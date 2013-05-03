@@ -18,35 +18,15 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "debug.h"
-#include "i18n.h"
+import QtQuick 2.0
+import Ubuntu.Components 0.1
 
-#include <QGuiApplication>
-#include <QProcessEnvironment>
-#include <QUrl>
-#include <QQuickView>
+MainView {
+    width: units.gu(48)
+    height: units.gu(60)
+    applicationName: "SystemSettings"
 
-using namespace SystemSettings;
-
-int main(int argc, char **argv)
-{
-    QGuiApplication app(argc, argv);
-
-    /* read environment variables */
-    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    if (environment.contains(QLatin1String("SS_LOGGING_LEVEL"))) {
-        bool isOk;
-        int value = environment.value(
-            QLatin1String("SS_LOGGING_LEVEL")).toInt(&isOk);
-        if (isOk)
-            setLoggingLevel(value);
+    Page {
+        title: i18n.tr("System Settings")
     }
-
-    initTr(I18N_DOMAIN, NULL);
-
-    QQuickView view;
-    view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
-    view.show();
-
-    return app.exec();
 }

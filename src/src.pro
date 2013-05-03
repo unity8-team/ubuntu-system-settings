@@ -25,6 +25,16 @@ SOURCES = \
     i18n.cpp \
     main.cpp
 
+QML_SOURCES = \
+    qml/MainWindow.qml
+
+RESOURCES += \
+    ui.qrc
+
+OTHER_FILES += \
+    $${QML_SOURCES} \
+    $${RESOURCES}
+
 DEFINES += \
     DEBUG_ENABLED \
     I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\"
