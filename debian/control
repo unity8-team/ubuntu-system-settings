@@ -1,0 +1,25 @@
+Source: ubuntu-system-settings
+Section: gnome
+Priority: optional
+Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
+Build-Depends: dbus-test-runner,
+               debhelper (>= 9),
+               gdb,
+               pkg-config,
+               qt5-default,
+               qtbase5-dev,
+               qtdeclarative5-dev,
+               xvfb,
+Standards-Version: 3.9.3
+Homepage: https://launchpad.net/ubuntu-system-settings
+# If you aren't a member of ~system-settings-touch but need to upload packaging
+# changes, just go ahead.  ~system-settings-touch will notice and sync up the
+# code again.
+Vcs-Bzr: https://code.launchpad.net/~system-settings-touch/ubuntu-system-settings/trunk
+
+Package: ubuntu-system-settings
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+Description: System Settings application for Ubuntu Touch
+ System Settings application for Ubuntu Touch.

@@ -1,0 +1,20 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: online-accounts-signon-ui
+Upstream-Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+Source: https://launchpad.net/online-accounts-signon-ui
+
+Files: *
+Copyright: 2011 Canonical Ltd.
+License: GPL-3
+
+Files: src/animation-label.*
+Copyright: 2009 Nokia Corporation
+License: GPL-3
+
+Files: debian/*
+Copyright: 2011 Ken VanDine <ken.vandine@canonical.com>
+License: GPL-3
+
+License: GPL-3
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
