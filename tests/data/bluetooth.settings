@@ -1,0 +1,11 @@
+{
+    "name": "Bluetooth",
+    "icon": "bluetooth-icon",
+    "translations": "bluez-plugin",
+    "category": "network",
+    "keywords": [
+        "bluetooth"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Cellular",
+    "icon": "phone-icon",
+    "translations": "phone-plugin",
+    "priority": -5,
+    "category": "phone",
+    "keywords": [
+        "phone",
+        "3g",
+        "cellular",
+        "telephone"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}

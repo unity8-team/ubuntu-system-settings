@@ -1,2 +1,3 @@
 TEMPLATE = subdirs
-SUBDIRS =
+SUBDIRS = \
+    tst_plugins.pro

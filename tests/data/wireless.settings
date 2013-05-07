@@ -1,0 +1,13 @@
+{
+    "name": "Wireless",
+    "icon": "wireless-icon",
+    "translations": "wireless-plugin",
+    "category": "network",
+    "keywords": [
+        "wireless",
+        "wlan",
+        "wifi"
+    ],
+    "has-dynamic-keywords": true,
+    "has-dynamic-visibility": false
+}

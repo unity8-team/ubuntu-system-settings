@@ -21,5 +21,6 @@ Package: ubuntu-system-settings
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
 Description: System Settings application for Ubuntu Touch
  System Settings application for Ubuntu Touch.

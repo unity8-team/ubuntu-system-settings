@@ -18,12 +18,16 @@ QT += \
 
 HEADERS = \
     debug.h \
-    i18n.h
+    i18n.h \
+    plugin-manager.h \
+    plugin.h
 
 SOURCES = \
     debug.cpp \
     i18n.cpp \
-    main.cpp
+    main.cpp \
+    plugin-manager.cpp \
+    plugin.cpp
 
 QML_SOURCES = \
     qml/MainWindow.qml
@@ -37,7 +41,8 @@ OTHER_FILES += \
 
 DEFINES += \
     DEBUG_ENABLED \
-    I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\"
+    I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\" \
+    PLUGIN_BASE_DIR=\\\"$${INSTALL_PREFIX}/share/settings/system\\\"
 
 po.target = ../po/signon-ui.pot
 po.depends = $${SOURCES}
