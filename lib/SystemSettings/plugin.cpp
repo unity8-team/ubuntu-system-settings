@@ -19,6 +19,7 @@
  */
 
 #include "debug.h"
+#include "plugin-base.h"
 #include "plugin.h"
 
 #include <QFileInfo>
@@ -28,17 +29,6 @@
 #include <QVariantMap>
 
 using namespace SystemSettings;
-
-static const QLatin1String keyName("name");
-static const QLatin1String keyIcon("icon");
-static const QLatin1String keyCategory("category");
-static const QLatin1String keyPriority("priority");
-static const QLatin1String keyTranslations("translations");
-static const QLatin1String keyFormFactors("form-factors");
-static const QLatin1String keyKeywords("keywords");
-static const QLatin1String keyPlugin("plugin");
-static const QLatin1String keyHasDynamicKeywords("has-dynamic-keywords");
-static const QLatin1String keyHasDynamicVisibility("has-dynamic-visibility");
 
 namespace SystemSettings {
 

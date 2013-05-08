@@ -22,43 +22,11 @@
 #define SYSTEM_SETTINGS_PLUGIN_INTERFACE_H
 
 #include <QObject>
-#include <QQmlComponent>
 #include <QVariantMap>
 
 namespace SystemSettings {
 
-class PluginBasePrivate;
-class PluginBase: public QObject
-{
-    Q_OBJECT
-
-public:
-    PluginBase(const QVariantMap &staticData, QObject *parent = 0);
-    ~PluginBase();
-
-    QUrl icon() const;
-    QStringList keywords() const;
-    bool isVisible() const;
-    virtual QQmlComponent *entryComponent(QQmlEngine *engine,
-                                          QObject *parent = 0);
-    virtual QQmlComponent *pageComponent(QQmlEngine *engine,
-                                         QObject *parent = 0) = 0;
-
-protected:
-    void setIcon(const QUrl &icon);
-    void setKeywords(const QStringList &keywords);
-    void setVisible(bool visible);
-    QVariantMap &staticData() const;
-
-Q_SIGNALS:
-    void iconChanged();
-    void keywordsChanged();
-    void visibilityChanged();
-
-private:
-    PluginBasePrivate *d_ptr;
-    Q_DECLARE_PRIVATE(PluginBase)
-};
+class PluginBase;
 
 class PluginInterface
 {

@@ -9,15 +9,18 @@ CONFIG += \
     qtestlib
 
 QT += \
-    core
+    core \
+    qml
 
 SRC_DIR = $$TOP_SRC_DIR/lib/SystemSettings
 SOURCES += \
     tst_plugins.cpp \
+    $$SRC_DIR/plugin-base.cpp \
     $$SRC_DIR/plugin-manager.cpp \
     $$SRC_DIR/plugin.cpp
 HEADERS += \
     $$SRC_DIR/debug.h \
+    $$SRC_DIR/plugin-base.h \
     $$SRC_DIR/plugin-manager.h \
     $$SRC_DIR/plugin.h
 

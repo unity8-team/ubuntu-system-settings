@@ -14,13 +14,18 @@ QT += \
     qml \
     quick
 
+# Error on undefined symbols
+QMAKE_LFLAGS += $$QMAKE_LFLAGS_NOUNDEF
+
 HEADERS = \
     debug.h \
+    plugin-base.h \
     plugin-manager.h \
     plugin.h
 
 SOURCES = \
     debug.cpp \
+    plugin-base.cpp \
     plugin-manager.cpp \
     plugin.cpp
 
