@@ -1,4 +1,4 @@
-include(../common-project-config.pri)
+include(../../common-project-config.pri)
 include($${TOP_SRC_DIR}/common-vars.pri)
 include($${TOP_SRC_DIR}/common-installs-config.pri)
 
@@ -11,22 +11,23 @@ CONFIG += \
 QT += \
     core
 
+SRC_DIR = $$TOP_SRC_DIR/lib/SystemSettings
 SOURCES += \
     tst_plugins.cpp \
-    $$TOP_SRC_DIR/src/plugin-manager.cpp \
-    $$TOP_SRC_DIR/src/plugin.cpp
+    $$SRC_DIR/plugin-manager.cpp \
+    $$SRC_DIR/plugin.cpp
 HEADERS += \
-    $$TOP_SRC_DIR/src/debug.h \
-    $$TOP_SRC_DIR/src/plugin-manager.h \
-    $$TOP_SRC_DIR/src/plugin.h
+    $$SRC_DIR/debug.h \
+    $$SRC_DIR/plugin-manager.h \
+    $$SRC_DIR/plugin.h
 
 INCLUDEPATH += \
     . \
-    $$TOP_SRC_DIR/src
+    $$SRC_DIR
 
 DEFINES += \
     DEBUG_ENABLED \
-    PLUGIN_BASE_DIR=\\\"$${TOP_SRC_DIR}/tests/data\\\" \
+    PLUGIN_BASE_DIR=\\\"$${TOP_SRC_DIR}/lib/tests/data\\\" \
     UNIT_TESTS
 
 check.commands = "xvfb-run -a ./$$TARGET"

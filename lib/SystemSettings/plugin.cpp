@@ -91,10 +91,16 @@ QString Plugin::displayName() const
     return d->m_data.value(keyName).toString();
 }
 
-QString Plugin::iconName() const
+QUrl Plugin::icon() const
 {
     Q_D(const Plugin);
-    return d->m_data.value(keyIcon).toString();
+    QString iconName = d->m_data.value(keyIcon).toString();
+    if (iconName.isEmpty()) {
+        // TODO: load the plugin and get the icon from there
+        return QUrl();
+    } else {
+        return QString("image://gicon/") + QUrl::toPercentEncoding(iconName);
+    }
 }
 
 QString Plugin::category() const
@@ -125,7 +131,7 @@ QStringList Plugin::keywords() const
     return ret;
 }
 
-bool Plugin::visible() const
+bool Plugin::isVisible() const
 {
     // TODO: visibility check depending on form-factor
     // TODO: run-time visibility check if keyHasDynamicVisibility is true

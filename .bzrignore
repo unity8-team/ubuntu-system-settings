@@ -1,6 +1,7 @@
 *.moc
+/lib/tests/tst_plugins
+lib*.so*
 Makefile*
 moc_*.cpp
 qrc_*.cpp
 /src/system-settings
-/tests/tst_plugins

@@ -22,6 +22,7 @@
 #define SYSTEM_SETTINGS_PLUGIN_H
 
 #include <QObject>
+#include <QUrl>
 
 class QFileInfo;
 
@@ -36,12 +37,12 @@ public:
     ~Plugin();
 
     QString displayName() const;
-    QString iconName() const;
+    QUrl icon() const;
     QString category() const;
     int priority() const;
     QString translations() const;
     QStringList keywords() const;
-    bool visible() const;
+    bool isVisible() const;
 
 private:
     PluginPrivate *d_ptr;
