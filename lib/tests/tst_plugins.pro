@@ -30,7 +30,8 @@ INCLUDEPATH += \
 
 DEFINES += \
     DEBUG_ENABLED \
-    PLUGIN_BASE_DIR=\\\"$${TOP_SRC_DIR}/lib/tests/data\\\" \
+    PLUGIN_MANIFEST_DIR=\\\"$${TOP_SRC_DIR}/lib/tests/data\\\" \
+    PLUGIN_MODULE_DIR=\\\"$${INSTALL_PREFIX}/lib/system-settings\\\" \
     UNIT_TESTS
 
 check.commands = "xvfb-run -a ./$$TARGET"

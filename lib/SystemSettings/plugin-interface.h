@@ -30,6 +30,7 @@ class PluginBase;
 
 class PluginInterface
 {
+public:
     virtual PluginBase *createPlugin(const QVariantMap &staticData) = 0;
 };
 

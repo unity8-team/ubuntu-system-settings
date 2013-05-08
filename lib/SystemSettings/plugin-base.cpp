@@ -34,7 +34,7 @@ const QLatin1String keyPriority("priority");
 const QLatin1String keyTranslations("translations");
 const QLatin1String keyFormFactors("form-factors");
 const QLatin1String keyKeywords("keywords");
-const QLatin1String keyPluginBase("plugin");
+const QLatin1String keyPlugin("plugin");
 const QLatin1String keyHasDynamicKeywords("has-dynamic-keywords");
 const QLatin1String keyHasDynamicVisibility("has-dynamic-visibility");
 
