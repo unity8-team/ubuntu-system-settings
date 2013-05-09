@@ -7,5 +7,6 @@
         "bluetooth"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false
+    "has-dynamic-visibility": false,
+    "plugin": "test-plugin"
 }

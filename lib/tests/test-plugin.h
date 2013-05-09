@@ -18,26 +18,23 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SYSTEM_SETTINGS_PLUGIN_INTERFACE_H
-#define SYSTEM_SETTINGS_PLUGIN_INTERFACE_H
+#ifndef SYSTEM_SETTINGS_TEST_PLUGIN_H
+#define SYSTEM_SETTINGS_TEST_PLUGIN_H
 
 #include <QObject>
-#include <QVariantMap>
+#include <SystemSettings/PluginInterface>
 
-namespace SystemSettings {
-
-class PluginBase;
-
-class PluginInterface
+class TestPlugin: public QObject, public SystemSettings::PluginInterface
 {
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface")
+    Q_INTERFACES(SystemSettings::PluginInterface)
+
 public:
-    virtual PluginBase *createPlugin(const QVariantMap &staticData,
-                                     QObject *parent = 0) = 0;
+    TestPlugin();
+
+    SystemSettings::PluginBase *createPlugin(const QVariantMap &staticData,
+                                             QObject *parent = 0);
 };
 
-} // namespace
-
-Q_DECLARE_INTERFACE(SystemSettings::PluginInterface,
-                    "com.ubuntu.SystemSettings.PluginInterface")
-
-#endif // SYSTEM_SETTINGS_PLUGIN_INTERFACE_H
+#endif // SYSTEM_SETTINGS_TEST_PLUGIN_H

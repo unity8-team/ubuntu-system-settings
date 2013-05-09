@@ -9,5 +9,6 @@
         "wifi"
     ],
     "has-dynamic-keywords": true,
-    "has-dynamic-visibility": false
+    "has-dynamic-visibility": false,
+    "plugin": "test-plugin"
 }

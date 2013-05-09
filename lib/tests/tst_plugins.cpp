@@ -37,6 +37,7 @@ public:
 
 private Q_SLOTS:
     void testCategory();
+    void testKeywords();
 };
 
 void PluginsTest::testCategory()
@@ -60,6 +61,35 @@ void PluginsTest::testCategory()
     QSet<QString> expectedNames;
     expectedNames << "Bluetooth" << "Wireless";
     QCOMPARE(names.toSet(), expectedNames);
+}
+
+void PluginsTest::testKeywords()
+{
+    PluginManager manager;
+
+    Plugin *wireless = 0;
+    Plugin *bluetooth = 0;
+    Q_FOREACH(Plugin *plugin, manager.plugins("network")) {
+        if (plugin->displayName() == "Bluetooth") {
+            bluetooth = plugin;
+        } else if (plugin->displayName() == "Wireless") {
+            wireless = plugin;
+        }
+    }
+    QVERIFY(bluetooth != 0);
+    QVERIFY(wireless != 0);
+
+    QStringList keywords = bluetooth->keywords();
+    QStringList expectedKeywords;
+    expectedKeywords << "bluetooth";
+    QCOMPARE(keywords, expectedKeywords);
+
+    // The manifest has has-dynamic-keywords set, so the plugin will be loaded
+    keywords = wireless->keywords();
+    expectedKeywords.clear();
+    expectedKeywords << "wireless" << "wlan" << "wifi" <<
+        "one" << "two" << "three";
+    QCOMPARE(keywords, expectedKeywords);
 }
 
 QTEST_MAIN(PluginsTest);

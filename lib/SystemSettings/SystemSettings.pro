@@ -1,6 +1,5 @@
 include(../../common-project-config.pri)
 include($${TOP_SRC_DIR}/common-vars.pri)
-include($${TOP_SRC_DIR}/common-installs-config.pri)
 
 TEMPLATE = lib
 TARGET = SystemSettings
@@ -17,11 +16,18 @@ QT += \
 # Error on undefined symbols
 QMAKE_LFLAGS += $$QMAKE_LFLAGS_NOUNDEF
 
-HEADERS = \
+public_headers = \
+    plugin-base.h PluginBase \
+    plugin-interface.h PluginInterface \
+    plugin-manager.h
+
+private_headers = \
     debug.h \
-    plugin-base.h \
-    plugin-manager.h \
     plugin.h
+
+HEADERS = \
+    $${public_headers} \
+    $${private_headers}
 
 SOURCES = \
     debug.cpp \
@@ -33,3 +39,7 @@ DEFINES += \
     DEBUG_ENABLED \
     PLUGIN_MANIFEST_DIR=\\\"$${INSTALL_PREFIX}/share/settings/system\\\" \
     PLUGIN_MODULE_DIR=\\\"$${INSTALL_PREFIX}/lib/system-settings\\\"
+
+headers.files = $${public_headers}
+
+include($${TOP_SRC_DIR}/common-installs-config.pri)
