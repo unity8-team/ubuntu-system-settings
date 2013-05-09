@@ -19,7 +19,7 @@
  */
 
 #include "debug.h"
-#include "plugin-base.h"
+#include "item-base.h"
 
 #include <QStringList>
 
@@ -38,12 +38,12 @@ const QLatin1String keyPlugin("plugin");
 const QLatin1String keyHasDynamicKeywords("has-dynamic-keywords");
 const QLatin1String keyHasDynamicVisibility("has-dynamic-visibility");
 
-class PluginBasePrivate
+class ItemBasePrivate
 {
-    friend class PluginBase;
+    friend class ItemBase;
 
-    inline PluginBasePrivate(const QVariantMap &staticData);
-    ~PluginBasePrivate() {};
+    inline ItemBasePrivate(const QVariantMap &staticData);
+    ~ItemBasePrivate() {};
 
 private:
     QVariantMap m_data;
@@ -54,79 +54,79 @@ private:
 
 } // namespace
 
-PluginBasePrivate::PluginBasePrivate(const QVariantMap &staticData):
+ItemBasePrivate::ItemBasePrivate(const QVariantMap &staticData):
     m_data(staticData),
     m_isVisible(false)
 {
 }
 
-PluginBase::PluginBase(const QVariantMap &staticData, QObject *parent):
+ItemBase::ItemBase(const QVariantMap &staticData, QObject *parent):
     QObject(parent),
-    d_ptr(new PluginBasePrivate(staticData))
+    d_ptr(new ItemBasePrivate(staticData))
 {
 }
 
-PluginBase::~PluginBase()
+ItemBase::~ItemBase()
 {
     delete d_ptr;
 }
 
-void PluginBase::setIcon(const QUrl &icon)
+void ItemBase::setIcon(const QUrl &icon)
 {
-    Q_D(PluginBase);
+    Q_D(ItemBase);
     if (icon == d->m_icon) return;
     d->m_icon = icon;
     Q_EMIT iconChanged();
 }
 
-QUrl PluginBase::icon() const
+QUrl ItemBase::icon() const
 {
-    Q_D(const PluginBase);
+    Q_D(const ItemBase);
     return d->m_icon;
 }
 
-void PluginBase::setKeywords(const QStringList &keywords)
+void ItemBase::setKeywords(const QStringList &keywords)
 {
-    Q_D(PluginBase);
+    Q_D(ItemBase);
     if (keywords == d->m_keywords) return;
     d->m_keywords = keywords;
     Q_EMIT keywordsChanged();
 }
 
-QStringList PluginBase::keywords() const
+QStringList ItemBase::keywords() const
 {
-    Q_D(const PluginBase);
+    Q_D(const ItemBase);
     return d->m_keywords;
 }
 
-void PluginBase::setVisible(bool visible)
+void ItemBase::setVisible(bool visible)
 {
-    Q_D(PluginBase);
+    Q_D(ItemBase);
     if (visible == d->m_isVisible) return;
     d->m_isVisible = visible;
     Q_EMIT visibilityChanged();
 }
 
-bool PluginBase::isVisible() const
+bool ItemBase::isVisible() const
 {
-    Q_D(const PluginBase);
+    Q_D(const ItemBase);
     return d->m_isVisible;
 }
 
-const QVariantMap &PluginBase::staticData() const
+const QVariantMap &ItemBase::staticData() const
 {
-    Q_D(const PluginBase);
+    Q_D(const ItemBase);
     return d->m_data;
 }
 
-QQmlComponent *PluginBase::entryComponent(QQmlEngine *engine, QObject *parent)
+QQmlComponent *ItemBase::entryComponent(QQmlEngine *engine, QObject *parent)
 {
     Q_UNUSED(engine);
     Q_UNUSED(parent);
     return 0;
 }
 
-QQmlComponent *PluginBase::pageComponent(QQmlEngine *engine, QObject *parent)
+QQmlComponent *ItemBase::pageComponent(QQmlEngine *engine, QObject *parent)
 {
     Q_UNUSED(engine);
     Q_UNUSED(parent);

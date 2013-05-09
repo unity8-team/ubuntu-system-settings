@@ -19,7 +19,7 @@
  */
 
 #include "debug.h"
-#include "plugin-base.h"
+#include "item-base.h"
 #include "plugin-interface.h"
 #include "plugin.h"
 
@@ -46,7 +46,7 @@ class PluginPrivate
     bool ensureLoaded() const;
 
 private:
-    mutable PluginBase *m_plugin;
+    mutable ItemBase *m_item;
     mutable QPluginLoader m_loader;
     QVariantMap m_data;
 };
@@ -54,7 +54,7 @@ private:
 } // namespace
 
 PluginPrivate::PluginPrivate(const QFileInfo &manifest):
-    m_plugin(0)
+    m_item(0)
 {
     QFile file(manifest.filePath());
     if (Q_UNLIKELY(!file.open(QIODevice::ReadOnly | QIODevice::Text))) {
@@ -75,7 +75,7 @@ PluginPrivate::PluginPrivate(const QFileInfo &manifest):
 
 bool PluginPrivate::ensureLoaded() const
 {
-    if (m_plugin != 0) return true;
+    if (m_item != 0) return true;
 
     if (Q_UNLIKELY(m_loader.isLoaded())) return false;
     QString name = QString("%1/lib%2.so").arg(pluginModuleDir).
@@ -94,8 +94,8 @@ bool PluginPrivate::ensureLoaded() const
         return false;
     }
 
-    m_plugin = interface->createPlugin(m_data);
-    return m_plugin != 0;
+    m_item = interface->createItem(m_data);
+    return m_item != 0;
 }
 
 Plugin::Plugin(const QFileInfo &manifest, QObject *parent):
@@ -121,7 +121,7 @@ QUrl Plugin::icon() const
     QString iconName = d->m_data.value(keyIcon).toString();
     if (iconName.isEmpty()) {
         if (!d->ensureLoaded()) return QUrl();
-        return d->m_plugin->icon();
+        return d->m_item->icon();
     } else {
         return QString("image://gicon/") + QUrl::toPercentEncoding(iconName);
     }
@@ -151,7 +151,7 @@ QStringList Plugin::keywords() const
     QStringList ret = d->m_data.value(keyKeywords).toStringList();
     if (d->m_data.value(keyHasDynamicKeywords).toBool()) {
         if (!d->ensureLoaded()) return ret;
-        ret += d->m_plugin->keywords();
+        ret += d->m_item->keywords();
     }
     return ret;
 }
@@ -162,7 +162,7 @@ bool Plugin::isVisible() const
     // TODO: visibility check depending on form-factor
     if (d->m_data.value(keyHasDynamicVisibility).toBool()) {
         if (!d->ensureLoaded()) return false;
-        return d->m_plugin->isVisible();
+        return d->m_item->isVisible();
     }
     return true;
 }

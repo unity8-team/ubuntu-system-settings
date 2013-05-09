@@ -33,8 +33,8 @@ class TestPlugin: public QObject, public SystemSettings::PluginInterface
 public:
     TestPlugin();
 
-    SystemSettings::PluginBase *createPlugin(const QVariantMap &staticData,
-                                             QObject *parent = 0);
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
 };
 
 #endif // SYSTEM_SETTINGS_TEST_PLUGIN_H

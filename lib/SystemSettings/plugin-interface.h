@@ -26,13 +26,13 @@
 
 namespace SystemSettings {
 
-class PluginBase;
+class ItemBase;
 
 class PluginInterface
 {
 public:
-    virtual PluginBase *createPlugin(const QVariantMap &staticData,
-                                     QObject *parent = 0) = 0;
+    virtual ItemBase *createItem(const QVariantMap &staticData,
+                                 QObject *parent = 0) = 0;
 };
 
 } // namespace

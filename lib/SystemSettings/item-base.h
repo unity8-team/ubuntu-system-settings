@@ -18,8 +18,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SYSTEM_SETTINGS_PLUGIN_BASE_H
-#define SYSTEM_SETTINGS_PLUGIN_BASE_H
+#ifndef SYSTEM_SETTINGS_ITEM_BASE_H
+#define SYSTEM_SETTINGS_ITEM_BASE_H
 
 #include <QObject>
 #include <QQmlComponent>
@@ -38,14 +38,14 @@ extern const QLatin1String keyPlugin;
 extern const QLatin1String keyHasDynamicKeywords;
 extern const QLatin1String keyHasDynamicVisibility;
 
-class PluginBasePrivate;
-class PluginBase: public QObject
+class ItemBasePrivate;
+class ItemBase: public QObject
 {
     Q_OBJECT
 
 public:
-    PluginBase(const QVariantMap &staticData, QObject *parent = 0);
-    ~PluginBase();
+    ItemBase(const QVariantMap &staticData, QObject *parent = 0);
+    ~ItemBase();
 
     QUrl icon() const;
     QStringList keywords() const;
@@ -67,10 +67,10 @@ Q_SIGNALS:
     void visibilityChanged();
 
 private:
-    PluginBasePrivate *d_ptr;
-    Q_DECLARE_PRIVATE(PluginBase)
+    ItemBasePrivate *d_ptr;
+    Q_DECLARE_PRIVATE(ItemBase)
 };
 
 } // namespace
 
-#endif // SYSTEM_SETTINGS_PLUGIN_BASE_H
+#endif // SYSTEM_SETTINGS_ITEM_BASE_H

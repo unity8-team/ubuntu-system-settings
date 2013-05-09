@@ -21,11 +21,11 @@
 #include "test-plugin.h"
 
 #include <QStringList>
-#include <SystemSettings/PluginBase>
+#include <SystemSettings/ItemBase>
 
 using namespace SystemSettings;
 
-class TestItem: public PluginBase
+class TestItem: public ItemBase
 {
     Q_OBJECT
 
@@ -40,7 +40,7 @@ public:
 };
 
 TestItem::TestItem(const QVariantMap &staticData, QObject *parent):
-    PluginBase(staticData, parent)
+    ItemBase(staticData, parent)
 {
     QStringList keywords;
     keywords << "one" << "two" << "three";
@@ -75,8 +75,8 @@ TestPlugin::TestPlugin():
 {
 }
 
-PluginBase *TestPlugin::createPlugin(const QVariantMap &staticData,
-                                     QObject *parent)
+ItemBase *TestPlugin::createItem(const QVariantMap &staticData,
+                                 QObject *parent)
 {
     return new TestItem(staticData, parent);
 }

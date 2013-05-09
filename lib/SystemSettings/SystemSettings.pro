@@ -17,7 +17,7 @@ QT += \
 QMAKE_LFLAGS += $$QMAKE_LFLAGS_NOUNDEF
 
 public_headers = \
-    plugin-base.h PluginBase \
+    item-base.h ItemBase \
     plugin-interface.h PluginInterface \
     plugin-manager.h
 
@@ -31,7 +31,7 @@ HEADERS = \
 
 SOURCES = \
     debug.cpp \
-    plugin-base.cpp \
+    item-base.cpp \
     plugin-manager.cpp \
     plugin.cpp
 
