@@ -23,6 +23,7 @@ public_headers = \
 
 private_headers = \
     debug.h \
+    item-model.h \
     plugin.h
 
 HEADERS = \
@@ -32,6 +33,7 @@ HEADERS = \
 SOURCES = \
     debug.cpp \
     item-base.cpp \
+    item-model.cpp \
     plugin-manager.cpp \
     plugin.cpp
 

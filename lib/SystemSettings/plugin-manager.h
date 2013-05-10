@@ -24,6 +24,8 @@
 #include <QList>
 #include <QObject>
 
+class QAbstractListModel;
+
 namespace SystemSettings {
 
 class Plugin;
@@ -38,6 +40,8 @@ public:
 
     QStringList categories() const;
     QList<Plugin *> plugins(const QString &category) const;
+
+    Q_INVOKABLE QAbstractListModel *itemModel(const QString &category);
 
 private:
     PluginManagerPrivate *d_ptr;

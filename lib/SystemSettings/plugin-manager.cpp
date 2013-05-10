@@ -19,6 +19,7 @@
  */
 
 #include "debug.h"
+#include "item-model.h"
 #include "plugin.h"
 #include "plugin-manager.h"
 
@@ -44,6 +45,7 @@ class PluginManagerPrivate
 
 private:
     QMap<QString,QList<Plugin*> > m_plugins;
+    QHash<QString,ItemModel*> m_models;
 };
 
 } // namespace
@@ -103,4 +105,15 @@ QList<Plugin *> PluginManager::plugins(const QString &category) const
 {
     Q_D(const PluginManager);
     return d->m_plugins.value(category);
+}
+
+QAbstractListModel *PluginManager::itemModel(const QString &category)
+{
+    Q_D(PluginManager);
+    ItemModel *&model = d->m_models[category];
+    if (model == 0) {
+        model = new ItemModel(this);
+        model->setPlugins(plugins(category));
+    }
+    return model;
 }

@@ -38,14 +38,15 @@ namespace SystemSettings {
 
 class PluginPrivate
 {
-    friend class Plugin;
+    Q_DECLARE_PUBLIC(Plugin)
 
-    inline PluginPrivate(const QFileInfo &manifest);
+    inline PluginPrivate(Plugin *q, const QFileInfo &manifest);
     ~PluginPrivate() {};
 
     bool ensureLoaded() const;
 
 private:
+    mutable Plugin *q_ptr;
     mutable ItemBase *m_item;
     mutable QPluginLoader m_loader;
     QVariantMap m_data;
@@ -53,7 +54,8 @@ private:
 
 } // namespace
 
-PluginPrivate::PluginPrivate(const QFileInfo &manifest):
+PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
+    q_ptr(q),
     m_item(0)
 {
     QFile file(manifest.filePath());
@@ -75,6 +77,8 @@ PluginPrivate::PluginPrivate(const QFileInfo &manifest):
 
 bool PluginPrivate::ensureLoaded() const
 {
+    Q_Q(const Plugin);
+
     if (m_item != 0) return true;
 
     if (Q_UNLIKELY(m_loader.isLoaded())) return false;
@@ -95,12 +99,20 @@ bool PluginPrivate::ensureLoaded() const
     }
 
     m_item = interface->createItem(m_data);
-    return m_item != 0;
+    if (m_item == 0) return false;
+
+    QObject::connect(m_item, SIGNAL(iconChanged()),
+                     q, SIGNAL(iconChanged()));
+    QObject::connect(m_item, SIGNAL(keywordsChanged()),
+                     q, SIGNAL(keywordsChanged()));
+    QObject::connect(m_item, SIGNAL(visibilityChanged()),
+                     q, SIGNAL(visibilityChanged()));
+    return true;
 }
 
 Plugin::Plugin(const QFileInfo &manifest, QObject *parent):
     QObject(parent),
-    d_ptr(new PluginPrivate(manifest))
+    d_ptr(new PluginPrivate(this, manifest))
 {
 }
 
@@ -165,4 +177,18 @@ bool Plugin::isVisible() const
         return d->m_item->isVisible();
     }
     return true;
+}
+
+QQmlComponent *Plugin::entryComponent(QQmlEngine *engine, QObject *parent)
+{
+    Q_D(const Plugin);
+    if (!d->ensureLoaded()) return 0;
+    return d->m_item->entryComponent(engine, parent);
+}
+
+QQmlComponent *Plugin::pageComponent(QQmlEngine *engine, QObject *parent)
+{
+    Q_D(const Plugin);
+    if (!d->ensureLoaded()) return 0;
+    return d->m_item->pageComponent(engine, parent);
 }

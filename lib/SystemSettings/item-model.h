@@ -18,47 +18,43 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SYSTEM_SETTINGS_PLUGIN_H
-#define SYSTEM_SETTINGS_PLUGIN_H
+#ifndef SYSTEM_SETTINGS_ITEM_MODEL_H
+#define SYSTEM_SETTINGS_ITEM_MODEL_H
 
-#include <QObject>
-#include <QQmlComponent>
-#include <QUrl>
-
-class QFileInfo;
+#include <QAbstractListModel>
 
 namespace SystemSettings {
 
-class PluginPrivate;
-class Plugin: public QObject
+class Plugin;
+
+class ItemModelPrivate;
+class ItemModel: public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    Plugin(const QFileInfo &manifest, QObject *parent = 0);
-    ~Plugin();
+    ItemModel(QObject *parent = 0);
+    ~ItemModel();
 
-    QString displayName() const;
-    QUrl icon() const;
-    QString category() const;
-    int priority() const;
-    QString translations() const;
-    QStringList keywords() const;
-    bool isVisible() const;
+    enum Roles {
+        IconRole = Qt::UserRole + 1,
+        ItemRole,
+    };
+    void setPlugins(const QList<Plugin *> &plugins);
 
-    QQmlComponent *entryComponent(QQmlEngine *engine, QObject *parent = 0);
-    QQmlComponent *pageComponent(QQmlEngine *engine, QObject *parent = 0);
+    // reimplemented virtual methods
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    QHash<int, QByteArray> roleNames() const;
 
-Q_SIGNALS:
-    void iconChanged();
-    void keywordsChanged();
-    void visibilityChanged();
+private Q_SLOTS:
+    void onItemVisibilityChanged();
 
 private:
-    PluginPrivate *d_ptr;
-    Q_DECLARE_PRIVATE(Plugin)
+    ItemModelPrivate *d_ptr;
+    Q_DECLARE_PRIVATE(ItemModel)
 };
 
 } // namespace
 
-#endif // SYSTEM_SETTINGS_PLUGIN_H
+#endif // SYSTEM_SETTINGS_ITEM_MODEL_H
