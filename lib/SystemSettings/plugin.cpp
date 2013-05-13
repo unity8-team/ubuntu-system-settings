@@ -27,6 +27,8 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include <QPluginLoader>
+#include <QQmlContext>
+#include <QQmlEngine>
 #include <QStringList>
 #include <QVariantMap>
 
@@ -179,16 +181,20 @@ bool Plugin::isVisible() const
     return true;
 }
 
-QQmlComponent *Plugin::entryComponent(QQmlEngine *engine, QObject *parent)
+QQmlComponent *Plugin::entryComponent()
 {
     Q_D(const Plugin);
     if (!d->ensureLoaded()) return 0;
-    return d->m_item->entryComponent(engine, parent);
+    QQmlContext *context = QQmlEngine::contextForObject(this);
+    if (Q_UNLIKELY(context == 0)) return 0;
+    return d->m_item->entryComponent(context->engine(), this);
 }
 
-QQmlComponent *Plugin::pageComponent(QQmlEngine *engine, QObject *parent)
+QQmlComponent *Plugin::pageComponent()
 {
     Q_D(const Plugin);
     if (!d->ensureLoaded()) return 0;
-    return d->m_item->pageComponent(engine, parent);
+    QQmlContext *context = QQmlEngine::contextForObject(this);
+    if (Q_UNLIKELY(context == 0)) return 0;
+    return d->m_item->pageComponent(context->engine(), this);
 }

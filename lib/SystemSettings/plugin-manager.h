@@ -23,17 +23,20 @@
 
 #include <QList>
 #include <QObject>
+#include <QQmlParserStatus>
 
-class QAbstractListModel;
+class QAbstractItemModel;
 
 namespace SystemSettings {
 
 class Plugin;
 
 class PluginManagerPrivate;
-class PluginManager: public QObject
+class PluginManager: public QObject, public QQmlParserStatus
 {
     Q_OBJECT
+    Q_INTERFACES(QQmlParserStatus)
+
 public:
     PluginManager(QObject *parent = 0);
     ~PluginManager();
@@ -41,7 +44,11 @@ public:
     QStringList categories() const;
     QList<Plugin *> plugins(const QString &category) const;
 
-    Q_INVOKABLE QAbstractListModel *itemModel(const QString &category);
+    Q_INVOKABLE QAbstractItemModel *itemModel(const QString &category);
+
+    // reimplemented virtual methods
+    void classBegin();
+    void componentComplete();
 
 private:
     PluginManagerPrivate *d_ptr;

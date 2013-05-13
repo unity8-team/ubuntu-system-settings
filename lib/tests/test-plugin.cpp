@@ -20,6 +20,7 @@
 
 #include "test-plugin.h"
 
+#include <QDebug>
 #include <QStringList>
 #include <SystemSettings/ItemBase>
 
@@ -62,9 +63,10 @@ QQmlComponent *TestItem::pageComponent(QQmlEngine *engine, QObject *parent)
 {
     QQmlComponent *page = new QQmlComponent(engine, parent);
     page->setData("import QtQuick 2.0\n"
-                  "Rect {\n"
+                  "Rectangle {\n"
                   "  width: 200; height: 200;\n"
                   "  objectName: \"myRect\"\n"
+                  "  color: \"red\""
                   "}",
                   QUrl());
     return page;

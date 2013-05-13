@@ -19,7 +19,7 @@ QMAKE_LFLAGS += $$QMAKE_LFLAGS_NOUNDEF
 public_headers = \
     item-base.h ItemBase \
     plugin-interface.h PluginInterface \
-    plugin-manager.h
+    plugin-manager.h PluginManager
 
 private_headers = \
     debug.h \

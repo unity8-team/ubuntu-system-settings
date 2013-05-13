@@ -137,4 +137,3 @@ void ItemModel::onItemVisibilityChanged()
         endRemoveRows();
     }
 }
-

@@ -20,13 +20,48 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import SystemSettings 1.0
 
 MainView {
     width: units.gu(48)
     height: units.gu(60)
     applicationName: "SystemSettings"
 
+    PluginManager {
+        id: pluginManager
+    }
+
     Page {
         title: i18n.tr("System Settings")
+
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            Repeater {
+                model: pluginManager.itemModel("network")
+
+                delegate: Item {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: col.height
+                    
+                    Column {
+                        id: col
+                        Text { text: model.displayName }
+                        Text { text: "Url: " + model.icon }
+                    }
+
+                    Loader { id: loader }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("clicked")
+                            loader.sourceComponent = model.item.pageComponent
+                        }
+                    }
+                }
+            }
+        }
     }
 }

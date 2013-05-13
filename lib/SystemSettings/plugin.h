@@ -33,6 +33,8 @@ class PluginPrivate;
 class Plugin: public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QQmlComponent *entryComponent READ entryComponent CONSTANT)
+    Q_PROPERTY(QQmlComponent *pageComponent READ pageComponent CONSTANT)
 
 public:
     Plugin(const QFileInfo &manifest, QObject *parent = 0);
@@ -46,8 +48,8 @@ public:
     QStringList keywords() const;
     bool isVisible() const;
 
-    QQmlComponent *entryComponent(QQmlEngine *engine, QObject *parent = 0);
-    QQmlComponent *pageComponent(QQmlEngine *engine, QObject *parent = 0);
+    QQmlComponent *entryComponent();
+    QQmlComponent *pageComponent();
 
 Q_SIGNALS:
     void iconChanged();

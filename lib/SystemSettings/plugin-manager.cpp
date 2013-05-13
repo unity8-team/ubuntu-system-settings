@@ -25,6 +25,7 @@
 
 #include <QDir>
 #include <QMap>
+#include <QQmlEngine>
 #include <QStringList>
 
 using namespace SystemSettings;
@@ -35,22 +36,24 @@ namespace SystemSettings {
 
 class PluginManagerPrivate
 {
-    friend class PluginManager;
+    Q_DECLARE_PUBLIC(PluginManager)
 
-    inline PluginManagerPrivate();
+    inline PluginManagerPrivate(PluginManager *q);
     inline ~PluginManagerPrivate();
 
     void clear();
     void reload();
 
 private:
+    mutable PluginManager *q_ptr;
     QMap<QString,QList<Plugin*> > m_plugins;
     QHash<QString,ItemModel*> m_models;
 };
 
 } // namespace
 
-PluginManagerPrivate::PluginManagerPrivate()
+PluginManagerPrivate::PluginManagerPrivate(PluginManager *q):
+    q_ptr(q)
 {
 }
 
@@ -73,10 +76,13 @@ void PluginManagerPrivate::clear()
 
 void PluginManagerPrivate::reload()
 {
+    Q_Q(PluginManager);
     clear();
     QDir path(baseDir, "*.settings");
     Q_FOREACH(QFileInfo fileInfo, path.entryInfoList()) {
         Plugin *plugin = new Plugin(fileInfo);
+        QQmlEngine::setContextForObject(plugin,
+                                        QQmlEngine::contextForObject(q));
         QList<Plugin*> &pluginList = m_plugins[plugin->category()];
         pluginList.append(plugin);
     }
@@ -84,10 +90,8 @@ void PluginManagerPrivate::reload()
 
 PluginManager::PluginManager(QObject *parent):
     QObject(parent),
-    d_ptr(new PluginManagerPrivate)
+    d_ptr(new PluginManagerPrivate(this))
 {
-    Q_D(PluginManager);
-    d->reload();
 }
 
 PluginManager::~PluginManager()
@@ -107,7 +111,7 @@ QList<Plugin *> PluginManager::plugins(const QString &category) const
     return d->m_plugins.value(category);
 }
 
-QAbstractListModel *PluginManager::itemModel(const QString &category)
+QAbstractItemModel *PluginManager::itemModel(const QString &category)
 {
     Q_D(PluginManager);
     ItemModel *&model = d->m_models[category];
@@ -116,4 +120,14 @@ QAbstractListModel *PluginManager::itemModel(const QString &category)
         model->setPlugins(plugins(category));
     }
     return model;
+}
+
+void PluginManager::classBegin()
+{
+    Q_D(PluginManager);
+    d->reload();
+}
+
+void PluginManager::componentComplete()
+{
 }

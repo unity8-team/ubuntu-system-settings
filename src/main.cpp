@@ -23,8 +23,11 @@
 
 #include <QGuiApplication>
 #include <QProcessEnvironment>
+#include <QQmlContext>
 #include <QUrl>
 #include <QQuickView>
+#include <QtQml>
+#include <SystemSettings/PluginManager>
 
 using namespace SystemSettings;
 
@@ -45,6 +48,8 @@ int main(int argc, char **argv)
     initTr(I18N_DOMAIN, NULL);
 
     QQuickView view;
+    qmlRegisterType<QAbstractItemModel>();
+    qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();
 

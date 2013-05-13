@@ -22,24 +22,9 @@
 
 #include <QDebug>
 
-/* 0 - fatal, 1 - critical(default), 2 - info/debug */
-extern int appLoggingLevel;
-
-static inline bool debugEnabled()
-{
-    return appLoggingLevel >= 2;
-}
-
-static inline int loggingLevel()
-{
-    return appLoggingLevel;
-}
-
-void setLoggingLevel(int level);
-
 #ifdef DEBUG_ENABLED
     #define DEBUG() \
-        if (debugEnabled()) qDebug() << __FILE__ << __LINE__ << __func__
+        qDebug() << __FILE__ << __LINE__ << __func__
 #else
     #define DEBUG() while (0) qDebug()
 #endif
