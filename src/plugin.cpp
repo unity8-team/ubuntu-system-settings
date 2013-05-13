@@ -19,8 +19,6 @@
  */
 
 #include "debug.h"
-#include "item-base.h"
-#include "plugin-interface.h"
 #include "plugin.h"
 
 #include <QFileInfo>
@@ -31,6 +29,9 @@
 #include <QQmlEngine>
 #include <QStringList>
 #include <QVariantMap>
+
+#include <SystemSettings/ItemBase>
+#include <SystemSettings/PluginInterface>
 
 using namespace SystemSettings;
 

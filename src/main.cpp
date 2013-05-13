@@ -20,6 +20,7 @@
 
 #include "debug.h"
 #include "i18n.h"
+#include "plugin-manager.h"
 
 #include <QGuiApplication>
 #include <QProcessEnvironment>
@@ -27,7 +28,6 @@
 #include <QUrl>
 #include <QQuickView>
 #include <QtQml>
-#include <SystemSettings/PluginManager>
 
 using namespace SystemSettings;
 

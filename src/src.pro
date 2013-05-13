@@ -23,12 +23,18 @@ INCLUDEPATH += $${TOP_SRC_DIR}/lib
 
 HEADERS = \
     debug.h \
-    i18n.h
+    i18n.h \
+    item-model.h \
+    plugin-manager.h \
+    plugin.h
 
 SOURCES = \
     debug.cpp \
     i18n.cpp \
-    main.cpp
+    item-model.cpp \
+    main.cpp \
+    plugin-manager.cpp \
+    plugin.cpp
 
 QML_SOURCES = \
     qml/MainWindow.qml
@@ -42,7 +48,9 @@ OTHER_FILES += \
 
 DEFINES += \
     DEBUG_ENABLED \
-    I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\"
+    I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\" \
+    PLUGIN_MANIFEST_DIR=\\\"$${INSTALL_PREFIX}/share/settings/system\\\" \
+    PLUGIN_MODULE_DIR=\\\"$${INSTALL_PREFIX}/lib/system-settings\\\"
 
 po.target = ../po/signon-ui.pot
 po.depends = $${SOURCES}
