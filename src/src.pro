@@ -37,6 +37,7 @@ SOURCES = \
     plugin.cpp
 
 QML_SOURCES = \
+    qml/EntryComponent.qml \
     qml/MainWindow.qml
 
 RESOURCES += \
