@@ -7,6 +7,7 @@ SUBDIRS = \
     po \
     lib \
     src \
+    plugins \
     tests
 
 include(common-installs-config.pri)

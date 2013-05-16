@@ -31,19 +31,31 @@ MainView {
         id: pluginManager
     }
 
-    Page {
-        title: i18n.tr("System Settings")
+    PageStack {
+        id: pageStack
 
-        Grid {
-            anchors.left: parent.left
-            anchors.right: parent.right
+        Page {
+            title: i18n.tr("System Settings")
 
-            Repeater {
-                model: pluginManager.itemModel("network")
+            Grid {
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-                delegate: Loader {
-                    width: units.gu(14)
-                    sourceComponent: model.item.entryComponent
+                Repeater {
+                    model: pluginManager.itemModel("network")
+
+                    delegate: Loader {
+                        id: loader
+                        width: units.gu(14)
+                        sourceComponent: model.item.entryComponent
+
+                        Connections {
+                            ignoreUnknownSignals: true
+                            target: loader.item
+                            onClicked: pageStack.push(model.item.pageComponent,
+                                                      { stack: pageStack })
+                        }
+                    }
                 }
             }
         }

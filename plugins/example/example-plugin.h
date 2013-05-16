@@ -18,24 +18,23 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import Ubuntu.Components 0.1
+#ifndef SYSTEM_SETTINGS_EXAMPLE_PLUGIN_H
+#define SYSTEM_SETTINGS_EXAMPLE_PLUGIN_H
 
-Item {
-    id: root
+#include <QObject>
+#include <SystemSettings/PluginInterface>
 
-    signal clicked
+class ExamplePlugin: public QObject, public SystemSettings::PluginInterface
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface")
+    Q_INTERFACES(SystemSettings::PluginInterface)
 
-    height: col.height
+public:
+    ExamplePlugin();
 
-    Column {
-        id: col
-        Image { source: model.icon }
-        Label { text: model.displayName }
-    }
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
+};
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: root.clicked()
-    }
-}
+#endif // SYSTEM_SETTINGS_EXAMPLE_PLUGIN_H

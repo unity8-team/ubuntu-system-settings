@@ -21,21 +21,24 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 
-Item {
+Page {
     id: root
 
-    signal clicked
+    property Item stack
 
-    height: col.height
-
-    Column {
-        id: col
-        Image { source: model.icon }
-        Label { text: model.displayName }
+    title: i18n.tr("Example settings")
+    tools: ToolbarActions {
+        Action {
+            text: "one"
+        }
+        Action {
+            text: "two"
+        }
     }
 
-    MouseArea {
+    Rectangle {
         anchors.fill: parent
-        onClicked: root.clicked()
+        anchors.margins: 10
+        color: "red"
     }
 }
