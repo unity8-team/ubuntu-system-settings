@@ -1,6 +1,5 @@
 include(../common-project-config.pri)
 include($${TOP_SRC_DIR}/common-vars.pri)
-include($${TOP_SRC_DIR}/common-installs-config.pri)
 
 TARGET = tst_plugins
 
