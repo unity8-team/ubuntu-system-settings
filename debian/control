@@ -10,7 +10,7 @@ Build-Depends: dbus-test-runner,
                qtbase5-dev,
                qtdeclarative5-dev,
                xvfb,
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
 # changes, just go ahead.  ~system-settings-touch will notice and sync up the
@@ -18,7 +18,7 @@ Homepage: https://launchpad.net/ubuntu-system-settings
 Vcs-Bzr: https://code.launchpad.net/~system-settings-touch/ubuntu-system-settings/trunk
 
 Package: ubuntu-system-settings
-Architecture: all
+Architecture: i386 amd64 armhf
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
