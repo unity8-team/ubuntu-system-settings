@@ -36,8 +36,8 @@ INCLUDEPATH += \
 
 DEFINES += \
     DEBUG_ENABLED \
-    PLUGIN_MANIFEST_DIR=\\\"$${TOP_SRC_DIR}/lib/tests/data\\\" \
-    PLUGIN_MODULE_DIR=\\\"$${TOP_BUILD_DIR}/lib/tests/plugins\\\" \
+    PLUGIN_MANIFEST_DIR=\\\"$${TOP_SRC_DIR}/tests/data\\\" \
+    PLUGIN_MODULE_DIR=\\\"$${TOP_BUILD_DIR}/tests/plugins\\\" \
     UNIT_TESTS
 
 check.commands = "xvfb-run -a ./$$TARGET"

@@ -43,6 +43,8 @@ private Q_SLOTS:
 void PluginsTest::testCategory()
 {
     PluginManager manager;
+    manager.classBegin();
+    manager.componentComplete();
 
     QSet<QString> expectedCategories;
     expectedCategories << "phone" << "network";
@@ -66,6 +68,8 @@ void PluginsTest::testCategory()
 void PluginsTest::testKeywords()
 {
     PluginManager manager;
+    manager.classBegin();
+    manager.componentComplete();
 
     Plugin *wireless = 0;
     Plugin *bluetooth = 0;
