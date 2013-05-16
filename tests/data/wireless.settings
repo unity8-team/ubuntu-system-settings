@@ -1,6 +1,6 @@
 {
     "name": "Wireless",
-    "icon": "wireless-icon",
+    "icon": "nm-device-wireless",
     "translations": "wireless-plugin",
     "category": "network",
     "keywords": [

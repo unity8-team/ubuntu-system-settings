@@ -1,6 +1,6 @@
 {
     "name": "Bluetooth",
-    "icon": "bluetooth-icon",
+    "icon": "bluetooth",
     "translations": "bluez-plugin",
     "category": "network",
     "keywords": [
