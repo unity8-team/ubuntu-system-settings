@@ -34,8 +34,6 @@ public:
     ExampleItem(const QVariantMap &staticData, QObject *parent = 0);
     ~ExampleItem();
 
-    virtual QQmlComponent *entryComponent(QQmlEngine *engine,
-                                          QObject *parent = 0);
     virtual QQmlComponent *pageComponent(QQmlEngine *engine,
                                          QObject *parent = 0);
 };
@@ -47,13 +45,6 @@ ExampleItem::ExampleItem(const QVariantMap &staticData, QObject *parent):
 
 ExampleItem::~ExampleItem()
 {
-}
-
-QQmlComponent *ExampleItem::entryComponent(QQmlEngine *engine, QObject *parent)
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(parent);
-    return 0;
 }
 
 QQmlComponent *ExampleItem::pageComponent(QQmlEngine *engine, QObject *parent)
