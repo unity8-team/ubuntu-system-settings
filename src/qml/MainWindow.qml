@@ -27,6 +27,8 @@ MainView {
     height: units.gu(60)
     applicationName: "SystemSettings"
 
+    Component.onCompleted: pageStack.push(mainPage)
+
     PluginManager {
         id: pluginManager
     }
@@ -35,7 +37,9 @@ MainView {
         id: pageStack
 
         Page {
+            id: mainPage
             title: i18n.tr("System Settings")
+            visible: false
 
             Grid {
                 anchors.left: parent.left
@@ -52,8 +56,7 @@ MainView {
                         Connections {
                             ignoreUnknownSignals: true
                             target: loader.item
-                            onClicked: pageStack.push(model.item.pageComponent,
-                                                      { stack: pageStack })
+                            onClicked: pageStack.push(model.item.pageComponent)
                         }
                     }
                 }
