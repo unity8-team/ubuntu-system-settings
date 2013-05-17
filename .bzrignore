@@ -1,5 +1,7 @@
 *.moc
 lib*.so*
+/lib/qmlutils/Ubuntu/
+/lib/qmlutils/qmldir
 Makefile*
 moc_*.cpp
 qrc_*.cpp

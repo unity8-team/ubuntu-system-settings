@@ -24,7 +24,11 @@ HEADERS += \
     default-plugin.h
 
 QML_SOURCES = \
-    PageComponent.qml
+    MenuAction.qml \
+    MenuItemDelegate.qml \
+    MenuSection.qml \
+    PageComponent.qml \
+    SubMenu.qml
 
 RESOURCES += \
     ui.qrc

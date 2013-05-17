@@ -1,5 +1,9 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+    <file>MenuAction.qml</file>
+    <file>MenuItemDelegate.qml</file>
+    <file>MenuSection.qml</file>
     <file>PageComponent.qml</file>
+    <file>SubMenu.qml</file>
 </qresource>
 </RCC>
