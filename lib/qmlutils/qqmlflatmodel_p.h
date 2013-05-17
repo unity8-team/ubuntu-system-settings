@@ -57,6 +57,7 @@ public:
     Q_INVOKABLE bool hasChildren(int row) const;
     Q_INVOKABLE void enterRow(int row);
     Q_INVOKABLE void goUp();
+    Q_INVOKABLE QModelIndex modelIndex(int row) const;
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;

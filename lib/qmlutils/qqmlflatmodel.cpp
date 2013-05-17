@@ -177,7 +177,7 @@ void QQmlFlatModelPrivate::_q_onDataChanged(const QModelIndex &topLeft,
 
 QQmlFlatModel::QQmlFlatModel(QObject *parent)
     : QAbstractListModel(parent)
-    , d_ptr(new QQmlFlatModelPrivate)
+    , d_ptr(new QQmlFlatModelPrivate(this))
 {
     QObject::connect(this, SIGNAL(rowsInserted(const QModelIndex&,int,int)),
                      this, SIGNAL(countChanged()));
@@ -364,6 +364,18 @@ void QQmlFlatModel::goUp()
     if (Q_UNLIKELY(d->model == 0)) return;
     QModelIndex newRootIndex = d->rootIndex.parent();
     setRootIndex(newRootIndex);
+}
+
+/*
+ * \qmlmethod void QtQuick2::FlatModel::modelIndex(int row)
+ *
+ * Get the \l QModelIndex for the specified index.
+ */
+QModelIndex QQmlFlatModel::modelIndex(int row) const
+{
+    Q_D(const QQmlFlatModel);
+    if (Q_UNLIKELY(d->model == 0)) return QModelIndex();
+    return d->mapIndex(row);
 }
 
 /*!

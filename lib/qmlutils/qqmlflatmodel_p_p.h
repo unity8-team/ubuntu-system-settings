@@ -28,7 +28,7 @@ class QQmlFlatModelPrivate
     Q_DECLARE_PUBLIC(QQmlFlatModel)
 
 public:
-    QQmlFlatModelPrivate() : model(0)
+    QQmlFlatModelPrivate(QQmlFlatModel *q): q_ptr(q), model(0)
         , subRow(-1), subColumn(0) {}
     void _q_onRowsInserted(const QModelIndex &index, int first, int last);
     void _q_onRowsRemoved(const QModelIndex &index, int first, int last);
