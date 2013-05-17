@@ -56,7 +56,8 @@ MainView {
                         Connections {
                             ignoreUnknownSignals: true
                             target: loader.item
-                            onClicked: pageStack.push(model.item.pageComponent)
+                            onClicked: pageStack.push(model.item.pageComponent,
+                                                      { item: model.item })
                         }
                     }
                 }

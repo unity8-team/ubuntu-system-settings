@@ -47,6 +47,7 @@ public:
     ItemBase(const QVariantMap &staticData, QObject *parent = 0);
     ~ItemBase();
 
+    const QVariantMap &staticData() const;
     QUrl icon() const;
     QStringList keywords() const;
     bool isVisible() const;
@@ -59,7 +60,6 @@ protected:
     void setIcon(const QUrl &icon);
     void setKeywords(const QStringList &keywords);
     void setVisible(bool visible);
-    const QVariantMap &staticData() const;
 
 Q_SIGNALS:
     void iconChanged();

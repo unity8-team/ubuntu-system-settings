@@ -35,6 +35,7 @@ class Plugin: public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlComponent *entryComponent READ entryComponent CONSTANT)
     Q_PROPERTY(QQmlComponent *pageComponent READ pageComponent CONSTANT)
+    Q_PROPERTY(QVariantMap manifest READ manifestData CONSTANT)
 
 public:
     Plugin(const QFileInfo &manifest, QObject *parent = 0);
@@ -47,6 +48,7 @@ public:
     QString translations() const;
     QStringList keywords() const;
     bool isVisible() const;
+    QVariantMap manifestData() const;
 
     QQmlComponent *entryComponent();
     QQmlComponent *pageComponent();

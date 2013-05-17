@@ -182,6 +182,12 @@ bool Plugin::isVisible() const
     return true;
 }
 
+QVariantMap Plugin::manifestData() const
+{
+    Q_D(const Plugin);
+    return d->m_data;
+}
+
 QQmlComponent *Plugin::entryComponent()
 {
     Q_D(const Plugin);

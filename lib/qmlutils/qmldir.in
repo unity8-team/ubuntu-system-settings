@@ -1,0 +1,2 @@
+module $${API_URI}
+plugin $${TARGET}
