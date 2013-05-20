@@ -22,13 +22,12 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.SystemSettings.Utils 0.1
 
-Rectangle {
+Item {
     id: root
     property variant modelIndexVar: modelIndex
     anchors.left: parent.left
     anchors.right: parent.right
     height: col.height
-    color: "green"
 
     FlatModel {
         id: sectionModel

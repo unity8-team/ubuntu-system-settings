@@ -20,23 +20,13 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import Ubuntu.SystemSettings.Utils 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 
-Rectangle {
+ListItem.Standard {
     id: root
-    height: 40 // FIXME
     anchors.left: parent.left
     anchors.right: parent.right
-    color: "lightsteelblue"
 
-    Text {
-        anchors.fill: parent
-        verticalAlignment: Text.AlignVCenter
-        text: "%1 (%2)".arg(label).arg(action)
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: console.log("action triggered: " + action)
-    }
+    text: label
+    icon: extra.canonical_icon ? "image://gicon/" + extra.canonical_icon : undefined
 }

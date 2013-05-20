@@ -37,13 +37,6 @@ Page {
         busType: DBus.SessionBus
         busName: "com.canonical.indicator.messages"
         objectPath: "/com/canonical/indicator/messages/menu"
-        onStatusChanged: {
-            console.log("Status changed: " + status)
-            if (status == DBus.Connecting) {
-                view.reset()
-            }
-            console.log("Count: " + view.count)
-        }
     }
 
     FlatModel {
@@ -52,23 +45,16 @@ Page {
         onCountChanged: console.log("flatmodel count: " + count)
     }
 
-    Rectangle {
+    ListView {
+        id: view
         anchors.fill: parent
-        anchors.margins: 10
-        color: "red"
-
-        ListView {
-            id: view
-            anchors.fill: parent
-            model: flatModel
-            spacing: 3
-            delegate: MenuItemDelegate {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                menuModel: flatModel.model
-                modelIndex: flatModel.modelIndex(index)
-            }
-            onCountChanged: console.log("view count: " + count)
+        model: flatModel
+        spacing: 3
+        delegate: MenuItemDelegate {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            menuModel: flatModel.model
+            modelIndex: flatModel.modelIndex(index)
         }
     }
 }
