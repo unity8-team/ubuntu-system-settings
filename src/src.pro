@@ -50,8 +50,8 @@ OTHER_FILES += \
 DEFINES += \
     DEBUG_ENABLED \
     I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\" \
-    PLUGIN_MANIFEST_DIR=\\\"$${INSTALL_PREFIX}/share/settings/system\\\" \
-    PLUGIN_MODULE_DIR=\\\"$${INSTALL_PREFIX}/lib/system-settings\\\"
+    PLUGIN_MANIFEST_DIR=\\\"$${PLUGIN_MANIFEST_DIR}\\\" \
+    PLUGIN_MODULE_DIR=\\\"$${PLUGIN_MODULE_DIR}\\\"
 
 po.target = ../po/signon-ui.pot
 po.depends = $${SOURCES}

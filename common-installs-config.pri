@@ -18,8 +18,9 @@ contains(TEMPLATE, app) {
 # default installation target for libraries
 #-----------------------------------------------------------------------------
 contains(TEMPLATE, lib) {
-
-    target.path  = $${INSTALL_PREFIX}/lib
+    isEmpty(target.path) {
+        target.path  = $${INSTALL_PREFIX}/lib
+    }
     INSTALLS    += target
     message("====")
     message("==== INSTALLS += target")

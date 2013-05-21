@@ -35,4 +35,6 @@ DEFINES += \
 
 headers.files = $${public_headers}
 
+target.path = $${PLUGIN_MODULE_DIR}
+
 include($${TOP_SRC_DIR}/common-installs-config.pri)
