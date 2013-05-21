@@ -1,5 +1,9 @@
 ubuntu-system-settings (0.1-0ubuntu1) UNRELEASED; urgency=low
 
+  [ Alberto Mardegan ]
   * Initial release.
+
+  [ Ken VanDine ]
+  * Split package up into application, plugin and libs
 
  -- Alberto Mardegan <alberto.mardegan@canonical.com>  Fri, 03 May 2013 09:58:03 -0700
