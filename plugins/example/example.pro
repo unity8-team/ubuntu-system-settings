@@ -14,7 +14,6 @@ QT += \
 
 LIBS += -lSystemSettings
 QMAKE_LIBDIR += $${TOP_BUILD_DIR}/lib/SystemSettings
-QMAKE_RPATHDIR = $${QMAKE_LIBDIR}
 
 INCLUDEPATH += $${TOP_SRC_DIR}/lib
 
