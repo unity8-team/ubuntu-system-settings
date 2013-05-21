@@ -22,5 +22,33 @@ Architecture: i386 amd64 armhf
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         libsystemsettings1 (= ${binary:Version}),
 Description: System Settings application for Ubuntu Touch
- System Settings application for Ubuntu Touch.
+ System Settings for Ubuntu Touch.
+
+Package: ubuntu-system-settings-example
+Section: libs
+Architecture: i386 amd64 armhf
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         ubuntu-system-settings (= ${binary:Version}),
+         libsystemsettings1 (= ${binary:Version}),
+Description: System Settings Example plugin for Ubuntu Touch
+ Example plugin for Ubuntu System Settings 
+
+Package: libsystemsettings1
+Section: libs
+Architecture: i386 amd64 armhf
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+Description: System Settings Library for Ubuntu Touch
+ System Settings for Ubuntu Touch.
+
+Package: libsystemsettings-dev
+Section: libdevel
+Architecture: i386 amd64 armhf
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         libsystemsettings1 (= ${binary:Version}),
+Description: System Settings for Ubuntu Touch - development files
+ System Settings for Ubuntu Touch.
