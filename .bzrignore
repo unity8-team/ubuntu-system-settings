@@ -1,7 +1,17 @@
+*.debhelper
+*.log
 *.moc
+*.substvars
 lib*.so*
 Makefile*
 moc_*.cpp
 qrc_*.cpp
+/debian/files
+/debian/libsystemsettings-dev/
+/debian/libsystemsettings1/
+/debian/tmp/
+/debian/ubuntu-system-settings/
+/debian/ubuntu-system-settings-example/
+/lib/SystemSettings/SystemSettings.pc
 /src/system-settings
 /tests/tst_plugins

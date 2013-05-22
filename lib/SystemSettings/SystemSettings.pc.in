@@ -1,0 +1,14 @@
+prefix=$$INSTALL_PREFIX
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+plugin_manifest_dir=$${PLUGIN_MANIFEST_DIR}
+plugin_module_dir=$${PLUGIN_MODULE_DIR}
+plugin_qml_dir=$${PLUGIN_QML_DIR}
+
+Name: SystemSettings
+Description: Ubuntu Touch system settings plug-in development
+Version: $$PROJECT_VERSION
+Requires: Qt5Core Qt5Qml
+Libs: -L${libdir} -l$${TARGET}
+Cflags: -I${includedir}
