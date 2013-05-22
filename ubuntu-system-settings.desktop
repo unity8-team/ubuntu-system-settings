@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=System Settings
+Icon=preferences-system
+Exec=system-settings
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=System;
+OnlyShowIn=Unity;
+Keywords=Preferences;Settings;
+X-Ubuntu-Gettext-Domain=ubuntu-system-settings
+X-Ubuntu-Touch=true
+X-Ubuntu-StageHint=SideStage
