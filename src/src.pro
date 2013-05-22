@@ -38,7 +38,8 @@ SOURCES = \
 
 QML_SOURCES = \
     qml/EntryComponent.qml \
-    qml/MainWindow.qml
+    qml/MainWindow.qml \
+    qml/UncategorizedItemsView.qml
 
 RESOURCES += \
     ui.qrc
@@ -51,7 +52,8 @@ DEFINES += \
     DEBUG_ENABLED \
     I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\" \
     PLUGIN_MANIFEST_DIR=\\\"$${PLUGIN_MANIFEST_DIR}\\\" \
-    PLUGIN_MODULE_DIR=\\\"$${PLUGIN_MODULE_DIR}\\\"
+    PLUGIN_MODULE_DIR=\\\"$${PLUGIN_MODULE_DIR}\\\" \
+    PLUGIN_QML_DIR=\\\"$${PLUGIN_QML_DIR}\\\"
 
 po.target = ../po/signon-ui.pot
 po.depends = $${SOURCES}

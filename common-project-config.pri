@@ -30,3 +30,4 @@ isEmpty(PREFIX) {
 
 PLUGIN_MANIFEST_DIR="$${INSTALL_PREFIX}/share/settings/system"
 PLUGIN_MODULE_DIR="$${INSTALL_PREFIX}/lib/system-settings"
+PLUGIN_QML_DIR="$${INSTALL_PREFIX}/share/settings/system/qml-plugins"

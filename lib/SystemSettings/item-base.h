@@ -35,6 +35,8 @@ extern const QLatin1String keyTranslations;
 extern const QLatin1String keyFormFactors;
 extern const QLatin1String keyKeywords;
 extern const QLatin1String keyPlugin;
+extern const QLatin1String keyEntryComponent;
+extern const QLatin1String keyPageComponent;
 extern const QLatin1String keyHasDynamicKeywords;
 extern const QLatin1String keyHasDynamicVisibility;
 

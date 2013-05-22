@@ -1,3 +1,4 @@
 TEMPLATE = subdirs
 SUBDIRS = \
-    example
+    example \
+    flight-mode

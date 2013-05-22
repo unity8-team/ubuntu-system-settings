@@ -20,6 +20,7 @@ INCLUDEPATH += $${TOP_SRC_DIR}/lib
 SRC_DIR = $$TOP_SRC_DIR/src
 SOURCES += \
     tst_plugins.cpp \
+    $$SRC_DIR/debug.cpp \
     $$SRC_DIR/item-model.cpp \
     $$SRC_DIR/plugin-manager.cpp \
     $$SRC_DIR/plugin.cpp
@@ -37,6 +38,7 @@ DEFINES += \
     DEBUG_ENABLED \
     PLUGIN_MANIFEST_DIR=\\\"$${TOP_SRC_DIR}/tests/data\\\" \
     PLUGIN_MODULE_DIR=\\\"$${TOP_BUILD_DIR}/tests/plugins\\\" \
+    PLUGIN_QML_DIR=\\\"$${TOP_BUILD_DIR}/tests/plugins\\\" \
     UNIT_TESTS
 
 check.commands = "xvfb-run -a ./$$TARGET"

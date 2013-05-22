@@ -20,6 +20,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 
 MainView {
@@ -41,24 +42,40 @@ MainView {
             title: i18n.tr("System Settings")
             visible: false
 
-            Grid {
+            Column {
                 anchors.left: parent.left
                 anchors.right: parent.right
+                UncategorizedItemsView {
+                    model: pluginManager.itemModel("uncategorized-top")
+                }
 
-                Repeater {
-                    model: pluginManager.itemModel("network")
+                ListItem.Divider {}
 
-                    delegate: Loader {
-                        id: loader
-                        width: units.gu(14)
-                        sourceComponent: model.item.entryComponent
+                Grid {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
 
-                        Connections {
-                            ignoreUnknownSignals: true
-                            target: loader.item
-                            onClicked: pageStack.push(model.item.pageComponent)
+                    Repeater {
+                        model: pluginManager.itemModel("network")
+
+                        delegate: Loader {
+                            id: loader
+                            width: units.gu(14)
+                            sourceComponent: model.item.entryComponent
+
+                            Connections {
+                                ignoreUnknownSignals: true
+                                target: loader.item
+                                onClicked: pageStack.push(model.item.pageComponent)
+                            }
                         }
                     }
+                }
+
+                ListItem.Divider {}
+
+                UncategorizedItemsView {
+                    model: pluginManager.itemModel("uncategorized-bottom")
                 }
             }
         }
