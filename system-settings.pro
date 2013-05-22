@@ -12,7 +12,7 @@ SUBDIRS = \
 
 include(common-installs-config.pri)
 
-desktop.path = $$PREFIX/share/applications
+desktop.path = $$INSTALL_PREFIX/share/applications
 desktop.files += ubuntu-system-settings.desktop
 
 INSTALLS += desktop
