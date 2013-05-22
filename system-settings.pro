@@ -12,6 +12,11 @@ SUBDIRS = \
 
 include(common-installs-config.pri)
 
+desktop.path = $$INSTALL_PREFIX/share/applications
+desktop.files += ubuntu-system-settings.desktop
+
+INSTALLS += desktop
+
 DISTNAME = $${PROJECT_NAME}-$${PROJECT_VERSION}
 dist.commands = "bzr export $${DISTNAME}.tar.bz2"
 QMAKE_EXTRA_TARGETS += dist
