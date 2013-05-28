@@ -1,4 +1,4 @@
-ubuntu-system-settings (0.1-0ubuntu1) UNRELEASED; urgency=low
+ubuntu-system-settings (0.1daily13.05.23-0ubuntu1) saucy; urgency=low
 
   [ Alberto Mardegan ]
   * Initial release.
@@ -6,4 +6,33 @@ ubuntu-system-settings (0.1-0ubuntu1) UNRELEASED; urgency=low
   [ Ken VanDine ]
   * Split package up into application, plugin and libs
 
- -- Alberto Mardegan <alberto.mardegan@canonical.com>  Fri, 03 May 2013 09:58:03 -0700
+  [ Alberto Mardegan ]
+  * Add a few files
+  * Add main window stub
+  * Introduce the PluginManager class
+  * Change directory structure: add libSystemSettings
+  * Add PluginBase
+  * Implement plugin loading
+  * Test plugin loading
+  * PluginBase->ItemBase Too many "plugin" in the project.
+  * Add ItemModel class
+  * Export pageComponent and entryComponent to QML
+  * Move Plugin client code to src/
+  * Default entry component
+  * Working icons for testing
+  * Add example plugin
+  * Fix stack navigation
+  * Removed unused method
+  * Fix unit tests
+  * packaging cleanup
+  * Install libSystemSettings in /usr/lib/system-settings/
+  * Allow loading items before and after the item grid
+  * Install flight-mode plugin
+  * Install pkg-config file
+  * Add missing file, update .bzrignore
+  * Update from trunk
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 25
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 23 May 2013 07:01:10 +0000
