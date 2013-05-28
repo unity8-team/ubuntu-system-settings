@@ -4,12 +4,12 @@ include($${TOP_SRC_DIR}/common-vars.pri)
 TARGET = tst_plugins
 
 CONFIG += \
-    debug \
-    qtestlib
+    debug
 
 QT += \
     core \
-    qml
+    qml \
+    testlib
 
 LIBS += -lSystemSettings
 QMAKE_LIBDIR += $${TOP_BUILD_DIR}/lib/SystemSettings
