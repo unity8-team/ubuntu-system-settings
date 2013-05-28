@@ -228,7 +228,6 @@ QQmlComponent *Plugin::entryComponent()
 QQmlComponent *Plugin::pageComponent()
 {
     Q_D(const Plugin);
-    if (!d->ensureLoaded()) return 0;
     QQmlContext *context = QQmlEngine::contextForObject(this);
     if (Q_UNLIKELY(context == 0)) return 0;
 
@@ -236,6 +235,7 @@ QQmlComponent *Plugin::pageComponent()
     if (!pageComponentUrl.isEmpty()) {
         return new QQmlComponent(context->engine(), pageComponentUrl, this);
     } else {
+        if (!d->ensureLoaded()) return 0;
         return d->m_item->pageComponent(context->engine(), this);
     }
 }

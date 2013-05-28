@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QQmlComponent>
+#include <QStringList>
 #include <QUrl>
 
 class QFileInfo;
@@ -35,6 +36,12 @@ class Plugin: public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlComponent *entryComponent READ entryComponent CONSTANT)
     Q_PROPERTY(QQmlComponent *pageComponent READ pageComponent CONSTANT)
+    Q_PROPERTY(QUrl icon READ icon NOTIFY iconChanged)
+    Q_PROPERTY(QString category READ category CONSTANT)
+    Q_PROPERTY(int priority READ priority CONSTANT)
+    Q_PROPERTY(QString translations READ translations CONSTANT)
+    Q_PROPERTY(QStringList keywords READ keywords NOTIFY keywordsChanged)
+    Q_PROPERTY(bool visible READ isVisible NOTIFY visibilityChanged)
 
 public:
     Plugin(const QFileInfo &manifest, QObject *parent = 0);

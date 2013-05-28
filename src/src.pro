@@ -54,7 +54,7 @@ DEFINES += \
     PLUGIN_MODULE_DIR=\\\"$${PLUGIN_MODULE_DIR}\\\" \
     PLUGIN_QML_DIR=\\\"$${PLUGIN_QML_DIR}\\\"
 
-po.target = ../po/signon-ui.pot
+po.target = ../po/system-settings.pot
 po.depends = $${SOURCES}
 po.commands = xgettext -o $@ -d $${I18N_DOMAIN} --keyword=_ $^
 
