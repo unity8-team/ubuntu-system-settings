@@ -21,35 +21,14 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import SystemSettings 1.0
 
-Column {
-    property alias model: repeater.model
+ListItem.Standard {
+    id: root
 
-    anchors.left: parent.left
-    anchors.right: parent.right
-
-    Repeater {
-        id: repeater
-
-        Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            ListItem.Divider {
-                visible: index != 0
-            }
-            Loader {
-                id: loader
-                anchors.left: parent.left
-                anchors.right: parent.right
-                sourceComponent: model.item.entryComponent
-                Connections {
-                    ignoreUnknownSignals: true
-                    target: loader.item
-                    onClicked: pageStack.push(model.item.pageComponent)
-                }
-            }
-        }
+    icon: Image {
+        source: model.icon
+        width: height
     }
+    text: i18n.tr("About this phone")
+    progression: true
 }

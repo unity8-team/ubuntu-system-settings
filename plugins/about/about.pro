@@ -2,10 +2,11 @@ include(../../common-project-config.pri)
 include($${TOP_SRC_DIR}/common-vars.pri)
 
 TEMPLATE = lib
-TARGET = flight-mode
+TARGET = about
 
 QML_SOURCES = \
-    EntryComponent.qml
+    EntryComponent.qml \
+    PageComponent.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}

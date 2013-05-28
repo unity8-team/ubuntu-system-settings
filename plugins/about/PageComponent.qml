@@ -20,36 +20,17 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
-import SystemSettings 1.0
 
-Column {
-    property alias model: repeater.model
+Page {
+    id: root
 
-    anchors.left: parent.left
-    anchors.right: parent.right
+    property Item stack
 
-    Repeater {
-        id: repeater
+    title: i18n.tr("Ubuntu BUG1")
 
-        Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            ListItem.Divider {
-                visible: index != 0
-            }
-            Loader {
-                id: loader
-                anchors.left: parent.left
-                anchors.right: parent.right
-                sourceComponent: model.item.entryComponent
-                Connections {
-                    ignoreUnknownSignals: true
-                    target: loader.item
-                    onClicked: pageStack.push(model.item.pageComponent)
-                }
-            }
+    Column {
+        Label {
+            text: i18n.tr("Best phone ever")
         }
     }
 }
