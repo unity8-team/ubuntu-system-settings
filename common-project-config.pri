@@ -28,6 +28,10 @@ isEmpty(PREFIX) {
     message("==== install prefix set to `$${INSTALL_PREFIX}'")
 }
 
-PLUGIN_MANIFEST_DIR="$${INSTALL_PREFIX}/share/settings/system"
-PLUGIN_MODULE_DIR="$${INSTALL_PREFIX}/lib/system-settings"
-PLUGIN_QML_DIR="$${INSTALL_PREFIX}/share/settings/system/qml-plugins"
+PLUGIN_MANIFEST_DIR_BASE = "share/settings/system"
+PLUGIN_MODULE_DIR_BASE="lib/system-settings"
+PLUGIN_QML_DIR_BASE="share/settings/system/qml-plugins"
+
+PLUGIN_MANIFEST_DIR="$${INSTALL_PREFIX}/$${PLUGIN_MANIFEST_DIR_BASE}"
+PLUGIN_MODULE_DIR="$${INSTALL_PREFIX}/$${PLUGIN_MODULE_DIR_BASE}"
+PLUGIN_QML_DIR="$${INSTALL_PREFIX}/$${PLUGIN_QML_DIR_BASE}"

@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.1daily13.05.23-0ubuntu2) UNRELEASED; urgency=low
+
+  * Don't hardcode prefix in pkg-config file.
+
+ -- Alberto Mardegan <alberto.mardegan@canonical.com>  Wed, 29 May 2013 14:29:47 +0300
+
 ubuntu-system-settings (0.1daily13.05.23-0ubuntu1) saucy; urgency=low
 
   [ Alberto Mardegan ]
