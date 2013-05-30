@@ -54,6 +54,7 @@ MainView {
                 Grid {
                     anchors.left: parent.left
                     anchors.right: parent.right
+                    columns: width / units.gu(14)
 
                     Repeater {
                         model: pluginManager.itemModel("network")

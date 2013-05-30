@@ -30,8 +30,19 @@ Item {
 
     Column {
         id: col
-        Image { source: model.icon }
-        Label { text: model.displayName }
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        Image {
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: units.gu(6)
+            height: width
+            source: model.icon
+        }
+        Label {
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: model.displayName
+        }
     }
 
     MouseArea {
