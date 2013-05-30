@@ -20,11 +20,10 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import SystemSettings 1.0
 
-Page {
+ItemPage {
     id: root
-
-    property Item stack
 
     title: i18n.tr("Ubuntu BUG1")
 

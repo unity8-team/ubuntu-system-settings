@@ -20,23 +20,11 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import SystemSettings 1.0
 
-ItemPage {
+Page {
     id: root
 
-    tools: ToolbarActions {
-        Action {
-            text: "one"
-        }
-        Action {
-            text: "two"
-        }
-    }
+    property variant plugin
 
-    Rectangle {
-        anchors.fill: parent
-        anchors.margins: 10
-        color: "red"
-    }
+    title: i18n.dtr(plugin.translations, plugin.displayName)
 }

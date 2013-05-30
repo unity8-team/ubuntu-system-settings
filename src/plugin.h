@@ -36,6 +36,7 @@ class Plugin: public QObject
     Q_OBJECT
     Q_PROPERTY(QQmlComponent *entryComponent READ entryComponent CONSTANT)
     Q_PROPERTY(QQmlComponent *pageComponent READ pageComponent CONSTANT)
+    Q_PROPERTY(QString displayName READ displayName CONSTANT)
     Q_PROPERTY(QUrl icon READ icon NOTIFY iconChanged)
     Q_PROPERTY(QString category READ category CONSTANT)
     Q_PROPERTY(int priority READ priority CONSTANT)

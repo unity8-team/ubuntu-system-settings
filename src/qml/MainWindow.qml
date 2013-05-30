@@ -54,6 +54,7 @@ MainView {
                 Grid {
                     anchors.left: parent.left
                     anchors.right: parent.right
+                    columns: width / units.gu(14)
 
                     Repeater {
                         model: pluginManager.itemModel("network")
@@ -66,7 +67,8 @@ MainView {
                             Connections {
                                 ignoreUnknownSignals: true
                                 target: loader.item
-                                onClicked: pageStack.push(model.item.pageComponent)
+                                onClicked: pageStack.push(model.item.pageComponent,
+                                                          { plugin: model.item })
                             }
                         }
                     }

@@ -50,6 +50,7 @@ int main(int argc, char **argv)
     QQuickView view;
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
+    view.engine()->addImportPath(PLUGIN_QML_DIR);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();
 
