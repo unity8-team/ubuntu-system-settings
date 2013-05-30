@@ -1,8 +1,17 @@
-ubuntu-system-settings (0.1daily13.05.23-0ubuntu2) UNRELEASED; urgency=low
+ubuntu-system-settings (0.1daily13.05.30ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
+  [ Alberto Mardegan ]
   * Don't hardcode prefix in pkg-config file.
+  * Skeleton implementation of the About plugin.
+  * Create ItemPage component, let plugins use it This component renders
+    a page with a default title (the item's name), and provide a
+    property to make the plugin object accessible from within the item
+    page. .
 
- -- Alberto Mardegan <alberto.mardegan@canonical.com>  Wed, 29 May 2013 14:29:47 +0300
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 29 (ubuntu-unity/next)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 30 May 2013 18:20:27 +0000
 
 ubuntu-system-settings (0.1daily13.05.23-0ubuntu1) saucy; urgency=low
 
