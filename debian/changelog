@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.1daily13.06.07-0ubuntu1) saucy; urgency=low
+
+  [ Alberto Mardegan ]
+  * Skeleton implementation of the About plugin.
+  * Create ItemPage component, let plugins use it This component renders
+    a page with a default title (the item's name), and provide a
+    property to make the plugin object accessible from within the item
+    page. .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 30
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 07 Jun 2013 15:57:25 +0000
+
 ubuntu-system-settings (0.1daily13.05.30ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
   [ Alberto Mardegan ]
