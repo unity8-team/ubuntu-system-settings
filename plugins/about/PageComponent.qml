@@ -27,79 +27,88 @@ ItemPage {
     id: root
 
     title: i18n.tr("About This Phone")
+    flickable: scrollWidget
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        id: scrollWidget
+        anchors.fill: parent
+        contentHeight: columnId.height
 
-        ListItem.Base {
-            height: ubuntulogo.height + labelmodel.height + 5
-            Column {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                Image {
-                    id: ubuntulogo
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    source: "/lib/plymouth/ubuntu_logo.png" // TODO: find better logo
-                }
-                Label {
-                    id: labelmodel
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: i18n.tr("Vendor") + " " + i18n.tr("Model") // TODO: get manufactor and model infos from the system
-                }
-            }
-        }
+        Column {
+            id: columnId
 
-        ListItem.SingleValue {
-            text: i18n.tr("Serial")
-            value: "FAKE-SERIAL-ID-NUMBER"   // TODO: read serial number from the device
-        }
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        ListItem.SingleValue {
-            text: i18n.tr("IMEI")
-            value: "FAKE-IMEI-ID-NUMBER"     // TODO: read IMEI number from the device
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Software:")
-        }
-
-        ListItem.SingleValue {
-            text: i18n.tr("OS:")
-            value: "Ubuntu Version 0.3"      // TODO: read version number from the device
-        }
-
-        ListItem.SingleValue {
-            text: i18n.tr("Last Updated")
-            value: "2013-04-09"              // TODO: read update infos from the device
-        }
-
-        ListItem.Base {
-            Column {
-                anchors.left: parent.left
-                anchors.right: parent.right
-                Button {
-                    anchors {
-                        margins: units.gu(3)
-                        left: parent.left
-                        right: parent.right
+            ListItem.Base {
+                height: ubuntuLogo.height + vendorStr.height + 5
+                Column {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    Image {
+                        id: ubuntuLogo
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        source: "/lib/plymouth/ubuntu_logo.png" // TODO: find better logo
                     }
-                    text: i18n.tr("Check for Updates")
-                }
-                Label {
-                    text:i18n.tr("Legal:")
+                    Label {
+                        id: vendorStr
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: i18n.tr("Vendor") + " " + i18n.tr("Model") // TODO: get manufactor and model infos from the system
+                    }
                 }
             }
-        }
 
-        ListItem.Standard {
-            text: i18n.tr("Software Licenses")
-            progression: true
-        }
+            ListItem.SingleValue {
+                text: i18n.tr("Serial")
+                value: "FAKE-SERIAL-ID-NUMBER"   // TODO: read serial number from the device
+            }
 
-        ListItem.Standard {
-            text: i18n.tr("Regulatory Info")
-            progression: true
+            ListItem.SingleValue {
+                text: i18n.tr("IMEI")
+                value: "FAKE-IMEI-ID-NUMBER"     // TODO: read IMEI number from the device
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Software:")
+            }
+
+            ListItem.SingleValue {
+                text: i18n.tr("OS:")
+                value: "Ubuntu Version 0.3"      // TODO: read version number from the device
+            }
+
+            ListItem.SingleValue {
+                text: i18n.tr("Last Updated")
+                value: "2013-04-09"              // TODO: read update infos from the device
+            }
+
+            ListItem.Base {
+                Column {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    Button {
+                        anchors {
+                            margins: units.gu(3)
+                            left: parent.left
+                            right: parent.right
+                        }
+                        text: i18n.tr("Check for Updates")
+                    }
+                    Label {
+                        text:i18n.tr("Legal:")
+                    }
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Software Licenses")
+                progression: true
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Regulatory Info")
+                progression: true
+            }
         }
     }
 }
