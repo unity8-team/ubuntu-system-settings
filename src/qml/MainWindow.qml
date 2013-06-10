@@ -25,7 +25,7 @@ import SystemSettings 1.0
 
 MainView {
     width: units.gu(48)
-    height: units.gu(60)
+    height: units.gu(90)
     applicationName: "SystemSettings"
 
     Component.onCompleted: pageStack.push(mainPage)
