@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>qml/EntryComponent.qml</file>
+    <file>qml/MainWindow.qml</file>
+    <file>qml/UncategorizedItemsView.qml</file>
+</qresource>
+</RCC>

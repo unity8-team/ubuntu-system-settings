@@ -1,0 +1,14 @@
+{
+    "name": "Example",
+    "icon": "totem",
+    "translations": "settings-example",
+    "category": "network",
+    "keywords": [
+        "example",
+        "test",
+        "sample"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "plugin": "example-plugin"
+}

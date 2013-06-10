@@ -1,0 +1,14 @@
+{
+    "name": "Wireless",
+    "icon": "nm-device-wireless",
+    "translations": "wireless-plugin",
+    "category": "network",
+    "keywords": [
+        "wireless",
+        "wlan",
+        "wifi"
+    ],
+    "has-dynamic-keywords": true,
+    "has-dynamic-visibility": false,
+    "plugin": "test-plugin"
+}
