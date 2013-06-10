@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.1daily13.06.10-0ubuntu1) saucy; urgency=low
+
+  * Automatic snapshot from revision 34
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 10 Jun 2013 07:01:49 +0000
+
 ubuntu-system-settings (0.1daily13.06.09-0ubuntu1) saucy; urgency=low
 
   * Automatic snapshot from revision 33
