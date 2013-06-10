@@ -1,0 +1,10 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: ubuntu-system-settings
+Upstream-Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+Source: https://launchpad.net/ubuntu-system-settings
+
+Files: *
+Copyright: 2013 Canonical Ltd.
+License: GPL-3
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.

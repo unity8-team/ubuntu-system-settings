@@ -1,0 +1,54 @@
+Source: ubuntu-system-settings
+Section: gnome
+Priority: optional
+Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
+Build-Depends: dbus-test-runner,
+               debhelper (>= 9),
+               gdb,
+               pkg-config,
+               qt5-default,
+               qtbase5-dev,
+               qtdeclarative5-dev,
+               xvfb,
+Standards-Version: 3.9.4
+Homepage: https://launchpad.net/ubuntu-system-settings
+# If you aren't a member of ~system-settings-touch but need to upload packaging
+# changes, just go ahead.  ~system-settings-touch will notice and sync up the
+# code again.
+Vcs-Bzr: https://code.launchpad.net/~system-settings-touch/ubuntu-system-settings/trunk
+
+Package: ubuntu-system-settings
+Architecture: i386 amd64 armhf
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         qtdeclarative5-ubuntu-ui-toolkit-plugin,
+         libsystemsettings1 (= ${binary:Version}),
+Description: System Settings application for Ubuntu Touch
+ System Settings for Ubuntu Touch.
+
+Package: ubuntu-system-settings-example
+Section: libs
+Architecture: i386 amd64 armhf
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         ubuntu-system-settings (= ${binary:Version}),
+         libsystemsettings1 (= ${binary:Version}),
+Description: System Settings Example plugin for Ubuntu Touch
+ Example plugin for Ubuntu System Settings 
+
+Package: libsystemsettings1
+Section: libs
+Architecture: i386 amd64 armhf
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+Description: System Settings Library for Ubuntu Touch
+ System Settings for Ubuntu Touch.
+
+Package: libsystemsettings-dev
+Section: libdevel
+Architecture: i386 amd64 armhf
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         libsystemsettings1 (= ${binary:Version}),
+Description: System Settings for Ubuntu Touch - development files
+ System Settings for Ubuntu Touch.

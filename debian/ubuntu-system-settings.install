@@ -1,0 +1,7 @@
+usr/bin
+usr/share/applications
+usr/share/settings/system/about.settings
+usr/share/settings/system/flight-mode.settings
+usr/share/settings/system/qml-plugins/SystemSettings
+usr/share/settings/system/qml-plugins/about
+usr/share/settings/system/qml-plugins/flight-mode
