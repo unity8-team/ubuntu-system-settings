@@ -41,7 +41,7 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Base {
-                height: ubuntuLogo.height + vendorStr.height + 5
+                height: ubuntuLogo.height + vendorStr.height + units.gu(1)
                 Column {
                     anchors.left: parent.left
                     anchors.right: parent.right
