@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.1daily13.06.11-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * [shell] give a bit of extra height, the geometry is closer from a
+    device this way and it also makes testing easier (no need to scroll
+    to see the bottom of the panels).
+  * Update the about plugin UI, that's a first rought implementation
+    following the design on
+    https://wiki.ubuntu.com/AboutThisDevice#Phone. The panel doesn't do
+    much yet but that's a start.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 37
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 11 Jun 2013 07:01:57 +0000
+
 ubuntu-system-settings (0.1daily13.06.10-0ubuntu1) saucy; urgency=low
 
   * Automatic snapshot from revision 34
