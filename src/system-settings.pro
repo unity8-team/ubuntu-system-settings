@@ -36,6 +36,7 @@ SOURCES = \
     plugin.cpp
 
 QML_SOURCES = \
+    qml/CategoryGrid.qml \
     qml/EntryComponent.qml \
     qml/MainWindow.qml \
     qml/UncategorizedItemsView.qml
