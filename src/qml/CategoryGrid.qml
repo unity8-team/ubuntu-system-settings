@@ -2,8 +2,11 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 
 Column {
-    anchors.left: parent.left
-    anchors.right: parent.right
+    anchors {
+        left: parent.left
+        right: parent.right
+        leftMargin: units.gu(1)
+    }
     spacing: units.gu(1)
 
     property string category
