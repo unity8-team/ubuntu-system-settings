@@ -61,7 +61,6 @@ MainView {
                     category: "network"
                 }
 
-
                 CategoryGrid {
                     category: "system"
                 }
