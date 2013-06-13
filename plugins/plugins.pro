@@ -3,4 +3,5 @@ SUBDIRS = \
     about \
     example \
     flight-mode \
-    orientation-lock
+    orientation-lock \
+    reset
