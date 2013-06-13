@@ -6,20 +6,15 @@ Column {
     anchors {
         left: parent.left
         right: parent.right
-        leftMargin: units.gu(1)
     }
     spacing: units.gu(1)
 
     property string category
     property string categoryName
 
-    ListItem.ThinDivider {}
-
-    Label {
+    ListItem.Header {
         text: categoryName
     }
-
-    ListItem.ThinDivider {}
 
     Grid {
         anchors.left: parent.left
@@ -43,4 +38,5 @@ Column {
             }
         }
     }
+    ListItem.ThinDivider {}
 }
