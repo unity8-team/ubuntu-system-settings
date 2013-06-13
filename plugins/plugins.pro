@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 SUBDIRS = \
     about \
     example \
-    flight-mode
+    flight-mode \
+    orientation-lock
