@@ -1,0 +1,14 @@
+{
+    "icon": "lock",
+    "name": "Orientation lock",
+    "translations": "system-settings",
+    "category": "uncategorized-top",
+    "keywords": [
+        "orientation",
+        "lock",
+        "screen"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "entry-component": "EntryComponent.qml"
+}
