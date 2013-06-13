@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
     anchors {
@@ -11,9 +12,14 @@ Column {
 
     property string category
 
+    ListItem.ThinDivider {}
+
     Label {
-        text: category.toUpperCase()
+        text: i18n.tr(category[0].toUpperCase()+category.slice(1))
     }
+
+    ListItem.ThinDivider {}
+
     Grid {
         anchors.left: parent.left
         anchors.right: parent.right
