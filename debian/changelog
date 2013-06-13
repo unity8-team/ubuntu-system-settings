@@ -1,3 +1,29 @@
+ubuntu-system-settings (0.1daily13.06.13-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * * Wrap the icons with an UbuntuShape, this makes it look more
+    consistent with the shell icons. * Added a leftMargin in the
+    CategoryGrid so the section titles aren't right against the edge *
+    Make flight-mode a ListItem.Standard to be more consistent with the
+    about plugin.
+
+  [ Sebastien Bacher ]
+  * settings: split the category grids from the settings in a new
+    component Use the new component to list the 3 categories from the
+    design, tweak a bit the UI to add category labels and some spacing .
+  * about: tweak the UI to address mpt's review comments - use standard
+    header items rather than custom - use a singlecontrol item for the
+    button - tweak spacing of the first entry - fix a typo in one of the
+    strings.
+  * flight-mode: use an url rather than an image for the entry The image
+    doesn't scale right for some reason, it's also easier to do it this
+    way.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 42
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 13 Jun 2013 07:01:53 +0000
+
 ubuntu-system-settings (0.1daily13.06.11-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

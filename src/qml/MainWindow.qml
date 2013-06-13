@@ -45,33 +45,24 @@ MainView {
             Column {
                 anchors.left: parent.left
                 anchors.right: parent.right
+                spacing: units.gu(3)
+
                 UncategorizedItemsView {
                     model: pluginManager.itemModel("uncategorized-top")
                 }
 
                 ListItem.Divider {}
 
-                Grid {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    columns: width / units.gu(14)
+                CategoryGrid {
+                    category: "personal"
+                }
 
-                    Repeater {
-                        model: pluginManager.itemModel("network")
+                CategoryGrid {
+                    category: "network"
+                }
 
-                        delegate: Loader {
-                            id: loader
-                            width: units.gu(14)
-                            sourceComponent: model.item.entryComponent
-
-                            Connections {
-                                ignoreUnknownSignals: true
-                                target: loader.item
-                                onClicked: pageStack.push(model.item.pageComponent,
-                                                          { plugin: model.item })
-                            }
-                        }
-                    }
+                CategoryGrid {
+                    category: "system"
                 }
 
                 ListItem.Divider {}

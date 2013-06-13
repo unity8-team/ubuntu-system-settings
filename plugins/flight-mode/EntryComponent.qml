@@ -20,30 +20,11 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 
-Item {
+ListItem.Standard {
     id: root
-
-    height: control.height
-
-    Image {
-        id: icon
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        width: height
-        source: model.icon
-    }
-
-    Label {
-        anchors.left: icon.right
-        anchors.verticalCenter: parent.verticalCenter
-        text: model.displayName
-    }
-
-    Switch {
-        id: control
-        anchors.right: parent.right
-        anchors.top: parent.top
-    }
+    icon: Qt.resolvedUrl(model.icon)
+    text: model.displayName
+    control: Switch {id: control}
 }
