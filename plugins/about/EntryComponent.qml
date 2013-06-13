@@ -25,10 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ListItem.Standard {
     id: root
 
-    icon: Image {
-        source: model.icon
-        width: height
-    }
+    icon: Qt.resolvedUrl(model.icon)
     text: i18n.tr("About this phone")
     progression: true
 }
