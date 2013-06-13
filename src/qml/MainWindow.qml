@@ -28,7 +28,10 @@ MainView {
     height: units.gu(90)
     applicationName: "SystemSettings"
 
-    Component.onCompleted: pageStack.push(mainPage)
+    Component.onCompleted: {
+        pageStack.push(mainPage)
+        i18n.domain = "ubuntu-system-settings"
+    }
 
     PluginManager {
         id: pluginManager
