@@ -3,12 +3,14 @@ TEMPLATE = subdirs
 PROJECTNAME = "ubuntu-system-settings"
 
 DESKTOPFILE = ../$${PROJECTNAME}.desktop
+SETTINGSFILES = ../plugins/*/*.settings
 
 SOURCECODE = ../plugins/*/*.qml \
              ../src/qml/*.qml
 
 BUILDDIR = ../.build
 DESKTOPFILETEMP = $${BUILDDIR}/$${PROJECTNAME}.desktop.js
+SETTINGSFILETEMP = $${BUILDDIR}/settings.js
 
 message("")
 message(" Project Name: $$PROJECTNAME ")
@@ -25,17 +27,25 @@ potfile.commands = xgettext \
 		   --package-name $${PROJECTNAME} \
 		   --qt --c++ --add-comments=TRANSLATORS \
 		   --keyword=tr --keyword=tr:1,2 --from-code=UTF-8 \
-		   $${SOURCECODE} $${DESKTOPFILETEMP}
-potfile.depends = desktopfile
+                   $${SOURCECODE} $${DESKTOPFILETEMP} $${SETTINGSFILETEMP}
+potfile.depends = desktopfile settingsfiles
 QMAKE_EXTRA_TARGETS += potfile
 
 ## Do not use this rule directly. It's a dependency rule to
-## generate an intermediate .h file to extract translatable
+## generate an intermediate file to extract translatable
 ## strings from the .desktop file
 desktopfile.target = desktopfile
 desktopfile.commands = awk \'BEGIN { FS=\"=\" }; /Name/ {print \"var s = i18n.tr(\42\" \$$2 \"\42);\"}\' $${DESKTOPFILE} > $${DESKTOPFILETEMP}
 desktopfile.depends = makebuilddir
 QMAKE_EXTRA_TARGETS += desktopfile
+
+## Do not use this rule directly. It's a dependency rule to
+## generate an intermediate file to extract translatable
+## strings from the .settings files
+settingsfiles.target = settingsfiles
+settingsfiles.commands = awk \'BEGIN { FS=\": \" }; /name/ {print \"var s = i18n.tr(\" \$$2 \");\"}\' $${SETTINGSFILES} | tr -d ',' > $${SETTINGSFILETEMP}
+settingsfiles.depends = makebuilddir
+QMAKE_EXTRA_TARGETS += settingsfiles
 
 ## Dependency rule to create the temporary build dir
 makebuilddir.target = makebuilddir
