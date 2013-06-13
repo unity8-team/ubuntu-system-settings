@@ -36,9 +36,6 @@ Column {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Divider {
-                visible: index != 0
-            }
             Loader {
                 id: loader
                 anchors.left: parent.left
