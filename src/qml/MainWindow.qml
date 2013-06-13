@@ -55,14 +55,17 @@ MainView {
 
                 CategoryGrid {
                     category: "personal"
+                    categoryName: i18n.tr("Personal")
                 }
 
                 CategoryGrid {
                     category: "network"
+                    categoryName: i18n.tr("Network")
                 }
 
                 CategoryGrid {
                     category: "system"
+                    categoryName: i18n.tr("System")
                 }
 
                 ListItem.Divider {}
