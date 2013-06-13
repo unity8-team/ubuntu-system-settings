@@ -29,8 +29,8 @@ MainView {
     applicationName: "SystemSettings"
 
     Component.onCompleted: {
-        pageStack.push(mainPage)
         i18n.domain = "ubuntu-system-settings"
+        pageStack.push(mainPage)
     }
 
     PluginManager {
