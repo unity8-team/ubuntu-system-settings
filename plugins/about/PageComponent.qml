@@ -26,7 +26,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ItemPage {
     id: root
 
-    title: i18n.tr("About This Phone")
+    title: i18n.tr("About this phone")
     flickable: scrollWidget
 
     Flickable {
@@ -58,7 +58,7 @@ ItemPage {
 
                         Label {
                             anchors.centerIn: parent
-                            text: i18n.tr("Vendor") + " " + i18n.tr("Model") // TODO: get manufactor and model infos from the system
+                            text: "Vendor" + " " + "Model" // TODO: get manufactor and model infos from the system
                         }
                     }
                 }
@@ -71,7 +71,7 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("IMEI")
+                text: "IMEI"
                 value: "FAKE-IMEI-ID-NUMBER"     // TODO: read IMEI number from the device
             }
 
@@ -95,7 +95,7 @@ ItemPage {
                         margins: units.gu(1)
                         fill: parent
                     }
-                    text: i18n.tr("Check for Updates")
+                    text: i18n.tr("Check for updates")
                 }
             }
 
@@ -109,12 +109,12 @@ ItemPage {
             }
 
             ListItem.Standard {
-                text: i18n.tr("Software Licenses")
+                text: i18n.tr("Software licenses")
                 progression: true
             }
 
             ListItem.Standard {
-                text: i18n.tr("Regulatory Info")
+                text: i18n.tr("Regulatory info")
                 progression: true
             }
         }

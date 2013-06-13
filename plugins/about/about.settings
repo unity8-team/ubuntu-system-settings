@@ -1,5 +1,6 @@
 {
     "icon": "distributor-logo",
+    "name": "About this phone",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
     "keywords": [
