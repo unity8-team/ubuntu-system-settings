@@ -5,7 +5,7 @@ include($${TOP_SRC_DIR}/common-installs-config.pri)
 TEMPLATE = app
 TARGET = system-settings
 
-I18N_DOMAIN = system-settings
+I18N_DOMAIN = ubuntu-system-settings
 
 CONFIG += \
     qt
