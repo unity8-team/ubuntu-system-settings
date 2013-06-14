@@ -64,16 +64,14 @@ ItemPage {
                             }
                         }
                     }
-                    Row {
+                    Item {
+                        id: vendorItm
                         anchors.horizontalCenter: parent.horizontalCenter
-                        Item {
-                            id: vendorItm
-                            height: vendorLabel.height + units.gu(1)
-                            width: childrenRect.width
-                            Label {
-                                id: vendorLabel
-                                text: "Vendor" + " " + "Model" // TODO: get manufactor and model infos from the system
-                            }
+                        height: vendorLabel.height
+                        width: childrenRect.width
+                        Label {
+                            id: vendorLabel
+                            text: "Vendor" + " " + "Model" // TODO: get manufactor and model infos from the system
                         }
                     }
                 }
