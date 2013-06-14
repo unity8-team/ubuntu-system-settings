@@ -45,27 +45,25 @@ MainView {
             Column {
                 anchors.left: parent.left
                 anchors.right: parent.right
-                spacing: units.gu(3)
 
                 UncategorizedItemsView {
                     model: pluginManager.itemModel("uncategorized-top")
                 }
 
-                ListItem.Divider {}
-
                 CategoryGrid {
                     category: "personal"
+                    categoryName: i18n.tr("Personal")
                 }
 
                 CategoryGrid {
                     category: "network"
+                    categoryName: i18n.tr("Network")
                 }
 
                 CategoryGrid {
                     category: "system"
+                    categoryName: i18n.tr("System")
                 }
-
-                ListItem.Divider {}
 
                 UncategorizedItemsView {
                     model: pluginManager.itemModel("uncategorized-bottom")

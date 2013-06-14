@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.1daily13.06.14-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * about: set an icon url rather than defining an image.
+  * orientation-lock: add new plugin for orientation locking.
+  * settings: slightly improve the category title The titles should
+    start by a uppercase, be translatable, and be placed between
+    horizontal lines.
+  * reset: add new plugin for settings reset .
+  * settings: tweak a bit the UI to be closer from the mockup, we are
+    still having only a few panels available and are missing nice icons
+    but otherwise it's getting there.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 48
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 14 Jun 2013 07:01:54 +0000
+
 ubuntu-system-settings (0.1daily13.06.13-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]

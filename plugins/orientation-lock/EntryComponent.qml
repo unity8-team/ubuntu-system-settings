@@ -21,33 +21,10 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import SystemSettings 1.0
 
-Column {
-    property alias model: repeater.model
-
-    anchors.left: parent.left
-    anchors.right: parent.right
-
-    Repeater {
-        id: repeater
-
-        Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            Loader {
-                id: loader
-                anchors.left: parent.left
-                anchors.right: parent.right
-                sourceComponent: model.item.entryComponent
-                Connections {
-                    ignoreUnknownSignals: true
-                    target: loader.item
-                    onClicked: pageStack.push(model.item.pageComponent,
-                                              { plugin: model.item })
-                }
-            }
-        }
-    }
+ListItem.Standard {
+    id: root
+    icon: Qt.resolvedUrl(model.icon)
+    text: model.displayName
+    control: Switch { id: control }
 }
