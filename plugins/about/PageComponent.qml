@@ -36,15 +36,19 @@ ItemPage {
 
         Column {
             id: columnId
-
             anchors.left: parent.left
             anchors.right: parent.right
-
             ListItem.Base {
-                height: ubuntuLogo.height + vendorItm.height + units.gu(1)
+                // This should be treated like a ListItem.Header, but with two
+                // rows.  So we'll set the height equal to that of a Header
+                // already defined multipled by 2.
+                height: legalHeader.height * 2
                 Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
                     Row {
                         anchors.horizontalCenter: parent.horizontalCenter
                         height: ubuntuLogo.height
@@ -118,6 +122,7 @@ ItemPage {
             }
 
             ListItem.Header {
+                id: legalHeader
                 text: i18n.tr("Legal:")
             }
 
