@@ -1,6 +1,6 @@
 {
     "name": "Flight mode",
-    "icon": "twitter",
+    "icon": "airplane-mode",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
     "keywords": [
