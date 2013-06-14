@@ -1,19 +1,21 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
     anchors {
         left: parent.left
         right: parent.right
-        leftMargin: units.gu(1)
     }
     spacing: units.gu(1)
 
     property string category
+    property string categoryName
 
-    Label {
-        text: category.toUpperCase()
+    ListItem.Header {
+        text: categoryName
     }
+
     Grid {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -36,4 +38,5 @@ Column {
             }
         }
     }
+    ListItem.ThinDivider {}
 }
