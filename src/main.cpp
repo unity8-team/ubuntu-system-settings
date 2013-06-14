@@ -46,6 +46,8 @@ int main(int argc, char **argv)
     }
 
     initTr(I18N_DOMAIN, NULL);
+    /* HACK: force the theme until lp #1098578 is fixed */
+    QIcon::setThemeName("ubuntu-mobile");
 
     QQuickView view;
     qmlRegisterType<QAbstractItemModel>();
