@@ -39,10 +39,10 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
             ListItem.Base {
-                // This should be treated like a ListItem.Header, but with two
-                // rows.  So we'll set the height equal to that of a Header
-                // already defined multipled by 2.
-                height: legalHeader.height * 2
+                // This should be treated like a ListItem.Standard, but with 2
+                // rows.  So we'll set the height equal to that of one already
+                // defined multipled by 2.
+                height: storageItem.height * 2
                 Column {
                     anchors {
                         left: parent.left
@@ -117,12 +117,12 @@ ItemPage {
             }
 
             ListItem.Standard {
+                id: storageItem
                 text: i18n.tr("Storage")
                 progression: true
             }
 
             ListItem.Header {
-                id: legalHeader
                 text: i18n.tr("Legal:")
             }
 
