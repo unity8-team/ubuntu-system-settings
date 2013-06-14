@@ -36,28 +36,46 @@ ItemPage {
 
         Column {
             id: columnId
-
             anchors.left: parent.left
             anchors.right: parent.right
-
             ListItem.Base {
-                height: ubuntuLogo.height + vendorItm.height + units.gu(1)
+                // This should be treated like a ListItem.Standard, but with 2
+                // rows.  So we'll set the height equal to that of one already
+                // defined multipled by 2.
+                height: storageItem.height * 2
                 Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    Image {
-                        id: ubuntuLogo
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                    Row {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        source: "/lib/plymouth/ubuntu_logo.png" // TODO: find better logo
+                        height: ubuntuLogo.height
+                        Item {
+                            id: ubuntuLogo
+                            height: childrenRect.height
+                            width: childrenRect.width
+                            Label {
+                                id: ubuntuLogoName
+                                text: "Ubuntu"
+                                fontSize: "large"
+                            }
+                            Label {
+                                anchors.left: ubuntuLogoName.right
+                                text: ""
+                                fontSize: "small"
+                            }
+                        }
                     }
                     Item {
                         id: vendorItm
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        height: 50
-
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: serialItem.height
+                        width: childrenRect.width
                         Label {
-                            anchors.centerIn: parent
+                            id: vendorLabel
+                            anchors.verticalCenter: parent.verticalCenter
                             text: "Vendor" + " " + "Model" // TODO: get manufactor and model infos from the system
                         }
                     }
@@ -100,6 +118,7 @@ ItemPage {
             }
 
             ListItem.Standard {
+                id: storageItem
                 text: i18n.tr("Storage")
                 progression: true
             }
