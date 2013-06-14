@@ -45,20 +45,35 @@ ItemPage {
                 Column {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    Image {
-                        id: ubuntuLogo
+                    Row {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        source: "/lib/plymouth/ubuntu_logo.png" // TODO: find better logo
+                        height: ubuntuLogo.height
+                        Item {
+                            id: ubuntuLogo
+                            height: childrenRect.height
+                            width: childrenRect.width
+                            Label {
+                                id: ubuntuLogoName
+                                text: "Ubuntu"
+                                fontSize: "large"
+                            }
+                            Label {
+                                anchors.left: ubuntuLogoName.right
+                                text: ""
+                                fontSize: "small"
+                            }
+                        }
                     }
-                    Item {
-                        id: vendorItm
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        height: 50
-
-                        Label {
-                            anchors.centerIn: parent
-                            text: "Vendor" + " " + "Model" // TODO: get manufactor and model infos from the system
+                    Row {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        Item {
+                            id: vendorItm
+                            height: vendorLabel.height + units.gu(1)
+                            width: childrenRect.width
+                            Label {
+                                id: vendorLabel
+                                text: "Vendor" + " " + "Model" // TODO: get manufactor and model infos from the system
+                            }
                         }
                     }
                 }
