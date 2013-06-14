@@ -25,6 +25,6 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ListItem.Standard {
     id: root
     icon: Qt.resolvedUrl(model.icon)
-    text: model.displayName
+    text: i18n.tr(model.displayName)
     control: Switch {id: control}
 }
