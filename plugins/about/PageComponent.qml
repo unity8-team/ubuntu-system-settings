@@ -71,10 +71,11 @@ ItemPage {
                     Item {
                         id: vendorItm
                         anchors.horizontalCenter: parent.horizontalCenter
-                        height: vendorLabel.height
+                        height: serialItem.height
                         width: childrenRect.width
                         Label {
                             id: vendorLabel
+                            anchors.verticalCenter: parent.verticalCenter
                             text: "Vendor" + " " + "Model" // TODO: get manufactor and model infos from the system
                         }
                     }
