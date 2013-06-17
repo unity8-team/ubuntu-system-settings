@@ -36,37 +36,43 @@ ItemPage {
 
         Column {
             id: columnId
-            spacing: units.gu(1)
 
             anchors.left: parent.left
             anchors.right: parent.right
 
-            Item { height: units.gu(1); width: parent.width }
+            ListItem.SingleControl {
+                control: Button {
+                    anchors {
+                        margins: units.gu(1)
+                        fill: parent
+                    }
+                    text: i18n.tr("Reset launcher & home screen…")
+                }
+                showDivider: false
+            }
 
-            Button {
-                anchors {
-                    margins: units.gu(3)
-                    left: parent.left
-                    right: parent.right
+            ListItem.SingleControl {
+                control: Button {
+                    anchors {
+                        margins: units.gu(1)
+                        fill: parent
+                    }
+                    text: i18n.tr("Reset all system settings…")
                 }
-                text: i18n.tr("Reset launcher & home screen…")
+                showDivider: false
             }
-            Button {
-                anchors {
-                    margins: units.gu(3)
-                    left: parent.left
-                    right: parent.right
+
+            ListItem.SingleControl {
+                control: Button {
+                    anchors {
+                        margins: units.gu(1)
+                        fill: parent
+                    }
+                    text: i18n.tr("Erase and reset everything…")
                 }
-                text: i18n.tr("Reset all system settings…")
+                showDivider: false
             }
-            Button {
-                anchors {
-                    margins: units.gu(3)
-                    left: parent.left
-                    right: parent.right
-                }
-                text: i18n.tr("Erase and reset everything…")
-            }
+
         }
     }
 }
