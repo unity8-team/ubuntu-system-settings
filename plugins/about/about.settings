@@ -1,6 +1,7 @@
 {
-    "icon": "distributor-logo",
-    "translations": "system-settings",
+    "icon": "/usr/share/settings/system/icons/settings-about.png",
+    "name": "About this phone",
+    "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
     "keywords": [
         "about",

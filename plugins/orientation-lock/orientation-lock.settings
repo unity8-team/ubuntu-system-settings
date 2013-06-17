@@ -1,7 +1,7 @@
 {
-    "icon": "lock",
+    "icon": "/usr/share/settings/system/icons/settings-orientation-lock.png",
     "name": "Orientation lock",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
     "keywords": [
         "orientation",

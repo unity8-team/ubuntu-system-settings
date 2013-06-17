@@ -26,6 +26,6 @@ ListItem.Standard {
     id: root
 
     icon: Qt.resolvedUrl(model.icon)
-    text: model.displayName
+    text: i18n.tr(model.displayName)
     progression: true
 }

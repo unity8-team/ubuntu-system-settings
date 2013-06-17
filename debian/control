@@ -23,6 +23,7 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
          libsystemsettings1 (= ${binary:Version}),
+Recommends: ubuntu-mobile-icons
 Description: System Settings application for Ubuntu Touch
  System Settings for Ubuntu Touch.
 
