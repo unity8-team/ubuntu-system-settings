@@ -1,3 +1,35 @@
+ubuntu-system-settings (0.1daily13.06.17-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Dropped the OnlyShowIn=Unity from the desktop file, unity8 doesn't
+    show it .
+  * about: Use text and unicode to create the Ubuntu logo .
+
+  [ Sebastien Bacher ]
+  * setings: set up for translations Use "ubuntu-system-settings" for
+    the domain, better to namespace to avoid name conflicts since all
+    the translation are installed in the same directory. The po.pro will
+    make the translation be compiled and installed on build, there is
+    also a "make pot" target to refresh the template. This commit also
+    includes a first translation (fr.po) which was used to test that
+    things are working correctly. .
+  * settings: use the string capitalization style recommended by design
+    Set some strings, like the vendor or model inforations, as not
+    translatables since those should be local specific.
+  * settings: make the plugin names translatable.
+  * settings: update some icons with copies from design, we will replace
+    those by theme icons once they are polished and included in the
+    theme use a standard icon for the airplane-mode since it's already
+    in theme .
+  * settings: set the theme to ubuntu-mobile, until lp#1098578 is fixed,
+    (toolkit not respecting the theme in use), recommends ubuntu-mobile-
+    icons as well since we use icons shipped there. (LP: #1098578)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 56
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 17 Jun 2013 07:01:58 +0000
+
 ubuntu-system-settings (0.1daily13.06.14-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
