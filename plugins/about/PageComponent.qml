@@ -121,6 +121,7 @@ ItemPage {
                 id: storageItem
                 text: i18n.tr("Storage")
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
             ListItem.Header {
