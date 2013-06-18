@@ -21,6 +21,6 @@ qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += qml
 
-image.files = settings-about.png
+image.files = settings-about.svg
 image.path = /usr/share/settings/system/icons
 INSTALLS += image

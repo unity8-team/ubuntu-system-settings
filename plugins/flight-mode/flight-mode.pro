@@ -17,3 +17,8 @@ INSTALLS += settings
 qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += qml
+
+image.files = settings-flight-mode.svg
+image.path = /usr/share/settings/system/icons
+INSTALLS += image
+
