@@ -31,23 +31,23 @@ ItemPage {
             }
 
             StorageBar {
-                barHeight: 25
+                barHeight: units.gu(3)
                 colors: spaceColors
             }
 
             Repeater {
                 model: spaceColors
                 Item {
-                    height: 19
+                    height: units.gu(3)
                     width: parent.width*0.9
                     anchors.horizontalCenter: parent.horizontalCenter
                     Row {
                         spacing: units.gu(1)
 
                         Rectangle {
-                            width: 15
-                            height: 15
-                            border.width: 1
+                            width: units.gu(2)
+                            height: units.gu(2)
+                            border.width: units.dp(1)
                             color: modelData
                         }
                         Label { text: spaceLabels[index] }
