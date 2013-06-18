@@ -6,7 +6,9 @@ TARGET = about
 
 QML_SOURCES = \
     EntryComponent.qml \
-    PageComponent.qml
+    PageComponent.qml \
+    Storage.qml \
+    StorageBar.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}
