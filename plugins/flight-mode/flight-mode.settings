@@ -1,6 +1,6 @@
 {
     "name": "Flight mode",
-    "icon": "airplane-mode",
+    "icon": "/usr/share/settings/system/icons/settings-flight-mode.svg",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
     "keywords": [

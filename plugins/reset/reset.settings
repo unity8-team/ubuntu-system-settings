@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/settings/system/icons/settings-reset.png",
+    "icon": "/usr/share/settings/system/icons/settings-reset.svg",
     "name": "Reset phone",
     "translations": "system-settings",
     "category": "uncategorized-bottom",
