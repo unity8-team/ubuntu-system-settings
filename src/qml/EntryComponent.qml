@@ -33,15 +33,11 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        UbuntuShape {
+        Image {
             anchors.horizontalCenter: parent.horizontalCenter
-            radius: "medium"
-            image: Image {
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: units.gu(6)
-                height: width
-                source: model.icon
-            }
+            width: units.gu(6)
+            height: width
+            source: model.icon
         }
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
