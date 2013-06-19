@@ -15,7 +15,7 @@ settings.files = $${TARGET}.settings
 settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
-image.files = settings-reset.png
+image.files = settings-reset.svg
 image.path = /usr/share/settings/system/icons
 INSTALLS += image
 

@@ -6,7 +6,9 @@ TARGET = about
 
 QML_SOURCES = \
     EntryComponent.qml \
-    PageComponent.qml
+    PageComponent.qml \
+    Storage.qml \
+    StorageBar.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}
@@ -19,6 +21,6 @@ qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += qml
 
-image.files = settings-about.png
+image.files = settings-about.svg
 image.path = /usr/share/settings/system/icons
 INSTALLS += image

@@ -14,7 +14,7 @@ settings.files = $${TARGET}.settings
 settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
-image.files = settings-orientation-lock.png
+image.files = settings-orientation-lock.svg
 image.path = /usr/share/settings/system/icons
 INSTALLS += image
 
