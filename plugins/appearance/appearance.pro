@@ -15,7 +15,7 @@ QML_SOURCES = \
 OTHER_FILES += \
     $${QML_SOURCES}
 
-images.files = aeg.jpg greenplant.jpg
+images.files = aeg.jpg darkeningclockwork.jpg
 images.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += images
 

@@ -57,7 +57,7 @@ ItemPage {
 
         delegate: Standard {
             text : name
-            icon : Qt.resolvedUrl("greenplant.jpg")
+            icon : Qt.resolvedUrl("darkeningclockwork.jpg")
             progression : true
         }
     }

@@ -53,7 +53,7 @@ ItemPage {
             left: parent.left
          }
 
-        source: "greenplant.jpg"
+        source: "darkeningclockwork.jpg"
         onClicked: pageStack.push(Utilities.createAlbumPage(
                                       i18n.tr("Welcome Screen")))
     }
