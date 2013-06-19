@@ -1,3 +1,23 @@
+ubuntu-system-settings (0.1daily13.06.19-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * don't wrap icons with an UbuntuShape .
+  * Use svg versions of the plugin icons and set the proper color .
+
+  [ Sebastien Bacher ]
+  * about: start work on the "storage" subpanel, that's a rough first
+    version of the UI that will need tweaking and improvement but at
+    least that's a base to build one.
+  * settings: don't use frames around the plugin icons.
+  * settings: use an icon from the mobile theme This way the launcher
+    will have an icon on the touch image (which is the primary target
+    for that code) .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 65
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 19 Jun 2013 07:01:04 +0000
+
 ubuntu-system-settings (0.1daily13.06.18-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]
