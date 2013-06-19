@@ -1,0 +1,148 @@
+/*
+ * Copyright (C) 2013 Canonical Ltd
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Authors:
+ * Iain Lane <iain.lane@canonical.com>
+ *
+*/
+
+import QtQuick 2.0
+
+import Ubuntu.Components 0.1
+
+import Ubuntu.Components.ListItems 0.1
+
+import SystemSettings 1.0
+
+import "utilities.js" as Utilities
+
+ItemPage {
+    id: mainPage
+    title: i18n.tr("Appearance")
+
+    Label {
+        id: welcomeLabel
+
+        anchors {
+            top: parent.top
+            topMargin: units.gu(1)
+            horizontalCenter: welcomeImage.horizontalCenter
+        }
+
+        fontSize: "large"
+        text: i18n.tr("Welcome screen")
+    }
+
+    SwappableImage {
+        id: welcomeImage
+
+        anchors {
+            top: welcomeLabel.bottom
+            left: parent.left
+         }
+
+        source: "greenplant.jpg"
+        onClicked: pageStack.push(Utilities.createAlbumPage(
+                                      i18n.tr("Welcome Screen")))
+    }
+
+    Label {
+        id: homeLabel
+
+        anchors {
+            top: parent.top
+            topMargin: units.gu(1)
+            horizontalCenter: homeImage.horizontalCenter
+        }
+
+        fontSize: "large"
+        text: i18n.tr("Home screen")
+    }
+
+    SwappableImage {
+        id: homeImage
+
+        anchors {
+            top: welcomeLabel.bottom
+            right: parent.right
+         }
+
+        source: "aeg.jpg"
+
+        onClicked: pageStack.push(Utilities.createAlbumPage(
+                                      i18n.tr("Home Screen")))
+    }
+
+    /*Empty {
+        id: empty
+        anchors.top: homeImage.bottom
+        showDivider: true
+        highlightWhenPressed: false
+    }*/
+
+    ThinDivider {
+        id: topDivider
+
+        anchors {
+            topMargin: units.gu(3)
+            top: homeImage.bottom
+        }
+    }
+
+    Standard {
+        id: sameBackground
+
+        property string previousImage
+
+        anchors.top: topDivider.bottom
+
+        text: i18n.tr("Same background for both")
+
+        selected : false
+
+        // XXX: Ultimately this should all be done by states.
+        // The current implementation is a demo.
+        onClicked : {
+            if (sameBackground.selected)
+                return
+            homeImage.altSource = welcomeImage.source
+            homeImage.enabled = false
+            differentBackground.selected = false
+            sameBackground.selected = true
+        }
+    }
+
+    Standard {
+        id: differentBackground
+
+        anchors.top: sameBackground.bottom
+
+        text: i18n.tr("Different background for each")
+
+        selected : true
+
+        onClicked : {
+            if (differentBackground.selected)
+                return
+            homeImage.enabled = true
+            differentBackground.selected = true
+            sameBackground.selected = false
+        }
+    }
+
+    ThinDivider {
+       anchors.top: differentBackground.bottom
+    }
+}

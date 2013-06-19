@@ -8,3 +8,17 @@ Copyright: 2013 Canonical Ltd.
 License: GPL-3
  On Debian systems, the complete text of the GNU General
  Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
+
+Files: plugins/appearance/aeg.jpg
+Copyright: 2012 Tauno Erik
+License: CC-BY-SA-3.0
+
+Files: plugins/appearance/greenplant.jpg
+Copyright: 2013 Simon Schlegl
+License: CC-BY-SA-3.0
+
+License: CC-BY-SA-3.0
+ This work is licensed under the Creative Commons Attribution-ShareAlike 3.0
+ Unported License. To view a copy of this license, visit
+ http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative
+ Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
