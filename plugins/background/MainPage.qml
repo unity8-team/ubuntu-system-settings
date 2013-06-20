@@ -20,7 +20,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import "utilities.js" as Utilities
 
@@ -51,7 +51,7 @@ ItemPage {
 
         source: "darkeningclockwork.jpg"
         onClicked: pageStack.push(Utilities.createAlbumPage(
-                                      i18n.tr("Welcome Screen")))
+                                      i18n.tr("Welcome screen")))
     }
 
     Label {
@@ -78,11 +78,11 @@ ItemPage {
         source: "aeg.jpg"
 
         onClicked: pageStack.push(Utilities.createAlbumPage(
-                                      i18n.tr("Home Screen")))
+                                      i18n.tr("Home screen")))
     }
 
 
-    ThinDivider {
+    ListItem.ThinDivider {
         id: topDivider
 
         anchors {
@@ -91,7 +91,7 @@ ItemPage {
         }
     }
 
-    Standard {
+    ListItem.Standard {
         id: sameBackground
 
         property string previousImage
@@ -101,6 +101,8 @@ ItemPage {
         text: i18n.tr("Same background for both")
 
         selected: false
+
+        showDivider: false
 
         // XXX: Ultimately this should all be done by states.
         // The current implementation is a demo.
@@ -114,7 +116,7 @@ ItemPage {
         }
     }
 
-    Standard {
+    ListItem.Standard {
         id: differentBackground
 
         anchors.top: sameBackground.bottom
@@ -130,9 +132,5 @@ ItemPage {
             differentBackground.selected = true
             sameBackground.selected = false
         }
-    }
-
-    ThinDivider {
-       anchors.top: differentBackground.bottom
     }
 }

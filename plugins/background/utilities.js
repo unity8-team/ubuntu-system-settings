@@ -26,7 +26,3 @@ function createAlbumPage(title) {
 
     return object
 }
-
-function createDetailPage(title) {
-
-}
