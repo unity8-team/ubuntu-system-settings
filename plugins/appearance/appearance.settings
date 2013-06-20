@@ -1,5 +1,5 @@
 {
-    "icon": "preferences-desktop-wallpaper",
+    "icon": "/usr/share/settings/system/icons/settings-appearance.svg",
     "translations": "system-settings",
     "name": "Appearance",
     "category": "personal",
