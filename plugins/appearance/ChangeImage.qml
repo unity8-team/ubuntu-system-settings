@@ -19,11 +19,8 @@
  */
 
 import QtQuick 2.0
-
 import Ubuntu.Components 0.1
-
 import Ubuntu.Components.ListItems 0.1
-
 import SystemSettings 1.0
 
 ItemPage {
@@ -31,34 +28,34 @@ ItemPage {
     id: rootPage
 
     ListModel {
-        id : galleriesModel
+        id: galleriesModel
 
         ListElement {
-            name : "Ubuntu Art"
+            name: "Ubuntu Art"
         }
 
         ListElement {
-            name : "Camera Photos"
+            name: "Camera Photos"
         }
 
         ListElement {
-            name : "An Album"
+            name: "An Album"
         }
 
         ListElement {
-            name : "Another Album"
+            name: "Another Album"
         }
 
     }
 
     ListView {
         anchors.fill: parent
-        model : galleriesModel
+        model: galleriesModel
 
         delegate: Standard {
-            text : name
-            icon : Qt.resolvedUrl("darkeningclockwork.jpg")
-            progression : true
+            text: name
+            icon: Qt.resolvedUrl("darkeningclockwork.jpg")
+            progression: true
         }
     }
 

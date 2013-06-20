@@ -6,7 +6,6 @@ TARGET = appearance
 
 QML_SOURCES = \
     ChangeImage.qml \
-    CrossFadeImage.qml \
     MainImage.qml \
     MainPage.qml \
     SwappableImage.qml \

@@ -19,13 +19,9 @@
 */
 
 import QtQuick 2.0
-
 import Ubuntu.Components 0.1
-
 import Ubuntu.Components.ListItems 0.1
-
 import SystemSettings 1.0
-
 import "utilities.js" as Utilities
 
 ItemPage {
@@ -85,12 +81,6 @@ ItemPage {
                                       i18n.tr("Home Screen")))
     }
 
-    /*Empty {
-        id: empty
-        anchors.top: homeImage.bottom
-        showDivider: true
-        highlightWhenPressed: false
-    }*/
 
     ThinDivider {
         id: topDivider
@@ -110,11 +100,11 @@ ItemPage {
 
         text: i18n.tr("Same background for both")
 
-        selected : false
+        selected: false
 
         // XXX: Ultimately this should all be done by states.
         // The current implementation is a demo.
-        onClicked : {
+        onClicked: {
             if (sameBackground.selected)
                 return
             homeImage.altSource = welcomeImage.source
@@ -131,9 +121,9 @@ ItemPage {
 
         text: i18n.tr("Different background for each")
 
-        selected : true
+        selected: true
 
-        onClicked : {
+        onClicked: {
             if (differentBackground.selected)
                 return
             homeImage.enabled = true
