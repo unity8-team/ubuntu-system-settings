@@ -2,7 +2,7 @@ include(../../common-project-config.pri)
 include($${TOP_SRC_DIR}/common-vars.pri)
 
 TEMPLATE = lib
-TARGET = appearance
+TARGET = background
 
 QML_SOURCES = \
     ChangeImage.qml \
@@ -30,6 +30,6 @@ qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += qml
 
-image.files = settings-appearance.svg
+image.files = settings-background.svg
 image.path = /usr/share/settings/system/icons
 INSTALLS += image

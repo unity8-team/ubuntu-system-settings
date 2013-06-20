@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 SUBDIRS = \
     about \
-    appearance \
+    background \
     example \
     flight-mode \
     orientation-lock \

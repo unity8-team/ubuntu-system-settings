@@ -9,11 +9,11 @@ License: GPL-3
  On Debian systems, the complete text of the GNU General
  Public License version 3 can be found in `/usr/share/common-licenses/GPL-3'.
 
-Files: plugins/appearance/aeg.jpg
+Files: plugins/background/aeg.jpg
 Copyright: 2012 Tauno Erik
 License: CC-BY-SA-3.0
 
-Files: plugins/appearance/darkeningclockwork.jpg
+Files: plugins/background/darkeningclockwork.jpg
 Copyright: 2013 Matt Katzenberger
 License: CC-BY-SA-3.0
 

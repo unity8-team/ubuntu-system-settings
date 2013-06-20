@@ -1,7 +1,7 @@
 {
-    "icon": "/usr/share/settings/system/icons/settings-appearance.svg",
+    "icon": "/usr/share/settings/system/icons/settings-background.svg",
     "translations": "system-settings",
-    "name": "Appearance",
+    "name": "Backgrounds",
     "category": "personal",
     "keywords": [
         "appearance",

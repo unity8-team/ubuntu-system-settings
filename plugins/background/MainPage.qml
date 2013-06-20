@@ -26,7 +26,7 @@ import "utilities.js" as Utilities
 
 ItemPage {
     id: mainPage
-    title: i18n.tr("Appearance")
+    title: i18n.tr("Background")
 
     Label {
         id: welcomeLabel
