@@ -6,7 +6,6 @@ TARGET = background
 
 QML_SOURCES = \
     ChangeImage.qml \
-    MainImage.qml \
     MainPage.qml \
     SwappableImage.qml \
     UbuntuSwappableImage.qml
