@@ -1,0 +1,14 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-background.svg",
+    "translations": "system-settings",
+    "name": "Backgrounds",
+    "category": "personal",
+    "keywords": [
+        "appearance",
+        "background",
+        "wallpaper"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "page-component": "MainPage.qml"
+}
