@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1daily13.06.21-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Added a recommends for ubuntu-system-settings-online-accounts .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 67
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 21 Jun 2013 07:01:02 +0000
+
 ubuntu-system-settings (0.1daily13.06.19-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]
