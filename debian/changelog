@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1daily13.06.24-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * Add initial implemention of appearance/background panel.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 69
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 24 Jun 2013 07:01:03 +0000
+
 ubuntu-system-settings (0.1daily13.06.21-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]
