@@ -93,7 +93,7 @@ ItemPage {
                 value: "FAKE-IMEI-ID-NUMBER"     // TODO: read IMEI number from the device
             }
 
-            ListItem.Header {
+            ListItem.Standard {
                 text: i18n.tr("Software:")
             }
 
@@ -124,7 +124,7 @@ ItemPage {
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
-            ListItem.Header {
+            ListItem.Standard {
                 text: i18n.tr("Legal:")
             }
 
