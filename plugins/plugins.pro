@@ -4,5 +4,6 @@ SUBDIRS = \
     background \
     example \
     flight-mode \
+    gps \
     orientation-lock \
     reset

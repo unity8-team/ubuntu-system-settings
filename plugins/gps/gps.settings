@@ -1,0 +1,15 @@
+{
+    "name": "GPS",
+    "icon": "/usr/share/settings/system/icons/settings-gps.svg",
+    "translations": "ubuntu-system-settings",
+    "category": "uncategorized-top",
+    "keywords": [
+        "gps",
+        "navigation",
+        "satellite",
+        "offline"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "entry-component": "EntryComponent.qml"
+}

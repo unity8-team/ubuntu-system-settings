@@ -4,6 +4,7 @@ usr/share/locale
 usr/share/settings/system/about.settings
 usr/share/settings/system/background.settings
 usr/share/settings/system/flight-mode.settings
+usr/share/settings/system/gps.settings
 usr/share/settings/system/reset.settings
 usr/share/settings/system/orientation-lock.settings
 usr/share/settings/system/icons
@@ -11,5 +12,6 @@ usr/share/settings/system/qml-plugins/SystemSettings
 usr/share/settings/system/qml-plugins/about
 usr/share/settings/system/qml-plugins/background
 usr/share/settings/system/qml-plugins/flight-mode
+usr/share/settings/system/qml-plugins/gps
 usr/share/settings/system/qml-plugins/orientation-lock
 usr/share/settings/system/qml-plugins/reset
