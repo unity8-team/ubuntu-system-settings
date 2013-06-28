@@ -21,22 +21,15 @@ Package: ubuntu-system-settings
 Architecture: i386 amd64 armhf
 Depends: ${misc:Depends},
          ${shlibs:Depends},
+         gsettings-desktop-schemas,
+         qtdeclarative5-gsettings1.0,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
          libsystemsettings1 (= ${binary:Version}),
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
+Conflicts: ubuntu-system-settings-example
 Description: System Settings application for Ubuntu Touch
  System Settings for Ubuntu Touch.
-
-Package: ubuntu-system-settings-example
-Section: libs
-Architecture: i386 amd64 armhf
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         ubuntu-system-settings (= ${binary:Version}),
-         libsystemsettings1 (= ${binary:Version}),
-Description: System Settings Example plugin for Ubuntu Touch
- Example plugin for Ubuntu System Settings 
 
 Package: libsystemsettings1
 Section: libs

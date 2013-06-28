@@ -1,0 +1,15 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-language.svg",
+    "name": "Language",
+    "translations": "system-settings",
+    "category": "personal",
+    "priority": 2,
+    "keywords": [
+        "language",
+        "lang",
+        "i18n",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}

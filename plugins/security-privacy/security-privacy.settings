@@ -1,0 +1,14 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-security-privacy.svg",
+    "name": "Security & Privacy",
+    "translations": "system-settings",
+    "category": "system",
+    "priority": 4,
+    "keywords": [
+        "security",
+        "privacy",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}

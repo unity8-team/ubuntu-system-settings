@@ -44,32 +44,40 @@ MainView {
             id: mainPage
             title: i18n.tr("System Settings")
             visible: false
+            flickable: mainFlickable
 
-            Column {
-                anchors.left: parent.left
-                anchors.right: parent.right
+            Flickable {
+                id: mainFlickable
+                anchors.fill: parent
+                contentHeight: contentItem.childrenRect.height
+                boundsBehavior: Flickable.StopAtBounds
 
-                UncategorizedItemsView {
-                    model: pluginManager.itemModel("uncategorized-top")
-                }
+                Column {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
 
-                CategoryGrid {
-                    category: "personal"
-                    categoryName: i18n.tr("Personal")
-                }
+                    UncategorizedItemsView {
+                        model: pluginManager.itemModel("uncategorized-top")
+                    }
 
-                CategoryGrid {
-                    category: "network"
-                    categoryName: i18n.tr("Network")
-                }
+                    CategoryGrid {
+                        category: "network"
+                        categoryName: i18n.tr("Network")
+                    }
 
-                CategoryGrid {
-                    category: "system"
-                    categoryName: i18n.tr("System")
-                }
+                    CategoryGrid {
+                        category: "personal"
+                        categoryName: i18n.tr("Personal")
+                    }
 
-                UncategorizedItemsView {
-                    model: pluginManager.itemModel("uncategorized-bottom")
+                    CategoryGrid {
+                        category: "system"
+                        categoryName: i18n.tr("System")
+                    }
+
+                    UncategorizedItemsView {
+                        model: pluginManager.itemModel("uncategorized-bottom")
+                    }
                 }
             }
         }
