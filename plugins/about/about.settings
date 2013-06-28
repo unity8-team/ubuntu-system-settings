@@ -3,6 +3,7 @@
     "name": "About this phone",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
+    "priority": 0,
     "keywords": [
         "about",
         "device",
