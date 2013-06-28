@@ -40,39 +40,42 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.SingleControl {
-                control: Button {
+            // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
+            ListItem.Base {
+                Button {
                     anchors {
-                        margins: units.gu(1)
-                        fill: parent
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                        left: parent.left
                     }
                     text: i18n.tr("Reset launcher & home screen…")
                 }
                 showDivider: false
             }
-
-            ListItem.SingleControl {
-                control: Button {
+            // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
+            ListItem.Base {
+                Button {
                     anchors {
-                        margins: units.gu(1)
-                        fill: parent
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                        left: parent.left
                     }
                     text: i18n.tr("Reset all system settings…")
                 }
                 showDivider: false
             }
-
-            ListItem.SingleControl {
-                control: Button {
+            // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
+            ListItem.Base {
+                Button {
                     anchors {
-                        margins: units.gu(1)
-                        fill: parent
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                        left: parent.left
                     }
                     text: i18n.tr("Erase and reset everything…")
                 }
                 showDivider: false
             }
-
         }
     }
 }
