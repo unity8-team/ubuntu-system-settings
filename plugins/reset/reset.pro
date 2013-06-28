@@ -6,10 +6,16 @@ TARGET = reset
 
 QML_SOURCES = \
     EntryComponent.qml \
-    PageComponent.qml
+    EraseEverything.qml \
+    PageComponent.qml \
+    ResetAllSettings.qml \
+    ResetLauncherHome.qml
 
 OTHER_FILES += \
-    $${QML_SOURCES}
+    $${QML_SOURCES} \
+    ResetButtonActions.qml \
+    ResetAllSettings.qml \
+    EraseEverything.qml
 
 settings.files = $${TARGET}.settings
 settings.path = $${PLUGIN_MANIFEST_DIR}

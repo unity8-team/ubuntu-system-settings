@@ -30,6 +30,11 @@ ItemPage {
     title: i18n.tr("Reset phone")
     flickable: scrollWidget
 
+    Loader {
+        id: buttonActions
+        asynchronous: false
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -50,9 +55,11 @@ ItemPage {
                         right: parent.right
                         left: parent.left
                     }
-                    text: i18n.tr("Reset Launcher & Home Screen…")
-                    onClicked: PopupUtils.open(resetLauncherHome,
-                                               resetLauncherHomeButton)
+                    text: i18n.tr("Reset launcher & home screen…")
+                    onClicked: {
+                        buttonActions.source = "ResetLauncherHome.qml"
+                        PopupUtils.open(buttonActions.item)
+                    }
                 }
                 showDivider: false
             }
@@ -65,9 +72,11 @@ ItemPage {
                         right: parent.right
                         left: parent.left
                     }
-                    text: i18n.tr("Reset All System Settings…")
-                    onClicked: PopupUtils.open(resetAllSettings,
-                                               resetAllSettingsButton)
+                    text: i18n.tr("Reset all system settings…")
+                    onClicked: {
+                        buttonActions.source = "ResetAllSettings.qml"
+                        PopupUtils.open(buttonActions.item)
+                    }
                 }
                 showDivider: false
             }
@@ -80,61 +89,14 @@ ItemPage {
                         right: parent.right
                         left: parent.left
                     }
-                    text: i18n.tr("Erase & Reset Everything…")
-                    onClicked: PopupUtils.open(eraseEverything,
-                                               eraseEverythingButton)
+                    text: i18n.tr("Erase & reset everything…")
+                    onClicked: {
+                        buttonActions.source = "EraseEverything.qml"
+                        PopupUtils.open(buttonActions.item)
+                    }
                 }
                 showDivider: false
             }
         }
     }
-
-    Component {
-        id: resetLauncherHome
-        Dialog {
-            id: dialog
-            text: i18n.tr("The contents and layout of the Launcher, and the filters in the Home Screen will be returned to their original settings.")
-            Button {
-                text: i18n.tr("Reset Launcher & Home Screen")
-                onClicked: PopupUtils.close(dialog)
-            }
-            Button {
-                text: i18n.tr("Cancel")
-                onClicked: PopupUtils.close(dialog)
-            }
-        }
-    }
-
-    Component {
-        id: resetAllSettings
-        Dialog {
-            id: dialog
-            text: i18n.tr("The contents and layout of the Launcher, and the filters in the Home Screen will be returned to their original settings.")
-            Button {
-                text: i18n.tr("Reset All System Settings")
-                onClicked: PopupUtils.close(dialog)
-            }
-            Button {
-                text: i18n.tr("Cancel")
-                onClicked: PopupUtils.close(dialog)
-            }
-        }
-    }
-
-    Component {
-        id: eraseEverything
-        Dialog {
-            id: dialog
-            text: i18n.tr("All documents, saved games, settings, and other items will be permanently deleted from this phone.")
-            Button {
-                text: i18n.tr("Erase & Reset Everything")
-                onClicked: PopupUtils.close(dialog)
-            }
-            Button {
-                text: i18n.tr("Cancel")
-                onClicked: PopupUtils.close(dialog)
-            }
-        }
-    }
-
 }
