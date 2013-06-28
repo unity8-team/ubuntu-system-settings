@@ -22,12 +22,18 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import SystemSettings 1.0
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 
 ItemPage {
     id: root
 
     title: i18n.tr("Reset phone")
     flickable: scrollWidget
+
+    Loader {
+        id: buttonActions
+        asynchronous: false
+    }
 
     Flickable {
         id: scrollWidget
@@ -43,36 +49,51 @@ ItemPage {
             // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
             ListItem.Base {
                 Button {
+                    id: resetLauncherHomeButton
                     anchors {
                         verticalCenter: parent.verticalCenter
                         right: parent.right
                         left: parent.left
                     }
                     text: i18n.tr("Reset launcher & home screen…")
+                    onClicked: {
+                        buttonActions.source = "ResetLauncherHome.qml"
+                        PopupUtils.open(buttonActions.item)
+                    }
                 }
                 showDivider: false
             }
             // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
             ListItem.Base {
                 Button {
+                    id: resetAllSettingsButton
                     anchors {
                         verticalCenter: parent.verticalCenter
                         right: parent.right
                         left: parent.left
                     }
                     text: i18n.tr("Reset all system settings…")
+                    onClicked: {
+                        buttonActions.source = "ResetAllSettings.qml"
+                        PopupUtils.open(buttonActions.item)
+                    }
                 }
                 showDivider: false
             }
             // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
             ListItem.Base {
                 Button {
+                    id: eraseEverythingButton
                     anchors {
                         verticalCenter: parent.verticalCenter
                         right: parent.right
                         left: parent.left
                     }
-                    text: i18n.tr("Erase and reset everything…")
+                    text: i18n.tr("Erase & reset everything…")
+                    onClicked: {
+                        buttonActions.source = "EraseEverything.qml"
+                        PopupUtils.open(buttonActions.item)
+                    }
                 }
                 showDivider: false
             }
