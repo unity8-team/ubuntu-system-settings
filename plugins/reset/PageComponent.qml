@@ -50,7 +50,7 @@ ItemPage {
                         right: parent.right
                         left: parent.left
                     }
-                    text: i18n.tr("Reset launcher & home screen…")
+                    text: i18n.tr("Reset Launcher & Home Screen…")
                     onClicked: PopupUtils.open(resetLauncherHome,
                                                resetLauncherHomeButton)
                 }
@@ -65,7 +65,7 @@ ItemPage {
                         right: parent.right
                         left: parent.left
                     }
-                    text: i18n.tr("Reset all system settings…")
+                    text: i18n.tr("Reset All System Settings…")
                     onClicked: PopupUtils.open(resetAllSettings,
                                                resetAllSettingsButton)
                 }
@@ -80,7 +80,7 @@ ItemPage {
                         right: parent.right
                         left: parent.left
                     }
-                    text: i18n.tr("Erase and reset everything…")
+                    text: i18n.tr("Erase & Reset Everything…")
                     onClicked: PopupUtils.open(eraseEverything,
                                                eraseEverythingButton)
                 }
