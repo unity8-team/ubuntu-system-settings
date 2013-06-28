@@ -44,32 +44,40 @@ MainView {
             id: mainPage
             title: i18n.tr("System Settings")
             visible: false
+            flickable: mainColumn
 
-            Column {
-                anchors.left: parent.left
-                anchors.right: parent.right
+            Flickable {
+                id: mainColumn
+                anchors.fill: parent
+                contentHeight: childrenRect.height
 
-                UncategorizedItemsView {
-                    model: pluginManager.itemModel("uncategorized-top")
-                }
+                Column {
 
-                CategoryGrid {
-                    category: "personal"
-                    categoryName: i18n.tr("Personal")
-                }
+                    anchors.left: parent.left
+                    anchors.right: parent.right
 
-                CategoryGrid {
-                    category: "network"
-                    categoryName: i18n.tr("Network")
-                }
+                    UncategorizedItemsView {
+                        model: pluginManager.itemModel("uncategorized-top")
+                    }
 
-                CategoryGrid {
-                    category: "system"
-                    categoryName: i18n.tr("System")
-                }
+                    CategoryGrid {
+                        category: "personal"
+                        categoryName: i18n.tr("Personal")
+                    }
 
-                UncategorizedItemsView {
-                    model: pluginManager.itemModel("uncategorized-bottom")
+                    CategoryGrid {
+                        category: "network"
+                        categoryName: i18n.tr("Network")
+                    }
+
+                    CategoryGrid {
+                        category: "system"
+                        categoryName: i18n.tr("System")
+                    }
+
+                    UncategorizedItemsView {
+                        model: pluginManager.itemModel("uncategorized-bottom")
+                    }
                 }
             }
         }
