@@ -32,9 +32,9 @@ OTHER_FILES += \
     $${QML_SOURCES} \
     $${RESOURCES}
 
-target.path = $${INSTALL_PREFIX}/lib/system-settings
-INSTALLS += target
-
-settings.files = example.settings
-settings.path = $${INSTALL_PREFIX}/share/settings/system
-INSTALLS += settings
+#target.path = $${INSTALL_PREFIX}/lib/system-settings
+#INSTALLS += target
+#
+#settings.files = example.settings
+#settings.path = $${INSTALL_PREFIX}/share/settings/system
+#INSTALLS += settings
