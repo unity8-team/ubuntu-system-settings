@@ -95,11 +95,11 @@ ItemPage {
             id: dialog
             text: i18n.tr("The contents and layout of the Launcher, and the filters in the Home Screen will be returned to their original settings.")
             Button {
-                text: "Reset Launcher & Home Screen"
+                text: i18n.tr("Reset Launcher & Home Screen")
                 onClicked: PopupUtils.close(dialog)
             }
             Button {
-                text: "Cancel"
+                text: i18n.tr("Cancel")
                 onClicked: PopupUtils.close(dialog)
             }
         }
@@ -111,11 +111,11 @@ ItemPage {
             id: dialog
             text: i18n.tr("The contents and layout of the Launcher, and the filters in the Home Screen will be returned to their original settings.")
             Button {
-                text: "Reset All System Settings"
+                text: i18n.tr("Reset All System Settings")
                 onClicked: PopupUtils.close(dialog)
             }
             Button {
-                text: "Cancel"
+                text: i18n.tr("Cancel")
                 onClicked: PopupUtils.close(dialog)
             }
         }
@@ -127,11 +127,11 @@ ItemPage {
             id: dialog
             text: i18n.tr("All documents, saved games, settings, and other items will be permanently deleted from this phone.")
             Button {
-                text: "Erase & Reset Everything"
+                text: i18n.tr("Erase & Reset Everything")
                 onClicked: PopupUtils.close(dialog)
             }
             Button {
-                text: "Cancel"
+                text: i18n.tr("Cancel")
                 onClicked: PopupUtils.close(dialog)
             }
         }
