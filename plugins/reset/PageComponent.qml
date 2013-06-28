@@ -38,11 +38,10 @@ ItemPage {
     Flickable {
         id: scrollWidget
         anchors.fill: parent
-        contentHeight: columnId.height
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: Flickable.StopAtBounds
 
         Column {
-            id: columnId
-
             anchors.left: parent.left
             anchors.right: parent.right
 
