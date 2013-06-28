@@ -1,0 +1,16 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-phone.svg",
+    "name": "Phone",
+    "translations": "system-settings",
+    "category": "system",
+    "priority": 2,
+    "form-factors": [
+        "phone"
+    ],
+    "keywords": [
+        "phone",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}

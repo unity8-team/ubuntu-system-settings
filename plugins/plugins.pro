@@ -10,4 +10,5 @@ SUBDIRS = \
     sounds \
     language \
     accessibility \
-    keyboard
+    keyboard \
+    phone
