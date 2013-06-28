@@ -22,6 +22,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import SystemSettings 1.0
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 
 ItemPage {
     id: root
@@ -43,39 +44,97 @@ ItemPage {
             // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
             ListItem.Base {
                 Button {
+                    id: resetLauncherHomeButton
                     anchors {
                         verticalCenter: parent.verticalCenter
                         right: parent.right
                         left: parent.left
                     }
                     text: i18n.tr("Reset launcher & home screen…")
+                    onClicked: PopupUtils.open(resetLauncherHome,
+                                               resetLauncherHomeButton)
                 }
                 showDivider: false
             }
             // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
             ListItem.Base {
                 Button {
+                    id: resetAllSettingsButton
                     anchors {
                         verticalCenter: parent.verticalCenter
                         right: parent.right
                         left: parent.left
                     }
                     text: i18n.tr("Reset all system settings…")
+                    onClicked: PopupUtils.open(resetAllSettings,
+                                               resetAllSettingsButton)
                 }
                 showDivider: false
             }
             // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
             ListItem.Base {
                 Button {
+                    id: eraseEverythingButton
                     anchors {
                         verticalCenter: parent.verticalCenter
                         right: parent.right
                         left: parent.left
                     }
                     text: i18n.tr("Erase and reset everything…")
+                    onClicked: PopupUtils.open(eraseEverything,
+                                               eraseEverythingButton)
                 }
                 showDivider: false
             }
         }
     }
+
+    Component {
+        id: resetLauncherHome
+        Dialog {
+            id: dialog
+            text: i18n.tr("The contents and layout of the Launcher, and the filters in the Home Screen will be returned to their original settings.")
+            Button {
+                text: "Reset Launcher & Home Screen"
+                onClicked: PopupUtils.close(dialog)
+            }
+            Button {
+                text: "Cancel"
+                onClicked: PopupUtils.close(dialog)
+            }
+        }
+    }
+
+    Component {
+        id: resetAllSettings
+        Dialog {
+            id: dialog
+            text: i18n.tr("The contents and layout of the Launcher, and the filters in the Home Screen will be returned to their original settings.")
+            Button {
+                text: "Reset All System Settings"
+                onClicked: PopupUtils.close(dialog)
+            }
+            Button {
+                text: "Cancel"
+                onClicked: PopupUtils.close(dialog)
+            }
+        }
+    }
+
+    Component {
+        id: eraseEverything
+        Dialog {
+            id: dialog
+            text: i18n.tr("All documents, saved games, settings, and other items will be permanently deleted from this phone.")
+            Button {
+                text: "Erase & Reset Everything"
+                onClicked: PopupUtils.close(dialog)
+            }
+            Button {
+                text: "Cancel"
+                onClicked: PopupUtils.close(dialog)
+            }
+        }
+    }
+
 }
