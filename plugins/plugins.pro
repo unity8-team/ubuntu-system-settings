@@ -14,4 +14,5 @@ SUBDIRS = \
     phone \
     brightness \
     time-date \
-    security-privacy
+    security-privacy \
+    system-update

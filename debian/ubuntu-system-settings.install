@@ -14,6 +14,7 @@ usr/share/settings/system/phone.settings
 usr/share/settings/system/brightness.settings
 usr/share/settings/system/time-date.settings
 usr/share/settings/system/security-privacy.settings
+usr/share/settings/system/system-update.settings
 usr/share/settings/system/orientation-lock.settings
 usr/share/settings/system/icons
 usr/share/settings/system/qml-plugins/SystemSettings
