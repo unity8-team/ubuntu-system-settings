@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="90"
+   height="90"
+   id="svg3408"
+   version="1.1"
+   inkscape:version="0.48+devel r12345"
+   sodipodi:docname="settings-system-update.svg">
+  <defs
+     id="defs3410" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.9580786"
+     inkscape:cx="28.687828"
+     inkscape:cy="47.593146"
+     inkscape:document-units="px"
+     inkscape:current-layer="g3130"
+     showgrid="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true" />
+  <metadata
+     id="metadata3413">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(487.85714,-1021.6479)">
+    <g
+       transform="translate(-487.85714,59.285714)"
+       id="g3886"
+       inkscape:label="Layer 1">
+      <g
+         id="g3130">
+        <path
+           style="color:#000000;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           d="M 43.34375 15 C 39.99395 15.068 40 15.625 40 20 L 40 21.53125 C 37.073 22.15085 34.3641 23.295 31.9375 24.875 L 30.84375 23.78125 C 29.07575 22.01375 28.1964 21.125 27.3125 21.125 C 26.4286 21.125 25.54905 22.01365 23.78125 23.78125 C 20.24595 27.31695 20.24585 27.30805 23.78125 30.84375 L 24.875 31.9375 C 23.295 34.3641 22.15085 37.073 21.53125 40 L 20 40 C 15 40 15 40 15 45 C 15 50 15 50 20 50 L 21.53125 50 C 22.15085 52.927 23.295 55.6359 24.875 58.0625 L 23.78125 59.15625 C 20.24595 62.69195 20.24585 62.68325 23.78125 66.21875 C 27.31705 69.75405 27.30815 69.75405 30.84375 66.21875 L 31.9375 65.125 C 34.3641 66.705 37.073 67.84915 40 68.46875 L 40 70 C 40 75 40 75 45 75 C 50 75 50 75 50 70 L 50 68.46875 C 52.927 67.84915 55.6359 66.705 58.0625 65.125 L 59.15625 66.21875 C 62.69205 69.75405 62.68315 69.75405 66.21875 66.21875 C 69.75405 62.68305 69.75415 62.69195 66.21875 59.15625 L 65.125 58.0625 C 66.705 55.6359 67.84915 52.927 68.46875 50 L 70 50 C 75 50 75 50 75 45 C 75 40 75 40 70 40 L 68.46875 40 C 67.84915 37.073 66.705 34.3641 65.125 31.9375 L 66.21875 30.84375 C 69.75405 27.30805 69.75415 27.31695 66.21875 23.78125 C 62.68295 20.24595 62.69185 20.24595 59.15625 23.78125 L 58.0625 24.875 C 55.6359 23.295 52.927 22.15085 50 21.53125 L 50 20 C 50 15 50 15 45 15 C 44.375 15 43.82225 14.9902 43.34375 15 z M 45 27.15625 C 46.690119 27.15625 59.93881 49.216567 59.09375 50.625 C 58.848022 51.034547 56.320067 51.297381 53 51.46875 L 53 59.15625 L 37 59.15625 L 37 51.46875 C 33.679933 51.297381 31.151978 51.034547 30.90625 50.625 C 30.06119 49.216567 43.309881 27.15625 45 27.15625 z "
+           transform="translate(0,962.36219)"
+           id="path3192" />
+        <rect
+           style="color:#000000;fill:none;stroke:none;stroke-width:7.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+           id="rect3892"
+           width="90"
+           height="90"
+           x="0"
+           y="962.36218" />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -3,6 +3,7 @@
     "translations": "system-settings",
     "name": "Backgrounds",
     "category": "personal",
+    "priority": 0,
     "keywords": [
         "appearance",
         "background",
