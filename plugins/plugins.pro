@@ -6,4 +6,5 @@ SUBDIRS = \
     flight-mode \
     gps \
     orientation-lock \
-    reset
+    reset \
+    sounds
