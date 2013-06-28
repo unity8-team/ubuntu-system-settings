@@ -13,4 +13,5 @@ SUBDIRS = \
     keyboard \
     phone \
     brightness \
-    time-date
+    time-date \
+    security-privacy
