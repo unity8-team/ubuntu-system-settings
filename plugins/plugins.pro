@@ -9,4 +9,5 @@ SUBDIRS = \
     reset \
     sounds \
     language \
-    accessibility
+    accessibility \
+    keyboard
