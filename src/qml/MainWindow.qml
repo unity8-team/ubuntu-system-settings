@@ -61,13 +61,13 @@ MainView {
                     }
 
                     CategoryGrid {
-                        category: "personal"
-                        categoryName: i18n.tr("Personal")
+                        category: "network"
+                        categoryName: i18n.tr("Network")
                     }
 
                     CategoryGrid {
-                        category: "network"
-                        categoryName: i18n.tr("Network")
+                        category: "personal"
+                        categoryName: i18n.tr("Personal")
                     }
 
                     CategoryGrid {
