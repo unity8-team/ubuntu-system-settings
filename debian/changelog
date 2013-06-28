@@ -1,3 +1,32 @@
+ubuntu-system-settings (0.1+13.10.20130628.1-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Updated string for the orientation plugin to match the design .
+  * Updated the color in the gps icon to match the others .
+  * Added stub plugins for system-update, security-privacy,time-date,
+    brightness, phone, keyboard, accessibility, and language. Also set
+    priorities and form-factor where appropriate.
+  * make the main window flickable .
+  * Ensure contentHeight is set properly and cleaned up the plugins to
+    be consistent. Changed boundsBehavior on the flickables to keep them
+    from being draggable when the content is smaller than what is
+    displayed.
+
+  [ Sebastien Bacher ]
+  * don't install the example plugin, it's useful as source example, not
+    so much installed (especially since we have other working plugins).
+
+  [ Iain Lane ]
+  * Add simple GPS toggle.
+  * Read the user's background from GSettings.
+  * reset: Add confirmation alerts.
+  * Make category order match design: Network, Personal, System.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 84
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Jun 2013 19:40:43 +0000
+
 ubuntu-system-settings (0.1+13.10.20130628-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
