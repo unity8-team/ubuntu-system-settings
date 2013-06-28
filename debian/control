@@ -21,6 +21,7 @@ Package: ubuntu-system-settings
 Architecture: i386 amd64 armhf
 Depends: ${misc:Depends},
          ${shlibs:Depends},
+         qtdeclarative5-gsettings1.0,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
          libsystemsettings1 (= ${binary:Version}),
 Recommends: ubuntu-mobile-icons,

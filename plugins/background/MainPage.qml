@@ -19,6 +19,7 @@
 */
 
 import QtQuick 2.0
+import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
@@ -27,6 +28,11 @@ import "utilities.js" as Utilities
 ItemPage {
     id: mainPage
     title: i18n.tr("Background")
+
+    GSettings {
+        id: background
+        schema: "org.gnome.desktop.background"
+    }
 
     Label {
         id: welcomeLabel
@@ -75,10 +81,34 @@ ItemPage {
             right: parent.right
          }
 
-        source: "aeg.jpg"
+        Connections {
+            target: testImage
+            onStatusChanged: updateImage()
+        }
+        Component.onCompleted: updateImage()
 
         onClicked: pageStack.push(Utilities.createAlbumPage(
                                       i18n.tr("Home screen")))
+    }
+
+    /* We don't have a good way of doing this after passing an invalid image to
+       SwappableImage, so test the image is valid /before/ showing it and show a
+       fallback if it isn't. */
+    function updateImage() {
+        // TODO: Doesn't yet fade when the background is changed, but probably
+        // not a huge issue. Will resolve itself when we switch to the SDK's
+        // CrossFadeImage
+        if (testImage.status == Image.Ready) {
+            homeImage.source = testImage.source
+        } else if (testImage.status == Image.Error) {
+            homeImage.source = "aeg.jpg"
+        }
+    }
+
+    Image {
+        id: testImage
+        source: background.pictureUri
+        visible: false
     }
 
 
