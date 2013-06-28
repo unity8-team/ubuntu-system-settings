@@ -7,4 +7,5 @@ SUBDIRS = \
     gps \
     orientation-lock \
     reset \
-    sounds
+    sounds \
+    language

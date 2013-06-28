@@ -7,6 +7,7 @@ usr/share/settings/system/flight-mode.settings
 usr/share/settings/system/gps.settings
 usr/share/settings/system/reset.settings
 usr/share/settings/system/sounds.settings
+usr/share/settings/system/language.settings
 usr/share/settings/system/orientation-lock.settings
 usr/share/settings/system/icons
 usr/share/settings/system/qml-plugins/SystemSettings
