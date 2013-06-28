@@ -12,4 +12,5 @@ SUBDIRS = \
     accessibility \
     keyboard \
     phone \
-    brightness
+    brightness \
+    time-date
