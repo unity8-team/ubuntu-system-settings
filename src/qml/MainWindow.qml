@@ -44,15 +44,15 @@ MainView {
             id: mainPage
             title: i18n.tr("System Settings")
             visible: false
-            flickable: mainColumn
+            flickable: mainFlickable
 
             Flickable {
-                id: mainColumn
+                id: mainFlickable
                 anchors.fill: parent
-                contentHeight: childrenRect.height
+                contentHeight: contentItem.childrenRect.height
+                boundsBehavior: Flickable.StopAtBounds
 
                 Column {
-
                     anchors.left: parent.left
                     anchors.right: parent.right
 
