@@ -81,10 +81,6 @@ ItemPage {
             right: parent.right
          }
 
-        Connections {
-            target: testImage
-            onStatusChanged: updateImage()
-        }
         Component.onCompleted: updateImage()
 
         onClicked: pageStack.push(Utilities.createAlbumPage(
@@ -109,6 +105,7 @@ ItemPage {
         id: testImage
         source: background.pictureUri
         visible: false
+        onStatusChanged: updateImage()
     }
 
 
