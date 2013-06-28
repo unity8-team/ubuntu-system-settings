@@ -1,0 +1,14 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-accessibility.svg",
+    "name": "Accessibility",
+    "translations": "system-settings",
+    "category": "personal",
+    "priority": 4,
+    "keywords": [
+        "accessibility",
+        "a11y",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}

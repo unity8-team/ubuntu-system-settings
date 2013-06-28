@@ -6,4 +6,13 @@ SUBDIRS = \
     flight-mode \
     gps \
     orientation-lock \
-    reset
+    reset \
+    sounds \
+    language \
+    accessibility \
+    keyboard \
+    phone \
+    brightness \
+    time-date \
+    security-privacy \
+    system-update

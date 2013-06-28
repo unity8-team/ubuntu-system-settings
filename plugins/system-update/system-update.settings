@@ -1,0 +1,15 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-system-update.svg",
+    "name": "Updates",
+    "translations": "system-settings",
+    "category": "system",
+    "priority": 5,
+    "keywords": [
+        "system",
+        "software",
+        "update",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}
