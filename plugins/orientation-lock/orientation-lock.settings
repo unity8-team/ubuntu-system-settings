@@ -1,9 +1,10 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-orientation-lock.svg",
-    "name": "Orientation lock",
+    "name": "Rotation lock",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
     "keywords": [
+        "rotation",
         "orientation",
         "lock",
         "screen"
