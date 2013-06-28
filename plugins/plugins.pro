@@ -11,4 +11,5 @@ SUBDIRS = \
     language \
     accessibility \
     keyboard \
-    phone
+    phone \
+    brightness
