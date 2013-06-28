@@ -8,4 +8,5 @@ SUBDIRS = \
     orientation-lock \
     reset \
     sounds \
-    language
+    language \
+    accessibility
