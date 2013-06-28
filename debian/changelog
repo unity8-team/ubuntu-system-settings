@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.1+13.10.20130628-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * Use Base items for buttons, instead of SingleControl ones (until bug
+    #1194844 is fixed in the ui toolkit). That should give us correct
+    margins for those items. (LP: #1194844)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 73
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Jun 2013 07:01:06 +0000
+
 ubuntu-system-settings (0.1daily13.06.25-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
