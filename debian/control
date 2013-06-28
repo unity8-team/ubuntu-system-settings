@@ -27,6 +27,7 @@ Depends: ${misc:Depends},
          libsystemsettings1 (= ${binary:Version}),
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
+Conflicts: ubuntu-system-settings-example
 Description: System Settings application for Ubuntu Touch
  System Settings for Ubuntu Touch.
 
