@@ -16,4 +16,5 @@ SUBDIRS = \
     security-privacy \
     system-update \
     wifi \
-    cellular
+    cellular \
+    bluetooth

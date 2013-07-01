@@ -18,6 +18,7 @@ usr/share/settings/system/system-update.settings
 usr/share/settings/system/orientation-lock.settings
 usr/share/settings/system/wifi.settings
 usr/share/settings/system/cellular.settings
+usr/share/settings/system/bluetooth.settings
 usr/share/settings/system/icons
 usr/share/settings/system/qml-plugins/SystemSettings
 usr/share/settings/system/qml-plugins/about
