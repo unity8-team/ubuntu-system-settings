@@ -1,0 +1,16 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-wifi.svg",
+    "name": "Wi-Fi",
+    "translations": "system-settings",
+    "category": "network",
+    "priority": 0,
+    "keywords": [
+        "network",
+        "wireless",
+        "wifi",
+        "wi-fi",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}
