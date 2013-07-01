@@ -14,4 +14,5 @@ SUBDIRS = \
     brightness \
     time-date \
     security-privacy \
-    system-update
+    system-update \
+    wifi
