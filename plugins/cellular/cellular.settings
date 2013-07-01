@@ -1,0 +1,19 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-cellular.svg",
+    "name": "Cellular",
+    "translations": "system-settings",
+    "category": "network",
+    "priority": 1,
+    "form-factors": [
+        "phone"
+    ],
+    "keywords": [
+        "cellular",
+        "network",
+        "mobile",
+        "gsm",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}

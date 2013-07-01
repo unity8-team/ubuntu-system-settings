@@ -15,4 +15,5 @@ SUBDIRS = \
     time-date \
     security-privacy \
     system-update \
-    wifi
+    wifi \
+    cellular
