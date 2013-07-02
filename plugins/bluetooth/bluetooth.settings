@@ -1,0 +1,13 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-bluetooth.svg",
+    "name": "Bluetooth",
+    "translations": "system-settings",
+    "category": "network",
+    "priority": 2,
+    "keywords": [
+        "bluetooth",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}
