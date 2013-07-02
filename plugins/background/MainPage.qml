@@ -116,6 +116,7 @@ ItemPage {
     Image {
         id: testWelcomeImage
         property string fallback: "darkeningclockwork.jpg"
+        source: fallback
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
                                      welcomeImage)
