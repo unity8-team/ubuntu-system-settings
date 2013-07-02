@@ -6,7 +6,7 @@ SUBDIRS = \
     gps \
     orientation-lock \
     reset \
-    sounds \
+    sound \
     language \
     accessibility \
     keyboard \

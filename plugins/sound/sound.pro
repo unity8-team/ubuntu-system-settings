@@ -2,7 +2,7 @@ include(../../common-project-config.pri)
 include($${TOP_SRC_DIR}/common-vars.pri)
 
 TEMPLATE = lib
-TARGET = sounds
+TARGET = sound
 
 QML_SOURCES = \
     PageComponent.qml \
