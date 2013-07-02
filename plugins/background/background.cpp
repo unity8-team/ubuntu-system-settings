@@ -12,6 +12,10 @@ Background::Background(QObject *parent) :
                            "org.freedesktop.Accounts",
                             system_bus_connection)
 {
+    if (!accountsservice_iface.isValid()) {
+        return;
+    }
+
     background_file = get_background_file();
 
     QDBusReply<QDBusObjectPath> q_object_path = accountsservice_iface.call(
