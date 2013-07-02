@@ -1,11 +1,11 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-sounds.svg",
-    "name": "Sounds",
+    "name": "Sound",
     "translations": "system-settings",
     "category": "personal",
     "priority": 1,
     "keywords": [
-        "sounds",
+        "sound",
         "settings"
     ],
     "has-dynamic-keywords": false,
