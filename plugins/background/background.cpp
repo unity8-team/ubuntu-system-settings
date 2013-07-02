@@ -48,7 +48,7 @@ QString Background::get_background_file()
         return user_interface.property("BackgroundFile").toString();
     }
 
-    return NULL;
+    return QString();
 }
 
 void Background::slotChanged()
