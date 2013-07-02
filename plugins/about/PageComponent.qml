@@ -38,46 +38,34 @@ ItemPage {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
+
             ListItem.Base {
                 // This should be treated like a ListItem.Standard, but with 2
                 // rows.  So we'll set the height equal to that of one already
                 // defined multipled by 2.
                 height: storageItem.height * 2
-                Column {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        verticalCenter: parent.verticalCenter
-                    }
-                    Row {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        height: ubuntuLogo.height
-                        Item {
-                            id: ubuntuLogo
-                            height: childrenRect.height
-                            width: childrenRect.width
-                            Label {
-                                id: ubuntuLogoName
-                                text: "Ubuntu"
-                                fontSize: "large"
-                            }
-                            Label {
-                                anchors.left: ubuntuLogoName.right
-                                text: ""
-                                fontSize: "small"
-                            }
+
+                Item {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    height:  storageItem.height
+                    Label {
+                        id: ubuntuLabel
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                            bottomMargin: units.gu(1)
                         }
+                        text: ""
+                        fontSize: "large"
                     }
-                    Item {
-                        id: vendorItm
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        height: serialItem.height
-                        width: childrenRect.width
-                        Label {
-                            id: vendorLabel
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: "Vendor" + " " + "Model" // TODO: get manufactor and model infos from the system
+                    Label {
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                            topMargin: units.gu(1)
+                            top: ubuntuLabel.bottom
                         }
+                        text: "Vendor" + " " + "Model"   // TODO: get manufactor and model infos from the system
                     }
                 }
             }
