@@ -51,7 +51,7 @@ HEADERS += plugin.h background.h
 SOURCES += plugin.cpp background.cpp
 
 # Install path for the plugin
-installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
+installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)
 target.path = $$installPath
 INSTALLS += target
 
