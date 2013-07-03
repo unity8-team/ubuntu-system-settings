@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.1+13.10.20130703-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * about: simply the code for the custom vendor-infos' entry.
+  * sound: implement the mainpage of the interface.
+  * sound: rename, use the singular form for consistency.
+  * refresh the translations' template.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 91
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 03 Jul 2013 07:01:05 +0000
+
 ubuntu-system-settings (0.1+13.10.20130702-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]
