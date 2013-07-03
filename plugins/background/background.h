@@ -35,6 +35,7 @@ class Background : public QObject
 public:
     explicit Background(QObject *parent = 0);
     ~Background();
+    QString backgroundFile();
 
 public Q_SLOTS:
     void slotChanged();
@@ -42,16 +43,12 @@ public Q_SLOTS:
 Q_SIGNALS:
     void backgroundFileChanged();
 
-protected:
-    QString backgroundFile();
-
-    QString background_file;
-
 private:
-    QDBusConnection system_bus_connection;
-    QString object_path;
-    QDBusInterface accountsservice_iface;
-    QString get_background_file();
+    QString m_backgroundFile;
+    QDBusConnection m_systemBusConnection;
+    QString m_objectPath;
+    QDBusInterface m_accountsserviceIface;
+    QString getBackgroundFile();
 };
 
 #endif // BACKGROUND_H

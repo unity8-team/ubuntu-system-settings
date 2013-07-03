@@ -19,53 +19,48 @@
 */
 
 #include "background.h"
-#include <QDebug>
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
 
 Background::Background(QObject *parent) :
     QObject(parent),
-    system_bus_connection (QDBusConnection::systemBus()),
-    accountsservice_iface ("org.freedesktop.Accounts",
-                           "/org/freedesktop/Accounts",
-                           "org.freedesktop.Accounts",
-                            system_bus_connection)
+    m_systemBusConnection (QDBusConnection::systemBus()),
+    m_accountsserviceIface ("org.freedesktop.Accounts",
+                            "/org/freedesktop/Accounts",
+                            "org.freedesktop.Accounts",
+                             m_systemBusConnection)
 {
-    if (!accountsservice_iface.isValid()) {
+    if (!m_accountsserviceIface.isValid()) {
         return;
     }
 
-    background_file = get_background_file();
-
-    QDBusReply<QDBusObjectPath> q_object_path = accountsservice_iface.call(
+    QDBusReply<QDBusObjectPath> qObjectPath = m_accountsserviceIface.call(
                 "FindUserById", qlonglong(getuid()));
 
-    if (q_object_path.isValid()) {
-        object_path = q_object_path.value().path();
+    if (qObjectPath.isValid()) {
+        m_objectPath = qObjectPath.value().path();
     }
 
-    system_bus_connection.connect("org.freedesktop.Accounts",
-                                  object_path,
+    m_systemBusConnection.connect("org.freedesktop.Accounts",
+                                  m_objectPath,
                                   "org.freedesktop.Accounts.User",
                                   "Changed",
                                   this,
                                   SLOT(slotChanged()));
-
-    background_file = get_background_file();
 }
 
-QString Background::get_background_file()
+QString Background::getBackgroundFile()
 {
-    QDBusInterface user_interface (
+    QDBusInterface userInterface (
                 "org.freedesktop.Accounts",
-                object_path,
+                m_objectPath,
                 "org.freedesktop.Accounts.User",
-                system_bus_connection,
+                m_systemBusConnection,
                 this);
 
-    if (user_interface.isValid()) {
-        return user_interface.property("BackgroundFile").toString();
+    if (userInterface.isValid()) {
+        return userInterface.property("BackgroundFile").toString();
     }
 
     return QString();
@@ -73,17 +68,19 @@ QString Background::get_background_file()
 
 void Background::slotChanged()
 {
-    QString new_background = get_background_file();
-    if (new_background != background_file) {
-        qDebug() << "Background changed to: " << new_background;
-        background_file = new_background;
+    QString new_background = getBackgroundFile();
+    if (new_background != m_backgroundFile) {
+        m_backgroundFile = new_background;
         Q_EMIT backgroundFileChanged();
     }
 }
 
 QString Background::backgroundFile()
 {
-     return background_file;
+    if (m_backgroundFile.isEmpty() || m_backgroundFile.isNull())
+        m_backgroundFile = getBackgroundFile();
+
+     return m_backgroundFile;
 }
 
 Background::~Background() {

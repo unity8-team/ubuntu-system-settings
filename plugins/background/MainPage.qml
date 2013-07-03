@@ -34,11 +34,14 @@ ItemPage {
     UbuntuBackgroundPanel {
         id: backgroundPanel
 
-        onBackgroundFileChanged:
-            testWelcomeImage.source = backgroundPanel.backgroundFile
+        function maybeUpdateSource() {
+            var source = backgroundPanel.backgroundFile
+            if (source != "" && source != undefined)
+                testWelcomeImage.source = source
+        }
 
-        Component.onCompleted:
-            testWelcomeImage.source = backgroundPanel.backgroundFile
+        onBackgroundFileChanged: maybeUpdateSource()
+        Component.onCompleted: maybeUpdateSource()
     }
 
     GSettings {
