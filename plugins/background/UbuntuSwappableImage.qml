@@ -35,7 +35,13 @@ Item {
     signal clicked
 
     function swapImage() {
-        state = state == "one" ? "two" : "one"
+        if (Qt.resolvedUrl(source) != Qt.resolvedUrl(altSource)) {
+            state = state == "one" ? "two" : "one"
+        } else {
+            var tmpImage = source
+            source = altSource
+            altSource = tmpImage
+        }
     }
 
     MouseArea {

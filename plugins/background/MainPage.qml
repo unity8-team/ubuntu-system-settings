@@ -23,11 +23,26 @@ import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Background 1.0
+
 import "utilities.js" as Utilities
 
 ItemPage {
     id: mainPage
     title: i18n.tr("Background")
+
+    UbuntuBackgroundPanel {
+        id: backgroundPanel
+
+        function maybeUpdateSource() {
+            var source = backgroundPanel.backgroundFile
+            if (source != "" && source != undefined)
+                testWelcomeImage.source = source
+        }
+
+        onBackgroundFileChanged: maybeUpdateSource()
+        Component.onCompleted: maybeUpdateSource()
+    }
 
     GSettings {
         id: background
@@ -55,7 +70,6 @@ ItemPage {
             left: parent.left
          }
 
-        source: "darkeningclockwork.jpg"
         onClicked: pageStack.push(Utilities.createAlbumPage(
                                       i18n.tr("Welcome screen")))
     }
@@ -81,7 +95,8 @@ ItemPage {
             right: parent.right
          }
 
-        Component.onCompleted: updateImage()
+        Component.onCompleted: updateImage(testHomeImage,
+                                           homeImage)
 
         onClicked: pageStack.push(Utilities.createAlbumPage(
                                       i18n.tr("Home screen")))
@@ -90,22 +105,33 @@ ItemPage {
     /* We don't have a good way of doing this after passing an invalid image to
        SwappableImage, so test the image is valid /before/ showing it and show a
        fallback if it isn't. */
-    function updateImage() {
+    function updateImage(testImage, targetImage) {
         // TODO: Doesn't yet fade when the background is changed, but probably
         // not a huge issue. Will resolve itself when we switch to the SDK's
         // CrossFadeImage
         if (testImage.status == Image.Ready) {
-            homeImage.source = testImage.source
+            targetImage.source = testImage.source
         } else if (testImage.status == Image.Error) {
-            homeImage.source = "aeg.jpg"
+            targetImage.source = testImage.fallback
         }
     }
 
     Image {
-        id: testImage
+        id: testWelcomeImage
+        property string fallback: "darkeningclockwork.jpg"
+        source: fallback
+        visible: false
+        onStatusChanged: updateImage(testWelcomeImage,
+                                     welcomeImage)
+    }
+
+    Image {
+        id: testHomeImage
+        property string fallback: "aeg.jpg"
         source: background.pictureUri
         visible: false
-        onStatusChanged: updateImage()
+        onStatusChanged: updateImage(testHomeImage,
+                                     homeImage)
     }
 
 
