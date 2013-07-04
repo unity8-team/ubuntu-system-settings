@@ -32,3 +32,37 @@ INSTALLS += qml
 image.files = settings-background.svg
 image.path = /usr/share/settings/system/icons
 INSTALLS += image
+
+# C++ bits
+TARGET = UbuntuBackgroundPanel
+QT += qml quick dbus
+CONFIG += qt plugin no_keywords
+
+#comment in the following line to enable traces
+#DEFINES += QT_NO_DEBUG_OUTPUT
+
+TARGET = $$qtLibraryTarget($$TARGET)
+uri = Ubuntu.SystemSettings.Background
+
+INCLUDEPATH += .
+
+# Input
+HEADERS += plugin.h background.h
+SOURCES += plugin.cpp background.cpp
+
+# Install path for the plugin
+installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)
+target.path = $$installPath
+INSTALLS += target
+
+# find files
+QMLDIR_FILE = qmldir
+
+# make visible to qt creator
+OTHER_FILES += $$QMLDIR_FILE 
+
+# create install targets for files
+qmldir.path = $$installPath
+qmldir.files = $$QMLDIR_FILE
+
+INSTALLS += qmldir

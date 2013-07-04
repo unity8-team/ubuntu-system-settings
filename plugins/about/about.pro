@@ -8,7 +8,8 @@ QML_SOURCES = \
     EntryComponent.qml \
     PageComponent.qml \
     Storage.qml \
-    StorageBar.qml
+    StorageBar.qml \
+    fakepkgslist.xml
 
 OTHER_FILES += \
     $${QML_SOURCES}
