@@ -22,12 +22,17 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import SystemSettings 1.0
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
     id: root
 
     title: i18n.tr("About this phone")
     flickable: scrollWidget
+
+    UbuntuStorageAboutPanel {
+        id: backendinfos
+    }
 
     Flickable {
         id: scrollWidget
@@ -87,7 +92,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("OS")
-                value: "Ubuntu Version 0.3"      // TODO: read version number from the device
+                value: backendinfos.OsVersion
             }
 
             ListItem.SingleValue {

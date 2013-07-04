@@ -1,0 +1,2 @@
+module Ubuntu.SystemSettings.StorageAbout
+plugin UbuntuStorageAboutPanel
