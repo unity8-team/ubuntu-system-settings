@@ -29,15 +29,18 @@ StorageAbout::StorageAbout(QObject *parent) :
 
 QString StorageAbout::OsVersion()
 {
-    QString OsRelease = "/etc/os-release";
-    QFile file(OsRelease);
-    if (file.exists())
+    if (m_OsVersion.isEmpty() || m_OsVersion.isNull())
     {
-        QSettings settings(OsRelease, QSettings::IniFormat);
-        m_OsVersion = QString("%1 %2").arg(settings.value("NAME").toString()).arg(settings.value("VERSION_ID").toString());
+        QString OsRelease = "/etc/os-release";
+        QFile file(OsRelease);
+        if (file.exists())
+        {
+            QSettings settings(OsRelease, QSettings::IniFormat);
+            m_OsVersion = QString("%1 %2").arg(settings.value("NAME").toString()).arg(settings.value("VERSION_ID").toString());
+        }
+        else
+            qWarning("Can't read os-release informations");
     }
-    else
-        qWarning("Can't read os-release informations");
 
     return m_OsVersion;
 }
