@@ -31,7 +31,7 @@ ItemPage {
     flickable: scrollWidget
 
     UbuntuStorageAboutPanel {
-        id: backendinfos
+        id: backendInfos
     }
 
     Flickable {
@@ -92,7 +92,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("OS")
-                value: backendinfos.OsVersion
+                value: backendInfos.OsVersion
             }
 
             ListItem.SingleValue {

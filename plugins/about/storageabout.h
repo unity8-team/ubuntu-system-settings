@@ -21,7 +21,6 @@
 #ifndef STORAGEABOUT_H
 #define STORAGEABOUT_H
 
-#include <QDBusInterface>
 #include <QObject>
 #include <QProcess>
 

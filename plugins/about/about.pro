@@ -28,7 +28,7 @@ INSTALLS += image
 
 # C++ bits
 TARGET = UbuntuStorageAboutPanel
-QT += qml quick dbus
+QT += qml quick
 CONFIG += qt plugin no_keywords
 
 #comment in the following line to enable traces

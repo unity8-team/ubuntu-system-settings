@@ -34,11 +34,11 @@ QString StorageAbout::OsVersion()
     if (file.exists())
     {
         QSettings settings(OsRelease, QSettings::IniFormat);
-        m_OsVersion = settings.value("NAME").toString() + " " + settings.value("VERSION_ID").toString();
+        m_OsVersion = QString("%1 %2").arg(settings.value("NAME").toString()).arg(settings.value("VERSION_ID").toString());
     }
     else
         qWarning("Can't read os-release informations");
-    
+
     return m_OsVersion;
 }
 
