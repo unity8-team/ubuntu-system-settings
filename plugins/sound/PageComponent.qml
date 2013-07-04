@@ -51,12 +51,12 @@ ItemPage {
 
             SoundCheckEntry {
                 checkStatus: false
-                textEntry: "Vibrate when ringing"
+                textEntry: i18n.tr("Vibrate when ringing")
             }
 
             SoundCheckEntry {
                 checkStatus: true
-                textEntry: "Vibrate in silent mode"
+                textEntry: i18n.tr("Vibrate in silent mode")
             }
 
             ListItem.Standard {
@@ -71,12 +71,12 @@ ItemPage {
 
             SoundCheckEntry {
                 checkStatus: true
-                textEntry: "Vibrate with alert sound"
+                textEntry: i18n.tr("Vibrate with alert sound")
             }
 
             SoundCheckEntry {
                 checkStatus: true
-                textEntry: "Vibrate in silent mode"
+                textEntry: i18n.tr("Vibrate in silent mode")
             }
         }
     }

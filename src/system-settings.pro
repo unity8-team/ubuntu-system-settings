@@ -53,6 +53,7 @@ DEFINES += \
     I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\" \
     PLUGIN_MANIFEST_DIR=\\\"$${PLUGIN_MANIFEST_DIR}\\\" \
     PLUGIN_MODULE_DIR=\\\"$${PLUGIN_MODULE_DIR}\\\" \
+    PLUGIN_PRIVATE_MODULE_DIR=\\\"$${PLUGIN_PRIVATE_MODULE_DIR}\\\" \
     PLUGIN_QML_DIR=\\\"$${PLUGIN_QML_DIR}\\\"
 
 po.target = ../po/system-settings.pot

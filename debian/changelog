@@ -1,3 +1,24 @@
+ubuntu-system-settings (0.1+13.10.20130704-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * sound: set extra strings as translatable.
+  * storage: add the list of installed softwares (built with fake datas)
+    The list is built from a xml model. We provide a static list for
+    testing, the idea is to make click packages generate a similar index
+    (through trigger or similar) later.
+
+  [ Iain Lane ]
+  * Hit accountsservice over D-Bus to get the "welcome" image.
+  * Install the private library(ies) into
+    /usr/lib/$DEB_HOST_MULTIARCH/ubuntu-system-settings and add this to
+    the import path. This means that the modules aren't exposed to the
+    public.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 96
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 04 Jul 2013 07:01:05 +0000
+
 ubuntu-system-settings (0.1+13.10.20130703-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
