@@ -10,7 +10,7 @@ ItemPage {
 
     title: i18n.tr("Storage")
     flickable: scrollWidget
-    property var spaceColors: ["white", "orangered", "steelblue"]
+    property var spaceColors: ["white", UbuntuColors.orange, UbuntuColors.lightAubergine]
     property var spaceLabels: [i18n.tr("Free space"), i18n.tr("Used by Ubuntu"),
         i18n.tr("Used by apps")]
     property var spaceValues: ["31.4 GB", "19.6 GB", "13.0 GB"]
