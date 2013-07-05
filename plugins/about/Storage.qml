@@ -1,8 +1,9 @@
 import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
+import QtSystemInfo 5.0
 import Ubuntu.Components 0.1
-import SystemSettings 1.0
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import SystemSettings 1.0
 
 ItemPage {
     id: storagePage
@@ -25,6 +26,23 @@ ItemPage {
         XmlRole { name: "installedSize"; query: "installed/string()" }
     }
 
+    /* Return used space in a formatted way */
+    function getFormattedSpace(space) {
+        if (space < 1000)
+            return space;
+        if (space / 1000 < 1000)
+            return Math.round((space / 1000) * 10) / 10 + " kB";
+        else if (space/1000/1000 < 1000)
+            return Math.round((space / 1000 / 1000) * 10) / 10 + " MB";
+        else if (space/1000/1000/1000 < 1000)
+            return Math.round((space / 1000 / 1000 / 1000) * 10) / 10 + " GB";
+        return "";
+    }
+
+    StorageInfo {
+        id: storageInfo
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -38,7 +56,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: diskItem
                 text: i18n.tr("Total storage")
-                value: "64.0GB"   // TODO: read value from the device
+                value: storagePage.getFormattedSpace(storageInfo.totalDiskSpace('/'));
                 showDivider: false
             }
 
@@ -73,19 +91,6 @@ ItemPage {
 
             ListItem.ThinDivider {}
 
-            /* Return used space in a formatted way */
-            function getFormattedSpace(space) {
-                if (space < 1000)
-                    return space;
-                if (space / 1000 < 1000)
-                    return Math.round((space / 1000) * 100) / 100 + " kB";
-                else if (space/1000/1000 < 1000)
-                    return Math.round((space / 1000 / 1000) * 100) / 100 + " MB";
-                else if (space/1000/1000/1000 < 1000)
-                    return Math.round((space / 1000 / 1000 / 1000) * 100) / 100 + " GB";
-                return "";
-            }
-
             ListView {
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -97,7 +102,7 @@ ItemPage {
                     icon: "image://gicon/" + iconName
                     fallbackIconSource: "image://gicon/clear"   // TOFIX: use proper fallback
                     text: binaryName
-                    value: columnId.getFormattedSpace(installedSize)
+                    value: storagePage.getFormattedSpace(installedSize)
                 }
             }
         }
