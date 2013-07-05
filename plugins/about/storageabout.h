@@ -29,14 +29,18 @@ class StorageAbout : public QObject
     Q_OBJECT
     Q_PROPERTY( QString OsVersion
                 READ OsVersion)
-    
+    Q_PROPERTY( QString serialNumber
+                READ serialNumber)
+
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
     QString OsVersion();
+    QString serialNumber();
 
 private:
     QString m_OsVersion;
+    QString m_serialNumber;
 };
 
 #endif // STORAGEABOUT_H
