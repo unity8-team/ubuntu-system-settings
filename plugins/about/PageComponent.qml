@@ -78,7 +78,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: serialItem
                 text: i18n.tr("Serial")
-                value: backendInfos.serialNumber
+                value: backendInfos.serialNumber ? backendInfos.serialNumber : i18n.tr("N/A")
             }
 
             ListItem.SingleValue {
