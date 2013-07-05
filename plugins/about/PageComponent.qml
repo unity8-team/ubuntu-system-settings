@@ -78,7 +78,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: serialItem
                 text: i18n.tr("Serial")
-                value: "FAKE-SERIAL-ID-NUMBER"   // TODO: read serial number from the device
+                value: backendInfos.serialNumber
             }
 
             ListItem.SingleValue {

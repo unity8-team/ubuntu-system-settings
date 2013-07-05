@@ -20,6 +20,7 @@
 #include "storageabout.h"
 #include <QFile>
 #include <QtCore/QSettings>
+#include <hybris/properties/properties.h>
 
 StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent)
@@ -44,6 +45,20 @@ QString StorageAbout::OsVersion()
 
     return m_OsVersion;
 }
+
+QString StorageAbout::serialNumber()
+{
+    static char serialBuffer[PROP_NAME_MAX];
+
+    if (m_serialNumber.isEmpty() || m_serialNumber.isNull())
+    {
+        property_get("ro.serialno", serialBuffer, "");
+        m_serialNumber = QString(serialBuffer);
+    }
+
+    return m_serialNumber;
+}
+
 
 StorageAbout::~StorageAbout() {
 }

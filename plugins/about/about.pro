@@ -38,6 +38,7 @@ TARGET = $$qtLibraryTarget($$TARGET)
 uri = Ubuntu.SystemSettings.StorageAbout
 
 INCLUDEPATH += .
+LIBS += -landroid-properties
 
 # Input
 HEADERS += plugin.h storageabout.h
