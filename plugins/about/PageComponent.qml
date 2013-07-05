@@ -70,7 +70,7 @@ ItemPage {
                             topMargin: units.gu(1)
                             top: ubuntuLabel.bottom
                         }
-                        text: "Vendor" + " " + "Model"   // TODO: get manufactor and model infos from the system
+                        text: (backendInfos.vendorString.toString() !== " ") ? backendInfos.vendorString : i18n.tr("Unknown Model")
                     }
                 }
             }
