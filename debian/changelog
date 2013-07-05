@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.1+13.10.20130705-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * about: collect system version informations from a plugin Since we
+    can't access files on disk from qml, we need to do it with some cpp
+    code. The backend is going to be used to collect some other
+    informations later as well. .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 98
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 05 Jul 2013 07:01:04 +0000
+
 ubuntu-system-settings (0.1+13.10.20130704-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
