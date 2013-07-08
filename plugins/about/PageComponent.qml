@@ -70,7 +70,7 @@ ItemPage {
                             topMargin: units.gu(1)
                             top: ubuntuLabel.bottom
                         }
-                        text: "Vendor" + " " + "Model"   // TODO: get manufactor and model infos from the system
+                        text: (backendInfos.vendorString.toString() !== " ") ? backendInfos.vendorString : i18n.tr("Unknown Model")
                     }
                 }
             }
@@ -78,7 +78,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: serialItem
                 text: i18n.tr("Serial")
-                value: "FAKE-SERIAL-ID-NUMBER"   // TODO: read serial number from the device
+                value: backendInfos.serialNumber ? backendInfos.serialNumber : i18n.tr("N/A")
             }
 
             ListItem.SingleValue {

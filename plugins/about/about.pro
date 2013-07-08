@@ -5,6 +5,7 @@ TEMPLATE = lib
 TARGET = about
 
 QML_SOURCES = \
+    CustomSelector.qml \
     EntryComponent.qml \
     PageComponent.qml \
     Storage.qml \
@@ -38,6 +39,7 @@ TARGET = $$qtLibraryTarget($$TARGET)
 uri = Ubuntu.SystemSettings.StorageAbout
 
 INCLUDEPATH += .
+LIBS += -landroid-properties
 
 # Input
 HEADERS += plugin.h storageabout.h
