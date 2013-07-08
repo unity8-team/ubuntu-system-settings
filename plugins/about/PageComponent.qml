@@ -19,8 +19,9 @@
  */
 
 import QtQuick 2.0
-import Ubuntu.Components 0.1
+import QtSystemInfo 5.0
 import SystemSettings 1.0
+import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 
@@ -32,6 +33,10 @@ ItemPage {
 
     UbuntuStorageAboutPanel {
         id: backendInfos
+    }
+
+    DeviceInfo {
+        id: deviceInfos
     }
 
     Flickable {
@@ -70,7 +75,7 @@ ItemPage {
                             topMargin: units.gu(1)
                             top: ubuntuLabel.bottom
                         }
-                        text: (backendInfos.vendorString.toString() !== " ") ? backendInfos.vendorString : i18n.tr("Unknown Model")
+                        text: deviceInfos.manufacturer() + " " + deviceInfos.model()
                     }
                 }
             }
@@ -83,7 +88,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: "IMEI"
-                value: "FAKE-IMEI-ID-NUMBER"     // TODO: read IMEI number from the device
+                value: deviceInfos.imei(0)
             }
 
             ListItem.Standard {
@@ -92,7 +97,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("OS")
-                value: backendInfos.OsVersion
+                value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os)
             }
 
             ListItem.SingleValue {
