@@ -10,6 +10,7 @@ Build-Depends: dbus-test-runner,
                qtbase5-dev,
                qtdeclarative5-dev,
                xvfb,
+               libandroid-properties-dev,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
@@ -23,6 +24,7 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          gsettings-desktop-schemas,
          qtdeclarative5-gsettings1.0,
+         qtdeclarative5-systeminfo-plugin,
          qtdeclarative5-ubuntu-ui-toolkit-plugin,
          libsystemsettings1 (= ${binary:Version}),
 Recommends: ubuntu-mobile-icons,

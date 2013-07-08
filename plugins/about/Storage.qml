@@ -1,18 +1,20 @@
 import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
+import QtSystemInfo 5.0
 import Ubuntu.Components 0.1
-import SystemSettings 1.0
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import SystemSettings 1.0
 
 ItemPage {
     id: storagePage
 
     title: i18n.tr("Storage")
     flickable: scrollWidget
-    property var spaceColors: ["white", "orangered", "steelblue"]
+    property var spaceColors: ["white", UbuntuColors.orange, UbuntuColors.lightAubergine]
     property var spaceLabels: [i18n.tr("Free space"), i18n.tr("Used by Ubuntu"),
         i18n.tr("Used by apps")]
     property var spaceValues: ["31.4 GB", "19.6 GB", "13.0 GB"]
+    property bool sortByName: true
 
     /* TOFIX: replace by real datas */
     XmlListModel {
@@ -23,6 +25,23 @@ ItemPage {
         XmlRole { name: "binaryName"; query: "name/string()" }
         XmlRole { name: "iconName"; query: "icon/string()" }
         XmlRole { name: "installedSize"; query: "installed/string()" }
+    }
+
+    /* Return used space in a formatted way */
+    function getFormattedSpace(space) {
+        if (space < 1000)
+            return space;
+        if (space / 1000 < 1000)
+            return Math.round((space / 1000) * 10) / 10 + " kB";
+        else if (space/1000/1000 < 1000)
+            return Math.round((space / 1000 / 1000) * 10) / 10 + " MB";
+        else if (space/1000/1000/1000 < 1000)
+            return Math.round((space / 1000 / 1000 / 1000) * 10) / 10 + " GB";
+        return "";
+    }
+
+    StorageInfo {
+        id: storageInfo
     }
 
     Flickable {
@@ -38,7 +57,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: diskItem
                 text: i18n.tr("Total storage")
-                value: "64.0GB"   // TODO: read value from the device
+                value: storagePage.getFormattedSpace(storageInfo.totalDiskSpace('/'));
                 showDivider: false
             }
 
@@ -71,20 +90,12 @@ ItemPage {
                 }
             }
 
-            ListItem.ThinDivider {}
-
-            /* Return used space in a formatted way */
-            function getFormattedSpace(space) {
-                if (space < 1000)
-                    return space;
-                if (space / 1000 < 1000)
-                    return Math.round((space / 1000) * 100) / 100 + " kB";
-                else if (space/1000/1000 < 1000)
-                    return Math.round((space / 1000 / 1000) * 100) / 100 + " MB";
-                else if (space/1000/1000/1000 < 1000)
-                    return Math.round((space / 1000 / 1000 / 1000) * 100) / 100 + " GB";
-                return "";
+            /* TODO: replace by a proper widget if we get one (lp #1198135) */
+            CustomSelector {
+                sortByName: sortByName
             }
+
+            ListItem.ThinDivider {}
 
             ListView {
                 anchors.left: parent.left
@@ -97,7 +108,7 @@ ItemPage {
                     icon: "image://gicon/" + iconName
                     fallbackIconSource: "image://gicon/clear"   // TOFIX: use proper fallback
                     text: binaryName
-                    value: columnId.getFormattedSpace(installedSize)
+                    value: storagePage.getFormattedSpace(installedSize)
                 }
             }
         }

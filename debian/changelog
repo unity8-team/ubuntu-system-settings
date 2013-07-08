@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.1+13.10.20130708-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * storage: use qtsystems to get the disk space informations.
+  * storage: use ubuntu colors.
+  * about: get real serial number.
+  * storage: add buttons to sort the applications' list.
+  * about: use 'N/A' if there is no serial number.
+  * about: get the manufacturer/model from the device.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 105
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 08 Jul 2013 07:01:07 +0000
+
 ubuntu-system-settings (0.1+13.10.20130705-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
