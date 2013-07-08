@@ -90,12 +90,9 @@ ItemPage {
                 }
             }
 
-            /* TODO: replace by a proper widget if we get one (lp #1198135) */
-            CustomSelector {
-                sortByName: sortByName
+            ListItem.ValueSelector {
+                values: [i18n.tr("By name"), i18n.tr("By size")]
             }
-
-            ListItem.ThinDivider {}
 
             ListView {
                 anchors.left: parent.left

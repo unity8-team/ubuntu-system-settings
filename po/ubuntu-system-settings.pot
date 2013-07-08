@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-08 15:29+0200\n"
+"POT-Creation-Date: 2013-07-08 16:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../plugins/about/CustomSelector.qml:23
-msgid "By Name"
-msgstr ""
-
-#: ../plugins/about/CustomSelector.qml:35
-msgid "By Size"
-msgstr ""
 
 #: ../plugins/about/PageComponent.qml:30 ../.build/settings.js:1
 msgid "About this phone"
@@ -87,6 +79,14 @@ msgstr ""
 
 #: ../plugins/about/Storage.qml:59
 msgid "Total storage"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:94
+msgid "By name"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:94
+msgid "By size"
 msgstr ""
 
 #: ../plugins/background/MainPage.qml:32

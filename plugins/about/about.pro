@@ -5,7 +5,6 @@ TEMPLATE = lib
 TARGET = about
 
 QML_SOURCES = \
-    CustomSelector.qml \
     EntryComponent.qml \
     PageComponent.qml \
     Storage.qml \
