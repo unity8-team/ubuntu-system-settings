@@ -18,32 +18,12 @@
 */
 
 #include "storageabout.h"
-#include <QFile>
-#include <QtCore/QSettings>
 #include <hybris/properties/properties.h>
 
 StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent)
 {
 
-}
-
-QString StorageAbout::OsVersion()
-{
-    if (m_OsVersion.isEmpty() || m_OsVersion.isNull())
-    {
-        QString OsRelease = "/etc/os-release";
-        QFile file(OsRelease);
-        if (file.exists())
-        {
-            QSettings settings(OsRelease, QSettings::IniFormat);
-            m_OsVersion = QString("%1 %2").arg(settings.value("NAME").toString()).arg(settings.value("VERSION_ID").toString());
-        }
-        else
-            qWarning("Can't read os-release informations");
-    }
-
-    return m_OsVersion;
 }
 
 QString StorageAbout::serialNumber()
@@ -57,21 +37,6 @@ QString StorageAbout::serialNumber()
     }
 
     return m_serialNumber;
-}
-
-QString StorageAbout::vendorString()
-{
-    static char manufacturerBuffer[PROP_NAME_MAX];
-    static char modelBuffer[PROP_NAME_MAX];
-
-    if (m_vendorString.isEmpty() || m_vendorString.isNull())
-    {
-        property_get("ro.product.manufacturer", manufacturerBuffer, "");
-        property_get("ro.product.model", modelBuffer, "");
-        m_vendorString = QString("%1 %2").arg(manufacturerBuffer).arg(modelBuffer);
-    }
-
-    return m_vendorString;
 }
 
 StorageAbout::~StorageAbout() {
