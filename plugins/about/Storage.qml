@@ -62,7 +62,6 @@ ItemPage {
             }
 
             StorageBar {
-                barHeight: units.gu(3)
                 colors: spaceColors
             }
 
@@ -70,7 +69,7 @@ ItemPage {
                 model: spaceColors
                 Item {
                     height: units.gu(3)
-                    width: parent.width*0.9
+                    width: parent.width-units.gu(4)
                     anchors.horizontalCenter: parent.horizontalCenter
                     Row {
                         spacing: units.gu(1)
