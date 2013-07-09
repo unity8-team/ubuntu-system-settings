@@ -23,6 +23,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Diagnostics 1.0
 
 ItemPage {
     id: root
@@ -30,6 +31,13 @@ ItemPage {
     title: i18n.tr("Diagnostics")
     flickable: scrollWidget
 
+    UbuntuDiagnostics {
+        id: diagnosticsThing
+        function maybeUpdate() {
+            console.log('onReportCrashesChanged()');
+        }
+        onReportCrashesChanged: maybeUpdate()
+    }
     Flickable {
         id: scrollWidget
         anchors.fill: parent
