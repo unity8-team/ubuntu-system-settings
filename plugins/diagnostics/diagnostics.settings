@@ -1,0 +1,14 @@
+{
+    "icon": "/usr/share/settings/system/icons/settings-diagnostics.svg",
+    "name": "Diagnostics",
+    "translations": "diagnostics",
+    "category": "system",
+    "priority": 4,
+    "keywords": [
+        "diagnostics",
+        "privacy",
+        "settings"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false
+}

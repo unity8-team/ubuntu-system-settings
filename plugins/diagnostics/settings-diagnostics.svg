@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="90"
+   height="90"
+   id="svg3327"
+   version="1.1"
+   inkscape:version="0.48+devel r12322"
+   sodipodi:docname="settings-security-privacy.svg">
+  <defs
+     id="defs3329" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.259629"
+     inkscape:cx="110.59541"
+     inkscape:cy="8.820022"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata3332">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-703.57143,-318.79075)">
+    <g
+       transform="translate(-958.42857,826.42857)"
+       id="g4097">
+      <rect
+         style="color:#000000;fill:none;stroke:none;stroke-width:7.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect4099"
+         width="90"
+         height="90"
+         x="1662"
+         y="-507.63782" />
+      <rect
+         y="-507.63782"
+         x="1662"
+         height="90"
+         width="90"
+         id="rect4103"
+         style="color:#000000;fill:none;stroke:none;stroke-width:6;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <g
+         id="g4121"
+         transform="translate(0,3.999976)">
+        <path
+           sodipodi:nodetypes="s808080sscccsscccc"
+           inkscape:connector-curvature="0"
+           id="path4101"
+           d="m 1695,-471.6378 c -10.7217,0 -11.945,0.058 -12,7 l 0,0.5 0,8.5 48,0 0,-8.5 0,-0.5 C 1730.9451,-471.5802 1729.7217,-471.6378 1719,-471.6378 z m -12,19 0,8.5 0,0.5 c 0.055,6.9422 1.2783,7 12,7 l 24,0 c 10.7217,0 11.9451,-0.058 12,-7 l 0,-0.5 L 1731,-452.6378 Z"
+           style="color:#000000;fill:#808080;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+        <path
+           style="font-size:xx-small;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:#808080;fill-opacity:1;stroke:none;stroke-width:6;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;clip-rule:nonzero;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+           d="m 1707,-496.625 c -8.8121,0 -16,7.18789 -16,16 l 0,9 c 0,8.81211 7.1879,16 16,16 8.8121,0 16,-7.18789 16,-16 l 0,-9 C 1723,-489.43711 1715.8121,-496.625 1707,-496.625 z m 0,6 c 5.5919,0 10,4.40811 10,10 l 0,9 c 0,5.59189 -4.4081,10 -10,10 -5.5919,0 -10,-4.40811 -10,-10 l 0,-9 C 1697,-486.21689 1701.4081,-490.625 1707,-490.625 Z"
+           id="rect4118"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+  </g>
+</svg>
