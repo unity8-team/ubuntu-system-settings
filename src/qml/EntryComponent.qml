@@ -41,7 +41,7 @@ Item {
         }
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: model.displayName
+            text: i18n.dtr(model.item.translations, model.displayName)
         }
     }
 
