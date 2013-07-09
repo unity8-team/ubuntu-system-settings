@@ -7,89 +7,106 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-02 21:36+0200\n"
+"POT-Creation-Date: 2013-07-08 16:18+0200\n"
 "PO-Revision-Date: 2013-07-03 05:36+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-08 13:36+0000\n"
+"X-Launchpad-Export-Date: 2013-07-09 08:17+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
-#: ../plugins/about/PageComponent.qml:29 ../.build/settings.js:1
+#: ../plugins/about/PageComponent.qml:30 ../.build/settings.js:1
 msgid "About this phone"
 msgstr "Quant a aquest telèfon"
 
-#: ../plugins/about/PageComponent.qml:75
+#: ../plugins/about/PageComponent.qml:73
+msgid "Unknown Model"
+msgstr ""
+
+#: ../plugins/about/PageComponent.qml:80
 msgid "Serial"
 msgstr "Número de sèrie"
 
-#: ../plugins/about/PageComponent.qml:85
+#: ../plugins/about/PageComponent.qml:81
+msgid "N/A"
+msgstr ""
+
+#: ../plugins/about/PageComponent.qml:90
 msgid "Software:"
 msgstr "Programari:"
 
-#: ../plugins/about/PageComponent.qml:89
+#: ../plugins/about/PageComponent.qml:94
 msgid "OS"
 msgstr "Sistema operatiu"
 
-#: ../plugins/about/PageComponent.qml:94
+#: ../plugins/about/PageComponent.qml:99
 msgid "Last Updated"
 msgstr "Darrera actualització"
 
-#: ../plugins/about/PageComponent.qml:106
+#: ../plugins/about/PageComponent.qml:111
 msgid "Check for updates"
 msgstr "Comprova si hi ha actualitzacions"
 
-#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:9
+#: ../plugins/about/PageComponent.qml:117 ../plugins/about/Storage.qml:11
 msgid "Storage"
 msgstr "Emmagatzematge"
 
-#: ../plugins/about/PageComponent.qml:118
+#: ../plugins/about/PageComponent.qml:123
 msgid "Legal:"
 msgstr "Informació legal:"
 
-#: ../plugins/about/PageComponent.qml:122
+#: ../plugins/about/PageComponent.qml:127
 msgid "Software licenses"
 msgstr "Llicències de programari"
 
-#: ../plugins/about/PageComponent.qml:127
+#: ../plugins/about/PageComponent.qml:132
 msgid "Regulatory info"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:12
+#: ../plugins/about/Storage.qml:14
 msgid "Free space"
 msgstr "Espai lliure"
 
-#: ../plugins/about/Storage.qml:12
+#: ../plugins/about/Storage.qml:14
 msgid "Used by Ubuntu"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:13
+#: ../plugins/about/Storage.qml:15
 msgid "Used by apps"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:28
+#: ../plugins/about/Storage.qml:59
 msgid "Total storage"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:30
+#: ../plugins/about/Storage.qml:94
+msgid "By name"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:94
+msgid "By size"
+msgstr ""
+
+#: ../plugins/background/MainPage.qml:32
 msgid "Background"
 msgstr "Fons de pantalla"
 
-#: ../plugins/background/MainPage.qml:47 ../plugins/background/MainPage.qml:60
+#: ../plugins/background/MainPage.qml:62 ../plugins/background/MainPage.qml:74
 msgid "Welcome screen"
 msgstr "Pantalla de benvinguda"
 
-#: ../plugins/background/MainPage.qml:73 ../plugins/background/MainPage.qml:87
+#: ../plugins/background/MainPage.qml:87
+#: ../plugins/background/MainPage.qml:102
 msgid "Home screen"
 msgstr "Pantalla d'inici"
 
-#: ../plugins/background/MainPage.qml:128
+#: ../plugins/background/MainPage.qml:154
 msgid "Same background for both"
 msgstr "El mateix per a ambdues"
 
-#: ../plugins/background/MainPage.qml:151
+#: ../plugins/background/MainPage.qml:177
 msgid "Different background for each"
 msgstr "Un de diferent per a cadascuna"
 
