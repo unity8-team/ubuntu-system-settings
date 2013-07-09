@@ -25,6 +25,37 @@ ItemPage {
         XmlRole { name: "binaryName"; query: "name/string()" }
         XmlRole { name: "iconName"; query: "icon/string()" }
         XmlRole { name: "installedSize"; query: "installed/string()" }
+
+        onStatusChanged: if (status === XmlListModel.Ready) { createSortedLists(); }
+    }
+
+    ListModel {
+        id: sortedNamesModel
+    }
+
+    ListModel {
+        id: sortedInstallModel
+    }
+
+    function createSortedLists() {
+        var n;
+        var namesDict = {};
+        var nameKeys = [];
+        var installDict = {};
+        var installKeys = [];
+
+        for (n=0; n < xmlModel.count; n++) {
+            namesDict[xmlModel.get(n).binaryName] = [xmlModel.get(n).iconName, xmlModel.get(n).installedSize];
+            installDict[xmlModel.get(n).installedSize] = [xmlModel.get(n).iconName, xmlModel.get(n).binaryName];
+        }
+
+        nameKeys = Object.keys(namesDict).sort();
+        installKeys = Object.keys(installDict).sort(function(a,b){return b-a});
+
+        for (n=0; n < nameKeys.length; n++) {
+            sortedNamesModel.append({"binaryName":nameKeys[n],"iconName":namesDict[nameKeys[n]][0],"installedSize":namesDict[nameKeys[n]][1]})
+            sortedInstallModel.append({"binaryName":installDict[installKeys[n]][1],"iconName":installDict[installKeys[n]][0],"installedSize":installKeys[n]})
+        }
     }
 
     /* Return used space in a formatted way */
@@ -90,6 +121,7 @@ ItemPage {
             }
 
             ListItem.ValueSelector {
+                id: valueSelect
                 values: [i18n.tr("By name"), i18n.tr("By size")]
             }
 
@@ -99,7 +131,7 @@ ItemPage {
                 height: childrenRect.height
                 /* Desactivate the listview flicking, we want to scroll on the column */
                 interactive: false
-                model: xmlModel
+                model: (valueSelect.selectedIndex === 0) ? sortedNamesModel : sortedInstallModel
                 delegate: ListItem.SingleValue {
                     icon: "image://gicon/" + iconName
                     fallbackIconSource: "image://gicon/clear"   // TOFIX: use proper fallback
