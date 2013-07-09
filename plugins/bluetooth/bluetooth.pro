@@ -9,5 +9,5 @@ settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
 image.files = settings-bluetooth.svg
-image.path = /usr/share/settings/system/icons
+image.path = $$INSTALL_PREFIX/share/settings/system/icons
 INSTALLS += image

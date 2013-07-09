@@ -22,7 +22,7 @@ settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
 image.files = settings-reset.svg
-image.path = /usr/share/settings/system/icons
+image.path = $$INSTALL_PREFIX/share/settings/system/icons
 INSTALLS += image
 
 qml.files = $${QML_SOURCES}

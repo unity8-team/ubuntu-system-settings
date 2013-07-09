@@ -1,3 +1,6 @@
+include(../common-project-config.pri)
+include($${TOP_SRC_DIR}/common-vars.pri)
+
 TEMPLATE = subdirs
 
 PROJECTNAME = "ubuntu-system-settings"
@@ -59,7 +62,7 @@ install.target = install
 install_mo_commands =
 for(po_file, PO_FILES) {
 mo_name = $$replace(po_file,.po,)
-mo_targetpath = $(INSTALL_ROOT)/usr/share/locale/$${mo_name}/LC_MESSAGES
+mo_targetpath = $${INSTALL_PREFIX}/share/locale/$${mo_name}/LC_MESSAGES
 mo_target = $${mo_targetpath}/$${PROJECTNAME}.mo
 !isEmpty(install_mo_commands): install_mo_commands += &&
 install_mo_commands += test -d $$mo_targetpath || mkdir -p $$mo_targetpath
