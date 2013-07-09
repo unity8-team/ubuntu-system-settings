@@ -1,0 +1,255 @@
+# Russian translation for ubuntu-system-settings
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the ubuntu-system-settings package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-system-settings\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-07-02 21:36+0200\n"
+"PO-Revision-Date: 2013-07-02 20:39+0000\n"
+"Last-Translator: Den <epicodes@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-07-08 13:36+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
+
+#: ../plugins/about/PageComponent.qml:29 ../.build/settings.js:1
+msgid "About this phone"
+msgstr "О телефоне"
+
+#: ../plugins/about/PageComponent.qml:75
+msgid "Serial"
+msgstr "Серийный номер"
+
+#: ../plugins/about/PageComponent.qml:85
+msgid "Software:"
+msgstr "Программное обеспечение:"
+
+#: ../plugins/about/PageComponent.qml:89
+msgid "OS"
+msgstr "Операционная система"
+
+#: ../plugins/about/PageComponent.qml:94
+msgid "Last Updated"
+msgstr "Последнее обновление"
+
+#: ../plugins/about/PageComponent.qml:106
+msgid "Check for updates"
+msgstr "Проверить наличие обновлений"
+
+#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:9
+msgid "Storage"
+msgstr "Хранилище"
+
+#: ../plugins/about/PageComponent.qml:118
+msgid "Legal:"
+msgstr "Правовая информация"
+
+#: ../plugins/about/PageComponent.qml:122
+msgid "Software licenses"
+msgstr "Лицензии на ПО"
+
+#: ../plugins/about/PageComponent.qml:127
+msgid "Regulatory info"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:12
+msgid "Free space"
+msgstr "Свободное место"
+
+#: ../plugins/about/Storage.qml:12
+msgid "Used by Ubuntu"
+msgstr "Занято Ubuntu"
+
+#: ../plugins/about/Storage.qml:13
+msgid "Used by apps"
+msgstr "Занято приложениями"
+
+#: ../plugins/about/Storage.qml:28
+msgid "Total storage"
+msgstr "Общий объём"
+
+#: ../plugins/background/MainPage.qml:30
+msgid "Background"
+msgstr "Фон"
+
+#: ../plugins/background/MainPage.qml:47 ../plugins/background/MainPage.qml:60
+msgid "Welcome screen"
+msgstr "Экран приветствия"
+
+#: ../plugins/background/MainPage.qml:73 ../plugins/background/MainPage.qml:87
+msgid "Home screen"
+msgstr "Домашний экран"
+
+#: ../plugins/background/MainPage.qml:128
+msgid "Same background for both"
+msgstr "Одинаковый фон для обоих экранов"
+
+#: ../plugins/background/MainPage.qml:151
+msgid "Different background for each"
+msgstr "Различный фон для каждого экрана"
+
+#: ../plugins/reset/EraseEverything.qml:29
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"Все документы, сохранённые игры, настройки и другие объекты, будут "
+"безвозвратно удалены из этого телефона."
+
+#: ../plugins/reset/EraseEverything.qml:31
+msgid "Erase & reset everything"
+msgstr "Стереть и выполнить полный сброс"
+
+#: ../plugins/reset/EraseEverything.qml:35
+#: ../plugins/reset/ResetAllSettings.qml:35
+#: ../plugins/reset/ResetLauncherHome.qml:35
+msgid "Cancel"
+msgstr "Отмена"
+
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+msgid "Reset phone"
+msgstr "Сбросить настройки телефона"
+
+#: ../plugins/reset/PageComponent.qml:57
+msgid "Reset launcher & home screen…"
+msgstr "Сбросить настройки панели запуска и домашнего экрана..."
+
+#: ../plugins/reset/PageComponent.qml:74
+msgid "Reset all system settings…"
+msgstr "Сбросить все системные настройки..."
+
+#: ../plugins/reset/PageComponent.qml:91
+msgid "Erase & reset everything…"
+msgstr "Стереть и выполнить полный сброс..."
+
+#: ../plugins/reset/ResetAllSettings.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+
+#: ../plugins/reset/ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "Сбросить все системные настройки"
+
+#: ../plugins/reset/ResetLauncherHome.qml:31
+msgid "Reset launcher & home screen"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:29 ../.build/settings.js:16
+msgid "Sound"
+msgstr "Звук"
+
+#: ../plugins/sound/PageComponent.qml:43
+msgid "Phone calls:"
+msgstr "Телефонные вызовы:"
+
+#: ../plugins/sound/PageComponent.qml:47
+msgid "Ringtone"
+msgstr "Мелодия вызова"
+
+#: ../plugins/sound/PageComponent.qml:54
+msgid "Vibrate when ringing"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:59 ../plugins/sound/PageComponent.qml:79
+msgid "Vibrate in silent mode"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:63
+msgid "Alerts:"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:67
+msgid "Alert sound"
+msgstr "Звук предупреждения"
+
+#: ../plugins/sound/PageComponent.qml:74
+msgid "Vibrate with alert sound"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:45 ../.build/ubuntu-system-settings.desktop.js:1
+msgid "System Settings"
+msgstr "Настройки системы"
+
+#: ../src/qml/MainWindow.qml:65
+msgid "Network"
+msgstr "Сеть"
+
+#: ../src/qml/MainWindow.qml:70
+msgid "Personal"
+msgstr "Личные"
+
+#: ../src/qml/MainWindow.qml:75
+msgid "System"
+msgstr "Система"
+
+#: ../.build/settings.js:2
+msgid "Accessibility"
+msgstr "Специальные возможности"
+
+#: ../.build/settings.js:3
+msgid "Backgrounds"
+msgstr "Фоновые изображения"
+
+#: ../.build/settings.js:4
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../.build/settings.js:5
+msgid "Brightness"
+msgstr "Яркость"
+
+#: ../.build/settings.js:6
+msgid "Cellular"
+msgstr ""
+
+#: ../.build/settings.js:7
+msgid "Example"
+msgstr "Пример"
+
+#: ../.build/settings.js:8
+msgid "Flight mode"
+msgstr "Режим полета"
+
+#: ../.build/settings.js:9
+msgid "GPS"
+msgstr "GPS"
+
+#: ../.build/settings.js:10
+msgid "Keyboard"
+msgstr "Клавиатура"
+
+#: ../.build/settings.js:11
+msgid "Language"
+msgstr "Язык"
+
+#: ../.build/settings.js:12
+msgid "Rotation lock"
+msgstr "Запертить автоповорот экрана"
+
+#: ../.build/settings.js:13
+msgid "Phone"
+msgstr "Телефон"
+
+#: ../.build/settings.js:15
+msgid "Security & Privacy"
+msgstr "Безопасность и Конфиденциальность"
+
+#: ../.build/settings.js:17
+msgid "Updates"
+msgstr "Обновления"
+
+#: ../.build/settings.js:18
+msgid "Time & Date"
+msgstr "Дата и время"
+
+#: ../.build/settings.js:19
+msgid "Wi-Fi"
+msgstr "Wi-Fi"

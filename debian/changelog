@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.1+13.10.20130709-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * Updated translation template.
+  * about: when it's possible, use qtsystem to get the device
+    informations.
+  * updated translations from launchpad.
+  * storage: use a valueselector rather than a custom widget.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 110
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 09 Jul 2013 07:01:45 +0000
+
 ubuntu-system-settings (0.1+13.10.20130708-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
