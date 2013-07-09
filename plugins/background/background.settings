@@ -1,6 +1,6 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-background.svg",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "name": "Background",
     "category": "personal",
     "priority": 0,

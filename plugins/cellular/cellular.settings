@@ -1,7 +1,7 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-cellular.svg",
     "name": "Cellular",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "network",
     "priority": 1,
     "form-factors": [
