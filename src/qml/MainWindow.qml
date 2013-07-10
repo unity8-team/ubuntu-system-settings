@@ -31,6 +31,16 @@ MainView {
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
         pageStack.push(mainPage)
+        if (defaultPlugin) {
+            var plugin = pluginManager.getByName(defaultPlugin)
+            if (plugin) {
+                // Got a valid plugin name - load it
+                pageStack.push(plugin.pageComponent)
+            } else {
+                // Invalid plugin passed on the commandline
+                console.log("Plugin " + defaultPlugin + " does not exist. Ignoring.")
+            }
+        }
     }
 
     PluginManager {

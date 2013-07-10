@@ -55,6 +55,8 @@ int main(int argc, char **argv)
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
+    view.rootContext()->setContextProperty("defaultPlugin",
+                                           argc > 1 ? argv[1] : "");
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();
 
