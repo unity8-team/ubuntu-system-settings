@@ -1,3 +1,25 @@
+ubuntu-system-settings (0.1+13.10.20130710-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * translation: update the translations again, some strings changed. We
+    are going to turn on autoimport then to avoid those manual commits
+    in the futur.
+  * storage: use a rectangle so we can have a border around the bar
+    Tweak some of the margins and vertical spaces as well to look a bit
+    better and be aligned on other elements .
+  * Since we have a readme let's put some informations in it.
+  * debian: slightly improved description, sort the build-depends.
+  * settings: translate the panel names in the system settings grid
+    view.
+  * storage: implement apps sorting.
+  * background: fix name inconsistency.
+  * settings: use the correct translation domain.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 119
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 10 Jul 2013 07:11:23 +0000
+
 ubuntu-system-settings (0.1+13.10.20130709-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
