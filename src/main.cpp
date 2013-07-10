@@ -22,6 +22,8 @@
 #include "i18n.h"
 #include "plugin-manager.h"
 
+#include <unistd.h>
+
 #include <QGuiApplication>
 #include <QProcessEnvironment>
 #include <QQmlContext>
@@ -33,6 +35,7 @@ using namespace SystemSettings;
 
 int main(int argc, char **argv)
 {
+    QString defaultPlugin;
     QGuiApplication app(argc, argv);
 
     /* read environment variables */
@@ -49,14 +52,23 @@ int main(int argc, char **argv)
     /* HACK: force the theme until lp #1098578 is fixed */
     QIcon::setThemeName("ubuntu-mobile");
 
+    /* Parse the commandline options to see if we've been given a panel to load.
+     * The platform might pass us unknown (to us) options, which we want to just ignore.
+     */
+    opterr = 0; /* disable errors, i.e. allow unknown arguments */
+    while (getopt(argc, argv, "") != -1); /* skip all option arguments */
+
+    if (optind < argc) { /* we have an argument */
+        defaultPlugin = argv[optind];
+    }
+
     QQuickView view;
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
-    view.rootContext()->setContextProperty("defaultPlugin",
-                                           argc > 1 ? argv[1] : "");
+    view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();
 
