@@ -35,8 +35,8 @@ class Diagnostics : public QObject
 public:
     explicit Diagnostics(QObject *parent = 0);
     ~Diagnostics();
-    bool getCanReportCrashes();
     bool canReportCrashes();
+    Q_INVOKABLE void setReportCrashes(bool report);
 
 public Q_SLOTS:
     void slotChanged();

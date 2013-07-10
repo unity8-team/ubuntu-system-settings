@@ -55,7 +55,7 @@ ItemPage {
             DiagnosticsCheckEntry {
                 id: reportCrashesCheck
                 onCheckedChanged: {
-                    /* diagnosticsWidget.setReportCrashes(checked); */
+                    diagnosticsWidget.setReportCrashes(checked);
                     /* Confirm the setting stuck and reflect it in the UI. */
                     if (checked != diagnosticsWidget.canReportCrashes) {
                         checked = !checked;

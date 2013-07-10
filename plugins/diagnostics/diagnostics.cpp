@@ -37,22 +37,6 @@ Diagnostics::Diagnostics(QObject *parent) :
                                   SLOT(slotChanged()));
 }
 
-bool Diagnostics::getCanReportCrashes()
-{
-    QDBusInterface propsInterface (
-                "com.ubuntu.WhoopsiePreferences",
-                "/com/ubuntu/WhoopsiePreferences",
-                "com.ubuntu.WhoopsiePreferences",
-                m_systemBusConnection,
-                this);
-
-    if (propsInterface.isValid()) {
-        return propsInterface.property("ReportCrashes").toBool();
-    }
-
-    return false;
-}
-
 void Diagnostics::slotChanged()
 {
     std::cout << "reportCrashesChanged() from c++" << std::endl;
@@ -62,7 +46,30 @@ void Diagnostics::slotChanged()
 bool Diagnostics::canReportCrashes()
 {
     std::cout << "canReportCrashes() from c++" << std::endl;
-    return getCanReportCrashes();
+    QDBusInterface interface (
+                "com.ubuntu.WhoopsiePreferences",
+                "/com/ubuntu/WhoopsiePreferences",
+                "com.ubuntu.WhoopsiePreferences",
+                m_systemBusConnection,
+                this);
+
+    if (interface.isValid()) {
+        return interface.property("ReportCrashes").toBool();
+    }
+
+    return false;
+}
+void Diagnostics::setReportCrashes(bool report)
+{
+    QDBusInterface interface (
+                "com.ubuntu.WhoopsiePreferences",
+                "/com/ubuntu/WhoopsiePreferences",
+                "com.ubuntu.WhoopsiePreferences",
+                m_systemBusConnection,
+                this);
+    if (interface.isValid()) {
+        interface.call("SetReportCrashes", report);
+    }
 }
 
 Diagnostics::~Diagnostics() {
