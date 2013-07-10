@@ -1,7 +1,7 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-keyboard.svg",
     "name": "Keyboard",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "personal",
     "priority": 5,
     "keywords": [

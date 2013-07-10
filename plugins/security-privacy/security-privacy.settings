@@ -1,7 +1,7 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-security-privacy.svg",
     "name": "Security & Privacy",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "system",
     "priority": 4,
     "keywords": [
