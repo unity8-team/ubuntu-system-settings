@@ -42,8 +42,9 @@ public:
     ~PluginManager();
 
     QStringList categories() const;
-    QList<Plugin *> plugins(const QString &category) const;
+    QMap<QString, Plugin *> plugins(const QString &category) const;
 
+    Q_INVOKABLE QObject *getByName(const QString &name) const;
     Q_INVOKABLE QAbstractItemModel *itemModel(const QString &category);
 
     // reimplemented virtual methods

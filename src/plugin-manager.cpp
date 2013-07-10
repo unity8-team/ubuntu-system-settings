@@ -46,7 +46,7 @@ class PluginManagerPrivate
 
 private:
     mutable PluginManager *q_ptr;
-    QMap<QString,QList<Plugin*> > m_plugins;
+    QMap<QString,QMap<QString, Plugin*> > m_plugins;
     QHash<QString,ItemModel*> m_models;
 };
 
@@ -64,10 +64,10 @@ PluginManagerPrivate::~PluginManagerPrivate()
 
 void PluginManagerPrivate::clear()
 {
-    QMapIterator<QString, QList<Plugin*> > it(m_plugins);
+    QMapIterator<QString, QMap<QString, Plugin*> > it(m_plugins);
     while (it.hasNext()) {
         it.next();
-        Q_FOREACH(Plugin *plugin, it.value()) {
+        Q_FOREACH(Plugin *plugin, it.value().values()) {
             delete plugin;
         }
     }
@@ -83,8 +83,8 @@ void PluginManagerPrivate::reload()
         Plugin *plugin = new Plugin(fileInfo);
         QQmlEngine::setContextForObject(plugin,
                                         QQmlEngine::contextForObject(q));
-        QList<Plugin*> &pluginList = m_plugins[plugin->category()];
-        pluginList.append(plugin);
+        QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];
+        pluginList.insert(fileInfo.baseName(), plugin);
     }
 }
 
@@ -105,7 +105,7 @@ QStringList PluginManager::categories() const
     return d->m_plugins.keys();
 }
 
-QList<Plugin *> PluginManager::plugins(const QString &category) const
+QMap<QString, Plugin *> PluginManager::plugins(const QString &category) const
 {
     Q_D(const PluginManager);
     return d->m_plugins.value(category);
@@ -120,6 +120,18 @@ QAbstractItemModel *PluginManager::itemModel(const QString &category)
         model->setPlugins(plugins(category));
     }
     return model;
+}
+
+QObject *PluginManager::getByName(const QString &name) const
+{
+    Q_D(const PluginManager);
+    QMapIterator<QString, QMap<QString, Plugin *> > plugins(d->m_plugins);
+    while (plugins.hasNext()) {
+        plugins.next();
+        if (plugins.value().contains(name))
+            return plugins.value()[name];
+    }
+    return NULL;
 }
 
 void PluginManager::classBegin()
