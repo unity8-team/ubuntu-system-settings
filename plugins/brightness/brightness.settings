@@ -1,7 +1,7 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-brightness.svg",
     "name": "Brightness",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "system",
     "priority": 1,
     "keywords": [

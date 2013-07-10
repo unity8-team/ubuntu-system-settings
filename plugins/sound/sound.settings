@@ -1,7 +1,7 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-sounds.svg",
     "name": "Sound",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "personal",
     "priority": 1,
     "keywords": [

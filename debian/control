@@ -5,12 +5,12 @@ Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: dbus-test-runner,
                debhelper (>= 9),
                gdb,
+               libandroid-properties-dev,
                pkg-config,
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
                xvfb,
-               libandroid-properties-dev,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
@@ -31,7 +31,9 @@ Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
 Conflicts: ubuntu-system-settings-example
 Description: System Settings application for Ubuntu Touch
- System Settings for Ubuntu Touch.
+ This package contains the System Settings application used on the 
+ Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ devices.
 
 Package: libsystemsettings1
 Section: libs
@@ -39,7 +41,9 @@ Architecture: i386 amd64 armhf
 Depends: ${misc:Depends},
          ${shlibs:Depends},
 Description: System Settings Library for Ubuntu Touch
- System Settings for Ubuntu Touch.
+ This package contains the System Settings application used on the 
+ Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ devices.
 
 Package: libsystemsettings-dev
 Section: libdevel
@@ -48,4 +52,6 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          libsystemsettings1 (= ${binary:Version}),
 Description: System Settings for Ubuntu Touch - development files
- System Settings for Ubuntu Touch.
+ This package contains the System Settings application used on the 
+ Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ devices.

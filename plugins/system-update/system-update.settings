@@ -1,7 +1,7 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-system-update.svg",
     "name": "Updates",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "system",
     "priority": 5,
     "keywords": [

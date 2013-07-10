@@ -2,30 +2,33 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 
 Item {
-    property int barHeight
     property var colors
 
     anchors.horizontalCenter: parent.horizontalCenter
-    width: parent.width*0.9
-    height: barHeight + 2*units.gu(1)
+    height: units.gu(5)
+    width: parent.width - units.gu(4)
 
-    Row {
-        id: spaceRow
-        Rectangle {
-            color: colors[1]
-            height: barHeight
-            width: 50
-        }
-        Rectangle {
-            color: colors[2]
-            height: barHeight
-            width: 30
-        }
-    }
     Rectangle {
+        border.width: 1
         color: colors[0]
-        anchors.left: spaceRow.right
-        anchors.right: parent.right
-        height: barHeight
+        height: units.gu(3)
+        width: parent.width
+
+        Row {
+            anchors.centerIn: parent
+            height: parent.height-2
+            width: parent.width-2
+            Rectangle {
+                color: colors[1]
+                height: parent.height
+                width: 50
+            }
+            Rectangle {
+                color: colors[2]
+                height: parent.height
+                width: 30
+            }
+        }
+
     }
 }

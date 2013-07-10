@@ -1,7 +1,7 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-reset.svg",
     "name": "Reset phone",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "uncategorized-bottom",
     "priority": 1,
     "keywords": [
