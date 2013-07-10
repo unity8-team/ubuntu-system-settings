@@ -15,14 +15,52 @@
  */
 
 import QtQuick 2.0
+import Ubuntu.Components 0.1
 
-UbuntuSwappableImage {
+Item {
+    id: swappableImage
+
+    /* Signals to connect through. See onCompleted of mouseArea for an example */
+    signal clicked
+
+    property string source
+    property string altSource
+
     height: parent.height * 0.4
     width: parent.width * 0.43
+    anchors.margins: units.gu(2)
 
-    anchors {
-        margins: units.gu(2)
+    UbuntuShape {
+        anchors.fill: parent
+        image: ses
+        onEnabledChanged: {
+            /* Swap images */
+            var tmpImage = source
+            source = altSource
+            altSource = tmpImage
+        }
     }
 
-    onEnabledChanged: swapImage()
+    ShaderEffectSource {
+        id: ses
+        sourceItem: xfi
+        width: 1
+        height: 1
+        hideSource: true
+    }
+
+    CrossFadeImage {
+        id: xfi
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectCrop
+        source: swappableImage.source
+        fadeDuration: UbuntuAnimation.SlowDuration
+        visible: false
+    }
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: xfi
+        Component.onCompleted: mouseArea.clicked.connect(swappableImage.clicked)
+    }
 }
