@@ -35,7 +35,6 @@ using namespace SystemSettings;
 
 int main(int argc, char **argv)
 {
-    QString defaultPlugin;
     QGuiApplication app(argc, argv);
 
     /* read environment variables */
@@ -55,6 +54,7 @@ int main(int argc, char **argv)
     /* Parse the commandline options to see if we've been given a panel to load.
      * The platform might pass us unknown (to us) options, which we want to just ignore.
      */
+    QString defaultPlugin;
     opterr = 0; /* disable errors, i.e. allow unknown arguments */
     while (getopt(argc, argv, "") != -1); /* skip all option arguments */
 
