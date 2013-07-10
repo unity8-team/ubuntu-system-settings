@@ -35,7 +35,9 @@ MainView {
             var plugin = pluginManager.getByName(defaultPlugin)
             if (plugin) {
                 // Got a valid plugin name - load it
-                pageStack.push(plugin.pageComponent)
+                var pageComponent = plugin.pageComponent
+                if (pageComponent)
+                    pageStack.push(pageComponent)
             } else {
                 // Invalid plugin passed on the commandline
                 console.log("Plugin " + defaultPlugin + " does not exist. Ignoring.")
