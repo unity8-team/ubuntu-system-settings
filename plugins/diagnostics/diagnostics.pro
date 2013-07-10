@@ -20,7 +20,7 @@ settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
 image.files = settings-diagnostics.svg
-image.path = $${PLUGIN_QML_DIR}/$${TARGET}
+image.path = /usr/share/settings/system/icons
 INSTALLS += image
 
 # C++ bits

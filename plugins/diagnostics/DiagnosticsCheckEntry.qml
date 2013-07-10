@@ -24,7 +24,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ListItem.Base {
     property string textEntry: "";
-    property bool checkStatus: false;
+    property alias checked: checkBox.checked;
 
     Row {
         anchors.top: parent.top
@@ -32,8 +32,8 @@ ListItem.Base {
         spacing: units.gu(2)
 
         CheckBox {
+            id: checkBox
             anchors.verticalCenter: parent.verticalCenter
-            checked: checkStatus
         }
         Label {
             anchors.verticalCenter: parent.verticalCenter

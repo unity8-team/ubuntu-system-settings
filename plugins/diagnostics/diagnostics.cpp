@@ -21,13 +21,14 @@
 #include "diagnostics.h"
 #include <QEvent>
 #include <QDBusReply>
-#include <QDebug>
+#include <iostream>
 #include <unistd.h>
 
 Diagnostics::Diagnostics(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus())
 {
+    std::cout << "created" << std::endl;
     m_systemBusConnection.connect("com.ubuntu.WhoopsiePreferences",
                                   "/com/ubuntu/WhoopsiePreferences",
                                   "org.freedesktop.DBus.Properties",
@@ -54,8 +55,14 @@ bool Diagnostics::getCanReportCrashes()
 
 void Diagnostics::slotChanged()
 {
-    qDebug() << "reportCrashesChanged() from c++";
+    std::cout << "reportCrashesChanged() from c++" << std::endl;
     Q_EMIT reportCrashesChanged();
+}
+
+bool Diagnostics::canReportCrashes()
+{
+    std::cout << "canReportCrashes() from c++" << std::endl;
+    return getCanReportCrashes();
 }
 
 Diagnostics::~Diagnostics() {

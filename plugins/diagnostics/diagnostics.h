@@ -36,6 +36,7 @@ public:
     explicit Diagnostics(QObject *parent = 0);
     ~Diagnostics();
     bool getCanReportCrashes();
+    bool canReportCrashes();
 
 public Q_SLOTS:
     void slotChanged();

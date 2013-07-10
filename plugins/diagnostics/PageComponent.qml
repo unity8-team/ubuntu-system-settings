@@ -32,9 +32,9 @@ ItemPage {
     flickable: scrollWidget
 
     UbuntuDiagnostics {
-        id: diagnosticsThing
+        id: diagnosticsWidget
         function maybeUpdate() {
-            console.log('onReportCrashesChanged()');
+            reportCrashesCheck.checked = diagnosticsWidget.canReportCrashes
         }
         onReportCrashesChanged: maybeUpdate()
     }
@@ -53,7 +53,15 @@ ItemPage {
             }
 
             DiagnosticsCheckEntry {
-                checkStatus: true
+                id: reportCrashesCheck
+                onCheckedChanged: {
+                    /* diagnosticsWidget.setReportCrashes(checked); */
+                    /* Confirm the setting stuck and reflect it in the UI. */
+                    if (checked != diagnosticsWidget.canReportCrashes) {
+                        checked = !checked;
+                    }
+
+                }
                 textEntry: i18n.tr("App crashes and errors")
             }
 
