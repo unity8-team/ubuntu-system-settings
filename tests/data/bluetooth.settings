@@ -3,6 +3,7 @@
     "icon": "bluetooth",
     "translations": "bluez-plugin",
     "category": "network",
+    "priority": 1,
     "keywords": [
         "bluetooth"
     ],

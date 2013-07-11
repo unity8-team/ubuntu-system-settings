@@ -47,7 +47,7 @@ class PluginManagerPrivate
 private:
     mutable PluginManager *q_ptr;
     QMap<QString,QMap<QString, Plugin*> > m_plugins;
-    QHash<QString,ItemModel*> m_models;
+    QHash<QString,ItemModelSortProxy*> m_models;
 };
 
 } // namespace
@@ -114,11 +114,18 @@ QMap<QString, Plugin *> PluginManager::plugins(const QString &category) const
 QAbstractItemModel *PluginManager::itemModel(const QString &category)
 {
     Q_D(PluginManager);
-    ItemModel *&model = d->m_models[category];
+    ItemModelSortProxy *&model = d->m_models[category];
     if (model == 0) {
-        model = new ItemModel(this);
-        model->setPlugins(plugins(category));
+        ItemModel *backing_model = new ItemModel(this);
+        backing_model->setPlugins(plugins(category));
+        /* Return a sorted proxy backed by the real model containing the items */
+        model = new ItemModelSortProxy(this);
+        model->setSourceModel(backing_model);
+        model->setDynamicSortFilter(false);
+        /* we only have one column as this is a QAbstractListModel */
+        model->sort(0);
     }
+
     return model;
 }
 
