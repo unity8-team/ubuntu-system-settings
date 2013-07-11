@@ -32,8 +32,13 @@ Column {
                 Connections {
                     ignoreUnknownSignals: true
                     target: loader.item
-                    onClicked: pageStack.push(model.item.pageComponent,
-                                              { plugin: model.item })
+                    onClicked: {
+                        var pageComponent = model.item.pageComponent
+                        if (pageComponent) {
+                            pageStack.push(model.item.pageComponent,
+                                           { plugin: model.item })
+                        }
+                    }
                 }
             }
         }
