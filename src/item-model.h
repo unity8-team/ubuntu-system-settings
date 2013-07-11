@@ -56,7 +56,7 @@ private:
     Q_DECLARE_PRIVATE(ItemModel)
 };
 
-class ItemModelSortProxy : public QSortFilterProxyModel
+class ItemModelSortProxy: public QSortFilterProxyModel
 {
     Q_OBJECT
 
@@ -64,9 +64,8 @@ public:
     ItemModelSortProxy(QObject *parent = 0);
 
 protected:
-    virtual bool lessThan (
-            const QModelIndex &left,
-            const QModelIndex &right) const;
+    virtual bool lessThan(const QModelIndex &left,
+                          const QModelIndex &right) const;
 };
 
 } // namespace
