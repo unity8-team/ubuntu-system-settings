@@ -149,10 +149,10 @@ bool ItemModelSortProxy::lessThan(const QModelIndex &left,
     QVariant leftData(sourceModel()->data(left, ItemModel::ItemRole));
     QVariant rightData(sourceModel()->data(right, ItemModel::ItemRole));
 
-    if (leftData.canConvert<QObject *>() && rightData.canConvert<QObject *>()) {
-        Plugin *leftPlugin = (Plugin *) leftData.value<QObject *>();
-        Plugin *rightPlugin = (Plugin *) rightData.value<QObject *>();
+    Plugin *leftPlugin = leftData.value<Plugin *>();
+    Plugin *rightPlugin = rightData.value<Plugin *>();
 
+    if (leftPlugin && rightPlugin) {
         int leftPriority = leftPlugin->priority();
         int rightPriority = rightPlugin->priority();
 
