@@ -7,61 +7,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-08 16:18+0200\n"
+"POT-Creation-Date: 2013-07-09 15:58+0200\n"
 "PO-Revision-Date: 2013-07-05 22:47+0000\n"
 "Last-Translator: Purvesh R. Shah. <purveshrshah@gmail.com>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-09 08:17+0000\n"
+"X-Launchpad-Export-Date: 2013-07-11 06:27+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
-#: ../plugins/about/PageComponent.qml:30 ../.build/settings.js:1
+#: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
 msgstr "આ ફોન વિશે"
 
-#: ../plugins/about/PageComponent.qml:73
-msgid "Unknown Model"
-msgstr ""
-
-#: ../plugins/about/PageComponent.qml:80
+#: ../plugins/about/PageComponent.qml:85
 msgid "Serial"
 msgstr "સીરીયલ"
 
-#: ../plugins/about/PageComponent.qml:81
+#: ../plugins/about/PageComponent.qml:86
 msgid "N/A"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:90
+#: ../plugins/about/PageComponent.qml:95
 msgid "Software:"
 msgstr "સોફ્ટવેર:"
 
-#: ../plugins/about/PageComponent.qml:94
+#: ../plugins/about/PageComponent.qml:99
 msgid "OS"
 msgstr "OS"
 
-#: ../plugins/about/PageComponent.qml:99
+#: ../plugins/about/PageComponent.qml:104
 msgid "Last Updated"
 msgstr "છેલ્લું અપડેટેડ"
 
-#: ../plugins/about/PageComponent.qml:111
+#: ../plugins/about/PageComponent.qml:116
 msgid "Check for updates"
 msgstr "અપડેટ્સ માટે તપાસો"
 
-#: ../plugins/about/PageComponent.qml:117 ../plugins/about/Storage.qml:11
+#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Storage.qml:11
 msgid "Storage"
 msgstr "સ્ટોરેજ"
 
-#: ../plugins/about/PageComponent.qml:123
+#: ../plugins/about/PageComponent.qml:128
 msgid "Legal:"
 msgstr "લિગલ"
 
-#: ../plugins/about/PageComponent.qml:127
+#: ../plugins/about/PageComponent.qml:132
 msgid "Software licenses"
 msgstr "સોફ્ટવેર લાઇસન્સીસ"
 
-#: ../plugins/about/PageComponent.qml:132
+#: ../plugins/about/PageComponent.qml:137
 msgid "Regulatory info"
 msgstr "નિયમનકારી માહિતી"
 
@@ -77,19 +73,19 @@ msgstr "Ubuntu દ્વારા વપરાયેલ"
 msgid "Used by apps"
 msgstr "એપ્લિકેશંસ દ્વારા વપરાયેલ"
 
-#: ../plugins/about/Storage.qml:59
+#: ../plugins/about/Storage.qml:90
 msgid "Total storage"
 msgstr "કુલ જગ્યા"
 
-#: ../plugins/about/Storage.qml:94
+#: ../plugins/about/Storage.qml:125
 msgid "By name"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:94
+#: ../plugins/about/Storage.qml:125
 msgid "By size"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:32
+#: ../plugins/background/MainPage.qml:32 ../.build/settings.js:3
 msgid "Background"
 msgstr "બેકગ્રાઉન્ડ"
 
@@ -212,10 +208,6 @@ msgstr "સિસ્ટમ"
 #: ../.build/settings.js:2
 msgid "Accessibility"
 msgstr "સુગમતા"
-
-#: ../.build/settings.js:3
-msgid "Backgrounds"
-msgstr "બેકગ્રાઉન્ડસ"
 
 #: ../.build/settings.js:4
 msgid "Bluetooth"
