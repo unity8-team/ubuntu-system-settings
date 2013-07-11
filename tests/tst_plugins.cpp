@@ -50,9 +50,9 @@ void PluginsTest::testCategory()
     expectedCategories << "phone" << "network";
     QCOMPARE(manager.categories().toSet(), expectedCategories);
 
-    QList<Plugin *> plugins = manager.plugins("phone");
+    QMap<QString, Plugin *> plugins = manager.plugins("phone");
     QCOMPARE(plugins.count(), 1);
-    QCOMPARE(plugins[0]->displayName(), QString("Cellular"));
+    QCOMPARE(plugins.value("cellular")->displayName(), QString("Cellular"));
 
     plugins = manager.plugins("network");
     QCOMPARE(plugins.count(), 2);

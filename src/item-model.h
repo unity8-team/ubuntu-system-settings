@@ -40,7 +40,7 @@ public:
         IconRole = Qt::UserRole + 1,
         ItemRole,
     };
-    void setPlugins(const QList<Plugin *> &plugins);
+    void setPlugins(const QMap<QString, Plugin *> &plugins);
 
     // reimplemented virtual methods
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
