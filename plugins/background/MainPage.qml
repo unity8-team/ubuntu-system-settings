@@ -38,6 +38,8 @@ ItemPage {
             var source = backgroundPanel.backgroundFile
             if (source != "" && source != undefined)
                 testWelcomeImage.source = source
+            else if (testWelcomeImage.source == "")
+                testWelcomeImage.source = testWelcomeImage.fallback
         }
 
         onBackgroundFileChanged: maybeUpdateSource()
