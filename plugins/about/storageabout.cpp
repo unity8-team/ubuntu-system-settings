@@ -39,5 +39,20 @@ QString StorageAbout::serialNumber()
     return m_serialNumber;
 }
 
+QString StorageAbout::vendorString()
+{
+    static char manufacturerBuffer[PROP_NAME_MAX];
+    static char modelBuffer[PROP_NAME_MAX];
+
+    if (m_vendorString.isEmpty() || m_vendorString.isNull())
+    {
+        property_get("ro.product.manufacturer", manufacturerBuffer, "");
+        property_get("ro.product.model", modelBuffer, "");
+        m_vendorString = QString("%1 %2").arg(manufacturerBuffer).arg(modelBuffer);
+    }
+
+    return m_vendorString;
+}
+
 StorageAbout::~StorageAbout() {
 }

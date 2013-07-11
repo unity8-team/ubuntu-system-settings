@@ -75,7 +75,7 @@ ItemPage {
                             topMargin: units.gu(1)
                             top: ubuntuLabel.bottom
                         }
-                        text: deviceInfos.manufacturer() + " " + deviceInfos.model()
+                        text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
                     }
                 }
             }
