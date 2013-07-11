@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.1+13.10.20130711-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * background: Remove custom UbuntuSwappableImage and use
+    CrossFadeImage from the ui-toolkit.
+  * Support passing plugin names directly on the commandline.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 123
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 11 Jul 2013 07:01:47 +0000
+
 ubuntu-system-settings (0.1+13.10.20130710-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

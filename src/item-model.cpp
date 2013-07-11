@@ -35,7 +35,7 @@ class ItemModelPrivate
 
 private:
     QHash<int, QByteArray> m_roleNames;
-    QList<Plugin *> m_plugins;
+    QMap<QString, Plugin *> m_plugins;
     QList<Plugin *> m_visibleItems;
 };
 
@@ -63,12 +63,12 @@ ItemModel::~ItemModel()
     delete d_ptr;
 }
 
-void ItemModel::setPlugins(const QList<Plugin *> &plugins)
+void ItemModel::setPlugins(const QMap<QString, Plugin *> &plugins)
 {
     Q_D(ItemModel);
     beginResetModel();
     d->m_plugins = plugins;
-    Q_FOREACH(Plugin *plugin, d->m_plugins) {
+    Q_FOREACH(Plugin *plugin, d->m_plugins.values()) {
         QObject::connect(plugin, SIGNAL(visibilityChanged()),
                          this, SLOT(onItemVisibilityChanged()));
         if (plugin->isVisible()) {
