@@ -137,3 +137,32 @@ void ItemModel::onItemVisibilityChanged()
         endRemoveRows();
     }
 }
+
+ItemModelSortProxy::ItemModelSortProxy(QObject *parent)
+    : QSortFilterProxyModel(parent)
+{
+}
+
+bool ItemModelSortProxy::lessThan(const QModelIndex &left,
+                                  const QModelIndex &right) const
+{
+    QVariant leftData(sourceModel()->data(left, ItemModel::ItemRole));
+    QVariant rightData(sourceModel()->data(right, ItemModel::ItemRole));
+
+    if (leftData.canConvert<QObject *>() && rightData.canConvert<QObject *>()) {
+        Plugin *leftPlugin = (Plugin *) leftData.value<QObject *>();
+        Plugin *rightPlugin = (Plugin *) rightData.value<QObject *>();
+
+        int leftPriority = leftPlugin->priority();
+        int rightPriority = rightPlugin->priority();
+
+        /* In case two plugins happen to have the same priority, sort them
+           alphabetically */
+        if (leftPriority == rightPriority)
+            return leftPlugin->displayName() < rightPlugin->displayName();
+
+        return leftPriority < rightPriority;
+    }
+
+    return false;
+}
