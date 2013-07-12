@@ -67,8 +67,16 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                id: previousReports
+                property string ident: diagnosticsWidget.getIdentifier()
                 text: i18n.tr("Previous error reports")
-                progression: true
+                progression: previousReports.ident != ""
+                onClicked: {
+                    var base = "https://errors.ubuntu.com/user/"
+                    if (previousReports.progression) {
+                        Qt.openUrlExternally(base + ident)
+                    }
+                }
             }
 
             ListItem.Caption {

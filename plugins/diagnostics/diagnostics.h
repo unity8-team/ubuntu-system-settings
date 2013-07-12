@@ -37,6 +37,7 @@ public:
     ~Diagnostics();
     bool canReportCrashes();
     Q_INVOKABLE void setReportCrashes(bool report);
+    Q_INVOKABLE QString getIdentifier();
 
 public Q_SLOTS:
     void slotChanged();

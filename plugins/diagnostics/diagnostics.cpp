@@ -55,6 +55,23 @@ bool Diagnostics::canReportCrashes()
 
     return false;
 }
+
+QString Diagnostics::getIdentifier()
+{
+    QDBusInterface interface (
+                "com.ubuntu.WhoopsiePreferences",
+                "/com/ubuntu/WhoopsiePreferences",
+                "com.ubuntu.WhoopsiePreferences",
+                m_systemBusConnection,
+                this);
+    QDBusReply<QString> reply = interface.call("GetIdentifier");
+
+    if (reply.isValid()) {
+        return reply.value();
+    }
+    return QString();
+}
+
 void Diagnostics::setReportCrashes(bool report)
 {
     QDBusInterface interface (
