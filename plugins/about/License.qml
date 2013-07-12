@@ -12,7 +12,7 @@ ItemPage {
     flickable: scrollWidget
 
     UbuntuStorageAboutPanel {
-        id: backendInfos
+        id: backendInfo
     }
 
     Flickable {
@@ -23,7 +23,7 @@ ItemPage {
 
         Text {
             id: textId
-            text: backendInfos.licenseInfos(binary)
+            text: backendInfo.licenseInfo(binary)
             width: scrollWidget.width
             wrapMode: Text.WordWrap
         }

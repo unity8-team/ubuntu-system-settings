@@ -46,7 +46,7 @@ public:
     QString serialNumber();
     QString vendorString();
     QStringList licensesList();
-    Q_INVOKABLE QString licenseInfos(const QString &subdir) const;
+    Q_INVOKABLE QString licenseInfo(const QString &subdir) const;
 
 private:
     QString m_serialNumber;

@@ -10,7 +10,7 @@ ItemPage {
     title: i18n.tr("Software licenses")
 
     UbuntuStorageAboutPanel {
-        id: backendInfos
+        id: backendInfo
     }
 
     ListView {
@@ -18,11 +18,11 @@ ItemPage {
         anchors.right: parent.right
         height: parent.height
 
-        model: backendInfos.licensesList
+        model: backendInfo.licensesList
         delegate: ListItem.Standard {
             text: modelData
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("Licenses.qml"), {binary: modelData})
+            onClicked: pageStack.push(Qt.resolvedUrl("License.qml"), {binary: modelData})
         }
 
     }

@@ -67,7 +67,7 @@ QStringList StorageAbout::licensesList()
     return m_licensesList;
 }
 
-QString StorageAbout::licenseInfos(const QString &subdir) const
+QString StorageAbout::licenseInfo(const QString &subdir) const
 {
 
     QString copyright = "/usr/share/doc/" + subdir + "/copyright";

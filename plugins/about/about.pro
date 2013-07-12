@@ -6,7 +6,7 @@ TARGET = about
 
 QML_SOURCES = \
     EntryComponent.qml \
-    Licenses.qml \
+    License.qml \
     PageComponent.qml \
     Software.qml \
     Storage.qml \
