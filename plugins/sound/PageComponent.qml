@@ -26,6 +26,8 @@ import SystemSettings 1.0
 ItemPage {
     id: root
 
+    property bool silentMode: false
+
     title: i18n.tr("Sound")
     flickable: scrollWidget
 
@@ -38,6 +40,36 @@ ItemPage {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
+
+            ListItem.Base {
+                height: itemId.height + units.gu(4)
+                Item {
+                    id: itemId
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.centerIn: parent
+
+                    height: silentIcon.height + silentLabel.height
+                    Icon {
+                        id: silentIcon
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: units.gu(3)
+                        width: height
+                        /* TODO: need a different icon */
+                        name: "speaker-mute"
+                    }
+                    Label {
+                        id: silentLabel
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                            top: silentIcon.bottom
+                        }
+                        text: i18n.tr("The phone is in Silent Mode.")
+                    }
+                }
+                visible: silentMode
+                showDivider: false
+            }
 
             ListItem.Standard {
                 text: i18n.tr("Phone calls:")
