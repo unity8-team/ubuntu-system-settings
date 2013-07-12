@@ -126,6 +126,7 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Software licenses")
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Software.qml"))
             }
 
             ListItem.Standard {
