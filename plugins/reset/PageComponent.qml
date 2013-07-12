@@ -45,16 +45,11 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
-            ListItem.Base {
-                Button {
+            ListItem.SingleControl {
+                control: Button {
                     id: resetLauncherHomeButton
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                        left: parent.left
-                    }
                     text: i18n.tr("Reset launcher & home screen…")
+                    width: parent.width - units.gu(4)
                     onClicked: {
                         buttonActions.source = "ResetLauncherHome.qml"
                         PopupUtils.open(buttonActions.item)
@@ -62,16 +57,12 @@ ItemPage {
                 }
                 showDivider: false
             }
-            // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
-            ListItem.Base {
-                Button {
+
+            ListItem.SingleControl {
+                control: Button {
                     id: resetAllSettingsButton
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                        left: parent.left
-                    }
                     text: i18n.tr("Reset all system settings…")
+                    width: parent.width - units.gu(4)
                     onClicked: {
                         buttonActions.source = "ResetAllSettings.qml"
                         PopupUtils.open(buttonActions.item)
@@ -79,16 +70,12 @@ ItemPage {
                 }
                 showDivider: false
             }
-            // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
-            ListItem.Base {
-                Button {
+
+            ListItem.SingleControl {
+                control: Button {
                     id: eraseEverythingButton
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                        left: parent.left
-                    }
                     text: i18n.tr("Erase & reset everything…")
+                    width: parent.width - units.gu(4)
                     onClicked: {
                         buttonActions.source = "EraseEverything.qml"
                         PopupUtils.open(buttonActions.item)
