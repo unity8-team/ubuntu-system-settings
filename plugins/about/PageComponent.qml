@@ -75,7 +75,7 @@ ItemPage {
                             topMargin: units.gu(1)
                             top: ubuntuLabel.bottom
                         }
-                        text: deviceInfos.manufacturer() + " " + deviceInfos.model()
+                        text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
                     }
                 }
             }
@@ -105,15 +105,10 @@ ItemPage {
                 value: "2013-04-09"              // TODO: read update infos from the device
             }
 
-            // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
-            ListItem.Base {
-                Button {
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                        left: parent.left
-                    }
+            ListItem.SingleControl {
+                control: Button {
                     text: i18n.tr("Check for updates")
+                    width: parent.width - units.gu(4)
                 }
             }
 

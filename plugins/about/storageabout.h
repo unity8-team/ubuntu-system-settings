@@ -32,13 +32,19 @@ class StorageAbout : public QObject
                 READ serialNumber
                 CONSTANT)
 
+    Q_PROPERTY( QString vendorString
+                READ vendorString
+                CONSTANT)
+
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
     QString serialNumber();
+    QString vendorString();
 
 private:
     QString m_serialNumber;
+    QString m_vendorString;
 };
 
 #endif // STORAGEABOUT_H

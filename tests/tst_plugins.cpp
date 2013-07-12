@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "item-model.h"
 #include "plugin-manager.h"
 #include "plugin.h"
 
@@ -38,6 +39,7 @@ public:
 private Q_SLOTS:
     void testCategory();
     void testKeywords();
+    void testSorting();
 };
 
 void PluginsTest::testCategory()
@@ -94,6 +96,26 @@ void PluginsTest::testKeywords()
     expectedKeywords << "wireless" << "wlan" << "wifi" <<
         "one" << "two" << "three";
     QCOMPARE(keywords, expectedKeywords);
+}
+
+void PluginsTest::testSorting()
+{
+    PluginManager manager;
+    manager.classBegin();
+    manager.componentComplete();
+
+    QAbstractItemModel *model(manager.itemModel("network"));
+
+    QVERIFY(model != 0);
+    QCOMPARE(model->rowCount(), 2);
+
+    Plugin *wireless = (Plugin *) model->data(model->index(0, 0),
+                                         ItemModel::ItemRole).value<QObject *>();
+    Plugin *cellular = (Plugin *) model->data(model->index(1, 0),
+                                             ItemModel::ItemRole).value<QObject *>();
+
+    QCOMPARE(wireless->displayName(), QString("Wireless"));
+    QCOMPARE(cellular->displayName(), QString("Bluetooth"));
 }
 
 QTEST_MAIN(PluginsTest);

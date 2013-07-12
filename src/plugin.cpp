@@ -90,8 +90,14 @@ bool PluginPrivate::ensureLoaded() const
     if (m_item != 0) return true;
 
     if (Q_UNLIKELY(m_loader.isLoaded())) return false;
-    QString name = QString("%1/lib%2.so").arg(pluginModuleDir).
-        arg(m_data.value(keyPlugin).toString());
+
+    /* We also get called if there is no pageComponent nor plugin in the
+     * settings file. Just return. */
+    QString plugin = m_data.value(keyPlugin).toString();
+    if (plugin.isEmpty())
+        return false;
+
+    QString name = QString("%1/lib%2.so").arg(pluginModuleDir).arg(plugin);
 
     m_loader.setFileName(name);
     if (Q_UNLIKELY(!m_loader.load())) {
