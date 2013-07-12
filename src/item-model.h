@@ -22,6 +22,7 @@
 #define SYSTEM_SETTINGS_ITEM_MODEL_H
 
 #include <QAbstractListModel>
+#include <QSortFilterProxyModel>
 
 namespace SystemSettings {
 
@@ -53,6 +54,18 @@ private Q_SLOTS:
 private:
     ItemModelPrivate *d_ptr;
     Q_DECLARE_PRIVATE(ItemModel)
+};
+
+class ItemModelSortProxy: public QSortFilterProxyModel
+{
+    Q_OBJECT
+
+public:
+    ItemModelSortProxy(QObject *parent = 0);
+
+protected:
+    virtual bool lessThan(const QModelIndex &left,
+                          const QModelIndex &right) const;
 };
 
 } // namespace
