@@ -101,7 +101,7 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Last Updated")
+                text: i18n.tr("Last updated")
                 value: "2013-04-09"              // TODO: read update infos from the device
             }
 
