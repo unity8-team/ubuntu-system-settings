@@ -67,7 +67,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: previousReports
-                property string ident: diagnosticsWidget.getIdentifier()
+                property string ident: diagnosticsWidget.systemIdentifier()
                 text: i18n.tr("Previous error reports")
                 progression: previousReports.ident != ""
                 onClicked: {

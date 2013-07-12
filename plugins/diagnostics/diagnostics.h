@@ -37,7 +37,7 @@ public:
     ~Diagnostics();
     bool canReportCrashes();
     Q_INVOKABLE void setReportCrashes(bool report);
-    Q_INVOKABLE QString getIdentifier();
+    Q_INVOKABLE QString systemIdentifier();
 
 public Q_SLOTS:
     void slotChanged();
@@ -47,6 +47,8 @@ Q_SIGNALS:
 
 private:
     QDBusConnection m_systemBusConnection;
+    QString m_systemIdentifier;
+    QString getIdentifier();
 };
 
 #endif // DIAGNOSTICS_H

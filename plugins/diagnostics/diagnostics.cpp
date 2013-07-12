@@ -33,6 +33,7 @@ Diagnostics::Diagnostics(QObject *parent) :
                                   "PropertiesChanged",
                                   this,
                                   SLOT(slotChanged()));
+    m_systemIdentifier = getIdentifier();
 }
 
 void Diagnostics::slotChanged()
@@ -84,6 +85,10 @@ void Diagnostics::setReportCrashes(bool report)
     if (interface.isValid()) {
         interface.call("SetReportCrashes", report);
     }
+}
+
+QString Diagnostics::systemIdentifier() {
+    return m_systemIdentifier;
 }
 
 Diagnostics::~Diagnostics() {
