@@ -48,7 +48,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
+            ListItem.Header {
                 text: i18n.tr("Report to Canonical:")
             }
 
@@ -71,7 +71,7 @@ ItemPage {
                 progression: true
             }
 
-            ListItem.Standard {
+            ListItem.Caption {
                 text: i18n.tr("Includes info about what an app was doing when it failed.")
             }
         }
