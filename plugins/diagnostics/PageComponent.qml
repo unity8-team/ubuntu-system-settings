@@ -47,7 +47,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Header {
+            ListItem.Standard {
                 text: i18n.tr("Report to Canonical:")
             }
 
