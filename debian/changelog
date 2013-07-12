@@ -1,3 +1,24 @@
+ubuntu-system-settings (0.1+13.10.20130712-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * Use SingleControl again, the toolkit margin issues have been fixed.
+  * get device informations from libhybris, as a fallback, until
+    qtsystems works on the touch image (it currently tries to read /sys
+    informations that are not available on the device).
+
+  [ Iain Lane ]
+  * Sort plugins according to their priority.
+  * background: Explicitly set the fallback if we get an empty string
+    back from the dbus call.
+  * sound: Allow clicking on the whole ListItem to toggle the CheckBox.
+  * Don't try to load or allow navigation into plugins with no
+    pageComponent.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 131
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 12 Jul 2013 07:01:49 +0000
+
 ubuntu-system-settings (0.1+13.10.20130711-0ubuntu1) saucy; urgency=low
 
   [ Iain Lane ]
