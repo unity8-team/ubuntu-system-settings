@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Iain Lane <iain.lane@canonical.com>
+ * Evan Dandrea <evan.dandrea@canonical.com>
  *
 */
 
