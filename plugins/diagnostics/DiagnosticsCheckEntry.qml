@@ -3,7 +3,8 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
+ * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>,
+ *          Evan Dandrea <evan.dandrea@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published

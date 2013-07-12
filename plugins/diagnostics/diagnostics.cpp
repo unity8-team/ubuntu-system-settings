@@ -21,14 +21,12 @@
 #include "diagnostics.h"
 #include <QEvent>
 #include <QDBusReply>
-#include <iostream>
 #include <unistd.h>
 
 Diagnostics::Diagnostics(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus())
 {
-    std::cout << "created" << std::endl;
     m_systemBusConnection.connect("com.ubuntu.WhoopsiePreferences",
                                   "/com/ubuntu/WhoopsiePreferences",
                                   "org.freedesktop.DBus.Properties",
@@ -39,13 +37,11 @@ Diagnostics::Diagnostics(QObject *parent) :
 
 void Diagnostics::slotChanged()
 {
-    std::cout << "reportCrashesChanged() from c++" << std::endl;
     Q_EMIT reportCrashesChanged();
 }
 
 bool Diagnostics::canReportCrashes()
 {
-    std::cout << "canReportCrashes() from c++" << std::endl;
     QDBusInterface interface (
                 "com.ubuntu.WhoopsiePreferences",
                 "/com/ubuntu/WhoopsiePreferences",
@@ -67,6 +63,7 @@ void Diagnostics::setReportCrashes(bool report)
                 "com.ubuntu.WhoopsiePreferences",
                 m_systemBusConnection,
                 this);
+
     if (interface.isValid()) {
         interface.call("SetReportCrashes", report);
     }
