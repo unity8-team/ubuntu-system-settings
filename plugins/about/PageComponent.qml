@@ -50,31 +50,22 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Base {
-                // This should be treated like a ListItem.Standard, but with 2
-                // rows.  So we'll set the height equal to that of one already
-                // defined multipled by 2.
-                height: storageItem.height * 2
+                height: ubuntuLabel.height + deviceLabel.height + units.gu(6)
 
-                Item {
+                Column {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    height:  storageItem.height
+                    anchors.centerIn: parent
+                    spacing: units.gu(2)
                     Label {
                         id: ubuntuLabel
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter
-                            bottomMargin: units.gu(1)
-                        }
+                        anchors.horizontalCenter: parent.horizontalCenter
                         text: ""
-                        fontSize: "large"
+                        fontSize: "x-large"
                     }
                     Label {
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter
-                            topMargin: units.gu(1)
-                            top: ubuntuLabel.bottom
-                        }
+                        id: deviceLabel
+                        anchors.horizontalCenter: parent.horizontalCenter
                         text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
                     }
                 }
@@ -101,7 +92,7 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Last Updated")
+                text: i18n.tr("Last updated")
                 value: "2013-04-09"              // TODO: read update infos from the device
             }
 
