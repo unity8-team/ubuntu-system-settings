@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-09 15:58+0200\n"
+"POT-Creation-Date: 2013-07-12 16:41+0200\n"
 "PO-Revision-Date: 2013-07-11 15:12+0000\n"
 "Last-Translator: Friedrich <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-12 06:47+0000\n"
+"X-Launchpad-Export-Date: 2013-07-13 06:37+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -38,26 +38,26 @@ msgid "OS"
 msgstr "Betriebssystem"
 
 #: ../plugins/about/PageComponent.qml:104
-msgid "Last Updated"
-msgstr "Letzte Aktualisierung"
+msgid "Last updated"
+msgstr ""
 
-#: ../plugins/about/PageComponent.qml:116
+#: ../plugins/about/PageComponent.qml:110
 msgid "Check for updates"
 msgstr "Nach Aktualisierungen suchen"
 
-#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Storage.qml:11
+#: ../plugins/about/PageComponent.qml:117 ../plugins/about/Storage.qml:11
 msgid "Storage"
 msgstr "Speicher"
 
-#: ../plugins/about/PageComponent.qml:128
+#: ../plugins/about/PageComponent.qml:123
 msgid "Legal:"
 msgstr "Rechtliches:"
 
-#: ../plugins/about/PageComponent.qml:132
+#: ../plugins/about/PageComponent.qml:127 ../plugins/about/Softwares.qml:10
 msgid "Software licenses"
 msgstr "Software-Lizenzen"
 
-#: ../plugins/about/PageComponent.qml:137
+#: ../plugins/about/PageComponent.qml:132
 msgid "Regulatory info"
 msgstr "Rechtliche Info"
 
@@ -89,20 +89,20 @@ msgstr "Nach Größe"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: ../plugins/background/MainPage.qml:62 ../plugins/background/MainPage.qml:74
+#: ../plugins/background/MainPage.qml:64 ../plugins/background/MainPage.qml:76
 msgid "Welcome screen"
 msgstr "Startbildschirm"
 
-#: ../plugins/background/MainPage.qml:87
-#: ../plugins/background/MainPage.qml:102
+#: ../plugins/background/MainPage.qml:89
+#: ../plugins/background/MainPage.qml:104
 msgid "Home screen"
 msgstr "Startseite"
 
-#: ../plugins/background/MainPage.qml:154
+#: ../plugins/background/MainPage.qml:155
 msgid "Same background for both"
 msgstr "Gleicher Hintergrund für beide"
 
-#: ../plugins/background/MainPage.qml:177
+#: ../plugins/background/MainPage.qml:178
 msgid "Different background for each"
 msgstr "Unterschiedlicher Hintergrund für jedes"
 
@@ -189,19 +189,19 @@ msgstr "Alarmklang"
 msgid "Vibrate with alert sound"
 msgstr "Vibrieren mit Alarmklang"
 
-#: ../src/qml/MainWindow.qml:45 ../.build/ubuntu-system-settings.desktop.js:1
+#: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr "Systemeinstellungen"
 
-#: ../src/qml/MainWindow.qml:65
+#: ../src/qml/MainWindow.qml:77
 msgid "Network"
 msgstr "Netzwerk"
 
-#: ../src/qml/MainWindow.qml:70
+#: ../src/qml/MainWindow.qml:82
 msgid "Personal"
 msgstr "Persönliches"
 
-#: ../src/qml/MainWindow.qml:75
+#: ../src/qml/MainWindow.qml:87
 msgid "System"
 msgstr "System"
 

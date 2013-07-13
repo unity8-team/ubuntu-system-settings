@@ -23,7 +23,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ListItem.Base {
-    property string textEntry: "";
+    property string textEntry: ""
     property alias checkStatus: checkBox.checked
 
     Row {
