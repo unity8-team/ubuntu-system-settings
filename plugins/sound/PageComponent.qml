@@ -26,6 +26,8 @@ import SystemSettings 1.0
 ItemPage {
     id: root
 
+    property bool silentMode: false
+
     title: i18n.tr("Sound")
     flickable: scrollWidget
 
@@ -38,6 +40,10 @@ ItemPage {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
+
+            SilentModeWarning {
+                silentMode: false
+            }
 
             ListItem.Standard {
                 text: i18n.tr("Phone calls:")
