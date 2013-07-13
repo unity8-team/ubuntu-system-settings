@@ -1,3 +1,23 @@
+ubuntu-system-settings (0.1+13.10.20130713-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * license: implement the "software licenses" section subpanel The
+    current approch is to list all the packages installing a copyright
+    and build a model from that. When selecting one of them in the list
+    we go to a new page which displays the content of the copyright.
+    That might need some tweaking later to include licences from the
+    container .
+  * about: improve a bit the format of the vendor header.
+  * reset: use singlecontrol items, the margin issue has been resolved.
+  * sound: implement the silent mode warning The UI is there but not
+    plugged to the system yet, you need to manually set the variable to
+    see it. .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 137
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 13 Jul 2013 07:01:47 +0000
+
 ubuntu-system-settings (0.1+13.10.20130712-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
