@@ -63,7 +63,7 @@ ItemPage {
         if (space < 1000)
             return space;
         if (space / 1000 < 1000)
-            return Math.round((space / 1000) * 10) / 10 + " kB";
+            return Math.round(space / 1000) + " kB";
         else if (space/1000/1000 < 1000)
             return Math.round((space / 1000 / 1000) * 10) / 10 + " MB";
         else if (space/1000/1000/1000 < 1000)
