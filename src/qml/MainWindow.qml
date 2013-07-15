@@ -62,7 +62,7 @@ MainView {
                 id: mainFlickable
                 anchors.fill: parent
                 contentHeight: contentItem.childrenRect.height
-                boundsBehavior: Flickable.StopAtBounds
+                boundsBehavior: (contentHeight > mainPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
                 Column {
                     anchors.left: parent.left
