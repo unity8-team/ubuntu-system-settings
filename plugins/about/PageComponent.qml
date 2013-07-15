@@ -78,8 +78,10 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                property string imeiNumber
+                imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
-                value: deviceInfos.imei(0)
+                value: imeiNumber ? imeiNumber : i18n.tr("N/A")
             }
 
             ListItem.Standard {
