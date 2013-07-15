@@ -63,11 +63,11 @@ ItemPage {
         if (space < 1000)
             return space;
         if (space / 1000 < 1000)
-            return Math.round(space / 1000) + " kB";
+            return Math.round(space / 1000) + " " + i18n.tr("kB");
         else if (space/1000/1000 < 1000)
-            return Math.round((space / 1000 / 1000) * 10) / 10 + " MB";
+            return Math.round((space / 1000 / 1000) * 10) / 10 + " " + i18n.tr("MB");
         else if (space/1000/1000/1000 < 1000)
-            return Math.round((space / 1000 / 1000 / 1000) * 10) / 10 + " GB";
+            return Math.round((space / 1000 / 1000 / 1000) * 10) / 10 + " " + i18n.tr("GB");
         return "";
     }
 
