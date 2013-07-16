@@ -46,7 +46,7 @@ Q_SIGNALS:
     void reportCrashesChanged();
 
 private:
-    QDBusConnection m_systemBusConnection;
+    QDBusInterface m_whoopsieInterface;
     QString m_systemIdentifier;
     QString getIdentifier();
 };

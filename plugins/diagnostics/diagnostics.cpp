@@ -25,14 +25,23 @@
 
 Diagnostics::Diagnostics(QObject *parent) :
     QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus())
+    m_whoopsieInterface (
+        "com.ubuntu.WhoopsiePreferences",
+        "/com/ubuntu/WhoopsiePreferences",
+        "com.ubuntu.WhoopsiePreferences",
+        QDBusConnection::systemBus())
 {
-    m_systemBusConnection.connect("com.ubuntu.WhoopsiePreferences",
-                                  "/com/ubuntu/WhoopsiePreferences",
-                                  "org.freedesktop.DBus.Properties",
-                                  "PropertiesChanged",
-                                  this,
-                                  SLOT(slotChanged()));
+    if (!m_whoopsieInterface.isValid()) {
+        return;
+    }
+
+    m_whoopsieInterface.connection().connect(
+        m_whoopsieInterface.service(),
+        m_whoopsieInterface.path(),
+        "org.freedesktop.DBus.Properties",
+        "PropertiesChanged",
+        this,
+        SLOT(slotChanged()));
     m_systemIdentifier = getIdentifier();
 }
 
@@ -43,30 +52,15 @@ void Diagnostics::slotChanged()
 
 bool Diagnostics::canReportCrashes()
 {
-    QDBusInterface interface (
-                "com.ubuntu.WhoopsiePreferences",
-                "/com/ubuntu/WhoopsiePreferences",
-                "com.ubuntu.WhoopsiePreferences",
-                m_systemBusConnection,
-                this);
-
-    if (interface.isValid()) {
-        return interface.property("ReportCrashes").toBool();
+    if (m_whoopsieInterface.isValid()) {
+        return m_whoopsieInterface.property("ReportCrashes").toBool();
     }
-
     return false;
 }
 
 QString Diagnostics::getIdentifier()
 {
-    QDBusInterface interface (
-                "com.ubuntu.WhoopsiePreferences",
-                "/com/ubuntu/WhoopsiePreferences",
-                "com.ubuntu.WhoopsiePreferences",
-                m_systemBusConnection,
-                this);
-    QDBusReply<QString> reply = interface.call("GetIdentifier");
-
+    QDBusReply<QString> reply = m_whoopsieInterface.call("GetIdentifier");
     if (reply.isValid()) {
         return reply.value();
     }
@@ -75,15 +69,8 @@ QString Diagnostics::getIdentifier()
 
 void Diagnostics::setReportCrashes(bool report)
 {
-    QDBusInterface interface (
-                "com.ubuntu.WhoopsiePreferences",
-                "/com/ubuntu/WhoopsiePreferences",
-                "com.ubuntu.WhoopsiePreferences",
-                m_systemBusConnection,
-                this);
-
-    if (interface.isValid()) {
-        interface.call("SetReportCrashes", report);
+    if (m_whoopsieInterface.isValid()) {
+        m_whoopsieInterface.call("SetReportCrashes", report);
     }
 }
 
