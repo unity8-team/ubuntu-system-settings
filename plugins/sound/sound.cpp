@@ -21,7 +21,7 @@
 #include <QDir>
 #include "sound.h"
 #include <unistd.h>
-#include <QtCore/QDebug>
+
 Sound::Sound(QObject *parent) :
     QObject(parent)
 {
