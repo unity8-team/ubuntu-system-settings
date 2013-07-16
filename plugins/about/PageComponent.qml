@@ -43,7 +43,7 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
             anchors.left: parent.left
@@ -78,8 +78,10 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                property string imeiNumber
+                imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
-                value: deviceInfos.imei(0)
+                value: imeiNumber ? imeiNumber : i18n.tr("N/A")
             }
 
             ListItem.Standard {
