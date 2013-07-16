@@ -40,7 +40,7 @@ ItemPage {
 
         ListItem.SingleValue {
             text: i18n.tr("Carrier")
-            value: i18n.tr("Aubergine")
+            value: "Aubergine"
             property bool enabled: chooseCarrier.selectedIndex == 1 // Manually
             progression: enabled
             onClicked: {
