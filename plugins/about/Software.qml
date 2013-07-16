@@ -14,9 +14,7 @@ ItemPage {
     }
 
     ListView {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: parent.height
+        anchors.fill: parent
 
         model: backendInfo.licensesList
         delegate: ListItem.Standard {
