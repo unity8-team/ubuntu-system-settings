@@ -14,9 +14,10 @@ ItemPage {
     }
 
     ListView {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: parent.height
+        id: softwareList
+        anchors.fill: parent
+        maximumFlickVelocity: height * 10
+        flickDeceleration: height * 2
 
         model: backendInfo.licensesList
         delegate: ListItem.Standard {
