@@ -5,9 +5,9 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
-
     id: licensesPage
     title: i18n.tr("Software licenses")
+    flickable: softwareList
 
     UbuntuStorageAboutPanel {
         id: backendInfo
