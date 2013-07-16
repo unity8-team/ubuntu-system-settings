@@ -33,6 +33,7 @@ ItemPage {
         ListItem.ValueSelector {
             id: chooseCarrier
             expanded: true
+            // TODO: There is no way to have a ValueSelector always expanded
             onExpandedChanged: expanded = true
             text: i18n.tr("Choose carrier:")
             values: [i18n.tr("Automatically"), i18n.tr("Manually")]
@@ -62,6 +63,7 @@ ItemPage {
         ListItem.ValueSelector {
             id: dataTypeSelector
             expanded: true
+            // TODO: There is no way to have a ValueSelector always expanded
             onExpandedChanged: expanded = true
             enabled: cellularDataControl.checked
             values: [i18n.tr("2G only (saves battery)"),
