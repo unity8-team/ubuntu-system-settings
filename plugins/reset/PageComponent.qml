@@ -39,7 +39,7 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
             anchors.left: parent.left

@@ -1,4 +1,4 @@
-# Arabic translation for ubuntu-system-settings
+# Chinese (Traditional) translation for ubuntu-system-settings
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the ubuntu-system-settings package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-07-12 16:41+0200\n"
-"PO-Revision-Date: 2013-07-13 11:54+0000\n"
-"Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
-"Language-Team: Arabic <ar@li.org>\n"
+"PO-Revision-Date: 2013-07-13 16:13+0000\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,203 +19,199 @@ msgstr ""
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
-msgstr "عن هذا الهاتف"
+msgstr "關於此手機"
 
 #: ../plugins/about/PageComponent.qml:85
 msgid "Serial"
-msgstr "التسلسل"
+msgstr "序號"
 
 #: ../plugins/about/PageComponent.qml:86
 msgid "N/A"
-msgstr "غير متوفر"
+msgstr "不適用"
 
 #: ../plugins/about/PageComponent.qml:95
 msgid "Software:"
-msgstr "البرنامج:"
+msgstr "軟體："
 
 #: ../plugins/about/PageComponent.qml:99
 msgid "OS"
-msgstr "نظام التشغيل"
+msgstr "作業系統"
 
 #: ../plugins/about/PageComponent.qml:104
 msgid "Last updated"
-msgstr "آخر تحديث"
+msgstr "上次更新"
 
 #: ../plugins/about/PageComponent.qml:110
 msgid "Check for updates"
-msgstr "ابحث عن تحديثات"
+msgstr "檢查有否更新"
 
 #: ../plugins/about/PageComponent.qml:117 ../plugins/about/Storage.qml:11
 msgid "Storage"
-msgstr "التخزين"
+msgstr "儲存空間"
 
 #: ../plugins/about/PageComponent.qml:123
 msgid "Legal:"
-msgstr "القانونية:"
+msgstr "法律資訊："
 
 #: ../plugins/about/PageComponent.qml:127 ../plugins/about/Softwares.qml:10
 msgid "Software licenses"
-msgstr "تراخيص البرمجيات"
+msgstr "軟體授權條款"
 
 #: ../plugins/about/PageComponent.qml:132
 msgid "Regulatory info"
-msgstr "معلومات تنظيمية"
+msgstr "管制資訊"
 
 #: ../plugins/about/Storage.qml:14
 msgid "Free space"
-msgstr "مساحة فارغة"
+msgstr "可用空間"
 
 #: ../plugins/about/Storage.qml:14
 msgid "Used by Ubuntu"
-msgstr "مستخدمة من قبل أبونتو"
+msgstr "Ubuntu 所使用"
 
 #: ../plugins/about/Storage.qml:15
 msgid "Used by apps"
-msgstr "مستخدمة من قبل تطبيقات"
+msgstr "程式所使用"
 
 #: ../plugins/about/Storage.qml:90
 msgid "Total storage"
-msgstr "مساحة التخزين الكلية"
+msgstr "總計儲存空間"
 
 #: ../plugins/about/Storage.qml:125
 msgid "By name"
-msgstr "حسب الاسم"
+msgstr "依名稱"
 
 #: ../plugins/about/Storage.qml:125
 msgid "By size"
-msgstr "حسب الحجم"
+msgstr "依大小"
 
 #: ../plugins/background/MainPage.qml:32 ../.build/settings.js:3
 msgid "Background"
-msgstr "الخلفية"
+msgstr "背景"
 
 #: ../plugins/background/MainPage.qml:64 ../plugins/background/MainPage.qml:76
 msgid "Welcome screen"
-msgstr "شاشة الترحيب"
+msgstr "歡迎畫面"
 
 #: ../plugins/background/MainPage.qml:89
 #: ../plugins/background/MainPage.qml:104
 msgid "Home screen"
-msgstr "الشاشة الرئيسية"
+msgstr "家屋畫面"
 
 #: ../plugins/background/MainPage.qml:155
 msgid "Same background for both"
-msgstr "نفس الخلفية لكلاهما"
+msgstr "兩者使用相同背景"
 
 #: ../plugins/background/MainPage.qml:178
 msgid "Different background for each"
-msgstr "خلفية مختلفة لكل واحدة"
+msgstr "各使用不同背景"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
-msgstr ""
-"جميع المستندات، والألعاب المحفوظة، والإعدادات، وأشياء أخرى عديدة ستحذف "
-"نهائيا من هذا الهاتف."
+msgstr "所有的文件、儲存的遊戲，以及其他項目皆會從此手機中永遠刪除。"
 
 #: ../plugins/reset/EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr "امسح واستعد كل شيء"
+msgstr "抹除並重設每個設定"
 
 #: ../plugins/reset/EraseEverything.qml:35
 #: ../plugins/reset/ResetAllSettings.qml:35
 #: ../plugins/reset/ResetLauncherHome.qml:35
 msgid "Cancel"
-msgstr "ألغِ"
+msgstr "取消"
 
 #: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
 msgid "Reset phone"
-msgstr "أعد ضبط الهاتف"
+msgstr "重設手機"
 
 #: ../plugins/reset/PageComponent.qml:57
 msgid "Reset launcher & home screen…"
-msgstr "أعد ضبط واجهة الهاتف والشاشة الرئيسية..."
+msgstr "重設啟動器與家屋畫面…"
 
 #: ../plugins/reset/PageComponent.qml:74
 msgid "Reset all system settings…"
-msgstr "أعد ضبط جميع إعدادات النظام..."
+msgstr "重設所有系統設定…"
 
 #: ../plugins/reset/PageComponent.qml:91
 msgid "Erase & reset everything…"
-msgstr "امسح وأعد ضبط كل شيء..."
+msgstr "抹除並重設每項設定…"
 
 #: ../plugins/reset/ResetAllSettings.qml:29
 #: ../plugins/reset/ResetLauncherHome.qml:29
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
-msgstr ""
-"جميع محتويات وتخطيطات واجهة الهاتف، والمرشحات في الشاشة الرئيسية ستعاد إلى "
-"الإعدادات الأصلية."
+msgstr "啟動器的內容與版面配置、家屋畫面中的過濾器等，皆會還原至原始設定。"
 
 #: ../plugins/reset/ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr "أعد ضبط جميع إعدادات النظام"
+msgstr "重設所有系統設定"
 
 #: ../plugins/reset/ResetLauncherHome.qml:31
 msgid "Reset launcher & home screen"
-msgstr "أعد ضبط واجهة الهاتف والشاشة الرئيسية"
+msgstr "重設啟動器與家屋畫面"
 
 #: ../plugins/sound/PageComponent.qml:29 ../.build/settings.js:16
 msgid "Sound"
-msgstr "الصوت"
+msgstr "音效"
 
 #: ../plugins/sound/PageComponent.qml:43
 msgid "Phone calls:"
-msgstr "مكالمات الهاتف:"
+msgstr "通話數："
 
 #: ../plugins/sound/PageComponent.qml:47
 msgid "Ringtone"
-msgstr "نغمة الرنين"
+msgstr "鈴聲"
 
 #: ../plugins/sound/PageComponent.qml:54
 msgid "Vibrate when ringing"
-msgstr "اهتزاز عند الرنين"
+msgstr "鈴聲響時發出振動"
 
 #: ../plugins/sound/PageComponent.qml:59 ../plugins/sound/PageComponent.qml:79
 msgid "Vibrate in silent mode"
-msgstr "اهتزاز في الوضع الصامت"
+msgstr "無聲模式下振動"
 
 #: ../plugins/sound/PageComponent.qml:63
 msgid "Alerts:"
-msgstr "المنبهات:"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:67
 msgid "Alert sound"
-msgstr "صوت التنبيه"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:74
 msgid "Vibrate with alert sound"
-msgstr "اهتزاز مع صوت التنبيه"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
-msgstr "إعدادات النظام"
+msgstr "系統設定"
 
 #: ../src/qml/MainWindow.qml:77
 msgid "Network"
-msgstr "الشبكة"
+msgstr "網路"
 
 #: ../src/qml/MainWindow.qml:82
 msgid "Personal"
-msgstr "شخصي"
+msgstr "個人"
 
 #: ../src/qml/MainWindow.qml:87
 msgid "System"
-msgstr "النظام"
+msgstr "系統"
 
 #: ../.build/settings.js:2
 msgid "Accessibility"
-msgstr "الإتاحة"
+msgstr "無障礙輔助"
 
 #: ../.build/settings.js:4
 msgid "Bluetooth"
-msgstr "بلوتوث"
+msgstr "藍牙"
 
 #: ../.build/settings.js:5
 msgid "Brightness"
-msgstr "السطوع"
+msgstr "亮度"
 
 #: ../.build/settings.js:6
 msgid "Cellular"
@@ -223,44 +219,44 @@ msgstr ""
 
 #: ../.build/settings.js:7
 msgid "Example"
-msgstr "مثال"
+msgstr "範例"
 
 #: ../.build/settings.js:8
 msgid "Flight mode"
-msgstr "نمط الطائرة"
+msgstr "飛航模式"
 
 #: ../.build/settings.js:9
 msgid "GPS"
-msgstr "نظام تحديد المواقع (GPS)"
+msgstr "GPS"
 
 #: ../.build/settings.js:10
 msgid "Keyboard"
-msgstr "لوحة المفاتيح"
+msgstr "鍵盤"
 
 #: ../.build/settings.js:11
 msgid "Language"
-msgstr "اللغة"
+msgstr "語言"
 
 #: ../.build/settings.js:12
 msgid "Rotation lock"
-msgstr "قفل الدوران"
+msgstr "旋轉鎖"
 
 #: ../.build/settings.js:13
 msgid "Phone"
-msgstr "الهاتف"
+msgstr "手機"
 
 #: ../.build/settings.js:15
 msgid "Security & Privacy"
-msgstr "الأمن والخصوصية"
+msgstr "安全與隱私"
 
 #: ../.build/settings.js:17
 msgid "Updates"
-msgstr "التحديثات"
+msgstr "更新"
 
 #: ../.build/settings.js:18
 msgid "Time & Date"
-msgstr "الوقت والتاريخ"
+msgstr "時間與日期"
 
 #: ../.build/settings.js:19
 msgid "Wi-Fi"
-msgstr "واي فاي"
+msgstr "Wi-Fi"
