@@ -7,7 +7,6 @@ import Ubuntu.SystemSettings.Sound 1.0
 ItemPage {
     property string title;
 
-    id: licensesPage
     title: title
 
     UbuntuSoundPanel {
