@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.1+13.10.20130716-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * Tweak the flickable behaviour to make the scrolling consistant with
+    the other applications, but still avoid scrolling if there is no
+    need for it See https://launchpad.net/bugs/1201394 for the details.
+    (LP: #1201394)
+  * storage: the design says to use zero decimal for kilobytes values,
+    do that.
+  * storage: translate the units.
+  * about: display N/A when there is no IMEI information.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 143
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 16 Jul 2013 07:01:48 +0000
+
 ubuntu-system-settings (0.1+13.10.20130713-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
