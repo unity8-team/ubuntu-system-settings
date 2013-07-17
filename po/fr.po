@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-12 16:41+0200\n"
+"POT-Creation-Date: 2013-07-16 15:06+0200\n"
 "PO-Revision-Date: 2013-07-12 17:06+0000\n"
 "Last-Translator: ldmpub <ldmpub@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-13 06:37+0000\n"
+"X-Launchpad-Export-Date: 2013-07-17 07:27+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "Language: \n"
 
@@ -22,43 +22,43 @@ msgstr ""
 msgid "About this phone"
 msgstr "À propos de ce téléphone"
 
-#: ../plugins/about/PageComponent.qml:85
+#: ../plugins/about/PageComponent.qml:76
 msgid "Serial"
 msgstr "Numéro de série"
 
-#: ../plugins/about/PageComponent.qml:86
+#: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
 msgid "N/A"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:95
+#: ../plugins/about/PageComponent.qml:88
 msgid "Software:"
 msgstr "Logiciel :"
 
-#: ../plugins/about/PageComponent.qml:99
+#: ../plugins/about/PageComponent.qml:92
 msgid "OS"
 msgstr "Système d'exploitation"
 
-#: ../plugins/about/PageComponent.qml:104
+#: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:110
+#: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
 msgstr "Vérifier l'existence de mises à jour"
 
-#: ../plugins/about/PageComponent.qml:117 ../plugins/about/Storage.qml:11
+#: ../plugins/about/PageComponent.qml:110 ../plugins/about/Storage.qml:11
 msgid "Storage"
 msgstr "Stockage"
 
-#: ../plugins/about/PageComponent.qml:123
+#: ../plugins/about/PageComponent.qml:116
 msgid "Legal:"
 msgstr "Licence :"
 
-#: ../plugins/about/PageComponent.qml:127 ../plugins/about/Softwares.qml:10
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr "Licences du logiciel"
 
-#: ../plugins/about/PageComponent.qml:132
+#: ../plugins/about/PageComponent.qml:126
 msgid "Regulatory info"
 msgstr ""
 
@@ -73,6 +73,18 @@ msgstr "Utilisé par Ubuntu"
 #: ../plugins/about/Storage.qml:15
 msgid "Used by apps"
 msgstr "Utilisé par les applications"
+
+#: ../plugins/about/Storage.qml:66
+msgid "kB"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:68
+msgid "MB"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:70
+msgid "GB"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:90
 msgid "Total storage"
@@ -107,6 +119,55 @@ msgstr "Même arrière-plan pour les deux"
 msgid "Different background for each"
 msgstr "Arrière-plan différent pour chacun"
 
+#: ../plugins/cellular/ChooseCarrier.qml:27
+#: ../plugins/cellular/PageComponent.qml:43
+msgid "Carrier"
+msgstr ""
+
+#: ../plugins/cellular/ChooseCarrier.qml:41
+msgid "Searching"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:27 ../.build/settings.js:6
+msgid "Cellular"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:38
+msgid "Choose carrier:"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:39
+msgid "Automatically"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:39
+msgid "Manually"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:56
+msgid "Cellular data"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:69
+msgid "2G only (saves battery)"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:70
+msgid "2G/3G/4G (faster)"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:74
+msgid "Call roaming"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:82
+msgid "Data roaming"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:113
+msgid "Data usage statistics"
+msgstr ""
+
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
@@ -129,15 +190,15 @@ msgstr "Annuler"
 msgid "Reset phone"
 msgstr "Remise à zero du téléphone"
 
-#: ../plugins/reset/PageComponent.qml:57
+#: ../plugins/reset/PageComponent.qml:51
 msgid "Reset launcher & home screen…"
 msgstr "Réinitialiser le lanceur et la page d'accueil…"
 
-#: ../plugins/reset/PageComponent.qml:74
+#: ../plugins/reset/PageComponent.qml:64
 msgid "Reset all system settings…"
 msgstr "Réinitialiser tous les paramètres du système…"
 
-#: ../plugins/reset/PageComponent.qml:91
+#: ../plugins/reset/PageComponent.qml:77
 msgid "Erase & reset everything…"
 msgstr "Supprimer et tout réinitialiser..."
 
@@ -158,37 +219,41 @@ msgstr "Réinitialiser tous les paramètres du système"
 msgid "Reset launcher & home screen"
 msgstr "Réinitialiser le lanceur et l'écran de bienvenue"
 
-#: ../plugins/sound/PageComponent.qml:29 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Sound"
 msgstr "Son"
 
-#: ../plugins/sound/PageComponent.qml:43
+#: ../plugins/sound/PageComponent.qml:49
 msgid "Phone calls:"
 msgstr "Appels téléphoniques :"
 
-#: ../plugins/sound/PageComponent.qml:47
+#: ../plugins/sound/PageComponent.qml:53
 msgid "Ringtone"
 msgstr "Sonnerie"
 
-#: ../plugins/sound/PageComponent.qml:54
+#: ../plugins/sound/PageComponent.qml:60
 msgid "Vibrate when ringing"
 msgstr "Vibrer pendant la sonnerie"
 
-#: ../plugins/sound/PageComponent.qml:59 ../plugins/sound/PageComponent.qml:79
+#: ../plugins/sound/PageComponent.qml:65 ../plugins/sound/PageComponent.qml:85
 msgid "Vibrate in silent mode"
 msgstr "Vibrer en mode silencieux"
 
-#: ../plugins/sound/PageComponent.qml:63
+#: ../plugins/sound/PageComponent.qml:69
 msgid "Alerts:"
 msgstr "Alertes|nbsp]:"
 
-#: ../plugins/sound/PageComponent.qml:67
+#: ../plugins/sound/PageComponent.qml:73
 msgid "Alert sound"
 msgstr "Son d'alerte"
 
-#: ../plugins/sound/PageComponent.qml:74
+#: ../plugins/sound/PageComponent.qml:80
 msgid "Vibrate with alert sound"
 msgstr "Vibrer pendant l'alerte sonore"
+
+#: ../plugins/sound/SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
@@ -217,10 +282,6 @@ msgstr "Bluetooth"
 #: ../.build/settings.js:5
 msgid "Brightness"
 msgstr "Luminosité"
-
-#: ../.build/settings.js:6
-msgid "Cellular"
-msgstr ""
 
 #: ../.build/settings.js:7
 msgid "Example"
