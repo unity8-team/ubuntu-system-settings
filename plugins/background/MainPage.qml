@@ -48,7 +48,7 @@ ItemPage {
 
     GSettings {
         id: background
-        schema: "org.gnome.desktop.background"
+        schema.id: "org.gnome.desktop.background"
     }
 
     Label {
