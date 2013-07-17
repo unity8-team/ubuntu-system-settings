@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-15 15:56+0200\n"
+"POT-Creation-Date: 2013-07-16 15:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,39 +25,39 @@ msgstr ""
 msgid "Serial"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:77
+#: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
 msgid "N/A"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:86
+#: ../plugins/about/PageComponent.qml:88
 msgid "Software:"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:90
+#: ../plugins/about/PageComponent.qml:92
 msgid "OS"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:95
+#: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:101
+#: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:108 ../plugins/about/Storage.qml:11
+#: ../plugins/about/PageComponent.qml:110 ../plugins/about/Storage.qml:11
 msgid "Storage"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:114
+#: ../plugins/about/PageComponent.qml:116
 msgid "Legal:"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:118 ../plugins/about/Software.qml:10
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:124
+#: ../plugins/about/PageComponent.qml:126
 msgid "Regulatory info"
 msgstr ""
 
@@ -116,6 +116,55 @@ msgstr ""
 
 #: ../plugins/background/MainPage.qml:178
 msgid "Different background for each"
+msgstr ""
+
+#: ../plugins/cellular/ChooseCarrier.qml:27
+#: ../plugins/cellular/PageComponent.qml:43
+msgid "Carrier"
+msgstr ""
+
+#: ../plugins/cellular/ChooseCarrier.qml:41
+msgid "Searching"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:27 ../.build/settings.js:6
+msgid "Cellular"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:38
+msgid "Choose carrier:"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:39
+msgid "Automatically"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:39
+msgid "Manually"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:56
+msgid "Cellular data"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:69
+msgid "2G only (saves battery)"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:70
+msgid "2G/3G/4G (faster)"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:74
+msgid "Call roaming"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:82
+msgid "Data roaming"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:113
+msgid "Data usage statistics"
 msgstr ""
 
 #: ../plugins/reset/EraseEverything.qml:29
@@ -227,10 +276,6 @@ msgstr ""
 
 #: ../.build/settings.js:5
 msgid "Brightness"
-msgstr ""
-
-#: ../.build/settings.js:6
-msgid "Cellular"
 msgstr ""
 
 #: ../.build/settings.js:7

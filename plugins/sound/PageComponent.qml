@@ -53,6 +53,7 @@ ItemPage {
                 text: i18n.tr("Ringtone")
                 value: "Theremin"   // TODO: get sound effect
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone")})
             }
 
             SoundCheckEntry {

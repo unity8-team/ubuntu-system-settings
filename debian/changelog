@@ -1,3 +1,24 @@
+ubuntu-system-settings (0.1+13.10.20130717-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Set the flickable for the ItemPage to properly handle scrolling
+    below the header .
+
+  [ Sebastien Bacher ]
+  * update the translations template since we got new ui elements.
+  * sound: list the installed sound files from a known directory.
+
+  [ Iain Lane ]
+  * Initial implementation of the cellular UI.
+  * Small tweaks to the license page: make scrolling work correctly so
+    it doesn't hide the header & go a bit faster so the large list can
+    be navigated.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 149
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Jul 2013 07:01:38 +0000
+
 ubuntu-system-settings (0.1+13.10.20130716-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
