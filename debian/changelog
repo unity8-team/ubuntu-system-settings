@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.1+13.10.20130717.1-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Updated for the GSettings API break .
+
+  [ Sebastien Bacher ]
+  * sound: display the sounds names in a nicer way.
+
+  [ Iain Lane ]
+  * sound: display the sounds names in a nicer way.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 153
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Jul 2013 16:55:59 +0000
+
 ubuntu-system-settings (0.1+13.10.20130717-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]
