@@ -12,6 +12,8 @@ ItemPage {
     id: soundsPage
     title: title
 
+    flickable: scrollWidget
+
     UbuntuSoundPanel {
         id: backendInfo
         Component.onCompleted:
@@ -26,12 +28,18 @@ ItemPage {
         soundFileNames = sounds
     }
 
-    ListItem.ValueSelector {
-        expanded: true
-        // TODO: There is no way to have a ValueSelector always expanded
-        onExpandedChanged: expanded = true
-        values: soundDisplayNames
-        onSelectedIndexChanged:
-            print(soundFileNames[selectedIndex]) // TODO: write configuration
+    Flickable {
+        id: scrollWidget
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+
+        ListItem.ValueSelector {
+            expanded: true
+            // TODO: There is no way to have a ValueSelector always expanded
+            onExpandedChanged: expanded = true
+            values: soundDisplayNames
+            onSelectedIndexChanged:
+                print(soundFileNames[selectedIndex]) // TODO: write configuration
+        }
     }
 }
