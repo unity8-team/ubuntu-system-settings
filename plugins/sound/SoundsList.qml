@@ -8,11 +8,10 @@ ItemPage {
     property string title
     property variant soundDisplayNames
     property variant soundFileNames
+    property bool silentModeOn: false
 
     id: soundsPage
     title: title
-
-    flickable: scrollWidget
 
     UbuntuSoundPanel {
         id: backendInfo
@@ -28,27 +27,41 @@ ItemPage {
         soundFileNames = sounds
     }
 
+    Column {
+        id: columnId
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        SilentModeWarning {
+            id: silentId
+            silentMode: silentModeOn
+        }
+
+        ListItem.SingleControl {
+            id: listId
+            control: Button {
+                text: i18n.tr("Stop playing")
+                width: parent.width - units.gu(4)
+            }
+            visible: !silentModeOn
+        }
+    }
+
     Flickable {
-        id: scrollWidget
-        anchors.fill: parent
+        width: parent.width
         contentHeight: contentItem.childrenRect.height
+        anchors.top: columnId.bottom
+        anchors.bottom: soundsPage.bottom
+        clip: true
 
-        Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            SilentModeWarning {
-                silentMode: false
-            }
-
-            ListItem.ValueSelector {
-                expanded: true
-                // TODO: There is no way to have a ValueSelector always expanded
-                onExpandedChanged: expanded = true
-                values: soundDisplayNames
-                onSelectedIndexChanged:
-                    print(soundFileNames[selectedIndex]) // TODO: write configuration
-            }
+        ListItem.ValueSelector {
+            id: soundSelector
+            expanded: true
+            // TODO: There is no way to have a ValueSelector always expanded
+            onExpandedChanged: expanded = true
+            values: soundDisplayNames
+            onSelectedIndexChanged:
+                print(soundFileNames[selectedIndex]) // TODO: write configuration
         }
     }
 }

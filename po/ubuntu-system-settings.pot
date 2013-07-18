@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-16 15:06+0200\n"
+"POT-Creation-Date: 2013-07-18 15:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Legal:"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
 msgid "Software licenses"
 msgstr ""
 
@@ -222,32 +222,36 @@ msgstr ""
 msgid "Phone calls:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:53
+#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
 msgid "Ringtone"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:60
+#: ../plugins/sound/PageComponent.qml:61
 msgid "Vibrate when ringing"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:65 ../plugins/sound/PageComponent.qml:85
+#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:86
 msgid "Vibrate in silent mode"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:69
+#: ../plugins/sound/PageComponent.qml:70
 msgid "Alerts:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:74
 msgid "Alert sound"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:80
+#: ../plugins/sound/PageComponent.qml:81
 msgid "Vibrate with alert sound"
 msgstr ""
 
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
+msgstr ""
+
+#: ../plugins/sound/SoundsList.qml:43
+msgid "Stop playing"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1
