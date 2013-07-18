@@ -19,12 +19,24 @@
  */
 
 import QtQuick 2.0
+import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     title: i18n.tr("Cellular")
+
+    NetworkInfo {
+        id: netinfo;
+        monitorNetworkName: true
+        monitorCurrentCellDataTechnology: true
+        onNetworkNameChanged: carrierName = netinfo.networkName(NetworkInfo.GsmMode, 0)
+        onCurrentCellDataTechnologyChanged: netinfo.currentCellDataTechnology(0) == NetworkInfo.UnknownDataTechnology ? false : true
+    }
+
+    property string carrierName: netinfo.networkName(NetworkInfo.GsmMode, 0)
+    property bool cellData: netinfo.currentCellDataTechnology(0) == NetworkInfo.UnknownDataTechnology ? false : true
 
     Column {
         anchors.left: parent.left
@@ -41,7 +53,7 @@ ItemPage {
 
         ListItem.SingleValue {
             text: i18n.tr("Carrier")
-            value: "Aubergine"
+            value: carrierName ? carrierName : i18n.tr("N/A")
             property bool enabled: chooseCarrier.selectedIndex == 1 // Manually
             progression: enabled
             onClicked: {
@@ -56,7 +68,11 @@ ItemPage {
             text: i18n.tr("Cellular data")
             control: Switch {
                 id: cellularDataControl
-                checked: false
+                checked: cellData
+                /* FIXME: This is disabled since it is currently a 
+                 * read-only setting 
+                 */
+                enabled: false
             }
         }
 
@@ -65,9 +81,15 @@ ItemPage {
             expanded: true
             // TODO: There is no way to have a ValueSelector always expanded
             onExpandedChanged: expanded = true
-            enabled: cellularDataControl.checked
+            /* FIXME: This is disabled since it is currently a 
+             * read-only setting 
+             * enabled: cellularDataControl.checked
+             */
+            enabled: false
             values: [i18n.tr("2G only (saves battery)"),
                 i18n.tr("2G/3G/4G (faster)")]
+            selectedIndex: netinfo.EdgeData ? 0 : 1
+            
         }
 
         ListItem.Standard {
