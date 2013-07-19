@@ -22,6 +22,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
+/* TODO: replace once https://bugs.launchpad.net/ubuntu-ui-toolkit/+bug/1197058 is fixed */
 ListItem.Base {
     property string textEntry: ""
     property alias checkStatus: checkBox.checked
