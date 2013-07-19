@@ -37,7 +37,6 @@ ListItem.Standard {
         GSettings {
             id: globalSettings
             schema.id: "com.ubuntu.touch.network"
-            onChanged: console.log(key + " " + value)
         }
     }
 }
