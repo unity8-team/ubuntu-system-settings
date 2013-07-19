@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-16 15:06+0200\n"
+"POT-Creation-Date: 2013-07-18 15:04+0200\n"
 "PO-Revision-Date: 2013-07-05 22:47+0000\n"
 "Last-Translator: Purvesh R. Shah. <purveshrshah@gmail.com>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-17 07:27+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 06:38+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -53,7 +53,7 @@ msgstr "સ્ટોરેજ"
 msgid "Legal:"
 msgstr "લિગલ"
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
 msgid "Software licenses"
 msgstr "સોફ્ટવેર લાઇસન્સીસ"
 
@@ -226,32 +226,36 @@ msgstr "અવાજ"
 msgid "Phone calls:"
 msgstr "ફોન કોલ્સ:"
 
-#: ../plugins/sound/PageComponent.qml:53
+#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
 msgid "Ringtone"
 msgstr "રિંગટોન"
 
-#: ../plugins/sound/PageComponent.qml:60
+#: ../plugins/sound/PageComponent.qml:61
 msgid "Vibrate when ringing"
 msgstr "વાયબ્રેટ જ્યારે રિંગિંગ"
 
-#: ../plugins/sound/PageComponent.qml:65 ../plugins/sound/PageComponent.qml:85
+#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:86
 msgid "Vibrate in silent mode"
 msgstr "શાંત મોડમાં વાયબ્રેટ"
 
-#: ../plugins/sound/PageComponent.qml:69
+#: ../plugins/sound/PageComponent.qml:70
 msgid "Alerts:"
 msgstr "ચેતવણીઓ"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:74
 msgid "Alert sound"
 msgstr "ચેતવણી અવાજ"
 
-#: ../plugins/sound/PageComponent.qml:80
+#: ../plugins/sound/PageComponent.qml:81
 msgid "Vibrate with alert sound"
 msgstr "ચેતવણી અવાજ સાથે વાયબ્રેટ"
 
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
+msgstr ""
+
+#: ../plugins/sound/SoundsList.qml:43
+msgid "Stop playing"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1

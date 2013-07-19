@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-16 15:06+0200\n"
-"PO-Revision-Date: 2013-07-13 08:31+0000\n"
+"POT-Creation-Date: 2013-07-18 15:04+0200\n"
+"PO-Revision-Date: 2013-07-17 10:41+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-17 07:27+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 06:38+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -53,7 +53,7 @@ msgstr "Almacenamiento"
 msgid "Legal:"
 msgstr "Legal:"
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
 msgid "Software licenses"
 msgstr "Licencias de software"
 
@@ -75,15 +75,15 @@ msgstr "Usado por las aplicaciones"
 
 #: ../plugins/about/Storage.qml:66
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 #: ../plugins/about/Storage.qml:68
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: ../plugins/about/Storage.qml:70
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: ../plugins/about/Storage.qml:90
 msgid "Total storage"
@@ -121,11 +121,11 @@ msgstr "Fondo distinto para ambas"
 #: ../plugins/cellular/ChooseCarrier.qml:27
 #: ../plugins/cellular/PageComponent.qml:43
 msgid "Carrier"
-msgstr ""
+msgstr "Operador"
 
 #: ../plugins/cellular/ChooseCarrier.qml:41
 msgid "Searching"
-msgstr ""
+msgstr "Buscando"
 
 #: ../plugins/cellular/PageComponent.qml:27 ../.build/settings.js:6
 msgid "Cellular"
@@ -133,39 +133,39 @@ msgstr "Datos móviles"
 
 #: ../plugins/cellular/PageComponent.qml:38
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Elegir el operador:"
 
 #: ../plugins/cellular/PageComponent.qml:39
 msgid "Automatically"
-msgstr ""
+msgstr "Automáticamente"
 
 #: ../plugins/cellular/PageComponent.qml:39
 msgid "Manually"
-msgstr ""
+msgstr "Manualmente"
 
 #: ../plugins/cellular/PageComponent.qml:56
 msgid "Cellular data"
-msgstr ""
+msgstr "Datos móviles"
 
 #: ../plugins/cellular/PageComponent.qml:69
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Solo 2G (ahorra batería)"
 
 #: ../plugins/cellular/PageComponent.qml:70
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (más rápidas)"
 
 #: ../plugins/cellular/PageComponent.qml:74
 msgid "Call roaming"
-msgstr ""
+msgstr "Itinerancia de llamadas"
 
 #: ../plugins/cellular/PageComponent.qml:82
 msgid "Data roaming"
-msgstr ""
+msgstr "Itinerancia de datos"
 
 #: ../plugins/cellular/PageComponent.qml:113
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Estadísticas de uso de datos"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
@@ -226,32 +226,36 @@ msgstr "Sonido"
 msgid "Phone calls:"
 msgstr "Llamadas telefónicas:"
 
-#: ../plugins/sound/PageComponent.qml:53
+#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
 msgid "Ringtone"
 msgstr "Tono de llamada"
 
-#: ../plugins/sound/PageComponent.qml:60
+#: ../plugins/sound/PageComponent.qml:61
 msgid "Vibrate when ringing"
 msgstr "Vibrar con la llamada"
 
-#: ../plugins/sound/PageComponent.qml:65 ../plugins/sound/PageComponent.qml:85
+#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:86
 msgid "Vibrate in silent mode"
 msgstr "Vibrar en modo silencioso"
 
-#: ../plugins/sound/PageComponent.qml:69
+#: ../plugins/sound/PageComponent.qml:70
 msgid "Alerts:"
 msgstr "Alertas:"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:74
 msgid "Alert sound"
 msgstr "Sonido de alerta"
 
-#: ../plugins/sound/PageComponent.qml:80
+#: ../plugins/sound/PageComponent.qml:81
 msgid "Vibrate with alert sound"
 msgstr "Vibrar al sonar la alerta"
 
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
+msgstr "El teléfono está en modo silencioso."
+
+#: ../plugins/sound/SoundsList.qml:43
+msgid "Stop playing"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1

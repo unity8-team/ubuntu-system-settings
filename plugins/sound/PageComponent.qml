@@ -74,6 +74,7 @@ ItemPage {
                 text: i18n.tr("Alert sound")
                 value: "Uh-oh"   // TODO: get sound effect
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Alert sound")})
             }
 
             SoundCheckEntry {
