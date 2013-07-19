@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtMultimedia 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -8,11 +9,10 @@ ItemPage {
     property string title
     property variant soundDisplayNames
     property variant soundFileNames
+    property bool silentModeOn: false
 
     id: soundsPage
     title: title
-
-    flickable: scrollWidget
 
     UbuntuSoundPanel {
         id: backendInfo
@@ -28,26 +28,49 @@ ItemPage {
         soundFileNames = sounds
     }
 
-    Flickable {
-        id: scrollWidget
-        anchors.fill: parent
-        contentHeight: contentItem.childrenRect.height
+    Audio {
+        id: soundEffect
+    }
 
-        Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+    Column {
+        id: columnId
+        anchors.left: parent.left
+        anchors.right: parent.right
 
-            SilentModeWarning {
-                silentMode: false
+        SilentModeWarning {
+            id: silentId
+            silentMode: silentModeOn
+        }
+
+        ListItem.SingleControl {
+            id: listId
+            control: Button {
+                text: i18n.tr("Stop playing")
+                width: parent.width - units.gu(4)
+                onClicked:
+                    soundEffect.stop()
             }
+            visible: !silentModeOn
+        }
+    }
 
-            ListItem.ValueSelector {
-                expanded: true
-                // TODO: There is no way to have a ValueSelector always expanded
-                onExpandedChanged: expanded = true
-                values: soundDisplayNames
-                onSelectedIndexChanged:
-                    print(soundFileNames[selectedIndex]) // TODO: write configuration
+    Flickable {
+        width: parent.width
+        contentHeight: contentItem.childrenRect.height
+        anchors.top: columnId.bottom
+        anchors.bottom: soundsPage.bottom
+        clip: true
+
+        ListItem.ValueSelector {
+            id: soundSelector
+            expanded: true
+            // TODO: There is no way to have a ValueSelector always expanded
+            onExpandedChanged: expanded = true
+            values: soundDisplayNames
+            onSelectedIndexChanged: {
+                print(soundFileNames[selectedIndex]) // TODO: write configuration
+                soundEffect.source = "/usr/share/sounds/ubuntu/stereo/" + soundFileNames[selectedIndex]
+                soundEffect.play()
             }
         }
     }

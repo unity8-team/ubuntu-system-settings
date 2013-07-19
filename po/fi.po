@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-16 15:06+0200\n"
-"PO-Revision-Date: 2013-07-09 03:58+0000\n"
+"POT-Creation-Date: 2013-07-18 15:04+0200\n"
+"PO-Revision-Date: 2013-07-19 06:03+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-17 07:27+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 06:38+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -39,7 +39,7 @@ msgstr "Käyttöjärjestelmä"
 
 #: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
-msgstr ""
+msgstr "Viimeksi päivitetty"
 
 #: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
@@ -53,7 +53,7 @@ msgstr "Tallennustila"
 msgid "Legal:"
 msgstr "Oikeudellinen huomautus:"
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
 msgid "Software licenses"
 msgstr "Ohjelmistolisenssit"
 
@@ -75,15 +75,15 @@ msgstr "Sovellusten käytössä"
 
 #: ../plugins/about/Storage.qml:66
 msgid "kB"
-msgstr ""
+msgstr "kt"
 
 #: ../plugins/about/Storage.qml:68
 msgid "MB"
-msgstr ""
+msgstr "Mt"
 
 #: ../plugins/about/Storage.qml:70
 msgid "GB"
-msgstr ""
+msgstr "Gt"
 
 #: ../plugins/about/Storage.qml:90
 msgid "Total storage"
@@ -121,11 +121,11 @@ msgstr "Eri tausta kummassakin"
 #: ../plugins/cellular/ChooseCarrier.qml:27
 #: ../plugins/cellular/PageComponent.qml:43
 msgid "Carrier"
-msgstr ""
+msgstr "Operaattori"
 
 #: ../plugins/cellular/ChooseCarrier.qml:41
 msgid "Searching"
-msgstr ""
+msgstr "Etsitään"
 
 #: ../plugins/cellular/PageComponent.qml:27 ../.build/settings.js:6
 msgid "Cellular"
@@ -133,39 +133,39 @@ msgstr "Matkapuhelin"
 
 #: ../plugins/cellular/PageComponent.qml:38
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Valitse operaattori:"
 
 #: ../plugins/cellular/PageComponent.qml:39
 msgid "Automatically"
-msgstr ""
+msgstr "Automaattisesti"
 
 #: ../plugins/cellular/PageComponent.qml:39
 msgid "Manually"
-msgstr ""
+msgstr "Manuaalisesti"
 
 #: ../plugins/cellular/PageComponent.qml:56
 msgid "Cellular data"
-msgstr ""
+msgstr "Mobiilidata"
 
 #: ../plugins/cellular/PageComponent.qml:69
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Vain 2G (säästää akkua)"
 
 #: ../plugins/cellular/PageComponent.qml:70
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (nopeampi)"
 
 #: ../plugins/cellular/PageComponent.qml:74
 msgid "Call roaming"
-msgstr ""
+msgstr "Puheen verkkovierailu"
 
 #: ../plugins/cellular/PageComponent.qml:82
 msgid "Data roaming"
-msgstr ""
+msgstr "Datan verkkovierailu"
 
 #: ../plugins/cellular/PageComponent.qml:113
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Datakäytön tilastot"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
@@ -226,33 +226,37 @@ msgstr "Ääni"
 msgid "Phone calls:"
 msgstr "Puhelut:"
 
-#: ../plugins/sound/PageComponent.qml:53
+#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
 msgid "Ringtone"
 msgstr "Soittoääni"
 
-#: ../plugins/sound/PageComponent.qml:60
+#: ../plugins/sound/PageComponent.qml:61
 msgid "Vibrate when ringing"
 msgstr "Värinä soidessa"
 
-#: ../plugins/sound/PageComponent.qml:65 ../plugins/sound/PageComponent.qml:85
+#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:86
 msgid "Vibrate in silent mode"
 msgstr "Värinä äänettömässä tilassa"
 
-#: ../plugins/sound/PageComponent.qml:69
+#: ../plugins/sound/PageComponent.qml:70
 msgid "Alerts:"
 msgstr "Hälytykset:"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:74
 msgid "Alert sound"
 msgstr "Hälytysääni"
 
-#: ../plugins/sound/PageComponent.qml:80
+#: ../plugins/sound/PageComponent.qml:81
 msgid "Vibrate with alert sound"
 msgstr "Värinä hälytysäänen kera"
 
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "Puhelin on äänettömässä tilassa."
+
+#: ../plugins/sound/SoundsList.qml:43
+msgid "Stop playing"
+msgstr "Lopeta toisto"
 
 #: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
