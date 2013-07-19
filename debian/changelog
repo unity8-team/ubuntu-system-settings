@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.1+13.10.20130719-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Use QtSystemInfo to display Carrier and network data modes in use. .
+
+  [ Sebastien Bacher ]
+  * sound: list the alert sounds.
+  * system: rotate with the device.
+  * sound: list 'stop playing' button, rework a bit the scrolling to
+    keep the button out of it (since it's supposed to always be on
+    screen according to the design document).
+  * sound: implement play/stop for sound effects.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 164
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 19 Jul 2013 07:01:36 +0000
+
 ubuntu-system-settings (0.1+13.10.20130718-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
