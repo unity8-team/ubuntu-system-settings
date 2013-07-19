@@ -34,14 +34,21 @@ LanguagePlugin::languages() const
 {
     if (_languages == NULL)
     {
+        QSet<QString> set = QSet<QString>();
         QList<QLocale> locales = QLocale::matchingLocales(QLocale::AnyLanguage,
                                                           QLocale::AnyScript,
                                                           QLocale::AnyCountry);
 
-        _languages = new QStringList();
-
         for (QList<QLocale>::const_iterator i = locales.begin(); i != locales.end(); ++i)
-            *_languages += i->nativeLanguageName() + " (" + i->nativeCountryName() + ')';
+        {
+            QString name = i->nativeLanguageName().trimmed();
+
+            if (!name.isEmpty())
+                set += name;
+        }
+
+        _languages = new QStringList(set.toList());
+        _languages->sort(Qt::CaseInsensitive);
     }
 
     return *_languages;

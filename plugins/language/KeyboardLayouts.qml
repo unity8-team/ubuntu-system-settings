@@ -21,7 +21,7 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItems
 
 ItemPage {
     id: root
@@ -38,30 +38,34 @@ ItemPage {
         Column {
             anchors.fill: parent
 
-            Standard {
+            ListItems.Standard {
                 text: i18n.tr("Current layouts:")
             }
 
-            CheckItem {
-                text: i18n.tr("English (US)")
-                checked: true
+            /* TODO: Get actual installed layouts. */
+
+            SettingsCheckEntry {
+                textEntry: i18n.tr("English (US)")
+                checkStatus: true
             }
 
-            CheckItem {
-                text: i18n.tr("French")
-                checked: true
+            SettingsCheckEntry {
+                textEntry: i18n.tr("French")
+                checkStatus: true
             }
 
-            Standard {
+            ListItems.Standard {
                 text: i18n.tr("All layouts available:")
             }
 
-            CheckItem {
-                text: i18n.tr("Afghani")
+            /* TODO: Get actual layouts. */
+
+            SettingsCheckEntry {
+                textEntry: i18n.tr("Afghani")
             }
 
-            CheckItem {
-                text: i18n.tr("Akan")
+            SettingsCheckEntry {
+                textEntry: i18n.tr("Akan")
             }
         }
     }

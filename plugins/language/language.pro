@@ -4,11 +4,10 @@ include($${TOP_SRC_DIR}/common-vars.pri)
 TEMPLATE = lib
 TARGET = language
 
-QML_SOURCES = PageComponent.qml   \
-              DisplayLanguage.qml \
+QML_SOURCES = DisplayLanguage.qml \
               KeyboardLayouts.qml \
-              SpellChecking.qml   \
-              CheckItem.qml
+              PageComponent.qml   \
+              SpellChecking.qml
 
 OTHER_FILES += $${QML_SOURCES}
 
@@ -38,8 +37,8 @@ uri = Ubuntu.SystemSettings.LanguagePlugin
 INCLUDEPATH += .
 
 # Input
-HEADERS += plugin.h language-plugin.h
-SOURCES += plugin.cpp language-plugin.cpp
+HEADERS += language-plugin.h plugin.h
+SOURCES += language-plugin.cpp plugin.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)

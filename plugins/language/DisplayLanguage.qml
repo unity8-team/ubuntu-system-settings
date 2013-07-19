@@ -21,7 +21,7 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItems
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -37,6 +37,8 @@ ItemPage {
     ListView {
         id: languageList
 
+        clip: true
+
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -46,7 +48,7 @@ ItemPage {
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         model: plugin.languages
-        delegate: Standard {
+        delegate: ListItems.Standard {
             text: modelData
         }
     }
@@ -54,9 +56,18 @@ ItemPage {
     Rectangle {
         id: buttonRectangle
 
+        height: cancelButton.height + units.gu(2)
+
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+        anchors.leftMargin: -1
+        anchors.rightMargin: -1
+        anchors.bottomMargin: -1
+
+        color: "transparent"
+        border.color: "lightgrey"
+        border.width: 1
 
         Button {
             id: cancelButton
@@ -64,7 +75,10 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            anchors.margins: units.gu(1)
+            anchors.topMargin: units.gu(1)
+            anchors.leftMargin: units.gu(2)
+            anchors.rightMargin: units.gu(1)
+            anchors.bottomMargin: units.gu(1)
 
             text: i18n.tr("Cancel")
             onClicked: pageStack.pop()
@@ -76,7 +90,10 @@ ItemPage {
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.margins: units.gu(1)
+            anchors.topMargin: units.gu(1)
+            anchors.leftMargin: units.gu(1)
+            anchors.rightMargin: units.gu(2)
+            anchors.bottomMargin: units.gu(1)
 
             text: i18n.tr("Confirm")
             onClicked: pageStack.pop()

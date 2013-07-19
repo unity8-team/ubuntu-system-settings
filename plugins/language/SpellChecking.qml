@@ -21,7 +21,7 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItems
 
 ItemPage {
     id: root
@@ -38,34 +38,38 @@ ItemPage {
         Column {
             anchors.fill: parent
 
-            Standard {
+            ListItems.Standard {
                 text: i18n.tr("Spell checking")
                 control: Switch {}
             }
 
-            Divider {}
+            ListItems.Divider {}
 
-            Standard {
+            ListItems.Standard {
                 text: i18n.tr("Current spelling languages:")
             }
 
-            CheckItem {
-                text: i18n.tr("English (US)")
-                checked: true
+            /* TODO: Get real spelling language */
+
+            SettingsCheckEntry {
+                textEntry: i18n.tr("English (US)")
+                checkStatus: true
             }
 
-            Divider {}
+            ListItems.Divider {}
 
-            Standard {
+            ListItems.Standard {
                 text: i18n.tr("All languages available:")
             }
 
-            CheckItem {
-                text: i18n.tr("Afar")
+            /* TODO: Get real available languages */
+
+            SettingsCheckEntry {
+                textEntry: i18n.tr("Afar")
             }
 
-            CheckItem {
-                text: i18n.tr("Afrikaans")
+            SettingsCheckEntry {
+                textEntry: i18n.tr("Afrikaans")
             }
         }
     }
