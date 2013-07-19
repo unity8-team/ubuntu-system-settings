@@ -30,13 +30,16 @@ ListItem.Standard {
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
-        Binding on checked { value: globalSettings.flightMode }
-        // XXX: There's a binding loop here. How do we avoid it?
+        //checked: globalSettings.flightMode
         onCheckedChanged: globalSettings.flightMode = checked
 
         GSettings {
             id: globalSettings
             schema.id: "com.ubuntu.touch.network"
+            onChanged: {
+                if (key == "flightMode")
+                    control.checked = value
+            }
         }
     }
 }
