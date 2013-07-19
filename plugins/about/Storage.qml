@@ -10,11 +10,13 @@ ItemPage {
 
     title: i18n.tr("Storage")
     flickable: scrollWidget
-    property var spaceColors: ["white", UbuntuColors.orange, UbuntuColors.lightAubergine]
-    property var spaceLabels: [i18n.tr("Free space"), i18n.tr("Used by Ubuntu"),
-        i18n.tr("Used by apps")]
-    property var spaceValues: ["31.4 GB", "19.6 GB", "13.0 GB"]
+
     property bool sortByName: true
+    property real diskSpace: storageInfo.totalDiskSpace('/')
+    property variant spaceColors: [UbuntuColors.orange, "red", "blue", "green", "yellow", UbuntuColors.lightAubergine]
+    property variant spaceLabels: [i18n.tr("Used by Ubuntu"), i18n.tr("Movies"), i18n.tr("Audio"),
+                                   i18n.tr("Pictures"), i18n.tr("Other files"), i18n.tr("Used by apps")]
+    property variant spaceValues: [19.6, 6.2, 9.2, 1.5, 4.6, 16.3] // TODO: replace by real values
 
     /* TOFIX: replace by real datas */
     XmlListModel {
@@ -88,35 +90,25 @@ ItemPage {
             ListItem.SingleValue {
                 id: diskItem
                 text: i18n.tr("Total storage")
-                value: storagePage.getFormattedSpace(storageInfo.totalDiskSpace('/'));
+                value: storagePage.getFormattedSpace(diskSpace);
                 showDivider: false
             }
 
-            StorageBar {
-                colors: spaceColors
+            StorageBar {}
+
+            StorageItem {
+                colorName: "white"
+                label: i18n.tr("Free space")
+                value: getFormattedSpace(31.4*1000000000) // TODO: replace by real values
             }
 
             Repeater {
                 model: spaceColors
-                Item {
-                    height: units.gu(3)
-                    width: parent.width-units.gu(4)
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    Row {
-                        spacing: units.gu(1)
 
-                        Rectangle {
-                            width: units.gu(2)
-                            height: units.gu(2)
-                            border.width: units.dp(1)
-                            color: modelData
-                        }
-                        Label { text: spaceLabels[index] }
-                    }
-                    Label {
-                        anchors.right: parent.right
-                        text: spaceValues[index]
-                    }
+                StorageItem {
+                    colorName: modelData
+                    label: spaceLabels[index]
+                    value: getFormattedSpace(spaceValues[index]*1000000000) // TODO: replace by real values
                 }
             }
 

@@ -27,6 +27,7 @@ MainView {
     width: units.gu(48)
     height: units.gu(90)
     applicationName: "SystemSettings"
+    automaticOrientation: true
 
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
