@@ -30,7 +30,7 @@ ListItem.Standard {
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
-        //checked: globalSettings.flightMode
+        checked: globalSettings.flightMode
         onCheckedChanged: globalSettings.flightMode = checked
 
         GSettings {
