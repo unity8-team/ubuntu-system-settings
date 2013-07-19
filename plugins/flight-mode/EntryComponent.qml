@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import GSettings 1.0
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -27,5 +28,16 @@ ListItem.Standard {
     icon: Qt.resolvedUrl(model.icon)
     iconFrame: false
     text: i18n.tr(model.displayName)
-    control: Switch {id: control}
+    control: Switch {
+        id: control
+        Binding on checked { value: globalSettings.flightMode }
+        // XXX: There's a binding loop here. How do we avoid it?
+        onCheckedChanged: globalSettings.flightMode = checked
+
+        GSettings {
+            id: globalSettings
+            schema.id: "com.ubuntu.touch.network"
+            onChanged: console.log(key + " " + value)
+        }
+    }
 }

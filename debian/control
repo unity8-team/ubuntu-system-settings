@@ -23,6 +23,7 @@ Architecture: i386 amd64 armhf
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          gsettings-desktop-schemas,
+         gsettings-ubuntu-touch-schemas,
          qtdeclarative5-qtmultimedia-plugin,
          qtdeclarative5-gsettings1.0 (>=0.0+13.10.20130717),
          qtdeclarative5-systeminfo-plugin,
