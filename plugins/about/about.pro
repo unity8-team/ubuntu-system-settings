@@ -11,6 +11,7 @@ QML_SOURCES = \
     Software.qml \
     Storage.qml \
     StorageBar.qml \
+    StorageItem.qml \
     fakepkgslist.xml
 
 OTHER_FILES += \

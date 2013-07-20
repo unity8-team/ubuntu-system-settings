@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-18 15:04+0200\n"
-"PO-Revision-Date: 2013-07-09 19:58+0000\n"
+"POT-Creation-Date: 2013-07-19 19:40+0200\n"
+"PO-Revision-Date: 2013-07-19 22:35+0000\n"
 "Last-Translator: Tiago Hillebrandt <tiagohillebrandt@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 06:38+0000\n"
+"X-Launchpad-Export-Date: 2013-07-20 06:24+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -26,6 +26,7 @@ msgid "Serial"
 msgstr "Número de série"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
+#: ../plugins/cellular/PageComponent.qml:56
 msgid "N/A"
 msgstr "N/A"
 
@@ -39,7 +40,7 @@ msgstr "SO"
 
 #: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
-msgstr ""
+msgstr "Última atualização"
 
 #: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
@@ -61,39 +62,55 @@ msgstr "Licenças de software"
 msgid "Regulatory info"
 msgstr "Informações regulamentares"
 
-#: ../plugins/about/Storage.qml:14
-msgid "Free space"
-msgstr "Espaço livre"
-
-#: ../plugins/about/Storage.qml:14
+#: ../plugins/about/Storage.qml:17
 msgid "Used by Ubuntu"
 msgstr "Usado pelo Ubuntu"
 
-#: ../plugins/about/Storage.qml:15
+#: ../plugins/about/Storage.qml:17
+msgid "Movies"
+msgstr "Filmes"
+
+#: ../plugins/about/Storage.qml:17
+msgid "Audio"
+msgstr "Áudio"
+
+#: ../plugins/about/Storage.qml:18
+msgid "Pictures"
+msgstr "Figuras"
+
+#: ../plugins/about/Storage.qml:18
+msgid "Other files"
+msgstr "Outros arquivos"
+
+#: ../plugins/about/Storage.qml:18
 msgid "Used by apps"
 msgstr "Usado pelos aplicativos"
 
-#: ../plugins/about/Storage.qml:66
-msgid "kB"
-msgstr ""
-
 #: ../plugins/about/Storage.qml:68
-msgid "MB"
-msgstr ""
+msgid "kB"
+msgstr "kB"
 
 #: ../plugins/about/Storage.qml:70
-msgid "GB"
-msgstr ""
+msgid "MB"
+msgstr "MB"
 
-#: ../plugins/about/Storage.qml:90
+#: ../plugins/about/Storage.qml:72
+msgid "GB"
+msgstr "GB"
+
+#: ../plugins/about/Storage.qml:92
 msgid "Total storage"
 msgstr "Armazenamento total"
 
-#: ../plugins/about/Storage.qml:125
+#: ../plugins/about/Storage.qml:101
+msgid "Free space"
+msgstr "Espaço livre"
+
+#: ../plugins/about/Storage.qml:117
 msgid "By name"
 msgstr "Por nome"
 
-#: ../plugins/about/Storage.qml:125
+#: ../plugins/about/Storage.qml:117
 msgid "By size"
 msgstr "Por tamanho"
 
@@ -119,53 +136,53 @@ msgid "Different background for each"
 msgstr "Diferentes planos de fundo para cada"
 
 #: ../plugins/cellular/ChooseCarrier.qml:27
-#: ../plugins/cellular/PageComponent.qml:43
+#: ../plugins/cellular/PageComponent.qml:55
 msgid "Carrier"
-msgstr ""
+msgstr "Operadora"
 
 #: ../plugins/cellular/ChooseCarrier.qml:41
 msgid "Searching"
-msgstr ""
+msgstr "Pesquisando"
 
-#: ../plugins/cellular/PageComponent.qml:27 ../.build/settings.js:6
+#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:6
 msgid "Cellular"
 msgstr "Celular"
 
-#: ../plugins/cellular/PageComponent.qml:38
+#: ../plugins/cellular/PageComponent.qml:50
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Escolha a operadora:"
 
-#: ../plugins/cellular/PageComponent.qml:39
+#: ../plugins/cellular/PageComponent.qml:51
 msgid "Automatically"
-msgstr ""
+msgstr "Automaticamente"
 
-#: ../plugins/cellular/PageComponent.qml:39
+#: ../plugins/cellular/PageComponent.qml:51
 msgid "Manually"
-msgstr ""
+msgstr "Manualmente"
 
-#: ../plugins/cellular/PageComponent.qml:56
+#: ../plugins/cellular/PageComponent.qml:68
 msgid "Cellular data"
-msgstr ""
+msgstr "Dados do celular"
 
-#: ../plugins/cellular/PageComponent.qml:69
+#: ../plugins/cellular/PageComponent.qml:89
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Somente 2G (economiza bateria)"
 
-#: ../plugins/cellular/PageComponent.qml:70
+#: ../plugins/cellular/PageComponent.qml:90
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (mais rápido)"
 
-#: ../plugins/cellular/PageComponent.qml:74
+#: ../plugins/cellular/PageComponent.qml:96
 msgid "Call roaming"
-msgstr ""
+msgstr "Roaming de chamadas"
 
-#: ../plugins/cellular/PageComponent.qml:82
+#: ../plugins/cellular/PageComponent.qml:104
 msgid "Data roaming"
-msgstr ""
+msgstr "Roaming de dados"
 
-#: ../plugins/cellular/PageComponent.qml:113
+#: ../plugins/cellular/PageComponent.qml:135
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Estatísticas de uso de dados"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
@@ -234,7 +251,7 @@ msgstr "Toque de chamada"
 msgid "Vibrate when ringing"
 msgstr "Vibrar ao tocar"
 
-#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:87
 msgid "Vibrate in silent mode"
 msgstr "Vibrar no modo silencioso"
 
@@ -242,35 +259,35 @@ msgstr "Vibrar no modo silencioso"
 msgid "Alerts:"
 msgstr "Alertas:"
 
-#: ../plugins/sound/PageComponent.qml:74
+#: ../plugins/sound/PageComponent.qml:74 ../plugins/sound/PageComponent.qml:77
 msgid "Alert sound"
 msgstr "Som de alerta"
 
-#: ../plugins/sound/PageComponent.qml:81
+#: ../plugins/sound/PageComponent.qml:82
 msgid "Vibrate with alert sound"
 msgstr "Vibrar com som de alerta"
 
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "O telefone está no Modo silencioso."
 
-#: ../plugins/sound/SoundsList.qml:43
+#: ../plugins/sound/SoundsList.qml:48
 msgid "Stop playing"
-msgstr ""
+msgstr "Parar reprodução"
 
-#: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1
+#: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr "Configurações do sistema"
 
-#: ../src/qml/MainWindow.qml:77
+#: ../src/qml/MainWindow.qml:78
 msgid "Network"
 msgstr "Rede"
 
-#: ../src/qml/MainWindow.qml:82
+#: ../src/qml/MainWindow.qml:83
 msgid "Personal"
 msgstr "Pessoal"
 
-#: ../src/qml/MainWindow.qml:87
+#: ../src/qml/MainWindow.qml:88
 msgid "System"
 msgstr "Sistema"
 

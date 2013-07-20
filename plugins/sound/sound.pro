@@ -7,7 +7,6 @@ TARGET = sound
 QML_SOURCES = \
     PageComponent.qml \
     SilentModeWarning.qml \
-    SoundCheckEntry.qml \
     SoundsList.qml
 
 OTHER_FILES += \
