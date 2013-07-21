@@ -50,7 +50,7 @@ ItemPage {
         id: background
         schema.id: "org.gnome.desktop.background"
         onChanged: {
-            if (name == "pictureUri")
+            if (key == "pictureUri")
                 testHomeImage.source = value
         }
     }
@@ -125,7 +125,14 @@ ItemPage {
 
     Image {
         id: testWelcomeImage
-        property string fallback: "darkeningclockwork.jpg"
+        property string fallback: {
+                // Copying welcome to home; use our fallback
+                if (systemSettingsSettings.backgroundSetLast == "home") {
+                        return "darkeningclockwork.jpg";
+                } else {
+                        return testHomeImage.fallback;
+                }
+        }
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
                                      welcomeImage)
@@ -133,7 +140,14 @@ ItemPage {
 
     Image {
         id: testHomeImage
-        property string fallback: "aeg.jpg"
+        property string fallback: {
+                // Copying welcome to home; use our fallback
+                if (systemSettingsSettings.backgroundSetLast == "welcome") {
+                        return "aeg.jpg";
+                } else {
+                        return testWelcomeImage.fallback
+                }
+        }
         source: background.pictureUri
         visible: false
         onStatusChanged: updateImage(testHomeImage,
