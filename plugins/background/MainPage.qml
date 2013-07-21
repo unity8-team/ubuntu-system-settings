@@ -125,14 +125,7 @@ ItemPage {
 
     Image {
         id: testWelcomeImage
-        property string fallback: {
-                // Copying welcome to home; use our fallback
-                if (systemSettingsSettings.backgroundSetLast == "home") {
-                        return "darkeningclockwork.jpg";
-                } else {
-                        return testHomeImage.fallback;
-                }
-        }
+        property string fallback: "darkeningclockwork.jpg"
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
                                      welcomeImage)
@@ -140,14 +133,7 @@ ItemPage {
 
     Image {
         id: testHomeImage
-        property string fallback: {
-                // Copying welcome to home; use our fallback
-                if (systemSettingsSettings.backgroundSetLast == "welcome") {
-                        return "aeg.jpg";
-                } else {
-                        return testWelcomeImage.fallback
-                }
-        }
+        property string fallback: "aeg.jpg"
         source: background.pictureUri
         visible: false
         onStatusChanged: updateImage(testHomeImage,
