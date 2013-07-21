@@ -42,7 +42,7 @@ Background::Background(QObject *parent) :
         m_objectPath = qObjectPath.value().path();
     }
 
-    m_systemBusConnection.connect("org.freedesktop.Accounts",
+     m_systemBusConnection.connect("org.freedesktop.Accounts",
                                   m_objectPath,
                                   "org.freedesktop.Accounts.User",
                                   "Changed",
@@ -64,6 +64,23 @@ QString Background::getBackgroundFile()
     }
 
     return QString();
+}
+
+void Background::setBackgroundFile(QUrl backgroundFile)
+{
+    if (!backgroundFile.isLocalFile())
+        return;
+
+    QDBusInterface userInterface (
+                "org.freedesktop.Accounts",
+                m_objectPath,
+                "org.freedesktop.Accounts.User",
+                m_systemBusConnection,
+                this);
+
+    QString backgroundFileSave = backgroundFile.path();
+    m_backgroundFile = backgroundFileSave;
+    userInterface.call("SetBackgroundFile", backgroundFileSave);
 }
 
 void Background::slotChanged()

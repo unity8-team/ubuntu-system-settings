@@ -35,11 +35,11 @@ ItemPage {
         id: backgroundPanel
 
         function maybeUpdateSource() {
-            var source = backgroundPanel.backgroundFile
+            var source = backgroundPanel.backgroundFile;
             if (source != "" && source != undefined)
-                testWelcomeImage.source = source
+                testWelcomeImage.source = source;
             else if (testWelcomeImage.source == "")
-                testWelcomeImage.source = testWelcomeImage.fallback
+                testWelcomeImage.source = testWelcomeImage.fallback;
         }
 
         onBackgroundFileChanged: maybeUpdateSource()
@@ -49,6 +49,10 @@ ItemPage {
     GSettings {
         id: background
         schema.id: "org.gnome.desktop.background"
+        onChanged: {
+            if (name == "pictureUri")
+                testHomeImage.source = value
+        }
     }
 
     Label {
@@ -74,6 +78,8 @@ ItemPage {
 
         onClicked: pageStack.push(Utilities.createAlbumPage(
                                       i18n.tr("Welcome screen")))
+
+        onSourceChanged: backgroundPanel.backgroundFile = source
     }
 
     Label {
@@ -102,19 +108,18 @@ ItemPage {
 
         onClicked: pageStack.push(Utilities.createAlbumPage(
                                       i18n.tr("Home screen")))
+
+        onSourceChanged: background.pictureUri = Qt.resolvedUrl(source);
     }
 
     /* We don't have a good way of doing this after passing an invalid image to
        SwappableImage, so test the image is valid /before/ showing it and show a
        fallback if it isn't. */
     function updateImage(testImage, targetImage) {
-        // TODO: Doesn't yet fade when the background is changed, but probably
-        // not a huge issue. Will resolve itself when we switch to the SDK's
-        // CrossFadeImage
         if (testImage.status == Image.Ready) {
-            targetImage.source = testImage.source
+            targetImage.source = testImage.source;
         } else if (testImage.status == Image.Error) {
-            targetImage.source = testImage.fallback
+            targetImage.source = testImage.fallback;
         }
     }
 
@@ -145,6 +150,39 @@ ItemPage {
         }
     }
 
+    function setUpImages() {
+        var mostRecent =
+                systemSettingsSettings.backgroundSetLast == "home" ?
+                    testHomeImage : testWelcomeImage;
+        var leastRecent = mostRecent == testHomeImage ?
+                    testWelcomeImage : testHomeImage;
+
+        if (systemSettingsSettings.backgroundDuplicate) { //same
+            /* save value of least recently changed to restore later */
+            systemSettingsSettings.backgroundPreviouslySetValue =
+                    leastRecent.source;
+            /* copy most recently changed to least recently changed */
+            leastRecent.source = mostRecent.source;
+            homeImage.enabled = false;
+        } else { // different
+            /* restore least recently changd to previous value */
+            leastRecent.source =
+                    systemSettingsSettings.backgroundPreviouslySetValue;
+            homeImage.enabled = true
+        }
+    }
+
+    GSettings {
+        // hahahaha
+        id: systemSettingsSettings
+        schema.id: "com.ubuntu.touch.system-settings"
+        onChanged: {
+            if (key == "backgroundDuplicate") {
+                setUpImages()
+            }
+        }
+    }
+
     ListItem.Standard {
         id: sameBackground
 
@@ -154,19 +192,14 @@ ItemPage {
 
         text: i18n.tr("Same background for both")
 
-        selected: false
+        selected: systemSettingsSettings.backgroundDuplicate
 
         showDivider: false
 
-        // XXX: Ultimately this should all be done by states.
-        // The current implementation is a demo.
         onClicked: {
             if (sameBackground.selected)
                 return
-            homeImage.altSource = welcomeImage.source
-            homeImage.enabled = false
-            differentBackground.selected = false
-            sameBackground.selected = true
+            systemSettingsSettings.backgroundDuplicate = true
         }
     }
 
@@ -177,14 +210,12 @@ ItemPage {
 
         text: i18n.tr("Different background for each")
 
-        selected: true
+        selected: !systemSettingsSettings.backgroundDuplicate
 
         onClicked: {
             if (differentBackground.selected)
                 return
-            homeImage.enabled = true
-            differentBackground.selected = true
-            sameBackground.selected = false
+            systemSettingsSettings.backgroundDuplicate = false
         }
     }
 }

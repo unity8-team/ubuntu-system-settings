@@ -24,18 +24,21 @@
 #include <QDBusInterface>
 #include <QObject>
 #include <QProcess>
+#include <QUrl>
 
 class Background : public QObject
 {
     Q_OBJECT
     Q_PROPERTY( QString backgroundFile
                 READ backgroundFile
+                WRITE setBackgroundFile
                 NOTIFY backgroundFileChanged )
     
 public:
     explicit Background(QObject *parent = 0);
     ~Background();
     QString backgroundFile();
+    void setBackgroundFile(QUrl backgroundFile);
 
 public Q_SLOTS:
     void slotChanged();
