@@ -78,6 +78,9 @@ void Background::setBackgroundFile(QUrl backgroundFile)
                 m_systemBusConnection,
                 this);
 
+    if (!userInterface.isValid())
+        return;
+
     QString backgroundFileSave = backgroundFile.path();
     m_backgroundFile = backgroundFileSave;
     userInterface.call("SetBackgroundFile", backgroundFileSave);
