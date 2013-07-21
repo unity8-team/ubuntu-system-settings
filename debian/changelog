@@ -1,3 +1,24 @@
+ubuntu-system-settings (0.1+13.10.20130720-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * settings: share the "list item with checkbox on the left" widget
+    since it's going to be used in different panels. We need this until
+    https://bugs.launchpad.net/ubuntu-ui-toolkit/+bug/1197058 is fixed
+    in the toolkit (or the design need to change to put those on the
+    right...).
+  * storage: update to reflect the design changes, some code
+    improvements - list the new categories from design (movies, audio,
+    pictures, other files) - create a new widget for the legend items -
+    update the bar widget to use the real values rather than fixed ones
+    (The datas are still mostly faked for the moment though) .
+  * update the translations' template.
+  * really move the custom check item to its new location.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 170
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 20 Jul 2013 07:01:51 +0000
+
 ubuntu-system-settings (0.1+13.10.20130719-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]

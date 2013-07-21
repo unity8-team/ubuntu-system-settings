@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-18 15:04+0200\n"
+"POT-Creation-Date: 2013-07-19 19:40+0200\n"
 "PO-Revision-Date: 2013-07-06 08:08+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 06:38+0000\n"
+"X-Launchpad-Export-Date: 2013-07-20 06:24+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -26,6 +26,7 @@ msgid "Serial"
 msgstr "מס׳ סידורי"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
+#: ../plugins/cellular/PageComponent.qml:56
 msgid "N/A"
 msgstr ""
 
@@ -61,39 +62,55 @@ msgstr "רישיונות התכנה"
 msgid "Regulatory info"
 msgstr "פרטים מנהליים"
 
-#: ../plugins/about/Storage.qml:14
-msgid "Free space"
-msgstr "מקום פנוי"
-
-#: ../plugins/about/Storage.qml:14
+#: ../plugins/about/Storage.qml:17
 msgid "Used by Ubuntu"
 msgstr "בשימוש על ידי אובונטו"
 
-#: ../plugins/about/Storage.qml:15
+#: ../plugins/about/Storage.qml:17
+msgid "Movies"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:17
+msgid "Audio"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:18
+msgid "Pictures"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:18
+msgid "Other files"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:18
 msgid "Used by apps"
 msgstr "בשימוש על ידי יישומים"
 
-#: ../plugins/about/Storage.qml:66
+#: ../plugins/about/Storage.qml:68
 msgid "kB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:68
+#: ../plugins/about/Storage.qml:70
 msgid "MB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:70
+#: ../plugins/about/Storage.qml:72
 msgid "GB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:90
+#: ../plugins/about/Storage.qml:92
 msgid "Total storage"
 msgstr "סך כל שטח האחסון"
 
-#: ../plugins/about/Storage.qml:125
+#: ../plugins/about/Storage.qml:101
+msgid "Free space"
+msgstr "מקום פנוי"
+
+#: ../plugins/about/Storage.qml:117
 msgid "By name"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:125
+#: ../plugins/about/Storage.qml:117
 msgid "By size"
 msgstr ""
 
@@ -119,7 +136,7 @@ msgid "Different background for each"
 msgstr "רקע שונה לכל אחד מהם"
 
 #: ../plugins/cellular/ChooseCarrier.qml:27
-#: ../plugins/cellular/PageComponent.qml:43
+#: ../plugins/cellular/PageComponent.qml:55
 msgid "Carrier"
 msgstr ""
 
@@ -127,43 +144,43 @@ msgstr ""
 msgid "Searching"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:27 ../.build/settings.js:6
+#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:6
 msgid "Cellular"
 msgstr "סלולרי"
 
-#: ../plugins/cellular/PageComponent.qml:38
+#: ../plugins/cellular/PageComponent.qml:50
 msgid "Choose carrier:"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:39
+#: ../plugins/cellular/PageComponent.qml:51
 msgid "Automatically"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:39
+#: ../plugins/cellular/PageComponent.qml:51
 msgid "Manually"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:56
+#: ../plugins/cellular/PageComponent.qml:68
 msgid "Cellular data"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:69
+#: ../plugins/cellular/PageComponent.qml:89
 msgid "2G only (saves battery)"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:70
+#: ../plugins/cellular/PageComponent.qml:90
 msgid "2G/3G/4G (faster)"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:74
+#: ../plugins/cellular/PageComponent.qml:96
 msgid "Call roaming"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:82
+#: ../plugins/cellular/PageComponent.qml:104
 msgid "Data roaming"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:113
+#: ../plugins/cellular/PageComponent.qml:135
 msgid "Data usage statistics"
 msgstr ""
 
@@ -231,7 +248,7 @@ msgstr "צלצול"
 msgid "Vibrate when ringing"
 msgstr "רטט עם הצלצול"
 
-#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:87
 msgid "Vibrate in silent mode"
 msgstr "רטט במצב השתקה"
 
@@ -239,11 +256,11 @@ msgstr "רטט במצב השתקה"
 msgid "Alerts:"
 msgstr "התרעות:"
 
-#: ../plugins/sound/PageComponent.qml:74
+#: ../plugins/sound/PageComponent.qml:74 ../plugins/sound/PageComponent.qml:77
 msgid "Alert sound"
 msgstr "צליל התרעה"
 
-#: ../plugins/sound/PageComponent.qml:81
+#: ../plugins/sound/PageComponent.qml:82
 msgid "Vibrate with alert sound"
 msgstr "רטט עם צליל ההתרעה"
 
@@ -251,23 +268,23 @@ msgstr "רטט עם צליל ההתרעה"
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:43
+#: ../plugins/sound/SoundsList.qml:48
 msgid "Stop playing"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:57 ../.build/ubuntu-system-settings.desktop.js:1
+#: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr "הגדרות מערכת"
 
-#: ../src/qml/MainWindow.qml:77
+#: ../src/qml/MainWindow.qml:78
 msgid "Network"
 msgstr "תקשורת"
 
-#: ../src/qml/MainWindow.qml:82
+#: ../src/qml/MainWindow.qml:83
 msgid "Personal"
 msgstr "אישי"
 
-#: ../src/qml/MainWindow.qml:87
+#: ../src/qml/MainWindow.qml:88
 msgid "System"
 msgstr "מערכת"
 
