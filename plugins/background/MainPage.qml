@@ -173,7 +173,6 @@ ItemPage {
     }
 
     GSettings {
-        // hahahaha
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
