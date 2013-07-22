@@ -99,7 +99,7 @@ ItemPage {
             StorageItem {
                 colorName: "white"
                 label: i18n.tr("Free space")
-                value: getFormattedSpace(31.4*1000000000) // TODO: replace by real values
+                value: getFormattedSpace(storageInfo.availableDiskSpace('/'))
             }
 
             Repeater {
