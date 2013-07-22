@@ -30,6 +30,7 @@ class Diagnostics : public QObject
     Q_OBJECT
     Q_PROPERTY( bool canReportCrashes
                 READ canReportCrashes
+                WRITE setReportCrashes
                 NOTIFY reportCrashesChanged )
     
 public:
