@@ -43,7 +43,7 @@ public:
 
 public Q_SLOTS:
     void slotChanged();
-    void createInterface(const QString& serviceName, const QString& oldOwner, const QString& newOwner);
+    void createInterface(const QString&, const QString&, const QString& newOwner);
 
 Q_SIGNALS:
     void reportCrashesChanged();

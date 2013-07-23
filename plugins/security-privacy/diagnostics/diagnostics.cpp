@@ -39,7 +39,7 @@ Diagnostics::Diagnostics(QObject *parent) :
     createInterface("", "", "");
 }
 
-void Diagnostics::createInterface(const QString& serviceName, const QString& oldOwner, const QString& newOwner)
+void Diagnostics::createInterface(const QString&, const QString&, const QString& newOwner)
 {
     if (!m_whoopsieInterface.isValid()) {
         return;
@@ -85,9 +85,7 @@ QString Diagnostics::getIdentifier()
 
 void Diagnostics::setReportCrashes(bool report)
 {
-    if (m_whoopsieInterface.isValid()) {
-        m_whoopsieInterface.call("SetReportCrashes", report);
-    }
+    m_whoopsieInterface.call("SetReportCrashes", report);
 }
 
 QString Diagnostics::systemIdentifier() {
