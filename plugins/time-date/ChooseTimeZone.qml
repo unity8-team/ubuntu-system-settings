@@ -37,7 +37,9 @@ ItemPage {
         model: timeDatePanel.allCities
         delegate: ListItem.Standard {
             text: modelData
-            onClicked: console.log(timeDatePanel.getTimeZoneForCity(modelData))
+            onClicked:
+                timeDatePanel.timeZone =
+                    timeDatePanel.getTimeZoneForCity(modelData)
         }
     }
 }
