@@ -7,11 +7,7 @@ Build-Depends: dbus-test-runner,
                gdb,
                libandroid-properties-dev,
                libglib2.0-dev,
-# We don't use these two directly, but libtimezonemap1-dev Requires it - this
-# is a bug there that will be fixed soon.
-               libjson-glib-dev,
-               libgtk-3-dev,
-               libtimezonemap1-dev,
+               libtimezonemap1-dev (>= 0.4.0.1),
                pkg-config,
                qt5-default,
                qtbase5-dev,
