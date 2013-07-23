@@ -19,9 +19,8 @@
 */
 
 #include "timedate.h"
-#include <QDebug>
-#include <QEvent>
 #include <QDBusReply>
+#include <QEvent>
 #include <unistd.h>
 
 TimeDate::TimeDate(QObject *parent) :

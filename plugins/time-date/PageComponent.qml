@@ -27,7 +27,23 @@ import Ubuntu.SystemSettings.TimeDate 1.0
 ItemPage {
     title: i18n.tr("Time & Date")
 
-    UbuntuTimeDatePanel { id: timeDatePanel }
+    function getUTCOffset() {
+        // We get the difference in minutes between UTC and our TZ (UTC - TZ)
+        // but we want it in hours between our TZ and UTC (TZ - UTC), so divide
+        // by -60 to invert and convert to hours.
+        var offset = new Date().getTimezoneOffset() / -60
+        var plus = offset >= 0 ? "+" : ""
+        return "UTC" + plus + offset
+    }
+
+    UbuntuTimeDatePanel {
+        id: timeDatePanel
+        onTimeZoneChanged: {
+            // Inform the JS engine that the TZ has been updated
+            Date.timeZoneUpdated()
+            timeZone.value = getUTCOffset()
+        }
+    }
 
     Column {
         anchors.fill: parent
@@ -35,12 +51,10 @@ ItemPage {
         ListItem.Standard { text: i18n.tr ("Time zone:") }
 
         ListItem.SingleValue {
-            text: timeDatePanel.timeZone
-            value: {
-                var offset = new Date().getTimezoneOffset() / -60
-                var plus = offset >= 0 ? "+" : ""
-                return "UTC" + plus + offset
-            }
+            id: timeZone
+            //e.g. America/New_York -> America/New York
+            text: timeDatePanel.timeZone.replace("_", " ")
+            value: getUTCOffset()
             progression: true
         }
 
