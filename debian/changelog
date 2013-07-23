@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.1+13.10.20130723-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * storage: get the real disk's free space information.
+
+  [ Iain Lane ]
+  * Add a GSettings schema for system-settings to store its own state.
+    Make background use this and set keys as appropriate.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 174
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 23 Jul 2013 07:01:51 +0000
+
 ubuntu-system-settings (0.1+13.10.20130720-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
