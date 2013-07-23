@@ -70,7 +70,6 @@ ItemPage {
                 wrapMode: Text.WordWrap
             }
             showDivider: false
-            visible: !callDiversionSwitch.checked
         }
     }
 }
