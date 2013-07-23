@@ -31,10 +31,9 @@ ItemPage {
     Timer {
         id: callDiversionTimer
         interval: 3000
-        running: false
+        running: true
         onTriggered: canCheckDiversion = false
     }
-    Component.onCompleted: callDiversionTimer.start()
 
     Switch {
         id: callDiversionSwitch

@@ -30,9 +30,8 @@ ItemPage {
     Timer {
         id: callWaitingTimer
         interval: 3000
-        running: false
+        running: true
     }
-    Component.onCompleted: callWaitingTimer.start()
 
     Switch {
         id: callWaitingSwitch
