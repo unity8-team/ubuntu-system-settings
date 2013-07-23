@@ -20,7 +20,11 @@
 
 #include "timedate.h"
 #include <QDBusReply>
+#include <QDebug>
 #include <QEvent>
+#include <glib.h>
+#include <glib-object.h>
+#include <timezonemap/tz.h>
 #include <unistd.h>
 
 TimeDate::TimeDate(QObject *parent) :
@@ -42,6 +46,8 @@ TimeDate::TimeDate(QObject *parent) :
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
+
+    m_cityMap = buildCityMap();
 
 }
 
@@ -78,6 +84,50 @@ void TimeDate::slotChanged(QString UNUSED interface,
 void TimeDate::setTimeZone(QString &time_zone)
 {
     m_timeDateInterface.call("SetTimezone", time_zone, false);
+}
+
+const QStringList TimeDate::getCities()
+{
+    if (m_cityMap.isEmpty())
+        m_cityMap = buildCityMap();
+
+    return m_cityMap.keys();
+}
+
+const QString TimeDate::getTimeZoneForCity(const QString city)
+{
+    if (m_cityMap.isEmpty())
+        m_cityMap = buildCityMap();
+
+    return m_cityMap.value(city);
+}
+
+QMap<QString, QString> TimeDate::buildCityMap() {
+    TzDB *tzdb = tz_load_db();
+    GPtrArray *tz_locations = tz_get_locations(tzdb);
+
+    QMap<QString, QString> output;
+    CcTimezoneLocation *tmp;
+
+    for (guint i = 0; i < tz_locations->len; ++i) {
+        tmp = (CcTimezoneLocation *) g_ptr_array_index(tz_locations, i);
+        gchar *en_name, *country, *zone;
+        g_object_get (tmp, "en_name", &en_name,
+                           "country", &country,
+                           "zone", &zone,
+                           NULL);
+        QString name_country = QString("%1, %2").arg(en_name).arg(country);
+        output[name_country] = zone;
+        g_free (en_name);
+        g_free (country);
+        g_free (zone);
+    }
+
+    g_ptr_array_free (tz_locations, TRUE);
+
+    output.remove("");
+
+    return output;
 }
 
 TimeDate::~TimeDate() {

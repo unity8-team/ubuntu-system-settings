@@ -5,6 +5,7 @@ TEMPLATE = lib
 TARGET = time-date
 
 QML_SOURCES = \
+    ChooseTimeZone.qml \
     PageComponent.qml
 
 OTHER_FILES += \
@@ -25,7 +26,9 @@ INSTALLS += image
 # C++ bits
 TARGET = UbuntuTimeDatePanel
 QT += qml quick dbus
-CONFIG += qt plugin no_keywords
+CONFIG += qt plugin no_keywords link_pkgconfig
+
+PKGCONFIG += timezonemap
 
 #comment in the following line to enable traces
 #DEFINES += QT_NO_DEBUG_OUTPUT

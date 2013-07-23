@@ -32,25 +32,33 @@ class TimeDate : public QObject
                 READ timeZone
                 WRITE setTimeZone
                 NOTIFY timeZoneChanged )
-    
+    Q_PROPERTY(QStringList allCities
+               READ getCities
+               NOTIFY citiesChanged)
+
 public:
     explicit TimeDate(QObject *parent = 0);
     ~TimeDate();
     void setTimeZone (QString &time_zone);
     QString timeZone();
+    const QStringList getCities();
+    Q_INVOKABLE const QString getTimeZoneForCity(const QString city);
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
 
 Q_SIGNALS:
     void timeZoneChanged();
+    void citiesChanged();
 
 private:
     QString m_currentTimeZone;
     QDBusConnection m_systemBusConnection;
     QDBusInterface m_timeDateInterface;
+    QMap<QString, QString> m_cityMap;
     QString m_objectPath;
     QString getTimeZone();
+    QMap<QString, QString> buildCityMap();
 
 };
 
