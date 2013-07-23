@@ -46,8 +46,8 @@ class PluginManagerPrivate
 
 private:
     mutable PluginManager *q_ptr;
-    QMap<QString,QList<Plugin*> > m_plugins;
-    QHash<QString,ItemModel*> m_models;
+    QMap<QString,QMap<QString, Plugin*> > m_plugins;
+    QHash<QString,ItemModelSortProxy*> m_models;
 };
 
 } // namespace
@@ -64,10 +64,10 @@ PluginManagerPrivate::~PluginManagerPrivate()
 
 void PluginManagerPrivate::clear()
 {
-    QMapIterator<QString, QList<Plugin*> > it(m_plugins);
+    QMapIterator<QString, QMap<QString, Plugin*> > it(m_plugins);
     while (it.hasNext()) {
         it.next();
-        Q_FOREACH(Plugin *plugin, it.value()) {
+        Q_FOREACH(Plugin *plugin, it.value().values()) {
             delete plugin;
         }
     }
@@ -83,8 +83,8 @@ void PluginManagerPrivate::reload()
         Plugin *plugin = new Plugin(fileInfo);
         QQmlEngine::setContextForObject(plugin,
                                         QQmlEngine::contextForObject(q));
-        QList<Plugin*> &pluginList = m_plugins[plugin->category()];
-        pluginList.append(plugin);
+        QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];
+        pluginList.insert(fileInfo.baseName(), plugin);
     }
 }
 
@@ -105,7 +105,7 @@ QStringList PluginManager::categories() const
     return d->m_plugins.keys();
 }
 
-QList<Plugin *> PluginManager::plugins(const QString &category) const
+QMap<QString, Plugin *> PluginManager::plugins(const QString &category) const
 {
     Q_D(const PluginManager);
     return d->m_plugins.value(category);
@@ -114,12 +114,31 @@ QList<Plugin *> PluginManager::plugins(const QString &category) const
 QAbstractItemModel *PluginManager::itemModel(const QString &category)
 {
     Q_D(PluginManager);
-    ItemModel *&model = d->m_models[category];
+    ItemModelSortProxy *&model = d->m_models[category];
     if (model == 0) {
-        model = new ItemModel(this);
-        model->setPlugins(plugins(category));
+        ItemModel *backing_model = new ItemModel(this);
+        backing_model->setPlugins(plugins(category));
+        /* Return a sorted proxy backed by the real model containing the items */
+        model = new ItemModelSortProxy(this);
+        model->setSourceModel(backing_model);
+        model->setDynamicSortFilter(false);
+        /* we only have one column as this is a QAbstractListModel */
+        model->sort(0);
     }
+
     return model;
+}
+
+QObject *PluginManager::getByName(const QString &name) const
+{
+    Q_D(const PluginManager);
+    QMapIterator<QString, QMap<QString, Plugin *> > plugins(d->m_plugins);
+    while (plugins.hasNext()) {
+        plugins.next();
+        if (plugins.value().contains(name))
+            return plugins.value()[name];
+    }
+    return NULL;
 }
 
 void PluginManager::classBegin()

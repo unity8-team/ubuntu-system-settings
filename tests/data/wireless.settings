@@ -3,6 +3,7 @@
     "icon": "nm-device-wireless",
     "translations": "wireless-plugin",
     "category": "network",
+    "priority": 0,
     "keywords": [
         "wireless",
         "wlan",

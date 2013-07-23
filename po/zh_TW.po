@@ -1,0 +1,344 @@
+# Chinese (Traditional) translation for ubuntu-system-settings
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the ubuntu-system-settings package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-system-settings\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-07-19 19:40+0200\n"
+"PO-Revision-Date: 2013-07-13 16:13+0000\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-07-20 06:24+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
+
+#: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
+msgid "About this phone"
+msgstr "關於此手機"
+
+#: ../plugins/about/PageComponent.qml:76
+msgid "Serial"
+msgstr "序號"
+
+#: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
+#: ../plugins/cellular/PageComponent.qml:56
+msgid "N/A"
+msgstr "不適用"
+
+#: ../plugins/about/PageComponent.qml:88
+msgid "Software:"
+msgstr "軟體："
+
+#: ../plugins/about/PageComponent.qml:92
+msgid "OS"
+msgstr "作業系統"
+
+#: ../plugins/about/PageComponent.qml:97
+msgid "Last updated"
+msgstr "上次更新"
+
+#: ../plugins/about/PageComponent.qml:103
+msgid "Check for updates"
+msgstr "檢查有否更新"
+
+#: ../plugins/about/PageComponent.qml:110 ../plugins/about/Storage.qml:11
+msgid "Storage"
+msgstr "儲存空間"
+
+#: ../plugins/about/PageComponent.qml:116
+msgid "Legal:"
+msgstr "法律資訊："
+
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
+msgid "Software licenses"
+msgstr "軟體授權條款"
+
+#: ../plugins/about/PageComponent.qml:126
+msgid "Regulatory info"
+msgstr "管制資訊"
+
+#: ../plugins/about/Storage.qml:17
+msgid "Used by Ubuntu"
+msgstr "Ubuntu 所使用"
+
+#: ../plugins/about/Storage.qml:17
+msgid "Movies"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:17
+msgid "Audio"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:18
+msgid "Pictures"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:18
+msgid "Other files"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:18
+msgid "Used by apps"
+msgstr "程式所使用"
+
+#: ../plugins/about/Storage.qml:68
+msgid "kB"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:70
+msgid "MB"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:72
+msgid "GB"
+msgstr ""
+
+#: ../plugins/about/Storage.qml:92
+msgid "Total storage"
+msgstr "總計儲存空間"
+
+#: ../plugins/about/Storage.qml:101
+msgid "Free space"
+msgstr "可用空間"
+
+#: ../plugins/about/Storage.qml:117
+msgid "By name"
+msgstr "依名稱"
+
+#: ../plugins/about/Storage.qml:117
+msgid "By size"
+msgstr "依大小"
+
+#: ../plugins/background/MainPage.qml:32 ../.build/settings.js:3
+msgid "Background"
+msgstr "背景"
+
+#: ../plugins/background/MainPage.qml:64 ../plugins/background/MainPage.qml:76
+msgid "Welcome screen"
+msgstr "歡迎畫面"
+
+#: ../plugins/background/MainPage.qml:89
+#: ../plugins/background/MainPage.qml:104
+msgid "Home screen"
+msgstr "家屋畫面"
+
+#: ../plugins/background/MainPage.qml:155
+msgid "Same background for both"
+msgstr "兩者使用相同背景"
+
+#: ../plugins/background/MainPage.qml:178
+msgid "Different background for each"
+msgstr "各使用不同背景"
+
+#: ../plugins/cellular/ChooseCarrier.qml:27
+#: ../plugins/cellular/PageComponent.qml:55
+msgid "Carrier"
+msgstr ""
+
+#: ../plugins/cellular/ChooseCarrier.qml:41
+msgid "Searching"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:6
+msgid "Cellular"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:50
+msgid "Choose carrier:"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:51
+msgid "Automatically"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:51
+msgid "Manually"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:68
+msgid "Cellular data"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:89
+msgid "2G only (saves battery)"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:90
+msgid "2G/3G/4G (faster)"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:96
+msgid "Call roaming"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:104
+msgid "Data roaming"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:135
+msgid "Data usage statistics"
+msgstr ""
+
+#: ../plugins/reset/EraseEverything.qml:29
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr "所有的文件、儲存的遊戲，以及其他項目皆會從此手機中永遠刪除。"
+
+#: ../plugins/reset/EraseEverything.qml:31
+msgid "Erase & reset everything"
+msgstr "抹除並重設每個設定"
+
+#: ../plugins/reset/EraseEverything.qml:35
+#: ../plugins/reset/ResetAllSettings.qml:35
+#: ../plugins/reset/ResetLauncherHome.qml:35
+msgid "Cancel"
+msgstr "取消"
+
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+msgid "Reset phone"
+msgstr "重設手機"
+
+#: ../plugins/reset/PageComponent.qml:51
+msgid "Reset launcher & home screen…"
+msgstr "重設啟動器與家屋畫面…"
+
+#: ../plugins/reset/PageComponent.qml:64
+msgid "Reset all system settings…"
+msgstr "重設所有系統設定…"
+
+#: ../plugins/reset/PageComponent.qml:77
+msgid "Erase & reset everything…"
+msgstr "抹除並重設每項設定…"
+
+#: ../plugins/reset/ResetAllSettings.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr "啟動器的內容與版面配置、家屋畫面中的過濾器等，皆會還原至原始設定。"
+
+#: ../plugins/reset/ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "重設所有系統設定"
+
+#: ../plugins/reset/ResetLauncherHome.qml:31
+msgid "Reset launcher & home screen"
+msgstr "重設啟動器與家屋畫面"
+
+#: ../plugins/sound/PageComponent.qml:31 ../.build/settings.js:16
+msgid "Sound"
+msgstr "音效"
+
+#: ../plugins/sound/PageComponent.qml:49
+msgid "Phone calls:"
+msgstr "通話數："
+
+#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
+msgid "Ringtone"
+msgstr "鈴聲"
+
+#: ../plugins/sound/PageComponent.qml:61
+msgid "Vibrate when ringing"
+msgstr "鈴聲響時發出振動"
+
+#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:87
+msgid "Vibrate in silent mode"
+msgstr "無聲模式下振動"
+
+#: ../plugins/sound/PageComponent.qml:70
+msgid "Alerts:"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:74 ../plugins/sound/PageComponent.qml:77
+msgid "Alert sound"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:82
+msgid "Vibrate with alert sound"
+msgstr ""
+
+#: ../plugins/sound/SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr ""
+
+#: ../plugins/sound/SoundsList.qml:48
+msgid "Stop playing"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
+msgid "System Settings"
+msgstr "系統設定"
+
+#: ../src/qml/MainWindow.qml:78
+msgid "Network"
+msgstr "網路"
+
+#: ../src/qml/MainWindow.qml:83
+msgid "Personal"
+msgstr "個人"
+
+#: ../src/qml/MainWindow.qml:88
+msgid "System"
+msgstr "系統"
+
+#: ../.build/settings.js:2
+msgid "Accessibility"
+msgstr "無障礙輔助"
+
+#: ../.build/settings.js:4
+msgid "Bluetooth"
+msgstr "藍牙"
+
+#: ../.build/settings.js:5
+msgid "Brightness"
+msgstr "亮度"
+
+#: ../.build/settings.js:7
+msgid "Example"
+msgstr "範例"
+
+#: ../.build/settings.js:8
+msgid "Flight mode"
+msgstr "飛航模式"
+
+#: ../.build/settings.js:9
+msgid "GPS"
+msgstr "GPS"
+
+#: ../.build/settings.js:10
+msgid "Keyboard"
+msgstr "鍵盤"
+
+#: ../.build/settings.js:11
+msgid "Language"
+msgstr "語言"
+
+#: ../.build/settings.js:12
+msgid "Rotation lock"
+msgstr "旋轉鎖"
+
+#: ../.build/settings.js:13
+msgid "Phone"
+msgstr "手機"
+
+#: ../.build/settings.js:15
+msgid "Security & Privacy"
+msgstr "安全與隱私"
+
+#: ../.build/settings.js:17
+msgid "Updates"
+msgstr "更新"
+
+#: ../.build/settings.js:18
+msgid "Time & Date"
+msgstr "時間與日期"
+
+#: ../.build/settings.js:19
+msgid "Wi-Fi"
+msgstr "Wi-Fi"

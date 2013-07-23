@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
+ * Contact: Iain Lane <iain.lane@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -19,25 +19,25 @@
  */
 
 import QtQuick 2.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
 
-ListItem.Base {
-    property string textEntry: "";
-    property bool checkStatus: false;
 
-    Row {
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        spacing: units.gu(2)
+ItemPage {
+    title: i18n.tr("Carrier")
 
-        CheckBox {
-            anchors.verticalCenter: parent.verticalCenter
-            checked: checkStatus
+    ActivityIndicator {
+        id: activityIndicator
+        anchors.centerIn: parent
+        running: true
+    }
+
+    Text {
+        anchors {
+            top: activityIndicator.bottom
+            topMargin: units.gu(2)
+            horizontalCenter: activityIndicator.horizontalCenter
         }
-        Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text: textEntry
-        }
+        text: i18n.tr("Searching")
     }
 }

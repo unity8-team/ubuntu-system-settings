@@ -43,39 +43,30 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
 
             ListItem.Base {
-                // This should be treated like a ListItem.Standard, but with 2
-                // rows.  So we'll set the height equal to that of one already
-                // defined multipled by 2.
-                height: storageItem.height * 2
+                height: ubuntuLabel.height + deviceLabel.height + units.gu(6)
 
-                Item {
+                Column {
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    height:  storageItem.height
+                    anchors.centerIn: parent
+                    spacing: units.gu(2)
                     Label {
                         id: ubuntuLabel
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter
-                            bottomMargin: units.gu(1)
-                        }
+                        anchors.horizontalCenter: parent.horizontalCenter
                         text: ""
-                        fontSize: "large"
+                        fontSize: "x-large"
                     }
                     Label {
-                        anchors {
-                            horizontalCenter: parent.horizontalCenter
-                            topMargin: units.gu(1)
-                            top: ubuntuLabel.bottom
-                        }
-                        text: deviceInfos.manufacturer() + " " + deviceInfos.model()
+                        id: deviceLabel
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
                     }
                 }
             }
@@ -87,8 +78,10 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                property string imeiNumber
+                imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
-                value: deviceInfos.imei(0)
+                value: imeiNumber ? imeiNumber : i18n.tr("N/A")
             }
 
             ListItem.Standard {
@@ -101,19 +94,14 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Last Updated")
+                text: i18n.tr("Last updated")
                 value: "2013-04-09"              // TODO: read update infos from the device
             }
 
-            // TOFIX: use ListItem.SingleControl when lp #1194844 is fixed
-            ListItem.Base {
-                Button {
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                        left: parent.left
-                    }
+            ListItem.SingleControl {
+                control: Button {
                     text: i18n.tr("Check for updates")
+                    width: parent.width - units.gu(4)
                 }
             }
 
@@ -131,6 +119,7 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Software licenses")
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Software.qml"))
             }
 
             ListItem.Standard {

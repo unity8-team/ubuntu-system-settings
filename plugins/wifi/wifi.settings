@@ -1,7 +1,7 @@
 {
     "icon": "/usr/share/settings/system/icons/settings-wifi.svg",
     "name": "Wi-Fi",
-    "translations": "system-settings",
+    "translations": "ubuntu-system-settings",
     "category": "network",
     "priority": 0,
     "keywords": [

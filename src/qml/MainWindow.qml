@@ -27,10 +27,23 @@ MainView {
     width: units.gu(48)
     height: units.gu(90)
     applicationName: "SystemSettings"
+    automaticOrientation: true
 
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
         pageStack.push(mainPage)
+        if (defaultPlugin) {
+            var plugin = pluginManager.getByName(defaultPlugin)
+            if (plugin) {
+                // Got a valid plugin name - load it
+                var pageComponent = plugin.pageComponent
+                if (pageComponent)
+                    pageStack.push(pageComponent, { plugin: plugin })
+            } else {
+                // Invalid plugin passed on the commandline
+                console.log("Plugin " + defaultPlugin + " does not exist. Ignoring.")
+            }
+        }
     }
 
     PluginManager {
@@ -50,7 +63,7 @@ MainView {
                 id: mainFlickable
                 anchors.fill: parent
                 contentHeight: contentItem.childrenRect.height
-                boundsBehavior: Flickable.StopAtBounds
+                boundsBehavior: (contentHeight > mainPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
                 Column {
                     anchors.left: parent.left

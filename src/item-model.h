@@ -22,6 +22,7 @@
 #define SYSTEM_SETTINGS_ITEM_MODEL_H
 
 #include <QAbstractListModel>
+#include <QSortFilterProxyModel>
 
 namespace SystemSettings {
 
@@ -40,7 +41,7 @@ public:
         IconRole = Qt::UserRole + 1,
         ItemRole,
     };
-    void setPlugins(const QList<Plugin *> &plugins);
+    void setPlugins(const QMap<QString, Plugin *> &plugins);
 
     // reimplemented virtual methods
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -53,6 +54,18 @@ private Q_SLOTS:
 private:
     ItemModelPrivate *d_ptr;
     Q_DECLARE_PRIVATE(ItemModel)
+};
+
+class ItemModelSortProxy: public QSortFilterProxyModel
+{
+    Q_OBJECT
+
+public:
+    ItemModelSortProxy(QObject *parent = 0);
+
+protected:
+    virtual bool lessThan(const QModelIndex &left,
+                          const QModelIndex &right) const;
 };
 
 } // namespace

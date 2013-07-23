@@ -6,9 +6,12 @@ TARGET = about
 
 QML_SOURCES = \
     EntryComponent.qml \
+    License.qml \
     PageComponent.qml \
+    Software.qml \
     Storage.qml \
     StorageBar.qml \
+    StorageItem.qml \
     fakepkgslist.xml
 
 OTHER_FILES += \

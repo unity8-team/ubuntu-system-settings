@@ -35,7 +35,7 @@ class ItemModelPrivate
 
 private:
     QHash<int, QByteArray> m_roleNames;
-    QList<Plugin *> m_plugins;
+    QMap<QString, Plugin *> m_plugins;
     QList<Plugin *> m_visibleItems;
 };
 
@@ -63,12 +63,12 @@ ItemModel::~ItemModel()
     delete d_ptr;
 }
 
-void ItemModel::setPlugins(const QList<Plugin *> &plugins)
+void ItemModel::setPlugins(const QMap<QString, Plugin *> &plugins)
 {
     Q_D(ItemModel);
     beginResetModel();
     d->m_plugins = plugins;
-    Q_FOREACH(Plugin *plugin, d->m_plugins) {
+    Q_FOREACH(Plugin *plugin, d->m_plugins.values()) {
         QObject::connect(plugin, SIGNAL(visibilityChanged()),
                          this, SLOT(onItemVisibilityChanged()));
         if (plugin->isVisible()) {
@@ -136,4 +136,33 @@ void ItemModel::onItemVisibilityChanged()
         d->m_visibleItems.removeAt(index);
         endRemoveRows();
     }
+}
+
+ItemModelSortProxy::ItemModelSortProxy(QObject *parent)
+    : QSortFilterProxyModel(parent)
+{
+}
+
+bool ItemModelSortProxy::lessThan(const QModelIndex &left,
+                                  const QModelIndex &right) const
+{
+    QVariant leftData(sourceModel()->data(left, ItemModel::ItemRole));
+    QVariant rightData(sourceModel()->data(right, ItemModel::ItemRole));
+
+    Plugin *leftPlugin = leftData.value<Plugin *>();
+    Plugin *rightPlugin = rightData.value<Plugin *>();
+
+    if (leftPlugin && rightPlugin) {
+        int leftPriority = leftPlugin->priority();
+        int rightPriority = rightPlugin->priority();
+
+        /* In case two plugins happen to have the same priority, sort them
+           alphabetically */
+        if (leftPriority == rightPriority)
+            return leftPlugin->displayName() < rightPlugin->displayName();
+
+        return leftPriority < rightPriority;
+    }
+
+    return false;
 }

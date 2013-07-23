@@ -26,6 +26,8 @@ import SystemSettings 1.0
 ItemPage {
     id: root
 
+    property bool silentMode: false
+
     title: i18n.tr("Sound")
     flickable: scrollWidget
 
@@ -33,11 +35,15 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
+
+            SilentModeWarning {
+                silentMode: false
+            }
 
             ListItem.Standard {
                 text: i18n.tr("Phone calls:")
@@ -47,14 +53,15 @@ ItemPage {
                 text: i18n.tr("Ringtone")
                 value: "Theremin"   // TODO: get sound effect
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone")})
             }
 
-            SoundCheckEntry {
+            SettingsCheckEntry {
                 checkStatus: false
                 textEntry: i18n.tr("Vibrate when ringing")
             }
 
-            SoundCheckEntry {
+            SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate in silent mode")
             }
@@ -67,14 +74,15 @@ ItemPage {
                 text: i18n.tr("Alert sound")
                 value: "Uh-oh"   // TODO: get sound effect
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Alert sound")})
             }
 
-            SoundCheckEntry {
+            SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate with alert sound")
             }
 
-            SoundCheckEntry {
+            SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate in silent mode")
             }

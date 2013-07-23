@@ -10,11 +10,13 @@ ItemPage {
 
     title: i18n.tr("Storage")
     flickable: scrollWidget
-    property var spaceColors: ["white", UbuntuColors.orange, UbuntuColors.lightAubergine]
-    property var spaceLabels: [i18n.tr("Free space"), i18n.tr("Used by Ubuntu"),
-        i18n.tr("Used by apps")]
-    property var spaceValues: ["31.4 GB", "19.6 GB", "13.0 GB"]
+
     property bool sortByName: true
+    property real diskSpace: storageInfo.totalDiskSpace('/')
+    property variant spaceColors: [UbuntuColors.orange, "red", "blue", "green", "yellow", UbuntuColors.lightAubergine]
+    property variant spaceLabels: [i18n.tr("Used by Ubuntu"), i18n.tr("Movies"), i18n.tr("Audio"),
+                                   i18n.tr("Pictures"), i18n.tr("Other files"), i18n.tr("Used by apps")]
+    property variant spaceValues: [19.6, 6.2, 9.2, 1.5, 4.6, 16.3] // TODO: replace by real values
 
     /* TOFIX: replace by real datas */
     XmlListModel {
@@ -25,6 +27,37 @@ ItemPage {
         XmlRole { name: "binaryName"; query: "name/string()" }
         XmlRole { name: "iconName"; query: "icon/string()" }
         XmlRole { name: "installedSize"; query: "installed/string()" }
+
+        onStatusChanged: if (status === XmlListModel.Ready) { createSortedLists(); }
+    }
+
+    ListModel {
+        id: sortedNamesModel
+    }
+
+    ListModel {
+        id: sortedInstallModel
+    }
+
+    function createSortedLists() {
+        var n;
+        var namesDict = {};
+        var nameKeys = [];
+        var installDict = {};
+        var installKeys = [];
+
+        for (n=0; n < xmlModel.count; n++) {
+            namesDict[xmlModel.get(n).binaryName] = [xmlModel.get(n).iconName, xmlModel.get(n).installedSize];
+            installDict[xmlModel.get(n).installedSize] = [xmlModel.get(n).iconName, xmlModel.get(n).binaryName];
+        }
+
+        nameKeys = Object.keys(namesDict).sort();
+        installKeys = Object.keys(installDict).sort(function(a,b){return b-a});
+
+        for (n=0; n < nameKeys.length; n++) {
+            sortedNamesModel.append({"binaryName":nameKeys[n],"iconName":namesDict[nameKeys[n]][0],"installedSize":namesDict[nameKeys[n]][1]})
+            sortedInstallModel.append({"binaryName":installDict[installKeys[n]][1],"iconName":installDict[installKeys[n]][0],"installedSize":installKeys[n]})
+        }
     }
 
     /* Return used space in a formatted way */
@@ -32,11 +65,11 @@ ItemPage {
         if (space < 1000)
             return space;
         if (space / 1000 < 1000)
-            return Math.round((space / 1000) * 10) / 10 + " kB";
+            return Math.round(space / 1000) + " " + i18n.tr("kB");
         else if (space/1000/1000 < 1000)
-            return Math.round((space / 1000 / 1000) * 10) / 10 + " MB";
+            return Math.round((space / 1000 / 1000) * 10) / 10 + " " + i18n.tr("MB");
         else if (space/1000/1000/1000 < 1000)
-            return Math.round((space / 1000 / 1000 / 1000) * 10) / 10 + " GB";
+            return Math.round((space / 1000 / 1000 / 1000) * 10) / 10 + " " + i18n.tr("GB");
         return "";
     }
 
@@ -57,40 +90,30 @@ ItemPage {
             ListItem.SingleValue {
                 id: diskItem
                 text: i18n.tr("Total storage")
-                value: storagePage.getFormattedSpace(storageInfo.totalDiskSpace('/'));
+                value: storagePage.getFormattedSpace(diskSpace);
                 showDivider: false
             }
 
-            StorageBar {
-                barHeight: units.gu(3)
-                colors: spaceColors
+            StorageBar {}
+
+            StorageItem {
+                colorName: "white"
+                label: i18n.tr("Free space")
+                value: getFormattedSpace(storageInfo.availableDiskSpace('/'))
             }
 
             Repeater {
                 model: spaceColors
-                Item {
-                    height: units.gu(3)
-                    width: parent.width*0.9
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    Row {
-                        spacing: units.gu(1)
 
-                        Rectangle {
-                            width: units.gu(2)
-                            height: units.gu(2)
-                            border.width: units.dp(1)
-                            color: modelData
-                        }
-                        Label { text: spaceLabels[index] }
-                    }
-                    Label {
-                        anchors.right: parent.right
-                        text: spaceValues[index]
-                    }
+                StorageItem {
+                    colorName: modelData
+                    label: spaceLabels[index]
+                    value: getFormattedSpace(spaceValues[index]*1000000000) // TODO: replace by real values
                 }
             }
 
             ListItem.ValueSelector {
+                id: valueSelect
                 values: [i18n.tr("By name"), i18n.tr("By size")]
             }
 
@@ -100,7 +123,7 @@ ItemPage {
                 height: childrenRect.height
                 /* Desactivate the listview flicking, we want to scroll on the column */
                 interactive: false
-                model: xmlModel
+                model: (valueSelect.selectedIndex === 0) ? sortedNamesModel : sortedInstallModel
                 delegate: ListItem.SingleValue {
                     icon: "image://gicon/" + iconName
                     fallbackIconSource: "image://gicon/clear"   // TOFIX: use proper fallback

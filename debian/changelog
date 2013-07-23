@@ -1,3 +1,196 @@
+ubuntu-system-settings (0.1+13.10.20130723-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * storage: get the real disk's free space information.
+
+  [ Iain Lane ]
+  * Add a GSettings schema for system-settings to store its own state.
+    Make background use this and set keys as appropriate.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 174
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 23 Jul 2013 07:01:51 +0000
+
+ubuntu-system-settings (0.1+13.10.20130720-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * settings: share the "list item with checkbox on the left" widget
+    since it's going to be used in different panels. We need this until
+    https://bugs.launchpad.net/ubuntu-ui-toolkit/+bug/1197058 is fixed
+    in the toolkit (or the design need to change to put those on the
+    right...).
+  * storage: update to reflect the design changes, some code
+    improvements - list the new categories from design (movies, audio,
+    pictures, other files) - create a new widget for the legend items -
+    update the bar widget to use the real values rather than fixed ones
+    (The datas are still mostly faked for the moment though) .
+  * update the translations' template.
+  * really move the custom check item to its new location.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 170
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 20 Jul 2013 07:01:51 +0000
+
+ubuntu-system-settings (0.1+13.10.20130719-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Use QtSystemInfo to display Carrier and network data modes in use. .
+
+  [ Sebastien Bacher ]
+  * sound: list the alert sounds.
+  * system: rotate with the device.
+  * sound: list 'stop playing' button, rework a bit the scrolling to
+    keep the button out of it (since it's supposed to always be on
+    screen according to the design document).
+  * sound: implement play/stop for sound effects.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 164
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 19 Jul 2013 07:01:36 +0000
+
+ubuntu-system-settings (0.1+13.10.20130718-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * sound: enable scrolling on the sounds' list.
+  * sound: display display sound warning in the sounds list.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 156
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 18 Jul 2013 07:01:40 +0000
+
+ubuntu-system-settings (0.1+13.10.20130717.1-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Updated for the GSettings API break .
+
+  [ Sebastien Bacher ]
+  * sound: display the sounds names in a nicer way.
+
+  [ Iain Lane ]
+  * sound: display the sounds names in a nicer way.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 153
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Jul 2013 16:55:59 +0000
+
+ubuntu-system-settings (0.1+13.10.20130717-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Set the flickable for the ItemPage to properly handle scrolling
+    below the header .
+
+  [ Sebastien Bacher ]
+  * update the translations template since we got new ui elements.
+  * sound: list the installed sound files from a known directory.
+
+  [ Iain Lane ]
+  * Initial implementation of the cellular UI.
+  * Small tweaks to the license page: make scrolling work correctly so
+    it doesn't hide the header & go a bit faster so the large list can
+    be navigated.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 149
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Jul 2013 07:01:38 +0000
+
+ubuntu-system-settings (0.1+13.10.20130716-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * Tweak the flickable behaviour to make the scrolling consistant with
+    the other applications, but still avoid scrolling if there is no
+    need for it See https://launchpad.net/bugs/1201394 for the details.
+    (LP: #1201394)
+  * storage: the design says to use zero decimal for kilobytes values,
+    do that.
+  * storage: translate the units.
+  * about: display N/A when there is no IMEI information.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 143
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 16 Jul 2013 07:01:48 +0000
+
+ubuntu-system-settings (0.1+13.10.20130713-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * license: implement the "software licenses" section subpanel The
+    current approch is to list all the packages installing a copyright
+    and build a model from that. When selecting one of them in the list
+    we go to a new page which displays the content of the copyright.
+    That might need some tweaking later to include licences from the
+    container .
+  * about: improve a bit the format of the vendor header.
+  * reset: use singlecontrol items, the margin issue has been resolved.
+  * sound: implement the silent mode warning The UI is there but not
+    plugged to the system yet, you need to manually set the variable to
+    see it. .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 137
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 13 Jul 2013 07:01:47 +0000
+
+ubuntu-system-settings (0.1+13.10.20130712-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * Use SingleControl again, the toolkit margin issues have been fixed.
+  * get device informations from libhybris, as a fallback, until
+    qtsystems works on the touch image (it currently tries to read /sys
+    informations that are not available on the device).
+
+  [ Iain Lane ]
+  * Sort plugins according to their priority.
+  * background: Explicitly set the fallback if we get an empty string
+    back from the dbus call.
+  * sound: Allow clicking on the whole ListItem to toggle the CheckBox.
+  * Don't try to load or allow navigation into plugins with no
+    pageComponent.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 131
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 12 Jul 2013 07:01:49 +0000
+
+ubuntu-system-settings (0.1+13.10.20130711-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * background: Remove custom UbuntuSwappableImage and use
+    CrossFadeImage from the ui-toolkit.
+  * Support passing plugin names directly on the commandline.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 123
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 11 Jul 2013 07:01:47 +0000
+
+ubuntu-system-settings (0.1+13.10.20130710-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * translation: update the translations again, some strings changed. We
+    are going to turn on autoimport then to avoid those manual commits
+    in the futur.
+  * storage: use a rectangle so we can have a border around the bar
+    Tweak some of the margins and vertical spaces as well to look a bit
+    better and be aligned on other elements .
+  * Since we have a readme let's put some informations in it.
+  * debian: slightly improved description, sort the build-depends.
+  * settings: translate the panel names in the system settings grid
+    view.
+  * storage: implement apps sorting.
+  * background: fix name inconsistency.
+  * settings: use the correct translation domain.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 119
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 10 Jul 2013 07:11:23 +0000
+
 ubuntu-system-settings (0.1+13.10.20130709-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
