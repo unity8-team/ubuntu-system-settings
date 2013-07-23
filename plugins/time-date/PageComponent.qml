@@ -58,8 +58,6 @@ ItemPage {
             progression: true
         }
 
-        ListItem.Divider {}
-
         ListItem.Standard {
             text: i18n.tr ("Set the time and date:")
         }
