@@ -11,6 +11,7 @@
         "phone",
         "settings"
     ],
+    "page-component": "PageComponent.qml",
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false
 }
