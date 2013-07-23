@@ -17,5 +17,10 @@
             <default>""</default>
             <description>When backgroud-duplicate is 'true', the value to restore the least recently changed screen to.</description>
         </key>
+        <key name="storage-sort-by-name" type="b">
+            <default>true</default>
+            <summary>Whether the applications should be sorted by name.</summary>
+            <description>If true the applications are sorted by name.</description>
+        </key>
     </schema>
 </schemalist>
