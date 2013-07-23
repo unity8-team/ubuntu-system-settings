@@ -25,11 +25,21 @@
 
 Diagnostics::Diagnostics(QObject *parent) :
     QObject(parent),
+    m_watcher ("com.ubuntu.WhoopsiePreferences",
+        QDBusConnection::systemBus(),
+        QDBusServiceWatcher::WatchForOwnerChange),
     m_whoopsieInterface (
         "com.ubuntu.WhoopsiePreferences",
         "/com/ubuntu/WhoopsiePreferences",
         "com.ubuntu.WhoopsiePreferences",
         QDBusConnection::systemBus())
+{
+    connect(&m_watcher, SIGNAL(serviceOwnerChanged(QString, QString, QString)),
+            this, SLOT(createInterface(QString, QString, QString)));
+    createInterface("", "", "");
+}
+
+void Diagnostics::createInterface(const QString& serviceName, const QString& oldOwner, const QString& newOwner)
 {
     if (!m_whoopsieInterface.isValid()) {
         return;
@@ -42,7 +52,13 @@ Diagnostics::Diagnostics(QObject *parent) :
         "PropertiesChanged",
         this,
         SLOT(slotChanged()));
+
     m_systemIdentifier = getIdentifier();
+
+    if(!newOwner.isEmpty()) {
+        /* Tell the UI to refresh its view of the properties */
+        slotChanged();
+    }
 }
 
 void Diagnostics::slotChanged()

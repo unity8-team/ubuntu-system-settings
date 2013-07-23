@@ -24,6 +24,7 @@
 #include <QDBusInterface>
 #include <QObject>
 #include <QProcess>
+#include <QDBusServiceWatcher>
 
 class Diagnostics : public QObject
 {
@@ -42,11 +43,13 @@ public:
 
 public Q_SLOTS:
     void slotChanged();
+    void createInterface(const QString& serviceName, const QString& oldOwner, const QString& newOwner);
 
 Q_SIGNALS:
     void reportCrashesChanged();
 
 private:
+    QDBusServiceWatcher m_watcher;
     QDBusInterface m_whoopsieInterface;
     QString m_systemIdentifier;
     QString getIdentifier();
