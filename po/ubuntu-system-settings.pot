@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-19 19:40+0200\n"
+"POT-Creation-Date: 2013-07-23 11:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -271,6 +271,18 @@ msgstr ""
 msgid "Stop playing"
 msgstr ""
 
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+msgid "Time & Date"
+msgstr ""
+
+#: ../plugins/time-date/PageComponent.qml:51
+msgid "Time zone:"
+msgstr ""
+
+#: ../plugins/time-date/PageComponent.qml:62
+msgid "Set the time and date:"
+msgstr ""
+
 #: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr ""
@@ -333,10 +345,6 @@ msgstr ""
 
 #: ../.build/settings.js:17
 msgid "Updates"
-msgstr ""
-
-#: ../.build/settings.js:18
-msgid "Time & Date"
 msgstr ""
 
 #: ../.build/settings.js:19
