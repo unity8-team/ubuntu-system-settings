@@ -1,0 +1,21 @@
+<schemalist>
+    <enum id="enum-background-set-last">
+        <value nick="home" value="1" />
+        <value nick="welcome" value="2" />
+    </enum>
+    <schema id="com.ubuntu.touch.system-settings" path="/com/ubuntu/touch/system-settings/">
+        <key name="background-duplicate" type="b">
+            <default>true</default>
+            <summary>Use the same background for the welcome screen and the greeter</summary>
+            <description>If true, the same background will be used for the welcome ('lock') screen and the background of the home screen. If false, two different backgrounds can be chosen.</description>
+        </key>
+        <key name="background-set-last" enum="enum-background-set-last">
+            <default>"home"</default>
+            <description>The most recently changed screen.</description>
+        </key>
+        <key name="background-previously-set-value" type="s">
+            <default>""</default>
+            <description>When backgroud-duplicate is 'true', the value to restore the least recently changed screen to.</description>
+        </key>
+    </schema>
+</schemalist>
