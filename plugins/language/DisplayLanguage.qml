@@ -50,6 +50,7 @@ ItemPage {
         model: plugin.languages
         delegate: ListItems.Standard {
             text: modelData
+            onClicked: plugin.setLanguage(modelData)
         }
     }
 

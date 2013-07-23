@@ -35,13 +35,12 @@ private:
 public:
 
     explicit LanguagePlugin(QObject *parent = NULL);
-    virtual ~LanguagePlugin();
 
     const QStringList &languages() const;
 
-private:
+public Q_SLOTS:
 
-    mutable QStringList *_languages;
+    void setLanguage(const QString &language);
 };
 
 #endif // LANGUAGE_PLUGIN_H

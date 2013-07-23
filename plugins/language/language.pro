@@ -26,7 +26,7 @@ INSTALLS += image
 # C++ bits
 TARGET = UbuntuLanguagePlugin
 QT += qml quick dbus
-CONFIG += qt plugin no_keywords
+CONFIG += qt link_pkgconfig plugin no_keywords
 
 #comment in the following line to enable traces
 #DEFINES += QT_NO_DEBUG_OUTPUT
@@ -35,6 +35,7 @@ TARGET = $$qtLibraryTarget($$TARGET)
 uri = Ubuntu.SystemSettings.LanguagePlugin
 
 INCLUDEPATH += .
+PKGCONFIG += accountsservice glib-2.0
 
 # Input
 HEADERS += language-plugin.h plugin.h
