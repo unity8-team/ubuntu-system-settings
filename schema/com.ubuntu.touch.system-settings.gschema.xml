@@ -20,7 +20,7 @@
         <key name="storage-sort-by-name" type="b">
             <default>true</default>
             <summary>Whether the applications should be sorted by name.</summary>
-            <description>If true the applications are sorted by name.</description>
+            <description>If true the applications are sorted by name, otherwise by disk size.</description>
         </key>
     </schema>
 </schemalist>
