@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-24 16:40+0000\n"
+"POT-Creation-Date: 2013-07-24 19:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,7 +185,7 @@ msgid "Data usage statistics"
 msgstr ""
 
 #: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
-#: ../plugins/phone/PageComponent.qml:34
+#: ../plugins/phone/PageComponent.qml:43
 msgid "Call diversion"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgid "Set"
 msgstr ""
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
-#: ../plugins/phone/PageComponent.qml:40
+#: ../plugins/phone/PageComponent.qml:49
 msgid "Call waiting"
 msgstr ""
 
@@ -229,13 +229,39 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:27 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
 msgid "Phone"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:48
+#: ../plugins/phone/PageComponent.qml:30
+msgid "SIM"
+msgstr ""
+
+#: ../plugins/phone/PageComponent.qml:57 ../plugins/phone/Services.qml:28
 #, qt-format
 msgid "%1 Services"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:34
+msgid "Voicemail"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:34
+#, qt-format
+msgid "My %1 Credit & Plan"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+#, qt-format
+msgid "Listen to digits of %1"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+msgid "Traffic report"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+msgid "Horoscopes"
 msgstr ""
 
 #: ../plugins/reset/EraseEverything.qml:29
