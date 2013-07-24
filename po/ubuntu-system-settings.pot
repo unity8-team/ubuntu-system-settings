@@ -311,11 +311,27 @@ msgstr ""
 msgid "Vibrate with alert sound"
 msgstr ""
 
+#: ../plugins/sound/PageComponent.qml:91
+msgid "Other sounds:"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
+msgid "Message received"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:103
+msgid "Keyboard sounds"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:108
+msgid "Lock sound"
+msgstr ""
+
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:48
+#: ../plugins/sound/SoundsList.qml:49
 msgid "Stop playing"
 msgstr ""
 
