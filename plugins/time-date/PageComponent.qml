@@ -56,6 +56,7 @@ ItemPage {
             text: timeDatePanel.timeZone.replace("_", " ")
             value: getUTCOffset()
             progression: true
+            onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"))
         }
 
         ListItem.Standard {
