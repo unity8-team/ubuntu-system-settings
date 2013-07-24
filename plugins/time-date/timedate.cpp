@@ -20,7 +20,6 @@
 
 #include "timedate.h"
 #include <QDBusReply>
-#include <QDebug>
 #include <QEvent>
 #include <glib.h>
 #include <glib-object.h>

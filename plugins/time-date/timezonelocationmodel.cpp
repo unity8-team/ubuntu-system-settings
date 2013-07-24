@@ -19,7 +19,6 @@
 */
 
 #include "timezonelocationmodel.h"
-#include <QDebug>
 #include <glib.h>
 #include <glib-object.h>
 #include <timezonemap/tz.h>
