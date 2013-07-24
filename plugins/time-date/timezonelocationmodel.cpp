@@ -23,7 +23,6 @@
 #include <glib-object.h>
 #include <timezonemap/tz.h>
 
-
 TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     QAbstractTableModel(parent)
 {
@@ -48,7 +47,7 @@ QVariant TimeZoneLocationModel::data(const QModelIndex &index, int role) const
             index.row() < 0)
         return QVariant();
 
-    TimeZoneLocationModel::TzLocation tz = m_locations[index.row()];
+    TzLocation tz = m_locations[index.row()];
 
     switch (role) {
     case Qt::DisplayRole:
@@ -80,13 +79,14 @@ QHash<int, QByteArray> TimeZoneLocationModel::roleNames() const
     return m_roleNames;
 }
 
-QList<TimeZoneLocationModel::TzLocation> TimeZoneLocationModel::buildCityMap() {
+QList<TimeZoneLocationModel::TzLocation> TimeZoneLocationModel::buildCityMap()
+{
     TzDB *tzdb = tz_load_db();
     GPtrArray *tz_locations = tz_get_locations(tzdb);
 
     QList<TzLocation> output;
     CcTimezoneLocation *tmp;
-    TimeZoneLocationModel::TzLocation tmpTz;
+    TzLocation tmpTz;
 
     for (guint i = 0; i < tz_locations->len; ++i) {
         tmp = (CcTimezoneLocation *) g_ptr_array_index(tz_locations, i);
@@ -108,6 +108,8 @@ QList<TimeZoneLocationModel::TzLocation> TimeZoneLocationModel::buildCityMap() {
     }
 
     g_ptr_array_free (tz_locations, TRUE);
+
+    qSort(output);
 
     return output;
 }

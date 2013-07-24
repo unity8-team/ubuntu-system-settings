@@ -30,23 +30,26 @@ ItemPage {
     UbuntuTimeDatePanel { id: timeDatePanel }
 
     TextField {
-        anchors.top: parent.top
-        anchors.margins: units.gu(2)
-        width: parent.width
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            margins: units.gu(2)
+        }
         id: filterCities
         onTextChanged: timeDatePanel.filter = text
+        Component.onCompleted: forceActiveFocus()
     }
 
     ListView {
         id: locationsListView
+        clip: true
         anchors {
             top: filterCities.bottom
             left: parent.left
             right: parent.right
             bottom: parent.bottom
         }
-        maximumFlickVelocity: height * 10
-        flickDeceleration: height * 2
 
         model: timeDatePanel.timeZoneModel
         visible: count > 0
@@ -56,10 +59,9 @@ ItemPage {
         }
     }
 
-    // A placeholder awaiting feedback from design
-    ListItem.SingleValue {
-        anchors.top: filterCities.bottom
+    Text {
+        anchors.centerIn: parent
         visible: locationsListView.count == 0
-        text: i18n.tr("No results")
+        text: i18n.tr("No matching place")
     }
 }
