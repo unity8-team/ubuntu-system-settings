@@ -21,6 +21,7 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -43,7 +44,7 @@ ItemPage {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: buttonRectangle.top
+        anchors.bottom: divider.top
 
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
@@ -56,7 +57,13 @@ ItemPage {
         }
     }
 
-    Rectangle {
+    ListItem.ThinDivider {
+        id: divider
+
+        anchors.bottom: buttonRectangle.top
+    }
+
+    Item {
         id: buttonRectangle
 
         height: cancelButton.height + units.gu(2)
@@ -64,13 +71,6 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.leftMargin: -1
-        anchors.rightMargin: -1
-        anchors.bottomMargin: -1
-
-        color: "transparent"
-        border.color: "lightgrey"
-        border.width: 1
 
         Button {
             id: cancelButton
