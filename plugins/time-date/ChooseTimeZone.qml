@@ -38,6 +38,7 @@ ItemPage {
     }
 
     ListView {
+        id: locationsListView
         anchors {
             top: filterCities.bottom
             left: parent.left
@@ -48,9 +49,17 @@ ItemPage {
         flickDeceleration: height * 2
 
         model: timeDatePanel.timeZoneModel
+        visible: count > 0
         delegate: ListItem.Standard {
             text: displayName
             onClicked: timeDatePanel.timeZone = timeZone
         }
+    }
+
+    // A placeholder awaiting feedback from design
+    ListItem.SingleValue {
+        anchors.top: filterCities.bottom
+        visible: locationsListView.count == 0
+        text: i18n.tr("No results")
     }
 }
