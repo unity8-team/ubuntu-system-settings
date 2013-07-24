@@ -20,7 +20,6 @@
 
 #include "timedate.h"
 #include <QDBusReply>
-#include <QDebug>
 #include <QEvent>
 #include <glib.h>
 #include <glib-object.h>
@@ -151,6 +150,7 @@ QMap<QString, QString> TimeDate::buildCityMap() {
 
     g_ptr_array_free (tz_locations, TRUE);
 
+    // Don't show the empty location included in the DB
     output.remove("");
 
     return output;
