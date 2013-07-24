@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 16:32+0200\n"
+"POT-Creation-Date: 2013-07-24 13:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,46 +184,46 @@ msgstr ""
 msgid "Data usage statistics"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:61
+#: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
 #: ../plugins/phone/PageComponent.qml:34
 msgid "Call diversion"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:75
+#: ../plugins/phone/CallDiversion.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:92
+#: ../plugins/phone/CallDiversion.qml:91
 msgid "Call diversion status can’t be checked right now. Try again later."
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:103
+#: ../plugins/phone/CallDiversion.qml:102
 msgid "Divert to"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:114
+#: ../plugins/phone/CallDiversion.qml:113
 msgid "Contacts…"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:114
+#: ../plugins/phone/CallDiversion.qml:113
 #: ../plugins/reset/EraseEverything.qml:35
 #: ../plugins/reset/ResetAllSettings.qml:35
 #: ../plugins/reset/ResetLauncherHome.qml:35
 msgid "Cancel"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:114
+#: ../plugins/phone/CallDiversion.qml:113
 msgid "Set"
 msgstr ""
 
-#: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:54
+#: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:40
 msgid "Call waiting"
 msgstr ""
 
-#: ../plugins/phone/CallWaiting.qml:68
+#: ../plugins/phone/CallWaiting.qml:67
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
@@ -319,6 +319,14 @@ msgstr ""
 msgid "Stop playing"
 msgstr ""
 
+#: ../plugins/time-date/ChooseTimeZone.qml:28
+msgid "Time Zone"
+msgstr ""
+
+#: ../plugins/time-date/ChooseTimeZone.qml:63
+msgid "No results"
+msgstr ""
+
 #: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
 msgid "Time & Date"
 msgstr ""
@@ -327,7 +335,7 @@ msgstr ""
 msgid "Time zone:"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:62
+#: ../plugins/time-date/PageComponent.qml:63
 msgid "Set the time and date:"
 msgstr ""
 
