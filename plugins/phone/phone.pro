@@ -7,7 +7,8 @@ TARGET = phone
 QML_SOURCES = \
     CallDiversion.qml \
     CallWaiting.qml \
-    PageComponent.qml
+    PageComponent.qml \
+    Services.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}
