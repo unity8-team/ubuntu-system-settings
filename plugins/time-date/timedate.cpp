@@ -30,15 +30,27 @@
 TimeDate::TimeDate(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus()),
+    m_serviceWatcher ("org.freedesktop.timedate1",
+                      m_systemBusConnection,
+                      QDBusServiceWatcher::WatchForOwnerChange),
     m_timeDateInterface ("org.freedesktop.timedate1",
                          "/org/freedesktop/timedate1",
                          "org.freedesktop.timedate1",
                           m_systemBusConnection)
 {
-    if (!m_timeDateInterface.isValid()) {
-        return;
+    connect (&m_serviceWatcher,
+             SIGNAL (serviceOwnerChanged (QString, QString, QString)),
+             this,
+             SLOT (slotNameOwnerChanged (QString, QString, QString)));
+
+    if (m_timeDateInterface.isValid()) {
+        setUpInterface();
     }
 
+}
+
+void TimeDate::setUpInterface()
+{
     m_timeDateInterface.connection().connect(
         m_timeDateInterface.service(),
         m_timeDateInterface.path(),
@@ -48,7 +60,6 @@ TimeDate::TimeDate(QObject *parent) :
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
 
     m_cityMap = buildCityMap();
-
 }
 
 QString TimeDate::timeZone()
@@ -69,16 +80,31 @@ QString TimeDate::getTimeZone()
     return QString();
 }
 
-#define UNUSED __attribute__((__unused__))
-
-void TimeDate::slotChanged(QString UNUSED interface,
-                           QVariantMap UNUSED changed_properties,
+void TimeDate::slotChanged(QString interface,
+                           QVariantMap changed_properties,
                            QStringList invalidated_properties)
 {
+    Q_UNUSED (interface);
+    Q_UNUSED (changed_properties);
+
     if (invalidated_properties.contains("Timezone")) {
         m_currentTimeZone = getTimeZone();
         Q_EMIT timeZoneChanged();
     }
+}
+
+void TimeDate::slotNameOwnerChanged(QString name,
+                                    QString oldOwner,
+                                    QString newOwner)
+{
+    Q_UNUSED (oldOwner);
+    Q_UNUSED (newOwner);
+    if (name != "org.freedesktop.timedate1")
+        return;
+
+    setUpInterface();
+    // Tell QML so that it refreshes its view of the property
+    Q_EMIT timeZoneChanged();
 }
 
 void TimeDate::setTimeZone(QString &time_zone)

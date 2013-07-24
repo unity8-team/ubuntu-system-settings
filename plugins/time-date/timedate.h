@@ -22,6 +22,7 @@
 #define TIMEDATE_H
 
 #include <QDBusInterface>
+#include <QDBusServiceWatcher>
 #include <QObject>
 #include <QProcess>
 
@@ -46,6 +47,7 @@ public:
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
+    void slotNameOwnerChanged(QString, QString, QString);
 
 Q_SIGNALS:
     void timeZoneChanged();
@@ -54,11 +56,13 @@ Q_SIGNALS:
 private:
     QString m_currentTimeZone;
     QDBusConnection m_systemBusConnection;
+    QDBusServiceWatcher m_serviceWatcher;
     QDBusInterface m_timeDateInterface;
     QMap<QString, QString> m_cityMap;
     QString m_objectPath;
     QString getTimeZone();
     QMap<QString, QString> buildCityMap();
+    void setUpInterface();
 
 };
 
