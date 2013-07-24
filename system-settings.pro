@@ -6,6 +6,7 @@ CONFIG += ordered
 SUBDIRS = \
     po \
     lib \
+    schema \
     src \
     plugins \
     tests

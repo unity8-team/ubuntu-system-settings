@@ -24,7 +24,6 @@ Item {
     signal clicked
 
     property string source
-    property string altSource
 
     height: parent.height * 0.4
     width: parent.width * 0.43
@@ -33,12 +32,6 @@ Item {
     UbuntuShape {
         anchors.fill: parent
         image: ses
-        onEnabledChanged: {
-            /* Swap images */
-            var tmpImage = source
-            source = altSource
-            altSource = tmpImage
-        }
     }
 
     ShaderEffectSource {
