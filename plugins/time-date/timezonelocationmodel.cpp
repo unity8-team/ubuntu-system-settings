@@ -39,7 +39,7 @@ int TimeZoneLocationModel::rowCount(const QModelIndex &parent) const
 int TimeZoneLocationModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED (parent);
-    return 3;
+    return 3; //TZ, City, Country
 }
 
 QVariant TimeZoneLocationModel::data(const QModelIndex &index, int role) const
