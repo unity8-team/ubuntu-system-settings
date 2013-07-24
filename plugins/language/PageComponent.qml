@@ -22,12 +22,17 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItems
+import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
     id: root
 
     title: i18n.tr("Language & Text")
     flickable: scrollWidget
+
+    UbuntuLanguagePlugin {
+        id: plugin
+    }
 
     Flickable {
         id: scrollWidget
@@ -41,8 +46,7 @@ ItemPage {
             ListItems.SingleValue {
                 icon: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
                 text: i18n.tr("Display language")
-                /* TODO: Get real display language */
-                value: i18n.tr("English")
+                value: plugin.languages[plugin.currentLanguage]
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("DisplayLanguage.qml"))
             }

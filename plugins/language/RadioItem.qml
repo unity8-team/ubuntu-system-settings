@@ -18,33 +18,35 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LANGUAGE_PLUGIN_H
-#define LANGUAGE_PLUGIN_H
+import QtQuick 2.0
+import SystemSettings 1.0
+import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItems
 
-#include <QtCore>
+ListItems.Empty {
+    id: root
 
-class LanguagePlugin : public QObject
-{
-private:
+    property bool active: false
 
-    Q_OBJECT
+    Label {
+        text: root.text
 
-    Q_PROPERTY(QStringList languages
-               READ languages
-               CONSTANT)
+        anchors.left: parent.left
+        anchors.right: radio.left
+        anchors.margins: units.gu(2)
+        anchors.verticalCenter: parent.verticalCenter
+    }
 
-    Q_PROPERTY(int currentLanguage
-               READ currentLanguage
-               WRITE setCurrentLanguage)
+    Rectangle {
+        id: radio
 
-public:
+        color: root.active ? "grey" : "transparent"
+        width: units.gu(1)
+        height: 1.0 * width
+        radius: 0.5 * width
 
-    explicit LanguagePlugin(QObject *parent = NULL);
-
-    const QStringList &languages() const;
-
-    int currentLanguage() const;
-    void setCurrentLanguage(int index);
-};
-
-#endif // LANGUAGE_PLUGIN_H
+        anchors.right: parent.right
+        anchors.margins: units.gu(2)
+        anchors.verticalCenter: parent.verticalCenter
+    }
+}

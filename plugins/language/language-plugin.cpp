@@ -21,48 +21,77 @@
 #include "language-plugin.h"
 #include <act/act.h>
 
-static QHash<QString, QLocale::Language> *languageLookup;
-static QStringList *languageNames;
+static QList<QLocale> *locales;
+static QHash<QLocale::Language, unsigned int> *languageIndices;
+static QStringList *localeNames;
 
-static QHash<QString, QLocale::Language> *
-getLanguageLookup()
+static bool
+compareLocales(const QLocale &locale0,
+               const QLocale &locale1)
 {
-    if (languageLookup == NULL)
+    QString name0(locale0.nativeLanguageName().trimmed().toCaseFolded());
+    QString name1(locale1.nativeLanguageName().trimmed().toCaseFolded());
+
+    return name0 < name1;
+}
+
+static QList<QLocale> *
+getLocales()
+{
+    if (locales == NULL)
     {
-        languageLookup = new QHash<QString, QLocale::Language>;
+        locales = new QList<QLocale>;
 
-        QList<QLocale> locales = QLocale::matchingLocales(QLocale::AnyLanguage,
-                                                          QLocale::AnyScript,
-                                                          QLocale::AnyCountry);
+        QSet<QLocale::Language> allLanguages;
+        QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage,
+                                                             QLocale::AnyScript,
+                                                             QLocale::AnyCountry);
 
-        for (QList<QLocale>::const_iterator i = locales.begin(); i != locales.end(); ++i)
+        for (QList<QLocale>::const_iterator i = allLocales.begin(); i != allLocales.end(); ++i)
         {
-            QString name = i->nativeLanguageName().trimmed();
+            QLocale::Language language = i->language();
 
-            if (!name.isEmpty())
-                (*languageLookup)[name] = i->language();
+            if (language != QLocale::AnyLanguage &&
+                !i->nativeLanguageName().trimmed().toCaseFolded().isEmpty() &&
+                !allLanguages.contains(language))
+            {
+                *locales += QLocale(language);
+                allLanguages += language;
+            }
         }
+
+        qSort(locales->begin(), locales->end(), compareLocales);
     }
 
-    return languageLookup;
+    return locales;
+}
+
+static QHash<QLocale::Language, unsigned int> *
+getLanguageIndices()
+{
+    if (languageIndices == NULL)
+    {
+        languageIndices = new QHash<QLocale::Language, unsigned int>;
+
+        for (int i = 0; i < getLocales()->length(); i++)
+            (*languageIndices)[(*getLocales())[i].language()] = i;
+    }
+
+    return languageIndices;
 }
 
 static QStringList *
-getLanguageNames()
+getLocaleNames()
 {
-    if (languageNames == NULL)
+    if (localeNames == NULL)
     {
-        languageNames = new QStringList(getLanguageLookup()->keys());
-        languageNames->sort(Qt::CaseInsensitive);
+        localeNames = new QStringList;
+
+        for (QList<QLocale>::const_iterator i = getLocales()->begin(); i != getLocales()->end(); ++i)
+            *localeNames += i->nativeLanguageName().trimmed();
     }
 
-    return languageNames;
-}
-
-static QLocale::Language
-getLanguageForName(const QString &name)
-{
-    return (*getLanguageLookup())[name];
+    return localeNames;
 }
 
 LanguagePlugin::LanguagePlugin(QObject *parent) : QObject(parent)
@@ -72,7 +101,17 @@ LanguagePlugin::LanguagePlugin(QObject *parent) : QObject(parent)
 const QStringList &
 LanguagePlugin::languages() const
 {
-    return *getLanguageNames();
+    return *getLocaleNames();
+}
+
+int
+LanguagePlugin::currentLanguage() const
+{
+    QLocale::Language language = QLocale::system().language();
+    QHash<QLocale::Language, unsigned int> *indices = getLanguageIndices();
+    QHash<QLocale::Language, unsigned int>::const_iterator i = indices->find(language);
+
+    return i != indices->end() ? *i : -1;
 }
 
 static void
@@ -83,16 +122,13 @@ setLanguageWithUser(GObject    *object,
     Q_UNUSED(pspec);
 
     ActUser *user = ACT_USER(object);
-    QString *name = static_cast<QString *>(user_data);
+    gint index = GPOINTER_TO_INT(user_data);
 
     if (act_user_is_loaded(user))
     {
-        g_signal_handlers_disconnect_by_data(user, name);
+        g_signal_handlers_disconnect_by_data(user, user_data);
 
-        QLocale locale(getLanguageForName(*name));
-        act_user_set_language(user, qPrintable(locale.name()));
-
-        delete name;
+        act_user_set_language(user, qPrintable((*getLocales())[index].name()));
     }
 }
 
@@ -104,14 +140,13 @@ setLanguageWithManager(GObject    *object,
     Q_UNUSED(pspec);
 
     ActUserManager *manager = ACT_USER_MANAGER(object);
-    QString *language = static_cast<QString *>(user_data);
 
     gboolean loaded;
     g_object_get(manager, "is-loaded", &loaded, NULL);
 
     if (loaded)
     {
-        g_signal_handlers_disconnect_by_data(manager, language);
+        g_signal_handlers_disconnect_by_data(manager, user_data);
 
         const char *name = qgetenv("USER").constData();
 
@@ -122,31 +157,30 @@ setLanguageWithManager(GObject    *object,
             if (user != NULL)
             {
                 if (act_user_is_loaded(user))
-                    setLanguageWithUser(G_OBJECT(user), NULL, language);
+                    setLanguageWithUser(G_OBJECT(user), NULL, user_data);
                 else
-                    g_signal_connect(user, "notify::is-loaded", G_CALLBACK(setLanguageWithUser), language);
+                    g_signal_connect(user, "notify::is-loaded", G_CALLBACK(setLanguageWithUser), user_data);
             }
-            else
-                delete language;
         }
-        else
-            delete language;
     }
 }
 
 void
-LanguagePlugin::setLanguage(const QString &language)
+LanguagePlugin::setCurrentLanguage(int index)
 {
-    ActUserManager *manager = act_user_manager_get_default();
-
-    if (manager != NULL)
+    if (index >= 0 && index < getLocales()->length())
     {
-        gboolean loaded;
-        g_object_get(manager, "is-loaded", &loaded, NULL);
+        ActUserManager *manager = act_user_manager_get_default();
 
-        if (loaded)
-            setLanguageWithManager(G_OBJECT(manager), NULL, new QString(language));
-        else
-            g_signal_connect(manager, "notify::is-loaded", G_CALLBACK(setLanguageWithManager), new QString(language));
+        if (manager != NULL)
+        {
+            gboolean loaded;
+            g_object_get(manager, "is-loaded", &loaded, NULL);
+
+            if (loaded)
+                setLanguageWithManager(G_OBJECT(manager), NULL, GINT_TO_POINTER(index));
+            else
+                g_signal_connect(manager, "notify::is-loaded", G_CALLBACK(setLanguageWithManager), GINT_TO_POINTER(index));
+        }
     }
 }

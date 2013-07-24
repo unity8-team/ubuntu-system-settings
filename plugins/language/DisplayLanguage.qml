@@ -37,6 +37,8 @@ ItemPage {
     ListView {
         id: languageList
 
+        property int selectedIndex: plugin.currentLanguage
+
         clip: true
 
         anchors.top: parent.top
@@ -48,9 +50,10 @@ ItemPage {
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         model: plugin.languages
-        delegate: ListItems.Standard {
+        delegate: RadioItem {
             text: modelData
-            onClicked: plugin.setLanguage(modelData)
+            active: index == languageList.selectedIndex
+            onClicked: languageList.selectedIndex = index
         }
     }
 
@@ -97,7 +100,10 @@ ItemPage {
             anchors.bottomMargin: units.gu(1)
 
             text: i18n.tr("Confirm")
-            onClicked: pageStack.pop()
+            onClicked: {
+                plugin.currentLanguage = languageList.selectedIndex
+                pageStack.pop()
+            }
         }
     }
 }
