@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 16:32+0200\n"
+"POT-Creation-Date: 2013-07-24 12:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,46 +184,46 @@ msgstr ""
 msgid "Data usage statistics"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:61
+#: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
 #: ../plugins/phone/PageComponent.qml:34
 msgid "Call diversion"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:75
+#: ../plugins/phone/CallDiversion.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:92
+#: ../plugins/phone/CallDiversion.qml:91
 msgid "Call diversion status can’t be checked right now. Try again later."
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:103
+#: ../plugins/phone/CallDiversion.qml:102
 msgid "Divert to"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:114
+#: ../plugins/phone/CallDiversion.qml:113
 msgid "Contacts…"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:114
+#: ../plugins/phone/CallDiversion.qml:113
 #: ../plugins/reset/EraseEverything.qml:35
 #: ../plugins/reset/ResetAllSettings.qml:35
 #: ../plugins/reset/ResetLauncherHome.qml:35
 msgid "Cancel"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:114
+#: ../plugins/phone/CallDiversion.qml:113
 msgid "Set"
 msgstr ""
 
-#: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:54
+#: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:40
 msgid "Call waiting"
 msgstr ""
 
-#: ../plugins/phone/CallWaiting.qml:68
+#: ../plugins/phone/CallWaiting.qml:67
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
@@ -311,11 +311,27 @@ msgstr ""
 msgid "Vibrate with alert sound"
 msgstr ""
 
+#: ../plugins/sound/PageComponent.qml:91
+msgid "Other sounds:"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
+msgid "Message received"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:103
+msgid "Keyboard sounds"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:108
+msgid "Lock sound"
+msgstr ""
+
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:48
+#: ../plugins/sound/SoundsList.qml:49
 msgid "Stop playing"
 msgstr ""
 
