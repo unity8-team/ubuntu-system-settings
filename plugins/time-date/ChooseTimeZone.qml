@@ -56,6 +56,7 @@ ItemPage {
         delegate: ListItem.Standard {
             text: displayName
             onClicked: timeDatePanel.timeZone = timeZone
+            selected: timeDatePanel.timeZone == timeZone
         }
     }
 
