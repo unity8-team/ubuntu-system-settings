@@ -25,7 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.TimeDate 1.0
 
 ItemPage {
-    title: i18n.tr("Time Zone")
+    title: i18n.tr("Time zone")
 
     UbuntuTimeDatePanel { id: timeDatePanel }
 
