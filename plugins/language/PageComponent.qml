@@ -21,7 +21,7 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItems
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -43,7 +43,7 @@ ItemPage {
         Column {
             anchors.fill: parent
 
-            ListItems.SingleValue {
+            ListItem.SingleValue {
                 icon: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
                 text: i18n.tr("Display language")
                 value: plugin.languages[plugin.currentLanguage]
@@ -51,9 +51,9 @@ ItemPage {
                 onClicked: pageStack.push(Qt.resolvedUrl("DisplayLanguage.qml"))
             }
 
-            ListItems.Divider {}
+            ListItem.Divider {}
 
-            ListItems.SingleValue {
+            ListItem.SingleValue {
                 text: i18n.tr("Keyboard layouts")
                 /* TODO: Get number of keyboard layouts */
                 value: i18n.tr("1")
@@ -61,9 +61,9 @@ ItemPage {
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
             }
 
-            ListItems.Divider {}
+            ListItem.Divider {}
 
-            ListItems.SingleValue {
+            ListItem.SingleValue {
                 text: i18n.tr("Spell checking")
                 /* TODO: Get spell checking setting */
                 value: i18n.tr("UK English")
@@ -71,35 +71,35 @@ ItemPage {
                 onClicked: pageStack.push(Qt.resolvedUrl("SpellChecking.qml"))
             }
 
-            ListItems.Standard {
+            ListItem.Standard {
                 text: i18n.tr("Auto correction")
                 control: Switch {}
             }
 
-            ListItems.Standard {
+            ListItem.Standard {
                 text: i18n.tr("Auto completion")
                 control: Switch {}
             }
 
-            ListItems.Divider {}
+            ListItem.Divider {}
 
-            ListItems.Standard {
+            ListItem.Standard {
                 text: i18n.tr("Auto capitalization")
                 control: Switch {}
             }
 
-            ListItems.Caption {
+            ListItem.Caption {
                 text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
             }
 
-            ListItems.Divider {}
+            ListItem.Divider {}
 
-            ListItems.Standard {
+            ListItem.Standard {
                 text: i18n.tr("Auto punctuation")
                 control: Switch {}
             }
 
-            ListItems.Caption {
+            ListItem.Caption {
                 text: i18n.tr("Adds a period, and any missing quotes or brackets, when you tap Space twice.")
             }
         }
