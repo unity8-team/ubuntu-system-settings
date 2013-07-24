@@ -21,6 +21,8 @@
 #ifndef TIMEDATE_H
 #define TIMEDATE_H
 
+#include "timezonelocationmodel.h"
+#include <QAbstractTableModel>
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
 #include <QObject>
@@ -29,21 +31,24 @@
 class TimeDate : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( QString timeZone
+    Q_PROPERTY (QString timeZone
                 READ timeZone
                 WRITE setTimeZone
                 NOTIFY timeZoneChanged )
-    Q_PROPERTY(QStringList allCities
-               READ getCities
-               NOTIFY citiesChanged)
+    Q_PROPERTY (QAbstractItemModel *timeZoneModel
+                READ getTimeZoneModel)
+    Q_PROPERTY (QString filter
+                READ getFilter
+                WRITE setFilter)
 
 public:
     explicit TimeDate(QObject *parent = 0);
     ~TimeDate();
     void setTimeZone (QString &time_zone);
     QString timeZone();
-    const QStringList getCities();
-    Q_INVOKABLE const QString getTimeZoneForCity(const QString city);
+    QAbstractItemModel *getTimeZoneModel();
+    QString getFilter();
+    void setFilter (QString &filter);
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
@@ -51,17 +56,17 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void timeZoneChanged();
-    void citiesChanged();
 
 private:
     QString m_currentTimeZone;
     QDBusConnection m_systemBusConnection;
     QDBusServiceWatcher m_serviceWatcher;
     QDBusInterface m_timeDateInterface;
-    QMap<QString, QString> m_cityMap;
     QString m_objectPath;
+    TimeZoneLocationModel m_timeZoneModel;
+    TimeZoneFilterProxy m_timeZoneFilterProxy;
+    QString m_filter;
     QString getTimeZone();
-    QMap<QString, QString> buildCityMap();
     void setUpInterface();
 
 };

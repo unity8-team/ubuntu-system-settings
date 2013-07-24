@@ -29,17 +29,28 @@ ItemPage {
 
     UbuntuTimeDatePanel { id: timeDatePanel }
 
+    TextField {
+        anchors.top: parent.top
+        anchors.margins: units.gu(2)
+        width: parent.width
+        id: filterCities
+        onTextChanged: timeDatePanel.filter = text
+    }
+
     ListView {
-        anchors.fill: parent
+        anchors {
+            top: filterCities.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
         maximumFlickVelocity: height * 10
         flickDeceleration: height * 2
 
-        model: timeDatePanel.allCities
+        model: timeDatePanel.timeZoneModel
         delegate: ListItem.Standard {
-            text: modelData
-            onClicked:
-                timeDatePanel.timeZone =
-                    timeDatePanel.getTimeZoneForCity(modelData)
+            text: displayName
+            onClicked: timeDatePanel.timeZone = timeZone
         }
     }
 }

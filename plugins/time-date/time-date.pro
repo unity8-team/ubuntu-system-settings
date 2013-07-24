@@ -39,8 +39,10 @@ uri = Ubuntu.SystemSettings.TimeDate
 INCLUDEPATH += .
 
 # Input
-HEADERS += plugin.h timedate.h
-SOURCES += plugin.cpp timedate.cpp
+HEADERS += plugin.h timedate.h \
+    timezonelocationmodel.h
+SOURCES += plugin.cpp timedate.cpp \
+    timezonelocationmodel.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)

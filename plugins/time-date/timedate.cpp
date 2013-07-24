@@ -20,6 +20,7 @@
 
 #include "timedate.h"
 #include <QDBusReply>
+#include <QDebug>
 #include <QEvent>
 #include <glib.h>
 #include <glib-object.h>
@@ -35,7 +36,9 @@ TimeDate::TimeDate(QObject *parent) :
     m_timeDateInterface ("org.freedesktop.timedate1",
                          "/org/freedesktop/timedate1",
                          "org.freedesktop.timedate1",
-                          m_systemBusConnection)
+                          m_systemBusConnection),
+    m_timeZoneModel(),
+    m_timeZoneFilterProxy(this)
 {
     connect (&m_serviceWatcher,
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
@@ -57,8 +60,6 @@ void TimeDate::setUpInterface()
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
-
-    m_cityMap = buildCityMap();
 }
 
 QString TimeDate::timeZone()
@@ -111,49 +112,28 @@ void TimeDate::setTimeZone(QString &time_zone)
     m_timeDateInterface.call("SetTimezone", time_zone, false);
 }
 
-const QStringList TimeDate::getCities()
+QAbstractItemModel *TimeDate::getTimeZoneModel()
 {
-    if (m_cityMap.isEmpty())
-        m_cityMap = buildCityMap();
-
-    return m_cityMap.keys();
+    m_timeZoneFilterProxy.setSourceModel(&m_timeZoneModel);
+    m_timeZoneFilterProxy.setDynamicSortFilter(false);
+    // By default don't display anything
+    m_timeZoneFilterProxy.setFilterRegExp("^$");
+    m_timeZoneFilterProxy.setFilterCaseSensitivity(Qt::CaseInsensitive);
+    return &m_timeZoneFilterProxy;
 }
 
-const QString TimeDate::getTimeZoneForCity(const QString city)
+QString TimeDate::getFilter()
 {
-    if (m_cityMap.isEmpty())
-        m_cityMap = buildCityMap();
-
-    return m_cityMap.value(city);
+    return m_filter;
 }
 
-QMap<QString, QString> TimeDate::buildCityMap() {
-    TzDB *tzdb = tz_load_db();
-    GPtrArray *tz_locations = tz_get_locations(tzdb);
-
-    QMap<QString, QString> output;
-    CcTimezoneLocation *tmp;
-
-    for (guint i = 0; i < tz_locations->len; ++i) {
-        tmp = (CcTimezoneLocation *) g_ptr_array_index(tz_locations, i);
-        gchar *en_name, *country, *zone;
-        g_object_get (tmp, "en_name", &en_name,
-                           "country", &country,
-                           "zone", &zone,
-                           NULL);
-        QString name_country = QString("%1, %2").arg(en_name).arg(country);
-        output[name_country] = zone;
-        g_free (en_name);
-        g_free (country);
-        g_free (zone);
-    }
-
-    g_ptr_array_free (tz_locations, TRUE);
-
-    // Don't show the empty location included in the DB
-    output.remove("");
-
-    return output;
+void TimeDate::setFilter(QString &new_filter)
+{
+    // Empty string should match nothing
+    if (new_filter.isEmpty())
+        new_filter = "^$";
+    m_filter = new_filter;
+    m_timeZoneFilterProxy.setFilterRegExp(new_filter);
 }
 
 TimeDate::~TimeDate() {
