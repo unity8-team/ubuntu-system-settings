@@ -45,12 +45,12 @@ ItemPage {
             /* TODO: Get actual installed layouts. */
 
             SettingsCheckEntry {
-                textEntry: i18n.tr("English (US)")
+                textEntry: "English (US)"
                 checkStatus: true
             }
 
             SettingsCheckEntry {
-                textEntry: i18n.tr("French")
+                textEntry: "French"
                 checkStatus: true
             }
 
@@ -61,11 +61,11 @@ ItemPage {
             /* TODO: Get actual layouts. */
 
             SettingsCheckEntry {
-                textEntry: i18n.tr("Afghani")
+                textEntry: "Afghani"
             }
 
             SettingsCheckEntry {
-                textEntry: i18n.tr("Akan")
+                textEntry: "Akan"
             }
         }
     }

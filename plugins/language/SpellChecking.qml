@@ -52,7 +52,7 @@ ItemPage {
             /* TODO: Get real spelling language */
 
             SettingsCheckEntry {
-                textEntry: i18n.tr("English (US)")
+                textEntry: "English (US)"
                 checkStatus: true
             }
 
@@ -65,11 +65,11 @@ ItemPage {
             /* TODO: Get real available languages */
 
             SettingsCheckEntry {
-                textEntry: i18n.tr("Afar")
+                textEntry: "Afar"
             }
 
             SettingsCheckEntry {
-                textEntry: i18n.tr("Afrikaans")
+                textEntry: "Afrikaans"
             }
         }
     }

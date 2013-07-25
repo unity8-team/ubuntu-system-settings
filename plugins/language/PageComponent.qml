@@ -56,7 +56,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Keyboard layouts")
                 /* TODO: Get number of keyboard layouts */
-                value: i18n.tr("1")
+                value: "1"
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
             }
@@ -66,7 +66,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Spell checking")
                 /* TODO: Get spell checking setting */
-                value: i18n.tr("UK English")
+                value: "UK English"
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SpellChecking.qml"))
             }
