@@ -29,16 +29,40 @@ ItemPage {
 
     UbuntuTimeDatePanel { id: timeDatePanel }
 
+    ListItem.ValueSelector {
+        id: setTimeZoneValueSelector
+        text: i18n.tr("Set the time zone: ")
+        values: [i18n.tr("Automatically"), i18n.tr("Manually")]
+        expanded: true
+        // FIXME
+        onExpandedChanged: expanded = true
+    }
+
+    ListItem.Standard {
+        anchors.top: setTimeZoneValueSelector.bottom
+        text: timeDatePanel.timeZone
+        enabled: false
+        visible: setTimeZoneValueSelector.selectedIndex == 0 // Automatically
+    }
+
     TextField {
         anchors {
-            top: parent.top
+            top: setTimeZoneValueSelector.bottom
             left: parent.left
             right: parent.right
             margins: units.gu(2)
         }
         id: filterCities
         onTextChanged: timeDatePanel.filter = text
+        visible: setTimeZoneValueSelector.selectedIndex == 1 // Manually
         Component.onCompleted: forceActiveFocus()
+        Connections {
+            target: setTimeZoneValueSelector
+            onSelectedIndexChanged: {
+                if (setTimeZoneValueSelector.selectedIndex == 1)
+                    filterCities.forceActiveFocus()
+            }
+        }
     }
 
     ListView {
@@ -52,7 +76,7 @@ ItemPage {
         }
 
         model: timeDatePanel.timeZoneModel
-        visible: count > 0
+        visible: setTimeZoneValueSelector.selectedIndex == 1 && count > 0
         delegate: ListItem.Standard {
             text: displayName
             onClicked: timeDatePanel.timeZone = timeZone
@@ -62,7 +86,8 @@ ItemPage {
 
     Text {
         anchors.centerIn: parent
-        visible: locationsListView.count == 0
+        visible: setTimeZoneValueSelector.selectedIndex ==1 &&
+                 locationsListView.count == 0
         text: i18n.tr("No matching place")
     }
 }
