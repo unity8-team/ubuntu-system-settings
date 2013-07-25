@@ -46,7 +46,7 @@ ItemPage {
         ListItem.ValueSelector {
             id: languageList
 
-            text: i18n.tr("Display Language")
+            text: i18n.tr("Display language")
             values: plugin.languages
             selectedIndex: plugin.currentLanguage
 
