@@ -33,9 +33,7 @@ ItemPage {
         id: plugin
     }
 
-    ListItem.ValueSelector {
-        id: languageList
-
+    Flickable {
         clip: true
 
         anchors.top: parent.top
@@ -43,12 +41,18 @@ ItemPage {
         anchors.right: parent.right
         anchors.bottom: divider.top
 
-        text: i18n.tr("Display Language")
-        values: plugin.languages
-        selectedIndex: plugin.currentLanguage
+        contentHeight: contentItem.childrenRect.height
 
-        expanded: true
-        onExpandedChanged: expanded = true
+        ListItem.ValueSelector {
+            id: languageList
+
+            text: i18n.tr("Display Language")
+            values: plugin.languages
+            selectedIndex: plugin.currentLanguage
+
+            expanded: true
+            onExpandedChanged: expanded = true
+        }
     }
 
     ListItem.ThinDivider {
