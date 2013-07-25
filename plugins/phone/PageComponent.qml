@@ -33,7 +33,7 @@ ItemPage {
         id: infoBackend;
         monitorNetworkName: true
         onNetworkNameChanged:
-            carrierName = netinfo.networkName(NetworkInfo.GsmMode, 0)
+            carrierName = infoBackend.networkName(NetworkInfo.GsmMode, 0)
     }
 
     Column {
