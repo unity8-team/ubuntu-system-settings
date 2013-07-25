@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-19 19:40+0200\n"
-"PO-Revision-Date: 2013-07-21 14:43+0000\n"
+"POT-Creation-Date: 2013-07-24 16:40+0000\n"
+"PO-Revision-Date: 2013-07-24 18:53+0000\n"
 "Last-Translator: Phillip Sz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-22 06:01+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-07-25 05:45+0000\n"
+"X-Generator: Launchpad (build 16700)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -118,20 +118,20 @@ msgstr "Nach Größe"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: ../plugins/background/MainPage.qml:64 ../plugins/background/MainPage.qml:76
+#: ../plugins/background/MainPage.qml:68 ../plugins/background/MainPage.qml:80
 msgid "Welcome screen"
 msgstr "Startbildschirm"
 
-#: ../plugins/background/MainPage.qml:89
-#: ../plugins/background/MainPage.qml:104
+#: ../plugins/background/MainPage.qml:95
+#: ../plugins/background/MainPage.qml:110
 msgid "Home screen"
 msgstr "Startseite"
 
-#: ../plugins/background/MainPage.qml:155
+#: ../plugins/background/MainPage.qml:191
 msgid "Same background for both"
 msgstr "Gleicher Hintergrund für beide"
 
-#: ../plugins/background/MainPage.qml:178
+#: ../plugins/background/MainPage.qml:209
 msgid "Different background for each"
 msgstr "Unterschiedlicher Hintergrund für jedes"
 
@@ -184,6 +184,60 @@ msgstr "Datenroaming"
 msgid "Data usage statistics"
 msgstr "Daten-Nutzungsstatistiken"
 
+#: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
+#: ../plugins/phone/PageComponent.qml:34
+msgid "Call diversion"
+msgstr ""
+
+#: ../plugins/phone/CallDiversion.qml:74
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+
+#: ../plugins/phone/CallDiversion.qml:91
+msgid "Call diversion status can’t be checked right now. Try again later."
+msgstr ""
+
+#: ../plugins/phone/CallDiversion.qml:102
+msgid "Divert to"
+msgstr ""
+
+#: ../plugins/phone/CallDiversion.qml:113
+msgid "Contacts…"
+msgstr "Kontakte …"
+
+#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/reset/EraseEverything.qml:35
+#: ../plugins/reset/ResetAllSettings.qml:35
+#: ../plugins/reset/ResetLauncherHome.qml:35
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../plugins/phone/CallDiversion.qml:113
+msgid "Set"
+msgstr ""
+
+#: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
+#: ../plugins/phone/PageComponent.qml:40
+msgid "Call waiting"
+msgstr ""
+
+#: ../plugins/phone/CallWaiting.qml:67
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+
+#: ../plugins/phone/PageComponent.qml:27 ../.build/settings.js:13
+msgid "Phone"
+msgstr "Telefon"
+
+#: ../plugins/phone/PageComponent.qml:48
+#, qt-format
+msgid "%1 Services"
+msgstr ""
+
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
@@ -195,12 +249,6 @@ msgstr ""
 #: ../plugins/reset/EraseEverything.qml:31
 msgid "Erase & reset everything"
 msgstr "Alles löschen & zurücksetzen"
-
-#: ../plugins/reset/EraseEverything.qml:35
-#: ../plugins/reset/ResetAllSettings.qml:35
-#: ../plugins/reset/ResetLauncherHome.qml:35
-msgid "Cancel"
-msgstr "Abbrechen"
 
 #: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
 msgid "Reset phone"
@@ -267,13 +315,49 @@ msgstr "Alarmklang"
 msgid "Vibrate with alert sound"
 msgstr "Vibrieren mit Alarmklang"
 
+#: ../plugins/sound/PageComponent.qml:91
+msgid "Other sounds:"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
+msgid "Message received"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:103
+msgid "Keyboard sounds"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:108
+msgid "Lock sound"
+msgstr ""
+
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
 msgstr "Das Telefon ist im Stumm-Modus."
 
-#: ../plugins/sound/SoundsList.qml:48
+#: ../plugins/sound/SoundsList.qml:49
 msgid "Stop playing"
 msgstr "Wiedergabe anhalten"
+
+#: ../plugins/time-date/ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Zeitzone"
+
+#: ../plugins/time-date/ChooseTimeZone.qml:66
+msgid "No matching place"
+msgstr ""
+
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+msgid "Time & Date"
+msgstr "Zeit & Datum"
+
+#: ../plugins/time-date/PageComponent.qml:51
+msgid "Time zone:"
+msgstr "Zeitzone:"
+
+#: ../plugins/time-date/PageComponent.qml:63
+msgid "Set the time and date:"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
@@ -327,10 +411,6 @@ msgstr "Sprache"
 msgid "Rotation lock"
 msgstr "Rotationssperre"
 
-#: ../.build/settings.js:13
-msgid "Phone"
-msgstr "Telefon"
-
 #: ../.build/settings.js:15
 msgid "Security & Privacy"
 msgstr "Sicherheit & Datenschutz"
@@ -338,10 +418,6 @@ msgstr "Sicherheit & Datenschutz"
 #: ../.build/settings.js:17
 msgid "Updates"
 msgstr "Aktualisierungen"
-
-#: ../.build/settings.js:18
-msgid "Time & Date"
-msgstr "Zeit & Datum"
 
 #: ../.build/settings.js:19
 msgid "Wi-Fi"
