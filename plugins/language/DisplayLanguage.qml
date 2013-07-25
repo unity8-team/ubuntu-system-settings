@@ -28,16 +28,13 @@ ItemPage {
     id: root
 
     title: i18n.tr("Display language")
-    flickable: languageList
 
     UbuntuLanguagePlugin {
         id: plugin
     }
 
-    ListView {
+    ListItem.ValueSelector {
         id: languageList
-
-        property int selectedIndex: plugin.currentLanguage
 
         clip: true
 
@@ -46,15 +43,12 @@ ItemPage {
         anchors.right: parent.right
         anchors.bottom: divider.top
 
-        contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        text: i18n.tr("Display Language")
+        values: plugin.languages
+        selectedIndex: plugin.currentLanguage
 
-        model: plugin.languages
-        delegate: RadioItem {
-            text: modelData
-            active: index == languageList.selectedIndex
-            onClicked: languageList.selectedIndex = index
-        }
+        expanded: true
+        onExpandedChanged: expanded = true
     }
 
     ListItem.ThinDivider {

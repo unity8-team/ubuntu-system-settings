@@ -7,7 +7,6 @@ TARGET = language
 QML_SOURCES = DisplayLanguage.qml \
               KeyboardLayouts.qml \
               PageComponent.qml   \
-              RadioItem.qml       \
               SpellChecking.qml
 
 OTHER_FILES += $${QML_SOURCES}
