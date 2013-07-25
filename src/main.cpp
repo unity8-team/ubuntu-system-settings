@@ -22,8 +22,6 @@
 #include "i18n.h"
 #include "plugin-manager.h"
 
-#include <unistd.h>
-
 #include <QGuiApplication>
 #include <QProcessEnvironment>
 #include <QQmlContext>
@@ -51,24 +49,32 @@ int main(int argc, char **argv)
     /* HACK: force the theme until lp #1098578 is fixed */
     QIcon::setThemeName("ubuntu-mobile");
 
-    /* Parse the commandline options to see if we've been given a panel to load.
-     * The platform might pass us unknown (to us) options, which we want to just ignore.
+    /* Parse the commandline options to see if we've been given a panel to load,
+     * and other options for the panel.
      */
     QString defaultPlugin;
-    opterr = 0; /* disable errors, i.e. allow unknown arguments */
-    while (getopt(argc, argv, "") != -1); /* skip all option arguments */
-
-    if (optind < argc) { /* we have an argument */
-        defaultPlugin = argv[optind];
+    QVariantMap pluginOptions;
+    QStringList arguments = app.arguments();
+    for (int i = 1; i < arguments.count(); i++) {
+        const QString &argument = arguments.at(i);
+        if (!argument.startsWith('-')) {
+            defaultPlugin = argument;
+        } else if (argument == "--option") {
+            QStringList option = arguments.at(++i).split("=");
+            pluginOptions.insert(option.at(0), option.at(1));
+        }
     }
 
     QQuickView view;
+    QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),
+                     Qt::QueuedConnection);
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<SystemSettings::PluginManager>("SystemSettings", 1, 0, "PluginManager");
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
+    view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();
 
