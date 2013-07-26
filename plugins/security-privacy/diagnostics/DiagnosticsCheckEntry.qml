@@ -25,6 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ListItem.Base {
     property string textEntry: "";
     property alias checked: checkBox.checked;
+    onClicked: checked = !checked;
 
     Row {
         anchors.top: parent.top
