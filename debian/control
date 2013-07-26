@@ -28,6 +28,7 @@ Depends: ${misc:Depends},
          qtdeclarative5-systeminfo-plugin,
          qtdeclarative5-ubuntu-ui-toolkit-plugin (>= 0.1.46+13.10.20130710),
          libsystemsettings1 (= ${binary:Version}),
+         system-image-dbus (>= 0.9),
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
 Conflicts: ubuntu-system-settings-example

@@ -43,7 +43,7 @@ ItemPage {
             updateInProgress= true;
             updateReady = false;
             updateCanceled = false;
-            actionbuttons.text = ""
+            actionbuttons.text = "";
             TriggerUpdate();
         }
 
