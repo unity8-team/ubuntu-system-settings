@@ -61,7 +61,8 @@ int main(int argc, char **argv)
             defaultPlugin = argument;
         } else if (argument == "--option") {
             QStringList option = arguments.at(++i).split("=");
-            pluginOptions.insert(option.at(0), option.at(1));
+            // If no value is given, insert an empty string
+            pluginOptions.insert(option.at(0), option.value(1, ""));
         }
     }
 
