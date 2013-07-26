@@ -30,11 +30,11 @@ ListItem.Standard {
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
-        checked: globalSettings.flightMode
-        onCheckedChanged: globalSettings.flightMode = checked
+        checked: networkSettings.flightMode
+        onCheckedChanged: networkSettings.flightMode = checked
 
         GSettings {
-            id: globalSettings
+            id: networkSettings
             schema.id: "com.ubuntu.touch.network"
             onChanged: {
                 if (key == "flightMode")
