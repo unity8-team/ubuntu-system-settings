@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import GSettings 1.0
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -27,5 +28,18 @@ ListItem.Standard {
     icon: Qt.resolvedUrl(model.icon)
     iconFrame: false
     text: i18n.tr(model.displayName)
-    control: Switch { id: control }
+    control: Switch {
+        id: control
+        checked: systemSettings.rotationLock
+        onCheckedChanged: systemSettings.rotationLock = checked
+
+        GSettings {
+            id: systemSettings
+            schema.id: "com.ubuntu.touch.system"
+            onChanged: {
+                if (key == "rotationLock")
+                    control.checked = value
+            }
+        }
+    }
 }

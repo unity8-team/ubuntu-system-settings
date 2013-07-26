@@ -21,26 +21,39 @@
 #ifndef TIMEDATE_H
 #define TIMEDATE_H
 
+#include "timezonelocationmodel.h"
+#include <QAbstractTableModel>
 #include <QDBusInterface>
+#include <QDBusServiceWatcher>
 #include <QObject>
 #include <QProcess>
 
 class TimeDate : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( QString timeZone
+    Q_PROPERTY (QString timeZone
                 READ timeZone
                 WRITE setTimeZone
-                NOTIFY timeZoneChanged )
-    
+                NOTIFY timeZoneChanged)
+    Q_PROPERTY (QAbstractItemModel *timeZoneModel
+                READ getTimeZoneModel
+                CONSTANT)
+    Q_PROPERTY (QString filter
+                READ getFilter
+                WRITE setFilter)
+
 public:
     explicit TimeDate(QObject *parent = 0);
     ~TimeDate();
     void setTimeZone (QString &time_zone);
     QString timeZone();
+    QAbstractItemModel *getTimeZoneModel();
+    QString getFilter();
+    void setFilter (QString &filter);
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
+    void slotNameOwnerChanged(QString, QString, QString);
 
 Q_SIGNALS:
     void timeZoneChanged();
@@ -48,9 +61,14 @@ Q_SIGNALS:
 private:
     QString m_currentTimeZone;
     QDBusConnection m_systemBusConnection;
+    QDBusServiceWatcher m_serviceWatcher;
     QDBusInterface m_timeDateInterface;
     QString m_objectPath;
+    TimeZoneLocationModel m_timeZoneModel;
+    TimeZoneFilterProxy m_timeZoneFilterProxy;
+    QString m_filter;
     QString getTimeZone();
+    void setUpInterface();
 
 };
 

@@ -5,6 +5,7 @@ TEMPLATE = lib
 TARGET = time-date
 
 QML_SOURCES = \
+    ChooseTimeZone.qml \
     PageComponent.qml
 
 OTHER_FILES += \
@@ -25,7 +26,9 @@ INSTALLS += image
 # C++ bits
 TARGET = UbuntuTimeDatePanel
 QT += qml quick dbus
-CONFIG += qt plugin no_keywords
+CONFIG += qt plugin no_keywords link_pkgconfig
+
+PKGCONFIG += timezonemap glib-2.0
 
 #comment in the following line to enable traces
 #DEFINES += QT_NO_DEBUG_OUTPUT
@@ -36,8 +39,10 @@ uri = Ubuntu.SystemSettings.TimeDate
 INCLUDEPATH += .
 
 # Input
-HEADERS += plugin.h timedate.h
-SOURCES += plugin.cpp timedate.cpp
+HEADERS += plugin.h timedate.h \
+    timezonelocationmodel.h
+SOURCES += plugin.cpp timedate.cpp \
+    timezonelocationmodel.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)

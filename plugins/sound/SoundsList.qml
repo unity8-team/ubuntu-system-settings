@@ -10,6 +10,7 @@ ItemPage {
     property variant soundDisplayNames
     property variant soundFileNames
     property bool silentModeOn: false
+    property bool showStopButton: false
 
     id: soundsPage
     title: title
@@ -50,7 +51,8 @@ ItemPage {
                 onClicked:
                     soundEffect.stop()
             }
-            visible: !silentModeOn
+            enabled: soundEffect.playbackState == Audio.PlayingState
+            visible: showStopButton && !silentModeOn
         }
     }
 

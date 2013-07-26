@@ -21,20 +21,37 @@
 #include "timedate.h"
 #include <QDBusReply>
 #include <QEvent>
+#include <glib.h>
+#include <glib-object.h>
+#include <timezonemap/tz.h>
 #include <unistd.h>
 
 TimeDate::TimeDate(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus()),
+    m_serviceWatcher ("org.freedesktop.timedate1",
+                      m_systemBusConnection,
+                      QDBusServiceWatcher::WatchForOwnerChange),
     m_timeDateInterface ("org.freedesktop.timedate1",
                          "/org/freedesktop/timedate1",
                          "org.freedesktop.timedate1",
-                          m_systemBusConnection)
+                          m_systemBusConnection),
+    m_timeZoneModel(),
+    m_timeZoneFilterProxy(this)
 {
-    if (!m_timeDateInterface.isValid()) {
-        return;
+    connect (&m_serviceWatcher,
+             SIGNAL (serviceOwnerChanged (QString, QString, QString)),
+             this,
+             SLOT (slotNameOwnerChanged (QString, QString, QString)));
+
+    if (m_timeDateInterface.isValid()) {
+        setUpInterface();
     }
 
+}
+
+void TimeDate::setUpInterface()
+{
     m_timeDateInterface.connection().connect(
         m_timeDateInterface.service(),
         m_timeDateInterface.path(),
@@ -42,7 +59,6 @@ TimeDate::TimeDate(QObject *parent) :
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
-
 }
 
 QString TimeDate::timeZone()
@@ -63,21 +79,63 @@ QString TimeDate::getTimeZone()
     return QString();
 }
 
-#define UNUSED __attribute__((__unused__))
-
-void TimeDate::slotChanged(QString UNUSED interface,
-                           QVariantMap UNUSED changed_properties,
+void TimeDate::slotChanged(QString interface,
+                           QVariantMap changed_properties,
                            QStringList invalidated_properties)
 {
+    Q_UNUSED (interface);
+    Q_UNUSED (changed_properties);
+
     if (invalidated_properties.contains("Timezone")) {
         m_currentTimeZone = getTimeZone();
         Q_EMIT timeZoneChanged();
     }
 }
 
+void TimeDate::slotNameOwnerChanged(QString name,
+                                    QString oldOwner,
+                                    QString newOwner)
+{
+    Q_UNUSED (oldOwner);
+    Q_UNUSED (newOwner);
+    if (name != "org.freedesktop.timedate1")
+        return;
+
+    setUpInterface();
+    // Tell QML so that it refreshes its view of the property
+    Q_EMIT timeZoneChanged();
+}
+
 void TimeDate::setTimeZone(QString &time_zone)
 {
     m_timeDateInterface.call("SetTimezone", time_zone, false);
+}
+
+QAbstractItemModel *TimeDate::getTimeZoneModel()
+{
+    if (m_timeZoneModel.rowCount() == 0)
+        m_timeZoneModel.populateModel();
+
+    m_timeZoneFilterProxy.setSourceModel(&m_timeZoneModel);
+    m_timeZoneFilterProxy.setDynamicSortFilter(false);
+    // By default don't display anything
+    m_timeZoneFilterProxy.setFilterRegExp("^$");
+    m_timeZoneFilterProxy.setFilterCaseSensitivity(Qt::CaseInsensitive);
+    return &m_timeZoneFilterProxy;
+}
+
+QString TimeDate::getFilter()
+{
+    return m_filter;
+}
+
+void TimeDate::setFilter(QString &new_filter)
+{
+    // Empty string should match nothing
+    if (new_filter.isEmpty())
+        new_filter = "^$";
+    m_filter = new_filter;
+    m_timeZoneFilterProxy.setFilterRegExp(new_filter);
 }
 
 TimeDate::~TimeDate() {
