@@ -22,6 +22,8 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Update 1.0
+
 
 ItemPage {
     id: root
@@ -29,20 +31,35 @@ ItemPage {
     title: i18n.tr("Update phone")
     flickable: scrollWidget // maybe remove
 
+    UbuntuUpdatePanel {
+        id: updateID
+
+        function statusMessage() {
+            if (updateAvailable === 0)
+                return i18n.tr("Congrats! You are already up to date!");
+            else if (updateAvailable === 1)
+                return i18n.tr("New version is available, click for more details");
+            return i18n.tr("Checking latest available system version…");
+        }
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
+
+
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
 
             ListItem.Standard {
-                text: i18n.tr("Update THE phone")
+                text: updateID.statusMessage();
             }
 
         }
     }
+
 }
