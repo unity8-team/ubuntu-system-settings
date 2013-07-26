@@ -59,7 +59,7 @@ int main(int argc, char **argv)
         const QString &argument = arguments.at(i);
         if (!argument.startsWith('-')) {
             defaultPlugin = argument;
-        } else if (argument == "--option") {
+        } else if (argument == "--option" && i + 1 < arguments.count()) {
             QStringList option = arguments.at(++i).split("=");
             // If no value is given, insert an empty string
             pluginOptions.insert(option.at(0), option.value(1, ""));
