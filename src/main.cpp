@@ -83,8 +83,6 @@ int main(int argc, char **argv)
         defaultPlugin = QString::fromLocal8Bit(argv[optind]);
     }
 
-    qDebug() << pluginOptions << defaultPlugin;
-
     QQuickView view;
     QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),
                      Qt::QueuedConnection);
