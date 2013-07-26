@@ -71,7 +71,7 @@ int main(int argc, char **argv)
             > -1) {
         switch (opt) {
         case 'o':
-            QStringList option = QString(optarg).split("=");
+            QStringList option = QString::fromLocal8Bit(optarg).split("=");
             if (option.length() < 2) /* Treat --option foo as --option foo= */
                 option.append("");
             pluginOptions.insert(option.at(0), option.at(1));
@@ -80,8 +80,10 @@ int main(int argc, char **argv)
     }
 
     if (optind < argc) { /* We have an argument */
-        defaultPlugin = argv[optind];
+        defaultPlugin = QString::fromLocal8Bit(argv[optind]);
     }
+
+    qDebug() << pluginOptions << defaultPlugin;
 
     QQuickView view;
     QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),
