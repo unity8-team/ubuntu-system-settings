@@ -53,6 +53,19 @@ Update::Update(QObject *parent) :
 Update::~Update() {
 }
 
+void Update::TriggerUpdate() {
+    m_SystemServiceIface.call("GetUpdate");
+}
+
+void Update::CancelUpdate() {
+    m_SystemServiceIface.call("Cancel");
+}
+
+void Update::Reboot() {
+    qWarning() << "Reboot";
+    m_SystemServiceIface.call("Reboot");
+}
+
 
 QString Update::OSVersion()
 {
@@ -70,7 +83,7 @@ QString Update::UpdateSize()
     return m_updateSize;
 }
 
-QStreing Update::UpdateDescriptions()
+QString Update::UpdateDescriptions()
 {
     return m_updateDescriptions;
 }

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Iain Lane <iain.lane@canonical.com>
+ * Didier Roche <didier.roche@canonical.com>
  *
 */
 
@@ -56,6 +56,10 @@ public:
     QString UpdateVersion();
     QString UpdateSize();
     QString UpdateDescriptions();
+
+    Q_INVOKABLE void TriggerUpdate();
+    Q_INVOKABLE void CancelUpdate();
+    Q_INVOKABLE void Reboot();
 
 
 public Q_SLOTS:

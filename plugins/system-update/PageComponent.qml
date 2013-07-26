@@ -57,6 +57,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: updateID.statusMessage();
+                onClicked: updateID.Reboot();
             }
             ListItem.Standard {
                 text: "OS version " + updateID.OSVersion;
