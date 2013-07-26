@@ -31,7 +31,7 @@ ItemPage {
 
     ListItem.ValueSelector {
         id: setTimeZoneValueSelector
-        text: i18n.tr("Set the time zone: ")
+        text: i18n.tr("Set the time zone:")
         values: [i18n.tr("Automatically"), i18n.tr("Manually")]
         expanded: true
         // FIXME
