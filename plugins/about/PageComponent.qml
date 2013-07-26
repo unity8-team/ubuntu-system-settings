@@ -28,6 +28,8 @@ import Ubuntu.SystemSettings.StorageAbout 1.0
 ItemPage {
     id: root
 
+    property string updateDate
+
     title: i18n.tr("About this phone")
     flickable: scrollWidget
 
@@ -95,7 +97,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Last updated")
-                value: "2013-04-09"              // TODO: read update infos from the device
+                value: updateDate ? updateDate : i18n.tr("Never")              // TODO: read update infos from the device
             }
 
             ListItem.SingleControl {
