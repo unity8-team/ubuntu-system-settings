@@ -40,18 +40,24 @@ class StorageAbout : public QObject
                 READ licensesList
                 CONSTANT)
 
+    Q_PROPERTY( QString updateDate
+                READ updateDate
+                CONSTANT)
+
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
     QString serialNumber();
     QString vendorString();
     QStringList licensesList();
+    QString updateDate();
     Q_INVOKABLE QString licenseInfo(const QString &subdir) const;
 
 private:
     QString m_serialNumber;
     QString m_vendorString;
     QStringList m_licensesList;
+    QString m_updateDate;
 };
 
 #endif // STORAGEABOUT_H
