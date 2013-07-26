@@ -6,6 +6,7 @@ lib*.so*
 Makefile*
 moc_*.cpp
 qrc_*.cpp
+system-settings.pro.user
 /debian/files
 /debian/libsystemsettings-dev/
 /debian/libsystemsettings1/

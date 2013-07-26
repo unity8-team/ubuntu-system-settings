@@ -1,3 +1,78 @@
+ubuntu-system-settings (0.1+13.10.20130726-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * about: show 'never' as update date if there is none.
+  * Initial language panel UI.
+
+  [ William Hua ]
+  * Initial language panel UI.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 187
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 26 Jul 2013 07:01:50 +0000
+
+ubuntu-system-settings (0.1+13.10.20130725-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * phone: start the ui work, add the main page and most of the subpages
+    for call diversion and call waiting (we are going to need a keypad
+    widget to use to be able to add some of the features though).
+  * sound: updated to reflect the recent design update - list new UI
+    elements for message received/keyboard sound/lock sound - show the
+    stop playing button only on the ringtone screen - disable the button
+    when sound is not playing.
+  * storage: store sorting preferences to gsettings.
+
+  [ Iain Lane ]
+  * Initial implementaion of Time & Date panel.
+  * phone: start the ui work, add the main page and most of the subpages
+    for call diversion and call waiting (we are going to need a keypad
+    widget to use to be able to add some of the features though).
+
+  [ Didier Roche ]
+  * ignore the local setting from qtcreator.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 183
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 25 Jul 2013 07:01:54 +0000
+
+ubuntu-system-settings (0.1+13.10.20130723-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * storage: get the real disk's free space information.
+
+  [ Iain Lane ]
+  * Add a GSettings schema for system-settings to store its own state.
+    Make background use this and set keys as appropriate.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 174
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 23 Jul 2013 07:01:51 +0000
+
+ubuntu-system-settings (0.1+13.10.20130720-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * settings: share the "list item with checkbox on the left" widget
+    since it's going to be used in different panels. We need this until
+    https://bugs.launchpad.net/ubuntu-ui-toolkit/+bug/1197058 is fixed
+    in the toolkit (or the design need to change to put those on the
+    right...).
+  * storage: update to reflect the design changes, some code
+    improvements - list the new categories from design (movies, audio,
+    pictures, other files) - create a new widget for the legend items -
+    update the bar widget to use the real values rather than fixed ones
+    (The datas are still mostly faked for the moment though) .
+  * update the translations' template.
+  * really move the custom check item to its new location.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 170
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 20 Jul 2013 07:01:51 +0000
+
 ubuntu-system-settings (0.1+13.10.20130719-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]

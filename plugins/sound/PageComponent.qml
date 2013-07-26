@@ -53,15 +53,15 @@ ItemPage {
                 text: i18n.tr("Ringtone")
                 value: "Theremin"   // TODO: get sound effect
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone")})
+                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone"), showStopButton: true})
             }
 
-            SoundCheckEntry {
+            SettingsCheckEntry {
                 checkStatus: false
                 textEntry: i18n.tr("Vibrate when ringing")
             }
 
-            SoundCheckEntry {
+            SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate in silent mode")
             }
@@ -77,14 +77,35 @@ ItemPage {
                 onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Alert sound")})
             }
 
-            SoundCheckEntry {
+            SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate with alert sound")
             }
 
-            SoundCheckEntry {
+            SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate in silent mode")
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Other sounds:")
+            }
+
+            ListItem.SingleValue {
+                text: i18n.tr("Message received")
+                value: "Xylophone"   // TODO: get sound effect
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Message received")})
+            }
+
+            SettingsCheckEntry {
+                checkStatus: false
+                textEntry: i18n.tr("Keyboard sounds")
+            }
+
+            SettingsCheckEntry {
+                checkStatus: false
+                textEntry: i18n.tr("Lock sound")
             }
         }
     }

@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
+ * Contact: William Hua <william.hua@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -18,28 +18,33 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+#ifndef LANGUAGE_PLUGIN_H
+#define LANGUAGE_PLUGIN_H
 
-ListItem.Base {
-    property string textEntry: ""
-    property alias checkStatus: checkBox.checked
+#include <QtCore>
 
-    Row {
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        spacing: units.gu(2)
+class LanguagePlugin : public QObject
+{
+private:
 
-        CheckBox {
-            id: checkBox
-            anchors.verticalCenter: parent.verticalCenter
-        }
-        Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text: textEntry
-        }
-    }
+    Q_OBJECT
 
-    onClicked: checkStatus = !checkStatus
-}
+    Q_PROPERTY(QStringList languages
+               READ languages
+               CONSTANT)
+
+    Q_PROPERTY(int currentLanguage
+               READ currentLanguage
+               WRITE setCurrentLanguage)
+
+public:
+
+    explicit LanguagePlugin(QObject *parent = NULL);
+
+    const QStringList &languages() const;
+
+    int currentLanguage() const;
+    void setCurrentLanguage(int index);
+};
+
+#endif // LANGUAGE_PLUGIN_H
