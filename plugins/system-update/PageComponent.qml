@@ -58,7 +58,12 @@ ItemPage {
             ListItem.Standard {
                 text: updateID.statusMessage();
             }
-
+            ListItem.Standard {
+                text: "OS version " + updateID.OSVersion;
+            }
+            ListItem.Standard {
+                text: "Test " + updateID.updateSize;
+            }
         }
     }
 

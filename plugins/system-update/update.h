@@ -29,18 +29,34 @@
 class Update : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( QString versionOS
-                READ versionOS
+    Q_PROPERTY( QString OSVersion
+                READ OSVersion
                 CONSTANT)
     Q_PROPERTY( int updateAvailable
-                READ getUpdateAvailable
+                READ UpdateAvailable
                 NOTIFY updateAvailableChanged )
+    Q_PROPERTY( QString updateVersion
+                READ UpdateVersion
+                NOTIFY updateAvailableChanged)
+    Q_PROPERTY( QString updateSize
+                READ UpdateSize
+                NOTIFY updateAvailableChanged)
+    Q_PROPERTY( QString updateDescriptions
+                READ UpdateDescriptions
+                NOTIFY updateAvailableChanged)
+
     
 public:
     explicit Update(QObject *parent = 0);
     ~Update();
-    QString versionOS();
-    int getUpdateAvailable();
+
+    QString OSVersion();
+
+    int UpdateAvailable();
+    QString UpdateVersion();
+    QString UpdateSize();
+    QString UpdateDescriptions();
+
 
 public Q_SLOTS:
     bool slotUpdateAvailableStatus(bool pendingUpdate);
@@ -49,11 +65,18 @@ Q_SIGNALS:
     bool updateAvailableChanged();
 
 private:
+    QString m_OSVersion;
+
     int m_updateAvailable;
-    QString m_versionOS;
+    QString m_updateVersion;
+    QString m_updateSize;
+    QString m_updateDescriptions;
+
     QDBusConnection m_sessionBusConnection;
     QString m_objectPath;
     QDBusInterface m_SystemServiceIface;
+
+    void m_getUpdateInfos();
 };
 
 #endif // UPDATE_H

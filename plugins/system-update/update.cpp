@@ -35,10 +35,18 @@ Update::Update(QObject *parent) :
 {
 
     // TODO: check if we get an error and maybe trigger a signal to update the UI (or retry)
-    m_SystemServiceIface.call("CheckForUpdate");
-
+    // check if an update is available
     connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool)),
             this, SLOT(slotUpdateAvailableStatus(bool)));
+    m_SystemServiceIface.call("CheckForUpdate");
+
+    // get current OS version
+    QDBusReply<int> reply = m_SystemServiceIface.call("BuildNumber");
+    if (reply.isValid())
+        m_OSVersion = QString::number(reply.value());
+    else
+        m_OSVersion = "Unknown";
+
 
 }
 
@@ -46,23 +54,56 @@ Update::~Update() {
 }
 
 
-QString Update::versionOS()
+QString Update::OSVersion()
 {
-    if (m_versionOS.isEmpty() || m_versionOS.isNull())
-        m_versionOS = QString("%1 %2").arg(m_objectPath).arg(QString("as user id"));
+    return m_OSVersion;
+}
 
-    return m_versionOS;
+QString Update::UpdateVersion()
+{
+    return m_updateVersion;
+}
+
+
+QString Update::UpdateSize()
+{
+    return m_updateSize;
+}
+
+QStreing Update::UpdateDescriptions()
+{
+    return m_updateDescriptions;
 }
 
 
 bool Update::slotUpdateAvailableStatus(bool pendingUpdate)
 {
     m_updateAvailable = int(pendingUpdate);
+    if (pendingUpdate)
+        m_getUpdateInfos();
     Q_EMIT updateAvailableChanged();
     return pendingUpdate;
 }
 
-int Update::getUpdateAvailable()
+int Update::UpdateAvailable()
 {
     return m_updateAvailable;
+}
+
+void Update::m_getUpdateInfos()
+{
+    QDBusReply<int> reply = m_SystemServiceIface.call("GetUpdateVersion");
+    if (reply.isValid())
+        m_updateVersion = QString::number(reply.value());
+    else
+        m_updateVersion = "Unknown";
+
+    QDBusReply<qint64> reply2 = m_SystemServiceIface.call("GetUpdateSize");
+    if (reply2.isValid())
+        m_updateSize = QString("%1 Mb").arg(QString::number(reply2.value()/1024.0));
+    else
+        m_updateSize = "Unknown";
+
+    // TODO: descriptions (array of dict)
+
 }
