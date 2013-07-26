@@ -107,7 +107,7 @@ ItemPage {
                         text: { if (updateID.updateAvailable === 0)
                                   return i18n.tr("Congrats! You are already up to date!");
                                 else if (updateID.updateAvailable === 1)
-                                  return i18n.tr("New version is available, click for more details");
+                                  return i18n.tr("A new version is available!");
                                 return i18n.tr("Checking latest available system version…"); }
                         wrapMode: Text.WordWrap
 
@@ -130,13 +130,13 @@ ItemPage {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     ListItem.Standard {
-                        text: i18n.tr("You can update from version %1 to version %2".arg(updateID.OSVersion).arg(updateID.updateVersion));
+                        text: i18n.tr("You can update from version %1 to version %2").arg(updateID.OSVersion).arg(updateID.updateVersion);
                     }
                     ListItem.Standard {
-                        text: i18n.tr("Size of this update: %1".arg(updateID.updateSize));
+                        text: i18n.tr("Size of this update: %1").arg(updateID.updateSize);
                     }
 
-                    ListItem.Standard {
+                    ListItem.Caption {
                         // TODO fix with real description (probably iteraring on a list)
                         // no i18n as the chain will change
                         text: "This update will:\n * Enables a 200x improvment on Ubuntu Edge phone\n * Makes you a sandwish";
