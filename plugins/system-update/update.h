@@ -67,6 +67,9 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     bool updateAvailableChanged();
+    void readyToReboot();
+    void updateFailed();
+    void updateCanceled();
 
 private:
     QString m_OSVersion;

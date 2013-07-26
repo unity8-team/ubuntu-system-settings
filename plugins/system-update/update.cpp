@@ -47,7 +47,13 @@ Update::Update(QObject *parent) :
     else
         m_OSVersion = "Unknown";
 
-
+    // signals to forward directly to QML
+    connect(&m_SystemServiceIface, SIGNAL(ReadyToReboot()),
+            this, SIGNAL(readyToReboot()));
+    connect(&m_SystemServiceIface, SIGNAL(UpdateFailed()),
+            this, SIGNAL(updateFailed()));
+    connect(&m_SystemServiceIface, SIGNAL(Canceled()),
+            this, SIGNAL(updateCanceled()));
 }
 
 Update::~Update() {
@@ -62,10 +68,8 @@ void Update::CancelUpdate() {
 }
 
 void Update::Reboot() {
-    qWarning() << "Reboot";
     m_SystemServiceIface.call("Reboot");
 }
-
 
 QString Update::OSVersion()
 {
@@ -77,7 +81,6 @@ QString Update::UpdateVersion()
     return m_updateVersion;
 }
 
-
 QString Update::UpdateSize()
 {
     return m_updateSize;
@@ -87,7 +90,6 @@ QString Update::UpdateDescriptions()
 {
     return m_updateDescriptions;
 }
-
 
 bool Update::slotUpdateAvailableStatus(bool pendingUpdate)
 {

@@ -33,6 +33,19 @@ ItemPage {
 
     UbuntuUpdatePanel {
         id: updateID
+        onReadyToReboot: {
+            console.log("ready to reboot");
+            toto.text = "READYYYYYYYYYYYYYYYYYYYYY";
+        }
+        onUpdateFailed: {
+            console.log("ready to failed");
+            toto.text = "FAILLLLLED";
+        }
+        onUpdateCanceled: {
+            console.log("ready to canceled");
+            toto.text = "CANCELED";
+        }
+
     }
 
     Flickable {
@@ -46,12 +59,13 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Standard {
+                id: toto
                 text: { if (updateID.updateAvailable === 0)
                             return i18n.tr("Congrats! You are already up to date!");
                         else if (updateID.updateAvailable === 1)
                             return i18n.tr("New version is available, click for more details");
                         return i18n.tr("Checking latest available system version…"); }
-                onClicked: updateID.Reboot();
+                onClicked: toto.text == "READYYYYYYYYYYYYYYYYYYYYY" ? updateID.CancelUpdate() : updateID.TriggerUpdate();
             }
             ListItem.Standard {
                 text: "OS version " + updateID.OSVersion;
