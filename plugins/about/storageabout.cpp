@@ -17,7 +17,10 @@
  *
 */
 
+#include <QDateTime>
 #include <QDir>
+#include <QFile>
+#include <QFileInfo>
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
 
@@ -65,6 +68,19 @@ QStringList StorageAbout::licensesList()
         m_licensesList = copyrightDir.entryList();
     }
     return m_licensesList;
+}
+
+QString StorageAbout::updateDate()
+{
+    if (m_updateDate.isEmpty() || m_updateDate.isNull())
+    {
+        QFile file("/userdata/.last_update");
+        if (!file.exists())
+            return "";
+        m_updateDate = QFileInfo(file).created().toString("yyyy-MM-dd");
+    }
+
+    return m_updateDate;
 }
 
 QString StorageAbout::licenseInfo(const QString &subdir) const
