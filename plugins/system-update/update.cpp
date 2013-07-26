@@ -81,6 +81,12 @@ QString Update::UpdateVersion()
     return m_updateVersion;
 }
 
+void Update::setUpdateAvailable(int updateStatus)
+{
+    m_updateAvailable = updateStatus;
+    Q_EMIT updateAvailableChanged();
+}
+
 QString Update::UpdateSize()
 {
     return m_updateSize;

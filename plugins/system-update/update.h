@@ -34,6 +34,7 @@ class Update : public QObject
                 CONSTANT)
     Q_PROPERTY( int updateAvailable
                 READ UpdateAvailable
+                WRITE setUpdateAvailable
                 NOTIFY updateAvailableChanged )
     Q_PROPERTY( QString updateVersion
                 READ UpdateVersion
@@ -53,6 +54,7 @@ public:
     QString OSVersion();
 
     int UpdateAvailable();
+    void setUpdateAvailable(int);
     QString UpdateVersion();
     QString UpdateSize();
     QString UpdateDescriptions();

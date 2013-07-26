@@ -22,6 +22,7 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Update 1.0
 
 
@@ -37,13 +38,11 @@ ItemPage {
         property bool updateInProgress: false
         property bool updateReady: false
         property bool updateCanceled: false
-        property bool updateFailed: false
 
         function startUpdate() {
             updateInProgress= true;
             updateReady = false;
             updateCanceled = false;
-            updateFailed = false;
             actionbuttons.text = ""
             TriggerUpdate();
         }
@@ -52,28 +51,30 @@ ItemPage {
             updateInProgress = true;
             updateReady = true;
             updateCanceled = false;
-            updateFailed = false;
         }
         onUpdateFailed: {
+            PopupUtils.open(updateFailedDialog)
             updateInProgress = false;
             updateReady = false;
             updateCanceled = false;
-            updateFailed = true;
-            actionbuttons.text = i18n.tr("Sorry, the update failed. Please try again later");
+            updateAvailable = -1;
         }
         onUpdateCanceled: {
             updateInProgress = false;
             updateReady = false;
             updateCanceled = true;
-            updateFailed = false;
+            updateAvailable = 1;
         }
 
         onUpdateAvailableChanged: {
-            if (updateID.updateAvailable === 1)
+            if (updateID.updateAvailable === 1) {
                 statusDetails.opacity = 1.0;
+                actionbuttons.text = actionbuttons.default_text;
+            }
             else
                 statusDetails.opacity = 0.0;
         }
+
     }
 
     Flickable {
@@ -89,15 +90,11 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-
             ListItem.Base {
-                anchors.left: parent.left
-                anchors.right: parent.right
                 height: updateStatusbar.height + checkUpdateIndicator.height + units.gu(6)
 
                 Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    width: parent.width
                     anchors.centerIn: parent
                     spacing: units.gu(2)
 
@@ -107,12 +104,11 @@ ItemPage {
                         anchors.right: parent.right
 
                         fontSize: "large"
-                        text: i18n.tr("Congrats! You are already up to date!")
-                        /*text: { if (updateID.updateAvailable === 0)
+                        text: { if (updateID.updateAvailable === 0)
                                   return i18n.tr("Congrats! You are already up to date!");
                                 else if (updateID.updateAvailable === 1)
                                   return i18n.tr("New version is available, click for more details");
-                                return i18n.tr("Checking latest available system version…"); }*/
+                                return i18n.tr("Checking latest available system version…"); }
                         wrapMode: Text.WordWrap
 
                     }
@@ -129,6 +125,7 @@ ItemPage {
                 id: statusDetails
                 Behavior on opacity { PropertyAnimation { duration: 1000 } }
                 opacity: 0
+
                 Column {
                     anchors.left: parent.left
                     anchors.right: parent.right
@@ -146,7 +143,8 @@ ItemPage {
                     }
                     ListItem.Standard {
                         id: actionbuttons
-                        text: "Apply?"
+                        property string default_text: i18n.tr("Apply?")
+                        text: default_text
                         ActivityIndicator {
                             anchors.verticalCenter: parent.verticalCenter
                             running: updateID.updateInProgress && !updateID.updateReady
@@ -157,7 +155,7 @@ ItemPage {
                                 text: i18n.tr("Update your phone")
                                 width: units.gu(19)
                                 onClicked: updateID.startUpdate()
-                                visible: !updateID.updateInProgress && !updateID.updateFailed
+                                visible: !updateID.updateInProgress
                             }
                             Button {
                                 text: i18n.tr("Cancel update")
@@ -166,8 +164,8 @@ ItemPage {
                                 visible: updateID.updateInProgress
                             }
                             Button {
-                                text: i18n.tr("Reboot your phone")
-                                width: units.gu(19)
+                                text: i18n.tr("Reboot your phone now")
+                                width: units.gu(25)
                                 onClicked: updateID.Reboot()
                                 visible: updateID.updateInProgress && updateID.updateReady
                             }
@@ -178,4 +176,16 @@ ItemPage {
         }
     }
 
+    Component {
+         id: updateFailedDialog
+        Dialog {
+            id: updateFailedDialogue
+            title: i18n.tr("We are deeply sorry");
+            text: i18n.tr("The update failed. Please try again later");
+            Button {
+               text: "I'll try later"
+               onClicked: PopupUtils.close(updateFailedDialogue)
+            }
+        }
+    }
 }
