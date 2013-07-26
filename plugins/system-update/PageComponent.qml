@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+ * Contact: Didier Roche <didier.roches@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -33,14 +33,6 @@ ItemPage {
 
     UbuntuUpdatePanel {
         id: updateID
-
-        function statusMessage() {
-            if (updateAvailable === 0)
-                return i18n.tr("Congrats! You are already up to date!");
-            else if (updateAvailable === 1)
-                return i18n.tr("New version is available, click for more details");
-            return i18n.tr("Checking latest available system version…");
-        }
     }
 
     Flickable {
@@ -49,14 +41,16 @@ ItemPage {
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-
-
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
 
             ListItem.Standard {
-                text: updateID.statusMessage();
+                text: { if (updateID.updateAvailable === 0)
+                            return i18n.tr("Congrats! You are already up to date!");
+                        else if (updateID.updateAvailable === 1)
+                            return i18n.tr("New version is available, click for more details");
+                        return i18n.tr("Checking latest available system version…"); }
                 onClicked: updateID.Reboot();
             }
             ListItem.Standard {
