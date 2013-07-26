@@ -22,6 +22,9 @@
 #include "i18n.h"
 #include "plugin-manager.h"
 
+#include <unistd.h>
+#include <getopt.h>
+
 #include <QGuiApplication>
 #include <QProcessEnvironment>
 #include <QQmlContext>
@@ -54,15 +57,30 @@ int main(int argc, char **argv)
      */
     QString defaultPlugin;
     QVariantMap pluginOptions;
-    QStringList arguments = app.arguments();
-    for (int i = 1; i < arguments.count(); i++) {
-        const QString &argument = arguments.at(i);
-        if (!argument.startsWith('-')) {
-            defaultPlugin = argument;
-        } else if (argument == "--option") {
-            QStringList option = arguments.at(++i).split("=");
+
+    opterr = 0; /* Skip unknown arguments */
+
+    static struct option long_options[] = {
+        {"option", required_argument, 0, 'o'},
+        {0, 0, 0, 0}
+    };
+
+    int option_index = 0;
+    int opt;
+    while ((opt = getopt_long (argc, argv, "", long_options, &option_index))
+            > -1) {
+        switch (opt) {
+        case 'o':
+            QStringList option = QString(optarg).split("=");
+            if (option.length() < 2) /* Treat --option foo as --option foo= */
+                option.append("");
             pluginOptions.insert(option.at(0), option.at(1));
+            break;
         }
+    }
+
+    if (optind < argc) { /* We have an argument */
+        defaultPlugin = argv[optind];
     }
 
     QQuickView view;
