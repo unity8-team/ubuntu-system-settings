@@ -66,9 +66,14 @@ ItemPage {
             updateReady = false;
             updateCanceled = true;
             updateFailed = false;
-            statusDetails.opacity = 0.0;
         }
 
+        onUpdateAvailableChanged: {
+            if (updateID.updateAvailable === 1)
+                statusDetails.opacity = 1.0;
+            else
+                statusDetails.opacity = 0.0;
+        }
     }
 
     Flickable {
@@ -76,22 +81,50 @@ ItemPage {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        anchors.left: parent.left
+        anchors.right: parent.right
+
 
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
-                id: toto
-                text: { if (updateID.updateAvailable === 0)
-                          return i18n.tr("Congrats! You are already up to date!");
-                        else if (updateID.updateAvailable === 1)
-                          return i18n.tr("New version is available, click for more details");
-                        return i18n.tr("Checking latest available system version…"); }
-                onClicked: { if (updateID.updateAvailable === 1)
-                               statusDetails.opacity = 1.0;
-                           }
+
+            ListItem.Base {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: updateStatusbar.height + checkUpdateIndicator.height + units.gu(6)
+
+                Column {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.centerIn: parent
+                    spacing: units.gu(2)
+
+                    Label {
+                        id: updateStatusbar
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+
+                        fontSize: "large"
+                        text: i18n.tr("Congrats! You are already up to date!")
+                        /*text: { if (updateID.updateAvailable === 0)
+                                  return i18n.tr("Congrats! You are already up to date!");
+                                else if (updateID.updateAvailable === 1)
+                                  return i18n.tr("New version is available, click for more details");
+                                return i18n.tr("Checking latest available system version…"); }*/
+                        wrapMode: Text.WordWrap
+
+                    }
+                    ActivityIndicator {
+                        id: checkUpdateIndicator
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        running: updateID.updateAvailable < 0
+                    }
+                }
+
             }
+
             ListItem.Standard {
                 id: statusDetails
                 Behavior on opacity { PropertyAnimation { duration: 1000 } }
