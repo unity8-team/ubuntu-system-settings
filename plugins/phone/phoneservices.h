@@ -22,6 +22,7 @@
 #define PHONESERVICES_H
 
 #include <QObject>
+#include <QtCore>
 
 class PhoneServices : public QObject
 {
