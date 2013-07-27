@@ -33,7 +33,7 @@ class PhoneServices : public QObject
 public:
     explicit PhoneServices(QObject *parent = 0);
     ~PhoneServices();
-    Q_INVOKABLE QMap<QString, QVariant> serviceNumbers ();
+    QMap<QString, QVariant> serviceNumbers ();
 
 private:
     QVariantMap m_serviceNumbers;

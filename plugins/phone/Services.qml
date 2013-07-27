@@ -22,17 +22,23 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Phone 1.0
 
 ItemPage {
     property string carrierString
     title: i18n.tr("%1 Services").arg(carrierString)
 
+    UbuntuPhonePanel {
+        id: sim
+    }
+
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
         Repeater {
-            model: [i18n.tr("Voicemail"), i18n.tr("My %1 Credit & Plan").arg(carrierString),
-                i18n.tr("Listen to digits of %1").arg(carrierString), i18n.tr("Traffic report"), i18n.tr("Horoscopes")]
+            //model: [i18n.tr("Voicemail"), i18n.tr("My %1 Credit & Plan").arg(carrierString),
+            //    i18n.tr("Listen to digits of %1").arg(carrierString), i18n.tr("Traffic report"), i18n.tr("Horoscopes")]
+            model: sim.serviceNumbers
 
             ListItem.Standard {
                 text: modelData
