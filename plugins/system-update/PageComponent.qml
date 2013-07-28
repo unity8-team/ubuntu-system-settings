@@ -116,6 +116,15 @@ ItemPage {
                         id: checkUpdateIndicator
                         anchors.horizontalCenter: parent.horizontalCenter
                         running: updateID.updateAvailable < 0
+                        visible: running
+                    }
+                    ProgressBar {
+                        id: indeterminateBar
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+
+                        indeterminate: true
+                        visible: updateID.updateInProgress && !updateID.updateReady
                     }
                 }
 
@@ -145,10 +154,6 @@ ItemPage {
                         id: actionbuttons
                         property string default_text: i18n.tr("Apply?")
                         text: default_text
-                        ActivityIndicator {
-                            anchors.verticalCenter: parent.verticalCenter
-                            running: updateID.updateInProgress && !updateID.updateReady
-                        }
                         control: Row {
                             spacing: units.gu(1)
                             Button {
