@@ -23,26 +23,45 @@
 #include <glib-object.h>
 #include <timezonemap/tz.h>
 
+#include <QDebug>
+
 TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     QAbstractTableModel(parent)
 {
+    qRegisterMetaType<TzLocation>();
+
+    TimeZonePopulateWorker *workerThread = new TimeZonePopulateWorker();
+    QObject::connect(workerThread,
+            &TimeZonePopulateWorker::resultReady,
+            this,
+            &TimeZoneLocationModel::processModelResult);
+    QObject::connect(workerThread,
+            &TimeZonePopulateWorker::finished,
+            workerThread,
+            &QObject::deleteLater);
+    workerThread->start();
 }
 
-void TimeZoneLocationModel::populateModel()
+void TimeZoneLocationModel::processModelResult(TzLocation location)
 {
-    m_locations.clear();
-    m_locations = buildCityMap();
+    QModelIndex root;
+    int rows = rowCount();
+    beginInsertRows(root, rows, rows);
+    m_locations.append(location);
+    endInsertRows();
 }
 
 int TimeZoneLocationModel::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED (parent);
+    if (parent.isValid())
+        return 0;
     return m_locations.count();
 }
 
 int TimeZoneLocationModel::columnCount(const QModelIndex &parent) const
 {
-    Q_UNUSED (parent);
+    if (parent.isValid())
+        return 0;
     return 3; //TZ, City, Country
 }
 
@@ -84,14 +103,18 @@ QHash<int, QByteArray> TimeZoneLocationModel::roleNames() const
     return m_roleNames;
 }
 
-QList<TimeZoneLocationModel::TzLocation> TimeZoneLocationModel::buildCityMap()
+void TimeZonePopulateWorker::run()
+{
+    buildCityMap();
+}
+
+void TimeZonePopulateWorker::buildCityMap()
 {
     TzDB *tzdb = tz_load_db();
     GPtrArray *tz_locations = tz_get_locations(tzdb);
 
-    QList<TzLocation> output;
     CcTimezoneLocation *tmp;
-    TzLocation tmpTz;
+    TimeZoneLocationModel::TzLocation tmpTz;
 
     for (guint i = 0; i < tz_locations->len; ++i) {
         tmp = (CcTimezoneLocation *) g_ptr_array_index(tz_locations, i);
@@ -105,25 +128,27 @@ QList<TimeZoneLocationModel::TzLocation> TimeZoneLocationModel::buildCityMap()
             tmpTz.city = en_name;
             tmpTz.country = country;
             tmpTz.timezone = zone;
-            output.prepend(tmpTz);
         }
         g_free (en_name);
         g_free (country);
         g_free (zone);
+
+        Q_EMIT (resultReady(tmpTz));
     }
 
     g_ptr_array_free (tz_locations, TRUE);
-
-    qSort(output);
-
-    return output;
 }
 
 TimeZoneLocationModel::~TimeZoneLocationModel()
 {
 }
 
-TimeZoneFilterProxy::TimeZoneFilterProxy(QObject *parent)
+TimeZoneFilterProxy::TimeZoneFilterProxy(TimeZoneLocationModel *parent)
     : QSortFilterProxyModel(parent)
 {
+    this->setSourceModel(parent);
+    this->setDynamicSortFilter(true);
+    // By default don't display anything
+    this->setFilterRegExp("^$");
+    this->setFilterCaseSensitivity(Qt::CaseInsensitive);
 }
