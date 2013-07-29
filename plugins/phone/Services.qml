@@ -39,7 +39,7 @@ ItemPage {
             model: sim.serviceNumbers
 
             ListItem.Standard {
-                text: name
+                text: modelData.name
             }
         }
     }

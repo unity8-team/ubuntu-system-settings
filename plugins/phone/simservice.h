@@ -27,8 +27,8 @@ class SimService : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString name READ name WRITE setName)
-    Q_PROPERTY(QString value READ value WRITE setValue)
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged)
 
 public:
     SimService(QObject *parent=0);
@@ -39,6 +39,10 @@ public:
 
     QString value() const;
     void setValue(const QString &value);
+
+signals:
+    void nameChanged();
+    void valueChanged();
 
 private:
     QString m_name;

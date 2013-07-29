@@ -28,7 +28,7 @@ INSTALLS += image
 # C++ bits
 TARGET = UbuntuPhonePanel
 QT += qml quick dbus
-CONFIG += qt plugin no_keywords link_pkgconfig
+CONFIG += qt plugin link_pkgconfig
 PKGCONFIG += ofono-qt
 
 #comment in the following line to enable traces

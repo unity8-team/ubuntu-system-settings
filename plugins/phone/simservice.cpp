@@ -39,6 +39,7 @@ void SimService::setName(const QString &name)
 {
     if (name != m_name) {
         m_name = name;
+        emit nameChanged();
     }
 }
 
@@ -51,5 +52,6 @@ void SimService::setValue(const QString &value)
 {
     if (value != m_value) {
         m_value = value;
+        emit valueChanged();
     }
 }
