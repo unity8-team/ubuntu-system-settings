@@ -37,7 +37,7 @@ TimeDate::TimeDate(QObject *parent) :
                          "org.freedesktop.timedate1",
                           m_systemBusConnection),
     m_timeZoneModel(),
-    m_timeZoneFilterProxy(this)
+    m_timeZoneFilterProxy(&m_timeZoneModel)
 {
     connect (&m_serviceWatcher,
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
@@ -113,14 +113,6 @@ void TimeDate::setTimeZone(QString &time_zone)
 
 QAbstractItemModel *TimeDate::getTimeZoneModel()
 {
-    if (m_timeZoneModel.rowCount() == 0)
-        m_timeZoneModel.populateModel();
-
-    m_timeZoneFilterProxy.setSourceModel(&m_timeZoneModel);
-    m_timeZoneFilterProxy.setDynamicSortFilter(false);
-    // By default don't display anything
-    m_timeZoneFilterProxy.setFilterRegExp("^$");
-    m_timeZoneFilterProxy.setFilterCaseSensitivity(Qt::CaseInsensitive);
     return &m_timeZoneFilterProxy;
 }
 

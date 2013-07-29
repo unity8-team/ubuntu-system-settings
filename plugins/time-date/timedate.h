@@ -37,7 +37,7 @@ class TimeDate : public QObject
                 NOTIFY timeZoneChanged)
     Q_PROPERTY (QAbstractItemModel *timeZoneModel
                 READ getTimeZoneModel
-                CONSTANT)
+                NOTIFY timeZoneModelChanged)
     Q_PROPERTY (QString filter
                 READ getFilter
                 WRITE setFilter)
@@ -57,6 +57,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void timeZoneChanged();
+    void timeZoneModelChanged();
 
 private:
     QString m_currentTimeZone;

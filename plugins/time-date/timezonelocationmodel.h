@@ -21,9 +21,9 @@
 #ifndef TIMEZONELOCATIONMODEL_H
 #define TIMEZONELOCATIONMODEL_H
 
-#include <QDebug>
 #include <QAbstractTableModel>
 #include <QSortFilterProxyModel>
+#include <QThread>
 
 class TimeZoneLocationModel : public QAbstractTableModel
 {
@@ -53,24 +53,49 @@ public:
         QString timezone;
     };
 
-    // implemented virtual methods
+    // implemented virtual methods from QAbstractTableModel
     int rowCount (const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
-    void populateModel();
+    void sort(int column, Qt::SortOrder order);
+
+public Q_SLOTS:
+    void processModelResult(TzLocation);
 
 private:
-    QList<TzLocation> buildCityMap();
     QList<TzLocation> m_locations;
 };
+
+Q_DECLARE_METATYPE (TimeZoneLocationModel::TzLocation)
 
 class TimeZoneFilterProxy: public QSortFilterProxyModel
 {
     Q_OBJECT
 
 public:
-    TimeZoneFilterProxy(QObject *parent = 0);
+    TimeZoneFilterProxy(TimeZoneLocationModel *parent = 0);
+    //void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
+
+protected:
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+
+};
+
+
+class TimeZonePopulateWorker : public QThread
+{
+    Q_OBJECT
+
+public:
+    void run();
+
+Q_SIGNALS:
+    void resultReady(TimeZoneLocationModel::TzLocation);
+
+private:
+    void buildCityMap();
+
 };
 
 #endif // TIMEZONELOCATIONMODEL_H
