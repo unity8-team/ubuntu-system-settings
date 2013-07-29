@@ -113,6 +113,9 @@ void TimeDate::setTimeZone(QString &time_zone)
 
 QAbstractItemModel *TimeDate::getTimeZoneModel()
 {
+    if (m_timeZoneModel.rowCount() == 0)
+        m_timeZoneModel.populateModel();
+
     m_timeZoneFilterProxy.setSourceModel(&m_timeZoneModel);
     m_timeZoneFilterProxy.setDynamicSortFilter(false);
     // By default don't display anything
