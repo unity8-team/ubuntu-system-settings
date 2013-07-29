@@ -57,6 +57,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void timeZoneChanged();
+    void timeZoneModelChanged();
 
 private:
     QString m_currentTimeZone;
@@ -69,6 +70,7 @@ private:
     QString m_filter;
     QString getTimeZone();
     void setUpInterface();
+    bool m_sortedBefore;
 
 };
 
