@@ -1,3 +1,27 @@
+ubuntu-system-settings (0.1+13.10.20130729-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * about: read update date from the device.
+  * phone: get the actual carrier name, add the services screen.
+
+  [ Iain Lane ]
+  * timedate: Implement some design & improve speed a bit.
+  * Bind the GSettings keys in gsettings-ubuntu-touch-schemas.
+
+  [ Didier Roche ]
+  * 0.1 version of system update status panel. Will work with the mock
+    system-settings. Enable to check for updates, handles failures,
+    cancellation and reboot request. (LP: #1201801)
+
+  [ Evan Dandrea ]
+  * Add a diagnostics page to system settings for controlling crash
+    reporting.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 196
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 29 Jul 2013 07:01:58 +0000
+
 ubuntu-system-settings (0.1+13.10.20130726-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

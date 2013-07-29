@@ -7,62 +7,62 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-25 14:52-0400\n"
+"POT-Creation-Date: 2013-07-26 18:00+0200\n"
 "PO-Revision-Date: 2013-07-02 14:26+0000\n"
 "Last-Translator: Jinkyu Yi <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-26 05:48+0000\n"
+"X-Launchpad-Export-Date: 2013-07-27 05:29+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
-#: ../plugins/about/PageComponent.qml:33 ../.build/settings.js:1
+#: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
 msgstr "이 폰에 대하여"
 
-#: ../plugins/about/PageComponent.qml:78
+#: ../plugins/about/PageComponent.qml:76
 msgid "Serial"
 msgstr "시리얼"
 
-#: ../plugins/about/PageComponent.qml:79 ../plugins/about/PageComponent.qml:86
+#: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
 #: ../plugins/cellular/PageComponent.qml:56
 msgid "N/A"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:90
+#: ../plugins/about/PageComponent.qml:88
 msgid "Software:"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:94
+#: ../plugins/about/PageComponent.qml:92
 msgid "OS"
 msgstr "OS"
 
-#: ../plugins/about/PageComponent.qml:99
+#: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:100
+#: ../plugins/about/PageComponent.qml:98
 msgid "Never"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:105
+#: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
+#: ../plugins/about/PageComponent.qml:110 ../plugins/about/Storage.qml:32
 msgid "Storage"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:118
+#: ../plugins/about/PageComponent.qml:116
 msgid "Legal:"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:9
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
 msgid "Software licenses"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:128
+#: ../plugins/about/PageComponent.qml:126
 msgid "Regulatory info"
 msgstr ""
 
@@ -157,10 +157,12 @@ msgid "Choose carrier:"
 msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:51
+#: ../plugins/time-date/ChooseTimeZone.qml:35
 msgid "Automatically"
 msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:51
+#: ../plugins/time-date/ChooseTimeZone.qml:35
 msgid "Manually"
 msgstr ""
 
@@ -263,7 +265,7 @@ msgid "All languages available:"
 msgstr ""
 
 #: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
-#: ../plugins/phone/PageComponent.qml:34
+#: ../plugins/phone/PageComponent.qml:43
 msgid "Call diversion"
 msgstr ""
 
@@ -290,7 +292,7 @@ msgid "Set"
 msgstr ""
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
-#: ../plugins/phone/PageComponent.qml:40
+#: ../plugins/phone/PageComponent.qml:49
 msgid "Call waiting"
 msgstr ""
 
@@ -300,13 +302,39 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:27 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
 msgid "Phone"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:48
+#: ../plugins/phone/PageComponent.qml:30
+msgid "SIM"
+msgstr ""
+
+#: ../plugins/phone/PageComponent.qml:57 ../plugins/phone/Services.qml:28
 #, qt-format
 msgid "%1 Services"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:34
+msgid "Voicemail"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:34
+#, qt-format
+msgid "My %1 Credit & Plan"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+#, qt-format
+msgid "Listen to digits of %1"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+msgid "Traffic report"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+msgid "Horoscopes"
 msgstr ""
 
 #: ../plugins/reset/EraseEverything.qml:29
@@ -348,6 +376,14 @@ msgstr ""
 
 #: ../plugins/reset/ResetLauncherHome.qml:31
 msgid "Reset launcher & home screen"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:30 ../.build/settings.js:15
+msgid "Security & Privacy"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:44
+msgid "Diagnostics"
 msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:31 ../.build/settings.js:16
@@ -406,11 +442,65 @@ msgstr ""
 msgid "Stop playing"
 msgstr ""
 
+#: ../plugins/system-update/PageComponent.qml:32
+msgid "Update phone"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:108
+msgid "Congrats! You are already up to date!"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:110
+msgid "A new version is available!"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:111
+msgid "Checking latest available system version…"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:133
+#, qt-format
+msgid "You can update from version %1 to version %2"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:136
+#, qt-format
+msgid "Size of this update: %1"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:146
+msgid "Apply?"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:155
+msgid "Update your phone"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:161
+msgid "Cancel update"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:167
+msgid "Reboot your phone now"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:183
+msgid "We are deeply sorry"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:184
+msgid "The update failed. Please try again later"
+msgstr ""
+
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
 msgstr ""
 
-#: ../plugins/time-date/ChooseTimeZone.qml:66
+#: ../plugins/time-date/ChooseTimeZone.qml:34
+msgid "Set the time zone:"
+msgstr ""
+
+#: ../plugins/time-date/ChooseTimeZone.qml:91
 msgid "No matching place"
 msgstr ""
 
@@ -476,10 +566,6 @@ msgstr ""
 
 #: ../.build/settings.js:12
 msgid "Rotation lock"
-msgstr ""
-
-#: ../.build/settings.js:15
-msgid "Security & Privacy"
 msgstr ""
 
 #: ../.build/settings.js:17

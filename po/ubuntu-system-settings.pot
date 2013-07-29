@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-26 13:41+0000\n"
+"POT-Creation-Date: 2013-07-26 18:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -265,7 +265,7 @@ msgid "All languages available:"
 msgstr ""
 
 #: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
-#: ../plugins/phone/PageComponent.qml:34
+#: ../plugins/phone/PageComponent.qml:43
 msgid "Call diversion"
 msgstr ""
 
@@ -292,7 +292,7 @@ msgid "Set"
 msgstr ""
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
-#: ../plugins/phone/PageComponent.qml:40
+#: ../plugins/phone/PageComponent.qml:49
 msgid "Call waiting"
 msgstr ""
 
@@ -302,13 +302,39 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:27 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
 msgid "Phone"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:48
+#: ../plugins/phone/PageComponent.qml:30
+msgid "SIM"
+msgstr ""
+
+#: ../plugins/phone/PageComponent.qml:57 ../plugins/phone/Services.qml:28
 #, qt-format
 msgid "%1 Services"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:34
+msgid "Voicemail"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:34
+#, qt-format
+msgid "My %1 Credit & Plan"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+#, qt-format
+msgid "Listen to digits of %1"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+msgid "Traffic report"
+msgstr ""
+
+#: ../plugins/phone/Services.qml:35
+msgid "Horoscopes"
 msgstr ""
 
 #: ../plugins/reset/EraseEverything.qml:29
@@ -414,6 +440,56 @@ msgstr ""
 
 #: ../plugins/sound/SoundsList.qml:49
 msgid "Stop playing"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:32
+msgid "Update phone"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:108
+msgid "Congrats! You are already up to date!"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:110
+msgid "A new version is available!"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:111
+msgid "Checking latest available system version…"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:133
+#, qt-format
+msgid "You can update from version %1 to version %2"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:136
+#, qt-format
+msgid "Size of this update: %1"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:146
+msgid "Apply?"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:155
+msgid "Update your phone"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:161
+msgid "Cancel update"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:167
+msgid "Reboot your phone now"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:183
+msgid "We are deeply sorry"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:184
+msgid "The update failed. Please try again later"
 msgstr ""
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
