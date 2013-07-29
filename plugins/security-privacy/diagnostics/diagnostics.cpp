@@ -86,6 +86,7 @@ QString Diagnostics::getIdentifier()
 void Diagnostics::setReportCrashes(bool report)
 {
     m_whoopsieInterface.call("SetReportCrashes", report);
+    m_whoopsieInterface.call("SetAutomaticallyReportCrashes", report);
 }
 
 QString Diagnostics::systemIdentifier() {
