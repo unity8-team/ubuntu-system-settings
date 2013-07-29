@@ -1,4 +1,4 @@
-# Arabic translation for ubuntu-system-settings
+# Portuguese translation for ubuntu-system-settings
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the ubuntu-system-settings package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-07-26 18:00+0200\n"
-"PO-Revision-Date: 2013-07-28 15:34+0000\n"
-"Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
-"Language-Team: Arabic <ar@li.org>\n"
+"PO-Revision-Date: 2013-07-29 03:19+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,125 +19,125 @@ msgstr ""
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
-msgstr "عن هذا الهاتف"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:76
 msgid "Serial"
-msgstr "التسلسل"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
 #: ../plugins/cellular/PageComponent.qml:56
 msgid "N/A"
-msgstr "غير متوفر"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:88
 msgid "Software:"
-msgstr "البرنامج:"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:92
 msgid "OS"
-msgstr "نظام التشغيل"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
-msgstr "آخر تحديث"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:98
 msgid "Never"
-msgstr "أبدًا"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
-msgstr "ابحث عن تحديثات"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:110 ../plugins/about/Storage.qml:32
 msgid "Storage"
-msgstr "التخزين"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:116
 msgid "Legal:"
-msgstr "القانونية:"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
 msgid "Software licenses"
-msgstr "تراخيص البرمجيات"
+msgstr ""
 
 #: ../plugins/about/PageComponent.qml:126
 msgid "Regulatory info"
-msgstr "معلومات تنظيمية"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:38
 msgid "Used by Ubuntu"
-msgstr "مستخدمة من قبل أبونتو"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:38
 msgid "Movies"
-msgstr "أفلام"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:38
 msgid "Audio"
-msgstr "صوتيات"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:39
 msgid "Pictures"
-msgstr "صور"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:39
 msgid "Other files"
-msgstr "ملفات أخرى"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:39
 msgid "Used by apps"
-msgstr "مستخدمة من قبل تطبيقات"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:98
 msgid "kB"
-msgstr "ك.ب"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:100
 msgid "MB"
-msgstr "م.ب"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:102
 msgid "GB"
-msgstr "ج.ب"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:122
 msgid "Total storage"
-msgstr "مساحة التخزين الكلية"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:131
 msgid "Free space"
-msgstr "مساحة فارغة"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:147
 msgid "By name"
-msgstr "حسب الاسم"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:147
 msgid "By size"
-msgstr "حسب الحجم"
+msgstr ""
 
 #: ../plugins/background/MainPage.qml:32 ../.build/settings.js:3
 msgid "Background"
-msgstr "الخلفية"
+msgstr ""
 
 #: ../plugins/background/MainPage.qml:68 ../plugins/background/MainPage.qml:80
 msgid "Welcome screen"
-msgstr "شاشة الترحيب"
+msgstr ""
 
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
 msgid "Home screen"
-msgstr "الشاشة الرئيسية"
+msgstr ""
 
 #: ../plugins/background/MainPage.qml:191
 msgid "Same background for both"
-msgstr "نفس الخلفية لكلاهما"
+msgstr ""
 
 #: ../plugins/background/MainPage.qml:209
 msgid "Different background for each"
-msgstr "خلفية مختلفة لكل واحدة"
+msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:27
 #: ../plugins/cellular/PageComponent.qml:55
@@ -146,7 +146,7 @@ msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:41
 msgid "Searching"
-msgstr "البحث"
+msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:6
 msgid "Cellular"
@@ -159,12 +159,12 @@ msgstr ""
 #: ../plugins/cellular/PageComponent.qml:51
 #: ../plugins/time-date/ChooseTimeZone.qml:35
 msgid "Automatically"
-msgstr "تلقائيا"
+msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:51
 #: ../plugins/time-date/ChooseTimeZone.qml:35
 msgid "Manually"
-msgstr "يدويا"
+msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:68
 msgid "Cellular data"
@@ -172,29 +172,29 @@ msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:89
 msgid "2G only (saves battery)"
-msgstr "الجيل الثاني فقط (2G) (لتوفير البطارية)"
+msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:90
 msgid "2G/3G/4G (faster)"
-msgstr "الجيل الثاني والثالث والرابع (2G/3G/4G) (أسرع في نقل البيانات)"
+msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:96
 msgid "Call roaming"
-msgstr "مكالمات التجوال"
+msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:104
 msgid "Data roaming"
-msgstr "نقل بيانات التجوال"
+msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:135
 msgid "Data usage statistics"
-msgstr "إحصاءات استخدام البيانات"
+msgstr ""
 
 #: ../plugins/language/DisplayLanguage.qml:30
 #: ../plugins/language/DisplayLanguage.qml:49
 #: ../plugins/language/PageComponent.qml:48
 msgid "Display language"
-msgstr "لغة العرض"
+msgstr ""
 
 #: ../plugins/language/DisplayLanguage.qml:84
 #: ../plugins/phone/CallDiversion.qml:113
@@ -202,42 +202,42 @@ msgstr "لغة العرض"
 #: ../plugins/reset/ResetAllSettings.qml:35
 #: ../plugins/reset/ResetLauncherHome.qml:35
 msgid "Cancel"
-msgstr "ألغِ"
+msgstr ""
 
 #: ../plugins/language/DisplayLanguage.qml:99
 msgid "Confirm"
-msgstr "تأكيد"
+msgstr ""
 
 #: ../plugins/language/KeyboardLayouts.qml:29
 #: ../plugins/language/PageComponent.qml:57
 msgid "Keyboard layouts"
-msgstr "تخطيط لوحة المفاتيح"
+msgstr ""
 
 #: ../plugins/language/KeyboardLayouts.qml:42
 msgid "Current layouts:"
-msgstr "التخطيطات الحالية:"
+msgstr ""
 
 #: ../plugins/language/KeyboardLayouts.qml:58
 msgid "All layouts available:"
-msgstr "جميع التخطيطات المتوفرة:"
+msgstr ""
 
 #: ../plugins/language/PageComponent.qml:30
 msgid "Language & Text"
-msgstr "اللغة والنص"
+msgstr ""
 
 #: ../plugins/language/PageComponent.qml:67
 #: ../plugins/language/SpellChecking.qml:29
 #: ../plugins/language/SpellChecking.qml:42
 msgid "Spell checking"
-msgstr "التدقيق الإملائي"
+msgstr ""
 
 #: ../plugins/language/PageComponent.qml:75
 msgid "Auto correction"
-msgstr "التصحيح التلقائي"
+msgstr ""
 
 #: ../plugins/language/PageComponent.qml:80
 msgid "Auto completion"
-msgstr "الإكمال التلقائي"
+msgstr ""
 
 #: ../plugins/language/PageComponent.qml:87
 msgid "Auto capitalization"
@@ -258,11 +258,11 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:49
 msgid "Current spelling languages:"
-msgstr "لغات التدقيق الحالية:"
+msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:62
 msgid "All languages available:"
-msgstr "جميع اللغات المتوفرة:"
+msgstr ""
 
 #: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
 #: ../plugins/phone/PageComponent.qml:43
@@ -289,24 +289,22 @@ msgstr ""
 
 #: ../plugins/phone/CallDiversion.qml:113
 msgid "Set"
-msgstr "عيّن"
+msgstr ""
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:49
 msgid "Call waiting"
-msgstr "انتظار المكالمات"
+msgstr ""
 
 #: ../plugins/phone/CallWaiting.qml:67
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
-"يتيح لك الإجابة على المكالمات أو بدء مكالمة جديدة أثناء إجرائك للمكالمات، "
-"والتبديل بينها."
 
 #: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
 msgid "Phone"
-msgstr "الهاتف"
+msgstr ""
 
 #: ../plugins/phone/PageComponent.qml:30
 msgid "SIM"
@@ -319,7 +317,7 @@ msgstr ""
 
 #: ../plugins/phone/Services.qml:34
 msgid "Voicemail"
-msgstr "البريد الصوتي"
+msgstr ""
 
 #: ../plugins/phone/Services.qml:34
 #, qt-format
@@ -337,35 +335,33 @@ msgstr ""
 
 #: ../plugins/phone/Services.qml:35
 msgid "Horoscopes"
-msgstr "الأبراج الفلكية"
+msgstr ""
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
-"جميع المستندات، والألعاب المحفوظة، والإعدادات، وأشياء أخرى عديدة ستحذف "
-"نهائيا من هذا الهاتف."
 
 #: ../plugins/reset/EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr "امسح واستعد كل شيء"
+msgstr ""
 
 #: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
 msgid "Reset phone"
-msgstr "أعد ضبط الهاتف"
+msgstr ""
 
 #: ../plugins/reset/PageComponent.qml:51
 msgid "Reset launcher & home screen…"
-msgstr "أعد ضبط واجهة الهاتف والشاشة الرئيسية..."
+msgstr ""
 
 #: ../plugins/reset/PageComponent.qml:64
 msgid "Reset all system settings…"
-msgstr "أعد ضبط جميع إعدادات النظام..."
+msgstr ""
 
 #: ../plugins/reset/PageComponent.qml:77
 msgid "Erase & reset everything…"
-msgstr "امسح وأعد ضبط كل شيء..."
+msgstr ""
 
 #: ../plugins/reset/ResetAllSettings.qml:29
 #: ../plugins/reset/ResetLauncherHome.qml:29
@@ -373,76 +369,74 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
-"جميع محتويات وتخطيطات واجهة الهاتف، والمرشحات في الشاشة الرئيسية ستعاد إلى "
-"الإعدادات الأصلية."
 
 #: ../plugins/reset/ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr "أعد ضبط جميع إعدادات النظام"
+msgstr ""
 
 #: ../plugins/reset/ResetLauncherHome.qml:31
 msgid "Reset launcher & home screen"
-msgstr "أعد ضبط واجهة الهاتف والشاشة الرئيسية"
+msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:30 ../.build/settings.js:15
 msgid "Security & Privacy"
-msgstr "الأمن والخصوصية"
+msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:44
 msgid "Diagnostics"
-msgstr "التشخيصات"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Sound"
-msgstr "الصوت"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:49
 msgid "Phone calls:"
-msgstr "مكالمات الهاتف:"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
 msgid "Ringtone"
-msgstr "نغمة الرنين"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:61
 msgid "Vibrate when ringing"
-msgstr "اهتزاز عند الرنين"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:87
 msgid "Vibrate in silent mode"
-msgstr "اهتزاز في الوضع الصامت"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:70
 msgid "Alerts:"
-msgstr "المنبهات:"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:74 ../plugins/sound/PageComponent.qml:77
 msgid "Alert sound"
-msgstr "صوت التنبيه"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:82
 msgid "Vibrate with alert sound"
-msgstr "اهتزاز مع صوت التنبيه"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:91
 msgid "Other sounds:"
-msgstr "أصوات أخرى:"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
 msgid "Message received"
-msgstr "تم إستلام الرسالة"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:103
 msgid "Keyboard sounds"
-msgstr "أصوات لوحة المفاتيح"
+msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:108
 msgid "Lock sound"
-msgstr "صوت القفل"
+msgstr ""
 
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr "الهاتف في الوضع الصامت."
+msgstr ""
 
 #: ../plugins/sound/SoundsList.qml:49
 msgid "Stop playing"
@@ -450,69 +444,69 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:32
 msgid "Update phone"
-msgstr "تحديث الهاتف"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:108
 msgid "Congrats! You are already up to date!"
-msgstr "تهانينا! جهازك مُحدّث بآخر نسخة!"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:110
 msgid "A new version is available!"
-msgstr "يتوفر حاليا نسخة جديدة!"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:111
 msgid "Checking latest available system version…"
-msgstr "يفحص آخر نسخة متوفرة للنظام..."
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "You can update from version %1 to version %2"
-msgstr "يمكنك التحديث من النسخة %1 إلى النسخة %2"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:136
 #, qt-format
 msgid "Size of this update: %1"
-msgstr "حجم هذا التحديث: %1"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:146
 msgid "Apply?"
-msgstr "تطبيق؟"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:155
 msgid "Update your phone"
-msgstr "حدّث هاتفك"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:161
 msgid "Cancel update"
-msgstr "إلغاء التحديث"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:167
 msgid "Reboot your phone now"
-msgstr "أعِد تشغيل هاتفك الآن"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:183
 msgid "We are deeply sorry"
-msgstr "نأسف بشدة"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:184
 msgid "The update failed. Please try again later"
-msgstr "فشلت عملية التحديث. يرجى المحاولة لاحقا"
+msgstr ""
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr "المنطقة الزمنية"
+msgstr ""
 
 #: ../plugins/time-date/ChooseTimeZone.qml:34
 msgid "Set the time zone:"
-msgstr "تعيين المنطقة الزمنية:"
+msgstr ""
 
 #: ../plugins/time-date/ChooseTimeZone.qml:91
 msgid "No matching place"
-msgstr "لا أماكن مطابقة"
+msgstr ""
 
 #: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
 msgid "Time & Date"
-msgstr "الوقت والتاريخ"
+msgstr ""
 
 #: ../plugins/time-date/PageComponent.qml:51
 msgid "Time zone:"
@@ -524,60 +518,60 @@ msgstr ""
 
 #: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
-msgstr "إعدادات النظام"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Network"
-msgstr "الشبكة"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:83
 msgid "Personal"
-msgstr "شخصي"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:88
 msgid "System"
-msgstr "النظام"
+msgstr ""
 
 #: ../.build/settings.js:2
 msgid "Accessibility"
-msgstr "الإتاحة"
+msgstr ""
 
 #: ../.build/settings.js:4
 msgid "Bluetooth"
-msgstr "بلوتوث"
+msgstr ""
 
 #: ../.build/settings.js:5
 msgid "Brightness"
-msgstr "السطوع"
+msgstr ""
 
 #: ../.build/settings.js:7
 msgid "Example"
-msgstr "مثال"
+msgstr ""
 
 #: ../.build/settings.js:8
 msgid "Flight mode"
-msgstr "نمط الطائرة"
+msgstr ""
 
 #: ../.build/settings.js:9
 msgid "GPS"
-msgstr "نظام تحديد المواقع (GPS)"
+msgstr ""
 
 #: ../.build/settings.js:10
 msgid "Keyboard"
-msgstr "لوحة المفاتيح"
+msgstr ""
 
 #: ../.build/settings.js:11
 msgid "Language"
-msgstr "اللغة"
+msgstr ""
 
 #: ../.build/settings.js:12
 msgid "Rotation lock"
-msgstr "قفل الدوران"
+msgstr ""
 
 #: ../.build/settings.js:17
 msgid "Updates"
-msgstr "التحديثات"
+msgstr ""
 
 #: ../.build/settings.js:19
 msgid "Wi-Fi"
-msgstr "واي فاي"
+msgstr ""
