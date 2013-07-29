@@ -53,13 +53,15 @@ void TimeZoneLocationModel::processModelResult(TzLocation location)
 
 int TimeZoneLocationModel::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED (parent);
+    if (parent.isValid())
+        return 0;
     return m_locations.count();
 }
 
 int TimeZoneLocationModel::columnCount(const QModelIndex &parent) const
 {
-    Q_UNUSED (parent);
+    if (parent.isValid())
+        return 0;
     return 3; //TZ, City, Country
 }
 
@@ -99,18 +101,6 @@ QHash<int, QByteArray> TimeZoneLocationModel::roleNames() const
     m_roleNames[CountryRole] = "country";
 
     return m_roleNames;
-}
-
-void TimeZoneLocationModel::sort(int column, Qt::SortOrder order)
-{
-    Q_UNUSED (column);
-
-    Q_EMIT (layoutAboutToBeChanged());
-    if (order == Qt::AscendingOrder)
-        qSort(m_locations);
-    else
-        qSort(m_locations.begin(), m_locations.end(), qGreater<TzLocation>());
-    Q_EMIT (layoutChanged());
 }
 
 void TimeZonePopulateWorker::run()
@@ -153,34 +143,11 @@ TimeZoneLocationModel::~TimeZoneLocationModel()
 {
 }
 
-/*void TimeZoneFilterProxy::sort(int column, Qt::SortOrder order)
-{
-    sourceModel()->sort(column, order);
-}*/
-
-bool TimeZoneFilterProxy::lessThan(const QModelIndex &left,
-                                   const QModelIndex &right) const
-{
-    qDebug() << "sorting";
-
-    QVariant leftData = sourceModel()->data(left);
-    QVariant rightData = sourceModel()->data(right);
-
-    QString leftName = leftData.value<QString>();
-    QString rightName = rightData.value<QString>();
-
-    if (!(leftName.isEmpty() && rightName.isEmpty()))
-        return leftName < rightName;
-
-    return false;
-}
-
 TimeZoneFilterProxy::TimeZoneFilterProxy(TimeZoneLocationModel *parent)
     : QSortFilterProxyModel(parent)
 {
     this->setSourceModel(parent);
     this->setDynamicSortFilter(true);
-    this->sort(-1);
     // By default don't display anything
     this->setFilterRegExp("^$");
     this->setFilterCaseSensitivity(Qt::CaseInsensitive);

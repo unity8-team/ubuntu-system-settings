@@ -58,7 +58,6 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
-    void sort(int column, Qt::SortOrder order);
 
 public Q_SLOTS:
     void processModelResult(TzLocation);
@@ -75,11 +74,6 @@ class TimeZoneFilterProxy: public QSortFilterProxyModel
 
 public:
     TimeZoneFilterProxy(TimeZoneLocationModel *parent = 0);
-    //void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
-
-protected:
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
-
 };
 
 
