@@ -26,6 +26,11 @@
 TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
     QAbstractTableModel(parent)
 {
+}
+
+void TimeZoneLocationModel::populateModel()
+{
+    m_locations.clear();
     m_locations = buildCityMap();
 }
 

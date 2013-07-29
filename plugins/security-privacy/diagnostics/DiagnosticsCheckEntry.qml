@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Iain Lane <iain.lane@canonical.com>
+ * Contact: Evan Dandrea <evan.dandrea@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -18,28 +18,27 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import GSettings 1.0
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
-ListItem.Standard {
-    id: root
-    icon: Qt.resolvedUrl(model.icon)
-    iconFrame: false
-    text: i18n.tr(model.displayName)
-    control: Switch {
-        id: control
-        checked: networkSettings.gps
-        onCheckedChanged: networkSettings.gps = checked
+ListItem.Base {
+    property string textEntry: "";
+    property alias checked: checkBox.checked;
+    onClicked: checked = !checked;
 
-        GSettings {
-            id: networkSettings
-            schema.id: "com.ubuntu.touch.network"
-            onChanged: {
-                if (key == "gps")
-                    control.checked = value
-            }
+    Row {
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        spacing: units.gu(2)
+
+        CheckBox {
+            id: checkBox
+            anchors.verticalCenter: parent.verticalCenter
+        }
+        Label {
+            anchors.verticalCenter: parent.verticalCenter
+            text: textEntry
         }
     }
 }

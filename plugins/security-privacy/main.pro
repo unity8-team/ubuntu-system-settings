@@ -2,13 +2,10 @@ include(../../common-project-config.pri)
 include($${TOP_SRC_DIR}/common-vars.pri)
 
 TEMPLATE = lib
-TARGET = phone
+TARGET = security-privacy
 
 QML_SOURCES = \
-    CallDiversion.qml \
-    CallWaiting.qml \
-    PageComponent.qml \
-    Services.qml
+    PageComponent.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}
@@ -21,6 +18,6 @@ settings.files = $${TARGET}.settings
 settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
-image.files = settings-phone.svg
+image.files = settings-security-privacy.svg
 image.path = /usr/share/settings/system/icons
 INSTALLS += image

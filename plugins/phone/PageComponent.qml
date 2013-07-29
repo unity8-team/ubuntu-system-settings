@@ -19,13 +19,22 @@
  */
 
 import QtQuick 2.0
+import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     title: i18n.tr("Phone")
-    property string carrierName: "SIM"
+    property string carrierName: infoBackend.networkName(NetworkInfo.GsmMode, 0)
+    property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
+
+    NetworkInfo {
+        id: infoBackend;
+        monitorNetworkName: true
+        onNetworkNameChanged:
+            carrierName = infoBackend.networkName(NetworkInfo.GsmMode, 0)
+    }
 
     Column {
         anchors.fill: parent
@@ -45,8 +54,9 @@ ItemPage {
         ListItem.Divider {}
 
         ListItem.Standard {
-            text: i18n.tr("%1 Services").arg(carrierName)
+            text: i18n.tr("%1 Services").arg(carrierString)
             progression: true
+            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {carrierString: carrierString})
         }
     }
 }
