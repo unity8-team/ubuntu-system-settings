@@ -14,29 +14,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Sebastien Bacher <sebastien.bacher@canonical.com>
+ * Ken VanDine <ken.vandine@canonical.com>
  *
 */
 
-#ifndef PHONESERVICES_H
-#define PHONESERVICES_H
+#ifndef SIMSERVICE_H
+#define SIMSERVICE_H
 
 #include <QObject>
-#include <QtCore>
 
-class PhoneServices : public QObject
+class SimService : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY ( QVariant serviceNumbers READ serviceNumbers CONSTANT )
 
+    Q_PROPERTY(QString name READ name WRITE setName)
+    Q_PROPERTY(QString value READ value WRITE setValue)
 
 public:
-    explicit PhoneServices(QObject *parent = 0);
-    ~PhoneServices();
-    QVariant serviceNumbers();
+    SimService(QObject *parent=0);
+    SimService(const QString &name, const QString &value, QObject *parent=0);
+
+    QString name() const;
+    void setName(const QString &name);
+
+    QString value() const;
+    void setValue(const QString &value);
 
 private:
-    QList<QObject*> m_serviceNumbers;
+    QString m_name;
+    QString m_value;
 };
 
-#endif // PHONESERVICES_H
+#endif // SIMSERVICE_H

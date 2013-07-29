@@ -14,29 +14,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Sebastien Bacher <sebastien.bacher@canonical.com>
+ * Ken VanDine <ken.vandine@canonical.com>
  *
 */
 
-#ifndef PHONESERVICES_H
-#define PHONESERVICES_H
+#include "simservice.h"
 
-#include <QObject>
-#include <QtCore>
-
-class PhoneServices : public QObject
+SimService::SimService(QObject *parent)
+    : QObject(parent)
 {
-    Q_OBJECT
-    Q_PROPERTY ( QVariant serviceNumbers READ serviceNumbers CONSTANT )
+}
 
+SimService::SimService(const QString &name, const QString &value, QObject *parent)
+    : QObject(parent), m_name(name), m_value(value)
+{
+}
 
-public:
-    explicit PhoneServices(QObject *parent = 0);
-    ~PhoneServices();
-    QVariant serviceNumbers();
+QString SimService::name() const
+{
+    return m_name;
+}
 
-private:
-    QList<QObject*> m_serviceNumbers;
-};
+void SimService::setName(const QString &name)
+{
+    if (name != m_name) {
+        m_name = name;
+    }
+}
 
-#endif // PHONESERVICES_H
+QString SimService::value() const
+{
+    return m_value;
+}
+
+void SimService::setValue(const QString &value)
+{
+    if (value != m_value) {
+        m_value = value;
+    }
+}

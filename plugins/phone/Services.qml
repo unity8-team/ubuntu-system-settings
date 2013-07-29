@@ -36,12 +36,10 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
         Repeater {
-            //model: [i18n.tr("Voicemail"), i18n.tr("My %1 Credit & Plan").arg(carrierString),
-            //    i18n.tr("Listen to digits of %1").arg(carrierString), i18n.tr("Traffic report"), i18n.tr("Horoscopes")]
             model: sim.serviceNumbers
 
             ListItem.Standard {
-                text: modelData
+                text: name
             }
         }
     }

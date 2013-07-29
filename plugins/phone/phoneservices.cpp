@@ -21,6 +21,7 @@
 #include <QtDebug>
 
 #include "phoneservices.h"
+#include "simservice.h"
 
 PhoneServices::PhoneServices(QObject *parent) :
     QObject(parent)
@@ -28,26 +29,27 @@ PhoneServices::PhoneServices(QObject *parent) :
 
 }
 
-QMap<QString, QVariant> PhoneServices::serviceNumbers()
+
+QVariant PhoneServices::serviceNumbers()
 {
     if (m_serviceNumbers.isEmpty())
     {
         OfonoSimManager *sim = new OfonoSimManager(OfonoModem::AutomaticSelect, QString(), NULL);
 
-        if (sim->modem()->isValid())
-        {
+        //if (sim->modem()->isValid())
+        //{
             m_serviceNumbers.clear();
             QMap<QString, QString> sn = sim->serviceNumbers();
             QMapIterator<QString, QString> i(sn);
             while (i.hasNext()) {
                 i.next();
-                m_serviceNumbers[i.key()] = i.value();
+                m_serviceNumbers.append(new SimService(i.key(), i.value()));
                 qDebug() << i.key() << ": " << i.value() << endl;
             }
 
-        }
+        //}
     }
-    return m_serviceNumbers;
+    return QVariant::fromValue(m_serviceNumbers);
 }
 
 PhoneServices::~PhoneServices() {
