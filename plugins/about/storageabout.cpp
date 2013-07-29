@@ -58,18 +58,6 @@ QString StorageAbout::vendorString()
     return m_vendorString;
 }
 
-QStringList StorageAbout::licensesList()
-{
-    if (m_licensesList.isEmpty())
-    {
-        QDir copyrightDir("/usr/share/doc/");
-        copyrightDir.setFilter(QDir::AllDirs | QDir::NoDotAndDotDot);
-
-        m_licensesList = copyrightDir.entryList();
-    }
-    return m_licensesList;
-}
-
 QString StorageAbout::updateDate()
 {
     if (m_updateDate.isEmpty() || m_updateDate.isNull())
