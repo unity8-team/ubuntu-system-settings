@@ -5,6 +5,7 @@ TEMPLATE = lib
 TARGET = security-privacy
 
 QML_SOURCES = \
+    Dash.qml  \
     PageComponent.qml
 
 OTHER_FILES += \
