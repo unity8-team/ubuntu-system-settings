@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-26 18:00+0200\n"
+"POT-Creation-Date: 2013-07-29 16:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Legal:"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr ""
 
@@ -315,6 +315,10 @@ msgstr ""
 msgid "%1 Services"
 msgstr ""
 
+#: ../plugins/phone/ServiceInfo.qml:34
+msgid "Call"
+msgstr ""
+
 #: ../plugins/phone/Services.qml:34
 msgid "Voicemail"
 msgstr ""
@@ -516,19 +520,19 @@ msgstr ""
 msgid "Set the time and date:"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
+#: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:78
+#: ../src/qml/MainWindow.qml:80
 msgid "Network"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:83
+#: ../src/qml/MainWindow.qml:85
 msgid "Personal"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:88
+#: ../src/qml/MainWindow.qml:90
 msgid "System"
 msgstr ""
 

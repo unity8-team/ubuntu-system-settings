@@ -8,6 +8,7 @@ QML_SOURCES = \
     CallDiversion.qml \
     CallWaiting.qml \
     PageComponent.qml \
+    ServiceInfo.qml   \
     Services.qml
 
 OTHER_FILES += \
