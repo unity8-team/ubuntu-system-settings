@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+13.10.20130730.5-0ubuntu1) saucy; urgency=low
+
+  [ Didier Roche ]
+  * fix typos and we get the size in bytes, not Kb from the daemon.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 213
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 30 Jul 2013 18:08:18 +0000
+
 ubuntu-system-settings (0.1+13.10.20130730.4-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
