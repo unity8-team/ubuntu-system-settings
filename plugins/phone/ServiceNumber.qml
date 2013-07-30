@@ -24,23 +24,19 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
-    property string carrierString
-    property var sim
-    title: i18n.tr("%1 Services").arg(carrierString)
-
-
+    property string name
+    property string number
+    title: name
 
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
-        Repeater {
-            model: sim.serviceNumbers
-
-            ListItem.Standard {
-                progression: true
-                text: modelData.name
-                onClicked: pageStack.push(Qt.resolvedUrl("ServiceNumber.qml"), {title: modelData.name, number: modelData.value})
+        ListItem.SingleControl {
+            control: Button {
+                text: i18n.tr("Call")
+                width: parent.width - units.gu(4)
             }
         }
     }
 }
+

@@ -11,7 +11,8 @@ QML_SOURCES = \
     Services.qml
 
 OTHER_FILES += \
-    $${QML_SOURCES}
+    $${QML_SOURCES} \
+    ServiceNumber.qml
 
 qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
