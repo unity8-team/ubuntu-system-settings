@@ -25,6 +25,7 @@ Page {
     id: root
 
     property variant plugin
+    property variant pluginManager
 
     title: i18n.dtr(plugin.translations, plugin.displayName)
 }

@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.1+13.10.20130730.4-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * about: we have an update panel, connect the 'check for update'
+    button to it.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 211
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 30 Jul 2013 16:46:49 +0000
+
 ubuntu-system-settings (0.1+13.10.20130730.3-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
