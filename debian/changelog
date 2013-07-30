@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.1+13.10.20130730.1-0ubuntu1) saucy; urgency=low
+
+  [ Loïc Minier ]
+  * Use system bus instead of session bus for OS updates.
+
+  [ Sebastien Bacher ]
+  * phone: add a subpage for service details.
+
+  [ Didier Roche ]
+  * * use a list instead of hardcoded data. Try to have a little bit
+    more beautiful result, but it seems there is a bug in the sdk *
+    replace the activity indicator for downloading by an infinite
+    progress indicator * listen to system dbus as well as the daemon is
+    listening to it.
+
+  [ Evan Dandrea ]
+  * Add a link off to the privacy policy from the diagnostics page.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 207
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 30 Jul 2013 10:01:39 +0000
+
 ubuntu-system-settings (0.1+13.10.20130730-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
