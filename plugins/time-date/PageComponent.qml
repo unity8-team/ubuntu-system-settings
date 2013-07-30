@@ -85,5 +85,10 @@ ItemPage {
             progression: setTimeAutomatically.selectedIndex === 1 // Manually
             enabled: progression
         }
+
+        ListItem.Caption {
+            text: i18n.tr("Setting the date and time automatically requires a data connection")
+            visible: !btimeDatePanel.globalConnectivity
+        }
     }
 }

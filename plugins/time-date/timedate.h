@@ -22,6 +22,7 @@
 #define TIMEDATE_H
 
 #include "timezonelocationmodel.h"
+
 #include <QAbstractTableModel>
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
@@ -41,6 +42,9 @@ class TimeDate : public QObject
     Q_PROPERTY (QString filter
                 READ getFilter
                 WRITE setFilter)
+    Q_PROPERTY(bool globalConnectivity
+               READ getGlobalConnectivity
+               NOTIFY globalConnectivityChanged)
 
 public:
     explicit TimeDate(QObject *parent = 0);
@@ -50,14 +54,17 @@ public:
     QAbstractItemModel *getTimeZoneModel();
     QString getFilter();
     void setFilter (QString &filter);
+    bool getGlobalConnectivity();
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
     void slotNameOwnerChanged(QString, QString, QString);
+    void slotStateChanged(uint);
 
 Q_SIGNALS:
     void timeZoneChanged();
     void timeZoneModelChanged();
+    void globalConnectivityChanged();
 
 private:
     QString m_currentTimeZone;
@@ -65,11 +72,13 @@ private:
     QDBusServiceWatcher m_serviceWatcher;
     QDBusInterface m_timeDateInterface;
     QString m_objectPath;
+    QDBusInterface m_networkManagerInterface;
+    QVariant m_globalConnectivity;
     TimeZoneLocationModel m_timeZoneModel;
     TimeZoneFilterProxy m_timeZoneFilterProxy;
     QString m_filter;
     QString getTimeZone();
-    void setUpInterface();
+    void setUpInterfaces();
     bool m_sortedBefore;
 
 };

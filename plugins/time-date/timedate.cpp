@@ -19,10 +19,13 @@
 */
 
 #include "timedate.h"
+
 #include <QDBusReply>
 #include <QEvent>
+
 #include <glib.h>
 #include <glib-object.h>
+#include <NetworkManager.h>
 #include <timezonemap/tz.h>
 #include <unistd.h>
 
@@ -36,30 +39,48 @@ TimeDate::TimeDate(QObject *parent) :
                          "/org/freedesktop/timedate1",
                          "org.freedesktop.timedate1",
                           m_systemBusConnection),
+    m_networkManagerInterface(NM_DBUS_SERVICE,
+                              NM_DBUS_PATH,
+                              NM_DBUS_INTERFACE,
+                              m_systemBusConnection),
     m_timeZoneModel(),
     m_timeZoneFilterProxy(&m_timeZoneModel),
     m_sortedBefore(false)
 {
+
     connect (&m_serviceWatcher,
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
              this,
              SLOT (slotNameOwnerChanged (QString, QString, QString)));
 
-    if (m_timeDateInterface.isValid()) {
-        setUpInterface();
+    setUpInterfaces();
+
+    if (m_networkManagerInterface.isValid()) {
+        getGlobalConnectivity();
     }
 
 }
 
-void TimeDate::setUpInterface()
+void TimeDate::setUpInterfaces()
 {
-    m_timeDateInterface.connection().connect(
-        m_timeDateInterface.service(),
-        m_timeDateInterface.path(),
-        "org.freedesktop.DBus.Properties",
-        "PropertiesChanged",
-        this,
-        SLOT(slotChanged(QString, QVariantMap, QStringList)));
+    if (m_timeDateInterface.isValid())
+        m_timeDateInterface.connection().connect(
+            m_timeDateInterface.service(),
+            m_timeDateInterface.path(),
+            "org.freedesktop.DBus.Properties",
+            "PropertiesChanged",
+            this,
+            SLOT(slotChanged(QString, QVariantMap, QStringList)));
+
+    if (m_networkManagerInterface.isValid())
+        m_systemBusConnection.connect(
+                    m_networkManagerInterface.service(),
+                    m_networkManagerInterface.path(),
+                    m_networkManagerInterface.interface(),
+                    "StateChanged",
+                    this,
+                    SLOT(slotStateChanged(uint)));
+
 }
 
 QString TimeDate::timeZone()
@@ -87,7 +108,8 @@ void TimeDate::slotChanged(QString interface,
     Q_UNUSED (interface);
     Q_UNUSED (changed_properties);
 
-    if (invalidated_properties.contains("Timezone")) {
+    if (interface == m_timeDateInterface.interface() &&
+            invalidated_properties.contains("Timezone")) {
         m_currentTimeZone = getTimeZone();
         Q_EMIT timeZoneChanged();
     }
@@ -102,9 +124,15 @@ void TimeDate::slotNameOwnerChanged(QString name,
     if (name != "org.freedesktop.timedate1")
         return;
 
-    setUpInterface();
+    setUpInterfaces();
     // Tell QML so that it refreshes its view of the property
     Q_EMIT timeZoneChanged();
+}
+
+void TimeDate::slotStateChanged(uint newState)
+{
+    m_globalConnectivity = newState;
+    Q_EMIT (globalConnectivityChanged());
 }
 
 void TimeDate::setTimeZone(QString &time_zone)
@@ -134,6 +162,14 @@ void TimeDate::setFilter(QString &new_filter)
         m_timeZoneFilterProxy.sort(0);
         m_sortedBefore = true;
     }
+}
+
+bool TimeDate::getGlobalConnectivity()
+{
+    if (m_globalConnectivity.isNull())
+        m_globalConnectivity = m_networkManagerInterface.property("State");
+
+    return m_globalConnectivity.value<uint>() == NM_STATE_CONNECTED_GLOBAL;
 }
 
 TimeDate::~TimeDate() {
