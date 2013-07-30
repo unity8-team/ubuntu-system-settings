@@ -27,11 +27,11 @@
 Update::Update(QObject *parent) :
     QObject(parent),
     m_updateAvailable(-1), // no status available
-    m_sessionBusConnection (QDBusConnection::sessionBus()),
+    m_systemBusConnection (QDBusConnection::systemBus()),
     m_SystemServiceIface ("com.canonical.SystemImage",
                          "/Service",
                          "com.canonical.SystemImage",
-                         m_sessionBusConnection)
+                         m_systemBusConnection)
 {
 
     // TODO: check if we get an error and maybe trigger a signal to update the UI (or retry)
