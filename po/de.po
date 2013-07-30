@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-07-26 18:00+0200\n"
-"PO-Revision-Date: 2013-07-28 11:25+0000\n"
+"PO-Revision-Date: 2013-07-29 21:21+0000\n"
 "Last-Translator: Carsten Gerlach <daswaldhorn@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:56+0000\n"
+"X-Launchpad-Export-Date: 2013-07-30 04:59+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -262,7 +262,7 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:49
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "Aktuelle Sprachen zur Rechtschreibprüfung:"
 
 #: ../plugins/language/SpellChecking.qml:62
 msgid "All languages available:"
@@ -284,8 +284,8 @@ msgstr ""
 #: ../plugins/phone/CallDiversion.qml:91
 msgid "Call diversion status can’t be checked right now. Try again later."
 msgstr ""
-"Status der Anrufweiterleitung kann gerade nicht abgerufen werden. Versuchen "
-"Sie es später erneut."
+"Status der Anrufweiterleitung kann zur Zeit nicht abgerufen werden. "
+"Versuchen Sie es später erneut."
 
 #: ../plugins/phone/CallDiversion.qml:102
 msgid "Divert to"
@@ -323,11 +323,11 @@ msgstr "SIM"
 #: ../plugins/phone/PageComponent.qml:57 ../plugins/phone/Services.qml:28
 #, qt-format
 msgid "%1 Services"
-msgstr "%1 Dienstleistungen"
+msgstr "%1-Dienstleistungen"
 
 #: ../plugins/phone/Services.qml:34
 msgid "Voicemail"
-msgstr ""
+msgstr "Sprachnachricht"
 
 #: ../plugins/phone/Services.qml:34
 #, qt-format
@@ -500,7 +500,7 @@ msgstr "Starten Sie Ihr Telefon jetzt neu"
 
 #: ../plugins/system-update/PageComponent.qml:183
 msgid "We are deeply sorry"
-msgstr ""
+msgstr "Es tut uns sehr Leid"
 
 #: ../plugins/system-update/PageComponent.qml:184
 msgid "The update failed. Please try again later"
