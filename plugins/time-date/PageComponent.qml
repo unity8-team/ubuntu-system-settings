@@ -88,7 +88,7 @@ ItemPage {
 
         ListItem.Caption {
             text: i18n.tr("Setting the date and time automatically requires a data connection")
-            visible: !btimeDatePanel.globalConnectivity
+            visible: !timeDatePanel.globalConnectivity
         }
     }
 }
