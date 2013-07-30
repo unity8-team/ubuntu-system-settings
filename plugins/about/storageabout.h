@@ -36,10 +36,6 @@ class StorageAbout : public QObject
                 READ vendorString
                 CONSTANT)
 
-    Q_PROPERTY( QStringList licensesList
-                READ licensesList
-                CONSTANT)
-
     Q_PROPERTY( QString updateDate
                 READ updateDate
                 CONSTANT)
@@ -49,14 +45,12 @@ public:
     ~StorageAbout();
     QString serialNumber();
     QString vendorString();
-    QStringList licensesList();
     QString updateDate();
     Q_INVOKABLE QString licenseInfo(const QString &subdir) const;
 
 private:
     QString m_serialNumber;
     QString m_vendorString;
-    QStringList m_licensesList;
     QString m_updateDate;
 };
 
