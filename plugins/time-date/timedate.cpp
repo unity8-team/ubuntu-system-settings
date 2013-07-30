@@ -47,7 +47,6 @@ TimeDate::TimeDate(QObject *parent) :
     m_timeZoneFilterProxy(&m_timeZoneModel),
     m_sortedBefore(false)
 {
-
     connect (&m_serviceWatcher,
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
              this,
