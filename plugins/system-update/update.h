@@ -81,7 +81,7 @@ private:
     QString m_updateSize;
     QString m_updateDescriptions;
 
-    QDBusConnection m_sessionBusConnection;
+    QDBusConnection m_systemBusConnection;
     QString m_objectPath;
     QDBusInterface m_SystemServiceIface;
 

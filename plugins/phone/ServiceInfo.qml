@@ -24,20 +24,15 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
-    property string carrierString
-    title: i18n.tr("%1 Services").arg(carrierString)
+    property string serviceName
+    title: serviceName
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        Repeater {
-            model: [i18n.tr("Voicemail"), i18n.tr("My %1 Credit & Plan").arg(carrierString),
-                i18n.tr("Listen to digits of %1").arg(carrierString), i18n.tr("Traffic report"), i18n.tr("Horoscopes")]
-
-            ListItem.Standard {
-                text: modelData
-                onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData})
-            }
+    ListItem.SingleControl {
+        anchors.bottom: parent.bottom
+        control: Button {
+            width: parent.width - units.gu(4)
+            text: i18n.tr("Call")
         }
     }
+
 }
