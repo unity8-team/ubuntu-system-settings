@@ -23,11 +23,12 @@
 
 #include <QObject>
 #include <QtCore>
+#include <ofonosimmanager.h>
 
 class PhoneServices : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY ( QVariant serviceNumbers READ serviceNumbers CONSTANT )
+    Q_PROPERTY ( QVariant serviceNumbers READ serviceNumbers NOTIFY serviceNumbersChanged )
 
 
 public:
@@ -35,8 +36,18 @@ public:
     ~PhoneServices();
     QVariant serviceNumbers();
 
+signals:
+    void serviceNumbersChanged();
+
 private:
     QList<QObject*> m_serviceNumbers;
+    OfonoServiceNumbers m_ofonoServiceNumbers;
+    OfonoSimManager *m_ofonoSimManager;
+    void populateServiceNumbers (OfonoServiceNumbers);
+
+private Q_SLOTS:
+    void simServiceNumbersChanged(OfonoServiceNumbers sn);
+
 };
 
 #endif // PHONESERVICES_H

@@ -17,9 +17,7 @@
  *
 */
 
-#include <ofonosimmanager.h>
 #include <QtDebug>
-
 #include "phoneservices.h"
 #include "simservice.h"
 
@@ -27,30 +25,46 @@ PhoneServices::PhoneServices(QObject *parent) :
     QObject(parent)
 {
 
+    m_ofonoSimManager = new OfonoSimManager(OfonoModem::AutomaticSelect, QString(), this);
+
+    populateServiceNumbers(m_ofonoServiceNumbers);
+    QObject::connect(m_ofonoSimManager,
+        SIGNAL (serviceNumbersChanged (const OfonoServiceNumbers&)),
+        this,
+        SLOT (simServiceNumbersChanged (const OfonoServiceNumbers&)));
 }
 
+void PhoneServices::populateServiceNumbers (OfonoServiceNumbers sn)
+{
+
+    if (m_ofonoSimManager->modem()->isValid())
+    {
+        m_serviceNumbers.clear();
+        if (sn.isEmpty())
+            m_ofonoServiceNumbers = m_ofonoSimManager->serviceNumbers();
+        else
+            m_ofonoServiceNumbers = sn;
+
+        QMapIterator<QString, QString> i(m_ofonoServiceNumbers);
+        while (i.hasNext()) {
+            i.next();
+            m_serviceNumbers.append(new SimService(i.key(), i.value()));
+            qDebug() << i.key() << ": " << i.value() << endl;
+        }
+    }
+}
 
 QVariant PhoneServices::serviceNumbers()
 {
-    if (m_serviceNumbers.isEmpty())
-    {
-        OfonoSimManager *sim = new OfonoSimManager(OfonoModem::AutomaticSelect, QString(), NULL);
-
-        //if (sim->modem()->isValid())
-        //{
-            m_serviceNumbers.clear();
-            QMap<QString, QString> sn = sim->serviceNumbers();
-            QMapIterator<QString, QString> i(sn);
-            while (i.hasNext()) {
-                i.next();
-                m_serviceNumbers.append(new SimService(i.key(), i.value()));
-                qDebug() << i.key() << ": " << i.value() << endl;
-            }
-
-        //}
-    }
     return QVariant::fromValue(m_serviceNumbers);
 }
 
-PhoneServices::~PhoneServices() {
+void PhoneServices::simServiceNumbersChanged(OfonoServiceNumbers sn)
+{
+    populateServiceNumbers(sn);
+    emit serviceNumbersChanged();
+}
+
+PhoneServices::~PhoneServices()
+{
 }
