@@ -8,11 +8,11 @@ QML_SOURCES = \
     CallDiversion.qml \
     CallWaiting.qml \
     PageComponent.qml \
-    Services.qml
+    Services.qml \
+    ServiceNumber.qml
 
 OTHER_FILES += \
-    $${QML_SOURCES} \
-    ServiceNumber.qml
+    $${QML_SOURCES}
 
 qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
