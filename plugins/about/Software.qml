@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import Qt.labs.folderlistmodel 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -13,17 +14,22 @@ ItemPage {
         id: backendInfo
     }
 
+    FolderListModel {
+        id: folderModel
+        folder: "/usr/share/doc"
+    }
+
     ListView {
         id: softwareList
         anchors.fill: parent
         maximumFlickVelocity: height * 10
         flickDeceleration: height * 2
 
-        model: backendInfo.licensesList
+        model: folderModel
         delegate: ListItem.Standard {
-            text: modelData
+            text: fileName
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("License.qml"), {binary: modelData})
+            onClicked: pageStack.push(Qt.resolvedUrl("License.qml"), {binary: fileName})
         }
 
     }

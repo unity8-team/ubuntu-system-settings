@@ -39,6 +39,10 @@ ItemPage {
         property bool updateReady: false
         property bool updateCanceled: false
 
+        // TODO: example data, no i18n
+        property variant updateDescriptions: ["Enables a 200x improvment on Ubuntu Edge phone",
+                                              "Makes you a sandwish"]
+
         function startUpdate() {
             updateInProgress= true;
             updateReady = false;
@@ -116,6 +120,15 @@ ItemPage {
                         id: checkUpdateIndicator
                         anchors.horizontalCenter: parent.horizontalCenter
                         running: updateID.updateAvailable < 0
+                        visible: running
+                    }
+                    ProgressBar {
+                        id: indeterminateBar
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+
+                        indeterminate: true
+                        visible: updateID.updateInProgress && !updateID.updateReady
                     }
                 }
 
@@ -129,26 +142,32 @@ ItemPage {
                 Column {
                     anchors.left: parent.left
                     anchors.right: parent.right
+
+                    // FIXME: Any of those item is creating an extra line in the middle, commented for now
+                    //ListItem.Divider { }
+                    /*ListItem.Header {
+                        text: i18n.tr("General update infos:")
+                    }*/
                     ListItem.Standard {
                         text: i18n.tr("You can update from version %1 to version %2").arg(updateID.OSVersion).arg(updateID.updateVersion);
                     }
                     ListItem.Standard {
                         text: i18n.tr("Size of this update: %1").arg(updateID.updateSize);
                     }
-
-                    ListItem.Caption {
-                        // TODO fix with real description (probably iteraring on a list)
-                        // no i18n as the chain will change
-                        text: "This update will:\n * Enables a 200x improvment on Ubuntu Edge phone\n * Makes you a sandwish";
+                    ListItem.Divider { }
+                    ListItem.Header {
+                        text: i18n.tr("This update will:")
                     }
+                    Repeater {
+                        model: updateID.updateDescriptions
+                        ListItem.Standard { text: modelData }
+                    }
+                    ListItem.Divider { }
+
                     ListItem.Standard {
                         id: actionbuttons
                         property string default_text: i18n.tr("Apply?")
                         text: default_text
-                        ActivityIndicator {
-                            anchors.verticalCenter: parent.verticalCenter
-                            running: updateID.updateInProgress && !updateID.updateReady
-                        }
                         control: Row {
                             spacing: units.gu(1)
                             Button {
