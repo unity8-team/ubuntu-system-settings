@@ -1,3 +1,4 @@
+import GSettings 1.0
 import QtQuick 2.0
 import QtMultimedia 5.0
 import SystemSettings 1.0
@@ -9,6 +10,7 @@ ItemPage {
     property string title
     property variant soundDisplayNames
     property variant soundFileNames
+    property GSettings soundSettings
     property bool silentModeOn: false
     property bool showStopButton: false
 
@@ -38,10 +40,7 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        SilentModeWarning {
-            id: silentId
-            silentMode: silentModeOn
-        }
+        SilentModeWarning { visible: soundSettings.silentMode }
 
         ListItem.SingleControl {
             id: listId
@@ -52,7 +51,7 @@ ItemPage {
                     soundEffect.stop()
             }
             enabled: soundEffect.playbackState == Audio.PlayingState
-            visible: showStopButton && !silentModeOn
+            visible: showStopButton && !soundSettings.silentMode
         }
     }
 
