@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-26 18:00+0200\n"
+"POT-Creation-Date: 2013-07-30 11:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Legal:"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr ""
 
@@ -315,6 +315,10 @@ msgstr ""
 msgid "%1 Services"
 msgstr ""
 
+#: ../plugins/phone/ServiceInfo.qml:34
+msgid "Call"
+msgstr ""
+
 #: ../plugins/phone/Services.qml:34
 msgid "Voicemail"
 msgstr ""
@@ -378,11 +382,32 @@ msgstr ""
 msgid "Reset launcher & home screen"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:30 ../.build/settings.js:15
+#: ../plugins/security-privacy/Dash.qml:29
+#: ../plugins/security-privacy/PageComponent.qml:58
+msgid "Dash search"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:48
+msgid "Return results from:"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:53
+#: ../plugins/security-privacy/PageComponent.qml:42
+#: ../plugins/security-privacy/PageComponent.qml:59
+msgid "Phone only"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:53
+#: ../plugins/security-privacy/PageComponent.qml:40
+#: ../plugins/security-privacy/PageComponent.qml:59
+msgid "Phone and Internet"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
 msgid "Security & Privacy"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:44
+#: ../plugins/security-privacy/PageComponent.qml:65
 msgid "Diagnostics"
 msgstr ""
 
@@ -516,19 +541,19 @@ msgstr ""
 msgid "Set the time and date:"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
+#: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:78
+#: ../src/qml/MainWindow.qml:80
 msgid "Network"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:83
+#: ../src/qml/MainWindow.qml:85
 msgid "Personal"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:88
+#: ../src/qml/MainWindow.qml:90
 msgid "System"
 msgstr ""
 

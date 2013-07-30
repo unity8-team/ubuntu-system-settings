@@ -39,7 +39,7 @@ ItemPage {
             ListItem.Standard {
                 progression: true
                 text: modelData.name
-                onClicked: pageStack.push(Qt.resolvedUrl("ServiceNumber.qml"), {title: modelData.name, number: modelData.value})
+                onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData.name, serviceNumber: modelData.value})
             }
         }
     }

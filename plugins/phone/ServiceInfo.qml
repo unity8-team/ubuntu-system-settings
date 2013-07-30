@@ -24,19 +24,16 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
-    property string name
-    property string number
-    title: name
+    property string serviceName
+    property string serviceNumber
+    title: serviceName
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        ListItem.SingleControl {
-            control: Button {
-                text: i18n.tr("Call")
-                width: parent.width - units.gu(4)
-            }
+    ListItem.SingleControl {
+        anchors.bottom: parent.bottom
+        control: Button {
+            width: parent.width - units.gu(4)
+            text: i18n.tr("Call")
         }
     }
-}
 
+}

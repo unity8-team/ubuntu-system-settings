@@ -1,3 +1,59 @@
+ubuntu-system-settings (0.1+13.10.20130730.3-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * security: add dash privacy control.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 209
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 30 Jul 2013 13:12:41 +0000
+
+ubuntu-system-settings (0.1+13.10.20130730.1-0ubuntu1) saucy; urgency=low
+
+  [ Loïc Minier ]
+  * Use system bus instead of session bus for OS updates.
+
+  [ Sebastien Bacher ]
+  * phone: add a subpage for service details.
+
+  [ Didier Roche ]
+  * * use a list instead of hardcoded data. Try to have a little bit
+    more beautiful result, but it seems there is a bug in the sdk *
+    replace the activity indicator for downloading by an infinite
+    progress indicator * listen to system dbus as well as the daemon is
+    listening to it.
+
+  [ Evan Dandrea ]
+  * Add a link off to the privacy policy from the diagnostics page.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 207
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 30 Jul 2013 10:01:39 +0000
+
+ubuntu-system-settings (0.1+13.10.20130730-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * licenses: replace custom backend by folderlistmodel use.
+
+  [ Iain Lane ]
+  * timedate: Retrieve and populate the list of locations in a worker
+    thread.
+
+  [ Evan Dandrea ]
+  * Enable automatic error reporting when error reporting is enabled.
+
+  [ Alberto Mardegan ]
+  * Support launching individual panels, with options - Let plugin
+    options be specified from the command line - Quit if the requested
+    plugin does not exist - Do not open the System Settings page when a
+    plugin is launched .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 202
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 30 Jul 2013 07:01:55 +0000
+
 ubuntu-system-settings (0.1+13.10.20130729-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

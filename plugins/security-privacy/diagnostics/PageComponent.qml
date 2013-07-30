@@ -47,6 +47,14 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
+            ListItem.SingleValue {
+                text: i18n.tr("Privacy policy")
+                progression: true
+                onClicked: {
+                    Qt.openUrlExternally("http://www.ubuntu.com/aboutus/privacypolicy?crashdb")
+                }
+            }
+
             ListItem.Standard {
                 text: i18n.tr("Report to Canonical:")
             }
