@@ -102,6 +102,8 @@ ItemPage {
                 control: Button {
                     text: i18n.tr("Check for updates")
                     width: parent.width - units.gu(4)
+                    onClicked:
+                        pageStack.push(pluginManager.getByName("system-update").pageComponent)
                 }
             }
 

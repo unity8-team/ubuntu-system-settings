@@ -36,7 +36,7 @@ Column {
                         var pageComponent = model.item.pageComponent
                         if (pageComponent) {
                             pageStack.push(model.item.pageComponent,
-                                           { plugin: model.item })
+                                           { plugin: model.item, pluginManager: pluginManager })
                         }
                     }
                 }
