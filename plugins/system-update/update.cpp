@@ -121,7 +121,7 @@ void Update::m_getUpdateInfos()
 
     QDBusReply<qint64> reply2 = m_SystemServiceIface.call("GetUpdateSize");
     if (reply2.isValid())
-        m_updateSize = QString("%1 Mb").arg(QString::number(reply2.value()/1024.0));
+        m_updateSize = QString("%1 Mb").arg(QString::number(reply2.value()/1024.0/1024.0));
     else
         m_updateSize = "Unknown";
 
