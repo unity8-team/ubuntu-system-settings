@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import GSettings 1.0
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -30,6 +31,18 @@ ItemPage {
     title: i18n.tr("Security & Privacy")
     flickable: scrollWidget
 
+    GSettings {
+        id: unitySettings
+        schema.id: "com.canonical.Unity.Lenses"
+        onChanged: {
+            if (key == "remoteContentSearch")
+                if (value == 'all')
+                    dashSearchId.value = i18n.tr("Phone and Internet")
+                else
+                    dashSearchId.value = i18n.tr("Phone only")
+        }
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -39,6 +52,14 @@ ItemPage {
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
+
+            ListItem.SingleValue {
+                id: dashSearchId
+                text: i18n.tr("Dash search")
+                value: (unitySettings.remoteContentSearch === 'all') ? i18n.tr("Phone and Internet") : i18n.tr("Phone only")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Dash.qml"))
+            }
 
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
