@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-29 16:47+0200\n"
+"POT-Creation-Date: 2013-07-30 11:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Legal:"
 msgstr ""
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgid "Dash search"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:48
-msgid "Return result from:"
+msgid "Return results from:"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:53
@@ -407,7 +407,7 @@ msgstr ""
 msgid "Security & Privacy"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:44
+#: ../plugins/security-privacy/PageComponent.qml:65
 msgid "Diagnostics"
 msgstr ""
 
