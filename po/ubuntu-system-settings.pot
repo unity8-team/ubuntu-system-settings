@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-30 11:41+0200\n"
+"POT-Creation-Date: 2013-07-30 11:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -471,49 +471,53 @@ msgstr ""
 msgid "Update phone"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:108
+#: ../plugins/system-update/PageComponent.qml:112
 msgid "Congrats! You are already up to date!"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:110
+#: ../plugins/system-update/PageComponent.qml:114
 msgid "A new version is available!"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:111
+#: ../plugins/system-update/PageComponent.qml:115
 msgid "Checking latest available system version…"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:133
+#: ../plugins/system-update/PageComponent.qml:152
 #, qt-format
 msgid "You can update from version %1 to version %2"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:136
+#: ../plugins/system-update/PageComponent.qml:155
 #, qt-format
 msgid "Size of this update: %1"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:146
+#: ../plugins/system-update/PageComponent.qml:159
+msgid "This update will:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:169
 msgid "Apply?"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:155
+#: ../plugins/system-update/PageComponent.qml:174
 msgid "Update your phone"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:161
+#: ../plugins/system-update/PageComponent.qml:180
 msgid "Cancel update"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:167
+#: ../plugins/system-update/PageComponent.qml:186
 msgid "Reboot your phone now"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:183
+#: ../plugins/system-update/PageComponent.qml:202
 msgid "We are deeply sorry"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:184
+#: ../plugins/system-update/PageComponent.qml:203
 msgid "The update failed. Please try again later"
 msgstr ""
 
@@ -539,6 +543,10 @@ msgstr ""
 
 #: ../plugins/time-date/PageComponent.qml:63
 msgid "Set the time and date:"
+msgstr ""
+
+#: ../plugins/time-date/PageComponent.qml:90
+msgid "Setting the date and time automatically requires a data connection"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
