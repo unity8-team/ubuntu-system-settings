@@ -41,7 +41,8 @@ ItemPage {
 
         // TODO: example data, no i18n
         property variant updateDescriptions: ["Enables a 200x improvment on Ubuntu Edge phone",
-                                              "Makes you a sandwish"]
+                                              "Makes you a sandwich",
+                                              "Makes Steve and Loic happy"]
 
         function startUpdate() {
             updateInProgress= true;
