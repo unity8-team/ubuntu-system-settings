@@ -45,7 +45,7 @@ ItemPage {
         anchors.right: parent.right
 
         ListItem.Standard {
-            text: i18n.tr("Return result from:")
+            text: i18n.tr("Return results from:")
         }
 
         ListItem.ValueSelector {
