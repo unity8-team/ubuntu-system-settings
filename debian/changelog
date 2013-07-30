@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.1+13.10.20130730-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * licenses: replace custom backend by folderlistmodel use.
+
+  [ Iain Lane ]
+  * timedate: Retrieve and populate the list of locations in a worker
+    thread.
+
+  [ Evan Dandrea ]
+  * Enable automatic error reporting when error reporting is enabled.
+
+  [ Alberto Mardegan ]
+  * Support launching individual panels, with options - Let plugin
+    options be specified from the command line - Quit if the requested
+    plugin does not exist - Do not open the System Settings page when a
+    plugin is launched .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 202
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 30 Jul 2013 07:01:55 +0000
+
 ubuntu-system-settings (0.1+13.10.20130729-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
