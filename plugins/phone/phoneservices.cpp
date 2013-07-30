@@ -17,7 +17,6 @@
  *
 */
 
-#include <QtDebug>
 #include "phoneservices.h"
 #include "simservice.h"
 
@@ -27,11 +26,19 @@ PhoneServices::PhoneServices(QObject *parent) :
 
     m_ofonoSimManager = new OfonoSimManager(OfonoModem::AutomaticSelect, QString(), this);
 
+    m_present = m_ofonoSimManager->present();
+
     populateServiceNumbers(m_ofonoServiceNumbers);
     QObject::connect(m_ofonoSimManager,
         SIGNAL (serviceNumbersChanged (const OfonoServiceNumbers&)),
         this,
         SLOT (simServiceNumbersChanged (const OfonoServiceNumbers&)));
+
+    QObject::connect(m_ofonoSimManager,
+        SIGNAL (presenceChanged (bool)),
+        this,
+        SLOT (simPresenceChanged (bool)));
+
 }
 
 void PhoneServices::populateServiceNumbers (OfonoServiceNumbers sn)
@@ -49,14 +56,24 @@ void PhoneServices::populateServiceNumbers (OfonoServiceNumbers sn)
         while (i.hasNext()) {
             i.next();
             m_serviceNumbers.append(new SimService(i.key(), i.value()));
-            qDebug() << i.key() << ": " << i.value() << endl;
         }
     }
+}
+
+bool PhoneServices::present() const
+{
+    return m_present;
 }
 
 QVariant PhoneServices::serviceNumbers()
 {
     return QVariant::fromValue(m_serviceNumbers);
+}
+
+void PhoneServices::simPresenceChanged(bool ispresent)
+{
+    m_present = ispresent;
+    emit presenceChanged(m_present);
 }
 
 void PhoneServices::simServiceNumbersChanged(OfonoServiceNumbers sn)

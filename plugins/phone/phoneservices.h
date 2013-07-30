@@ -29,25 +29,30 @@ class PhoneServices : public QObject
 {
     Q_OBJECT
     Q_PROPERTY ( QVariant serviceNumbers READ serviceNumbers NOTIFY serviceNumbersChanged )
-
+    Q_PROPERTY ( bool present READ present NOTIFY presenceChanged )
 
 public:
     explicit PhoneServices(QObject *parent = 0);
     ~PhoneServices();
+
+    /* Properties */
     QVariant serviceNumbers();
+    bool present() const;
 
 signals:
     void serviceNumbersChanged();
+    void presenceChanged(bool ispresent);
 
 private:
     QList<QObject*> m_serviceNumbers;
     OfonoServiceNumbers m_ofonoServiceNumbers;
     OfonoSimManager *m_ofonoSimManager;
-    void populateServiceNumbers (OfonoServiceNumbers);
+    bool m_present;
+    void populateServiceNumbers(OfonoServiceNumbers);
 
 private Q_SLOTS:
     void simServiceNumbersChanged(OfonoServiceNumbers sn);
-
+    void simPresenceChanged(bool ispresent);
 };
 
 #endif // PHONESERVICES_H
