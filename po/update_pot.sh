@@ -1,5 +1,5 @@
 #! /bin/bash
 
 cd ../src
-make ../po/system-settings.pot
+make ../po/ubuntu-system-settings.pot
 
