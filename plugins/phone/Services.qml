@@ -28,8 +28,6 @@ ItemPage {
     property var sim
     title: i18n.tr("%1 Services").arg(carrierString)
 
-
-
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
