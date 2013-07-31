@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.1+13.10.20130731-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Use ofono-qt to get SIM Services and populate the Services and
+    ServiceInfo packages.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 216
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 31 Jul 2013 13:19:52 +0000
+
 ubuntu-system-settings (0.1+13.10.20130730.5-0ubuntu1) saucy; urgency=low
 
   [ Didier Roche ]
