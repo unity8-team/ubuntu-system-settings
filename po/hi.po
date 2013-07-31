@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-26 18:00+0200\n"
+"POT-Creation-Date: 2013-07-30 11:41+0200\n"
 "PO-Revision-Date: 2013-07-05 22:48+0000\n"
 "Last-Translator: Purvesh R. Shah. <purveshrshah@gmail.com>\n"
 "Language-Team: Hindi <hi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-27 05:29+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-07-31 06:11+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -58,7 +58,7 @@ msgstr "स्टोरेज"
 msgid "Legal:"
 msgstr "लिगल:"
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr "सॉफ्टवेयर लाइसेंसीस"
 
@@ -315,6 +315,10 @@ msgstr ""
 msgid "%1 Services"
 msgstr ""
 
+#: ../plugins/phone/ServiceInfo.qml:34
+msgid "Call"
+msgstr ""
+
 #: ../plugins/phone/Services.qml:34
 msgid "Voicemail"
 msgstr ""
@@ -382,11 +386,32 @@ msgstr "सभी सिस्टम सेटिंग रीसेट कर�
 msgid "Reset launcher & home screen"
 msgstr "लांचर और होम स्क्रीन रीसेट करे"
 
-#: ../plugins/security-privacy/PageComponent.qml:30 ../.build/settings.js:15
+#: ../plugins/security-privacy/Dash.qml:29
+#: ../plugins/security-privacy/PageComponent.qml:58
+msgid "Dash search"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:48
+msgid "Return results from:"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:53
+#: ../plugins/security-privacy/PageComponent.qml:42
+#: ../plugins/security-privacy/PageComponent.qml:59
+msgid "Phone only"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:53
+#: ../plugins/security-privacy/PageComponent.qml:40
+#: ../plugins/security-privacy/PageComponent.qml:59
+msgid "Phone and Internet"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
 msgid "Security & Privacy"
 msgstr "सुरक्षा और गोपनीयता"
 
-#: ../plugins/security-privacy/PageComponent.qml:44
+#: ../plugins/security-privacy/PageComponent.qml:65
 msgid "Diagnostics"
 msgstr ""
 
@@ -520,19 +545,19 @@ msgstr ""
 msgid "Set the time and date:"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
+#: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr "सिस्टम सेटिंग्स"
 
-#: ../src/qml/MainWindow.qml:78
+#: ../src/qml/MainWindow.qml:80
 msgid "Network"
 msgstr "नेटवर्क"
 
-#: ../src/qml/MainWindow.qml:83
+#: ../src/qml/MainWindow.qml:85
 msgid "Personal"
 msgstr "निजी"
 
-#: ../src/qml/MainWindow.qml:88
+#: ../src/qml/MainWindow.qml:90
 msgid "System"
 msgstr "सिस्टम"
 
