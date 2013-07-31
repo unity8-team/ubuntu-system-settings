@@ -45,9 +45,9 @@ ItemPage {
         anchors.fill: parent
 
         ListItem.Standard {
-            text: i18n.tr("Call diversion")
+            text: i18n.tr("Call forwarding")
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CallDiversion.qml"))
+            onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"))
         }
 
         ListItem.Standard {
