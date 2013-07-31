@@ -25,6 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     property string serviceName
+    property string serviceNumber
     title: serviceName
 
     ListItem.SingleControl {
