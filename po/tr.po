@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-26 18:00+0200\n"
-"PO-Revision-Date: 2013-07-03 23:04+0000\n"
-"Last-Translator: Volkan Gezer <Unknown>\n"
+"POT-Creation-Date: 2013-07-30 11:41+0200\n"
+"PO-Revision-Date: 2013-07-30 05:43+0000\n"
+"Last-Translator: İbrahim Çelik <ibrahimcelik89@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-27 05:29+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-07-31 06:11+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -28,7 +28,7 @@ msgstr "Seri numarası"
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
 #: ../plugins/cellular/PageComponent.qml:56
 msgid "N/A"
-msgstr ""
+msgstr "Mevcut Değil"
 
 #: ../plugins/about/PageComponent.qml:88
 msgid "Software:"
@@ -40,11 +40,11 @@ msgstr "İşletim Sistemi"
 
 #: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
-msgstr ""
+msgstr "Son güncelleme"
 
 #: ../plugins/about/PageComponent.qml:98
 msgid "Never"
-msgstr ""
+msgstr "Hiçbir Zaman"
 
 #: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
@@ -58,7 +58,7 @@ msgstr "Depolama"
 msgid "Legal:"
 msgstr "Yasal:"
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:9
+#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr "Yazılım lisansları"
 
@@ -72,19 +72,19 @@ msgstr "Ubuntu tarafından kullanılan"
 
 #: ../plugins/about/Storage.qml:38
 msgid "Movies"
-msgstr ""
+msgstr "Filmler"
 
 #: ../plugins/about/Storage.qml:38
 msgid "Audio"
-msgstr ""
+msgstr "Ses ve Müzik"
 
 #: ../plugins/about/Storage.qml:39
 msgid "Pictures"
-msgstr ""
+msgstr "Resimler"
 
 #: ../plugins/about/Storage.qml:39
 msgid "Other files"
-msgstr ""
+msgstr "Diğer dosyalar"
 
 #: ../plugins/about/Storage.qml:39
 msgid "Used by apps"
@@ -92,15 +92,15 @@ msgstr "Uygulamalar tarafından kullanılan"
 
 #: ../plugins/about/Storage.qml:98
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 #: ../plugins/about/Storage.qml:100
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: ../plugins/about/Storage.qml:102
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: ../plugins/about/Storage.qml:122
 msgid "Total storage"
@@ -112,11 +112,11 @@ msgstr "Boş alan"
 
 #: ../plugins/about/Storage.qml:147
 msgid "By name"
-msgstr ""
+msgstr "Ada göre"
 
 #: ../plugins/about/Storage.qml:147
 msgid "By size"
-msgstr ""
+msgstr "Boyuta göre"
 
 #: ../plugins/background/MainPage.qml:32 ../.build/settings.js:3
 msgid "Background"
@@ -142,11 +142,11 @@ msgstr "Her biri için ayrı arkaplan"
 #: ../plugins/cellular/ChooseCarrier.qml:27
 #: ../plugins/cellular/PageComponent.qml:55
 msgid "Carrier"
-msgstr ""
+msgstr "Taşıyıcı"
 
 #: ../plugins/cellular/ChooseCarrier.qml:41
 msgid "Searching"
-msgstr ""
+msgstr "Arıyor"
 
 #: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:6
 msgid "Cellular"
@@ -154,29 +154,29 @@ msgstr "Hücresel"
 
 #: ../plugins/cellular/PageComponent.qml:50
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Taşıyıcı seç:"
 
 #: ../plugins/cellular/PageComponent.qml:51
 #: ../plugins/time-date/ChooseTimeZone.qml:35
 msgid "Automatically"
-msgstr ""
+msgstr "Otomatik"
 
 #: ../plugins/cellular/PageComponent.qml:51
 #: ../plugins/time-date/ChooseTimeZone.qml:35
 msgid "Manually"
-msgstr ""
+msgstr "Elle"
 
 #: ../plugins/cellular/PageComponent.qml:68
 msgid "Cellular data"
-msgstr ""
+msgstr "Hücresel veri"
 
 #: ../plugins/cellular/PageComponent.qml:89
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Sadece 2G (pil tasarrufu)"
 
 #: ../plugins/cellular/PageComponent.qml:90
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (daha hızlı)"
 
 #: ../plugins/cellular/PageComponent.qml:96
 msgid "Call roaming"
@@ -188,13 +188,13 @@ msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:135
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Veri kullanımı istatistikleri"
 
 #: ../plugins/language/DisplayLanguage.qml:30
 #: ../plugins/language/DisplayLanguage.qml:49
 #: ../plugins/language/PageComponent.qml:48
 msgid "Display language"
-msgstr ""
+msgstr "Görüntüleme dili"
 
 #: ../plugins/language/DisplayLanguage.qml:84
 #: ../plugins/phone/CallDiversion.qml:113
@@ -206,16 +206,16 @@ msgstr "İptal"
 
 #: ../plugins/language/DisplayLanguage.qml:99
 msgid "Confirm"
-msgstr ""
+msgstr "Onayla"
 
 #: ../plugins/language/KeyboardLayouts.qml:29
 #: ../plugins/language/PageComponent.qml:57
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "Klavye düzenleri"
 
 #: ../plugins/language/KeyboardLayouts.qml:42
 msgid "Current layouts:"
-msgstr ""
+msgstr "Şu anki düzenler:"
 
 #: ../plugins/language/KeyboardLayouts.qml:58
 msgid "All layouts available:"
@@ -223,25 +223,25 @@ msgstr ""
 
 #: ../plugins/language/PageComponent.qml:30
 msgid "Language & Text"
-msgstr ""
+msgstr "Dil & Metin"
 
 #: ../plugins/language/PageComponent.qml:67
 #: ../plugins/language/SpellChecking.qml:29
 #: ../plugins/language/SpellChecking.qml:42
 msgid "Spell checking"
-msgstr ""
+msgstr "Yazım denetimi"
 
 #: ../plugins/language/PageComponent.qml:75
 msgid "Auto correction"
-msgstr ""
+msgstr "Otomatik düzeltme"
 
 #: ../plugins/language/PageComponent.qml:80
 msgid "Auto completion"
-msgstr ""
+msgstr "Otomatik tamamlama"
 
 #: ../plugins/language/PageComponent.qml:87
 msgid "Auto capitalization"
-msgstr ""
+msgstr "Otomatik büyük harf"
 
 #: ../plugins/language/PageComponent.qml:92
 msgid "Turns on Shift to capitalize the first letter of each sentence."
@@ -249,7 +249,7 @@ msgstr ""
 
 #: ../plugins/language/PageComponent.qml:98
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Otomatik noktalama"
 
 #: ../plugins/language/PageComponent.qml:103
 msgid ""
@@ -258,49 +258,54 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:49
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "Şu anki yazım dilleri:"
 
 #: ../plugins/language/SpellChecking.qml:62
 msgid "All languages available:"
-msgstr ""
+msgstr "Tüm mevcut diller:"
 
 #: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
 #: ../plugins/phone/PageComponent.qml:43
 msgid "Call diversion"
-msgstr ""
+msgstr "Arama yönlendirme"
 
 #: ../plugins/phone/CallDiversion.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"Cevap vermediğinizde, telefonunuz meşguldeyken, kapalıyken veya kapsama "
+"alanı dışındayken gelen aramaları başka bir numaraya yönlendirir."
 
 #: ../plugins/phone/CallDiversion.qml:91
 msgid "Call diversion status can’t be checked right now. Try again later."
 msgstr ""
+"Arama yönlendirme durumu şu anda denetlenemiyor. Daha sonra tekrar deneyin."
 
 #: ../plugins/phone/CallDiversion.qml:102
 msgid "Divert to"
-msgstr ""
+msgstr "Şuna yönlendir"
 
 #: ../plugins/phone/CallDiversion.qml:113
 msgid "Contacts…"
-msgstr ""
+msgstr "Kişiler..."
 
 #: ../plugins/phone/CallDiversion.qml:113
 msgid "Set"
-msgstr ""
+msgstr "Ayarla"
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:49
 msgid "Call waiting"
-msgstr ""
+msgstr "Arama bekletme"
 
 #: ../plugins/phone/CallWaiting.qml:67
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
+"Bir görüşme yaparken başka bir arama yapmanızı, başka bir aramaya cevap "
+"vermenizi veya aralarında geçiş yapmanızı sağlar"
 
 #: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
 msgid "Phone"
@@ -308,16 +313,20 @@ msgstr "Telefon"
 
 #: ../plugins/phone/PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #: ../plugins/phone/PageComponent.qml:57 ../plugins/phone/Services.qml:28
 #, qt-format
 msgid "%1 Services"
 msgstr ""
 
+#: ../plugins/phone/ServiceInfo.qml:34
+msgid "Call"
+msgstr ""
+
 #: ../plugins/phone/Services.qml:34
 msgid "Voicemail"
-msgstr ""
+msgstr "Telesekreter"
 
 #: ../plugins/phone/Services.qml:34
 #, qt-format
@@ -331,11 +340,11 @@ msgstr ""
 
 #: ../plugins/phone/Services.qml:35
 msgid "Traffic report"
-msgstr ""
+msgstr "Trafik raporu"
 
 #: ../plugins/phone/Services.qml:35
 msgid "Horoscopes"
-msgstr ""
+msgstr "Burçlar"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
@@ -382,11 +391,32 @@ msgstr "Tüm sistem ayarların sıfırla"
 msgid "Reset launcher & home screen"
 msgstr "Başlatıcı ve ana ekranı sıfırla"
 
-#: ../plugins/security-privacy/PageComponent.qml:30 ../.build/settings.js:15
+#: ../plugins/security-privacy/Dash.qml:29
+#: ../plugins/security-privacy/PageComponent.qml:58
+msgid "Dash search"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:48
+msgid "Return results from:"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:53
+#: ../plugins/security-privacy/PageComponent.qml:42
+#: ../plugins/security-privacy/PageComponent.qml:59
+msgid "Phone only"
+msgstr ""
+
+#: ../plugins/security-privacy/Dash.qml:53
+#: ../plugins/security-privacy/PageComponent.qml:40
+#: ../plugins/security-privacy/PageComponent.qml:59
+msgid "Phone and Internet"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
 msgid "Security & Privacy"
 msgstr "Güvenlik ve Gizlilik"
 
-#: ../plugins/security-privacy/PageComponent.qml:44
+#: ../plugins/security-privacy/PageComponent.qml:65
 msgid "Diagnostics"
 msgstr ""
 
@@ -424,15 +454,15 @@ msgstr "Uyarı sesi ile titre"
 
 #: ../plugins/sound/PageComponent.qml:91
 msgid "Other sounds:"
-msgstr ""
+msgstr "Diğer sesler:"
 
 #: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
 msgid "Message received"
-msgstr ""
+msgstr "Mesaj alındı"
 
 #: ../plugins/sound/PageComponent.qml:103
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "Klavye sesleri"
 
 #: ../plugins/sound/PageComponent.qml:108
 msgid "Lock sound"
@@ -440,53 +470,53 @@ msgstr ""
 
 #: ../plugins/sound/SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "Telefon sessiz modda."
 
 #: ../plugins/sound/SoundsList.qml:49
 msgid "Stop playing"
-msgstr ""
+msgstr "Oynatmayı durdur"
 
 #: ../plugins/system-update/PageComponent.qml:32
 msgid "Update phone"
-msgstr ""
+msgstr "Telefonu güncelle"
 
 #: ../plugins/system-update/PageComponent.qml:108
 msgid "Congrats! You are already up to date!"
-msgstr ""
+msgstr "Tebrikler! Telefonunuz güncel!"
 
 #: ../plugins/system-update/PageComponent.qml:110
 msgid "A new version is available!"
-msgstr ""
+msgstr "Yeni bir sürüm mevcut!"
 
 #: ../plugins/system-update/PageComponent.qml:111
 msgid "Checking latest available system version…"
-msgstr ""
+msgstr "Mevcut olan son sistem sürümü denetleniyor..."
 
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "You can update from version %1 to version %2"
-msgstr ""
+msgstr "Sürüm %1'den sürüm %2'ye güncelleştirebilirsiniz"
 
 #: ../plugins/system-update/PageComponent.qml:136
 #, qt-format
 msgid "Size of this update: %1"
-msgstr ""
+msgstr "Güncelleştirme boyutu: %1"
 
 #: ../plugins/system-update/PageComponent.qml:146
 msgid "Apply?"
-msgstr ""
+msgstr "Uygulansın mı?"
 
 #: ../plugins/system-update/PageComponent.qml:155
 msgid "Update your phone"
-msgstr ""
+msgstr "Telefonunuzu güncelleştirin"
 
 #: ../plugins/system-update/PageComponent.qml:161
 msgid "Cancel update"
-msgstr ""
+msgstr "Güncelleştirmeyi iptal et"
 
 #: ../plugins/system-update/PageComponent.qml:167
 msgid "Reboot your phone now"
-msgstr ""
+msgstr "Telefonu şimdi yeniden başlatın"
 
 #: ../plugins/system-update/PageComponent.qml:183
 msgid "We are deeply sorry"
@@ -520,19 +550,19 @@ msgstr ""
 msgid "Set the time and date:"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:58 ../.build/ubuntu-system-settings.desktop.js:1
+#: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr "Sistem Ayarları"
 
-#: ../src/qml/MainWindow.qml:78
+#: ../src/qml/MainWindow.qml:80
 msgid "Network"
 msgstr "Ağ"
 
-#: ../src/qml/MainWindow.qml:83
+#: ../src/qml/MainWindow.qml:85
 msgid "Personal"
 msgstr "Kişisel"
 
-#: ../src/qml/MainWindow.qml:88
+#: ../src/qml/MainWindow.qml:90
 msgid "System"
 msgstr "Sistem"
 

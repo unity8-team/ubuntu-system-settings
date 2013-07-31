@@ -25,18 +25,19 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     property string carrierString
+    property var sim
     title: i18n.tr("%1 Services").arg(carrierString)
 
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
         Repeater {
-            model: [i18n.tr("Voicemail"), i18n.tr("My %1 Credit & Plan").arg(carrierString),
-                i18n.tr("Listen to digits of %1").arg(carrierString), i18n.tr("Traffic report"), i18n.tr("Horoscopes")]
+            model: sim.serviceNumbers
 
             ListItem.Standard {
-                text: modelData
-                onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData})
+                progression: true
+                text: modelData.name
+                onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData.name, serviceNumber: modelData.value})
             }
         }
     }

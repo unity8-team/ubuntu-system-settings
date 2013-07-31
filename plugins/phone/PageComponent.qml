@@ -23,6 +23,7 @@ import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Phone 1.0
 
 ItemPage {
     title: i18n.tr("Phone")
@@ -34,6 +35,10 @@ ItemPage {
         monitorNetworkName: true
         onNetworkNameChanged:
             carrierName = infoBackend.networkName(NetworkInfo.GsmMode, 0)
+    }
+
+    UbuntuPhonePanel {
+        id: sim
     }
 
     Column {
@@ -56,7 +61,8 @@ ItemPage {
         ListItem.Standard {
             text: i18n.tr("%1 Services").arg(carrierString)
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {carrierString: carrierString})
+            enabled: sim.present
+            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {carrierString: carrierString, sim: sim})
         }
     }
 }
