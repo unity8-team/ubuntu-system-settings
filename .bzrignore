@@ -1,3 +1,4 @@
+.build
 *.debhelper
 *.log
 *.moc
