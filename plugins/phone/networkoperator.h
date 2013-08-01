@@ -18,41 +18,44 @@
  *
 */
 
-#ifndef PHONESERVICES_H
-#define PHONESERVICES_H
+#ifndef NETWORKOPERATOR_H
+#define NETWORKOPERATOR_H
 
 #include <QObject>
 #include <QtCore>
-#include <ofonosimmanager.h>
+#include <ofononetworkregistration.h>
+#include <ofononetworkoperator.h>
 
-class PhoneServices : public QObject
+class NetworkOperator : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY ( QVariant serviceNumbers READ serviceNumbers NOTIFY serviceNumbersChanged )
-    Q_PROPERTY ( bool present READ present NOTIFY presenceChanged )
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+    Q_PROPERTY(QString status READ status NOTIFY statusChanged)
+
 
 public:
-    explicit PhoneServices(QObject *parent = 0);
-    ~PhoneServices();
+    explicit NetworkOperator(QObject *parent = 0);
+    ~NetworkOperator();
+
+
 
     /* Properties */
-    QVariant serviceNumbers();
-    bool present() const;
+    QString name() const;
+    QString status() const;
 
 signals:
-    void serviceNumbersChanged();
-    void presenceChanged(bool ispresent);
+    void nameChanged(const QString &name);
+    void statusChanged(const QString &status);
 
 private:
-    QList<QObject*> m_serviceNumbers;
-    OfonoServiceNumbers m_ofonoServiceNumbers;
-    OfonoSimManager *m_ofonoSimManager;
-    bool m_present;
-    void populateServiceNumbers(OfonoServiceNumbers);
+    OfonoNetworkRegistration *m_ofonoNetworkRegistration;
+    QString m_name;
+    QString m_status;
+
 
 private Q_SLOTS:
-    void simServiceNumbersChanged(OfonoServiceNumbers sn);
-    void simPresenceChanged(bool ispresent);
+    void operatorNameChanged(const QString &name);
+    void operatorStatusChanged(const QString &status);
 };
 
-#endif // PHONESERVICES_H
+#endif // NETWORKOPERATOR_H

@@ -27,17 +27,16 @@ import Ubuntu.SystemSettings.Phone 1.0
 
 ItemPage {
     title: i18n.tr("Phone")
-    property string carrierName: infoBackend.networkName(NetworkInfo.GsmMode, 0)
+    property string carrierName: infoBackend.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
-    NetworkInfo {
+    NetworkOperator {
         id: infoBackend;
-        monitorNetworkName: true
-        onNetworkNameChanged:
-            carrierName = infoBackend.networkName(NetworkInfo.GsmMode, 0)
+        onNameChanged:
+            carrierName = infoBackend.name
     }
 
-    UbuntuPhonePanel {
+    SimManager {
         id: sim
     }
 
