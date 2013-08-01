@@ -39,7 +39,7 @@ include($${TOP_SRC_DIR}/common-installs-config.pri)
 
 pkgconfig.CONFIG = no_check_exist
 pkgconfig.files = $${TARGET}.pc
-pkgconfig.path = $${INSTALL_PREFIX}/lib/pkgconfig
+pkgconfig.path = $${LIBDIR}/pkgconfig
 QMAKE_EXTRA_TARGETS += pkgconfig
 INSTALLS += pkgconfig
 

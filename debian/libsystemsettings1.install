@@ -1,1 +1,1 @@
-usr/lib/libSystemSettings.so.*
+usr/lib/*/libSystemSettings.so.*
