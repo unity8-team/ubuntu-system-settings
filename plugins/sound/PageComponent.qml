@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import GSettings 1.0
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -26,10 +27,13 @@ import SystemSettings 1.0
 ItemPage {
     id: root
 
-    property bool silentMode: false
-
     title: i18n.tr("Sound")
     flickable: scrollWidget
+
+    GSettings {
+        id: soundSettings
+        schema.id: "com.ubuntu.touch.sound"
+    }
 
     Flickable {
         id: scrollWidget
@@ -41,9 +45,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            SilentModeWarning {
-                silentMode: false
-            }
+            SilentModeWarning { visible: soundSettings.silentMode }
 
             ListItem.Standard {
                 text: i18n.tr("Phone calls:")
@@ -53,7 +55,8 @@ ItemPage {
                 text: i18n.tr("Ringtone")
                 value: "Theremin"   // TODO: get sound effect
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone"), showStopButton: true})
+                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone"),
+                                          showStopButton: true, soundSettings: soundSettings})
             }
 
             SettingsCheckEntry {
@@ -64,17 +67,6 @@ ItemPage {
             SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate in silent mode")
-            }
-
-            ListItem.Standard {
-                text: i18n.tr("Alerts:")
-            }
-
-            ListItem.SingleValue {
-                text: i18n.tr("Alert sound")
-                value: "Uh-oh"   // TODO: get sound effect
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Alert sound")})
             }
 
             SettingsCheckEntry {
@@ -95,7 +87,8 @@ ItemPage {
                 text: i18n.tr("Message received")
                 value: "Xylophone"   // TODO: get sound effect
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Message received")})
+                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Message received"),
+                                          soundSettings: soundSettings})
             }
 
             SettingsCheckEntry {

@@ -4,9 +4,8 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ListItem.Base {
-    property bool silentMode: false
-
     height: itemId.height + units.gu(4)
+
     Item {
         id: itemId
         anchors.left: parent.left
@@ -31,6 +30,6 @@ ListItem.Base {
             text: i18n.tr("The phone is in Silent Mode.")
         }
     }
-    visible: silentMode
+
     showDivider: false
 }
