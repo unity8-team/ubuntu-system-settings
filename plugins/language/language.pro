@@ -20,7 +20,7 @@ qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += qml
 
 image.files = settings-language.svg
-image.path = /usr/share/settings/system/icons
+image.path = $${PLUGIN_MANIFEST_DIR}/icons
 INSTALLS += image
 
 # C++ bits

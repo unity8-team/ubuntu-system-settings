@@ -15,5 +15,6 @@ system-settings.pro.user
 /debian/ubuntu-system-settings/
 /debian/ubuntu-system-settings-example/
 /lib/SystemSettings/SystemSettings.pc
+/po/*.mo
 /src/system-settings
 /tests/tst_plugins

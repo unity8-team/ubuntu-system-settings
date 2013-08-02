@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/settings/system/icons/settings-keyboard.svg",
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-keyboard.svg",
     "name": "Keyboard",
     "translations": "ubuntu-system-settings",
     "category": "personal",
