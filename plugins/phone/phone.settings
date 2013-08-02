@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/settings/system/icons/settings-phone.svg",
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-phone.svg",
     "name": "Phone",
     "translations": "ubuntu-system-settings",
     "category": "system",
