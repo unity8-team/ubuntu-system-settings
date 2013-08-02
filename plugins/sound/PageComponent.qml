@@ -24,6 +24,8 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 
+import "utilities.js" as Utilities
+
 ItemPage {
     id: root
 
@@ -53,25 +55,15 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Ringtone")
-                value: "Theremin"   // TODO: get sound effect
+                value: Utilities.buildDisplayName(soundSettings.incomingCallSound)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone"),
-                                          showStopButton: true, soundSettings: soundSettings})
+                                          showStopButton: true, soundType: 0})
             }
 
             SettingsCheckEntry {
                 checkStatus: false
                 textEntry: i18n.tr("Vibrate when ringing")
-            }
-
-            SettingsCheckEntry {
-                checkStatus: true
-                textEntry: i18n.tr("Vibrate in silent mode")
-            }
-
-            SettingsCheckEntry {
-                checkStatus: true
-                textEntry: i18n.tr("Vibrate with alert sound")
             }
 
             SettingsCheckEntry {
@@ -85,10 +77,10 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Message received")
-                value: "Xylophone"   // TODO: get sound effect
+                value: Utilities.buildDisplayName(soundSettings.incomingMessageSound)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Message received"),
-                                          soundSettings: soundSettings})
+                                          soundType: 1})
             }
 
             SettingsCheckEntry {
