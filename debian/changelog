@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.1+13.10.20130802.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * sound: get the silent mode's status from gsettings.
+  * sound: drop alerts sound, following the design update.
+
+  [ Jeremy Bicha ]
+  * Rename 'Call diversion' to 'Call forwarding' (LP: #1205480). (LP:
+    #1205480)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 222
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 02 Aug 2013 08:36:42 +0000
+
 ubuntu-system-settings (0.1+13.10.20130731-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]

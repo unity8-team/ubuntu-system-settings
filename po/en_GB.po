@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-30 11:41+0200\n"
+"POT-Creation-Date: 2013-07-31 10:17-0400\n"
 "PO-Revision-Date: 2013-07-11 15:41+0000\n"
 "Last-Translator: Iain Lane <iain@orangesquash.org.uk>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-31 06:11+0000\n"
+"X-Launchpad-Export-Date: 2013-08-02 05:59+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -50,19 +50,19 @@ msgstr ""
 msgid "Check for updates"
 msgstr "Check for updates"
 
-#: ../plugins/about/PageComponent.qml:110 ../plugins/about/Storage.qml:32
+#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
 msgid "Storage"
 msgstr "Storage"
 
-#: ../plugins/about/PageComponent.qml:116
+#: ../plugins/about/PageComponent.qml:118
 msgid "Legal:"
 msgstr "Legal:"
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
+#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr "Software licenses"
 
-#: ../plugins/about/PageComponent.qml:126
+#: ../plugins/about/PageComponent.qml:128
 msgid "Regulatory info"
 msgstr "Regulatory info"
 
@@ -197,7 +197,7 @@ msgid "Display language"
 msgstr ""
 
 #: ../plugins/language/DisplayLanguage.qml:84
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:35
 #: ../plugins/reset/ResetAllSettings.qml:35
 #: ../plugins/reset/ResetLauncherHome.qml:35
@@ -264,35 +264,36 @@ msgstr ""
 msgid "All languages available:"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
-#: ../plugins/phone/PageComponent.qml:43
-msgid "Call diversion"
+#: ../plugins/phone/CallForwarding.qml:27
+#: ../plugins/phone/CallForwarding.qml:60
+#: ../plugins/phone/PageComponent.qml:48
+msgid "Call forwarding"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:74
+#: ../plugins/phone/CallForwarding.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:91
-msgid "Call diversion status can’t be checked right now. Try again later."
+#: ../plugins/phone/CallForwarding.qml:91
+msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:102
+#: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 msgid "Contacts…"
 msgstr ""
 
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 msgid "Set"
 msgstr ""
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
-#: ../plugins/phone/PageComponent.qml:49
+#: ../plugins/phone/PageComponent.qml:54
 msgid "Call waiting"
 msgstr ""
 
@@ -302,43 +303,21 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:13
 msgid "Phone"
 msgstr "Phone"
 
-#: ../plugins/phone/PageComponent.qml:30
+#: ../plugins/phone/PageComponent.qml:31
 msgid "SIM"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:57 ../plugins/phone/Services.qml:28
+#: ../plugins/phone/PageComponent.qml:62 ../plugins/phone/Services.qml:29
 #, qt-format
 msgid "%1 Services"
 msgstr ""
 
-#: ../plugins/phone/ServiceInfo.qml:34
+#: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:34
-msgid "Voicemail"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:34
-#, qt-format
-msgid "My %1 Credit & Plan"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:35
-#, qt-format
-msgid "Listen to digits of %1"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:35
-msgid "Traffic report"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:35
-msgid "Horoscopes"
 msgstr ""
 
 #: ../plugins/reset/EraseEverything.qml:29
@@ -475,49 +454,53 @@ msgstr ""
 msgid "Update phone"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:108
+#: ../plugins/system-update/PageComponent.qml:113
 msgid "Congrats! You are already up to date!"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:110
+#: ../plugins/system-update/PageComponent.qml:115
 msgid "A new version is available!"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:111
+#: ../plugins/system-update/PageComponent.qml:116
 msgid "Checking latest available system version…"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:133
+#: ../plugins/system-update/PageComponent.qml:153
 #, qt-format
 msgid "You can update from version %1 to version %2"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:136
+#: ../plugins/system-update/PageComponent.qml:156
 #, qt-format
 msgid "Size of this update: %1"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:146
+#: ../plugins/system-update/PageComponent.qml:160
+msgid "This update will:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:170
 msgid "Apply?"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:155
+#: ../plugins/system-update/PageComponent.qml:175
 msgid "Update your phone"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:161
+#: ../plugins/system-update/PageComponent.qml:181
 msgid "Cancel update"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:167
+#: ../plugins/system-update/PageComponent.qml:187
 msgid "Reboot your phone now"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:183
+#: ../plugins/system-update/PageComponent.qml:203
 msgid "We are deeply sorry"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:184
+#: ../plugins/system-update/PageComponent.qml:204
 msgid "The update failed. Please try again later"
 msgstr ""
 

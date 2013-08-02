@@ -5,7 +5,7 @@ TEMPLATE = lib
 TARGET = phone
 
 QML_SOURCES = \
-    CallDiversion.qml \
+    CallForwarding.qml \
     CallWaiting.qml \
     PageComponent.qml \
     ServiceInfo.qml   \

@@ -56,7 +56,7 @@ DEFINES += \
     PLUGIN_PRIVATE_MODULE_DIR=\\\"$${PLUGIN_PRIVATE_MODULE_DIR}\\\" \
     PLUGIN_QML_DIR=\\\"$${PLUGIN_QML_DIR}\\\"
 
-po.target = ../po/system-settings.pot
+po.target = ../po/ubuntu-system-settings.pot
 po.depends = $${SOURCES}
 po.commands = xgettext -o $@ -d $${I18N_DOMAIN} --keyword=_ $^
 

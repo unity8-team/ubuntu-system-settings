@@ -24,27 +24,27 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
-    title: i18n.tr("Call diversion")
-    property bool canCheckDiversion: true
+    title: i18n.tr("Call forwarding")
+    property bool canCheckForwarding: true
 
     /* Simulate going off and retreiving the status, TODO: replace by real data */
     Timer {
-        id: callDiversionTimer
+        id: callForwardingTimer
         interval: 3000
         running: true
-        onTriggered: canCheckDiversion = false
+        onTriggered: canCheckForwarding = false
     }
 
     Switch {
-        id: callDiversionSwitch
+        id: callForwardingSwitch
         checked: false
-        visible: callDiversionItem.control == callDiversionSwitch
+        visible: callForwardingItem.control == callForwardingSwitch
     }
 
     ActivityIndicator {
-        id: callDiversionIndicator
+        id: callForwardingIndicator
         running: true
-        visible: callDiversionItem.control == callDiversionIndicator
+        visible: callForwardingItem.control == callForwardingIndicator
     }
 
     Label {
@@ -56,9 +56,9 @@ ItemPage {
         anchors.fill: parent
 
         ListItem.Standard {
-            id: callDiversionItem
-            text: i18n.tr("Call diversion")
-            control: callDiversionTimer.running ? callDiversionIndicator : callDiversionSwitch
+            id: callForwardingItem
+            text: i18n.tr("Call forwarding")
+            control: callForwardingTimer.running ? callForwardingIndicator : callForwardingSwitch
         }
 
         ListItem.Base {
@@ -76,7 +76,7 @@ ItemPage {
                 wrapMode: Text.WordWrap
             }
             showDivider: false
-            visible: !callDiversionSwitch.checked
+            visible: !callForwardingSwitch.checked
         }
 
         ListItem.Base {
@@ -88,20 +88,20 @@ ItemPage {
                     verticalCenter: parent.verticalCenter
                 }
 
-                text: i18n.tr("Call diversion status can’t be checked right now. Try again later.")
+                text: i18n.tr("Call forwarding status can’t be checked right now. Try again later.")
                 color: "red" // TODO: replace by the standard 'error color' if we get one in the toolkit
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
             }
             showDivider: false
-            visible: !callDiversionSwitch.checked && !canCheckDiversion
+            visible: !callForwardingSwitch.checked && !canCheckForwarding
         }
 
         ListItem.Standard {
             property string contactName: ""
             text: i18n.tr("Divert to")
             control: contactLabel
-            visible: callDiversionSwitch.checked
+            visible: callForwardingSwitch.checked
         }
 
         ListItem.Base {
@@ -117,7 +117,7 @@ ItemPage {
                     }
                 }
             }
-            visible: callDiversionSwitch.checked
+            visible: callForwardingSwitch.checked
         }
     }
 }
