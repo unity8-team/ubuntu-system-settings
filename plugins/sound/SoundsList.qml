@@ -6,6 +6,8 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Sound 1.0
 
+import "utilities.js" as Utilities
+
 ItemPage {
     property string title
     property variant soundDisplayNames
@@ -19,16 +21,10 @@ ItemPage {
 
     UbuntuSoundPanel {
         id: backendInfo
-        Component.onCompleted:
-            buildSoundValues(listSounds("/usr/share/sounds/ubuntu/stereo"))
-    }
-
-    function buildSoundValues(sounds)
-    {
-        soundDisplayNames = sounds.map(function (sound) {
-            return sound.split('/').pop().split('.').slice(0,-1).join(" ");
-        })
-        soundFileNames = sounds
+        Component.onCompleted: {
+            soundFileNames = listSounds("/usr/share/sounds/ubuntu/stereo")
+            soundDisplayNames = Utilities.buildSoundValues(soundFileNames)
+        }
     }
 
     Audio {
