@@ -1,6 +1,6 @@
 {
     "name": "GPS",
-    "icon": "/usr/share/settings/system/icons/settings-gps.svg",
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-gps.svg",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
     "priority": 2,
