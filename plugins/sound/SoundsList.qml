@@ -12,9 +12,9 @@ ItemPage {
     property string title
     property variant soundDisplayNames
     property variant soundFileNames
-    property GSettings soundSettings
     property bool silentModeOn: false
     property bool showStopButton: false
+    property int soundType // 0: ringtone, 1: message
 
     id: soundsPage
     title: title
@@ -22,8 +22,24 @@ ItemPage {
     UbuntuSoundPanel {
         id: backendInfo
         Component.onCompleted: {
-            soundFileNames = listSounds("/usr/share/sounds/ubuntu/stereo")
+            soundFileNames = listSounds("/usr/share/sounds/ubuntu/stereo").map(function (sound)
+                             {return '/usr/share/sounds/ubuntu/stereo/'+sound})
             soundDisplayNames = Utilities.buildSoundValues(soundFileNames)
+            if (soundType == 0)
+                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, soundSettings.incomingCallSound)
+            else if (soundType == 1)
+                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, soundSettings.incomingMessageSound)
+        }
+    }
+
+    GSettings {
+        id: soundSettings
+        schema.id: "com.ubuntu.touch.sound"
+        onChanged: {
+            if (soundType == 0 && key == "incomingCallSound")
+                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, value)
+            if (soundType == 1 && key == "incomingMessageSound")
+                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, value)
         }
     }
 
@@ -65,8 +81,11 @@ ItemPage {
             onExpandedChanged: expanded = true
             values: soundDisplayNames
             onSelectedIndexChanged: {
-                print(soundFileNames[selectedIndex]) // TODO: write configuration
-                soundEffect.source = "/usr/share/sounds/ubuntu/stereo/" + soundFileNames[selectedIndex]
+                if (soundType == 0)
+                    soundSettings.incomingCallSound = soundFileNames[selectedIndex]
+                else if (soundType == 1)
+                    soundSettings.incomingMessageSound = soundFileNames[selectedIndex]
+                soundEffect.source = soundFileNames[selectedIndex]
                 soundEffect.play()
             }
         }

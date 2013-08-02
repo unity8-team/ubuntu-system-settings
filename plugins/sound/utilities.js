@@ -25,3 +25,7 @@ function buildDisplayName(sound) {
 function buildSoundValues(sounds) {
     return sounds.map(buildDisplayName)
 }
+
+function indexSelectedFile(soundsList, soundName) {
+    return soundsList.indexOf(soundName)
+}
