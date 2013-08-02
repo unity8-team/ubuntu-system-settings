@@ -69,18 +69,6 @@ ItemPage {
                 textEntry: i18n.tr("Vibrate in silent mode")
             }
 
-            ListItem.Standard {
-                text: i18n.tr("Alerts:")
-            }
-
-            ListItem.SingleValue {
-                text: i18n.tr("Alert sound")
-                value: "Uh-oh"   // TODO: get sound effect
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Alert sound"),
-                                          soundSettings: soundSettings})
-            }
-
             SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate with alert sound")
