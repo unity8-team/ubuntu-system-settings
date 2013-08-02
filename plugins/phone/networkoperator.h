@@ -31,31 +31,43 @@ class NetworkOperator : public QObject
     Q_OBJECT
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString status READ status NOTIFY statusChanged)
-
+    Q_PROPERTY(int technology READ technology NOTIFY technologyChanged)
+    Q_ENUMS(CellDataTechnology)
 
 public:
     explicit NetworkOperator(QObject *parent = 0);
     ~NetworkOperator();
 
-
+    enum CellDataTechnology {
+        UnknownDataTechnology = 0,
+        GprsDataTechnology,
+        EdgeDataTechnology,
+        UmtsDataTechnology,
+        HspaDataTechnology
+    };
 
     /* Properties */
     QString name() const;
     QString status() const;
+    CellDataTechnology technology() const;
 
 signals:
     void nameChanged(const QString &name);
     void statusChanged(const QString &status);
+    void technologyChanged(const CellDataTechnology &technology);
 
 private:
     OfonoNetworkRegistration *m_ofonoNetworkRegistration;
     QString m_name;
     QString m_status;
-
+    CellDataTechnology m_technology;
+    CellDataTechnology technologyToInt(const QString &technology);
 
 private Q_SLOTS:
     void operatorNameChanged(const QString &name);
     void operatorStatusChanged(const QString &status);
+    void operatorTechnologyChanged(const QString &technology);
+
 };
 
 #endif // NETWORKOPERATOR_H

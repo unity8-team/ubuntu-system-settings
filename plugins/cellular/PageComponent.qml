@@ -19,24 +19,20 @@
  */
 
 import QtQuick 2.0
-import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Phone 1.0
 
 ItemPage {
     title: i18n.tr("Cellular")
 
-    NetworkInfo {
-        id: netinfo;
-        monitorNetworkName: true
-        monitorCurrentCellDataTechnology: true
-        onNetworkNameChanged: carrierName = netinfo.networkName(NetworkInfo.GsmMode, 0)
-        onCurrentCellDataTechnologyChanged: netinfo.currentCellDataTechnology(0) == NetworkInfo.UnknownDataTechnology ? false : true
+    NetworkOperator {
+        id: netop
     }
 
-    property string carrierName: netinfo.networkName(NetworkInfo.GsmMode, 0)
-    property bool cellData: netinfo.currentCellDataTechnology(0) == NetworkInfo.UnknownDataTechnology ? false : true
+    property string carrierName: netop.name
+    property bool cellData: netop.technology ==  netop.UnknownDataTechnology ? false : true
 
     Column {
         anchors.left: parent.left
@@ -88,7 +84,7 @@ ItemPage {
             enabled: false
             values: [i18n.tr("2G only (saves battery)"),
                 i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: netinfo.EdgeData ? 0 : 1
+            selectedIndex: netop.EdgeDataTechnology ? 0 : 1
             
         }
 

@@ -19,7 +19,6 @@
  */
 
 import QtQuick 2.0
-import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -27,13 +26,13 @@ import Ubuntu.SystemSettings.Phone 1.0
 
 ItemPage {
     title: i18n.tr("Phone")
-    property string carrierName: infoBackend.name
+    property string carrierName: netop.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
     NetworkOperator {
-        id: infoBackend;
+        id: netop;
         onNameChanged:
-            carrierName = infoBackend.name
+            carrierName = netop.name
     }
 
     SimManager {
