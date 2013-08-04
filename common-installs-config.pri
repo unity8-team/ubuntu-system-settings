@@ -19,7 +19,7 @@ contains(TEMPLATE, app) {
 #-----------------------------------------------------------------------------
 contains(TEMPLATE, lib) {
     isEmpty(target.path) {
-        target.path  = $${INSTALL_PREFIX}/lib
+        target.path  = $${LIBDIR}
     }
     INSTALLS    += target
     message("====")

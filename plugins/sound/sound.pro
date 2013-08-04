@@ -16,12 +16,16 @@ qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += qml
 
+utilities.files = utilities.js
+utilities.path = $${PLUGIN_QML_DIR}/$${TARGET}
+INSTALLS += utilities
+
 settings.files = $${TARGET}.settings
 settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
 image.files = settings-sounds.svg
-image.path = /usr/share/settings/system/icons
+image.path = $${PLUGIN_MANIFEST_DIR}/icons
 INSTALLS += image
 
 # C++ bits

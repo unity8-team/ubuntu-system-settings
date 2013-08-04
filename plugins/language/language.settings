@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/settings/system/icons/settings-language.svg",
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-language.svg",
     "name": "Language",
     "translations": "ubuntu-system-settings",
     "category": "personal",

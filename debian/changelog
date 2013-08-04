@@ -1,3 +1,25 @@
+ubuntu-system-settings (0.1+13.10.20130804-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * sound: split out helper function in a new source so we can reuse it.
+  * sound: - clean some leftover options - some small refactoring - use
+    gsettings to read/store the sound effects.
+
+  [ Iain Lane ]
+  * Write location of private module dir in pkg-config file Also, change
+    the location to be alongside the binary plugins and independent of
+    the Qt installation dir. .
+
+  [ Alberto Mardegan ]
+  * Write location of private module dir in pkg-config file Also, change
+    the location to be alongside the binary plugins and independent of
+    the Qt installation dir. .
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 227
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sun, 04 Aug 2013 07:01:57 +0000
+
 ubuntu-system-settings (0.1+13.10.20130802.1-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

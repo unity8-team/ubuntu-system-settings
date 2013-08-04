@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-01 18:01+0200\n"
+"POT-Creation-Date: 2013-08-02 15:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -406,27 +406,23 @@ msgstr ""
 msgid "Vibrate when ringing"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:69 ../plugins/sound/PageComponent.qml:79
+#: ../plugins/sound/PageComponent.qml:69
 msgid "Vibrate in silent mode"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:74
-msgid "Vibrate with alert sound"
-msgstr ""
-
-#: ../plugins/sound/PageComponent.qml:83
+#: ../plugins/sound/PageComponent.qml:73
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:87 ../plugins/sound/PageComponent.qml:90
+#: ../plugins/sound/PageComponent.qml:77 ../plugins/sound/PageComponent.qml:80
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:96
+#: ../plugins/sound/PageComponent.qml:86
 msgid "Keyboard sounds"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:101
+#: ../plugins/sound/PageComponent.qml:91
 msgid "Lock sound"
 msgstr ""
 
@@ -434,7 +430,7 @@ msgstr ""
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:48
+#: ../plugins/sound/SoundsList.qml:44
 msgid "Stop playing"
 msgstr ""
 
