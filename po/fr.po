@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-31 10:17-0400\n"
+"POT-Creation-Date: 2013-08-02 15:26+0200\n"
 "PO-Revision-Date: 2013-07-26 16:45+0000\n"
 "Last-Translator: Hélion du Mas des Bourboux <helion331990@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-02 05:59+0000\n"
+"X-Launchpad-Export-Date: 2013-08-03 06:15+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
 "Language: \n"
 
@@ -395,59 +395,47 @@ msgstr "Sécurité et vie privée"
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:31 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:30 ../.build/settings.js:16
 msgid "Sound"
 msgstr "Son"
 
-#: ../plugins/sound/PageComponent.qml:49
+#: ../plugins/sound/PageComponent.qml:51
 msgid "Phone calls:"
 msgstr "Appels téléphoniques :"
 
-#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
+#: ../plugins/sound/PageComponent.qml:55 ../plugins/sound/PageComponent.qml:58
 msgid "Ringtone"
 msgstr "Sonnerie"
 
-#: ../plugins/sound/PageComponent.qml:61
+#: ../plugins/sound/PageComponent.qml:64
 msgid "Vibrate when ringing"
 msgstr "Vibrer pendant la sonnerie"
 
-#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:87
+#: ../plugins/sound/PageComponent.qml:69
 msgid "Vibrate in silent mode"
 msgstr "Vibrer en mode silencieux"
 
-#: ../plugins/sound/PageComponent.qml:70
-msgid "Alerts:"
-msgstr "Alertes :"
-
-#: ../plugins/sound/PageComponent.qml:74 ../plugins/sound/PageComponent.qml:77
-msgid "Alert sound"
-msgstr "Son d'alerte"
-
-#: ../plugins/sound/PageComponent.qml:82
-msgid "Vibrate with alert sound"
-msgstr "Vibrer pendant l'alerte sonore"
-
-#: ../plugins/sound/PageComponent.qml:91
+#: ../plugins/sound/PageComponent.qml:73
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
+#: ../plugins/sound/PageComponent.qml:77 ../plugins/sound/PageComponent.qml:80
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:103
+#: ../plugins/sound/PageComponent.qml:86
 msgid "Keyboard sounds"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:108
+#: ../plugins/sound/PageComponent.qml:91
 msgid "Lock sound"
 msgstr ""
 
-#: ../plugins/sound/SilentModeWarning.qml:31
+#: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
 msgstr "Le téléphone est en mode silencieux."
 
-#: ../plugins/sound/SoundsList.qml:49
+#: ../plugins/sound/SoundsList.qml:44
 msgid "Stop playing"
 msgstr "Arrêter la lecture"
 

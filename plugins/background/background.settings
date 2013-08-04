@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/settings/system/icons/settings-background.svg",
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-background.svg",
     "translations": "ubuntu-system-settings",
     "name": "Background",
     "category": "personal",

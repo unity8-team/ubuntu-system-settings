@@ -32,9 +32,9 @@ OTHER_FILES += \
     $${QML_SOURCES} \
     $${RESOURCES}
 
-target.path = $${INSTALL_PREFIX}/lib/system-settings
+target.path = $${PLUGIN_MODULE_DIR}
 INSTALLS += target
 
 settings.files = example.settings
-settings.path = $${INSTALL_PREFIX}/share/settings/system
+settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings

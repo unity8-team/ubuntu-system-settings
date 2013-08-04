@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/settings/system/icons/settings-bluetooth.svg",
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-bluetooth.svg",
     "name": "Bluetooth",
     "translations": "ubuntu-system-settings",
     "category": "network",
