@@ -9,7 +9,6 @@ SUBDIRS = \
     sound \
     language \
     accessibility \
-    keyboard \
     phone \
     brightness \
     time-date \
