@@ -19,7 +19,9 @@
  */
 
 function buildDisplayName(sound) {
-    return sound.split('/').pop().split('.').slice(0,-1).join(" ")
+    /* The display name starts with an uppercase char, and replace special chars with spaces */
+    var title = sound.split('/').pop().split('.').slice(0,-1).join(" ").replace(/[._-]/g, " ")
+    return title[0].toUpperCase() + title.slice(1)
 }
 
 function buildSoundValues(sounds) {
