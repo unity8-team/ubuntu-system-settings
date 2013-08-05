@@ -50,6 +50,7 @@ Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends},
          ${shlibs:Depends},
+Pre-Depends: dpkg (>= 1.15.6~), ${misc:Pre-Depends}
 Description: System Settings Library for Ubuntu Touch
  This package contains the System Settings application used on the 
  Ubuntu Touch images, it's designed for phones, tablets and convergent 
@@ -62,6 +63,7 @@ Multi-Arch: same
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          libsystemsettings1 (= ${binary:Version}),
+Pre-Depends: dpkg (>= 1.15.6~), ${misc:Pre-Depends}
 Description: System Settings for Ubuntu Touch - development files
  This package contains the System Settings application used on the 
  Ubuntu Touch images, it's designed for phones, tablets and convergent 
