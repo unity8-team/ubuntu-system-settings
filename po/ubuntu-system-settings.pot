@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-02 15:26+0200\n"
+"POT-Creation-Date: 2013-08-05 13:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,16 +126,21 @@ msgstr ""
 msgid "Welcome screen"
 msgstr ""
 
+#: ../plugins/background/MainPage.qml:80
+#: ../plugins/background/MainPage.qml:110
+msgid "Choose background"
+msgstr ""
+
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
 msgid "Home screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:191
+#: ../plugins/background/MainPage.qml:189
 msgid "Same background for both"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:209
+#: ../plugins/background/MainPage.qml:207
 msgid "Different background for each"
 msgstr ""
 
@@ -390,39 +395,39 @@ msgstr ""
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:30 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:16
 msgid "Sound"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:51
+#: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:55 ../plugins/sound/PageComponent.qml:58
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:64
+#: ../plugins/sound/PageComponent.qml:66
 msgid "Vibrate when ringing"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:69
+#: ../plugins/sound/PageComponent.qml:71
 msgid "Vibrate in silent mode"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:75
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:77 ../plugins/sound/PageComponent.qml:80
+#: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:88
 msgid "Keyboard sounds"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:91
+#: ../plugins/sound/PageComponent.qml:93
 msgid "Lock sound"
 msgstr ""
 
@@ -430,7 +435,7 @@ msgstr ""
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:44
+#: ../plugins/sound/SoundsList.qml:60
 msgid "Stop playing"
 msgstr ""
 

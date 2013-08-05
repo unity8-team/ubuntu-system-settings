@@ -77,7 +77,7 @@ ItemPage {
          }
 
         onClicked: pageStack.push(Utilities.createAlbumPage(
-                                      i18n.tr("Welcome screen")))
+                                  differentBackground.selected ? i18n.tr("Welcome screen") : i18n.tr("Choose background")))
 
         onSourceChanged: backgroundPanel.backgroundFile = source
     }
@@ -107,7 +107,7 @@ ItemPage {
                                            homeImage)
 
         onClicked: pageStack.push(Utilities.createAlbumPage(
-                                      i18n.tr("Home screen")))
+                                  differentBackground.selected ? i18n.tr("Home screen") : i18n.tr("Choose background")))
 
         onSourceChanged: background.pictureUri = Qt.resolvedUrl(source)
     }
@@ -162,12 +162,10 @@ ItemPage {
                     leastRecent.source
             /* copy most recently changed to least recently changed */
             leastRecent.source = mostRecent.source
-            homeImage.enabled = false
         } else { // different
             /* restore least recently changed to previous value */
             leastRecent.source =
                     systemSettingsSettings.backgroundPreviouslySetValue
-            homeImage.enabled = true
         }
     }
 
