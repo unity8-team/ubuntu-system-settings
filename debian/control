@@ -23,7 +23,7 @@ Homepage: https://launchpad.net/ubuntu-system-settings
 Vcs-Bzr: https://code.launchpad.net/~system-settings-touch/ubuntu-system-settings/trunk
 
 Package: ubuntu-system-settings
-Architecture: i386 amd64 armhf
+Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          accountsservice,
@@ -46,9 +46,11 @@ Description: System Settings application for Ubuntu Touch
 
 Package: libsystemsettings1
 Section: libs
-Architecture: i386 amd64 armhf
+Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends},
          ${shlibs:Depends},
+Pre-Depends: dpkg (>= 1.15.6~), ${misc:Pre-Depends}
 Description: System Settings Library for Ubuntu Touch
  This package contains the System Settings application used on the 
  Ubuntu Touch images, it's designed for phones, tablets and convergent 
@@ -56,10 +58,12 @@ Description: System Settings Library for Ubuntu Touch
 
 Package: libsystemsettings-dev
 Section: libdevel
-Architecture: i386 amd64 armhf
+Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          libsystemsettings1 (= ${binary:Version}),
+Pre-Depends: dpkg (>= 1.15.6~), ${misc:Pre-Depends}
 Description: System Settings for Ubuntu Touch - development files
  This package contains the System Settings application used on the 
  Ubuntu Touch images, it's designed for phones, tablets and convergent 
