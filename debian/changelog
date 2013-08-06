@@ -1,3 +1,25 @@
+ubuntu-system-settings (0.1+13.10.20130806.2-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * plugin_module_dir in SystemsSettings.pc should use libdir .
+
+  [ Sebastien Bacher ]
+  * background: update title of the background selector to match the
+    spec.
+  * drop keyboard, it's part of language&text.
+  * sound: improve display's name.
+  * don't fail build on broken tests to workaround armhf/libhybris
+    issues.
+
+  [ Timo Jyrinki ]
+  * Enable Multi-Arch for the libraries (LP: #1208347) Also change back
+    to arch 'any' instead of listing archs. (LP: #1208347)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 236
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 06 Aug 2013 16:57:30 +0000
+
 ubuntu-system-settings (0.1+13.10.20130805-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
