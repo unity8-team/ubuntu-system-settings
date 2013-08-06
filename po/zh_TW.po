@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-02 15:26+0200\n"
+"POT-Creation-Date: 2013-08-05 18:12+0200\n"
 "PO-Revision-Date: 2013-07-13 16:13+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-03 06:15+0000\n"
+"X-Launchpad-Export-Date: 2013-08-06 05:06+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -126,16 +126,21 @@ msgstr "背景"
 msgid "Welcome screen"
 msgstr "歡迎畫面"
 
+#: ../plugins/background/MainPage.qml:80
+#: ../plugins/background/MainPage.qml:110
+msgid "Choose background"
+msgstr ""
+
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
 msgid "Home screen"
 msgstr "家屋畫面"
 
-#: ../plugins/background/MainPage.qml:191
+#: ../plugins/background/MainPage.qml:189
 msgid "Same background for both"
 msgstr "兩者使用相同背景"
 
-#: ../plugins/background/MainPage.qml:209
+#: ../plugins/background/MainPage.qml:207
 msgid "Different background for each"
 msgstr "各使用不同背景"
 
@@ -221,7 +226,7 @@ msgstr ""
 msgid "All layouts available:"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:30
+#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:10
 msgid "Language & Text"
 msgstr ""
 
@@ -303,7 +308,7 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:12
 msgid "Phone"
 msgstr "手機"
 
@@ -330,7 +335,7 @@ msgstr "所有的文件、儲存的遊戲，以及其他項目皆會從此手機
 msgid "Erase & reset everything"
 msgstr "抹除並重設每個設定"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "重設手機"
 
@@ -382,7 +387,7 @@ msgstr ""
 msgid "Phone and Internet"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:14
 msgid "Security & Privacy"
 msgstr "安全與隱私"
 
@@ -390,39 +395,39 @@ msgstr "安全與隱私"
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:30 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
 msgstr "音效"
 
-#: ../plugins/sound/PageComponent.qml:51
+#: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
 msgstr "通話數："
 
-#: ../plugins/sound/PageComponent.qml:55 ../plugins/sound/PageComponent.qml:58
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
 msgstr "鈴聲"
 
-#: ../plugins/sound/PageComponent.qml:64
+#: ../plugins/sound/PageComponent.qml:66
 msgid "Vibrate when ringing"
 msgstr "鈴聲響時發出振動"
 
-#: ../plugins/sound/PageComponent.qml:69
+#: ../plugins/sound/PageComponent.qml:71
 msgid "Vibrate in silent mode"
 msgstr "無聲模式下振動"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:75
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:77 ../plugins/sound/PageComponent.qml:80
+#: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:88
 msgid "Keyboard sounds"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:91
+#: ../plugins/sound/PageComponent.qml:93
 msgid "Lock sound"
 msgstr ""
 
@@ -430,7 +435,7 @@ msgstr ""
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:44
+#: ../plugins/sound/SoundsList.qml:60
 msgid "Stop playing"
 msgstr ""
 
@@ -500,7 +505,7 @@ msgstr ""
 msgid "No matching place"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr "時間與日期"
 
@@ -552,22 +557,14 @@ msgstr "飛航模式"
 msgid "GPS"
 msgstr "GPS"
 
-#: ../.build/settings.js:10
-msgid "Keyboard"
-msgstr "鍵盤"
-
 #: ../.build/settings.js:11
-msgid "Language"
-msgstr "語言"
-
-#: ../.build/settings.js:12
 msgid "Rotation lock"
 msgstr "旋轉鎖"
 
-#: ../.build/settings.js:17
+#: ../.build/settings.js:16
 msgid "Updates"
 msgstr "更新"
 
-#: ../.build/settings.js:19
+#: ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
