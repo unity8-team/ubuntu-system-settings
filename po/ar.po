@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-02 15:26+0200\n"
+"POT-Creation-Date: 2013-08-05 18:12+0200\n"
 "PO-Revision-Date: 2013-07-31 05:45+0000\n"
 "Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-03 06:15+0000\n"
+"X-Launchpad-Export-Date: 2013-08-06 05:06+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -126,16 +126,21 @@ msgstr "الخلفية"
 msgid "Welcome screen"
 msgstr "شاشة الترحيب"
 
+#: ../plugins/background/MainPage.qml:80
+#: ../plugins/background/MainPage.qml:110
+msgid "Choose background"
+msgstr ""
+
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
 msgid "Home screen"
 msgstr "الشاشة الرئيسية"
 
-#: ../plugins/background/MainPage.qml:191
+#: ../plugins/background/MainPage.qml:189
 msgid "Same background for both"
 msgstr "نفس الخلفية لكلاهما"
 
-#: ../plugins/background/MainPage.qml:209
+#: ../plugins/background/MainPage.qml:207
 msgid "Different background for each"
 msgstr "خلفية مختلفة لكل واحدة"
 
@@ -221,7 +226,7 @@ msgstr "التخطيطات الحالية:"
 msgid "All layouts available:"
 msgstr "جميع التخطيطات المتوفرة:"
 
-#: ../plugins/language/PageComponent.qml:30
+#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:10
 msgid "Language & Text"
 msgstr "اللغة والنص"
 
@@ -308,7 +313,7 @@ msgstr ""
 "يتيح لك الإجابة على المكالمات أو بدء مكالمة جديدة أثناء إجرائك للمكالمات، "
 "والتبديل بينها."
 
-#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:12
 msgid "Phone"
 msgstr "الهاتف"
 
@@ -337,7 +342,7 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "امسح واستعد كل شيء"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "أعد ضبط الهاتف"
 
@@ -391,7 +396,7 @@ msgstr "الهاتف فقط"
 msgid "Phone and Internet"
 msgstr "الهاتف والإنترنت"
 
-#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:14
 msgid "Security & Privacy"
 msgstr "الأمن والخصوصية"
 
@@ -399,39 +404,39 @@ msgstr "الأمن والخصوصية"
 msgid "Diagnostics"
 msgstr "التشخيصات"
 
-#: ../plugins/sound/PageComponent.qml:30 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
 msgstr "الصوت"
 
-#: ../plugins/sound/PageComponent.qml:51
+#: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
 msgstr "مكالمات الهاتف:"
 
-#: ../plugins/sound/PageComponent.qml:55 ../plugins/sound/PageComponent.qml:58
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
 msgstr "نغمة الرنين"
 
-#: ../plugins/sound/PageComponent.qml:64
+#: ../plugins/sound/PageComponent.qml:66
 msgid "Vibrate when ringing"
 msgstr "اهتزاز عند الرنين"
 
-#: ../plugins/sound/PageComponent.qml:69
+#: ../plugins/sound/PageComponent.qml:71
 msgid "Vibrate in silent mode"
 msgstr "اهتزاز في الوضع الصامت"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:75
 msgid "Other sounds:"
 msgstr "أصوات أخرى:"
 
-#: ../plugins/sound/PageComponent.qml:77 ../plugins/sound/PageComponent.qml:80
+#: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
 msgid "Message received"
 msgstr "تم إستلام الرسالة"
 
-#: ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:88
 msgid "Keyboard sounds"
 msgstr "أصوات لوحة المفاتيح"
 
-#: ../plugins/sound/PageComponent.qml:91
+#: ../plugins/sound/PageComponent.qml:93
 msgid "Lock sound"
 msgstr "صوت القفل"
 
@@ -439,7 +444,7 @@ msgstr "صوت القفل"
 msgid "The phone is in Silent Mode."
 msgstr "الهاتف في الوضع الصامت."
 
-#: ../plugins/sound/SoundsList.qml:44
+#: ../plugins/sound/SoundsList.qml:60
 msgid "Stop playing"
 msgstr ""
 
@@ -509,7 +514,7 @@ msgstr "تعيين المنطقة الزمنية:"
 msgid "No matching place"
 msgstr "لا أماكن مطابقة"
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr "الوقت والتاريخ"
 
@@ -561,22 +566,14 @@ msgstr "نمط الطائرة"
 msgid "GPS"
 msgstr "نظام تحديد المواقع (GPS)"
 
-#: ../.build/settings.js:10
-msgid "Keyboard"
-msgstr "لوحة المفاتيح"
-
 #: ../.build/settings.js:11
-msgid "Language"
-msgstr "اللغة"
-
-#: ../.build/settings.js:12
 msgid "Rotation lock"
 msgstr "قفل الدوران"
 
-#: ../.build/settings.js:17
+#: ../.build/settings.js:16
 msgid "Updates"
 msgstr "التحديثات"
 
-#: ../.build/settings.js:19
+#: ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "واي فاي"

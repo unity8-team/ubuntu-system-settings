@@ -1,6 +1,6 @@
 {
     "icon": "/usr/share/ubuntu/settings/system/icons/settings-language.svg",
-    "name": "Language",
+    "name": "Language & Text",
     "translations": "ubuntu-system-settings",
     "category": "personal",
     "priority": 2,
