@@ -29,11 +29,11 @@ ItemPage {
     property var netreg
     property var operators: netreg.operators
     Component.onCompleted: { netreg.getOperators(); console.log ("operators: " + operators); }
-    /*
+
     ActivityIndicator {
         id: activityIndicator
         anchors.centerIn: parent
-        running: true
+        running: netreg.scanning
     }
 
     Text {
@@ -44,7 +44,7 @@ ItemPage {
         }
         text: i18n.tr("Searching")
     }
-    */
+
     Column {
         anchors.left: parent.left
         anchors.right: parent.right

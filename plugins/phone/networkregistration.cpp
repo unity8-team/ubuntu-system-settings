@@ -71,6 +71,8 @@ void NetworkRegistration::populateOperators (QStringList oplist)
 }
 void NetworkRegistration::operatorsUpdated(bool success, const QStringList &oplist)
 {
+    m_scanning = false;
+    emit scanningChanged();
     if (success)
     {
         populateOperators(oplist);
@@ -86,6 +88,7 @@ void NetworkRegistration::registerOp()
 
 void NetworkRegistration::scan()
 {
+    m_scanning = true;
     m_ofonoNetworkRegistration->scan();
 }
 
@@ -131,6 +134,7 @@ void NetworkRegistration::operatorStatusChanged(const QString &status)
     qDebug() << "STATUS: " << m_status;
     emit statusChanged(m_status);
 }
+
 NetworkRegistration::CellDataTechnology NetworkRegistration::technology() const
 {
     return m_technology;
@@ -141,6 +145,11 @@ void NetworkRegistration::operatorTechnologyChanged(const QString &technology)
     m_technology = technologyToInt(technology);
     qDebug() << "TECHNOLOGY: " << m_technology;
     emit technologyChanged(m_technology);
+}
+
+bool NetworkRegistration::scanning() const
+{
+    return m_scanning;
 }
 
 NetworkRegistration::~NetworkRegistration()

@@ -32,6 +32,8 @@ class NetworkRegistration : public QObject
     Q_PROPERTY(QString status READ status NOTIFY statusChanged)
     Q_PROPERTY(int technology READ technology NOTIFY technologyChanged)
     Q_PROPERTY(QVariant operators READ operators NOTIFY operatorsChanged)
+    Q_PROPERTY(bool scanning READ scanning NOTIFY scanningChanged)
+
     Q_ENUMS(CellDataTechnology)
 
 public:
@@ -51,6 +53,7 @@ public:
     QString status() const;
     QVariant operators() const;
     CellDataTechnology technology() const;
+    bool scanning() const;
 
 public slots:
     void registerOp();
@@ -62,6 +65,7 @@ signals:
     void statusChanged(const QString &status);
     void technologyChanged(const CellDataTechnology &technology);
     void operatorsChanged();
+    void scanningChanged();
 
 private:
     OfonoNetworkRegistration *m_ofonoNetworkRegistration;
@@ -70,6 +74,7 @@ private:
     QList<QObject*> m_operators;
     CellDataTechnology m_technology;
     CellDataTechnology technologyToInt(const QString &technology);
+    bool m_scanning;
     void populateOperators(QStringList);
 
 
