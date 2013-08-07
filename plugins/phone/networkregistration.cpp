@@ -25,12 +25,7 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
 {
     m_ofonoNetworkRegistration = new OfonoNetworkRegistration(OfonoModem::AutomaticSelect, QString(), this);
 
-    m_name = m_ofonoNetworkRegistration->name();
-    qDebug() << "NAME: " << m_name;
-    m_status = m_ofonoNetworkRegistration->status();
-    qDebug() << "STATUS: " << m_status;
-    m_technology = technologyToInt(m_ofonoNetworkRegistration->technology());
-    qDebug() << "TECHNOLOGY: " << m_technology;
+
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (nameChanged (const QString&)),
         this,
@@ -51,6 +46,14 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
         SIGNAL (scanComplete (bool, const QStringList&)),
         this,
         SLOT (operatorsUpdated(bool, const QStringList&)));
+
+    m_name = m_ofonoNetworkRegistration->name();
+    qDebug() << "NAME: " << m_name;
+    m_status = m_ofonoNetworkRegistration->status();
+    qDebug() << "STATUS: " << m_status;
+    m_technology = technologyToInt(m_ofonoNetworkRegistration->technology());
+    qDebug() << "TECHNOLOGY: " << m_technology;
+    m_ofonoNetworkRegistration->getOperators();
 }
 
 
@@ -71,8 +74,7 @@ void NetworkRegistration::populateOperators (QStringList oplist)
 }
 void NetworkRegistration::operatorsUpdated(bool success, const QStringList &oplist)
 {
-    m_scanning = false;
-    emit scanningChanged();
+    this->setScanning(false);
     if (success)
     {
         populateOperators(oplist);
@@ -88,7 +90,7 @@ void NetworkRegistration::registerOp()
 
 void NetworkRegistration::scan()
 {
-    m_scanning = true;
+    this->setScanning(true);
     m_ofonoNetworkRegistration->scan();
 }
 
@@ -150,6 +152,15 @@ void NetworkRegistration::operatorTechnologyChanged(const QString &technology)
 bool NetworkRegistration::scanning() const
 {
     return m_scanning;
+}
+
+void NetworkRegistration::setScanning(bool scanning)
+{
+    if (scanning != m_scanning)
+    {
+        m_scanning = scanning;
+        emit scanningChanged();
+    }
 }
 
 NetworkRegistration::~NetworkRegistration()

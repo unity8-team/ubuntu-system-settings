@@ -32,7 +32,7 @@ class NetworkRegistration : public QObject
     Q_PROPERTY(QString status READ status NOTIFY statusChanged)
     Q_PROPERTY(int technology READ technology NOTIFY technologyChanged)
     Q_PROPERTY(QVariant operators READ operators NOTIFY operatorsChanged)
-    Q_PROPERTY(bool scanning READ scanning NOTIFY scanningChanged)
+    Q_PROPERTY(bool scanning READ scanning WRITE setScanning NOTIFY scanningChanged)
 
     Q_ENUMS(CellDataTechnology)
 
@@ -59,6 +59,7 @@ public slots:
     void registerOp();
     void getOperators();
     void scan();
+    void setScanning(bool scanning);
 
 signals:
     void nameChanged(const QString &name);

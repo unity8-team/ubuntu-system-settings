@@ -28,22 +28,9 @@ ItemPage {
     title: i18n.tr("Carrier")
     property var netreg
     property var operators: netreg.operators
+    property bool scanning: netreg.scanning
+
     Component.onCompleted: { netreg.getOperators(); console.log ("operators: " + operators); }
-
-    ActivityIndicator {
-        id: activityIndicator
-        anchors.centerIn: parent
-        running: netreg.scanning
-    }
-
-    Text {
-        anchors {
-            top: activityIndicator.bottom
-            topMargin: units.gu(2)
-            horizontalCenter: activityIndicator.horizontalCenter
-        }
-        text: i18n.tr("Searching")
-    }
 
     Column {
         anchors.left: parent.left
@@ -66,6 +53,22 @@ ItemPage {
                 netreg.scan();
             }
         }
+    }
+
+    ActivityIndicator {
+        id: activityIndicator
+        anchors.centerIn: parent
+        running: scanning
+    }
+
+    Text {
+        anchors {
+            top: activityIndicator.bottom
+            topMargin: units.gu(2)
+            horizontalCenter: activityIndicator.horizontalCenter
+        }
+        text: i18n.tr("Searching")
+        visible: activityIndicator.running
     }
 }
 
