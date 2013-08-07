@@ -27,7 +27,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ItemPage {
     title: i18n.tr("Carrier")
     property var netreg
-    Component.onCompleted: console.log ("COUNT: " + netreg.operators.count())
+    property var operators: netreg.operators
+    Component.onCompleted: { netreg.getOperators(); console.log ("COUNT: " + operators); }
     /*
     ActivityIndicator {
         id: activityIndicator
@@ -49,7 +50,7 @@ ItemPage {
         anchors.right: parent.right
 
         Repeater {
-            model: netreg.operators
+            model: operators
             delegate: ListItem.SingleValue {
                 text: modelData.name
             }
