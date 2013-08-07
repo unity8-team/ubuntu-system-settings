@@ -18,13 +18,11 @@
 */
 
 #include "networkoperator.h"
+#include "networkregistration.h"
 
-NetworkOperator::NetworkOperator(const QString& operatorId, QObject *parent) :
+NetworkRegistration::NetworkRegistration(QObject *parent) :
     QObject(parent)
 {
-    qDebug() << "operatorId: " << operatorId;
-    new OfonoNetworkOperator(operatorId);
-    /*
     m_ofonoNetworkRegistration = new OfonoNetworkRegistration(OfonoModem::AutomaticSelect, QString(), this);
 
     m_name = m_ofonoNetworkRegistration->name();
@@ -45,66 +43,106 @@ NetworkOperator::NetworkOperator(const QString& operatorId, QObject *parent) :
         SIGNAL (technologyChanged (const QString&)),
         this,
         SLOT (operatorTechnologyChanged(const QString&)));
-    */
+    QObject::connect(m_ofonoNetworkRegistration,
+        SIGNAL (getOperatorsComplete (bool, const QStringList&)),
+        this,
+        SLOT (operatorsUpdated(bool, const QStringList&)));
+    QObject::connect(m_ofonoNetworkRegistration,
+        SIGNAL (scanComplete (bool, const QStringList&)),
+        this,
+        SLOT (operatorsUpdated(bool, const QStringList&)));
 }
 
-/*
-NetworkOperator::NetworkOperator(const NetworkOperator& op)
-    : QObject(op.parent())
+
+QVariant NetworkRegistration::operators() const
 {
-    new OfonoNetworkOperator(op);
+    return QVariant::fromValue(m_operators);
 }
-*/
 
-NetworkOperator::CellDataTechnology NetworkOperator::technologyToInt(const QString &technology)
+void NetworkRegistration::populateOperators (QStringList oplist)
+{
+
+    m_operators.clear();
+    foreach(QString i, oplist)
+    {
+        m_operators.append(new NetworkOperator(i));
+    }
+
+}
+void NetworkRegistration::operatorsUpdated(bool success, const QStringList &oplist)
+{
+    if (success)
+    {
+        populateOperators(oplist);
+        qDebug() << "operatorsUpdated: " << oplist;
+        emit operatorsChanged();
+    }
+}
+
+void NetworkRegistration::registerOp()
+{
+    m_ofonoNetworkRegistration->registerOp();
+}
+
+void NetworkRegistration::scan()
+{
+    m_ofonoNetworkRegistration->scan();
+}
+
+void NetworkRegistration::getOperators()
+{
+    m_ofonoNetworkRegistration->getOperators();
+}
+
+NetworkRegistration::CellDataTechnology NetworkRegistration::technologyToInt(const QString &technology)
 {
     if (technology == QString(QStringLiteral("gprs")))
-        return NetworkOperator::GprsDataTechnology;
+        return NetworkRegistration::GprsDataTechnology;
     else if (technology == QString(QStringLiteral("edge")))
-        return NetworkOperator::EdgeDataTechnology;
+        return NetworkRegistration::EdgeDataTechnology;
     else if (technology == QString(QStringLiteral("umts")))
-        return NetworkOperator::UmtsDataTechnology;
+        return NetworkRegistration::UmtsDataTechnology;
     else if (technology == QString(QStringLiteral("hspa")))
-        return NetworkOperator::HspaDataTechnology;
+        return NetworkRegistration::HspaDataTechnology;
 
-    return NetworkOperator::UnknownDataTechnology;
+    return NetworkRegistration::UnknownDataTechnology;
 }
 
-QString NetworkOperator::name() const
+QString NetworkRegistration::name() const
 {
     return m_name;
 }
 
-void NetworkOperator::operatorNameChanged(const QString &name)
+void NetworkRegistration::operatorNameChanged(const QString &name)
 {
     m_name = name;
     qDebug() << "NAME: " << m_name;
     emit nameChanged(m_name);
 }
 
-QString NetworkOperator::status() const
+QString NetworkRegistration::status() const
 {
     return m_status;
 }
 
-void NetworkOperator::operatorStatusChanged(const QString &status)
+void NetworkRegistration::operatorStatusChanged(const QString &status)
 {
     m_status = status;
     qDebug() << "STATUS: " << m_status;
     emit statusChanged(m_status);
 }
-NetworkOperator::CellDataTechnology NetworkOperator::technology() const
+NetworkRegistration::CellDataTechnology NetworkRegistration::technology() const
 {
     return m_technology;
 }
 
-void NetworkOperator::operatorTechnologyChanged(const QString &technology)
+void NetworkRegistration::operatorTechnologyChanged(const QString &technology)
 {
     m_technology = technologyToInt(technology);
     qDebug() << "TECHNOLOGY: " << m_technology;
     emit technologyChanged(m_technology);
 }
 
-NetworkOperator::~NetworkOperator()
+NetworkRegistration::~NetworkRegistration()
 {
 }

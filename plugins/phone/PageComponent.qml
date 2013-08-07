@@ -29,7 +29,7 @@ ItemPage {
     property string carrierName: netop.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
-    NetworkOperator {
+    NetworkRegistration {
         id: netop;
         onNameChanged:
             carrierName = netop.name

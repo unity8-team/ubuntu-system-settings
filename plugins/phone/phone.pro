@@ -42,13 +42,17 @@ INCLUDEPATH += .
 
 # Input
 HEADERS += plugin.h \
+    connman.h \
     simservice.h \
     simmanager.h \
-    networkoperator.h
+    networkoperator.h \
+    networkregistration.h
 SOURCES += plugin.cpp \
+    connman.cpp \
     simservice.cpp \
     simmanager.cpp \
-    networkoperator.cpp
+    networkoperator.cpp \
+    networkregistration.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)

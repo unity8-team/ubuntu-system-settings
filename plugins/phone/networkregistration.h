@@ -18,25 +18,25 @@
  *
 */
 
-#ifndef NETWORKOPERATOR_H
-#define NETWORKOPERATOR_H
+#ifndef NETWORKREGISTRATION_H
+#define NETWORKREGISTRATION_H
 
 #include <QObject>
 #include <QtCore>
-#include <ofononetworkoperator.h>
+#include <ofononetworkregistration.h>
 
-class NetworkOperator : public QObject
+class NetworkRegistration : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString status READ status NOTIFY statusChanged)
     Q_PROPERTY(int technology READ technology NOTIFY technologyChanged)
+    Q_PROPERTY(QVariant operators READ operators NOTIFY operatorsChanged)
     Q_ENUMS(CellDataTechnology)
 
 public:
-    NetworkOperator(const QString& operatorId, QObject *parent=0);
-    //NetworkOperator(const NetworkOperator& op);
-    ~NetworkOperator();
+    explicit NetworkRegistration(QObject *parent = 0);
+    ~NetworkRegistration();
 
     enum CellDataTechnology {
         UnknownDataTechnology = 0,
@@ -49,25 +49,37 @@ public:
     /* Properties */
     QString name() const;
     QString status() const;
+    QVariant operators() const;
     CellDataTechnology technology() const;
+
+public slots:
+    void registerOp();
+    void getOperators();
+    void scan();
 
 signals:
     void nameChanged(const QString &name);
     void statusChanged(const QString &status);
     void technologyChanged(const CellDataTechnology &technology);
+    void operatorsChanged();
 
 private:
-    //OfonoNetworkRegistration *m_ofonoNetworkRegistration;
+    OfonoNetworkRegistration *m_ofonoNetworkRegistration;
     QString m_name;
     QString m_status;
+    QList<QObject*> m_operators;
     CellDataTechnology m_technology;
     CellDataTechnology technologyToInt(const QString &technology);
+    void populateOperators(QStringList);
+
 
 private Q_SLOTS:
     void operatorNameChanged(const QString &name);
     void operatorStatusChanged(const QString &status);
     void operatorTechnologyChanged(const QString &technology);
+    void operatorsUpdated(bool success, const QStringList &oplist);
+
 
 };
 
-#endif // NETWORKOPERATOR_H
+#endif // NETWORKREGISTRATION_H

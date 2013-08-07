@@ -14,27 +14,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Iain Lane <iain.lane@canonical.com>
+ * Ken VanDine <ken.vandine@canonical.com>
  *
 */
 
-#include <QtQml>
-#include <QtQml/QQmlContext>
-#include "plugin.h"
-#include "connman.h"
-#include "simmanager.h"
-#include "networkregistration.h"
+#ifndef CONNMAN_H
+#define CONNMAN_H
 
-void BackendPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Phone"));
-    
-    qmlRegisterType<SimManager>(uri, 1, 0, "SimManager");
-    qmlRegisterType<NetworkRegistration>(uri, 1, 0, "NetworkRegistration");
-    qmlRegisterType<ConnMan>(uri, 1, 0, "ConnMan");
-}
+#include <ofonoconnman.h>
+#include <QDebug>
+#include <QtCore>
+#include <QObject>
 
-void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
+class ConnMan : public QObject
 {
-    QQmlExtensionPlugin::initializeEngine(engine, uri);
-}
+    Q_OBJECT
+    Q_PROPERTY(bool roamingAllowed READ roamingAllowed WRITE setRoamingAllowed NOTIFY roamingAllowedChanged)
+
+public:
+    ConnMan();
+    bool roamingAllowed() const;
+    void setRoamingAllowed(const bool &st);
+
+signals:
+    void roamingAllowedChanged ();
+
+private slots:
+    void onRoamingAllowedChanged(bool st);
+
+private:
+    OfonoConnMan *m;
+    bool m_roam;
+};
+
+
+#endif // CONNMAN_H
