@@ -21,11 +21,14 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 
 
 ItemPage {
     title: i18n.tr("Carrier")
-
+    property var netreg
+    Component.onCompleted: console.log ("COUNT: " + netreg.operators.count())
+    /*
     ActivityIndicator {
         id: activityIndicator
         anchors.centerIn: parent
@@ -39,5 +42,17 @@ ItemPage {
             horizontalCenter: activityIndicator.horizontalCenter
         }
         text: i18n.tr("Searching")
+    }
+    */
+    Column {
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        Repeater {
+            model: netreg.operators
+            delegate: ListItem.SingleValue {
+                text: modelData.name
+            }
+        }
     }
 }

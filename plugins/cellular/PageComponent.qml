@@ -27,12 +27,12 @@ import Ubuntu.SystemSettings.Phone 1.0
 ItemPage {
     title: i18n.tr("Cellular")
 
-    NetworkOperator {
-        id: netop
+    NetworkRegistration {
+        id: netreg
     }
 
-    property string carrierName: netop.name
-    property bool cellData: netop.technology ==  netop.UnknownDataTechnology ? false : true
+    property string carrierName: netreg.name
+    property bool cellData: netreg.technology ==  netreg.UnknownDataTechnology ? false : true
 
     Column {
         anchors.left: parent.left
@@ -54,7 +54,7 @@ ItemPage {
             progression: enabled
             onClicked: {
                 if (enabled)
-                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"))
+                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netreg: netreg})
             }
         }
 
@@ -84,7 +84,7 @@ ItemPage {
             enabled: false
             values: [i18n.tr("2G only (saves battery)"),
                 i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: netop.EdgeDataTechnology ? 0 : 1
+            selectedIndex: netreg.EdgeDataTechnology ? 0 : 1
             
         }
 

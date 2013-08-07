@@ -23,29 +23,20 @@ NetworkOperator::NetworkOperator(const QString& operatorId, QObject *parent) :
     QObject(parent)
 {
     qDebug() << "operatorId: " << operatorId;
-    new OfonoNetworkOperator(operatorId);
-    /*
-    m_ofonoNetworkRegistration = new OfonoNetworkRegistration(OfonoModem::AutomaticSelect, QString(), this);
+    m_ofonoNetworkOperator = new OfonoNetworkOperator(operatorId);
 
-    m_name = m_ofonoNetworkRegistration->name();
+    m_name = m_ofonoNetworkOperator->name();
     qDebug() << "NAME: " << m_name;
-    m_status = m_ofonoNetworkRegistration->status();
+    m_status = m_ofonoNetworkOperator->status();
     qDebug() << "STATUS: " << m_status;
-    m_technology = technologyToInt(m_ofonoNetworkRegistration->technology());
-    qDebug() << "TECHNOLOGY: " << m_technology;
-    QObject::connect(m_ofonoNetworkRegistration,
+    QObject::connect(m_ofonoNetworkOperator,
         SIGNAL (nameChanged (const QString&)),
         this,
         SLOT (operatorNameChanged(const QString&)));
-    QObject::connect(m_ofonoNetworkRegistration,
+    QObject::connect(m_ofonoNetworkOperator,
         SIGNAL (statusChanged (const QString&)),
         this,
         SLOT (operatorStatusChanged(const QString&)));
-    QObject::connect(m_ofonoNetworkRegistration,
-        SIGNAL (technologyChanged (const QString&)),
-        this,
-        SLOT (operatorTechnologyChanged(const QString&)));
-    */
 }
 
 /*
@@ -92,17 +83,6 @@ void NetworkOperator::operatorStatusChanged(const QString &status)
     m_status = status;
     qDebug() << "STATUS: " << m_status;
     emit statusChanged(m_status);
-}
-NetworkOperator::CellDataTechnology NetworkOperator::technology() const
-{
-    return m_technology;
-}
-
-void NetworkOperator::operatorTechnologyChanged(const QString &technology)
-{
-    m_technology = technologyToInt(technology);
-    qDebug() << "TECHNOLOGY: " << m_technology;
-    emit technologyChanged(m_technology);
 }
 
 NetworkOperator::~NetworkOperator()
