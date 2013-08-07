@@ -38,9 +38,9 @@ NetworkOperator::NetworkOperator(const QString& operatorId, QObject *parent) :
         this,
         SLOT (operatorStatusChanged(const QString&)));
     QObject::connect(m_ofonoNetworkOperator,
-        SIGNAL (registerComplete (const QString&)),
+        SIGNAL (registerComplete (bool)),
         this,
-        SLOT (operatorRegisterComplete(const QString&)));
+        SLOT (operatorRegisterComplete(bool)));
 }
 
 /*

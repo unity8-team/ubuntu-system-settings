@@ -74,6 +74,7 @@ ItemPage {
                 selectedIndex: curOp
                 onSelectedIndexChanged: {
                     console.log ("CHANGED: " + operators[selectedIndex].name);
+                    operators[selectedIndex].registerOp();
                 }
             }
     }
