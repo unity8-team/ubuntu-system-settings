@@ -72,6 +72,7 @@ void NetworkRegistration::populateOperators (QStringList oplist)
     }
 
 }
+
 void NetworkRegistration::operatorsUpdated(bool success, const QStringList &oplist)
 {
     this->setScanning(false);
@@ -81,11 +82,6 @@ void NetworkRegistration::operatorsUpdated(bool success, const QStringList &opli
         qDebug() << "operatorsUpdated: " << oplist;
         emit operatorsChanged();
     }
-}
-
-void NetworkRegistration::registerOp()
-{
-    m_ofonoNetworkRegistration->registerOp();
 }
 
 void NetworkRegistration::scan()

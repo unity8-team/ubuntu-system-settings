@@ -56,7 +56,6 @@ public:
     bool scanning() const;
 
 public slots:
-    void registerOp();
     void getOperators();
     void scan();
     void setScanning(bool scanning);

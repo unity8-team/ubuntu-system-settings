@@ -37,6 +37,10 @@ NetworkOperator::NetworkOperator(const QString& operatorId, QObject *parent) :
         SIGNAL (statusChanged (const QString&)),
         this,
         SLOT (operatorStatusChanged(const QString&)));
+    QObject::connect(m_ofonoNetworkOperator,
+        SIGNAL (registerComplete (const QString&)),
+        this,
+        SLOT (operatorRegisterComplete(const QString&)));
 }
 
 /*
@@ -83,6 +87,25 @@ void NetworkOperator::operatorStatusChanged(const QString &status)
     m_status = status;
     qDebug() << "STATUS: " << m_status;
     emit statusChanged(m_status);
+}
+
+void NetworkOperator::registerOp()
+{
+    qDebug() << "Registering on " << m_name;
+    m_ofonoNetworkOperator->registerOp();
+}
+
+void NetworkOperator::operatorRegisterComplete(bool success)
+{
+    if (success)
+    {
+        qDebug() << "operatorRegisterComplete: SUCCESS";
+    }
+    else
+    {
+        qDebug() << "operatorRegisterComplete: FAILED " << m_ofonoNetworkOperator->errorMessage();
+    }
+    emit registerComplete(success, m_ofonoNetworkOperator->errorMessage());
 }
 
 NetworkOperator::~NetworkOperator()

@@ -49,9 +49,13 @@ public:
     QString name() const;
     QString status() const;
 
+public slots:
+    void registerOp();
+
 signals:
     void nameChanged(const QString &name);
     void statusChanged(const QString &status);
+    void registerComplete(bool success, const QString & errorMessage);
 
 private:
     OfonoNetworkOperator *m_ofonoNetworkOperator;
@@ -62,6 +66,8 @@ private:
 private Q_SLOTS:
     void operatorNameChanged(const QString &name);
     void operatorStatusChanged(const QString &status);
+    void operatorRegisterComplete(bool success);
+
 };
 
 #endif // NETWORKOPERATOR_H
