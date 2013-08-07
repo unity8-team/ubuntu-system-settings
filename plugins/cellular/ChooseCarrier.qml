@@ -28,7 +28,7 @@ ItemPage {
     title: i18n.tr("Carrier")
     property var netreg
     property var operators: netreg.operators
-    Component.onCompleted: { netreg.getOperators(); console.log ("COUNT: " + operators); }
+    Component.onCompleted: { netreg.getOperators(); console.log ("operators: " + operators); }
     /*
     ActivityIndicator {
         id: activityIndicator
@@ -56,4 +56,16 @@ ItemPage {
             }
         }
     }
+    ListItem.SingleControl {
+        anchors.bottom: parent.bottom
+        control: Button {
+            width: parent.width - units.gu(4)
+            text: i18n.tr("Scan")
+            onTriggered: {
+                console.log ("Scanning");
+                netreg.scan();
+            }
+        }
+    }
 }
+
