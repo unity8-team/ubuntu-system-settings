@@ -1,0 +1,14 @@
+{
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-battery.svg",
+    "name": "Battery",
+    "translations": "ubuntu-system-settings",
+    "category": "system",
+    "priority": 0,
+    "keywords": [
+        "battery",
+        "power"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "page-component": "PageComponent.qml"
+}
