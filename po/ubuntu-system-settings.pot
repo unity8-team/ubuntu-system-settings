@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-31 10:17-0400\n"
+"POT-Creation-Date: 2013-08-05 18:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,16 +126,21 @@ msgstr ""
 msgid "Welcome screen"
 msgstr ""
 
+#: ../plugins/background/MainPage.qml:80
+#: ../plugins/background/MainPage.qml:110
+msgid "Choose background"
+msgstr ""
+
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
 msgid "Home screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:191
+#: ../plugins/background/MainPage.qml:189
 msgid "Same background for both"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:209
+#: ../plugins/background/MainPage.qml:207
 msgid "Different background for each"
 msgstr ""
 
@@ -221,7 +226,7 @@ msgstr ""
 msgid "All layouts available:"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:30
+#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:10
 msgid "Language & Text"
 msgstr ""
 
@@ -303,7 +308,7 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:12
 msgid "Phone"
 msgstr ""
 
@@ -330,7 +335,7 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr ""
 
@@ -382,7 +387,7 @@ msgstr ""
 msgid "Phone and Internet"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:14
 msgid "Security & Privacy"
 msgstr ""
 
@@ -390,59 +395,47 @@ msgstr ""
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:31 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:49
+#: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:61
+#: ../plugins/sound/PageComponent.qml:66
 msgid "Vibrate when ringing"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:87
+#: ../plugins/sound/PageComponent.qml:71
 msgid "Vibrate in silent mode"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:70
-msgid "Alerts:"
-msgstr ""
-
-#: ../plugins/sound/PageComponent.qml:74 ../plugins/sound/PageComponent.qml:77
-msgid "Alert sound"
-msgstr ""
-
-#: ../plugins/sound/PageComponent.qml:82
-msgid "Vibrate with alert sound"
-msgstr ""
-
-#: ../plugins/sound/PageComponent.qml:91
+#: ../plugins/sound/PageComponent.qml:75
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
+#: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:103
+#: ../plugins/sound/PageComponent.qml:88
 msgid "Keyboard sounds"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:108
+#: ../plugins/sound/PageComponent.qml:93
 msgid "Lock sound"
 msgstr ""
 
-#: ../plugins/sound/SilentModeWarning.qml:31
+#: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:49
+#: ../plugins/sound/SoundsList.qml:60
 msgid "Stop playing"
 msgstr ""
 
@@ -512,7 +505,7 @@ msgstr ""
 msgid "No matching place"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr ""
 
@@ -564,22 +557,14 @@ msgstr ""
 msgid "GPS"
 msgstr ""
 
-#: ../.build/settings.js:10
-msgid "Keyboard"
-msgstr ""
-
 #: ../.build/settings.js:11
-msgid "Language"
-msgstr ""
-
-#: ../.build/settings.js:12
 msgid "Rotation lock"
 msgstr ""
 
-#: ../.build/settings.js:17
+#: ../.build/settings.js:16
 msgid "Updates"
 msgstr ""
 
-#: ../.build/settings.js:19
+#: ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr ""

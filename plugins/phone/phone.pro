@@ -23,7 +23,7 @@ settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
 image.files = settings-phone.svg
-image.path = /usr/share/settings/system/icons
+image.path = $${PLUGIN_MANIFEST_DIR}/icons
 INSTALLS += image
 
 # C++ bits

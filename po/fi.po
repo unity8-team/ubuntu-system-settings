@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-30 11:41+0200\n"
-"PO-Revision-Date: 2013-07-30 19:02+0000\n"
+"POT-Creation-Date: 2013-08-05 18:12+0200\n"
+"PO-Revision-Date: 2013-08-05 17:12+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-31 06:10+0000\n"
+"X-Launchpad-Export-Date: 2013-08-06 05:06+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -50,19 +50,19 @@ msgstr "Ei koskaan"
 msgid "Check for updates"
 msgstr "Tarkista päivitykset"
 
-#: ../plugins/about/PageComponent.qml:110 ../plugins/about/Storage.qml:32
+#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
 msgid "Storage"
 msgstr "Tallennustila"
 
-#: ../plugins/about/PageComponent.qml:116
+#: ../plugins/about/PageComponent.qml:118
 msgid "Legal:"
 msgstr "Oikeudellinen huomautus:"
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
+#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr "Ohjelmistolisenssit"
 
-#: ../plugins/about/PageComponent.qml:126
+#: ../plugins/about/PageComponent.qml:128
 msgid "Regulatory info"
 msgstr "Sääntelytiedot"
 
@@ -126,16 +126,21 @@ msgstr "Tausta"
 msgid "Welcome screen"
 msgstr "Tervetuloruutu"
 
+#: ../plugins/background/MainPage.qml:80
+#: ../plugins/background/MainPage.qml:110
+msgid "Choose background"
+msgstr "Valitse taustakuva"
+
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
 msgid "Home screen"
 msgstr "Kotinäyttö"
 
-#: ../plugins/background/MainPage.qml:191
+#: ../plugins/background/MainPage.qml:189
 msgid "Same background for both"
 msgstr "Sama tausta molemmissa"
 
-#: ../plugins/background/MainPage.qml:209
+#: ../plugins/background/MainPage.qml:207
 msgid "Different background for each"
 msgstr "Eri tausta kummassakin"
 
@@ -197,7 +202,7 @@ msgid "Display language"
 msgstr "Näyttökieli"
 
 #: ../plugins/language/DisplayLanguage.qml:84
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:35
 #: ../plugins/reset/ResetAllSettings.qml:35
 #: ../plugins/reset/ResetLauncherHome.qml:35
@@ -221,7 +226,7 @@ msgstr "Nykyiset asettelut:"
 msgid "All layouts available:"
 msgstr "Kaikki saatavilla olevat asettelut:"
 
-#: ../plugins/language/PageComponent.qml:30
+#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:10
 msgid "Language & Text"
 msgstr "Kieli ja teksti"
 
@@ -266,12 +271,13 @@ msgstr "Nykyiset oikeinkirjoituksen kielet:"
 msgid "All languages available:"
 msgstr "Kaikki saatavillat olevat kielet:"
 
-#: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
-#: ../plugins/phone/PageComponent.qml:43
-msgid "Call diversion"
+#: ../plugins/phone/CallForwarding.qml:27
+#: ../plugins/phone/CallForwarding.qml:60
+#: ../plugins/phone/PageComponent.qml:48
+msgid "Call forwarding"
 msgstr "Soitonsiirto"
 
-#: ../plugins/phone/CallDiversion.qml:74
+#: ../plugins/phone/CallForwarding.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
@@ -279,25 +285,25 @@ msgstr ""
 "Siirtää puhelut toiseen numeroon, jos et vastaa, puhelimesi on varattu, "
 "sammutettu tai kuuluvuusalueen ulkopuolella."
 
-#: ../plugins/phone/CallDiversion.qml:91
-msgid "Call diversion status can’t be checked right now. Try again later."
+#: ../plugins/phone/CallForwarding.qml:91
+msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
 "Soitonsiirron tilaa ei voi tarkistaa juuri nyt. Yritä myöhemmin uudelleen."
 
-#: ../plugins/phone/CallDiversion.qml:102
+#: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
 msgstr "Ohjaa numeroon"
 
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 msgid "Contacts…"
 msgstr "Yhteystiedot…"
 
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 msgid "Set"
 msgstr "Aseta"
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
-#: ../plugins/phone/PageComponent.qml:49
+#: ../plugins/phone/PageComponent.qml:54
 msgid "Call waiting"
 msgstr "Koputuspalvelu"
 
@@ -309,44 +315,22 @@ msgstr ""
 "Mahdollistaa uuden puhelun soittamisen tai vastaamisen saapuvaan puheluun, "
 "kun meneillään on jo puhelu."
 
-#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:12
 msgid "Phone"
 msgstr "Puhelin"
 
-#: ../plugins/phone/PageComponent.qml:30
+#: ../plugins/phone/PageComponent.qml:31
 msgid "SIM"
 msgstr "SIM"
 
-#: ../plugins/phone/PageComponent.qml:57 ../plugins/phone/Services.qml:28
+#: ../plugins/phone/PageComponent.qml:62 ../plugins/phone/Services.qml:29
 #, qt-format
 msgid "%1 Services"
 msgstr "%1-palvelut"
 
-#: ../plugins/phone/ServiceInfo.qml:34
+#: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
 msgstr ""
-
-#: ../plugins/phone/Services.qml:34
-msgid "Voicemail"
-msgstr "Vastaaja"
-
-#: ../plugins/phone/Services.qml:34
-#, qt-format
-msgid "My %1 Credit & Plan"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:35
-#, qt-format
-msgid "Listen to digits of %1"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:35
-msgid "Traffic report"
-msgstr "Liikennöintiraportti"
-
-#: ../plugins/phone/Services.qml:35
-msgid "Horoscopes"
-msgstr "Horoskoopit"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
@@ -360,7 +344,7 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "Pyyhi ja nollaa kaikki"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "Nollaa puhelin"
 
@@ -414,7 +398,7 @@ msgstr "Vain puhelimesta"
 msgid "Phone and Internet"
 msgstr "Puhelimesta ja internetistä"
 
-#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:14
 msgid "Security & Privacy"
 msgstr "Turvallisuus ja yksityisyys"
 
@@ -422,59 +406,47 @@ msgstr "Turvallisuus ja yksityisyys"
 msgid "Diagnostics"
 msgstr "Diagnostiikka"
 
-#: ../plugins/sound/PageComponent.qml:31 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
 msgstr "Ääni"
 
-#: ../plugins/sound/PageComponent.qml:49
+#: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
 msgstr "Puhelut:"
 
-#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
 msgstr "Soittoääni"
 
-#: ../plugins/sound/PageComponent.qml:61
+#: ../plugins/sound/PageComponent.qml:66
 msgid "Vibrate when ringing"
 msgstr "Värinä soidessa"
 
-#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:87
+#: ../plugins/sound/PageComponent.qml:71
 msgid "Vibrate in silent mode"
 msgstr "Värinä äänettömässä tilassa"
 
-#: ../plugins/sound/PageComponent.qml:70
-msgid "Alerts:"
-msgstr "Hälytykset:"
-
-#: ../plugins/sound/PageComponent.qml:74 ../plugins/sound/PageComponent.qml:77
-msgid "Alert sound"
-msgstr "Hälytysääni"
-
-#: ../plugins/sound/PageComponent.qml:82
-msgid "Vibrate with alert sound"
-msgstr "Värinä hälytysäänen kera"
-
-#: ../plugins/sound/PageComponent.qml:91
+#: ../plugins/sound/PageComponent.qml:75
 msgid "Other sounds:"
 msgstr "Muut äänet:"
 
-#: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
+#: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
 msgid "Message received"
 msgstr "Viesti vastaanotettu"
 
-#: ../plugins/sound/PageComponent.qml:103
+#: ../plugins/sound/PageComponent.qml:88
 msgid "Keyboard sounds"
 msgstr "Näppäimistön äänet"
 
-#: ../plugins/sound/PageComponent.qml:108
+#: ../plugins/sound/PageComponent.qml:93
 msgid "Lock sound"
 msgstr "Lukitusääni"
 
-#: ../plugins/sound/SilentModeWarning.qml:31
+#: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
 msgstr "Puhelin on äänettömässä tilassa."
 
-#: ../plugins/sound/SoundsList.qml:49
+#: ../plugins/sound/SoundsList.qml:60
 msgid "Stop playing"
 msgstr "Lopeta toisto"
 
@@ -482,49 +454,53 @@ msgstr "Lopeta toisto"
 msgid "Update phone"
 msgstr "Päivitä puhelin"
 
-#: ../plugins/system-update/PageComponent.qml:108
+#: ../plugins/system-update/PageComponent.qml:113
 msgid "Congrats! You are already up to date!"
 msgstr "Onnittelut, ohjelmistosi on jo ajan tasalla!"
 
-#: ../plugins/system-update/PageComponent.qml:110
+#: ../plugins/system-update/PageComponent.qml:115
 msgid "A new version is available!"
 msgstr "Uusi versio on saatavilla!"
 
-#: ../plugins/system-update/PageComponent.qml:111
+#: ../plugins/system-update/PageComponent.qml:116
 msgid "Checking latest available system version…"
 msgstr "Tarkistetaan uusinta saatavilla olevaa järjestelmäversiota…"
 
-#: ../plugins/system-update/PageComponent.qml:133
+#: ../plugins/system-update/PageComponent.qml:153
 #, qt-format
 msgid "You can update from version %1 to version %2"
 msgstr "Voit päivittää versiosta %1 versioon %2"
 
-#: ../plugins/system-update/PageComponent.qml:136
+#: ../plugins/system-update/PageComponent.qml:156
 #, qt-format
 msgid "Size of this update: %1"
 msgstr "Päivityksen koko: %1"
 
-#: ../plugins/system-update/PageComponent.qml:146
+#: ../plugins/system-update/PageComponent.qml:160
+msgid "This update will:"
+msgstr "Päivityksen seuraukset:"
+
+#: ../plugins/system-update/PageComponent.qml:170
 msgid "Apply?"
 msgstr "Toteutetaanko?"
 
-#: ../plugins/system-update/PageComponent.qml:155
+#: ../plugins/system-update/PageComponent.qml:175
 msgid "Update your phone"
 msgstr "Päivitä puhelin"
 
-#: ../plugins/system-update/PageComponent.qml:161
+#: ../plugins/system-update/PageComponent.qml:181
 msgid "Cancel update"
 msgstr "Peru päivitys"
 
-#: ../plugins/system-update/PageComponent.qml:167
+#: ../plugins/system-update/PageComponent.qml:187
 msgid "Reboot your phone now"
 msgstr "Käynnistä puhelin uudelleen"
 
-#: ../plugins/system-update/PageComponent.qml:183
+#: ../plugins/system-update/PageComponent.qml:203
 msgid "We are deeply sorry"
 msgstr "Olemme pahoillamme"
 
-#: ../plugins/system-update/PageComponent.qml:184
+#: ../plugins/system-update/PageComponent.qml:204
 msgid "The update failed. Please try again later"
 msgstr "Päivitys epäonnistui. Yritä myöhemmin uudelleen."
 
@@ -540,7 +516,7 @@ msgstr "Aseta aikavyöhyke:"
 msgid "No matching place"
 msgstr "Ei vastaavaa paikkaa"
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr "Aika ja päiväys"
 
@@ -592,22 +568,14 @@ msgstr "Lentokonetila"
 msgid "GPS"
 msgstr "GPS"
 
-#: ../.build/settings.js:10
-msgid "Keyboard"
-msgstr "Näppäimistö"
-
 #: ../.build/settings.js:11
-msgid "Language"
-msgstr "Kieli"
-
-#: ../.build/settings.js:12
 msgid "Rotation lock"
 msgstr "Kääntölukitus"
 
-#: ../.build/settings.js:17
+#: ../.build/settings.js:16
 msgid "Updates"
 msgstr "Päivitykset"
 
-#: ../.build/settings.js:19
+#: ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "Wi-Fi"

@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/settings/system/icons/settings-brightness.svg",
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-brightness.svg",
     "name": "Brightness",
     "translations": "ubuntu-system-settings",
     "category": "system",

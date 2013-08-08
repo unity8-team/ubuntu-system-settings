@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-30 11:41+0200\n"
-"PO-Revision-Date: 2013-07-31 09:52+0000\n"
+"POT-Creation-Date: 2013-08-05 18:12+0200\n"
+"PO-Revision-Date: 2013-08-05 17:20+0000\n"
 "Last-Translator: Phillip Sz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-01 05:54+0000\n"
+"X-Launchpad-Export-Date: 2013-08-06 05:06+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
-msgstr "Über dieses Telefon"
+msgstr "Über dieses Gerät"
 
 #: ../plugins/about/PageComponent.qml:76
 msgid "Serial"
@@ -50,19 +50,19 @@ msgstr "Nie"
 msgid "Check for updates"
 msgstr "Nach Aktualisierungen suchen"
 
-#: ../plugins/about/PageComponent.qml:110 ../plugins/about/Storage.qml:32
+#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
 msgid "Storage"
 msgstr "Speicher"
 
-#: ../plugins/about/PageComponent.qml:116
+#: ../plugins/about/PageComponent.qml:118
 msgid "Legal:"
 msgstr "Rechtliches:"
 
-#: ../plugins/about/PageComponent.qml:120 ../plugins/about/Software.qml:10
+#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
 msgid "Software licenses"
 msgstr "Software-Lizenzen"
 
-#: ../plugins/about/PageComponent.qml:126
+#: ../plugins/about/PageComponent.qml:128
 msgid "Regulatory info"
 msgstr "Rechtliche Info"
 
@@ -126,16 +126,21 @@ msgstr "Hintergrund"
 msgid "Welcome screen"
 msgstr "Startbildschirm"
 
+#: ../plugins/background/MainPage.qml:80
+#: ../plugins/background/MainPage.qml:110
+msgid "Choose background"
+msgstr "Wählen Sie ein Hintergrundbild"
+
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
 msgid "Home screen"
 msgstr "Startseite"
 
-#: ../plugins/background/MainPage.qml:191
+#: ../plugins/background/MainPage.qml:189
 msgid "Same background for both"
 msgstr "Gleicher Hintergrund für beide"
 
-#: ../plugins/background/MainPage.qml:209
+#: ../plugins/background/MainPage.qml:207
 msgid "Different background for each"
 msgstr "Unterschiedlicher Hintergrund für jedes"
 
@@ -197,7 +202,7 @@ msgid "Display language"
 msgstr "Anzeigesprache"
 
 #: ../plugins/language/DisplayLanguage.qml:84
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:35
 #: ../plugins/reset/ResetAllSettings.qml:35
 #: ../plugins/reset/ResetLauncherHome.qml:35
@@ -221,7 +226,7 @@ msgstr "Aktuelle Erscheinungsbilder:"
 msgid "All layouts available:"
 msgstr "Alle verfügbaren Erscheinungsbilder:"
 
-#: ../plugins/language/PageComponent.qml:30
+#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:10
 msgid "Language & Text"
 msgstr "Sprache & Text"
 
@@ -268,12 +273,13 @@ msgstr "Aktuelle Sprachen zur Rechtschreibprüfung:"
 msgid "All languages available:"
 msgstr "Alle verfügbaren Sprachen:"
 
-#: ../plugins/phone/CallDiversion.qml:27 ../plugins/phone/CallDiversion.qml:60
-#: ../plugins/phone/PageComponent.qml:43
-msgid "Call diversion"
+#: ../plugins/phone/CallForwarding.qml:27
+#: ../plugins/phone/CallForwarding.qml:60
+#: ../plugins/phone/PageComponent.qml:48
+msgid "Call forwarding"
 msgstr "Anrufweiterleitung"
 
-#: ../plugins/phone/CallDiversion.qml:74
+#: ../plugins/phone/CallForwarding.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
@@ -281,26 +287,26 @@ msgstr ""
 "Leitet Anrufe zu einer anderen Nummer, wenn Sie nicht an Ihr Telefon gehen, "
 "besetzt ist, es ausgeschaltet ist oder kein Empfang hat."
 
-#: ../plugins/phone/CallDiversion.qml:91
-msgid "Call diversion status can’t be checked right now. Try again later."
+#: ../plugins/phone/CallForwarding.qml:91
+msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
-"Status der Anrufweiterleitung kann zur Zeit nicht abgerufen werden. "
-"Versuchen Sie es später erneut."
+"Anrufweiterleitungsstatus kann zur Zeit nicht abgerufen werden. Bitte "
+"versuchen Sie es später erneut."
 
-#: ../plugins/phone/CallDiversion.qml:102
+#: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
 msgstr "Weiterleiten zu"
 
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 msgid "Contacts…"
 msgstr "Kontakte …"
 
-#: ../plugins/phone/CallDiversion.qml:113
+#: ../plugins/phone/CallForwarding.qml:113
 msgid "Set"
 msgstr "Einstellen"
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
-#: ../plugins/phone/PageComponent.qml:49
+#: ../plugins/phone/PageComponent.qml:54
 msgid "Call waiting"
 msgstr "Anklopfen"
 
@@ -312,44 +318,22 @@ msgstr ""
 "Ermöglicht es Ihnen während eines anderen Anrufes, einen neuen Anruf zu "
 "beginnen und zwischen diesen zu wechseln."
 
-#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:12
 msgid "Phone"
 msgstr "Telefon"
 
-#: ../plugins/phone/PageComponent.qml:30
+#: ../plugins/phone/PageComponent.qml:31
 msgid "SIM"
 msgstr "SIM"
 
-#: ../plugins/phone/PageComponent.qml:57 ../plugins/phone/Services.qml:28
+#: ../plugins/phone/PageComponent.qml:62 ../plugins/phone/Services.qml:29
 #, qt-format
 msgid "%1 Services"
 msgstr "%1-Dienstleistungen"
 
-#: ../plugins/phone/ServiceInfo.qml:34
+#: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
 msgstr "Anruf"
-
-#: ../plugins/phone/Services.qml:34
-msgid "Voicemail"
-msgstr "Sprachnachricht"
-
-#: ../plugins/phone/Services.qml:34
-#, qt-format
-msgid "My %1 Credit & Plan"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:35
-#, qt-format
-msgid "Listen to digits of %1"
-msgstr ""
-
-#: ../plugins/phone/Services.qml:35
-msgid "Traffic report"
-msgstr "Datenaufkommensbericht"
-
-#: ../plugins/phone/Services.qml:35
-msgid "Horoscopes"
-msgstr "Horoskope"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
@@ -363,7 +347,7 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "Alles löschen & zurücksetzen"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "Telefon zurücksetzen"
 
@@ -399,7 +383,7 @@ msgstr "Starter & Startbildschirm zurücksetzen"
 #: ../plugins/security-privacy/Dash.qml:29
 #: ../plugins/security-privacy/PageComponent.qml:58
 msgid "Dash search"
-msgstr ""
+msgstr "Dash-Suche"
 
 #: ../plugins/security-privacy/Dash.qml:48
 msgid "Return results from:"
@@ -417,7 +401,7 @@ msgstr "Nur vom Telefon"
 msgid "Phone and Internet"
 msgstr "Vom Telefon und vom Internet"
 
-#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:14
 msgid "Security & Privacy"
 msgstr "Sicherheit & Datenschutz"
 
@@ -425,59 +409,47 @@ msgstr "Sicherheit & Datenschutz"
 msgid "Diagnostics"
 msgstr "Fehlerdiagnose"
 
-#: ../plugins/sound/PageComponent.qml:31 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
 msgstr "Audio"
 
-#: ../plugins/sound/PageComponent.qml:49
+#: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
 msgstr "Telefonanrufe:"
 
-#: ../plugins/sound/PageComponent.qml:53 ../plugins/sound/PageComponent.qml:56
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
 msgstr "Klingelton"
 
-#: ../plugins/sound/PageComponent.qml:61
+#: ../plugins/sound/PageComponent.qml:66
 msgid "Vibrate when ringing"
 msgstr "Vibrieren wenn es klingelt"
 
-#: ../plugins/sound/PageComponent.qml:66 ../plugins/sound/PageComponent.qml:87
+#: ../plugins/sound/PageComponent.qml:71
 msgid "Vibrate in silent mode"
 msgstr "Vibrieren im Stumm-Modus"
 
-#: ../plugins/sound/PageComponent.qml:70
-msgid "Alerts:"
-msgstr "Alarme:"
-
-#: ../plugins/sound/PageComponent.qml:74 ../plugins/sound/PageComponent.qml:77
-msgid "Alert sound"
-msgstr "Alarmklang"
-
-#: ../plugins/sound/PageComponent.qml:82
-msgid "Vibrate with alert sound"
-msgstr "Vibrieren mit Alarmklang"
-
-#: ../plugins/sound/PageComponent.qml:91
+#: ../plugins/sound/PageComponent.qml:75
 msgid "Other sounds:"
 msgstr "Andere Töne:"
 
-#: ../plugins/sound/PageComponent.qml:95 ../plugins/sound/PageComponent.qml:98
+#: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
 msgid "Message received"
 msgstr "Nachricht empfangen"
 
-#: ../plugins/sound/PageComponent.qml:103
+#: ../plugins/sound/PageComponent.qml:88
 msgid "Keyboard sounds"
 msgstr "Tastaturtöne"
 
-#: ../plugins/sound/PageComponent.qml:108
+#: ../plugins/sound/PageComponent.qml:93
 msgid "Lock sound"
 msgstr "Sperrton"
 
-#: ../plugins/sound/SilentModeWarning.qml:31
+#: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
 msgstr "Das Telefon ist im Stumm-Modus."
 
-#: ../plugins/sound/SoundsList.qml:49
+#: ../plugins/sound/SoundsList.qml:60
 msgid "Stop playing"
 msgstr "Wiedergabe anhalten"
 
@@ -485,49 +457,53 @@ msgstr "Wiedergabe anhalten"
 msgid "Update phone"
 msgstr "Telefon aktualisieren"
 
-#: ../plugins/system-update/PageComponent.qml:108
+#: ../plugins/system-update/PageComponent.qml:113
 msgid "Congrats! You are already up to date!"
 msgstr "Gratulation! Sie sind bereits auf dem aktuellen Stand!"
 
-#: ../plugins/system-update/PageComponent.qml:110
+#: ../plugins/system-update/PageComponent.qml:115
 msgid "A new version is available!"
 msgstr "Eine neue Version ist verfügbar!"
 
-#: ../plugins/system-update/PageComponent.qml:111
+#: ../plugins/system-update/PageComponent.qml:116
 msgid "Checking latest available system version…"
 msgstr "Überprüft, ob eine neue Systemversion verfügbar ist …"
 
-#: ../plugins/system-update/PageComponent.qml:133
+#: ../plugins/system-update/PageComponent.qml:153
 #, qt-format
 msgid "You can update from version %1 to version %2"
 msgstr "Sie können von Version %1 zu Version %2 aktualisieren"
 
-#: ../plugins/system-update/PageComponent.qml:136
+#: ../plugins/system-update/PageComponent.qml:156
 #, qt-format
 msgid "Size of this update: %1"
 msgstr "Größe der Aktualisierung: %1"
 
-#: ../plugins/system-update/PageComponent.qml:146
+#: ../plugins/system-update/PageComponent.qml:160
+msgid "This update will:"
+msgstr "Diese Aktualisierung wird:"
+
+#: ../plugins/system-update/PageComponent.qml:170
 msgid "Apply?"
 msgstr "Anwenden?"
 
-#: ../plugins/system-update/PageComponent.qml:155
+#: ../plugins/system-update/PageComponent.qml:175
 msgid "Update your phone"
 msgstr "Ihr Telefon aktualisieren"
 
-#: ../plugins/system-update/PageComponent.qml:161
+#: ../plugins/system-update/PageComponent.qml:181
 msgid "Cancel update"
 msgstr "Aktualisierung abbrechen"
 
-#: ../plugins/system-update/PageComponent.qml:167
+#: ../plugins/system-update/PageComponent.qml:187
 msgid "Reboot your phone now"
 msgstr "Starten Sie Ihr Telefon jetzt neu"
 
-#: ../plugins/system-update/PageComponent.qml:183
+#: ../plugins/system-update/PageComponent.qml:203
 msgid "We are deeply sorry"
 msgstr "Es tut uns sehr Leid"
 
-#: ../plugins/system-update/PageComponent.qml:184
+#: ../plugins/system-update/PageComponent.qml:204
 msgid "The update failed. Please try again later"
 msgstr ""
 "Die Aktualisierung ist fehlgeschlagen. Bitte versuchen Sie es später erneut."
@@ -544,7 +520,7 @@ msgstr "Stellen Sie die Zeitzone ein:"
 msgid "No matching place"
 msgstr "Kein übereinstimmender Ort"
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr "Zeit & Datum"
 
@@ -596,22 +572,14 @@ msgstr "Flugmodus"
 msgid "GPS"
 msgstr "GPS"
 
-#: ../.build/settings.js:10
-msgid "Keyboard"
-msgstr "Tastatur"
-
 #: ../.build/settings.js:11
-msgid "Language"
-msgstr "Sprache"
-
-#: ../.build/settings.js:12
 msgid "Rotation lock"
 msgstr "Rotationssperre"
 
-#: ../.build/settings.js:17
+#: ../.build/settings.js:16
 msgid "Updates"
 msgstr "Aktualisierungen"
 
-#: ../.build/settings.js:19
+#: ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "Funknetzwerke"
