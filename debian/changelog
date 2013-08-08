@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+13.10.20130808.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * depends on qtdeclarative5-folderlistmodel-plugin.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 241
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 08 Aug 2013 09:28:34 +0000
+
 ubuntu-system-settings (0.1+13.10.20130807-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
