@@ -2,6 +2,7 @@ TEMPLATE = subdirs
 SUBDIRS = \
     about \
     background \
+    battery \
     flight-mode \
     gps \
     orientation-lock \
