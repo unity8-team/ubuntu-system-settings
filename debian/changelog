@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.1+13.10.20130809.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: clean up a bit, update info dynamically, add placeholde for
+    a charge graph.
+  * Depends on powerd | gnome-settings-daemon.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 247
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 09 Aug 2013 16:16:18 +0000
+
 ubuntu-system-settings (0.1+13.10.20130809-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
