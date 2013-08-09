@@ -30,21 +30,28 @@ class ConnMan : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool roamingAllowed READ roamingAllowed WRITE setRoamingAllowed NOTIFY roamingAllowedChanged)
+    Q_PROPERTY(bool powered READ powered WRITE setPowered NOTIFY poweredChanged)
 
 public:
     ConnMan();
     bool roamingAllowed() const;
     void setRoamingAllowed(const bool &st);
+    bool powered() const;
+    void setPowered(const bool &st);
 
 signals:
     void roamingAllowedChanged ();
+    void poweredChanged ();
+
 
 private slots:
     void onRoamingAllowedChanged(bool st);
+    void onPoweredChanged(bool st);
 
 private:
     OfonoConnMan *m;
     bool m_roam;
+    bool m_powered;
 };
 
 

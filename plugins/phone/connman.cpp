@@ -28,6 +28,10 @@ ConnMan::ConnMan()
 
     qDebug() << "ROAMING ALLOWED: " << m_roam;
 
+    QObject::connect(m, SIGNAL(poweredChanged(bool)), this, SLOT(onPoweredChanged(bool)));
+    m_powered = m->powered();
+    qDebug() << "POWERED: " << m_powered;
+
     /*
     if (m->modem()->isValid())
     {
@@ -56,4 +60,21 @@ void ConnMan::onRoamingAllowedChanged(bool st)
     m_roam = st;
     emit roamingAllowedChanged();
     qDebug() << "ROAMING ALLOWED: " << m_roam;
+}
+
+bool ConnMan::powered() const
+{
+    return m_powered;
+}
+
+void ConnMan::setPowered(const bool &st)
+{
+    m->setPowered(st);
+}
+
+void ConnMan::onPoweredChanged(bool st)
+{
+    m_powered = st;
+    emit poweredChanged();
+    qDebug() << "POWERED: " << m_powered;
 }

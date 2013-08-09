@@ -43,7 +43,7 @@ ItemPage {
     }
 
     property string carrierName: netreg.name
-    property bool cellData: netreg.technology ==  netreg.UnknownDataTechnology ? false : true
+    property bool cellData: netreg.powered
 
     Column {
         anchors.left: parent.left
@@ -95,9 +95,10 @@ ItemPage {
              * enabled: cellularDataControl.checked
              */
             enabled: false
-            values: [i18n.tr("2G only (saves battery)"),
+            values: [i18n.tr("Off"),
+                i18n.tr("2G only (saves battery)"),
                 i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: netreg.EdgeDataTechnology ? 0 : 1   
+            selectedIndex: netreg.EdgeDataTechnology ? 1 : 2
         }
 
         ListItem.Standard {
