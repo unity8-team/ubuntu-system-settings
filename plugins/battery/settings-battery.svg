@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg3289"
+   height="90"
+   width="90"
+   version="1.1"
+   enable-background="new"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="settings-battery.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1310"
+     inkscape:window-height="815"
+     id="namedview26"
+     showgrid="false"
+     inkscape:zoom="2.6222222"
+     inkscape:cx="45"
+     inkscape:cy="45"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3289" />
+  <defs
+     id="defs3291">
+    <filter
+       id="filter856">
+      <feBlend
+         mode="screen"
+         in2="BackgroundImage"
+         id="feBlend858" />
+    </filter>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3047-5">
+      <rect
+         x="951.5"
+         y="312"
+         width="13"
+         height="32.5"
+         style="opacity:.5;color:#000000;enable-background:accumulate;fill:#ff00ff"
+         id="rect3049-1" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3052-9">
+      <rect
+         x="1011.5"
+         y="314"
+         width="19"
+         height="27"
+         style="opacity:.67568;color:#000000;enable-background:accumulate;fill:#ff00ff"
+         id="rect3054-4" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3866-6">
+      <path
+         d="m964.5 366h2v2h-2zm0-19h2v2h-2zm-5.6406 2c-5.3594 0.0547-5.3594 0.5-5.3594 4v9c0 4 0 4 8 4h13c8 0 8 0 8-4v-9c0-4 0-4-8-4h-13c-1 0-1.88-0.01-2.64 0zm25.609 2.5312c0.021 0.44727 0.031 0.9286 0.031 1.4688v9c0 0.54015-0.01 1.0215-0.031 1.4688 0.392-0.0184 0.7323-0.0501 1.0312-0.0937v-11.75c-0.3-0.05-0.64-0.08-1.03-0.1zm1.0468 0.0937c0.2078 0.0309 0.395 0.0772 0.5625 0.125-0.17-0.04-0.36-0.08-0.56-0.12zm1.9219 2.0625c0.014 0.1415 0.039 0.27697 0.047 0.4375-0.02-0.15-0.04-0.29-0.05-0.43zm0.047 7.1875c-0.01 0.16053-0.033 0.29599-0.047 0.4375 0.01-0.14 0.04-0.28 0.04-0.44zm-1.4062 2.375c-0.1676 0.0478-0.3548 0.0941-0.5625 0.125 0.2-0.02 0.39-0.06 0.56-0.11z"
+         style="opacity:.67568;color:#000000;enable-background:accumulate;fill:#ff00ff"
+         id="path3868-9" />
+    </clipPath>
+  </defs>
+  <metadata
+     id="metadata3294">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0 -962.36)"
+     style="filter:url(#filter856)"
+     id="layer1">
+    <g
+       transform="translate(-789 604.36)"
+       id="g4451">
+      <g
+         transform="matrix(2,0,0,2,-1195,-252)"
+         id="g4401">
+        <rect
+           x="-1037"
+           y="305"
+           width="45"
+           height="45"
+           transform="scale(-1,1)"
+           style="fill:none"
+           id="rect4403-3" />
+        <path
+           d="m1009.5 317v2h-3c-1 0-1.875-0.008-2.6406 0-5.3594 0.0547-5.3594 0.5-5.3594 4v9c0 4 0 4 8 4h3v2h2v-2h8c8 0 8 0 8-4v-9c0-4 0-4-8-4h-8v-2h-2zm19.969 4.5312c0.021 0.44727 0.031 0.9286 0.031 1.4688v9c0 0.54015-0.01 1.0215-0.031 1.4688 0.3302-0.0155 0.6271-0.0453 0.8906-0.0781 0.049-0.006 0.093-0.009 0.1406-0.0156v-11.75c-0.043-0.006-0.096-0.01-0.1406-0.0156-0.3-0.03-0.6-0.06-0.9-0.08z"
+           style="opacity:.25;fill:#808080"
+           id="path3804" />
+        <path
+           d="m39 24v4h16c16 0 16 0 16 8v18c0 8 0 8-16 8h-16v4h16c18 0 20 0 20-12v-18c0-12-2-12-20-12h-16z"
+           transform="matrix(.5 0 0 .5 992 305)"
+           style="opacity:.5;fill:#808080"
+           id="path3810" />
+        <path
+           d="m1030.5 321.62v11.75c1.7155-0.25071 2-1.004 2-3.2969v-5.1562c0-2.28-0.3-3.03-2-3.29z"
+           style="opacity:.5;fill:#808080"
+           id="path3820" />
+        <path
+           d="m29 24c-18 0-20 0-20 12v18c0 12 2 12 20 12h6v-42h-6z"
+           transform="matrix(.5 0 0 .5 992 305)"
+           style="fill:#808080"
+           id="path3837" />
+      </g>
+    </g>
+  </g>
+  <g
+     style="display:none"
+     id="layer2">
+    <path
+       transform="matrix(2,0,0,2,-1894,-665.8)"
+       clip-path="url(#clipPath3866-6)"
+       d="m984.47 351.53c0.021 0.44727 0.031 0.9286 0.031 1.4688v9c0 0.54015-0.01 1.0215-0.031 1.4688 2.6419-0.12411 3.0312-0.69816 3.0312-3.3906v-5.1562c0-2.69-0.39-3.26-3.03-3.39zm-22.97-4.53c-9 0-10 0-10 6v9c0 6 1 6 10 6h13c9 0 10 0 10-6v-9c0-6-1-6-10-6z"
+       style="opacity:.25;filter:url(#filter856);fill:#808080;display:inline"
+       id="path3804-3" />
+    <path
+       transform="matrix(2,0,0,2,-1984,-605.8)"
+       clip-path="url(#clipPath3052-9)"
+       d="m1006.5 317c-9 0-10 0-10 6v9c0 6 1 6 10 6h13c9 0 10 0 10-6v-9c0-6-1-6-10-6h-13zm-2.6406 2c0.7656-0.008 1.6406 0 2.6406 0h13c8 0 8 0 8 4v9c0 4 0 4-8 4h-13c-8 0-8 0-8-4v-9c0-3.5 0-3.95 5.4-4z"
+       style="opacity:.5;filter:url(#filter856);fill:#808080;display:inline"
+       id="path3810-5" />
+    <path
+       d="m77 37.45v23.5c3.431-0.50142 4-2.0079 4-6.5938v-10.312c0-4.586-0.569-6.093-4-6.594z"
+       style="opacity:.5;filter:url(#filter856);fill:#808080;display:inline"
+       id="path3820-1" />
+    <path
+       transform="matrix(2,0,0,2,-1894,-605.8)"
+       clip-path="url(#clipPath3047-5)"
+       d="m961.5 317c-9 0-10 0-10 6v9c0 6 1 6 10 6h13c9 0 10 0 10-6v-9c0-6-1-6-10-6z"
+       style="filter:url(#filter856);fill:#808080;display:inline"
+       id="path3837-7" />
+  </g>
+</svg>
