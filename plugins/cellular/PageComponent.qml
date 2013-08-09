@@ -30,7 +30,6 @@ ItemPage {
     NetworkRegistration {
         id: netreg
         onModeChanged: {
-            console.log ("onModeChanged: " + mode);
             if (mode === "manual")
                 chooseCarrier.selectedIndex = 1;
             else
@@ -43,7 +42,6 @@ ItemPage {
     }
 
     property string carrierName: netreg.name
-    property bool cellData: netreg.powered
 
     Column {
         anchors.left: parent.left
@@ -71,34 +69,22 @@ ItemPage {
             }
         }
 
-        ListItem.Divider {}
-
-        ListItem.Standard {
-            text: i18n.tr("Cellular data")
-            control: Switch {
-                id: cellularDataControl
-                checked: cellData
-                /* FIXME: This is disabled since it is currently a 
-                 * read-only setting 
-                 */
-                enabled: false
-            }
-        }
-
         ListItem.ValueSelector {
             id: dataTypeSelector
             expanded: true
             // TODO: There is no way to have a ValueSelector always expanded
             onExpandedChanged: expanded = true
-            /* FIXME: This is disabled since it is currently a 
-             * read-only setting 
-             * enabled: cellularDataControl.checked
-             */
-            enabled: false
+            text: i18n.tr("Cellular data:")
             values: [i18n.tr("Off"),
                 i18n.tr("2G only (saves battery)"),
                 i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: netreg.EdgeDataTechnology ? 1 : 2
+            selectedIndex: !connMan.powered ? 0 : 2
+            onSelectedIndexChanged: {
+                if (selectedIndex == 0)
+                    connMan.powered = false;
+                else
+                    connMan.powered = true;
+            }
         }
 
         ListItem.Standard {
@@ -109,8 +95,6 @@ ItemPage {
                 onClicked: connMan.roamingAllowed = checked
             }
         }
-
-        ListItem.Divider {}
 
         ListItem.Standard {
             text: i18n.tr("Data usage statistics")
