@@ -43,8 +43,10 @@ ItemPage {
             expanded: true
             // TODO: There is no way to have a ValueSelector always expanded
             onExpandedChanged: expanded = true
+            enabled: netreg.mode != "auto-only"
             text: i18n.tr("Choose carrier:")
             values: [i18n.tr("Automatically"), i18n.tr("Manually")]
+            selectedIndex: netreg.mode == "manual" ? 1 : 0
         }
 
         ListItem.SingleValue {
