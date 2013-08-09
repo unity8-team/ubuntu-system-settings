@@ -47,7 +47,6 @@ ItemPage {
         var oS = new Array();
         for (var i in operators)
         {
-            console.log ("HERE: " + operators[i].name);
             oN.push(operators[i].name);
             oS.push(operators[i].status);
         }
@@ -60,25 +59,24 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-           ListItem.ValueSelector {
-                id: carrierSelector
-                expanded: true
-                // TODO: There is no way to have a ValueSelector always expanded
-                onExpandedChanged: expanded = true
-                /* FIXME: This is disabled since it is currently a
-                 * read-only setting
-                 * enabled: cellularDataControl.checked
-                 */
-                enabled: true
-                values: operatorNames
-                selectedIndex: curOp
-                onSelectedIndexChanged: {
-                    console.log ("CHANGED: " + operators[selectedIndex].name);
-                    operators[selectedIndex].registerOp();
-                }
+       ListItem.ValueSelector {
+            id: carrierSelector
+            expanded: true
+            // TODO: There is no way to have a ValueSelector always expanded
+            onExpandedChanged: expanded = true
+            /* FIXME: This is disabled since it is currently a
+             * read-only setting
+             * enabled: cellularDataControl.checked
+             */
+            enabled: true
+            values: operatorNames
+            selectedIndex: curOp
+            onSelectedIndexChanged: {
+                console.log ("CHANGED: " + operators[selectedIndex].name);
+                operators[selectedIndex].registerOp();
             }
+        }
     }
-
 
     ListItem.SingleControl {
         anchors.bottom: parent.bottom
@@ -98,7 +96,7 @@ ItemPage {
         running: scanning
     }
 
-    Text {
+    Label {
         anchors {
             top: activityIndicator.bottom
             topMargin: units.gu(2)
@@ -108,5 +106,3 @@ ItemPage {
         visible: activityIndicator.running
     }
 }
-
-

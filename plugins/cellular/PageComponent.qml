@@ -29,6 +29,13 @@ ItemPage {
 
     NetworkRegistration {
         id: netreg
+        onModeChanged: {
+            console.log ("onModeChanged: " + mode);
+            if (mode === "manual")
+                chooseCarrier.selectedIndex = 1;
+            else
+                chooseCarrier.selectedIndex = 0;
+        }
     }
 
     property string carrierName: netreg.name
@@ -86,8 +93,7 @@ ItemPage {
             enabled: false
             values: [i18n.tr("2G only (saves battery)"),
                 i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: netreg.EdgeDataTechnology ? 0 : 1
-            
+            selectedIndex: netreg.EdgeDataTechnology ? 0 : 1   
         }
 
         ListItem.Standard {
