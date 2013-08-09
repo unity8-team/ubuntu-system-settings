@@ -20,6 +20,11 @@
 #include "networkoperator.h"
 #include "networkregistration.h"
 
+/* A Wrapper class for OfonoNetworkRegistration
+ *
+ * This class provides properties and functions related to
+ * registration on the cellular network.
+ */
 NetworkRegistration::NetworkRegistration(QObject *parent) :
     QObject(parent)
 {
@@ -29,18 +34,30 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
         SIGNAL (nameChanged (const QString&)),
         this,
         SLOT (operatorNameChanged(const QString&)));
+    m_name = m_ofonoNetworkRegistration->name();
+    qDebug() << "NAME: " << m_name;
+
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (statusChanged (const QString&)),
         this,
         SLOT (operatorStatusChanged(const QString&)));
+    m_status = m_ofonoNetworkRegistration->status();
+    qDebug() << "STATUS: " << m_status;
+
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (modeChanged (const QString&)),
         this,
         SLOT (operatorModeChanged(const QString&)));
+    m_mode = m_ofonoNetworkRegistration->mode();
+    qDebug() << "MODE: " << m_mode;
+
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (technologyChanged (const QString&)),
         this,
         SLOT (operatorTechnologyChanged(const QString&)));
+    m_technology = technologyToInt(m_ofonoNetworkRegistration->technology());
+    qDebug() << "TECHNOLOGY: " << m_technology;
+
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (getOperatorsComplete (bool, const QStringList&)),
         this,
@@ -49,15 +66,7 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
         SIGNAL (scanComplete (bool, const QStringList&)),
         this,
         SLOT (operatorsUpdated(bool, const QStringList&)));
-
-    m_name = m_ofonoNetworkRegistration->name();
-    qDebug() << "NAME: " << m_name;
-    m_status = m_ofonoNetworkRegistration->status();
-    qDebug() << "STATUS: " << m_status;
-    m_mode = m_ofonoNetworkRegistration->mode();
-    qDebug() << "MODE: " << m_mode;
-    m_technology = technologyToInt(m_ofonoNetworkRegistration->technology());
-    qDebug() << "TECHNOLOGY: " << m_technology;
+    /* Populate the cache of operators */
     m_ofonoNetworkRegistration->getOperators();
 }
 
@@ -100,7 +109,10 @@ void NetworkRegistration::getOperators()
     m_ofonoNetworkRegistration->getOperators();
 }
 
-NetworkRegistration::CellDataTechnology NetworkRegistration::technologyToInt(const QString &technology)
+/* Converts the technology provided from ofono as a string to an enum.
+ * The possible values from ofono are: "gsm", "edge", "umts", "hspa", "lte"
+ */
+NetworkRegistration::CellDataTechnology technologyToInt(const QString &technology)
 {
     if (technology == QString(QStringLiteral("gprs")))
         return NetworkRegistration::GprsDataTechnology;
@@ -110,7 +122,6 @@ NetworkRegistration::CellDataTechnology NetworkRegistration::technologyToInt(con
         return NetworkRegistration::UmtsDataTechnology;
     else if (technology == QString(QStringLiteral("hspa")))
         return NetworkRegistration::HspaDataTechnology;
-
     return NetworkRegistration::UnknownDataTechnology;
 }
 
@@ -126,6 +137,7 @@ void NetworkRegistration::operatorNameChanged(const QString &name)
     emit nameChanged(m_name);
 }
 
+/* The current registration status of a modem. */
 QString NetworkRegistration::status() const
 {
     return m_status;
@@ -154,6 +166,17 @@ void NetworkRegistration::operatorModeChanged(const QString &mode)
     emit modeChanged(m_mode);
 }
 
+/* Contains the enum of the technology of the current network.
+ *
+ * The possible values are: "gsm", "edge", "umts", "hspa", "lte"
+ * The possible values are:
+ *      UnknownDataTechnology
+ *      GprsDataTechnology
+ *      EdgeDataTechnology
+ *      UmtsDataTechnology
+ *      HspaDataTechnology
+ *
+ */
 NetworkRegistration::CellDataTechnology NetworkRegistration::technology() const
 {
     return m_technology;
@@ -166,6 +189,7 @@ void NetworkRegistration::operatorTechnologyChanged(const QString &technology)
     emit technologyChanged(m_technology);
 }
 
+/* bool to show if there is a scan in progress */
 bool NetworkRegistration::scanning() const
 {
     return m_scanning;

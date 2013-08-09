@@ -44,14 +44,7 @@ NetworkOperator::NetworkOperator(const QString& operatorId, QObject *parent) :
 }
 
 /*
-NetworkOperator::NetworkOperator(const NetworkOperator& op)
-    : QObject(op.parent())
-{
-    new OfonoNetworkOperator(op);
-}
-*/
-
-NetworkOperator::CellDataTechnology NetworkOperator::technologyToInt(const QString &technology)
+NetworkOperator::CellDataTechnology technologyToInt(const QString &technology)
 {
     if (technology == QString(QStringLiteral("gprs")))
         return NetworkOperator::GprsDataTechnology;
@@ -64,6 +57,7 @@ NetworkOperator::CellDataTechnology NetworkOperator::technologyToInt(const QStri
 
     return NetworkOperator::UnknownDataTechnology;
 }
+*/
 
 QString NetworkOperator::name() const
 {

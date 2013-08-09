@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QtCore>
+#include "networkoperator.h"
 #include <ofononetworkregistration.h>
 
 class NetworkRegistration : public QObject
@@ -77,7 +78,6 @@ private:
     QString m_mode;
     QList<QObject*> m_operators;
     CellDataTechnology m_technology;
-    CellDataTechnology technologyToInt(const QString &technology);
     bool m_scanning;
     void populateOperators(QStringList);
 
@@ -89,5 +89,7 @@ private Q_SLOTS:
     void operatorTechnologyChanged(const QString &technology);
     void operatorsUpdated(bool success, const QStringList &oplist);
 };
+
+NetworkRegistration::CellDataTechnology technologyToInt(const QString &technology);
 
 #endif // NETWORKREGISTRATION_H

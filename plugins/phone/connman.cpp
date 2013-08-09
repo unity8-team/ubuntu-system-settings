@@ -20,6 +20,11 @@
 
 #include "connman.h"
 
+/* A Wrapper class for OfonoConnMan (ConnectionManager)
+ *
+ * This class provides properties related to data connectivity (not voice)
+ * via the modem
+ */
 ConnMan::ConnMan()
 {
     m = new OfonoConnMan(OfonoModem::AutomaticSelect, QString(), NULL);
@@ -31,20 +36,14 @@ ConnMan::ConnMan()
     QObject::connect(m, SIGNAL(poweredChanged(bool)), this, SLOT(onPoweredChanged(bool)));
     m_powered = m->powered();
     qDebug() << "POWERED: " << m_powered;
-
-    /*
-    if (m->modem()->isValid())
-    {
-        qDebug() << "Found valid modem";
-        qDebug() << m->name();
-
-    } else
-    {
-        qDebug() << "No modem found";
-    }
-    */
 }
 
+/* Contains whether data roaming is allowed.  In the off
+ * setting, if the packet radio registration state
+ * indicates that the modem is roaming, oFono will
+ * automatically detach and no further connection
+ * establishment will be possible.
+ */
 bool ConnMan::roamingAllowed() const
 {
     return m_roam;
@@ -62,6 +61,10 @@ void ConnMan::onRoamingAllowedChanged(bool st)
     qDebug() << "ROAMING ALLOWED: " << m_roam;
 }
 
+/* Controls whether packet radio use is allowed. Setting
+ * this value to off detaches the modem from the
+ * Packet Domain network.
+ */
 bool ConnMan::powered() const
 {
     return m_powered;

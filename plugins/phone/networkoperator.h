@@ -34,7 +34,6 @@ class NetworkOperator : public QObject
 
 public:
     NetworkOperator(const QString& operatorId, QObject *parent=0);
-    //NetworkOperator(const NetworkOperator& op);
     ~NetworkOperator();
 
     enum CellDataTechnology {
@@ -61,7 +60,6 @@ private:
     OfonoNetworkOperator *m_ofonoNetworkOperator;
     QString m_name;
     QString m_status;
-    CellDataTechnology technologyToInt(const QString &technology);
 
 private Q_SLOTS:
     void operatorNameChanged(const QString &name);
