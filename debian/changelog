@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+13.10.20130809-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: add new panel, mostly UI (with some backend work).
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 244
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 09 Aug 2013 07:02:03 +0000
+
 ubuntu-system-settings (0.1+13.10.20130808.2-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
