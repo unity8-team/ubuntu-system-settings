@@ -101,40 +101,11 @@ ItemPage {
         }
 
         ListItem.Standard {
-            text: i18n.tr("Call roaming")
-            control: Switch {
-                id: callRoamingControl
-                checked: connMan.roamingAllowed
-                onCheckedChanged: connMan.roamingAllowed = checked;
-            }
-        }
-
-        ListItem.Standard {
             text: i18n.tr("Data roaming")
             control: Switch {
                 id: dataRoamingControl
-                checked: false
-                onClicked: {
-                    if (!callRoamingControl.checked ||
-                            !cellularDataControl.checked)
-                        checked = false
-                }
-                Connections {
-                    target: callRoamingControl
-                    onCheckedChanged: {
-                        //TODO: Should recall previous state if true
-                        if (!callRoamingControl.checked)
-                            dataRoamingControl.checked = false
-                    }
-                }
-                Connections {
-                    target: cellularDataControl
-                    onCheckedChanged: {
-                        //TODO: Should recall previous state if true
-                        if (!cellularDataControl.checked)
-                            dataRoamingControl.checked = false
-                    }
-                }
+                checked: connMan.roamingAllowed
+                onClicked: connMan.roamingAllowed = checked
             }
         }
 
