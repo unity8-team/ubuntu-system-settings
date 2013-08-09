@@ -36,10 +36,8 @@ ItemPage {
     Component.onCompleted: { netreg.getOperators(); console.log ("operators: " + operators); }
 
     onOperatorsChanged: {
-        console.log("netreg.onOperatorsChanged");
         buildLists();
     }
-
 
     function buildLists()
     {
@@ -82,11 +80,8 @@ ItemPage {
         anchors.bottom: parent.bottom
         control: Button {
             width: parent.width - units.gu(4)
-            text: i18n.tr("Scan")
-            onTriggered: {
-                console.log ("Scanning");
-                netreg.scan();
-            }
+            text: i18n.tr("Refresh")
+            onTriggered: netreg.scan()
         }
     }
 
