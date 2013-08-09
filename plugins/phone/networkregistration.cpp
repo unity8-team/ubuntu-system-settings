@@ -25,7 +25,6 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
 {
     m_ofonoNetworkRegistration = new OfonoNetworkRegistration(OfonoModem::AutomaticSelect, QString(), this);
 
-
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (nameChanged (const QString&)),
         this,
@@ -34,6 +33,10 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
         SIGNAL (statusChanged (const QString&)),
         this,
         SLOT (operatorStatusChanged(const QString&)));
+    QObject::connect(m_ofonoNetworkRegistration,
+        SIGNAL (modeChanged (const QString&)),
+        this,
+        SLOT (operatorModeChanged(const QString&)));
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (technologyChanged (const QString&)),
         this,
@@ -51,6 +54,8 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
     qDebug() << "NAME: " << m_name;
     m_status = m_ofonoNetworkRegistration->status();
     qDebug() << "STATUS: " << m_status;
+    m_mode = m_ofonoNetworkRegistration->mode();
+    qDebug() << "MODE: " << m_mode;
     m_technology = technologyToInt(m_ofonoNetworkRegistration->technology());
     qDebug() << "TECHNOLOGY: " << m_technology;
     m_ofonoNetworkRegistration->getOperators();
@@ -131,6 +136,22 @@ void NetworkRegistration::operatorStatusChanged(const QString &status)
     m_status = status;
     qDebug() << "STATUS: " << m_status;
     emit statusChanged(m_status);
+}
+
+/* The network registration mode, possible values include: "auto",
+ * "auto-only", and "manual".  The mode changes from "auto" to
+ * "manual" when registerOp is called on an operator.
+ */
+QString NetworkRegistration::mode() const
+{
+    return m_mode;
+}
+
+void NetworkRegistration::operatorModeChanged(const QString &mode)
+{
+    m_mode = mode;
+    qDebug() << "MODE: " << m_mode;
+    emit modeChanged(m_mode);
 }
 
 NetworkRegistration::CellDataTechnology NetworkRegistration::technology() const
