@@ -66,7 +66,6 @@ ItemPage {
 
             ListItem.ValueSelector {
                 id: sleepSelector
-                text: "Standard"
                 expanded: true
                 // TODO: There is no way to have a ValueSelector always expanded
                 onExpandedChanged: expanded = true

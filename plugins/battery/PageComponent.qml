@@ -42,11 +42,29 @@ ItemPage {
     BatteryInfo {
         id: batteryInfo
 
-        monitorChargerType: true
-        monitorCurrentFlow: true
-        monitorRemainingChargingTime: true
         monitorChargingState: true
         monitorBatteryStatus: true
+
+        onChargingStateChanged: {
+            if (state === BatteryInfo.Charging) {
+                chargingEntry.text = i18n.tr("Charging now")
+                chargingEntry.value = ""
+
+            }
+            else {
+                chargingEntry.text = i18n.tr("Last full charge")
+                chargingEntry.value = i18n.tr("N/A")  // TODO: find a way to get that information
+            }
+        }
+        onRemainingCapacityChanged: {
+            if(batteryInfo.batteryCount > 0)
+                chargingLevel.value = i18n.tr("%1 %").arg((batteryInfo.remainingCapacity(0)/batteryInfo.maximumCapacity(0)*100).toFixed(0))
+        }
+
+        Component.onCompleted: {
+            onChargingStateChanged(0, chargingState(0))
+            onRemainingCapacityChanged(0, remainingCapacity(0))
+        }
     }
 
     Flickable {
@@ -60,21 +78,36 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.SingleValue {
+                id: chargingLevel
                 text: i18n.tr("Charge level")
-                value: {
-                    if (batteryInfo.chargingState(0) === BatteryInfo.Charging)
-                        return i18n.tr("Charging now")
-                    else
-                        return (batteryInfo.batteryCount > 0) ?
-                                    i18n.tr("%1 %").arg(batteryInfo.remainingCapacity(0)/batteryInfo.maximumCapacity(0)*100) : i18n.tr("N/A")
-                }
+                value: i18n.tr("N/A")
                 showDivider: false
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Last full charge")
-                value: i18n.tr("N/A") // TODO: find a way to get that information
+                id: chargingEntry
                 showDivider: false
+            }
+
+            Canvas {
+                id: canvas
+                width:parent.width - units.gu(4)
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: units.gu(15)
+
+                onPaint:{
+                    var ctx = canvas.getContext('2d');
+                    ctx.save();
+                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+                    ctx.beginPath();
+                    ctx.strokeStyle = UbuntuColors.lightAubergine
+                    ctx.lineWidth = units.dp(3)
+                    ctx.moveTo(1, 0)
+                    ctx.lineTo(1, height)
+                    ctx.lineTo(width, height)
+                    ctx.stroke()
+                    ctx.restore();
+                }
             }
 
             // TODO: add charge stats
