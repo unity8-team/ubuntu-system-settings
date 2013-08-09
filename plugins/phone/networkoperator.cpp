@@ -22,43 +22,28 @@
 NetworkOperator::NetworkOperator(const QString& operatorId, QObject *parent) :
     QObject(parent)
 {
-    qDebug() << "operatorId: " << operatorId;
     m_ofonoNetworkOperator = new OfonoNetworkOperator(operatorId);
 
-    m_name = m_ofonoNetworkOperator->name();
-    qDebug() << "NAME: " << m_name;
-    m_status = m_ofonoNetworkOperator->status();
-    qDebug() << "STATUS: " << m_status;
     QObject::connect(m_ofonoNetworkOperator,
         SIGNAL (nameChanged (const QString&)),
         this,
         SLOT (operatorNameChanged(const QString&)));
+    m_name = m_ofonoNetworkOperator->name();
+
+
     QObject::connect(m_ofonoNetworkOperator,
         SIGNAL (statusChanged (const QString&)),
         this,
         SLOT (operatorStatusChanged(const QString&)));
+        m_status = m_ofonoNetworkOperator->status();
+
     QObject::connect(m_ofonoNetworkOperator,
         SIGNAL (registerComplete (bool)),
         this,
         SLOT (operatorRegisterComplete(bool)));
 }
 
-/*
-NetworkOperator::CellDataTechnology technologyToInt(const QString &technology)
-{
-    if (technology == QString(QStringLiteral("gprs")))
-        return NetworkOperator::GprsDataTechnology;
-    else if (technology == QString(QStringLiteral("edge")))
-        return NetworkOperator::EdgeDataTechnology;
-    else if (technology == QString(QStringLiteral("umts")))
-        return NetworkOperator::UmtsDataTechnology;
-    else if (technology == QString(QStringLiteral("hspa")))
-        return NetworkOperator::HspaDataTechnology;
-
-    return NetworkOperator::UnknownDataTechnology;
-}
-*/
-
+/* Contains the name of the operator */
 QString NetworkOperator::name() const
 {
     return m_name;
@@ -67,10 +52,10 @@ QString NetworkOperator::name() const
 void NetworkOperator::operatorNameChanged(const QString &name)
 {
     m_name = name;
-    qDebug() << "NAME: " << m_name;
     emit nameChanged(m_name);
 }
 
+/* Contains the status of the operator */
 QString NetworkOperator::status() const
 {
     return m_status;
@@ -79,26 +64,17 @@ QString NetworkOperator::status() const
 void NetworkOperator::operatorStatusChanged(const QString &status)
 {
     m_status = status;
-    qDebug() << "STATUS: " << m_status;
     emit statusChanged(m_status);
 }
 
+/* Registers on the operator's network */
 void NetworkOperator::registerOp()
 {
-    qDebug() << "Registering on " << m_name;
     m_ofonoNetworkOperator->registerOp();
 }
 
 void NetworkOperator::operatorRegisterComplete(bool success)
 {
-    if (success)
-    {
-        qDebug() << "operatorRegisterComplete: SUCCESS";
-    }
-    else
-    {
-        qDebug() << "operatorRegisterComplete: FAILED " << m_ofonoNetworkOperator->errorMessage();
-    }
     emit registerComplete(success, m_ofonoNetworkOperator->errorMessage());
 }
 

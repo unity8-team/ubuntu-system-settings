@@ -23,9 +23,7 @@
 SimManager::SimManager(QObject *parent) :
     QObject(parent)
 {
-
     m_ofonoSimManager = new OfonoSimManager(OfonoModem::AutomaticSelect, QString(), this);
-
     m_present = m_ofonoSimManager->present();
 
     populateServiceNumbers(m_ofonoServiceNumbers);
@@ -38,7 +36,6 @@ SimManager::SimManager(QObject *parent) :
         SIGNAL (presenceChanged (bool)),
         this,
         SLOT (simPresenceChanged (bool)));
-
 }
 
 void SimManager::populateServiceNumbers (OfonoServiceNumbers sn)

@@ -31,11 +31,8 @@ ConnMan::ConnMan()
     QObject::connect(m, SIGNAL(roamingAllowedChanged(bool)), this, SLOT(onRoamingAllowedChanged(bool)));
     m_roam = m->roamingAllowed();
 
-    qDebug() << "ROAMING ALLOWED: " << m_roam;
-
     QObject::connect(m, SIGNAL(poweredChanged(bool)), this, SLOT(onPoweredChanged(bool)));
     m_powered = m->powered();
-    qDebug() << "POWERED: " << m_powered;
 }
 
 /* Contains whether data roaming is allowed.  In the off
@@ -58,7 +55,6 @@ void ConnMan::onRoamingAllowedChanged(bool st)
 {
     m_roam = st;
     emit roamingAllowedChanged();
-    qDebug() << "ROAMING ALLOWED: " << m_roam;
 }
 
 /* Controls whether packet radio use is allowed. Setting
@@ -79,5 +75,4 @@ void ConnMan::onPoweredChanged(bool st)
 {
     m_powered = st;
     emit poweredChanged();
-    qDebug() << "POWERED: " << m_powered;
 }

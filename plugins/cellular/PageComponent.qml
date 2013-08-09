@@ -35,6 +35,18 @@ ItemPage {
             else
                 chooseCarrier.selectedIndex = 0;
         }
+        Component.onCompleted: {
+            /* NetworkRegistration provides an enum for data technology,
+             * including:
+             *     UnknownDataTechnology
+             *     GprsDataTechnology
+             *     EdgeDataTechnology
+             *     UmtsDataTechnology
+             *     HspaDataTechnology
+             */
+            if (technology == NetworkRegistration.UnknownDataTechnology)
+                console.log ("Unknown data technology");
+        }
     }
 
     ConnMan {

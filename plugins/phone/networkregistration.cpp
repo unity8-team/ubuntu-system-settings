@@ -35,28 +35,24 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
         this,
         SLOT (operatorNameChanged(const QString&)));
     m_name = m_ofonoNetworkRegistration->name();
-    qDebug() << "NAME: " << m_name;
 
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (statusChanged (const QString&)),
         this,
         SLOT (operatorStatusChanged(const QString&)));
     m_status = m_ofonoNetworkRegistration->status();
-    qDebug() << "STATUS: " << m_status;
 
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (modeChanged (const QString&)),
         this,
         SLOT (operatorModeChanged(const QString&)));
     m_mode = m_ofonoNetworkRegistration->mode();
-    qDebug() << "MODE: " << m_mode;
 
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (technologyChanged (const QString&)),
         this,
         SLOT (operatorTechnologyChanged(const QString&)));
     m_technology = technologyToInt(m_ofonoNetworkRegistration->technology());
-    qDebug() << "TECHNOLOGY: " << m_technology;
 
     QObject::connect(m_ofonoNetworkRegistration,
         SIGNAL (getOperatorsComplete (bool, const QStringList&)),
@@ -70,7 +66,10 @@ NetworkRegistration::NetworkRegistration(QObject *parent) :
     m_ofonoNetworkRegistration->getOperators();
 }
 
-
+/* A QList<QObject*> of NetworkOperator instances
+ *
+ * This list is cached, to force a refresh you must call the scan function
+ */
 QVariant NetworkRegistration::operators() const
 {
     return QVariant::fromValue(m_operators);
@@ -78,13 +77,11 @@ QVariant NetworkRegistration::operators() const
 
 void NetworkRegistration::populateOperators (QStringList oplist)
 {
-
     m_operators.clear();
     foreach(QString i, oplist)
     {
         m_operators.append(new NetworkOperator(i));
     }
-
 }
 
 void NetworkRegistration::operatorsUpdated(bool success, const QStringList &oplist)
@@ -93,11 +90,16 @@ void NetworkRegistration::operatorsUpdated(bool success, const QStringList &opli
     if (success)
     {
         populateOperators(oplist);
-        qDebug() << "operatorsUpdated: " << oplist;
         emit operatorsChanged();
     }
 }
 
+/* Scans cellular network for available operators
+ *
+ * Important note:  While scanning is in progress, all
+ * connectivity is disabled.
+ *
+ */
 void NetworkRegistration::scan()
 {
     this->setScanning(true);
@@ -125,6 +127,7 @@ NetworkRegistration::CellDataTechnology technologyToInt(const QString &technolog
     return NetworkRegistration::UnknownDataTechnology;
 }
 
+/* Contains the name of the operator currently register */
 QString NetworkRegistration::name() const
 {
     return m_name;
@@ -133,7 +136,6 @@ QString NetworkRegistration::name() const
 void NetworkRegistration::operatorNameChanged(const QString &name)
 {
     m_name = name;
-    qDebug() << "NAME: " << m_name;
     emit nameChanged(m_name);
 }
 
@@ -146,7 +148,6 @@ QString NetworkRegistration::status() const
 void NetworkRegistration::operatorStatusChanged(const QString &status)
 {
     m_status = status;
-    qDebug() << "STATUS: " << m_status;
     emit statusChanged(m_status);
 }
 
@@ -162,13 +163,11 @@ QString NetworkRegistration::mode() const
 void NetworkRegistration::operatorModeChanged(const QString &mode)
 {
     m_mode = mode;
-    qDebug() << "MODE: " << m_mode;
     emit modeChanged(m_mode);
 }
 
 /* Contains the enum of the technology of the current network.
  *
- * The possible values are: "gsm", "edge", "umts", "hspa", "lte"
  * The possible values are:
  *      UnknownDataTechnology
  *      GprsDataTechnology
@@ -185,7 +184,6 @@ NetworkRegistration::CellDataTechnology NetworkRegistration::technology() const
 void NetworkRegistration::operatorTechnologyChanged(const QString &technology)
 {
     m_technology = technologyToInt(technology);
-    qDebug() << "TECHNOLOGY: " << m_technology;
     emit technologyChanged(m_technology);
 }
 
