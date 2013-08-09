@@ -41,8 +41,18 @@ uri = Ubuntu.SystemSettings.Phone
 INCLUDEPATH += .
 
 # Input
-HEADERS += plugin.h phoneservices.h simservice.h
-SOURCES += plugin.cpp phoneservices.cpp simservice.cpp
+HEADERS += plugin.h \
+    connman.h \
+    simservice.h \
+    simmanager.h \
+    networkoperator.h \
+    networkregistration.h
+SOURCES += plugin.cpp \
+    connman.cpp \
+    simservice.cpp \
+    simmanager.cpp \
+    networkoperator.cpp \
+    networkregistration.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)

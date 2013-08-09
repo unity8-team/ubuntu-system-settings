@@ -21,23 +21,83 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 
 
 ItemPage {
     title: i18n.tr("Carrier")
+    property var netreg
+    property variant operators: netreg.operators
+    property bool scanning: netreg.scanning
+    property variant operatorNames
+    property variant operatorStatus
+    property int curOp
+
+    Component.onCompleted: { netreg.getOperators(); console.log ("operators: " + operators); }
+
+    onOperatorsChanged: {
+        buildLists();
+    }
+
+    function buildLists()
+    {
+        var oN = new Array();
+        var oS = new Array();
+        for (var i in operators)
+        {
+            oN.push(operators[i].name);
+            oS.push(operators[i].status);
+        }
+        curOp = oS.indexOf("current");
+        operatorNames = oN;
+        operatorStatus = oS;
+    }
+
+    Column {
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+       ListItem.ValueSelector {
+            id: carrierSelector
+            expanded: true
+            // TODO: There is no way to have a ValueSelector always expanded
+            onExpandedChanged: expanded = true
+            /* FIXME: This is disabled since it is currently a
+             * read-only setting
+             * enabled: cellularDataControl.checked
+             */
+            enabled: true
+            values: operatorNames
+            selectedIndex: curOp
+            onSelectedIndexChanged: {
+                console.log ("CHANGED: " + operators[selectedIndex].name);
+                operators[selectedIndex].registerOp();
+            }
+        }
+    }
+
+    ListItem.SingleControl {
+        anchors.bottom: parent.bottom
+        control: Button {
+            width: parent.width - units.gu(4)
+            text: i18n.tr("Refresh")
+            onTriggered: netreg.scan()
+        }
+    }
 
     ActivityIndicator {
         id: activityIndicator
         anchors.centerIn: parent
-        running: true
+        running: scanning
     }
 
-    Text {
+    Label {
         anchors {
             top: activityIndicator.bottom
             topMargin: units.gu(2)
             horizontalCenter: activityIndicator.horizontalCenter
         }
         text: i18n.tr("Searching")
+        visible: activityIndicator.running
     }
 }
