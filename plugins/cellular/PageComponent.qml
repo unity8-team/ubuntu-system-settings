@@ -38,6 +38,10 @@ ItemPage {
         }
     }
 
+    ConnMan {
+        id: connMan
+    }
+
     property string carrierName: netreg.name
     property bool cellData: netreg.technology ==  netreg.UnknownDataTechnology ? false : true
 
@@ -100,7 +104,8 @@ ItemPage {
             text: i18n.tr("Call roaming")
             control: Switch {
                 id: callRoamingControl
-                checked: true
+                checked: connMan.roamingAllowed
+                onCheckedChanged: connMan.roamingAllowed = checked;
             }
         }
 
