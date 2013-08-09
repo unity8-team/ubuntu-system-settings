@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-05 18:12+0200\n"
-"PO-Revision-Date: 2013-08-05 17:12+0000\n"
+"POT-Creation-Date: 2013-08-08 18:37+0200\n"
+"PO-Revision-Date: 2013-08-08 18:48+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-06 05:06+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-09 05:37+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -26,6 +26,8 @@ msgid "Serial"
 msgstr "Sarjanumero"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
+#: ../plugins/battery/PageComponent.qml:69
+#: ../plugins/battery/PageComponent.qml:76
 #: ../plugins/cellular/PageComponent.qml:56
 msgid "N/A"
 msgstr "–"
@@ -43,6 +45,9 @@ msgid "Last updated"
 msgstr "Viimeksi päivitetty"
 
 #: ../plugins/about/PageComponent.qml:98
+#: ../plugins/battery/PageComponent.qml:129
+#: ../plugins/battery/PageComponent.qml:134
+#: ../plugins/battery/SleepValues.qml:78
 msgid "Never"
 msgstr "Ei koskaan"
 
@@ -144,6 +149,73 @@ msgstr "Sama tausta molemmissa"
 msgid "Different background for each"
 msgstr "Eri tausta kummassakin"
 
+#: ../plugins/battery/PageComponent.qml:31 ../.build/settings.js:4
+msgid "Battery"
+msgstr "Akku"
+
+#: ../plugins/battery/PageComponent.qml:63
+msgid "Charge level"
+msgstr "Varaustaso"
+
+#: ../plugins/battery/PageComponent.qml:66
+msgid "Charging now"
+msgstr "Ladataan nyt"
+
+#: ../plugins/battery/PageComponent.qml:69
+#, qt-format
+msgid "%1 %"
+msgstr "%1 %"
+
+#: ../plugins/battery/PageComponent.qml:75
+msgid "Last full charge"
+msgstr "Viimeisin täysi lataus"
+
+#: ../plugins/battery/PageComponent.qml:83
+msgid "Ways to reduce battery use:"
+msgstr "Tapoja vähentää akun käyttöä:"
+
+#: ../plugins/battery/PageComponent.qml:87
+msgid "Display brightness"
+msgstr "Näytön kirkkaus"
+
+#: ../plugins/battery/PageComponent.qml:124
+#: ../plugins/battery/SleepValues.qml:31
+msgid "Auto sleep"
+msgstr "Automaattinen lepotila"
+
+#: ../plugins/battery/PageComponent.qml:128
+#: ../plugins/battery/PageComponent.qml:133
+#: ../plugins/battery/SleepValues.qml:73 ../plugins/battery/SleepValues.qml:74
+#: ../plugins/battery/SleepValues.qml:75 ../plugins/battery/SleepValues.qml:76
+#: ../plugins/battery/SleepValues.qml:77
+#, qt-format
+msgid "After %1 minutes"
+msgstr "%1 minuutin jälkeen"
+
+#: ../plugins/battery/PageComponent.qml:141 ../.build/settings.js:19
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../plugins/battery/PageComponent.qml:149 ../.build/settings.js:5
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../plugins/battery/PageComponent.qml:157 ../.build/settings.js:10
+msgid "GPS"
+msgstr "GPS"
+
+#: ../plugins/battery/PageComponent.qml:165
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "Tarkka sijainnin havaitsemien vaatii GPS:n ja/tai wifin."
+
+#: ../plugins/battery/SleepValues.qml:64
+msgid "Put the display to sleep when idle"
+msgstr "Aseta näyttö lepotilaan puhelimen ollessa käyttämättömänä"
+
+#: ../plugins/battery/SleepValues.qml:88
+msgid "Videos and some apps may keep the phone awake."
+msgstr "Videot ja jotkin sovellukset saattavat estää puhelimen lepotilan."
+
 #: ../plugins/cellular/ChooseCarrier.qml:27
 #: ../plugins/cellular/PageComponent.qml:55
 msgid "Carrier"
@@ -153,7 +225,7 @@ msgstr "Operaattori"
 msgid "Searching"
 msgstr "Etsitään"
 
-#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:6
+#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
 msgid "Cellular"
 msgstr "Matkapuhelin"
 
@@ -226,7 +298,7 @@ msgstr "Nykyiset asettelut:"
 msgid "All layouts available:"
 msgstr "Kaikki saatavilla olevat asettelut:"
 
-#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:10
+#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:11
 msgid "Language & Text"
 msgstr "Kieli ja teksti"
 
@@ -315,7 +387,7 @@ msgstr ""
 "Mahdollistaa uuden puhelun soittamisen tai vastaamisen saapuvaan puheluun, "
 "kun meneillään on jo puhelu."
 
-#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:12
+#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:13
 msgid "Phone"
 msgstr "Puhelin"
 
@@ -344,7 +416,7 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "Pyyhi ja nollaa kaikki"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
 msgid "Reset phone"
 msgstr "Nollaa puhelin"
 
@@ -398,7 +470,7 @@ msgstr "Vain puhelimesta"
 msgid "Phone and Internet"
 msgstr "Puhelimesta ja internetistä"
 
-#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:14
+#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
 msgid "Security & Privacy"
 msgstr "Turvallisuus ja yksityisyys"
 
@@ -406,7 +478,7 @@ msgstr "Turvallisuus ja yksityisyys"
 msgid "Diagnostics"
 msgstr "Diagnostiikka"
 
-#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:16
 msgid "Sound"
 msgstr "Ääni"
 
@@ -516,7 +588,7 @@ msgstr "Aseta aikavyöhyke:"
 msgid "No matching place"
 msgstr "Ei vastaavaa paikkaa"
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
 msgid "Time & Date"
 msgstr "Aika ja päiväys"
 
@@ -548,34 +620,22 @@ msgstr "Järjestelmä"
 msgid "Accessibility"
 msgstr "Esteettömyys"
 
-#: ../.build/settings.js:4
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../.build/settings.js:5
+#: ../.build/settings.js:6
 msgid "Brightness"
 msgstr "Kirkkaus"
 
-#: ../.build/settings.js:7
+#: ../.build/settings.js:8
 msgid "Example"
 msgstr "Esimerkki"
 
-#: ../.build/settings.js:8
+#: ../.build/settings.js:9
 msgid "Flight mode"
 msgstr "Lentokonetila"
 
-#: ../.build/settings.js:9
-msgid "GPS"
-msgstr "GPS"
-
-#: ../.build/settings.js:11
+#: ../.build/settings.js:12
 msgid "Rotation lock"
 msgstr "Kääntölukitus"
 
-#: ../.build/settings.js:16
+#: ../.build/settings.js:17
 msgid "Updates"
 msgstr "Päivitykset"
-
-#: ../.build/settings.js:18
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
