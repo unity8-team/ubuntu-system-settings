@@ -19,8 +19,11 @@
 */
 
 #include "battery.h"
+#include <glib.h>
+#include <libupower-glib/upower.h>
 #include <QEvent>
 #include <QDBusReply>
+#include <QPair>
 
 Battery::Battery(QObject *parent) :
     QObject(parent),
@@ -41,6 +44,69 @@ Battery::Battery(QObject *parent) :
 bool Battery::powerdRunning()
 {
     return m_powerdRunning;
+}
+
+QString Battery::deviceString() {
+    UpClient *client;
+    gboolean returnIsOk;
+    GPtrArray *devices;
+    UpDevice *device;
+    UpDeviceKind kind;
+
+    client = up_client_new ();
+    returnIsOk = up_client_enumerate_devices_sync (client, NULL, NULL);
+
+    if(!returnIsOk)
+        return QString("");
+
+    devices = up_client_get_devices (client);
+
+    for (uint i=0; i < devices->len; i++) {
+        device = (UpDevice *)g_ptr_array_index (devices, i);
+        g_object_get (device, "kind", &kind, NULL);
+        if (kind == UP_DEVICE_KIND_BATTERY) {
+            QString deviceId(up_device_get_object_path (device));
+            g_ptr_array_unref (devices);
+            g_object_unref (client);
+            return deviceId;
+        }
+    }
+
+    g_ptr_array_unref (devices);
+    g_object_unref (client);
+    return QString("");
+}
+
+/* TODO: refresh values over time for dynamic update */
+QVariantList Battery::getHistory(const QString &deviceString, const int timespan, const int resolution) const
+{
+    UpDevice *device;
+    UpHistoryItem *item;
+    GPtrArray *values;
+    gint32 offset = 0;
+    GTimeVal timeval;
+    QVariantList listValues;
+
+    g_get_current_time (&timeval);
+    offset = timeval.tv_sec;
+
+    device = up_device_new ();
+    up_device_set_object_path_sync (device, deviceString.toStdString().c_str(), NULL, NULL);
+    values = up_device_get_history_sync (device, "charge", timespan, resolution, NULL, NULL);
+    for (uint i=0; i < values->len; i++) {
+        QVariantMap listItem;
+        item = (UpHistoryItem *) g_ptr_array_index (values, i);
+
+        if (up_history_item_get_state (item) == UP_DEVICE_STATE_UNKNOWN)
+            continue;
+
+        listItem.insert("time",((gint32) up_history_item_get_time (item) - offset));
+        listItem.insert("value",up_history_item_get_value (item));
+        listValues += listItem;
+    }
+
+    g_object_unref (device);
+    return listValues;
 }
 
 Battery::~Battery() {

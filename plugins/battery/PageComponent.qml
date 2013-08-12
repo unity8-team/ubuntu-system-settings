@@ -102,17 +102,33 @@ ItemPage {
                     ctx.save();
                     ctx.clearRect(0, 0, canvas.width, canvas.height)
                     ctx.beginPath();
+
+                    /* Display the axis in aubergine color */
                     ctx.strokeStyle = UbuntuColors.lightAubergine
                     ctx.lineWidth = units.dp(3)
                     ctx.moveTo(1, 0)
                     ctx.lineTo(1, height)
                     ctx.lineTo(width, height)
                     ctx.stroke()
+
+                    /* Display the charge history in orange color */
+                    ctx.lineWidth = units.dp(1)
+                    ctx.strokeStyle = UbuntuColors.orange
+
+                    /* Get infos from battery0, on a day (60*24*24=86400 seconds), with 150 points on the graph */
+                    var chargeDatas = batteryBackend.getHistory(batteryBackend.deviceString, 86400, 150)
+
+                    /* time is the offset in seconds compared to the current time (negative value)
+                       we display the charge on a day, which is 86400 seconds, the value is the %
+                       the coordinates are adjusted to the canvas, top,left is 0,0 */
+                    ctx.moveTo((86400+chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
+                    for (var i=1; i < chargeDatas.length; i++) {
+                        ctx.lineTo((86400+chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
+                    }
+                    ctx.stroke()
                     ctx.restore();
                 }
             }
-
-            // TODO: add charge stats
 
             ListItem.Standard {
                 text: i18n.tr("Ways to reduce battery use:")
