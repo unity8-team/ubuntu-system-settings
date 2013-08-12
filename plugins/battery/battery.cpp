@@ -33,6 +33,8 @@ Battery::Battery(QObject *parent) :
                    "com.canonical.powerd",
                    m_systemBusConnection)
 {
+    m_device = up_device_new ();
+
     if (!m_powerdIface.isValid()) {
         m_powerdRunning = false;
         return;
@@ -80,7 +82,6 @@ QString Battery::deviceString() {
 /* TODO: refresh values over time for dynamic update */
 QVariantList Battery::getHistory(const QString &deviceString, const int timespan, const int resolution) const
 {
-    UpDevice *device;
     UpHistoryItem *item;
     GPtrArray *values;
     gint32 offset = 0;
@@ -89,10 +90,8 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
 
     g_get_current_time (&timeval);
     offset = timeval.tv_sec;
-
-    device = up_device_new ();
-    up_device_set_object_path_sync (device, deviceString.toStdString().c_str(), NULL, NULL);
-    values = up_device_get_history_sync (device, "charge", timespan, resolution, NULL, NULL);
+    up_device_set_object_path_sync (m_device, deviceString.toStdString().c_str(), NULL, NULL);
+    values = up_device_get_history_sync (m_device, "charge", timespan, resolution, NULL, NULL);
     for (uint i=0; i < values->len; i++) {
         QVariantMap listItem;
         item = (UpHistoryItem *) g_ptr_array_index (values, i);
@@ -105,9 +104,9 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         listValues += listItem;
     }
 
-    g_object_unref (device);
     return listValues;
 }
 
 Battery::~Battery() {
+    g_object_unref (m_device);
 }

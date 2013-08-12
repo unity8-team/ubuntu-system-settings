@@ -25,6 +25,8 @@
 #include <QObject>
 #include <QProcess>
 
+#include <libupower-glib/upower.h>
+
 class Battery : public QObject
 {
     Q_OBJECT
@@ -48,6 +50,7 @@ private:
     QString m_objectPath;
     QDBusInterface m_powerdIface;
     bool m_powerdRunning;
+    UpDevice *m_device;
 };
 
 #endif // BATTERY_H
