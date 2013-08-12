@@ -31,7 +31,6 @@ ItemPage {
     title: i18n.tr("Auto sleep")
     flickable: scrollWidget
 
-    /* TODO: hack to support testing on desktop better, to drop later */
     property bool runTouch
 
     GSettings {
