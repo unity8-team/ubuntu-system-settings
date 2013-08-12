@@ -25,23 +25,32 @@
 #include <QObject>
 #include <QProcess>
 
+#include <libupower-glib/upower.h>
+
 class Battery : public QObject
 {
     Q_OBJECT
     Q_PROPERTY( bool powerdRunning
                 READ powerdRunning
                 CONSTANT)
-    
+
+    Q_PROPERTY( QString deviceString
+                READ deviceString
+                CONSTANT)
+
 public:
     explicit Battery(QObject *parent = 0);
     ~Battery();
     bool powerdRunning();
+    QString deviceString();
+    Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution) const;
 
 private:
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;
     QDBusInterface m_powerdIface;
     bool m_powerdRunning;
+    UpDevice *m_device;
 };
 
 #endif // BATTERY_H
