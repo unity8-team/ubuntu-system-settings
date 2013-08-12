@@ -21,9 +21,10 @@
 import GSettings 1.0
 import QtQuick 2.0
 import QtSystemInfo 5.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import SystemSettings 1.0
+import Ubuntu.SystemSettings.Battery 1.0
 
 ItemPage {
     id: root
@@ -31,12 +32,9 @@ ItemPage {
     title: i18n.tr("Battery")
     flickable: scrollWidget
 
-    /* TODO: hack to support testing on desktop better, to drop later */
-    property bool runTouch: true
-
     GSettings {
         id: powerSettings
-        schema.id: runTouch ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
+        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
     }
 
     BatteryInfo {
@@ -65,6 +63,10 @@ ItemPage {
             onChargingStateChanged(0, chargingState(0))
             onRemainingCapacityChanged(0, remainingCapacity(0))
         }
+    }
+
+    UbuntuBatteryPanel {
+        id: batteryBackend
     }
 
     Flickable {
@@ -156,7 +158,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Auto sleep")
                 value: {
-                    if (runTouch) {
+                    if (batteryBackend.powerdRunning ) {
                         return (powerSettings.activityTimeout != 0) ?
                                     i18n.tr("After %1 minutes").arg(Math.round(powerSettings.activityTimeout/60)) :
                                     i18n.tr("Never")
@@ -168,7 +170,7 @@ ItemPage {
                     }
                 }
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SleepValues.qml"), {runTouch: runTouch})
+                onClicked: pageStack.push(Qt.resolvedUrl("SleepValues.qml"), {usePowerd: batteryBackend.powerdRunning })
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
