@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.1+13.10.20130812-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: add a cpp backend, use it to check if powerd is running, if
+    it's running use it, if not fallback to gnome-settings-daemon. That
+    should let us handle both touch and desktop without manual hacks.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 252
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 12 Aug 2013 14:35:58 +0000
+
 ubuntu-system-settings (0.1+13.10.20130809.1-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

@@ -31,19 +31,18 @@ ItemPage {
     title: i18n.tr("Auto sleep")
     flickable: scrollWidget
 
-    /* TODO: hack to support testing on desktop better, to drop later */
-    property bool runTouch
+    property bool usePowerd
 
     GSettings {
         id: powerSettings
-        schema.id: runTouch ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
+        schema.id: usePowerd ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
         onChanged: {
             if([60,120,180,240,300].indexOf(value) != -1)
                 if (key == "activityTimeout" || key == "sleepDisplayBattery")
                     sleepSelector.selectedIndex = (value/60)-1
         }
         Component.onCompleted: {
-            if (runTouch)
+            if (usePowerd)
                 sleepSelector.selectedIndex = (powerSettings.activityTimeout === 0) ? 5 : powerSettings.activityTimeout/60-1
             else
                 sleepSelector.selectedIndex = (powerSettings.sleepDisplayBattery === 0) ? 5 : powerSettings.sleepDisplayBattery/60-1
@@ -76,7 +75,7 @@ ItemPage {
                     i18n.tr("After %1 minutes").arg(5),
                     i18n.tr("Never")]
                 onSelectedIndexChanged: {
-                  if (runTouch)
+                  if (usePowerd)
                     powerSettings.activityTimeout = (selectedIndex == 5) ? 0 : (selectedIndex+1)*60
                   else
                     powerSettings.sleepDisplayBattery = (selectedIndex == 5) ? 0 : (selectedIndex+1)*60
