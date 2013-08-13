@@ -30,7 +30,8 @@ INSTALLS += image
 # C++ bits
 TARGET = UbuntuBatteryPanel
 QT += qml quick dbus
-CONFIG += qt plugin no_keywords
+CONFIG += qt plugin no_keywords link_pkgconfig
+PKGCONFIG += glib-2.0 upower-glib
 
 #comment in the following line to enable traces
 #DEFINES += QT_NO_DEBUG_OUTPUT
