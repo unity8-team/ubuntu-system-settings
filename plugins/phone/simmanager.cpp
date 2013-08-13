@@ -17,15 +17,13 @@
  *
 */
 
-#include "phoneservices.h"
+#include "simmanager.h"
 #include "simservice.h"
 
-PhoneServices::PhoneServices(QObject *parent) :
+SimManager::SimManager(QObject *parent) :
     QObject(parent)
 {
-
     m_ofonoSimManager = new OfonoSimManager(OfonoModem::AutomaticSelect, QString(), this);
-
     m_present = m_ofonoSimManager->present();
 
     populateServiceNumbers(m_ofonoServiceNumbers);
@@ -38,10 +36,9 @@ PhoneServices::PhoneServices(QObject *parent) :
         SIGNAL (presenceChanged (bool)),
         this,
         SLOT (simPresenceChanged (bool)));
-
 }
 
-void PhoneServices::populateServiceNumbers (OfonoServiceNumbers sn)
+void SimManager::populateServiceNumbers (OfonoServiceNumbers sn)
 {
 
     if (m_ofonoSimManager->modem()->isValid())
@@ -60,28 +57,28 @@ void PhoneServices::populateServiceNumbers (OfonoServiceNumbers sn)
     }
 }
 
-bool PhoneServices::present() const
+bool SimManager::present() const
 {
     return m_present;
 }
 
-QVariant PhoneServices::serviceNumbers()
+QVariant SimManager::serviceNumbers()
 {
     return QVariant::fromValue(m_serviceNumbers);
 }
 
-void PhoneServices::simPresenceChanged(bool ispresent)
+void SimManager::simPresenceChanged(bool ispresent)
 {
     m_present = ispresent;
     emit presenceChanged(m_present);
 }
 
-void PhoneServices::simServiceNumbersChanged(OfonoServiceNumbers sn)
+void SimManager::simServiceNumbersChanged(OfonoServiceNumbers sn)
 {
     populateServiceNumbers(sn);
     emit serviceNumbersChanged();
 }
 
-PhoneServices::~PhoneServices()
+SimManager::~SimManager()
 {
 }
