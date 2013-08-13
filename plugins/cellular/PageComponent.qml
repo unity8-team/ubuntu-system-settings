@@ -19,24 +19,41 @@
  */
 
 import QtQuick 2.0
-import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Phone 1.0
 
 ItemPage {
     title: i18n.tr("Cellular")
 
-    NetworkInfo {
-        id: netinfo;
-        monitorNetworkName: true
-        monitorCurrentCellDataTechnology: true
-        onNetworkNameChanged: carrierName = netinfo.networkName(NetworkInfo.GsmMode, 0)
-        onCurrentCellDataTechnologyChanged: netinfo.currentCellDataTechnology(0) == NetworkInfo.UnknownDataTechnology ? false : true
+    NetworkRegistration {
+        id: netReg
+        onModeChanged: {
+            if (mode === "manual")
+                chooseCarrier.selectedIndex = 1;
+            else
+                chooseCarrier.selectedIndex = 0;
+        }
+        Component.onCompleted: {
+            /* NetworkRegistration provides an enum for data technology,
+             * including:
+             *     UnknownDataTechnology
+             *     GprsDataTechnology
+             *     EdgeDataTechnology
+             *     UmtsDataTechnology
+             *     HspaDataTechnology
+             */
+            if (technology == NetworkRegistration.UnknownDataTechnology)
+                console.log ("Unknown data technology");
+        }
     }
 
-    property string carrierName: netinfo.networkName(NetworkInfo.GsmMode, 0)
-    property bool cellData: netinfo.currentCellDataTechnology(0) == NetworkInfo.UnknownDataTechnology ? false : true
+    ConnMan {
+        id: connMan
+    }
+
+    property string carrierName: netReg.name
 
     Column {
         anchors.left: parent.left
@@ -47,8 +64,10 @@ ItemPage {
             expanded: true
             // TODO: There is no way to have a ValueSelector always expanded
             onExpandedChanged: expanded = true
+            enabled: netReg.mode != "auto-only"
             text: i18n.tr("Choose carrier:")
             values: [i18n.tr("Automatically"), i18n.tr("Manually")]
+            selectedIndex: netReg.mode == "manual" ? 1 : 0
         }
 
         ListItem.SingleValue {
@@ -58,21 +77,7 @@ ItemPage {
             progression: enabled
             onClicked: {
                 if (enabled)
-                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"))
-            }
-        }
-
-        ListItem.Divider {}
-
-        ListItem.Standard {
-            text: i18n.tr("Cellular data")
-            control: Switch {
-                id: cellularDataControl
-                checked: cellData
-                /* FIXME: This is disabled since it is currently a 
-                 * read-only setting 
-                 */
-                enabled: false
+                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
             }
         }
 
@@ -81,22 +86,16 @@ ItemPage {
             expanded: true
             // TODO: There is no way to have a ValueSelector always expanded
             onExpandedChanged: expanded = true
-            /* FIXME: This is disabled since it is currently a 
-             * read-only setting 
-             * enabled: cellularDataControl.checked
-             */
-            enabled: false
-            values: [i18n.tr("2G only (saves battery)"),
+            text: i18n.tr("Cellular data:")
+            values: [i18n.tr("Off"),
+                i18n.tr("2G only (saves battery)"),
                 i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: netinfo.EdgeData ? 0 : 1
-            
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Call roaming")
-            control: Switch {
-                id: callRoamingControl
-                checked: true
+            selectedIndex: !connMan.powered ? 0 : 2
+            onSelectedIndexChanged: {
+                if (selectedIndex == 0)
+                    connMan.powered = false;
+                else
+                    connMan.powered = true;
             }
         }
 
@@ -104,32 +103,10 @@ ItemPage {
             text: i18n.tr("Data roaming")
             control: Switch {
                 id: dataRoamingControl
-                checked: false
-                onClicked: {
-                    if (!callRoamingControl.checked ||
-                            !cellularDataControl.checked)
-                        checked = false
-                }
-                Connections {
-                    target: callRoamingControl
-                    onCheckedChanged: {
-                        //TODO: Should recall previous state if true
-                        if (!callRoamingControl.checked)
-                            dataRoamingControl.checked = false
-                    }
-                }
-                Connections {
-                    target: cellularDataControl
-                    onCheckedChanged: {
-                        //TODO: Should recall previous state if true
-                        if (!cellularDataControl.checked)
-                            dataRoamingControl.checked = false
-                    }
-                }
+                checked: connMan.roamingAllowed
+                onClicked: connMan.roamingAllowed = checked
             }
         }
-
-        ListItem.Divider {}
 
         ListItem.Standard {
             text: i18n.tr("Data usage statistics")

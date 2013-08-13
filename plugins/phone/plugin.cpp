@@ -21,14 +21,17 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
-#include "phoneservices.h"
-
+#include "connman.h"
+#include "simmanager.h"
+#include "networkregistration.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Phone"));
     
-    qmlRegisterType<PhoneServices>(uri, 1, 0, "UbuntuPhonePanel");
+    qmlRegisterType<SimManager>(uri, 1, 0, "SimManager");
+    qmlRegisterType<NetworkRegistration>(uri, 1, 0, "NetworkRegistration");
+    qmlRegisterType<ConnMan>(uri, 1, 0, "ConnMan");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
