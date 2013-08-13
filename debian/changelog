@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.1+13.10.20130813-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: get battery id and charge history from upower, display it
+    in the graph.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 254
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 13 Aug 2013 03:14:46 +0000
+
 ubuntu-system-settings (0.1+13.10.20130812-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
