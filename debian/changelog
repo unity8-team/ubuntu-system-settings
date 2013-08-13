@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+13.10.20130813.1-0ubuntu1) saucy; urgency=low
+
+  [ Ken VanDine ]
+  * Implement most of the cellular panel.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 256
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 13 Aug 2013 18:52:53 +0000
+
 ubuntu-system-settings (0.1+13.10.20130813-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
