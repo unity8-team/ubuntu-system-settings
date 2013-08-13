@@ -21,9 +21,10 @@
 import GSettings 1.0
 import QtQuick 2.0
 import QtSystemInfo 5.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import SystemSettings 1.0
+import Ubuntu.SystemSettings.Battery 1.0
 
 ItemPage {
     id: root
@@ -31,12 +32,9 @@ ItemPage {
     title: i18n.tr("Battery")
     flickable: scrollWidget
 
-    /* TODO: hack to support testing on desktop better, to drop later */
-    property bool runTouch: true
-
     GSettings {
         id: powerSettings
-        schema.id: runTouch ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
+        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
     }
 
     BatteryInfo {
@@ -65,6 +63,10 @@ ItemPage {
             onChargingStateChanged(0, chargingState(0))
             onRemainingCapacityChanged(0, remainingCapacity(0))
         }
+    }
+
+    UbuntuBatteryPanel {
+        id: batteryBackend
     }
 
     Flickable {
@@ -100,17 +102,33 @@ ItemPage {
                     ctx.save();
                     ctx.clearRect(0, 0, canvas.width, canvas.height)
                     ctx.beginPath();
+
+                    /* Display the axis in aubergine color */
                     ctx.strokeStyle = UbuntuColors.lightAubergine
                     ctx.lineWidth = units.dp(3)
                     ctx.moveTo(1, 0)
                     ctx.lineTo(1, height)
                     ctx.lineTo(width, height)
                     ctx.stroke()
+
+                    /* Display the charge history in orange color */
+                    ctx.lineWidth = units.dp(1)
+                    ctx.strokeStyle = UbuntuColors.orange
+
+                    /* Get infos from battery0, on a day (60*24*24=86400 seconds), with 150 points on the graph */
+                    var chargeDatas = batteryBackend.getHistory(batteryBackend.deviceString, 86400, 150)
+
+                    /* time is the offset in seconds compared to the current time (negative value)
+                       we display the charge on a day, which is 86400 seconds, the value is the %
+                       the coordinates are adjusted to the canvas, top,left is 0,0 */
+                    ctx.moveTo((86400+chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
+                    for (var i=1; i < chargeDatas.length; i++) {
+                        ctx.lineTo((86400+chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
+                    }
+                    ctx.stroke()
                     ctx.restore();
                 }
             }
-
-            // TODO: add charge stats
 
             ListItem.Standard {
                 text: i18n.tr("Ways to reduce battery use:")
@@ -156,7 +174,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Auto sleep")
                 value: {
-                    if (runTouch) {
+                    if (batteryBackend.powerdRunning ) {
                         return (powerSettings.activityTimeout != 0) ?
                                     i18n.tr("After %1 minutes").arg(Math.round(powerSettings.activityTimeout/60)) :
                                     i18n.tr("Never")
@@ -168,7 +186,7 @@ ItemPage {
                     }
                 }
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SleepValues.qml"), {runTouch: runTouch})
+                onClicked: pageStack.push(Qt.resolvedUrl("SleepValues.qml"), {usePowerd: batteryBackend.powerdRunning })
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")

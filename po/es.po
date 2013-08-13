@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-08 18:37+0200\n"
-"PO-Revision-Date: 2013-08-02 15:23+0000\n"
+"PO-Revision-Date: 2013-08-09 18:37+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-09 05:37+0000\n"
+"X-Launchpad-Export-Date: 2013-08-10 05:39+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -134,7 +134,7 @@ msgstr "Pantalla de bienvenida"
 #: ../plugins/background/MainPage.qml:80
 #: ../plugins/background/MainPage.qml:110
 msgid "Choose background"
-msgstr ""
+msgstr "Elija el fondo"
 
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
@@ -151,15 +151,15 @@ msgstr "Fondo distinto para ambas"
 
 #: ../plugins/battery/PageComponent.qml:31 ../.build/settings.js:4
 msgid "Battery"
-msgstr ""
+msgstr "Batería"
 
 #: ../plugins/battery/PageComponent.qml:63
 msgid "Charge level"
-msgstr ""
+msgstr "Nivel de carga"
 
 #: ../plugins/battery/PageComponent.qml:66
 msgid "Charging now"
-msgstr ""
+msgstr "Cargando ahora"
 
 #: ../plugins/battery/PageComponent.qml:69
 #, qt-format
@@ -168,15 +168,15 @@ msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:75
 msgid "Last full charge"
-msgstr ""
+msgstr "Última carga completa"
 
 #: ../plugins/battery/PageComponent.qml:83
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "Formas de reducir el uso de la batería:"
 
 #: ../plugins/battery/PageComponent.qml:87
 msgid "Display brightness"
-msgstr ""
+msgstr "Brillo de la pantalla"
 
 #: ../plugins/battery/PageComponent.qml:124
 #: ../plugins/battery/SleepValues.qml:31
@@ -190,7 +190,7 @@ msgstr ""
 #: ../plugins/battery/SleepValues.qml:77
 #, qt-format
 msgid "After %1 minutes"
-msgstr ""
+msgstr "Tras %1 minutos"
 
 #: ../plugins/battery/PageComponent.qml:141 ../.build/settings.js:19
 msgid "Wi-Fi"
@@ -582,7 +582,7 @@ msgstr "Zona horaria"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:34
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Definir el huso horario:"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:91
 msgid "No matching place"
@@ -598,7 +598,7 @@ msgstr "Zona horaria:"
 
 #: ../plugins/time-date/PageComponent.qml:63
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Definir la hora y la fecha:"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"

@@ -27,3 +27,37 @@ image.files = settings-battery.svg
 image.path = $${PLUGIN_MANIFEST_DIR}/icons
 INSTALLS += image
 
+# C++ bits
+TARGET = UbuntuBatteryPanel
+QT += qml quick dbus
+CONFIG += qt plugin no_keywords link_pkgconfig
+PKGCONFIG += glib-2.0 upower-glib
+
+#comment in the following line to enable traces
+#DEFINES += QT_NO_DEBUG_OUTPUT
+
+TARGET = $$qtLibraryTarget($$TARGET)
+uri = Ubuntu.SystemSettings.Battery
+
+INCLUDEPATH += .
+
+# Input
+HEADERS += plugin.h battery.h
+SOURCES += plugin.cpp battery.cpp
+
+# Install path for the plugin
+installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)
+target.path = $$installPath
+INSTALLS += target
+
+# find files
+QMLDIR_FILE = qmldir
+
+# make visible to qt creator
+OTHER_FILES += $$QMLDIR_FILE
+
+# create install targets for files
+qmldir.path = $$installPath
+qmldir.files = $$QMLDIR_FILE
+
+INSTALLS += qmldir

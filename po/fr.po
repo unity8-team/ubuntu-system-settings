@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-08 18:37+0200\n"
-"PO-Revision-Date: 2013-07-26 16:45+0000\n"
+"PO-Revision-Date: 2013-08-10 09:59+0000\n"
 "Last-Translator: Hélion du Mas des Bourboux <helion331990@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-09 05:37+0000\n"
+"X-Launchpad-Export-Date: 2013-08-11 05:01+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 "Language: \n"
 
@@ -43,14 +43,14 @@ msgstr "Système d'exploitation"
 
 #: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
-msgstr ""
+msgstr "Dernière mise à jour"
 
 #: ../plugins/about/PageComponent.qml:98
 #: ../plugins/battery/PageComponent.qml:129
 #: ../plugins/battery/PageComponent.qml:134
 #: ../plugins/battery/SleepValues.qml:78
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
@@ -82,7 +82,7 @@ msgstr "Films"
 
 #: ../plugins/about/Storage.qml:38
 msgid "Audio"
-msgstr ""
+msgstr "Son"
 
 #: ../plugins/about/Storage.qml:39
 msgid "Pictures"
@@ -135,7 +135,7 @@ msgstr "Écran de bienvenue"
 #: ../plugins/background/MainPage.qml:80
 #: ../plugins/background/MainPage.qml:110
 msgid "Choose background"
-msgstr ""
+msgstr "Choisir l'arrière plan"
 
 #: ../plugins/background/MainPage.qml:95
 #: ../plugins/background/MainPage.qml:110
@@ -152,24 +152,24 @@ msgstr "Arrière-plan différent pour chacun"
 
 #: ../plugins/battery/PageComponent.qml:31 ../.build/settings.js:4
 msgid "Battery"
-msgstr ""
+msgstr "Batterie"
 
 #: ../plugins/battery/PageComponent.qml:63
 msgid "Charge level"
-msgstr ""
+msgstr "Niveau de chargement"
 
 #: ../plugins/battery/PageComponent.qml:66
 msgid "Charging now"
-msgstr ""
+msgstr "En charge"
 
 #: ../plugins/battery/PageComponent.qml:69
 #, qt-format
 msgid "%1 %"
-msgstr ""
+msgstr "%1 %"
 
 #: ../plugins/battery/PageComponent.qml:75
 msgid "Last full charge"
-msgstr ""
+msgstr "Dernier chargement complet"
 
 #: ../plugins/battery/PageComponent.qml:83
 msgid "Ways to reduce battery use:"
@@ -182,7 +182,7 @@ msgstr ""
 #: ../plugins/battery/PageComponent.qml:124
 #: ../plugins/battery/SleepValues.qml:31
 msgid "Auto sleep"
-msgstr ""
+msgstr "Mise en veille automatique"
 
 #: ../plugins/battery/PageComponent.qml:128
 #: ../plugins/battery/PageComponent.qml:133
@@ -191,7 +191,7 @@ msgstr ""
 #: ../plugins/battery/SleepValues.qml:77
 #, qt-format
 msgid "After %1 minutes"
-msgstr ""
+msgstr "Après %1 minutes"
 
 #: ../plugins/battery/PageComponent.qml:141 ../.build/settings.js:19
 msgid "Wi-Fi"
@@ -216,15 +216,16 @@ msgstr ""
 #: ../plugins/battery/SleepValues.qml:88
 msgid "Videos and some apps may keep the phone awake."
 msgstr ""
+"Les vidéos et certaines applications peuvent garder le téléphone éveillé."
 
 #: ../plugins/cellular/ChooseCarrier.qml:27
 #: ../plugins/cellular/PageComponent.qml:55
 msgid "Carrier"
-msgstr ""
+msgstr "Fournisseur"
 
 #: ../plugins/cellular/ChooseCarrier.qml:41
 msgid "Searching"
-msgstr ""
+msgstr "Recherche en cours"
 
 #: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
 msgid "Cellular"
@@ -232,7 +233,7 @@ msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:50
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Choisir le fournisseur :"
 
 #: ../plugins/cellular/PageComponent.qml:51
 #: ../plugins/time-date/ChooseTimeZone.qml:35
@@ -246,15 +247,15 @@ msgstr "Manuellement"
 
 #: ../plugins/cellular/PageComponent.qml:68
 msgid "Cellular data"
-msgstr ""
+msgstr "Données du téléphone"
 
 #: ../plugins/cellular/PageComponent.qml:89
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "2G uniquement (économise la batterie)"
 
 #: ../plugins/cellular/PageComponent.qml:90
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (plus rapide)"
 
 #: ../plugins/cellular/PageComponent.qml:96
 msgid "Call roaming"
@@ -272,7 +273,7 @@ msgstr "Données sur les statistiques d'utilisation"
 #: ../plugins/language/DisplayLanguage.qml:49
 #: ../plugins/language/PageComponent.qml:48
 msgid "Display language"
-msgstr ""
+msgstr "Afficher la langue"
 
 #: ../plugins/language/DisplayLanguage.qml:84
 #: ../plugins/phone/CallForwarding.qml:113
@@ -284,34 +285,34 @@ msgstr "Annuler"
 
 #: ../plugins/language/DisplayLanguage.qml:99
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #: ../plugins/language/KeyboardLayouts.qml:29
 #: ../plugins/language/PageComponent.qml:57
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "Agencements du clavier"
 
 #: ../plugins/language/KeyboardLayouts.qml:42
 msgid "Current layouts:"
-msgstr ""
+msgstr "Agencements actuels :"
 
 #: ../plugins/language/KeyboardLayouts.qml:58
 msgid "All layouts available:"
-msgstr ""
+msgstr "Tous les agencements disponibles :"
 
 #: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:11
 msgid "Language & Text"
-msgstr ""
+msgstr "Langue et texte"
 
 #: ../plugins/language/PageComponent.qml:67
 #: ../plugins/language/SpellChecking.qml:29
 #: ../plugins/language/SpellChecking.qml:42
 msgid "Spell checking"
-msgstr ""
+msgstr "Vérification orthographique"
 
 #: ../plugins/language/PageComponent.qml:75
 msgid "Auto correction"
-msgstr ""
+msgstr "Correction automatique"
 
 #: ../plugins/language/PageComponent.qml:80
 msgid "Auto completion"
@@ -319,7 +320,7 @@ msgstr ""
 
 #: ../plugins/language/PageComponent.qml:87
 msgid "Auto capitalization"
-msgstr ""
+msgstr "Majuscules automatiques"
 
 #: ../plugins/language/PageComponent.qml:92
 msgid "Turns on Shift to capitalize the first letter of each sentence."
@@ -327,12 +328,14 @@ msgstr ""
 
 #: ../plugins/language/PageComponent.qml:98
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Ponctuation automatique"
 
 #: ../plugins/language/PageComponent.qml:103
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Ajoute un point, un guillemet ou une parenthèse manquante lorsque vous tapez "
+"deux fois sur Espace."
 
 #: ../plugins/language/SpellChecking.qml:49
 msgid "Current spelling languages:"
@@ -340,46 +343,52 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:62
 msgid "All languages available:"
-msgstr ""
+msgstr "Toutes les langues disponibles :"
 
 #: ../plugins/phone/CallForwarding.qml:27
 #: ../plugins/phone/CallForwarding.qml:60
 #: ../plugins/phone/PageComponent.qml:48
 msgid "Call forwarding"
-msgstr ""
+msgstr "Redirection d'appels"
 
 #: ../plugins/phone/CallForwarding.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"Redirige les appels vers un autre numéro lorsque vous ne répondez pas, que "
+"votre téléphone est occupé, éteint ou hors de porté."
 
 #: ../plugins/phone/CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
+"Le statut de redirection d'appels ne peut être vérifié maintenant. Veuillez "
+"ressayer plus tard."
 
 #: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
-msgstr ""
+msgstr "Rediriger vers"
 
 #: ../plugins/phone/CallForwarding.qml:113
 msgid "Contacts…"
-msgstr ""
+msgstr "Contacts…"
 
 #: ../plugins/phone/CallForwarding.qml:113
 msgid "Set"
-msgstr ""
+msgstr "Valider"
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:54
 msgid "Call waiting"
-msgstr ""
+msgstr "Appel en attente"
 
 #: ../plugins/phone/CallWaiting.qml:67
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
+"Vous permet de répondre ou de commencer un nouvel appel alors que vous êtes "
+"en ligne et vous permet de basculer entre ces appels."
 
 #: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:13
 msgid "Phone"
@@ -387,12 +396,12 @@ msgstr "Téléphone"
 
 #: ../plugins/phone/PageComponent.qml:31
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #: ../plugins/phone/PageComponent.qml:62 ../plugins/phone/Services.qml:29
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "%1 services"
 
 #: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
@@ -446,23 +455,23 @@ msgstr "Réinitialiser le lanceur et l'écran de bienvenue"
 #: ../plugins/security-privacy/Dash.qml:29
 #: ../plugins/security-privacy/PageComponent.qml:58
 msgid "Dash search"
-msgstr ""
+msgstr "Recherche dans le tableau de bord"
 
 #: ../plugins/security-privacy/Dash.qml:48
 msgid "Return results from:"
-msgstr ""
+msgstr "Renvoyer les résultats du :"
 
 #: ../plugins/security-privacy/Dash.qml:53
 #: ../plugins/security-privacy/PageComponent.qml:42
 #: ../plugins/security-privacy/PageComponent.qml:59
 msgid "Phone only"
-msgstr ""
+msgstr "Téléphone uniquement"
 
 #: ../plugins/security-privacy/Dash.qml:53
 #: ../plugins/security-privacy/PageComponent.qml:40
 #: ../plugins/security-privacy/PageComponent.qml:59
 msgid "Phone and Internet"
-msgstr ""
+msgstr "Téléphone et d'Internet"
 
 #: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
 msgid "Security & Privacy"
@@ -470,7 +479,7 @@ msgstr "Sécurité et vie privée"
 
 #: ../plugins/security-privacy/PageComponent.qml:65
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostics"
 
 #: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:16
 msgid "Sound"
@@ -494,19 +503,19 @@ msgstr "Vibrer en mode silencieux"
 
 #: ../plugins/sound/PageComponent.qml:75
 msgid "Other sounds:"
-msgstr ""
+msgstr "Autre sons :"
 
 #: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
 msgid "Message received"
-msgstr ""
+msgstr "Message reçu"
 
 #: ../plugins/sound/PageComponent.qml:88
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "Sons du clavier"
 
 #: ../plugins/sound/PageComponent.qml:93
 msgid "Lock sound"
-msgstr ""
+msgstr "Son du verrouillage"
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
@@ -518,7 +527,7 @@ msgstr "Arrêter la lecture"
 
 #: ../plugins/system-update/PageComponent.qml:32
 msgid "Update phone"
-msgstr ""
+msgstr "Mettre à jour le téléphone"
 
 #: ../plugins/system-update/PageComponent.qml:113
 msgid "Congrats! You are already up to date!"
@@ -526,21 +535,22 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:115
 msgid "A new version is available!"
-msgstr ""
+msgstr "Une nouvelle version est disponible !"
 
 #: ../plugins/system-update/PageComponent.qml:116
 msgid "Checking latest available system version…"
 msgstr ""
+"Vérification de la dernière version disponible du système en cours..."
 
 #: ../plugins/system-update/PageComponent.qml:153
 #, qt-format
 msgid "You can update from version %1 to version %2"
-msgstr ""
+msgstr "Vous pouvez mettre à jour depuis la version %1 vers la version %2"
 
 #: ../plugins/system-update/PageComponent.qml:156
 #, qt-format
 msgid "Size of this update: %1"
-msgstr ""
+msgstr "Taille de cette mise à jour : %1"
 
 #: ../plugins/system-update/PageComponent.qml:160
 msgid "This update will:"
@@ -548,39 +558,39 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:170
 msgid "Apply?"
-msgstr ""
+msgstr "Appliquer ?"
 
 #: ../plugins/system-update/PageComponent.qml:175
 msgid "Update your phone"
-msgstr ""
+msgstr "Mettre à jour votre téléphone"
 
 #: ../plugins/system-update/PageComponent.qml:181
 msgid "Cancel update"
-msgstr ""
+msgstr "Annuler la mise à jour"
 
 #: ../plugins/system-update/PageComponent.qml:187
 msgid "Reboot your phone now"
-msgstr ""
+msgstr "Redémarrer votre téléphone maintenant"
 
 #: ../plugins/system-update/PageComponent.qml:203
 msgid "We are deeply sorry"
-msgstr ""
+msgstr "Nous sommes vraiment désolés"
 
 #: ../plugins/system-update/PageComponent.qml:204
 msgid "The update failed. Please try again later"
-msgstr ""
+msgstr "La mise à jour a échoué. Veuillez essayer de nouveau une autre fois."
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "Fuseau horaire"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:34
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Régler le fuseau horaire :"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:91
 msgid "No matching place"
-msgstr ""
+msgstr "Aucun lieu ne correspond"
 
 #: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
 msgid "Time & Date"
@@ -592,7 +602,7 @@ msgstr "Fuseau horaire :"
 
 #: ../plugins/time-date/PageComponent.qml:63
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Définir la date et l'heure :"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
