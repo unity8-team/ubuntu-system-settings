@@ -18,22 +18,22 @@
  *
 */
 
-#ifndef PHONESERVICES_H
-#define PHONESERVICES_H
+#ifndef SIMMANAGER_H
+#define SIMMANAGER_H
 
 #include <QObject>
 #include <QtCore>
 #include <ofonosimmanager.h>
 
-class PhoneServices : public QObject
+class SimManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY ( QVariant serviceNumbers READ serviceNumbers NOTIFY serviceNumbersChanged )
     Q_PROPERTY ( bool present READ present NOTIFY presenceChanged )
 
 public:
-    explicit PhoneServices(QObject *parent = 0);
-    ~PhoneServices();
+    explicit SimManager(QObject *parent = 0);
+    ~SimManager();
 
     /* Properties */
     QVariant serviceNumbers();
@@ -55,4 +55,4 @@ private Q_SLOTS:
     void simPresenceChanged(bool ispresent);
 };
 
-#endif // PHONESERVICES_H
+#endif // SIMMANAGER_H

@@ -35,5 +35,4 @@ ItemPage {
             text: i18n.tr("Call")
         }
     }
-
 }
