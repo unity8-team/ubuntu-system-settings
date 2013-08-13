@@ -28,7 +28,7 @@ ItemPage {
     title: i18n.tr("Cellular")
 
     NetworkRegistration {
-        id: netreg
+        id: netReg
         onModeChanged: {
             if (mode === "manual")
                 chooseCarrier.selectedIndex = 1;
@@ -53,7 +53,7 @@ ItemPage {
         id: connMan
     }
 
-    property string carrierName: netreg.name
+    property string carrierName: netReg.name
 
     Column {
         anchors.left: parent.left
@@ -64,10 +64,10 @@ ItemPage {
             expanded: true
             // TODO: There is no way to have a ValueSelector always expanded
             onExpandedChanged: expanded = true
-            enabled: netreg.mode != "auto-only"
+            enabled: netReg.mode != "auto-only"
             text: i18n.tr("Choose carrier:")
             values: [i18n.tr("Automatically"), i18n.tr("Manually")]
-            selectedIndex: netreg.mode == "manual" ? 1 : 0
+            selectedIndex: netReg.mode == "manual" ? 1 : 0
         }
 
         ListItem.SingleValue {
@@ -77,7 +77,7 @@ ItemPage {
             progression: enabled
             onClicked: {
                 if (enabled)
-                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netreg: netreg})
+                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
             }
         }
 

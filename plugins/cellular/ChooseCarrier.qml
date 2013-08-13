@@ -26,14 +26,12 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     title: i18n.tr("Carrier")
-    property var netreg
-    property variant operators: netreg.operators
-    property bool scanning: netreg.scanning
+    property var netReg
+    property variant operators: netReg.operators
+    property bool scanning: netReg.scanning
     property variant operatorNames
     property variant operatorStatus
     property int curOp
-
-    Component.onCompleted: { netreg.getOperators(); console.log ("operators: " + operators); }
 
     onOperatorsChanged: {
         buildLists();
@@ -70,7 +68,6 @@ ItemPage {
             values: operatorNames
             selectedIndex: curOp
             onSelectedIndexChanged: {
-                console.log ("CHANGED: " + operators[selectedIndex].name);
                 operators[selectedIndex].registerOp();
             }
         }
@@ -81,7 +78,7 @@ ItemPage {
         control: Button {
             width: parent.width - units.gu(4)
             text: i18n.tr("Refresh")
-            onTriggered: netreg.scan()
+            onTriggered: netReg.scan()
         }
     }
 
