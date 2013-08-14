@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=MeetUbuntu
+Comment=My project description
+Exec=/usr/bin/qmlscene $@ /usr/share/MeetUbuntu/MeetUbuntu.qml
+Icon=qmlscene
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
