@@ -32,6 +32,27 @@ ItemPage {
     title: i18n.tr("Battery")
     flickable: scrollWidget
 
+    property bool isCharging
+
+    function timeDeltaString(timeDelta) {
+        if (timeDelta === 1)
+            return i18n.tr("1 second ago")
+        if (timeDelta < 60)
+            return i18n.tr("%1 seconds ago").arg(Math.round(timeDelta))
+        if (timeDelta === 60)
+            return i18n.tr("1 minute ago")
+        if (timeDelta > 60 && timeDelta < 3600)
+            return i18n.tr("%1 minutes ago").arg(Math.round(timeDelta/60))
+        if (timeDelta === 3600)
+            return i18n.tr("1 hour ago")
+        if (timeDelta > 3600 && timeDelta < 86400)
+            return i18n.tr("%1 hours ago").arg(Math.round(timeDelta/3600))
+        if (timeDelta === 86400)
+            return i18n.tr("1 day ago")
+        if (timeDelta > 86400)
+            return i18n.tr("%1 days ago").arg(Math.round(timeDelta/86400))
+    }
+
     GSettings {
         id: powerSettings
         schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
@@ -46,12 +67,15 @@ ItemPage {
         onChargingStateChanged: {
             if (state === BatteryInfo.Charging) {
                 chargingEntry.text = i18n.tr("Charging now")
-                chargingEntry.value = ""
-
+                isCharging = true
             }
-            else {
+            else if (state === BatteryInfo.Discharging) {
                 chargingEntry.text = i18n.tr("Last full charge")
-                chargingEntry.value = i18n.tr("N/A")  // TODO: find a way to get that information
+                isCharging = false
+            }
+            else if (state === BatteryInfo.Full || state === BatteryInfo.NotCharging) {
+                chargingEntry.text = i18n.tr("Fully charged")
+                isCharging = true
             }
         }
         onRemainingCapacityChanged: {
@@ -88,6 +112,8 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: chargingEntry
+                value: isCharging ?
+                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
                 showDivider: false
             }
 
@@ -112,7 +138,7 @@ ItemPage {
                     ctx.stroke()
 
                     /* Display the charge history in orange color */
-                    ctx.lineWidth = units.dp(1)
+                    ctx.lineWidth = units.dp(2)
                     ctx.strokeStyle = UbuntuColors.orange
 
                     /* Get infos from battery0, on a day (60*24*24=86400 seconds), with 150 points on the graph */

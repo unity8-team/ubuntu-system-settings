@@ -38,12 +38,20 @@ class Battery : public QObject
                 READ deviceString
                 CONSTANT)
 
+    Q_PROPERTY( int lastFullCharge
+                READ lastFullCharge
+                NOTIFY lastFullChargeChanged)
+
 public:
     explicit Battery(QObject *parent = 0);
     ~Battery();
     bool powerdRunning();
     QString deviceString();
-    Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution) const;
+    int lastFullCharge();
+    Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution);
+
+Q_SIGNALS:
+    void lastFullChargeChanged();
 
 private:
     QDBusConnection m_systemBusConnection;
@@ -51,6 +59,10 @@ private:
     QDBusInterface m_powerdIface;
     bool m_powerdRunning;
     UpDevice *m_device;
+    QString m_deviceString;
+    int m_lastFullCharge;
+    void buildDeviceString();
+    void getLastFullCharge();
 };
 
 #endif // BATTERY_H
