@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-13 09:22-0400\n"
-"PO-Revision-Date: 2013-07-02 11:06+0000\n"
-"Last-Translator: Jared Norris <jarednorris@ubuntu.com>\n"
+"PO-Revision-Date: 2013-08-15 02:15+0000\n"
+"Last-Translator: Jackson Doak <Doak.jackson@gmail.com>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-14 06:13+0000\n"
+"X-Launchpad-Export-Date: 2013-08-15 05:52+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -30,7 +30,7 @@ msgstr "Serial"
 #: ../plugins/battery/PageComponent.qml:85
 #: ../plugins/cellular/PageComponent.qml:75
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: ../plugins/about/PageComponent.qml:88
 msgid "Software:"
@@ -42,18 +42,18 @@ msgstr "OS"
 
 #: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
-msgstr ""
+msgstr "Last updated"
 
 #: ../plugins/about/PageComponent.qml:98
 #: ../plugins/battery/PageComponent.qml:180
 #: ../plugins/battery/PageComponent.qml:185
 #: ../plugins/battery/SleepValues.qml:76
 msgid "Never"
-msgstr ""
+msgstr "Never"
 
 #: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
-msgstr ""
+msgstr "Check for updates"
 
 #: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
 msgid "Storage"
@@ -65,27 +65,27 @@ msgstr "Legal:"
 
 #: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
 msgid "Software licenses"
-msgstr ""
+msgstr "Software licenses"
 
 #: ../plugins/about/PageComponent.qml:128
 msgid "Regulatory info"
-msgstr ""
+msgstr "Regulatory info"
 
 #: ../plugins/about/Storage.qml:38
 msgid "Used by Ubuntu"
-msgstr ""
+msgstr "Used by Ubuntu"
 
 #: ../plugins/about/Storage.qml:38
 msgid "Movies"
-msgstr ""
+msgstr "Movies"
 
 #: ../plugins/about/Storage.qml:38
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: ../plugins/about/Storage.qml:39
 msgid "Pictures"
-msgstr ""
+msgstr "Pictures"
 
 #: ../plugins/about/Storage.qml:39
 msgid "Other files"
