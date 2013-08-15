@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.SystemSettings.LanguagePlugin 1.0
 import "../Components" as LocalComponents
 
 LocalComponents.Page {

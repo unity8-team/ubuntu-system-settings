@@ -9,7 +9,8 @@ SUBDIRS = \
     schema \
     src \
     plugins \
-    tests
+    tests \
+    wizard
 
 include(common-installs-config.pri)
 
