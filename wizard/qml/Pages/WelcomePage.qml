@@ -30,24 +30,45 @@ LocalComponents.Page {
         id: plugin
     }
 
-    Flickable {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: parent.height - __bottomMargin
-        clip: true
+    Item {
+        id: content
+        anchors {
+            fill: parent
+            topMargin: units.gu(5)
+            leftMargin: units.gu(3)
+            rightMargin: units.gu(3)
+            bottomMargin: __bottomMargin
+        }
 
-        contentHeight: contentItem.childrenRect.height
+        Column {
+            spacing: units.gu(2)
 
-        ListItem.ValueSelector {
-            id: languageList
+            Label {
+                text: i18n.tr("Welcome to Ubuntu.\nLet's get started.")
+            }
 
-            text: i18n.tr("Display language")
-            values: plugin.languages
-            selectedIndex: plugin.currentLanguage
+            Label {
+                text: i18n.tr("Select your language")
+            }
 
-            expanded: false
-            onExpandedChanged: expanded = true
+            Flickable {
+                clip: true
+                width: content.width
+                height: units.gu(30)
+
+                contentHeight: contentItem.childrenRect.height
+
+                ListItem.ValueSelector {
+                    id: languageList
+
+                    text: i18n.tr("Display language")
+                    values: plugin.languages
+                    selectedIndex: plugin.currentLanguage
+
+                    expanded: false
+                    onExpandedChanged: expanded = true
+                }
+            }
         }
     }
 

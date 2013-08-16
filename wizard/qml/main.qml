@@ -21,7 +21,7 @@ MainView {
     width: units.gu(40)
     height: units.gu(71)
 
-    Component.onCompleted: Theme.name = "Ubuntu.Components.Themes.SuruGradient"
+//    Component.onCompleted: Theme.name = "Ubuntu.Components.Themes.SuruGradient"
 
     PageStack {
         id: pageStack
