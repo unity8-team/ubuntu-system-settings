@@ -24,7 +24,7 @@ LocalComponents.Page {
     title: i18n.tr("Hello")
     forwardButtonSourceComponent: forwardButton
 
-    readonly property bool __simCardPresent: true
+    readonly property bool __simCardPresent: false
 
     UbuntuLanguagePlugin {
         id: plugin

@@ -22,6 +22,25 @@ LocalComponents.Page {
     title: i18n.tr("No SIM card installed")
     forwardButtonSourceComponent: forwardButton
 
+    Item {
+        id: content
+        anchors {
+            fill: parent
+            topMargin: units.gu(5)
+            leftMargin: units.gu(3)
+            rightMargin: units.gu(3)
+            bottomMargin: __bottomMargin
+        }
+
+        Column {
+            // IMAGE OF SIM CARD HERE
+
+            Label {
+                text: i18n.tr("You need a valid SIM to use telephone and SMS features.")
+            }
+        }
+    }
+
     Component {
         id: forwardButton
         Button {
