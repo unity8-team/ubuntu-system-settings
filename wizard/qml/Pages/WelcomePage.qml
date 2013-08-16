@@ -16,6 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 import "../Components" as LocalComponents
 
@@ -25,11 +26,39 @@ LocalComponents.Page {
 
     readonly property bool __simCardPresent: true
 
+    UbuntuLanguagePlugin {
+        id: plugin
+    }
+
+    Flickable {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: parent.height - __bottomMargin
+        clip: true
+
+        contentHeight: contentItem.childrenRect.height
+
+        ListItem.ValueSelector {
+            id: languageList
+
+            text: i18n.tr("Display language")
+            values: plugin.languages
+            selectedIndex: plugin.currentLanguage
+
+            expanded: false
+            onExpandedChanged: expanded = true
+        }
+    }
+
     Component {
         id: forwardButton
         Button {
             text: i18n.tr("Start")
-            onClicked: pageStack.push(Qt.resolvedUrl(__simCardPresent ? "WiFiPage.qml" : "SimCardPage.qml"))
+            onClicked: {
+                plugin.currentLanguage = languageList.selectedIndex
+                pageStack.push(Qt.resolvedUrl(__simCardPresent ? "WiFiPage.qml" : "SimCardPage.qml"))
+            }
         }
     }
 }

@@ -17,6 +17,7 @@
  */
 
 #include <QGuiApplication>
+#include <QQmlContext>
 #include <QUrl>
 #include <QQuickView>
 #include <QtQml>
