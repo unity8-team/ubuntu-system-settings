@@ -1,6 +1,7 @@
 TEMPLATE = subdirs
 SUBDIRS = \
     about \
+    account \
     background \
     battery \
     flight-mode \

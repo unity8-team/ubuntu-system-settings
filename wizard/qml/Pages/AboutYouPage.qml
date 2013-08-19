@@ -16,11 +16,43 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.SystemSettings.AccountPlugin 1.0
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
     title: i18n.tr("About You")
     forwardButtonSourceComponent: forwardButton
+
+    UbuntuAccountPlugin {
+        id: plugin
+    }
+
+    Item {
+        id: content
+        anchors {
+            fill: parent
+            topMargin: __topMargin
+            leftMargin: __leftMargin
+            rightMargin: __rightMargin
+            bottomMargin: __bottomMargin
+        }
+
+        Column {
+            spacing: units.gu(2)
+
+            Label {
+                width: content.width
+                wrapMode: Text.WordWrap
+                text: i18n.tr("Welcome to Ubuntu.\nLet's get started.")
+            }
+
+            Label {
+                width: content.width
+                wrapMode: Text.WordWrap
+                text: plugin.accountRealName
+            }
+        }
+    }
 
     Component {
         id: forwardButton

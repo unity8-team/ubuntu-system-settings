@@ -22,6 +22,22 @@ LocalComponents.Page {
     title: i18n.tr("That's it!")
     forwardButtonSourceComponent: forwardButton
 
+    Item {
+        id: content
+        anchors {
+            fill: parent
+            topMargin: __topMargin
+            leftMargin: __leftMargin
+            rightMargin: __rightMargin
+            bottomMargin: __bottomMargin
+        }
+
+        Label {
+            width: parent.width
+            wrapMode: Text.WordWrap
+            text: i18n.tr("It's great to have you in the Ubuntu Community.\n\nYou're now ready to enjoy your new phone.")
+        }
+    }
     Component {
         id: forwardButton
         Button {

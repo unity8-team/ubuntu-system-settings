@@ -22,6 +22,23 @@ LocalComponents.Page {
     title: i18n.tr("Your phone and location")
     forwardButtonSourceComponent: forwardButton
 
+    Item {
+        id: content
+        anchors {
+            fill: parent
+            topMargin: __topMargin
+            leftMargin: __leftMargin
+            rightMargin: __rightMargin
+            bottomMargin: __bottomMargin
+        }
+
+        Label {
+            width: parent.width
+            wrapMode: Text.WordWrap
+            text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.\n\nYour phone is setup to detect your location. This can be disabled in system settings.")
+        }
+    }
+
     Component {
         id: forwardButton
         Button {

@@ -26,9 +26,9 @@ LocalComponents.Page {
         id: content
         anchors {
             fill: parent
-            topMargin: units.gu(5)
-            leftMargin: units.gu(3)
-            rightMargin: units.gu(3)
+            topMargin: __topMargin
+            leftMargin: __leftMargin
+            rightMargin: __rightMargin
             bottomMargin: __bottomMargin
         }
 
@@ -36,6 +36,8 @@ LocalComponents.Page {
             // IMAGE OF SIM CARD HERE
 
             Label {
+                width: content.width
+                wrapMode: Text.WordWrap
                 text: i18n.tr("You need a valid SIM to use telephone and SMS features.")
             }
         }

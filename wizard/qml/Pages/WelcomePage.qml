@@ -34,9 +34,9 @@ LocalComponents.Page {
         id: content
         anchors {
             fill: parent
-            topMargin: units.gu(5)
-            leftMargin: units.gu(3)
-            rightMargin: units.gu(3)
+            topMargin: __topMargin
+            leftMargin: __leftMargin
+            rightMargin: __rightMargin
             bottomMargin: __bottomMargin
         }
 
@@ -44,10 +44,14 @@ LocalComponents.Page {
             spacing: units.gu(2)
 
             Label {
+                width: content.width
+                wrapMode: Text.WordWrap
                 text: i18n.tr("Welcome to Ubuntu.\nLet's get started.")
             }
 
             Label {
+                width: content.width
+                wrapMode: Text.WordWrap
                 text: i18n.tr("Select your language")
             }
 

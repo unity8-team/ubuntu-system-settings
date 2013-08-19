@@ -22,6 +22,17 @@ LocalComponents.Page {
     title: i18n.tr("Connect to Wi-Fi")
     forwardButtonSourceComponent: forwardButton
 
+    Item {
+        id: content
+        anchors {
+            fill: parent
+            topMargin: __topMargin
+            leftMargin: __leftMargin
+            rightMargin: __rightMargin
+            bottomMargin: __bottomMargin
+        }
+    }
+
     Component {
         id: forwardButton
         Button {

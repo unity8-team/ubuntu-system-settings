@@ -20,6 +20,9 @@ import Ubuntu.Components 0.1
 Page {
     readonly property real __buttonMargin: units.gu(2)
     readonly property real __buttonWidth: (width - __buttonMargin * 2) / 2 - __buttonMargin / 2
+    readonly property real __topMargin: units.gu(5)
+    readonly property real __leftMargin: units.gu(3)
+    readonly property real __rightMargin: units.gu(3)
     readonly property real __bottomMargin: backButton.height + __buttonMargin * 2
 
     property alias forwardButtonSourceComponent: forwardButton.sourceComponent
