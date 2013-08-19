@@ -29,26 +29,32 @@ import Ubuntu.SystemSettings.Update 1.0
 ItemPage {
     id: root
 
-    title: i18n.tr("Update phone")
+    title: i18n.tr("Update")
     flickable: scrollWidget // maybe remove
 
     UbuntuUpdatePanel {
         id: updateID
 
+
         property bool updateInProgress: false
         property bool updateReady: false
         property bool updateCanceled: false
 
-        // TODO: example data, no i18n
+        // FIXME: those should be taken from the backend
+        property string lastUpdateDate: "1983-09-13"
+        property string downloadRemainingTime: "40 seconds"
         property variant updateDescriptions: ["Enables a 200x improvment on Ubuntu Edge phone",
                                               "Makes you a sandwich",
                                               "Makes Steve and Loic happy"]
+
+        // REMOVEME: fake update available
+        updateAvailable: 1
+
 
         function startUpdate() {
             updateInProgress= true;
             updateReady = false;
             updateCanceled = false;
-            actionbuttons.text = "";
             TriggerUpdate();
         }
 
@@ -73,8 +79,8 @@ ItemPage {
 
         onUpdateAvailableChanged: {
             if (updateID.updateAvailable === 1) {
-                statusDetails.opacity = 1.0;
-                actionbuttons.text = actionbuttons.default_text;
+                //statusDetails.opacity = 1.0;
+                //actionbuttons.text = actionbuttons.default_text;
             }
             else
                 statusDetails.opacity = 0.0;
@@ -87,55 +93,187 @@ ItemPage {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        anchors.left: parent.left
-        anchors.right: parent.right
-
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
-
+            width: parent.width
             ListItem.Base {
-                height: updateStatusbar.height + checkUpdateIndicator.height + units.gu(6)
+                height: {
+                    if (updateID.updateAvailable === 1)
+                        return updateContentDisplay.height+ units.gu(4);
+                    else
+                        return updateStatusbar.height + checkUpdateIndicator.height + units.gu(6);
+                }
 
                 Column {
-                    width: parent.width
                     anchors.centerIn: parent
+                    width: parent.width
                     spacing: units.gu(2)
 
-                    Label {
-                        id: updateStatusbar
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-
-                        fontSize: "large"
-                        text: { if (updateID.updateAvailable === 0)
-                                  return i18n.tr("Congrats! You are already up to date!");
-                                else if (updateID.updateAvailable === 1)
-                                  return i18n.tr("A new version is available!");
-                                return i18n.tr("Checking latest available system version…"); }
-                        wrapMode: Text.WordWrap
-
-                    }
                     ActivityIndicator {
                         id: checkUpdateIndicator
                         anchors.horizontalCenter: parent.horizontalCenter
                         running: updateID.updateAvailable < 0
                         visible: running
                     }
-                    ProgressBar {
+                    Label {
+                        id: updateStatusbar
+                        //FIXME: doesn't center because of width (but activity indicator is centered)
+                        // but we need a width or something to have the wrapMode working
+                        width: parent.width
+                        anchors.horizontalCenter: parent.horizontalCenter
+
+                        text: { if (updateID.updateAvailable === 0)
+                                  return i18n.tr("No software update available\nLast updated %1").arg(updateID.lastUpdateDate);
+                                return i18n.tr("Checking for updates"); }
+                        visible: updateID.updateAvailable < 1
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Column {
+                        id: updateContentDisplay
+                        visible: updateID.updateAvailable === 1
+                        width: parent.width
+                        spacing: units.gu(2)
+
+                        Icon {
+                            id: distribLogo
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: units.gu(6)
+                            height: width
+                            name: "distributor-logo"
+                        }
+
+                        Row {
+                            width: parent.width
+
+                            Label {
+                                width: parent.width/2
+                                text: i18n.tr("Ubuntu Phone")
+                            }
+
+                            Label {
+                                horizontalAlignment: Text.AlignRight
+                                width: parent.width/2
+                                text: updateID.updateSize;
+                            }
+                        }
+
+                        // FIXME: use the right widget then
+                        ListItem.ValueSelector {
+                            text: i18n.tr("Version %1").arg(updateID.updateVersion)
+                            values: updateID.updateDescriptions
+                            selectedIndex: -1
+                        }
+
+                        Column {
+                            id: updateDownloading
+                            spacing: units.gu(1)
+                            width: parent.width
+
+                            ProgressBar {
+                                id: updateProgress
+                                maximumValue : 100
+                                minimumValue : 0
+                                value : 70
+                                width: parent.width
+                                visible: true // updateID.updateInProgress && !updateID.updateReady
+                            }
+
+                            Label {
+                                text: i18n.tr("About %1 remaining").arg(updateID.downloadRemainingTime)
+                            }
+
+                            Button {
+                                id: pauseDownloadButton
+                                text: i18n.tr("Pause downloading")
+                                width: parent.width
+                                onClicked: updateID.startUpdate()
+                                visible: !updateID.updateInProgress
+                            }
+
+                            Button {
+                                text: i18n.tr("Resume downloading")
+                                width: parent.width
+                                onClicked: updateID.startUpdate()
+                                visible: !pauseDownloadButton.visible
+                            }
+
+                        }
+
+                        Column {
+                            id: updateStopped
+                            spacing: units.gu(1)
+                            width: parent.width
+
+                            Button {
+                                text: i18n.tr("Download")
+                                width: parent.width
+                                onClicked: updateID.startUpdate()
+                                visible: !updateID.updateInProgress
+                            }
+
+                            Label {
+                                text: i18n.tr("<b>Download is failing:</b><br/>%1").arg("The update server is not responding. Try again later.")
+                                wrapMode: Text.WordWrap
+                                textFormat: Text.RichText
+                                visible: true
+                            }
+
+                            Button {
+                                text: i18n.tr("Retry")
+                                width: parent.width
+                                onClicked: updateID.startUpdate()
+                                visible: !updateID.updateInProgress
+                            }
+
+                            Button {
+                                text: i18n.tr("Install & Restart")
+                                width: parent.width
+                                onClicked: updateID.startUpdate()
+                                visible: !updateID.updateInProgress
+                            }
+
+                        }
+
+
+
+                    }
+
+                    /*ProgressBar {
                         id: indeterminateBar
                         anchors.left: parent.left
                         anchors.right: parent.right
 
                         indeterminate: true
                         visible: updateID.updateInProgress && !updateID.updateReady
-                    }
+                    }*/
                 }
 
             }
 
-            ListItem.Standard {
+            ListItem.ValueSelector {
+                id: upgradePolicySelector
+                expanded: true
+                // TODO: There is no way to have a ValueSelector always expanded
+                onExpandedChanged: expanded = true
+                text: i18n.tr("Download future updates automatically:")
+                values: [i18n.tr("Never"),
+                    i18n.tr("When on wi-fi"),
+                    // TODO: Data charges may apply needs to be smaller
+                    i18n.tr("On any data connection\nData charges may apply.")]
+                // FIXME
+                selectedIndex: 0
+                //FIXME
+                /*onSelectedIndexChanged: {
+                    if (selectedIndex == 0)
+                        connMan.powered = false;
+                    else
+                        connMan.powered = true;
+                }*/
+            }
+
+
+            /*ListItem.Standard {
                 id: statusDetails
                 Behavior on opacity { PropertyAnimation { duration: 1000 } }
                 opacity: 0
@@ -146,9 +284,9 @@ ItemPage {
 
                     // FIXME: Any of those item is creating an extra line in the middle, commented for now
                     //ListItem.Divider { }
-                    /*ListItem.Header {
-                        text: i18n.tr("General update infos:")
-                    }*/
+                    //ListItem.Header {
+                    //    text: i18n.tr("General update infos:")
+                    //}
                     ListItem.Standard {
                         text: i18n.tr("You can update from version %1 to version %2").arg(updateID.OSVersion).arg(updateID.updateVersion);
                     }
@@ -206,6 +344,7 @@ ItemPage {
                text: "I'll try later"
                onClicked: PopupUtils.close(updateFailedDialogue)
             }
+        }*/
         }
     }
 }
