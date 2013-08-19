@@ -16,7 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import Ubuntu.SystemSettings.AccountPlugin 1.0
+import Ubuntu.SystemSettings.Account 1.0
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
