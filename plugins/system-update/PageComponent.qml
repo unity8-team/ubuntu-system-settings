@@ -22,7 +22,6 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Update 1.0
 
 
@@ -33,7 +32,7 @@ ItemPage {
     flickable: scrollWidget // maybe remove
 
     UbuntuUpdatePanel {
-        id: updateID
+        id: updateBackend
 
 
         property bool updateInProgress: false
@@ -78,7 +77,7 @@ ItemPage {
         }
 
         onUpdateAvailableChanged: {
-            if (updateID.updateAvailable === 1) {
+            if (updateBackend.updateAvailable === 1) {
                 //statusDetails.opacity = 1.0;
                 //actionbuttons.text = actionbuttons.default_text;
             }
@@ -98,7 +97,7 @@ ItemPage {
             width: parent.width
             ListItem.Base {
                 height: {
-                    if (updateID.updateAvailable === 1)
+                    if (updateBackend.updateAvailable === 1)
                         return updateContentDisplay.height+ units.gu(4);
                     else
                         return updateStatusbar.height + checkUpdateIndicator.height + units.gu(6);
@@ -112,7 +111,7 @@ ItemPage {
                     ActivityIndicator {
                         id: checkUpdateIndicator
                         anchors.horizontalCenter: parent.horizontalCenter
-                        running: updateID.updateAvailable < 0
+                        running: updateBackend.updateAvailable < 0
                         visible: running
                     }
                     Label {
@@ -122,16 +121,16 @@ ItemPage {
                         width: parent.width
                         anchors.horizontalCenter: parent.horizontalCenter
 
-                        text: { if (updateID.updateAvailable === 0)
-                                  return i18n.tr("No software update available\nLast updated %1").arg(updateID.lastUpdateDate);
+                        text: { if (updateBackend.updateAvailable === 0)
+                                  return i18n.tr("No software update available\nLast updated %1").arg(updateBackend.lastUpdateDate);
                                 return i18n.tr("Checking for updates"); }
-                        visible: updateID.updateAvailable < 1
+                        visible: updateBackend.updateAvailable < 1
                         wrapMode: Text.WordWrap
                     }
 
                     Column {
                         id: updateContentDisplay
-                        visible: updateID.updateAvailable === 1
+                        visible: updateBackend.updateAvailable === 1
                         width: parent.width
                         spacing: units.gu(2)
 
@@ -154,14 +153,14 @@ ItemPage {
                             Label {
                                 horizontalAlignment: Text.AlignRight
                                 width: parent.width/2
-                                text: updateID.updateSize;
+                                text: updateBackend.updateSize;
                             }
                         }
 
                         // FIXME: use the right widget then
                         ListItem.ValueSelector {
-                            text: i18n.tr("Version %1").arg(updateID.updateVersion)
-                            values: updateID.updateDescriptions
+                            text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
+                            values: updateBackend.updateDescriptions
                             selectedIndex: -1
                         }
 
@@ -176,25 +175,25 @@ ItemPage {
                                 minimumValue : 0
                                 value : 70
                                 width: parent.width
-                                visible: true // updateID.updateInProgress && !updateID.updateReady
+                                visible: true // updateBackend.updateInProgress && !updateBackend.updateReady
                             }
 
                             Label {
-                                text: i18n.tr("About %1 remaining").arg(updateID.downloadRemainingTime)
+                                text: i18n.tr("About %1 remaining").arg(updateBackend.downloadRemainingTime)
                             }
 
                             Button {
                                 id: pauseDownloadButton
                                 text: i18n.tr("Pause downloading")
                                 width: parent.width
-                                onClicked: updateID.startUpdate()
-                                visible: !updateID.updateInProgress
+                                onClicked: updateBackend.startUpdate()
+                                visible: !updateBackend.updateInProgress
                             }
 
                             Button {
                                 text: i18n.tr("Resume downloading")
                                 width: parent.width
-                                onClicked: updateID.startUpdate()
+                                onClicked: updateBackend.startUpdate()
                                 visible: !pauseDownloadButton.visible
                             }
 
@@ -208,8 +207,8 @@ ItemPage {
                             Button {
                                 text: i18n.tr("Download")
                                 width: parent.width
-                                onClicked: updateID.startUpdate()
-                                visible: !updateID.updateInProgress
+                                onClicked: updateBackend.startUpdate()
+                                visible: !updateBackend.updateInProgress
                             }
 
                             Label {
@@ -222,15 +221,15 @@ ItemPage {
                             Button {
                                 text: i18n.tr("Retry")
                                 width: parent.width
-                                onClicked: updateID.startUpdate()
-                                visible: !updateID.updateInProgress
+                                onClicked: updateBackend.startUpdate()
+                                visible: !updateBackend.updateInProgress
                             }
 
                             Button {
                                 text: i18n.tr("Install & Restart")
                                 width: parent.width
-                                onClicked: updateID.startUpdate()
-                                visible: !updateID.updateInProgress
+                                onClicked: updateBackend.startUpdate()
+                                visible: !updateBackend.updateInProgress
                             }
 
                         }
@@ -245,7 +244,7 @@ ItemPage {
                         anchors.right: parent.right
 
                         indeterminate: true
-                        visible: updateID.updateInProgress && !updateID.updateReady
+                        visible: updateBackend.updateInProgress && !updateBackend.updateReady
                     }*/
                 }
 
@@ -275,33 +274,8 @@ ItemPage {
 
             /*ListItem.Standard {
                 id: statusDetails
-                Behavior on opacity { PropertyAnimation { duration: 1000 } }
-                opacity: 0
 
                 Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-
-                    // FIXME: Any of those item is creating an extra line in the middle, commented for now
-                    //ListItem.Divider { }
-                    //ListItem.Header {
-                    //    text: i18n.tr("General update infos:")
-                    //}
-                    ListItem.Standard {
-                        text: i18n.tr("You can update from version %1 to version %2").arg(updateID.OSVersion).arg(updateID.updateVersion);
-                    }
-                    ListItem.Standard {
-                        text: i18n.tr("Size of this update: %1").arg(updateID.updateSize);
-                    }
-                    ListItem.Divider { }
-                    ListItem.Header {
-                        text: i18n.tr("This update will:")
-                    }
-                    Repeater {
-                        model: updateID.updateDescriptions
-                        ListItem.Standard { text: modelData }
-                    }
-                    ListItem.Divider { }
 
                     ListItem.Standard {
                         id: actionbuttons
@@ -312,20 +286,20 @@ ItemPage {
                             Button {
                                 text: i18n.tr("Update your phone")
                                 width: units.gu(19)
-                                onClicked: updateID.startUpdate()
-                                visible: !updateID.updateInProgress
+                                onClicked: updateBackend.startUpdate()
+                                visible: !updateBackend.updateInProgress
                             }
                             Button {
                                 text: i18n.tr("Cancel update")
                                 width: units.gu(19)
-                                onClicked: updateID.CancelUpdate()
-                                visible: updateID.updateInProgress
+                                onClicked: updateBackend.CancelUpdate()
+                                visible: updateBackend.updateInProgress
                             }
                             Button {
                                 text: i18n.tr("Reboot your phone now")
                                 width: units.gu(25)
-                                onClicked: updateID.Reboot()
-                                visible: updateID.updateInProgress && updateID.updateReady
+                                onClicked: updateBackend.Reboot()
+                                visible: updateBackend.updateInProgress && updateBackend.updateReady
                             }
                         }
                     }
@@ -333,17 +307,6 @@ ItemPage {
             }
         }
     }
-
-    Component {
-         id: updateFailedDialog
-        Dialog {
-            id: updateFailedDialogue
-            title: i18n.tr("We are deeply sorry");
-            text: i18n.tr("The update failed. Please try again later");
-            Button {
-               text: "I'll try later"
-               onClicked: PopupUtils.close(updateFailedDialogue)
-            }
         }*/
         }
     }
