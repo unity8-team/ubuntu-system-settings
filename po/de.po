@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-13 09:22-0400\n"
-"PO-Revision-Date: 2013-08-15 17:59+0000\n"
-"Last-Translator: Phillip Sz <Unknown>\n"
+"PO-Revision-Date: 2013-08-18 11:06+0000\n"
+"Last-Translator: Carsten Gerlach <daswaldhorn@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-16 06:04+0000\n"
+"X-Launchpad-Export-Date: 2013-08-19 04:58+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -155,11 +155,11 @@ msgstr "Batterie"
 
 #: ../plugins/battery/PageComponent.qml:48
 msgid "Charging now"
-msgstr ""
+msgstr "Wird geladen"
 
 #: ../plugins/battery/PageComponent.qml:53
 msgid "Last full charge"
-msgstr ""
+msgstr "Zuletzt voll geladen"
 
 #: ../plugins/battery/PageComponent.qml:59
 #, qt-format
@@ -168,20 +168,20 @@ msgstr "%1 %"
 
 #: ../plugins/battery/PageComponent.qml:84
 msgid "Charge level"
-msgstr ""
+msgstr "Ladezustand"
 
 #: ../plugins/battery/PageComponent.qml:134
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "Möglichkeiten um Energie zu sparen:"
 
 #: ../plugins/battery/PageComponent.qml:138
 msgid "Display brightness"
-msgstr ""
+msgstr "Bildschirmhelligkeit"
 
 #: ../plugins/battery/PageComponent.qml:175
 #: ../plugins/battery/SleepValues.qml:31
 msgid "Auto sleep"
-msgstr ""
+msgstr "Automatisch in den Ruhezustand gehen"
 
 #: ../plugins/battery/PageComponent.qml:179
 #: ../plugins/battery/PageComponent.qml:184
@@ -190,7 +190,7 @@ msgstr ""
 #: ../plugins/battery/SleepValues.qml:75
 #, qt-format
 msgid "After %1 minutes"
-msgstr ""
+msgstr "Nach %1 Minuten"
 
 #: ../plugins/battery/PageComponent.qml:192 ../.build/settings.js:19
 msgid "Wi-Fi"
@@ -206,15 +206,15 @@ msgstr "GPS"
 
 #: ../plugins/battery/PageComponent.qml:216
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "Für eine genaue Ortung werden GPS und/oder WLAN benötigt"
 
 #: ../plugins/battery/SleepValues.qml:63
 msgid "Put the display to sleep when idle"
-msgstr ""
+msgstr "Schaltet den Bildschirm bei Inaktivität ab"
 
 #: ../plugins/battery/SleepValues.qml:86
 msgid "Videos and some apps may keep the phone awake."
-msgstr ""
+msgstr "Videos und manche Anwendungen können das Telefon aktiv halten"
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:74
@@ -223,7 +223,7 @@ msgstr "Betreiber"
 
 #: ../plugins/cellular/ChooseCarrier.qml:83
 msgid "Refresh"
-msgstr ""
+msgstr "Aktualisieren"
 
 #: ../plugins/cellular/ChooseCarrier.qml:100
 msgid "Searching"
@@ -249,7 +249,7 @@ msgstr "Manuell"
 
 #: ../plugins/cellular/PageComponent.qml:89
 msgid "Cellular data:"
-msgstr ""
+msgstr "Telefondaten:"
 
 #: ../plugins/cellular/PageComponent.qml:90
 msgid "Off"
