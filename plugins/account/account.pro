@@ -26,7 +26,7 @@ CONFIG += qt plugin no_keywords
 #DEFINES += QT_NO_DEBUG_OUTPUT
 
 TARGET = $$qtLibraryTarget($$TARGET)
-uri = Ubuntu.SystemSettings.Account
+uri = Ubuntu.SystemSettings.AccountPlugin
 
 INCLUDEPATH += .
 
