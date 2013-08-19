@@ -43,13 +43,14 @@ LocalComponents.Page {
             Label {
                 width: content.width
                 wrapMode: Text.WordWrap
-                text: i18n.tr("Welcome to Ubuntu.\nLet's get started.")
+                text: i18n.tr("What shall we call you?")
             }
 
-            Label {
+            TextField {
+                id: textField
                 width: content.width
-                wrapMode: Text.WordWrap
                 text: plugin.accountRealName
+                placeholderText: "Your name"
             }
         }
     }
@@ -58,7 +59,10 @@ LocalComponents.Page {
         id: forwardButton
         Button {
             text: i18n.tr("Continue")
-            onClicked: pageStack.push(Qt.resolvedUrl("LocationPage.qml"))
+            onClicked: {
+                plugin.accountRealName = textField.text
+                pageStack.push(Qt.resolvedUrl("LocationPage.qml"))
+            }
         }
     }
 }
