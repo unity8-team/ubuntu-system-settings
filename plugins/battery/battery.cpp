@@ -23,7 +23,7 @@
 #include <libupower-glib/upower.h>
 #include <QEvent>
 #include <QDBusReply>
-#include <QPair>
+#include <QtCore/QDebug>
 
 Battery::Battery(QObject *parent) :
     QObject(parent),
@@ -31,9 +31,13 @@ Battery::Battery(QObject *parent) :
     m_powerdIface ("com.canonical.powerd",
                    "/com/canonical/powerd",
                    "com.canonical.powerd",
-                   m_systemBusConnection)
+                   m_systemBusConnection),
+    m_deviceString("")
 {
     m_device = up_device_new();
+
+    buildDeviceString();
+    getLastFullCharge();
 
     if (!m_powerdIface.isValid()) {
         m_powerdRunning = false;
@@ -48,7 +52,7 @@ bool Battery::powerdRunning()
     return m_powerdRunning;
 }
 
-QString Battery::deviceString() {
+void Battery::buildDeviceString() {
     UpClient *client;
     gboolean returnIsOk;
     GPtrArray *devices;
@@ -59,7 +63,7 @@ QString Battery::deviceString() {
     returnIsOk = up_client_enumerate_devices_sync(client, NULL, NULL);
 
     if(!returnIsOk)
-        return QString("");
+        return;
 
     devices = up_client_get_devices(client);
 
@@ -67,20 +71,58 @@ QString Battery::deviceString() {
         device = (UpDevice *)g_ptr_array_index(devices, i);
         g_object_get(device, "kind", &kind, NULL);
         if (kind == UP_DEVICE_KIND_BATTERY) {
-            QString deviceId(up_device_get_object_path(device));
-            g_ptr_array_unref(devices);
-            g_object_unref(client);
-            return deviceId;
+            m_deviceString = QString(up_device_get_object_path(device));
         }
     }
 
     g_ptr_array_unref(devices);
     g_object_unref(client);
-    return QString("");
+}
+
+QString Battery::deviceString()
+{
+    return m_deviceString;
+}
+
+int Battery::lastFullCharge()
+{
+    return m_lastFullCharge;
+}
+
+bool Battery::updateLastFullCharge(UpHistoryItem *item, int offset)
+{
+    if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+        m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(item)));
+        Q_EMIT(lastFullChargeChanged());
+        return true; /* return true if the charge value got updated */
+    }
+    return false;
+}
+
+void Battery::getLastFullCharge()
+{
+    UpHistoryItem *item;
+    GPtrArray *values;
+    gint32 offset = 0;
+    GTimeVal timeval;
+
+    g_get_current_time(&timeval);
+    offset = timeval.tv_sec;
+    up_device_set_object_path_sync(m_device, m_deviceString.toStdString().c_str(), NULL, NULL);
+    values = up_device_get_history_sync(m_device, "charge", 864000, 1000, NULL, NULL);
+    for (uint i=values->len-1; i > 0; i--) {
+        item = (UpHistoryItem *) g_ptr_array_index(values, i);
+
+        if (updateLastFullCharge(item, offset) == true) {
+            g_ptr_array_unref (values);
+            return;
+        }
+    }
+    g_ptr_array_unref (values);
 }
 
 /* TODO: refresh values over time for dynamic update */
-QVariantList Battery::getHistory(const QString &deviceString, const int timespan, const int resolution) const
+QVariantList Battery::getHistory(const QString &deviceString, const int timespan, const int resolution)
 {
     UpHistoryItem *item;
     GPtrArray *values;
@@ -99,11 +141,13 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
             continue;
 
-        listItem.insert("time",((gint32) up_history_item_get_time(item) - offset));
+        updateLastFullCharge(item, offset);
+
+        listItem.insert("time",(offset - (gint32) up_history_item_get_time(item)));
         listItem.insert("value",up_history_item_get_value(item));
         listValues += listItem;
     }
-
+    g_ptr_array_unref (values);
     return listValues;
 }
 
