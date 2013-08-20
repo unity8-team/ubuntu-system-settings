@@ -147,9 +147,9 @@ ItemPage {
                     /* time is the offset in seconds compared to the current time (negative value)
                        we display the charge on a day, which is 86400 seconds, the value is the %
                        the coordinates are adjusted to the canvas, top,left is 0,0 */
-                    ctx.moveTo((86400+chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
+                    ctx.moveTo((86400-chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
                     for (var i=1; i < chargeDatas.length; i++) {
-                        ctx.lineTo((86400+chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
+                        ctx.lineTo((86400-chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
                     }
                     ctx.stroke()
                     ctx.restore();

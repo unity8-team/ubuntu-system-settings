@@ -104,7 +104,7 @@ void Battery::getLastFullCharge()
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
-            m_lastFullCharge = (int)(((gint32) up_history_item_get_time(item) - offset)*-1);
+            m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(item)));
             Q_EMIT(lastFullChargeChanged());
             return;
         }
@@ -132,11 +132,11 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
             continue;
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
-            m_lastFullCharge = (int)(((gint32) up_history_item_get_time(item) - offset)*-1);
+            m_lastFullCharge = (int)(offset - ((gint32) up_history_item_get_time(item)));
             Q_EMIT(lastFullChargeChanged());
         }
 
-        listItem.insert("time",((gint32) up_history_item_get_time(item) - offset));
+        listItem.insert("time",(offset - (gint32) up_history_item_get_time(item)));
         listItem.insert("value",up_history_item_get_value(item));
         listValues += listItem;
     }
