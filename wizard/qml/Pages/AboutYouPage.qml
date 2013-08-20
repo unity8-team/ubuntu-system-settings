@@ -43,6 +43,7 @@ LocalComponents.Page {
             Label {
                 width: content.width
                 wrapMode: Text.WordWrap
+                fontSize: "large"
                 text: i18n.tr("What shall we call you?")
             }
 

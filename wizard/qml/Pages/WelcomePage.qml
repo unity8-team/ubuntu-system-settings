@@ -46,12 +46,14 @@ LocalComponents.Page {
             Label {
                 width: content.width
                 wrapMode: Text.WordWrap
+                fontSize: "large"
                 text: i18n.tr("Welcome to Ubuntu.\nLet's get started.")
             }
 
             Label {
                 width: content.width
                 wrapMode: Text.WordWrap
+                fontSize: "large"
                 text: i18n.tr("Select your language")
             }
 

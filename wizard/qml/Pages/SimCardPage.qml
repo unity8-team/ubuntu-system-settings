@@ -38,6 +38,7 @@ LocalComponents.Page {
             Label {
                 width: content.width
                 wrapMode: Text.WordWrap
+                fontSize: "large"
                 text: i18n.tr("You need a valid SIM to use telephone and SMS features.")
             }
         }
