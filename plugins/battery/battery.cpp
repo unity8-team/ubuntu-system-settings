@@ -113,9 +113,12 @@ void Battery::getLastFullCharge()
     for (uint i=values->len-1; i > 0; i--) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
-        if (updateLastFullCharge(item, offset) == true)
+        if (updateLastFullCharge(item, offset) == true) {
+            g_ptr_array_unref (values);
             return;
+        }
     }
+    g_ptr_array_unref (values);
 }
 
 /* TODO: refresh values over time for dynamic update */
@@ -144,6 +147,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         listItem.insert("value",up_history_item_get_value(item));
         listValues += listItem;
     }
+    g_ptr_array_unref (values);
     return listValues;
 }
 
