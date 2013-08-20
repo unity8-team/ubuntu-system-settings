@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+13.10.20130820-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * don't install the a11y plugin, it's not planned for 13.10.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 262
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 20 Aug 2013 14:34:56 +0000
+
 ubuntu-system-settings (0.1+13.10.20130813.1-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]
