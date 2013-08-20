@@ -27,20 +27,32 @@ LocalComponents.Page {
         anchors {
             fill: parent
             topMargin: __topMargin
-            leftMargin: __leftMargin
             rightMargin: __rightMargin
             bottomMargin: __bottomMargin
         }
 
-        Column {
-            // IMAGE OF SIM CARD HERE
-
-            Label {
-                width: content.width
-                wrapMode: Text.WordWrap
-                fontSize: "large"
-                text: i18n.tr("You need a valid SIM to use telephone and SMS features.")
+        Image {
+            id: image
+            anchors {
+                top: parent.top
+                left: parent.left
+                leftMargin: units.gu(2.5)
             }
+            source: "data/meet_ubuntu_simcard@30.png"
+            scale: 0.5
+        }
+
+        Label {
+            anchors {
+                top: image.bottom
+                left: parent.left
+                topMargin: units.gu(2)
+                leftMargin: __leftMargin
+            }
+            width: content.width
+            wrapMode: Text.WordWrap
+            fontSize: "large"
+            text: i18n.tr("You need a valid SIM to use telephone and SMS features.")
         }
     }
 
