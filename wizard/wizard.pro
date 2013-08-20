@@ -4,6 +4,8 @@ include($${TOP_SRC_DIR}/common-installs-config.pri)
 
 TEMPLATE = app
 
+I18N_DOMAIN = wizard
+
 CONFIG += \
     qt
 
@@ -33,5 +35,10 @@ OTHER_FILES += \
     $${RESOURCES}
 
 DEFINES += \
+    I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\" \
     PLUGIN_PRIVATE_MODULE_DIR=\\\"$${PLUGIN_PRIVATE_MODULE_DIR}\\\" \
     PLUGIN_QML_DIR=\\\"$${PLUGIN_QML_DIR}\\\"
+
+po.target = po/wizard.pot
+po.depends = $${SOURCES}
+po.commands = xgettext -o $@ -d $${I18N_DOMAIN} --keyword=_ $^
