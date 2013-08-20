@@ -63,6 +63,7 @@ private:
     int m_lastFullCharge;
     void buildDeviceString();
     void getLastFullCharge();
+    bool updateLastFullCharge(UpHistoryItem *item, int offset);
 };
 
 #endif // BATTERY_H

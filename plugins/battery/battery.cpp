@@ -89,6 +89,16 @@ int Battery::lastFullCharge()
     return m_lastFullCharge;
 }
 
+bool Battery::updateLastFullCharge(UpHistoryItem *item, int offset)
+{
+    if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+        m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(item)));
+        Q_EMIT(lastFullChargeChanged());
+        return true; /* return true if the charge value got updated */
+    }
+    return false;
+}
+
 void Battery::getLastFullCharge()
 {
     UpHistoryItem *item;
@@ -103,11 +113,8 @@ void Battery::getLastFullCharge()
     for (uint i=values->len-1; i > 0; i--) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
-        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
-            m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(item)));
-            Q_EMIT(lastFullChargeChanged());
+        if (updateLastFullCharge(item, offset) == true)
             return;
-        }
     }
 }
 
@@ -131,10 +138,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
             continue;
 
-        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
-            m_lastFullCharge = (int)(offset - ((gint32) up_history_item_get_time(item)));
-            Q_EMIT(lastFullChargeChanged());
-        }
+        updateLastFullCharge(item, offset);
 
         listItem.insert("time",(offset - (gint32) up_history_item_get_time(item)));
         listItem.insert("value",up_history_item_get_value(item));
