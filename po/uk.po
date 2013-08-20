@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-08 18:37+0200\n"
+"POT-Creation-Date: 2013-08-13 09:22-0400\n"
 "PO-Revision-Date: 2013-07-02 10:35+0000\n"
 "Last-Translator: Fedik <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-09 05:37+0000\n"
+"X-Launchpad-Export-Date: 2013-08-14 06:13+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -26,9 +26,9 @@ msgid "Serial"
 msgstr "Серійний номер"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/battery/PageComponent.qml:69
-#: ../plugins/battery/PageComponent.qml:76
-#: ../plugins/cellular/PageComponent.qml:56
+#: ../plugins/battery/PageComponent.qml:54
+#: ../plugins/battery/PageComponent.qml:85
+#: ../plugins/cellular/PageComponent.qml:75
 msgid "N/A"
 msgstr ""
 
@@ -45,9 +45,9 @@ msgid "Last updated"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:129
-#: ../plugins/battery/PageComponent.qml:134
-#: ../plugins/battery/SleepValues.qml:78
+#: ../plugins/battery/PageComponent.qml:180
+#: ../plugins/battery/PageComponent.qml:185
+#: ../plugins/battery/SleepValues.qml:76
 msgid "Never"
 msgstr ""
 
@@ -149,79 +149,83 @@ msgstr ""
 msgid "Different background for each"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:31 ../.build/settings.js:4
+#: ../plugins/battery/PageComponent.qml:32 ../.build/settings.js:4
 msgid "Battery"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:63
-msgid "Charge level"
-msgstr ""
-
-#: ../plugins/battery/PageComponent.qml:66
+#: ../plugins/battery/PageComponent.qml:48
 msgid "Charging now"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:69
+#: ../plugins/battery/PageComponent.qml:53
+msgid "Last full charge"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:59
 #, qt-format
 msgid "%1 %"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:75
-msgid "Last full charge"
+#: ../plugins/battery/PageComponent.qml:84
+msgid "Charge level"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:83
+#: ../plugins/battery/PageComponent.qml:134
 msgid "Ways to reduce battery use:"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:87
+#: ../plugins/battery/PageComponent.qml:138
 msgid "Display brightness"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:124
+#: ../plugins/battery/PageComponent.qml:175
 #: ../plugins/battery/SleepValues.qml:31
 msgid "Auto sleep"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:128
-#: ../plugins/battery/PageComponent.qml:133
+#: ../plugins/battery/PageComponent.qml:179
+#: ../plugins/battery/PageComponent.qml:184
+#: ../plugins/battery/SleepValues.qml:71 ../plugins/battery/SleepValues.qml:72
 #: ../plugins/battery/SleepValues.qml:73 ../plugins/battery/SleepValues.qml:74
-#: ../plugins/battery/SleepValues.qml:75 ../plugins/battery/SleepValues.qml:76
-#: ../plugins/battery/SleepValues.qml:77
+#: ../plugins/battery/SleepValues.qml:75
 #, qt-format
 msgid "After %1 minutes"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:141 ../.build/settings.js:19
+#: ../plugins/battery/PageComponent.qml:192 ../.build/settings.js:19
 msgid "Wi-Fi"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:149 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:200 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:157 ../.build/settings.js:10
+#: ../plugins/battery/PageComponent.qml:208 ../.build/settings.js:10
 msgid "GPS"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:165
+#: ../plugins/battery/PageComponent.qml:216
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:64
+#: ../plugins/battery/SleepValues.qml:63
 msgid "Put the display to sleep when idle"
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:88
+#: ../plugins/battery/SleepValues.qml:86
 msgid "Videos and some apps may keep the phone awake."
 msgstr ""
 
-#: ../plugins/cellular/ChooseCarrier.qml:27
-#: ../plugins/cellular/PageComponent.qml:55
+#: ../plugins/cellular/ChooseCarrier.qml:28
+#: ../plugins/cellular/PageComponent.qml:74
 msgid "Carrier"
 msgstr ""
 
-#: ../plugins/cellular/ChooseCarrier.qml:41
+#: ../plugins/cellular/ChooseCarrier.qml:83
+msgid "Refresh"
+msgstr ""
+
+#: ../plugins/cellular/ChooseCarrier.qml:100
 msgid "Searching"
 msgstr ""
 
@@ -229,41 +233,41 @@ msgstr ""
 msgid "Cellular"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:50
+#: ../plugins/cellular/PageComponent.qml:68
 msgid "Choose carrier:"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:51
+#: ../plugins/cellular/PageComponent.qml:69
 #: ../plugins/time-date/ChooseTimeZone.qml:35
 msgid "Automatically"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:51
+#: ../plugins/cellular/PageComponent.qml:69
 #: ../plugins/time-date/ChooseTimeZone.qml:35
 msgid "Manually"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:68
-msgid "Cellular data"
-msgstr ""
-
 #: ../plugins/cellular/PageComponent.qml:89
-msgid "2G only (saves battery)"
+msgid "Cellular data:"
 msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:90
+msgid "Off"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:91
+msgid "2G only (saves battery)"
+msgstr ""
+
+#: ../plugins/cellular/PageComponent.qml:92
 msgid "2G/3G/4G (faster)"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:96
-msgid "Call roaming"
-msgstr ""
-
-#: ../plugins/cellular/PageComponent.qml:104
+#: ../plugins/cellular/PageComponent.qml:103
 msgid "Data roaming"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:135
+#: ../plugins/cellular/PageComponent.qml:112
 msgid "Data usage statistics"
 msgstr ""
 
@@ -343,7 +347,7 @@ msgstr ""
 
 #: ../plugins/phone/CallForwarding.qml:27
 #: ../plugins/phone/CallForwarding.qml:60
-#: ../plugins/phone/PageComponent.qml:48
+#: ../plugins/phone/PageComponent.qml:46
 msgid "Call forwarding"
 msgstr ""
 
@@ -370,7 +374,7 @@ msgid "Set"
 msgstr ""
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
-#: ../plugins/phone/PageComponent.qml:54
+#: ../plugins/phone/PageComponent.qml:52
 msgid "Call waiting"
 msgstr ""
 
@@ -380,15 +384,15 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:29 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
 msgid "Phone"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:31
+#: ../plugins/phone/PageComponent.qml:30
 msgid "SIM"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:62 ../plugins/phone/Services.qml:29
+#: ../plugins/phone/PageComponent.qml:60 ../plugins/phone/Services.qml:29
 #, qt-format
 msgid "%1 Services"
 msgstr ""
