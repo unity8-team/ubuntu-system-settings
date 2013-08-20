@@ -29,7 +29,8 @@
 class Update : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( QString OSVersion
+    Q_ENUMS(State)
+    /*Q_PROPERTY( QString OSVersion
                 READ OSVersion
                 CONSTANT)
     Q_PROPERTY( int updateAvailable
@@ -44,23 +45,24 @@ class Update : public QObject
                 NOTIFY updateAvailableChanged)
     Q_PROPERTY( QString updateDescriptions
                 READ UpdateDescriptions
-                NOTIFY updateAvailableChanged)
+                NOTIFY updateAvailableChanged)*/
 
     
 public:
     explicit Update(QObject *parent = 0);
     ~Update();
 
-    QString OSVersion();
+    enum State { Checking, NoUpdate, UpdateAvailable, Downloading, Paused, ReadyToInstall, Failed };
+
+    /*QString OSVersion();
 
     int UpdateAvailable();
     void setUpdateAvailable(int);
     QString UpdateVersion();
     QString UpdateSize();
-    QString UpdateDescriptions();
+    QString UpdateDescriptions();*/
 
     Q_INVOKABLE void TriggerUpdate();
-    Q_INVOKABLE void CancelUpdate();
     Q_INVOKABLE void Reboot();
 
 
@@ -68,10 +70,10 @@ public Q_SLOTS:
     bool slotUpdateAvailableStatus(bool pendingUpdate);
 
 Q_SIGNALS:
+    void sigUpdateAvailableStatus(bool isAvailable);
     bool updateAvailableChanged();
     void readyToReboot();
     void updateFailed();
-    void updateCanceled();
 
 private:
     QString m_OSVersion;

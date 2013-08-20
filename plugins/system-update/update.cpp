@@ -22,6 +22,7 @@
 #include <QDebug>
 #include <QEvent>
 #include <QDBusReply>
+#include <QtQml>
 #include <unistd.h>
 
 Update::Update(QObject *parent) :
@@ -36,35 +37,32 @@ Update::Update(QObject *parent) :
 
     // TODO: check if we get an error and maybe trigger a signal to update the UI (or retry)
     // check if an update is available
+    /*connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool updateS)),
+            this, SLOT(slotUpdateAvailableStatus(bool)));*/
     connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool)),
-            this, SLOT(slotUpdateAvailableStatus(bool)));
+            this, SIGNAL(sigUpdateAvailableStatus(bool)));
+
     m_SystemServiceIface.call("CheckForUpdate");
 
     // get current OS version
-    QDBusReply<int> reply = m_SystemServiceIface.call("BuildNumber");
+    /*QDBusReply<int> reply = m_SystemServiceIface.call("BuildNumber");
     if (reply.isValid())
         m_OSVersion = QString::number(reply.value());
     else
-        m_OSVersion = "Unknown";
+        m_OSVersion = "Unknown";*/
 
     // signals to forward directly to QML
-    connect(&m_SystemServiceIface, SIGNAL(ReadyToReboot()),
+    /*connect(&m_SystemServiceIface, SIGNAL(ReadyToReboot()),
             this, SIGNAL(readyToReboot()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateFailed()),
-            this, SIGNAL(updateFailed()));
-    connect(&m_SystemServiceIface, SIGNAL(Canceled()),
-            this, SIGNAL(updateCanceled()));
+            this, SIGNAL(updateFailed()));*/
 }
 
 Update::~Update() {
 }
 
-void Update::TriggerUpdate() {
+/*void Update::TriggerUpdate() {
     m_SystemServiceIface.call("GetUpdate");
-}
-
-void Update::CancelUpdate() {
-    m_SystemServiceIface.call("Cancel");
 }
 
 void Update::Reboot() {
@@ -128,3 +126,4 @@ void Update::m_getUpdateInfos()
     // TODO: descriptions (array of dict)
 
 }
+*/
