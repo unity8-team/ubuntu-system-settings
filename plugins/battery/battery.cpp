@@ -124,6 +124,9 @@ void Battery::getLastFullCharge()
 /* TODO: refresh values over time for dynamic update */
 QVariantList Battery::getHistory(const QString &deviceString, const int timespan, const int resolution)
 {
+    if (deviceString.isNull() || deviceString.isEmpty())
+        return QVariantList();
+
     UpHistoryItem *item;
     GPtrArray *values;
     gint32 offset = 0;
