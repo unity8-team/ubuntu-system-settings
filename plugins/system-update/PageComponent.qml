@@ -93,7 +93,7 @@ ItemPage {
             }
             else {
                 currentUpdateState = UbuntuUpdatePanel.NoUpdate;
-                infoMessage = i18n.tr("No software update available\nLast updated %1").arg(lastUpdateDate);
+                infoMessage = i18n.tr("No software update available<br/>Last updated %1").arg(lastUpdateDate);
             }
         }
 
