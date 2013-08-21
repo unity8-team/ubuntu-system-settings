@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.1+13.10.20130821-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: display the last full charge.
+
+  [ Iain Lane ]
+  * Only display the battery panel if the system actually has a battery.
+  * background: don't update gsettings/accountsservice for now (until
+    the content picker arrives). (LP: #1214452)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 267
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 21 Aug 2013 08:07:06 +0000
+
 ubuntu-system-settings (0.1+13.10.20130820-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
