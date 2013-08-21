@@ -57,6 +57,39 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
+            ListItem.Standard {
+                text: i18n.tr("Security:")
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("Phone locking")
+                value: i18n.tr("%n minute",
+                               "%n minutes",
+                               5)
+                progression: true
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("SIM PIN")
+                value: "Off"
+                progression: true
+            }
+            ListItem.Standard {
+                text: i18n.tr("Encryption")
+                control: Switch { }
+            }
+            ListItem.Caption {
+                text: i18n.tr("Encryption protects against access to phone data when the phone is connected to a PC or other device.")
+            }
+            ListItem.Standard {
+                text: i18n.tr("Privacy:")
+            }
+            ListItem.Standard {
+                text: i18n.tr("Stats on welcome screen")
+                control: Switch { enabled: true }
+            }
+            ListItem.Standard {
+                text: i18n.tr("Messages on welcome screen")
+                control: Switch { }
+            }
             ListItem.SingleValue {
                 id: dashSearchId
                 text: i18n.tr("Dash search")
@@ -66,7 +99,15 @@ ItemPage {
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Dash.qml"))
             }
-
+            ListItem.SingleValue {
+                text: i18n.tr("Location access")
+                value: "On"
+                progression: true
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("Other app access")
+                progression: true
+            }
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
                 progression: true
