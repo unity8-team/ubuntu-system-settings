@@ -79,7 +79,7 @@ ItemPage {
         onClicked: pageStack.push(Utilities.createAlbumPage(
                                   differentBackground.selected ? i18n.tr("Welcome screen") : i18n.tr("Choose background")))
 
-        onSourceChanged: backgroundPanel.backgroundFile = source
+        //onSourceChanged: backgroundPanel.backgroundFile = source
     }
 
     Label {
@@ -109,7 +109,7 @@ ItemPage {
         onClicked: pageStack.push(Utilities.createAlbumPage(
                                   differentBackground.selected ? i18n.tr("Home screen") : i18n.tr("Choose background")))
 
-        onSourceChanged: background.pictureUri = Qt.resolvedUrl(source)
+        //onSourceChanged: background.pictureUri = Qt.resolvedUrl(source)
     }
 
     /* We don't have a good way of doing this after passing an invalid image to
