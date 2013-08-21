@@ -31,6 +31,10 @@ ItemPage {
     title: i18n.tr("Security & Privacy")
     flickable: scrollWidget
 
+    UbuntuDiagnostics {
+        id: diagnosticsWidget
+    }
+
     GSettings {
         id: unitySettings
         schema.id: "com.canonical.Unity.Lenses"
@@ -66,6 +70,9 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
                 progression: true
+                value: diagnosticsWidget.canReportCrashes ?
+                           i18n.tr("Sent") :
+                           i18n.tr("Not sent")
                 onClicked: {
                     var path = "../diagnostics/PageComponent.qml";
                     pageStack.push(Qt.resolvedUrl(path));
