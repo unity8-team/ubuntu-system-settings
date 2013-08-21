@@ -31,46 +31,98 @@ ItemPage {
     title: i18n.tr("Update")
     flickable: scrollWidget // maybe remove
 
-
+    // TODO: surely needs its own QML as the whole logic is here
     UbuntuUpdatePanel {
         id: updateBackend
 
+        property int downloadProgress: 0
+        property string downloadRemainingTime
         // FIXME: those should be taken from the backend
         property string lastUpdateDate: "1983-09-13"
-        property string downloadRemainingTime: "40 seconds"
         property variant updateDescriptions: ["Enables a 200x improvment on Ubuntu Edge phone",
                                               "Makes you a sandwich",
                                               "Makes Steve and Loic happy"]
 
-        property int currentUpdateState: UbuntuUpdatePanel.ReadyToInstall
+        property int currentUpdateState: UbuntuUpdatePanel.Checking
+        property string checkinfoMessage: i18n.tr("Checking for updates")
+        infoMessage: checkinfoMessage
 
 
-        function startUpdate() {
-            currentUpdateState = UbuntuUpdatePanel.Downloading
-            //TriggerUpdate();
+        /***************************
+         * DIRECT CALLS TO BACKEND *
+         *                         */
+        function recheckForUpdate() {
+            infoMessage = "";
+            var msg = CancelUpdate();
+            if(msg) {
+                infoMessage = TranslateFromBackend(msg);
+                currentUpdateState = UbuntuUpdatePanel.CheckingError;
+                return;
+            }
+            currentUpdateState = UbuntuUpdatePanel.Checking;
+            infoMessage = checkinfoMessage;
+            CheckForUpdate();
         }
 
-        /*onReadyToReboot: {
-            currentUpdateState = UbuntuUpdatePanel.ReadyToInstall;
+        function downloadUpdate() {
+            infoMessage = "";
+            DownloadUpdate();
         }
-        onUpdateFailed: {
-            currentUpdateState = UbuntuUpdatePanel.Failed;
-        }*/
 
-        onSigUpdateAvailableStatus: {
+        function applyUpdate() {
+            infoMessage = "";
+            var msg = ApplyUpdate();
+            if (msg)
+                infoMessage = i18n.tr("<b>Apply update failed:</b><br/>%1").arg(TranslateFromBackend(msg));
+        }
+
+        function pauseUpdate() {
+            infoMessage = "";
+            var msg = PauseUpdate();
+            if (msg)
+                infoMessage = i18n.tr("<b>Pausing failed:</b><br/>%1").arg(TranslateFromBackend(msg));
+        }
+
+        /************************
+         * SIGNALS FROM BACKEND *
+         *                      */
+        onUpdateAvailableStatus: {
             if(isAvailable) {
                 // TODO: more case like manual mode, failure…
                 currentUpdateState = UbuntuUpdatePanel.UpdateAvailable;
             }
             else {
                 currentUpdateState = UbuntuUpdatePanel.NoUpdate;
+                infoMessage = i18n.tr("No software update available\nLast updated %1").arg(lastUpdateDate);
             }
         }
 
-        function isUpdateContentToDisplay() {
-            return currentUpdateState !== UbuntuUpdatePanel.Checking && currentUpdateState !== UbuntuUpdatePanel.NoUpdate;
+        onUpdateProgress: {
+            downloadProgress = percentage;
+            if (eta > 0)
+                downloadRemainingTime = i18n.tr("%1 seconds").arg(eta);
+            else
+                downloadRemainingTime = i18n.tr("No estimate for the download");
+            currentUpdateState = UbuntuUpdatePanel.Downloading;
         }
 
+        onUpdatePaused: {
+            downloadProgress = percentage;
+            currentUpdateState = UbuntuUpdatePanel.Paused;
+        }
+
+        onUpdateDownloaded: {
+            currentUpdateState = UbuntuUpdatePanel.ReadyToInstall;
+        }
+
+        onUpdateFailed: {
+            infoMessage = i18n.tr("<b>Download failed:</b><br/>%1").arg(TranslateFromBackend(lastReason));
+            currentUpdateState = UbuntuUpdatePanel.DownloadFailed;
+        }
+
+        function isUpdateContentToDisplay() {
+            return currentUpdateState !== UbuntuUpdatePanel.Checking && currentUpdateState !== UbuntuUpdatePanel.NoUpdate && currentUpdateState !== UbuntuUpdatePanel.CheckingError;
+        }
     }
 
     Flickable {
@@ -85,8 +137,12 @@ ItemPage {
                 height: {
                     if (updateBackend.isUpdateContentToDisplay())
                         return updateContentDisplay.height+ units.gu(4);
-                    else
-                        return updateStatusbar.height + checkUpdateIndicator.height + units.gu(6);
+                    else {
+                        var updateStatusSize = updateStatusbar.height + checkUpdateIndicator.height + units.gu(6);
+                        if (retryCheckUpdateButton.visible)
+                            return updateStatusSize + retryCheckUpdateButton.height
+                        return updateStatusSize;
+                    }
                 }
 
                 Column {
@@ -107,11 +163,17 @@ ItemPage {
                         width: parent.width
                         anchors.horizontalCenter: parent.horizontalCenter
 
-                        text: { if (updateBackend.currentUpdateState === UbuntuUpdatePanel.NoUpdate)
-                                  return i18n.tr("No software update available\nLast updated %1").arg(updateBackend.lastUpdateDate);
-                                return i18n.tr("Checking for updates"); }
-                        visible: !updateBackend.isUpdateContentToDisplay()
+                        text: updateBackend.infoMessage
+                        visible: !updateBackend.isUpdateContentToDisplay() && updateBackend.infoMessage
                         wrapMode: Text.WordWrap
+                        textFormat: Text.RichText
+                    }
+                    Button {
+                        id: retryCheckUpdateButton
+                        text: i18n.tr("Retry checking")
+                        width: parent.width
+                        onClicked: updateBackend.recheckForUpdate()
+                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.NoUpdate || updateBackend.currentUpdateState === UbuntuUpdatePanel.CheckingError
                     }
 
                     Column {
@@ -150,6 +212,18 @@ ItemPage {
                             selectedIndex: -1
                         }
 
+                        Label {
+                            // FIXME: doesn't center because of width (but activity indicator is centered)
+                            // but we need a width or something to have the wrapMode working
+                            width: parent.width
+                            anchors.horizontalCenter: parent.horizontalCenter
+
+                            text: updateBackend.infoMessage
+                            visible: updateBackend.infoMessage !== ""
+                            wrapMode: Text.WordWrap
+                            textFormat: Text.RichText
+                        }
+
                         Column {
                             id: updateDownloading
                             spacing: units.gu(1)
@@ -160,7 +234,7 @@ ItemPage {
                                 id: updateProgress
                                 maximumValue : 100
                                 minimumValue : 0
-                                value : 70
+                                value : updateBackend.downloadProgress
                                 width: parent.width
                             }
 
@@ -173,14 +247,14 @@ ItemPage {
                                 id: pauseDownloadButton
                                 text: i18n.tr("Pause downloading")
                                 width: parent.width
-                                onClicked: updateBackend.startUpdate()
+                                onClicked: updateBackend.pauseUpdate()
                                 visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading
                             }
 
                             Button {
                                 text: i18n.tr("Resume downloading")
                                 width: parent.width
-                                onClicked: updateBackend.startUpdate()
+                                onClicked: updateBackend.downloadUpdate()
                                 visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
                             }
 
@@ -194,28 +268,21 @@ ItemPage {
                             Button {
                                 text: i18n.tr("Download")
                                 width: parent.width
-                                onClicked: updateBackend.startUpdate()
+                                onClicked: updateBackend.downloadUpdate()
                                 visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.UpdateAvailable
-                            }
-
-                            Label {
-                                text: i18n.tr("<b>Download is failing:</b><br/>%1").arg("The update server is not responding. Try again later.")
-                                wrapMode: Text.WordWrap
-                                textFormat: Text.RichText
-                                visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Failed
                             }
 
                             Button {
                                 text: i18n.tr("Retry")
                                 width: parent.width
-                                onClicked: updateBackend.startUpdate()
-                                visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Failed
+                                onClicked: updateBackend.recheckForUpdate()
+                                visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.DownloadFailed
                             }
 
                             Button {
                                 text: i18n.tr("Install & Restart")
                                 width: parent.width
-                                onClicked: updateBackend.startUpdate()
+                                onClicked: updateBackend.applyUpdate()
                                 visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.ReadyToInstall
                             }
                         }
