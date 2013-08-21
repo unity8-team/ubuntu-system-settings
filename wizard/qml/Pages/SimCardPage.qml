@@ -39,7 +39,8 @@ LocalComponents.Page {
                 leftMargin: units.gu(2.5)
             }
             source: "data/meet_ubuntu_simcard@30.png"
-            scale: 0.5
+            height: units.gu(9)
+            width: units.gu(12.5)
         }
 
         Label {

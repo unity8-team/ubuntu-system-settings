@@ -15,17 +15,34 @@
  */
 
 import QtQuick 2.0
+import GSettings 1.0
 import Ubuntu.Components 0.1
 
 MainView {
     width: units.gu(40)
     height: units.gu(71)
 
-//    Component.onCompleted: Theme.name = "Ubuntu.Components.Themes.SuruGradient"
+    headerColor: "#57365E"
+    backgroundColor: "#A55263"
+    footerColor: "#D75669"
+
+    Component.onCompleted: Theme.name = "Ubuntu.Components.Themes.SuruGradient"
+
+    GSettings {
+        id: background
+        schema.id: "org.gnome.desktop.background"
+    }
+
+    Image {
+        id: image
+        anchors.fill: parent
+        source: background.pictureUri
+        fillMode: Image.PreserveAspectCrop
+        visible: status === Image.Ready
+    }
 
     PageStack {
         id: pageStack
-
         Component.onCompleted: push(Qt.resolvedUrl("Pages/WelcomePage.qml"))
     }
 }
