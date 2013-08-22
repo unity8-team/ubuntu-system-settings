@@ -34,6 +34,7 @@ ItemPage {
             text: i18n.tr("Lock security")
             value: i18n.tr("Swipe (no security)")
             progression: true
+            onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
         }
 
         ListItem.SingleValue {

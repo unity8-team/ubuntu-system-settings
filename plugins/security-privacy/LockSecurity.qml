@@ -34,6 +34,7 @@ ItemPage {
         }
 
         ListItem.ValueSelector {
+            id: unlockMethod
             values: [
                 i18n.tr("Swipe (no security)"),
                 i18n.tr("4-digit passcode"),
@@ -41,6 +42,13 @@ ItemPage {
             ]
             expanded: true
             onExpandedChanged: expanded = true
+        }
+        ListItem.SingleControl {
+            control: Button {
+                text: i18n.tr("Change passcode…")
+                width: parent.width - units.gu(4)
+                enabled: false //unlockMethod.selectedIndex == 1 //passcode
+            }
         }
     }
 }
