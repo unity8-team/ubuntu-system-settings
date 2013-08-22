@@ -110,7 +110,7 @@ void Battery::getLastFullCharge()
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, m_deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", 864000, 1000, NULL, NULL);
-    for (uint i=values->len-1; i > 0; i--) {
+    for (uint i=0; i < values->len; i++) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         if (updateLastFullCharge(item, offset) == true) {
@@ -137,7 +137,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", timespan, resolution, NULL, NULL);
-    for (uint i=0; i < values->len; i++) {
+    for (uint i=values->len-1; i > 0; i--) {
         QVariantMap listItem;
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
