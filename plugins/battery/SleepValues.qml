@@ -68,7 +68,7 @@ ItemPage {
                 expanded: true
                 // TODO: There is no way to have a ValueSelector always expanded
                 onExpandedChanged: expanded = true
-                values: [i18n.tr("After %1 minutes").arg(1),
+                values: [i18n.tr("After %1 minute").arg(1),
                     i18n.tr("After %1 minutes").arg(2),
                     i18n.tr("After %1 minutes").arg(3),
                     i18n.tr("After %1 minutes").arg(4),

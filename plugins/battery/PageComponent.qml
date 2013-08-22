@@ -202,12 +202,12 @@ ItemPage {
                 value: {
                     if (batteryBackend.powerdRunning ) {
                         return (powerSettings.activityTimeout != 0) ?
-                                    i18n.tr("After %1 minutes").arg(Math.round(powerSettings.activityTimeout/60)) :
+                                    i18n.tr("After %1 minute").arg(Math.round(powerSettings.activityTimeout/60)) :
                                     i18n.tr("Never")
                     }
                     else {
                         return (powerSettings.sleepDisplayBattery != 0) ?
-                                    i18n.tr("After %1 minutes").arg(Math.round(powerSettings.sleepDisplayBattery/60)) :
+                                    i18n.tr("After %1 minute").arg(Math.round(powerSettings.sleepDisplayBattery/60)) :
                                     i18n.tr("Never")
                     }
                 }

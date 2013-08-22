@@ -37,7 +37,7 @@ ItemPage {
             values: [
                 i18n.tr("Swipe (no security)"),
                 i18n.tr("4-digit passcode"),
-                i18n.tr("Passphrase")
+                i18n.tr("Passphrase…")
             ]
             expanded: true
             onExpandedChanged: expanded = true
