@@ -57,10 +57,10 @@ public:
 
 
 public Q_SLOTS:
-    void ProcessAvailableStatus(bool, bool, int, int, QString, QString);
+    void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
 
 Q_SIGNALS:
-    void updateAvailableStatus(bool isAvailable, bool downloading, int availableVersion, int updateSize,
+    void updateAvailableStatus(bool isAvailable, bool downloading, QString availableVersion, int updateSize,
                                QString lastUpdateDate, QStringList descriptions, QString errorReason);
     void updateProgress(int percentage, double eta);
     void updatePaused(int percentage);
