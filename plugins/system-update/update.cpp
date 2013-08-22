@@ -125,6 +125,7 @@ QString Update::TranslateFromBackend(QString msg) {
 
 void Update::ProcessAvailableStatus(bool isAvailable, bool downloading, int availableVersion, int updateSize, QString lastUpdateDate, QString errorReason)
 {
+    //TODO: bind with the real description once we can listen to the signal
     QStringList descriptions;
     descriptions.append("Description for update1");
     descriptions.append("Description for update2");
