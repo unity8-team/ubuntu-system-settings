@@ -90,6 +90,25 @@ QString Update::PauseDownload() {
     return _("Can't pause current request (can't contact service)");
 }
 
+int Update::GetDownloadMode() {
+    QDBusReply<QString> reply = m_SystemServiceIface.call("GetSetting", "auto_download");
+    int default_mode = 1;
+    if (reply.isValid()) {
+        bool ok;
+        int result;
+        result = reply.value().toInt(&ok);
+        if (ok)
+            return result;
+        return default_mode;
+    }
+    return default_mode;
+}
+
+void Update::SetDownloadMode(int value) {
+    m_SystemServiceIface.call("SetSetting", "auto_download", QString::number(value));
+}
+
+
 QString Update::InfoMessage() {
     return m_infoMessage;
 }

@@ -311,15 +311,8 @@ ItemPage {
                     i18n.tr("When on wi-fi"),
                     // TODO: Data charges may apply needs to be smaller
                     i18n.tr("On any data connection\nData charges may apply.")]
-                // FIXME
-                selectedIndex: 0
-                //FIXME
-                /*onSelectedIndexChanged: {
-                    if (selectedIndex == 0)
-                        connMan.powered = false;
-                    else
-                        connMan.powered = true;
-                }*/
+                selectedIndex: updateBackend.GetDownloadMode()
+                onSelectedIndexChanged: { updateBackend.SetDownloadMode(selectedIndex); }
             }
         }
     }

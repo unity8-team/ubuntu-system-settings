@@ -35,7 +35,7 @@ class Update : public QObject
                 READ InfoMessage
                 WRITE SetInfoMessage
                 NOTIFY infoMessageChanged)
-    
+
 public:
     explicit Update(QObject *parent = 0);
     ~Update();
@@ -50,6 +50,8 @@ public:
     Q_INVOKABLE QString ApplyUpdate();
     Q_INVOKABLE QString CancelUpdate();
     Q_INVOKABLE QString PauseDownload();
+    Q_INVOKABLE int GetDownloadMode();
+    Q_INVOKABLE void SetDownloadMode(int);
     Q_INVOKABLE QString TranslateFromBackend(QString);
 
 
@@ -64,6 +66,7 @@ Q_SIGNALS:
     void updatePaused(int percentage);
     void updateDownloaded();
     void updateFailed(int consecutiveFailureCount, QString lastReason);
+    void downloadModeChanged();
     void infoMessageChanged();
 
 private:
@@ -72,8 +75,6 @@ private:
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;
     QDBusInterface m_SystemServiceIface;
-
-    void m_getUpdateInfos();
 };
 
 #endif // UPDATE_H
