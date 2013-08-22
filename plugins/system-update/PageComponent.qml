@@ -87,6 +87,7 @@ ItemPage {
          ************************/
         onUpdateAvailableStatus: {
 
+            infoMessage = "";
             updateVersion = availableVersion;
             // TODO: be more agile in the MB handling
             updateBackend.updateSize = i18n.tr("%1 MB").arg(updateSize/(1024*1024));
