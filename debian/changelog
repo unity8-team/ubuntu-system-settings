@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.1+13.10.20130822-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: some tweaks to the charge info: - read history in the right
+    order - ignore buggy empty charge values from suspend/resume -
+    correctly determine when we stop charging.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 270
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 11:18:59 +0000
+
 ubuntu-system-settings (0.1+13.10.20130821-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
