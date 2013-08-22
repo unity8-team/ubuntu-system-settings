@@ -55,10 +55,10 @@ public:
 
 
 public Q_SLOTS:
-    void ProcessAvailableStatus(bool, bool, int, int, QString, const QDBusArgument&, QString);
+    void ProcessAvailableStatus(bool, bool, int, int, QString, QString);
 
 Q_SIGNALS:
-    void updateAvailableStatus(bool isAvailable);
+    void updateAvailableStatus(bool, bool, int, int, QString, QList< QMap<QString, QString> >, QString);
     void updateProgress(int percentage, double eta);
     void updatePaused(int percentage);
     void updateDownloaded();

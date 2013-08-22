@@ -32,47 +32,6 @@ QString _(const char *text)
     return QString::fromUtf8(dgettext(0, text));
 }
 
-/**************/
-/* WILL SPLIT */
-class MyArrayWithDictInside
-{
-public:
-    QVector< QMap<QString, QString> > foo;
-};
-Q_DECLARE_METATYPE(MyArrayWithDictInside)
-
-
-QDBusArgument &operator<<(QDBusArgument &argument, const MyArrayWithDictInside)
-{
- // you don't really need to implement this one if you don't plan writing it to the bus but i think qDbusRegisterType complains if you don't have it
-    return argument;
-}
-
-const QDBusArgument &operator>>(const QDBusArgument &argument, MyArrayWithDictInside &bar)
-{
-     while ( !argument.atEnd() ) {
-         QMap<QString, QString> map;
-         argument.beginMap();
-         while ( !argument.atEnd() ) {
-             QString key;
-             QString value;
-             argument.beginMapEntry();
-             argument >> key >> value;
-             argument.endMapEntry();
-             map.insert( key, value );
-         }
-
-         argument.endMap();
-
-         bar.foo.append(map);
-     }
-
-     argument.endArray();
-     return argument;
-}
-
-/**************/
-
 Update::Update(QObject *parent) :
     QObject(parent),
     m_infoMessage(""),
@@ -82,15 +41,10 @@ Update::Update(QObject *parent) :
                          "com.canonical.SystemImage",
                          m_systemBusConnection)
 {
-    qRegisterMetaType<MyArrayWithDictInside>();
-    qDBusRegisterMetaType<MyArrayWithDictInside>();
 
+    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, int, int, QString, QString)),
+               this, SLOT(ProcessAvailableStatus(bool, bool, int, int, QString, QString)));
     // signals to forward directly to QML
-    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, int, int, QString, MyArrayWithDictInside, QString)),
-               this, SLOT(ProcessAvailableStatus(bool, bool, int, int, QString, MyArrayWithDictInside, QString)));
-
-/*    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, int, int, QString, QDBusRawType::aa{ss}, QString)),
-            this, SLOT(ProcessAvailableStatus(bool, bool, int, int, QString, const QDBusArgument&, QString)));*/
     connect(&m_SystemServiceIface, SIGNAL(UpdateProgress(int, double)),
                 this, SIGNAL(updateProgress(int, double)));
     connect(&m_SystemServiceIface, SIGNAL(UpdatePaused(int)),
@@ -150,9 +104,7 @@ QString Update::TranslateFromBackend(QString msg) {
     return msg;
 }
 
-
-// We'll care about that one once connected to the signal
-void Update::ProcessAvailableStatus(bool, bool, int, int, QString, const QDBusArgument &, QString)
+void Update::ProcessAvailableStatus(bool, bool, int, int, QString, QString)
 {
     //const QDBusArgument &bar = foo;
     //Q_EMIT updateAvailableStatus();
