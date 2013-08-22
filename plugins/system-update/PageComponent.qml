@@ -113,7 +113,7 @@ ItemPage {
         onUpdateProgress: {
             downloadProgress = percentage;
             if (eta > 0)
-                downloadRemainingTime = i18n.tr("About %1 seconds remaining").arg(eta);
+                downloadRemainingTime = i18n.tr("About %1 second remaining", "About %1 seconds remaining", eta).arg(eta);
             else
                 downloadRemainingTime = i18n.tr("No estimate for the download");
             currentUpdateState = UbuntuUpdatePanel.Downloading;
