@@ -89,16 +89,6 @@ int Battery::lastFullCharge()
     return m_lastFullCharge;
 }
 
-bool Battery::updateLastFullCharge(UpHistoryItem *item, int offset)
-{
-    if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
-        m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(item)));
-        Q_EMIT(lastFullChargeChanged());
-        return true; /* return true if the charge value got updated */
-    }
-    return false;
-}
-
 void Battery::getLastFullCharge()
 {
     UpHistoryItem *item;
@@ -110,12 +100,20 @@ void Battery::getLastFullCharge()
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, m_deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", 864000, 1000, NULL, NULL);
-    for (uint i=values->len-1; i > 0; i--) {
+    for (uint i=0; i < values->len; i++) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
-        if (updateLastFullCharge(item, offset) == true) {
-            g_ptr_array_unref (values);
-            return;
+        /* Getting the next point after full charge, since upower registers only on state changes,
+           typically you get no data while the device is fully charged and plugged and you get a discharging
+           one when you unplugged, that's when the charge stops */
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+            if (i < values->len-1) {
+                UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i+1);
+                m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
+                Q_EMIT(lastFullChargeChanged());
+                g_ptr_array_unref (values);
+                return;
+            }
         }
     }
     g_ptr_array_unref (values);
@@ -132,22 +130,39 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     gint32 offset = 0;
     GTimeVal timeval;
     QVariantList listValues;
+    gdouble currentValue = 0;
 
     g_get_current_time(&timeval);
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", timespan, resolution, NULL, NULL);
-    for (uint i=0; i < values->len; i++) {
+    for (uint i=values->len-1; i > 0; i--) {
         QVariantMap listItem;
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
             continue;
 
-        updateLastFullCharge(item, offset);
+        /* TODO: find better way to filter out suspend/resume buggy values,
+         * we get empty charge report when that happens, in practice batteries don't run flat often,
+         * if charge was over 3% before it's likely a bug so we ignore the value */
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_EMPTY && currentValue > 3)
+            continue;
 
+        /* Getting the next point after full charge, since upower registers only on state changes,
+           typically you get no data while the device is fully charged and plugged and you get a discharging
+           one when you unplugged, that's when the charge stops */
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+            if (i > 1) {
+                UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i-1);
+                m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
+                Q_EMIT(lastFullChargeChanged());
+            }
+        }
+
+        currentValue = up_history_item_get_value(item);
         listItem.insert("time",(offset - (gint32) up_history_item_get_time(item)));
-        listItem.insert("value",up_history_item_get_value(item));
+        listItem.insert("value", currentValue);
         listValues += listItem;
     }
     g_ptr_array_unref (values);

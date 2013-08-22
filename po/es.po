@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-14 15:54+0200\n"
-"PO-Revision-Date: 2013-08-09 18:37+0000\n"
+"PO-Revision-Date: 2013-08-21 11:01+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-21 05:49+0000\n"
-"X-Generator: Launchpad (build 16731)\n"
+"X-Launchpad-Export-Date: 2013-08-22 05:48+0000\n"
+"X-Generator: Launchpad (build 16734)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -182,7 +182,7 @@ msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:51
 msgid "1 day ago"
-msgstr ""
+msgstr "Ayer"
 
 #: ../plugins/battery/PageComponent.qml:53
 #, qt-format
@@ -385,7 +385,7 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:62
 msgid "All languages available:"
-msgstr "Todos los idomas disponibles:"
+msgstr "Todos los idiomas disponibles:"
 
 #: ../plugins/phone/CallForwarding.qml:27
 #: ../plugins/phone/CallForwarding.qml:60
@@ -404,7 +404,7 @@ msgstr ""
 #: ../plugins/phone/CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
-"No se puede comprobar el estado del desvío de llamadas, Inténtelo más tarde."
+"No se puede comprobar el estado del desvío de llamadas. Inténtelo más tarde."
 
 #: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
