@@ -114,14 +114,3 @@ void Update::ProcessAvailableStatus(bool isAvailable, bool downloading, int avai
     Q_EMIT updateAvailableStatus(isAvailable, downloading, availableVersion, updateSize, lastUpdateDate, descriptions, errorReason);
 }
 
-/*
-    QDBusReply<qint64> reply2 = m_SystemServiceIface.call("GetUpdateSize");
-    if (reply2.isValid())
-        m_updateSize = QString("%1 Mb").arg(QString::number(reply2.value()/1024.0/1024.0));
-    else
-        m_updateSize = "Unknown";
-
-    // TODO: descriptions (array of dict)
-
-}
-*/
