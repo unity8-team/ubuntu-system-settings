@@ -31,6 +31,10 @@ ItemPage {
     title: i18n.tr("Security & Privacy")
     flickable: scrollWidget
 
+    UbuntuDiagnostics {
+        id: diagnosticsWidget
+    }
+
     GSettings {
         id: unitySettings
         schema.id: "com.canonical.Unity.Lenses"
@@ -53,17 +57,63 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
+            ListItem.Standard {
+                text: i18n.tr("Security:")
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("Phone locking")
+                value: i18n.tr("1 minute",
+                               "%1 minutes".arg(5),
+                               5)
+                progression: true
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("SIM PIN")
+                value: "Off"
+                progression: true
+            }
+            ListItem.Standard {
+                text: i18n.tr("Encryption")
+                control: Switch { }
+            }
+            ListItem.Caption {
+                text: i18n.tr("Encryption protects against access to phone data when the phone is connected to a PC or other device.")
+            }
+            ListItem.Standard {
+                text: i18n.tr("Privacy:")
+            }
+            ListItem.Standard {
+                text: i18n.tr("Stats on welcome screen")
+                control: Switch { enabled: true }
+            }
+            ListItem.Standard {
+                text: i18n.tr("Messages on welcome screen")
+                control: Switch { }
+            }
             ListItem.SingleValue {
                 id: dashSearchId
                 text: i18n.tr("Dash search")
-                value: (unitySettings.remoteContentSearch === 'all') ? i18n.tr("Phone and Internet") : i18n.tr("Phone only")
+                value: (unitySettings.remoteContentSearch === 'all') ?
+                           i18n.tr("Phone and Internet") :
+                           i18n.tr("Phone only")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Dash.qml"))
             }
-
+            ListItem.SingleValue {
+                text: i18n.tr("Location access")
+                value: "On"
+                progression: true
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("Other app access")
+                progression: true
+            }
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
                 progression: true
+                value: diagnosticsWidget.canReportCrashes ?
+                           i18n.tr("Sent") :
+                           i18n.tr("Not sent")
                 onClicked: {
                     var path = "../diagnostics/PageComponent.qml";
                     pageStack.push(Qt.resolvedUrl(path));
