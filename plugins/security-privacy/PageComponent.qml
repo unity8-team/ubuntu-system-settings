@@ -66,18 +66,12 @@ ItemPage {
                                "%1 minutes".arg(5),
                                5)
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
             }
             ListItem.SingleValue {
                 text: i18n.tr("SIM PIN")
                 value: "Off"
                 progression: true
-            }
-            ListItem.Standard {
-                text: i18n.tr("Encryption")
-                control: Switch { }
-            }
-            ListItem.Caption {
-                text: i18n.tr("Encryption protects against access to phone data when the phone is connected to a PC or other device.")
             }
             ListItem.Standard {
                 text: i18n.tr("Privacy:")
