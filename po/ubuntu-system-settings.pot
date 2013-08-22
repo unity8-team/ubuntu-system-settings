@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-22 09:43+0000\n"
+"POT-Creation-Date: 2013-08-22 14:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,7 @@ msgstr ""
 #: ../plugins/battery/PageComponent.qml:206
 #: ../plugins/battery/PageComponent.qml:211
 #: ../plugins/battery/SleepValues.qml:76
+#: ../plugins/security-privacy/LockWhenIdle.qml:57
 msgid "Never"
 msgstr ""
 
@@ -229,6 +230,12 @@ msgstr ""
 #: ../plugins/battery/SleepValues.qml:71 ../plugins/battery/SleepValues.qml:72
 #: ../plugins/battery/SleepValues.qml:73 ../plugins/battery/SleepValues.qml:74
 #: ../plugins/battery/SleepValues.qml:75
+#: ../plugins/security-privacy/LockWhenIdle.qml:51
+#: ../plugins/security-privacy/LockWhenIdle.qml:52
+#: ../plugins/security-privacy/LockWhenIdle.qml:53
+#: ../plugins/security-privacy/LockWhenIdle.qml:54
+#: ../plugins/security-privacy/LockWhenIdle.qml:55
+#: ../plugins/security-privacy/LockWhenIdle.qml:56
 #, qt-format
 msgid "After %1 minutes"
 msgstr ""
@@ -484,7 +491,7 @@ msgid "Reset launcher & home screen"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:29
-#: ../plugins/security-privacy/PageComponent.qml:95
+#: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Dash search"
 msgstr ""
 
@@ -494,14 +501,51 @@ msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:53
 #: ../plugins/security-privacy/PageComponent.qml:46
-#: ../plugins/security-privacy/PageComponent.qml:98
+#: ../plugins/security-privacy/PageComponent.qml:92
 msgid "Phone only"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:53
 #: ../plugins/security-privacy/PageComponent.qml:44
-#: ../plugins/security-privacy/PageComponent.qml:97
+#: ../plugins/security-privacy/PageComponent.qml:91
 msgid "Phone and Internet"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:27
+#: ../plugins/security-privacy/PhoneLocking.qml:34
+msgid "Lock security"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:33
+msgid "Unlock the phone using:"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:38
+#: ../plugins/security-privacy/PhoneLocking.qml:35
+msgid "Swipe (no security)"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:39
+msgid "4-digit passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:40
+msgid "Passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockWhenIdle.qml:29
+#: ../plugins/security-privacy/PhoneLocking.qml:40
+msgid "Lock when idle"
+msgstr ""
+
+#: ../plugins/security-privacy/LockWhenIdle.qml:43
+msgid "Lock the phone when it is not in use:"
+msgstr ""
+
+#: ../plugins/security-privacy/LockWhenIdle.qml:62
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
 msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
@@ -513,60 +557,56 @@ msgid "Security:"
 msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:64
+#: ../plugins/security-privacy/PhoneLocking.qml:27
 msgid "Phone locking"
 msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:65
+#: ../plugins/security-privacy/PhoneLocking.qml:41
 #, qt-format
 msgid "1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/security-privacy/PageComponent.qml:71
+#: ../plugins/security-privacy/PageComponent.qml:72
 msgid "SIM PIN"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:76
-msgid "Encryption"
-msgstr ""
-
-#: ../plugins/security-privacy/PageComponent.qml:80
-msgid ""
-"Encryption protects against access to phone data when the phone is connected "
-"to a PC or other device."
-msgstr ""
-
-#: ../plugins/security-privacy/PageComponent.qml:83
+#: ../plugins/security-privacy/PageComponent.qml:77
 msgid "Privacy:"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:86
+#: ../plugins/security-privacy/PageComponent.qml:80
 msgid "Stats on welcome screen"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:90
+#: ../plugins/security-privacy/PageComponent.qml:84
 msgid "Messages on welcome screen"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:103
+#: ../plugins/security-privacy/PageComponent.qml:97
 msgid "Location access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:108
+#: ../plugins/security-privacy/PageComponent.qml:102
 msgid "Other app access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:112
+#: ../plugins/security-privacy/PageComponent.qml:106
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:115
+#: ../plugins/security-privacy/PageComponent.qml:109
 msgid "Sent"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:116
+#: ../plugins/security-privacy/PageComponent.qml:110
 msgid "Not sent"
+msgstr ""
+
+#: ../plugins/security-privacy/PhoneLocking.qml:50
+msgid "Sleep locks immediately"
 msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:16
