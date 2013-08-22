@@ -168,10 +168,9 @@ ItemPage {
                     }
                     Label {
                         id: updateStatusbar
-                        //FIXME: doesn't center because of width (but activity indicator is centered)
-                        // but we need a width or something to have the wrapMode working
-                        width: parent.width
                         anchors.horizontalCenter: parent.horizontalCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        width: parent.width
 
                         text: updateBackend.infoMessage
                         visible: !updateBackend.isUpdateContentToDisplay() && updateBackend.infoMessage
@@ -223,10 +222,9 @@ ItemPage {
                         }
 
                         Label {
-                            // FIXME: doesn't center because of width (but activity indicator is centered)
-                            // but we need a width or something to have the wrapMode working
-                            width: parent.width
                             anchors.horizontalCenter: parent.horizontalCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            width: parent.width
 
                             text: updateBackend.infoMessage
                             visible: updateBackend.infoMessage !== ""
