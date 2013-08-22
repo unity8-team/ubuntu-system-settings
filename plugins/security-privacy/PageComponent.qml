@@ -103,6 +103,7 @@ ItemPage {
                 text: i18n.tr("Location access")
                 value: "On"
                 progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
             }
             ListItem.SingleValue {
                 text: i18n.tr("Other app access")
