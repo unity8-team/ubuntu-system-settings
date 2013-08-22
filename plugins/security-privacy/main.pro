@@ -6,6 +6,7 @@ TARGET = security-privacy
 
 QML_SOURCES = \
     Dash.qml  \
+    Location.qml \
     LockSecurity.qml \
     LockWhenIdle.qml \
     PageComponent.qml \

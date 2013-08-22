@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-22 14:50+0000\n"
+"POT-Creation-Date: 2013-08-22 15:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -511,6 +511,61 @@ msgstr ""
 msgid "Phone and Internet"
 msgstr ""
 
+#: ../plugins/security-privacy/Location.qml:29
+msgid "Location"
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:36
+msgid "Location detection"
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:45
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:47
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:49
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:51
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:53
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:55
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:57
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:62
+msgid "Allow access to location:"
+msgstr ""
+
 #: ../plugins/security-privacy/LockSecurity.qml:27
 #: ../plugins/security-privacy/PhoneLocking.qml:34
 msgid "Lock security"
@@ -589,19 +644,19 @@ msgstr ""
 msgid "Location access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:102
+#: ../plugins/security-privacy/PageComponent.qml:103
 msgid "Other app access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:106
+#: ../plugins/security-privacy/PageComponent.qml:107
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:109
+#: ../plugins/security-privacy/PageComponent.qml:110
 msgid "Sent"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:110
+#: ../plugins/security-privacy/PageComponent.qml:111
 msgid "Not sent"
 msgstr ""
 
