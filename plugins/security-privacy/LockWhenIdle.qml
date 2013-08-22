@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
+ * Contact: Iain Lane <iain.lane@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -18,9 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import GSettings 1.0
 import QtQuick 2.0
-import QtSystemInfo 5.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
@@ -28,26 +26,8 @@ import SystemSettings 1.0
 ItemPage {
     id: root
 
-    title: i18n.tr("Auto sleep")
+    title: i18n.tr("Lock when idle")
     flickable: scrollWidget
-
-    property bool usePowerd
-
-    GSettings {
-        id: powerSettings
-        schema.id: usePowerd ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
-        onChanged: {
-            if([60,120,180,240,300].indexOf(value) != -1)
-                if (key == "activityTimeout" || key == "sleepDisplayBattery")
-                    sleepSelector.selectedIndex = (value/60)-1
-        }
-        Component.onCompleted: {
-            if (usePowerd)
-                sleepSelector.selectedIndex = (powerSettings.activityTimeout === 0) ? 5 : powerSettings.activityTimeout/60-1
-            else
-                sleepSelector.selectedIndex = (powerSettings.sleepDisplayBattery === 0) ? 5 : powerSettings.sleepDisplayBattery/60-1
-        }
-    }
 
     Flickable {
         id: scrollWidget
@@ -60,7 +40,7 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Standard {
-                text: i18n.tr("Put the display to sleep when idle")
+                text: i18n.tr("Lock the phone when it is not in use:")
             }
 
             ListItem.ValueSelector {
@@ -84,17 +64,15 @@ ItemPage {
                     i18n.tr("After %1 minute".arg(5),
                             "After %1 minutes".arg(5),
                             5),
+                    i18n.tr("After %1 minute".arg(10),
+                            "After %1 minutes".arg(10),
+                            10),
                     i18n.tr("Never")]
-                onSelectedIndexChanged: {
-                  if (usePowerd)
-                    powerSettings.activityTimeout = (selectedIndex == 5) ? 0 : (selectedIndex+1)*60
-                  else
-                    powerSettings.sleepDisplayBattery = (selectedIndex == 5) ? 0 : (selectedIndex+1)*60
-                }
+                selectedIndex: 4 // 5
             }
 
             ListItem.Caption {
-                text: i18n.tr("Videos and some apps may keep the phone awake.")
+                text: i18n.tr("Shorter times are more secure. Phone won't lock during calls or video playback.")
             }
         }
     }
