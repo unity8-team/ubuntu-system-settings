@@ -35,6 +35,10 @@ class Update : public QObject
                 READ InfoMessage
                 WRITE SetInfoMessage
                 NOTIFY infoMessageChanged)
+    Q_PROPERTY( int downloadMode
+                READ DownloadMode
+                WRITE SetDownloadMode
+                NOTIFY downloadModeChanged)
 
 public:
     explicit Update(QObject *parent = 0);
@@ -44,20 +48,19 @@ public:
 
     QString InfoMessage();
     void SetInfoMessage(QString);
+    int DownloadMode();
+    void SetDownloadMode(int);
 
     Q_INVOKABLE void CheckForUpdate();
     Q_INVOKABLE void DownloadUpdate();
     Q_INVOKABLE QString ApplyUpdate();
     Q_INVOKABLE QString CancelUpdate();
     Q_INVOKABLE QString PauseDownload();
-    Q_INVOKABLE int GetDownloadMode();
-    Q_INVOKABLE void SetDownloadMode(int);
     Q_INVOKABLE QString TranslateFromBackend(QString);
-
-
 
 public Q_SLOTS:
     void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
+    void ProcessSettingChanged(QString, QString);
 
 Q_SIGNALS:
     void updateAvailableStatus(bool isAvailable, bool downloading, QString availableVersion, int updateSize,
@@ -66,11 +69,13 @@ Q_SIGNALS:
     void updatePaused(int percentage);
     void updateDownloaded();
     void updateFailed(int consecutiveFailureCount, QString lastReason);
-    void downloadModeChanged();
     void infoMessageChanged();
+    void downloadModeChanged();
+
 
 private:
     QString m_infoMessage;
+    int m_downloadMode;
 
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;

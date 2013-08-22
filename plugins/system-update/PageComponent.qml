@@ -312,8 +312,8 @@ ItemPage {
                     i18n.tr("When on wi-fi"),
                     // TODO: Data charges may apply needs to be smaller
                     i18n.tr("On any data connection\nData charges may apply.")]
-                selectedIndex: updateBackend.GetDownloadMode()
-                onSelectedIndexChanged: updateBackend.SetDownloadMode(selectedIndex);
+                selectedIndex: updateBackend.downloadMode
+                onSelectedIndexChanged: updateBackend.downloadMode = selectedIndex
             }
         }
     }

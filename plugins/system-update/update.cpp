@@ -35,6 +35,7 @@ QString _(const char *text)
 Update::Update(QObject *parent) :
     QObject(parent),
     m_infoMessage(""),
+    m_downloadMode(-1),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_SystemServiceIface ("com.canonical.SystemImage",
                          "/Service",
@@ -53,6 +54,8 @@ Update::Update(QObject *parent) :
                 this, SIGNAL(updateDownloaded()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateFailed(int, QString)),
                 this, SIGNAL(updateFailed(int, QString)));
+    connect(&m_SystemServiceIface, SIGNAL(SettingChanged(QString, QString)),
+                this, SLOT(ProcessSettingChanged(QString, QString)));
 
     this->CheckForUpdate();
 
@@ -90,25 +93,6 @@ QString Update::PauseDownload() {
     return _("Can't pause current request (can't contact service)");
 }
 
-int Update::GetDownloadMode() {
-    QDBusReply<QString> reply = m_SystemServiceIface.call("GetSetting", "auto_download");
-    int default_mode = 1;
-    if (reply.isValid()) {
-        bool ok;
-        int result;
-        result = reply.value().toInt(&ok);
-        if (ok)
-            return result;
-        return default_mode;
-    }
-    return default_mode;
-}
-
-void Update::SetDownloadMode(int value) {
-    m_SystemServiceIface.call("SetSetting", "auto_download", QString::number(value));
-}
-
-
 QString Update::InfoMessage() {
     return m_infoMessage;
 }
@@ -116,6 +100,46 @@ QString Update::InfoMessage() {
 void Update::SetInfoMessage(QString infoMessage) {
     m_infoMessage = infoMessage;
     Q_EMIT infoMessageChanged();
+}
+
+int Update::DownloadMode() {
+    if (m_downloadMode != -1)
+        return m_downloadMode;
+
+    QDBusReply<QString> reply = m_SystemServiceIface.call("GetSetting", "auto_download");
+    int default_mode = 1;
+    if (reply.isValid()) {
+        bool ok;
+        int result;
+        result = reply.value().toInt(&ok);
+        if (ok)
+            m_downloadMode = result;
+        else
+            m_downloadMode = default_mode;
+    }
+    else
+        m_downloadMode = default_mode;
+    return m_downloadMode;
+}
+
+void Update::SetDownloadMode(int value) {
+    if (m_downloadMode == value)
+        return;
+
+    m_downloadMode = value;
+    m_SystemServiceIface.call("SetSetting", "auto_download", QString::number(value));
+}
+
+void Update::ProcessSettingChanged(QString key, QString newvalue) {
+    if(key == "auto_download") {
+        bool ok;
+        int newintValue;
+        newintValue = newvalue.toInt(&ok);
+        if (ok) {
+            m_downloadMode = newintValue;
+            Q_EMIT downloadModeChanged();
+        }
+    }
 }
 
 QString Update::TranslateFromBackend(QString msg) {
