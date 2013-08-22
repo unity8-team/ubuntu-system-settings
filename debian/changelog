@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.1+13.10.20130822.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * security: new location subpanel.
+
+  [ Iain Lane ]
+  * An initial dummy version of the main page of security-privacy.
+  * security-privacy: Add UI for some subpanels.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 274
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 19:25:05 +0000
+
 ubuntu-system-settings (0.1+13.10.20130822-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
