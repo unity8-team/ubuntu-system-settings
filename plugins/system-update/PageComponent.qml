@@ -29,7 +29,7 @@ ItemPage {
     id: root
 
     title: i18n.tr("Update")
-    flickable: scrollWidget // maybe remove
+    flickable: scrollWidget // TODO: maybe remove
 
     // TODO: surely needs its own QML as the whole logic is here
     UbuntuUpdatePanel {
@@ -43,6 +43,7 @@ ItemPage {
                                               "Makes you a sandwich",
                                               "Makes Steve and Loic happy"]
 
+        // initial state
         property int currentUpdateState: UbuntuUpdatePanel.Checking
         property string checkinfoMessage: i18n.tr("Checking for updates")
         infoMessage: checkinfoMessage
@@ -50,7 +51,7 @@ ItemPage {
 
         /***************************
          * DIRECT CALLS TO BACKEND *
-         *                         */
+         ***************************/
         function recheckForUpdate() {
             infoMessage = "";
             var msg = CancelUpdate();
@@ -85,7 +86,7 @@ ItemPage {
 
         /************************
          * SIGNALS FROM BACKEND *
-         *                      */
+         ************************/
         onUpdateAvailableStatus: {
             if(isAvailable) {
                 // TODO: more case like manual mode, failure…

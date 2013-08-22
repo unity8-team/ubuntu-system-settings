@@ -21,6 +21,7 @@
 #ifndef UPDATE_H
 #define UPDATE_H
 
+#include <QtDBus>
 #include <QDBusInterface>
 #include <QObject>
 #include <QProcess>
@@ -53,12 +54,12 @@ public:
 
 
 
-/*public Q_SLOTS:
-    bool slotUpdateAvailableStatus(bool pendingUpdate);*/
+public Q_SLOTS:
+    void ProcessAvailableStatus(bool, bool, int, int, QString, const QDBusArgument&, QString);
 
 Q_SIGNALS:
     void updateAvailableStatus(bool isAvailable);
-    void updateProgress(int percentage, int eta);
+    void updateProgress(int percentage, double eta);
     void updatePaused(int percentage);
     void updateDownloaded();
     void updateFailed(int consecutiveFailureCount, QString lastReason);

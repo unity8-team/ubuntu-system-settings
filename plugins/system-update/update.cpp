@@ -19,13 +19,59 @@
 */
 
 #include "update.h"
-#include "../../src/i18n.h"
 #include <QDebug>
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
 
-using namespace SystemSettings;
+// FIXME: need to do this better including #include "../../src/i18n.h"
+// and linking to it
+#include <libintl.h>
+QString _(const char *text)
+{
+    return QString::fromUtf8(dgettext(0, text));
+}
+
+/**************/
+/* WILL SPLIT */
+class MyArrayWithDictInside
+{
+public:
+    QVector< QMap<QString, QString> > foo;
+};
+Q_DECLARE_METATYPE(MyArrayWithDictInside)
+
+
+QDBusArgument &operator<<(QDBusArgument &argument, const MyArrayWithDictInside)
+{
+ // you don't really need to implement this one if you don't plan writing it to the bus but i think qDbusRegisterType complains if you don't have it
+    return argument;
+}
+
+const QDBusArgument &operator>>(const QDBusArgument &argument, MyArrayWithDictInside &bar)
+{
+     while ( !argument.atEnd() ) {
+         QMap<QString, QString> map;
+         argument.beginMap();
+         while ( !argument.atEnd() ) {
+             QString key;
+             QString value;
+             argument.beginMapEntry();
+             argument >> key >> value;
+             argument.endMapEntry();
+             map.insert( key, value );
+         }
+
+         argument.endMap();
+
+         bar.foo.append(map);
+     }
+
+     argument.endArray();
+     return argument;
+}
+
+/**************/
 
 Update::Update(QObject *parent) :
     QObject(parent),
@@ -36,22 +82,23 @@ Update::Update(QObject *parent) :
                          "com.canonical.SystemImage",
                          m_systemBusConnection)
 {
-
-    // TODO: remove? a slot to filter the function
-    /*connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool updateS)),
-            this, SLOT(slotUpdateAvailableStatus(bool)));*/
+    qRegisterMetaType<MyArrayWithDictInside>();
+    qDBusRegisterMetaType<MyArrayWithDictInside>();
 
     // signals to forward directly to QML
-    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool)),
-            this, SIGNAL(updateAvailableStatus(bool)));
-    connect(&m_SystemServiceIface, SIGNAL(UpdateProgress(int, int)),
-                this, SIGNAL(updateProgress(int, int)));
+    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, int, int, QString, MyArrayWithDictInside, QString)),
+               this, SLOT(ProcessAvailableStatus(bool, bool, int, int, QString, MyArrayWithDictInside, QString)));
+
+/*    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, int, int, QString, QDBusRawType::aa{ss}, QString)),
+            this, SLOT(ProcessAvailableStatus(bool, bool, int, int, QString, const QDBusArgument&, QString)));*/
+    connect(&m_SystemServiceIface, SIGNAL(UpdateProgress(int, double)),
+                this, SIGNAL(updateProgress(int, double)));
     connect(&m_SystemServiceIface, SIGNAL(UpdatePaused(int)),
                 this, SIGNAL(updatePaused(int)));
     connect(&m_SystemServiceIface, SIGNAL(UpdateDownloaded()),
                 this, SIGNAL(updateDownloaded()));
     connect(&m_SystemServiceIface, SIGNAL(UpdateFailed(int, QString)),
-                this, SIGNAL(updateDownloaded(int, QString)));
+                this, SIGNAL(updateFailed(int, QString)));
 
     this->CheckForUpdate();
 
@@ -76,7 +123,7 @@ QString Update::ApplyUpdate() {
 }
 
 QString Update::CancelUpdate() {
-    QDBusReply<QString> reply = m_SystemServiceIface.call("CancelUpdate");
+    QDBusReply<QString> reply = m_SystemServiceIface.call("Cancel");
     if (reply.isValid())
         return reply.value();
     return _("Can't cancel current request (can't contact service)");
@@ -103,17 +150,15 @@ QString Update::TranslateFromBackend(QString msg) {
     return msg;
 }
 
-/*
-bool Update::slotUpdateAvailableStatus(bool pendingUpdate)
+
+// We'll care about that one once connected to the signal
+void Update::ProcessAvailableStatus(bool, bool, int, int, QString, const QDBusArgument &, QString)
 {
-    m_updateAvailable = int(pendingUpdate);
-    if (pendingUpdate)
-        m_getUpdateInfos();
-    Q_EMIT updateAvailableChanged();
-    return pendingUpdate;
+    //const QDBusArgument &bar = foo;
+    //Q_EMIT updateAvailableStatus();
 }
 
-
+/*
     QDBusReply<qint64> reply2 = m_SystemServiceIface.call("GetUpdateSize");
     if (reply2.isValid())
         m_updateSize = QString("%1 Mb").arg(QString::number(reply2.value()/1024.0/1024.0));
