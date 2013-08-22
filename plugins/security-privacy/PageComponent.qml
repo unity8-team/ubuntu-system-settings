@@ -62,8 +62,8 @@ ItemPage {
             }
             ListItem.SingleValue {
                 text: i18n.tr("Phone locking")
-                value: i18n.tr("%n minute",
-                               "%n minutes",
+                value: i18n.tr("1 minute",
+                               "%1 minutes".arg(5),
                                5)
                 progression: true
             }
