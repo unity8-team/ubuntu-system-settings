@@ -37,11 +37,9 @@ ItemPage {
 
         property int downloadProgress: 0
         property string downloadRemainingTime
-        // FIXME: those should be taken from the backend
-        property string lastUpdateDate: "1983-09-13"
-        property variant updateDescriptions: ["Enables a 200x improvment on Ubuntu Edge phone",
-                                              "Makes you a sandwich",
-                                              "Makes Steve and Loic happy"]
+        property string updateVersion
+        property string updateSize
+        property variant updateDescriptions: [""]
 
         // initial state
         property int currentUpdateState: UbuntuUpdatePanel.Checking
@@ -77,9 +75,9 @@ ItemPage {
                 infoMessage = i18n.tr("<b>Apply update failed:</b><br/>%1").arg(TranslateFromBackend(msg));
         }
 
-        function pauseUpdate() {
+        function pauseDownload() {
             infoMessage = "";
-            var msg = PauseUpdate();
+            var msg = PauseDownload();
             if (msg)
                 infoMessage = i18n.tr("<b>Pausing failed:</b><br/>%1").arg(TranslateFromBackend(msg));
         }
@@ -88,20 +86,31 @@ ItemPage {
          * SIGNALS FROM BACKEND *
          ************************/
         onUpdateAvailableStatus: {
+
+            updateVersion = availableVersion;
+            // TODO: be more agile in the MB handling
+            updateBackend.updateSize = i18n.tr("%1 MB").arg(updateSize/(1024*1024));
+            updateDescriptions = descriptions;
+            console.log(isAvailable)
+
             if(isAvailable) {
-                // TODO: more case like manual mode, failure…
                 currentUpdateState = UbuntuUpdatePanel.UpdateAvailable;
             }
             else {
                 currentUpdateState = UbuntuUpdatePanel.NoUpdate;
                 infoMessage = i18n.tr("No software update available<br/>Last updated %1").arg(lastUpdateDate);
             }
+
+            if(errorReason) {
+                infoMessage = errorReason;
+                currentUpdateState = UbuntuUpdatePanel.CheckingError;
+            }
         }
 
         onUpdateProgress: {
             downloadProgress = percentage;
             if (eta > 0)
-                downloadRemainingTime = i18n.tr("%1 seconds").arg(eta);
+                downloadRemainingTime = i18n.tr("About %1 seconds remaining").arg(eta);
             else
                 downloadRemainingTime = i18n.tr("No estimate for the download");
             currentUpdateState = UbuntuUpdatePanel.Downloading;
@@ -202,13 +211,13 @@ ItemPage {
                             Label {
                                 horizontalAlignment: Text.AlignRight
                                 width: parent.width/2
-                                text: updateBackend.currentUpdateState //"124" //updateBackend.updateSize;
+                                text: updateBackend.updateSize;
                             }
                         }
 
                         // FIXME: use the right widget then
                         ListItem.ValueSelector {
-                            text: i18n.tr("Version %1").arg(2000)//updateBackend.updateVersion)
+                            text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
                             values: updateBackend.updateDescriptions
                             selectedIndex: -1
                         }
@@ -240,7 +249,7 @@ ItemPage {
                             }
 
                             Label {
-                                text: i18n.tr("About %1 remaining").arg(updateBackend.downloadRemainingTime)
+                                text: updateBackend.downloadRemainingTime
                                 visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading
                             }
 
@@ -248,7 +257,7 @@ ItemPage {
                                 id: pauseDownloadButton
                                 text: i18n.tr("Pause downloading")
                                 width: parent.width
-                                onClicked: updateBackend.pauseUpdate()
+                                onClicked: updateBackend.pauseDownload()
                                 visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading
                             }
 

@@ -49,7 +49,7 @@ public:
     Q_INVOKABLE void DownloadUpdate();
     Q_INVOKABLE QString ApplyUpdate();
     Q_INVOKABLE QString CancelUpdate();
-    Q_INVOKABLE QString PauseUpdate();
+    Q_INVOKABLE QString PauseDownload();
     Q_INVOKABLE QString TranslateFromBackend(QString);
 
 
@@ -58,7 +58,8 @@ public Q_SLOTS:
     void ProcessAvailableStatus(bool, bool, int, int, QString, QString);
 
 Q_SIGNALS:
-    void updateAvailableStatus(bool, bool, int, int, QString, QList< QMap<QString, QString> >, QString);
+    void updateAvailableStatus(bool isAvailable, bool downloading, int availableVersion, int updateSize,
+                               QString lastUpdateDate, QStringList descriptions, QString errorReason);
     void updateProgress(int percentage, double eta);
     void updatePaused(int percentage);
     void updateDownloaded();

@@ -83,8 +83,8 @@ QString Update::CancelUpdate() {
     return _("Can't cancel current request (can't contact service)");
 }
 
-QString Update::PauseUpdate() {
-    QDBusReply<QString> reply = m_SystemServiceIface.call("PauseUpdate");
+QString Update::PauseDownload() {
+    QDBusReply<QString> reply = m_SystemServiceIface.call("PauseDownload");
     if (reply.isValid())
         return reply.value();
     return _("Can't pause current request (can't contact service)");
@@ -104,10 +104,14 @@ QString Update::TranslateFromBackend(QString msg) {
     return msg;
 }
 
-void Update::ProcessAvailableStatus(bool, bool, int, int, QString, QString)
+void Update::ProcessAvailableStatus(bool isAvailable, bool downloading, int availableVersion, int updateSize, QString lastUpdateDate, QString errorReason)
 {
-    //const QDBusArgument &bar = foo;
-    //Q_EMIT updateAvailableStatus();
+    QStringList descriptions;
+    descriptions.append("Description for update1");
+    descriptions.append("Description for update2");
+    descriptions.append("Description for update3");
+
+    Q_EMIT updateAvailableStatus(isAvailable, downloading, availableVersion, updateSize, lastUpdateDate, descriptions, errorReason);
 }
 
 /*
