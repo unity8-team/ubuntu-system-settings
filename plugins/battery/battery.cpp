@@ -132,6 +132,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     gint32 offset = 0;
     GTimeVal timeval;
     QVariantList listValues;
+    gdouble currentValue = 0;
 
     g_get_current_time(&timeval);
     offset = timeval.tv_sec;
@@ -144,10 +145,17 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
             continue;
 
+        /* TODO: find better way to filter out suspend/resume buggy values,
+         * we get empty charge report when that happens, in practice batteries don't run flat often,
+         * if charge was over 3% before it's likely a bug so we ignore the value */
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_EMPTY && currentValue > 3)
+            continue;
+
         updateLastFullCharge(item, offset);
 
+        currentValue = up_history_item_get_value(item);
         listItem.insert("time",(offset - (gint32) up_history_item_get_time(item)));
-        listItem.insert("value",up_history_item_get_value(item));
+        listItem.insert("value", currentValue);
         listValues += listItem;
     }
     g_ptr_array_unref (values);
