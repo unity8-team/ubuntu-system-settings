@@ -68,11 +68,22 @@ ItemPage {
                 expanded: true
                 // TODO: There is no way to have a ValueSelector always expanded
                 onExpandedChanged: expanded = true
-                values: [i18n.tr("After %1 minute").arg(1),
-                    i18n.tr("After %1 minutes").arg(2),
-                    i18n.tr("After %1 minutes").arg(3),
-                    i18n.tr("After %1 minutes").arg(4),
-                    i18n.tr("After %1 minutes").arg(5),
+                values: [
+                    i18n.tr("After %1 minute".arg(1),
+                            "After %1 minutes".arg(1),
+                            1),
+                    i18n.tr("After %1 minute".arg(2),
+                            "After %1 minutes".arg(2),
+                            2),
+                    i18n.tr("After %1 minute".arg(3),
+                            "After %1 minutes".arg(3),
+                            3),
+                    i18n.tr("After %1 minute".arg(4),
+                            "After %1 minutes".arg(4),
+                            4),
+                    i18n.tr("After %1 minute".arg(5),
+                            "After %1 minutes".arg(5),
+                            5),
                     i18n.tr("Never")]
                 onSelectedIndexChanged: {
                   if (usePowerd)

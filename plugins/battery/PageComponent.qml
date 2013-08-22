@@ -201,13 +201,19 @@ ItemPage {
                 text: i18n.tr("Auto sleep")
                 value: {
                     if (batteryBackend.powerdRunning ) {
+                        var timeout = Math.round(powerSettings.activityTimeout/60)
                         return (powerSettings.activityTimeout != 0) ?
-                                    i18n.tr("After %1 minute").arg(Math.round(powerSettings.activityTimeout/60)) :
+                                    i18n.tr("After %1 minute".arg(timeout),
+                                            "After %1 minutes".arg(timeout),
+                                            timeout) :
                                     i18n.tr("Never")
                     }
                     else {
+                        var timeout = Math.round(powerSettings.sleepDisplayBattery/60)
                         return (powerSettings.sleepDisplayBattery != 0) ?
-                                    i18n.tr("After %1 minute").arg(Math.round(powerSettings.sleepDisplayBattery/60)) :
+                                    i18n.tr("After %1 minute".arg(timeout),
+                                            "After %1 minutes".arg(timeout),
+                                            timeout) :
                                     i18n.tr("Never")
                     }
                 }
