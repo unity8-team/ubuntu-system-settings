@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-22 15:08+0000\n"
+"POT-Creation-Date: 2013-08-22 16:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,17 +227,10 @@ msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:205
 #: ../plugins/battery/PageComponent.qml:210
-#: ../plugins/battery/SleepValues.qml:71 ../plugins/battery/SleepValues.qml:72
-#: ../plugins/battery/SleepValues.qml:73 ../plugins/battery/SleepValues.qml:74
-#: ../plugins/battery/SleepValues.qml:75
-#: ../plugins/security-privacy/LockWhenIdle.qml:51
+#: ../plugins/battery/SleepValues.qml:71
 #: ../plugins/security-privacy/LockWhenIdle.qml:52
-#: ../plugins/security-privacy/LockWhenIdle.qml:53
-#: ../plugins/security-privacy/LockWhenIdle.qml:54
-#: ../plugins/security-privacy/LockWhenIdle.qml:55
-#: ../plugins/security-privacy/LockWhenIdle.qml:56
 #, qt-format
-msgid "After %1 minutes"
+msgid "After %1 minute"
 msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:218 ../.build/settings.js:19
@@ -258,6 +251,17 @@ msgstr ""
 
 #: ../plugins/battery/SleepValues.qml:63
 msgid "Put the display to sleep when idle"
+msgstr ""
+
+#: ../plugins/battery/SleepValues.qml:72 ../plugins/battery/SleepValues.qml:73
+#: ../plugins/battery/SleepValues.qml:74 ../plugins/battery/SleepValues.qml:75
+#: ../plugins/security-privacy/LockWhenIdle.qml:51
+#: ../plugins/security-privacy/LockWhenIdle.qml:53
+#: ../plugins/security-privacy/LockWhenIdle.qml:54
+#: ../plugins/security-privacy/LockWhenIdle.qml:55
+#: ../plugins/security-privacy/LockWhenIdle.qml:56
+#, qt-format
+msgid "After %1 minutes"
 msgstr ""
 
 #: ../plugins/battery/SleepValues.qml:86
@@ -585,7 +589,7 @@ msgid "4-digit passcode"
 msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:40
-msgid "Passphrase"
+msgid "Passphrase…"
 msgstr ""
 
 #: ../plugins/security-privacy/LockWhenIdle.qml:29
