@@ -77,7 +77,7 @@ QString Update::ApplyUpdate() {
 }
 
 QString Update::CancelUpdate() {
-    QDBusReply<QString> reply = m_SystemServiceIface.call("Cancel");
+    QDBusReply<QString> reply = m_SystemServiceIface.call("CancelUpdate");
     if (reply.isValid())
         return reply.value();
     return _("Can't cancel current request (can't contact service)");

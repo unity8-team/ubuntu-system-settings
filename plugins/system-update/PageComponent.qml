@@ -91,7 +91,6 @@ ItemPage {
             // TODO: be more agile in the MB handling
             updateBackend.updateSize = i18n.tr("%1 MB").arg(updateSize/(1024*1024));
             updateDescriptions = descriptions;
-            console.log(isAvailable)
 
             if(isAvailable) {
                 currentUpdateState = UbuntuUpdatePanel.UpdateAvailable;
@@ -312,7 +311,7 @@ ItemPage {
                     // TODO: Data charges may apply needs to be smaller
                     i18n.tr("On any data connection\nData charges may apply.")]
                 selectedIndex: updateBackend.GetDownloadMode()
-                onSelectedIndexChanged: { updateBackend.SetDownloadMode(selectedIndex); }
+                onSelectedIndexChanged: updateBackend.SetDownloadMode(selectedIndex);
             }
         }
     }
