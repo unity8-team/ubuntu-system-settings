@@ -319,6 +319,8 @@ ItemPage {
                 }
             }
 
+            ListItem.ThinDivider {}
+
             ListItem.Standard {
                 text: i18n.tr ("Download future updates automatically:")
             }
