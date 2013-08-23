@@ -174,6 +174,9 @@ ItemPage {
                     }
                 }
 
+                /**********************
+                 * Checking/no update *
+                 **********************/
                 Column {
                     anchors.centerIn: parent
                     width: parent.width
@@ -206,6 +209,9 @@ ItemPage {
                     }
                 }
 
+                /**********************
+                 * Update to download *
+                 **********************/
                 Column {
                     id: updateContentDisplay
                     visible: updateBackend.isUpdateContentToDisplay()
@@ -248,6 +254,9 @@ ItemPage {
                         visible: updateBackend.infoMessage !== ""
                     }
 
+                    /***************************
+                     * Transaction in progress *
+                     ***************************/
                     Column {
                         id: updateDownloading
                         spacing: units.gu(1)
@@ -284,9 +293,11 @@ ItemPage {
 
                     }
 
+                    /*********************
+                     * Transaction ended *
+                     *********************/
                     Column {
                         id: updateStopped
-                        spacing: units.gu(1)
                         width: parent.width
 
                         Button {
