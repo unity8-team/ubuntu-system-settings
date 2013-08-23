@@ -72,14 +72,14 @@ ItemPage {
             infoMessage = "";
             var msg = ApplyUpdate();
             if (msg)
-                infoMessage = i18n.tr("<b>Apply update failed:</b><br/>%1").arg(TranslateFromBackend(msg));
+                infoMessage = "<b>" + i18n.tr("Apply update failed:") + "</b><br/>" + TranslateFromBackend(msg);
         }
 
         function pauseDownload() {
             infoMessage = "";
             var msg = PauseDownload();
             if (msg)
-                infoMessage = i18n.tr("<b>Pause failed:</b><br/>%1").arg(TranslateFromBackend(msg));
+                infoMessage = "<b>" + i18n.tr("Pause failed:") + "</b><br/>" + TranslateFromBackend(msg);
         }
 
         /************************
@@ -101,7 +101,7 @@ ItemPage {
             }
             else {
                 currentUpdateState = UbuntuUpdatePanel.NoUpdate;
-                infoMessage = i18n.tr("No software update available<br/>Last updated %1").arg(lastUpdateDate);
+                infoMessage = i18n.tr("No software update available") + "<br/>" + i18n.tr("Last updated %1").arg(lastUpdateDate);
             }
 
             if(errorReason) {
@@ -129,7 +129,7 @@ ItemPage {
         }
 
         onUpdateFailed: {
-            infoMessage = i18n.tr("<b>Download failed:</b><br/>%1").arg(TranslateFromBackend(lastReason));
+            infoMessage = "<b>" + i18n.tr("Download failed:") + "</b><br/>" + TranslateFromBackend(lastReason);
             currentUpdateState = UbuntuUpdatePanel.DownloadFailed;
         }
 
