@@ -45,6 +45,7 @@ ItemPage {
         property int currentUpdateState: UbuntuUpdatePanel.Checking
         property string checkinfoMessage: i18n.tr("Checking for updates")
         infoMessage: checkinfoMessage
+        property string infoSecondaryMessage
 
 
         /***************************
@@ -52,6 +53,7 @@ ItemPage {
          ***************************/
         function recheckForUpdate() {
             infoMessage = "";
+            infoSecondaryMessage = "";
             var msg = CancelUpdate();
             if(msg) {
                 infoMessage = TranslateFromBackend(msg);
@@ -65,21 +67,28 @@ ItemPage {
 
         function downloadUpdate() {
             infoMessage = "";
+            infoSecondaryMessage = "";
             DownloadUpdate();
         }
 
         function applyUpdate() {
             infoMessage = "";
+            infoSecondaryMessage = "";
             var msg = ApplyUpdate();
-            if (msg)
-                infoMessage = "<b>" + i18n.tr("Apply update failed:") + "</b><br/>" + TranslateFromBackend(msg);
+            if (msg) {
+                infoMessage = i18n.tr("Apply update failed:");
+                infoSecondaryMessage = TranslateFromBackend(msg);
+            }
         }
 
         function pauseDownload() {
             infoMessage = "";
+            infoSecondaryMessage = "";
             var msg = PauseDownload();
-            if (msg)
-                infoMessage = "<b>" + i18n.tr("Pause failed:") + "</b><br/>" + TranslateFromBackend(msg);
+            if (msg) {
+                infoMessage = i18n.tr("Pause failed:");
+                infoSecondaryMessage = TranslateFromBackend(msg);
+            }
         }
 
         /************************
@@ -129,7 +138,8 @@ ItemPage {
         }
 
         onUpdateFailed: {
-            infoMessage = "<b>" + i18n.tr("Download failed:") + "</b><br/>" + TranslateFromBackend(lastReason);
+            infoMessage = i18n.tr("Download failed:");
+            infoSecondaryMessage = TranslateFromBackend(lastReason);
             currentUpdateState = UbuntuUpdatePanel.DownloadFailed;
         }
 
@@ -224,15 +234,10 @@ ItemPage {
                             selectedIndex: -1
                         }
 
-                        Label {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            horizontalAlignment: Text.AlignHCenter
-                            width: parent.width
-
+                        ListItem.Subtitled {
                             text: updateBackend.infoMessage
+                            subText: updateBackend.infoSecondaryMessage
                             visible: updateBackend.infoMessage !== ""
-                            wrapMode: Text.WordWrap
-                            textFormat: Text.RichText
                         }
 
                         Column {
