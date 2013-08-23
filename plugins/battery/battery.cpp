@@ -21,6 +21,7 @@
 #include "battery.h"
 #include <glib.h>
 #include <libupower-glib/upower.h>
+#include <nm-client.h>
 #include <QEvent>
 #include <QDBusReply>
 #include <QtCore/QDebug>
@@ -35,6 +36,7 @@ Battery::Battery(QObject *parent) :
     m_deviceString("")
 {
     m_device = up_device_new();
+    m_nm_client = nm_client_new();
 
     buildDeviceString();
     getLastFullCharge();
@@ -83,6 +85,17 @@ QString Battery::deviceString()
 {
     return m_deviceString;
 }
+
+bool Battery::getWifiStatus()
+{
+    return nm_client_wireless_get_enabled (m_nm_client);
+}
+
+void Battery::setWifiStatus(bool enableStatus)
+{
+    nm_client_wireless_set_enabled (m_nm_client, enableStatus);
+}
+
 
 int Battery::lastFullCharge()
 {
