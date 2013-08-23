@@ -1,4 +1,5 @@
 {
+    "plugin": "battery-plugin",
     "icon": "/usr/share/ubuntu/settings/system/icons/settings-battery.svg",
     "name": "Battery",
     "translations": "ubuntu-system-settings",
@@ -9,6 +10,6 @@
         "power"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false,
+    "has-dynamic-visibility": true,
     "page-component": "PageComponent.qml"
 }

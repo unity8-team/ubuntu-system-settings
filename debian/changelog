@@ -1,3 +1,54 @@
+ubuntu-system-settings (0.1+13.10.20130822.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * security: new location subpanel.
+
+  [ Iain Lane ]
+  * An initial dummy version of the main page of security-privacy.
+  * security-privacy: Add UI for some subpanels.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 274
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 19:25:05 +0000
+
+ubuntu-system-settings (0.1+13.10.20130822-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: some tweaks to the charge info: - read history in the right
+    order - ignore buggy empty charge values from suspend/resume -
+    correctly determine when we stop charging.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 270
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 11:18:59 +0000
+
+ubuntu-system-settings (0.1+13.10.20130821-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: display the last full charge.
+
+  [ Iain Lane ]
+  * Only display the battery panel if the system actually has a battery.
+  * background: don't update gsettings/accountsservice for now (until
+    the content picker arrives). (LP: #1214452)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 267
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 21 Aug 2013 08:07:06 +0000
+
+ubuntu-system-settings (0.1+13.10.20130820-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * don't install the a11y plugin, it's not planned for 13.10.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 262
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 20 Aug 2013 14:34:56 +0000
+
 ubuntu-system-settings (0.1+13.10.20130813.1-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]

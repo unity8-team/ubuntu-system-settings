@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-13 09:22-0400\n"
+"POT-Creation-Date: 2013-08-22 17:15+0000\n"
 "PO-Revision-Date: 2013-07-02 18:02+0000\n"
 "Last-Translator: milen milev <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-14 06:13+0000\n"
-"X-Generator: Launchpad (build 16723)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2013-08-23 06:01+0000\n"
+"X-Generator: Launchpad (build 16737)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -26,8 +27,8 @@ msgid "Serial"
 msgstr "Сериен номер"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/battery/PageComponent.qml:54
-#: ../plugins/battery/PageComponent.qml:85
+#: ../plugins/battery/PageComponent.qml:109
+#: ../plugins/battery/PageComponent.qml:116
 #: ../plugins/cellular/PageComponent.qml:75
 msgid "N/A"
 msgstr ""
@@ -45,9 +46,10 @@ msgid "Last updated"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:180
-#: ../plugins/battery/PageComponent.qml:185
-#: ../plugins/battery/SleepValues.qml:76
+#: ../plugins/battery/PageComponent.qml:209
+#: ../plugins/battery/PageComponent.qml:217
+#: ../plugins/battery/SleepValues.qml:87
+#: ../plugins/security-privacy/LockWhenIdle.qml:70
 msgid "Never"
 msgstr ""
 
@@ -153,58 +155,106 @@ msgstr ""
 msgid "Battery"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:48
-msgid "Charging now"
+#: ../plugins/battery/PageComponent.qml:39
+msgid "1 second ago"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:41
+#, qt-format
+msgid "%1 seconds ago"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:43
+msgid "1 minute ago"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:45
+#, qt-format
+msgid "%1 minutes ago"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:47
+msgid "1 hour ago"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:49
+#, qt-format
+msgid "%1 hours ago"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:51
+msgid "1 day ago"
 msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:53
+#, qt-format
+msgid "%1 days ago"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:69
+msgid "Charging now"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:73
 msgid "Last full charge"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:59
+#: ../plugins/battery/PageComponent.qml:77
+msgid "Fully charged"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:83
 #, qt-format
 msgid "%1 %"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:84
+#: ../plugins/battery/PageComponent.qml:108
 msgid "Charge level"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:134
+#: ../plugins/battery/PageComponent.qml:160
 msgid "Ways to reduce battery use:"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:138
+#: ../plugins/battery/PageComponent.qml:164
 msgid "Display brightness"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:175
+#: ../plugins/battery/PageComponent.qml:201
 #: ../plugins/battery/SleepValues.qml:31
 msgid "Auto sleep"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:179
-#: ../plugins/battery/PageComponent.qml:184
-#: ../plugins/battery/SleepValues.qml:71 ../plugins/battery/SleepValues.qml:72
-#: ../plugins/battery/SleepValues.qml:73 ../plugins/battery/SleepValues.qml:74
-#: ../plugins/battery/SleepValues.qml:75
+#: ../plugins/battery/PageComponent.qml:206
+#: ../plugins/battery/PageComponent.qml:214
+#: ../plugins/battery/SleepValues.qml:72 ../plugins/battery/SleepValues.qml:75
+#: ../plugins/battery/SleepValues.qml:78 ../plugins/battery/SleepValues.qml:81
+#: ../plugins/battery/SleepValues.qml:84
+#: ../plugins/security-privacy/LockWhenIdle.qml:52
+#: ../plugins/security-privacy/LockWhenIdle.qml:55
+#: ../plugins/security-privacy/LockWhenIdle.qml:58
+#: ../plugins/security-privacy/LockWhenIdle.qml:61
+#: ../plugins/security-privacy/LockWhenIdle.qml:64
+#: ../plugins/security-privacy/LockWhenIdle.qml:67
 #, qt-format
-msgid "After %1 minutes"
-msgstr ""
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../plugins/battery/PageComponent.qml:192 ../.build/settings.js:19
+#: ../plugins/battery/PageComponent.qml:224 ../.build/settings.js:19
 msgid "Wi-Fi"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:200 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:232 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:208 ../.build/settings.js:10
+#: ../plugins/battery/PageComponent.qml:240 ../.build/settings.js:10
 msgid "GPS"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:216
+#: ../plugins/battery/PageComponent.qml:248
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
@@ -212,7 +262,7 @@ msgstr ""
 msgid "Put the display to sleep when idle"
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:86
+#: ../plugins/battery/SleepValues.qml:97
 msgid "Videos and some apps may keep the phone awake."
 msgstr ""
 
@@ -221,11 +271,11 @@ msgstr ""
 msgid "Carrier"
 msgstr ""
 
-#: ../plugins/cellular/ChooseCarrier.qml:83
+#: ../plugins/cellular/ChooseCarrier.qml:80
 msgid "Refresh"
 msgstr ""
 
-#: ../plugins/cellular/ChooseCarrier.qml:100
+#: ../plugins/cellular/ChooseCarrier.qml:97
 msgid "Searching"
 msgstr ""
 
@@ -443,7 +493,7 @@ msgid "Reset launcher & home screen"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:29
-#: ../plugins/security-privacy/PageComponent.qml:58
+#: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Dash search"
 msgstr ""
 
@@ -452,23 +502,172 @@ msgid "Return results from:"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:53
-#: ../plugins/security-privacy/PageComponent.qml:42
-#: ../plugins/security-privacy/PageComponent.qml:59
+#: ../plugins/security-privacy/PageComponent.qml:46
+#: ../plugins/security-privacy/PageComponent.qml:92
 msgid "Phone only"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:53
-#: ../plugins/security-privacy/PageComponent.qml:40
-#: ../plugins/security-privacy/PageComponent.qml:59
+#: ../plugins/security-privacy/PageComponent.qml:44
+#: ../plugins/security-privacy/PageComponent.qml:91
 msgid "Phone and Internet"
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:29
+msgid "Location"
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:36
+msgid "Location detection"
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:45
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:47
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:49
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:51
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:53
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:55
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:57
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy/Location.qml:62
+msgid "Allow access to location:"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:27
+#: ../plugins/security-privacy/PhoneLocking.qml:34
+msgid "Lock security"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:33
+msgid "Unlock the phone using:"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:39
+#: ../plugins/security-privacy/PhoneLocking.qml:35
+msgid "Swipe (no security)"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:40
+msgid "4-digit passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:41
+msgid "Passphrase…"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:48
+msgid "Change passcode…"
+msgstr ""
+
+#: ../plugins/security-privacy/LockWhenIdle.qml:29
+#: ../plugins/security-privacy/PhoneLocking.qml:41
+msgid "Lock when idle"
+msgstr ""
+
+#: ../plugins/security-privacy/LockWhenIdle.qml:43
+msgid "Lock the phone when it is not in use:"
+msgstr ""
+
+#: ../plugins/security-privacy/LockWhenIdle.qml:75
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
 msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
 msgid "Security & Privacy"
 msgstr ""
 
+#: ../plugins/security-privacy/PageComponent.qml:61
+msgid "Security:"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:64
+#: ../plugins/security-privacy/PhoneLocking.qml:27
+msgid "Phone locking"
+msgstr ""
+
 #: ../plugins/security-privacy/PageComponent.qml:65
+#: ../plugins/security-privacy/PhoneLocking.qml:42
+#, qt-format
+msgid "1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/security-privacy/PageComponent.qml:72
+msgid "SIM PIN"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:77
+msgid "Privacy:"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:80
+msgid "Stats on welcome screen"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:84
+msgid "Messages on welcome screen"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:97
+msgid "Location access"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:103
+msgid "Other app access"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:107
 msgid "Diagnostics"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:110
+msgid "Sent"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:111
+msgid "Not sent"
+msgstr ""
+
+#: ../plugins/security-privacy/PhoneLocking.qml:51
+msgid "Sleep locks immediately"
 msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:16

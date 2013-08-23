@@ -23,7 +23,7 @@
 #include <libupower-glib/upower.h>
 #include <QEvent>
 #include <QDBusReply>
-#include <QPair>
+#include <QtCore/QDebug>
 
 Battery::Battery(QObject *parent) :
     QObject(parent),
@@ -31,9 +31,13 @@ Battery::Battery(QObject *parent) :
     m_powerdIface ("com.canonical.powerd",
                    "/com/canonical/powerd",
                    "com.canonical.powerd",
-                   m_systemBusConnection)
+                   m_systemBusConnection),
+    m_deviceString("")
 {
     m_device = up_device_new();
+
+    buildDeviceString();
+    getLastFullCharge();
 
     if (!m_powerdIface.isValid()) {
         m_powerdRunning = false;
@@ -48,7 +52,7 @@ bool Battery::powerdRunning()
     return m_powerdRunning;
 }
 
-QString Battery::deviceString() {
+void Battery::buildDeviceString() {
     UpClient *client;
     gboolean returnIsOk;
     GPtrArray *devices;
@@ -59,7 +63,7 @@ QString Battery::deviceString() {
     returnIsOk = up_client_enumerate_devices_sync(client, NULL, NULL);
 
     if(!returnIsOk)
-        return QString("");
+        return;
 
     devices = up_client_get_devices(client);
 
@@ -67,43 +71,101 @@ QString Battery::deviceString() {
         device = (UpDevice *)g_ptr_array_index(devices, i);
         g_object_get(device, "kind", &kind, NULL);
         if (kind == UP_DEVICE_KIND_BATTERY) {
-            QString deviceId(up_device_get_object_path(device));
-            g_ptr_array_unref(devices);
-            g_object_unref(client);
-            return deviceId;
+            m_deviceString = QString(up_device_get_object_path(device));
         }
     }
 
     g_ptr_array_unref(devices);
     g_object_unref(client);
-    return QString("");
 }
 
-/* TODO: refresh values over time for dynamic update */
-QVariantList Battery::getHistory(const QString &deviceString, const int timespan, const int resolution) const
+QString Battery::deviceString()
+{
+    return m_deviceString;
+}
+
+int Battery::lastFullCharge()
+{
+    return m_lastFullCharge;
+}
+
+void Battery::getLastFullCharge()
 {
     UpHistoryItem *item;
     GPtrArray *values;
     gint32 offset = 0;
     GTimeVal timeval;
+
+    g_get_current_time(&timeval);
+    offset = timeval.tv_sec;
+    up_device_set_object_path_sync(m_device, m_deviceString.toStdString().c_str(), NULL, NULL);
+    values = up_device_get_history_sync(m_device, "charge", 864000, 1000, NULL, NULL);
+    for (uint i=0; i < values->len; i++) {
+        item = (UpHistoryItem *) g_ptr_array_index(values, i);
+
+        /* Getting the next point after full charge, since upower registers only on state changes,
+           typically you get no data while the device is fully charged and plugged and you get a discharging
+           one when you unplugged, that's when the charge stops */
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+            if (i < values->len-1) {
+                UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i+1);
+                m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
+                Q_EMIT(lastFullChargeChanged());
+                g_ptr_array_unref (values);
+                return;
+            }
+        }
+    }
+    g_ptr_array_unref (values);
+}
+
+/* TODO: refresh values over time for dynamic update */
+QVariantList Battery::getHistory(const QString &deviceString, const int timespan, const int resolution)
+{
+    if (deviceString.isNull() || deviceString.isEmpty())
+        return QVariantList();
+
+    UpHistoryItem *item;
+    GPtrArray *values;
+    gint32 offset = 0;
+    GTimeVal timeval;
     QVariantList listValues;
+    gdouble currentValue = 0;
 
     g_get_current_time(&timeval);
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", timespan, resolution, NULL, NULL);
-    for (uint i=0; i < values->len; i++) {
+    for (uint i=values->len-1; i > 0; i--) {
         QVariantMap listItem;
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
             continue;
 
-        listItem.insert("time",((gint32) up_history_item_get_time(item) - offset));
-        listItem.insert("value",up_history_item_get_value(item));
+        /* TODO: find better way to filter out suspend/resume buggy values,
+         * we get empty charge report when that happens, in practice batteries don't run flat often,
+         * if charge was over 3% before it's likely a bug so we ignore the value */
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_EMPTY && currentValue > 3)
+            continue;
+
+        /* Getting the next point after full charge, since upower registers only on state changes,
+           typically you get no data while the device is fully charged and plugged and you get a discharging
+           one when you unplugged, that's when the charge stops */
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+            if (i > 1) {
+                UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i-1);
+                m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
+                Q_EMIT(lastFullChargeChanged());
+            }
+        }
+
+        currentValue = up_history_item_get_value(item);
+        listItem.insert("time",(offset - (gint32) up_history_item_get_time(item)));
+        listItem.insert("value", currentValue);
         listValues += listItem;
     }
-
+    g_ptr_array_unref (values);
     return listValues;
 }
 

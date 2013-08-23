@@ -9,7 +9,7 @@ SUBDIRS = \
     reset \
     sound \
     language \
-    accessibility \
+    # accessibility \  not on the 13.10 list
     phone \
     brightness \
     time-date \

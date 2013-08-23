@@ -32,6 +32,27 @@ ItemPage {
     title: i18n.tr("Battery")
     flickable: scrollWidget
 
+    property bool isCharging
+
+    function timeDeltaString(timeDelta) {
+        if (timeDelta === 1)
+            return i18n.tr("1 second ago")
+        if (timeDelta < 60)
+            return i18n.tr("%1 seconds ago").arg(timeDelta)
+        if (timeDelta >= 60 && timeDelta < 90)
+            return i18n.tr("1 minute ago")
+        if (timeDelta >= 90 && timeDelta < 3570)
+            return i18n.tr("%1 minutes ago").arg(Math.round(timeDelta/60))
+        if (timeDelta >= 3570 && timeDelta < 5400)
+            return i18n.tr("1 hour ago")
+        if (timeDelta >= 5400 && timeDelta < 84600)
+            return i18n.tr("%1 hours ago").arg(Math.round(timeDelta/3600))
+        if (timeDelta >= 84600 && timeDelta < 129600)
+            return i18n.tr("1 day ago")
+        if (timeDelta >= 129600)
+            return i18n.tr("%1 days ago").arg(Math.round(timeDelta/86400))
+    }
+
     GSettings {
         id: powerSettings
         schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
@@ -46,12 +67,15 @@ ItemPage {
         onChargingStateChanged: {
             if (state === BatteryInfo.Charging) {
                 chargingEntry.text = i18n.tr("Charging now")
-                chargingEntry.value = ""
-
+                isCharging = true
             }
-            else {
+            else if (state === BatteryInfo.Discharging) {
                 chargingEntry.text = i18n.tr("Last full charge")
-                chargingEntry.value = i18n.tr("N/A")  // TODO: find a way to get that information
+                isCharging = false
+            }
+            else if (state === BatteryInfo.Full || state === BatteryInfo.NotCharging) {
+                chargingEntry.text = i18n.tr("Fully charged")
+                isCharging = true
             }
         }
         onRemainingCapacityChanged: {
@@ -88,6 +112,8 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: chargingEntry
+                value: isCharging ?
+                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
                 showDivider: false
             }
 
@@ -112,7 +138,7 @@ ItemPage {
                     ctx.stroke()
 
                     /* Display the charge history in orange color */
-                    ctx.lineWidth = units.dp(1)
+                    ctx.lineWidth = units.dp(2)
                     ctx.strokeStyle = UbuntuColors.orange
 
                     /* Get infos from battery0, on a day (60*24*24=86400 seconds), with 150 points on the graph */
@@ -121,9 +147,9 @@ ItemPage {
                     /* time is the offset in seconds compared to the current time (negative value)
                        we display the charge on a day, which is 86400 seconds, the value is the %
                        the coordinates are adjusted to the canvas, top,left is 0,0 */
-                    ctx.moveTo((86400+chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
+                    ctx.moveTo((86400-chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
                     for (var i=1; i < chargeDatas.length; i++) {
-                        ctx.lineTo((86400+chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
+                        ctx.lineTo((86400-chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
                     }
                     ctx.stroke()
                     ctx.restore();
@@ -175,13 +201,19 @@ ItemPage {
                 text: i18n.tr("Auto sleep")
                 value: {
                     if (batteryBackend.powerdRunning ) {
+                        var timeout = Math.round(powerSettings.activityTimeout/60)
                         return (powerSettings.activityTimeout != 0) ?
-                                    i18n.tr("After %1 minutes").arg(Math.round(powerSettings.activityTimeout/60)) :
+                                    i18n.tr("After %1 minute".arg(timeout),
+                                            "After %1 minutes".arg(timeout),
+                                            timeout) :
                                     i18n.tr("Never")
                     }
                     else {
+                        var timeout = Math.round(powerSettings.sleepDisplayBattery/60)
                         return (powerSettings.sleepDisplayBattery != 0) ?
-                                    i18n.tr("After %1 minutes").arg(Math.round(powerSettings.sleepDisplayBattery/60)) :
+                                    i18n.tr("After %1 minute".arg(timeout),
+                                            "After %1 minutes".arg(timeout),
+                                            timeout) :
                                     i18n.tr("Never")
                     }
                 }
