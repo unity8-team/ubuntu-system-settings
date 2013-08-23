@@ -157,7 +157,12 @@ ItemPage {
 
         Column {
             width: parent.width
-            ListItem.Base {
+            Item {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: units.gu(2)
+                }
                 height: {
                     if (updateBackend.isUpdateContentToDisplay())
                         return updateContentDisplay.height+ units.gu(4);
@@ -194,7 +199,7 @@ ItemPage {
                     }
                     Button {
                         id: retryCheckUpdateButton
-                        text: i18n.tr("Retry checking")
+                        text: i18n.tr("Retry")
                         width: parent.width
                         onClicked: updateBackend.recheckForUpdate()
                         visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.NoUpdate || updateBackend.currentUpdateState === UbuntuUpdatePanel.CheckingError
