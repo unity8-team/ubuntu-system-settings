@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-22 17:15+0000\n"
+"POT-Creation-Date: 2013-08-23 08:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,6 +50,7 @@ msgstr ""
 #: ../plugins/battery/PageComponent.qml:217
 #: ../plugins/battery/SleepValues.qml:87
 #: ../plugins/security-privacy/LockWhenIdle.qml:70
+#: ../plugins/system-update/PageComponent.qml:313
 msgid "Never"
 msgstr ""
 
@@ -714,58 +715,101 @@ msgstr ""
 msgid "Stop playing"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:32
-msgid "Update phone"
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:17
+msgid "Updates"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:113
-msgid "Congrats! You are already up to date!"
+#: ../plugins/system-update/PageComponent.qml:46
+msgid "Checking for updates"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:115
-msgid "A new version is available!"
+#: ../plugins/system-update/PageComponent.qml:75
+msgid "Apply update failed:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:82
+msgid "Pause failed:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:94
+#, qt-format
+msgid "%1 GB"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:96
+#, qt-format
+msgid "%1 MB"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:104
+msgid "No software update available"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:104
+#, qt-format
+msgid "Last updated %1"
 msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:116
-msgid "Checking latest available system version…"
-msgstr ""
-
-#: ../plugins/system-update/PageComponent.qml:153
 #, qt-format
-msgid "You can update from version %1 to version %2"
+msgid "About %1 second remaining"
+msgid_plural "About %1 seconds remaining"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/system-update/PageComponent.qml:118
+msgid "No estimate for the download"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:156
+#: ../plugins/system-update/PageComponent.qml:132
+msgid "Download failed:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:185
+msgid "Retry checking"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:210
+msgid "Ubuntu Phone"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:222
 #, qt-format
-msgid "Size of this update: %1"
+msgid "Version %1"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:160
-msgid "This update will:"
+#: ../plugins/system-update/PageComponent.qml:259
+msgid "Pause downloading"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:170
-msgid "Apply?"
+#: ../plugins/system-update/PageComponent.qml:266
+msgid "Resume downloading"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:175
-msgid "Update your phone"
+#: ../plugins/system-update/PageComponent.qml:280
+msgid "Download"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:181
-msgid "Cancel update"
+#: ../plugins/system-update/PageComponent.qml:287
+msgid "Retry"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:187
-msgid "Reboot your phone now"
+#: ../plugins/system-update/PageComponent.qml:294
+msgid "Install & Restart"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:203
-msgid "We are deeply sorry"
+#: ../plugins/system-update/PageComponent.qml:306
+msgid "Download future updates automatically:"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:204
-msgid "The update failed. Please try again later"
+#: ../plugins/system-update/PageComponent.qml:314
+msgid "When on wi-fi"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:316
+msgid ""
+"On any data connection\n"
+"Data charges may apply."
 msgstr ""
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
@@ -826,8 +870,4 @@ msgstr ""
 
 #: ../.build/settings.js:12
 msgid "Rotation lock"
-msgstr ""
-
-#: ../.build/settings.js:17
-msgid "Updates"
 msgstr ""
