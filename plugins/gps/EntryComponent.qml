@@ -32,6 +32,7 @@ ListItem.Standard {
         id: control
         checked: networkSettings.gps
         onCheckedChanged: networkSettings.gps = checked
+        enabled: false /* TODO: enable when there is a gps interface */
 
         GSettings {
             id: networkSettings

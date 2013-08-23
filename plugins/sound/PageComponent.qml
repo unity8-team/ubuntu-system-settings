@@ -64,11 +64,13 @@ ItemPage {
             SettingsCheckEntry {
                 checkStatus: false
                 textEntry: i18n.tr("Vibrate when ringing")
+                enabled: false /* TODO: enable when there is a backend */
             }
 
             SettingsCheckEntry {
                 checkStatus: true
                 textEntry: i18n.tr("Vibrate in silent mode")
+                enabled: false /* TODO: enable when there is a backend */
             }
 
             ListItem.Standard {
@@ -86,11 +88,13 @@ ItemPage {
             SettingsCheckEntry {
                 checkStatus: false
                 textEntry: i18n.tr("Keyboard sounds")
+                enabled: false /* TODO: enable when there is a backend */
             }
 
             SettingsCheckEntry {
                 checkStatus: false
                 textEntry: i18n.tr("Lock sound")
+                enabled: false /* TODO: enable when there is a backend (lp: #1208418) */
             }
         }
     }

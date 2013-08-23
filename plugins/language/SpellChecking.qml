@@ -40,7 +40,9 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Spell checking")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }}
             }
 
             ListItem.Divider {}

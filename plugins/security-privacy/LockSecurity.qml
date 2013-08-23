@@ -42,6 +42,7 @@ ItemPage {
             ]
             expanded: true
             onExpandedChanged: expanded = true
+            enabled: false /* TODO: enable when there is a backend */
         }
         ListItem.SingleControl {
             control: Button {
