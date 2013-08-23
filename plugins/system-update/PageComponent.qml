@@ -100,9 +100,9 @@ ItemPage {
             updateVersion = availableVersion;
             var sizeInMB = updateSize/(1024*1024);
             if (sizeInMB > 1024)
-                updateBackend.updateSize = i18n.tr("%1 GB").arg(sizeInMB/1024);
+                updateBackend.updateSize = i18n.tr("%1 GB").arg(Math.round(sizeInMB/1024*10)/10);
             else
-                updateBackend.updateSize = i18n.tr("%1 MB").arg(sizeInMB);
+                updateBackend.updateSize = i18n.tr("%1 MB").arg(Math.round(sizeInMB*10)/10);
             updateDescriptions = descriptions;
 
             if(isAvailable) {
@@ -163,16 +163,8 @@ ItemPage {
                     right: parent.right
                     margins: units.gu(2)
                 }
-                height: {
-                    if (updateBackend.isUpdateContentToDisplay())
-                        return updateContentDisplay.height+ units.gu(4);
-                    else {
-                        var updateStatusSize = updateStatusbar.height + checkUpdateIndicator.height + units.gu(6);
-                        if (retryCheckUpdateButton.visible)
-                            return updateStatusSize + retryCheckUpdateButton.height
-                        return updateStatusSize;
-                    }
-                }
+                height: distribLogo.height + standardLabel.height*2 + versionId.height + subtitleId.height +
+                        updateProgress.height + pauseDownloadButton.height + units.gu(4)
 
                 /**********************
                  * Checking/no update *
@@ -230,6 +222,7 @@ ItemPage {
                         width: parent.width
 
                         Label {
+                            id: standardLabel
                             width: parent.width/2
                             text: i18n.tr("Ubuntu Phone")
                         }
@@ -243,15 +236,19 @@ ItemPage {
 
                     // FIXME: use the right widget then
                     ListItem.ValueSelector {
+                        id: versionId
                         text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
                         values: updateBackend.updateDescriptions
                         selectedIndex: -1
+                        showDivider: false
                     }
 
                     ListItem.Subtitled {
+                        id: subtitleId
                         text: updateBackend.infoMessage
                         subText: updateBackend.infoSecondaryMessage
                         visible: updateBackend.infoMessage !== ""
+                        showDivider: false
                     }
 
                     /***************************
@@ -323,6 +320,8 @@ ItemPage {
                     }
                 }
             }
+
+            ListItem.ThinDivider {}
 
             ListItem.Standard {
                 text: i18n.tr ("Download future updates automatically:")
