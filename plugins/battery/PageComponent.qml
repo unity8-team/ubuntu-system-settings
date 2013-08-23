@@ -198,7 +198,9 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Auto sleep")
+                /* TODO: use real configuration when we have one, lp #1215957 */
+                property bool lockOnSuspend: false
+                text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
                 value: {
                     if (batteryBackend.powerdRunning ) {
                         var timeout = Math.round(powerSettings.activityTimeout/60)
@@ -218,7 +220,8 @@ ItemPage {
                     }
                 }
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SleepValues.qml"), {usePowerd: batteryBackend.powerdRunning })
+                onClicked: pageStack.push(Qt.resolvedUrl("SleepValues.qml"), {usePowerd: batteryBackend.powerdRunning,
+                                              title: text, lockOnSuspend: lockOnSuspend })
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
