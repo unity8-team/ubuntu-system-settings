@@ -130,6 +130,7 @@ ItemPage {
 
         onUpdatePaused: {
             downloadProgress = percentage;
+            downloadRemainingTime = i18n.tr("Paused");
             currentUpdateState = UbuntuUpdatePanel.Paused;
         }
 
@@ -256,7 +257,7 @@ ItemPage {
 
                             Label {
                                 text: updateBackend.downloadRemainingTime
-                                visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading
+                                visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
                             }
 
                             Button {
