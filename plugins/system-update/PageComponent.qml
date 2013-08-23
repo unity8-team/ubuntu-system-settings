@@ -240,6 +240,7 @@ ItemPage {
                         text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
                         values: updateBackend.updateDescriptions
                         selectedIndex: -1
+                        showDivider: false
                     }
 
                     ListItem.Subtitled {
@@ -247,6 +248,7 @@ ItemPage {
                         text: updateBackend.infoMessage
                         subText: updateBackend.infoSecondaryMessage
                         visible: updateBackend.infoMessage !== ""
+                        showDivider: false
                     }
 
                     /***************************

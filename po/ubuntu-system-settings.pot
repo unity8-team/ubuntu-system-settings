@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-23 08:27+0200\n"
+"POT-Creation-Date: 2013-08-23 15:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr ""
 #: ../plugins/battery/PageComponent.qml:217
 #: ../plugins/battery/SleepValues.qml:87
 #: ../plugins/security-privacy/LockWhenIdle.qml:70
-#: ../plugins/system-update/PageComponent.qml:313
+#: ../plugins/system-update/PageComponent.qml:334
 msgid "Never"
 msgstr ""
 
@@ -720,93 +720,94 @@ msgid "Updates"
 msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:46
-msgid "Checking for updates"
+msgid "Checking for updates…"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:75
+#: ../plugins/system-update/PageComponent.qml:79
 msgid "Apply update failed:"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:82
+#: ../plugins/system-update/PageComponent.qml:89
 msgid "Pause failed:"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:94
+#: ../plugins/system-update/PageComponent.qml:103
 #, qt-format
 msgid "%1 GB"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:96
+#: ../plugins/system-update/PageComponent.qml:105
 #, qt-format
 msgid "%1 MB"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:104
+#: ../plugins/system-update/PageComponent.qml:113
 msgid "No software update available"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:104
+#: ../plugins/system-update/PageComponent.qml:113
 #, qt-format
 msgid "Last updated %1"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:116
+#: ../plugins/system-update/PageComponent.qml:125
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/system-update/PageComponent.qml:118
+#: ../plugins/system-update/PageComponent.qml:127
 msgid "No estimate for the download"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:132
+#: ../plugins/system-update/PageComponent.qml:133
+msgid "Paused"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:142
 msgid "Download failed:"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:185
-msgid "Retry checking"
+#: ../plugins/system-update/PageComponent.qml:197
+#: ../plugins/system-update/PageComponent.qml:308
+msgid "Retry"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:210
+#: ../plugins/system-update/PageComponent.qml:227
 msgid "Ubuntu Phone"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:222
+#: ../plugins/system-update/PageComponent.qml:240
 #, qt-format
 msgid "Version %1"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:259
+#: ../plugins/system-update/PageComponent.qml:278
 msgid "Pause downloading"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:266
+#: ../plugins/system-update/PageComponent.qml:285
 msgid "Resume downloading"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:280
+#: ../plugins/system-update/PageComponent.qml:301
 msgid "Download"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:287
-msgid "Retry"
-msgstr ""
-
-#: ../plugins/system-update/PageComponent.qml:294
+#: ../plugins/system-update/PageComponent.qml:315
 msgid "Install & Restart"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:306
+#: ../plugins/system-update/PageComponent.qml:327
 msgid "Download future updates automatically:"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:314
+#: ../plugins/system-update/PageComponent.qml:335
 msgid "When on wi-fi"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:316
+#: ../plugins/system-update/PageComponent.qml:337
 msgid ""
 "On any data connection\n"
 "Data charges may apply."
