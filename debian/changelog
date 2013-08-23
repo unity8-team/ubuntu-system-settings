@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.1+13.10.20130823-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * updates: some Ui tweaks - don't show extra lines in the middle of
+    the ui - use separator between sections - use a consistant height -
+    round update size to 1 digit - refresh the translations template.
+
+  [ Didier Roche ]
+  * Visual refresh from the design spec. Comply to the new daemon <->
+    client dbus API.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 278
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 23 Aug 2013 15:18:05 +0000
+
 ubuntu-system-settings (0.1+13.10.20130822.2-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
