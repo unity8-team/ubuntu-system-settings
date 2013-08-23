@@ -28,7 +28,7 @@ import Ubuntu.SystemSettings.Update 1.0
 ItemPage {
     id: root
 
-    title: i18n.tr("Update")
+    title: i18n.tr("Updates")
     flickable: scrollWidget // TODO: maybe remove
 
     // TODO: surely needs its own QML as the whole logic is here
@@ -79,7 +79,7 @@ ItemPage {
             infoMessage = "";
             var msg = PauseDownload();
             if (msg)
-                infoMessage = i18n.tr("<b>Pausing failed:</b><br/>%1").arg(TranslateFromBackend(msg));
+                infoMessage = i18n.tr("<b>Pause failed:</b><br/>%1").arg(TranslateFromBackend(msg));
         }
 
         /************************
@@ -302,12 +302,14 @@ ItemPage {
                 }
             }
 
+            ListItem.Standard {
+                text: i18n.tr ("Download future updates automatically:")
+            }
+            // TODO: this widget needs to be replace by the real one
             ListItem.ValueSelector {
                 id: upgradePolicySelector
                 expanded: true
-                // TODO: There is no way to have a ValueSelector always expanded
                 onExpandedChanged: expanded = true
-                text: i18n.tr("Download future updates automatically:")
                 values: [i18n.tr("Never"),
                     i18n.tr("When on wi-fi"),
                     // TODO: Data charges may apply needs to be smaller
