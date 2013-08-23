@@ -43,7 +43,7 @@ ItemPage {
 
         // initial state
         property int currentUpdateState: UbuntuUpdatePanel.Checking
-        property string checkinfoMessage: i18n.tr("Checking for updates")
+        property string checkinfoMessage: i18n.tr("Checking for updates…")
         infoMessage: checkinfoMessage
         property string infoSecondaryMessage
 
