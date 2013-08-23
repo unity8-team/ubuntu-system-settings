@@ -100,9 +100,9 @@ ItemPage {
             updateVersion = availableVersion;
             var sizeInMB = updateSize/(1024*1024);
             if (sizeInMB > 1024)
-                updateBackend.updateSize = i18n.tr("%1 GB").arg(sizeInMB/1024);
+                updateBackend.updateSize = i18n.tr("%1 GB").arg(Math.round(sizeInMB/1024*10)/10);
             else
-                updateBackend.updateSize = i18n.tr("%1 MB").arg(sizeInMB);
+                updateBackend.updateSize = i18n.tr("%1 MB").arg(Math.round(sizeInMB*10)/10);
             updateDescriptions = descriptions;
 
             if(isAvailable) {
