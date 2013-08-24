@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-22 17:15+0000\n"
+"POT-Creation-Date: 2013-08-23 15:11+0200\n"
 "PO-Revision-Date: 2013-08-10 09:59+0000\n"
 "Last-Translator: londumas <helion331990@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-08-23 06:01+0000\n"
-"X-Generator: Launchpad (build 16737)\n"
+"X-Launchpad-Export-Date: 2013-08-24 05:44+0000\n"
+"X-Generator: Launchpad (build 16738)\n"
 "Language: \n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -51,6 +51,7 @@ msgstr "Dernière mise à jour"
 #: ../plugins/battery/PageComponent.qml:217
 #: ../plugins/battery/SleepValues.qml:87
 #: ../plugins/security-privacy/LockWhenIdle.qml:70
+#: ../plugins/system-update/PageComponent.qml:334
 msgid "Never"
 msgstr "Jamais"
 
@@ -728,60 +729,103 @@ msgstr "Le téléphone est en mode silencieux."
 msgid "Stop playing"
 msgstr "Arrêter la lecture"
 
-#: ../plugins/system-update/PageComponent.qml:32
-msgid "Update phone"
-msgstr "Mettre à jour le téléphone"
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:17
+msgid "Updates"
+msgstr "Mises à jours"
+
+#: ../plugins/system-update/PageComponent.qml:46
+msgid "Checking for updates…"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:79
+msgid "Apply update failed:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:89
+msgid "Pause failed:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:103
+#, qt-format
+msgid "%1 GB"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:105
+#, qt-format
+msgid "%1 MB"
+msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:113
-msgid "Congrats! You are already up to date!"
+msgid "No software update available"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:115
-msgid "A new version is available!"
-msgstr "Une nouvelle version est disponible !"
-
-#: ../plugins/system-update/PageComponent.qml:116
-msgid "Checking latest available system version…"
-msgstr ""
-"Vérification de la dernière version disponible du système en cours..."
-
-#: ../plugins/system-update/PageComponent.qml:153
+#: ../plugins/system-update/PageComponent.qml:113
 #, qt-format
-msgid "You can update from version %1 to version %2"
-msgstr "Vous pouvez mettre à jour depuis la version %1 vers la version %2"
-
-#: ../plugins/system-update/PageComponent.qml:156
-#, qt-format
-msgid "Size of this update: %1"
-msgstr "Taille de cette mise à jour : %1"
-
-#: ../plugins/system-update/PageComponent.qml:160
-msgid "This update will:"
+msgid "Last updated %1"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:170
-msgid "Apply?"
-msgstr "Appliquer ?"
+#: ../plugins/system-update/PageComponent.qml:125
+#, qt-format
+msgid "About %1 second remaining"
+msgid_plural "About %1 seconds remaining"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../plugins/system-update/PageComponent.qml:175
-msgid "Update your phone"
-msgstr "Mettre à jour votre téléphone"
+#: ../plugins/system-update/PageComponent.qml:127
+msgid "No estimate for the download"
+msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:181
-msgid "Cancel update"
-msgstr "Annuler la mise à jour"
+#: ../plugins/system-update/PageComponent.qml:133
+msgid "Paused"
+msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:187
-msgid "Reboot your phone now"
-msgstr "Redémarrer votre téléphone maintenant"
+#: ../plugins/system-update/PageComponent.qml:142
+msgid "Download failed:"
+msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:203
-msgid "We are deeply sorry"
-msgstr "Nous sommes vraiment désolés"
+#: ../plugins/system-update/PageComponent.qml:197
+#: ../plugins/system-update/PageComponent.qml:308
+msgid "Retry"
+msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:204
-msgid "The update failed. Please try again later"
-msgstr "La mise à jour a échoué. Veuillez essayer de nouveau une autre fois."
+#: ../plugins/system-update/PageComponent.qml:227
+msgid "Ubuntu Phone"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:240
+#, qt-format
+msgid "Version %1"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:278
+msgid "Pause downloading"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:285
+msgid "Resume downloading"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:301
+msgid "Download"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:315
+msgid "Install & Restart"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:327
+msgid "Download future updates automatically:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:335
+msgid "When on wi-fi"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:337
+msgid ""
+"On any data connection\n"
+"Data charges may apply."
+msgstr ""
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -842,7 +886,3 @@ msgstr "Mode avion"
 #: ../.build/settings.js:12
 msgid "Rotation lock"
 msgstr "Verrouillage de la rotation"
-
-#: ../.build/settings.js:17
-msgid "Updates"
-msgstr "Mises à jours"
