@@ -16,6 +16,13 @@ ItemPage {
         menuObjectPath: "/com/canonical/indicator/network/phone"
     }
 
+    Component {
+        id: menuDelegate
+        ListItem.Standard {
+            text: label
+        }
+    }
+
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -23,6 +30,7 @@ ItemPage {
         ListView {
             id: aplist
             model: menuModel
+            delegate: menuDelegate
         }
 
         ListItem.Standard {
