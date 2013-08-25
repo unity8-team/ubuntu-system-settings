@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-23 15:11+0200\n"
-"PO-Revision-Date: 2013-07-19 19:51+0000\n"
-"Last-Translator: Igor Zubarev <igor.zubarev@gmail.com>\n"
+"PO-Revision-Date: 2013-08-24 21:44+0000\n"
+"Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-08-24 05:44+0000\n"
+"X-Launchpad-Export-Date: 2013-08-25 05:21+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
-msgstr "О телефоне"
+msgstr "Сведения о телефоне"
 
 #: ../plugins/about/PageComponent.qml:76
 msgid "Serial"
@@ -220,7 +220,7 @@ msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:164
 msgid "Display brightness"
-msgstr ""
+msgstr "Яркость экрана"
 
 #: ../plugins/battery/PageComponent.qml:201
 #: ../plugins/battery/SleepValues.qml:31
@@ -258,7 +258,7 @@ msgstr "GPS"
 
 #: ../plugins/battery/PageComponent.qml:248
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "Для точного определения местонахождения требуется GPS и/или Wi-Fi."
 
 #: ../plugins/battery/SleepValues.qml:63
 msgid "Put the display to sleep when idle"
@@ -348,11 +348,11 @@ msgstr ""
 
 #: ../plugins/language/KeyboardLayouts.qml:42
 msgid "Current layouts:"
-msgstr ""
+msgstr "Текущие раскладки:"
 
 #: ../plugins/language/KeyboardLayouts.qml:58
 msgid "All layouts available:"
-msgstr ""
+msgstr "Все доступные раскладки:"
 
 #: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:11
 msgid "Language & Text"
@@ -395,7 +395,7 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:62
 msgid "All languages available:"
-msgstr ""
+msgstr "Все доступные языки:"
 
 #: ../plugins/phone/CallForwarding.qml:27
 #: ../plugins/phone/CallForwarding.qml:60
@@ -419,7 +419,7 @@ msgstr ""
 
 #: ../plugins/phone/CallForwarding.qml:113
 msgid "Contacts…"
-msgstr ""
+msgstr "Контакты…"
 
 #: ../plugins/phone/CallForwarding.qml:113
 msgid "Set"
@@ -690,7 +690,7 @@ msgstr "Мелодия вызова"
 
 #: ../plugins/sound/PageComponent.qml:66
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "Вибрация при звонке"
 
 #: ../plugins/sound/PageComponent.qml:71
 msgid "Vibrate in silent mode"
@@ -698,7 +698,7 @@ msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:75
 msgid "Other sounds:"
-msgstr ""
+msgstr "Другие звуки:"
 
 #: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
 msgid "Message received"
@@ -710,7 +710,7 @@ msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:93
 msgid "Lock sound"
-msgstr ""
+msgstr "Звук блокировки"
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
