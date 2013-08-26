@@ -21,6 +21,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QProcess>
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
 
@@ -29,6 +30,20 @@ StorageAbout::StorageAbout(QObject *parent) :
 {
 
 }
+
+QByteArray StorageAbout::getClickList()
+{
+    QFile clickBinary("/usr/bin/click");
+    if (!clickBinary.exists()) {
+        return QByteArray();
+    }
+
+    QProcess *clickProcess = new QProcess();
+    clickProcess->start("/usr/bin/click", QStringList() << "list" << "--manifest");
+    clickProcess->waitForFinished(-1);
+    return clickProcess->readAllStandardOutput();
+}
+
 
 QString StorageAbout::serialNumber()
 {
