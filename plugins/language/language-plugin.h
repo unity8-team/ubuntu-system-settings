@@ -35,7 +35,28 @@ private:
 
     Q_PROPERTY(int currentLanguage
                READ currentLanguage
-               WRITE setCurrentLanguage)
+               WRITE setCurrentLanguage
+               NOTIFY currentLanguageChanged)
+
+    Q_PROPERTY(bool autoCapitalization
+               READ autoCapitalization
+               WRITE setAutoCapitalization
+               NOTIFY autoCapitalizationChanged)
+
+    Q_PROPERTY(bool autoCompletion
+               READ autoCompletion
+               WRITE setAutoCompletion
+               NOTIFY autoCompletionChanged)
+
+    Q_PROPERTY(bool autoCorrection
+               READ autoCorrection
+               WRITE setAutoCorrection
+               NOTIFY autoCorrectionChanged)
+
+    Q_PROPERTY(bool autoPunctuation
+               READ autoPunctuation
+               WRITE setAutoPunctuation
+               NOTIFY autoPunctuationChanged)
 
 public:
 
@@ -45,6 +66,23 @@ public:
 
     int currentLanguage() const;
     void setCurrentLanguage(int index);
+    Q_SIGNAL void currentLanguageChanged();
+
+    bool autoCapitalization() const;
+    void setAutoCapitalization(bool value);
+    Q_SIGNAL void autoCapitalizationChanged();
+
+    bool autoCompletion() const;
+    void setAutoCompletion(bool value);
+    Q_SIGNAL void autoCompletionChanged();
+
+    bool autoCorrection() const;
+    void setAutoCorrection(bool value);
+    Q_SIGNAL void autoCorrectionChanged();
+
+    bool autoPunctuation() const;
+    void setAutoPunctuation(bool value);
+    Q_SIGNAL void autoPunctuationChanged();
 };
 
 #endif // LANGUAGE_PLUGIN_H

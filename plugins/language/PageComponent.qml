@@ -73,15 +73,19 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Auto correction")
+
                 control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
+                    checked: plugin.autoCorrection
+                    onClicked: plugin.autoCorrection = checked
                 }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Auto completion")
+
                 control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
+                    checked: plugin.autoCompletion
+                    onClicked: plugin.autoCompletion = checked
                 }
             }
 
@@ -89,8 +93,10 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Auto capitalization")
+
                 control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
+                    checked: plugin.autoCapitalization
+                    onClicked: plugin.autoCapitalization = checked
                 }
             }
 
@@ -102,8 +108,10 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Auto punctuation")
+
                 control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
+                    checked: plugin.autoPunctuation
+                    onClicked: plugin.autoPunctuation = checked
                 }
             }
 

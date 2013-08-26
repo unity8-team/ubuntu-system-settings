@@ -21,9 +21,21 @@
 #include "language-plugin.h"
 #include <act/act.h>
 
+#define ORG "maliit.org"
+#define APP "server"
+
+#define MALIIT_PREFIX "pluginsettings/libmaliit-keyboard-plugin.so"
+#define UBUNTU_PREFIX "pluginsettings/libubuntu-keyboard-plugin.so"
+
+#define KEY_CAPITALIZATION "auto_caps_enabled"
+#define KEY_COMPLETION     "word_engine_enabled"
+#define KEY_CORRECTION     "auto_correct_enabled"
+
 static QList<QLocale> *locales;
 static QHash<QLocale::Language, unsigned int> *languageIndices;
 static QStringList *localeNames;
+
+static QSettings *maliitSettings;
 
 static bool
 compareLocales(const QLocale &locale0,
@@ -92,6 +104,17 @@ getLocaleNames()
     }
 
     return localeNames;
+}
+
+static QSettings *
+getMaliitSettings()
+{
+    if (maliitSettings == NULL)
+        maliitSettings = new QSettings("maliit.org", "server");
+
+    qDebug("getMaliitSettings ()");
+
+    return maliitSettings;
 }
 
 LanguagePlugin::LanguagePlugin(QObject *parent) : QObject(parent)
@@ -183,4 +206,60 @@ LanguagePlugin::setCurrentLanguage(int index)
                 g_signal_connect(manager, "notify::is-loaded", G_CALLBACK(setLanguageWithManager), GINT_TO_POINTER(index));
         }
     }
+}
+
+bool
+LanguagePlugin::autoCapitalization() const
+{
+    return getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_CAPITALIZATION, false).toBool();
+}
+
+void
+LanguagePlugin::setAutoCapitalization(bool value)
+{
+    getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_CAPITALIZATION, value);
+    getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_CAPITALIZATION, value);
+    getMaliitSettings()->sync();
+}
+
+bool
+LanguagePlugin::autoCompletion() const
+{
+    return getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_COMPLETION, false).toBool();
+}
+
+void
+LanguagePlugin::setAutoCompletion(bool value)
+{
+    getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_COMPLETION, value);
+    getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_COMPLETION, value);
+    getMaliitSettings()->sync();
+}
+
+bool
+LanguagePlugin::autoCorrection() const
+{
+    return getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_CORRECTION, false).toBool();
+}
+
+void
+LanguagePlugin::setAutoCorrection(bool value)
+{
+    getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_CORRECTION, value);
+    getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_CORRECTION, value);
+    getMaliitSettings()->sync();
+}
+
+bool
+LanguagePlugin::autoPunctuation() const
+{
+    /* TODO: Get auto punctuation setting. */
+    return false;
+}
+
+void
+LanguagePlugin::setAutoPunctuation(bool value)
+{
+    /* TODO: Set auto punctuation setting. */
+    Q_UNUSED(value);
 }
