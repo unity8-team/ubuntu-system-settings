@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.1+13.10.20130827-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: don't segfault when there is no charge info.
+  * storage: get the list of click packages installed and build a model
+    from it. We don't use the real datas in the ui yet though, since the
+    manifest doesn't have the informations we need for that yet.
+  * battery: update sleep/lock subscreen to match the new design.
+  * settings: use enabled: false with a TODO for non working elements.
+  * battery: backend for the wifi controls.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 287
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 11:18:05 +0000
+
 ubuntu-system-settings (0.1+13.10.20130823-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
