@@ -49,6 +49,7 @@ ItemPage {
         SettingsCheckEntry {
             checkStatus: true
             textEntry: i18n.tr("Sleep locks immediately")
+            enabled: false /* TODO: enable when there is a backend */
         }
 
     /* TODO: once we know how to do this

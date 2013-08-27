@@ -69,6 +69,7 @@ ItemPage {
                             10),
                     i18n.tr("Never")]
                 selectedIndex: 4 // 5
+                enabled: false /* TODO: enable when there is a backend */
             }
 
             ListItem.Caption {

@@ -78,11 +78,16 @@ ItemPage {
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")
-                control: Switch { enabled: true }
+                control: Switch {
+                    checked: true
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
             ListItem.Standard {
                 text: i18n.tr("Messages on welcome screen")
-                control: Switch { }
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
             ListItem.SingleValue {
                 id: dashSearchId
