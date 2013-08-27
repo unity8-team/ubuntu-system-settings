@@ -55,8 +55,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Keyboard layouts")
-                /* TODO: Get number of keyboard layouts */
-                value: "1"
+                value: plugin.currentPlugins.length
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
             }

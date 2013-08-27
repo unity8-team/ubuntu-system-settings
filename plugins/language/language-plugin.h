@@ -38,6 +38,15 @@ private:
                WRITE setCurrentLanguage
                NOTIFY currentLanguageChanged)
 
+    Q_PROPERTY(QStringList plugins
+               READ plugins
+               CONSTANT)
+
+    Q_PROPERTY(QList<int> currentPlugins
+               READ currentPlugins
+               WRITE setCurrentPlugins
+               NOTIFY currentPluginsChanged)
+
     Q_PROPERTY(bool autoCapitalization
                READ autoCapitalization
                WRITE setAutoCapitalization
@@ -67,6 +76,12 @@ public:
     int currentLanguage() const;
     void setCurrentLanguage(int index);
     Q_SIGNAL void currentLanguageChanged();
+
+    const QStringList &plugins() const;
+
+    const QList<int> &currentPlugins() const;
+    void setCurrentPlugins(const QList<int> &list);
+    Q_SIGNAL void currentPluginsChanged();
 
     bool autoCapitalization() const;
     void setAutoCapitalization(bool value);

@@ -25,7 +25,7 @@ INSTALLS += image
 
 # C++ bits
 TARGET = UbuntuLanguagePlugin
-QT += qml quick dbus
+QT += qml quick dbus xmlpatterns
 CONFIG += qt link_pkgconfig plugin no_keywords
 
 #comment in the following line to enable traces
@@ -38,8 +38,8 @@ INCLUDEPATH += .
 PKGCONFIG += accountsservice glib-2.0
 
 # Input
-HEADERS += language-plugin.h plugin.h
-SOURCES += language-plugin.cpp plugin.cpp
+HEADERS += keyboard-plugin.h language-plugin.h plugin.h
+SOURCES += keyboard-plugin.cpp language-plugin.cpp plugin.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)
