@@ -38,10 +38,10 @@ QByteArray StorageAbout::getClickList()
         return QByteArray();
     }
 
-    QProcess *clickProcess = new QProcess();
-    clickProcess->start("/usr/bin/click", QStringList() << "list" << "--manifest");
-    clickProcess->waitForFinished(-1);
-    return clickProcess->readAllStandardOutput();
+    QProcess clickProcess;
+    clickProcess.start("/usr/bin/click", QStringList() << "list" << "--manifest");
+    clickProcess.waitForFinished(-1);
+    return clickProcess.readAllStandardOutput();
 }
 
 
