@@ -92,7 +92,7 @@ int Battery::lastFullCharge()
 void Battery::getLastFullCharge()
 {
     UpHistoryItem *item;
-    GPtrArray *values;
+    GPtrArray *values = NULL;
     gint32 offset = 0;
     GTimeVal timeval;
 
@@ -100,6 +100,12 @@ void Battery::getLastFullCharge()
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, m_deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", 864000, 1000, NULL, NULL);
+
+    if (values == NULL) {
+        qWarning() << "Can't get charge info";
+        return;
+    }
+
     for (uint i=0; i < values->len; i++) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
@@ -126,7 +132,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         return QVariantList();
 
     UpHistoryItem *item;
-    GPtrArray *values;
+    GPtrArray *values = NULL;
     gint32 offset = 0;
     GTimeVal timeval;
     QVariantList listValues;
@@ -136,6 +142,12 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", timespan, resolution, NULL, NULL);
+
+    if (values == NULL) {
+        qWarning() << "Can't get charge info";
+        return QVariantList();
+    }
+
     for (uint i=values->len-1; i > 0; i--) {
         QVariantMap listItem;
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
