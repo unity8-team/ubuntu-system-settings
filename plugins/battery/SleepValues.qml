@@ -28,10 +28,10 @@ import SystemSettings 1.0
 ItemPage {
     id: root
 
-    title: i18n.tr("Auto sleep")
     flickable: scrollWidget
 
     property bool usePowerd
+    property bool lockOnSuspend
 
     GSettings {
         id: powerSettings
@@ -60,7 +60,7 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Standard {
-                text: i18n.tr("Put the display to sleep when idle")
+                text: lockOnSuspend ? i18n.tr("Lock the phone when it's not in use:") : i18n.tr("Put the phone to sleep when it is not in use:")
             }
 
             ListItem.ValueSelector {
@@ -94,7 +94,7 @@ ItemPage {
             }
 
             ListItem.Caption {
-                text: i18n.tr("Videos and some apps may keep the phone awake.")
+                text: lockOnSuspend ? i18n.tr("Shorter times are more secure. Phone won't lock during calls or video playback.") : i18n.tr("Phone won’t sleep during calls or video playback.")
             }
         }
     }

@@ -22,9 +22,10 @@ import GSettings 1.0
 import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
 import QtSystemInfo 5.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import SystemSettings 1.0
+import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
     id: storagePage
@@ -66,6 +67,19 @@ ItemPage {
         onChanged: {
             if (key == "storageSortByName")
                 sortByName = value
+        }
+    }
+
+    ListModel { id: clicksList }
+
+    UbuntuStorageAboutPanel {
+        id: backendInfos
+        Component.onCompleted: {
+            var clickData = getClickList()
+            var clickJson = JSON.parse(clickData)
+            for (var val in clickJson) {
+                clicksList.append({"binaryName": clickJson[val].title})
+            }
         }
     }
 

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-22 17:15+0000\n"
-"PO-Revision-Date: 2013-08-22 10:58+0000\n"
+"POT-Creation-Date: 2013-08-23 15:11+0200\n"
+"PO-Revision-Date: 2013-08-26 17:02+0000\n"
 "Last-Translator: Tiago Hillebrandt <tiagohillebrandt@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-08-23 06:02+0000\n"
-"X-Generator: Launchpad (build 16737)\n"
+"X-Launchpad-Export-Date: 2013-08-27 05:04+0000\n"
+"X-Generator: Launchpad (build 16738)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -50,6 +50,7 @@ msgstr "Última atualização"
 #: ../plugins/battery/PageComponent.qml:217
 #: ../plugins/battery/SleepValues.qml:87
 #: ../plugins/security-privacy/LockWhenIdle.qml:70
+#: ../plugins/system-update/PageComponent.qml:334
 msgid "Never"
 msgstr "Nunca"
 
@@ -239,8 +240,8 @@ msgstr "Dormir automaticamente"
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Depois de %1 minuto"
+msgstr[1] "Depois de %1 minutos"
 
 #: ../plugins/battery/PageComponent.qml:224 ../.build/settings.js:19
 msgid "Wi-Fi"
@@ -528,23 +529,27 @@ msgstr "Telefone e Internet"
 
 #: ../plugins/security-privacy/Location.qml:29
 msgid "Location"
-msgstr ""
+msgstr "Localização"
 
 #: ../plugins/security-privacy/Location.qml:36
 msgid "Location detection"
-msgstr ""
+msgstr "Detecção de localização"
 
 #: ../plugins/security-privacy/Location.qml:45
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"Usa o GPS para detectar sua localização aproximada. Quando desativado, o GPS "
+"desliga para economizar bateria."
 
 #: ../plugins/security-privacy/Location.qml:47
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Usa rede sem fio e GPS para detectar sua localização aproximada. Desligar a "
+"detecção de localização economiza bateria."
 
 #: ../plugins/security-privacy/Location.qml:49
 msgid ""
@@ -579,16 +584,16 @@ msgstr ""
 
 #: ../plugins/security-privacy/Location.qml:62
 msgid "Allow access to location:"
-msgstr ""
+msgstr "Permitir acesso para localização:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:27
 #: ../plugins/security-privacy/PhoneLocking.qml:34
 msgid "Lock security"
-msgstr ""
+msgstr "Trava de segurança"
 
 #: ../plugins/security-privacy/LockSecurity.qml:33
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "Destravar o telefone usando:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:39
 #: ../plugins/security-privacy/PhoneLocking.qml:35
@@ -628,7 +633,7 @@ msgstr "Segurança e privacidade"
 
 #: ../plugins/security-privacy/PageComponent.qml:61
 msgid "Security:"
-msgstr ""
+msgstr "Segurança:"
 
 #: ../plugins/security-privacy/PageComponent.qml:64
 #: ../plugins/security-privacy/PhoneLocking.qml:27
@@ -645,19 +650,19 @@ msgstr[1] ""
 
 #: ../plugins/security-privacy/PageComponent.qml:72
 msgid "SIM PIN"
-msgstr ""
+msgstr "PIN do SIM"
 
 #: ../plugins/security-privacy/PageComponent.qml:77
 msgid "Privacy:"
-msgstr ""
+msgstr "Privacidade:"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Estatísticas na tela de boas-vindas"
 
 #: ../plugins/security-privacy/PageComponent.qml:84
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Mensagens na tela de boas-vindas"
 
 #: ../plugins/security-privacy/PageComponent.qml:97
 msgid "Location access"
@@ -673,11 +678,11 @@ msgstr "Diagnósticos"
 
 #: ../plugins/security-privacy/PageComponent.qml:110
 msgid "Sent"
-msgstr ""
+msgstr "Enviado"
 
 #: ../plugins/security-privacy/PageComponent.qml:111
 msgid "Not sent"
-msgstr ""
+msgstr "Não enviado"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:51
 msgid "Sleep locks immediately"
@@ -727,59 +732,103 @@ msgstr "O telefone está no Modo silencioso."
 msgid "Stop playing"
 msgstr "Parar reprodução"
 
-#: ../plugins/system-update/PageComponent.qml:32
-msgid "Update phone"
-msgstr "Atualizar telefone"
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:17
+msgid "Updates"
+msgstr "Atualizações"
+
+#: ../plugins/system-update/PageComponent.qml:46
+msgid "Checking for updates…"
+msgstr "Verificando por atualizações..."
+
+#: ../plugins/system-update/PageComponent.qml:79
+msgid "Apply update failed:"
+msgstr "Falha ao aplicar atualização:"
+
+#: ../plugins/system-update/PageComponent.qml:89
+msgid "Pause failed:"
+msgstr "Falha ao pausar:"
+
+#: ../plugins/system-update/PageComponent.qml:103
+#, qt-format
+msgid "%1 GB"
+msgstr "%1 GB"
+
+#: ../plugins/system-update/PageComponent.qml:105
+#, qt-format
+msgid "%1 MB"
+msgstr "%1 MB"
 
 #: ../plugins/system-update/PageComponent.qml:113
-msgid "Congrats! You are already up to date!"
-msgstr "Parabéns, seu sistema já está atualizado!"
+msgid "No software update available"
+msgstr "Nenhuma atualização de software disponível"
 
-#: ../plugins/system-update/PageComponent.qml:115
-msgid "A new version is available!"
-msgstr "Uma nova versão está disponível!"
-
-#: ../plugins/system-update/PageComponent.qml:116
-msgid "Checking latest available system version…"
-msgstr "Verificando a última versão de sistema disponível..."
-
-#: ../plugins/system-update/PageComponent.qml:153
+#: ../plugins/system-update/PageComponent.qml:113
 #, qt-format
-msgid "You can update from version %1 to version %2"
-msgstr "Você pode atualizar da versão %1 para versão %2"
+msgid "Last updated %1"
+msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:156
+#: ../plugins/system-update/PageComponent.qml:125
 #, qt-format
-msgid "Size of this update: %1"
-msgstr "Tamanho da atualização: %1"
+msgid "About %1 second remaining"
+msgid_plural "About %1 seconds remaining"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../plugins/system-update/PageComponent.qml:160
-msgid "This update will:"
-msgstr "Esta atualização irá:"
+#: ../plugins/system-update/PageComponent.qml:127
+msgid "No estimate for the download"
+msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:170
-msgid "Apply?"
-msgstr "Aplicar?"
+#: ../plugins/system-update/PageComponent.qml:133
+msgid "Paused"
+msgstr "Pausado"
 
-#: ../plugins/system-update/PageComponent.qml:175
-msgid "Update your phone"
-msgstr "Atualizar seu telefone"
+#: ../plugins/system-update/PageComponent.qml:142
+msgid "Download failed:"
+msgstr "Falha ao baixar:"
 
-#: ../plugins/system-update/PageComponent.qml:181
-msgid "Cancel update"
-msgstr "Cancelar atualização"
+#: ../plugins/system-update/PageComponent.qml:197
+#: ../plugins/system-update/PageComponent.qml:308
+msgid "Retry"
+msgstr "Tentar novamente"
 
-#: ../plugins/system-update/PageComponent.qml:187
-msgid "Reboot your phone now"
-msgstr "Reiniciar seu telefone agora"
+#: ../plugins/system-update/PageComponent.qml:227
+msgid "Ubuntu Phone"
+msgstr "Ubuntu Phone"
 
-#: ../plugins/system-update/PageComponent.qml:203
-msgid "We are deeply sorry"
-msgstr "Lamentamos profundamente"
+#: ../plugins/system-update/PageComponent.qml:240
+#, qt-format
+msgid "Version %1"
+msgstr "Versão %1"
 
-#: ../plugins/system-update/PageComponent.qml:204
-msgid "The update failed. Please try again later"
-msgstr "Falha na atualização. Tente novamente mais tarde"
+#: ../plugins/system-update/PageComponent.qml:278
+msgid "Pause downloading"
+msgstr "Pausar download"
+
+#: ../plugins/system-update/PageComponent.qml:285
+msgid "Resume downloading"
+msgstr "Continuar baixando"
+
+#: ../plugins/system-update/PageComponent.qml:301
+msgid "Download"
+msgstr "Baixar"
+
+#: ../plugins/system-update/PageComponent.qml:315
+msgid "Install & Restart"
+msgstr "Instalar e reiniciar"
+
+#: ../plugins/system-update/PageComponent.qml:327
+msgid "Download future updates automatically:"
+msgstr "Baixar atualizações futuras automaticamente:"
+
+#: ../plugins/system-update/PageComponent.qml:335
+msgid "When on wi-fi"
+msgstr "Quando conectado em rede sem fio"
+
+#: ../plugins/system-update/PageComponent.qml:337
+msgid ""
+"On any data connection\n"
+"Data charges may apply."
+msgstr ""
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -840,7 +889,3 @@ msgstr "Modo avião"
 #: ../.build/settings.js:12
 msgid "Rotation lock"
 msgstr "Trava de rotação"
-
-#: ../.build/settings.js:17
-msgid "Updates"
-msgstr "Atualizações"
