@@ -69,6 +69,7 @@ ItemPage {
             expanded: true
             // TODO: No way to have always expanded
             onExpandedChanged: expanded = true
+            enabled: false /* TODO: enable when there is a backend */
         }
 
         Timer {

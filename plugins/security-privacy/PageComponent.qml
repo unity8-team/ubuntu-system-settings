@@ -101,7 +101,6 @@ ItemPage {
                     checked: securityPrivacy.messagesWelcomeScreen
                 }
             }
-
             Binding {
                 target: securityPrivacy
                 property: "messagesWelcomeScreen"

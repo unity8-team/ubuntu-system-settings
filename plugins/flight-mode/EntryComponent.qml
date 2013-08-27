@@ -32,6 +32,7 @@ ListItem.Standard {
         id: control
         checked: networkSettings.flightMode
         onCheckedChanged: networkSettings.flightMode = checked
+        enabled: false /* TODO: enable when there is a flight mode backend */
 
         GSettings {
             id: networkSettings

@@ -1,3 +1,49 @@
+ubuntu-system-settings (0.1+13.10.20130827-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: don't segfault when there is no charge info.
+  * storage: get the list of click packages installed and build a model
+    from it. We don't use the real datas in the ui yet though, since the
+    manifest doesn't have the informations we need for that yet.
+  * battery: update sleep/lock subscreen to match the new design.
+  * settings: use enabled: false with a TODO for non working elements.
+  * battery: backend for the wifi controls.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 287
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 11:18:05 +0000
+
+ubuntu-system-settings (0.1+13.10.20130823-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * updates: some Ui tweaks - don't show extra lines in the middle of
+    the ui - use separator between sections - use a consistant height -
+    round update size to 1 digit - refresh the translations template.
+
+  [ Didier Roche ]
+  * Visual refresh from the design spec. Comply to the new daemon <->
+    client dbus API.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 278
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 23 Aug 2013 15:18:05 +0000
+
+ubuntu-system-settings (0.1+13.10.20130822.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * security: new location subpanel.
+
+  [ Iain Lane ]
+  * An initial dummy version of the main page of security-privacy.
+  * security-privacy: Add UI for some subpanels.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 274
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 19:25:05 +0000
+
 ubuntu-system-settings (0.1+13.10.20130822-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

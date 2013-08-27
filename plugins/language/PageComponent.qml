@@ -73,19 +73,25 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Auto correction")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Auto completion")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
 
             ListItem.Divider {}
 
             ListItem.Standard {
                 text: i18n.tr("Auto capitalization")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
 
             ListItem.Caption {
@@ -96,7 +102,9 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Auto punctuation")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
 
             ListItem.Caption {

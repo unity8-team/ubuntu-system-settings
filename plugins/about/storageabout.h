@@ -43,6 +43,7 @@ class StorageAbout : public QObject
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
+    Q_INVOKABLE QByteArray getClickList();
     QString serialNumber();
     QString vendorString();
     QString updateDate();
