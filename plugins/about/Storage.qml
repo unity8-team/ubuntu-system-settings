@@ -76,10 +76,6 @@ ItemPage {
         id: backendInfos
         Component.onCompleted: {
             var clickData = getClickList()
-            if (clickData == "") {
-                print("empty click list")
-                return;
-            }
             var clickJson = JSON.parse(clickData)
             for (var val in clickJson) {
                 clicksList.append({"binaryName": clickJson[val].title})
