@@ -86,14 +86,12 @@ ItemPage {
                 control: Switch {
                     id: welcomeStatsSwitch
                     checked: securityPrivacy.statsWelcomeScreen
-                    onCheckedChanged:
-                        securityPrivacy.statsWelcomeScreen = checked
                 }
             }
-            Connections {
+            Binding {
                 target: securityPrivacy
-                onStatsWelcomeScreenChanged:
-                    welcomeStatsSwitch.checked = securityPrivacy.statsWelcomeScreen
+                property: "statsWelcomeScreen"
+                value: welcomeStatsSwitch.checked
             }
 
             ListItem.Standard {
@@ -101,14 +99,13 @@ ItemPage {
                 control: Switch {
                     id: welcomeMessagesSwitch
                     checked: securityPrivacy.messagesWelcomeScreen
-                    onCheckedChanged:
-                        securityPrivacy.messagesWelcomeScreen = checked
                 }
             }
-            Connections {
+
+            Binding {
                 target: securityPrivacy
-                onMessagesWelcomeScreenChanged:
-                    welcomeMessagesSwitch.checked = securityPrivacy.messagesWelcomeScreen
+                property: "messagesWelcomeScreen"
+                value: welcomeMessagesSwitch.checked
             }
 
             ListItem.SingleValue {
