@@ -24,6 +24,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: root
@@ -33,6 +34,10 @@ ItemPage {
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
+    }
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
     }
 
     GSettings {
@@ -78,12 +83,34 @@ ItemPage {
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")
-                control: Switch { enabled: true }
+                control: Switch {
+                    id: welcomeStatsSwitch
+                    checked: securityPrivacy.statsWelcomeScreen
+                    onCheckedChanged:
+                        securityPrivacy.statsWelcomeScreen = checked
+                }
             }
+            Connections {
+                target: securityPrivacy
+                onStatsWelcomeScreenChanged:
+                    welcomeStatsSwitch.checked = securityPrivacy.statsWelcomeScreen
+            }
+
             ListItem.Standard {
                 text: i18n.tr("Messages on welcome screen")
-                control: Switch { }
+                control: Switch {
+                    id: welcomeMessagesSwitch
+                    checked: securityPrivacy.messagesWelcomeScreen
+                    onCheckedChanged:
+                        securityPrivacy.messagesWelcomeScreen = checked
+                }
             }
+            Connections {
+                target: securityPrivacy
+                onMessagesWelcomeScreenChanged:
+                    welcomeMessagesSwitch.checked = securityPrivacy.messagesWelcomeScreen
+            }
+
             ListItem.SingleValue {
                 id: dashSearchId
                 text: i18n.tr("Dash search")
