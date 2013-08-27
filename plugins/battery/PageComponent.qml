@@ -226,8 +226,8 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
                 control: Switch {
-                    checked: true
-                    enabled: false
+                    checked: batteryBackend.getWifiStatus()
+                    onCheckedChanged: batteryBackend.setWifiStatus(checked)
                 }
             }
 
