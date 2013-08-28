@@ -42,6 +42,7 @@ ItemPage {
         anchors.bottom: divider.top
 
         contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         ListItem.ValueSelector {
             id: languageList

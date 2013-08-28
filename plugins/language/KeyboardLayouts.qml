@@ -22,50 +22,74 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
     id: root
 
     title: i18n.tr("Keyboard layouts")
-    flickable: scrollWidget
+
+    UbuntuLanguagePlugin {
+        id: plugin
+    }
 
     Flickable {
-        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        Column {
-            anchors.fill: parent
+        ListItem.Standard {
+            id: currentLayoutsHeader
+            text: i18n.tr("Current layouts:")
 
-            ListItem.Standard {
-                text: i18n.tr("Current layouts:")
-            }
+            anchors.left: parent.left
+            anchors.right: parent.right
+        }
 
-            /* TODO: Get actual installed layouts. */
+        ListView {
+            id: currentLayouts
 
-            SettingsCheckEntry {
-                textEntry: "English (US)"
+            interactive: false
+
+            anchors.top: currentLayoutsHeader.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            height: contentItem.childrenRect.height
+            contentHeight: contentItem.childrenRect.height
+
+            model: plugin.currentPlugins.length
+            delegate: SettingsCheckEntry {
+                textEntry: plugin.plugins[plugin.currentPlugins[index]]
                 checkStatus: true
             }
+        }
 
-            SettingsCheckEntry {
-                textEntry: "French"
-                checkStatus: true
-            }
+        ListItem.Standard {
+            id: availableLayoutsHeader
+            text: i18n.tr("All layouts available:")
 
-            ListItem.Standard {
-                text: i18n.tr("All layouts available:")
-            }
+            anchors.top: currentLayouts.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+        }
 
-            /* TODO: Get actual layouts. */
+        ListView {
+            id: availableLayouts
 
-            SettingsCheckEntry {
-                textEntry: "Afghani"
-            }
+            interactive: false
 
-            SettingsCheckEntry {
-                textEntry: "Akan"
+            anchors.top: availableLayoutsHeader.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            height: contentItem.childrenRect.height
+            contentHeight: contentItem.childrenRect.height
+
+            model: plugin.plugins.length
+            delegate: SettingsCheckEntry {
+                textEntry: plugin.plugins[index]
+                checkStatus: false
             }
         }
     }

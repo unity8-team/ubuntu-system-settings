@@ -28,14 +28,12 @@ ItemPage {
     id: root
 
     title: i18n.tr("Language & Text")
-    flickable: scrollWidget
 
     UbuntuLanguagePlugin {
         id: plugin
     }
 
     Flickable {
-        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
@@ -65,7 +63,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Spell checking")
                 /* TODO: Get spell checking setting */
-                value: "UK English"
+                value: "U.K. English"
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SpellChecking.qml"))
             }
