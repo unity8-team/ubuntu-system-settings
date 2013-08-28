@@ -89,7 +89,7 @@ ItemPage {
             model: plugin.plugins.length
             delegate: SettingsCheckEntry {
                 textEntry: plugin.plugins[index]
-                checkStatus: false
+                checkStatus: plugin.isCurrentPlugin(index)
             }
         }
     }

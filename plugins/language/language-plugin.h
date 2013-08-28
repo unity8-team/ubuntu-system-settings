@@ -81,6 +81,7 @@ public:
 
     const QList<int> &currentPlugins() const;
     void setCurrentPlugins(const QList<int> &list);
+    Q_INVOKABLE bool isCurrentPlugin(int index) const;
     Q_SIGNAL void currentPluginsChanged();
 
     bool autoCapitalization() const;

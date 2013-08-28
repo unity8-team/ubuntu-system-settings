@@ -219,8 +219,6 @@ getPluginIndices()
 LanguagePlugin::LanguagePlugin(QObject *parent) :
     QObject(parent)
 {
-    /* TODO: remove this */
-    getKeyboardPlugins();
 }
 
 const QStringList &
@@ -335,6 +333,12 @@ LanguagePlugin::setCurrentPlugins(const QList<int> &list)
 
     delete pluginIndices;
     pluginIndices = NULL;
+}
+
+bool
+LanguagePlugin::isCurrentPlugin(int index) const
+{
+    return currentPlugins().contains(index);
 }
 
 bool
