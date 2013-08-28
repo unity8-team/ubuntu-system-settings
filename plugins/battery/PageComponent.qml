@@ -220,8 +220,9 @@ ItemPage {
                     }
                 }
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SleepValues.qml"), {usePowerd: batteryBackend.powerdRunning,
-                                              title: text, lockOnSuspend: lockOnSuspend })
+                onClicked: pageStack.push(
+                               Qt.resolvedUrl("SleepValues.qml"),
+                               { title: text, lockOnSuspend: lockOnSuspend })
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")

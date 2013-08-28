@@ -38,12 +38,18 @@ ItemPage {
         }
 
         ListItem.SingleValue {
-            text: i18n.tr("Lock when idle")
+            /* TODO: Use real configuration */
+            property bool lockOnSuspend: false
+            text: lockOnSuspend ? i18n.tr("Lock when idle")
+                                : i18n.tr("Sleep when idle")
             value: i18n.tr("1 minute",
                            "%1 minutes".arg(5),
                            5)
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("LockWhenIdle.qml"))
+            onClicked:
+                pageStack.push(
+                    Qt.resolvedUrl("../battery/SleepValues.qml"),
+                    { title: text, lockOnSuspend: lockOnSuspend } )
         }
 
         SettingsCheckEntry {

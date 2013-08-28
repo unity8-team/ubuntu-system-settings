@@ -8,7 +8,6 @@ QML_SOURCES = \
     Dash.qml  \
     Location.qml \
     LockSecurity.qml \
-    LockWhenIdle.qml \
     PageComponent.qml \
     PhoneLocking.qml
 
