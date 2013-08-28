@@ -22,6 +22,7 @@ import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Content 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 
@@ -76,8 +77,11 @@ ItemPage {
             left: parent.left
          }
 
-        onClicked: pageStack.push(Utilities.createAlbumPage(
-                                  differentBackground.selected ? i18n.tr("Welcome screen") : i18n.tr("Choose background")))
+        onClicked: {
+            var peer = ContentHub.defaultSourceForType(ContentType.Pictures);
+            __activeTransfer = ContentHub.importContent(ContentType.Pictures, peer);
+            __activeTransfer.start();
+        }
 
         //onSourceChanged: backgroundPanel.backgroundFile = source
     }
@@ -212,6 +216,20 @@ ItemPage {
             if (differentBackground.selected)
                 return
             systemSettingsSettings.backgroundDuplicate = false
+        }
+    }
+
+    property var __activeTransfer
+
+    Connections {
+        target: __activeTransfer
+        onStateChanged: {
+            if (__activeTransfer.state === ContentTransfer.Charged) {
+                if (__activeTransfer.items.length > 0) {
+                    var imageUrl = __activeTransfer.items[0].url
+                    background.pictureUri = imageUrl
+                }
+            }
         }
     }
 }
