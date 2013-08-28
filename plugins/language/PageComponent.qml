@@ -107,6 +107,7 @@ ItemPage {
                 text: i18n.tr("Auto punctuation")
 
                 control: Switch {
+                    enabled: false
                     checked: plugin.autoPunctuation
                     onClicked: plugin.autoPunctuation = checked
                 }
