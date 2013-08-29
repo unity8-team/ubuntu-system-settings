@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-23 15:11+0200\n"
+"POT-Creation-Date: 2013-08-23 20:54+0200\n"
 "PO-Revision-Date: 2013-07-13 15:09+0000\n"
 "Last-Translator: Aron Xu <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-08-24 05:44+0000\n"
+"X-Launchpad-Export-Date: 2013-08-28 05:40+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -46,8 +46,8 @@ msgid "Last updated"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:209
-#: ../plugins/battery/PageComponent.qml:217
+#: ../plugins/battery/PageComponent.qml:211
+#: ../plugins/battery/PageComponent.qml:219
 #: ../plugins/battery/SleepValues.qml:87
 #: ../plugins/security-privacy/LockWhenIdle.qml:70
 #: ../plugins/system-update/PageComponent.qml:334
@@ -221,13 +221,18 @@ msgstr ""
 msgid "Display brightness"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:201
-#: ../plugins/battery/SleepValues.qml:31
-msgid "Auto sleep"
+#: ../plugins/battery/PageComponent.qml:203
+#: ../plugins/security-privacy/LockWhenIdle.qml:29
+#: ../plugins/security-privacy/PhoneLocking.qml:41
+msgid "Lock when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:206
-#: ../plugins/battery/PageComponent.qml:214
+#: ../plugins/battery/PageComponent.qml:203
+msgid "Sleep when idle"
+msgstr ""
+
+#: ../plugins/battery/PageComponent.qml:208
+#: ../plugins/battery/PageComponent.qml:216
 #: ../plugins/battery/SleepValues.qml:72 ../plugins/battery/SleepValues.qml:75
 #: ../plugins/battery/SleepValues.qml:78 ../plugins/battery/SleepValues.qml:81
 #: ../plugins/battery/SleepValues.qml:84
@@ -243,28 +248,39 @@ msgid_plural "After %1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/battery/PageComponent.qml:224 ../.build/settings.js:19
+#: ../plugins/battery/PageComponent.qml:227 ../.build/settings.js:19
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../plugins/battery/PageComponent.qml:232 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:235 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr "蓝牙"
 
-#: ../plugins/battery/PageComponent.qml:240 ../.build/settings.js:10
+#: ../plugins/battery/PageComponent.qml:243 ../.build/settings.js:10
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery/PageComponent.qml:248
+#: ../plugins/battery/PageComponent.qml:251
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
 #: ../plugins/battery/SleepValues.qml:63
-msgid "Put the display to sleep when idle"
+msgid "Lock the phone when it's not in use:"
+msgstr ""
+
+#: ../plugins/battery/SleepValues.qml:63
+msgid "Put the phone to sleep when it is not in use:"
 msgstr ""
 
 #: ../plugins/battery/SleepValues.qml:97
-msgid "Videos and some apps may keep the phone awake."
+#: ../plugins/security-privacy/LockWhenIdle.qml:75
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+
+#: ../plugins/battery/SleepValues.qml:97
+msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
@@ -595,19 +611,8 @@ msgstr ""
 msgid "Change passcode…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockWhenIdle.qml:29
-#: ../plugins/security-privacy/PhoneLocking.qml:41
-msgid "Lock when idle"
-msgstr ""
-
 #: ../plugins/security-privacy/LockWhenIdle.qml:43
 msgid "Lock the phone when it is not in use:"
-msgstr ""
-
-#: ../plugins/security-privacy/LockWhenIdle.qml:75
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
 msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15

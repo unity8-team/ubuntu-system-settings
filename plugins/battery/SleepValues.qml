@@ -18,20 +18,28 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// THIS FILE IS LOADED DIRECTLY BY NAME FROM THE SECURITY-PRIVACY PANEL.
+// IF YOU RENAME IT YOU MUST UPDATE THE REFERENCE THERE.
+
 import GSettings 1.0
 import QtQuick 2.0
 import QtSystemInfo 5.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Battery 1.0
 
 ItemPage {
     id: root
 
     flickable: scrollWidget
 
-    property bool usePowerd
+    property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
+
+    UbuntuBatteryPanel {
+        id: batteryBackend
+    }
 
     GSettings {
         id: powerSettings
