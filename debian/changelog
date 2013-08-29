@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+13.10.20130829-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * Use battery's SleepValues panel for lock/sleep when idle timeout.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 290
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 03:20:41 +0000
+
 ubuntu-system-settings (0.1+13.10.20130827-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
