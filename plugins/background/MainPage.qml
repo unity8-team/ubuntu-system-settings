@@ -83,7 +83,8 @@ ItemPage {
             __activeTransfer.start();
         }
 
-        //onSourceChanged: backgroundPanel.backgroundFile = source
+        Component.onCompleted: updateImage(testWelcomeImage,
+                                           welcomeImage)
     }
 
     Label {
@@ -110,10 +111,11 @@ ItemPage {
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
 
-        onClicked: pageStack.push(Utilities.createAlbumPage(
-                                  differentBackground.selected ? i18n.tr("Home screen") : i18n.tr("Choose background")))
-
-        //onSourceChanged: background.pictureUri = Qt.resolvedUrl(source)
+        onClicked: {
+            var peer = ContentHub.defaultSourceForType(ContentType.Pictures);
+            __activeTransfer = ContentHub.importContent(ContentType.Pictures, peer);
+            __activeTransfer.start();
+        }
     }
 
     /* We don't have a good way of doing this after passing an invalid image to
@@ -222,12 +224,13 @@ ItemPage {
     property var __activeTransfer
 
     Connections {
-        target: __activeTransfer
+        target: __activeTransfer ? __activeTransfer : null
         onStateChanged: {
             if (__activeTransfer.state === ContentTransfer.Charged) {
                 if (__activeTransfer.items.length > 0) {
-                    var imageUrl = __activeTransfer.items[0].url
-                    background.pictureUri = imageUrl
+                    var imageUrl = __activeTransfer.items[0].url;
+                    background.pictureUri = imageUrl;
+                    setUpImages();
                 }
             }
         }
