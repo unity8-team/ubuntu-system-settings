@@ -78,9 +78,9 @@ ItemPage {
          }
 
         onClicked: {
-            var peer = ContentHub.defaultSourceForType(ContentType.Pictures);
-            __activeTransfer = ContentHub.importContent(ContentType.Pictures, peer);
-            __activeTransfer.start();
+            activeTransfer = ContentHub.importContent(ContentType.Pictures,
+                                                      ContentHub.defaultSourceForType(ContentType.Pictures));
+            activeTransfer.start();
         }
 
         Component.onCompleted: updateImage(testWelcomeImage,
@@ -112,9 +112,9 @@ ItemPage {
                                            homeImage)
 
         onClicked: {
-            var peer = ContentHub.defaultSourceForType(ContentType.Pictures);
-            __activeTransfer = ContentHub.importContent(ContentType.Pictures, peer);
-            __activeTransfer.start();
+            activeTransfer = ContentHub.importContent(ContentType.Pictures,
+                                                      ContentHub.defaultSourceForType(ContentType.Pictures));
+            activeTransfer.start();
         }
     }
 
@@ -221,14 +221,14 @@ ItemPage {
         }
     }
 
-    property var __activeTransfer
+    property var activeTransfer
 
     Connections {
-        target: __activeTransfer ? __activeTransfer : null
+        target: activeTransfer ? activeTransfer : null
         onStateChanged: {
-            if (__activeTransfer.state === ContentTransfer.Charged) {
-                if (__activeTransfer.items.length > 0) {
-                    var imageUrl = __activeTransfer.items[0].url;
+            if (activeTransfer.state === ContentTransfer.Charged) {
+                if (activeTransfer.items.length > 0) {
+                    var imageUrl = activeTransfer.items[0].url;
                     background.pictureUri = imageUrl;
                     setUpImages();
                 }
