@@ -1,0 +1,15 @@
+<node>
+  <interface name="com.ubuntu.touch.AccountsService.SecurityPrivacy">
+
+    <annotation name="org.freedesktop.Accounts.VendorExtension" value="true"/>
+
+    <property name="StatsWelcomeScreen" type="b" access="readwrite">
+      <annotation name="org.freedesktop.Accounts.DefaultValue" value="true"/>
+    </property>
+
+    <property name="MessagesWelcomeScreen" type="b" access="readwrite">
+      <annotation name="org.freedesktop.Accounts.DefaultValue" value="true"/>
+    </property>
+
+  </interface>
+</node>
