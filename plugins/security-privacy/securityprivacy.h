@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors: Michael Terry <michael.terry@canonical.com>
+ *          Iain Lane <iain.lane@canonical.com>
  */
 
 #ifndef SECURITYPRIVACY_H
