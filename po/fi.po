@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-23 20:54+0200\n"
-"PO-Revision-Date: 2013-08-27 13:28+0000\n"
+"PO-Revision-Date: 2013-08-28 06:55+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-28 05:40+0000\n"
+"X-Launchpad-Export-Date: 2013-08-29 05:29+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -266,7 +266,7 @@ msgstr "Tarkka sijainnin havaitsemien vaatii GPS:n ja/tai wifin."
 
 #: ../plugins/battery/SleepValues.qml:63
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "Lukitse käyttämättömänä oleva puhelin:"
 
 #: ../plugins/battery/SleepValues.qml:63
 msgid "Put the phone to sleep when it is not in use:"
@@ -278,6 +278,8 @@ msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
+"Lyhyt viive on pitkää turvallisempi. Puhelin ei lukitse itseään puhelujen "
+"tai videotoiston aikana."
 
 #: ../plugins/battery/SleepValues.qml:97
 msgid "Phone won’t sleep during calls or video playback."
@@ -683,7 +685,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:97
 msgid "Location access"
-msgstr ""
+msgstr "Sijainnin käyttö"
 
 #: ../plugins/security-privacy/PageComponent.qml:103
 msgid "Other app access"
