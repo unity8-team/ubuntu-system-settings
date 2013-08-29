@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.1+13.10.20130829.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * use a better icon, since the mobile theme provides one.
+  * battery: 100% is fully charged Since upower seems to not always
+    consider 100% as fully charged, check for the charge, as well as for
+    the status.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 294
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 12:29:50 +0000
+
 ubuntu-system-settings (0.1+13.10.20130829-0ubuntu1) saucy; urgency=low
 
   [ Iain Lane ]
