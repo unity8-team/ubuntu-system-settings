@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-23 20:54+0200\n"
-"PO-Revision-Date: 2013-08-26 17:02+0000\n"
+"PO-Revision-Date: 2013-08-30 05:23+0000\n"
 "Last-Translator: Tiago Hillebrandt <tiagohillebrandt@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-08-28 05:40+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-08-30 05:26+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -225,11 +225,11 @@ msgstr "Brilho da tela"
 #: ../plugins/security-privacy/LockWhenIdle.qml:29
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Lock when idle"
-msgstr ""
+msgstr "Travar quando inativo"
 
 #: ../plugins/battery/PageComponent.qml:203
 msgid "Sleep when idle"
-msgstr ""
+msgstr "Dormir quando inativo"
 
 #: ../plugins/battery/PageComponent.qml:208
 #: ../plugins/battery/PageComponent.qml:216
@@ -266,11 +266,11 @@ msgstr "Precisão na detecção da localização requer GPS e/ou rede sem fio."
 
 #: ../plugins/battery/SleepValues.qml:63
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "Travar o telefone quando não estiver em uso:"
 
 #: ../plugins/battery/SleepValues.qml:63
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "Colocar o telefone para dormir quando não estiver em uso:"
 
 #: ../plugins/battery/SleepValues.qml:97
 #: ../plugins/security-privacy/LockWhenIdle.qml:75
@@ -278,10 +278,12 @@ msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
+"Tempos mais curtos são mais seguros. O telefone não travará durante chamadas "
+"ou reprodução de vídeos."
 
 #: ../plugins/battery/SleepValues.qml:97
 msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
+msgstr "O telefone não travará durante chamadas ou reprodução de vídeos."
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:74
@@ -614,23 +616,23 @@ msgstr "Destravar o telefone usando:"
 #: ../plugins/security-privacy/LockSecurity.qml:39
 #: ../plugins/security-privacy/PhoneLocking.qml:35
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Deslizar (sem segurança)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:40
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Senha de 4 dígitos"
 
 #: ../plugins/security-privacy/LockSecurity.qml:41
 msgid "Passphrase…"
-msgstr ""
+msgstr "Frase secreta..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:48
 msgid "Change passcode…"
-msgstr ""
+msgstr "Alterar senha..."
 
 #: ../plugins/security-privacy/LockWhenIdle.qml:43
 msgid "Lock the phone when it is not in use:"
-msgstr ""
+msgstr "Travar o telefone quando não estiver em uso:"
 
 #: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
 msgid "Security & Privacy"
@@ -643,7 +645,7 @@ msgstr "Segurança:"
 #: ../plugins/security-privacy/PageComponent.qml:64
 #: ../plugins/security-privacy/PhoneLocking.qml:27
 msgid "Phone locking"
-msgstr ""
+msgstr "Trava do telefone"
 
 #: ../plugins/security-privacy/PageComponent.qml:65
 #: ../plugins/security-privacy/PhoneLocking.qml:42
@@ -776,12 +778,12 @@ msgstr ""
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Restando aproximadamente %1 segundo"
+msgstr[1] "Restando aproximadamente %1 segundos"
 
 #: ../plugins/system-update/PageComponent.qml:127
 msgid "No estimate for the download"
-msgstr ""
+msgstr "Sem estimativa para o download"
 
 #: ../plugins/system-update/PageComponent.qml:133
 msgid "Paused"
