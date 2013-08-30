@@ -22,6 +22,7 @@
 #define LANGUAGE_PLUGIN_H
 
 #include <QtCore>
+#include "subset-model.h"
 
 class LanguagePlugin : public QObject
 {
@@ -38,14 +39,9 @@ private:
                WRITE setCurrentLanguage
                NOTIFY currentLanguageChanged)
 
-    Q_PROPERTY(QStringList plugins
-               READ plugins
+    Q_PROPERTY(SubsetModel *pluginsModel
+               READ pluginsModel
                CONSTANT)
-
-    Q_PROPERTY(QList<int> currentPlugins
-               READ currentPlugins
-               WRITE setCurrentPlugins
-               NOTIFY currentPluginsChanged)
 
     Q_PROPERTY(bool autoCapitalization
                READ autoCapitalization
@@ -75,30 +71,25 @@ public:
 
     int currentLanguage() const;
     void setCurrentLanguage(int index);
-    Q_SIGNAL void currentLanguageChanged();
+    Q_SIGNAL void currentLanguageChanged() const;
 
-    const QStringList &plugins() const;
-
-    const QList<int> &currentPlugins() const;
-    void setCurrentPlugins(const QList<int> &list);
-    Q_INVOKABLE bool isCurrentPlugin(int index) const;
-    Q_SIGNAL void currentPluginsChanged();
+    SubsetModel *pluginsModel();
 
     bool autoCapitalization() const;
     void setAutoCapitalization(bool value);
-    Q_SIGNAL void autoCapitalizationChanged();
+    Q_SIGNAL void autoCapitalizationChanged() const;
 
     bool autoCompletion() const;
     void setAutoCompletion(bool value);
-    Q_SIGNAL void autoCompletionChanged();
+    Q_SIGNAL void autoCompletionChanged() const;
 
     bool autoCorrection() const;
     void setAutoCorrection(bool value);
-    Q_SIGNAL void autoCorrectionChanged();
+    Q_SIGNAL void autoCorrectionChanged() const;
 
     bool autoPunctuation() const;
     void setAutoPunctuation(bool value);
-    Q_SIGNAL void autoPunctuationChanged();
+    Q_SIGNAL void autoPunctuationChanged() const;
 };
 
 #endif // LANGUAGE_PLUGIN_H

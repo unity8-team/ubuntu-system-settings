@@ -43,8 +43,7 @@ static QHash<QLocale::Language, unsigned int> *languageIndices;
 static QStringList *languageNames;
 
 static QList<KeyboardPlugin *> *keyboardPlugins;
-static QStringList *pluginNames;
-static QList<int> *pluginIndices;
+static SubsetModel *pluginsModel;
 
 static QSettings *
 getMaliitSettings()
@@ -167,35 +166,25 @@ getKeyboardPlugins()
     return keyboardPlugins;
 }
 
-static QStringList *
-getPluginNames()
+static SubsetModel *
+getPluginsModel()
 {
-    if (pluginNames == NULL)
+    if (pluginsModel == NULL)
     {
-        pluginNames = new QStringList;
+        QStringList pluginNames;
 
         for (QList<KeyboardPlugin *>::const_iterator i = getKeyboardPlugins()->begin(); i != getKeyboardPlugins()->end(); ++i)
         {
             if (!(*i)->displayName().isEmpty())
-                *pluginNames += (*i)->displayName();
+                pluginNames += (*i)->displayName();
             else
-                *pluginNames += (*i)->name();
+                pluginNames += (*i)->name();
         }
-    }
 
-    return pluginNames;
-}
+        QList<int> pluginIndices;
+        QStringList currentPlugins(getMaliitSettings()->value(KEY_PLUGINS).toStringList());
 
-static QList<int> *
-getPluginIndices()
-{
-    if (pluginIndices == NULL)
-    {
-        pluginIndices = new QList<int>;
-
-        QStringList pluginNames = getMaliitSettings()->value(KEY_PLUGINS).toStringList();
-
-        for (QStringList::const_iterator i = pluginNames.begin(); i != pluginNames.end(); ++i)
+        for (QStringList::const_iterator i = currentPlugins.begin(); i != currentPlugins.end(); ++i)
         {
             if (i->startsWith(PLUGIN_PREFIX))
             {
@@ -205,15 +194,18 @@ getPluginIndices()
                 {
                     if ((*getKeyboardPlugins())[j]->name() == plugin)
                     {
-                        *pluginIndices += j;
+                        pluginIndices += j;
                         break;
                     }
                 }
             }
         }
+
+        pluginsModel = new SubsetModel(pluginNames);
+        pluginsModel->setSubset(pluginIndices);
     }
 
-    return pluginIndices;
+    return pluginsModel;
 }
 
 LanguagePlugin::LanguagePlugin(QObject *parent) :
@@ -308,37 +300,10 @@ LanguagePlugin::setCurrentLanguage(int index)
     }
 }
 
-const QStringList &
-LanguagePlugin::plugins() const
+SubsetModel *
+LanguagePlugin::pluginsModel()
 {
-    return *getPluginNames();
-}
-
-const QList<int> &
-LanguagePlugin::currentPlugins() const
-{
-    return *getPluginIndices();
-}
-
-void
-LanguagePlugin::setCurrentPlugins(const QList<int> &list)
-{
-    QStringList currentPlugins;
-
-    for (QList<int>::const_iterator i = list.begin(); i != list.end(); ++i)
-        if (0 <= *i && *i < getKeyboardPlugins()->length())
-            currentPlugins += PLUGIN_PREFIX + (*getKeyboardPlugins())[*i]->name();
-
-    getMaliitSettings()->setValue(KEY_PLUGINS, currentPlugins);
-
-    delete pluginIndices;
-    pluginIndices = NULL;
-}
-
-bool
-LanguagePlugin::isCurrentPlugin(int index) const
-{
-    return currentPlugins().contains(index);
+    return getPluginsModel();
 }
 
 bool

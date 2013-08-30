@@ -33,64 +33,17 @@ ItemPage {
         id: plugin
     }
 
-    Flickable {
+    ListView {
+        id: pluginsList
+
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        ListItem.Standard {
-            id: currentLayoutsHeader
-            text: i18n.tr("Current layouts:")
-
-            anchors.left: parent.left
-            anchors.right: parent.right
-        }
-
-        ListView {
-            id: currentLayouts
-
-            interactive: false
-
-            anchors.top: currentLayoutsHeader.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            height: contentItem.childrenRect.height
-            contentHeight: contentItem.childrenRect.height
-
-            model: plugin.currentPlugins.length
-            delegate: SettingsCheckEntry {
-                textEntry: plugin.plugins[plugin.currentPlugins[index]]
-                checkStatus: true
-            }
-        }
-
-        ListItem.Standard {
-            id: availableLayoutsHeader
-            text: i18n.tr("All layouts available:")
-
-            anchors.top: currentLayouts.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-        }
-
-        ListView {
-            id: availableLayouts
-
-            interactive: false
-
-            anchors.top: availableLayoutsHeader.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            height: contentItem.childrenRect.height
-            contentHeight: contentItem.childrenRect.height
-
-            model: plugin.plugins.length
-            delegate: SettingsCheckEntry {
-                textEntry: plugin.plugins[index]
-                checkStatus: plugin.isCurrentPlugin(index)
-            }
+        model: plugin.pluginsModel
+        delegate: SettingsCheckEntry {
+            textEntry: modelData.text
+            checkStatus: modelData.checked
         }
     }
 }

@@ -24,7 +24,7 @@
 KeyboardPlugin::KeyboardPlugin(const QString &name,
                                const QString &language,
                                const QString &displayName,
-                               QObject *parent) :
+                               QObject       *parent) :
     QObject(parent),
     _name(name),
     _language(language),
@@ -33,7 +33,7 @@ KeyboardPlugin::KeyboardPlugin(const QString &name,
 }
 
 KeyboardPlugin::KeyboardPlugin(const QFileInfo &fileInfo,
-                               QObject *parent) :
+                               QObject         *parent) :
     QObject(parent),
     _name(fileInfo.completeBaseName())
 {

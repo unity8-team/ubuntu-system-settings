@@ -43,13 +43,13 @@ private:
 
 public:
 
-    explicit KeyboardPlugin(const QString &name = QString(),
-                            const QString &language = QString(),
+    explicit KeyboardPlugin(const QString &name        = QString(),
+                            const QString &language    = QString(),
                             const QString &displayName = QString(),
-                            QObject *parent = NULL);
+                            QObject       *parent      = NULL);
 
     explicit KeyboardPlugin(const QFileInfo &fileInfo,
-                            QObject *parent = NULL);
+                            QObject         *parent = NULL);
 
     const QString &name() const;
     const QString &language() const;
