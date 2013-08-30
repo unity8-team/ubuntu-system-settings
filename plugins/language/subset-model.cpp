@@ -20,17 +20,19 @@
 
 #include "subset-model.h"
 
-SubsetModel::SubsetModel(const QStringList &universe,
+#define SECTION_ROLE (Qt::UserRole + 0)
+
+SubsetModel::SubsetModel(const QStringList &superset,
                          QObject           *parent) :
-    QAbstractItemModel(parent),
-    _universe(universe)
+    QAbstractListModel(parent),
+    _superset(superset)
 {
 }
 
 const QStringList &
-SubsetModel::universe() const
+SubsetModel::superset() const
 {
-    return _universe;
+    return _superset;
 }
 
 const QList<int> &
@@ -40,91 +42,51 @@ SubsetModel::subset() const
 }
 
 void
-SubsetModel::setSubset(const QList<int> &list)
+SubsetModel::setSubset(const QList<int> &subset)
 {
-    if (list != _subset)
+    if (subset != _subset)
     {
         beginResetModel();
-        _subset = list;
+        _subset = subset;
         endResetModel();
 
         Q_EMIT subsetChanged();
     }
 }
 
-QModelIndex
-SubsetModel::index(int                row,
-                   int                column,
-                   const QModelIndex &parent) const
+bool
+SubsetModel::setInSubset(int  element,
+                         bool inSubset)
 {
-    if (hasIndex(row, column, parent))
+    if (inSubset != _subset.contains(element))
     {
-        if (!parent.isValid())
+        if (inSubset)
         {
-            if (0 <= row && row < 2 && column == 0)
-                return createIndex(row, column);
+            beginInsertRows(QModelIndex(), _subset.length(), _subset.length());
+            _subset += element;
+            endInsertRows();
         }
         else
         {
-            switch (parent.row())
+            for (int i = 0; i < _subset.length(); i++)
             {
-            case 0:
-                if (0 <= row && row < _subset.length() && column == 0)
-                    return createIndex(row, column, const_cast<void *>(static_cast<const void *>(&_subset)));
-
-                break;
-
-            case 1:
-                if (0 <= row && row < _universe.length() && column == 0)
-                    return createIndex(row, column, const_cast<void *>(static_cast<const void *>(&_universe)));
-
-                break;
+                while (i < _subset.length() && _subset[i] == element)
+                {
+                    beginRemoveRows(QModelIndex(), i, i);
+                    _subset.removeAt(i);
+                    endRemoveRows();
+                }
             }
         }
+
+        QModelIndex changed(index(_subset.length() + element, 0));
+        Q_EMIT dataChanged(changed, changed, QVector<int>(1, Qt::CheckStateRole));
+        Q_EMIT subsetChanged();
+
+        return true;
     }
 
-    return QModelIndex();
-}
-
-QModelIndex
-SubsetModel::parent(const QModelIndex &index) const
-{
-    if (index.isValid())
-    {
-        if (index.internalPointer() == &_subset)
-            return createIndex(0, 0);
-        else if (index.internalPointer() == &_universe)
-            return createIndex(1, 0);
-    }
-
-    return QModelIndex();
-}
-
-int
-SubsetModel::rowCount(const QModelIndex &parent) const
-{
-    if (!parent.isValid())
-        return 2;
-
-    if (parent.internalPointer() == NULL)
-    {
-        switch (parent.row())
-        {
-        case 0:
-            return _subset.length();
-
-        case 1:
-            return _universe.length();
-        }
-    }
-
-    return 0;
-}
-
-int
-SubsetModel::columnCount(const QModelIndex &parent) const
-{
-    return !parent.isValid() || (parent.internalPointer() == NULL && 0 <= parent.row() && parent.row() < 2);
+    return false;
 }
 
 QHash<int, QByteArray>
@@ -132,16 +94,27 @@ SubsetModel::roleNames() const
 {
     QHash<int, QByteArray> roleNames;
 
-    roleNames.insert(Qt::DisplayRole, "text");
+    roleNames.insert(SECTION_ROLE, "section");
+    roleNames.insert(Qt::DisplayRole, "label");
     roleNames.insert(Qt::CheckStateRole, "checked");
 
     return roleNames;
 }
 
+int
+SubsetModel::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+
+    return _subset.length() + _superset.length();
+}
+
 Qt::ItemFlags
 SubsetModel::flags(const QModelIndex &index) const
 {
-    return index.isValid() && index.internalPointer() != NULL ? Qt::ItemIsUserCheckable : Qt::NoItemFlags;
+    Q_UNUSED(index);
+
+    return Qt::ItemIsUserCheckable | Qt::ItemIsEnabled;
 }
 
 QVariant
@@ -150,21 +123,14 @@ SubsetModel::data(const QModelIndex &index,
 {
     switch (role)
     {
-    case Qt::DisplayRole:
-        if (index.internalPointer() == &_subset)
-            return _universe[_subset[index.row()]];
-        else if (index.internalPointer() == &_universe)
-            return _universe[index.row()];
+    case SECTION_ROLE:
+        return index.row() < _subset.length() ? "subset" : "superset";
 
-        break;
+    case Qt::DisplayRole:
+        return index.row() < _subset.length() ? _superset[_subset[index.row()]] : _superset[index.row() - _subset.length()];
 
     case Qt::CheckStateRole:
-        if (index.internalPointer() == &_subset)
-            return true;
-        else if (index.internalPointer() == &_universe)
-            return _subset.contains(index.row());
-
-        break;
+        return index.row() < _subset.length() ? true : _subset.contains(index.row() - _subset.length());
     }
 
     return QVariant();
@@ -175,73 +141,24 @@ SubsetModel::setData(const QModelIndex &index,
                      const QVariant    &value,
                      int                role)
 {
-    if (index.isValid() && index.internalPointer() != NULL)
+    switch (role)
     {
-        switch (role)
+    case Qt::CheckStateRole:
+        if (static_cast<QMetaType::Type>(value.type()) == QMetaType::Bool)
         {
-        case Qt::CheckStateRole:
-            if ((QMetaType::Type) value.type() == QMetaType::Bool)
+            if (index.row() < _subset.length())
             {
-                if (index.internalPointer() == &_subset)
-                {
-                    if (0 <= index.row() && index.row() < _subset.length())
-                    {
-                        if (!value.toBool())
-                        {
-                            int changed = _subset[index.row()];
-
-                            for (int i = 0; i < _subset.length(); i++)
-                            {
-                                while (i < _subset.length() && _subset[i] == changed)
-                                {
-                                    beginRemoveRows(this->index(0, 0), i, i);
-                                    _subset.removeAt(i);
-                                    endRemoveRows();
-                                }
-                            }
-
-                            QModelIndex unchecked(this->index(changed, 0, this->index(1, 0)));
-                            Q_EMIT dataChanged(unchecked, unchecked, QVector<int>(1, Qt::CheckStateRole));
-                        }
-
-                        return true;
-                    }
-                }
-                else if (index.internalPointer() == &_universe)
-                {
-                    if (0 <= index.row() && index.row() < _universe.length())
-                    {
-                        if (_subset.contains(index.row()) != value.toBool())
-                        {
-                            if (!value.toBool())
-                            {
-                                for (int i = 0; i < _subset.length(); i++)
-                                {
-                                    while (i < _subset.length() && _subset[i] == index.row())
-                                    {
-                                        beginRemoveRows(this->index(0, 0), i, i);
-                                        _subset.removeAt(i);
-                                        endRemoveRows();
-                                    }
-                                }
-
-                                Q_EMIT dataChanged(index, index, QVector<int>(1, Qt::CheckStateRole));
-                            }
-                            else
-                            {
-                                beginInsertRows(this->index(0, 0), _subset.length(), _subset.length());
-                                _subset += index.row();
-                                endInsertRows();
-
-                                Q_EMIT dataChanged(index, index, QVector<int>(1, Qt::CheckStateRole));
-                            }
-                        }
-                    }
-                }
+                if (setInSubset(_subset[index.row()], false))
+                    return true;
             }
-
-            break;
+            else
+            {
+                if (setInSubset(index.row() - _subset.length(), value.toBool()))
+                    return true;
+            }
         }
+
+        break;
     }
 
     return false;

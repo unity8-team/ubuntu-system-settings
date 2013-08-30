@@ -23,14 +23,14 @@
 
 #include <QtCore>
 
-class SubsetModel : public QAbstractItemModel
+class SubsetModel : public QAbstractListModel
 {
 private:
 
     Q_OBJECT
 
-    Q_PROPERTY(QStringList universe
-               READ universe
+    Q_PROPERTY(QStringList superset
+               READ superset
                CONSTANT)
 
     Q_PROPERTY(QList<int> subset
@@ -40,29 +40,26 @@ private:
 
 public:
 
-    explicit SubsetModel(const QStringList &universe = QStringList(), QObject *parent = NULL);
+    explicit SubsetModel(const QStringList &superset = QStringList(), QObject *parent = NULL);
 
-    const QStringList &universe() const;
+    virtual const QStringList &superset() const;
 
-    const QList<int> &subset() const;
-    void setSubset(const QList<int> &list);
-    Q_SIGNAL void subsetChanged() const;
-
-    virtual QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
-    virtual QModelIndex parent(const QModelIndex &index) const;
-
-    virtual bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
-    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    virtual const QList<int> &subset() const;
+    virtual void setSubset(const QList<int> &subset);
+    Q_INVOKABLE virtual bool setInSubset(int element, bool inSubset);
+    Q_SIGNAL virtual void subsetChanged() const;
 
     virtual QHash<int, QByteArray> roleNames() const;
+
+    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
 
 private:
 
-    QStringList _universe;
+    QStringList _superset;
     QList<int> _subset;
 };
 

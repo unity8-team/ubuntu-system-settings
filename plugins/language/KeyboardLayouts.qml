@@ -38,12 +38,21 @@ ItemPage {
 
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: contentHeight > root.height ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+
+        section.property: "section"
+        section.delegate: ListItem.Standard {
+            text: section == "subset" ? i18n.tr("Current layouts:") : i18n.tr("All layouts available:")
+        }
 
         model: plugin.pluginsModel
         delegate: SettingsCheckEntry {
-            textEntry: modelData.text
-            checkStatus: modelData.checked
+            textEntry: label
+            checkStatus: checked
+            onClicked: plugin.pluginsModel.setInSubset(index < plugin.pluginsModel.subset.length ?
+                                                       plugin.pluginsModel.subset[index] :
+                                                       index - plugin.pluginsModel.subset.length,
+                                                       checkStatus)
         }
     }
 }

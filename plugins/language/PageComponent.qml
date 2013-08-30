@@ -53,7 +53,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Keyboard layouts")
-                value: plugin.currentPlugins.length
+                value: plugin.pluginsModel.subset.length
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
             }
