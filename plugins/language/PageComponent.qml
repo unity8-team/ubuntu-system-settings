@@ -36,7 +36,7 @@ ItemPage {
     Flickable {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: contentHeight > root.height ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
             anchors.fill: parent
@@ -46,6 +46,7 @@ ItemPage {
                 text: i18n.tr("Display language")
                 value: plugin.languages[plugin.currentLanguage]
                 progression: true
+
                 onClicked: pageStack.push(Qt.resolvedUrl("DisplayLanguage.qml"))
             }
 
@@ -53,8 +54,11 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Keyboard layouts")
-                value: plugin.pluginsModel.subset.length
+                value: plugin.pluginsModel.subset.length == 1 ?
+                       plugin.pluginsModel.superset[plugin.pluginsModel.subset[0]] :
+                       plugin.pluginsModel.subset.length
                 progression: true
+
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
             }
 
@@ -65,6 +69,7 @@ ItemPage {
                 /* TODO: Get spell checking setting */
                 value: "U.K. English"
                 progression: true
+
                 onClicked: pageStack.push(Qt.resolvedUrl("SpellChecking.qml"))
             }
 
@@ -73,6 +78,7 @@ ItemPage {
 
                 control: Switch {
                     checked: plugin.autoCorrection
+
                     onClicked: plugin.autoCorrection = checked
                 }
             }
@@ -82,6 +88,7 @@ ItemPage {
 
                 control: Switch {
                     checked: plugin.autoCompletion
+
                     onClicked: plugin.autoCompletion = checked
                 }
             }
@@ -93,6 +100,7 @@ ItemPage {
 
                 control: Switch {
                     checked: plugin.autoCapitalization
+
                     onClicked: plugin.autoCapitalization = checked
                 }
             }
@@ -109,6 +117,7 @@ ItemPage {
                 control: Switch {
                     enabled: false
                     checked: plugin.autoPunctuation
+
                     onClicked: plugin.autoPunctuation = checked
                 }
             }

@@ -40,13 +40,15 @@ private:
 
 public:
 
-    explicit SubsetModel(const QStringList &superset = QStringList(), QObject *parent = NULL);
+    explicit SubsetModel(const QStringList &superset = QStringList(),
+                         QObject           *parent   = NULL);
 
     virtual const QStringList &superset() const;
 
     virtual const QList<int> &subset() const;
     virtual void setSubset(const QList<int> &subset);
-    Q_INVOKABLE virtual bool setInSubset(int element, bool inSubset);
+    Q_INVOKABLE virtual bool setInSubset(int  element,
+                                         bool inSubset);
     Q_SIGNAL virtual void subsetChanged() const;
 
     virtual QHash<int, QByteArray> roleNames() const;
@@ -54,8 +56,11 @@ public:
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
 
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
-    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+    virtual QVariant data(const QModelIndex &index,
+                          int                role  = Qt::DisplayRole) const;
+    virtual bool setData(const QModelIndex &index,
+                         const QVariant    &value,
+                         int                role  = Qt::EditRole);
 
 private:
 

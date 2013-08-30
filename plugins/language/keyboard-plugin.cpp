@@ -46,7 +46,7 @@ KeyboardPlugin::KeyboardPlugin(const QFileInfo &fileInfo,
     QStringList languageResults;
 
     if (languageQuery.evaluateTo(&languageResults) && !languageResults.isEmpty())
-        _language = *languageResults.begin();
+        _language = languageResults.first();
 
     QXmlQuery titleQuery;
     titleQuery.bindVariable("path", path);
@@ -55,7 +55,7 @@ KeyboardPlugin::KeyboardPlugin(const QFileInfo &fileInfo,
     QStringList titleResults;
 
     if (titleQuery.evaluateTo(&titleResults) && !titleResults.isEmpty())
-        _displayName = *titleResults.begin();
+        _displayName = titleResults.first();
 }
 
 const QString &

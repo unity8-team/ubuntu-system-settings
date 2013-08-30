@@ -42,7 +42,7 @@ ItemPage {
         anchors.bottom: divider.top
 
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: contentHeight > root.height ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         ListItem.ValueSelector {
             id: languageList
@@ -52,6 +52,7 @@ ItemPage {
             selectedIndex: plugin.currentLanguage
 
             expanded: true
+
             onExpandedChanged: expanded = true
         }
     }
@@ -74,6 +75,8 @@ ItemPage {
         Button {
             id: cancelButton
 
+            text: i18n.tr("Cancel")
+
             anchors.left: parent.left
             anchors.right: parent.horizontalCenter
             anchors.bottom: parent.bottom
@@ -82,12 +85,13 @@ ItemPage {
             anchors.rightMargin: units.gu(1)
             anchors.bottomMargin: units.gu(1)
 
-            text: i18n.tr("Cancel")
             onClicked: pageStack.pop()
         }
 
         Button {
             id: confirmButton
+
+            text: i18n.tr("Confirm")
 
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right
@@ -97,7 +101,6 @@ ItemPage {
             anchors.rightMargin: units.gu(2)
             anchors.bottomMargin: units.gu(1)
 
-            text: i18n.tr("Confirm")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
                 pageStack.pop()

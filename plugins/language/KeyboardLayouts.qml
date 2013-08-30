@@ -49,6 +49,7 @@ ItemPage {
         delegate: SettingsCheckEntry {
             textEntry: label
             checkStatus: checked
+
             onClicked: plugin.pluginsModel.setInSubset(index < plugin.pluginsModel.subset.length ?
                                                        plugin.pluginsModel.subset[index] :
                                                        index - plugin.pluginsModel.subset.length,

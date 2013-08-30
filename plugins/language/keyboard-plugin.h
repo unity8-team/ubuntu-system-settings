@@ -49,7 +49,7 @@ public:
                             QObject       *parent      = NULL);
 
     explicit KeyboardPlugin(const QFileInfo &fileInfo,
-                            QObject         *parent = NULL);
+                            QObject         *parent   = NULL);
 
     const QString &name() const;
     const QString &language() const;

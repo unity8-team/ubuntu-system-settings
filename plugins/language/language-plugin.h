@@ -74,6 +74,7 @@ public:
     Q_SIGNAL void currentLanguageChanged() const;
 
     SubsetModel *pluginsModel();
+    Q_SLOT void updatePlugins();
 
     bool autoCapitalization() const;
     void setAutoCapitalization(bool value);
@@ -90,6 +91,10 @@ public:
     bool autoPunctuation() const;
     void setAutoPunctuation(bool value);
     Q_SIGNAL void autoPunctuationChanged() const;
+
+private:
+
+    bool _updatePluginsConnected;
 };
 
 #endif // LANGUAGE_PLUGIN_H

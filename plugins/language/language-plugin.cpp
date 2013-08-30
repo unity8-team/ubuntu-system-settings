@@ -209,7 +209,8 @@ getPluginsModel()
 }
 
 LanguagePlugin::LanguagePlugin(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    _updatePluginsConnected(false)
 {
 }
 
@@ -263,7 +264,7 @@ setLanguageWithManager(GObject    *object,
     {
         g_signal_handlers_disconnect_by_data(manager, user_data);
 
-        const char *name = qgetenv("USER").constData();
+        const char *name = qPrintable(qgetenv("USER"));
 
         if (name != NULL && name[0] != '\0')
         {
@@ -296,6 +297,8 @@ LanguagePlugin::setCurrentLanguage(int index)
                 setLanguageWithManager(G_OBJECT(manager), NULL, GINT_TO_POINTER(index));
             else
                 g_signal_connect(manager, "notify::is-loaded", G_CALLBACK(setLanguageWithManager), GINT_TO_POINTER(index));
+
+            Q_EMIT currentLanguageChanged();
         }
     }
 }
@@ -303,7 +306,25 @@ LanguagePlugin::setCurrentLanguage(int index)
 SubsetModel *
 LanguagePlugin::pluginsModel()
 {
+    if (!_updatePluginsConnected)
+    {
+        connect(getPluginsModel(), SIGNAL(subsetChanged()), SLOT(updatePlugins()));
+
+        _updatePluginsConnected = true;
+    }
+
     return getPluginsModel();
+}
+
+void
+LanguagePlugin::updatePlugins()
+{
+    QStringList currentPlugins;
+
+    for (QList<int>::const_iterator i = pluginsModel()->subset().begin(); i != pluginsModel()->subset().end(); ++i)
+        currentPlugins += PLUGIN_PREFIX + (*getKeyboardPlugins())[*i]->name();
+
+    getMaliitSettings()->setValue(KEY_PLUGINS, currentPlugins);
 }
 
 bool
@@ -315,9 +336,14 @@ LanguagePlugin::autoCapitalization() const
 void
 LanguagePlugin::setAutoCapitalization(bool value)
 {
+    bool changed = value != getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_CAPITALIZATION).toBool();
+
     getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_CAPITALIZATION, value);
     getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_CAPITALIZATION, value);
     getMaliitSettings()->sync();
+
+    if (changed)
+        Q_EMIT autoCapitalizationChanged();
 }
 
 bool
@@ -329,9 +355,14 @@ LanguagePlugin::autoCompletion() const
 void
 LanguagePlugin::setAutoCompletion(bool value)
 {
+    bool changed = value != getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_COMPLETION).toBool();
+
     getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_COMPLETION, value);
     getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_COMPLETION, value);
     getMaliitSettings()->sync();
+
+    if (changed)
+        Q_EMIT autoCompletionChanged();
 }
 
 bool
@@ -343,9 +374,14 @@ LanguagePlugin::autoCorrection() const
 void
 LanguagePlugin::setAutoCorrection(bool value)
 {
+    bool changed = value != getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_CORRECTION).toBool();
+
     getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_CORRECTION, value);
     getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_CORRECTION, value);
     getMaliitSettings()->sync();
+
+    if (changed)
+        Q_EMIT autoCorrectionChanged();
 }
 
 bool
