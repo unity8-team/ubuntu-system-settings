@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import GSettings 1.0
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
@@ -26,13 +27,31 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ItemPage {
     title: i18n.tr("Phone locking")
 
+    GSettings {
+        id: settingsSchema
+        schema.id: "com.ubuntu.touch.system-settings"
+    }
+
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
 
         ListItem.SingleValue {
+            property string swipe: i18n.tr("Swipe (no security)")
+            property string passcode: i18n.tr("4-digit passcode")
+            property string passphrase: i18n.tr("Passphrase")
+
             text: i18n.tr("Lock security")
-            value: i18n.tr("Swipe (no security)")
+            value: {
+                switch (settingsSchema.unlockMethod) {
+                    case "swipe":
+                        return swipe
+                    case "passcode":
+                        return passcode
+                    case "password":
+                        return passphrase
+                }
+            }
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
         }

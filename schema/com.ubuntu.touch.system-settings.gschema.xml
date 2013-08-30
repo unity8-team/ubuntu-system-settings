@@ -3,6 +3,11 @@
         <value nick="home" value="1" />
         <value nick="welcome" value="2" />
     </enum>
+    <enum id="enum-unlock-method">
+        <value nick="swipe" value="1" />
+        <value nick="passcode" value="2" />
+        <value nick="password" value="3" />
+    </enum>
     <schema id="com.ubuntu.touch.system-settings" path="/com/ubuntu/touch/system-settings/">
         <key name="background-duplicate" type="b">
             <default>true</default>
@@ -21,6 +26,10 @@
             <default>true</default>
             <summary>Whether the applications should be sorted by name.</summary>
             <description>If true the applications are sorted by name, otherwise by disk size.</description>
+        </key>
+        <key name="unlock-method" enum="enum-unlock-method">
+            <default>"swipe"</default>
+            <description>The unlocking method in use</description>
         </key>
     </schema>
 </schemalist>
