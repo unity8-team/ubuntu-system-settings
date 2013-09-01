@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-23 20:54+0200\n"
-"PO-Revision-Date: 2013-08-28 10:27+0000\n"
-"Last-Translator: londumas <helion331990@gmail.com>\n"
+"PO-Revision-Date: 2013-08-31 15:11+0000\n"
+"Last-Translator: Anne <anneonyme017@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-08-29 05:29+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-09-01 04:54+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "Language: \n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -624,7 +624,7 @@ msgstr "Un mot de passe à 4 chiffres"
 
 #: ../plugins/security-privacy/LockSecurity.qml:41
 msgid "Passphrase…"
-msgstr "Phrase secrète..."
+msgstr "Une phrase secrète..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:48
 msgid "Change passcode…"
