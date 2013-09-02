@@ -69,7 +69,16 @@ ItemPage {
             expanded: true
             // TODO: No way to have always expanded
             onExpandedChanged: expanded = true
-            enabled: false /* TODO: enable when there is a backend */
+            onSelectedIndexChanged: {
+                var useNTP = selectedIndex === 0 // 0 = Automatically
+                timeDatePanel.useNTP = useNTP
+            }
+        }
+
+        Binding {
+            target: setTimeAutomatically
+            property: "selectedIndex"
+            value: timeDatePanel.useNTP ? 0 : 1
         }
 
         Timer {

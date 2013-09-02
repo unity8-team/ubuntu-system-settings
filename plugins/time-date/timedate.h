@@ -41,6 +41,10 @@ class TimeDate : public QObject
     Q_PROPERTY (QString filter
                 READ getFilter
                 WRITE setFilter)
+    Q_PROPERTY(bool useNTP
+               READ getUseNTP
+               WRITE setUseNTP
+               NOTIFY useNTPChanged)
 
 public:
     explicit TimeDate(QObject *parent = 0);
@@ -50,6 +54,8 @@ public:
     QAbstractItemModel *getTimeZoneModel();
     QString getFilter();
     void setFilter (QString &filter);
+    bool getUseNTP();
+    void setUseNTP(bool enabled);
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
@@ -58,6 +64,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void timeZoneChanged();
     void timeZoneModelChanged();
+    void useNTPChanged();
 
 private:
     QString m_currentTimeZone;
