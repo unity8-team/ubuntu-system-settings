@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+13.10.20130902.1-0ubuntu1) saucy; urgency=low
+
+  [ Guenter Schwann ]
+  * Use content hub for picking a background from the gallery.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 302
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 02 Sep 2013 06:12:47 +0000
+
 ubuntu-system-settings (0.1+13.10.20130829.2-0ubuntu1) saucy; urgency=low
 
   [ Iain Lane ]
