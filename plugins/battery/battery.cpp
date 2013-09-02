@@ -39,12 +39,7 @@ Battery::Battery(QObject *parent) :
     buildDeviceString();
     getLastFullCharge();
 
-    if (!m_powerdIface.isValid()) {
-        m_powerdRunning = false;
-        return;
-    }
-    else
-        m_powerdRunning = true;
+    m_powerdRunning = m_powerdIface.isValid();
 }
 
 bool Battery::powerdRunning() const
