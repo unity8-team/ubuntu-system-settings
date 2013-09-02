@@ -70,7 +70,7 @@ ItemPage {
             // TODO: No way to have always expanded
             onExpandedChanged: expanded = true
             onSelectedIndexChanged: {
-                var useNTP = selectedIndex === 0 // 0 = Automatically
+                var useNTP = (selectedIndex === 0) // 0 = Automatically
                 timeDatePanel.useNTP = useNTP
             }
         }
