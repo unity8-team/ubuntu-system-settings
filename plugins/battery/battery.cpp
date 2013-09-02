@@ -112,6 +112,9 @@ void Battery::getLastFullCharge()
         return;
     }
 
+    double maxCapacity = 100.0;
+    g_object_get (m_device, "capacity", &maxCapacity, NULL);
+
     for (uint i=0; i < values->len; i++) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
@@ -119,7 +122,7 @@ void Battery::getLastFullCharge()
            typically you get no data while the device is fully charged and plugged and you get a discharging
            one when you unplugged, that's when the charge stops */
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED ||
-                up_history_item_get_value(item) == 100.0) {
+                up_history_item_get_value(item) >= maxCapacity) {
             if (i < values->len-1) {
                 UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i+1);
                 m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
