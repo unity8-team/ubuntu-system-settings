@@ -198,4 +198,5 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
 
 Battery::~Battery() {
     g_object_unref(m_device);
+    g_object_unref(m_nm_client);
 }
