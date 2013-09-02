@@ -75,7 +75,7 @@ ItemPage {
 
     Dialog {
         id: currentPassphraseDialog
-        title: i18n.tr("Enter Passphrase")
+        title: i18n.tr("Enter passphrase")
         TextField {
             id: currentPassphraseInput
             echoMode: TextInput.Password
@@ -102,7 +102,7 @@ ItemPage {
 
     Dialog {
         id: currentPasscodeDialog
-        title: i18n.tr("Enter Passcode")
+        title: i18n.tr("Enter passcode")
         TextField {
             id: currentPasscodeInput
             echoMode: TextInput.Password
@@ -130,7 +130,7 @@ ItemPage {
 
     Dialog {
         id: newPassphraseDialog
-        title: i18n.tr("Choose Passphrase")
+        title: i18n.tr("Choose passphrase")
         text: i18n.tr("New passphrase")
         TextField {
             id: newPassphraseInput
