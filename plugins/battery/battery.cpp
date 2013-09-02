@@ -49,7 +49,7 @@ Battery::Battery(QObject *parent) :
         m_powerdRunning = true;
 }
 
-bool Battery::powerdRunning()
+bool Battery::powerdRunning() const
 {
     return m_powerdRunning;
 }
@@ -81,7 +81,7 @@ void Battery::buildDeviceString() {
     g_object_unref(client);
 }
 
-QString Battery::deviceString()
+QString Battery::deviceString() const
 {
     return m_deviceString;
 }
@@ -97,7 +97,7 @@ void Battery::setWifiStatus(bool enableStatus)
 }
 
 
-int Battery::lastFullCharge()
+int Battery::lastFullCharge() const
 {
     return m_lastFullCharge;
 }
