@@ -23,7 +23,6 @@
 
 #include <QDBusInterface>
 #include <QObject>
-#include <QProcess>
 
 #include <libupower-glib/upower.h>
 #include <nm-client.h>

@@ -22,8 +22,6 @@
 #include <glib.h>
 #include <libupower-glib/upower.h>
 #include <nm-client.h>
-#include <QEvent>
-#include <QDBusReply>
 #include <QtCore/QDebug>
 
 Battery::Battery(QObject *parent) :
