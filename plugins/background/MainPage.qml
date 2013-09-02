@@ -22,6 +22,7 @@ import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Content 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 
@@ -76,10 +77,14 @@ ItemPage {
             left: parent.left
          }
 
-        onClicked: pageStack.push(Utilities.createAlbumPage(
-                                  differentBackground.selected ? i18n.tr("Welcome screen") : i18n.tr("Choose background")))
+        onClicked: {
+            activeTransfer = ContentHub.importContent(ContentType.Pictures,
+                                                      ContentHub.defaultSourceForType(ContentType.Pictures));
+            activeTransfer.start();
+        }
 
-        //onSourceChanged: backgroundPanel.backgroundFile = source
+        Component.onCompleted: updateImage(testWelcomeImage,
+                                           welcomeImage)
     }
 
     Label {
@@ -106,10 +111,11 @@ ItemPage {
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
 
-        onClicked: pageStack.push(Utilities.createAlbumPage(
-                                  differentBackground.selected ? i18n.tr("Home screen") : i18n.tr("Choose background")))
-
-        //onSourceChanged: background.pictureUri = Qt.resolvedUrl(source)
+        onClicked: {
+            activeTransfer = ContentHub.importContent(ContentType.Pictures,
+                                                      ContentHub.defaultSourceForType(ContentType.Pictures));
+            activeTransfer.start();
+        }
     }
 
     /* We don't have a good way of doing this after passing an invalid image to
@@ -212,6 +218,21 @@ ItemPage {
             if (differentBackground.selected)
                 return
             systemSettingsSettings.backgroundDuplicate = false
+        }
+    }
+
+    property var activeTransfer
+
+    Connections {
+        target: activeTransfer ? activeTransfer : null
+        onStateChanged: {
+            if (activeTransfer.state === ContentTransfer.Charged) {
+                if (activeTransfer.items.length > 0) {
+                    var imageUrl = activeTransfer.items[0].url;
+                    background.pictureUri = imageUrl;
+                    setUpImages();
+                }
+            }
         }
     }
 }
