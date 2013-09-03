@@ -112,7 +112,8 @@ ItemPage {
                                                         hour,
                                                         minute,
                                                         second)
-                                console.log(newDate.getTime())
+                                // Milliseconds to microseconds
+                                timeDatePanel.setTime(newDate.getTime() * 1000)
                 })
             }
         }
