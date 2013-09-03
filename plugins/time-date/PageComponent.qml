@@ -22,6 +22,7 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.TimeDate 1.0
 
 ItemPage {
@@ -90,10 +91,30 @@ ItemPage {
             running: true
         }
 
+        Component {
+            id: timePicker
+            TimePicker {}
+        }
+
         ListItem.Standard {
             id: currentTime
             progression: setTimeAutomatically.selectedIndex === 1 // Manually
             enabled: progression
+            onClicked: {
+                Qt.inputMethod.hide()
+                var popupObj = PopupUtils.open(timePicker);
+                popupObj.accepted.connect(
+                            function(hour, minute, second,
+                                     day, month, year) {
+                                var newDate =  new Date(year,
+                                                        month,
+                                                        day,
+                                                        hour,
+                                                        minute,
+                                                        second)
+                                console.log(newDate.getTime())
+                })
+            }
         }
     }
 }
