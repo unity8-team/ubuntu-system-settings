@@ -86,8 +86,8 @@ ItemPage {
                 case "password":
                     return i18n.tr("Existing passphrase")
                 }
+            }
 
-                i18n.tr("Existing %1".arg(changeSecurityDialog.oldMethod))
             visible: currentInput.visible
         }
 
