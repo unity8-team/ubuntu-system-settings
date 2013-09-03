@@ -44,142 +44,137 @@ ItemPage {
         }
     }
 
-    function promptOldSecurity() {
-        switch (settingsSchema.unlockMethod) {
-            case "swipe": // no previous security so prompt for the new one
-                promptNewSecurity()
-                break
-            case "passcode":
-                currentPasscodeDialog.show()
-                currentPasscodeInput.forceActiveFocus()
-                break
-            case "password":
-                currentPassphraseDialog.show()
-                currentPassphraseInput.forceActiveFocus()
-                break
-        }
-    }
-
-    function promptNewSecurity() {
-        var idx = unlockMethod.selectedIndex
-        if (idx == 0) {
-            settingsSchema.unlockMethod = "swipe"
-        } else if (idx == 1) { // passcode
-            newPasscodeDialog.show()
-            newPasscodeInput.forceActiveFocus()
-        } else if (idx == 2) { // passphrase
-            newPassphraseDialog.show()
-            newPassphraseInput.forceActiveFocus()
+    function indexToMethod(index) {
+        switch (index) {
+            case 0:
+                return "swipe"
+            case 1:
+                return "passcode"
+            case 2:
+                return "password"
         }
     }
 
     Dialog {
-        id: currentPassphraseDialog
-        title: i18n.tr("Enter passphrase")
-        TextField {
-            id: currentPassphraseInput
-            echoMode: TextInput.Password
-            inputMethodHints: Qt.ImhNoAutoUppercase |
-                              Qt.ImhSensitiveData
-        }
-        Button {
-            text: i18n.tr("Continue")
-            onClicked: {
-                PopupUtils.close(currentPassphraseDialog)
-                // TODO: check password
-                promptNewSecurity()
-            }
-        }
-        Button {
-            text: i18n.tr("Cancel")
-            onClicked: {
-                PopupUtils.close(currentPassphraseDialog)
-                unlockMethod.skip = true
-                unlockMethod.selectedIndex = getUnlockMethod()
-            }
-        }
-    }
+        id: changeSecurityDialog
 
-    Dialog {
-        id: currentPasscodeDialog
-        title: i18n.tr("Enter passcode")
-        TextField {
-            id: currentPasscodeInput
-            echoMode: TextInput.Password
-            inputMethodHints: Qt.ImhNoAutoUppercase |
-                              Qt.ImhSensitiveData |
-                              Qt.ImhDigitsOnly
-            inputMask: "9999"
-        }
-        Button {
-            text: i18n.tr("Continue")
-            onClicked: {
-                PopupUtils.close(currentPasscodeDialog)
-                promptNewSecurity()
-            }
-        }
-        Button {
-            text: i18n.tr("Cancel")
-            onClicked: {
-                PopupUtils.close(currentPasscodeDialog)
-                unlockMethod.skip = true
-                unlockMethod.selectedIndex = getUnlockMethod()
-            }
-        }
-    }
+        property string oldMethod: settingsSchema.unlockMethod
+        property string newMethod: indexToMethod(unlockMethod.selectedIndex)
 
-    Dialog {
-        id: newPassphraseDialog
-        title: i18n.tr("Choose passphrase")
-        text: i18n.tr("New passphrase")
-        TextField {
-            id: newPassphraseInput
-            echoMode: TextInput.Password
-            inputMethodHints: Qt.ImhNoAutoUppercase |
-                              Qt.ImhSensitiveData
+        function clearInputs() {
+            currentInput.text = ""
+            newInput.text = ""
+            confirmInput.text = ""
         }
-        Button {
-            text: i18n.tr("Set")
-            onClicked: {
-                settingsSchema.unlockMethod = "password"
-                PopupUtils.close(newPassphraseDialog)
-            }
-        }
-        Button {
-            text: i18n.tr("Cancel")
-            onClicked: {
-                PopupUtils.close(newPassphraseDialog)
-                unlockMethod.skip = true
-                unlockMethod.selectedIndex = getUnlockMethod()
-            }
-        }
-    }
 
-    Dialog {
-        id: newPasscodeDialog
-        title: i18n.tr("Choose passcode")
-        text: i18n.tr("New passcode")
+        title:
+            i18n.tr("Switch to %1".arg(changeSecurityDialog.newMethod))
+
+        Label {
+            text: i18n.tr("Existing %1".arg(changeSecurityDialog.oldMethod))
+            visible: currentInput.visible
+        }
+
         TextField {
-            id: newPasscodeInput
+            id: currentInput
             echoMode: TextInput.Password
-            inputMethodHints: Qt.ImhNoAutoUppercase |
-                              Qt.ImhSensitiveData |
-                              Qt.ImhDigitsOnly
-            inputMask: "9999"
-        }
-        Button {
-            text: i18n.tr("Set")
-            onClicked: {
-                settingsSchema.unlockMethod = "passcode"
-                PopupUtils.close(newPasscodeDialog)
+            inputMethodHints: {
+                if (changeSecurityDialog.oldMethod === "password")
+                    return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
+                else if (changeSecurityDialog.oldMethod === "passcode")
+                    return Qt.ImhNoAutoUppercase |
+                           Qt.ImhSensitiveData |
+                           Qt.ImhDigitsOnly
+                else
+                    return Qt.ImhNone
             }
+            inputMask: {
+                if (changeSecurityDialog.oldMethod === "passcode")
+                    return "9999"
+                else
+                    return ""
+            }
+            visible: changeSecurityDialog.oldMethod === "password" ||
+                     changeSecurityDialog.oldMethod === "passcode"
         }
+
+        Label {
+            text: i18n.tr("Choose %1".arg(changeSecurityDialog.newMethod))
+            visible: newInput.visible
+        }
+
+        TextField {
+            id: newInput
+            echoMode: TextInput.Password
+            inputMethodHints: {
+                if (changeSecurityDialog.newMethod === "password")
+                    return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
+                else if (changeSecurityDialog.newMethod === "passcode")
+                    return Qt.ImhNoAutoUppercase |
+                           Qt.ImhSensitiveData |
+                           Qt.ImhDigitsOnly
+                else
+                    return Qt.ImhNone
+            }
+            inputMask: {
+                if (changeSecurityDialog.newMethod === "passcode")
+                    return "9999"
+                else
+                    return ""
+            }
+            visible: changeSecurityDialog.newMethod === "passcode" ||
+                     changeSecurityDialog.newMethod === "password"
+        }
+
+        Label {
+            text: i18n.tr("Confirm %1".arg(changeSecurityDialog.newMethod))
+            visible: confirmInput.visible
+        }
+
+        TextField {
+            id: confirmInput
+            echoMode: TextInput.Password
+            inputMethodHints: {
+                if (changeSecurityDialog.newMethod === "password")
+                    return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
+                else if (changeSecurityDialog.newMethod === "passcode")
+                    return Qt.ImhNoAutoUppercase |
+                           Qt.ImhSensitiveData |
+                           Qt.ImhDigitsOnly
+                else
+                    return Qt.ImhNone
+            }
+            inputMask: {
+                if (changeSecurityDialog.newMethod === "passcode")
+                    return "9999"
+                else
+                    return ""
+            }
+            visible: changeSecurityDialog.newMethod === "passcode" ||
+                     changeSecurityDialog.newMethod === "password"
+        }
+
+        Button {
+            text: changeSecurityDialog.newMethod === "swipe" ?
+                      i18n.tr("Unset") :
+                      i18n.tr("Continue")
+            enabled: newInput.text == confirmInput.text
+            onClicked: {
+                PopupUtils.close(changeSecurityDialog)
+                //TODO: Check it's correct before updating and do the update
+                settingsSchema.unlockMethod = changeSecurityDialog.newMethod
+                changeSecurityDialog.clearInputs()
+            }
+
+        }
+
         Button {
             text: i18n.tr("Cancel")
             onClicked: {
-                PopupUtils.close(newPasscodeDialog)
+                PopupUtils.close(changeSecurityDialog)
                 unlockMethod.skip = true
                 unlockMethod.selectedIndex = getUnlockMethod()
+                changeSecurityDialog.clearInputs()
             }
         }
     }
@@ -201,8 +196,7 @@ ItemPage {
             property string passphraseAlt: i18n.tr("Passphrase…")
 
             property bool skip: true
-
-            signal changed
+            property bool firstRun: true
 
             id: unlockMethod
             values: [
@@ -213,8 +207,10 @@ ItemPage {
             expanded: true
             onExpandedChanged: expanded = true
             onSelectedIndexChanged: {
-                if (getUnlockMethod() === 0) // swipe
-                    promptOldSecurity()
+                if (getUnlockMethod() === 0 && firstRun) { // swipe
+                    changeSecurityDialog.show()
+                    firstRun = false
+                }
 
                 // Otherwise the dialogs pop up the first time
                 if (skip) {
@@ -222,9 +218,7 @@ ItemPage {
                     return
                 }
 
-                // Prompt for the current passcode or passphrase as necessary
-                // This will also prompt for the new one
-                promptOldSecurity();
+                changeSecurityDialog.show()
             }
         }
         Binding {
