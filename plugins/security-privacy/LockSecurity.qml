@@ -67,11 +67,27 @@ ItemPage {
             confirmInput.text = ""
         }
 
-        title:
-            i18n.tr("Switch to %1".arg(changeSecurityDialog.newMethod))
+        title: {
+            switch (changeSecurityDialog.newMethod) {
+            case "swipe":
+                return i18n.tr("Switch to Swipe")
+            case "passcode":
+                return i18n.tr("Switch to Passcode")
+            case "password":
+                return i18n.tr("Switch to Passphrase")
+            }
+        }
 
         Label {
-            text: i18n.tr("Existing %1".arg(changeSecurityDialog.oldMethod))
+            text: {
+                switch (changeSecurityDialog.oldMethod) {
+                case "passcode":
+                    return i18n.tr("Existing passcode")
+                case "password":
+                    return i18n.tr("Existing passphrase")
+                }
+
+                i18n.tr("Existing %1".arg(changeSecurityDialog.oldMethod))
             visible: currentInput.visible
         }
 
