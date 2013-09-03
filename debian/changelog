@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.1+13.10.20130903.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * drop the gps control from the main screen.
+
+  [ Iain Lane ]
+  * Make the Automatic / Manual selector in Time & Date toggle
+    timedated's NTP property.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 306
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 11:44:46 +0000
+
 ubuntu-system-settings (0.1+13.10.20130902.1-0ubuntu1) saucy; urgency=low
 
   [ Guenter Schwann ]
