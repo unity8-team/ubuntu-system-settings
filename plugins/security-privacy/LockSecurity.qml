@@ -85,6 +85,9 @@ ItemPage {
                     return i18n.tr("Existing passcode")
                 case "password":
                     return i18n.tr("Existing passphrase")
+                // Shouldn't be reached when visible but still evaluated
+                default:
+                    return i18n.tr("Existing")
                 }
             }
 
@@ -121,6 +124,9 @@ ItemPage {
                     return i18n.tr("Choose passcode")
                 case "password":
                     return i18n.tr("Choose passphrase")
+                // Shouldn't be reached when visible but still evaluated
+                default:
+                    return i18n.tr("Choose")
                 }
             }
             visible: newInput.visible
@@ -156,6 +162,9 @@ ItemPage {
                     return i18n.tr("Confirm passcode")
                 case "password":
                     return i18n.tr("Conrifm passphrase")
+                // Shouldn't be reached when visible but still evaluated
+                default:
+                    return i18n.tr("Confirm")
                 }
             }
             visible: confirmInput.visible
