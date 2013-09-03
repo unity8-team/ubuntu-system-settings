@@ -172,8 +172,8 @@ ItemPage {
                 interactive: false
                 model: (valueSelect.selectedIndex === 0) ? sortedNamesModel : sortedInstallModel
                 delegate: ListItem.SingleValue {
-                    icon: "image://gicon/" + iconName
-                    fallbackIconSource: "image://gicon/clear"   // TOFIX: use proper fallback
+                    icon: "image://theme/" + iconName
+                    fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
                     text: binaryName
                     value: storagePage.getFormattedSpace(installedSize)
                 }
