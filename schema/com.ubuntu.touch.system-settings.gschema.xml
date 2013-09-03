@@ -20,7 +20,7 @@
         </key>
         <key name="background-previously-set-value" type="s">
             <default>""</default>
-            <description>When backgroud-duplicate is 'true', the value to restore the least recently changed screen to.</description>
+            <description>When background-duplicate is 'true', the value to restore the least recently changed screen to.</description>
         </key>
         <key name="storage-sort-by-name" type="b">
             <default>true</default>
