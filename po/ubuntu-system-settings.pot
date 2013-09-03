@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 15:33+0000\n"
+"POT-Creation-Date: 2013-09-03 09:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,29 +125,23 @@ msgstr ""
 msgid "By size"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:32 ../.build/settings.js:3
+#: ../plugins/background/MainPage.qml:33 ../.build/settings.js:3
 msgid "Background"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:68 ../plugins/background/MainPage.qml:80
+#: ../plugins/background/MainPage.qml:69
 msgid "Welcome screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:80
-#: ../plugins/background/MainPage.qml:110
-msgid "Choose background"
-msgstr ""
-
-#: ../plugins/background/MainPage.qml:95
-#: ../plugins/background/MainPage.qml:110
+#: ../plugins/background/MainPage.qml:100
 msgid "Home screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:189
+#: ../plugins/background/MainPage.qml:195
 msgid "Same background for both"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:207
+#: ../plugins/background/MainPage.qml:213
 msgid "Different background for each"
 msgstr ""
 
@@ -241,7 +235,7 @@ msgid_plural "After %1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/battery/PageComponent.qml:228 ../.build/settings.js:19
+#: ../plugins/battery/PageComponent.qml:228 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr ""
 
@@ -249,7 +243,7 @@ msgstr ""
 msgid "Bluetooth"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:244 ../.build/settings.js:10
+#: ../plugins/battery/PageComponent.qml:244
 msgid "GPS"
 msgstr ""
 
@@ -341,14 +335,12 @@ msgstr ""
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
 #: ../plugins/reset/ResetLauncherHome.qml:36
-#: ../plugins/security-privacy/LockSecurity.qml:94
-#: ../plugins/security-privacy/LockSecurity.qml:122
-#: ../plugins/security-privacy/LockSecurity.qml:149
-#: ../plugins/security-privacy/LockSecurity.qml:178
+#: ../plugins/security-privacy/LockSecurity.qml:211
 msgid "Cancel"
 msgstr ""
 
 #: ../plugins/language/DisplayLanguage.qml:99
+#: ../plugins/security-privacy/LockSecurity.qml:167
 msgid "Confirm"
 msgstr ""
 
@@ -365,7 +357,7 @@ msgstr ""
 msgid "All layouts available:"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:11
+#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:10
 msgid "Language & Text"
 msgstr ""
 
@@ -433,8 +425,6 @@ msgid "Contacts…"
 msgstr ""
 
 #: ../plugins/phone/CallForwarding.qml:113
-#: ../plugins/security-privacy/LockSecurity.qml:142
-#: ../plugins/security-privacy/LockSecurity.qml:171
 msgid "Set"
 msgstr ""
 
@@ -449,7 +439,7 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
 msgid "Phone"
 msgstr ""
 
@@ -476,7 +466,7 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr ""
 
@@ -588,71 +578,92 @@ msgstr ""
 msgid "Lock security"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:78
-msgid "Enter Passphrase"
+#: ../plugins/security-privacy/LockSecurity.qml:73
+msgid "Switch to Swipe"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:86
-#: ../plugins/security-privacy/LockSecurity.qml:115
-msgid "Continue"
+#: ../plugins/security-privacy/LockSecurity.qml:75
+msgid "Switch to Passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:105
-msgid "Enter Passcode"
+#: ../plugins/security-privacy/LockSecurity.qml:77
+msgid "Switch to Passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:133
-msgid "Choose Passphrase"
+#: ../plugins/security-privacy/LockSecurity.qml:85
+msgid "Existing passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:134
-msgid "New passphrase"
+#: ../plugins/security-privacy/LockSecurity.qml:87
+msgid "Existing passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:160
+#: ../plugins/security-privacy/LockSecurity.qml:90
+msgid "Existing"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:124
 msgid "Choose passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:161
-msgid "New passcode"
+#: ../plugins/security-privacy/LockSecurity.qml:126
+msgid "Choose passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:192
-msgid "Unlock the phone using:"
+#: ../plugins/security-privacy/LockSecurity.qml:129
+msgid "Choose"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:196
-#: ../plugins/security-privacy/PhoneLocking.qml:40
-msgid "Swipe (no security)"
+#: ../plugins/security-privacy/LockSecurity.qml:162
+msgid "Confirm passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:197
-#: ../plugins/security-privacy/PhoneLocking.qml:41
-msgid "4-digit passcode"
+#: ../plugins/security-privacy/LockSecurity.qml:164
+msgid "Conrifm passphrase"
 msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:198
+msgid "Unset"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:199
+msgid "Continue"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:226
+msgid "Unlock the phone using:"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:230
+msgid "Swipe (no security)"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:231
+msgid "4-digit passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:232
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:199
+#: ../plugins/security-privacy/LockSecurity.qml:233
 msgid "Swipe (no security)… "
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:200
+#: ../plugins/security-privacy/LockSecurity.qml:234
 msgid "4-digit passcode…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:201
+#: ../plugins/security-privacy/LockSecurity.qml:235
 msgid "Passphrase…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:238
+#: ../plugins/security-privacy/LockSecurity.qml:271
 msgid "Change passcode…"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:15
+#: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:14
 msgid "Security & Privacy"
 msgstr ""
 
@@ -709,11 +720,19 @@ msgstr ""
 msgid "Not sent"
 msgstr ""
 
+#: ../plugins/security-privacy/PhoneLocking.qml:40
+msgid "None"
+msgstr ""
+
+#: ../plugins/security-privacy/PhoneLocking.qml:41
+msgid "Passcode"
+msgstr ""
+
 #: ../plugins/security-privacy/PhoneLocking.qml:76
 msgid "Sleep locks immediately"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
 msgstr ""
 
@@ -757,7 +776,7 @@ msgstr ""
 msgid "Stop playing"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:17
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
 msgstr ""
 
@@ -867,7 +886,7 @@ msgstr ""
 msgid "No matching place"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr ""
 
@@ -911,6 +930,6 @@ msgstr ""
 msgid "Flight mode"
 msgstr ""
 
-#: ../.build/settings.js:12
+#: ../.build/settings.js:11
 msgid "Rotation lock"
 msgstr ""
