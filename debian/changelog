@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.1+13.10.20130903.3-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * stop using the deprecated gicon provider, use the new themed icon
+    instead. Change the plugin icon code to support themed icons, as
+    well as urls to file locations on disk.
+
+  [ Iain Lane ]
+  * UI (without backend) for setting/changing the unlock
+    password/passphrase.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 309
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 19:15:57 +0000
+
 ubuntu-system-settings (0.1+13.10.20130903.2-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
