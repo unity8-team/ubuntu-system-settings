@@ -3,6 +3,11 @@
         <value nick="home" value="1" />
         <value nick="welcome" value="2" />
     </enum>
+    <enum id="enum-unlock-method">
+        <value nick="swipe" value="1" />
+        <value nick="passcode" value="2" />
+        <value nick="password" value="3" />
+    </enum>
     <schema id="com.ubuntu.touch.system-settings" path="/com/ubuntu/touch/system-settings/">
         <key name="background-duplicate" type="b">
             <default>true</default>
@@ -15,12 +20,17 @@
         </key>
         <key name="background-previously-set-value" type="s">
             <default>""</default>
-            <description>When backgroud-duplicate is 'true', the value to restore the least recently changed screen to.</description>
+            <description>When background-duplicate is 'true', the value to restore the least recently changed screen to.</description>
         </key>
         <key name="storage-sort-by-name" type="b">
             <default>true</default>
             <summary>Whether the applications should be sorted by name.</summary>
             <description>If true the applications are sorted by name, otherwise by disk size.</description>
+        </key>
+        <key name="unlock-method" enum="enum-unlock-method">
+            <default>"swipe"</default>
+            <summary>The unlocking method in use</summary>
+            <description>If 'swipe', unlock by swiping the screen (no security). If 'passcode', use a 4-digit number to unlock. If 'password', use a free-text password.</description>
         </key>
     </schema>
 </schemalist>
