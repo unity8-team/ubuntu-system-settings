@@ -115,7 +115,14 @@ ItemPage {
         }
 
         Label {
-            text: i18n.tr("Choose %1".arg(changeSecurityDialog.newMethod))
+            text: {
+                switch (changeSecurityDialog.newMethod) {
+                case "passcode":
+                    return i18n.tr("Choose passcode")
+                case "password":
+                    return i18n.tr("Choose passphrase")
+                }
+            }
             visible: newInput.visible
         }
 
@@ -143,7 +150,14 @@ ItemPage {
         }
 
         Label {
-            text: i18n.tr("Confirm %1".arg(changeSecurityDialog.newMethod))
+            text: {
+                switch (changeSecurityDialog.newMethod) {
+                case "passcode":
+                    return i18n.tr("Confirm passcode")
+                case "password":
+                    return i18n.tr("Conrifm passphrase")
+                }
+            }
             visible: confirmInput.visible
         }
 
