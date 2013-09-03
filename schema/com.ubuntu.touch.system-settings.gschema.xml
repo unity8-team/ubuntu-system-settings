@@ -30,7 +30,7 @@
         <key name="unlock-method" enum="enum-unlock-method">
             <default>"swipe"</default>
             <summary>The unlocking method in use</summary>
-            <description>If swipe, unlock by swiping the screen (no security). If passcode, use a 4-digit number to unlock. If password, use a free-text password.</description>
+            <description>If 'swipe', unlock by swiping the screen (no security). If 'passcode', use a 4-digit number to unlock. If 'password', use a free-text password.</description>
         </key>
     </schema>
 </schemalist>
