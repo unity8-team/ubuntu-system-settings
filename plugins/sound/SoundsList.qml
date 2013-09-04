@@ -12,7 +12,6 @@ ItemPage {
     property string title
     property variant soundDisplayNames
     property variant soundFileNames
-    property bool silentModeOn: false
     property bool showStopButton: false
     property int soundType // 0: ringtone, 1: message
 
@@ -74,19 +73,20 @@ ItemPage {
         anchors.bottom: soundsPage.bottom
         clip: true
 
-        ListItem.ValueSelector {
+        ListItem.ItemSelector {
             id: soundSelector
             expanded: true
-            // TODO: There is no way to have a ValueSelector always expanded
-            onExpandedChanged: expanded = true
-            values: soundDisplayNames
-            onSelectedIndexChanged: {
+            model: soundDisplayNames
+            onDelegateClicked: {
                 if (soundType == 0)
-                    soundSettings.incomingCallSound = soundFileNames[selectedIndex]
+                    soundSettings.incomingCallSound = soundFileNames[index]
                 else if (soundType == 1)
-                    soundSettings.incomingMessageSound = soundFileNames[selectedIndex]
-                soundEffect.source = soundFileNames[selectedIndex]
-                soundEffect.play()
+                    soundSettings.incomingMessageSound = soundFileNames[index]
+                /* Only preview the file if not in silent mode */
+                if (!soundSettings.silentMode) {
+                    soundEffect.source = soundFileNames[index]
+                    soundEffect.play()
+                }
             }
         }
     }
