@@ -166,7 +166,7 @@ QUrl Plugin::icon() const
     } else if (iconName.startsWith("/")) {
         return QString("file://") + iconName;
     } else {
-        return iconName;
+        return QString("image://theme/") + iconName;
     }
 }
 
