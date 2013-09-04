@@ -203,7 +203,6 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                /* TODO: use real configuration when we have one, lp #1215957 */
                 property bool lockOnSuspend:
                     settingsSchema.unlockMethod !== "swipe"
                 text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
