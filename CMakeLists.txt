@@ -18,6 +18,10 @@ find_package(Qt5Widgets REQUIRED)
 set(QT_IMPORTS_DIR "${CMAKE_INSTALL_LIBDIR}/qt5/qml")
 set(CMAKE_AUTOMOC ON)
 
+pkg_search_module(GLIB REQUIRED glib-2.0)
+pkg_search_module(UPOWER_GLIB REQUIRED upower-glib)
+pkg_search_module(LIBNM_GLIB REQUIRED libnm-glib)
+
 set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
 set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
 set(PLUGIN_PRIVATE_MODULE_DIR_BASE "${PLUGIN_MODULE_DIR_BASE}/private")
@@ -30,7 +34,9 @@ set(PLUGIN_PRIVATE_MODULE_DIR "${LIBDIR}/${PLUGIN_PRIVATE_MODULE_DIR_BASE}")
 
 set(ANDR_PROP_LIB -landroid-properties)
 
+add_definitions(-DQT_NO_KEYWORDS)
+
 add_subdirectory(lib)
-add_subdirectory(plugins)
 include_directories(lib)
+add_subdirectory(plugins)
 add_subdirectory(src)
