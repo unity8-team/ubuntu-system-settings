@@ -68,13 +68,23 @@ ItemPage {
         }
 
         title: {
-            switch (changeSecurityDialog.newMethod) {
-            case "swipe":
-                return i18n.tr("Switch to Swipe")
-            case "passcode":
-                return i18n.tr("Switch to Passcode")
-            case "password":
-                return i18n.tr("Switch to Passphrase")
+            if (changeSecurityDialog.newMethod ==
+                    changeSecurityDialog.oldMethod) { // Changing existing
+                switch (changeSecurityDialog.newMethod) {
+                case "passcode":
+                    return i18n.tr("Change passcode")
+                case "password":
+                    return i18n.tr("Change passphrase")
+                }
+            } else {
+                switch (changeSecurityDialog.newMethod) {
+                case "swipe":
+                    return i18n.tr("Switch to swipe")
+                case "passcode":
+                    return i18n.tr("Switch to passcode")
+                case "password":
+                    return i18n.tr("Switch to passphrase")
+                }
             }
         }
 
@@ -267,10 +277,22 @@ ItemPage {
         }
 
         ListItem.SingleControl {
+
+            visible: settingsSchema.unlockMethod !== "swipe" // Swipe
+
             control: Button {
-                text: i18n.tr("Change passcode…")
+                property string changePasscode: i18n.tr("Change passcode…")
+                property string changePassphrase: i18n.tr("Change passphrase…")
+
+                property bool passcode:
+                    settingsSchema.unlockMethod === "passcode"
+
+                enabled: parent.visible
+
+                text: passcode ? changePasscode : changePassphrase
                 width: parent.width - units.gu(4)
-                enabled: false //unlockMethod.selectedIndex == 1 //passcode
+
+                onClicked: changeSecurityDialog.show()
             }
         }
     }
