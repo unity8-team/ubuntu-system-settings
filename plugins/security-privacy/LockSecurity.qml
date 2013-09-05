@@ -79,11 +79,11 @@ ItemPage {
             } else {
                 switch (changeSecurityDialog.newMethod) {
                 case "swipe":
-                    return i18n.tr("Switch to Swipe")
+                    return i18n.tr("Switch to swipe")
                 case "passcode":
-                    return i18n.tr("Switch to Passcode")
+                    return i18n.tr("Switch to passcode")
                 case "password":
-                    return i18n.tr("Switch to Passphrase")
+                    return i18n.tr("Switch to passphrase")
                 }
             }
         }
