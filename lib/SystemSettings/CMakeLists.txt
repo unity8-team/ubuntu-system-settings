@@ -1,4 +1,4 @@
-add_library(SystemSettings item-base.cpp item-base.h)
+add_library(SystemSettings SHARED item-base.cpp item-base.h)
 set_target_properties(SystemSettings PROPERTIES
 VERSION 1.0
 SOVERSION 1

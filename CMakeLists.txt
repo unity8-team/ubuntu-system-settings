@@ -28,6 +28,9 @@ set(PLUGIN_MODULE_DIR "${LIBDIR}/${PLUGIN_MODULE_DIR_BASE}")
 set(PLUGIN_QML_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_QML_DIR_BASE}")
 set(PLUGIN_PRIVATE_MODULE_DIR "${LIBDIR}/${PLUGIN_PRIVATE_MODULE_DIR_BASE}")
 
+set(ANDR_PROP_LIB -landroid-properties)
+
 add_subdirectory(lib)
+add_subdirectory(plugins)
 include_directories(lib)
 add_subdirectory(src)
