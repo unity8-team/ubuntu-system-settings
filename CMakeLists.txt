@@ -43,3 +43,5 @@ add_subdirectory(lib)
 include_directories(lib)
 add_subdirectory(plugins)
 add_subdirectory(src)
+add_subdirectory(tests)
+
