@@ -72,7 +72,7 @@ ItemPage {
                     changeSecurityDialog.oldMethod) { // Changing existing
                 switch (changeSecurityDialog.newMethod) {
                 case "passcode":
-                    return i18n.tr("Change passphrase")
+                    return i18n.tr("Change passcode")
                 case "password":
                     return i18n.tr("Change passphrase")
                 }
