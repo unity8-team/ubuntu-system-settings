@@ -75,7 +75,7 @@ MainView {
                         id: search
                         control: TextField {
                             width: parent.width - units.gu(2)
-                            placeholderText: i18n.tr("Search…")
+                            placeholderText: i18n.tr("Search")
                             onDisplayTextChanged:
                                 pluginManager.filter = displayText
                         }
