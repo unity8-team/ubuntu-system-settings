@@ -121,7 +121,9 @@ QAbstractItemModel *PluginManager::itemModel(const QString &category)
         /* Return a sorted proxy backed by the real model containing the items */
         model = new ItemModelSortProxy(this);
         model->setSourceModel(backing_model);
-        model->setDynamicSortFilter(false);
+        model->setDynamicSortFilter(true);
+        model->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        model->setFilterRole(ItemModel::KeywordRole);
         /* we only have one column as this is a QAbstractListModel */
         model->sort(0);
     }
@@ -139,6 +141,26 @@ QObject *PluginManager::getByName(const QString &name) const
             return plugins.value()[name];
     }
     return NULL;
+}
+
+QString PluginManager::getFilter()
+{
+    return m_filter;
+}
+
+void PluginManager::setFilter(const QString &filter)
+{
+    Q_D(PluginManager);
+    QHashIterator<QString,ItemModelSortProxy*> it(d->m_models);
+    while (it.hasNext()) {
+        it.next();
+        if (filter.isEmpty())
+            it.value()->setFilterRegExp("");
+        else
+            it.value()->setFilterRegExp(filter);
+    }
+    m_filter = filter;
+    Q_EMIT (filterChanged());
 }
 
 void PluginManager::classBegin()

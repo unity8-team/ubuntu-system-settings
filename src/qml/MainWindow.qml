@@ -71,6 +71,16 @@ MainView {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
+                    ListItem.SingleControl {
+                        id: search
+                        control: TextField {
+                            width: parent.width - units.gu(2)
+                            placeholderText: i18n.tr("Search…")
+                            onDisplayTextChanged:
+                                pluginManager.filter = displayText
+                        }
+                    }
+
                     UncategorizedItemsView {
                         model: pluginManager.itemModel("uncategorized-top")
                     }

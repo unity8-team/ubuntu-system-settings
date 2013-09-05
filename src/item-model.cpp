@@ -46,6 +46,7 @@ ItemModelPrivate::ItemModelPrivate()
     m_roleNames[Qt::DisplayRole] = "displayName";
     m_roleNames[ItemModel::IconRole] = "icon";
     m_roleNames[ItemModel::ItemRole] = "item";
+    m_roleNames[ItemModel::KeywordRole] = "keywords";
 }
 
 ItemModelPrivate::~ItemModelPrivate()
@@ -104,6 +105,10 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
     case ItemRole:
         ret = QVariant::fromValue<QObject*>(const_cast<Plugin*>(item));
         break;
+    case KeywordRole:
+        QStringList temp(item->keywords());
+        temp << item->displayName();
+        ret = temp;
     }
 
     return ret;
@@ -165,4 +170,23 @@ bool ItemModelSortProxy::lessThan(const QModelIndex &left,
     }
 
     return false;
+}
+
+bool ItemModelSortProxy::filterAcceptsRow(
+        int source_row, const QModelIndex &source_parent) const
+{
+    QStringList keywords;
+    QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
+
+    QVariant data(sourceModel()->data(index, filterRole()));
+
+    switch (filterRole()) {
+    case ItemModel::KeywordRole:
+        keywords = data.value<QStringList>();
+        return keywords.filter(filterRegExp()).length() > 0;
+    default:
+        return false;
+    }
+
+    return true;
 }
