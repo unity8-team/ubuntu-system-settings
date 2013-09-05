@@ -2,6 +2,7 @@ add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${PLUGIN_MANIFEST_DIR}")
 add_definitions(-DPLUGIN_QML_DIR="${PLUGIN_MANIFEST_DIR}")
+add_definitions(-DPLUGIN_MODULE_DIR="${PLUGIN_MODULE_DIR}")
 
 add_subdirectory(SystemSettings)
 
