@@ -1,3 +1,56 @@
+ubuntu-system-settings (0.1+13.10.20130904.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * use the theme provider for themed icons.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 315
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Sep 2013 16:24:50 +0000
+
+ubuntu-system-settings (0.1+13.10.20130904-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * sound: use the new ItemSelector list widget.
+  * battery: use the new ItemSelector list widget. Depends on the new
+    toolkit version for that. If the configuration value is zero, than
+    select the "never" entry as well.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 312
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Sep 2013 03:14:44 +0000
+
+ubuntu-system-settings (0.1+13.10.20130903.3-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * stop using the deprecated gicon provider, use the new themed icon
+    instead. Change the plugin icon code to support themed icons, as
+    well as urls to file locations on disk.
+
+  [ Iain Lane ]
+  * UI (without backend) for setting/changing the unlock
+    password/passphrase.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 309
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 19:15:57 +0000
+
+ubuntu-system-settings (0.1+13.10.20130903.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * drop the gps control from the main screen.
+
+  [ Iain Lane ]
+  * Make the Automatic / Manual selector in Time & Date toggle
+    timedated's NTP property.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 306
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 11:44:46 +0000
+
 ubuntu-system-settings (0.1+13.10.20130902.1-0ubuntu1) saucy; urgency=low
 
   [ Guenter Schwann ]

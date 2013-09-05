@@ -45,9 +45,11 @@ ItemPage {
         id: powerSettings
         schema.id: usePowerd ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
         onChanged: {
-            if([60,120,180,240,300].indexOf(value) != -1)
-                if (key == "activityTimeout" || key == "sleepDisplayBattery")
+            if (key == "activityTimeout" || key == "sleepDisplayBattery")
+                if([60,120,180,240,300].indexOf(value) != -1)
                     sleepSelector.selectedIndex = (value/60)-1
+                else if(value === 0)
+                    sleepSelector.selectedIndex = 5
         }
         Component.onCompleted: {
             if (usePowerd)
@@ -67,16 +69,10 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            ListItem.Standard {
-                text: lockOnSuspend ? i18n.tr("Lock the phone when it's not in use:") : i18n.tr("Put the phone to sleep when it is not in use:")
-            }
-
-            ListItem.ValueSelector {
+            ListItem.ItemSelector {
                 id: sleepSelector
-                expanded: true
-                // TODO: There is no way to have a ValueSelector always expanded
-                onExpandedChanged: expanded = true
-                values: [
+                text: lockOnSuspend ? i18n.tr("Lock the phone when it's not in use:") : i18n.tr("Put the phone to sleep when it is not in use:")
+                model: [
                     i18n.tr("After %1 minute".arg(1),
                             "After %1 minutes".arg(1),
                             1),
@@ -93,11 +89,12 @@ ItemPage {
                             "After %1 minutes".arg(5),
                             5),
                     i18n.tr("Never")]
-                onSelectedIndexChanged: {
+                expanded: true
+                onDelegateClicked: {
                   if (usePowerd)
-                    powerSettings.activityTimeout = (selectedIndex == 5) ? 0 : (selectedIndex+1)*60
+                    powerSettings.activityTimeout = (index == 5) ? 0 : (index+1)*60
                   else
-                    powerSettings.sleepDisplayBattery = (selectedIndex == 5) ? 0 : (selectedIndex+1)*60
+                    powerSettings.sleepDisplayBattery = (index == 5) ? 0 : (index+1)*60
                 }
             }
 
