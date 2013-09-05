@@ -80,7 +80,6 @@ ItemPage {
         onClicked: {
             activeTransfer = ContentHub.importContent(ContentType.Pictures,
                                                       ContentHub.defaultSourceForType(ContentType.Pictures));
-            activeTransfer.start();
         }
 
         Component.onCompleted: updateImage(testWelcomeImage,
@@ -114,7 +113,6 @@ ItemPage {
         onClicked: {
             activeTransfer = ContentHub.importContent(ContentType.Pictures,
                                                       ContentHub.defaultSourceForType(ContentType.Pictures));
-            activeTransfer.start();
         }
     }
 
