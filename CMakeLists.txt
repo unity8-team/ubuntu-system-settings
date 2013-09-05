@@ -16,6 +16,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-permissive -pedantic -Wa
 find_package(Qt5Widgets REQUIRED)
 # Workaround for https://bugreports.qt-project.org/browse/QTBUG-29987
 set(QT_IMPORTS_DIR "${CMAKE_INSTALL_LIBDIR}/qt5/qml")
+set(CMAKE_AUTOMOC ON)
 
 set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
 set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
@@ -27,5 +28,6 @@ set(PLUGIN_MODULE_DIR "${LIBDIR}/${PLUGIN_MODULE_DIR_BASE}")
 set(PLUGIN_QML_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_QML_DIR_BASE}")
 set(PLUGIN_PRIVATE_MODULE_DIR "${LIBDIR}/${PLUGIN_PRIVATE_MODULE_DIR_BASE}")
 
+add_subdirectory(lib)
 include_directories(lib)
 add_subdirectory(src)
