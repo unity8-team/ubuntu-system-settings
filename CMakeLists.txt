@@ -22,6 +22,7 @@ pkg_search_module(GLIB REQUIRED glib-2.0)
 pkg_search_module(UPOWER_GLIB REQUIRED upower-glib)
 pkg_search_module(LIBNM_GLIB REQUIRED libnm-glib)
 pkg_search_module(ACCOUNTSSERVICE REQUIRED accountsservice)
+pkg_search_module(OFONO REQUIRED ofono-qt)
 
 set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
 set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
