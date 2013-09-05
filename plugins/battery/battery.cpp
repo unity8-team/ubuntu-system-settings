@@ -150,6 +150,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     gint32 offset = 0;
     GTimeVal timeval;
     QVariantList listValues;
+    QVariantMap listItem;
     gdouble currentValue = 0;
 
     g_get_current_time(&timeval);
@@ -163,7 +164,6 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     }
 
     for (uint i=values->len-1; i > 0; i--) {
-        QVariantMap listItem;
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
@@ -192,6 +192,14 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         listItem.insert("value", currentValue);
         listValues += listItem;
     }
+
+    /* Set an extra point, at the current time, with the previous value
+     * that's to workaround https://bugs.freedesktop.org/show_bug.cgi?id=68711
+     * otherwise a fully charged device lacks the flat full charge segment */
+    listItem.insert("time", 0);
+    listItem.insert("value", currentValue);
+    listValues += listItem;
+
     g_ptr_array_unref (values);
     return listValues;
 }
