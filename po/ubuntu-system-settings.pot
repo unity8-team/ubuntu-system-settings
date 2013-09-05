@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 11:39-0500\n"
+"POT-Creation-Date: 2013-09-05 17:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -328,6 +328,7 @@ msgstr ""
 #: ../plugins/reset/ResetAllSettings.qml:36
 #: ../plugins/reset/ResetLauncherHome.qml:36
 #: ../plugins/security-privacy/LockSecurity.qml:211
+#: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
 msgstr ""
 
@@ -417,6 +418,7 @@ msgid "Contacts…"
 msgstr ""
 
 #: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/time-date/TimePicker.qml:189
 msgid "Set"
 msgstr ""
 
@@ -878,16 +880,100 @@ msgstr ""
 msgid "No matching place"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
+#: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:51
+#: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:63
+#: ../plugins/time-date/PageComponent.qml:64
 msgid "Set the time and date:"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:26
+msgid "Set time & date"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:68
+msgid "Time"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:81
+msgid "Hour"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:95
+msgid "Minute"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:109
+msgid "Second"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:118
+msgid "Date"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:130
+msgid "Day"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:144
+msgid "Month"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:148
+msgid "January"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:149
+msgid "February"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:150
+msgid "March"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:151
+msgid "April"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:152
+msgid "May"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:153
+msgid "June"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:154
+msgid "July"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:155
+msgid "August"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:156
+msgid "Septemper"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:157
+msgid "October"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:158
+msgid "November"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:159
+msgid "December"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:169
+msgid "Year"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
