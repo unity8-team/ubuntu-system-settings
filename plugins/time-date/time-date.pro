@@ -6,11 +6,12 @@ TARGET = time-date
 
 QML_SOURCES = \
     ChooseTimeZone.qml \
-    PageComponent.qml
+    PageComponent.qml \
+    Scroller.qml \
+    TimePicker.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}
-
 qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += qml

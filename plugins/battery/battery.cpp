@@ -22,8 +22,6 @@
 #include <glib.h>
 #include <libupower-glib/upower.h>
 #include <nm-client.h>
-#include <QEvent>
-#include <QDBusReply>
 #include <QtCore/QDebug>
 
 Battery::Battery(QObject *parent) :
@@ -41,15 +39,10 @@ Battery::Battery(QObject *parent) :
     buildDeviceString();
     getLastFullCharge();
 
-    if (!m_powerdIface.isValid()) {
-        m_powerdRunning = false;
-        return;
-    }
-    else
-        m_powerdRunning = true;
+    m_powerdRunning = m_powerdIface.isValid();
 }
 
-bool Battery::powerdRunning()
+bool Battery::powerdRunning() const
 {
     return m_powerdRunning;
 }
@@ -81,7 +74,7 @@ void Battery::buildDeviceString() {
     g_object_unref(client);
 }
 
-QString Battery::deviceString()
+QString Battery::deviceString() const
 {
     return m_deviceString;
 }
@@ -97,7 +90,7 @@ void Battery::setWifiStatus(bool enableStatus)
 }
 
 
-int Battery::lastFullCharge()
+int Battery::lastFullCharge() const
 {
     return m_lastFullCharge;
 }
@@ -119,6 +112,9 @@ void Battery::getLastFullCharge()
         return;
     }
 
+    double maxCapacity = 100.0;
+    g_object_get (m_device, "capacity", &maxCapacity, NULL);
+
     for (uint i=0; i < values->len; i++) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
@@ -126,7 +122,7 @@ void Battery::getLastFullCharge()
            typically you get no data while the device is fully charged and plugged and you get a discharging
            one when you unplugged, that's when the charge stops */
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED ||
-                up_history_item_get_value(item) == 100.0) {
+                up_history_item_get_value(item) >= maxCapacity) {
             if (i < values->len-1) {
                 UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i+1);
                 m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
@@ -198,4 +194,5 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
 
 Battery::~Battery() {
     g_object_unref(m_device);
+    g_object_unref(m_nm_client);
 }
