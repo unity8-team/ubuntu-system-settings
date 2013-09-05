@@ -1,3 +1,10 @@
+add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
+add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
+add_definitions(-DPLUGIN_MANIFEST_DIR="${PLUGIN_MANIFEST_DIR}")
+add_definitions(-DPLUGIN_QML_DIR="${PLUGIN_MANIFEST_DIR}")
+
+add_subdirectory(SystemSettings)
+
 set(USS_SOURCES 
     debug.cpp
     i18n.cpp
@@ -8,4 +15,4 @@ set(USS_SOURCES
 )
 
 add_executable(system-settings ${USS_SOURCES})
-qt5_use_modules(system-settings Core Qui Quick Qml)
+qt5_use_modules(system-settings Core Gui Quick Qml)
