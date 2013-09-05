@@ -23,6 +23,7 @@ pkg_search_module(UPOWER_GLIB REQUIRED upower-glib)
 pkg_search_module(LIBNM_GLIB REQUIRED libnm-glib)
 pkg_search_module(ACCOUNTSSERVICE REQUIRED accountsservice)
 pkg_search_module(OFONO REQUIRED ofono-qt)
+pkg_search_module(TIMEZONEMAP REQUIRED timezonemap)
 
 set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
 set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
