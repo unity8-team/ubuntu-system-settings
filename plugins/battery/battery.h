@@ -23,7 +23,6 @@
 
 #include <QDBusInterface>
 #include <QObject>
-#include <QProcess>
 
 #include <libupower-glib/upower.h>
 #include <nm-client.h>
@@ -46,9 +45,9 @@ class Battery : public QObject
 public:
     explicit Battery(QObject *parent = 0);
     ~Battery();
-    bool powerdRunning();
-    QString deviceString();
-    int lastFullCharge();
+    bool powerdRunning() const;
+    QString deviceString() const;
+    int lastFullCharge() const;
     Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution);
     /* TODO: should be a dynamic property, or replaced by proper qt bindings */
     Q_INVOKABLE bool getWifiStatus();
