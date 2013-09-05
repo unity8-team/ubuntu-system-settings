@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 09:30+0000\n"
+"POT-Creation-Date: 2013-09-05 09:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgstr ""
 #: ../plugins/about/PageComponent.qml:98
 #: ../plugins/battery/PageComponent.qml:211
 #: ../plugins/battery/PageComponent.qml:219
-#: ../plugins/battery/SleepValues.qml:95
+#: ../plugins/battery/SleepValues.qml:91
 #: ../plugins/system-update/PageComponent.qml:334
 msgid "Never"
 msgstr ""
@@ -226,9 +226,9 @@ msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:208
 #: ../plugins/battery/PageComponent.qml:216
-#: ../plugins/battery/SleepValues.qml:80 ../plugins/battery/SleepValues.qml:83
-#: ../plugins/battery/SleepValues.qml:86 ../plugins/battery/SleepValues.qml:89
-#: ../plugins/battery/SleepValues.qml:92
+#: ../plugins/battery/SleepValues.qml:76 ../plugins/battery/SleepValues.qml:79
+#: ../plugins/battery/SleepValues.qml:82 ../plugins/battery/SleepValues.qml:85
+#: ../plugins/battery/SleepValues.qml:88
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
@@ -251,21 +251,21 @@ msgstr ""
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:71
+#: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:71
+#: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:105
+#: ../plugins/battery/SleepValues.qml:102
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:105
+#: ../plugins/battery/SleepValues.qml:102
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 
@@ -772,7 +772,7 @@ msgstr ""
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:60
+#: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
 msgstr ""
 
@@ -902,15 +902,19 @@ msgstr ""
 msgid "System Settings"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:80
-msgid "Network"
-msgstr ""
-
-#: ../src/qml/MainWindow.qml:85
-msgid "Personal"
+#: ../src/qml/MainWindow.qml:78
+msgid "Search…"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:90
+msgid "Network"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:95
+msgid "Personal"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr ""
 
