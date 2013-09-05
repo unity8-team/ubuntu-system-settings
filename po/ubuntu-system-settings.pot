@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 09:52+0000\n"
+"POT-Creation-Date: 2013-09-05 09:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -903,7 +903,7 @@ msgid "System Settings"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:78
-msgid "Search…"
+msgid "Search"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:90
