@@ -58,6 +58,11 @@ ItemPage {
         schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
     }
 
+    GSettings {
+        id: settingsSchema
+        schema.id: "com.ubuntu.touch.system-settings"
+    }
+
     BatteryInfo {
         id: batteryInfo
 
@@ -198,8 +203,8 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                /* TODO: use real configuration when we have one, lp #1215957 */
-                property bool lockOnSuspend: false
+                property bool lockOnSuspend:
+                    settingsSchema.unlockMethod !== "swipe"
                 text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
                 value: {
                     if (batteryBackend.powerdRunning ) {
