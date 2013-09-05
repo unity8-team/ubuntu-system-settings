@@ -1,3 +1,5 @@
 add_subdirectory(about)
 add_subdirectory(background)
 add_subdirectory(battery)
+add_subdirectory(example)
+add_subdirectory(language)
