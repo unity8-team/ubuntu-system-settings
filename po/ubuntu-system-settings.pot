@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 17:07+0000\n"
+"POT-Creation-Date: 2013-09-05 17:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -327,13 +327,13 @@ msgstr ""
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
 #: ../plugins/reset/ResetLauncherHome.qml:36
-#: ../plugins/security-privacy/LockSecurity.qml:211
+#: ../plugins/security-privacy/LockSecurity.qml:221
 #: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
 msgstr ""
 
 #: ../plugins/language/DisplayLanguage.qml:99
-#: ../plugins/security-privacy/LockSecurity.qml:167
+#: ../plugins/security-privacy/LockSecurity.qml:177
 msgid "Confirm"
 msgstr ""
 
@@ -572,89 +572,98 @@ msgstr ""
 msgid "Lock security"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:73
-msgid "Switch to Swipe"
-msgstr ""
-
 #: ../plugins/security-privacy/LockSecurity.qml:75
-msgid "Switch to Passcode"
-msgstr ""
-
 #: ../plugins/security-privacy/LockSecurity.qml:77
-msgid "Switch to Passphrase"
+msgid "Change passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:85
+#: ../plugins/security-privacy/LockSecurity.qml:82
+msgid "Switch to swipe"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:84
+msgid "Switch to passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:86
+msgid "Switch to passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:95
 msgid "Existing passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:87
+#: ../plugins/security-privacy/LockSecurity.qml:97
 msgid "Existing passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:90
+#: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:124
+#: ../plugins/security-privacy/LockSecurity.qml:134
 msgid "Choose passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:126
+#: ../plugins/security-privacy/LockSecurity.qml:136
 msgid "Choose passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:129
+#: ../plugins/security-privacy/LockSecurity.qml:139
 msgid "Choose"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:162
+#: ../plugins/security-privacy/LockSecurity.qml:172
 msgid "Confirm passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:164
+#: ../plugins/security-privacy/LockSecurity.qml:174
 msgid "Conrifm passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:198
+#: ../plugins/security-privacy/LockSecurity.qml:208
 msgid "Unset"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:199
+#: ../plugins/security-privacy/LockSecurity.qml:209
 msgid "Continue"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:226
+#: ../plugins/security-privacy/LockSecurity.qml:236
 msgid "Unlock the phone using:"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:230
+#: ../plugins/security-privacy/LockSecurity.qml:240
 msgid "Swipe (no security)"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:231
+#: ../plugins/security-privacy/LockSecurity.qml:241
 msgid "4-digit passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:232
+#: ../plugins/security-privacy/LockSecurity.qml:242
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:233
+#: ../plugins/security-privacy/LockSecurity.qml:243
 msgid "Swipe (no security)… "
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:234
+#: ../plugins/security-privacy/LockSecurity.qml:244
 msgid "4-digit passcode…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:235
+#: ../plugins/security-privacy/LockSecurity.qml:245
 msgid "Passphrase…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:271
+#: ../plugins/security-privacy/LockSecurity.qml:284
 msgid "Change passcode…"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:285
+msgid "Change passphrase…"
 msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:14
