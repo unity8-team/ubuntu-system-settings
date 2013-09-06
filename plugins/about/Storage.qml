@@ -40,27 +40,6 @@ ItemPage {
                                    i18n.tr("Pictures"), i18n.tr("Other files"), i18n.tr("Used by apps")]
     property variant spaceValues: [19.6, 6.2, 9.2, 1.5, 4.6, 16.3] // TODO: replace by real values
 
-    /* TOFIX: replace by real datas */
-    XmlListModel {
-        id: xmlModel
-        source: "fakepkgslist.xml"
-        query: "/list/binary"
-
-        XmlRole { name: "binaryName"; query: "name/string()" }
-        XmlRole { name: "iconName"; query: "icon/string()" }
-        XmlRole { name: "installedSize"; query: "installed/string()" }
-
-        onStatusChanged: if (status === XmlListModel.Ready) { createSortedLists(); }
-    }
-
-    ListModel {
-        id: sortedNamesModel
-    }
-
-    ListModel {
-        id: sortedInstallModel
-    }
-
     GSettings {
         id: settingsId
         schema.id: "com.ubuntu.touch.system-settings"
@@ -70,7 +49,10 @@ ItemPage {
         }
     }
 
+    /* Get a model from the click command, build sorted lists for the view */
     ListModel { id: clicksList }
+    ListModel { id: sortedNamesModel }
+    ListModel { id: sortedInstallModel }
 
     UbuntuStorageAboutPanel {
         id: backendInfos
@@ -78,9 +60,18 @@ ItemPage {
             var clickData = getClickList()
             var clickJson = JSON.parse(clickData)
             for (var val in clickJson) {
-                clicksList.append({"binaryName": clickJson[val].title})
+                clicksList.append({"binaryName": clickJson[val]["title"],
+                                      "iconName": clickJson[val]["icon"] ? getClickDir(clickJson[val]["name"]) + "/" + clickJson[val]["icon"] : "",
+                                      "installedSize": clickJson[val]["installed-size"] ? clickJson[val]["installed-size"]*1024 : 0})
             }
+            createSortedLists();
         }
+    }
+
+    function noCaseSorting(a, b) {
+        if (a.toLowerCase() < b.toLowerCase()) return -1;
+        if (a.toLowerCase() > b.toLowerCase()) return 1;
+        return 0;
     }
 
     function createSortedLists() {
@@ -90,12 +81,12 @@ ItemPage {
         var installDict = {};
         var installKeys = [];
 
-        for (n=0; n < xmlModel.count; n++) {
-            namesDict[xmlModel.get(n).binaryName] = [xmlModel.get(n).iconName, xmlModel.get(n).installedSize];
-            installDict[xmlModel.get(n).installedSize] = [xmlModel.get(n).iconName, xmlModel.get(n).binaryName];
+        for (n=0; n < clicksList.count; n++) {
+            namesDict[clicksList.get(n).binaryName] = [clicksList.get(n).iconName, clicksList.get(n).installedSize];
+            installDict[clicksList.get(n).installedSize] = [clicksList.get(n).iconName, clicksList.get(n).binaryName];
         }
 
-        nameKeys = Object.keys(namesDict).sort();
+        nameKeys = Object.keys(namesDict).sort(noCaseSorting);
         installKeys = Object.keys(installDict).sort(function(a,b){return b-a});
 
         for (n=0; n < nameKeys.length; n++) {
@@ -172,10 +163,10 @@ ItemPage {
                 interactive: false
                 model: (valueSelect.selectedIndex === 0) ? sortedNamesModel : sortedInstallModel
                 delegate: ListItem.SingleValue {
-                    icon: "image://theme/" + iconName
+                    icon: iconName
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
                     text: binaryName
-                    value: storagePage.getFormattedSpace(installedSize)
+                    value: installedSize ? storagePage.getFormattedSpace(installedSize) : i18n.tr("N/A")
                 }
             }
         }
