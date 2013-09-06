@@ -1,7 +1,8 @@
-set(SS_QML_SOURCES 
+set(QML_SOURCES 
     ItemPage.qml
     SettingsCheckEntry.qml
 )
 
-#add_library(SystemSettings SHARED ${SS_QML_SOURCES})
-#qt5_use_modules(SystemSettings Qml)
+set(PLUG_DIR ${PLUGIN_QML_DIR}/SystemSettings)
+install(FILES qmldir DESTINATION ${PLUG_DIR})
+install(FILES ${QML_SOURCES} DESTINATION ${PLUG_DIR})

@@ -18,3 +18,4 @@ set(USS_SOURCES
 add_executable(system-settings ${USS_SOURCES})
 qt5_use_modules(system-settings Core Gui Quick Qml)
 target_link_libraries(system-settings SystemSettings)
+install(TARGET system-settings RUNTIME DESTINATION bin)
