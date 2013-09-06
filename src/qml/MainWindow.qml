@@ -74,7 +74,7 @@ MainView {
                     ListItem.SingleControl {
                         id: search
                         control: TextField {
-                            width: parent.width - units.gu(2)
+                            width: parent.width - units.gu(4)
                             placeholderText: i18n.tr("Search")
                             onDisplayTextChanged:
                                 pluginManager.filter = displayText
