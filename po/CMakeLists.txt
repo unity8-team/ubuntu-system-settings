@@ -1,6 +1,28 @@
+file(GLOB SOURCECODE "${CMAKE_SOURCE_DIR}/plugins/*/*.qml" "${CMAKE_SOURCE_DIR}/src/qml/*.qml")
+file(GLOB SETTINGSFILES "${CMAKE_SOURCE_DIR}/plugins/*/*.settings")
+
+#add_custom_command(OUTPUT settings.js
+#  command some_script ${SETTINGSFILES} ${CMAKE_CURRENT_BINARY_DIR}/settings.js
+#  DEPENDS ${SETTINGSFILES}
+#)
+
+#add_custom_command(OUTPUT desktop.js
+#  command some_script ${CMAKE_SOURCE_DIR}/ubuntu-system-settings.desktop ${CMAKE_CURRENT_BINARY_DIR}/desktop.js 
+#  DEPENDS ${CMAKE_SOURCE_DIR}/ubuntu-system-settings.desktop
+#)
+
+add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/ubuntu-system-settings.pot
+    COMMAND XGETTEXT_BIN -o ${CMAKE_CURRENT_SOURCE_DIR}/ubuntu-system-settings.pot
+    -copyright=\"Canonical Ltd. \"
+    --package-name ubuntu-system-settings
+    --qt --c++ --add-comments=TRANSLATORS
+    --keyword=tr --keyword=tr:1,2 --from-code=UTF-8
+    ${SOURCECODE} ${DESKTOPFILE} ${SETTINGSFILE}
+    DEPENDS ${SOURCECODE} #desktop.js settings.js
+)
+
 set(languages "ar;be;bg;bs;ca;de;el;en_AU;en_GB;eo;es;fa;fi;fr;gl;gu;he;hi;hr;id;it;ko;lv;my;nb;pl;pt_BR;pt;ru;sl;sv;tr;ug;uk;xh;zh_CN;zh_TW")
 foreach(i ${languages})
-#  GETTEXT_PROCESS_PO_FILES(${i} PO_FILES ALL INSTALL_DESTINATION share/locale PO_FILES "${i}.po")
   add_custom_command(OUTPUT ${i}.mo
   COMMAND ${MSGFMT_BIN} ${CMAKE_CURRENT_SOURCE_DIR}/${i}.po -o ${CMAKE_CURRENT_BINARY_DIR}/${i}.mo
   DEPENDS ${i}.po
