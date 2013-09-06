@@ -22,3 +22,12 @@ INSTALLS += settings
 image.files = settings-wifi.svg
 image.path = $${PLUGIN_MANIFEST_DIR}/icons
 INSTALLS += image
+
+SOURCES += \
+    modelprinter.cpp
+
+HEADERS += \
+    modelprinter.h
+
+unix: CONFIG += link_pkgconfig
+unix: PKGCONFIG += qmenumodel
