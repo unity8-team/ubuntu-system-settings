@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 17:10+0000\n"
+"POT-Creation-Date: 2013-09-06 10:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -992,15 +992,19 @@ msgstr ""
 msgid "System Settings"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:80
-msgid "Network"
-msgstr ""
-
-#: ../src/qml/MainWindow.qml:85
-msgid "Personal"
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:90
+msgid "Network"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:95
+msgid "Personal"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr ""
 
