@@ -158,5 +158,11 @@ void TimeDate::setFilter(QString &new_filter)
     }
 }
 
+void TimeDate::setTime(qlonglong new_time)
+{
+    if (m_timeDateInterface.isValid())
+        m_timeDateInterface.call("SetTime", new_time, false, false);
+}
+
 TimeDate::~TimeDate() {
 }

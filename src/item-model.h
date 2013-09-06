@@ -40,6 +40,7 @@ public:
     enum Roles {
         IconRole = Qt::UserRole + 1,
         ItemRole,
+        KeywordRole,
     };
     void setPlugins(const QMap<QString, Plugin *> &plugins);
 
@@ -66,6 +67,8 @@ public:
 protected:
     virtual bool lessThan(const QModelIndex &left,
                           const QModelIndex &right) const;
+    virtual bool filterAcceptsRow(int source_row,
+                                  const QModelIndex &source_parent) const;
 };
 
 } // namespace
