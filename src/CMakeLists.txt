@@ -18,4 +18,10 @@ set(USS_SOURCES
 add_executable(system-settings ${USS_SOURCES})
 qt5_use_modules(system-settings Core Gui Quick Qml)
 target_link_libraries(system-settings SystemSettings)
-install(TARGET system-settings RUNTIME DESTINATION bin)
+install(TARGETS system-settings RUNTIME DESTINATION bin)
+
+add_custom_target(po COMMAND
+${XGETTEXT_BIN} -o ${CMAKE_SOURCE_DIR}/po/ubuntu-system-settings.pot -d ubuntu-system-settings
+--keyword=_ ${USS_SOURCES}
+WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)

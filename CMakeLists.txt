@@ -25,6 +25,8 @@ pkg_search_module(ACCOUNTSSERVICE REQUIRED accountsservice)
 pkg_search_module(OFONO REQUIRED ofono-qt)
 pkg_search_module(TIMEZONEMAP REQUIRED timezonemap)
 
+find_program(XGETTEXT_BIN xgettext)
+
 set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
 set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
 set(PLUGIN_PRIVATE_MODULE_DIR_BASE "${PLUGIN_MODULE_DIR_BASE}/private")
