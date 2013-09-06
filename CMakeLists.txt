@@ -41,6 +41,7 @@ set(PLUGIN_PRIVATE_MODULE_DIR "${LIBDIR}/${PLUGIN_PRIVATE_MODULE_DIR_BASE}")
 set(ANDR_PROP_LIB -landroid-properties)
 
 add_subdirectory(po)
+add_subdirectory(schema)
 add_subdirectory(lib)
 include_directories(lib)
 add_subdirectory(plugins)
