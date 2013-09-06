@@ -35,27 +35,28 @@ ItemPage {
     property bool isCharging
 
     function timeDeltaString(timeDelta) {
-        if (timeDelta === 1)
-            return i18n.tr("1 second ago")
-        if (timeDelta < 60)
-            return i18n.tr("%1 seconds ago").arg(timeDelta)
-        if (timeDelta >= 60 && timeDelta < 90)
-            return i18n.tr("1 minute ago")
-        if (timeDelta >= 90 && timeDelta < 3570)
-            return i18n.tr("%1 minutes ago").arg(Math.round(timeDelta/60))
-        if (timeDelta >= 3570 && timeDelta < 5400)
-            return i18n.tr("1 hour ago")
-        if (timeDelta >= 5400 && timeDelta < 84600)
-            return i18n.tr("%1 hours ago").arg(Math.round(timeDelta/3600))
-        if (timeDelta >= 84600 && timeDelta < 129600)
-            return i18n.tr("1 day ago")
-        if (timeDelta >= 129600)
-            return i18n.tr("%1 days ago").arg(Math.round(timeDelta/86400))
+        var sec = timeDelta,
+            min = Math.round (timeDelta / 60),
+            hr = Math.round (timeDelta / 3600),
+            day = Math.round (timeDelta / 86400);
+        if (sec < 60)
+            return i18n.tr("%1 second ago".arg(sec), "%1 seconds ago".arg(sec), sec)
+        else if (min < 60)
+            return i18n.tr("%1 minute ago".arg(min), "%1 minutes ago".arg(min), min)
+        else if (hr < 24)
+            return i18n.tr("%1 hour ago".arg(hr), "%1 hours ago".arg(hr), hr)
+        else
+            return i18n.tr("%1 day ago".arg(day), "%1 days ago".arg(day), day)
     }
 
     GSettings {
         id: powerSettings
         schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
+    }
+
+    GSettings {
+        id: settingsSchema
+        schema.id: "com.ubuntu.touch.system-settings"
     }
 
     BatteryInfo {
@@ -198,8 +199,8 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                /* TODO: use real configuration when we have one, lp #1215957 */
-                property bool lockOnSuspend: false
+                property bool lockOnSuspend:
+                    settingsSchema.unlockMethod !== "swipe"
                 text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
                 value: {
                     if (batteryBackend.powerdRunning ) {

@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+13.10.20130904.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * use the theme provider for themed icons.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 315
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Sep 2013 16:24:50 +0000
+
 ubuntu-system-settings (0.1+13.10.20130904-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
