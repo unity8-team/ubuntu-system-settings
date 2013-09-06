@@ -12,7 +12,7 @@ include(GNUInstallDirs)
 set(LIBDIR ${CMAKE_INSTALL_LIBDIR})
 enable_testing()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-permissive -pedantic -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fno-permissive -pedantic -Wall -Wextra")
 find_package(Qt5Widgets REQUIRED)
 # Workaround for https://bugreports.qt-project.org/browse/QTBUG-29987
 set(QT_IMPORTS_DIR "${CMAKE_INSTALL_LIBDIR}/qt5/qml")
@@ -26,6 +26,7 @@ pkg_search_module(OFONO REQUIRED ofono-qt)
 pkg_search_module(TIMEZONEMAP REQUIRED timezonemap)
 
 find_program(XGETTEXT_BIN xgettext)
+find_program(MSGFMT_BIN msgfmt)
 
 set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
 set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
@@ -39,6 +40,7 @@ set(PLUGIN_PRIVATE_MODULE_DIR "${LIBDIR}/${PLUGIN_PRIVATE_MODULE_DIR_BASE}")
 
 set(ANDR_PROP_LIB -landroid-properties)
 
+add_subdirectory(po)
 add_subdirectory(lib)
 include_directories(lib)
 add_subdirectory(plugins)
