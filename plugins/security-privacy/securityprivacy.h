@@ -25,11 +25,13 @@
 #include <QtDBus/QDBusInterface>
 #include <QtCore/QMap>
 #include <QtCore/QObject>
+#include <QtCore/QSettings>
 #include <QtCore/QString>
 
 class SecurityPrivacy: public QObject
 {
     Q_OBJECT
+    Q_ENUMS(SecurityType)
     Q_PROPERTY (bool statsWelcomeScreen
                 READ getStatsWelcomeScreen
                 WRITE setStatsWelcomeScreen
@@ -38,13 +40,25 @@ class SecurityPrivacy: public QObject
                 READ getMessagesWelcomeScreen
                 WRITE setMessagesWelcomeScreen
                 NOTIFY messagesWelcomeScreenChanged)
+    Q_PROPERTY (SecurityType securityType
+                READ getSecurityType
+                WRITE setSecurityType
+                NOTIFY securityTypeChanged)
 
 public:
+    enum SecurityType {
+         Swipe,
+         Passcode,
+         Passphrase
+    };
+
     explicit SecurityPrivacy(QObject *parent = 0);
     bool getStatsWelcomeScreen();
     void setStatsWelcomeScreen(bool enabled);
     bool getMessagesWelcomeScreen();
     void setMessagesWelcomeScreen(bool enabled);
+    SecurityType getSecurityType();
+    void setSecurityType(SecurityType type);
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
@@ -53,12 +67,14 @@ public Q_SLOTS:
 Q_SIGNALS:
     void statsWelcomeScreenChanged();
     void messagesWelcomeScreenChanged();
+    void securityTypeChanged();
 
 private:
     QDBusConnection m_systemBusConnection;
     QDBusServiceWatcher m_serviceWatcher;
     QDBusInterface m_accountsserviceIface;
     QString m_objectPath;
+    QSettings m_lockSettings;
 
     QVariant getUserProperty(const QString &property);
     void setUserProperty(const QString &property,

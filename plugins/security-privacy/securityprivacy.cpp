@@ -18,6 +18,7 @@
  */
 
 #include "securityprivacy.h"
+#include <QtCore/QDir>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusConnectionInterface>
 #include <QtDBus/QDBusMessage>
@@ -36,7 +37,9 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
     m_accountsserviceIface ("org.freedesktop.Accounts",
                             "/org/freedesktop/Accounts",
                             "org.freedesktop.Accounts",
-                             m_systemBusConnection)
+                             m_systemBusConnection),
+    m_lockSettings(QDir::home().filePath(".unity8-greeter-demo"),
+                   QSettings::NativeFormat)
 {
     connect (&m_serviceWatcher,
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
@@ -167,4 +170,39 @@ void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
 
     setUserProperty("MessagesWelcomeScreen", QVariant::fromValue(enabled));
     Q_EMIT(messagesWelcomeScreenChanged());
+}
+
+SecurityPrivacy::SecurityType SecurityPrivacy::getSecurityType()
+{
+    QVariant password(m_lockSettings.value("password", "none"));
+
+     if (password == "pin")
+        return SecurityPrivacy::Passcode;
+    else if (password == "keyboard")
+        return SecurityPrivacy::Passphrase;
+    else
+         return SecurityPrivacy::Swipe;
+
+}
+
+void SecurityPrivacy::setSecurityType(SecurityType type)
+{
+    QVariant sec;
+
+    switch (type) {
+    case SecurityPrivacy::Passcode:
+        sec = "pin";
+        break;
+    case SecurityPrivacy::Passphrase:
+        sec = "keyboard";
+        break;
+    case SecurityPrivacy::Swipe:
+    default:
+        sec = "none";
+        break;
+    }
+
+    m_lockSettings.setValue("password", sec);
+    m_lockSettings.sync();
+    Q_EMIT (securityTypeChanged());
 }

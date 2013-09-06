@@ -23,23 +23,23 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
 ItemPage {
     title: i18n.tr("Lock security")
 
-    GSettings {
-        id: settingsSchema
-        schema.id: "com.ubuntu.touch.system-settings"
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
     }
 
-    function getUnlockMethod() {
-        switch (settingsSchema.unlockMethod) {
-            case "swipe":
+    function methodToIndex(method) {
+        switch (method) {
+            case UbuntuSecurityPrivacyPanel.Swipe:
                 return 0
-            case "passcode":
+            case UbuntuSecurityPrivacyPanel.Passcode:
                 return 1
-            case "password":
+            case UbuntuSecurityPrivacyPanel.Passphrase:
                 return 2
         }
     }
@@ -47,19 +47,19 @@ ItemPage {
     function indexToMethod(index) {
         switch (index) {
             case 0:
-                return "swipe"
+                return UbuntuSecurityPrivacyPanel.Swipe
             case 1:
-                return "passcode"
+                return UbuntuSecurityPrivacyPanel.Passcode
             case 2:
-                return "password"
+                return UbuntuSecurityPrivacyPanel.Passphrase
         }
     }
 
     Dialog {
         id: changeSecurityDialog
 
-        property string oldMethod: settingsSchema.unlockMethod
-        property string newMethod: indexToMethod(unlockMethod.selectedIndex)
+        property int oldMethod: securityPrivacy.securityType
+        property int newMethod: indexToMethod(unlockMethod.selectedIndex)
 
         function clearInputs() {
             currentInput.text = ""
@@ -71,18 +71,20 @@ ItemPage {
             if (changeSecurityDialog.newMethod ==
                     changeSecurityDialog.oldMethod) { // Changing existing
                 switch (changeSecurityDialog.newMethod) {
-                case "passcode":
+                case UbuntuSecurityPrivacyPanel.Passcode:
                     return i18n.tr("Change passcode")
-                case "password":
+                case UbuntuSecurityPrivacyPanel.Passphrase:
                     return i18n.tr("Change passphrase")
+                default: // To stop the runtime complaining
+                    return i18n.tr("Change")
                 }
             } else {
                 switch (changeSecurityDialog.newMethod) {
-                case "swipe":
+                case UbuntuSecurityPrivacyPanel.Swipe:
                     return i18n.tr("Switch to swipe")
-                case "passcode":
+                case UbuntuSecurityPrivacyPanel.Passcode:
                     return i18n.tr("Switch to passcode")
-                case "password":
+                case UbuntuSecurityPrivacyPanel.Passphrase:
                     return i18n.tr("Switch to passphrase")
                 }
             }
@@ -91,9 +93,9 @@ ItemPage {
         Label {
             text: {
                 switch (changeSecurityDialog.oldMethod) {
-                case "passcode":
+                case UbuntuSecurityPrivacyPanel.Passcode:
                     return i18n.tr("Existing passcode")
-                case "password":
+                case UbuntuSecurityPrivacyPanel.Passphrase:
                     return i18n.tr("Existing passphrase")
                 // Shouldn't be reached when visible but still evaluated
                 default:
@@ -108,9 +110,11 @@ ItemPage {
             id: currentInput
             echoMode: TextInput.Password
             inputMethodHints: {
-                if (changeSecurityDialog.oldMethod === "password")
+                if (changeSecurityDialog.oldMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase)
                     return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
-                else if (changeSecurityDialog.oldMethod === "passcode")
+                else if (changeSecurityDialog.oldMethod ===
+                         UbuntuSecurityPrivacyPanel.Passcode)
                     return Qt.ImhNoAutoUppercase |
                            Qt.ImhSensitiveData |
                            Qt.ImhDigitsOnly
@@ -118,21 +122,24 @@ ItemPage {
                     return Qt.ImhNone
             }
             inputMask: {
-                if (changeSecurityDialog.oldMethod === "passcode")
+                if (changeSecurityDialog.oldMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode)
                     return "9999"
                 else
                     return ""
             }
-            visible: changeSecurityDialog.oldMethod === "password" ||
-                     changeSecurityDialog.oldMethod === "passcode"
+            visible: changeSecurityDialog.oldMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase ||
+                     changeSecurityDialog.oldMethod ===
+                         UbuntuSecurityPrivacyPanel.Passcode
         }
 
         Label {
             text: {
                 switch (changeSecurityDialog.newMethod) {
-                case "passcode":
+                case UbuntuSecurityPrivacyPanel.Passcode:
                     return i18n.tr("Choose passcode")
-                case "password":
+                case UbuntuSecurityPrivacyPanel.Passphrase:
                     return i18n.tr("Choose passphrase")
                 // Shouldn't be reached when visible but still evaluated
                 default:
@@ -146,9 +153,11 @@ ItemPage {
             id: newInput
             echoMode: TextInput.Password
             inputMethodHints: {
-                if (changeSecurityDialog.newMethod === "password")
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase)
                     return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
-                else if (changeSecurityDialog.newMethod === "passcode")
+                else if (changeSecurityDialog.newMethod ===
+                         UbuntuSecurityPrivacyPanel.Passcode)
                     return Qt.ImhNoAutoUppercase |
                            Qt.ImhSensitiveData |
                            Qt.ImhDigitsOnly
@@ -156,21 +165,24 @@ ItemPage {
                     return Qt.ImhNone
             }
             inputMask: {
-                if (changeSecurityDialog.newMethod === "passcode")
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode)
                     return "9999"
                 else
                     return ""
             }
-            visible: changeSecurityDialog.newMethod === "passcode" ||
-                     changeSecurityDialog.newMethod === "password"
+            visible: changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode ||
+                     changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase
         }
 
         Label {
             text: {
                 switch (changeSecurityDialog.newMethod) {
-                case "passcode":
+                case UbuntuSecurityPrivacyPanel.Passcode:
                     return i18n.tr("Confirm passcode")
-                case "password":
+                case UbuntuSecurityPrivacyPanel.Passphrase:
                     return i18n.tr("Conrifm passphrase")
                 // Shouldn't be reached when visible but still evaluated
                 default:
@@ -184,9 +196,11 @@ ItemPage {
             id: confirmInput
             echoMode: TextInput.Password
             inputMethodHints: {
-                if (changeSecurityDialog.newMethod === "password")
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase)
                     return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
-                else if (changeSecurityDialog.newMethod === "passcode")
+                else if (changeSecurityDialog.newMethod ===
+                         UbuntuSecurityPrivacyPanel.Passcode)
                     return Qt.ImhNoAutoUppercase |
                            Qt.ImhSensitiveData |
                            Qt.ImhDigitsOnly
@@ -194,24 +208,30 @@ ItemPage {
                     return Qt.ImhNone
             }
             inputMask: {
-                if (changeSecurityDialog.newMethod === "passcode")
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode)
                     return "9999"
                 else
                     return ""
             }
-            visible: changeSecurityDialog.newMethod === "passcode" ||
-                     changeSecurityDialog.newMethod === "password"
+            visible: changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode ||
+                     changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase
         }
 
         Button {
-            text: changeSecurityDialog.newMethod === "swipe" ?
+            text: changeSecurityDialog.newMethod ===
+                    UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Unset") :
                       i18n.tr("Continue")
             enabled: newInput.text == confirmInput.text
             onClicked: {
                 PopupUtils.close(changeSecurityDialog)
                 //TODO: Check it's correct before updating and do the update
-                settingsSchema.unlockMethod = changeSecurityDialog.newMethod
+                securityPrivacy.securityType =
+                        indexToMethod(unlockMethod.selectedIndex)
+
                 changeSecurityDialog.clearInputs()
             }
 
@@ -222,7 +242,8 @@ ItemPage {
             onClicked: {
                 PopupUtils.close(changeSecurityDialog)
                 unlockMethod.skip = true
-                unlockMethod.selectedIndex = getUnlockMethod()
+                unlockMethod.selectedIndex =
+                        methodToIndex(securityPrivacy.securityType)
                 changeSecurityDialog.clearInputs()
             }
         }
@@ -256,7 +277,8 @@ ItemPage {
             expanded: true
             onExpandedChanged: expanded = true
             onSelectedIndexChanged: {
-                if (getUnlockMethod() === 0 && firstRun) { // swipe
+                if (securityPrivacy.securityType ===
+                        UbuntuSecurityPrivacyPanel.Swipe && firstRun) {
                     changeSecurityDialog.show()
                     firstRun = false
                 }
@@ -273,19 +295,20 @@ ItemPage {
         Binding {
             target: unlockMethod
             property: "selectedIndex"
-            value: getUnlockMethod()
+            value: methodToIndex(securityPrivacy.securityType)
         }
 
         ListItem.SingleControl {
 
-            visible: settingsSchema.unlockMethod !== "swipe" // Swipe
+            visible: securityPrivacy.securityType !==
+                        UbuntuSecurityPrivacyPanel.Swipe
 
             control: Button {
                 property string changePasscode: i18n.tr("Change passcode…")
                 property string changePassphrase: i18n.tr("Change passphrase…")
 
-                property bool passcode:
-                    settingsSchema.unlockMethod === "passcode"
+                property bool passcode: securityPrivacy.securityType ===
+                                        UbuntuSecurityPrivacyPanel.Passcode
 
                 enabled: parent.visible
 
