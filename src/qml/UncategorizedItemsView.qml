@@ -26,6 +26,8 @@ import SystemSettings 1.0
 Column {
     property alias model: repeater.model
 
+    visible: repeater.count > 0
+
     anchors.left: parent.left
     anchors.right: parent.right
 

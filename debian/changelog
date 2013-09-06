@@ -1,3 +1,115 @@
+ubuntu-system-settings (0.1+13.10.20130904.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * use the theme provider for themed icons.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 315
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Sep 2013 16:24:50 +0000
+
+ubuntu-system-settings (0.1+13.10.20130904-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * sound: use the new ItemSelector list widget.
+  * battery: use the new ItemSelector list widget. Depends on the new
+    toolkit version for that. If the configuration value is zero, than
+    select the "never" entry as well.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 312
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Sep 2013 03:14:44 +0000
+
+ubuntu-system-settings (0.1+13.10.20130903.3-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * stop using the deprecated gicon provider, use the new themed icon
+    instead. Change the plugin icon code to support themed icons, as
+    well as urls to file locations on disk.
+
+  [ Iain Lane ]
+  * UI (without backend) for setting/changing the unlock
+    password/passphrase.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 309
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 19:15:57 +0000
+
+ubuntu-system-settings (0.1+13.10.20130903.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * drop the gps control from the main screen.
+
+  [ Iain Lane ]
+  * Make the Automatic / Manual selector in Time & Date toggle
+    timedated's NTP property.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 306
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 11:44:46 +0000
+
+ubuntu-system-settings (0.1+13.10.20130902.1-0ubuntu1) saucy; urgency=low
+
+  [ Guenter Schwann ]
+  * Use content hub for picking a background from the gallery.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 302
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 02 Sep 2013 06:12:47 +0000
+
+ubuntu-system-settings (0.1+13.10.20130829.2-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * Add a custom AccountsService schema and set up two examples.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 296
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 16:14:49 +0000
+
+ubuntu-system-settings (0.1+13.10.20130829.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * use a better icon, since the mobile theme provides one.
+  * battery: 100% is fully charged Since upower seems to not always
+    consider 100% as fully charged, check for the charge, as well as for
+    the status.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 294
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 12:29:50 +0000
+
+ubuntu-system-settings (0.1+13.10.20130829-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * Use battery's SleepValues panel for lock/sleep when idle timeout.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 290
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 03:20:41 +0000
+
+ubuntu-system-settings (0.1+13.10.20130827-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: don't segfault when there is no charge info.
+  * storage: get the list of click packages installed and build a model
+    from it. We don't use the real datas in the ui yet though, since the
+    manifest doesn't have the informations we need for that yet.
+  * battery: update sleep/lock subscreen to match the new design.
+  * settings: use enabled: false with a TODO for non working elements.
+  * battery: backend for the wifi controls.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 287
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 11:18:05 +0000
+
 ubuntu-system-settings (0.1+13.10.20130823-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

@@ -21,8 +21,7 @@
 #include "battery.h"
 #include <glib.h>
 #include <libupower-glib/upower.h>
-#include <QEvent>
-#include <QDBusReply>
+#include <nm-client.h>
 #include <QtCore/QDebug>
 
 Battery::Battery(QObject *parent) :
@@ -35,19 +34,15 @@ Battery::Battery(QObject *parent) :
     m_deviceString("")
 {
     m_device = up_device_new();
+    m_nm_client = nm_client_new();
 
     buildDeviceString();
     getLastFullCharge();
 
-    if (!m_powerdIface.isValid()) {
-        m_powerdRunning = false;
-        return;
-    }
-    else
-        m_powerdRunning = true;
+    m_powerdRunning = m_powerdIface.isValid();
 }
 
-bool Battery::powerdRunning()
+bool Battery::powerdRunning() const
 {
     return m_powerdRunning;
 }
@@ -79,12 +74,23 @@ void Battery::buildDeviceString() {
     g_object_unref(client);
 }
 
-QString Battery::deviceString()
+QString Battery::deviceString() const
 {
     return m_deviceString;
 }
 
-int Battery::lastFullCharge()
+bool Battery::getWifiStatus()
+{
+    return nm_client_wireless_get_enabled (m_nm_client);
+}
+
+void Battery::setWifiStatus(bool enableStatus)
+{
+    nm_client_wireless_set_enabled (m_nm_client, enableStatus);
+}
+
+
+int Battery::lastFullCharge() const
 {
     return m_lastFullCharge;
 }
@@ -92,7 +98,7 @@ int Battery::lastFullCharge()
 void Battery::getLastFullCharge()
 {
     UpHistoryItem *item;
-    GPtrArray *values;
+    GPtrArray *values = NULL;
     gint32 offset = 0;
     GTimeVal timeval;
 
@@ -100,13 +106,23 @@ void Battery::getLastFullCharge()
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, m_deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", 864000, 1000, NULL, NULL);
+
+    if (values == NULL) {
+        qWarning() << "Can't get charge info";
+        return;
+    }
+
+    double maxCapacity = 100.0;
+    g_object_get (m_device, "capacity", &maxCapacity, NULL);
+
     for (uint i=0; i < values->len; i++) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         /* Getting the next point after full charge, since upower registers only on state changes,
            typically you get no data while the device is fully charged and plugged and you get a discharging
            one when you unplugged, that's when the charge stops */
-        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED ||
+                up_history_item_get_value(item) >= maxCapacity) {
             if (i < values->len-1) {
                 UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i+1);
                 m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
@@ -126,18 +142,24 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         return QVariantList();
 
     UpHistoryItem *item;
-    GPtrArray *values;
+    GPtrArray *values = NULL;
     gint32 offset = 0;
     GTimeVal timeval;
     QVariantList listValues;
+    QVariantMap listItem;
     gdouble currentValue = 0;
 
     g_get_current_time(&timeval);
     offset = timeval.tv_sec;
     up_device_set_object_path_sync(m_device, deviceString.toStdString().c_str(), NULL, NULL);
     values = up_device_get_history_sync(m_device, "charge", timespan, resolution, NULL, NULL);
+
+    if (values == NULL) {
+        qWarning() << "Can't get charge info";
+        return QVariantList();
+    }
+
     for (uint i=values->len-1; i > 0; i--) {
-        QVariantMap listItem;
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
@@ -152,7 +174,8 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         /* Getting the next point after full charge, since upower registers only on state changes,
            typically you get no data while the device is fully charged and plugged and you get a discharging
            one when you unplugged, that's when the charge stops */
-        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED ||
+                up_history_item_get_value(item) == 100.0) {
             if (i > 1) {
                 UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i-1);
                 m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
@@ -165,10 +188,19 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         listItem.insert("value", currentValue);
         listValues += listItem;
     }
+
+    /* Set an extra point, at the current time, with the previous value
+     * that's to workaround https://bugs.freedesktop.org/show_bug.cgi?id=68711
+     * otherwise a fully charged device lacks the flat full charge segment */
+    listItem.insert("time", 0);
+    listItem.insert("value", currentValue);
+    listValues += listItem;
+
     g_ptr_array_unref (values);
     return listValues;
 }
 
 Battery::~Battery() {
     g_object_unref(m_device);
+    g_object_unref(m_nm_client);
 }

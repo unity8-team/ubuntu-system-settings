@@ -22,6 +22,7 @@ import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Content 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 
@@ -59,12 +60,11 @@ ItemPage {
         id: welcomeLabel
 
         anchors {
-            top: parent.top
+            top: welcomeImage.bottom
             topMargin: units.gu(1)
             horizontalCenter: welcomeImage.horizontalCenter
         }
 
-        fontSize: "large"
         text: i18n.tr("Welcome screen")
     }
 
@@ -72,44 +72,46 @@ ItemPage {
         id: welcomeImage
 
         anchors {
-            top: welcomeLabel.bottom
+            top: parent.top
             left: parent.left
          }
 
-        onClicked: pageStack.push(Utilities.createAlbumPage(
-                                  differentBackground.selected ? i18n.tr("Welcome screen") : i18n.tr("Choose background")))
-
-        //onSourceChanged: backgroundPanel.backgroundFile = source
-    }
-
-    Label {
-        id: homeLabel
-
-        anchors {
-            top: parent.top
-            topMargin: units.gu(1)
-            horizontalCenter: homeImage.horizontalCenter
+        onClicked: {
+            activeTransfer = ContentHub.importContent(ContentType.Pictures,
+                                                      ContentHub.defaultSourceForType(ContentType.Pictures));
         }
 
-        fontSize: "large"
-        text: i18n.tr("Home screen")
+        Component.onCompleted: updateImage(testWelcomeImage,
+                                           welcomeImage)
     }
 
     SwappableImage {
         id: homeImage
 
         anchors {
-            top: welcomeLabel.bottom
+            top: parent.top
             right: parent.right
          }
 
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
 
-        onClicked: pageStack.push(Utilities.createAlbumPage(
-                                  differentBackground.selected ? i18n.tr("Home screen") : i18n.tr("Choose background")))
+        onClicked: {
+            activeTransfer = ContentHub.importContent(ContentType.Pictures,
+                                                      ContentHub.defaultSourceForType(ContentType.Pictures));
+        }
+    }
 
-        //onSourceChanged: background.pictureUri = Qt.resolvedUrl(source)
+    Label {
+        id: homeLabel
+
+        anchors {
+            top: homeImage.bottom
+            topMargin: units.gu(1)
+            horizontalCenter: homeImage.horizontalCenter
+        }
+
+        text: i18n.tr("Home screen")
     }
 
     /* We don't have a good way of doing this after passing an invalid image to
@@ -145,8 +147,8 @@ ItemPage {
         id: topDivider
 
         anchors {
-            topMargin: units.gu(3)
-            top: homeImage.bottom
+            topMargin: units.gu(2)
+            top: welcomeLabel.bottom
         }
     }
 
@@ -179,39 +181,35 @@ ItemPage {
         }
     }
 
-    ListItem.Standard {
-        id: sameBackground
+    OptionSelector {
+        id: optionSelector
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: topDivider.bottom
+            topMargin: units.gu(2)
+        }
+        width: parent.width - units.gu(4)
+        expanded: true
 
-        property string previousImage
-
-        anchors.top: topDivider.bottom
-
-        text: i18n.tr("Same background for both")
-
-        selected: systemSettingsSettings.backgroundDuplicate
-
-        showDivider: false
-
-        onClicked: {
-            if (sameBackground.selected)
-                return
-            systemSettingsSettings.backgroundDuplicate = true
+        model: [i18n.tr("Same background for both"),
+            i18n.tr("Different background for each")]
+        onSelectedIndexChanged: {
+            systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
         }
     }
 
-    ListItem.Standard {
-        id: differentBackground
+    property var activeTransfer
 
-        anchors.top: sameBackground.bottom
-
-        text: i18n.tr("Different background for each")
-
-        selected: !systemSettingsSettings.backgroundDuplicate
-
-        onClicked: {
-            if (differentBackground.selected)
-                return
-            systemSettingsSettings.backgroundDuplicate = false
+    Connections {
+        target: activeTransfer ? activeTransfer : null
+        onStateChanged: {
+            if (activeTransfer.state === ContentTransfer.Charged) {
+                if (activeTransfer.items.length > 0) {
+                    var imageUrl = activeTransfer.items[0].url;
+                    background.pictureUri = imageUrl;
+                    setUpImages();
+                }
+            }
         }
     }
 }

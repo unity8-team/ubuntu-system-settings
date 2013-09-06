@@ -24,12 +24,17 @@ import Ubuntu.Components.Popups 0.1
 
 Component {
     id: resetLauncherHome
+
     Dialog {
         id: dialog
         text: i18n.tr("The contents and layout of the launcher, and the filters in the home screen will be returned to their original settings.")
         Button {
             text: i18n.tr("Reset launcher & home screen")
-            onClicked: PopupUtils.close(dialog)
+            onClicked: {
+                unitySettings.schema.reset("favorites")
+                resetBackend.resetLauncher()
+                PopupUtils.close(dialog)
+            }
         }
         Button {
             text: i18n.tr("Cancel")
