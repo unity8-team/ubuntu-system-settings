@@ -60,7 +60,6 @@ public:
     SecurityType getSecurityType();
     void setSecurityType(SecurityType type);
 
-
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
     void slotNameOwnerChanged(QString, QString, QString);
