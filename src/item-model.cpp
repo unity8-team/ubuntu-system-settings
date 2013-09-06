@@ -18,6 +18,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <libintl.h>
+
 #include "debug.h"
 #include "item-model.h"
 #include "plugin.h"
@@ -106,8 +108,19 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
         ret = QVariant::fromValue<QObject*>(const_cast<Plugin*>(item));
         break;
     case KeywordRole:
+        const char * domain = item->translations().toUtf8().constData();
         QStringList temp(item->keywords());
-        temp << item->displayName();
+        QMutableListIterator<QString> it(temp);
+        while (it.hasNext()) {
+            QString keyword = it.next();
+            it.setValue(QString::fromUtf8(
+                            dgettext(
+                                domain,
+                                keyword.toUtf8().constData())));
+        }
+        temp << QString::fromUtf8(
+                dgettext(domain,
+                         item->displayName().toUtf8().constData()));
         ret = temp;
     }
 
