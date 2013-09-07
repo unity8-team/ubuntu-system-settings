@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-05 17:10+0000\n"
-"PO-Revision-Date: 2013-09-04 18:49+0000\n"
+"POT-Creation-Date: 2013-09-06 15:25+0000\n"
+"PO-Revision-Date: 2013-09-06 17:59+0000\n"
 "Last-Translator: Tiago Hillebrandt <tiagohillebrandt@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-09-06 06:09+0000\n"
+"X-Launchpad-Export-Date: 2013-09-07 05:43+0000\n"
 "X-Generator: Launchpad (build 16760)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -153,29 +153,29 @@ msgstr "Bateria"
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 segundo atrás"
+msgstr[1] "%1 segundos atrás"
 
 #: ../plugins/battery/PageComponent.qml:45
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 minuto atrás"
+msgstr[1] "%1 minutos atrás"
 
 #: ../plugins/battery/PageComponent.qml:47
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 hora atrás"
+msgstr[1] "%1 horas atrás"
 
 #: ../plugins/battery/PageComponent.qml:49
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 dia atrás"
+msgstr[1] "%1 dias atrás"
 
 #: ../plugins/battery/PageComponent.qml:70
 msgid "Charging now"
@@ -328,7 +328,7 @@ msgstr "Exibir idioma"
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:221
 #: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
@@ -473,24 +473,24 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "Apagar e redefinir tudo"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "Redefinir telefone"
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "Redefinir lançador e tela inicial..."
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr "Redefinir todas as configurações do sistema..."
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr "Apagar e redefinir tudo..."
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -502,7 +502,7 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr "Redefinir todas as configurações do sistema"
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr "Redefinir lançador e tela inicial"
 
@@ -606,23 +606,23 @@ msgstr "Segurança do bloqueio"
 
 #: ../plugins/security-privacy/LockSecurity.qml:75
 msgid "Change passcode"
-msgstr ""
+msgstr "Alterar senha"
 
 #: ../plugins/security-privacy/LockSecurity.qml:77
 msgid "Change passphrase"
-msgstr ""
+msgstr "Alterar frase secreta"
 
 #: ../plugins/security-privacy/LockSecurity.qml:82
 msgid "Switch to swipe"
-msgstr ""
+msgstr "Alternar para deslizar"
 
 #: ../plugins/security-privacy/LockSecurity.qml:84
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Alternar para senha"
 
 #: ../plugins/security-privacy/LockSecurity.qml:86
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "Alternar para frase secreta"
 
 #: ../plugins/security-privacy/LockSecurity.qml:95
 msgid "Existing passcode"
@@ -699,7 +699,7 @@ msgstr "Alterar senha..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:285
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Alterar frase secreta..."
 
 #: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:14
 msgid "Security & Privacy"
@@ -940,101 +940,105 @@ msgstr "Defina a data e hora:"
 
 #: ../plugins/time-date/TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Definir data e hora"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Horário"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Hora"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Minuto"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Segundo"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: ../plugins/time-date/TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Dia"
 
 #: ../plugins/time-date/TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "Mês"
 
 #: ../plugins/time-date/TimePicker.qml:148
 msgid "January"
-msgstr ""
+msgstr "janeiro"
 
 #: ../plugins/time-date/TimePicker.qml:149
 msgid "February"
-msgstr ""
+msgstr "fevereiro"
 
 #: ../plugins/time-date/TimePicker.qml:150
 msgid "March"
-msgstr ""
+msgstr "março"
 
 #: ../plugins/time-date/TimePicker.qml:151
 msgid "April"
-msgstr ""
+msgstr "abril"
 
 #: ../plugins/time-date/TimePicker.qml:152
 msgid "May"
-msgstr ""
+msgstr "maio"
 
 #: ../plugins/time-date/TimePicker.qml:153
 msgid "June"
-msgstr ""
+msgstr "junho"
 
 #: ../plugins/time-date/TimePicker.qml:154
 msgid "July"
-msgstr ""
+msgstr "julho"
 
 #: ../plugins/time-date/TimePicker.qml:155
 msgid "August"
-msgstr ""
+msgstr "agosto"
 
 #: ../plugins/time-date/TimePicker.qml:156
-msgid "Septemper"
-msgstr ""
+msgid "September"
+msgstr "setembro"
 
 #: ../plugins/time-date/TimePicker.qml:157
 msgid "October"
-msgstr ""
+msgstr "outubro"
 
 #: ../plugins/time-date/TimePicker.qml:158
 msgid "November"
-msgstr ""
+msgstr "novembro"
 
 #: ../plugins/time-date/TimePicker.qml:159
 msgid "December"
-msgstr ""
+msgstr "dezembro"
 
 #: ../plugins/time-date/TimePicker.qml:169
 msgid "Year"
-msgstr ""
+msgstr "Ano"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr "Configurações do sistema"
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr "Pesquisar"
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "Rede"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "Pessoal"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "Sistema"
 

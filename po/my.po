@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-05 17:10+0000\n"
+"POT-Creation-Date: 2013-09-06 15:25+0000\n"
 "PO-Revision-Date: 2013-08-22 11:26+0000\n"
 "Last-Translator: Pyae Sone <Unknown>\n"
 "Language-Team: Burmese <my@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-09-06 06:09+0000\n"
+"X-Launchpad-Export-Date: 2013-09-07 05:42+0000\n"
 "X-Generator: Launchpad (build 16760)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -326,7 +326,7 @@ msgstr "ပြသမည့်ဘာသာ"
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:221
 #: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
@@ -462,24 +462,24 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "ဖျက် နှင့် အားလုံးအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "ဖုန်းကိုအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "launcher နှင့်ပင်မမျက်နှာပြင်ကိုအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr ""
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -489,7 +489,7 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr ""
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr ""
 
@@ -971,7 +971,7 @@ msgid "August"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:156
-msgid "Septemper"
+msgid "September"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:157
@@ -994,15 +994,19 @@ msgstr ""
 msgid "System Settings"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "ကွန်ယက်"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "ကိုယ်ရေးကိုယ်တာ"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "စနစ်"
 

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-05 17:10+0000\n"
-"PO-Revision-Date: 2013-09-05 18:09+0000\n"
+"POT-Creation-Date: 2013-09-06 15:25+0000\n"
+"PO-Revision-Date: 2013-09-06 19:15+0000\n"
 "Last-Translator: Phillip Sz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-06 06:09+0000\n"
+"X-Launchpad-Export-Date: 2013-09-07 05:42+0000\n"
 "X-Generator: Launchpad (build 16760)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -331,7 +331,7 @@ msgstr "Anzeigesprache"
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:221
 #: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
@@ -477,24 +477,24 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "Alles löschen & zurücksetzen"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "Telefon zurücksetzen"
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "Starter & Startbildschirm zurücksetzen …"
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr "Alle Systemeinstellungen zurücksetzen …"
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr "Alles löschen & zurücksetzen …"
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -506,7 +506,7 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr "Alle Systemeinstellungen zurücksetzen"
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr "Starter & Startbildschirm zurücksetzen"
 
@@ -848,8 +848,8 @@ msgstr ""
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ungefähr %1 Sekunde verbleibt"
+msgstr[1] "Ungefähr %1 Sekunden verbleibt"
 
 #: ../plugins/system-update/PageComponent.qml:127
 msgid "No estimate for the download"
@@ -857,7 +857,7 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:133
 msgid "Paused"
-msgstr ""
+msgstr "Pausiert"
 
 #: ../plugins/system-update/PageComponent.qml:142
 msgid "Download failed:"
@@ -996,7 +996,7 @@ msgid "August"
 msgstr "August"
 
 #: ../plugins/time-date/TimePicker.qml:156
-msgid "Septemper"
+msgid "September"
 msgstr "September"
 
 #: ../plugins/time-date/TimePicker.qml:157
@@ -1005,29 +1005,33 @@ msgstr "Oktober"
 
 #: ../plugins/time-date/TimePicker.qml:158
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: ../plugins/time-date/TimePicker.qml:159
 msgid "December"
-msgstr ""
+msgstr "Dezember"
 
 #: ../plugins/time-date/TimePicker.qml:169
 msgid "Year"
-msgstr ""
+msgstr "Jahr"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr "Systemeinstellungen"
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "Netzwerk"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "Persönliches"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "System"
 

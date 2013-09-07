@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-05 17:10+0000\n"
+"POT-Creation-Date: 2013-09-06 15:25+0000\n"
 "PO-Revision-Date: 2013-07-31 05:45+0000\n"
 "Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2013-09-06 06:09+0000\n"
+"X-Launchpad-Export-Date: 2013-09-07 05:42+0000\n"
 "X-Generator: Launchpad (build 16760)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -327,7 +327,7 @@ msgstr "لغة العرض"
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:221
 #: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
@@ -468,24 +468,24 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "امسح واستعد كل شيء"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "أعد ضبط الهاتف"
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "أعد ضبط واجهة الهاتف والشاشة الرئيسية..."
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr "أعد ضبط جميع إعدادات النظام..."
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr "امسح وأعد ضبط كل شيء..."
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -497,7 +497,7 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr "أعد ضبط جميع إعدادات النظام"
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr "أعد ضبط واجهة الهاتف والشاشة الرئيسية"
 
@@ -979,7 +979,7 @@ msgid "August"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:156
-msgid "Septemper"
+msgid "September"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:157
@@ -1002,15 +1002,19 @@ msgstr ""
 msgid "System Settings"
 msgstr "إعدادات النظام"
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "الشبكة"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "شخصي"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "النظام"
 

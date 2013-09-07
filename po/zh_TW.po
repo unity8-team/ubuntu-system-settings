@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-05 17:10+0000\n"
+"POT-Creation-Date: 2013-09-06 15:25+0000\n"
 "PO-Revision-Date: 2013-07-13 16:13+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-09-06 06:09+0000\n"
+"X-Launchpad-Export-Date: 2013-09-07 05:43+0000\n"
 "X-Generator: Launchpad (build 16760)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -326,7 +326,7 @@ msgstr ""
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:221
 #: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
@@ -460,24 +460,24 @@ msgstr "所有的文件、儲存的遊戲，以及其他項目皆會從此手機
 msgid "Erase & reset everything"
 msgstr "抹除並重設每個設定"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "重設手機"
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "重設啟動器與家屋畫面…"
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr "重設所有系統設定…"
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr "抹除並重設每項設定…"
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -487,7 +487,7 @@ msgstr "啟動器的內容與版面配置、家屋畫面中的過濾器等，皆
 msgid "Reset all system settings"
 msgstr "重設所有系統設定"
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr "重設啟動器與家屋畫面"
 
@@ -969,7 +969,7 @@ msgid "August"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:156
-msgid "Septemper"
+msgid "September"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:157
@@ -992,15 +992,19 @@ msgstr ""
 msgid "System Settings"
 msgstr "系統設定"
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "網路"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "個人"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "系統"
 
