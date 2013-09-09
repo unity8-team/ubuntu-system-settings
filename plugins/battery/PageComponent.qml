@@ -53,7 +53,7 @@ ItemPage {
 
     GSettings {
         id: powerSettings
-        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
+        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.desktop.session"
     }
 
     UbuntuSecurityPrivacyPanel {
@@ -214,8 +214,8 @@ ItemPage {
                                     i18n.tr("Never")
                     }
                     else {
-                        var timeout = Math.round(powerSettings.sleepDisplayBattery/60)
-                        return (powerSettings.sleepDisplayBattery != 0) ?
+                        var timeout = Math.round(powerSettings.idleDelay/60)
+                        return (powerSettings.idleDelay != 0) ?
                                     i18n.tr("After %1 minute".arg(timeout),
                                             "After %1 minutes".arg(timeout),
                                             timeout) :
