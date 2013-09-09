@@ -65,6 +65,7 @@ ItemPage {
             currentInput.text = ""
             newInput.text = ""
             confirmInput.text = ""
+            incorrect.visible = false
         }
 
         title: {
@@ -132,6 +133,20 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Passphrase ||
                      changeSecurityDialog.oldMethod ===
                          UbuntuSecurityPrivacyPanel.Passcode
+        }
+
+        Label {
+            id: incorrect
+            text: {
+                if (changeSecurityDialog.oldMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode)
+                    return i18n.tr("Incorrect passcode. Try again.")
+                if (changeSecurityDialog.oldMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase)
+                    return i18n.tr("Incorrect passphrase. Try again.")
+            }
+            visible: false
+            color: "darkred"
         }
 
         Label {
@@ -234,11 +249,13 @@ ItemPage {
                     PopupUtils.close(changeSecurityDialog)
                     securityPrivacy.securityType =
                             indexToMethod(unlockMethod.selectedIndex)
-                    console.log("Updating: " + newInput.text)
                     securityPrivacy.securityValue = newInput.text
                     changeSecurityDialog.clearInputs()
                 } else {
-                    console.log("Entered security value incorrect")
+                    // incorrect
+                    incorrect.visible = true
+                    currentInput.forceActiveFocus()
+                    currentInput.selectAll()
                 }
             }
 
