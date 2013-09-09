@@ -144,6 +144,9 @@ ItemPage {
                 if (changeSecurityDialog.oldMethod ===
                         UbuntuSecurityPrivacyPanel.Passphrase)
                     return i18n.tr("Incorrect passphrase. Try again.")
+
+                //Fallback to prevent warnings. Not displayed.
+                return i18n.tr("Incorrect. Try again.")
             }
             visible: false
             color: "darkred"
@@ -190,6 +193,9 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Passcode ||
                      changeSecurityDialog.newMethod ===
                         UbuntuSecurityPrivacyPanel.Passphrase
+            // Doesn't get updated if you set this in enabled of confirmButton
+            onTextChanged: confirmButton.enabled =
+                           (acceptableInput && (!visible || text.length > 0))
         }
 
         Label {
@@ -235,27 +241,59 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Passphrase
         }
 
+        Label {
+            id: notMatching
+            text: {
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode)
+                    return i18n.tr("Those passcodes don't match. Try again.")
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase)
+                    return i18n.tr("Those passphrases don't match. Try again.")
+
+                //Fallback to prevent warnings. Not displayed.
+                return i18n.tr("Incorrect. Try again.")
+            }
+            visible: false
+            color: "darkred"
+        }
+
         Button {
+            id: confirmButton
+
             text: changeSecurityDialog.newMethod ===
                     UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Unset") :
                       i18n.tr("Continue")
-            enabled: (newInput.text == confirmInput.text) &&
-                     newInput.acceptableInput
+            enabled: newInput.acceptableInput
             onClicked: {
                 var correct = !currentInput.visible ||
                         (currentInput.text == securityPrivacy.securityValue)
-                if (correct) {
+                var match = newInput.text == confirmInput.text
+
+                incorrect.visible = !correct
+
+                if (correct) // one problem at a time
+                    notMatching.visible = !match
+
+                if (correct && match) {
                     PopupUtils.close(changeSecurityDialog)
                     securityPrivacy.securityType =
                             indexToMethod(unlockMethod.selectedIndex)
                     securityPrivacy.securityValue = newInput.text
                     changeSecurityDialog.clearInputs()
-                } else {
-                    // incorrect
-                    incorrect.visible = true
+                }
+
+                if (!correct) {
                     currentInput.forceActiveFocus()
                     currentInput.selectAll()
+                    return
+                }
+
+
+                if (!match) {
+                    newInput.forceActiveFocus()
+                    newInput.selectAll()
                 }
             }
 
