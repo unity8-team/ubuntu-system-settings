@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 15:25+0000\n"
+"POT-Creation-Date: 2013-09-06 18:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,15 +133,15 @@ msgstr ""
 msgid "Welcome screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:116
+#: ../plugins/background/MainPage.qml:114
 msgid "Home screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:196
+#: ../plugins/background/MainPage.qml:194
 msgid "Same background for both"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:197
+#: ../plugins/background/MainPage.qml:195
 msgid "Different background for each"
 msgstr ""
 
@@ -1025,5 +1025,5 @@ msgid "Flight mode"
 msgstr ""
 
 #: ../.build/settings.js:11
-msgid "Rotation lock"
+msgid "Orientation lock"
 msgstr ""
