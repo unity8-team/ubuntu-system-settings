@@ -183,7 +183,7 @@ ItemPage {
                 case UbuntuSecurityPrivacyPanel.Passcode:
                     return i18n.tr("Confirm passcode")
                 case UbuntuSecurityPrivacyPanel.Passphrase:
-                    return i18n.tr("Conrifm passphrase")
+                    return i18n.tr("Confirm passphrase")
                 // Shouldn't be reached when visible but still evaluated
                 default:
                     return i18n.tr("Confirm")
