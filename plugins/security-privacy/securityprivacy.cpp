@@ -206,3 +206,18 @@ void SecurityPrivacy::setSecurityType(SecurityType type)
     m_lockSettings.sync();
     Q_EMIT (securityTypeChanged());
 }
+
+// XXX: passwordValue is invalid when security type is Swipe; handle this?
+QString SecurityPrivacy::getSecurityValue()
+{
+    QVariant password(m_lockSettings.value("passwordValue", QString()));
+
+    return password.toString();
+}
+
+void SecurityPrivacy::setSecurityValue(QString value)
+{
+    m_lockSettings.setValue("passwordValue", value);
+    m_lockSettings.sync();
+    Q_EMIT (securityValueChanged());
+}

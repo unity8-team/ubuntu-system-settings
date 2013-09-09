@@ -44,6 +44,10 @@ class SecurityPrivacy: public QObject
                 READ getSecurityType
                 WRITE setSecurityType
                 NOTIFY securityTypeChanged)
+    Q_PROPERTY (QString securityValue
+                READ getSecurityValue
+                WRITE setSecurityValue
+                NOTIFY securityValueChanged)
 
 public:
     enum SecurityType {
@@ -59,6 +63,8 @@ public:
     void setMessagesWelcomeScreen(bool enabled);
     SecurityType getSecurityType();
     void setSecurityType(SecurityType type);
+    QString getSecurityValue();
+    void setSecurityValue(QString value);
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
@@ -68,6 +74,7 @@ Q_SIGNALS:
     void statsWelcomeScreenChanged();
     void messagesWelcomeScreenChanged();
     void securityTypeChanged();
+    void securityValueChanged();
 
 private:
     QDBusConnection m_systemBusConnection;
