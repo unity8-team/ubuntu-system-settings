@@ -20,12 +20,20 @@
 
 #include "subset-model.h"
 
-#define SECTION_ROLE (Qt::UserRole + 0)
+#define SECTION_ROLE Qt::UserRole
+#define DISPLAY_ROLE Qt::DisplayRole
+#define CHECKED_ROLE Qt::CheckStateRole
 
-SubsetModel::SubsetModel(const QStringList &superset,
-                         QObject           *parent) :
+bool
+changeLessThan(const SubsetModel::Change *change0,
+               const SubsetModel::Change *change1)
+{
+    return change0->finish < change1->finish;
+}
+
+SubsetModel::SubsetModel(QObject *parent) :
     QAbstractListModel(parent),
-    _superset(superset)
+    _ignore(QDateTime::currentMSecsSinceEpoch())
 {
 }
 
@@ -33,6 +41,38 @@ const QStringList &
 SubsetModel::superset() const
 {
     return _superset;
+}
+
+void
+SubsetModel::setSuperset(const QStringList &superset)
+{
+    if (superset != _superset)
+    {
+        beginResetModel();
+
+        for (QList<State *>::iterator i = _state.begin(); i != _state.end(); ++i)
+            delete *i;
+
+        _ignore = QDateTime::currentMSecsSinceEpoch();
+        _superset = superset;
+        _subset.clear();
+        _state.clear();
+
+        for (int i = 0; i < _superset.length(); i++)
+        {
+            State *state = new State;
+            state->checked = false;
+            state->check = _ignore;
+            state->uncheck = _ignore;
+
+            _state += state;
+        }
+
+        endResetModel();
+
+        Q_EMIT subsetChanged();
+        Q_EMIT supersetChanged();
+    }
 }
 
 const QList<int> &
@@ -47,46 +87,71 @@ SubsetModel::setSubset(const QList<int> &subset)
     if (subset != _subset)
     {
         beginResetModel();
-        _subset = subset;
+
+        _ignore = QDateTime::currentMSecsSinceEpoch();
+
+        for (QList<State *>::iterator i = _state.begin(); i != _state.end(); ++i)
+        {
+            (*i)->checked = false;
+            (*i)->check = _ignore;
+            (*i)->uncheck = _ignore;
+        }
+
+        _subset.clear();
+
+        for (QList<int>::const_iterator i = subset.begin(); i != subset.end(); ++i)
+        {
+            if (0 <= *i && *i < _superset.length())
+            {
+                _subset += *i;
+                _state[*i]->checked = true;
+            }
+        }
+
         endResetModel();
 
         Q_EMIT subsetChanged();
     }
 }
 
-bool
-SubsetModel::setInSubset(int  element,
-                         bool inSubset)
+void
+SubsetModel::setChecked(int  element,
+                        bool checked,
+                        int  timeout)
 {
-    if (inSubset != _subset.contains(element))
+    qint64 time = QDateTime::currentMSecsSinceEpoch();
+
+    if (checked)
+        _state[element]->check = time;
+    else
+        _state[element]->uncheck = time;
+
+    if (checked != _state[element]->checked)
     {
-        if (inSubset)
+        _state[element]->checked = checked;
+
+        for (int i = 0; i < _subset.length(); i++)
         {
-            beginInsertRows(QModelIndex(), _subset.length(), _subset.length());
-            _subset += element;
-            endInsertRows();
-        }
-        else
-        {
-            for (int i = 0; i < _subset.length(); i++)
+            if (_subset[i] == element)
             {
-                while (i < _subset.length() && _subset[i] == element)
-                {
-                    beginRemoveRows(QModelIndex(), i, i);
-                    _subset.removeAt(i);
-                    endRemoveRows();
-                }
+                QModelIndex row = index(i, 0);
+                Q_EMIT dataChanged(row, row, QVector<int>(1, CHECKED_ROLE));
             }
         }
 
-        QModelIndex changed(index(_subset.length() + element, 0));
-        Q_EMIT dataChanged(changed, changed, QVector<int>(1, Qt::CheckStateRole));
-        Q_EMIT subsetChanged();
+        QModelIndex row = index(_subset.length() + element, 0);
+        Q_EMIT dataChanged(row, row, QVector<int>(1, CHECKED_ROLE));
 
-        return true;
+        Change *change = new Change;
+        change->element = element;
+        change->checked = checked;
+        change->start = time;
+        change->finish = time + timeout;
+
+        _change.insert(qUpperBound(_change.begin(), _change.end(), change, changeLessThan), change);
+
+        QTimer::singleShot(timeout, this, SLOT(timerExpired()));
     }
-
-    return false;
 }
 
 QHash<int, QByteArray>
@@ -95,8 +160,8 @@ SubsetModel::roleNames() const
     QHash<int, QByteArray> roleNames;
 
     roleNames.insert(SECTION_ROLE, "section");
-    roleNames.insert(Qt::DisplayRole, "label");
-    roleNames.insert(Qt::CheckStateRole, "checked");
+    roleNames.insert(DISPLAY_ROLE, "display");
+    roleNames.insert(CHECKED_ROLE, "checked");
 
     return roleNames;
 }
@@ -126,11 +191,11 @@ SubsetModel::data(const QModelIndex &index,
     case SECTION_ROLE:
         return index.row() < _subset.length() ? "subset" : "superset";
 
-    case Qt::DisplayRole:
-        return index.row() < _subset.length() ? _superset[_subset[index.row()]] : _superset[index.row() - _subset.length()];
+    case DISPLAY_ROLE:
+        return _superset[elementAtIndex(index)];
 
-    case Qt::CheckStateRole:
-        return index.row() < _subset.length() ? true : _subset.contains(index.row() - _subset.length());
+    case CHECKED_ROLE:
+        return _state[elementAtIndex(index)]->checked;
     }
 
     return QVariant();
@@ -143,23 +208,73 @@ SubsetModel::setData(const QModelIndex &index,
 {
     switch (role)
     {
-    case Qt::CheckStateRole:
+    case CHECKED_ROLE:
         if (static_cast<QMetaType::Type>(value.type()) == QMetaType::Bool)
         {
-            if (index.row() < _subset.length())
-            {
-                if (setInSubset(_subset[index.row()], false))
-                    return true;
-            }
-            else
-            {
-                if (setInSubset(index.row() - _subset.length(), value.toBool()))
-                    return true;
-            }
+            setChecked(elementAtIndex(index), value.toBool(), 0);
+
+            return true;
         }
 
         break;
     }
 
     return false;
+}
+
+void
+SubsetModel::timerExpired()
+{
+    Change *change = _change.first();
+
+    _change.removeFirst();
+
+    if (change->start > _ignore)
+    {
+        if (change->checked)
+        {
+            if (change->start > _state[change->element]->uncheck)
+            {
+                if (!_subset.contains(change->element))
+                {
+                    beginInsertRows(QModelIndex(), _subset.length(), _subset.length());
+                    _subset += change->element;
+                    endInsertRows();
+
+                    Q_EMIT subsetChanged();
+                }
+            }
+        }
+        else
+        {
+            if (change->start > _state[change->element]->check)
+            {
+                for (int i = 0; i < _subset.length(); i++)
+                {
+                    while (i < _subset.length() && _subset[i] == change->element)
+                    {
+                        beginRemoveRows(QModelIndex(), i, i);
+                        _subset.removeAt(i);
+                        endRemoveRows();
+                    }
+                }
+
+                Q_EMIT subsetChanged();
+            }
+        }
+    }
+
+    delete change;
+}
+
+int
+SubsetModel::elementAtRow(int row) const
+{
+    return row < _subset.length() ? _subset[row] : row - _subset.length();
+}
+
+int
+SubsetModel::elementAtIndex(const QModelIndex &index) const
+{
+    return elementAtRow(index.row());
 }

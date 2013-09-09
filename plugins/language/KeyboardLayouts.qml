@@ -47,13 +47,40 @@ ItemPage {
 
         model: plugin.pluginsModel
         delegate: SettingsCheckEntry {
-            textEntry: label
+            textEntry: display
             checkStatus: checked
 
-            onClicked: plugin.pluginsModel.setInSubset(index < plugin.pluginsModel.subset.length ?
-                                                       plugin.pluginsModel.subset[index] :
-                                                       index - plugin.pluginsModel.subset.length,
-                                                       checkStatus)
+            opacity: 0
+
+            onClicked: {
+                var element
+
+                if (index < plugin.pluginsModel.subset.length)
+                    element = plugin.pluginsModel.subset[index]
+                else
+                    element = index - plugin.pluginsModel.subset.length
+
+                plugin.pluginsModel.setChecked(element, checkStatus, checkStatus ? 0 : 2000)
+            }
+        }
+
+        populate: Transition {
+            NumberAnimation { property: "opacity"; to: 1; duration: 0 }
+        }
+
+        add: Transition {
+            NumberAnimation { property: "opacity"; to: 1; duration: 50 }
+        }
+
+        remove: Transition {
+            ParallelAnimation {
+                NumberAnimation { property: "opacity"; to: 0; duration: 50 }
+                NumberAnimation { property: "y"; duration: 50 }
+            }
+        }
+
+        displaced: Transition {
+            NumberAnimation { property: "y"; duration: 50 }
         }
     }
 }

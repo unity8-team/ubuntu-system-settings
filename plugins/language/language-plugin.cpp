@@ -201,7 +201,8 @@ getPluginsModel()
             }
         }
 
-        pluginsModel = new SubsetModel(pluginNames);
+        pluginsModel = new SubsetModel();
+        pluginsModel->setSuperset(pluginNames);
         pluginsModel->setSubset(pluginIndices);
     }
 

@@ -25,31 +25,35 @@
 
 class SubsetModel : public QAbstractListModel
 {
-private:
+protected:
 
     Q_OBJECT
 
+public:
+
     Q_PROPERTY(QStringList superset
                READ superset
-               CONSTANT)
+               WRITE setSuperset
+               NOTIFY supersetChanged)
 
     Q_PROPERTY(QList<int> subset
                READ subset
                WRITE setSubset
                NOTIFY subsetChanged)
 
-public:
-
-    explicit SubsetModel(const QStringList &superset = QStringList(),
-                         QObject           *parent   = NULL);
+    explicit SubsetModel(QObject *parent = NULL);
 
     virtual const QStringList &superset() const;
+    virtual void setSuperset(const QStringList &superset);
+    Q_SIGNAL virtual void supersetChanged() const;
 
     virtual const QList<int> &subset() const;
     virtual void setSubset(const QList<int> &subset);
-    Q_INVOKABLE virtual bool setInSubset(int  element,
-                                         bool inSubset);
     Q_SIGNAL virtual void subsetChanged() const;
+
+    Q_INVOKABLE virtual void setChecked(int  element,
+                                        bool checked,
+                                        int  timeout);
 
     virtual QHash<int, QByteArray> roleNames() const;
 
@@ -62,10 +66,36 @@ public:
                          const QVariant    &value,
                          int                role  = Qt::EditRole);
 
-private:
+protected:
+
+    Q_SLOT virtual void timerExpired();
+
+    virtual int elementAtRow(int row) const;
+    virtual int elementAtIndex(const QModelIndex &index) const;
+
+    struct State {
+        bool checked;
+        qint64 check;
+        qint64 uncheck;
+    };
+
+    struct Change {
+        int element;
+        bool checked;
+        qint64 start;
+        qint64 finish;
+    };
 
     QStringList _superset;
     QList<int> _subset;
+
+    QList<State *> _state;
+    QList<Change *> _change;
+
+    qint64 _ignore;
+
+    friend bool changeLessThan(const Change *change0,
+                               const Change *change1);
 };
 
 #endif // SUBSET_MODEL_H
