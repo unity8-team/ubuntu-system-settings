@@ -225,14 +225,21 @@ ItemPage {
                     UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Unset") :
                       i18n.tr("Continue")
-            enabled: newInput.text == confirmInput.text
+            enabled: (newInput.text == confirmInput.text) &&
+                     newInput.acceptableInput
             onClicked: {
-                PopupUtils.close(changeSecurityDialog)
-                //TODO: Check it's correct before updating and do the update
-                securityPrivacy.securityType =
-                        indexToMethod(unlockMethod.selectedIndex)
-
-                changeSecurityDialog.clearInputs()
+                var correct = !currentInput.visible ||
+                        (currentInput.text == securityPrivacy.securityValue)
+                if (correct) {
+                    PopupUtils.close(changeSecurityDialog)
+                    securityPrivacy.securityType =
+                            indexToMethod(unlockMethod.selectedIndex)
+                    console.log("Updating: " + newInput.text)
+                    securityPrivacy.securityValue = newInput.text
+                    changeSecurityDialog.clearInputs()
+                } else {
+                    console.log("Entered security value incorrect")
+                }
             }
 
         }
