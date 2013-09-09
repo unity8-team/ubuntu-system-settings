@@ -147,9 +147,10 @@ ItemPage {
                 }
             }
 
-            ListItem.ValueSelector {
+            ListItem.ItemSelector {
                 id: valueSelect
-                values: [i18n.tr("By name"), i18n.tr("By size")]
+                text: i18n.tr("Installed apps")
+                model: [i18n.tr("By name"), i18n.tr("By size")]
                 selectedIndex: sortByName ? 0 : 1
                 onSelectedIndexChanged:
                     settingsId.storageSortByName = (valueSelect.selectedIndex == 0) ? true : false
