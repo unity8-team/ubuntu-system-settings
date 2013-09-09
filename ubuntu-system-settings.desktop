@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=System Settings
-Icon=settings
+Icon=system-settings
 Exec=system-settings
 Terminal=false
 Type=Application

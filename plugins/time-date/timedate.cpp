@@ -80,6 +80,23 @@ QString TimeDate::getTimeZone()
     return QString();
 }
 
+bool TimeDate::getUseNTP()
+{
+    if (m_timeDateInterface.isValid()) {
+        return m_timeDateInterface.property("NTP").toBool();
+    }
+
+    // Default to false
+    return false;
+}
+
+void TimeDate::setUseNTP(bool enabled)
+{
+    if (m_timeDateInterface.isValid()) {
+        m_timeDateInterface.call("SetNTP", enabled, false);
+    }
+}
+
 void TimeDate::slotChanged(QString interface,
                            QVariantMap changed_properties,
                            QStringList invalidated_properties)
@@ -90,6 +107,10 @@ void TimeDate::slotChanged(QString interface,
     if (invalidated_properties.contains("Timezone")) {
         m_currentTimeZone = getTimeZone();
         Q_EMIT timeZoneChanged();
+    }
+
+    if (invalidated_properties.contains("NTP")) {
+        Q_EMIT useNTPChanged();
     }
 }
 
@@ -105,6 +126,7 @@ void TimeDate::slotNameOwnerChanged(QString name,
     setUpInterface();
     // Tell QML so that it refreshes its view of the property
     Q_EMIT timeZoneChanged();
+    Q_EMIT useNTPChanged();
 }
 
 void TimeDate::setTimeZone(QString &time_zone)
@@ -134,6 +156,12 @@ void TimeDate::setFilter(QString &new_filter)
         m_timeZoneFilterProxy.sort(0);
         m_sortedBefore = true;
     }
+}
+
+void TimeDate::setTime(qlonglong new_time)
+{
+    if (m_timeDateInterface.isValid())
+        m_timeDateInterface.call("SetTime", new_time, false, false);
 }
 
 TimeDate::~TimeDate() {

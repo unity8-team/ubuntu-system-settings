@@ -4,7 +4,6 @@ SUBDIRS = \
     background \
     battery \
     flight-mode \
-    gps \
     orientation-lock \
     reset \
     sound \

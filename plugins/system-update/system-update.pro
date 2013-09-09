@@ -5,6 +5,7 @@ TEMPLATE = lib
 TARGET = system-update
 
 QML_SOURCES = \
+    Download.qml \
     PageComponent.qml
 
 settings.files = $${TARGET}.settings

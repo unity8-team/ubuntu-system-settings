@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-23 20:54+0200\n"
+"POT-Creation-Date: 2013-09-06 15:25+0000\n"
 "PO-Revision-Date: 2013-07-11 07:09+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur <ug@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-08-28 05:40+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-09-07 05:42+0000\n"
+"X-Generator: Launchpad (build 16760)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -27,8 +27,8 @@ msgid "Serial"
 msgstr "ئارقىمۇئارقا"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/battery/PageComponent.qml:109
-#: ../plugins/battery/PageComponent.qml:116
+#: ../plugins/battery/PageComponent.qml:110
+#: ../plugins/battery/PageComponent.qml:117
 #: ../plugins/cellular/PageComponent.qml:75
 msgid "N/A"
 msgstr "N/A"
@@ -46,10 +46,9 @@ msgid "Last updated"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:211
-#: ../plugins/battery/PageComponent.qml:219
-#: ../plugins/battery/SleepValues.qml:87
-#: ../plugins/security-privacy/LockWhenIdle.qml:70
+#: ../plugins/battery/PageComponent.qml:212
+#: ../plugins/battery/PageComponent.qml:220
+#: ../plugins/battery/SleepValues.qml:91
 #: ../plugins/system-update/PageComponent.qml:334
 msgid "Never"
 msgstr ""
@@ -58,7 +57,7 @@ msgstr ""
 msgid "Check for updates"
 msgstr "يېڭىلانما بارمۇ تەكشۈرۈش"
 
-#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
+#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:33
 msgid "Storage"
 msgstr "ساقلىغۇچ"
 
@@ -74,81 +73,75 @@ msgstr ""
 msgid "Regulatory info"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:38
+#: ../plugins/about/Storage.qml:39
 msgid "Used by Ubuntu"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:38
+#: ../plugins/about/Storage.qml:39
 msgid "Movies"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:38
+#: ../plugins/about/Storage.qml:39
 msgid "Audio"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:39
+#: ../plugins/about/Storage.qml:40
 msgid "Pictures"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:39
+#: ../plugins/about/Storage.qml:40
 msgid "Other files"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:39
+#: ../plugins/about/Storage.qml:40
 msgid "Used by apps"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:98
+#: ../plugins/about/Storage.qml:112
 msgid "kB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:100
+#: ../plugins/about/Storage.qml:114
 msgid "MB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:102
+#: ../plugins/about/Storage.qml:116
 msgid "GB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:122
+#: ../plugins/about/Storage.qml:136
 msgid "Total storage"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:131
+#: ../plugins/about/Storage.qml:145
 msgid "Free space"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:147
+#: ../plugins/about/Storage.qml:161
 msgid "By name"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:147
+#: ../plugins/about/Storage.qml:161
 msgid "By size"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:32 ../.build/settings.js:3
+#: ../plugins/background/MainPage.qml:33 ../.build/settings.js:3
 msgid "Background"
 msgstr "تەگلىك"
 
-#: ../plugins/background/MainPage.qml:68 ../plugins/background/MainPage.qml:80
+#: ../plugins/background/MainPage.qml:68
 msgid "Welcome screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:80
-#: ../plugins/background/MainPage.qml:110
-msgid "Choose background"
-msgstr ""
-
-#: ../plugins/background/MainPage.qml:95
-#: ../plugins/background/MainPage.qml:110
+#: ../plugins/background/MainPage.qml:116
 msgid "Home screen"
 msgstr "ماكان ئېكران"
 
-#: ../plugins/background/MainPage.qml:189
+#: ../plugins/background/MainPage.qml:196
 msgid "Same background for both"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:207
+#: ../plugins/background/MainPage.qml:197
 msgid "Different background for each"
 msgstr ""
 
@@ -156,130 +149,115 @@ msgstr ""
 msgid "Battery"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:39
-msgid "1 second ago"
-msgstr ""
-
-#: ../plugins/battery/PageComponent.qml:41
-#, qt-format
-msgid "%1 seconds ago"
-msgstr ""
-
 #: ../plugins/battery/PageComponent.qml:43
-msgid "1 minute ago"
-msgstr ""
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/battery/PageComponent.qml:45
 #, qt-format
-msgid "%1 minutes ago"
-msgstr ""
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/battery/PageComponent.qml:47
-msgid "1 hour ago"
-msgstr ""
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/battery/PageComponent.qml:49
 #, qt-format
-msgid "%1 hours ago"
-msgstr ""
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../plugins/battery/PageComponent.qml:51
-msgid "1 day ago"
-msgstr ""
-
-#: ../plugins/battery/PageComponent.qml:53
-#, qt-format
-msgid "%1 days ago"
-msgstr ""
-
-#: ../plugins/battery/PageComponent.qml:69
+#: ../plugins/battery/PageComponent.qml:70
 msgid "Charging now"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:73
+#: ../plugins/battery/PageComponent.qml:74
 msgid "Last full charge"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:77
+#: ../plugins/battery/PageComponent.qml:78
 msgid "Fully charged"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:83
+#: ../plugins/battery/PageComponent.qml:84
 #, qt-format
 msgid "%1 %"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:108
+#: ../plugins/battery/PageComponent.qml:109
 msgid "Charge level"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:160
+#: ../plugins/battery/PageComponent.qml:161
 msgid "Ways to reduce battery use:"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:164
+#: ../plugins/battery/PageComponent.qml:165
 msgid "Display brightness"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:203
-#: ../plugins/security-privacy/LockWhenIdle.qml:29
-#: ../plugins/security-privacy/PhoneLocking.qml:41
+#: ../plugins/battery/PageComponent.qml:204
+#: ../plugins/security-privacy/PhoneLocking.qml:61
 msgid "Lock when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:203
+#: ../plugins/battery/PageComponent.qml:204
+#: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Sleep when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:208
-#: ../plugins/battery/PageComponent.qml:216
-#: ../plugins/battery/SleepValues.qml:72 ../plugins/battery/SleepValues.qml:75
-#: ../plugins/battery/SleepValues.qml:78 ../plugins/battery/SleepValues.qml:81
-#: ../plugins/battery/SleepValues.qml:84
-#: ../plugins/security-privacy/LockWhenIdle.qml:52
-#: ../plugins/security-privacy/LockWhenIdle.qml:55
-#: ../plugins/security-privacy/LockWhenIdle.qml:58
-#: ../plugins/security-privacy/LockWhenIdle.qml:61
-#: ../plugins/security-privacy/LockWhenIdle.qml:64
-#: ../plugins/security-privacy/LockWhenIdle.qml:67
+#: ../plugins/battery/PageComponent.qml:209
+#: ../plugins/battery/PageComponent.qml:217
+#: ../plugins/battery/SleepValues.qml:76 ../plugins/battery/SleepValues.qml:79
+#: ../plugins/battery/SleepValues.qml:82 ../plugins/battery/SleepValues.qml:85
+#: ../plugins/battery/SleepValues.qml:88
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/battery/PageComponent.qml:227 ../.build/settings.js:19
+#: ../plugins/battery/PageComponent.qml:229 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../plugins/battery/PageComponent.qml:235 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:237 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr "كۆكچىش"
 
-#: ../plugins/battery/PageComponent.qml:243 ../.build/settings.js:10
+#: ../plugins/battery/PageComponent.qml:245
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery/PageComponent.qml:251
+#: ../plugins/battery/PageComponent.qml:253
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:63
+#: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:63
+#: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:97
-#: ../plugins/security-privacy/LockWhenIdle.qml:75
+#: ../plugins/battery/SleepValues.qml:102
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:97
+#: ../plugins/battery/SleepValues.qml:102
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 
@@ -346,13 +324,16 @@ msgstr ""
 
 #: ../plugins/language/DisplayLanguage.qml:84
 #: ../plugins/phone/CallForwarding.qml:113
-#: ../plugins/reset/EraseEverything.qml:35
-#: ../plugins/reset/ResetAllSettings.qml:35
-#: ../plugins/reset/ResetLauncherHome.qml:35
+#: ../plugins/reset/EraseEverything.qml:36
+#: ../plugins/reset/ResetAllSettings.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
+#: ../plugins/security-privacy/LockSecurity.qml:221
+#: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
 msgstr "ئەمەلدىن قالدۇر"
 
 #: ../plugins/language/DisplayLanguage.qml:99
+#: ../plugins/security-privacy/LockSecurity.qml:177
 msgid "Confirm"
 msgstr ""
 
@@ -369,7 +350,7 @@ msgstr ""
 msgid "All layouts available:"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:11
+#: ../plugins/language/PageComponent.qml:30 ../.build/settings.js:10
 msgid "Language & Text"
 msgstr ""
 
@@ -383,32 +364,32 @@ msgstr ""
 msgid "Auto correction"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:80
+#: ../plugins/language/PageComponent.qml:82
 msgid "Auto completion"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:87
+#: ../plugins/language/PageComponent.qml:91
 msgid "Auto capitalization"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:92
+#: ../plugins/language/PageComponent.qml:98
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:98
+#: ../plugins/language/PageComponent.qml:104
 msgid "Auto punctuation"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:103
+#: ../plugins/language/PageComponent.qml:111
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
 
-#: ../plugins/language/SpellChecking.qml:49
+#: ../plugins/language/SpellChecking.qml:51
 msgid "Current spelling languages:"
 msgstr ""
 
-#: ../plugins/language/SpellChecking.qml:62
+#: ../plugins/language/SpellChecking.qml:64
 msgid "All languages available:"
 msgstr ""
 
@@ -437,6 +418,7 @@ msgid "Contacts…"
 msgstr ""
 
 #: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/time-date/TimePicker.qml:189
 msgid "Set"
 msgstr ""
 
@@ -451,7 +433,7 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
 msgid "Phone"
 msgstr "تېلېفون"
 
@@ -478,24 +460,24 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:14
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr ""
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -505,12 +487,12 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr ""
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:29
-#: ../plugins/security-privacy/PageComponent.qml:89
+#: ../plugins/security-privacy/PageComponent.qml:112
 msgid "Dash search"
 msgstr ""
 
@@ -519,14 +501,14 @@ msgid "Return results from:"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:53
-#: ../plugins/security-privacy/PageComponent.qml:46
-#: ../plugins/security-privacy/PageComponent.qml:92
+#: ../plugins/security-privacy/PageComponent.qml:51
+#: ../plugins/security-privacy/PageComponent.qml:115
 msgid "Phone only"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:53
-#: ../plugins/security-privacy/PageComponent.qml:44
-#: ../plugins/security-privacy/PageComponent.qml:91
+#: ../plugins/security-privacy/PageComponent.qml:49
+#: ../plugins/security-privacy/PageComponent.qml:114
 msgid "Phone and Internet"
 msgstr ""
 
@@ -585,98 +567,178 @@ msgstr ""
 msgid "Allow access to location:"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:27
-#: ../plugins/security-privacy/PhoneLocking.qml:34
+#: ../plugins/security-privacy/LockSecurity.qml:29
+#: ../plugins/security-privacy/PhoneLocking.qml:44
 msgid "Lock security"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:33
+#: ../plugins/security-privacy/LockSecurity.qml:75
+msgid "Change passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:77
+msgid "Change passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:82
+msgid "Switch to swipe"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:84
+msgid "Switch to passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:86
+msgid "Switch to passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:95
+msgid "Existing passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:97
+msgid "Existing passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:100
+msgid "Existing"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:134
+msgid "Choose passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:136
+msgid "Choose passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:139
+msgid "Choose"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:172
+msgid "Confirm passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:174
+msgid "Conrifm passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:208
+msgid "Unset"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:209
+msgid "Continue"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:236
 msgid "Unlock the phone using:"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:39
-#: ../plugins/security-privacy/PhoneLocking.qml:35
+#: ../plugins/security-privacy/LockSecurity.qml:240
 msgid "Swipe (no security)"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:40
+#: ../plugins/security-privacy/LockSecurity.qml:241
 msgid "4-digit passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:41
+#: ../plugins/security-privacy/LockSecurity.qml:242
+#: ../plugins/security-privacy/PhoneLocking.qml:42
+msgid "Passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:243
+msgid "Swipe (no security)… "
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:244
+msgid "4-digit passcode…"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:245
 msgid "Passphrase…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:48
+#: ../plugins/security-privacy/LockSecurity.qml:284
 msgid "Change passcode…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockWhenIdle.qml:43
-msgid "Lock the phone when it is not in use:"
+#: ../plugins/security-privacy/LockSecurity.qml:285
+msgid "Change passphrase…"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:31 ../.build/settings.js:15
+#: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:14
 msgid "Security & Privacy"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:61
+#: ../plugins/security-privacy/PageComponent.qml:66
 msgid "Security:"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:64
-#: ../plugins/security-privacy/PhoneLocking.qml:27
+#: ../plugins/security-privacy/PageComponent.qml:69
+#: ../plugins/security-privacy/PhoneLocking.qml:28
 msgid "Phone locking"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:65
-#: ../plugins/security-privacy/PhoneLocking.qml:42
+#: ../plugins/security-privacy/PageComponent.qml:70
+#: ../plugins/security-privacy/PhoneLocking.qml:63
 #, qt-format
 msgid "1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/security-privacy/PageComponent.qml:72
+#: ../plugins/security-privacy/PageComponent.qml:77
 msgid "SIM PIN"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:77
+#: ../plugins/security-privacy/PageComponent.qml:82
 msgid "Privacy:"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:80
+#: ../plugins/security-privacy/PageComponent.qml:85
 msgid "Stats on welcome screen"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:84
+#: ../plugins/security-privacy/PageComponent.qml:98
 msgid "Messages on welcome screen"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:97
+#: ../plugins/security-privacy/PageComponent.qml:120
 msgid "Location access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:103
+#: ../plugins/security-privacy/PageComponent.qml:126
 msgid "Other app access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:107
+#: ../plugins/security-privacy/PageComponent.qml:130
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:110
+#: ../plugins/security-privacy/PageComponent.qml:133
 msgid "Sent"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:111
+#: ../plugins/security-privacy/PageComponent.qml:134
 msgid "Not sent"
 msgstr ""
 
-#: ../plugins/security-privacy/PhoneLocking.qml:51
+#: ../plugins/security-privacy/PhoneLocking.qml:40
+msgid "None"
+msgstr ""
+
+#: ../plugins/security-privacy/PhoneLocking.qml:41
+msgid "Passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/PhoneLocking.qml:75
 msgid "Sleep locks immediately"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:16
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
 msgstr "ئاۋاز"
 
@@ -692,23 +754,23 @@ msgstr "قوڭغۇراق ئاۋازى"
 msgid "Vibrate when ringing"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:71
+#: ../plugins/sound/PageComponent.qml:72
 msgid "Vibrate in silent mode"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:75
+#: ../plugins/sound/PageComponent.qml:77
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:79 ../plugins/sound/PageComponent.qml:82
+#: ../plugins/sound/PageComponent.qml:81 ../plugins/sound/PageComponent.qml:84
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:88
+#: ../plugins/sound/PageComponent.qml:90
 msgid "Keyboard sounds"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:93
+#: ../plugins/sound/PageComponent.qml:96
 msgid "Lock sound"
 msgstr ""
 
@@ -716,11 +778,11 @@ msgstr ""
 msgid "The phone is in Silent Mode."
 msgstr ""
 
-#: ../plugins/sound/SoundsList.qml:60
+#: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:17
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
 msgstr "يېڭىلانمىلار"
 
@@ -830,31 +892,119 @@ msgstr ""
 msgid "No matching place"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:18
+#: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr "ۋاقىت بىلەن چىسلا"
 
-#: ../plugins/time-date/PageComponent.qml:51
+#: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:63
+#: ../plugins/time-date/PageComponent.qml:64
 msgid "Set the time and date:"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:26
+msgid "Set time & date"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:68
+msgid "Time"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:81
+msgid "Hour"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:95
+msgid "Minute"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:109
+msgid "Second"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:118
+msgid "Date"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:130
+msgid "Day"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:144
+msgid "Month"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:148
+msgid "January"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:149
+msgid "February"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:150
+msgid "March"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:151
+msgid "April"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:152
+msgid "May"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:153
+msgid "June"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:154
+msgid "July"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:155
+msgid "August"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:156
+msgid "September"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:157
+msgid "October"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:158
+msgid "November"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:159
+msgid "December"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:169
+msgid "Year"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr "سىستېما تەڭشىكى"
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "تور"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "شەخسىي"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "سىستېما"
 
@@ -874,6 +1024,6 @@ msgstr "مىسال"
 msgid "Flight mode"
 msgstr "ئايروپىلاندا"
 
-#: ../.build/settings.js:12
+#: ../.build/settings.js:11
 msgid "Rotation lock"
 msgstr ""

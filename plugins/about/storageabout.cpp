@@ -31,7 +31,7 @@ StorageAbout::StorageAbout(QObject *parent) :
 
 }
 
-QByteArray StorageAbout::getClickList()
+QByteArray StorageAbout::getClickList() const
 {
     QFile clickBinary("/usr/bin/click");
     if (!clickBinary.exists()) {
@@ -44,6 +44,18 @@ QByteArray StorageAbout::getClickList()
     return clickProcess.readAllStandardOutput();
 }
 
+QString StorageAbout::getClickDir(const QString &name) const
+{
+    QFile clickBinary("/usr/bin/click");
+    if (!clickBinary.exists()) {
+        return QString();
+    }
+
+    QProcess clickProcess;
+    clickProcess.start("/usr/bin/click", QStringList() << "pkgdir" << name);
+    clickProcess.waitForFinished(-1);
+    return clickProcess.readAllStandardOutput().simplified();
+}
 
 QString StorageAbout::serialNumber()
 {

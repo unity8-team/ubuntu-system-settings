@@ -22,8 +22,6 @@
 #include <glib.h>
 #include <libupower-glib/upower.h>
 #include <nm-client.h>
-#include <QEvent>
-#include <QDBusReply>
 #include <QtCore/QDebug>
 
 Battery::Battery(QObject *parent) :
@@ -41,15 +39,10 @@ Battery::Battery(QObject *parent) :
     buildDeviceString();
     getLastFullCharge();
 
-    if (!m_powerdIface.isValid()) {
-        m_powerdRunning = false;
-        return;
-    }
-    else
-        m_powerdRunning = true;
+    m_powerdRunning = m_powerdIface.isValid();
 }
 
-bool Battery::powerdRunning()
+bool Battery::powerdRunning() const
 {
     return m_powerdRunning;
 }
@@ -81,7 +74,7 @@ void Battery::buildDeviceString() {
     g_object_unref(client);
 }
 
-QString Battery::deviceString()
+QString Battery::deviceString() const
 {
     return m_deviceString;
 }
@@ -97,7 +90,7 @@ void Battery::setWifiStatus(bool enableStatus)
 }
 
 
-int Battery::lastFullCharge()
+int Battery::lastFullCharge() const
 {
     return m_lastFullCharge;
 }
@@ -119,13 +112,17 @@ void Battery::getLastFullCharge()
         return;
     }
 
+    double maxCapacity = 100.0;
+    g_object_get (m_device, "capacity", &maxCapacity, NULL);
+
     for (uint i=0; i < values->len; i++) {
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         /* Getting the next point after full charge, since upower registers only on state changes,
            typically you get no data while the device is fully charged and plugged and you get a discharging
            one when you unplugged, that's when the charge stops */
-        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED ||
+                up_history_item_get_value(item) >= maxCapacity) {
             if (i < values->len-1) {
                 UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i+1);
                 m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
@@ -149,6 +146,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     gint32 offset = 0;
     GTimeVal timeval;
     QVariantList listValues;
+    QVariantMap listItem;
     gdouble currentValue = 0;
 
     g_get_current_time(&timeval);
@@ -162,7 +160,6 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     }
 
     for (uint i=values->len-1; i > 0; i--) {
-        QVariantMap listItem;
         item = (UpHistoryItem *) g_ptr_array_index(values, i);
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
@@ -177,7 +174,8 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         /* Getting the next point after full charge, since upower registers only on state changes,
            typically you get no data while the device is fully charged and plugged and you get a discharging
            one when you unplugged, that's when the charge stops */
-        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED) {
+        if (up_history_item_get_state(item) == UP_DEVICE_STATE_FULLY_CHARGED ||
+                up_history_item_get_value(item) == 100.0) {
             if (i > 1) {
                 UpHistoryItem *nextItem = (UpHistoryItem *) g_ptr_array_index(values, i-1);
                 m_lastFullCharge = (int)((offset - (gint32) up_history_item_get_time(nextItem)));
@@ -190,10 +188,19 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
         listItem.insert("value", currentValue);
         listValues += listItem;
     }
+
+    /* Set an extra point, at the current time, with the previous value
+     * that's to workaround https://bugs.freedesktop.org/show_bug.cgi?id=68711
+     * otherwise a fully charged device lacks the flat full charge segment */
+    listItem.insert("time", 0);
+    listItem.insert("value", currentValue);
+    listValues += listItem;
+
     g_ptr_array_unref (values);
     return listValues;
 }
 
 Battery::~Battery() {
     g_object_unref(m_device);
+    g_object_unref(m_nm_client);
 }

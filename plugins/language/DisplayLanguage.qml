@@ -44,11 +44,11 @@ ItemPage {
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        ListItem.ValueSelector {
+        ListItem.ItemSelector {
             id: languageList
 
             text: i18n.tr("Display language")
-            values: plugin.languages
+            model: plugin.languages
             selectedIndex: plugin.currentLanguage
 
             expanded: true
