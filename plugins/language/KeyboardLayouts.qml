@@ -50,8 +50,6 @@ ItemPage {
             textEntry: display
             checkStatus: checked
 
-            opacity: 0
-
             onClicked: {
                 var element
 
@@ -64,23 +62,19 @@ ItemPage {
             }
         }
 
-        populate: Transition {
-            NumberAnimation { property: "opacity"; to: 1; duration: 0 }
-        }
-
         add: Transition {
-            NumberAnimation { property: "opacity"; to: 1; duration: 50 }
+            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 100 }
         }
 
         remove: Transition {
             ParallelAnimation {
-                NumberAnimation { property: "opacity"; to: 0; duration: 50 }
-                NumberAnimation { property: "y"; duration: 50 }
+                NumberAnimation { property: "opacity"; to: 0; duration: 100 }
+                NumberAnimation { property: "y"; duration: 100 }
             }
         }
 
         displaced: Transition {
-            NumberAnimation { property: "y"; duration: 50 }
+            NumberAnimation { property: "y"; duration: 100 }
         }
     }
 }
