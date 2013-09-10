@@ -265,7 +265,6 @@ ItemPage {
                     UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Unset") :
                       i18n.tr("Continue")
-            enabled: newInput.acceptableInput
             onClicked: {
                 var correct = !currentInput.visible ||
                         (currentInput.text == securityPrivacy.securityValue)
