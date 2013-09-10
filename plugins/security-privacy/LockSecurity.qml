@@ -66,6 +66,7 @@ ItemPage {
             newInput.text = ""
             confirmInput.text = ""
             incorrect.visible = false
+            notMatching.visible = false
             confirmButton.enabled = false
         }
 
