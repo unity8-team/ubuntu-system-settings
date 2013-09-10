@@ -60,12 +60,11 @@ ItemPage {
         id: welcomeLabel
 
         anchors {
-            top: parent.top
+            top: welcomeImage.bottom
             topMargin: units.gu(1)
             horizontalCenter: welcomeImage.horizontalCenter
         }
 
-        fontSize: "large"
         text: i18n.tr("Welcome screen")
     }
 
@@ -73,38 +72,24 @@ ItemPage {
         id: welcomeImage
 
         anchors {
-            top: welcomeLabel.bottom
+            top: parent.top
             left: parent.left
          }
 
         onClicked: {
             activeTransfer = ContentHub.importContent(ContentType.Pictures,
                                                       ContentHub.defaultSourceForType(ContentType.Pictures));
-            activeTransfer.start();
         }
 
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
     }
 
-    Label {
-        id: homeLabel
-
-        anchors {
-            top: parent.top
-            topMargin: units.gu(1)
-            horizontalCenter: homeImage.horizontalCenter
-        }
-
-        fontSize: "large"
-        text: i18n.tr("Home screen")
-    }
-
     SwappableImage {
         id: homeImage
 
         anchors {
-            top: welcomeLabel.bottom
+            top: parent.top
             right: parent.right
          }
 
@@ -114,8 +99,19 @@ ItemPage {
         onClicked: {
             activeTransfer = ContentHub.importContent(ContentType.Pictures,
                                                       ContentHub.defaultSourceForType(ContentType.Pictures));
-            activeTransfer.start();
         }
+    }
+
+    Label {
+        id: homeLabel
+
+        anchors {
+            top: homeImage.bottom
+            topMargin: units.gu(1)
+            horizontalCenter: homeImage.horizontalCenter
+        }
+
+        text: i18n.tr("Home screen")
     }
 
     /* We don't have a good way of doing this after passing an invalid image to
@@ -151,8 +147,8 @@ ItemPage {
         id: topDivider
 
         anchors {
-            topMargin: units.gu(3)
-            top: homeImage.bottom
+            topMargin: units.gu(2)
+            top: welcomeLabel.bottom
         }
     }
 
@@ -185,39 +181,20 @@ ItemPage {
         }
     }
 
-    ListItem.Standard {
-        id: sameBackground
-
-        property string previousImage
-
-        anchors.top: topDivider.bottom
-
-        text: i18n.tr("Same background for both")
-
-        selected: systemSettingsSettings.backgroundDuplicate
-
-        showDivider: false
-
-        onClicked: {
-            if (sameBackground.selected)
-                return
-            systemSettingsSettings.backgroundDuplicate = true
+    OptionSelector {
+        id: optionSelector
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: topDivider.bottom
+            topMargin: units.gu(2)
         }
-    }
+        width: parent.width - units.gu(4)
+        expanded: true
 
-    ListItem.Standard {
-        id: differentBackground
-
-        anchors.top: sameBackground.bottom
-
-        text: i18n.tr("Different background for each")
-
-        selected: !systemSettingsSettings.backgroundDuplicate
-
-        onClicked: {
-            if (differentBackground.selected)
-                return
-            systemSettingsSettings.backgroundDuplicate = false
+        model: [i18n.tr("Same background for both"),
+            i18n.tr("Different background for each")]
+        onSelectedIndexChanged: {
+            systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
         }
     }
 

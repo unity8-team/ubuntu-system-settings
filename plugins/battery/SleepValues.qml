@@ -43,9 +43,9 @@ ItemPage {
 
     GSettings {
         id: powerSettings
-        schema.id: usePowerd ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
+        schema.id: usePowerd ? "com.canonical.powerd" : "org.gnome.desktop.session"
         onChanged: {
-            if (key == "activityTimeout" || key == "sleepDisplayBattery")
+            if (key == "activityTimeout" || key == "idleDelay")
                 if([60,120,180,240,300].indexOf(value) != -1)
                     sleepSelector.selectedIndex = (value/60)-1
                 else if(value === 0)
@@ -55,7 +55,7 @@ ItemPage {
             if (usePowerd)
                 sleepSelector.selectedIndex = (powerSettings.activityTimeout === 0) ? 5 : powerSettings.activityTimeout/60-1
             else
-                sleepSelector.selectedIndex = (powerSettings.sleepDisplayBattery === 0) ? 5 : powerSettings.sleepDisplayBattery/60-1
+                sleepSelector.selectedIndex = (powerSettings.idleDelay === 0) ? 5 : powerSettings.idleDelay/60-1
         }
     }
 
@@ -94,7 +94,7 @@ ItemPage {
                   if (usePowerd)
                     powerSettings.activityTimeout = (index == 5) ? 0 : (index+1)*60
                   else
-                    powerSettings.sleepDisplayBattery = (index == 5) ? 0 : (index+1)*60
+                    powerSettings.idleDelay = (index == 5) ? 0 : (index+1)*60
                 }
             }
 
