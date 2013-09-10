@@ -58,7 +58,6 @@ Component {
                 selectedIndex: plugin.currentLanguage
 
                 expanded: true
-                onExpandedChanged: expanded = true
             }
         }
 
