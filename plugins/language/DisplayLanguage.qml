@@ -21,85 +21,94 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
-ItemPage {
+Component {
     id: root
 
-    title: i18n.tr("Display language")
+    SheetBase {
+        id: sheet
 
-    UbuntuLanguagePlugin {
-        id: plugin
-    }
+        modal: true
+        title: i18n.tr("Display language")
 
-    Flickable {
-        clip: true
+        contentsWidth: parent.width
+        contentsHeight: parent.height
 
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: divider.top
-
-        contentHeight: contentItem.childrenRect.height
-
-        ListItem.ItemSelector {
-            id: languageList
-
-            text: i18n.tr("Display language")
-            model: plugin.languages
-            selectedIndex: plugin.currentLanguage
-
-            expanded: true
-            onExpandedChanged: expanded = true
+        UbuntuLanguagePlugin {
+            id: plugin
         }
-    }
 
-    ListItem.ThinDivider {
-        id: divider
+        Flickable {
+            clip: true
 
-        anchors.bottom: buttonRectangle.top
-    }
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: divider.top
 
-    Item {
-        id: buttonRectangle
+            contentHeight: contentItem.childrenRect.height
 
-        height: cancelButton.height + units.gu(2)
+            ListItem.ItemSelector {
+                id: languageList
 
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
+                model: plugin.languages
+                selectedIndex: plugin.currentLanguage
 
-        Button {
-            id: cancelButton
+                expanded: true
+            }
+        }
+
+        ListItem.ThinDivider {
+            id: divider
+
+            anchors.bottom: buttonRectangle.top
+        }
+
+        Item {
+            id: buttonRectangle
+
+            height: cancelButton.height + units.gu(2)
 
             anchors.left: parent.left
-            anchors.right: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.topMargin: units.gu(1)
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(1)
-            anchors.bottomMargin: units.gu(1)
-
-            text: i18n.tr("Cancel")
-            onClicked: pageStack.pop()
-        }
-
-        Button {
-            id: confirmButton
-
-            anchors.left: parent.horizontalCenter
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.topMargin: units.gu(1)
-            anchors.leftMargin: units.gu(1)
-            anchors.rightMargin: units.gu(2)
-            anchors.bottomMargin: units.gu(1)
 
-            text: i18n.tr("Confirm")
-            onClicked: {
-                plugin.currentLanguage = languageList.selectedIndex
-                pageStack.pop()
+            Button {
+                id: cancelButton
+
+                text: i18n.tr("Cancel")
+
+                anchors.left: parent.left
+                anchors.right: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                anchors.topMargin: units.gu(1)
+                anchors.leftMargin: units.gu(2)
+                anchors.rightMargin: units.gu(1)
+                anchors.bottomMargin: units.gu(1)
+
+                onClicked: PopupUtils.close(sheet)
+            }
+
+            Button {
+                id: confirmButton
+
+                text: i18n.tr("Confirm")
+
+                anchors.left: parent.horizontalCenter
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.topMargin: units.gu(1)
+                anchors.leftMargin: units.gu(1)
+                anchors.rightMargin: units.gu(2)
+                anchors.bottomMargin: units.gu(1)
+
+                onClicked: {
+                    plugin.currentLanguage = languageList.selectedIndex
+                    PopupUtils.close(sheet)
+                }
             }
         }
     }
