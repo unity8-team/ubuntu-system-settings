@@ -234,11 +234,10 @@ ItemPage {
                         }
                     }
 
-                    // FIXME: use the right widget then
-                    ListItem.ValueSelector {
+                    ListItem.ItemSelector {
                         id: versionId
                         text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
-                        values: updateBackend.updateDescriptions
+                        model: updateBackend.updateDescriptions
                         selectedIndex: -1
                         showDivider: false
                     }
@@ -323,21 +322,20 @@ ItemPage {
 
             ListItem.ThinDivider {}
 
-            ListItem.Standard {
-                text: i18n.tr ("Download future updates automatically:")
-            }
-            // TODO: this widget needs to be replace by the real one
-            ListItem.ValueSelector {
-                id: upgradePolicySelector
-                expanded: true
-                onExpandedChanged: expanded = true
-                values: [i18n.tr("Never"),
-                    i18n.tr("When on wi-fi"),
-                    // TODO: Data charges may apply needs to be smaller
-                    i18n.tr("On any data connection\nData charges may apply.")]
-                selectedIndex: updateBackend.downloadMode
-                onSelectedIndexChanged: updateBackend.downloadMode = selectedIndex
-            }
         }
+    }
+    ListItem.SingleValue {
+        anchors.bottom: parent.bottom
+        text: i18n.tr("Auto download")
+        value: {
+            if (updateBackend.downloadMode === 0)
+                return i18n.tr("Never")
+            else if (updateBackend.downloadMode === 1)
+                return i18n.tr("On wi-fi")
+            else if (updateBackend.downloadMode === 2)
+                return i18n.tr("Always")
+        }
+       progression: true
+       onClicked: pageStack.push(Qt.resolvedUrl("Download.qml"), {updateBackend: updateBackend})
     }
 }

@@ -27,10 +27,5 @@
             <summary>Whether the applications should be sorted by name.</summary>
             <description>If true the applications are sorted by name, otherwise by disk size.</description>
         </key>
-        <key name="unlock-method" enum="enum-unlock-method">
-            <default>"swipe"</default>
-            <summary>The unlocking method in use</summary>
-            <description>If 'swipe', unlock by swiping the screen (no security). If 'passcode', use a 4-digit number to unlock. If 'password', use a free-text password.</description>
-        </key>
     </schema>
 </schemalist>

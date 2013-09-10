@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-03 09:30+0000\n"
-"PO-Revision-Date: 2013-08-22 11:26+0000\n"
+"POT-Creation-Date: 2013-09-06 18:22+0200\n"
+"PO-Revision-Date: 2013-09-07 12:28+0000\n"
 "Last-Translator: Pyae Sone <Unknown>\n"
 "Language-Team: Burmese <my@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-09-04 05:05+0000\n"
-"X-Generator: Launchpad (build 16753)\n"
+"X-Launchpad-Export-Date: 2013-09-10 05:24+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -27,8 +27,8 @@ msgid "Serial"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/battery/PageComponent.qml:109
-#: ../plugins/battery/PageComponent.qml:116
+#: ../plugins/battery/PageComponent.qml:110
+#: ../plugins/battery/PageComponent.qml:117
 #: ../plugins/cellular/PageComponent.qml:75
 msgid "N/A"
 msgstr ""
@@ -46,9 +46,9 @@ msgid "Last updated"
 msgstr "နောက်ဆုံးအသစ်ဆွဲခဲ့စဉ်"
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:211
-#: ../plugins/battery/PageComponent.qml:219
-#: ../plugins/battery/SleepValues.qml:95
+#: ../plugins/battery/PageComponent.qml:212
+#: ../plugins/battery/PageComponent.qml:220
+#: ../plugins/battery/SleepValues.qml:91
 #: ../plugins/system-update/PageComponent.qml:334
 msgid "Never"
 msgstr "ဘယ်တော့မှ"
@@ -129,19 +129,19 @@ msgstr "အရွယ်အစားအရ"
 msgid "Background"
 msgstr "နောက်ခံ"
 
-#: ../plugins/background/MainPage.qml:69
+#: ../plugins/background/MainPage.qml:68
 msgid "Welcome screen"
 msgstr "ကြိုဆိုသည့်စခရင်"
 
-#: ../plugins/background/MainPage.qml:100
+#: ../plugins/background/MainPage.qml:114
 msgid "Home screen"
 msgstr "ပင်မစာမျက်နှာ"
 
-#: ../plugins/background/MainPage.qml:195
+#: ../plugins/background/MainPage.qml:194
 msgid "Same background for both"
 msgstr "နှစ်ခုလုံးအတွက်နောက်ခံအတူတူ"
 
-#: ../plugins/background/MainPage.qml:213
+#: ../plugins/background/MainPage.qml:195
 msgid "Different background for each"
 msgstr "တစ်ခုခြင်းဆီအတွက်နောက်ခံကွဲမည်"
 
@@ -149,123 +149,113 @@ msgstr "တစ်ခုခြင်းဆီအတွက်နောက်ခံ
 msgid "Battery"
 msgstr "ဘက်ထရီ"
 
-#: ../plugins/battery/PageComponent.qml:39
-msgid "1 second ago"
-msgstr ""
-
-#: ../plugins/battery/PageComponent.qml:41
-#, qt-format
-msgid "%1 seconds ago"
-msgstr ""
-
 #: ../plugins/battery/PageComponent.qml:43
-msgid "1 minute ago"
-msgstr "၁ မိနစ်အရင်က"
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/battery/PageComponent.qml:45
 #, qt-format
-msgid "%1 minutes ago"
-msgstr "%1 မိနစ်အရင်က"
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/battery/PageComponent.qml:47
-msgid "1 hour ago"
-msgstr "1 နာရီအရင်က"
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/battery/PageComponent.qml:49
 #, qt-format
-msgid "%1 hours ago"
-msgstr "%1 နာရီအရင်က"
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 ရက်အရင်က"
 
-#: ../plugins/battery/PageComponent.qml:51
-msgid "1 day ago"
-msgstr "1 ရက်အရင်က"
-
-#: ../plugins/battery/PageComponent.qml:53
-#, qt-format
-msgid "%1 days ago"
-msgstr "%1 ရက်အရင်က"
-
-#: ../plugins/battery/PageComponent.qml:69
+#: ../plugins/battery/PageComponent.qml:70
 msgid "Charging now"
 msgstr "ယခုအားသွင်းနေသည်"
 
-#: ../plugins/battery/PageComponent.qml:73
+#: ../plugins/battery/PageComponent.qml:74
 msgid "Last full charge"
 msgstr "နောက်ဆုံးအားအပြည့်သွင်းချိန်"
 
-#: ../plugins/battery/PageComponent.qml:77
+#: ../plugins/battery/PageComponent.qml:78
 msgid "Fully charged"
 msgstr "အားအပြည့်သွင်းပြီးပါပြီ"
 
-#: ../plugins/battery/PageComponent.qml:83
+#: ../plugins/battery/PageComponent.qml:84
 #, qt-format
 msgid "%1 %"
 msgstr "%1 %"
 
-#: ../plugins/battery/PageComponent.qml:108
+#: ../plugins/battery/PageComponent.qml:109
 msgid "Charge level"
 msgstr "အားသွင်းမှု့အဆင့်"
 
-#: ../plugins/battery/PageComponent.qml:160
+#: ../plugins/battery/PageComponent.qml:161
 msgid "Ways to reduce battery use:"
 msgstr "ဘတ်ထရီသုံးမှု့လျော့ရန်နည်းလမ်း -"
 
-#: ../plugins/battery/PageComponent.qml:164
+#: ../plugins/battery/PageComponent.qml:165
 msgid "Display brightness"
 msgstr "အလင်း ကိုပြမည်"
 
-#: ../plugins/battery/PageComponent.qml:203
-#: ../plugins/security-privacy/PhoneLocking.qml:62
+#: ../plugins/battery/PageComponent.qml:204
+#: ../plugins/security-privacy/PhoneLocking.qml:61
 msgid "Lock when idle"
-msgstr ""
+msgstr "အားလပ်နေချိန်တွင်သော့ခတ်ထားမည်"
 
-#: ../plugins/battery/PageComponent.qml:203
-#: ../plugins/security-privacy/PhoneLocking.qml:63
+#: ../plugins/battery/PageComponent.qml:204
+#: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Sleep when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:208
-#: ../plugins/battery/PageComponent.qml:216
-#: ../plugins/battery/SleepValues.qml:80 ../plugins/battery/SleepValues.qml:83
-#: ../plugins/battery/SleepValues.qml:86 ../plugins/battery/SleepValues.qml:89
-#: ../plugins/battery/SleepValues.qml:92
+#: ../plugins/battery/PageComponent.qml:209
+#: ../plugins/battery/PageComponent.qml:217
+#: ../plugins/battery/SleepValues.qml:76 ../plugins/battery/SleepValues.qml:79
+#: ../plugins/battery/SleepValues.qml:82 ../plugins/battery/SleepValues.qml:85
+#: ../plugins/battery/SleepValues.qml:88
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1မိနစ်ကြာပြီးနောက်"
 
-#: ../plugins/battery/PageComponent.qml:228 ../.build/settings.js:18
+#: ../plugins/battery/PageComponent.qml:229 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../plugins/battery/PageComponent.qml:236 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:237 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:244
+#: ../plugins/battery/PageComponent.qml:245
 msgid "GPS"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:252
+#: ../plugins/battery/PageComponent.qml:253
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:71
+#: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "မသုံးဖြစ်တော့ရင်ဖုန်းကိုခဏပိတ်ထားမည်-"
 
-#: ../plugins/battery/SleepValues.qml:71
+#: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:105
+#: ../plugins/battery/SleepValues.qml:102
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
 
-#: ../plugins/battery/SleepValues.qml:105
+#: ../plugins/battery/SleepValues.qml:102
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 
@@ -276,7 +266,7 @@ msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:80
 msgid "Refresh"
-msgstr ""
+msgstr "ပြန်လည်ဖွင့်ခြင်း"
 
 #: ../plugins/cellular/ChooseCarrier.qml:97
 msgid "Searching"
@@ -334,13 +324,14 @@ msgstr "ပြသမည့်ဘာသာ"
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:36
-#: ../plugins/security-privacy/LockSecurity.qml:211
+#: ../plugins/reset/ResetLauncherHome.qml:40
+#: ../plugins/security-privacy/LockSecurity.qml:221
+#: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
 msgstr "ပယ်ဖျက်မည်"
 
 #: ../plugins/language/DisplayLanguage.qml:99
-#: ../plugins/security-privacy/LockSecurity.qml:167
+#: ../plugins/security-privacy/LockSecurity.qml:177
 msgid "Confirm"
 msgstr "အတည်ပြု"
 
@@ -425,6 +416,7 @@ msgid "Contacts…"
 msgstr "ဆက်သွယ်လူစာရင်း"
 
 #: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/time-date/TimePicker.qml:189
 msgid "Set"
 msgstr "သတ်မှတ်"
 
@@ -468,24 +460,24 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "ဖျက် နှင့် အားလုံးအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "ဖုန်းကိုအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "launcher နှင့်ပင်မမျက်နှာပြင်ကိုအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr ""
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -495,7 +487,7 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr ""
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr ""
 
@@ -522,11 +514,11 @@ msgstr "ဖုန်းနှင့်အင်တာနက်"
 
 #: ../plugins/security-privacy/Location.qml:29
 msgid "Location"
-msgstr ""
+msgstr "တည်နေရာ"
 
 #: ../plugins/security-privacy/Location.qml:36
 msgid "Location detection"
-msgstr ""
+msgstr "တည်နေရာသိရှိနိုင်ခြင်း"
 
 #: ../plugins/security-privacy/Location.qml:45
 msgid ""
@@ -573,96 +565,108 @@ msgstr ""
 
 #: ../plugins/security-privacy/Location.qml:62
 msgid "Allow access to location:"
-msgstr ""
+msgstr "တည်နေရာကိုသုံးရန်ခွင့်ပြုမည် -"
 
 #: ../plugins/security-privacy/LockSecurity.qml:29
 #: ../plugins/security-privacy/PhoneLocking.qml:44
 msgid "Lock security"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:73
-msgid "Switch to Swipe"
-msgstr ""
-
 #: ../plugins/security-privacy/LockSecurity.qml:75
-msgid "Switch to Passcode"
+msgid "Change passcode"
 msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:77
-msgid "Switch to Passphrase"
+msgid "Change passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:85
+#: ../plugins/security-privacy/LockSecurity.qml:82
+msgid "Switch to swipe"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:84
+msgid "Switch to passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:86
+msgid "Switch to passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:95
 msgid "Existing passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:87
+#: ../plugins/security-privacy/LockSecurity.qml:97
 msgid "Existing passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:90
+#: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing"
-msgstr ""
+msgstr "ထွက်နေသည်"
 
-#: ../plugins/security-privacy/LockSecurity.qml:124
+#: ../plugins/security-privacy/LockSecurity.qml:134
 msgid "Choose passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:126
+#: ../plugins/security-privacy/LockSecurity.qml:136
 msgid "Choose passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:129
+#: ../plugins/security-privacy/LockSecurity.qml:139
 msgid "Choose"
-msgstr ""
+msgstr "ရွေးမည်"
 
-#: ../plugins/security-privacy/LockSecurity.qml:162
+#: ../plugins/security-privacy/LockSecurity.qml:172
 msgid "Confirm passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:164
+#: ../plugins/security-privacy/LockSecurity.qml:174
 msgid "Conrifm passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:198
+#: ../plugins/security-privacy/LockSecurity.qml:208
 msgid "Unset"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:199
+#: ../plugins/security-privacy/LockSecurity.qml:209
 msgid "Continue"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:226
+#: ../plugins/security-privacy/LockSecurity.qml:236
 msgid "Unlock the phone using:"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:230
+#: ../plugins/security-privacy/LockSecurity.qml:240
 msgid "Swipe (no security)"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:231
+#: ../plugins/security-privacy/LockSecurity.qml:241
 msgid "4-digit passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:232
+#: ../plugins/security-privacy/LockSecurity.qml:242
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:233
+#: ../plugins/security-privacy/LockSecurity.qml:243
 msgid "Swipe (no security)… "
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:234
+#: ../plugins/security-privacy/LockSecurity.qml:244
 msgid "4-digit passcode…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:235
+#: ../plugins/security-privacy/LockSecurity.qml:245
 msgid "Passphrase…"
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:271
+#: ../plugins/security-privacy/LockSecurity.qml:284
 msgid "Change passcode…"
+msgstr ""
+
+#: ../plugins/security-privacy/LockSecurity.qml:285
+msgid "Change passphrase…"
 msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:14
@@ -679,7 +683,7 @@ msgid "Phone locking"
 msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:70
-#: ../plugins/security-privacy/PhoneLocking.qml:64
+#: ../plugins/security-privacy/PhoneLocking.qml:63
 #, qt-format
 msgid "1 minute"
 msgid_plural "%1 minutes"
@@ -730,7 +734,7 @@ msgstr ""
 msgid "Passcode"
 msgstr ""
 
-#: ../plugins/security-privacy/PhoneLocking.qml:76
+#: ../plugins/security-privacy/PhoneLocking.qml:75
 msgid "Sleep locks immediately"
 msgstr ""
 
@@ -774,7 +778,7 @@ msgstr "အသံသော့ခတ်"
 msgid "The phone is in Silent Mode."
 msgstr "ဖုန်းသည်တိတ်ဆိတ်သည့်ပုံစံ"
 
-#: ../plugins/sound/SoundsList.qml:60
+#: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
 msgstr "ဖွင့်ထားတာရပ်မည်"
 
@@ -888,31 +892,119 @@ msgstr "အချိန်နယ်ပယ်သတ်မှတ်မည်-"
 msgid "No matching place"
 msgstr "တူညီသည့်နေရာမရှိ"
 
-#: ../plugins/time-date/PageComponent.qml:28 ../.build/settings.js:17
+#: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
 msgstr "အချိန်နှင့်ရက်စွဲ"
 
-#: ../plugins/time-date/PageComponent.qml:51
+#: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
 msgstr "အချိန်နယ်ပယ်-"
 
-#: ../plugins/time-date/PageComponent.qml:63
+#: ../plugins/time-date/PageComponent.qml:64
 msgid "Set the time and date:"
 msgstr "အချိန်နှင့်ရက်သတ်မှတ်မည်"
+
+#: ../plugins/time-date/TimePicker.qml:26
+msgid "Set time & date"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:68
+msgid "Time"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:81
+msgid "Hour"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:95
+msgid "Minute"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:109
+msgid "Second"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:118
+msgid "Date"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:130
+msgid "Day"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:144
+msgid "Month"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:148
+msgid "January"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:149
+msgid "February"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:150
+msgid "March"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:151
+msgid "April"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:152
+msgid "May"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:153
+msgid "June"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:154
+msgid "July"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:155
+msgid "August"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:156
+msgid "September"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:157
+msgid "October"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:158
+msgid "November"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:159
+msgid "December"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:169
+msgid "Year"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "ကွန်ယက်"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "ကိုယ်ရေးကိုယ်တာ"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "စနစ်"
 
@@ -933,5 +1025,5 @@ msgid "Flight mode"
 msgstr ""
 
 #: ../.build/settings.js:11
-msgid "Rotation lock"
-msgstr "လှည့်နေသောသော့"
+msgid "Orientation lock"
+msgstr ""

@@ -23,13 +23,13 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     title: i18n.tr("Phone locking")
 
-    GSettings {
-        id: settingsSchema
-        schema.id: "com.ubuntu.touch.system-settings"
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
     }
 
     Column {
@@ -43,12 +43,12 @@ ItemPage {
 
             text: i18n.tr("Lock security")
             value: {
-                switch (settingsSchema.unlockMethod) {
-                    case "swipe":
+                switch (securityPrivacy.securityType) {
+                    case UbuntuSecurityPrivacyPanel.Swipe:
                         return swipe
-                    case "passcode":
+                    case UbuntuSecurityPrivacyPanel.Passcode:
                         return passcode
-                    case "password":
+                    case UbuntuSecurityPrivacyPanel.Passphrase:
                         return passphrase
                 }
             }
@@ -57,8 +57,8 @@ ItemPage {
         }
 
         ListItem.SingleValue {
-            /* TODO: Use real configuration */
-            property bool lockOnSuspend: false
+            property bool lockOnSuspend: securityPrivacy.securityType !==
+                                            UbuntuSecurityPrivacyPanel.Swipe
             text: lockOnSuspend ? i18n.tr("Lock when idle")
                                 : i18n.tr("Sleep when idle")
             value: i18n.tr("1 minute",
