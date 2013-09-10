@@ -66,6 +66,7 @@ ItemPage {
             newInput.text = ""
             confirmInput.text = ""
             incorrect.visible = false
+            confirmButton.enabled = false
         }
 
         title: {
@@ -133,6 +134,11 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Passphrase ||
                      changeSecurityDialog.oldMethod ===
                          UbuntuSecurityPrivacyPanel.Passcode
+            onTextChanged: {
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Swipe)
+                    confirmButton.enabled = text.length > 0
+            }
         }
 
         Label {
@@ -265,6 +271,7 @@ ItemPage {
                     UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Unset") :
                       i18n.tr("Continue")
+            enabled: false
             onClicked: {
                 var correct = !currentInput.visible ||
                         (currentInput.text == securityPrivacy.securityValue)
