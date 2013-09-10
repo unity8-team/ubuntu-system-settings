@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-06 15:25+0000\n"
+"POT-Creation-Date: 2013-09-06 18:22+0200\n"
 "PO-Revision-Date: 2013-09-07 12:28+0000\n"
 "Last-Translator: Pyae Sone <Unknown>\n"
 "Language-Team: Burmese <my@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-09-08 05:04+0000\n"
-"X-Generator: Launchpad (build 16760)\n"
+"X-Launchpad-Export-Date: 2013-09-10 05:24+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -133,15 +133,15 @@ msgstr "နောက်ခံ"
 msgid "Welcome screen"
 msgstr "ကြိုဆိုသည့်စခရင်"
 
-#: ../plugins/background/MainPage.qml:116
+#: ../plugins/background/MainPage.qml:114
 msgid "Home screen"
 msgstr "ပင်မစာမျက်နှာ"
 
-#: ../plugins/background/MainPage.qml:196
+#: ../plugins/background/MainPage.qml:194
 msgid "Same background for both"
 msgstr "နှစ်ခုလုံးအတွက်နောက်ခံအတူတူ"
 
-#: ../plugins/background/MainPage.qml:197
+#: ../plugins/background/MainPage.qml:195
 msgid "Different background for each"
 msgstr "တစ်ခုခြင်းဆီအတွက်နောက်ခံကွဲမည်"
 
@@ -1025,5 +1025,5 @@ msgid "Flight mode"
 msgstr ""
 
 #: ../.build/settings.js:11
-msgid "Rotation lock"
-msgstr "လှည့်နေသောသော့"
+msgid "Orientation lock"
+msgstr ""

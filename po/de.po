@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-06 15:25+0000\n"
+"POT-Creation-Date: 2013-09-06 18:22+0200\n"
 "PO-Revision-Date: 2013-09-06 19:15+0000\n"
 "Last-Translator: Phillip Sz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-07 05:42+0000\n"
-"X-Generator: Launchpad (build 16760)\n"
+"X-Launchpad-Export-Date: 2013-09-10 05:24+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -133,15 +133,15 @@ msgstr "Hintergrund"
 msgid "Welcome screen"
 msgstr "Startbildschirm"
 
-#: ../plugins/background/MainPage.qml:116
+#: ../plugins/background/MainPage.qml:114
 msgid "Home screen"
 msgstr "Startseite"
 
-#: ../plugins/background/MainPage.qml:196
+#: ../plugins/background/MainPage.qml:194
 msgid "Same background for both"
 msgstr "Gleicher Hintergrund für beide"
 
-#: ../plugins/background/MainPage.qml:197
+#: ../plugins/background/MainPage.qml:195
 msgid "Different background for each"
 msgstr "Unterschiedlicher Hintergrund für jedes"
 
@@ -1052,5 +1052,5 @@ msgid "Flight mode"
 msgstr "Flugmodus"
 
 #: ../.build/settings.js:11
-msgid "Rotation lock"
-msgstr "Rotationssperre"
+msgid "Orientation lock"
+msgstr ""
