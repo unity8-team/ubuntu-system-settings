@@ -8,9 +8,11 @@ QML_SOURCES = \
     AccessPoint.qml \
     BaseMenuItem.qml \
     BasicMenuItem.qml \
+    CachedMenuModel.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
     HLine.qml \
+    IndicatorBase.qml \
     MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
@@ -24,9 +26,11 @@ OTHER_FILES += \
     AccessPoint.qml \
     BaseMenuItem.qml \
     BasicMenuItem.qml \
+    CachedMenuModel.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
     HLine.qml \
+    IndicatorBase.qml \
     MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
