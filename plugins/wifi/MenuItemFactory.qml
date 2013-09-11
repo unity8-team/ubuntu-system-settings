@@ -26,17 +26,17 @@ Item {
     property var model: null
 
     property var _map:  {
-        "unity.widgets.systemsettings.tablet.volumecontrol" : sliderMenu,
+        // "unity.widgets.systemsettings.tablet.volumecontrol" : sliderMenu,
         "unity.widgets.systemsettings.tablet.switch"        : switchMenu,
 
-        "com.canonical.indicator.button"    : buttonMenu,
+        // "com.canonical.indicator.button"    : buttonMenu,
         "com.canonical.indicator.div"       : divMenu,
         "com.canonical.indicator.section"   : sectionMenu,
-        "com.canonical.indicator.progress"  : progressMenu,
-        "com.canonical.indicator.slider"    : sliderMenu,
+        // "com.canonical.indicator.progress"  : progressMenu,
+        // "com.canonical.indicator.slider"    : sliderMenu,
         "com.canonical.indicator.switch"    : switchMenu,
 
-        "com.canonical.unity.slider"    : sliderMenu,
+        // "com.canonical.unity.slider"    : sliderMenu,
         "com.canonical.unity.switch"    : switchMenu,
 
         "unity.widgets.systemsettings.tablet.wifisection" : wifiSection,
