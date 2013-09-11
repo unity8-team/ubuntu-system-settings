@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-06 15:25+0000\n"
+"POT-Creation-Date: 2013-09-06 18:22+0200\n"
 "PO-Revision-Date: 2013-07-04 19:52+0000\n"
 "Last-Translator: George Christofis <geochr22@gmail.com>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-07 05:42+0000\n"
-"X-Generator: Launchpad (build 16760)\n"
+"X-Launchpad-Export-Date: 2013-09-10 05:25+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -133,15 +133,15 @@ msgstr "Φόντο"
 msgid "Welcome screen"
 msgstr "Οθόνη υποδοχής"
 
-#: ../plugins/background/MainPage.qml:116
+#: ../plugins/background/MainPage.qml:114
 msgid "Home screen"
 msgstr "Αρχική οθόνη"
 
-#: ../plugins/background/MainPage.qml:196
+#: ../plugins/background/MainPage.qml:194
 msgid "Same background for both"
 msgstr "Ίδιο φόντο και για τα δύο"
 
-#: ../plugins/background/MainPage.qml:197
+#: ../plugins/background/MainPage.qml:195
 msgid "Different background for each"
 msgstr "Διαφορετικό φόντα για το καθένα"
 
@@ -1029,5 +1029,5 @@ msgid "Flight mode"
 msgstr "Λειτουργία πτήσης"
 
 #: ../.build/settings.js:11
-msgid "Rotation lock"
-msgstr "Κλείδωμα περιστροφής"
+msgid "Orientation lock"
+msgstr ""

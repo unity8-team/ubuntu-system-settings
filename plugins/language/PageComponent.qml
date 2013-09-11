@@ -21,6 +21,7 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
@@ -31,6 +32,10 @@ ItemPage {
 
     UbuntuLanguagePlugin {
         id: plugin
+    }
+
+    DisplayLanguage {
+        id: displayLanguage
     }
 
     Flickable {
@@ -47,7 +52,7 @@ ItemPage {
                 value: plugin.languages[plugin.currentLanguage]
                 progression: true
 
-                onClicked: pageStack.push(Qt.resolvedUrl("DisplayLanguage.qml"))
+                onClicked: PopupUtils.open(displayLanguage)
             }
 
             ListItem.Divider {}

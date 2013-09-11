@@ -65,6 +65,9 @@ ItemPage {
             currentInput.text = ""
             newInput.text = ""
             confirmInput.text = ""
+            incorrect.visible = false
+            notMatching.visible = false
+            confirmButton.enabled = false
         }
 
         title: {
@@ -132,6 +135,28 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Passphrase ||
                      changeSecurityDialog.oldMethod ===
                          UbuntuSecurityPrivacyPanel.Passcode
+            onTextChanged: {
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Swipe)
+                    confirmButton.enabled = text.length > 0
+            }
+        }
+
+        Label {
+            id: incorrect
+            text: {
+                if (changeSecurityDialog.oldMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode)
+                    return i18n.tr("Incorrect passcode. Try again.")
+                if (changeSecurityDialog.oldMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase)
+                    return i18n.tr("Incorrect passphrase. Try again.")
+
+                //Fallback to prevent warnings. Not displayed.
+                return i18n.tr("Incorrect. Try again.")
+            }
+            visible: false
+            color: "darkred"
         }
 
         Label {
@@ -175,6 +200,9 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Passcode ||
                      changeSecurityDialog.newMethod ===
                         UbuntuSecurityPrivacyPanel.Passphrase
+            // Doesn't get updated if you set this in enabled of confirmButton
+            onTextChanged: confirmButton.enabled =
+                           (acceptableInput && (!visible || text.length > 0))
         }
 
         Label {
@@ -220,19 +248,60 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Passphrase
         }
 
+        Label {
+            id: notMatching
+            text: {
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passcode)
+                    return i18n.tr("Those passcodes don't match. Try again.")
+                if (changeSecurityDialog.newMethod ===
+                        UbuntuSecurityPrivacyPanel.Passphrase)
+                    return i18n.tr("Those passphrases don't match. Try again.")
+
+                //Fallback to prevent warnings. Not displayed.
+                return i18n.tr("Incorrect. Try again.")
+            }
+            visible: false
+            color: "darkred"
+        }
+
         Button {
+            id: confirmButton
+
             text: changeSecurityDialog.newMethod ===
                     UbuntuSecurityPrivacyPanel.Swipe ?
                       i18n.tr("Unset") :
                       i18n.tr("Continue")
-            enabled: newInput.text == confirmInput.text
+            enabled: false
             onClicked: {
-                PopupUtils.close(changeSecurityDialog)
-                //TODO: Check it's correct before updating and do the update
-                securityPrivacy.securityType =
-                        indexToMethod(unlockMethod.selectedIndex)
+                var correct = !currentInput.visible ||
+                        (currentInput.text == securityPrivacy.securityValue)
+                var match = (newInput.text == confirmInput.text)
 
-                changeSecurityDialog.clearInputs()
+                incorrect.visible = !correct
+
+                if (correct) // one problem at a time
+                    notMatching.visible = !match
+
+                if (correct && match) {
+                    PopupUtils.close(changeSecurityDialog)
+                    securityPrivacy.securityType =
+                            indexToMethod(unlockMethod.selectedIndex)
+                    securityPrivacy.securityValue = newInput.text
+                    changeSecurityDialog.clearInputs()
+                }
+
+                if (!correct) {
+                    currentInput.forceActiveFocus()
+                    currentInput.selectAll()
+                    return
+                }
+
+
+                if (!match) {
+                    newInput.forceActiveFocus()
+                    newInput.selectAll()
+                }
             }
 
         }
