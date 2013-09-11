@@ -5,11 +5,13 @@ TEMPLATE = lib
 TARGET = wifi
 
 QML_SOURCES = \
-    PageComponent.qml
+    PageComponent.qml \
+    MenuItemFactory.qml
 
 OTHER_FILES += \
     $${QML_SOURCES} \
-    PageComponent.qml
+    PageComponent.qml \
+    MenuItemFactory.qml
 
 qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
