@@ -15,38 +15,40 @@
  *
  * Authors:
  *      Renato Araujo Oliveira Filho <renato@canonical.com>
- *      Nick Dedekind <nick.dedekind@canonical.com>
  */
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 
-FramedMenuItem {
+BaseMenuItem {
     id: menuItem
+    property alias text: header.text
+    property bool busy: false
 
-    property bool checked: false
+    implicitHeight: text !== "" ? header.height : 0
 
-    signal activate()
+    ListItem.Header {
+        id: header
 
-    onCheckedChanged: {
-        // Can't rely on binding. Checked is assigned on click.
-        switcher.checked = checked;
-    }
-
-    control: Switch {
-        id: switcher
-
-        Component.onCompleted: {
-            checked = menuItem.checked;
+        height: units.gu(4)
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
         }
+        visible: text != ""
 
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-
-        // FIXME : should use Checkbox.toggled signal
-        // lp:~nick-dedekind/ubuntu-ui-toolkit/checkbox.toggled
-        onClicked: {
-            menuItem.activate();
+        ActivityIndicator {
+            id: indicator
+            running: busy
+            anchors {
+                margins: units.gu(0.5)
+                right: parent.right
+            }
+            height: parent.height - (anchors.margins * 2)
+            width: height
+            anchors.verticalCenter: parent.verticalCenter
         }
     }
 }

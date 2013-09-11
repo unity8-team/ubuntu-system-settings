@@ -43,6 +43,7 @@ Item {
         "unity.widgets.systemsettings.tablet.accesspoint" : accessPoint,
     }
 
+/*
     Component {
         id: sliderMenu;
         Indicators.SliderMenuItem {
@@ -91,9 +92,11 @@ Item {
             }
         }
     }
+*/
 
-    Component { id: divMenu; Indicators.DivMenuItem {} }
+    Component { id: divMenu; DivMenuItem {} }
 
+/*
     Component {
         id: buttonMenu;
         Indicators.ButtonMenuItem {
@@ -105,15 +108,18 @@ Item {
             onActivate: model.activate(modelIndex);
         }
     }
+*/
+
     Component {
         id: sectionMenu;
-        Indicators.SectionMenuItem {
+        SectionMenuItem {
             property QtObject menu: null
 
             text: menu && menu.label ? menu.label : ""
         }
     }
 
+/*
     Component {
         id: progressMenu;
         Indicators.ProgressMenuItem {
@@ -124,10 +130,11 @@ Item {
             value : menu ? menu.actionState : 0.0
         }
     }
+*/
 
     Component {
         id: standardMenu;
-        Indicators.StandardMenuItem {
+        StandardMenuItem {
             property QtObject menu: null
 
             text: menu && menu.label ? menu.label : ""
@@ -142,7 +149,7 @@ Item {
 
     Component {
         id: switchMenu;
-        Indicators.SwitchMenuItem {
+        SwitchMenuItem {
             property QtObject menu: null
 
             text: menu && menu.label ? menu.label : ""
@@ -156,7 +163,7 @@ Item {
 
     Component {
         id: wifiSection;
-        Indicators.SectionMenuItem {
+        SectionMenuItem {
             property QtObject menu: null
 
             text: menu && menu.label ? menu.label : ""
