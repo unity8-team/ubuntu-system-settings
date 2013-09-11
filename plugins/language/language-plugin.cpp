@@ -81,8 +81,7 @@ comparePlugins(KeyboardPlugin *plugin0,
 static QList<QLocale> *
 getLanguageLocales()
 {
-    if (languageLocales == NULL)
-    {
+    if (languageLocales == NULL) {
         languageLocales = new QList<QLocale>;
 
         QSet<QLocale::Language> allLanguages;
@@ -90,14 +89,14 @@ getLanguageLocales()
                                                              QLocale::AnyScript,
                                                              QLocale::AnyCountry);
 
-        for (QList<QLocale>::const_iterator i = allLocales.begin(); i != allLocales.end(); ++i)
-        {
+        for (QList<QLocale>::const_iterator i = allLocales.begin(); i != allLocales.end(); ++i) {
             QLocale::Language language = i->language();
 
-            if (language != QLocale::AnyLanguage &&
+            bool uniqueLanguage = language != QLocale::AnyLanguage &&
                 !i->nativeLanguageName().trimmed().toCaseFolded().isEmpty() &&
-                !allLanguages.contains(language))
-            {
+                !allLanguages.contains(language);
+
+            if (uniqueLanguage) {
                 *languageLocales += QLocale(language);
                 allLanguages += language;
             }
@@ -112,8 +111,7 @@ getLanguageLocales()
 static QHash<QLocale::Language, unsigned int> *
 getLanguageIndices()
 {
-    if (languageIndices == NULL)
-    {
+    if (languageIndices == NULL) {
         languageIndices = new QHash<QLocale::Language, unsigned int>;
 
         for (int i = 0; i < getLanguageLocales()->length(); i++)
@@ -126,8 +124,7 @@ getLanguageIndices()
 static QStringList *
 getLanguageNames()
 {
-    if (languageNames == NULL)
-    {
+    if (languageNames == NULL) {
         languageNames = new QStringList;
 
         for (QList<QLocale>::const_iterator i = getLanguageLocales()->begin(); i != getLanguageLocales()->end(); ++i)
@@ -140,8 +137,7 @@ getLanguageNames()
 static QList<KeyboardPlugin *> *
 getKeyboardPlugins()
 {
-    if (keyboardPlugins == NULL)
-    {
+    if (keyboardPlugins == NULL) {
         keyboardPlugins = new QList<KeyboardPlugin *>;
 
         QDir pluginDir(PLUGIN_DIR);
@@ -152,8 +148,7 @@ getKeyboardPlugins()
 
         QFileInfoList fileInfoList(pluginDir.entryInfoList());
 
-        for (QFileInfoList::const_iterator i = fileInfoList.begin(); i != fileInfoList.end(); ++i)
-        {
+        for (QFileInfoList::const_iterator i = fileInfoList.begin(); i != fileInfoList.end(); ++i) {
             KeyboardPlugin *plugin = new KeyboardPlugin(*i);
 
             if (!plugin->language().isEmpty())
@@ -169,12 +164,10 @@ getKeyboardPlugins()
 static SubsetModel *
 getPluginsModel()
 {
-    if (pluginsModel == NULL)
-    {
+    if (pluginsModel == NULL) {
         QStringList pluginNames;
 
-        for (QList<KeyboardPlugin *>::const_iterator i = getKeyboardPlugins()->begin(); i != getKeyboardPlugins()->end(); ++i)
-        {
+        for (QList<KeyboardPlugin *>::const_iterator i = getKeyboardPlugins()->begin(); i != getKeyboardPlugins()->end(); ++i) {
             if (!(*i)->displayName().isEmpty())
                 pluginNames += (*i)->displayName();
             else
@@ -184,16 +177,12 @@ getPluginsModel()
         QList<int> pluginIndices;
         QStringList currentPlugins(getMaliitSettings()->value(KEY_PLUGINS).toStringList());
 
-        for (QStringList::const_iterator i = currentPlugins.begin(); i != currentPlugins.end(); ++i)
-        {
-            if (i->startsWith(PLUGIN_PREFIX))
-            {
+        for (QStringList::const_iterator i = currentPlugins.begin(); i != currentPlugins.end(); ++i) {
+            if (i->startsWith(PLUGIN_PREFIX)) {
                 QString plugin(i->right(i->length() - strlen(PLUGIN_PREFIX)));
 
-                for (int j = 0; j < getKeyboardPlugins()->length(); j++)
-                {
-                    if ((*getKeyboardPlugins())[j]->name() == plugin)
-                    {
+                for (int j = 0; j < getKeyboardPlugins()->length(); j++) {
+                    if ((*getKeyboardPlugins())[j]->name() == plugin) {
                         pluginIndices += j;
                         break;
                     }
@@ -241,8 +230,7 @@ setLanguageWithUser(GObject    *object,
     ActUser *user = ACT_USER(object);
     gint index = GPOINTER_TO_INT(user_data);
 
-    if (act_user_is_loaded(user))
-    {
+    if (act_user_is_loaded(user)) {
         g_signal_handlers_disconnect_by_data(user, user_data);
 
         act_user_set_language(user, qPrintable((*getLanguageLocales())[index].name()));
@@ -261,18 +249,15 @@ setLanguageWithManager(GObject    *object,
     gboolean loaded;
     g_object_get(manager, "is-loaded", &loaded, NULL);
 
-    if (loaded)
-    {
+    if (loaded) {
         g_signal_handlers_disconnect_by_data(manager, user_data);
 
         const char *name = qPrintable(qgetenv("USER"));
 
-        if (name != NULL && name[0] != '\0')
-        {
+        if (name != NULL && name[0] != '\0') {
             ActUser *user = act_user_manager_get_user(manager, name);
 
-            if (user != NULL)
-            {
+            if (user != NULL) {
                 if (act_user_is_loaded(user))
                     setLanguageWithUser(G_OBJECT(user), NULL, user_data);
                 else
@@ -285,12 +270,10 @@ setLanguageWithManager(GObject    *object,
 void
 LanguagePlugin::setCurrentLanguage(int index)
 {
-    if (index >= 0 && index < getLanguageLocales()->length())
-    {
+    if (index >= 0 && index < getLanguageLocales()->length()) {
         ActUserManager *manager = act_user_manager_get_default();
 
-        if (manager != NULL)
-        {
+        if (manager != NULL) {
             gboolean loaded;
             g_object_get(manager, "is-loaded", &loaded, NULL);
 
@@ -307,8 +290,7 @@ LanguagePlugin::setCurrentLanguage(int index)
 SubsetModel *
 LanguagePlugin::pluginsModel()
 {
-    if (!_updatePluginsConnected)
-    {
+    if (!_updatePluginsConnected) {
         connect(getPluginsModel(), SIGNAL(subsetChanged()), SLOT(updatePlugins()));
 
         _updatePluginsConnected = true;

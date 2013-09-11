@@ -46,8 +46,7 @@ SubsetModel::superset() const
 void
 SubsetModel::setSuperset(const QStringList &superset)
 {
-    if (superset != _superset)
-    {
+    if (superset != _superset) {
         beginResetModel();
 
         for (QList<State *>::iterator i = _state.begin(); i != _state.end(); ++i)
@@ -58,8 +57,7 @@ SubsetModel::setSuperset(const QStringList &superset)
         _subset.clear();
         _state.clear();
 
-        for (int i = 0; i < _superset.length(); i++)
-        {
+        for (int i = 0; i < _superset.length(); i++) {
             State *state = new State;
             state->checked = false;
             state->check = _ignore;
@@ -84,14 +82,12 @@ SubsetModel::subset() const
 void
 SubsetModel::setSubset(const QList<int> &subset)
 {
-    if (subset != _subset)
-    {
+    if (subset != _subset) {
         beginResetModel();
 
         _ignore = QDateTime::currentMSecsSinceEpoch();
 
-        for (QList<State *>::iterator i = _state.begin(); i != _state.end(); ++i)
-        {
+        for (QList<State *>::iterator i = _state.begin(); i != _state.end(); ++i) {
             (*i)->checked = false;
             (*i)->check = _ignore;
             (*i)->uncheck = _ignore;
@@ -99,10 +95,8 @@ SubsetModel::setSubset(const QList<int> &subset)
 
         _subset.clear();
 
-        for (QList<int>::const_iterator i = subset.begin(); i != subset.end(); ++i)
-        {
-            if (0 <= *i && *i < _superset.length())
-            {
+        for (QList<int>::const_iterator i = subset.begin(); i != subset.end(); ++i) {
+            if (0 <= *i && *i < _superset.length()) {
                 _subset += *i;
                 _state[*i]->checked = true;
             }
@@ -126,14 +120,11 @@ SubsetModel::setChecked(int  element,
     else
         _state[element]->uncheck = time;
 
-    if (checked != _state[element]->checked)
-    {
+    if (checked != _state[element]->checked) {
         _state[element]->checked = checked;
 
-        for (int i = 0; i < _subset.length(); i++)
-        {
-            if (_subset[i] == element)
-            {
+        for (int i = 0; i < _subset.length(); i++) {
+            if (_subset[i] == element) {
                 QModelIndex row = index(i, 0);
                 Q_EMIT dataChanged(row, row, QVector<int>(1, CHECKED_ROLE));
             }
@@ -186,8 +177,7 @@ QVariant
 SubsetModel::data(const QModelIndex &index,
                   int                role) const
 {
-    switch (role)
-    {
+    switch (role) {
     case SECTION_ROLE:
         return index.row() < _subset.length() ? "subset" : "superset";
 
@@ -206,11 +196,9 @@ SubsetModel::setData(const QModelIndex &index,
                      const QVariant    &value,
                      int                role)
 {
-    switch (role)
-    {
+    switch (role) {
     case CHECKED_ROLE:
-        if (static_cast<QMetaType::Type>(value.type()) == QMetaType::Bool)
-        {
+        if (static_cast<QMetaType::Type>(value.type()) == QMetaType::Bool) {
             setChecked(elementAtIndex(index), value.toBool(), 0);
 
             return true;
@@ -229,14 +217,10 @@ SubsetModel::timerExpired()
 
     _change.removeFirst();
 
-    if (change->start > _ignore)
-    {
-        if (change->checked)
-        {
-            if (change->start > _state[change->element]->uncheck)
-            {
-                if (!_subset.contains(change->element))
-                {
+    if (change->start > _ignore) {
+        if (change->checked) {
+            if (change->start > _state[change->element]->uncheck) {
+                if (!_subset.contains(change->element)) {
                     beginInsertRows(QModelIndex(), _subset.length(), _subset.length());
                     _subset += change->element;
                     endInsertRows();
@@ -245,14 +229,10 @@ SubsetModel::timerExpired()
                 }
             }
         }
-        else
-        {
-            if (change->start > _state[change->element]->check)
-            {
-                for (int i = 0; i < _subset.length(); i++)
-                {
-                    while (i < _subset.length() && _subset[i] == change->element)
-                    {
+        else {
+            if (change->start > _state[change->element]->check) {
+                for (int i = 0; i < _subset.length(); i++) {
+                    while (i < _subset.length() && _subset[i] == change->element) {
                         beginRemoveRows(QModelIndex(), i, i);
                         _subset.removeAt(i);
                         endRemoveRows();
