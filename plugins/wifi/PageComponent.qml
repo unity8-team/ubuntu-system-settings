@@ -6,15 +6,11 @@ import Ubuntu.SystemSettings.Phone 1.0
 import QMenuModel 0.1
 
 
-ItemPage {
+IndicatorBase {
     title: i18n.tr("Wi-Fi")
-
-    UnityMenuModel {
-        id: menuModel
-        busName: "com.canonical.indicator.network"
-        actions: { "indicator": "/com/canonical/indicator/network" }
-        menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
-    }
+	busName: "com.canonical.indicator.network"
+	actionsObjectPath: "/com/canonical/indicator/network"
+	menuObjectPath: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
 
     MenuItemFactory {
         id: menuFactory
