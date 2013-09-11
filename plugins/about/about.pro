@@ -44,8 +44,8 @@ INCLUDEPATH += .
 LIBS += -landroid-properties
 
 # Input
-HEADERS += plugin.h storageabout.h
-SOURCES += plugin.cpp storageabout.cpp
+HEADERS += plugin.h storageabout.h click.h
+SOURCES += plugin.cpp storageabout.cpp click.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)

@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QProcess>
+#include <QVariant>
 
 class StorageAbout : public QObject
 {
@@ -43,6 +44,7 @@ class StorageAbout : public QObject
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
+    Q_INVOKABLE QVariant buildClickView();
     Q_INVOKABLE QByteArray getClickList() const;
     Q_INVOKABLE QString getClickDir(const QString &name) const;
     QString serialNumber();
@@ -54,6 +56,7 @@ private:
     QString m_serialNumber;
     QString m_vendorString;
     QString m_updateDate;
+    QList<QObject*> m_clickList;
 };
 
 #endif // STORAGEABOUT_H
