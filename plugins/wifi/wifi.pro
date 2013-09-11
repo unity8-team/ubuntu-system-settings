@@ -5,13 +5,23 @@ TEMPLATE = lib
 TARGET = wifi
 
 QML_SOURCES = \
+    BaseMenuItem.qml \
+    DivMenuItem.qml \
+    MenuItemFactory.qml \
     PageComponent.qml \
-    MenuItemFactory.qml
+    SectionMenuItem.qml \
+    StandardMenuItem.qml \
+    SwitchMenuItem.qml
 
 OTHER_FILES += \
     $${QML_SOURCES} \
+    BaseMenuItem.qml \
+    DivMenuItem.qml \
+    MenuItemFactory.qml \
     PageComponent.qml \
-    MenuItemFactory.qml
+    SectionMenuItem.qml \
+    StandardMenuItem.qml \
+    SwitchMenuItem.qml
 
 qml.files = $${QML_SOURCES}
 qml.path = $${PLUGIN_QML_DIR}/$${TARGET}
