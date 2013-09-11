@@ -28,15 +28,7 @@ Item {
 
     UbuntuShape {
         anchors.fill: parent
-        image: sesOverlay
-    }
-
-    ShaderEffectSource {
-        id: sesOverlay
-        sourceItem: overlayHomeImage
-        width: 1
-        height: 1
-        hideSource: true
+        image: overlayHomeImage
     }
 
     Image {
