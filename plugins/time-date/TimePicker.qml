@@ -153,7 +153,7 @@ Dialog {
                 , i18n.tr("June")
                 , i18n.tr("July")
                 , i18n.tr("August")
-                , i18n.tr("Septemper")
+                , i18n.tr("September")
                 , i18n.tr("October")
                 , i18n.tr("November")
                 , i18n.tr("December")]

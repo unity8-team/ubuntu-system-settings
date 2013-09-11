@@ -25,6 +25,8 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+
 
 ItemPage {
     id: root
@@ -51,12 +53,11 @@ ItemPage {
 
     GSettings {
         id: powerSettings
-        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
+        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.desktop.session"
     }
 
-    GSettings {
-        id: settingsSchema
-        schema.id: "com.ubuntu.touch.system-settings"
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
     }
 
     BatteryInfo {
@@ -200,7 +201,8 @@ ItemPage {
 
             ListItem.SingleValue {
                 property bool lockOnSuspend:
-                    settingsSchema.unlockMethod !== "swipe"
+                    securityPrivacy.securityType !==
+                        UbuntuSecurityPrivacyPanel.Swipe
                 text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
                 value: {
                     if (batteryBackend.powerdRunning ) {
@@ -212,8 +214,8 @@ ItemPage {
                                     i18n.tr("Never")
                     }
                     else {
-                        var timeout = Math.round(powerSettings.sleepDisplayBattery/60)
-                        return (powerSettings.sleepDisplayBattery != 0) ?
+                        var timeout = Math.round(powerSettings.idleDelay/60)
+                        return (powerSettings.idleDelay != 0) ?
                                     i18n.tr("After %1 minute".arg(timeout),
                                             "After %1 minutes".arg(timeout),
                                             timeout) :

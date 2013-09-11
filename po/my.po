@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-05 17:10+0000\n"
-"PO-Revision-Date: 2013-08-22 11:26+0000\n"
+"POT-Creation-Date: 2013-09-06 18:22+0200\n"
+"PO-Revision-Date: 2013-09-07 12:28+0000\n"
 "Last-Translator: Pyae Sone <Unknown>\n"
 "Language-Team: Burmese <my@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-09-06 06:09+0000\n"
-"X-Generator: Launchpad (build 16760)\n"
+"X-Launchpad-Export-Date: 2013-09-10 05:24+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -133,15 +133,15 @@ msgstr "နောက်ခံ"
 msgid "Welcome screen"
 msgstr "ကြိုဆိုသည့်စခရင်"
 
-#: ../plugins/background/MainPage.qml:116
+#: ../plugins/background/MainPage.qml:114
 msgid "Home screen"
 msgstr "ပင်မစာမျက်နှာ"
 
-#: ../plugins/background/MainPage.qml:196
+#: ../plugins/background/MainPage.qml:194
 msgid "Same background for both"
 msgstr "နှစ်ခုလုံးအတွက်နောက်ခံအတူတူ"
 
-#: ../plugins/background/MainPage.qml:197
+#: ../plugins/background/MainPage.qml:195
 msgid "Different background for each"
 msgstr "တစ်ခုခြင်းဆီအတွက်နောက်ခံကွဲမည်"
 
@@ -174,8 +174,7 @@ msgstr[1] ""
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 ရက်အရင်က"
 
 #: ../plugins/battery/PageComponent.qml:70
 msgid "Charging now"
@@ -209,7 +208,7 @@ msgstr "အလင်း ကိုပြမည်"
 #: ../plugins/battery/PageComponent.qml:204
 #: ../plugins/security-privacy/PhoneLocking.qml:61
 msgid "Lock when idle"
-msgstr ""
+msgstr "အားလပ်နေချိန်တွင်သော့ခတ်ထားမည်"
 
 #: ../plugins/battery/PageComponent.qml:204
 #: ../plugins/security-privacy/PhoneLocking.qml:62
@@ -224,8 +223,7 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1မိနစ်ကြာပြီးနောက်"
 
 #: ../plugins/battery/PageComponent.qml:229 ../.build/settings.js:18
 msgid "Wi-Fi"
@@ -245,7 +243,7 @@ msgstr ""
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "မသုံးဖြစ်တော့ရင်ဖုန်းကိုခဏပိတ်ထားမည်-"
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
@@ -268,7 +266,7 @@ msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:80
 msgid "Refresh"
-msgstr ""
+msgstr "ပြန်လည်ဖွင့်ခြင်း"
 
 #: ../plugins/cellular/ChooseCarrier.qml:97
 msgid "Searching"
@@ -326,7 +324,7 @@ msgstr "ပြသမည့်ဘာသာ"
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:221
 #: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
@@ -462,24 +460,24 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "ဖျက် နှင့် အားလုံးအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "ဖုန်းကိုအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "launcher နှင့်ပင်မမျက်နှာပြင်ကိုအစကနေပြန်သတ်မှတ်"
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr ""
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -489,7 +487,7 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr ""
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr ""
 
@@ -516,11 +514,11 @@ msgstr "ဖုန်းနှင့်အင်တာနက်"
 
 #: ../plugins/security-privacy/Location.qml:29
 msgid "Location"
-msgstr ""
+msgstr "တည်နေရာ"
 
 #: ../plugins/security-privacy/Location.qml:36
 msgid "Location detection"
-msgstr ""
+msgstr "တည်နေရာသိရှိနိုင်ခြင်း"
 
 #: ../plugins/security-privacy/Location.qml:45
 msgid ""
@@ -567,7 +565,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/Location.qml:62
 msgid "Allow access to location:"
-msgstr ""
+msgstr "တည်နေရာကိုသုံးရန်ခွင့်ပြုမည် -"
 
 #: ../plugins/security-privacy/LockSecurity.qml:29
 #: ../plugins/security-privacy/PhoneLocking.qml:44
@@ -604,7 +602,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing"
-msgstr ""
+msgstr "ထွက်နေသည်"
 
 #: ../plugins/security-privacy/LockSecurity.qml:134
 msgid "Choose passcode"
@@ -616,7 +614,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:139
 msgid "Choose"
-msgstr ""
+msgstr "ရွေးမည်"
 
 #: ../plugins/security-privacy/LockSecurity.qml:172
 msgid "Confirm passcode"
@@ -971,7 +969,7 @@ msgid "August"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:156
-msgid "Septemper"
+msgid "September"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:157
@@ -994,15 +992,19 @@ msgstr ""
 msgid "System Settings"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "ကွန်ယက်"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "ကိုယ်ရေးကိုယ်တာ"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "စနစ်"
 
@@ -1023,5 +1025,5 @@ msgid "Flight mode"
 msgstr ""
 
 #: ../.build/settings.js:11
-msgid "Rotation lock"
-msgstr "လှည့်နေသောသော့"
+msgid "Orientation lock"
+msgstr ""

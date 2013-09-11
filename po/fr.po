@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 17:10+0000\n"
+"POT-Creation-Date: 2013-09-06 18:22+0200\n"
 "PO-Revision-Date: 2013-08-31 15:11+0000\n"
 "Last-Translator: Anne <anneonyme017@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-09-06 06:09+0000\n"
-"X-Generator: Launchpad (build 16760)\n"
+"X-Launchpad-Export-Date: 2013-09-10 05:24+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "Language: \n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -134,15 +134,15 @@ msgstr "Arrière-plan"
 msgid "Welcome screen"
 msgstr "Écran de bienvenue"
 
-#: ../plugins/background/MainPage.qml:116
+#: ../plugins/background/MainPage.qml:114
 msgid "Home screen"
 msgstr "Page d'accueil"
 
-#: ../plugins/background/MainPage.qml:196
+#: ../plugins/background/MainPage.qml:194
 msgid "Same background for both"
 msgstr "Même arrière-plan pour les deux"
 
-#: ../plugins/background/MainPage.qml:197
+#: ../plugins/background/MainPage.qml:195
 msgid "Different background for each"
 msgstr "Arrière-plan différent pour chacun"
 
@@ -331,7 +331,7 @@ msgstr "Afficher la langue"
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
 #: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:221
 #: ../plugins/time-date/TimePicker.qml:180
 msgid "Cancel"
@@ -475,24 +475,24 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr "Supprimer et tout réinitialiser"
 
-#: ../plugins/reset/PageComponent.qml:30 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
 msgstr "Remise à zero du téléphone"
 
-#: ../plugins/reset/PageComponent.qml:51
+#: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "Réinitialiser le lanceur et la page d'accueil…"
 
-#: ../plugins/reset/PageComponent.qml:64
+#: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr "Réinitialiser tous les paramètres du système…"
 
-#: ../plugins/reset/PageComponent.qml:77
+#: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr "Supprimer et tout réinitialiser..."
 
 #: ../plugins/reset/ResetAllSettings.qml:29
-#: ../plugins/reset/ResetLauncherHome.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -504,7 +504,7 @@ msgstr ""
 msgid "Reset all system settings"
 msgstr "Réinitialiser tous les paramètres du système"
 
-#: ../plugins/reset/ResetLauncherHome.qml:31
+#: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr "Réinitialiser le lanceur et l'écran de bienvenue"
 
@@ -988,7 +988,7 @@ msgid "August"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:156
-msgid "Septemper"
+msgid "September"
 msgstr ""
 
 #: ../plugins/time-date/TimePicker.qml:157
@@ -1011,15 +1011,19 @@ msgstr ""
 msgid "System Settings"
 msgstr "Paramètres système"
 
-#: ../src/qml/MainWindow.qml:80
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr "Réseau"
 
-#: ../src/qml/MainWindow.qml:85
+#: ../src/qml/MainWindow.qml:95
 msgid "Personal"
 msgstr "Personnel"
 
-#: ../src/qml/MainWindow.qml:90
+#: ../src/qml/MainWindow.qml:100
 msgid "System"
 msgstr "Système"
 
@@ -1040,5 +1044,5 @@ msgid "Flight mode"
 msgstr "Mode avion"
 
 #: ../.build/settings.js:11
-msgid "Rotation lock"
-msgstr "Verrouillage de la rotation"
+msgid "Orientation lock"
+msgstr ""
