@@ -32,7 +32,9 @@ ListItem.Standard {
     showDivider: false
     __foregroundColor: "#e8e1d0" // FIXME not in palette yet
 
+/*
     backgroundIndicator: RemoveBackground {
         state: baseMenu.swipingState
     }
+*/
 }
