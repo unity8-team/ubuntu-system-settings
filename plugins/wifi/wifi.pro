@@ -14,6 +14,7 @@ QML_SOURCES = \
     MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
+    RemoveBackground.qml \
     SectionMenuItem.qml \
     StandardMenuItem.qml \
     SwitchMenuItem.qml
@@ -29,6 +30,7 @@ OTHER_FILES += \
     MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
+    RemoveBackground.qml \
     SectionMenuItem.qml \
     StandardMenuItem.qml \
     SwitchMenuItem.qml
