@@ -10,6 +10,7 @@ QML_SOURCES = \
     BasicMenuItem.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
+    HLine.qml \
     MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
@@ -24,6 +25,7 @@ OTHER_FILES += \
     BasicMenuItem.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
+    HLine.qml \
     MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
