@@ -177,7 +177,7 @@ Item {
 
     Component {
         id: accessPoint;
-        ICNetwork.AccessPoint {
+        AccessPoint {
             property QtObject menu: null
 //            property var strenthAction: QMenuModel.UnityMenuAction {
 //                model: menuFactory.model ? menuFactory.model : null

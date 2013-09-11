@@ -5,8 +5,11 @@ TEMPLATE = lib
 TARGET = wifi
 
 QML_SOURCES = \
+    AccessPoint.qml \
     BaseMenuItem.qml \
+    BasicMenuItem.qml \
     DivMenuItem.qml \
+    MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
     SectionMenuItem.qml \
@@ -15,8 +18,11 @@ QML_SOURCES = \
 
 OTHER_FILES += \
     $${QML_SOURCES} \
+    AccessPoint.qml \
     BaseMenuItem.qml \
+    BasicMenuItem.qml \
     DivMenuItem.qml \
+    MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
     SectionMenuItem.qml \
