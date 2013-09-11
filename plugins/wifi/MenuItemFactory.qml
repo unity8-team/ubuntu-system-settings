@@ -18,8 +18,6 @@
  */
 
 import QtQuick 2.0
-import Unity.Indicators 0.1 as Indicators
-import Unity.Indicators.Network 0.1 as ICNetwork
 import QMenuModel 0.1 as QMenuModel
 
 Item {
