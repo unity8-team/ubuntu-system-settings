@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-06 18:22+0200\n"
-"PO-Revision-Date: 2013-09-09 20:08+0000\n"
+"PO-Revision-Date: 2013-09-10 15:06+0000\n"
 "Last-Translator: Aleksi Kinnunen <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-10 05:24+0000\n"
+"X-Launchpad-Export-Date: 2013-09-11 05:26+0000\n"
 "X-Generator: Launchpad (build 16761)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -493,16 +493,16 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
-"Käynnistimen sisältö ja asettelu sekä kotinäytön suodattimet palautetaan "
-"alkuperäisiin asetuksiin."
+"Käynnistimen sisältö ja asettelu sekä kotinäkymän sivut palautetaan "
+"alkuperäisiin."
 
 #: ../plugins/reset/ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr "Nollaa kaikki järjestelmän asetukset"
+msgstr "Palauta järjestelmän alkuperäisasetukset"
 
 #: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
-msgstr "Nollaa käynnistin ja kotinäyttö"
+msgstr "Palauta käynnistimen ja kotinäkymän alkuperäisasetukset"
 
 #: ../plugins/security-privacy/Dash.qml:29
 #: ../plugins/security-privacy/PageComponent.qml:112
@@ -523,7 +523,7 @@ msgstr "Vain puhelimesta"
 #: ../plugins/security-privacy/PageComponent.qml:49
 #: ../plugins/security-privacy/PageComponent.qml:114
 msgid "Phone and Internet"
-msgstr "Puhelimesta ja internetistä"
+msgstr "Puhelimesta ja Internetistä"
 
 #: ../plugins/security-privacy/Location.qml:29
 msgid "Location"
@@ -538,51 +538,50 @@ msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
-"Käyttää GPS:ää karkean sijainnin havaitsemiseen. Kun ei käytössä, GPS "
-"kytkeytyy pois akun säästämisen vuoksi."
+"Käyttää GPS:ää epätarkan sijainnin paikantamiseen. Kun ei käytössä, GPS ei "
+"ole käytössä virransäästön vuoksi."
 
 #: ../plugins/security-privacy/Location.qml:47
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Käyttää wifiä ja GPS:ää karkean sijainnin havaitsemiseen. Sijainnin "
-"havaitsemisen kytkeminen pois säästää akkua."
+"Käyttää Wi-Fiä ja GPS:ää epätarkan sijainnin paikantamiseen. Toiminnon "
+"kytkeminen pois käytöstä säästää akkuvirtaa."
 
 #: ../plugins/security-privacy/Location.qml:49
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
-"Käyttää wifiä (ei käytössä nyt) ja GPS:ää karkean sijainnin havaitsemiseen. "
-"Sijainnin havaitsemisen kytkeminen pois säästää akkua."
+"Käyttää Wi-Fiä (ei käytössä nyt) ja GPS:ää epätarkan sijainnin "
+"paikantamiseen. Toiminnon kytkeminen pois käytöstä säästää akkuvirtaa."
 
 #: ../plugins/security-privacy/Location.qml:51
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
-"Käyttää wifiä, mobiiliverkon tukiasemien sijainteja ja GPS:ää karkean "
-"sijainnin havaitsemiseen. Sijainnin havaitsemisen kytkeminen pois säästää "
-"akkua."
+"Käyttää Wi-Fiä, puhelinmastojen sijainteja ja GPS:ää epätarkan sijainnin "
+"paikantamiseen. Toiminnon kytkeminen pois käytöstä säästää akkuvirtaa."
 
 #: ../plugins/security-privacy/Location.qml:53
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
-"Käyttää wifiä, mobiiliverkon tukiasemien sijainteja (ei mobiiliyhteyttä nyt) "
-"ja GPS:ää karkean sijainnin havaitsemiseen. Sijainnin havaitsemisen "
-"kytkeminen pois säästää akkua."
+"Käyttää Wi-Fiä, puhelinmastojen sijainteja (mobiiliyhteys ei käytettävissä) "
+"ja GPS:ää epätarkan sijainnin paikantamiseen. Toiminnon kytkeminen pois "
+"käytöstä säästää akkuvirtaa."
 
 #: ../plugins/security-privacy/Location.qml:55
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
-"Käyttää wifiä (ei käytössä nyt), mobiiliverkon tukiasemien sijainteja ja "
-"GPS:ää karkean sijainnin havaitsemiseen. Sijainnin havaitsemisen kytkeminen "
-"pois säästää akkua."
+"Käyttää Wi-Fiä (ei käytössä nyt), puhelinmastojen sijainteja ja GPS:ää "
+"epätarkan sijainnin paikantamiseen. Toiminnon kytkeminen pois käytöstä "
+"säästää akkuvirtaa."
 
 #: ../plugins/security-privacy/Location.qml:57
 msgid ""
@@ -590,9 +589,9 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Käyttää wifiä (ei käytössä nyt), mobiiliverkon tukiasemien sijainteja (ei "
-"mobiiliyhteyttä nyt) ja GPS:ää karkean sijainnin havaitsemiseen. Sijainnin "
-"havaitsemisen kytkeminen pois säästää akkua."
+"Käyttää Wi-Fiä (ei käytössä nyt), puhelinmastojen sijainteja (mobiiliyhteys "
+"ei käytettävissä) ja GPS:ää epätarkan sijainnin paikantamiseen. Toiminnon "
+"kytkeminen pois käytöstä säästää akkuvirtaa."
 
 #: ../plugins/security-privacy/Location.qml:62
 msgid "Allow access to location:"
@@ -605,7 +604,7 @@ msgstr "Lukituksen turva"
 
 #: ../plugins/security-privacy/LockSecurity.qml:75
 msgid "Change passcode"
-msgstr "Vaihda koodi"
+msgstr "Vaihda pääsykoodi"
 
 #: ../plugins/security-privacy/LockSecurity.qml:77
 msgid "Change passphrase"
@@ -617,7 +616,7 @@ msgstr "Vaihda pyyhkäisyyn"
 
 #: ../plugins/security-privacy/LockSecurity.qml:84
 msgid "Switch to passcode"
-msgstr "Vaihda koodiin"
+msgstr "Vaihda pääsykoodiin"
 
 #: ../plugins/security-privacy/LockSecurity.qml:86
 msgid "Switch to passphrase"
@@ -625,7 +624,7 @@ msgstr "Vaihda avainlauseeseen"
 
 #: ../plugins/security-privacy/LockSecurity.qml:95
 msgid "Existing passcode"
-msgstr "Nykyinen koodi"
+msgstr "Nykyinen pääsykoodi"
 
 #: ../plugins/security-privacy/LockSecurity.qml:97
 msgid "Existing passphrase"
@@ -637,7 +636,7 @@ msgstr "Nykyinen"
 
 #: ../plugins/security-privacy/LockSecurity.qml:134
 msgid "Choose passcode"
-msgstr "Valitse koodi"
+msgstr "Valitse pääsykoodi"
 
 #: ../plugins/security-privacy/LockSecurity.qml:136
 msgid "Choose passphrase"
@@ -649,7 +648,7 @@ msgstr "Valitse"
 
 #: ../plugins/security-privacy/LockSecurity.qml:172
 msgid "Confirm passcode"
-msgstr "Vahvista koodi"
+msgstr "Vahvista pääsykoodi"
 
 #: ../plugins/security-privacy/LockSecurity.qml:174
 msgid "Conrifm passphrase"
@@ -657,7 +656,7 @@ msgstr "Vahvista avainlause"
 
 #: ../plugins/security-privacy/LockSecurity.qml:208
 msgid "Unset"
-msgstr ""
+msgstr "Ei määritetty"
 
 #: ../plugins/security-privacy/LockSecurity.qml:209
 msgid "Continue"
@@ -673,7 +672,7 @@ msgstr "Pyyhkäisy (ei turvallinen)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:241
 msgid "4-digit passcode"
-msgstr "4-numeroinen koodi"
+msgstr "4-numeroinen pääsykoodi"
 
 #: ../plugins/security-privacy/LockSecurity.qml:242
 #: ../plugins/security-privacy/PhoneLocking.qml:42
@@ -686,7 +685,7 @@ msgstr "Pyyhkäisy (ei turvallinen)… "
 
 #: ../plugins/security-privacy/LockSecurity.qml:244
 msgid "4-digit passcode…"
-msgstr "Nelinumeroinen koodi…"
+msgstr "Nelinumeroinen pääsykoodi…"
 
 #: ../plugins/security-privacy/LockSecurity.qml:245
 msgid "Passphrase…"
@@ -694,7 +693,7 @@ msgstr "Tunnussana…"
 
 #: ../plugins/security-privacy/LockSecurity.qml:284
 msgid "Change passcode…"
-msgstr "Vaihda koodi…"
+msgstr "Vaihda pääsykoodi…"
 
 #: ../plugins/security-privacy/LockSecurity.qml:285
 msgid "Change passphrase…"
@@ -723,7 +722,7 @@ msgstr[1] ""
 
 #: ../plugins/security-privacy/PageComponent.qml:77
 msgid "SIM PIN"
-msgstr "SIM-kortin PIN"
+msgstr "SIM-kortin PIN-koodi"
 
 #: ../plugins/security-privacy/PageComponent.qml:82
 msgid "Privacy:"
@@ -731,11 +730,11 @@ msgstr "Yksityisyys:"
 
 #: ../plugins/security-privacy/PageComponent.qml:85
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Tilastot tervetulonäkymässä"
 
 #: ../plugins/security-privacy/PageComponent.qml:98
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Viestit tervetulonäkymässä"
 
 #: ../plugins/security-privacy/PageComponent.qml:120
 msgid "Location access"
@@ -747,7 +746,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:130
 msgid "Diagnostics"
-msgstr "Diagnostiikka"
+msgstr "Tilastot"
 
 #: ../plugins/security-privacy/PageComponent.qml:133
 msgid "Sent"
@@ -763,7 +762,7 @@ msgstr "Ei mitään"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
-msgstr "Koodi"
+msgstr "Pääsykoodi"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:75
 msgid "Sleep locks immediately"
@@ -846,7 +845,7 @@ msgstr "Ohjelmistopäivityksiä ei ole saatavilla"
 #: ../plugins/system-update/PageComponent.qml:113
 #, qt-format
 msgid "Last updated %1"
-msgstr "Viimeksi päivitetty %1"
+msgstr "Päivitetty viimeksi %1"
 
 #: ../plugins/system-update/PageComponent.qml:125
 #, qt-format
@@ -857,7 +856,7 @@ msgstr[1] "Noin %1 sekuntia jäljellä"
 
 #: ../plugins/system-update/PageComponent.qml:127
 msgid "No estimate for the download"
-msgstr "Ei arviota latauksesta"
+msgstr "Ei latausaika-arviota"
 
 #: ../plugins/system-update/PageComponent.qml:133
 msgid "Paused"
@@ -903,7 +902,7 @@ msgstr "Lataa päivitykset jatkossa automaattisesti:"
 
 #: ../plugins/system-update/PageComponent.qml:335
 msgid "When on wi-fi"
-msgstr "Wifi-yhteyden ollessa käytössä"
+msgstr "Vain Wi-Fillä"
 
 #: ../plugins/system-update/PageComponent.qml:337
 msgid ""
@@ -1055,7 +1054,7 @@ msgstr "Esimerkki"
 
 #: ../.build/settings.js:9
 msgid "Flight mode"
-msgstr "Lentokonetila"
+msgstr "Lentotila"
 
 #: ../.build/settings.js:11
 msgid "Orientation lock"
