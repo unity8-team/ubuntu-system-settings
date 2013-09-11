@@ -83,6 +83,11 @@ ItemPage {
 
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
+
+        OverlayImage {
+            anchors.fill: parent
+            source: "welcomeoverlay.svg"
+        }
     }
 
     SwappableImage {
@@ -99,6 +104,11 @@ ItemPage {
         onClicked: {
             activeTransfer = ContentHub.importContent(ContentType.Pictures,
                                                       ContentHub.defaultSourceForType(ContentType.Pictures));
+        }
+
+        OverlayImage {
+            anchors.fill: parent
+            source: "homeoverlay.svg"
         }
     }
 
