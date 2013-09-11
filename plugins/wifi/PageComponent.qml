@@ -94,16 +94,4 @@ ItemPage {
             }
         }
     }
-
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        ListView {
-            id: aplist
-            model: menuModel
-            delegate: menuDelegate
-        }
-
-    }
 }
