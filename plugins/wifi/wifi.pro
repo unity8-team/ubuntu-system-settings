@@ -23,11 +23,38 @@ image.files = settings-wifi.svg
 image.path = $${PLUGIN_MANIFEST_DIR}/icons
 INSTALLS += image
 
+# C++ bits
+TARGET = UbuntuWifiPanel
+QT += qml quick dbus
+CONFIG += qt plugin no_keywords
+
+TARGET = $$qtLibraryTarget($$TARGET)
+uri = Ubuntu.SystemSettings.Wifi
+
 SOURCES += \
-    modelprinter.cpp
+    modelprinter.cpp \
+    plugin.cpp
 
 HEADERS += \
-    modelprinter.h
+    modelprinter.h \
+    plugin.h
 
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += qmenumodel
+
+# Install path for the plugin
+installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)
+target.path = $$installPath
+INSTALLS += target
+
+# find files
+QMLDIR_FILE = qmldir
+
+# make visible to qt creator
+OTHER_FILES += $$QMLDIR_FILE
+
+# create install targets for files
+qmldir.path = $$installPath
+qmldir.files = $$QMLDIR_FILE
+
+INSTALLS += qmldir
