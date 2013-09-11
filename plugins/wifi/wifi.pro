@@ -8,7 +8,7 @@ QML_SOURCES = \
     AccessPoint.qml \
     BaseMenuItem.qml \
     BasicMenuItem.qml \
-    CachedMenuModel.qml \
+    CachedUnityMenuModel.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
     HLine.qml \
@@ -26,7 +26,7 @@ OTHER_FILES += \
     AccessPoint.qml \
     BaseMenuItem.qml \
     BasicMenuItem.qml \
-    CachedMenuModel.qml \
+    CachedUnityMenuModel.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
     HLine.qml \
