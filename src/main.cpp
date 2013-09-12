@@ -45,16 +45,6 @@ int main(int argc, char **argv)
             setLoggingLevel(value);
     }
 
-    /* Use an environment variable USS_SHOW_ALL_UI to show unfinished / beta /
-     * deferred components or panels */
-
-    bool showAll = false;
-
-    if (environment.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
-        QString showAllS = environment.value("USS_SHOW_ALL_UI", QString());
-        showAll = !showAllS.isEmpty();
-    }
-
     initTr(I18N_DOMAIN, NULL);
     /* HACK: force the theme until lp #1098578 is fixed */
     QIcon::setThemeName("ubuntu-mobile");
@@ -86,7 +76,6 @@ int main(int argc, char **argv)
     view.engine()->addImportPath(PLUGIN_QML_DIR);
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
     view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
-    view.rootContext()->setContextProperty("showAllUI", showAll);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();
 

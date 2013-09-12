@@ -84,18 +84,22 @@ void PluginManagerPrivate::reload()
     clear();
     QDir path(baseDir, "*.settings");
 
-    // FIXME: This should be accessible via context properties
+    /* Use an environment variable USS_SHOW_ALL_UI to show unfinished / beta /
+     * deferred components or panels */
     bool showAll = false;
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     if (environment.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
         QString showAllS = environment.value("USS_SHOW_ALL_UI", QString());
         showAll = !showAllS.isEmpty();
     }
-    //qDebug() << QQmlEngine::contextForObject(q)->contextProperty("showAllUI");
+
+    QQmlContext *ctx = QQmlEngine::contextForObject(q);
+    if (ctx)
+        ctx->engine()->rootContext()->setContextProperty("showAllUI", showAll);
+
     Q_FOREACH(QFileInfo fileInfo, path.entryInfoList()) {
         Plugin *plugin = new Plugin(fileInfo);
-        QQmlEngine::setContextForObject(plugin,
-                                        QQmlEngine::contextForObject(q));
+        QQmlEngine::setContextForObject(plugin, ctx);
         QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];
         if (showAll || !plugin->hideByDefault())
             pluginList.insert(fileInfo.baseName(), plugin);
