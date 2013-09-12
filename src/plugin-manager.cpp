@@ -91,6 +91,7 @@ void PluginManagerPrivate::reload()
         QString showAllS = environment.value("USS_SHOW_ALL_UI", QString());
         showAll = !showAllS.isEmpty();
     }
+    //qDebug() << QQmlEngine::contextForObject(q)->contextProperty("showAllUI");
     Q_FOREACH(QFileInfo fileInfo, path.entryInfoList()) {
         Plugin *plugin = new Plugin(fileInfo);
         QQmlEngine::setContextForObject(plugin,
