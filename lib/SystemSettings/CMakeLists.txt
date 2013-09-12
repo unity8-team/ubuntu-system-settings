@@ -8,3 +8,6 @@ qt5_use_modules(SystemSettings Core Gui Quick Qml)
 install(TARGETS SystemSettings LIBRARY DESTINATION ${LIBDIR})
 install(FILES item-base.h ItemBase plugin-interface.h PluginInterface
 DESTINATION include/SystemSettings)
+
+configure_file(SystemSettings.pc.in SystemSettings.pc @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/SystemSettings.pc DESTINATION ${LIBDIR}/pkg-config)
