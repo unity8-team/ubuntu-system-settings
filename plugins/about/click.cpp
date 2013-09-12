@@ -19,33 +19,110 @@
 
 #include "click.h"
 
-Click::Click(const QString &name,
-             const QString &icon,
-             const QString &install,
-             QObject *parent) :
-    QObject(parent),
-    m_clickName(name),
-    m_clickIcon(icon),
-    m_clickInstall(install)
+#include <QDebug>
+#include <QDir>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 
+ClickModel::ClickModel(QObject *parent):
+    QAbstractTableModel(parent)
 {
-
+    m_clickPackages = buildClickList();
 }
 
-QString Click::clickName() const
+QList<ClickModel::Click> ClickModel::buildClickList()
 {
-    return m_clickName;
+    QFile clickBinary("/usr/bin/click");
+    if (!clickBinary.exists()) {
+        return QList<ClickModel::Click>();
+    }
+
+    QProcess clickProcess;
+    clickProcess.start("/usr/bin/click",
+                       QStringList() << "list" << "--manifest");
+    clickProcess.waitForFinished(-1);
+
+    QJsonDocument jsond =
+            QJsonDocument::fromJson(clickProcess.readAllStandardOutput());
+
+    QJsonArray data(jsond.array());
+
+    QJsonArray::ConstIterator begin(data.constBegin());
+    QJsonArray::ConstIterator end(data.constEnd());
+
+    QList<ClickModel::Click> clickPackages;
+
+    while (begin != end) {
+        QJsonObject val = (*begin++).toObject();
+        Click newClick;
+
+        newClick.name = val.value("title").toString();
+        QDir directory(val.value("_directory").toString());
+        newClick.icon = directory.filePath(
+                            val.value("icon").toString().simplified());
+        newClick.installSize = val.value("installed-size").toString().toUInt();
+
+        clickPackages.append(newClick);
+    }
+
+    return clickPackages;
 }
 
-QString Click::clickIcon() const
+int ClickModel::rowCount(const QModelIndex &parent) const
 {
-    return m_clickIcon;
+    if (parent.isValid())
+        return 0;
 
+    return m_clickPackages.count();
 }
-QString Click::clickInstall() const
+
+int ClickModel::columnCount(const QModelIndex &parent) const
 {
-    return m_clickInstall;
-
+    if (parent.isValid())
+        return 0;
+    return 3; //Display, size, icon
 }
-Click::~Click() {
+
+QHash<int, QByteArray> ClickModel::roleNames() const
+{
+    QHash<int, QByteArray> roleNames;
+
+    roleNames[Qt::DisplayRole] = "displayName";
+    roleNames[InstalledSizeRole] = "installedSize";
+    roleNames[IconRole] = "iconPath";
+
+    return roleNames;
+}
+
+QVariant ClickModel::data(const QModelIndex &index, int role) const
+{
+    if (index.row() > m_clickPackages.count() ||
+            index.row() < 0)
+        return QVariant();
+
+    Click click = m_clickPackages[index.row()];
+
+    switch (role) {
+    case Qt::DisplayRole:
+        return click.name;
+    case InstalledSizeRole:
+        return click.installSize;
+    case IconRole:
+        return click.icon;
+    default:
+        return QVariant();
+    }
+}
+
+ClickModel::~ClickModel()
+{
+}
+
+ClickFilterProxy::ClickFilterProxy(ClickModel *parent)
+    : QSortFilterProxyModel(parent)
+{
+    this->setSourceModel(parent);
+    this->setDynamicSortFilter(false);
+    this->sort(0);
 }

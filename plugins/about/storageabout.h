@@ -21,6 +21,8 @@
 #ifndef STORAGEABOUT_H
 #define STORAGEABOUT_H
 
+#include "click.h"
+
 #include <QObject>
 #include <QProcess>
 #include <QVariant>
@@ -28,6 +30,8 @@
 class StorageAbout : public QObject
 {
     Q_OBJECT
+
+    Q_ENUMS(ClickModel::Roles)
 
     Q_PROPERTY( QString serialNumber
                 READ serialNumber
@@ -41,22 +45,37 @@ class StorageAbout : public QObject
                 READ updateDate
                 CONSTANT)
 
+    Q_PROPERTY(QAbstractItemModel *clickList
+               READ getClickList
+               CONSTANT)
+
+    Q_PROPERTY(ClickModel::Roles sortRole
+               READ getSortRole
+               WRITE setSortRole
+               NOTIFY sortRoleChanged)
+
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
-    Q_INVOKABLE QVariant buildClickView();
-    Q_INVOKABLE QByteArray getClickList() const;
+    QAbstractItemModel *getClickList();
     Q_INVOKABLE QString getClickDir(const QString &name) const;
     QString serialNumber();
     QString vendorString();
     QString updateDate();
     Q_INVOKABLE QString licenseInfo(const QString &subdir) const;
+    ClickModel::Roles getSortRole();
+    void setSortRole(ClickModel::Roles newRole);
+
+Q_SIGNALS:
+    void sortRoleChanged();
 
 private:
     QString m_serialNumber;
     QString m_vendorString;
     QString m_updateDate;
-    QList<QObject*> m_clickList;
+    ClickModel m_clickModel;
+    ClickFilterProxy m_clickFilterProxy;
+    bool m_sortedBefore;
 };
 
 #endif // STORAGEABOUT_H

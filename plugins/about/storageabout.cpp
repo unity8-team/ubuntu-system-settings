@@ -17,6 +17,8 @@
  *
 */
 
+#include <QDebug>
+
 #include <QDateTime>
 #include <QDir>
 #include <QFile>
@@ -26,51 +28,15 @@
 #include <QJsonObject>
 #include <QProcess>
 #include <QVariant>
-#include "click.h"
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
 
 StorageAbout::StorageAbout(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_clickModel(),
+    m_clickFilterProxy(&m_clickModel),
+    m_sortedBefore(false)
 {
-
-}
-
-QByteArray StorageAbout::getClickList() const
-{
-    QFile clickBinary("/usr/bin/click");
-    if (!clickBinary.exists()) {
-        return QByteArray();
-    }
-
-    QProcess clickProcess;
-    clickProcess.start("/usr/bin/click", QStringList() << "list" << "--manifest");
-    clickProcess.waitForFinished(-1);
-    return clickProcess.readAllStandardOutput();
-}
-
-QVariant StorageAbout::buildClickView()
-{
-    QFile clickBinary("/usr/bin/click");
-    if (!clickBinary.exists()) {
-        return QByteArray();
-    }
-
-    QProcess clickProcess;
-    clickProcess.start("/usr/bin/click", QStringList() << "list" << "--manifest");
-    clickProcess.waitForFinished(-1);
-
-    QJsonDocument jsond = QJsonDocument::fromJson(clickProcess.readAllStandardOutput());
-    for(int i = 0; i < jsond.array().count(); i++) {
-        QString title(jsond.array()[i].toObject().value("title").toString());
-        QString directory(jsond.array()[i].toObject().value("_directory").toString());
-        QString icon(jsond.array()[i].toObject().value("icon").toString().simplified());
-        QString installed(jsond.array()[i].toObject().value("installed-size").toString());
-
-        m_clickList.append(new Click(title, directory+"/"+icon, installed));
-    }
-
-    return QVariant::fromValue(m_clickList);
 }
 
 QString StorageAbout::getClickDir(const QString &name) const
@@ -138,6 +104,26 @@ QString StorageAbout::licenseInfo(const QString &subdir) const
     copyrightText = QString(file.readAll());
     file.close();
     return copyrightText;
+}
+
+QAbstractItemModel *StorageAbout::getClickList()
+{
+    return &m_clickFilterProxy;
+}
+
+ClickModel::Roles StorageAbout::getSortRole()
+{
+    return (ClickModel::Roles) m_clickFilterProxy.sortRole();
+}
+
+void StorageAbout::setSortRole(ClickModel::Roles newRole)
+{
+    m_clickFilterProxy.setSortRole(newRole);
+
+    m_clickFilterProxy.sort(0, newRole == ClickModel::InstalledSizeRole ?
+                                Qt::DescendingOrder :
+                                Qt::AscendingOrder);
+    Q_EMIT(sortRoleChanged());
 }
 
 StorageAbout::~StorageAbout() {

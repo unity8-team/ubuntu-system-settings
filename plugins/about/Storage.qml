@@ -55,17 +55,7 @@ ItemPage {
     ListModel { id: sortedInstallModel }
 
     UbuntuStorageAboutPanel {
-        id: backendInfos
-        Component.onCompleted: {
-            var clickData = getClickList()
-            var clickJson = JSON.parse(clickData)
-            for (var val in clickJson) {
-                clicksList.append({"binaryName": clickJson[val]["title"],
-                                      "iconName": clickJson[val]["icon"] ? getClickDir(clickJson[val]["name"]) + "/" + clickJson[val]["icon"] : "",
-                                      "installedSize": clickJson[val]["installed-size"] ? clickJson[val]["installed-size"]*1024 : 0})
-            }
-            createSortedLists();
-        }
+        id: backendInfo
     }
 
     function noCaseSorting(a, b) {
@@ -151,9 +141,14 @@ ItemPage {
                 id: valueSelect
                 text: i18n.tr("Installed apps")
                 model: [i18n.tr("By name"), i18n.tr("By size")]
-                selectedIndex: sortByName ? 0 : 1
-                onSelectedIndexChanged:
-                    settingsId.storageSortByName = (valueSelect.selectedIndex == 0) ? true : false
+                selectedIndex:
+                    backendInfo.sortRole === ClickRoles.DisplayNameRole ? 0 : 1
+                onSelectedIndexChanged: {
+                    backendInfo.sortRole =
+                            selectedIndex == 0 ?
+                                ClickRoles.DisplayNameRole :
+                                ClickRoles.InstalledSizeRole
+                }
             }
 
             ListView {
@@ -162,12 +157,14 @@ ItemPage {
                 height: childrenRect.height
                 /* Desactivate the listview flicking, we want to scroll on the column */
                 interactive: false
-                model: (valueSelect.selectedIndex === 0) ? sortedNamesModel : sortedInstallModel
+                model: backendInfo.clickList
                 delegate: ListItem.SingleValue {
-                    icon: iconName
+                    icon: iconPath
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
-                    text: binaryName
-                    value: installedSize ? storagePage.getFormattedSpace(installedSize) : i18n.tr("N/A")
+                    text: displayName
+                    value: installedSize ?
+                               storagePage.getFormattedSpace(installedSize)
+                             : i18n.tr("N/A")
                 }
             }
         }

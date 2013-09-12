@@ -21,35 +21,58 @@
 #ifndef CLICK_H
 #define CLICK_H
 
+#include <QAbstractTableModel>
+#include <QSortFilterProxyModel>
 #include <QObject>
 #include <QProcess>
-#include <QQmlListProperty>
 
-class Click : public QObject
+class ClickModel : public QAbstractTableModel
 {
     Q_OBJECT
 
-    Q_PROPERTY( QString clickName READ clickName NOTIFY clickUpdate)
-    Q_PROPERTY( QString clickIcon READ clickIcon NOTIFY clickUpdate)
-    Q_PROPERTY( QString clickInstall READ clickInstall NOTIFY clickUpdate)
-
 public:
-    explicit Click(const QString &name,
-                   const QString &icon,
-                   const QString &install,
-                   QObject *parent = 0);
-    ~Click();
-    QString clickName() const;
-    QString clickIcon() const;
-    QString clickInstall() const;
+    ClickModel(QObject *parent = 0);
+    ~ClickModel();
 
-Q_SIGNALS:
-    void clickUpdate();
+    Q_ENUMS(Roles)
+
+    enum Roles {
+        DisplayNameRole = Qt::DisplayRole,
+        InstalledSizeRole = Qt::UserRole + 1,
+        IconRole
+    };
+
+    struct Click {
+        QString name;
+        QString icon;
+        uint installSize;
+    };
+
+    // implemented virtual methods from QAbstractTableModel
+    int rowCount (const QModelIndex &parent = QModelIndex()) const;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
+    QHash<int, QByteArray> roleNames() const;
 
 private:
-    QString m_clickName;
-    QString m_clickIcon;
-    QString m_clickInstall;
+    QList<Click> buildClickList();
+    QList<Click> m_clickPackages;
+
+};
+
+Q_DECLARE_METATYPE (ClickModel::Roles)
+
+class ClickFilterProxy: public QSortFilterProxyModel
+{
+    Q_OBJECT
+
+public:
+    ClickFilterProxy(ClickModel *parent = 0);
+
+/*protected:
+    virtual bool lessThan(const QModelIndex &left,
+                          const QModelIndex &right) const;*/
+
 };
 
 #endif // CLICK_H
