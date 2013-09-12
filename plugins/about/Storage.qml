@@ -49,40 +49,8 @@ ItemPage {
         }
     }
 
-    /* Get a model from the click command, build sorted lists for the view */
-    ListModel { id: clicksList }
-    ListModel { id: sortedNamesModel }
-    ListModel { id: sortedInstallModel }
-
     UbuntuStorageAboutPanel {
         id: backendInfo
-    }
-
-    function noCaseSorting(a, b) {
-        if (a.toLowerCase() < b.toLowerCase()) return -1;
-        if (a.toLowerCase() > b.toLowerCase()) return 1;
-        return 0;
-    }
-
-    function createSortedLists() {
-        var n;
-        var namesDict = {};
-        var nameKeys = [];
-        var installDict = {};
-        var installKeys = [];
-
-        for (n=0; n < clicksList.count; n++) {
-            namesDict[clicksList.get(n).binaryName] = [clicksList.get(n).iconName, clicksList.get(n).installedSize];
-            installDict[clicksList.get(n).installedSize] = [clicksList.get(n).iconName, clicksList.get(n).binaryName];
-        }
-
-        nameKeys = Object.keys(namesDict).sort(noCaseSorting);
-        installKeys = Object.keys(installDict).sort(function(a,b){return b-a});
-
-        for (n=0; n < nameKeys.length; n++) {
-            sortedNamesModel.append({"binaryName":nameKeys[n],"iconName":namesDict[nameKeys[n]][0],"installedSize":namesDict[nameKeys[n]][1]})
-            sortedInstallModel.append({"binaryName":installDict[installKeys[n]][1],"iconName":installDict[installKeys[n]][0],"installedSize":installKeys[n]})
-        }
     }
 
     /* Return used space in a formatted way */

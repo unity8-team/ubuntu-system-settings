@@ -58,7 +58,6 @@ public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
     QAbstractItemModel *getClickList();
-    Q_INVOKABLE QString getClickDir(const QString &name) const;
     QString serialNumber();
     QString vendorString();
     QString updateDate();
@@ -75,7 +74,6 @@ private:
     QString m_updateDate;
     ClickModel m_clickModel;
     ClickFilterProxy m_clickFilterProxy;
-    bool m_sortedBefore;
 };
 
 #endif // STORAGEABOUT_H

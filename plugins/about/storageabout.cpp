@@ -39,19 +39,6 @@ StorageAbout::StorageAbout(QObject *parent) :
 {
 }
 
-QString StorageAbout::getClickDir(const QString &name) const
-{
-    QFile clickBinary("/usr/bin/click");
-    if (!clickBinary.exists()) {
-        return QString();
-    }
-
-    QProcess clickProcess;
-    clickProcess.start("/usr/bin/click", QStringList() << "pkgdir" << name);
-    clickProcess.waitForFinished(-1);
-    return clickProcess.readAllStandardOutput().simplified();
-}
-
 QString StorageAbout::serialNumber()
 {
     static char serialBuffer[PROP_NAME_MAX];
