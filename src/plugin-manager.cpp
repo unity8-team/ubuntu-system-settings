@@ -23,8 +23,6 @@
 #include "plugin.h"
 #include "plugin-manager.h"
 
-#include <QDebug>
-
 #include <QDir>
 #include <QMap>
 #include <QProcessEnvironment>
