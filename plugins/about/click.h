@@ -68,10 +68,6 @@ class ClickFilterProxy: public QSortFilterProxyModel
 public:
     ClickFilterProxy(ClickModel *parent = 0);
 
-/*protected:
-    virtual bool lessThan(const QModelIndex &left,
-                          const QModelIndex &right) const;*/
-
 };
 
 #endif // CLICK_H
