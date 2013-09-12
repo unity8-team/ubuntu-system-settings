@@ -10,7 +10,7 @@ IndicatorBase {
     title: i18n.tr("Wi-Fi")
 	busName: "com.canonical.indicator.network"
 	actionsObjectPath: "/com/canonical/indicator/network"
-	menuObjectPath: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
+	menuObjectPaths: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
 
     MenuItemFactory {
         id: menuFactory
