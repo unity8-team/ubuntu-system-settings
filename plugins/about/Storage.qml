@@ -131,8 +131,8 @@ ItemPage {
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
                     text: displayName
                     value: installedSize ?
-                               storagePage.getFormattedSpace(installedSize)
-                             : i18n.tr("N/A")
+                               storagePage.getFormattedSpace(installedSize) :
+                               i18n.tr("N/A")
                 }
             }
         }
