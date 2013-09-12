@@ -19,7 +19,6 @@
 
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
-import Unity.Indicators 0.1 as Indicators
 
 // Make sure we don't duplicate models.
 Item {
@@ -35,7 +34,7 @@ Item {
             return null;
         }
 
-        var component = Indicators.UnityMenuModelCache.model(menuObjectPath);
+        var component = UnityMenuModelCache.model(menuObjectPath);
         if (!component) {
             component = modelComponent.createObject(cachedModel);
             return component;
@@ -53,7 +52,7 @@ Item {
             menuObjectPath: cachedModel.menuObjectPath
 
             Component.onCompleted: {
-                Indicators.UnityMenuModelCache.registerModel(cachedModel.menuObjectPath, unityModel);
+                UnityMenuModelCache.registerModel(cachedModel.menuObjectPath, unityModel);
             }
         }
     }
