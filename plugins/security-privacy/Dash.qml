@@ -34,9 +34,9 @@ ItemPage {
         onChanged: {
             if (key == "remoteContentSearch")
                 if (value == 'all')
-                    valueSelector.selectedIndex = 1
+                    selectorId.selectedIndex = 1
                 else
-                    valueSelector.selectedIndex = 0
+                    selectorId.selectedIndex = 0
         }
     }
 
@@ -44,18 +44,14 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListItem.Standard {
+        ListItem.ItemSelector {
+            id: selectorId
             text: i18n.tr("Return results from:")
-        }
-
-        ListItem.ValueSelector {
-            id: valueSelector
-            values: [i18n.tr("Phone only"), i18n.tr("Phone and Internet")]
+            model: [i18n.tr("Phone only"), i18n.tr("Phone and Internet")]
             selectedIndex: (unitySettings.remoteContentSearch === 'all') ? 1 : 0
             expanded: true
-            onExpandedChanged: expanded = true
             onSelectedIndexChanged:
-                unitySettings.remoteContentSearch = (valueSelector.selectedIndex == 0) ? "none" : "all"
+                unitySettings.remoteContentSearch = (selectorId.selectedIndex == 0) ? "none" : "all"
         }
     }
 }
