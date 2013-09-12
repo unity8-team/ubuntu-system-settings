@@ -23,8 +23,12 @@
 #include "plugin.h"
 #include "plugin-manager.h"
 
+#include <QDebug>
+
 #include <QDir>
 #include <QMap>
+#include <QProcessEnvironment>
+#include <QQmlContext>
 #include <QQmlEngine>
 #include <QStringList>
 
@@ -79,12 +83,21 @@ void PluginManagerPrivate::reload()
     Q_Q(PluginManager);
     clear();
     QDir path(baseDir, "*.settings");
+
+    // FIXME: This should be accessible via context properties
+    bool showAll = false;
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    if (environment.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
+        QString showAllS = environment.value("USS_SHOW_ALL_UI", QString());
+        showAll = !showAllS.isEmpty();
+    }
     Q_FOREACH(QFileInfo fileInfo, path.entryInfoList()) {
         Plugin *plugin = new Plugin(fileInfo);
         QQmlEngine::setContextForObject(plugin,
                                         QQmlEngine::contextForObject(q));
         QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];
-        pluginList.insert(fileInfo.baseName(), plugin);
+        if (showAll || !plugin->hideByDefault())
+            pluginList.insert(fileInfo.baseName(), plugin);
     }
 }
 
