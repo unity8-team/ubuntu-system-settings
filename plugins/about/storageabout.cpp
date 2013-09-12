@@ -34,8 +34,7 @@
 StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
-    m_clickFilterProxy(&m_clickModel),
-    m_sortedBefore(false)
+    m_clickFilterProxy(&m_clickModel)
 {
 }
 
