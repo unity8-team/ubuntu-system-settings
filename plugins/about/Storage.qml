@@ -110,10 +110,12 @@ ItemPage {
                 text: i18n.tr("Installed apps")
                 model: [i18n.tr("By name"), i18n.tr("By size")]
                 selectedIndex:
-                    backendInfo.sortRole === ClickRoles.DisplayNameRole ? 0 : 1
+                    (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?
+                        0 :
+                        1
                 onSelectedIndexChanged: {
                     backendInfo.sortRole =
-                            selectedIndex == 0 ?
+                            (selectedIndex == 0) ?
                                 ClickRoles.DisplayNameRole :
                                 ClickRoles.InstalledSizeRole
                 }
