@@ -22,8 +22,6 @@
 #include "i18n.h"
 #include "plugin-manager.h"
 
-#include <QDebug>
-
 #include <QGuiApplication>
 #include <QProcessEnvironment>
 #include <QQmlContext>
@@ -56,8 +54,6 @@ int main(int argc, char **argv)
         QString showAllS = environment.value("USS_SHOW_ALL_UI", QString());
         showAll = !showAllS.isEmpty();
     }
-
-    qDebug() << "showAll =" << showAll;
 
     initTr(I18N_DOMAIN, NULL);
     /* HACK: force the theme until lp #1098578 is fixed */
