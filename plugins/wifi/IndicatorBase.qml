@@ -19,8 +19,10 @@
 
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
+import SystemSettings 1.0
+import Ubuntu.Components 0.1
 
-Item {
+ItemPage {
     id: indicatorItem
 
     // FIXME : should be disabled until bus available when we have desktop indicators
