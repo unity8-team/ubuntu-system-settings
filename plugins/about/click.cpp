@@ -124,5 +124,6 @@ ClickFilterProxy::ClickFilterProxy(ClickModel *parent)
 {
     this->setSourceModel(parent);
     this->setDynamicSortFilter(false);
+    this->setSortCaseSensitivity(Qt::CaseInsensitive);
     this->sort(0);
 }
