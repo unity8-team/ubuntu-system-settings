@@ -22,37 +22,23 @@
 #include <act/act.h>
 #include "keyboard-plugin.h"
 
-#define ORG "maliit.org"
-#define APP "server"
+#define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
 
-#define PLUGIN_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
+#define KEY_ENABLED_LANGUAGES   "enabled-languages"
+#define KEY_AUTO_CAPITALIZATION "auto-capitalization"
+#define KEY_AUTO_COMPLETION     "auto-completion"
+#define KEY_PREDICTIVE_TEXT     "predictive-text"
+#define KEY_KEY_PRESS_FEEDBACK  "key-press-feedback"
 
-#define PLUGIN_PREFIX "libubuntu-keyboard-plugin.so:"
-#define MALIIT_PREFIX "maliit/pluginsettings/libmaliit-keyboard-plugin.so"
-#define UBUNTU_PREFIX "maliit/pluginsettings/libubuntu-keyboard-plugin.so"
-
-#define KEY_PLUGINS        "maliit/onscreen/enabled"
-#define KEY_CAPITALIZATION "auto_caps_enabled"
-#define KEY_COMPLETION     "word_engine_enabled"
-#define KEY_CORRECTION     "auto_correct_enabled"
-
-static QSettings *maliitSettings;
+#define LANGUAGE_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
 
 static QList<QLocale> *languageLocales;
 static QHash<QLocale::Language, unsigned int> *languageIndices;
 static QStringList *languageNames;
 
+static GSettings *maliitSettings;
 static QList<KeyboardPlugin *> *keyboardPlugins;
 static SubsetModel *pluginsModel;
-
-static QSettings *
-getMaliitSettings()
-{
-    if (maliitSettings == NULL)
-        maliitSettings = new QSettings("maliit.org", "server");
-
-    return maliitSettings;
-}
 
 static bool
 compareLocales(const QLocale &locale0,
@@ -65,8 +51,8 @@ compareLocales(const QLocale &locale0,
 }
 
 static bool
-comparePlugins(KeyboardPlugin *plugin0,
-               KeyboardPlugin *plugin1)
+comparePlugins(const KeyboardPlugin *plugin0,
+               const KeyboardPlugin *plugin1)
 {
     const QString &displayName0(plugin0->displayName());
     const QString &displayName1(plugin1->displayName());
@@ -134,13 +120,22 @@ getLanguageNames()
     return languageNames;
 }
 
+static GSettings *
+getMaliitSettings()
+{
+    if (maliitSettings == NULL)
+        maliitSettings = g_settings_new(UBUNTU_KEYBOARD_SCHEMA_ID);
+
+    return maliitSettings;
+}
+
 static QList<KeyboardPlugin *> *
 getKeyboardPlugins()
 {
     if (keyboardPlugins == NULL) {
         keyboardPlugins = new QList<KeyboardPlugin *>;
 
-        QDir pluginDir(PLUGIN_DIR);
+        QDir pluginDir(LANGUAGE_DIR);
 
         pluginDir.setFilter(QDir::Files);
         pluginDir.setNameFilters(QStringList("*.xml"));
@@ -174,21 +169,22 @@ getPluginsModel()
                 pluginNames += (*i)->name();
         }
 
+        GVariantIter *iter;
+        const gchar *language;
         QList<int> pluginIndices;
-        QStringList currentPlugins(getMaliitSettings()->value(KEY_PLUGINS).toStringList());
 
-        for (QStringList::const_iterator i = currentPlugins.begin(); i != currentPlugins.end(); ++i) {
-            if (i->startsWith(PLUGIN_PREFIX)) {
-                QString plugin(i->right(i->length() - strlen(PLUGIN_PREFIX)));
+        g_settings_get(getMaliitSettings(), KEY_ENABLED_LANGUAGES, "as", &iter);
 
-                for (int j = 0; j < getKeyboardPlugins()->length(); j++) {
-                    if ((*getKeyboardPlugins())[j]->name() == plugin) {
-                        pluginIndices += j;
-                        break;
-                    }
+        while (g_variant_iter_next(iter, "&s", &language)) {
+            for (int i = 0; i < getKeyboardPlugins()->length(); i++) {
+                if ((*getKeyboardPlugins())[i]->name() == language) {
+                    pluginIndices += i;
+                    break;
                 }
             }
         }
+
+        g_variant_iter_free(iter);
 
         pluginsModel = new SubsetModel();
         pluginsModel->setSuperset(pluginNames);
@@ -302,81 +298,75 @@ LanguagePlugin::pluginsModel()
 void
 LanguagePlugin::updatePlugins()
 {
-    QStringList currentPlugins;
+    GVariantBuilder builder;
+    GVariant *currentPlugins;
+
+    g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
 
     for (QList<int>::const_iterator i = pluginsModel()->subset().begin(); i != pluginsModel()->subset().end(); ++i)
-        currentPlugins += PLUGIN_PREFIX + (*getKeyboardPlugins())[*i]->name();
+        g_variant_builder_add(&builder, "s", qPrintable((*getKeyboardPlugins())[*i]->name()));
 
-    getMaliitSettings()->setValue(KEY_PLUGINS, currentPlugins);
+    currentPlugins = g_variant_ref_sink(g_variant_builder_end(&builder));
+    g_settings_set_value(getMaliitSettings(), KEY_ENABLED_LANGUAGES, currentPlugins);
+    g_variant_unref(currentPlugins);
 }
 
 bool
 LanguagePlugin::autoCapitalization() const
 {
-    return getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_CAPITALIZATION, false).toBool();
+    return g_settings_get_boolean(getMaliitSettings(), KEY_AUTO_CAPITALIZATION);
 }
 
 void
 LanguagePlugin::setAutoCapitalization(bool value)
 {
-    bool changed = value != getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_CAPITALIZATION).toBool();
-
-    getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_CAPITALIZATION, value);
-    getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_CAPITALIZATION, value);
-    getMaliitSettings()->sync();
-
-    if (changed)
+    if (value != autoCapitalization()) {
+        g_settings_set_boolean(getMaliitSettings(), KEY_AUTO_CAPITALIZATION, value);
         Q_EMIT autoCapitalizationChanged();
+    }
 }
 
 bool
 LanguagePlugin::autoCompletion() const
 {
-    return getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_COMPLETION, false).toBool();
+    return g_settings_get_boolean(getMaliitSettings(), KEY_AUTO_COMPLETION);
 }
 
 void
 LanguagePlugin::setAutoCompletion(bool value)
 {
-    bool changed = value != getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_COMPLETION).toBool();
-
-    getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_COMPLETION, value);
-    getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_COMPLETION, value);
-    getMaliitSettings()->sync();
-
-    if (changed)
+    if (value != autoCompletion()) {
+        g_settings_set_boolean(getMaliitSettings(), KEY_AUTO_COMPLETION, value);
         Q_EMIT autoCompletionChanged();
+    }
 }
 
 bool
-LanguagePlugin::autoCorrection() const
+LanguagePlugin::predictiveText() const
 {
-    return getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_CORRECTION, false).toBool();
+    return g_settings_get_boolean(getMaliitSettings(), KEY_PREDICTIVE_TEXT);
 }
 
 void
-LanguagePlugin::setAutoCorrection(bool value)
+LanguagePlugin::setPredictiveText(bool value)
 {
-    bool changed = value != getMaliitSettings()->value(UBUNTU_PREFIX "/" KEY_CORRECTION).toBool();
-
-    getMaliitSettings()->setValue(MALIIT_PREFIX "/" KEY_CORRECTION, value);
-    getMaliitSettings()->setValue(UBUNTU_PREFIX "/" KEY_CORRECTION, value);
-    getMaliitSettings()->sync();
-
-    if (changed)
-        Q_EMIT autoCorrectionChanged();
+    if (value != predictiveText()) {
+        g_settings_set_boolean(getMaliitSettings(), KEY_PREDICTIVE_TEXT, value);
+        Q_EMIT predictiveTextChanged();
+    }
 }
 
 bool
-LanguagePlugin::autoPunctuation() const
+LanguagePlugin::keyPressFeedback() const
 {
-    /* TODO: Get auto punctuation setting. */
-    return false;
+    return g_settings_get_boolean(getMaliitSettings(), KEY_KEY_PRESS_FEEDBACK);
 }
 
 void
-LanguagePlugin::setAutoPunctuation(bool value)
+LanguagePlugin::setKeyPressFeedback(bool value)
 {
-    /* TODO: Set auto punctuation setting. */
-    Q_UNUSED(value);
+    if (value != keyPressFeedback()) {
+        g_settings_set_boolean(getMaliitSettings(), KEY_KEY_PRESS_FEEDBACK, value);
+        Q_EMIT keyPressFeedbackChanged();
+    }
 }

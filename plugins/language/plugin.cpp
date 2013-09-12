@@ -20,7 +20,6 @@
  */
 
 #include <QtQml>
-#include <QtQml/QQmlContext>
 #include "plugin.h"
 #include "subset-model.h"
 #include "language-plugin.h"

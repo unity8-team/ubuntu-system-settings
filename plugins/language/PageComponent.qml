@@ -79,22 +79,22 @@ ItemPage {
             }
 
             ListItem.Standard {
-                text: i18n.tr("Auto correction")
-
-                control: Switch {
-                    checked: plugin.autoCorrection
-
-                    onClicked: plugin.autoCorrection = checked
-                }
-            }
-
-            ListItem.Standard {
                 text: i18n.tr("Auto completion")
 
                 control: Switch {
                     checked: plugin.autoCompletion
 
                     onClicked: plugin.autoCompletion = checked
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Word prediction")
+
+                control: Switch {
+                    checked: plugin.wordPrediction
+
+                    onClicked: plugin.wordPrediction = checked
                 }
             }
 
@@ -117,18 +117,17 @@ ItemPage {
             ListItem.Divider {}
 
             ListItem.Standard {
-                text: i18n.tr("Auto punctuation")
+                text: i18n.tr("Key press feedback")
 
                 control: Switch {
-                    enabled: false
-                    checked: plugin.autoPunctuation
+                    checked: plugin.keyPressFeedback
 
-                    onClicked: plugin.autoPunctuation = checked
+                    onClicked: plugin.keyPressFeedback = checked
                 }
             }
 
             ListItem.Caption {
-                text: i18n.tr("Adds a period, and any missing quotes or brackets, when you tap Space twice.")
+                text: i18n.tr("Vibrate or emit sound on key press.")
             }
         }
     }

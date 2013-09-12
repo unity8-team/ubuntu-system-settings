@@ -53,15 +53,15 @@ private:
                WRITE setAutoCompletion
                NOTIFY autoCompletionChanged)
 
-    Q_PROPERTY(bool autoCorrection
-               READ autoCorrection
-               WRITE setAutoCorrection
-               NOTIFY autoCorrectionChanged)
+    Q_PROPERTY(bool predictiveText
+               READ predictiveText
+               WRITE setPredictiveText
+               NOTIFY predictiveTextChanged)
 
-    Q_PROPERTY(bool autoPunctuation
-               READ autoPunctuation
-               WRITE setAutoPunctuation
-               NOTIFY autoPunctuationChanged)
+    Q_PROPERTY(bool keyPressFeedback
+               READ keyPressFeedback
+               WRITE setKeyPressFeedback
+               NOTIFY keyPressFeedbackChanged)
 
 public:
 
@@ -84,13 +84,13 @@ public:
     void setAutoCompletion(bool value);
     Q_SIGNAL void autoCompletionChanged() const;
 
-    bool autoCorrection() const;
-    void setAutoCorrection(bool value);
-    Q_SIGNAL void autoCorrectionChanged() const;
+    bool predictiveText() const;
+    void setPredictiveText(bool value);
+    Q_SIGNAL void predictiveTextChanged() const;
 
-    bool autoPunctuation() const;
-    void setAutoPunctuation(bool value);
-    Q_SIGNAL void autoPunctuationChanged() const;
+    bool keyPressFeedback() const;
+    void setKeyPressFeedback(bool value);
+    Q_SIGNAL void keyPressFeedbackChanged() const;
 
 private:
 

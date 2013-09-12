@@ -42,6 +42,7 @@ Depends: ${misc:Depends},
          whoopsie-preferences (>= 0.9),
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 0.9),
+         ubuntu-keyboard-data,
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
 Conflicts: ubuntu-system-settings-example
