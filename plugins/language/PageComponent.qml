@@ -89,12 +89,12 @@ ItemPage {
             }
 
             ListItem.Standard {
-                text: i18n.tr("Word prediction")
+                text: i18n.tr("Predictive text")
 
                 control: Switch {
-                    checked: plugin.wordPrediction
+                    checked: plugin.predictiveText
 
-                    onClicked: plugin.wordPrediction = checked
+                    onClicked: plugin.predictiveText = checked
                 }
             }
 
@@ -127,7 +127,7 @@ ItemPage {
             }
 
             ListItem.Caption {
-                text: i18n.tr("Vibrate or emit sound on key press.")
+                text: i18n.tr("Vibrate or emit a sound whenever a key is pressed.")
             }
         }
     }
