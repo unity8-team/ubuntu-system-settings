@@ -25,6 +25,8 @@
 
 #include <QDir>
 #include <QMap>
+#include <QProcessEnvironment>
+#include <QQmlContext>
 #include <QQmlEngine>
 #include <QStringList>
 
@@ -79,12 +81,26 @@ void PluginManagerPrivate::reload()
     Q_Q(PluginManager);
     clear();
     QDir path(baseDir, "*.settings");
+
+    /* Use an environment variable USS_SHOW_ALL_UI to show unfinished / beta /
+     * deferred components or panels */
+    bool showAll = false;
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    if (environment.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
+        QString showAllS = environment.value("USS_SHOW_ALL_UI", QString());
+        showAll = !showAllS.isEmpty();
+    }
+
+    QQmlContext *ctx = QQmlEngine::contextForObject(q);
+    if (ctx)
+        ctx->engine()->rootContext()->setContextProperty("showAllUI", showAll);
+
     Q_FOREACH(QFileInfo fileInfo, path.entryInfoList()) {
         Plugin *plugin = new Plugin(fileInfo);
-        QQmlEngine::setContextForObject(plugin,
-                                        QQmlEngine::contextForObject(q));
+        QQmlEngine::setContextForObject(plugin, ctx);
         QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];
-        pluginList.insert(fileInfo.baseName(), plugin);
+        if (showAll || !plugin->hideByDefault())
+            pluginList.insert(fileInfo.baseName(), plugin);
     }
 }
 
