@@ -51,6 +51,7 @@ public:
     virtual void setSubset(const QList<int> &subset);
     Q_SIGNAL virtual void subsetChanged() const;
 
+    Q_INVOKABLE virtual bool checked(int element);
     Q_INVOKABLE virtual void setChecked(int  element,
                                         bool checked,
                                         int  timeout);

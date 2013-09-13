@@ -49,7 +49,7 @@ ItemPage {
             textEntry: display
             checkStatus: checked
 
-            onClicked: {
+            onCheckStatusChanged: {
                 var element
 
                 if (index < plugin.pluginsModel.subset.length)

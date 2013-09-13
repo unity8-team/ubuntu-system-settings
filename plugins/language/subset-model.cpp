@@ -108,6 +108,12 @@ SubsetModel::setSubset(const QList<int> &subset)
     }
 }
 
+bool
+SubsetModel::checked(int element)
+{
+    return _state[element]->checked;
+}
+
 void
 SubsetModel::setChecked(int  element,
                         bool checked,
