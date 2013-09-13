@@ -22,13 +22,20 @@
 #include "unitymenumodelstack.h"
 #include "unitymenumodelcache.h"
 
+static QObject* menuModelCacheSingleton(QQmlEngine* engine, QJSEngine* scriptEngine)
+{
+	Q_UNUSED(engine);
+	Q_UNUSED(scriptEngine);
+	return new UnityMenuModelCache;
+}
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wifi"));
     qmlRegisterType<ModelPrinter>(uri, 1, 0, "UbuntuWifiPanel");
     qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
-    qmlRegisterType<UnityMenuModelCache>(uri, 1, 0, "UnityMenuModelCache");
+
+	qmlRegisterSingletonType<UnityMenuModelCache>(uri, 0, 1, "UnityMenuModelCache", menuModelCacheSingleton);
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
