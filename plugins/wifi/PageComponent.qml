@@ -7,6 +7,7 @@ import QMenuModel 0.1
 
 
 IndicatorBase {
+	id: wifibase
     title: i18n.tr("Wi-Fi")
 	busName: "com.canonical.indicator.network"
 	actionsObjectPath: "/com/canonical/indicator/network"
@@ -14,12 +15,17 @@ IndicatorBase {
 
     MenuItemFactory {
         id: menuFactory
-		model: menuModel
+		model: wifibase.menuModel
+    }
+
+    UnityMenuModelStack {
+        id: menuStack
+        head: wifibase.menuModel
     }
 
     ListView {
         id: mainMenu
-        model: menuModel
+        model: menuStack.tail ? menuStack.tail : null
 
         anchors {
             fill: parent
@@ -65,9 +71,10 @@ IndicatorBase {
                     right: parent.right
                 }
 
-                sourceComponent: menuFactory.load(model)
+                sourceComponent: menuFactory.load(mainMenu.model)
 
                 onLoaded: {
+                    console.debug("Loaded")
                     if (model.type === rootMenuType) {
                         menuStack.push(mainMenu.model.submenu(index));
                     }
