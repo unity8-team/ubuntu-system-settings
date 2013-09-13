@@ -66,6 +66,8 @@ ItemPage {
                 console.log('  checked =', plugin.layoutsModel.checked(element), '->', checkStatus)
 
                 plugin.layoutsModel.setChecked(element, checkStatus, checkStatus ? 0 : 2000)
+
+                checkStatus = Qt.binding(function() { return checked })
             }
         }
 
