@@ -19,6 +19,7 @@
 
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
+import Ubuntu.SystemSettings.Wifi 1.0
 
 // Make sure we don't duplicate models.
 Item {
