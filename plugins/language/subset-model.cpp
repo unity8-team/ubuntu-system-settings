@@ -20,9 +20,10 @@
 
 #include "subset-model.h"
 
-#define SECTION_ROLE Qt::UserRole
-#define DISPLAY_ROLE Qt::DisplayRole
-#define CHECKED_ROLE Qt::CheckStateRole
+#define SUBSET_ROLE   (Qt::UserRole + 0)
+#define SUPERSET_ROLE (Qt::UserRole + 1)
+#define DISPLAY_ROLE  (Qt::DisplayRole)
+#define CHECKED_ROLE  (Qt::CheckStateRole)
 
 bool
 changeLessThan(const SubsetModel::Change *change0,
@@ -162,7 +163,8 @@ SubsetModel::roleNames() const
 {
     QHash<int, QByteArray> roleNames;
 
-    roleNames.insert(SECTION_ROLE, "section");
+    roleNames.insert(SUBSET_ROLE, "subset");
+    roleNames.insert(SUPERSET_ROLE, "superset");
     roleNames.insert(DISPLAY_ROLE, "display");
     roleNames.insert(CHECKED_ROLE, "checked");
 
@@ -189,17 +191,21 @@ QVariant
 SubsetModel::data(const QModelIndex &index,
                   int                role) const
 {
-    qDebug("%lld: data(%d, %s)", QDateTime::currentMSecsSinceEpoch(), index.row(), role == SECTION_ROLE ? "SECTION_ROLE" : role == DISPLAY_ROLE ? "DISPLAY_ROLE" : "CHECKED_ROLE");
+    qDebug("%lld: data(%d, %s)", QDateTime::currentMSecsSinceEpoch(), index.row(), role == SUBSET_ROLE   ? "SUBSET_ROLE"   :
+                                                                                   role == SUPERSET_ROLE ? "SUPERSET_ROLE" :
+                                                                                   role == DISPLAY_ROLE  ? "DISPLAY_ROLE"  :
+                                                                                                           "CHECKED_ROLE");
 
     switch (role) {
-    case SECTION_ROLE:
-        return index.row() < _subset.length() ? "subset" : "superset";
+    case SUBSET_ROLE:
+    case SUPERSET_ROLE:
+        return (role == SUBSET_ROLE) == (index.row() < _subset.length());
 
     case DISPLAY_ROLE:
         return _superset[elementAtIndex(index)];
 
     case CHECKED_ROLE:
-        return _state[elementAtIndex(index)]->checked;
+        return _state[elementAtIndex(index)]->checked ? Qt::Checked : Qt::Unchecked;
     }
 
     return QVariant();
@@ -212,10 +218,19 @@ SubsetModel::setData(const QModelIndex &index,
 {
     switch (role) {
     case CHECKED_ROLE:
-        if (static_cast<QMetaType::Type>(value.type()) == QMetaType::Bool) {
+        switch (static_cast<QMetaType::Type>(value.type())) {
+        case QMetaType::Bool:
+        case QMetaType::QChar:
+        case QMetaType::Int:
+        case QMetaType::UInt:
+        case QMetaType::LongLong:
+        case QMetaType::ULongLong:
             setChecked(elementAtIndex(index), value.toBool(), 0);
 
             return true;
+
+        default:
+            break;
         }
 
         break;

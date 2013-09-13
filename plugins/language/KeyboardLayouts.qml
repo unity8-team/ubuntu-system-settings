@@ -39,9 +39,9 @@ ItemPage {
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        section.property: "section"
+        section.property: "subset"
         section.delegate: ListItem.Standard {
-            text: section == "subset" ? i18n.tr("Current layouts:") : i18n.tr("All layouts available:")
+            text: section == "true" ? i18n.tr("Current layouts:") : i18n.tr("All layouts available:")
         }
 
         model: plugin.layoutsModel
