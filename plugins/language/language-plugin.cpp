@@ -20,25 +20,25 @@
 
 #include "language-plugin.h"
 #include <act/act.h>
-#include "keyboard-plugin.h"
+#include "keyboard-layout.h"
 
 #define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
 
-#define KEY_ENABLED_LANGUAGES   "enabled-languages"
+#define KEY_ENABLED_LAYOUTS     "enabled-languages"
 #define KEY_AUTO_CAPITALIZATION "auto-capitalization"
 #define KEY_AUTO_COMPLETION     "auto-completion"
 #define KEY_PREDICTIVE_TEXT     "predictive-text"
 #define KEY_KEY_PRESS_FEEDBACK  "key-press-feedback"
 
-#define LANGUAGE_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
+#define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
 
 static QList<QLocale> *languageLocales;
 static QHash<QLocale::Language, unsigned int> *languageIndices;
 static QStringList *languageNames;
 
 static GSettings *maliitSettings;
-static QList<KeyboardPlugin *> *keyboardPlugins;
-static SubsetModel *pluginsModel;
+static QList<KeyboardLayout *> *keyboardLayouts;
+static SubsetModel *layoutsModel;
 
 static bool
 compareLocales(const QLocale &locale0,
@@ -51,15 +51,15 @@ compareLocales(const QLocale &locale0,
 }
 
 static bool
-comparePlugins(const KeyboardPlugin *plugin0,
-               const KeyboardPlugin *plugin1)
+compareLayouts(const KeyboardLayout *layout0,
+               const KeyboardLayout *layout1)
 {
-    const QString &displayName0(plugin0->displayName());
-    const QString &displayName1(plugin1->displayName());
-    const QString &language0(plugin0->language());
-    const QString &language1(plugin1->language());
-    const QString &name0(plugin0->name());
-    const QString &name1(plugin1->name());
+    const QString &displayName0(layout0->displayName());
+    const QString &displayName1(layout1->displayName());
+    const QString &language0(layout0->language());
+    const QString &language1(layout1->language());
+    const QString &name0(layout0->name());
+    const QString &name1(layout1->name());
 
     return displayName0 < displayName1 || (displayName0 == displayName1 && (language0 < language1 || (language0 == language1 && name0 < name1)));
 }
@@ -129,56 +129,56 @@ getMaliitSettings()
     return maliitSettings;
 }
 
-static QList<KeyboardPlugin *> *
-getKeyboardPlugins()
+static QList<KeyboardLayout *> *
+getKeyboardLayouts()
 {
-    if (keyboardPlugins == NULL) {
-        keyboardPlugins = new QList<KeyboardPlugin *>;
+    if (keyboardLayouts == NULL) {
+        keyboardLayouts = new QList<KeyboardLayout *>;
 
-        QDir pluginDir(LANGUAGE_DIR);
+        QDir layoutsDir(LAYOUTS_DIR);
 
-        pluginDir.setFilter(QDir::Files);
-        pluginDir.setNameFilters(QStringList("*.xml"));
-        pluginDir.setSorting(QDir::Name);
+        layoutsDir.setFilter(QDir::Files);
+        layoutsDir.setNameFilters(QStringList("*.xml"));
+        layoutsDir.setSorting(QDir::Name);
 
-        QFileInfoList fileInfoList(pluginDir.entryInfoList());
+        QFileInfoList fileInfoList(layoutsDir.entryInfoList());
 
         for (QFileInfoList::const_iterator i = fileInfoList.begin(); i != fileInfoList.end(); ++i) {
-            KeyboardPlugin *plugin = new KeyboardPlugin(*i);
+            KeyboardLayout *layout = new KeyboardLayout(*i);
 
-            if (!plugin->language().isEmpty())
-                *keyboardPlugins += plugin;
+            if (!layout->language().isEmpty())
+                *keyboardLayouts += layout;
         }
 
-        qSort(keyboardPlugins->begin(), keyboardPlugins->end(), comparePlugins);
+        qSort(keyboardLayouts->begin(), keyboardLayouts->end(), compareLayouts);
     }
 
-    return keyboardPlugins;
+    return keyboardLayouts;
 }
 
 static SubsetModel *
-getPluginsModel()
+getLayoutsModel()
 {
-    if (pluginsModel == NULL) {
-        QStringList pluginNames;
+    if (layoutsModel == NULL) {
+        QStringList layoutNames;
 
-        for (QList<KeyboardPlugin *>::const_iterator i = getKeyboardPlugins()->begin(); i != getKeyboardPlugins()->end(); ++i) {
+        for (QList<KeyboardLayout *>::const_iterator i = getKeyboardLayouts()->begin(); i != getKeyboardLayouts()->end(); ++i) {
             if (!(*i)->displayName().isEmpty())
-                pluginNames += (*i)->displayName();
+                layoutNames += (*i)->displayName();
             else
-                pluginNames += (*i)->name();
+                layoutNames += (*i)->name();
         }
 
         GVariantIter *iter;
         const gchar *language;
-        QList<int> pluginIndices;
+        QList<int> layoutIndices;
 
-        g_settings_get(getMaliitSettings(), KEY_ENABLED_LANGUAGES, "as", &iter);
+        g_settings_get(getMaliitSettings(), KEY_ENABLED_LAYOUTS, "as", &iter);
 
         while (g_variant_iter_next(iter, "&s", &language)) {
-            for (int i = 0; i < getKeyboardPlugins()->length(); i++) {
-                if ((*getKeyboardPlugins())[i]->name() == language) {
-                    pluginIndices += i;
+            for (int i = 0; i < getKeyboardLayouts()->length(); i++) {
+                if ((*getKeyboardLayouts())[i]->name() == language) {
+                    layoutIndices += i;
                     break;
                 }
             }
@@ -186,17 +186,17 @@ getPluginsModel()
 
         g_variant_iter_free(iter);
 
-        pluginsModel = new SubsetModel();
-        pluginsModel->setSuperset(pluginNames);
-        pluginsModel->setSubset(pluginIndices);
+        layoutsModel = new SubsetModel();
+        layoutsModel->setSuperset(layoutNames);
+        layoutsModel->setSubset(layoutIndices);
     }
 
-    return pluginsModel;
+    return layoutsModel;
 }
 
 LanguagePlugin::LanguagePlugin(QObject *parent) :
     QObject(parent),
-    _updatePluginsConnected(false)
+    _updateLayoutsConnected(false)
 {
 }
 
@@ -284,31 +284,31 @@ LanguagePlugin::setCurrentLanguage(int index)
 }
 
 SubsetModel *
-LanguagePlugin::pluginsModel()
+LanguagePlugin::layoutsModel()
 {
-    if (!_updatePluginsConnected) {
-        connect(getPluginsModel(), SIGNAL(subsetChanged()), SLOT(updatePlugins()));
+    if (!_updateLayoutsConnected) {
+        connect(getLayoutsModel(), SIGNAL(subsetChanged()), SLOT(updateLayouts()));
 
-        _updatePluginsConnected = true;
+        _updateLayoutsConnected = true;
     }
 
-    return getPluginsModel();
+    return getLayoutsModel();
 }
 
 void
-LanguagePlugin::updatePlugins()
+LanguagePlugin::updateLayouts()
 {
     GVariantBuilder builder;
-    GVariant *currentPlugins;
+    GVariant *currentLayouts;
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
 
-    for (QList<int>::const_iterator i = pluginsModel()->subset().begin(); i != pluginsModel()->subset().end(); ++i)
-        g_variant_builder_add(&builder, "s", qPrintable((*getKeyboardPlugins())[*i]->name()));
+    for (QList<int>::const_iterator i = layoutsModel()->subset().begin(); i != layoutsModel()->subset().end(); ++i)
+        g_variant_builder_add(&builder, "s", qPrintable((*getKeyboardLayouts())[*i]->name()));
 
-    currentPlugins = g_variant_ref_sink(g_variant_builder_end(&builder));
-    g_settings_set_value(getMaliitSettings(), KEY_ENABLED_LANGUAGES, currentPlugins);
-    g_variant_unref(currentPlugins);
+    currentLayouts = g_variant_ref_sink(g_variant_builder_end(&builder));
+    g_settings_set_value(getMaliitSettings(), KEY_ENABLED_LAYOUTS, currentLayouts);
+    g_variant_unref(currentLayouts);
 }
 
 bool

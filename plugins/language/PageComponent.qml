@@ -59,9 +59,9 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Keyboard layouts")
-                value: plugin.pluginsModel.subset.length == 1 ?
-                       plugin.pluginsModel.superset[plugin.pluginsModel.subset[0]] :
-                       plugin.pluginsModel.subset.length
+                value: plugin.layoutsModel.subset.length == 1 ?
+                       plugin.layoutsModel.superset[plugin.layoutsModel.subset[0]] :
+                       plugin.layoutsModel.subset.length
                 progression: true
 
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))

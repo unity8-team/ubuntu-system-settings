@@ -39,8 +39,8 @@ private:
                WRITE setCurrentLanguage
                NOTIFY currentLanguageChanged)
 
-    Q_PROPERTY(SubsetModel *pluginsModel
-               READ pluginsModel
+    Q_PROPERTY(SubsetModel *layoutsModel
+               READ layoutsModel
                CONSTANT)
 
     Q_PROPERTY(bool autoCapitalization
@@ -73,8 +73,8 @@ public:
     void setCurrentLanguage(int index);
     Q_SIGNAL void currentLanguageChanged() const;
 
-    SubsetModel *pluginsModel();
-    Q_SLOT void updatePlugins();
+    SubsetModel *layoutsModel();
+    Q_SLOT void updateLayouts();
 
     bool autoCapitalization() const;
     void setAutoCapitalization(bool value);
@@ -94,7 +94,7 @@ public:
 
 private:
 
-    bool _updatePluginsConnected;
+    bool _updateLayoutsConnected;
 };
 
 #endif // LANGUAGE_PLUGIN_H

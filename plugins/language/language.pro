@@ -38,8 +38,8 @@ INCLUDEPATH += .
 PKGCONFIG += accountsservice glib-2.0
 
 # Input
-HEADERS += keyboard-plugin.h subset-model.h language-plugin.h plugin.h
-SOURCES += keyboard-plugin.cpp subset-model.cpp language-plugin.cpp plugin.cpp
+HEADERS += keyboard-layout.h language-plugin.h plugin.h subset-model.h
+SOURCES += keyboard-layout.cpp language-plugin.cpp plugin.cpp subset-model.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)

@@ -18,12 +18,12 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef KEYBOARD_PLUGIN_H
-#define KEYBOARD_PLUGIN_H
+#ifndef KEYBOARD_LAYOUT_H
+#define KEYBOARD_LAYOUT_H
 
 #include <QtCore>
 
-class KeyboardPlugin : public QObject
+class KeyboardLayout : public QObject
 {
 private:
 
@@ -43,12 +43,12 @@ private:
 
 public:
 
-    explicit KeyboardPlugin(const QString &name        = QString(),
+    explicit KeyboardLayout(const QString &name        = QString(),
                             const QString &language    = QString(),
                             const QString &displayName = QString(),
                             QObject       *parent      = NULL);
 
-    explicit KeyboardPlugin(const QFileInfo &fileInfo,
+    explicit KeyboardLayout(const QFileInfo &fileInfo,
                             QObject         *parent   = NULL);
 
     const QString &name() const;
@@ -62,4 +62,4 @@ private:
     QString _displayName;
 };
 
-#endif // KEYBOARD_PLUGIN_H
+#endif // KEYBOARD_LAYOUT_H

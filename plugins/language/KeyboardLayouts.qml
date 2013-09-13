@@ -44,7 +44,7 @@ ItemPage {
             text: section == "subset" ? i18n.tr("Current layouts:") : i18n.tr("All layouts available:")
         }
 
-        model: plugin.pluginsModel
+        model: plugin.layoutsModel
         delegate: SettingsCheckEntry {
             textEntry: display
             checkStatus: checked
@@ -52,12 +52,12 @@ ItemPage {
             onCheckStatusChanged: {
                 var element
 
-                if (index < plugin.pluginsModel.subset.length)
-                    element = plugin.pluginsModel.subset[index]
+                if (index < plugin.layoutsModel.subset.length)
+                    element = plugin.layoutsModel.subset[index]
                 else
-                    element = index - plugin.pluginsModel.subset.length
+                    element = index - plugin.layoutsModel.subset.length
 
-                plugin.pluginsModel.setChecked(element, checkStatus, checkStatus ? 0 : 2000)
+                plugin.layoutsModel.setChecked(element, checkStatus, checkStatus ? 0 : 2000)
             }
         }
 

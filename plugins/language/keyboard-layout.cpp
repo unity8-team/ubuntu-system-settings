@@ -18,10 +18,10 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "keyboard-plugin.h"
+#include "keyboard-layout.h"
 #include <QtXmlPatterns>
 
-KeyboardPlugin::KeyboardPlugin(const QString &name,
+KeyboardLayout::KeyboardLayout(const QString &name,
                                const QString &language,
                                const QString &displayName,
                                QObject       *parent) :
@@ -32,7 +32,7 @@ KeyboardPlugin::KeyboardPlugin(const QString &name,
 {
 }
 
-KeyboardPlugin::KeyboardPlugin(const QFileInfo &fileInfo,
+KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,
                                QObject         *parent) :
     QObject(parent),
     _name(fileInfo.completeBaseName())
@@ -59,19 +59,19 @@ KeyboardPlugin::KeyboardPlugin(const QFileInfo &fileInfo,
 }
 
 const QString &
-KeyboardPlugin::name() const
+KeyboardLayout::name() const
 {
     return _name;
 }
 
 const QString &
-KeyboardPlugin::language() const
+KeyboardLayout::language() const
 {
     return _language;
 }
 
 const QString &
-KeyboardPlugin::displayName() const
+KeyboardLayout::displayName() const
 {
     return _displayName;
 }
