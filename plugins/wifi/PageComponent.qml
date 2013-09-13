@@ -14,6 +14,16 @@ IndicatorBase {
 	menuObjectPaths: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
 	active: true
 
+	UnityMenuModel {
+		id: menuModel
+		busName: "com.canonical.indicator.network"
+		actions: { "indicator": "/com/canonical/indicator/network" }
+		menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
+		Component.onCompleted: {
+			menuStack.head = menuModel;
+		}
+	}
+
     MenuItemFactory {
         id: menuFactory
 		model: wifibase.menuModel
@@ -21,7 +31,6 @@ IndicatorBase {
 
     UnityMenuModelStack {
         id: menuStack
-        head: wifibase.menuModel
     }
 
     ListView {

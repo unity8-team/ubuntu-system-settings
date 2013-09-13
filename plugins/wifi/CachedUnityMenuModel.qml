@@ -19,7 +19,7 @@
 
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
-import Ubuntu.SystemSettings.Wifi 1.0
+import Ubuntu.SystemSettings.Wifi 1.0 as Wifi
 
 // Make sure we don't duplicate models.
 Item {
@@ -35,7 +35,7 @@ Item {
             return null;
         }
 
-        var component = UnityMenuModelCache.model(menuObjectPath);
+        var component = Wifi.UnityMenuModelCache.model(menuObjectPath);
         if (!component) {
             component = modelComponent.createObject(cachedModel);
             return component;

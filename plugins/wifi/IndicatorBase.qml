@@ -42,13 +42,4 @@ ItemPage {
 
     signal actionGroupUpdated()
     signal modelUpdated()
-
-    property alias menuModel: cachedModel.model
-
-    CachedUnityMenuModel {
-        id: cachedModel
-        busName: active ? indicatorItem.busName : ""
-        actionsObjectPath: active ? indicatorItem.actionsObjectPath : ""
-        menuObjectPath: active ? indicatorItem.deviceMenuObjectPath : ""
-    }
 }
