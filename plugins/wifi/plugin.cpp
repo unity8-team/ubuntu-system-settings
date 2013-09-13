@@ -19,12 +19,14 @@
 #include <QtQml/QQmlContext>
 #include "plugin.h"
 #include "modelprinter.h"
+#include "unitymenumodelstack.h"
 
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wifi"));
     qmlRegisterType<ModelPrinter>(uri, 1, 0, "UbuntuWifiPanel");
+    qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

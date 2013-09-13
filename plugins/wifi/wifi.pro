@@ -61,11 +61,13 @@ uri = Ubuntu.SystemSettings.Wifi
 
 SOURCES += \
     modelprinter.cpp \
-    plugin.cpp
+    plugin.cpp \
+    unitymenumodelstack.cpp
 
 HEADERS += \
     modelprinter.h \
-    plugin.h
+    plugin.h \
+    unitymenumodelstack.h
 
 unix: CONFIG += link_pkgconfig
 unix: PKGCONFIG += qmenumodel
