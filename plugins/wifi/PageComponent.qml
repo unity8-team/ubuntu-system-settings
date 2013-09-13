@@ -12,6 +12,7 @@ IndicatorBase {
 	busName: "com.canonical.indicator.network"
 	actionsObjectPath: "/com/canonical/indicator/network"
 	menuObjectPaths: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
+	active: true
 
     MenuItemFactory {
         id: menuFactory
@@ -89,11 +90,13 @@ IndicatorBase {
                     }
                 }
 
+/*
                 Binding {
                     target: item ? item : null
                     property: "objectName"
                     value: model.action
                 }
+				*/
             }
         }
     }
