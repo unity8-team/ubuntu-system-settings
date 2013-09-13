@@ -7,13 +7,11 @@ TARGET = wifi
 QML_SOURCES = \
     AccessPoint.qml \
     BaseMenuItem.qml \
-    BasicMenuItem.qml \
     CachedUnityMenuModel.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
     HLine.qml \
     IndicatorBase.qml \
-    MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
     RemoveBackground.qml \
@@ -25,13 +23,11 @@ OTHER_FILES += \
     $${QML_SOURCES} \
     AccessPoint.qml \
     BaseMenuItem.qml \
-    BasicMenuItem.qml \
     CachedUnityMenuModel.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
     HLine.qml \
     IndicatorBase.qml \
-    MenuItem.qml \
     MenuItemFactory.qml \
     PageComponent.qml \
     RemoveBackground.qml \
