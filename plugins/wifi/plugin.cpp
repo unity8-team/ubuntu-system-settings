@@ -18,9 +18,7 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
-#include "modelprinter.h"
 #include "unitymenumodelstack.h"
-#include "unitymenumodelcache.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
