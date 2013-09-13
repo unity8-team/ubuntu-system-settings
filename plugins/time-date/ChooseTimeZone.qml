@@ -29,37 +29,35 @@ ItemPage {
 
     UbuntuTimeDatePanel { id: timeDatePanel }
 
-    ListItem.ValueSelector {
-        id: setTimeZoneValueSelector
+    ListItem.ItemSelector {
+        id: setTimeZoneSelector
         text: i18n.tr("Set the time zone:")
-        values: [i18n.tr("Automatically"), i18n.tr("Manually")]
+        model: [i18n.tr("Automatically"), i18n.tr("Manually")]
         expanded: true
-        // FIXME
-        onExpandedChanged: expanded = true
     }
 
     ListItem.Standard {
-        anchors.top: setTimeZoneValueSelector.bottom
+        anchors.top: setTimeZoneSelector.bottom
         text: timeDatePanel.timeZone
         enabled: false
-        visible: setTimeZoneValueSelector.selectedIndex == 0 // Automatically
+        visible: setTimeZoneSelector.selectedIndex == 0 // Automatically
     }
 
     TextField {
         anchors {
-            top: setTimeZoneValueSelector.bottom
+            top: setTimeZoneSelector.bottom
             left: parent.left
             right: parent.right
             margins: units.gu(2)
         }
         id: filterCities
         onTextChanged: timeDatePanel.filter = text
-        visible: setTimeZoneValueSelector.selectedIndex == 1 // Manually
+        visible: setTimeZoneSelector.selectedIndex == 1 // Manually
         Component.onCompleted: forceActiveFocus()
         Connections {
-            target: setTimeZoneValueSelector
+            target: setTimeZoneSelector
             onSelectedIndexChanged: {
-                if (setTimeZoneValueSelector.selectedIndex == 1)
+                if (setTimeZoneSelector.selectedIndex == 1)
                     filterCities.forceActiveFocus()
             }
         }
@@ -76,7 +74,7 @@ ItemPage {
         }
 
         model: timeDatePanel.timeZoneModel
-        visible: setTimeZoneValueSelector.selectedIndex == 1 && count > 0
+        visible: setTimeZoneSelector.selectedIndex == 1 && count > 0
         delegate: ListItem.Standard {
             text: displayName
             onClicked: timeDatePanel.timeZone = timeZone
@@ -86,7 +84,7 @@ ItemPage {
 
     Text {
         anchors.centerIn: parent
-        visible: setTimeZoneValueSelector.selectedIndex ==1 &&
+        visible: setTimeZoneSelector.selectedIndex ==1 &&
                  locationsListView.count == 0
         text: i18n.tr("No matching place")
     }
