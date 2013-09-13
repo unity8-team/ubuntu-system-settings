@@ -20,14 +20,12 @@
 #ifndef UNITYMENUMODELCACHE_H
 #define UNITYMENUMODELCACHE_H
 
-#include "unityindicatorsglobal.h"
-
 #include <QObject>
 #include <QHash>
 
 class UnityMenuModel;
 
-class UNITYINDICATORS_EXPORT UnityMenuModelCache : public QObject
+class UnityMenuModelCache : public QObject
 {
     Q_OBJECT
 public:

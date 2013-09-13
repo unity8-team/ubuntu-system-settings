@@ -68,7 +68,6 @@ SOURCES += \
 HEADERS += \
     modelprinter.h \
     plugin.h \
-    unityindicatorsglobal.h \
     unitymenumodelcache.h \
     unitymenumodelstack.h
 
