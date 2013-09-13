@@ -7,7 +7,6 @@ TARGET = wifi
 QML_SOURCES = \
     AccessPoint.qml \
     BaseMenuItem.qml \
-    CachedUnityMenuModel.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
     HLine.qml \
@@ -23,7 +22,6 @@ OTHER_FILES += \
     $${QML_SOURCES} \
     AccessPoint.qml \
     BaseMenuItem.qml \
-    CachedUnityMenuModel.qml \
     DivMenuItem.qml \
     FramedMenuItem.qml \
     HLine.qml \
@@ -58,13 +56,11 @@ uri = Ubuntu.SystemSettings.Wifi
 SOURCES += \
     modelprinter.cpp \
     plugin.cpp \
-    unitymenumodelcache.cpp \
     unitymenumodelstack.cpp
 
 HEADERS += \
     modelprinter.h \
     plugin.h \
-    unitymenumodelcache.h \
     unitymenumodelstack.h
 
 unix: CONFIG += link_pkgconfig
