@@ -59,9 +59,9 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Keyboard layouts")
-                value: plugin.layoutsModel.subset.length == 1 ?
-                       plugin.layoutsModel.superset[plugin.layoutsModel.subset[0]] :
-                       plugin.layoutsModel.subset.length
+                value: plugin.keyboardLayoutsModel.subset.length == 1 ?
+                       plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]] :
+                       plugin.keyboardLayoutsModel.subset.length
                 progression: true
 
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
@@ -71,8 +71,9 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Spell checking")
-                /* TODO: Get spell checking setting */
-                value: "U.K. English"
+                value: plugin.spellCheckingModel.subset.length == 1 ?
+                       plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]] :
+                       plugin.spellCheckingModel.subset.length
                 progression: true
 
                 onClicked: pageStack.push(Qt.resolvedUrl("SpellChecking.qml"))

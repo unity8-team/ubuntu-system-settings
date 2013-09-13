@@ -39,8 +39,17 @@ private:
                WRITE setCurrentLanguage
                NOTIFY currentLanguageChanged)
 
-    Q_PROPERTY(SubsetModel *layoutsModel
-               READ layoutsModel
+    Q_PROPERTY(SubsetModel *keyboardLayoutsModel
+               READ keyboardLayoutsModel
+               CONSTANT)
+
+    Q_PROPERTY(bool spellChecking
+               READ spellChecking
+               WRITE setSpellChecking
+               NOTIFY spellCheckingChanged)
+
+    Q_PROPERTY(SubsetModel *spellCheckingModel
+               READ spellCheckingModel
                CONSTANT)
 
     Q_PROPERTY(bool autoCapitalization
@@ -73,8 +82,15 @@ public:
     void setCurrentLanguage(int index);
     Q_SIGNAL void currentLanguageChanged() const;
 
-    SubsetModel *layoutsModel();
-    Q_SLOT void updateLayouts();
+    SubsetModel *keyboardLayoutsModel();
+    Q_SLOT void updateKeyboardLayouts();
+
+    bool spellChecking() const;
+    void setSpellChecking(bool value);
+    Q_SIGNAL void spellCheckingChanged() const;
+
+    SubsetModel *spellCheckingModel();
+    Q_SLOT void updateSpellChecking();
 
     bool autoCapitalization() const;
     void setAutoCapitalization(bool value);
@@ -94,7 +110,8 @@ public:
 
 private:
 
-    bool _updateLayoutsConnected;
+    bool _updateKeyboardLayoutsConnected;
+    bool _updateSpellCheckingConnected;
 };
 
 #endif // LANGUAGE_PLUGIN_H

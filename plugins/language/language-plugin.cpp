@@ -38,7 +38,9 @@ static QStringList *languageNames;
 
 static GSettings *maliitSettings;
 static QList<KeyboardLayout *> *keyboardLayouts;
-static SubsetModel *layoutsModel;
+static SubsetModel *keyboardLayoutsModel;
+
+static SubsetModel *spellCheckingModel;
 
 static bool
 compareLocales(const QLocale &locale0,
@@ -157,9 +159,9 @@ getKeyboardLayouts()
 }
 
 static SubsetModel *
-getLayoutsModel()
+getKeyboardLayoutsModel()
 {
-    if (layoutsModel == NULL) {
+    if (keyboardLayoutsModel == NULL) {
         QStringList layoutNames;
 
         for (QList<KeyboardLayout *>::const_iterator i = getKeyboardLayouts()->begin(); i != getKeyboardLayouts()->end(); ++i) {
@@ -186,17 +188,34 @@ getLayoutsModel()
 
         g_variant_iter_free(iter);
 
-        layoutsModel = new SubsetModel();
-        layoutsModel->setSuperset(layoutNames);
-        layoutsModel->setSubset(layoutIndices);
+        keyboardLayoutsModel = new SubsetModel();
+        keyboardLayoutsModel->setSuperset(layoutNames);
+        keyboardLayoutsModel->setSubset(layoutIndices);
     }
 
-    return layoutsModel;
+    return keyboardLayoutsModel;
+}
+
+static SubsetModel *
+getSpellCheckingModel()
+{
+    if (spellCheckingModel == NULL) {
+        // TODO: populate spell checking model
+        QList<int> subset;
+        subset += 0;
+
+        spellCheckingModel = new SubsetModel();
+        spellCheckingModel->setSuperset(*getLanguageNames());
+        spellCheckingModel->setSubset(subset);
+    }
+
+    return spellCheckingModel;
 }
 
 LanguagePlugin::LanguagePlugin(QObject *parent) :
     QObject(parent),
-    _updateLayoutsConnected(false)
+    _updateKeyboardLayoutsConnected(false),
+    _updateSpellCheckingConnected(false)
 {
 }
 
@@ -284,31 +303,63 @@ LanguagePlugin::setCurrentLanguage(int index)
 }
 
 SubsetModel *
-LanguagePlugin::layoutsModel()
+LanguagePlugin::keyboardLayoutsModel()
 {
-    if (!_updateLayoutsConnected) {
-        connect(getLayoutsModel(), SIGNAL(subsetChanged()), SLOT(updateLayouts()));
+    if (!_updateKeyboardLayoutsConnected) {
+        connect(getKeyboardLayoutsModel(), SIGNAL(subsetChanged()), SLOT(updateKeyboardLayouts()));
 
-        _updateLayoutsConnected = true;
+        _updateKeyboardLayoutsConnected = true;
     }
 
-    return getLayoutsModel();
+    return getKeyboardLayoutsModel();
 }
 
 void
-LanguagePlugin::updateLayouts()
+LanguagePlugin::updateKeyboardLayouts()
 {
     GVariantBuilder builder;
     GVariant *currentLayouts;
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
 
-    for (QList<int>::const_iterator i = layoutsModel()->subset().begin(); i != layoutsModel()->subset().end(); ++i)
+    for (QList<int>::const_iterator i = keyboardLayoutsModel()->subset().begin(); i != keyboardLayoutsModel()->subset().end(); ++i)
         g_variant_builder_add(&builder, "s", qPrintable((*getKeyboardLayouts())[*i]->name()));
 
     currentLayouts = g_variant_ref_sink(g_variant_builder_end(&builder));
     g_settings_set_value(getMaliitSettings(), KEY_ENABLED_LAYOUTS, currentLayouts);
     g_variant_unref(currentLayouts);
+}
+
+bool
+LanguagePlugin::spellChecking() const
+{
+    // TODO: get spell checking setting
+    return true;
+}
+
+void
+LanguagePlugin::setSpellChecking(bool value)
+{
+    // TODO: set spell checking setting
+    Q_UNUSED(value);
+}
+
+SubsetModel *
+LanguagePlugin::spellCheckingModel()
+{
+    if (!_updateSpellCheckingConnected) {
+        connect(getSpellCheckingModel(), SIGNAL(subsetChanged()), SLOT(updateSpellChecking()));
+
+        _updateSpellCheckingConnected = true;
+    }
+
+    return getSpellCheckingModel();
+}
+
+void
+LanguagePlugin::updateSpellChecking()
+{
+    // TODO: update spell checking
 }
 
 bool
