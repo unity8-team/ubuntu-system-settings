@@ -21,6 +21,5 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 
 Rectangle {
-    color: "#181514" // FIXME not in palette yet
     implicitHeight: units.gu(1)
 }

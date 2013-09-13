@@ -29,11 +29,9 @@ BaseMenuItem {
 
     HLine {
         anchors.top: parent.top
-        color: "#403b37" // FIXME not in palette yet
     }
 
     HLine {
         anchors.bottom: parent.bottom
-        color: "#060606" // FIXME not in palette yet
     }
 }
