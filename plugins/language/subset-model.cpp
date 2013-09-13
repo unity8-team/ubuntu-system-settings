@@ -120,8 +120,6 @@ SubsetModel::setChecked(int  element,
                         bool checked,
                         int  timeout)
 {
-    qDebug("%lld: setChecked(%d, %s, %d)", QDateTime::currentMSecsSinceEpoch(), element, checked ? "true" : "false", timeout);
-
     qint64 time = QDateTime::currentMSecsSinceEpoch();
 
     if (checked)
@@ -135,16 +133,12 @@ SubsetModel::setChecked(int  element,
         for (int i = 0; i < _subset.length(); i++) {
             if (_subset[i] == element) {
                 QModelIndex row = index(i, 0);
-                qDebug("%lld: vvv dataChanged(%d)", QDateTime::currentMSecsSinceEpoch(), row.row());
                 Q_EMIT dataChanged(row, row, QVector<int>(1, CHECKED_ROLE));
-                qDebug("%lld: ^^^ dataChanged(%d)", QDateTime::currentMSecsSinceEpoch(), row.row());
             }
         }
 
         QModelIndex row = index(_subset.length() + element, 0);
-        qDebug("%lld: vvv dataChanged(%d)", QDateTime::currentMSecsSinceEpoch(), row.row());
         Q_EMIT dataChanged(row, row, QVector<int>(1, CHECKED_ROLE));
-        qDebug("%lld: ^^^ dataChanged(%d)", QDateTime::currentMSecsSinceEpoch(), row.row());
 
         Change *change = new Change;
         change->element = element;
@@ -191,11 +185,6 @@ QVariant
 SubsetModel::data(const QModelIndex &index,
                   int                role) const
 {
-    qDebug("%lld: data(%d, %s)", QDateTime::currentMSecsSinceEpoch(), index.row(), role == SUBSET_ROLE   ? "SUBSET_ROLE"   :
-                                                                                   role == SUPERSET_ROLE ? "SUPERSET_ROLE" :
-                                                                                   role == DISPLAY_ROLE  ? "DISPLAY_ROLE"  :
-                                                                                                           "CHECKED_ROLE");
-
     switch (role) {
     case SUBSET_ROLE:
     case SUPERSET_ROLE:
@@ -242,8 +231,6 @@ SubsetModel::setData(const QModelIndex &index,
 void
 SubsetModel::timerExpired()
 {
-    qDebug("%lld: timerExpired()", QDateTime::currentMSecsSinceEpoch());
-
     Change *change = _change.first();
 
     _change.removeFirst();
@@ -252,8 +239,6 @@ SubsetModel::timerExpired()
         if (change->checked) {
             if (change->start > _state[change->element]->uncheck) {
                 if (!_subset.contains(change->element)) {
-                    qDebug("%lld: beginInsertRows(%d)", QDateTime::currentMSecsSinceEpoch(), _subset.length());
-
                     beginInsertRows(QModelIndex(), _subset.length(), _subset.length());
                     _subset += change->element;
                     endInsertRows();
@@ -266,8 +251,6 @@ SubsetModel::timerExpired()
             if (change->start > _state[change->element]->check) {
                 for (int i = 0; i < _subset.length(); i++) {
                     while (i < _subset.length() && _subset[i] == change->element) {
-                        qDebug("%lld: beginRemoveRows(%d)", QDateTime::currentMSecsSinceEpoch(), i);
-
                         beginRemoveRows(QModelIndex(), i, i);
                         _subset.removeAt(i);
                         endRemoveRows();

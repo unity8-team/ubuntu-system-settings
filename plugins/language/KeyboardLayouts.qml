@@ -57,14 +57,6 @@ ItemPage {
                 else
                     element = index - plugin.layoutsModel.subset.length
 
-                console.log()
-                console.log('onCheckStatusChanged')
-                console.log('  row =', index)
-                console.log('  element =', element)
-                console.log('  language =', display)
-                console.log('  language =', plugin.layoutsModel.superset[element])
-                console.log('  checked =', plugin.layoutsModel.checked(element), '->', checkStatus)
-
                 plugin.layoutsModel.setChecked(element, checkStatus, checkStatus ? 0 : 2000)
 
                 checkStatus = Qt.binding(function() { return checked })
