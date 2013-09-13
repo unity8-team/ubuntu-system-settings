@@ -54,12 +54,10 @@ TARGET = $$qtLibraryTarget($$TARGET)
 uri = Ubuntu.SystemSettings.Wifi
 
 SOURCES += \
-    modelprinter.cpp \
     plugin.cpp \
     unitymenumodelstack.cpp
 
 HEADERS += \
-    modelprinter.h \
     plugin.h \
     unitymenumodelstack.h
 
