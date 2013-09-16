@@ -26,7 +26,7 @@ IndicatorBase {
 
     MenuItemFactory {
         id: menuFactory
-		model: wifibase.menuModel
+		model: mainMenu.model
     }
 
     UnityMenuModelStack {
