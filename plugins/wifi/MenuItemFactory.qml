@@ -120,18 +120,15 @@ Item {
 
     function load(modelData) {
         if (modelData.type !== undefined) {
-            console.debug(modelData.type);
             var component = _map[modelData.type];
             if (component !== undefined) {
                 return component;
             }
         } else {
             if (modelData.isSeparator) {
-                console.debug("Separator");
                 return divMenu;
             }
         }
-        console.debug("Standard Menu");
         return standardMenu;
     }
 }
