@@ -35,5 +35,6 @@ Item {
         id: overlayHomeImage
         source: overlayImage.source
         fillMode: Image.PreserveAspectCrop
+        verticalAlignment: Image.AlignTop
     }
 }

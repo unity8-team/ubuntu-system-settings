@@ -8,7 +8,8 @@ QML_SOURCES = \
     ChangeImage.qml \
     MainPage.qml \
     SwappableImage.qml \
-    UbuntuSwappableImage.qml
+    UbuntuSwappableImage.qml \
+    OverlayImage.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}
