@@ -26,89 +26,19 @@ Item {
     property var model: null
 
     property var _map:  {
-        // "unity.widgets.systemsettings.tablet.volumecontrol" : sliderMenu,
         "unity.widgets.systemsettings.tablet.switch"        : switchMenu,
 
-        // "com.canonical.indicator.button"    : buttonMenu,
         "com.canonical.indicator.div"       : divMenu,
         "com.canonical.indicator.section"   : sectionMenu,
-        // "com.canonical.indicator.progress"  : progressMenu,
-        // "com.canonical.indicator.slider"    : sliderMenu,
         "com.canonical.indicator.switch"    : switchMenu,
 
-        // "com.canonical.unity.slider"    : sliderMenu,
         "com.canonical.unity.switch"    : switchMenu,
 
         "unity.widgets.systemsettings.tablet.wifisection" : wifiSection,
         "unity.widgets.systemsettings.tablet.accesspoint" : accessPoint,
     }
 
-/*
-    Component {
-        id: sliderMenu;
-        Indicators.SliderMenuItem {
-            property QtObject menu: null
-
-            text: menu && menu.label ? menu.label : ""
-            icon: menu ? menu.icon : ""
-            minIcon: menu.ext.minIcon
-            maxIcon: menu.ext.maxIcon
-
-            minimumValue: menu.ext.minValue ? menu.ext.minValue : 0.0
-            maximumValue: {
-                var maximum = menu.ext.maxValue ? menu.ext.maxValue : 1.0
-                if (maximum <= minimumValue) {
-                        return minimumValue + 1;
-                }
-                return maximum;
-            }
-            value: menu ? menu.actionState : 0.0
-            enabled: menu ? menu.sensitive : false
-
-            Component.onCompleted: {
-                model.loadExtendedAttributes(modelIndex, {'min-value': 'double',
-                                                          'max-value': 'double',
-                                                          'min-icon': 'icon',
-                                                          'max-icon': 'icon'});
-            }
-
-            // FIXME: The interval should be [0.0 - 1.0]. Unfortunately, when
-            // reaching the boundaries (0.0 or 1.0), the value is converted
-            // to an integer when automatically wrapped in a variant when
-            // passed to QStateAction::updateState(…). The server chokes on
-            // those values, complaining that they’re not of the right type…
-            onChangeState: {
-                if (value == Math.round(value)) {
-                    if (value >= maximumValue) {
-                        model.changeState(modelIndex, maximumValue - 0.000001);
-                    } else if (value <= minimumValue) {
-                        model.changeState(modelIndex, minimumValue + 0.000001);
-                    } else {
-                        model.changeState(modelIndex, value * 1.000001);
-                    }
-                } else {
-                    model.changeState(modelIndex, value);
-                }
-            }
-        }
-    }
-*/
-
     Component { id: divMenu; DivMenuItem {} }
-
-/*
-    Component {
-        id: buttonMenu;
-        Indicators.ButtonMenuItem {
-            property QtObject menu: null
-
-            text: menu && menu.label ? menu.label : ""
-            enabled: menu ? menu.sensitive : false
-
-            onActivate: model.activate(modelIndex);
-        }
-    }
-*/
 
     Component {
         id: sectionMenu;
@@ -118,19 +48,6 @@ Item {
             text: menu && menu.label ? menu.label : ""
         }
     }
-
-/*
-    Component {
-        id: progressMenu;
-        Indicators.ProgressMenuItem {
-            property QtObject menu: null
-
-            text: menu && menu.label ? menu.label : ""
-            icon: menu ? menu.icon : ""
-            value : menu ? menu.actionState : 0.0
-        }
-    }
-*/
 
     Component {
         id: standardMenu;
