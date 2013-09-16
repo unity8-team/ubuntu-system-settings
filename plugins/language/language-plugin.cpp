@@ -73,16 +73,16 @@ getLanguageLocales()
         languageLocales = new QList<QLocale>;
 
         QSet<QLocale::Language> allLanguages;
-        QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage,
-                                                             QLocale::AnyScript,
-                                                             QLocale::AnyCountry);
+        QList<QLocale> allLocales(QLocale::matchingLocales(QLocale::AnyLanguage,
+                                                           QLocale::AnyScript,
+                                                           QLocale::AnyCountry));
 
-        for (QList<QLocale>::const_iterator i = allLocales.begin(); i != allLocales.end(); ++i) {
-            QLocale::Language language = i->language();
+        for (QList<QLocale>::const_iterator i(allLocales.begin()); i != allLocales.end(); ++i) {
+            QLocale::Language language(i->language());
 
-            bool uniqueLanguage = language != QLocale::AnyLanguage &&
-                !i->nativeLanguageName().trimmed().toCaseFolded().isEmpty() &&
-                !allLanguages.contains(language);
+            bool uniqueLanguage(language != QLocale::AnyLanguage &&
+                                !i->nativeLanguageName().trimmed().toCaseFolded().isEmpty() &&
+                                !allLanguages.contains(language));
 
             if (uniqueLanguage) {
                 *languageLocales += QLocale(language);
@@ -102,7 +102,7 @@ getLanguageIndices()
     if (languageIndices == NULL) {
         languageIndices = new QHash<QLocale::Language, unsigned int>;
 
-        for (int i = 0; i < getLanguageLocales()->length(); i++)
+        for (int i(0); i < getLanguageLocales()->length(); i++)
             (*languageIndices)[(*getLanguageLocales())[i].language()] = i;
     }
 
@@ -115,7 +115,7 @@ getLanguageNames()
     if (languageNames == NULL) {
         languageNames = new QStringList;
 
-        for (QList<QLocale>::const_iterator i = getLanguageLocales()->begin(); i != getLanguageLocales()->end(); ++i)
+        for (QList<QLocale>::const_iterator i(getLanguageLocales()->begin()); i != getLanguageLocales()->end(); ++i)
             *languageNames += i->nativeLanguageName().trimmed();
     }
 
@@ -145,8 +145,8 @@ getKeyboardLayouts()
 
         QFileInfoList fileInfoList(layoutsDir.entryInfoList());
 
-        for (QFileInfoList::const_iterator i = fileInfoList.begin(); i != fileInfoList.end(); ++i) {
-            KeyboardLayout *layout = new KeyboardLayout(*i);
+        for (QFileInfoList::const_iterator i(fileInfoList.begin()); i != fileInfoList.end(); ++i) {
+            KeyboardLayout *layout(new KeyboardLayout(*i));
 
             if (!layout->language().isEmpty())
                 *keyboardLayouts += layout;
@@ -164,7 +164,7 @@ getKeyboardLayoutsModel()
     if (keyboardLayoutsModel == NULL) {
         QStringList layoutNames;
 
-        for (QList<KeyboardLayout *>::const_iterator i = getKeyboardLayouts()->begin(); i != getKeyboardLayouts()->end(); ++i) {
+        for (QList<KeyboardLayout *>::const_iterator i(getKeyboardLayouts()->begin()); i != getKeyboardLayouts()->end(); ++i) {
             if (!(*i)->displayName().isEmpty())
                 layoutNames += (*i)->displayName();
             else
@@ -178,7 +178,7 @@ getKeyboardLayoutsModel()
         g_settings_get(getMaliitSettings(), KEY_ENABLED_LAYOUTS, "as", &iter);
 
         while (g_variant_iter_next(iter, "&s", &language)) {
-            for (int i = 0; i < getKeyboardLayouts()->length(); i++) {
+            for (int i(0); i < getKeyboardLayouts()->length(); i++) {
                 if ((*getKeyboardLayouts())[i]->name() == language) {
                     layoutIndices += i;
                     break;
@@ -191,6 +191,7 @@ getKeyboardLayoutsModel()
         keyboardLayoutsModel = new SubsetModel();
         keyboardLayoutsModel->setSuperset(layoutNames);
         keyboardLayoutsModel->setSubset(layoutIndices);
+        keyboardLayoutsModel->setAllowEmpty(false);
     }
 
     return keyboardLayoutsModel;
@@ -201,12 +202,10 @@ getSpellCheckingModel()
 {
     if (spellCheckingModel == NULL) {
         // TODO: populate spell checking model
-        QList<int> subset;
-        subset += 0;
-
         spellCheckingModel = new SubsetModel();
         spellCheckingModel->setSuperset(*getLanguageNames());
-        spellCheckingModel->setSubset(subset);
+        spellCheckingModel->setSubset(QList<int>());
+        spellCheckingModel->setAllowEmpty(false);
     }
 
     return spellCheckingModel;
@@ -228,9 +227,9 @@ LanguagePlugin::languages() const
 int
 LanguagePlugin::currentLanguage() const
 {
-    QLocale::Language language = QLocale::system().language();
-    QHash<QLocale::Language, unsigned int> *indices = getLanguageIndices();
-    QHash<QLocale::Language, unsigned int>::const_iterator i = indices->find(language);
+    QLocale::Language language(QLocale::system().language());
+    QHash<QLocale::Language, unsigned int> *indices(getLanguageIndices());
+    QHash<QLocale::Language, unsigned int>::const_iterator i(indices->find(language));
 
     return i != indices->end() ? *i : -1;
 }
@@ -242,8 +241,8 @@ setLanguageWithUser(GObject    *object,
 {
     Q_UNUSED(pspec);
 
-    ActUser *user = ACT_USER(object);
-    gint index = GPOINTER_TO_INT(user_data);
+    ActUser *user(ACT_USER(object));
+    gint index(GPOINTER_TO_INT(user_data));
 
     if (act_user_is_loaded(user)) {
         g_signal_handlers_disconnect_by_data(user, user_data);
@@ -259,7 +258,7 @@ setLanguageWithManager(GObject    *object,
 {
     Q_UNUSED(pspec);
 
-    ActUserManager *manager = ACT_USER_MANAGER(object);
+    ActUserManager *manager(ACT_USER_MANAGER(object));
 
     gboolean loaded;
     g_object_get(manager, "is-loaded", &loaded, NULL);
@@ -267,10 +266,10 @@ setLanguageWithManager(GObject    *object,
     if (loaded) {
         g_signal_handlers_disconnect_by_data(manager, user_data);
 
-        const char *name = qPrintable(qgetenv("USER"));
+        const char *name(qPrintable(qgetenv("USER")));
 
         if (name != NULL && name[0] != '\0') {
-            ActUser *user = act_user_manager_get_user(manager, name);
+            ActUser *user(act_user_manager_get_user(manager, name));
 
             if (user != NULL) {
                 if (act_user_is_loaded(user))
@@ -286,7 +285,7 @@ void
 LanguagePlugin::setCurrentLanguage(int index)
 {
     if (index >= 0 && index < getLanguageLocales()->length()) {
-        ActUserManager *manager = act_user_manager_get_default();
+        ActUserManager *manager(act_user_manager_get_default());
 
         if (manager != NULL) {
             gboolean loaded;
@@ -322,7 +321,7 @@ LanguagePlugin::updateKeyboardLayouts()
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
 
-    for (QList<int>::const_iterator i = keyboardLayoutsModel()->subset().begin(); i != keyboardLayoutsModel()->subset().end(); ++i)
+    for (QList<int>::const_iterator i(keyboardLayoutsModel()->subset().begin()); i != keyboardLayoutsModel()->subset().end(); ++i)
         g_variant_builder_add(&builder, "s", qPrintable((*getKeyboardLayouts())[*i]->name()));
 
     currentLayouts = g_variant_ref_sink(g_variant_builder_end(&builder));

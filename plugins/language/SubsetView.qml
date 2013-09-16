@@ -44,6 +44,7 @@ ListView {
     delegate: SettingsCheckEntry {
         textEntry: display
         checkStatus: checked
+        enabled: sensitive
 
         onCheckStatusChanged: {
             var element = index < root.model.subset.length ? root.model.subset[index] : index - root.model.subset.length

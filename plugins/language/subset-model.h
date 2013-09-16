@@ -41,6 +41,11 @@ public:
                WRITE setSubset
                NOTIFY subsetChanged)
 
+    Q_PROPERTY(bool allowEmpty
+               READ allowEmpty
+               WRITE setAllowEmpty
+               NOTIFY allowEmptyChanged)
+
     explicit SubsetModel(QObject *parent = NULL);
 
     virtual const QStringList &superset() const;
@@ -50,6 +55,10 @@ public:
     virtual const QList<int> &subset() const;
     virtual void setSubset(const QList<int> &subset);
     Q_SIGNAL virtual void subsetChanged() const;
+
+    virtual bool allowEmpty() const;
+    virtual void setAllowEmpty(bool allowEmpty);
+    Q_SIGNAL virtual void allowEmptyChanged() const;
 
     Q_INVOKABLE virtual bool checked(int element);
     Q_INVOKABLE virtual void setChecked(int  element,
@@ -89,10 +98,12 @@ protected:
 
     QStringList _superset;
     QList<int> _subset;
+    bool _allowEmpty;
 
     QList<State *> _state;
     QList<Change *> _change;
 
+    int _checked;
     qint64 _ignore;
 
     friend bool changeLessThan(const Change *change0,
