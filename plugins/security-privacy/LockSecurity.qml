@@ -326,25 +326,17 @@ ItemPage {
             text: i18n.tr("Unlock the phone using:")
         }
 
-        ListItem.ValueSelector {
-            property string swipe: i18n.tr("Swipe (no security)")
-            property string passcode: i18n.tr("4-digit passcode")
-            property string passphrase: i18n.tr("Passphrase")
-            property string swipeAlt: i18n.tr("Swipe (no security)… ")
-            property string passcodeAlt: i18n.tr("4-digit passcode…")
-            property string passphraseAlt: i18n.tr("Passphrase…")
-
+        ListItem.ItemSelector {
             property bool skip: true
             property bool firstRun: true
 
             id: unlockMethod
-            values: [
-                selectedIndex == 0 ? swipe : swipeAlt,
-                selectedIndex == 1 ? passcode : passcodeAlt,
-                selectedIndex == 2 ? passphrase : passphraseAlt
+            model: [
+                i18n.tr("Swipe (no security)"),
+                i18n.tr("4-digit passcode"),
+                i18n.tr("Passphrase")
             ]
             expanded: true
-            onExpandedChanged: expanded = true
             onSelectedIndexChanged: {
                 if (securityPrivacy.securityType ===
                         UbuntuSecurityPrivacyPanel.Swipe && firstRun) {
