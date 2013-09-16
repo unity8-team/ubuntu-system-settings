@@ -81,10 +81,9 @@ IndicatorBase {
                     right: parent.right
                 }
 
-                sourceComponent: menuFactory.load(mainMenu.model)
+                sourceComponent: menuFactory.load(model)
 
                 onLoaded: {
-                    console.debug("Loaded")
                     if (model.type === rootMenuType) {
                         menuStack.push(mainMenu.model.submenu(index));
                     }
