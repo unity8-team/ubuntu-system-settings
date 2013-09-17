@@ -19,6 +19,8 @@
 
 #include "click.h"
 
+#include <libintl.h>
+
 #include <QDebug>
 #include <QDir>
 #include <QJsonArray>
@@ -54,14 +56,23 @@ QList<ClickModel::Click> ClickModel::buildClickList()
     QList<ClickModel::Click> clickPackages;
 
     while (begin != end) {
-        QJsonObject val = (*begin++).toObject();
+        QVariantMap val = (*begin++).toObject().toVariantMap();
         Click newClick;
 
-        newClick.name = val.value("title").toString();
-        QDir directory(val.value("_directory").toString());
-        newClick.icon = directory.filePath(
-                            val.value("icon").toString().simplified());
-        newClick.installSize = val.value("installed-size").toString().toUInt();
+        newClick.name = val.value("title",
+                                  gettext("Unknown title")).toString();
+
+        if (val.contains("_directory")) {
+            QDir directory(val.value("_directory", "/undefined").toString());
+            QString iconFile(val.value("icon", "undefined").toString());
+            if (directory.exists()) {
+                QString icon(directory.filePath(iconFile.simplified()));
+                newClick.icon = icon;
+            }
+        }
+
+        newClick.installSize = val.value("installed-size",
+                                         "0").toString().toUInt();
 
         clickPackages.append(newClick);
     }
