@@ -140,6 +140,7 @@ QVariant ClickModel::data(const QModelIndex &index, int role) const
     case IconRole:
         return click.icon;
     default:
+        qWarning() << "Unknown role requested";
         return QVariant();
     }
 }
