@@ -45,8 +45,14 @@ QList<ClickModel::Click> ClickModel::buildClickList()
                        QStringList() << "list" << "--all" << "--manifest");
     clickProcess.waitForFinished(-1);
 
+    QJsonParseError error;
+
     QJsonDocument jsond =
-            QJsonDocument::fromJson(clickProcess.readAllStandardOutput());
+            QJsonDocument::fromJson(clickProcess.readAllStandardOutput(),
+                                    &error);
+
+    if (error.error != QJsonParseError::NoError)
+        qWarning() << error.errorString();
 
     QJsonArray data(jsond.array());
 
