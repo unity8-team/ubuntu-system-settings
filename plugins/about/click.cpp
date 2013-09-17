@@ -40,7 +40,7 @@ QList<ClickModel::Click> ClickModel::buildClickList()
 
     QProcess clickProcess;
     clickProcess.start("/usr/bin/click",
-                       QStringList() << "list" << "--manifest");
+                       QStringList() << "list" << "--all" << "--manifest");
     clickProcess.waitForFinished(-1);
 
     QJsonDocument jsond =
