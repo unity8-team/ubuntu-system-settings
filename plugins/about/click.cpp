@@ -43,7 +43,17 @@ QList<ClickModel::Click> ClickModel::buildClickList()
     QProcess clickProcess;
     clickProcess.start("/usr/bin/click",
                        QStringList() << "list" << "--all" << "--manifest");
-    clickProcess.waitForFinished(-1);
+
+    if (!clickProcess.waitForFinished(5000)) {
+        qWarning() << "Timeout retrieving the list of click packages";
+        return QList<ClickModel::Click>();
+    }
+
+    if (clickProcess.exitStatus() == QProcess::CrashExit) {
+        qWarning() << "The click utility exited abnormally" <<
+                      clickProcess.readAllStandardError();
+        return QList<ClickModel::Click>();
+    }
 
     QJsonParseError error;
 
@@ -51,8 +61,10 @@ QList<ClickModel::Click> ClickModel::buildClickList()
             QJsonDocument::fromJson(clickProcess.readAllStandardOutput(),
                                     &error);
 
-    if (error.error != QJsonParseError::NoError)
+    if (error.error != QJsonParseError::NoError) {
         qWarning() << error.errorString();
+        return QList<ClickModel::Click>();
+    }
 
     QJsonArray data(jsond.array());
 
