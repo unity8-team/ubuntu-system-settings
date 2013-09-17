@@ -1,8 +1,10 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_library(example-plugin MODULE example-plugin.cpp example-plugin.h)
+QT5_ADD_RESOURCES(example-res ui.qrc)
+add_library(example-plugin MODULE example-plugin.cpp example-plugin.h ${example-res})
 qt5_use_modules(example-plugin Qml Core)
 target_link_libraries(example-plugin SystemSettings)
+
 
 set(QML_SOURCES PageComponent.qml)
 install(FILES example.settings DESTINATION ${PLUGIN_MANIFEST_DIR})

@@ -15,7 +15,9 @@ set(USS_SOURCES
     plugin.cpp
 )
 
-add_executable(system-settings ${USS_SOURCES})
+QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
+
+add_executable(system-settings ${USS_SOURCES} ${system-settings-resources})
 qt5_use_modules(system-settings Core Gui Quick Qml)
 target_link_libraries(system-settings SystemSettings)
 install(TARGETS system-settings RUNTIME DESTINATION bin)
