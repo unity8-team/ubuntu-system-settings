@@ -327,15 +327,23 @@ ItemPage {
         }
 
         ListItem.ItemSelector {
+            property string swipe: i18n.tr("Swipe (no security)")
+            property string passcode: i18n.tr("4-digit passcode")
+            property string passphrase: i18n.tr("Passphrase")
+            property string swipeAlt: i18n.tr("Swipe (no security)… ")
+            property string passcodeAlt: i18n.tr("4-digit passcode…")
+            property string passphraseAlt: i18n.tr("Passphrase…")
+
             property bool skip: true
             property bool firstRun: true
 
             id: unlockMethod
-            model: [
-                i18n.tr("Swipe (no security)"),
-                i18n.tr("4-digit passcode"),
-                i18n.tr("Passphrase")
-            ]
+            model: 3
+            delegate: OptionSelectorDelegate {
+                text: index == 0 ? (unlockMethod.selectedIndex == 0 ? unlockMethod.swipe : unlockMethod.swipeAlt) :
+                     (index == 1 ? (unlockMethod.selectedIndex == 1 ? unlockMethod.passcode : unlockMethod.passcodeAlt) :
+                                   (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
+            }
             expanded: true
             onSelectedIndexChanged: {
                 if (securityPrivacy.securityType ===
