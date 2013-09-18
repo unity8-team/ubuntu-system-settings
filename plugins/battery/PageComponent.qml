@@ -100,6 +100,7 @@ ItemPage {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        interactive: !sliderId.pressed
 
         Column {
             anchors.left: parent.left
