@@ -60,7 +60,7 @@ KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,
         _displayName = titleResults.first();
 
     _shortName = _language.left(2);
-    _shortName[0].toUpper();
+    _shortName[0] = _shortName[0].toUpper();
 }
 
 const QString &

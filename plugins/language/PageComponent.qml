@@ -62,7 +62,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Keyboard layouts")
                 value: plugin.keyboardLayoutsModel.subset.length == 1 ?
-                       plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]] :
+                       plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
                        plugin.keyboardLayoutsModel.subset.length
                 progression: true
 
@@ -74,7 +74,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Spell checking")
                 value: plugin.spellCheckingModel.subset.length == 1 ?
-                       plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]] :
+                       plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]][0] :
                        plugin.spellCheckingModel.subset.length
                 progression: true
 

@@ -31,7 +31,12 @@ protected:
 
 public:
 
-    Q_PROPERTY(QStringList superset
+    Q_PROPERTY(QStringList customRoles
+               READ customRoles
+               WRITE setCustomRoles
+               NOTIFY customRolesChanged)
+
+    Q_PROPERTY(QVariantList superset
                READ superset
                WRITE setSuperset
                NOTIFY supersetChanged)
@@ -48,8 +53,12 @@ public:
 
     explicit SubsetModel(QObject *parent = NULL);
 
-    virtual const QStringList &superset() const;
-    virtual void setSuperset(const QStringList &superset);
+    virtual const QStringList &customRoles() const;
+    virtual void setCustomRoles(const QStringList &customRoles);
+    Q_SIGNAL virtual void customRolesChanged() const;
+
+    virtual const QVariantList &superset() const;
+    virtual void setSuperset(const QVariantList &superset);
     Q_SIGNAL virtual void supersetChanged() const;
 
     virtual const QList<int> &subset() const;
@@ -96,7 +105,8 @@ protected:
         qint64 finish;
     };
 
-    QStringList _superset;
+    QStringList _customRoles;
+    QVariantList _superset;
     QList<int> _subset;
     bool _allowEmpty;
 

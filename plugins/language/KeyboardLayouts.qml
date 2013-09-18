@@ -41,8 +41,8 @@ ItemPage {
 
         model: plugin.keyboardLayoutsModel
         delegate: KeyboardLayoutItem {
-            name: model.display
-            shortName: "En"
+            name: model.language
+            shortName: model.icon
             checked: model.checked
             enabled: model.enabled
 

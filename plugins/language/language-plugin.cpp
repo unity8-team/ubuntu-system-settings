@@ -162,25 +162,30 @@ static SubsetModel *
 getKeyboardLayoutsModel()
 {
     if (keyboardLayoutsModel == NULL) {
-        QStringList layoutNames;
+        QVariantList superset;
 
         for (QList<KeyboardLayout *>::const_iterator i(getKeyboardLayouts()->begin()); i != getKeyboardLayouts()->end(); ++i) {
+            QVariantList element;
+
             if (!(*i)->displayName().isEmpty())
-                layoutNames += (*i)->displayName();
+                element += (*i)->displayName();
             else
-                layoutNames += (*i)->name();
+                element += (*i)->name();
+
+            element += (*i)->shortName();
+            superset += QVariant(element);
         }
 
         GVariantIter *iter;
         const gchar *language;
-        QList<int> layoutIndices;
+        QList<int> subset;
 
         g_settings_get(getMaliitSettings(), KEY_ENABLED_LAYOUTS, "as", &iter);
 
         while (g_variant_iter_next(iter, "&s", &language)) {
             for (int i(0); i < getKeyboardLayouts()->length(); i++) {
                 if ((*getKeyboardLayouts())[i]->name() == language) {
-                    layoutIndices += i;
+                    subset += i;
                     break;
                 }
             }
@@ -188,9 +193,14 @@ getKeyboardLayoutsModel()
 
         g_variant_iter_free(iter);
 
+        QStringList customRoles;
+        customRoles += "language";
+        customRoles += "icon";
+
         keyboardLayoutsModel = new SubsetModel();
-        keyboardLayoutsModel->setSuperset(layoutNames);
-        keyboardLayoutsModel->setSubset(layoutIndices);
+        keyboardLayoutsModel->setCustomRoles(customRoles);
+        keyboardLayoutsModel->setSuperset(superset);
+        keyboardLayoutsModel->setSubset(subset);
         keyboardLayoutsModel->setAllowEmpty(false);
     }
 
@@ -202,8 +212,17 @@ getSpellCheckingModel()
 {
     if (spellCheckingModel == NULL) {
         // TODO: populate spell checking model
+        QVariantList superset;
+
+        for (QStringList::const_iterator i(getLanguageNames()->begin()); i != getLanguageNames()->end(); ++i) {
+            QVariantList element;
+            element += *i;
+            superset += QVariant(element);
+        }
+
         spellCheckingModel = new SubsetModel();
-        spellCheckingModel->setSuperset(*getLanguageNames());
+        spellCheckingModel->setCustomRoles(QStringList("language"));
+        spellCheckingModel->setSuperset(superset);
         spellCheckingModel->setSubset(QList<int>());
         spellCheckingModel->setAllowEmpty(false);
     }

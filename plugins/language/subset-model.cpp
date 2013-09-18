@@ -20,11 +20,12 @@
 
 #include "subset-model.h"
 
-#define SUBSET_ROLE   (Qt::UserRole + 0)
-#define SUPERSET_ROLE (Qt::UserRole + 1)
-#define ENABLED_ROLE  (Qt::UserRole + 2)
-#define DISPLAY_ROLE  (Qt::DisplayRole)
 #define CHECKED_ROLE  (Qt::CheckStateRole)
+#define ENABLED_ROLE  (Qt::UserRole + 0)
+#define SUBSET_ROLE   (Qt::UserRole + 1)
+#define SUPERSET_ROLE (Qt::UserRole + 2)
+#define DISPLAY_ROLE  (Qt::UserRole + 3)
+#define CUSTOM_ROLE   (Qt::UserRole + 4)
 
 bool
 changeLessThan(const SubsetModel::Change *change0,
@@ -42,13 +43,29 @@ SubsetModel::SubsetModel(QObject *parent) :
 }
 
 const QStringList &
+SubsetModel::customRoles() const
+{
+    return _customRoles;
+}
+
+void
+SubsetModel::setCustomRoles(const QStringList &customRoles)
+{
+    if (customRoles != _customRoles) {
+        _customRoles = customRoles;
+
+        Q_EMIT customRolesChanged();
+    }
+}
+
+const QVariantList &
 SubsetModel::superset() const
 {
     return _superset;
 }
 
 void
-SubsetModel::setSuperset(const QStringList &superset)
+SubsetModel::setSuperset(const QVariantList &superset)
 {
     if (superset != _superset) {
         beginResetModel();
@@ -250,11 +267,14 @@ SubsetModel::roleNames() const
 {
     QHash<int, QByteArray> roleNames;
 
+    roleNames.insert(CHECKED_ROLE, "checked");
+    roleNames.insert(ENABLED_ROLE, "enabled");
     roleNames.insert(SUBSET_ROLE, "subset");
     roleNames.insert(SUPERSET_ROLE, "superset");
-    roleNames.insert(ENABLED_ROLE, "enabled");
     roleNames.insert(DISPLAY_ROLE, "display");
-    roleNames.insert(CHECKED_ROLE, "checked");
+
+    for (int i = 0; i < _customRoles.length(); i++)
+        roleNames.insert(CUSTOM_ROLE + i, _customRoles[i].toUtf8());
 
     return roleNames;
 }
@@ -280,19 +300,27 @@ SubsetModel::data(const QModelIndex &index,
                   int                role) const
 {
     switch (role) {
-    case SUBSET_ROLE:
-    case SUPERSET_ROLE:
-        return (role == SUBSET_ROLE) == (index.row() < _subset.length());
+    case CHECKED_ROLE:
+        return _state[elementAtIndex(index)]->checked ? Qt::Checked : Qt::Unchecked;
 
     case ENABLED_ROLE:
         return _allowEmpty || _checked != 1 || !_state[elementAtIndex(index)]->checked;
 
-    case DISPLAY_ROLE:
-        return _superset[elementAtIndex(index)];
+    case SUBSET_ROLE:
+    case SUPERSET_ROLE:
+        return (role == SUBSET_ROLE) == (index.row() < _subset.length());
 
-    case CHECKED_ROLE:
-        return _state[elementAtIndex(index)]->checked ? Qt::Checked : Qt::Unchecked;
+    case DISPLAY_ROLE:
+        role = CUSTOM_ROLE;
+        break;
     }
+
+    int column = role - CUSTOM_ROLE;
+    int element = elementAtIndex(index);
+    QVariantList list = _superset[element].toList();
+
+    if (0 <= column && column < list.length())
+        return list[column];
 
     return QVariant();
 }
