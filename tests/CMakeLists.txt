@@ -4,6 +4,7 @@ add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${PLUGIN_MANIFEST_DIR}")
 add_definitions(-DPLUGIN_QML_DIR="${PLUGIN_MANIFEST_DIR}")
 add_definitions(-DPLUGIN_MODULE_DIR="${PLUGIN_MODULE_DIR}")
+add_definitions(-DPLUGIN_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
 
 add_library(test-plugin SHARED test-plugin.cpp test-plugin.h)
 target_link_librarieS(test-plugin SystemSettings)
