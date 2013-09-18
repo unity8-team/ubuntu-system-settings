@@ -127,6 +127,7 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Regulatory info")
                 progression: true
+                visible: showAllUI
             }
         }
     }
