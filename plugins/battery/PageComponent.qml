@@ -178,6 +178,10 @@ ItemPage {
                     }
                     Slider {
                         id: sliderId
+                        function formatValue(v) {
+                            return "%1%".arg(v.toFixed(0))
+                        }
+
                         anchors {
                             left: iconLeft.right
                             right: iconRight.left
