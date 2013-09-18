@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-12 16:55+0000\n"
-"PO-Revision-Date: 2013-09-09 19:07+0000\n"
+"PO-Revision-Date: 2013-09-17 14:55+0000\n"
 "Last-Translator: Tiago Hillebrandt <tiagohillebrandt@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-09-13 06:36+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-18 05:12+0000\n"
+"X-Generator: Launchpad (build 16765)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -120,7 +120,7 @@ msgstr "Espaço livre"
 
 #: ../plugins/about/Storage.qml:152
 msgid "Installed apps"
-msgstr ""
+msgstr "Aplicativos instalados"
 
 #: ../plugins/about/Storage.qml:153
 msgid "By name"
@@ -620,7 +620,7 @@ msgstr "Alterar frase secreta"
 
 #: ../plugins/security-privacy/LockSecurity.qml:82
 msgid "Change"
-msgstr ""
+msgstr "Alterar"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
@@ -648,16 +648,16 @@ msgstr "Existente"
 
 #: ../plugins/security-privacy/LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Senha incorreta. Tente novamente."
 
 #: ../plugins/security-privacy/LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Frase secreta incorreta. Tente novamente."
 
 #: ../plugins/security-privacy/LockSecurity.qml:156
 #: ../plugins/security-privacy/LockSecurity.qml:262
 msgid "Incorrect. Try again."
-msgstr ""
+msgstr "Incorreto. Tente novamente."
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
@@ -677,15 +677,15 @@ msgstr "Confirmar senha"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Confirme a frase secreta"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Estas senhas não conferem. Tente novamente."
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Estas frases secretas não conferem. Tente novamente."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
@@ -848,7 +848,7 @@ msgstr "Parar reprodução"
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Auto download"
-msgstr ""
+msgstr "Baixar automaticamente"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
@@ -860,11 +860,11 @@ msgstr "Quando conectado em rede sem fio"
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "Em qualquer conexão de dados"
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "Taxas de dados podem ser aplicadas."
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
@@ -952,11 +952,11 @@ msgstr "Instalar e reiniciar"
 
 #: ../plugins/system-update/PageComponent.qml:334
 msgid "On wi-fi"
-msgstr ""
+msgstr "Na rede sem fio"
 
 #: ../plugins/system-update/PageComponent.qml:336
 msgid "Always"
-msgstr ""
+msgstr "Sempre"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
