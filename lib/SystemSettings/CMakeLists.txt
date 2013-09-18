@@ -9,5 +9,6 @@ install(TARGETS SystemSettings LIBRARY DESTINATION ${LIBDIR})
 install(FILES item-base.h ItemBase plugin-interface.h PluginInterface
 DESTINATION include/SystemSettings)
 
+set(SYSTEMSETTINGS_LIB SystemSettings)
 configure_file(SystemSettings.pc.in SystemSettings.pc @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/SystemSettings.pc DESTINATION ${LIBDIR}/pkgconfig)

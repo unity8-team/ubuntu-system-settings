@@ -11,5 +11,5 @@ Name: SystemSettings
 Description: Ubuntu Touch system settings plug-in development
 Version: @PROJECT_VERSION@
 Requires: Qt5Core Qt5Qml
-Libs: -L${libdir} -l${TARGET}
+Libs: -L${libdir} -l@SYSTEMSETTINGS_LIB@
 Cflags: -I${includedir}
