@@ -50,3 +50,4 @@ add_subdirectory(plugins)
 add_subdirectory(src)
 add_subdirectory(tests)
 
+install(FILES ubuntu-system-settings.desktop DESTINATION share/applications)
