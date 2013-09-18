@@ -26,7 +26,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
-
+import QMenuModel 0.1
 
 ItemPage {
     id: root
@@ -94,6 +94,17 @@ ItemPage {
     UbuntuBatteryPanel {
         id: batteryBackend
     }
+
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+
+        property variant brightness: action("brightness")
+    }
+
+    Component.onCompleted: indicatorPower.start()
 
     Flickable {
         id: scrollWidget
@@ -174,6 +185,11 @@ ItemPage {
                         height: sliderId.height - units.gu(1)
                         name: "torch-off"
                         width: height
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: indicatorPower.brightness.updateState(0.0)
+                        }
                     }
                     Slider {
                         id: sliderId
@@ -185,9 +201,12 @@ ItemPage {
                             verticalCenter: parent.verticalCenter
                         }
                         height: parent.height - units.gu(2)
-                        minimumValue: 0
-                        maximumValue: 100
-                        value: 0.0 // TODO: get actual value
+                        minimumValue: 0.0
+                        maximumValue: 1.0
+                        enabled: indicatorPower.brightness.state != null
+                        value: enabled ? indicatorPower.brightness.state : 0.0
+
+                        onValueChanged: indicatorPower.brightness.updateState(value);
                     }
                     Icon {
                         id: iconRight
@@ -196,6 +215,11 @@ ItemPage {
                         height: sliderId.height - units.gu(1)
                         name: "torch-on"
                         width: height
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: indicatorPower.brightness.updateState(1.0)
+                        }
                     }
             }
 
