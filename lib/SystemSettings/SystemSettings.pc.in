@@ -1,6 +1,6 @@
 prefix=@CMAKE_INSTALL_PREFIX@
 exec_prefix=${prefix}
-libdir=@LIBDIR@
+libdir=${prefix}/@LIBDIR@
 includedir=${prefix}/include
 plugin_manifest_dir=${prefix}/@PLUGIN_MANIFEST_DIR_BASE@
 plugin_module_dir=${libdir}/@PLUGIN_MODULE_DIR_BASE@
