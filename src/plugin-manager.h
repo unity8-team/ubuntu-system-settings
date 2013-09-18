@@ -38,7 +38,7 @@ class PluginManager: public QObject, public QQmlParserStatus
     Q_INTERFACES(QQmlParserStatus)
 
 public:
-    PluginManager(QObject *parent = 0);
+    PluginManager(QObject *parent = 0, QString *baseDir = 0);
     ~PluginManager();
 
     QStringList categories() const;

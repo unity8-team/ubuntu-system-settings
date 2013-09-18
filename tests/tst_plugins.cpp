@@ -44,7 +44,8 @@ private Q_SLOTS:
 
 void PluginsTest::testCategory()
 {
-    PluginManager manager;
+    QString pluginDir = QString::fromUtf8("../tests/data");
+    PluginManager manager(nullptr, &pluginDir);
     manager.classBegin();
     manager.componentComplete();
 
@@ -69,7 +70,8 @@ void PluginsTest::testCategory()
 
 void PluginsTest::testKeywords()
 {
-    PluginManager manager;
+    QString pluginDir = QString::fromUtf8("../tests/data");
+    PluginManager manager(nullptr, &pluginDir);
     manager.classBegin();
     manager.componentComplete();
 
@@ -100,7 +102,8 @@ void PluginsTest::testKeywords()
 
 void PluginsTest::testSorting()
 {
-    PluginManager manager;
+    QString pluginDir = QString::fromUtf8("../tests/data");
+    PluginManager manager(nullptr, &pluginDir);
     manager.classBegin();
     manager.componentComplete();
 

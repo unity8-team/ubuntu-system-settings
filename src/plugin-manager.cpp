@@ -30,7 +30,7 @@
 
 using namespace SystemSettings;
 
-static const QLatin1String baseDir(PLUGIN_MANIFEST_DIR);
+static const QLatin1String defaultBaseDir(PLUGIN_MANIFEST_DIR);
 
 namespace SystemSettings {
 
@@ -41,6 +41,7 @@ class PluginManagerPrivate
     inline PluginManagerPrivate(PluginManager *q);
     inline ~PluginManagerPrivate();
 
+    void setBaseDir(QString newBaseDir);
     void clear();
     void reload();
 
@@ -48,6 +49,7 @@ private:
     mutable PluginManager *q_ptr;
     QMap<QString,QMap<QString, Plugin*> > m_plugins;
     QHash<QString,ItemModelSortProxy*> m_models;
+    QString baseDir;
 };
 
 } // namespace
@@ -55,11 +57,16 @@ private:
 PluginManagerPrivate::PluginManagerPrivate(PluginManager *q):
     q_ptr(q)
 {
+    baseDir = defaultBaseDir;
 }
 
 PluginManagerPrivate::~PluginManagerPrivate()
 {
     clear();
+}
+
+void PluginManagerPrivate::setBaseDir(QString newBaseDir) {
+    baseDir = newBaseDir;
 }
 
 void PluginManagerPrivate::clear()
@@ -88,10 +95,14 @@ void PluginManagerPrivate::reload()
     }
 }
 
-PluginManager::PluginManager(QObject *parent):
+PluginManager::PluginManager(QObject *parent, QString *baseDir):
     QObject(parent),
     d_ptr(new PluginManagerPrivate(this))
 {
+    Q_D(PluginManager);
+    if(baseDir) {
+        d->setBaseDir(*baseDir);
+    }
 }
 
 PluginManager::~PluginManager()
