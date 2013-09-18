@@ -59,6 +59,8 @@ public:
     QQmlComponent *entryComponent();
     QQmlComponent *pageComponent();
 
+    void setPluginModuleDir(QString newModuleDir);
+
 Q_SIGNALS:
     void iconChanged();
     void keywordsChanged();
