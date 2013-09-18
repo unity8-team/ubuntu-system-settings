@@ -24,11 +24,13 @@
 KeyboardLayout::KeyboardLayout(const QString &name,
                                const QString &language,
                                const QString &displayName,
+                               const QString &shortName,
                                QObject       *parent) :
     QObject(parent),
     _name(name),
     _language(language),
-    _displayName(displayName)
+    _displayName(displayName),
+    _shortName(shortName)
 {
 }
 
@@ -56,6 +58,9 @@ KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,
 
     if (titleQuery.evaluateTo(&titleResults) && !titleResults.isEmpty())
         _displayName = titleResults.first();
+
+    _shortName = _language.left(2);
+    _shortName[0].toUpper();
 }
 
 const QString &
@@ -74,4 +79,10 @@ const QString &
 KeyboardLayout::displayName() const
 {
     return _displayName;
+}
+
+const QString &
+KeyboardLayout::shortName() const
+{
+    return _shortName;
 }

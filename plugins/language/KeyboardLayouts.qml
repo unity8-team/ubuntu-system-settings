@@ -19,6 +19,7 @@
  */
 
 import SystemSettings 1.0
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -29,6 +30,8 @@ ItemPage {
     }
 
     SubsetView {
+        id: subsetView
+
         clip: true
 
         anchors.fill: parent
@@ -37,5 +40,21 @@ ItemPage {
         supersetLabel: i18n.tr("All layouts available:")
 
         model: plugin.keyboardLayoutsModel
+        delegate: KeyboardLayoutItem {
+            name: model.display
+            shortName: "En"
+            checked: model.checked
+            enabled: model.enabled
+
+            onCheckedChanged: {
+                var element = model.index < subsetView.model.subset.length ?
+                              subsetView.model.subset[model.index] :
+                              model.index - subsetView.model.subset.length
+
+                plugin.keyboardLayoutsModel.setChecked(element, checked, checked ? 0 : subsetView.delay)
+
+                checked = Qt.binding(function() { return model.checked })
+            }
+        }
     }
 }

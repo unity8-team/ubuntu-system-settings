@@ -46,6 +46,7 @@ public:
     explicit KeyboardLayout(const QString &name        = QString(),
                             const QString &language    = QString(),
                             const QString &displayName = QString(),
+                            const QString &shortName   = QString(),
                             QObject       *parent      = NULL);
 
     explicit KeyboardLayout(const QFileInfo &fileInfo,
@@ -54,12 +55,14 @@ public:
     const QString &name() const;
     const QString &language() const;
     const QString &displayName() const;
+    const QString &shortName() const;
 
 private:
 
     QString _name;
     QString _language;
     QString _displayName;
+    QString _shortName;
 };
 
 #endif // KEYBOARD_LAYOUT_H

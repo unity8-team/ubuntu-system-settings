@@ -41,7 +41,9 @@ ItemPage {
     Flickable {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: contentHeight > root.height ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: contentHeight > root.height ?
+                        Flickable.DragAndOvershootBounds :
+                        Flickable.StopAtBounds
 
         Column {
             anchors.fill: parent

@@ -4,11 +4,12 @@ include($${TOP_SRC_DIR}/common-vars.pri)
 TEMPLATE = lib
 TARGET = language
 
-QML_SOURCES = DisplayLanguage.qml \
-              KeyboardLayouts.qml \
-              PageComponent.qml   \
-              SpellChecking.qml
-
+QML_SOURCES = DisplayLanguage.qml    \
+              KeyboardLayoutItem.qml \
+              KeyboardLayouts.qml    \
+              PageComponent.qml      \
+              SpellChecking.qml      \
+              SubsetView.qml
 OTHER_FILES += $${QML_SOURCES}
 
 settings.files = $${TARGET}.settings

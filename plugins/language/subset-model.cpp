@@ -252,7 +252,7 @@ SubsetModel::roleNames() const
 
     roleNames.insert(SUBSET_ROLE, "subset");
     roleNames.insert(SUPERSET_ROLE, "superset");
-    roleNames.insert(ENABLED_ROLE, "sensitive");
+    roleNames.insert(ENABLED_ROLE, "enabled");
     roleNames.insert(DISPLAY_ROLE, "display");
     roleNames.insert(CHECKED_ROLE, "checked");
 

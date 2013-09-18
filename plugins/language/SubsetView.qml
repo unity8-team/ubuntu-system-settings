@@ -42,16 +42,18 @@ ListView {
     }
 
     delegate: SettingsCheckEntry {
-        textEntry: display
-        checkStatus: checked
-        enabled: sensitive
+        textEntry: model.display
+        checkStatus: model.checked
+        enabled: model.enabled
 
         onCheckStatusChanged: {
-            var element = index < root.model.subset.length ? root.model.subset[index] : index - root.model.subset.length
+            var element = model.index < root.model.subset.length ?
+                          root.model.subset[model.index] :
+                          model.index - root.model.subset.length
 
             root.model.setChecked(element, checkStatus, checkStatus ? 0 : delay)
 
-            checkStatus = Qt.binding(function() { return checked })
+            checkStatus = Qt.binding(function() { return model.checked })
         }
     }
 
