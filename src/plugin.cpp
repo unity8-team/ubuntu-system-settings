@@ -36,7 +36,7 @@
 
 using namespace SystemSettings;
 
-static const QString defaultPluginModuleDir(PLUGIN_MODULE_DIR);
+static const QLatin1String pluginModuleDir(PLUGIN_MODULE_DIR);
 static const QLatin1String pluginQmlDir(PLUGIN_QML_DIR);
 
 namespace SystemSettings {
@@ -50,7 +50,6 @@ class PluginPrivate
 
     bool ensureLoaded() const;
     QUrl componentFromSettingsFile(const QString &key) const;
-    void setPluginModuleDir(QString newPluginModuleDir) { pluginModuleDir = newPluginModuleDir; }
 
 private:
     mutable Plugin *q_ptr;
@@ -58,7 +57,6 @@ private:
     mutable QPluginLoader m_loader;
     QString m_baseName;
     QVariantMap m_data;
-    QString pluginModuleDir;
 };
 
 } // namespace
@@ -66,8 +64,7 @@ private:
 PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
     q_ptr(q),
     m_item(0),
-    m_baseName(manifest.completeBaseName()),
-    pluginModuleDir(defaultPluginModuleDir)
+    m_baseName(manifest.completeBaseName())
 {
     QFile file(manifest.filePath());
     if (Q_UNLIKELY(!file.open(QIODevice::ReadOnly | QIODevice::Text))) {
@@ -85,7 +82,6 @@ PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
 
     m_data = json.toVariant().toMap();
 }
-
 
 bool PluginPrivate::ensureLoaded() const
 {
@@ -250,9 +246,4 @@ QQmlComponent *Plugin::pageComponent()
         if (!d->ensureLoaded()) return 0;
         return d->m_item->pageComponent(context->engine(), this);
     }
-}
-
-void Plugin::setPluginModuleDir(QString newModuleDir) {
-    Q_D(Plugin);
-    d->setPluginModuleDir(newModuleDir);
 }

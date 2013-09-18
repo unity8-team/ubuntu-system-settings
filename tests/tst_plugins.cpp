@@ -44,8 +44,7 @@ private Q_SLOTS:
 
 void PluginsTest::testCategory()
 {
-    QString pluginDir = QString::fromUtf8(PLUGIN_TEST_DATA_DIR);
-    PluginManager manager(nullptr, &pluginDir);
+    PluginManager manager;
     manager.classBegin();
     manager.componentComplete();
 
@@ -70,9 +69,7 @@ void PluginsTest::testCategory()
 
 void PluginsTest::testKeywords()
 {
-    QString pluginDir = QString::fromUtf8(PLUGIN_TEST_DATA_DIR);
-    QString pluginModuleDir = QString::fromUtf8(PLUGIN_TEST_MOD_DIR);
-    PluginManager manager(nullptr, &pluginDir);
+    PluginManager manager;
     manager.classBegin();
     manager.componentComplete();
 
@@ -94,7 +91,6 @@ void PluginsTest::testKeywords()
     QCOMPARE(keywords, expectedKeywords);
 
     // The manifest has has-dynamic-keywords set, so the plugin will be loaded
-    wireless->setPluginModuleDir(pluginModuleDir);
     keywords = wireless->keywords();
     expectedKeywords.clear();
     expectedKeywords << "wireless" << "wlan" << "wifi" <<
@@ -104,8 +100,7 @@ void PluginsTest::testKeywords()
 
 void PluginsTest::testSorting()
 {
-    QString pluginDir = QString::fromUtf8(PLUGIN_TEST_DATA_DIR);
-    PluginManager manager(nullptr, &pluginDir);
+    PluginManager manager;
     manager.classBegin();
     manager.componentComplete();
 
