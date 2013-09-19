@@ -16,6 +16,5 @@
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
-    "page-component": "PageComponent.qml",
-    "plugin": "UbuntuWifiPanel"
+    "page-component": "PageComponent.qml"
 }
