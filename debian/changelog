@@ -1,3 +1,34 @@
+ubuntu-system-settings (0.1+13.10.20130918.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * timedate: use the new itemselector widget.
+  * security: use the new ItemSelector widget.
+  * [storage] Add a C++ backend for reading the Click package metadata
+    and turning it into a proper table model, allowing the QML side to
+    be made far cleaner.
+
+  [ Iain Lane ]
+  * Update pot.
+  * Add the ability to hide deferred/unfinished panels or elements. Pass
+    USS_SHOW_ALL_UI=1 to re-enable them.
+  * Hide the deferred brightness panel.
+  * Hide "messages on the welcome screen" toggle which is deferred.
+  * Flight mode is deferred. Hide it.
+  * Don't do anything when clicking on uncategorised items which have no
+    pageComponent. They should handle this themselves in their entry
+    component.
+  * [storage] Add a C++ backend for reading the Click package metadata
+    and turning it into a proper table model, allowing the QML side to
+    be made far cleaner.
+
+  [ Guenter Schwann ]
+  * Use start() to actually start the content picking transfer.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 358
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Sep 2013 07:55:27 +0000
+
 ubuntu-system-settings (0.1+13.10.20130910.3-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

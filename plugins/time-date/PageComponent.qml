@@ -61,15 +61,13 @@ ItemPage {
         }
 
         ListItem.Standard {
-            text: i18n.tr ("Set the time and date:")
         }
 
-        ListItem.ValueSelector {
+        ListItem.ItemSelector {
             id: setTimeAutomatically
-            values: ["Automatically" , "Manually"]
+            text: i18n.tr ("Set the time and date:")
+            model: [ i18n.tr("Automatically") , i18n.tr("Manually")]
             expanded: true
-            // TODO: No way to have always expanded
-            onExpandedChanged: expanded = true
             onSelectedIndexChanged: {
                 var useNTP = (selectedIndex === 0) // 0 = Automatically
                 timeDatePanel.useNTP = useNTP
