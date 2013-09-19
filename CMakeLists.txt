@@ -8,11 +8,24 @@ endif()
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower) # Build types should always be lowercase but sometimes they are not.
 
 set(PROJECT_VERSION 0.1)
-
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(EnableCoverageReport)
 include(FindPkgConfig)
 include(GNUInstallDirs)
 set(LIBDIR ${CMAKE_INSTALL_LIBDIR})
 enable_testing()
+
+if(cmake_build_type_lower MATCHES coverage)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage" )
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage" )
+  set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} --coverage" )
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} --coverage" )
+
+  # We add -g when building with coverage so valgrind reports line numbers.
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g" )
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g" )
+endif()
+
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fno-permissive -pedantic -Wall -Wextra")
 find_package(Qt5Widgets REQUIRED)
@@ -51,3 +64,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 install(FILES ubuntu-system-settings.desktop DESTINATION share/applications)
+
+if(cmake_build_type_lower MATCHES coverage)
+  ENABLE_COVERAGE_REPORT(TARGETS system-settings FILTER /usr/include ${CMAKE_SOURCE_DIR}/test/* ${CMAKE_BINARY_DIR}/*)
+endif()
