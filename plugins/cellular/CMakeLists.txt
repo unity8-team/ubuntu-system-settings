@@ -6,3 +6,4 @@ set(QML_SOURCES
     PageComponent.qml
 )
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/cellular)
+install(FILES settings-cellular.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)

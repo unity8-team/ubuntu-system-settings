@@ -13,4 +13,4 @@ install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/sound)
 
 install(FILES sound.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
-install(FILES settings-sounds.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icon)
+install(FILES settings-sounds.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)

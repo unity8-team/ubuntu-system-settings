@@ -18,4 +18,4 @@ install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/timedate)
 
 install(FILES time-date.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
-install(FILES settings-time-date.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icon)
+install(FILES settings-time-date.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)

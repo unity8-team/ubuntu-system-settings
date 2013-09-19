@@ -9,3 +9,4 @@ set(QML_SOURCES
 )
 
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/background)
+install(FILES settings-background.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)

@@ -13,3 +13,4 @@ set(QML_SOURCES
 )
 
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/battery)
+install(FILES settings-battery.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
