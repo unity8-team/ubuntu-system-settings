@@ -10,6 +10,8 @@ add_library(UbuntuTimeDatePanel MODULE plugin.h
 qt5_use_modules(UbuntuTimeDatePanel Qml Quick DBus)
 target_link_libraries(UbuntuTimeDatePanel ${GLIB_LDFLAGS} ${TIMEZONEMAP_LDFLAGS})
 
+set(QML_SOURCES Scroller.qml TimePicker.qml)
+
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/TimeDate)
 install(TARGETS UbuntuTimeDatePanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
