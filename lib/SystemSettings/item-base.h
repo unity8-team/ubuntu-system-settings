@@ -39,6 +39,7 @@ extern const QLatin1String keyEntryComponent;
 extern const QLatin1String keyPageComponent;
 extern const QLatin1String keyHasDynamicKeywords;
 extern const QLatin1String keyHasDynamicVisibility;
+extern const QLatin1String keyHideByDefault;
 
 class ItemBasePrivate;
 class ItemBase: public QObject

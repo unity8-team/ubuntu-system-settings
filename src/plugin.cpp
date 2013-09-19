@@ -210,6 +210,12 @@ bool Plugin::isVisible() const
     return true;
 }
 
+bool Plugin::hideByDefault() const
+{
+    Q_D(const Plugin);
+    return d->m_data.value(keyHideByDefault, false).toBool();
+}
+
 QQmlComponent *Plugin::entryComponent()
 {
     Q_D(const Plugin);

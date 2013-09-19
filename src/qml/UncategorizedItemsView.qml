@@ -26,6 +26,8 @@ import SystemSettings 1.0
 Column {
     property alias model: repeater.model
 
+    visible: repeater.count > 0
+
     anchors.left: parent.left
     anchors.right: parent.right
 
@@ -44,8 +46,14 @@ Column {
                 Connections {
                     ignoreUnknownSignals: true
                     target: loader.item
-                    onClicked: pageStack.push(model.item.pageComponent,
-                                              { plugin: model.item, pluginManager: pluginManager })
+                    onClicked: {
+                        var pageComponent = model.item.pageComponent
+                        if (pageComponent) {
+                            pageStack.push(model.item.pageComponent,
+                                           { plugin: model.item,
+                                             pluginManager: pluginManager })
+                        }
+                    }
                 }
             }
         }

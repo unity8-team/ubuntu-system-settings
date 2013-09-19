@@ -17,33 +17,26 @@
  *
 */
 
+#include <QDebug>
+
 #include <QDateTime>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QProcess>
+#include <QVariant>
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
 
 StorageAbout::StorageAbout(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_clickModel(),
+    m_clickFilterProxy(&m_clickModel)
 {
-
 }
-
-QByteArray StorageAbout::getClickList()
-{
-    QFile clickBinary("/usr/bin/click");
-    if (!clickBinary.exists()) {
-        return QByteArray();
-    }
-
-    QProcess clickProcess;
-    clickProcess.start("/usr/bin/click", QStringList() << "list" << "--manifest");
-    clickProcess.waitForFinished(-1);
-    return clickProcess.readAllStandardOutput();
-}
-
 
 QString StorageAbout::serialNumber()
 {
@@ -97,6 +90,26 @@ QString StorageAbout::licenseInfo(const QString &subdir) const
     copyrightText = QString(file.readAll());
     file.close();
     return copyrightText;
+}
+
+QAbstractItemModel *StorageAbout::getClickList()
+{
+    return &m_clickFilterProxy;
+}
+
+ClickModel::Roles StorageAbout::getSortRole()
+{
+    return (ClickModel::Roles) m_clickFilterProxy.sortRole();
+}
+
+void StorageAbout::setSortRole(ClickModel::Roles newRole)
+{
+    m_clickFilterProxy.setSortRole(newRole);
+
+    m_clickFilterProxy.sort(0, newRole == ClickModel::InstalledSizeRole ?
+                                Qt::DescendingOrder :
+                                Qt::AscendingOrder);
+    Q_EMIT(sortRoleChanged());
 }
 
 StorageAbout::~StorageAbout() {

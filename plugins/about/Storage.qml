@@ -40,27 +40,6 @@ ItemPage {
                                    i18n.tr("Pictures"), i18n.tr("Other files"), i18n.tr("Used by apps")]
     property variant spaceValues: [19.6, 6.2, 9.2, 1.5, 4.6, 16.3] // TODO: replace by real values
 
-    /* TOFIX: replace by real datas */
-    XmlListModel {
-        id: xmlModel
-        source: "fakepkgslist.xml"
-        query: "/list/binary"
-
-        XmlRole { name: "binaryName"; query: "name/string()" }
-        XmlRole { name: "iconName"; query: "icon/string()" }
-        XmlRole { name: "installedSize"; query: "installed/string()" }
-
-        onStatusChanged: if (status === XmlListModel.Ready) { createSortedLists(); }
-    }
-
-    ListModel {
-        id: sortedNamesModel
-    }
-
-    ListModel {
-        id: sortedInstallModel
-    }
-
     GSettings {
         id: settingsId
         schema.id: "com.ubuntu.touch.system-settings"
@@ -70,38 +49,8 @@ ItemPage {
         }
     }
 
-    ListModel { id: clicksList }
-
     UbuntuStorageAboutPanel {
-        id: backendInfos
-        Component.onCompleted: {
-            var clickData = getClickList()
-            var clickJson = JSON.parse(clickData)
-            for (var val in clickJson) {
-                clicksList.append({"binaryName": clickJson[val].title})
-            }
-        }
-    }
-
-    function createSortedLists() {
-        var n;
-        var namesDict = {};
-        var nameKeys = [];
-        var installDict = {};
-        var installKeys = [];
-
-        for (n=0; n < xmlModel.count; n++) {
-            namesDict[xmlModel.get(n).binaryName] = [xmlModel.get(n).iconName, xmlModel.get(n).installedSize];
-            installDict[xmlModel.get(n).installedSize] = [xmlModel.get(n).iconName, xmlModel.get(n).binaryName];
-        }
-
-        nameKeys = Object.keys(namesDict).sort();
-        installKeys = Object.keys(installDict).sort(function(a,b){return b-a});
-
-        for (n=0; n < nameKeys.length; n++) {
-            sortedNamesModel.append({"binaryName":nameKeys[n],"iconName":namesDict[nameKeys[n]][0],"installedSize":namesDict[nameKeys[n]][1]})
-            sortedInstallModel.append({"binaryName":installDict[installKeys[n]][1],"iconName":installDict[installKeys[n]][0],"installedSize":installKeys[n]})
-        }
+        id: backendInfo
     }
 
     /* Return used space in a formatted way */
@@ -156,12 +105,20 @@ ItemPage {
                 }
             }
 
-            ListItem.ValueSelector {
+            ListItem.ItemSelector {
                 id: valueSelect
-                values: [i18n.tr("By name"), i18n.tr("By size")]
-                selectedIndex: sortByName ? 0 : 1
-                onSelectedIndexChanged:
-                    settingsId.storageSortByName = (valueSelect.selectedIndex == 0) ? true : false
+                text: i18n.tr("Installed apps")
+                model: [i18n.tr("By name"), i18n.tr("By size")]
+                selectedIndex:
+                    (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?
+                        0 :
+                        1
+                onSelectedIndexChanged: {
+                    backendInfo.sortRole =
+                            (selectedIndex == 0) ?
+                                ClickRoles.DisplayNameRole :
+                                ClickRoles.InstalledSizeRole
+                }
             }
 
             ListView {
@@ -170,12 +127,14 @@ ItemPage {
                 height: childrenRect.height
                 /* Desactivate the listview flicking, we want to scroll on the column */
                 interactive: false
-                model: (valueSelect.selectedIndex === 0) ? sortedNamesModel : sortedInstallModel
+                model: backendInfo.clickList
                 delegate: ListItem.SingleValue {
-                    icon: "image://theme/" + iconName
+                    icon: iconPath
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
-                    text: binaryName
-                    value: storagePage.getFormattedSpace(installedSize)
+                    text: displayName
+                    value: installedSize ?
+                               storagePage.getFormattedSpace(installedSize) :
+                               i18n.tr("N/A")
                 }
             }
         }

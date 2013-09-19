@@ -25,6 +25,8 @@
 
 #include <QDir>
 #include <QMap>
+#include <QProcessEnvironment>
+#include <QQmlContext>
 #include <QQmlEngine>
 #include <QStringList>
 
@@ -79,12 +81,26 @@ void PluginManagerPrivate::reload()
     Q_Q(PluginManager);
     clear();
     QDir path(baseDir, "*.settings");
+
+    /* Use an environment variable USS_SHOW_ALL_UI to show unfinished / beta /
+     * deferred components or panels */
+    bool showAll = false;
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    if (environment.contains(QLatin1String("USS_SHOW_ALL_UI"))) {
+        QString showAllS = environment.value("USS_SHOW_ALL_UI", QString());
+        showAll = !showAllS.isEmpty();
+    }
+
+    QQmlContext *ctx = QQmlEngine::contextForObject(q);
+    if (ctx)
+        ctx->engine()->rootContext()->setContextProperty("showAllUI", showAll);
+
     Q_FOREACH(QFileInfo fileInfo, path.entryInfoList()) {
         Plugin *plugin = new Plugin(fileInfo);
-        QQmlEngine::setContextForObject(plugin,
-                                        QQmlEngine::contextForObject(q));
+        QQmlEngine::setContextForObject(plugin, ctx);
         QMap<QString, Plugin*> &pluginList = m_plugins[plugin->category()];
-        pluginList.insert(fileInfo.baseName(), plugin);
+        if (showAll || !plugin->hideByDefault())
+            pluginList.insert(fileInfo.baseName(), plugin);
     }
 }
 
@@ -121,7 +137,9 @@ QAbstractItemModel *PluginManager::itemModel(const QString &category)
         /* Return a sorted proxy backed by the real model containing the items */
         model = new ItemModelSortProxy(this);
         model->setSourceModel(backing_model);
-        model->setDynamicSortFilter(false);
+        model->setDynamicSortFilter(true);
+        model->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        model->setFilterRole(ItemModel::KeywordRole);
         /* we only have one column as this is a QAbstractListModel */
         model->sort(0);
     }
@@ -139,6 +157,26 @@ QObject *PluginManager::getByName(const QString &name) const
             return plugins.value()[name];
     }
     return NULL;
+}
+
+QString PluginManager::getFilter()
+{
+    return m_filter;
+}
+
+void PluginManager::setFilter(const QString &filter)
+{
+    Q_D(PluginManager);
+    QHashIterator<QString,ItemModelSortProxy*> it(d->m_models);
+    while (it.hasNext()) {
+        it.next();
+        if (filter.isEmpty())
+            it.value()->setFilterRegExp("");
+        else
+            it.value()->setFilterRegExp(filter);
+    }
+    m_filter = filter;
+    Q_EMIT (filterChanged());
 }
 
 void PluginManager::classBegin()

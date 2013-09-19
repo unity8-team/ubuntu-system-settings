@@ -43,6 +43,7 @@ class Plugin: public QObject
     Q_PROPERTY(QString translations READ translations CONSTANT)
     Q_PROPERTY(QStringList keywords READ keywords NOTIFY keywordsChanged)
     Q_PROPERTY(bool visible READ isVisible NOTIFY visibilityChanged)
+    Q_PROPERTY(bool hideByDefault READ hideByDefault CONSTANT)
 
 public:
     Plugin(const QFileInfo &manifest, QObject *parent = 0);
@@ -55,6 +56,7 @@ public:
     QString translations() const;
     QStringList keywords() const;
     bool isVisible() const;
+    bool hideByDefault() const;
 
     QQmlComponent *entryComponent();
     QQmlComponent *pageComponent();

@@ -22,6 +22,7 @@
 #define TIMEDATE_H
 
 #include "timezonelocationmodel.h"
+
 #include <QAbstractTableModel>
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
@@ -56,6 +57,7 @@ public:
     void setFilter (QString &filter);
     bool getUseNTP();
     void setUseNTP(bool enabled);
+    Q_INVOKABLE void setTime (qlonglong new_time);
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);

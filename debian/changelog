@@ -1,3 +1,83 @@
+ubuntu-system-settings (0.1+13.10.20130918.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * timedate: use the new itemselector widget.
+  * security: use the new ItemSelector widget.
+  * [storage] Add a C++ backend for reading the Click package metadata
+    and turning it into a proper table model, allowing the QML side to
+    be made far cleaner.
+
+  [ Iain Lane ]
+  * Update pot.
+  * Add the ability to hide deferred/unfinished panels or elements. Pass
+    USS_SHOW_ALL_UI=1 to re-enable them.
+  * Hide the deferred brightness panel.
+  * Hide "messages on the welcome screen" toggle which is deferred.
+  * Flight mode is deferred. Hide it.
+  * Don't do anything when clicking on uncategorised items which have no
+    pageComponent. They should handle this themselves in their entry
+    component.
+  * [storage] Add a C++ backend for reading the Click package metadata
+    and turning it into a proper table model, allowing the QML side to
+    be made far cleaner.
+
+  [ Guenter Schwann ]
+  * Use start() to actually start the content picking transfer.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 358
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Sep 2013 07:55:27 +0000
+
+ubuntu-system-settings (0.1+13.10.20130910.3-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * background: use the new OptionSelector, tweak the UI to be closer
+    from the visuals (move the labels at the bottom of the images, use
+    smaller text, use correct spacing).
+  * battery: set current value on the graph.
+  * reset: implement backend to reset the unity launcher settings.
+  * storage: display the clicks' list rather than the fake datas.
+  * updates: use the new ItemSelector widget, updated the download
+    option to match the current design as well, moving the selector in
+    its own subpage.
+  * orientation: replace "Rotation lock" by "Orientation lock".
+  * language: use new ItemSelector widget.
+  * storage: use new ItemSelector widget.
+  * battery: on the desktop use idle-delay's key, which is not
+    deprecated.
+
+  [ Iain Lane ]
+  * Make the panels display "Lock on idle" or "Sleep on idle" as
+    appropriate.
+  * Add UI and backend for setting the time manually.
+  * Make the "Change passphrase" / "Change passcode" button work.
+  * Implement filtering in the main window.
+  * Typo fix "Septemper" → "September". (LP: #1221400)
+  * Set the unlock type in a QSettings file (~/.unity8-greeter-demo).
+    (LP: #1218010)
+  * security-privacy: Implement changing password and validation of
+    input.
+
+  [ Charles Kerr ]
+  * Fix NMClient leak, take battery capacity into account when
+    determining the last time a discharging battery was full.
+
+  [ Ken VanDine ]
+  * Don't start the transfer from the importer, the hub now handles that
+    when dispatching the transfer.
+
+  [ William Hua ]
+  * Replace page stack with sheet in display languages. (LP: #1222728)
+
+  [ Adolfo Jayme Barrientos ]
+  * Trivial typo fix: Conrifm → Confirm.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 341
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 10 Sep 2013 19:20:48 +0000
+
 ubuntu-system-settings (0.1+13.10.20130904.1-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
