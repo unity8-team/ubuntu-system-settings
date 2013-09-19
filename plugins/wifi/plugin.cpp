@@ -13,22 +13,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
- * Iain Lane <iain.lane@canonical.com>
- *
 */
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
-#include "timedate.h"
-
+#include "unitymenumodelstack.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.TimeDate"));
-
-    qmlRegisterType<TimeDate>(uri, 1, 0, "UbuntuTimeDatePanel");
+    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wifi"));
+    qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

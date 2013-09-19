@@ -13,25 +13,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
- * Iain Lane <iain.lane@canonical.com>
- *
 */
 
-#include <QtQml>
-#include <QtQml/QQmlContext>
-#include "plugin.h"
-#include "timedate.h"
+#ifndef PLUGIN_H
+#define PLUGIN_H
 
+#include <QtQml/QQmlEngine>
+#include <QtQml/QQmlExtensionPlugin>
 
-void BackendPlugin::registerTypes(const char *uri)
+class BackendPlugin: public QQmlExtensionPlugin
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.TimeDate"));
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-    qmlRegisterType<TimeDate>(uri, 1, 0, "UbuntuTimeDatePanel");
-}
+public:
+    void registerTypes(const char *uri);
+    void initializeEngine(QQmlEngine *engine, const char *uri);
+};
 
-void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    QQmlExtensionPlugin::initializeEngine(engine, uri);
-}
+#endif // PLUGIN_H
