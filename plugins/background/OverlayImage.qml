@@ -28,13 +28,13 @@ Item {
 
     UbuntuShape {
         anchors.fill: parent
-        image: overlayHomeImage
+
+        image: Image {
+            id: overlayInnerImage
+            source: overlayImage.source
+            fillMode: Image.PreserveAspectCrop
+            verticalAlignment: Image.AlignTop
+        }
     }
 
-    Image {
-        id: overlayHomeImage
-        source: overlayImage.source
-        fillMode: Image.PreserveAspectCrop
-        verticalAlignment: Image.AlignTop
-    }
 }
