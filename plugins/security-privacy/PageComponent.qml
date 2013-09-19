@@ -65,6 +65,7 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Security:")
             }
+/* Enable once we actually support phone locking (i.e. have a LightDM greeter)
             ListItem.SingleValue {
                 text: i18n.tr("Phone locking")
                 value: i18n.tr("1 minute",
@@ -73,6 +74,7 @@ ItemPage {
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
             }
+*/
             ListItem.SingleValue {
                 text: i18n.tr("SIM PIN")
                 value: "Off"
