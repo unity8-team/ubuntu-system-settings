@@ -30,26 +30,26 @@ class UnityMenuModel;
 // opened can be pushed onto the queue.
 // The tail is set to the last item on the queue
 // Popping the queue will remove the last entry, and the tail be updated to the last item.
-class UnityMenuModelStack : public QObject
+class UnityMenuModelStack: public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(UnityMenuModel* head READ head WRITE setHead NOTIFY headChanged)
-    Q_PROPERTY(UnityMenuModel* tail READ tail NOTIFY tailChanged)
+    Q_PROPERTY(UnityMenuModel *head READ head WRITE setHead NOTIFY headChanged)
+    Q_PROPERTY(UnityMenuModel *tail READ tail NOTIFY tailChanged)
 public:
-    UnityMenuModelStack(QObject*parent=NULL);
+    UnityMenuModelStack(QObject *parent = 0);
     ~UnityMenuModelStack();
 
-    UnityMenuModel* head() const;
-    void setHead(UnityMenuModel* model);
+    UnityMenuModel *head() const;
+    void setHead(UnityMenuModel *model);
 
-    UnityMenuModel* tail() const;
+    UnityMenuModel *tail() const;
 
-    Q_INVOKABLE void push(UnityMenuModel* model);
-    Q_INVOKABLE UnityMenuModel* pop();
+    Q_INVOKABLE void push(UnityMenuModel *model);
+    Q_INVOKABLE UnityMenuModel *pop();
 
 Q_SIGNALS:
-    void headChanged(UnityMenuModel* head);
-    void tailChanged(UnityMenuModel* tail);
+    void headChanged(UnityMenuModel *head);
+    void tailChanged(UnityMenuModel *tail);
 
 private:
     QList<UnityMenuModel*> m_menuModels;

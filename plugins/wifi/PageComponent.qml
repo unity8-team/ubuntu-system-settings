@@ -23,26 +23,26 @@ import QMenuModel 0.1
 
 
 IndicatorBase {
-	id: wifibase
+    id: wifibase
     title: i18n.tr("Wi-Fi")
-	busName: "com.canonical.indicator.network"
-	actionsObjectPath: "/com/canonical/indicator/network"
-	menuObjectPaths: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
-	active: true
+    busName: "com.canonical.indicator.network"
+    actionsObjectPath: "/com/canonical/indicator/network"
+    menuObjectPaths: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
+    active: true
 
-	UnityMenuModel {
-		id: menuModel
-		busName: "com.canonical.indicator.network"
-		actions: { "indicator": "/com/canonical/indicator/network" }
-		menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
-		Component.onCompleted: {
-			menuStack.head = menuModel;
-		}
-	}
+    UnityMenuModel {
+        id: menuModel
+        busName: "com.canonical.indicator.network"
+        actions: { "indicator": "/com/canonical/indicator/network" }
+        menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
+        Component.onCompleted: {
+            menuStack.head = menuModel;
+        }
+    }
 
     MenuItemFactory {
         id: menuFactory
-		model: mainMenu.model
+        model: mainMenu.model
     }
 
     UnityMenuModelStack {
@@ -113,14 +113,6 @@ IndicatorBase {
                         item.menu = Qt.binding(function() { return model; });
                     }
                 }
-
-/*
-                Binding {
-                    target: item ? item : null
-                    property: "objectName"
-                    value: model.action
-                }
-				*/
             }
         }
     }

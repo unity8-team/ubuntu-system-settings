@@ -19,8 +19,8 @@
 
 #include "unitymenumodelstack.h"
 
-UnityMenuModelStack::UnityMenuModelStack(QObject* parent)
-    : QObject(parent)
+UnityMenuModelStack::UnityMenuModelStack(QObject *parent):
+    QObject(parent)
 {
 }
 
@@ -28,12 +28,12 @@ UnityMenuModelStack::~UnityMenuModelStack()
 {
 }
 
-UnityMenuModel* UnityMenuModelStack::head() const
+UnityMenuModel *UnityMenuModelStack::head() const
 {
     return !m_menuModels.isEmpty() ? m_menuModels.first() : NULL;
 }
 
-void UnityMenuModelStack::setHead(UnityMenuModel* model)
+void UnityMenuModelStack::setHead(UnityMenuModel *model)
 {
     if (head() != model) {
         m_menuModels.clear();
@@ -42,23 +42,23 @@ void UnityMenuModelStack::setHead(UnityMenuModel* model)
     }
 }
 
-UnityMenuModel* UnityMenuModelStack::tail() const
+UnityMenuModel *UnityMenuModelStack::tail() const
 {
     return !m_menuModels.isEmpty() ? m_menuModels.last() : NULL;
 }
 
-void UnityMenuModelStack::push(UnityMenuModel* model)
+void UnityMenuModelStack::push(UnityMenuModel *model)
 {
     m_menuModels << model;
     Q_EMIT tailChanged(model);
 }
 
-UnityMenuModel* UnityMenuModelStack::pop()
+UnityMenuModel *UnityMenuModelStack::pop()
 {
     if (m_menuModels.isEmpty()) {
         return NULL;
     }
-    UnityMenuModel* model = m_menuModels.takeLast();
+    UnityMenuModel *model = m_menuModels.takeLast();
 
     Q_EMIT tailChanged(tail());
     if (m_menuModels.isEmpty()) {
