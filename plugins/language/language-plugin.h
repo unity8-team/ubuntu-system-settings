@@ -33,6 +33,10 @@ private:
                READ languages
                CONSTANT)
 
+    Q_PROPERTY(QStringList languageCodes
+               READ languageCodes
+               CONSTANT)
+
     Q_PROPERTY(int currentLanguage
                READ currentLanguage
                WRITE setCurrentLanguage)
@@ -42,6 +46,8 @@ public:
     explicit LanguagePlugin(QObject *parent = NULL);
 
     const QStringList &languages() const;
+
+    const QStringList &languageCodes() const;
 
     int currentLanguage() const;
     void setCurrentLanguage(int index);
