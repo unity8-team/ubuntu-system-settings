@@ -1,6 +1,6 @@
 {
     "icon": "/usr/share/ubuntu/settings/system/icons/settings-orientation-lock.svg",
-    "name": "Rotation lock",
+    "name": "Orientation lock",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
     "priority": 0,
@@ -16,5 +16,6 @@
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
-    "entry-component": "EntryComponent.qml"
+    "entry-component": "EntryComponent.qml",
+    "hide-by-default": true
 }

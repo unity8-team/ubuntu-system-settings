@@ -4,6 +4,9 @@
     "translations": "ubuntu-system-settings",
     "category": "network",
     "priority": 0,
+    "form-factors": [
+        "phone"
+    ],
     "keywords": [
         "network",
         "wireless",
@@ -12,5 +15,6 @@
         "settings"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false
+    "has-dynamic-visibility": false,
+    "page-component": "PageComponent.qml"
 }

@@ -23,9 +23,9 @@
 
 #include <QDBusInterface>
 #include <QObject>
-#include <QProcess>
 
 #include <libupower-glib/upower.h>
+#include <nm-client.h>
 
 class Battery : public QObject
 {
@@ -38,12 +38,23 @@ class Battery : public QObject
                 READ deviceString
                 CONSTANT)
 
+    Q_PROPERTY( int lastFullCharge
+                READ lastFullCharge
+                NOTIFY lastFullChargeChanged)
+
 public:
     explicit Battery(QObject *parent = 0);
     ~Battery();
-    bool powerdRunning();
-    QString deviceString();
-    Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution) const;
+    bool powerdRunning() const;
+    QString deviceString() const;
+    int lastFullCharge() const;
+    Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution);
+    /* TODO: should be a dynamic property, or replaced by proper qt bindings */
+    Q_INVOKABLE bool getWifiStatus();
+    Q_INVOKABLE void setWifiStatus(bool enableStatus);
+
+Q_SIGNALS:
+    void lastFullChargeChanged();
 
 private:
     QDBusConnection m_systemBusConnection;
@@ -51,6 +62,12 @@ private:
     QDBusInterface m_powerdIface;
     bool m_powerdRunning;
     UpDevice *m_device;
+    QString m_deviceString;
+    int m_lastFullCharge;
+    NMClient *m_nm_client;
+    void buildDeviceString();
+    void getLastFullCharge();
+    bool updateLastFullCharge(UpHistoryItem *item, int offset);
 };
 
 #endif // BATTERY_H

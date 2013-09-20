@@ -22,64 +22,131 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Update 1.0
 
 
 ItemPage {
     id: root
 
-    title: i18n.tr("Update phone")
-    flickable: scrollWidget // maybe remove
+    title: i18n.tr("Updates")
+    flickable: scrollWidget // TODO: maybe remove
 
+    // TODO: surely needs its own QML as the whole logic is here
     UbuntuUpdatePanel {
-        id: updateID
+        id: updateBackend
 
-        property bool updateInProgress: false
-        property bool updateReady: false
-        property bool updateCanceled: false
+        property int downloadProgress: 0
+        property string downloadRemainingTime
+        property string updateVersion
+        property string updateSize
+        property variant updateDescriptions: [""]
 
-        // TODO: example data, no i18n
-        property variant updateDescriptions: ["Enables a 200x improvment on Ubuntu Edge phone",
-                                              "Makes you a sandwich",
-                                              "Makes Steve and Loic happy"]
+        // initial state
+        property int currentUpdateState: UbuntuUpdatePanel.Checking
+        property string checkinfoMessage: i18n.tr("Checking for updates…")
+        infoMessage: checkinfoMessage
+        property string infoSecondaryMessage
 
-        function startUpdate() {
-            updateInProgress= true;
-            updateReady = false;
-            updateCanceled = false;
-            actionbuttons.text = "";
-            TriggerUpdate();
-        }
 
-        onReadyToReboot: {
-            updateInProgress = true;
-            updateReady = true;
-            updateCanceled = false;
-        }
-        onUpdateFailed: {
-            PopupUtils.open(updateFailedDialog)
-            updateInProgress = false;
-            updateReady = false;
-            updateCanceled = false;
-            updateAvailable = -1;
-        }
-        onUpdateCanceled: {
-            updateInProgress = false;
-            updateReady = false;
-            updateCanceled = true;
-            updateAvailable = 1;
-        }
-
-        onUpdateAvailableChanged: {
-            if (updateID.updateAvailable === 1) {
-                statusDetails.opacity = 1.0;
-                actionbuttons.text = actionbuttons.default_text;
+        /***************************
+         * DIRECT CALLS TO BACKEND *
+         ***************************/
+        function recheckForUpdate() {
+            infoMessage = "";
+            infoSecondaryMessage = "";
+            var msg = CancelUpdate();
+            if(msg) {
+                infoMessage = TranslateFromBackend(msg);
+                currentUpdateState = UbuntuUpdatePanel.CheckingError;
+                return;
             }
-            else
-                statusDetails.opacity = 0.0;
+            currentUpdateState = UbuntuUpdatePanel.Checking;
+            infoMessage = checkinfoMessage;
+            CheckForUpdate();
         }
 
+        function downloadUpdate() {
+            infoMessage = "";
+            infoSecondaryMessage = "";
+            DownloadUpdate();
+        }
+
+        function applyUpdate() {
+            infoMessage = "";
+            infoSecondaryMessage = "";
+            var msg = ApplyUpdate();
+            if (msg) {
+                infoMessage = i18n.tr("Apply update failed:");
+                infoSecondaryMessage = TranslateFromBackend(msg);
+            }
+        }
+
+        function pauseDownload() {
+            infoMessage = "";
+            infoSecondaryMessage = "";
+            var msg = PauseDownload();
+            if (msg) {
+                infoMessage = i18n.tr("Pause failed:");
+                infoSecondaryMessage = TranslateFromBackend(msg);
+            }
+        }
+
+        /************************
+         * SIGNALS FROM BACKEND *
+         ************************/
+        onUpdateAvailableStatus: {
+
+            infoMessage = "";
+            updateVersion = availableVersion;
+            var sizeInMB = updateSize/(1024*1024);
+            if (sizeInMB > 1024)
+                updateBackend.updateSize = i18n.tr("%1 GB").arg(Math.round(sizeInMB/1024*10)/10);
+            else
+                updateBackend.updateSize = i18n.tr("%1 MB").arg(Math.round(sizeInMB*10)/10);
+            updateDescriptions = descriptions;
+
+            if(isAvailable) {
+                currentUpdateState = UbuntuUpdatePanel.UpdateAvailable;
+            }
+            else {
+                currentUpdateState = UbuntuUpdatePanel.NoUpdate;
+                infoMessage = i18n.tr("No software update available") + "<br/>" + i18n.tr("Last updated %1").arg(lastUpdateDate);
+            }
+
+            if(errorReason) {
+                infoMessage = errorReason;
+                currentUpdateState = UbuntuUpdatePanel.CheckingError;
+            }
+        }
+
+        onUpdateProgress: {
+            downloadProgress = percentage;
+            if (eta > 0)
+                downloadRemainingTime = i18n.tr("About %1 second remaining", "About %1 seconds remaining", eta).arg(eta);
+            else
+                downloadRemainingTime = i18n.tr("No estimate for the download");
+            currentUpdateState = UbuntuUpdatePanel.Downloading;
+        }
+
+        onUpdatePaused: {
+            downloadProgress = percentage;
+            downloadRemainingTime = i18n.tr("Paused");
+            currentUpdateState = UbuntuUpdatePanel.Paused;
+        }
+
+        onUpdateDownloaded: {
+            currentUpdateState = UbuntuUpdatePanel.ReadyToInstall;
+        }
+
+        onUpdateFailed: {
+            infoMessage = i18n.tr("Download failed:");
+            infoSecondaryMessage = TranslateFromBackend(lastReason);
+            currentUpdateState = UbuntuUpdatePanel.DownloadFailed;
+        }
+
+        function isUpdateContentToDisplay() {
+            return currentUpdateState !== UbuntuUpdatePanel.Checking && currentUpdateState !== UbuntuUpdatePanel.NoUpdate && currentUpdateState !== UbuntuUpdatePanel.CheckingError;
+        }
     }
 
     Flickable {
@@ -87,125 +154,188 @@ ItemPage {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        anchors.left: parent.left
-        anchors.right: parent.right
-
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            width: parent.width
+            Item {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: units.gu(2)
+                }
+                height: distribLogo.height + standardLabel.height*2 + versionId.height + subtitleId.height +
+                        updateProgress.height + pauseDownloadButton.height + units.gu(4)
 
-            ListItem.Base {
-                height: updateStatusbar.height + checkUpdateIndicator.height + units.gu(6)
-
+                /**********************
+                 * Checking/no update *
+                 **********************/
                 Column {
-                    width: parent.width
                     anchors.centerIn: parent
+                    width: parent.width
                     spacing: units.gu(2)
+                    visible: !updateBackend.isUpdateContentToDisplay()
 
-                    Label {
-                        id: updateStatusbar
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-
-                        fontSize: "large"
-                        text: { if (updateID.updateAvailable === 0)
-                                  return i18n.tr("Congrats! You are already up to date!");
-                                else if (updateID.updateAvailable === 1)
-                                  return i18n.tr("A new version is available!");
-                                return i18n.tr("Checking latest available system version…"); }
-                        wrapMode: Text.WordWrap
-
-                    }
                     ActivityIndicator {
                         id: checkUpdateIndicator
                         anchors.horizontalCenter: parent.horizontalCenter
-                        running: updateID.updateAvailable < 0
+                        running: updateBackend.currentUpdateState === UbuntuUpdatePanel.Checking
                         visible: running
                     }
-                    ProgressBar {
-                        id: indeterminateBar
-                        anchors.left: parent.left
-                        anchors.right: parent.right
+                    Label {
+                        id: updateStatusbar
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        width: parent.width
 
-                        indeterminate: true
-                        visible: updateID.updateInProgress && !updateID.updateReady
+                        text: updateBackend.infoMessage
+                        visible: updateBackend.infoMessage
+                        wrapMode: Text.WordWrap
+                        textFormat: Text.RichText
+                    }
+                    Button {
+                        id: retryCheckUpdateButton
+                        text: i18n.tr("Retry")
+                        width: parent.width
+                        onClicked: updateBackend.recheckForUpdate()
+                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.NoUpdate || updateBackend.currentUpdateState === UbuntuUpdatePanel.CheckingError
                     }
                 }
 
-            }
-
-            ListItem.Standard {
-                id: statusDetails
-                Behavior on opacity { PropertyAnimation { duration: 1000 } }
-                opacity: 0
-
+                /**********************
+                 * Update to download *
+                 **********************/
                 Column {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    id: updateContentDisplay
+                    visible: updateBackend.isUpdateContentToDisplay()
+                    width: parent.width
+                    spacing: units.gu(2)
 
-                    // FIXME: Any of those item is creating an extra line in the middle, commented for now
-                    //ListItem.Divider { }
-                    /*ListItem.Header {
-                        text: i18n.tr("General update infos:")
-                    }*/
-                    ListItem.Standard {
-                        text: i18n.tr("You can update from version %1 to version %2").arg(updateID.OSVersion).arg(updateID.updateVersion);
+                    Icon {
+                        id: distribLogo
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: units.gu(6)
+                        height: width
+                        name: "distributor-logo"
                     }
-                    ListItem.Standard {
-                        text: i18n.tr("Size of this update: %1").arg(updateID.updateSize);
-                    }
-                    ListItem.Divider { }
-                    ListItem.Header {
-                        text: i18n.tr("This update will:")
-                    }
-                    Repeater {
-                        model: updateID.updateDescriptions
-                        ListItem.Standard { text: modelData }
-                    }
-                    ListItem.Divider { }
 
-                    ListItem.Standard {
-                        id: actionbuttons
-                        property string default_text: i18n.tr("Apply?")
-                        text: default_text
-                        control: Row {
-                            spacing: units.gu(1)
-                            Button {
-                                text: i18n.tr("Update your phone")
-                                width: units.gu(19)
-                                onClicked: updateID.startUpdate()
-                                visible: !updateID.updateInProgress
-                            }
-                            Button {
-                                text: i18n.tr("Cancel update")
-                                width: units.gu(19)
-                                onClicked: updateID.CancelUpdate()
-                                visible: updateID.updateInProgress
-                            }
-                            Button {
-                                text: i18n.tr("Reboot your phone now")
-                                width: units.gu(25)
-                                onClicked: updateID.Reboot()
-                                visible: updateID.updateInProgress && updateID.updateReady
-                            }
+                    Row {
+                        width: parent.width
+
+                        Label {
+                            id: standardLabel
+                            width: parent.width/2
+                            text: i18n.tr("Ubuntu Phone")
+                        }
+
+                        Label {
+                            horizontalAlignment: Text.AlignRight
+                            width: parent.width/2
+                            text: updateBackend.updateSize;
+                        }
+                    }
+
+                    ListItem.ItemSelector {
+                        id: versionId
+                        text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
+                        model: updateBackend.updateDescriptions
+                        selectedIndex: -1
+                        showDivider: false
+                    }
+
+                    ListItem.Subtitled {
+                        id: subtitleId
+                        text: updateBackend.infoMessage
+                        subText: updateBackend.infoSecondaryMessage
+                        visible: updateBackend.infoMessage !== ""
+                        showDivider: false
+                    }
+
+                    /***************************
+                     * Transaction in progress *
+                     ***************************/
+                    Column {
+                        id: updateDownloading
+                        spacing: units.gu(1)
+                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                        width: parent.width
+
+                        ProgressBar {
+                            id: updateProgress
+                            maximumValue : 100
+                            minimumValue : 0
+                            value : updateBackend.downloadProgress
+                            width: parent.width
+                        }
+
+                        Label {
+                            text: updateBackend.downloadRemainingTime
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                        }
+
+                        Button {
+                            id: pauseDownloadButton
+                            text: i18n.tr("Pause downloading")
+                            width: parent.width
+                            onClicked: updateBackend.pauseDownload()
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading
+                        }
+
+                        Button {
+                            text: i18n.tr("Resume downloading")
+                            width: parent.width
+                            onClicked: updateBackend.downloadUpdate()
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                        }
+
+                    }
+
+                    /*********************
+                     * Transaction ended *
+                     *********************/
+                    Column {
+                        id: updateStopped
+                        width: parent.width
+
+                        Button {
+                            text: i18n.tr("Download")
+                            width: parent.width
+                            onClicked: updateBackend.downloadUpdate()
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.UpdateAvailable
+                        }
+
+                        Button {
+                            text: i18n.tr("Retry")
+                            width: parent.width
+                            onClicked: updateBackend.recheckForUpdate()
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.DownloadFailed
+                        }
+
+                        Button {
+                            text: i18n.tr("Install & Restart")
+                            width: parent.width
+                            onClicked: updateBackend.applyUpdate()
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.ReadyToInstall
                         }
                     }
                 }
             }
+
+            ListItem.ThinDivider {}
+
         }
     }
-
-    Component {
-         id: updateFailedDialog
-        Dialog {
-            id: updateFailedDialogue
-            title: i18n.tr("We are deeply sorry");
-            text: i18n.tr("The update failed. Please try again later");
-            Button {
-               text: "I'll try later"
-               onClicked: PopupUtils.close(updateFailedDialogue)
-            }
+    ListItem.SingleValue {
+        anchors.bottom: parent.bottom
+        text: i18n.tr("Auto download")
+        value: {
+            if (updateBackend.downloadMode === 0)
+                return i18n.tr("Never")
+            else if (updateBackend.downloadMode === 1)
+                return i18n.tr("On wi-fi")
+            else if (updateBackend.downloadMode === 2)
+                return i18n.tr("Always")
         }
+       progression: true
+       onClicked: pageStack.push(Qt.resolvedUrl("Download.qml"), {updateBackend: updateBackend})
     }
 }

@@ -13,7 +13,10 @@ Column {
     property string categoryName
 
     ListItem.Header {
+        id: header
+
         text: categoryName
+        visible: repeater.count > 0
     }
 
     Grid {
@@ -22,6 +25,8 @@ Column {
         columns: width / units.gu(14)
 
         Repeater {
+            id: repeater
+
             model: pluginManager.itemModel(category)
 
             delegate: Loader {
@@ -43,5 +48,5 @@ Column {
             }
         }
     }
-    ListItem.ThinDivider {}
+    ListItem.ThinDivider { visible: header.visible }
 }

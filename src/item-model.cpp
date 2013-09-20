@@ -18,6 +18,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <libintl.h>
+
 #include "debug.h"
 #include "item-model.h"
 #include "plugin.h"
@@ -46,6 +48,7 @@ ItemModelPrivate::ItemModelPrivate()
     m_roleNames[Qt::DisplayRole] = "displayName";
     m_roleNames[ItemModel::IconRole] = "icon";
     m_roleNames[ItemModel::ItemRole] = "item";
+    m_roleNames[ItemModel::KeywordRole] = "keywords";
 }
 
 ItemModelPrivate::~ItemModelPrivate()
@@ -104,6 +107,21 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
     case ItemRole:
         ret = QVariant::fromValue<QObject*>(const_cast<Plugin*>(item));
         break;
+    case KeywordRole:
+        const char * domain = item->translations().toUtf8().constData();
+        QStringList temp(item->keywords());
+        QMutableListIterator<QString> it(temp);
+        while (it.hasNext()) {
+            QString keyword = it.next();
+            it.setValue(QString::fromUtf8(
+                            dgettext(
+                                domain,
+                                keyword.toUtf8().constData())));
+        }
+        temp << QString::fromUtf8(
+                dgettext(domain,
+                         item->displayName().toUtf8().constData()));
+        ret = temp;
     }
 
     return ret;
@@ -165,4 +183,23 @@ bool ItemModelSortProxy::lessThan(const QModelIndex &left,
     }
 
     return false;
+}
+
+bool ItemModelSortProxy::filterAcceptsRow(
+        int source_row, const QModelIndex &source_parent) const
+{
+    QStringList keywords;
+    QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
+
+    QVariant data(sourceModel()->data(index, filterRole()));
+
+    switch (filterRole()) {
+    case ItemModel::KeywordRole:
+        keywords = data.value<QStringList>();
+        return keywords.filter(filterRegExp()).length() > 0;
+    default:
+        return false;
+    }
+
+    return true;
 }

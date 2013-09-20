@@ -21,6 +21,7 @@
 #ifndef UPDATE_H
 #define UPDATE_H
 
+#include <QtDBus>
 #include <QDBusInterface>
 #include <QObject>
 #include <QProcess>
@@ -29,63 +30,56 @@
 class Update : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( QString OSVersion
-                READ OSVersion
-                CONSTANT)
-    Q_PROPERTY( int updateAvailable
-                READ UpdateAvailable
-                WRITE setUpdateAvailable
-                NOTIFY updateAvailableChanged )
-    Q_PROPERTY( QString updateVersion
-                READ UpdateVersion
-                NOTIFY updateAvailableChanged)
-    Q_PROPERTY( QString updateSize
-                READ UpdateSize
-                NOTIFY updateAvailableChanged)
-    Q_PROPERTY( QString updateDescriptions
-                READ UpdateDescriptions
-                NOTIFY updateAvailableChanged)
+    Q_ENUMS(State)
+    Q_PROPERTY( QString infoMessage
+                READ InfoMessage
+                WRITE SetInfoMessage
+                NOTIFY infoMessageChanged)
+    Q_PROPERTY( int downloadMode
+                READ DownloadMode
+                WRITE SetDownloadMode
+                NOTIFY downloadModeChanged)
 
-    
 public:
     explicit Update(QObject *parent = 0);
     ~Update();
 
-    QString OSVersion();
+    enum State { CheckingError, Checking, NoUpdate, UpdateAvailable, Downloading, Paused, ReadyToInstall, DownloadFailed };
 
-    int UpdateAvailable();
-    void setUpdateAvailable(int);
-    QString UpdateVersion();
-    QString UpdateSize();
-    QString UpdateDescriptions();
+    QString InfoMessage();
+    void SetInfoMessage(QString);
+    int DownloadMode();
+    void SetDownloadMode(int);
 
-    Q_INVOKABLE void TriggerUpdate();
-    Q_INVOKABLE void CancelUpdate();
-    Q_INVOKABLE void Reboot();
-
+    Q_INVOKABLE void CheckForUpdate();
+    Q_INVOKABLE void DownloadUpdate();
+    Q_INVOKABLE QString ApplyUpdate();
+    Q_INVOKABLE QString CancelUpdate();
+    Q_INVOKABLE QString PauseDownload();
+    Q_INVOKABLE QString TranslateFromBackend(QString);
 
 public Q_SLOTS:
-    bool slotUpdateAvailableStatus(bool pendingUpdate);
+    void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
+    void ProcessSettingChanged(QString, QString);
 
 Q_SIGNALS:
-    bool updateAvailableChanged();
-    void readyToReboot();
-    void updateFailed();
-    void updateCanceled();
+    void updateAvailableStatus(bool isAvailable, bool downloading, QString availableVersion, int updateSize,
+                               QString lastUpdateDate, QStringList descriptions, QString errorReason);
+    void updateProgress(int percentage, double eta);
+    void updatePaused(int percentage);
+    void updateDownloaded();
+    void updateFailed(int consecutiveFailureCount, QString lastReason);
+    void infoMessageChanged();
+    void downloadModeChanged();
+
 
 private:
-    QString m_OSVersion;
-
-    int m_updateAvailable;
-    QString m_updateVersion;
-    QString m_updateSize;
-    QString m_updateDescriptions;
+    QString m_infoMessage;
+    int m_downloadMode;
 
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;
     QDBusInterface m_SystemServiceIface;
-
-    void m_getUpdateInfos();
 };
 
 #endif // UPDATE_H

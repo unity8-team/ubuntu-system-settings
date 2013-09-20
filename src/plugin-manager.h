@@ -36,6 +36,10 @@ class PluginManager: public QObject, public QQmlParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
+    Q_PROPERTY (QString filter
+                READ getFilter
+                WRITE setFilter
+                NOTIFY filterChanged)
 
 public:
     PluginManager(QObject *parent = 0);
@@ -46,14 +50,20 @@ public:
 
     Q_INVOKABLE QObject *getByName(const QString &name) const;
     Q_INVOKABLE QAbstractItemModel *itemModel(const QString &category);
+    QString getFilter();
+    void setFilter(const QString &filter);
 
     // reimplemented virtual methods
     void classBegin();
     void componentComplete();
 
+Q_SIGNALS:
+    void filterChanged();
+
 private:
     PluginManagerPrivate *d_ptr;
     Q_DECLARE_PRIVATE(PluginManager)
+    QString m_filter;
 };
 
 } // namespace

@@ -163,8 +163,10 @@ QUrl Plugin::icon() const
     if (iconName.isEmpty()) {
         if (!d->ensureLoaded()) return QUrl();
         return d->m_item->icon();
+    } else if (iconName.startsWith("/")) {
+        return QString("file://") + iconName;
     } else {
-        return QString("image://gicon/") + QUrl::toPercentEncoding(iconName);
+        return QString("image://theme/") + iconName;
     }
 }
 
@@ -206,6 +208,12 @@ bool Plugin::isVisible() const
         return d->m_item->isVisible();
     }
     return true;
+}
+
+bool Plugin::hideByDefault() const
+{
+    Q_D(const Plugin);
+    return d->m_data.value(keyHideByDefault, false).toBool();
 }
 
 QQmlComponent *Plugin::entryComponent()

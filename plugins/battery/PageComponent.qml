@@ -25,6 +25,8 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+
 
 ItemPage {
     id: root
@@ -32,9 +34,30 @@ ItemPage {
     title: i18n.tr("Battery")
     flickable: scrollWidget
 
+    property bool isCharging
+
+    function timeDeltaString(timeDelta) {
+        var sec = timeDelta,
+            min = Math.round (timeDelta / 60),
+            hr = Math.round (timeDelta / 3600),
+            day = Math.round (timeDelta / 86400);
+        if (sec < 60)
+            return i18n.tr("%1 second ago".arg(sec), "%1 seconds ago".arg(sec), sec)
+        else if (min < 60)
+            return i18n.tr("%1 minute ago".arg(min), "%1 minutes ago".arg(min), min)
+        else if (hr < 24)
+            return i18n.tr("%1 hour ago".arg(hr), "%1 hours ago".arg(hr), hr)
+        else
+            return i18n.tr("%1 day ago".arg(day), "%1 days ago".arg(day), day)
+    }
+
     GSettings {
         id: powerSettings
-        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.settings-daemon.plugins.power"
+        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.desktop.session"
+    }
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
     }
 
     BatteryInfo {
@@ -46,12 +69,15 @@ ItemPage {
         onChargingStateChanged: {
             if (state === BatteryInfo.Charging) {
                 chargingEntry.text = i18n.tr("Charging now")
-                chargingEntry.value = ""
-
+                isCharging = true
             }
-            else {
+            else if (state === BatteryInfo.Discharging) {
                 chargingEntry.text = i18n.tr("Last full charge")
-                chargingEntry.value = i18n.tr("N/A")  // TODO: find a way to get that information
+                isCharging = false
+            }
+            else if (state === BatteryInfo.Full || state === BatteryInfo.NotCharging) {
+                chargingEntry.text = i18n.tr("Fully charged")
+                isCharging = true
             }
         }
         onRemainingCapacityChanged: {
@@ -74,6 +100,7 @@ ItemPage {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        interactive: !sliderId.pressed
 
         Column {
             anchors.left: parent.left
@@ -88,6 +115,8 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: chargingEntry
+                value: isCharging ?
+                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
                 showDivider: false
             }
 
@@ -112,7 +141,7 @@ ItemPage {
                     ctx.stroke()
 
                     /* Display the charge history in orange color */
-                    ctx.lineWidth = units.dp(1)
+                    ctx.lineWidth = units.dp(2)
                     ctx.strokeStyle = UbuntuColors.orange
 
                     /* Get infos from battery0, on a day (60*24*24=86400 seconds), with 150 points on the graph */
@@ -121,9 +150,9 @@ ItemPage {
                     /* time is the offset in seconds compared to the current time (negative value)
                        we display the charge on a day, which is 86400 seconds, the value is the %
                        the coordinates are adjusted to the canvas, top,left is 0,0 */
-                    ctx.moveTo((86400+chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
+                    ctx.moveTo((86400-chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
                     for (var i=1; i < chargeDatas.length; i++) {
-                        ctx.lineTo((86400+chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
+                        ctx.lineTo((86400-chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
                     }
                     ctx.stroke()
                     ctx.restore();
@@ -149,6 +178,10 @@ ItemPage {
                     }
                     Slider {
                         id: sliderId
+                        function formatValue(v) {
+                            return "%1%".arg(v.toFixed(0))
+                        }
+
                         anchors {
                             left: iconLeft.right
                             right: iconRight.left
@@ -172,27 +205,38 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Auto sleep")
+                property bool lockOnSuspend:
+                    securityPrivacy.securityType !==
+                        UbuntuSecurityPrivacyPanel.Swipe
+                text: lockOnSuspend ? i18n.tr("Lock when idle") : i18n.tr("Sleep when idle")
                 value: {
                     if (batteryBackend.powerdRunning ) {
+                        var timeout = Math.round(powerSettings.activityTimeout/60)
                         return (powerSettings.activityTimeout != 0) ?
-                                    i18n.tr("After %1 minutes").arg(Math.round(powerSettings.activityTimeout/60)) :
+                                    i18n.tr("After %1 minute".arg(timeout),
+                                            "After %1 minutes".arg(timeout),
+                                            timeout) :
                                     i18n.tr("Never")
                     }
                     else {
-                        return (powerSettings.sleepDisplayBattery != 0) ?
-                                    i18n.tr("After %1 minutes").arg(Math.round(powerSettings.sleepDisplayBattery/60)) :
+                        var timeout = Math.round(powerSettings.idleDelay/60)
+                        return (powerSettings.idleDelay != 0) ?
+                                    i18n.tr("After %1 minute".arg(timeout),
+                                            "After %1 minutes".arg(timeout),
+                                            timeout) :
                                     i18n.tr("Never")
                     }
                 }
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SleepValues.qml"), {usePowerd: batteryBackend.powerdRunning })
+                onClicked: pageStack.push(
+                               Qt.resolvedUrl("SleepValues.qml"),
+                               { title: text, lockOnSuspend: lockOnSuspend })
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
                 control: Switch {
-                    checked: true
-                    enabled: false
+                    checked: batteryBackend.getWifiStatus()
+                    onCheckedChanged: batteryBackend.setWifiStatus(checked)
                 }
             }
 

@@ -3,6 +3,11 @@
         <value nick="home" value="1" />
         <value nick="welcome" value="2" />
     </enum>
+    <enum id="enum-unlock-method">
+        <value nick="swipe" value="1" />
+        <value nick="passcode" value="2" />
+        <value nick="password" value="3" />
+    </enum>
     <schema id="com.ubuntu.touch.system-settings" path="/com/ubuntu/touch/system-settings/">
         <key name="background-duplicate" type="b">
             <default>true</default>
@@ -15,7 +20,7 @@
         </key>
         <key name="background-previously-set-value" type="s">
             <default>""</default>
-            <description>When backgroud-duplicate is 'true', the value to restore the least recently changed screen to.</description>
+            <description>When background-duplicate is 'true', the value to restore the least recently changed screen to.</description>
         </key>
         <key name="storage-sort-by-name" type="b">
             <default>true</default>

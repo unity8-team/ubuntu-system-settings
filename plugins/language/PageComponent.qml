@@ -21,6 +21,7 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
@@ -32,6 +33,10 @@ ItemPage {
 
     UbuntuLanguagePlugin {
         id: plugin
+    }
+
+    DisplayLanguage {
+        id: displayLanguage
     }
 
     Flickable {
@@ -48,7 +53,7 @@ ItemPage {
                 text: i18n.tr("Display language")
                 value: plugin.languages[plugin.currentLanguage]
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("DisplayLanguage.qml"))
+                onClicked: PopupUtils.open(displayLanguage)
             }
 
             ListItem.Divider {}
@@ -73,19 +78,25 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Auto correction")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
 
             ListItem.Standard {
                 text: i18n.tr("Auto completion")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
 
             ListItem.Divider {}
 
             ListItem.Standard {
                 text: i18n.tr("Auto capitalization")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
 
             ListItem.Caption {
@@ -96,7 +107,9 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Auto punctuation")
-                control: Switch {}
+                control: Switch {
+                    enabled: false /* TODO: enable when there is a backend */
+                }
             }
 
             ListItem.Caption {

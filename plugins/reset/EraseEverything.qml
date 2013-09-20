@@ -29,6 +29,7 @@ Component {
         text: i18n.tr("All documents, saved games, settings, and other items will be permanently deleted from this phone.")
         Button {
             text: i18n.tr("Erase & reset everything")
+            enabled: false /* TODO: enable when there is a backend */
             onClicked: PopupUtils.close(dialog)
         }
         Button {

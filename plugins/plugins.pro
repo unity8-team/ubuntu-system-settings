@@ -5,12 +5,11 @@ SUBDIRS = \
     background \
     battery \
     flight-mode \
-    gps \
     orientation-lock \
     reset \
     sound \
     language \
-    accessibility \
+    # accessibility \  not on the 13.10 list
     phone \
     brightness \
     time-date \

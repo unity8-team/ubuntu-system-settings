@@ -24,12 +24,21 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: root
 
     title: i18n.tr("Security & Privacy")
     flickable: scrollWidget
+
+    UbuntuDiagnostics {
+        id: diagnosticsWidget
+    }
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
+    }
 
     GSettings {
         id: unitySettings
@@ -53,17 +62,77 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
+            ListItem.Standard {
+                text: i18n.tr("Security:")
+            }
             ListItem.SingleValue {
-                id: dashSearchId
-                text: i18n.tr("Dash search")
-                value: (unitySettings.remoteContentSearch === 'all') ? i18n.tr("Phone and Internet") : i18n.tr("Phone only")
+                text: i18n.tr("Phone locking")
+                value: i18n.tr("1 minute",
+                               "%1 minutes".arg(5),
+                               5)
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("Dash.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("SIM PIN")
+                value: "Off"
+                progression: true
+            }
+            ListItem.Standard {
+                text: i18n.tr("Privacy:")
+            }
+            ListItem.Standard {
+                text: i18n.tr("Stats on welcome screen")
+                control: Switch {
+                    id: welcomeStatsSwitch
+                    checked: securityPrivacy.statsWelcomeScreen
+                }
+            }
+            Binding {
+                target: securityPrivacy
+                property: "statsWelcomeScreen"
+                value: welcomeStatsSwitch.checked
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Messages on welcome screen")
+                control: Switch {
+                    id: welcomeMessagesSwitch
+                    checked: securityPrivacy.messagesWelcomeScreen
+                }
+                visible: showAllUI
+            }
+            Binding {
+                target: securityPrivacy
+                property: "messagesWelcomeScreen"
+                value: welcomeMessagesSwitch.checked
             }
 
             ListItem.SingleValue {
+                id: dashSearchId
+                text: i18n.tr("Dash search")
+                value: (unitySettings.remoteContentSearch === 'all') ?
+                           i18n.tr("Phone and Internet") :
+                           i18n.tr("Phone only")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Dash.qml"))
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("Location access")
+                value: "On"
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
+            }
+            ListItem.SingleValue {
+                text: i18n.tr("Other app access")
+                progression: true
+            }
+            ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
                 progression: true
+                value: diagnosticsWidget.canReportCrashes ?
+                           i18n.tr("Sent") :
+                           i18n.tr("Not sent")
                 onClicked: {
                     var path = "../diagnostics/PageComponent.qml";
                     pageStack.push(Qt.resolvedUrl(path));

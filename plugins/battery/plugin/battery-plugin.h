@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Iain Lane <iain.lane@canonical.com>
+ * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -18,28 +18,23 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import GSettings 1.0
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+#ifndef SYSTEM_SETTINGS_BATTERY_PLUGIN_H
+#define SYSTEM_SETTINGS_BATTERY_PLUGIN_H
 
-ListItem.Standard {
-    id: root
-    icon: Qt.resolvedUrl(model.icon)
-    iconFrame: false
-    text: i18n.tr(model.displayName)
-    control: Switch {
-        id: control
-        checked: networkSettings.gps
-        onCheckedChanged: networkSettings.gps = checked
+#include <QObject>
+#include <SystemSettings/PluginInterface>
 
-        GSettings {
-            id: networkSettings
-            schema.id: "com.ubuntu.touch.network"
-            onChanged: {
-                if (key == "gps")
-                    control.checked = value
-            }
-        }
-    }
-}
+class BatteryPlugin: public QObject, public SystemSettings::PluginInterface
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface")
+    Q_INTERFACES(SystemSettings::PluginInterface)
+
+public:
+    BatteryPlugin();
+
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
+};
+
+#endif // SYSTEM_SETTINGS_BATTERY_PLUGIN_H

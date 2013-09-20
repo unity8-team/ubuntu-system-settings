@@ -1,3 +1,262 @@
+ubuntu-system-settings (0.1+13.10.20130918.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * timedate: use the new itemselector widget.
+  * security: use the new ItemSelector widget.
+  * [storage] Add a C++ backend for reading the Click package metadata
+    and turning it into a proper table model, allowing the QML side to
+    be made far cleaner.
+
+  [ Iain Lane ]
+  * Update pot.
+  * Add the ability to hide deferred/unfinished panels or elements. Pass
+    USS_SHOW_ALL_UI=1 to re-enable them.
+  * Hide the deferred brightness panel.
+  * Hide "messages on the welcome screen" toggle which is deferred.
+  * Flight mode is deferred. Hide it.
+  * Don't do anything when clicking on uncategorised items which have no
+    pageComponent. They should handle this themselves in their entry
+    component.
+  * [storage] Add a C++ backend for reading the Click package metadata
+    and turning it into a proper table model, allowing the QML side to
+    be made far cleaner.
+
+  [ Guenter Schwann ]
+  * Use start() to actually start the content picking transfer.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 358
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Sep 2013 07:55:27 +0000
+
+ubuntu-system-settings (0.1+13.10.20130910.3-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * background: use the new OptionSelector, tweak the UI to be closer
+    from the visuals (move the labels at the bottom of the images, use
+    smaller text, use correct spacing).
+  * battery: set current value on the graph.
+  * reset: implement backend to reset the unity launcher settings.
+  * storage: display the clicks' list rather than the fake datas.
+  * updates: use the new ItemSelector widget, updated the download
+    option to match the current design as well, moving the selector in
+    its own subpage.
+  * orientation: replace "Rotation lock" by "Orientation lock".
+  * language: use new ItemSelector widget.
+  * storage: use new ItemSelector widget.
+  * battery: on the desktop use idle-delay's key, which is not
+    deprecated.
+
+  [ Iain Lane ]
+  * Make the panels display "Lock on idle" or "Sleep on idle" as
+    appropriate.
+  * Add UI and backend for setting the time manually.
+  * Make the "Change passphrase" / "Change passcode" button work.
+  * Implement filtering in the main window.
+  * Typo fix "Septemper" → "September". (LP: #1221400)
+  * Set the unlock type in a QSettings file (~/.unity8-greeter-demo).
+    (LP: #1218010)
+  * security-privacy: Implement changing password and validation of
+    input.
+
+  [ Charles Kerr ]
+  * Fix NMClient leak, take battery capacity into account when
+    determining the last time a discharging battery was full.
+
+  [ Ken VanDine ]
+  * Don't start the transfer from the importer, the hub now handles that
+    when dispatching the transfer.
+
+  [ William Hua ]
+  * Replace page stack with sheet in display languages. (LP: #1222728)
+
+  [ Adolfo Jayme Barrientos ]
+  * Trivial typo fix: Conrifm → Confirm.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 341
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 10 Sep 2013 19:20:48 +0000
+
+ubuntu-system-settings (0.1+13.10.20130904.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * use the theme provider for themed icons.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 315
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Sep 2013 16:24:50 +0000
+
+ubuntu-system-settings (0.1+13.10.20130904-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * sound: use the new ItemSelector list widget.
+  * battery: use the new ItemSelector list widget. Depends on the new
+    toolkit version for that. If the configuration value is zero, than
+    select the "never" entry as well.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 312
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Sep 2013 03:14:44 +0000
+
+ubuntu-system-settings (0.1+13.10.20130903.3-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * stop using the deprecated gicon provider, use the new themed icon
+    instead. Change the plugin icon code to support themed icons, as
+    well as urls to file locations on disk.
+
+  [ Iain Lane ]
+  * UI (without backend) for setting/changing the unlock
+    password/passphrase.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 309
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 19:15:57 +0000
+
+ubuntu-system-settings (0.1+13.10.20130903.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * drop the gps control from the main screen.
+
+  [ Iain Lane ]
+  * Make the Automatic / Manual selector in Time & Date toggle
+    timedated's NTP property.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 306
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 11:44:46 +0000
+
+ubuntu-system-settings (0.1+13.10.20130902.1-0ubuntu1) saucy; urgency=low
+
+  [ Guenter Schwann ]
+  * Use content hub for picking a background from the gallery.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 302
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 02 Sep 2013 06:12:47 +0000
+
+ubuntu-system-settings (0.1+13.10.20130829.2-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * Add a custom AccountsService schema and set up two examples.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 296
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 16:14:49 +0000
+
+ubuntu-system-settings (0.1+13.10.20130829.1-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * use a better icon, since the mobile theme provides one.
+  * battery: 100% is fully charged Since upower seems to not always
+    consider 100% as fully charged, check for the charge, as well as for
+    the status.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 294
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 12:29:50 +0000
+
+ubuntu-system-settings (0.1+13.10.20130829-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * Use battery's SleepValues panel for lock/sleep when idle timeout.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 290
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 29 Aug 2013 03:20:41 +0000
+
+ubuntu-system-settings (0.1+13.10.20130827-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: don't segfault when there is no charge info.
+  * storage: get the list of click packages installed and build a model
+    from it. We don't use the real datas in the ui yet though, since the
+    manifest doesn't have the informations we need for that yet.
+  * battery: update sleep/lock subscreen to match the new design.
+  * settings: use enabled: false with a TODO for non working elements.
+  * battery: backend for the wifi controls.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 287
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 27 Aug 2013 11:18:05 +0000
+
+ubuntu-system-settings (0.1+13.10.20130823-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * updates: some Ui tweaks - don't show extra lines in the middle of
+    the ui - use separator between sections - use a consistant height -
+    round update size to 1 digit - refresh the translations template.
+
+  [ Didier Roche ]
+  * Visual refresh from the design spec. Comply to the new daemon <->
+    client dbus API.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 278
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 23 Aug 2013 15:18:05 +0000
+
+ubuntu-system-settings (0.1+13.10.20130822.2-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * security: new location subpanel.
+
+  [ Iain Lane ]
+  * An initial dummy version of the main page of security-privacy.
+  * security-privacy: Add UI for some subpanels.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 274
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 19:25:05 +0000
+
+ubuntu-system-settings (0.1+13.10.20130822-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: some tweaks to the charge info: - read history in the right
+    order - ignore buggy empty charge values from suspend/resume -
+    correctly determine when we stop charging.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 270
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 22 Aug 2013 11:18:59 +0000
+
+ubuntu-system-settings (0.1+13.10.20130821-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: display the last full charge.
+
+  [ Iain Lane ]
+  * Only display the battery panel if the system actually has a battery.
+  * background: don't update gsettings/accountsservice for now (until
+    the content picker arrives). (LP: #1214452)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 267
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 21 Aug 2013 08:07:06 +0000
+
+ubuntu-system-settings (0.1+13.10.20130820-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * don't install the a11y plugin, it's not planned for 13.10.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 262
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 20 Aug 2013 14:34:56 +0000
+
 ubuntu-system-settings (0.1+13.10.20130813.1-0ubuntu1) saucy; urgency=low
 
   [ Ken VanDine ]
