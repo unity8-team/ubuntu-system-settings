@@ -3,6 +3,7 @@ include($${TOP_SRC_DIR}/common-vars.pri)
 include($${TOP_SRC_DIR}/common-installs-config.pri)
 
 TEMPLATE = app
+TARGET = system-settings-wizard
 
 I18N_DOMAIN = wizard
 
@@ -42,3 +43,7 @@ DEFINES += \
 po.target = po/wizard.pot
 po.depends = $${SOURCES}
 po.commands = xgettext -o $@ -d $${I18N_DOMAIN} --keyword=_ $^
+
+upstart.path = $$INSTALL_SYSCONFDIR/init
+upstart.files += ubuntu-system-settings-wizard.conf
+INSTALLS += upstart

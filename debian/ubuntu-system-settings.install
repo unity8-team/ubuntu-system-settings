@@ -1,3 +1,4 @@
+etc/init
 usr/bin
 usr/lib/*/ubuntu-system-settings
 usr/share/applications
