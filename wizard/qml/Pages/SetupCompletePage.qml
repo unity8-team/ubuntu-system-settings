@@ -43,6 +43,7 @@ LocalComponents.Page {
         id: forwardButton
         Button {
             text: i18n.tr("Finish")
+            onClicked: Qt.quit()
         }
     }
 }
