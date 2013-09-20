@@ -23,9 +23,13 @@
 
 #include "click.h"
 
+#include <gio/gio.h>
+#include <glib.h>
+
 #include <QObject>
 #include <QProcess>
 #include <QVariant>
+
 
 class StorageAbout : public QObject
 {
@@ -49,6 +53,26 @@ class StorageAbout : public QObject
                READ getClickList
                CONSTANT)
 
+    Q_PROPERTY(quint64 totalClickSize
+               READ getClickSize
+               CONSTANT)
+
+    Q_PROPERTY(quint64 moviesSize
+               READ getMoviesSize
+               NOTIFY sizeReady)
+
+    Q_PROPERTY(quint64 audioSize
+               READ getAudioSize
+               NOTIFY sizeReady)
+
+    Q_PROPERTY(quint64 picturesSize
+               READ getPicturesSize
+               NOTIFY sizeReady)
+
+    Q_PROPERTY(quint64 homeSize
+               READ getHomeSize
+               NOTIFY sizeReady)
+
     Q_PROPERTY(ClickModel::Roles sortRole
                READ getSortRole
                WRITE setSortRole
@@ -64,9 +88,16 @@ public:
     Q_INVOKABLE QString licenseInfo(const QString &subdir) const;
     ClickModel::Roles getSortRole();
     void setSortRole(ClickModel::Roles newRole);
+    quint64 getClickSize() const;
+    quint64 getMoviesSize();
+    quint64 getAudioSize();
+    quint64 getPicturesSize();
+    quint64 getHomeSize();
+    Q_INVOKABLE QString formatSize (quint64 size) const;
 
 Q_SIGNALS:
     void sortRoleChanged();
+    void sizeReady();
 
 private:
     QString m_serialNumber;
@@ -74,6 +105,11 @@ private:
     QString m_updateDate;
     ClickModel m_clickModel;
     ClickFilterProxy m_clickFilterProxy;
+    quint64 m_moviesSize;
+    quint64 m_audioSize;
+    quint64 m_picturesSize;
+    quint64 m_otherSize;
+    quint64 m_homeSize;
 };
 
 #endif // STORAGEABOUT_H
