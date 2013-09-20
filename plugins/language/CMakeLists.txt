@@ -16,5 +16,5 @@ set(QML_SOURCES
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/LanguagePlugin)
 install(TARGETS UbuntuLanguagePlugin DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
-install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/about)
+install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/language)
 install(FILES settings-language.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)

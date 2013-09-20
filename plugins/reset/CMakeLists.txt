@@ -13,7 +13,7 @@ set(QML_SOURCES EntryComponent.qml
     ResetLauncherHome.qml
 )
 
-set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/reset)
+set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Reset)
 install(TARGETS UbuntuResetPanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES reset.settings DESTINATION ${PLUGIN_MANIFEST_DIR})

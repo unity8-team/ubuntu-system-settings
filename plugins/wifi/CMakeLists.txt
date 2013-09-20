@@ -21,7 +21,7 @@ StandardMenuItem.qml
 SwitchMenuItem.qml
 )
 
-set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/wifi)
+set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Wifi)
 install(TARGETS UbuntuWifiPanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES wifi.settings DESTINATION ${PLUGIN_MANIFEST_DIR})

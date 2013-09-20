@@ -15,7 +15,7 @@ set(QML_SOURCES Scroller.qml TimePicker.qml)
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/TimeDate)
 install(TARGETS UbuntuTimeDatePanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
-install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/timedate)
+install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/time-date)
 
 install(FILES time-date.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-time-date.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
