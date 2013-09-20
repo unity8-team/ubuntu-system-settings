@@ -106,6 +106,7 @@ ItemPage {
         property bool ready: false
         // All of these events come simultaneously
         onMoviesSizeChanged: ready = true
+        Component.onCompleted: populateSizes()
     }
 
     StorageInfo {

@@ -118,27 +118,6 @@ StorageAbout::StorageAbout(QObject *parent) :
     m_clickModel(),
     m_clickFilterProxy(&m_clickModel)
 {
-    uint *finished = new uint(0);
-
-    measure_special_file(
-                G_USER_DIRECTORY_VIDEOS,
-                measure_finished,
-                new MeasureData(finished, this, &m_moviesSize));
-
-    measure_special_file(
-                G_USER_DIRECTORY_MUSIC,
-                measure_finished,
-                new MeasureData(finished, this, &m_audioSize));
-
-    measure_special_file(
-                G_USER_DIRECTORY_PICTURES,
-                measure_finished,
-                new MeasureData(finished, this, &m_picturesSize));
-
-    measure_file(
-                g_get_home_dir(),
-                measure_finished,
-                new MeasureData(finished, this, &m_homeSize));
 }
 
 QString StorageAbout::serialNumber()
@@ -246,6 +225,31 @@ QString StorageAbout::formatSize(quint64 size) const
     const char * formatted_size = g_format_size (g_size);
 
     return QString::fromLocal8Bit(formatted_size);
+}
+
+void StorageAbout::populateSizes()
+{
+    uint *finished = new uint(0);
+
+    measure_special_file(
+                G_USER_DIRECTORY_VIDEOS,
+                measure_finished,
+                new MeasureData(finished, this, &m_moviesSize));
+
+    measure_special_file(
+                G_USER_DIRECTORY_MUSIC,
+                measure_finished,
+                new MeasureData(finished, this, &m_audioSize));
+
+    measure_special_file(
+                G_USER_DIRECTORY_PICTURES,
+                measure_finished,
+                new MeasureData(finished, this, &m_picturesSize));
+
+    measure_file(
+                g_get_home_dir(),
+                measure_finished,
+                new MeasureData(finished, this, &m_homeSize));
 }
 
 StorageAbout::~StorageAbout() {
