@@ -44,6 +44,6 @@ po.target = po/wizard.pot
 po.depends = $${SOURCES}
 po.commands = xgettext -o $@ -d $${I18N_DOMAIN} --keyword=_ $^
 
-upstart.path = $$INSTALL_SYSCONFDIR/init
+upstart.path = $$INSTALL_PREFIX/share/upstart/sessions
 upstart.files += ubuntu-system-settings-wizard.conf
 INSTALLS += upstart

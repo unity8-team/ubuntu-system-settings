@@ -13,22 +13,6 @@ TOP_BUILD_DIR = $${TOP_SRC_DIR}/$(BUILD_DIR)
 include(coverage.pri)
 
 #-----------------------------------------------------------------------------
-# setup the install sysconfdir
-#-----------------------------------------------------------------------------
-INSTALL_SYSCONFDIR = /etc  # default installation sysconfdir
-
-# default sysconfdir can be overriden by defining SYSCONFDIR when running qmake
-isEmpty(SYSCONFDIR) {
-    message("====")
-    message("==== NOTE: To override the installation sysconfdir run: `qmake SYSCONFDIR=/custom/path'")
-    message("==== (current installation path is `$${INSTALL_SYSCONFDIR}')")
-} else {
-    INSTALL_SYSCONFDIR = $${SYSCONFDIR}
-    message("====")
-    message("==== install sysconfdir set to `$${INSTALL_SYSCONFDIR}'")
-}
-
-#-----------------------------------------------------------------------------
 # setup the installation prefix
 #-----------------------------------------------------------------------------
 INSTALL_PREFIX = /usr  # default installation prefix
