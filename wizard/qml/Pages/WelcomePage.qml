@@ -21,7 +21,7 @@ import Ubuntu.SystemSettings.LanguagePlugin 1.0
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Hello")
+    title: i18n.tr("Hello!")
     forwardButtonSourceComponent: forwardButton
 
     readonly property bool __simCardPresent: true // TODO: implement this
@@ -57,23 +57,11 @@ LocalComponents.Page {
                 text: i18n.tr("Select your language")
             }
 
-            Flickable {
-                clip: true
-                width: content.width
-                height: units.gu(30)
-
-                contentHeight: contentItem.childrenRect.height
-
-                ListItem.ValueSelector {
-                    id: languageList
-
-                    text: i18n.tr("Display language")
-                    values: plugin.languages
-                    selectedIndex: plugin.currentLanguage
-
-                    expanded: false
-                    onExpandedChanged: expanded = true
-                }
+            ListItem.ItemSelector {
+                id: languageList
+                model: plugin.languages
+                selectedIndex: plugin.currentLanguage
+                containerHeight: units.gu(30)
             }
         }
     }
