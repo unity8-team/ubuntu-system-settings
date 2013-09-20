@@ -15,6 +15,7 @@ set(QML_SOURCES EntryComponent.qml
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/reset)
 install(TARGETS UbuntuResetPanel DESTINATION ${PLUG_DIR})
+install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES reset.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-reset.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/reset)

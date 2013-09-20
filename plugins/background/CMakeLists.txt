@@ -8,5 +8,8 @@ set(QML_SOURCES
 #    UbuntuSwappableImage.qml
 )
 
+set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Background)
+install(TARGETS UbuntuBackgroundPanel DESTINATION ${PLUG_DIR})
+install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/background)
 install(FILES settings-background.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)

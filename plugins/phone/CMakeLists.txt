@@ -1,7 +1,5 @@
 include_directories(${OFONO_INCLUDE_DIRS})
 
-#include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
-
 add_library(UbuntuPhonePanel MODULE
     connman.h
     simservice.h

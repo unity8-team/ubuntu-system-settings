@@ -11,6 +11,8 @@ set(QML_SOURCES
     PageComponent.qml
     SleepValues.qml
 )
-
+set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Battery)
+install(TARGETS UbuntuBatteryPanel DESTINATION ${PLUG_DIR})
+install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/battery)
 install(FILES settings-battery.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
