@@ -44,6 +44,7 @@ Depends: ${misc:Depends},
          whoopsie-preferences (>= 0.9),
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 0.9),
+         ubuntu-touch-session,
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
 Conflicts: ubuntu-system-settings-example

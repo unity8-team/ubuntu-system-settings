@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Your phone and location")
+    title: i18n.tr("Your phone and settings")
     forwardButtonSourceComponent: forwardButton
 
     Item {

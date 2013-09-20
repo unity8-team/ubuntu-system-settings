@@ -24,7 +24,7 @@ LocalComponents.Page {
     title: i18n.tr("Hello")
     forwardButtonSourceComponent: forwardButton
 
-    readonly property bool __simCardPresent: false
+    readonly property bool __simCardPresent: true // TODO: implement this
 
     UbuntuLanguagePlugin {
         id: plugin
@@ -47,7 +47,7 @@ LocalComponents.Page {
                 width: content.width
                 wrapMode: Text.WordWrap
                 fontSize: "large"
-                text: i18n.tr("Welcome to Ubuntu.\nLet's get started.")
+                text: i18n.tr("Welcome to Ubuntu.\nLet’s get started.")
             }
 
             Label {
@@ -84,7 +84,8 @@ LocalComponents.Page {
             text: i18n.tr("Start")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
-                pageStack.push(Qt.resolvedUrl(__simCardPresent ? "WiFiPage.qml" : "SimCardPage.qml"))
+                // TODO: Should go to WiFiPage.qml when that works
+                pageStack.push(Qt.resolvedUrl(__simCardPresent ? "AboutYouPage.qml" : "SimCardPage.qml"))
             }
         }
     }
