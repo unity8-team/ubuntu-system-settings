@@ -2,8 +2,7 @@ Source: ubuntu-system-settings
 Section: gnome
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
-Build-Depends: bluez (>= 4.36),
-               dbus-test-runner,
+Build-Depends: dbus-test-runner,
                debhelper (>= 9),
                gdb,
                libaccountsservice-dev,
@@ -31,6 +30,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          accountsservice,
+         bluez (>= 4.36),
          gsettings-desktop-schemas,
          gsettings-ubuntu-touch-schemas (>= 0.0.1+13.10.20130730),
          indicator-network (>= 0.5.0+13.10.20130918),
