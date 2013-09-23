@@ -36,7 +36,6 @@ TARGET = UbuntuBluetoothPanel
 QT += dbus
 CONFIG += qt plugin no_keywords link_pkgconfig
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra
-PKGCONFIG += bluez
 
 #comment in the following line to enable traces
 #DEFINES += QT_NO_DEBUG_OUTPUT
