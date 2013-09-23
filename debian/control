@@ -32,7 +32,7 @@ Depends: ${misc:Depends},
          gsettings-desktop-schemas,
          gsettings-ubuntu-touch-schemas (>= 0.0.1+13.10.20130730),
          powerd | gnome-settings-daemon,
-         qmenumodel-qml
+         qmenumodel-qml,
          qtdeclarative5-folderlistmodel-plugin,
          qtdeclarative5-qtmultimedia-plugin,
          qtdeclarative5-gsettings1.0 (>=0.0+13.10.20130717),
