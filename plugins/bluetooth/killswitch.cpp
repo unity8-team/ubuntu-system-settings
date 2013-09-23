@@ -102,7 +102,6 @@ class RfKillSwitchPrivate
         for (auto e : entries)
           if ((b = e.second.soft || e.second.hard))
             break;
-        qDebug() << "after processing event(s), setting blocked to" << b;
         q->setBlocked (b);
       }
   }

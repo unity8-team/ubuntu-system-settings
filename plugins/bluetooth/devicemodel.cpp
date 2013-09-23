@@ -156,7 +156,6 @@ DeviceModel :: addDevice (QSharedPointer<Device>& device)
       row = m_devices.size ();
       beginInsertRows (QModelIndex(), row, row);
       m_devices.append (device);
-      qDebug() << "adding new device to model:" << qPrintable(m_devices[row]->getName());
       endInsertRows ();
     }
 }
@@ -166,7 +165,6 @@ DeviceModel :: removeRow (int row)
 {
   if (0<=row && row<m_devices.size())
     {
-      qDebug() << "removing row" << row << qPrintable(m_devices[row]->getName());
       beginRemoveRows (QModelIndex(), row, row);
       m_devices.removeAt (row);
       endRemoveRows ();
@@ -190,8 +188,6 @@ DeviceModel :: emitRowChanged (int row)
 void
 DeviceModel :: slotDeviceCreated (const QDBusObjectPath & path)
 {
-  qDebug() << "a device was created on " << qPrintable(path.path());
-
   addDevice (path.path());
 }
 
@@ -202,10 +198,7 @@ DeviceModel :: slotDeviceFound (const QString & address, const QMap<QString,QVar
 
   auto device = getDeviceFromAddress (address);
   if (!device) // hey, we haven't seen this one before
-    {
-      qDebug() << __FILE__ << __LINE__ << "creating device for" << address;
-      m_bluezAdapter->asyncCall (QLatin1String("CreateDevice"), address);
-    }
+    m_bluezAdapter->asyncCall (QLatin1String("CreateDevice"), address);
 }
 
 void
@@ -268,13 +261,10 @@ void
 DeviceModel :: pairDevice (const QString& address)
 {
   if (m_bluezAdapter)
-    {
-      qDebug() << __FILE__ << __LINE__ << "calling CreatePairedDevice" << address;
-      m_bluezAdapter->asyncCall ("CreatePairedDevice",
-                                 address,
-                                 qVariantFromValue(QDBusObjectPath(DBUS_AGENT_PATH)),
-                                 QString(DBUS_AGENT_CAPABILITY));
-    }
+    m_bluezAdapter->asyncCall ("CreatePairedDevice",
+                               address,
+                               qVariantFromValue(QDBusObjectPath(DBUS_AGENT_PATH)),
+                               QString(DBUS_AGENT_CAPABILITY));
 }
 
 /***

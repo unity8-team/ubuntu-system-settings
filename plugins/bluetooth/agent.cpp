@@ -42,7 +42,6 @@ namespace
 void
 Agent :: Release ()
 {
-  qDebug() << __FILE__ << ':' << __LINE__ << "agent released";
   Q_EMIT (onPairingDone());
 }
 
@@ -67,8 +66,6 @@ Agent :: Release ()
 void
 Agent :: RequestConfirmation (const QDBusObjectPath& objectPath, uint passkey)
 {
-  qDebug() << __FILE__ << __LINE__ << "got passkey" << passkey;
-
   auto device = m_devices.getDeviceFromPath (objectPath.path());
   if (device)
     {
@@ -156,8 +153,6 @@ Agent :: RequestPasskey (const QDBusObjectPath& objectPath)
 void
 Agent :: providePasskey (uint tag, bool provided, uint passkey)
 {
-  qDebug() << __FILE__ << __LINE__ << "provided" << provided << "passkey" << passkey;
-
   if (m_delayedReplies.contains(tag))
     {
       if (provided)

@@ -135,7 +135,6 @@ Bluetooth :: connectHeadset (const QString& address)
     }
   else
     {
-      qDebug() << "Trying to connect to unpaired device" << address << "so pairing now & queuing the connect";
       m_connectAfterPairing[address] = connMode;
       m_devices.pairDevice (address);
     }
