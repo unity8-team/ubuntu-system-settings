@@ -250,6 +250,8 @@ Device::updateProperty(const QString &key, const QVariant &value)
 ****
 ***/
 
+/* Determine the Type from the bits in the Class of Device (CoD) field.
+   https://www.bluetooth.org/en-us/specification/assigned-numbers/baseband */
 Device::Type
 Device::getTypeFromClass (quint32 c)
 {
