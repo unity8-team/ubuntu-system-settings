@@ -188,7 +188,7 @@ ItemPage {
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: indicatorPower.brightness.updateState(0.0)
+                            onClicked: sliderId.value = 0.0
                         }
                     }
                     Slider {
@@ -218,7 +218,7 @@ ItemPage {
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: indicatorPower.brightness.updateState(1.0)
+                            onClicked: sliderId.value = 100.0
                         }
                     }
             }
