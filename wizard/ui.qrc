@@ -6,6 +6,7 @@
         <file>qml/Pages/LocationPage.qml</file>
         <file>qml/Pages/SetupCompletePage.qml</file>
         <file>qml/Pages/SimCardPage.qml</file>
+        <file>qml/Pages/SpinnerPage.qml</file>
         <file>qml/Pages/WelcomePage.qml</file>
         <file>qml/Pages/WiFiPage.qml</file>
         <file>qml/Pages/data/meet_ubuntu_simcard@30.png</file>

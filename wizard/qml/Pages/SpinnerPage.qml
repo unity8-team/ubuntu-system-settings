@@ -19,8 +19,14 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("That’s it!")
-    forwardButtonSourceComponent: forwardButton
+    title: i18n.tr("Please wait")
+
+    hasBackButton: false
+    tools: ToolbarItems {
+        back: null
+    }
+
+    Component.onCompleted: Qt.quit()
 
     Item {
         id: content
@@ -32,18 +38,12 @@ LocalComponents.Page {
             bottomMargin: __bottomMargin
         }
 
-        Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-            fontSize: "large"
-            text: i18n.tr("It’s great to have you in the Ubuntu Community.\n\nYou’re now ready to enjoy your new phone.")
-        }
-    }
-    Component {
-        id: forwardButton
-        Button {
-            text: i18n.tr("Finish")
-            onClicked: pageStack.push(Qt.resolvedUrl("SpinnerPage.qml"))
+        ActivityIndicator {
+            id: spinner
+            anchors.centerIn: parent
+            width: units.gu(10)
+            height: units.gu(10)
+            running: true
         }
     }
 }

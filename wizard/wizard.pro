@@ -25,6 +25,7 @@ QML_SOURCES = \
     qml/Pages/LocationPage.qml \
     qml/Pages/SetupCompletePage.qml \
     qml/Pages/SimCardPage.qml \
+    qml/Pages/SpinnerPage.qml \
     qml/Pages/WelcomePage.qml \
     qml/Pages/WiFiPage.qml
 

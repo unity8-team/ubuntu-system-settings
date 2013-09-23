@@ -25,6 +25,7 @@ Page {
     readonly property real __rightMargin: units.gu(3)
     readonly property real __bottomMargin: backButton.height + __buttonMargin * 2
 
+    property bool hasBackButton: true
     property alias forwardButtonSourceComponent: forwardButton.sourceComponent
 
     visible: false
@@ -40,7 +41,7 @@ Page {
         }
         z: 1
         text: i18n.tr("Back")
-        visible: pageStack.depth > 1
+        visible: pageStack.depth > 1 && hasBackButton
         gradient: UbuntuColors.greyGradient
 
         onClicked: pageStack.pop()

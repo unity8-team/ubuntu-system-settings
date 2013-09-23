@@ -22,13 +22,25 @@
 #include <QQuickView>
 #include <QtQml>
 
+void start_xsession()
+{
+    // When we get a request to stop, we don't quit but rather start xsession
+    // in the background.  When xsession finishes loading, we'll be stopped
+    // by upstart.
+    QString command = "initctl emit xsession";
+    command += " SESSION=" + qgetenv("DESKTOP_SESSION");
+    command += " SESSIONTYPE=" + qgetenv("SESSIONTYPE");
+    command += " &";
+    if (system(command.toLatin1().data()) != 0)
+        QGuiApplication::quit(); // just quit if we can't start xsession
+}
+
 int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
 
     QQuickView view;
-    QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),
-                     Qt::QueuedConnection);
+    QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
