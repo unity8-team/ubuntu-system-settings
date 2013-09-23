@@ -202,11 +202,11 @@ ItemPage {
                         }
                         height: parent.height - units.gu(2)
                         minimumValue: 0.0
-                        maximumValue: 1.0
+                        maximumValue: 100.0
                         enabled: indicatorPower.brightness.state != null
-                        value: enabled ? indicatorPower.brightness.state : 0.0
+                        value: enabled ? indicatorPower.brightness.state * 100 : 0.0
 
-                        onValueChanged: indicatorPower.brightness.updateState(value);
+                        onValueChanged: indicatorPower.brightness.updateState(value / 100.0);
                     }
                     Icon {
                         id: iconRight
