@@ -20,7 +20,7 @@ import Ubuntu.SystemSettings.Account 1.0
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("About You")
+    title: i18n.tr("About you")
     forwardButtonSourceComponent: forwardButton
 
     UbuntuAccountPlugin {
