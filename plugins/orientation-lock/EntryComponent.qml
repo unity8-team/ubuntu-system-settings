@@ -32,7 +32,6 @@ ListItem.Standard {
         id: control
         checked: systemSettings.rotationLock
         onCheckedChanged: systemSettings.rotationLock = checked
-        enabled: false /* TODO: enable when lock rotation is implemented */
 
         GSettings {
             id: systemSettings

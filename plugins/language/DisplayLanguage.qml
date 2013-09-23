@@ -24,90 +24,100 @@ import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
-Component {
-    id: root
+SheetBase {
+    id: sheet
 
-    SheetBase {
-        id: sheet
+    property string initialLanguage
 
-        modal: true
-        title: i18n.tr("Display language")
+    modal: true
+    title: i18n.tr("Display language")
 
-        contentsWidth: parent.width
-        contentsHeight: parent.height
+    contentsWidth: parent.width
+    contentsHeight: parent.height
 
-        UbuntuLanguagePlugin {
-            id: plugin
+    Component.onCompleted: {
+        initialLanguage = i18n.language
+    }
+
+    UbuntuLanguagePlugin {
+        id: plugin
+    }
+
+    Flickable {
+        clip: true
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: divider.top
+
+        contentHeight: contentItem.childrenRect.height
+
+        ListItem.ItemSelector {
+            id: languageList
+
+            expanded: true
+            model: plugin.languages
+            selectedIndex: plugin.currentLanguage
+
+            onSelectedIndexChanged: {
+                i18n.language = plugin.languageCodes[selectedIndex]
+                i18n.domain = i18n.domain
+            }
         }
+    }
 
-        Flickable {
-            clip: true
+    ListItem.ThinDivider {
+        id: divider
 
-            anchors.top: parent.top
+        anchors.bottom: buttonRectangle.top
+    }
+
+    Item {
+        id: buttonRectangle
+
+        height: cancelButton.height + units.gu(2)
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        Button {
+            id: cancelButton
+
+            text: i18n.tr("Cancel")
+
             anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: divider.top
+            anchors.right: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.topMargin: units.gu(1)
+            anchors.leftMargin: units.gu(2)
+            anchors.rightMargin: units.gu(1)
+            anchors.bottomMargin: units.gu(1)
 
-            contentHeight: contentItem.childrenRect.height
-
-            ListItem.ItemSelector {
-                id: languageList
-
-                model: plugin.languages
-                selectedIndex: plugin.currentLanguage
-
-                expanded: true
+            onClicked: {
+                i18n.language = initialLanguage
+                i18n.domain = i18n.domain
+                PopupUtils.close(sheet)
             }
         }
 
-        ListItem.ThinDivider {
-            id: divider
+        Button {
+            id: confirmButton
 
-            anchors.bottom: buttonRectangle.top
-        }
+            text: i18n.tr("Confirm")
 
-        Item {
-            id: buttonRectangle
-
-            height: cancelButton.height + units.gu(2)
-
-            anchors.left: parent.left
+            anchors.left: parent.horizontalCenter
             anchors.right: parent.right
             anchors.bottom: parent.bottom
+            anchors.topMargin: units.gu(1)
+            anchors.leftMargin: units.gu(1)
+            anchors.rightMargin: units.gu(2)
+            anchors.bottomMargin: units.gu(1)
 
-            Button {
-                id: cancelButton
-
-                text: i18n.tr("Cancel")
-
-                anchors.left: parent.left
-                anchors.right: parent.horizontalCenter
-                anchors.bottom: parent.bottom
-                anchors.topMargin: units.gu(1)
-                anchors.leftMargin: units.gu(2)
-                anchors.rightMargin: units.gu(1)
-                anchors.bottomMargin: units.gu(1)
-
-                onClicked: PopupUtils.close(sheet)
-            }
-
-            Button {
-                id: confirmButton
-
-                text: i18n.tr("Confirm")
-
-                anchors.left: parent.horizontalCenter
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.topMargin: units.gu(1)
-                anchors.leftMargin: units.gu(1)
-                anchors.rightMargin: units.gu(2)
-                anchors.bottomMargin: units.gu(1)
-
-                onClicked: {
-                    plugin.currentLanguage = languageList.selectedIndex
-                    PopupUtils.close(sheet)
-                }
+            onClicked: {
+                plugin.currentLanguage = languageList.selectedIndex
+                PopupUtils.close(sheet)
             }
         }
     }

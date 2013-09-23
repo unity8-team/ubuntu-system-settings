@@ -34,8 +34,10 @@ ItemPage {
         id: plugin
     }
 
-    DisplayLanguage {
+    Component {
         id: displayLanguage
+
+        DisplayLanguage {}
     }
 
     Flickable {

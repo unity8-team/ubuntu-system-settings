@@ -21,6 +21,7 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
+#include "click.h"
 #include "storageabout.h"
 
 
@@ -28,6 +29,8 @@ void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.StorageAbout"));
     
+    qRegisterMetaType<ClickModel::Roles>();
+    qmlRegisterType<ClickModel>(uri, 1, 0, "ClickRoles");
     qmlRegisterType<StorageAbout>(uri, 1, 0, "UbuntuStorageAboutPanel");
 }
 

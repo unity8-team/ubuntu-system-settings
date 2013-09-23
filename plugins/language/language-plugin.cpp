@@ -35,6 +35,7 @@
 static QList<QLocale> *languageLocales;
 static QHash<QLocale::Language, unsigned int> *languageIndices;
 static QStringList *languageNames;
+static QStringList *languageCodes;
 
 static GSettings *maliitSettings;
 static QList<KeyboardLayout *> *keyboardLayouts;
@@ -120,6 +121,19 @@ getLanguageNames()
     }
 
     return languageNames;
+}
+
+static QStringList *
+getLanguageCodes()
+{
+    if (languageCodes == NULL) {
+        languageCodes = new QStringList;
+
+        for (QList<QLocale>::const_iterator i(getLanguageLocales()->begin()); i != getLanguageLocales()->end(); ++i)
+            *languageCodes += i->name().trimmed();
+    }
+
+    return languageCodes;
 }
 
 static GSettings *
@@ -241,6 +255,12 @@ const QStringList &
 LanguagePlugin::languages() const
 {
     return *getLanguageNames();
+}
+
+const QStringList &
+LanguagePlugin::languageCodes() const
+{
+    return *getLanguageCodes();
 }
 
 int
