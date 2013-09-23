@@ -2,7 +2,8 @@ Source: ubuntu-system-settings
 Section: gnome
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
-Build-Depends: dbus-test-runner,
+Build-Depends: bluez (>= 4.36),
+               dbus-test-runner,
                debhelper (>= 9),
                gdb,
                libaccountsservice-dev,
