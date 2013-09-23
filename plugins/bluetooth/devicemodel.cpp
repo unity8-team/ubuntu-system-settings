@@ -130,40 +130,15 @@ DeviceModel :: updateDevices ()
 ***/
 
 void
-DeviceModel :: initNewDevice (QSharedPointer<Device>& device)
-{
-  if (device)
-    {
-      if (device->isValid())
-        {
-          QObject::connect (device.data(), SIGNAL(deviceChanged()),
-                            this, SLOT(slotDeviceChanged()));
-        }
-      else
-        {
-          device.reset (0);
-        }
-    }
-}
-
-QSharedPointer<Device>
-DeviceModel :: createDevice (const QString& path)
-{
-  QSharedPointer<Device> device (new Device (path, m_dbus));
-  initNewDevice (device);
-  return device;
-}
-
-/***
-****
-***/
-
-void
 DeviceModel :: addDevice (const QString& path)
 {
-  auto device = createDevice (path);
-  if (device)
-    addDevice (device);
+  QSharedPointer<Device> device (new Device (path, m_dbus));
+  if (device->isValid())
+    {
+      QObject::connect (device.data(), SIGNAL(deviceChanged()),
+                        this, SLOT(slotDeviceChanged()));
+      addDevice (device);
+    }
 }
 
 void

@@ -21,8 +21,10 @@
 #ifndef BLUETOOTH_DEVICE_MODEL_H
 #define BLUETOOTH_DEVICE_MODEL_H
 
-#include <QList>
 #include <QByteArray>
+#include <QHash>
+#include <QList>
+#include <QVariant>
 
 #include <QAbstractListModel>
 #include <QDBusConnection>
@@ -30,7 +32,6 @@
 #include <QScopedPointer>
 #include <QSharedPointer>
 #include <QSortFilterProxyModel>
-#include <QTimer>
 
 #include "device.h"
 
@@ -67,7 +68,6 @@ class DeviceModel: public QAbstractListModel
   private:
     QDBusConnection m_dbus;
     QDBusInterface m_bluezManager;
-    QTimer m_discoverTimer;
 
     QScopedPointer<QDBusInterface> m_bluezAdapter;
     void clearAdapter ();
@@ -77,13 +77,9 @@ class DeviceModel: public QAbstractListModel
     void updateDevices ();
     void addDevice (QSharedPointer<Device>& device);
     void addDevice (const QString& objectPath);
-    //void addDevice (const QMap<QString,QVariant>& properties);
     void removeRow (int i);
     int findRowFromAddress (const QString& address) const;
     void emitRowChanged (int row);
-    QSharedPointer<Device> createDevice (const QString& path);
-    QSharedPointer<Device> createDevice (const QMap<QString,QVariant>& properties);
-    void initNewDevice (QSharedPointer<Device>& device);
 
   private Q_SLOTS:
     void slotDeviceChanged();
