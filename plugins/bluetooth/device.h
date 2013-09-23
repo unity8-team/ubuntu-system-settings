@@ -98,6 +98,7 @@ struct Device: QObject
     QString m_state;
     QString m_address;
     QString m_iconName;
+    QString m_fallbackIconName;
     Type m_type = Type::Other;
     bool m_paired = false;
     Connection m_connection = Connection::Disconnected;

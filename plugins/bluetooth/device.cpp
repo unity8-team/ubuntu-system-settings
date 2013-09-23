@@ -200,18 +200,32 @@ Device :: setConnection (Connection connection)
     {
       m_connection = connection;
       Q_EMIT (connectionChanged());
-      updateIcon ();
     }
 }
 
 void
 Device :: updateIcon ()
 {
-  switch (getType())
+  /* The bluez-provided icon can be unreliable?
+     In testing I'm getting an "audio-card" icon from bluez for 
+     my NoiseHush N700 headset.
+
+     Try to guess the icon from the device type,
+     and use the bluez-provided icon as a fallback */
+
+  const auto type = getType ();
+
+  if (type == Type::Headset)
     {
-      case Type::Headset: setIconName ("image://theme/audio-headset"); break;
-      case Type::Phone:   setIconName ("image://theme/phone"); break;
-      default: break;
+      setIconName ("image://theme/audio-headset");
+    }
+  else if (type == Type::Phone)
+    {
+      setIconName ("image://theme/phone");
+    }
+  else if (!m_fallbackIconName.isEmpty())
+    {
+      setIconName (QString("image://theme/%1").arg(m_fallbackIconName));
     }
 }
 
@@ -267,9 +281,8 @@ Device :: updateProperty (const QString& key, const QVariant& value)
     }
   else if (key == "Icon") // org.bluez.Device
     {
-      // FIXME: unreliable? bluez is returning "audio-card"
-      // as the icon for my NoiseHush N700 headset in testing.
-      // Handling icons in setType() instead.
+      m_fallbackIconName = value.toString ();
+      updateIcon ();
     }
 }
 
