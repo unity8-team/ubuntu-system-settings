@@ -225,7 +225,7 @@ DeviceModel :: slotDeviceFound (const QString & address, const QMap<QString,QVar
 {
   Q_UNUSED (properties);
 
-  QSharedPointer<Device> device = getDeviceFromAddress (address);
+  auto device = getDeviceFromAddress (address);
   if (!device) // hey, we haven't seen this one before
     {
       qDebug() << __FILE__ << __LINE__ << "creating device for" << address;
@@ -339,7 +339,7 @@ DeviceModel :: data (const QModelIndex & index, int role) const
 
   if ((0<=index.row()) && (index.row()<m_devices.size()))
     {
-      QSharedPointer<Device> device = m_devices[index.row()];
+      auto device = m_devices[index.row()];
 
       switch (role)
         {

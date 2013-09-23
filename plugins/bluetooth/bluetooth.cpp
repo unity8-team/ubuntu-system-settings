@@ -125,7 +125,7 @@ void
 Bluetooth :: connectHeadset (const QString& address)
 {
   const Device::ConnectionMode connMode = Device::HeadsetMode;
-  QSharedPointer<Device> device = m_devices.getDeviceFromAddress (address);
+  auto device = m_devices.getDeviceFromAddress (address);
   if (!device)
     return;
 
@@ -150,7 +150,7 @@ Bluetooth :: onPairingDone ()
     {
       it.next();
       const QString& address = it.key();
-      QSharedPointer<Device> device = m_devices.getDeviceFromAddress (address);
+      auto device = m_devices.getDeviceFromAddress (address);
       if (device)
         {
           device->connect (it.value());

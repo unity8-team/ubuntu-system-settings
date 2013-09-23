@@ -69,7 +69,7 @@ Agent :: RequestConfirmation (const QDBusObjectPath& objectPath, uint passkey)
 {
   qDebug() << __FILE__ << __LINE__ << "got passkey" << passkey;
 
-  QSharedPointer<Device> device = m_devices.getDeviceFromPath (objectPath.path());
+  auto device = m_devices.getDeviceFromPath (objectPath.path());
   if (device)
     {
       const uint tag = m_tag++;
@@ -126,7 +126,7 @@ Agent :: confirmPasskey (uint tag, bool confirmed)
 unsigned int
 Agent :: RequestPasskey (const QDBusObjectPath& objectPath)
 {
-  QSharedPointer<Device> device = m_devices.getDeviceFromPath (objectPath.path());
+  auto device = m_devices.getDeviceFromPath (objectPath.path());
   if (device)
     {
       const uint tag = m_tag++;
