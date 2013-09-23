@@ -27,6 +27,11 @@ LocalComponents.Page {
         id: plugin
     }
 
+    function advance() {
+        plugin.accountRealName = textField.text
+        pageStack.push(Qt.resolvedUrl("LocationPage.qml"))
+    }
+
     Item {
         id: content
         anchors {
@@ -52,6 +57,7 @@ LocalComponents.Page {
                 width: content.width
                 text: plugin.accountRealName
                 placeholderText: "Your name"
+                onAccepted: advance()
             }
         }
     }
@@ -60,10 +66,8 @@ LocalComponents.Page {
         id: forwardButton
         Button {
             text: i18n.tr("Continue")
-            onClicked: {
-                plugin.accountRealName = textField.text
-                pageStack.push(Qt.resolvedUrl("LocationPage.qml"))
-            }
+            enabled: textField.text != ""
+            onClicked: advance()
         }
     }
 }
