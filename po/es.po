@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-19 13:49+0300\n"
-"PO-Revision-Date: 2013-09-16 13:48+0000\n"
+"PO-Revision-Date: 2013-09-22 15:03+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-20 06:04+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2013-09-23 05:36+0000\n"
+"X-Generator: Launchpad (build 16771)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -661,15 +661,15 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Los códigos no coinciden. Inténtelo de nuevo."
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Las frases no coinciden. Inténtelo de nuevo."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "Quitar"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
@@ -681,7 +681,7 @@ msgstr "Desbloquear el teléfono mediante:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Deslizar (no seguro)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:331
 msgid "4-digit passcode"
@@ -690,27 +690,27 @@ msgstr "Código de 4 dígitos"
 #: ../plugins/security-privacy/LockSecurity.qml:332
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "Frase"
 
 #: ../plugins/security-privacy/LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Deslizar (no seguro)… "
 
 #: ../plugins/security-privacy/LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Código de 4 dígitos…"
 
 #: ../plugins/security-privacy/LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "Frase…"
 
 #: ../plugins/security-privacy/LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "Cambiar el código…"
 
 #: ../plugins/security-privacy/LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Cambiar la frase…"
 
 #: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:14
 msgid "Security & Privacy"
@@ -751,7 +751,7 @@ msgstr "Mensajes en la pantalla de bienvenida"
 
 #: ../plugins/security-privacy/PageComponent.qml:121
 msgid "Location access"
-msgstr ""
+msgstr "Acceso a la ubicación"
 
 #: ../plugins/security-privacy/PageComponent.qml:127
 msgid "Other app access"
@@ -763,19 +763,19 @@ msgstr "Diagnósticos"
 
 #: ../plugins/security-privacy/PageComponent.qml:134
 msgid "Sent"
-msgstr ""
+msgstr "Enviado"
 
 #: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Not sent"
-msgstr ""
+msgstr "No enviado"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:40
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "Código"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:76
 msgid "Sleep locks immediately"
@@ -940,7 +940,7 @@ msgstr "Siempre"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr "Zona horaria"
+msgstr "Huso horario"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:34
 msgid "Set the time zone:"
@@ -956,7 +956,7 @@ msgstr "Fecha y hora"
 
 #: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
-msgstr "Zona horaria:"
+msgstr "Huso horario:"
 
 #: ../plugins/time-date/PageComponent.qml:68
 msgid "Set the time and date:"
@@ -968,7 +968,7 @@ msgstr "Establecer fecha y hora"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Hora"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
@@ -1052,7 +1052,7 @@ msgstr "Configuración del sistema"
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: ../src/qml/MainWindow.qml:90
 msgid "Network"
