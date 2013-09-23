@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-12 16:55+0000\n"
+"POT-Creation-Date: 2013-09-19 13:49+0300\n"
 "PO-Revision-Date: 2013-07-17 19:27+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Persian <fa@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-09-13 06:35+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-20 06:04+0000\n"
+"X-Generator: Launchpad (build 16765)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -27,8 +27,8 @@ msgid "Serial"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/about/Storage.qml:170 ../plugins/battery/PageComponent.qml:111
-#: ../plugins/battery/PageComponent.qml:118
+#: ../plugins/about/Storage.qml:137 ../plugins/battery/PageComponent.qml:112
+#: ../plugins/battery/PageComponent.qml:119
 #: ../plugins/cellular/PageComponent.qml:75
 msgid "N/A"
 msgstr ""
@@ -46,8 +46,8 @@ msgid "Last updated"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:214
-#: ../plugins/battery/PageComponent.qml:222
+#: ../plugins/battery/PageComponent.qml:219
+#: ../plugins/battery/PageComponent.qml:227
 #: ../plugins/battery/SleepValues.qml:91
 #: ../plugins/system-update/Download.qml:53
 #: ../plugins/system-update/PageComponent.qml:332
@@ -98,35 +98,35 @@ msgstr ""
 msgid "Used by apps"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:103
+#: ../plugins/about/Storage.qml:61
 msgid "kB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:105
+#: ../plugins/about/Storage.qml:63
 msgid "MB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:107
+#: ../plugins/about/Storage.qml:65
 msgid "GB"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:127
+#: ../plugins/about/Storage.qml:85
 msgid "Total storage"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:136
+#: ../plugins/about/Storage.qml:94
 msgid "Free space"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:152
+#: ../plugins/about/Storage.qml:110
 msgid "Installed apps"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:153
+#: ../plugins/about/Storage.qml:111
 msgid "By name"
 msgstr ""
 
-#: ../plugins/about/Storage.qml:153
+#: ../plugins/about/Storage.qml:111
 msgid "By size"
 msgstr ""
 
@@ -199,30 +199,30 @@ msgstr ""
 msgid "%1 %"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:110
+#: ../plugins/battery/PageComponent.qml:111
 msgid "Charge level"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:162
+#: ../plugins/battery/PageComponent.qml:163
 msgid "Ways to reduce battery use:"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:166
+#: ../plugins/battery/PageComponent.qml:167
 msgid "Display brightness"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:206
+#: ../plugins/battery/PageComponent.qml:211
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:206
+#: ../plugins/battery/PageComponent.qml:211
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:211
-#: ../plugins/battery/PageComponent.qml:219
+#: ../plugins/battery/PageComponent.qml:216
+#: ../plugins/battery/PageComponent.qml:224
 #: ../plugins/battery/SleepValues.qml:76 ../plugins/battery/SleepValues.qml:79
 #: ../plugins/battery/SleepValues.qml:82 ../plugins/battery/SleepValues.qml:85
 #: ../plugins/battery/SleepValues.qml:88
@@ -232,19 +232,20 @@ msgid_plural "After %1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/battery/PageComponent.qml:231 ../.build/settings.js:18
+#: ../plugins/battery/PageComponent.qml:236
+#: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:239 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:244 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:247
+#: ../plugins/battery/PageComponent.qml:252
 msgid "GPS"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:255
+#: ../plugins/battery/PageComponent.qml:260
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
@@ -498,7 +499,7 @@ msgid "Reset launcher & home screen"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:29
-#: ../plugins/security-privacy/PageComponent.qml:112
+#: ../plugins/security-privacy/PageComponent.qml:113
 msgid "Dash search"
 msgstr ""
 
@@ -508,13 +509,13 @@ msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:51
-#: ../plugins/security-privacy/PageComponent.qml:115
+#: ../plugins/security-privacy/PageComponent.qml:116
 msgid "Phone only"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:49
-#: ../plugins/security-privacy/PageComponent.qml:114
+#: ../plugins/security-privacy/PageComponent.qml:115
 msgid "Phone and Internet"
 msgstr ""
 
@@ -737,23 +738,23 @@ msgstr ""
 msgid "Messages on welcome screen"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:120
+#: ../plugins/security-privacy/PageComponent.qml:121
 msgid "Location access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:126
+#: ../plugins/security-privacy/PageComponent.qml:127
 msgid "Other app access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:130
+#: ../plugins/security-privacy/PageComponent.qml:131
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:133
+#: ../plugins/security-privacy/PageComponent.qml:134
 msgid "Sent"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:134
+#: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Not sent"
 msgstr ""
 
@@ -785,23 +786,23 @@ msgstr ""
 msgid "Vibrate when ringing"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:72
+#: ../plugins/sound/PageComponent.qml:73
 msgid "Vibrate in silent mode"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:77
+#: ../plugins/sound/PageComponent.qml:79
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:81 ../plugins/sound/PageComponent.qml:84
+#: ../plugins/sound/PageComponent.qml:83 ../plugins/sound/PageComponent.qml:86
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:90
+#: ../plugins/sound/PageComponent.qml:92
 msgid "Keyboard sounds"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:96
+#: ../plugins/sound/PageComponent.qml:99
 msgid "Lock sound"
 msgstr ""
 

@@ -49,50 +49,8 @@ ItemPage {
         }
     }
 
-    /* Get a model from the click command, build sorted lists for the view */
-    ListModel { id: clicksList }
-    ListModel { id: sortedNamesModel }
-    ListModel { id: sortedInstallModel }
-
     UbuntuStorageAboutPanel {
-        id: backendInfos
-        Component.onCompleted: {
-            var clickData = getClickList()
-            var clickJson = JSON.parse(clickData)
-            for (var val in clickJson) {
-                clicksList.append({"binaryName": clickJson[val]["title"],
-                                      "iconName": clickJson[val]["icon"] ? getClickDir(clickJson[val]["name"]) + "/" + clickJson[val]["icon"] : "",
-                                      "installedSize": clickJson[val]["installed-size"] ? clickJson[val]["installed-size"]*1024 : 0})
-            }
-            createSortedLists();
-        }
-    }
-
-    function noCaseSorting(a, b) {
-        if (a.toLowerCase() < b.toLowerCase()) return -1;
-        if (a.toLowerCase() > b.toLowerCase()) return 1;
-        return 0;
-    }
-
-    function createSortedLists() {
-        var n;
-        var namesDict = {};
-        var nameKeys = [];
-        var installDict = {};
-        var installKeys = [];
-
-        for (n=0; n < clicksList.count; n++) {
-            namesDict[clicksList.get(n).binaryName] = [clicksList.get(n).iconName, clicksList.get(n).installedSize];
-            installDict[clicksList.get(n).installedSize] = [clicksList.get(n).iconName, clicksList.get(n).binaryName];
-        }
-
-        nameKeys = Object.keys(namesDict).sort(noCaseSorting);
-        installKeys = Object.keys(installDict).sort(function(a,b){return b-a});
-
-        for (n=0; n < nameKeys.length; n++) {
-            sortedNamesModel.append({"binaryName":nameKeys[n],"iconName":namesDict[nameKeys[n]][0],"installedSize":namesDict[nameKeys[n]][1]})
-            sortedInstallModel.append({"binaryName":installDict[installKeys[n]][1],"iconName":installDict[installKeys[n]][0],"installedSize":installKeys[n]})
-        }
+        id: backendInfo
     }
 
     /* Return used space in a formatted way */
@@ -151,9 +109,16 @@ ItemPage {
                 id: valueSelect
                 text: i18n.tr("Installed apps")
                 model: [i18n.tr("By name"), i18n.tr("By size")]
-                selectedIndex: sortByName ? 0 : 1
-                onSelectedIndexChanged:
-                    settingsId.storageSortByName = (valueSelect.selectedIndex == 0) ? true : false
+                selectedIndex:
+                    (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?
+                        0 :
+                        1
+                onSelectedIndexChanged: {
+                    backendInfo.sortRole =
+                            (selectedIndex == 0) ?
+                                ClickRoles.DisplayNameRole :
+                                ClickRoles.InstalledSizeRole
+                }
             }
 
             ListView {
@@ -162,12 +127,14 @@ ItemPage {
                 height: childrenRect.height
                 /* Desactivate the listview flicking, we want to scroll on the column */
                 interactive: false
-                model: (valueSelect.selectedIndex === 0) ? sortedNamesModel : sortedInstallModel
+                model: backendInfo.clickList
                 delegate: ListItem.SingleValue {
-                    icon: iconName
+                    icon: iconPath
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
-                    text: binaryName
-                    value: installedSize ? storagePage.getFormattedSpace(installedSize) : i18n.tr("N/A")
+                    text: displayName
+                    value: installedSize ?
+                               storagePage.getFormattedSpace(installedSize) :
+                               i18n.tr("N/A")
                 }
             }
         }
