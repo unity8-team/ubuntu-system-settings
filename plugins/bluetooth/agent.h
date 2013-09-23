@@ -35,29 +35,30 @@ class Agent: public QObject, protected QDBusContext
     Q_OBJECT
 
 public:
-    Agent (QDBusConnection connection, DeviceModel& devices, QObject * parent=0): QObject(parent), m_connection(connection), m_devices(devices) {}
-    virtual ~Agent () {}
-    Q_INVOKABLE void confirmPasskey (uint tag, bool confirmed);
-    Q_INVOKABLE void providePasskey (uint tag, bool provided, uint passkey);
+    Agent(QDBusConnection connection, DeviceModel &devices, QObject *parent=0):
+        QObject(parent), m_connection(connection), m_devices(devices) {}
+    virtual ~Agent() {}
+    Q_INVOKABLE void confirmPasskey(uint tag, bool confirmed);
+    Q_INVOKABLE void providePasskey(uint tag, bool provided, uint passkey);
 
 public Q_SLOTS: // received from the system's bluez service
-    void Cancel ();
-    void DisplayPasskey      (const QDBusObjectPath & path, uint passkey, uchar entered);
-    void Release ();
-    void RequestConfirmation (const QDBusObjectPath & path, uint passkey);
-    uint RequestPasskey      (const QDBusObjectPath & path);
-    QString RequestPinCode   (const QDBusObjectPath & path);
+    void Cancel();
+    void DisplayPasskey(const QDBusObjectPath &path, uint passkey, uchar entered);
+    void Release();
+    void RequestConfirmation(const QDBusObjectPath &path, uint passkey);
+    uint RequestPasskey(const QDBusObjectPath &path);
+    QString RequestPinCode(const QDBusObjectPath &path);
 
 Q_SIGNALS:
-    void passkeyNeeded (int tag, Device* device);
-    void passkeyConfirmationNeeded (int tag, Device* device, QString passkey);
-    void onPairingDone ();
+    void passkeyNeeded(int tag, Device* device);
+    void passkeyConfirmationNeeded(int tag, Device* device, QString passkey);
+    void onPairingDone();
 
 private:
     Q_DISABLE_COPY(Agent);
 
     QDBusConnection m_connection;
-    DeviceModel& m_devices;
+    DeviceModel &m_devices;
     QMap<uint,QDBusMessage> m_delayedReplies;
     uint m_tag = 1;
 };

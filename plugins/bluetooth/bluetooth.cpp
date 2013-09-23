@@ -26,45 +26,46 @@
 #include "bluetooth.h"
 #include "dbus-shared.h"
 
-Bluetooth :: Bluetooth (QObject * parent):
-  QObject (parent),
-  m_dbus (QDBusConnection::systemBus()),
-  m_devices (m_dbus),
-  m_agent (m_dbus, m_devices)
+Bluetooth::Bluetooth(QObject *parent):
+    QObject(parent),
+    m_dbus(QDBusConnection::systemBus()),
+    m_devices(m_dbus),
+    m_agent(m_dbus, m_devices)
 {
-  // export our Agent to handle pairing requests
-  new AgentAdaptor (&m_agent);
-  if (!m_dbus.registerObject (DBUS_AGENT_PATH, &m_agent))
-    qFatal ("Couldn't register agent at " DBUS_AGENT_PATH);
+    // export our Agent to handle pairing requests
+    new AgentAdaptor(&m_agent);
+    if(!m_dbus.registerObject(DBUS_AGENT_PATH, &m_agent))
+        qFatal("Couldn't register agent at " DBUS_AGENT_PATH);
 
-  m_connectedHeadsets.filterOnType (Device::Type::Headset);
-  m_connectedHeadsets.filterOnConnections (Device::Connection::Connected | Device::Connection::Disconnecting);
-  m_connectedHeadsets.setSourceModel (&m_devices);
+    m_connectedHeadsets.filterOnType(Device::Type::Headset);
+    m_connectedHeadsets.filterOnConnections(Device::Connection::Connected |
+                                            Device::Connection::Disconnecting);
+    m_connectedHeadsets.setSourceModel(&m_devices);
 
-  m_disconnectedHeadsets.filterOnType (Device::Type::Headset);
-  m_disconnectedHeadsets.filterOnConnections (Device::Connection::Connecting | Device::Connection::Disconnected);
-  m_disconnectedHeadsets.setSourceModel (&m_devices);
+    m_disconnectedHeadsets.filterOnType(Device::Type::Headset);
+    m_disconnectedHeadsets.filterOnConnections(Device::Connection::Connecting |
+                                               Device::Connection::Disconnected);
+    m_disconnectedHeadsets.setSourceModel(&m_devices);
   
-  QObject::connect (&m_killswitch, SIGNAL(blockedChanged(bool)),
-                    this, SLOT(onKillSwitchChanged(bool)));
+    QObject::connect(&m_killswitch, SIGNAL(blockedChanged(bool)),
+                     this, SLOT(onKillSwitchChanged(bool)));
 
-  QObject::connect (&m_agent, SIGNAL(onPairingDone()),
-                    this, SLOT(onPairingDone()));
+    QObject::connect(&m_agent, SIGNAL(onPairingDone()),
+                     this, SLOT(onPairingDone()));
 }
 
 void
-Bluetooth :: onKillSwitchChanged (bool blocked)
+Bluetooth::onKillSwitchChanged(bool blocked)
 {
-  Q_EMIT (enabledChanged (!blocked));
+    Q_EMIT(enabledChanged(!blocked));
 }
 
 void
-Bluetooth :: setSelectedDevice (const QString& address)
+Bluetooth::setSelectedDevice(const QString &address)
 {
-  if (!m_selectedDevice || (m_selectedDevice->getAddress() != address))
-    {
-      m_selectedDevice = m_devices.getDeviceFromAddress (address);
-      Q_EMIT (selectedDeviceChanged ());
+    if (!m_selectedDevice || (m_selectedDevice->getAddress() != address)) {
+        m_selectedDevice = m_devices.getDeviceFromAddress(address);
+        Q_EMIT(selectedDeviceChanged());
     }
 }
 
@@ -73,40 +74,39 @@ Bluetooth :: setSelectedDevice (const QString& address)
 ***/
 
 Device *
-Bluetooth :: getSelectedDevice ()
+Bluetooth::getSelectedDevice()
 {
-  if (m_selectedDevice)
-    {
-      auto ret = m_selectedDevice.data();
-      QQmlEngine::setObjectOwnership (ret, QQmlEngine::CppOwnership);
-      return ret;
+    if (m_selectedDevice) {
+        auto ret = m_selectedDevice.data();
+        QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+        return ret;
     }
 
-  return nullptr;
+    return nullptr;
 }
 
 Agent *
-Bluetooth :: getAgent ()
+Bluetooth::getAgent()
 {
-  auto ret = &m_agent;
-  QQmlEngine::setObjectOwnership (ret, QQmlEngine::CppOwnership);
-  return ret;
+    auto ret = &m_agent;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }
 
 QAbstractItemModel *
-Bluetooth :: getConnectedHeadsets ()
+Bluetooth::getConnectedHeadsets()
 {
-  auto ret = &m_connectedHeadsets;
-  QQmlEngine::setObjectOwnership (ret, QQmlEngine::CppOwnership);
-  return ret;
+    auto ret = &m_connectedHeadsets;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }
 
 QAbstractItemModel *
-Bluetooth :: getDisconnectedHeadsets ()
+Bluetooth::getDisconnectedHeadsets()
 {
-  auto ret = &m_disconnectedHeadsets;
-  QQmlEngine::setObjectOwnership (ret, QQmlEngine::CppOwnership);
-  return ret;
+    auto ret = &m_disconnectedHeadsets;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
 }
 
 
@@ -115,46 +115,39 @@ Bluetooth :: getDisconnectedHeadsets ()
 ***/
 
 void
-Bluetooth :: disconnectHeadset ()
+Bluetooth::disconnectHeadset()
 {
-  if (m_selectedDevice)
-    m_selectedDevice->disconnect (Device::HeadsetMode);
+    if (m_selectedDevice)
+        m_selectedDevice->disconnect(Device::HeadsetMode);
 }
 
 void
-Bluetooth :: connectHeadset (const QString& address)
+Bluetooth::connectHeadset(const QString &address)
 {
-  const Device::ConnectionMode connMode = Device::HeadsetMode;
-  auto device = m_devices.getDeviceFromAddress (address);
-  if (!device)
-    return;
+    const Device::ConnectionMode connMode = Device::HeadsetMode;
+    auto device = m_devices.getDeviceFromAddress(address);
+    if (!device)
+        return;
 
-  if (device->isPaired())
-    {
-      device->connect (connMode);
-    }
-  else
-    {
-      m_connectAfterPairing[address] = connMode;
-      m_devices.pairDevice (address);
+    if (device->isPaired()) {
+        device->connect(connMode);
+    } else {
+        m_connectAfterPairing[address] = connMode;
+        m_devices.pairDevice(address);
     }
 }
 
 void
-Bluetooth :: onPairingDone ()
+Bluetooth::onPairingDone()
 {
-  QMapIterator<QString,Device::ConnectionMode> it (m_connectAfterPairing);
-
-  while (it.hasNext())
-    {
-      it.next();
-      const QString& address = it.key();
-      auto device = m_devices.getDeviceFromAddress (address);
-      if (device)
-        {
-          device->connect (it.value());
-        }
+    QMapIterator<QString,Device::ConnectionMode> it(m_connectAfterPairing);
+    while (it.hasNext()) {
+        it.next();
+        const QString &address = it.key();
+        auto device = m_devices.getDeviceFromAddress(address);
+        if (device)
+            device->connect(it.value());
     }
 
-  m_connectAfterPairing.clear();
+    m_connectAfterPairing.clear();
 }

@@ -31,32 +31,25 @@ class KillSwitch : public QObject
 {
     Q_OBJECT
 
-  public:
-
-    bool isBlocked () const { return m_blocked; }
+public:
+    bool isBlocked() const { return m_blocked; }
 
     /* Try to block/unblock bluetooth.
-     * This can fail if the requested state is overruled by a hardware block. */
-    virtual void trySetBlocked (bool b) = 0;
+       This can fail if the requested state is overruled by a hardware block. */
+    virtual void trySetBlocked(bool b) = 0;
 
-  Q_SIGNALS:
+Q_SIGNALS:
+    void blockedChanged(bool blocked);
 
-    void blockedChanged (bool blocked);
-
-  protected:
-
-    void setBlocked (bool b)
-    {
-      if (m_blocked != b)
-        {
-          m_blocked = b;
-
-          Q_EMIT (blockedChanged (b));
+protected:
+    void setBlocked(bool b) {
+        if (m_blocked != b) {
+            m_blocked = b;
+            Q_EMIT(blockedChanged(b));
         }
     }
 
-  private:
-
+private:
     bool m_blocked = false;
 };
 
@@ -70,14 +63,14 @@ class RfKillSwitch : public KillSwitch
 {
     Q_OBJECT
 
-  public:
-    RfKillSwitch ();
+public:
+    RfKillSwitch();
     virtual ~RfKillSwitch();
-    void trySetBlocked (bool b);
+    void trySetBlocked(bool b);
 
-  private:
+private:
     RfKillSwitchPrivate * d_ptr;
-    Q_DECLARE_PRIVATE (RfKillSwitch);
+    Q_DECLARE_PRIVATE(RfKillSwitch);
     Q_PRIVATE_SLOT(d_func(), void onFileChanged());
 };
 

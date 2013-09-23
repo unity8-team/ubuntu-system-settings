@@ -52,35 +52,35 @@ class Bluetooth : public QObject
                 WRITE setEnabled
                 NOTIFY enabledChanged);
 
-  Q_SIGNALS:
-    void selectedDeviceChanged ();
-    void enabledChanged (bool enabled);
+Q_SIGNALS:
+    void selectedDeviceChanged();
+    void enabledChanged(bool enabled);
 
-  private Q_SLOTS:
-    void onPairingDone ();
-    void onKillSwitchChanged (bool blocked);
-    void slotDevicePairedChanged ();
+private Q_SLOTS:
+    void onPairingDone();
+    void onKillSwitchChanged(bool blocked);
+    void slotDevicePairedChanged();
 
-  public:
-    Bluetooth (QObject *parent = 0);
+public:
+    Bluetooth(QObject *parent = 0);
     ~Bluetooth() {}
 
-    Q_INVOKABLE void setSelectedDevice (const QString& address);
-    Q_INVOKABLE void connectHeadset (const QString& address);
-    Q_INVOKABLE void disconnectHeadset ();
-    Q_INVOKABLE void connectAudioSource ();
-    Q_INVOKABLE void disconnectAudioSource ();
+    Q_INVOKABLE void setSelectedDevice(const QString &address);
+    Q_INVOKABLE void connectHeadset(const QString &address);
+    Q_INVOKABLE void disconnectHeadset();
+    Q_INVOKABLE void connectAudioSource();
+    Q_INVOKABLE void disconnectAudioSource();
 
-  public:
-    Agent * getAgent ();
-    Device * getSelectedDevice ();
-    QAbstractItemModel * getConnectedHeadsets ();
-    QAbstractItemModel * getDisconnectedHeadsets ();
+public:
+    Agent * getAgent();
+    Device * getSelectedDevice();
+    QAbstractItemModel * getConnectedHeadsets();
+    QAbstractItemModel * getDisconnectedHeadsets();
 
-    bool isEnabled () const { return !m_killswitch.isBlocked(); }
-    void setEnabled (bool enabled) { m_killswitch.trySetBlocked (!enabled); }
+    bool isEnabled() const { return !m_killswitch.isBlocked(); }
+    void setEnabled(bool enabled) { m_killswitch.trySetBlocked(!enabled); }
 
-  private:
+private:
     QDBusConnection m_dbus;
     RfKillSwitch m_killswitch;
     DeviceModel m_devices;

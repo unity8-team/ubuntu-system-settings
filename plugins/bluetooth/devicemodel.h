@@ -15,8 +15,7 @@
  *
  * Authors:
  * Charles Kerr <charles.kerr@canonical.com>
- *
-*/
+ */
 
 #ifndef BLUETOOTH_DEVICE_MODEL_H
 #define BLUETOOTH_DEVICE_MODEL_H
@@ -39,8 +38,8 @@ class DeviceModel: public QAbstractListModel
 {
     Q_OBJECT
 
-  public:
-    DeviceModel (QDBusConnection& dbus, QObject *parent = 0);
+public:
+    DeviceModel(QDBusConnection &dbus, QObject *parent = 0);
     ~DeviceModel();
 
     enum Roles
@@ -55,55 +54,55 @@ class DeviceModel: public QAbstractListModel
     };
 
     // implemented virtual methods from QAbstractTableModel
-    int rowCount (const QModelIndex & parent = QModelIndex()) const;
-    QVariant data (const QModelIndex & index, int role = Qt::DisplayRole) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int,QByteArray> roleNames() const;
 
-    QSharedPointer<Device> getDeviceFromAddress (const QString& address);
-    QSharedPointer<Device> getDeviceFromPath (const QString& path);
+    QSharedPointer<Device> getDeviceFromAddress(const QString &address);
+    QSharedPointer<Device> getDeviceFromPath(const QString &path);
 
-  public:
-    void pairDevice (const QString& address);
+public:
+    void pairDevice(const QString &address);
 
-  private:
+private:
     QDBusConnection m_dbus;
     QDBusInterface m_bluezManager;
 
     QScopedPointer<QDBusInterface> m_bluezAdapter;
-    void clearAdapter ();
-    void setAdapterFromPath (const QString& objectPath);
+    void clearAdapter();
+    void setAdapterFromPath(const QString &objectPath);
 
     QList<QSharedPointer<Device> > m_devices;
-    void updateDevices ();
-    void addDevice (QSharedPointer<Device>& device);
-    void addDevice (const QString& objectPath);
-    void removeRow (int i);
-    int findRowFromAddress (const QString& address) const;
-    void emitRowChanged (int row);
+    void updateDevices();
+    void addDevice(QSharedPointer<Device> &device);
+    void addDevice(const QString &objectPath);
+    void removeRow(int i);
+    int findRowFromAddress(const QString &address) const;
+    void emitRowChanged(int row);
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void slotDeviceChanged();
-    void slotDeviceCreated (const QDBusObjectPath &);
-    void slotDeviceRemoved (const QDBusObjectPath &);
-    void slotDeviceFound (const QString &, const QMap<QString,QVariant>&);
-    void slotDeviceDisappeared (const QString&);
+    void slotDeviceCreated(const QDBusObjectPath &);
+    void slotDeviceRemoved(const QDBusObjectPath &);
+    void slotDeviceFound(const QString &, const QMap<QString,QVariant>&);
+    void slotDeviceDisappeared(const QString&);
 };
 
 class DeviceFilter: public QSortFilterProxyModel
 {
     Q_OBJECT
 
-  public:
-    DeviceFilter () {}
-    virtual ~DeviceFilter () {}
-    void filterOnType (Device::Type);
-    void filterOnConnections (Device::Connections);
+public:
+    DeviceFilter() {}
+    virtual ~DeviceFilter() {}
+    void filterOnType(Device::Type);
+    void filterOnConnections(Device::Connections);
 
-  protected:
-    virtual bool filterAcceptsRow (int, const QModelIndex&) const;
-    virtual bool lessThan (const QModelIndex&, const QModelIndex&) const;
+protected:
+    virtual bool filterAcceptsRow(int, const QModelIndex&) const;
+    virtual bool lessThan(const QModelIndex&, const QModelIndex&) const;
 
-  private:
+private:
     Device::Type m_type = Device::Type::Other;
     bool m_typeEnabled = false;
     Device::Connections m_connections = Device::Connection::Connected;

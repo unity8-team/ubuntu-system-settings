@@ -24,8 +24,8 @@
 
 namespace
 {
-  const char * const REJECTED_TYPE = "org.bluez.Error.Rejected";
-  const char * const REJECTED_TEXT = "The request was rejected";
+    const char * const REJECTED_TYPE = "org.bluez.Error.Rejected";
+    const char * const REJECTED_TEXT = "The request was rejected";
 }
 
 /***
@@ -40,9 +40,9 @@ namespace
  * already been unregistered.
  */
 void
-Agent :: Release ()
+Agent::Release()
 {
-  Q_EMIT (onPairingDone());
+    Q_EMIT(onPairingDone());
 }
 
 /***
@@ -64,23 +64,20 @@ Agent :: Release ()
  *                  org.bluez.Error.Canceled
  */
 void
-Agent :: RequestConfirmation (const QDBusObjectPath& objectPath, uint passkey)
+Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
 {
-  auto device = m_devices.getDeviceFromPath (objectPath.path());
-  if (device)
-    {
-      const uint tag = m_tag++;
+    auto device = m_devices.getDeviceFromPath(objectPath.path());
+    if (device) {
+        const uint tag = m_tag++;
 
-      setDelayedReply (true);
-      assert (!m_delayedReplies.contains(tag));
-      m_delayedReplies[tag] = message();
+        setDelayedReply(true);
+        assert(!m_delayedReplies.contains(tag));
+        m_delayedReplies[tag] = message();
       
-      QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
-      Q_EMIT (passkeyConfirmationNeeded (tag, device.data(), passkeyStr));
-    }
-  else // confirmation requested for an unknown device..?!
-    {
-      m_connection.send (message().createErrorReply (REJECTED_TYPE, REJECTED_TEXT));
+        QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
+        Q_EMIT(passkeyConfirmationNeeded(tag, device.data(), passkeyStr));
+    } else { // confirmation requested for an unknown device..?!
+        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
     }
 }
 
@@ -92,18 +89,17 @@ Agent :: RequestConfirmation (const QDBusObjectPath& objectPath, uint passkey)
  * @param confirmed: true if user confirmed the passkey, false if they canceled
  */
 void
-Agent :: confirmPasskey (uint tag, bool confirmed)
+Agent::confirmPasskey(uint tag, bool confirmed)
 {
-  if (m_delayedReplies.contains(tag))
-    {
-      QDBusMessage message = m_delayedReplies[tag];
+    if (m_delayedReplies.contains(tag)) {
+        QDBusMessage message = m_delayedReplies[tag];
 
-      if (confirmed)
-        m_connection.send (message.createReply());
-      else
-        m_connection.send (message.createErrorReply (REJECTED_TYPE, REJECTED_TEXT));
+        if (confirmed)
+            m_connection.send(message.createReply());
+        else
+            m_connection.send(message.createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
 
-      m_delayedReplies.remove (tag);
+        m_delayedReplies.remove(tag);
     }
 }
 
@@ -121,22 +117,20 @@ Agent :: confirmPasskey (uint tag, bool confirmed)
  *                  org.bluez.Error.Canceled
  */
 unsigned int
-Agent :: RequestPasskey (const QDBusObjectPath& objectPath)
+Agent::RequestPasskey(const QDBusObjectPath &objectPath)
 {
-  auto device = m_devices.getDeviceFromPath (objectPath.path());
-  if (device)
-    {
-      const uint tag = m_tag++;
+    auto device = m_devices.getDeviceFromPath(objectPath.path());
+    if (device) {
+        const uint tag = m_tag++;
 
-      setDelayedReply (true);
-      assert (!m_delayedReplies.contains(tag));
-      m_delayedReplies[tag] = message ();
+        setDelayedReply(true);
+        assert(!m_delayedReplies.contains(tag));
+        m_delayedReplies[tag] = message();
 
-      Q_EMIT (passkeyNeeded (tag, device.data()));
-    }
-  else // passkey requested for an unknown device..?!
-    {
-      m_connection.send (message().createErrorReply (REJECTED_TYPE, REJECTED_TEXT));
+        Q_EMIT(passkeyNeeded(tag, device.data()));
+
+    } else { // passkey requested for an unknown device..?!
+        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
     }
 
   return 0;
@@ -151,16 +145,15 @@ Agent :: RequestPasskey (const QDBusObjectPath& objectPath)
  * @param passkey: the passkey. Only valid if provided is true.
  */
 void
-Agent :: providePasskey (uint tag, bool provided, uint passkey)
+Agent::providePasskey(uint tag, bool provided, uint passkey)
 {
-  if (m_delayedReplies.contains(tag))
-    {
-      if (provided)
-        m_connection.send (m_delayedReplies[tag].createReply (passkey));
-      else
-        m_connection.send (m_delayedReplies[tag].createErrorReply (REJECTED_TYPE, REJECTED_TEXT));
+    if (m_delayedReplies.contains(tag)) {
+        if (provided)
+            m_connection.send(m_delayedReplies[tag].createReply(passkey));
+        else
+            m_connection.send(m_delayedReplies[tag].createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
 
-      m_delayedReplies.remove (tag);
+        m_delayedReplies.remove(tag);
     }
 }
 
@@ -169,29 +162,29 @@ Agent :: providePasskey (uint tag, bool provided, uint passkey)
 ***/
 
 void
-Agent :: DisplayPasskey (const QDBusObjectPath& objectPath, uint passkey, uchar entered)
+Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, uchar entered)
 {
-  Q_UNUSED (objectPath);
-  Q_UNUSED (passkey);
-  Q_UNUSED (entered);
+    Q_UNUSED(objectPath);
+    Q_UNUSED(passkey);
+    Q_UNUSED(entered);
 
-  // unimplemented -- unneeded for headsets
+    // unimplemented -- unneeded for headsets
 }
 
 void
-Agent :: Cancel ()
+Agent::Cancel()
 {
-  // unimplemented -- companion function for DisplayPasskey
+    // unimplemented -- companion function for DisplayPasskey
 }
 
 QString
-Agent :: RequestPinCode (const QDBusObjectPath& device)
+Agent::RequestPinCode(const QDBusObjectPath &device)
 {
-  // TODO: I'm not able to trigger this with any bluetooth devices and
-  // Agent capabilities -- Everything triggers ConfirmPasskey or RequestPasskey.
-  // Instead of creating untestable code here, throw an error
+    /* TODO: I'm not able to trigger this with any bluetooth devices and
+       Agent capabilities -- Everything triggers ConfirmPasskey or RequestPasskey.
+       Instead of creating untestable code here, throw an error */
 
-  Q_UNUSED (device);
-  m_connection.send (message().createErrorReply (REJECTED_TYPE, REJECTED_TEXT));
-  return "";
+    Q_UNUSED(device);
+    m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
+    return "";
 }
