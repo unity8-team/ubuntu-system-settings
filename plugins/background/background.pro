@@ -8,12 +8,17 @@ QML_SOURCES = \
     ChangeImage.qml \
     MainPage.qml \
     SwappableImage.qml \
-    UbuntuSwappableImage.qml
+    UbuntuSwappableImage.qml \
+    OverlayImage.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}
 
-images.files = aeg.jpg darkeningclockwork.jpg
+images.files = \
+    aeg.jpg \
+    darkeningclockwork.jpg \
+    homeoverlay.svg \
+    welcomeoverlay.svg
 images.path = $${PLUGIN_QML_DIR}/$${TARGET}
 INSTALLS += images
 
