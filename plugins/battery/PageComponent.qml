@@ -19,6 +19,7 @@
  */
 
 import GSettings 1.0
+import QMenuModel 0.1
 import QtQuick 2.0
 import QtSystemInfo 5.0
 import SystemSettings 1.0
@@ -264,20 +265,67 @@ ItemPage {
                 }
             }
 
+            QDBusActionGroup {
+                id: bluetoothActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.bluetooth"
+                objectPath: "/com/canonical/indicator/bluetooth"
+
+                property variant enabled: action("bluetooth-enabled")
+                property variant actionVisible: action("root-phone")
+
+                property bool visible:
+                    actionVisible.state.visible === undefined ||
+                    actionVisible.state.visible
+
+                Component.onCompleted: start()
+            }
+
             ListItem.Standard {
                 text: i18n.tr("Bluetooth")
                 control: Switch {
-                    checked: true
-                    enabled: false
+                    id: btSwitch
+                    // Cannot use onCheckedChanged as this triggers a loop
+                    onClicked: bluetoothActionGroup.enabled.activate()
                 }
+                visible: bluetoothActionGroup.visible
+                Component.onCompleted:
+                    clicked.connect(btSwitch.clicked)
+            }
+
+            Binding {
+                target: btSwitch
+                property: "checked"
+                value: bluetoothActionGroup.enabled.state
+            }
+
+            QDBusActionGroup {
+                id: locationActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.location"
+                objectPath: "/com/canonical/indicator/location"
+
+                property variant enabled: action("gps-detection-enabled")
+
+                Component.onCompleted: start()
             }
 
             ListItem.Standard {
                 text: i18n.tr("GPS")
                 control: Switch {
-                    checked: true
-                    enabled: false
+                    id: gpsSwitch
+                    onClicked: locationActionGroup.enabled.activate()
                 }
+                visible: showAllUI && // Hidden until the indicator works
+                         locationActionGroup.enabled.state !== undefined
+                Component.onCompleted:
+                    clicked.connect(gpsSwitch.clicked)
+            }
+
+            Binding {
+                target: gpsSwitch
+                property: "checked"
+                value: locationActionGroup.enabled.state
             }
 
             ListItem.Caption {

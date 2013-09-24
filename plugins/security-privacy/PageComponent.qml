@@ -19,6 +19,7 @@
  */
 
 import GSettings 1.0
+import QMenuModel 0.1
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -118,11 +119,23 @@ ItemPage {
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Dash.qml"))
             }
+            QDBusActionGroup {
+                id: locationActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.location"
+                objectPath: "/com/canonical/indicator/location"
+
+                property variant enabled: action("location-detection-enabled")
+
+                Component.onCompleted: start()
+            }
             ListItem.SingleValue {
                 text: i18n.tr("Location access")
                 value: "On"
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
+                visible: showAllUI && // Hidden until the indicator works
+                         locationActionGroup.enabled.state !== undefined
             }
             ListItem.SingleValue {
                 text: i18n.tr("Other app access")
