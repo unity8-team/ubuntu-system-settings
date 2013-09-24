@@ -26,6 +26,7 @@
 #include <timezonemap/tz.h>
 #include <unistd.h>
 
+#include <iostream>
 TimeDate::TimeDate(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus()),
@@ -40,6 +41,7 @@ TimeDate::TimeDate(QObject *parent) :
     m_timeZoneFilterProxy(&m_timeZoneModel),
     m_sortedBefore(false)
 {
+std::cerr << __FILE__ << ':' << __LINE__ << ':' << this << std::endl;
     connect (&m_serviceWatcher,
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
              this,
@@ -53,13 +55,14 @@ TimeDate::TimeDate(QObject *parent) :
 
 void TimeDate::setUpInterface()
 {
-    m_timeDateInterface.connection().connect(
+    bool b = m_timeDateInterface.connection().connect(
         m_timeDateInterface.service(),
         m_timeDateInterface.path(),
         "org.freedesktop.DBus.Properties",
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
+std::cerr << "org.freedesktop.DBus.Properties - PropertiesChanged - " << b << std::endl;
 }
 
 QString TimeDate::timeZone()

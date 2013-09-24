@@ -30,6 +30,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          accountsservice,
+         bluez (>= 4.36),
          gsettings-desktop-schemas,
          gsettings-ubuntu-touch-schemas (>= 0.0.1+13.10.20130730),
          indicator-network (>= 0.5.0+13.10.20130918),
