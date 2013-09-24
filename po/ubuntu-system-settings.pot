@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 13:49+0300\n"
+"POT-Creation-Date: 2013-09-24 16:12-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,7 +130,7 @@ msgstr ""
 msgid "By size"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:33 ../.build/settings.js:3
+#: ../plugins/background/MainPage.qml:33 ../.build/settings.js:4
 msgid "Background"
 msgstr ""
 
@@ -138,19 +138,19 @@ msgstr ""
 msgid "Welcome screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:116
+#: ../plugins/background/MainPage.qml:126
 msgid "Home screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:196
+#: ../plugins/background/MainPage.qml:206
 msgid "Same background for both"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:197
+#: ../plugins/background/MainPage.qml:207
 msgid "Different background for each"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:34 ../.build/settings.js:4
+#: ../plugins/battery/PageComponent.qml:34 ../.build/settings.js:5
 msgid "Battery"
 msgstr ""
 
@@ -233,11 +233,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../plugins/battery/PageComponent.qml:236
-#: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
+#: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:19
 msgid "Wi-Fi"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:244 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:244 ../.build/settings.js:6
 msgid "Bluetooth"
 msgstr ""
 
@@ -280,7 +280,7 @@ msgstr ""
 msgid "Searching"
 msgstr ""
 
-#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
+#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:8
 msgid "Cellular"
 msgstr ""
 
@@ -357,7 +357,7 @@ msgstr ""
 msgid "All layouts available:"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:31 ../.build/settings.js:10
+#: ../plugins/language/PageComponent.qml:31 ../.build/settings.js:11
 msgid "Language & Text"
 msgstr ""
 
@@ -440,7 +440,7 @@ msgid ""
 "between them"
 msgstr ""
 
-#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:13
 msgid "Phone"
 msgstr ""
 
@@ -467,7 +467,7 @@ msgstr ""
 msgid "Erase & reset everything"
 msgstr ""
 
-#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:14
 msgid "Reset phone"
 msgstr ""
 
@@ -661,6 +661,8 @@ msgid "Unset"
 msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
+#: ../wizard/qml/Pages/AboutYouPage.qml:68
+#: ../wizard/qml/Pages/LocationPage.qml:46
 msgid "Continue"
 msgstr ""
 
@@ -701,7 +703,7 @@ msgstr ""
 msgid "Change passphrase…"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:14
+#: ../plugins/security-privacy/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Security & Privacy"
 msgstr ""
 
@@ -770,7 +772,7 @@ msgstr ""
 msgid "Sleep locks immediately"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:16
 msgid "Sound"
 msgstr ""
 
@@ -835,7 +837,7 @@ msgstr ""
 msgid "Data charges may apply."
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:17
 msgid "Updates"
 msgstr ""
 
@@ -939,7 +941,7 @@ msgstr ""
 msgid "No matching place"
 msgstr ""
 
-#: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
+#: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:18
 msgid "Time & Date"
 msgstr ""
 
@@ -1055,22 +1057,105 @@ msgstr ""
 msgid "System"
 msgstr ""
 
+#: ../wizard/qml/Components/Page.qml:43
+msgid "Back"
+msgstr ""
+
+#: ../wizard/qml/Pages/AboutYouPage.qml:23
+msgid "About you"
+msgstr ""
+
+#: ../wizard/qml/Pages/AboutYouPage.qml:52
+msgid "What shall we call you?"
+msgstr ""
+
+#: ../wizard/qml/Pages/LocationPage.qml:22
+msgid "Your phone and settings"
+msgstr ""
+
+#: ../wizard/qml/Pages/LocationPage.qml:39
+msgid ""
+"Your phone is setup to automatically report errors to Canonical. This can be "
+"disabled in system settings.\n"
+"\n"
+"Your phone is setup to detect your location. This can be disabled in system "
+"settings."
+msgstr ""
+
+#: ../wizard/qml/Pages/SetupCompletePage.qml:22
+#: ../wizard/qml/Pages/SpinnerPage.qml:22
+msgid "That’s it!"
+msgstr ""
+
+#: ../wizard/qml/Pages/SetupCompletePage.qml:39
+msgid ""
+"It’s great to have you in the Ubuntu Community.\n"
+"\n"
+"You’re now ready to enjoy your new phone."
+msgstr ""
+
+#: ../wizard/qml/Pages/SetupCompletePage.qml:45
+msgid "Finish"
+msgstr ""
+
+#: ../wizard/qml/Pages/SimCardPage.qml:22
+msgid "No SIM card installed"
+msgstr ""
+
+#: ../wizard/qml/Pages/SimCardPage.qml:56
+msgid "You need a valid SIM to use telephone and SMS features."
+msgstr ""
+
+#: ../wizard/qml/Pages/SimCardPage.qml:63
+msgid "Skip"
+msgstr ""
+
+#: ../wizard/qml/Pages/WelcomePage.qml:24
+msgid "Hello!"
+msgstr ""
+
+#: ../wizard/qml/Pages/WelcomePage.qml:50
+msgid ""
+"Welcome to Ubuntu.\n"
+"Let’s get started."
+msgstr ""
+
+#: ../wizard/qml/Pages/WelcomePage.qml:57
+msgid "Select your language"
+msgstr ""
+
+#: ../wizard/qml/Pages/WelcomePage.qml:72
+msgid "Start"
+msgstr ""
+
+#: ../wizard/qml/Pages/WiFiPage.qml:22
+msgid "Connect to Wi-Fi"
+msgstr ""
+
+#: ../wizard/qml/Pages/WiFiPage.qml:39
+msgid "Connect"
+msgstr ""
+
 #: ../.build/settings.js:2
 msgid "Accessibility"
 msgstr ""
 
-#: ../.build/settings.js:6
+#: ../.build/settings.js:3
+msgid "Account"
+msgstr ""
+
+#: ../.build/settings.js:7
 msgid "Brightness"
 msgstr ""
 
-#: ../.build/settings.js:8
+#: ../.build/settings.js:9
 msgid "Example"
 msgstr ""
 
-#: ../.build/settings.js:9
+#: ../.build/settings.js:10
 msgid "Flight mode"
 msgstr ""
 
-#: ../.build/settings.js:11
+#: ../.build/settings.js:12
 msgid "Orientation lock"
 msgstr ""

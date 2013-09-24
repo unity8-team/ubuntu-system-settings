@@ -10,8 +10,7 @@ SUBDIRS = \
     src \
     plugins \
     tests \
-    wizard \
-    wizard/po
+    wizard
 
 include(common-installs-config.pri)
 

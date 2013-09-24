@@ -5,7 +5,7 @@ include($${TOP_SRC_DIR}/common-installs-config.pri)
 TEMPLATE = app
 TARGET = system-settings-wizard
 
-I18N_DOMAIN = wizard
+I18N_DOMAIN = ubuntu-system-settings
 
 CONFIG += \
     qt
@@ -40,10 +40,6 @@ DEFINES += \
     I18N_DOMAIN=\\\"$${I18N_DOMAIN}\\\" \
     PLUGIN_PRIVATE_MODULE_DIR=\\\"$${PLUGIN_PRIVATE_MODULE_DIR}\\\" \
     PLUGIN_QML_DIR=\\\"$${PLUGIN_QML_DIR}\\\"
-
-po.target = po/wizard.pot
-po.depends = $${SOURCES}
-po.commands = xgettext -o $@ -d $${I18N_DOMAIN} --keyword=_ $^
 
 upstart.path = $$INSTALL_PREFIX/share/upstart/sessions
 upstart.files += ubuntu-system-settings-wizard.conf

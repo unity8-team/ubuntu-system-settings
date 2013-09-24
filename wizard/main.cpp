@@ -16,6 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <libintl.h>
 #include <QGuiApplication>
 #include <QQmlContext>
 #include <QUrl>
@@ -44,6 +45,9 @@ void start_xsession()
 int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
+
+    bindtextdomain(I18N_DOMAIN, NULL);
+    textdomain(I18N_DOMAIN);
 
     QQuickView view;
     QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);

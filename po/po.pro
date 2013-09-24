@@ -6,7 +6,9 @@ DESKTOPFILE = ../$${PROJECTNAME}.desktop
 SETTINGSFILES = ../plugins/*/*.settings
 
 SOURCECODE = ../plugins/*/*.qml \
-             ../src/qml/*.qml
+             ../src/qml/*.qml \
+             ../wizard/qml/*.qml \
+             ../wizard/qml/*/*.qml
 
 BUILDDIR = ../.build
 DESKTOPFILETEMP = $${BUILDDIR}/$${PROJECTNAME}.desktop.js
