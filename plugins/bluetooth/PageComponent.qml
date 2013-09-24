@@ -26,7 +26,9 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Bluetooth 1.0
 
 
-PageStack {
+ItemPage {
+    id: root
+    UbuntuBluetoothPanel { id: backend }
 
     Component {
         id: confirmPasskeyDialog
@@ -38,19 +40,15 @@ PageStack {
         ProvidePasskeyDialog { }
     }
 
-    id: pageStack
-    Component.onCompleted: push(mainPage)
-    UbuntuBluetoothPanel { id: backend }
-
     Connections {
         target: backend.agent
         onPasskeyConfirmationNeeded: {
-            var popup = PopupUtils.open (confirmPasskeyDialog, pageStack, {passkey: passkey, name: device.name})
+            var popup = PopupUtils.open (confirmPasskeyDialog, root, {passkey: passkey, name: device.name})
             popup.canceled.connect (function() {target.confirmPasskey (tag, false)})
             popup.confirmed.connect (function() {target.confirmPasskey (tag, true)})
         }
         onPasskeyNeeded: {
-            var popup = PopupUtils.open (providePasskeyDialog, pageStack, {name: device.name})
+            var popup = PopupUtils.open (providePasskeyDialog, root, {name: device.name})
             popup.canceled.connect (function() {target.providePasskey (tag, false, 0)})
             popup.provided.connect (function(passkey) {target.providePasskey (tag, true, passkey)})
         }
@@ -98,10 +96,11 @@ PageStack {
     Page {
         id: mainPage
         title: i18n.tr("Bluetooth")
+        visible: true
+        anchors.fill: parent
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors.fill: parent
 
             ListItem.Standard {
                 text: i18n.tr ("Bluetooth")
@@ -121,12 +120,12 @@ PageStack {
                 enabled: backend.enabled
                 visible: connectedList.visible
             }
+
             ListView {
                 id: connectedList
                 width: parent.width
                 height: connectedHeader.height * count
 
-                enabled: backend.enabled
                 visible: backend.enabled && (count > 0)
 
                 model: backend.connectedHeadsets
@@ -145,7 +144,6 @@ PageStack {
             ListItem.Standard {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr ("Connect a different headset:") : i18n.tr ("Connect a headset:")
-
                 enabled: backend.enabled
             }
             ListView {
@@ -153,7 +151,6 @@ PageStack {
                 width: parent.width
                 height: disconnectedHeader.height * count
 
-                enabled: backend.enabled
                 visible: backend.enabled && (count > 0)
 
                 model: backend.disconnectedHeadsets
@@ -168,7 +165,6 @@ PageStack {
             ListItem.Standard {
                 id: disconnectedNone
                 text: i18n.tr("None detected")
-                enabled: backend.enabled
                 visible: !disconnectedList.visible
             }
         }
@@ -176,12 +172,11 @@ PageStack {
 
     Page {
         id: connectedHeadsetPage
-        visible: false
         title: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
+        visible: false
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors.fill: parent
 
             ListItem.SingleValue {
                 text: i18n.tr("Name")
