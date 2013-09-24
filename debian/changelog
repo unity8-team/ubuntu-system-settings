@@ -1,3 +1,35 @@
+ubuntu-system-settings (0.1+13.10.20130924.1-0ubuntu1) saucy; urgency=low
+
+  [ Ted Gould ]
+  * Add Wifi Panel.
+
+  [ Iain Lane ]
+  * [battery] Disable scrolling of the flickable while the slider is
+    being used. Display a % in the tooltip.
+
+  [ Michael Terry ]
+  * Hide the "Phone locking" options for now, since they likely won't be
+    functional for 13.10.
+
+  [ William Hua ]
+  * Security panel: use ItemSelector instead of deprecated
+    ValueSelector. (LP: #1223986)
+  * Switch the UI language whenever the display language is changed.
+
+  [ Alberto Mardegan ]
+  * Add Wifi Panel.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Change the background image selection screen so that it fits design
+    (as per bug #1221179) overlaying the new wallpapers with the assets.
+    Right now we're using temporary placeholder assets, still waiting on
+    design action. (LP: #1221179)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 369
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 24 Sep 2013 07:03:11 +0000
+
 ubuntu-system-settings (0.1+13.10.20130918.1-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
