@@ -259,14 +259,20 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Bluetooth")
-                // TODO: Update when changed externally
                 control: Switch {
                     id: btSwitch
-                    onCheckedChanged: bluetoothActionGroup.enabled.activate()
-                    Component.onCompleted:
-                        checked = bluetoothActionGroup.enabled.state
+                    // Cannot use onCheckedChanged as this triggers a loop
+                    onClicked: bluetoothActionGroup.enabled.activate()
                 }
                 visible: bluetoothActionGroup.visible
+                Component.onCompleted:
+                    clicked.connect(btSwitch.clicked)
+            }
+
+            Binding {
+                target: btSwitch
+                property: "checked"
+                value: bluetoothActionGroup.enabled.state
             }
 
             QDBusActionGroup {
@@ -283,12 +289,19 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("GPS")
                 control: Switch {
-                    // TODO: Update when changed externally
-                    onCheckedChanged: locationActionGroup.enabled.activate()
-                    Component.onCompleted:
-                        checked = locationActionGroup.enabled.state
+                    id: gpsSwitch
+                    onClicked: locationActionGroup.enabled.activate()
                 }
-                visible: locationActionGroup.enabled.state !== undefined
+                visible: showAllUI && // Hidden until the indicator works
+                         locationActionGroup.enabled.state !== undefined
+                Component.onCompleted:
+                    clicked.connect(gpsSwitch.clicked)
+            }
+
+            Binding {
+                target: gpsSwitch
+                property: "checked"
+                value: locationActionGroup.enabled.state
             }
 
             ListItem.Caption {
