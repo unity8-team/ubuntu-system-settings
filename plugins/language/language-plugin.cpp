@@ -24,6 +24,7 @@
 static QList<QLocale> *locales;
 static QHash<QLocale::Language, unsigned int> *languageIndices;
 static QStringList *localeNames;
+static QStringList *languageCodes;
 
 static bool
 compareLocales(const QLocale &locale0,
@@ -94,6 +95,19 @@ getLocaleNames()
     return localeNames;
 }
 
+static QStringList *
+getLanguageCodes()
+{
+    if (languageCodes == NULL) {
+        languageCodes = new QStringList;
+
+        for (QList<QLocale>::const_iterator i(getLocales()->begin()); i != getLocales()->end(); ++i)
+            *languageCodes += i->name().trimmed();
+    }
+
+    return languageCodes;
+}
+
 LanguagePlugin::LanguagePlugin(QObject *parent) : QObject(parent)
 {
 }
@@ -102,6 +116,12 @@ const QStringList &
 LanguagePlugin::languages() const
 {
     return *getLocaleNames();
+}
+
+const QStringList &
+LanguagePlugin::languageCodes() const
+{
+    return *getLanguageCodes();
 }
 
 int
