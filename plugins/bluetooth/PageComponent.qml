@@ -43,18 +43,18 @@ ItemPage {
     Connections {
         target: backend.agent
         onPasskeyConfirmationNeeded: {
-            var popup = PopupUtils.open (confirmPasskeyDialog, root, {passkey: passkey, name: device.name})
-            popup.canceled.connect (function() {target.confirmPasskey (tag, false)})
-            popup.confirmed.connect (function() {target.confirmPasskey (tag, true)})
+            var popup = PopupUtils.open(confirmPasskeyDialog, root, {passkey: passkey, name: device.name})
+            popup.canceled.connect(function() {target.confirmPasskey(tag, false)})
+            popup.confirmed.connect(function() {target.confirmPasskey(tag, true)})
         }
         onPasskeyNeeded: {
-            var popup = PopupUtils.open (providePasskeyDialog, root, {name: device.name})
-            popup.canceled.connect (function() {target.providePasskey (tag, false, 0)})
-            popup.provided.connect (function(passkey) {target.providePasskey (tag, true, passkey)})
+            var popup = PopupUtils.open(providePasskeyDialog, root, {name: device.name})
+            popup.canceled.connect(function() {target.providePasskey(tag, false, 0)})
+            popup.provided.connect(function(passkey) {target.providePasskey(tag, true, passkey)})
         }
     }
 
-    function getDisplayName (connection, displayName) {
+    function getDisplayName(connection, displayName) {
       if (connection == Device.Connecting)
         return i18n.tr("%1 (Connecting…)").arg(displayName);
       else if (connection == Device.Disconnecting)
@@ -63,33 +63,33 @@ ItemPage {
         return displayName;
     }
 
-    function getTypeString (type) {
+    function getTypeString(type) {
         switch (type) {
-            case Device.Computer:   return i18n.tr("Computer");
-            case Device.Phone:      return i18n.tr("Phone");
-            case Device.Modem:      return i18n.tr("Modem");
-            case Device.Network:    return i18n.tr("Network");
-            case Device.Headset:    return i18n.tr("Headset");
-            case Device.Headphones: return i18n.tr("Headphones");
-            case Device.Video:      return i18n.tr("Video");
-            case Device.OtherAudio: return i18n.tr("Other Audio");
-            case Device.Joypad:     return i18n.tr("Joypad");
-            case Device.Keyboard:   return i18n.tr("Keyboard");
-            case Device.Tablet:     return i18n.tr("Tablet");
-            case Device.Mouse:      return i18n.tr("Mouse");
-            case Device.Printer:    return i18n.tr("Printer");
-            case Device.Camera:     return i18n.tr("Camera");
-            default:                return i18n.tr("Other");
+        case Device.Computer:   return i18n.tr("Computer");
+        case Device.Phone:      return i18n.tr("Phone");
+        case Device.Modem:      return i18n.tr("Modem");
+        case Device.Network:    return i18n.tr("Network");
+        case Device.Headset:    return i18n.tr("Headset");
+        case Device.Headphones: return i18n.tr("Headphones");
+        case Device.Video:      return i18n.tr("Video");
+        case Device.OtherAudio: return i18n.tr("Other Audio");
+        case Device.Joypad:     return i18n.tr("Joypad");
+        case Device.Keyboard:   return i18n.tr("Keyboard");
+        case Device.Tablet:     return i18n.tr("Tablet");
+        case Device.Mouse:      return i18n.tr("Mouse");
+        case Device.Printer:    return i18n.tr("Printer");
+        case Device.Camera:     return i18n.tr("Camera");
+        default:                return i18n.tr("Other");
         }
     }
 
-    function getSignalString (strength) {
+    function getSignalString(strength) {
         switch (strength) {
-            case Device.Excellent: return i18n.tr("Excellent");
-            case Device.Good:      return i18n.tr("Good");
-            case Device.Fair:      return i18n.tr("Fair");
-            case Device.Poor:      return i18n.tr("Poor");
-            default:               return i18n.tr("None");
+        case Device.Excellent: return i18n.tr("Excellent");
+        case Device.Good:      return i18n.tr("Good");
+        case Device.Fair:      return i18n.tr("Fair");
+        case Device.Poor:      return i18n.tr("Poor");
+        default:               return i18n.tr("None");
         }
     }
 
@@ -103,7 +103,7 @@ ItemPage {
             anchors.fill: parent
 
             ListItem.Standard {
-                text: i18n.tr ("Bluetooth")
+                text: i18n.tr("Bluetooth")
                 control: Switch {
                     id: enabledControl
                     checked: backend.enabled
@@ -131,9 +131,9 @@ ItemPage {
                 model: backend.connectedHeadsets
                 delegate: ListItem.Standard {
                     icon: iconName
-                    text: getDisplayName (connection, displayName)
+                    text: getDisplayName(connection, displayName)
                     onClicked: {
-                        backend.setSelectedDevice (addressName);
+                        backend.setSelectedDevice(addressName);
                         pageStack.push(connectedHeadsetPage);
                     }
                 }
@@ -143,7 +143,7 @@ ItemPage {
 
             ListItem.Standard {
                 id: disconnectedHeader
-                text: connectedList.visible ? i18n.tr ("Connect a different headset:") : i18n.tr ("Connect a headset:")
+                text: connectedList.visible ? i18n.tr("Connect a different headset:") : i18n.tr("Connect a headset:")
                 enabled: backend.enabled
             }
             ListView {
@@ -156,9 +156,9 @@ ItemPage {
                 model: backend.disconnectedHeadsets
                 delegate: ListItem.Standard {
                     icon: iconName
-                    text: getDisplayName (connection, displayName)
+                    text: getDisplayName(connection, displayName)
                     onClicked: {
-                        backend.connectHeadset (addressName);
+                        backend.connectHeadset(addressName);
                     }
                 }
             }
@@ -184,18 +184,18 @@ ItemPage {
             }
             ListItem.SingleValue {
                 text: i18n.tr("Type")
-                value: getTypeString (backend.selectedDevice ? backend.selectedDevice.type : Device.OTHER)
+                value: getTypeString(backend.selectedDevice ? backend.selectedDevice.type : Device.OTHER)
             }
             ListItem.SingleValue {
                 text: i18n.tr("Signal Strength")
-                value: getSignalString (backend.selectedDevice ? backend.selectedDevice.strength : Device.None)
+                value: getSignalString(backend.selectedDevice ? backend.selectedDevice.strength : Device.None)
             }
             ListItem.SingleControl {
                 control: Button {
                     text: i18n.tr("Disconnect")
                     width: parent.width - units.gu(8)
                     onClicked: {
-                        backend.disconnectHeadset ();
+                        backend.disconnectHeadset();
                         pageStack.pop();
                     }
                 }
