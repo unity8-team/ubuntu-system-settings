@@ -54,7 +54,10 @@ ItemPage {
         function recheckForUpdate() {
             infoMessage = "";
             infoSecondaryMessage = "";
-            var msg = CancelUpdate();
+            var msg = ""
+            // Only  if there is anything to cancel:
+            if (updateBackend.currentUpdateState !== UbuntuUpdatePanel.NoUpdate && updateBackend.currentUpdateState !== UbuntuUpdatePanel.CheckingError)
+                CancelUpdate();
             if(msg) {
                 infoMessage = TranslateFromBackend(msg);
                 currentUpdateState = UbuntuUpdatePanel.CheckingError;
