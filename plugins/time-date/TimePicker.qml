@@ -68,7 +68,7 @@ Dialog {
         text: i18n.tr("Time")
     }
     Row {
-        height: units.gu(24)
+        height: units.gu(18)
 
         Scroller {
             id: hourScroller
@@ -119,7 +119,7 @@ Dialog {
     }
 
     Row {
-        height: units.gu(24)
+        height: units.gu(18)
         Scroller {
             id: dayScroller
             anchors {
