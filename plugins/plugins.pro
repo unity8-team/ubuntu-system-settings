@@ -3,6 +3,7 @@ SUBDIRS = \
     about \
     background \
     battery \
+    bluetooth \
     flight-mode \
     orientation-lock \
     reset \

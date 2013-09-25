@@ -81,7 +81,7 @@ Item {
             top: parent.top
             right: parent.right
         }
-        height: units.gu(5)
+        height: units.gu(4)
 
         Label {
             id: label
@@ -127,7 +127,7 @@ Item {
         }
         highlight: Rectangle {
             width: parent.width
-            height: units.gu(6)
+            height: units.gu(5)
             gradient: UbuntuColors.orangeGradient
         }
         ListItems.Divider {
