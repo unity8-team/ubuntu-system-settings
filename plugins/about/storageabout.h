@@ -111,6 +111,8 @@ private:
     quint64 m_picturesSize;
     quint64 m_otherSize;
     quint64 m_homeSize;
+
+    GCancellable *m_cancellable;
 };
 
 #endif // STORAGEABOUT_H

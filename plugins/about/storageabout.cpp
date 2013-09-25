@@ -38,25 +38,30 @@ struct MeasureData {
     uint *finished;
     StorageAbout *object;
     quint64 *size;
+    GCancellable *cancellable;
     MeasureData (uint *finished,
                  StorageAbout *object,
-                 quint64 *size):
+                 quint64 *size,
+                 GCancellable *cancellable):
         finished(finished),
         object(object),
-        size(size) {}
+        size(size),
+        cancellable(cancellable){}
 };
 
 static void measure_file(const char * filename,
                          GAsyncReadyCallback callback,
                          gpointer user_data)
 {
+    MeasureData *data = (MeasureData *) user_data;
+
     GFile *file = g_file_new_for_path (filename);
 
     g_file_measure_disk_usage_async (
                 file,
                 G_FILE_MEASURE_NONE,
                 G_PRIORITY_LOW,
-                NULL, /* cancellable */
+                data->cancellable, /* cancellable */
                 NULL, /* progress_callback */
                 NULL, /* progress_data */
                 callback,
@@ -73,10 +78,9 @@ static void measure_special_file(GUserDirectory directory,
 
 static void maybeEmit(MeasureData *data)
 {
-    // Cheesy method to determine if all the async requests have finished.
-    (*data->finished)++;
+    --(*data->finished);
 
-    if (*data->finished == 4) {
+    if (*data->finished == 0) {
         Q_EMIT (data->object->sizeReady());
         delete data->finished;
     }
@@ -105,8 +109,14 @@ static void measure_finished(GObject *source_object,
                 &err);
 
     if (err != NULL) {
-        qWarning() << "Measuring of" << g_file_get_path (file) << "failed:"
-                      << err->message;
+        if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+            delete data->finished;
+            g_object_unref (file);
+            return;
+        } else {
+            qWarning() << "Measuring of" << g_file_get_path (file)
+                       << "failed:" << err->message;
+        }
     }
 
     g_object_unref (file);
@@ -230,27 +240,36 @@ QString StorageAbout::formatSize(quint64 size) const
 void StorageAbout::populateSizes()
 {
     uint *finished = new uint(0);
+    m_cancellable = g_cancellable_new();
 
     measure_special_file(
                 G_USER_DIRECTORY_VIDEOS,
                 measure_finished,
-                new MeasureData(finished, this, &m_moviesSize));
+                new MeasureData(&++(*finished), this, &m_moviesSize,
+                                m_cancellable));
 
     measure_special_file(
                 G_USER_DIRECTORY_MUSIC,
                 measure_finished,
-                new MeasureData(finished, this, &m_audioSize));
+                new MeasureData(&++(*finished), this, &m_audioSize,
+                                m_cancellable));
 
     measure_special_file(
                 G_USER_DIRECTORY_PICTURES,
                 measure_finished,
-                new MeasureData(finished, this, &m_picturesSize));
+                new MeasureData(&++(*finished), this, &m_picturesSize,
+                                m_cancellable));
 
     measure_file(
                 g_get_home_dir(),
                 measure_finished,
-                new MeasureData(finished, this, &m_homeSize));
+                new MeasureData(&++(*finished), this, &m_homeSize,
+                                m_cancellable));
 }
 
 StorageAbout::~StorageAbout() {
+    if (m_cancellable) {
+        g_cancellable_cancel(m_cancellable);
+        g_object_unref(m_cancellable);
+    }
 }
