@@ -1,3 +1,34 @@
+ubuntu-system-settings (0.1+13.10.20130925.1-0ubuntu1) saucy; urgency=low
+
+  [ Ted Gould ]
+  * Ask Upstart App Launch to make settings single instance. (LP:
+    #1227111)
+
+  [ Iain Lane ]
+  * Reduce the height of the time/date pickers as they weren't fitting
+    on mobile devices. (LP: #1228409). (LP: #1228409)
+  * Use QMenuModel to hook up toggles for bluetooth and gps/location
+    enabled/disabled in the battery and security-privacy panels.
+    Location is hidden because the backend doesn't work yet.
+
+  [ Lars Uebernickel ]
+  * Fix the brightness slider in the battery panel.
+
+  [ Charles Kerr ]
+  * Add the bluetooth plugin.
+
+  [ Ken VanDine ]
+  * background: Use singleSelect on the transfer request and specify a
+    persistent Content::Store for the transfer .
+
+  [ Didier Roche ]
+  * Only Cancel if there is anything to cancel. (LP: #1215946)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 378
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 25 Sep 2013 11:12:19 +0000
+
 ubuntu-system-settings (0.1+13.10.20130924.1-0ubuntu1) saucy; urgency=low
 
   [ Ted Gould ]
