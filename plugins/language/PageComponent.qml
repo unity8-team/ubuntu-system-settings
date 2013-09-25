@@ -59,9 +59,13 @@ ItemPage {
                 onClicked: PopupUtils.open(displayLanguage)
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.SingleValue {
+                visible: showAllUI
+
                 text: i18n.tr("Keyboard layouts")
                 value: plugin.keyboardLayoutsModel.subset.length == 1 ?
                        plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
@@ -71,9 +75,13 @@ ItemPage {
                 onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.SingleValue {
+                visible: showAllUI
+
                 text: i18n.tr("Spell checking")
                 value: plugin.spellCheckingModel.subset.length == 1 ?
                        plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]][0] :
@@ -84,6 +92,8 @@ ItemPage {
             }
 
             ListItem.Standard {
+                visible: showAllUI
+
                 text: i18n.tr("Auto completion")
 
                 control: Switch {
@@ -94,6 +104,8 @@ ItemPage {
             }
 
             ListItem.Standard {
+                visible: showAllUI
+
                 text: i18n.tr("Predictive text")
 
                 control: Switch {
@@ -103,9 +115,13 @@ ItemPage {
                 }
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.Standard {
+                visible: showAllUI
+
                 text: i18n.tr("Auto capitalization")
 
                 control: Switch {
@@ -116,12 +132,18 @@ ItemPage {
             }
 
             ListItem.Caption {
+                visible: showAllUI
+
                 text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.Standard {
+                visible: showAllUI
+
                 text: i18n.tr("Key press feedback")
 
                 control: Switch {
@@ -132,6 +154,8 @@ ItemPage {
             }
 
             ListItem.Caption {
+                visible: showAllUI
+
                 text: i18n.tr("Vibrate or emit a sound whenever a key is pressed.")
             }
         }
