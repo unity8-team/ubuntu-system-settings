@@ -129,7 +129,8 @@ static void measure_finished(GObject *source_object,
 StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
-    m_clickFilterProxy(&m_clickModel)
+    m_clickFilterProxy(&m_clickModel),
+    m_cancellable(NULL)
 {
 }
 
