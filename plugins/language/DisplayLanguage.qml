@@ -44,26 +44,34 @@ SheetBase {
         id: plugin
     }
 
-    Flickable {
-        clip: true
+    Loader {
+        id: languageLoader
+
+        asynchronous: true
 
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: divider.top
 
-        contentHeight: contentItem.childrenRect.height
+        sourceComponent: Component {
+            Flickable {
+                clip: true
 
-        ListItem.ItemSelector {
-            id: languageList
+                contentHeight: contentItem.childrenRect.height
 
-            expanded: true
-            model: plugin.languages
-            selectedIndex: plugin.currentLanguage
+                ListItem.ItemSelector {
+                    id: languageList
 
-            onSelectedIndexChanged: {
-                i18n.language = plugin.languageCodes[selectedIndex]
-                i18n.domain = i18n.domain
+                    expanded: true
+                    model: plugin.languages
+                    selectedIndex: plugin.currentLanguage
+
+                    onSelectedIndexChanged: {
+                        i18n.language = plugin.languageCodes[selectedIndex]
+                        i18n.domain = i18n.domain
+                    }
+                }
             }
         }
     }
