@@ -39,8 +39,7 @@ namespace
  * agent, because when this method gets called it has
  * already been unregistered.
  */
-void
-Agent::Release()
+void Agent::Release()
 {
     Q_EMIT(onPairingDone());
 }
@@ -63,8 +62,7 @@ Agent::Release()
  * Possible errors: org.bluez.Error.Rejected
  *                  org.bluez.Error.Canceled
  */
-void
-Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
+void Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
 {
     auto device = m_devices.getDeviceFromPath(objectPath.path());
     if (device) {
@@ -88,8 +86,7 @@ Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
  * @param tag: the tag sent in the emitted Agent::passkeyConfirmationNeeded signal
  * @param confirmed: true if user confirmed the passkey, false if they canceled
  */
-void
-Agent::confirmPasskey(uint tag, bool confirmed)
+void Agent::confirmPasskey(uint tag, bool confirmed)
 {
     if (m_delayedReplies.contains(tag)) {
         QDBusMessage message = m_delayedReplies[tag];
@@ -116,8 +113,7 @@ Agent::confirmPasskey(uint tag, bool confirmed)
  * Possible errors: org.bluez.Error.Rejected
  *                  org.bluez.Error.Canceled
  */
-unsigned int
-Agent::RequestPasskey(const QDBusObjectPath &objectPath)
+unsigned int Agent::RequestPasskey(const QDBusObjectPath &objectPath)
 {
     auto device = m_devices.getDeviceFromPath(objectPath.path());
     if (device) {
@@ -144,8 +140,7 @@ Agent::RequestPasskey(const QDBusObjectPath &objectPath)
  * @param provided: true if user provided the passkey, false if they canceled
  * @param passkey: the passkey. Only valid if provided is true.
  */
-void
-Agent::providePasskey(uint tag, bool provided, uint passkey)
+void Agent::providePasskey(uint tag, bool provided, uint passkey)
 {
     if (m_delayedReplies.contains(tag)) {
         if (provided)
@@ -161,8 +156,7 @@ Agent::providePasskey(uint tag, bool provided, uint passkey)
 ****
 ***/
 
-void
-Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, uchar entered)
+void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, uchar entered)
 {
     Q_UNUSED(objectPath);
     Q_UNUSED(passkey);
@@ -171,14 +165,12 @@ Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, uchar ent
     // unimplemented -- unneeded for headsets
 }
 
-void
-Agent::Cancel()
+void Agent::Cancel()
 {
     // unimplemented -- companion function for DisplayPasskey
 }
 
-QString
-Agent::RequestPinCode(const QDBusObjectPath &device)
+QString Agent::RequestPinCode(const QDBusObjectPath &device)
 {
     /* TODO: I'm not able to trigger this with any bluetooth devices and
        Agent capabilities -- Everything triggers ConfirmPasskey or RequestPasskey.

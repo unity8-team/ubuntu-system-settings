@@ -151,8 +151,7 @@ RfKillSwitch::~RfKillSwitch()
     delete d_ptr;
 }
 
-void
-RfKillSwitch::trySetBlocked(bool b)
+void RfKillSwitch::trySetBlocked(bool b)
 {
     Q_D (RfKillSwitch);
 
