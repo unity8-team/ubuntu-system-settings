@@ -35,15 +35,15 @@
 #include <hybris/properties/properties.h>
 
 struct MeasureData {
-    uint *finished;
+    uint *running;
     StorageAbout *object;
     quint64 *size;
     GCancellable *cancellable;
-    MeasureData (uint *finished,
+    MeasureData (uint *running,
                  StorageAbout *object,
                  quint64 *size,
                  GCancellable *cancellable):
-        finished(finished),
+        running(running),
         object(object),
         size(size),
         cancellable(cancellable){}
@@ -78,11 +78,11 @@ static void measure_special_file(GUserDirectory directory,
 
 static void maybeEmit(MeasureData *data)
 {
-    --(*data->finished);
+    --(*data->running);
 
-    if (*data->finished == 0) {
+    if (*data->running == 0) {
         Q_EMIT (data->object->sizeReady());
-        delete data->finished;
+        delete data->running;
     }
 
     delete data;
@@ -110,7 +110,8 @@ static void measure_finished(GObject *source_object,
 
     if (err != NULL) {
         if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-            delete data->finished;
+            delete data->running;
+            delete data;
             g_object_unref (file);
             g_error_free (err);
             return;
@@ -234,38 +235,42 @@ QString StorageAbout::formatSize(quint64 size) const
 {
     guint64 g_size = size;
 
-    const char * formatted_size = g_format_size (g_size);
+    gchar * formatted_size = g_format_size (g_size);
+    QString q_formatted_size = QString::fromLocal8Bit(formatted_size);
+    g_free (formatted_size);
 
-    return QString::fromLocal8Bit(formatted_size);
+    return q_formatted_size;
 }
 
 void StorageAbout::populateSizes()
 {
-    uint *finished = new uint(0);
-    m_cancellable = g_cancellable_new();
+    uint *running = new uint(0);
+
+    if (!m_cancellable)
+        m_cancellable = g_cancellable_new();
 
     measure_special_file(
                 G_USER_DIRECTORY_VIDEOS,
                 measure_finished,
-                new MeasureData(&++(*finished), this, &m_moviesSize,
+                new MeasureData(&++(*running), this, &m_moviesSize,
                                 m_cancellable));
 
     measure_special_file(
                 G_USER_DIRECTORY_MUSIC,
                 measure_finished,
-                new MeasureData(&++(*finished), this, &m_audioSize,
+                new MeasureData(&++(*running), this, &m_audioSize,
                                 m_cancellable));
 
     measure_special_file(
                 G_USER_DIRECTORY_PICTURES,
                 measure_finished,
-                new MeasureData(&++(*finished), this, &m_picturesSize,
+                new MeasureData(&++(*running), this, &m_picturesSize,
                                 m_cancellable));
 
     measure_file(
                 g_get_home_dir(),
                 measure_finished,
-                new MeasureData(&++(*finished), this, &m_homeSize,
+                new MeasureData(&++(*running), this, &m_homeSize,
                                 m_cancellable));
 }
 
