@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-19 13:49+0300\n"
+"POT-Creation-Date: 2013-09-22 21:53-0500\n"
 "PO-Revision-Date: 2013-07-05 06:40+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-20 06:03+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2013-09-25 05:54+0000\n"
+"X-Generator: Launchpad (build 16771)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -138,15 +138,15 @@ msgstr ""
 msgid "Welcome screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:116
+#: ../plugins/background/MainPage.qml:126
 msgid "Home screen"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:196
+#: ../plugins/background/MainPage.qml:206
 msgid "Same background for both"
 msgstr ""
 
-#: ../plugins/background/MainPage.qml:197
+#: ../plugins/background/MainPage.qml:207
 msgid "Different background for each"
 msgstr ""
 
@@ -237,7 +237,9 @@ msgstr[1] ""
 msgid "Wi-Fi"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:244 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:244
+#: ../plugins/bluetooth/PageComponent.qml:100
+#: ../plugins/bluetooth/PageComponent.qml:107 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr ""
 
@@ -265,6 +267,167 @@ msgstr ""
 
 #: ../plugins/battery/SleepValues.qml:102
 msgid "Phone won’t sleep during calls or video playback."
+msgstr ""
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr ""
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:36
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr ""
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:48
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
+#: ../plugins/language/DisplayLanguage.qml:89
+#: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/reset/EraseEverything.qml:36
+#: ../plugins/reset/ResetAllSettings.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
+#: ../plugins/security-privacy/LockSecurity.qml:310
+#: ../plugins/time-date/TimePicker.qml:180
+msgid "Cancel"
+msgstr ""
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:56
+msgid "Confirm PIN"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:61
+#, qt-format
+msgid "%1 (Connecting…)"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:63
+#, qt-format
+msgid "%1 (Disconnecting…)"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:70
+msgid "Computer"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:71
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
+msgid "Phone"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:72
+msgid "Modem"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:73 ../src/qml/MainWindow.qml:90
+msgid "Network"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:74
+msgid "Headset"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:75
+msgid "Headphones"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:76
+msgid "Video"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:77
+msgid "Other Audio"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:78
+msgid "Joypad"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:79
+msgid "Keyboard"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:80
+msgid "Tablet"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:81
+msgid "Mouse"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:82
+msgid "Printer"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:83
+msgid "Camera"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:84
+msgid "Other"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:90
+msgid "Excellent"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:91
+msgid "Good"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:92
+msgid "Fair"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:93
+msgid "Poor"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:94
+#: ../plugins/bluetooth/PageComponent.qml:180
+#: ../plugins/bluetooth/PageComponent.qml:188
+#: ../plugins/security-privacy/PhoneLocking.qml:40
+msgid "None"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:119
+msgid "Connected headset:"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:147
+msgid "Connect a different headset:"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:147
+msgid "Connect a headset:"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:170
+msgid "None detected"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:187
+msgid "Name"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:191
+msgid "Type"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:195
+msgid "Signal Strength"
+msgstr ""
+
+#: ../plugins/bluetooth/PageComponent.qml:200
+msgid "Disconnect"
+msgstr ""
+
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr ""
+
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
+msgid "Pair"
 msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
@@ -324,28 +487,18 @@ msgstr ""
 msgid "Data usage statistics"
 msgstr ""
 
-#: ../plugins/language/DisplayLanguage.qml:35
-#: ../plugins/language/PageComponent.qml:53
+#: ../plugins/language/DisplayLanguage.qml:34
+#: ../plugins/language/PageComponent.qml:55
 msgid "Display language"
 msgstr ""
 
-#: ../plugins/language/DisplayLanguage.qml:82
-#: ../plugins/phone/CallForwarding.qml:113
-#: ../plugins/reset/EraseEverything.qml:36
-#: ../plugins/reset/ResetAllSettings.qml:36
-#: ../plugins/reset/ResetLauncherHome.qml:40
-#: ../plugins/security-privacy/LockSecurity.qml:310
-#: ../plugins/time-date/TimePicker.qml:180
-msgid "Cancel"
-msgstr ""
-
-#: ../plugins/language/DisplayLanguage.qml:98
+#: ../plugins/language/DisplayLanguage.qml:109
 #: ../plugins/security-privacy/LockSecurity.qml:217
 msgid "Confirm"
 msgstr ""
 
 #: ../plugins/language/KeyboardLayouts.qml:29
-#: ../plugins/language/PageComponent.qml:62
+#: ../plugins/language/PageComponent.qml:64
 msgid "Keyboard layouts"
 msgstr ""
 
@@ -361,33 +514,33 @@ msgstr ""
 msgid "Language & Text"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:72
+#: ../plugins/language/PageComponent.qml:74
 #: ../plugins/language/SpellChecking.qml:29
 #: ../plugins/language/SpellChecking.qml:42
 msgid "Spell checking"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:80
+#: ../plugins/language/PageComponent.qml:82
 msgid "Auto correction"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:87
+#: ../plugins/language/PageComponent.qml:89
 msgid "Auto completion"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:96
+#: ../plugins/language/PageComponent.qml:98
 msgid "Auto capitalization"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:103
+#: ../plugins/language/PageComponent.qml:105
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:109
+#: ../plugins/language/PageComponent.qml:111
 msgid "Auto punctuation"
 msgstr ""
 
-#: ../plugins/language/PageComponent.qml:116
+#: ../plugins/language/PageComponent.qml:118
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
@@ -438,10 +591,6 @@ msgstr ""
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
-msgstr ""
-
-#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
-msgid "Phone"
 msgstr ""
 
 #: ../plugins/phone/PageComponent.qml:30
@@ -499,7 +648,7 @@ msgid "Reset launcher & home screen"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:29
-#: ../plugins/security-privacy/PageComponent.qml:113
+#: ../plugins/security-privacy/PageComponent.qml:114
 msgid "Dash search"
 msgstr ""
 
@@ -509,13 +658,13 @@ msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:51
-#: ../plugins/security-privacy/PageComponent.qml:116
+#: ../plugins/security-privacy/PageComponent.qml:117
 msgid "Phone only"
 msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:49
-#: ../plugins/security-privacy/PageComponent.qml:115
+#: ../plugins/security-privacy/PageComponent.qml:116
 msgid "Phone and Internet"
 msgstr ""
 
@@ -722,44 +871,40 @@ msgid_plural "%1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/security-privacy/PageComponent.qml:77
+#: ../plugins/security-privacy/PageComponent.qml:78
 msgid "SIM PIN"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:82
+#: ../plugins/security-privacy/PageComponent.qml:83
 msgid "Privacy:"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:85
+#: ../plugins/security-privacy/PageComponent.qml:86
 msgid "Stats on welcome screen"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:98
+#: ../plugins/security-privacy/PageComponent.qml:99
 msgid "Messages on welcome screen"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:121
+#: ../plugins/security-privacy/PageComponent.qml:122
 msgid "Location access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:127
+#: ../plugins/security-privacy/PageComponent.qml:128
 msgid "Other app access"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:131
+#: ../plugins/security-privacy/PageComponent.qml:132
 msgid "Diagnostics"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:134
+#: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Sent"
 msgstr ""
 
-#: ../plugins/security-privacy/PageComponent.qml:135
+#: ../plugins/security-privacy/PageComponent.qml:136
 msgid "Not sent"
-msgstr ""
-
-#: ../plugins/security-privacy/PhoneLocking.qml:40
-msgid "None"
 msgstr ""
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
@@ -1041,10 +1186,6 @@ msgstr ""
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
-
-#: ../src/qml/MainWindow.qml:90
-msgid "Network"
 msgstr ""
 
 #: ../src/qml/MainWindow.qml:95
