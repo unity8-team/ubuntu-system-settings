@@ -44,6 +44,10 @@ ItemPage {
                 drives.push(systemDrives[i])
             }
         }
+         // Sometimes drive types are "unknown"; just try / in that case
+        if (drives.length === 0) {
+            drives.push("/")
+        }
         return drives
     }
     property real diskSpace: {
