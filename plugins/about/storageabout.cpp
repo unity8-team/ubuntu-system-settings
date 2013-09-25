@@ -272,6 +272,6 @@ void StorageAbout::populateSizes()
 StorageAbout::~StorageAbout() {
     if (m_cancellable) {
         g_cancellable_cancel(m_cancellable);
-        g_object_unref(m_cancellable);
+        g_clear_object(&m_cancellable);
     }
 }
