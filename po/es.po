@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-22 21:53-0500\n"
-"PO-Revision-Date: 2013-09-22 15:03+0000\n"
+"PO-Revision-Date: 2013-09-25 11:14+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-25 05:55+0000\n"
+"X-Launchpad-Export-Date: 2013-09-26 05:56+0000\n"
 "X-Generator: Launchpad (build 16771)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -298,12 +298,12 @@ msgstr ""
 #: ../plugins/bluetooth/PageComponent.qml:61
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr ""
+msgstr "%1 (conectando…)"
 
 #: ../plugins/bluetooth/PageComponent.qml:63
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr ""
+msgstr "%1 (desconectando…)"
 
 #: ../plugins/bluetooth/PageComponent.qml:70
 msgid "Computer"
@@ -316,7 +316,7 @@ msgstr "Teléfono"
 
 #: ../plugins/bluetooth/PageComponent.qml:72
 msgid "Modem"
-msgstr ""
+msgstr "Módem"
 
 #: ../plugins/bluetooth/PageComponent.qml:73 ../src/qml/MainWindow.qml:90
 msgid "Network"
@@ -332,7 +332,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:76
 msgid "Video"
-msgstr ""
+msgstr "Vídeo"
 
 #: ../plugins/bluetooth/PageComponent.qml:77
 msgid "Other Audio"
@@ -344,31 +344,31 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:79
 msgid "Keyboard"
-msgstr ""
+msgstr "Teclado"
 
 #: ../plugins/bluetooth/PageComponent.qml:80
 msgid "Tablet"
-msgstr ""
+msgstr "Tableta"
 
 #: ../plugins/bluetooth/PageComponent.qml:81
 msgid "Mouse"
-msgstr ""
+msgstr "Ratón"
 
 #: ../plugins/bluetooth/PageComponent.qml:82
 msgid "Printer"
-msgstr ""
+msgstr "Impresora"
 
 #: ../plugins/bluetooth/PageComponent.qml:83
 msgid "Camera"
-msgstr ""
+msgstr "Cámara"
 
 #: ../plugins/bluetooth/PageComponent.qml:84
 msgid "Other"
-msgstr ""
+msgstr "Otro"
 
 #: ../plugins/bluetooth/PageComponent.qml:90
 msgid "Excellent"
-msgstr ""
+msgstr "Excelente"
 
 #: ../plugins/bluetooth/PageComponent.qml:91
 msgid "Good"
@@ -407,28 +407,28 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:187
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: ../plugins/bluetooth/PageComponent.qml:191
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: ../plugins/bluetooth/PageComponent.qml:195
 msgid "Signal Strength"
-msgstr ""
+msgstr "Intensidad de la señal"
 
 #: ../plugins/bluetooth/PageComponent.qml:200
 msgid "Disconnect"
-msgstr ""
+msgstr "Desconectar"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "PIN para «%1»"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "Emparejar"
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:74
