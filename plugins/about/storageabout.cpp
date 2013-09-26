@@ -303,7 +303,17 @@ QString StorageAbout::getDevicePath(const QString mount_point)
         g_list_free (mount_points);
     }
 
-    return m_mounts.value(mount_point);
+    GUnixMountEntry * g_mount_point =
+            g_unix_mount_at(mount_point.toLocal8Bit(), NULL);
+
+    const gchar * device_path = g_unix_mount_get_device_path(g_mount_point);
+
+    QString s_mount_point = QString::fromLocal8Bit(device_path);
+
+    g_unix_mount_free (g_mount_point);
+
+    //return m_mounts.value(mount_point);
+    return s_mount_point;
 }
 
 StorageAbout::~StorageAbout() {
