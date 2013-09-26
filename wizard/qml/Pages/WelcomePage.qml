@@ -41,27 +41,23 @@ LocalComponents.Page {
         }
 
         Column {
+            id: column
             spacing: units.gu(2)
 
             Label {
+                id: label
                 width: content.width
                 wrapMode: Text.WordWrap
                 fontSize: "large"
                 text: i18n.tr("Welcome to Ubuntu.\nLet’s get started.")
             }
 
-            Label {
-                width: content.width
-                wrapMode: Text.WordWrap
-                fontSize: "large"
-                text: i18n.tr("Select your language")
-            }
-
-            ListItem.ItemSelector {
+            OptionSelector {
                 id: languageList
+                text: i18n.tr("Select your language")
                 model: plugin.languages
                 selectedIndex: plugin.currentLanguage
-                containerHeight: units.gu(30)
+                containerHeight: content.height - label.height - column.spacing - units.gu(4)
             }
         }
     }
