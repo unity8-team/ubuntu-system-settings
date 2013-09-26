@@ -310,6 +310,8 @@ QString StorageAbout::getDevicePath(const QString mount_point)
 
     QString s_mount_point = QString::fromLocal8Bit(device_path);
 
+    qDebug() << mount_point << "=" << s_mount_point;
+
     g_unix_mount_free (g_mount_point);
 
     //return m_mounts.value(mount_point);
