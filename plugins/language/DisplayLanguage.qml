@@ -70,20 +70,20 @@ SheetBase {
                 anchors.verticalCenter: parent.verticalCenter
             }
 
-            Image {
+            Rectangle {
                 id: checkMark
 
-                /* Temporary until ItemSelector works again. */
-                source: "/usr/lib/arm-linux-gnueabihf/qt5/qml/Ubuntu/Components/artwork/tick@30.png"
+                color: Theme.palette.normal.baseText
 
-                opacity: index == languageList.currentIndex ? 1.0 : 0.0
-
-                width: units.gu(2)
-                height: units.gu(2)
+                radius: width / 2.0
+                width: units.gu(1)
+                height: units.gu(1)
 
                 anchors.right: parent.right
                 anchors.rightMargin: units.gu(2)
                 anchors.verticalCenter: parent.verticalCenter
+
+                visible: index == languageList.currentIndex
             }
 
             onClicked: {
