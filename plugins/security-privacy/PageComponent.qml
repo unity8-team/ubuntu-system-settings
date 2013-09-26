@@ -79,6 +79,7 @@ ItemPage {
                 text: i18n.tr("SIM PIN")
                 value: "Off"
                 progression: true
+                visible: showAllUI
             }
             ListItem.Standard {
                 text: i18n.tr("Privacy:")
@@ -140,6 +141,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Other app access")
                 progression: true
+                visible: showAllUI
             }
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")

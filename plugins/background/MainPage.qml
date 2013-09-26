@@ -77,18 +77,9 @@ ItemPage {
          }
 
         onClicked: {
-            var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                    ContentHub.defaultSourceForType(ContentType.Pictures));
-            if (transfer != null)
-            {
-                transfer.selectionType = ContentTransfer.Single;
-                var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-                console.log("Store is: " + store.uri);
-                transfer.setStore(store);
-                activeTransfer = transfer;
-                activeTransfer.start();
-            }
-
+            activeTransfer = ContentHub.importContent(ContentType.Pictures,
+                                                      ContentHub.defaultSourceForType(ContentType.Pictures));
+            activeTransfer.start();
         }
 
         Component.onCompleted: updateImage(testWelcomeImage,
@@ -112,17 +103,9 @@ ItemPage {
                                            homeImage)
 
         onClicked: {
-            var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                    ContentHub.defaultSourceForType(ContentType.Pictures));
-            if (transfer != null)
-            {
-                transfer.selectionType = ContentTransfer.Single;
-                var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-                console.log("Store is: " + store.uri);
-                transfer.setStore(store);
-                activeTransfer = transfer;
-                activeTransfer.start();
-            }
+            activeTransfer = ContentHub.importContent(ContentType.Pictures,
+                                                      ContentHub.defaultSourceForType(ContentType.Pictures));
+            activeTransfer.start();
         }
 
         OverlayImage {

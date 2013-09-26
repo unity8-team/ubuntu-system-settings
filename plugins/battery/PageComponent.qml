@@ -83,6 +83,7 @@ ItemPage {
         }
         onRemainingCapacityChanged: {
             if(batteryInfo.batteryCount > 0)
+                /* TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery */
                 chargingLevel.value = i18n.tr("%1 %").arg((batteryInfo.remainingCapacity(0)/batteryInfo.maximumCapacity(0)*100).toFixed(0))
         }
 
@@ -256,6 +257,7 @@ ItemPage {
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SleepValues.qml"),
                                { title: text, lockOnSuspend: lockOnSuspend })
+                visible: showAllUI // TODO: re-enable once bug #1230345 is resolved
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")

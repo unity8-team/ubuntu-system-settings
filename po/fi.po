@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-22 21:53-0500\n"
-"PO-Revision-Date: 2013-09-13 06:51+0000\n"
+"PO-Revision-Date: 2013-09-25 10:34+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-25 05:54+0000\n"
+"X-Launchpad-Export-Date: 2013-09-26 05:56+0000\n"
 "X-Generator: Launchpad (build 16771)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -274,12 +274,12 @@ msgstr "Puhelin ei sammuta näyttöään puheluiden tai videotoiston aikana."
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr ""
+msgstr "Bluetooth-parituspyyntö"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:36
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "Varmista, että laitteen \"%1\" PIN vastaa tätä"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:48
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
@@ -295,21 +295,21 @@ msgstr "Peru"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:56
 msgid "Confirm PIN"
-msgstr ""
+msgstr "Vahvista PIN"
 
 #: ../plugins/bluetooth/PageComponent.qml:61
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr ""
+msgstr "%1 (Yhdistetään…)"
 
 #: ../plugins/bluetooth/PageComponent.qml:63
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr ""
+msgstr "%1 (Katkaistaan yhteyttä…)"
 
 #: ../plugins/bluetooth/PageComponent.qml:70
 msgid "Computer"
-msgstr ""
+msgstr "Tietokone"
 
 #: ../plugins/bluetooth/PageComponent.qml:71
 #: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
@@ -318,7 +318,7 @@ msgstr "Puhelin"
 
 #: ../plugins/bluetooth/PageComponent.qml:72
 msgid "Modem"
-msgstr ""
+msgstr "Modeemi"
 
 #: ../plugins/bluetooth/PageComponent.qml:73 ../src/qml/MainWindow.qml:90
 msgid "Network"
@@ -326,63 +326,63 @@ msgstr "Verkko"
 
 #: ../plugins/bluetooth/PageComponent.qml:74
 msgid "Headset"
-msgstr ""
+msgstr "Kuulokemikrofoni"
 
 #: ../plugins/bluetooth/PageComponent.qml:75
 msgid "Headphones"
-msgstr ""
+msgstr "Kuulokkeet"
 
 #: ../plugins/bluetooth/PageComponent.qml:76
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: ../plugins/bluetooth/PageComponent.qml:77
 msgid "Other Audio"
-msgstr ""
+msgstr "Muu ääni"
 
 #: ../plugins/bluetooth/PageComponent.qml:78
 msgid "Joypad"
-msgstr ""
+msgstr "Peliohjain"
 
 #: ../plugins/bluetooth/PageComponent.qml:79
 msgid "Keyboard"
-msgstr ""
+msgstr "Näppäimistö"
 
 #: ../plugins/bluetooth/PageComponent.qml:80
 msgid "Tablet"
-msgstr ""
+msgstr "Piirtopöytä"
 
 #: ../plugins/bluetooth/PageComponent.qml:81
 msgid "Mouse"
-msgstr ""
+msgstr "Hiiri"
 
 #: ../plugins/bluetooth/PageComponent.qml:82
 msgid "Printer"
-msgstr ""
+msgstr "Tulostin"
 
 #: ../plugins/bluetooth/PageComponent.qml:83
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: ../plugins/bluetooth/PageComponent.qml:84
 msgid "Other"
-msgstr ""
+msgstr "Muu"
 
 #: ../plugins/bluetooth/PageComponent.qml:90
 msgid "Excellent"
-msgstr ""
+msgstr "Erinomainen"
 
 #: ../plugins/bluetooth/PageComponent.qml:91
 msgid "Good"
-msgstr ""
+msgstr "Hyvä"
 
 #: ../plugins/bluetooth/PageComponent.qml:92
 msgid "Fair"
-msgstr ""
+msgstr "Kohtalainen"
 
 #: ../plugins/bluetooth/PageComponent.qml:93
 msgid "Poor"
-msgstr ""
+msgstr "Heikko"
 
 #: ../plugins/bluetooth/PageComponent.qml:94
 #: ../plugins/bluetooth/PageComponent.qml:180
@@ -393,35 +393,35 @@ msgstr "Ei mitään"
 
 #: ../plugins/bluetooth/PageComponent.qml:119
 msgid "Connected headset:"
-msgstr ""
+msgstr "Yhdistetty kuulokemikrofoni:"
 
 #: ../plugins/bluetooth/PageComponent.qml:147
 msgid "Connect a different headset:"
-msgstr ""
+msgstr "Yhdistä toinen kuulokemikrofoni:"
 
 #: ../plugins/bluetooth/PageComponent.qml:147
 msgid "Connect a headset:"
-msgstr ""
+msgstr "Yhdistä kuulokemikrofoni:"
 
 #: ../plugins/bluetooth/PageComponent.qml:170
 msgid "None detected"
-msgstr ""
+msgstr "Mitään ei havaittu"
 
 #: ../plugins/bluetooth/PageComponent.qml:187
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #: ../plugins/bluetooth/PageComponent.qml:191
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
 #: ../plugins/bluetooth/PageComponent.qml:195
 msgid "Signal Strength"
-msgstr ""
+msgstr "Signaalin voimakkuus"
 
 #: ../plugins/bluetooth/PageComponent.qml:200
 msgid "Disconnect"
-msgstr ""
+msgstr "Katkaise yhteys"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
 #, qt-format
@@ -430,7 +430,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "Parita"
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:74
@@ -768,7 +768,7 @@ msgstr "Vaihda avainlause"
 
 #: ../plugins/security-privacy/LockSecurity.qml:82
 msgid "Change"
-msgstr ""
+msgstr "Vaihda"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
