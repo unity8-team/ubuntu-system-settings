@@ -127,22 +127,6 @@ static void measure_finished(GObject *source_object,
     maybeEmit(data);
 }
 
-static void build_mount_point_map (gpointer data, gpointer user_data)
-{
-    GUnixMountPoint * mount_point = (GUnixMountPoint *) data;
-    QMap<QString, QString> *mount_point_map =
-            (QMap<QString, QString> *) user_data;
-
-    const char * s_mount_point =
-            g_unix_mount_point_get_mount_path (mount_point);
-    const char * s_device_path =
-            g_unix_mount_point_get_device_path (mount_point);
-
-    mount_point_map->insert(s_mount_point, s_device_path);
-
-    g_unix_mount_point_free (mount_point);
-}
-
 StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
@@ -294,27 +278,19 @@ void StorageAbout::populateSizes()
 
 QString StorageAbout::getDevicePath(const QString mount_point)
 {
-    if (m_mounts.isEmpty()) {
-        GList * mount_points = g_unix_mount_points_get(NULL);
-
-        g_list_foreach (mount_points, build_mount_point_map,
-                        &m_mounts);
-
-        g_list_free (mount_points);
-    }
-
     GUnixMountEntry * g_mount_point =
             g_unix_mount_at(mount_point.toLocal8Bit(), NULL);
 
-    const gchar * device_path = g_unix_mount_get_device_path(g_mount_point);
+    QString s_mount_point;
 
-    QString s_mount_point = QString::fromLocal8Bit(device_path);
-
-    qDebug() << mount_point << "=" << s_mount_point;
+    if (g_mount_point) {
+        const gchar * device_path =
+                g_unix_mount_get_device_path(g_mount_point);
+        s_mount_point = QString::fromLocal8Bit(device_path);
+    }
 
     g_unix_mount_free (g_mount_point);
 
-    //return m_mounts.value(mount_point);
     return s_mount_point;
 }
 

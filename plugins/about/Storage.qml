@@ -44,10 +44,10 @@ ItemPage {
                     StorageInfo.InternalDrive ||
                 storageInfo.driveType(drive) ===
                     StorageInfo.RemovableDrive) &&
-                paths.indexOf(path) == -1) {
+                paths.indexOf(path) == -1 && // Haven't seen this device before
+                path !== "") { // Has a mount point
                 drives.push(drive)
-                if (path !== "")
-                    paths.push(path)
+                paths.push(path)
             }
         }
         return drives
