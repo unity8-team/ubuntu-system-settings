@@ -95,6 +95,7 @@ public:
     quint64 getHomeSize();
     Q_INVOKABLE QString formatSize (quint64 size) const;
     Q_INVOKABLE void populateSizes();
+    Q_INVOKABLE QString getDevicePath (const QString mount_point);
 
 Q_SIGNALS:
     void sortRoleChanged();
@@ -111,6 +112,8 @@ private:
     quint64 m_picturesSize;
     quint64 m_otherSize;
     quint64 m_homeSize;
+
+    QMap<QString, QString> m_mounts;
 
     GCancellable *m_cancellable;
 };

@@ -34,19 +34,21 @@ ItemPage {
 
     property bool sortByName: settingsId.storageSortByName
     property var allDrives: {
-        var drives = []
+        var drives = ["/"] // Always consider /
+        var paths = [backendInfo.getDevicePath("/")]
         var systemDrives = storageInfo.allLogicalDrives
         for (var i = 0; i < systemDrives.length; i++) {
-            if (storageInfo.driveType(systemDrives[i]) ===
+            var drive = systemDrives[i]
+            var path = backendInfo.getDevicePath(drive)
+            if ((storageInfo.driveType(drive) ===
                     StorageInfo.InternalDrive ||
-                storageInfo.driveType(systemDrives[i]) ===
-                    StorageInfo.RemovableDrive) {
-                drives.push(systemDrives[i])
+                storageInfo.driveType(drive) ===
+                    StorageInfo.RemovableDrive) &&
+                paths.indexOf(path) == -1) {
+                drives.push(drive)
+                if (path !== "")
+                    paths.push(path)
             }
-        }
-         // Sometimes drive types are "unknown"; just try / in that case
-        if (drives.length === 0) {
-            drives.push("/")
         }
         return drives
     }

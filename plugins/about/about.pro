@@ -33,7 +33,7 @@ INSTALLS += image
 TARGET = UbuntuStorageAboutPanel
 QT += qml quick
 CONFIG += qt plugin no_keywords link_pkgconfig
-PKGCONFIG += glib-2.0 gio-2.0
+PKGCONFIG += glib-2.0 gio-2.0 gio-unix-2.0
 
 #comment in the following line to enable traces
 #DEFINES += QT_NO_DEBUG_OUTPUT
