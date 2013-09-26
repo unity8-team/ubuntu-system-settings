@@ -56,6 +56,9 @@ ItemPage {
         }
     }
 
+
+    /* XXX: We hide the welcome screen parts for v1 - there's a lot of elements to hide */
+
     Label {
         id: welcomeLabel
 
@@ -66,10 +69,14 @@ ItemPage {
         }
 
         text: i18n.tr("Welcome screen")
+
+        visible: showAllUI
     }
 
     SwappableImage {
         id: welcomeImage
+
+        visible: showAllUI
 
         anchors {
             top: parent.top
@@ -105,7 +112,8 @@ ItemPage {
 
         anchors {
             top: parent.top
-            right: parent.right
+            right: (showAllUI) ? parent.right : undefined
+            horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
          }
 
         Component.onCompleted: updateImage(testHomeImage,
@@ -143,6 +151,38 @@ ItemPage {
         text: i18n.tr("Home screen")
     }
 
+    ListItem.ThinDivider {
+        id: topDivider
+
+        anchors {
+            topMargin: units.gu(2)
+            top: welcomeLabel.bottom
+        }
+
+        visible: showAllUI
+    }
+
+    OptionSelector {
+        id: optionSelector
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: topDivider.bottom
+            topMargin: units.gu(2)
+        }
+        width: parent.width - units.gu(4)
+        expanded: true
+
+        model: [i18n.tr("Same background for both"),
+            i18n.tr("Different background for each")]
+        onSelectedIndexChanged: {
+            systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
+        }
+
+        visible: showAllUI
+    }
+
+
+
     /* We don't have a good way of doing this after passing an invalid image to
        SwappableImage, so test the image is valid /before/ showing it and show a
        fallback if it isn't. */
@@ -169,16 +209,6 @@ ItemPage {
         visible: false
         onStatusChanged: updateImage(testHomeImage,
                                      homeImage)
-    }
-
-
-    ListItem.ThinDivider {
-        id: topDivider
-
-        anchors {
-            topMargin: units.gu(2)
-            top: welcomeLabel.bottom
-        }
     }
 
     function setUpImages() {
@@ -210,22 +240,6 @@ ItemPage {
         }
     }
 
-    OptionSelector {
-        id: optionSelector
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: topDivider.bottom
-            topMargin: units.gu(2)
-        }
-        width: parent.width - units.gu(4)
-        expanded: true
-
-        model: [i18n.tr("Same background for both"),
-            i18n.tr("Different background for each")]
-        onSelectedIndexChanged: {
-            systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
-        }
-    }
 
     property var activeTransfer
 
