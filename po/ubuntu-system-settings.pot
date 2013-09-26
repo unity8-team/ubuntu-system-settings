@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 11:07+0200\n"
+"POT-Creation-Date: 2013-09-26 13:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgid "Serial"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/about/Storage.qml:137 ../plugins/battery/PageComponent.qml:124
-#: ../plugins/battery/PageComponent.qml:131
+#: ../plugins/about/Storage.qml:137 ../plugins/battery/PageComponent.qml:125
+#: ../plugins/battery/PageComponent.qml:132
 #: ../plugins/cellular/PageComponent.qml:75
 msgid "N/A"
 msgstr ""
@@ -46,8 +46,8 @@ msgid "Last updated"
 msgstr ""
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:244
-#: ../plugins/battery/PageComponent.qml:252
+#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:253
 #: ../plugins/battery/SleepValues.qml:91
 #: ../plugins/system-update/Download.qml:53
 #: ../plugins/system-update/PageComponent.qml:335
@@ -194,35 +194,36 @@ msgstr ""
 msgid "Fully charged"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:86
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery/PageComponent.qml:87
 #, qt-format
 msgid "%1 %"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:123
+#: ../plugins/battery/PageComponent.qml:124
 msgid "Charge level"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:175
+#: ../plugins/battery/PageComponent.qml:176
 msgid "Ways to reduce battery use:"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:179
+#: ../plugins/battery/PageComponent.qml:180
 msgid "Display brightness"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:236
+#: ../plugins/battery/PageComponent.qml:237
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:236
+#: ../plugins/battery/PageComponent.qml:237
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:241
-#: ../plugins/battery/PageComponent.qml:249
+#: ../plugins/battery/PageComponent.qml:242
+#: ../plugins/battery/PageComponent.qml:250
 #: ../plugins/battery/SleepValues.qml:76 ../plugins/battery/SleepValues.qml:79
 #: ../plugins/battery/SleepValues.qml:82 ../plugins/battery/SleepValues.qml:85
 #: ../plugins/battery/SleepValues.qml:88
@@ -232,22 +233,22 @@ msgid_plural "After %1 minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/battery/PageComponent.qml:262
+#: ../plugins/battery/PageComponent.qml:263
 #: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:286
+#: ../plugins/battery/PageComponent.qml:287
 #: ../plugins/bluetooth/PageComponent.qml:98
 #: ../plugins/bluetooth/PageComponent.qml:106 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:315
+#: ../plugins/battery/PageComponent.qml:316
 msgid "GPS"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:333
+#: ../plugins/battery/PageComponent.qml:334
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
