@@ -45,8 +45,7 @@ DeviceModel::~DeviceModel()
     clearAdapter();
 }
 
-int
-DeviceModel::findRowFromAddress(const QString &address) const
+int DeviceModel::findRowFromAddress(const QString &address) const
 {
     for (int i=0, n=m_devices.size(); i<n; i++)
         if (m_devices[i]->getAddress() == address)
@@ -59,8 +58,7 @@ DeviceModel::findRowFromAddress(const QString &address) const
 ****
 ***/
 
-void
-DeviceModel::clearAdapter()
+void DeviceModel::clearAdapter()
 {
     if (m_bluezAdapter) {
 
@@ -84,8 +82,7 @@ DeviceModel::clearAdapter()
     }
 }
 
-void
-DeviceModel::setAdapterFromPath(const QString &path)
+void DeviceModel::setAdapterFromPath(const QString &path)
 {
     clearAdapter();
 
@@ -111,8 +108,7 @@ DeviceModel::setAdapterFromPath(const QString &path)
     }
 }
 
-void
-DeviceModel::updateDevices()
+void DeviceModel::updateDevices()
 {
     if (m_bluezAdapter && m_bluezAdapter->isValid()) {
         QDBusReply<QList<QDBusObjectPath> > reply = m_bluezAdapter->call("ListDevices");
@@ -126,8 +122,7 @@ DeviceModel::updateDevices()
 ****
 ***/
 
-void
-DeviceModel::addDevice(const QString &path)
+void DeviceModel::addDevice(const QString &path)
 {
     QSharedPointer<Device> device(new Device(path, m_dbus));
     if (device->isValid()) {
@@ -137,8 +132,7 @@ DeviceModel::addDevice(const QString &path)
     }
 }
 
-void
-DeviceModel::addDevice(QSharedPointer<Device> &device)
+void DeviceModel::addDevice(QSharedPointer<Device> &device)
 {
     int row = findRowFromAddress(device->getAddress());
 
@@ -153,8 +147,7 @@ DeviceModel::addDevice(QSharedPointer<Device> &device)
     }
 }
 
-void
-DeviceModel::removeRow(int row)
+void DeviceModel::removeRow(int row)
 {
     if (0<=row && row<m_devices.size()) {
         beginRemoveRows(QModelIndex(), row, row);
@@ -163,8 +156,7 @@ DeviceModel::removeRow(int row)
     }
 }
 
-void
-DeviceModel::emitRowChanged(int row)
+void DeviceModel::emitRowChanged(int row)
 {
     if (0<=row && row<m_devices.size()) {
         QModelIndex qmi = index(row, 0);
@@ -176,15 +168,13 @@ DeviceModel::emitRowChanged(int row)
 ****
 ***/
 
-void
-DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
+void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
 {
     addDevice(path.path());
 }
 
-void
-DeviceModel::slotDeviceFound(const QString                &address,
-                             const QMap<QString,QVariant> &properties)
+void DeviceModel::slotDeviceFound(const QString                &address,
+                                  const QMap<QString,QVariant> &properties)
 {
     Q_UNUSED(properties);
 
@@ -193,8 +183,7 @@ DeviceModel::slotDeviceFound(const QString                &address,
         m_bluezAdapter->asyncCall(QLatin1String("CreateDevice"), address);
 }
 
-void
-DeviceModel::slotDeviceRemoved(const QDBusObjectPath &path)
+void DeviceModel::slotDeviceRemoved(const QDBusObjectPath &path)
 {
     Q_UNUSED(path);
 
@@ -203,16 +192,14 @@ DeviceModel::slotDeviceRemoved(const QDBusObjectPath &path)
        indicates the device has disappeared altogether */
 }
 
-void
-DeviceModel::slotDeviceDisappeared(const QString &address)
+void DeviceModel::slotDeviceDisappeared(const QString &address)
 {
     const int row = findRowFromAddress(address);
     if ((row >= 0) && !m_devices[row]->isPaired())
         removeRow(row);
 }
 
-void
-DeviceModel::slotDeviceChanged()
+void DeviceModel::slotDeviceChanged()
 {
     const Device * device = qobject_cast<Device*>(sender());
 
@@ -227,8 +214,7 @@ DeviceModel::slotDeviceChanged()
         emitRowChanged(row);
 }
 
-QSharedPointer<Device>
-DeviceModel::getDeviceFromAddress(const QString &address)
+QSharedPointer<Device> DeviceModel::getDeviceFromAddress(const QString &address)
 {
     QSharedPointer<Device> device;
 
@@ -239,8 +225,7 @@ DeviceModel::getDeviceFromAddress(const QString &address)
     return device;
 }
 
-QSharedPointer<Device>
-DeviceModel::getDeviceFromPath(const QString &path)
+QSharedPointer<Device> DeviceModel::getDeviceFromPath(const QString &path)
 {
     for (auto device : m_devices)
         if (device->getPath() == path)
@@ -249,8 +234,7 @@ DeviceModel::getDeviceFromPath(const QString &path)
     return QSharedPointer<Device>();
 }
 
-void
-DeviceModel::pairDevice (const QString &address)
+void DeviceModel::pairDevice (const QString &address)
 {
     if (m_bluezAdapter) {
         m_bluezAdapter->asyncCall("CreatePairedDevice",
@@ -272,8 +256,7 @@ DeviceModel::rowCount(const QModelIndex &parent) const
     return m_devices.size();
 }
 
-QHash<int,QByteArray>
-DeviceModel::roleNames() const
+QHash<int,QByteArray> DeviceModel::roleNames() const
 {
     static QHash<int,QByteArray> names;
 
@@ -289,8 +272,7 @@ DeviceModel::roleNames() const
     return names;
 }
 
-QVariant
-DeviceModel::data(const QModelIndex &index, int role) const
+QVariant DeviceModel::data(const QModelIndex &index, int role) const
 {
     QVariant ret;
 
@@ -335,25 +317,22 @@ DeviceModel::data(const QModelIndex &index, int role) const
 ****
 ***/
 
-void
-DeviceFilter::filterOnType(Device::Type type)
+void DeviceFilter::filterOnType(Device::Type type)
 {
     m_type = type;
     m_typeEnabled = true;
     invalidateFilter();
 }
 
-void
-DeviceFilter::filterOnConnections(Device::Connections connections)
+void DeviceFilter::filterOnConnections(Device::Connections connections)
 {
     m_connections = connections;
     m_connectionsEnabled = true;
     invalidateFilter();
 }
 
-bool
-DeviceFilter::filterAcceptsRow(int sourceRow,
-                               const QModelIndex &sourceParent) const
+bool DeviceFilter::filterAcceptsRow(int sourceRow,
+                                    const QModelIndex &sourceParent) const
 {
     bool accepts = true;
     QModelIndex childIndex = sourceModel()->index(sourceRow, 0, sourceParent);
@@ -371,9 +350,8 @@ DeviceFilter::filterAcceptsRow(int sourceRow,
     return accepts;
 }
 
-bool
-DeviceFilter::lessThan(const QModelIndex &left,
-                       const QModelIndex &right) const
+bool DeviceFilter::lessThan(const QModelIndex &left,
+                            const QModelIndex &right) const
 {
   const QString a = sourceModel()->data(left, Qt::DisplayRole).value<QString>();
   const QString b = sourceModel()->data(right, Qt::DisplayRole).value<QString>();
