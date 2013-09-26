@@ -33,19 +33,21 @@ ItemPage {
         id: setTimeZoneSelector
         text: i18n.tr("Set the time zone:")
         model: [i18n.tr("Automatically"), i18n.tr("Manually")]
+        selectedIndex: 1 // TODO: get value once we have a working backend
         expanded: true
+        visible: showAllUI
     }
 
     ListItem.Standard {
         anchors.top: setTimeZoneSelector.bottom
         text: timeDatePanel.timeZone
         enabled: false
-        visible: setTimeZoneSelector.selectedIndex == 0 // Automatically
+        visible: showAllUI && setTimeZoneSelector.selectedIndex == 0 // Automatically
     }
 
     TextField {
         anchors {
-            top: setTimeZoneSelector.bottom
+            top: showAllUI ? setTimeZoneSelector.bottom : parent.top
             left: parent.left
             right: parent.right
             margins: units.gu(2)
@@ -82,10 +84,10 @@ ItemPage {
         }
     }
 
-    Text {
+    Label {
         anchors.centerIn: parent
         visible: setTimeZoneSelector.selectedIndex ==1 &&
                  locationsListView.count == 0
-        text: i18n.tr("No matching place")
+        text: (filterCities.length == 0) ? i18n.tr("Enter your current location.") : i18n.tr("No matching place")
     }
 }

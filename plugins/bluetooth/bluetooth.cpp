@@ -54,14 +54,12 @@ Bluetooth::Bluetooth(QObject *parent):
                      this, SLOT(onPairingDone()));
 }
 
-void
-Bluetooth::onKillSwitchChanged(bool blocked)
+void Bluetooth::onKillSwitchChanged(bool blocked)
 {
     Q_EMIT(enabledChanged(!blocked));
 }
 
-void
-Bluetooth::setSelectedDevice(const QString &address)
+void Bluetooth::setSelectedDevice(const QString &address)
 {
     if (!m_selectedDevice || (m_selectedDevice->getAddress() != address)) {
         m_selectedDevice = m_devices.getDeviceFromAddress(address);
@@ -73,8 +71,7 @@ Bluetooth::setSelectedDevice(const QString &address)
 ****
 ***/
 
-Device *
-Bluetooth::getSelectedDevice()
+Device * Bluetooth::getSelectedDevice()
 {
     if (m_selectedDevice) {
         auto ret = m_selectedDevice.data();
@@ -85,24 +82,21 @@ Bluetooth::getSelectedDevice()
     return nullptr;
 }
 
-Agent *
-Bluetooth::getAgent()
+Agent * Bluetooth::getAgent()
 {
     auto ret = &m_agent;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-QAbstractItemModel *
-Bluetooth::getConnectedHeadsets()
+QAbstractItemModel * Bluetooth::getConnectedHeadsets()
 {
     auto ret = &m_connectedHeadsets;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-QAbstractItemModel *
-Bluetooth::getDisconnectedHeadsets()
+QAbstractItemModel * Bluetooth::getDisconnectedHeadsets()
 {
     auto ret = &m_disconnectedHeadsets;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
@@ -114,15 +108,13 @@ Bluetooth::getDisconnectedHeadsets()
 ****
 ***/
 
-void
-Bluetooth::disconnectHeadset()
+void Bluetooth::disconnectHeadset()
 {
     if (m_selectedDevice)
         m_selectedDevice->disconnect(Device::HeadsetMode);
 }
 
-void
-Bluetooth::connectHeadset(const QString &address)
+void Bluetooth::connectHeadset(const QString &address)
 {
     const Device::ConnectionMode connMode = Device::HeadsetMode;
     auto device = m_devices.getDeviceFromAddress(address);
@@ -137,8 +129,7 @@ Bluetooth::connectHeadset(const QString &address)
     }
 }
 
-void
-Bluetooth::onPairingDone()
+void Bluetooth::onPairingDone()
 {
     QMapIterator<QString,Device::ConnectionMode> it(m_connectAfterPairing);
     while (it.hasNext()) {

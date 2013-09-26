@@ -50,18 +50,16 @@ Device::Device(const QString &path, QDBusConnection &bus)
 ****
 ***/
 
-void
-Device::slotPropertyChanged(const QString      &key,
-                            const QDBusVariant &value)
+void Device::slotPropertyChanged(const QString      &key,
+                                 const QDBusVariant &value)
 {
   updateProperty (key, value.variant());
 }
 
-void
-Device::initInterface(QSharedPointer<QDBusInterface> &setme,
-                      const QString                  &path,
-                      const QString                  &interfaceName,
-                      QDBusConnection                &bus)
+void Device::initInterface(QSharedPointer<QDBusInterface> &setme,
+                           const QString                  &path,
+                           const QString                  &interfaceName,
+                           QDBusConnection                &bus)
 {
     const QString service = "org.bluez";
 
@@ -85,8 +83,7 @@ Device::initInterface(QSharedPointer<QDBusInterface> &setme,
     }
 }
 
-void
-Device::setProperties(const QMap<QString,QVariant> &properties)
+void Device::setProperties(const QMap<QString,QVariant> &properties)
 {
     QMapIterator<QString,QVariant> it(properties);
     while (it.hasNext()) {
@@ -99,8 +96,7 @@ Device::setProperties(const QMap<QString,QVariant> &properties)
 ****
 ***/
 
-void
-Device::disconnect(ConnectionMode mode)
+void Device::disconnect(ConnectionMode mode)
 {
     if (m_headsetInterface && (mode == HeadsetMode))
         m_headsetInterface->asyncCall("Disconnect");
@@ -112,8 +108,7 @@ Device::disconnect(ConnectionMode mode)
         qWarning() << "Unhandled connection mode" << mode;
 }
 
-void
-Device::connect(ConnectionMode mode)
+void Device::connect(ConnectionMode mode)
 {
     if (m_headsetInterface && (mode == HeadsetMode))
         m_headsetInterface->asyncCall("Connect");
@@ -129,8 +124,7 @@ Device::connect(ConnectionMode mode)
 ****
 ***/
 
-void
-Device::setName(const QString &name)
+void Device::setName(const QString &name)
 {
     if (m_name != name) {
         m_name = name;
@@ -138,8 +132,7 @@ Device::setName(const QString &name)
     }
 }
 
-void
-Device::setIconName(const QString &iconName)
+void Device::setIconName(const QString &iconName)
 {
     if (m_iconName != iconName) {
         m_iconName = iconName;
@@ -147,8 +140,7 @@ Device::setIconName(const QString &iconName)
     }
 }
 
-void
-Device::setAddress(const QString &address)
+void Device::setAddress(const QString &address)
 {
     if (m_address != address) {
         m_address = address;
@@ -156,8 +148,7 @@ Device::setAddress(const QString &address)
     }
 }
 
-void
-Device::setType(Type type)
+void Device::setType(Type type)
 {
     if (m_type != type) {
         m_type = type;
@@ -166,8 +157,7 @@ Device::setType(Type type)
     }
 }
 
-void
-Device::setPaired(bool paired)
+void Device::setPaired(bool paired)
 {
     if (m_paired != paired) {
         m_paired = paired;
@@ -175,8 +165,7 @@ Device::setPaired(bool paired)
     }
 }
 
-void
-Device::setConnection(Connection connection)
+void Device::setConnection(Connection connection)
 {
     if (m_connection != connection) {
         m_connection = connection;
@@ -184,8 +173,7 @@ Device::setConnection(Connection connection)
     }
 }
 
-void
-Device::updateIcon()
+void Device::updateIcon()
 {
     /* bluez-provided icon is unreliable? In testing I'm getting
        an "audio-card" icon from bluez for my NoiseHush N700 headset.
@@ -202,8 +190,7 @@ Device::updateIcon()
         setIconName(QString("image://theme/%1").arg(m_fallbackIconName));
 }
 
-void
-Device::updateConnection()
+void Device::updateConnection()
 {
     Connection c;
   
@@ -223,8 +210,7 @@ Device::updateConnection()
     setConnection(c);
 }
 
-void
-Device::updateProperty(const QString &key, const QVariant &value)
+void Device::updateProperty(const QString &key, const QVariant &value)
 {
     if (key == "Name") { // org.bluez.Device
         setName(value.toString());
@@ -252,8 +238,7 @@ Device::updateProperty(const QString &key, const QVariant &value)
 
 /* Determine the Type from the bits in the Class of Device (CoD) field.
    https://www.bluetooth.org/en-us/specification/assigned-numbers/baseband */
-Device::Type
-Device::getTypeFromClass (quint32 c)
+Device::Type Device::getTypeFromClass (quint32 c)
 {
     switch ((c & 0x1f00) >> 8) {
     case 0x01:

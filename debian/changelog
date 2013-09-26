@@ -1,3 +1,45 @@
+ubuntu-system-settings (0.1+13.10.20130926.4-0ubuntu1) saucy; urgency=low
+
+  [ Charles Kerr ]
+  * As requested, remove the linefeed between a function's return type
+    and its name.
+
+  [ Sebastien Bacher ]
+  * security: hide non working PIN and app access settings.
+  * battery: hide screen idle delay selection, the backend is not
+    working.
+  * timezone: some tweaks and fixes - hide the selector, we don't have a
+    backend for automatic selection - replace the text widget by label
+    from the ubuntu uitk, it fixes the issue with the text being too
+    small - update the placeholder string according to the new design.
+  * datetime: drop empty list item, it's not in the design.
+  * hide reset options until we get some backend code working. The
+    factory resets require support for the system image side, the other
+    options should be doable from our side later on.
+  * hide phone settings, we lack phone app support for call
+    forwarding,waiting.
+  * update the translation template.
+  * background: revert use of the new content-hub, it's buggy (see bug
+    #1231368). (LP: #1231368)
+
+  [ William Hua ]
+  * Switch to ListView as workaround to LP #1227249. (LP: #1227249)
+
+  [ David Planella ]
+  * Add a translator comment for the battery charge level (bug 1210341).
+    (LP: #1210341)
+
+  [ Alberto Mardegan ]
+  * Load testability driver if the -testability option is given. This
+    change is needed in order to make the system-settings application
+    and its plugins testable with autopilot (or other testability
+    plugins).
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 392
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Sep 2013 21:44:53 +0000
+
 ubuntu-system-settings (0.1+13.10.20130925.1-0ubuntu1) saucy; urgency=low
 
   [ Ted Gould ]
