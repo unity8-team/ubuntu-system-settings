@@ -59,32 +59,9 @@ SheetBase {
         currentIndex: plugin.currentLanguage
 
         model: plugin.languages
-        delegate: ListItem.Empty {
-            Label {
-                text: modelData
-
-                anchors.left: parent.left
-                anchors.right: checkMark.left
-                anchors.leftMargin: units.gu(2)
-                anchors.rightMargin: units.gu(2)
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            Rectangle {
-                id: checkMark
-
-                color: Theme.palette.normal.baseText
-
-                radius: width / 2.0
-                width: units.gu(1)
-                height: units.gu(1)
-
-                anchors.right: parent.right
-                anchors.rightMargin: units.gu(2)
-                anchors.verticalCenter: parent.verticalCenter
-
-                visible: index == languageList.currentIndex
-            }
+        delegate: ListItem.Standard {
+            text: modelData
+            selected: index == languageList.currentIndex
 
             onClicked: {
                 languageList.currentIndex = index
