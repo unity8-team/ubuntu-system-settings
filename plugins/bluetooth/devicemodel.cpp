@@ -26,9 +26,7 @@
 
 namespace
 {
-  // somewhat arbitrary value.
-  // spec calls for 5 seconds, but in testing sometimes that's not long enough
-  const int SCANNING_ACTIVE_DURATION_MSEC = (8 * 1000);
+  const int SCANNING_ACTIVE_DURATION_MSEC = (10 * 1000);
 
   const int SCANNING_IDLE_DURATION_MSEC = (10 * 1000);
 }
