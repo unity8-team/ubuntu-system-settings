@@ -200,7 +200,7 @@ void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
         if (confirmed)
             m_connection.send(message.createReply(pinCode));
         else
-            m_connection.send(message.createErrorReply(CANCELED_TYPE, CANCELED_TEXT "Agent::confirmPinCode"));
+            m_connection.send(message.createErrorReply(CANCELED_TYPE, CANCELED_TEXT "Agent::providePinCode"));
 
         m_delayedReplies.remove(tag);
     }
