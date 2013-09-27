@@ -78,7 +78,21 @@ int main(int argc, char **argv)
     QStringList arguments = app.arguments();
     for (int i = 1; i < arguments.count(); i++) {
         const QString &argument = arguments.at(i);
-        if (!argument.startsWith('-')) {
+        if (argument.startsWith("settings://")) {
+            QUrl urlArgument(argument);
+            /* Find out which plugin is required. If the first component of the
+             * path is "system", just skip it. */
+            QStringList pathComponents = urlArgument.path().split('/');
+            int pluginIndex = 0;
+            if (pathComponents.value(pluginIndex, "") == "system")
+                pluginIndex++;
+            defaultPlugin = pathComponents.value(pluginIndex, QString());
+            /* Convert the query parameters into options for the plugin */
+            QUrlQuery query(urlArgument);
+            Q_FOREACH(const QPair<QString,QString> &pair, query) {
+                pluginOptions.insert(pair.first(), pair.second());
+            }
+        } else if (!argument.startsWith('-')) {
             defaultPlugin = argument;
         } else if (argument == "--option" && i + 1 < arguments.count()) {
             QStringList option = arguments.at(++i).split("=");
