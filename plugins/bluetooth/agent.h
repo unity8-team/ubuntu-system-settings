@@ -63,6 +63,9 @@ private:
     DeviceModel &m_devices;
     QMap<uint,QDBusMessage> m_delayedReplies;
     uint m_tag = 1;
+
+    void cancel(QDBusMessage msg, const char *functionName);
+    void reject(QDBusMessage msg, const char *functionName);
 };
 
 Q_DECLARE_METATYPE(Agent*)

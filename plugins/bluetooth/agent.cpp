@@ -22,11 +22,23 @@
 
 #include "agent.h"
 
-#define REJECTED_TYPE "org.bluez.Error.Rejected"
-#define REJECTED_TEXT "The request was rejected"
+/***
+****
+***/
 
-#define CANCELED_TYPE "org.bluez.Error.Canceled"
-#define CANCELED_TEXT "The request was canceled"
+void Agent::cancel(QDBusMessage msg, const char *functionName)
+{
+  QString name = "org.bluez.Error.Canceled";
+  QString text = QString("The request was canceled: %1").arg(functionName);
+  m_connection.send(msg.createErrorReply(name, text));
+}
+
+void Agent::reject(QDBusMessage msg, const char *functionName)
+{
+  QString name = "org.bluez.Error.Rejected";
+  QString text = QString("The request was rejected: %1").arg(functionName);
+  m_connection.send(msg.createErrorReply(name, text));
+}
 
 /***
 ****
@@ -75,7 +87,7 @@ void Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
         QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
         Q_EMIT(passkeyConfirmationNeeded(tag, device.data(), passkeyStr));
     } else { // confirmation requested for an unknown device..?!
-        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT "Agent::RequestConfirmation"));
+        reject(message(), __func__);
     }
 }
 
@@ -94,7 +106,7 @@ void Agent::confirmPasskey(uint tag, bool confirmed)
         if (confirmed)
             m_connection.send(message.createReply());
         else
-            m_connection.send(message.createErrorReply(CANCELED_TYPE, CANCELED_TEXT "Agent::confirmPasskey"));
+            cancel(message, __func__);
 
         m_delayedReplies.remove(tag);
     }
@@ -126,7 +138,7 @@ unsigned int Agent::RequestPasskey(const QDBusObjectPath &objectPath)
         Q_EMIT(passkeyNeeded(tag, device.data()));
 
     } else { // passkey requested for an unknown device..?!
-        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT "Agent::RequestPasskey"));
+        reject(message(), __func__);
     }
 
   return 0;
@@ -146,7 +158,7 @@ void Agent::providePasskey(uint tag, bool provided, uint passkey)
         if (provided)
             m_connection.send(m_delayedReplies[tag].createReply(passkey));
         else
-            m_connection.send(m_delayedReplies[tag].createErrorReply(CANCELED_TYPE, CANCELED_TEXT "Agent::providePasskey"));
+            cancel(m_delayedReplies[tag], __func__);
 
         m_delayedReplies.remove(tag);
     }
@@ -176,10 +188,11 @@ QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
         assert(!m_delayedReplies.contains(tag));
         m_delayedReplies[tag] = message();
 
+        qDebug() << __func__ << "emitting 'pinCodeNeeded' signal; qml listener will prompt in ui";
         Q_EMIT(pinCodeNeeded(tag, device.data()));
 
     } else { // passkey requested for an unknown device..?!
-        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT "Agent::RequestPinCode"));
+        reject(message(), __func__);
     }
 
     return "";
@@ -194,13 +207,18 @@ QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
  */
 void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
 {
+    qDebug() << __func__ << "tag" << tag << "confirmed" << confirmed << "pinCode" << pinCode;
+
     if (m_delayedReplies.contains(tag)) {
         QDBusMessage message = m_delayedReplies[tag];
 
-        if (confirmed)
-            m_connection.send(message.createReply(pinCode));
-        else
-            m_connection.send(message.createErrorReply(CANCELED_TYPE, CANCELED_TEXT "Agent::providePinCode"));
+        if (confirmed) {
+            qDebug() << __func__ << "sending string reply:" << pinCode;
+            m_connection.send(message.createReply(qVariantFromValue(pinCode)));
+        } else {
+            qDebug() << __func__ << "sending cancel";
+            cancel(message, __func__);
+        }
 
         m_delayedReplies.remove(tag);
     }
