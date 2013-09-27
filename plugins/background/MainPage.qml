@@ -57,7 +57,7 @@ ItemPage {
     }
 
 
-    /* XXX: We hide the welcome screen parts for v1 - there's a lot of elements to hide */
+    /* TODO: We hide the welcome screen parts for v1 - there's a lot of elements to hide */
 
     Label {
         id: welcomeLabel
