@@ -95,7 +95,7 @@ void Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
  * Invoked by the user-facing code after it prompts the user to confirm/cancel
  * the passkey passed from an Agent::passkeyConfirmationNeeded signal.
  *
- * @param tag: the tag sent in the emitted Agent::passkeyConfirmationNeeded signal
+ * @param tag: the tag from the Agent::passkeyConfirmationNeeded signal
  * @param confirmed: true if user confirmed the passkey, false if they canceled
  */
 void Agent::confirmPasskey(uint tag, bool confirmed)
@@ -148,7 +148,7 @@ unsigned int Agent::RequestPasskey(const QDBusObjectPath &objectPath)
  * Invoked by the user-facing code after it prompts the user for a passkey
  * as a result of an Agent::passkeyNeeded signal.
  *
- * @param tag: the tag sent in the emitted Agent::passkeyNeeded signal
+ * @param tag: the tag from the Agent::passkeyNeeded signal
  * @param provided: true if user provided the passkey, false if they canceled
  * @param passkey: the passkey. Only valid if provided is true.
  */
@@ -201,7 +201,7 @@ QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
  * Invoked by the user-facing code after it prompts the user for a PIN code
  * from an Agent::pinCodeNeeded() signal.
  *
- * @param tag: the tag sent in the emitted Agent::passkeyConfirmationNeeded signal
+ * @param tag: the tag from the Agent::passkeyConfirmationNeeded signal
  * @param confirmed: true if user confirmed the passkey, false if they canceled
  */
 void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
