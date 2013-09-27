@@ -149,6 +149,8 @@ ItemPage {
         }
 
         text: i18n.tr("Home screen")
+
+        visible: showAllUI
     }
 
     ListItem.ThinDivider {
