@@ -31,12 +31,12 @@ Dialog {
     property string passkey: "000000"
 
     signal canceled
-    signal provided (int passkey)
+    signal provided (string passkey)
 
     text: i18n.tr("PIN for '%1'").arg(root.name)
 
     TextField {
-        id: passkeyField
+        id: pinCodeField
         anchors {
             left: parent.left
             right: parent.right
@@ -61,7 +61,7 @@ Dialog {
         Button {
             text: i18n.tr("Pair")
             onClicked: {
-                root.provided (passkeyField.text.trimmed())
+                root.provided (pinCodeField.text)
                 PopupUtils.close(root)
             }
             width: (parent.width - parent.spacing) / 2
