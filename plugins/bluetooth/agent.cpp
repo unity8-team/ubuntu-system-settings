@@ -188,7 +188,6 @@ QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
         assert(!m_delayedReplies.contains(tag));
         m_delayedReplies[tag] = message();
 
-        qDebug() << __func__ << "emitting 'pinCodeNeeded' signal; qml listener will prompt in ui";
         Q_EMIT(pinCodeNeeded(tag, device.data()));
 
     } else { // passkey requested for an unknown device..?!
@@ -207,18 +206,13 @@ QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
  */
 void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
 {
-    qDebug() << __func__ << "tag" << tag << "confirmed" << confirmed << "pinCode" << pinCode;
-
     if (m_delayedReplies.contains(tag)) {
         QDBusMessage message = m_delayedReplies[tag];
 
-        if (confirmed) {
-            qDebug() << __func__ << "sending string reply:" << pinCode;
+        if (confirmed)
             m_connection.send(message.createReply(qVariantFromValue(pinCode)));
-        } else {
-            qDebug() << __func__ << "sending cancel";
+        else
             cancel(message, __func__);
-        }
 
         m_delayedReplies.remove(tag);
     }

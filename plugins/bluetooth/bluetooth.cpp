@@ -18,7 +18,6 @@
  *
  */
 
-#include <QDebug>
 #include <QQmlEngine>
 
 #include "agent.h"
