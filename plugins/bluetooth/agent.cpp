@@ -22,11 +22,11 @@
 
 #include "agent.h"
 
-namespace
-{
-    const char * const REJECTED_TYPE = "org.bluez.Error.Rejected";
-    const char * const REJECTED_TEXT = "The request was rejected";
-}
+#define REJECTED_TYPE "org.bluez.Error.Rejected"
+#define REJECTED_TEXT "The request was rejected"
+
+#define CANCELED_TYPE "org.bluez.Error.Canceled"
+#define CANCELED_TEXT "The request was canceled"
 
 /***
 ****
@@ -75,7 +75,7 @@ void Agent::RequestConfirmation(const QDBusObjectPath &objectPath, uint passkey)
         QString passkeyStr = QString("%1").arg(passkey, 6, 10, QChar('0'));
         Q_EMIT(passkeyConfirmationNeeded(tag, device.data(), passkeyStr));
     } else { // confirmation requested for an unknown device..?!
-        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
+        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT "Agent::RequestConfirmation"));
     }
 }
 
@@ -94,7 +94,7 @@ void Agent::confirmPasskey(uint tag, bool confirmed)
         if (confirmed)
             m_connection.send(message.createReply());
         else
-            m_connection.send(message.createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
+            m_connection.send(message.createErrorReply(CANCELED_TYPE, CANCELED_TEXT "Agent::confirmPasskey"));
 
         m_delayedReplies.remove(tag);
     }
@@ -126,7 +126,7 @@ unsigned int Agent::RequestPasskey(const QDBusObjectPath &objectPath)
         Q_EMIT(passkeyNeeded(tag, device.data()));
 
     } else { // passkey requested for an unknown device..?!
-        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
+        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT "Agent::RequestPasskey"));
     }
 
   return 0;
@@ -146,7 +146,61 @@ void Agent::providePasskey(uint tag, bool provided, uint passkey)
         if (provided)
             m_connection.send(m_delayedReplies[tag].createReply(passkey));
         else
-            m_connection.send(m_delayedReplies[tag].createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
+            m_connection.send(m_delayedReplies[tag].createErrorReply(CANCELED_TYPE, CANCELED_TEXT "Agent::providePasskey"));
+
+        m_delayedReplies.remove(tag);
+    }
+}
+
+/***
+****
+***/
+
+/*
+ * This method gets called when the service daemon
+ * needs to get the passkey for an authentication.
+ *
+ * The return value should be a string of 1-16 characters
+ * length. The string can be alphanumeric.
+ *
+ * Possible errors: org.bluez.Error.Rejected
+ *                  org.bluez.Error.Canceled
+ */
+QString Agent::RequestPinCode(const QDBusObjectPath &objectPath)
+{
+    auto device = m_devices.getDeviceFromPath(objectPath.path());
+    if (device) {
+        const uint tag = m_tag++;
+
+        setDelayedReply(true);
+        assert(!m_delayedReplies.contains(tag));
+        m_delayedReplies[tag] = message();
+
+        Q_EMIT(pinCodeNeeded(tag, device.data()));
+
+    } else { // passkey requested for an unknown device..?!
+        m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT "Agent::RequestPinCode"));
+    }
+
+    return "";
+}
+
+/**
+ * Invoked by the user-facing code after it prompts the user for a PIN code
+ * from an Agent::pinCodeNeeded() signal.
+ *
+ * @param tag: the tag sent in the emitted Agent::passkeyConfirmationNeeded signal
+ * @param confirmed: true if user confirmed the passkey, false if they canceled
+ */
+void Agent::providePinCode(uint tag, bool confirmed, QString pinCode)
+{
+    if (m_delayedReplies.contains(tag)) {
+        QDBusMessage message = m_delayedReplies[tag];
+
+        if (confirmed)
+            m_connection.send(message.createReply(pinCode));
+        else
+            m_connection.send(message.createErrorReply(CANCELED_TYPE, CANCELED_TEXT "Agent::confirmPinCode"));
 
         m_delayedReplies.remove(tag);
     }
@@ -168,15 +222,4 @@ void Agent::DisplayPasskey(const QDBusObjectPath &objectPath, uint passkey, ucha
 void Agent::Cancel()
 {
     // unimplemented -- companion function for DisplayPasskey
-}
-
-QString Agent::RequestPinCode(const QDBusObjectPath &device)
-{
-    /* TODO: I'm not able to trigger this with any bluetooth devices and
-       Agent capabilities -- Everything triggers ConfirmPasskey or RequestPasskey.
-       Instead of creating untestable code here, throw an error */
-
-    Q_UNUSED(device);
-    m_connection.send(message().createErrorReply(REJECTED_TYPE, REJECTED_TEXT));
-    return "";
 }

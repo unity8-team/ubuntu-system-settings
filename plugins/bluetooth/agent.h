@@ -40,6 +40,7 @@ public:
     virtual ~Agent() {}
     Q_INVOKABLE void confirmPasskey(uint tag, bool confirmed);
     Q_INVOKABLE void providePasskey(uint tag, bool provided, uint passkey);
+    Q_INVOKABLE void providePinCode(uint tag, bool provided, QString pinCode);
 
 public Q_SLOTS: // received from the system's bluez service
     void Cancel();
@@ -50,6 +51,7 @@ public Q_SLOTS: // received from the system's bluez service
     QString RequestPinCode(const QDBusObjectPath &path);
 
 Q_SIGNALS:
+    void pinCodeNeeded(int tag, Device* device);
     void passkeyNeeded(int tag, Device* device);
     void passkeyConfirmationNeeded(int tag, Device* device, QString passkey);
     void onPairingDone();
