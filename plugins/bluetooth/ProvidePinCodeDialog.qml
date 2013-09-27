@@ -40,11 +40,12 @@ Dialog {
         anchors {
             left: parent.left
             right: parent.right
-            margins: units.gu(8)
+            margins: units.gu(4)
         }
-        text: "000000"
+        text: "0000"
         focus: true
         Component.onCompleted: selectAll()
+        maximumLength: 16
     }
 
     Row {
