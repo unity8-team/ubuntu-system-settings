@@ -50,6 +50,9 @@ Bluetooth::Bluetooth(QObject *parent):
     QObject::connect(&m_killswitch, SIGNAL(blockedChanged(bool)),
                      this, SLOT(onKillSwitchChanged(bool)));
 
+    QObject::connect(&m_devices, SIGNAL(discoveringChanged(bool)),
+                     this, SIGNAL(discoveringChanged(bool)));
+
     QObject::connect(&m_agent, SIGNAL(onPairingDone()),
                      this, SLOT(onPairingDone()));
 }

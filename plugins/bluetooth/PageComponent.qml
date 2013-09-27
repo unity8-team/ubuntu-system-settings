@@ -145,7 +145,12 @@ ItemPage {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect a different headset:") : i18n.tr("Connect a headset:")
                 enabled: backend.enabled
+                control: ActivityIndicator {
+                    visible: backend.discovering
+                    running: true
+                }
             }
+
             ListView {
                 id: disconnectedList
                 width: parent.width
@@ -166,6 +171,7 @@ ItemPage {
                 id: disconnectedNone
                 text: i18n.tr("None detected")
                 visible: !disconnectedList.visible
+                enabled: !backend.discovering
             }
         }
     }
