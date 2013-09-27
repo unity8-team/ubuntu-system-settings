@@ -20,7 +20,6 @@
 
 import GSettings 1.0
 import QtQuick 2.0
-import QtQuick.XmlListModel 2.0
 import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
@@ -34,11 +33,70 @@ ItemPage {
     flickable: scrollWidget
 
     property bool sortByName: settingsId.storageSortByName
-    property real diskSpace: storageInfo.totalDiskSpace('/')
-    property variant spaceColors: [UbuntuColors.orange, "red", "blue", "green", "yellow", UbuntuColors.lightAubergine]
-    property variant spaceLabels: [i18n.tr("Used by Ubuntu"), i18n.tr("Movies"), i18n.tr("Audio"),
-                                   i18n.tr("Pictures"), i18n.tr("Other files"), i18n.tr("Used by apps")]
-    property variant spaceValues: [19.6, 6.2, 9.2, 1.5, 4.6, 16.3] // TODO: replace by real values
+    property var allDrives: {
+        var drives = ["/"] // Always consider /
+        var paths = [backendInfo.getDevicePath("/")]
+        var systemDrives = storageInfo.allLogicalDrives
+        for (var i = 0; i < systemDrives.length; i++) {
+            var drive = systemDrives[i]
+            var path = backendInfo.getDevicePath(drive)
+            if ((storageInfo.driveType(drive) ===
+                    StorageInfo.InternalDrive ||
+                storageInfo.driveType(drive) ===
+                    StorageInfo.RemovableDrive) &&
+                paths.indexOf(path) == -1 && // Haven't seen this device before
+                path !== "") { // Has a mount point
+                drives.push(drive)
+                paths.push(path)
+            }
+        }
+        return drives
+    }
+    property real diskSpace: {
+        var space = 0
+        for (var i = 0; i < allDrives.length; i++) {
+            space += storageInfo.totalDiskSpace(allDrives[i])
+        }
+        return space
+    }
+    property real freediskSpace: {
+        var space = 0
+        for (var i = 0; i < allDrives.length; i++) {
+            space += storageInfo.availableDiskSpace(allDrives[i])
+        }
+        return space
+    }
+    property real usedByUbuntu: diskSpace -
+                                freediskSpace -
+                                backendInfo.homeSize -
+                                backendInfo.totalClickSize
+    property real otherSize: diskSpace -
+                             freediskSpace -
+                             usedByUbuntu -
+                             backendInfo.moviesSize -
+                             backendInfo.picturesSize -
+                             backendInfo.audioSize
+    property variant spaceColors: [
+        UbuntuColors.orange,
+        "red",
+        "blue",
+        "green",
+        "yellow",
+        UbuntuColors.lightAubergine]
+    property variant spaceLabels: [
+        i18n.tr("Used by Ubuntu"),
+        i18n.tr("Movies"),
+        i18n.tr("Audio"),
+        i18n.tr("Pictures"),
+        i18n.tr("Other files"),
+        i18n.tr("Used by apps")]
+    property variant spaceValues: [
+        usedByUbuntu, // Used by Ubuntu
+        backendInfo.moviesSize,
+        backendInfo.audioSize,
+        backendInfo.picturesSize,
+        otherSize, //Other Files
+        backendInfo.totalClickSize]
 
     GSettings {
         id: settingsId
@@ -51,19 +109,10 @@ ItemPage {
 
     UbuntuStorageAboutPanel {
         id: backendInfo
-    }
-
-    /* Return used space in a formatted way */
-    function getFormattedSpace(space) {
-        if (space < 1000)
-            return space;
-        if (space / 1000 < 1000)
-            return Math.round(space / 1000) + " " + i18n.tr("kB");
-        else if (space/1000/1000 < 1000)
-            return Math.round((space / 1000 / 1000) * 10) / 10 + " " + i18n.tr("MB");
-        else if (space/1000/1000/1000 < 1000)
-            return Math.round((space / 1000 / 1000 / 1000) * 10) / 10 + " " + i18n.tr("GB");
-        return "";
+        property bool ready: false
+        // All of these events come simultaneously
+        onMoviesSizeChanged: ready = true
+        Component.onCompleted: populateSizes()
     }
 
     StorageInfo {
@@ -83,16 +132,19 @@ ItemPage {
             ListItem.SingleValue {
                 id: diskItem
                 text: i18n.tr("Total storage")
-                value: storagePage.getFormattedSpace(diskSpace);
+                value: backendInfo.formatSize(diskSpace)
                 showDivider: false
             }
 
-            StorageBar {}
+            StorageBar {
+                ready: backendInfo.ready
+            }
 
             StorageItem {
                 colorName: "white"
                 label: i18n.tr("Free space")
-                value: getFormattedSpace(storageInfo.availableDiskSpace('/'))
+                value: freediskSpace
+                ready: backendInfo.ready
             }
 
             Repeater {
@@ -101,7 +153,8 @@ ItemPage {
                 StorageItem {
                     colorName: modelData
                     label: spaceLabels[index]
-                    value: getFormattedSpace(spaceValues[index]*1000000000) // TODO: replace by real values
+                    value: spaceValues[index]
+                    ready: backendInfo.ready
                 }
             }
 
@@ -133,7 +186,7 @@ ItemPage {
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
                     text: displayName
                     value: installedSize ?
-                               storagePage.getFormattedSpace(installedSize) :
+                               backendInfo.formatSize(installedSize) :
                                i18n.tr("N/A")
                 }
             }

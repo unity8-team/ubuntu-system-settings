@@ -52,10 +52,12 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
+    quint64 getClickSize() const;
 
 private:
     QList<Click> buildClickList();
     QList<Click> m_clickPackages;
+    int m_totalClickSize;
 
 };
 

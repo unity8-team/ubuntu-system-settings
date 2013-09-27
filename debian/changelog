@@ -1,3 +1,108 @@
+ubuntu-system-settings (0.1+13.10.20130926.4-0ubuntu1) saucy; urgency=low
+
+  [ Charles Kerr ]
+  * As requested, remove the linefeed between a function's return type
+    and its name.
+
+  [ Sebastien Bacher ]
+  * security: hide non working PIN and app access settings.
+  * battery: hide screen idle delay selection, the backend is not
+    working.
+  * timezone: some tweaks and fixes - hide the selector, we don't have a
+    backend for automatic selection - replace the text widget by label
+    from the ubuntu uitk, it fixes the issue with the text being too
+    small - update the placeholder string according to the new design.
+  * datetime: drop empty list item, it's not in the design.
+  * hide reset options until we get some backend code working. The
+    factory resets require support for the system image side, the other
+    options should be doable from our side later on.
+  * hide phone settings, we lack phone app support for call
+    forwarding,waiting.
+  * update the translation template.
+  * background: revert use of the new content-hub, it's buggy (see bug
+    #1231368). (LP: #1231368)
+
+  [ William Hua ]
+  * Switch to ListView as workaround to LP #1227249. (LP: #1227249)
+
+  [ David Planella ]
+  * Add a translator comment for the battery charge level (bug 1210341).
+    (LP: #1210341)
+
+  [ Alberto Mardegan ]
+  * Load testability driver if the -testability option is given. This
+    change is needed in order to make the system-settings application
+    and its plugins testable with autopilot (or other testability
+    plugins).
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 392
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Sep 2013 21:44:53 +0000
+
+ubuntu-system-settings (0.1+13.10.20130925.1-0ubuntu1) saucy; urgency=low
+
+  [ Ted Gould ]
+  * Ask Upstart App Launch to make settings single instance. (LP:
+    #1227111)
+
+  [ Iain Lane ]
+  * Reduce the height of the time/date pickers as they weren't fitting
+    on mobile devices. (LP: #1228409). (LP: #1228409)
+  * Use QMenuModel to hook up toggles for bluetooth and gps/location
+    enabled/disabled in the battery and security-privacy panels.
+    Location is hidden because the backend doesn't work yet.
+
+  [ Lars Uebernickel ]
+  * Fix the brightness slider in the battery panel.
+
+  [ Charles Kerr ]
+  * Add the bluetooth plugin.
+
+  [ Ken VanDine ]
+  * background: Use singleSelect on the transfer request and specify a
+    persistent Content::Store for the transfer .
+
+  [ Didier Roche ]
+  * Only Cancel if there is anything to cancel. (LP: #1215946)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 378
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 25 Sep 2013 11:12:19 +0000
+
+ubuntu-system-settings (0.1+13.10.20130924.1-0ubuntu1) saucy; urgency=low
+
+  [ Ted Gould ]
+  * Add Wifi Panel.
+
+  [ Iain Lane ]
+  * [battery] Disable scrolling of the flickable while the slider is
+    being used. Display a % in the tooltip.
+
+  [ Michael Terry ]
+  * Hide the "Phone locking" options for now, since they likely won't be
+    functional for 13.10.
+
+  [ William Hua ]
+  * Security panel: use ItemSelector instead of deprecated
+    ValueSelector. (LP: #1223986)
+  * Switch the UI language whenever the display language is changed.
+
+  [ Alberto Mardegan ]
+  * Add Wifi Panel.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Change the background image selection screen so that it fits design
+    (as per bug #1221179) overlaying the new wallpapers with the assets.
+    Right now we're using temporary placeholder assets, still waiting on
+    design action. (LP: #1221179)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 369
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 24 Sep 2013 07:03:11 +0000
+
 ubuntu-system-settings (0.1+13.10.20130918.1-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

@@ -2,28 +2,54 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 
 Item {
+    property bool ready: false
     anchors.horizontalCenter: parent.horizontalCenter
     height: units.gu(5)
     width: parent.width - units.gu(4)
 
-    Rectangle {
-        border.width: 1
+    UbuntuShape {
+        //border.width: 1
         color: "white"
+        clip: true
         height: units.gu(3)
         width: parent.width
-        Row {
-            anchors.centerIn: parent
-            height: parent.height-2
-            width: parent.width-2
-            Repeater {
-                model: spaceColors
+        image: ses
+    }
 
-                Rectangle {
-                    color: modelData
-                    height: parent.height
-                    width: spaceValues[index]*1000000000 / diskSpace * parent.width // TODO: drop value hack when we get the real space
+    ShaderEffectSource {
+        id: ses
+        sourceItem: row
+        width: 1
+        height: 1
+        hideSource: true
+    }
+
+    Row {
+        id: row
+        visible: false
+
+        anchors.fill: parent
+
+        Repeater {
+            model: spaceColors
+
+            Rectangle {
+                color: ready ? modelData : UbuntuColors.warmGrey
+                height: parent.height
+                width: spaceValues[index] / diskSpace * parent.width
+                Behavior on color {
+                    ColorAnimation {
+                        duration: UbuntuAnimation.SlowDuration
+                        easing: UbuntuAnimation.StandardEasing
+                    }
                 }
             }
+        }
+
+        Rectangle {
+            color: "white"
+            height: parent.height
+            width: parent.width
         }
     }
 }

@@ -59,14 +59,12 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListItem.ValueSelector {
+        ListItem.ItemSelector {
             id: chooseCarrier
             expanded: true
-            // TODO: There is no way to have a ValueSelector always expanded
-            onExpandedChanged: expanded = true
             enabled: netReg.mode != "auto-only"
             text: i18n.tr("Choose carrier:")
-            values: [i18n.tr("Automatically"), i18n.tr("Manually")]
+            model: [i18n.tr("Automatically"), i18n.tr("Manually")]
             selectedIndex: netReg.mode == "manual" ? 1 : 0
         }
 
@@ -81,13 +79,12 @@ ItemPage {
             }
         }
 
-        ListItem.ValueSelector {
+        /* TODO: use selector once ofono supports those options (bug #1211804)
+        ListItem.ItemSelector {
             id: dataTypeSelector
             expanded: true
-            // TODO: There is no way to have a ValueSelector always expanded
-            onExpandedChanged: expanded = true
             text: i18n.tr("Cellular data:")
-            values: [i18n.tr("Off"),
+            model: [i18n.tr("Off"),
                 i18n.tr("2G only (saves battery)"),
                 i18n.tr("2G/3G/4G (faster)")]
             selectedIndex: !connMan.powered ? 0 : 2
@@ -96,6 +93,15 @@ ItemPage {
                     connMan.powered = false;
                 else
                     connMan.powered = true;
+            }
+        }
+        */
+
+        ListItem.Standard {
+            text: i18n.tr("Cellular data")
+            control: Switch {
+                checked: connMan.powered
+                onClicked: connMan.powered = checked
             }
         }
 
@@ -111,6 +117,7 @@ ItemPage {
         ListItem.Standard {
             text: i18n.tr("Data usage statistics")
             progression: true
+            visible: showAllUI
         }
     }
 }

@@ -10,3 +10,4 @@ Keywords=Preferences;Settings;
 X-Ubuntu-Gettext-Domain=ubuntu-system-settings
 X-Ubuntu-Touch=true
 X-Ubuntu-StageHint=SideStage
+X-Ubuntu-Single-Instance=true
