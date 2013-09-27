@@ -48,14 +48,14 @@ ListItem.Base {
                 height: units.gu(3.0)
                 radius: units.gu(0.5)
 
-                color: UbuntuColors.warmGrey
+                color: Theme.palette.normal.backgroundText
 
                 anchors.verticalCenter: parent.verticalCenter
 
                 Label {
                     id: shortName
 
-                    color: "white"
+                    color: Theme.palette.normal.background
                     fontSize: "small"
 
                     anchors.centerIn: parent
