@@ -11,5 +11,6 @@
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
     "entry-component": "EntryComponent.qml",
-    "page-component": "PageComponent.qml"
+    "page-component": "PageComponent.qml",
+    "hide-by-default": true
 }

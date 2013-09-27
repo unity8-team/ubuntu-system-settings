@@ -25,7 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 SheetBase {
-    id: sheet
+    id: root
 
     property string initialLanguage
 
@@ -43,7 +43,9 @@ SheetBase {
         id: plugin
     }
 
-    Flickable {
+    ListView {
+        id: languageList
+
         clip: true
 
         anchors.top: parent.top
@@ -52,18 +54,23 @@ SheetBase {
         anchors.bottom: divider.top
 
         contentHeight: contentItem.childrenRect.height
+        boundsBehavior: contentHeight > root.height ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        ListItem.ItemSelector {
-            id: languageList
+        currentIndex: plugin.currentLanguage
 
-            expanded: true
-            model: plugin.languages
-            selectedIndex: plugin.currentLanguage
+        model: plugin.languages
+        delegate: ListItem.Standard {
+            text: modelData
+            selected: index == languageList.currentIndex
 
-            onSelectedIndexChanged: {
-                i18n.language = plugin.languageCodes[selectedIndex]
-                i18n.domain = i18n.domain
+            onClicked: {
+                languageList.currentIndex = index
             }
+        }
+
+        onCurrentIndexChanged: {
+            i18n.language = plugin.languageCodes[currentIndex]
+            i18n.domain = i18n.domain
         }
     }
 
@@ -98,7 +105,7 @@ SheetBase {
             onClicked: {
                 i18n.language = initialLanguage
                 i18n.domain = i18n.domain
-                PopupUtils.close(sheet)
+                PopupUtils.close(root)
             }
         }
 
@@ -116,8 +123,8 @@ SheetBase {
             anchors.bottomMargin: units.gu(1)
 
             onClicked: {
-                plugin.currentLanguage = languageList.selectedIndex
-                PopupUtils.close(sheet)
+                plugin.currentLanguage = languageList.currentIndex
+                PopupUtils.close(root)
             }
         }
     }

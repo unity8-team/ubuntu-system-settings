@@ -19,6 +19,7 @@
  */
 
 import GSettings 1.0
+import QMenuModel 0.1
 import QtQuick 2.0
 import QtSystemInfo 5.0
 import SystemSettings 1.0
@@ -26,7 +27,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
-
+import QMenuModel 0.1
 
 ItemPage {
     id: root
@@ -82,6 +83,7 @@ ItemPage {
         }
         onRemainingCapacityChanged: {
             if(batteryInfo.batteryCount > 0)
+                /* TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery */
                 chargingLevel.value = i18n.tr("%1 %").arg((batteryInfo.remainingCapacity(0)/batteryInfo.maximumCapacity(0)*100).toFixed(0))
         }
 
@@ -94,6 +96,17 @@ ItemPage {
     UbuntuBatteryPanel {
         id: batteryBackend
     }
+
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+
+        property variant brightness: action("brightness")
+    }
+
+    Component.onCompleted: indicatorPower.start()
 
     Flickable {
         id: scrollWidget
@@ -175,6 +188,11 @@ ItemPage {
                         height: sliderId.height - units.gu(1)
                         name: "torch-off"
                         width: height
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: sliderId.value = 0.0
+                        }
                     }
                     Slider {
                         id: sliderId
@@ -190,9 +208,12 @@ ItemPage {
                             verticalCenter: parent.verticalCenter
                         }
                         height: parent.height - units.gu(2)
-                        minimumValue: 0
-                        maximumValue: 100
-                        value: 0.0 // TODO: get actual value
+                        minimumValue: 0.0
+                        maximumValue: 100.0
+                        enabled: indicatorPower.brightness.state != null
+                        value: enabled ? indicatorPower.brightness.state * 100 : 0.0
+
+                        onValueChanged: indicatorPower.brightness.updateState(value / 100.0);
                     }
                     Icon {
                         id: iconRight
@@ -201,6 +222,11 @@ ItemPage {
                         height: sliderId.height - units.gu(1)
                         name: "torch-on"
                         width: height
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: sliderId.value = 100.0
+                        }
                     }
             }
 
@@ -231,6 +257,7 @@ ItemPage {
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SleepValues.qml"),
                                { title: text, lockOnSuspend: lockOnSuspend })
+                visible: showAllUI // TODO: re-enable once bug #1230345 is resolved
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
@@ -240,20 +267,67 @@ ItemPage {
                 }
             }
 
+            QDBusActionGroup {
+                id: bluetoothActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.bluetooth"
+                objectPath: "/com/canonical/indicator/bluetooth"
+
+                property variant enabled: action("bluetooth-enabled")
+                property variant actionVisible: action("root-phone")
+
+                property bool visible:
+                    actionVisible.state.visible === undefined ||
+                    actionVisible.state.visible
+
+                Component.onCompleted: start()
+            }
+
             ListItem.Standard {
                 text: i18n.tr("Bluetooth")
                 control: Switch {
-                    checked: true
-                    enabled: false
+                    id: btSwitch
+                    // Cannot use onCheckedChanged as this triggers a loop
+                    onClicked: bluetoothActionGroup.enabled.activate()
                 }
+                visible: bluetoothActionGroup.visible
+                Component.onCompleted:
+                    clicked.connect(btSwitch.clicked)
+            }
+
+            Binding {
+                target: btSwitch
+                property: "checked"
+                value: bluetoothActionGroup.enabled.state
+            }
+
+            QDBusActionGroup {
+                id: locationActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.location"
+                objectPath: "/com/canonical/indicator/location"
+
+                property variant enabled: action("gps-detection-enabled")
+
+                Component.onCompleted: start()
             }
 
             ListItem.Standard {
                 text: i18n.tr("GPS")
                 control: Switch {
-                    checked: true
-                    enabled: false
+                    id: gpsSwitch
+                    onClicked: locationActionGroup.enabled.activate()
                 }
+                visible: showAllUI && // Hidden until the indicator works
+                         locationActionGroup.enabled.state !== undefined
+                Component.onCompleted:
+                    clicked.connect(gpsSwitch.clicked)
+            }
+
+            Binding {
+                target: gpsSwitch
+                property: "checked"
+                value: locationActionGroup.enabled.state
             }
 
             ListItem.Caption {

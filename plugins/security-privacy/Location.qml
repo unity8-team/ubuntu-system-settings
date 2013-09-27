@@ -19,6 +19,7 @@
  */
 
 import GSettings 1.0
+import QMenuModel 0.1
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -32,10 +33,34 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
+        QDBusActionGroup {
+            id: locationActionGroup
+            busType: DBus.SessionBus
+            busName: "com.canonical.indicator.location"
+            objectPath: "/com/canonical/indicator/location"
+
+            property variant enabled: action("location-detection-enabled")
+
+            Component.onCompleted: start()
+        }
+
         ListItem.Standard {
             text: i18n.tr("Location detection")
-            control: Switch { id: locationOn }
+            control: Switch {
+                id: locationOn
+                onClicked: locationActionGroup.enabled.activate()
+            }
+            visible: locationActionGroup.enabled.state !== undefined
+            Component.onCompleted:
+                clicked.connect(locationOn.clicked)
         }
+
+        Binding {
+            target: locationOn
+            property: "checked"
+            value: locationActionGroup.enabled.state
+        }
+
         ListItem.Caption {
             /* TODO: replace by real info from the location service */
             property int locationInfo: 0
@@ -56,11 +81,13 @@ ItemPage {
                 else if (locationInfo === 6) /* GPS, wi-fi and cellular off */
                     return i18n.tr("Uses wi-fi (currently off), cell tower locations (no current cellular connection), and GPS to detect your rough location. Turning off location detection saves battery.")
             }
+
+            visible: showAllUI
         }
 
         ListItem.Standard {
             text: i18n.tr("Allow access to location:")
-            visible: locationOn.checked
+            visible: showAllUI && locationOn.checked
         }
 
         Repeater {
@@ -68,7 +95,7 @@ ItemPage {
             ListItem.Standard {
                 text: modelData
                 control: Switch { checked: true; enabled: false}
-                visible: locationOn.checked
+                visible: showAllUI && locationOn.checked
             }
         }
     }
