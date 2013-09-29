@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-26 13:30+0200\n"
-"PO-Revision-Date: 2013-09-27 18:38+0000\n"
+"PO-Revision-Date: 2013-09-28 11:35+0000\n"
 "Last-Translator: Zonov Roman <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-09-28 05:56+0000\n"
+"X-Launchpad-Export-Date: 2013-09-29 05:48+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -264,7 +264,7 @@ msgstr "Блокировать устройство когда оно не ис�
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "Переводить телефон в спящий режим, когда он не используется:"
 
 #: ../plugins/battery/SleepValues.qml:102
 msgid ""
@@ -348,7 +348,7 @@ msgstr "Видео"
 
 #: ../plugins/bluetooth/PageComponent.qml:75
 msgid "Other Audio"
-msgstr ""
+msgstr "Другая музыка"
 
 #: ../plugins/bluetooth/PageComponent.qml:76
 msgid "Joypad"
@@ -403,44 +403,44 @@ msgstr "Отсутствует"
 
 #: ../plugins/bluetooth/PageComponent.qml:118
 msgid "Connected headset:"
-msgstr ""
+msgstr "Подключенная гарнитура:"
 
 #: ../plugins/bluetooth/PageComponent.qml:146
 msgid "Connect a different headset:"
-msgstr ""
+msgstr "Подключение другую гарнитуру:"
 
 #: ../plugins/bluetooth/PageComponent.qml:146
 msgid "Connect a headset:"
-msgstr ""
+msgstr "Подключите гарнитуру:"
 
 #: ../plugins/bluetooth/PageComponent.qml:167
 msgid "None detected"
-msgstr ""
+msgstr "Не обнаружено"
 
 #: ../plugins/bluetooth/PageComponent.qml:182
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
 #: ../plugins/bluetooth/PageComponent.qml:186
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: ../plugins/bluetooth/PageComponent.qml:190
 msgid "Signal Strength"
-msgstr ""
+msgstr "Мощность сигнала"
 
 #: ../plugins/bluetooth/PageComponent.qml:195
 msgid "Disconnect"
-msgstr ""
+msgstr "Отключиться"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "PIN для '%1'"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "Сопряжение"
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:74
@@ -908,6 +908,7 @@ msgstr "Блокировка телефона"
 msgid "1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 минуту"
+msgstr[1] "%1 минуты"
 
 #: ../plugins/security-privacy/PageComponent.qml:79
 msgid "SIM PIN"
