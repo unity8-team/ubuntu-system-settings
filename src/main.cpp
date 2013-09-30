@@ -21,6 +21,7 @@
 #include "debug.h"
 #include "i18n.h"
 #include "plugin-manager.h"
+#include "utils.h"
 
 #include <QGuiApplication>
 #include <QProcessEnvironment>
@@ -75,17 +76,7 @@ int main(int argc, char **argv)
      */
     QString defaultPlugin;
     QVariantMap pluginOptions;
-    QStringList arguments = app.arguments();
-    for (int i = 1; i < arguments.count(); i++) {
-        const QString &argument = arguments.at(i);
-        if (!argument.startsWith('-')) {
-            defaultPlugin = argument;
-        } else if (argument == "--option" && i + 1 < arguments.count()) {
-            QStringList option = arguments.at(++i).split("=");
-            // If no value is given, insert an empty string
-            pluginOptions.insert(option.at(0), option.value(1, ""));
-        }
-    }
+    parsePluginOptions(app.arguments(), defaultPlugin, pluginOptions);
 
     QQuickView view;
     QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),
