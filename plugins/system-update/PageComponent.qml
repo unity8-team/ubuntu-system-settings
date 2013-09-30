@@ -72,6 +72,7 @@ ItemPage {
             infoMessage = "";
             infoSecondaryMessage = "";
             DownloadUpdate();
+            currentUpdateState = UbuntuUpdatePanel.DownloadRequested;
         }
 
         function applyUpdate() {
@@ -263,7 +264,7 @@ ItemPage {
                     Column {
                         id: updateDownloading
                         spacing: units.gu(1)
-                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused || updateBackend.currentUpdateState === UbuntuUpdatePanel.DownloadRequested
                         width: parent.width
 
                         ProgressBar {
@@ -271,6 +272,13 @@ ItemPage {
                             maximumValue : 100
                             minimumValue : 0
                             value : updateBackend.downloadProgress
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                            width: parent.width
+                        }
+
+                        ProgressBar {
+                            indeterminate: true
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.DownloadRequested
                             width: parent.width
                         }
 
