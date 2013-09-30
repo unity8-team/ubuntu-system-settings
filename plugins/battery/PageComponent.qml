@@ -81,12 +81,6 @@ ItemPage {
                 isCharging = true
             }
         }
-        onRemainingCapacityChanged: {
-            if(batteryInfo.batteryCount > 0)
-                /* TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery */
-                chargingLevel.value = i18n.tr("%1 %").arg((batteryInfo.remainingCapacity(0)/batteryInfo.maximumCapacity(0)*100).toFixed(0))
-        }
-
         Component.onCompleted: {
             onChargingStateChanged(0, chargingState(0))
             onRemainingCapacityChanged(0, remainingCapacity(0))
@@ -104,6 +98,7 @@ ItemPage {
         objectPath: "/com/canonical/indicator/power"
 
         property variant brightness: action("brightness")
+        property variant batteryLevel: action("battery-level")
     }
 
     Component.onCompleted: indicatorPower.start()
@@ -122,7 +117,16 @@ ItemPage {
             ListItem.SingleValue {
                 id: chargingLevel
                 text: i18n.tr("Charge level")
-                value: i18n.tr("N/A")
+                value: {
+                    var chargeLevel = indicatorPower.batteryLevel.state
+
+                    if (chargeLevel === null)
+                        return i18n.tr("N/A")
+
+                    /* TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery */
+                    return i18n.tr("%1%".arg(chargeLevel))
+                }
+
                 showDivider: false
             }
 
