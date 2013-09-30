@@ -52,9 +52,14 @@ class Bluetooth : public QObject
                 WRITE setEnabled
                 NOTIFY enabledChanged);
 
+    Q_PROPERTY (bool discovering
+                READ isDiscovering
+                NOTIFY discoveringChanged);
+
 Q_SIGNALS:
     void selectedDeviceChanged();
     void enabledChanged(bool enabled);
+    void discoveringChanged(bool isActive);
 
 private Q_SLOTS:
     void onPairingDone();
@@ -79,6 +84,7 @@ public:
 
     bool isEnabled() const { return !m_killswitch.isBlocked(); }
     void setEnabled(bool enabled) { m_killswitch.trySetBlocked(!enabled); }
+    bool isDiscovering() const { return m_devices.isDiscovering(); }
 
 private:
     QDBusConnection m_dbus;

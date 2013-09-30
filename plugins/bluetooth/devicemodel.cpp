@@ -24,6 +24,13 @@
 #include "devicemodel.h"
 #include "dbus-shared.h"
 
+namespace
+{
+  const int SCANNING_ACTIVE_DURATION_MSEC = (10 * 1000);
+
+  const int SCANNING_IDLE_DURATION_MSEC = (10 * 1000);
+}
+
 /***
 ****
 ***/
@@ -38,6 +45,8 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
         if (qObjectPath.isValid())
             setAdapterFromPath(qObjectPath.value().path());
     }
+
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
 }
 
 DeviceModel::~DeviceModel()
@@ -58,6 +67,52 @@ int DeviceModel::findRowFromAddress(const QString &address) const
 ****
 ***/
 
+void DeviceModel::restartTimer()
+{
+    m_timer.start (m_isDiscovering ? SCANNING_ACTIVE_DURATION_MSEC
+                                   : SCANNING_IDLE_DURATION_MSEC);
+}
+
+void DeviceModel::stopDiscovery()
+{
+    if (m_isDiscovering) {
+        if (m_bluezAdapter)
+            m_bluezAdapter->asyncCall("StopDiscovery");
+        m_isDiscovering = false;
+        Q_EMIT(discoveringChanged(m_isDiscovering));
+    }
+
+    restartTimer();
+}
+
+void DeviceModel::startDiscovery()
+{
+    if (m_bluezAdapter && !m_isDiscovering) {
+        m_bluezAdapter->asyncCall("StartDiscovery");
+        m_isDiscovering = true;
+        Q_EMIT(discoveringChanged(m_isDiscovering));
+    }
+
+    restartTimer();
+}
+
+void DeviceModel::toggleDiscovery()
+{
+    if (isDiscovering())
+        stopDiscovery();
+    else
+        startDiscovery();
+}
+
+void DeviceModel::slotTimeout()
+{
+    toggleDiscovery ();
+}
+
+/***
+****
+***/
+
 void DeviceModel::clearAdapter()
 {
     if (m_bluezAdapter) {
@@ -67,7 +122,7 @@ void DeviceModel::clearAdapter()
         const QString path = m_bluezAdapter->path();
         const QString interface = m_bluezAdapter->interface();
 
-        m_bluezAdapter->asyncCall("StopDiscovery");
+        stopDiscovery();
 
         bus.disconnect(service, path, interface, "DeviceCreated",
                        this, SLOT(slotDeviceCreated(const QDBusObjectPath&)));
@@ -102,8 +157,7 @@ void DeviceModel::setAdapterFromPath(const QString &path)
                        this, SLOT(slotDeviceDisappeared(const QString&)));
 
         m_bluezAdapter.reset(i);
-        m_bluezAdapter->asyncCall("StartDiscovery");
-
+        startDiscovery();
         updateDevices();
     }
 }

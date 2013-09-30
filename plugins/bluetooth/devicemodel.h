@@ -22,6 +22,7 @@
 
 #include <QByteArray>
 #include <QHash>
+#include <QTimer>
 #include <QList>
 #include <QVariant>
 
@@ -62,11 +63,22 @@ public:
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
 
 public:
+    bool isDiscovering() const { return m_isDiscovering; }
     void pairDevice(const QString &address);
+
+Q_SIGNALS: 
+    void discoveringChanged(bool isDiscovering);
 
 private:
     QDBusConnection m_dbus;
     QDBusInterface m_bluezManager;
+
+    bool m_isDiscovering = false;
+    QTimer m_timer;
+    void stopDiscovery();
+    void startDiscovery();
+    void toggleDiscovery();
+    void restartTimer();
 
     QScopedPointer<QDBusInterface> m_bluezAdapter;
     void clearAdapter();
@@ -81,6 +93,7 @@ private:
     void emitRowChanged(int row);
 
 private Q_SLOTS:
+    void slotTimeout();
     void slotDeviceChanged();
     void slotDeviceCreated(const QDBusObjectPath &);
     void slotDeviceRemoved(const QDBusObjectPath &);
