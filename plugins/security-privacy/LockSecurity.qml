@@ -153,7 +153,7 @@ ItemPage {
                     return i18n.tr("Incorrect passphrase. Try again.")
 
                 //Fallback to prevent warnings. Not displayed.
-                return i18n.tr("Incorrect. Try again.")
+                return ""
             }
             visible: false
             color: "darkred"
