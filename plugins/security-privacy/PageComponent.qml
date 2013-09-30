@@ -148,7 +148,11 @@ ItemPage {
                 text: i18n.tr("Diagnostics")
                 progression: true
                 value: diagnosticsWidget.canReportCrashes ?
+                           /* TRANSLATORS: This string is shown when crash
+                              reports are to be sent by the system. */
                            i18n.tr("Sent") :
+                           /* TRANSLATORS: This string is shown when crash
+                              reports are not to be sent by the system */
                            i18n.tr("Not sent")
                 onClicked: {
                     var path = "../diagnostics/PageComponent.qml";
