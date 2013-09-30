@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-26 13:30+0200\n"
-"PO-Revision-Date: 2013-09-28 11:35+0000\n"
+"PO-Revision-Date: 2013-09-29 13:27+0000\n"
 "Last-Translator: Zonov Roman <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-09-29 05:48+0000\n"
+"X-Launchpad-Export-Date: 2013-09-30 05:45+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -225,7 +225,7 @@ msgstr "Блокировать в режиме ожидания"
 #: ../plugins/battery/PageComponent.qml:237
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
-msgstr ""
+msgstr "Засыпать в режиме ожидания"
 
 #: ../plugins/battery/PageComponent.qml:242
 #: ../plugins/battery/PageComponent.qml:250
@@ -542,11 +542,12 @@ msgstr "Автозаполнение"
 
 #: ../plugins/language/PageComponent.qml:98
 msgid "Auto capitalization"
-msgstr ""
+msgstr "Автокапсуляция"
 
 #: ../plugins/language/PageComponent.qml:105
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
+"Включает Shift для того, чтобы каждое предложение начиналось с большой буквы."
 
 #: ../plugins/language/PageComponent.qml:111
 msgid "Auto punctuation"
@@ -617,7 +618,7 @@ msgstr "SIM"
 #: ../plugins/phone/PageComponent.qml:60 ../plugins/phone/Services.qml:29
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "Сервисы от %1"
 
 #: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
@@ -909,6 +910,7 @@ msgid "1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 минуту"
 msgstr[1] "%1 минуты"
+msgstr[2] "%1 минут"
 
 #: ../plugins/security-privacy/PageComponent.qml:79
 msgid "SIM PIN"
@@ -920,7 +922,7 @@ msgstr "Конфиденциальность:"
 
 #: ../plugins/security-privacy/PageComponent.qml:88
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Статистика на домашнем экране"
 
 #: ../plugins/security-privacy/PageComponent.qml:101
 msgid "Messages on welcome screen"
@@ -984,7 +986,7 @@ msgstr "Сообщение принято"
 
 #: ../plugins/sound/PageComponent.qml:92
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "Звуки при нажатии на клавишу"
 
 #: ../plugins/sound/PageComponent.qml:99
 msgid "Lock sound"
@@ -1106,7 +1108,7 @@ msgstr "Установить (требуется перезагрузка)"
 
 #: ../plugins/system-update/PageComponent.qml:337
 msgid "On wi-fi"
-msgstr ""
+msgstr "Через wi-fi"
 
 #: ../plugins/system-update/PageComponent.qml:339
 msgid "Always"
