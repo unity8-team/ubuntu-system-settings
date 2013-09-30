@@ -274,19 +274,16 @@ ItemPage {
                 control: Switch {
                     id: wifiSwitch
                     checked: batteryBackend.wifiEnabled
+                    onClicked: batteryBackend.wifiEnabled = checked
                 }
+                Component.onCompleted:
+                    clicked.connect(wifiSwitch.clicked)
             }
 
             Binding {
                 target: wifiSwitch
                 property: "checked"
                 value: batteryBackend.wifiEnabled
-            }
-
-            Binding {
-                target: batteryBackend
-                property: "wifiEnabled"
-                value: wifiSwitch.checked
             }
 
             QDBusActionGroup {
