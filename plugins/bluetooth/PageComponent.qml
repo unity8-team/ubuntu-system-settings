@@ -40,6 +40,11 @@ ItemPage {
         ProvidePasskeyDialog { }
     }
 
+    Component {
+        id: providePinCodeDialog
+        ProvidePinCodeDialog { }
+    }
+
     Connections {
         target: backend.agent
         onPasskeyConfirmationNeeded: {
@@ -51,6 +56,11 @@ ItemPage {
             var popup = PopupUtils.open(providePasskeyDialog, root, {name: device.name})
             popup.canceled.connect(function() {target.providePasskey(tag, false, 0)})
             popup.provided.connect(function(passkey) {target.providePasskey(tag, true, passkey)})
+        }
+        onPinCodeNeeded: {
+            var popup = PopupUtils.open(providePinCodeDialog, root, {name: device.name})
+            popup.canceled.connect(function() {target.providePinCode(tag, false, "")})
+            popup.provided.connect(function(pinCode) {target.providePinCode(tag, true, pinCode)})
         }
     }
 

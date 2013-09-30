@@ -18,7 +18,6 @@
  *
 */
 
-#include <QDebug>
 #include <QDBusReply>
 
 #include "devicemodel.h"
