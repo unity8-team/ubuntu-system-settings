@@ -54,7 +54,6 @@ public:
     QString deviceString() const;
     int lastFullCharge() const;
     Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution);
-    /* TODO: should be a dynamic property, or replaced by proper qt bindings */
     bool getWifiEnabled();
     void setWifiEnabled(bool enabled);
 
