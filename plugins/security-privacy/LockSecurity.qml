@@ -79,7 +79,7 @@ ItemPage {
                 case UbuntuSecurityPrivacyPanel.Passphrase:
                     return i18n.tr("Change passphrase")
                 default: // To stop the runtime complaining
-                    return i18n.tr("Change")
+                    return ""
                 }
             } else {
                 switch (changeSecurityDialog.newMethod) {
@@ -102,7 +102,7 @@ ItemPage {
                     return i18n.tr("Existing passphrase")
                 // Shouldn't be reached when visible but still evaluated
                 default:
-                    return i18n.tr("Existing")
+                    return ""
                 }
             }
 
@@ -168,7 +168,7 @@ ItemPage {
                     return i18n.tr("Choose passphrase")
                 // Shouldn't be reached when visible but still evaluated
                 default:
-                    return i18n.tr("Choose")
+                    return ""
                 }
             }
             visible: newInput.visible
@@ -214,7 +214,7 @@ ItemPage {
                     return i18n.tr("Confirm passphrase")
                 // Shouldn't be reached when visible but still evaluated
                 default:
-                    return i18n.tr("Confirm")
+                    return ""
                 }
             }
             visible: confirmInput.visible
@@ -259,7 +259,7 @@ ItemPage {
                     return i18n.tr("Those passphrases don't match. Try again.")
 
                 //Fallback to prevent warnings. Not displayed.
-                return i18n.tr("Incorrect. Try again.")
+                return ""
             }
             visible: false
             color: "darkred"
