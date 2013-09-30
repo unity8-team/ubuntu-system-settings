@@ -43,12 +43,16 @@ ItemPage {
             hr = Math.round (timeDelta / 3600),
             day = Math.round (timeDelta / 86400);
         if (sec < 60)
+            // TRANSLATORS: %1 is the number of seconds
             return i18n.tr("%1 second ago".arg(sec), "%1 seconds ago".arg(sec), sec)
         else if (min < 60)
+            // TRANSLATORS: %1 is the number of minutes
             return i18n.tr("%1 minute ago".arg(min), "%1 minutes ago".arg(min), min)
         else if (hr < 24)
+            // TRANSLATORS: %1 is the number of hours
             return i18n.tr("%1 hour ago".arg(hr), "%1 hours ago".arg(hr), hr)
         else
+            // TRANSLATORS: %1 is the number of days
             return i18n.tr("%1 day ago".arg(day), "%1 days ago".arg(day), day)
     }
 
@@ -243,6 +247,7 @@ ItemPage {
                     if (batteryBackend.powerdRunning ) {
                         var timeout = Math.round(powerSettings.activityTimeout/60)
                         return (powerSettings.activityTimeout != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
                                     i18n.tr("After %1 minute".arg(timeout),
                                             "After %1 minutes".arg(timeout),
                                             timeout) :
@@ -251,6 +256,7 @@ ItemPage {
                     else {
                         var timeout = Math.round(powerSettings.idleDelay/60)
                         return (powerSettings.idleDelay != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
                                     i18n.tr("After %1 minute".arg(timeout),
                                             "After %1 minutes".arg(timeout),
                                             timeout) :

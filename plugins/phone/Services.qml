@@ -26,6 +26,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ItemPage {
     property string carrierString
     property var sim
+    // TRANSLATORS: %1 is the name of the (network) carrier
     title: i18n.tr("%1 Services").arg(carrierString)
 
     Column {

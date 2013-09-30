@@ -68,6 +68,7 @@ ItemPage {
             }
             ListItem.SingleValue {
                 text: i18n.tr("Phone locking")
+                // TRANSLATORS: %1 is the number of minutes
                 value: i18n.tr("1 minute",
                                "%1 minutes".arg(5),
                                5)

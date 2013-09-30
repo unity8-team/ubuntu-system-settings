@@ -57,6 +57,7 @@ ItemPage {
         ListItem.Divider {}
 
         ListItem.Standard {
+            // TRANSLATORS: %1 is the name of the (network) carrier
             text: i18n.tr("%1 Services").arg(carrierString)
             progression: true
             enabled: sim.present
