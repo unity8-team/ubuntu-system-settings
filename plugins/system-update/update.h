@@ -44,7 +44,7 @@ public:
     explicit Update(QObject *parent = 0);
     ~Update();
 
-    enum State { CheckingError, Checking, NoUpdate, UpdateAvailable, Downloading, Paused, ReadyToInstall, DownloadFailed };
+    enum State { CheckingError, Checking, NoUpdate, UpdateAvailable, DownloadRequested, Downloading, Paused, ReadyToInstall, DownloadFailed };
 
     QString InfoMessage();
     void SetInfoMessage(QString);
