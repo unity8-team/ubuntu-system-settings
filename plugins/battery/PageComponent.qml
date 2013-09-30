@@ -266,9 +266,21 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
                 control: Switch {
-                    checked: batteryBackend.getWifiStatus()
-                    onCheckedChanged: batteryBackend.setWifiStatus(checked)
+                    id: wifiSwitch
+                    checked: batteryBackend.wifiEnabled
                 }
+            }
+
+            Binding {
+                target: wifiSwitch
+                property: "checked"
+                value: batteryBackend.wifiEnabled
+            }
+
+            Binding {
+                target: batteryBackend
+                property: "wifiEnabled"
+                value: wifiSwitch.checked
             }
 
             QDBusActionGroup {
