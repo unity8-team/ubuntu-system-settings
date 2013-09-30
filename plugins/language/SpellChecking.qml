@@ -53,9 +53,11 @@ ItemPage {
 
             /* TODO: Get real spelling language */
 
-            SettingsCheckEntry {
-                textEntry: "English (US)"
-                checkStatus: true
+            ListItem.Standard {
+                text: "English (US)"
+                control: CheckBox {
+                    checked: true
+                }
             }
 
             ListItem.Divider {}
@@ -66,12 +68,14 @@ ItemPage {
 
             /* TODO: Get real available languages */
 
-            SettingsCheckEntry {
-                textEntry: "Afar"
+            ListItem.Standard {
+                text: "Afar"
+                control: CheckBox {}
             }
 
-            SettingsCheckEntry {
-                textEntry: "Afrikaans"
+            ListItem.Standard {
+                text: "Afrikaans"
+                control: CheckBox {}
             }
         }
     }

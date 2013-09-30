@@ -71,10 +71,11 @@ ItemPage {
                     { title: text, lockOnSuspend: lockOnSuspend } )
         }
 
-        SettingsCheckEntry {
-            checkStatus: true
-            textEntry: i18n.tr("Sleep locks immediately")
-            enabled: false /* TODO: enable when there is a backend */
+        ListItem.Standard {
+            control: CheckBox {
+                checked: true
+            }
+            text: i18n.tr("Sleep locks immediately")
         }
 
     /* TODO: once we know how to do this

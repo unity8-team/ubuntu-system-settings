@@ -44,14 +44,18 @@ ItemPage {
 
             /* TODO: Get actual installed layouts. */
 
-            SettingsCheckEntry {
-                textEntry: "English (US)"
-                checkStatus: true
+            ListItem.Standard {
+                text: "English (US)"
+                control: CheckBox {
+                    checked: true
+                }
             }
 
-            SettingsCheckEntry {
-                textEntry: "French"
-                checkStatus: true
+            ListItem.Standard {
+                text: "French"
+                control: CheckBox {
+                    checked: true
+                }
             }
 
             ListItem.Standard {
@@ -60,12 +64,14 @@ ItemPage {
 
             /* TODO: Get actual layouts. */
 
-            SettingsCheckEntry {
-                textEntry: "Afghani"
+            ListItem.Standard {
+                text: "Afghani"
+                control: CheckBox {}
             }
 
-            SettingsCheckEntry {
-                textEntry: "Akan"
+            ListItem.Standard {
+                text: "Akan"
+                control: CheckBox {}
             }
         }
     }
