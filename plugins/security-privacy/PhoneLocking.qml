@@ -63,8 +63,8 @@ ItemPage {
                                 : i18n.tr("Sleep when idle")
             // TRANSLATORS: %1 is the number of minutes
             value: i18n.tr("%1 minute",
-                           "%1 minutes".arg(5),
-                           5)
+                           "%1 minutes",
+                           5).arg(5)
             progression: true
             onClicked:
                 pageStack.push(
