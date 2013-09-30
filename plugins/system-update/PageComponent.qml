@@ -237,13 +237,12 @@ ItemPage {
                         }
                     }
 
-                    ListItem.ItemSelector {
+                    ListItem.Standard {
                         id: versionId
                         text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
-                        model: updateBackend.updateDescriptions
-                        selectedIndex: -1
                         showDivider: false
                     }
+                    /* TODO: list updateBackend.updateDescriptions once bug #1215586 is resolved */
 
                     ListItem.Subtitled {
                         id: subtitleId
