@@ -43,13 +43,17 @@ ItemPage {
             hr = Math.round (timeDelta / 3600),
             day = Math.round (timeDelta / 86400);
         if (sec < 60)
-            return i18n.tr("%1 second ago".arg(sec), "%1 seconds ago".arg(sec), sec)
+            // TRANSLATORS: %1 is the number of seconds
+            return i18n.tr("%1 second ago", "%1 seconds ago", sec).arg(sec)
         else if (min < 60)
-            return i18n.tr("%1 minute ago".arg(min), "%1 minutes ago".arg(min), min)
+            // TRANSLATORS: %1 is the number of minutes
+            return i18n.tr("%1 minute ago", "%1 minutes ago", min).arg(min)
         else if (hr < 24)
-            return i18n.tr("%1 hour ago".arg(hr), "%1 hours ago".arg(hr), hr)
+            // TRANSLATORS: %1 is the number of hours
+            return i18n.tr("%1 hour ago", "%1 hours ago", hr).arg(hr)
         else
-            return i18n.tr("%1 day ago".arg(day), "%1 days ago".arg(day), day)
+            // TRANSLATORS: %1 is the number of days
+            return i18n.tr("%1 day ago", "%1 days ago", day).arg(day)
     }
 
     GSettings {
@@ -243,17 +247,19 @@ ItemPage {
                     if (batteryBackend.powerdRunning ) {
                         var timeout = Math.round(powerSettings.activityTimeout/60)
                         return (powerSettings.activityTimeout != 0) ?
-                                    i18n.tr("After %1 minute".arg(timeout),
-                                            "After %1 minutes".arg(timeout),
-                                            timeout) :
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
                                     i18n.tr("Never")
                     }
                     else {
                         var timeout = Math.round(powerSettings.idleDelay/60)
                         return (powerSettings.idleDelay != 0) ?
-                                    i18n.tr("After %1 minute".arg(timeout),
-                                            "After %1 minutes".arg(timeout),
-                                            timeout) :
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
                                     i18n.tr("Never")
                     }
                 }

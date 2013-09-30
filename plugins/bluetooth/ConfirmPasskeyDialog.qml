@@ -33,6 +33,7 @@ Dialog {
     signal canceled
     signal confirmed
 
+    // TRANSLATORS: %1 is the name of the bluetooth device being paired
     text: i18n.tr("Please confirm that the PIN displayed on '%1' matches this one").arg(root.name)
 
     Label {

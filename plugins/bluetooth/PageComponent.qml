@@ -66,8 +66,10 @@ ItemPage {
 
     function getDisplayName(connection, displayName) {
       if (connection == Device.Connecting)
+        // TRANSLATORS: %1 is the display name of the device that is connecting
         return i18n.tr("%1 (Connecting…)").arg(displayName);
       else if (connection == Device.Disconnecting)
+        // TRANSLATORS: %1 is the display name of the device that is disconnecting
         return i18n.tr("%1 (Disconnecting…)").arg(displayName);
       else
         return displayName;
