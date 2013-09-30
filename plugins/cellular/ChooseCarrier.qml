@@ -55,17 +55,15 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-       ListItem.ValueSelector {
+       ListItem.ItemSelector {
             id: carrierSelector
             expanded: true
-            // TODO: There is no way to have a ValueSelector always expanded
-            onExpandedChanged: expanded = true
             /* FIXME: This is disabled since it is currently a
              * read-only setting
              * enabled: cellularDataControl.checked
              */
             enabled: true
-            values: operatorNames
+            model: operatorNames
             selectedIndex: curOp
             onSelectedIndexChanged: {
                 operators[selectedIndex].registerOp();
