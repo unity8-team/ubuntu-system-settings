@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=System Settings
 Icon=system-settings
-Exec=system-settings
+Exec=system-settings %u
 Terminal=false
 Type=Application
 StartupNotify=true
