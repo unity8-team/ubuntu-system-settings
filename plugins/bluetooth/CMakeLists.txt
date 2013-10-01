@@ -20,7 +20,7 @@ add_library(UbuntuBluetoothPanel MODULE
 qt5_use_modules(UbuntuBluetoothPanel Qml Quick DBus)
 
 set(QML_SOURCES
-ProvidePinCodeDialgo.qml
+ProvidePinCodeDialog.qml
 ConfirmPasskeyDialog.qml
 ProvidePasskeyDialog.qml
 PageComponent.qml 
