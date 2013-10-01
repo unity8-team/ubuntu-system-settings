@@ -20,13 +20,17 @@ Column {
     }
 
     Grid {
-        property int itemWidth: units.gu(14)
+        property int itemWidth: units.gu(11)
 
         anchors.leftMargin: (parent.width - width) / 2
         anchors.rightMargin: anchors.leftMargin
         width: (columns * itemWidth) + columnSpacing * (columns - 1)
         anchors.horizontalCenter: parent.horizontalCenter
-        columns: Math.floor(parent.width / itemWidth)
+        columns: {
+            var items = Math.floor(parent.width / itemWidth)
+            var count = repeater.count
+            return count < items ? count : items
+        }
         columnSpacing: spacing
 
         Repeater {
