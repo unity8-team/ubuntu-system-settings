@@ -21,7 +21,7 @@ add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/ubuntu-system-settings.pot
     DEPENDS ${SOURCECODE} #desktop.js settings.js
 )
 
-set(languages "ar;be;bg;bs;ca;de;el;en_AU;en_GB;eo;es;fa;fi;fr;gl;gu;he;hi;hr;hu;id;it;ko;lv;my;nb;pl;pt_BR;pt;ru;sl;sv;tr;ug;uk;xh;zh_CN;zh_TW")
+set(languages "ar;ast;be;bg;bs;ca;de;el;en_AU;en_GB;eo;es;fa;fi;fr;gl;gu;he;hi;hr;hu;id;it;ko;lv;my;nb;pl;pt_BR;pt;ru;sl;sv;tr;ug;uk;xh;zh_CN;zh_TW")
 foreach(i ${languages})
   add_custom_command(OUTPUT ${i}.mo
   COMMAND ${MSGFMT_BIN} ${CMAKE_CURRENT_SOURCE_DIR}/${i}.po -o ${CMAKE_CURRENT_BINARY_DIR}/${i}.mo

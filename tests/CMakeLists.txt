@@ -20,6 +20,15 @@ add_executable(tst-plugins
     ../src/plugin-manager.h
     ../src/plugin.h
 )
+
+add_executable(tst-arguments
+    tst_arguments.cpp
+    ../src/utils.cpp
+)
+
 qt5_use_modules(tst-plugins Core Qml Test)
 target_link_libraries(tst-plugins SystemSettings)
 add_test(tst-plugins tst-plugins)
+
+qt5_use_modules(tst-arguments Core Test)
+add_test(tst-arguments tst-arguments)

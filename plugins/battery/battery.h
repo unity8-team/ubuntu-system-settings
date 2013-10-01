@@ -42,6 +42,11 @@ class Battery : public QObject
                 READ lastFullCharge
                 NOTIFY lastFullChargeChanged)
 
+    Q_PROPERTY( bool wifiEnabled
+                READ getWifiEnabled
+                WRITE setWifiEnabled
+                NOTIFY wifiEnabledChanged)
+
 public:
     explicit Battery(QObject *parent = 0);
     ~Battery();
@@ -49,12 +54,12 @@ public:
     QString deviceString() const;
     int lastFullCharge() const;
     Q_INVOKABLE QVariantList getHistory(const QString &deviceString, const int timespan, const int resolution);
-    /* TODO: should be a dynamic property, or replaced by proper qt bindings */
-    Q_INVOKABLE bool getWifiStatus();
-    Q_INVOKABLE void setWifiStatus(bool enableStatus);
+    bool getWifiEnabled();
+    void setWifiEnabled(bool enabled);
 
 Q_SIGNALS:
     void lastFullChargeChanged();
+    void wifiEnabledChanged();
 
 private:
     QDBusConnection m_systemBusConnection;

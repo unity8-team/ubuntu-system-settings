@@ -3,8 +3,7 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Iain Lane <iain.lane@canonical.com>
- *          William Hua <william.hua@canonical.com>
+ * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -19,20 +18,17 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtQml>
-#include "plugin.h"
-#include "subset-model.h"
-#include "language-plugin.h"
+#ifndef SYSTEM_SETTINGS_UTILS_H
+#define SYSTEM_SETTINGS_UTILS_H
 
-void BackendPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.LanguagePlugin"));
+#include <QStringList>
+#include <QVariantMap>
 
-    qmlRegisterType<SubsetModel>(uri, 1, 0, "SubsetModel");
-    qmlRegisterType<LanguagePlugin>(uri, 1, 0, "UbuntuLanguagePlugin");
-}
+namespace SystemSettings {
 
-void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    QQmlExtensionPlugin::initializeEngine(engine, uri);
-}
+void parsePluginOptions(const QStringList &arguments, QString &defaultPlugin,
+                        QVariantMap &pluginOptions);
+
+} // namespace
+
+#endif // SYSTEM_SETTINGS_UTILS_H

@@ -13,6 +13,7 @@ set(USS_SOURCES
     main.cpp
     plugin-manager.cpp
     plugin.cpp
+    utils.cpp
 )
 
 QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
