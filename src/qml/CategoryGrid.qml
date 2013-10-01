@@ -22,7 +22,11 @@ Column {
     Grid {
         anchors.left: parent.left
         anchors.right: parent.right
-        columns: width / units.gu(14)
+        columns: Math.floor(width / units.gu(15))
+        columnSpacing: (width - anchors.leftMargin -
+                        anchors.rightMargin - (columns * units.gu(15))
+                        - parent.spacing * 2) /
+                       (columns - 1)
 
         Repeater {
             id: repeater
@@ -31,7 +35,7 @@ Column {
 
             delegate: Loader {
                 id: loader
-                width: units.gu(14)
+                width: units.gu(15)
                 sourceComponent: model.item.entryComponent
 
                 Connections {

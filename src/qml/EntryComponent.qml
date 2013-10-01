@@ -34,6 +34,7 @@ Item {
         anchors.right: parent.right
 
         Image {
+            id: icon
             anchors.horizontalCenter: parent.horizontalCenter
             width: units.gu(6)
             height: width
@@ -42,6 +43,9 @@ Item {
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
             text: i18n.dtr(model.item.translations, model.displayName)
+            width: col.width
+            horizontalAlignment: Text.AlignHCenter
+            elide: Text.ElideMiddle
         }
     }
 
