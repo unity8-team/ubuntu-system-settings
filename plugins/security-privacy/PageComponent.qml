@@ -68,9 +68,10 @@ ItemPage {
             }
             ListItem.SingleValue {
                 text: i18n.tr("Phone locking")
-                value: i18n.tr("1 minute",
-                               "%1 minutes".arg(5),
-                               5)
+                // TRANSLATORS: %1 is the number of minutes
+                value: i18n.tr("%1 minute",
+                               "%1 minutes",
+                               5).arg(5)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
                 visible: showAllUI
@@ -147,7 +148,11 @@ ItemPage {
                 text: i18n.tr("Diagnostics")
                 progression: true
                 value: diagnosticsWidget.canReportCrashes ?
+                           /* TRANSLATORS: This string is shown when crash
+                              reports are to be sent by the system. */
                            i18n.tr("Sent") :
+                           /* TRANSLATORS: This string is shown when crash
+                              reports are not to be sent by the system */
                            i18n.tr("Not sent")
                 onClicked: {
                     var path = "../diagnostics/PageComponent.qml";

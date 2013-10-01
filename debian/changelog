@@ -1,3 +1,29 @@
+ubuntu-system-settings (0.1+13.10.20130930-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * update: hide the description of the updates from the panel, since
+    the current version of the server doesn't provide those information.
+    (see bug #1215586 for details). (LP: #1215586)
+  * cellular: - use the new itemselector widget rather the deprecated
+    valueselector - hide the non implemented statistics option - turn
+    the data mode selector to an on/off switch, ofono supports only
+    those.
+
+  [ Iain Lane ]
+  * Use GLib to get the sizes of directories to display in
+    Storage>About, displaying a spinner while the information is being
+    calculated. Also record the total space used by click packages to
+    display too. (LP: #1205297, #1228419)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * In a hacky way, try hiding the welcome-screen background changing
+    elements for v1 - by a design decision. (LP: #1230295)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 401
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 30 Sep 2013 09:37:44 +0000
+
 ubuntu-system-settings (0.1+13.10.20130926.4-0ubuntu1) saucy; urgency=low
 
   [ Charles Kerr ]

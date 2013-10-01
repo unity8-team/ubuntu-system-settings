@@ -17,4 +17,5 @@ system-settings.pro.user
 /lib/SystemSettings/SystemSettings.pc
 /po/*.mo
 /src/system-settings
+/tests/tst_arguments
 /tests/tst_plugins

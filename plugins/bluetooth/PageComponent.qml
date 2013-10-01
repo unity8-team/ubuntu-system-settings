@@ -40,6 +40,11 @@ ItemPage {
         ProvidePasskeyDialog { }
     }
 
+    Component {
+        id: providePinCodeDialog
+        ProvidePinCodeDialog { }
+    }
+
     Connections {
         target: backend.agent
         onPasskeyConfirmationNeeded: {
@@ -52,12 +57,19 @@ ItemPage {
             popup.canceled.connect(function() {target.providePasskey(tag, false, 0)})
             popup.provided.connect(function(passkey) {target.providePasskey(tag, true, passkey)})
         }
+        onPinCodeNeeded: {
+            var popup = PopupUtils.open(providePinCodeDialog, root, {name: device.name})
+            popup.canceled.connect(function() {target.providePinCode(tag, false, "")})
+            popup.provided.connect(function(pinCode) {target.providePinCode(tag, true, pinCode)})
+        }
     }
 
     function getDisplayName(connection, displayName) {
       if (connection == Device.Connecting)
+        // TRANSLATORS: %1 is the display name of the device that is connecting
         return i18n.tr("%1 (Connecting…)").arg(displayName);
       else if (connection == Device.Disconnecting)
+        // TRANSLATORS: %1 is the display name of the device that is disconnecting
         return i18n.tr("%1 (Disconnecting…)").arg(displayName);
       else
         return displayName;
@@ -145,7 +157,12 @@ ItemPage {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect a different headset:") : i18n.tr("Connect a headset:")
                 enabled: backend.enabled
+                control: ActivityIndicator {
+                    visible: backend.discovering
+                    running: true
+                }
             }
+
             ListView {
                 id: disconnectedList
                 width: parent.width
@@ -166,6 +183,7 @@ ItemPage {
                 id: disconnectedNone
                 text: i18n.tr("None detected")
                 visible: !disconnectedList.visible
+                enabled: !backend.discovering
             }
         }
     }

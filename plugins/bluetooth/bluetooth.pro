@@ -19,6 +19,7 @@ INSTALLS += image
 QML_SOURCES = \
   ConfirmPasskeyDialog.qml \
   ProvidePasskeyDialog.qml \
+  ProvidePinCodeDialog.qml \
   PageComponent.qml 
 
 OTHER_FILES += $${QML_SOURCES}

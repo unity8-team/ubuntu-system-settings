@@ -20,10 +20,6 @@ _ spec wants a small histogram of signal strength.
 _ spec wants the pin entry dialog to hover over the other window;
   currently it overlays the entire window
 
-_ spec wants "Connect to a different headset:" to have a spinner indicating
-  when we're looking for other devices every 5 seconds. Current implementation
-  is to always watch for new devices when the page is open.
-
 _ spec's "Provide Passkey" dialog is overlaid over the Bluetooth page.
   Implementation has a fullpage dialog.
 

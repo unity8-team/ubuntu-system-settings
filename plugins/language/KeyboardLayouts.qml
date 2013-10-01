@@ -18,60 +18,42 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
-    id: root
-
     title: i18n.tr("Keyboard layouts")
-    flickable: scrollWidget
 
-    Flickable {
-        id: scrollWidget
+    UbuntuLanguagePlugin {
+        id: plugin
+    }
+
+    SubsetView {
+        id: subsetView
+
+        clip: true
+
         anchors.fill: parent
-        contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        Column {
-            anchors.fill: parent
+        subsetLabel: i18n.tr("Current layouts:")
+        supersetLabel: i18n.tr("All layouts available:")
 
-            ListItem.Standard {
-                text: i18n.tr("Current layouts:")
-            }
+        model: plugin.keyboardLayoutsModel
+        delegate: KeyboardLayoutItem {
+            name: model.language
+            shortName: model.icon
+            checked: model.checked
+            enabled: model.enabled
 
-            /* TODO: Get actual installed layouts. */
+            onCheckedChanged: {
+                var element = model.index < subsetView.model.subset.length ?
+                              subsetView.model.subset[model.index] :
+                              model.index - subsetView.model.subset.length
 
-            ListItem.Standard {
-                text: "English (US)"
-                control: CheckBox {
-                    checked: true
-                }
-            }
+                plugin.keyboardLayoutsModel.setChecked(element, checked, checked ? 0 : subsetView.delay)
 
-            ListItem.Standard {
-                text: "French"
-                control: CheckBox {
-                    checked: true
-                }
-            }
-
-            ListItem.Standard {
-                text: i18n.tr("All layouts available:")
-            }
-
-            /* TODO: Get actual layouts. */
-
-            ListItem.Standard {
-                text: "Afghani"
-                control: CheckBox {}
-            }
-
-            ListItem.Standard {
-                text: "Akan"
-                control: CheckBox {}
+                checked = Qt.binding(function() { return model.checked })
             }
         }
     }
