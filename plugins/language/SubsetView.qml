@@ -20,6 +20,7 @@
 
 import QtQuick 2.0
 import SystemSettings 1.0
+import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ListView {
@@ -41,20 +42,22 @@ ListView {
         text: section == "true" ? subsetLabel : supersetLabel
     }
 
-    delegate: SettingsCheckEntry {
-        textEntry: model.display
-        checkStatus: model.checked
+    delegate: ListItem.Standard {
+        text: model.display
+        control: CheckBox {
+            checked: model.checked
+            onCheckedChanged: {
+                var element = model.index < root.model.subset.length ?
+                              root.model.subset[model.index] :
+                              model.index - root.model.subset.length
+
+                root.model.setChecked(element, checked, checked ? 0 : delay)
+
+                checked = Qt.binding(function() { return model.checked })
+            }
+        }
         enabled: model.enabled
 
-        onCheckStatusChanged: {
-            var element = model.index < root.model.subset.length ?
-                          root.model.subset[model.index] :
-                          model.index - root.model.subset.length
-
-            root.model.setChecked(element, checkStatus, checkStatus ? 0 : delay)
-
-            checkStatus = Qt.binding(function() { return model.checked })
-        }
     }
 
     add: Transition {
