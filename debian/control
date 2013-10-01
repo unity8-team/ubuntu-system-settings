@@ -46,7 +46,7 @@ Depends: ${misc:Depends},
          whoopsie-preferences (>= 0.9),
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 0.9),
-         ubuntu-keyboard-data,
+         ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
 Conflicts: ubuntu-system-settings-example
