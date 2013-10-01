@@ -47,7 +47,7 @@ Update::Update(QObject *parent) :
     qDBusRegisterMetaType<StringMap>();
     qDBusRegisterMetaType<ArrayDict>();
 
-    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QList<QMap<QString, QString> >, QString)),
+    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, ArrayDict, QString)),
                this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, ArrayDict, QString)));
     // signals to forward directly to QML
     connect(&m_SystemServiceIface, SIGNAL(UpdateProgress(int, double)),
