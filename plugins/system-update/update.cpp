@@ -43,8 +43,8 @@ Update::Update(QObject *parent) :
                          m_systemBusConnection)
 {
 
-    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QString)),
-               this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QString)));
+    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QList<QMap<QString, QString> >, QString)),
+               this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QList<QMap<QString, QString> >, QString)));
     // signals to forward directly to QML
     connect(&m_SystemServiceIface, SIGNAL(UpdateProgress(int, double)),
                 this, SIGNAL(updateProgress(int, double)));
@@ -147,9 +147,10 @@ QString Update::TranslateFromBackend(QString msg) {
     return msg;
 }
 
-void Update::ProcessAvailableStatus(bool isAvailable, bool downloading, QString availableVersion, int updateSize, QString lastUpdateDate, QString errorReason)
+void Update::ProcessAvailableStatus(bool isAvailable, bool downloading, QString availableVersion, int updateSize, QString lastUpdateDate, QList<QMap<QString, QString> > desc, QString errorReason)
 {
     //TODO: bind with the real description once we can listen to the signal
+    desc = desc;
     QStringList descriptions;
     descriptions.append("Description for update1");
     descriptions.append("Description for update2");

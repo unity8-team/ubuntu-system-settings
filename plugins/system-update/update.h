@@ -59,7 +59,7 @@ public:
     Q_INVOKABLE QString TranslateFromBackend(QString);
 
 public Q_SLOTS:
-    void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
+    void ProcessAvailableStatus(bool, bool, QString, int, QString, QList<QMap<QString, QString> >, QString);
     void ProcessSettingChanged(QString, QString);
 
 Q_SIGNALS:
