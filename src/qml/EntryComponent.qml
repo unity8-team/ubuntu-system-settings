@@ -45,7 +45,8 @@ Item {
             text: i18n.dtr(model.item.translations, model.displayName)
             width: col.width
             horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideMiddle
+            //elide: Text.ElideMiddle
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         }
     }
 

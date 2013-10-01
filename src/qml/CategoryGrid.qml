@@ -20,7 +20,7 @@ Column {
     }
 
     Grid {
-        property int itemWidth: units.gu(15)
+        property int itemWidth: units.gu(14)
 
         anchors.leftMargin: (parent.width - width) / 2
         anchors.rightMargin: anchors.leftMargin
