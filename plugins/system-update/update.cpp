@@ -43,8 +43,12 @@ Update::Update(QObject *parent) :
                          m_systemBusConnection)
 {
 
+    // register types
+    qDBusRegisterMetaType<StringMap>();
+    qDBusRegisterMetaType<ArrayDict>();
+
     connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QList<QMap<QString, QString> >, QString)),
-               this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QList<QMap<QString, QString> >, QString)));
+               this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, ArrayDict, QString)));
     // signals to forward directly to QML
     connect(&m_SystemServiceIface, SIGNAL(UpdateProgress(int, double)),
                 this, SIGNAL(updateProgress(int, double)));

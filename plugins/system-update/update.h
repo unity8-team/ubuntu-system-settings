@@ -27,6 +27,12 @@
 #include <QProcess>
 #include <QUrl>
 
+typedef QMap<QString, QString> StringMap;
+typedef QList<StringMap> ArrayDict;
+
+Q_DECLARE_METATYPE(StringMap)
+Q_DECLARE_METATYPE(ArrayDict)
+
 class Update : public QObject
 {
     Q_OBJECT
