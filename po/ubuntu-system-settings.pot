@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-30 16:31+0000\n"
+"POT-Creation-Date: 2013-09-30 22:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr ""
 #: ../plugins/battery/PageComponent.qml:263
 #: ../plugins/battery/SleepValues.qml:96
 #: ../plugins/system-update/Download.qml:53
-#: ../plugins/system-update/PageComponent.qml:339
+#: ../plugins/system-update/PageComponent.qml:347
 msgid "Never"
 msgstr ""
 
@@ -231,17 +231,17 @@ msgstr[1] ""
 msgid "Wi-Fi"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:297
-#: ../plugins/bluetooth/PageComponent.qml:100
-#: ../plugins/bluetooth/PageComponent.qml:108 ../.build/settings.js:5
+#: ../plugins/battery/PageComponent.qml:306
+#: ../plugins/bluetooth/PageComponent.qml:110
+#: ../plugins/bluetooth/PageComponent.qml:118 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:326
+#: ../plugins/battery/PageComponent.qml:335
 msgid "GPS"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:344
+#: ../plugins/battery/PageComponent.qml:353
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
@@ -265,6 +265,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr ""
 
@@ -276,6 +277,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:54
 #: ../plugins/language/DisplayLanguage.qml:95
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/reset/EraseEverything.qml:36
@@ -291,139 +293,141 @@ msgid "Confirm PIN"
 msgstr ""
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
-#: ../plugins/bluetooth/PageComponent.qml:60
+#: ../plugins/bluetooth/PageComponent.qml:70
 #, qt-format
 msgid "%1 (Connecting…)"
 msgstr ""
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
-#: ../plugins/bluetooth/PageComponent.qml:63
+#: ../plugins/bluetooth/PageComponent.qml:73
 #, qt-format
 msgid "%1 (Disconnecting…)"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:70
+#: ../plugins/bluetooth/PageComponent.qml:80
 msgid "Computer"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:71
+#: ../plugins/bluetooth/PageComponent.qml:81
 #: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
 msgid "Phone"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:72
+#: ../plugins/bluetooth/PageComponent.qml:82
 msgid "Modem"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:73 ../src/qml/MainWindow.qml:90
+#: ../plugins/bluetooth/PageComponent.qml:83 ../src/qml/MainWindow.qml:90
 msgid "Network"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:74
+#: ../plugins/bluetooth/PageComponent.qml:84
 msgid "Headset"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:75
+#: ../plugins/bluetooth/PageComponent.qml:85
 msgid "Headphones"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:76
+#: ../plugins/bluetooth/PageComponent.qml:86
 msgid "Video"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:77
+#: ../plugins/bluetooth/PageComponent.qml:87
 msgid "Other Audio"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:78
+#: ../plugins/bluetooth/PageComponent.qml:88
 msgid "Joypad"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:79
+#: ../plugins/bluetooth/PageComponent.qml:89
 msgid "Keyboard"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:80
+#: ../plugins/bluetooth/PageComponent.qml:90
 msgid "Tablet"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:81
+#: ../plugins/bluetooth/PageComponent.qml:91
 msgid "Mouse"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:82
+#: ../plugins/bluetooth/PageComponent.qml:92
 msgid "Printer"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:83
+#: ../plugins/bluetooth/PageComponent.qml:93
 msgid "Camera"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:84
+#: ../plugins/bluetooth/PageComponent.qml:94
 msgid "Other"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:90
+#: ../plugins/bluetooth/PageComponent.qml:100
 msgid "Excellent"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:91
+#: ../plugins/bluetooth/PageComponent.qml:101
 msgid "Good"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:92
+#: ../plugins/bluetooth/PageComponent.qml:102
 msgid "Fair"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:93
+#: ../plugins/bluetooth/PageComponent.qml:103
 msgid "Poor"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:94
-#: ../plugins/bluetooth/PageComponent.qml:183
-#: ../plugins/bluetooth/PageComponent.qml:191
+#: ../plugins/bluetooth/PageComponent.qml:104
+#: ../plugins/bluetooth/PageComponent.qml:193
+#: ../plugins/bluetooth/PageComponent.qml:201
 #: ../plugins/security-privacy/PhoneLocking.qml:40
 msgid "None"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:120
+#: ../plugins/bluetooth/PageComponent.qml:130
 msgid "Connected headset:"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:148
+#: ../plugins/bluetooth/PageComponent.qml:158
 msgid "Connect a different headset:"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:148
+#: ../plugins/bluetooth/PageComponent.qml:158
 msgid "Connect a headset:"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:174
+#: ../plugins/bluetooth/PageComponent.qml:184
 msgid "None detected"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:190
+#: ../plugins/bluetooth/PageComponent.qml:200
 msgid "Name"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:194
+#: ../plugins/bluetooth/PageComponent.qml:204
 msgid "Type"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:198
+#: ../plugins/bluetooth/PageComponent.qml:208
 msgid "Signal Strength"
 msgstr ""
 
-#: ../plugins/bluetooth/PageComponent.qml:203
+#: ../plugins/bluetooth/PageComponent.qml:213
 msgid "Disconnect"
 msgstr ""
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
 msgstr ""
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
 msgid "Pair"
 msgstr ""
 
@@ -749,10 +753,6 @@ msgstr ""
 msgid "Incorrect passphrase. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy/LockSecurity.qml:156
-msgid "Incorrect. Try again."
-msgstr ""
-
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
 msgstr ""
@@ -937,7 +937,7 @@ msgid "Stop playing"
 msgstr ""
 
 #: ../plugins/system-update/Download.qml:29
-#: ../plugins/system-update/PageComponent.qml:336
+#: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
 msgstr ""
 
@@ -965,92 +965,92 @@ msgstr ""
 msgid "Checking for updates…"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:82
+#: ../plugins/system-update/PageComponent.qml:83
 msgid "Apply update failed:"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:92
+#: ../plugins/system-update/PageComponent.qml:93
 msgid "Pause failed:"
 msgstr ""
 
 #. TRANSLATORS: %1 is the size of the update in GB
-#: ../plugins/system-update/PageComponent.qml:107
+#: ../plugins/system-update/PageComponent.qml:108
 #, qt-format
 msgid "%1 GB"
 msgstr ""
 
 #. TRANSLATORS: %1 is the size of the update in MB
-#: ../plugins/system-update/PageComponent.qml:110
+#: ../plugins/system-update/PageComponent.qml:111
 #, qt-format
 msgid "%1 MB"
 msgstr ""
 
 #. TRANSLATORS: %1 is the date when the device was last updated
-#: ../plugins/system-update/PageComponent.qml:119
+#: ../plugins/system-update/PageComponent.qml:120
 msgid "No software update available"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:119
+#: ../plugins/system-update/PageComponent.qml:120
 #, qt-format
 msgid "Last updated %1"
 msgstr ""
 
 #. TRANSLATORS: %1 is the number of seconds remaining
-#: ../plugins/system-update/PageComponent.qml:132
+#: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/system-update/PageComponent.qml:134
+#: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:140
+#: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:149
+#: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:204
-#: ../plugins/system-update/PageComponent.qml:314
+#: ../plugins/system-update/PageComponent.qml:205
+#: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:234
+#: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
 msgstr ""
 
 #. TRANSLATORS: %1 is the version of the update
-#: ../plugins/system-update/PageComponent.qml:247
+#: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:284
+#: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:291
+#: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:307
+#: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:321
+#: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:341
+#: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
 msgstr ""
 
-#: ../plugins/system-update/PageComponent.qml:343
+#: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
 msgstr ""
 
