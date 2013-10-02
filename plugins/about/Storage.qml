@@ -45,9 +45,10 @@ ItemPage {
                 type === StorageInfo.RemovableDrive ||
                 type === StorageInfo.UnknownDrive) &&
                 paths.indexOf(path) == -1 && // Haven't seen this device before
-                path !== "") { // Has a mount point
+                path.charAt(0) === "/") { // Has a real mount point
                 drives.push(drive)
                 paths.push(path)
+                console.log(path)
             }
         }
         return drives
