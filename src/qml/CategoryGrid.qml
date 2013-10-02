@@ -22,8 +22,13 @@ Column {
     Grid {
         property int itemWidth: units.gu(11)
 
-        anchors.leftMargin: (parent.width - width) / 2
-        anchors.rightMargin: anchors.leftMargin
+        // The amount of whitespace, including column spacing
+        property int space: parent.width - columns * itemWidth
+
+        // The column spacing is 1/n of the left/right margins
+        property int n: 4
+
+        columnSpacing: space / ((2 * n) + (columns - 1))
         width: (columns * itemWidth) + columnSpacing * (columns - 1)
         anchors.horizontalCenter: parent.horizontalCenter
         columns: {
@@ -31,7 +36,6 @@ Column {
             var count = repeater.count
             return count < items ? count : items
         }
-        columnSpacing: spacing
 
         Repeater {
             id: repeater
