@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2013 Canonical Ltd.
  *
- * Contact: Sebastien Bacher <sebastien.bacher@canonical.com>
+ * Contact: William Hua <william.hua@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -22,10 +22,10 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
-/* TODO: replace once https://bugs.launchpad.net/ubuntu-ui-toolkit/+bug/1197058 is fixed */
 ListItem.Base {
-    property string textEntry: ""
-    property alias checkStatus: checkBox.checked
+    property alias name: name.text
+    property alias checked: checkBox.checked
+    property alias shortName: shortName.text
 
     Row {
         anchors.top: parent.top
@@ -34,13 +34,41 @@ ListItem.Base {
 
         CheckBox {
             id: checkBox
+
             anchors.verticalCenter: parent.verticalCenter
         }
-        Label {
-            anchors.verticalCenter: parent.verticalCenter
-            text: textEntry
+
+        Row {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            spacing: units.gu(1)
+
+            Rectangle {
+                width: units.gu(3.0)
+                height: units.gu(3.0)
+                radius: units.gu(0.5)
+
+                color: Theme.palette.normal.backgroundText
+
+                anchors.verticalCenter: parent.verticalCenter
+
+                Label {
+                    id: shortName
+
+                    color: Theme.palette.normal.background
+                    fontSize: "small"
+
+                    anchors.centerIn: parent
+                }
+            }
+
+            Label {
+                id: name
+
+                anchors.verticalCenter: parent.verticalCenter
+            }
         }
     }
 
-    onClicked: checkStatus = !checkStatus
+    onClicked: checked = !checked
 }

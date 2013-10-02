@@ -22,6 +22,7 @@
 #define LANGUAGE_PLUGIN_H
 
 #include <QtCore>
+#include "subset-model.h"
 
 class LanguagePlugin : public QObject
 {
@@ -39,7 +40,41 @@ private:
 
     Q_PROPERTY(int currentLanguage
                READ currentLanguage
-               WRITE setCurrentLanguage)
+               WRITE setCurrentLanguage
+               NOTIFY currentLanguageChanged)
+
+    Q_PROPERTY(SubsetModel *keyboardLayoutsModel
+               READ keyboardLayoutsModel
+               CONSTANT)
+
+    Q_PROPERTY(bool spellChecking
+               READ spellChecking
+               WRITE setSpellChecking
+               NOTIFY spellCheckingChanged)
+
+    Q_PROPERTY(SubsetModel *spellCheckingModel
+               READ spellCheckingModel
+               CONSTANT)
+
+    Q_PROPERTY(bool autoCapitalization
+               READ autoCapitalization
+               WRITE setAutoCapitalization
+               NOTIFY autoCapitalizationChanged)
+
+    Q_PROPERTY(bool autoCompletion
+               READ autoCompletion
+               WRITE setAutoCompletion
+               NOTIFY autoCompletionChanged)
+
+    Q_PROPERTY(bool predictiveText
+               READ predictiveText
+               WRITE setPredictiveText
+               NOTIFY predictiveTextChanged)
+
+    Q_PROPERTY(bool keyPressFeedback
+               READ keyPressFeedback
+               WRITE setKeyPressFeedback
+               NOTIFY keyPressFeedbackChanged)
 
 public:
 
@@ -51,6 +86,38 @@ public:
 
     int currentLanguage() const;
     void setCurrentLanguage(int index);
+    Q_SIGNAL void currentLanguageChanged() const;
+
+    SubsetModel *keyboardLayoutsModel();
+    Q_SLOT void updateKeyboardLayouts();
+
+    bool spellChecking() const;
+    void setSpellChecking(bool value);
+    Q_SIGNAL void spellCheckingChanged() const;
+
+    SubsetModel *spellCheckingModel();
+    Q_SLOT void updateSpellChecking();
+
+    bool autoCapitalization() const;
+    void setAutoCapitalization(bool value);
+    Q_SIGNAL void autoCapitalizationChanged() const;
+
+    bool autoCompletion() const;
+    void setAutoCompletion(bool value);
+    Q_SIGNAL void autoCompletionChanged() const;
+
+    bool predictiveText() const;
+    void setPredictiveText(bool value);
+    Q_SIGNAL void predictiveTextChanged() const;
+
+    bool keyPressFeedback() const;
+    void setKeyPressFeedback(bool value);
+    Q_SIGNAL void keyPressFeedbackChanged() const;
+
+private:
+
+    bool _updateKeyboardLayoutsConnected;
+    bool _updateSpellCheckingConnected;
 };
 
 #endif // LANGUAGE_PLUGIN_H

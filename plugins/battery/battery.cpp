@@ -24,6 +24,15 @@
 #include <nm-client.h>
 #include <QtCore/QDebug>
 
+static void wireless_enabled_changed (NMDevice *device G_GNUC_UNUSED,
+                                      GParamSpec *pspec G_GNUC_UNUSED,
+                                      gpointer user_data)
+{
+    Battery * object = (Battery *) user_data;
+
+    Q_EMIT (object->wifiEnabledChanged());
+}
+
 Battery::Battery(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus()),
@@ -35,6 +44,11 @@ Battery::Battery(QObject *parent) :
 {
     m_device = up_device_new();
     m_nm_client = nm_client_new();
+
+    g_signal_connect (m_nm_client,
+                      "notify::wireless-enabled",
+                      G_CALLBACK (wireless_enabled_changed),
+                      this /* user_data */);
 
     buildDeviceString();
     getLastFullCharge();
@@ -79,14 +93,14 @@ QString Battery::deviceString() const
     return m_deviceString;
 }
 
-bool Battery::getWifiStatus()
+bool Battery::getWifiEnabled()
 {
     return nm_client_wireless_get_enabled (m_nm_client);
 }
 
-void Battery::setWifiStatus(bool enableStatus)
+void Battery::setWifiEnabled(bool enabled)
 {
-    nm_client_wireless_set_enabled (m_nm_client, enableStatus);
+    nm_client_wireless_set_enabled (m_nm_client, enabled);
 }
 
 

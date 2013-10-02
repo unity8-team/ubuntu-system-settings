@@ -61,9 +61,10 @@ ItemPage {
                                             UbuntuSecurityPrivacyPanel.Swipe
             text: lockOnSuspend ? i18n.tr("Lock when idle")
                                 : i18n.tr("Sleep when idle")
-            value: i18n.tr("1 minute",
-                           "%1 minutes".arg(5),
-                           5)
+            // TRANSLATORS: %1 is the number of minutes
+            value: i18n.tr("%1 minute",
+                           "%1 minutes",
+                           5).arg(5)
             progression: true
             onClicked:
                 pageStack.push(
@@ -71,10 +72,11 @@ ItemPage {
                     { title: text, lockOnSuspend: lockOnSuspend } )
         }
 
-        SettingsCheckEntry {
-            checkStatus: true
-            textEntry: i18n.tr("Sleep locks immediately")
-            enabled: false /* TODO: enable when there is a backend */
+        ListItem.Standard {
+            control: CheckBox {
+                checked: true
+            }
+            text: i18n.tr("Sleep locks immediately")
         }
 
     /* TODO: once we know how to do this

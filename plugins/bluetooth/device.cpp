@@ -17,8 +17,8 @@
  * Charles Kerr <charles.kerr@canonical.com>
  */
 
-#include <QDebug>
 #include <QDBusReply>
+#include <QDebug> // qWarning()
 
 #include "dbus-shared.h"
 #include "device.h"

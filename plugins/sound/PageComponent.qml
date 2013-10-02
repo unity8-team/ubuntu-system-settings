@@ -61,17 +61,19 @@ ItemPage {
                                           showStopButton: true, soundType: 0})
             }
 
-            SettingsCheckEntry {
-                checkStatus: false
-                textEntry: i18n.tr("Vibrate when ringing")
-                enabled: false /* TODO: enable when there is a backend */
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Vibrate when ringing")
                 visible: showAllUI
             }
 
-            SettingsCheckEntry {
-                checkStatus: true
-                textEntry: i18n.tr("Vibrate in silent mode")
-                enabled: false /* TODO: enable when there is a backend */
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Vibrate in silent mode")
                 visible: showAllUI
             }
 
@@ -87,17 +89,19 @@ ItemPage {
                                           soundType: 1})
             }
 
-            SettingsCheckEntry {
-                checkStatus: false
-                textEntry: i18n.tr("Keyboard sounds")
-                enabled: false /* TODO: enable when there is a backend */
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Keyboard sounds")
                 visible: showAllUI
             }
 
-            SettingsCheckEntry {
-                checkStatus: false
-                textEntry: i18n.tr("Lock sound")
-                enabled: false /* TODO: enable when there is a backend (lp: #1208418) */
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Lock sound")
                 visible: showAllUI
             }
         }

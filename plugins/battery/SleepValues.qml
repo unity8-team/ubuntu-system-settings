@@ -73,21 +73,26 @@ ItemPage {
                 id: sleepSelector
                 text: lockOnSuspend ? i18n.tr("Lock the phone when it's not in use:") : i18n.tr("Put the phone to sleep when it is not in use:")
                 model: [
-                    i18n.tr("After %1 minute".arg(1),
-                            "After %1 minutes".arg(1),
-                            1),
-                    i18n.tr("After %1 minute".arg(2),
-                            "After %1 minutes".arg(2),
-                            2),
-                    i18n.tr("After %1 minute".arg(3),
-                            "After %1 minutes".arg(3),
-                            3),
-                    i18n.tr("After %1 minute".arg(4),
-                            "After %1 minutes".arg(4),
-                            4),
-                    i18n.tr("After %1 minute".arg(5),
-                            "After %1 minutes".arg(5),
-                            5),
+                    // TRANSLATORS: %1 is the number of minutes
+                    i18n.tr("After %1 minute",
+                            "After %1 minutes",
+                            1).arg(1),
+                    // TRANSLATORS: %1 is the number of minutes
+                    i18n.tr("After %1 minute",
+                            "After %1 minutes",
+                            2).arg(2),
+                    // TRANSLATORS: %1 is the number of minutes
+                    i18n.tr("After %1 minute",
+                            "After %1 minutes",
+                            3).arg(3),
+                    // TRANSLATORS: %1 is the number of minutes
+                    i18n.tr("After %1 minute",
+                            "After %1 minutes",
+                            4).arg(4),
+                    // TRANSLATORS: %1 is the number of minutes
+                    i18n.tr("After %1 minute",
+                            "After %1 minutes",
+                            5).arg(5),
                     i18n.tr("Never")]
                 expanded: true
                 onDelegateClicked: {

@@ -65,11 +65,11 @@ Update::~Update() {
 }
 
 void Update::CheckForUpdate() {
-    m_SystemServiceIface.call("CheckForUpdate");
+    m_SystemServiceIface.asyncCall("CheckForUpdate");
 }
 
 void Update::DownloadUpdate() {
-    m_SystemServiceIface.call("DownloadUpdate");
+    m_SystemServiceIface.asyncCall("DownloadUpdate");
 }
 
 QString Update::ApplyUpdate() {
@@ -127,7 +127,7 @@ void Update::SetDownloadMode(int value) {
         return;
 
     m_downloadMode = value;
-    m_SystemServiceIface.call("SetSetting", "auto_download", QString::number(value));
+    m_SystemServiceIface.asyncCall("SetSetting", "auto_download", QString::number(value));
 }
 
 void Update::ProcessSettingChanged(QString key, QString newvalue) {

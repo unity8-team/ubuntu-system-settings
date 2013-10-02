@@ -31,16 +31,21 @@ Dialog {
     property string passkey: "000000"
 
     signal canceled
-    signal confirmed
+    signal provided (string passkey)
 
-    // TRANSLATORS: %1 is the name of the bluetooth device being paired
-    text: i18n.tr("Please confirm that the PIN displayed on '%1' matches this one").arg(root.name)
+    text: i18n.tr("PIN for '%1'").arg(root.name)
 
-    Label {
-        text: root.passkey
-        fontSize: "x-large"
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
+    TextField {
+        id: pinCodeField
+        anchors {
+            left: parent.left
+            right: parent.right
+            margins: units.gu(4)
+        }
+        text: "0000"
+        focus: true
+        Component.onCompleted: selectAll()
+        maximumLength: 16
     }
 
     Row {
@@ -54,9 +59,9 @@ Dialog {
             width: (parent.width - parent.spacing) / 2
         }
         Button {
-            text: i18n.tr("Confirm PIN")
+            text: i18n.tr("Pair")
             onClicked: {
-                root.confirmed()
+                root.provided (pinCodeField.text)
                 PopupUtils.close(root)
             }
             width: (parent.width - parent.spacing) / 2

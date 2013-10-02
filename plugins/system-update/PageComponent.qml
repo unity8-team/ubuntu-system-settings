@@ -63,7 +63,7 @@ ItemPage {
                 currentUpdateState = UbuntuUpdatePanel.CheckingError;
                 return;
             }
-            currentUpdateState = UbuntuUpdatePanel.Checking;
+            currentUpdateStminutesate = UbuntuUpdatePanel.Checking;
             infoMessage = checkinfoMessage;
             CheckForUpdate();
         }
@@ -72,6 +72,7 @@ ItemPage {
             infoMessage = "";
             infoSecondaryMessage = "";
             DownloadUpdate();
+            currentUpdateState = UbuntuUpdatePanel.DownloadRequested;
         }
 
         function applyUpdate() {
@@ -103,8 +104,10 @@ ItemPage {
             updateVersion = availableVersion;
             var sizeInMB = updateSize/(1024*1024);
             if (sizeInMB > 1024)
+                // TRANSLATORS: %1 is the size of the update in GB
                 updateBackend.updateSize = i18n.tr("%1 GB").arg(Math.round(sizeInMB/1024*10)/10);
-            else
+
+                // TRANSLATORS: %1 is the size of the update in MB
                 updateBackend.updateSize = i18n.tr("%1 MB").arg(Math.round(sizeInMB*10)/10);
             updateDescriptions = descriptions;
 
@@ -113,6 +116,7 @@ ItemPage {
             }
             else {
                 currentUpdateState = UbuntuUpdatePanel.NoUpdate;
+                // TRANSLATORS: %1 is the date when the device was last updated
                 infoMessage = i18n.tr("No software update available") + "<br/>" + i18n.tr("Last updated %1").arg(lastUpdateDate);
             }
 
@@ -125,6 +129,7 @@ ItemPage {
         onUpdateProgress: {
             downloadProgress = percentage;
             if (eta > 0)
+                // TRANSLATORS: %1 is the number of seconds remaining
                 downloadRemainingTime = i18n.tr("About %1 second remaining", "About %1 seconds remaining", eta).arg(eta);
             else
                 downloadRemainingTime = i18n.tr("No estimate for the download");
@@ -239,6 +244,7 @@ ItemPage {
 
                     ListItem.Standard {
                         id: versionId
+                        // TRANSLATORS: %1 is the version of the update
                         text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
                         showDivider: false
                     }
@@ -258,7 +264,7 @@ ItemPage {
                     Column {
                         id: updateDownloading
                         spacing: units.gu(1)
-                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused || updateBackend.currentUpdateState === UbuntuUpdatePanel.DownloadRequested
                         width: parent.width
 
                         ProgressBar {
@@ -266,6 +272,13 @@ ItemPage {
                             maximumValue : 100
                             minimumValue : 0
                             value : updateBackend.downloadProgress
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                            width: parent.width
+                        }
+
+                        ProgressBar {
+                            indeterminate: true
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.DownloadRequested
                             width: parent.width
                         }
 

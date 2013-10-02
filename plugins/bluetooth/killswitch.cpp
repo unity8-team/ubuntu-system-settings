@@ -25,7 +25,7 @@
 #include <fcntl.h>
 #include <unistd.h> // write()
 
-#include <QtDebug> // qWarning
+#include <QDebug> // qWarning()
 #include <QFileSystemWatcher>
 #include <QtGlobal>
 
