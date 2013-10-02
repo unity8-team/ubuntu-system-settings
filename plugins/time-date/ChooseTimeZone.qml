@@ -93,6 +93,9 @@ ItemPage {
         visible: setTimeZoneSelector.selectedIndex == 1 && count > 0
         delegate: ListItem.Standard {
             text: displayName
+            // If a timezone is manually selected, record which one so that
+            // we highlight that one only. Usually all cities in that timezone
+            // are highlighted.
             onClicked: {
                 locationsListView.manuallySelected = displayName
                 timeDatePanel.timeZone = timeZone
