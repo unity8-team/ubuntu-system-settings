@@ -18,61 +18,41 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
-    id: root
-
     title: i18n.tr("Spell checking")
-    flickable: scrollWidget
 
-    Flickable {
-        id: scrollWidget
-        anchors.fill: parent
-        contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+    UbuntuLanguagePlugin {
+        id: plugin
+    }
 
-        Column {
-            anchors.fill: parent
+    ListItem.Standard {
+        id: item
 
-            ListItem.Standard {
-                text: i18n.tr("Spell checking")
-                control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
-                }
-            }
+        text: i18n.tr("Spell checking")
 
-            ListItem.Divider {}
+        control: Switch {
+            checked: plugin.spellChecking
 
-            ListItem.Standard {
-                text: i18n.tr("Current spelling languages:")
-            }
-
-            /* TODO: Get real spelling language */
-
-            SettingsCheckEntry {
-                textEntry: "English (US)"
-                checkStatus: true
-            }
-
-            ListItem.Divider {}
-
-            ListItem.Standard {
-                text: i18n.tr("All languages available:")
-            }
-
-            /* TODO: Get real available languages */
-
-            SettingsCheckEntry {
-                textEntry: "Afar"
-            }
-
-            SettingsCheckEntry {
-                textEntry: "Afrikaans"
-            }
+            onClicked: plugin.spellChecking = checked
         }
+    }
+
+    SubsetView {
+        clip: true
+
+        anchors.top: item.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        subsetLabel: i18n.tr("Current spelling languages:")
+        supersetLabel: i18n.tr("All languages available:")
+
+        model: plugin.spellCheckingModel
     }
 }

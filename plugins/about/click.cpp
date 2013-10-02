@@ -91,7 +91,7 @@ QList<ClickModel::Click> ClickModel::buildClickList()
         }
 
         newClick.installSize = val.value("installed-size",
-                                         "0").toString().toUInt();
+                                         "0").toString().toUInt()*1024;
 
         m_totalClickSize += newClick.installSize;
 
