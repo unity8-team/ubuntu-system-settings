@@ -1,3 +1,52 @@
+ubuntu-system-settings (0.1+13.10.20131002-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * click: the installed-size info is in kib, not in bytes.
+
+  [ Iain Lane ]
+  * Use the indicator's value for the charge level instead of
+    calculating it from QtSystems derived information.
+  * [battery] Update the UI dynamically when the wireless state changes.
+  * Various translation tweaks as noted in LP: #1233214. (LP: #1215712,
+    #1233214)
+  * [battery] Bind the onClicked handlers instead of checked to avoid
+    loops when enabling/disabling wifi.
+  * Remove one more missed translation.
+  * Bump required version of ubuntu-keyboard-data, as we require the
+    schemas for the language panel.
+  * Remove the SettingsCheckEntry now that the design issues are
+    resolved.
+
+  [ Ted Gould ]
+  * Adding a %u to the desktop file Exec line.
+
+  [ William Hua ]
+  * Hook up language panel to some maliit settings.
+
+  [ Didier Roche ]
+  * Use some async calls for system update where we don't expect any
+    returned value.
+  * Add an indeterminate progress bar until system image answers.
+
+  [ Charles Kerr ]
+  * Show an ActivityIndicator to tell users when discovery mode is on to
+    search for new bluetooth devices.
+  * add PIN code pairing. Implementation is similar to the existing
+    passkey pairing.
+
+  [ Ken VanDine ]
+  * revert the previous revert done in rev 391, Bug (#LP: #1231368) was
+    caused by gallery-app needing a rebuild for content-hub changes. .
+    (LP: #1231368)
+
+  [ Alberto Mardegan ]
+  * Parse URLs given in command line. (LP: #1227690)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 419
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Oct 2013 04:09:15 +0000
+
 ubuntu-system-settings (0.1+13.10.20130930-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
