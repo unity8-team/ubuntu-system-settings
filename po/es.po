@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-30 22:34+0100\n"
-"PO-Revision-Date: 2013-09-25 11:14+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2013-10-02 05:13+0000\n"
+"Last-Translator: Leo Arias <leo.arias@canonical.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-01 05:41+0000\n"
+"X-Launchpad-Export-Date: 2013-10-02 05:39+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -290,7 +290,7 @@ msgstr "Cancelar"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "Confirmar PIN"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: ../plugins/bluetooth/PageComponent.qml:70
@@ -323,11 +323,11 @@ msgstr "Red"
 
 #: ../plugins/bluetooth/PageComponent.qml:84
 msgid "Headset"
-msgstr ""
+msgstr "Auricular"
 
 #: ../plugins/bluetooth/PageComponent.qml:85
 msgid "Headphones"
-msgstr ""
+msgstr "Audífonos"
 
 #: ../plugins/bluetooth/PageComponent.qml:86
 msgid "Video"
@@ -339,7 +339,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:88
 msgid "Joypad"
-msgstr ""
+msgstr "Mando de juego"
 
 #: ../plugins/bluetooth/PageComponent.qml:89
 msgid "Keyboard"
@@ -371,15 +371,15 @@ msgstr "Excelente"
 
 #: ../plugins/bluetooth/PageComponent.qml:101
 msgid "Good"
-msgstr ""
+msgstr "Buena"
 
 #: ../plugins/bluetooth/PageComponent.qml:102
 msgid "Fair"
-msgstr ""
+msgstr "Regular"
 
 #: ../plugins/bluetooth/PageComponent.qml:103
 msgid "Poor"
-msgstr ""
+msgstr "Mala"
 
 #: ../plugins/bluetooth/PageComponent.qml:104
 #: ../plugins/bluetooth/PageComponent.qml:193
@@ -390,7 +390,7 @@ msgstr "Ninguno"
 
 #: ../plugins/bluetooth/PageComponent.qml:130
 msgid "Connected headset:"
-msgstr ""
+msgstr "Auricular conectado:"
 
 #: ../plugins/bluetooth/PageComponent.qml:158
 msgid "Connect a different headset:"
@@ -466,7 +466,7 @@ msgstr "Manualmente"
 
 #: ../plugins/cellular/PageComponent.qml:101
 msgid "Cellular data"
-msgstr ""
+msgstr "Datos móviles"
 
 #: ../plugins/cellular/PageComponent.qml:109
 msgid "Data roaming"
@@ -488,15 +488,15 @@ msgstr "Confirmar"
 #: ../plugins/language/KeyboardLayouts.qml:29
 #: ../plugins/language/PageComponent.qml:64
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "Distribuciones de teclado"
 
 #: ../plugins/language/KeyboardLayouts.qml:42
 msgid "Current layouts:"
-msgstr ""
+msgstr "Distribuciones de teclado actuales:"
 
 #: ../plugins/language/KeyboardLayouts.qml:58
 msgid "All layouts available:"
-msgstr ""
+msgstr "Todas las distribuciones disponibles:"
 
 #: ../plugins/language/PageComponent.qml:31 ../.build/settings.js:10
 msgid "Language & Text"
@@ -514,7 +514,7 @@ msgstr "Corrección automática"
 
 #: ../plugins/language/PageComponent.qml:89
 msgid "Auto completion"
-msgstr ""
+msgstr "Autocompletado"
 
 #: ../plugins/language/PageComponent.qml:98
 msgid "Auto capitalization"
@@ -537,7 +537,7 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:51
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "Idiomas ortográficos actuales:"
 
 #: ../plugins/language/SpellChecking.qml:64
 msgid "All languages available:"
@@ -681,6 +681,8 @@ msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"Usa GPS para detectar su ubicación aproximada. Si está desactivado, el GPS "
+"se apaga para conservar batería."
 
 #: ../plugins/security-privacy/Location.qml:72
 msgid ""
@@ -852,8 +854,8 @@ msgstr "Bloqueo del teléfono"
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 minuto"
+msgstr[1] "%1 minutos"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "SIM PIN"
@@ -877,7 +879,7 @@ msgstr "Acceso a la ubicación"
 
 #: ../plugins/security-privacy/PageComponent.qml:143
 msgid "Other app access"
-msgstr ""
+msgstr "Acceso de otras aplicaciones"
 
 #: ../plugins/security-privacy/PageComponent.qml:148
 msgid "Diagnostics"
@@ -1016,7 +1018,7 @@ msgstr[1] "Quedan %1 segundos aprox."
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
-msgstr ""
+msgstr "No hay estimación para la descarga"
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"

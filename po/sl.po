@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-30 22:34+0100\n"
-"PO-Revision-Date: 2013-08-07 19:02+0000\n"
+"PO-Revision-Date: 2013-10-01 17:24+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2013-10-01 05:41+0000\n"
+"X-Launchpad-Export-Date: 2013-10-02 05:39+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -69,7 +69,7 @@ msgstr "Pravno:"
 
 #: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
 msgid "Software licenses"
-msgstr "Programske licence"
+msgstr "Programska dovoljenja"
 
 #: ../plugins/about/PageComponent.qml:128
 msgid "Regulatory info"
@@ -81,23 +81,23 @@ msgstr "Uporablja Ubuntu"
 
 #: ../plugins/about/Storage.qml:88
 msgid "Movies"
-msgstr ""
+msgstr "Filmi"
 
 #: ../plugins/about/Storage.qml:89
 msgid "Audio"
-msgstr ""
+msgstr "Zvok"
 
 #: ../plugins/about/Storage.qml:90
 msgid "Pictures"
-msgstr ""
+msgstr "Slike"
 
 #: ../plugins/about/Storage.qml:91
 msgid "Other files"
-msgstr ""
+msgstr "Druge datoteke"
 
 #: ../plugins/about/Storage.qml:92
 msgid "Used by apps"
-msgstr "Uporabljajo programi"
+msgstr ""
 
 #: ../plugins/about/Storage.qml:134
 msgid "Total storage"
@@ -109,7 +109,7 @@ msgstr "Nezaseden prostor"
 
 #: ../plugins/about/Storage.qml:163
 msgid "Installed apps"
-msgstr ""
+msgstr "Nameščeni programi"
 
 #: ../plugins/about/Storage.qml:164
 msgid "By name"
@@ -141,69 +141,77 @@ msgstr "Različna ozadja za oboje"
 
 #: ../plugins/battery/PageComponent.qml:35 ../.build/settings.js:4
 msgid "Battery"
-msgstr ""
+msgstr "Baterija"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery/PageComponent.qml:47
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pred %1 sekundami"
+msgstr[1] "Pred %1 sekundo"
+msgstr[2] "Pred %1 sekundama"
+msgstr[3] "Pred %1 sekundami"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery/PageComponent.qml:50
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pred %1 minutami"
+msgstr[1] "pred %1 minuto"
+msgstr[2] "pred %1 minutama"
+msgstr[3] "pred %1 minutami"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery/PageComponent.qml:53
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pred %1 urami"
+msgstr[1] "pred %1 uro"
+msgstr[2] "pred %1 urama"
+msgstr[3] "pred %1 urami"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery/PageComponent.qml:56
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pred %1 dnevi"
+msgstr[1] "pred %1 dnevom"
+msgstr[2] "pred %1 dnevoma"
+msgstr[3] "pred %1 dnevi"
 
 #: ../plugins/battery/PageComponent.qml:76
 msgid "Charging now"
-msgstr ""
+msgstr "Polnjenje"
 
 #: ../plugins/battery/PageComponent.qml:80
 msgid "Last full charge"
-msgstr ""
+msgstr "Zadnja napolnitev"
 
 #: ../plugins/battery/PageComponent.qml:84
 msgid "Fully charged"
-msgstr ""
+msgstr "Popolnoma napolnjeno"
 
 #: ../plugins/battery/PageComponent.qml:123
 msgid "Charge level"
-msgstr ""
+msgstr "Raven napolnjenosti"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery/PageComponent.qml:131
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../plugins/battery/PageComponent.qml:184
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "Načini za zmanjšanje porabe baterije:"
 
 #: ../plugins/battery/PageComponent.qml:188
 msgid "Display brightness"
-msgstr ""
+msgstr "Svetlost zaslona"
 
 #: ../plugins/battery/PageComponent.qml:245
 #: ../plugins/security-privacy/PhoneLocking.qml:62
@@ -224,8 +232,10 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Po %1 minutah"
+msgstr[1] "Po %1 minuti"
+msgstr[2] "Po %1 minutah"
+msgstr[3] "Po %1 minutah"
 
 #: ../plugins/battery/PageComponent.qml:273
 #: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
@@ -244,37 +254,40 @@ msgstr "GPS"
 
 #: ../plugins/battery/PageComponent.qml:353
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "Odkrivanje točnega položaja zahteva GPS in/ali Wi-Fi."
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "Zakleni telefon, ko ni v uporabi:"
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "Daj telefon v pripravljenost, ko ni v uporabi:"
 
 #: ../plugins/battery/SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
+"Krajši časi so varnejši. Telefon se med klici ali predvajanjem videa ne bo "
+"zaklenil."
 
 #: ../plugins/battery/SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
+"Telefon med klici ali predvajanjem videa ne bo prešel v pripravljenost."
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr ""
+msgstr "Zahteva seznanjenja naprav Bluetooth"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "Potrdite, da se PIN, prikazan na '%1', ujema s tem"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
@@ -291,23 +304,23 @@ msgstr "Prekliči"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "Potrdi PIN"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: ../plugins/bluetooth/PageComponent.qml:70
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr ""
+msgstr "%1 (Povezovanje …)"
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
 #: ../plugins/bluetooth/PageComponent.qml:73
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr ""
+msgstr "%1 (Prekinjanje …)"
 
 #: ../plugins/bluetooth/PageComponent.qml:80
 msgid "Computer"
-msgstr ""
+msgstr "Računalnik"
 
 #: ../plugins/bluetooth/PageComponent.qml:81
 #: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
@@ -316,7 +329,7 @@ msgstr "Telefon"
 
 #: ../plugins/bluetooth/PageComponent.qml:82
 msgid "Modem"
-msgstr ""
+msgstr "Modem"
 
 #: ../plugins/bluetooth/PageComponent.qml:83 ../src/qml/MainWindow.qml:90
 msgid "Network"
@@ -324,15 +337,15 @@ msgstr "Omrežje"
 
 #: ../plugins/bluetooth/PageComponent.qml:84
 msgid "Headset"
-msgstr ""
+msgstr "Slušalke z mikrofonom"
 
 #: ../plugins/bluetooth/PageComponent.qml:85
 msgid "Headphones"
-msgstr ""
+msgstr "Slušalke"
 
 #: ../plugins/bluetooth/PageComponent.qml:86
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: ../plugins/bluetooth/PageComponent.qml:87
 msgid "Other Audio"
@@ -340,97 +353,97 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:88
 msgid "Joypad"
-msgstr ""
+msgstr "Igralni plošček"
 
 #: ../plugins/bluetooth/PageComponent.qml:89
 msgid "Keyboard"
-msgstr ""
+msgstr "Tipkovnica"
 
 #: ../plugins/bluetooth/PageComponent.qml:90
 msgid "Tablet"
-msgstr ""
+msgstr "Tablični računalnik"
 
 #: ../plugins/bluetooth/PageComponent.qml:91
 msgid "Mouse"
-msgstr ""
+msgstr "Miška"
 
 #: ../plugins/bluetooth/PageComponent.qml:92
 msgid "Printer"
-msgstr ""
+msgstr "Tiskalnik"
 
 #: ../plugins/bluetooth/PageComponent.qml:93
 msgid "Camera"
-msgstr ""
+msgstr "Fotoaparat"
 
 #: ../plugins/bluetooth/PageComponent.qml:94
 msgid "Other"
-msgstr ""
+msgstr "Drugo"
 
 #: ../plugins/bluetooth/PageComponent.qml:100
 msgid "Excellent"
-msgstr ""
+msgstr "Odlično"
 
 #: ../plugins/bluetooth/PageComponent.qml:101
 msgid "Good"
-msgstr ""
+msgstr "Dobro"
 
 #: ../plugins/bluetooth/PageComponent.qml:102
 msgid "Fair"
-msgstr ""
+msgstr "Zadovoljivo"
 
 #: ../plugins/bluetooth/PageComponent.qml:103
 msgid "Poor"
-msgstr ""
+msgstr "Slabo"
 
 #: ../plugins/bluetooth/PageComponent.qml:104
 #: ../plugins/bluetooth/PageComponent.qml:193
 #: ../plugins/bluetooth/PageComponent.qml:201
 #: ../plugins/security-privacy/PhoneLocking.qml:40
 msgid "None"
-msgstr ""
+msgstr "Brez"
 
 #: ../plugins/bluetooth/PageComponent.qml:130
 msgid "Connected headset:"
-msgstr ""
+msgstr "Povezane slušalke z mikrofonom:"
 
 #: ../plugins/bluetooth/PageComponent.qml:158
 msgid "Connect a different headset:"
-msgstr ""
+msgstr "Poveži druge slušalke z mikrofonom:"
 
 #: ../plugins/bluetooth/PageComponent.qml:158
 msgid "Connect a headset:"
-msgstr ""
+msgstr "Poveži slušalke z mikrofonom:"
 
 #: ../plugins/bluetooth/PageComponent.qml:184
 msgid "None detected"
-msgstr ""
+msgstr "Ni zaznanih"
 
 #: ../plugins/bluetooth/PageComponent.qml:200
 msgid "Name"
-msgstr ""
+msgstr "Ime"
 
 #: ../plugins/bluetooth/PageComponent.qml:204
 msgid "Type"
-msgstr ""
+msgstr "Vrsta"
 
 #: ../plugins/bluetooth/PageComponent.qml:208
 msgid "Signal Strength"
-msgstr ""
+msgstr "Moč signala"
 
 #: ../plugins/bluetooth/PageComponent.qml:213
 msgid "Disconnect"
-msgstr ""
+msgstr "Prekini povezavo"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "PIN za '%1'"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "Seznani"
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:72
@@ -439,11 +452,11 @@ msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:78
 msgid "Refresh"
-msgstr ""
+msgstr "Osveži"
 
 #: ../plugins/cellular/ChooseCarrier.qml:95
 msgid "Searching"
-msgstr ""
+msgstr "Iskanje"
 
 #: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
 msgid "Cellular"
@@ -457,13 +470,13 @@ msgstr ""
 #: ../plugins/time-date/ChooseTimeZone.qml:35
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Automatically"
-msgstr ""
+msgstr "Samodejno"
 
 #: ../plugins/cellular/PageComponent.qml:67
 #: ../plugins/time-date/ChooseTimeZone.qml:35
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Manually"
-msgstr ""
+msgstr "Ročno"
 
 #: ../plugins/cellular/PageComponent.qml:101
 msgid "Cellular data"
@@ -475,7 +488,7 @@ msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:118
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Statistika uporabe podatkov"
 
 #: ../plugins/language/DisplayLanguage.qml:33
 #: ../plugins/language/PageComponent.qml:55
@@ -484,92 +497,98 @@ msgstr ""
 
 #: ../plugins/language/DisplayLanguage.qml:115
 msgid "Confirm"
-msgstr ""
+msgstr "Potrdi"
 
 #: ../plugins/language/KeyboardLayouts.qml:29
 #: ../plugins/language/PageComponent.qml:64
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "Razporeditve tipk"
 
 #: ../plugins/language/KeyboardLayouts.qml:42
 msgid "Current layouts:"
-msgstr ""
+msgstr "Trenutne razporeditve:"
 
 #: ../plugins/language/KeyboardLayouts.qml:58
 msgid "All layouts available:"
-msgstr ""
+msgstr "Vse razpoložljive razporeditve:"
 
 #: ../plugins/language/PageComponent.qml:31 ../.build/settings.js:10
 msgid "Language & Text"
-msgstr ""
+msgstr "Jezik in besedilo"
 
 #: ../plugins/language/PageComponent.qml:74
 #: ../plugins/language/SpellChecking.qml:29
 #: ../plugins/language/SpellChecking.qml:42
 msgid "Spell checking"
-msgstr ""
+msgstr "Preverjanje črkovanja"
 
 #: ../plugins/language/PageComponent.qml:82
 msgid "Auto correction"
-msgstr ""
+msgstr "Samodejno popravljanje"
 
 #: ../plugins/language/PageComponent.qml:89
 msgid "Auto completion"
-msgstr ""
+msgstr "Samodejno dopolnjevanje"
 
 #: ../plugins/language/PageComponent.qml:98
 msgid "Auto capitalization"
-msgstr ""
+msgstr "Samodejno spreminjanje velikih začetnic"
 
 #: ../plugins/language/PageComponent.qml:105
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
+msgstr "Vklopi tipko Shift za spreminjanje velikih začetnic v vsaki povedi."
 
 #: ../plugins/language/PageComponent.qml:111
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Samodejno postavljanje ločil"
 
 #: ../plugins/language/PageComponent.qml:118
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Doda piko in vsake manjkajoče narekovaje ali oklepaje, ko stisnete "
+"preslednico dvakrat."
 
 #: ../plugins/language/SpellChecking.qml:51
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "Trenutni jeziki za črkovanje:"
 
 #: ../plugins/language/SpellChecking.qml:64
 msgid "All languages available:"
-msgstr ""
+msgstr "Vsi razpoložljivi jeziki:"
 
 #: ../plugins/phone/CallForwarding.qml:27
 #: ../plugins/phone/CallForwarding.qml:60
 #: ../plugins/phone/PageComponent.qml:46
 msgid "Call forwarding"
-msgstr ""
+msgstr "Posredovanje klica"
 
 #: ../plugins/phone/CallForwarding.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"Preusmeri telefonske klice na drugo številko, kadarkoli ne odgovorite na "
+"klic ali je Vaš telefon zaposlen, ugasnjen ali izven dosega."
 
 #: ../plugins/phone/CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
+"Stanja posredovanja klica trenutno ni mogoče preveriti. Poskusite ponovno "
+"kasneje."
 
 #: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
-msgstr ""
+msgstr "Preusmeri na"
 
 #: ../plugins/phone/CallForwarding.qml:113
 msgid "Contacts…"
-msgstr ""
+msgstr "Stiki ..."
 
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/time-date/TimePicker.qml:189
 msgid "Set"
-msgstr ""
+msgstr "Nastavi"
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:52
@@ -581,20 +600,22 @@ msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
+"Vam omogoči, da odgovorite ali začnete nov klic, medtem ko ste na drugem "
+"klicu in preklopi med njima"
 
 #: ../plugins/phone/PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone/PageComponent.qml:61 ../plugins/phone/Services.qml:30
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "%1 storitve"
 
 #: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
-msgstr ""
+msgstr "Klic"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
@@ -630,7 +651,7 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
-"Vsebina in razporeditev zaganjalnika in filtri v domačenm zaslonu bodo "
+"Vsebina in razporeditev zaganjalnika in filtri v domačem zaslonu bodo "
 "povrnjeni na izvirne nastavitve."
 
 #: ../plugins/reset/ResetAllSettings.qml:31
@@ -644,11 +665,11 @@ msgstr "Ponastavi zaganjalnik in domači zaslon"
 #: ../plugins/security-privacy/Dash.qml:29
 #: ../plugins/security-privacy/PageComponent.qml:117
 msgid "Dash search"
-msgstr ""
+msgstr "Iskanje v pregledni plošči"
 
 #: ../plugins/security-privacy/Dash.qml:49
 msgid "Return results from:"
-msgstr ""
+msgstr "Vrni rezultate od:"
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:52
@@ -664,23 +685,27 @@ msgstr ""
 
 #: ../plugins/security-privacy/Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "Položaj"
 
 #: ../plugins/security-privacy/Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "Odkrivanje položaja"
 
 #: ../plugins/security-privacy/Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"Uporabi GPS za odkritje Vaše grobega položaja. Kadar je ugasnjen, se GPS "
+"izklopi za varčevanje energije."
 
 #: ../plugins/security-privacy/Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Uporabi wi-fi in GPS za odkritje Vaše grobega položaja. Izklop odkrivanja "
+"položaja prihrani energijo."
 
 #: ../plugins/security-privacy/Location.qml:74
 msgid ""
