@@ -28,6 +28,12 @@ Item {
 
     height: col.height
 
+    Rectangle {
+        color: "red"
+        width: height
+        anchors.fill: parent
+    }
+
     Column {
         id: col
         anchors.left: parent.left
