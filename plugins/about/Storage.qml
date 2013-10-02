@@ -39,11 +39,11 @@ ItemPage {
         var systemDrives = storageInfo.allLogicalDrives
         for (var i = 0; i < systemDrives.length; i++) {
             var drive = systemDrives[i]
+            var type = storageInfo.driveType(drive)
             var path = backendInfo.getDevicePath(drive)
-            if ((storageInfo.driveType(drive) ===
-                    StorageInfo.InternalDrive ||
-                storageInfo.driveType(drive) ===
-                    StorageInfo.RemovableDrive) &&
+            if ((type === StorageInfo.InternalDrive ||
+                type === StorageInfo.RemovableDrive ||
+                type === StorageInfo.UnknownDrive) &&
                 paths.indexOf(path) == -1 && // Haven't seen this device before
                 path !== "") { // Has a mount point
                 drives.push(drive)
