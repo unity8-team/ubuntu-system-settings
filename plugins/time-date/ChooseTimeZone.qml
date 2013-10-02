@@ -75,12 +75,19 @@ ItemPage {
             bottom: parent.bottom
         }
 
+        property string show: ""
+
         model: timeDatePanel.timeZoneModel
         visible: setTimeZoneSelector.selectedIndex == 1 && count > 0
         delegate: ListItem.Standard {
             text: displayName
-            onClicked: timeDatePanel.timeZone = timeZone
-            selected: timeDatePanel.timeZone == timeZone
+            onClicked: {
+                locationsListView.show = displayName
+                timeDatePanel.timeZone = timeZone
+            }
+            selected: locationsListView.show === "" ?
+                          timeDatePanel.timeZone == timeZone :
+                          locationsListView.show == displayName
         }
     }
 
