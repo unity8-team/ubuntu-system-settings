@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-30 22:34+0100\n"
-"PO-Revision-Date: 2013-10-01 17:24+0000\n"
+"PO-Revision-Date: 2013-10-02 09:57+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2013-10-02 05:39+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-03 05:57+0000\n"
+"X-Generator: Launchpad (build 16791)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -53,7 +53,7 @@ msgstr "Nazadnje posodobljeno"
 #: ../plugins/system-update/Download.qml:53
 #: ../plugins/system-update/PageComponent.qml:347
 msgid "Never"
-msgstr ""
+msgstr "Nikoli"
 
 #: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
@@ -97,7 +97,7 @@ msgstr "Druge datoteke"
 
 #: ../plugins/about/Storage.qml:92
 msgid "Used by apps"
-msgstr ""
+msgstr "Uporabljajo programi"
 
 #: ../plugins/about/Storage.qml:134
 msgid "Total storage"
@@ -448,7 +448,7 @@ msgstr "Seznani"
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:72
 msgid "Carrier"
-msgstr ""
+msgstr "Operater"
 
 #: ../plugins/cellular/ChooseCarrier.qml:78
 msgid "Refresh"
@@ -464,7 +464,7 @@ msgstr "Mobilno omrežje"
 
 #: ../plugins/cellular/PageComponent.qml:66
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Izberite operaterja:"
 
 #: ../plugins/cellular/PageComponent.qml:67
 #: ../plugins/time-date/ChooseTimeZone.qml:35
@@ -484,7 +484,7 @@ msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:109
 msgid "Data roaming"
-msgstr ""
+msgstr "Podatkovno gostovanje"
 
 #: ../plugins/cellular/PageComponent.qml:118
 msgid "Data usage statistics"
@@ -704,7 +704,7 @@ msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Uporabi wi-fi in GPS za odkritje Vaše grobega položaja. Izklop odkrivanja "
+"Uporablja wi-fi in GPS za odkritje Vaše grobega položaja. Izklop odkrivanja "
 "položaja prihrani energijo."
 
 #: ../plugins/security-privacy/Location.qml:74
@@ -712,24 +712,34 @@ msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"Uporablja wi-fi (trenutno izklopljen) in GPS za odkrivanje Vašega grobega "
+"položaja. Izklop odkrivanja položaja prihrani energijo."
 
 #: ../plugins/security-privacy/Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"Uporablja wi-fi, položaje baznih postaj in GPS za odkrivanje Vašega grobega "
+"položaja. Izklop odkrivanja položaja prihrani energijo."
 
 #: ../plugins/security-privacy/Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"Uporablja wi-fi, položaje baznih postaj (trenutno ni mobilne povezave) in "
+"GPS za odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja "
+"prihrani energijo."
 
 #: ../plugins/security-privacy/Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj in GPS za "
+"odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja prihrani "
+"energijo."
 
 #: ../plugins/security-privacy/Location.qml:82
 msgid ""
@@ -737,51 +747,54 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj (trenutno ni "
+"mobilne povezave) in GPS za odkrivanje Vašega grobega položaja. Izklop "
+"odkrivanja položaja prihrani energijo."
 
 #: ../plugins/security-privacy/Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "Dovoli dostop do mesta:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:30
 #: ../plugins/security-privacy/PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "Zakleni varnost"
 
 #: ../plugins/security-privacy/LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "Spremeni geslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "Spremeni šifrirno reklo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "Preklopi na poteg"
 
 #: ../plugins/security-privacy/LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Preklopi na geslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "Preklopi na šifrirno reklo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "Obstoječe geslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "Obstoječe šifrirno reklo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Nepravilno geslo. Poskusite znova."
 
 #: ../plugins/security-privacy/LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Nepravilno šifrirno reklo. Poskusite znova."
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
@@ -789,23 +802,23 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Izberi šifrirno reklo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Potrdi geslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Potrdi šifrirno reklo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Ti gesli se ne ujemata. Poskusite znova."
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Ti šifrirni rekli se ne ujemata. Poskusite znova."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
@@ -813,44 +826,44 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "Nadaljuj"
 
 #: ../plugins/security-privacy/LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "Odkleni telefon s:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "potegom (brez varnosti)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4-mestno številko"
 
 #: ../plugins/security-privacy/LockSecurity.qml:332
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "šifrirnim reklom"
 
 #: ../plugins/security-privacy/LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Poteg (brez varnosti) ... "
 
 #: ../plugins/security-privacy/LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4-mestna številka ..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "Šifrirno reklo ..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "Spremeni geslo ..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Spremeni šifrirno reklo ..."
 
 #: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
 msgid "Security & Privacy"
@@ -858,12 +871,12 @@ msgstr "Varnost in zasebnost"
 
 #: ../plugins/security-privacy/PageComponent.qml:67
 msgid "Security:"
-msgstr ""
+msgstr "Varnost:"
 
 #: ../plugins/security-privacy/PageComponent.qml:70
 #: ../plugins/security-privacy/PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "Zaklepanje telefona"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy/PageComponent.qml:72
@@ -871,8 +884,10 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 minut"
+msgstr[1] "%1 minuta"
+msgstr[2] "%1 minuti"
+msgstr[3] "%1 minute"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "SIM PIN"
@@ -880,15 +895,15 @@ msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:86
 msgid "Privacy:"
-msgstr ""
+msgstr "Zasebnost:"
 
 #: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Statistika na pozdravnem zaslonu"
 
 #: ../plugins/security-privacy/PageComponent.qml:102
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Sporočila na pozdravnem zaslonu"
 
 #: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Location access"
@@ -900,23 +915,23 @@ msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:148
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostika"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy/PageComponent.qml:153
 msgid "Sent"
-msgstr ""
+msgstr "Poslano"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy/PageComponent.qml:156
 msgid "Not sent"
-msgstr ""
+msgstr "Ni poslano"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "Geslo"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:77
 msgid "Sleep locks immediately"
@@ -948,36 +963,36 @@ msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:83 ../plugins/sound/PageComponent.qml:86
 msgid "Message received"
-msgstr ""
+msgstr "Sporočilo je bilo prejeto"
 
 #: ../plugins/sound/PageComponent.qml:92
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "Zvoki tipkovnice"
 
 #: ../plugins/sound/PageComponent.qml:99
 msgid "Lock sound"
-msgstr ""
+msgstr "Zvok zaklepa"
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "Telefon je v Tihem načinu."
 
 #: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
-msgstr ""
+msgstr "Ustavi predvajanje"
 
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
-msgstr ""
+msgstr "Samodejni prejem"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "Prejmi prihodnje posodobitve samodejno:"
 
 #: ../plugins/system-update/Download.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "kadar je vključen wi-fi"
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
@@ -993,7 +1008,7 @@ msgstr "Posodobitve"
 
 #: ../plugins/system-update/PageComponent.qml:46
 msgid "Checking for updates…"
-msgstr ""
+msgstr "Preverjanje za posodobitve ..."
 
 #: ../plugins/system-update/PageComponent.qml:83
 msgid "Apply update failed:"
@@ -1001,19 +1016,19 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:93
 msgid "Pause failed:"
-msgstr ""
+msgstr "Premor ni uspel:"
 
 #. TRANSLATORS: %1 is the size of the update in GB
 #: ../plugins/system-update/PageComponent.qml:108
 #, qt-format
 msgid "%1 GB"
-msgstr ""
+msgstr "%1 GB"
 
 #. TRANSLATORS: %1 is the size of the update in MB
 #: ../plugins/system-update/PageComponent.qml:111
 #, qt-format
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #. TRANSLATORS: %1 is the date when the device was last updated
 #: ../plugins/system-update/PageComponent.qml:120
@@ -1023,15 +1038,17 @@ msgstr ""
 #: ../plugins/system-update/PageComponent.qml:120
 #, qt-format
 msgid "Last updated %1"
-msgstr ""
+msgstr "Nazadnje posodobljeno %1"
 
 #. TRANSLATORS: %1 is the number of seconds remaining
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Preostaja še %1 sekund"
+msgstr[1] "Preostaja še %1 sekunda"
+msgstr[2] "Preostajata še %1 sekundi"
+msgstr[3] "Preostajajo še %1 sekunde"
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
@@ -1039,16 +1056,16 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
-msgstr ""
+msgstr "V premoru"
 
 #: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
-msgstr ""
+msgstr "Prejem ni uspel:"
 
 #: ../plugins/system-update/PageComponent.qml:205
 #: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
-msgstr ""
+msgstr "Poskusi znova"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
@@ -1058,47 +1075,47 @@ msgstr ""
 #: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Različica %1"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
-msgstr ""
+msgstr "Premor prejemanja"
 
 #: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
-msgstr ""
+msgstr "Nadaljuj prejemanje"
 
 #: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
-msgstr ""
+msgstr "Prejem"
 
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
-msgstr ""
+msgstr "Namesti in ponovno zaženi"
 
 #: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
-msgstr ""
+msgstr "Ob povezavi wi-fi"
 
 #: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
-msgstr ""
+msgstr "Vedno"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "Časovni pas"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:34
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Nastavi časovni pas:"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:91
 msgid "Enter your current location."
-msgstr ""
+msgstr "Vnesite Vaš trenutni kraj."
 
 #: ../plugins/time-date/ChooseTimeZone.qml:91
 msgid "No matching place"
-msgstr ""
+msgstr "Kraja ni mogoče najti"
 
 #: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
@@ -1106,95 +1123,95 @@ msgstr "Datum in čas"
 
 #: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
-msgstr ""
+msgstr "Časovni pas:"
 
 #: ../plugins/time-date/PageComponent.qml:65
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Nastavi čas in datum:"
 
 #: ../plugins/time-date/TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Nastavi čas in datum"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Ura"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Minute"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Sekunde"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: ../plugins/time-date/TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Dan"
 
 #: ../plugins/time-date/TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "Mesec"
 
 #: ../plugins/time-date/TimePicker.qml:148
 msgid "January"
-msgstr ""
+msgstr "Januar"
 
 #: ../plugins/time-date/TimePicker.qml:149
 msgid "February"
-msgstr ""
+msgstr "Februar"
 
 #: ../plugins/time-date/TimePicker.qml:150
 msgid "March"
-msgstr ""
+msgstr "Marec"
 
 #: ../plugins/time-date/TimePicker.qml:151
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: ../plugins/time-date/TimePicker.qml:152
 msgid "May"
-msgstr ""
+msgstr "Maj"
 
 #: ../plugins/time-date/TimePicker.qml:153
 msgid "June"
-msgstr ""
+msgstr "Junij"
 
 #: ../plugins/time-date/TimePicker.qml:154
 msgid "July"
-msgstr ""
+msgstr "Julij"
 
 #: ../plugins/time-date/TimePicker.qml:155
 msgid "August"
-msgstr ""
+msgstr "Avgust"
 
 #: ../plugins/time-date/TimePicker.qml:156
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: ../plugins/time-date/TimePicker.qml:157
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: ../plugins/time-date/TimePicker.qml:158
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: ../plugins/time-date/TimePicker.qml:159
 msgid "December"
-msgstr ""
+msgstr "December"
 
 #: ../plugins/time-date/TimePicker.qml:169
 msgid "Year"
-msgstr ""
+msgstr "Leto"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
@@ -1202,7 +1219,7 @@ msgstr "Sistemske nastavitve"
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
+msgstr "Iskanje"
 
 #: ../src/qml/MainWindow.qml:95
 msgid "Personal"
@@ -1230,4 +1247,4 @@ msgstr "Letalski način"
 
 #: ../.build/settings.js:11
 msgid "Orientation lock"
-msgstr ""
+msgstr "Zaklep usmerjenosti"
