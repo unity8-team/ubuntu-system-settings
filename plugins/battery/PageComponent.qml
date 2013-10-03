@@ -353,6 +353,7 @@ ItemPage {
 
             ListItem.Caption {
                 text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
+                visible: gpsSwitch.visible
             }
         }
     }
