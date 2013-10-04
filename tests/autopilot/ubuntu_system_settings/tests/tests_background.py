@@ -31,7 +31,7 @@ class BackgroundSettingsTestCases(UbuntuSystemSettingsTestCase):
         search = self.main_view.select_single('TextField', placeholderText='Search')
         self.assertThat(search, NotEquals(None))
         
-    def test_network_category(self):
+    def test_categories(self):
         """ Checks whether the Network category is available """
         category = self.main_view.select_single('CategoryGrid', category='network')
         self.assertThat(category, NotEquals(None))
@@ -49,8 +49,59 @@ class BackgroundSettingsTestCases(UbuntuSystemSettingsTestCase):
         self.assertThat(category, NotEquals(None))
         self.assertThat(category.categoryName, Eventually(Equals('System')))
  
-    def test_background_plugin(self):
-        """ Checks whether the Background plugin is available """
+    def test_wifi_plugin(self):
+        """ Checks whether the Wi-Fi plugin is available """
         plugin = self.main_view.select_single('Label', text='Wi-Fi')
         self.assertThat(plugin, NotEquals(None))
- 
+
+    def test_cellular_plugin(self):
+        """ Checks whether the Cellunar plugin is available """
+        plugin = self.main_view.select_single('Label', text='Cellular')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_bluetooth_plugin(self):
+        """ Checks whether the Bluetooth plugin is available """
+        plugin = self.main_view.select_single('Label', text='Bluetooth')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_background_plugin(self):
+        """ Checks whether the Background plugin is available """
+        plugin = self.main_view.select_single('Label', text='Background')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_sound_plugin(self):
+        """ Checks whether the Sound plugin is available """
+        plugin = self.main_view.select_single('Label', text='Sound')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_language_plugin(self):
+        """ Checks whether the Language plugin is available """
+        plugin = self.main_view.select_single('Label', text='Language & Text')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_accounts_plugin(self):
+        """ Checks whether the Accounts plugin is available """
+        plugin = self.main_view.select_single('Label', text='Accounts')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_battery_plugin(self):
+        """ Checks whether the Battery plugin is available """
+        plugin = self.main_view.select_single('Label', text='Battery')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_timedate_plugin(self):
+        """ Checks whether the Time & Date plugin is available """
+        plugin = self.main_view.select_single('Label', text='Time & Date')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_security_plugin(self):
+        """ Checks whether the Security plugin is available """
+        plugin = self.main_view.select_single('Label', text='Security & Privacy')
+        self.assertThat(plugin, NotEquals(None))
+
+    def test_updates_plugin(self):
+        """ Checks whether the Updates plugin is available """
+        plugin = self.main_view.select_single('Label', text='Updates')
+        self.assertThat(plugin, NotEquals(None))
+
+
