@@ -277,19 +277,22 @@ void StorageAbout::populateSizes()
 }
 
 QString StorageAbout::getDevicePath(const QString mount_point)
-{
-    GUnixMountEntry * g_mount_point =
-            g_unix_mount_at(mount_point.toLocal8Bit(), NULL);
-
+{    
     QString s_mount_point;
+
+    GUnixMountEntry * g_mount_point = NULL;
+
+    if (!mount_point.isNull() && !mount_point.isEmpty()) {
+         g_mount_point = g_unix_mount_at(mount_point.toLocal8Bit(), NULL);
+    }
 
     if (g_mount_point) {
         const gchar * device_path =
                 g_unix_mount_get_device_path(g_mount_point);
         s_mount_point = QString::fromLocal8Bit(device_path);
-    }
 
-    g_unix_mount_free (g_mount_point);
+        g_unix_mount_free (g_mount_point);
+    }
 
     return s_mount_point;
 }

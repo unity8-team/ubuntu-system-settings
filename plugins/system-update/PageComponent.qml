@@ -63,7 +63,7 @@ ItemPage {
                 currentUpdateState = UbuntuUpdatePanel.CheckingError;
                 return;
             }
-            currentUpdateStminutesate = UbuntuUpdatePanel.Checking;
+            currentUpdateState = UbuntuUpdatePanel.Checking;
             infoMessage = checkinfoMessage;
             CheckForUpdate();
         }
@@ -106,7 +106,7 @@ ItemPage {
             if (sizeInMB > 1024)
                 // TRANSLATORS: %1 is the size of the update in GB
                 updateBackend.updateSize = i18n.tr("%1 GB").arg(Math.round(sizeInMB/1024*10)/10);
-
+            else
                 // TRANSLATORS: %1 is the size of the update in MB
                 updateBackend.updateSize = i18n.tr("%1 MB").arg(Math.round(sizeInMB*10)/10);
             updateDescriptions = descriptions;

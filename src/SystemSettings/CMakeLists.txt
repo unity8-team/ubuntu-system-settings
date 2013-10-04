@@ -1,6 +1,5 @@
 set(QML_SOURCES 
     ItemPage.qml
-    SettingsCheckEntry.qml
 )
 
 set(PLUG_DIR ${PLUGIN_QML_DIR}/SystemSettings)

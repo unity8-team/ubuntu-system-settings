@@ -1,3 +1,83 @@
+ubuntu-system-settings (0.1+13.10.20131004-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: having 100% power is still "fully charged", even while
+    discharging.
+  * battery: only display the location caption if the gps settings is
+    visible.
+  * update: clean small unwanted changes that sneaked in a previous
+    commit, that should make the "check for update" button do the
+    correct thing again, rather than having the label hidding and the
+    button stop working. (LP: #1234703)
+
+  [ Iain Lane ]
+  * When manually selecting a timezone, navigate back to the previous
+    screen (Time & Date) after one second. Don't highlight all cities
+    the first time you've selected a new timezone, just the chosen one.
+    (LP: #1232114)
+  * Check the passed mount point when measuring directory size, to avoid
+    a GLib critical message.
+  * [about] In the storage subpanel, check the space for drives Qt
+    reports as "Unknown".
+  * Tweaks to the default layout - Make the text smaller - Make the text
+    wrap at the edge of the bounding box of the grid item - Centre the
+    grid horizontally - Dynamically space the grid elements according to
+    how many columns there are in that category. (LP: #1223827)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 429
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 04 Oct 2013 05:43:12 +0000
+
+ubuntu-system-settings (0.1+13.10.20131002-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * click: the installed-size info is in kib, not in bytes.
+
+  [ Iain Lane ]
+  * Use the indicator's value for the charge level instead of
+    calculating it from QtSystems derived information.
+  * [battery] Update the UI dynamically when the wireless state changes.
+  * Various translation tweaks as noted in LP: #1233214. (LP: #1215712,
+    #1233214)
+  * [battery] Bind the onClicked handlers instead of checked to avoid
+    loops when enabling/disabling wifi.
+  * Remove one more missed translation.
+  * Bump required version of ubuntu-keyboard-data, as we require the
+    schemas for the language panel.
+  * Remove the SettingsCheckEntry now that the design issues are
+    resolved.
+
+  [ Ted Gould ]
+  * Adding a %u to the desktop file Exec line.
+
+  [ William Hua ]
+  * Hook up language panel to some maliit settings.
+
+  [ Didier Roche ]
+  * Use some async calls for system update where we don't expect any
+    returned value.
+  * Add an indeterminate progress bar until system image answers.
+
+  [ Charles Kerr ]
+  * Show an ActivityIndicator to tell users when discovery mode is on to
+    search for new bluetooth devices.
+  * add PIN code pairing. Implementation is similar to the existing
+    passkey pairing.
+
+  [ Ken VanDine ]
+  * revert the previous revert done in rev 391, Bug (#LP: #1231368) was
+    caused by gallery-app needing a rebuild for content-hub changes. .
+    (LP: #1231368)
+
+  [ Alberto Mardegan ]
+  * Parse URLs given in command line. (LP: #1227690)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 419
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Oct 2013 04:09:15 +0000
+
 ubuntu-system-settings (0.1+13.10.20130930-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
