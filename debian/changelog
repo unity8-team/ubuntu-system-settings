@@ -1,3 +1,34 @@
+ubuntu-system-settings (0.1+13.10.20131004-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: having 100% power is still "fully charged", even while
+    discharging.
+  * battery: only display the location caption if the gps settings is
+    visible.
+  * update: clean small unwanted changes that sneaked in a previous
+    commit, that should make the "check for update" button do the
+    correct thing again, rather than having the label hidding and the
+    button stop working. (LP: #1234703)
+
+  [ Iain Lane ]
+  * When manually selecting a timezone, navigate back to the previous
+    screen (Time & Date) after one second. Don't highlight all cities
+    the first time you've selected a new timezone, just the chosen one.
+    (LP: #1232114)
+  * Check the passed mount point when measuring directory size, to avoid
+    a GLib critical message.
+  * [about] In the storage subpanel, check the space for drives Qt
+    reports as "Unknown".
+  * Tweaks to the default layout - Make the text smaller - Make the text
+    wrap at the edge of the bounding box of the grid item - Centre the
+    grid horizontally - Dynamically space the grid elements according to
+    how many columns there are in that category. (LP: #1223827)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 429
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 04 Oct 2013 05:43:12 +0000
+
 ubuntu-system-settings (0.1+13.10.20131002-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

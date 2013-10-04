@@ -27,7 +27,19 @@ import Ubuntu.SystemSettings.TimeDate 1.0
 ItemPage {
     title: i18n.tr("Time zone")
 
-    UbuntuTimeDatePanel { id: timeDatePanel }
+    Timer {
+        id: goBackTimer
+        onTriggered: pageStack.pop()
+    }
+
+    UbuntuTimeDatePanel {
+        id: timeDatePanel
+        onTimeZoneChanged: {
+            // Protect against the tz being changed externally
+            if (locationsListView.manuallySelected !== "")
+                goBackTimer.start()
+        }
+    }
 
     ListItem.ItemSelector {
         id: setTimeZoneSelector
@@ -75,12 +87,22 @@ ItemPage {
             bottom: parent.bottom
         }
 
+        property string manuallySelected: ""
+
         model: timeDatePanel.timeZoneModel
         visible: setTimeZoneSelector.selectedIndex == 1 && count > 0
         delegate: ListItem.Standard {
             text: displayName
-            onClicked: timeDatePanel.timeZone = timeZone
-            selected: timeDatePanel.timeZone == timeZone
+            // If a timezone is manually selected, record which one so that
+            // we highlight that one only. Usually all cities in that timezone
+            // are highlighted.
+            onClicked: {
+                locationsListView.manuallySelected = displayName
+                timeDatePanel.timeZone = timeZone
+            }
+            selected: locationsListView.manuallySelected === "" ?
+                          timeDatePanel.timeZone == timeZone :
+                          locationsListView.manuallySelected == displayName
         }
     }
 

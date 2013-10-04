@@ -24,7 +24,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 
 MainView {
-    width: units.gu(48)
+    width: units.gu(40)
     height: units.gu(90)
     applicationName: "SystemSettings"
     automaticOrientation: true
