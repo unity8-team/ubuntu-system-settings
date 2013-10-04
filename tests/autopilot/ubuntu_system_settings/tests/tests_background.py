@@ -9,6 +9,7 @@ from time import sleep
 
 from autopilot.matchers import Eventually
 from testtools.matchers import Contains, Equals, NotEquals, GreaterThan
+from unittest import skip
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 
@@ -31,7 +32,7 @@ class BackgroundSettingsTestCases(UbuntuSystemSettingsTestCase):
         search = self.main_view.select_single('TextField', placeholderText='Search')
         self.assertThat(search, NotEquals(None))
         
-    def test_categories(self):
+    def test_network_category(self):
         """ Checks whether the Network category is available """
         category = self.main_view.select_single('CategoryGrid', category='network')
         self.assertThat(category, NotEquals(None))
@@ -68,6 +69,8 @@ class BackgroundSettingsTestCases(UbuntuSystemSettingsTestCase):
         """ Checks whether the Background plugin is available """
         plugin = self.main_view.select_single('Label', text='Background')
         self.assertThat(plugin, NotEquals(None))
+        self.pointer.move_to_object(provider_item)
+        self.pointer.click()
 
     def test_sound_plugin(self):
         """ Checks whether the Sound plugin is available """
@@ -103,5 +106,4 @@ class BackgroundSettingsTestCases(UbuntuSystemSettingsTestCase):
         """ Checks whether the Updates plugin is available """
         plugin = self.main_view.select_single('Label', text='Updates')
         self.assertThat(plugin, NotEquals(None))
-
 
