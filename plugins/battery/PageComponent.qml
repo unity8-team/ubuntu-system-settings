@@ -76,11 +76,13 @@ ItemPage {
                 chargingEntry.text = i18n.tr("Charging now")
                 isCharging = true
             }
-            else if (state === BatteryInfo.Discharging) {
+            else if (state === BatteryInfo.Discharging &&
+                     batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
                 chargingEntry.text = i18n.tr("Last full charge")
                 isCharging = false
             }
-            else if (state === BatteryInfo.Full || state === BatteryInfo.NotCharging) {
+            else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
+                     state === BatteryInfo.NotCharging) {
                 chargingEntry.text = i18n.tr("Fully charged")
                 isCharging = true
             }
@@ -351,6 +353,7 @@ ItemPage {
 
             ListItem.Caption {
                 text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
+                visible: gpsSwitch.visible
             }
         }
     }
