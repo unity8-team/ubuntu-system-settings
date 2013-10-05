@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-30 22:34+0100\n"
-"PO-Revision-Date: 2013-10-04 05:36+0000\n"
+"PO-Revision-Date: 2013-10-04 07:00+0000\n"
 "Last-Translator: Anousak <anousak@gmail.com>\n"
 "Language-Team: Lao <lo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-10-04 05:47+0000\n"
+"X-Launchpad-Export-Date: 2013-10-05 06:28+0000\n"
 "X-Generator: Launchpad (build 16791)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -586,43 +586,45 @@ msgstr ""
 
 #: ../plugins/phone/PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "ຊີມ"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone/PageComponent.qml:61 ../plugins/phone/Services.qml:30
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "ບໍລິການ %1"
 
 #: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
-msgstr ""
+msgstr "ໂທ"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
+"ເອກະສານທັງຫມົດ, ເກມທ້ອນ, ປັບຄ່າ, ແລະ "
+"ລາຍການອື່ນໆຈະໄດ້ຮັບການລຶບຢ່າງຖາວອນຈາກໂທລະສັບທີ່ນີ້."
 
 #: ../plugins/reset/EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr ""
+msgstr "ລຶບ ແລະ ປັບທຸກສິ່ງທຸກຢ່າງ"
 
 #: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
-msgstr ""
+msgstr "ປັບໂທລະສັບ"
 
 #: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
-msgstr ""
+msgstr "ປັບຕົວເລີ່ມ ແລະ ຈໍຫຼັກ ..."
 
 #: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "ປັບທຸກສິ່ງທຸກຢ່າງຂອງລະບົບຕັ້ງຄ່າ"
 
 #: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
-msgstr ""
+msgstr "ລຶບ ເເລະ ປັບທຸກສິ່ງທຸກຢ່າງ"
 
 #: ../plugins/reset/ResetAllSettings.qml:29
 #: ../plugins/reset/ResetLauncherHome.qml:30
@@ -630,79 +632,92 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
+"ເນື້ອໃນ ແລະ ຮູບຮ່າງຂອງຕົວເລີ່ມ, "
+"ແລະການກັ່ນຕອງໃນຫນ້າຈໍຫຼັກຈະໄດ້ຮັບການກັບຄືນໄປຕັ້ງຕົ້ນສະບັບຂອງເຂົາເຈົ້າ."
 
 #: ../plugins/reset/ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "ປັບທຸກລະບົບຕັ້ງຂ່າ"
 
 #: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
-msgstr ""
+msgstr "ປັບຕົວເລີ່ມແລະ ຈໍ່ຫຼັກ"
 
 #: ../plugins/security-privacy/Dash.qml:29
 #: ../plugins/security-privacy/PageComponent.qml:117
 msgid "Dash search"
-msgstr ""
+msgstr "ເເດດຊ໌ຊອກຫາ"
 
 #: ../plugins/security-privacy/Dash.qml:49
 msgid "Return results from:"
-msgstr ""
+msgstr "ຜົນ​ໄດ້​ຮັບ​ຈາກ​:..."
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:52
 #: ../plugins/security-privacy/PageComponent.qml:120
 msgid "Phone only"
-msgstr ""
+msgstr "ພຽງແຕ່ໂທລະສັບ"
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:119
 msgid "Phone and Internet"
-msgstr ""
+msgstr "ໂທລະສັບ ເເລະ ອິນເຕີເນດ໌"
 
 #: ../plugins/security-privacy/Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "ສະຖານທີ່"
 
 #: ../plugins/security-privacy/Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "ພົບສະຖານທີ່"
 
 #: ../plugins/security-privacy/Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"ນໍາໃຊ້ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ. ໃນເວລາປິດ, GPS ປິດນໍາຊ່ວຍປະຢັດໄຟ."
 
 #: ../plugins/security-privacy/Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"ນໍາໃຊ້ Wi-Fi ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ. "
+"ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
 
 #: ../plugins/security-privacy/Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"ນໍາໃຊ້ Wi-Fi (ປະຈຸບັນປິດ) ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ.  "
+"ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
 
 #: ../plugins/security-privacy/Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"ນໍາໃຊ້ Wi-Fi, ຫຼັກເຄື່ອຂ່ຍ ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ.  "
+"ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
 
 #: ../plugins/security-privacy/Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"ນໍາໃຊ້ Wi-Fi, ຫຼັກເຄື່ອຂ່າຍ (ປະຈຸບັນບໍ່ໃດ້ເຊີ່ມກັບສັນຍານ) ແລະ GPS "
+"ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ.  ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
 
 #: ../plugins/security-privacy/Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"ນໍາໃຊ້ Wi-Fi (ປະຈຸບັນປິດ), ຫຼັກເຄື່ອຂ່າຍ ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ. "
+" ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
 
 #: ../plugins/security-privacy/Location.qml:82
 msgid ""
@@ -710,133 +725,136 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"ນໍາໃຊ້ Wi-Fi (ປະຈຸບັນປິດ), ຫຼັກເຄື່ອຂ່າຍ ຫຼັກເຄື່ອຂ່າຍ "
+"(ປະຈຸບັນບໍ່ໃດ້ເຊີ່ມກັບສັນຍານ)ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ.  "
+"ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
 
 #: ../plugins/security-privacy/Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "ອານຸຍາດເຂົ້າເຖີງສະຖານທີ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:30
 #: ../plugins/security-privacy/PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "ຄວາມປອດໄຟລ໋ອກ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "ປ່ຽນລະຫັດພ່ານ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "ປ່ຽນຄໍ່ສັບລະຫັດພ່ານ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "ສະໄວ້ເພື່ອປ່ຽນ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "ປ່ຽນໄປຫາສະຫັດ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "ປ່ຽນໄປຫາຄໍາສັບລະຫັດ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "ຫາສະຫັດມີເເລ້ວ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "ຄໍາສັບຫາສະຫັດມີເເລ້ວ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "ສະຫັດບໍ່ຖືກຕ້ງ. ລອງອີກເທື່ອ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "ຄໍາສັບສະຫັດບໍ່ຖືກຕ້ງ. ລອງອີກເທື່ອ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "ເລືອກລະຫັດ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "ເລືອກຄໍາສັບລະຫັດ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "ຢັ້ງຢືນລະຫັດ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "ຢັ້ງຢືນຄໍາສັບລະຫັດ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "ລະຫັດເລົ່ານັ້ນເເມ່ນບໍາຖຶກກັນ. ລອງອີກເທື່ອ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "ຄໍາສັບລະຫັດເລົ່ານັ້ນເເມ່ນບໍາຖຶກກັນ. ລອງອີກເທື່ອ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "ລົບລ້າງ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "ຕໍ່ໄປ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "ປົດລ໋ອກໂລະສັບນໍາໃຊ້:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "ສະໄວ້ (ບໍ່ມີປ້ອງກັນ)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "ສະຫັດ 4-ຕົວ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:332
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "ຄໍາສັບລະຫັດ"
 
 #: ../plugins/security-privacy/LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "ສະໄວ້ (ບໍ່ມີປ້ອງກັນ)... "
 
 #: ../plugins/security-privacy/LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "ສະຫັດ 4-ຕົວ...."
 
 #: ../plugins/security-privacy/LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "ຄໍາສັບສະຫັດພານ..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "ປ່ຽນສະຫັດພານ..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "ປ່ຽນຄໍາສັບສະຫັດພານ..."
 
 #: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
 msgid "Security & Privacy"
-msgstr ""
+msgstr "ຄວາມປອດໄຟ ເເລະ ສ່ວນຕົວ"
 
 #: ../plugins/security-privacy/PageComponent.qml:67
 msgid "Security:"
-msgstr ""
+msgstr "ຄວາມປອດໄຟ:"
 
 #: ../plugins/security-privacy/PageComponent.qml:70
 #: ../plugins/security-privacy/PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "ການລອກໂທລະສັບ"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy/PageComponent.qml:72
@@ -844,20 +862,19 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 ນາທີ"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "SIM PIN"
-msgstr ""
+msgstr "ຊີມ PIN"
 
 #: ../plugins/security-privacy/PageComponent.qml:86
 msgid "Privacy:"
-msgstr ""
+msgstr "ສ່ວນຕົວ:"
 
 #: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "ສະຖິຕິ"
 
 #: ../plugins/security-privacy/PageComponent.qml:102
 msgid "Messages on welcome screen"
