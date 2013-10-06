@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-30 22:34+0100\n"
-"PO-Revision-Date: 2013-10-02 10:28+0000\n"
+"PO-Revision-Date: 2013-10-05 17:28+0000\n"
 "Last-Translator: Claudio Arseni <claudio.arseni@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-03 05:57+0000\n"
+"X-Launchpad-Export-Date: 2013-10-06 05:21+0000\n"
 "X-Generator: Launchpad (build 16791)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -180,11 +180,11 @@ msgstr "In carica"
 
 #: ../plugins/battery/PageComponent.qml:80
 msgid "Last full charge"
-msgstr ""
+msgstr "Ultima ricarica completa"
 
 #: ../plugins/battery/PageComponent.qml:84
 msgid "Fully charged"
-msgstr ""
+msgstr "Ricarica completa"
 
 #: ../plugins/battery/PageComponent.qml:123
 msgid "Charge level"
@@ -207,12 +207,12 @@ msgstr "Luminosità dysplay"
 #: ../plugins/battery/PageComponent.qml:245
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
-msgstr ""
+msgstr "Blocca quando inattivo"
 
 #: ../plugins/battery/PageComponent.qml:245
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
-msgstr ""
+msgstr "Sospendi quando inattivo"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery/PageComponent.qml:251
@@ -243,15 +243,15 @@ msgstr "GPS"
 
 #: ../plugins/battery/PageComponent.qml:353
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "La rilevazione esatta della posizione richiede il GPS e/o il Wi-Fi."
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "Blocca il telefono quando non è in uso:"
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "Sospendi il telefono quando non è in uso:"
 
 #: ../plugins/battery/SleepValues.qml:107
 msgid ""
@@ -262,6 +262,7 @@ msgstr ""
 #: ../plugins/battery/SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
+"Non sospendere il telefono durante le chiamate e la riproduzione video."
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
@@ -355,7 +356,7 @@ msgstr "Mouse"
 
 #: ../plugins/bluetooth/PageComponent.qml:92
 msgid "Printer"
-msgstr ""
+msgstr "Stampante"
 
 #: ../plugins/bluetooth/PageComponent.qml:93
 msgid "Camera"
@@ -367,26 +368,26 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:100
 msgid "Excellent"
-msgstr ""
+msgstr "Eccellente"
 
 #: ../plugins/bluetooth/PageComponent.qml:101
 msgid "Good"
-msgstr ""
+msgstr "Buona"
 
 #: ../plugins/bluetooth/PageComponent.qml:102
 msgid "Fair"
-msgstr ""
+msgstr "Discreta"
 
 #: ../plugins/bluetooth/PageComponent.qml:103
 msgid "Poor"
-msgstr ""
+msgstr "Scarsa"
 
 #: ../plugins/bluetooth/PageComponent.qml:104
 #: ../plugins/bluetooth/PageComponent.qml:193
 #: ../plugins/bluetooth/PageComponent.qml:201
 #: ../plugins/security-privacy/PhoneLocking.qml:40
 msgid "None"
-msgstr ""
+msgstr "Nessuna"
 
 #: ../plugins/bluetooth/PageComponent.qml:130
 msgid "Connected headset:"
@@ -414,7 +415,7 @@ msgstr "Tipo"
 
 #: ../plugins/bluetooth/PageComponent.qml:208
 msgid "Signal Strength"
-msgstr ""
+msgstr "Potenza del segnale"
 
 #: ../plugins/bluetooth/PageComponent.qml:213
 msgid "Disconnect"
@@ -434,7 +435,7 @@ msgstr "Associa"
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:72
 msgid "Carrier"
-msgstr ""
+msgstr "Operatore"
 
 #: ../plugins/cellular/ChooseCarrier.qml:78
 msgid "Refresh"
@@ -446,11 +447,11 @@ msgstr "Ricerca"
 
 #: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
 msgid "Cellular"
-msgstr "Cellulare"
+msgstr "Rete mobile"
 
 #: ../plugins/cellular/PageComponent.qml:66
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Scegli operatore:"
 
 #: ../plugins/cellular/PageComponent.qml:67
 #: ../plugins/time-date/ChooseTimeZone.qml:35
@@ -466,20 +467,20 @@ msgstr "Manualmente"
 
 #: ../plugins/cellular/PageComponent.qml:101
 msgid "Cellular data"
-msgstr ""
+msgstr "Dati mobili"
 
 #: ../plugins/cellular/PageComponent.qml:109
 msgid "Data roaming"
-msgstr ""
+msgstr "Roming dati"
 
 #: ../plugins/cellular/PageComponent.qml:118
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Statistiche utilizzo dati"
 
 #: ../plugins/language/DisplayLanguage.qml:33
 #: ../plugins/language/PageComponent.qml:55
 msgid "Display language"
-msgstr ""
+msgstr "Lingua"
 
 #: ../plugins/language/DisplayLanguage.qml:115
 msgid "Confirm"
@@ -506,7 +507,7 @@ msgstr "Lingua e testo"
 #: ../plugins/language/SpellChecking.qml:29
 #: ../plugins/language/SpellChecking.qml:42
 msgid "Spell checking"
-msgstr ""
+msgstr "Controllo ortografico"
 
 #: ../plugins/language/PageComponent.qml:82
 msgid "Auto correction"
@@ -514,19 +515,20 @@ msgstr "Correzione automatica"
 
 #: ../plugins/language/PageComponent.qml:89
 msgid "Auto completion"
-msgstr ""
+msgstr "Completamento automatico"
 
 #: ../plugins/language/PageComponent.qml:98
 msgid "Auto capitalization"
-msgstr ""
+msgstr "Maiuscolo automatico"
 
 #: ../plugins/language/PageComponent.qml:105
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
+"Attivare «Maiusc» per usare la maiuscola come prima lettera di ogni frase."
 
 #: ../plugins/language/PageComponent.qml:111
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Punteggiatura automatica"
 
 #: ../plugins/language/PageComponent.qml:118
 msgid ""
@@ -539,7 +541,7 @@ msgstr ""
 
 #: ../plugins/language/SpellChecking.qml:64
 msgid "All languages available:"
-msgstr ""
+msgstr "Tutte le lingue disponibili:"
 
 #: ../plugins/phone/CallForwarding.qml:27
 #: ../plugins/phone/CallForwarding.qml:60
@@ -552,14 +554,18 @@ msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"Reindirizza a un altro numero le chiamate senza risposta, oppure quando il "
+"telefono è occupato, spento o non raggiungibile."
 
 #: ../plugins/phone/CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
+"Lo stato di inoltro delle chiamate non può essere verificato ora. Riprovare "
+"più tardi."
 
 #: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
-msgstr ""
+msgstr "Devia al numero"
 
 #: ../plugins/phone/CallForwarding.qml:113
 msgid "Contacts…"
@@ -573,7 +579,7 @@ msgstr "Imposta"
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:52
 msgid "Call waiting"
-msgstr ""
+msgstr "Chamata in attesa"
 
 #: ../plugins/phone/CallWaiting.qml:67
 msgid ""
@@ -583,7 +589,7 @@ msgstr ""
 
 #: ../plugins/phone/PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone/PageComponent.qml:61 ../plugins/phone/Services.qml:30
@@ -600,10 +606,12 @@ msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
+"Tutti i documenti, i giochi salvati, le impostazioni e tutti gli altri "
+"elementi verranno permanentemente eliminati da questo telefono."
 
 #: ../plugins/reset/EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr ""
+msgstr "Cancella a ripristina tutto"
 
 #: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
@@ -619,7 +627,7 @@ msgstr "Ripristino di tutte le impostazioni di sistema..."
 
 #: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
-msgstr ""
+msgstr "Cancellazione e rispristino in corso..."
 
 #: ../plugins/reset/ResetAllSettings.qml:29
 #: ../plugins/reset/ResetLauncherHome.qml:30
@@ -627,43 +635,45 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
+"I contenuti e le impostazioni del Launcher e i filtri nella schermata Home "
+"verranno ripristinati alle impostazioni di fabbrica."
 
 #: ../plugins/reset/ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "Ripristina tutte le impostazioni di sistema"
 
 #: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
-msgstr ""
+msgstr "Ripristina Launcher e schermata Home"
 
 #: ../plugins/security-privacy/Dash.qml:29
 #: ../plugins/security-privacy/PageComponent.qml:117
 msgid "Dash search"
-msgstr ""
+msgstr "Ricerche dalla Dash"
 
 #: ../plugins/security-privacy/Dash.qml:49
 msgid "Return results from:"
-msgstr ""
+msgstr "Restituisci risultati:"
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:52
 #: ../plugins/security-privacy/PageComponent.qml:120
 msgid "Phone only"
-msgstr ""
+msgstr "Solo dal telefono"
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:119
 msgid "Phone and Internet"
-msgstr ""
+msgstr "Dal telefono e da internet"
 
 #: ../plugins/security-privacy/Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "Posizione"
 
 #: ../plugins/security-privacy/Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "Rilevamento della posizione"
 
 #: ../plugins/security-privacy/Location.qml:70
 msgid ""
@@ -710,7 +720,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "Consenti accesso alla posizione:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:30
 #: ../plugins/security-privacy/PhoneLocking.qml:44
@@ -719,11 +729,11 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "Cambia il passcode"
 
 #: ../plugins/security-privacy/LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "Cambia la passphrase"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
@@ -739,101 +749,101 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "Passcode esistente"
 
 #: ../plugins/security-privacy/LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "Passphrase esistente"
 
 #: ../plugins/security-privacy/LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Passoce errato. Provare di nuovo."
 
 #: ../plugins/security-privacy/LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Passprhase errata. Provare di nuovo."
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "Scegli passcode"
 
 #: ../plugins/security-privacy/LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Scegli passphrase"
 
 #: ../plugins/security-privacy/LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Conferma passcode"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Conferma passphrase"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "I passcode non corridspondono. Provare di nuovo."
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Le passphrase non corrispondono. Provare di nuovo."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "Azzera"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "Continua"
 
 #: ../plugins/security-privacy/LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "Sblocca il telefono usando:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Scorrimento (nessuna sicurezza)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Passcode a 4 caratteri"
 
 #: ../plugins/security-privacy/LockSecurity.qml:332
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "Passphrase"
 
 #: ../plugins/security-privacy/LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Scorrimento (nessuna sicurezza)... "
 
 #: ../plugins/security-privacy/LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Passcode a 4 caratteri..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "Passphrase..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "Cambia passcode..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Cambia passphrase..."
 
 #: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
 msgid "Security & Privacy"
-msgstr ""
+msgstr "Sicurezza e privacy"
 
 #: ../plugins/security-privacy/PageComponent.qml:67
 msgid "Security:"
-msgstr ""
+msgstr "Sicurezza:"
 
 #: ../plugins/security-privacy/PageComponent.qml:70
 #: ../plugins/security-privacy/PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "Blocco del telefono"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy/PageComponent.qml:72
@@ -841,28 +851,28 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 minuto"
+msgstr[1] "%1 minuti"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "SIM PIN"
-msgstr ""
+msgstr "PIN della SIM"
 
 #: ../plugins/security-privacy/PageComponent.qml:86
 msgid "Privacy:"
-msgstr ""
+msgstr "Privacy:"
 
 #: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Statistiche sulla schermata di benvenuto"
 
 #: ../plugins/security-privacy/PageComponent.qml:102
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Messaggi sulla schermata di benvenuto"
 
 #: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Location access"
-msgstr ""
+msgstr "Accesso all aposizione"
 
 #: ../plugins/security-privacy/PageComponent.qml:143
 msgid "Other app access"
@@ -886,7 +896,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "Passcode"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:77
 msgid "Sleep locks immediately"
@@ -898,31 +908,31 @@ msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
-msgstr ""
+msgstr "Chiamate:"
 
 #: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
-msgstr ""
+msgstr "Suoneria"
 
 #: ../plugins/sound/PageComponent.qml:66
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "Vibra e suona"
 
 #: ../plugins/sound/PageComponent.qml:73
 msgid "Vibrate in silent mode"
-msgstr ""
+msgstr "Vibra in modalità silenziosa"
 
 #: ../plugins/sound/PageComponent.qml:79
 msgid "Other sounds:"
-msgstr ""
+msgstr "Altri suoni:"
 
 #: ../plugins/sound/PageComponent.qml:83 ../plugins/sound/PageComponent.qml:86
 msgid "Message received"
-msgstr ""
+msgstr "Messaggio ricevuto"
 
 #: ../plugins/sound/PageComponent.qml:92
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "Toni tastiera"
 
 #: ../plugins/sound/PageComponent.qml:99
 msgid "Lock sound"
@@ -930,32 +940,32 @@ msgstr ""
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "Il telefono è in modalità silenziosa."
 
 #: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
-msgstr ""
+msgstr "Ferma la riproduzione"
 
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
-msgstr ""
+msgstr "Scaricamento automatico"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "Scarica gli aggiornamenti futuri automaticamente:"
 
 #: ../plugins/system-update/Download.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Quando connesso alla ret Wi-Fi"
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "Su qualunque connessione dati"
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "Potrebbero essere applicati costi aggiuntivi."
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
@@ -1000,25 +1010,25 @@ msgstr "Ultimo aggiornamento %1"
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Circa %1 secondo rimanente"
+msgstr[1] "Circa %1 secondo rimanenti"
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
-msgstr ""
+msgstr "Nessuna stima per lo scaricamento"
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
-msgstr ""
+msgstr "In pausa"
 
 #: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
-msgstr ""
+msgstr "Scaricamento non riuscio:"
 
 #: ../plugins/system-update/PageComponent.qml:205
 #: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
-msgstr ""
+msgstr "Riprova"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
@@ -1032,23 +1042,23 @@ msgstr "Versione %1"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
-msgstr ""
+msgstr "Sospendi lo scaricamento"
 
 #: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
-msgstr ""
+msgstr "Riprendi lo scaricamento"
 
 #: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
-msgstr ""
+msgstr "Scarica"
 
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
-msgstr ""
+msgstr "Installa e riavvia"
 
 #: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
-msgstr ""
+msgstr "Su rete Wi-Fi"
 
 #: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
@@ -1064,11 +1074,11 @@ msgstr "Imposta fuso orario:"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:91
 msgid "Enter your current location."
-msgstr ""
+msgstr "Inserire la posizione attuale."
 
 #: ../plugins/time-date/ChooseTimeZone.qml:91
 msgid "No matching place"
-msgstr ""
+msgstr "Nessuna località corrispondente"
 
 #: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
@@ -1088,19 +1098,19 @@ msgstr "Imposta ora e data"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Orario"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Ore"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Minuti"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Secondi"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
@@ -1148,23 +1158,23 @@ msgstr "Agosto"
 
 #: ../plugins/time-date/TimePicker.qml:156
 msgid "September"
-msgstr ""
+msgstr "Settembre"
 
 #: ../plugins/time-date/TimePicker.qml:157
 msgid "October"
-msgstr ""
+msgstr "Ottobre"
 
 #: ../plugins/time-date/TimePicker.qml:158
 msgid "November"
-msgstr ""
+msgstr "Novembre"
 
 #: ../plugins/time-date/TimePicker.qml:159
 msgid "December"
-msgstr ""
+msgstr "Dicembre"
 
 #: ../plugins/time-date/TimePicker.qml:169
 msgid "Year"
-msgstr ""
+msgstr "Anno"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
@@ -1172,7 +1182,7 @@ msgstr "Impostazioni di sistema"
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
+msgstr "Cerca"
 
 #: ../src/qml/MainWindow.qml:95
 msgid "Personal"
@@ -1184,11 +1194,11 @@ msgstr "Sistema"
 
 #: ../.build/settings.js:2
 msgid "Accessibility"
-msgstr ""
+msgstr "Accessibilità"
 
 #: ../.build/settings.js:6
 msgid "Brightness"
-msgstr ""
+msgstr "Luminosità"
 
 #: ../.build/settings.js:8
 msgid "Example"
