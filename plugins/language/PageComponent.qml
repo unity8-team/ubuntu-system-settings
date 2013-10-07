@@ -76,7 +76,6 @@ ItemPage {
             }
 
             ListItem.Divider {
-                visible: showAllUI
             }
 
             ListItem.SingleValue {
@@ -92,8 +91,6 @@ ItemPage {
             }
 
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Auto completion")
 
                 control: Switch {
@@ -104,8 +101,6 @@ ItemPage {
             }
 
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Predictive text")
 
                 control: Switch {
