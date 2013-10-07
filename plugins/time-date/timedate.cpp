@@ -41,7 +41,6 @@ TimeDate::TimeDate(QObject *parent) :
     m_timeZoneFilterProxy(&m_timeZoneModel),
     m_sortedBefore(false)
 {
-std::cerr << __FILE__ << ':' << __LINE__ << ':' << this << std::endl;
     connect (&m_serviceWatcher,
              SIGNAL (serviceOwnerChanged (QString, QString, QString)),
              this,
@@ -62,7 +61,6 @@ void TimeDate::setUpInterface()
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
-std::cerr << "org.freedesktop.DBus.Properties - PropertiesChanged - " << b << std::endl;
 }
 
 QString TimeDate::timeZone()
