@@ -144,19 +144,12 @@ Dialog {
             labelText: i18n.tr("Month")
             currentIndex: priv.now.getMonth()
 
-            model: [
-                  i18n.tr("January")
-                , i18n.tr("February")
-                , i18n.tr("March")
-                , i18n.tr("April")
-                , i18n.tr("May")
-                , i18n.tr("June")
-                , i18n.tr("July")
-                , i18n.tr("August")
-                , i18n.tr("September")
-                , i18n.tr("October")
-                , i18n.tr("November")
-                , i18n.tr("December")]
+            model: {
+                var months = []
+                for (var i = 0; i < 12; ++i)
+                    months.push(Qt.locale().standaloneMonthName(i))
+                return months
+            }
 
         }
         Scroller {
