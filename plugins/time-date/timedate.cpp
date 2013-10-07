@@ -54,14 +54,14 @@ TimeDate::TimeDate(QObject *parent) :
 
 void TimeDate::setUpInterface()
 {
-    bool b = m_timeDateInterface.connection().connect(
+    m_timeDateInterface.connection().connect(
         m_timeDateInterface.service(),
         m_timeDateInterface.path(),
         "org.freedesktop.DBus.Properties",
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
-}
+    }
 
 QString TimeDate::timeZone()
 {
