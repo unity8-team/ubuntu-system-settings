@@ -32,6 +32,9 @@ ItemPage {
     id: mainPage
     title: i18n.tr("Background")
 
+    /* TODO: For now hardcoded paths, later we'll use GSettings */
+    property string defaultBackground: mainPage.width >= units.gu(60) ? "/usr/share/unity8/graphics/tablet_background.jpg" : "/usr/share/unity8/graphics/phone_background.jpg"
+
     UbuntuBackgroundPanel {
         id: backgroundPanel
 
@@ -198,7 +201,7 @@ ItemPage {
 
     Image {
         id: testWelcomeImage
-        property string fallback: "darkeningclockwork.jpg"
+        property string fallback: mainPage.defaultBackground
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
                                      welcomeImage)
@@ -206,7 +209,7 @@ ItemPage {
 
     Image {
         id: testHomeImage
-        property string fallback: "aeg.jpg"
+        property string fallback: mainPage.defaultBackground
         source: background.pictureUri
         visible: false
         onStatusChanged: updateImage(testHomeImage,

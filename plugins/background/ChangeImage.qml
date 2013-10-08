@@ -23,6 +23,8 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1
 import SystemSettings 1.0
 
+import "MainPage"
+
 ItemPage {
 
     id: rootPage
@@ -54,7 +56,7 @@ ItemPage {
 
         delegate: Standard {
             text: name
-            icon: Qt.resolvedUrl("darkeningclockwork.jpg")
+            icon: Qt.resolvedUrl(mainPage.defaultBackground)
             progression: true
         }
     }
