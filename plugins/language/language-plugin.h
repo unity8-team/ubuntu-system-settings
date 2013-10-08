@@ -81,7 +81,6 @@ public:
     explicit LanguagePlugin(QObject *parent = NULL);
 
     const QStringList &languages() const;
-
     const QStringList &languageCodes() const;
 
     int currentLanguage() const;

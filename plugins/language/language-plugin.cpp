@@ -30,9 +30,9 @@
 #define KEY_PREDICTIVE_TEXT     "predictive-text"
 #define KEY_KEY_PRESS_FEEDBACK  "key-press-feedback"
 
-#define LANGUAGE_PACKS_DIR "/usr/share/locale-langpack"
 #define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
 
+static QProcess *localeProcess;
 static QSet<QString> *languagePacks;
 static QList<QLocale> *languageLocales;
 static QHash<QLocale::Language, unsigned int> *languageIndices;
@@ -75,17 +75,29 @@ getLanguagePacks()
     if (languagePacks == NULL) {
         languagePacks = new QSet<QString>;
 
-        QDir languagePacksDir(LANGUAGE_PACKS_DIR);
-
-        languagePacksDir.setFilter(QDir::Dirs);
-        languagePacksDir.setSorting(QDir::Name);
-
-        QFileInfoList fileInfoList(languagePacksDir.entryInfoList());
-
-        for (QFileInfoList::const_iterator i(fileInfoList.begin()); i != fileInfoList.end(); ++i) {
-            if (i->fileName() != "..")
-                *languagePacks += i->fileName();
+        if (localeProcess == NULL) {
+            localeProcess = new QProcess();
+            localeProcess->start("locale", QStringList("-a"), QIODevice::ReadOnly);
+            // TODO: do this asynchronously
+            localeProcess->waitForFinished();
         }
+    }
+
+    if (localeProcess != NULL && localeProcess->state() == QProcess::NotRunning) {
+        QString output(localeProcess->readAllStandardOutput());
+        QStringList tokens(output.split(QRegExp("\\s+")));
+
+        languagePacks->clear();
+
+        for (QStringList::const_iterator i(tokens.begin()); i != tokens.end(); ++i) {
+            QString locale(i->left(i->indexOf('.')));
+
+            if (locale != "C" && locale != "POSIX")
+                *languagePacks += locale;
+        }
+
+        delete localeProcess;
+        localeProcess = NULL;
     }
 
     return languagePacks;
