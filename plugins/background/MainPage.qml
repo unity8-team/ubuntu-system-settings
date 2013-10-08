@@ -164,6 +164,22 @@ ItemPage {
         visible: showAllUI
     }
 
+    ListItem.SingleControl {
+        anchors {
+            top: homeImage.bottom
+            horizontalCenter: homeImage.horizontalCenter
+        }
+
+        control: Button {
+            text: i18n.tr("Reset background")
+            width: parent.width / 2
+            onClicked: {
+                background.schema.reset('pictureUri')
+                setUpImages()
+            }
+        }
+    }
+
     OptionSelector {
         id: optionSelector
         anchors {
