@@ -305,21 +305,23 @@ ItemPage {
             }
 
             ListItem.Standard {
+                id: btListItem
                 text: i18n.tr("Bluetooth")
-                control: Switch {
-                    id: btSwitch
-                    // Cannot use onCheckedChanged as this triggers a loop
-                    onClicked: bluetoothActionGroup.enabled.activate()
+                control: Loader {
+                    active: bluetoothActionGroup.enabled.state != null
+                    sourceComponent: Switch {
+                        id: btSwitch
+                        // Cannot use onCheckedChanged as this triggers a loop
+                        onClicked: bluetoothActionGroup.enabled.activate()
+                        checked: bluetoothActionGroup.enabled.state
+                    }
+
+                    // ListItem forwards the 'clicked' signal to its control.
+                    // It needs to be forwarded again to the Loader's sourceComponent
+                    signal clicked
+                    onClicked: item.clicked()
                 }
                 visible: bluetoothActionGroup.visible
-                Component.onCompleted:
-                    clicked.connect(btSwitch.clicked)
-            }
-
-            Binding {
-                target: btSwitch
-                property: "checked"
-                value: bluetoothActionGroup.enabled.state
             }
 
             QDBusActionGroup {
