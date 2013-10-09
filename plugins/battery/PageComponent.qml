@@ -336,26 +336,28 @@ ItemPage {
             }
 
             ListItem.Standard {
+                id: gpsListItem
                 text: i18n.tr("GPS")
-                control: Switch {
-                    id: gpsSwitch
-                    onClicked: locationActionGroup.enabled.activate()
+                control: Loader {
+                    active: locationActionGroup.enabled.state != null
+                    sourceComponent: Switch {
+                        id: gpsSwitch
+                        onClicked: locationActionGroup.enabled.activate()
+                        checked: locationActionGroup.enabled.state
+                    }
+
+                    // ListItem forwards the 'clicked' signal to its control.
+                    // It needs to be forwarded again to the Loader's sourceComponent
+                    signal clicked
+                    onClicked: item.clicked()
                 }
                 visible: showAllUI && // Hidden until the indicator works
                          locationActionGroup.enabled.state !== undefined
-                Component.onCompleted:
-                    clicked.connect(gpsSwitch.clicked)
-            }
-
-            Binding {
-                target: gpsSwitch
-                property: "checked"
-                value: locationActionGroup.enabled.state
             }
 
             ListItem.Caption {
                 text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
-                visible: gpsSwitch.visible
+                visible: gpsListItem.visible
             }
         }
     }
