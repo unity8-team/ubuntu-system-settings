@@ -139,29 +139,30 @@ ItemPage {
 
     Column {
 
+        id: buttonColumn
+        spacing: units.gu(1)
+
         anchors {
+            topMargin: units.gu(1)
             left: parent.left
             right: parent.right
-            top: homeImage.bottom
-            horizontalCenter: homeImage.horizontalCenter
+            top: showAllUI ? topDivider.bottom : homeImage.bottom
         }
 
-        ListItem.SingleControl {
-            control: Button {
-                text: i18n.tr("Change...")
-                width: parent.width / 2
-                onClicked: startContentTransfer()
-            }
+        Button {
+            text: i18n.tr("Change…")
+            width: parent.width / 2
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: startContentTransfer()
         }
-    
-        ListItem.SingleControl {
-            control: Button {
-                text: i18n.tr("Use original background")
-                width: parent.width / 2
-                onClicked: {
-                    background.schema.reset('pictureUri')
-                    setUpImages()
-                }
+
+        Button {
+            text: i18n.tr("Use original background")
+            width: (parent.width / 2)
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                background.schema.reset('pictureUri')
+                setUpImages()
             }
         }
 
@@ -171,7 +172,7 @@ ItemPage {
         id: optionSelector
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: topDivider.bottom
+            top: buttonColumn.bottom
             topMargin: units.gu(2)
         }
         width: parent.width - units.gu(4)
