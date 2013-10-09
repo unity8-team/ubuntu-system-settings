@@ -47,6 +47,11 @@ MainView {
         }
     }
 
+    Connections {
+        target: UriHandler
+        onOpened: print(uris)
+    }
+
     PluginManager {
         id: pluginManager
     }
