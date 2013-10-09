@@ -89,7 +89,6 @@ ItemPage {
         }
         Component.onCompleted: {
             onChargingStateChanged(0, chargingState(0))
-            onRemainingCapacityChanged(0, remainingCapacity(0))
         }
     }
 
