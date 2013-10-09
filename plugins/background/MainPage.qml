@@ -83,21 +83,7 @@ ItemPage {
             left: parent.left
          }
 
-        onClicked: {
-            var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                    ContentHub.defaultSourceForType(ContentType.Pictures));
-            if (transfer != null)
-            {
-                transfer.selectionType = ContentTransfer.Single;
-                var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-                console.log("Store is: " + store.uri);
-                transfer.setStore(store);
-                activeTransfer = transfer;
-                activeTransfer.start();
-            }
-
-        }
-
+        onClicked: startContentTransfer()
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
 
@@ -116,22 +102,9 @@ ItemPage {
             horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
          }
 
+        onClicked: startContentTransfer()
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
-
-        onClicked: {
-            var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                    ContentHub.defaultSourceForType(ContentType.Pictures));
-            if (transfer != null)
-            {
-                transfer.selectionType = ContentTransfer.Single;
-                var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-                console.log("Store is: " + store.uri);
-                transfer.setStore(store);
-                activeTransfer = transfer;
-                activeTransfer.start();
-            }
-        }
 
         OverlayImage {
             anchors.fill: parent
@@ -164,20 +137,34 @@ ItemPage {
         visible: showAllUI
     }
 
-    ListItem.SingleControl {
+    Column {
+
         anchors {
+            left: parent.left
+            right: parent.right
             top: homeImage.bottom
             horizontalCenter: homeImage.horizontalCenter
         }
 
-        control: Button {
-            text: i18n.tr("Reset background")
-            width: parent.width / 2
-            onClicked: {
-                background.schema.reset('pictureUri')
-                setUpImages()
+        ListItem.SingleControl {
+            control: Button {
+                text: i18n.tr("Change...")
+                width: parent.width / 2
+                onClicked: startContentTransfer()
             }
         }
+    
+        ListItem.SingleControl {
+            control: Button {
+                text: i18n.tr("Use original background")
+                width: parent.width / 2
+                onClicked: {
+                    background.schema.reset('pictureUri')
+                    setUpImages()
+                }
+            }
+        }
+
     }
 
     OptionSelector {
@@ -271,6 +258,20 @@ ItemPage {
                     setUpImages();
                 }
             }
+        }
+    }
+
+    function startContentTransfer() {
+        var transfer = ContentHub.importContent(ContentType.Pictures,
+                                                ContentHub.defaultSourceForType(ContentType.Pictures));
+        if (transfer != null)
+        {
+            transfer.selectionType = ContentTransfer.Single;
+            var store = ContentHub.defaultStoreForType(ContentType.Pictures);
+            console.log("Store is: " + store.uri);
+            transfer.setStore(store);
+            activeTransfer = transfer;
+            activeTransfer.start();
         }
     }
 }
