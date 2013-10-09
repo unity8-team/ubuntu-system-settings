@@ -101,7 +101,6 @@ Item {
         model: defaultModel
         anchors.fill: parent
         anchors.topMargin: labelRect.height
-        anchors.margins: 0
         pathItemCount: listView.height / highlightItem.height + 1
         preferredHighlightBegin: 0.5
         preferredHighlightEnd: 0.5
