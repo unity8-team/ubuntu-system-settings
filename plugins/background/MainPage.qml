@@ -143,7 +143,7 @@ ItemPage {
         spacing: units.gu(1)
 
         anchors {
-            topMargin: units.gu(1)
+            topMargin: units.gu(2)
             left: parent.left
             right: parent.right
             top: showAllUI ? topDivider.bottom : homeImage.bottom
@@ -151,14 +151,14 @@ ItemPage {
 
         Button {
             text: i18n.tr("Change…")
-            width: parent.width / 2
+            width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: startContentTransfer()
         }
 
         Button {
             text: i18n.tr("Use original background")
-            width: (parent.width / 2)
+            width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
                 background.schema.reset('pictureUri')
