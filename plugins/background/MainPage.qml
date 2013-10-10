@@ -201,7 +201,7 @@ ItemPage {
 
     Image {
         id: testWelcomeImage
-        property string fallback: mainPage.defaultBackground
+        property string fallback: defaultBackground
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
                                      welcomeImage)
@@ -209,7 +209,7 @@ ItemPage {
 
     Image {
         id: testHomeImage
-        property string fallback: mainPage.defaultBackground
+        property string fallback: defaultBackground
         source: background.pictureUri
         visible: false
         onStatusChanged: updateImage(testHomeImage,
