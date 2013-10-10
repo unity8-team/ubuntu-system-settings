@@ -26,7 +26,6 @@
 #include "agent.h"
 #include "agentadaptor.h"
 #include "devicemodel.h"
-#include "killswitch.h"
 
 class Bluetooth : public QObject
 {
@@ -47,23 +46,16 @@ class Bluetooth : public QObject
     Q_PROPERTY (QObject * agent
                 READ getAgent);
 
-    Q_PROPERTY (bool enabled
-                READ isEnabled
-                WRITE setEnabled
-                NOTIFY enabledChanged);
-
     Q_PROPERTY (bool discovering
                 READ isDiscovering
                 NOTIFY discoveringChanged);
 
 Q_SIGNALS:
     void selectedDeviceChanged();
-    void enabledChanged(bool enabled);
     void discoveringChanged(bool isActive);
 
 private Q_SLOTS:
     void onPairingDone();
-    void onKillSwitchChanged(bool blocked);
     void slotDevicePairedChanged();
 
 public:
@@ -82,13 +74,10 @@ public:
     QAbstractItemModel * getConnectedHeadsets();
     QAbstractItemModel * getDisconnectedHeadsets();
 
-    bool isEnabled() const { return !m_killswitch.isBlocked(); }
-    void setEnabled(bool enabled) { m_killswitch.trySetBlocked(!enabled); }
     bool isDiscovering() const { return m_devices.isDiscovering(); }
 
 private:
     QDBusConnection m_dbus;
-    RfKillSwitch m_killswitch;
     DeviceModel m_devices;
     DeviceFilter m_connectedHeadsets;
     DeviceFilter m_disconnectedHeadsets;

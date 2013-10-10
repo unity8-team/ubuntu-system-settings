@@ -54,7 +54,6 @@ HEADERS += \
   bluetooth.h \
   device.h \
   devicemodel.h \
-  killswitch.h \
   plugin.h
   
 SOURCES += \
@@ -63,8 +62,7 @@ SOURCES += \
   bluetooth.cpp \
   device.cpp \
   devicemodel.cpp \
-  plugin.cpp \
-  killswitch.cpp
+  plugin.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)
