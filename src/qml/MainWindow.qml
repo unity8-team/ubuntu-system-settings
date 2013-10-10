@@ -29,27 +29,67 @@ MainView {
     applicationName: "SystemSettings"
     automaticOrientation: true
 
+    function loadPluginByName(pluginName, pluginOptions) {
+        var plugin = pluginManager.getByName(pluginName)
+        var opts = { plugin: plugin,
+                     pluginManager: pluginManager }
+
+        if (pluginOptions)
+            opts.pluginOptions = pluginOptions
+
+        if (plugin) {
+            // Got a valid plugin name - load it
+            var pageComponent = plugin.pageComponent
+            if (pageComponent) {
+                pageStack.push(pageComponent, opts)
+                return true
+            }
+        } else {
+            // Invalid plugin
+            console.log("Plugin " + pluginName + " does not exist.")
+            return false
+        }
+    }
+
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
         pageStack.push(mainPage)
         if (defaultPlugin) {
-            var plugin = pluginManager.getByName(defaultPlugin)
-            if (plugin) {
-                // Got a valid plugin name - load it
-                var pageComponent = plugin.pageComponent
-                if (pageComponent)
-                    pageStack.push(pageComponent, { plugin: plugin, pluginManager: pluginManager })
-            } else {
-                // Invalid plugin passed on the commandline
-                console.log("Plugin " + defaultPlugin + " does not exist.")
+            if (!loadPluginByName(defaultPlugin))
                 Qt.quit()
-            }
         }
     }
 
     Connections {
         target: UriHandler
-        onOpened: print(uris)
+        onOpened: {
+            var url = String(uris)
+            var panelAndOptions = url.replace("settings:///system/", "")
+            var optionIndex = panelAndOptions.indexOf("?")
+            var panel = optionIndex > -1 ?
+                        panelAndOptions.substring(0, optionIndex) :
+                        panelAndOptions
+            var urlParams = {}
+            // Parse URL options
+            // From http://stackoverflow.com/a/2880929
+            if (optionIndex > -1) { // Got options
+                var match,
+                    // Regex for replacing addition symbol with a space
+                    pl     = /\+/g,
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) {
+                        return decodeURIComponent(s.replace(pl, " "))
+                    }
+                while (match = search.exec(
+                           panelAndOptions.substring(optionIndex + 1)))
+                       urlParams[decode(match[1])] = decode(match[2])
+
+                loadPluginByName(panel, urlParams)
+            } else {
+                loadPluginByName(panel)
+            }
+
+        }
     }
 
     PluginManager {
