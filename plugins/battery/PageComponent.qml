@@ -293,12 +293,8 @@ ItemPage {
                 busName: "com.canonical.indicator.bluetooth"
                 objectPath: "/com/canonical/indicator/bluetooth"
 
+                property bool visible: action("bluetooth-supported")
                 property variant enabled: action("bluetooth-enabled")
-                property variant actionVisible: action("root-phone")
-
-                property bool visible:
-                    actionVisible.state.visible === undefined ||
-                    actionVisible.state.visible
 
                 Component.onCompleted: start()
             }
