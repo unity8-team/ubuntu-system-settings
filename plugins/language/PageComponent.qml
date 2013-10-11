@@ -40,6 +40,18 @@ ItemPage {
         DisplayLanguage {}
     }
 
+    Component {
+        id: keyboardLayouts
+
+        KeyboardLayouts {}
+    }
+
+    Component {
+        id: spellChecking
+
+        SpellChecking {}
+    }
+
     Flickable {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
@@ -53,7 +65,7 @@ ItemPage {
             ListItem.SingleValue {
                 icon: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
                 text: i18n.tr("Display language")
-                value: plugin.languages[plugin.currentLanguage]
+                value: plugin.languageNames[plugin.currentLanguage]
                 progression: true
 
                 onClicked: PopupUtils.open(displayLanguage)
@@ -72,7 +84,7 @@ ItemPage {
                        plugin.keyboardLayoutsModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
+                onClicked: pageStack.push(keyboardLayouts)
             }
 
             ListItem.Divider {
@@ -88,7 +100,7 @@ ItemPage {
                        plugin.spellCheckingModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(Qt.resolvedUrl("SpellChecking.qml"))
+                onClicked: pageStack.push(spellChecking)
             }
 
             ListItem.Standard {
