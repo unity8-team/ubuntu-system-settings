@@ -15,8 +15,6 @@ OTHER_FILES += \
     $${QML_SOURCES}
 
 images.files = \
-    aeg.jpg \
-    darkeningclockwork.jpg \
     homeoverlay.svg \
     welcomeoverlay.svg
 images.path = $${PLUGIN_QML_DIR}/$${TARGET}
