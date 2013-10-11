@@ -104,7 +104,7 @@ void Update::SetInfoMessage(QString infoMessage) {
 }
 
 int Update::currentBuildNumber() {
-    if (m_downloadMode != -1)
+    if (m_currentBuildNumber != -1)
         return m_currentBuildNumber;
 
     QDBusReply<int> reply = m_SystemServiceIface.call("Info");
