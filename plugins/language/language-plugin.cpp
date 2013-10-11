@@ -41,6 +41,8 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     _codeIndices(NULL),
     _currentLanguage(-1),
     _nextCurrentLanguage(-1),
+    _manager(NULL),
+    _user(NULL),
     _maliitSettings(NULL),
     _keyboardLayouts(NULL),
     _keyboardLayoutsModel(NULL),
@@ -56,8 +58,21 @@ LanguagePlugin::~LanguagePlugin()
     delete _nameIndices;
     delete _codeIndices;
 
+    if (_manager != NULL) {
+        g_signal_handlers_disconnect_by_data(_manager, this);
+        g_object_unref(_manager);
+    }
+
+    if (_user != NULL) {
+        g_signal_handlers_disconnect_by_data(_user, this);
+        g_object_unref(_user);
+    }
+
     if (_maliitSettings != NULL)
-        g_object_unref (_maliitSettings);
+        g_object_unref(_maliitSettings);
+
+    for (QList<KeyboardLayout *>::const_iterator i(_keyboardLayouts->begin()); i != _keyboardLayouts->end(); ++i)
+        delete *i;
 
     delete _keyboardLayouts;
     delete _keyboardLayoutsModel;
@@ -136,13 +151,15 @@ void
 LanguagePlugin::userSetCurrentLanguage(ActUser *user)
 {
     if (act_user_is_loaded(user)) {
-        g_signal_handlers_disconnect_by_data(user, this);
+        if (_user != NULL) {
+            g_signal_handlers_disconnect_by_data(_user, this);
+            g_object_unref(_user);
+            _user = NULL;
+        }
 
         if (_nextCurrentLanguage != _currentLanguage) {
+            act_user_set_language(user, qPrintable(languageCodes()[_nextCurrentLanguage]));
             _currentLanguage = _nextCurrentLanguage;
-
-            act_user_set_language(user, qPrintable(languageCodes()[_currentLanguage]));
-
             Q_EMIT currentLanguageChanged();
         }
     }
@@ -166,7 +183,11 @@ LanguagePlugin::managerSetCurrentLanguage(ActUserManager *manager)
     g_object_get(manager, "is-loaded", &loaded, NULL);
 
     if (loaded) {
-        g_signal_handlers_disconnect_by_data(manager, this);
+        if (_manager != NULL) {
+            g_signal_handlers_disconnect_by_data(_manager, this);
+            g_object_unref(_manager);
+            _manager = NULL;
+        }
 
         const char *name(qPrintable(qgetenv("USER")));
 
@@ -176,8 +197,10 @@ LanguagePlugin::managerSetCurrentLanguage(ActUserManager *manager)
             if (user != NULL) {
                 if (act_user_is_loaded(user))
                     userSetCurrentLanguage(user);
-                else
+                else {
+                    _user = static_cast<ActUser *>(g_object_ref(user));
                     g_signal_connect(user, "notify::is-loaded", G_CALLBACK(::userSetCurrentLanguage), this);
+                }
             }
         }
     }
@@ -208,8 +231,10 @@ LanguagePlugin::setCurrentLanguage(int index)
 
             if (loaded)
                 managerSetCurrentLanguage(manager);
-            else
+            else {
+                _manager = static_cast<ActUserManager *>(g_object_ref(manager));
                 g_signal_connect(manager, "notify::is-loaded", G_CALLBACK(::managerSetCurrentLanguage), this);
+            }
         }
     }
 }
@@ -510,6 +535,8 @@ LanguagePlugin::keyboardLayouts() const
 
             if (!layout->language().isEmpty())
                 *_keyboardLayouts += layout;
+            else
+                delete layout;
         }
 
         qSort(_keyboardLayouts->begin(), _keyboardLayouts->end(), compareLayouts);

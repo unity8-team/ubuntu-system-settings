@@ -138,6 +138,8 @@ private:
 
     mutable int _currentLanguage;
     int _nextCurrentLanguage;
+    ActUserManager *_manager;
+    ActUser *_user;
 
     mutable GSettings *_maliitSettings;
     GSettings *maliitSettings() const;
