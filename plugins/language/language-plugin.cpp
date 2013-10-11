@@ -32,6 +32,8 @@
 
 #define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
 
+static QProcess *localeProcess;
+static QSet<QString> *languagePacks;
 static QList<QLocale> *languageLocales;
 static QHash<QLocale::Language, unsigned int> *languageIndices;
 static QStringList *languageNames;
@@ -67,27 +69,61 @@ compareLayouts(const KeyboardLayout *layout0,
     return displayName0 < displayName1 || (displayName0 == displayName1 && (language0 < language1 || (language0 == language1 && name0 < name1)));
 }
 
+static QSet<QString> *
+getLanguagePacks()
+{
+    if (languagePacks == NULL) {
+        languagePacks = new QSet<QString>;
+
+        if (localeProcess == NULL) {
+            localeProcess = new QProcess();
+            localeProcess->start("locale", QStringList("-a"), QIODevice::ReadOnly);
+            // TODO: do this asynchronously
+            localeProcess->waitForFinished();
+        }
+    }
+
+    if (localeProcess != NULL && localeProcess->state() == QProcess::NotRunning) {
+        QString output(localeProcess->readAllStandardOutput());
+        QStringList tokens(output.split(QRegExp("\\s+")));
+
+        languagePacks->clear();
+
+        for (QStringList::const_iterator i(tokens.begin()); i != tokens.end(); ++i) {
+            QString locale(i->left(i->indexOf('.')));
+
+            if (locale != "C" && locale != "POSIX")
+                *languagePacks += locale;
+        }
+
+        delete localeProcess;
+        localeProcess = NULL;
+    }
+
+    return languagePacks;
+}
+
 static QList<QLocale> *
 getLanguageLocales()
 {
     if (languageLocales == NULL) {
         languageLocales = new QList<QLocale>;
 
-        QSet<QLocale::Language> allLanguages;
-        QList<QLocale> allLocales(QLocale::matchingLocales(QLocale::AnyLanguage,
-                                                           QLocale::AnyScript,
-                                                           QLocale::AnyCountry));
+        QSet<QString> *languagePacks(getLanguagePacks());
+        QSet<QString> allLanguageNames;
 
-        for (QList<QLocale>::const_iterator i(allLocales.begin()); i != allLocales.end(); ++i) {
-            QLocale::Language language(i->language());
+        for (QSet<QString>::const_iterator i(languagePacks->begin()); i != languagePacks->end(); ++i) {
+            QLocale locale(*i);
+            QString name(locale.nativeLanguageName().trimmed().toCaseFolded());
 
-            bool uniqueLanguage(language != QLocale::AnyLanguage &&
-                                !i->nativeLanguageName().trimmed().toCaseFolded().isEmpty() &&
-                                !allLanguages.contains(language));
+            bool unique(locale != QLocale::c() &&
+                        locale.language() != QLocale::AnyLanguage &&
+                        !name.isEmpty() &&
+                        !allLanguageNames.contains(name));
 
-            if (uniqueLanguage) {
-                *languageLocales += QLocale(language);
-                allLanguages += language;
+            if (unique) {
+                *languageLocales += locale;
+                allLanguageNames += name;
             }
         }
 

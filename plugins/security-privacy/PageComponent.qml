@@ -64,9 +64,12 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Standard {
+                id: securityTitle
                 text: i18n.tr("Security:")
+                visible: lockingControl.visible || simControl.visible
             }
             ListItem.SingleValue {
+                id: lockingControl
                 text: i18n.tr("Phone locking")
                 // TRANSLATORS: %1 is the number of minutes
                 value: i18n.tr("%1 minute",
@@ -77,6 +80,7 @@ ItemPage {
                 visible: showAllUI
             }
             ListItem.SingleValue {
+                id: simControl
                 text: i18n.tr("SIM PIN")
                 value: "Off"
                 progression: true
@@ -84,6 +88,7 @@ ItemPage {
             }
             ListItem.Standard {
                 text: i18n.tr("Privacy:")
+                visible: securityTitle.visible
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")

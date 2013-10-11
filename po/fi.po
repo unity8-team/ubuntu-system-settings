@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-30 22:34+0100\n"
-"PO-Revision-Date: 2013-10-01 08:33+0000\n"
-"Last-Translator: Jiri Grönroos <Unknown>\n"
+"POT-Creation-Date: 2013-10-07 12:02+0100\n"
+"PO-Revision-Date: 2013-10-09 11:37+0000\n"
+"Last-Translator: Timo Jyrinki <timo.jyrinki@canonical.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-02 05:39+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-10 05:27+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -27,8 +27,8 @@ msgid "Serial"
 msgstr "Sarjanumero"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:128
-#: ../plugins/battery/PageComponent.qml:140
+#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:130
+#: ../plugins/battery/PageComponent.qml:142
 #: ../plugins/cellular/PageComponent.qml:73
 msgid "N/A"
 msgstr "–"
@@ -46,8 +46,8 @@ msgid "Last updated"
 msgstr "Päivitetty viimeksi"
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:254
-#: ../plugins/battery/PageComponent.qml:263
+#: ../plugins/battery/PageComponent.qml:256
+#: ../plugins/battery/PageComponent.qml:265
 #: ../plugins/battery/SleepValues.qml:96
 #: ../plugins/system-update/Download.qml:53
 #: ../plugins/system-update/PageComponent.qml:347
@@ -126,15 +126,15 @@ msgstr "Tausta"
 msgid "Welcome screen"
 msgstr "Tervetulonäkymä"
 
-#: ../plugins/background/MainPage.qml:134
+#: ../plugins/background/MainPage.qml:151
 msgid "Home screen"
 msgstr "Kotinäkymä"
 
-#: ../plugins/background/MainPage.qml:160
+#: ../plugins/background/MainPage.qml:177
 msgid "Same background for both"
 msgstr "Molemmissa sama tausta"
 
-#: ../plugins/background/MainPage.qml:161
+#: ../plugins/background/MainPage.qml:178
 msgid "Different background for each"
 msgstr "Kummassakin eri tausta"
 
@@ -178,45 +178,45 @@ msgstr[1] "%1 päivää sitten"
 msgid "Charging now"
 msgstr "Ladataan nyt"
 
-#: ../plugins/battery/PageComponent.qml:80
+#: ../plugins/battery/PageComponent.qml:81
 msgid "Last full charge"
 msgstr "Viimeisin täysi lataus"
 
-#: ../plugins/battery/PageComponent.qml:84
+#: ../plugins/battery/PageComponent.qml:86
 msgid "Fully charged"
 msgstr "Ladattu täyteen"
 
-#: ../plugins/battery/PageComponent.qml:123
+#: ../plugins/battery/PageComponent.qml:125
 msgid "Charge level"
 msgstr "Varaustaso"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery/PageComponent.qml:131
+#: ../plugins/battery/PageComponent.qml:133
 #, qt-format
 msgid "%1%"
 msgstr "%1 %"
 
-#: ../plugins/battery/PageComponent.qml:184
+#: ../plugins/battery/PageComponent.qml:186
 msgid "Ways to reduce battery use:"
 msgstr "Säästä akkuvirtaa näin:"
 
-#: ../plugins/battery/PageComponent.qml:188
+#: ../plugins/battery/PageComponent.qml:190
 msgid "Display brightness"
 msgstr "Näytön kirkkaus"
 
-#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
 msgstr "Lukitse käyttämättömänä ollut laite"
 
-#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
 msgstr "Sammuta käyttämättömänä olleen laitteen näyttö"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery/PageComponent.qml:251
-#: ../plugins/battery/PageComponent.qml:260
+#: ../plugins/battery/PageComponent.qml:253
+#: ../plugins/battery/PageComponent.qml:262
 #: ../plugins/battery/SleepValues.qml:77 ../plugins/battery/SleepValues.qml:81
 #: ../plugins/battery/SleepValues.qml:85 ../plugins/battery/SleepValues.qml:89
 #: ../plugins/battery/SleepValues.qml:93
@@ -226,22 +226,22 @@ msgid_plural "After %1 minutes"
 msgstr[0] "%1 minuutin jälkeen"
 msgstr[1] "%1 minuutin jälkeen"
 
-#: ../plugins/battery/PageComponent.qml:273
+#: ../plugins/battery/PageComponent.qml:275
 #: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../plugins/battery/PageComponent.qml:306
+#: ../plugins/battery/PageComponent.qml:308
 #: ../plugins/bluetooth/PageComponent.qml:110
 #: ../plugins/bluetooth/PageComponent.qml:118 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/battery/PageComponent.qml:335
+#: ../plugins/battery/PageComponent.qml:337
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery/PageComponent.qml:353
+#: ../plugins/battery/PageComponent.qml:355
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Sijainnin tarkka määrittäminen edellyttää GPS:n ja/tai Wi-Fin."
 
@@ -286,7 +286,7 @@ msgstr "Varmista, että laitteen \"%1\" PIN vastaa tätä"
 #: ../plugins/reset/ResetAllSettings.qml:36
 #: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:310
-#: ../plugins/time-date/TimePicker.qml:180
+#: ../plugins/time-date/TimePicker.qml:173
 msgid "Cancel"
 msgstr "Peru"
 
@@ -426,7 +426,7 @@ msgstr "Katkaise yhteys"
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "PIN-koodi (%1)"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
@@ -455,13 +455,13 @@ msgid "Choose carrier:"
 msgstr "Valitse operaattori:"
 
 #: ../plugins/cellular/PageComponent.qml:67
-#: ../plugins/time-date/ChooseTimeZone.qml:35
+#: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Automatically"
 msgstr "Automaattisesti"
 
 #: ../plugins/cellular/PageComponent.qml:67
-#: ../plugins/time-date/ChooseTimeZone.qml:35
+#: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Manually"
 msgstr "Manuaalisesti"
@@ -481,22 +481,22 @@ msgstr "Datakäytön tilastot"
 #: ../plugins/language/DisplayLanguage.qml:33
 #: ../plugins/language/PageComponent.qml:55
 msgid "Display language"
-msgstr "Käyttöjärjestelmän kieli"
+msgstr "Kieli"
 
 #: ../plugins/language/DisplayLanguage.qml:115
 msgid "Confirm"
 msgstr "Hyväksy"
 
-#: ../plugins/language/KeyboardLayouts.qml:29
-#: ../plugins/language/PageComponent.qml:64
+#: ../plugins/language/KeyboardLayouts.qml:26
+#: ../plugins/language/PageComponent.qml:69
 msgid "Keyboard layouts"
 msgstr "Näppäimistöasettelut"
 
-#: ../plugins/language/KeyboardLayouts.qml:42
+#: ../plugins/language/KeyboardLayouts.qml:39
 msgid "Current layouts:"
 msgstr "Nykyiset asettelut:"
 
-#: ../plugins/language/KeyboardLayouts.qml:58
+#: ../plugins/language/KeyboardLayouts.qml:40
 msgid "All layouts available:"
 msgstr "Kaikki saatavilla olevat asettelut:"
 
@@ -504,44 +504,41 @@ msgstr "Kaikki saatavilla olevat asettelut:"
 msgid "Language & Text"
 msgstr "Kieli ja teksti"
 
-#: ../plugins/language/PageComponent.qml:74
-#: ../plugins/language/SpellChecking.qml:29
-#: ../plugins/language/SpellChecking.qml:42
+#: ../plugins/language/PageComponent.qml:85
+#: ../plugins/language/SpellChecking.qml:27
+#: ../plugins/language/SpellChecking.qml:36
 msgid "Spell checking"
 msgstr "Oikoluku"
 
-#: ../plugins/language/PageComponent.qml:82
-msgid "Auto correction"
-msgstr "Automaattinen korjaus"
-
-#: ../plugins/language/PageComponent.qml:89
+#: ../plugins/language/PageComponent.qml:97
 msgid "Auto completion"
 msgstr "Automaattinen täydennys"
 
-#: ../plugins/language/PageComponent.qml:98
+#: ../plugins/language/PageComponent.qml:109
+msgid "Predictive text"
+msgstr "Ennakoiva teksti"
+
+#: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
 msgstr "Automaattiset isot kirjaimet"
 
-#: ../plugins/language/PageComponent.qml:105
+#: ../plugins/language/PageComponent.qml:137
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "Shift-näppäin on käytössä automaattisesti jokaisen lauseen alussa."
 
-#: ../plugins/language/PageComponent.qml:111
-msgid "Auto punctuation"
-msgstr "Automaattiset välimerkit"
+#: ../plugins/language/PageComponent.qml:147
+msgid "Key press feedback"
+msgstr "Näppäimen painalluksen palaute"
 
-#: ../plugins/language/PageComponent.qml:118
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
-"Lisää pisteen tai puuttuvat lainausmerkit tai sulkeet, kun napautat "
-"välilyöntä kahdesti."
+#: ../plugins/language/PageComponent.qml:159
+msgid "Vibrate or emit a sound whenever a key is pressed."
+msgstr "Värise tai äänehdi näppäintä painettaessa."
 
-#: ../plugins/language/SpellChecking.qml:51
+#: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
 msgstr "Nykyiset oikeinkirjoituksen kielet:"
 
-#: ../plugins/language/SpellChecking.qml:64
+#: ../plugins/language/SpellChecking.qml:54
 msgid "All languages available:"
 msgstr "Kaikki saatavillat olevat kielet:"
 
@@ -573,7 +570,7 @@ msgid "Contacts…"
 msgstr "Yhteystiedot…"
 
 #: ../plugins/phone/CallForwarding.qml:113
-#: ../plugins/time-date/TimePicker.qml:189
+#: ../plugins/time-date/TimePicker.qml:182
 msgid "Set"
 msgstr "Aseta"
 
@@ -602,7 +599,7 @@ msgstr "%1-palvelut"
 
 #: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
-msgstr ""
+msgstr "Puhelut"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
@@ -896,7 +893,7 @@ msgstr "Sijainnin käyttö"
 
 #: ../plugins/security-privacy/PageComponent.qml:143
 msgid "Other app access"
-msgstr ""
+msgstr "Muiden sovellusten pääsy"
 
 #: ../plugins/security-privacy/PageComponent.qml:148
 msgid "Diagnostics"
@@ -918,9 +915,9 @@ msgstr "Ei lähetetä"
 msgid "Passcode"
 msgstr "Pääsykoodi"
 
-#: ../plugins/security-privacy/PhoneLocking.qml:77
+#: ../plugins/security-privacy/PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "Valmiustila lukitsee välittömästi"
 
 #: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
@@ -934,27 +931,27 @@ msgstr "Puhelut:"
 msgid "Ringtone"
 msgstr "Soittoääni"
 
-#: ../plugins/sound/PageComponent.qml:66
+#: ../plugins/sound/PageComponent.qml:68
 msgid "Vibrate when ringing"
 msgstr "Värinä soidessa"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:76
 msgid "Vibrate in silent mode"
 msgstr "Värinä äänettömässä tilassa"
 
-#: ../plugins/sound/PageComponent.qml:79
+#: ../plugins/sound/PageComponent.qml:81
 msgid "Other sounds:"
 msgstr "Muut äänet:"
 
-#: ../plugins/sound/PageComponent.qml:83 ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
 msgid "Message received"
 msgstr "Viesti vastaanotettu"
 
-#: ../plugins/sound/PageComponent.qml:92
+#: ../plugins/sound/PageComponent.qml:96
 msgid "Keyboard sounds"
 msgstr "Näppäimistön äänet"
 
-#: ../plugins/sound/PageComponent.qml:99
+#: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
 msgstr "Lukitusääni"
 
@@ -1052,7 +1049,7 @@ msgstr "Yritä uudelleen"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
-msgstr ""
+msgstr "Ubuntu-puhelin"
 
 #. TRANSLATORS: %1 is the version of the update
 #: ../plugins/system-update/PageComponent.qml:248
@@ -1088,15 +1085,15 @@ msgstr "Aina"
 msgid "Time zone"
 msgstr "Aikavyöhyke"
 
-#: ../plugins/time-date/ChooseTimeZone.qml:34
+#: ../plugins/time-date/ChooseTimeZone.qml:46
 msgid "Set the time zone:"
 msgstr "Aseta aikavyöhyke:"
 
-#: ../plugins/time-date/ChooseTimeZone.qml:91
+#: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
 msgstr "Anna nykyinen sijaintisi."
 
-#: ../plugins/time-date/ChooseTimeZone.qml:91
+#: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
 msgstr "Ei vastaavaa paikkaa"
 
@@ -1144,55 +1141,7 @@ msgstr "Päivä"
 msgid "Month"
 msgstr "Kuukausi"
 
-#: ../plugins/time-date/TimePicker.qml:148
-msgid "January"
-msgstr "Tammikuu"
-
-#: ../plugins/time-date/TimePicker.qml:149
-msgid "February"
-msgstr "Helmikuu"
-
-#: ../plugins/time-date/TimePicker.qml:150
-msgid "March"
-msgstr "Maaliskuu"
-
-#: ../plugins/time-date/TimePicker.qml:151
-msgid "April"
-msgstr "Huhtikuu"
-
-#: ../plugins/time-date/TimePicker.qml:152
-msgid "May"
-msgstr "Toukokuu"
-
-#: ../plugins/time-date/TimePicker.qml:153
-msgid "June"
-msgstr "Kesäkuu"
-
-#: ../plugins/time-date/TimePicker.qml:154
-msgid "July"
-msgstr "Heinäkuu"
-
-#: ../plugins/time-date/TimePicker.qml:155
-msgid "August"
-msgstr "Elokuu"
-
-#: ../plugins/time-date/TimePicker.qml:156
-msgid "September"
-msgstr "Syyskuu"
-
-#: ../plugins/time-date/TimePicker.qml:157
-msgid "October"
-msgstr "Lokakuu"
-
-#: ../plugins/time-date/TimePicker.qml:158
-msgid "November"
-msgstr "Marraskuu"
-
-#: ../plugins/time-date/TimePicker.qml:159
-msgid "December"
-msgstr "Joulukuu"
-
-#: ../plugins/time-date/TimePicker.qml:169
+#: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
 msgstr "Vuosi"
 

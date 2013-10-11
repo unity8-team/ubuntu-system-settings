@@ -22,16 +22,4 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
-BaseMenuItem {
-    implicitHeight: units.gu(7)
-
-    iconFrame: false
-
-    HLine {
-        anchors.top: parent.top
-    }
-
-    HLine {
-        anchors.bottom: parent.bottom
-    }
-}
+ListItem.Standard {}

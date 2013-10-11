@@ -32,6 +32,9 @@ ItemPage {
     id: mainPage
     title: i18n.tr("Background")
 
+    /* TODO: For now hardcoded paths, later we'll use GSettings */
+    property string defaultBackground: mainPage.width >= units.gu(60) ? "/usr/share/unity8/graphics/tablet_background.jpg" : "/usr/share/unity8/graphics/phone_background.jpg"
+
     UbuntuBackgroundPanel {
         id: backgroundPanel
 
@@ -83,21 +86,7 @@ ItemPage {
             left: parent.left
          }
 
-        onClicked: {
-            var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                    ContentHub.defaultSourceForType(ContentType.Pictures));
-            if (transfer != null)
-            {
-                transfer.selectionType = ContentTransfer.Single;
-                var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-                console.log("Store is: " + store.uri);
-                transfer.setStore(store);
-                activeTransfer = transfer;
-                activeTransfer.start();
-            }
-
-        }
-
+        onClicked: startContentTransfer()
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
 
@@ -116,22 +105,9 @@ ItemPage {
             horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
          }
 
+        onClicked: startContentTransfer()
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
-
-        onClicked: {
-            var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                    ContentHub.defaultSourceForType(ContentType.Pictures));
-            if (transfer != null)
-            {
-                transfer.selectionType = ContentTransfer.Single;
-                var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-                console.log("Store is: " + store.uri);
-                transfer.setStore(store);
-                activeTransfer = transfer;
-                activeTransfer.start();
-            }
-        }
 
         OverlayImage {
             anchors.fill: parent
@@ -164,11 +140,42 @@ ItemPage {
         visible: showAllUI
     }
 
+    Column {
+
+        id: buttonColumn
+        spacing: units.gu(1)
+
+        anchors {
+            topMargin: units.gu(2)
+            left: parent.left
+            right: parent.right
+            top: showAllUI ? topDivider.bottom : homeImage.bottom
+        }
+
+        Button {
+            text: i18n.tr("Change…")
+            width: parent.width - units.gu(4)
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: startContentTransfer()
+        }
+
+        Button {
+            text: i18n.tr("Use original background")
+            width: parent.width - units.gu(4)
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                background.schema.reset('pictureUri')
+                setUpImages()
+            }
+        }
+
+    }
+
     OptionSelector {
         id: optionSelector
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: topDivider.bottom
+            top: buttonColumn.bottom
             topMargin: units.gu(2)
         }
         width: parent.width - units.gu(4)
@@ -198,7 +205,7 @@ ItemPage {
 
     Image {
         id: testWelcomeImage
-        property string fallback: "darkeningclockwork.jpg"
+        property string fallback: defaultBackground
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
                                      welcomeImage)
@@ -206,7 +213,7 @@ ItemPage {
 
     Image {
         id: testHomeImage
-        property string fallback: "aeg.jpg"
+        property string fallback: defaultBackground
         source: background.pictureUri
         visible: false
         onStatusChanged: updateImage(testHomeImage,
@@ -255,6 +262,20 @@ ItemPage {
                     setUpImages();
                 }
             }
+        }
+    }
+
+    function startContentTransfer() {
+        var transfer = ContentHub.importContent(ContentType.Pictures,
+                                                ContentHub.defaultSourceForType(ContentType.Pictures));
+        if (transfer != null)
+        {
+            transfer.selectionType = ContentTransfer.Single;
+            var store = ContentHub.defaultStoreForType(ContentType.Pictures);
+            console.log("Store is: " + store.uri);
+            transfer.setStore(store);
+            activeTransfer = transfer;
+            activeTransfer.start();
         }
     }
 }

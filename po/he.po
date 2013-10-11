@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-30 22:34+0100\n"
+"POT-Creation-Date: 2013-10-07 12:02+0100\n"
 "PO-Revision-Date: 2013-09-30 20:52+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-02 05:39+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-08 06:28+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -27,8 +27,8 @@ msgid "Serial"
 msgstr "מס׳ סידורי"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:128
-#: ../plugins/battery/PageComponent.qml:140
+#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:130
+#: ../plugins/battery/PageComponent.qml:142
 #: ../plugins/cellular/PageComponent.qml:73
 msgid "N/A"
 msgstr "לא זמין"
@@ -46,8 +46,8 @@ msgid "Last updated"
 msgstr "עדכון אחרון"
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:254
-#: ../plugins/battery/PageComponent.qml:263
+#: ../plugins/battery/PageComponent.qml:256
+#: ../plugins/battery/PageComponent.qml:265
 #: ../plugins/battery/SleepValues.qml:96
 #: ../plugins/system-update/Download.qml:53
 #: ../plugins/system-update/PageComponent.qml:347
@@ -126,15 +126,15 @@ msgstr "רקע"
 msgid "Welcome screen"
 msgstr "מסך קבלת הפנים"
 
-#: ../plugins/background/MainPage.qml:134
+#: ../plugins/background/MainPage.qml:151
 msgid "Home screen"
 msgstr "מסך הבית"
 
-#: ../plugins/background/MainPage.qml:160
+#: ../plugins/background/MainPage.qml:177
 msgid "Same background for both"
 msgstr "אותו הרקע לשניהם"
 
-#: ../plugins/background/MainPage.qml:161
+#: ../plugins/background/MainPage.qml:178
 msgid "Different background for each"
 msgstr "רקע שונה לכל אחד מהם"
 
@@ -178,45 +178,45 @@ msgstr[1] "לפני %1 ימים"
 msgid "Charging now"
 msgstr "בטעינה כעת"
 
-#: ../plugins/battery/PageComponent.qml:80
+#: ../plugins/battery/PageComponent.qml:81
 msgid "Last full charge"
 msgstr "הטעינה המלאה האחרונה"
 
-#: ../plugins/battery/PageComponent.qml:84
+#: ../plugins/battery/PageComponent.qml:86
 msgid "Fully charged"
 msgstr "טעינה מלאה"
 
-#: ../plugins/battery/PageComponent.qml:123
+#: ../plugins/battery/PageComponent.qml:125
 msgid "Charge level"
 msgstr "רמת הטעינה"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery/PageComponent.qml:131
+#: ../plugins/battery/PageComponent.qml:133
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery/PageComponent.qml:184
+#: ../plugins/battery/PageComponent.qml:186
 msgid "Ways to reduce battery use:"
 msgstr "דרכים להפחתת השימוש בסוללה:"
 
-#: ../plugins/battery/PageComponent.qml:188
+#: ../plugins/battery/PageComponent.qml:190
 msgid "Display brightness"
 msgstr "בהירות התצוגה"
 
-#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
 msgstr "לנעול בהעדר פעילות"
 
-#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
 msgstr "מצב שינה בהעדר פעילות"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery/PageComponent.qml:251
-#: ../plugins/battery/PageComponent.qml:260
+#: ../plugins/battery/PageComponent.qml:253
+#: ../plugins/battery/PageComponent.qml:262
 #: ../plugins/battery/SleepValues.qml:77 ../plugins/battery/SleepValues.qml:81
 #: ../plugins/battery/SleepValues.qml:85 ../plugins/battery/SleepValues.qml:89
 #: ../plugins/battery/SleepValues.qml:93
@@ -226,22 +226,22 @@ msgid_plural "After %1 minutes"
 msgstr[0] "לאחר דקה %1"
 msgstr[1] "לאחר %1 דקות"
 
-#: ../plugins/battery/PageComponent.qml:273
+#: ../plugins/battery/PageComponent.qml:275
 #: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "רשת אלחוטית"
 
-#: ../plugins/battery/PageComponent.qml:306
+#: ../plugins/battery/PageComponent.qml:308
 #: ../plugins/bluetooth/PageComponent.qml:110
 #: ../plugins/bluetooth/PageComponent.qml:118 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/battery/PageComponent.qml:335
+#: ../plugins/battery/PageComponent.qml:337
 msgid "GPS"
 msgstr "איכון"
 
-#: ../plugins/battery/PageComponent.qml:353
+#: ../plugins/battery/PageComponent.qml:355
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "זיהוי מיקום מדויק דורש GPS ו/או רשת אלחוטית."
 
@@ -286,7 +286,7 @@ msgstr "נא לאשר כי הקוד שמופיע ב־‚%1‘ תואם לזה"
 #: ../plugins/reset/ResetAllSettings.qml:36
 #: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:310
-#: ../plugins/time-date/TimePicker.qml:180
+#: ../plugins/time-date/TimePicker.qml:173
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -455,13 +455,13 @@ msgid "Choose carrier:"
 msgstr "נא לבחור בספק:"
 
 #: ../plugins/cellular/PageComponent.qml:67
-#: ../plugins/time-date/ChooseTimeZone.qml:35
+#: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Automatically"
 msgstr "אוטומטית"
 
 #: ../plugins/cellular/PageComponent.qml:67
-#: ../plugins/time-date/ChooseTimeZone.qml:35
+#: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Manually"
 msgstr "ידנית"
@@ -487,16 +487,16 @@ msgstr "שפת התצוגה"
 msgid "Confirm"
 msgstr "אישור"
 
-#: ../plugins/language/KeyboardLayouts.qml:29
-#: ../plugins/language/PageComponent.qml:64
+#: ../plugins/language/KeyboardLayouts.qml:26
+#: ../plugins/language/PageComponent.qml:69
 msgid "Keyboard layouts"
 msgstr "פריסות מקלדת"
 
-#: ../plugins/language/KeyboardLayouts.qml:42
+#: ../plugins/language/KeyboardLayouts.qml:39
 msgid "Current layouts:"
 msgstr "הפריסות הנוכחיות:"
 
-#: ../plugins/language/KeyboardLayouts.qml:58
+#: ../plugins/language/KeyboardLayouts.qml:40
 msgid "All layouts available:"
 msgstr "כל הפריסות זמינות:"
 
@@ -504,42 +504,41 @@ msgstr "כל הפריסות זמינות:"
 msgid "Language & Text"
 msgstr "שפה וטקסט"
 
-#: ../plugins/language/PageComponent.qml:74
-#: ../plugins/language/SpellChecking.qml:29
-#: ../plugins/language/SpellChecking.qml:42
+#: ../plugins/language/PageComponent.qml:85
+#: ../plugins/language/SpellChecking.qml:27
+#: ../plugins/language/SpellChecking.qml:36
 msgid "Spell checking"
 msgstr "בדיקת איות"
 
-#: ../plugins/language/PageComponent.qml:82
-msgid "Auto correction"
-msgstr "תיקון אוטומטי"
-
-#: ../plugins/language/PageComponent.qml:89
+#: ../plugins/language/PageComponent.qml:97
 msgid "Auto completion"
 msgstr "השלמה אוטומטית"
 
-#: ../plugins/language/PageComponent.qml:98
+#: ../plugins/language/PageComponent.qml:109
+msgid "Predictive text"
+msgstr ""
+
+#: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
 msgstr "הגדלת אותיות אוטומטית"
 
-#: ../plugins/language/PageComponent.qml:105
+#: ../plugins/language/PageComponent.qml:137
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "הפעלת Shift להגדלת האות הראשונה של כל משפט."
 
-#: ../plugins/language/PageComponent.qml:111
-msgid "Auto punctuation"
-msgstr "פיסוק אוטומטי"
+#: ../plugins/language/PageComponent.qml:147
+msgid "Key press feedback"
+msgstr ""
 
-#: ../plugins/language/PageComponent.qml:118
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr "הוספת פסיק וסוגריים או מירכאות חסרים בעת לחיצה כפולה על רווח."
+#: ../plugins/language/PageComponent.qml:159
+msgid "Vibrate or emit a sound whenever a key is pressed."
+msgstr ""
 
-#: ../plugins/language/SpellChecking.qml:51
+#: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
 msgstr "שפות האיות הנוכחיות:"
 
-#: ../plugins/language/SpellChecking.qml:64
+#: ../plugins/language/SpellChecking.qml:54
 msgid "All languages available:"
 msgstr "כל השפות הזמינות:"
 
@@ -570,7 +569,7 @@ msgid "Contacts…"
 msgstr "אנשי קשר…"
 
 #: ../plugins/phone/CallForwarding.qml:113
-#: ../plugins/time-date/TimePicker.qml:189
+#: ../plugins/time-date/TimePicker.qml:182
 msgid "Set"
 msgstr "הגדרה"
 
@@ -908,7 +907,7 @@ msgstr "לא נשלחו"
 msgid "Passcode"
 msgstr "צופן"
 
-#: ../plugins/security-privacy/PhoneLocking.qml:77
+#: ../plugins/security-privacy/PhoneLocking.qml:79
 msgid "Sleep locks immediately"
 msgstr "נעילה עם מצב שינה"
 
@@ -924,27 +923,27 @@ msgstr "שיחות טלפון:"
 msgid "Ringtone"
 msgstr "צלצול"
 
-#: ../plugins/sound/PageComponent.qml:66
+#: ../plugins/sound/PageComponent.qml:68
 msgid "Vibrate when ringing"
 msgstr "רטט עם הצלצול"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:76
 msgid "Vibrate in silent mode"
 msgstr "רטט במצב השתקה"
 
-#: ../plugins/sound/PageComponent.qml:79
+#: ../plugins/sound/PageComponent.qml:81
 msgid "Other sounds:"
 msgstr "צלילים אחרים:"
 
-#: ../plugins/sound/PageComponent.qml:83 ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
 msgid "Message received"
 msgstr "הודעה התקבלה"
 
-#: ../plugins/sound/PageComponent.qml:92
+#: ../plugins/sound/PageComponent.qml:96
 msgid "Keyboard sounds"
 msgstr "צלילי מקלדת"
 
-#: ../plugins/sound/PageComponent.qml:99
+#: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
 msgstr "צליל נעילה"
 
@@ -1078,15 +1077,15 @@ msgstr "תמיד"
 msgid "Time zone"
 msgstr "אזור זמן"
 
-#: ../plugins/time-date/ChooseTimeZone.qml:34
+#: ../plugins/time-date/ChooseTimeZone.qml:46
 msgid "Set the time zone:"
 msgstr "הגדרת אזור הזמן:"
 
-#: ../plugins/time-date/ChooseTimeZone.qml:91
+#: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
 msgstr "נא להזין את המיקום הנוכחי."
 
-#: ../plugins/time-date/ChooseTimeZone.qml:91
+#: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
 msgstr "לא נמצא מיקום תואם"
 
@@ -1134,55 +1133,7 @@ msgstr "יום"
 msgid "Month"
 msgstr "חודש"
 
-#: ../plugins/time-date/TimePicker.qml:148
-msgid "January"
-msgstr "ינואר"
-
-#: ../plugins/time-date/TimePicker.qml:149
-msgid "February"
-msgstr "פברואר"
-
-#: ../plugins/time-date/TimePicker.qml:150
-msgid "March"
-msgstr "מרץ"
-
-#: ../plugins/time-date/TimePicker.qml:151
-msgid "April"
-msgstr "אפריל"
-
-#: ../plugins/time-date/TimePicker.qml:152
-msgid "May"
-msgstr "מאי"
-
-#: ../plugins/time-date/TimePicker.qml:153
-msgid "June"
-msgstr "יוני"
-
-#: ../plugins/time-date/TimePicker.qml:154
-msgid "July"
-msgstr "יולי"
-
-#: ../plugins/time-date/TimePicker.qml:155
-msgid "August"
-msgstr "אוגוסט"
-
-#: ../plugins/time-date/TimePicker.qml:156
-msgid "September"
-msgstr "ספטמבר"
-
-#: ../plugins/time-date/TimePicker.qml:157
-msgid "October"
-msgstr "אוקטובר"
-
-#: ../plugins/time-date/TimePicker.qml:158
-msgid "November"
-msgstr "נובמבר"
-
-#: ../plugins/time-date/TimePicker.qml:159
-msgid "December"
-msgstr "דצמבר"
-
-#: ../plugins/time-date/TimePicker.qml:169
+#: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
 msgstr "שנה"
 

@@ -31,6 +31,7 @@ MainView {
 
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
+        pageStack.push(mainPage)
         if (defaultPlugin) {
             var plugin = pluginManager.getByName(defaultPlugin)
             if (plugin) {
@@ -43,8 +44,6 @@ MainView {
                 console.log("Plugin " + defaultPlugin + " does not exist.")
                 Qt.quit()
             }
-        } else {
-            pageStack.push(mainPage)
         }
     }
 
