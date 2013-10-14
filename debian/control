@@ -50,6 +50,7 @@ Depends: ${misc:Depends},
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
+            ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example
 Description: System Settings application for Ubuntu Touch
  This package contains the System Settings application used on the 
