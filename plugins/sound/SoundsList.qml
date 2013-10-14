@@ -9,7 +9,6 @@ import Ubuntu.SystemSettings.Sound 1.0
 import "utilities.js" as Utilities
 
 ItemPage {
-    //property string title
     property variant soundDisplayNames
     property variant soundFileNames
     property bool showStopButton: false
@@ -17,7 +16,6 @@ ItemPage {
     property string soundsDir
 
     id: soundsPage
-    //title: title
 
     UbuntuSoundPanel {
         id: backendInfo
