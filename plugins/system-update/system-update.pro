@@ -12,7 +12,7 @@ settings.files = $${TARGET}.settings
 settings.path = $${PLUGIN_MANIFEST_DIR}
 INSTALLS += settings
 
-image.files = settings-system-update.svg
+image.files = settings-system-update.svg distributor-logo.png
 image.path = $${PLUGIN_MANIFEST_DIR}/icons
 INSTALLS += image
 
