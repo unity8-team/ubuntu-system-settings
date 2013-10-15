@@ -36,6 +36,7 @@ Update::Update(QObject *parent) :
     QObject(parent),
     m_infoMessage(""),
     m_downloadMode(-1),
+    m_currentBuildNumber(-1),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_SystemServiceIface ("com.canonical.SystemImage",
                          "/Service",
@@ -100,6 +101,17 @@ QString Update::InfoMessage() {
 void Update::SetInfoMessage(QString infoMessage) {
     m_infoMessage = infoMessage;
     Q_EMIT infoMessageChanged();
+}
+
+int Update::currentBuildNumber() {
+    if (m_currentBuildNumber != -1)
+        return m_currentBuildNumber;
+
+    QDBusReply<int> reply = m_SystemServiceIface.call("Info");
+    if (reply.isValid())
+        m_currentBuildNumber = reply.value();
+
+    return m_currentBuildNumber;
 }
 
 int Update::DownloadMode() {

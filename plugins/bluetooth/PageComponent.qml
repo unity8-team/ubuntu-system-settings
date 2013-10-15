@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import QMenuModel 0.1
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
@@ -114,13 +115,31 @@ ItemPage {
         Column {
             anchors.fill: parent
 
+            QDBusActionGroup {
+                id: bluetoothActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.bluetooth"
+                objectPath: "/com/canonical/indicator/bluetooth"
+
+                property variant enabled: action("bluetooth-enabled")
+
+                Component.onCompleted: start()
+            }
+
             ListItem.Standard {
                 text: i18n.tr("Bluetooth")
                 control: Switch {
-                    id: enabledControl
-                    checked: backend.enabled
-                    onClicked: backend.enabled = checked
+                    id: btSwitch
+                    // Cannot use onCheckedChanged as this triggers a loop
+                    onClicked: bluetoothActionGroup.enabled.activate()
                 }
+                Component.onCompleted: clicked.connect(btSwitch.clicked)
+            }
+
+            Binding {
+                target: btSwitch
+                property: "checked"
+                value: bluetoothActionGroup.enabled.state
             }
 
             //  Connnected Headset(s)
@@ -129,7 +148,7 @@ ItemPage {
                 id: connectedHeader
                 text: i18n.tr("Connected headset:")
 
-                enabled: backend.enabled
+                enabled: bluetoothActionGroup.enabled
                 visible: connectedList.visible
             }
 
@@ -138,7 +157,7 @@ ItemPage {
                 width: parent.width
                 height: connectedHeader.height * count
 
-                visible: backend.enabled && (count > 0)
+                visible: bluetoothActionGroup.enabled && (count > 0)
 
                 model: backend.connectedHeadsets
                 delegate: ListItem.Standard {
@@ -156,7 +175,7 @@ ItemPage {
             ListItem.Standard {
                 id: disconnectedHeader
                 text: connectedList.visible ? i18n.tr("Connect a different headset:") : i18n.tr("Connect a headset:")
-                enabled: backend.enabled
+                enabled: bluetoothActionGroup.enabled
                 control: ActivityIndicator {
                     visible: backend.discovering
                     running: true
@@ -168,7 +187,7 @@ ItemPage {
                 width: parent.width
                 height: disconnectedHeader.height * count
 
-                visible: backend.enabled && (count > 0)
+                visible: bluetoothActionGroup.enabled && (count > 0)
 
                 model: backend.disconnectedHeadsets
                 delegate: ListItem.Standard {

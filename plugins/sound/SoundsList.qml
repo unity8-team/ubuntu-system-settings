@@ -14,6 +14,7 @@ ItemPage {
     property variant soundFileNames
     property bool showStopButton: false
     property int soundType // 0: ringtone, 1: message
+    property string soundsDir
 
     id: soundsPage
     title: title
@@ -21,8 +22,8 @@ ItemPage {
     UbuntuSoundPanel {
         id: backendInfo
         Component.onCompleted: {
-            soundFileNames = listSounds("/usr/share/sounds/ubuntu/stereo").map(function (sound)
-                             {return '/usr/share/sounds/ubuntu/stereo/'+sound})
+            soundFileNames = listSounds(soundsDir).map(function (sound)
+                             {return soundsDir+sound})
             soundDisplayNames = Utilities.buildSoundValues(soundFileNames)
             if (soundType == 0)
                 soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, soundSettings.incomingCallSound)
