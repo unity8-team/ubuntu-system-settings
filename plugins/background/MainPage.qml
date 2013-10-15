@@ -86,7 +86,7 @@ ItemPage {
             left: parent.left
          }
 
-        onClicked: startContentTransfer()
+        onClicked: startContentTransfer(function(url) { backgroundPanel.backgroundFile = url; })
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
 
@@ -105,7 +105,7 @@ ItemPage {
             horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
          }
 
-        onClicked: startContentTransfer()
+        onClicked: startContentTransfer(function(url) { background.pictureUri = url; })
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
 
@@ -156,7 +156,7 @@ ItemPage {
             text: i18n.tr("Change…")
             width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: startContentTransfer()
+            onClicked: startContentTransfer(function(url) { background.pictureUri = url; })
         }
 
         Button {
@@ -206,6 +206,7 @@ ItemPage {
     Image {
         id: testWelcomeImage
         property string fallback: defaultBackground
+        source: backgroundPanel.backgroundFile
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
                                      welcomeImage)
@@ -251,6 +252,7 @@ ItemPage {
 
 
     property var activeTransfer
+    property var actionOnSuccess
 
     Connections {
         target: activeTransfer ? activeTransfer : null
@@ -258,14 +260,14 @@ ItemPage {
             if (activeTransfer.state === ContentTransfer.Charged) {
                 if (activeTransfer.items.length > 0) {
                     var imageUrl = activeTransfer.items[0].url;
-                    background.pictureUri = imageUrl;
+                    if (actionOnSuccess) actionOnSuccess(imageUrl);
                     setUpImages();
                 }
             }
         }
     }
 
-    function startContentTransfer() {
+    function startContentTransfer(handler) {
         var transfer = ContentHub.importContent(ContentType.Pictures,
                                                 ContentHub.defaultSourceForType(ContentType.Pictures));
         if (transfer != null)
@@ -274,6 +276,7 @@ ItemPage {
             var store = ContentHub.defaultStoreForType(ContentType.Pictures);
             console.log("Store is: " + store.uri);
             transfer.setStore(store);
+            actionOnSuccess = handler;
             activeTransfer = transfer;
             activeTransfer.start();
         }
