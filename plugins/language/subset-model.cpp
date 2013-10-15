@@ -273,7 +273,7 @@ SubsetModel::roleNames() const
     roleNames.insert(SUPERSET_ROLE, "superset");
     roleNames.insert(DISPLAY_ROLE, "display");
 
-    for (int i = 0; i < _customRoles.length(); i++)
+    for (int i(0); i < _customRoles.length(); i++)
         roleNames.insert(CUSTOM_ROLE + i, _customRoles[i].toUtf8());
 
     return roleNames;
@@ -315,9 +315,9 @@ SubsetModel::data(const QModelIndex &index,
         break;
     }
 
-    int column = role - CUSTOM_ROLE;
-    int element = elementAtIndex(index);
-    QVariantList list = _superset[element].toList();
+    int column(role - CUSTOM_ROLE);
+    int element(elementAtIndex(index));
+    QVariantList list(_superset[element].toList());
 
     if (0 <= column && column < list.length())
         return list[column];
