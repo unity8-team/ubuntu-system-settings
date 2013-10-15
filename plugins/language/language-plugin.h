@@ -24,14 +24,24 @@
 #include <QtCore>
 #include "subset-model.h"
 
+typedef struct _ActUser ActUser;
+typedef struct _ActUserManager ActUserManager;
+typedef struct _GObject GObject;
+typedef struct _GParamSpec GParamSpec;
+typedef struct _GSettings GSettings;
+
+class KeyboardLayout;
+
+typedef void *gpointer;
+
 class LanguagePlugin : public QObject
 {
 private:
 
     Q_OBJECT
 
-    Q_PROPERTY(QStringList languages
-               READ languages
+    Q_PROPERTY(QStringList languageNames
+               READ languageNames
                CONSTANT)
 
     Q_PROPERTY(QStringList languageCodes
@@ -80,7 +90,9 @@ public:
 
     explicit LanguagePlugin(QObject *parent = NULL);
 
-    const QStringList &languages() const;
+    virtual ~LanguagePlugin();
+
+    const QStringList &languageNames() const;
     const QStringList &languageCodes() const;
 
     int currentLanguage() const;
@@ -115,8 +127,40 @@ public:
 
 private:
 
-    bool _updateKeyboardLayoutsConnected;
-    bool _updateSpellCheckingConnected;
+    mutable QList<QLocale> *_languageLocales;
+    mutable QStringList *_languageNames;
+    mutable QStringList *_languageCodes;
+    mutable QHash<QString, unsigned int> *_nameIndices;
+    mutable QHash<QString, unsigned int> *_codeIndices;
+    const QList<QLocale> &languageLocales() const;
+    const QHash<QString, unsigned int> &nameIndices() const;
+    const QHash<QString, unsigned int> &codeIndices() const;
+
+    mutable int _currentLanguage;
+    int _nextCurrentLanguage;
+    ActUserManager *_manager;
+    ActUser *_user;
+
+    mutable GSettings *_maliitSettings;
+    GSettings *maliitSettings() const;
+
+    mutable QList<KeyboardLayout *> *_keyboardLayouts;
+    const QList<KeyboardLayout *> &keyboardLayouts() const;
+
+    SubsetModel *_keyboardLayoutsModel;
+    SubsetModel *_spellCheckingModel;
+
+    void userSetCurrentLanguage(ActUser *user);
+
+    friend void userSetCurrentLanguage(GObject    *object,
+                                       GParamSpec *pspec,
+                                       gpointer    user_data);
+
+    void managerSetCurrentLanguage(ActUserManager *manager);
+
+    friend void managerSetCurrentLanguage(GObject    *object,
+                                          GParamSpec *pspec,
+                                          gpointer    user_data);
 };
 
 #endif // LANGUAGE_PLUGIN_H

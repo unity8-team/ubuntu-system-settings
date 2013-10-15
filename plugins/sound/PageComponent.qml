@@ -41,7 +41,9 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
 
         Column {
             anchors.left: parent.left
@@ -55,10 +57,16 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Ringtone")
-                value: Utilities.buildDisplayName(soundSettings.incomingCallSound)
+                value: Utilities.buildDisplayName(
+                           soundSettings.incomingCallSound)
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone"),
-                                              showStopButton: true, soundType: 0, soundsDir: "/usr/share/sounds/ubuntu/ringtones/"})
+                onClicked: pageStack.push(
+                               Qt.resolvedUrl("SoundsList.qml"),
+                               { title: i18n.tr("Ringtone"),
+                                 showStopButton: true,
+                                 soundType: 0,
+                                 soundsDir:
+                                   "/usr/share/sounds/ubuntu/ringtones/" })
             }
 
             ListItem.Standard {
@@ -83,10 +91,15 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Message received")
-                value: Utilities.buildDisplayName(soundSettings.incomingMessageSound)
+                value:Utilities.buildDisplayName(
+                          soundSettings.incomingMessageSound)
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Message received"),
-                                              soundType: 1, soundsDir: "/usr/share/sounds/ubuntu/notifications/"})
+                onClicked: pageStack.push(
+                               Qt.resolvedUrl("SoundsList.qml"),
+                               { title: i18n.tr("Message received"),
+                                 soundType: 1,
+                                 soundsDir:
+                                   "/usr/share/sounds/ubuntu/notifications/" })
             }
 
             ListItem.Standard {
