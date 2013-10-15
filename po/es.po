@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-10-06 21:44+0000\n"
+"PO-Revision-Date: 2013-10-12 07:16+0000\n"
 "Last-Translator: Leo Arias <leo.arias@canonical.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-08 06:28+0000\n"
+"X-Launchpad-Export-Date: 2013-10-13 05:40+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -273,7 +273,7 @@ msgstr "Solicitud de emparejamiento de Bluetooth"
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "Confirme que el PIN mostrado en «%1» coincida"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
@@ -514,7 +514,7 @@ msgstr "Autocompletado"
 
 #: ../plugins/language/PageComponent.qml:109
 msgid "Predictive text"
-msgstr ""
+msgstr "Texto predictivo"
 
 #: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
@@ -526,11 +526,11 @@ msgstr "Activa Mayús al principio de cada oración."
 
 #: ../plugins/language/PageComponent.qml:147
 msgid "Key press feedback"
-msgstr ""
+msgstr "Respuesta al tacto"
 
 #: ../plugins/language/PageComponent.qml:159
 msgid "Vibrate or emit a sound whenever a key is pressed."
-msgstr ""
+msgstr "Vibrar o emitir un sonido cuando se pulsan las teclas."
 
 #: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -741,11 +741,11 @@ msgstr "Cambiar a deslizar"
 
 #: ../plugins/security-privacy/LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Cambiar a código de acceso"
 
 #: ../plugins/security-privacy/LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "Cambiar a frase de acceso"
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing passcode"
@@ -765,19 +765,19 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "Elija el código de acceso"
 
 #: ../plugins/security-privacy/LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Elija la frase de acceso"
 
 #: ../plugins/security-privacy/LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Confirme el código de acceso"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Confirme la frase de acceso"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
@@ -961,7 +961,7 @@ msgstr ""
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "En cualquier conexión de datos"
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."

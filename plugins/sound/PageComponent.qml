@@ -58,7 +58,7 @@ ItemPage {
                 value: Utilities.buildDisplayName(soundSettings.incomingCallSound)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone"),
-                                          showStopButton: true, soundType: 0})
+                                              showStopButton: true, soundType: 0, soundsDir: "/usr/share/sounds/ubuntu/ringtones/"})
             }
 
             ListItem.Standard {
@@ -86,7 +86,7 @@ ItemPage {
                 value: Utilities.buildDisplayName(soundSettings.incomingMessageSound)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Message received"),
-                                          soundType: 1})
+                                              soundType: 1, soundsDir: "/usr/share/sounds/ubuntu/notifications/"})
             }
 
             ListItem.Standard {
