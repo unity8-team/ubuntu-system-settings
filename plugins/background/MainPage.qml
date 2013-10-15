@@ -33,7 +33,10 @@ ItemPage {
     title: i18n.tr("Background")
 
     /* TODO: For now hardcoded paths, later we'll use GSettings */
-    property string defaultBackground: mainPage.width >= units.gu(60) ? "/usr/share/unity8/graphics/tablet_background.jpg" : "/usr/share/unity8/graphics/phone_background.jpg"
+    property string defaultBackground:
+        mainPage.width >= units.gu(60) ?
+            "/usr/share/unity8/graphics/tablet_background.jpg" :
+            "/usr/share/unity8/graphics/phone_background.jpg"
 
     UbuntuBackgroundPanel {
         id: backgroundPanel
@@ -59,8 +62,8 @@ ItemPage {
         }
     }
 
-
-    /* TODO: We hide the welcome screen parts for v1 - there's a lot of elements to hide */
+    /* TODO: We hide the welcome screen parts for v1 -
+       there's a lot of elements to hide */
 
     Label {
         id: welcomeLabel
