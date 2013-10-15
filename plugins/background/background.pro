@@ -5,11 +5,9 @@ TEMPLATE = lib
 TARGET = background
 
 QML_SOURCES = \
-    ChangeImage.qml \
     MainPage.qml \
-    SwappableImage.qml \
-    UbuntuSwappableImage.qml \
-    OverlayImage.qml
+    OverlayImage.qml \
+    SwappableImage.qml
 
 OTHER_FILES += \
     $${QML_SOURCES}
