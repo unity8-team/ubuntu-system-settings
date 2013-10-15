@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.1+13.10.20131015-0ubuntu1) saucy; urgency=low
+
+  [ Charles Kerr ]
+  * In the battery plugin, use indicator-bluetooth's "bluetooth-
+    supported" action state to know whether or not to show the bluetooth
+    toggle. (LP: #1233628)
+  * In the bluetooth plugin, handle bluetooth adapters
+    appearing/disappearing on the bus. (LP: #1236249)
+
+  [ Sebastien Bacher ]
+  * update: get the current build number, use it in the os version
+    string. (LP: #1233682)
+  * update: tweak a bit the UI, we don't have a description for the
+    updates so there is no need to keep the stacked UI, we can use one
+    line. Copy the icon in the source as well since it's not installed
+    on touch. (LP: #1233682)
+  * sound: use the new sounds sets from ubuntu-touch-sounds.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 456
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Oct 2013 04:19:09 +0000
+
 ubuntu-system-settings (0.1+13.10.20131011-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]
