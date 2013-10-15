@@ -73,7 +73,10 @@ IndicatorBase {
         cacheBuffer: 10000
 
         // Only allow flicking if the content doesn't fit on the page
-        interactive: contentHeight > height
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > wifibase.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
 
         currentIndex: -1
         delegate: Item {
