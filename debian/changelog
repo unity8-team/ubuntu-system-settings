@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.1+13.10.20131015.2-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * [sound] Fix overriding of title in sound selector subpage causing
+    translation errors.
+  * [wifi] Properly set the list of networks up for scrolling.
+
+  [ William Hua ]
+  * Move state into class so we can fix LP: 1234407 properly. (LP:
+    #1234407)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 461
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Oct 2013 20:24:13 +0000
+
 ubuntu-system-settings (0.1+13.10.20131015-0ubuntu1) saucy; urgency=low
 
   [ Charles Kerr ]
