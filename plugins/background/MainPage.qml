@@ -43,6 +43,7 @@ ItemPage {
 
         function maybeUpdateSource() {
             var source = backgroundPanel.backgroundFile
+            console.log(source + "!!")
             if (source != "" && source != undefined)
                 testWelcomeImage.source = source
             else if (testWelcomeImage.source == "")
@@ -60,6 +61,19 @@ ItemPage {
             if (key == "pictureUri")
                 testHomeImage.source = value
         }
+    }
+
+    function updateWelcome(imageUrl) {
+        backgroundPanel.backgroundFile = imageUrl
+    }
+
+    function updateHome(imageUrl) {
+        background.pictureUri = imageUrl
+    }
+
+    function updateBoth(imageUrl) {
+        updateWelcome(imageUrl)
+        updateHome(imageUrl)
     }
 
     /* TODO: We hide the welcome screen parts for v1 -
@@ -89,7 +103,11 @@ ItemPage {
             left: parent.left
          }
 
-        onClicked: startContentTransfer()
+        onClicked: startContentTransfer(function(url) {
+            systemSettingsSettings.backgroundDuplicate ?
+                        updateBoth(url) :
+                        updateWelcome(url)
+        })
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
 
@@ -108,7 +126,11 @@ ItemPage {
             horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
          }
 
-        onClicked: startContentTransfer()
+        onClicked: startContentTransfer(function(url) {
+            systemSettingsSettings.backgroundDuplicate ?
+                        updateBoth(url) :
+                        updateHome(url)
+        })
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
 
@@ -256,20 +278,23 @@ ItemPage {
     property var activeTransfer
 
     Connections {
+        id: contentHubConnection
         property var imageCallback
         target: activeTransfer ? activeTransfer : null
         onStateChanged: {
             if (activeTransfer.state === ContentTransfer.Charged) {
                 if (activeTransfer.items.length > 0) {
                     var imageUrl = activeTransfer.items[0].url;
-                    imageCallback();
+                    imageCallback(imageUrl);
                     setUpImages();
                 }
             }
         }
     }
 
-    function startContentTransfer() {
+    function startContentTransfer(callback) {
+        if (callback)
+            contentHubConnection.imageCallback = callback
         var transfer = ContentHub.importContent(
                     ContentType.Pictures,
                     ContentHub.defaultSourceForType(ContentType.Pictures));
