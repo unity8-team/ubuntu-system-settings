@@ -43,7 +43,6 @@ ItemPage {
 
         function maybeUpdateSource() {
             var source = backgroundPanel.backgroundFile
-            console.log(source + "!!")
             if (source != "" && source != undefined)
                 testWelcomeImage.source = source
             else if (testWelcomeImage.source == "")
