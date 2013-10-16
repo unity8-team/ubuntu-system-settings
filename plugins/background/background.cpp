@@ -55,12 +55,18 @@ QString Background::getBackgroundFile()
     QDBusInterface userInterface (
                 "org.freedesktop.Accounts",
                 m_objectPath,
-                "org.freedesktop.Accounts.User",
+                "org.freedesktop.DBus.Properties",
                 m_systemBusConnection,
                 this);
 
     if (userInterface.isValid()) {
-        return userInterface.property("BackgroundFile").toString();
+        QDBusReply<QDBusVariant> answer = userInterface.call (
+                    "Get",
+                    "org.freedesktop.Accounts.User",
+                    "BackgroundFile");
+
+        if (answer.isValid())
+            return answer.value().variant().toString();
     }
 
     return QString();
