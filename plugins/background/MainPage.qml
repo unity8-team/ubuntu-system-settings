@@ -256,12 +256,13 @@ ItemPage {
     property var activeTransfer
 
     Connections {
+        property var imageCallback
         target: activeTransfer ? activeTransfer : null
         onStateChanged: {
             if (activeTransfer.state === ContentTransfer.Charged) {
                 if (activeTransfer.items.length > 0) {
                     var imageUrl = activeTransfer.items[0].url;
-                    background.pictureUri = imageUrl;
+                    imageCallback();
                     setUpImages();
                 }
             }
@@ -269,8 +270,9 @@ ItemPage {
     }
 
     function startContentTransfer() {
-        var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                ContentHub.defaultSourceForType(ContentType.Pictures));
+        var transfer = ContentHub.importContent(
+                    ContentType.Pictures,
+                    ContentHub.defaultSourceForType(ContentType.Pictures));
         if (transfer != null)
         {
             transfer.selectionType = ContentTransfer.Single;
