@@ -103,9 +103,12 @@ ItemPage {
          }
 
         onClicked: startContentTransfer(function(url) {
-            systemSettingsSettings.backgroundDuplicate ?
-                        updateBoth(url) :
-                        updateWelcome(url)
+            if (systemSettingsSettings.backgroundDuplicate) {
+                updateBoth(url)
+            } else {
+                updateWelcome(url)
+                systemSettingsSettings.backgroundSetLast = "welcome"
+            }
         })
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
@@ -126,9 +129,12 @@ ItemPage {
          }
 
         onClicked: startContentTransfer(function(url) {
-            systemSettingsSettings.backgroundDuplicate ?
-                        updateBoth(url) :
-                        updateHome(url)
+            if (systemSettingsSettings.backgroundDuplicate) {
+                updateBoth(url)
+            } else {
+                updateHome(url)
+                systemSettingsSettings.backgroundSetLast = "home"
+            }
         })
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
@@ -189,7 +195,6 @@ ItemPage {
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
                 background.schema.reset('pictureUri')
-                setUpImages()
             }
         }
 
@@ -229,6 +234,12 @@ ItemPage {
 
     Image {
         id: testWelcomeImage
+
+        function update(uri) {
+            // Will update source
+            updateWelcome(uri)
+        }
+
         property string fallback: defaultBackground
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
@@ -237,6 +248,12 @@ ItemPage {
 
     Image {
         id: testHomeImage
+
+        function update(uri) {
+            // Will update source
+            updateHome(uri)
+        }
+
         property string fallback: defaultBackground
         source: background.pictureUri
         visible: false
@@ -255,11 +272,11 @@ ItemPage {
             systemSettingsSettings.backgroundPreviouslySetValue =
                     leastRecent.source
             /* copy most recently changed to least recently changed */
-            leastRecent.source = mostRecent.source
+            leastRecent.update(mostRecent.source)
         } else { // different
             /* restore least recently changed to previous value */
-            leastRecent.source =
-                    systemSettingsSettings.backgroundPreviouslySetValue
+            leastRecent.update(
+                    systemSettingsSettings.backgroundPreviouslySetValue)
         }
     }
 
@@ -285,7 +302,6 @@ ItemPage {
                 if (activeTransfer.items.length > 0) {
                     var imageUrl = activeTransfer.items[0].url;
                     imageCallback(imageUrl);
-                    setUpImages();
                 }
             }
         }
