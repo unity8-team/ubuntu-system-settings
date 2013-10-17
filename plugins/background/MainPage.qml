@@ -268,6 +268,12 @@ ItemPage {
         }
     }
 
+    ContentImportHint {
+        id: importHint
+        anchors.fill: parent
+        activeTransfer: mainPage.activeTransfer
+    }
+
     function startContentTransfer() {
         var transfer = ContentHub.importContent(ContentType.Pictures,
                                                 ContentHub.defaultSourceForType(ContentType.Pictures));
