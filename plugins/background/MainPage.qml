@@ -200,7 +200,7 @@ ItemPage {
                         background.pictureUri
                 backgroundPanel.backgroundFile = background.pictureUri
                 systemSettingsSettings.backgroundSetLast = "home"
-                systemSettingsSettings.backgroundDuplicate = true
+                optionSelector.selectedIndex = 0 // Same
             }
         }
 
