@@ -62,6 +62,19 @@ ItemPage {
         }
     }
 
+    function updateWelcome(imageUrl) {
+        backgroundPanel.backgroundFile = imageUrl
+    }
+
+    function updateHome(imageUrl) {
+        background.pictureUri = imageUrl
+    }
+
+    function updateBoth(imageUrl) {
+        updateWelcome(imageUrl)
+        updateHome(imageUrl)
+    }
+
     /* TODO: We hide the welcome screen parts for v1 -
        there's a lot of elements to hide */
 
@@ -89,7 +102,14 @@ ItemPage {
             left: parent.left
          }
 
-        onClicked: startContentTransfer()
+        onClicked: startContentTransfer(function(url) {
+            if (systemSettingsSettings.backgroundDuplicate) {
+                updateBoth(url)
+            } else {
+                updateWelcome(url)
+                systemSettingsSettings.backgroundSetLast = "welcome"
+            }
+        })
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
 
@@ -108,7 +128,14 @@ ItemPage {
             horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
          }
 
-        onClicked: startContentTransfer()
+        onClicked: startContentTransfer(function(url) {
+            if (systemSettingsSettings.backgroundDuplicate) {
+                updateBoth(url)
+            } else {
+                updateHome(url)
+                systemSettingsSettings.backgroundSetLast = "home"
+            }
+        })
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
 
@@ -159,7 +186,8 @@ ItemPage {
             text: i18n.tr("Change…")
             width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: startContentTransfer()
+            Component.onCompleted:
+                clicked.connect(homeImage.clicked)
         }
 
         Button {
@@ -167,8 +195,13 @@ ItemPage {
             width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
+                // Reset all of the settings
                 background.schema.reset('pictureUri')
-                setUpImages()
+                systemSettingsSettings.backgroundPreviouslySetValue =
+                        background.pictureUri
+                backgroundPanel.backgroundFile = background.pictureUri
+                systemSettingsSettings.backgroundSetLast = "home"
+                optionSelector.selectedIndex = 0 // Same
             }
         }
 
@@ -208,6 +241,12 @@ ItemPage {
 
     Image {
         id: testWelcomeImage
+
+        function update(uri) {
+            // Will update source
+            updateWelcome(uri)
+        }
+
         property string fallback: defaultBackground
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
@@ -216,6 +255,12 @@ ItemPage {
 
     Image {
         id: testHomeImage
+
+        function update(uri) {
+            // Will update source
+            updateHome(uri)
+        }
+
         property string fallback: defaultBackground
         source: background.pictureUri
         visible: false
@@ -234,11 +279,11 @@ ItemPage {
             systemSettingsSettings.backgroundPreviouslySetValue =
                     leastRecent.source
             /* copy most recently changed to least recently changed */
-            leastRecent.source = mostRecent.source
+            leastRecent.update(mostRecent.source)
         } else { // different
             /* restore least recently changed to previous value */
-            leastRecent.source =
-                    systemSettingsSettings.backgroundPreviouslySetValue
+            leastRecent.update(
+                    systemSettingsSettings.backgroundPreviouslySetValue)
         }
     }
 
@@ -256,21 +301,25 @@ ItemPage {
     property var activeTransfer
 
     Connections {
+        id: contentHubConnection
+        property var imageCallback
         target: activeTransfer ? activeTransfer : null
         onStateChanged: {
             if (activeTransfer.state === ContentTransfer.Charged) {
                 if (activeTransfer.items.length > 0) {
                     var imageUrl = activeTransfer.items[0].url;
-                    background.pictureUri = imageUrl;
-                    setUpImages();
+                    imageCallback(imageUrl);
                 }
             }
         }
     }
 
-    function startContentTransfer() {
-        var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                ContentHub.defaultSourceForType(ContentType.Pictures));
+    function startContentTransfer(callback) {
+        if (callback)
+            contentHubConnection.imageCallback = callback
+        var transfer = ContentHub.importContent(
+                    ContentType.Pictures,
+                    ContentHub.defaultSourceForType(ContentType.Pictures));
         if (transfer != null)
         {
             transfer.selectionType = ContentTransfer.Single;
