@@ -128,14 +128,15 @@ ItemPage {
             horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
          }
 
-        onClicked: startContentTransfer(function(url) {
+        onClicked: {
+            startContentTransfer(function(url) {
             if (systemSettingsSettings.backgroundDuplicate) {
                 updateBoth(url)
             } else {
                 updateHome(url)
                 systemSettingsSettings.backgroundSetLast = "home"
             }
-        })
+        })}
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
 
@@ -186,7 +187,8 @@ ItemPage {
             text: i18n.tr("Change…")
             width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: startContentTransfer()
+            Component.onCompleted:
+                clicked.connect(homeImage.clicked)
         }
 
         Button {
