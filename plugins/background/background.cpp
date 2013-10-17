@@ -90,6 +90,7 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     QString backgroundFileSave = backgroundFile.path();
     m_backgroundFile = backgroundFileSave;
     userInterface.call("SetBackgroundFile", backgroundFileSave);
+    Q_EMIT backgroundFileChanged();
 }
 
 void Background::slotChanged()
