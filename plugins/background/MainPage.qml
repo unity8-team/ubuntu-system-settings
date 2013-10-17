@@ -194,7 +194,13 @@ ItemPage {
             width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
+                // Reset all of the settings
                 background.schema.reset('pictureUri')
+                systemSettingsSettings.backgroundPreviouslySetValue =
+                        background.pictureUri
+                backgroundPanel.backgroundFile = background.pictureUri
+                systemSettingsSettings.backgroundSetLast = "home"
+                systemSettingsSettings.backgroundDuplicate = true
             }
         }
 
