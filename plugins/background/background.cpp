@@ -19,6 +19,7 @@
 */
 
 #include "background.h"
+#include <QDebug>
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
@@ -65,6 +66,8 @@ QString Background::getBackgroundFile()
                     "org.freedesktop.Accounts.User",
                     "BackgroundFile");
 
+        qDebug() << "Reading background:" << answer.value().variant();
+
         if (answer.isValid())
             return answer.value().variant().toString();
     }
@@ -90,6 +93,7 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     QString backgroundFileSave = backgroundFile.path();
     m_backgroundFile = backgroundFileSave;
     userInterface.call("SetBackgroundFile", backgroundFileSave);
+    qDebug() << "Setting background to " << backgroundFileSave;
 }
 
 void Background::slotChanged()
@@ -97,6 +101,7 @@ void Background::slotChanged()
     QString new_background = getBackgroundFile();
     if (new_background != m_backgroundFile) {
         m_backgroundFile = new_background;
+        qDebug() << "Background changed to:" << new_background << "- emitting";
         Q_EMIT backgroundFileChanged();
     }
 }
