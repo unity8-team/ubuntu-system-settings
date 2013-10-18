@@ -40,9 +40,6 @@ FramedMenuItem {
             checked = menuItem.checked;
         }
 
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.right: parent.right
-
         // FIXME : should use Checkbox.toggled signal
         // lp:~nick-dedekind/ubuntu-ui-toolkit/checkbox.toggled
         onClicked: {
