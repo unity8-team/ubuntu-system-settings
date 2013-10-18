@@ -158,7 +158,9 @@ LanguagePlugin::userSetCurrentLanguage(ActUser *user)
         }
 
         if (m_nextCurrentLanguage != m_currentLanguage) {
-            act_user_set_language(user, qPrintable(languageCodes()[m_nextCurrentLanguage]));
+            QString languageCode(languageCodes()[m_nextCurrentLanguage]);
+            act_user_set_language(user, qPrintable(languageCode.left(languageCode.indexOf('.'))));
+            act_user_set_formats_locale(user, qPrintable(languageCode));
             m_currentLanguage = m_nextCurrentLanguage;
             Q_EMIT currentLanguageChanged();
         }
@@ -442,10 +444,10 @@ LanguagePlugin::languageLocales() const
 
         QString localeOutput(localeProcess.readAllStandardOutput());
         QStringList localeNames(localeOutput.split(QRegExp("\\s+")));
-        QSet<QString> languageNames;
+        QHash<QString, QString> nameCodes;
 
         for (QStringList::const_iterator i(localeNames.begin()); i != localeNames.end(); ++i) {
-            QString localeName(i->left(i->indexOf('.')));
+            QString localeName(i->left(i->indexOf('.')).trimmed());
             QLocale locale(localeName);
             QString languageName(locale.nativeLanguageName().trimmed().toCaseFolded());
 
@@ -454,14 +456,14 @@ LanguagePlugin::languageLocales() const
                 QString genericName(genericLocale.nativeLanguageName().trimmed().toCaseFolded());
 
                 if (genericName == languageName) {
-                    if (!languageNames.contains(genericName)) {
+                    if (!nameCodes.contains(genericName)) {
                         *m_languageLocales += genericLocale;
-                        languageNames += genericName;
+                        nameCodes.insert(genericName, i->trimmed());
                     }
                 } else {
-                    if (!languageNames.contains(languageName)) {
+                    if (!nameCodes.contains(languageName)) {
                         *m_languageLocales += locale;
-                        languageNames += languageName;
+                        nameCodes.insert(languageName, i->trimmed());
                     }
                 }
             }
@@ -471,9 +473,10 @@ LanguagePlugin::languageLocales() const
 
         for (int i(0); i < m_languageLocales->length(); i++) {
             *m_languageNames += (*m_languageLocales)[i].nativeLanguageName().trimmed();
-            *m_languageCodes += (*m_languageLocales)[i].name().trimmed();
+            *m_languageCodes += nameCodes[(*m_languageNames)[i].toCaseFolded()];
             (*m_nameIndices)[(*m_languageNames)[i]] = i;
-            (*m_codeIndices)[(*m_languageCodes)[i]] = i;
+            QString languageCode((*m_languageCodes)[i]);
+            (*m_codeIndices)[languageCode.left(languageCode.indexOf('.'))] = i;
         }
     }
 
