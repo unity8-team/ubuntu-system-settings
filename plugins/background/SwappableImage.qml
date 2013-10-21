@@ -29,31 +29,16 @@ Item {
     width: parent.width * 0.43
     anchors.margins: units.gu(2)
 
-    UbuntuShape {
-        anchors.fill: parent
-        image: ses
-    }
-
-    ShaderEffectSource {
-        id: ses
-        sourceItem: xfi
-        width: 1
-        height: 1
-        hideSource: true
-    }
-
     CrossFadeImage {
-        id: xfi
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
         source: swappableImage.source
         fadeDuration: UbuntuAnimation.SlowDuration
-        visible: false
     }
 
     MouseArea {
         id: mouseArea
-        anchors.fill: xfi
+        anchors.fill: parent
         Component.onCompleted: mouseArea.clicked.connect(swappableImage.clicked)
     }
 }

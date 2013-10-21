@@ -39,6 +39,9 @@ class Update : public QObject
                 READ DownloadMode
                 WRITE SetDownloadMode
                 NOTIFY downloadModeChanged)
+    Q_PROPERTY( int currentBuildNumber
+                READ currentBuildNumber
+                CONSTANT)
 
 public:
     explicit Update(QObject *parent = 0);
@@ -50,6 +53,7 @@ public:
     void SetInfoMessage(QString);
     int DownloadMode();
     void SetDownloadMode(int);
+    int currentBuildNumber();
 
     Q_INVOKABLE void CheckForUpdate();
     Q_INVOKABLE void DownloadUpdate();
@@ -76,6 +80,7 @@ Q_SIGNALS:
 private:
     QString m_infoMessage;
     int m_downloadMode;
+    int m_currentBuildNumber;
 
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;

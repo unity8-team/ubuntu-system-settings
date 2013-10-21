@@ -26,15 +26,10 @@ Item {
 
     property string source
 
-    UbuntuShape {
+    Image {
         anchors.fill: parent
-
-        image: Image {
-            id: overlayInnerImage
-            source: overlayImage.source
-            fillMode: Image.PreserveAspectCrop
-            verticalAlignment: Image.AlignTop
-        }
+        source: overlayImage.source
+        fillMode: Image.PreserveAspectCrop
+        verticalAlignment: Image.AlignTop
     }
-
 }

@@ -39,10 +39,6 @@ SheetBase {
         initialLanguage = i18n.language
     }
 
-    UbuntuLanguagePlugin {
-        id: plugin
-    }
-
     ListView {
         id: languageList
 
@@ -58,7 +54,7 @@ SheetBase {
 
         currentIndex: plugin.currentLanguage
 
-        model: plugin.languages
+        model: plugin.languageNames
         delegate: ListItem.Standard {
             text: modelData
             selected: index == languageList.currentIndex

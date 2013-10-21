@@ -1,3 +1,88 @@
+ubuntu-system-settings (0.1+13.10.20131015.2-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * [sound] Fix overriding of title in sound selector subpage causing
+    translation errors.
+  * [wifi] Properly set the list of networks up for scrolling.
+
+  [ William Hua ]
+  * Move state into class so we can fix LP: 1234407 properly. (LP:
+    #1234407)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 461
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Oct 2013 20:24:13 +0000
+
+ubuntu-system-settings (0.1+13.10.20131015-0ubuntu1) saucy; urgency=low
+
+  [ Charles Kerr ]
+  * In the battery plugin, use indicator-bluetooth's "bluetooth-
+    supported" action state to know whether or not to show the bluetooth
+    toggle. (LP: #1233628)
+  * In the bluetooth plugin, handle bluetooth adapters
+    appearing/disappearing on the bus. (LP: #1236249)
+
+  [ Sebastien Bacher ]
+  * update: get the current build number, use it in the os version
+    string. (LP: #1233682)
+  * update: tweak a bit the UI, we don't have a description for the
+    updates so there is no need to keep the stacked UI, we can use one
+    line. Copy the icon in the source as well since it's not installed
+    on touch. (LP: #1233682)
+  * sound: use the new sounds sets from ubuntu-touch-sounds.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 456
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Oct 2013 04:19:09 +0000
+
+ubuntu-system-settings (0.1+13.10.20131011-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * security: don't display the section titles when they have no widgets
+    listed. (LP: #1236331)
+  * battery: clean leftover call that got deprecated by the indicator
+    use.
+  * wifi: replace the hackish frame entry by a standard element, that
+    should let the list elements to look like other lists one, rather
+    than having some extra height and white separator.
+
+  [ Iain Lane ]
+  * Use Qt.locale for month names instead of having them translatable.
+    (LP: #1233218)
+  * Always push the main page onto the pageStack so that we can go back
+    to the index after being launched to an individual panel. (LP:
+    #1234588)
+  * [time-date] Hide divider between elements in the manual time
+    selection screen. (LP: #1237030)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Add a 'reset background' button to get the default value. (LP:
+    #1234994)
+  * According to the design the edges of the previews are not supposed
+    to be rounded, so we don't need an UbuntuShape here. (LP: #1237821)
+  * Remove the included fallback images, use the ones that unity8 uses -
+    we do it in the same way that unity8 does, but oh well, it's a
+    workaround for now anyway. (LP: #1223798)
+
+  [ William Hua ]
+  * Show only installed language packs.
+
+  [ Lars Uebernickel ]
+  * battery: don't animate switches when opening the page This happened
+    because the switches' values are not set on initialization, but when
+    the indicator services reports its state a few ms after opening the
+    panel. The switch always animates between its states, with no
+    apparent way to turn it off. This fix puts the switch controls into
+    a Loader, which loads them as soon as their respective actions are
+    available.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 448
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Oct 2013 08:47:27 +0000
+
 ubuntu-system-settings (0.1+13.10.20131004-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

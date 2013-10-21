@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-10-03 13:29+0000\n"
-"Last-Translator: GTriderXC <gtriderxc@yahoo.com>\n"
+"PO-Revision-Date: 2013-10-13 13:16+0000\n"
+"Last-Translator: Stanisław Dac <s.dac@yandex.ru>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-10-08 06:28+0000\n"
+"X-Launchpad-Export-Date: 2013-10-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -523,7 +523,7 @@ msgstr "Automatyczne uzupełnianie"
 
 #: ../plugins/language/PageComponent.qml:109
 msgid "Predictive text"
-msgstr ""
+msgstr "Tekst podpowiedzi"
 
 #: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
@@ -535,11 +535,11 @@ msgstr "\"Wciska\" Shift, by rozpocząć każde nowe zdanie wielką literą"
 
 #: ../plugins/language/PageComponent.qml:147
 msgid "Key press feedback"
-msgstr ""
+msgstr "Reakcja na wciśnięcie przycisku"
 
 #: ../plugins/language/PageComponent.qml:159
 msgid "Vibrate or emit a sound whenever a key is pressed."
-msgstr ""
+msgstr "Wibracja lub dźwięk przy każdym wciśnięciu klawisza"
 
 #: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -936,254 +936,255 @@ msgstr "Rozmowy telefoniczne:"
 
 #: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
-msgstr ""
+msgstr "Dźwięk dzwonka"
 
 #: ../plugins/sound/PageComponent.qml:68
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "Wibracja i dźwięk dzwonka"
 
 #: ../plugins/sound/PageComponent.qml:76
 msgid "Vibrate in silent mode"
-msgstr ""
+msgstr "Wibracja gdy wyciszony"
 
 #: ../plugins/sound/PageComponent.qml:81
 msgid "Other sounds:"
-msgstr ""
+msgstr "Inne dźwięki:"
 
 #: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
 msgid "Message received"
-msgstr ""
+msgstr "Otrzymano wiadomość"
 
 #: ../plugins/sound/PageComponent.qml:96
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "Dźwięki klawiatury:"
 
 #: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
-msgstr ""
+msgstr "Dźwięk blokady"
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "Telefon wyciszony"
 
 #: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
-msgstr ""
+msgstr "Zatrzymanie odwarzania"
 
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
-msgstr ""
+msgstr "Auto pobieranie"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "Automatyczne pobieranie aktualizacji:"
 
 #: ../plugins/system-update/Download.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Podczas połączenia Wi-Fi"
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "Dla każdego rodzaju połączenia sieciowego"
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "Ryzyko wysokich opłat za transfer danych."
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
-msgstr ""
+msgstr "Aktualizacje"
 
 #: ../plugins/system-update/PageComponent.qml:46
 msgid "Checking for updates…"
-msgstr ""
+msgstr "Sprawdzanie dostępnych aktualizacji..."
 
 #: ../plugins/system-update/PageComponent.qml:83
 msgid "Apply update failed:"
-msgstr ""
+msgstr "Instalacja aktualizacji nie powiodła się:"
 
 #: ../plugins/system-update/PageComponent.qml:93
 msgid "Pause failed:"
-msgstr ""
+msgstr "Wstrzymanie nie powiodło się:"
 
 #. TRANSLATORS: %1 is the size of the update in GB
 #: ../plugins/system-update/PageComponent.qml:108
 #, qt-format
 msgid "%1 GB"
-msgstr ""
+msgstr "%1 GB"
 
 #. TRANSLATORS: %1 is the size of the update in MB
 #: ../plugins/system-update/PageComponent.qml:111
 #, qt-format
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #. TRANSLATORS: %1 is the date when the device was last updated
 #: ../plugins/system-update/PageComponent.qml:120
 msgid "No software update available"
-msgstr ""
+msgstr "Brak aktualizacji oprogramowania"
 
 #: ../plugins/system-update/PageComponent.qml:120
 #, qt-format
 msgid "Last updated %1"
-msgstr ""
+msgstr "Ostatnio aktualizowany: %1"
 
 #. TRANSLATORS: %1 is the number of seconds remaining
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pozostała %1 sekunda"
+msgstr[1] "Pozostało około %1 sekund"
+msgstr[2] "Pozostało około %1 sekund"
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
-msgstr ""
+msgstr "Oszacowanie pobrania nie jest tym razem możliwe."
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
-msgstr ""
+msgstr "Wstrzymano"
 
 #: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
-msgstr ""
+msgstr "Pobieranie nie powiodło się"
 
 #: ../plugins/system-update/PageComponent.qml:205
 #: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
-msgstr ""
+msgstr "Ponów"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
-msgstr ""
+msgstr "Ubuntu Phone"
 
 #. TRANSLATORS: %1 is the version of the update
 #: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Wersja %1"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
-msgstr ""
+msgstr "Wstrzymanie pobieranie"
 
 #: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
-msgstr ""
+msgstr "Kontynuacja pobierania"
 
 #: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
-msgstr ""
+msgstr "Pobieranie"
 
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
-msgstr ""
+msgstr "Instalacja i ponowne uruchomienie"
 
 #: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
-msgstr ""
+msgstr "Przy połączeniu Wi-Fi"
 
 #: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
-msgstr ""
+msgstr "Zawsze"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "Strefa czasowa"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Podaj strefę czasową:"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
-msgstr ""
+msgstr "Bieżące położenie"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
-msgstr ""
+msgstr "Dopasowanie lokalizacji niemożliwe"
 
 #: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
-msgstr ""
+msgstr "Data i czas"
 
 #: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
-msgstr ""
+msgstr "Strefa czasowa:"
 
 #: ../plugins/time-date/PageComponent.qml:65
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Ustaw czas i datę:"
 
 #: ../plugins/time-date/TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Ustawienie czasu i daty"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Czas"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Godzina"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Minuty"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Sekundy"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: ../plugins/time-date/TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Dzień"
 
 #: ../plugins/time-date/TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "Miesiąc"
 
 #: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "Rok"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
-msgstr ""
+msgstr "Ustawienia systemowe"
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
+msgstr "Wyszukaj"
 
 #: ../src/qml/MainWindow.qml:95
 msgid "Personal"
-msgstr ""
+msgstr "Ustawienia osobiste"
 
 #: ../src/qml/MainWindow.qml:100
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: ../.build/settings.js:2
 msgid "Accessibility"
-msgstr ""
+msgstr "Ułatwienia dostępu"
 
 #: ../.build/settings.js:6
 msgid "Brightness"
-msgstr ""
+msgstr "Jasność"
 
 #: ../.build/settings.js:8
 msgid "Example"
-msgstr ""
+msgstr "Przykład"
 
 #: ../.build/settings.js:9
 msgid "Flight mode"
-msgstr ""
+msgstr "Tryb samolotowy"
 
 #: ../.build/settings.js:11
 msgid "Orientation lock"
-msgstr ""
+msgstr "Blokada położenia"

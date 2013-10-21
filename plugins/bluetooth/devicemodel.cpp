@@ -40,9 +40,22 @@ DeviceModel::DeviceModel(QDBusConnection &dbus, QObject *parent):
     m_bluezManager("org.bluez", "/", "org.bluez.Manager", m_dbus)
 {
     if (m_bluezManager.isValid()) {
+
         QDBusReply<QDBusObjectPath> qObjectPath = m_bluezManager.call("DefaultAdapter");
         if (qObjectPath.isValid())
             setAdapterFromPath(qObjectPath.value().path());
+
+        m_dbus.connect (m_bluezManager.service(),
+                        m_bluezManager.path(),
+                        m_bluezManager.interface(),
+                        "DefaultAdapterChanged",
+                        this, SLOT(slotDefaultAdapterChanged(const QDBusObjectPath&)));
+
+        m_dbus.connect (m_bluezManager.service(),
+                        m_bluezManager.path(),
+                        m_bluezManager.interface(),
+                        "AdapterRemoved",
+                        this, SLOT(slotAdapterRemoved(const QDBusObjectPath&)));
     }
 
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(slotTimeout()));
@@ -133,6 +146,10 @@ void DeviceModel::clearAdapter()
                        this, SLOT(slotDeviceDisappeared(const QString&)));
 
         m_bluezAdapter.reset(0);
+
+        beginResetModel();
+        m_devices.clear();
+        endResetModel();
     }
 }
 
@@ -159,6 +176,17 @@ void DeviceModel::setAdapterFromPath(const QString &path)
         startDiscovery();
         updateDevices();
     }
+}
+
+void DeviceModel::slotAdapterRemoved(const QDBusObjectPath &path)
+{
+  if (m_bluezAdapter && (m_bluezAdapter->path()==path.path()))
+      clearAdapter();
+}
+
+void DeviceModel::slotDefaultAdapterChanged(const QDBusObjectPath &objectPath)
+{
+  setAdapterFromPath (objectPath.path());
 }
 
 void DeviceModel::updateDevices()

@@ -7,13 +7,11 @@ add_library(UbuntuBluetoothPanel MODULE
   device.cpp
   devicemodel.cpp
   plugin.cpp
-  killswitch.cpp
   agent.h 
   agentadaptor.h
   bluetooth.h
   device.h
   devicemodel.h
-  killswitch.h
   plugin.h
 )
 
