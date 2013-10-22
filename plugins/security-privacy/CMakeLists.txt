@@ -1,8 +1,5 @@
 add_subdirectory(diagnostics)
 
-add_library(UbuntuSecurityPrivacyPanel MODULE plugin.h securityprivacy.h plugin.cpp securityprivacy.cpp)
-qt5_use_modules(UbuntuSecurityPrivacyPanel Qml Quick DBus)
-
 set(QML_SOURCES
     Dash.qml
     Location.qml
@@ -10,6 +7,10 @@ set(QML_SOURCES
     PageComponent.qml
     PhoneLocking.qml
 )
+
+add_library(UbuntuSecurityPrivacyPanel MODULE plugin.h securityprivacy.h plugin.cpp securityprivacy.cpp
+${QML_SOURCES})
+qt5_use_modules(UbuntuSecurityPrivacyPanel Qml Quick DBus)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/SecurityPrivacy)
 install(TARGETS UbuntuSecurityPrivacyPanel DESTINATION ${PLUG_DIR})

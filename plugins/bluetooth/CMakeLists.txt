@@ -1,5 +1,12 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+set(QML_SOURCES
+ProvidePinCodeDialog.qml
+ConfirmPasskeyDialog.qml
+ProvidePasskeyDialog.qml
+PageComponent.qml 
+)
+
 add_library(UbuntuBluetoothPanel MODULE
   agent.cpp
   agentadaptor.cpp
@@ -13,17 +20,10 @@ add_library(UbuntuBluetoothPanel MODULE
   device.h
   devicemodel.h
   plugin.h
+  ${QML_SOURCES}
 )
 
 qt5_use_modules(UbuntuBluetoothPanel Qml Quick DBus)
-
-set(QML_SOURCES
-ProvidePinCodeDialog.qml
-ConfirmPasskeyDialog.qml
-ProvidePasskeyDialog.qml
-PageComponent.qml 
-)
-
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Bluetooth)
 install(TARGETS UbuntuBluetoothPanel DESTINATION ${PLUG_DIR})

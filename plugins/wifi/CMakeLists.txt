@@ -1,11 +1,3 @@
-add_library(UbuntuWifiPanel MODULE
-  plugin.cpp
-  unitymenumodelstack.cpp
-  plugin.h
-  unitymenumodelstack.h
-)
-qt5_use_modules(UbuntuWifiPanel Qml Quick DBus)
-
 set(QML_SOURCES
 AccessPoint.qml
 BaseMenuItem.qml
@@ -20,6 +12,15 @@ SectionMenuItem.qml
 StandardMenuItem.qml
 SwitchMenuItem.qml
 )
+
+add_library(UbuntuWifiPanel MODULE
+  plugin.cpp
+  unitymenumodelstack.cpp
+  plugin.h
+  unitymenumodelstack.h
+  ${QML_SOURCES}
+)
+qt5_use_modules(UbuntuWifiPanel Qml Quick DBus)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Wifi)
 install(TARGETS UbuntuWifiPanel DESTINATION ${PLUG_DIR})

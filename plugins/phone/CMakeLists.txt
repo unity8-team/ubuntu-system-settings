@@ -1,5 +1,13 @@
 include_directories(${OFONO_INCLUDE_DIRS})
 
+set(QML_SOURCES
+    CallForwarding.qml
+    CallWaiting.qml
+    PageComponent.qml
+    ServiceInfo.qml
+    Services.qml
+)
+
 add_library(UbuntuPhonePanel MODULE
     connman.h
     simservice.h
@@ -13,17 +21,11 @@ add_library(UbuntuPhonePanel MODULE
     networkoperator.cpp
     networkregistration.cpp
     plugin.h
+    ${QML_SOURCES}
 )
 qt5_use_modules(UbuntuPhonePanel Qml Quick DBus)
 target_link_libraries(UbuntuPhonePanel ${OFONO_LDFLAGS})
 
-set(QML_SOURCES
-    CallForwarding.qml
-    CallWaiting.qml
-    PageComponent.qml
-    ServiceInfo.qml
-    Services.qml
-)
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Phone)
 install(TARGETS UbuntuPhonePanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})

@@ -1,17 +1,18 @@
-add_library(UbuntuResetPanel MODULE
-  plugin.cpp
-  reset.cpp
-  plugin.h
-  reset.h
-)
-qt5_use_modules(UbuntuResetPanel Qml Quick DBus)
-
 set(QML_SOURCES EntryComponent.qml
     EraseEverything.qml
     PageComponent.qml
     ResetAllSettings.qml
     ResetLauncherHome.qml
 )
+
+add_library(UbuntuResetPanel MODULE
+  plugin.cpp
+  reset.cpp
+  plugin.h
+  reset.h
+  ${QML_SOURCES}
+)
+qt5_use_modules(UbuntuResetPanel Qml Quick DBus)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Reset)
 install(TARGETS UbuntuResetPanel DESTINATION ${PLUG_DIR})
