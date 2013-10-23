@@ -15,95 +15,93 @@ from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 
 """ Tests for Ubuntu System Settings """
 
-class BackgroundSettingsTestCases(UbuntuSystemSettingsTestCase):
+class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
     """ Tests for Background Settings """
 
     def setUp(self):
-        super(BackgroundSettingsTestCases, self).setUp()
+        super(SystemSettingsTestCases, self).setUp()
 
     def test_title(self):
         """ Checks whether the main_view title is correct """
-        header = self.main_view.select_single('Page', visible=True)
+        header = self.main_view.select_single(objectName='systemSettingsPage')
         self.assertThat(header, NotEquals(None))
         self.assertThat(header.title, Eventually(Equals('System Settings')))
         
     def test_search(self):
         """ Checks whether the Search box is available """
-        search = self.main_view.select_single('TextField', placeholderText='Search')
+        search = self.main_view.select_single(objectName='searchTextField')
         self.assertThat(search, NotEquals(None))
         
     def test_network_category(self):
         """ Checks whether the Network category is available """
-        category = self.main_view.select_single('CategoryGrid', category='network')
+        category = self.main_view.select_single(objectName='categoryGridNetwork')
         self.assertThat(category, NotEquals(None))
         self.assertThat(category.categoryName, Eventually(Equals('Network')))
         
     def test_personal_category(self):
         """ Checks whether the Personal category is available """
-        category = self.main_view.select_single('CategoryGrid', category='personal')
+        category = self.main_view.select_single(objectName='categoryGridPersonal')
         self.assertThat(category, NotEquals(None))
         self.assertThat(category.categoryName, Eventually(Equals('Personal')))
  
     def test_system_category(self):
         """ Checks whether the System category is available """
-        category = self.main_view.select_single('CategoryGrid', category='system')
+        category = self.main_view.select_single(objectName='categoryGridSystem')
         self.assertThat(category, NotEquals(None))
         self.assertThat(category.categoryName, Eventually(Equals('System')))
  
     def test_wifi_plugin(self):
         """ Checks whether the Wi-Fi plugin is available """
-        plugin = self.main_view.select_single('Label', text='Wi-Fi')
+        plugin = self.main_view.select_single(objectName='entryComponentWi-Fi')
         self.assertThat(plugin, NotEquals(None))
 
     def test_cellular_plugin(self):
         """ Checks whether the Cellunar plugin is available """
-        plugin = self.main_view.select_single('Label', text='Cellular')
+        plugin = self.main_view.select_single(objectName='entryComponentCellular')
         self.assertThat(plugin, NotEquals(None))
 
     def test_bluetooth_plugin(self):
         """ Checks whether the Bluetooth plugin is available """
-        plugin = self.main_view.select_single('Label', text='Bluetooth')
+        plugin = self.main_view.select_single(objectName='entryComponentBluetooth')
         self.assertThat(plugin, NotEquals(None))
 
     def test_background_plugin(self):
         """ Checks whether the Background plugin is available """
-        plugin = self.main_view.select_single('Label', text='Background')
+        plugin = self.main_view.select_single(objectName='entryComponentBackground')
         self.assertThat(plugin, NotEquals(None))
-        self.pointer.move_to_object(provider_item)
-        self.pointer.click()
 
     def test_sound_plugin(self):
         """ Checks whether the Sound plugin is available """
-        plugin = self.main_view.select_single('Label', text='Sound')
+        plugin = self.main_view.select_single(objectName='entryComponentSound')
         self.assertThat(plugin, NotEquals(None))
 
     def test_language_plugin(self):
         """ Checks whether the Language plugin is available """
-        plugin = self.main_view.select_single('Label', text='Language & Text')
+        plugin = self.main_view.select_single(objectName='entryComponentLanguage & Text')
         self.assertThat(plugin, NotEquals(None))
 
     def test_accounts_plugin(self):
         """ Checks whether the Accounts plugin is available """
-        plugin = self.main_view.select_single('Label', text='Accounts')
+        plugin = self.main_view.select_single(objectName='entryComponentAccounts')
         self.assertThat(plugin, NotEquals(None))
 
     def test_battery_plugin(self):
         """ Checks whether the Battery plugin is available """
-        plugin = self.main_view.select_single('Label', text='Battery')
+        plugin = self.main_view.select_single(objectName='entryComponentBattery')
         self.assertThat(plugin, NotEquals(None))
 
     def test_timedate_plugin(self):
         """ Checks whether the Time & Date plugin is available """
-        plugin = self.main_view.select_single('Label', text='Time & Date')
+        plugin = self.main_view.select_single(objectName='entryComponentTime & Date')
         self.assertThat(plugin, NotEquals(None))
 
     def test_security_plugin(self):
         """ Checks whether the Security plugin is available """
-        plugin = self.main_view.select_single('Label', text='Security & Privacy')
+        plugin = self.main_view.select_single(objectName='entryComponentSecurity & Privacy')
         self.assertThat(plugin, NotEquals(None))
 
     def test_updates_plugin(self):
         """ Checks whether the Updates plugin is available """
-        plugin = self.main_view.select_single('Label', text='Updates')
+        plugin = self.main_view.select_single(objectName='entryComponentUpdates')
         self.assertThat(plugin, NotEquals(None))
 

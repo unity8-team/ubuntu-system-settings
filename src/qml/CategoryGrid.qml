@@ -12,6 +12,8 @@ Column {
     property string category
     property string categoryName
 
+    objectName: "categoryGrid" + categoryName
+
     ListItem.Header {
         id: header
 

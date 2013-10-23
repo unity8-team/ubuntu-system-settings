@@ -28,6 +28,8 @@ Item {
 
     height: col.height
 
+    objectName: "entryComponent" + model.displayName
+
     Column {
         id: col
         anchors.left: parent.left

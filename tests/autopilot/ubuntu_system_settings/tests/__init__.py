@@ -15,7 +15,9 @@ from autopilot.testcase import AutopilotTestCase
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals
 
-class UbuntuSystemSettingsTestCase(AutopilotTestCase):
+from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
+
+class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
     def setUp(self):
         super(UbuntuSystemSettingsTestCase, self).setUp()
