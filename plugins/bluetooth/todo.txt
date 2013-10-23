@@ -1,0 +1,35 @@
+
+_ spec wants the icon to change to a spinner when connecting,
+  but ActivityIndicator is =really= slow when used in a ListView delegate.
+  This seems like it should be low-hanging fruit but not sure how to implement
+  inside the ListView? Using a stand-in "(Connecting...)" for now.
+
+_ spec wants rows to slide up and down on the page when they transition from
+  connected to disconnected & back again.
+
+_ spec wants the main settings page (ie, the system-settings window, not the
+  bluetooth plugin window) to indicate via different bluetooth icons whether
+  bluetooth is on or off and whether or not there's a connection.
+
+_ "Signal Strength" is currently a lie, it's always listed as "Fair".
+  This information doesn't seem to be provided by bluez?
+
+_ spec wants a small histogram of signal strength.
+  Not implemented -- see previous item
+
+_ spec wants the pin entry dialog to hover over the other window;
+  currently it overlays the entire window
+
+_ spec's "Provide Passkey" dialog is overlaid over the Bluetooth page.
+  Implementation has a fullpage dialog.
+
+_ spec's "Provide Passkey" dialog requests an extra-large textfield.
+  ubuntu ui toolkit doesn't appear to have a way to set fontSize
+
+_ spec's text entry field in "Provide Passkey" dialog doesn't behave or
+  look the same as Ubuntu/Components/TextField.qml. (Update spec?)
+
+_ spec has nothing to say about the "Confirm Passkey" dialog. (Update spec?)
+
+_ spec has nothing about unpairing devices.
+

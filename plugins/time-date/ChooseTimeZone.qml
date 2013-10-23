@@ -27,25 +27,39 @@ import Ubuntu.SystemSettings.TimeDate 1.0
 ItemPage {
     title: i18n.tr("Time zone")
 
-    UbuntuTimeDatePanel { id: timeDatePanel }
+    Timer {
+        id: goBackTimer
+        onTriggered: pageStack.pop()
+    }
+
+    UbuntuTimeDatePanel {
+        id: timeDatePanel
+        onTimeZoneChanged: {
+            // Protect against the tz being changed externally
+            if (locationsListView.manuallySelected !== "")
+                goBackTimer.start()
+        }
+    }
 
     ListItem.ItemSelector {
         id: setTimeZoneSelector
         text: i18n.tr("Set the time zone:")
         model: [i18n.tr("Automatically"), i18n.tr("Manually")]
+        selectedIndex: 1 // TODO: get value once we have a working backend
         expanded: true
+        visible: showAllUI
     }
 
     ListItem.Standard {
         anchors.top: setTimeZoneSelector.bottom
         text: timeDatePanel.timeZone
         enabled: false
-        visible: setTimeZoneSelector.selectedIndex == 0 // Automatically
+        visible: showAllUI && setTimeZoneSelector.selectedIndex == 0 // Automatically
     }
 
     TextField {
         anchors {
-            top: setTimeZoneSelector.bottom
+            top: showAllUI ? setTimeZoneSelector.bottom : parent.top
             left: parent.left
             right: parent.right
             margins: units.gu(2)
@@ -73,19 +87,29 @@ ItemPage {
             bottom: parent.bottom
         }
 
+        property string manuallySelected: ""
+
         model: timeDatePanel.timeZoneModel
         visible: setTimeZoneSelector.selectedIndex == 1 && count > 0
         delegate: ListItem.Standard {
             text: displayName
-            onClicked: timeDatePanel.timeZone = timeZone
-            selected: timeDatePanel.timeZone == timeZone
+            // If a timezone is manually selected, record which one so that
+            // we highlight that one only. Usually all cities in that timezone
+            // are highlighted.
+            onClicked: {
+                locationsListView.manuallySelected = displayName
+                timeDatePanel.timeZone = timeZone
+            }
+            selected: locationsListView.manuallySelected === "" ?
+                          timeDatePanel.timeZone == timeZone :
+                          locationsListView.manuallySelected == displayName
         }
     }
 
-    Text {
+    Label {
         anchors.centerIn: parent
         visible: setTimeZoneSelector.selectedIndex ==1 &&
                  locationsListView.count == 0
-        text: i18n.tr("No matching place")
+        text: (filterCities.length == 0) ? i18n.tr("Enter your current location.") : i18n.tr("No matching place")
     }
 }

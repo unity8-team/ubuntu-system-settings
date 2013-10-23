@@ -19,6 +19,7 @@
  */
 
 import GSettings 1.0
+import QMenuModel 0.1
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -63,24 +64,31 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Standard {
+                id: securityTitle
                 text: i18n.tr("Security:")
+                visible: lockingControl.visible || simControl.visible
             }
             ListItem.SingleValue {
+                id: lockingControl
                 text: i18n.tr("Phone locking")
-                value: i18n.tr("1 minute",
-                               "%1 minutes".arg(5),
-                               5)
+                // TRANSLATORS: %1 is the number of minutes
+                value: i18n.tr("%1 minute",
+                               "%1 minutes",
+                               5).arg(5)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
                 visible: showAllUI
             }
             ListItem.SingleValue {
+                id: simControl
                 text: i18n.tr("SIM PIN")
                 value: "Off"
                 progression: true
+                visible: showAllUI
             }
             ListItem.Standard {
                 text: i18n.tr("Privacy:")
+                visible: securityTitle.visible
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")
@@ -118,21 +126,38 @@ ItemPage {
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Dash.qml"))
             }
+            QDBusActionGroup {
+                id: locationActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.location"
+                objectPath: "/com/canonical/indicator/location"
+
+                property variant enabled: action("location-detection-enabled")
+
+                Component.onCompleted: start()
+            }
             ListItem.SingleValue {
                 text: i18n.tr("Location access")
                 value: "On"
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
+                visible: showAllUI && // Hidden until the indicator works
+                         locationActionGroup.enabled.state !== undefined
             }
             ListItem.SingleValue {
                 text: i18n.tr("Other app access")
                 progression: true
+                visible: showAllUI
             }
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
                 progression: true
                 value: diagnosticsWidget.canReportCrashes ?
+                           /* TRANSLATORS: This string is shown when crash
+                              reports are to be sent by the system. */
                            i18n.tr("Sent") :
+                           /* TRANSLATORS: This string is shown when crash
+                              reports are not to be sent by the system */
                            i18n.tr("Not sent")
                 onClicked: {
                     var path = "../diagnostics/PageComponent.qml";

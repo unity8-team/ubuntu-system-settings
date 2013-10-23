@@ -26,6 +26,7 @@
 #include <timezonemap/tz.h>
 #include <unistd.h>
 
+#include <iostream>
 TimeDate::TimeDate(QObject *parent) :
     QObject(parent),
     m_systemBusConnection (QDBusConnection::systemBus()),
@@ -60,7 +61,7 @@ void TimeDate::setUpInterface()
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
-}
+    }
 
 QString TimeDate::timeZone()
 {

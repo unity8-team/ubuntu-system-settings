@@ -5,6 +5,7 @@ Item {
     property string label
     property color colorName
     property string value
+    property bool ready: false
 
     height: units.gu(3)
     width: parent.width-units.gu(4)
@@ -21,7 +22,14 @@ Item {
         Label { text: label }
     }
     Label {
+        id: sizelabel
         anchors.right: parent.right
-        text: value
+        text: backendInfo.formatSize(value)
+        visible: ready
+    }
+    ActivityIndicator {
+        anchors.right: parent.right
+        visible: !ready
+        running: true
     }
 }

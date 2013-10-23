@@ -1,3 +1,299 @@
+ubuntu-system-settings (0.1+13.10.20131015.2-0ubuntu1) saucy; urgency=low
+
+  [ Iain Lane ]
+  * [sound] Fix overriding of title in sound selector subpage causing
+    translation errors.
+  * [wifi] Properly set the list of networks up for scrolling.
+
+  [ William Hua ]
+  * Move state into class so we can fix LP: 1234407 properly. (LP:
+    #1234407)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 461
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Oct 2013 20:24:13 +0000
+
+ubuntu-system-settings (0.1+13.10.20131015-0ubuntu1) saucy; urgency=low
+
+  [ Charles Kerr ]
+  * In the battery plugin, use indicator-bluetooth's "bluetooth-
+    supported" action state to know whether or not to show the bluetooth
+    toggle. (LP: #1233628)
+  * In the bluetooth plugin, handle bluetooth adapters
+    appearing/disappearing on the bus. (LP: #1236249)
+
+  [ Sebastien Bacher ]
+  * update: get the current build number, use it in the os version
+    string. (LP: #1233682)
+  * update: tweak a bit the UI, we don't have a description for the
+    updates so there is no need to keep the stacked UI, we can use one
+    line. Copy the icon in the source as well since it's not installed
+    on touch. (LP: #1233682)
+  * sound: use the new sounds sets from ubuntu-touch-sounds.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 456
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Oct 2013 04:19:09 +0000
+
+ubuntu-system-settings (0.1+13.10.20131011-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * security: don't display the section titles when they have no widgets
+    listed. (LP: #1236331)
+  * battery: clean leftover call that got deprecated by the indicator
+    use.
+  * wifi: replace the hackish frame entry by a standard element, that
+    should let the list elements to look like other lists one, rather
+    than having some extra height and white separator.
+
+  [ Iain Lane ]
+  * Use Qt.locale for month names instead of having them translatable.
+    (LP: #1233218)
+  * Always push the main page onto the pageStack so that we can go back
+    to the index after being launched to an individual panel. (LP:
+    #1234588)
+  * [time-date] Hide divider between elements in the manual time
+    selection screen. (LP: #1237030)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Add a 'reset background' button to get the default value. (LP:
+    #1234994)
+  * According to the design the edges of the previews are not supposed
+    to be rounded, so we don't need an UbuntuShape here. (LP: #1237821)
+  * Remove the included fallback images, use the ones that unity8 uses -
+    we do it in the same way that unity8 does, but oh well, it's a
+    workaround for now anyway. (LP: #1223798)
+
+  [ William Hua ]
+  * Show only installed language packs.
+
+  [ Lars Uebernickel ]
+  * battery: don't animate switches when opening the page This happened
+    because the switches' values are not set on initialization, but when
+    the indicator services reports its state a few ms after opening the
+    panel. The switch always animates between its states, with no
+    apparent way to turn it off. This fix puts the switch controls into
+    a Loader, which loads them as soon as their respective actions are
+    available.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 448
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Oct 2013 08:47:27 +0000
+
+ubuntu-system-settings (0.1+13.10.20131004-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: having 100% power is still "fully charged", even while
+    discharging.
+  * battery: only display the location caption if the gps settings is
+    visible.
+  * update: clean small unwanted changes that sneaked in a previous
+    commit, that should make the "check for update" button do the
+    correct thing again, rather than having the label hidding and the
+    button stop working. (LP: #1234703)
+
+  [ Iain Lane ]
+  * When manually selecting a timezone, navigate back to the previous
+    screen (Time & Date) after one second. Don't highlight all cities
+    the first time you've selected a new timezone, just the chosen one.
+    (LP: #1232114)
+  * Check the passed mount point when measuring directory size, to avoid
+    a GLib critical message.
+  * [about] In the storage subpanel, check the space for drives Qt
+    reports as "Unknown".
+  * Tweaks to the default layout - Make the text smaller - Make the text
+    wrap at the edge of the bounding box of the grid item - Centre the
+    grid horizontally - Dynamically space the grid elements according to
+    how many columns there are in that category. (LP: #1223827)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 429
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 04 Oct 2013 05:43:12 +0000
+
+ubuntu-system-settings (0.1+13.10.20131002-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * click: the installed-size info is in kib, not in bytes.
+
+  [ Iain Lane ]
+  * Use the indicator's value for the charge level instead of
+    calculating it from QtSystems derived information.
+  * [battery] Update the UI dynamically when the wireless state changes.
+  * Various translation tweaks as noted in LP: #1233214. (LP: #1215712,
+    #1233214)
+  * [battery] Bind the onClicked handlers instead of checked to avoid
+    loops when enabling/disabling wifi.
+  * Remove one more missed translation.
+  * Bump required version of ubuntu-keyboard-data, as we require the
+    schemas for the language panel.
+  * Remove the SettingsCheckEntry now that the design issues are
+    resolved.
+
+  [ Ted Gould ]
+  * Adding a %u to the desktop file Exec line.
+
+  [ William Hua ]
+  * Hook up language panel to some maliit settings.
+
+  [ Didier Roche ]
+  * Use some async calls for system update where we don't expect any
+    returned value.
+  * Add an indeterminate progress bar until system image answers.
+
+  [ Charles Kerr ]
+  * Show an ActivityIndicator to tell users when discovery mode is on to
+    search for new bluetooth devices.
+  * add PIN code pairing. Implementation is similar to the existing
+    passkey pairing.
+
+  [ Ken VanDine ]
+  * revert the previous revert done in rev 391, Bug (#LP: #1231368) was
+    caused by gallery-app needing a rebuild for content-hub changes. .
+    (LP: #1231368)
+
+  [ Alberto Mardegan ]
+  * Parse URLs given in command line. (LP: #1227690)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 419
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Oct 2013 04:09:15 +0000
+
+ubuntu-system-settings (0.1+13.10.20130930-0ubuntu1) saucy; urgency=low
+
+  [ Sebastien Bacher ]
+  * update: hide the description of the updates from the panel, since
+    the current version of the server doesn't provide those information.
+    (see bug #1215586 for details). (LP: #1215586)
+  * cellular: - use the new itemselector widget rather the deprecated
+    valueselector - hide the non implemented statistics option - turn
+    the data mode selector to an on/off switch, ofono supports only
+    those.
+
+  [ Iain Lane ]
+  * Use GLib to get the sizes of directories to display in
+    Storage>About, displaying a spinner while the information is being
+    calculated. Also record the total space used by click packages to
+    display too. (LP: #1205297, #1228419)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * In a hacky way, try hiding the welcome-screen background changing
+    elements for v1 - by a design decision. (LP: #1230295)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 401
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 30 Sep 2013 09:37:44 +0000
+
+ubuntu-system-settings (0.1+13.10.20130926.4-0ubuntu1) saucy; urgency=low
+
+  [ Charles Kerr ]
+  * As requested, remove the linefeed between a function's return type
+    and its name.
+
+  [ Sebastien Bacher ]
+  * security: hide non working PIN and app access settings.
+  * battery: hide screen idle delay selection, the backend is not
+    working.
+  * timezone: some tweaks and fixes - hide the selector, we don't have a
+    backend for automatic selection - replace the text widget by label
+    from the ubuntu uitk, it fixes the issue with the text being too
+    small - update the placeholder string according to the new design.
+  * datetime: drop empty list item, it's not in the design.
+  * hide reset options until we get some backend code working. The
+    factory resets require support for the system image side, the other
+    options should be doable from our side later on.
+  * hide phone settings, we lack phone app support for call
+    forwarding,waiting.
+  * update the translation template.
+  * background: revert use of the new content-hub, it's buggy (see bug
+    #1231368). (LP: #1231368)
+
+  [ William Hua ]
+  * Switch to ListView as workaround to LP #1227249. (LP: #1227249)
+
+  [ David Planella ]
+  * Add a translator comment for the battery charge level (bug 1210341).
+    (LP: #1210341)
+
+  [ Alberto Mardegan ]
+  * Load testability driver if the -testability option is given. This
+    change is needed in order to make the system-settings application
+    and its plugins testable with autopilot (or other testability
+    plugins).
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 392
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Sep 2013 21:44:53 +0000
+
+ubuntu-system-settings (0.1+13.10.20130925.1-0ubuntu1) saucy; urgency=low
+
+  [ Ted Gould ]
+  * Ask Upstart App Launch to make settings single instance. (LP:
+    #1227111)
+
+  [ Iain Lane ]
+  * Reduce the height of the time/date pickers as they weren't fitting
+    on mobile devices. (LP: #1228409). (LP: #1228409)
+  * Use QMenuModel to hook up toggles for bluetooth and gps/location
+    enabled/disabled in the battery and security-privacy panels.
+    Location is hidden because the backend doesn't work yet.
+
+  [ Lars Uebernickel ]
+  * Fix the brightness slider in the battery panel.
+
+  [ Charles Kerr ]
+  * Add the bluetooth plugin.
+
+  [ Ken VanDine ]
+  * background: Use singleSelect on the transfer request and specify a
+    persistent Content::Store for the transfer .
+
+  [ Didier Roche ]
+  * Only Cancel if there is anything to cancel. (LP: #1215946)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 378
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 25 Sep 2013 11:12:19 +0000
+
+ubuntu-system-settings (0.1+13.10.20130924.1-0ubuntu1) saucy; urgency=low
+
+  [ Ted Gould ]
+  * Add Wifi Panel.
+
+  [ Iain Lane ]
+  * [battery] Disable scrolling of the flickable while the slider is
+    being used. Display a % in the tooltip.
+
+  [ Michael Terry ]
+  * Hide the "Phone locking" options for now, since they likely won't be
+    functional for 13.10.
+
+  [ William Hua ]
+  * Security panel: use ItemSelector instead of deprecated
+    ValueSelector. (LP: #1223986)
+  * Switch the UI language whenever the display language is changed.
+
+  [ Alberto Mardegan ]
+  * Add Wifi Panel.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Change the background image selection screen so that it fits design
+    (as per bug #1221179) overlaying the new wallpapers with the assets.
+    Right now we're using temporary placeholder assets, still waiting on
+    design action. (LP: #1221179)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 369
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 24 Sep 2013 07:03:11 +0000
+
 ubuntu-system-settings (0.1+13.10.20130918.1-0ubuntu1) saucy; urgency=low
 
   [ Sebastien Bacher ]

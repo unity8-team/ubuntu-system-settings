@@ -4,11 +4,12 @@ include($${TOP_SRC_DIR}/common-vars.pri)
 TEMPLATE = lib
 TARGET = language
 
-QML_SOURCES = DisplayLanguage.qml \
-              KeyboardLayouts.qml \
-              PageComponent.qml   \
-              SpellChecking.qml
-
+QML_SOURCES = DisplayLanguage.qml    \
+              KeyboardLayoutItem.qml \
+              KeyboardLayouts.qml    \
+              PageComponent.qml      \
+              SpellChecking.qml      \
+              SubsetView.qml
 OTHER_FILES += $${QML_SOURCES}
 
 settings.files = $${TARGET}.settings
@@ -25,7 +26,7 @@ INSTALLS += image
 
 # C++ bits
 TARGET = UbuntuLanguagePlugin
-QT += qml quick dbus
+QT += qml quick dbus xmlpatterns
 CONFIG += qt link_pkgconfig plugin no_keywords
 
 #comment in the following line to enable traces
@@ -38,8 +39,8 @@ INCLUDEPATH += .
 PKGCONFIG += accountsservice glib-2.0
 
 # Input
-HEADERS += language-plugin.h plugin.h
-SOURCES += language-plugin.cpp plugin.cpp
+HEADERS += keyboard-layout.h language-plugin.h plugin.h subset-model.h
+SOURCES += keyboard-layout.cpp language-plugin.cpp plugin.cpp subset-model.cpp
 
 # Install path for the plugin
 installPath = $${PLUGIN_PRIVATE_MODULE_DIR}/$$replace(uri, \\., /)
