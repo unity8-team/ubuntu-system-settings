@@ -13,10 +13,8 @@ from unittest import skip
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 
-""" Tests for Ubuntu System Settings """
-
 class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
-    """ Tests for Background Settings """
+    """ Tests for Ubuntu System Settings """
 
     def setUp(self):
         super(SystemSettingsTestCases, self).setUp()
