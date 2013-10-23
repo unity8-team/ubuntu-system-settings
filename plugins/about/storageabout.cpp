@@ -19,6 +19,10 @@
 
 #include <QDebug>
 
+#include <gio/gio.h>
+#include <gio/gunixmounts.h>
+#include <glib.h>
+
 #include <QDateTime>
 #include <QDir>
 #include <QFile>
@@ -31,10 +35,103 @@
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
 
+struct MeasureData {
+    uint *running;
+    StorageAbout *object;
+    quint64 *size;
+    GCancellable *cancellable;
+    MeasureData (uint *running,
+                 StorageAbout *object,
+                 quint64 *size,
+                 GCancellable *cancellable):
+        running(running),
+        object(object),
+        size(size),
+        cancellable(cancellable){}
+};
+
+static void measure_file(const char * filename,
+                         GAsyncReadyCallback callback,
+                         gpointer user_data)
+{
+    MeasureData *data = (MeasureData *) user_data;
+
+    GFile *file = g_file_new_for_path (filename);
+
+    g_file_measure_disk_usage_async (
+                file,
+                G_FILE_MEASURE_NONE,
+                G_PRIORITY_LOW,
+                data->cancellable, /* cancellable */
+                NULL, /* progress_callback */
+                NULL, /* progress_data */
+                callback,
+                user_data);
+
+}
+
+static void measure_special_file(GUserDirectory directory,
+                                 GAsyncReadyCallback callback,
+                                 gpointer user_data)
+{
+    measure_file (g_get_user_special_dir (directory), callback, user_data);
+}
+
+static void maybeEmit(MeasureData *data)
+{
+    --(*data->running);
+
+    if (*data->running == 0) {
+        Q_EMIT (data->object->sizeReady());
+        delete data->running;
+    }
+
+    delete data;
+
+}
+
+static void measure_finished(GObject *source_object,
+                             GAsyncResult *result,
+                             gpointer user_data)
+{
+    GError *err = NULL;
+    GFile *file = G_FILE (source_object);
+
+    MeasureData *data = (MeasureData *) user_data;
+
+    guint64 *size = (guint64 *) data->size;
+
+    g_file_measure_disk_usage_finish (
+                file,
+                result,
+                size,
+                NULL, /* num_dirs */
+                NULL, /* num_files */
+                &err);
+
+    if (err != NULL) {
+        if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+            delete data->running;
+            delete data;
+            g_object_unref (file);
+            g_error_free (err);
+            return;
+        } else {
+            qWarning() << "Measuring of" << g_file_get_path (file)
+                       << "failed:" << err->message;
+            g_error_free(err);
+        }
+    }
+
+    g_object_unref (file);
+    maybeEmit(data);
+}
+
 StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
-    m_clickFilterProxy(&m_clickModel)
+    m_clickFilterProxy(&m_clickModel),
+    m_cancellable(NULL)
 {
 }
 
@@ -112,5 +209,97 @@ void StorageAbout::setSortRole(ClickModel::Roles newRole)
     Q_EMIT(sortRoleChanged());
 }
 
+quint64 StorageAbout::getClickSize() const
+{
+    return m_clickModel.getClickSize();
+}
+
+quint64 StorageAbout::getMoviesSize()
+{
+    return m_moviesSize;
+}
+
+quint64 StorageAbout::getAudioSize()
+{
+    return m_audioSize;
+}
+quint64 StorageAbout::getPicturesSize()
+{
+    return m_picturesSize;
+}
+
+quint64 StorageAbout::getHomeSize()
+{
+    return m_homeSize;
+}
+
+QString StorageAbout::formatSize(quint64 size) const
+{
+    guint64 g_size = size;
+
+    gchar * formatted_size = g_format_size (g_size);
+    QString q_formatted_size = QString::fromLocal8Bit(formatted_size);
+    g_free (formatted_size);
+
+    return q_formatted_size;
+}
+
+void StorageAbout::populateSizes()
+{
+    uint *running = new uint(0);
+
+    if (!m_cancellable)
+        m_cancellable = g_cancellable_new();
+
+    measure_special_file(
+                G_USER_DIRECTORY_VIDEOS,
+                measure_finished,
+                new MeasureData(&++(*running), this, &m_moviesSize,
+                                m_cancellable));
+
+    measure_special_file(
+                G_USER_DIRECTORY_MUSIC,
+                measure_finished,
+                new MeasureData(&++(*running), this, &m_audioSize,
+                                m_cancellable));
+
+    measure_special_file(
+                G_USER_DIRECTORY_PICTURES,
+                measure_finished,
+                new MeasureData(&++(*running), this, &m_picturesSize,
+                                m_cancellable));
+
+    measure_file(
+                g_get_home_dir(),
+                measure_finished,
+                new MeasureData(&++(*running), this, &m_homeSize,
+                                m_cancellable));
+}
+
+QString StorageAbout::getDevicePath(const QString mount_point)
+{    
+    QString s_mount_point;
+
+    GUnixMountEntry * g_mount_point = NULL;
+
+    if (!mount_point.isNull() && !mount_point.isEmpty()) {
+         g_mount_point = g_unix_mount_at(mount_point.toLocal8Bit(), NULL);
+    }
+
+    if (g_mount_point) {
+        const gchar * device_path =
+                g_unix_mount_get_device_path(g_mount_point);
+        s_mount_point = QString::fromLocal8Bit(device_path);
+
+        g_unix_mount_free (g_mount_point);
+    }
+
+    return s_mount_point;
+}
+
 StorageAbout::~StorageAbout() {
+    if (m_cancellable) {
+        g_cancellable_cancel(m_cancellable);
+        g_clear_object(&m_cancellable);
+    }
 }

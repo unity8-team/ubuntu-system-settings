@@ -60,9 +60,6 @@ ItemPage {
             onClicked: pageStack.push(Qt.resolvedUrl("ChooseTimeZone.qml"))
         }
 
-        ListItem.Standard {
-        }
-
         ListItem.ItemSelector {
             id: setTimeAutomatically
             text: i18n.tr ("Set the time and date:")

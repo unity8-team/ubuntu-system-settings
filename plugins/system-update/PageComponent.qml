@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import QtSystemInfo 5.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -30,6 +31,10 @@ ItemPage {
 
     title: i18n.tr("Updates")
     flickable: scrollWidget // TODO: maybe remove
+
+    DeviceInfo {
+        id: deviceInfo
+    }
 
     // TODO: surely needs its own QML as the whole logic is here
     UbuntuUpdatePanel {
@@ -54,7 +59,10 @@ ItemPage {
         function recheckForUpdate() {
             infoMessage = "";
             infoSecondaryMessage = "";
-            var msg = CancelUpdate();
+            var msg = ""
+            // Only  if there is anything to cancel:
+            if (updateBackend.currentUpdateState !== UbuntuUpdatePanel.NoUpdate && updateBackend.currentUpdateState !== UbuntuUpdatePanel.CheckingError)
+                CancelUpdate();
             if(msg) {
                 infoMessage = TranslateFromBackend(msg);
                 currentUpdateState = UbuntuUpdatePanel.CheckingError;
@@ -69,6 +77,7 @@ ItemPage {
             infoMessage = "";
             infoSecondaryMessage = "";
             DownloadUpdate();
+            currentUpdateState = UbuntuUpdatePanel.DownloadRequested;
         }
 
         function applyUpdate() {
@@ -100,8 +109,10 @@ ItemPage {
             updateVersion = availableVersion;
             var sizeInMB = updateSize/(1024*1024);
             if (sizeInMB > 1024)
+                // TRANSLATORS: %1 is the size of the update in GB
                 updateBackend.updateSize = i18n.tr("%1 GB").arg(Math.round(sizeInMB/1024*10)/10);
             else
+                // TRANSLATORS: %1 is the size of the update in MB
                 updateBackend.updateSize = i18n.tr("%1 MB").arg(Math.round(sizeInMB*10)/10);
             updateDescriptions = descriptions;
 
@@ -110,6 +121,7 @@ ItemPage {
             }
             else {
                 currentUpdateState = UbuntuUpdatePanel.NoUpdate;
+                // TRANSLATORS: %1 is the date when the device was last updated
                 infoMessage = i18n.tr("No software update available") + "<br/>" + i18n.tr("Last updated %1").arg(lastUpdateDate);
             }
 
@@ -122,6 +134,7 @@ ItemPage {
         onUpdateProgress: {
             downloadProgress = percentage;
             if (eta > 0)
+                // TRANSLATORS: %1 is the number of seconds remaining
                 downloadRemainingTime = i18n.tr("About %1 second remaining", "About %1 seconds remaining", eta).arg(eta);
             else
                 downloadRemainingTime = i18n.tr("No estimate for the download");
@@ -163,7 +176,7 @@ ItemPage {
                     right: parent.right
                     margins: units.gu(2)
                 }
-                height: distribLogo.height + standardLabel.height*2 + versionId.height + subtitleId.height +
+                height: updateTitleId.height*3 + subtitleId.height +
                         updateProgress.height + pauseDownloadButton.height + units.gu(4)
 
                 /**********************
@@ -210,37 +223,15 @@ ItemPage {
                     width: parent.width
                     spacing: units.gu(2)
 
-                    Icon {
-                        id: distribLogo
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        width: units.gu(6)
-                        height: width
-                        name: "distributor-logo"
+                    ListItem.SingleValue {
+                        id: updateTitleId
+                        icon: "file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"
+                        iconFrame: false
+                        text: "Ubuntu %1 (r%2)".arg(deviceInfo.version(DeviceInfo.Os)).arg(updateBackend.updateVersion)
+                        value: updateBackend.updateSize;
                     }
 
-                    Row {
-                        width: parent.width
-
-                        Label {
-                            id: standardLabel
-                            width: parent.width/2
-                            text: i18n.tr("Ubuntu Phone")
-                        }
-
-                        Label {
-                            horizontalAlignment: Text.AlignRight
-                            width: parent.width/2
-                            text: updateBackend.updateSize;
-                        }
-                    }
-
-                    ListItem.ItemSelector {
-                        id: versionId
-                        text: i18n.tr("Version %1").arg(updateBackend.updateVersion)
-                        model: updateBackend.updateDescriptions
-                        selectedIndex: -1
-                        showDivider: false
-                    }
+                    /* TODO: list updateBackend.updateDescriptions once bug #1215586 is resolved */
 
                     ListItem.Subtitled {
                         id: subtitleId
@@ -256,7 +247,7 @@ ItemPage {
                     Column {
                         id: updateDownloading
                         spacing: units.gu(1)
-                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                        visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused || updateBackend.currentUpdateState === UbuntuUpdatePanel.DownloadRequested
                         width: parent.width
 
                         ProgressBar {
@@ -264,6 +255,13 @@ ItemPage {
                             maximumValue : 100
                             minimumValue : 0
                             value : updateBackend.downloadProgress
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.Downloading || updateBackend.currentUpdateState === UbuntuUpdatePanel.Paused
+                            width: parent.width
+                        }
+
+                        ProgressBar {
+                            indeterminate: true
+                            visible: updateBackend.currentUpdateState === UbuntuUpdatePanel.DownloadRequested
                             width: parent.width
                         }
 

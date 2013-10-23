@@ -20,14 +20,15 @@
  */
 
 #include <QtQml>
-#include <QtQml/QQmlContext>
 #include "plugin.h"
+#include "subset-model.h"
 #include "language-plugin.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.LanguagePlugin"));
 
+    qmlRegisterType<SubsetModel>(uri, 1, 0, "SubsetModel");
     qmlRegisterType<LanguagePlugin>(uri, 1, 0, "UbuntuLanguagePlugin");
 }
 

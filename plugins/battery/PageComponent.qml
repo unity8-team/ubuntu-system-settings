@@ -19,6 +19,7 @@
  */
 
 import GSettings 1.0
+import QMenuModel 0.1
 import QtQuick 2.0
 import QtSystemInfo 5.0
 import SystemSettings 1.0
@@ -26,7 +27,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
-
+import QMenuModel 0.1
 
 ItemPage {
     id: root
@@ -42,13 +43,17 @@ ItemPage {
             hr = Math.round (timeDelta / 3600),
             day = Math.round (timeDelta / 86400);
         if (sec < 60)
-            return i18n.tr("%1 second ago".arg(sec), "%1 seconds ago".arg(sec), sec)
+            // TRANSLATORS: %1 is the number of seconds
+            return i18n.tr("%1 second ago", "%1 seconds ago", sec).arg(sec)
         else if (min < 60)
-            return i18n.tr("%1 minute ago".arg(min), "%1 minutes ago".arg(min), min)
+            // TRANSLATORS: %1 is the number of minutes
+            return i18n.tr("%1 minute ago", "%1 minutes ago", min).arg(min)
         else if (hr < 24)
-            return i18n.tr("%1 hour ago".arg(hr), "%1 hours ago".arg(hr), hr)
+            // TRANSLATORS: %1 is the number of hours
+            return i18n.tr("%1 hour ago", "%1 hours ago", hr).arg(hr)
         else
-            return i18n.tr("%1 day ago".arg(day), "%1 days ago".arg(day), day)
+            // TRANSLATORS: %1 is the number of days
+            return i18n.tr("%1 day ago", "%1 days ago", day).arg(day)
     }
 
     GSettings {
@@ -71,29 +76,37 @@ ItemPage {
                 chargingEntry.text = i18n.tr("Charging now")
                 isCharging = true
             }
-            else if (state === BatteryInfo.Discharging) {
+            else if (state === BatteryInfo.Discharging &&
+                     batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
                 chargingEntry.text = i18n.tr("Last full charge")
                 isCharging = false
             }
-            else if (state === BatteryInfo.Full || state === BatteryInfo.NotCharging) {
+            else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
+                     state === BatteryInfo.NotCharging) {
                 chargingEntry.text = i18n.tr("Fully charged")
                 isCharging = true
             }
         }
-        onRemainingCapacityChanged: {
-            if(batteryInfo.batteryCount > 0)
-                chargingLevel.value = i18n.tr("%1 %").arg((batteryInfo.remainingCapacity(0)/batteryInfo.maximumCapacity(0)*100).toFixed(0))
-        }
-
         Component.onCompleted: {
             onChargingStateChanged(0, chargingState(0))
-            onRemainingCapacityChanged(0, remainingCapacity(0))
         }
     }
 
     UbuntuBatteryPanel {
         id: batteryBackend
     }
+
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+
+        property variant brightness: action("brightness")
+        property variant batteryLevel: action("battery-level")
+    }
+
+    Component.onCompleted: indicatorPower.start()
 
     Flickable {
         id: scrollWidget
@@ -109,7 +122,16 @@ ItemPage {
             ListItem.SingleValue {
                 id: chargingLevel
                 text: i18n.tr("Charge level")
-                value: i18n.tr("N/A")
+                value: {
+                    var chargeLevel = indicatorPower.batteryLevel.state
+
+                    if (chargeLevel === null)
+                        return i18n.tr("N/A")
+
+                    /* TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery */
+                    return i18n.tr("%1%".arg(chargeLevel))
+                }
+
                 showDivider: false
             }
 
@@ -175,6 +197,11 @@ ItemPage {
                         height: sliderId.height - units.gu(1)
                         name: "torch-off"
                         width: height
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: sliderId.value = 0.0
+                        }
                     }
                     Slider {
                         id: sliderId
@@ -190,9 +217,12 @@ ItemPage {
                             verticalCenter: parent.verticalCenter
                         }
                         height: parent.height - units.gu(2)
-                        minimumValue: 0
-                        maximumValue: 100
-                        value: 0.0 // TODO: get actual value
+                        minimumValue: 0.0
+                        maximumValue: 100.0
+                        enabled: indicatorPower.brightness.state != null
+                        value: enabled ? indicatorPower.brightness.state * 100 : 0.0
+
+                        onValueChanged: indicatorPower.brightness.updateState(value / 100.0);
                     }
                     Icon {
                         id: iconRight
@@ -201,6 +231,11 @@ ItemPage {
                         height: sliderId.height - units.gu(1)
                         name: "torch-on"
                         width: height
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: sliderId.value = 100.0
+                        }
                     }
             }
 
@@ -213,17 +248,19 @@ ItemPage {
                     if (batteryBackend.powerdRunning ) {
                         var timeout = Math.round(powerSettings.activityTimeout/60)
                         return (powerSettings.activityTimeout != 0) ?
-                                    i18n.tr("After %1 minute".arg(timeout),
-                                            "After %1 minutes".arg(timeout),
-                                            timeout) :
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
                                     i18n.tr("Never")
                     }
                     else {
                         var timeout = Math.round(powerSettings.idleDelay/60)
                         return (powerSettings.idleDelay != 0) ?
-                                    i18n.tr("After %1 minute".arg(timeout),
-                                            "After %1 minutes".arg(timeout),
-                                            timeout) :
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
                                     i18n.tr("Never")
                     }
                 }
@@ -231,33 +268,91 @@ ItemPage {
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SleepValues.qml"),
                                { title: text, lockOnSuspend: lockOnSuspend })
+                visible: showAllUI // TODO: re-enable once bug #1230345 is resolved
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
                 control: Switch {
-                    checked: batteryBackend.getWifiStatus()
-                    onCheckedChanged: batteryBackend.setWifiStatus(checked)
+                    id: wifiSwitch
+                    checked: batteryBackend.wifiEnabled
+                    onClicked: batteryBackend.wifiEnabled = checked
                 }
+                Component.onCompleted:
+                    clicked.connect(wifiSwitch.clicked)
+            }
+
+            Binding {
+                target: wifiSwitch
+                property: "checked"
+                value: batteryBackend.wifiEnabled
+            }
+
+            QDBusActionGroup {
+                id: bluetoothActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.bluetooth"
+                objectPath: "/com/canonical/indicator/bluetooth"
+
+                property bool visible: action("bluetooth-supported")
+                property variant enabled: action("bluetooth-enabled")
+
+                Component.onCompleted: start()
             }
 
             ListItem.Standard {
+                id: btListItem
                 text: i18n.tr("Bluetooth")
-                control: Switch {
-                    checked: true
-                    enabled: false
+                control: Loader {
+                    active: bluetoothActionGroup.enabled.state != null
+                    sourceComponent: Switch {
+                        id: btSwitch
+                        // Cannot use onCheckedChanged as this triggers a loop
+                        onClicked: bluetoothActionGroup.enabled.activate()
+                        checked: bluetoothActionGroup.enabled.state
+                    }
+
+                    // ListItem forwards the 'clicked' signal to its control.
+                    // It needs to be forwarded again to the Loader's sourceComponent
+                    signal clicked
+                    onClicked: item.clicked()
                 }
+                visible: bluetoothActionGroup.visible
+            }
+
+            QDBusActionGroup {
+                id: locationActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.location"
+                objectPath: "/com/canonical/indicator/location"
+
+                property variant enabled: action("gps-detection-enabled")
+
+                Component.onCompleted: start()
             }
 
             ListItem.Standard {
+                id: gpsListItem
                 text: i18n.tr("GPS")
-                control: Switch {
-                    checked: true
-                    enabled: false
+                control: Loader {
+                    active: locationActionGroup.enabled.state != null
+                    sourceComponent: Switch {
+                        id: gpsSwitch
+                        onClicked: locationActionGroup.enabled.activate()
+                        checked: locationActionGroup.enabled.state
+                    }
+
+                    // ListItem forwards the 'clicked' signal to its control.
+                    // It needs to be forwarded again to the Loader's sourceComponent
+                    signal clicked
+                    onClicked: item.clicked()
                 }
+                visible: showAllUI && // Hidden until the indicator works
+                         locationActionGroup.enabled.state !== undefined
             }
 
             ListItem.Caption {
                 text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
+                visible: gpsListItem.visible
             }
         }
     }

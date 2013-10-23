@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=System Settings
 Icon=system-settings
-Exec=system-settings
+Exec=system-settings %u
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -10,3 +10,4 @@ Keywords=Preferences;Settings;
 X-Ubuntu-Gettext-Domain=ubuntu-system-settings
 X-Ubuntu-Touch=true
 X-Ubuntu-StageHint=SideStage
+X-Ubuntu-Single-Instance=true

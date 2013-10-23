@@ -41,7 +41,9 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
 
         Column {
             anchors.left: parent.left
@@ -55,23 +57,31 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Ringtone")
-                value: Utilities.buildDisplayName(soundSettings.incomingCallSound)
+                value: Utilities.buildDisplayName(
+                           soundSettings.incomingCallSound)
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Ringtone"),
-                                          showStopButton: true, soundType: 0})
+                onClicked: pageStack.push(
+                               Qt.resolvedUrl("SoundsList.qml"),
+                               { title: i18n.tr("Ringtone"),
+                                 showStopButton: true,
+                                 soundType: 0,
+                                 soundsDir:
+                                   "/usr/share/sounds/ubuntu/ringtones/" })
             }
 
-            SettingsCheckEntry {
-                checkStatus: false
-                textEntry: i18n.tr("Vibrate when ringing")
-                enabled: false /* TODO: enable when there is a backend */
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Vibrate when ringing")
                 visible: showAllUI
             }
 
-            SettingsCheckEntry {
-                checkStatus: true
-                textEntry: i18n.tr("Vibrate in silent mode")
-                enabled: false /* TODO: enable when there is a backend */
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Vibrate in silent mode")
                 visible: showAllUI
             }
 
@@ -81,23 +91,30 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Message received")
-                value: Utilities.buildDisplayName(soundSettings.incomingMessageSound)
+                value:Utilities.buildDisplayName(
+                          soundSettings.incomingMessageSound)
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SoundsList.qml"), {title: i18n.tr("Message received"),
-                                          soundType: 1})
+                onClicked: pageStack.push(
+                               Qt.resolvedUrl("SoundsList.qml"),
+                               { title: i18n.tr("Message received"),
+                                 soundType: 1,
+                                 soundsDir:
+                                   "/usr/share/sounds/ubuntu/notifications/" })
             }
 
-            SettingsCheckEntry {
-                checkStatus: false
-                textEntry: i18n.tr("Keyboard sounds")
-                enabled: false /* TODO: enable when there is a backend */
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Keyboard sounds")
                 visible: showAllUI
             }
 
-            SettingsCheckEntry {
-                checkStatus: false
-                textEntry: i18n.tr("Lock sound")
-                enabled: false /* TODO: enable when there is a backend (lp: #1208418) */
+            ListItem.Standard {
+                control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Lock sound")
                 visible: showAllUI
             }
         }

@@ -28,7 +28,8 @@
 #include <QJsonObject>
 
 ClickModel::ClickModel(QObject *parent):
-    QAbstractTableModel(parent)
+    QAbstractTableModel(parent),
+    m_totalClickSize(0)
 {
     m_clickPackages = buildClickList();
 }
@@ -90,7 +91,9 @@ QList<ClickModel::Click> ClickModel::buildClickList()
         }
 
         newClick.installSize = val.value("installed-size",
-                                         "0").toString().toUInt();
+                                         "0").toString().toUInt()*1024;
+
+        m_totalClickSize += newClick.installSize;
 
         clickPackages.append(newClick);
     }
@@ -143,6 +146,11 @@ QVariant ClickModel::data(const QModelIndex &index, int role) const
         qWarning() << "Unknown role requested";
         return QVariant();
     }
+}
+
+quint64 ClickModel::getClickSize() const
+{
+    return m_totalClickSize;
 }
 
 ClickModel::~ClickModel()

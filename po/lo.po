@@ -1,0 +1,1173 @@
+# Lao translation for ubuntu-system-settings
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the ubuntu-system-settings package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-system-settings\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-10-07 12:02+0100\n"
+"PO-Revision-Date: 2013-10-04 07:00+0000\n"
+"Last-Translator: Anousak <anousak@gmail.com>\n"
+"Language-Team: Lao <lo@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2013-10-08 06:28+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
+
+#: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
+msgid "About this phone"
+msgstr "ກ່ຽວກັບໂທລະສັບນີ້"
+
+#: ../plugins/about/PageComponent.qml:76
+msgid "Serial"
+msgstr "ຊີເລຍ"
+
+#: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
+#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:130
+#: ../plugins/battery/PageComponent.qml:142
+#: ../plugins/cellular/PageComponent.qml:73
+msgid "N/A"
+msgstr "ບໍ່ມີຜົນບັງຄັບໃຊ້"
+
+#: ../plugins/about/PageComponent.qml:88
+msgid "Software:"
+msgstr "ຊອບເເວລ໌:"
+
+#: ../plugins/about/PageComponent.qml:92
+msgid "OS"
+msgstr "OS"
+
+#: ../plugins/about/PageComponent.qml:97
+msgid "Last updated"
+msgstr "ອັບເດດລ້າສຸດ"
+
+#: ../plugins/about/PageComponent.qml:98
+#: ../plugins/battery/PageComponent.qml:256
+#: ../plugins/battery/PageComponent.qml:265
+#: ../plugins/battery/SleepValues.qml:96
+#: ../plugins/system-update/Download.qml:53
+#: ../plugins/system-update/PageComponent.qml:347
+msgid "Never"
+msgstr "ບໍ່ເຄີຍ"
+
+#: ../plugins/about/PageComponent.qml:103
+msgid "Check for updates"
+msgstr "ກວດເພື່ອອັບເດດ"
+
+#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
+msgid "Storage"
+msgstr "ສະຖານທີ່ເກັບຮັກສາ"
+
+#: ../plugins/about/PageComponent.qml:118
+msgid "Legal:"
+msgstr "ກົດຫມາຍ:"
+
+#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
+msgid "Software licenses"
+msgstr "ໃບອະນຸຍາດຊອບແວລ໌"
+
+#: ../plugins/about/PageComponent.qml:128
+msgid "Regulatory info"
+msgstr "ຂໍ້ມູນກົດລະບຽບ"
+
+#: ../plugins/about/Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "ນໍາໃຊ້ໂດຍ ອູບັນຕູ"
+
+#: ../plugins/about/Storage.qml:88
+msgid "Movies"
+msgstr "ໜັງ"
+
+#: ../plugins/about/Storage.qml:89
+msgid "Audio"
+msgstr "ສຽງ"
+
+#: ../plugins/about/Storage.qml:90
+msgid "Pictures"
+msgstr "ຮູບພາບ"
+
+#: ../plugins/about/Storage.qml:91
+msgid "Other files"
+msgstr "ເເຟ້ມອື່ນໆ"
+
+#: ../plugins/about/Storage.qml:92
+msgid "Used by apps"
+msgstr "ນໍາໃຊ້ໂດຍ ໂປຣເເກຣມ"
+
+#: ../plugins/about/Storage.qml:134
+msgid "Total storage"
+msgstr "ເນື້ອທີ່ເກັບຮັກສາທັງຫມົດ"
+
+#: ../plugins/about/Storage.qml:145
+msgid "Free space"
+msgstr "ເນື້ອທີ່ວ່າງ"
+
+#: ../plugins/about/Storage.qml:163
+msgid "Installed apps"
+msgstr "ໂປຣເເກຣມຕິດຕັ້ງເເລ້ວ"
+
+#: ../plugins/about/Storage.qml:164
+msgid "By name"
+msgstr "ໂດຍຊື່"
+
+#: ../plugins/about/Storage.qml:164
+msgid "By size"
+msgstr "ໂດຍຂະຫນາດ"
+
+#: ../plugins/background/MainPage.qml:33 ../.build/settings.js:3
+msgid "Background"
+msgstr "ພື້ນ"
+
+#: ../plugins/background/MainPage.qml:71
+msgid "Welcome screen"
+msgstr "ຫນ້າຈໍຍິນດີຕ້ອນຮັບ"
+
+#: ../plugins/background/MainPage.qml:151
+msgid "Home screen"
+msgstr "ຫນ້າຈໍຫຼັກ"
+
+#: ../plugins/background/MainPage.qml:177
+msgid "Same background for both"
+msgstr "ພື້ນດຽວກັນສໍາລັບທັງສອງ"
+
+#: ../plugins/background/MainPage.qml:178
+msgid "Different background for each"
+msgstr "ພື້ນທີ່ແຕກຕ່າງກັນສໍາລັບແຕ່ລະອັນ"
+
+#: ../plugins/battery/PageComponent.qml:35 ../.build/settings.js:4
+msgid "Battery"
+msgstr "ເເບດ"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery/PageComponent.qml:47
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 ວິນາທີພ່ານໄປ"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery/PageComponent.qml:50
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 ວິນາທີພ່ານມາ"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery/PageComponent.qml:53
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 ຊົ່ວໂມງພ່ານມາ"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery/PageComponent.qml:56
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 ມື້ພ່ານມາ"
+
+#: ../plugins/battery/PageComponent.qml:76
+msgid "Charging now"
+msgstr "ປະຈຸບັນກໍາລັງສາກໄຟເເບດ"
+
+#: ../plugins/battery/PageComponent.qml:81
+msgid "Last full charge"
+msgstr "ສາກໄຟເເບດເຕັມຄັ້ງສຸດທ້າຍ"
+
+#: ../plugins/battery/PageComponent.qml:86
+msgid "Fully charged"
+msgstr "ສາກໄຟເເບດເຕັມ"
+
+#: ../plugins/battery/PageComponent.qml:125
+msgid "Charge level"
+msgstr "ລະດັບສາກໄຟເເບດ"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery/PageComponent.qml:133
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../plugins/battery/PageComponent.qml:186
+msgid "Ways to reduce battery use:"
+msgstr "ວິທີການທີ່ຈະຫຼຸດຜ່ອນການນໍາໃຊ້ໄຟເເບດ:"
+
+#: ../plugins/battery/PageComponent.qml:190
+msgid "Display brightness"
+msgstr "ສະເເດງຄວາມເເຈ້ງ"
+
+#: ../plugins/battery/PageComponent.qml:247
+#: ../plugins/security-privacy/PhoneLocking.qml:62
+msgid "Lock when idle"
+msgstr "ລ໋ອກໃນເວລາບໍ່ໃຊ້ງານ"
+
+#: ../plugins/battery/PageComponent.qml:247
+#: ../plugins/security-privacy/PhoneLocking.qml:63
+msgid "Sleep when idle"
+msgstr "ນອນໃນເວລາບໍ່ໃຊ້ງານ"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery/PageComponent.qml:253
+#: ../plugins/battery/PageComponent.qml:262
+#: ../plugins/battery/SleepValues.qml:77 ../plugins/battery/SleepValues.qml:81
+#: ../plugins/battery/SleepValues.qml:85 ../plugins/battery/SleepValues.qml:89
+#: ../plugins/battery/SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "ຫຼັງຈາກ %1 ນາທີ"
+
+#: ../plugins/battery/PageComponent.qml:275
+#: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../plugins/battery/PageComponent.qml:308
+#: ../plugins/bluetooth/PageComponent.qml:110
+#: ../plugins/bluetooth/PageComponent.qml:118 ../.build/settings.js:5
+msgid "Bluetooth"
+msgstr "ບຣູທຸດ໌"
+
+#: ../plugins/battery/PageComponent.qml:337
+msgid "GPS"
+msgstr "GPS"
+
+#: ../plugins/battery/PageComponent.qml:355
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "ການຊອກຄົ້ນຫາສະຖານທີ່ທີ່ຖືກຕ້ອງຮຽກຮ້ອງໃຫ້ GPS ແລະ/ຫຼື Wi-Fi"
+
+#: ../plugins/battery/SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "ລ໋ອກໂທລະສັບໃນເວລາບໍ່ໃດ້ໃຊ້ງານ:"
+
+#: ../plugins/battery/SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "ເອົາໂທລະສັບນອນໃນເວລາບໍ່ໃດ້ໃຊ້ງານ:"
+
+#: ../plugins/battery/SleepValues.qml:107
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+"ເວລາສັ້ນແມ່ນຮັບປະກັນກວ່າ. ໂທລະສັບຈະບໍ່ ລ໋ອກ ໃນລະຫວ່າງການໂທ ຫຼື ຫຼິນວີດີໂອ."
+
+#: ../plugins/battery/SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "ໂທລະສັບຈະບໍ່ນອນໃນລະຫວ່າງການໂທ ຫຼື  ຫຼິນວີດີໂອ."
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "ບຣູທູດຮ້ອງຂໍຈັບຄູ່"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "ກະລຸນາຢືນຢັນວ່າ PIN ສະແດງກ່ຽວກັບ '%1' ເເມ່ຖຶກກັນກັບອັນນີ້"
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:54
+#: ../plugins/language/DisplayLanguage.qml:95
+#: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/reset/EraseEverything.qml:36
+#: ../plugins/reset/ResetAllSettings.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
+#: ../plugins/security-privacy/LockSecurity.qml:310
+#: ../plugins/time-date/TimePicker.qml:173
+msgid "Cancel"
+msgstr "ຍົກເລີກ"
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "ຢືນຢັນ PIN"
+
+#. TRANSLATORS: %1 is the display name of the device that is connecting
+#: ../plugins/bluetooth/PageComponent.qml:70
+#, qt-format
+msgid "%1 (Connecting…)"
+msgstr "%1 (ກໍາລັງເຊີ່ມຕໍ່…)"
+
+#. TRANSLATORS: %1 is the display name of the device that is disconnecting
+#: ../plugins/bluetooth/PageComponent.qml:73
+#, qt-format
+msgid "%1 (Disconnecting…)"
+msgstr "%1 (ອອກຈາກການເຊີ່ມຕໍ່…)"
+
+#: ../plugins/bluetooth/PageComponent.qml:80
+msgid "Computer"
+msgstr "ຄອມພິວເຕີ"
+
+#: ../plugins/bluetooth/PageComponent.qml:81
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
+msgid "Phone"
+msgstr "ໂທລະສັບ"
+
+#: ../plugins/bluetooth/PageComponent.qml:82
+msgid "Modem"
+msgstr "ໂມເດັມ"
+
+#: ../plugins/bluetooth/PageComponent.qml:83 ../src/qml/MainWindow.qml:90
+msgid "Network"
+msgstr "ເຄືອຂ່າຍ"
+
+#: ../plugins/bluetooth/PageComponent.qml:84
+msgid "Headset"
+msgstr "ເຄື່ອງຫູຟັງ"
+
+#: ../plugins/bluetooth/PageComponent.qml:85
+msgid "Headphones"
+msgstr "ເຄື່ອງຫູຟັງ"
+
+#: ../plugins/bluetooth/PageComponent.qml:86
+msgid "Video"
+msgstr "ວີດີໂອ"
+
+#: ../plugins/bluetooth/PageComponent.qml:87
+msgid "Other Audio"
+msgstr "ສຽງອື່ນ"
+
+#: ../plugins/bluetooth/PageComponent.qml:88
+msgid "Joypad"
+msgstr "ຈອຍເເພດ"
+
+#: ../plugins/bluetooth/PageComponent.qml:89
+msgid "Keyboard"
+msgstr "ເເປ້ນພີມ"
+
+#: ../plugins/bluetooth/PageComponent.qml:90
+msgid "Tablet"
+msgstr "ເເທບເລດທ໌"
+
+#: ../plugins/bluetooth/PageComponent.qml:91
+msgid "Mouse"
+msgstr "ມ້າວຊ໌"
+
+#: ../plugins/bluetooth/PageComponent.qml:92
+msgid "Printer"
+msgstr "ເຄື່ອງພິມ"
+
+#: ../plugins/bluetooth/PageComponent.qml:93
+msgid "Camera"
+msgstr "ກ້ອງ"
+
+#: ../plugins/bluetooth/PageComponent.qml:94
+msgid "Other"
+msgstr "ອື່ນໆ"
+
+#: ../plugins/bluetooth/PageComponent.qml:100
+msgid "Excellent"
+msgstr "ດີເລີດ"
+
+#: ../plugins/bluetooth/PageComponent.qml:101
+msgid "Good"
+msgstr "ດີ"
+
+#: ../plugins/bluetooth/PageComponent.qml:102
+msgid "Fair"
+msgstr "ພໍໃຊ້ໃດ້"
+
+#: ../plugins/bluetooth/PageComponent.qml:103
+msgid "Poor"
+msgstr "ບໍ່ດີ"
+
+#: ../plugins/bluetooth/PageComponent.qml:104
+#: ../plugins/bluetooth/PageComponent.qml:193
+#: ../plugins/bluetooth/PageComponent.qml:201
+#: ../plugins/security-privacy/PhoneLocking.qml:40
+msgid "None"
+msgstr "ບໍ່ມີຫຍັງ"
+
+#: ../plugins/bluetooth/PageComponent.qml:130
+msgid "Connected headset:"
+msgstr "ເຊີ່ມເຄື່ອງຫູຟັງ"
+
+#: ../plugins/bluetooth/PageComponent.qml:158
+msgid "Connect a different headset:"
+msgstr "ເຊີ່ມເຄື່ອງຫູຟັງອື່ນ"
+
+#: ../plugins/bluetooth/PageComponent.qml:158
+msgid "Connect a headset:"
+msgstr "ເຊີ່ມເຄື່ອງຫູຟັງ"
+
+#: ../plugins/bluetooth/PageComponent.qml:184
+msgid "None detected"
+msgstr "ບໍ່ພໍ້ຫຍັງ"
+
+#: ../plugins/bluetooth/PageComponent.qml:200
+msgid "Name"
+msgstr "ຊື່"
+
+#: ../plugins/bluetooth/PageComponent.qml:204
+msgid "Type"
+msgstr "ປະເພດ"
+
+#: ../plugins/bluetooth/PageComponent.qml:208
+msgid "Signal Strength"
+msgstr "ຄວາມເຂັ້ມແຂງຂອງສັນຍານ"
+
+#: ../plugins/bluetooth/PageComponent.qml:213
+msgid "Disconnect"
+msgstr "ຖອນອອກ"
+
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "PIN ສະເພາະ '%1'"
+
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
+msgid "Pair"
+msgstr "ຄູ່"
+
+#: ../plugins/cellular/ChooseCarrier.qml:28
+#: ../plugins/cellular/PageComponent.qml:72
+msgid "Carrier"
+msgstr "ຜູ້ບໍລິການ"
+
+#: ../plugins/cellular/ChooseCarrier.qml:78
+msgid "Refresh"
+msgstr "ໂລດໜ້າຈໍ"
+
+#: ../plugins/cellular/ChooseCarrier.qml:95
+msgid "Searching"
+msgstr "ກໍລັງຊອກຫາ"
+
+#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
+msgid "Cellular"
+msgstr "ຜູ້ບໍລິການ"
+
+#: ../plugins/cellular/PageComponent.qml:66
+msgid "Choose carrier:"
+msgstr "ເລືອກຜູ້ໃຫ້ບໍລິການ:"
+
+#: ../plugins/cellular/PageComponent.qml:67
+#: ../plugins/time-date/ChooseTimeZone.qml:47
+#: ../plugins/time-date/PageComponent.qml:66
+msgid "Automatically"
+msgstr "ອັດຕະໂນມັດ"
+
+#: ../plugins/cellular/PageComponent.qml:67
+#: ../plugins/time-date/ChooseTimeZone.qml:47
+#: ../plugins/time-date/PageComponent.qml:66
+msgid "Manually"
+msgstr "ດ້ວຍມື"
+
+#: ../plugins/cellular/PageComponent.qml:101
+msgid "Cellular data"
+msgstr "ຜູ້ບໍລິການຂໍ້ມູນ"
+
+#: ../plugins/cellular/PageComponent.qml:109
+msgid "Data roaming"
+msgstr "ຂໍ້ມູນໂຣມມີ້ງ"
+
+#: ../plugins/cellular/PageComponent.qml:118
+msgid "Data usage statistics"
+msgstr "ສະຖິຕິການນໍາໃຊ້ຂໍ້ມູນ"
+
+#: ../plugins/language/DisplayLanguage.qml:33
+#: ../plugins/language/PageComponent.qml:55
+msgid "Display language"
+msgstr "ສະແດງພາສາ"
+
+#: ../plugins/language/DisplayLanguage.qml:115
+msgid "Confirm"
+msgstr "ຢືນຢັນ"
+
+#: ../plugins/language/KeyboardLayouts.qml:26
+#: ../plugins/language/PageComponent.qml:69
+msgid "Keyboard layouts"
+msgstr "ຮູບຮ່າງແປ້ນພິມ"
+
+#: ../plugins/language/KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "ຮູບເເບບປະຈຸບັນ"
+
+#: ../plugins/language/KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "ທຸກໆຮູບເເບບທີ່ມີ:"
+
+#: ../plugins/language/PageComponent.qml:31 ../.build/settings.js:10
+msgid "Language & Text"
+msgstr "ພາສາ ເເລະ ບົດຄວາມ"
+
+#: ../plugins/language/PageComponent.qml:85
+#: ../plugins/language/SpellChecking.qml:27
+#: ../plugins/language/SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "ການກວດສອບສະກົດ"
+
+#: ../plugins/language/PageComponent.qml:97
+msgid "Auto completion"
+msgstr "ການສໍາເລັດອັດຕະໂນມັດ"
+
+#: ../plugins/language/PageComponent.qml:109
+msgid "Predictive text"
+msgstr ""
+
+#: ../plugins/language/PageComponent.qml:125
+msgid "Auto capitalization"
+msgstr "ການປັບອັກສອນອັດຕະໂນມັດ"
+
+#: ../plugins/language/PageComponent.qml:137
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "ກົດ Shift ເພື່ອປັບອັກສອນຕົວທໍາອິດໃຫ້ໃຫຍ່ຂອງແຕ່ລະປະໂຫຍກ."
+
+#: ../plugins/language/PageComponent.qml:147
+msgid "Key press feedback"
+msgstr ""
+
+#: ../plugins/language/PageComponent.qml:159
+msgid "Vibrate or emit a sound whenever a key is pressed."
+msgstr ""
+
+#: ../plugins/language/SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "ປະຈຸບັນການສະກົດພາສາທັງຫມົດ:"
+
+#: ../plugins/language/SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "ພາສາທັງຫມົດມີ:"
+
+#: ../plugins/phone/CallForwarding.qml:27
+#: ../plugins/phone/CallForwarding.qml:60
+#: ../plugins/phone/PageComponent.qml:46
+msgid "Call forwarding"
+msgstr "ໂທສົ່ງຕໍ່"
+
+#: ../plugins/phone/CallForwarding.qml:74
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"ຢ້າຍໂທທຸກຄັ້ງທີ່ເຈົ້າບໍ່ຕອບ, ຫຼື ໂທລະສັບຂອງເຈົ້າບໍ່ວ່າງ, ປິດ, ຫຼື "
+"ອອກຈາກລະດັບຮັບສາຍ."
+
+#: ../plugins/phone/CallForwarding.qml:91
+msgid "Call forwarding status can’t be checked right now. Try again later."
+msgstr ""
+"ສະຖານະພາບຂອງໂທສົ່ງຕໍ່ບໍ່ສາມາດການກວດກາໃດ້ໃນປັດຈຸບັນ. "
+"ພະຍາຍາມອີກເທື່ອຫນຶ່ງຫຼັງຈາກນັ້ນ."
+
+#: ../plugins/phone/CallForwarding.qml:102
+msgid "Divert to"
+msgstr "ຫັນກັບເຖີງ"
+
+#: ../plugins/phone/CallForwarding.qml:113
+msgid "Contacts…"
+msgstr "ສາຍພົວພັນ..."
+
+#: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/time-date/TimePicker.qml:182
+msgid "Set"
+msgstr "ກໍານົດ"
+
+#: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
+#: ../plugins/phone/PageComponent.qml:52
+msgid "Call waiting"
+msgstr "ໂທລໍຖ້າ"
+
+#: ../plugins/phone/CallWaiting.qml:67
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"ໃຫ້ເຈົ້າຮັບສາຍ ຫຼື ເລີ່ມຕົ້ນມີການໂທໃຫມ່ໃນຂະນະທີ່ໂທກັບຄົນອື່ນ ແລະ "
+"ການສະຫຼັບລະຫວ່າງເຂົາເຈົ້າ"
+
+#: ../plugins/phone/PageComponent.qml:30
+msgid "SIM"
+msgstr "ຊີມ"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone/PageComponent.qml:61 ../plugins/phone/Services.qml:30
+#, qt-format
+msgid "%1 Services"
+msgstr "ບໍລິການ %1"
+
+#: ../plugins/phone/ServiceInfo.qml:35
+msgid "Call"
+msgstr "ໂທ"
+
+#: ../plugins/reset/EraseEverything.qml:29
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"ເອກະສານທັງຫມົດ, ເກມທ້ອນ, ປັບຄ່າ, ແລະ "
+"ລາຍການອື່ນໆຈະໄດ້ຮັບການລຶບຢ່າງຖາວອນຈາກໂທລະສັບທີ່ນີ້."
+
+#: ../plugins/reset/EraseEverything.qml:31
+msgid "Erase & reset everything"
+msgstr "ລຶບ ແລະ ປັບທຸກສິ່ງທຸກຢ່າງ"
+
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
+msgid "Reset phone"
+msgstr "ປັບໂທລະສັບ"
+
+#: ../plugins/reset/PageComponent.qml:62
+msgid "Reset launcher & home screen…"
+msgstr "ປັບຕົວເລີ່ມ ແລະ ຈໍຫຼັກ ..."
+
+#: ../plugins/reset/PageComponent.qml:75
+msgid "Reset all system settings…"
+msgstr "ປັບທຸກສິ່ງທຸກຢ່າງຂອງລະບົບຕັ້ງຄ່າ"
+
+#: ../plugins/reset/PageComponent.qml:88
+msgid "Erase & reset everything…"
+msgstr "ລຶບ ເເລະ ປັບທຸກສິ່ງທຸກຢ່າງ"
+
+#: ../plugins/reset/ResetAllSettings.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+"ເນື້ອໃນ ແລະ ຮູບຮ່າງຂອງຕົວເລີ່ມ, "
+"ແລະການກັ່ນຕອງໃນຫນ້າຈໍຫຼັກຈະໄດ້ຮັບການກັບຄືນໄປຕັ້ງຕົ້ນສະບັບຂອງເຂົາເຈົ້າ."
+
+#: ../plugins/reset/ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "ປັບທຸກລະບົບຕັ້ງຂ່າ"
+
+#: ../plugins/reset/ResetLauncherHome.qml:32
+msgid "Reset launcher & home screen"
+msgstr "ປັບຕົວເລີ່ມແລະ ຈໍ່ຫຼັກ"
+
+#: ../plugins/security-privacy/Dash.qml:29
+#: ../plugins/security-privacy/PageComponent.qml:117
+msgid "Dash search"
+msgstr "ເເດດຊ໌ຊອກຫາ"
+
+#: ../plugins/security-privacy/Dash.qml:49
+msgid "Return results from:"
+msgstr "ຜົນ​ໄດ້​ຮັບ​ຈາກ​:..."
+
+#: ../plugins/security-privacy/Dash.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:52
+#: ../plugins/security-privacy/PageComponent.qml:120
+msgid "Phone only"
+msgstr "ພຽງແຕ່ໂທລະສັບ"
+
+#: ../plugins/security-privacy/Dash.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:119
+msgid "Phone and Internet"
+msgstr "ໂທລະສັບ ເເລະ ອິນເຕີເນດ໌"
+
+#: ../plugins/security-privacy/Location.qml:30
+msgid "Location"
+msgstr "ສະຖານທີ່"
+
+#: ../plugins/security-privacy/Location.qml:48
+msgid "Location detection"
+msgstr "ພົບສະຖານທີ່"
+
+#: ../plugins/security-privacy/Location.qml:70
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+"ນໍາໃຊ້ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ. ໃນເວລາປິດ, GPS ປິດນໍາຊ່ວຍປະຢັດໄຟ."
+
+#: ../plugins/security-privacy/Location.qml:72
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"ນໍາໃຊ້ Wi-Fi ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ. "
+"ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
+
+#: ../plugins/security-privacy/Location.qml:74
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+"ນໍາໃຊ້ Wi-Fi (ປະຈຸບັນປິດ) ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ.  "
+"ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
+
+#: ../plugins/security-privacy/Location.qml:76
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+"ນໍາໃຊ້ Wi-Fi, ຫຼັກເຄື່ອຂ່ຍ ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ.  "
+"ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
+
+#: ../plugins/security-privacy/Location.qml:78
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+"ນໍາໃຊ້ Wi-Fi, ຫຼັກເຄື່ອຂ່າຍ (ປະຈຸບັນບໍ່ໃດ້ເຊີ່ມກັບສັນຍານ) ແລະ GPS "
+"ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ.  ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
+
+#: ../plugins/security-privacy/Location.qml:80
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+"ນໍາໃຊ້ Wi-Fi (ປະຈຸບັນປິດ), ຫຼັກເຄື່ອຂ່າຍ ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ. "
+" ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
+
+#: ../plugins/security-privacy/Location.qml:82
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"ນໍາໃຊ້ Wi-Fi (ປະຈຸບັນປິດ), ຫຼັກເຄື່ອຂ່າຍ ຫຼັກເຄື່ອຂ່າຍ "
+"(ປະຈຸບັນບໍ່ໃດ້ເຊີ່ມກັບສັນຍານ)ແລະ GPS ເພື່ອກວດຫາສະຖານທີ່ຂອງເຈົ້າ.  "
+"ປິດເຄື່ອງກວດຫາເພື່ອຊ່ວຍປະຢັດໄຟ."
+
+#: ../plugins/security-privacy/Location.qml:89
+msgid "Allow access to location:"
+msgstr "ອານຸຍາດເຂົ້າເຖີງສະຖານທີ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:30
+#: ../plugins/security-privacy/PhoneLocking.qml:44
+msgid "Lock security"
+msgstr "ຄວາມປອດໄຟລ໋ອກ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:78
+msgid "Change passcode"
+msgstr "ປ່ຽນລະຫັດພ່ານ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:80
+msgid "Change passphrase"
+msgstr "ປ່ຽນຄໍ່ສັບລະຫັດພ່ານ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:87
+msgid "Switch to swipe"
+msgstr "ສະໄວ້ເພື່ອປ່ຽນ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:89
+msgid "Switch to passcode"
+msgstr "ປ່ຽນໄປຫາສະຫັດ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:91
+msgid "Switch to passphrase"
+msgstr "ປ່ຽນໄປຫາຄໍາສັບລະຫັດ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:100
+msgid "Existing passcode"
+msgstr "ຫາສະຫັດມີເເລ້ວ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:102
+msgid "Existing passphrase"
+msgstr "ຄໍາສັບຫາສະຫັດມີເເລ້ວ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:150
+msgid "Incorrect passcode. Try again."
+msgstr "ສະຫັດບໍ່ຖືກຕ້ງ. ລອງອີກເທື່ອ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:153
+msgid "Incorrect passphrase. Try again."
+msgstr "ຄໍາສັບສະຫັດບໍ່ຖືກຕ້ງ. ລອງອີກເທື່ອ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:166
+msgid "Choose passcode"
+msgstr "ເລືອກລະຫັດ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:168
+msgid "Choose passphrase"
+msgstr "ເລືອກຄໍາສັບລະຫັດ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:212
+msgid "Confirm passcode"
+msgstr "ຢັ້ງຢືນລະຫັດ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:214
+msgid "Confirm passphrase"
+msgstr "ຢັ້ງຢືນຄໍາສັບລະຫັດ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:256
+msgid "Those passcodes don't match. Try again."
+msgstr "ລະຫັດເລົ່ານັ້ນເເມ່ນບໍາຖຶກກັນ. ລອງອີກເທື່ອ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:259
+msgid "Those passphrases don't match. Try again."
+msgstr "ຄໍາສັບລະຫັດເລົ່ານັ້ນເເມ່ນບໍາຖຶກກັນ. ລອງອີກເທື່ອ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:273
+msgid "Unset"
+msgstr "ລົບລ້າງ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:274
+msgid "Continue"
+msgstr "ຕໍ່ໄປ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:326
+msgid "Unlock the phone using:"
+msgstr "ປົດລ໋ອກໂລະສັບນໍາໃຊ້:"
+
+#: ../plugins/security-privacy/LockSecurity.qml:330
+msgid "Swipe (no security)"
+msgstr "ສະໄວ້ (ບໍ່ມີປ້ອງກັນ)"
+
+#: ../plugins/security-privacy/LockSecurity.qml:331
+msgid "4-digit passcode"
+msgstr "ສະຫັດ 4-ຕົວ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:332
+#: ../plugins/security-privacy/PhoneLocking.qml:42
+msgid "Passphrase"
+msgstr "ຄໍາສັບລະຫັດ"
+
+#: ../plugins/security-privacy/LockSecurity.qml:333
+msgid "Swipe (no security)… "
+msgstr "ສະໄວ້ (ບໍ່ມີປ້ອງກັນ)... "
+
+#: ../plugins/security-privacy/LockSecurity.qml:334
+msgid "4-digit passcode…"
+msgstr "ສະຫັດ 4-ຕົວ...."
+
+#: ../plugins/security-privacy/LockSecurity.qml:335
+msgid "Passphrase…"
+msgstr "ຄໍາສັບສະຫັດພານ..."
+
+#: ../plugins/security-privacy/LockSecurity.qml:376
+msgid "Change passcode…"
+msgstr "ປ່ຽນສະຫັດພານ..."
+
+#: ../plugins/security-privacy/LockSecurity.qml:377
+msgid "Change passphrase…"
+msgstr "ປ່ຽນຄໍາສັບສະຫັດພານ..."
+
+#: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
+msgid "Security & Privacy"
+msgstr "ຄວາມປອດໄຟ ເເລະ ສ່ວນຕົວ"
+
+#: ../plugins/security-privacy/PageComponent.qml:67
+msgid "Security:"
+msgstr "ຄວາມປອດໄຟ:"
+
+#: ../plugins/security-privacy/PageComponent.qml:70
+#: ../plugins/security-privacy/PhoneLocking.qml:29
+msgid "Phone locking"
+msgstr "ການລອກໂທລະສັບ"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy/PageComponent.qml:72
+#: ../plugins/security-privacy/PhoneLocking.qml:65
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 ນາທີ"
+
+#: ../plugins/security-privacy/PageComponent.qml:80
+msgid "SIM PIN"
+msgstr "ຊີມ PIN"
+
+#: ../plugins/security-privacy/PageComponent.qml:86
+msgid "Privacy:"
+msgstr "ສ່ວນຕົວ:"
+
+#: ../plugins/security-privacy/PageComponent.qml:89
+msgid "Stats on welcome screen"
+msgstr "ສະຖິຕິ"
+
+#: ../plugins/security-privacy/PageComponent.qml:102
+msgid "Messages on welcome screen"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:135
+msgid "Location access"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:143
+msgid "Other app access"
+msgstr ""
+
+#: ../plugins/security-privacy/PageComponent.qml:148
+msgid "Diagnostics"
+msgstr ""
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy/PageComponent.qml:153
+msgid "Sent"
+msgstr ""
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy/PageComponent.qml:156
+msgid "Not sent"
+msgstr ""
+
+#: ../plugins/security-privacy/PhoneLocking.qml:41
+msgid "Passcode"
+msgstr ""
+
+#: ../plugins/security-privacy/PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
+msgid "Sound"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:53
+msgid "Phone calls:"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
+msgid "Ringtone"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:68
+msgid "Vibrate when ringing"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:76
+msgid "Vibrate in silent mode"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:81
+msgid "Other sounds:"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
+msgid "Message received"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:96
+msgid "Keyboard sounds"
+msgstr ""
+
+#: ../plugins/sound/PageComponent.qml:104
+msgid "Lock sound"
+msgstr ""
+
+#: ../plugins/sound/SilentModeWarning.qml:30
+msgid "The phone is in Silent Mode."
+msgstr ""
+
+#: ../plugins/sound/SoundsList.qml:59
+msgid "Stop playing"
+msgstr ""
+
+#: ../plugins/system-update/Download.qml:29
+#: ../plugins/system-update/PageComponent.qml:344
+msgid "Auto download"
+msgstr ""
+
+#: ../plugins/system-update/Download.qml:34
+msgid "Download future updates automatically:"
+msgstr ""
+
+#: ../plugins/system-update/Download.qml:54
+msgid "When on wi-fi"
+msgstr ""
+
+#: ../plugins/system-update/Download.qml:55
+msgid "On any data connection"
+msgstr ""
+
+#: ../plugins/system-update/Download.qml:56
+msgid "Data charges may apply."
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
+msgid "Updates"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:46
+msgid "Checking for updates…"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:83
+msgid "Apply update failed:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:93
+msgid "Pause failed:"
+msgstr ""
+
+#. TRANSLATORS: %1 is the size of the update in GB
+#: ../plugins/system-update/PageComponent.qml:108
+#, qt-format
+msgid "%1 GB"
+msgstr ""
+
+#. TRANSLATORS: %1 is the size of the update in MB
+#: ../plugins/system-update/PageComponent.qml:111
+#, qt-format
+msgid "%1 MB"
+msgstr ""
+
+#. TRANSLATORS: %1 is the date when the device was last updated
+#: ../plugins/system-update/PageComponent.qml:120
+msgid "No software update available"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:120
+#, qt-format
+msgid "Last updated %1"
+msgstr ""
+
+#. TRANSLATORS: %1 is the number of seconds remaining
+#: ../plugins/system-update/PageComponent.qml:133
+#, qt-format
+msgid "About %1 second remaining"
+msgid_plural "About %1 seconds remaining"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/system-update/PageComponent.qml:135
+msgid "No estimate for the download"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:141
+msgid "Paused"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:150
+msgid "Download failed:"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:205
+#: ../plugins/system-update/PageComponent.qml:322
+msgid "Retry"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:235
+msgid "Ubuntu Phone"
+msgstr ""
+
+#. TRANSLATORS: %1 is the version of the update
+#: ../plugins/system-update/PageComponent.qml:248
+#, qt-format
+msgid "Version %1"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:292
+msgid "Pause downloading"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:299
+msgid "Resume downloading"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:315
+msgid "Download"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:329
+msgid "Install & Restart"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:349
+msgid "On wi-fi"
+msgstr ""
+
+#: ../plugins/system-update/PageComponent.qml:351
+msgid "Always"
+msgstr ""
+
+#: ../plugins/time-date/ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr ""
+
+#: ../plugins/time-date/ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr ""
+
+#: ../plugins/time-date/ChooseTimeZone.qml:113
+msgid "Enter your current location."
+msgstr ""
+
+#: ../plugins/time-date/ChooseTimeZone.qml:113
+msgid "No matching place"
+msgstr ""
+
+#: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
+msgid "Time & Date"
+msgstr ""
+
+#: ../plugins/time-date/PageComponent.qml:52
+msgid "Time zone:"
+msgstr ""
+
+#: ../plugins/time-date/PageComponent.qml:65
+msgid "Set the time and date:"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:26
+msgid "Set time & date"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:68
+msgid "Time"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:81
+msgid "Hour"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:95
+msgid "Minute"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:109
+msgid "Second"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:118
+msgid "Date"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:130
+msgid "Day"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:144
+msgid "Month"
+msgstr ""
+
+#: ../plugins/time-date/TimePicker.qml:162
+msgid "Year"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
+msgid "System Settings"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:95
+msgid "Personal"
+msgstr ""
+
+#: ../src/qml/MainWindow.qml:100
+msgid "System"
+msgstr ""
+
+#: ../.build/settings.js:2
+msgid "Accessibility"
+msgstr ""
+
+#: ../.build/settings.js:6
+msgid "Brightness"
+msgstr ""
+
+#: ../.build/settings.js:8
+msgid "Example"
+msgstr ""
+
+#: ../.build/settings.js:9
+msgid "Flight mode"
+msgstr ""
+
+#: ../.build/settings.js:11
+msgid "Orientation lock"
+msgstr ""

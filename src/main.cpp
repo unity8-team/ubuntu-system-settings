@@ -21,6 +21,7 @@
 #include "debug.h"
 #include "i18n.h"
 #include "plugin-manager.h"
+#include "utils.h"
 
 #include <QGuiApplication>
 #include <QProcessEnvironment>
@@ -34,6 +35,27 @@ using namespace SystemSettings;
 int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
+
+    /* The testability driver is only loaded by QApplication but not by
+     * QGuiApplication.  However, QApplication depends on QWidget which would
+     * add some unneeded overhead => Let's load the testability driver on our
+     * own.
+     */
+    if (app.arguments().contains(QStringLiteral("-testability"))) {
+        QLibrary testLib(QStringLiteral("qttestability"));
+        if (testLib.load()) {
+            typedef void (*TasInitialize)(void);
+            TasInitialize initFunction =
+                (TasInitialize)testLib.resolve("qt_testability_init");
+            if (initFunction) {
+                initFunction();
+            } else {
+                qCritical("Library qttestability resolve failed!");
+            }
+        } else {
+            qCritical("Library qttestability load failed!");
+        }
+    }
 
     /* read environment variables */
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
@@ -54,17 +76,7 @@ int main(int argc, char **argv)
      */
     QString defaultPlugin;
     QVariantMap pluginOptions;
-    QStringList arguments = app.arguments();
-    for (int i = 1; i < arguments.count(); i++) {
-        const QString &argument = arguments.at(i);
-        if (!argument.startsWith('-')) {
-            defaultPlugin = argument;
-        } else if (argument == "--option" && i + 1 < arguments.count()) {
-            QStringList option = arguments.at(++i).split("=");
-            // If no value is given, insert an empty string
-            pluginOptions.insert(option.at(0), option.value(1, ""));
-        }
-    }
+    parsePluginOptions(app.arguments(), defaultPlugin, pluginOptions);
 
     QQuickView view;
     QObject::connect(view.engine(), SIGNAL(quit()), &app, SLOT(quit()),

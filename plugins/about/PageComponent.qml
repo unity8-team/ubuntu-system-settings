@@ -24,6 +24,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
+import Ubuntu.SystemSettings.Update 1.0
 
 ItemPage {
     id: root
@@ -37,6 +38,10 @@ ItemPage {
 
     DeviceInfo {
         id: deviceInfos
+    }
+
+    UbuntuUpdatePanel {
+        id: updateBackend
     }
 
     Flickable {
@@ -90,7 +95,8 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("OS")
-                value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os)
+                value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
+                       (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
             }
 
             ListItem.SingleValue {

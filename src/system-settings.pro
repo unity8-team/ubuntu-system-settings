@@ -25,7 +25,8 @@ HEADERS = \
     i18n.h \
     item-model.h \
     plugin-manager.h \
-    plugin.h
+    plugin.h \
+    utils.h
 
 SOURCES = \
     debug.cpp \
@@ -33,7 +34,8 @@ SOURCES = \
     item-model.cpp \
     main.cpp \
     plugin-manager.cpp \
-    plugin.cpp
+    plugin.cpp \
+    utils.cpp
 
 QML_SOURCES = \
     qml/CategoryGrid.qml \

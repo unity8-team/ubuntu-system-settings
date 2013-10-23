@@ -29,7 +29,6 @@ ItemPage {
     id: root
 
     title: i18n.tr("Language & Text")
-    flickable: scrollWidget
 
     UbuntuLanguagePlugin {
         id: plugin
@@ -41,11 +40,24 @@ ItemPage {
         DisplayLanguage {}
     }
 
+    Component {
+        id: keyboardLayouts
+
+        KeyboardLayouts {}
+    }
+
+    Component {
+        id: spellChecking
+
+        SpellChecking {}
+    }
+
     Flickable {
-        id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: contentHeight > root.height ?
+                        Flickable.DragAndOvershootBounds :
+                        Flickable.StopAtBounds
 
         Column {
             anchors.fill: parent
@@ -53,69 +65,110 @@ ItemPage {
             ListItem.SingleValue {
                 icon: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
                 text: i18n.tr("Display language")
-                value: plugin.languages[plugin.currentLanguage]
+                value: plugin.languageNames[plugin.currentLanguage]
                 progression: true
+
                 onClicked: PopupUtils.open(displayLanguage)
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.SingleValue {
+                visible: showAllUI
+
                 text: i18n.tr("Keyboard layouts")
-                /* TODO: Get number of keyboard layouts */
-                value: "1"
+                value: plugin.keyboardLayoutsModel.subset.length == 1 ?
+                       plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
+                       plugin.keyboardLayoutsModel.subset.length
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
+
+                onClicked: pageStack.push(keyboardLayouts)
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.SingleValue {
+                visible: showAllUI
+
                 text: i18n.tr("Spell checking")
-                /* TODO: Get spell checking setting */
-                value: "UK English"
+                value: plugin.spellCheckingModel.subset.length == 1 ?
+                       plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]][0] :
+                       plugin.spellCheckingModel.subset.length
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SpellChecking.qml"))
+
+                onClicked: pageStack.push(spellChecking)
             }
 
             ListItem.Standard {
-                text: i18n.tr("Auto correction")
-                control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
-                }
-            }
+                visible: showAllUI
 
-            ListItem.Standard {
                 text: i18n.tr("Auto completion")
+
                 control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
+                    checked: plugin.autoCompletion
+
+                    onClicked: plugin.autoCompletion = checked
                 }
             }
 
-            ListItem.Divider {}
+            ListItem.Standard {
+                visible: showAllUI
+
+                text: i18n.tr("Predictive text")
+
+                control: Switch {
+                    checked: plugin.predictiveText
+
+                    onClicked: plugin.predictiveText = checked
+                }
+            }
+
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.Standard {
+                visible: showAllUI
+
                 text: i18n.tr("Auto capitalization")
+
                 control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
+                    checked: plugin.autoCapitalization
+
+                    onClicked: plugin.autoCapitalization = checked
                 }
             }
 
             ListItem.Caption {
+                visible: showAllUI
+
                 text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
             }
 
-            ListItem.Divider {}
+            ListItem.Divider {
+                visible: showAllUI
+            }
 
             ListItem.Standard {
-                text: i18n.tr("Auto punctuation")
+                visible: showAllUI
+
+                text: i18n.tr("Key press feedback")
+
                 control: Switch {
-                    enabled: false /* TODO: enable when there is a backend */
+                    checked: plugin.keyPressFeedback
+
+                    onClicked: plugin.keyPressFeedback = checked
                 }
             }
 
             ListItem.Caption {
-                text: i18n.tr("Adds a period, and any missing quotes or brackets, when you tap Space twice.")
+                visible: showAllUI
+
+                text: i18n.tr("Vibrate or emit a sound whenever a key is pressed.")
             }
         }
     }
