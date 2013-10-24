@@ -15,7 +15,7 @@ add_library(UbuntuLanguagePlugin MODULE
  keyboard-layout.h language-plugin.h plugin.h subset-model.h
  ${QML_SOURCES})
 qt5_use_modules(UbuntuLanguagePlugin Qml Quick DBus XmlPatterns)
-target_link_libraries(UbuntuLanguagePlugin ${GLIB_LDFLAGS} ${ACCOUNTSSERVICE_LDFLAGS})
+target_link_libraries(UbuntuLanguagePlugin ${GLIB_LDFLAGS} ${GIO_LDFLAGS} ${ACCOUNTSSERVICE_LDFLAGS})
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/LanguagePlugin)
 install(TARGETS UbuntuLanguagePlugin DESTINATION ${PLUG_DIR})
