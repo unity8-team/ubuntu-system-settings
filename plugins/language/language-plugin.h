@@ -130,11 +130,11 @@ private:
     mutable QList<QLocale> *m_languageLocales;
     mutable QStringList *m_languageNames;
     mutable QStringList *m_languageCodes;
-    mutable QHash<QString, unsigned int> *m_nameIndices;
-    mutable QHash<QString, unsigned int> *m_codeIndices;
+    mutable QHash<QString, unsigned int> *m_indicesByBcp47Name;
+    mutable QHash<QString, unsigned int> *m_indicesByLocaleName;
     const QList<QLocale> &languageLocales() const;
-    const QHash<QString, unsigned int> &nameIndices() const;
-    const QHash<QString, unsigned int> &codeIndices() const;
+    int indexForLocale(const QLocale &locale) const;
+    int indexForLanguage(const QString &language) const;
 
     mutable int m_currentLanguage;
     int m_nextCurrentLanguage;

@@ -37,8 +37,8 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     m_languageLocales(NULL),
     m_languageNames(NULL),
     m_languageCodes(NULL),
-    m_nameIndices(NULL),
-    m_codeIndices(NULL),
+    m_indicesByBcp47Name(NULL),
+    m_indicesByLocaleName(NULL),
     m_currentLanguage(-1),
     m_nextCurrentLanguage(-1),
     m_manager(NULL),
@@ -55,8 +55,8 @@ LanguagePlugin::~LanguagePlugin()
     delete m_languageLocales;
     delete m_languageNames;
     delete m_languageCodes;
-    delete m_nameIndices;
-    delete m_codeIndices;
+    delete m_indicesByBcp47Name;
+    delete m_indicesByLocaleName;
 
     if (m_manager != NULL) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
@@ -111,20 +111,17 @@ LanguagePlugin::currentLanguage() const
 
                     if (user != NULL && act_user_is_loaded(user)) {
                         const char *language(act_user_get_language(user));
-                        QHash<QString, unsigned int>::const_iterator i(codeIndices().find(language));
+                        m_currentLanguage = indexForLanguage(language);
 
-                        if (i == codeIndices().end()) {
+                        if (m_currentLanguage < 0) {
                             QLocale locale(language);
-                            i = nameIndices().find(locale.nativeLanguageName().trimmed());
+                            m_currentLanguage = indexForLocale(locale);
 
-                            if (i == nameIndices().end()) {
+                            if (m_currentLanguage < 0) {
                                 locale = QLocale(locale.language());
-                                i = nameIndices().find(locale.nativeLanguageName().trimmed());
+                                m_currentLanguage = indexForLocale(locale);
                             }
                         }
-
-                        if (i != codeIndices().end() && i != nameIndices().end())
-                            m_currentLanguage = *i;
                     }
                 }
             }
@@ -133,15 +130,12 @@ LanguagePlugin::currentLanguage() const
 
     if (m_currentLanguage < 0) {
         QLocale locale(QLocale::system());
-        QHash<QString, unsigned int>::const_iterator i(codeIndices().find(locale.name().trimmed()));
+        m_currentLanguage = indexForLocale(locale);
 
-        if (i == codeIndices().end()) {
+        if (m_currentLanguage < 0) {
             locale = QLocale(locale.language());
-            i = codeIndices().find(locale.name().trimmed());
+            m_currentLanguage = indexForLocale(locale);
         }
-
-        if (i != codeIndices().end())
-            m_currentLanguage = *i;
     }
 
     return m_currentLanguage;
@@ -417,8 +411,13 @@ static bool
 compareLocales(const QLocale &locale0,
                const QLocale &locale1)
 {
-    QString name0(locale0.nativeLanguageName().trimmed().toCaseFolded());
-    QString name1(locale1.nativeLanguageName().trimmed().toCaseFolded());
+    QString name0(locale0.nativeLanguageName().toCaseFolded());
+    QString name1(locale1.nativeLanguageName().toCaseFolded());
+
+    if (name0 == name1) {
+        name0 = locale0.nativeCountryName().toCaseFolded();
+        name1 = locale1.nativeCountryName().toCaseFolded();
+    }
 
     return name0 < name1;
 }
@@ -429,14 +428,14 @@ LanguagePlugin::languageLocales() const
     if (m_languageLocales == NULL) {
         delete m_languageNames;
         delete m_languageCodes;
-        delete m_nameIndices;
-        delete m_codeIndices;
+        delete m_indicesByBcp47Name;
+        delete m_indicesByLocaleName;
 
         m_languageLocales = new QList<QLocale>;
         m_languageNames = new QStringList;
         m_languageCodes = new QStringList;
-        m_nameIndices = new QHash<QString, unsigned int>;
-        m_codeIndices = new QHash<QString, unsigned int>;
+        m_indicesByBcp47Name = new QHash<QString, unsigned int>;
+        m_indicesByLocaleName = new QHash<QString, unsigned int>;
 
         QProcess localeProcess;
         localeProcess.start("locale", QStringList("-a"), QIODevice::ReadOnly);
@@ -444,57 +443,55 @@ LanguagePlugin::languageLocales() const
 
         QString localeOutput(localeProcess.readAllStandardOutput());
         QStringList localeNames(localeOutput.split(QRegExp("\\s+")));
-        QHash<QString, QString> nameCodes;
+        QHash<QString, QString> localeNamesByBcp47Name;
+        QHash<QString, unsigned int> countsByLanguage;
 
         for (QStringList::const_iterator i(localeNames.begin()); i != localeNames.end(); ++i) {
-            QString localeName(i->left(i->indexOf('.')).trimmed());
-            QLocale locale(localeName);
-            QString languageName(locale.nativeLanguageName().trimmed().toCaseFolded());
+            QLocale locale(i->left(i->indexOf('.')));
+            QString bcp47Name(locale.bcp47Name());
+            QString language(locale.nativeLanguageName());
 
-            if (!languageName.isEmpty()) {
-                QLocale genericLocale(locale.language());
-                QString genericName(genericLocale.nativeLanguageName().trimmed().toCaseFolded());
-
-                if (genericName == languageName) {
-                    if (!nameCodes.contains(genericName)) {
-                        *m_languageLocales += genericLocale;
-                        nameCodes.insert(genericName, i->trimmed());
-                    }
-                } else {
-                    if (!nameCodes.contains(languageName)) {
-                        *m_languageLocales += locale;
-                        nameCodes.insert(languageName, i->trimmed());
-                    }
-                }
+            if (!language.isEmpty() && !localeNamesByBcp47Name.contains(bcp47Name)) {
+                *m_languageLocales += locale;
+                localeNamesByBcp47Name[bcp47Name] = *i;
+                countsByLanguage[language]++;
             }
         }
 
         qSort(m_languageLocales->begin(), m_languageLocales->end(), compareLocales);
 
         for (int i(0); i < m_languageLocales->length(); i++) {
-            *m_languageNames += (*m_languageLocales)[i].nativeLanguageName().trimmed();
-            *m_languageCodes += nameCodes[(*m_languageNames)[i].toCaseFolded()];
-            (*m_nameIndices)[(*m_languageNames)[i]] = i;
-            QString languageCode((*m_languageCodes)[i]);
-            (*m_codeIndices)[languageCode.left(languageCode.indexOf('.'))] = i;
+            const QLocale &locale((*m_languageLocales)[i]);
+            QString bcp47Name(locale.bcp47Name());
+            QString language(locale.nativeLanguageName());
+            unsigned int count(countsByLanguage[language]);
+
+            if (count > 1)
+                *m_languageNames += QString("%1 - %2").arg(language).arg(locale.nativeCountryName());
+            else
+                *m_languageNames += language;
+
+            *m_languageCodes += localeNamesByBcp47Name[bcp47Name];
+            (*m_indicesByBcp47Name)[bcp47Name] = i;
+            (*m_indicesByLocaleName)[localeNamesByBcp47Name[bcp47Name]] = i;
         }
     }
 
     return *m_languageLocales;
 }
 
-const QHash<QString, unsigned int> &
-LanguagePlugin::nameIndices() const
+int
+LanguagePlugin::indexForLocale(const QLocale &locale) const
 {
     languageLocales();
-    return *m_nameIndices;
+    return m_indicesByBcp47Name->value(locale.bcp47Name(), -1);
 }
 
-const QHash<QString, unsigned int> &
-LanguagePlugin::codeIndices() const
+int
+LanguagePlugin::indexForLanguage(const QString &language) const
 {
     languageLocales();
-    return *m_codeIndices;
+    return m_indicesByLocaleName->value(language, -1);
 }
 
 GSettings *
@@ -510,14 +507,20 @@ static bool
 compareLayouts(const KeyboardLayout *layout0,
                const KeyboardLayout *layout1)
 {
-    const QString &displayName0(layout0->displayName());
-    const QString &displayName1(layout1->displayName());
-    const QString &language0(layout0->language());
-    const QString &language1(layout1->language());
-    const QString &name0(layout0->name());
-    const QString &name1(layout1->name());
+    QString name0(layout0->displayName());
+    QString name1(layout1->displayName());
 
-    return displayName0 < displayName1 || (displayName0 == displayName1 && (language0 < language1 || (language0 == language1 && name0 < name1)));
+    if (name0 == name1) {
+        name0 = layout0->language();
+        name1 = layout1->language();
+
+        if (name0 == name1) {
+            name0 = layout0->name();
+            name1 = layout1->name();
+        }
+    }
+
+    return name0 < name1;
 }
 
 const QList<KeyboardLayout *> &
