@@ -100,7 +100,6 @@ private Q_SLOTS:
     void slotDeviceFound(const QString &, const QMap<QString,QVariant>&);
     void slotDeviceDisappeared(const QString&);
     void slotDefaultAdapterChanged(const QDBusObjectPath&);
-    void slotManagerPropertyChanged(const QString&, const QVariant&);
     void slotAdapterRemoved(const QDBusObjectPath& path);
 };
 
