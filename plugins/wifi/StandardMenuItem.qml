@@ -18,7 +18,7 @@
  */
 
 import QtQuick 2.0
-import Ubuntu.Components 0.1 as Components
+import Ubuntu.Components 0.1
 
 FramedMenuItem {
     id: menuItem
@@ -28,43 +28,34 @@ FramedMenuItem {
 
     signal activate()
 
-    // FIXME : need a radio button from sdk
-    // https://bugs.launchpad.net/ubuntu-ui-toolkit/+bug/1211866
-    onCheckableChanged: {
-        if (checkable) {
-            icon = checkComponent.createObject(menuItem);
-        }
-    }
-
     onCheckedChanged: {
         // Can't rely on binding. Checked is assigned on click.
-        if (icon) {
-            icon.checked = checked;
+        if (checkable) {
+            checkbox.checked = checked;
         }
     }
 
     onClicked: {
-        if (checkable && icon) {
-            icon.clicked();
+        if (checkable) {
+            checkbox.clicked();
         } else {
             menuItem.activate();
         }
     }
 
-    property var checkComponent: Component {
-        Components.CheckBox {
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
+    control: CheckBox {
+        id: checkbox
 
-            Component.onCompleted: {
-                checked = menuItem.checked;
-            }
-
-            // FIXME : should use Checkbox.toggled signal
-            // lp:~nick-dedekind/ubuntu-ui-toolkit/checkbox.toggled
-            onClicked: {
-                menuItem.activate();
-            }
+        Component.onCompleted: {
+            checked = menuItem.checked;
         }
+
+        // FIXME : should use Checkbox.toggled signal
+        // lp:~nick-dedekind/ubuntu-ui-toolkit/checkbox.toggled
+        onClicked: {
+            menuItem.activate();
+        }
+
+        visible: checkable
     }
 }

@@ -60,9 +60,6 @@ FramedMenuItem {
     iconFrame: false
     control: CheckBox {
         id: checkBoxActive
-        height: units.gu(4)
-        width: units.gu(4)
-        anchors.centerIn: parent
 
         onClicked: {
             accessPoint.activate();
