@@ -88,14 +88,10 @@ ItemPage {
         }
 
         text: i18n.tr("Welcome screen")
-
-        visible: showAllUI
     }
 
     SwappableImage {
         id: welcomeImage
-
-        visible: showAllUI
 
         anchors {
             top: parent.top
@@ -124,8 +120,7 @@ ItemPage {
 
         anchors {
             top: parent.top
-            right: (showAllUI) ? parent.right : undefined
-            horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
+            right: parent.right
          }
 
         onClicked: startContentTransfer(function(url) {
@@ -155,8 +150,6 @@ ItemPage {
         }
 
         text: i18n.tr("Home screen")
-
-        visible: showAllUI
     }
 
     ListItem.ThinDivider {
@@ -166,8 +159,24 @@ ItemPage {
             topMargin: units.gu(2)
             top: welcomeLabel.bottom
         }
+    }
 
-        visible: showAllUI
+
+    OptionSelector {
+        id: optionSelector
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: topDivider.bottom
+            topMargin: units.gu(2)
+        }
+        width: parent.width - units.gu(4)
+        expanded: true
+
+        model: [i18n.tr("Same background for both"),
+            i18n.tr("Different background for each")]
+        onSelectedIndexChanged: {
+            systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
+        }
     }
 
     Column {
@@ -179,15 +188,7 @@ ItemPage {
             topMargin: units.gu(2)
             left: parent.left
             right: parent.right
-            top: showAllUI ? topDivider.bottom : homeImage.bottom
-        }
-
-        Button {
-            text: i18n.tr("Change…")
-            width: parent.width - units.gu(4)
-            anchors.horizontalCenter: parent.horizontalCenter
-            Component.onCompleted:
-                clicked.connect(homeImage.clicked)
+            top: optionSelector.bottom
         }
 
         Button {
@@ -204,29 +205,7 @@ ItemPage {
                 optionSelector.selectedIndex = 0 // Same
             }
         }
-
     }
-
-    OptionSelector {
-        id: optionSelector
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: buttonColumn.bottom
-            topMargin: units.gu(2)
-        }
-        width: parent.width - units.gu(4)
-        expanded: true
-
-        model: [i18n.tr("Same background for both"),
-            i18n.tr("Different background for each")]
-        onSelectedIndexChanged: {
-            systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
-        }
-
-        visible: showAllUI
-    }
-
-
 
     /* We don't have a good way of doing this after passing an invalid image to
        SwappableImage, so test the image is valid /before/ showing it and show a
