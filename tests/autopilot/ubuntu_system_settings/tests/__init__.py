@@ -13,7 +13,7 @@ from autopilot.input import Pointer
 from autopilot.platform import model
 from autopilot.testcase import AutopilotTestCase
 from autopilot.matchers import Eventually
-from testtools.matchers import Equals
+from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
 
@@ -41,4 +41,72 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     def pointer(self):
         """ Return pointer """
         return Pointer(self.input_device_class.create())
+
+
+class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
+    """ Base class for About this phone tests """
+
+    def setUp(self):
+        """ Go to About page """
+        super(AboutBaseTestCase, self).setUp()
+        # Click on 'About' button
+        about = self.main_view.select_single(objectName='entryComponentAbout')
+        self.assertThat(about, NotEquals(None))
+        self.pointer.move_to_object(about)
+        self.pointer.click()
+
+    @property
+    def about_page(self):
+        """ Returns 'About' page """
+        return self.main_view.select_single(objectName='aboutPage')
+
+
+class StorageBaseTestCase(AboutBaseTestCase):
+    """ Base class for Storage page tests """
+
+    def setUp(self):
+        """ Go to Storage Page """
+        super(StorageBaseTestCase, self).setUp()
+        # Click on 'Storage' option
+        button = self.about_page.select_single(objectName='storageItem')
+        self.assertThat(button, NotEquals(None))
+        self.pointer.move_to_object(button)
+        self.pointer.click()
+
+    def assert_space_item(self, object_name, text):
+        """ Checks whether an space item exists and returns a value """
+        item = self.storage_page.select_single(objectName=object_name)
+        self.assertThat(item, NotEquals(None))
+        label = item.label # Label
+        space = item.value # Disk space (bytes)
+        self.assertThat(label, Equals(text))
+        # Get item's label
+        size_label = item.select_single(objectName='sizeLabel')
+        self.assertThat(size_label, NotEquals(None))
+        values = size_label.text.split(' ')  # Format: "00.0 (bytes|MB|GB)"
+        self.assertThat(len(values), GreaterThan(1))
+
+    @property
+    def storage_page(self):
+        """ Return 'Storage' page """
+        return self.main_view.select_single(objectName='storagePage')
+
+
+class LicenseBaseTestCase(AboutBaseTestCase):
+    """ Base class for Licenses page tests """
+
+    def setUp(self):
+        """ Go to License Page """
+        super(LicenseBaseTestCase, self).setUp()
+        # Click on 'Software licenses' option
+        button = self.main_view.select_single(objectName='licenseItem')
+        self.assertThat(button, NotEquals(None))
+        self.assertThat(button.text, Equals('Software licenses'))
+        self.pointer.move_to_object(button)
+        self.pointer.click()
+
+    @property
+    def licenses_page(self):
+        """ Return 'License' page """
+        return self.main_view.select_single(objectName='licensesPage')
 
