@@ -59,30 +59,11 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListItem.ItemSelector {
-            id: chooseCarrier
-            expanded: true
-            enabled: netReg.mode != "auto-only"
-            text: i18n.tr("Choose carrier:")
-            model: [i18n.tr("Automatically"), i18n.tr("Manually")]
-            selectedIndex: netReg.mode == "manual" ? 1 : 0
-        }
-
-        ListItem.SingleValue {
-            text: i18n.tr("Carrier")
-            value: carrierName ? carrierName : i18n.tr("N/A")
-            property bool enabled: chooseCarrier.selectedIndex == 1 // Manually
-            progression: enabled
-            onClicked: {
-                if (enabled)
-                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
-            }
-        }
-
-        /* TODO: use selector once ofono supports those options (bug #1211804)
+        /* TODO: use selector once ofono supports those options (bug #1211804) */
         ListItem.ItemSelector {
             id: dataTypeSelector
             expanded: true
+            visible: showAllUI
             text: i18n.tr("Cellular data:")
             model: [i18n.tr("Off"),
                 i18n.tr("2G only (saves battery)"),
@@ -95,7 +76,6 @@ ItemPage {
                     connMan.powered = true;
             }
         }
-        */
 
         ListItem.Standard {
             text: i18n.tr("Cellular data")
@@ -116,6 +96,32 @@ ItemPage {
 
         ListItem.Standard {
             text: i18n.tr("Data usage statistics")
+            progression: true
+            visible: showAllUI
+        }
+
+        ListItem.ItemSelector {
+            id: chooseCarrier
+            expanded: true
+            enabled: netReg.mode != "auto-only"
+            text: i18n.tr("Choose carrier:")
+            model: [i18n.tr("Automatically"), i18n.tr("Manually")]
+            selectedIndex: netReg.mode == "manual" ? 1 : 0
+        }
+
+        ListItem.SingleValue {
+            text: i18n.tr("Carrier")
+            value: carrierName ? carrierName : i18n.tr("N/A")
+            property bool enabled: chooseCarrier.selectedIndex == 1 // Manually
+            progression: enabled
+            onClicked: {
+                if (enabled)
+                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
+            }
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("APN")
             progression: true
             visible: showAllUI
         }
