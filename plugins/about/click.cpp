@@ -19,6 +19,7 @@
 
 #include "click.h"
 
+#include <glib.h>
 #include <libintl.h>
 
 #include <QDebug>
@@ -26,6 +27,26 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+
+const char * try_get_desktop_file_key (GKeyFile *keyfile,
+                                       const char * key)
+{
+    GError *err = NULL;
+    char *value = g_key_file_get_string (
+                keyfile,
+                G_KEY_FILE_DESKTOP_GROUP,
+                key,
+                &err
+                );
+    if (err) {
+        g_warning (
+            "Desktop file doesn't have a key %s", key);
+        g_error_free (err);
+        return NULL;
+    }
+
+    return value;
+}
 
 ClickModel::ClickModel(QObject *parent):
     QAbstractTableModel(parent),
@@ -77,16 +98,75 @@ QList<ClickModel::Click> ClickModel::buildClickList()
     while (begin != end) {
         QVariantMap val = (*begin++).toObject().toVariantMap();
         Click newClick;
+        QDir directory;
 
         newClick.name = val.value("title",
                                   gettext("Unknown title")).toString();
 
         if (val.contains("_directory")) {
-            QDir directory(val.value("_directory", "/undefined").toString());
+            directory = val.value("_directory", "/undefined").toString();
+            // Set the icon from the click package
             QString iconFile(val.value("icon", "undefined").toString());
             if (directory.exists()) {
                 QString icon(directory.filePath(iconFile.simplified()));
                 newClick.icon = icon;
+            }
+        }
+
+        // "hooks" → title → "desktop" / "icon"
+        QVariant hooks(val.value("hooks"));
+
+        if (hooks.isValid()) {
+            QVariantMap allHooks(hooks.toMap());
+
+            if (allHooks.contains(newClick.name)) {
+                QVariantMap appHooks(allHooks.value(newClick.name).toMap());
+                if (!appHooks.isEmpty() &&
+                    appHooks.contains("desktop") &&
+                    directory.exists()) {
+                    QFile desktopFile(
+                                directory.absoluteFilePath(
+                                    appHooks.value("desktop",
+                                                   "undefined").toString()));
+                    const char * desktopFileName =
+                        desktopFile.fileName().toLocal8Bit().constData();
+                    g_debug ("Desktop file: %s", desktopFileName);
+                    if (desktopFile.exists()) {
+                        GError *err = NULL;
+                        GKeyFile *keyfile = g_key_file_new();
+
+                        g_key_file_load_from_file (keyfile,
+                                                   desktopFileName,
+                                                   G_KEY_FILE_NONE,
+                                                   &err);
+                        if (err) {
+                            g_warning ("Couldn't parse desktop file %s: %s",
+                                       desktopFileName,
+                                       err->message);
+                            g_error_free (err);
+                        } else {
+                            const char * name = try_get_desktop_file_key(
+                                        keyfile,
+                                        G_KEY_FILE_DESKTOP_KEY_NAME);
+                            if (name) {
+                                g_debug ("Name is %s", name);
+                                newClick.displayName = name;
+                            }
+
+                            // Overwrite the icon with the .desktop file's one
+                            // if we have it. This one is more reliable.
+                            const char * icon = try_get_desktop_file_key(
+                                        keyfile,
+                                        G_KEY_FILE_DESKTOP_KEY_ICON
+                                        );
+                            if (icon) {
+                                g_debug ("Icon is %s", icon);
+                                newClick.icon = directory.absoluteFilePath(
+                                            QString::fromLocal8Bit(icon));
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -137,7 +217,10 @@ QVariant ClickModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Qt::DisplayRole:
-        return click.name;
+        if (click.displayName.isEmpty() || click.displayName.isNull())
+            return click.name;
+        else
+            return click.displayName;
     case InstalledSizeRole:
         return click.installSize;
     case IconRole:
