@@ -19,6 +19,8 @@
 
 #include "click.h"
 
+#include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <glib.h>
 #include <libintl.h>
 
@@ -27,26 +29,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-
-const char * try_get_desktop_file_key (GKeyFile *keyfile,
-                                       const char * key)
-{
-    GError *err = NULL;
-    char *value = g_key_file_get_string (
-                keyfile,
-                G_KEY_FILE_DESKTOP_GROUP,
-                key,
-                &err
-                );
-    if (err) {
-        g_warning (
-            "Desktop file doesn't have a key %s", key);
-        g_error_free (err);
-        return NULL;
-    }
-
-    return value;
-}
 
 ClickModel::ClickModel(QObject *parent):
     QAbstractTableModel(parent),
@@ -132,22 +114,17 @@ QList<ClickModel::Click> ClickModel::buildClickList()
                         desktopFile.fileName().toLocal8Bit().constData();
                     g_debug ("Desktop file: %s", desktopFileName);
                     if (desktopFile.exists()) {
-                        GError *err = NULL;
-                        GKeyFile *keyfile = g_key_file_new();
+                        GDesktopAppInfo *appinfo =
+                                g_desktop_app_info_new_from_filename (
+                                    desktopFileName);
 
-                        g_key_file_load_from_file (keyfile,
-                                                   desktopFileName,
-                                                   G_KEY_FILE_NONE,
-                                                   &err);
-                        if (err) {
-                            g_warning ("Couldn't parse desktop file %s: %s",
-                                       desktopFileName,
-                                       err->message);
-                            g_error_free (err);
+                        if (!appinfo) {
+                            g_warning ("Couldn't parse desktop file %s",
+                                       desktopFileName);
                         } else {
-                            const char * name = try_get_desktop_file_key(
-                                        keyfile,
-                                        G_KEY_FILE_DESKTOP_KEY_NAME);
+                            const char * name = g_app_info_get_name (
+                                        (GAppInfo *) appinfo);
+
                             if (name) {
                                 g_debug ("Name is %s", name);
                                 newClick.displayName = name;
@@ -155,10 +132,8 @@ QList<ClickModel::Click> ClickModel::buildClickList()
 
                             // Overwrite the icon with the .desktop file's one
                             // if we have it. This one is more reliable.
-                            const char * icon = try_get_desktop_file_key(
-                                        keyfile,
-                                        G_KEY_FILE_DESKTOP_KEY_ICON
-                                        );
+                            const char * icon = g_desktop_app_info_get_string (
+                                        appinfo, "icon");
                             if (icon) {
                                 g_debug ("Icon is %s", icon);
                                 newClick.icon = directory.absoluteFilePath(
