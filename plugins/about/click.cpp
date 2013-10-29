@@ -136,8 +136,16 @@ QList<ClickModel::Click> ClickModel::buildClickList()
                                         appinfo, "icon");
                             if (icon) {
                                 g_debug ("Icon is %s", icon);
-                                newClick.icon = directory.absoluteFilePath(
-                                            QString::fromLocal8Bit(icon));
+                                QFile iconFile(icon);
+                                if (iconFile.exists())
+                                    newClick.icon = icon;
+                                else {
+                                    iconFile.setFileName(
+                                                directory.absoluteFilePath(
+                                                    QString::fromLocal8Bit(icon)));
+                                    if (iconFile.exists())
+                                        newClick.icon = iconFile.fileName();
+                                }
                             }
                         }
                     }
