@@ -78,6 +78,15 @@ ItemPage {
         }
 
         ListItem.Standard {
+            text: i18n.tr("Cellular data")
+            visible: !showAllUI
+            control: Switch {
+                checked: connMan.powered
+                onClicked: connMan.powered = checked
+            }
+         }
+
+        ListItem.Standard {
             text: i18n.tr("Data roaming")
             control: Switch {
                 id: dataRoamingControl
