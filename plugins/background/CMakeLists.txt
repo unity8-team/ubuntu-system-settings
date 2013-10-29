@@ -1,11 +1,13 @@
-add_library(UbuntuBackgroundPanel MODULE plugin.cpp background.cpp plugin.h background.h)
-qt5_use_modules(UbuntuBackgroundPanel Qml Quick DBus)
 
 set(QML_SOURCES
     MainPage.qml
     OverlayImage.qml
     SwappableImage.qml
 )
+add_library(UbuntuBackgroundPanel MODULE
+plugin.cpp background.cpp plugin.h background.h
+${QML_SOURCES}) # So they show up in Qt designer.
+qt5_use_modules(UbuntuBackgroundPanel Qml Quick DBus)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Background)
 install(TARGETS UbuntuBackgroundPanel DESTINATION ${PLUG_DIR})
