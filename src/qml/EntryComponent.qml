@@ -28,7 +28,7 @@ Item {
 
     height: col.height
 
-    objectName: "entryComponent" + model.displayName
+    objectName: "entryComponent" + model.item.baseName
 
     Column {
         id: col

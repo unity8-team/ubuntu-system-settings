@@ -50,7 +50,7 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
         """ Go to About page """
         super(AboutBaseTestCase, self).setUp()
         # Click on 'About' button
-        about = self.main_view.select_single(objectName='entryComponentAbout')
+        about = self.main_view.select_single(objectName='entryComponent-about')
         self.assertThat(about, NotEquals(None))
         self.pointer.move_to_object(about)
         self.pointer.click()
