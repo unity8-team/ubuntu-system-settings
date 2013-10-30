@@ -1,9 +1,9 @@
 project(ubuntu-system-settings C CXX)
 cmake_minimum_required(VERSION 2.8.10)
 
-#if(${PROJECT_BINARY_DIR} STREQUAL ${PROJECT_SOURCE_DIR})
-#   message(FATAL_ERROR "In-tree build attempt detected, aborting. Set your build dir outside your source dir, delete CMakeCache.txt from source root and try again.")
-#endif()
+if(${PROJECT_BINARY_DIR} STREQUAL ${PROJECT_SOURCE_DIR})
+   message(FATAL_ERROR "In-tree build attempt detected, aborting. Set your build dir outside your source dir, delete CMakeCache.txt from source root and try again.")
+endif()
 
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower) # Build types should always be lowercase but sometimes they are not.
 
