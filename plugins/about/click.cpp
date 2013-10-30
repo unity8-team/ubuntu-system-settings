@@ -26,6 +26,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QIcon>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -133,13 +134,13 @@ QList<ClickModel::Click> ClickModel::buildClickList()
                             // Overwrite the icon with the .desktop file's one
                             // if we have it. This one is more reliable.
                             const char * icon = g_desktop_app_info_get_string (
-                                        appinfo, "icon");
+                                        appinfo, "Icon");
                             if (icon) {
                                 g_debug ("Icon is %s", icon);
                                 QFile iconFile(icon);
-                                if (iconFile.exists())
+                                if (iconFile.exists()) {
                                     newClick.icon = icon;
-                                else {
+                                } else {
                                     iconFile.setFileName(
                                                 directory.absoluteFilePath(
                                                     QString::fromLocal8Bit(icon)));
