@@ -64,7 +64,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 icon: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
-                text: i18n.tr("Display language")
+                text: i18n.tr("Display language...")
                 value: plugin.languageNames[plugin.currentLanguage]
                 progression: true
 
@@ -72,12 +72,9 @@ ItemPage {
             }
 
             ListItem.Divider {
-                visible: showAllUI
             }
 
             ListItem.SingleValue {
-                visible: showAllUI
-
                 text: i18n.tr("Keyboard layouts")
                 value: plugin.keyboardLayoutsModel.subset.length == 1 ?
                        plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
@@ -118,7 +115,7 @@ ItemPage {
             ListItem.Standard {
                 visible: showAllUI
 
-                text: i18n.tr("Predictive text")
+                text: i18n.tr("Word suggestions")
 
                 control: Switch {
                     checked: plugin.predictiveText
@@ -128,12 +125,9 @@ ItemPage {
             }
 
             ListItem.Divider {
-                visible: showAllUI
             }
 
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Auto capitalization")
 
                 control: Switch {
@@ -144,8 +138,6 @@ ItemPage {
             }
 
             ListItem.Caption {
-                visible: showAllUI
-
                 text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
             }
 
@@ -156,19 +148,13 @@ ItemPage {
             ListItem.Standard {
                 visible: showAllUI
 
-                text: i18n.tr("Key press feedback")
+                text: i18n.tr("Keyboard sound")
 
                 control: Switch {
                     checked: plugin.keyPressFeedback
 
                     onClicked: plugin.keyPressFeedback = checked
                 }
-            }
-
-            ListItem.Caption {
-                visible: showAllUI
-
-                text: i18n.tr("Vibrate or emit a sound whenever a key is pressed.")
             }
         }
     }
