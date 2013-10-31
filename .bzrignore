@@ -2,6 +2,12 @@
 *.debhelper
 *.log
 *.moc
+moc_*
+Makefile*
+tst_*
+lib/SystemSettings/SystemSettings.pc
+src/qrc_ui.cpp
+src/system-settings
 system-settings.pro.user
 /debian/files
 /debian/libsystemsettings-dev/
