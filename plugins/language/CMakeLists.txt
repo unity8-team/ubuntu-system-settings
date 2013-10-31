@@ -3,7 +3,6 @@ add_definitions(-DQT_NO_KEYWORDS)
 
 set(QML_SOURCES
     DisplayLanguage.qml
-    KeyboardLayoutItem.qml
     KeyboardLayouts.qml
     PageComponent.qml
     SpellChecking.qml
