@@ -64,7 +64,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 icon: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
-                text: i18n.tr("Display language...")
+                text: i18n.tr("Display language…")
                 value: plugin.languageNames[plugin.currentLanguage]
                 progression: true
 
