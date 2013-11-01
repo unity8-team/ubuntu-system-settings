@@ -72,9 +72,12 @@ ItemPage {
             }
 
             ListItem.Divider {
+                visible: showAllUI
             }
 
             ListItem.SingleValue {
+                visible: showAllUI
+
                 text: i18n.tr("Keyboard layouts")
                 value: plugin.keyboardLayoutsModel.subset.length == 1 ?
                        plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
