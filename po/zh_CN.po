@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-07-13 15:09+0000\n"
-"Last-Translator: Aron Xu <Unknown>\n"
+"PO-Revision-Date: 2013-11-03 15:18+0000\n"
+"Last-Translator: Anthony Wong <anthony.wong@canonical.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-10-08 06:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-11-04 06:04+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -24,14 +24,14 @@ msgstr "关于此手机"
 
 #: ../plugins/about/PageComponent.qml:76
 msgid "Serial"
-msgstr ""
+msgstr "序列号"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
 #: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:130
 #: ../plugins/battery/PageComponent.qml:142
 #: ../plugins/cellular/PageComponent.qml:73
 msgid "N/A"
-msgstr ""
+msgstr "不适用"
 
 #: ../plugins/about/PageComponent.qml:88
 msgid "Software:"
@@ -43,7 +43,7 @@ msgstr "操作系统"
 
 #: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
-msgstr ""
+msgstr "最后更新"
 
 #: ../plugins/about/PageComponent.qml:98
 #: ../plugins/battery/PageComponent.qml:256
@@ -52,7 +52,7 @@ msgstr ""
 #: ../plugins/system-update/Download.qml:53
 #: ../plugins/system-update/PageComponent.qml:347
 msgid "Never"
-msgstr ""
+msgstr "永不"
 
 #: ../plugins/about/PageComponent.qml:103
 msgid "Check for updates"
@@ -80,19 +80,19 @@ msgstr "Ubuntu 系统所占空间"
 
 #: ../plugins/about/Storage.qml:88
 msgid "Movies"
-msgstr ""
+msgstr "电影"
 
 #: ../plugins/about/Storage.qml:89
 msgid "Audio"
-msgstr ""
+msgstr "音频"
 
 #: ../plugins/about/Storage.qml:90
 msgid "Pictures"
-msgstr ""
+msgstr "图片"
 
 #: ../plugins/about/Storage.qml:91
 msgid "Other files"
-msgstr ""
+msgstr "其他文件"
 
 #: ../plugins/about/Storage.qml:92
 msgid "Used by apps"
@@ -108,19 +108,19 @@ msgstr "剩余空间"
 
 #: ../plugins/about/Storage.qml:163
 msgid "Installed apps"
-msgstr ""
+msgstr "已安装应用程序"
 
 #: ../plugins/about/Storage.qml:164
 msgid "By name"
-msgstr ""
+msgstr "按名称"
 
 #: ../plugins/about/Storage.qml:164
 msgid "By size"
-msgstr ""
+msgstr "按大小"
 
 #: ../plugins/background/MainPage.qml:33 ../.build/settings.js:3
 msgid "Background"
-msgstr "后台"
+msgstr "背景"
 
 #: ../plugins/background/MainPage.qml:71
 msgid "Welcome screen"
@@ -140,43 +140,39 @@ msgstr "使用不同背景"
 
 #: ../plugins/battery/PageComponent.qml:35 ../.build/settings.js:4
 msgid "Battery"
-msgstr ""
+msgstr "电池"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery/PageComponent.qml:47
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 秒前"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery/PageComponent.qml:50
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 分钟前"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery/PageComponent.qml:53
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 小时前"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery/PageComponent.qml:56
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 天前"
 
 #: ../plugins/battery/PageComponent.qml:76
 msgid "Charging now"
-msgstr ""
+msgstr "正在充电"
 
 #: ../plugins/battery/PageComponent.qml:81
 msgid "Last full charge"
@@ -184,7 +180,7 @@ msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:86
 msgid "Fully charged"
-msgstr ""
+msgstr "电已充满"
 
 #: ../plugins/battery/PageComponent.qml:125
 msgid "Charge level"
@@ -194,7 +190,7 @@ msgstr ""
 #: ../plugins/battery/PageComponent.qml:133
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../plugins/battery/PageComponent.qml:186
 msgid "Ways to reduce battery use:"
@@ -202,7 +198,7 @@ msgstr ""
 
 #: ../plugins/battery/PageComponent.qml:190
 msgid "Display brightness"
-msgstr ""
+msgstr "屏幕亮度"
 
 #: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:62
@@ -267,7 +263,7 @@ msgstr ""
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr ""
+msgstr "蓝牙配对请求"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:37
@@ -290,7 +286,7 @@ msgstr "取消"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "确认 PIN 码"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: ../plugins/bluetooth/PageComponent.qml:70
@@ -306,7 +302,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:80
 msgid "Computer"
-msgstr ""
+msgstr "电脑"
 
 #: ../plugins/bluetooth/PageComponent.qml:81
 #: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
@@ -315,7 +311,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:82
 msgid "Modem"
-msgstr ""
+msgstr "调制解调器"
 
 #: ../plugins/bluetooth/PageComponent.qml:83 ../src/qml/MainWindow.qml:90
 msgid "Network"
@@ -331,7 +327,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:86
 msgid "Video"
-msgstr ""
+msgstr "视频"
 
 #: ../plugins/bluetooth/PageComponent.qml:87
 msgid "Other Audio"
@@ -343,27 +339,27 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:89
 msgid "Keyboard"
-msgstr ""
+msgstr "键盘"
 
 #: ../plugins/bluetooth/PageComponent.qml:90
 msgid "Tablet"
-msgstr ""
+msgstr "手写板"
 
 #: ../plugins/bluetooth/PageComponent.qml:91
 msgid "Mouse"
-msgstr ""
+msgstr "鼠标"
 
 #: ../plugins/bluetooth/PageComponent.qml:92
 msgid "Printer"
-msgstr ""
+msgstr "打印机"
 
 #: ../plugins/bluetooth/PageComponent.qml:93
 msgid "Camera"
-msgstr ""
+msgstr "相机"
 
 #: ../plugins/bluetooth/PageComponent.qml:94
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #: ../plugins/bluetooth/PageComponent.qml:100
 msgid "Excellent"
@@ -414,7 +410,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:208
 msgid "Signal Strength"
-msgstr ""
+msgstr "信号强度"
 
 #: ../plugins/bluetooth/PageComponent.qml:213
 msgid "Disconnect"
@@ -438,7 +434,7 @@ msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:78
 msgid "Refresh"
-msgstr ""
+msgstr "刷新"
 
 #: ../plugins/cellular/ChooseCarrier.qml:95
 msgid "Searching"
@@ -446,53 +442,53 @@ msgstr ""
 
 #: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
 msgid "Cellular"
-msgstr ""
+msgstr "移动网络"
 
 #: ../plugins/cellular/PageComponent.qml:66
 msgid "Choose carrier:"
-msgstr ""
+msgstr "选择网络运营商："
 
 #: ../plugins/cellular/PageComponent.qml:67
 #: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Automatically"
-msgstr ""
+msgstr "自动"
 
 #: ../plugins/cellular/PageComponent.qml:67
 #: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Manually"
-msgstr ""
+msgstr "手动"
 
 #: ../plugins/cellular/PageComponent.qml:101
 msgid "Cellular data"
-msgstr ""
+msgstr "数据网络"
 
 #: ../plugins/cellular/PageComponent.qml:109
 msgid "Data roaming"
-msgstr ""
+msgstr "数据网络漫游"
 
 #: ../plugins/cellular/PageComponent.qml:118
 msgid "Data usage statistics"
-msgstr ""
+msgstr "数据用量统计"
 
 #: ../plugins/language/DisplayLanguage.qml:33
 #: ../plugins/language/PageComponent.qml:55
 msgid "Display language"
-msgstr ""
+msgstr "显示语言"
 
 #: ../plugins/language/DisplayLanguage.qml:115
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 #: ../plugins/language/KeyboardLayouts.qml:26
 #: ../plugins/language/PageComponent.qml:69
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "键盘布局"
 
 #: ../plugins/language/KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr ""
+msgstr "当前布局："
 
 #: ../plugins/language/KeyboardLayouts.qml:40
 msgid "All layouts available:"
@@ -500,13 +496,13 @@ msgstr ""
 
 #: ../plugins/language/PageComponent.qml:31 ../.build/settings.js:10
 msgid "Language & Text"
-msgstr ""
+msgstr "语言和文字"
 
 #: ../plugins/language/PageComponent.qml:85
 #: ../plugins/language/SpellChecking.qml:27
 #: ../plugins/language/SpellChecking.qml:36
 msgid "Spell checking"
-msgstr ""
+msgstr "拼写检查"
 
 #: ../plugins/language/PageComponent.qml:97
 msgid "Auto completion"
@@ -518,7 +514,7 @@ msgstr ""
 
 #: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
-msgstr ""
+msgstr "自动大写"
 
 #: ../plugins/language/PageComponent.qml:137
 msgid "Turns on Shift to capitalize the first letter of each sentence."
@@ -530,7 +526,7 @@ msgstr ""
 
 #: ../plugins/language/PageComponent.qml:159
 msgid "Vibrate or emit a sound whenever a key is pressed."
-msgstr ""
+msgstr "按键时振动或发出声音。"
 
 #: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -544,7 +540,7 @@ msgstr ""
 #: ../plugins/phone/CallForwarding.qml:60
 #: ../plugins/phone/PageComponent.qml:46
 msgid "Call forwarding"
-msgstr ""
+msgstr "呼叫转接"
 
 #: ../plugins/phone/CallForwarding.qml:74
 msgid ""
@@ -558,7 +554,7 @@ msgstr ""
 
 #: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
-msgstr ""
+msgstr "转接至"
 
 #: ../plugins/phone/CallForwarding.qml:113
 msgid "Contacts…"
@@ -567,12 +563,12 @@ msgstr ""
 #: ../plugins/phone/CallForwarding.qml:113
 #: ../plugins/time-date/TimePicker.qml:182
 msgid "Set"
-msgstr ""
+msgstr "设置"
 
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:52
 msgid "Call waiting"
-msgstr ""
+msgstr "呼叫等待"
 
 #: ../plugins/phone/CallWaiting.qml:67
 msgid ""
@@ -642,19 +638,19 @@ msgstr ""
 
 #: ../plugins/security-privacy/Dash.qml:49
 msgid "Return results from:"
-msgstr ""
+msgstr "回传结果来于："
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:52
 #: ../plugins/security-privacy/PageComponent.qml:120
 msgid "Phone only"
-msgstr ""
+msgstr "仅手机"
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:119
 msgid "Phone and Internet"
-msgstr ""
+msgstr "手机和互联网"
 
 #: ../plugins/security-privacy/Location.qml:30
 msgid "Location"
@@ -869,7 +865,7 @@ msgstr ""
 
 #: ../plugins/security-privacy/PageComponent.qml:148
 msgid "Diagnostics"
-msgstr ""
+msgstr "诊断数据"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
@@ -881,7 +877,7 @@ msgstr ""
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy/PageComponent.qml:156
 msgid "Not sent"
-msgstr ""
+msgstr "不发送"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
@@ -917,11 +913,11 @@ msgstr ""
 
 #: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
 msgid "Message received"
-msgstr ""
+msgstr "收到訊息时"
 
 #: ../plugins/sound/PageComponent.qml:96
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "键盘提示音"
 
 #: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
@@ -929,7 +925,7 @@ msgstr ""
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "手机处于无声模式。"
 
 #: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
@@ -938,7 +934,7 @@ msgstr ""
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
-msgstr ""
+msgstr "自动下载"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
@@ -954,7 +950,7 @@ msgstr ""
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "可能会产生数据费"
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
@@ -962,7 +958,7 @@ msgstr "更新"
 
 #: ../plugins/system-update/PageComponent.qml:46
 msgid "Checking for updates…"
-msgstr ""
+msgstr "正在检查更新..."
 
 #: ../plugins/system-update/PageComponent.qml:83
 msgid "Apply update failed:"
@@ -976,13 +972,13 @@ msgstr ""
 #: ../plugins/system-update/PageComponent.qml:108
 #, qt-format
 msgid "%1 GB"
-msgstr ""
+msgstr "%1 GB"
 
 #. TRANSLATORS: %1 is the size of the update in MB
 #: ../plugins/system-update/PageComponent.qml:111
 #, qt-format
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #. TRANSLATORS: %1 is the date when the device was last updated
 #: ../plugins/system-update/PageComponent.qml:120
@@ -992,15 +988,14 @@ msgstr ""
 #: ../plugins/system-update/PageComponent.qml:120
 #, qt-format
 msgid "Last updated %1"
-msgstr ""
+msgstr "最后更新于 %1"
 
 #. TRANSLATORS: %1 is the number of seconds remaining
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "大约还有 %1 秒"
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
@@ -1008,7 +1003,7 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
-msgstr ""
+msgstr "已暂停"
 
 #: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
@@ -1017,21 +1012,21 @@ msgstr ""
 #: ../plugins/system-update/PageComponent.qml:205
 #: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
-msgstr ""
+msgstr "重试"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
-msgstr ""
+msgstr "Ubuntu Phone"
 
 #. TRANSLATORS: %1 is the version of the update
 #: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "版本 %1"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
-msgstr ""
+msgstr "暂停下载"
 
 #: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
@@ -1039,7 +1034,7 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
-msgstr ""
+msgstr "下载"
 
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
@@ -1055,15 +1050,15 @@ msgstr ""
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "时区"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "设置时区："
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
-msgstr ""
+msgstr "输入您目前的位置"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
@@ -1075,31 +1070,31 @@ msgstr "时间和日期"
 
 #: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
-msgstr ""
+msgstr "时区："
 
 #: ../plugins/time-date/PageComponent.qml:65
 msgid "Set the time and date:"
-msgstr ""
+msgstr "设置时间和日期："
 
 #: ../plugins/time-date/TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "设置时间和日期"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "时"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "分"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "秒"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
@@ -1127,7 +1122,7 @@ msgstr ""
 
 #: ../src/qml/MainWindow.qml:95
 msgid "Personal"
-msgstr ""
+msgstr "个人"
 
 #: ../src/qml/MainWindow.qml:100
 msgid "System"
