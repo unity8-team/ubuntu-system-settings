@@ -68,8 +68,10 @@ LanguagePlugin::~LanguagePlugin()
         g_object_unref(m_user);
     }
 
-    if (m_maliitSettings != NULL)
+    if (m_maliitSettings != NULL) {
+        g_signal_handlers_disconnect_by_data(m_maliitSettings, this);
         g_object_unref(m_maliitSettings);
+    }
 
     for (QList<KeyboardLayout *>::const_iterator i(m_keyboardLayouts->begin()); i != m_keyboardLayouts->end(); ++i)
         delete *i;
@@ -235,55 +237,39 @@ LanguagePlugin::setCurrentLanguage(int index)
     }
 }
 
-SubsetModel *
-LanguagePlugin::keyboardLayoutsModel()
+void
+LanguagePlugin::enabledLayoutsChanged()
 {
-    if (m_keyboardLayoutsModel == NULL) {
-        QVariantList superset;
+    GVariantIter *iter;
+    const gchar *language;
+    QList<int> subset;
 
-        for (QList<KeyboardLayout *>::const_iterator i(keyboardLayouts().begin()); i != keyboardLayouts().end(); ++i) {
-            QVariantList element;
+    g_settings_get(maliitSettings(), KEY_ENABLED_LAYOUTS, "as", &iter);
 
-            if (!(*i)->displayName().isEmpty())
-                element += (*i)->displayName();
-            else
-                element += (*i)->name();
-
-            element += (*i)->shortName();
-            superset += QVariant(element);
-        }
-
-        GVariantIter *iter;
-        const gchar *language;
-        QList<int> subset;
-
-        g_settings_get(maliitSettings(), KEY_ENABLED_LAYOUTS, "as", &iter);
-
-        while (g_variant_iter_next(iter, "&s", &language)) {
-            for (int i(0); i < keyboardLayouts().length(); i++) {
-                if (keyboardLayouts()[i]->name() == language) {
-                    subset += i;
-                    break;
-                }
+    while (g_variant_iter_next(iter, "&s", &language)) {
+        for (int i(0); i < keyboardLayouts().length(); i++) {
+            if (keyboardLayouts()[i]->name() == language) {
+                subset += i;
+                break;
             }
         }
-
-        g_variant_iter_free(iter);
-
-        QStringList customRoles;
-        customRoles += "language";
-        customRoles += "icon";
-
-        m_keyboardLayoutsModel = new SubsetModel();
-        m_keyboardLayoutsModel->setCustomRoles(customRoles);
-        m_keyboardLayoutsModel->setSuperset(superset);
-        m_keyboardLayoutsModel->setSubset(subset);
-        m_keyboardLayoutsModel->setAllowEmpty(false);
-
-        connect(m_keyboardLayoutsModel, SIGNAL(subsetChanged()), SLOT(updateKeyboardLayouts()));
     }
 
-    return m_keyboardLayoutsModel;
+    g_variant_iter_free(iter);
+
+    m_keyboardLayoutsModel->setSubset(subset);
+}
+
+void
+enabledLayoutsChanged(GSettings *settings,
+                      gchar     *key,
+                      gpointer   user_data)
+{
+    Q_UNUSED(settings);
+    Q_UNUSED(key);
+
+    LanguagePlugin *plugin(static_cast<LanguagePlugin *>(user_data));
+    plugin->enabledLayoutsChanged();
 }
 
 void
@@ -302,6 +288,46 @@ LanguagePlugin::updateKeyboardLayouts()
     g_variant_unref(currentLayouts);
 }
 
+SubsetModel *
+LanguagePlugin::keyboardLayoutsModel()
+{
+    if (m_keyboardLayoutsModel == NULL) {
+        m_keyboardLayoutsModel = new SubsetModel();
+
+        QStringList customRoles;
+        customRoles += "language";
+        customRoles += "icon";
+
+        m_keyboardLayoutsModel->setCustomRoles(customRoles);
+
+        QVariantList superset;
+
+        for (QList<KeyboardLayout *>::const_iterator i(keyboardLayouts().begin()); i != keyboardLayouts().end(); ++i) {
+            QVariantList element;
+
+            if (!(*i)->displayName().isEmpty())
+                element += (*i)->displayName();
+            else
+                element += (*i)->name();
+
+            element += (*i)->shortName();
+            superset += QVariant(element);
+        }
+
+        m_keyboardLayoutsModel->setSuperset(superset);
+
+        enabledLayoutsChanged();
+
+        m_keyboardLayoutsModel->setAllowEmpty(false);
+
+        connect(m_keyboardLayoutsModel, SIGNAL(subsetChanged()), SLOT(updateKeyboardLayouts()));
+
+        g_signal_connect(maliitSettings(), "changed::" KEY_ENABLED_LAYOUTS, G_CALLBACK(::enabledLayoutsChanged), this);
+    }
+
+    return m_keyboardLayoutsModel;
+}
+
 bool
 LanguagePlugin::spellChecking() const
 {
@@ -314,6 +340,12 @@ LanguagePlugin::setSpellChecking(bool value)
 {
     // TODO: set spell checking setting
     Q_UNUSED(value);
+}
+
+void
+LanguagePlugin::updateSpellChecking()
+{
+    // TODO: update spell checking
 }
 
 SubsetModel *
@@ -339,12 +371,6 @@ LanguagePlugin::spellCheckingModel()
     }
 
     return m_spellCheckingModel;
-}
-
-void
-LanguagePlugin::updateSpellChecking()
-{
-    // TODO: update spell checking
 }
 
 bool

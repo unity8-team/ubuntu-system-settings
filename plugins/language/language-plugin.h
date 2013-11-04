@@ -29,10 +29,10 @@ typedef struct _ActUserManager ActUserManager;
 typedef struct _GObject GObject;
 typedef struct _GParamSpec GParamSpec;
 typedef struct _GSettings GSettings;
+typedef void *gpointer;
+typedef char gchar;
 
 class KeyboardLayout;
-
-typedef void *gpointer;
 
 class LanguagePlugin : public QObject
 {
@@ -149,6 +149,12 @@ private:
 
     SubsetModel *m_keyboardLayoutsModel;
     SubsetModel *m_spellCheckingModel;
+
+    void enabledLayoutsChanged();
+
+    friend void enabledLayoutsChanged(GSettings *settings,
+                                      gchar     *key,
+                                      gpointer   user_data);
 
     void userSetCurrentLanguage(ActUser *user);
 
