@@ -63,6 +63,7 @@ include_directories(lib)
 add_subdirectory(plugins)
 add_subdirectory(src)
 add_subdirectory(tests)
+add_subdirectory(wizard)
 
 install(FILES ubuntu-system-settings.desktop DESTINATION share/applications)
 

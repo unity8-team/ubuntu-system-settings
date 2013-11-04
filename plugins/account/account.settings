@@ -1,0 +1,15 @@
+{
+    "icon": "/usr/share/ubuntu/settings/system/icons/settings-background.svg",
+    "translations": "ubuntu-system-settings",
+    "name": "Account",
+    "category": "personal",
+    "priority": 0,
+    "keywords": [
+        "appearance",
+        "background",
+        "wallpaper"
+    ],
+    "has-dynamic-keywords": false,
+    "has-dynamic-visibility": false,
+    "page-component": "MainPage.qml"
+}
