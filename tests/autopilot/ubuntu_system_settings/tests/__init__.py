@@ -9,6 +9,9 @@
 
 from __future__ import absolute_import
 
+import locale
+import gettext
+
 from autopilot.input import Pointer
 from autopilot.platform import model
 from autopilot.testcase import AutopilotTestCase
@@ -19,10 +22,15 @@ from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
+
     def setUp(self):
         super(UbuntuSystemSettingsTestCase, self).setUp()
         self.launch_system_settings()
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
+        # l10n support
+        current_locale, encoding = locale.getdefaultlocale()
+        tr = gettext.translation('ubuntu-system-settings', '/usr/share/locale/', languages=[current_locale], fallback=True)
+        tr.install()
 
     def launch_system_settings(self):
         params = ['/usr/bin/system-settings']
@@ -101,7 +109,7 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         # Click on 'Software licenses' option
         button = self.main_view.select_single(objectName='licenseItem')
         self.assertThat(button, NotEquals(None))
-        self.assertThat(button.text, Equals('Software licenses'))
+        self.assertThat(button.text, Equals(_('Software licenses')))
         self.pointer.move_to_object(button)
         self.pointer.click()
 
@@ -109,4 +117,5 @@ class LicenseBaseTestCase(AboutBaseTestCase):
     def licenses_page(self):
         """ Return 'License' page """
         return self.main_view.select_single(objectName='licensesPage')
+
 

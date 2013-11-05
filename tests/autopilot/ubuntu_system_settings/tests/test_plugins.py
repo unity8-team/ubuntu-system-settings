@@ -51,56 +51,56 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
  
     def test_wifi_plugin(self):
         """ Checks whether the Wi-Fi plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentWi-Fi')
+        plugin = self.main_view.select_single(objectName='entryComponent-wifi')
         self.assertThat(plugin, NotEquals(None))
 
     def test_cellular_plugin(self):
         """ Checks whether the Cellunar plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentCellular')
+        plugin = self.main_view.select_single(objectName='entryComponent-cellular')
         self.assertThat(plugin, NotEquals(None))
 
     def test_bluetooth_plugin(self):
         """ Checks whether the Bluetooth plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentBluetooth')
+        plugin = self.main_view.select_single(objectName='entryComponent-bluetooth')
         self.assertThat(plugin, NotEquals(None))
 
     def test_background_plugin(self):
         """ Checks whether the Background plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentBackground')
+        plugin = self.main_view.select_single(objectName='entryComponent-background')
         self.assertThat(plugin, NotEquals(None))
 
     def test_sound_plugin(self):
         """ Checks whether the Sound plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentSound')
+        plugin = self.main_view.select_single(objectName='entryComponent-sound')
         self.assertThat(plugin, NotEquals(None))
 
     def test_language_plugin(self):
         """ Checks whether the Language plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentLanguage & Text')
+        plugin = self.main_view.select_single(objectName='entryComponent-language')
         self.assertThat(plugin, NotEquals(None))
 
     def test_accounts_plugin(self):
         """ Checks whether the Accounts plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentAccounts')
+        plugin = self.main_view.select_single(objectName='entryComponent-online-accounts')
         self.assertThat(plugin, NotEquals(None))
 
     def test_battery_plugin(self):
         """ Checks whether the Battery plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentBattery')
+        plugin = self.main_view.select_single(objectName='entryComponent-battery')
         self.assertThat(plugin, NotEquals(None))
 
     def test_timedate_plugin(self):
         """ Checks whether the Time & Date plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentTime & Date')
+        plugin = self.main_view.select_single(objectName='entryComponent-time-date')
         self.assertThat(plugin, NotEquals(None))
 
     def test_security_plugin(self):
         """ Checks whether the Security plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentSecurity & Privacy')
+        plugin = self.main_view.select_single(objectName='entryComponent-security-privacy')
         self.assertThat(plugin, NotEquals(None))
 
     def test_updates_plugin(self):
         """ Checks whether the Updates plugin is available """
-        plugin = self.main_view.select_single(objectName='entryComponentUpdates')
+        plugin = self.main_view.select_single(objectName='entryComponent-system-update')
         self.assertThat(plugin, NotEquals(None))
 

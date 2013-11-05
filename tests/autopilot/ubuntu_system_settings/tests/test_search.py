@@ -30,7 +30,7 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         self.pointer.move_to_object(search)
         self.pointer.click()
         # Filter by string
-        self.keyboard.type('Sound')
+        self.keyboard.type(_('Sound'))
         # Search component
         sound = self.main_view.select_single(objectName='entryComponentSound')
         self.assertThat(sound, NotEquals(None))
