@@ -75,7 +75,11 @@ QVariant TimeZoneLocationModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Qt::DisplayRole:
-        return QVariant(QString("%1, %2").arg(tz.city).arg(tz.country));
+        if (!tz.state.isEmpty())
+           return QVariant(QString("%1, %2, %3").arg(tz.city).arg(tz.state)
+                   .arg(tz.country));
+        else
+            return QVariant(QString("%1, %2").arg(tz.city).arg(tz.country));
         break;
     case TimeZoneRole:
         return tz.timezone;
@@ -118,16 +122,18 @@ void TimeZonePopulateWorker::buildCityMap()
 
     for (guint i = 0; i < tz_locations->len; ++i) {
         tmp = (CcTimezoneLocation *) g_ptr_array_index(tz_locations, i);
-        gchar *en_name, *country, *zone;
+        gchar *en_name, *country, *zone, *state;
         g_object_get (tmp, "en_name", &en_name,
                            "country", &country,
                            "zone", &zone,
+                           "state", &state,
                            NULL);
         // There are empty entries in the DB
         if (g_strcmp0(en_name, "") != 0) {
             tmpTz.city = en_name;
             tmpTz.country = country;
             tmpTz.timezone = zone;
+            tmpTz.state = state;
         }
         g_free (en_name);
         g_free (country);
