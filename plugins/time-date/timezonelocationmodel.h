@@ -36,7 +36,8 @@ public:
     enum Roles {
         TimeZoneRole = Qt::UserRole + 1,
         CityRole,
-        CountryRole
+        CountryRole,
+        SimpleRole
     };
 
     struct TzLocation {

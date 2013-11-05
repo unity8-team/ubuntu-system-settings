@@ -73,16 +73,18 @@ QVariant TimeZoneLocationModel::data(const QModelIndex &index, int role) const
 
     TzLocation tz = m_locations[index.row()];
 
+    QString country(tz.full_country.isEmpty() ? tz.country : tz.full_country);
+
     switch (role) {
     case Qt::DisplayRole:
         if (!tz.state.isEmpty())
            return QVariant(QString("%1, %2, %3").arg(tz.city).arg(tz.state)
-                   .arg(tz.full_country.isEmpty() ?
-                            tz.country : tz.full_country));
+                   .arg(country));
         else
-            return QVariant(QString("%1, %2").arg(tz.city)
-                   .arg(tz.full_country.isEmpty() ?
-                            tz.country : tz.full_country));
+            return QVariant(QString("%1, %2").arg(tz.city).arg(country));
+        break;
+    case SimpleRole:
+        return QVariant(QString("%1, %2").arg(tz.city).arg(country));
         break;
     case TimeZoneRole:
         return tz.timezone;
@@ -161,6 +163,7 @@ TimeZoneFilterProxy::TimeZoneFilterProxy(TimeZoneLocationModel *parent)
 {
     this->setSourceModel(parent);
     this->setDynamicSortFilter(true);
+    this->setFilterRole(TimeZoneLocationModel::SimpleRole);
     // By default don't display anything
     this->setFilterRegExp("^$");
     this->setFilterCaseSensitivity(Qt::CaseInsensitive);
