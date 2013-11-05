@@ -52,6 +52,7 @@ public:
         QString country;
         QString timezone;
         QString state;
+        QString full_country;
     };
 
     // implemented virtual methods from QAbstractTableModel

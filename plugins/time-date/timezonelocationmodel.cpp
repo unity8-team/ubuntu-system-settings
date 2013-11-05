@@ -77,9 +77,12 @@ QVariant TimeZoneLocationModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
         if (!tz.state.isEmpty())
            return QVariant(QString("%1, %2, %3").arg(tz.city).arg(tz.state)
-                   .arg(tz.country));
+                   .arg(tz.full_country.isEmpty() ?
+                            tz.country : tz.full_country));
         else
-            return QVariant(QString("%1, %2").arg(tz.city).arg(tz.country));
+            return QVariant(QString("%1, %2").arg(tz.city)
+                   .arg(tz.full_country.isEmpty() ?
+                            tz.country : tz.full_country));
         break;
     case TimeZoneRole:
         return tz.timezone;
@@ -122,11 +125,12 @@ void TimeZonePopulateWorker::buildCityMap()
 
     for (guint i = 0; i < tz_locations->len; ++i) {
         tmp = (CcTimezoneLocation *) g_ptr_array_index(tz_locations, i);
-        gchar *en_name, *country, *zone, *state;
+        gchar *en_name, *country, *zone, *state, *full_country;
         g_object_get (tmp, "en_name", &en_name,
                            "country", &country,
                            "zone", &zone,
                            "state", &state,
+                           "full_country", &full_country,
                            NULL);
         // There are empty entries in the DB
         if (g_strcmp0(en_name, "") != 0) {
@@ -134,10 +138,13 @@ void TimeZonePopulateWorker::buildCityMap()
             tmpTz.country = country;
             tmpTz.timezone = zone;
             tmpTz.state = state;
+            tmpTz.full_country = full_country;
         }
         g_free (en_name);
         g_free (country);
         g_free (zone);
+        g_free (state);
+        g_free (full_country);
 
         Q_EMIT (resultReady(tmpTz));
     }
