@@ -10,7 +10,12 @@ override_dh_auto_configure:
 	dh_auto_configure -- LIBDIR="/usr/lib/$(DEB_HOST_MULTIARCH)"
 
 override_dh_install:
-	dh_install --fail-missing
+	cd tests/autopilot; \
+	set -ex; for python in $(shell pyversions -r); do \
+		$$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
+	done; \
+	cd $(CURDIR)
+	dh_install -X'*.pyc' --fail-missing
 
 %:
-	dh $@ 
+	dh $@ --fail-missing --with python2

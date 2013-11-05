@@ -4,6 +4,8 @@ Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: dbus-test-runner,
                debhelper (>= 9),
+               python (>= 2.7),
+               python-setuptools,
                gdb,
                libaccountsservice-dev,
                libandroid-properties-dev,
@@ -81,3 +83,19 @@ Description: System Settings for Ubuntu Touch - development files
  This package contains the System Settings application used on the 
  Ubuntu Touch images, it's designed for phones, tablets and convergent 
  devices.
+
+Package: ubuntu-system-settings-autopilot
+Architecture: all
+Depends: ubuntu-system-settings,
+         python-autopilot,
+         libautopilot-qt,
+         ubuntu-ui-toolkit-autopilot,
+         dpkg-dev,
+         ${misc:Depends},
+         ${python:Depends},
+Description: System Settings for Ubuntu Touch - Autopilot tests
+ This package contains the System Settings application used on the 
+ Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ devices.
+
+
