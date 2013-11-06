@@ -45,6 +45,7 @@ int main(int argc, char **argv)
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
     view.setSource(QUrl("qrc:/qml/main.qml"));
+    view.show();
 //    view.showFullScreen();
 
     return app.exec();
