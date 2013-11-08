@@ -72,7 +72,6 @@ LocalComponents.Page {
             text: i18n.tr("Start")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
-                // TODO: Should go to WiFiPage.qml when that works
                 pageStack.push(Qt.resolvedUrl(__simCardPresent ? "AboutYouPage.qml" : "SimCardPage.qml"))
             }
         }
