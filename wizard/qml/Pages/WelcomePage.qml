@@ -49,7 +49,7 @@ LocalComponents.Page {
                 width: content.width
                 wrapMode: Text.WordWrap
                 fontSize: "large"
-                text: i18n.tr("Welcome to Ubuntu.\nLet’s get started.")
+                text: i18n.tr("Welcome to Ubuntu.") + "\n" + i18n.tr("Let’s get started.")
             }
 
             OptionSelector {

@@ -15,9 +15,3 @@ add_executable(system-settings-wizard ${WIZARD_SOURCES} ${system-settings-wizard
 qt5_use_modules(system-settings-wizard Core Gui Quick Qml)
 
 install(TARGETS system-settings-wizard RUNTIME DESTINATION bin)
-
-add_custom_target(wizard-po COMMAND
-${XGETTEXT_BIN} -o ${CMAKE_SOURCE_DIR}/wizard/po/wizard.pot -d ubuntu-system-settings
---keyword=_ ${WIZARD_SOURCES}
-WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-)

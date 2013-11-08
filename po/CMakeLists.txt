@@ -1,5 +1,11 @@
-file(GLOB SOURCECODE "${CMAKE_SOURCE_DIR}/plugins/*/*.qml" "${CMAKE_SOURCE_DIR}/src/qml/*.qml")
-file(GLOB SETTINGSFILES "${CMAKE_SOURCE_DIR}/plugins/*/*.settings")
+file(GLOB CPPFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+                   "${CMAKE_SOURCE_DIR}/src/*.cpp")
+file(GLOB QMLFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+                   "${CMAKE_SOURCE_DIR}/plugins/*/*.qml"
+                   "${CMAKE_SOURCE_DIR}/src/qml/*.qml"
+                   "${CMAKE_SOURCE_DIR}/wizard/qml/*/*.qml")
+file(GLOB SETTINGSFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+                        "${CMAKE_SOURCE_DIR}/plugins/*/*.settings")
 
 #add_custom_command(OUTPUT settings.js
 #  command some_script ${SETTINGSFILES} ${CMAKE_CURRENT_BINARY_DIR}/settings.js
@@ -11,15 +17,30 @@ file(GLOB SETTINGSFILES "${CMAKE_SOURCE_DIR}/plugins/*/*.settings")
 #  DEPENDS ${CMAKE_SOURCE_DIR}/ubuntu-system-settings.desktop
 #)
 
-add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/ubuntu-system-settings.pot
-    COMMAND XGETTEXT_BIN -o ${CMAKE_CURRENT_SOURCE_DIR}/ubuntu-system-settings.pot
-    -copyright=\"Canonical Ltd. \"
-    --package-name ubuntu-system-settings
-    --qt --c++ --add-comments=TRANSLATORS
-    --keyword=tr --keyword=tr:1,2 --from-code=UTF-8
-    ${SOURCECODE} ${DESKTOPFILE} ${SETTINGSFILE}
-    DEPENDS ${SOURCECODE} #desktop.js settings.js
+add_custom_target(pot-qml
+    COMMAND ${XGETTEXT_BIN} -o ubuntu-system-settings.pot
+                            --copyright=\"Canonical Ltd.\"
+                            --package-name ubuntu-system-settings
+                            --qt --c++ --add-comments=TRANSLATORS
+                            --keyword=tr --keyword=tr:1,2 --from-code=UTF-8
+                            ${QMLFILES}
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    DEPENDS ${QMLFILES} #desktop.js settings.js
 )
+
+add_custom_target(pot-cpp
+    COMMAND ${XGETTEXT_BIN} -o ubuntu-system-settings.pot
+                            --join-existing
+                            --copyright=\"Canonical Ltd.\"
+                            --package-name ubuntu-system-settings
+                            --qt --c++ --add-comments=TRANSLATORS
+                            --keyword=_ --from-code=UTF-8
+                            ${CPPFILES}
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    DEPENDS pot-qml ${CPPFILES}
+)
+
+add_custom_target(pot DEPENDS pot-qml pot-cpp)
 
 set(languages "ar;ast;be;bg;bs;ca;cs;de;el;en_AU;en_GB;eo;es;fa;fi;fr;gl;gu;he;hi;hr;hu;id;it;km;ko;lo;lv;ms;my;nb;pl;pt_BR;pt;ru;shn;sl;sv;tr;ug;uk;xh;zh_CN;zh_HK;zh_TW")
 foreach(i ${languages})
