@@ -30,8 +30,3 @@ void BackendPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<Account>(uri, 1, 0, "UbuntuAccountPlugin");
 }
-
-void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    QQmlExtensionPlugin::initializeEngine(engine, uri);
-}
