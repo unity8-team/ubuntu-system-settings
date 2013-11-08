@@ -16,6 +16,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <libintl.h>
 #include <QGuiApplication>
 #include <QQmlContext>
 #include <QUrl>
@@ -27,6 +28,12 @@ void start_xsession()
     // When we get a request to stop, we don't quit but rather start xsession
     // in the background.  When xsession finishes loading, we'll be stopped
     // by upstart.
+
+    // But first, stop maliit-server, it needs to be started by unity8
+    if (system("stop maliit-server") != 0)
+    {} // ignore any errors
+
+    // Now resume starting xsession, which we interrupted with our upstart job
     QString command = "initctl emit xsession";
     command += " SESSION=" + qgetenv("DESKTOP_SESSION");
     command += " SESSIONTYPE=" + qgetenv("SESSIONTYPE");
@@ -38,6 +45,9 @@ void start_xsession()
 int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
+
+    bindtextdomain(I18N_DOMAIN, NULL);
+    textdomain(I18N_DOMAIN);
 
     QQuickView view;
     QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);

@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Please wait")
+    title: i18n.tr("That’s it!")
 
     hasBackButton: false
     tools: ToolbarItems {

@@ -7,6 +7,7 @@ export DH_VERBOSE=1
 include /usr/share/dpkg/buildflags.mk
 
 override_dh_install:
+	rm -r debian/tmp/usr/share/upstart # not ready yet
 	dh_install --fail-missing
 
 %:

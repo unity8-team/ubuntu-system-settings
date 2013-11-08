@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-08 11:29-0500\n"
+"POT-Creation-Date: 2013-11-08 11:43-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -640,7 +640,7 @@ msgid "Unset"
 msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:274
-#: ../wizard/qml/Pages//AboutYouPage.qml:62
+#: ../wizard/qml/Pages//AboutYouPage.qml:68
 #: ../wizard/qml/Pages//LocationPage.qml:46
 msgid "Continue"
 msgstr ""
@@ -1162,12 +1162,12 @@ msgstr ""
 msgid "About you"
 msgstr ""
 
-#: ../wizard/qml/Pages//AboutYouPage.qml:47
+#: ../wizard/qml/Pages//AboutYouPage.qml:52
 msgid "What shall we call you?"
 msgstr ""
 
 #: ../wizard/qml/Pages//LocationPage.qml:22
-msgid "Your phone and settings"
+msgid "Your phone settings"
 msgstr ""
 
 #: ../wizard/qml/Pages//LocationPage.qml:39
@@ -1183,7 +1183,8 @@ msgid ""
 msgstr ""
 
 #: ../wizard/qml/Pages//SpinnerPage.qml:22
-msgid "Please wait"
+#: ../wizard/qml/Pages//SetupCompletePage.qml:22
+msgid "That’s it!"
 msgstr ""
 
 #: ../wizard/qml/Pages//WiFiPage.qml:22
@@ -1224,10 +1225,6 @@ msgstr ""
 
 #: ../wizard/qml/Pages//WelcomePage.qml:68
 msgid "Start"
-msgstr ""
-
-#: ../wizard/qml/Pages//SetupCompletePage.qml:22
-msgid "That’s it!"
 msgstr ""
 
 #: ../wizard/qml/Pages//SetupCompletePage.qml:39
