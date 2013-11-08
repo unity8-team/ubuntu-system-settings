@@ -55,8 +55,12 @@ LocalComponents.Page {
             OptionSelector {
                 id: languageList
                 text: i18n.tr("Select your language")
-                model: plugin.languages
+                model: plugin.languageNames
                 selectedIndex: plugin.currentLanguage
+                onSelectedIndexChanged: {
+                    i18n.language = plugin.languageCodes[selectedIndex]
+                    i18n.domain = i18n.domain
+                }
                 containerHeight: content.height - label.height - column.spacing - units.gu(4)
             }
         }

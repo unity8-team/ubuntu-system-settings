@@ -27,7 +27,10 @@ MainView {
     backgroundColor: "#A55263"
     footerColor: "#D75669"
 
-    Component.onCompleted: Theme.name = "Ubuntu.Components.Themes.SuruGradient"
+    Component.onCompleted: {
+        Theme.name = "Ubuntu.Components.Themes.SuruGradient"
+        i18n.domain = "ubuntu-system-settings"
+    }
 
     OSKController {
         anchors.fill: parent

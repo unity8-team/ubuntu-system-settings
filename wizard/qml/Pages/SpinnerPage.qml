@@ -22,9 +22,6 @@ LocalComponents.Page {
     title: i18n.tr("That’s it!")
 
     hasBackButton: false
-    tools: ToolbarItems {
-        back: null
-    }
 
     Component.onCompleted: Qt.quit()
 
@@ -41,8 +38,6 @@ LocalComponents.Page {
         ActivityIndicator {
             id: spinner
             anchors.centerIn: parent
-            width: units.gu(10)
-            height: units.gu(10)
             running: true
         }
     }

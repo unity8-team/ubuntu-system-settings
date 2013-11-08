@@ -29,6 +29,9 @@ Page {
     property alias forwardButtonSourceComponent: forwardButton.sourceComponent
 
     visible: false
+    tools: ToolbarItems {
+        back: null
+    }
 
     Button {
         id: backButton
