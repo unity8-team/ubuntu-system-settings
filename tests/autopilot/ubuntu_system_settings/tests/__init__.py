@@ -9,8 +9,7 @@
 
 from __future__ import absolute_import
 
-import locale
-import gettext
+from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from autopilot.input import Pointer
 from autopilot.platform import model
@@ -27,10 +26,6 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
         super(UbuntuSystemSettingsTestCase, self).setUp()
         self.launch_system_settings()
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
-        # l10n support
-        current_locale, encoding = locale.getdefaultlocale()
-        tr = gettext.translation('ubuntu-system-settings', '/usr/share/locale/', languages=[current_locale], fallback=True)
-        tr.install()
 
     def launch_system_settings(self):
         params = ['/usr/bin/system-settings']
@@ -117,5 +112,4 @@ class LicenseBaseTestCase(AboutBaseTestCase):
     def licenses_page(self):
         """ Return 'License' page """
         return self.main_view.select_single(objectName='licensesPage')
-
 

@@ -12,6 +12,8 @@ from testtools.matchers import Contains, Equals, NotEquals, GreaterThan
 from unittest import skip
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
+from ubuntu_system_settings.utils.i18n import ugettext as _
+
 
 """ Tests for Ubuntu System Settings """
 

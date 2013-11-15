@@ -5,12 +5,15 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
+from time import sleep
+
 from autopilot.platform import model
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from unittest import expectedFailure
 
 from ubuntu_system_settings.tests import AboutBaseTestCase, StorageBaseTestCase, LicenseBaseTestCase
+from ubuntu_system_settings.utils.i18n import ugettext as _
 
 class AboutTestCase(AboutBaseTestCase):
     """ Tests for About this phone Page """
@@ -30,7 +33,7 @@ class AboutTestCase(AboutBaseTestCase):
         """ Checks whether Serial info is available """
         item = self.about_page.select_single(objectName='serialItem')
         self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('Serial'))
+        self.assertThat(item.text, Equals(_('Serial')))
         if (model() == 'Desktop'):
             self.assertThat(item.value, Equals(_('N/A')))
         else:
@@ -97,6 +100,7 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_disk(self):
         """ Checks whether disk item is available """
+        sleep(5)
         disk_item = self.storage_page.select_single(objectName='diskItem')
         self.assertThat(disk_item, NotEquals(None))
         self.assertThat(disk_item.text, Equals(_('Total storage')))

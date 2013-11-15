@@ -12,7 +12,7 @@ from testtools.matchers import Contains, Equals, NotEquals, GreaterThan
 from unittest import skip
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
-
+from ubuntu_system_settings.utils.i18n import ugettext as _
 
 class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
     """ Tests for Ubuntu System Settings """
@@ -24,7 +24,7 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         """ Checks whether the main_view title is correct """
         header = self.main_view.select_single(objectName='systemSettingsPage')
         self.assertThat(header, NotEquals(None))
-        self.assertThat(header.title, Eventually(Equals('System Settings')))
+        self.assertThat(header.title, Eventually(Equals(_('System Settings'))))
         
     def test_search(self):
         """ Checks whether the Search box is available """
@@ -35,19 +35,19 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         """ Checks whether the Network category is available """
         category = self.main_view.select_single(objectName='categoryGrid-network')
         self.assertThat(category, NotEquals(None))
-        self.assertThat(category.categoryName, Eventually(Equals('Network')))
+        self.assertThat(category.categoryName, Eventually(Equals(_('Network'))))
         
     def test_personal_category(self):
         """ Checks whether the Personal category is available """
         category = self.main_view.select_single(objectName='categoryGrid-personal')
         self.assertThat(category, NotEquals(None))
-        self.assertThat(category.categoryName, Eventually(Equals('Personal')))
+        self.assertThat(category.categoryName, Eventually(Equals(_('Personal'))))
  
     def test_system_category(self):
         """ Checks whether the System category is available """
         category = self.main_view.select_single(objectName='categoryGrid-system')
         self.assertThat(category, NotEquals(None))
-        self.assertThat(category.categoryName, Eventually(Equals('System')))
+        self.assertThat(category.categoryName, Eventually(Equals(_('System'))))
  
     def test_wifi_plugin(self):
         """ Checks whether the Wi-Fi plugin is available """
