@@ -33,19 +33,19 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         
     def test_network_category(self):
         """ Checks whether the Network category is available """
-        category = self.main_view.select_single(objectName='categoryGridNetwork')
+        category = self.main_view.select_single(objectName='categoryGrid-network')
         self.assertThat(category, NotEquals(None))
         self.assertThat(category.categoryName, Eventually(Equals('Network')))
         
     def test_personal_category(self):
         """ Checks whether the Personal category is available """
-        category = self.main_view.select_single(objectName='categoryGridPersonal')
+        category = self.main_view.select_single(objectName='categoryGrid-personal')
         self.assertThat(category, NotEquals(None))
         self.assertThat(category.categoryName, Eventually(Equals('Personal')))
  
     def test_system_category(self):
         """ Checks whether the System category is available """
-        category = self.main_view.select_single(objectName='categoryGridSystem')
+        category = self.main_view.select_single(objectName='categoryGrid-system')
         self.assertThat(category, NotEquals(None))
         self.assertThat(category.categoryName, Eventually(Equals('System')))
  

@@ -12,7 +12,7 @@ Column {
     property string category
     property string categoryName
 
-    objectName: "categoryGrid" + categoryName
+    objectName: "categoryGrid-" + category
 
     ListItem.Header {
         id: header
