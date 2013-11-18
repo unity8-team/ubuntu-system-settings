@@ -11,8 +11,8 @@ file(GLOB SETTINGSFILES "${CMAKE_SOURCE_DIR}/plugins/*/*.settings")
 #  DEPENDS ${CMAKE_SOURCE_DIR}/ubuntu-system-settings.desktop
 #)
 
-add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/ubuntu-system-settings.pot
-    COMMAND XGETTEXT_BIN -o ${CMAKE_CURRENT_SOURCE_DIR}/ubuntu-system-settings.pot
+add_custom_target(pot
+    COMMAND ${XGETTEXT_BIN} -o ${CMAKE_CURRENT_SOURCE_DIR}/ubuntu-system-settings.pot
     -copyright=\"Canonical Ltd. \"
     --package-name ubuntu-system-settings
     --qt --c++ --add-comments=TRANSLATORS
