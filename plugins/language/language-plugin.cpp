@@ -42,9 +42,7 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     m_nextCurrentLanguage(-1),
     m_manager(act_user_manager_get_default()),
     m_user(NULL),
-    m_maliitSettings(g_settings_new(UBUNTU_KEYBOARD_SCHEMA_ID)),
-    m_keyboardLayoutsModel(NULL),
-    m_spellCheckingModel(NULL)
+    m_maliitSettings(g_settings_new(UBUNTU_KEYBOARD_SCHEMA_ID))
 {
     if (m_manager != NULL) {
         g_object_ref(m_manager);
@@ -82,7 +80,7 @@ LanguagePlugin::~LanguagePlugin()
         g_object_unref(m_maliitSettings);
     }
 
-    for (QList<KeyboardLayout *>::iterator i(m_keyboardLayouts.begin()); i != m_keyboardLayouts.end(); ++i)
+    for (QList<KeyboardLayout *>::const_iterator i(m_keyboardLayouts.begin()); i != m_keyboardLayouts.end(); ++i)
         delete *i;
 }
 
@@ -128,7 +126,7 @@ LanguagePlugin::keyboardLayoutsModelChanged()
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
 
-    for (QList<int>::const_iterator i(keyboardLayoutsModel()->subset().begin()); i != keyboardLayoutsModel()->subset().end(); ++i)
+    for (QList<int>::const_iterator i(m_keyboardLayoutsModel.subset().begin()); i != m_keyboardLayoutsModel.subset().end(); ++i)
         g_variant_builder_add(&builder, "s", qPrintable(m_keyboardLayouts[*i]->name()));
 
     currentLayouts = g_variant_ref_sink(g_variant_builder_end(&builder));
@@ -316,12 +314,13 @@ LanguagePlugin::updateCurrentLanguage()
             m_currentLanguage = m_nextCurrentLanguage;
             m_nextCurrentLanguage = -1;
 
-            QString languageCode(languageCodes()[m_currentLanguage]);
-            act_user_set_language(m_user, qPrintable(languageCode.left(languageCode.indexOf('.'))));
-            act_user_set_formats_locale(m_user, qPrintable(languageCode));
+            if (changed) {
+                QString languageCode(m_languageCodes[m_currentLanguage]);
+                act_user_set_language(m_user, qPrintable(languageCode.left(languageCode.indexOf('.'))));
+                act_user_set_formats_locale(m_user, qPrintable(languageCode));
 
-            if (changed)
                 Q_EMIT currentLanguageChanged();
+            }
         } else {
             const char *language(act_user_get_language(m_user));
             m_currentLanguage = indexForLanguage(language);
@@ -417,7 +416,7 @@ LanguagePlugin::updateSpellCheckingModel()
     // TODO: populate spell checking model
     QVariantList superset;
 
-    for (QStringList::const_iterator i(languageNames().begin()); i != languageNames().end(); ++i) {
+    for (QStringList::const_iterator i(m_languageNames.begin()); i != m_languageNames.end(); ++i) {
         QVariantList element;
         element += *i;
         superset += QVariant(element);
