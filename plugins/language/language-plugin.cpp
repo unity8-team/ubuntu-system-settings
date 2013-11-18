@@ -307,20 +307,16 @@ LanguagePlugin::updateLanguageLocales()
 void
 LanguagePlugin::updateCurrentLanguage()
 {
+    int previousLanguage(m_currentLanguage);
+
     if (m_user != NULL && act_user_is_loaded(m_user)) {
         if (m_nextCurrentLanguage >= 0) {
-            bool changed(m_nextCurrentLanguage != m_currentLanguage);
-
             m_currentLanguage = m_nextCurrentLanguage;
             m_nextCurrentLanguage = -1;
 
-            if (changed) {
-                QString languageCode(m_languageCodes[m_currentLanguage]);
-                act_user_set_language(m_user, qPrintable(languageCode.left(languageCode.indexOf('.'))));
-                act_user_set_formats_locale(m_user, qPrintable(languageCode));
-
-                Q_EMIT currentLanguageChanged();
-            }
+            QString languageCode(m_languageCodes[m_currentLanguage]);
+            act_user_set_language(m_user, qPrintable(languageCode.left(languageCode.indexOf('.'))));
+            act_user_set_formats_locale(m_user, qPrintable(languageCode));
         } else {
             const char *language(act_user_get_language(m_user));
             m_currentLanguage = indexForLanguage(language);
@@ -346,6 +342,9 @@ LanguagePlugin::updateCurrentLanguage()
             m_currentLanguage = indexForLocale(locale);
         }
     }
+
+    if (m_currentLanguage != previousLanguage)
+        Q_EMIT currentLanguageChanged();
 }
 
 void
