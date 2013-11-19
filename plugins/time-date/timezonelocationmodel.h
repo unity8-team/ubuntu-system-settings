@@ -36,7 +36,8 @@ public:
     enum Roles {
         TimeZoneRole = Qt::UserRole + 1,
         CityRole,
-        CountryRole
+        CountryRole,
+        SimpleRole
     };
 
     struct TzLocation {
@@ -51,6 +52,8 @@ public:
         QString city;
         QString country;
         QString timezone;
+        QString state;
+        QString full_country;
     };
 
     // implemented virtual methods from QAbstractTableModel

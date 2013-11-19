@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-10-14 07:48+0000\n"
-"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"PO-Revision-Date: 2013-11-14 03:00+0000\n"
+"Last-Translator: Seng Sutha <sutha@khmeros.info>\n"
 "Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-10-15 05:19+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-11-15 06:33+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -31,7 +31,7 @@ msgstr "សៀរៀល"
 #: ../plugins/battery/PageComponent.qml:142
 #: ../plugins/cellular/PageComponent.qml:73
 msgid "N/A"
-msgstr "មិនមាន"
+msgstr "N/A"
 
 #: ../plugins/about/PageComponent.qml:88
 msgid "Software:"
@@ -76,7 +76,7 @@ msgstr "ព័ត៌មាន​ផ្លូវ​ច្បាប់"
 
 #: ../plugins/about/Storage.qml:87
 msgid "Used by Ubuntu"
-msgstr "បាន​ប្រើ​ដោយ Ubuntu"
+msgstr "បាន​ប្រើ​ដោយ​អ៊ូប៊ុនទូ"
 
 #: ../plugins/about/Storage.qml:88
 msgid "Movies"
@@ -694,24 +694,32 @@ msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ) ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ "
+"បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
 
 #: ../plugins/security-privacy/Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"ការ​ប្រើ​វ៉ាយហ្វាយ, ទីតាំង​បង្គោល​​អង់តែន​, និង GPS "
+"ដើម្បី​រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
 
 #: ../plugins/security-privacy/Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"ប្រើ​វ៉ាយហ្វាយ, ទីតាំង​បង្គោល​អង់តែន (គ្មាន​ការ​តភ្ជាប់​ចល័ត​បច្ចុប្បន្ន), "
+"ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
 
 #: ../plugins/security-privacy/Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ), ទីតាំង​បង្គោល​អង់តែន ហើយ GPS "
+"រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
 
 #: ../plugins/security-privacy/Location.qml:82
 msgid ""
@@ -719,133 +727,136 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ), ទីតាំង​បង្គោល​អង់តែន​ "
+"(គ្មាន​ការ​តភ្ជាប់​ចល័ត​បច្ចុប្បន្ន), ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ "
+"បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
 
 #: ../plugins/security-privacy/Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "អនុញ្ញាត​ឲ្យ​ចូល​ទៅ​ទីតាំង៖"
 
 #: ../plugins/security-privacy/LockSecurity.qml:30
 #: ../plugins/security-privacy/PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "ចាក់សោ​សុវត្ថិភាព"
 
 #: ../plugins/security-privacy/LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "ប្ដូរ​ពាក្យ​សម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "ផ្លាស់ប្ដូរ​ឃ្លា​សម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "ប្ដូរ​ដើម្បី​ត្រូវ​អូស"
 
 #: ../plugins/security-privacy/LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "ប្ដូរ​ទៅ​ពាក្យ​សម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "ប្ដូរ​ទៅ​ឃ្លា​សម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "ពាក្យ​សម្ងាត់​ដែល​មាន​ស្រាប់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "ឃ្លា​សម្ងាត់​ដែល​មាន​ស្រាប់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ​។ ព្យាយាម​ម្ដងទៀត។"
 
 #: ../plugins/security-privacy/LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "ឃ្លា​សម្ងាត់​មិន​ត្រឹមត្រូវ។ ព្យាយាម​ម្ដងទៀត។"
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "ជ្រើស​ពាក្យ​សម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "ជ្រើស​ពាក្យ​សម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "បញ្ជាក់​ពាក្យ​សម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "បញ្ជាក់​ឃ្លា​សម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "ពាក្យ​សម្ងាត់​ទាំង​នោះ​មិន​ដូច​គ្នា។​ ព្យាយាម​ម្ដងទៀត។"
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "ពាក្យ​សម្ងាត់​ទាំង​នោះ​មិន​ដូច​គ្នា។ ព្យាយាម​ម្ដងទៀត។"
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "មិន​កំណត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "បន្ត"
 
 #: ../plugins/security-privacy/LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "ដោះ​សោ​ទូរស័ព្ទ​ដោយ​ប្រើ៖"
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "អូស (គ្មាន​សុវត្ថិភាព)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "លេខ​កូដ ៤​ខ្ទង់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:332
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "ឃ្លាសម្ងាត់"
 
 #: ../plugins/security-privacy/LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "អូស (គ្មាន​សុវត្ថិភាព)… "
 
 #: ../plugins/security-privacy/LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "លេខ​កូដ ៤​ខ្ទង់…"
 
 #: ../plugins/security-privacy/LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "ឃ្លា​សម្ងាត់..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "ប្ដូរ​ឃ្លា​សម្ងាត់..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "ប្ដូរ​ឃ្លា​សម្ងាត់..."
 
 #: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
 msgid "Security & Privacy"
-msgstr ""
+msgstr "សុវត្ថិភាព និង​​ភាព​ឯកជន"
 
 #: ../plugins/security-privacy/PageComponent.qml:67
 msgid "Security:"
-msgstr ""
+msgstr "សុវត្ថិភាព ៖"
 
 #: ../plugins/security-privacy/PageComponent.qml:70
 #: ../plugins/security-privacy/PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "ការ​ចាក់សោ​ទូរស័ព្ទ"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy/PageComponent.qml:72
@@ -853,315 +864,313 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 នាទី"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "SIM PIN"
-msgstr ""
+msgstr "លេខ​កូដ PIN ស៊ីម"
 
 #: ../plugins/security-privacy/PageComponent.qml:86
 msgid "Privacy:"
-msgstr ""
+msgstr "ភាព​ឯកជន​ ៖"
 
 #: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "ស្ថានភាព​លើ​អេក្រង់​ស្វាគមន៍"
 
 #: ../plugins/security-privacy/PageComponent.qml:102
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "សារ​លើអេក្រង់​ស្វាគមន៍"
 
 #: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Location access"
-msgstr ""
+msgstr "ចូល​ដំណើរការ​ទីតាំង"
 
 #: ../plugins/security-privacy/PageComponent.qml:143
 msgid "Other app access"
-msgstr ""
+msgstr "ចូល​ដំណើរការ​កម្មវិធី​ផ្សេង"
 
 #: ../plugins/security-privacy/PageComponent.qml:148
 msgid "Diagnostics"
-msgstr ""
+msgstr "ការ​ពិនិត្យ​មើល"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy/PageComponent.qml:153
 msgid "Sent"
-msgstr ""
+msgstr "បានផ្ញើ"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy/PageComponent.qml:156
 msgid "Not sent"
-msgstr ""
+msgstr "មិន​បាន​ផ្ញើ"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "កូដ​សម្ងាត់"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "ចាក់​សោ​ដេក​ភ្លាម​ៗ"
 
 #: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
-msgstr ""
+msgstr "សំឡេង"
 
 #: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
-msgstr ""
+msgstr "ការ​ហៅ​ទូរស័ព្ទ៖"
 
 #: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
-msgstr ""
+msgstr "សំឡេង​រោទ៍"
 
 #: ../plugins/sound/PageComponent.qml:68
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "ញ័រ​ពេលរោទ៍"
 
 #: ../plugins/sound/PageComponent.qml:76
 msgid "Vibrate in silent mode"
-msgstr ""
+msgstr "ញ័រ​ក្នុង​របៀប​ស្ងាត់"
 
 #: ../plugins/sound/PageComponent.qml:81
 msgid "Other sounds:"
-msgstr ""
+msgstr "សំឡេង​ផ្សេងៗ៖"
 
 #: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
 msgid "Message received"
-msgstr ""
+msgstr "បាន​ទទួល​សារ"
 
 #: ../plugins/sound/PageComponent.qml:96
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "សំឡេង​ក្ដារ​ចុច"
 
 #: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
-msgstr ""
+msgstr "សំឡេង​ចាក់សោ"
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "ទូរស័ព្ទ​ក្នុង​របៀប​ស្ងាត់។"
 
 #: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
-msgstr ""
+msgstr "ឈប់ចាក់"
 
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
-msgstr ""
+msgstr "ទាញយក​ស្វ័យ​ប្រវត្តិ"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "ទាញ​យក​បច្ចុប្បន្នភាព​អនាគត​ដោយ​ស្វ័យ​ប្រវត្តិ៖"
 
 #: ../plugins/system-update/Download.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "ពេល​បើក​វ៉ាយហ្វាយ"
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "លើ​ការ​ភ្ជាប់​ទិន្នន័យ​ណា​មួយ"
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "ការ​កាត់​លុយ​ទិន្នន័យ​អាច​អនុវត្ត។"
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
-msgstr ""
+msgstr "បច្ចុប្បន្នភាព"
 
 #: ../plugins/system-update/PageComponent.qml:46
 msgid "Checking for updates…"
-msgstr ""
+msgstr "កំពុង​ពិនិត្យមើល​បច្ចុប្បន្នភាព…"
 
 #: ../plugins/system-update/PageComponent.qml:83
 msgid "Apply update failed:"
-msgstr ""
+msgstr "បាន​បរាជ័យ​ការអនុវត្ត​បច្ចុប្បន្នភាព៖"
 
 #: ../plugins/system-update/PageComponent.qml:93
 msgid "Pause failed:"
-msgstr ""
+msgstr "ការ​ផ្អាក​បាន​បរាជ័យ៖"
 
 #. TRANSLATORS: %1 is the size of the update in GB
 #: ../plugins/system-update/PageComponent.qml:108
 #, qt-format
 msgid "%1 GB"
-msgstr ""
+msgstr "%1 ជីកាបៃ"
 
 #. TRANSLATORS: %1 is the size of the update in MB
 #: ../plugins/system-update/PageComponent.qml:111
 #, qt-format
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 មេកាបៃ"
 
 #. TRANSLATORS: %1 is the date when the device was last updated
 #: ../plugins/system-update/PageComponent.qml:120
 msgid "No software update available"
-msgstr ""
+msgstr "គ្មាន​បច្ចុប្បន្នភាព​កម្មវិធី"
 
 #: ../plugins/system-update/PageComponent.qml:120
 #, qt-format
 msgid "Last updated %1"
-msgstr ""
+msgstr "បាន​ធ្វើ​បច្ចុប្បន្ន​ភាព​ចុងក្រោយ %1"
 
 #. TRANSLATORS: %1 is the number of seconds remaining
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ប្រហែល​ជា​នៅ​សល់ %1 វិនាទី"
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
-msgstr ""
+msgstr "គ្មាន​ការ​ប៉ាន់ស្មាន​សម្រាប់​ការ​ទាញ​យក"
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
-msgstr ""
+msgstr "បាន​ផ្អាក"
 
 #: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
-msgstr ""
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ទាញ​យក៖"
 
 #: ../plugins/system-update/PageComponent.qml:205
 #: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
-msgstr ""
+msgstr "ព្យាយាម​ម្តង​ទៀត"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
-msgstr ""
+msgstr "Ubuntu Phone"
 
 #. TRANSLATORS: %1 is the version of the update
 #: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "កំណែ​ %1"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
-msgstr ""
+msgstr "ផ្អាក​ការ​ទាញ​យក"
 
 #: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
-msgstr ""
+msgstr "បន្ត​ការ​ទាញ​យក"
 
 #: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
-msgstr ""
+msgstr "ទាញយក"
 
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
-msgstr ""
+msgstr "ដំឡើង ហើយ​ចាប់ផ្ដើម​ឡើង​វិញ"
 
 #: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
-msgstr ""
+msgstr "បើក​វ៉ាយហ្វាយ"
 
 #: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
-msgstr ""
+msgstr "ជានិច្ច"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "តំបន់​ពេលវេលា"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "កំណត់​តំបន់​ពេលវេលា៖"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
-msgstr ""
+msgstr "បញ្ចូល​ទីតាំង​បច្ចុប្បន្ន​របស់​អ្នក។"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
-msgstr ""
+msgstr "គ្មាន​ទីតាំង​ផ្គូផ្គង"
 
 #: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
-msgstr ""
+msgstr "ពេលវេលា និង​កាល​បរិច្ឆេទ"
 
 #: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
-msgstr ""
+msgstr "តំបន់​ពេលវេលា៖"
 
 #: ../plugins/time-date/PageComponent.qml:65
 msgid "Set the time and date:"
-msgstr ""
+msgstr "កំណត់​ពេលវេលា និង​កាលបរិច្ឆេទ៖"
 
 #: ../plugins/time-date/TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "កំណត់​ពេលវេលា និង​កាលបរិច្ឆេទ"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "ពេលវេលា"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "ម៉ោង"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "នាទី"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "វិនាទី"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "កាលបរិច្ឆេទ"
 
 #: ../plugins/time-date/TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "ថ្ងៃ"
 
 #: ../plugins/time-date/TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "ខែ"
 
 #: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "ឆ្នាំ"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
-msgstr ""
+msgstr "ការ​កំណត់​ប្រព័ន្ធ"
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
+msgstr "ស្វែង​រក"
 
 #: ../src/qml/MainWindow.qml:95
 msgid "Personal"
-msgstr ""
+msgstr "ផ្ទាល់​ខ្លួន"
 
 #: ../src/qml/MainWindow.qml:100
 msgid "System"
-msgstr ""
+msgstr "ប្រព័ន្ធ"
 
 #: ../.build/settings.js:2
 msgid "Accessibility"
-msgstr ""
+msgstr "មធ្យោបាយ​ងាយស្រួល"
 
 #: ../.build/settings.js:6
 msgid "Brightness"
-msgstr ""
+msgstr "ពន្លឺ"
 
 #: ../.build/settings.js:8
 msgid "Example"
-msgstr ""
+msgstr "ឧទាហរណ៍"
 
 #: ../.build/settings.js:9
 msgid "Flight mode"
-msgstr ""
+msgstr "របៀប​ហោះហើរ"
 
 #: ../.build/settings.js:11
 msgid "Orientation lock"
-msgstr ""
+msgstr "ចាក់​សោ​ទិស"

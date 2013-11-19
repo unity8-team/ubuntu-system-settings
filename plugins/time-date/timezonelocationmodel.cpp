@@ -73,9 +73,18 @@ QVariant TimeZoneLocationModel::data(const QModelIndex &index, int role) const
 
     TzLocation tz = m_locations[index.row()];
 
+    QString country(tz.full_country.isEmpty() ? tz.country : tz.full_country);
+
     switch (role) {
     case Qt::DisplayRole:
-        return QVariant(QString("%1, %2").arg(tz.city).arg(tz.country));
+        if (!tz.state.isEmpty())
+           return QVariant(QString("%1, %2, %3").arg(tz.city).arg(tz.state)
+                   .arg(country));
+        else
+            return QVariant(QString("%1, %2").arg(tz.city).arg(country));
+        break;
+    case SimpleRole:
+        return QVariant(QString("%1, %2").arg(tz.city).arg(country));
         break;
     case TimeZoneRole:
         return tz.timezone;
@@ -118,20 +127,26 @@ void TimeZonePopulateWorker::buildCityMap()
 
     for (guint i = 0; i < tz_locations->len; ++i) {
         tmp = (CcTimezoneLocation *) g_ptr_array_index(tz_locations, i);
-        gchar *en_name, *country, *zone;
+        gchar *en_name, *country, *zone, *state, *full_country;
         g_object_get (tmp, "en_name", &en_name,
                            "country", &country,
                            "zone", &zone,
+                           "state", &state,
+                           "full_country", &full_country,
                            NULL);
         // There are empty entries in the DB
         if (g_strcmp0(en_name, "") != 0) {
             tmpTz.city = en_name;
             tmpTz.country = country;
             tmpTz.timezone = zone;
+            tmpTz.state = state;
+            tmpTz.full_country = full_country;
         }
         g_free (en_name);
         g_free (country);
         g_free (zone);
+        g_free (state);
+        g_free (full_country);
 
         Q_EMIT (resultReady(tmpTz));
     }
@@ -148,6 +163,7 @@ TimeZoneFilterProxy::TimeZoneFilterProxy(TimeZoneLocationModel *parent)
 {
     this->setSourceModel(parent);
     this->setDynamicSortFilter(true);
+    this->setFilterRole(TimeZoneLocationModel::SimpleRole);
     // By default don't display anything
     this->setFilterRegExp("^$");
     this->setFilterCaseSensitivity(Qt::CaseInsensitive);

@@ -56,7 +56,6 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onPairingDone();
-    void slotDevicePairedChanged();
 
 public:
     Bluetooth(QObject *parent = 0);
@@ -65,8 +64,6 @@ public:
     Q_INVOKABLE void setSelectedDevice(const QString &address);
     Q_INVOKABLE void connectHeadset(const QString &address);
     Q_INVOKABLE void disconnectHeadset();
-    Q_INVOKABLE void connectAudioSource();
-    Q_INVOKABLE void disconnectAudioSource();
 
 public:
     Agent * getAgent();
