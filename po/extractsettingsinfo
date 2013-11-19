@@ -1,0 +1,54 @@
+#!/usr/bin/python
+#
+# This file is part of system-settings
+#
+# Copyright (C) 2013 Canonical Ltd.
+#
+# Contact: Iain Lane <iain.lane@canonical.com>
+#
+# This program is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 3, as published
+# by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
+# PURPOSE.  See the GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Output the name and keywords from .settings files specified on the
+# commandline in a format that can be parsed by xgettext
+
+from __future__ import print_function
+
+import argparse
+import json
+import os
+
+def output(text, name, write):
+    print ("// TRANSLATORS: This is a keyword or name for the %s plugin which "
+           "is used while searching" %
+           os.path.splitext(os.path.basename(name))[0], file=write)
+    print('var s = i18n.tr(%s)' % json.dumps(text), file=write)
+
+def printkeywords(fh, write):
+        parsed = json.load(fh)
+        if "name" in parsed:
+            output(parsed["name"], fh.name, write)
+        if "keywords" in parsed:
+            for k in parsed["keywords"]:
+                output(k, fh.name, write)
+
+parser = argparse.ArgumentParser(description="Process settings file for"
+        "translation")
+parser.add_argument("-o", "--output", type=argparse.FileType("w"))
+parser.add_argument("files", nargs="*", type=argparse.FileType("r"))
+
+args = parser.parse_args()
+
+text = set()
+
+for file in args.files:
+    printkeywords(file, args.output)
