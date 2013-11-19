@@ -1,0 +1,1190 @@
+# Tamil translation for ubuntu-system-settings
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the ubuntu-system-settings package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-system-settings\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-10-07 12:02+0100\n"
+"PO-Revision-Date: 2013-10-25 06:00+0000\n"
+"Last-Translator: Thangamani Arun - தங்கமணி அருண் <thangam.arunx@gmail.com>\n"
+"Language-Team: Tamil <ta@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2013-11-12 06:26+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
+
+#: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
+msgid "About this phone"
+msgstr "இந்த தொலைப்பேசியைப் பற்றி"
+
+#: ../plugins/about/PageComponent.qml:76
+msgid "Serial"
+msgstr "தொடர்"
+
+#: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
+#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:130
+#: ../plugins/battery/PageComponent.qml:142
+#: ../plugins/cellular/PageComponent.qml:73
+msgid "N/A"
+msgstr "பொருந்தாது"
+
+#: ../plugins/about/PageComponent.qml:88
+msgid "Software:"
+msgstr "மென்பொருள்:"
+
+#: ../plugins/about/PageComponent.qml:92
+msgid "OS"
+msgstr "இயங்கு தளம்"
+
+#: ../plugins/about/PageComponent.qml:97
+msgid "Last updated"
+msgstr "கடைசியாக புதுப்பிக்கப்பட்டது"
+
+#: ../plugins/about/PageComponent.qml:98
+#: ../plugins/battery/PageComponent.qml:256
+#: ../plugins/battery/PageComponent.qml:265
+#: ../plugins/battery/SleepValues.qml:96
+#: ../plugins/system-update/Download.qml:53
+#: ../plugins/system-update/PageComponent.qml:347
+msgid "Never"
+msgstr "எப்போதுமில்லை"
+
+#: ../plugins/about/PageComponent.qml:103
+msgid "Check for updates"
+msgstr "புதுப்பிக்க வேண்டியதை சரிபார்க்கவும்"
+
+#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
+msgid "Storage"
+msgstr "சேமிப்பகம்"
+
+#: ../plugins/about/PageComponent.qml:118
+msgid "Legal:"
+msgstr "சட்டரீதியான:"
+
+#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
+msgid "Software licenses"
+msgstr "மென்பொருள் உரிமம்"
+
+#: ../plugins/about/PageComponent.qml:128
+msgid "Regulatory info"
+msgstr "ஒழுங்குமுறை தகவல்"
+
+#: ../plugins/about/Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "உபுண்டுவால் பயன்படுத்தப்படுகிறது"
+
+#: ../plugins/about/Storage.qml:88
+msgid "Movies"
+msgstr "திரைப்படங்கள்"
+
+#: ../plugins/about/Storage.qml:89
+msgid "Audio"
+msgstr "ஒலி"
+
+#: ../plugins/about/Storage.qml:90
+msgid "Pictures"
+msgstr "படங்கள்"
+
+#: ../plugins/about/Storage.qml:91
+msgid "Other files"
+msgstr "மற்ற கோப்புகள்"
+
+#: ../plugins/about/Storage.qml:92
+msgid "Used by apps"
+msgstr "பயன்பாடுகளால் பயன்படுத்தப்படுகிறது"
+
+#: ../plugins/about/Storage.qml:134
+msgid "Total storage"
+msgstr "மொத்த சேமிப்பகம்"
+
+#: ../plugins/about/Storage.qml:145
+msgid "Free space"
+msgstr "காலியான இடம்"
+
+#: ../plugins/about/Storage.qml:163
+msgid "Installed apps"
+msgstr "நிறுவப்பட்ட பயன்பாடுகள்"
+
+#: ../plugins/about/Storage.qml:164
+msgid "By name"
+msgstr "பெயரால்"
+
+#: ../plugins/about/Storage.qml:164
+msgid "By size"
+msgstr "அளவால்"
+
+#: ../plugins/background/MainPage.qml:33 ../.build/settings.js:3
+msgid "Background"
+msgstr "பின்னணி"
+
+#: ../plugins/background/MainPage.qml:71
+msgid "Welcome screen"
+msgstr "வரவேற்பு திரை"
+
+#: ../plugins/background/MainPage.qml:151
+msgid "Home screen"
+msgstr "முகப்புத் திரை"
+
+#: ../plugins/background/MainPage.qml:177
+msgid "Same background for both"
+msgstr "இரண்டிற்கும் ஒத்த பின்னணி"
+
+#: ../plugins/background/MainPage.qml:178
+msgid "Different background for each"
+msgstr "ஒவ்வொண்டிற்கும் மாறுபட்ட பின்னணி"
+
+#: ../plugins/battery/PageComponent.qml:35 ../.build/settings.js:4
+msgid "Battery"
+msgstr "மின்கலம்"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery/PageComponent.qml:47
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 வினாடிக்கு முன்"
+msgstr[1] "%1 வினாடிகளுக்கு முன்"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery/PageComponent.qml:50
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 நிமிடத்திற்கு முன்"
+msgstr[1] "%1 நிமிடங்களுக்கு முன்"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery/PageComponent.qml:53
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 மணி நேரத்திற்கு முன்"
+msgstr[1] "%1 மணி நேரத்திற்கு முன்"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery/PageComponent.qml:56
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 நாளுக்கு முன்"
+msgstr[1] "%1 நாட்களுக்கு முன்"
+
+#: ../plugins/battery/PageComponent.qml:76
+msgid "Charging now"
+msgstr "இப்போது மின்னேற்றுகிறது"
+
+#: ../plugins/battery/PageComponent.qml:81
+msgid "Last full charge"
+msgstr "முழு மின்கலமும் முடிந்தது"
+
+#: ../plugins/battery/PageComponent.qml:86
+msgid "Fully charged"
+msgstr "முழு மின்கலமும் மின்னேற்றப்பட்டது"
+
+#: ../plugins/battery/PageComponent.qml:125
+msgid "Charge level"
+msgstr "மின்கல அளவு"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery/PageComponent.qml:133
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../plugins/battery/PageComponent.qml:186
+msgid "Ways to reduce battery use:"
+msgstr "மின்கலன் பயன்பாட்டடை குறைப்பதற்க்கான வழிகள்:"
+
+#: ../plugins/battery/PageComponent.qml:190
+msgid "Display brightness"
+msgstr "பிரகாசத்தை காட்டு"
+
+#: ../plugins/battery/PageComponent.qml:247
+#: ../plugins/security-privacy/PhoneLocking.qml:62
+msgid "Lock when idle"
+msgstr "வேலையற்ற நிலையில் பூட்டு"
+
+#: ../plugins/battery/PageComponent.qml:247
+#: ../plugins/security-privacy/PhoneLocking.qml:63
+msgid "Sleep when idle"
+msgstr "வேலையற்ற நிலையில் முடங்கு"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery/PageComponent.qml:253
+#: ../plugins/battery/PageComponent.qml:262
+#: ../plugins/battery/SleepValues.qml:77 ../plugins/battery/SleepValues.qml:81
+#: ../plugins/battery/SleepValues.qml:85 ../plugins/battery/SleepValues.qml:89
+#: ../plugins/battery/SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "A %1 நிமிடத்திற்கு பிறகு"
+msgstr[1] "A %1 நிமிடங்களுக்கு பிறகு"
+
+#: ../plugins/battery/PageComponent.qml:275
+#: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
+msgid "Wi-Fi"
+msgstr "வை-பை"
+
+#: ../plugins/battery/PageComponent.qml:308
+#: ../plugins/bluetooth/PageComponent.qml:110
+#: ../plugins/bluetooth/PageComponent.qml:118 ../.build/settings.js:5
+msgid "Bluetooth"
+msgstr "ஃப்ளூடூத்"
+
+#: ../plugins/battery/PageComponent.qml:337
+msgid "GPS"
+msgstr "ஜிபிஎஸ்"
+
+#: ../plugins/battery/PageComponent.qml:355
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr ""
+"துல்லியமான இடத்தை கணிக்க ஜிபிஎஸ் மற்றும்/அல்லது வை-பை தேவைப்படுகிறது."
+
+#: ../plugins/battery/SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "தொலைப்பேசி பயன்பாட்டில் இல்லாதபோது பூட்டு:"
+
+#: ../plugins/battery/SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "தொலைப்பேசி பயன்பாட்டில் இல்லாதபோது முடக்கி வை:"
+
+#: ../plugins/battery/SleepValues.qml:107
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+"குறைந்த நேர்ங்கள் அதிக பாதுகாப்பானது. படம் பார்க்கும்பொழுது அல்லது "
+"அழைப்பிலிருக்கும்போதும் தொலைப்பேசி பூட்டிக்கொள்ளாது."
+
+#: ../plugins/battery/SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
+msgstr ""
+"தொலைப்பேசியானது அழைப்பில் அல்லது படம் பாரக்கும் பொழுதும் முடங்காது."
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "ப்ளூடூத் இணக்கத்திற்க்கான கோரிக்கை"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr ""
+"தயவுச்செய்து %1 இல் காட்டப்பட்ட PIN இதனுடன் பொருந்துகிறதா என "
+"உறுதிப்படுத்தவும்"
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:54
+#: ../plugins/language/DisplayLanguage.qml:95
+#: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/reset/EraseEverything.qml:36
+#: ../plugins/reset/ResetAllSettings.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
+#: ../plugins/security-privacy/LockSecurity.qml:310
+#: ../plugins/time-date/TimePicker.qml:173
+msgid "Cancel"
+msgstr "ரத்துசெய்"
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "PIN ஐ உறுதிச்செய்"
+
+#. TRANSLATORS: %1 is the display name of the device that is connecting
+#: ../plugins/bluetooth/PageComponent.qml:70
+#, qt-format
+msgid "%1 (Connecting…)"
+msgstr "%1 (இணைக்கிறது...)"
+
+#. TRANSLATORS: %1 is the display name of the device that is disconnecting
+#: ../plugins/bluetooth/PageComponent.qml:73
+#, qt-format
+msgid "%1 (Disconnecting…)"
+msgstr "%1 (துண்டிக்கிறது...)"
+
+#: ../plugins/bluetooth/PageComponent.qml:80
+msgid "Computer"
+msgstr "கணினி"
+
+#: ../plugins/bluetooth/PageComponent.qml:81
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
+msgid "Phone"
+msgstr "தொலைபேசி"
+
+#: ../plugins/bluetooth/PageComponent.qml:82
+msgid "Modem"
+msgstr "மோடம்"
+
+#: ../plugins/bluetooth/PageComponent.qml:83 ../src/qml/MainWindow.qml:90
+msgid "Network"
+msgstr "பிணையம்"
+
+#: ../plugins/bluetooth/PageComponent.qml:84
+msgid "Headset"
+msgstr "ஹெட்செட்"
+
+#: ../plugins/bluetooth/PageComponent.qml:85
+msgid "Headphones"
+msgstr "ஹெட்போன்கள்"
+
+#: ../plugins/bluetooth/PageComponent.qml:86
+msgid "Video"
+msgstr "காணொளி"
+
+#: ../plugins/bluetooth/PageComponent.qml:87
+msgid "Other Audio"
+msgstr "மற்ற ஓலிகள்"
+
+#: ../plugins/bluetooth/PageComponent.qml:88
+msgid "Joypad"
+msgstr "ஜாய்பேடு"
+
+#: ../plugins/bluetooth/PageComponent.qml:89
+msgid "Keyboard"
+msgstr "விசைப்பலகை"
+
+#: ../plugins/bluetooth/PageComponent.qml:90
+msgid "Tablet"
+msgstr "தொடுபலகை"
+
+#: ../plugins/bluetooth/PageComponent.qml:91
+msgid "Mouse"
+msgstr "எலியன்"
+
+#: ../plugins/bluetooth/PageComponent.qml:92
+msgid "Printer"
+msgstr "அச்சுப்பொறி"
+
+#: ../plugins/bluetooth/PageComponent.qml:93
+msgid "Camera"
+msgstr "புகைபட கருவி"
+
+#: ../plugins/bluetooth/PageComponent.qml:94
+msgid "Other"
+msgstr "மற்றவை"
+
+#: ../plugins/bluetooth/PageComponent.qml:100
+msgid "Excellent"
+msgstr "அற்புதம்"
+
+#: ../plugins/bluetooth/PageComponent.qml:101
+msgid "Good"
+msgstr "நன்று"
+
+#: ../plugins/bluetooth/PageComponent.qml:102
+msgid "Fair"
+msgstr "மிதமான"
+
+#: ../plugins/bluetooth/PageComponent.qml:103
+msgid "Poor"
+msgstr "மோசம்"
+
+#: ../plugins/bluetooth/PageComponent.qml:104
+#: ../plugins/bluetooth/PageComponent.qml:193
+#: ../plugins/bluetooth/PageComponent.qml:201
+#: ../plugins/security-privacy/PhoneLocking.qml:40
+msgid "None"
+msgstr "வெற்று"
+
+#: ../plugins/bluetooth/PageComponent.qml:130
+msgid "Connected headset:"
+msgstr "இணைக்கப்பட்ட ஹெட்செட்:"
+
+#: ../plugins/bluetooth/PageComponent.qml:158
+msgid "Connect a different headset:"
+msgstr "மற்றொரு ஹெட்செட்டுடன் இணை:"
+
+#: ../plugins/bluetooth/PageComponent.qml:158
+msgid "Connect a headset:"
+msgstr "ஒரு ஹெட்செட் இணை:"
+
+#: ../plugins/bluetooth/PageComponent.qml:184
+msgid "None detected"
+msgstr "எதையும் காணவில்லை"
+
+#: ../plugins/bluetooth/PageComponent.qml:200
+msgid "Name"
+msgstr "பெயர்"
+
+#: ../plugins/bluetooth/PageComponent.qml:204
+msgid "Type"
+msgstr "வகை"
+
+#: ../plugins/bluetooth/PageComponent.qml:208
+msgid "Signal Strength"
+msgstr "சமிக்ஞை வலிமை"
+
+#: ../plugins/bluetooth/PageComponent.qml:213
+msgid "Disconnect"
+msgstr "துண்டிக்கவும்"
+
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "'%1' க்கான PIN"
+
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
+msgid "Pair"
+msgstr "சோடி"
+
+#: ../plugins/cellular/ChooseCarrier.qml:28
+#: ../plugins/cellular/PageComponent.qml:72
+msgid "Carrier"
+msgstr "எடுத்துச் செல்லத்தக்க"
+
+#: ../plugins/cellular/ChooseCarrier.qml:78
+msgid "Refresh"
+msgstr "புதுப்பி"
+
+#: ../plugins/cellular/ChooseCarrier.qml:95
+msgid "Searching"
+msgstr "தேடுகிறது"
+
+#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
+msgid "Cellular"
+msgstr "செல்லுலார்"
+
+#: ../plugins/cellular/PageComponent.qml:66
+msgid "Choose carrier:"
+msgstr "கேரியர் தேர்வு:"
+
+#: ../plugins/cellular/PageComponent.qml:67
+#: ../plugins/time-date/ChooseTimeZone.qml:47
+#: ../plugins/time-date/PageComponent.qml:66
+msgid "Automatically"
+msgstr "தன்னிச்சையாக"
+
+#: ../plugins/cellular/PageComponent.qml:67
+#: ../plugins/time-date/ChooseTimeZone.qml:47
+#: ../plugins/time-date/PageComponent.qml:66
+msgid "Manually"
+msgstr "கைமுறையாக"
+
+#: ../plugins/cellular/PageComponent.qml:101
+msgid "Cellular data"
+msgstr "செல்லுலார் தரவு"
+
+#: ../plugins/cellular/PageComponent.qml:109
+msgid "Data roaming"
+msgstr "ரோமிங் தரவு"
+
+#: ../plugins/cellular/PageComponent.qml:118
+msgid "Data usage statistics"
+msgstr "தரவு பயன்பாட்டு நிலவரம்"
+
+#: ../plugins/language/DisplayLanguage.qml:33
+#: ../plugins/language/PageComponent.qml:55
+msgid "Display language"
+msgstr "மொழியை காட்டு"
+
+#: ../plugins/language/DisplayLanguage.qml:115
+msgid "Confirm"
+msgstr "உறுதிப்படுத்து"
+
+#: ../plugins/language/KeyboardLayouts.qml:26
+#: ../plugins/language/PageComponent.qml:69
+msgid "Keyboard layouts"
+msgstr "விசைப்பலகை அமைப்புகள்"
+
+#: ../plugins/language/KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "தற்போதைய அமைப்புகள்:"
+
+#: ../plugins/language/KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "எல்லா அமைப்புகளும் இருக்கின்றன:"
+
+#: ../plugins/language/PageComponent.qml:31 ../.build/settings.js:10
+msgid "Language & Text"
+msgstr "மொழி & உரை"
+
+#: ../plugins/language/PageComponent.qml:85
+#: ../plugins/language/SpellChecking.qml:27
+#: ../plugins/language/SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "சொல்திருத்தம்"
+
+#: ../plugins/language/PageComponent.qml:97
+msgid "Auto completion"
+msgstr "தன்னிச்சையாக முடிவுறுதல்"
+
+#: ../plugins/language/PageComponent.qml:109
+msgid "Predictive text"
+msgstr "முன்னறிவிக்கும் உரை"
+
+#: ../plugins/language/PageComponent.qml:125
+msgid "Auto capitalization"
+msgstr "தானாக பெரிய எழுத்தாக்குதல்"
+
+#: ../plugins/language/PageComponent.qml:137
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr ""
+"ஒவ்வொரு வாக்கியத்தின் முதல் எழுத்தை பெரிய எழுத்தாக்க Shift விசையை இயக்கவும்."
+
+#: ../plugins/language/PageComponent.qml:147
+msgid "Key press feedback"
+msgstr "விசையை அழுத்த பின்னூட்டம்"
+
+#: ../plugins/language/PageComponent.qml:159
+msgid "Vibrate or emit a sound whenever a key is pressed."
+msgstr ""
+"ஒவ்வொரு முறை விசை அழுத்தப்படும் பொதும் ஒரு ஒலி அல்லது அதிர்வை "
+"வெளிப்படுத்து."
+
+#: ../plugins/language/SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "தற்போதைய உச்சரிப்பு மொழிகளில்:"
+
+#: ../plugins/language/SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "அனைத்து மொழிகளும் இருக்கின்றன."
+
+#: ../plugins/phone/CallForwarding.qml:27
+#: ../plugins/phone/CallForwarding.qml:60
+#: ../plugins/phone/PageComponent.qml:46
+msgid "Call forwarding"
+msgstr "அழைப்பை முன்னனுப்புகிறது"
+
+#: ../plugins/phone/CallForwarding.qml:74
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"நீங்க பதில் அளிக்காத பொதெல்லாம் தொலைப்பேசி அழைப்புகள் மற்றொரு எண்ணிற்கு "
+"மாற்றி அனுப்பபடுகிறது, உங்களுடைய பேசி பயன்பாட்டில் உள்ளது, முடக்கி "
+"வைக்கபட்டுள்ளது, அல்லது தகவல் எல்லைக்கு அப்பாலுள்ளது."
+
+#: ../plugins/phone/CallForwarding.qml:91
+msgid "Call forwarding status can’t be checked right now. Try again later."
+msgstr ""
+"அழைப்பை முன்னனுப்பும் நிலையை இப்போது சரிபர்க்க இயலாது. பிறகு மீண்டும் "
+"முயற்சி செய்."
+
+#: ../plugins/phone/CallForwarding.qml:102
+msgid "Divert to"
+msgstr "திருப்பி அனுப்பு"
+
+#: ../plugins/phone/CallForwarding.qml:113
+msgid "Contacts…"
+msgstr "தொடர்புகள்..."
+
+#: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/time-date/TimePicker.qml:182
+msgid "Set"
+msgstr "அமை"
+
+#: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
+#: ../plugins/phone/PageComponent.qml:52
+msgid "Call waiting"
+msgstr "அழைப்பு காத்திருக்கிறது"
+
+#: ../plugins/phone/CallWaiting.qml:67
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"நீங்க பதலளிங்க அல்லது மற்றொரு அழைப்பிலிருக்கும் பொது புதிய அழைப்பை "
+"உருவாக்கு, அவற்றிரண்டிற்கும் இடையில் மாற்றும் கொள்"
+
+#: ../plugins/phone/PageComponent.qml:30
+msgid "SIM"
+msgstr "சிம்"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone/PageComponent.qml:61 ../plugins/phone/Services.qml:30
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 சேவைகள்"
+
+#: ../plugins/phone/ServiceInfo.qml:35
+msgid "Call"
+msgstr "அழை"
+
+#: ../plugins/reset/EraseEverything.qml:29
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"அனைத்து ஆவணங்கள், சேமிக்கபட்ட விளையாட்டுகள், அமைப்புகள், மற்றும் மற்ற "
+"உருப்பிடிகள் நிரந்தரமாக இந்த தொலைப்பேசியிலிருந்து நீக்கப்படும்."
+
+#: ../plugins/reset/EraseEverything.qml:31
+msgid "Erase & reset everything"
+msgstr "அனைத்தையும் அழி & மீட்டமை"
+
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
+msgid "Reset phone"
+msgstr "தொலைப்பேசையை மீட்டமை"
+
+#: ../plugins/reset/PageComponent.qml:62
+msgid "Reset launcher & home screen…"
+msgstr "தொடக்கம் மற்றும் முகப்பு திரையை மீட்டமை..."
+
+#: ../plugins/reset/PageComponent.qml:75
+msgid "Reset all system settings…"
+msgstr "அனைத்து கணினி அமைப்புகளையும் மீட்டமை..."
+
+#: ../plugins/reset/PageComponent.qml:88
+msgid "Erase & reset everything…"
+msgstr "அனைத்தையும் அழி & மீட்டமை.."
+
+#: ../plugins/reset/ResetAllSettings.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+"தொடக்கத்தின் அமைப்பு மற்றும் உள்ளடக்கங்கள், மற்றும் முகப்பு திரையிலுள்ள "
+"வடிப்பான்கள் அதனுடைய உண்மை அமைப்புகளுக்கு திரும்பிவிடும்."
+
+#: ../plugins/reset/ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "அனைத்து கணினி அமைப்புகளையும் மீட்டமை"
+
+#: ../plugins/reset/ResetLauncherHome.qml:32
+msgid "Reset launcher & home screen"
+msgstr "தொடக்கும் & முகப்பு திரையை மீட்டமை"
+
+#: ../plugins/security-privacy/Dash.qml:29
+#: ../plugins/security-privacy/PageComponent.qml:117
+msgid "Dash search"
+msgstr "கோடு தேடல்"
+
+#: ../plugins/security-privacy/Dash.qml:49
+msgid "Return results from:"
+msgstr "திருப்பிய முடிவுகளிலிருந்து:"
+
+#: ../plugins/security-privacy/Dash.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:52
+#: ../plugins/security-privacy/PageComponent.qml:120
+msgid "Phone only"
+msgstr "தொலைப்பேசி மட்டும்"
+
+#: ../plugins/security-privacy/Dash.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:119
+msgid "Phone and Internet"
+msgstr "தொலைப்பேசி மற்றும் இணையம்"
+
+#: ../plugins/security-privacy/Location.qml:30
+msgid "Location"
+msgstr "இடம்"
+
+#: ../plugins/security-privacy/Location.qml:48
+msgid "Location detection"
+msgstr "இடமறிதல்"
+
+#: ../plugins/security-privacy/Location.qml:70
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+"உங்களின் தோராயமான இடத்தை கண்டறிய ஜிபிஎஸ்யை பயன்படுத்துகிறது. ஜிபிஎஸ் "
+"முடக்கம் மின்கல ஆயுளை நீட்டிக்கும்."
+
+#: ../plugins/security-privacy/Location.qml:72
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"உங்களின் தோராயமான இடத்தை கண்டறிய ஜிபிஎஸ் மறுறம் வை-பை பயன்படுத்துகிறது. "
+"இடமறிதலின் முடக்கம் மின்கல ஆயுளை நீட்டிக்கும்."
+
+#: ../plugins/security-privacy/Location.qml:74
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+"வை-பை(முடக்கப்பட்டுள்ளது), மற்றும் ஜிபிஎஸ் பயன்படுத்தி தோரயாமான இடத்தை "
+"கனிக்கிறது. இடமறிதலின் முடக்கம் மினகலனை சேமிக்கிறது."
+
+#: ../plugins/security-privacy/Location.qml:76
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+"வை-பை, செல் கோபுர இடங்கள், மற்றும் ஜிபிஎஸ் பயன்படுத்தி தோரயாமான இடத்தை "
+"கனிக்கிறது. இடமறிதலின் முடக்கம் மினகலனை சேமிக்கிறது."
+
+#: ../plugins/security-privacy/Location.qml:78
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+"வை-பை, செல் கோபுர இடங்கள்(தொலைப்பேசி இணைப்பு இல்லை), மற்றும் ஜிபிஎஸ் "
+"பயன்படுத்தி தோரயாமான இடத்தை கனிக்கிறது. இடமறிதலின் முடக்கம் மினகலனை "
+"சேமிக்கிறது."
+
+#: ../plugins/security-privacy/Location.qml:80
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+"வை-பை(முடக்கப்பட்டுள்ளது), செல் கோபுர இடங்கள், மற்றும் ஜிபிஎஸ் பயன்படுத்தி "
+"தோரயாமான இடத்தை கனிக்கிறது. இடமறிதலின் முடக்கம் மினகலனை சேமிக்கிறது."
+
+#: ../plugins/security-privacy/Location.qml:82
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"வை-பை(முடக்கப்பட்டுள்ளது), செல் கோபுர இடங்கள்(தொலைப்பேசி இணைப்பு இல்லை), "
+"மற்றும் ஜிபிஎஸ் பயன்படுத்தி தோரயாமான இடத்தை கனிக்கிறது. இடமறிதலின் முடக்கம் "
+"மினகலனை சேமிக்கிறது."
+
+#: ../plugins/security-privacy/Location.qml:89
+msgid "Allow access to location:"
+msgstr "இடத்துக்கு அனுமதி வழங்கு:"
+
+#: ../plugins/security-privacy/LockSecurity.qml:30
+#: ../plugins/security-privacy/PhoneLocking.qml:44
+msgid "Lock security"
+msgstr "பாதுகாப்பை பூட்டு"
+
+#: ../plugins/security-privacy/LockSecurity.qml:78
+msgid "Change passcode"
+msgstr "கடவுக்குறியீட்டை மாற்று"
+
+#: ../plugins/security-privacy/LockSecurity.qml:80
+msgid "Change passphrase"
+msgstr "கடவுச்சொல்லை மாற்று"
+
+#: ../plugins/security-privacy/LockSecurity.qml:87
+msgid "Switch to swipe"
+msgstr "தேய்த்தலுக்கு மாறு"
+
+#: ../plugins/security-privacy/LockSecurity.qml:89
+msgid "Switch to passcode"
+msgstr "கடவுக்குறியீட்டுக்கு மாறு"
+
+#: ../plugins/security-privacy/LockSecurity.qml:91
+msgid "Switch to passphrase"
+msgstr "கடவுச்சொல்லுக்கு மாறு"
+
+#: ../plugins/security-privacy/LockSecurity.qml:100
+msgid "Existing passcode"
+msgstr "ஏற்கனவேயுள்ள கடவுக்குறியீடு"
+
+#: ../plugins/security-privacy/LockSecurity.qml:102
+msgid "Existing passphrase"
+msgstr "ஏற்கனவேயுள்ள கடவுச்சொல்"
+
+#: ../plugins/security-privacy/LockSecurity.qml:150
+msgid "Incorrect passcode. Try again."
+msgstr "தவயான கடவுக்குறியீடு. மீண்டும் முயற்சி"
+
+#: ../plugins/security-privacy/LockSecurity.qml:153
+msgid "Incorrect passphrase. Try again."
+msgstr "தவயான கடவுச்சொல். மீண்டும் முயற்சி"
+
+#: ../plugins/security-privacy/LockSecurity.qml:166
+msgid "Choose passcode"
+msgstr "கடவுக்குறியீட்டை தேர்வுச்செய்"
+
+#: ../plugins/security-privacy/LockSecurity.qml:168
+msgid "Choose passphrase"
+msgstr "கடவுச்சொல்லை தேர்வுச்செய்"
+
+#: ../plugins/security-privacy/LockSecurity.qml:212
+msgid "Confirm passcode"
+msgstr "கடவுக்குறியீட்டை உறுதிப்படுத்து"
+
+#: ../plugins/security-privacy/LockSecurity.qml:214
+msgid "Confirm passphrase"
+msgstr "கடவுச்சொல்லை உறுதிப்படுத்து"
+
+#: ../plugins/security-privacy/LockSecurity.qml:256
+msgid "Those passcodes don't match. Try again."
+msgstr "அந்த கடவுக்குறியீடுகள் பொருந்தவில்லை. மீண்டும் முயற்சி."
+
+#: ../plugins/security-privacy/LockSecurity.qml:259
+msgid "Those passphrases don't match. Try again."
+msgstr "அந்த கடவுச்சொற்கள் பொருந்தவில்லை. மீண்டும் முயற்சி."
+
+#: ../plugins/security-privacy/LockSecurity.qml:273
+msgid "Unset"
+msgstr "அமைக்காத"
+
+#: ../plugins/security-privacy/LockSecurity.qml:274
+msgid "Continue"
+msgstr "தொடரவும்"
+
+#: ../plugins/security-privacy/LockSecurity.qml:326
+msgid "Unlock the phone using:"
+msgstr "பயன்படுத்தி தொலைப்பேசியை திற:"
+
+#: ../plugins/security-privacy/LockSecurity.qml:330
+msgid "Swipe (no security)"
+msgstr "தேய் (பாதுகாப்பற்றது)"
+
+#: ../plugins/security-privacy/LockSecurity.qml:331
+msgid "4-digit passcode"
+msgstr "4-இலக்க கடவுக்குறியீடு"
+
+#: ../plugins/security-privacy/LockSecurity.qml:332
+#: ../plugins/security-privacy/PhoneLocking.qml:42
+msgid "Passphrase"
+msgstr "கடவுச்சொல்"
+
+#: ../plugins/security-privacy/LockSecurity.qml:333
+msgid "Swipe (no security)… "
+msgstr "தேய் (பாதுகாப்பற்றது)... "
+
+#: ../plugins/security-privacy/LockSecurity.qml:334
+msgid "4-digit passcode…"
+msgstr "4-இலக்க கடவுக்குறியீடு..."
+
+#: ../plugins/security-privacy/LockSecurity.qml:335
+msgid "Passphrase…"
+msgstr "் கடவுச்சொல்..."
+
+#: ../plugins/security-privacy/LockSecurity.qml:376
+msgid "Change passcode…"
+msgstr "கடவுக்குறியீட்டை மாற்று..."
+
+#: ../plugins/security-privacy/LockSecurity.qml:377
+msgid "Change passphrase…"
+msgstr "கடவுச்சொல்லை மாற்று..."
+
+#: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
+msgid "Security & Privacy"
+msgstr "பாதுகாப்பு & தனியுரிமை"
+
+#: ../plugins/security-privacy/PageComponent.qml:67
+msgid "Security:"
+msgstr "பாதுகாப்பு:"
+
+#: ../plugins/security-privacy/PageComponent.qml:70
+#: ../plugins/security-privacy/PhoneLocking.qml:29
+msgid "Phone locking"
+msgstr "தொலைப்பேசி பூட்டுகிறது"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy/PageComponent.qml:72
+#: ../plugins/security-privacy/PhoneLocking.qml:65
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 நிமிடம்"
+msgstr[1] "%1 நிமிடங்கள்"
+
+#: ../plugins/security-privacy/PageComponent.qml:80
+msgid "SIM PIN"
+msgstr "சிம் PIN"
+
+#: ../plugins/security-privacy/PageComponent.qml:86
+msgid "Privacy:"
+msgstr "தனியுரிமை:"
+
+#: ../plugins/security-privacy/PageComponent.qml:89
+msgid "Stats on welcome screen"
+msgstr "முகப்பு திரையின் நிலைமை"
+
+#: ../plugins/security-privacy/PageComponent.qml:102
+msgid "Messages on welcome screen"
+msgstr "வரவேற்ப்பு திரை செய்திகள்"
+
+#: ../plugins/security-privacy/PageComponent.qml:135
+msgid "Location access"
+msgstr "இடம் அனுகல்"
+
+#: ../plugins/security-privacy/PageComponent.qml:143
+msgid "Other app access"
+msgstr "மற்ற பயன்பாடுகளின் அனுகல்"
+
+#: ../plugins/security-privacy/PageComponent.qml:148
+msgid "Diagnostics"
+msgstr "கண்டறிதல்"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy/PageComponent.qml:153
+msgid "Sent"
+msgstr "அனுப்பப்பட்டது"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy/PageComponent.qml:156
+msgid "Not sent"
+msgstr "அனுப்பப்படாதவை"
+
+#: ../plugins/security-privacy/PhoneLocking.qml:41
+msgid "Passcode"
+msgstr "கடவுக்குறியீடு"
+
+#: ../plugins/security-privacy/PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr "முடக்கம் உடனடியாக பூட்டிவிடுகிறது"
+
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
+msgid "Sound"
+msgstr "ஒலி"
+
+#: ../plugins/sound/PageComponent.qml:53
+msgid "Phone calls:"
+msgstr "தொலைப்பேசி அழைப்புகள்:"
+
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
+msgid "Ringtone"
+msgstr "அழைப்பொலி"
+
+#: ../plugins/sound/PageComponent.qml:68
+msgid "Vibrate when ringing"
+msgstr "அலறும்பொது அதிரும்படி வை"
+
+#: ../plugins/sound/PageComponent.qml:76
+msgid "Vibrate in silent mode"
+msgstr "சத்தமற்ற முறையில் அதிரும்படி வை"
+
+#: ../plugins/sound/PageComponent.qml:81
+msgid "Other sounds:"
+msgstr "மற்ற சத்தங்கள்:"
+
+#: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
+msgid "Message received"
+msgstr "தகவல் பெறப்பட்டது"
+
+#: ../plugins/sound/PageComponent.qml:96
+msgid "Keyboard sounds"
+msgstr "விசைப்பலகை சத்தங்கள்"
+
+#: ../plugins/sound/PageComponent.qml:104
+msgid "Lock sound"
+msgstr "சத்தத்தை பூட்டு"
+
+#: ../plugins/sound/SilentModeWarning.qml:30
+msgid "The phone is in Silent Mode."
+msgstr "தொலைப்பேசி சத்தமற்ற முறையில் வைக்கப்பட்டுள்ளது."
+
+#: ../plugins/sound/SoundsList.qml:59
+msgid "Stop playing"
+msgstr "விளையாடுவதை நிறுத்து"
+
+#: ../plugins/system-update/Download.qml:29
+#: ../plugins/system-update/PageComponent.qml:344
+msgid "Auto download"
+msgstr "தன்னிச்சையான பதிவிறக்கம்"
+
+#: ../plugins/system-update/Download.qml:34
+msgid "Download future updates automatically:"
+msgstr "வருங்கால மேம்பாடுகளை தன்னிச்சையாக பதிவிறக்கு;"
+
+#: ../plugins/system-update/Download.qml:54
+msgid "When on wi-fi"
+msgstr "வை-பை செயற்பாட்டிலுள்ள போது"
+
+#: ../plugins/system-update/Download.qml:55
+msgid "On any data connection"
+msgstr "எந்தவித தரவு இணைப்பிலும்"
+
+#: ../plugins/system-update/Download.qml:56
+msgid "Data charges may apply."
+msgstr "தரவு கட்டணம் இருக்கலாம்."
+
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
+msgid "Updates"
+msgstr "மேம்பாடுகள்"
+
+#: ../plugins/system-update/PageComponent.qml:46
+msgid "Checking for updates…"
+msgstr "புதுப்பித்தல்களுக்கு தேடுகிறது..."
+
+#: ../plugins/system-update/PageComponent.qml:83
+msgid "Apply update failed:"
+msgstr "மேம்பாட்டு செயல் தோல்வியுற்றது:"
+
+#: ../plugins/system-update/PageComponent.qml:93
+msgid "Pause failed:"
+msgstr "இடைநிறுத்தம் தோல்வியுற்றது:"
+
+#. TRANSLATORS: %1 is the size of the update in GB
+#: ../plugins/system-update/PageComponent.qml:108
+#, qt-format
+msgid "%1 GB"
+msgstr "%1 GB"
+
+#. TRANSLATORS: %1 is the size of the update in MB
+#: ../plugins/system-update/PageComponent.qml:111
+#, qt-format
+msgid "%1 MB"
+msgstr "%1 MB"
+
+#. TRANSLATORS: %1 is the date when the device was last updated
+#: ../plugins/system-update/PageComponent.qml:120
+msgid "No software update available"
+msgstr "எந்தவித மென்பொருள் மேம்பாடும் இல்லை"
+
+#: ../plugins/system-update/PageComponent.qml:120
+#, qt-format
+msgid "Last updated %1"
+msgstr "கடைசியாக மேம்படுத்தப்பட்டது %1"
+
+#. TRANSLATORS: %1 is the number of seconds remaining
+#: ../plugins/system-update/PageComponent.qml:133
+#, qt-format
+msgid "About %1 second remaining"
+msgid_plural "About %1 seconds remaining"
+msgstr[0] "தோராயமாக %1 வினாடி மீதமுள்ளது"
+msgstr[1] "தோராயமாக %1 வினாடிகள் மீதமுள்ளன"
+
+#: ../plugins/system-update/PageComponent.qml:135
+msgid "No estimate for the download"
+msgstr "பதிவிறக்கத்திற்கு கணிப்பில்லை"
+
+#: ../plugins/system-update/PageComponent.qml:141
+msgid "Paused"
+msgstr "இடைநிறுத்தப்பட்டது"
+
+#: ../plugins/system-update/PageComponent.qml:150
+msgid "Download failed:"
+msgstr "பதிவிறக்கம் தோல்வியுற்றது:"
+
+#: ../plugins/system-update/PageComponent.qml:205
+#: ../plugins/system-update/PageComponent.qml:322
+msgid "Retry"
+msgstr "மீண்டும் முயல்க"
+
+#: ../plugins/system-update/PageComponent.qml:235
+msgid "Ubuntu Phone"
+msgstr "உபுண்டு தொலைப்பேசி"
+
+#. TRANSLATORS: %1 is the version of the update
+#: ../plugins/system-update/PageComponent.qml:248
+#, qt-format
+msgid "Version %1"
+msgstr "பதிப்பு %1"
+
+#: ../plugins/system-update/PageComponent.qml:292
+msgid "Pause downloading"
+msgstr "பதிவிறக்கம் இடைநிறுத்து"
+
+#: ../plugins/system-update/PageComponent.qml:299
+msgid "Resume downloading"
+msgstr "பதிவிறக்கத்தை தொடரவும்"
+
+#: ../plugins/system-update/PageComponent.qml:315
+msgid "Download"
+msgstr "பதவிறக்கம்"
+
+#: ../plugins/system-update/PageComponent.qml:329
+msgid "Install & Restart"
+msgstr "நிறுவு & மீள்துவக்கு"
+
+#: ../plugins/system-update/PageComponent.qml:349
+msgid "On wi-fi"
+msgstr "வை-பையில்"
+
+#: ../plugins/system-update/PageComponent.qml:351
+msgid "Always"
+msgstr "எப்போதும்"
+
+#: ../plugins/time-date/ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "நேர மண்டலம்"
+
+#: ../plugins/time-date/ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "நேர மண்டலத்தை அமை:"
+
+#: ../plugins/time-date/ChooseTimeZone.qml:113
+msgid "Enter your current location."
+msgstr "உங்களுடைய இருப்படத்தை உள்ளிடு."
+
+#: ../plugins/time-date/ChooseTimeZone.qml:113
+msgid "No matching place"
+msgstr "பொருந்திய இடங்கள் காணவில்லை"
+
+#: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
+msgid "Time & Date"
+msgstr "நேரம் மற்றும் தேதி"
+
+#: ../plugins/time-date/PageComponent.qml:52
+msgid "Time zone:"
+msgstr "நேரம் மண்டலம்:"
+
+#: ../plugins/time-date/PageComponent.qml:65
+msgid "Set the time and date:"
+msgstr "நேரம் மற்றும் தேதியை அமை:"
+
+#: ../plugins/time-date/TimePicker.qml:26
+msgid "Set time & date"
+msgstr "நேரம் & தேதியை அமை"
+
+#: ../plugins/time-date/TimePicker.qml:68
+msgid "Time"
+msgstr "நேரம்"
+
+#: ../plugins/time-date/TimePicker.qml:81
+msgid "Hour"
+msgstr "மணி"
+
+#: ../plugins/time-date/TimePicker.qml:95
+msgid "Minute"
+msgstr "நிமிடம்"
+
+#: ../plugins/time-date/TimePicker.qml:109
+msgid "Second"
+msgstr "வினாடி"
+
+#: ../plugins/time-date/TimePicker.qml:118
+msgid "Date"
+msgstr "தேதி"
+
+#: ../plugins/time-date/TimePicker.qml:130
+msgid "Day"
+msgstr "நாள்"
+
+#: ../plugins/time-date/TimePicker.qml:144
+msgid "Month"
+msgstr "மாதம்"
+
+#: ../plugins/time-date/TimePicker.qml:162
+msgid "Year"
+msgstr "ஆண்டு"
+
+#: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
+msgid "System Settings"
+msgstr "கணினி அமைப்புகள்"
+
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr "தெடு"
+
+#: ../src/qml/MainWindow.qml:95
+msgid "Personal"
+msgstr "தனிப்பட்ட"
+
+#: ../src/qml/MainWindow.qml:100
+msgid "System"
+msgstr "கணினி"
+
+#: ../.build/settings.js:2
+msgid "Accessibility"
+msgstr "அணுகுத்தன்மை"
+
+#: ../.build/settings.js:6
+msgid "Brightness"
+msgstr "வெளிச்சம்"
+
+#: ../.build/settings.js:8
+msgid "Example"
+msgstr "எடுத்துக்காட்டு"
+
+#: ../.build/settings.js:9
+msgid "Flight mode"
+msgstr "விமான பாங்கு"
+
+#: ../.build/settings.js:11
+msgid "Orientation lock"
+msgstr "நோக்குநிலை பூட்டு"

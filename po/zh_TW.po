@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-10-13 05:29+0000\n"
+"PO-Revision-Date: 2013-10-21 15:00+0000\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-10-14 05:34+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-11-12 06:26+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -242,7 +242,7 @@ msgstr "要準確偵測位置需要 GPS 和/或 Wi-Fi。"
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr "鎖定電話，當不使用："
+msgstr "當不使用此時間後鎖定電話："
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
@@ -781,7 +781,7 @@ msgstr "繼續"
 
 #: ../plugins/security-privacy/LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr "為電話解鎖，使用："
+msgstr "以此為電話解鎖："
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
@@ -919,7 +919,7 @@ msgstr "鍵盤音效"
 
 #: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
-msgstr "鎖定音效"
+msgstr "音效鎖定"
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
@@ -1020,7 +1020,7 @@ msgstr "Ubuntu Phone"
 #: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
-msgstr "版本 %1"
+msgstr "%1 版"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"

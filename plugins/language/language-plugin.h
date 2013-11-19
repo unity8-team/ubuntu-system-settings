@@ -29,10 +29,10 @@ typedef struct _ActUserManager ActUserManager;
 typedef struct _GObject GObject;
 typedef struct _GParamSpec GParamSpec;
 typedef struct _GSettings GSettings;
+typedef void *gpointer;
+typedef char gchar;
 
 class KeyboardLayout;
-
-typedef void *gpointer;
 
 class LanguagePlugin : public QObject
 {
@@ -127,28 +127,34 @@ public:
 
 private:
 
-    mutable QList<QLocale> *_languageLocales;
-    mutable QStringList *_languageNames;
-    mutable QStringList *_languageCodes;
-    mutable QHash<QString, unsigned int> *_nameIndices;
-    mutable QHash<QString, unsigned int> *_codeIndices;
+    mutable QList<QLocale> *m_languageLocales;
+    mutable QStringList *m_languageNames;
+    mutable QStringList *m_languageCodes;
+    mutable QHash<QString, unsigned int> *m_indicesByBcp47Name;
+    mutable QHash<QString, unsigned int> *m_indicesByLocaleName;
     const QList<QLocale> &languageLocales() const;
-    const QHash<QString, unsigned int> &nameIndices() const;
-    const QHash<QString, unsigned int> &codeIndices() const;
+    int indexForLocale(const QLocale &locale) const;
+    int indexForLanguage(const QString &language) const;
 
-    mutable int _currentLanguage;
-    int _nextCurrentLanguage;
-    ActUserManager *_manager;
-    ActUser *_user;
+    mutable int m_currentLanguage;
+    int m_nextCurrentLanguage;
+    ActUserManager *m_manager;
+    ActUser *m_user;
 
-    mutable GSettings *_maliitSettings;
+    mutable GSettings *m_maliitSettings;
     GSettings *maliitSettings() const;
 
-    mutable QList<KeyboardLayout *> *_keyboardLayouts;
+    mutable QList<KeyboardLayout *> *m_keyboardLayouts;
     const QList<KeyboardLayout *> &keyboardLayouts() const;
 
-    SubsetModel *_keyboardLayoutsModel;
-    SubsetModel *_spellCheckingModel;
+    SubsetModel *m_keyboardLayoutsModel;
+    SubsetModel *m_spellCheckingModel;
+
+    void enabledLayoutsChanged();
+
+    friend void enabledLayoutsChanged(GSettings *settings,
+                                      gchar     *key,
+                                      gpointer   user_data);
 
     void userSetCurrentLanguage(ActUser *user);
 
