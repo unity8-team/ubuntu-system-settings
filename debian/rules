@@ -9,5 +9,8 @@ include /usr/share/dpkg/buildflags.mk
 override_dh_install:
 	dh_install --fail-missing
 
+override_dh_makeshlibs:
+	dh_makeshlibs -Xusr/lib/x86_64-linux-gnu/ubuntu-system-settings
+
 %:
 	dh $@ 
