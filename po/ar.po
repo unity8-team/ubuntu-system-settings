@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-07-31 05:45+0000\n"
+"PO-Revision-Date: 2013-11-20 21:59+0000\n"
 "Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2013-11-12 06:25+0000\n"
-"X-Generator: Launchpad (build 16820)\n"
+"X-Launchpad-Export-Date: 2013-11-21 06:40+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -109,7 +109,7 @@ msgstr "مساحة فارغة"
 
 #: ../plugins/about/Storage.qml:163
 msgid "Installed apps"
-msgstr ""
+msgstr "التطبيقات المثبّتة"
 
 #: ../plugins/about/Storage.qml:164
 msgid "By name"
@@ -141,79 +141,95 @@ msgstr "خلفية مختلفة لكل واحدة"
 
 #: ../plugins/battery/PageComponent.qml:35 ../.build/settings.js:4
 msgid "Battery"
-msgstr ""
+msgstr "البطارية"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery/PageComponent.qml:47
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "منذ أقل من ثانية (%1)"
+msgstr[1] "منذ ثانية واحدة (%1)"
+msgstr[2] "منذ ثانيتين (%1)"
+msgstr[3] "منذ %1 ثوان"
+msgstr[4] "منذ %1 ثانية"
+msgstr[5] "منذ %1 ثانية"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery/PageComponent.qml:50
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "منذ أقل من دقيقة (%1)"
+msgstr[1] "منذ دقيقة واحدة (%1)"
+msgstr[2] "منذ دقيقتين (%1)"
+msgstr[3] "منذ %1 دقائق"
+msgstr[4] "منذ %1 دقيقة"
+msgstr[5] "منذ %1 دقيقة"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery/PageComponent.qml:53
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "منذ أقل من ساعة (%1)"
+msgstr[1] "منذ ساعة (%1)"
+msgstr[2] "منذ ساعتين (%1)"
+msgstr[3] "منذ %1 ساعات"
+msgstr[4] "منذ %1 ساعة"
+msgstr[5] "منذ %1 ساعة"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery/PageComponent.qml:56
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "منذ أقل من يوم (%1)"
+msgstr[1] "منذ يوم واحد (%1)"
+msgstr[2] "منذ يومين (%1)"
+msgstr[3] "منذ %1 أيام"
+msgstr[4] "منذ %1 يوما"
+msgstr[5] "منذ %1 يوم"
 
 #: ../plugins/battery/PageComponent.qml:76
 msgid "Charging now"
-msgstr ""
+msgstr "يشحن حاليا"
 
 #: ../plugins/battery/PageComponent.qml:81
 msgid "Last full charge"
-msgstr ""
+msgstr "آخر شحن مكتمل"
 
 #: ../plugins/battery/PageComponent.qml:86
 msgid "Fully charged"
-msgstr ""
+msgstr "مشحون بالكامل"
 
 #: ../plugins/battery/PageComponent.qml:125
 msgid "Charge level"
-msgstr ""
+msgstr "مستوى الشحن"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery/PageComponent.qml:133
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../plugins/battery/PageComponent.qml:186
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "طرق للحد من استهلاك البطارية:"
 
 #: ../plugins/battery/PageComponent.qml:190
 msgid "Display brightness"
-msgstr ""
+msgstr "سطوع الشاشة"
 
 #: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
-msgstr ""
+msgstr "الإيصاد عند الخمول"
 
 #: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
-msgstr ""
+msgstr "السُبات عند الخمول"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery/PageComponent.qml:253
@@ -224,8 +240,12 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "بعد أقل من دقيقة (%1)"
+msgstr[1] "بعد دقيقة واحدة (%1)"
+msgstr[2] "بعد دقيقتين (%1)"
+msgstr[3] "بعد %1 دقائق"
+msgstr[4] "بعد %1 دقيقة"
+msgstr[5] "بعد %1 دقيقة"
 
 #: ../plugins/battery/PageComponent.qml:275
 #: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
@@ -245,36 +265,39 @@ msgstr "نظام تحديد المواقع (GPS)"
 #: ../plugins/battery/PageComponent.qml:355
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
+"لتحديد الموقع بدقه يجب تشغيل نظام تحديد المواقع (GPS) و/أو اتصال واي-فاي."
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "إيصاد الهاتف عندما لا يكون قيد الاستخدام:"
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "وضع الهاتف في وضع السُبات عندما لا يكون قيد الاستخدام:"
 
 #: ../plugins/battery/SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
+"الأوقات الأقصر تكون أكثر أمانا. لن يتم إيصاد الهاتف أثناء المكالمات أو أثناء "
+"تشغيل الفيديو."
 
 #: ../plugins/battery/SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
+msgstr "لن يسبُت الهاتف أثناء إجراء المكالمات أو أثناء تشغيل الفيديو."
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr ""
+msgstr "طلب اقتران بلوتوث."
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "من فضلك تحقق من أن رقم الهوية (PIN) الظاهر على '%1' يطابق هذا الرقم."
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
@@ -291,23 +314,23 @@ msgstr "ألغِ"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "تأكيد رقم الهوية (PIN)"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: ../plugins/bluetooth/PageComponent.qml:70
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr ""
+msgstr "%1 (يتصل…)"
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
 #: ../plugins/bluetooth/PageComponent.qml:73
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr ""
+msgstr "%1 (يقطع الاتصال…)"
 
 #: ../plugins/bluetooth/PageComponent.qml:80
 msgid "Computer"
-msgstr ""
+msgstr "حاسوب"
 
 #: ../plugins/bluetooth/PageComponent.qml:81
 #: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
@@ -316,7 +339,7 @@ msgstr "الهاتف"
 
 #: ../plugins/bluetooth/PageComponent.qml:82
 msgid "Modem"
-msgstr ""
+msgstr "مودم"
 
 #: ../plugins/bluetooth/PageComponent.qml:83 ../src/qml/MainWindow.qml:90
 msgid "Network"
@@ -324,70 +347,70 @@ msgstr "الشبكة"
 
 #: ../plugins/bluetooth/PageComponent.qml:84
 msgid "Headset"
-msgstr ""
+msgstr "سماعة رأس بميكروفون"
 
 #: ../plugins/bluetooth/PageComponent.qml:85
 msgid "Headphones"
-msgstr ""
+msgstr "سماعات رأس"
 
 #: ../plugins/bluetooth/PageComponent.qml:86
 msgid "Video"
-msgstr ""
+msgstr "فيديو"
 
 #: ../plugins/bluetooth/PageComponent.qml:87
 msgid "Other Audio"
-msgstr ""
+msgstr "صوت آخر"
 
 #: ../plugins/bluetooth/PageComponent.qml:88
 msgid "Joypad"
-msgstr ""
+msgstr "عصا تحكم"
 
 #: ../plugins/bluetooth/PageComponent.qml:89
 msgid "Keyboard"
-msgstr ""
+msgstr "لوحة مفاتيح"
 
 #: ../plugins/bluetooth/PageComponent.qml:90
 msgid "Tablet"
-msgstr ""
+msgstr "لوحي"
 
 #: ../plugins/bluetooth/PageComponent.qml:91
 msgid "Mouse"
-msgstr ""
+msgstr "فأرة"
 
 #: ../plugins/bluetooth/PageComponent.qml:92
 msgid "Printer"
-msgstr ""
+msgstr "طابعة"
 
 #: ../plugins/bluetooth/PageComponent.qml:93
 msgid "Camera"
-msgstr ""
+msgstr "كاميرا"
 
 #: ../plugins/bluetooth/PageComponent.qml:94
 msgid "Other"
-msgstr ""
+msgstr "آخر"
 
 #: ../plugins/bluetooth/PageComponent.qml:100
 msgid "Excellent"
-msgstr ""
+msgstr "ممتاز"
 
 #: ../plugins/bluetooth/PageComponent.qml:101
 msgid "Good"
-msgstr ""
+msgstr "جيد"
 
 #: ../plugins/bluetooth/PageComponent.qml:102
 msgid "Fair"
-msgstr ""
+msgstr "مقبول"
 
 #: ../plugins/bluetooth/PageComponent.qml:103
 msgid "Poor"
-msgstr ""
+msgstr "سيء"
 
 #: ../plugins/bluetooth/PageComponent.qml:104
 #: ../plugins/bluetooth/PageComponent.qml:193
 #: ../plugins/bluetooth/PageComponent.qml:201
 #: ../plugins/security-privacy/PhoneLocking.qml:40
 msgid "None"
-msgstr ""
+msgstr "لا شيء"
 
 #: ../plugins/bluetooth/PageComponent.qml:130
 msgid "Connected headset:"
@@ -407,30 +430,30 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:200
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #: ../plugins/bluetooth/PageComponent.qml:204
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #: ../plugins/bluetooth/PageComponent.qml:208
 msgid "Signal Strength"
-msgstr ""
+msgstr "قوة الإشارة"
 
 #: ../plugins/bluetooth/PageComponent.qml:213
 msgid "Disconnect"
-msgstr ""
+msgstr "اقطع الاتصال"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "رقم الهوية (PIN) لـ '%1'"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "اقتران"
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:72
@@ -439,7 +462,7 @@ msgstr ""
 
 #: ../plugins/cellular/ChooseCarrier.qml:78
 msgid "Refresh"
-msgstr ""
+msgstr "تحديث"
 
 #: ../plugins/cellular/ChooseCarrier.qml:95
 msgid "Searching"
@@ -527,11 +550,11 @@ msgstr ""
 
 #: ../plugins/language/PageComponent.qml:147
 msgid "Key press feedback"
-msgstr ""
+msgstr "رد فعل الضغط على المفاتيح"
 
 #: ../plugins/language/PageComponent.qml:159
 msgid "Vibrate or emit a sound whenever a key is pressed."
-msgstr ""
+msgstr "الاهتزاز أو إصدار صوت عند الضغط على مفتاح"
 
 #: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -545,7 +568,7 @@ msgstr "جميع اللغات المتوفرة:"
 #: ../plugins/phone/CallForwarding.qml:60
 #: ../plugins/phone/PageComponent.qml:46
 msgid "Call forwarding"
-msgstr ""
+msgstr "تحويل المكالمات"
 
 #: ../plugins/phone/CallForwarding.qml:74
 msgid ""
@@ -588,13 +611,13 @@ msgstr ""
 
 #: ../plugins/phone/PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "شريحة الهاتف"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone/PageComponent.qml:61 ../plugins/phone/Services.qml:30
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "خدمات %1"
 
 #: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
@@ -648,7 +671,7 @@ msgstr "أعد ضبط واجهة الهاتف والشاشة الرئيسية"
 #: ../plugins/security-privacy/Dash.qml:29
 #: ../plugins/security-privacy/PageComponent.qml:117
 msgid "Dash search"
-msgstr ""
+msgstr "بحث اللوحة"
 
 #: ../plugins/security-privacy/Dash.qml:49
 msgid "Return results from:"
