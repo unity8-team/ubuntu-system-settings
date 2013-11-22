@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-11-20 21:59+0000\n"
+"PO-Revision-Date: 2013-11-22 00:41+0000\n"
 "Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2013-11-21 06:40+0000\n"
+"X-Launchpad-Export-Date: 2013-11-22 06:04+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -691,47 +691,61 @@ msgstr "الهاتف والإنترنت"
 
 #: ../plugins/security-privacy/Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "الموقع"
 
 #: ../plugins/security-privacy/Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "اكتشاف الموقع"
 
 #: ../plugins/security-privacy/Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"استخدام نظام تحديد المواقع (GPS) للكشف عن موقعك. عندما توقف ذلك، سينطفئ نظام "
+"تحديد المواقع لتوفير البطارية."
 
 #: ../plugins/security-privacy/Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"استخدام الواي-فاي ونظام تحديد المواقع (GPS) للكشف عن موقعك. إيقاف الكشف عن "
+"الموقع سيوفر من استهلاك البطارية."
 
 #: ../plugins/security-privacy/Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"استخدام الواي-فاي (متوقف حاليا) ونظام تحديد المواقع (GPS) للكشف عن موقعك. "
+"إيقاف الكشف عن الموقع سيوفر من استهلاك البطارية."
 
 #: ../plugins/security-privacy/Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"استخدام الواي-فاي، ومواقع أبراج الهاتف الخلوي، ونظام تحديد المواقع (GPS) "
+"للكشف عن موقعك. إيقاف الكشف عن الموقع سيوفر من استهلاك البطارية."
 
 #: ../plugins/security-privacy/Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"استخدام الواي-فاي، ومواقع أبراج الهاتف الخلوي(ما من اتصال حالي بأية أبراج "
+"خلوية)، ونظام تحديد المواقع (GPS) للكشف عن موقعك. إيقاف الكشف عن الموقع "
+"سيوفر من استهلاك البطارية."
 
 #: ../plugins/security-privacy/Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"استخدام الواي-فاي (متوقف حاليا)، ومواقع أبراج الهاتف الخلوي، ونظام تحديد "
+"المواقع (GPS) للكشف عن موقعك. إيقاف الكشف عن الموقع سيوفر من استهلاك "
+"البطارية."
 
 #: ../plugins/security-privacy/Location.qml:82
 msgid ""
@@ -739,15 +753,18 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"استخدام الواي-فاي (متوقف حاليا)، ومواقع أبراج الهاتف الخلوي (ما من اتصال "
+"حالي بأية أبراج خلوية)، ونظام تحديد المواقع (GPS) للكشف عن موقعك. إيقاف "
+"الكشف عن الموقع سيوفر من استهلاك البطارية."
 
 #: ../plugins/security-privacy/Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "السماح بالحصول على الموقع:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:30
 #: ../plugins/security-privacy/PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "قفل الأمان"
 
 #: ../plugins/security-privacy/LockSecurity.qml:78
 msgid "Change passcode"
@@ -787,72 +804,72 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "اختيار كود سري"
 
 #: ../plugins/security-privacy/LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "اختيار عبارة سرية"
 
 #: ../plugins/security-privacy/LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "تأكيد الكود السري"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "تأكيد العبارة السرية"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "الكودين غير متطابقين. حاول مجددا."
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "العبارتين غير متطابقتين. حاول مجددا."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "إلغاء التعيين"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "استمر"
 
 #: ../plugins/security-privacy/LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "إيصاد الهاتف باستخدام:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "التمرير (دون تأمين)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "كود سري من 4 أرقام"
 
 #: ../plugins/security-privacy/LockSecurity.qml:332
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "عبارة سرية"
 
 #: ../plugins/security-privacy/LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "تمرير (دون تأمين)... "
 
 #: ../plugins/security-privacy/LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "كود سري من 4 أرقام..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "عبارة سرية..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "تغيير الكود السري..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "تغيير العبارة السرية..."
 
 #: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
 msgid "Security & Privacy"
@@ -860,7 +877,7 @@ msgstr "الأمن والخصوصية"
 
 #: ../plugins/security-privacy/PageComponent.qml:67
 msgid "Security:"
-msgstr ""
+msgstr "الأمان:"
 
 #: ../plugins/security-privacy/PageComponent.qml:70
 #: ../plugins/security-privacy/PhoneLocking.qml:29
@@ -873,32 +890,36 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "أقل من دقيقة (%1)"
+msgstr[1] "دقيقة واحدة (%1)"
+msgstr[2] "دقيقتان (%1)"
+msgstr[3] "%1 دقائق"
+msgstr[4] "%1 دقيقة"
+msgstr[5] "%1 دقيقة"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "SIM PIN"
-msgstr ""
+msgstr "رقم هوية شريحة الهاتف"
 
 #: ../plugins/security-privacy/PageComponent.qml:86
 msgid "Privacy:"
-msgstr ""
+msgstr "الخصوصية:"
 
 #: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "الإحصائات على شاشة الترحيب"
 
 #: ../plugins/security-privacy/PageComponent.qml:102
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "الرسائل على شاشة الترحيب"
 
 #: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Location access"
-msgstr ""
+msgstr "الحصول على الموقع"
 
 #: ../plugins/security-privacy/PageComponent.qml:143
 msgid "Other app access"
-msgstr ""
+msgstr "النفاذ إلى تطبيقات أخرى"
 
 #: ../plugins/security-privacy/PageComponent.qml:148
 msgid "Diagnostics"
@@ -908,17 +929,17 @@ msgstr "التشخيصات"
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy/PageComponent.qml:153
 msgid "Sent"
-msgstr ""
+msgstr "تم الإرسال"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy/PageComponent.qml:156
 msgid "Not sent"
-msgstr ""
+msgstr "لم يُرسَل"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "الكود السري"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:79
 msgid "Sleep locks immediately"
