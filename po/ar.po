@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-11-22 00:41+0000\n"
+"PO-Revision-Date: 2013-11-23 04:15+0000\n"
 "Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2013-11-22 06:04+0000\n"
+"X-Launchpad-Export-Date: 2013-11-23 06:28+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -426,7 +426,7 @@ msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:184
 msgid "None detected"
-msgstr ""
+msgstr "لم يكتشف شيئا"
 
 #: ../plugins/bluetooth/PageComponent.qml:200
 msgid "Name"
@@ -458,7 +458,7 @@ msgstr "اقتران"
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:72
 msgid "Carrier"
-msgstr ""
+msgstr "مزود الخدمة"
 
 #: ../plugins/cellular/ChooseCarrier.qml:78
 msgid "Refresh"
@@ -470,11 +470,11 @@ msgstr "البحث"
 
 #: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
 msgid "Cellular"
-msgstr ""
+msgstr "شبكة الاتصال الخلوي"
 
 #: ../plugins/cellular/PageComponent.qml:66
 msgid "Choose carrier:"
-msgstr ""
+msgstr "اختيار مزود الخدمة:"
 
 #: ../plugins/cellular/PageComponent.qml:67
 #: ../plugins/time-date/ChooseTimeZone.qml:47
@@ -490,7 +490,7 @@ msgstr "يدويا"
 
 #: ../plugins/cellular/PageComponent.qml:101
 msgid "Cellular data"
-msgstr ""
+msgstr "نقل البيانات عبر الشبكة الخلوية"
 
 #: ../plugins/cellular/PageComponent.qml:109
 msgid "Data roaming"
@@ -538,11 +538,11 @@ msgstr "الإكمال التلقائي"
 
 #: ../plugins/language/PageComponent.qml:109
 msgid "Predictive text"
-msgstr ""
+msgstr "النصوص التوقعية"
 
 #: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
-msgstr ""
+msgstr "أحرف كبيرة تلقائيا"
 
 #: ../plugins/language/PageComponent.qml:137
 msgid "Turns on Shift to capitalize the first letter of each sentence."
@@ -768,7 +768,7 @@ msgstr "قفل الأمان"
 
 #: ../plugins/security-privacy/LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "تغيير الكود السري"
 
 #: ../plugins/security-privacy/LockSecurity.qml:80
 msgid "Change passphrase"
@@ -776,31 +776,31 @@ msgstr ""
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "التبديل إلى التمرير"
 
 #: ../plugins/security-privacy/LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "التبديل إلى الكود السري"
 
 #: ../plugins/security-privacy/LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "التبديل إلى العبارة السرية"
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "الكود السري الحالي"
 
 #: ../plugins/security-privacy/LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "العبارة السرية الحالية"
 
 #: ../plugins/security-privacy/LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "الكود السري غير صحيح. حاول مجددا."
 
 #: ../plugins/security-privacy/LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "العبارة السرية غير صحيحة. حاول مجددا."
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
@@ -996,7 +996,7 @@ msgstr ""
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "تنزيل التحديثات المستقبلية تلقائيا"
 
 #: ../plugins/system-update/Download.qml:54
 msgid "When on wi-fi"
@@ -1016,88 +1016,92 @@ msgstr "التحديثات"
 
 #: ../plugins/system-update/PageComponent.qml:46
 msgid "Checking for updates…"
-msgstr ""
+msgstr "يبحث عن تحديثات..."
 
 #: ../plugins/system-update/PageComponent.qml:83
 msgid "Apply update failed:"
-msgstr ""
+msgstr "فشل تطبيق التحديث:"
 
 #: ../plugins/system-update/PageComponent.qml:93
 msgid "Pause failed:"
-msgstr ""
+msgstr "فشل الإلباث:"
 
 #. TRANSLATORS: %1 is the size of the update in GB
 #: ../plugins/system-update/PageComponent.qml:108
 #, qt-format
 msgid "%1 GB"
-msgstr ""
+msgstr "%1 ج.ب"
 
 #. TRANSLATORS: %1 is the size of the update in MB
 #: ../plugins/system-update/PageComponent.qml:111
 #, qt-format
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 م.ب"
 
 #. TRANSLATORS: %1 is the date when the device was last updated
 #: ../plugins/system-update/PageComponent.qml:120
 msgid "No software update available"
-msgstr ""
+msgstr "لا تتوفر تحديثات برمجية"
 
 #: ../plugins/system-update/PageComponent.qml:120
 #, qt-format
 msgid "Last updated %1"
-msgstr ""
+msgstr "آخر تحديث في %1"
 
 #. TRANSLATORS: %1 is the number of seconds remaining
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "بقي ما يقارب أقل من ثانية (%1)"
+msgstr[1] "بقي ما يقارب ثانية واحدة (%1)"
+msgstr[2] "بقي ما يقارب ثانيتين (%1)"
+msgstr[3] "بقي ما يقارب %1 ثوان"
+msgstr[4] "بقي ما يقارب %1 ثانية"
+msgstr[5] "بقي ما يقارب %1 ثانية"
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
-msgstr ""
+msgstr "لا تتوفر تخمينات للتنزيل"
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
-msgstr ""
+msgstr "مُلبَث"
 
 #: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
-msgstr ""
+msgstr "فشل التنزيل:"
 
 #: ../plugins/system-update/PageComponent.qml:205
 #: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
-msgstr ""
+msgstr "أعِد المحاولة"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
-msgstr ""
+msgstr "أوبونتو للهواتف"
 
 #. TRANSLATORS: %1 is the version of the update
 #: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "الإصدارة %1"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
-msgstr ""
+msgstr "إلباث التنزيل"
 
 #: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
-msgstr ""
+msgstr "استئناف التنزيل"
 
 #: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
-msgstr ""
+msgstr "تنزيل"
 
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
-msgstr ""
+msgstr "تثبيت وإعادة تشغيل"
 
 #: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
@@ -1105,7 +1109,7 @@ msgstr ""
 
 #: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
-msgstr ""
+msgstr "دائما"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -1117,7 +1121,7 @@ msgstr "تعيين المنطقة الزمنية:"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
-msgstr ""
+msgstr "أدخل موقعك الحالي."
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
@@ -1137,39 +1141,39 @@ msgstr "تعيين الوقت والتاريخ:"
 
 #: ../plugins/time-date/TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "اضبط الوقت والتاريخ"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "الوقت"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "الساعة"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "الدقيقة"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "الثانية"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "التاريخ"
 
 #: ../plugins/time-date/TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "اليوم"
 
 #: ../plugins/time-date/TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "الشهر"
 
 #: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "السنة"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
@@ -1177,7 +1181,7 @@ msgstr "إعدادات النظام"
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
+msgstr "البحث"
 
 #: ../src/qml/MainWindow.qml:95
 msgid "Personal"
