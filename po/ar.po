@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-11-23 04:15+0000\n"
+"PO-Revision-Date: 2013-11-23 18:09+0000\n"
 "Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2013-11-23 06:28+0000\n"
+"X-Launchpad-Export-Date: 2013-11-24 05:50+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -347,7 +347,7 @@ msgstr "الشبكة"
 
 #: ../plugins/bluetooth/PageComponent.qml:84
 msgid "Headset"
-msgstr "سماعة رأس بميكروفون"
+msgstr ""
 
 #: ../plugins/bluetooth/PageComponent.qml:85
 msgid "Headphones"
@@ -546,7 +546,7 @@ msgstr "أحرف كبيرة تلقائيا"
 
 #: ../plugins/language/PageComponent.qml:137
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
+msgstr "شغّل مفتاح Shift لتكبير الأحرف الأولية من كل جملة."
 
 #: ../plugins/language/PageComponent.qml:147
 msgid "Key press feedback"
@@ -582,6 +582,7 @@ msgstr ""
 #: ../plugins/phone/CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
+"لا يمكن التحقق من حالة تحويل المكالمات حاليا. حاول مجددا في وقت لاحق."
 
 #: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
@@ -675,7 +676,7 @@ msgstr "بحث اللوحة"
 
 #: ../plugins/security-privacy/Dash.qml:49
 msgid "Return results from:"
-msgstr ""
+msgstr "النتائج المرتجعة من:"
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:52
@@ -772,7 +773,7 @@ msgstr "تغيير الكود السري"
 
 #: ../plugins/security-privacy/LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "تغيير العبارة السرية"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
@@ -992,7 +993,7 @@ msgstr ""
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
-msgstr ""
+msgstr "التنزيل التلقائي"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
@@ -1000,15 +1001,15 @@ msgstr "تنزيل التحديثات المستقبلية تلقائيا"
 
 #: ../plugins/system-update/Download.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "عندما يكون على الواي-فاي"
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "على أي اتصال بيانات"
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "قد يتم تطبيق رسوم البيانات."
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
@@ -1105,7 +1106,7 @@ msgstr "تثبيت وإعادة تشغيل"
 
 #: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
-msgstr ""
+msgstr "على الواي-فاي"
 
 #: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
