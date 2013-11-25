@@ -148,6 +148,8 @@ ItemPage {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: units.gu(15)
 
+                antialiasing: true
+
                 onPaint:{
                     var ctx = canvas.getContext('2d');
                     ctx.save();
