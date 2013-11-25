@@ -3,6 +3,9 @@ set(QML_SOURCES
     MainPage.qml
     OverlayImage.qml
     SwappableImage.qml
+    SelectSource.qml
+    SelectCustom.qml
+    SelectUbuntu.qml
 )
 add_library(UbuntuBackgroundPanel MODULE
 plugin.cpp background.cpp plugin.h background.h

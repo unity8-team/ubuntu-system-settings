@@ -22,7 +22,6 @@ import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Content 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 
@@ -98,14 +97,17 @@ ItemPage {
             left: parent.left
          }
 
-        onClicked: startContentTransfer(function(url) {
-            if (systemSettingsSettings.backgroundDuplicate) {
-                updateBoth(url)
-            } else {
-                updateWelcome(url)
-                systemSettingsSettings.backgroundSetLast = "welcome"
-            }
-        })
+        onClicked: {
+            pageStack.push(Qt.resolvedUrl("SelectSource.qml"), {title: i18n.tr("Welcome screen")});
+            selectImage(function(url) {
+                if (systemSettingsSettings.backgroundDuplicate) {
+                    updateBoth(url)
+                } else {
+                    updateWelcome(url)
+                    systemSettingsSettings.backgroundSetLast = "welcome"
+                }
+            });
+        }
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
 
@@ -123,14 +125,18 @@ ItemPage {
             right: parent.right
          }
 
-        onClicked: startContentTransfer(function(url) {
-            if (systemSettingsSettings.backgroundDuplicate) {
-                updateBoth(url)
-            } else {
-                updateHome(url)
-                systemSettingsSettings.backgroundSetLast = "home"
-            }
-        })
+        onClicked: {
+            pageStack.push(Qt.resolvedUrl("SelectSource.qml"), {title: i18n.tr("Home screen")});
+
+            selectImage(function(url) {
+                if (systemSettingsSettings.backgroundDuplicate) {
+                    updateBoth(url)
+                } else {
+                    updateHome(url)
+                    systemSettingsSettings.backgroundSetLast = "home"
+                }
+            });
+        }
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
 
@@ -160,7 +166,6 @@ ItemPage {
             top: welcomeLabel.bottom
         }
     }
-
 
     OptionSelector {
         id: optionSelector
@@ -276,37 +281,8 @@ ItemPage {
         }
     }
 
-
-    property var activeTransfer
-
-    Connections {
-        id: contentHubConnection
-        property var imageCallback
-        target: activeTransfer ? activeTransfer : null
-        onStateChanged: {
-            if (activeTransfer.state === ContentTransfer.Charged) {
-                if (activeTransfer.items.length > 0) {
-                    var imageUrl = activeTransfer.items[0].url;
-                    imageCallback(imageUrl);
-                }
-            }
-        }
-    }
-
-    function startContentTransfer(callback) {
+    function selectImage(callback) {
         if (callback)
-            contentHubConnection.imageCallback = callback
-        var transfer = ContentHub.importContent(
-                    ContentType.Pictures,
-                    ContentHub.defaultSourceForType(ContentType.Pictures));
-        if (transfer != null)
-        {
-            transfer.selectionType = ContentTransfer.Single;
-            var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-            console.log("Store is: " + store.uri);
-            transfer.setStore(store);
-            activeTransfer = transfer;
-            activeTransfer.start();
-        }
+            console.log ("selectImage called");
     }
 }
