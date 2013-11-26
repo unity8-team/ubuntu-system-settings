@@ -39,6 +39,8 @@ public:
     ~Background();
     QString backgroundFile();
     void setBackgroundFile(QUrl backgroundFile);
+    Q_INVOKABLE QStringList listUbuntuArt(const QString &dirString);
+    Q_INVOKABLE QStringList listCustomArt(const QString &dirString);
 
 public Q_SLOTS:
     void slotChanged();
@@ -52,6 +54,8 @@ private:
     QString m_objectPath;
     QDBusInterface m_accountsserviceIface;
     QString getBackgroundFile();
+    QStringList m_ubuntuArtList;
+    QStringList m_customArtList;
 };
 
 #endif // BACKGROUND_H

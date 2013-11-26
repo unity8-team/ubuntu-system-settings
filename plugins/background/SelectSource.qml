@@ -36,8 +36,21 @@ ItemPage {
     property bool homeScreen: true
     property var gsettings
     property var mainPage
+    property int cols: 2
+    property int itemWidth: (parent.width * 0.7) / cols
+    property int space: itemWidth * 0.3
+    property string ubuntuArtDir: "/usr/share/backgrounds/"
+    property var ubuntuArtList: []
+    property var customList: []
+    property var activeTransfer
+    property var store
 
     title: homeScreen ? i18n.tr("Home screen") : i18n.tr("Welcome screen")
+
+    Component.onCompleted: {
+        store = ContentHub.defaultStoreForType(ContentType.Pictures);
+        customList = backgroundPanel.listCustomArt(store.uri);
+    }
 
     Action {
         id: selectDefaultPeer
@@ -45,8 +58,6 @@ ItemPage {
         iconName: "import-image"
         onTriggered: {
             startContentTransfer(function(url) {
-                console.log ("URI: " + url);
-                console.log ("TITLe: " + mainPage.title);
                 if (gsettings.backgroundDuplicate) {
                     mainPage.updateBoth(url)
                 } else {
@@ -69,9 +80,12 @@ ItemPage {
         }
     }
 
-    property int cols: 2
-    property int itemWidth: (parent.width * 0.7) / cols
-    property int space: itemWidth * 0.3
+    UbuntuBackgroundPanel {
+        id: backgroundPanel
+        Component.onCompleted: {
+            ubuntuArtList = listUbuntuArt(ubuntuArtDir);
+        }
+    }
 
     Flickable {
         id: sourceSelector
@@ -101,26 +115,37 @@ ItemPage {
                 spacing: space
                 height: childrenRect.height
                 Repeater {
-                    model: 20 // FIXME: Populate this with ubuntu art images
+                    id: itemGridRepeater
+                    model: ubuntuArtList
                     Item {
                         width: itemWidth
                         height: width
                         UbuntuShape {
-                            height: parent.height
-                            width: parent.width
+                            width: itemWidth
+                            height: width
                             image: Image {
-                                source: "file:///usr/share/backgrounds/Speaker_Weave_by_Phil_Jackson.jpg"
-                                width: parent.width
-                                height: parent.height
-                                fillMode: Image.PreserveAspectFit
-                            }
+                               id: itemImage
+                               source: modelData
+                               width: itemWidth
+                               height: width
+                               sourceSize.width: width
+                               sourceSize.height: height
+                               fillMode: Image.PreserveAspectFit
+                               asynchronous: true
 
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    // FIXME: set background image
-                                    console.log ("clicked");
-                                }
+                            }
+                            ActivityIndicator {
+                                anchors.centerIn: parent
+                                running: parent.image.status === Image.Loading
+                                visible: running
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                // FIXME: set background image
+                                console.log ("clicked: " + modelData);
                             }
                         }
                     }
@@ -142,38 +167,28 @@ ItemPage {
                 spacing: space
                 height: childrenRect.height
                 Repeater {
-                    model: 3
-                    Column {
+                    model: customList
+                    UbuntuShape {
                         width: itemWidth
-                        height: childrenRect.height
-                        UbuntuShape {
+                        height: width
+                        image: Image {
+                            source: modelData
                             width: parent.width
                             height: width
-                            image: Image {
-                                source: "file:///usr/share/backgrounds/Vanishing_by_James_Wilson.jpg"
-                                width: parent.width
-                                height: parent.height
-                                fillMode: Image.PreserveAspectFit
-                            }
-
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    console.log ("clicked");
-                                }
-                            }
+                            fillMode: Image.PreserveAspectFit
                         }
-                        Text {
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: modelData.name
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                console.log ("clicked: " + modelData);
+                            }
                         }
                     }
                 }
             }
         }
     }
-
-    property var activeTransfer
 
     Connections {
         id: contentHubConnection
@@ -198,8 +213,6 @@ ItemPage {
         if (transfer != null)
         {
             transfer.selectionType = ContentTransfer.Single;
-            var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-            console.log("Store is: " + store.uri);
             transfer.setStore(store);
             activeTransfer = transfer;
             activeTransfer.start();

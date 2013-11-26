@@ -19,6 +19,7 @@
 */
 
 #include "background.h"
+#include <QDir>
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
@@ -108,6 +109,37 @@ QString Background::backgroundFile()
         m_backgroundFile = getBackgroundFile();
 
      return m_backgroundFile;
+}
+
+QStringList Background::listUbuntuArt(const QString &dirString)
+{
+    if (m_ubuntuArtList.isEmpty())
+    {
+        QDir dir(dirString);
+        dir.setFilter(QDir::Files | QDir::NoSymLinks);
+        QFileInfoList tmpList = dir.entryInfoList();
+        foreach (QFileInfo f, tmpList)
+        {
+            if (f.fileName() != "warty-final-ubuntu.png")
+                m_ubuntuArtList.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+        }
+    }
+    return m_ubuntuArtList;
+}
+
+QStringList Background::listCustomArt(const QString &dirString)
+{
+    if (m_customArtList.isEmpty())
+    {
+        QDir dir(dirString);
+        dir.setFilter(QDir::Files | QDir::NoSymLinks);
+        QFileInfoList tmpList = dir.entryInfoList();
+        foreach (QFileInfo f, tmpList)
+        {
+            m_customArtList.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+        }
+    }
+    return m_customArtList;
 }
 
 Background::~Background() {
