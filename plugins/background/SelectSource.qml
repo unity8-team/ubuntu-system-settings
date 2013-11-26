@@ -33,15 +33,45 @@ ItemPage {
     flickable: sourceSelector
     anchors.fill: parent
 
+    property bool homeScreen: true
+    property var gsettings
+    property var mainPage
+
+    title: homeScreen ? i18n.tr("Home screen") : i18n.tr("Welcome screen")
+
+    Action {
+        id: selectDefaultPeer
+        text: i18n.tr("Photo/Image")
+        iconName: "import-image"
+        onTriggered: {
+            startContentTransfer(function(url) {
+                console.log ("URI: " + url);
+                console.log ("TITLe: " + mainPage.title);
+                if (gsettings.backgroundDuplicate) {
+                    mainPage.updateBoth(url)
+                } else {
+                    if (homeScreen) {
+                        mainPage.updateHome(url);
+                        gsettings.backgroundSetLast = "home";
+                    } else {
+                        mainPage.updateWelcome(url);
+                        gsettings.backgroundSetLast = "welcome";
+                    }
+                }
+                pageStack.pop();
+            });
+        }
+    }
+
+    tools: ToolbarItems {
+        ToolbarButton {
+            action: selectDefaultPeer
+        }
+    }
 
     property int cols: 2
     property int itemWidth: (parent.width * 0.7) / cols
     property int space: itemWidth * 0.3
-    property list<ContentPeer> peers
-
-    Component.onCompleted: {
-        peers = ContentHub.knownSourcesForType(ContentType.Pictures);
-    }
 
     Flickable {
         id: sourceSelector
@@ -112,7 +142,7 @@ ItemPage {
                 spacing: space
                 height: childrenRect.height
                 Repeater {
-                    model: peers
+                    model: 3
                     Column {
                         width: itemWidth
                         height: childrenRect.height
@@ -120,8 +150,7 @@ ItemPage {
                             width: parent.width
                             height: width
                             image: Image {
-                                // FIXME: replace with app icon
-                                source: "file:///usr/share/backgrounds/Speaker_Weave_by_Phil_Jackson.jpg"
+                                source: "file:///usr/share/backgrounds/Vanishing_by_James_Wilson.jpg"
                                 width: parent.width
                                 height: parent.height
                                 fillMode: Image.PreserveAspectFit
@@ -130,7 +159,6 @@ ItemPage {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    // FIXME: Create import request from content-hub for selected peer
                                     console.log ("clicked");
                                 }
                             }
@@ -143,6 +171,38 @@ ItemPage {
                 }
             }
         }
+    }
 
+    property var activeTransfer
+
+    Connections {
+        id: contentHubConnection
+        property var imageCallback
+        target: activeTransfer ? activeTransfer : null
+        onStateChanged: {
+            if (activeTransfer.state === ContentTransfer.Charged) {
+                if (activeTransfer.items.length > 0) {
+                    var imageUrl = activeTransfer.items[0].url;
+                    imageCallback(imageUrl);
+                }
+            }
+        }
+    }
+
+    function startContentTransfer(callback) {
+        if (callback)
+            contentHubConnection.imageCallback = callback
+        var transfer = ContentHub.importContent(
+                    ContentType.Pictures,
+                    ContentHub.defaultSourceForType(ContentType.Pictures));
+        if (transfer != null)
+        {
+            transfer.selectionType = ContentTransfer.Single;
+            var store = ContentHub.defaultStoreForType(ContentType.Pictures);
+            console.log("Store is: " + store.uri);
+            transfer.setStore(store);
+            activeTransfer = transfer;
+            activeTransfer.start();
+        }
     }
 }
