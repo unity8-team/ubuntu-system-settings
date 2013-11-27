@@ -179,6 +179,7 @@ ItemPage {
 
         model: [i18n.tr("Same background for both"),
             i18n.tr("Different background for each")]
+        selectedIndex: systemSettingsSettings.backgroundDuplicate === 0 ? 0 : 1
         onSelectedIndexChanged: {
             systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
         }
