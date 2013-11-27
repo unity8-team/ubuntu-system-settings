@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Iain Lane <iain.lane@canonical.com>
+ * Ken VanDine <ken.vandine@canonical.com>
  *
 */
 
@@ -61,7 +61,7 @@ Column {
                        height: width
                        sourceSize.width: width
                        sourceSize.height: height
-                       fillMode: Image.PreserveAspectFit
+                       fillMode: Image.PreserveAspectCrop
                        asynchronous: true
                     }
                     ActivityIndicator {
@@ -75,6 +75,8 @@ Column {
                     onClicked: {
                         // FIXME: set background image
                         console.log ("clicked: " + modelData);
+                        pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: modelData});
+
                     }
                 }
             }

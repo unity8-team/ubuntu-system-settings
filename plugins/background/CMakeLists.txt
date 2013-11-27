@@ -5,6 +5,7 @@ set(QML_SOURCES
     SwappableImage.qml
     Wallpapers.qml
     WallpaperGrid.qml
+    Preview.qml
 )
 add_library(UbuntuBackgroundPanel MODULE
 plugin.cpp background.cpp plugin.h background.h
