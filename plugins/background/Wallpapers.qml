@@ -36,9 +36,6 @@ ItemPage {
     property bool homeScreen: true
     property var gsettings
     property var mainPage
-    property int cols: 2
-    property int itemWidth: (parent.width * 0.7) / cols
-    property int space: itemWidth * 0.3
     property string ubuntuArtDir: "/usr/share/backgrounds/"
     property var ubuntuArtList: []
     property var customList: []
@@ -48,6 +45,7 @@ ItemPage {
     title: homeScreen ? i18n.tr("Home screen") : i18n.tr("Welcome screen")
 
     Component.onCompleted: {
+        ubuntuArtList = backgroundPanel.listUbuntuArt(ubuntuArtDir);
         store = ContentHub.defaultStoreForType(ContentType.Pictures);
         customList = backgroundPanel.listCustomArt(store.uri);
     }
@@ -82,9 +80,6 @@ ItemPage {
 
     UbuntuBackgroundPanel {
         id: backgroundPanel
-        Component.onCompleted: {
-            ubuntuArtList = listUbuntuArt(ubuntuArtDir);
-        }
     }
 
     Flickable {
@@ -98,94 +93,22 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
             height: childrenRect.height
-
             spacing: units.gu(1)
 
-            ListItem.Header {
-                id: ubuntuArtHeader
+            WallpaperGrid {
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: i18n.tr("Ubuntu Art")
+                columns: 2
+                model: ubuntuArtList
+                title: i18n.tr("Ubuntu Art")
             }
 
-            Grid {
-                id: itemGrid
-                anchors.horizontalCenter: parent.horizontalCenter
-                columns: cols
-                spacing: space
-                height: childrenRect.height
-                Repeater {
-                    id: itemGridRepeater
-                    model: ubuntuArtList
-                    Item {
-                        width: itemWidth
-                        height: width
-                        UbuntuShape {
-                            width: itemWidth
-                            height: width
-                            image: Image {
-                               id: itemImage
-                               source: modelData
-                               width: itemWidth
-                               height: width
-                               sourceSize.width: width
-                               sourceSize.height: height
-                               fillMode: Image.PreserveAspectFit
-                               asynchronous: true
-
-                            }
-                            ActivityIndicator {
-                                anchors.centerIn: parent
-                                running: parent.image.status === Image.Loading
-                                visible: running
-                            }
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                // FIXME: set background image
-                                console.log ("clicked: " + modelData);
-                            }
-                        }
-                    }
-                }
-            }
-
-            ListItem.ThinDivider {}
-
-            ListItem.Header {
+            WallpaperGrid {
                 anchors.left: parent.left
                 anchors.right: parent.right
-                text: i18n.tr("Custom")
-            }
-
-            Grid {
-                id: customGrid
-                anchors.horizontalCenter: parent.horizontalCenter
-                columns: cols
-                spacing: space
-                height: childrenRect.height
-                Repeater {
-                    model: customList
-                    UbuntuShape {
-                        width: itemWidth
-                        height: width
-                        image: Image {
-                            source: modelData
-                            width: parent.width
-                            height: width
-                            fillMode: Image.PreserveAspectFit
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                console.log ("clicked: " + modelData);
-                            }
-                        }
-                    }
-                }
+                columns: 2
+                model: customList
+                title: i18n.tr("Custom")
             }
         }
     }

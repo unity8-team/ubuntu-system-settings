@@ -98,7 +98,7 @@ ItemPage {
          }
 
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("SelectSource.qml"), {homeScreen: false, gsettings: systemSettingsSettings});
+            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"), {homeScreen: false, gsettings: systemSettingsSettings});
             selectImage(function(url) {
                 if (systemSettingsSettings.backgroundDuplicate) {
                     updateBoth(url)
@@ -126,7 +126,7 @@ ItemPage {
          }
 
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("SelectSource.qml"), {homeScreen: true, gsettings: systemSettingsSettings, mainPage: mainPage});
+            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"), {homeScreen: true, gsettings: systemSettingsSettings, mainPage: mainPage});
 
             selectImage(function(url) {
                 if (systemSettingsSettings.backgroundDuplicate) {
