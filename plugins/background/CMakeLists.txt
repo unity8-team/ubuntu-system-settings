@@ -16,7 +16,6 @@ install(TARGETS UbuntuBackgroundPanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/background)
 install(FILES homeoverlay.svg welcomeoverlay.svg import-image@18.png
-install(FILES homeoverlay.svg welcomeoverlay.svg
         DESTINATION ${PLUGIN_QML_DIR}/background)
 install(FILES settings-background.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 install(FILES background.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
