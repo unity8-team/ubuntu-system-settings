@@ -1,0 +1,1147 @@
+# Chinese (Hong Kong) translation for ubuntu-system-settings
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the ubuntu-system-settings package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ubuntu-system-settings\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-10-07 12:02+0100\n"
+"PO-Revision-Date: 2013-11-03 15:03+0000\n"
+"Last-Translator: Anthony Wong <anthony.wong@canonical.com>\n"
+"Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2013-11-12 06:26+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
+
+#: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
+msgid "About this phone"
+msgstr "關於本電話"
+
+#: ../plugins/about/PageComponent.qml:76
+msgid "Serial"
+msgstr "序號"
+
+#: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
+#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:130
+#: ../plugins/battery/PageComponent.qml:142
+#: ../plugins/cellular/PageComponent.qml:73
+msgid "N/A"
+msgstr "不適用"
+
+#: ../plugins/about/PageComponent.qml:88
+msgid "Software:"
+msgstr "軟件："
+
+#: ../plugins/about/PageComponent.qml:92
+msgid "OS"
+msgstr "作業系統"
+
+#: ../plugins/about/PageComponent.qml:97
+msgid "Last updated"
+msgstr "最近更新"
+
+#: ../plugins/about/PageComponent.qml:98
+#: ../plugins/battery/PageComponent.qml:256
+#: ../plugins/battery/PageComponent.qml:265
+#: ../plugins/battery/SleepValues.qml:96
+#: ../plugins/system-update/Download.qml:53
+#: ../plugins/system-update/PageComponent.qml:347
+msgid "Never"
+msgstr "從未更新"
+
+#: ../plugins/about/PageComponent.qml:103
+msgid "Check for updates"
+msgstr "檢查更新"
+
+#: ../plugins/about/PageComponent.qml:112 ../plugins/about/Storage.qml:32
+msgid "Storage"
+msgstr "儲存空間"
+
+#: ../plugins/about/PageComponent.qml:118
+msgid "Legal:"
+msgstr "法律資訊："
+
+#: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
+msgid "Software licenses"
+msgstr "軟件授權條款"
+
+#: ../plugins/about/PageComponent.qml:128
+msgid "Regulatory info"
+msgstr "管制資訊"
+
+#: ../plugins/about/Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "Ubuntu 所使用"
+
+#: ../plugins/about/Storage.qml:88
+msgid "Movies"
+msgstr "電影"
+
+#: ../plugins/about/Storage.qml:89
+msgid "Audio"
+msgstr "音訊"
+
+#: ../plugins/about/Storage.qml:90
+msgid "Pictures"
+msgstr "圖片"
+
+#: ../plugins/about/Storage.qml:91
+msgid "Other files"
+msgstr "其他檔案"
+
+#: ../plugins/about/Storage.qml:92
+msgid "Used by apps"
+msgstr "程式所使用"
+
+#: ../plugins/about/Storage.qml:134
+msgid "Total storage"
+msgstr "總計儲存空間"
+
+#: ../plugins/about/Storage.qml:145
+msgid "Free space"
+msgstr "可用空間"
+
+#: ../plugins/about/Storage.qml:163
+msgid "Installed apps"
+msgstr "已安裝程式"
+
+#: ../plugins/about/Storage.qml:164
+msgid "By name"
+msgstr "按名稱"
+
+#: ../plugins/about/Storage.qml:164
+msgid "By size"
+msgstr "按大小"
+
+#: ../plugins/background/MainPage.qml:33 ../.build/settings.js:3
+msgid "Background"
+msgstr "背景"
+
+#: ../plugins/background/MainPage.qml:71
+msgid "Welcome screen"
+msgstr "歡迎畫面"
+
+#: ../plugins/background/MainPage.qml:151
+msgid "Home screen"
+msgstr "主畫面"
+
+#: ../plugins/background/MainPage.qml:177
+msgid "Same background for both"
+msgstr "兩者使用相同背景"
+
+#: ../plugins/background/MainPage.qml:178
+msgid "Different background for each"
+msgstr "各自使用不同背景"
+
+#: ../plugins/battery/PageComponent.qml:35 ../.build/settings.js:4
+msgid "Battery"
+msgstr "電池"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery/PageComponent.qml:47
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 秒前"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery/PageComponent.qml:50
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 分鐘前"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery/PageComponent.qml:53
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 小時前"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery/PageComponent.qml:56
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 天前"
+
+#: ../plugins/battery/PageComponent.qml:76
+msgid "Charging now"
+msgstr "正在充電"
+
+#: ../plugins/battery/PageComponent.qml:81
+msgid "Last full charge"
+msgstr "最後充滿電"
+
+#: ../plugins/battery/PageComponent.qml:86
+msgid "Fully charged"
+msgstr "充滿電"
+
+#: ../plugins/battery/PageComponent.qml:125
+msgid "Charge level"
+msgstr "充電水平"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery/PageComponent.qml:133
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../plugins/battery/PageComponent.qml:186
+msgid "Ways to reduce battery use:"
+msgstr "減少使用電池的方法："
+
+#: ../plugins/battery/PageComponent.qml:190
+msgid "Display brightness"
+msgstr "顯示亮度"
+
+#: ../plugins/battery/PageComponent.qml:247
+#: ../plugins/security-privacy/PhoneLocking.qml:62
+msgid "Lock when idle"
+msgstr "閒置時鎖定"
+
+#: ../plugins/battery/PageComponent.qml:247
+#: ../plugins/security-privacy/PhoneLocking.qml:63
+msgid "Sleep when idle"
+msgstr "閒置時睡眠"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery/PageComponent.qml:253
+#: ../plugins/battery/PageComponent.qml:262
+#: ../plugins/battery/SleepValues.qml:77 ../plugins/battery/SleepValues.qml:81
+#: ../plugins/battery/SleepValues.qml:85 ../plugins/battery/SleepValues.qml:89
+#: ../plugins/battery/SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "%1 分鐘後"
+
+#: ../plugins/battery/PageComponent.qml:275
+#: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../plugins/battery/PageComponent.qml:308
+#: ../plugins/bluetooth/PageComponent.qml:110
+#: ../plugins/bluetooth/PageComponent.qml:118 ../.build/settings.js:5
+msgid "Bluetooth"
+msgstr "藍牙"
+
+#: ../plugins/battery/PageComponent.qml:337
+msgid "GPS"
+msgstr "GPS"
+
+#: ../plugins/battery/PageComponent.qml:355
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "要準確偵測位置需要 GPS 和/或 Wi-Fi。"
+
+#: ../plugins/battery/SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "當不使用此時間後鎖定電話："
+
+#: ../plugins/battery/SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "令電話睡眠，當不使用："
+
+#: ../plugins/battery/SleepValues.qml:107
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr "較短的時間會較安全。電話在談話或播放影片時不會鎖定。"
+
+#: ../plugins/battery/SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "電話在談話或播放影片時不會睡眠。"
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "藍牙配對請求"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "請確定顯示在「%1」的密碼和這個相同"
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:54
+#: ../plugins/language/DisplayLanguage.qml:95
+#: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/reset/EraseEverything.qml:36
+#: ../plugins/reset/ResetAllSettings.qml:36
+#: ../plugins/reset/ResetLauncherHome.qml:40
+#: ../plugins/security-privacy/LockSecurity.qml:310
+#: ../plugins/time-date/TimePicker.qml:173
+msgid "Cancel"
+msgstr "取消"
+
+#: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "確認密碼"
+
+#. TRANSLATORS: %1 is the display name of the device that is connecting
+#: ../plugins/bluetooth/PageComponent.qml:70
+#, qt-format
+msgid "%1 (Connecting…)"
+msgstr "%1 (連接中…)"
+
+#. TRANSLATORS: %1 is the display name of the device that is disconnecting
+#: ../plugins/bluetooth/PageComponent.qml:73
+#, qt-format
+msgid "%1 (Disconnecting…)"
+msgstr "%1 (斷線中…)"
+
+#: ../plugins/bluetooth/PageComponent.qml:80
+msgid "Computer"
+msgstr "電腦"
+
+#: ../plugins/bluetooth/PageComponent.qml:81
+#: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
+msgid "Phone"
+msgstr "電話"
+
+#: ../plugins/bluetooth/PageComponent.qml:82
+msgid "Modem"
+msgstr "數據機"
+
+#: ../plugins/bluetooth/PageComponent.qml:83 ../src/qml/MainWindow.qml:90
+msgid "Network"
+msgstr "網絡"
+
+#: ../plugins/bluetooth/PageComponent.qml:84
+msgid "Headset"
+msgstr "耳機(Headset)"
+
+#: ../plugins/bluetooth/PageComponent.qml:85
+msgid "Headphones"
+msgstr "耳筒"
+
+#: ../plugins/bluetooth/PageComponent.qml:86
+msgid "Video"
+msgstr "影片"
+
+#: ../plugins/bluetooth/PageComponent.qml:87
+msgid "Other Audio"
+msgstr "其他音訊"
+
+#: ../plugins/bluetooth/PageComponent.qml:88
+msgid "Joypad"
+msgstr "遊戲手柄"
+
+#: ../plugins/bluetooth/PageComponent.qml:89
+msgid "Keyboard"
+msgstr "鍵盤"
+
+#: ../plugins/bluetooth/PageComponent.qml:90
+msgid "Tablet"
+msgstr "繪圖板"
+
+#: ../plugins/bluetooth/PageComponent.qml:91
+msgid "Mouse"
+msgstr "滑鼠"
+
+#: ../plugins/bluetooth/PageComponent.qml:92
+msgid "Printer"
+msgstr "打印機"
+
+#: ../plugins/bluetooth/PageComponent.qml:93
+msgid "Camera"
+msgstr "相機"
+
+#: ../plugins/bluetooth/PageComponent.qml:94
+msgid "Other"
+msgstr "其他"
+
+#: ../plugins/bluetooth/PageComponent.qml:100
+msgid "Excellent"
+msgstr "極好"
+
+#: ../plugins/bluetooth/PageComponent.qml:101
+msgid "Good"
+msgstr "好"
+
+#: ../plugins/bluetooth/PageComponent.qml:102
+msgid "Fair"
+msgstr "普通"
+
+#: ../plugins/bluetooth/PageComponent.qml:103
+msgid "Poor"
+msgstr "差"
+
+#: ../plugins/bluetooth/PageComponent.qml:104
+#: ../plugins/bluetooth/PageComponent.qml:193
+#: ../plugins/bluetooth/PageComponent.qml:201
+#: ../plugins/security-privacy/PhoneLocking.qml:40
+msgid "None"
+msgstr "無"
+
+#: ../plugins/bluetooth/PageComponent.qml:130
+msgid "Connected headset:"
+msgstr "已連接耳機(Headset)："
+
+#: ../plugins/bluetooth/PageComponent.qml:158
+msgid "Connect a different headset:"
+msgstr "連接不同耳機(Headset)："
+
+#: ../plugins/bluetooth/PageComponent.qml:158
+msgid "Connect a headset:"
+msgstr "連接耳機(Headset)："
+
+#: ../plugins/bluetooth/PageComponent.qml:184
+msgid "None detected"
+msgstr "偵測不到"
+
+#: ../plugins/bluetooth/PageComponent.qml:200
+msgid "Name"
+msgstr "名稱"
+
+#: ../plugins/bluetooth/PageComponent.qml:204
+msgid "Type"
+msgstr "類型"
+
+#: ../plugins/bluetooth/PageComponent.qml:208
+msgid "Signal Strength"
+msgstr "訊號強度"
+
+#: ../plugins/bluetooth/PageComponent.qml:213
+msgid "Disconnect"
+msgstr "斷線"
+
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "「%1」的密碼"
+
+#: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
+msgid "Pair"
+msgstr "配對"
+
+#: ../plugins/cellular/ChooseCarrier.qml:28
+#: ../plugins/cellular/PageComponent.qml:72
+msgid "Carrier"
+msgstr "通訊商"
+
+#: ../plugins/cellular/ChooseCarrier.qml:78
+msgid "Refresh"
+msgstr "刷新"
+
+#: ../plugins/cellular/ChooseCarrier.qml:95
+msgid "Searching"
+msgstr "正在搜尋"
+
+#: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
+msgid "Cellular"
+msgstr "手機"
+
+#: ../plugins/cellular/PageComponent.qml:66
+msgid "Choose carrier:"
+msgstr "選擇通訊商："
+
+#: ../plugins/cellular/PageComponent.qml:67
+#: ../plugins/time-date/ChooseTimeZone.qml:47
+#: ../plugins/time-date/PageComponent.qml:66
+msgid "Automatically"
+msgstr "自動"
+
+#: ../plugins/cellular/PageComponent.qml:67
+#: ../plugins/time-date/ChooseTimeZone.qml:47
+#: ../plugins/time-date/PageComponent.qml:66
+msgid "Manually"
+msgstr "手動"
+
+#: ../plugins/cellular/PageComponent.qml:101
+msgid "Cellular data"
+msgstr "手機數據"
+
+#: ../plugins/cellular/PageComponent.qml:109
+msgid "Data roaming"
+msgstr "數據漫遊"
+
+#: ../plugins/cellular/PageComponent.qml:118
+msgid "Data usage statistics"
+msgstr "數據用量統計"
+
+#: ../plugins/language/DisplayLanguage.qml:33
+#: ../plugins/language/PageComponent.qml:55
+msgid "Display language"
+msgstr "顯示語言"
+
+#: ../plugins/language/DisplayLanguage.qml:115
+msgid "Confirm"
+msgstr "確認"
+
+#: ../plugins/language/KeyboardLayouts.qml:26
+#: ../plugins/language/PageComponent.qml:69
+msgid "Keyboard layouts"
+msgstr "鍵盤配置"
+
+#: ../plugins/language/KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "目前配置："
+
+#: ../plugins/language/KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "所有可用配置："
+
+#: ../plugins/language/PageComponent.qml:31 ../.build/settings.js:10
+msgid "Language & Text"
+msgstr "語言與文字"
+
+#: ../plugins/language/PageComponent.qml:85
+#: ../plugins/language/SpellChecking.qml:27
+#: ../plugins/language/SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "拼字檢查"
+
+#: ../plugins/language/PageComponent.qml:97
+msgid "Auto completion"
+msgstr "自動完成"
+
+#: ../plugins/language/PageComponent.qml:109
+msgid "Predictive text"
+msgstr "預計文字"
+
+#: ../plugins/language/PageComponent.qml:125
+msgid "Auto capitalization"
+msgstr "自動大寫"
+
+#: ../plugins/language/PageComponent.qml:137
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "在每句句子開頭打開 Shift 使首個字母大寫"
+
+#: ../plugins/language/PageComponent.qml:147
+msgid "Key press feedback"
+msgstr "按鍵回饋"
+
+#: ../plugins/language/PageComponent.qml:159
+msgid "Vibrate or emit a sound whenever a key is pressed."
+msgstr "按鍵時振動或發出聲音。"
+
+#: ../plugins/language/SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "目前會檢查拼字的語言："
+
+#: ../plugins/language/SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "所有可用語言："
+
+#: ../plugins/phone/CallForwarding.qml:27
+#: ../plugins/phone/CallForwarding.qml:60
+#: ../plugins/phone/PageComponent.qml:46
+msgid "Call forwarding"
+msgstr "來電轉駁"
+
+#: ../plugins/phone/CallForwarding.qml:74
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr "當無法接聽、忙線、關機或信號接收不到時將電話轉駁至另一個號碼。"
+
+#: ../plugins/phone/CallForwarding.qml:91
+msgid "Call forwarding status can’t be checked right now. Try again later."
+msgstr "現時無法檢查電話轉駁的狀態。請稍候重試。"
+
+#: ../plugins/phone/CallForwarding.qml:102
+msgid "Divert to"
+msgstr "轉駁至"
+
+#: ../plugins/phone/CallForwarding.qml:113
+msgid "Contacts…"
+msgstr "聯絡人…"
+
+#: ../plugins/phone/CallForwarding.qml:113
+#: ../plugins/time-date/TimePicker.qml:182
+msgid "Set"
+msgstr "設定"
+
+#: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
+#: ../plugins/phone/PageComponent.qml:52
+msgid "Call waiting"
+msgstr "電話待接"
+
+#: ../plugins/phone/CallWaiting.qml:67
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr "讓您在接聽電話時接聽另一個電話、或開始另一個電話，又或在兩者之間切換"
+
+#: ../plugins/phone/PageComponent.qml:30
+msgid "SIM"
+msgstr "SIM 卡"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone/PageComponent.qml:61 ../plugins/phone/Services.qml:30
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 服務"
+
+#: ../plugins/phone/ServiceInfo.qml:35
+msgid "Call"
+msgstr "通話"
+
+#: ../plugins/reset/EraseEverything.qml:29
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr "所有文件、儲存的遊戲、設定以及其他項目皆會從此手機永久刪除。"
+
+#: ../plugins/reset/EraseEverything.qml:31
+msgid "Erase & reset everything"
+msgstr "抹除並重設每個設定"
+
+#: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
+msgid "Reset phone"
+msgstr "重置手機"
+
+#: ../plugins/reset/PageComponent.qml:62
+msgid "Reset launcher & home screen…"
+msgstr "重置啟動器與主畫面…"
+
+#: ../plugins/reset/PageComponent.qml:75
+msgid "Reset all system settings…"
+msgstr "重置所有系統設定…"
+
+#: ../plugins/reset/PageComponent.qml:88
+msgid "Erase & reset everything…"
+msgstr "抹除並重置每項設定…"
+
+#: ../plugins/reset/ResetAllSettings.qml:29
+#: ../plugins/reset/ResetLauncherHome.qml:30
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr "啟動器的內容與版面配置、主畫面的篩選條件等，皆會還原至原始設定。"
+
+#: ../plugins/reset/ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "重置所有系統設定"
+
+#: ../plugins/reset/ResetLauncherHome.qml:32
+msgid "Reset launcher & home screen"
+msgstr "重置啟動器與主畫面"
+
+#: ../plugins/security-privacy/Dash.qml:29
+#: ../plugins/security-privacy/PageComponent.qml:117
+msgid "Dash search"
+msgstr "Dash 搜尋"
+
+#: ../plugins/security-privacy/Dash.qml:49
+msgid "Return results from:"
+msgstr "傳回來自此處的結果："
+
+#: ../plugins/security-privacy/Dash.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:52
+#: ../plugins/security-privacy/PageComponent.qml:120
+msgid "Phone only"
+msgstr "僅電話"
+
+#: ../plugins/security-privacy/Dash.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:50
+#: ../plugins/security-privacy/PageComponent.qml:119
+msgid "Phone and Internet"
+msgstr "電話與互聯網"
+
+#: ../plugins/security-privacy/Location.qml:30
+msgid "Location"
+msgstr "位置"
+
+#: ../plugins/security-privacy/Location.qml:48
+msgid "Location detection"
+msgstr "位置偵測"
+
+#: ../plugins/security-privacy/Location.qml:70
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr "以 GPS 偵測你的大約位置。關閉 GPS 以省電。"
+
+#: ../plugins/security-privacy/Location.qml:72
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr "以 Wi-Fi 和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
+
+#: ../plugins/security-privacy/Location.qml:74
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr "以 Wi-Fi (目前關閉) 偵測你的大約位置。關閉位置偵測以省電。"
+
+#: ../plugins/security-privacy/Location.qml:76
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr "以 Wi-Fi、無線電話基地台和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
+
+#: ../plugins/security-privacy/Location.qml:78
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr "以 Wi-Fi、無線電話基地台 (目前沒有連線) 和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
+
+#: ../plugins/security-privacy/Location.qml:80
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr "以 Wi-Fi (目前關閉)、無線電話基地台和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
+
+#: ../plugins/security-privacy/Location.qml:82
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr "以 Wi-Fi (目前關閉)、無線電話基地台 (目前沒有連線) 和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
+
+#: ../plugins/security-privacy/Location.qml:89
+msgid "Allow access to location:"
+msgstr "允許存取位置："
+
+#: ../plugins/security-privacy/LockSecurity.qml:30
+#: ../plugins/security-privacy/PhoneLocking.qml:44
+msgid "Lock security"
+msgstr "保安鎖定"
+
+#: ../plugins/security-privacy/LockSecurity.qml:78
+msgid "Change passcode"
+msgstr "更改密碼"
+
+#: ../plugins/security-privacy/LockSecurity.qml:80
+msgid "Change passphrase"
+msgstr "更改密語"
+
+#: ../plugins/security-privacy/LockSecurity.qml:87
+msgid "Switch to swipe"
+msgstr "改為輕掃"
+
+#: ../plugins/security-privacy/LockSecurity.qml:89
+msgid "Switch to passcode"
+msgstr "改為密碼"
+
+#: ../plugins/security-privacy/LockSecurity.qml:91
+msgid "Switch to passphrase"
+msgstr "改為密語"
+
+#: ../plugins/security-privacy/LockSecurity.qml:100
+msgid "Existing passcode"
+msgstr "現有密碼"
+
+#: ../plugins/security-privacy/LockSecurity.qml:102
+msgid "Existing passphrase"
+msgstr "現有密語"
+
+#: ../plugins/security-privacy/LockSecurity.qml:150
+msgid "Incorrect passcode. Try again."
+msgstr "密碼不對。請重試。"
+
+#: ../plugins/security-privacy/LockSecurity.qml:153
+msgid "Incorrect passphrase. Try again."
+msgstr "密語不對。請重試。"
+
+#: ../plugins/security-privacy/LockSecurity.qml:166
+msgid "Choose passcode"
+msgstr "選擇密碼"
+
+#: ../plugins/security-privacy/LockSecurity.qml:168
+msgid "Choose passphrase"
+msgstr "選擇密語"
+
+#: ../plugins/security-privacy/LockSecurity.qml:212
+msgid "Confirm passcode"
+msgstr "確認密碼"
+
+#: ../plugins/security-privacy/LockSecurity.qml:214
+msgid "Confirm passphrase"
+msgstr "確認密語"
+
+#: ../plugins/security-privacy/LockSecurity.qml:256
+msgid "Those passcodes don't match. Try again."
+msgstr "密碼不符。請重試。"
+
+#: ../plugins/security-privacy/LockSecurity.qml:259
+msgid "Those passphrases don't match. Try again."
+msgstr "密語不符。請重試。"
+
+#: ../plugins/security-privacy/LockSecurity.qml:273
+msgid "Unset"
+msgstr "取消設定"
+
+#: ../plugins/security-privacy/LockSecurity.qml:274
+msgid "Continue"
+msgstr "繼續"
+
+#: ../plugins/security-privacy/LockSecurity.qml:326
+msgid "Unlock the phone using:"
+msgstr "以此為電話解鎖："
+
+#: ../plugins/security-privacy/LockSecurity.qml:330
+msgid "Swipe (no security)"
+msgstr "輕掃 (無保安)"
+
+#: ../plugins/security-privacy/LockSecurity.qml:331
+msgid "4-digit passcode"
+msgstr "4位密碼"
+
+#: ../plugins/security-privacy/LockSecurity.qml:332
+#: ../plugins/security-privacy/PhoneLocking.qml:42
+msgid "Passphrase"
+msgstr "密語"
+
+#: ../plugins/security-privacy/LockSecurity.qml:333
+msgid "Swipe (no security)… "
+msgstr "輕掃 (無保安)… "
+
+#: ../plugins/security-privacy/LockSecurity.qml:334
+msgid "4-digit passcode…"
+msgstr "4位密碼…"
+
+#: ../plugins/security-privacy/LockSecurity.qml:335
+msgid "Passphrase…"
+msgstr "密語…"
+
+#: ../plugins/security-privacy/LockSecurity.qml:376
+msgid "Change passcode…"
+msgstr "更改密碼…"
+
+#: ../plugins/security-privacy/LockSecurity.qml:377
+msgid "Change passphrase…"
+msgstr "更改密語…"
+
+#: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
+msgid "Security & Privacy"
+msgstr "保安與私隱"
+
+#: ../plugins/security-privacy/PageComponent.qml:67
+msgid "Security:"
+msgstr "保安："
+
+#: ../plugins/security-privacy/PageComponent.qml:70
+#: ../plugins/security-privacy/PhoneLocking.qml:29
+msgid "Phone locking"
+msgstr "鎖定電話"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy/PageComponent.qml:72
+#: ../plugins/security-privacy/PhoneLocking.qml:65
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 分鐘"
+
+#: ../plugins/security-privacy/PageComponent.qml:80
+msgid "SIM PIN"
+msgstr "SIM 密碼"
+
+#: ../plugins/security-privacy/PageComponent.qml:86
+msgid "Privacy:"
+msgstr "私隱："
+
+#: ../plugins/security-privacy/PageComponent.qml:89
+msgid "Stats on welcome screen"
+msgstr "歡迎畫面的統計"
+
+#: ../plugins/security-privacy/PageComponent.qml:102
+msgid "Messages on welcome screen"
+msgstr "歡迎畫面的訊息"
+
+#: ../plugins/security-privacy/PageComponent.qml:135
+msgid "Location access"
+msgstr "位置存取"
+
+#: ../plugins/security-privacy/PageComponent.qml:143
+msgid "Other app access"
+msgstr "其他程式存取"
+
+#: ../plugins/security-privacy/PageComponent.qml:148
+msgid "Diagnostics"
+msgstr "診斷"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy/PageComponent.qml:153
+msgid "Sent"
+msgstr "已傳送"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy/PageComponent.qml:156
+msgid "Not sent"
+msgstr "不傳送"
+
+#: ../plugins/security-privacy/PhoneLocking.qml:41
+msgid "Passcode"
+msgstr "密碼"
+
+#: ../plugins/security-privacy/PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr "睡眠時馬上鎖定"
+
+#: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
+msgid "Sound"
+msgstr "聲音"
+
+#: ../plugins/sound/PageComponent.qml:53
+msgid "Phone calls:"
+msgstr "通話數："
+
+#: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
+msgid "Ringtone"
+msgstr "鈴聲"
+
+#: ../plugins/sound/PageComponent.qml:68
+msgid "Vibrate when ringing"
+msgstr "鈴聲響時震動"
+
+#: ../plugins/sound/PageComponent.qml:76
+msgid "Vibrate in silent mode"
+msgstr "無聲模式時震動"
+
+#: ../plugins/sound/PageComponent.qml:81
+msgid "Other sounds:"
+msgstr "其他聲音："
+
+#: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
+msgid "Message received"
+msgstr "收到訊息"
+
+#: ../plugins/sound/PageComponent.qml:96
+msgid "Keyboard sounds"
+msgstr "鍵盤聲音"
+
+#: ../plugins/sound/PageComponent.qml:104
+msgid "Lock sound"
+msgstr "聲音鎖定"
+
+#: ../plugins/sound/SilentModeWarning.qml:30
+msgid "The phone is in Silent Mode."
+msgstr "電話現於無聲模式。"
+
+#: ../plugins/sound/SoundsList.qml:59
+msgid "Stop playing"
+msgstr "停止播放"
+
+#: ../plugins/system-update/Download.qml:29
+#: ../plugins/system-update/PageComponent.qml:344
+msgid "Auto download"
+msgstr "自動下載"
+
+#: ../plugins/system-update/Download.qml:34
+msgid "Download future updates automatically:"
+msgstr "自動下載未來更新："
+
+#: ../plugins/system-update/Download.qml:54
+msgid "When on wi-fi"
+msgstr "當有 Wi-Fi 時"
+
+#: ../plugins/system-update/Download.qml:55
+msgid "On any data connection"
+msgstr "當有任何數據連線時"
+
+#: ../plugins/system-update/Download.qml:56
+msgid "Data charges may apply."
+msgstr "可能要數據費。"
+
+#: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
+msgid "Updates"
+msgstr "更新"
+
+#: ../plugins/system-update/PageComponent.qml:46
+msgid "Checking for updates…"
+msgstr "正在檢查更新..."
+
+#: ../plugins/system-update/PageComponent.qml:83
+msgid "Apply update failed:"
+msgstr "未能套用更新："
+
+#: ../plugins/system-update/PageComponent.qml:93
+msgid "Pause failed:"
+msgstr "未能暫停："
+
+#. TRANSLATORS: %1 is the size of the update in GB
+#: ../plugins/system-update/PageComponent.qml:108
+#, qt-format
+msgid "%1 GB"
+msgstr "%1 GB"
+
+#. TRANSLATORS: %1 is the size of the update in MB
+#: ../plugins/system-update/PageComponent.qml:111
+#, qt-format
+msgid "%1 MB"
+msgstr "%1 MB"
+
+#. TRANSLATORS: %1 is the date when the device was last updated
+#: ../plugins/system-update/PageComponent.qml:120
+msgid "No software update available"
+msgstr "無軟件更新提供"
+
+#: ../plugins/system-update/PageComponent.qml:120
+#, qt-format
+msgid "Last updated %1"
+msgstr "最後更新於 %1"
+
+#. TRANSLATORS: %1 is the number of seconds remaining
+#: ../plugins/system-update/PageComponent.qml:133
+#, qt-format
+msgid "About %1 second remaining"
+msgid_plural "About %1 seconds remaining"
+msgstr[0] "大約還有 %1 秒"
+
+#: ../plugins/system-update/PageComponent.qml:135
+msgid "No estimate for the download"
+msgstr "無估計下載時間"
+
+#: ../plugins/system-update/PageComponent.qml:141
+msgid "Paused"
+msgstr "暫停"
+
+#: ../plugins/system-update/PageComponent.qml:150
+msgid "Download failed:"
+msgstr "未能下載："
+
+#: ../plugins/system-update/PageComponent.qml:205
+#: ../plugins/system-update/PageComponent.qml:322
+msgid "Retry"
+msgstr "重試"
+
+#: ../plugins/system-update/PageComponent.qml:235
+msgid "Ubuntu Phone"
+msgstr "Ubuntu Phone"
+
+#. TRANSLATORS: %1 is the version of the update
+#: ../plugins/system-update/PageComponent.qml:248
+#, qt-format
+msgid "Version %1"
+msgstr "%1 版"
+
+#: ../plugins/system-update/PageComponent.qml:292
+msgid "Pause downloading"
+msgstr "暫停下載"
+
+#: ../plugins/system-update/PageComponent.qml:299
+msgid "Resume downloading"
+msgstr "恢復下載"
+
+#: ../plugins/system-update/PageComponent.qml:315
+msgid "Download"
+msgstr "下載"
+
+#: ../plugins/system-update/PageComponent.qml:329
+msgid "Install & Restart"
+msgstr "安裝並重新啟動"
+
+#: ../plugins/system-update/PageComponent.qml:349
+msgid "On wi-fi"
+msgstr "當有 Wi-Fi 時"
+
+#: ../plugins/system-update/PageComponent.qml:351
+msgid "Always"
+msgstr "一定"
+
+#: ../plugins/time-date/ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "時區"
+
+#: ../plugins/time-date/ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "設定時區："
+
+#: ../plugins/time-date/ChooseTimeZone.qml:113
+msgid "Enter your current location."
+msgstr "輸入你目前的位置。"
+
+#: ../plugins/time-date/ChooseTimeZone.qml:113
+msgid "No matching place"
+msgstr "無符合的地點"
+
+#: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
+msgid "Time & Date"
+msgstr "時間與日期"
+
+#: ../plugins/time-date/PageComponent.qml:52
+msgid "Time zone:"
+msgstr "時區："
+
+#: ../plugins/time-date/PageComponent.qml:65
+msgid "Set the time and date:"
+msgstr "設定時間與日期："
+
+#: ../plugins/time-date/TimePicker.qml:26
+msgid "Set time & date"
+msgstr "設定時間與日期"
+
+#: ../plugins/time-date/TimePicker.qml:68
+msgid "Time"
+msgstr "時間"
+
+#: ../plugins/time-date/TimePicker.qml:81
+msgid "Hour"
+msgstr "時"
+
+#: ../plugins/time-date/TimePicker.qml:95
+msgid "Minute"
+msgstr "分"
+
+#: ../plugins/time-date/TimePicker.qml:109
+msgid "Second"
+msgstr "秒"
+
+#: ../plugins/time-date/TimePicker.qml:118
+msgid "Date"
+msgstr "日期"
+
+#: ../plugins/time-date/TimePicker.qml:130
+msgid "Day"
+msgstr "日"
+
+#: ../plugins/time-date/TimePicker.qml:144
+msgid "Month"
+msgstr "月"
+
+#: ../plugins/time-date/TimePicker.qml:162
+msgid "Year"
+msgstr "年"
+
+#: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
+msgid "System Settings"
+msgstr "系統設定"
+
+#: ../src/qml/MainWindow.qml:78
+msgid "Search"
+msgstr "搜尋"
+
+#: ../src/qml/MainWindow.qml:95
+msgid "Personal"
+msgstr "個人"
+
+#: ../src/qml/MainWindow.qml:100
+msgid "System"
+msgstr "系統"
+
+#: ../.build/settings.js:2
+msgid "Accessibility"
+msgstr "無障礙"
+
+#: ../.build/settings.js:6
+msgid "Brightness"
+msgstr "亮度"
+
+#: ../.build/settings.js:8
+msgid "Example"
+msgstr "例子"
+
+#: ../.build/settings.js:9
+msgid "Flight mode"
+msgstr "飛航模式"
+
+#: ../.build/settings.js:11
+msgid "Orientation lock"
+msgstr "鎖定方向"

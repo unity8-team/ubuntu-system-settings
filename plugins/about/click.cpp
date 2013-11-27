@@ -19,10 +19,14 @@
 
 #include "click.h"
 
+#include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
+#include <glib.h>
 #include <libintl.h>
 
 #include <QDebug>
 #include <QDir>
+#include <QIcon>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -77,16 +81,76 @@ QList<ClickModel::Click> ClickModel::buildClickList()
     while (begin != end) {
         QVariantMap val = (*begin++).toObject().toVariantMap();
         Click newClick;
+        QDir directory;
 
         newClick.name = val.value("title",
                                   gettext("Unknown title")).toString();
 
         if (val.contains("_directory")) {
-            QDir directory(val.value("_directory", "/undefined").toString());
+            directory = val.value("_directory", "/undefined").toString();
+            // Set the icon from the click package
             QString iconFile(val.value("icon", "undefined").toString());
             if (directory.exists()) {
                 QString icon(directory.filePath(iconFile.simplified()));
                 newClick.icon = icon;
+            }
+        }
+
+        // "hooks" → title → "desktop" / "icon"
+        QVariant hooks(val.value("hooks"));
+
+        if (hooks.isValid()) {
+            QVariantMap allHooks(hooks.toMap());
+
+            if (allHooks.contains(newClick.name)) {
+                QVariantMap appHooks(allHooks.value(newClick.name).toMap());
+                if (!appHooks.isEmpty() &&
+                    appHooks.contains("desktop") &&
+                    directory.exists()) {
+                    QFile desktopFile(
+                                directory.absoluteFilePath(
+                                    appHooks.value("desktop",
+                                                   "undefined").toString()));
+                    const char * desktopFileName =
+                        desktopFile.fileName().toLocal8Bit().constData();
+                    g_debug ("Desktop file: %s", desktopFileName);
+                    if (desktopFile.exists()) {
+                        GDesktopAppInfo *appinfo =
+                                g_desktop_app_info_new_from_filename (
+                                    desktopFileName);
+
+                        if (!appinfo) {
+                            g_warning ("Couldn't parse desktop file %s",
+                                       desktopFileName);
+                        } else {
+                            const char * name = g_app_info_get_name (
+                                        (GAppInfo *) appinfo);
+
+                            if (name) {
+                                g_debug ("Name is %s", name);
+                                newClick.displayName = name;
+                            }
+
+                            // Overwrite the icon with the .desktop file's one
+                            // if we have it. This one is more reliable.
+                            const char * icon = g_desktop_app_info_get_string (
+                                        appinfo, "Icon");
+                            if (icon) {
+                                g_debug ("Icon is %s", icon);
+                                QFile iconFile(icon);
+                                if (iconFile.exists()) {
+                                    newClick.icon = icon;
+                                } else {
+                                    iconFile.setFileName(
+                                                directory.absoluteFilePath(
+                                                    QString::fromLocal8Bit(icon)));
+                                    if (iconFile.exists())
+                                        newClick.icon = iconFile.fileName();
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -137,7 +201,10 @@ QVariant ClickModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Qt::DisplayRole:
-        return click.name;
+        if (click.displayName.isEmpty() || click.displayName.isNull())
+            return click.name;
+        else
+            return click.displayName;
     case InstalledSizeRole:
         return click.installSize;
     case IconRole:

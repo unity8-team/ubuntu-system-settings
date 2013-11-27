@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-30 22:34+0100\n"
-"PO-Revision-Date: 2013-09-30 22:44+0000\n"
+"POT-Creation-Date: 2013-10-07 12:02+0100\n"
+"PO-Revision-Date: 2013-11-03 15:24+0000\n"
 "Last-Translator: Sylvie Gallet <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-10-02 05:39+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-11-12 06:25+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 "Language: \n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -28,8 +28,8 @@ msgid "Serial"
 msgstr "Numéro de série"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:128
-#: ../plugins/battery/PageComponent.qml:140
+#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:130
+#: ../plugins/battery/PageComponent.qml:142
 #: ../plugins/cellular/PageComponent.qml:73
 msgid "N/A"
 msgstr "N/A"
@@ -47,8 +47,8 @@ msgid "Last updated"
 msgstr "Dernière mise à jour"
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:254
-#: ../plugins/battery/PageComponent.qml:263
+#: ../plugins/battery/PageComponent.qml:256
+#: ../plugins/battery/PageComponent.qml:265
 #: ../plugins/battery/SleepValues.qml:96
 #: ../plugins/system-update/Download.qml:53
 #: ../plugins/system-update/PageComponent.qml:347
@@ -127,15 +127,15 @@ msgstr "Arrière-plan"
 msgid "Welcome screen"
 msgstr "Écran de bienvenue"
 
-#: ../plugins/background/MainPage.qml:134
+#: ../plugins/background/MainPage.qml:151
 msgid "Home screen"
 msgstr "Page d'accueil"
 
-#: ../plugins/background/MainPage.qml:160
+#: ../plugins/background/MainPage.qml:177
 msgid "Same background for both"
 msgstr "Même arrière-plan pour les deux"
 
-#: ../plugins/background/MainPage.qml:161
+#: ../plugins/background/MainPage.qml:178
 msgid "Different background for each"
 msgstr "Arrière-plan différent pour chacun"
 
@@ -179,45 +179,45 @@ msgstr[1] "il y a %1 jours"
 msgid "Charging now"
 msgstr "En charge"
 
-#: ../plugins/battery/PageComponent.qml:80
+#: ../plugins/battery/PageComponent.qml:81
 msgid "Last full charge"
 msgstr "Dernier chargement complet"
 
-#: ../plugins/battery/PageComponent.qml:84
+#: ../plugins/battery/PageComponent.qml:86
 msgid "Fully charged"
 msgstr "Complètement chargée"
 
-#: ../plugins/battery/PageComponent.qml:123
+#: ../plugins/battery/PageComponent.qml:125
 msgid "Charge level"
 msgstr "Niveau de charge"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery/PageComponent.qml:131
+#: ../plugins/battery/PageComponent.qml:133
 #, qt-format
 msgid "%1%"
 msgstr "%1 %"
 
-#: ../plugins/battery/PageComponent.qml:184
+#: ../plugins/battery/PageComponent.qml:186
 msgid "Ways to reduce battery use:"
 msgstr "Façons de réduire l'utilisation de la batterie :"
 
-#: ../plugins/battery/PageComponent.qml:188
+#: ../plugins/battery/PageComponent.qml:190
 msgid "Display brightness"
 msgstr "Niveau de luminosité"
 
-#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
 msgstr "Verrouiller en cas d'inactivité"
 
-#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
 msgstr "Mettre en veille en cas d'inactivité"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery/PageComponent.qml:251
-#: ../plugins/battery/PageComponent.qml:260
+#: ../plugins/battery/PageComponent.qml:253
+#: ../plugins/battery/PageComponent.qml:262
 #: ../plugins/battery/SleepValues.qml:77 ../plugins/battery/SleepValues.qml:81
 #: ../plugins/battery/SleepValues.qml:85 ../plugins/battery/SleepValues.qml:89
 #: ../plugins/battery/SleepValues.qml:93
@@ -227,22 +227,22 @@ msgid_plural "After %1 minutes"
 msgstr[0] "Après %1 minute"
 msgstr[1] "Après %1 minutes"
 
-#: ../plugins/battery/PageComponent.qml:273
+#: ../plugins/battery/PageComponent.qml:275
 #: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../plugins/battery/PageComponent.qml:306
+#: ../plugins/battery/PageComponent.qml:308
 #: ../plugins/bluetooth/PageComponent.qml:110
 #: ../plugins/bluetooth/PageComponent.qml:118 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/battery/PageComponent.qml:335
+#: ../plugins/battery/PageComponent.qml:337
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery/PageComponent.qml:353
+#: ../plugins/battery/PageComponent.qml:355
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "La détection précise de la position nécessite le GPS et/ou le Wi-Fi."
 
@@ -290,7 +290,7 @@ msgstr ""
 #: ../plugins/reset/ResetAllSettings.qml:36
 #: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:310
-#: ../plugins/time-date/TimePicker.qml:180
+#: ../plugins/time-date/TimePicker.qml:173
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -459,20 +459,20 @@ msgid "Choose carrier:"
 msgstr "Choisir le fournisseur :"
 
 #: ../plugins/cellular/PageComponent.qml:67
-#: ../plugins/time-date/ChooseTimeZone.qml:35
+#: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Automatically"
 msgstr "Automatiquement"
 
 #: ../plugins/cellular/PageComponent.qml:67
-#: ../plugins/time-date/ChooseTimeZone.qml:35
+#: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Manually"
 msgstr "Manuellement"
 
 #: ../plugins/cellular/PageComponent.qml:101
 msgid "Cellular data"
-msgstr ""
+msgstr "Données cellulaires"
 
 #: ../plugins/cellular/PageComponent.qml:109
 msgid "Data roaming"
@@ -491,16 +491,16 @@ msgstr "Afficher la langue"
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: ../plugins/language/KeyboardLayouts.qml:29
-#: ../plugins/language/PageComponent.qml:64
+#: ../plugins/language/KeyboardLayouts.qml:26
+#: ../plugins/language/PageComponent.qml:69
 msgid "Keyboard layouts"
 msgstr "Agencements du clavier"
 
-#: ../plugins/language/KeyboardLayouts.qml:42
+#: ../plugins/language/KeyboardLayouts.qml:39
 msgid "Current layouts:"
 msgstr "Agencements actuels :"
 
-#: ../plugins/language/KeyboardLayouts.qml:58
+#: ../plugins/language/KeyboardLayouts.qml:40
 msgid "All layouts available:"
 msgstr "Tous les agencements disponibles :"
 
@@ -508,46 +508,43 @@ msgstr "Tous les agencements disponibles :"
 msgid "Language & Text"
 msgstr "Langue et texte"
 
-#: ../plugins/language/PageComponent.qml:74
-#: ../plugins/language/SpellChecking.qml:29
-#: ../plugins/language/SpellChecking.qml:42
+#: ../plugins/language/PageComponent.qml:85
+#: ../plugins/language/SpellChecking.qml:27
+#: ../plugins/language/SpellChecking.qml:36
 msgid "Spell checking"
 msgstr "Vérification orthographique"
 
-#: ../plugins/language/PageComponent.qml:82
-msgid "Auto correction"
-msgstr "Correction automatique"
-
-#: ../plugins/language/PageComponent.qml:89
+#: ../plugins/language/PageComponent.qml:97
 msgid "Auto completion"
 msgstr "Complétion automatique"
 
-#: ../plugins/language/PageComponent.qml:98
+#: ../plugins/language/PageComponent.qml:109
+msgid "Predictive text"
+msgstr "Saisie intuitive"
+
+#: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
 msgstr "Majuscules automatiques"
 
-#: ../plugins/language/PageComponent.qml:105
+#: ../plugins/language/PageComponent.qml:137
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 "Active la touche Maj pour mettre en majuscule la première lettre de chaque "
 "phrase."
 
-#: ../plugins/language/PageComponent.qml:111
-msgid "Auto punctuation"
-msgstr "Ponctuation automatique"
-
-#: ../plugins/language/PageComponent.qml:118
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+#: ../plugins/language/PageComponent.qml:147
+msgid "Key press feedback"
 msgstr ""
-"Ajoute un point, un guillemet ou une parenthèse manquante lorsque vous tapez "
-"deux fois sur Espace."
 
-#: ../plugins/language/SpellChecking.qml:51
+#: ../plugins/language/PageComponent.qml:159
+msgid "Vibrate or emit a sound whenever a key is pressed."
+msgstr "Vibrer ou émettre un son lorsqu'une touche est appuyée."
+
+#: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
 msgstr "Langues d'orthographe actuelles :"
 
-#: ../plugins/language/SpellChecking.qml:64
+#: ../plugins/language/SpellChecking.qml:54
 msgid "All languages available:"
 msgstr "Toutes les langues disponibles :"
 
@@ -580,7 +577,7 @@ msgid "Contacts…"
 msgstr "Contacts…"
 
 #: ../plugins/phone/CallForwarding.qml:113
-#: ../plugins/time-date/TimePicker.qml:189
+#: ../plugins/time-date/TimePicker.qml:182
 msgid "Set"
 msgstr "Valider"
 
@@ -821,7 +818,7 @@ msgstr "Ces mots de passe ne correspondent pas. Veuillez réessayer."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "Non configuré"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
@@ -930,7 +927,7 @@ msgstr "Non envoyé"
 msgid "Passcode"
 msgstr "Code"
 
-#: ../plugins/security-privacy/PhoneLocking.qml:77
+#: ../plugins/security-privacy/PhoneLocking.qml:79
 msgid "Sleep locks immediately"
 msgstr "La mise en veille verrouille immédiatement"
 
@@ -946,27 +943,27 @@ msgstr "Appels téléphoniques :"
 msgid "Ringtone"
 msgstr "Sonnerie"
 
-#: ../plugins/sound/PageComponent.qml:66
+#: ../plugins/sound/PageComponent.qml:68
 msgid "Vibrate when ringing"
 msgstr "Vibrer pendant la sonnerie"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:76
 msgid "Vibrate in silent mode"
 msgstr "Vibrer en mode silencieux"
 
-#: ../plugins/sound/PageComponent.qml:79
+#: ../plugins/sound/PageComponent.qml:81
 msgid "Other sounds:"
 msgstr "Autre sons :"
 
-#: ../plugins/sound/PageComponent.qml:83 ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
 msgid "Message received"
 msgstr "Message reçu"
 
-#: ../plugins/sound/PageComponent.qml:92
+#: ../plugins/sound/PageComponent.qml:96
 msgid "Keyboard sounds"
 msgstr "Sons du clavier"
 
-#: ../plugins/sound/PageComponent.qml:99
+#: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
 msgstr "Son du verrouillage"
 
@@ -1100,15 +1097,15 @@ msgstr "Tout le temps"
 msgid "Time zone"
 msgstr "Fuseau horaire"
 
-#: ../plugins/time-date/ChooseTimeZone.qml:34
+#: ../plugins/time-date/ChooseTimeZone.qml:46
 msgid "Set the time zone:"
 msgstr "Régler le fuseau horaire :"
 
-#: ../plugins/time-date/ChooseTimeZone.qml:91
+#: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
 msgstr "Entez votre localisation actuelle."
 
-#: ../plugins/time-date/ChooseTimeZone.qml:91
+#: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
 msgstr "Aucun lieu ne correspond"
 
@@ -1156,55 +1153,7 @@ msgstr "Jour"
 msgid "Month"
 msgstr "Mois"
 
-#: ../plugins/time-date/TimePicker.qml:148
-msgid "January"
-msgstr "Janvier"
-
-#: ../plugins/time-date/TimePicker.qml:149
-msgid "February"
-msgstr "Février"
-
-#: ../plugins/time-date/TimePicker.qml:150
-msgid "March"
-msgstr "Mars"
-
-#: ../plugins/time-date/TimePicker.qml:151
-msgid "April"
-msgstr "Avril"
-
-#: ../plugins/time-date/TimePicker.qml:152
-msgid "May"
-msgstr "Mai"
-
-#: ../plugins/time-date/TimePicker.qml:153
-msgid "June"
-msgstr "Juin"
-
-#: ../plugins/time-date/TimePicker.qml:154
-msgid "July"
-msgstr "Juillet"
-
-#: ../plugins/time-date/TimePicker.qml:155
-msgid "August"
-msgstr "Août"
-
-#: ../plugins/time-date/TimePicker.qml:156
-msgid "September"
-msgstr "Septembre"
-
-#: ../plugins/time-date/TimePicker.qml:157
-msgid "October"
-msgstr "Octobre"
-
-#: ../plugins/time-date/TimePicker.qml:158
-msgid "November"
-msgstr "Novembre"
-
-#: ../plugins/time-date/TimePicker.qml:159
-msgid "December"
-msgstr "Décembre"
-
-#: ../plugins/time-date/TimePicker.qml:169
+#: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
 msgstr "Année"
 

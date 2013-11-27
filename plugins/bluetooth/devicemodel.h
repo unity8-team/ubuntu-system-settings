@@ -99,6 +99,8 @@ private Q_SLOTS:
     void slotDeviceRemoved(const QDBusObjectPath &);
     void slotDeviceFound(const QString &, const QMap<QString,QVariant>&);
     void slotDeviceDisappeared(const QString&);
+    void slotDefaultAdapterChanged(const QDBusObjectPath&);
+    void slotAdapterRemoved(const QDBusObjectPath& path);
 };
 
 class DeviceFilter: public QSortFilterProxyModel

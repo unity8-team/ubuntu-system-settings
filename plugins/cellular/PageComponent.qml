@@ -59,6 +59,48 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
+        /* TODO: use selector once ofono supports those options (bug #1211804) */
+        ListItem.ItemSelector {
+            id: dataTypeSelector
+            expanded: true
+            visible: showAllUI
+            text: i18n.tr("Cellular data:")
+            model: [i18n.tr("Off"),
+                i18n.tr("2G only (saves battery)"),
+                i18n.tr("2G/3G/4G (faster)")]
+            selectedIndex: !connMan.powered ? 0 : 2
+            onSelectedIndexChanged: {
+                if (selectedIndex == 0)
+                    connMan.powered = false;
+                else
+                    connMan.powered = true;
+            }
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Cellular data")
+            visible: !showAllUI
+            control: Switch {
+                checked: connMan.powered
+                onClicked: connMan.powered = checked
+            }
+         }
+
+        ListItem.Standard {
+            text: i18n.tr("Data roaming")
+            control: Switch {
+                id: dataRoamingControl
+                checked: connMan.roamingAllowed
+                onClicked: connMan.roamingAllowed = checked
+            }
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Data usage statistics")
+            progression: true
+            visible: showAllUI
+        }
+
         ListItem.ItemSelector {
             id: chooseCarrier
             expanded: true
@@ -79,43 +121,8 @@ ItemPage {
             }
         }
 
-        /* TODO: use selector once ofono supports those options (bug #1211804)
-        ListItem.ItemSelector {
-            id: dataTypeSelector
-            expanded: true
-            text: i18n.tr("Cellular data:")
-            model: [i18n.tr("Off"),
-                i18n.tr("2G only (saves battery)"),
-                i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: !connMan.powered ? 0 : 2
-            onSelectedIndexChanged: {
-                if (selectedIndex == 0)
-                    connMan.powered = false;
-                else
-                    connMan.powered = true;
-            }
-        }
-        */
-
         ListItem.Standard {
-            text: i18n.tr("Cellular data")
-            control: Switch {
-                checked: connMan.powered
-                onClicked: connMan.powered = checked
-            }
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Data roaming")
-            control: Switch {
-                id: dataRoamingControl
-                checked: connMan.roamingAllowed
-                onClicked: connMan.roamingAllowed = checked
-            }
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Data usage statistics")
+            text: i18n.tr("APN")
             progression: true
             visible: showAllUI
         }

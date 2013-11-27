@@ -59,10 +59,10 @@ public:
 
 private:
 
-    QString _name;
-    QString _language;
-    QString _displayName;
-    QString _shortName;
+    QString m_name;
+    QString m_language;
+    QString m_displayName;
+    QString m_shortName;
 };
 
 #endif // KEYBOARD_LAYOUT_H

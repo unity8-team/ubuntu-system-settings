@@ -1,12 +1,13 @@
-.build
+/build
 *.debhelper
 *.log
 *.moc
-*.substvars
-lib*.so*
+moc_*
 Makefile*
-moc_*.cpp
-qrc_*.cpp
+tst_*
+lib/SystemSettings/SystemSettings.pc
+src/qrc_ui.cpp
+src/system-settings
 system-settings.pro.user
 /debian/files
 /debian/libsystemsettings-dev/
@@ -14,8 +15,3 @@ system-settings.pro.user
 /debian/tmp/
 /debian/ubuntu-system-settings/
 /debian/ubuntu-system-settings-example/
-/lib/SystemSettings/SystemSettings.pc
-/po/*.mo
-/src/system-settings
-/tests/tst_arguments
-/tests/tst_plugins

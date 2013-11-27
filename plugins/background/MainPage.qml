@@ -26,11 +26,15 @@ import Ubuntu.Content 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 
-import "utilities.js" as Utilities
-
 ItemPage {
     id: mainPage
     title: i18n.tr("Background")
+
+    /* TODO: For now hardcoded paths, later we'll use GSettings */
+    property string defaultBackground:
+        mainPage.width >= units.gu(60) ?
+            "/usr/share/unity8/graphics/tablet_background.jpg" :
+            "/usr/share/unity8/graphics/phone_background.jpg"
 
     UbuntuBackgroundPanel {
         id: backgroundPanel
@@ -56,8 +60,21 @@ ItemPage {
         }
     }
 
+    function updateWelcome(imageUrl) {
+        backgroundPanel.backgroundFile = imageUrl
+    }
 
-    /* TODO: We hide the welcome screen parts for v1 - there's a lot of elements to hide */
+    function updateHome(imageUrl) {
+        background.pictureUri = imageUrl
+    }
+
+    function updateBoth(imageUrl) {
+        updateWelcome(imageUrl)
+        updateHome(imageUrl)
+    }
+
+    /* TODO: We hide the welcome screen parts for v1 -
+       there's a lot of elements to hide */
 
     Label {
         id: welcomeLabel
@@ -69,35 +86,24 @@ ItemPage {
         }
 
         text: i18n.tr("Welcome screen")
-
-        visible: showAllUI
     }
 
     SwappableImage {
         id: welcomeImage
-
-        visible: showAllUI
 
         anchors {
             top: parent.top
             left: parent.left
          }
 
-        onClicked: {
-            var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                    ContentHub.defaultSourceForType(ContentType.Pictures));
-            if (transfer != null)
-            {
-                transfer.selectionType = ContentTransfer.Single;
-                var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-                console.log("Store is: " + store.uri);
-                transfer.setStore(store);
-                activeTransfer = transfer;
-                activeTransfer.start();
+        onClicked: startContentTransfer(function(url) {
+            if (systemSettingsSettings.backgroundDuplicate) {
+                updateBoth(url)
+            } else {
+                updateWelcome(url)
+                systemSettingsSettings.backgroundSetLast = "welcome"
             }
-
-        }
-
+        })
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
 
@@ -112,26 +118,19 @@ ItemPage {
 
         anchors {
             top: parent.top
-            right: (showAllUI) ? parent.right : undefined
-            horizontalCenter: (showAllUI) ? undefined : parent.horizontalCenter
+            right: parent.right
          }
 
+        onClicked: startContentTransfer(function(url) {
+            if (systemSettingsSettings.backgroundDuplicate) {
+                updateBoth(url)
+            } else {
+                updateHome(url)
+                systemSettingsSettings.backgroundSetLast = "home"
+            }
+        })
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
-
-        onClicked: {
-            var transfer = ContentHub.importContent(ContentType.Pictures,
-                                                    ContentHub.defaultSourceForType(ContentType.Pictures));
-            if (transfer != null)
-            {
-                transfer.selectionType = ContentTransfer.Single;
-                var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-                console.log("Store is: " + store.uri);
-                transfer.setStore(store);
-                activeTransfer = transfer;
-                activeTransfer.start();
-            }
-        }
 
         OverlayImage {
             anchors.fill: parent
@@ -149,8 +148,6 @@ ItemPage {
         }
 
         text: i18n.tr("Home screen")
-
-        visible: showAllUI
     }
 
     ListItem.ThinDivider {
@@ -160,9 +157,8 @@ ItemPage {
             topMargin: units.gu(2)
             top: welcomeLabel.bottom
         }
-
-        visible: showAllUI
     }
+
 
     OptionSelector {
         id: optionSelector
@@ -176,14 +172,39 @@ ItemPage {
 
         model: [i18n.tr("Same background for both"),
             i18n.tr("Different background for each")]
+        selectedIndex: systemSettingsSettings.backgroundDuplicate === 0 ? 0 : 1
         onSelectedIndexChanged: {
             systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
         }
-
-        visible: showAllUI
     }
 
+    Column {
 
+        id: buttonColumn
+        spacing: units.gu(1)
+
+        anchors {
+            topMargin: units.gu(2)
+            left: parent.left
+            right: parent.right
+            top: optionSelector.bottom
+        }
+
+        Button {
+            text: i18n.tr("Use original background")
+            width: parent.width - units.gu(4)
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                // Reset all of the settings
+                background.schema.reset('pictureUri')
+                systemSettingsSettings.backgroundPreviouslySetValue =
+                        background.pictureUri
+                backgroundPanel.backgroundFile = background.pictureUri
+                systemSettingsSettings.backgroundSetLast = "home"
+                optionSelector.selectedIndex = 0 // Same
+            }
+        }
+    }
 
     /* We don't have a good way of doing this after passing an invalid image to
        SwappableImage, so test the image is valid /before/ showing it and show a
@@ -198,7 +219,13 @@ ItemPage {
 
     Image {
         id: testWelcomeImage
-        property string fallback: "darkeningclockwork.jpg"
+
+        function update(uri) {
+            // Will update source
+            updateWelcome(uri)
+        }
+
+        property string fallback: defaultBackground
         visible: false
         onStatusChanged: updateImage(testWelcomeImage,
                                      welcomeImage)
@@ -206,7 +233,13 @@ ItemPage {
 
     Image {
         id: testHomeImage
-        property string fallback: "aeg.jpg"
+
+        function update(uri) {
+            // Will update source
+            updateHome(uri)
+        }
+
+        property string fallback: defaultBackground
         source: background.pictureUri
         visible: false
         onStatusChanged: updateImage(testHomeImage,
@@ -224,11 +257,11 @@ ItemPage {
             systemSettingsSettings.backgroundPreviouslySetValue =
                     leastRecent.source
             /* copy most recently changed to least recently changed */
-            leastRecent.source = mostRecent.source
+            leastRecent.update(mostRecent.source)
         } else { // different
             /* restore least recently changed to previous value */
-            leastRecent.source =
-                    systemSettingsSettings.backgroundPreviouslySetValue
+            leastRecent.update(
+                    systemSettingsSettings.backgroundPreviouslySetValue)
         }
     }
 
@@ -246,15 +279,33 @@ ItemPage {
     property var activeTransfer
 
     Connections {
+        id: contentHubConnection
+        property var imageCallback
         target: activeTransfer ? activeTransfer : null
         onStateChanged: {
             if (activeTransfer.state === ContentTransfer.Charged) {
                 if (activeTransfer.items.length > 0) {
                     var imageUrl = activeTransfer.items[0].url;
-                    background.pictureUri = imageUrl;
-                    setUpImages();
+                    imageCallback(imageUrl);
                 }
             }
+        }
+    }
+
+    function startContentTransfer(callback) {
+        if (callback)
+            contentHubConnection.imageCallback = callback
+        var transfer = ContentHub.importContent(
+                    ContentType.Pictures,
+                    ContentHub.defaultSourceForType(ContentType.Pictures));
+        if (transfer != null)
+        {
+            transfer.selectionType = ContentTransfer.Single;
+            var store = ContentHub.defaultStoreForType(ContentType.Pictures);
+            console.log("Store is: " + store.uri);
+            transfer.setStore(store);
+            activeTransfer = transfer;
+            activeTransfer.start();
         }
     }
 }

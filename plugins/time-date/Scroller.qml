@@ -113,6 +113,7 @@ Item {
                 anchors.centerIn: parent
                 text: modelData
             }
+            showDivider: false
             onClicked: listView.currentIndex = index
         }
         property int contentHeight: pathItemCount * highlightItem.height
@@ -127,7 +128,7 @@ Item {
         }
         highlight: Rectangle {
             width: parent.width
-            height: units.gu(5)
+            height: units.gu(4)
             gradient: UbuntuColors.orangeGradient
         }
         ListItems.Divider {

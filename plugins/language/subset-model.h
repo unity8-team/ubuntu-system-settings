@@ -105,16 +105,16 @@ protected:
         qint64 finish;
     };
 
-    QStringList _customRoles;
-    QVariantList _superset;
-    QList<int> _subset;
-    bool _allowEmpty;
+    QStringList m_customRoles;
+    QVariantList m_superset;
+    QList<int> m_subset;
+    bool m_allowEmpty;
 
-    QList<State *> _state;
-    QList<Change *> _change;
+    QList<State *> m_state;
+    QList<Change *> m_change;
 
-    int _checked;
-    qint64 _ignore;
+    int m_checked;
+    qint64 m_ignore;
 
     friend bool changeLessThan(const Change *change0,
                                const Change *change1);

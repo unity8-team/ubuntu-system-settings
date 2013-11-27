@@ -1,15 +1,15 @@
-prefix=$$INSTALL_PREFIX
+prefix=@CMAKE_INSTALL_PREFIX@
 exec_prefix=${prefix}
-libdir=$$LIBDIR
+libdir=${prefix}/@LIBDIR@
 includedir=${prefix}/include
-plugin_manifest_dir=${prefix}/$${PLUGIN_MANIFEST_DIR_BASE}
-plugin_module_dir=${libdir}/$${PLUGIN_MODULE_DIR_BASE}
-plugin_private_module_dir=${libdir}/$${PLUGIN_PRIVATE_MODULE_DIR_BASE}
-plugin_qml_dir=${prefix}/$${PLUGIN_QML_DIR_BASE}
+plugin_manifest_dir=${prefix}/@PLUGIN_MANIFEST_DIR_BASE@
+plugin_module_dir=${libdir}/@PLUGIN_MODULE_DIR_BASE@
+plugin_private_module_dir=${libdir}/@PLUGIN_PRIVATE_MODULE_DIR_BASE@
+plugin_qml_dir=${prefix}/@PLUGIN_QML_DIR_BASE@
 
 Name: SystemSettings
 Description: Ubuntu Touch system settings plug-in development
-Version: $$PROJECT_VERSION
+Version: @PROJECT_VERSION@
 Requires: Qt5Core Qt5Qml
-Libs: -L${libdir} -l$${TARGET}
+Libs: -L${libdir} -l@SYSTEMSETTINGS_LIB@
 Cflags: -I${includedir}

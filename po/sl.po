@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-30 22:34+0100\n"
+"POT-Creation-Date: 2013-10-07 12:02+0100\n"
 "PO-Revision-Date: 2013-10-02 09:57+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2013-10-03 05:57+0000\n"
-"X-Generator: Launchpad (build 16791)\n"
+"X-Launchpad-Export-Date: 2013-11-12 06:26+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -28,8 +28,8 @@ msgid "Serial"
 msgstr "Zaporedna številka"
 
 #: ../plugins/about/PageComponent.qml:77 ../plugins/about/PageComponent.qml:84
-#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:128
-#: ../plugins/battery/PageComponent.qml:140
+#: ../plugins/about/Storage.qml:190 ../plugins/battery/PageComponent.qml:130
+#: ../plugins/battery/PageComponent.qml:142
 #: ../plugins/cellular/PageComponent.qml:73
 msgid "N/A"
 msgstr "Ni na voljo"
@@ -47,8 +47,8 @@ msgid "Last updated"
 msgstr "Nazadnje posodobljeno"
 
 #: ../plugins/about/PageComponent.qml:98
-#: ../plugins/battery/PageComponent.qml:254
-#: ../plugins/battery/PageComponent.qml:263
+#: ../plugins/battery/PageComponent.qml:256
+#: ../plugins/battery/PageComponent.qml:265
 #: ../plugins/battery/SleepValues.qml:96
 #: ../plugins/system-update/Download.qml:53
 #: ../plugins/system-update/PageComponent.qml:347
@@ -127,15 +127,15 @@ msgstr "Ozadje"
 msgid "Welcome screen"
 msgstr "Pozdravni zaslon"
 
-#: ../plugins/background/MainPage.qml:134
+#: ../plugins/background/MainPage.qml:151
 msgid "Home screen"
 msgstr "Domači zaslon"
 
-#: ../plugins/background/MainPage.qml:160
+#: ../plugins/background/MainPage.qml:177
 msgid "Same background for both"
 msgstr "Enako ozadje za oboje"
 
-#: ../plugins/background/MainPage.qml:161
+#: ../plugins/background/MainPage.qml:178
 msgid "Different background for each"
 msgstr "Različna ozadja za oboje"
 
@@ -187,45 +187,45 @@ msgstr[3] "pred %1 dnevi"
 msgid "Charging now"
 msgstr "Polnjenje"
 
-#: ../plugins/battery/PageComponent.qml:80
+#: ../plugins/battery/PageComponent.qml:81
 msgid "Last full charge"
 msgstr "Zadnja napolnitev"
 
-#: ../plugins/battery/PageComponent.qml:84
+#: ../plugins/battery/PageComponent.qml:86
 msgid "Fully charged"
 msgstr "Popolnoma napolnjeno"
 
-#: ../plugins/battery/PageComponent.qml:123
+#: ../plugins/battery/PageComponent.qml:125
 msgid "Charge level"
 msgstr "Raven napolnjenosti"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery/PageComponent.qml:131
+#: ../plugins/battery/PageComponent.qml:133
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery/PageComponent.qml:184
+#: ../plugins/battery/PageComponent.qml:186
 msgid "Ways to reduce battery use:"
 msgstr "Načini za zmanjšanje porabe baterije:"
 
-#: ../plugins/battery/PageComponent.qml:188
+#: ../plugins/battery/PageComponent.qml:190
 msgid "Display brightness"
 msgstr "Svetlost zaslona"
 
-#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
 msgstr ""
 
-#: ../plugins/battery/PageComponent.qml:245
+#: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
 msgstr ""
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery/PageComponent.qml:251
-#: ../plugins/battery/PageComponent.qml:260
+#: ../plugins/battery/PageComponent.qml:253
+#: ../plugins/battery/PageComponent.qml:262
 #: ../plugins/battery/SleepValues.qml:77 ../plugins/battery/SleepValues.qml:81
 #: ../plugins/battery/SleepValues.qml:85 ../plugins/battery/SleepValues.qml:89
 #: ../plugins/battery/SleepValues.qml:93
@@ -237,22 +237,22 @@ msgstr[1] "Po %1 minuti"
 msgstr[2] "Po %1 minutah"
 msgstr[3] "Po %1 minutah"
 
-#: ../plugins/battery/PageComponent.qml:273
+#: ../plugins/battery/PageComponent.qml:275
 #: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../plugins/battery/PageComponent.qml:306
+#: ../plugins/battery/PageComponent.qml:308
 #: ../plugins/bluetooth/PageComponent.qml:110
 #: ../plugins/bluetooth/PageComponent.qml:118 ../.build/settings.js:5
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/battery/PageComponent.qml:335
+#: ../plugins/battery/PageComponent.qml:337
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery/PageComponent.qml:353
+#: ../plugins/battery/PageComponent.qml:355
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Odkrivanje točnega položaja zahteva GPS in/ali Wi-Fi."
 
@@ -298,7 +298,7 @@ msgstr "Potrdite, da se PIN, prikazan na '%1', ujema s tem"
 #: ../plugins/reset/ResetAllSettings.qml:36
 #: ../plugins/reset/ResetLauncherHome.qml:40
 #: ../plugins/security-privacy/LockSecurity.qml:310
-#: ../plugins/time-date/TimePicker.qml:180
+#: ../plugins/time-date/TimePicker.qml:173
 msgid "Cancel"
 msgstr "Prekliči"
 
@@ -467,13 +467,13 @@ msgid "Choose carrier:"
 msgstr "Izberite operaterja:"
 
 #: ../plugins/cellular/PageComponent.qml:67
-#: ../plugins/time-date/ChooseTimeZone.qml:35
+#: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Automatically"
 msgstr "Samodejno"
 
 #: ../plugins/cellular/PageComponent.qml:67
-#: ../plugins/time-date/ChooseTimeZone.qml:35
+#: ../plugins/time-date/ChooseTimeZone.qml:47
 #: ../plugins/time-date/PageComponent.qml:66
 msgid "Manually"
 msgstr "Ročno"
@@ -499,16 +499,16 @@ msgstr ""
 msgid "Confirm"
 msgstr "Potrdi"
 
-#: ../plugins/language/KeyboardLayouts.qml:29
-#: ../plugins/language/PageComponent.qml:64
+#: ../plugins/language/KeyboardLayouts.qml:26
+#: ../plugins/language/PageComponent.qml:69
 msgid "Keyboard layouts"
 msgstr "Razporeditve tipk"
 
-#: ../plugins/language/KeyboardLayouts.qml:42
+#: ../plugins/language/KeyboardLayouts.qml:39
 msgid "Current layouts:"
 msgstr "Trenutne razporeditve:"
 
-#: ../plugins/language/KeyboardLayouts.qml:58
+#: ../plugins/language/KeyboardLayouts.qml:40
 msgid "All layouts available:"
 msgstr "Vse razpoložljive razporeditve:"
 
@@ -516,44 +516,41 @@ msgstr "Vse razpoložljive razporeditve:"
 msgid "Language & Text"
 msgstr "Jezik in besedilo"
 
-#: ../plugins/language/PageComponent.qml:74
-#: ../plugins/language/SpellChecking.qml:29
-#: ../plugins/language/SpellChecking.qml:42
+#: ../plugins/language/PageComponent.qml:85
+#: ../plugins/language/SpellChecking.qml:27
+#: ../plugins/language/SpellChecking.qml:36
 msgid "Spell checking"
 msgstr "Preverjanje črkovanja"
 
-#: ../plugins/language/PageComponent.qml:82
-msgid "Auto correction"
-msgstr "Samodejno popravljanje"
-
-#: ../plugins/language/PageComponent.qml:89
+#: ../plugins/language/PageComponent.qml:97
 msgid "Auto completion"
 msgstr "Samodejno dopolnjevanje"
 
-#: ../plugins/language/PageComponent.qml:98
+#: ../plugins/language/PageComponent.qml:109
+msgid "Predictive text"
+msgstr ""
+
+#: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
 msgstr "Samodejno spreminjanje velikih začetnic"
 
-#: ../plugins/language/PageComponent.qml:105
+#: ../plugins/language/PageComponent.qml:137
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "Vklopi tipko Shift za spreminjanje velikih začetnic v vsaki povedi."
 
-#: ../plugins/language/PageComponent.qml:111
-msgid "Auto punctuation"
-msgstr "Samodejno postavljanje ločil"
-
-#: ../plugins/language/PageComponent.qml:118
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+#: ../plugins/language/PageComponent.qml:147
+msgid "Key press feedback"
 msgstr ""
-"Doda piko in vsake manjkajoče narekovaje ali oklepaje, ko stisnete "
-"preslednico dvakrat."
 
-#: ../plugins/language/SpellChecking.qml:51
+#: ../plugins/language/PageComponent.qml:159
+msgid "Vibrate or emit a sound whenever a key is pressed."
+msgstr ""
+
+#: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
 msgstr "Trenutni jeziki za črkovanje:"
 
-#: ../plugins/language/SpellChecking.qml:64
+#: ../plugins/language/SpellChecking.qml:54
 msgid "All languages available:"
 msgstr "Vsi razpoložljivi jeziki:"
 
@@ -586,7 +583,7 @@ msgid "Contacts…"
 msgstr "Stiki ..."
 
 #: ../plugins/phone/CallForwarding.qml:113
-#: ../plugins/time-date/TimePicker.qml:189
+#: ../plugins/time-date/TimePicker.qml:182
 msgid "Set"
 msgstr "Nastavi"
 
@@ -933,7 +930,7 @@ msgstr "Ni poslano"
 msgid "Passcode"
 msgstr "Geslo"
 
-#: ../plugins/security-privacy/PhoneLocking.qml:77
+#: ../plugins/security-privacy/PhoneLocking.qml:79
 msgid "Sleep locks immediately"
 msgstr ""
 
@@ -949,27 +946,27 @@ msgstr "Telefonski klici:"
 msgid "Ringtone"
 msgstr "Ton zvonjenja"
 
-#: ../plugins/sound/PageComponent.qml:66
+#: ../plugins/sound/PageComponent.qml:68
 msgid "Vibrate when ringing"
 msgstr "Vibriraj med zvonenjem"
 
-#: ../plugins/sound/PageComponent.qml:73
+#: ../plugins/sound/PageComponent.qml:76
 msgid "Vibrate in silent mode"
 msgstr "Vibriraj v tihem načinu"
 
-#: ../plugins/sound/PageComponent.qml:79
+#: ../plugins/sound/PageComponent.qml:81
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound/PageComponent.qml:83 ../plugins/sound/PageComponent.qml:86
+#: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
 msgid "Message received"
 msgstr "Sporočilo je bilo prejeto"
 
-#: ../plugins/sound/PageComponent.qml:92
+#: ../plugins/sound/PageComponent.qml:96
 msgid "Keyboard sounds"
 msgstr "Zvoki tipkovnice"
 
-#: ../plugins/sound/PageComponent.qml:99
+#: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
 msgstr "Zvok zaklepa"
 
@@ -1105,15 +1102,15 @@ msgstr "Vedno"
 msgid "Time zone"
 msgstr "Časovni pas"
 
-#: ../plugins/time-date/ChooseTimeZone.qml:34
+#: ../plugins/time-date/ChooseTimeZone.qml:46
 msgid "Set the time zone:"
 msgstr "Nastavi časovni pas:"
 
-#: ../plugins/time-date/ChooseTimeZone.qml:91
+#: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
 msgstr "Vnesite Vaš trenutni kraj."
 
-#: ../plugins/time-date/ChooseTimeZone.qml:91
+#: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
 msgstr "Kraja ni mogoče najti"
 
@@ -1161,55 +1158,7 @@ msgstr "Dan"
 msgid "Month"
 msgstr "Mesec"
 
-#: ../plugins/time-date/TimePicker.qml:148
-msgid "January"
-msgstr "Januar"
-
-#: ../plugins/time-date/TimePicker.qml:149
-msgid "February"
-msgstr "Februar"
-
-#: ../plugins/time-date/TimePicker.qml:150
-msgid "March"
-msgstr "Marec"
-
-#: ../plugins/time-date/TimePicker.qml:151
-msgid "April"
-msgstr "April"
-
-#: ../plugins/time-date/TimePicker.qml:152
-msgid "May"
-msgstr "Maj"
-
-#: ../plugins/time-date/TimePicker.qml:153
-msgid "June"
-msgstr "Junij"
-
-#: ../plugins/time-date/TimePicker.qml:154
-msgid "July"
-msgstr "Julij"
-
-#: ../plugins/time-date/TimePicker.qml:155
-msgid "August"
-msgstr "Avgust"
-
-#: ../plugins/time-date/TimePicker.qml:156
-msgid "September"
-msgstr "September"
-
-#: ../plugins/time-date/TimePicker.qml:157
-msgid "October"
-msgstr "Oktober"
-
-#: ../plugins/time-date/TimePicker.qml:158
-msgid "November"
-msgstr "November"
-
-#: ../plugins/time-date/TimePicker.qml:159
-msgid "December"
-msgstr "December"
-
-#: ../plugins/time-date/TimePicker.qml:169
+#: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
 msgstr "Leto"
 

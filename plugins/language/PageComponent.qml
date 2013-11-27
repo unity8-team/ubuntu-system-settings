@@ -40,6 +40,18 @@ ItemPage {
         DisplayLanguage {}
     }
 
+    Component {
+        id: keyboardLayouts
+
+        KeyboardLayouts {}
+    }
+
+    Component {
+        id: spellChecking
+
+        SpellChecking {}
+    }
+
     Flickable {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
@@ -52,8 +64,8 @@ ItemPage {
 
             ListItem.SingleValue {
                 icon: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
-                text: i18n.tr("Display language")
-                value: plugin.languages[plugin.currentLanguage]
+                text: i18n.tr("Display language…")
+                value: plugin.languageNames[plugin.currentLanguage]
                 progression: true
 
                 onClicked: PopupUtils.open(displayLanguage)
@@ -72,7 +84,7 @@ ItemPage {
                        plugin.keyboardLayoutsModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(Qt.resolvedUrl("KeyboardLayouts.qml"))
+                onClicked: pageStack.push(keyboardLayouts)
             }
 
             ListItem.Divider {
@@ -87,7 +99,7 @@ ItemPage {
                        plugin.spellCheckingModel.subset.length
                 progression: true
 
-                onClicked: pageStack.push(Qt.resolvedUrl("SpellChecking.qml"))
+                onClicked: pageStack.push(spellChecking)
             }
 
             ListItem.Standard {
@@ -101,7 +113,7 @@ ItemPage {
             }
 
             ListItem.Standard {
-                text: i18n.tr("Predictive text")
+                text: i18n.tr("Word suggestions")
 
                 control: Switch {
                     checked: plugin.predictiveText
@@ -111,12 +123,9 @@ ItemPage {
             }
 
             ListItem.Divider {
-                visible: showAllUI
             }
 
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Auto capitalization")
 
                 control: Switch {
@@ -127,8 +136,6 @@ ItemPage {
             }
 
             ListItem.Caption {
-                visible: showAllUI
-
                 text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
             }
 
@@ -139,19 +146,13 @@ ItemPage {
             ListItem.Standard {
                 visible: showAllUI
 
-                text: i18n.tr("Key press feedback")
+                text: i18n.tr("Keyboard sound")
 
                 control: Switch {
                     checked: plugin.keyPressFeedback
 
                     onClicked: plugin.keyPressFeedback = checked
                 }
-            }
-
-            ListItem.Caption {
-                visible: showAllUI
-
-                text: i18n.tr("Vibrate or emit a sound whenever a key is pressed.")
             }
         }
     }

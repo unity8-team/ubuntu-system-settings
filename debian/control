@@ -12,13 +12,14 @@ Build-Depends: dbus-test-runner,
                libofono-qt-dev,
                libqmenumodel-dev,
                libqt5xmlpatterns5-dev,
-               libtimezonemap1-dev (>= 0.4.0.1),
+               libtimezonemap1-dev (>= 0.4.1),
                libupower-glib-dev,
                pkg-config,
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
                xvfb,
+               cmake,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
@@ -34,6 +35,7 @@ Depends: ${misc:Depends},
          bluez (>= 4.36),
          gsettings-desktop-schemas,
          gsettings-ubuntu-touch-schemas (>= 0.0.1+13.10.20130730),
+         indicator-bluetooth (>> 0.0.6+13.10.20131010),
          indicator-network (>= 0.5.0+13.10.20130918),
          powerd | gnome-settings-daemon,
          qmenumodel-qml,
@@ -49,6 +51,7 @@ Depends: ${misc:Depends},
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
+            ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example
 Description: System Settings application for Ubuntu Touch
  This package contains the System Settings application used on the 

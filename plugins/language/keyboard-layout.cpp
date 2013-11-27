@@ -27,17 +27,17 @@ KeyboardLayout::KeyboardLayout(const QString &name,
                                const QString &shortName,
                                QObject       *parent) :
     QObject(parent),
-    _name(name),
-    _language(language),
-    _displayName(displayName),
-    _shortName(shortName)
+    m_name(name),
+    m_language(language),
+    m_displayName(displayName),
+    m_shortName(shortName)
 {
 }
 
 KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,
                                QObject         *parent) :
     QObject(parent),
-    _name(fileInfo.completeBaseName())
+    m_name(fileInfo.completeBaseName())
 {
     QVariant path(fileInfo.canonicalFilePath());
 
@@ -48,7 +48,7 @@ KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,
     QStringList languageResults;
 
     if (languageQuery.evaluateTo(&languageResults) && !languageResults.isEmpty())
-        _language = languageResults.first();
+        m_language = languageResults.first();
 
     QXmlQuery titleQuery;
     titleQuery.bindVariable("path", path);
@@ -57,32 +57,32 @@ KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,
     QStringList titleResults;
 
     if (titleQuery.evaluateTo(&titleResults) && !titleResults.isEmpty())
-        _displayName = titleResults.first();
+        m_displayName = titleResults.first();
 
-    _shortName = _language.left(2);
-    _shortName[0] = _shortName[0].toUpper();
+    m_shortName = m_language.left(2);
+    m_shortName[0] = m_shortName[0].toUpper();
 }
 
 const QString &
 KeyboardLayout::name() const
 {
-    return _name;
+    return m_name;
 }
 
 const QString &
 KeyboardLayout::language() const
 {
-    return _language;
+    return m_language;
 }
 
 const QString &
 KeyboardLayout::displayName() const
 {
-    return _displayName;
+    return m_displayName;
 }
 
 const QString &
 KeyboardLayout::shortName() const
 {
-    return _shortName;
+    return m_shortName;
 }

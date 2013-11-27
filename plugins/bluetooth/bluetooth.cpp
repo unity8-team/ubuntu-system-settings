@@ -45,20 +45,12 @@ Bluetooth::Bluetooth(QObject *parent):
     m_disconnectedHeadsets.filterOnConnections(Device::Connection::Connecting |
                                                Device::Connection::Disconnected);
     m_disconnectedHeadsets.setSourceModel(&m_devices);
-  
-    QObject::connect(&m_killswitch, SIGNAL(blockedChanged(bool)),
-                     this, SLOT(onKillSwitchChanged(bool)));
 
     QObject::connect(&m_devices, SIGNAL(discoveringChanged(bool)),
                      this, SIGNAL(discoveringChanged(bool)));
 
     QObject::connect(&m_agent, SIGNAL(onPairingDone()),
                      this, SLOT(onPairingDone()));
-}
-
-void Bluetooth::onKillSwitchChanged(bool blocked)
-{
-    Q_EMIT(enabledChanged(!blocked));
 }
 
 void Bluetooth::setSelectedDevice(const QString &address)

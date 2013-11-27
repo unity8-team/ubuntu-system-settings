@@ -89,7 +89,6 @@ ItemPage {
         }
         Component.onCompleted: {
             onChargingStateChanged(0, chargingState(0))
-            onRemainingCapacityChanged(0, remainingCapacity(0))
         }
     }
 
@@ -163,9 +162,14 @@ ItemPage {
                     ctx.lineTo(width, height)
                     ctx.stroke()
 
-                    /* Display the charge history in orange color */
+                    /* Display the charge history */
+                    ctx.beginPath();
                     ctx.lineWidth = units.dp(2)
-                    ctx.strokeStyle = UbuntuColors.orange
+                    var gradient = ctx.createLinearGradient(0, 0, 0, height);
+                    gradient.addColorStop(0, "green");
+                    gradient.addColorStop(0.5, "yellow");
+                    gradient.addColorStop(1, "red");
+                    ctx.strokeStyle = gradient
 
                     /* Get infos from battery0, on a day (60*24*24=86400 seconds), with 150 points on the graph */
                     var chargeDatas = batteryBackend.getHistory(batteryBackend.deviceString, 86400, 150)
@@ -294,32 +298,30 @@ ItemPage {
                 busName: "com.canonical.indicator.bluetooth"
                 objectPath: "/com/canonical/indicator/bluetooth"
 
+                property bool visible: action("bluetooth-supported")
                 property variant enabled: action("bluetooth-enabled")
-                property variant actionVisible: action("root-phone")
-
-                property bool visible:
-                    actionVisible.state.visible === undefined ||
-                    actionVisible.state.visible
 
                 Component.onCompleted: start()
             }
 
             ListItem.Standard {
+                id: btListItem
                 text: i18n.tr("Bluetooth")
-                control: Switch {
-                    id: btSwitch
-                    // Cannot use onCheckedChanged as this triggers a loop
-                    onClicked: bluetoothActionGroup.enabled.activate()
+                control: Loader {
+                    active: bluetoothActionGroup.enabled.state != null
+                    sourceComponent: Switch {
+                        id: btSwitch
+                        // Cannot use onCheckedChanged as this triggers a loop
+                        onClicked: bluetoothActionGroup.enabled.activate()
+                        checked: bluetoothActionGroup.enabled.state
+                    }
+
+                    // ListItem forwards the 'clicked' signal to its control.
+                    // It needs to be forwarded again to the Loader's sourceComponent
+                    signal clicked
+                    onClicked: item.clicked()
                 }
                 visible: bluetoothActionGroup.visible
-                Component.onCompleted:
-                    clicked.connect(btSwitch.clicked)
-            }
-
-            Binding {
-                target: btSwitch
-                property: "checked"
-                value: bluetoothActionGroup.enabled.state
             }
 
             QDBusActionGroup {
@@ -334,26 +336,28 @@ ItemPage {
             }
 
             ListItem.Standard {
+                id: gpsListItem
                 text: i18n.tr("GPS")
-                control: Switch {
-                    id: gpsSwitch
-                    onClicked: locationActionGroup.enabled.activate()
+                control: Loader {
+                    active: locationActionGroup.enabled.state != null
+                    sourceComponent: Switch {
+                        id: gpsSwitch
+                        onClicked: locationActionGroup.enabled.activate()
+                        checked: locationActionGroup.enabled.state
+                    }
+
+                    // ListItem forwards the 'clicked' signal to its control.
+                    // It needs to be forwarded again to the Loader's sourceComponent
+                    signal clicked
+                    onClicked: item.clicked()
                 }
                 visible: showAllUI && // Hidden until the indicator works
                          locationActionGroup.enabled.state !== undefined
-                Component.onCompleted:
-                    clicked.connect(gpsSwitch.clicked)
-            }
-
-            Binding {
-                target: gpsSwitch
-                property: "checked"
-                value: locationActionGroup.enabled.state
             }
 
             ListItem.Caption {
                 text: i18n.tr("Accurate location detection requires GPS and/or Wi-Fi.")
-                visible: gpsSwitch.visible
+                visible: gpsListItem.visible
             }
         }
     }
