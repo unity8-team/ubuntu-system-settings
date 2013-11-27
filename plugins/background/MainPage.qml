@@ -24,6 +24,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
+import "utilities.js" as Utilities
 
 ItemPage {
     id: mainPage
@@ -59,19 +60,6 @@ ItemPage {
         }
     }
 
-    function updateWelcome(imageUrl) {
-        backgroundPanel.backgroundFile = imageUrl
-    }
-
-    function updateHome(imageUrl) {
-        background.pictureUri = imageUrl
-    }
-
-    function updateBoth(imageUrl) {
-        updateWelcome(imageUrl)
-        updateHome(imageUrl)
-    }
-
     /* TODO: We hide the welcome screen parts for v1 -
        there's a lot of elements to hide */
 
@@ -97,14 +85,7 @@ ItemPage {
 
         onClicked: {
             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"), {homeScreen: false, gsettings: systemSettingsSettings});
-            selectImage(function(url) {
-                if (systemSettingsSettings.backgroundDuplicate) {
-                    updateBoth(url)
-                } else {
-                    updateWelcome(url)
-                    systemSettingsSettings.backgroundSetLast = "welcome"
-                }
-            });
+            //selectImage(Utilities.setBackground)
         }
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
@@ -124,16 +105,8 @@ ItemPage {
          }
 
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"), {homeScreen: true, gsettings: systemSettingsSettings, mainPage: mainPage});
-
-            selectImage(function(url) {
-                if (systemSettingsSettings.backgroundDuplicate) {
-                    updateBoth(url)
-                } else {
-                    updateHome(url)
-                    systemSettingsSettings.backgroundSetLast = "home"
-                }
-            });
+            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"), {homeScreen: true, gsettings: systemSettingsSettings});
+            //selectImage(Utilities.setBackground);
         }
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
@@ -227,7 +200,7 @@ ItemPage {
 
         function update(uri) {
             // Will update source
-            updateWelcome(uri)
+            Utilities.updateWelcome(uri)
         }
 
         property string fallback: defaultBackground
@@ -241,7 +214,7 @@ ItemPage {
 
         function update(uri) {
             // Will update source
-            updateHome(uri)
+            Utilities.updateHome(uri)
         }
 
         property string fallback: defaultBackground

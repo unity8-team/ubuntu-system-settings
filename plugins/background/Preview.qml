@@ -23,21 +23,55 @@ import GSettings 1.0
 import Ubuntu.Components 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
+import "utilities.js" as Utilities
 
 ItemPage {
     id: preview
     anchors.fill: parent
 
+    property string uri
+    property bool homeScreen
+
+    states: [
+        State {
+            name: "showing"
+            StateChangeScript {
+                script: {
+                    pageStack.currentPage.header.opacity = 0.7;
+                    pageStack.currentPage.toolbar.opacity = 0.7;
+                }
+
+            }
+        },
+        State {
+            name: "destroyed"
+            StateChangeScript {
+                script: {
+                    pageStack.currentPage.header.opacity = 1.0;
+                    pageStack.currentPage.toolbar.opacity = 1.0;
+                    pageStack.pop();
+                }
+            }
+        }
+    ]
+    Component.onCompleted: {
+        state = "showing";
+        console.log ("homeScreen: " + homeScreen);
+    }
+
     title: i18n.tr("Preview")
 
-    property string uri
+    GSettings {
+        id: background
+        schema.id: "org.gnome.desktop.background"
+    }
 
     Action {
         id: cancelAction
         text: i18n.tr("Cancel")
         iconName: "back"
         onTriggered: {
-                pageStack.pop();
+            state = "destroyed";
         }
     }
 
@@ -46,10 +80,11 @@ ItemPage {
         text: i18n.tr("Set")
         iconName: "import-image"
         onTriggered: {
-                pageStack.pop();
+            console.log ("Set wallpaper here");
+            Utilities.setBackground(uri);
+            state = "destroyed";
         }
     }
-
 
     tools: ToolbarItems {
         back: ToolbarButton {
@@ -64,11 +99,15 @@ ItemPage {
         id: backgroundPanel
     }
 
+    GSettings {
+        id: systemSettingsSettings
+        schema.id: "com.ubuntu.touch.system-settings"
+    }
+
     Image {
         id: previewImage
-        anchors.fill: parent
+        anchors.centerIn: parent
         source: uri
-        width: parent.width
         height: parent.height
         fillMode: Image.PreserveAspectFit
     }

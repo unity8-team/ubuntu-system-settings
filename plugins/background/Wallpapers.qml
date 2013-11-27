@@ -25,15 +25,14 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Content 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
+import "utilities.js" as Utilities
 
 ItemPage {
     id: selectSourcePage
     flickable: sourceSelector
     anchors.fill: parent
 
-    property bool homeScreen: true
-    property var gsettings
-    property var mainPage
+    property bool homeScreen
     property string ubuntuArtDir: "/usr/share/backgrounds/"
     property var ubuntuArtList: []
     property var customList: []
@@ -46,6 +45,7 @@ ItemPage {
         ubuntuArtList = backgroundPanel.listUbuntuArt(ubuntuArtDir);
         store = ContentHub.defaultStoreForType(ContentType.Pictures);
         customList = backgroundPanel.listCustomArt(store.uri);
+        console.log ("homeScreen: " + homeScreen);
     }
 
     Action {
@@ -53,18 +53,8 @@ ItemPage {
         text: i18n.tr("Photo/Image")
         iconName: "import-image"
         onTriggered: {
-            startContentTransfer(function(url) {
-                if (gsettings.backgroundDuplicate) {
-                    mainPage.updateBoth(url)
-                } else {
-                    if (homeScreen) {
-                        mainPage.updateHome(url);
-                        gsettings.backgroundSetLast = "home";
-                    } else {
-                        mainPage.updateWelcome(url);
-                        gsettings.backgroundSetLast = "welcome";
-                    }
-                }
+            startContentTransfer(function(uri) {
+                Utilities.setBackground(uri);
                 pageStack.pop();
             });
         }
@@ -78,6 +68,16 @@ ItemPage {
 
     UbuntuBackgroundPanel {
         id: backgroundPanel
+    }
+
+    GSettings {
+        id: systemSettingsSettings
+        schema.id: "com.ubuntu.touch.system-settings"
+    }
+
+    GSettings {
+        id: background
+        schema.id: "org.gnome.desktop.background"
     }
 
     Flickable {
@@ -99,6 +99,7 @@ ItemPage {
                 columns: 2
                 model: ubuntuArtList
                 title: i18n.tr("Ubuntu Art")
+                homeScreen: selectSourcePage.homeScreen
             }
 
             WallpaperGrid {
@@ -107,6 +108,7 @@ ItemPage {
                 columns: 2
                 model: customList
                 title: i18n.tr("Custom")
+                homeScreen: selectSourcePage.homeScreen
             }
         }
     }

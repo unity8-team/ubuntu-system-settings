@@ -6,6 +6,7 @@ set(QML_SOURCES
     Wallpapers.qml
     WallpaperGrid.qml
     Preview.qml
+    utilities.js
 )
 add_library(UbuntuBackgroundPanel MODULE
 plugin.cpp background.cpp plugin.h background.h

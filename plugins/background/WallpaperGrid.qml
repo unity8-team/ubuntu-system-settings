@@ -34,6 +34,11 @@ Column {
     property int columns
     property int itemWidth: (parent.width * 0.7) / columns
     property string title
+    property bool homeScreen
+
+    Component.onCompleted: {
+        console.log ("homeScreen: " + homeScreen);
+    }
 
     ListItem.Header {
         anchors.left: parent.left
@@ -75,7 +80,8 @@ Column {
                     onClicked: {
                         // FIXME: set background image
                         console.log ("clicked: " + modelData);
-                        pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: modelData});
+                        console.log ("clicked: " + homeScreen);
+                        pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: modelData, homeScreen: homeScreen});
 
                     }
                 }
