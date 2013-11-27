@@ -26,8 +26,6 @@ import Ubuntu.Content 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 
-import "utilities.js" as Utilities
-
 ItemPage {
     id: mainPage
     title: i18n.tr("Background")
