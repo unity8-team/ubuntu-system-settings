@@ -18,9 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
@@ -42,40 +40,20 @@ ItemPage {
         supersetLabel: i18n.tr("All layouts available:")
 
         model: plugin.keyboardLayoutsModel
-        delegate: ListItem.Standard {
+        delegate: KeyboardLayoutItem {
+            name: model.language
+            shortName: model.icon
+            checked: model.checked
             enabled: model.enabled
 
-            icon: Rectangle {
-                width: units.gu(3.0)
-                height: units.gu(3.0)
-                radius: units.gu(0.5)
+            onCheckedChanged: {
+                var element = model.index < subsetView.model.subset.length ?
+                              subsetView.model.subset[model.index] :
+                              model.index - subsetView.model.subset.length
 
-                color: Theme.palette.normal.backgroundText
+                plugin.keyboardLayoutsModel.setChecked(element, checked, checked ? 0 : subsetView.delay)
 
-                Label {
-                    text: model.icon
-
-                    color: Theme.palette.normal.background
-                    fontSize: "small"
-
-                    anchors.centerIn: parent
-                }
-            }
-
-            text: model.language
-
-            control: CheckBox {
-                checked: model.checked
-
-                onCheckedChanged: {
-                    var element = index < subsetView.model.subset.length ?
-                                  subsetView.model.subset[index] :
-                                  index - subsetView.model.subset.length
-
-                    plugin.keyboardLayoutsModel.setChecked(element, checked, checked ? 0 : subsetView.delay)
-
-                    checked = Qt.binding(function() { return model.checked })
-                }
+                checked = Qt.binding(function() { return model.checked })
             }
         }
     }
