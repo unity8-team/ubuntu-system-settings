@@ -69,7 +69,7 @@ ItemPage {
         id: soundSelector
         anchors.top: columnId.bottom
         anchors.bottom: soundsPage.bottom
-        containerHeight: soundsPage.height - columnId.height
+        containerHeight: height
 
         expanded: true
         model: soundDisplayNames
