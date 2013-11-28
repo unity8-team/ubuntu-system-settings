@@ -72,12 +72,9 @@ ItemPage {
             }
 
             ListItem.Divider {
-                visible: showAllUI
             }
 
             ListItem.SingleValue {
-                visible: showAllUI
-
                 text: i18n.tr("Keyboard layouts")
                 value: plugin.keyboardLayoutsModel.subset.length == 1 ?
                        plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
@@ -126,6 +123,8 @@ ItemPage {
             }
 
             ListItem.Standard {
+                visible: showAllUI
+
                 text: i18n.tr("Auto capitalization")
 
                 control: Switch {
@@ -136,16 +135,12 @@ ItemPage {
             }
 
             ListItem.Caption {
+                visible: showAllUI
+
                 text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
             }
 
-            ListItem.Divider {
-                visible: showAllUI
-            }
-
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Keyboard sound")
 
                 control: Switch {
