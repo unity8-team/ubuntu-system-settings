@@ -135,13 +135,6 @@ ItemPage {
                 showDivider: false
             }
 
-            ListItem.SingleValue {
-                id: chargingEntry
-                value: isCharging ?
-                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
-                showDivider: false
-            }
-
             Canvas {
                 id: canvas
                 width:parent.width - units.gu(4)
@@ -184,6 +177,13 @@ ItemPage {
                     ctx.stroke()
                     ctx.restore();
                 }
+            }
+
+            ListItem.SingleValue {
+                id: chargingEntry
+                value: isCharging ?
+                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
+                showDivider: false
             }
 
             ListItem.Standard {
