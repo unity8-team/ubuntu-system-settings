@@ -141,19 +141,49 @@ ItemPage {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: units.gu(15)
 
+                function drawAxes(ctx) {
+                    ctx.save()
+                    ctx.beginPath()
+                    ctx.strokeStyle = UbuntuColors.lightAubergine
+
+                    ctx.lineWidth = units.dp(2)
+
+                    var axisHeight = height - 5 - ctx.lineWidth
+
+                    ctx.translate(0, 1)
+
+                    // 11 ticks with 0, 5, 10 being big
+                    for (var i = 0; i <= 10; i++) {
+                        var x = (i % 5 == 0) ? 0 : 2
+                        var y = ((i / 10) * axisHeight)
+                        ctx.moveTo(x, y)
+                        ctx.lineTo(5, y)
+                    }
+
+                    var axisWidth = width - 5 - ctx.lineWidth
+
+                    ctx.translate(6, height - 5)
+
+                    // 24 ticks with 0, 6, 12, 18, 24 being big
+                    for (i = 0; i <= 24; i++) {
+                        x = (i / 24) * axisWidth
+                        y = (i % 6 == 0) ? 5 : 3
+                        ctx.moveTo(x, 0)
+                        ctx.lineTo(x, y)
+                    }
+
+                    ctx.translate(0, 0)
+
+                    ctx.stroke()
+                    ctx.restore()
+                }
+
                 onPaint:{
                     var ctx = canvas.getContext('2d');
                     ctx.save();
                     ctx.clearRect(0, 0, canvas.width, canvas.height)
-                    ctx.beginPath();
 
-                    /* Display the axis in aubergine color */
-                    ctx.strokeStyle = UbuntuColors.lightAubergine
-                    ctx.lineWidth = units.dp(3)
-                    ctx.moveTo(1, 0)
-                    ctx.lineTo(1, height)
-                    ctx.lineTo(width, height)
-                    ctx.stroke()
+                    drawAxes(ctx)
 
                     /* Display the charge history */
                     ctx.beginPath();
