@@ -65,27 +65,23 @@ ItemPage {
         }
     }
 
-    Flickable {
-        width: parent.width
-        contentHeight: contentItem.childrenRect.height
+    ListItem.ItemSelector {
+        id: soundSelector
         anchors.top: columnId.bottom
         anchors.bottom: soundsPage.bottom
-        clip: true
+        containerHeight: height
 
-        ListItem.ItemSelector {
-            id: soundSelector
-            expanded: true
-            model: soundDisplayNames
-            onDelegateClicked: {
-                if (soundType == 0)
-                    soundSettings.incomingCallSound = soundFileNames[index]
-                else if (soundType == 1)
-                    soundSettings.incomingMessageSound = soundFileNames[index]
-                /* Only preview the file if not in silent mode */
-                if (!soundSettings.silentMode) {
-                    soundEffect.source = soundFileNames[index]
-                    soundEffect.play()
-                }
+        expanded: true
+        model: soundDisplayNames
+        onDelegateClicked: {
+            if (soundType == 0)
+                soundSettings.incomingCallSound = soundFileNames[index]
+            else if (soundType == 1)
+                soundSettings.incomingMessageSound = soundFileNames[index]
+            /* Only preview the file if not in silent mode */
+            if (!soundSettings.silentMode) {
+                soundEffect.source = soundFileNames[index]
+                soundEffect.play()
             }
         }
     }
