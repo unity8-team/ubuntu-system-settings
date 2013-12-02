@@ -24,7 +24,7 @@ LocalComponents.Page {
     title: i18n.tr("Hello!")
     forwardButtonSourceComponent: forwardButton
 
-    readonly property bool __simCardPresent: false // TODO: implement this
+    readonly property bool simCardPresent: false // TODO: implement this
 
     UbuntuLanguagePlugin {
         id: plugin
@@ -34,10 +34,10 @@ LocalComponents.Page {
         id: content
         anchors {
             fill: parent
-            topMargin: __topMargin
-            leftMargin: __leftMargin
-            rightMargin: __rightMargin
-            bottomMargin: __bottomMargin
+            topMargin: topMargin
+            leftMargin: leftMargin
+            rightMargin: rightMargin
+            bottomMargin: bottomMargin
         }
 
         Column {
@@ -72,7 +72,7 @@ LocalComponents.Page {
             text: i18n.tr("Start")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
-                pageStack.push(Qt.resolvedUrl(__simCardPresent ? "AboutYouPage.qml" : "SimCardPage.qml"))
+                pageStack.push(Qt.resolvedUrl(simCardPresent ? "AboutYouPage.qml" : "SimCardPage.qml"))
             }
         }
     }

@@ -18,12 +18,12 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 
 Page {
-    readonly property real __buttonMargin: units.gu(2)
-    readonly property real __buttonWidth: (width - __buttonMargin * 2) / 2 - __buttonMargin / 2
-    readonly property real __topMargin: units.gu(5)
-    readonly property real __leftMargin: units.gu(3)
-    readonly property real __rightMargin: units.gu(3)
-    readonly property real __bottomMargin: backButton.height + __buttonMargin * 2
+    readonly property real buttonMargin: units.gu(2)
+    readonly property real buttonWidth: (width - buttonMargin * 2) / 2 - buttonMargin / 2
+    readonly property real topMargin: units.gu(5)
+    readonly property real leftMargin: units.gu(3)
+    readonly property real rightMargin: units.gu(3)
+    readonly property real bottomMargin: backButton.height + buttonMargin * 2
 
     property bool hasBackButton: true
     property alias forwardButtonSourceComponent: forwardButton.sourceComponent
@@ -35,12 +35,12 @@ Page {
 
     Button {
         id: backButton
-        width: __buttonWidth
+        width: buttonWidth
         anchors {
             left: parent.left
             bottom: parent.bottom
-            leftMargin: __buttonMargin
-            bottomMargin: __buttonMargin
+            leftMargin: buttonMargin
+            bottomMargin: buttonMargin
         }
         z: 1
         text: i18n.tr("Back")
@@ -52,12 +52,12 @@ Page {
 
     Loader {
         id: forwardButton
-        width: __buttonWidth
+        width: buttonWidth
         anchors {
             right: parent.right
             bottom: parent.bottom
-            rightMargin: __buttonMargin
-            bottomMargin: __buttonMargin
+            rightMargin: buttonMargin
+            bottomMargin: buttonMargin
         }
         z: 1
     }

@@ -29,10 +29,10 @@ LocalComponents.Page {
         id: content
         anchors {
             fill: parent
-            topMargin: __topMargin
-            leftMargin: __leftMargin
-            rightMargin: __rightMargin
-            bottomMargin: __bottomMargin
+            topMargin: topMargin
+            leftMargin: leftMargin
+            rightMargin: rightMargin
+            bottomMargin: bottomMargin
         }
 
         ActivityIndicator {

@@ -26,9 +26,9 @@ LocalComponents.Page {
         id: content
         anchors {
             fill: parent
-            topMargin: __topMargin
-            rightMargin: __rightMargin
-            bottomMargin: __bottomMargin
+            topMargin: topMargin
+            rightMargin: rightMargin
+            bottomMargin: bottomMargin
         }
 
         Image {
@@ -48,7 +48,7 @@ LocalComponents.Page {
                 top: image.bottom
                 left: parent.left
                 topMargin: units.gu(2)
-                leftMargin: __leftMargin
+                leftMargin: leftMargin
             }
             width: content.width
             wrapMode: Text.WordWrap
