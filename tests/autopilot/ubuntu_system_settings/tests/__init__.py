@@ -29,7 +29,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def launch_system_settings(self):
         params = ['/usr/bin/system-settings']
-        if (model() <> 'Desktop'):
+        if (model() != 'Desktop'):
             params.append('--desktop_file_hint=/usr/share/applications/ubuntu-system-settings.desktop')
         self.app = self.launch_test_application(
             *params,
