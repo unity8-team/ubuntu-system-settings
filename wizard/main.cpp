@@ -29,7 +29,9 @@ void start_xsession()
     // in the background.  When xsession finishes loading, we'll be stopped
     // by upstart.
 
-    // But first, stop maliit-server, it needs to be started by unity8
+    // But first, stop maliit-server, it needs to be started by unity8.
+    // This was an OSK bug in October, need to discover if it is still a
+    // problem, especially once we become a system upstart job.
     if (system("stop maliit-server") != 0)
     {} // ignore any errors
 
