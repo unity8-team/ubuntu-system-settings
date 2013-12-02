@@ -162,7 +162,7 @@ ItemPage {
                                   height - axisHeight - ctx.lineWidth / 2)
 
                     ctx.moveTo(0, 0)
-                    ctx.lineTo(0, -1 * ctx.lineWidth)
+                    ctx.lineTo(0, -ctx.lineWidth)
 
                     // 25 ticks with 0, 6, 12, 18, 24 being big
                     for (i = 0; i <= 24; i++) {
