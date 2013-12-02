@@ -104,10 +104,6 @@ class StorageTestCase(StorageBaseTestCase):
         disk_item = self.storage_page.select_single(objectName='diskItem')
         self.assertThat(disk_item, NotEquals(None))
         self.assertThat(disk_item.text, Equals(_('Total storage')))
-        total_storage = disk_item.value.split(' ') # Format: 0.0 GB
-        self.assertThat(len(total_storage), Equals(2))
-        self.assertThat(total_storage[0], GreaterThan(0.0))
-        self.assertThat(total_storage[1], Equals(_('GB')))
 
     def test_space(self):
         """ Checks whether storage item is available """
