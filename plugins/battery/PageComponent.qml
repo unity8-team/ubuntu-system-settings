@@ -152,7 +152,7 @@ ItemPage {
 
                     // 11 ticks with 0, 5, 10 being big
                     for (var i = 0; i <= 10; i++) {
-                        var x = (i % 5 == 0) ? 0 : 2
+                        var x = (i % 5 == 0) ? 0 : Math.floor(axisWidth / 2)
                         var y = (i / 10) * (height - axisHeight - ctx.lineWidth)
                         ctx.moveTo(x, y)
                         ctx.lineTo(axisWidth, y)
@@ -164,7 +164,8 @@ ItemPage {
                     // 24 ticks with 0, 6, 12, 18, 24 being big
                     for (i = 0; i <= 24; i++) {
                         x = (i / 24) * (width - axisWidth - ctx.lineWidth)
-                        y = (i % 6 == 0) ? axisHeight : axisHeight - 2
+                        y = (i % 6 == 0) ? axisHeight : axisHeight -
+                                            Math.floor(axisHeight / 2)
                         ctx.moveTo(x, 0)
                         ctx.lineTo(x, y)
                     }
@@ -180,8 +181,8 @@ ItemPage {
                     ctx.save();
                     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-                    var axisWidth = 5
-                    var axisHeight = 5
+                    var axisWidth = 10
+                    var axisHeight = 10
 
                     var graphHeight = height - axisHeight
 
