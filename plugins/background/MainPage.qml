@@ -26,8 +26,6 @@ import Ubuntu.Content 0.1
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 
-import "utilities.js" as Utilities
-
 ItemPage {
     id: mainPage
     title: i18n.tr("Background")
@@ -174,6 +172,7 @@ ItemPage {
 
         model: [i18n.tr("Same background for both"),
             i18n.tr("Different background for each")]
+        selectedIndex: systemSettingsSettings.backgroundDuplicate === 0 ? 0 : 1
         onSelectedIndexChanged: {
             systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
         }

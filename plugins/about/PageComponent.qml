@@ -131,9 +131,12 @@ ItemPage {
             }
 
             ListItem.Standard {
+                property var regulatoryInfo:
+                    pluginManager.getByName("regulatory-information")
                 text: i18n.tr("Regulatory info")
                 progression: true
-                visible: showAllUI
+                visible: regulatoryInfo
+                onClicked: pageStack.push(regulatoryInfo.pageComponent)
             }
         }
     }

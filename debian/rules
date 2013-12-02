@@ -5,10 +5,14 @@
 export DH_VERBOSE=1
 
 include /usr/share/dpkg/buildflags.mk
+include /usr/share/dpkg/architecture.mk
 
 override_dh_install:
 	rm -r debian/tmp/usr/share/upstart # not ready yet; also, do not enable wizard without tests!
 	dh_install --fail-missing
+
+override_dh_makeshlibs:
+	dh_makeshlibs -Xusr/lib/$(DEB_HOST_MULTIARCH)/ubuntu-system-settings
 
 %:
 	dh $@ 

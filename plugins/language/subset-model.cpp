@@ -371,8 +371,7 @@ SubsetModel::timerExpired()
                     Q_EMIT subsetChanged();
                 }
             }
-        }
-        else {
+        } else {
             if (change->start > m_state[change->element]->check) {
                 for (int i(0); i < m_subset.length(); i++) {
                     while (i < m_subset.length() && m_subset[i] == change->element) {

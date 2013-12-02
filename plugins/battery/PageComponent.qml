@@ -135,13 +135,6 @@ ItemPage {
                 showDivider: false
             }
 
-            ListItem.SingleValue {
-                id: chargingEntry
-                value: isCharging ?
-                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
-                showDivider: false
-            }
-
             Canvas {
                 id: canvas
                 width:parent.width - units.gu(4)
@@ -162,9 +155,14 @@ ItemPage {
                     ctx.lineTo(width, height)
                     ctx.stroke()
 
-                    /* Display the charge history in orange color */
+                    /* Display the charge history */
+                    ctx.beginPath();
                     ctx.lineWidth = units.dp(2)
-                    ctx.strokeStyle = UbuntuColors.orange
+                    var gradient = ctx.createLinearGradient(0, 0, 0, height);
+                    gradient.addColorStop(0, "green");
+                    gradient.addColorStop(0.5, "yellow");
+                    gradient.addColorStop(1, "red");
+                    ctx.strokeStyle = gradient
 
                     /* Get infos from battery0, on a day (60*24*24=86400 seconds), with 150 points on the graph */
                     var chargeDatas = batteryBackend.getHistory(batteryBackend.deviceString, 86400, 150)
@@ -179,6 +177,13 @@ ItemPage {
                     ctx.stroke()
                     ctx.restore();
                 }
+            }
+
+            ListItem.SingleValue {
+                id: chargingEntry
+                value: isCharging ?
+                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
+                showDivider: false
             }
 
             ListItem.Standard {

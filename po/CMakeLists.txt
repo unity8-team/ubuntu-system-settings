@@ -7,10 +7,10 @@ file(GLOB QMLFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
 file(GLOB SETTINGSFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                         "${CMAKE_SOURCE_DIR}/plugins/*/*.settings")
 
-#add_custom_command(OUTPUT settings.js
-#  command some_script ${SETTINGSFILES} ${CMAKE_CURRENT_BINARY_DIR}/settings.js
-#  DEPENDS ${SETTINGSFILES}
-#)
+add_custom_command(OUTPUT settings.js
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/extractsettingsinfo ${SETTINGSFILES} -o ${CMAKE_CURRENT_BINARY_DIR}/settings.js
+    DEPENDS ${SETTINGSFILES}
+)
 
 #add_custom_command(OUTPUT desktop.js
 #  command some_script ${CMAKE_SOURCE_DIR}/ubuntu-system-settings.desktop ${CMAKE_CURRENT_BINARY_DIR}/desktop.js 
@@ -23,9 +23,9 @@ add_custom_target(pot-qml
                             --package-name ubuntu-system-settings
                             --qt --c++ --add-comments=TRANSLATORS
                             --keyword=tr --keyword=tr:1,2 --from-code=UTF-8
-                            ${QMLFILES}
+                            ${QMLFILES} settings.js
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    DEPENDS ${QMLFILES} #desktop.js settings.js
+    DEPENDS ${QMLFILES} settings.js #desktop.js
 )
 
 add_custom_target(pot-cpp

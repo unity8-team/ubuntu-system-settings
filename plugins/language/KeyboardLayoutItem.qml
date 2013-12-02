@@ -29,45 +29,41 @@ ListItem.Base {
 
     Row {
         anchors.top: parent.top
+        anchors.left: parent.left
         anchors.bottom: parent.bottom
-        spacing: units.gu(2)
+        spacing: units.gu(1)
 
-        CheckBox {
-            id: checkBox
+        Rectangle {
+            width: units.gu(3.0)
+            height: units.gu(3.0)
+            radius: units.gu(0.5)
+
+            color: Theme.palette.normal.backgroundText
+
+            anchors.verticalCenter: parent.verticalCenter
+
+            Label {
+                id: shortName
+
+                color: Theme.palette.normal.background
+                fontSize: "small"
+
+                anchors.centerIn: parent
+            }
+        }
+
+        Label {
+            id: name
 
             anchors.verticalCenter: parent.verticalCenter
         }
+    }
 
-        Row {
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            spacing: units.gu(1)
+    CheckBox {
+        id: checkBox
 
-            Rectangle {
-                width: units.gu(3.0)
-                height: units.gu(3.0)
-                radius: units.gu(0.5)
-
-                color: Theme.palette.normal.backgroundText
-
-                anchors.verticalCenter: parent.verticalCenter
-
-                Label {
-                    id: shortName
-
-                    color: Theme.palette.normal.background
-                    fontSize: "small"
-
-                    anchors.centerIn: parent
-                }
-            }
-
-            Label {
-                id: name
-
-                anchors.verticalCenter: parent.verticalCenter
-            }
-        }
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     onClicked: checked = !checked
