@@ -158,7 +158,8 @@ ItemPage {
                         ctx.lineTo(axisWidth, y)
                     }
 
-                    ctx.translate(axisWidth + 1, height - axisHeight)
+                    ctx.translate(axisWidth + ctx.lineWidth / 2,
+                                  height - axisHeight - ctx.lineWidth / 2)
 
                     // 24 ticks with 0, 6, 12, 18, 24 being big
                     for (i = 0; i <= 24; i++) {
