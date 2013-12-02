@@ -161,7 +161,10 @@ ItemPage {
                     ctx.translate(axisWidth + ctx.lineWidth / 2,
                                   height - axisHeight - ctx.lineWidth / 2)
 
-                    // 24 ticks with 0, 6, 12, 18, 24 being big
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(0, -1 * ctx.lineWidth)
+
+                    // 25 ticks with 0, 6, 12, 18, 24 being big
                     for (i = 0; i <= 24; i++) {
                         x = (i / 24) * (width - axisWidth - ctx.lineWidth)
                         y = (i % 6 == 0) ? axisHeight : axisHeight -
