@@ -182,7 +182,7 @@ ItemPage {
                 interactive: false
                 model: backendInfo.clickList
                 delegate: ListItem.SingleValue {
-                    icon: iconPath
+                    iconSource: iconPath
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
                     text: displayName
                     value: installedSize ?

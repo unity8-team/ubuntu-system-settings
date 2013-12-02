@@ -225,7 +225,7 @@ ItemPage {
 
                     ListItem.SingleValue {
                         id: updateTitleId
-                        icon: "file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"
+                        iconSource: "file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"
                         iconFrame: false
                         text: "Ubuntu %1 (r%2)".arg(deviceInfo.version(DeviceInfo.Os)).arg(updateBackend.updateVersion)
                         value: updateBackend.updateSize;
