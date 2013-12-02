@@ -78,7 +78,6 @@ Column {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        // FIXME: set background image
                         console.log ("clicked: " + modelData);
                         console.log ("clicked: " + homeScreen);
                         pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: modelData, homeScreen: homeScreen});

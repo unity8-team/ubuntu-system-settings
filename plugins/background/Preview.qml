@@ -21,6 +21,7 @@
 import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 import "utilities.js" as Utilities
@@ -38,7 +39,7 @@ ItemPage {
             StateChangeScript {
                 script: {
                     pageStack.currentPage.header.opacity = 0.7;
-                    pageStack.currentPage.toolbar.opacity = 0.7;
+                    pageStack.currentPage.toolbar.opened = false;
                 }
 
             }
@@ -47,8 +48,9 @@ ItemPage {
             name: "destroyed"
             StateChangeScript {
                 script: {
+                    console.log ("Destroyed");
                     pageStack.currentPage.header.opacity = 1.0;
-                    pageStack.currentPage.toolbar.opacity = 1.0;
+                    //pageStack.currentPage.toolbar.opacity = 1.0;
                     pageStack.pop();
                 }
             }
@@ -64,35 +66,6 @@ ItemPage {
     GSettings {
         id: background
         schema.id: "org.gnome.desktop.background"
-    }
-
-    Action {
-        id: cancelAction
-        text: i18n.tr("Cancel")
-        iconName: "back"
-        onTriggered: {
-            state = "destroyed";
-        }
-    }
-
-    Action {
-        id: setAction
-        text: i18n.tr("Set")
-        iconName: "import-image"
-        onTriggered: {
-            console.log ("Set wallpaper here");
-            Utilities.setBackground(uri);
-            state = "destroyed";
-        }
-    }
-
-    tools: ToolbarItems {
-        back: ToolbarButton {
-            action: cancelAction
-        }
-        ToolbarButton {
-            action: setAction
-        }
     }
 
     UbuntuBackgroundPanel {
@@ -111,4 +84,36 @@ ItemPage {
         height: parent.height
         fillMode: Image.PreserveAspectFit
     }
+
+    ListItem.Base {
+        id: previewButtons
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: units.gu(2)
+
+            Button {
+                text: i18n.tr("Cancel")
+                width: (previewButtons.width-units.gu(2)*4)/2
+                onClicked: {
+                    console.log ("Cancelled");
+                    preview.state = "destroyed";
+                }
+            }
+            Button {
+                text: i18n.tr("Set wallpaper")
+                width: (previewButtons.width-units.gu(2)*4)/2
+                onClicked: {
+                    console.log ("Set wallpaper here");
+                    Utilities.setBackground(uri);
+                    preview.state = "destroyed";
+                }
+            }
+        }
+    }
+
 }
