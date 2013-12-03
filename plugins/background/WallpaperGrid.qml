@@ -32,14 +32,16 @@ Column {
 
     property var model
     property int columns
-    property int itemWidth: (parent.width * 0.7) / columns
+    property int itemWidth: (mainPage.width * 0.7) / columns
+    property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
     property string title
     signal selected (string uri)
 
-    ListItem.Header {
+    ListItem.Standard {
         anchors.left: parent.left
         anchors.right: parent.right
         text: title
+        showDivider: false
     }
 
     Grid {
@@ -49,28 +51,22 @@ Column {
         height: childrenRect.height
         Repeater {
             model: wallpaperGrid.model
-            Item {
-                width: itemWidth
-                height: width
-                UbuntuShape {
-                    width: itemWidth
-                    height: width
-                    image: Image {
-                       id: itemImage
-                       source: modelData
-                       width: itemWidth
-                       height: width
-                       sourceSize.width: width
-                       sourceSize.height: height
-                       fillMode: Image.PreserveAspectCrop
-                       asynchronous: true
-                    }
-                    ActivityIndicator {
-                        anchors.centerIn: parent
-                        running: parent.image.status === Image.Loading
-                        visible: running
-                    }
+            Image {
+               id: itemImage
+               source: modelData
+               width: itemWidth
+               height: itemHeight
+               sourceSize.width: width
+               sourceSize.height: height
+               fillMode: Image.PreserveAspectCrop
+               asynchronous: true
+
+                ActivityIndicator {
+                    anchors.centerIn: parent
+                    running: parent.status === Image.Loading
+                    visible: running
                 }
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
@@ -80,6 +76,4 @@ Column {
             }
         }
     }
-
-    ListItem.ThinDivider {}
 }
