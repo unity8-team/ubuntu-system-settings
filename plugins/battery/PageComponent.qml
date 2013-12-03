@@ -141,6 +141,8 @@ ItemPage {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: units.gu(15)
 
+                antialiasing: true
+
                 function drawAxes(ctx, axisWidth, axisHeight) {
                     ctx.save()
                     ctx.beginPath()
