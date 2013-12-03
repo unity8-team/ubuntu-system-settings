@@ -305,10 +305,10 @@ ItemPage {
     Connections {
         id: curItemConnection
         onSave: {
-            console.log ("HERE: " + curItem.uri);
-            console.log ("HERE homeScreen: " + curItem.homeScreen);
+            console.log ("HERE: " + uri);
+            console.log ("HERE homeScreen: " + homeScreen);
 
-            Utilities.setBackground(curItem.homeScreen, curItem.uri);
+            Utilities.setBackground(homeScreen, uri);
 
         }
     }

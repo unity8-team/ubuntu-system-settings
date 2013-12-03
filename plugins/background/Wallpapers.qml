@@ -37,7 +37,7 @@ ItemPage {
     property var activeTransfer
     property var store
     property var backgroundPanel
-    signal save (var curItem)
+    signal save (bool homeScreen, string uri)
 
     title: homeScreen ? i18n.tr("Home screen") : i18n.tr("Welcome screen")
 
@@ -100,7 +100,7 @@ ItemPage {
                         console.log ("onSelectedState: " + target.state);
                         if (target.state === "saved")
                         {
-                            save(target);
+                            save(homeScreen, target.uri);
                             pageStack.pop();
                         }
 
