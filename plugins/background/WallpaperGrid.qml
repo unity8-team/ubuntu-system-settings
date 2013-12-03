@@ -35,6 +35,7 @@ Column {
     property int itemWidth: (mainPage.width * 0.7) / columns
     property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
     property string title
+    property string current
     signal selected (string uri)
 
     ListItem.Standard {
@@ -47,31 +48,40 @@ Column {
     Grid {
         anchors.horizontalCenter: parent.horizontalCenter
         columns: wallpaperGrid.columns
-        spacing: itemWidth * 0.3
+        spacing: itemWidth * 0.2
         height: childrenRect.height
         Repeater {
             model: wallpaperGrid.model
-            Image {
-               id: itemImage
-               source: modelData
-               width: itemWidth
-               height: itemHeight
-               sourceSize.width: width
-               sourceSize.height: height
-               fillMode: Image.PreserveAspectCrop
-               asynchronous: true
-
-                ActivityIndicator {
-                    anchors.centerIn: parent
-                    running: parent.status === Image.Loading
-                    visible: running
-                }
-
-                MouseArea {
+            Item {
+                width: itemWidth + units.gu(2)
+                height: itemHeight + units.gu(2)
+                Rectangle {
+                    id: itemRect
                     anchors.fill: parent
-                    onClicked: {
-                        selected(modelData);
-                    }
+                    color: UbuntuColors.coolGrey
+                    visible: (current === modelData) && (itemImage.status === Image.Ready)
+                }
+                Image {
+                   id: itemImage
+                   anchors.centerIn: parent
+                   source: modelData
+                   width: itemWidth
+                   height: itemHeight
+                   sourceSize.width: width
+                   sourceSize.height: height
+                   fillMode: Image.PreserveAspectCrop
+                   asynchronous: true
+                   ActivityIndicator {
+                       anchors.centerIn: parent
+                       running: parent.status === Image.Loading
+                       visible: running
+                   }
+                   MouseArea {
+                       anchors.fill: parent
+                       onClicked: {
+                           selected(modelData);
+                       }
+                   }
                 }
             }
         }

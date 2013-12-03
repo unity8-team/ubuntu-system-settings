@@ -36,6 +36,14 @@ ItemPage {
             "/usr/share/unity8/graphics/tablet_background.jpg" :
             "/usr/share/unity8/graphics/phone_background.jpg"
 
+    property string homeBackground: background.pictureUri
+    property string welcomeBackground: backgroundPanel.backgroundFile
+
+    Component.onCompleted: {
+        console.log ("homeBackground: " + homeBackground);
+        console.log ("welcomeBackground: " + welcomeBackground);
+    }
+
     UbuntuBackgroundPanel {
         id: backgroundPanel
 
@@ -90,6 +98,7 @@ ItemPage {
             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
                            {homeScreen: false,
                                backgroundPanel: backgroundPanel,
+                               current: welcomeBackground
                             });
 
             var curItem = pageStack.currentPage;
@@ -118,6 +127,7 @@ ItemPage {
             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
                            {homeScreen: true,
                                backgroundPanel: backgroundPanel,
+                               current: homeBackground
                             });
             var curItem = pageStack.currentPage;
             selectedItemConnection.target = curItem;

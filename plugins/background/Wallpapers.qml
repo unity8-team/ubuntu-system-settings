@@ -37,6 +37,7 @@ ItemPage {
     property var customList: []
     property var activeTransfer
     property var store
+    property string current
     signal save (bool homeScreen, string uri)
 
     title: homeScreen ? i18n.tr("Home screen") : i18n.tr("Welcome screen")
@@ -88,6 +89,7 @@ ItemPage {
                 columns: 2
                 model: ubuntuArtList
                 title: i18n.tr("Ubuntu Art")
+                current: selectSourcePage.current
                 onSelected: {
                     pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
                     selectedItemConnection.target = pageStack.currentPage;
@@ -100,6 +102,7 @@ ItemPage {
                 columns: 2
                 model: customList
                 title: i18n.tr("Custom")
+                current: selectSourcePage.current
                 onSelected: {
                     pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
                     selectedItemConnection.target = pageStack.currentPage;
