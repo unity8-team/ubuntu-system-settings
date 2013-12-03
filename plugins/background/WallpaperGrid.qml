@@ -34,7 +34,6 @@ Column {
     property int columns
     property int itemWidth: (parent.width * 0.7) / columns
     property string title
-    property bool homeScreen
     signal selected (string uri)
 
     ListItem.Header {
@@ -75,8 +74,6 @@ Column {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        console.log ("clicked: " + modelData);
-                        console.log ("clicked: " + homeScreen);
                         selected(modelData);
                     }
                 }

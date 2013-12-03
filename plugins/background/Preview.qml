@@ -28,7 +28,6 @@ ItemPage {
     anchors.fill: parent
 
     property string uri
-    property bool homeScreen
     signal save
 
     tools: null
@@ -47,7 +46,6 @@ ItemPage {
             name: "destroyed"
             StateChangeScript {
                 script: {
-                    console.log ("Destroyed");
                     pageStack.currentPage.header.opacity = 1.0;
                     pageStack.pop();
                 }
@@ -57,7 +55,6 @@ ItemPage {
             name: "saved"
             StateChangeScript {
                 script: {
-                    console.log ("Saved");
                     save();
                 }
             }
@@ -66,7 +63,6 @@ ItemPage {
 
     Component.onCompleted: {
         state = "showing";
-        console.log ("homeScreen: " + homeScreen);
     }
 
     title: i18n.tr("Preview")
@@ -94,7 +90,6 @@ ItemPage {
                 text: i18n.tr("Cancel")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 onClicked: {
-                    console.log ("Cancelled");
                     preview.state = "destroyed";
                 }
             }
@@ -102,7 +97,6 @@ ItemPage {
                 text: i18n.tr("Set wallpaper")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 onClicked: {
-                    console.log ("Setting wallpaper");
                     preview.state = "destroyed";
                     preview.state = "saved";
                 }

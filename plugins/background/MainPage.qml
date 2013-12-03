@@ -40,15 +40,11 @@ ItemPage {
         id: backgroundPanel
 
         function maybeUpdateSource() {
-            console.log ("maybeUpdateSource: " + backgroundPanel.backgroundFile);
             var source = backgroundPanel.backgroundFile
-            console.log ("SOURCE: " + source);
             if (source != "" && source != undefined) {
-                console.log ("source is valid: " + source);
                 testWelcomeImage.source = source;
             }
             if (testWelcomeImage.source == "") {
-                console.log ("source isn't valid: " + testWelcomeImage.source);
                 testWelcomeImage.source = testWelcomeImage.fallback
             }
         }
@@ -61,6 +57,7 @@ ItemPage {
         id: background
         schema.id: "org.gnome.desktop.background"
         onChanged: {
+            console.log ("onChanged: " + key + " = " + value);
             if (key == "pictureUri")
                 testHomeImage.source = value
         }
@@ -93,12 +90,10 @@ ItemPage {
             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
                            {homeScreen: false,
                                backgroundPanel: backgroundPanel,
-                               background: background,
-                               systemSettingsSettings: systemSettingsSettings
                             });
 
             var curItem = pageStack.currentPage;
-            curItemConnection.target = curItem;
+            selectedItemConnection.target = curItem;
             updateImage(testWelcomeImage, welcomeImage);
         }
 
@@ -123,11 +118,9 @@ ItemPage {
             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
                            {homeScreen: true,
                                backgroundPanel: backgroundPanel,
-                               background: background,
-                               systemSettingsSettings: systemSettingsSettings
                             });
             var curItem = pageStack.currentPage;
-            curItemConnection.target = curItem;
+            selectedItemConnection.target = curItem;
             updateImage(testHomeImage, homeImage);
         }
         Component.onCompleted: updateImage(testHomeImage,
@@ -224,19 +217,13 @@ ItemPage {
         id: testWelcomeImage
 
         function update(uri) {
-            console.log ("testWelcomeImage.update");
             // Will update source
             Utilities.updateWelcome(uri)
         }
 
         property string fallback: defaultBackground
         visible: false
-        onStatusChanged: {
-            console.log ("WELCOME onStatusChanged");
-            console.log ("testWelcomeImage: "+ testWelcomeImage.source);
-            console.log ("welcomeImage: "+ welcomeImage.source);
-            updateImage(testWelcomeImage, welcomeImage);
-        }
+        onStatusChanged: updateImage(testWelcomeImage, welcomeImage)
     }
 
     Image {
@@ -244,31 +231,21 @@ ItemPage {
 
         function update(uri) {
             // Will update source
-            console.log ("testHomeImage.update");
             Utilities.updateHome(uri)
         }
 
         property string fallback: defaultBackground
         source: background.pictureUri
         visible: false
-        onStatusChanged: {
-            console.log ("HOME onStatusChanged");
-            console.log ("testHomeImage: "+ testHomeImage.source);
-            console.log ("homeImage: "+ homeImage.source);
-            updateImage(testHomeImage, homeImage);
-        }
+        onStatusChanged: updateImage(testHomeImage, homeImage)
     }
 
     function setUpImages() {
-        console.log ("setUpImages");
-        console.log ("systemSettingsSettings.backgroundSetLast: " + systemSettingsSettings.backgroundSetLast);
         var mostRecent = (systemSettingsSettings.backgroundSetLast === "home") ?
                     testHomeImage : testWelcomeImage;
         var leastRecent = (mostRecent === testHomeImage) ?
                     testWelcomeImage : testHomeImage;
 
-        console.log ("mostRecent.source: " + mostRecent.source);
-        console.log ("leastRecent.source: " + leastRecent.source);
         if (systemSettingsSettings.backgroundDuplicate) { //same
             /* save value of least recently changed to restore later */
             systemSettingsSettings.backgroundPreviouslySetValue =
@@ -280,15 +257,12 @@ ItemPage {
             leastRecent.update(
                     systemSettingsSettings.backgroundPreviouslySetValue)
         }
-        console.log ("mostRecent.source: " + mostRecent.source);
-        console.log ("leastRecent.source: " + leastRecent.source);
     }
 
     GSettings {
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
-            console.log ("Changed: "+ key);
             if (key == "backgroundDuplicate") {
                 setUpImages()
             }
@@ -298,23 +272,14 @@ ItemPage {
                 optionSelector.selectedIndex = 0;
             else
                 optionSelector.selectedIndex = 1;
-            setUpImages();
         }
     }
 
     Connections {
-        id: curItemConnection
+        id: selectedItemConnection
         onSave: {
-            console.log ("HERE: " + uri);
-            console.log ("HERE homeScreen: " + homeScreen);
-
             Utilities.setBackground(homeScreen, uri);
 
         }
-    }
-
-    function selectImage(callback) {
-        if (callback)
-            console.log ("selectImage called");
     }
 }

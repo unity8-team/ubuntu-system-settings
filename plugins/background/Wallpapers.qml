@@ -24,6 +24,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Content 0.1
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Background 1.0
 
 ItemPage {
     id: selectSourcePage
@@ -36,7 +37,6 @@ ItemPage {
     property var customList: []
     property var activeTransfer
     property var store
-    property var backgroundPanel
     signal save (bool homeScreen, string uri)
 
     title: homeScreen ? i18n.tr("Home screen") : i18n.tr("Welcome screen")
@@ -53,7 +53,7 @@ ItemPage {
         iconName: "import-image"
         onTriggered: {
             startContentTransfer(function(uri) {
-                Utilities.setBackground(homeScreen, uri);
+                save(homeScreen, uri);
                 pageStack.pop();
             });
         }
@@ -63,6 +63,10 @@ ItemPage {
         ToolbarButton {
             action: selectDefaultPeer
         }
+    }
+
+    UbuntuBackgroundPanel {
+        id: backgroundPanel
     }
 
     Flickable {
@@ -84,27 +88,9 @@ ItemPage {
                 columns: 2
                 model: ubuntuArtList
                 title: i18n.tr("Ubuntu Art")
-                homeScreen: selectSourcePage.homeScreen
-
                 onSelected: {
-                    console.log ("onSelected: " + uri);
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri, homeScreen: homeScreen});
-                    var curItem = pageStack.currentPage;
-                    curItemConnection.target = curItem;
-                }
-
-                Connections {
-                    id: curItemConnection
-                    onStateChanged: {
-                        console.log ("onSelectedSave: " + target.uri);
-                        console.log ("onSelectedState: " + target.state);
-                        if (target.state === "saved")
-                        {
-                            save(homeScreen, target.uri);
-                            pageStack.pop();
-                        }
-
-                    }
+                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    selectedItemConnection.target = pageStack.currentPage;
                 }
             }
 
@@ -114,7 +100,21 @@ ItemPage {
                 columns: 2
                 model: customList
                 title: i18n.tr("Custom")
-                homeScreen: selectSourcePage.homeScreen
+                onSelected: {
+                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    selectedItemConnection.target = pageStack.currentPage;
+                }
+            }
+
+            Connections {
+                id: selectedItemConnection
+                onStateChanged: {
+                    if (target.state === "saved")
+                    {
+                        save(homeScreen, target.uri);
+                        pageStack.pop();
+                    }
+                }
             }
         }
     }
