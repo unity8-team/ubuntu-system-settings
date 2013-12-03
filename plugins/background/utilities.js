@@ -18,10 +18,11 @@
  *
  */
 
-function setBackground(uri) {
+function setBackground(homeScreen, uri) {
     console.log ("setBackground: " + uri);
+    console.log ("systemSettingsSettings.backgroundDuplicate: " + systemSettingsSettings.backgroundDuplicate);
     if (systemSettingsSettings.backgroundDuplicate) {
-        updateBoth(uri)
+        updateBoth(uri);
     } else {
         if (homeScreen) {
             updateHome(uri);
@@ -31,6 +32,7 @@ function setBackground(uri) {
             systemSettingsSettings.backgroundSetLast = "welcome";
         }
     }
+    //pageStack.pop();
 }
 
 function updateWelcome(uri) {

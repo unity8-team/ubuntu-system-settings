@@ -78,6 +78,10 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     if (!backgroundFile.isLocalFile())
         return;
 
+    QString backgroundFileSave = backgroundFile.path();
+    if (backgroundFileSave == m_backgroundFile)
+        return;
+
     QDBusInterface userInterface (
                 "org.freedesktop.Accounts",
                 m_objectPath,
@@ -88,7 +92,6 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     if (!userInterface.isValid())
         return;
 
-    QString backgroundFileSave = backgroundFile.path();
     m_backgroundFile = backgroundFileSave;
     userInterface.call("SetBackgroundFile", backgroundFileSave);
     Q_EMIT backgroundFileChanged();

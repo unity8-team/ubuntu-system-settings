@@ -19,12 +19,8 @@
 */
 
 import QtQuick 2.0
-import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import SystemSettings 1.0
-import Ubuntu.SystemSettings.Background 1.0
-import "utilities.js" as Utilities
 
 ItemPage {
     id: preview
@@ -32,6 +28,9 @@ ItemPage {
 
     property string uri
     property bool homeScreen
+    signal save
+
+    tools: null
 
     states: [
         State {
@@ -39,7 +38,6 @@ ItemPage {
             StateChangeScript {
                 script: {
                     pageStack.currentPage.header.opacity = 0.7;
-                    pageStack.currentPage.toolbar.opened = false;
                 }
 
             }
@@ -50,32 +48,27 @@ ItemPage {
                 script: {
                     console.log ("Destroyed");
                     pageStack.currentPage.header.opacity = 1.0;
-                    //pageStack.currentPage.toolbar.opacity = 1.0;
                     pageStack.pop();
+                }
+            }
+        },
+        State {
+            name: "saved"
+            StateChangeScript {
+                script: {
+                    console.log ("Saved");
+                    save();
                 }
             }
         }
     ]
+
     Component.onCompleted: {
         state = "showing";
         console.log ("homeScreen: " + homeScreen);
     }
 
     title: i18n.tr("Preview")
-
-    GSettings {
-        id: background
-        schema.id: "org.gnome.desktop.background"
-    }
-
-    UbuntuBackgroundPanel {
-        id: backgroundPanel
-    }
-
-    GSettings {
-        id: systemSettingsSettings
-        schema.id: "com.ubuntu.touch.system-settings"
-    }
 
     Image {
         id: previewImage
@@ -108,9 +101,9 @@ ItemPage {
                 text: i18n.tr("Set wallpaper")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 onClicked: {
-                    console.log ("Set wallpaper here");
-                    Utilities.setBackground(uri);
+                    console.log ("Setting wallpaper");
                     preview.state = "destroyed";
+                    preview.state = "saved";
                 }
             }
         }

@@ -40,11 +40,17 @@ ItemPage {
         id: backgroundPanel
 
         function maybeUpdateSource() {
+            console.log ("maybeUpdateSource: " + backgroundPanel.backgroundFile);
             var source = backgroundPanel.backgroundFile
-            if (source != "" && source != undefined)
-                testWelcomeImage.source = source
-            else if (testWelcomeImage.source == "")
+            console.log ("SOURCE: " + source);
+            if (source != "" && source != undefined) {
+                console.log ("source is valid: " + source);
+                testWelcomeImage.source = source;
+            }
+            if (testWelcomeImage.source == "") {
+                console.log ("source isn't valid: " + testWelcomeImage.source);
                 testWelcomeImage.source = testWelcomeImage.fallback
+            }
         }
 
         onBackgroundFileChanged: maybeUpdateSource()
@@ -84,9 +90,18 @@ ItemPage {
          }
 
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"), {homeScreen: false, gsettings: systemSettingsSettings});
-            //selectImage(Utilities.setBackground)
+            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
+                           {homeScreen: false,
+                               backgroundPanel: backgroundPanel,
+                               background: background,
+                               systemSettingsSettings: systemSettingsSettings
+                            });
+
+            var curItem = pageStack.currentPage;
+            curItemConnection.target = curItem;
+            updateImage(testWelcomeImage, welcomeImage);
         }
+
         Component.onCompleted: updateImage(testWelcomeImage,
                                            welcomeImage)
 
@@ -105,8 +120,15 @@ ItemPage {
          }
 
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"), {homeScreen: true, gsettings: systemSettingsSettings});
-            //selectImage(Utilities.setBackground);
+            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
+                           {homeScreen: true,
+                               backgroundPanel: backgroundPanel,
+                               background: background,
+                               systemSettingsSettings: systemSettingsSettings
+                            });
+            var curItem = pageStack.currentPage;
+            curItemConnection.target = curItem;
+            updateImage(testHomeImage, homeImage);
         }
         Component.onCompleted: updateImage(testHomeImage,
                                            homeImage)
@@ -150,9 +172,12 @@ ItemPage {
 
         model: [i18n.tr("Same background for both"),
             i18n.tr("Different background for each")]
-        selectedIndex: systemSettingsSettings.backgroundDuplicate === 0 ? 0 : 1
+        //selectedIndex: systemSettingsSettings.backgroundDuplicate ? 0 : 1
         onSelectedIndexChanged: {
-            systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
+            if (selectedIndex === 0 && !systemSettingsSettings.backgroundDuplicate)
+                systemSettingsSettings.backgroundDuplicate = true;
+            else if (selectedIndex === 1 && systemSettingsSettings.backgroundDuplicate)
+                systemSettingsSettings.backgroundDuplicate = false;
         }
     }
 
@@ -188,9 +213,9 @@ ItemPage {
        SwappableImage, so test the image is valid /before/ showing it and show a
        fallback if it isn't. */
     function updateImage(testImage, targetImage) {
-        if (testImage.status == Image.Ready) {
+        if (testImage.status === Image.Ready) {
             targetImage.source = testImage.source
-        } else if (testImage.status == Image.Error) {
+        } else if (testImage.status === Image.Error) {
             targetImage.source = testImage.fallback
         }
     }
@@ -199,14 +224,19 @@ ItemPage {
         id: testWelcomeImage
 
         function update(uri) {
+            console.log ("testWelcomeImage.update");
             // Will update source
             Utilities.updateWelcome(uri)
         }
 
         property string fallback: defaultBackground
         visible: false
-        onStatusChanged: updateImage(testWelcomeImage,
-                                     welcomeImage)
+        onStatusChanged: {
+            console.log ("WELCOME onStatusChanged");
+            console.log ("testWelcomeImage: "+ testWelcomeImage.source);
+            console.log ("welcomeImage: "+ welcomeImage.source);
+            updateImage(testWelcomeImage, welcomeImage);
+        }
     }
 
     Image {
@@ -214,22 +244,31 @@ ItemPage {
 
         function update(uri) {
             // Will update source
+            console.log ("testHomeImage.update");
             Utilities.updateHome(uri)
         }
 
         property string fallback: defaultBackground
         source: background.pictureUri
         visible: false
-        onStatusChanged: updateImage(testHomeImage,
-                                     homeImage)
+        onStatusChanged: {
+            console.log ("HOME onStatusChanged");
+            console.log ("testHomeImage: "+ testHomeImage.source);
+            console.log ("homeImage: "+ homeImage.source);
+            updateImage(testHomeImage, homeImage);
+        }
     }
 
     function setUpImages() {
+        console.log ("setUpImages");
+        console.log ("systemSettingsSettings.backgroundSetLast: " + systemSettingsSettings.backgroundSetLast);
         var mostRecent = (systemSettingsSettings.backgroundSetLast === "home") ?
-                    testHomeImage : testWelcomeImage
+                    testHomeImage : testWelcomeImage;
         var leastRecent = (mostRecent === testHomeImage) ?
-                    testWelcomeImage : testHomeImage
+                    testWelcomeImage : testHomeImage;
 
+        console.log ("mostRecent.source: " + mostRecent.source);
+        console.log ("leastRecent.source: " + leastRecent.source);
         if (systemSettingsSettings.backgroundDuplicate) { //same
             /* save value of least recently changed to restore later */
             systemSettingsSettings.backgroundPreviouslySetValue =
@@ -241,15 +280,36 @@ ItemPage {
             leastRecent.update(
                     systemSettingsSettings.backgroundPreviouslySetValue)
         }
+        console.log ("mostRecent.source: " + mostRecent.source);
+        console.log ("leastRecent.source: " + leastRecent.source);
     }
 
     GSettings {
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
+            console.log ("Changed: "+ key);
             if (key == "backgroundDuplicate") {
                 setUpImages()
             }
+        }
+        Component.onCompleted: {
+            if (systemSettingsSettings.backgroundDuplicate)
+                optionSelector.selectedIndex = 0;
+            else
+                optionSelector.selectedIndex = 1;
+            setUpImages();
+        }
+    }
+
+    Connections {
+        id: curItemConnection
+        onSave: {
+            console.log ("HERE: " + curItem.uri);
+            console.log ("HERE homeScreen: " + curItem.homeScreen);
+
+            Utilities.setBackground(curItem.homeScreen, curItem.uri);
+
         }
     }
 

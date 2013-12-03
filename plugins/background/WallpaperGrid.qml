@@ -35,10 +35,7 @@ Column {
     property int itemWidth: (parent.width * 0.7) / columns
     property string title
     property bool homeScreen
-
-    Component.onCompleted: {
-        console.log ("homeScreen: " + homeScreen);
-    }
+    signal selected (string uri)
 
     ListItem.Header {
         anchors.left: parent.left
@@ -80,8 +77,7 @@ Column {
                     onClicked: {
                         console.log ("clicked: " + modelData);
                         console.log ("clicked: " + homeScreen);
-                        pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: modelData, homeScreen: homeScreen});
-
+                        selected(modelData);
                     }
                 }
             }

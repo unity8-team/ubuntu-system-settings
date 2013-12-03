@@ -24,8 +24,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Content 0.1
 import SystemSettings 1.0
-import Ubuntu.SystemSettings.Background 1.0
-import "utilities.js" as Utilities
 
 ItemPage {
     id: selectSourcePage
@@ -38,6 +36,8 @@ ItemPage {
     property var customList: []
     property var activeTransfer
     property var store
+    property var backgroundPanel
+    signal save (var curItem)
 
     title: homeScreen ? i18n.tr("Home screen") : i18n.tr("Welcome screen")
 
@@ -45,7 +45,6 @@ ItemPage {
         ubuntuArtList = backgroundPanel.listUbuntuArt(ubuntuArtDir);
         store = ContentHub.defaultStoreForType(ContentType.Pictures);
         customList = backgroundPanel.listCustomArt(store.uri);
-        console.log ("homeScreen: " + homeScreen);
     }
 
     Action {
@@ -54,7 +53,7 @@ ItemPage {
         iconName: "import-image"
         onTriggered: {
             startContentTransfer(function(uri) {
-                Utilities.setBackground(uri);
+                Utilities.setBackground(homeScreen, uri);
                 pageStack.pop();
             });
         }
@@ -64,20 +63,6 @@ ItemPage {
         ToolbarButton {
             action: selectDefaultPeer
         }
-    }
-
-    UbuntuBackgroundPanel {
-        id: backgroundPanel
-    }
-
-    GSettings {
-        id: systemSettingsSettings
-        schema.id: "com.ubuntu.touch.system-settings"
-    }
-
-    GSettings {
-        id: background
-        schema.id: "org.gnome.desktop.background"
     }
 
     Flickable {
@@ -100,6 +85,27 @@ ItemPage {
                 model: ubuntuArtList
                 title: i18n.tr("Ubuntu Art")
                 homeScreen: selectSourcePage.homeScreen
+
+                onSelected: {
+                    console.log ("onSelected: " + uri);
+                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri, homeScreen: homeScreen});
+                    var curItem = pageStack.currentPage;
+                    curItemConnection.target = curItem;
+                }
+
+                Connections {
+                    id: curItemConnection
+                    onStateChanged: {
+                        console.log ("onSelectedSave: " + target.uri);
+                        console.log ("onSelectedState: " + target.state);
+                        if (target.state === "saved")
+                        {
+                            save(target);
+                            pageStack.pop();
+                        }
+
+                    }
+                }
             }
 
             WallpaperGrid {
@@ -112,6 +118,7 @@ ItemPage {
             }
         }
     }
+
 
     Connections {
         id: contentHubConnection
