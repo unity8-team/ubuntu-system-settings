@@ -78,8 +78,7 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     if (!backgroundFile.isLocalFile())
         return;
 
-    QString backgroundFileSave = backgroundFile.path();
-    if (backgroundFileSave == m_backgroundFile)
+    if (backgroundFile.url() == m_backgroundFile)
         return;
 
     QDBusInterface userInterface (
@@ -92,14 +91,14 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     if (!userInterface.isValid())
         return;
 
-    m_backgroundFile = backgroundFileSave;
-    userInterface.call("SetBackgroundFile", backgroundFileSave);
+    m_backgroundFile = backgroundFile.url();
+    userInterface.call("SetBackgroundFile", backgroundFile.path());
     Q_EMIT backgroundFileChanged();
 }
 
 void Background::slotChanged()
 {
-    QString new_background = getBackgroundFile();
+    QString new_background = QUrl::fromLocalFile(getBackgroundFile()).url();
     if (new_background != m_backgroundFile) {
         m_backgroundFile = new_background;
         Q_EMIT backgroundFileChanged();
@@ -109,7 +108,7 @@ void Background::slotChanged()
 QString Background::backgroundFile()
 {
     if (m_backgroundFile.isEmpty() || m_backgroundFile.isNull())
-        m_backgroundFile = getBackgroundFile();
+        m_backgroundFile = QUrl::fromLocalFile(getBackgroundFile()).url();
 
      return m_backgroundFile;
 }
