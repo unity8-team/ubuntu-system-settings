@@ -53,8 +53,8 @@ ItemPage {
         iconName: "import-image"
         onTriggered: {
             startContentTransfer(function(uri) {
-                save(homeScreen, uri);
-                pageStack.pop();
+                pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                selectedItemConnection.target = pageStack.currentPage;
             });
         }
     }
