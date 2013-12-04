@@ -22,6 +22,7 @@ import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 
 Column {
     id: wallpaperGrid
@@ -62,26 +63,52 @@ Column {
                     visible: (current === modelData) && (itemImage.status === Image.Ready)
                 }
                 Image {
-                   id: itemImage
-                   anchors.centerIn: parent
-                   source: modelData
-                   width: itemWidth
-                   height: itemHeight
-                   sourceSize.width: width
-                   sourceSize.height: height
-                   fillMode: Image.PreserveAspectCrop
-                   asynchronous: true
-                   ActivityIndicator {
-                       anchors.centerIn: parent
-                       running: parent.status === Image.Loading
-                       visible: running
-                   }
-                   MouseArea {
-                       anchors.fill: parent
-                       onClicked: {
-                           selected(modelData);
-                       }
-                   }
+                    id: itemImage
+                    anchors.centerIn: parent
+                    source: modelData
+                    width: itemWidth
+                    height: itemHeight
+                    sourceSize.width: width
+                    sourceSize.height: height
+                    fillMode: Image.PreserveAspectCrop
+                    asynchronous: true
+                    ActivityIndicator {
+                        anchors.centerIn: parent
+                        running: parent.status === Image.Loading
+                        visible: running
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onPressAndHold: {
+                            console.log ("onPressAndHold: " + modelData);
+                            actPop.target = itemImage;
+                            actPop.show();
+                        }
+                        onClicked: {
+                            if (!actPop.visible)
+                                selected(modelData);
+                        }
+                    }
+                }
+                ActionSelectionPopover {
+                    id: actPop
+                    target: parent
+                    pointerTarget: parent
+                    dismissArea: parent
+                    delegate: ListItem.Standard {
+                        text: action.text
+                    }
+                    actions: ActionList {
+                        Action {
+                            text: i18n.tr("Remove")
+                            onTriggered: {
+                                print(text);
+                                print(modelData);
+                                actPop.hide();
+                            }
+                        }
+                    }
                 }
             }
         }
