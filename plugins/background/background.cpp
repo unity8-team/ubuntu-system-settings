@@ -53,6 +53,8 @@ Background::Background(QObject *parent) :
                                   "Changed",
                                   this,
                                   SLOT(slotChanged()));
+    updateUbuntuArt();
+    updateCustomBackgrounds();
 }
 
 QString Background::getBackgroundFile()
@@ -119,10 +121,6 @@ QString Background::backgroundFile()
 
 QStringList Background::customBackgrounds()
 {
-    if (m_customBackgrounds.isEmpty())
-    {
-        updateCustomBackgrounds();
-    }
     return m_customBackgrounds;
 }
 
@@ -133,28 +131,30 @@ void Background::updateCustomBackgrounds()
     QDir dir(customPath);
     dir.setFilter(QDir::Files | QDir::NoSymLinks);
     QFileInfoList tmpList = dir.entryInfoList();
-    foreach (QFileInfo f, tmpList)
+    if (!tmpList.isEmpty())
     {
-        m_customBackgrounds.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+        foreach (QFileInfo f, tmpList)
+            m_customBackgrounds.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
     }
     Q_EMIT customBackgroundsChanged();
 }
 
 QStringList Background::ubuntuArt()
 {
-    if (m_ubuntuArt.isEmpty())
-    {
-        QDir dir("/usr/share/backgrounds/");
-        dir.setFilter(QDir::Files | QDir::NoSymLinks);
-        QFileInfoList tmpList = dir.entryInfoList();
-        foreach (QFileInfo f, tmpList)
-        {
-            if (f.fileName() != "warty-final-ubuntu.png")
-                m_ubuntuArt.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
-        }
-        Q_EMIT ubuntuArtChanged();
-    }
     return m_ubuntuArt;
+}
+void Background::updateUbuntuArt()
+{
+
+    QDir dir("/usr/share/backgrounds/");
+    dir.setFilter(QDir::Files | QDir::NoSymLinks);
+    QFileInfoList tmpList = dir.entryInfoList();
+    foreach (QFileInfo f, tmpList)
+    {
+        if (f.fileName() != "warty-final-ubuntu.png")
+            m_ubuntuArt.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+    }
+    Q_EMIT ubuntuArtChanged();
 }
 
 void Background::rmFile(const QString &file)

@@ -56,8 +56,8 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void backgroundFileChanged();
-    virtual void customBackgroundsChanged();
-    virtual void ubuntuArtChanged();
+    void customBackgroundsChanged();
+    void ubuntuArtChanged();
 
 
 
@@ -65,6 +65,7 @@ private:
     QStringList m_ubuntuArt;
     QStringList m_customBackgrounds;
     void updateCustomBackgrounds();
+    void updateUbuntuArt();
     QString m_backgroundFile;
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;
