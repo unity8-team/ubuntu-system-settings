@@ -44,8 +44,8 @@ ItemPage {
 
     Component.onCompleted: {
         ubuntuArtList = backgroundPanel.listUbuntuArt(ubuntuArtDir);
-        store = ContentHub.defaultStoreForType(ContentType.Pictures);
-        customList = backgroundPanel.listCustomArt(store.uri);
+        //store = ContentHub.defaultStoreForType(ContentType.Pictures);
+        //customList = backgroundPanel.listCustomArt(store.uri);
     }
 
     Action {
@@ -68,6 +68,7 @@ ItemPage {
 
     UbuntuBackgroundPanel {
         id: backgroundPanel
+        onCustomBackgroundsChanged: console.log ("onCustomBackgroundsChanged:" + backgroundPanel.customBackgrounds)
     }
 
     Flickable {
@@ -84,10 +85,12 @@ ItemPage {
             spacing: units.gu(1)
 
             WallpaperGrid {
+                visible: false
                 anchors.left: parent.left
                 anchors.right: parent.right
                 columns: 2
-                model: ubuntuArtList
+                bgmodel: ubuntuArtList
+                backgroundPanel: backgroundPanel
                 title: i18n.tr("Ubuntu Art")
                 current: selectSourcePage.current
                 onSelected: {
@@ -97,12 +100,15 @@ ItemPage {
             }
 
             WallpaperGrid {
+                id: customGrid
                 anchors.left: parent.left
                 anchors.right: parent.right
                 columns: 2
-                model: customList
+                bgmodel: backgroundPanel.customBackgrounds
+                backgroundPanel: backgroundPanel
                 title: i18n.tr("Custom")
                 current: selectSourcePage.current
+                editable: true
                 onSelected: {
                     pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
                     selectedItemConnection.target = pageStack.currentPage;
@@ -146,6 +152,7 @@ ItemPage {
         if (transfer != null)
         {
             transfer.selectionType = ContentTransfer.Single;
+            store = ContentHub.defaultStoreForType(ContentType.Pictures);
             transfer.setStore(store);
             activeTransfer = transfer;
             activeTransfer.start();

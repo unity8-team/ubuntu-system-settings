@@ -23,6 +23,7 @@ import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
+//import Ubuntu.SystemSettings.Background 1.0
 
 Column {
     id: wallpaperGrid
@@ -31,13 +32,23 @@ Column {
     height: childrenRect.height
     spacing: units.gu(2)
 
-    property var model
+    property var bgmodel
     property int columns
     property int itemWidth: (mainPage.width * 0.7) / columns
     property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
     property string title
     property string current
+    property bool editable: false
+    property var backgroundPanel
     signal selected (string uri)
+
+
+    /*
+    UbuntuBackgroundPanel {
+        id: backgroundPanel
+        onCustomBackgroundsChanged: console.log ("onCustomBackgroundsChanged2:" + backgroundPanel.customBackgrounds)
+    }
+    */
 
     ListItem.Standard {
         anchors.left: parent.left
@@ -52,7 +63,7 @@ Column {
         spacing: itemWidth * 0.2
         height: childrenRect.height
         Repeater {
-            model: wallpaperGrid.model
+            model: bgmodel
             Item {
                 width: itemWidth + units.gu(2)
                 height: itemHeight + units.gu(2)
@@ -82,8 +93,10 @@ Column {
                         anchors.fill: parent
                         onPressAndHold: {
                             console.log ("onPressAndHold: " + modelData);
-                            actPop.target = itemImage;
-                            actPop.show();
+                            if (editable) {
+                                actPop.target = itemImage;
+                                actPop.show();
+                            }
                         }
                         onClicked: {
                             if (!actPop.visible)
@@ -105,6 +118,7 @@ Column {
                             onTriggered: {
                                 print(text);
                                 print(modelData);
+                                backgroundPanel.rmFile(modelData);
                                 actPop.hide();
                             }
                         }

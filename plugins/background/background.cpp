@@ -20,12 +20,15 @@
 
 #include "background.h"
 #include <QDir>
+#include <QStandardPaths>
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
+#include <QDebug>
 
 Background::Background(QObject *parent) :
     QObject(parent),
+    m_customBackgrounds(0),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_accountsserviceIface ("org.freedesktop.Accounts",
                             "/org/freedesktop/Accounts",
@@ -43,12 +46,13 @@ Background::Background(QObject *parent) :
         m_objectPath = qObjectPath.value().path();
     }
 
-     m_systemBusConnection.connect("org.freedesktop.Accounts",
+    m_systemBusConnection.connect("org.freedesktop.Accounts",
                                   m_objectPath,
                                   "org.freedesktop.Accounts.User",
                                   "Changed",
                                   this,
                                   SLOT(slotChanged()));
+    this->updateCustomBackgrounds();
 }
 
 QString Background::getBackgroundFile()
@@ -113,6 +117,35 @@ QString Background::backgroundFile()
      return m_backgroundFile;
 }
 
+QStringList Background::customBackgrounds()
+{
+    /*
+    if (m_customBackgrounds.isEmpty())
+    {
+        this->updateCustomBackgrounds();
+    }
+    */
+    return m_customBackgrounds;
+}
+
+void Background::updateCustomBackgrounds()
+{
+    qDebug() << "updateCustomBackgrounds:"<< this->m_customBackgrounds;
+    this->m_customBackgrounds.clear();
+    QString dirString = QStandardPaths::writableLocation(QStandardPaths::DataLocation)+"/Pictures";
+    QDir dir(dirString);
+    dir.setFilter(QDir::Files | QDir::NoSymLinks);
+    QFileInfoList tmpList = dir.entryInfoList();
+    foreach (QFileInfo f, tmpList)
+    {
+        this->m_customBackgrounds.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+    }
+    this->m_customBackgrounds.sort();
+    Q_EMIT this->customBackgroundsChanged();
+    qDebug() << "updateCustomBackgrounds:"<< this->m_customBackgrounds;
+}
+
+
 QStringList Background::listUbuntuArt(const QString &dirString)
 {
     if (m_ubuntuArtList.isEmpty())
@@ -129,19 +162,29 @@ QStringList Background::listUbuntuArt(const QString &dirString)
     return m_ubuntuArtList;
 }
 
-QStringList Background::listCustomArt(const QString &dirString)
+
+void Background::rmFile(const QString &file)
 {
-    if (m_customArtList.isEmpty())
+
+    if (file.isEmpty() || file.isNull())
+        return;
+
+    if (!file.contains(QStandardPaths::writableLocation(QStandardPaths::DataLocation)))
     {
-        QDir dir(dirString);
-        dir.setFilter(QDir::Files | QDir::NoSymLinks);
-        QFileInfoList tmpList = dir.entryInfoList();
-        foreach (QFileInfo f, tmpList)
-        {
-            m_customArtList.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
-        }
+        qDebug() << "File can't be removed"<< file;
+        return;
     }
-    return m_customArtList;
+
+    QUrl fileUri(file);
+    if (!fileUri.isLocalFile())
+        return;
+
+    QFile filePath(fileUri.path());
+    if (filePath.exists())
+    {
+        filePath.remove();
+        this->updateCustomBackgrounds();
+    }
 }
 
 Background::~Background() {
