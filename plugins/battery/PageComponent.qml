@@ -135,50 +135,106 @@ ItemPage {
                 showDivider: false
             }
 
-            ListItem.SingleValue {
-                id: chargingEntry
-                value: isCharging ?
-                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
-                showDivider: false
-            }
-
             Canvas {
                 id: canvas
                 width:parent.width - units.gu(4)
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: units.gu(15)
 
+                antialiasing: true
+
+                function drawAxes(ctx, axisWidth, axisHeight) {
+                    ctx.save()
+                    ctx.beginPath()
+                    ctx.strokeStyle = UbuntuColors.lightAubergine
+
+                    ctx.lineWidth = units.dp(2)
+
+                    ctx.translate(0, 1)
+
+                    // 11 ticks with 0, 5, 10 being big
+                    for (var i = 0; i <= 10; i++) {
+                        var x = (i % 5 == 0) ? 0 : Math.floor(axisWidth / 2)
+                        var y = (i / 10) * (height - axisHeight - ctx.lineWidth)
+                        ctx.moveTo(x, y)
+                        ctx.lineTo(axisWidth, y)
+                    }
+
+                    ctx.translate(axisWidth + ctx.lineWidth / 2,
+                                  height - axisHeight - ctx.lineWidth / 2)
+
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(0, -ctx.lineWidth)
+
+                    // 25 ticks with 0, 6, 12, 18, 24 being big
+                    for (i = 0; i <= 24; i++) {
+                        x = (i / 24) * (width - axisWidth - ctx.lineWidth)
+                        y = (i % 6 == 0) ? axisHeight : axisHeight -
+                                            Math.floor(axisHeight / 2)
+                        ctx.moveTo(x, 0)
+                        ctx.lineTo(x, y)
+                    }
+
+                    ctx.translate(0, 0)
+
+                    ctx.stroke()
+                    ctx.restore()
+                }
+
                 onPaint:{
                     var ctx = canvas.getContext('2d');
                     ctx.save();
                     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                    var axisWidth = 10
+                    var axisHeight = 10
+
+                    var graphHeight = height - axisHeight
+
+                    drawAxes(ctx, axisWidth, axisHeight)
+
+                    /* Display the charge history */
                     ctx.beginPath();
 
-                    /* Display the axis in aubergine color */
-                    ctx.strokeStyle = UbuntuColors.lightAubergine
-                    ctx.lineWidth = units.dp(3)
-                    ctx.moveTo(1, 0)
-                    ctx.lineTo(1, height)
-                    ctx.lineTo(width, height)
-                    ctx.stroke()
-
-                    /* Display the charge history in orange color */
                     ctx.lineWidth = units.dp(2)
-                    ctx.strokeStyle = UbuntuColors.orange
+
+
+                    ctx.translate(0, height)
+                    // Invert the y axis so we draw from the bottom left
+                    ctx.scale(1, -1)
+                    // Move the origin to just above the axes
+                    ctx.translate(axisWidth, axisHeight)
+                    // Scale to avoid the axes so we can draw as if they aren't
+                    // there
+                    ctx.scale(1 - (axisWidth / width), 1 - axisHeight / height)
+
+                    var gradient = ctx.createLinearGradient(0, 0, 0, height);
+                    gradient.addColorStop(1, "green");
+                    gradient.addColorStop(0.5, "yellow");
+                    gradient.addColorStop(0, "red");
+                    ctx.strokeStyle = gradient
 
                     /* Get infos from battery0, on a day (60*24*24=86400 seconds), with 150 points on the graph */
                     var chargeDatas = batteryBackend.getHistory(batteryBackend.deviceString, 86400, 150)
 
                     /* time is the offset in seconds compared to the current time (negative value)
-                       we display the charge on a day, which is 86400 seconds, the value is the %
-                       the coordinates are adjusted to the canvas, top,left is 0,0 */
-                    ctx.moveTo((86400-chargeDatas[0].time)/86400*canvas.width, (1-chargeDatas[0].value/100)*canvas.height)
-                    for (var i=1; i < chargeDatas.length; i++) {
-                        ctx.lineTo((86400-chargeDatas[i].time)/86400*canvas.width, (1-chargeDatas[i].value/100)*canvas.height)
+                       we display the charge on a day, which is 86400 seconds, the value is the % */
+                    ctx.moveTo((86400 - chargeDatas[0].time) / 86400 * width,
+                               (chargeDatas[0].value / 100) * width)
+                    for (var i = 1; i < chargeDatas.length; i++) {
+                        ctx.lineTo((86400-chargeDatas[i].time) / 86400 * width,
+                                   (chargeDatas[i].value / 100) * height)
                     }
                     ctx.stroke()
                     ctx.restore();
                 }
+            }
+
+            ListItem.SingleValue {
+                id: chargingEntry
+                value: isCharging ?
+                           "" : (batteryBackend.lastFullCharge ? timeDeltaString(batteryBackend.lastFullCharge) : i18n.tr("N/A"))
+                showDivider: false
             }
 
             ListItem.Standard {

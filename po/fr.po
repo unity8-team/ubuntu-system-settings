@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-10-14 13:39+0000\n"
-"Last-Translator: Laurent N <norents@gmail.com>\n"
+"PO-Revision-Date: 2013-12-03 14:08+0000\n"
+"Last-Translator: Pierre Slamich <pierre.slamich@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-10-15 05:19+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-12-04 05:58+0000\n"
+"X-Generator: Launchpad (build 16861)\n"
 "Language: \n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -520,7 +520,7 @@ msgstr "Complétion automatique"
 
 #: ../plugins/language/PageComponent.qml:109
 msgid "Predictive text"
-msgstr ""
+msgstr "Saisie intuitive"
 
 #: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
@@ -818,7 +818,7 @@ msgstr "Ces mots de passe ne correspondent pas. Veuillez réessayer."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "Non configuré"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
@@ -998,7 +998,7 @@ msgstr "Des frais de connexion de données peuvent s'appliquer."
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
-msgstr "Mises à jours"
+msgstr "Mises à jour"
 
 #: ../plugins/system-update/PageComponent.qml:46
 msgid "Checking for updates…"

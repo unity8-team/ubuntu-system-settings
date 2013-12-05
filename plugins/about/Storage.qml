@@ -28,7 +28,6 @@ import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
     id: storagePage
-    objectName: "storagePage"
 
     title: i18n.tr("Storage")
     flickable: scrollWidget
@@ -98,13 +97,6 @@ ItemPage {
         backendInfo.picturesSize,
         otherSize, //Other Files
         backendInfo.totalClickSize]
-    property variant spaceObjectNames: [
-        "usedByUbuntuItem",
-        "moviesItem",
-        "audioItem",
-        "picturesItem",
-        "otherFilesItem",
-        "usedByAppsItem"]
 
     GSettings {
         id: settingsId
@@ -139,7 +131,6 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: diskItem
-                objectName: "diskItem"
                 text: i18n.tr("Total storage")
                 value: backendInfo.formatSize(diskSpace)
                 showDivider: false
@@ -150,7 +141,6 @@ ItemPage {
             }
 
             StorageItem {
-                objectName: "storageItem"
                 colorName: "white"
                 label: i18n.tr("Free space")
                 value: freediskSpace
@@ -161,7 +151,6 @@ ItemPage {
                 model: spaceColors
 
                 StorageItem {
-                    objectName: spaceObjectNames[index]
                     colorName: modelData
                     label: spaceLabels[index]
                     value: spaceValues[index]
@@ -171,7 +160,6 @@ ItemPage {
 
             ListItem.ItemSelector {
                 id: valueSelect
-                objectName: "installedAppsItemSelector"
                 text: i18n.tr("Installed apps")
                 model: [i18n.tr("By name"), i18n.tr("By size")]
                 selectedIndex:
@@ -187,7 +175,6 @@ ItemPage {
             }
 
             ListView {
-                objectName: "installedAppsListView"
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: childrenRect.height

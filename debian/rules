@@ -5,9 +5,7 @@
 export DH_VERBOSE=1
 
 include /usr/share/dpkg/buildflags.mk
-
-override_dh_auto_configure:
-	dh_auto_configure -- LIBDIR="/usr/lib/$(DEB_HOST_MULTIARCH)"
+include /usr/share/dpkg/architecture.mk
 
 override_dh_install:
 	cd tests/autopilot; \
@@ -16,6 +14,9 @@ override_dh_install:
 	done; \
 	cd $(CURDIR)
 	dh_install -X'*.pyc' --fail-missing
+
+override_dh_makeshlibs:
+	dh_makeshlibs -Xusr/lib/$(DEB_HOST_MULTIARCH)/ubuntu-system-settings
 
 %:
 	dh $@ --fail-missing --with python2

@@ -43,6 +43,7 @@ public:
 
     struct Click {
         QString name;
+        QString displayName;
         QString icon;
         uint installSize;
     };

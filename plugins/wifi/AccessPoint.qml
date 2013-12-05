@@ -36,7 +36,7 @@ FramedMenuItem {
         checkBoxActive.checked = checked;
     }
 
-    icon: {
+    iconName: {
         var imageName = "nm-signal-100"
 
         if (adHoc) {
@@ -54,15 +54,12 @@ FramedMenuItem {
         if (secure) {
             imageName += "-secure";
         }
-        return "image://gicon/" + imageName;
+        return imageName;
     }
 
     iconFrame: false
     control: CheckBox {
         id: checkBoxActive
-        height: units.gu(4)
-        width: units.gu(4)
-        anchors.centerIn: parent
 
         onClicked: {
             accessPoint.activate();

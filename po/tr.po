@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-08-10 12:25+0000\n"
-"Last-Translator: Berat Alp Erbil <Unknown>\n"
+"PO-Revision-Date: 2013-11-21 12:54+0000\n"
+"Last-Translator: İbrahim Çelik <ibrahimcelik89@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-10-08 06:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-11-22 06:04+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
 msgid "About this phone"
@@ -43,7 +43,7 @@ msgstr "İşletim Sistemi"
 
 #: ../plugins/about/PageComponent.qml:97
 msgid "Last updated"
-msgstr "Son güncelleme"
+msgstr "Son güncelleştirme"
 
 #: ../plugins/about/PageComponent.qml:98
 #: ../plugins/battery/PageComponent.qml:256
@@ -108,7 +108,7 @@ msgstr "Boş alan"
 
 #: ../plugins/about/Storage.qml:163
 msgid "Installed apps"
-msgstr ""
+msgstr "Yüklü Uygulamalar"
 
 #: ../plugins/about/Storage.qml:164
 msgid "By name"
@@ -147,32 +147,32 @@ msgstr "Batarya"
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 saniye önce"
+msgstr[1] "%1 saniye önce"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery/PageComponent.qml:50
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 dakika önce"
+msgstr[1] "%1 dakika önce"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery/PageComponent.qml:53
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 saat önce"
+msgstr[1] "%1 saat önce"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery/PageComponent.qml:56
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 gün önce"
+msgstr[1] "%1 gün önce"
 
 #: ../plugins/battery/PageComponent.qml:76
 msgid "Charging now"
@@ -180,11 +180,11 @@ msgstr "Şarj oluyor"
 
 #: ../plugins/battery/PageComponent.qml:81
 msgid "Last full charge"
-msgstr ""
+msgstr "Son tam dolum"
 
 #: ../plugins/battery/PageComponent.qml:86
 msgid "Fully charged"
-msgstr ""
+msgstr "Tam dolu"
 
 #: ../plugins/battery/PageComponent.qml:125
 msgid "Charge level"
@@ -194,11 +194,11 @@ msgstr "Şarj seviyesi"
 #: ../plugins/battery/PageComponent.qml:133
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%%1"
 
 #: ../plugins/battery/PageComponent.qml:186
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "Batarya kullanımını azaltma yolları:"
 
 #: ../plugins/battery/PageComponent.qml:190
 msgid "Display brightness"
@@ -207,12 +207,12 @@ msgstr "Ekran parlaklığı"
 #: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:62
 msgid "Lock when idle"
-msgstr ""
+msgstr "Boşta ise kilitle"
 
 #: ../plugins/battery/PageComponent.qml:247
 #: ../plugins/security-privacy/PhoneLocking.qml:63
 msgid "Sleep when idle"
-msgstr ""
+msgstr "Boşta ise uykuya al"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery/PageComponent.qml:253
@@ -223,8 +223,8 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 dakika sonra"
+msgstr[1] "%1 dakika sonra"
 
 #: ../plugins/battery/PageComponent.qml:275
 #: ../plugins/wifi/PageComponent.qml:27 ../.build/settings.js:18
@@ -247,33 +247,35 @@ msgstr "Kesin konumun bulunması GPS ve/veya Wi-Fi gerektirir."
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "Kullanılmadığında telefonu kilitle:"
 
 #: ../plugins/battery/SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "Kullanılmadığında telefonu uykuya al:"
 
 #: ../plugins/battery/SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
+"Kısa süreler daha güvenlidir. Arama sırasında veya video oynatırken telefon "
+"kilitlenmez."
 
 #: ../plugins/battery/SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
+msgstr "Arama sırasında veya video oynatırken telefon uykuya geçmez."
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:28
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr ""
+msgstr "Bluetooth Eşleşme İsteği"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "Lütfen %1 ekranında görünen PIN'in bununla aynı olduğunu onaylayın"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:49
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:54
@@ -290,23 +292,23 @@ msgstr "İptal"
 
 #: ../plugins/bluetooth/ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "PIN'i onayla"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: ../plugins/bluetooth/PageComponent.qml:70
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr ""
+msgstr "%1 (Bağlanıyor...)"
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
 #: ../plugins/bluetooth/PageComponent.qml:73
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr ""
+msgstr "%1 (Bağlantı Kesiliyor...)"
 
 #: ../plugins/bluetooth/PageComponent.qml:80
 msgid "Computer"
-msgstr ""
+msgstr "Bilgisayar"
 
 #: ../plugins/bluetooth/PageComponent.qml:81
 #: ../plugins/phone/PageComponent.qml:28 ../.build/settings.js:12
@@ -315,7 +317,7 @@ msgstr "Telefon"
 
 #: ../plugins/bluetooth/PageComponent.qml:82
 msgid "Modem"
-msgstr ""
+msgstr "Modem"
 
 #: ../plugins/bluetooth/PageComponent.qml:83 ../src/qml/MainWindow.qml:90
 msgid "Network"
@@ -323,113 +325,113 @@ msgstr "Ağ"
 
 #: ../plugins/bluetooth/PageComponent.qml:84
 msgid "Headset"
-msgstr ""
+msgstr "Mikrofonlu Kulaklık"
 
 #: ../plugins/bluetooth/PageComponent.qml:85
 msgid "Headphones"
-msgstr ""
+msgstr "Kulaklık"
 
 #: ../plugins/bluetooth/PageComponent.qml:86
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: ../plugins/bluetooth/PageComponent.qml:87
 msgid "Other Audio"
-msgstr ""
+msgstr "Diğer Ses ve Müzikler"
 
 #: ../plugins/bluetooth/PageComponent.qml:88
 msgid "Joypad"
-msgstr ""
+msgstr "Oyun Kolu"
 
 #: ../plugins/bluetooth/PageComponent.qml:89
 msgid "Keyboard"
-msgstr ""
+msgstr "Klavye"
 
 #: ../plugins/bluetooth/PageComponent.qml:90
 msgid "Tablet"
-msgstr ""
+msgstr "Tablet"
 
 #: ../plugins/bluetooth/PageComponent.qml:91
 msgid "Mouse"
-msgstr ""
+msgstr "Fare"
 
 #: ../plugins/bluetooth/PageComponent.qml:92
 msgid "Printer"
-msgstr ""
+msgstr "Yazıcı"
 
 #: ../plugins/bluetooth/PageComponent.qml:93
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: ../plugins/bluetooth/PageComponent.qml:94
 msgid "Other"
-msgstr ""
+msgstr "Diğer"
 
 #: ../plugins/bluetooth/PageComponent.qml:100
 msgid "Excellent"
-msgstr ""
+msgstr "Mükemmel"
 
 #: ../plugins/bluetooth/PageComponent.qml:101
 msgid "Good"
-msgstr ""
+msgstr "İyi"
 
 #: ../plugins/bluetooth/PageComponent.qml:102
 msgid "Fair"
-msgstr ""
+msgstr "Orta"
 
 #: ../plugins/bluetooth/PageComponent.qml:103
 msgid "Poor"
-msgstr ""
+msgstr "Zayıf"
 
 #: ../plugins/bluetooth/PageComponent.qml:104
 #: ../plugins/bluetooth/PageComponent.qml:193
 #: ../plugins/bluetooth/PageComponent.qml:201
 #: ../plugins/security-privacy/PhoneLocking.qml:40
 msgid "None"
-msgstr ""
+msgstr "Yok"
 
 #: ../plugins/bluetooth/PageComponent.qml:130
 msgid "Connected headset:"
-msgstr ""
+msgstr "Bağlı mikrofonlu kulaklık:"
 
 #: ../plugins/bluetooth/PageComponent.qml:158
 msgid "Connect a different headset:"
-msgstr ""
+msgstr "Başka bir mikrofonlu kulaklık bağla:"
 
 #: ../plugins/bluetooth/PageComponent.qml:158
 msgid "Connect a headset:"
-msgstr ""
+msgstr "Bir mikrofonlu kulaklık bağla:"
 
 #: ../plugins/bluetooth/PageComponent.qml:184
 msgid "None detected"
-msgstr ""
+msgstr "Hiçbir şey algılanmadı"
 
 #: ../plugins/bluetooth/PageComponent.qml:200
 msgid "Name"
-msgstr ""
+msgstr "Ad"
 
 #: ../plugins/bluetooth/PageComponent.qml:204
 msgid "Type"
-msgstr ""
+msgstr "Tür"
 
 #: ../plugins/bluetooth/PageComponent.qml:208
 msgid "Signal Strength"
-msgstr ""
+msgstr "Sinyal Gücü"
 
 #: ../plugins/bluetooth/PageComponent.qml:213
 msgid "Disconnect"
-msgstr ""
+msgstr "Bağlantıyı kes"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:36
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "'%1' aygıt PIN'i"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "Eşleştir"
 
 #: ../plugins/cellular/ChooseCarrier.qml:28
 #: ../plugins/cellular/PageComponent.qml:72
@@ -438,7 +440,7 @@ msgstr "Taşıyıcı"
 
 #: ../plugins/cellular/ChooseCarrier.qml:78
 msgid "Refresh"
-msgstr ""
+msgstr "Yenile"
 
 #: ../plugins/cellular/ChooseCarrier.qml:95
 msgid "Searching"
@@ -466,7 +468,7 @@ msgstr "Elle"
 
 #: ../plugins/cellular/PageComponent.qml:101
 msgid "Cellular data"
-msgstr ""
+msgstr "Hücresel veri"
 
 #: ../plugins/cellular/PageComponent.qml:109
 msgid "Data roaming"
@@ -514,7 +516,7 @@ msgstr "Otomatik tamamlama"
 
 #: ../plugins/language/PageComponent.qml:109
 msgid "Predictive text"
-msgstr ""
+msgstr "Tahmini metin"
 
 #: ../plugins/language/PageComponent.qml:125
 msgid "Auto capitalization"
@@ -522,15 +524,15 @@ msgstr "Otomatik büyük harf"
 
 #: ../plugins/language/PageComponent.qml:137
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
+msgstr "Her cümlenin ilk harfini büyütmek için Shift tuşunu etkinleştirir."
 
 #: ../plugins/language/PageComponent.qml:147
 msgid "Key press feedback"
-msgstr ""
+msgstr "Tuşa basma geribildirimi"
 
 #: ../plugins/language/PageComponent.qml:159
 msgid "Vibrate or emit a sound whenever a key is pressed."
-msgstr ""
+msgstr "Bir tuşa basıldığında titre ya da bir ses çıkar."
 
 #: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -666,47 +668,60 @@ msgstr "Telefon ve Internet"
 
 #: ../plugins/security-privacy/Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "Konum"
 
 #: ../plugins/security-privacy/Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "Konum algılandı"
 
 #: ../plugins/security-privacy/Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"Tahmini konumunuzu algılamak için GPS kullanır. Kapalıyken, enerji tasarrufu "
+"için GPS'i de kapatır."
 
 #: ../plugins/security-privacy/Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Tahmini konumunuzu algılamak için kablosuzu ağ ve GPS kullanır. Konum "
+"algılamayı kapatmak enerji tasarrufu sağlar."
 
 #: ../plugins/security-privacy/Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"Tahmini konumunuzu algılamak için kablosuzu ağ (şu an kapalı) ve GPS "
+"kullanır. Konum algılamayı kapatmak enerji tasarrufu sağlar."
 
 #: ../plugins/security-privacy/Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"Tahmini konumunuzu algılamak için kablosuz ağı, baz istasyonu konumunu ve "
+"GPS'i kullanır. Konum algılamayı kapatmak enerji tasarufu sağlar."
 
 #: ../plugins/security-privacy/Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"Tahmini konumunuzu algılamak için kablosuz ağı, baz istasyonu konumunu (şu "
+"an şebeke yok)  ve GPS'i kullanır. Konum algılamayı kapatmak enerji tasarufu "
+"sağlar."
 
 #: ../plugins/security-privacy/Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"Tahmini konumunuzu algılamak için kablosuz ağı (şu an kapalı), baz istasyonu "
+"konumunu ve GPS'i kullanır. Konum algılamayı kapatmak enerji tasarufu sağlar."
 
 #: ../plugins/security-privacy/Location.qml:82
 msgid ""
@@ -714,120 +729,123 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Tahmini konumunuzu algılamak için kablosuz ağı (şu an kapalı), baz istasyonu "
+"konumunu (şu an şebeke yok) ve GPS'i kullanır. Konum algılamayı kapatmak "
+"enerji tasarufu sağlar."
 
 #: ../plugins/security-privacy/Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "Konuma erişime izin ver:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:30
 #: ../plugins/security-privacy/PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "Kilitleme güvenliği"
 
 #: ../plugins/security-privacy/LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "Şifreyi değiştir"
 
 #: ../plugins/security-privacy/LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "Parolayı değiştir"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "Kaydırmaya geç"
 
 #: ../plugins/security-privacy/LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Şifreye geç"
 
 #: ../plugins/security-privacy/LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "Parolaya geç"
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "Şu anki şifre"
 
 #: ../plugins/security-privacy/LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "Şu anki parola"
 
 #: ../plugins/security-privacy/LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Şifre yanlış. Tekrar deneyin."
 
 #: ../plugins/security-privacy/LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Parola yanlış. Tekrar deneyin."
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "Şifreyi seç"
 
 #: ../plugins/security-privacy/LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Parolayı seç"
 
 #: ../plugins/security-privacy/LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Şifreyi onayla"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Parolayı onayla"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Şifreler uyuşmuyor. Tekrar deneyin."
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Parolalar uyuşmuyor. Tekrar deneyin."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "Ayarı kaldır"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "Devam Et"
 
 #: ../plugins/security-privacy/LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "Telefon kilitleme yöntemi:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Kaydırma (güvenlik önlemi yok)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4 rakamlı şifre"
 
 #: ../plugins/security-privacy/LockSecurity.qml:332
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "Parola"
 
 #: ../plugins/security-privacy/LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Kaydırma (güvenlik önlemi yok)... "
 
 #: ../plugins/security-privacy/LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4 rakamlı şifre..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "Parola..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "Şifreyi değiştir..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Parolayı değiştir..."
 
 #: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
 msgid "Security & Privacy"
@@ -835,12 +853,12 @@ msgstr "Güvenlik ve Gizlilik"
 
 #: ../plugins/security-privacy/PageComponent.qml:67
 msgid "Security:"
-msgstr ""
+msgstr "Güvenlik:"
 
 #: ../plugins/security-privacy/PageComponent.qml:70
 #: ../plugins/security-privacy/PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "Telefon kilitleme"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy/PageComponent.qml:72
@@ -848,56 +866,56 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 dakika"
+msgstr[1] "%1 dakika"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "SIM PIN"
-msgstr ""
+msgstr "SIM PIN'i"
 
 #: ../plugins/security-privacy/PageComponent.qml:86
 msgid "Privacy:"
-msgstr ""
+msgstr "Gizlilik:"
 
 #: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Karşılama ekranındaki bilgiler"
 
 #: ../plugins/security-privacy/PageComponent.qml:102
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Karşılama ekranındaki iletiler"
 
 #: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Location access"
-msgstr ""
+msgstr "Konum erişimi"
 
 #: ../plugins/security-privacy/PageComponent.qml:143
 msgid "Other app access"
-msgstr ""
+msgstr "Diğer uygulama erişimleri"
 
 #: ../plugins/security-privacy/PageComponent.qml:148
 msgid "Diagnostics"
-msgstr ""
+msgstr "Tanılama"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy/PageComponent.qml:153
 msgid "Sent"
-msgstr ""
+msgstr "Gönderilecek"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy/PageComponent.qml:156
 msgid "Not sent"
-msgstr ""
+msgstr "Gönderilmeyecek"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "Şifre"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "Uyku anında kilitler"
 
 #: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
@@ -937,7 +955,7 @@ msgstr "Kilit sesi"
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr "Telefon sessiz modda."
+msgstr "Telefon Sessiz Modda."
 
 #: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
@@ -946,23 +964,23 @@ msgstr "Oynatmayı durdur"
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
-msgstr ""
+msgstr "Otomatik indirme"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "Sonraki güncelleştirmeleri otomatik indir:"
 
 #: ../plugins/system-update/Download.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Kablosuz ağa bağlıyken"
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "Herhangi bir veri bağlantısında"
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "Veri ücretlendirme uygulanabilir."
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
@@ -970,96 +988,96 @@ msgstr "Güncelleştirmeler"
 
 #: ../plugins/system-update/PageComponent.qml:46
 msgid "Checking for updates…"
-msgstr ""
+msgstr "Güncelleştirmeler denetleniyor..."
 
 #: ../plugins/system-update/PageComponent.qml:83
 msgid "Apply update failed:"
-msgstr ""
+msgstr "Güncelleştirme başarısız oldu:"
 
 #: ../plugins/system-update/PageComponent.qml:93
 msgid "Pause failed:"
-msgstr ""
+msgstr "Durdurma başarısız oldu:"
 
 #. TRANSLATORS: %1 is the size of the update in GB
 #: ../plugins/system-update/PageComponent.qml:108
 #, qt-format
 msgid "%1 GB"
-msgstr ""
+msgstr "%1 GB"
 
 #. TRANSLATORS: %1 is the size of the update in MB
 #: ../plugins/system-update/PageComponent.qml:111
 #, qt-format
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #. TRANSLATORS: %1 is the date when the device was last updated
 #: ../plugins/system-update/PageComponent.qml:120
 msgid "No software update available"
-msgstr ""
+msgstr "Mevcut güncelleştirme yok"
 
 #: ../plugins/system-update/PageComponent.qml:120
 #, qt-format
 msgid "Last updated %1"
-msgstr ""
+msgstr "en son %1 tarihinde güncelleştirildi"
 
 #. TRANSLATORS: %1 is the number of seconds remaining
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Yaklaşık %1 saniye kaldı"
+msgstr[1] "Yaklaşık %1 saniye kaldı"
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
-msgstr ""
+msgstr "İndirme için tahmin yok"
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
-msgstr ""
+msgstr "Duraklatıldı"
 
 #: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
-msgstr ""
+msgstr "İndirme başarısız oldu:"
 
 #: ../plugins/system-update/PageComponent.qml:205
 #: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
-msgstr ""
+msgstr "Tekrar Dene"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
-msgstr ""
+msgstr "Ubuntu Telefon"
 
 #. TRANSLATORS: %1 is the version of the update
 #: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "%1 sürümü"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
-msgstr ""
+msgstr "İndirmeyi duraklat"
 
 #: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
-msgstr ""
+msgstr "İndirmeye devam et"
 
 #: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
-msgstr ""
+msgstr "İndir"
 
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
-msgstr ""
+msgstr "Kur & Yeniden Başlat"
 
 #: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
-msgstr ""
+msgstr "Kablosuz ağda"
 
 #: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
-msgstr ""
+msgstr "Her Zaman"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -1071,11 +1089,11 @@ msgstr "Zaman dilimini ayarla:"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
-msgstr ""
+msgstr "Şu anki konumunuzu girin."
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
-msgstr ""
+msgstr "Eşleşen konum yok"
 
 #: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
@@ -1091,39 +1109,39 @@ msgstr "Tarih ve saati ayarla:"
 
 #: ../plugins/time-date/TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Zaman & tarihi ayarla"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Zaman"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Saat"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Dakika"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Saniye"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Tarih"
 
 #: ../plugins/time-date/TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Gün"
 
 #: ../plugins/time-date/TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "Ay"
 
 #: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "Yıl"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
@@ -1131,7 +1149,7 @@ msgstr "Sistem Ayarları"
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
+msgstr "Arama"
 
 #: ../src/qml/MainWindow.qml:95
 msgid "Personal"
@@ -1159,4 +1177,4 @@ msgstr "Uçak kipi"
 
 #: ../.build/settings.js:11
 msgid "Orientation lock"
-msgstr ""
+msgstr "Ekran döndürme kilidi"
