@@ -32,7 +32,7 @@ function setBackground(homeScreen, uri) {
             systemSettingsSettings.backgroundSetLast = "welcome";
         }
     }
-    //pageStack.pop();
+    pageStack.pop();
 }
 
 function updateWelcome(uri) {

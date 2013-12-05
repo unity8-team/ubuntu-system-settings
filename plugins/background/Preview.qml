@@ -101,8 +101,8 @@ ItemPage {
                 text: i18n.tr("Set wallpaper")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 onClicked: {
-                    preview.state = "destroyed";
                     preview.state = "saved";
+                    preview.state = "destroyed";
                 }
             }
         }

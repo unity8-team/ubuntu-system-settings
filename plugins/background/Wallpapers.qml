@@ -114,7 +114,6 @@ ItemPage {
                         save(homeScreen, target.uri);
                         if (activeTransfer.state === ContentTransfer.Collected)
                             activeTransfer.finalize();
-                        pageStack.pop();
                     }
                     if ((target.state === "cancelled") && (activeTransfer.state === ContentTransfer.Collected))
                     {
