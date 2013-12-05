@@ -156,6 +156,12 @@ QString Plugin::displayName() const
     return d->m_data.value(keyName).toString();
 }
 
+QString Plugin::baseName() const
+{
+    Q_D(const Plugin);
+    return d->m_baseName;
+}
+
 QUrl Plugin::icon() const
 {
     Q_D(const Plugin);

@@ -25,7 +25,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ListItem.Standard {
     id: root
 
-    iconSource: model.icon
+    objectName: "entryComponent-about"
+    icon: Qt.resolvedUrl(model.icon)
     iconFrame: false
     text: i18n.tr(model.displayName)
     progression: true
