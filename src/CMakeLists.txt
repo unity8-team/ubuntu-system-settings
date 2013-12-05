@@ -16,9 +16,16 @@ set(USS_SOURCES
     utils.cpp
 )
 
+set(QML_SOURCES
+    qml/CategoryGrid.qml
+    qml/EntryComponent.qml
+    qml/MainWindow.qml
+    qml/UncategorizedItemsView.qml
+)
+
 QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
 
-add_executable(system-settings ${USS_SOURCES} ${system-settings-resources})
+add_executable(system-settings ${USS_SOURCES} ${QML_SOURCES} ${system-settings-resources})
 qt5_use_modules(system-settings Core Gui Quick Qml)
 target_link_libraries(system-settings SystemSettings)
 install(TARGETS system-settings RUNTIME DESTINATION bin)
