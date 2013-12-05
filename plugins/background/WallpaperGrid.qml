@@ -108,10 +108,7 @@ Column {
                         Action {
                             text: i18n.tr("Remove")
                             onTriggered: {
-                                print(text);
-                                print(modelData);
                                 backgroundPanel.rmFile(modelData);
-                                actPop.hide();
                             }
                         }
                     }
