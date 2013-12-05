@@ -92,25 +92,25 @@ Column {
                         fillMode: Image.PreserveAspectCrop
                         asynchronous: true
                         smooth: true
-                        ActivityIndicator {
-                            anchors.centerIn: parent
-                            running: parent.status === Image.Loading
-                            visible: running
-                        }
+                    }
+                    ActivityIndicator {
+                        anchors.centerIn: parent
+                        running: parent.status === Image.Loading
+                        visible: running
+                    }
 
-                        MouseArea {
-                            anchors.fill: parent
-                            onPressAndHold: {
-                                console.log ("onPressAndHold: " + modelData);
-                                if (editable) {
-                                    actPop.target = itemImage;
-                                    actPop.show();
-                                }
+                    MouseArea {
+                        anchors.fill: parent
+                        onPressAndHold: {
+                            console.log ("onPressAndHold: " + modelData);
+                            if (editable) {
+                                actPop.target = itemImage;
+                                actPop.show();
                             }
-                            onClicked: {
-                                if (!actPop.visible)
-                                    selected(modelData);
-                            }
+                        }
+                        onClicked: {
+                            if (!actPop.visible)
+                                selected(modelData);
                         }
                     }
                 }
