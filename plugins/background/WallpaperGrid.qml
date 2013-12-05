@@ -43,6 +43,8 @@ Column {
     property var backgroundPanel
     signal selected (string uri)
 
+    visible: bgmodel.length > 0
+
     ListItem.Standard {
         anchors.left: parent.left
         anchors.right: parent.right
