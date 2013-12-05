@@ -8,6 +8,7 @@
 from time import sleep
 
 from autopilot.matchers import Eventually
+from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Contains, Equals, NotEquals, GreaterThan
 from unittest import skip
 
@@ -36,6 +37,9 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         # Search component
         sound = self.main_view.select_single(objectName='entryComponent-sound')
         self.assertThat(sound, NotEquals(None))
-        background = self.main_view.select_single(objectName='entryComponent-background')
+        try:
+            background = self.main_view.select_single(objectName='entryComponent-background')
+        except StateNotFoundError:
+            background = None
         self.assertThat(background, Equals(None))
  
