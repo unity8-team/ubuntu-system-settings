@@ -72,19 +72,22 @@ Column {
                     id: itemRect
                     anchors.fill: parent
                     color: UbuntuColors.orange
+                    radius: "medium"
                     visible: (current === modelData) && (itemImage.status === Image.Ready)
                     UbuntuShape {
                         anchors.fill: parent
-                        anchors.margins: units.dp(2)
+                        anchors.margins: units.dp(3)
                         color: Theme.palette.normal.background
+                        radius: parent.radius
                         visible: parent.visible
                     }
                 }
                 UbuntuShape {
                     anchors.centerIn: parent
-                    anchors.margins: (current === modelData) ? units.dp(3) : 0
+                    anchors.margins: units.dp(4)
                     width: itemWidth - (anchors.margins * 2)
                     height: itemHeight  - (anchors.margins * 2)
+                    radius: itemRect.radius
                     image: Image {
                         id: itemImage
                         source: modelData
