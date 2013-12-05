@@ -32,9 +32,6 @@ ItemPage {
     anchors.fill: parent
 
     property bool homeScreen
-    property string ubuntuArtDir: "/usr/share/backgrounds/"
-    property var ubuntuArtList: []
-    property var customList: []
     property var activeTransfer
     property var store
     property string current
