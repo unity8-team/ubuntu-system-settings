@@ -224,13 +224,8 @@ static bool
 compareLocales(const QLocale &locale0,
                const QLocale &locale1)
 {
-    QString name0(locale0.nativeLanguageName().toCaseFolded());
-    QString name1(locale1.nativeLanguageName().toCaseFolded());
-
-    if (name0 == name1) {
-        name0 = locale0.nativeCountryName().toCaseFolded();
-        name1 = locale1.nativeCountryName().toCaseFolded();
-    }
+    QString name0(locale0.bcp47Name());
+    QString name1(locale1.bcp47Name());
 
     return name0 < name1;
 }
@@ -271,17 +266,43 @@ LanguagePlugin::updateLanguageLocales()
     QString localeOutput(localeProcess.readAllStandardOutput());
     QStringList localeNames(localeOutput.split(QRegExp("\\s+")));
     QHash<QString, QString> localeNamesByBcp47Name;
-    QHash<QString, unsigned int> countsByLanguage;
 
     for (QStringList::const_iterator i(localeNames.begin()); i != localeNames.end(); ++i) {
-        QLocale locale(i->left(i->indexOf('.')));
-        QString bcp47Name(locale.bcp47Name());
+        QLocale locale(i->left(i->indexOf('.')).left(i->indexOf('_')));
         QString language(locale.nativeLanguageName());
+        QString bcp47Name(locale.bcp47Name());
+
+        if (!language.isEmpty() && !localeNamesByBcp47Name.contains(bcp47Name)) {
+            m_languageLocales += locale;
+
+            for (QStringList::const_iterator j(i); j != localeNames.end(); ++j) {
+                QLocale likelyLocale(j->left(j->indexOf('.')));
+                QString likelyBcp47Name(likelyLocale.bcp47Name());
+
+                if (likelyBcp47Name == bcp47Name) {
+                    localeNamesByBcp47Name[bcp47Name] = *j;
+                    break;
+                }
+            }
+
+            if (!localeNamesByBcp47Name.contains(bcp47Name)) {
+                int index(i->indexOf('.'));
+
+                if (index < 0) {
+                    localeNamesByBcp47Name[bcp47Name] = i->left(index).left(i->indexOf('_'));
+                } else {
+                    localeNamesByBcp47Name[bcp47Name] = i->left(index).left(i->indexOf('_')) + i->right(i->length() - index);
+                }
+            }
+        }
+
+        locale = QLocale(i->left(i->indexOf('.')));
+        language = locale.nativeLanguageName();
+        bcp47Name = locale.bcp47Name();
 
         if (!language.isEmpty() && !localeNamesByBcp47Name.contains(bcp47Name)) {
             m_languageLocales += locale;
             localeNamesByBcp47Name[bcp47Name] = *i;
-            countsByLanguage[language]++;
         }
     }
 
@@ -289,15 +310,11 @@ LanguagePlugin::updateLanguageLocales()
 
     for (int i(0); i < m_languageLocales.length(); i++) {
         const QLocale &locale(m_languageLocales[i]);
-        QString bcp47Name(locale.bcp47Name());
         QString language(locale.nativeLanguageName());
-        unsigned int count(countsByLanguage[language]);
+        QString country(locale.nativeCountryName());
+        QString bcp47Name(locale.bcp47Name());
 
-        if (count > 1)
-            m_languageNames += QString("%1 - %2").arg(language).arg(locale.nativeCountryName());
-        else
-            m_languageNames += language;
-
+        m_languageNames += QString("%1 (%2)").arg(language).arg(country);
         m_languageCodes += localeNamesByBcp47Name[bcp47Name];
         m_indicesByBcp47Name[bcp47Name] = i;
         m_indicesByLocaleName[localeNamesByBcp47Name[bcp47Name]] = i;
