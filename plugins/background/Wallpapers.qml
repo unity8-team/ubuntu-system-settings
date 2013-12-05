@@ -112,14 +112,20 @@ ItemPage {
                     if (target.state === "saved")
                     {
                         save(homeScreen, target.uri);
+                        if (activeTransfer.state === ContentTransfer.Collected)
+                            activeTransfer.finalize();
                         pageStack.pop();
+                    }
+                    if ((target.state === "cancelled") && (activeTransfer.state === ContentTransfer.Collected))
+                    {
+                        backgroundPanel.rmFile(target.uri);
+                        activeTransfer.finalize();
                     }
                 }
             }
             ListItem.Empty {}
         }
     }
-
 
     Connections {
         id: contentHubConnection
