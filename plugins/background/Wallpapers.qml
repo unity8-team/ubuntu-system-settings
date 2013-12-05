@@ -66,19 +66,20 @@ ItemPage {
         id: sourceSelector
         anchors.fill: parent
         visible: true
-        contentHeight: sourceColumn.height
+        contentHeight: sourceColumn.height + sourceColumn.anchors.bottomMargin
 
         Column {
             id: sourceColumn
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: childrenRect.height
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             spacing: units.gu(1)
 
             WallpaperGrid {
                 anchors.left: parent.left
                 anchors.right: parent.right
-                columns: 2
+                columns: 3
                 bgmodel: backgroundPanel.ubuntuArt
                 backgroundPanel: backgroundPanel
                 title: i18n.tr("Ubuntu Art")
@@ -93,7 +94,7 @@ ItemPage {
                 id: customGrid
                 anchors.left: parent.left
                 anchors.right: parent.right
-                columns: 2
+                columns: 3
                 bgmodel: backgroundPanel.customBackgrounds
                 backgroundPanel: backgroundPanel
                 title: i18n.tr("Custom")
@@ -115,6 +116,7 @@ ItemPage {
                     }
                 }
             }
+            ListItem.Empty {}
         }
     }
 

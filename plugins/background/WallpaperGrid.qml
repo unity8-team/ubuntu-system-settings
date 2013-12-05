@@ -23,18 +23,19 @@ import GSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
-//import Ubuntu.SystemSettings.Background 1.0
 
 Column {
     id: wallpaperGrid
-    anchors.left: parent.left
-    anchors.right: parent.right
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
     height: childrenRect.height
-    spacing: units.gu(2)
+    spacing: units.gu(1)
 
     property var bgmodel
     property int columns
-    property int itemWidth: (mainPage.width * 0.7) / columns
+    property int itemWidth: ((mainPage.width - (grid.spacing * (columns - 1))) - (grid.anchors.margins * 2)) / columns
     property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
     property string title
     property string current
@@ -50,9 +51,15 @@ Column {
     }
 
     Grid {
-        anchors.horizontalCenter: parent.horizontalCenter
+        id: grid
+        anchors {
+            left: parent.left
+            right: parent.right
+            margins: spacing
+        }
+
         columns: wallpaperGrid.columns
-        spacing: itemWidth * 0.2
+        spacing: units.gu(2)
         height: childrenRect.height
         Repeater {
             model: bgmodel
