@@ -66,47 +66,51 @@ Column {
             Item {
                 width: itemWidth
                 height: itemHeight
-                Rectangle {
+                UbuntuShape {
                     id: itemRect
                     anchors.fill: parent
-                    color: UbuntuColors.coolGrey
+                    color: UbuntuColors.orange
                     visible: (current === modelData) && (itemImage.status === Image.Ready)
-                    Rectangle {
+                    UbuntuShape {
                         anchors.fill: parent
-                        anchors.margins: units.dp(5)
-                        color: "white"
+                        anchors.margins: units.dp(2)
+                        color: Theme.palette.normal.background
                         visible: parent.visible
                     }
                 }
-                Image {
-                    id: itemImage
+                UbuntuShape {
                     anchors.centerIn: parent
-                    anchors.margins: (current === modelData) ? units.dp(8) : 0
-                    source: modelData
+                    anchors.margins: (current === modelData) ? units.dp(3) : 0
                     width: itemWidth - (anchors.margins * 2)
                     height: itemHeight  - (anchors.margins * 2)
-                    sourceSize.width: width
-                    sourceSize.height: height
-                    fillMode: Image.PreserveAspectCrop
-                    asynchronous: true
-                    ActivityIndicator {
-                        anchors.centerIn: parent
-                        running: parent.status === Image.Loading
-                        visible: running
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onPressAndHold: {
-                            console.log ("onPressAndHold: " + modelData);
-                            if (editable) {
-                                actPop.target = itemImage;
-                                actPop.show();
-                            }
+                    image: Image {
+                        id: itemImage
+                        source: modelData
+                        width: itemWidth - (anchors.margins * 2)
+                        height: itemHeight  - (anchors.margins * 2)
+                        sourceSize.width: 512
+                        fillMode: Image.PreserveAspectCrop
+                        asynchronous: true
+                        smooth: true
+                        ActivityIndicator {
+                            anchors.centerIn: parent
+                            running: parent.status === Image.Loading
+                            visible: running
                         }
-                        onClicked: {
-                            if (!actPop.visible)
-                                selected(modelData);
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onPressAndHold: {
+                                console.log ("onPressAndHold: " + modelData);
+                                if (editable) {
+                                    actPop.target = itemImage;
+                                    actPop.show();
+                                }
+                            }
+                            onClicked: {
+                                if (!actPop.visible)
+                                    selected(modelData);
+                            }
                         }
                     }
                 }
