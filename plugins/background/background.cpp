@@ -28,7 +28,8 @@
 
 Background::Background(QObject *parent) :
     QObject(parent),
-    m_customBackgrounds(0),
+    //m_ubuntuArt(0),
+    //m_customBackgrounds(0),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_accountsserviceIface ("org.freedesktop.Accounts",
                             "/org/freedesktop/Accounts",
@@ -52,7 +53,6 @@ Background::Background(QObject *parent) :
                                   "Changed",
                                   this,
                                   SLOT(slotChanged()));
-    this->updateCustomBackgrounds();
 }
 
 QString Background::getBackgroundFile()
@@ -119,61 +119,51 @@ QString Background::backgroundFile()
 
 QStringList Background::customBackgrounds()
 {
-    /*
     if (m_customBackgrounds.isEmpty())
     {
-        this->updateCustomBackgrounds();
+        updateCustomBackgrounds();
     }
-    */
     return m_customBackgrounds;
 }
 
 void Background::updateCustomBackgrounds()
 {
-    qDebug() << "updateCustomBackgrounds:"<< this->m_customBackgrounds;
-    this->m_customBackgrounds.clear();
-    QString dirString = QStandardPaths::writableLocation(QStandardPaths::DataLocation)+"/Pictures";
-    QDir dir(dirString);
+    m_customBackgrounds.clear();
+    QString customPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation)+"/Pictures";
+    QDir dir(customPath);
     dir.setFilter(QDir::Files | QDir::NoSymLinks);
     QFileInfoList tmpList = dir.entryInfoList();
     foreach (QFileInfo f, tmpList)
     {
-        this->m_customBackgrounds.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+        m_customBackgrounds.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
     }
-    this->m_customBackgrounds.sort();
-    Q_EMIT this->customBackgroundsChanged();
-    qDebug() << "updateCustomBackgrounds:"<< this->m_customBackgrounds;
+    Q_EMIT customBackgroundsChanged();
 }
 
-
-QStringList Background::listUbuntuArt(const QString &dirString)
+QStringList Background::ubuntuArt()
 {
-    if (m_ubuntuArtList.isEmpty())
+    if (m_ubuntuArt.isEmpty())
     {
-        QDir dir(dirString);
+        QDir dir("/usr/share/backgrounds/");
         dir.setFilter(QDir::Files | QDir::NoSymLinks);
         QFileInfoList tmpList = dir.entryInfoList();
         foreach (QFileInfo f, tmpList)
         {
             if (f.fileName() != "warty-final-ubuntu.png")
-                m_ubuntuArtList.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+                m_ubuntuArt.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
         }
+        Q_EMIT ubuntuArtChanged();
     }
-    return m_ubuntuArtList;
+    return m_ubuntuArt;
 }
-
 
 void Background::rmFile(const QString &file)
 {
-
     if (file.isEmpty() || file.isNull())
         return;
 
     if (!file.contains(QStandardPaths::writableLocation(QStandardPaths::DataLocation)))
-    {
-        qDebug() << "File can't be removed"<< file;
         return;
-    }
 
     QUrl fileUri(file);
     if (!fileUri.isLocalFile())
@@ -182,8 +172,8 @@ void Background::rmFile(const QString &file)
     QFile filePath(fileUri.path());
     if (filePath.exists())
     {
-        filePath.remove();
-        this->updateCustomBackgrounds();
+        if (filePath.remove())
+            updateCustomBackgrounds();
     }
 }
 

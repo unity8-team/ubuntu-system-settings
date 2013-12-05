@@ -42,14 +42,6 @@ Column {
     property var backgroundPanel
     signal selected (string uri)
 
-
-    /*
-    UbuntuBackgroundPanel {
-        id: backgroundPanel
-        onCustomBackgroundsChanged: console.log ("onCustomBackgroundsChanged2:" + backgroundPanel.customBackgrounds)
-    }
-    */
-
     ListItem.Standard {
         anchors.left: parent.left
         anchors.right: parent.right

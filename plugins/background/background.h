@@ -37,27 +37,32 @@ class Background : public QObject
     Q_PROPERTY( QStringList customBackgrounds
                 READ customBackgrounds
                 NOTIFY customBackgroundsChanged )
+
+    Q_PROPERTY( QStringList ubuntuArt
+                READ ubuntuArt
+                NOTIFY ubuntuArtChanged )
     
 public:
     explicit Background(QObject *parent = 0);
     ~Background();
     QString backgroundFile();
     void setBackgroundFile(QUrl backgroundFile);
-    Q_INVOKABLE QStringList listUbuntuArt(const QString &dirString);
     Q_INVOKABLE void rmFile(const QString &file);
     QStringList customBackgrounds();
-
+    QStringList ubuntuArt();
 
 public Q_SLOTS:
     void slotChanged();
 
 Q_SIGNALS:
     void backgroundFileChanged();
-    void customBackgroundsChanged();
+    virtual void customBackgroundsChanged();
+    virtual void ubuntuArtChanged();
+
 
 
 private:
-    QStringList m_ubuntuArtList;
+    QStringList m_ubuntuArt;
     QStringList m_customBackgrounds;
     void updateCustomBackgrounds();
     QString m_backgroundFile;

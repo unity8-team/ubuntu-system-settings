@@ -42,12 +42,6 @@ ItemPage {
 
     title: homeScreen ? i18n.tr("Home screen") : i18n.tr("Welcome screen")
 
-    Component.onCompleted: {
-        ubuntuArtList = backgroundPanel.listUbuntuArt(ubuntuArtDir);
-        //store = ContentHub.defaultStoreForType(ContentType.Pictures);
-        //customList = backgroundPanel.listCustomArt(store.uri);
-    }
-
     Action {
         id: selectDefaultPeer
         text: i18n.tr("Photo/Image")
@@ -85,11 +79,10 @@ ItemPage {
             spacing: units.gu(1)
 
             WallpaperGrid {
-                visible: false
                 anchors.left: parent.left
                 anchors.right: parent.right
                 columns: 2
-                bgmodel: ubuntuArtList
+                bgmodel: backgroundPanel.ubuntuArt
                 backgroundPanel: backgroundPanel
                 title: i18n.tr("Ubuntu Art")
                 current: selectSourcePage.current
