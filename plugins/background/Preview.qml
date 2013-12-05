@@ -58,6 +58,9 @@ ItemPage {
                     save();
                 }
             }
+        },
+        State {
+            name: "cancelled"
         }
     ]
 
@@ -90,6 +93,7 @@ ItemPage {
                 text: i18n.tr("Cancel")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 onClicked: {
+                    preview.state = "cancelled";
                     preview.state = "destroyed";
                 }
             }
