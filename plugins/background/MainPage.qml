@@ -38,6 +38,8 @@ ItemPage {
 
     property string homeBackground: background.pictureUri
     property string welcomeBackground: backgroundPanel.backgroundFile
+    property real swappableWidth: mainPage.width * 0.43
+    property real swappableHeight: mainPage.height * 0.4
 
     Component.onCompleted: {
         console.log ("homeBackground: " + homeBackground);
@@ -71,87 +73,109 @@ ItemPage {
         }
     }
 
-    /* TODO: We hide the welcome screen parts for v1 -
-       there's a lot of elements to hide */
-
-    Label {
-        id: welcomeLabel
-
-        anchors {
-            top: welcomeImage.bottom
-            topMargin: units.gu(1)
-            horizontalCenter: welcomeImage.horizontalCenter
-        }
-
-        text: i18n.tr("Welcome screen")
-    }
-
-    SwappableImage {
-        id: welcomeImage
-
+    Column {
+        id: previewsRow
         anchors {
             top: parent.top
             left: parent.left
-         }
-
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
-                           {homeScreen: false,
-                               backgroundPanel: backgroundPanel,
-                               current: welcomeBackground
-                            });
-
-            var curItem = pageStack.currentPage;
-            selectedItemConnection.target = curItem;
-            updateImage(testWelcomeImage, welcomeImage);
-        }
-
-        Component.onCompleted: updateImage(testWelcomeImage,
-                                           welcomeImage)
-
-        OverlayImage {
-            anchors.fill: parent
-            source: "welcomeoverlay.svg"
-        }
-    }
-
-    SwappableImage {
-        id: homeImage
-
-        anchors {
-            top: parent.top
             right: parent.right
-         }
-
-        onClicked: {
-            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
-                           {homeScreen: true,
-                               backgroundPanel: backgroundPanel,
-                               current: homeBackground
-                            });
-            var curItem = pageStack.currentPage;
-            selectedItemConnection.target = curItem;
-            updateImage(testHomeImage, homeImage);
+            topMargin: spacing
+            bottomMargin: spacing
         }
-        Component.onCompleted: updateImage(testHomeImage,
-                                           homeImage)
+        height: childrenRect.height
+        spacing: units.gu(2)
 
-        OverlayImage {
-            anchors.fill: parent
-            source: "homeoverlay.svg"
+        Row {
+            spacing: units.gu(2)
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: childrenRect.height
+            width: childrenRect.width
+
+            Item {
+                anchors.top: parent.top
+                visible: !systemSettingsSettings.backgroundDuplicate
+                height: childrenRect.height
+                width: swappableWidth
+
+                SwappableImage {
+                    id: welcomeImage
+                    anchors.top: parent.top
+                    height: swappableHeight
+                    width: swappableWidth
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
+                                       {homeScreen: false,
+                                           backgroundPanel: backgroundPanel,
+                                           current: welcomeBackground
+                                        });
+
+                        var curItem = pageStack.currentPage;
+                        selectedItemConnection.target = curItem;
+                        updateImage(testWelcomeImage, welcomeImage);
+                    }
+
+                    Component.onCompleted: updateImage(testWelcomeImage,
+                                                       welcomeImage)
+
+                    OverlayImage {
+                        anchors.fill: parent
+                        source: "welcomeoverlay.svg"
+                    }
+                }
+                Label {
+                    id: welcomeLabel
+
+                    anchors {
+                        topMargin: units.gu(1)
+                        top: welcomeImage.bottom
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                    text: i18n.tr("Welcome screen")
+                }
+            }
+
+            Item {
+                anchors.top: parent.top
+                height: childrenRect.height
+                width: swappableWidth
+                SwappableImage {
+                    id: homeImage
+                    anchors.top: parent.top
+                    height: swappableHeight
+                    width: swappableWidth
+
+                    onClicked: {
+                        pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
+                                       {homeScreen: true,
+                                           backgroundPanel: backgroundPanel,
+                                           current: homeBackground
+                                        });
+                        var curItem = pageStack.currentPage;
+                        selectedItemConnection.target = curItem;
+                        updateImage(testHomeImage, homeImage);
+                    }
+                    Component.onCompleted: updateImage(testHomeImage,
+                                                       homeImage)
+
+                    OverlayImage {
+                        anchors.fill: parent
+                        source: "homeoverlay.svg"
+                    }
+                }
+
+                Label {
+                    id: homeLabel
+
+                    anchors {
+                        top: homeImage.bottom
+                        topMargin: units.gu(1)
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    text: i18n.tr("Home screen")
+                }
+            }
         }
-    }
-
-    Label {
-        id: homeLabel
-
-        anchors {
-            top: homeImage.bottom
-            topMargin: units.gu(1)
-            horizontalCenter: homeImage.horizontalCenter
-        }
-
-        text: i18n.tr("Home screen")
     }
 
     ListItem.ThinDivider {
@@ -159,7 +183,7 @@ ItemPage {
 
         anchors {
             topMargin: units.gu(2)
-            top: welcomeLabel.bottom
+            top: previewsRow.bottom
         }
     }
 
