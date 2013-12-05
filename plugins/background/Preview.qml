@@ -78,6 +78,11 @@ ItemPage {
         fillMode: Image.PreserveAspectFit
     }
 
+    ListItem.ThinDivider {
+        anchors.bottom: previewButtons.top
+        anchors.bottomMargin: units.gu(1)
+    }
+
     ListItem.Base {
         id: previewButtons
         anchors {
@@ -85,6 +90,8 @@ ItemPage {
             right: parent.right
             bottom: parent.bottom
         }
+        showDivider: false
+
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: units.gu(2)
@@ -92,6 +99,7 @@ ItemPage {
             Button {
                 text: i18n.tr("Cancel")
                 width: (previewButtons.width-units.gu(2)*4)/2
+                gradient: UbuntuColors.greyGradient
                 onClicked: {
                     preview.state = "cancelled";
                     preview.state = "destroyed";
