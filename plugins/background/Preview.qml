@@ -39,7 +39,6 @@ ItemPage {
                 script: {
                     pageStack.currentPage.header.opacity = 0.7;
                 }
-
             }
         },
         State {
