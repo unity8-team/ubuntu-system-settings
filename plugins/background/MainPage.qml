@@ -80,7 +80,6 @@ ItemPage {
             left: parent.left
             right: parent.right
             topMargin: spacing
-            bottomMargin: spacing
         }
         height: childrenRect.height
         spacing: units.gu(2)
@@ -176,48 +175,24 @@ ItemPage {
                 }
             }
         }
-    }
 
-    ListItem.ThinDivider {
-        id: topDivider
+        ListItem.ThinDivider {}
 
-        anchors {
-            topMargin: units.gu(2)
-            top: previewsRow.bottom
-        }
-    }
+        OptionSelector {
+            id: optionSelector
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - units.gu(4)
+            expanded: true
 
-    OptionSelector {
-        id: optionSelector
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: topDivider.bottom
-            topMargin: units.gu(2)
-        }
-        width: parent.width - units.gu(4)
-        expanded: true
-
-        model: [i18n.tr("Same background for both"),
-            i18n.tr("Different background for each")]
-        //selectedIndex: systemSettingsSettings.backgroundDuplicate ? 0 : 1
-        onSelectedIndexChanged: {
-            if (selectedIndex === 0 && !systemSettingsSettings.backgroundDuplicate)
-                systemSettingsSettings.backgroundDuplicate = true;
-            else if (selectedIndex === 1 && systemSettingsSettings.backgroundDuplicate)
-                systemSettingsSettings.backgroundDuplicate = false;
-        }
-    }
-
-    Column {
-
-        id: buttonColumn
-        spacing: units.gu(1)
-
-        anchors {
-            topMargin: units.gu(2)
-            left: parent.left
-            right: parent.right
-            top: optionSelector.bottom
+            model: [i18n.tr("Same background for both"),
+                i18n.tr("Different background for each")]
+            //selectedIndex: systemSettingsSettings.backgroundDuplicate ? 0 : 1
+            onSelectedIndexChanged: {
+                if (selectedIndex === 0 && !systemSettingsSettings.backgroundDuplicate)
+                    systemSettingsSettings.backgroundDuplicate = true;
+                else if (selectedIndex === 1 && systemSettingsSettings.backgroundDuplicate)
+                    systemSettingsSettings.backgroundDuplicate = false;
+            }
         }
 
         Button {
@@ -313,7 +288,6 @@ ItemPage {
         id: selectedItemConnection
         onSave: {
             Utilities.setBackground(homeScreen, uri);
-
         }
     }
 }
