@@ -57,20 +57,27 @@ Column {
         Repeater {
             model: bgmodel
             Item {
-                width: itemWidth + units.gu(2)
-                height: itemHeight + units.gu(2)
+                width: itemWidth
+                height: itemHeight
                 Rectangle {
                     id: itemRect
                     anchors.fill: parent
                     color: UbuntuColors.coolGrey
                     visible: (current === modelData) && (itemImage.status === Image.Ready)
+                    Rectangle {
+                        anchors.fill: parent
+                        anchors.margins: units.dp(5)
+                        color: "white"
+                        visible: parent.visible
+                    }
                 }
                 Image {
                     id: itemImage
                     anchors.centerIn: parent
+                    anchors.margins: (current === modelData) ? units.dp(8) : 0
                     source: modelData
-                    width: itemWidth
-                    height: itemHeight
+                    width: itemWidth - (anchors.margins * 2)
+                    height: itemHeight  - (anchors.margins * 2)
                     sourceSize.width: width
                     sourceSize.height: height
                     fillMode: Image.PreserveAspectCrop
