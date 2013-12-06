@@ -45,7 +45,6 @@ ItemPage {
             name: "saved"
             StateChangeScript {
                 script: {
-                    print("saved");
                     save();
                     pageStack.pop();
                 }
@@ -55,7 +54,6 @@ ItemPage {
             name: "cancelled"
             StateChangeScript {
                 script: {
-                    print("cancelled");
                     pageStack.pop();
                 }
             }
