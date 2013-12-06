@@ -29,7 +29,10 @@ Item {
     Image {
         anchors.fill: parent
         source: overlayImage.source
+        sourceSize.width: parent.width
+        sourceSize.height: parent.height
         fillMode: Image.PreserveAspectCrop
         verticalAlignment: Image.AlignTop
+        smooth: true
     }
 }
