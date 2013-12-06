@@ -59,7 +59,6 @@ Column {
             right: parent.right
             margins: spacing
         }
-
         columns: wallpaperGrid.columns
         spacing: units.dp(1)
         height: childrenRect.height
@@ -96,34 +95,32 @@ Column {
                         running: parent.status === Image.Loading
                         visible: running
                     }
-
+                    /* create an empty item centered in the image to align the popover to */
+                    Item {
+                        id: emptyItemForCaller
+                        anchors.centerIn: parent
+                    }
                     MouseArea {
                         anchors.fill: parent
                         onPressAndHold: {
-                            if (editable) {
-                                actPop.target = itemImage;
+                            if (editable)
                                 actPop.show();
-                            }
                         }
                         onClicked: {
                             if (!actPop.visible)
                                 selected(modelData);
                         }
                     }
-                }
-                ActionSelectionPopover {
-                    id: actPop
-                    target: parent
-                    pointerTarget: parent
-                    dismissArea: parent
-                    delegate: ListItem.Standard {
-                        text: action.text
-                    }
-                    actions: ActionList {
-                        Action {
-                            text: i18n.tr("Remove")
-                            onTriggered: {
-                                backgroundPanel.rmFile(modelData);
+                    ActionSelectionPopover {
+                        id: actPop
+                        caller: emptyItemForCaller
+                        delegate: ListItem.Standard {
+                            text: action.text
+                        }
+                        actions: ActionList {
+                            Action {
+                                text: i18n.tr("Remove")
+                                onTriggered: backgroundPanel.rmFile(modelData)
                             }
                         }
                     }
