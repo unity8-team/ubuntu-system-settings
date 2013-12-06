@@ -61,7 +61,7 @@ Column {
         }
 
         columns: wallpaperGrid.columns
-        spacing: units.gu(1)
+        spacing: units.dp(1)
         height: childrenRect.height
         Repeater {
             model: bgmodel
