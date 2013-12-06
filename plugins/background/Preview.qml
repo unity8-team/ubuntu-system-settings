@@ -31,41 +31,36 @@ ItemPage {
     signal save
 
     tools: null
+    Component.onCompleted: {
+        /* change the header text color to make it more readable over the background */
+        header.__styleInstance.textColor = Theme.palette.selected.foregroundText;
+    }
+
+    Component.onDestruction: {
+        header.__styleInstance.textColor = Theme.palette.selected.backgroundText;
+    }
 
     states: [
         State {
-            name: "showing"
+            name: "saved"
             StateChangeScript {
                 script: {
-                    pageStack.currentPage.header.opacity = 0.7;
-                }
-            }
-        },
-        State {
-            name: "destroyed"
-            StateChangeScript {
-                script: {
-                    pageStack.currentPage.header.opacity = 1.0;
+                    print("saved");
+                    save();
                     pageStack.pop();
                 }
             }
         },
         State {
-            name: "saved"
+            name: "cancelled"
             StateChangeScript {
                 script: {
-                    save();
+                    print("cancelled");
+                    pageStack.pop();
                 }
             }
-        },
-        State {
-            name: "cancelled"
         }
     ]
-
-    Component.onCompleted: {
-        state = "showing";
-    }
 
     title: i18n.tr("Preview")
 
@@ -101,7 +96,6 @@ ItemPage {
                 gradient: UbuntuColors.greyGradient
                 onClicked: {
                     preview.state = "cancelled";
-                    preview.state = "destroyed";
                 }
             }
             Button {
@@ -109,10 +103,20 @@ ItemPage {
                 width: (previewButtons.width-units.gu(2)*4)/2
                 onClicked: {
                     preview.state = "saved";
-                    preview.state = "destroyed";
                 }
             }
         }
     }
 
+    /* Make the header slightly darker to ease readability on light backgrounds */
+    Rectangle {
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+        color: "black"
+        opacity: 0.3
+        height: preview.header.height
+    }
 }
