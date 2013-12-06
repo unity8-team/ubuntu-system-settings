@@ -102,7 +102,8 @@ ItemPage {
                     width: swappableWidth
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
-                                       {homeScreen: false,
+                                       {homeScreen: systemSettingsSettings.backgroundDuplicate ? true : false,
+                                           useSame: systemSettingsSettings.backgroundDuplicate,
                                            backgroundPanel: backgroundPanel,
                                            current: welcomeBackground
                                         });
@@ -145,6 +146,7 @@ ItemPage {
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
                                        {homeScreen: true,
+                                           useSame: systemSettingsSettings.backgroundDuplicate,
                                            backgroundPanel: backgroundPanel,
                                            current: homeBackground
                                         });

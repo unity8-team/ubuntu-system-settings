@@ -32,12 +32,13 @@ ItemPage {
     anchors.fill: parent
 
     property bool homeScreen
+    property bool useSame
     property var activeTransfer
     property var store
     property string current
     signal save (bool homeScreen, string uri)
 
-    title: homeScreen ? i18n.tr("Home Screen") : i18n.tr("Welcome Screen")
+    title: useSame ? i18n.tr("Choose Background") : homeScreen ? i18n.tr("Home Screen") : i18n.tr("Welcome Screen")
 
     Action {
         id: selectDefaultPeer
