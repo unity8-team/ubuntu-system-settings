@@ -21,6 +21,7 @@ set(QML_SOURCES
     qml/EntryComponent.qml
     qml/MainWindow.qml
     qml/UncategorizedItemsView.qml
+    SystemSettings/ItemPage.qml
 )
 
 QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
