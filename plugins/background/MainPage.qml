@@ -84,95 +84,113 @@ ItemPage {
         height: childrenRect.height
         spacing: units.gu(2)
 
-        Row {
-            spacing: units.gu(2)
+        Item {
             anchors.horizontalCenter: parent.horizontalCenter
-            height: childrenRect.height
-            width: childrenRect.width
-
-            Item {
-                anchors.top: parent.top
+            height: thumbRow.height
+            width: thumbRow.width
+            Row {
+                id: thumbRow
+                spacing: units.gu(2)
                 height: childrenRect.height
-                width: swappableWidth
+                width: childrenRect.width
 
-                SwappableImage {
-                    id: welcomeImage
+                Item {
                     anchors.top: parent.top
-                    height: swappableHeight
+                    height: childrenRect.height
                     width: swappableWidth
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
-                                       {homeScreen: systemSettingsSettings.backgroundDuplicate ? true : false,
-                                           useSame: systemSettingsSettings.backgroundDuplicate,
-                                           backgroundPanel: backgroundPanel,
-                                           current: welcomeBackground
-                                        });
 
-                        var curItem = pageStack.currentPage;
-                        selectedItemConnection.target = curItem;
-                        updateImage(testWelcomeImage, welcomeImage);
+                    SwappableImage {
+                        id: welcomeImage
+                        anchors.top: parent.top
+                        height: swappableHeight
+                        width: swappableWidth
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
+                                           {homeScreen: systemSettingsSettings.backgroundDuplicate ? true : false,
+                                               useSame: systemSettingsSettings.backgroundDuplicate,
+                                               backgroundPanel: backgroundPanel,
+                                               current: welcomeBackground
+                                            });
+
+                            var curItem = pageStack.currentPage;
+                            selectedItemConnection.target = curItem;
+                            updateImage(testWelcomeImage, welcomeImage);
+                        }
+
+                        Component.onCompleted: updateImage(testWelcomeImage,
+                                                           welcomeImage)
+
+                        OverlayImage {
+                            anchors.fill: parent
+                            source: "welcomeoverlay.svg"
+                        }
                     }
+                    Label {
+                        id: welcomeLabel
 
-                    Component.onCompleted: updateImage(testWelcomeImage,
-                                                       welcomeImage)
-
-                    OverlayImage {
-                        anchors.fill: parent
-                        source: "welcomeoverlay.svg"
+                        anchors {
+                            topMargin: units.gu(1)
+                            top: welcomeImage.bottom
+                            horizontalCenter: parent.horizontalCenter
+                        }
+                        text: i18n.tr("Welcome screen")
                     }
                 }
-                Label {
-                    id: welcomeLabel
 
-                    anchors {
-                        topMargin: units.gu(1)
-                        top: welcomeImage.bottom
-                        horizontalCenter: parent.horizontalCenter
+                Item {
+                    anchors.top: parent.top
+                    height: childrenRect.height
+                    width: swappableWidth
+                    SwappableImage {
+                        id: homeImage
+                        anchors.top: parent.top
+                        height: swappableHeight
+                        width: swappableWidth
+
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
+                                           {homeScreen: true,
+                                               useSame: systemSettingsSettings.backgroundDuplicate,
+                                               backgroundPanel: backgroundPanel,
+                                               current: homeBackground
+                                            });
+                            var curItem = pageStack.currentPage;
+                            selectedItemConnection.target = curItem;
+                            updateImage(testHomeImage, homeImage);
+                        }
+                        Component.onCompleted: updateImage(testHomeImage,
+                                                           homeImage)
+
+                        OverlayImage {
+                            anchors.fill: parent
+                            source: "homeoverlay.svg"
+                        }
                     }
-                    text: i18n.tr("Welcome screen")
+
+                    Label {
+                        id: homeLabel
+
+                        anchors {
+                            top: homeImage.bottom
+                            topMargin: units.gu(1)
+                            horizontalCenter: parent.horizontalCenter
+                        }
+
+                        text: i18n.tr("Home screen")
+                    }
                 }
+
             }
-
-            Item {
-                anchors.top: parent.top
-                height: childrenRect.height
-                width: swappableWidth
-                SwappableImage {
-                    id: homeImage
-                    anchors.top: parent.top
-                    height: swappableHeight
-                    width: swappableWidth
-
-                    onClicked: {
-                        pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
-                                       {homeScreen: true,
-                                           useSame: systemSettingsSettings.backgroundDuplicate,
-                                           backgroundPanel: backgroundPanel,
-                                           current: homeBackground
-                                        });
-                        var curItem = pageStack.currentPage;
-                        selectedItemConnection.target = curItem;
-                        updateImage(testHomeImage, homeImage);
-                    }
-                    Component.onCompleted: updateImage(testHomeImage,
-                                                       homeImage)
-
-                    OverlayImage {
-                        anchors.fill: parent
-                        source: "homeoverlay.svg"
-                    }
+            MouseArea {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
                 }
-
-                Label {
-                    id: homeLabel
-
-                    anchors {
-                        top: homeImage.bottom
-                        topMargin: units.gu(1)
-                        horizontalCenter: parent.horizontalCenter
-                    }
-
-                    text: i18n.tr("Home screen")
+                height: swappableHeight
+                visible: systemSettingsSettings.backgroundDuplicate
+                onClicked: {
+                    homeImage.clicked();
                 }
             }
         }
