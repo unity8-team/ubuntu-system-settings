@@ -19,8 +19,6 @@
  */
 
 function setBackground(homeScreen, uri) {
-    console.log ("setBackground: " + uri);
-    console.log ("systemSettingsSettings.backgroundDuplicate: " + systemSettingsSettings.backgroundDuplicate);
     if (systemSettingsSettings.backgroundDuplicate) {
         updateBoth(uri);
     } else {
@@ -36,17 +34,14 @@ function setBackground(homeScreen, uri) {
 }
 
 function updateWelcome(uri) {
-    console.log ("updateWelcome: " + uri);
     backgroundPanel.backgroundFile = uri;
 }
 
 function updateHome(uri) {
-    console.log ("updateHome: " + uri);
     background.pictureUri = uri;
 }
 
 function updateBoth(uri) {
-    console.log ("updateBoth: " + uri);
     updateWelcome(uri);
     updateHome(uri);
 }

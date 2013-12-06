@@ -60,7 +60,6 @@ ItemPage {
 
     UbuntuBackgroundPanel {
         id: backgroundPanel
-        onCustomBackgroundsChanged: console.log ("onCustomBackgroundsChanged:" + backgroundPanel.customBackgrounds)
     }
 
     Flickable {

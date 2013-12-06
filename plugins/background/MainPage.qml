@@ -41,11 +41,6 @@ ItemPage {
     property real swappableWidth: mainPage.width * 0.43
     property real swappableHeight: mainPage.height * 0.4
 
-    Component.onCompleted: {
-        console.log ("homeBackground: " + homeBackground);
-        console.log ("welcomeBackground: " + welcomeBackground);
-    }
-
     UbuntuBackgroundPanel {
         id: backgroundPanel
 
@@ -67,7 +62,6 @@ ItemPage {
         id: background
         schema.id: "org.gnome.desktop.background"
         onChanged: {
-            console.log ("onChanged: " + key + " = " + value);
             if (key == "pictureUri")
                 testHomeImage.source = value
         }

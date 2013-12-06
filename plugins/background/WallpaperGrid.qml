@@ -100,7 +100,6 @@ Column {
                     MouseArea {
                         anchors.fill: parent
                         onPressAndHold: {
-                            console.log ("onPressAndHold: " + modelData);
                             if (editable) {
                                 actPop.target = itemImage;
                                 actPop.show();
