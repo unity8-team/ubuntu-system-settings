@@ -92,7 +92,6 @@ ItemPage {
 
             Item {
                 anchors.top: parent.top
-                visible: !systemSettingsSettings.backgroundDuplicate
                 height: childrenRect.height
                 width: swappableWidth
 
