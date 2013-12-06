@@ -23,6 +23,7 @@ Item {
     }
     Label {
         id: sizelabel
+        objectName: "sizeLabel"
         anchors.right: parent.right
         text: backendInfo.formatSize(value)
         visible: ready
