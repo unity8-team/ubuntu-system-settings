@@ -97,7 +97,7 @@ ItemPage {
                 }
             }
             Button {
-                text: i18n.tr("Set wallpaper")
+                text: i18n.tr("Set")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 onClicked: {
                     preview.state = "saved";
