@@ -59,8 +59,6 @@ Q_SIGNALS:
     void customBackgroundsChanged();
     void ubuntuArtChanged();
 
-
-
 private:
     QStringList m_ubuntuArt;
     QStringList m_customBackgrounds;
