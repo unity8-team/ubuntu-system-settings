@@ -29,15 +29,19 @@ ItemPage {
 
     property string uri
     signal save
+    property Item headerStyle: header.__styleInstance ?
+                                   header.__styleInstance : null
 
     tools: null
     Component.onCompleted: {
         /* change the header text color to make it more readable over the background */
-        header.__styleInstance.textColor = Theme.palette.selected.foregroundText;
+        if (headerStyle.hasOwnProperty("textColor"))
+            headerStyle.textColor = Theme.palette.selected.foregroundText;
     }
 
     Component.onDestruction: {
-        header.__styleInstance.textColor = Theme.palette.selected.backgroundText;
+        if (headerStyle.hasOwnProperty("textColor"))
+            headerStyle.textColor = Theme.palette.selected.backgroundText;
     }
 
     states: [
