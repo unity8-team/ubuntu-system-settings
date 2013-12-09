@@ -226,7 +226,21 @@ static bool
 compareLocales(const QLocale &locale0,
                const QLocale &locale1)
 {
-    return locale0.bcp47Name() < locale1.bcp47Name();
+    QString bcp47Name0(locale0.bcp47Name());
+    QString bcp47Name1(locale1.bcp47Name());
+
+    if (bcp47Name0.indexOf('_') < 0 || bcp47Name1.indexOf('_') < 0)
+        return bcp47Name0 < bcp47Name1;
+
+    icu::Locale displayLocale0(qPrintable(bcp47Name0));
+    icu::Locale displayLocale1(qPrintable(bcp47Name1));
+    icu::UnicodeString displayName0;
+    icu::UnicodeString displayName1;
+
+    displayLocale0.getDisplayName(displayLocale0, displayName0);
+    displayLocale1.getDisplayName(displayLocale1, displayName1);
+
+    return displayName0 < displayName1;
 }
 
 static bool
