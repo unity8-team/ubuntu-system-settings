@@ -50,7 +50,7 @@ ItemPage {
                 testWelcomeImage.source = source;
             }
             if (testWelcomeImage.source == "") {
-                testWelcomeImage.source = testWelcomeImage.fallback
+                testWelcomeImage.source = testWelcomeImage.fallback;
             }
         }
 
@@ -229,9 +229,9 @@ ItemPage {
        fallback if it isn't. */
     function updateImage(testImage, targetImage) {
         if (testImage.status === Image.Ready) {
-            targetImage.source = testImage.source
+            targetImage.source = testImage.source;
         } else if (testImage.status === Image.Error) {
-            targetImage.source = testImage.fallback
+            targetImage.source = testImage.fallback;
         }
     }
 
