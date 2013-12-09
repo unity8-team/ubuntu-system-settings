@@ -38,8 +38,8 @@ ItemPage {
     property string current
     signal save (bool homeScreen, string uri)
 
-    title: useSame ? i18n.tr("Choose Background") : homeScreen ?
-                         i18n.tr("Home Screen") : i18n.tr("Welcome Screen")
+    title: useSame ? i18n.tr("Choose background") : homeScreen ?
+                         i18n.tr("Home screen") : i18n.tr("Welcome screen")
 
     Action {
         id: selectDefaultPeer
