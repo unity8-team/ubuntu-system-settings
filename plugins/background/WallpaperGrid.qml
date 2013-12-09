@@ -56,7 +56,7 @@ Column {
         anchors {
             left: parent.left
             right: parent.right
-            margins: spacing
+            margins: units.gu(2)
         }
         columns: wallpaperGrid.columns
         spacing: units.dp(1)
