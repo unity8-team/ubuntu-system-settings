@@ -207,21 +207,6 @@ ItemPage {
                     systemSettingsSettings.backgroundDuplicate = false;
             }
         }
-
-        Button {
-            text: i18n.tr("Use original background")
-            width: parent.width - units.gu(4)
-            anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                // Reset all of the settings
-                background.schema.reset('pictureUri')
-                systemSettingsSettings.backgroundPreviouslySetValue =
-                        background.pictureUri
-                backgroundPanel.backgroundFile = background.pictureUri
-                systemSettingsSettings.backgroundSetLast = "home"
-                optionSelector.selectedIndex = 0 // Same
-            }
-        }
     }
 
     /* We don't have a good way of doing this after passing an invalid image to
