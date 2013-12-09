@@ -63,7 +63,7 @@ ItemPage {
         schema.id: "org.gnome.desktop.background"
         onChanged: {
             if (key == "pictureUri")
-                testHomeImage.source = value
+                testHomeImage.source = value;
         }
     }
 
@@ -183,9 +183,7 @@ ItemPage {
                 }
                 height: swappableHeight
                 visible: systemSettingsSettings.backgroundDuplicate
-                onClicked: {
-                    homeImage.clicked();
-                }
+                onClicked: homeImage.clicked()
             }
         }
 
@@ -225,7 +223,7 @@ ItemPage {
 
         function update(uri) {
             // Will update source
-            Utilities.updateWelcome(uri)
+            Utilities.updateWelcome(uri);
         }
 
         property string fallback: defaultBackground
@@ -238,7 +236,7 @@ ItemPage {
 
         function update(uri) {
             // Will update source
-            Utilities.updateHome(uri)
+            Utilities.updateHome(uri);
         }
 
         property string fallback: defaultBackground
@@ -256,13 +254,13 @@ ItemPage {
         if (systemSettingsSettings.backgroundDuplicate) { //same
             /* save value of least recently changed to restore later */
             systemSettingsSettings.backgroundPreviouslySetValue =
-                    leastRecent.source
+                    leastRecent.source;
             /* copy most recently changed to least recently changed */
-            leastRecent.update(mostRecent.source)
+            leastRecent.update(mostRecent.source);
         } else { // different
             /* restore least recently changed to previous value */
             leastRecent.update(
-                    systemSettingsSettings.backgroundPreviouslySetValue)
+                    systemSettingsSettings.backgroundPreviouslySetValue);
         }
     }
 
@@ -270,9 +268,8 @@ ItemPage {
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
-            if (key == "backgroundDuplicate") {
-                setUpImages()
-            }
+            if (key == "backgroundDuplicate")
+                setUpImages();
         }
         Component.onCompleted: {
             if (systemSettingsSettings.backgroundDuplicate)
@@ -284,8 +281,6 @@ ItemPage {
 
     Connections {
         id: selectedItemConnection
-        onSave: {
-            Utilities.setBackground(homeScreen, uri);
-        }
+        onSave: Utilities.setBackground(homeScreen, uri)
     }
 }
