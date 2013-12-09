@@ -38,8 +38,8 @@ ItemPage {
 
     property string homeBackground: background.pictureUri
     property string welcomeBackground: backgroundPanel.backgroundFile
-    property real swappableWidth: mainPage.width * 0.43
-    property real swappableHeight: mainPage.height * 0.4
+    property real thumbWidth: mainPage.width * 0.43
+    property real thumbHeight: mainPage.height * 0.4
 
     UbuntuBackgroundPanel {
         id: backgroundPanel
@@ -91,13 +91,13 @@ ItemPage {
                 Item {
                     anchors.top: parent.top
                     height: childrenRect.height
-                    width: swappableWidth
+                    width: thumbWidth
 
                     SwappableImage {
                         id: welcomeImage
                         anchors.top: parent.top
-                        height: swappableHeight
-                        width: swappableWidth
+                        height: thumbHeight
+                        width: thumbWidth
                         onClicked: {
                             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
                                            {homeScreen: systemSettingsSettings.backgroundDuplicate ? true : false,
@@ -134,12 +134,12 @@ ItemPage {
                 Item {
                     anchors.top: parent.top
                     height: childrenRect.height
-                    width: swappableWidth
+                    width: thumbWidth
                     SwappableImage {
                         id: homeImage
                         anchors.top: parent.top
-                        height: swappableHeight
-                        width: swappableWidth
+                        height: thumbHeight
+                        width: thumbWidth
 
                         onClicked: {
                             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
@@ -181,7 +181,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                height: swappableHeight
+                height: thumbHeight
                 visible: systemSettingsSettings.backgroundDuplicate
                 onClicked: homeImage.clicked()
             }
