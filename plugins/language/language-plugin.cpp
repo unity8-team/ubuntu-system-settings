@@ -19,8 +19,10 @@
  */
 
 #include "language-plugin.h"
-#include <act/act.h>
 #include "keyboard-layout.h"
+
+#include <act/act.h>
+#include <unicode/locid.h>
 
 #define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
 
@@ -105,7 +107,7 @@ LanguagePlugin::currentLanguage() const
 void
 LanguagePlugin::setCurrentLanguage(int index)
 {
-    if (index >= 0 && index < m_languageLocales.length()) {
+    if (index >= 0 && index < m_languageCodes.length()) {
         m_nextCurrentLanguage = index;
 
         updateCurrentLanguage();
@@ -224,10 +226,7 @@ static bool
 compareLocales(const QLocale &locale0,
                const QLocale &locale1)
 {
-    QString name0(locale0.bcp47Name());
-    QString name1(locale1.bcp47Name());
-
-    return name0 < name1;
+    return locale0.bcp47Name() < locale1.bcp47Name();
 }
 
 static bool
@@ -253,7 +252,6 @@ compareLayouts(const KeyboardLayout *layout0,
 void
 LanguagePlugin::updateLanguageLocales()
 {
-    m_languageLocales.clear();
     m_languageNames.clear();
     m_languageCodes.clear();
     m_indicesByBcp47Name.clear();
@@ -266,6 +264,7 @@ LanguagePlugin::updateLanguageLocales()
     QString localeOutput(localeProcess.readAllStandardOutput());
     QStringList localeNames(localeOutput.split(QRegExp("\\s+")));
     QHash<QString, QString> localeNamesByBcp47Name;
+    QList<QLocale> languageLocales;
 
     for (QStringList::const_iterator i(localeNames.begin()); i != localeNames.end(); ++i) {
         QLocale locale(i->left(i->indexOf('.')).left(i->indexOf('_')));
@@ -273,7 +272,7 @@ LanguagePlugin::updateLanguageLocales()
         QString bcp47Name(locale.bcp47Name());
 
         if (!language.isEmpty() && !localeNamesByBcp47Name.contains(bcp47Name)) {
-            m_languageLocales += locale;
+            languageLocales += locale;
 
             for (QStringList::const_iterator j(i); j != localeNames.end(); ++j) {
                 QLocale likelyLocale(j->left(j->indexOf('.')));
@@ -301,23 +300,29 @@ LanguagePlugin::updateLanguageLocales()
         bcp47Name = locale.bcp47Name();
 
         if (!language.isEmpty() && !localeNamesByBcp47Name.contains(bcp47Name)) {
-            m_languageLocales += locale;
+            languageLocales += locale;
             localeNamesByBcp47Name[bcp47Name] = *i;
         }
     }
 
-    qSort(m_languageLocales.begin(), m_languageLocales.end(), compareLocales);
+    qSort(languageLocales.begin(), languageLocales.end(), compareLocales);
 
-    for (int i(0); i < m_languageLocales.length(); i++) {
-        const QLocale &locale(m_languageLocales[i]);
-        QString language(locale.nativeLanguageName());
-        QString country(locale.nativeCountryName());
+    for (int i(0); i < languageLocales.length(); i++) {
+        const QLocale &locale(languageLocales[i]);
         QString bcp47Name(locale.bcp47Name());
+        QString localeName(localeNamesByBcp47Name[bcp47Name]);
 
-        m_languageNames += QString("%1 (%2)").arg(language).arg(country);
-        m_languageCodes += localeNamesByBcp47Name[bcp47Name];
+        icu::Locale queryLocale(qPrintable(localeName));
+        icu::UnicodeString displayName;
+        std::string languageName;
+
+        queryLocale.getDisplayName(queryLocale, displayName);
+        displayName.toUTF8String(languageName);
+
+        m_languageNames += languageName.c_str();
+        m_languageCodes += localeName;
         m_indicesByBcp47Name[bcp47Name] = i;
-        m_indicesByLocaleName[localeNamesByBcp47Name[bcp47Name]] = i;
+        m_indicesByLocaleName[localeName] = i;
     }
 }
 
