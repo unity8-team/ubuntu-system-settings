@@ -20,10 +20,10 @@
 
 import QtQuick 2.0
 import GSettings 1.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Content 0.1
-import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
 
 ItemPage {
@@ -38,7 +38,8 @@ ItemPage {
     property string current
     signal save (bool homeScreen, string uri)
 
-    title: useSame ? i18n.tr("Choose Background") : homeScreen ? i18n.tr("Home Screen") : i18n.tr("Welcome Screen")
+    title: useSame ? i18n.tr("Choose Background") : homeScreen ?
+                         i18n.tr("Home Screen") : i18n.tr("Welcome Screen")
 
     Action {
         id: selectDefaultPeer
@@ -109,14 +110,13 @@ ItemPage {
             Connections {
                 id: selectedItemConnection
                 onStateChanged: {
-                    if (target.state === "saved")
-                    {
+                    if (target.state === "saved") {
                         save(homeScreen, target.uri);
                         if (activeTransfer.state === ContentTransfer.Collected)
                             activeTransfer.finalize();
                     }
-                    if ((target.state === "cancelled") && (activeTransfer.state === ContentTransfer.Collected))
-                    {
+                    if ((target.state === "cancelled") &&
+                        (activeTransfer.state === ContentTransfer.Collected)) {
                         backgroundPanel.rmFile(target.uri);
                         activeTransfer.finalize();
                     }
@@ -146,8 +146,7 @@ ItemPage {
         var transfer = ContentHub.importContent(
                     ContentType.Pictures,
                     ContentHub.defaultSourceForType(ContentType.Pictures));
-        if (transfer != null)
-        {
+        if (transfer != null) {
             transfer.selectionType = ContentTransfer.Single;
             store = ContentHub.defaultStoreForType(ContentType.Pictures);
             transfer.setStore(store);

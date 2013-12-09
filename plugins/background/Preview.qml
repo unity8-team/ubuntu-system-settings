@@ -19,9 +19,9 @@
 */
 
 import QtQuick 2.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import SystemSettings 1.0
 
 ItemPage {
     id: preview
@@ -92,16 +92,12 @@ ItemPage {
                 text: i18n.tr("Cancel")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 gradient: UbuntuColors.greyGradient
-                onClicked: {
-                    preview.state = "cancelled";
-                }
+                onClicked: preview.state = "cancelled"
             }
             Button {
                 text: i18n.tr("Set")
                 width: (previewButtons.width-units.gu(2)*4)/2
-                onClicked: {
-                    preview.state = "saved";
-                }
+                onClicked: preview.state = "saved"
             }
         }
     }
