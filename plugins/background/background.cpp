@@ -28,8 +28,6 @@
 
 Background::Background(QObject *parent) :
     QObject(parent),
-    //m_ubuntuArt(0),
-    //m_customBackgrounds(0),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_accountsserviceIface ("org.freedesktop.Accounts",
                             "/org/freedesktop/Accounts",
