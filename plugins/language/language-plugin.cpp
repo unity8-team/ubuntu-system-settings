@@ -359,11 +359,15 @@ LanguagePlugin::updateCurrentLanguage()
             act_user_set_language(m_user, qPrintable(languageCode.left(languageCode.indexOf('.'))));
             act_user_set_formats_locale(m_user, qPrintable(languageCode));
         } else {
+            m_currentLanguage = indexForLocale(act_user_get_formats_locale(m_user));
+
+            if (m_currentLanguage < 0)
+                m_currentLanguage = indexForLocale(act_user_get_language(m_user));
         }
     }
 
-    if (m_currentLanguage < 0) {
-    }
+    if (m_currentLanguage < 0)
+        m_currentLanguage = indexForLocale(QLocale::system().name());
 
     if (m_currentLanguage != previousLanguage)
         Q_EMIT currentLanguageChanged();
@@ -449,6 +453,29 @@ LanguagePlugin::updateSpellCheckingModel()
     m_spellCheckingModel.setAllowEmpty(false);
 
     connect(&m_spellCheckingModel, SIGNAL(subsetChanged()), SLOT(spellCheckingModelChanged()));
+}
+
+int
+LanguagePlugin::indexForLocale(const QString &name)
+{
+    int bestMatch(-1);
+
+    QString localeName(name.left(name.indexOf('.')));
+    QString localePrefix(localeName.left(localeName.indexOf('_')));
+
+    for (int i(0); i < m_languageCodes.length(); i++) {
+        QString languageCode(m_languageCodes[i].left(m_languageCodes[i].indexOf('.')));
+
+        if (languageCode == localeName)
+            return i;
+
+        QString languagePrefix(languageCode.left(languageCode.indexOf('_')));
+
+        if (bestMatch < 0 && languagePrefix == localePrefix)
+            bestMatch = i;
+    }
+
+    return bestMatch;
 }
 
 void

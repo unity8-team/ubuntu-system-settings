@@ -133,6 +133,8 @@ private:
     void updateKeyboardLayoutsModel();
     void updateSpellCheckingModel();
 
+    int indexForLocale(const QString &name);
+
     void userLoaded();
 
     friend void userLoaded(GObject    *object,
