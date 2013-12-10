@@ -53,6 +53,7 @@ MainView {
 
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
+        i18n.bindtextdomain("ubuntu-system-settings", i18nDirectory)
         pageStack.push(mainPage)
         if (defaultPlugin) {
             if (!loadPluginByName(defaultPlugin))
