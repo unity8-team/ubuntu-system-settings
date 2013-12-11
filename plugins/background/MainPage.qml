@@ -20,11 +20,11 @@
 
 import QtQuick 2.0
 import GSettings 1.0
+import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.Content 0.1
-import SystemSettings 1.0
 import Ubuntu.SystemSettings.Background 1.0
+import "utilities.js" as Utilities
 
 ItemPage {
     id: mainPage
@@ -36,15 +36,22 @@ ItemPage {
             "/usr/share/unity8/graphics/tablet_background.jpg" :
             "/usr/share/unity8/graphics/phone_background.jpg"
 
+    property string homeBackground: background.pictureUri
+    property string welcomeBackground: backgroundPanel.backgroundFile
+    property real thumbWidth: mainPage.width * 0.43
+    property real thumbHeight: mainPage.height * 0.4
+
     UbuntuBackgroundPanel {
         id: backgroundPanel
 
         function maybeUpdateSource() {
             var source = backgroundPanel.backgroundFile
-            if (source != "" && source != undefined)
-                testWelcomeImage.source = source
-            else if (testWelcomeImage.source == "")
-                testWelcomeImage.source = testWelcomeImage.fallback
+            if (source != "" && source != undefined) {
+                testWelcomeImage.source = source;
+            }
+            if (testWelcomeImage.source == "") {
+                testWelcomeImage.source = testWelcomeImage.fallback;
+            }
         }
 
         onBackgroundFileChanged: maybeUpdateSource()
@@ -56,152 +63,146 @@ ItemPage {
         schema.id: "org.gnome.desktop.background"
         onChanged: {
             if (key == "pictureUri")
-                testHomeImage.source = value
-        }
-    }
-
-    function updateWelcome(imageUrl) {
-        backgroundPanel.backgroundFile = imageUrl
-    }
-
-    function updateHome(imageUrl) {
-        background.pictureUri = imageUrl
-    }
-
-    function updateBoth(imageUrl) {
-        updateWelcome(imageUrl)
-        updateHome(imageUrl)
-    }
-
-    /* TODO: We hide the welcome screen parts for v1 -
-       there's a lot of elements to hide */
-
-    Label {
-        id: welcomeLabel
-
-        anchors {
-            top: welcomeImage.bottom
-            topMargin: units.gu(1)
-            horizontalCenter: welcomeImage.horizontalCenter
-        }
-
-        text: i18n.tr("Welcome screen")
-    }
-
-    SwappableImage {
-        id: welcomeImage
-
-        anchors {
-            top: parent.top
-            left: parent.left
-         }
-
-        onClicked: startContentTransfer(function(url) {
-            if (systemSettingsSettings.backgroundDuplicate) {
-                updateBoth(url)
-            } else {
-                updateWelcome(url)
-                systemSettingsSettings.backgroundSetLast = "welcome"
-            }
-        })
-        Component.onCompleted: updateImage(testWelcomeImage,
-                                           welcomeImage)
-
-        OverlayImage {
-            anchors.fill: parent
-            source: "welcomeoverlay.svg"
-        }
-    }
-
-    SwappableImage {
-        id: homeImage
-
-        anchors {
-            top: parent.top
-            right: parent.right
-         }
-
-        onClicked: startContentTransfer(function(url) {
-            if (systemSettingsSettings.backgroundDuplicate) {
-                updateBoth(url)
-            } else {
-                updateHome(url)
-                systemSettingsSettings.backgroundSetLast = "home"
-            }
-        })
-        Component.onCompleted: updateImage(testHomeImage,
-                                           homeImage)
-
-        OverlayImage {
-            anchors.fill: parent
-            source: "homeoverlay.svg"
-        }
-    }
-
-    Label {
-        id: homeLabel
-
-        anchors {
-            top: homeImage.bottom
-            topMargin: units.gu(1)
-            horizontalCenter: homeImage.horizontalCenter
-        }
-
-        text: i18n.tr("Home screen")
-    }
-
-    ListItem.ThinDivider {
-        id: topDivider
-
-        anchors {
-            topMargin: units.gu(2)
-            top: welcomeLabel.bottom
-        }
-    }
-
-
-    OptionSelector {
-        id: optionSelector
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            top: topDivider.bottom
-            topMargin: units.gu(2)
-        }
-        width: parent.width - units.gu(4)
-        expanded: true
-
-        model: [i18n.tr("Same background for both"),
-            i18n.tr("Different background for each")]
-        selectedIndex: systemSettingsSettings.backgroundDuplicate === 0 ? 0 : 1
-        onSelectedIndexChanged: {
-            systemSettingsSettings.backgroundDuplicate = ( selectedIndex === 0 )
+                testHomeImage.source = value;
         }
     }
 
     Column {
-
-        id: buttonColumn
-        spacing: units.gu(1)
-
+        id: previewsRow
         anchors {
-            topMargin: units.gu(2)
+            top: parent.top
             left: parent.left
             right: parent.right
-            top: optionSelector.bottom
+            topMargin: spacing
+        }
+        height: childrenRect.height
+        spacing: units.gu(2)
+
+        Item {
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: thumbRow.height
+            width: thumbRow.width
+            Row {
+                id: thumbRow
+                spacing: units.gu(2)
+                height: childrenRect.height
+                width: childrenRect.width
+
+                Item {
+                    anchors.top: parent.top
+                    height: childrenRect.height
+                    width: thumbWidth
+
+                    SwappableImage {
+                        id: welcomeImage
+                        anchors.top: parent.top
+                        height: thumbHeight
+                        width: thumbWidth
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
+                                           {homeScreen: systemSettingsSettings.backgroundDuplicate ? true : false,
+                                               useSame: systemSettingsSettings.backgroundDuplicate,
+                                               backgroundPanel: backgroundPanel,
+                                               current: welcomeBackground
+                                            });
+
+                            var curItem = pageStack.currentPage;
+                            selectedItemConnection.target = curItem;
+                            updateImage(testWelcomeImage, welcomeImage);
+                        }
+
+                        Component.onCompleted: updateImage(testWelcomeImage,
+                                                           welcomeImage)
+
+                        OverlayImage {
+                            anchors.fill: parent
+                            source: "welcomeoverlay.svg"
+                        }
+                    }
+                    Label {
+                        id: welcomeLabel
+
+                        anchors {
+                            topMargin: units.gu(1)
+                            top: welcomeImage.bottom
+                            horizontalCenter: parent.horizontalCenter
+                        }
+                        text: i18n.tr("Welcome screen")
+                    }
+                }
+
+                Item {
+                    anchors.top: parent.top
+                    height: childrenRect.height
+                    width: thumbWidth
+                    SwappableImage {
+                        id: homeImage
+                        anchors.top: parent.top
+                        height: thumbHeight
+                        width: thumbWidth
+
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
+                                           {homeScreen: true,
+                                               useSame: systemSettingsSettings.backgroundDuplicate,
+                                               backgroundPanel: backgroundPanel,
+                                               current: homeBackground
+                                            });
+                            var curItem = pageStack.currentPage;
+                            selectedItemConnection.target = curItem;
+                            updateImage(testHomeImage, homeImage);
+                        }
+                        Component.onCompleted: updateImage(testHomeImage,
+                                                           homeImage)
+
+                        OverlayImage {
+                            anchors.fill: parent
+                            source: "homeoverlay.svg"
+                        }
+                    }
+
+                    Label {
+                        id: homeLabel
+
+                        anchors {
+                            top: homeImage.bottom
+                            topMargin: units.gu(1)
+                            horizontalCenter: parent.horizontalCenter
+                        }
+
+                        text: i18n.tr("Home screen")
+                    }
+                }
+
+            }
+            MouseArea {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                }
+                height: thumbHeight
+                visible: systemSettingsSettings.backgroundDuplicate
+                onClicked: homeImage.clicked()
+            }
         }
 
-        Button {
-            text: i18n.tr("Use original background")
-            width: parent.width - units.gu(4)
+        ListItem.ThinDivider {}
+
+        OptionSelector {
+            id: optionSelector
             anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                // Reset all of the settings
-                background.schema.reset('pictureUri')
-                systemSettingsSettings.backgroundPreviouslySetValue =
-                        background.pictureUri
-                backgroundPanel.backgroundFile = background.pictureUri
-                systemSettingsSettings.backgroundSetLast = "home"
-                optionSelector.selectedIndex = 0 // Same
+            width: parent.width - units.gu(4)
+            expanded: true
+
+            model: [i18n.tr("Same background for both"),
+                i18n.tr("Different background for each")]
+            selectedIndex: systemSettingsSettings.backgroundDuplicate ? 0 : 1
+            onSelectedIndexChanged: {
+                if (selectedIndex === 0 && !systemSettingsSettings.backgroundDuplicate)
+                    systemSettingsSettings.backgroundDuplicate = true;
+                else if (selectedIndex === 1 && systemSettingsSettings.backgroundDuplicate)
+                    systemSettingsSettings.backgroundDuplicate = false;
             }
         }
     }
@@ -210,10 +211,10 @@ ItemPage {
        SwappableImage, so test the image is valid /before/ showing it and show a
        fallback if it isn't. */
     function updateImage(testImage, targetImage) {
-        if (testImage.status == Image.Ready) {
-            targetImage.source = testImage.source
-        } else if (testImage.status == Image.Error) {
-            targetImage.source = testImage.fallback
+        if (testImage.status === Image.Ready) {
+            targetImage.source = testImage.source;
+        } else if (testImage.status === Image.Error) {
+            targetImage.source = testImage.fallback;
         }
     }
 
@@ -222,13 +223,12 @@ ItemPage {
 
         function update(uri) {
             // Will update source
-            updateWelcome(uri)
+            Utilities.updateWelcome(uri);
         }
 
         property string fallback: defaultBackground
         visible: false
-        onStatusChanged: updateImage(testWelcomeImage,
-                                     welcomeImage)
+        onStatusChanged: updateImage(testWelcomeImage, welcomeImage)
     }
 
     Image {
@@ -236,32 +236,31 @@ ItemPage {
 
         function update(uri) {
             // Will update source
-            updateHome(uri)
+            Utilities.updateHome(uri);
         }
 
         property string fallback: defaultBackground
         source: background.pictureUri
         visible: false
-        onStatusChanged: updateImage(testHomeImage,
-                                     homeImage)
+        onStatusChanged: updateImage(testHomeImage, homeImage)
     }
 
     function setUpImages() {
         var mostRecent = (systemSettingsSettings.backgroundSetLast === "home") ?
-                    testHomeImage : testWelcomeImage
+                    testHomeImage : testWelcomeImage;
         var leastRecent = (mostRecent === testHomeImage) ?
-                    testWelcomeImage : testHomeImage
+                    testWelcomeImage : testHomeImage;
 
         if (systemSettingsSettings.backgroundDuplicate) { //same
             /* save value of least recently changed to restore later */
             systemSettingsSettings.backgroundPreviouslySetValue =
-                    leastRecent.source
+                    leastRecent.source;
             /* copy most recently changed to least recently changed */
-            leastRecent.update(mostRecent.source)
+            leastRecent.update(mostRecent.source);
         } else { // different
             /* restore least recently changed to previous value */
             leastRecent.update(
-                    systemSettingsSettings.backgroundPreviouslySetValue)
+                    systemSettingsSettings.backgroundPreviouslySetValue);
         }
     }
 
@@ -269,43 +268,19 @@ ItemPage {
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
-            if (key == "backgroundDuplicate") {
-                setUpImages()
-            }
+            if (key == "backgroundDuplicate")
+                setUpImages();
+        }
+        Component.onCompleted: {
+            if (systemSettingsSettings.backgroundDuplicate)
+                optionSelector.selectedIndex = 0;
+            else
+                optionSelector.selectedIndex = 1;
         }
     }
-
-
-    property var activeTransfer
 
     Connections {
-        id: contentHubConnection
-        property var imageCallback
-        target: activeTransfer ? activeTransfer : null
-        onStateChanged: {
-            if (activeTransfer.state === ContentTransfer.Charged) {
-                if (activeTransfer.items.length > 0) {
-                    var imageUrl = activeTransfer.items[0].url;
-                    imageCallback(imageUrl);
-                }
-            }
-        }
-    }
-
-    function startContentTransfer(callback) {
-        if (callback)
-            contentHubConnection.imageCallback = callback
-        var transfer = ContentHub.importContent(
-                    ContentType.Pictures,
-                    ContentHub.defaultSourceForType(ContentType.Pictures));
-        if (transfer != null)
-        {
-            transfer.selectionType = ContentTransfer.Single;
-            var store = ContentHub.defaultStoreForType(ContentType.Pictures);
-            console.log("Store is: " + store.uri);
-            transfer.setStore(store);
-            activeTransfer = transfer;
-            activeTransfer.start();
-        }
+        id: selectedItemConnection
+        onSave: Utilities.setBackground(homeScreen, uri)
     }
 }
