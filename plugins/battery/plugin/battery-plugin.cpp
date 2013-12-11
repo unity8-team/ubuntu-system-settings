@@ -90,6 +90,7 @@ BatteryItem::~BatteryItem()
     if (m_addedHandler) {
         g_signal_handler_disconnect (m_client, m_addedHandler);
         m_addedHandler = 0;
+    }
 
     if (m_removedHandler) {
         g_signal_handler_disconnect (m_client, m_removedHandler);
