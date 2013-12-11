@@ -40,7 +40,7 @@ public:
 
 private:
     UpClient *m_client;
-    gulong added_handler, removed_handler;
+    gulong m_addedHandler, m_removedHandler;
 };
 
 void deviceChanged(UpClient *client,
@@ -66,14 +66,14 @@ void deviceChanged(UpClient *client,
 BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent),
     m_client(up_client_new()),
-    added_handler(0),
-    removed_handler(0)
+    m_addedHandler(0),
+    m_removedHandler(0)
 {
-    added_handler = g_signal_connect (m_client,
+    m_addedHandler = g_signal_connect (m_client,
                                       "device-added",
                                       G_CALLBACK (::deviceChanged),
                                       this /* user_data */);
-    removed_handler = g_signal_connect (m_client,
+    m_removedHandler = g_signal_connect (m_client,
                                         "device-removed",
                                         G_CALLBACK (::deviceChanged),
                                         this /* user_data */);
@@ -87,13 +87,13 @@ void BatteryItem::setVisibility(bool visible)
 
 BatteryItem::~BatteryItem()
 {
-    if (added_handler) {
-        g_signal_handler_disconnect (m_client, added_handler);
-        added_handler = 0;
+    if (m_addedHandler) {
+        g_signal_handler_disconnect (m_client, m_addedHandler);
+        m_addedHandler = 0;
 
-    if (removed_handler) {
-        g_signal_handler_disconnect (m_client, removed_handler);
-        removed_handler = 0;
+    if (m_removedHandler) {
+        g_signal_handler_disconnect (m_client, m_removedHandler);
+        m_removedHandler = 0;
     }
 
     g_object_unref (m_client);
