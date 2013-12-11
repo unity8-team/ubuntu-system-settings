@@ -19,11 +19,26 @@ from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
 
-class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
+import dbus
+import dbusmock
+import subprocess
+
+class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
+                                   dbusmock.DBusTestCase):
     """ Base class for Ubuntu System Settings """
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+        """ Add a mock Upower environment so we get consistent results """
+        (klass.p_mock, klass.obj_upower) = klass.spawn_server_template(
+            'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
+        klass.dbusmock = dbus.Interface(klass.obj_upower, dbusmock.MOCK_IFACE)
 
     def setUp(self):
         super(UbuntuSystemSettingsTestCase, self).setUp()
+        self.obj_upower.Reset()
         self.launch_system_settings()
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
@@ -44,6 +59,18 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     def pointer(self):
         """ Return pointer """
         return Pointer(self.input_device_class.create())
+
+    def add_mock_battery(self):
+        """ Make sure we have a battery """
+        self.dbusmock.AddDischargingBattery('mock_BATTERY', 'Battery', 50.0, 10)
+
+class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsTestCase):
+    """ Base class for tests which rely on the presence of a battery """
+    def setUp(self):
+        super(UbuntuSystemSettingsTestCase, self).setUp()
+        self.add_mock_battery()
+        self.launch_system_settings()
+        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
