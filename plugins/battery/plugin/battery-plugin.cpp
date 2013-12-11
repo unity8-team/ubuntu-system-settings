@@ -87,11 +87,14 @@ void BatteryItem::setVisibility(bool visible)
 
 BatteryItem::~BatteryItem()
 {
-    if (added_handler)
+    if (added_handler) {
         g_signal_handler_disconnect (m_client, added_handler);
+        added_handler = 0;
 
-    if (removed_handler)
+    if (removed_handler) {
         g_signal_handler_disconnect (m_client, removed_handler);
+        removed_handler = 0;
+    }
 
     g_object_unref (m_client);
 }
