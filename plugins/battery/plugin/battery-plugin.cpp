@@ -70,11 +70,11 @@ BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
     removed_handler(0)
 {
     added_handler = g_signal_connect (m_client,
-                                      "notify::device-added",
+                                      "device-added",
                                       G_CALLBACK (::deviceChanged),
                                       this /* user_data */);
     removed_handler = g_signal_connect (m_client,
-                                        "notify::device-removed",
+                                        "device-removed",
                                         G_CALLBACK (::deviceChanged),
                                         this /* user_data */);
     deviceChanged(m_client, NULL, this);
