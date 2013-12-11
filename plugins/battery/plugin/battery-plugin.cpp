@@ -35,27 +35,65 @@ class BatteryItem: public ItemBase
 
 public:
     BatteryItem(const QVariantMap &staticData, QObject *parent = 0);
+    void setVisibility(bool visible);
     ~BatteryItem();
+
+private:
+    UpClient *m_client;
+    gulong added_handler, removed_handler;
 };
 
-BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
-    ItemBase(staticData, parent)
+void deviceChanged(UpClient *client,
+                   GParamSpec *pspec G_GNUC_UNUSED,
+                   gpointer user_data)
 {
-    UpClient *client = up_client_new();
-    gboolean ret = up_client_enumerate_devices_sync(client, NULL, NULL);
+    BatteryItem *item (static_cast<BatteryItem *> (user_data));
+    g_object_ref (client);
+
+    gboolean ret = up_client_enumerate_devices_sync (client, NULL, NULL);
     if (!ret) {
-        setVisible(false);
+        item->setVisibility (false);
     } else {
-        GPtrArray *devices = up_client_get_devices(client);
-        setVisible (devices->len > 0);
+        GPtrArray *devices = up_client_get_devices (client);
+        item->setVisibility (devices->len > 0);
         g_ptr_array_unref (devices);
     }
 
     g_object_unref (client);
+
+}
+
+BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
+    ItemBase(staticData, parent),
+    m_client(up_client_new()),
+    added_handler(0),
+    removed_handler(0)
+{
+    added_handler = g_signal_connect (m_client,
+                                      "notify::device-added",
+                                      G_CALLBACK (::deviceChanged),
+                                      this /* user_data */);
+    removed_handler = g_signal_connect (m_client,
+                                        "notify::device-removed",
+                                        G_CALLBACK (::deviceChanged),
+                                        this /* user_data */);
+    deviceChanged(m_client, NULL, this);
+}
+
+void BatteryItem::setVisibility(bool visible)
+{
+    setVisible(visible);
 }
 
 BatteryItem::~BatteryItem()
 {
+    if (added_handler)
+        g_signal_handler_disconnect (m_client, added_handler);
+
+    if (removed_handler)
+        g_signal_handler_disconnect (m_client, removed_handler);
+
+    g_object_unref (m_client);
 }
 
 BatteryPlugin::BatteryPlugin():
