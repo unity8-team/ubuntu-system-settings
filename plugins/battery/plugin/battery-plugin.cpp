@@ -48,7 +48,6 @@ void deviceChanged(UpClient *client,
                    gpointer user_data)
 {
     BatteryItem *item (static_cast<BatteryItem *> (user_data));
-    g_object_ref (client);
 
     gboolean ret = up_client_enumerate_devices_sync (client, NULL, NULL);
     if (!ret) {
@@ -58,8 +57,6 @@ void deviceChanged(UpClient *client,
         item->setVisibility (devices->len > 0);
         g_ptr_array_unref (devices);
     }
-
-    g_object_unref (client);
 
 }
 
