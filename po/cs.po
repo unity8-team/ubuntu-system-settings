@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-10-07 12:02+0100\n"
-"PO-Revision-Date: 2013-12-11 21:49+0000\n"
-"Last-Translator: Ondra Kadlec <o.kadlec@seznam.cz>\n"
+"PO-Revision-Date: 2013-12-12 10:12+0000\n"
+"Last-Translator: Tadeáš Pařík <tadeas.parik@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-12-12 06:00+0000\n"
+"X-Launchpad-Export-Date: 2013-12-13 06:44+0000\n"
 "X-Generator: Launchpad (build 16869)\n"
 
 #: ../plugins/about/PageComponent.qml:31 ../.build/settings.js:1
@@ -64,7 +64,7 @@ msgstr "Úložiště"
 
 #: ../plugins/about/PageComponent.qml:118
 msgid "Legal:"
-msgstr ""
+msgstr "Právní:"
 
 #: ../plugins/about/PageComponent.qml:122 ../plugins/about/Software.qml:10
 msgid "Software licenses"
@@ -72,7 +72,7 @@ msgstr "Softwarové licence"
 
 #: ../plugins/about/PageComponent.qml:128
 msgid "Regulatory info"
-msgstr ""
+msgstr "Regulační informace:"
 
 #: ../plugins/about/Storage.qml:87
 msgid "Used by Ubuntu"
@@ -108,7 +108,7 @@ msgstr "Volné místo"
 
 #: ../plugins/about/Storage.qml:163
 msgid "Installed apps"
-msgstr ""
+msgstr "Nainstalované aplikace"
 
 #: ../plugins/about/Storage.qml:164
 msgid "By name"
@@ -431,7 +431,7 @@ msgstr "Odpojit"
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "PIN pro %1"
 
 #: ../plugins/bluetooth/ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth/ProvidePinCodeDialog.qml:62
@@ -453,7 +453,7 @@ msgstr "Vyhledávání"
 
 #: ../plugins/cellular/PageComponent.qml:28 ../.build/settings.js:7
 msgid "Cellular"
-msgstr ""
+msgstr "Mobilní"
 
 #: ../plugins/cellular/PageComponent.qml:66
 msgid "Choose carrier:"
@@ -541,7 +541,7 @@ msgstr "Vibrovat nebo vydávat zvuky při každém stiku tlačítek."
 
 #: ../plugins/language/SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "Aktuální kontrola pravopisu:"
 
 #: ../plugins/language/SpellChecking.qml:54
 msgid "All languages available:"
@@ -558,10 +558,13 @@ msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"Přesměrovává hovory na jiné číslo, když neodpovídáte, nebo když je obsazeno, "
+"telefon je vypnutý nebo není dostupný."
 
 #: ../plugins/phone/CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
+"Stav přesměrování hovorů nemůže být nyní zkontrolován. Zkuste to později."
 
 #: ../plugins/phone/CallForwarding.qml:102
 msgid "Divert to"
@@ -579,53 +582,56 @@ msgstr "Nastavit"
 #: ../plugins/phone/CallWaiting.qml:27 ../plugins/phone/CallWaiting.qml:53
 #: ../plugins/phone/PageComponent.qml:52
 msgid "Call waiting"
-msgstr ""
+msgstr "Čekající hovor"
 
 #: ../plugins/phone/CallWaiting.qml:67
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
+"Dovolí začít jiný hovor, když právě telefonujete, a přepínat se mezi nimi."
 
 #: ../plugins/phone/PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone/PageComponent.qml:61 ../plugins/phone/Services.qml:30
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "%1 Služby"
 
 #: ../plugins/phone/ServiceInfo.qml:35
 msgid "Call"
-msgstr ""
+msgstr "Volání"
 
 #: ../plugins/reset/EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
+"Všechny dokumenty, uložené hry, nastavení a další položky budou trvale "
+"odstraněny."
 
 #: ../plugins/reset/EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr ""
+msgstr "Smazat a vše resetovat"
 
 #: ../plugins/reset/PageComponent.qml:32 ../.build/settings.js:13
 msgid "Reset phone"
-msgstr ""
+msgstr "Resetovat telefon"
 
 #: ../plugins/reset/PageComponent.qml:62
 msgid "Reset launcher & home screen…"
-msgstr ""
+msgstr "Resetovat launcher a domácí obrazovku"
 
 #: ../plugins/reset/PageComponent.qml:75
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "Resetovat všeachna systémová nastavení..."
 
 #: ../plugins/reset/PageComponent.qml:88
 msgid "Erase & reset everything…"
-msgstr ""
+msgstr "Smazat  a vše resetovat"
 
 #: ../plugins/reset/ResetAllSettings.qml:29
 #: ../plugins/reset/ResetLauncherHome.qml:30
@@ -633,79 +639,94 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
+"Obsah a nastavení launcheru a filtry na domovské obrazovce budou nastaveny "
+"do výchozího nastavení."
 
 #: ../plugins/reset/ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "Resetovat všechna systémová nastavení"
 
 #: ../plugins/reset/ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
-msgstr ""
+msgstr "Resetovat launcher a domovskou obrazovku"
 
 #: ../plugins/security-privacy/Dash.qml:29
 #: ../plugins/security-privacy/PageComponent.qml:117
 msgid "Dash search"
-msgstr ""
+msgstr "Vyhledávání v Dashi"
 
 #: ../plugins/security-privacy/Dash.qml:49
 msgid "Return results from:"
-msgstr ""
+msgstr "Výsledky z:"
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:52
 #: ../plugins/security-privacy/PageComponent.qml:120
 msgid "Phone only"
-msgstr ""
+msgstr "Pouze telefon"
 
 #: ../plugins/security-privacy/Dash.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:50
 #: ../plugins/security-privacy/PageComponent.qml:119
 msgid "Phone and Internet"
-msgstr ""
+msgstr "Telefon a internet"
 
 #: ../plugins/security-privacy/Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "Umístění"
 
 #: ../plugins/security-privacy/Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "Určení polohy"
 
 #: ../plugins/security-privacy/Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"Používá GPS ke zjištění vaší přibližné polohy. Je-li GPS vypnuta, šetří se "
+"baterie."
 
 #: ../plugins/security-privacy/Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Používá WiFi a GPS ke zjištění vaší přibližné polohy. Je-li zjištění polohy "
+"vypnuto, šetří se baterie."
 
 #: ../plugins/security-privacy/Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"Používá WiFi (nyní vypnuto) a GPS ke zjištění vaší přibližné polohy. Je-li "
+"zjištění polohy vypnuto, šetří se baterie."
 
 #: ../plugins/security-privacy/Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"Používá WiFi, mobilní síť a GPS ke zjištění vaší přibližné polohy. Je-li "
+"zjištění polohy vypnuto, šetří se baterie."
 
 #: ../plugins/security-privacy/Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"Používá WiFi, mobilní síť (mobilní připojení není dostupné) a GPS ke "
+"zjištění vaší přibližné polohy. Je-li zjištění polohy vypnuto, šetří se "
+"baterie."
 
 #: ../plugins/security-privacy/Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"Používá WiFi (nyní vypnuto), mobilní síť a GPS ke zjištění vaší přibližné "
+"polohy. Je-li zjištění polohy vypnuto, šetří se baterie."
 
 #: ../plugins/security-privacy/Location.qml:82
 msgid ""
@@ -713,133 +734,136 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Používá WiFi (nyní vypnuto), mobilní síť (mobilní připojení není dostupné) a "
+"GPS ke zjištění vaší přibližné polohy. Je-li zjištění polohy vypnuto, šetří "
+"se baterie."
 
 #: ../plugins/security-privacy/Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "Povolit přístup do umístění:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:30
 #: ../plugins/security-privacy/PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "Bepečnostní zámek"
 
 #: ../plugins/security-privacy/LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "Změnit heslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "Změnit heslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "Přepnout na přejetí prstem"
 
 #: ../plugins/security-privacy/LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Přepnout na kód"
 
 #: ../plugins/security-privacy/LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "Přepnout na přístupové heslo."
 
 #: ../plugins/security-privacy/LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "Existující kód."
 
 #: ../plugins/security-privacy/LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "Existující přístupové heslo."
 
 #: ../plugins/security-privacy/LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Špatný kód. Zkuste to znova."
 
 #: ../plugins/security-privacy/LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Nesprávné přístupové heslo. Zkuste to znova."
 
 #: ../plugins/security-privacy/LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "Zvolte heslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Vyberte přístupové heslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Potvrdit heslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Potvrďte přístupové heslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Tato hesla se neshodují. Zkuste to znovu."
 
 #: ../plugins/security-privacy/LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Tato přístupová heslo jsou nesprávná. Zkuste to znovu."
 
 #: ../plugins/security-privacy/LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "Nenastaveno"
 
 #: ../plugins/security-privacy/LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "Pokračovat"
 
 #: ../plugins/security-privacy/LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "Odemknout telefon pomocí:"
 
 #: ../plugins/security-privacy/LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Přepnout (žádné zabezpečení)"
 
 #: ../plugins/security-privacy/LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4 číselné heslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:332
 #: ../plugins/security-privacy/PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "Přístupové heslo"
 
 #: ../plugins/security-privacy/LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Přepnout (žádné zabezpečení)... "
 
 #: ../plugins/security-privacy/LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4 číselné heslo..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "Přístupové heslo..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "Změnit heslo..."
 
 #: ../plugins/security-privacy/LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Změnit přístupové heslo..."
 
 #: ../plugins/security-privacy/PageComponent.qml:33 ../.build/settings.js:14
 msgid "Security & Privacy"
-msgstr ""
+msgstr "Bezpečnost a soukromí"
 
 #: ../plugins/security-privacy/PageComponent.qml:67
 msgid "Security:"
-msgstr ""
+msgstr "Zabezpečení:"
 
 #: ../plugins/security-privacy/PageComponent.qml:70
 #: ../plugins/security-privacy/PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "Zamykání telefonu"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy/PageComponent.qml:72
@@ -847,315 +871,317 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 minuta"
+msgstr[1] "%1 minuty"
+msgstr[2] "%1 minut"
 
 #: ../plugins/security-privacy/PageComponent.qml:80
 msgid "SIM PIN"
-msgstr ""
+msgstr "PIN karty SIM"
 
 #: ../plugins/security-privacy/PageComponent.qml:86
 msgid "Privacy:"
-msgstr ""
+msgstr "Soukromí:"
 
 #: ../plugins/security-privacy/PageComponent.qml:89
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Údaje na uvítací obrazovce"
 
 #: ../plugins/security-privacy/PageComponent.qml:102
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Zprávy na uvítací obrazovce"
 
 #: ../plugins/security-privacy/PageComponent.qml:135
 msgid "Location access"
-msgstr ""
+msgstr "Přistup k umístění"
 
 #: ../plugins/security-privacy/PageComponent.qml:143
 msgid "Other app access"
-msgstr ""
+msgstr "Přístup ostatních aplikací"
 
 #: ../plugins/security-privacy/PageComponent.qml:148
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostika"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy/PageComponent.qml:153
 msgid "Sent"
-msgstr ""
+msgstr "Odeslat"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy/PageComponent.qml:156
 msgid "Not sent"
-msgstr ""
+msgstr "Neodesílat"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "Kód"
 
 #: ../plugins/security-privacy/PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "Okamžitý zámek spánku"
 
 #: ../plugins/sound/PageComponent.qml:32 ../.build/settings.js:15
 msgid "Sound"
-msgstr ""
+msgstr "Zvuk"
 
 #: ../plugins/sound/PageComponent.qml:53
 msgid "Phone calls:"
-msgstr ""
+msgstr "Telefonní hovory:"
 
 #: ../plugins/sound/PageComponent.qml:57 ../plugins/sound/PageComponent.qml:60
 msgid "Ringtone"
-msgstr ""
+msgstr "Vyzvánění"
 
 #: ../plugins/sound/PageComponent.qml:68
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "Vibrovat při zvonění"
 
 #: ../plugins/sound/PageComponent.qml:76
 msgid "Vibrate in silent mode"
-msgstr ""
+msgstr "Vibrovat v tichém režimu"
 
 #: ../plugins/sound/PageComponent.qml:81
 msgid "Other sounds:"
-msgstr ""
+msgstr "Ostatní zvuky:"
 
 #: ../plugins/sound/PageComponent.qml:85 ../plugins/sound/PageComponent.qml:88
 msgid "Message received"
-msgstr ""
+msgstr "Přijata nová zpráva"
 
 #: ../plugins/sound/PageComponent.qml:96
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "Zvuky klávesnice"
 
 #: ../plugins/sound/PageComponent.qml:104
 msgid "Lock sound"
-msgstr ""
+msgstr "Zvuk uzamčení"
 
 #: ../plugins/sound/SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "Telefon je v tichém režimu."
 
 #: ../plugins/sound/SoundsList.qml:59
 msgid "Stop playing"
-msgstr ""
+msgstr "Zastavit přehrávání"
 
 #: ../plugins/system-update/Download.qml:29
 #: ../plugins/system-update/PageComponent.qml:344
 msgid "Auto download"
-msgstr ""
+msgstr "Automatické stahování"
 
 #: ../plugins/system-update/Download.qml:34
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "Stahovat budoucí aktualizace automaticky:"
 
 #: ../plugins/system-update/Download.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Přes Wi-Fi"
 
 #: ../plugins/system-update/Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "Přes kterékoliv datové spojení"
 
 #: ../plugins/system-update/Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "Přenos dat může být zpoplatněn."
 
 #: ../plugins/system-update/PageComponent.qml:31 ../.build/settings.js:16
 msgid "Updates"
-msgstr ""
+msgstr "Aktualizace"
 
 #: ../plugins/system-update/PageComponent.qml:46
 msgid "Checking for updates…"
-msgstr ""
+msgstr "Ověřuje se dostupnost aktualizací..."
 
 #: ../plugins/system-update/PageComponent.qml:83
 msgid "Apply update failed:"
-msgstr ""
+msgstr "Aktualizace se nazdařila:"
 
 #: ../plugins/system-update/PageComponent.qml:93
 msgid "Pause failed:"
-msgstr ""
+msgstr "Pozastavení selhalo:"
 
 #. TRANSLATORS: %1 is the size of the update in GB
 #: ../plugins/system-update/PageComponent.qml:108
 #, qt-format
 msgid "%1 GB"
-msgstr ""
+msgstr "%1 GB"
 
 #. TRANSLATORS: %1 is the size of the update in MB
 #: ../plugins/system-update/PageComponent.qml:111
 #, qt-format
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #. TRANSLATORS: %1 is the date when the device was last updated
 #: ../plugins/system-update/PageComponent.qml:120
 msgid "No software update available"
-msgstr ""
+msgstr "Žádné aktualizace nejsou k dispozici"
 
 #: ../plugins/system-update/PageComponent.qml:120
 #, qt-format
 msgid "Last updated %1"
-msgstr ""
+msgstr "Poslední aktualizace %1"
 
 #. TRANSLATORS: %1 is the number of seconds remaining
 #: ../plugins/system-update/PageComponent.qml:133
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Zbývá okolo %1 vteřiny"
+msgstr[1] "Zbývá okolo %1 vteřin"
+msgstr[2] "Zbývá okolo %1 vteřin"
 
 #: ../plugins/system-update/PageComponent.qml:135
 msgid "No estimate for the download"
-msgstr ""
+msgstr "Žádný odhad pro stažení"
 
 #: ../plugins/system-update/PageComponent.qml:141
 msgid "Paused"
-msgstr ""
+msgstr "Pozastaveno"
 
 #: ../plugins/system-update/PageComponent.qml:150
 msgid "Download failed:"
-msgstr ""
+msgstr "Stahování se nezdařilo:"
 
 #: ../plugins/system-update/PageComponent.qml:205
 #: ../plugins/system-update/PageComponent.qml:322
 msgid "Retry"
-msgstr ""
+msgstr "Opakovat"
 
 #: ../plugins/system-update/PageComponent.qml:235
 msgid "Ubuntu Phone"
-msgstr ""
+msgstr "Ubuntu Telefon"
 
 #. TRANSLATORS: %1 is the version of the update
 #: ../plugins/system-update/PageComponent.qml:248
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Verze %1"
 
 #: ../plugins/system-update/PageComponent.qml:292
 msgid "Pause downloading"
-msgstr ""
+msgstr "Pozastavit stahování"
 
 #: ../plugins/system-update/PageComponent.qml:299
 msgid "Resume downloading"
-msgstr ""
+msgstr "Obnovit stahování"
 
 #: ../plugins/system-update/PageComponent.qml:315
 msgid "Download"
-msgstr ""
+msgstr "Stažení"
 
 #: ../plugins/system-update/PageComponent.qml:329
 msgid "Install & Restart"
-msgstr ""
+msgstr "Instalovat a restartovat"
 
 #: ../plugins/system-update/PageComponent.qml:349
 msgid "On wi-fi"
-msgstr ""
+msgstr "Přes Wi-Fi"
 
 #: ../plugins/system-update/PageComponent.qml:351
 msgid "Always"
-msgstr ""
+msgstr "Vždy"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "Časové pásmo"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Nastavit časové pásmo:"
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "Enter your current location."
-msgstr ""
+msgstr "Zadejte svou současnou polohu."
 
 #: ../plugins/time-date/ChooseTimeZone.qml:113
 msgid "No matching place"
-msgstr ""
+msgstr "Žádné odpovídající místo"
 
 #: ../plugins/time-date/PageComponent.qml:29 ../.build/settings.js:17
 msgid "Time & Date"
-msgstr ""
+msgstr "Datum a čas"
 
 #: ../plugins/time-date/PageComponent.qml:52
 msgid "Time zone:"
-msgstr ""
+msgstr "Časové pásmo:"
 
 #: ../plugins/time-date/PageComponent.qml:65
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Nastavit datum a čas:"
 
 #: ../plugins/time-date/TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Nastavit datum a čas"
 
 #: ../plugins/time-date/TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 #: ../plugins/time-date/TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Hodina"
 
 #: ../plugins/time-date/TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Minuta"
 
 #: ../plugins/time-date/TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Vteřina"
 
 #: ../plugins/time-date/TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: ../plugins/time-date/TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Den"
 
 #: ../plugins/time-date/TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "Měsíc"
 
 #: ../plugins/time-date/TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "Rok"
 
 #: ../src/qml/MainWindow.qml:60 ../.build/ubuntu-system-settings.desktop.js:1
 msgid "System Settings"
-msgstr ""
+msgstr "Systémová nastavení"
 
 #: ../src/qml/MainWindow.qml:78
 msgid "Search"
-msgstr ""
+msgstr "Hledat"
 
 #: ../src/qml/MainWindow.qml:95
 msgid "Personal"
-msgstr ""
+msgstr "Osobní"
 
 #: ../src/qml/MainWindow.qml:100
 msgid "System"
-msgstr ""
+msgstr "Systém"
 
 #: ../.build/settings.js:2
 msgid "Accessibility"
-msgstr ""
+msgstr "Zpřístupnění"
 
 #: ../.build/settings.js:6
 msgid "Brightness"
-msgstr ""
+msgstr "Jas"
 
 #: ../.build/settings.js:8
 msgid "Example"
-msgstr ""
+msgstr "Příklad"
 
 #: ../.build/settings.js:9
 msgid "Flight mode"
-msgstr ""
+msgstr "Režim Letadlo"
 
 #: ../.build/settings.js:11
 msgid "Orientation lock"
-msgstr ""
+msgstr "Zámek orientace"
