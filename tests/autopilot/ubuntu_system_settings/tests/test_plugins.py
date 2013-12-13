@@ -88,11 +88,8 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
 
     def test_no_battery_plugin_without_battery(self):
         """ Checks whether the Battery plugin is not available as we have no battery """
-        try:
-            plugin = self.main_view.select_single(objectName='entryComponent-battery')
-        except StateNotFoundError: # We couldn't find the plugin (expected)
-            plugin = None
-        self.assertThat(plugin, Equals(None))
+        self.assertThat(lambda: self.main_view.select_single(objectName='entryComponent-battery'),
+            Raises(StateNotFoundError))
 
     # Needs https://code.launchpad.net/~laney/python-dbusmock/upower-emit-deviceadded to be merged
     @expectedFailure()
