@@ -9,8 +9,8 @@ from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
-from testtools.matchers import Contains, Equals, NotEquals, GreaterThan
-from unittest import skip
+from testtools.matchers import Contains, Equals, NotEquals, GreaterThan, raises
+from unittest import expectedFailure
 
 from ubuntu_system_settings.tests import (UbuntuSystemSettingsTestCase,
      UbuntuSystemSettingsBatteryTestCase)
@@ -89,10 +89,10 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
     def test_no_battery_plugin_without_battery(self):
         """ Checks whether the Battery plugin is not available as we have no battery """
         self.assertThat(lambda: self.main_view.select_single(objectName='entryComponent-battery'),
-            Raises(StateNotFoundError))
+            raises(StateNotFoundError))
 
     # Needs https://code.launchpad.net/~laney/python-dbusmock/upower-emit-deviceadded to be merged
-    @expectedFailure()
+    @expectedFailure
     def test_battery_plugin_battery_hotplugging(self):
         """ Checks whether hotplugging a battery makes the panel visible """
         self.add_mock_battery()
