@@ -7,11 +7,12 @@
 
 from time import sleep
 
+from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
-from testtools.matchers import Contains, Equals, NotEquals, GreaterThan
-from unittest import skip
+from testtools.matchers import Contains, Equals, NotEquals, GreaterThan, raises
 
-from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
+from ubuntu_system_settings.tests import (UbuntuSystemSettingsTestCase,
+     UbuntuSystemSettingsBatteryTestCase)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
@@ -84,8 +85,14 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         plugin = self.main_view.select_single(objectName='entryComponent-online-accounts')
         self.assertThat(plugin, NotEquals(None))
 
-    def test_battery_plugin(self):
-        """ Checks whether the Battery plugin is available """
+    def test_no_battery_plugin_without_battery(self):
+        """ Checks whether the Battery plugin is not available as we have no battery """
+        self.assertThat(lambda: self.main_view.select_single(objectName='entryComponent-battery'),
+            raises(StateNotFoundError))
+
+    def test_battery_plugin_battery_hotplugging(self):
+        """ Checks whether hotplugging a battery makes the panel visible """
+        self.add_mock_battery()
         plugin = self.main_view.select_single(objectName='entryComponent-battery')
         self.assertThat(plugin, NotEquals(None))
 
@@ -102,5 +109,14 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
     def test_updates_plugin(self):
         """ Checks whether the Updates plugin is available """
         plugin = self.main_view.select_single(objectName='entryComponent-system-update')
+        self.assertThat(plugin, NotEquals(None))
+
+class SystemSettingsUpowerTestCases(UbuntuSystemSettingsBatteryTestCase):
+    def setUp(self):
+        super(SystemSettingsUpowerTestCases, self).setUp()
+
+    def test_battery_plugin(self):
+        """ checks whether the Battery plugin is available """
+        plugin = self.main_view.select_single(objectName='entryComponent-battery')
         self.assertThat(plugin, NotEquals(None))
 
