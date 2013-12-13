@@ -31,7 +31,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
     def setUpClass(klass):
         klass.start_system_bus()
         klass.dbus_con = klass.get_dbus(True)
-        """ Add a mock Upower environment so we get consistent results """
+        # Add a mock Upower environment so we get consistent results
         (klass.p_mock, klass.obj_upower) = klass.spawn_server_template(
             'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
         klass.dbusmock = dbus.Interface(klass.obj_upower, dbusmock.MOCK_IFACE)
