@@ -94,7 +94,8 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
             plugin = None
         self.assertThat(plugin, Equals(None))
 
-    @skip("Needs https://code.launchpad.net/~laney/python-dbusmock/upower-emit-deviceadded to be merged")
+    # Needs https://code.launchpad.net/~laney/python-dbusmock/upower-emit-deviceadded to be merged
+    @expectedFailure()
     def test_battery_plugin_battery_hotplugging(self):
         """ Checks whether hotplugging a battery makes the panel visible """
         self.add_mock_battery()
