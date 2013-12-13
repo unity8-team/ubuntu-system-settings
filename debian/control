@@ -89,7 +89,7 @@ Package: ubuntu-system-settings-autopilot
 Architecture: all
 Depends: ubuntu-system-settings,
          python-autopilot,
-         python-dbusmock,
+         python-dbusmock (>= 0.9.2),
          libautopilot-qt,
          ubuntu-ui-toolkit-autopilot,
          dpkg-dev,
