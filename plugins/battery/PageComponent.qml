@@ -277,6 +277,7 @@ ItemPage {
                         maximumValue: 100.0
                         enabled: indicatorPower.brightness.state != null
                         value: enabled ? indicatorPower.brightness.state * 100 : 0.0
+                        live: true
 
                         onValueChanged: indicatorPower.brightness.updateState(value / 100.0);
                     }
