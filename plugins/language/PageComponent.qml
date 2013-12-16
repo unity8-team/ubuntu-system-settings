@@ -123,8 +123,6 @@ ItemPage {
             }
 
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Auto capitalization")
 
                 control: Switch {
@@ -135,9 +133,10 @@ ItemPage {
             }
 
             ListItem.Caption {
-                visible: showAllUI
-
                 text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
+            }
+
+            ListItem.ThinDivider {
             }
 
             ListItem.Standard {
