@@ -25,10 +25,6 @@ Item {
 
     property string source
 
-    height: parent.height * 0.4
-    width: parent.width * 0.43
-    anchors.margins: units.gu(2)
-
     CrossFadeImage {
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop

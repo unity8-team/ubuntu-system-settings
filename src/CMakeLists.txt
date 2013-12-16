@@ -1,3 +1,4 @@
+add_definitions(-DI18N_DIRECTORY="${CMAKE_INSTALL_PREFIX}/share/locale")
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${PLUGIN_MANIFEST_DIR}")
@@ -16,9 +17,17 @@ set(USS_SOURCES
     utils.cpp
 )
 
+set(QML_SOURCES
+    qml/CategoryGrid.qml
+    qml/EntryComponent.qml
+    qml/MainWindow.qml
+    qml/UncategorizedItemsView.qml
+    SystemSettings/ItemPage.qml
+)
+
 QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
 
-add_executable(system-settings ${USS_SOURCES} ${system-settings-resources})
+add_executable(system-settings ${USS_SOURCES} ${QML_SOURCES} ${system-settings-resources})
 qt5_use_modules(system-settings Core Gui Quick Qml)
 target_link_libraries(system-settings SystemSettings)
 install(TARGETS system-settings RUNTIME DESTINATION bin)

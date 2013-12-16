@@ -14,15 +14,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Iain Lane <iain.lane@canonical.com>
+ * Ken VanDine <ken.vandine@canonical.com>
  *
  */
 
-function createAlbumPage(title) {
-    var url = Qt.resolvedUrl("ChangeImage.qml")
-    var component = Qt.createComponent(url)
-    var object = component.createObject(mainPage)
-    object.title = title
+function setBackground(homeScreen, uri) {
+    if (systemSettingsSettings.backgroundDuplicate) {
+        updateBoth(uri);
+    } else {
+        if (homeScreen) {
+            updateHome(uri);
+            systemSettingsSettings.backgroundSetLast = "home";
+        } else {
+            updateWelcome(uri);
+            systemSettingsSettings.backgroundSetLast = "welcome";
+        }
+    }
+    pageStack.pop();
+}
 
-    return object
+function updateWelcome(uri) {
+    backgroundPanel.backgroundFile = uri;
+}
+
+function updateHome(uri) {
+    background.pictureUri = uri;
+}
+
+function updateBoth(uri) {
+    updateWelcome(uri);
+    updateHome(uri);
 }
