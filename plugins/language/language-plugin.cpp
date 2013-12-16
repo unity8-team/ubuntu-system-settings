@@ -303,7 +303,7 @@ LanguagePlugin::updateLanguageNamesAndCodes()
 {
     m_languageNames.clear();
     m_languageCodes.clear();
-    m_indicesForLocales.clear();
+    m_indicesByLocale.clear();
 
     // Get locales from 'locale -a'.
     QProcess localeProcess;
@@ -370,11 +370,11 @@ LanguagePlugin::updateLanguageNamesAndCodes()
 
         QString localeName(languageLocale.localeName);
         localeName = localeName.left(localeName.indexOf('.'));
-        m_indicesForLocales.insert(localeName, i);
+        m_indicesByLocale.insert(localeName, i);
 
         if (languageLocale.likely) {
             localeName = localeName.left(localeName.indexOf('_'));
-            m_indicesForLocales.insert(localeName, i);
+            m_indicesByLocale.insert(localeName, i);
         }
     }
 }
@@ -502,7 +502,7 @@ LanguagePlugin::updateSpellCheckingModel()
 int
 LanguagePlugin::indexForLocale(const QString &name)
 {
-    return m_indicesForLocales.value(name.left(name.indexOf('.')), -1);
+    return m_indicesByLocale.value(name.left(name.indexOf('.')), -1);
 }
 
 void

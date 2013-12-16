@@ -155,7 +155,7 @@ private:
 
     QStringList m_languageNames;
     QStringList m_languageCodes;
-    QHash<QString, unsigned int> m_indicesForLocales;
+    QHash<QString, unsigned int> m_indicesByLocale;
 
     int m_currentLanguage;
     int m_nextCurrentLanguage;
