@@ -108,7 +108,9 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
         ret = QVariant::fromValue<QObject*>(const_cast<Plugin*>(item));
         break;
     case KeywordRole:
-        const char * domain = item->translations().toUtf8().constData();
+        QByteArray translations = item->translations().toUtf8();
+        QByteArray displayName = item->displayName().toUtf8();
+        const char * domain = translations.constData();
         QStringList temp(item->keywords());
         QMutableListIterator<QString> it(temp);
         while (it.hasNext()) {
@@ -119,8 +121,7 @@ QVariant ItemModel::data(const QModelIndex &index, int role) const
                                 keyword.toUtf8().constData())));
         }
         temp << QString::fromUtf8(
-                dgettext(domain,
-                         item->displayName().toUtf8().constData()));
+                    dgettext(domain,displayName.constData()));
         ret = temp;
     }
 

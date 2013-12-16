@@ -87,6 +87,7 @@ int main(int argc, char **argv)
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
     view.rootContext()->setContextProperty("defaultPlugin", defaultPlugin);
+    view.rootContext()->setContextProperty("i18nDirectory", I18N_DIRECTORY);
     view.rootContext()->setContextProperty("pluginOptions", pluginOptions);
     view.setSource(QUrl("qrc:/qml/MainWindow.qml"));
     view.show();

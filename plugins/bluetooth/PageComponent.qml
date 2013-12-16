@@ -161,7 +161,7 @@ ItemPage {
 
                 model: backend.connectedHeadsets
                 delegate: ListItem.Standard {
-                    icon: iconName
+                    iconName: iconName
                     text: getDisplayName(connection, displayName)
                     onClicked: {
                         backend.setSelectedDevice(addressName);
@@ -191,7 +191,7 @@ ItemPage {
 
                 model: backend.disconnectedHeadsets
                 delegate: ListItem.Standard {
-                    icon: iconName
+                    iconName: iconName
                     text: getDisplayName(connection, displayName)
                     onClicked: {
                         backend.connectHeadset(addressName);
