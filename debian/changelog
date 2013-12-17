@@ -1,3 +1,76 @@
+ubuntu-system-settings (0.1+14.04.20131216-0ubuntu1) trusty; urgency=low
+
+  [ Sebastien Bacher ]
+  * battery: list the full charge item under the graph, respecting the
+    design.
+  * use iconName and iconSource properties, icon has been deprecated See
+    https://code.launchpad.net/~fboucault/ubuntu-ui-
+    toolkit/icon_api_sanitization/+merge/194253 for the toolkit change
+    I've updated the Depends to the version where the change landed:
+    https://launchpad.net/ubuntu/+source/ubuntu-ui-
+    toolkit/0.1.46+14.04.20131126-0ubuntu1.
+  * sound: drop the flickable, that's not needed, ListItem is one.
+
+  [ Iain Lane ]
+  * When generating the translated list of keywords, keep the byte array
+    alive for as long as it's needed. (LP: #1251729)
+  * Add a script to parse the .settings files and extract their
+    names/keywords for translation.
+  * Fix for lintian warnings; don't generate shlibs for private
+    libraries & override extra-license-file tag which points to a qml
+    file.
+  * [about] If there's a "regulatory-information" plugin, display a
+    listitem for it.
+  * [background] Set the index of the same/different OptionSelector from
+    gsettings.
+  * [battery] Draw dashed axes with 'ticks', per the design.
+  * [battery] Draw the graph with antialiaing to improve the look of the
+    line.
+  * Always load our translations from the right directory.
+  * Watch upower's device-added and device-removed signals so that we
+    can display / hide the battery panel if a battery is hotplugged.
+  * Run the autopilot tests with a mock UPower to make them more
+    reliable. Add tests checking whether the battery panel is visible or
+    hidden, as appropriate (dependent on the presence or not of a
+    battery).
+  * Update the translation templates.
+
+  [ Jussi Pakkanen ]
+  * Add a script to parse the .settings files and extract their
+    names/keywords for translation.
+
+  [ Víctor R. Ruiz ]
+  * Initial batch of autopilot tests for Ubuntu System Settings.
+
+  [ William Hua ]
+  * [language] Load eagerly so we can use fewer pointers.
+  * [language] Use custom Base for keyboard layout delegate. (LP:
+    #1256017). (LP: #1256017)
+
+  [ Ken VanDine ]
+  * [background] dropped unused utilities.js and removed references .
+  * default to a wider window size for the desktop, closer to the aspect
+    ration on the phone Added more qml files that weren't showing up in
+    qtcreator.
+  * added another qml source so it shows up in qtcreator .
+  * Added the ability to browse default wallpapers as well as manage
+    custom wallpapers selected from the gallery. This implements most of
+    the changes for the spec[1]. It doesn't implement making changes to
+    the images imported from the gallery to better fit the screen, we'll
+    do that in a separate branch. [1]
+    https://wiki.ubuntu.com/Appearance#Phone.
+
+  [ Adnane Belmadiaf ]
+  * Live change the brightness to much the panel indicator.
+
+  [ Dimitri John Ledkov ]
+  * Build-depend on gdb:any to aid with cross-building.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 530
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 16 Dec 2013 16:58:21 +0000
+
 ubuntu-system-settings (0.1+14.04.20131119-0ubuntu1) trusty; urgency=low
 
   [ Ken VanDine ]
