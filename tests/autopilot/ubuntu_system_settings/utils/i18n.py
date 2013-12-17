@@ -18,7 +18,5 @@ if not lc:
 
 language = gettext.translation(APP_NAME, LOCALE_DIR, languages=[lc], fallback=True)
 
-def ugettext(message):
-    """ gettext as UTF-8 """
-    return language.ugettext(message)
-
+# UTF-8
+ugettext = language.ugettext
