@@ -22,15 +22,20 @@ from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
 
-    def setUp(self):
+    def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.launch_system_settings()
+        self.launch_system_settings(panel=panel)
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
-    def launch_system_settings(self):
+    def launch_system_settings(self, panel=None):
         params = ['/usr/bin/system-settings']
         if (model() != 'Desktop'):
             params.append('--desktop_file_hint=/usr/share/applications/ubuntu-system-settings.desktop')
+
+        # Launch to a specific panel
+        if panel is not None:
+            params.append(panel)
+
         self.app = self.launch_test_application(
             *params,
             app_type='qt')
