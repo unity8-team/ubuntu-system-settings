@@ -310,20 +310,20 @@ LanguagePlugin::updateLanguageNamesAndCodes()
     localeProcess.start("locale", QStringList("-a"), QIODevice::ReadOnly);
     localeProcess.waitForFinished();
     QString localeOutput(localeProcess.readAllStandardOutput());
-    QStringList localeNames(localeOutput.split(QRegExp("\\s+")));
+    QSet<QString> localeNames(localeOutput.split(QRegExp("\\s+")).toSet());
 
     QHash<QString, QString> likelyLocaleForLanguage;
     QList<LanguageLocale> languageLocales;
-    QSet<QString> localeBlacklist;
 
-    // Initialize locale blacklist.
+    // Remove blacklisted locales.
     for (unsigned int
          i(0); i < sizeof(LOCALE_BLACKLIST) / sizeof(const char *); i++)
-        localeBlacklist += LOCALE_BLACKLIST[i];
+        localeNames.remove(LOCALE_BLACKLIST[i]);
 
-    for (QStringList::const_iterator
+    for (QSet<QString>::const_iterator
          i(localeNames.begin()); i != localeNames.end(); ++i) {
-        if (localeBlacklist.contains(*i))
+        // We only want locales that contain '.utf8'.
+        if (i->indexOf(".utf8") < 0)
             continue;
 
         LanguageLocale languageLocale(*i);
@@ -346,21 +346,6 @@ LanguagePlugin::updateLanguageNamesAndCodes()
     }
 
     qSort(languageLocales);
-
-    // Sometimes 'locale -a' lists the same locale twice, but with a UTF-8
-    // variant. We want to take only one, so we try to choose the most specific
-    // one, which usually has a longer name.
-    for (int i(0); i + 1 < languageLocales.length(); i++) {
-        while (i + 1 < languageLocales.length() &&
-               languageLocales[i + 1].displayName ==
-               languageLocales[i].displayName) {
-            if (languageLocales[i].localeName.length() >
-                languageLocales[i + 1].localeName.length())
-                languageLocales.removeAt(i + 1);
-            else
-                languageLocales.removeAt(i);
-        }
-    }
 
     for (int i(0); i < languageLocales.length(); i++) {
         const LanguageLocale &languageLocale(languageLocales[i]);
