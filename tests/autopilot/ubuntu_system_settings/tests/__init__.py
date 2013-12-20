@@ -11,7 +11,7 @@ from __future__ import absolute_import
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
-from autopilot.input import Pointer
+from autopilot.input import Mouse, Touch, Pointer
 from autopilot.platform import model
 from autopilot.testcase import AutopilotTestCase
 from autopilot.matchers import Eventually
@@ -26,6 +26,10 @@ import subprocess
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
                                    dbusmock.DBusTestCase):
     """ Base class for Ubuntu System Settings """
+    if model() == 'Desktop':
+        scenarios = [ ('with mouse', dict(input_device_class=Mouse)) ]
+    else:
+        scenarios = [ ('with touch', dict(input_device_class=Touch)) ]
 
     @classmethod
     def setUpClass(klass):
@@ -83,12 +87,7 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
 
     def setUp(self):
         """ Go to About page """
-        super(AboutBaseTestCase, self).setUp()
-        # Click on 'About' button
-        about = self.main_view.select_single(objectName='entryComponent-about')
-        self.assertThat(about, NotEquals(None))
-        self.pointer.move_to_object(about)
-        self.pointer.click()
+        super(AboutBaseTestCase, self).setUp('about')
 
     @property
     def about_page(self):
@@ -105,8 +104,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
         # Click on 'Storage' option
         button = self.about_page.select_single(objectName='storageItem')
         self.assertThat(button, NotEquals(None))
-        self.pointer.move_to_object(button)
-        self.pointer.click()
+        self.pointer.click_object(button)
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
@@ -137,8 +135,7 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         button = self.main_view.select_single(objectName='licenseItem')
         self.assertThat(button, NotEquals(None))
         self.assertThat(button.text, Equals(_('Software licenses')))
-        self.pointer.move_to_object(button)
-        self.pointer.click()
+        self.pointer.click_object(button)
 
     @property
     def licenses_page(self):
