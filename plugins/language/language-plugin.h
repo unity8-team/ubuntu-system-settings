@@ -127,14 +127,13 @@ public:
 
 private:
 
-    void updateLanguageLocales();
+    void updateLanguageNamesAndCodes();
     void updateCurrentLanguage();
     void updateKeyboardLayouts();
     void updateKeyboardLayoutsModel();
     void updateSpellCheckingModel();
 
-    int indexForLocale(const QLocale &locale) const;
-    int indexForLanguage(const QString &language) const;
+    int indexForLocale(const QString &name);
 
     void userLoaded();
 
@@ -154,11 +153,9 @@ private:
                                       gchar     *key,
                                       gpointer   user_data);
 
-    QList<QLocale> m_languageLocales;
     QStringList m_languageNames;
     QStringList m_languageCodes;
-    QHash<QString, unsigned int> m_indicesByBcp47Name;
-    QHash<QString, unsigned int> m_indicesByLocaleName;
+    QHash<QString, unsigned int> m_indicesByLocale;
 
     int m_currentLanguage;
     int m_nextCurrentLanguage;

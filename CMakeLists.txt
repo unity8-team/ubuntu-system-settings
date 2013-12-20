@@ -40,6 +40,7 @@ pkg_search_module(LIBNM_GLIB REQUIRED libnm-glib)
 pkg_search_module(ACCOUNTSSERVICE REQUIRED accountsservice)
 pkg_search_module(OFONO REQUIRED ofono-qt)
 pkg_search_module(TIMEZONEMAP REQUIRED timezonemap)
+pkg_search_module(ICU REQUIRED icu-i18n)
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)
