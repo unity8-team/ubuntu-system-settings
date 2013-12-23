@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-12-16 11:18+0000\n"
-"PO-Revision-Date: 2013-12-18 14:48+0000\n"
+"PO-Revision-Date: 2013-12-22 18:53+0000\n"
 "Last-Translator: Phillip Sz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-12-19 06:17+0000\n"
+"X-Launchpad-Export-Date: 2013-12-23 05:49+0000\n"
 "X-Generator: Launchpad (build 16872)\n"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:30
@@ -1292,7 +1292,7 @@ msgstr "Netzwerk"
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:20
 msgid "wireless"
-msgstr ""
+msgstr "drahtlos"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:22
@@ -1357,7 +1357,7 @@ msgstr "Sicherheit"
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: settings.js:54
 msgid "privacy"
-msgstr ""
+msgstr "Datenschutz"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:60
