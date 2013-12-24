@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-12-16 11:18+0000\n"
-"PO-Revision-Date: 2013-10-21 15:00+0000\n"
+"PO-Revision-Date: 2013-12-23 14:09+0000\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-12-17 06:17+0000\n"
-"X-Generator: Launchpad (build 16869)\n"
+"X-Launchpad-Export-Date: 2013-12-24 06:04+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:30
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetAllSettings.qml:29
@@ -399,7 +399,7 @@ msgstr "語言與文字"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:67
 msgid "Display language…"
-msgstr ""
+msgstr "顯示語言…"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:109
 msgid "Auto completion"
@@ -407,7 +407,7 @@ msgstr "自動完成"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:121
 msgid "Word suggestions"
-msgstr ""
+msgstr "字詞建議"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:134
 msgid "Auto capitalization"
@@ -419,7 +419,7 @@ msgstr "在每句句子開首打開 Shift 使首個字母大寫"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:154
 msgid "Keyboard sound"
-msgstr ""
+msgstr "鍵盤聲音"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:33
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:127
@@ -769,23 +769,23 @@ msgstr "手機"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:67
 msgid "Cellular data:"
-msgstr ""
+msgstr "流動數據："
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:68
 msgid "Off"
-msgstr ""
+msgstr "關"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:69
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "僅 2G (省電)"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:70
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (較快)"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:81
 msgid "Cellular data"
-msgstr "手機數據"
+msgstr "流動數據"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:90
 msgid "Data roaming"
@@ -813,7 +813,7 @@ msgstr "手動"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:125
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePasskeyDialog.qml:28
@@ -1162,27 +1162,27 @@ msgstr "各使用不同背景"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//WallpaperGrid.qml:121
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Preview.qml:67
 msgid "Preview"
-msgstr ""
+msgstr "預覽"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:41
 msgid "Choose background"
-msgstr ""
+msgstr "選擇背景"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:46
 msgid "Photo/Image"
-msgstr ""
+msgstr "相片/影像"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:86
 msgid "Ubuntu Art"
-msgstr ""
+msgstr "Ubuntu 美工"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:101
 msgid "Custom"
-msgstr ""
+msgstr "自訂"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:106
 msgid "System Settings"
@@ -1203,7 +1203,7 @@ msgstr "系統"
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: settings.js:4
 msgid "reset"
-msgstr ""
+msgstr "重設"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
@@ -1221,7 +1221,7 @@ msgstr ""
 #: settings.js:66 settings.js:80 settings.js:86 settings.js:96 settings.js:108
 #: settings.js:114 settings.js:124
 msgid "settings"
-msgstr ""
+msgstr "設定"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:8
@@ -1231,38 +1231,38 @@ msgstr "飛航模式"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:10
 msgid "flight"
-msgstr ""
+msgstr "飛航"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:12
 msgid "plane"
-msgstr ""
+msgstr "飛機"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:14
 msgid "offline"
-msgstr ""
+msgstr "離線"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:18 settings.js:102
 msgid "network"
-msgstr ""
+msgstr "網路"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:20
 msgid "wireless"
-msgstr ""
+msgstr "無線網路"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:22
 msgid "wifi"
-msgstr ""
+msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:24
 msgid "wi-fi"
-msgstr ""
+msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:28
@@ -1272,7 +1272,7 @@ msgstr "亮度"
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:30
 msgid "brightness"
-msgstr ""
+msgstr "亮度"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:34
@@ -1282,17 +1282,17 @@ msgstr "範例"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:36
 msgid "example"
-msgstr ""
+msgstr "例子"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:38
 msgid "test"
-msgstr ""
+msgstr "測試"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:40
 msgid "sample"
-msgstr ""
+msgstr "範例"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:42
@@ -1302,137 +1302,137 @@ msgstr "無障礙輔助"
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:44
 msgid "accessibility"
-msgstr ""
+msgstr "無障礙"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:46
 msgid "a11y"
-msgstr ""
+msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: settings.js:52
 msgid "security"
-msgstr ""
+msgstr "安全性"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: settings.js:54
 msgid "privacy"
-msgstr ""
+msgstr "隱私"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:60
 msgid "language"
-msgstr ""
+msgstr "語言"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:62
 msgid "lang"
-msgstr ""
+msgstr "語言"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:64
 msgid "i18n"
-msgstr ""
+msgstr "國際化"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:70
 msgid "about"
-msgstr ""
+msgstr "關於"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:72
 msgid "device"
-msgstr ""
+msgstr "裝置"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:74
 msgid "info"
-msgstr ""
+msgstr "資訊"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:78
 msgid "sound"
-msgstr ""
+msgstr "聲音"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: settings.js:84
 msgid "phone"
-msgstr ""
+msgstr "電話"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:90
 msgid "system"
-msgstr ""
+msgstr "系統"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:92
 msgid "software"
-msgstr ""
+msgstr "軟體"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:94
 msgid "update"
-msgstr ""
+msgstr "更新"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:100
 msgid "cellular"
-msgstr ""
+msgstr "手機"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:104
 msgid "mobile"
-msgstr ""
+msgstr "行動"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:106
 msgid "gsm"
-msgstr ""
+msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: settings.js:112
 msgid "bluetooth"
-msgstr ""
+msgstr "藍牙"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:118
 msgid "time"
-msgstr ""
+msgstr "時間"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:120
 msgid "date"
-msgstr ""
+msgstr "日期"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:122
 msgid "timezone"
-msgstr ""
+msgstr "時區"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: settings.js:128
 msgid "battery"
-msgstr ""
+msgstr "電池"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: settings.js:130
 msgid "power"
-msgstr ""
+msgstr "電源"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:134
 msgid "appearance"
-msgstr ""
+msgstr "外觀"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:136
 msgid "background"
-msgstr ""
+msgstr "背景"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:138
 msgid "wallpaper"
-msgstr ""
+msgstr "桌布"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:140
@@ -1442,19 +1442,19 @@ msgstr "鎖定方向"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:142
 msgid "rotation"
-msgstr ""
+msgstr "旋轉"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:144
 msgid "orientation"
-msgstr ""
+msgstr "方向"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:146
 msgid "lock"
-msgstr ""
+msgstr "鎖定"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:148
 msgid "screen"
-msgstr ""
+msgstr "螢幕"
