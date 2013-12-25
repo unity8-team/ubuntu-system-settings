@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-12-16 11:18+0000\n"
-"PO-Revision-Date: 2013-09-20 13:06+0000\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
+"PO-Revision-Date: 2013-12-24 19:13+0000\n"
+"Last-Translator: Úr Balázs <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-12-17 06:16+0000\n"
-"X-Generator: Launchpad (build 16869)\n"
+"X-Launchpad-Export-Date: 2013-12-25 06:37+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:30
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetAllSettings.qml:29
@@ -24,10 +24,12 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
+"A tartalmak és az indító elrendezése, valamint a kezdő képernyőn lévő szűrők "
+"vissza lesznek állítva az eredeti beállításukra."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
-msgstr ""
+msgstr "Az indító és a kezdő képernyő visszaállítása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:40
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//EraseEverything.qml:36
@@ -41,60 +43,64 @@ msgstr ""
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:173
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Preview.qml:96
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
+"Minden dokumentum, elmentett játék, beállítások és egyéb elemek véglegesen "
+"törölve lesznek erről a telefonról."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr ""
+msgstr "Törlés és minden visszaállítása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "Minden rendszerbeállítás visszaállítása"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//PageComponent.qml:32
 #: settings.js:2
 msgid "Reset phone"
-msgstr ""
+msgstr "Telefon visszaállítása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//PageComponent.qml:62
 msgid "Reset launcher & home screen…"
-msgstr ""
+msgstr "Az indító és a kezdő képernyő visszaállítása…"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//PageComponent.qml:75
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "Minden rendszerbeállítás visszaállítása…"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//PageComponent.qml:88
 msgid "Erase & reset everything…"
-msgstr ""
+msgstr "Törlés és minden visszaállítása…"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/wifi//PageComponent.qml:27
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:330
 #: settings.js:16
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "Hely"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "Helymeghatározás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"A GPS-t használja a helyzetének durva meghatározásához. Ha ki van kapcsolva, "
+"kikapcsolja a GPS-t az akkumulátor kímélése érdekében."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:72
 msgid ""
