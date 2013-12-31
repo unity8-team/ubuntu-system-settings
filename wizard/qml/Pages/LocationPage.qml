@@ -16,7 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import "../Components" as LocalComponents
+import "qrc:/qml/Components" as LocalComponents
 
 LocalComponents.Page {
     title: i18n.tr("Your phone settings")
@@ -36,7 +36,9 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.") + "\n\n" + i18n.tr("Your phone is setup to detect your location. This can be disabled in system settings.")
+            text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.") +
+                  "\n\n" +
+                  i18n.tr("Your phone is setup to detect your location. This can be disabled in system settings.")
         }
     }
 

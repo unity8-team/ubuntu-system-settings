@@ -19,7 +19,8 @@ import Ubuntu.Components 0.1
 
 Page {
     readonly property real buttonMargin: units.gu(2)
-    readonly property real buttonWidth: (width - buttonMargin * 2) / 2 - buttonMargin / 2
+    readonly property real buttonWidth: (width - buttonMargin * 2) / 2 -
+                                        buttonMargin / 2
     readonly property real topMargin: units.gu(5)
     readonly property real leftMargin: units.gu(3)
     readonly property real rightMargin: units.gu(3)

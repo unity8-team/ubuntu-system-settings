@@ -18,7 +18,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
-import "../Components" as LocalComponents
+import "qrc:/qml/Components" as LocalComponents
 
 LocalComponents.Page {
     title: i18n.tr("Hello!")
@@ -49,7 +49,8 @@ LocalComponents.Page {
                 width: content.width
                 wrapMode: Text.WordWrap
                 fontSize: "large"
-                text: i18n.tr("Welcome to Ubuntu.") + "\n" + i18n.tr("Let’s get started.")
+                text: i18n.tr("Welcome to Ubuntu.") + "\n" +
+                      i18n.tr("Let’s get started.")
             }
 
             OptionSelector {
@@ -61,7 +62,8 @@ LocalComponents.Page {
                     i18n.language = plugin.languageCodes[selectedIndex]
                     i18n.domain = i18n.domain
                 }
-                containerHeight: content.height - label.height - column.spacing - units.gu(4)
+                containerHeight: content.height - label.height
+                                 - column.spacing - units.gu(4)
             }
         }
     }
@@ -72,7 +74,9 @@ LocalComponents.Page {
             text: i18n.tr("Start")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
-                pageStack.push(Qt.resolvedUrl(simCardPresent ? "AboutYouPage.qml" : "SimCardPage.qml"))
+                pageStack.push(Qt.resolvedUrl(simCardPresent
+                                              ? "AboutYouPage.qml"
+                                              : "SimCardPage.qml"))
             }
         }
     }

@@ -16,7 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import "../Components" as LocalComponents
+import "qrc:/qml/Components" as LocalComponents
 
 LocalComponents.Page {
     title: i18n.tr("That’s it!")
@@ -36,7 +36,9 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("It’s great to have you in the Ubuntu Community.") + "\n\n" + i18n.tr("You’re now ready to enjoy your new phone.")
+            text: i18n.tr("It’s great to have you in the Ubuntu Community.") +
+                  "\n\n" +
+                  i18n.tr("You’re now ready to enjoy your new phone.")
         }
     }
     Component {
