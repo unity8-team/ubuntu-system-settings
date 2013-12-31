@@ -24,7 +24,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 
 MainView {
-    width: units.gu(40)
+    width: units.gu(50)
     height: units.gu(90)
     applicationName: "SystemSettings"
     automaticOrientation: true
@@ -53,6 +53,7 @@ MainView {
 
     Component.onCompleted: {
         i18n.domain = "ubuntu-system-settings"
+        i18n.bindtextdomain("ubuntu-system-settings", i18nDirectory)
         pageStack.push(mainPage)
         if (defaultPlugin) {
             if (!loadPluginByName(defaultPlugin))
@@ -101,6 +102,7 @@ MainView {
 
         Page {
             id: mainPage
+            objectName: "systemSettingsPage"
             title: i18n.tr("System Settings")
             visible: false
             flickable: mainFlickable
@@ -120,6 +122,7 @@ MainView {
                         control: TextField {
                             width: parent.width - units.gu(4)
                             placeholderText: i18n.tr("Search")
+                            objectName: "searchTextField"
                             onDisplayTextChanged:
                                 pluginManager.filter = displayText
                         }

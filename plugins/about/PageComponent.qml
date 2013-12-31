@@ -28,6 +28,7 @@ import Ubuntu.SystemSettings.Update 1.0
 
 ItemPage {
     id: root
+    objectName: "aboutPage"
 
     title: i18n.tr("About this phone")
     flickable: scrollWidget
@@ -70,6 +71,7 @@ ItemPage {
                     }
                     Label {
                         id: deviceLabel
+                        objectName: "deviceLabel"
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
                     }
@@ -78,11 +80,13 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: serialItem
+                objectName: "serialItem"
                 text: i18n.tr("Serial")
                 value: backendInfos.serialNumber ? backendInfos.serialNumber : i18n.tr("N/A")
             }
 
             ListItem.SingleValue {
+                objectName: "imeiItem"
                 property string imeiNumber
                 imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
@@ -90,22 +94,26 @@ ItemPage {
             }
 
             ListItem.Standard {
+                objectName: "softwareItem"
                 text: i18n.tr("Software:")
             }
 
             ListItem.SingleValue {
+                objectName: "osItem"
                 text: i18n.tr("OS")
                 value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
                        (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
             }
 
             ListItem.SingleValue {
+                objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
                 value: backendInfos.updateDate ? backendInfos.updateDate : i18n.tr("Never")
             }
 
             ListItem.SingleControl {
                 control: Button {
+                    objectName: "updateButton"
                     text: i18n.tr("Check for updates")
                     width: parent.width - units.gu(4)
                     onClicked:
@@ -115,16 +123,19 @@ ItemPage {
 
             ListItem.Standard {
                 id: storageItem
+                objectName: "storageItem"
                 text: i18n.tr("Storage")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
             ListItem.Standard {
+                objectName: "legalItem"
                 text: i18n.tr("Legal:")
             }
 
             ListItem.Standard {
+                objectName: "licenseItem"
                 text: i18n.tr("Software licenses")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Software.qml"))
