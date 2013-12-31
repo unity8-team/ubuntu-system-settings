@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("No SIM card installed")
+    title: i18n.tr("No SIM installed")
     forwardButtonSourceComponent: forwardButton
 
     Item {
