@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-12-16 11:18+0000\n"
-"PO-Revision-Date: 2013-12-24 19:13+0000\n"
-"Last-Translator: Úr Balázs <urbalazs@gmail.com>\n"
+"PO-Revision-Date: 2014-01-05 00:07+0000\n"
+"Last-Translator: Péter MÁTÓ <mato.peter@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-12-25 06:37+0000\n"
+"X-Launchpad-Export-Date: 2014-01-05 05:49+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:30
@@ -107,30 +107,42 @@ msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Wi-Fi és GPS használata a hely durva meghatározásához. A hely meghatározás "
+"kikapcsolása kíméli az akkumulátort."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"Wi-Fi (jelenleg ki van kapcsolva) és GPS használata a hely durva "
+"meghatározásához. A hely meghatározás kikapcsolása kíméli az akkumulátort."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"Wi-Fi, mobil tornyok helyzetének és GPS használata a hely durva "
+"meghatározásához. A hely meghatározás kikapcsolása kíméli az akkumulátort."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"Wi-Fi, mobil tornyok helyzetének (jelenleg nem elérhető a mobil hálózat) és "
+"GPS használata a hely durva meghatározásához. A hely meghatározás "
+"kikapcsolása kíméli az akkumulátort."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"Wi-Fi (jelenleg ki van kapcsolva), mobil tornyok helyzetének és GPS "
+"használata a hely durva meghatározásához. A hely meghatározás kikapcsolása "
+"kíméli az akkumulátort."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:82
 msgid ""
@@ -138,46 +150,49 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Wi-Fi (jelenleg ki van kapcsolva), mobil tornyok helyzetének (jelenleg nem "
+"elérhető a mobil hálózat) és GPS használata a hely durva meghatározásához. A "
+"hely meghatározás kikapcsolása kíméli az akkumulátort."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "Hely információ elérésének engedélyezése:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:29
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:73
 msgid "Phone locking"
-msgstr ""
+msgstr "Telefon lezárása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:40
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:105
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:212
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:220
 msgid "None"
-msgstr ""
+msgstr "Nincs"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "Jelkód"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:42
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:332
 msgid "Passphrase"
-msgstr ""
+msgstr "Jelmondat"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:44
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:30
 msgid "Lock security"
-msgstr ""
+msgstr "Zárolás biztonsága"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:62
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:302
 msgid "Lock when idle"
-msgstr ""
+msgstr "Zárolás, ha inaktív"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:63
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:302
 msgid "Sleep when idle"
-msgstr ""
+msgstr "Altatás, ha inaktív"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:65
@@ -185,297 +200,297 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 perc"
+msgstr[1] "%1 perc"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "Altatáskor azonnali zárolás"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:33
 #: settings.js:50
 msgid "Security & Privacy"
-msgstr ""
+msgstr "Biztonság és magánszféra"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:50
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:124
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Dash.qml:50
 msgid "Phone and Internet"
-msgstr ""
+msgstr "Telefon és internet"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:52
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:125
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Dash.qml:50
 msgid "Phone only"
-msgstr ""
+msgstr "Csak telefon"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:68
 msgid "Security:"
-msgstr ""
+msgstr "Biztonság:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:84
 msgid "SIM PIN"
-msgstr ""
+msgstr "SIM PIN"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:90
 msgid "Privacy:"
-msgstr ""
+msgstr "Magánszféra:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:94
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Statisztikák az üdvözlő képernyőn"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:107
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Üzenetek az üdvözlő képernyőn"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:122
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr ""
+msgstr "Dash keresés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:140
 msgid "Location access"
-msgstr ""
+msgstr "Hely hozzáférés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:148
 msgid "Other app access"
-msgstr ""
+msgstr "Egyéb alkalmazás hozzáférés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:153
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnosztika"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:158
 msgid "Sent"
-msgstr ""
+msgstr "Elküldve"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:161
 msgid "Not sent"
-msgstr ""
+msgstr "Nincs elküldve"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "Jelkód megváltoztatása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "Jelmondat megváltoztatása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "Csúsztatásra váltás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Jelkódra váltás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "Jelmondatra váltás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "Korábbi jelkód"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "Korábbi jelmondat"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Hibás jelkód. Próbálja újra!"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Hibás jelmondat. Próbálja újra!"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "Válasszon jelkódot"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Válasszon jelmondatot"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Jelkód megerősítése"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Jelmondat megerősítése"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "A jelkódok nem egyeznek. Próbálja újra!"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "A jelmondatok nem egyeznek. Próbálja újra!"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "Elfelejt"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "Folytatás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "A telefon feloldása az alábbival:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Csúsztatás (nincs zárolás)"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4 jegyű jelkód"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Csúsztatás (nincs zárolás)... "
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4 jegyű jelkód..."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "Jelmondat..."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "Jelkód módosítása..."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Jelmondat módosítása..."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Dash.qml:49
 msgid "Return results from:"
-msgstr ""
+msgstr "Visszatérési érték innen:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//SpellChecking.qml:27
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//SpellChecking.qml:36
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:97
 msgid "Spell checking"
-msgstr ""
+msgstr "Helyesírás ellenőrzés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "Jelenleg ellenőrzött nyelvek:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
-msgstr ""
+msgstr "Rendelkezésre álló nyelvek:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr ""
+msgstr "A megjelenítés nyelve"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//DisplayLanguage.qml:111
 msgid "Confirm"
-msgstr ""
+msgstr "Jóváhagyás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//KeyboardLayouts.qml:26
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:81
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "Billentyűzetkiosztások"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr ""
+msgstr "Jelenlegi kiosztások:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr ""
+msgstr "A rendelkezésre álló kiosztások:"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:31
 #: settings.js:58
 msgid "Language & Text"
-msgstr ""
+msgstr "Nyelv és szöveg"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:67
 msgid "Display language…"
-msgstr ""
+msgstr "Megjelenítési nyelv..."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:109
 msgid "Auto completion"
-msgstr ""
+msgstr "Automatikus kiegészítés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:121
 msgid "Word suggestions"
-msgstr ""
+msgstr "Szó javaslatok"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:134
 msgid "Auto capitalization"
-msgstr ""
+msgstr "Automatikus nagybetűsítés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:144
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
+msgstr "A Shift bekapcsolása a mondatok kezdőbetűinek nagybetűsítésére."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:154
 msgid "Keyboard sound"
-msgstr ""
+msgstr "Billentyűzet hang"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:33
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:127
 msgid "Storage"
-msgstr ""
+msgstr "Tároló"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:88
 msgid "Used by Ubuntu"
-msgstr ""
+msgstr "Az Ubuntu által használt"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:89
 msgid "Movies"
-msgstr ""
+msgstr "Videók"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:90
 msgid "Audio"
-msgstr ""
+msgstr "Zenék"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:91
 msgid "Pictures"
-msgstr ""
+msgstr "Képek"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:92
 msgid "Other files"
-msgstr ""
+msgstr "Egyéb"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:93
 msgid "Used by apps"
-msgstr ""
+msgstr "Alkalmazások által használt"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:143
 msgid "Total storage"
-msgstr ""
+msgstr "Teljes tárterület"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:155
 msgid "Free space"
-msgstr ""
+msgstr "Szabad hely"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:175
 msgid "Installed apps"
-msgstr ""
+msgstr "Telepített alkalmazások"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:176
 msgid "By name"
-msgstr ""
+msgstr "Név szerint"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:176
 msgid "By size"
-msgstr ""
+msgstr "Méret szerint"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:204
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:85
@@ -484,34 +499,34 @@ msgstr ""
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:129
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:236
 msgid "N/A"
-msgstr ""
+msgstr "Nem elérhető"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Software.qml:10
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:139
 msgid "Software licenses"
-msgstr ""
+msgstr "Szoftver licencek"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:33
 #: settings.js:68
 msgid "About this phone"
-msgstr ""
+msgstr "A telefon névjegye"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:84
 msgid "Serial"
-msgstr ""
+msgstr "Sorozatszám"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:98
 msgid "Software:"
-msgstr ""
+msgstr "Szoftver:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:103
 msgid "OS"
-msgstr ""
+msgstr "OS"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:110
 msgid "Last updated"
-msgstr ""
+msgstr "Utolsó frissítés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:111
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:53
@@ -520,15 +535,15 @@ msgstr ""
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:311
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:320
 msgid "Never"
-msgstr ""
+msgstr "Soha"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:117
 msgid "Check for updates"
-msgstr ""
+msgstr "Frissítések keresése"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:134
 msgid "Legal:"
-msgstr ""
+msgstr "Jogi információk:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:147
 msgid "Regulatory info"
@@ -536,393 +551,398 @@ msgstr ""
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
-msgstr ""
+msgstr "Lejátszás leállítása"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:32
 #: settings.js:76
 msgid "Sound"
-msgstr ""
+msgstr "Hang"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:55
 msgid "Phone calls:"
-msgstr ""
+msgstr "Hívások:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:59
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:65
 msgid "Ringtone"
-msgstr ""
+msgstr "Csengőhang"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:76
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "Csörgéskor rezeg"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:84
 msgid "Vibrate in silent mode"
-msgstr ""
+msgstr "Néma módban rezeg"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:89
 msgid "Other sounds:"
-msgstr ""
+msgstr "Egyéb hangok:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:93
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:99
 msgid "Message received"
-msgstr ""
+msgstr "Üzenet érkezett"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:109
 msgid "Keyboard sounds"
-msgstr ""
+msgstr "Billentyűzet hangok"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:117
 msgid "Lock sound"
-msgstr ""
+msgstr "Zárolási hang"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "A telefon néma módban van."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:27
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:60
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:46
 msgid "Call forwarding"
-msgstr ""
+msgstr "Hívás továbbítás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"Egy másik számra irányítja a hívást ha nem veszi fel, a telefon foglalt, ki "
+"van kapcsolva vagy nincs térerő."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
+"Jelenleg nem ellenőrizhető a hívás továbbítás státusza. Próbálja meg később!"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:102
 msgid "Divert to"
-msgstr ""
+msgstr "Átirányítás ide:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:113
 msgid "Contacts…"
-msgstr ""
+msgstr "Névjegyek..."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:113
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:182
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Preview.qml:102
 msgid "Set"
-msgstr ""
+msgstr "Beállít"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//Services.qml:30
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:61
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "%1 szolgáltatások"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallWaiting.qml:27
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallWaiting.qml:53
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:52
 msgid "Call waiting"
-msgstr ""
+msgstr "Hívás várakoztatás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallWaiting.qml:67
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
+"Lehetővé teszi, hogy új hívást indítson vagy fogadjon, egy másik hívás "
+"közben és váltson közöttük"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:28
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:82
 #: settings.js:82
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//ServiceInfo.qml:35
 msgid "Call"
-msgstr ""
+msgstr "Hívás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:29
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:327
 msgid "Auto download"
-msgstr ""
+msgstr "Automatikus letöltés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:34
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "Frissítések automatikus letöltése:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Wi-Fi hálózaton"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "Bármely adatkapcsolaton"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "Adatforgalmi díja lehet!"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:32
 #: settings.js:88
 msgid "Updates"
-msgstr ""
+msgstr "Frissítések"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:51
 msgid "Checking for updates…"
-msgstr ""
+msgstr "Frissítések keresése…"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:88
 msgid "Apply update failed:"
-msgstr ""
+msgstr "A fissítés sikertelen:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:98
 msgid "Pause failed:"
-msgstr ""
+msgstr "Felfüggesztés sikertelen:"
 
 #. TRANSLATORS: %1 is the size of the update in GB
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:113
 #, qt-format
 msgid "%1 GB"
-msgstr ""
+msgstr "%1 GB"
 
 #. TRANSLATORS: %1 is the size of the update in MB
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:116
 #, qt-format
 msgid "%1 MB"
-msgstr ""
+msgstr "%1 MB"
 
 #. TRANSLATORS: %1 is the date when the device was last updated
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:125
 msgid "No software update available"
-msgstr ""
+msgstr "Nem elérhető frissítés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:125
 #, qt-format
 msgid "Last updated %1"
-msgstr ""
+msgstr "Utoljára frissítve: %1"
 
 #. TRANSLATORS: %1 is the number of seconds remaining
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:138
 #, qt-format
 msgid "About %1 second remaining"
 msgid_plural "About %1 seconds remaining"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hátralévő idő: %1 másodperc"
+msgstr[1] "Hátralévő idő: %1 másodperc"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:140
 msgid "No estimate for the download"
-msgstr ""
+msgstr "A letöltés ideje nem becsülhető"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:146
 msgid "Paused"
-msgstr ""
+msgstr "Felfüggesztve"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:155
 msgid "Download failed:"
-msgstr ""
+msgstr "Letöltés sikertelen:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:210
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:305
 msgid "Retry"
-msgstr ""
+msgstr "Újra"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:275
 msgid "Pause downloading"
-msgstr ""
+msgstr "Letöltés felfüggesztése"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:282
 msgid "Resume downloading"
-msgstr ""
+msgstr "Letöltés újraindítása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:298
 msgid "Download"
-msgstr ""
+msgstr "Letöltés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:312
 msgid "Install & Restart"
-msgstr ""
+msgstr "Telepítés és újraindítás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:332
 msgid "On wi-fi"
-msgstr ""
+msgstr "Wi-Fi hálózaton"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:334
 msgid "Always"
-msgstr ""
+msgstr "Mindig"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//ChooseCarrier.qml:28
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:114
 msgid "Carrier"
-msgstr ""
+msgstr "Szolgáltató"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//ChooseCarrier.qml:78
 msgid "Refresh"
-msgstr ""
+msgstr "Frissítés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//ChooseCarrier.qml:95
 msgid "Searching"
-msgstr ""
+msgstr "Keresés"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:28
 #: settings.js:98
 msgid "Cellular"
-msgstr ""
+msgstr "Mobil"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:67
 msgid "Cellular data:"
-msgstr ""
+msgstr "Mobil adatátvitel:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:68
 msgid "Off"
-msgstr ""
+msgstr "Kikapcsolva"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:69
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Csak 2G (akkumulátor kímélő)"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:70
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (gyorsabb)"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:81
 msgid "Cellular data"
-msgstr ""
+msgstr "Mobil adatátvitel"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:90
 msgid "Data roaming"
-msgstr ""
+msgstr "Adat roaming"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:99
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Adat használati statisztikák"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:108
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Válassz szolgáltatót:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:109
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:47
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:66
 msgid "Automatically"
-msgstr ""
+msgstr "Automatikusan"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:109
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:47
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:66
 msgid "Manually"
-msgstr ""
+msgstr "Kézzel"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:125
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePasskeyDialog.qml:28
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePinCodeDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr ""
+msgstr "Bluetooth párosítási kérés"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "Erősítse meg, hogy a \"%1\" által megjelenített PIN megegyezik ezzel"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "PIN megerősítése"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:71
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr ""
+msgstr "%1 (Kapcsolódás...)"
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:74
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr ""
+msgstr "%1 (Leválasztás...)"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:81
 msgid "Computer"
-msgstr ""
+msgstr "Számítógép"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:83
 msgid "Modem"
-msgstr ""
+msgstr "Modem"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:84
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:137
 msgid "Network"
-msgstr ""
+msgstr "Hálózat"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
-msgstr ""
+msgstr "Headset"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:86
 msgid "Headphones"
-msgstr ""
+msgstr "Fülhallgatók"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:87
 msgid "Video"
-msgstr ""
+msgstr "Videó"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:88
 msgid "Other Audio"
-msgstr ""
+msgstr "Egyéb hang"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:89
 msgid "Joypad"
-msgstr ""
+msgstr "Joypad"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:90
 msgid "Keyboard"
-msgstr ""
+msgstr "Billentyűzet"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:91
 msgid "Tablet"
-msgstr ""
+msgstr "Táblagép"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:92
 msgid "Mouse"
-msgstr ""
+msgstr "Egér"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:93
 msgid "Printer"
-msgstr ""
+msgstr "Nyomtató"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:94
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:95
 msgid "Other"
-msgstr ""
+msgstr "Egyéb"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:101
 msgid "Excellent"
-msgstr ""
+msgstr "Kiváló"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:102
 msgid "Good"
-msgstr ""
+msgstr "Jó"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:103
 msgid "Fair"
-msgstr ""
+msgstr "Elfogadható"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:104
 msgid "Poor"
-msgstr ""
+msgstr "Gyenge"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:111
@@ -930,124 +950,124 @@ msgstr ""
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:360
 #: settings.js:110
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:149
 msgid "Connected headset:"
-msgstr ""
+msgstr "Használt headset:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:177
 msgid "Connect a different headset:"
-msgstr ""
+msgstr "Kapcsolódás másik headset-hez:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:177
 msgid "Connect a headset:"
-msgstr ""
+msgstr "Kapcsolódás headset-hez:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:203
 msgid "None detected"
-msgstr ""
+msgstr "Nem található"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:219
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:223
 msgid "Type"
-msgstr ""
+msgstr "Típus"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:227
 msgid "Signal Strength"
-msgstr ""
+msgstr "Jelerősség"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:232
 msgid "Disconnect"
-msgstr ""
+msgstr "Kapcsolat bontása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "PIN a következőhöz: %1"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePasskeyDialog.qml:62
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePinCodeDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "Párosítás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Dátum és idő beállítása"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Idő"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Óra"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Perc"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Másodperc"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Dátum"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Nap"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "Hónap"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "Év"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "Időzóna"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Időzóna beállítása:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:113
 msgid "Enter your current location."
-msgstr ""
+msgstr "Adja meg a jelenlegi helyzetét!"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:113
 msgid "No matching place"
-msgstr ""
+msgstr "Nincs találat"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:29
 #: settings.js:116
 msgid "Time & Date"
-msgstr ""
+msgstr "Dátum és idő"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:52
 msgid "Time zone:"
-msgstr ""
+msgstr "Időzóna:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:65
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Dátum és idő beállítása:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "Telefon zárolása, ha nem aktív:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "Altassa el a telefont ha nem aktív:"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:77
@@ -1060,163 +1080,165 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 perc után"
+msgstr[1] "%1 perc után"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
+"Biztonságosabb kisebb értéket választani. A telefon nem kerül zárolásra "
+"telefonhívások vagy videó lejátszás közben."
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
+msgstr "A telefon nem alszik el telefonhívások vagy videó lejátszás közben."
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:35
 #: settings.js:126
 msgid "Battery"
-msgstr ""
+msgstr "Akkumulátor"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:47
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 másodperce"
+msgstr[1] "%1 másodperce"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:50
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 perce"
+msgstr[1] "%1 perce"
 
 #. TRANSLATORS: %1 is the number of hours
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:53
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 órája"
+msgstr[1] "%1 órája"
 
 #. TRANSLATORS: %1 is the number of days
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:56
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 napja"
+msgstr[1] "%1 napja"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:76
 msgid "Charging now"
-msgstr ""
+msgstr "Töltés folyamatban"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:81
 msgid "Last full charge"
-msgstr ""
+msgstr "Utolsó teljes töltés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:86
 msgid "Fully charged"
-msgstr ""
+msgstr "Teljesen feltöltve"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:124
 msgid "Charge level"
-msgstr ""
+msgstr "Töltöttségi szint"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:132
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:241
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "A merülés a következő módokon lassítható:"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:245
 msgid "Display brightness"
-msgstr ""
+msgstr "Kijelző fényereje"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:391
 msgid "GPS"
-msgstr ""
+msgstr "GPS"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:410
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "A pontos hely meghatározáshoz GPS vagy Wi-Fi szükséges."
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:31
 #: settings.js:132
 msgid "Background"
-msgstr ""
+msgstr "Háttér"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:130
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:42
 msgid "Welcome screen"
-msgstr ""
+msgstr "Üdvözlő képernyő"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:173
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:42
 msgid "Home screen"
-msgstr ""
+msgstr "Kezdőképernyő"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:198
 msgid "Same background for both"
-msgstr ""
+msgstr "Azonos háttér mindkettőn"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:199
 msgid "Different background for each"
-msgstr ""
+msgstr "A hátterek különböznek"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//WallpaperGrid.qml:121
 msgid "Remove"
-msgstr ""
+msgstr "Eltávolítás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Preview.qml:67
 msgid "Preview"
-msgstr ""
+msgstr "Előnézet"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:41
 msgid "Choose background"
-msgstr ""
+msgstr "Válasszon hátteret"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:46
 msgid "Photo/Image"
-msgstr ""
+msgstr "Fotó vagy kép"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:86
 msgid "Ubuntu Art"
-msgstr ""
+msgstr "Ubuntu Art"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:101
 msgid "Custom"
-msgstr ""
+msgstr "Egyedi beállítás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:106
 msgid "System Settings"
-msgstr ""
+msgstr "Alapértelmezett beállítás"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:124
 msgid "Search"
-msgstr ""
+msgstr "Keresés"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:142
 msgid "Personal"
-msgstr ""
+msgstr "Személyes"
 
 #: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:147
 msgid "System"
-msgstr ""
+msgstr "Rendszer"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: settings.js:4
 msgid "reset"
-msgstr ""
+msgstr "visszaállítás"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
@@ -1234,240 +1256,240 @@ msgstr ""
 #: settings.js:66 settings.js:80 settings.js:86 settings.js:96 settings.js:108
 #: settings.js:114 settings.js:124
 msgid "settings"
-msgstr ""
+msgstr "beállítások"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:8
 msgid "Flight mode"
-msgstr ""
+msgstr "Repülési üzemmód"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:10
 msgid "flight"
-msgstr ""
+msgstr "repülési"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:12
 msgid "plane"
-msgstr ""
+msgstr "repülő"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:14
 msgid "offline"
-msgstr ""
+msgstr "offline"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:18 settings.js:102
 msgid "network"
-msgstr ""
+msgstr "hálózat"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:20
 msgid "wireless"
-msgstr ""
+msgstr "vezeték nélküli"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:22
 msgid "wifi"
-msgstr ""
+msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:24
 msgid "wi-fi"
-msgstr ""
+msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:28
 msgid "Brightness"
-msgstr ""
+msgstr "Fényerő"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:30
 msgid "brightness"
-msgstr ""
+msgstr "fényerő"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:34
 msgid "Example"
-msgstr ""
+msgstr "Példa"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:36
 msgid "example"
-msgstr ""
+msgstr "példa"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:38
 msgid "test"
-msgstr ""
+msgstr "teszt"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:40
 msgid "sample"
-msgstr ""
+msgstr "minta"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:42
 msgid "Accessibility"
-msgstr ""
+msgstr "Kisegítő lehetőségek"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:44
 msgid "accessibility"
-msgstr ""
+msgstr "akadálymentesítés"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:46
 msgid "a11y"
-msgstr ""
+msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: settings.js:52
 msgid "security"
-msgstr ""
+msgstr "biztonság"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: settings.js:54
 msgid "privacy"
-msgstr ""
+msgstr "magánszféra"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:60
 msgid "language"
-msgstr ""
+msgstr "nyelv"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:62
 msgid "lang"
-msgstr ""
+msgstr "nyelv"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:64
 msgid "i18n"
-msgstr ""
+msgstr "i18n"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:70
 msgid "about"
-msgstr ""
+msgstr "névjegy"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:72
 msgid "device"
-msgstr ""
+msgstr "eszköz"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:74
 msgid "info"
-msgstr ""
+msgstr "infó"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:78
 msgid "sound"
-msgstr ""
+msgstr "hang"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: settings.js:84
 msgid "phone"
-msgstr ""
+msgstr "telefon"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:90
 msgid "system"
-msgstr ""
+msgstr "rendszer"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:92
 msgid "software"
-msgstr ""
+msgstr "szoftver"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:94
 msgid "update"
-msgstr ""
+msgstr "frissítés"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:100
 msgid "cellular"
-msgstr ""
+msgstr "mobil"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:104
 msgid "mobile"
-msgstr ""
+msgstr "mobil"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:106
 msgid "gsm"
-msgstr ""
+msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: settings.js:112
 msgid "bluetooth"
-msgstr ""
+msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:118
 msgid "time"
-msgstr ""
+msgstr "idő"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:120
 msgid "date"
-msgstr ""
+msgstr "dátum"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:122
 msgid "timezone"
-msgstr ""
+msgstr "időzóna"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: settings.js:128
 msgid "battery"
-msgstr ""
+msgstr "akkumulátor"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: settings.js:130
 msgid "power"
-msgstr ""
+msgstr "áramellátás"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:134
 msgid "appearance"
-msgstr ""
+msgstr "megjelenítés"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:136
 msgid "background"
-msgstr ""
+msgstr "háttér"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:138
 msgid "wallpaper"
-msgstr ""
+msgstr "háttérkép"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:140
 msgid "Orientation lock"
-msgstr ""
+msgstr "Tájolás zárolása"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:142
 msgid "rotation"
-msgstr ""
+msgstr "forgatás"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:144
 msgid "orientation"
-msgstr ""
+msgstr "tájolás"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:146
 msgid "lock"
-msgstr ""
+msgstr "zárolás"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:148
 msgid "screen"
-msgstr ""
+msgstr "képernyő"
