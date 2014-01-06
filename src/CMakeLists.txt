@@ -8,7 +8,6 @@ add_definitions(-DPLUGIN_MODULE_DIR="${PLUGIN_MODULE_DIR}")
 add_subdirectory(SystemSettings)
 
 set(USS_SOURCES
-    accountsservice.cpp
     debug.cpp
     i18n.cpp
     item-model.cpp
@@ -29,9 +28,13 @@ set(QML_SOURCES
 QT5_ADD_RESOURCES(system-settings-resources ui.qrc)
 
 add_executable(system-settings ${USS_SOURCES} ${QML_SOURCES} ${system-settings-resources})
-qt5_use_modules(system-settings Core Gui Quick Qml DBus)
+qt5_use_modules(system-settings Core Gui Quick Qml)
 target_link_libraries(system-settings SystemSettings)
 install(TARGETS system-settings RUNTIME DESTINATION bin)
+
+add_library(uss-accountsservice SHARED accountsservice.h accountsservice.cpp)
+qt5_use_modules(uss-accountsservice Core Qml DBus)
+install(TARGETS uss-accountsservice DESTINATION ${PLUGIN_MODULE_DIR})
 
 add_custom_target(po COMMAND
 ${XGETTEXT_BIN} -o ${CMAKE_SOURCE_DIR}/po/ubuntu-system-settings.pot -d ubuntu-system-settings

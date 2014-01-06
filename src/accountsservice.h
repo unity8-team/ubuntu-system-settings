@@ -38,6 +38,8 @@ public:
     void setUserProperty(const QString &interface,
                          const QString &property,
                          const QVariant &value);
+    void customSetUserProperty(const QString &method,
+                               const QVariant &value);
 
 
 public Q_SLOTS:
@@ -46,6 +48,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void propertyChanged(QString interface, QString property);
+    void changed();
     void nameOwnerChanged();
 
 private:

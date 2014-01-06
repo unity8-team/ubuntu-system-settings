@@ -88,6 +88,13 @@ void AccountsService::setUpInterface()
             "PropertiesChanged",
             this,
             SLOT(slotChanged(QString, QVariantMap, QStringList)));
+        m_accountsserviceIface.connection().connect(
+            m_accountsserviceIface.service(),
+            m_objectPath,
+            "org.freedesktop.Accounts.User",
+            "Changed",
+            this,
+            SIGNAL (changed ()));
     }
 }
 
@@ -121,7 +128,7 @@ void AccountsService::setUserProperty(const QString &interface,
                                       const QVariant &value)
 {
     QDBusInterface iface (
-                "org.freedesktop.Accounts",
+                 "org.freedesktop.Accounts",
                 m_objectPath,
                 "org.freedesktop.DBus.Properties",
                 m_systemBusConnection,
@@ -133,4 +140,18 @@ void AccountsService::setUserProperty(const QString &interface,
                    property,
                    QVariant::fromValue(QDBusVariant(value)));
     }
+}
+
+void AccountsService::customSetUserProperty(const QString &method,
+                                            const QVariant &value)
+{
+    QDBusInterface iface ("org.freedesktop.Accounts",
+                          m_objectPath,
+                          "org.freedesktop.Accounts.User",
+                          m_systemBusConnection,
+                          this);
+
+    if (iface.isValid())
+        iface.call(method, value);
+
 }
