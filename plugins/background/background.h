@@ -63,7 +63,6 @@ Q_SIGNALS:
 
 private:
     AccountsService m_accountsService;
-
     QStringList m_ubuntuArt;
     QStringList m_customBackgrounds;
     void updateCustomBackgrounds();
