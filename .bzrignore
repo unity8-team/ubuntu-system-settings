@@ -2,6 +2,7 @@
 *.debhelper
 *.log
 *.moc
+CMakeLists.txt.user
 moc_*
 Makefile*
 tst_*
