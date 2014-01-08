@@ -23,6 +23,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Sound 1.0
 
 import "utilities.js" as Utilities
 
@@ -31,6 +32,8 @@ ItemPage {
 
     title: i18n.tr("Sound")
     flickable: scrollWidget
+
+    UbuntuSoundPanel { id: backendInfo }
 
     GSettings {
         id: soundSettings
@@ -49,7 +52,7 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            SilentModeWarning { visible: soundSettings.silentMode }
+            SilentModeWarning { visible: backendInfo.silentMode }
 
             ListItem.Standard {
                 text: i18n.tr("Phone calls:")
@@ -58,7 +61,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Ringtone")
                 value: Utilities.buildDisplayName(
-                           soundSettings.incomingCallSound)
+                           backendInfo.incomingCallSound)
                 progression: true
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SoundsList.qml"),
@@ -92,12 +95,12 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Message received")
                 value:Utilities.buildDisplayName(
-                          soundSettings.incomingMessageSound)
+                          backendInfo.incomingMessageSound)
                 progression: true
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SoundsList.qml"),
                                { title: i18n.tr("Message received"),
-                                 soundType: 1,
+                                  soundType: 1,
                                  soundsDir:
                                    "/usr/share/sounds/ubuntu/notifications/" })
             }

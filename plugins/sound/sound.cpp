@@ -22,15 +22,97 @@
 #include "sound.h"
 #include <unistd.h>
 
+#define AS_INTERFACE "com.ubuntu.touch.AccountsService.Sound"
+
 Sound::Sound(QObject *parent) :
     QObject(parent)
 {
+    connect (&m_accountsService,
+             SIGNAL (propertyChanged (QString, QString)),
+             this,
+             SLOT (slotChanged (QString, QString)));
 
+    connect (&m_accountsService,
+             SIGNAL (nameOwnerChanged()),
+             this,
+             SLOT (slotNameOwnerChanged()));
+}
+
+void Sound::slotChanged(QString interface,
+                                  QString property)
+{
+    if (interface != AS_INTERFACE)
+        return;
+
+    if (property == "SilentMode") {
+        Q_EMIT silentModeChanged();
+    } else if (property == "IncomingCallSound") {
+        Q_EMIT incomingCallSoundChanged();
+    } else if (property == "IncomingMessageSound") {
+        Q_EMIT incomingMessageSoundChanged();
+    }
+}
+
+void Sound::slotNameOwnerChanged()
+{
+    // Tell QML so that it refreshes its view of the property
+    Q_EMIT incomingCallSoundChanged();
+    Q_EMIT incomingMessageSoundChanged();
+    Q_EMIT silentModeChanged();
+}
+
+QString Sound::getIncomingCallSound()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "IncomingCallSound").toString();
+}
+
+void Sound::setIncomingCallSound(QString sound)
+{
+    if (sound == getIncomingCallSound())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "IncomingCallSound",
+                                      QVariant::fromValue(sound));
+    Q_EMIT(incomingCallSoundChanged());
+}
+
+QString Sound::getIncomingMessageSound()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "IncomingMessageSound").toString();
+}
+
+void Sound::setIncomingMessageSound(QString sound)
+{
+    if (sound == getIncomingMessageSound())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "IncomingMessageSound",
+                                      QVariant::fromValue(sound));
+    Q_EMIT(incomingMessageSoundChanged());
+}
+
+bool Sound::getSilentMode()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "SilentMode").toBool();
+}
+
+void Sound::setSilentMode(bool enabled)
+{
+    if (enabled == getSilentMode())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "SilentMode",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(silentModeChanged());
 }
 
 QStringList Sound::listSounds(const QString &dirString)
-
-
 {
     if (m_soundsList.isEmpty())
     {
@@ -39,7 +121,4 @@ QStringList Sound::listSounds(const QString &dirString)
         m_soundsList = soundsDir.entryList();
     }
     return m_soundsList;
-}
-
-Sound::~Sound() {
 }

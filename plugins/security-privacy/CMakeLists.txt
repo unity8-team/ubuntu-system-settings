@@ -12,8 +12,6 @@ add_library(UbuntuSecurityPrivacyPanel MODULE plugin.h securityprivacy.h plugin.
 ${QML_SOURCES})
 qt5_use_modules(UbuntuSecurityPrivacyPanel Qml Quick DBus)
 
-set(ACCOUNTS_IFACE_DIR "${CMAKE_INSTALL_PREFIX}/share/accountsservice/interfaces")
-
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/SecurityPrivacy)
 install(TARGETS UbuntuSecurityPrivacyPanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
