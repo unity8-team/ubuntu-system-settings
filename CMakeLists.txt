@@ -57,10 +57,13 @@ set(PLUGIN_PRIVATE_MODULE_DIR "${CMAKE_INSTALL_PREFIX}/${LIBDIR}/${PLUGIN_PRIVAT
 
 set(ANDR_PROP_LIB -landroid-properties)
 
+SET(CMAKE_INSTALL_RPATH "${PLUGIN_MODULE_DIR}")
+
 add_subdirectory(po)
 add_subdirectory(schema)
 add_subdirectory(lib)
 include_directories(lib)
+include_directories(src)
 add_subdirectory(plugins)
 add_subdirectory(src)
 add_subdirectory(tests)
