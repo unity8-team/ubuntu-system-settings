@@ -12,9 +12,11 @@ APP_NAME='ubuntu-system-settings'
 LOCALE_DIR='/usr/share/locale/'
 
 lc, encoding = locale.getdefaultlocale()
+
+if not lc:
+    lc = 'C'
+
 language = gettext.translation(APP_NAME, LOCALE_DIR, languages=[lc], fallback=True)
 
-def ugettext(message):
-    """ gettext as UTF-8 """
-    return language.ugettext(message)
-
+# UTF-8
+ugettext = language.ugettext

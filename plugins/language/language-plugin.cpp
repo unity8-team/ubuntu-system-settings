@@ -19,8 +19,10 @@
  */
 
 #include "language-plugin.h"
-#include <act/act.h>
 #include "keyboard-layout.h"
+
+#include <act/act.h>
+#include <unicode/locid.h>
 
 #define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
 
@@ -30,7 +32,57 @@
 #define KEY_PREDICTIVE_TEXT     "predictive-text"
 #define KEY_KEY_PRESS_FEEDBACK  "key-press-feedback"
 
+#define LANGUAGE2LOCALE "/usr/share/language-tools/language2locale"
 #define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
+
+static const char * const LOCALE_BLACKLIST[] = {
+    "C",
+    "C.UTF-8",
+    "POSIX",
+    NULL
+};
+
+struct LanguageLocale
+{
+public:
+
+    // Should be true if locale is the default for its language.
+    // e.g. 'en_US' is the likely locale for 'en', 'en_CA' is not.
+    bool likely;
+
+    QString localeName;
+    QString displayName;
+    icu::Locale locale;
+
+public:
+
+    explicit LanguageLocale(const QString &name);
+
+    bool operator<(const LanguageLocale &l) const;
+};
+
+LanguageLocale::LanguageLocale(const QString &name) :
+    likely(false),
+    localeName(name),
+    locale(qPrintable(name))
+{
+    std::string string;
+    icu::UnicodeString unicodeString;
+    locale.getDisplayName(locale, unicodeString);
+    unicodeString.toUTF8String(string);
+    displayName = string.c_str();
+}
+
+bool LanguageLocale::operator<(const LanguageLocale &l) const
+{
+    // Likely locales should precede unlikely ones of the same language.
+    if (strcmp(locale.getLanguage(), l.locale.getLanguage()) == 0) {
+        if (likely || l.likely)
+            return likely && !l.likely;
+    }
+
+    return displayName < l.displayName;
+}
 
 void managerLoaded(GObject    *object,
                    GParamSpec *pspec,
@@ -53,10 +105,11 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
         if (loaded)
             managerLoaded();
         else
-            g_signal_connect(m_manager, "notify::is-loaded", G_CALLBACK(::managerLoaded), this);
+            g_signal_connect(m_manager, "notify::is-loaded",
+                             G_CALLBACK(::managerLoaded), this);
     }
 
-    updateLanguageLocales();
+    updateLanguageNamesAndCodes();
     updateCurrentLanguage();
     updateKeyboardLayouts();
     updateKeyboardLayoutsModel();
@@ -80,7 +133,8 @@ LanguagePlugin::~LanguagePlugin()
         g_object_unref(m_maliitSettings);
     }
 
-    for (QList<KeyboardLayout *>::const_iterator i(m_keyboardLayouts.begin()); i != m_keyboardLayouts.end(); ++i)
+    for (QList<KeyboardLayout *>::const_iterator
+         i(m_keyboardLayouts.begin()); i != m_keyboardLayouts.end(); ++i)
         delete *i;
 }
 
@@ -105,7 +159,7 @@ LanguagePlugin::currentLanguage() const
 void
 LanguagePlugin::setCurrentLanguage(int index)
 {
-    if (index >= 0 && index < m_languageLocales.length()) {
+    if (index >= 0 && index < m_languageCodes.length()) {
         m_nextCurrentLanguage = index;
 
         updateCurrentLanguage();
@@ -126,8 +180,11 @@ LanguagePlugin::keyboardLayoutsModelChanged()
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
 
-    for (QList<int>::const_iterator i(m_keyboardLayoutsModel.subset().begin()); i != m_keyboardLayoutsModel.subset().end(); ++i)
-        g_variant_builder_add(&builder, "s", qPrintable(m_keyboardLayouts[*i]->name()));
+    for (QList<int>::const_iterator
+         i(m_keyboardLayoutsModel.subset().begin());
+         i != m_keyboardLayoutsModel.subset().end(); ++i)
+        g_variant_builder_add(&builder, "s",
+                              qPrintable(m_keyboardLayouts[*i]->name()));
 
     currentLayouts = g_variant_ref_sink(g_variant_builder_end(&builder));
     g_settings_set_value(m_maliitSettings, KEY_ENABLED_LAYOUTS, currentLayouts);
@@ -170,7 +227,8 @@ void
 LanguagePlugin::setAutoCapitalization(bool value)
 {
     if (value != autoCapitalization()) {
-        g_settings_set_boolean(m_maliitSettings, KEY_AUTO_CAPITALIZATION, value);
+        g_settings_set_boolean(m_maliitSettings,
+                               KEY_AUTO_CAPITALIZATION, value);
         Q_EMIT autoCapitalizationChanged();
     }
 }
@@ -221,21 +279,6 @@ LanguagePlugin::setKeyPressFeedback(bool value)
 }
 
 static bool
-compareLocales(const QLocale &locale0,
-               const QLocale &locale1)
-{
-    QString name0(locale0.nativeLanguageName().toCaseFolded());
-    QString name1(locale1.nativeLanguageName().toCaseFolded());
-
-    if (name0 == name1) {
-        name0 = locale0.nativeCountryName().toCaseFolded();
-        name1 = locale1.nativeCountryName().toCaseFolded();
-    }
-
-    return name0 < name1;
-}
-
-static bool
 compareLayouts(const KeyboardLayout *layout0,
                const KeyboardLayout *layout1)
 {
@@ -256,51 +299,68 @@ compareLayouts(const KeyboardLayout *layout0,
 }
 
 void
-LanguagePlugin::updateLanguageLocales()
+LanguagePlugin::updateLanguageNamesAndCodes()
 {
-    m_languageLocales.clear();
     m_languageNames.clear();
     m_languageCodes.clear();
-    m_indicesByBcp47Name.clear();
-    m_indicesByLocaleName.clear();
+    m_indicesByLocale.clear();
 
+    // Get locales from 'locale -a'.
     QProcess localeProcess;
     localeProcess.start("locale", QStringList("-a"), QIODevice::ReadOnly);
     localeProcess.waitForFinished();
-
     QString localeOutput(localeProcess.readAllStandardOutput());
-    QStringList localeNames(localeOutput.split(QRegExp("\\s+")));
-    QHash<QString, QString> localeNamesByBcp47Name;
-    QHash<QString, unsigned int> countsByLanguage;
+    QSet<QString> localeNames(localeOutput.split(QRegExp("\\s+")).toSet());
 
-    for (QStringList::const_iterator i(localeNames.begin()); i != localeNames.end(); ++i) {
-        QLocale locale(i->left(i->indexOf('.')));
-        QString bcp47Name(locale.bcp47Name());
-        QString language(locale.nativeLanguageName());
+    QHash<QString, QString> likelyLocaleForLanguage;
+    QList<LanguageLocale> languageLocales;
 
-        if (!language.isEmpty() && !localeNamesByBcp47Name.contains(bcp47Name)) {
-            m_languageLocales += locale;
-            localeNamesByBcp47Name[bcp47Name] = *i;
-            countsByLanguage[language]++;
+    // Remove blacklisted locales.
+    for (unsigned int
+         i(0); i < sizeof(LOCALE_BLACKLIST) / sizeof(const char *); i++)
+        localeNames.remove(LOCALE_BLACKLIST[i]);
+
+    for (QSet<QString>::const_iterator
+         i(localeNames.begin()); i != localeNames.end(); ++i) {
+        // We only want locales that contain '.utf8'.
+        if (i->indexOf(".utf8") < 0)
+            continue;
+
+        LanguageLocale languageLocale(*i);
+        QString language(languageLocale.locale.getLanguage());
+
+        if (!likelyLocaleForLanguage.contains(language)) {
+            QProcess likelyProcess;
+            likelyProcess.start(LANGUAGE2LOCALE,
+                                QStringList(language),
+                                QIODevice::ReadOnly);
+            likelyProcess.waitForFinished();
+            QString likelyLocale(likelyProcess.readAllStandardOutput());
+            likelyLocale = likelyLocale.left(likelyLocale.indexOf('.'));
+            likelyLocaleForLanguage.insert(language, likelyLocale.trimmed());
         }
+
+        languageLocale.likely = likelyLocaleForLanguage[language] ==
+                                i->left(i->indexOf('.'));
+        languageLocales += languageLocale;
     }
 
-    qSort(m_languageLocales.begin(), m_languageLocales.end(), compareLocales);
+    qSort(languageLocales);
 
-    for (int i(0); i < m_languageLocales.length(); i++) {
-        const QLocale &locale(m_languageLocales[i]);
-        QString bcp47Name(locale.bcp47Name());
-        QString language(locale.nativeLanguageName());
-        unsigned int count(countsByLanguage[language]);
+    for (int i(0); i < languageLocales.length(); i++) {
+        const LanguageLocale &languageLocale(languageLocales[i]);
 
-        if (count > 1)
-            m_languageNames += QString("%1 - %2").arg(language).arg(locale.nativeCountryName());
-        else
-            m_languageNames += language;
+        m_languageNames += languageLocale.displayName;
+        m_languageCodes += languageLocale.localeName;
 
-        m_languageCodes += localeNamesByBcp47Name[bcp47Name];
-        m_indicesByBcp47Name[bcp47Name] = i;
-        m_indicesByLocaleName[localeNamesByBcp47Name[bcp47Name]] = i;
+        QString localeName(languageLocale.localeName);
+        localeName = localeName.left(localeName.indexOf('.'));
+        m_indicesByLocale.insert(localeName, i);
+
+        if (languageLocale.likely) {
+            localeName = localeName.left(localeName.indexOf('_'));
+            m_indicesByLocale.insert(localeName, i);
+        }
     }
 }
 
@@ -314,34 +374,23 @@ LanguagePlugin::updateCurrentLanguage()
             m_currentLanguage = m_nextCurrentLanguage;
             m_nextCurrentLanguage = -1;
 
-            QString languageCode(m_languageCodes[m_currentLanguage]);
-            act_user_set_language(m_user, qPrintable(languageCode.left(languageCode.indexOf('.'))));
-            act_user_set_formats_locale(m_user, qPrintable(languageCode));
+            QString formatsLocale(m_languageCodes[m_currentLanguage]);
+            QString language(formatsLocale.left(formatsLocale.indexOf('.')));
+            act_user_set_language(m_user, qPrintable(language));
+            act_user_set_formats_locale(m_user, qPrintable(formatsLocale));
         } else {
-            const char *language(act_user_get_language(m_user));
-            m_currentLanguage = indexForLanguage(language);
+            QString formatsLocale(act_user_get_formats_locale(m_user));
+            m_currentLanguage = indexForLocale(formatsLocale);
 
             if (m_currentLanguage < 0) {
-                QLocale locale(language);
-                m_currentLanguage = indexForLocale(locale);
-
-                if (m_currentLanguage < 0) {
-                    locale = QLocale(locale.language());
-                    m_currentLanguage = indexForLocale(locale);
-                }
+                QString language(act_user_get_language(m_user));
+                m_currentLanguage = indexForLocale(language);
             }
         }
     }
 
-    if (m_currentLanguage < 0) {
-        QLocale locale(QLocale::system());
-        m_currentLanguage = indexForLocale(locale);
-
-        if (m_currentLanguage < 0) {
-            locale = QLocale(locale.language());
-            m_currentLanguage = indexForLocale(locale);
-        }
-    }
+    if (m_currentLanguage < 0)
+        m_currentLanguage = indexForLocale(QLocale::system().name());
 
     if (m_currentLanguage != previousLanguage)
         Q_EMIT currentLanguageChanged();
@@ -359,7 +408,8 @@ LanguagePlugin::updateKeyboardLayouts()
 
     QFileInfoList fileInfoList(layoutsDir.entryInfoList());
 
-    for (QFileInfoList::const_iterator i(fileInfoList.begin()); i != fileInfoList.end(); ++i) {
+    for (QFileInfoList::const_iterator
+         i(fileInfoList.begin()); i != fileInfoList.end(); ++i) {
         KeyboardLayout *layout(new KeyboardLayout(*i));
 
         if (!layout->language().isEmpty())
@@ -386,7 +436,8 @@ LanguagePlugin::updateKeyboardLayoutsModel()
 
     QVariantList superset;
 
-    for (QList<KeyboardLayout *>::const_iterator i(m_keyboardLayouts.begin()); i != m_keyboardLayouts.end(); ++i) {
+    for (QList<KeyboardLayout *>::const_iterator
+         i(m_keyboardLayouts.begin()); i != m_keyboardLayouts.end(); ++i) {
         QVariantList element;
 
         if (!(*i)->displayName().isEmpty())
@@ -404,9 +455,11 @@ LanguagePlugin::updateKeyboardLayoutsModel()
 
     m_keyboardLayoutsModel.setAllowEmpty(false);
 
-    connect(&m_keyboardLayoutsModel, SIGNAL(subsetChanged()), SLOT(keyboardLayoutsModelChanged()));
+    connect(&m_keyboardLayoutsModel,
+            SIGNAL(subsetChanged()), SLOT(keyboardLayoutsModelChanged()));
 
-    g_signal_connect(m_maliitSettings, "changed::" KEY_ENABLED_LAYOUTS, G_CALLBACK(::enabledLayoutsChanged), this);
+    g_signal_connect(m_maliitSettings, "changed::" KEY_ENABLED_LAYOUTS,
+                     G_CALLBACK(::enabledLayoutsChanged), this);
 }
 
 void
@@ -415,7 +468,8 @@ LanguagePlugin::updateSpellCheckingModel()
     // TODO: populate spell checking model
     QVariantList superset;
 
-    for (QStringList::const_iterator i(m_languageNames.begin()); i != m_languageNames.end(); ++i) {
+    for (QStringList::const_iterator
+         i(m_languageNames.begin()); i != m_languageNames.end(); ++i) {
         QVariantList element;
         element += *i;
         superset += QVariant(element);
@@ -426,19 +480,14 @@ LanguagePlugin::updateSpellCheckingModel()
     m_spellCheckingModel.setSubset(QList<int>());
     m_spellCheckingModel.setAllowEmpty(false);
 
-    connect(&m_spellCheckingModel, SIGNAL(subsetChanged()), SLOT(spellCheckingModelChanged()));
+    connect(&m_spellCheckingModel,
+            SIGNAL(subsetChanged()), SLOT(spellCheckingModelChanged()));
 }
 
 int
-LanguagePlugin::indexForLocale(const QLocale &locale) const
+LanguagePlugin::indexForLocale(const QString &name)
 {
-    return m_indicesByBcp47Name.value(locale.bcp47Name(), -1);
-}
-
-int
-LanguagePlugin::indexForLanguage(const QString &language) const
-{
-    return m_indicesByLocaleName.value(language, -1);
+    return m_indicesByLocale.value(name.left(name.indexOf('.')), -1);
 }
 
 void
@@ -483,7 +532,8 @@ LanguagePlugin::managerLoaded()
                 if (act_user_is_loaded(m_user))
                     userLoaded();
                 else
-                    g_signal_connect(m_user, "notify::is-loaded", G_CALLBACK(::userLoaded), this);
+                    g_signal_connect(m_user, "notify::is-loaded",
+                                     G_CALLBACK(::userLoaded), this);
             }
         }
     }
