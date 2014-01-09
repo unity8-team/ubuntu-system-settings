@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.1+14.04.20140109.2-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Sebastien Bacher ]
+  * updates: display "Software is up to date" is there is no update (LP:
+    #1256366)
+  * list CMakeLists.txt.user in .bzrignore, that file is used by
+    qtcreator
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 09 Jan 2014 16:44:08 +0100
+
 ubuntu-system-settings (0.1+14.04.20140109.1-0ubuntu1) trusty; urgency=low
 
   [ Iain Lane ]
