@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.1+14.04.20140108.1-0ubuntu1) trusty; urgency=low
+
+  * Create a private library for communicating with accountsservice.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 08 Jan 2014 14:17:32 +0100
+
+ubuntu-system-settings (0.1+14.04.20140108-0ubuntu1) trusty; urgency=low
+
+  * edit install instructions due to the change from qmake to cmake
+  * Use ICU for display languages dialog. Fixes the en_DK problem.
+    (committed directly) (LP: #1252489)
+  * Drop redundant function definition. (committed directly)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 08 Jan 2014 11:58:37 +0100
+
 ubuntu-system-settings (0.1+14.04.20131216-0ubuntu1) trusty; urgency=low
 
   [ Sebastien Bacher ]
