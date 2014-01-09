@@ -52,6 +52,11 @@ Depends: ${misc:Depends},
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 0.9),
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
+# for the session-migration script
+         python3,
+         python3-gi,
+         python3-dbus,
+         gir1.2-glib-2.0
 Recommends: ubuntu-mobile-icons,
             ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
