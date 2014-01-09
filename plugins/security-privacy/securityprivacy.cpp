@@ -30,123 +30,44 @@
 
 SecurityPrivacy::SecurityPrivacy(QObject* parent)
   : QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_serviceWatcher ("org.freedesktop.Accounts",
-                      m_systemBusConnection,
-                      QDBusServiceWatcher::WatchForOwnerChange),
-    m_accountsserviceIface ("org.freedesktop.Accounts",
-                            "/org/freedesktop/Accounts",
-                            "org.freedesktop.Accounts",
-                             m_systemBusConnection),
     m_lockSettings(QDir::home().filePath(".unity8-greeter-demo"),
                    QSettings::NativeFormat)
 {
-    connect (&m_serviceWatcher,
-             SIGNAL (serviceOwnerChanged (QString, QString, QString)),
+    connect (&m_accountsService,
+             SIGNAL (propertyChanged (QString, QString)),
              this,
-             SLOT (slotNameOwnerChanged (QString, QString, QString)));
+             SLOT (slotChanged (QString, QString)));
 
-    if (m_accountsserviceIface.isValid()) {
-        setUpInterface();
-    }
-
+    connect (&m_accountsService,
+             SIGNAL (nameOwnerChanged()),
+             this,
+             SLOT (slotNameOwnerChanged()));
 }
 
 void SecurityPrivacy::slotChanged(QString interface,
-                                  QVariantMap changed_properties,
-                                  QStringList invalidated_properties)
+                                  QString property)
 {
-    Q_UNUSED (changed_properties);
-
     if (interface != AS_INTERFACE)
         return;
 
-    if (invalidated_properties.contains("MessagesWelcomeScreen")) {
+    if (property == "MessagesWelcomeScreen") {
         Q_EMIT messagesWelcomeScreenChanged();
-    }
-
-    if (invalidated_properties.contains("StatsWelcomeScreen")) {
+    } else if (property == "StatsWelcomeScreen") {
         Q_EMIT statsWelcomeScreenChanged();
     }
 }
 
-void SecurityPrivacy::setUpInterface()
+void SecurityPrivacy::slotNameOwnerChanged()
 {
-    QDBusReply<QDBusObjectPath> qObjectPath = m_accountsserviceIface.call(
-                "FindUserById", qlonglong(getuid()));
-
-    if (qObjectPath.isValid()) {
-        m_objectPath = qObjectPath.value().path();
-        m_accountsserviceIface.connection().connect(
-            m_accountsserviceIface.service(),
-            m_objectPath,
-            "org.freedesktop.DBus.Properties",
-            "PropertiesChanged",
-            this,
-            SLOT(slotChanged(QString, QVariantMap, QStringList)));
-    }
-}
-
-void SecurityPrivacy::slotNameOwnerChanged(QString name,
-                                           QString oldOwner,
-                                           QString newOwner)
-{
-    Q_UNUSED (oldOwner);
-    Q_UNUSED (newOwner);
-    if (name != "org.freedesktop.Accounts")
-        return;
-
-    setUpInterface();
     // Tell QML so that it refreshes its view of the property
     Q_EMIT messagesWelcomeScreenChanged();
     Q_EMIT statsWelcomeScreenChanged();
 }
 
-QVariant SecurityPrivacy::getUserProperty(const QString &property)
-{
-    if (!m_accountsserviceIface.isValid())
-        return QVariant();
-
-    QDBusInterface iface (
-                "org.freedesktop.Accounts",
-                m_objectPath,
-                "org.freedesktop.DBus.Properties",
-                m_systemBusConnection,
-                this);
-
-    if (iface.isValid()) {
-        QDBusReply<QDBusVariant> answer = iface.call(
-                    "Get",
-                    AS_INTERFACE,
-                    property);
-        if (answer.isValid()) {
-            return answer.value().variant();
-        }
-    }
-    return QVariant();
-}
-
-void SecurityPrivacy::setUserProperty(const QString &property,
-                                      const QVariant &value)
-{
-    QDBusInterface iface (
-                "org.freedesktop.Accounts",
-                m_objectPath,
-                "org.freedesktop.DBus.Properties",
-                m_systemBusConnection,
-                this);
-    if (iface.isValid()) {
-        // The value needs to be carefully wrapped
-        iface.call("Set",
-                   AS_INTERFACE,
-                   property,
-                   QVariant::fromValue(QDBusVariant(value)));
-    }
-}
-
 bool SecurityPrivacy::getStatsWelcomeScreen()
 {
-    return getUserProperty("StatsWelcomeScreen").toBool();
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "StatsWelcomeScreen").toBool();
 }
 
 void SecurityPrivacy::setStatsWelcomeScreen(bool enabled)
@@ -154,13 +75,16 @@ void SecurityPrivacy::setStatsWelcomeScreen(bool enabled)
     if (enabled == getStatsWelcomeScreen())
         return;
 
-    setUserProperty("StatsWelcomeScreen", QVariant::fromValue(enabled));
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "StatsWelcomeScreen",
+                                      QVariant::fromValue(enabled));
     Q_EMIT(statsWelcomeScreenChanged());
 }
 
 bool SecurityPrivacy::getMessagesWelcomeScreen()
 {
-    return getUserProperty("MessagesWelcomeScreen").toBool();
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "MessagesWelcomeScreen").toBool();
 }
 
 void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
@@ -168,7 +92,9 @@ void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
     if (enabled == getMessagesWelcomeScreen())
         return;
 
-    setUserProperty("MessagesWelcomeScreen", QVariant::fromValue(enabled));
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "MessagesWelcomeScreen",
+                                      QVariant::fromValue(enabled));
     Q_EMIT(messagesWelcomeScreenChanged());
 }
 
