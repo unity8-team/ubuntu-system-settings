@@ -7,6 +7,7 @@ Type=Application
 StartupNotify=true
 Categories=System;
 Keywords=Preferences;Settings;
+X-Screenshot=@PLUGIN_MANIFEST_DIR@/screenshot.png
 X-Ubuntu-Gettext-Domain=ubuntu-system-settings
 X-Ubuntu-Touch=true
 X-Ubuntu-StageHint=SideStage
