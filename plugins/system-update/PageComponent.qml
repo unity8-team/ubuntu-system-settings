@@ -121,8 +121,7 @@ ItemPage {
             }
             else {
                 currentUpdateState = UbuntuUpdatePanel.NoUpdate;
-                // TRANSLATORS: %1 is the date when the device was last updated
-                infoMessage = i18n.tr("No software update available") + "<br/>" + i18n.tr("Last updated %1").arg(lastUpdateDate);
+                infoMessage = i18n.tr("Software is up to date");
             }
 
             if(errorReason) {
