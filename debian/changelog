@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.1+14.04.20140109.1-0ubuntu1) trusty; urgency=low
+
+  [ Iain Lane ]
+  * [security-privacy] Use the AS private library
+  * [background] Drop direct use of AS & use the new private library.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 09 Jan 2014 13:17:36 +0100
+
 ubuntu-system-settings (0.1+14.04.20140108.1-0ubuntu1) trusty; urgency=low
 
   * Create a private library for communicating with accountsservice.
