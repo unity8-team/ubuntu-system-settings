@@ -72,12 +72,9 @@ ItemPage {
             }
 
             ListItem.Divider {
-                visible: showAllUI
             }
 
             ListItem.SingleValue {
-                visible: showAllUI
-
                 text: i18n.tr("Keyboard layouts")
                 value: plugin.keyboardLayoutsModel.subset.length == 1 ?
                        plugin.keyboardLayoutsModel.superset[plugin.keyboardLayoutsModel.subset[0]][0] :
@@ -88,7 +85,6 @@ ItemPage {
             }
 
             ListItem.Divider {
-                visible: showAllUI
             }
 
             ListItem.SingleValue {
@@ -104,8 +100,6 @@ ItemPage {
             }
 
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Auto completion")
 
                 control: Switch {
@@ -116,8 +110,6 @@ ItemPage {
             }
 
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Word suggestions")
 
                 control: Switch {
@@ -144,13 +136,10 @@ ItemPage {
                 text: i18n.tr("Turns on Shift to capitalize the first letter of each sentence.")
             }
 
-            ListItem.Divider {
-                visible: showAllUI
+            ListItem.ThinDivider {
             }
 
             ListItem.Standard {
-                visible: showAllUI
-
                 text: i18n.tr("Keyboard sound")
 
                 control: Switch {
