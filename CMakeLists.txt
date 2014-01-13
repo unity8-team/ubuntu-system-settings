@@ -54,6 +54,7 @@ set(PLUGIN_MANIFEST_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_MANIFEST_DIR_BASE}")
 set(PLUGIN_MODULE_DIR "${CMAKE_INSTALL_PREFIX}/${LIBDIR}/${PLUGIN_MODULE_DIR_BASE}")
 set(PLUGIN_QML_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_QML_DIR_BASE}")
 set(PLUGIN_PRIVATE_MODULE_DIR "${CMAKE_INSTALL_PREFIX}/${LIBDIR}/${PLUGIN_PRIVATE_MODULE_DIR_BASE}")
+set(SETTINGS_SHARE_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_MANIFEST_DIR_BASE}")
 
 set(ANDR_PROP_LIB -landroid-properties)
 
@@ -70,7 +71,7 @@ add_subdirectory(tests)
 
 configure_file(ubuntu-system-settings.desktop.in ubuntu-system-settings.desktop @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-system-settings.desktop DESTINATION share/applications)
-install(FILES screenshot.png DESTINATION ${PLUGIN_MANIFEST_DIR})
+install(FILES screenshot.png DESTINATION ${SETTINGS_SHARE_DIR})
 
 if(cmake_build_type_lower MATCHES coverage)
   ENABLE_COVERAGE_REPORT(TARGETS system-settings FILTER /usr/include ${CMAKE_SOURCE_DIR}/test/* ${CMAKE_BINARY_DIR}/*)
