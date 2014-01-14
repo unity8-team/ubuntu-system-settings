@@ -69,6 +69,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 install(FILES ubuntu-system-settings.desktop DESTINATION share/applications)
+install(FILES ubuntu-system-settings.url-dispatcher DESTINATION share/url-dispatcher/urls)
 
 if(cmake_build_type_lower MATCHES coverage)
   ENABLE_COVERAGE_REPORT(TARGETS system-settings FILTER /usr/include ${CMAKE_SOURCE_DIR}/test/* ${CMAKE_BINARY_DIR}/*)
