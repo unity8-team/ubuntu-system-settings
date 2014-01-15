@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-09 14:06+0100\n"
-"PO-Revision-Date: 2014-01-09 21:31+0000\n"
-"Last-Translator: İbrahim Çelik <ibrahimcelik89@gmail.com>\n"
+"PO-Revision-Date: 2014-01-14 19:21+0000\n"
+"Last-Translator: ilker saglam <isaglam@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-01-10 05:35+0000\n"
-"X-Generator: Launchpad (build 16884)\n"
+"X-Launchpad-Export-Date: 2014-01-15 06:34+0000\n"
+"X-Generator: Launchpad (build 16890)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
@@ -625,7 +625,7 @@ msgstr "Hiçbir Zaman"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/wifi//PageComponent.qml:27
 #: settings.js:60
 msgid "Wi-Fi"
-msgstr "Kablosuz"
+msgstr "Kablosuz (Wi-Fi)"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:361
@@ -1183,7 +1183,7 @@ msgstr "Filmler"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
 msgid "Audio"
-msgstr "Ses ve Müzik"
+msgstr "Ses"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:91
 msgid "Pictures"
@@ -1380,7 +1380,7 @@ msgstr "Örnek"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:80
 msgid "example"
-msgstr ""
+msgstr "örnek"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:82
@@ -1390,7 +1390,7 @@ msgstr "sınama"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:84
 msgid "sample"
-msgstr ""
+msgstr "örnek"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:88
@@ -1435,7 +1435,7 @@ msgstr "uçuş"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:112
 msgid "plane"
-msgstr ""
+msgstr "uçak"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:114
