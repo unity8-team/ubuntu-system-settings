@@ -140,3 +140,20 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """ Return 'License' page """
         return self.main_view.select_single(objectName='licensesPage')
 
+
+class LanguageBaseTestCase(UbuntuSystemSettingsTestCase):
+    """ Base class for Language & Text tests """
+
+    def setUp(self):
+        """ Go to Language & Text page """
+        super(LanguageBaseTestCase, self).setUp()
+        # Click on 'Language & Text' button
+        language = self.main_view.select_single(objectName='entryComponent-language')
+        self.assertThat(language, NotEquals(None))
+        self.pointer.move_to_object(language)
+        self.pointer.click()
+
+    @property
+    def language_page(self):
+        """ Returns 'Language & Text' page """
+        return self.main_view.select_single(objectName='languagePage')
