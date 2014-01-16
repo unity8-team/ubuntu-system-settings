@@ -6,7 +6,6 @@ set(QML_SOURCES
     KeyboardLayoutItem.qml
     KeyboardLayouts.qml
     PageComponent.qml
-    SpellChecking.qml
     SubsetView.qml
 )
 

@@ -46,12 +46,6 @@ ItemPage {
         KeyboardLayouts {}
     }
 
-    Component {
-        id: spellChecking
-
-        SpellChecking {}
-    }
-
     Flickable {
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
@@ -87,16 +81,14 @@ ItemPage {
             ListItem.Divider {
             }
 
-            ListItem.SingleValue {
-                visible: showAllUI
-
+            ListItem.Standard {
                 text: i18n.tr("Spell checking")
-                value: plugin.spellCheckingModel.subset.length == 1 ?
-                       plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]][0] :
-                       plugin.spellCheckingModel.subset.length
-                progression: true
 
-                onClicked: pageStack.push(spellChecking)
+                control: Switch {
+                    checked: plugin.spellChecking
+
+                    onClicked: plugin.spellChecking = checked
+                }
             }
 
             ListItem.Standard {
