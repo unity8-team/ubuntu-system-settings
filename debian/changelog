@@ -1,3 +1,56 @@
+ubuntu-system-settings (0.1+14.04.20140115-0ubuntu1) trusty; urgency=low
+
+  [ Sebastien Bacher ]
+  * install a screenshot, to be used in the unity dash (LP: #1229758)
+
+  [ Iain Lane ]
+  * Don't need an empty destructor in the sound plugin
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 15 Jan 2014 13:40:05 +0000
+
+ubuntu-system-settings (0.1+14.04.20140110-0ubuntu1) trusty; urgency=low
+
+  [ William Hua ]
+  * Enable auto-completion and predictive text settings.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 10 Jan 2014 10:58:07 +0000
+
+ubuntu-system-settings (0.1+14.04.20140109.2-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Sebastien Bacher ]
+  * updates: display "Software is up to date" is there is no update (LP:
+    #1256366)
+  * list CMakeLists.txt.user in .bzrignore, that file is used by
+    qtcreator
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 09 Jan 2014 16:44:08 +0100
+
+ubuntu-system-settings (0.1+14.04.20140109.1-0ubuntu1) trusty; urgency=low
+
+  [ Iain Lane ]
+  * [security-privacy] Use the AS private library
+  * [background] Drop direct use of AS & use the new private library.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 09 Jan 2014 13:17:36 +0100
+
+ubuntu-system-settings (0.1+14.04.20140108.1-0ubuntu1) trusty; urgency=low
+
+  * Create a private library for communicating with accountsservice.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 08 Jan 2014 14:17:32 +0100
+
+ubuntu-system-settings (0.1+14.04.20140108-0ubuntu1) trusty; urgency=low
+
+  * edit install instructions due to the change from qmake to cmake
+  * Use ICU for display languages dialog. Fixes the en_DK problem.
+    (committed directly) (LP: #1252489)
+  * Drop redundant function definition. (committed directly)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 08 Jan 2014 11:58:37 +0100
+
 ubuntu-system-settings (0.1+14.04.20131216-0ubuntu1) trusty; urgency=low
 
   [ Sebastien Bacher ]

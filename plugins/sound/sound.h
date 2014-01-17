@@ -30,7 +30,6 @@ class Sound : public QObject
 
 public:
     explicit Sound(QObject *parent = 0);
-    ~Sound();
     Q_INVOKABLE QStringList listSounds(const QString &dirString);
 
 
