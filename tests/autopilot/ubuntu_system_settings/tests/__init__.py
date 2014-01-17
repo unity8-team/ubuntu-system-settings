@@ -149,7 +149,7 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         button = self.main_view.select_single(objectName='licenseItem')
         self.assertThat(button, NotEquals(None))
         self.assertThat(button.text, Equals(_('Software licenses')))
-        self.pointer.click_object(button)
+        self.scroll_to_and_click(button)
 
     @property
     def licenses_page(self):
