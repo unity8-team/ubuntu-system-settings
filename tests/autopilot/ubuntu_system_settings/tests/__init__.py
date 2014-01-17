@@ -18,6 +18,7 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
+from ubuntuuitoolkit import emulators as toolkit_emulators
 
 import dbus
 import dbusmock
@@ -58,7 +59,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
     @property
     def pointer(self):
         """ Return pointer """
-        return Pointer(self.input_device_class.create())
+        return toolkit_emulators.get_pointing_device()
 
     def add_mock_battery(self):
         """ Make sure we have a battery """
@@ -82,8 +83,7 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
         # Click on 'About' button
         about = self.main_view.select_single(objectName='entryComponent-about')
         self.assertThat(about, NotEquals(None))
-        self.pointer.move_to_object(about)
-        self.pointer.click()
+        self.pointer.click_object(about)
 
     @property
     def about_page(self):
@@ -100,8 +100,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
         # Click on 'Storage' option
         button = self.about_page.select_single(objectName='storageItem')
         self.assertThat(button, NotEquals(None))
-        self.pointer.move_to_object(button)
-        self.pointer.click()
+        self.pointer.click_object(button)
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
@@ -132,8 +131,7 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         button = self.main_view.select_single(objectName='licenseItem')
         self.assertThat(button, NotEquals(None))
         self.assertThat(button.text, Equals(_('Software licenses')))
-        self.pointer.move_to_object(button)
-        self.pointer.click()
+        self.pointer.click_object(button)
 
     @property
     def licenses_page(self):
