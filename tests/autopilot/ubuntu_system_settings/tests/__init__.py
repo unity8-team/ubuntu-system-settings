@@ -22,6 +22,7 @@ from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
 import dbus
 import dbusmock
 import subprocess
+from time import sleep
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
                                    dbusmock.DBusTestCase):
@@ -73,6 +74,19 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
         """ Make sure we have a battery """
         self.dbusmock.AddDischargingBattery('mock_BATTERY', 'Battery', 50.0, 10)
 
+    def scroll_to_and_click(self, obj):
+        page = self.main_view.select_single(objectName='systemSettingsPage')
+        self.pointer.move_to_object(page)
+        (page_center_x, page_center_y) = self.pointer.position()
+        page_bottom = page.globalRect[1] + page.globalRect[3]
+        while obj.globalRect[1] + obj.height > page_bottom:
+            self.pointer.move(page_center_x, page_center_y)
+            self.pointer.press()
+            self.pointer.move(page_center_x, page_center_y - obj.height * 2)
+            sleep(0.2)
+            self.pointer.release()
+        self.pointer.click_object(obj)
+
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsTestCase):
     """ Base class for tests which rely on the presence of a battery """
     def setUp(self):
@@ -104,7 +118,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
         # Click on 'Storage' option
         button = self.about_page.select_single(objectName='storageItem')
         self.assertThat(button, NotEquals(None))
-        self.pointer.click_object(button)
+        self.scroll_to_and_click(button)
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
