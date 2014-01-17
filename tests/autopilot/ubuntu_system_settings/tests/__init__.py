@@ -18,6 +18,7 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
+from ubuntuuitoolkit import emulators as toolkit_emulators
 
 import dbus
 import dbusmock
@@ -58,7 +59,8 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
 
         self.app = self.launch_test_application(
             *params,
-            app_type='qt')
+            app_type='qt',
+            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)
 
     @property
     def main_view(self):
@@ -75,6 +77,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
         self.dbusmock.AddDischargingBattery('mock_BATTERY', 'Battery', 50.0, 10)
 
     def scroll_to_and_click(self, obj):
+        self.app.select_single(toolkit_emulators.Toolbar).close()
         page = self.main_view.select_single(objectName='systemSettingsPage')
         self.pointer.move_to_object(page)
         (page_center_x, page_center_y) = self.pointer.position()
