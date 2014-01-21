@@ -79,15 +79,13 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
     def scroll_to_and_click(self, obj):
         self.app.select_single(toolkit_emulators.Toolbar).close()
         page = self.main_view.select_single(objectName='systemSettingsPage')
-        self.pointer.move_to_object(page)
-        (page_center_x, page_center_y) = self.pointer.position()
+        page_right = page.globalRect[0] + page.globalRect[2]
         page_bottom = page.globalRect[1] + page.globalRect[3]
+        page_center_x = int(page_right / 2)
+        page_center_y = int(page_bottom / 2)
         while obj.globalRect[1] + obj.height > page_bottom:
-            self.pointer.move(page_center_x, page_center_y)
-            self.pointer.press()
-            self.pointer.move(page_center_x, page_center_y - obj.height * 2)
-            sleep(0.2)
-            self.pointer.release()
+            self.pointer.drag(page_center_x, page_center_y, 
+                    page_center_x, page_center_y - obj.height * 2)
         self.pointer.click_object(obj)
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsTestCase):
