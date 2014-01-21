@@ -25,26 +25,15 @@ import dbusmock
 import subprocess
 from time import sleep
 
-class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
-                                   dbusmock.DBusTestCase):
+class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
     if model() == 'Desktop':
         scenarios = [ ('with mouse', dict(input_device_class=Mouse)) ]
     else:
         scenarios = [ ('with touch', dict(input_device_class=Touch)) ]
 
-    @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
-        # Add a mock Upower environment so we get consistent results
-        (klass.p_mock, klass.obj_upower) = klass.spawn_server_template(
-            'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
-        klass.dbusmock = dbus.Interface(klass.obj_upower, dbusmock.MOCK_IFACE)
-
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.obj_upower.Reset()
         self.launch_system_settings(panel=panel)
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
@@ -72,10 +61,6 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
         """ Return pointer """
         return Pointer(self.input_device_class.create())
 
-    def add_mock_battery(self):
-        """ Make sure we have a battery """
-        self.dbusmock.AddDischargingBattery('mock_BATTERY', 'Battery', 50.0, 10)
-
     def scroll_to_and_click(self, obj):
         self.app.select_single(toolkit_emulators.Toolbar).close()
         page = self.main_view.select_single(objectName='systemSettingsPage')
@@ -88,10 +73,31 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
                     page_center_x, page_center_y - obj.height * 2)
         self.pointer.click_object(obj)
 
-class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsTestCase):
+
+class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
+                                         dbusmock.DBusTestCase):
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+        # Add a mock Upower environment so we get consistent results
+        (klass.p_mock, klass.obj_upower) = klass.spawn_server_template(
+            'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
+        klass.dbusmock = dbus.Interface(klass.obj_upower, dbusmock.MOCK_IFACE)
+
+    def setUp(self, panel=None):
+        self.obj_upower.Reset()
+        super(UbuntuSystemSettingsUpowerTestCase, self).setUp()
+
+    def add_mock_battery(self):
+        """ Make sure we have a battery """
+        self.dbusmock.AddDischargingBattery('mock_BATTERY', 'Battery', 50.0, 10)
+
+
+class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     """ Base class for tests which rely on the presence of a battery """
     def setUp(self):
-        super(UbuntuSystemSettingsTestCase, self).setUp()
+        super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
         self.launch_system_settings()
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
