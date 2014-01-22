@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+14.04.20140122-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ William Hua ]
+  * [language] Disable confirm if unchanged. (LP: #1263163)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 22 Jan 2014 12:05:40 +0000
+
 ubuntu-system-settings (0.1+14.04.20140115-0ubuntu1) trusty; urgency=low
 
   [ Sebastien Bacher ]
