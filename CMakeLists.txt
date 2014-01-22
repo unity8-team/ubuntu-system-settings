@@ -71,6 +71,7 @@ add_subdirectory(tests)
 
 configure_file(ubuntu-system-settings.desktop.in ubuntu-system-settings.desktop @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-system-settings.desktop DESTINATION share/applications)
+install(FILES ubuntu-system-settings.url-dispatcher DESTINATION share/url-dispatcher/urls)
 install(FILES screenshot.png DESTINATION ${SETTINGS_SHARE_DIR})
 
 if(cmake_build_type_lower MATCHES coverage)
