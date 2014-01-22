@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.1+14.04.20140122.1-0ubuntu1) trusty; urgency=low
+
+  [ Ted Gould ]
+  * Add URL Dispatcher Configuration
+
+  [ Albert Astals ]
+  * Run tst_plugin test under the miminal QPA to prevent test failures
+    in Qt5. (LP: #1267828)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 22 Jan 2014 18:42:49 +0000
+
 ubuntu-system-settings (0.1+14.04.20140122-0ubuntu1) trusty; urgency=low
 
   [ CI bot ]
