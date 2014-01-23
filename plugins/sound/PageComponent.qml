@@ -106,7 +106,7 @@ ItemPage {
                 control: CheckBox {
                     checked: false
                 }
-                text: i18n.tr("Keyboard sounds")
+                text: i18n.tr("Keyboard sound")
                 visible: showAllUI
             }
 
