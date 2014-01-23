@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -14,77 +14,111 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Didier Roche <didier.roche@canonical.com>
+ * Diego Sarmentero <diego.sarmentero@canonical.com>
  *
 */
 
 #ifndef UPDATE_H
 #define UPDATE_H
 
-#include <QtDBus>
-#include <QDBusInterface>
 #include <QObject>
-#include <QProcess>
-#include <QUrl>
+#include <QtQml>
+#include <QString>
+#include <QStringList>
+
+namespace UpdatePlugin {
 
 class Update : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(State)
-    Q_PROPERTY( QString infoMessage
-                READ InfoMessage
-                WRITE SetInfoMessage
-                NOTIFY infoMessageChanged)
-    Q_PROPERTY( int downloadMode
-                READ DownloadMode
-                WRITE SetDownloadMode
-                NOTIFY downloadModeChanged)
-    Q_PROPERTY( int currentBuildNumber
-                READ currentBuildNumber
-                CONSTANT)
+    Q_PROPERTY(bool systemUpdate READ systemUpdate WRITE setSystemUpdate
+               NOTIFY systemUpdateChanged)
+    Q_PROPERTY(QString packageName READ getPackageName)
+    Q_PROPERTY(QString title READ getTitle NOTIFY titleChanged)
+    Q_PROPERTY(QString localVersion READ getLocalVersion
+               NOTIFY localVersionChanged)
+    Q_PROPERTY(QString remoteVersion READ getRemoteVersion
+               NOTIFY remoteVersionChanged)
+    Q_PROPERTY(QString updateRequired READ updateRequired)
+    Q_PROPERTY(QString iconUrl READ iconUrl NOTIFY iconUrlChanged)
+    Q_PROPERTY(int binaryFilesize READ binaryFilesize
+               NOTIFY binaryFilesizeChanged)
+    Q_PROPERTY(bool updateState READ updateState WRITE setUpdateState
+               NOTIFY updatesStateChanged)
+    Q_PROPERTY(bool updateReady READ updateReady WRITE setUpdateReady
+               NOTIFY updatesReadyChanged)
+    Q_PROPERTY(bool selected READ selected WRITE setSelected
+               NOTIFY selectedChanged)
+    Q_PROPERTY(QString error READ getError NOTIFY errorChanged)
+    Q_PROPERTY(QString lastUpdateDate READ lastUpdateDate
+               NOTIFY lastUpdateDateChanged)
+    Q_PROPERTY(int downloadProgress READ downloadProgress
+               NOTIFY downloadProgressChanged)
+
+Q_SIGNALS:
+    void systemUpdateChanged();
+    void titleChanged();
+    void binaryFilesizeChanged();
+    void iconUrlChanged();
+    void localVersionChanged();
+    void remoteVersionChanged();
+    void updatesStateChanged();
+    void updatesReadyChanged();
+    void selectedChanged();
+    void errorChanged();
+    void downloadProgressChanged();
+    void lastUpdateDateChanged();
 
 public:
     explicit Update(QObject *parent = 0);
-    ~Update();
+    virtual ~Update();
 
-    enum State { CheckingError, Checking, NoUpdate, UpdateAvailable, DownloadRequested, Downloading, Paused, ReadyToInstall, DownloadFailed };
+    bool systemUpdate() { return m_systemUpdate; }
+    QString getPackageName() { return m_packagename; }
+    QString getTitle() { return m_title; }
+    QString getLocalVersion() { return m_local_version; }
+    QString getRemoteVersion() { return m_remote_version; }
+    QString iconUrl() { return m_icon_url; }
+    QString lastUpdateDate() { return m_lastUpdateDate; }
+    int binaryFilesize() { return m_binary_filesize; }
+    int downloadProgress() { return m_download_progress; }
+    bool updateRequired() { return m_update; }
+    bool updateState() { return m_update_state; }
+    bool updateReady() { return m_update_ready; }
+    bool selected() { return m_selected; }
+    QString getError() { return m_error; }
 
-    QString InfoMessage();
-    void SetInfoMessage(QString);
-    int DownloadMode();
-    void SetDownloadMode(int);
-    int currentBuildNumber();
-
-    Q_INVOKABLE void CheckForUpdate();
-    Q_INVOKABLE void DownloadUpdate();
-    Q_INVOKABLE QString ApplyUpdate();
-    Q_INVOKABLE QString CancelUpdate();
-    Q_INVOKABLE QString PauseDownload();
-    Q_INVOKABLE QString TranslateFromBackend(QString);
-
-public Q_SLOTS:
-    void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
-    void ProcessSettingChanged(QString, QString);
-
-Q_SIGNALS:
-    void updateAvailableStatus(bool isAvailable, bool downloading, QString availableVersion, int updateSize,
-                               QString lastUpdateDate, QStringList descriptions, QString errorReason);
-    void updateProgress(int percentage, double eta);
-    void updatePaused(int percentage);
-    void updateDownloaded();
-    void updateFailed(int consecutiveFailureCount, QString lastReason);
-    void infoMessageChanged();
-    void downloadModeChanged();
-
+    void setSystemUpdate(bool isSystem);
+    void initializeApplication(QString packagename, QString title,
+                               QString version);
+    void setRemoteVersion(QString &version);
+    void setUpdateState(bool state);
+    void setUpdateReady(bool ready);
+    void setSelected(bool value);
+    void setBinaryFilesize(int size);
+    void setDownloadProgress(int progress);
+    void setIconUrl(QString icon);
+    void setError(QString error);
+    void setUpdateAvailable(bool available) { m_update = available; }
+    void setLastUpdateDate(const QString date);
 
 private:
-    QString m_infoMessage;
-    int m_downloadMode;
-    int m_currentBuildNumber;
-
-    QDBusConnection m_systemBusConnection;
-    QString m_objectPath;
-    QDBusInterface m_SystemServiceIface;
+    bool m_systemUpdate;
+    QString m_packagename;
+    QString m_title;
+    QString m_local_version;
+    QString m_remote_version;
+    QString m_icon_url;
+    QString m_error;
+    QString m_lastUpdateDate;
+    int m_binary_filesize;
+    int m_download_progress;
+    bool m_update;
+    bool m_update_state;
+    bool m_update_ready;
+    bool m_selected;
 };
+
+}
 
 #endif // UPDATE_H
