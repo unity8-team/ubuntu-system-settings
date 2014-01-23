@@ -64,10 +64,6 @@ public:
                WRITE setSpellChecking
                NOTIFY spellCheckingChanged)
 
-    Q_PROPERTY(SubsetModel *spellCheckingModel
-               READ spellCheckingModel
-               CONSTANT)
-
     Q_PROPERTY(bool autoCapitalization
                READ autoCapitalization
                WRITE setAutoCapitalization
@@ -106,9 +102,6 @@ public:
     void setSpellChecking(bool value);
     Q_SIGNAL void spellCheckingChanged() const;
 
-    SubsetModel *spellCheckingModel();
-    Q_SLOT void spellCheckingModelChanged();
-
     bool autoCapitalization() const;
     void setAutoCapitalization(bool value);
     Q_SIGNAL void autoCapitalizationChanged() const;
@@ -131,7 +124,6 @@ private:
     void updateCurrentLanguage();
     void updateKeyboardLayouts();
     void updateKeyboardLayoutsModel();
-    void updateSpellCheckingModel();
 
     int indexForLocale(const QString &name);
 
@@ -165,7 +157,6 @@ private:
     GSettings *m_maliitSettings;
     QList<KeyboardLayout *> m_keyboardLayouts;
     SubsetModel m_keyboardLayoutsModel;
-    SubsetModel m_spellCheckingModel;
 };
 
 #endif // LANGUAGE_PLUGIN_H

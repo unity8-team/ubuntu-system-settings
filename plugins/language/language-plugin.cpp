@@ -27,6 +27,7 @@
 #define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
 
 #define KEY_ENABLED_LAYOUTS     "enabled-languages"
+#define KEY_SPELL_CHECKING      "spell-checking"
 #define KEY_AUTO_CAPITALIZATION "auto-capitalization"
 #define KEY_AUTO_COMPLETION     "auto-completion"
 #define KEY_PREDICTIVE_TEXT     "predictive-text"
@@ -113,7 +114,6 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     updateCurrentLanguage();
     updateKeyboardLayouts();
     updateKeyboardLayoutsModel();
-    updateSpellCheckingModel();
 }
 
 LanguagePlugin::~LanguagePlugin()
@@ -194,27 +194,17 @@ LanguagePlugin::keyboardLayoutsModelChanged()
 bool
 LanguagePlugin::spellChecking() const
 {
-    // TODO: get spell checking setting
-    return true;
+    return g_settings_get_boolean(m_maliitSettings, KEY_SPELL_CHECKING);
 }
 
 void
 LanguagePlugin::setSpellChecking(bool value)
 {
-    // TODO: set spell checking setting
-    Q_UNUSED(value);
-}
-
-SubsetModel *
-LanguagePlugin::spellCheckingModel()
-{
-    return &m_spellCheckingModel;
-}
-
-void
-LanguagePlugin::spellCheckingModelChanged()
-{
-    // TODO: update spell checking model
+    if (value != spellChecking()) {
+        g_settings_set_boolean(m_maliitSettings,
+                               KEY_SPELL_CHECKING, value);
+        Q_EMIT spellCheckingChanged();
+    }
 }
 
 bool
@@ -460,28 +450,6 @@ LanguagePlugin::updateKeyboardLayoutsModel()
 
     g_signal_connect(m_maliitSettings, "changed::" KEY_ENABLED_LAYOUTS,
                      G_CALLBACK(::enabledLayoutsChanged), this);
-}
-
-void
-LanguagePlugin::updateSpellCheckingModel()
-{
-    // TODO: populate spell checking model
-    QVariantList superset;
-
-    for (QStringList::const_iterator
-         i(m_languageNames.begin()); i != m_languageNames.end(); ++i) {
-        QVariantList element;
-        element += *i;
-        superset += QVariant(element);
-    }
-
-    m_spellCheckingModel.setCustomRoles(QStringList("language"));
-    m_spellCheckingModel.setSuperset(superset);
-    m_spellCheckingModel.setSubset(QList<int>());
-    m_spellCheckingModel.setAllowEmpty(false);
-
-    connect(&m_spellCheckingModel,
-            SIGNAL(subsetChanged()), SLOT(spellCheckingModelChanged()));
 }
 
 int
