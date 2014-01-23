@@ -4,6 +4,13 @@ add_definitions(-DTESTS)
 # Need to get libsignon/accounts here, as they get exposed in headers
 find_package (PkgConfig REQUIRED)
 
+add_executable(tst-update-manager
+    tst_updatemanager.cpp
+    ../../../plugins/system-update/update.cpp
+    ../../../plugins/system-update/update_manager.cpp
+    ../../../plugins/system-update/system_update.cpp
+)
+
 add_executable(tst-update
     tst_update.cpp
     ../../../plugins/system-update/update.cpp
@@ -11,6 +18,10 @@ add_executable(tst-update
 
 # set the path to the library folder
 include_directories(/usr/include/apt-pkg/)
+
+target_link_libraries(tst-update-manager apt-pkg ${UBUNTUONEAUTH_LDFLAGS})
+qt5_use_modules(tst-update-manager Qml Quick Core DBus Xml Network Test)
+add_test(tst-update-manager tst-update-manager)
 
 qt5_use_modules(tst-update Qml Quick Core DBus Xml Network Test)
 target_link_libraries(tst-update apt-pkg)

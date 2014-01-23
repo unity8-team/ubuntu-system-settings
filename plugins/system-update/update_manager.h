@@ -61,7 +61,14 @@ public:
     int downloadMode() { return m_systemUpdate.downloadMode(); }
     void setDownloadMode(int mode) { m_systemUpdate.setDownloadMode(mode); }
 
-private Q_SLOTS:
+#ifdef TESTS
+    // For testing purposes
+    QHash<QString, Update*> get_apps() { return m_apps; }
+    QVariantList get_model() { return m_model; }
+    int get_downloadMode() { return m_downloadMode; }
+#endif
+
+public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
 
 private:
