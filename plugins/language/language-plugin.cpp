@@ -27,6 +27,7 @@
 #define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
 
 #define KEY_ENABLED_LAYOUTS     "enabled-languages"
+#define KEY_CURRENT_LAYOUT      "active-language"
 #define KEY_SPELL_CHECKING      "spell-checking"
 #define KEY_AUTO_CAPITALIZATION "auto-capitalization"
 #define KEY_AUTO_COMPLETION     "auto-completion"
@@ -34,7 +35,7 @@
 #define KEY_KEY_PRESS_FEEDBACK  "key-press-feedback"
 
 #define LANGUAGE2LOCALE "/usr/share/language-tools/language2locale"
-#define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
+#define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/lib"
 
 static const char * const LOCALE_BLACKLIST[] = {
     "C",
@@ -112,6 +113,7 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
 
     updateLanguageNamesAndCodes();
     updateCurrentLanguage();
+    updateEnabledLayouts();
     updateKeyboardLayouts();
     updateKeyboardLayoutsModel();
 }
@@ -368,6 +370,17 @@ LanguagePlugin::updateCurrentLanguage()
             QString language(formatsLocale.left(formatsLocale.indexOf('.')));
             act_user_set_language(m_user, qPrintable(language));
             act_user_set_formats_locale(m_user, qPrintable(formatsLocale));
+
+            icu::Locale locale(qPrintable(formatsLocale));
+            const char *code(locale.getLanguage());
+            QFileInfo fileInfo(QDir(LAYOUTS_DIR), code);
+
+            if (fileInfo.exists() && fileInfo.isDir()) {
+                g_settings_set_string(m_maliitSettings,
+                                      KEY_CURRENT_LAYOUT, code);
+
+                updateEnabledLayouts();
+            }
         } else {
             QString formatsLocale(act_user_get_formats_locale(m_user));
             m_currentLanguage = indexForLocale(formatsLocale);
@@ -387,13 +400,42 @@ LanguagePlugin::updateCurrentLanguage()
 }
 
 void
+LanguagePlugin::updateEnabledLayouts()
+{
+    GVariantBuilder builder;
+    GVariantIter *iter;
+    const gchar *current;
+    const gchar *layout;
+    QSet<QString> added;
+
+    g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
+    g_settings_get(m_maliitSettings, KEY_ENABLED_LAYOUTS, "as", &iter);
+    g_settings_get(m_maliitSettings, KEY_CURRENT_LAYOUT, "&s", &current);
+
+    while (g_variant_iter_next(iter, "&s", &layout)) {
+        if (!added.contains(layout)) {
+            g_variant_builder_add(&builder, "s", layout);
+            added.insert(layout);
+        }
+    }
+
+    if (!added.contains(current)) {
+        g_variant_builder_add(&builder, "s", current);
+        added.insert(current);
+    }
+
+    g_variant_iter_free(iter);
+    g_settings_set_value(m_maliitSettings,
+                         KEY_ENABLED_LAYOUTS, g_variant_builder_end(&builder));
+}
+
+void
 LanguagePlugin::updateKeyboardLayouts()
 {
     m_keyboardLayouts.clear();
 
     QDir layoutsDir(LAYOUTS_DIR);
-    layoutsDir.setFilter(QDir::Files);
-    layoutsDir.setNameFilters(QStringList("*.xml"));
+    layoutsDir.setFilter(QDir::Dirs);
     layoutsDir.setSorting(QDir::Name);
 
     QFileInfoList fileInfoList(layoutsDir.entryInfoList());
@@ -523,14 +565,14 @@ void
 LanguagePlugin::enabledLayoutsChanged()
 {
     GVariantIter *iter;
-    const gchar *language;
+    const gchar *layout;
     QList<int> subset;
 
     g_settings_get(m_maliitSettings, KEY_ENABLED_LAYOUTS, "as", &iter);
 
-    while (g_variant_iter_next(iter, "&s", &language)) {
+    while (g_variant_iter_next(iter, "&s", &layout)) {
         for (int i(0); i < m_keyboardLayouts.length(); i++) {
-            if (m_keyboardLayouts[i]->name() == language) {
+            if (m_keyboardLayouts[i]->name() == layout) {
                 subset += i;
                 break;
             }

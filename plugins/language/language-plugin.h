@@ -122,6 +122,7 @@ private:
 
     void updateLanguageNamesAndCodes();
     void updateCurrentLanguage();
+    void updateEnabledLayouts();
     void updateKeyboardLayouts();
     void updateKeyboardLayoutsModel();
 
