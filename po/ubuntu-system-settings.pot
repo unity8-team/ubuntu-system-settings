@@ -42,7 +42,7 @@ msgid "Vibrate when ringing"
 msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
-msgid "Vibrate in silent mode"
+msgid "Vibrate in Silent Mode"
 msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89

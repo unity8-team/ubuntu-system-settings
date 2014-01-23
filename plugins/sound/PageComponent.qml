@@ -81,7 +81,7 @@ ItemPage {
                 control: CheckBox {
                     checked: false
                 }
-                text: i18n.tr("Vibrate in silent mode")
+                text: i18n.tr("Vibrate in Silent Mode")
                 visible: showAllUI
             }
 
