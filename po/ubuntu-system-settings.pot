@@ -1152,7 +1152,7 @@ msgid "Used by Ubuntu"
 msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
-msgid "Movies"
+msgid "Videos"
 msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
@@ -1247,7 +1247,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
-msgid "Orientation lock"
+msgid "Orientation Lock"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
@@ -1398,7 +1398,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:108
-msgid "Flight mode"
+msgid "Flight Mode"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
