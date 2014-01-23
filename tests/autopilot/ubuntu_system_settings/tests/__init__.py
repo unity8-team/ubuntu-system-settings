@@ -54,7 +54,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase,
     def main_view(self):
         """ Return main view """
         return self.app.select_single("QQuickView")
-        
+
     @property
     def pointer(self):
         """ Return pointer """
@@ -140,3 +140,20 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """ Return 'License' page """
         return self.main_view.select_single(objectName='licensesPage')
 
+
+class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
+    """ Base class for SystemUpdates page tests """
+
+    def setUp(self):
+        """ Go to SystemUpdates Page """
+        super(SystemUpdatesBaseTestCase, self).setUp()
+        # Click on 'System Updates' option
+        button = self.main_view.select_single(objectName='entryComponent-system-update')
+        self.assertThat(button, NotEquals(None))
+        self.pointer.move_to_object(button)
+        self.pointer.click()
+
+    @property
+    def updates_page(self):
+        """ Return 'System Update' page """
+        return self.main_view.select_single(objectName='entryComponent-system-update')
