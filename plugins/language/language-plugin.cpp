@@ -178,19 +178,59 @@ void
 LanguagePlugin::keyboardLayoutsModelChanged()
 {
     GVariantBuilder builder;
-    GVariant *currentLayouts;
+    const gchar *current;
+    bool removed(true);
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
+    g_settings_get(m_maliitSettings, KEY_CURRENT_LAYOUT, "&s", &current);
 
     for (QList<int>::const_iterator
          i(m_keyboardLayoutsModel.subset().begin());
-         i != m_keyboardLayoutsModel.subset().end(); ++i)
+         i != m_keyboardLayoutsModel.subset().end(); ++i) {
         g_variant_builder_add(&builder, "s",
                               qPrintable(m_keyboardLayouts[*i]->name()));
 
-    currentLayouts = g_variant_ref_sink(g_variant_builder_end(&builder));
-    g_settings_set_value(m_maliitSettings, KEY_ENABLED_LAYOUTS, currentLayouts);
-    g_variant_unref(currentLayouts);
+        if (m_keyboardLayouts[*i]->name() == current)
+            removed = false;
+    }
+
+    if (removed && !m_keyboardLayoutsModel.subset().isEmpty()) {
+        GVariantIter *iter;
+        const gchar *layout;
+        bool found(false);
+
+        g_settings_get(m_maliitSettings, KEY_ENABLED_LAYOUTS, "as", &iter);
+
+        for (int i(0); g_variant_iter_next(iter, "&s", &layout); i++) {
+            found = g_strcmp0(layout, current) == 0;
+
+            if (found) {
+                if (i >= m_keyboardLayoutsModel.subset().size())
+                    i = m_keyboardLayoutsModel.subset().size() - 1;
+
+                int index(m_keyboardLayoutsModel.subset()[i]);
+                const QString &name(m_keyboardLayouts[index]->name());
+
+                g_settings_set_string(m_maliitSettings,
+                                      KEY_CURRENT_LAYOUT, qPrintable(name));
+
+                break;
+            }
+        }
+
+        if (!found) {
+            int index(m_keyboardLayoutsModel.subset().front());
+            const QString &name(m_keyboardLayouts[index]->name());
+
+            g_settings_set_string(m_maliitSettings,
+                                  KEY_CURRENT_LAYOUT, qPrintable(name));
+        }
+
+        g_variant_iter_free(iter);
+    }
+
+    g_settings_set_value(m_maliitSettings,
+                         KEY_ENABLED_LAYOUTS, g_variant_builder_end(&builder));
 }
 
 bool
