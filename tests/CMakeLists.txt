@@ -32,3 +32,5 @@ add_test(tst-plugins tst-plugins)
 
 qt5_use_modules(tst-arguments Core Test)
 add_test(tst-arguments tst-arguments)
+
+add_subdirectory(plugins)
