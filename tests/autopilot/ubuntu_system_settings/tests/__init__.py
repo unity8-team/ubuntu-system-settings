@@ -72,7 +72,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
             self.pointer.drag(page_center_x, page_center_y, 
                     page_center_x, page_center_y - obj.height * 2)
             # avoid a flick
-            sleep(0.2)
+            sleep(0.5)
         self.pointer.click_object(obj)
 
 
