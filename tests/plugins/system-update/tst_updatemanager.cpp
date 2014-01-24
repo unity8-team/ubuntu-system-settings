@@ -29,7 +29,6 @@ class UpdateManagerTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void testCheckUpdatesNotFound();
     void testRegisterSystemUpdateRequired();
     void testRegisterSystemUpdateNotRequired();
     void testStartDownload();
@@ -52,16 +51,6 @@ Update* UpdateManagerTest::getUpdate()
     update->setUpdateAvailable(true);
 
     return update;
-}
-
-void UpdateManagerTest::testCheckUpdatesNotFound()
-{
-    UpdateManager manager;
-    QSignalSpy spy(&manager, SIGNAL(updatesNotFound()));
-    QTRY_COMPARE(spy.count(), 0);
-    manager.checkUpdates();
-    QTRY_COMPARE(spy.count(), 1);
-    QTRY_COMPARE(manager.get_apps().size(), 0);
 }
 
 void UpdateManagerTest::testRegisterSystemUpdateRequired()
