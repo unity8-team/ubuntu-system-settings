@@ -1,5 +1,4 @@
 set(QML_SOURCES PageComponent.qml Configuration.qml)
-set(JS_SOURCES js/utils.js)
 
 add_library(UbuntuUpdatePanel MODULE plugin.h system_update.h update_manager.h update.h plugin.cpp system_update.cpp update_manager.cpp update.cpp
 ${QML_SOURCES})
