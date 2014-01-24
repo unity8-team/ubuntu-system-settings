@@ -26,7 +26,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Update 1.0
-import "js/utils.js" as Utils
 
 
 ItemPage {
@@ -169,7 +168,7 @@ ItemPage {
         }
 
         Label {
-            text: i18n.tr("Checking for updates...")
+            text: i18n.tr("Checking for updates…")
             fontSize: "large"
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
@@ -283,7 +282,7 @@ ItemPage {
                         }
                     }
                     Label {
-                        text: Utils.convert_bytes_to_size(modelData.binaryFilesize)
+                        text: convert_bytes_to_size(modelData.binaryFilesize)
                         height: textArea.height / 2
                         anchors.right: parent.right
                     }
@@ -413,9 +412,32 @@ ItemPage {
             }
 
             Label {
-                text: i18n.tr("Installing update...")
+                text: i18n.tr("Installing update…")
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
+    }
+
+    function convert_bytes_to_size(bytes) {
+        var SIZE_IN_GIB = 1024.0 * 1024.0 * 1024.0;
+        var SIZE_IN_MIB = 1024.0 * 1024.0;
+        var SIZE_IN_KIB = 1024.0;
+
+        var result = "";
+        var size = 0;
+        if (bytes < SIZE_IN_KIB) {
+            result = bytes + i18n.tr(" bytes");
+        } else if (bytes < SIZE_IN_MIB) {
+            size = (bytes / SIZE_IN_KIB).toFixed(1);
+            result = bytes + i18n.tr(" KiB");
+        } else if (bytes < SIZE_IN_GIB) {
+            size = (bytes / SIZE_IN_MIB).toFixed(1);
+            result = size + i18n.tr(" MiB");
+        } else {
+            size = (bytes / SIZE_IN_GIB).toFixed(1);
+            result = size + i18n.tr(" GiB");
+        }
+
+        return result;
     }
 }

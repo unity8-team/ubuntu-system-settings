@@ -43,7 +43,7 @@ Update* UpdateManagerTest::getUpdate()
 {
     Update *update = new Update(this);
     QString packageName("UbuntuImage");
-    update->initializeApplication(packageName, "Ubuntu Touch", QString::number(1));
+    update->initializeApplication(packageName, "Ubuntu", QString::number(1));
     update->setSystemUpdate(true);
     QString version(2);
     update->setRemoteVersion(version);
@@ -81,7 +81,7 @@ void UpdateManagerTest::testRegisterSystemUpdateRequired()
     QTRY_COMPARE(manager.get_apps().size(), 1);
     QTRY_COMPARE(manager.get_model().size(), 1);
     Update* app = manager.get_model()[0].value<Update*>();
-    QCOMPARE(app->getTitle(), QString("Ubuntu Touch"));
+    QCOMPARE(app->getTitle(), QString("Ubuntu"));
     QCOMPARE(app->updateRequired(), true);
     QCOMPARE(app->getPackageName(), QString("UbuntuImage"));
 
