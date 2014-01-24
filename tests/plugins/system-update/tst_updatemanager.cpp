@@ -28,7 +28,7 @@ class UpdateManagerTest : public QObject
 {
     Q_OBJECT
 
-private slots:
+private Q_SLOTS:
     void testCheckUpdatesNotFound();
     void testRegisterSystemUpdateRequired();
     void testRegisterSystemUpdateNotRequired();
@@ -132,5 +132,5 @@ void UpdateManagerTest::testPauseDownload()
 }
 
 
-QTEST_MAIN(UpdateManagerTest)
+QTEST_MAIN(UpdateManagerTest);
 #include "tst_updatemanager.moc"

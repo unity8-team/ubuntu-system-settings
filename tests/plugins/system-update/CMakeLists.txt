@@ -1,7 +1,7 @@
+set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ../../../plugins/system-update)
 add_definitions(-DTESTS)
 
-# Need to get libsignon/accounts here, as they get exposed in headers
 find_package (PkgConfig REQUIRED)
 
 add_executable(tst-update-manager
@@ -19,7 +19,7 @@ add_executable(tst-update
 # set the path to the library folder
 include_directories(/usr/include/apt-pkg/)
 
-target_link_libraries(tst-update-manager apt-pkg ${UBUNTUONEAUTH_LDFLAGS})
+target_link_libraries(tst-update-manager apt-pkg)
 qt5_use_modules(tst-update-manager Qml Quick Core DBus Xml Network Test)
 add_test(tst-update-manager tst-update-manager)
 

@@ -51,5 +51,5 @@ void UpdateTest::testCompareVersion()
     QCOMPARE(app.updateRequired(), true);
 }
 
-QTEST_MAIN(UpdateTest)
+QTEST_MAIN(UpdateTest);
 #include "tst_update.moc"
