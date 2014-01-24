@@ -61,7 +61,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
         """ Return pointer """
         return Pointer(self.input_device_class.create())
 
-    def scroll_to_and_click(self, obj):
+    def scroll_to(self, obj):
         self.app.select_single(toolkit_emulators.Toolbar).close()
         page = self.main_view.select_single(objectName='systemSettingsPage')
         page_right = page.globalRect[0] + page.globalRect[2]
@@ -73,6 +73,9 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
                     page_center_x, page_center_y - obj.height * 2)
             # avoid a flick
             sleep(0.2)
+
+    def scroll_to_and_click(self, obj):
+        self.scroll_to(obj)
         self.pointer.click_object(obj)
 
 
@@ -146,6 +149,18 @@ class StorageBaseTestCase(AboutBaseTestCase):
     def storage_page(self):
         """ Return 'Storage' page """
         return self.main_view.select_single(objectName='storagePage')
+
+    @property
+    def installed_apps(self):
+        return self.storage_page.select_single(
+                toolkit_emulators.QQuickListView,
+                objectName='installedAppsListView')
+
+    @property
+    def installed_apps_items(self):
+        list = self.installed_apps.select_many(toolkit_emulators.SingleValue)
+        list.sort(lambda l, r: cmp(l.globalRect[1], r.globalRect[1]))
+        return list
 
 
 class LicenseBaseTestCase(AboutBaseTestCase):

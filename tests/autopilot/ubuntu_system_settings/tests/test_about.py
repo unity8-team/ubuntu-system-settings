@@ -11,6 +11,9 @@ from autopilot.platform import model
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from unittest import expectedFailure
+from ubuntuuitoolkit import emulators as toolkit_emulators
+
+import pdb
 
 from ubuntu_system_settings.tests import AboutBaseTestCase, StorageBaseTestCase, LicenseBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
@@ -136,8 +139,32 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_installed_apps(self):
         """ Checks whether Installed Apps list is available """
-        installed_apps_list_view = self.storage_page.select_single(objectName='installedAppsListView')
-        self.assertThat(installed_apps_list_view, NotEquals(None))
+        self.assertThat(self.installed_apps, NotEquals(None))
+
+    def test_installed_apps_sorted_by_name(self):
+        """ Whether the Installed Apps list is sorted by name by default """
+        sorted = True
+        last = None
+        for e in self.installed_apps_items:
+            if last is not None and last > e.text:
+                sorted = False
+                break
+            last = e.text
+        self.assertTrue(sorted)
+
+    def test_installed_apps_sorted_by_size(self):
+        """ Whether the Installed Apps list sorts by size properly """
+        selector = self.storage_page.select_single(
+                toolkit_emulators.ItemSelector,
+                objectName="installedAppsItemSelector")
+        self.scroll_to(selector)
+        # LP: #1271969
+        selector_center_x = selector.globalRect[0] + int(selector.globalRect[2] / 2)
+        selector_center_y = selector.globalRect[1] + int(selector.globalRect[3] / 1.5)
+        self.pointer.move(selector_center_x, selector_center_y)
+        self.pointer.click()
+        item = selector.wait_select_single(text=_("By size"))
+        # Check they're sorted by size
 
 
 class LicenseTestCase(LicenseBaseTestCase):
