@@ -27,6 +27,7 @@ MainView {
     width: units.gu(50)
     height: units.gu(90)
     applicationName: "SystemSettings"
+    objectName: "mainView"
     automaticOrientation: true
 
     function loadPluginByName(pluginName, pluginOptions) {
