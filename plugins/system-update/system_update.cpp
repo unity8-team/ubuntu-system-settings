@@ -90,7 +90,6 @@ void SystemUpdate::cancelUpdate() {
 void SystemUpdate::pauseDownload() {
     QDBusReply<QString> reply = m_SystemServiceIface.call("PauseDownload");
     if (!reply.isValid())
-        qDebug() << "faillllllllllllllll";
         Q_EMIT updateProcessFailed(_("Can't pause current request (can't contact service)"));
 }
 
