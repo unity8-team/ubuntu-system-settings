@@ -21,8 +21,8 @@ include_directories(/usr/include/apt-pkg/)
 
 target_link_libraries(tst-update-manager apt-pkg)
 qt5_use_modules(tst-update-manager Qml Quick Core DBus Xml Network Test)
-add_test(tst-update-manager COMMAND ${XVFB_CMD} tst-update-manager)
+add_test(tst-update-manager ${XVFB_CMD} tst-update-manager)
 
 qt5_use_modules(tst-update Qml Quick Core DBus Xml Network Test)
 target_link_libraries(tst-update apt-pkg)
-add_test(tst-update COMMAND ${XVFB_CMD} tst-update)
+add_test(tst-update ${XVFB_CMD} tst-update)
