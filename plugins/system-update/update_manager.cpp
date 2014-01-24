@@ -40,7 +40,11 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_systemUpdate, SIGNAL(updateDownloaded()),
                   SIGNAL(systemUpdateDownloaded()));
     QObject::connect(&m_systemUpdate, SIGNAL(updateProcessFailed(const QString&)),
+                  SIGNAL(updateProcessFailed(QString)));
+    QObject::connect(&m_systemUpdate, SIGNAL(updateFailed(int, QString)),
                   SIGNAL(systemUpdateFailed()));
+    QObject::connect(&m_systemUpdate, SIGNAL(updatePaused(int)),
+                  SLOT(systemUpdatePaused(int)));
 }
 
 UpdateManager::~UpdateManager()
@@ -66,11 +70,32 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
     }
 }
 
+void UpdateManager::systemUpdatePaused(int value)
+{
+    QString packagename("UbuntuImage");
+    if (m_apps.contains(packagename)) {
+        Update *update = m_apps[packagename];
+        update->setSelected(true);
+        update->setDownloadProgress(value);
+    }
+}
+
 void UpdateManager::startDownload(const QString &packagename)
 {
     qDebug() << "Download Package:" << packagename;
     m_apps[packagename]->setUpdateState(true);
     m_systemUpdate.downloadUpdate();
+}
+
+void UpdateManager::retryDownload(const QString &packagename)
+{
+    qDebug() << "Retry Package:" << packagename;
+    Update *update = m_apps.take(packagename);
+    m_systemUpdate.cancelUpdate();
+    m_model.removeAt(0);
+    update->deleteLater();
+    Q_EMIT modelChanged();
+    m_systemUpdate.checkForUpdate();
 }
 
 void UpdateManager::pauseDownload(const QString &packagename)

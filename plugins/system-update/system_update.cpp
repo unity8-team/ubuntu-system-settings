@@ -45,6 +45,7 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                          "com.canonical.SystemImage",
                          m_systemBusConnection)
 {
+    update = nullptr;
 
     connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QString)),
                this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QString)));
@@ -77,7 +78,7 @@ void SystemUpdate::downloadUpdate() {
 void SystemUpdate::applyUpdate() {
     QDBusReply<QString> reply = m_SystemServiceIface.call("ApplyUpdate");
     if (!reply.isValid())
-        Q_EMIT updateProcessFailed(_("Can't apply the current update (can't contact service)"));
+        Q_EMIT updateProcessFailed(reply.value());
 }
 
 void SystemUpdate::cancelUpdate() {
@@ -89,6 +90,7 @@ void SystemUpdate::cancelUpdate() {
 void SystemUpdate::pauseDownload() {
     QDBusReply<QString> reply = m_SystemServiceIface.call("PauseDownload");
     if (!reply.isValid())
+        qDebug() << "faillllllllllllllll";
         Q_EMIT updateProcessFailed(_("Can't pause current request (can't contact service)"));
 }
 
@@ -152,7 +154,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
 {
     update = new Update(this);
     QString packageName("UbuntuImage");
-    update->initializeApplication(packageName, "Ubuntu Touch",
+    update->initializeApplication(packageName, "Ubuntu",
                                   QString::number(this->currentBuildNumber()));
 
     update->setSystemUpdate(true);
@@ -160,6 +162,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
     update->setBinaryFilesize(updateSize);
     update->setError(errorReason);
     update->setUpdateState(downloading);
+    update->setSelected(downloading);
     update->setUpdateAvailable(isAvailable);
     update->setLastUpdateDate(lastUpdateDate);
     update->setIconUrl(QString("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"));
@@ -170,7 +173,9 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
 void SystemUpdate::updateDownloadProgress(int percentage, double eta)
 {
     Q_UNUSED(eta);
-    update->setDownloadProgress(percentage);
+    if (update != nullptr) {
+        update->setDownloadProgress(percentage);
+    }
 }
 
 }

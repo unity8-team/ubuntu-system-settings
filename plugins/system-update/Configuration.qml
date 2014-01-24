@@ -34,9 +34,9 @@ ItemPage {
         text: i18n.tr ("Download future updates automatically:")
         model: downloadSelector
         delegate: selectorDelegate
-        selectedIndex: updateBackend.downloadMode
-        onSelectedIndexChanged: updateBackend.downloadMode = selectedIndex
-        Component.onCompleted: selectedIndex = updateBackend.downloadMode
+        selectedIndex: updateManager.downloadMode
+        onSelectedIndexChanged: updateManager.downloadMode = selectedIndex
+        Component.onCompleted: selectedIndex = updateManager.downloadMode
     }
     Component {
         id: selectorDelegate

@@ -46,6 +46,7 @@ Q_SIGNALS:
     void errorFound();
     void downloadModeChanged();
     void systemUpdateDownloaded();
+    void updateProcessFailed(QString message);
     void systemUpdateFailed();
     
 public:
@@ -55,6 +56,7 @@ public:
     Q_INVOKABLE void checkUpdates();
     Q_INVOKABLE void startDownload(const QString &packagename);
     Q_INVOKABLE void pauseDownload(const QString &packagename);
+    Q_INVOKABLE void retryDownload(const QString &packagename);
     Q_INVOKABLE void applySystemUpdate() { m_systemUpdate.applyUpdate(); }
 
     QVariantList model() const { return m_model; }
@@ -70,6 +72,9 @@ public:
 
 public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
+
+private Q_SLOTS:
+    void systemUpdatePaused(int value);
 
 private:
     QHash<QString, Update*> m_apps;

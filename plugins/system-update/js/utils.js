@@ -25,13 +25,13 @@ function convert_bytes_to_size(bytes) {
     if (bytes < SIZE_IN_KIB) {
         result = bytes + " bytes";
     } else if (bytes < SIZE_IN_MIB) {
-        size = (bytes / SIZE_IN_KIB).toFixed(2);
+        size = (bytes / SIZE_IN_KIB).toFixed(1);
         result = bytes + " KiB";
     } else if (bytes < SIZE_IN_GIB) {
-        size = (bytes / SIZE_IN_MIB).toFixed(2);
+        size = (bytes / SIZE_IN_MIB).toFixed(1);
         result = size + " MiB";
     } else {
-        size = (bytes / SIZE_IN_GIB).toFixed(2);
+        size = (bytes / SIZE_IN_GIB).toFixed(1);
         result = size + " GiB";
     }
 

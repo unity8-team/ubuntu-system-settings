@@ -34,8 +34,6 @@ ItemPage {
 
     title: i18n.tr("Updates")
 
-    property int updates: 0
-
     DeviceInfo {
         id: deviceInfo
     }
@@ -51,9 +49,9 @@ ItemPage {
                  text: i18n.tr("Install & Restart")
                  color: UbuntuColors.orange
                  onClicked: {
+                     installingImageUpdate.visible = true;
                      updateManager.applySystemUpdate();
                      PopupUtils.close(dialogueInstall);
-                     installingImageUpdate.visible = true;
                  }
              }
              Button {
@@ -78,43 +76,33 @@ ItemPage {
             PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
-            PropertyChanges { target: checkForUpdatesButton; visible: false}
         },
         State {
             name: "NOUPDATES"
             PropertyChanges { target: updatedNotification; text: i18n.tr("Software is up to date")}
             PropertyChanges { target: updatedNotification; visible: true}
-            PropertyChanges { target: checkForUpdatesButton; visible: true}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
         },
         State {
             name: "SYSTEMUPDATEFAILED"
-            PropertyChanges { target: notification; text: i18n.tr("System Update has failed.")}
+            PropertyChanges { target: notification; text: i18n.tr("System update has failed.")}
             PropertyChanges { target: notification; onClicked: undefined }
             PropertyChanges { target: notification; progression: false}
             PropertyChanges { target: notification; visible: true}
             PropertyChanges { target: installingImageUpdate; visible: false}
-            PropertyChanges { target: checkForUpdatesButton; visible: true}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
+            PropertyChanges { target: updatedNotification; visible: false}
         },
         State {
             name: "UPDATE"
             PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: installAllButton; visible: true}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
-            PropertyChanges { target: checkForUpdatesButton; visible: false}
+            PropertyChanges { target: updatedNotification; visible: false}
         }
     ]
-
-    onUpdatesChanged: {
-        if (root.updates > 0) {
-            root.state = "UPDATE";
-        } else {
-            root.state = "NOUPDATES";
-        }
-    }
 
     UpdateManager {
         id: updateManager
@@ -126,7 +114,11 @@ ItemPage {
         }
 
         onUpdateAvailableFound: {
-            root.updates = updateManager.model.length;
+            if (updateManager.model.length > 0) {
+                root.state = "UPDATE";
+            } else {
+                root.state = "NOUPDATES";
+            }
         }
 
         onUpdatesNotFound: {
@@ -139,6 +131,15 @@ ItemPage {
 
         onSystemUpdateFailed: {
             root.state = "SYSTEMUPDATEFAILED";
+        }
+
+        onUpdateProcessFailed: {
+            root.state = "SYSTEMUPDATEFAILED";
+            if (message) {
+                notification.text = message;
+            } else {
+                notification.text = i18n.tr("System update failed.");
+            }
         }
     }
 
@@ -154,7 +155,7 @@ ItemPage {
             leftMargin: units.gu(4)
             rightMargin: units.gu(4)
         }
-        height: buttonCheckUpdates.height
+        height: installAllButton.height
 
         ActivityIndicator {
             id: activity
@@ -175,46 +176,11 @@ ItemPage {
             anchors {
                 left: activity.right
                 top: parent.top
-                right: buttonCheckUpdates.left
+                right: checkForUpdatesArea.right
                 leftMargin: units.gu(2)
                 topMargin: units.gu(1)
                 rightMargin: units.gu(2)
             }
-        }
-
-        Button {
-            id: buttonCheckUpdates
-            text: i18n.tr("Retry")
-            anchors {
-                right: parent.right
-                top: parent.top
-            }
-
-            onClicked: {
-                root.state = "SEARCHING";
-                updateManager.checkUpdates();
-            }
-        }
-    }
-
-    Button {
-        id: checkForUpdatesButton
-        objectName: "checkForUpdatesButton"
-        text: i18n.tr("Check for updates")
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: parent.top
-            topMargin: units.gu(2)
-            leftMargin: units.gu(4)
-            rightMargin: units.gu(4)
-        }
-        visible: false
-
-        color: UbuntuColors.orange
-        onClicked: {
-            root.state = "SEARCHING";
-            updateManager.checkUpdates();
         }
     }
 
@@ -272,6 +238,7 @@ ItemPage {
                 anchors.topMargin: units.gu(1)
 
                 property string message: modelData.error
+                property bool retry: false
 
                 onMessageChanged: {
                     if(message.length > 0) {
@@ -279,6 +246,7 @@ ItemPage {
                         buttonAppUpdate.text = i18n.tr("Retry");
                         modelData.updateState = false;
                         modelData.selected = false;
+                        textArea.retry = true;
                     }
                 }
 
@@ -292,14 +260,17 @@ ItemPage {
                     Button {
                         id: buttonAppUpdate
 
-                        property string primaryText: i18n.tr("Update")
+                        property string primaryText: modelData.systemUpdate ? i18n.tr("Download") : i18n.tr("Update")
                         property string secondaryText: i18n.tr("Pause")
 
                         text: modelData.updateState ? secondaryText : primaryText
                         height: textArea.height / 2
 
                         onClicked: {
-                            if (modelData.updateReady) {
+                            if (textArea.retry) {
+                                textArea.retry = false;
+                                updateManager.retryDownload(modelData.packageName);
+                            } else if (modelData.updateReady) {
                                 updateManager.applySystemUpdate();
                                 installingImageUpdate.visible = true;
                             } else if (modelData.updateState) {
