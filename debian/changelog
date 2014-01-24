@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.1+14.04.20140124-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Iain Lane ]
+  * Various fixes to the autopilot tests so that they all pass on both
+    desktop and device (at least in the 'C' locale).
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 24 Jan 2014 09:08:01 +0000
+
 ubuntu-system-settings (0.1+14.04.20140122.1-0ubuntu1) trusty; urgency=low
 
   [ Ted Gould ]
