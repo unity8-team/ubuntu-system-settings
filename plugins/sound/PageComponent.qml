@@ -124,7 +124,7 @@ ItemPage {
             }
 
             ListItem.Standard {
-                control: CheckBox {
+                control: Switch {
                     checked: false
                 }
                 text: i18n.tr("Keyboard sound")
@@ -132,7 +132,7 @@ ItemPage {
             }
 
             ListItem.Standard {
-                control: CheckBox {
+                control: Switch {
                     checked: false
                 }
                 text: i18n.tr("Lock sound")
