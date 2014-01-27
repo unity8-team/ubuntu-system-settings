@@ -88,6 +88,8 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                visible: showAllUI
+
                 text: i18n.tr("Spell checking")
                 value: plugin.spellCheckingModel.subset.length == 1 ?
                        plugin.spellCheckingModel.superset[plugin.spellCheckingModel.subset[0]][0] :
@@ -95,6 +97,16 @@ ItemPage {
                 progression: true
 
                 onClicked: pageStack.push(spellChecking)
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Spell checking")
+
+                control: Switch {
+                    checked: plugin.spellChecking
+
+                    onClicked: plugin.spellChecking = checked
+                }
             }
 
             ListItem.Standard {
