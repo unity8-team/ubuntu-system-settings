@@ -1,4 +1,5 @@
 {
+    "plugin": "brightness-plugin",
     "icon": "/usr/share/ubuntu/settings/system/icons/settings-brightness.svg",
     "name": "Brightness",
     "translations": "ubuntu-system-settings",
@@ -9,5 +10,6 @@
         "settings"
     ],
     "has-dynamic-keywords": false,
-    "has-dynamic-visibility": false
+    "has-dynamic-visibility": true,
+    "page-component": "PageComponent.qml"
 }
