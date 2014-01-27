@@ -18,8 +18,33 @@
  *
  */
 
+#include <QDBusArgument>
 #include <QDBusMessage>
 #include "brightness.h"
+
+struct Params {
+        int min;
+        int max;
+        int def;
+        bool automatic;
+};
+Q_DECLARE_METATYPE(Params)
+
+const QDBusArgument &operator<<(QDBusArgument &argument, const Params &params)
+{
+    argument.beginStructure();
+    argument << params.min << params.max << params.def << params.automatic;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument &operator>>(const QDBusArgument &argument, Params &params)
+{
+    argument.beginStructure();
+    argument >> params.min >> params.max >> params.def >> params.automatic;
+    argument.endStructure();
+    return argument;
+}
 
 Brightness::Brightness(QObject *parent) :
     QObject(parent),
@@ -34,13 +59,19 @@ Brightness::Brightness(QObject *parent) :
     if (!m_powerdRunning)
         return;
 
-    QDBusMessage reply(m_powerdIface.call("getBrightnessParams"));
+    QDBusReply<Params> reply(m_powerdIface.call("getBrightnessParams"));
 
-    if (reply.type() != QDBusMessage::ReplyMessage)
+    if (!reply.isValid())
         return;
 
     // (iiib) -> max, min, default, autobrightness
-    m_autoBrightnessAvailable = reply.arguments()[3].toBool();
+    Params result(reply.value());
+    m_autoBrightnessAvailable = result.automatic;
+}
+
+bool Brightness::getAutoBrightnessAvailable() const
+{
+    return m_autoBrightnessAvailable;
 }
 
 bool Brightness::getPowerdRunning() const {

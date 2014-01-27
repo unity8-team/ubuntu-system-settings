@@ -35,6 +35,11 @@ ItemPage {
         id: brightnessPanel
     }
 
+    GSettings {
+        id: gsettings
+        schema.id: "com.ubuntu.touch.system"
+    }
+
     QDBusActionGroup {
         id: indicatorPower
         busType: 1
@@ -44,10 +49,6 @@ ItemPage {
         property variant brightness: action("brightness")
     }
 
-    GSettings {
-        id: gsettings
-        schema.id: "com.ubuntu.touch.system"
-    }
 
     Component.onCompleted: indicatorPower.start()
 
@@ -113,7 +114,7 @@ ItemPage {
         }
 
         Binding {
-            target: adjust
+            target: autoAdjustCheck
             property: "checked"
             value: adjust.enabled && gsettings.autoBrightness
         }
@@ -124,10 +125,10 @@ ItemPage {
             enabled: brightnessPanel.powerdRunning &&
                      brightnessPanel.autoBrightnessAvailable
             control: CheckBox {
-                id: autoAdjustSwitch
+                id: autoAdjustCheck
                 onClicked: gsettings.autoBrightness = checked
             }
-            Component.onCompleted: clicked.connect(autoAdjustSwitch.clicked)
+            Component.onCompleted: clicked.connect(autoAdjustCheck.clicked)
             showDivider: false
         }
         ListItem.Caption {
