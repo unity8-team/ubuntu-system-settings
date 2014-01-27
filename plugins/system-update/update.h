@@ -103,20 +103,20 @@ public:
     void setLastUpdateDate(const QString date);
 
 private:
-    bool m_systemUpdate;
-    QString m_packagename;
-    QString m_title;
-    QString m_local_version;
-    QString m_remote_version;
-    QString m_icon_url;
-    QString m_error;
-    QString m_lastUpdateDate;
     int m_binary_filesize;
     int m_download_progress;
-    bool m_update;
-    bool m_update_state;
-    bool m_update_ready;
+    QString m_error;
+    QString m_icon_url;
+    QString m_lastUpdateDate;
+    QString m_local_version;
+    QString m_packagename;
+    QString m_remote_version;
     bool m_selected;
+    bool m_systemUpdate;
+    QString m_title;
+    bool m_update;
+    bool m_update_ready;
+    bool m_update_state;
 };
 
 }

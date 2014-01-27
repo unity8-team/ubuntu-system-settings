@@ -37,8 +37,8 @@ namespace UpdatePlugin {
 
 SystemUpdate::SystemUpdate(QObject *parent) :
     QObject(parent),
-    m_downloadMode(-1),
     m_currentBuildNumber(-1),
+    m_downloadMode(-1),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_SystemServiceIface ("com.canonical.SystemImage",
                          "/Service",

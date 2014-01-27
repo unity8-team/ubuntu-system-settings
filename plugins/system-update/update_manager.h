@@ -78,9 +78,10 @@ private Q_SLOTS:
 
 private:
     QHash<QString, Update*> m_apps;
+    int m_downloadMode;
     QVariantList m_model;
     SystemUpdate m_systemUpdate;
-    int m_downloadMode;
+
     void checkForUpdates();
 };
 

@@ -27,20 +27,20 @@ namespace UpdatePlugin {
 
 Update::Update(QObject *parent) :
     QObject(parent),
-    m_systemUpdate(false),
-    m_packagename(""),
-    m_title(""),
-    m_local_version(""),
-    m_remote_version(""),
-    m_icon_url(""),
-    m_error(""),
-    m_lastUpdateDate(""),
     m_binary_filesize(0),
     m_download_progress(0),
+    m_error(""),
+    m_icon_url(""),
+    m_lastUpdateDate(""),
+    m_local_version(""),
+    m_packagename(""),
+    m_remote_version(""),
+    m_selected(false),
+    m_systemUpdate(false),
+    m_title(""),
     m_update(false),
-    m_update_state(false),
     m_update_ready(false),
-    m_selected(false)
+    m_update_state(false)
 {
 }
 

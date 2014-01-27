@@ -67,8 +67,8 @@ private Q_SLOTS:
     void updateDownloadProgress(int percentage, double eta);
 
 private:
-    int m_downloadMode;
     int m_currentBuildNumber;
+    int m_downloadMode;
 
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;

@@ -54,6 +54,7 @@ UpdateManager::~UpdateManager()
 void UpdateManager::checkUpdates()
 {
     m_model.clear();
+    m_apps.clear();
     Q_EMIT modelChanged();
     m_systemUpdate.checkForUpdate();
 }
