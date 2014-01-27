@@ -59,6 +59,10 @@ public:
                READ keyboardLayoutsModel
                CONSTANT)
 
+    Q_PROPERTY(SubsetModel *spellCheckingModel
+               READ spellCheckingModel
+               CONSTANT)
+
     Q_PROPERTY(bool spellChecking
                READ spellChecking
                WRITE setSpellChecking
@@ -98,6 +102,9 @@ public:
     SubsetModel *keyboardLayoutsModel();
     Q_SLOT void keyboardLayoutsModelChanged();
 
+    SubsetModel *spellCheckingModel();
+    Q_SLOT void spellCheckingModelChanged();
+
     bool spellChecking() const;
     void setSpellChecking(bool value);
     Q_SIGNAL void spellCheckingChanged() const;
@@ -125,6 +132,7 @@ private:
     void updateEnabledLayouts();
     void updateKeyboardLayouts();
     void updateKeyboardLayoutsModel();
+    void updateSpellCheckingModel();
 
     int indexForLocale(const QString &name);
 
@@ -158,6 +166,7 @@ private:
     GSettings *m_maliitSettings;
     QList<KeyboardLayout *> m_keyboardLayouts;
     SubsetModel m_keyboardLayoutsModel;
+    SubsetModel m_spellCheckingModel;
 };
 
 #endif // LANGUAGE_PLUGIN_H

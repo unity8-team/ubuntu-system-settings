@@ -116,6 +116,7 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     updateEnabledLayouts();
     updateKeyboardLayouts();
     updateKeyboardLayoutsModel();
+    updateSpellCheckingModel();
 }
 
 LanguagePlugin::~LanguagePlugin()
@@ -231,6 +232,18 @@ LanguagePlugin::keyboardLayoutsModelChanged()
 
     g_settings_set_value(m_maliitSettings,
                          KEY_ENABLED_LAYOUTS, g_variant_builder_end(&builder));
+}
+
+SubsetModel *
+LanguagePlugin::spellCheckingModel()
+{
+    return &m_spellCheckingModel;
+}
+
+void
+LanguagePlugin::spellCheckingModelChanged()
+{
+    // TODO: update spell checking model
 }
 
 bool
@@ -532,6 +545,28 @@ LanguagePlugin::updateKeyboardLayoutsModel()
 
     g_signal_connect(m_maliitSettings, "changed::" KEY_ENABLED_LAYOUTS,
                      G_CALLBACK(::enabledLayoutsChanged), this);
+}
+
+void
+LanguagePlugin::updateSpellCheckingModel()
+{
+    // TODO: populate spell checking model
+    QVariantList superset;
+
+    for (QStringList::const_iterator
+         i(m_languageNames.begin()); i != m_languageNames.end(); ++i) {
+        QVariantList element;
+        element += *i;
+        superset += QVariant(element);
+    }
+
+    m_spellCheckingModel.setCustomRoles(QStringList("language"));
+    m_spellCheckingModel.setSuperset(superset);
+    m_spellCheckingModel.setSubset(QList<int>());
+    m_spellCheckingModel.setAllowEmpty(false);
+
+    connect(&m_spellCheckingModel,
+            SIGNAL(subsetChanged()), SLOT(spellCheckingModelChanged()));
 }
 
 int
