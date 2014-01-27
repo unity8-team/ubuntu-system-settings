@@ -186,7 +186,7 @@ ItemPage {
     Button {
         id: installAllButton
         objectName: "installAllButton"
-        text: i18n.tr("Install %1 Update", "Install %1 Updates", updateManager.model.length).arg(updateManager.model.length)
+        text: i18n.tr("Install %1 update", "Install %1 updates", updateManager.model.length).arg(updateManager.model.length)
         anchors {
             left: parent.left
             right: parent.right
@@ -225,7 +225,7 @@ ItemPage {
             id: listItem
             icon: Qt.resolvedUrl(modelData.iconUrl)
             iconFrame: false
-            height: units.gu(9)
+            height: modelData.updateState ? units.gu(14) : units.gu(8)
 
             property alias actionButton: buttonAppUpdate
 
@@ -249,96 +249,103 @@ ItemPage {
                     }
                 }
 
-                Column {
-                    id: colRight
-                    objectName: "colRight"
+                Button {
+                    id: buttonAppUpdate
+                    objectName: "buttonAppUpdate"
                     anchors.top: parent.top
                     anchors.right: parent.right
                     anchors.topMargin: units.gu(1)
+                    anchors.rightMargin: units.gu(1)
+                    height: labelTitle.height
 
-                    Button {
-                        id: buttonAppUpdate
+                    property string primaryText: modelData.systemUpdate ? i18n.tr("Download") : i18n.tr("Update")
+                    property string secondaryText: i18n.tr("Pause")
 
-                        property string primaryText: modelData.systemUpdate ? i18n.tr("Download") : i18n.tr("Update")
-                        property string secondaryText: i18n.tr("Pause")
+                    text: modelData.updateState ? secondaryText : primaryText
 
-                        text: modelData.updateState ? secondaryText : primaryText
-                        height: textArea.height / 2
-
-                        onClicked: {
-                            if (textArea.retry) {
-                                textArea.retry = false;
-                                updateManager.retryDownload(modelData.packageName);
-                            } else if (modelData.updateReady) {
-                                updateManager.applySystemUpdate();
-                                installingImageUpdate.visible = true;
-                            } else if (modelData.updateState) {
-                                updateManager.pauseDownload(modelData.packageName);
-                            } else {
-                                modelData.selected = true;
-                                buttonAppUpdate.primaryText = i18n.tr("Resume");
-                                updateManager.startDownload(modelData.packageName);
-                            }
+                    onClicked: {
+                        if (textArea.retry) {
+                            textArea.retry = false;
+                            updateManager.retryDownload(modelData.packageName);
+                        } else if (modelData.updateReady) {
+                            updateManager.applySystemUpdate();
+                            installingImageUpdate.visible = true;
+                        } else if (modelData.updateState) {
+                            updateManager.pauseDownload(modelData.packageName);
+                        } else {
+                            modelData.selected = true;
+                            buttonAppUpdate.primaryText = i18n.tr("Resume");
+                            updateManager.startDownload(modelData.packageName);
                         }
-                    }
-                    Label {
-                        text: convert_bytes_to_size(modelData.binaryFilesize)
-                        height: textArea.height / 2
-                        anchors.right: parent.right
                     }
                 }
 
-                Column {
-                    id: colLeft
-                    objectName: "colLeft"
+                Label {
+                    id: labelSize
+                    text: convert_bytes_to_size(modelData.binaryFilesize)
+                    anchors.bottom: labelVersion.bottom
+                    anchors.right: parent.right
+                    anchors.rightMargin: units.gu(1)
+                    visible: !modelData.selected
+                }
+
+                Label {
+                    id: labelTitle
                     anchors {
-                        left: parent.left
-                        bottom: parent.bottom
                         top: parent.top
-                        right: colRight.left
-                        rightMargin: units.gu(1)
+                        left: parent.left
+                        right: buttonAppUpdate.right
                         topMargin: units.gu(1)
                     }
-
-                    Label {
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
-                        text: modelData.title
-                        color: modelData.updateState ? "gray" : "black"
-                        font.bold: true
-                        elide: Text.ElideRight
-                    }
-                    Label {
-                        id: labelVersion
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
-                        text: modelData.remoteVersion ? i18n.tr("Version: ") + modelData.remoteVersion : ""
-                        color: "black"
-                        visible: !modelData.selected
-                        elide: Text.ElideRight
-                    }
+                    height: units.gu(3)
+                    text: modelData.title
+                    color: modelData.updateState ? "gray" : "black"
+                    font.bold: true
+                    elide: Text.ElideRight
                 }
-            }
 
-            ProgressBar {
-                id: progress
-                objectName: "progress"
-                width: textArea.width - colRight.width - units.gu(2)
-                height: parent.height / 3
-                anchors.left: textArea.left
-                anchors.leftMargin: units.gu(1)
-                anchors.bottom: textArea.bottom
-                anchors.bottomMargin: units.dp(5)
-                opacity: modelData.selected ? 1 : 0
-                value: modelData.downloadProgress
-                minimumValue: 0
-                maximumValue: 100
+                Label {
+                    id: labelUpdateStatus
+                    text: i18n.tr("Installing")
+                    anchors.top: labelTitle.bottom
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    opacity: modelData.selected ? 1 : 0
+                    anchors.bottomMargin: units.gu(1)
 
-                Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
+                    Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
+                }
+
+                ProgressBar {
+                    id: progress
+                    objectName: "progress"
+                    height: units.gu(2)
+                    anchors.left: parent.left
+                    anchors.top: labelUpdateStatus.bottom
+                    anchors.topMargin: units.gu(1)
+                    anchors.right: parent.right
+                    opacity: modelData.selected ? 1 : 0
+                    value: modelData.downloadProgress
+                    minimumValue: 0
+                    maximumValue: 100
+
+                    Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
+                }
+
+                Label {
+                    id: labelVersion
+                    anchors {
+                        left: parent.left
+                        right: buttonAppUpdate.right
+                        top: progress.bottom
+                        topMargin: units.gu(1)
+                        bottom: parent.bottom
+                        bottomMargin: units.gu(1)
+                    }
+                    text: modelData.remoteVersion ? i18n.tr("Version: ") + modelData.remoteVersion : ""
+                    color: "black"
+                    elide: Text.ElideRight
+                }
             }
         }
     }

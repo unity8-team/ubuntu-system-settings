@@ -38,6 +38,7 @@ class UpdateManager : public QObject
     Q_PROPERTY(QVariantList model READ model NOTIFY modelChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
+    Q_PROPERTY(int currentBuildNumber READ currentBuildNumber)
 
 Q_SIGNALS:
     void modelChanged();
@@ -62,6 +63,7 @@ public:
     QVariantList model() const { return m_model; }
     int downloadMode() { return m_systemUpdate.downloadMode(); }
     void setDownloadMode(int mode) { m_systemUpdate.setDownloadMode(mode); }
+    int currentBuildNumber() { return m_systemUpdate.currentBuildNumber(); }
 
 #ifdef TESTS
     // For testing purposes
