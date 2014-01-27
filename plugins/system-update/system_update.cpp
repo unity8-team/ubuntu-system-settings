@@ -20,7 +20,6 @@
 */
 
 #include "system_update.h"
-#include <QDebug>
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>

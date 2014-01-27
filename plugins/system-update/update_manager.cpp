@@ -25,7 +25,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
-#include <QDebug>
 
 namespace UpdatePlugin {
 
@@ -83,14 +82,12 @@ void UpdateManager::systemUpdatePaused(int value)
 
 void UpdateManager::startDownload(const QString &packagename)
 {
-    qDebug() << "Download Package:" << packagename;
     m_apps[packagename]->setUpdateState(true);
     m_systemUpdate.downloadUpdate();
 }
 
 void UpdateManager::retryDownload(const QString &packagename)
 {
-    qDebug() << "Retry Package:" << packagename;
     Update *update = m_apps.take(packagename);
     m_systemUpdate.cancelUpdate();
     m_model.removeAt(0);
@@ -101,7 +98,6 @@ void UpdateManager::retryDownload(const QString &packagename)
 
 void UpdateManager::pauseDownload(const QString &packagename)
 {
-    qDebug() << "Pause Package:" << packagename;
     m_apps[packagename]->setUpdateState(false);
     m_systemUpdate.pauseDownload();
 }

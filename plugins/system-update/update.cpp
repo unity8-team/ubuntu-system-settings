@@ -21,7 +21,6 @@
 #include "update.h"
 #include <QStringList>
 #include <apt-pkg/debversion.h>
-#include <QDebug>
 
 namespace UpdatePlugin {
 
