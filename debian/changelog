@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+14.04.20140127-0ubuntu1) trusty; urgency=low
+
+  [ Sebastien Bacher ]
+  * Small strings tweaks: Update Flight Mode and Orientation Lock
+    casing, they are proper nouns. storage: rename "Movies" to "Videos".
+    update the translations template (LP: #1247576)
+  * None
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 27 Jan 2014 16:18:10 +0000
+
 ubuntu-system-settings (0.1+14.04.20140124-0ubuntu1) trusty; urgency=low
 
   [ CI bot ]

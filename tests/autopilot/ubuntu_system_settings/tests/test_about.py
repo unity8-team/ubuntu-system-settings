@@ -116,7 +116,7 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_space_movies(self):
         """ Checks whether space item is available """
-        self.assert_space_item('moviesItem', _('Movies'))
+        self.assert_space_item('moviesItem', _('Videos'))
 
     def test_space_audio(self):
         """ Checks whether space item is available """
