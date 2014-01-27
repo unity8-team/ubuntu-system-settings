@@ -19,7 +19,7 @@
  */
 
 #include <QDBusArgument>
-#include <QDBusMessage>
+#include <QDBusReply>
 #include "brightness.h"
 
 struct Params {
