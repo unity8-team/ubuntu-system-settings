@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-09 14:06+0100\n"
-"PO-Revision-Date: 2014-01-16 12:50+0000\n"
+"PO-Revision-Date: 2014-01-25 14:49+0000\n"
 "Last-Translator: jogijs <e.blumbergs@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-01-18 07:08+0000\n"
-"X-Generator: Launchpad (build 16901)\n"
+"X-Launchpad-Export-Date: 2014-01-26 05:17+0000\n"
+"X-Generator: Launchpad (build 16914)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
@@ -102,31 +102,31 @@ msgstr "Laiks"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Stunda"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Minūte"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Sekunde"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Datums"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Diena"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "Mēnesis"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "Gads"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:173
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:310
@@ -140,42 +140,42 @@ msgstr ""
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:54
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:54
 msgid "Cancel"
-msgstr ""
+msgstr "Atcelt"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:182
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:102
 msgid "Set"
-msgstr ""
+msgstr "Uzstādīt"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "Laika josla"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Iestatīt laika joslu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:113
 msgid "Enter your current location."
-msgstr ""
+msgstr "Ievadiet savu pašreizējo atrašanos vietu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:113
 msgid "No matching place"
-msgstr ""
+msgstr "Vietu nevar atrast"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:30
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "Aizslēgšanas drošība"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "Mainīt kodu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "Mainīt paroles frāzi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
@@ -183,51 +183,51 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Pārslēgties uz kodu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "Pārslēgties uz paroles frāzi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "Esošais paroles kods"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "Esošā paroles frāze"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Nepareizs kods. Mēģiniet vēlreiz."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Nepareiza parole. Mēģiniet vēlreiz."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "Izvēlieties kodu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Izvēlieties paroli"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Apstipriniet kodu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Apstipriniet paroli"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Šie kodi nesakrīt. Mēģiniet vēlreiz."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Šīs paroļes nesakrīt. Mēģiniet vēlreiz."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:273
 msgid "Unset"
@@ -235,11 +235,11 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:274
 msgid "Continue"
-msgstr ""
+msgstr "Turpināt"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "Atbloķēt tālruni ar:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
@@ -247,12 +247,12 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4 ciparu kods"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:332
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "Parole"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
@@ -260,19 +260,19 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4 ciparu kods..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "Parole..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "Mainīt kodu..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Mainīt paroli..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:30
 msgid "Location"
@@ -303,6 +303,8 @@ msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"Izmanto wi-fi (pašreiz izslēgts) un GPS, lai noteiktu aptuvenu atrašanās "
+"vietu. Izslēdzot atrašanās vietas noteikšanu, tiek taupīta baterija."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:76
 msgid ""

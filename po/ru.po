@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-09 14:06+0100\n"
-"PO-Revision-Date: 2014-01-23 14:03+0000\n"
-"Last-Translator: Oleg Baykov <krimdono@yandex.ru>\n"
+"PO-Revision-Date: 2014-01-26 15:27+0000\n"
+"Last-Translator: Zonov Roman <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-01-24 06:27+0000\n"
+"X-Launchpad-Export-Date: 2014-01-27 05:48+0000\n"
 "X-Generator: Launchpad (build 16914)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
@@ -457,7 +457,7 @@ msgstr "Засыпать в режиме ожидания"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "Блокировка при выключении экрана"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:31
@@ -467,7 +467,7 @@ msgstr "Язык и текст"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:67
 msgid "Display language…"
-msgstr ""
+msgstr "Выбранный язык..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:81
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:26
@@ -754,7 +754,7 @@ msgstr "Применить обновление не удалось:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:98
 msgid "Pause failed:"
-msgstr ""
+msgstr "Приостановить не удалось:"
 
 #. TRANSLATORS: %1 is the size of the update in GB
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:113
@@ -938,11 +938,11 @@ msgstr "Изображение"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:86
 msgid "Ubuntu Art"
-msgstr ""
+msgstr "Обои Ubuntu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:101
 msgid "Custom"
-msgstr ""
+msgstr "Свои"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1101,7 +1101,7 @@ msgstr "Передача данных:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:68
 msgid "Off"
-msgstr ""
+msgstr "Выкл."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:69
 msgid "2G only (saves battery)"
@@ -1294,7 +1294,7 @@ msgstr "Блокировка ориентации устройства"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:20
 msgid "rotation"
-msgstr ""
+msgstr "вращение"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:22
@@ -1334,7 +1334,7 @@ msgstr "специальные возможности"
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:40
 msgid "a11y"
-msgstr ""
+msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:46
@@ -1344,12 +1344,12 @@ msgstr "язык"
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:48
 msgid "lang"
-msgstr ""
+msgstr "язык"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:50
 msgid "i18n"
-msgstr ""
+msgstr "i18n"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: settings.js:56
@@ -1395,7 +1395,7 @@ msgstr "Пример"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:80
 msgid "example"
-msgstr ""
+msgstr "образец"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:82
@@ -1405,12 +1405,12 @@ msgstr "провeркa"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:84
 msgid "sample"
-msgstr ""
+msgstr "пример"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:88
 msgid "system"
-msgstr ""
+msgstr "система"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:90
@@ -1445,12 +1445,12 @@ msgstr "Режим полета"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110
 msgid "flight"
-msgstr ""
+msgstr "полёт"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:112
 msgid "plane"
-msgstr ""
+msgstr "самолёт"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:114
@@ -1480,12 +1480,12 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:132
 msgid "cellular"
-msgstr ""
+msgstr "сотовая"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:136
 msgid "mobile"
-msgstr ""
+msgstr "мобильный"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:138
