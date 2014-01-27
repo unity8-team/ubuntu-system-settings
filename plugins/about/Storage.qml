@@ -172,7 +172,6 @@ ItemPage {
             ListItem.ItemSelector {
                 id: valueSelect
                 objectName: "installedAppsItemSelector"
-                text: i18n.tr("Installed apps")
                 model: [i18n.tr("By name"), i18n.tr("By size")]
                 selectedIndex:
                     (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?
