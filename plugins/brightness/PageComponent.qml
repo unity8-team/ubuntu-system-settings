@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Brightness 1.0
 import GSettings 1.0
-import QMenuModel 0.1
 
 ItemPage {
     id: root
@@ -40,78 +40,11 @@ ItemPage {
         schema.id: "com.ubuntu.touch.system"
     }
 
-    QDBusActionGroup {
-        id: indicatorPower
-        busType: 1
-        busName: "com.canonical.indicator.power"
-        objectPath: "/com/canonical/indicator/power"
-
-        property variant brightness: action("brightness")
-    }
-
-
-    Component.onCompleted: indicatorPower.start()
-
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListItem.Standard {
-            text: i18n.tr("Display brightness")
-            showDivider: false
-        }
-
-        ListItem.Base {
-
-            Icon {
-                id: iconLeft
-                anchors.verticalCenter: parent.verticalCenter
-                height: sliderId.height - units.gu(1)
-                name: "torch-off"
-                width: height
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: sliderId.value = 0.0
-                }
-            }
-            Slider {
-                id: sliderId
-                function formatValue(v) {
-                    return "%1%".arg(v.toFixed(0))
-                }
-
-                anchors {
-                    left: iconLeft.right
-                    right: iconRight.left
-                    leftMargin: units.gu(1)
-                    rightMargin: units.gu(1)
-                    verticalCenter: parent.verticalCenter
-                }
-                height: parent.height - units.gu(2)
-                minimumValue: 0.0
-                maximumValue: 100.0
-                enabled: indicatorPower.brightness.state != null
-                value: enabled ? indicatorPower.brightness.state * 100 : 0.0
-                live: true
-
-                onValueChanged: indicatorPower.brightness.updateState(
-                                    value / 100.0)
-            }
-            Icon {
-                id: iconRight
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                height: sliderId.height - units.gu(1)
-                name: "torch-on"
-                width: height
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: sliderId.value = 100.0
-                }
-            }
-        }
+        BrightnessSlider {}
 
         Binding {
             target: autoAdjustCheck

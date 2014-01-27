@@ -27,7 +27,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
-import QMenuModel 0.1
 
 ItemPage {
     id: root
@@ -96,24 +95,12 @@ ItemPage {
         id: batteryBackend
     }
 
-    QDBusActionGroup {
-        id: indicatorPower
-        busType: 1
-        busName: "com.canonical.indicator.power"
-        objectPath: "/com/canonical/indicator/power"
-
-        property variant brightness: action("brightness")
-        property variant batteryLevel: action("battery-level")
-    }
-
-    Component.onCompleted: indicatorPower.start()
-
     Flickable {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        interactive: !sliderId.pressed
+        interactive: !brightness.pressed
 
         Column {
             anchors.left: parent.left
@@ -123,7 +110,8 @@ ItemPage {
                 id: chargingLevel
                 text: i18n.tr("Charge level")
                 value: {
-                    var chargeLevel = indicatorPower.batteryLevel.state
+                    var chargeLevel =
+                            brightness.level
 
                     if (chargeLevel === null)
                         return i18n.tr("N/A")
@@ -241,59 +229,8 @@ ItemPage {
                 text: i18n.tr("Ways to reduce battery use:")
             }
 
-            ListItem.Standard {
-                text: i18n.tr("Display brightness")
-                showDivider: false
-            }
-
-            ListItem.Base {
-                    Icon {
-                        id: iconLeft
-                        anchors.verticalCenter: parent.verticalCenter
-                        height: sliderId.height - units.gu(1)
-                        name: "torch-off"
-                        width: height
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: sliderId.value = 0.0
-                        }
-                    }
-                    Slider {
-                        id: sliderId
-                        function formatValue(v) {
-                            return "%1%".arg(v.toFixed(0))
-                        }
-
-                        anchors {
-                            left: iconLeft.right
-                            right: iconRight.left
-                            leftMargin: units.gu(1)
-                            rightMargin: units.gu(1)
-                            verticalCenter: parent.verticalCenter
-                        }
-                        height: parent.height - units.gu(2)
-                        minimumValue: 0.0
-                        maximumValue: 100.0
-                        enabled: indicatorPower.brightness.state != null
-                        value: enabled ? indicatorPower.brightness.state * 100 : 0.0
-                        live: true
-
-                        onValueChanged: indicatorPower.brightness.updateState(value / 100.0);
-                    }
-                    Icon {
-                        id: iconRight
-                        anchors.right: parent.right
-                        anchors.verticalCenter: parent.verticalCenter
-                        height: sliderId.height - units.gu(1)
-                        name: "torch-on"
-                        width: height
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: sliderId.value = 100.0
-                        }
-                    }
+            BrightnessSlider {
+                id: brightness
             }
 
             ListItem.SingleValue {
