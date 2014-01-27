@@ -33,6 +33,8 @@ ItemPage {
 
     title: i18n.tr("Updates")
 
+    property bool installAll: false
+
     DeviceInfo {
         id: deviceInfo
     }
@@ -130,6 +132,9 @@ ItemPage {
 
         onSystemUpdateFailed: {
             root.state = "SYSTEMUPDATEFAILED";
+            if (lastReason) {
+                notification.text = lastReason;
+            }
         }
 
         onUpdateProcessFailed: {
@@ -169,15 +174,14 @@ ItemPage {
 
         Label {
             text: i18n.tr("Checking for updates…")
-            fontSize: "large"
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideRight
             anchors {
                 left: activity.right
                 top: parent.top
                 right: checkForUpdatesArea.right
+                bottom: parent.bottom
                 leftMargin: units.gu(2)
-                topMargin: units.gu(1)
                 rightMargin: units.gu(2)
             }
         }
@@ -186,7 +190,10 @@ ItemPage {
     Button {
         id: installAllButton
         objectName: "installAllButton"
-        text: i18n.tr("Install %1 update", "Install %1 updates", updateManager.model.length).arg(updateManager.model.length)
+
+        property string primaryText: i18n.tr("Install %1 update", "Install %1 updates", updateManager.model.length).arg(updateManager.model.length)
+        property string secondaryText: i18n.tr("Pause All")
+        text: root.installAll ? secondaryText : primaryText
         anchors {
             left: parent.left
             right: parent.right
@@ -199,10 +206,14 @@ ItemPage {
 
         color: UbuntuColors.orange
         onClicked: {
+            root.installAll = !root.installAll;
             for (var i=0; i < updateList.count; i++) {
                 updateList.currentIndex = i;
                 var item = updateList.currentItem;
-                item.actionButton.clicked();
+                var modelItem = updateManager.model[i];
+                if (modelItem.updateState == !root.installAll) {
+                    item.actionButton.clicked();
+                }
             }
         }
     }
@@ -225,7 +236,7 @@ ItemPage {
             id: listItem
             icon: Qt.resolvedUrl(modelData.iconUrl)
             iconFrame: false
-            height: modelData.updateState ? units.gu(14) : units.gu(8)
+            height: modelData.selected ? units.gu(14) : units.gu(8)
 
             property alias actionButton: buttonAppUpdate
 
@@ -258,7 +269,8 @@ ItemPage {
                     anchors.rightMargin: units.gu(1)
                     height: labelTitle.height
 
-                    property string primaryText: modelData.systemUpdate ? i18n.tr("Download") : i18n.tr("Update")
+                    property string actionText: modelData.systemUpdate ? i18n.tr("Download") : i18n.tr("Update")
+                    property string primaryText: modelData.selected ? i18n.tr("Resume") : actionText
                     property string secondaryText: i18n.tr("Pause")
 
                     text: modelData.updateState ? secondaryText : primaryText
@@ -274,7 +286,6 @@ ItemPage {
                             updateManager.pauseDownload(modelData.packageName);
                         } else {
                             modelData.selected = true;
-                            buttonAppUpdate.primaryText = i18n.tr("Resume");
                             updateManager.startDownload(modelData.packageName);
                         }
                     }
@@ -299,7 +310,6 @@ ItemPage {
                     }
                     height: units.gu(3)
                     text: modelData.title
-                    color: modelData.updateState ? "gray" : "black"
                     font.bold: true
                     elide: Text.ElideRight
                 }

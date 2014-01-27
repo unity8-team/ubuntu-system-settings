@@ -42,7 +42,7 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_systemUpdate, SIGNAL(updateProcessFailed(const QString&)),
                   SIGNAL(updateProcessFailed(QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updateFailed(int, QString)),
-                  SIGNAL(systemUpdateFailed()));
+                  SIGNAL(systemUpdateFailed(int, QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updatePaused(int)),
                   SLOT(systemUpdatePaused(int)));
 }

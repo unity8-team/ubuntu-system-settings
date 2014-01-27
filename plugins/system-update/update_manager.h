@@ -48,7 +48,7 @@ Q_SIGNALS:
     void downloadModeChanged();
     void systemUpdateDownloaded();
     void updateProcessFailed(QString message);
-    void systemUpdateFailed();
+    void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
     
 public:
     explicit UpdateManager(QObject *parent = 0);
