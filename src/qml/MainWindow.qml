@@ -124,6 +124,7 @@ MainView {
                             width: parent.width - units.gu(4)
                             placeholderText: i18n.tr("Search")
                             objectName: "searchTextField"
+                            inputMethodHints: Qt.ImhNoPredictiveText
                             onDisplayTextChanged:
                                 pluginManager.filter = displayText
                         }
