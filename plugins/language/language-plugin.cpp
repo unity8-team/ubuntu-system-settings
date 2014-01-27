@@ -179,11 +179,11 @@ void
 LanguagePlugin::keyboardLayoutsModelChanged()
 {
     GVariantBuilder builder;
-    const gchar *current;
+    gchar *current;
     bool removed(true);
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
-    g_settings_get(m_maliitSettings, KEY_CURRENT_LAYOUT, "&s", &current);
+    g_settings_get(m_maliitSettings, KEY_CURRENT_LAYOUT, "s", &current);
 
     for (QList<int>::const_iterator
          i(m_keyboardLayoutsModel.subset().begin());
@@ -230,6 +230,7 @@ LanguagePlugin::keyboardLayoutsModelChanged()
         g_variant_iter_free(iter);
     }
 
+    g_free(current);
     g_settings_set_value(m_maliitSettings,
                          KEY_ENABLED_LAYOUTS, g_variant_builder_end(&builder));
 }
@@ -457,13 +458,13 @@ LanguagePlugin::updateEnabledLayouts()
 {
     GVariantBuilder builder;
     GVariantIter *iter;
-    const gchar *current;
+    gchar *current;
     const gchar *layout;
     QSet<QString> added;
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
     g_settings_get(m_maliitSettings, KEY_ENABLED_LAYOUTS, "as", &iter);
-    g_settings_get(m_maliitSettings, KEY_CURRENT_LAYOUT, "&s", &current);
+    g_settings_get(m_maliitSettings, KEY_CURRENT_LAYOUT, "s", &current);
 
     while (g_variant_iter_next(iter, "&s", &layout)) {
         if (!added.contains(layout)) {
@@ -477,6 +478,7 @@ LanguagePlugin::updateEnabledLayouts()
         added.insert(current);
     }
 
+    g_free(current);
     g_variant_iter_free(iter);
     g_settings_set_value(m_maliitSettings,
                          KEY_ENABLED_LAYOUTS, g_variant_builder_end(&builder));
