@@ -43,8 +43,8 @@ MainView {
             var pageComponent = plugin.pageComponent
             if (pageComponent) {
                 pageStack.push(pageComponent, opts)
-                return true
             }
+            return true
         } else {
             // Invalid plugin
             console.log("Plugin " + pluginName + " does not exist.")
