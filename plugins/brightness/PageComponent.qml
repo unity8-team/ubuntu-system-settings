@@ -49,13 +49,13 @@ ItemPage {
         Binding {
             target: autoAdjustCheck
             property: "checked"
-            value: adjust.enabled && gsettings.autoBrightness
+            value: adjust.visible && gsettings.autoBrightness
         }
 
         ListItem.Standard {
             id: adjust
             text: i18n.tr("Adjust automatically")
-            enabled: brightnessPanel.powerdRunning &&
+            visible: brightnessPanel.powerdRunning &&
                      brightnessPanel.autoBrightnessAvailable
             control: CheckBox {
                 id: autoAdjustCheck
@@ -67,6 +67,7 @@ ItemPage {
         ListItem.Caption {
             text: i18n.tr("Brightens and dims the display to suit the " +
                           "surroundings")
+            visible: adjust.visible
         }
     }
 }
