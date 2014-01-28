@@ -23,10 +23,10 @@
 #include "brightness.h"
 
 struct Params {
-        int min;
-        int max;
-        int def;
-        bool automatic;
+        int min; // Minimum brightness
+        int max; // Maximum brightness
+        int def; // Default brightness
+        bool automatic; // Whether "auto brightness" is supported
 };
 Q_DECLARE_METATYPE(Params)
 
