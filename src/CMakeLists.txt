@@ -22,6 +22,7 @@ set(QML_SOURCES
     qml/EntryComponent.qml
     qml/MainWindow.qml
     qml/UncategorizedItemsView.qml
+    qml/UpdatesNotification.qml
     SystemSettings/ItemPage.qml
 )
 
