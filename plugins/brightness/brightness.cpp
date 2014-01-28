@@ -20,6 +20,7 @@
 
 #include <QDBusArgument>
 #include <QDBusReply>
+#include <QDBusMetaType>
 #include "brightness.h"
 
 struct Params {
@@ -54,6 +55,7 @@ Brightness::Brightness(QObject *parent) :
                    "com.canonical.powerd",
                    m_systemBusConnection)
 {
+    qRegisterMetaType<Params>();
     m_powerdRunning = m_powerdIface.isValid();
 
     if (!m_powerdRunning)
