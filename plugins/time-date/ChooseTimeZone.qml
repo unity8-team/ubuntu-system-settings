@@ -68,6 +68,7 @@ ItemPage {
         onTextChanged: timeDatePanel.filter = text
         visible: setTimeZoneSelector.selectedIndex == 1 // Manually
         Component.onCompleted: forceActiveFocus()
+        inputMethodHints: Qt.ImhNoPredictiveText
         Connections {
             target: setTimeZoneSelector
             onSelectedIndexChanged: {
