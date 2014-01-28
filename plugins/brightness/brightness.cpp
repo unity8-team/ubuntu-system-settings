@@ -23,15 +23,17 @@
 #include <QDBusMetaType>
 #include "brightness.h"
 
-struct Params {
+// Returned data from getBrightnessParams
+struct BrightnessParams {
         int min; // Minimum brightness
         int max; // Maximum brightness
         int def; // Default brightness
         bool automatic; // Whether "auto brightness" is supported
 };
-Q_DECLARE_METATYPE(Params)
+Q_DECLARE_METATYPE(BrightnessParams)
 
-const QDBusArgument &operator<<(QDBusArgument &argument, const Params &params)
+const QDBusArgument &operator<<(QDBusArgument &argument,
+                                const BrightnessParams &params)
 {
     argument.beginStructure();
     argument << params.min << params.max << params.def << params.automatic;
@@ -39,7 +41,8 @@ const QDBusArgument &operator<<(QDBusArgument &argument, const Params &params)
     return argument;
 }
 
-const QDBusArgument &operator>>(const QDBusArgument &argument, Params &params)
+const QDBusArgument &operator>>(const QDBusArgument &argument,
+                                BrightnessParams &params)
 {
     argument.beginStructure();
     argument >> params.min >> params.max >> params.def >> params.automatic;
@@ -55,19 +58,20 @@ Brightness::Brightness(QObject *parent) :
                    "com.canonical.powerd",
                    m_systemBusConnection)
 {
-    qRegisterMetaType<Params>();
+    qRegisterMetaType<BrightnessParams>();
     m_powerdRunning = m_powerdIface.isValid();
 
     if (!m_powerdRunning)
         return;
 
-    QDBusReply<Params> reply(m_powerdIface.call("getBrightnessParams"));
+    QDBusReply<BrightnessParams> reply(
+                m_powerdIface.call("getBrightnessParams"));
 
     if (!reply.isValid())
         return;
 
     // (iiib) -> max, min, default, autobrightness
-    Params result(reply.value());
+    BrightnessParams result(reply.value());
     m_autoBrightnessAvailable = result.automatic;
 }
 
