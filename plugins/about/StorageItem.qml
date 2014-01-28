@@ -13,10 +13,10 @@ Item {
     Row {
         spacing: units.gu(1)
 
-        Rectangle {
-            width: units.gu(2)
+        UbuntuShape {
+            anchors.verticalCenter: parent.verticalCenter
+            width: units.gu(3)
             height: units.gu(2)
-            border.width: units.dp(1)
             color: colorName
         }
         Label { text: label }
