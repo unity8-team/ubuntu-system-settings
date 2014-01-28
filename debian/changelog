@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.1+14.04.20140128-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Alberto Mardegan ]
+  * MainView: return success if a plugin has been loaded The
+    loadPluginByName() function was not returning anything in the case
+    where a plugin could be loaded but didn't provide a page component
+    (like Online Accounts is doing). In this case probably JS returns
+    just false. Make sure that the function returns a value in all
+    cases: false if the plugin cannot be loaded, true if the plugin was
+    loaded successfully (even if it doesn't provide a page component).
+    (LP: #1273262)
+
+  [ Sebastien Bacher ]
+  * storage: use UbuntuShape rather than Rectangle, remove redundant
+    “Installed apps” label
+  * disable the osk predictive text, so results are shown while typing
+    (LP: #1272081)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 28 Jan 2014 13:22:49 +0000
+
 ubuntu-system-settings (0.1+14.04.20140127-0ubuntu1) trusty; urgency=low
 
   [ Sebastien Bacher ]
