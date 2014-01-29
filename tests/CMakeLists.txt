@@ -33,3 +33,5 @@ set_tests_properties(tst-plugins PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal
 
 qt5_use_modules(tst-arguments Core Test)
 add_test(tst-arguments tst-arguments)
+
+add_subdirectory(plugins)

@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-01-10 05:34+0000\n"
-"X-Generator: Launchpad (build 16884)\n"
+"X-Launchpad-Export-Date: 2014-01-29 06:06+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
@@ -42,8 +42,8 @@ msgid "Vibrate when ringing"
 msgstr "Värinä soidessa"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
-msgid "Vibrate in silent mode"
-msgstr "Värinä äänettömässä tilassa"
+msgid "Vibrate in Silent Mode"
+msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
 msgid "Other sounds:"
@@ -53,10 +53,6 @@ msgstr "Muut äänet:"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
 msgid "Message received"
 msgstr "Viesti vastaanotettu"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
-msgid "Keyboard sounds"
-msgstr "Näppäimistön äänet"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Lock sound"
@@ -494,6 +490,7 @@ msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "Shift-näppäin on käytössä automaattisesti jokaisen lauseen alussa."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:154
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
 msgid "Keyboard sound"
 msgstr "Näppäimistön ääni"
 
@@ -1180,8 +1177,8 @@ msgid "Used by Ubuntu"
 msgstr "Ubuntun käytössä"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
-msgid "Movies"
-msgstr "Elokuvat"
+msgid "Videos"
+msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
 msgid "Audio"
@@ -1275,8 +1272,8 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
-msgid "Orientation lock"
-msgstr "Kiertolukitus"
+msgid "Orientation Lock"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:20
@@ -1426,8 +1423,8 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:108
-msgid "Flight mode"
-msgstr "Lentotila"
+msgid "Flight Mode"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110

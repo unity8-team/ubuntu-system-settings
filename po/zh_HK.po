@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-01-10 05:35+0000\n"
-"X-Generator: Launchpad (build 16884)\n"
+"X-Launchpad-Export-Date: 2014-01-29 06:07+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
@@ -42,8 +42,8 @@ msgid "Vibrate when ringing"
 msgstr "鈴聲響時震動"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
-msgid "Vibrate in silent mode"
-msgstr "無聲模式時震動"
+msgid "Vibrate in Silent Mode"
+msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
 msgid "Other sounds:"
@@ -53,10 +53,6 @@ msgstr "其他聲音："
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
 msgid "Message received"
 msgstr "收到訊息"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
-msgid "Keyboard sounds"
-msgstr "鍵盤聲音"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Lock sound"
@@ -476,6 +472,7 @@ msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "在每句句子開頭打開 Shift 使首個字母大寫"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:154
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
 msgid "Keyboard sound"
 msgstr ""
 
@@ -1145,8 +1142,8 @@ msgid "Used by Ubuntu"
 msgstr "Ubuntu 所使用"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
-msgid "Movies"
-msgstr "電影"
+msgid "Videos"
+msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
 msgid "Audio"
@@ -1240,8 +1237,8 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
-msgid "Orientation lock"
-msgstr "鎖定方向"
+msgid "Orientation Lock"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:20
@@ -1391,8 +1388,8 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:108
-msgid "Flight mode"
-msgstr "飛航模式"
+msgid "Flight Mode"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110

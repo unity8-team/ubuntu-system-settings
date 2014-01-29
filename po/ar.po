@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-01-24 06:26+0000\n"
-"X-Generator: Launchpad (build 16914)\n"
+"X-Launchpad-Export-Date: 2014-01-29 06:06+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
@@ -43,8 +43,8 @@ msgid "Vibrate when ringing"
 msgstr "اهتزاز عند الرنين"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
-msgid "Vibrate in silent mode"
-msgstr "اهتزاز في الوضع الصامت"
+msgid "Vibrate in Silent Mode"
+msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
 msgid "Other sounds:"
@@ -54,10 +54,6 @@ msgstr "أصوات أخرى:"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
 msgid "Message received"
 msgstr "تم إستلام الرسالة"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
-msgid "Keyboard sounds"
-msgstr "أصوات لوحة المفاتيح"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Lock sound"
@@ -499,6 +495,7 @@ msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "شغّل مفتاح Shift لتكبير الأحرف الأولية من كل جملة."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:154
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
 msgid "Keyboard sound"
 msgstr "صوت لوحة المفاتيح"
 
@@ -1211,8 +1208,8 @@ msgid "Used by Ubuntu"
 msgstr "مستخدمة من قبل أبونتو"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
-msgid "Movies"
-msgstr "أفلام"
+msgid "Videos"
+msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
 msgid "Audio"
@@ -1306,8 +1303,8 @@ msgstr "المنطقة الزمنية"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
-msgid "Orientation lock"
-msgstr "قفل تدوير الشاشة"
+msgid "Orientation Lock"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:20
@@ -1457,8 +1454,8 @@ msgstr "إعادة التعيين"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:108
-msgid "Flight mode"
-msgstr "نمط الطائرة"
+msgid "Flight Mode"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110
