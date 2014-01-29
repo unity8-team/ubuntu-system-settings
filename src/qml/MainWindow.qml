@@ -145,6 +145,7 @@ MainView {
 
                     UpdatesNotification {
                         id: updatesNotification
+                        objectName: "updatesNotification"
 
                         onClicked: pageStack.push(pluginManager.getByName("system-update").pageComponent);
                     }
