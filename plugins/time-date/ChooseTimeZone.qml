@@ -65,6 +65,7 @@ ItemPage {
             margins: units.gu(2)
         }
         id: filterCities
+        objectName: "selectTimeZoneField"
         onTextChanged: timeDatePanel.filter = text
         visible: setTimeZoneSelector.selectedIndex == 1 // Manually
         Component.onCompleted: forceActiveFocus()
