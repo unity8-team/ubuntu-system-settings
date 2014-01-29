@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-01-18 07:08+0000\n"
-"X-Generator: Launchpad (build 16901)\n"
+"X-Launchpad-Export-Date: 2014-01-29 06:06+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
@@ -42,8 +42,8 @@ msgid "Vibrate when ringing"
 msgstr "Gegar bila mendering"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
-msgid "Vibrate in silent mode"
-msgstr "Gegar dalam mod senyap"
+msgid "Vibrate in Silent Mode"
+msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
 msgid "Other sounds:"
@@ -53,10 +53,6 @@ msgstr "Lain-lain bunyi:"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
 msgid "Message received"
 msgstr "Mesej Diterima"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
-msgid "Keyboard sounds"
-msgstr "Bunyi papan kekunci"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Lock sound"
@@ -493,6 +489,7 @@ msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "Hidupkan Shift untuk besarkan huruf pertama bagi setiap ayat."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:154
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
 msgid "Keyboard sound"
 msgstr "Bunyi papan kekunci"
 
@@ -1181,8 +1178,8 @@ msgid "Used by Ubuntu"
 msgstr "Digunakan oleh Ubuntu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
-msgid "Movies"
-msgstr "Cereka"
+msgid "Videos"
+msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
 msgid "Audio"
@@ -1276,8 +1273,8 @@ msgstr "zon waktu"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
-msgid "Orientation lock"
-msgstr "Orientasi kunci"
+msgid "Orientation Lock"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:20
@@ -1427,8 +1424,8 @@ msgstr "tetap semula"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:108
-msgid "Flight mode"
-msgstr "Mod Penerbangan"
+msgid "Flight Mode"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110
