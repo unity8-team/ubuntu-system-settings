@@ -27,6 +27,7 @@ MainView {
     width: units.gu(50)
     height: units.gu(90)
     applicationName: "SystemSettings"
+    objectName: "mainView"
     automaticOrientation: true
 
     function loadPluginByName(pluginName, pluginOptions) {
@@ -42,8 +43,8 @@ MainView {
             var pageComponent = plugin.pageComponent
             if (pageComponent) {
                 pageStack.push(pageComponent, opts)
-                return true
             }
+            return true
         } else {
             // Invalid plugin
             console.log("Plugin " + pluginName + " does not exist.")
@@ -123,6 +124,7 @@ MainView {
                             width: parent.width - units.gu(4)
                             placeholderText: i18n.tr("Search")
                             objectName: "searchTextField"
+                            inputMethodHints: Qt.ImhNoPredictiveText
                             onDisplayTextChanged:
                                 pluginManager.filter = displayText
                         }

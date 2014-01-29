@@ -86,7 +86,7 @@ ItemPage {
         UbuntuColors.lightAubergine]
     property variant spaceLabels: [
         i18n.tr("Used by Ubuntu"),
-        i18n.tr("Movies"),
+        i18n.tr("Videos"),
         i18n.tr("Audio"),
         i18n.tr("Pictures"),
         i18n.tr("Other files"),
@@ -172,7 +172,6 @@ ItemPage {
             ListItem.ItemSelector {
                 id: valueSelect
                 objectName: "installedAppsItemSelector"
-                text: i18n.tr("Installed apps")
                 model: [i18n.tr("By name"), i18n.tr("By size")]
                 selectedIndex:
                     (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?

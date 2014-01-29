@@ -21,6 +21,8 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
+#include "accountsservice.h"
+
 #include <QDBusInterface>
 #include <QObject>
 #include <QProcess>
@@ -60,14 +62,12 @@ Q_SIGNALS:
     void ubuntuArtChanged();
 
 private:
+    AccountsService m_accountsService;
     QStringList m_ubuntuArt;
     QStringList m_customBackgrounds;
     void updateCustomBackgrounds();
     void updateUbuntuArt();
     QString m_backgroundFile;
-    QDBusConnection m_systemBusConnection;
-    QString m_objectPath;
-    QDBusInterface m_accountsserviceIface;
     QString getBackgroundFile();
 };
 
