@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.1+14.04.20140129-0ubuntu1) trusty; urgency=low
+
+  [ Diego Sarmentero ]
+  * Adding the New UI for system updates. .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 29 Jan 2014 14:41:24 +0000
+
 ubuntu-system-settings (0.1+14.04.20140128-0ubuntu1) trusty; urgency=low
 
   [ CI bot ]
