@@ -19,7 +19,7 @@
  */
 
 #include "keyboard-layout.h"
-#include <QtXmlPatterns>
+#include <unicode/locid.h>
 
 KeyboardLayout::KeyboardLayout(const QString &name,
                                const QString &language,
@@ -37,28 +37,17 @@ KeyboardLayout::KeyboardLayout(const QString &name,
 KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,
                                QObject         *parent) :
     QObject(parent),
-    m_name(fileInfo.completeBaseName())
+    m_name(fileInfo.fileName())
 {
-    QVariant path(fileInfo.canonicalFilePath());
+    icu::Locale locale(qPrintable(m_name));
+    icu::UnicodeString unicodeString;
+    std::string string;
 
-    QXmlQuery languageQuery;
-    languageQuery.bindVariable("path", path);
-    languageQuery.setQuery("xs:string(doc($path)/keyboard/@language)");
+    locale.getDisplayName(locale, unicodeString);
+    unicodeString.toTitle(NULL, locale).toUTF8String(string);
 
-    QStringList languageResults;
-
-    if (languageQuery.evaluateTo(&languageResults) && !languageResults.isEmpty())
-        m_language = languageResults.first();
-
-    QXmlQuery titleQuery;
-    titleQuery.bindVariable("path", path);
-    titleQuery.setQuery("xs:string(doc($path)/keyboard/@title)");
-
-    QStringList titleResults;
-
-    if (titleQuery.evaluateTo(&titleResults) && !titleResults.isEmpty())
-        m_displayName = titleResults.first();
-
+    m_language = locale.getLanguage();
+    m_displayName = string.c_str();
     m_shortName = m_language.left(2);
     m_shortName[0] = m_shortName[0].toUpper();
 }

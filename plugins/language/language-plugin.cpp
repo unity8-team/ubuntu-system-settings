@@ -27,13 +27,15 @@
 #define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
 
 #define KEY_ENABLED_LAYOUTS     "enabled-languages"
+#define KEY_CURRENT_LAYOUT      "active-language"
+#define KEY_SPELL_CHECKING      "spell-checking"
 #define KEY_AUTO_CAPITALIZATION "auto-capitalization"
 #define KEY_AUTO_COMPLETION     "auto-completion"
 #define KEY_PREDICTIVE_TEXT     "predictive-text"
 #define KEY_KEY_PRESS_FEEDBACK  "key-press-feedback"
 
 #define LANGUAGE2LOCALE "/usr/share/language-tools/language2locale"
-#define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/languages"
+#define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/lib"
 
 static const char * const LOCALE_BLACKLIST[] = {
     "C",
@@ -111,6 +113,7 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
 
     updateLanguageNamesAndCodes();
     updateCurrentLanguage();
+    updateEnabledLayouts();
     updateKeyboardLayouts();
     updateKeyboardLayoutsModel();
     updateSpellCheckingModel();
@@ -176,33 +179,60 @@ void
 LanguagePlugin::keyboardLayoutsModelChanged()
 {
     GVariantBuilder builder;
-    GVariant *currentLayouts;
+    gchar *current;
+    bool removed(true);
 
     g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
+    g_settings_get(m_maliitSettings, KEY_CURRENT_LAYOUT, "s", &current);
 
     for (QList<int>::const_iterator
          i(m_keyboardLayoutsModel.subset().begin());
-         i != m_keyboardLayoutsModel.subset().end(); ++i)
+         i != m_keyboardLayoutsModel.subset().end(); ++i) {
         g_variant_builder_add(&builder, "s",
                               qPrintable(m_keyboardLayouts[*i]->name()));
 
-    currentLayouts = g_variant_ref_sink(g_variant_builder_end(&builder));
-    g_settings_set_value(m_maliitSettings, KEY_ENABLED_LAYOUTS, currentLayouts);
-    g_variant_unref(currentLayouts);
-}
+        if (m_keyboardLayouts[*i]->name() == current)
+            removed = false;
+    }
 
-bool
-LanguagePlugin::spellChecking() const
-{
-    // TODO: get spell checking setting
-    return true;
-}
+    if (removed && !m_keyboardLayoutsModel.subset().isEmpty()) {
+        GVariantIter *iter;
+        const gchar *layout;
+        bool found(false);
 
-void
-LanguagePlugin::setSpellChecking(bool value)
-{
-    // TODO: set spell checking setting
-    Q_UNUSED(value);
+        g_settings_get(m_maliitSettings, KEY_ENABLED_LAYOUTS, "as", &iter);
+
+        for (int i(0); g_variant_iter_next(iter, "&s", &layout); i++) {
+            found = g_strcmp0(layout, current) == 0;
+
+            if (found) {
+                if (i >= m_keyboardLayoutsModel.subset().size())
+                    i = m_keyboardLayoutsModel.subset().size() - 1;
+
+                int index(m_keyboardLayoutsModel.subset()[i]);
+                const QString &name(m_keyboardLayouts[index]->name());
+
+                g_settings_set_string(m_maliitSettings,
+                                      KEY_CURRENT_LAYOUT, qPrintable(name));
+
+                break;
+            }
+        }
+
+        if (!found) {
+            int index(m_keyboardLayoutsModel.subset().front());
+            const QString &name(m_keyboardLayouts[index]->name());
+
+            g_settings_set_string(m_maliitSettings,
+                                  KEY_CURRENT_LAYOUT, qPrintable(name));
+        }
+
+        g_variant_iter_free(iter);
+    }
+
+    g_free(current);
+    g_settings_set_value(m_maliitSettings,
+                         KEY_ENABLED_LAYOUTS, g_variant_builder_end(&builder));
 }
 
 SubsetModel *
@@ -215,6 +245,22 @@ void
 LanguagePlugin::spellCheckingModelChanged()
 {
     // TODO: update spell checking model
+}
+
+bool
+LanguagePlugin::spellChecking() const
+{
+    return g_settings_get_boolean(m_maliitSettings, KEY_SPELL_CHECKING);
+}
+
+void
+LanguagePlugin::setSpellChecking(bool value)
+{
+    if (value != spellChecking()) {
+        g_settings_set_boolean(m_maliitSettings,
+                               KEY_SPELL_CHECKING, value);
+        Q_EMIT spellCheckingChanged();
+    }
 }
 
 bool
@@ -378,6 +424,17 @@ LanguagePlugin::updateCurrentLanguage()
             QString language(formatsLocale.left(formatsLocale.indexOf('.')));
             act_user_set_language(m_user, qPrintable(language));
             act_user_set_formats_locale(m_user, qPrintable(formatsLocale));
+
+            icu::Locale locale(qPrintable(formatsLocale));
+            const char *code(locale.getLanguage());
+            QFileInfo fileInfo(QDir(LAYOUTS_DIR), code);
+
+            if (fileInfo.exists() && fileInfo.isDir()) {
+                g_settings_set_string(m_maliitSettings,
+                                      KEY_CURRENT_LAYOUT, code);
+
+                updateEnabledLayouts();
+            }
         } else {
             QString formatsLocale(act_user_get_formats_locale(m_user));
             m_currentLanguage = indexForLocale(formatsLocale);
@@ -397,13 +454,43 @@ LanguagePlugin::updateCurrentLanguage()
 }
 
 void
+LanguagePlugin::updateEnabledLayouts()
+{
+    GVariantBuilder builder;
+    GVariantIter *iter;
+    gchar *current;
+    const gchar *layout;
+    QSet<QString> added;
+
+    g_variant_builder_init(&builder, G_VARIANT_TYPE("as"));
+    g_settings_get(m_maliitSettings, KEY_ENABLED_LAYOUTS, "as", &iter);
+    g_settings_get(m_maliitSettings, KEY_CURRENT_LAYOUT, "s", &current);
+
+    while (g_variant_iter_next(iter, "&s", &layout)) {
+        if (!added.contains(layout)) {
+            g_variant_builder_add(&builder, "s", layout);
+            added.insert(layout);
+        }
+    }
+
+    if (!added.contains(current)) {
+        g_variant_builder_add(&builder, "s", current);
+        added.insert(current);
+    }
+
+    g_free(current);
+    g_variant_iter_free(iter);
+    g_settings_set_value(m_maliitSettings,
+                         KEY_ENABLED_LAYOUTS, g_variant_builder_end(&builder));
+}
+
+void
 LanguagePlugin::updateKeyboardLayouts()
 {
     m_keyboardLayouts.clear();
 
     QDir layoutsDir(LAYOUTS_DIR);
-    layoutsDir.setFilter(QDir::Files);
-    layoutsDir.setNameFilters(QStringList("*.xml"));
+    layoutsDir.setFilter(QDir::Dirs);
     layoutsDir.setSorting(QDir::Name);
 
     QFileInfoList fileInfoList(layoutsDir.entryInfoList());
@@ -555,14 +642,14 @@ void
 LanguagePlugin::enabledLayoutsChanged()
 {
     GVariantIter *iter;
-    const gchar *language;
+    const gchar *layout;
     QList<int> subset;
 
     g_settings_get(m_maliitSettings, KEY_ENABLED_LAYOUTS, "as", &iter);
 
-    while (g_variant_iter_next(iter, "&s", &language)) {
+    while (g_variant_iter_next(iter, "&s", &layout)) {
         for (int i(0); i < m_keyboardLayouts.length(); i++) {
-            if (m_keyboardLayouts[i]->name() == language) {
+            if (m_keyboardLayouts[i]->name() == layout) {
                 subset += i;
                 break;
             }

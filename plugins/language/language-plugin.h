@@ -59,14 +59,14 @@ public:
                READ keyboardLayoutsModel
                CONSTANT)
 
+    Q_PROPERTY(SubsetModel *spellCheckingModel
+               READ spellCheckingModel
+               CONSTANT)
+
     Q_PROPERTY(bool spellChecking
                READ spellChecking
                WRITE setSpellChecking
                NOTIFY spellCheckingChanged)
-
-    Q_PROPERTY(SubsetModel *spellCheckingModel
-               READ spellCheckingModel
-               CONSTANT)
 
     Q_PROPERTY(bool autoCapitalization
                READ autoCapitalization
@@ -102,12 +102,12 @@ public:
     SubsetModel *keyboardLayoutsModel();
     Q_SLOT void keyboardLayoutsModelChanged();
 
+    SubsetModel *spellCheckingModel();
+    Q_SLOT void spellCheckingModelChanged();
+
     bool spellChecking() const;
     void setSpellChecking(bool value);
     Q_SIGNAL void spellCheckingChanged() const;
-
-    SubsetModel *spellCheckingModel();
-    Q_SLOT void spellCheckingModelChanged();
 
     bool autoCapitalization() const;
     void setAutoCapitalization(bool value);
@@ -129,6 +129,7 @@ private:
 
     void updateLanguageNamesAndCodes();
     void updateCurrentLanguage();
+    void updateEnabledLayouts();
     void updateKeyboardLayouts();
     void updateKeyboardLayoutsModel();
     void updateSpellCheckingModel();
