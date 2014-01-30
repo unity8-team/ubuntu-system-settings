@@ -81,6 +81,7 @@ ItemPage {
 
     ListView {
         id: locationsListView
+        objectName: "locationsListView"
         clip: true
         anchors {
             top: filterCities.bottom
@@ -109,6 +110,7 @@ ItemPage {
     }
 
     Label {
+        objectName: "nothingLabel"
         anchors.centerIn: parent
         visible: setTimeZoneSelector.selectedIndex ==1 &&
                  locationsListView.count == 0
