@@ -106,8 +106,11 @@ void TimeDate::slotChanged(QString interface,
     Q_UNUSED (changed_properties);
 
     if (invalidated_properties.contains("Timezone")) {
-        m_currentTimeZone = getTimeZone();
-        Q_EMIT timeZoneChanged();
+        QString tz(getTimeZone());
+        if (tz != m_currentTimeZone) {
+            m_currentTimeZone = tz;
+            Q_EMIT timeZoneChanged();
+        }
     }
 
     if (invalidated_properties.contains("NTP")) {
