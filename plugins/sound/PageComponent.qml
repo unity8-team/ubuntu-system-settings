@@ -81,12 +81,12 @@ ItemPage {
                 control: CheckBox {
                     checked: false
                 }
-                text: i18n.tr("Vibrate in silent mode")
+                text: i18n.tr("Vibrate in Silent Mode")
                 visible: showAllUI
             }
 
             ListItem.Standard {
-                text: i18n.tr("Other sounds:")
+                text: i18n.tr("Messages:")
             }
 
             ListItem.SingleValue {
@@ -106,12 +106,33 @@ ItemPage {
                 control: CheckBox {
                     checked: false
                 }
-                text: i18n.tr("Keyboard sounds")
+                text: i18n.tr("Vibrate with message sound")
                 visible: showAllUI
             }
 
             ListItem.Standard {
                 control: CheckBox {
+                    checked: false
+                }
+                text: i18n.tr("Vibrate in Silent Mode")
+                visible: showAllUI
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Other sounds:")
+                visible: showAllUI
+            }
+
+            ListItem.Standard {
+                control: Switch {
+                    checked: false
+                }
+                text: i18n.tr("Keyboard sound")
+                visible: showAllUI
+            }
+
+            ListItem.Standard {
+                control: Switch {
                     checked: false
                 }
                 text: i18n.tr("Lock sound")
