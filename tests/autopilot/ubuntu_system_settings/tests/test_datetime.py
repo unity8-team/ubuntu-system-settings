@@ -47,7 +47,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def click_tz_search_field(self):
         self.scroll_to_and_click(self.tz_page)
         text_field = self.main_view.select_single(objectName='selectTimeZoneField')
-        self.scroll_to_and_click(text_field)
+        self.pointer.move_to_object(text_field)
 
     def test_time_date_page(self):
         """ Checks whether Time & Date page is available """
