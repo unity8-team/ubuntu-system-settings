@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.1+14.04.20140130-0ubuntu1) trusty; urgency=low
+
+  [ William Hua ]
+  * [language] Use active-language and spell-checking settings. (LP:
+    #1254098)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 30 Jan 2014 11:32:56 +0000
+
 ubuntu-system-settings (0.1+14.04.20140129-0ubuntu1) trusty; urgency=low
 
   [ Diego Sarmentero ]
