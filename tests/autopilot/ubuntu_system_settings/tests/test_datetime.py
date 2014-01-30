@@ -12,7 +12,6 @@ from time import sleep
 
 from autopilot.platform import model
 from autopilot.matchers import Eventually
-from testtools import skip
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
@@ -76,19 +75,17 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         labelVisible = self.main_view.select_single(objectName='nothingLabel').visible
         self.assertThat(labelVisible, Equals(True))
 
-    @skip("Needs https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/1 in dbusmock first")
     def test_manual_tz_selection(self):
         """ Check that manually selecting a timezone sets it properly """
         self.click_tz_search_field()
         self.keyboard.type('London, United Kingdom')
         listview = self.main_view.select_single(objectName='locationsListView')
         london = listview.select_many(toolkit_emulators.Standard)[0]
-        self.scroll_to_and_click(london)
+        self.pointer.click_object(london)
         header = self.main_view.select_single(objectName='MainView_Header')
         self.assertThat(header.title, Eventually(Equals(_('Time & Date'))))
         self.assertThat(self.tz_page.text, Equals('Europe/London'))
 
-    @skip("Needs https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/1 in dbusmock first")
     def test_same_tz_selection(self):
         """ Check that manually setting a timezone then setting the same one doesn't
             take you back to the index """
@@ -98,7 +95,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         self.keyboard.type('Preston, United Kingdom')
         listview = self.main_view.select_single(objectName='locationsListView')
         preston = listview.select_many(toolkit_emulators.Standard)[0]
-        self.scroll_to_and_click(preston)
+        self.pointer.click_object(preston)
         # The timer is 1 second, wait and see that we haven't moved pages
         sleep(2)
         header = self.main_view.select_single(objectName='MainView_Header')
