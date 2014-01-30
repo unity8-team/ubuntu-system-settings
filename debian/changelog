@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.1+14.04.20140130.1-0ubuntu1) trusty; urgency=low
+
+  [ Iain Lane ]
+  * Stop installing the AccountsService schema as it's moving to
+    accountsservice-ubuntu-touch-schemas
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 30 Jan 2014 16:46:26 +0000
+
 ubuntu-system-settings (0.1+14.04.20140130-0ubuntu1) trusty; urgency=low
 
   [ William Hua ]
