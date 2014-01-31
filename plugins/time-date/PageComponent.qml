@@ -27,6 +27,7 @@ import Ubuntu.SystemSettings.TimeDate 1.0
 
 ItemPage {
     title: i18n.tr("Time & Date")
+    objectName: "timeDatePage"
 
     function getUTCOffset() {
         // We get the difference in minutes between UTC and our TZ (UTC - TZ)
@@ -52,6 +53,7 @@ ItemPage {
         ListItem.Standard { text: i18n.tr ("Time zone:") }
 
         ListItem.SingleValue {
+            objectName: "timeZone"
             id: timeZone
             //e.g. America/New_York -> America/New York
             text: timeDatePanel.timeZone.replace("_", " ")
@@ -62,6 +64,7 @@ ItemPage {
 
         ListItem.ItemSelector {
             id: setTimeAutomatically
+            objectName: "timeItemSelector"
             text: i18n.tr ("Set the time and date:")
             model: [ i18n.tr("Automatically") , i18n.tr("Manually")]
             expanded: true
@@ -93,6 +96,7 @@ ItemPage {
 
         ListItem.Standard {
             id: currentTime
+            objectName: "currentTime"
             progression: setTimeAutomatically.selectedIndex === 1 // Manually
             enabled: progression
             onClicked: {
