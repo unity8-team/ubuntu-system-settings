@@ -22,7 +22,6 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
-import Ubuntu.SystemSettings.Update 1.0
 
 MainView {
     id: main
@@ -99,19 +98,6 @@ MainView {
         id: pluginManager
     }
 
-    UpdateManager {
-        id: updateManager
-        objectName: "updateManager"
-
-        Component.onCompleted: {
-            updateManager.checkUpdates();
-        }
-
-        onUpdateAvailableFound: {
-            updatesNotification.updatesAvailable = updateManager.model.length;
-        }
-    }
-
     PageStack {
         id: pageStack
 
@@ -141,13 +127,6 @@ MainView {
                             onDisplayTextChanged:
                                 pluginManager.filter = displayText
                         }
-                    }
-
-                    UpdatesNotification {
-                        id: updatesNotification
-                        objectName: "updatesNotification"
-
-                        onClicked: pageStack.push(pluginManager.getByName("system-update").pageComponent);
                     }
 
                     UncategorizedItemsView {

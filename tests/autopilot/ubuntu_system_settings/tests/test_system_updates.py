@@ -38,12 +38,12 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
     def test_no_updates_in_main(self):
         """Check that the upadtes notification is not shown in main."""
         updatesNotification = self.main_view.select_single(
-            objectName='updatesNotification')
+            objectName='entryComponent-updates')
         self.assertThat(updatesNotification.visible, NotEquals(True))
 
     def test_updates_in_main(self):
         """Check that the upadtes notification is shown in main."""
         updatesNotification = self.main_view.select_single(
-            objectName='updatesNotification')
+            objectName='entryComponent-updates')
         updatesNotification.updatesAvailable = 1
         self.assertThat(updatesNotification.visible, NotEquals(False))

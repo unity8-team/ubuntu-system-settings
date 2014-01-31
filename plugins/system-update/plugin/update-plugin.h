@@ -18,30 +18,23 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+#ifndef SYSTEM_SETTINGS_UPDATE_PLUGIN_H
+#define SYSTEM_SETTINGS_UPDATE_PLUGIN_H
 
-ListItem.Standard {
-    id: root
-    text: i18n.tr("Updates Available")
-    icon: Qt.resolvedUrl("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png")
-    iconFrame: false
-    progression: true
-    visible: root.updatesAvailable == 0 ? false : true
+#include <QObject>
+#include <SystemSettings/PluginInterface>
 
-    property int updatesAvailable: 0
+class CheckUpdatesPlugin: public QObject, public SystemSettings::PluginInterface
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface")
+    Q_INTERFACES(SystemSettings::PluginInterface)
 
-    Label {
-        id: labelCount
-        objectName: "labelCount"
-        text: root.updatesAvailable
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            right: parent.right
-            rightMargin: units.gu(4)
-        }
-        verticalAlignment: Text.AlignVCenter
-    }
-}
+public:
+    CheckUpdatesPlugin();
+
+    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
+                                         QObject *parent = 0);
+};
+
+#endif // SYSTEM_SETTINGS_UPDATE_PLUGIN_H

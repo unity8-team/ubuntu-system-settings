@@ -14,3 +14,18 @@ install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/system-update)
 
 install(FILES system-update.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES images/settings-system-update.svg images/distributor-logo.png DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
+
+
+set(QML_SOURCES_NOTIFICATION EntryComponent.qml)
+
+# We need a dummy target so the QML files show up in Qt Creator
+# If this plugin gets some C++ sources, remove this.
+add_custom_target(update-notification
+COMMAND echo This is just a dummy.
+SOURCES ${QML_SOURCES_NOTIFICATION})
+
+
+install(FILES update-notification.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
+install(FILES ${QML_SOURCES_NOTIFICATION} DESTINATION ${PLUGIN_QML_DIR}/update-notification)
+
+add_subdirectory(plugin)
