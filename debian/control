@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: dbus-test-runner,
                debhelper (>= 9),
-               python (>= 2.7),
+               python:any (>= 2.7),
                python-setuptools,
                gdb:any,
                libaccountsservice-dev,
