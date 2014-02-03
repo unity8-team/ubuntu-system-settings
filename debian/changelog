@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.1+14.04.20140203-0ubuntu1) trusty; urgency=low
+
+  [ Dimitri John Ledkov ]
+  * Fix cross-compilation
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 03 Feb 2014 11:43:23 +0000
+
 ubuntu-system-settings (0.1+14.04.20140131-0ubuntu1) trusty; urgency=low
 
   [ Sebastien Bacher ]
