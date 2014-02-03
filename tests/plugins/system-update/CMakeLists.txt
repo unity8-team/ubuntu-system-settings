@@ -2,8 +2,6 @@ set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ../../../plugins/system-update)
 add_definitions(-DTESTS)
 
-find_package (PkgConfig REQUIRED)
-
 add_executable(tst-update-manager
     tst_updatemanager.cpp
     ../../../plugins/system-update/update.cpp
