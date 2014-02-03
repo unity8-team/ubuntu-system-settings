@@ -1,3 +1,80 @@
+ubuntu-system-settings (0.1+14.04.20140131-0ubuntu1) trusty; urgency=low
+
+  [ Sebastien Bacher ]
+  * Update the translations template
+
+  [ Iain Lane ]
+  * Add some initial tests for the datetime panel
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 31 Jan 2014 13:09:05 +0000
+
+ubuntu-system-settings (0.1+14.04.20140130.1-0ubuntu1) trusty; urgency=low
+
+  [ Iain Lane ]
+  * Stop installing the AccountsService schema as it's moving to
+    accountsservice-ubuntu-touch-schemas
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 30 Jan 2014 16:46:26 +0000
+
+ubuntu-system-settings (0.1+14.04.20140130-0ubuntu1) trusty; urgency=low
+
+  [ William Hua ]
+  * [language] Use active-language and spell-checking settings. (LP:
+    #1254098)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 30 Jan 2014 11:32:56 +0000
+
+ubuntu-system-settings (0.1+14.04.20140129-0ubuntu1) trusty; urgency=low
+
+  [ Diego Sarmentero ]
+  * Adding the New UI for system updates. .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 29 Jan 2014 14:41:24 +0000
+
+ubuntu-system-settings (0.1+14.04.20140128-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Alberto Mardegan ]
+  * MainView: return success if a plugin has been loaded The
+    loadPluginByName() function was not returning anything in the case
+    where a plugin could be loaded but didn't provide a page component
+    (like Online Accounts is doing). In this case probably JS returns
+    just false. Make sure that the function returns a value in all
+    cases: false if the plugin cannot be loaded, true if the plugin was
+    loaded successfully (even if it doesn't provide a page component).
+    (LP: #1273262)
+
+  [ Sebastien Bacher ]
+  * storage: use UbuntuShape rather than Rectangle, remove redundant
+    “Installed apps” label
+  * disable the osk predictive text, so results are shown while typing
+    (LP: #1272081)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 28 Jan 2014 13:22:49 +0000
+
+ubuntu-system-settings (0.1+14.04.20140127-0ubuntu1) trusty; urgency=low
+
+  [ Sebastien Bacher ]
+  * Small strings tweaks: Update Flight Mode and Orientation Lock
+    casing, they are proper nouns. storage: rename "Movies" to "Videos".
+    update the translations template (LP: #1247576)
+  * None
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 27 Jan 2014 16:18:10 +0000
+
+ubuntu-system-settings (0.1+14.04.20140124-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Iain Lane ]
+  * Various fixes to the autopilot tests so that they all pass on both
+    desktop and device (at least in the 'C' locale).
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 24 Jan 2014 09:08:01 +0000
+
 ubuntu-system-settings (0.1+14.04.20140122.1-0ubuntu1) trusty; urgency=low
 
   [ Ted Gould ]

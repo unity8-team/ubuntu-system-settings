@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2014 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -25,7 +25,7 @@ import Ubuntu.SystemSettings.Update 1.0
 
 ItemPage {
     id: root
-    property UbuntuUpdatePanel updateBackend
+    property UpdateManager updateManager
     title: i18n.tr("Auto download")
 
     ListItem.ItemSelector {
@@ -34,10 +34,9 @@ ItemPage {
         text: i18n.tr ("Download future updates automatically:")
         model: downloadSelector
         delegate: selectorDelegate
-        selectedIndex: updateBackend.downloadMode
-        onSelectedIndexChanged: updateBackend.downloadMode = selectedIndex
-        /* Not sure why it's needed but nothing is selected without that */
-        Component.onCompleted: selectedIndex = updateBackend.downloadMode
+        selectedIndex: updateManager.downloadMode
+        onSelectedIndexChanged: updateManager.downloadMode = selectedIndex
+        Component.onCompleted: selectedIndex = updateManager.downloadMode
     }
     Component {
         id: selectorDelegate
