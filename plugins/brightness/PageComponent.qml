@@ -65,8 +65,8 @@ ItemPage {
             showDivider: false
         }
         ListItem.Caption {
-            text: i18n.tr("Brightens and dims the display to suit the " +
-                          "surroundings")
+            text: i18n.tr(
+                    "Brightens and dims the display to suit the surroundings")
             visible: adjust.visible
         }
     }
