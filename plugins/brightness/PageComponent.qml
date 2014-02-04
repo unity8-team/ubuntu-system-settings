@@ -35,11 +35,6 @@ ItemPage {
         id: brightnessPanel
     }
 
-    GSettings {
-        id: gsettings
-        schema.id: "com.ubuntu.touch.system"
-    }
-
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -69,5 +64,10 @@ ItemPage {
                     "Brightens and dims the display to suit the surroundings")
             visible: adjust.visible
         }
+    }
+
+    GSettings {
+        id: gsettings
+        schema.id: "com.ubuntu.touch.system"
     }
 }
