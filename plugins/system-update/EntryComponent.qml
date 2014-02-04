@@ -23,43 +23,29 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Update 1.0
 
-ListItem.Standard {
+ListItem.SingleValue {
     id: root
     text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
-    iconSource: model.icon
+    icon: Qt.resolvedUrl(model.icon)
     iconFrame: false
     progression: true
 
+    value: root.updatesAvailable > 0 ? root.updatesAvailable : ""
+
     property int updatesAvailable: 0
 
-    Label {
-        id: labelCount
-        objectName: "labelCount"
-        text: root.updatesAvailable
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            right: parent.right
-            rightMargin: units.gu(4)
-        }
-        verticalAlignment: Text.AlignVCenter
-
-        // This can not be added in the list, it needs to be inside the label
+    Item {
         UpdateManager {
             id: updateManager
             objectName: "updateManager"
 
             Component.onCompleted: {
-                model.visible = true;
                 updateManager.checkUpdates();
             }
 
             onUpdateAvailableFound: {
                 root.updatesAvailable = updateManager.model.length;
-                if (root.updatesAvailable > 0) {
-                    model.visible = true;
-                }
             }
         }
     }

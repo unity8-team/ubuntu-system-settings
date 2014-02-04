@@ -9,7 +9,7 @@ from time import sleep
 
 from autopilot.matchers import Eventually
 from autopilot.introspection.dbus import StateNotFoundError
-from testtools.matchers import Contains, Equals, NotEquals, GreaterThan
+from testtools.matchers import Contains, Equals, NotEquals, GreaterThan, raises
 from unittest import skip
 
 from ubuntu_system_settings.tests import SystemUpdatesBaseTestCase
@@ -35,15 +35,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         self.pointer.move_to_object(updates)
         self.pointer.click()
 
-    def test_no_updates_in_main(self):
-        """Check that the upadtes notification is not shown in main."""
-        updatesNotification = self.main_view.select_single(
-            objectName='entryComponent-updates')
-        self.assertThat(updatesNotification.visible, NotEquals(True))
-
-    def test_updates_in_main(self):
-        """Check that the upadtes notification is shown in main."""
-        updatesNotification = self.main_view.select_single(
-            objectName='entryComponent-updates')
-        updatesNotification.updatesAvailable = 1
-        self.assertThat(updatesNotification.visible, NotEquals(False))
+    def test_updates_not_in_main(self):
+        """Check that the updates notification is shown in main."""
+        self.assertThat(lambda: self.main_view.select_single(
+            objectName='entryComponent-updates'), raises(StateNotFoundError))

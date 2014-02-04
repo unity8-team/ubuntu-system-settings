@@ -4,7 +4,7 @@
     "name": "Updates available",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",
-    "priority": 0,
+    "priority": 2,
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": true,
     "entry-component": "EntryComponent.qml"
