@@ -25,7 +25,7 @@ import QMenuModel 0.1
 
 Column {
     signal pressed
-    property int level: indicatorPower.batteryLevel.state
+    property int level: indicatorPower.batteryLevel
     readonly property bool pressed: sliderId.pressed
 
     anchors {
@@ -39,8 +39,12 @@ Column {
         busName: "com.canonical.indicator.power"
         objectPath: "/com/canonical/indicator/power"
 
-        property variant brightness: action("brightness")
-        property variant batteryLevel: action("battery-level")
+        property variant brightness: action("brightness").state
+        property variant batteryLevel: action("battery-level").state
+        onBrightnessChanged: { 
+            sliderId.enabled = brightness != null
+            sliderId.value = sliderId.enabled ? brightness * 100 : 0.0
+        }
     }
 
     Component.onCompleted: indicatorPower.start()
@@ -80,11 +84,9 @@ Column {
             height: parent.height - units.gu(2)
             minimumValue: 0.0
             maximumValue: 100.0
-            enabled: indicatorPower.brightness.state != null
-            value: enabled ? indicatorPower.brightness.state * 100 : 0.0
             live: true
 
-            onValueChanged: indicatorPower.brightness.updateState(value / 100.0)
+            onValueChanged: indicatorPower.action('brightness').updateState(value / 100.0)
         }
         Icon {
             id: iconRight
