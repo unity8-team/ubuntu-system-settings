@@ -66,7 +66,7 @@ Brightness::Brightness(QObject *parent) :
 
     QDBusMessage reply(m_powerdIface.call("getBrightnessParams"));
 
-    if (!reply.type() != QDBusMessage::ReplyMessage)
+    if (reply.type() != QDBusMessage::ReplyMessage)
         return;
 
     // (iiib) -> max, min, default, autobrightness
