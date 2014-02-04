@@ -64,15 +64,15 @@ Brightness::Brightness(QObject *parent) :
     if (!m_powerdRunning)
         return;
 
-    QDBusReply<BrightnessParams> reply(
-                m_powerdIface.call("getBrightnessParams"));
+    QDBusMessage reply(m_powerdIface.call("getBrightnessParams"));
 
-    if (!reply.isValid())
+    if (!reply.type() != QDBusMessage::ReplyMessage)
         return;
 
     // (iiib) -> max, min, default, autobrightness
-    BrightnessParams result(reply.value());
-    m_autoBrightnessAvailable = result.automatic;
+    QDBusArgument result(reply.arguments()[0].value<QDBusArgument>());
+    BrightnessParams params = qdbus_cast<BrightnessParams>(result);
+    m_autoBrightnessAvailable = params.automatic;
 }
 
 bool Brightness::getAutoBrightnessAvailable() const
