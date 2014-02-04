@@ -40,6 +40,7 @@ Column {
         objectPath: "/com/canonical/indicator/power"
 
         property variant brightness: action("brightness")
+        property variant batteryLevel: action("battery-level")
     }
 
     Component.onCompleted: indicatorPower.start()
