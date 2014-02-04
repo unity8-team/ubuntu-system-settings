@@ -54,6 +54,7 @@ ItemPage {
                      brightnessPanel.autoBrightnessAvailable
             control: CheckBox {
                 id: autoAdjustCheck
+                checked: gsettings.autoBrightness
                 onClicked: gsettings.autoBrightness = checked
             }
             Component.onCompleted: clicked.connect(autoAdjustCheck.clicked)
