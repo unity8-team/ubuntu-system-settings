@@ -60,7 +60,7 @@ void UpdateManager::checkUpdates()
 
 void UpdateManager::registerSystemUpdate(const QString& packageName, Update *update)
 {
-    if (update->updateRequired()) {
+    if (update->updateRequired() && !m_apps.contains(packageName)) {
         m_apps[packageName] = update;
         m_model.insert(0, QVariant::fromValue(update));
         Q_EMIT modelChanged();

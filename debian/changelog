@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.1+14.04.20140206-0ubuntu1) trusty; urgency=low
+
+  [ Diego Sarmentero ]
+  * Show updates notification in main page. .
+
+  [ Iain Lane ]
+  * Add the brightness panel (LP: #1275699)
+  * Set the 'enabled' and 'value' of BrightnessSlider when the state
+    from the indicator backend changes.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 06 Feb 2014 15:47:52 +0000
+
 ubuntu-system-settings (0.1+14.04.20140203-0ubuntu1) trusty; urgency=low
 
   [ Dimitri John Ledkov ]
