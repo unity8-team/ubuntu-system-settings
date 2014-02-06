@@ -27,7 +27,7 @@ ListItem.SingleValue {
     id: root
     text: i18n.tr(model.displayName)
     objectName: "entryComponent-updates"
-    icon: Qt.resolvedUrl(model.icon)
+    iconSource: Qt.resolvedUrl(model.icon)
     iconFrame: false
     progression: true
 
