@@ -24,6 +24,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 
 MainView {
+    id: main
     width: units.gu(50)
     height: units.gu(90)
     applicationName: "SystemSettings"
