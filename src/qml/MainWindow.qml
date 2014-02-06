@@ -32,8 +32,10 @@ MainView {
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
-        var opts = { plugin: plugin,
-                     pluginManager: pluginManager }
+        var opts = {
+            plugin: plugin,
+            pluginManager: pluginManager
+        }
 
         if (pluginOptions)
             opts.pluginOptions = pluginOptions
@@ -68,29 +70,27 @@ MainView {
             var url = String(uris)
             var panelAndOptions = url.replace("settings:///system/", "")
             var optionIndex = panelAndOptions.indexOf("?")
-            var panel = optionIndex > -1 ?
-                        panelAndOptions.substring(0, optionIndex) :
-                        panelAndOptions
-            var urlParams = {}
+            var panel = optionIndex > -1 ? panelAndOptions.substring(
+                                               0, optionIndex) : panelAndOptions
+            var urlParams = {
+
+            }
             // Parse URL options
             // From http://stackoverflow.com/a/2880929
-            if (optionIndex > -1) { // Got options
-                var match,
-                    // Regex for replacing addition symbol with a space
-                    pl     = /\+/g,
-                    search = /([^&=]+)=?([^&]*)/g,
-                    decode = function (s) {
-                        return decodeURIComponent(s.replace(pl, " "))
-                    }
-                while (match = search.exec(
-                           panelAndOptions.substring(optionIndex + 1)))
-                       urlParams[decode(match[1])] = decode(match[2])
+            if (optionIndex > -1) {
+                // Got options
+                var match, // Regex for replacing addition symbol with a space
+                        pl = /\+/g, search = /([^&=]+)=?([^&]*)/g, decode = function (s) {
+                            return decodeURIComponent(s.replace(pl, " "))
+                        }
+                while (match = search.exec(panelAndOptions.substring(
+                                               optionIndex + 1)))
+                    urlParams[decode(match[1])] = decode(match[2])
 
                 loadPluginByName(panel, urlParams)
             } else {
                 loadPluginByName(panel)
             }
-
         }
     }
 
@@ -100,6 +100,34 @@ MainView {
 
     PageStack {
         id: pageStack
+
+        Loader {
+            id: pageLoader
+            property variant options
+
+            function push(page, opts) {
+                pageLoader.sourceComponent = page
+                pageLoader.options = opts
+            }
+
+            onLoaded: {
+                timer.running = false
+                console.log(pageLoader.sourceComponent)
+                pageStack.push(pageLoader.sourceComponent, options)
+            }
+
+            onStatusChanged: {
+                if (status != Loader.Ready)
+                    timer.running = true
+            }
+        }
+
+        Timer {
+            id: timer
+            interval: 5000
+            running: false
+            onTriggered: console.log("ping")
+        }
 
         Page {
             id: mainPage
@@ -125,8 +153,7 @@ MainView {
                             placeholderText: i18n.tr("Search")
                             objectName: "searchTextField"
                             inputMethodHints: Qt.ImhNoPredictiveText
-                            onDisplayTextChanged:
-                                pluginManager.filter = displayText
+                            onDisplayTextChanged: pluginManager.filter = displayText
                         }
                     }
 

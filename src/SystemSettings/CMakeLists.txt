@@ -1,4 +1,4 @@
-set(QML_SOURCES 
+set(QML_SOURCES
     ItemPage.qml
 )
 

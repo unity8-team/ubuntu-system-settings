@@ -30,4 +30,5 @@ ListItem.Standard {
     iconFrame: false
     text: i18n.tr(model.displayName)
     progression: true
+    highlightWhenPressed: true
 }

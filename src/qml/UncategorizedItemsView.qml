@@ -49,7 +49,7 @@ Column {
                     onClicked: {
                         var pageComponent = model.item.pageComponent
                         if (pageComponent) {
-                            pageStack.push(model.item.pageComponent,
+                            pageLoader.push(pageComponent,
                                            { plugin: model.item,
                                              pluginManager: pluginManager })
                         }

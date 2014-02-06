@@ -42,6 +42,7 @@ Item {
             height: width
             source: model.icon
         }
+
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
             text: i18n.dtr(model.item.translations, model.displayName)
