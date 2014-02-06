@@ -30,6 +30,7 @@ import Ubuntu.SystemSettings.Update 1.0
 
 ItemPage {
     id: root
+    objectName: "systemUpdatesPage"
 
     title: i18n.tr("Updates")
 
