@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-01-09 14:06+0100\n"
-"PO-Revision-Date: 2014-01-17 09:39+0000\n"
+"POT-Creation-Date: 2014-01-31 12:33+0100\n"
+"PO-Revision-Date: 2014-02-08 14:29+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-01-29 06:06+0000\n"
+"X-Launchpad-Export-Date: 2014-02-09 06:55+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
+msgid "Display language"
+msgstr "Prikazni jezik"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:91
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:310
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:40
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:36
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:36
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:173
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:96
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:111
+msgid "Confirm"
+msgstr "Potrdi"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:31
+#: settings.js:12
+msgid "Language & Text"
+msgstr "Jezik in besedilo"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:67
+msgid "Display language…"
+msgstr "Prikazni jezik ..."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:78
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "Razporeditve tipk"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:93
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:103
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:27
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "Preverjanje črkovanja"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:113
+msgid "Auto completion"
+msgstr "Samodejno dopolnjevanje"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:123
+msgid "Word suggestions"
+msgstr "Besedni predlogi"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:136
+msgid "Auto capitalization"
+msgstr "Samodejno spreminjanje velikih začetnic"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:146
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "Vklopi tipko Shift za spreminjanje velikih začetnic v vsaki povedi."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:153
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:130
+msgid "Keyboard sound"
+msgstr "Zvok tipkovnice"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "Trenutne razporeditve:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "Vse razpoložljive razporeditve:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "Trenutni jeziki za črkovanje:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Vsi razpoložljivi jeziki:"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/wifi//PageComponent.qml:27
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:331
+#: settings.js:22
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
@@ -25,7 +113,7 @@ msgstr "Ustavi predvajanje"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:32
-#: settings.js:2
+#: settings.js:34
 msgid "Sound"
 msgstr "Zvok"
 
@@ -43,19 +131,28 @@ msgid "Vibrate when ringing"
 msgstr "Vibriraj med zvonenjem"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "Vibriraj v Tihem načinu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
-msgid "Other sounds:"
-msgstr "Drugi zvoki:"
+msgid "Messages:"
+msgstr "Sporočila:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:93
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
 msgid "Message received"
 msgstr "Sporočilo je bilo prejeto"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
+msgid "Vibrate with message sound"
+msgstr "Vibriraj z zvokom sporočila"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:122
+msgid "Other sounds:"
+msgstr "Drugi zvoki:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:138
 msgid "Lock sound"
 msgstr "Zvok zaklepa"
 
@@ -63,108 +160,199 @@ msgstr "Zvok zaklepa"
 msgid "The phone is in Silent Mode."
 msgstr "Telefon je v Tihem načinu."
 
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:29
-#: settings.js:8
-msgid "Time & Date"
-msgstr "Datum in čas"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:29
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:73
+msgid "Phone locking"
+msgstr "Zaklepanje telefona"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:52
-msgid "Time zone:"
-msgstr "Časovni pas:"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:40
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:105
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:212
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:220
+msgid "None"
+msgstr "Brez"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:65
-msgid "Set the time and date:"
-msgstr "Nastavi čas in datum:"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:41
+msgid "Passcode"
+msgstr "Geslo"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:66
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:47
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:109
-msgid "Automatically"
-msgstr "Samodejno"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:42
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:332
+msgid "Passphrase"
+msgstr "šifrirnim reklom"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:66
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:47
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:109
-msgid "Manually"
-msgstr "Ročno"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "Nastavi čas in datum"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "Čas"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "Ura"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "Minute"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "Sekunde"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "Datum"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "Dan"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "Mesec"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "Leto"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:173
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:310
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:91
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:36
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:36
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:40
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:96
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:54
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:54
-msgid "Cancel"
-msgstr "Prekliči"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:182
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:102
-msgid "Set"
-msgstr "Nastavi"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "Časovni pas"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "Nastavi časovni pas:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:113
-msgid "Enter your current location."
-msgstr "Vnesite Vaš trenutni kraj."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:113
-msgid "No matching place"
-msgstr "Kraja ni mogoče najti"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:30
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:44
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:30
 msgid "Lock security"
 msgstr "Zakleni varnost"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:62
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
+msgid "Lock when idle"
+msgstr "Zakleni med nedejavnostjo"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:63
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
+msgid "Sleep when idle"
+msgstr "V pripravljenost med nedejavnostjo"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:65
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:75
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minut"
+msgstr[1] "%1 minuta"
+msgstr[2] "%1 minuti"
+msgstr[3] "%1 minute"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr "Način pripravljenosti zaklene takoj"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:33
+#: settings.js:40
+msgid "Security & Privacy"
+msgstr "Varnost in zasebnost"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:50
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:124
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:50
+msgid "Phone and Internet"
+msgstr "telefona in interneta"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:52
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:125
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:50
+msgid "Phone only"
+msgstr "samo telefona"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:68
+msgid "Security:"
+msgstr "Varnost:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:84
+msgid "SIM PIN"
+msgstr "Geslo PIN kartice SIM"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:90
+msgid "Privacy:"
+msgstr "Zasebnost:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:94
+msgid "Stats on welcome screen"
+msgstr "Statistika na pozdravnem zaslonu"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:107
+msgid "Messages on welcome screen"
+msgstr "Sporočila na pozdravnem zaslonu"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:122
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:29
+msgid "Dash search"
+msgstr "Iskanje v pregledni plošči"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:140
+msgid "Location access"
+msgstr "Dostop do položaja"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:148
+msgid "Other app access"
+msgstr "Dostop do drugega programa"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:153
+msgid "Diagnostics"
+msgstr "Diagnostika"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:158
+msgid "Sent"
+msgstr "Poslano"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:161
+msgid "Not sent"
+msgstr "Ni poslano"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:49
+msgid "Return results from:"
+msgstr "Vrni rezultate od:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:30
+msgid "Location"
+msgstr "Položaj"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:48
+msgid "Location detection"
+msgstr "Odkrivanje položaja"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:70
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+"Uporabi GPS za odkritje Vaše grobega položaja. Kadar je ugasnjen, se GPS "
+"izklopi za varčevanje energije."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:72
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Uporablja wi-fi in GPS za odkritje Vaše grobega položaja. Izklop odkrivanja "
+"položaja prihrani energijo."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:74
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+"Uporablja wi-fi (trenutno izklopljen) in GPS za odkrivanje Vašega grobega "
+"položaja. Izklop odkrivanja položaja prihrani energijo."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:76
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+"Uporablja wi-fi, položaje baznih postaj in GPS za odkrivanje Vašega grobega "
+"položaja. Izklop odkrivanja položaja prihrani energijo."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:78
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+"Uporablja wi-fi, položaje baznih postaj (trenutno ni mobilne povezave) in "
+"GPS za odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja "
+"prihrani energijo."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:80
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj in GPS za "
+"odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja prihrani "
+"energijo."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:82
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj (trenutno ni "
+"mobilne povezave) in GPS za odkrivanje Vašega grobega položaja. Izklop "
+"odkrivanja položaja prihrani energijo."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:89
+msgid "Allow access to location:"
+msgstr "Dovoli dostop do mesta:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
@@ -246,11 +434,6 @@ msgstr "potegom (brez varnosti)"
 msgid "4-digit passcode"
 msgstr "4-mestno številko"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:332
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:42
-msgid "Passphrase"
-msgstr "šifrirnim reklom"
-
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
 msgstr "Poteg (brez varnosti) ... "
@@ -271,600 +454,84 @@ msgstr "Spremeni geslo ..."
 msgid "Change passphrase…"
 msgstr "Spremeni šifrirno reklo ..."
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:30
-msgid "Location"
-msgstr "Položaj"
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:28
+#: settings.js:48
+msgid "Cellular"
+msgstr "Mobilno omrežje"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:48
-msgid "Location detection"
-msgstr "Odkrivanje položaja"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:67
+msgid "Cellular data:"
+msgstr "mobilni podatki"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:70
-msgid ""
-"Uses GPS to detect your rough location. When off, GPS turns off to save "
-"battery."
-msgstr ""
-"Uporabi GPS za odkritje Vaše grobega položaja. Kadar je ugasnjen, se GPS "
-"izklopi za varčevanje energije."
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:68
+msgid "Off"
+msgstr "Izklopljeno"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:72
-msgid ""
-"Uses wi-fi and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"Uporablja wi-fi in GPS za odkritje Vaše grobega položaja. Izklop odkrivanja "
-"položaja prihrani energijo."
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:69
+msgid "2G only (saves battery)"
+msgstr "Samo 2G (prihrani baterijo)"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:74
-msgid ""
-"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
-"off location detection saves battery."
-msgstr ""
-"Uporablja wi-fi (trenutno izklopljen) in GPS za odkrivanje Vašega grobega "
-"položaja. Izklop odkrivanja položaja prihrani energijo."
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:70
+msgid "2G/3G/4G (faster)"
+msgstr "2G/3G/4G (hitrejše)"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:76
-msgid ""
-"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
-"Turning off location detection saves battery."
-msgstr ""
-"Uporablja wi-fi, položaje baznih postaj in GPS za odkrivanje Vašega grobega "
-"položaja. Izklop odkrivanja položaja prihrani energijo."
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:81
+msgid "Cellular data"
+msgstr "Mobilni podatki"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:78
-msgid ""
-"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
-"to detect your rough location. Turning off location detection saves battery."
-msgstr ""
-"Uporablja wi-fi, položaje baznih postaj (trenutno ni mobilne povezave) in "
-"GPS za odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja "
-"prihrani energijo."
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:90
+msgid "Data roaming"
+msgstr "Podatkovno gostovanje"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:80
-msgid ""
-"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
-"rough location. Turning off location detection saves battery."
-msgstr ""
-"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj in GPS za "
-"odkrivanje Vašega grobega položaja. Izklop odkrivanja položaja prihrani "
-"energijo."
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:99
+msgid "Data usage statistics"
+msgstr "Statistika uporabe podatkov"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:82
-msgid ""
-"Uses wi-fi (currently off), cell tower locations (no current cellular "
-"connection), and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"Uporablja wi-fi (trenutno izklopljen), položaje baznih postaj (trenutno ni "
-"mobilne povezave) in GPS za odkrivanje Vašega grobega položaja. Izklop "
-"odkrivanja položaja prihrani energijo."
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:108
+msgid "Choose carrier:"
+msgstr "Izberite operaterja:"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:89
-msgid "Allow access to location:"
-msgstr "Dovoli dostop do mesta:"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:109
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:66
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:47
+msgid "Automatically"
+msgstr "Samodejno"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:33
-#: settings.js:28
-msgid "Security & Privacy"
-msgstr "Varnost in zasebnost"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:109
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:66
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:47
+msgid "Manually"
+msgstr "Ročno"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:50
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:124
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:50
-msgid "Phone and Internet"
-msgstr "telefona in interneta"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:114
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:28
+msgid "Carrier"
+msgstr "Operater"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:52
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:125
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:50
-msgid "Phone only"
-msgstr "samo telefona"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:68
-msgid "Security:"
-msgstr "Varnost:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:73
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:29
-msgid "Phone locking"
-msgstr "Zaklepanje telefona"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:75
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:65
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 minut"
-msgstr[1] "%1 minuta"
-msgstr[2] "%1 minuti"
-msgstr[3] "%1 minute"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:84
-msgid "SIM PIN"
-msgstr "Geslo PIN kartice SIM"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:90
-msgid "Privacy:"
-msgstr "Zasebnost:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:94
-msgid "Stats on welcome screen"
-msgstr "Statistika na pozdravnem zaslonu"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:107
-msgid "Messages on welcome screen"
-msgstr "Sporočila na pozdravnem zaslonu"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:122
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "Iskanje v pregledni plošči"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:140
-msgid "Location access"
-msgstr "Dostop do položaja"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:148
-msgid "Other app access"
-msgstr "Dostop do drugega programa"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:153
-msgid "Diagnostics"
-msgstr "Diagnostika"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:158
-msgid "Sent"
-msgstr "Poslano"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:161
-msgid "Not sent"
-msgstr "Ni poslano"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:49
-msgid "Return results from:"
-msgstr "Vrni rezultate od:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:40
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:105
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:212
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:220
-msgid "None"
-msgstr "Brez"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:41
-msgid "Passcode"
-msgstr "Geslo"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:62
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
-msgid "Lock when idle"
-msgstr "Zakleni med nedejavnostjo"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:63
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
-msgid "Sleep when idle"
-msgstr "V pripravljenost med nedejavnostjo"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
-msgstr "Način pripravljenosti zaklene takoj"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:31
-#: settings.js:44
-msgid "Language & Text"
-msgstr "Jezik in besedilo"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:67
-msgid "Display language…"
-msgstr "Prikazni jezik ..."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:81
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "Razporeditve tipk"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:97
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:27
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:36
-msgid "Spell checking"
-msgstr "Preverjanje črkovanja"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:109
-msgid "Auto completion"
-msgstr "Samodejno dopolnjevanje"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:121
-msgid "Word suggestions"
-msgstr "Besedni predlogi"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:134
-msgid "Auto capitalization"
-msgstr "Samodejno spreminjanje velikih začetnic"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:144
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "Vklopi tipko Shift za spreminjanje velikih začetnic v vsaki povedi."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:154
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
-msgid "Keyboard sound"
-msgstr "Zvok tipkovnice"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "Trenutni jeziki za črkovanje:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "Vsi razpoložljivi jeziki:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr "Prikazni jezik"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:111
-msgid "Confirm"
-msgstr "Potrdi"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "Trenutne razporeditve:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "Vse razpoložljive razporeditve:"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:35
-#: settings.js:54
-msgid "Battery"
-msgstr "Baterija"
-
-#. TRANSLATORS: %1 is the number of seconds
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:47
-#, qt-format
-msgid "%1 second ago"
-msgid_plural "%1 seconds ago"
-msgstr[0] "Pred %1 sekundami"
-msgstr[1] "Pred %1 sekundo"
-msgstr[2] "Pred %1 sekundama"
-msgstr[3] "Pred %1 sekundami"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:50
-#, qt-format
-msgid "%1 minute ago"
-msgid_plural "%1 minutes ago"
-msgstr[0] "pred %1 minutami"
-msgstr[1] "pred %1 minuto"
-msgstr[2] "pred %1 minutama"
-msgstr[3] "pred %1 minutami"
-
-#. TRANSLATORS: %1 is the number of hours
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:53
-#, qt-format
-msgid "%1 hour ago"
-msgid_plural "%1 hours ago"
-msgstr[0] "Pred %1 urami"
-msgstr[1] "pred %1 uro"
-msgstr[2] "pred %1 urama"
-msgstr[3] "pred %1 urami"
-
-#. TRANSLATORS: %1 is the number of days
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:56
-#, qt-format
-msgid "%1 day ago"
-msgid_plural "%1 days ago"
-msgstr[0] "pred %1 dnevi"
-msgstr[1] "pred %1 dnevom"
-msgstr[2] "pred %1 dnevoma"
-msgstr[3] "pred %1 dnevi"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:76
-msgid "Charging now"
-msgstr "Polnjenje"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:81
-msgid "Last full charge"
-msgstr "Zadnja napolnitev"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:86
-msgid "Fully charged"
-msgstr "Popolnoma napolnjeno"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:124
-msgid "Charge level"
-msgstr "Raven napolnjenosti"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:129
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:236
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:115
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:203
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:85
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:93
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:204
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:129
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:236
 msgid "N/A"
 msgstr "Ni na voljo"
 
-#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:132
-#, qt-format
-msgid "%1%"
-msgstr "%1%"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:125
+msgid "APN"
+msgstr "APN"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:241
-msgid "Ways to reduce battery use:"
-msgstr "Načini za zmanjšanje porabe baterije:"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:78
+msgid "Refresh"
+msgstr "Osveži"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:245
-msgid "Display brightness"
-msgstr "Svetlost zaslona"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:95
+msgid "Searching"
+msgstr "Iskanje"
 
-#. TRANSLATORS: %1 is the number of minutes
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:309
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:318
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:77
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:81
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:85
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:89
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:93
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "Po %1 minutah"
-msgstr[1] "Po %1 minuti"
-msgstr[2] "Po %1 minutah"
-msgstr[3] "Po %1 minutah"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:312
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:321
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:96
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:330
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Download.qml:53
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:111
-msgid "Never"
-msgstr "Nikoli"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:331
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/wifi//PageComponent.qml:27
-#: settings.js:60
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:361
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:111
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:130
-#: settings.js:124
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:392
-msgid "GPS"
-msgstr "GPS"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:411
-msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "Odkrivanje točnega položaja zahteva GPS in/ali Wi-Fi."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr "Zakleni telefon, ko ni v uporabi:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "Daj telefon v pripravljenost, ko ni v uporabi:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-"Krajši časi so varnejši. Telefon se med klici ali predvajanjem videa ne bo "
-"zaklenil."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
-"Telefon med klici ali predvajanjem videa ne bo prešel v pripravljenost."
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//Services.qml:30
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:61
-#, qt-format
-msgid "%1 Services"
-msgstr "%1 storitve"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:28
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:82
-#: settings.js:72
-msgid "Phone"
-msgstr "Telefon"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr "SIM"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:46
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:27
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:60
-msgid "Call forwarding"
-msgstr "Posredovanje klica"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:52
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:27
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:53
-msgid "Call waiting"
-msgstr "Dajanje klica na čakanje"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//ServiceInfo.qml:35
-msgid "Call"
-msgstr "Klic"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:74
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"Preusmeri telefonske klice na drugo številko, kadarkoli ne odgovorite na "
-"klic ali je Vaš telefon zaposlen, ugasnjen ali izven dosega."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:91
-msgid "Call forwarding status can’t be checked right now. Try again later."
-msgstr ""
-"Stanja posredovanja klica trenutno ni mogoče preveriti. Poskusite ponovno "
-"kasneje."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:102
-msgid "Divert to"
-msgstr "Preusmeri na"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
-msgid "Contacts…"
-msgstr "Stiki ..."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:67
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-"Vam omogoči, da odgovorite ali začnete nov klic, medtem ko ste na drugem "
-"klicu in preklopi med njima"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:32
-#: settings.js:86
-msgid "Updates"
-msgstr "Posodobitve"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:51
-msgid "Checking for updates…"
-msgstr "Preverjanje za posodobitve ..."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:88
-msgid "Apply update failed:"
-msgstr "Uveljavljanje posodobitev ni uspelo:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:98
-msgid "Pause failed:"
-msgstr "Premor ni uspel:"
-
-#. TRANSLATORS: %1 is the size of the update in GB
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:113
-#, qt-format
-msgid "%1 GB"
-msgstr "%1 GB"
-
-#. TRANSLATORS: %1 is the size of the update in MB
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:116
-#, qt-format
-msgid "%1 MB"
-msgstr "%1 MB"
-
-#. TRANSLATORS: %1 is the date when the device was last updated
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:125
-msgid "No software update available"
-msgstr "Ni novih programskih posodobitev"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:125
-#, qt-format
-msgid "Last updated %1"
-msgstr "Nazadnje posodobljeno %1"
-
-#. TRANSLATORS: %1 is the number of seconds remaining
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:138
-#, qt-format
-msgid "About %1 second remaining"
-msgid_plural "About %1 seconds remaining"
-msgstr[0] "Preostaja še %1 sekund"
-msgstr[1] "Preostaja še %1 sekunda"
-msgstr[2] "Preostajata še %1 sekundi"
-msgstr[3] "Preostajajo še %1 sekunde"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:140
-msgid "No estimate for the download"
-msgstr "Ni predvidenega časa za prejem"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:146
-msgid "Paused"
-msgstr "V premoru"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:155
-msgid "Download failed:"
-msgstr "Prejem ni uspel:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:210
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:305
-msgid "Retry"
-msgstr "Poskusi znova"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:275
-msgid "Pause downloading"
-msgstr "Premor prejemanja"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:282
-msgid "Resume downloading"
-msgstr "Nadaljuj prejemanje"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:298
-msgid "Download"
-msgstr "Prejem"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:312
-msgid "Install & Restart"
-msgstr "Namesti in ponovno zaženi"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:327
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Download.qml:29
-msgid "Auto download"
-msgstr "Samodejni prejem"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:332
-msgid "On wi-fi"
-msgstr "Ob povezavi wi-fi"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:334
-msgid "Always"
-msgstr "Vedno"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Download.qml:34
-msgid "Download future updates automatically:"
-msgstr "Prejmi prihodnje posodobitve samodejno:"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Download.qml:54
-msgid "When on wi-fi"
-msgstr "kadar je vključen wi-fi"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Download.qml:55
-msgid "On any data connection"
-msgstr "ob vsakršni podatkovni povezavi"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Download.qml:56
-msgid "Data charges may apply."
-msgstr "Prenosi podatkov bodo morda zaračunani."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:29
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr ""
-"Vsi dokumenti, shranjene igre, nastavitve in drugi predmeti bodo trajno "
-"izbrisani iz tega telefona."
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:31
-msgid "Erase & reset everything"
-msgstr "Izbriši in ponastavi vse"
-
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:29
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:30
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:29
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -872,13 +539,13 @@ msgstr ""
 "Vsebina in razporeditev zaganjalnika in filtri v domačem zaslonu bodo "
 "povrnjeni na izvirne nastavitve."
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "Ponastavi vse sistemske nastavitve"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:32
+msgid "Reset launcher & home screen"
+msgstr "Ponastavi zaganjalnik in domači zaslon"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:32
-#: settings.js:102
+#: settings.js:60
 msgid "Reset phone"
 msgstr "Ponastavi telefon"
 
@@ -894,84 +561,186 @@ msgstr "Ponastavi vse sistemske nastavitve ..."
 msgid "Erase & reset everything…"
 msgstr "Izbriši in ponastavi vse ..."
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:32
-msgid "Reset launcher & home screen"
-msgstr "Ponastavi zaganjalnik in domači zaslon"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:29
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"Vsi dokumenti, shranjene igre, nastavitve in drugi predmeti bodo trajno "
+"izbrisani iz tega telefona."
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:67
-msgid "Preview"
-msgstr "Predogled"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:31
+msgid "Erase & reset everything"
+msgstr "Izbriši in ponastavi vse"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//WallpaperGrid.qml:121
-msgid "Remove"
-msgstr "Odstrani"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "Ponastavi vse sistemske nastavitve"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:31
-#: settings.js:116
-msgid "Background"
-msgstr "Ozadje"
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:29
+#: settings.js:66
+msgid "Time & Date"
+msgstr "Datum in čas"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:130
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:42
-msgid "Welcome screen"
-msgstr "Pozdravni zaslon"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:52
+msgid "Time zone:"
+msgstr "Časovni pas:"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:173
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:42
-msgid "Home screen"
-msgstr "Domači zaslon"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:65
+msgid "Set the time and date:"
+msgstr "Nastavi čas in datum:"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:198
-msgid "Same background for both"
-msgstr "Enako ozadje za oboje"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "Nastavi čas in datum"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:199
-msgid "Different background for each"
-msgstr "Različna ozadja za oboje"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "Čas"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:41
-msgid "Choose background"
-msgstr "Nastavi ozadje"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "Ura"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:46
-msgid "Photo/Image"
-msgstr "Fotografija/slika"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "Minute"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:86
-msgid "Ubuntu Art"
-msgstr "Galerija Ubuntu"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "Sekunde"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:101
-msgid "Custom"
-msgstr "Po meri"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "Datum"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr "Zahteva seznanjenja naprav Bluetooth"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "Dan"
 
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "Potrdite, da se PIN, prikazan na '%1', ujema s tem"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "Mesec"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "Potrdi PIN"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "Leto"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "PIN za '%1'"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:182
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:102
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
+msgid "Set"
+msgstr "Nastavi"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:62
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr "Seznani"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Časovni pas"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "Nastavi časovni pas:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:114
+msgid "Enter your current location."
+msgstr "Vnesite Vaš trenutni kraj."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:114
+msgid "No matching place"
+msgstr "Kraja ni mogoče najti"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Software.qml:10
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:139
+msgid "Software licenses"
+msgstr "Programska dovoljenja"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:33
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:127
+msgid "Storage"
+msgstr "Shramba"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:88
+msgid "Used by Ubuntu"
+msgstr "Uporablja Ubuntu"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
+msgid "Videos"
+msgstr "Videi"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
+msgid "Audio"
+msgstr "Zvok"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:91
+msgid "Pictures"
+msgstr "Slike"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:92
+msgid "Other files"
+msgstr "Druge datoteke"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:93
+msgid "Used by apps"
+msgstr "Uporabljajo programi"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:143
+msgid "Total storage"
+msgstr "Celotna shramba"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:155
+msgid "Free space"
+msgstr "Nezaseden prostor"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:175
+msgid "By name"
+msgstr "Po imenu"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:175
+msgid "By size"
+msgstr "Po velikosti"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:33
+#: settings.js:76
+msgid "About this phone"
+msgstr "O tem telefonu"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:84
+msgid "Serial"
+msgstr "Zaporedna številka"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:98
+msgid "Software:"
+msgstr "Programska oprema:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:103
+msgid "OS"
+msgstr "OS"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:110
+msgid "Last updated"
+msgstr "Nazadnje posodobljeno"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:111
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:312
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:321
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:96
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:52
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:374
+msgid "Never"
+msgstr "Nikoli"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:117
+msgid "Check for updates"
+msgstr "Preveri za posodobitve"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:134
+msgid "Legal:"
+msgstr "Pravno:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:147
+msgid "Regulatory info"
+msgstr "Regulatorni podatki"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:71
@@ -989,12 +758,19 @@ msgstr "%1 (Prekinjanje …)"
 msgid "Computer"
 msgstr "Računalnik"
 
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:82
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:28
+#: settings.js:130
+msgid "Phone"
+msgstr "Telefon"
+
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:83
 msgid "Modem"
 msgstr "Modem"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:84
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:137
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:139
 msgid "Network"
 msgstr "Omrežje"
 
@@ -1058,6 +834,14 @@ msgstr "Zadovoljivo"
 msgid "Poor"
 msgstr "Slabo"
 
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:111
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:130
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:361
+#: settings.js:92
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:149
 msgid "Connected headset:"
 msgstr "Povezane slušalke z mikrofonom:"
@@ -1090,420 +874,662 @@ msgstr "Moč signala"
 msgid "Disconnect"
 msgstr "Prekini povezavo"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:28
-#: settings.js:130
-msgid "Cellular"
-msgstr "Mobilno omrežje"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "Zahteva seznanjenja naprav Bluetooth"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:67
-msgid "Cellular data:"
-msgstr "mobilni podatki"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "PIN za '%1'"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:68
-msgid "Off"
-msgstr "Izklopljeno"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:62
+msgid "Pair"
+msgstr "Seznani"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:69
-msgid "2G only (saves battery)"
-msgstr "Samo 2G (prihrani baterijo)"
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "Potrdite, da se PIN, prikazan na '%1', ujema s tem"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:70
-msgid "2G/3G/4G (faster)"
-msgstr "2G/3G/4G (hitrejše)"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "Potrdi PIN"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:81
-msgid "Cellular data"
-msgstr "Mobilni podatki"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//WallpaperGrid.qml:121
+msgid "Remove"
+msgstr "Odstrani"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:90
-msgid "Data roaming"
-msgstr "Podatkovno gostovanje"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:41
+msgid "Choose background"
+msgstr "Nastavi ozadje"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:99
-msgid "Data usage statistics"
-msgstr "Statistika uporabe podatkov"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:42
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:173
+msgid "Home screen"
+msgstr "Domači zaslon"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:108
-msgid "Choose carrier:"
-msgstr "Izberite operaterja:"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:42
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:130
+msgid "Welcome screen"
+msgstr "Pozdravni zaslon"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:114
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:28
-msgid "Carrier"
-msgstr "Operater"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:46
+msgid "Photo/Image"
+msgstr "Fotografija/slika"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:125
-msgid "APN"
-msgstr "APN"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:86
+msgid "Ubuntu Art"
+msgstr "Galerija Ubuntu"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:78
-msgid "Refresh"
-msgstr "Osveži"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:101
+msgid "Custom"
+msgstr "Po meri"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:95
-msgid "Searching"
-msgstr "Iskanje"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:67
+msgid "Preview"
+msgstr "Predogled"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Software.qml:10
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:139
-msgid "Software licenses"
-msgstr "Programska dovoljenja"
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:31
+#: settings.js:98
+msgid "Background"
+msgstr "Ozadje"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:33
-#: settings.js:142
-msgid "About this phone"
-msgstr "O tem telefonu"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:198
+msgid "Same background for both"
+msgstr "Enako ozadje za oboje"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:84
-msgid "Serial"
-msgstr "Zaporedna številka"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:199
+msgid "Different background for each"
+msgstr "Različna ozadja za oboje"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:98
-msgid "Software:"
-msgstr "Programska oprema:"
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:35
+#: settings.js:114
+msgid "Battery"
+msgstr "Baterija"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:103
-msgid "OS"
-msgstr "OS"
+#. TRANSLATORS: %1 is the number of seconds
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:47
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "Pred %1 sekundami"
+msgstr[1] "Pred %1 sekundo"
+msgstr[2] "Pred %1 sekundama"
+msgstr[3] "Pred %1 sekundami"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:110
-msgid "Last updated"
-msgstr "Nazadnje posodobljeno"
+#. TRANSLATORS: %1 is the number of minutes
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:50
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "pred %1 minutami"
+msgstr[1] "pred %1 minuto"
+msgstr[2] "pred %1 minutama"
+msgstr[3] "pred %1 minutami"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:117
-msgid "Check for updates"
-msgstr "Preveri za posodobitve"
+#. TRANSLATORS: %1 is the number of hours
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:53
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "Pred %1 urami"
+msgstr[1] "pred %1 uro"
+msgstr[2] "pred %1 urama"
+msgstr[3] "pred %1 urami"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:127
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "Shramba"
+#. TRANSLATORS: %1 is the number of days
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:56
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "pred %1 dnevi"
+msgstr[1] "pred %1 dnevom"
+msgstr[2] "pred %1 dnevoma"
+msgstr[3] "pred %1 dnevi"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:134
-msgid "Legal:"
-msgstr "Pravno:"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:76
+msgid "Charging now"
+msgstr "Polnjenje"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:147
-msgid "Regulatory info"
-msgstr "Regulatorni podatki"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:81
+msgid "Last full charge"
+msgstr "Zadnja napolnitev"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:88
-msgid "Used by Ubuntu"
-msgstr "Uporablja Ubuntu"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:86
+msgid "Fully charged"
+msgstr "Popolnoma napolnjeno"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
-msgid "Videos"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:124
+msgid "Charge level"
+msgstr "Raven napolnjenosti"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:132
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:241
+msgid "Ways to reduce battery use:"
+msgstr "Načini za zmanjšanje porabe baterije:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:245
+msgid "Display brightness"
+msgstr "Svetlost zaslona"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:309
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:318
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:77
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:81
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:85
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:89
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "Po %1 minutah"
+msgstr[1] "Po %1 minuti"
+msgstr[2] "Po %1 minutah"
+msgstr[3] "Po %1 minutah"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:392
+msgid "GPS"
+msgstr "GPS"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:411
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "Odkrivanje točnega položaja zahteva GPS in/ali Wi-Fi."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "Zakleni telefon, ko ni v uporabi:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "Daj telefon v pripravljenost, ko ni v uporabi:"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:107
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
 msgstr ""
+"Krajši časi so varnejši. Telefon se med klici ali predvajanjem videa ne bo "
+"zaklenil."
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
-msgid "Audio"
-msgstr "Zvok"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
+msgstr ""
+"Telefon med klici ali predvajanjem videa ne bo prešel v pripravljenost."
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:91
-msgid "Pictures"
-msgstr "Slike"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:29
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:371
+msgid "Auto download"
+msgstr "Samodejni prejem"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:92
-msgid "Other files"
-msgstr "Druge datoteke"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:34
+msgid "Download future updates automatically:"
+msgstr "Prejmi prihodnje posodobitve samodejno:"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:93
-msgid "Used by apps"
-msgstr "Uporabljajo programi"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:53
+msgid "When on wi-fi"
+msgstr "kadar je vključen wi-fi"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:143
-msgid "Total storage"
-msgstr "Celotna shramba"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:54
+msgid "On any data connection"
+msgstr "ob vsakršni podatkovni povezavi"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:155
-msgid "Free space"
-msgstr "Nezaseden prostor"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:55
+msgid "Data charges may apply."
+msgstr "Prenosi podatkov bodo morda zaračunani."
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:175
-msgid "Installed apps"
-msgstr "Nameščeni programi"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:34
+#: settings.js:120
+msgid "Updates"
+msgstr "Posodobitve"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:176
-msgid "By name"
-msgstr "Po imenu"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:46
+msgid "Update System"
+msgstr "Posodobi sistem"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:176
-msgid "By size"
-msgstr "Po velikosti"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:47
+msgid "The phone needs to restart to install the system update."
+msgstr "Telefon se mora zaradi namestitve posodobitev sistema znova zagnati."
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:106
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:50
+msgid "Install & Restart"
+msgstr "Namesti in ponovno zaženi"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:59
+msgid "Not Now"
+msgstr "Ne zdaj"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:65
+msgid "Install"
+msgstr "Namesti"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:83
+msgid "Software is up to date"
+msgstr "Programska oprema je posodobljena"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:90
+msgid "System update has failed."
+msgstr "Posodobitev sistema ni uspela."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:145
+msgid "System update failed."
+msgstr "Posodobitev sistema ni uspela."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:176
+msgid "Checking for updates…"
+msgstr "Preverjanje za posodobitve ..."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:194
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] "Namesti %1 posodobitev"
+msgstr[1] "Namesti %1 posodobitev"
+msgstr[2] "Namesti %1 posodobitvi"
+msgstr[3] "Namesti %1 posodobitve"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:195
+msgid "Pause All"
+msgstr "Premor vsega"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:256
+msgid "Retry"
+msgstr "Poskusi znova"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:272
+msgid "Download"
+msgstr "Prejem"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:272
+msgid "Update"
+msgstr "Posodobi"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:273
+msgid "Resume"
+msgstr "Nadaljuj"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:274
+msgid "Pause"
+msgstr "Premor"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:319
+msgid "Installing"
+msgstr "Nameščanje"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:355
+msgid "Version: "
+msgstr "Različica: "
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:376
+msgid "On wi-fi"
+msgstr "Ob povezavi wi-fi"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:378
+msgid "Always"
+msgstr "Vedno"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:432
+msgid "Installing update…"
+msgstr "Nameščanje posodobitev ..."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:446
+msgid " bytes"
+msgstr " bajtov"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:449
+msgid " KiB"
+msgstr " KiB"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:452
+msgid " MiB"
+msgstr " MiB"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:455
+msgid " GiB"
+msgstr " GiB"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:30
+msgid "SIM"
+msgstr "SIM"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:46
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:27
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:60
+msgid "Call forwarding"
+msgstr "Posredovanje klica"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:52
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:27
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:53
+msgid "Call waiting"
+msgstr "Dajanje klica na čakanje"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:61
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//Services.qml:30
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 storitve"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:67
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"Vam omogoči, da odgovorite ali začnete nov klic, medtem ko ste na drugem "
+"klicu in preklopi med njima"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//ServiceInfo.qml:35
+msgid "Call"
+msgstr "Klic"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:74
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"Preusmeri telefonske klice na drugo številko, kadarkoli ne odgovorite na "
+"klic ali je Vaš telefon zaposlen, ugasnjen ali izven dosega."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:91
+msgid "Call forwarding status can’t be checked right now. Try again later."
+msgstr ""
+"Stanja posredovanja klica trenutno ni mogoče preveriti. Poskusite ponovno "
+"kasneje."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:102
+msgid "Divert to"
+msgstr "Preusmeri na"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
+msgid "Contacts…"
+msgstr "Stiki ..."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:107
 msgid "System Settings"
 msgstr "Sistemske nastavitve"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:124
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:125
 msgid "Search"
 msgstr "Iskanje"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:142
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:144
 msgid "Personal"
 msgstr "Osebno"
 
-#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:147
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:149
 msgid "System"
 msgstr "Sistem"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: settings.js:4
-msgid "sound"
-msgstr "zvok"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:6 settings.js:16 settings.js:34 settings.js:42 settings.js:52
-#: settings.js:70 settings.js:76 settings.js:94 settings.js:100
-#: settings.js:106 settings.js:128 settings.js:140
-msgid "settings"
-msgstr "nastavitve"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:10
-msgid "time"
-msgstr "čas"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:12
-msgid "date"
-msgstr "datum"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:14
-msgid "timezone"
-msgstr "časovni pas"
-
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:18
+#: settings.js:2
 msgid "Orientation Lock"
-msgstr ""
+msgstr "Zaklep usmerjenosti"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:20
+#: settings.js:4
 msgid "rotation"
 msgstr "obračanje"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:22
+#: settings.js:6
 msgid "orientation"
 msgstr "usmerjenost"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:24
+#: settings.js:8
 msgid "lock"
 msgstr "zakleni"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:26
+#: settings.js:10
 msgid "screen"
 msgstr "zaslon"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:30
-msgid "security"
-msgstr "varnost"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:32
-msgid "privacy"
-msgstr "zasebnost"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:36
-msgid "Accessibility"
-msgstr "Dostopnost"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:38
-msgid "accessibility"
-msgstr "dostopnost"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:40
-msgid "a11y"
-msgstr "a11y"
-
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:46
+#: settings.js:14
 msgid "language"
 msgstr "jezik"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:48
+#: settings.js:16
 msgid "lang"
 msgstr "jezik"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:50
+#: settings.js:18
 msgid "i18n"
 msgstr "i18n"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:56
-msgid "battery"
-msgstr "baterija"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:58
-msgid "power"
-msgstr "energija"
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: settings.js:20 settings.js:32 settings.js:38 settings.js:46 settings.js:58
+#: settings.js:64 settings.js:74 settings.js:96 settings.js:128
+#: settings.js:134 settings.js:140 settings.js:148
+msgid "settings"
+msgstr "nastavitve"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:62 settings.js:134
+#: settings.js:24 settings.js:52
 msgid "network"
 msgstr "omrežje"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:64
+#: settings.js:26
 msgid "wireless"
 msgstr "brezžično"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:66
+#: settings.js:28
 msgid "wifi"
 msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:68
+#: settings.js:30
 msgid "wi-fi"
 msgstr "wi-fi"
 
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: settings.js:74
-msgid "phone"
-msgstr "telefon"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: settings.js:36
+msgid "sound"
+msgstr "zvok"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:78
-msgid "Example"
-msgstr "Primer"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: settings.js:42
+msgid "security"
+msgstr "varnost"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:80
-msgid "example"
-msgstr "primer"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:82
-msgid "test"
-msgstr "preizkus"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:84
-msgid "sample"
-msgstr "primer"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:88
-msgid "system"
-msgstr "sistem"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:90
-msgid "software"
-msgstr "programska oprema"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:92
-msgid "update"
-msgstr "posodobitve"
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: settings.js:96
-msgid "Brightness"
-msgstr "Svetlost"
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: settings.js:98
-msgid "brightness"
-msgstr "svetlost"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: settings.js:104
-msgid "reset"
-msgstr "ponastavi"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:108
-msgid "Flight Mode"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:110
-msgid "flight"
-msgstr "let"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:112
-msgid "plane"
-msgstr "letalo"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:114
-msgid "offline"
-msgstr "nepovezan"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:118
-msgid "appearance"
-msgstr "izgled"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:120
-msgid "background"
-msgstr "ozadje"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:122
-msgid "wallpaper"
-msgstr "ozadje"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: settings.js:126
-msgid "bluetooth"
-msgstr "bluetooth"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: settings.js:44
+msgid "privacy"
+msgstr "zasebnost"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:132
+#: settings.js:50
 msgid "cellular"
 msgstr "mobilno"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:136
+#: settings.js:54
 msgid "mobile"
 msgstr "mobilno"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:138
+#: settings.js:56
 msgid "gsm"
 msgstr "gsm"
 
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: settings.js:62
+msgid "reset"
+msgstr "ponastavi"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: settings.js:68
+msgid "time"
+msgstr "čas"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: settings.js:70
+msgid "date"
+msgstr "datum"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: settings.js:72
+msgid "timezone"
+msgstr "časovni pas"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:144
+#: settings.js:78
 msgid "about"
 msgstr "o programu"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:146
+#: settings.js:80
 msgid "device"
 msgstr "naprava"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:148
+#: settings.js:82
 msgid "info"
 msgstr "podrobnosti"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: settings.js:84
+msgid "Flight Mode"
+msgstr "Način letenja"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: settings.js:86
+msgid "flight"
+msgstr "let"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: settings.js:88
+msgid "plane"
+msgstr "letalo"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: settings.js:90
+msgid "offline"
+msgstr "nepovezan"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: settings.js:94
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: settings.js:100
+msgid "appearance"
+msgstr "izgled"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: settings.js:102
+msgid "background"
+msgstr "ozadje"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: settings.js:104
+msgid "wallpaper"
+msgstr "ozadje"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: settings.js:106
+msgid "Example"
+msgstr "Primer"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: settings.js:108
+msgid "example"
+msgstr "primer"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: settings.js:110
+msgid "test"
+msgstr "preizkus"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: settings.js:112
+msgid "sample"
+msgstr "primer"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: settings.js:116
+msgid "battery"
+msgstr "baterija"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: settings.js:118
+msgid "power"
+msgstr "energija"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: settings.js:122
+msgid "system"
+msgstr "sistem"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: settings.js:124
+msgid "software"
+msgstr "programska oprema"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: settings.js:126
+msgid "update"
+msgstr "posodobitve"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: settings.js:132
+msgid "phone"
+msgstr "telefon"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: settings.js:136
+msgid "Brightness"
+msgstr "Svetlost"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: settings.js:138
+msgid "brightness"
+msgstr "svetlost"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: settings.js:142
+msgid "Accessibility"
+msgstr "Dostopnost"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: settings.js:144
+msgid "accessibility"
+msgstr "dostopnost"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: settings.js:146
+msgid "a11y"
+msgstr "a11y"

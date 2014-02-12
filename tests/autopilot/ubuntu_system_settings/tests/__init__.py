@@ -173,7 +173,8 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
         """ Go to SystemUpdates Page """
         super(SystemUpdatesBaseTestCase, self).setUp()
         # Click on 'System Updates' option
-        button = self.main_view.select_single(objectName='entryComponent-system-update')
+        button = self.main_view.select_single(
+            objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
         self.pointer.move_to_object(button)
         self.pointer.click()
@@ -181,4 +182,5 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
     @property
     def updates_page(self):
         """ Return 'System Update' page """
-        return self.main_view.select_single(objectName='entryComponent-system-update')
+        return self.main_view.select_single(
+            objectName='entryComponent-system-update')
