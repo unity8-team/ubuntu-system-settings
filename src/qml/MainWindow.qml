@@ -101,32 +101,9 @@ MainView {
     PageStack {
         id: pageStack
 
-        Loader {
+        PageLoader {
             id: pageLoader
-            property variant options
-
-            function push(page, opts) {
-                pageLoader.sourceComponent = page
-                pageLoader.options = opts
-            }
-
-            onLoaded: {
-                timer.running = false
-                console.log(pageLoader.sourceComponent)
-                pageStack.push(pageLoader.sourceComponent, options)
-            }
-
-            onStatusChanged: {
-                if (status != Loader.Ready)
-                    timer.running = true
-            }
-        }
-
-        Timer {
-            id: timer
-            interval: 5000
-            running: false
-            onTriggered: console.log("ping")
+            anchors.fill: parent
         }
 
         Page {
