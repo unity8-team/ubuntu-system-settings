@@ -103,15 +103,7 @@ ItemPage {
                 Qt.inputMethod.hide()
                 var popupObj = PopupUtils.open(timePicker);
                 popupObj.accepted.connect(
-                            function(hour, minute, second,
-                                     day, month, year) {
-                                var newDate =  new Date(year,
-                                                        month,
-                                                        day,
-                                                        hour,
-                                                        minute,
-                                                        second)
-                                // Milliseconds to microseconds
+                            function(newDate) {
                                 timeDatePanel.setTime(newDate.getTime() * 1000)
                 })
             }

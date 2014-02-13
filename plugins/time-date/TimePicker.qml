@@ -20,150 +20,71 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
+import Ubuntu.Components.Pickers 0.1
 
 Dialog {
     id: root
     title: i18n.tr("Set time & date")
 
-    property alias hour: hourScroller.currentIndex
-    property alias minute: minuteScroller.currentIndex
-    property alias seconds: secondScroller.currentIndex
-    // 1 - 31
-    property int day: priv.now.getDate() - 1
-    // 0 - 11
-    property alias month: monthScroller.currentIndex
-    property int year: priv.now.getFullYear()
-    property alias minYear: yearScroller.min
-    property alias maxYear: yearScroller.max
-
-    signal accepted(int hours, int minutes, int seconds,
-                    int day, int month, int year)
+    signal accepted(date date)
     signal rejected
 
-    QtObject {
-        id: priv
-        property date now: new Date()
+    property date date
 
-        function getDays(month, year) {
-            switch(month) {
-            case 1:
-                if (((year % 4 === 0) &&
-                     (year % 100 !== 0))
-                        || (year % 400 === 0)) {
-                    return 29;
-                }
-                return 28;
-            case 3:
-            case 5:
-            case 8:
-            case 10:
-                return 30;
-            default:
-                return 31;
-            }
-        }
+    onDateChanged: {
+        currentDate.value = Qt.formatDate(date, "d MMMM yyyy")
+        currentTime.value = Qt.formatTime(date, "h:mm:ssAP")
     }
 
-    Label {
-        text: i18n.tr("Time")
-    }
-    Row {
-        height: units.gu(17)
-
-        Scroller {
-            id: hourScroller
-            objectName: "hourScroller"
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            width: parent.width / 3
-            labelText: i18n.tr("Hour")
-
-            min: 00
-            max: 23
-            currentIndex: priv.now.getHours()
-        }
-        Scroller {
-            id: minuteScroller
-            objectName: "minuteScroller"
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            width: parent.width / 3
-            labelText: i18n.tr("Minute")
-
-            min: 00
-            max: 59
-            currentIndex: priv.now.getMinutes()
-        }
-        Scroller {
-            id: secondScroller
-            objectName: "secondScroller"
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            width: parent.width / 3
-            labelText: i18n.tr("Second")
-
-            min: 00
-            max: 59
-            currentIndex: priv.now.getSeconds()
-        }
-    }
-
-    Label {
-        text: i18n.tr("Date")
+    Timer {
+        id: timer
+        onTriggered: date = new Date()
+        triggeredOnStart: true
+        repeat: true
+        running: true
     }
 
     Row {
-        height: units.gu(17)
-        Scroller {
-            id: dayScroller
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            width: parent.width / 3
-            labelText: i18n.tr("Day")
-            min: 1
-            max: priv.getDays(root.month,
-                              root.year)
-            currentIndex: priv.now.getDate() - 1
-            onCurrentIndexChanged: root.day = currentIndex + 1
-        }
-        Scroller {
-            id: monthScroller
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
-            width: parent.width / 3
-            labelText: i18n.tr("Month")
-            currentIndex: priv.now.getMonth()
+        ListItem.SingleValue {
+            id: currentTime
+            property alias date: root.date
+            property Item picker
 
-            model: {
-                var months = []
-                for (var i = 0; i < 12; ++i)
-                    months.push(Qt.locale().standaloneMonthName(i))
-                return months
+            text: "Time"
+            showDivider: false
+            onClicked: {
+                timer.running = false
+                picker = PickerPanel.openDatePicker(currentTime,
+                                                   "date",
+                                                   "Hours|Minutes|Seconds")
             }
-
         }
-        Scroller {
-            id: yearScroller
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
+
+        Connections {
+            target: currentTime.picker
+            onClosed: buttonSet.enabled = true
+        }
+    }
+
+    Row {
+        ListItem.SingleValue {
+            id: currentDate
+            property alias date: root.date
+            property Item picker
+
+            text: "Date"
+            showDivider: false
+            onClicked: {
+                timer.running = false
+                picker = PickerPanel.openDatePicker(currentDate,
+                                                   "date",
+                                                   "Years|Months|Days")
             }
-            width: parent.width / 3
-            labelText: i18n.tr("Year")
-            min: 1970
-            max: 2048
-            currentIndex: priv.now.getFullYear() - min
-            onCurrentIndexChanged: root.year = currentIndex + min
+        }
+
+        Connections {
+            target: currentTime.picker
+            onClosed: buttonSet.enabled = true
         }
     }
 
@@ -178,12 +99,13 @@ Dialog {
             width: (parent.width - parent.spacing) / 2
         }
         Button {
+            id: buttonSet
             objectName: "TimePickerOKButton"
             text: i18n.tr("Set")
+            enabled: false
 
             onClicked: {
-                root.accepted(root.hour, root.minute, root.seconds,
-                              root.day, root.month, root.year)
+                root.accepted(root.date)
                 PopupUtils.close(root)
             }
             width: (parent.width - parent.spacing) / 2

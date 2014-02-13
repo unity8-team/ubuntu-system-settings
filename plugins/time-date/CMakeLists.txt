@@ -1,6 +1,6 @@
 include_directories(${GLIB_INCLUDE_DIRS} ${TIMEZONEMAP_INCLUDE_DIRS})
 
-set(QML_SOURCES ChooseTimeZone.qml PageComponent.qml Scroller.qml TimePicker.qml)
+set(QML_SOURCES ChooseTimeZone.qml PageComponent.qml TimePicker.qml)
 
 add_library(UbuntuTimeDatePanel MODULE plugin.h
   timedate.h
