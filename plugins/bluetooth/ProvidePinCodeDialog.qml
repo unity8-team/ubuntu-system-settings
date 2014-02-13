@@ -46,6 +46,7 @@ Dialog {
         focus: true
         Component.onCompleted: selectAll()
         maximumLength: 16
+        inputMethodHints: Qt.ImhNoPredictiveText
     }
 
     Row {

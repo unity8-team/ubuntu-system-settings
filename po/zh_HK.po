@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-12-16 11:18+0000\n"
+"POT-Creation-Date: 2014-01-31 12:33+0100\n"
 "PO-Revision-Date: 2013-11-03 15:03+0000\n"
 "Last-Translator: Anthony Wong <anthony.wong@canonical.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
@@ -15,1446 +15,1470 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-12-17 06:17+0000\n"
-"X-Generator: Launchpad (build 16869)\n"
+"X-Launchpad-Export-Date: 2014-02-01 06:55+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:30
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr "啟動器的內容與版面配置、主畫面的篩選條件等，皆會還原至原始設定。"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
+msgid "Display language"
+msgstr "顯示語言"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:32
-msgid "Reset launcher & home screen"
-msgstr "重置啟動器與主畫面"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetLauncherHome.qml:40
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//EraseEverything.qml:36
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetAllSettings.qml:36
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:310
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//DisplayLanguage.qml:91
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:113
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePinCodeDialog.qml:54
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:173
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Preview.qml:96
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:91
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:310
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:40
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:36
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:36
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:173
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:96
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
 msgid "Cancel"
 msgstr "取消"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//EraseEverything.qml:29
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr "所有文件、儲存的遊戲、設定以及其他項目皆會從此手機永久刪除。"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:111
+msgid "Confirm"
+msgstr "確認"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//EraseEverything.qml:31
-msgid "Erase & reset everything"
-msgstr "抹除並重設每個設定"
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:31
+#: settings.js:12
+msgid "Language & Text"
+msgstr "語言與文字"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "重置所有系統設定"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:67
+msgid "Display language…"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//PageComponent.qml:32
-#: settings.js:2
-msgid "Reset phone"
-msgstr "重置手機"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:78
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "鍵盤配置"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//PageComponent.qml:62
-msgid "Reset launcher & home screen…"
-msgstr "重置啟動器與主畫面…"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:93
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:103
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:27
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "拼字檢查"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//PageComponent.qml:75
-msgid "Reset all system settings…"
-msgstr "重置所有系統設定…"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:113
+msgid "Auto completion"
+msgstr "自動完成"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/reset//PageComponent.qml:88
-msgid "Erase & reset everything…"
-msgstr "抹除並重置每項設定…"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:123
+msgid "Word suggestions"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:136
+msgid "Auto capitalization"
+msgstr "自動大寫"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:146
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "在每句句子開頭打開 Shift 使首個字母大寫"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:153
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:130
+msgid "Keyboard sound"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "目前配置："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "所有可用配置："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "目前會檢查拼字的語言："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "所有可用語言："
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/wifi//PageComponent.qml:27
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:330
-#: settings.js:16
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/wifi//PageComponent.qml:27
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:331
+#: settings.js:22
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:30
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
+msgid "Stop playing"
+msgstr "停止播放"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:32
+#: settings.js:34
+msgid "Sound"
+msgstr "聲音"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:55
+msgid "Phone calls:"
+msgstr "通話數："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:59
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:65
+msgid "Ringtone"
+msgstr "鈴聲"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:76
+msgid "Vibrate when ringing"
+msgstr "鈴聲響時震動"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
+msgid "Vibrate in Silent Mode"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
+msgid "Messages:"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:93
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
+msgid "Message received"
+msgstr "收到訊息"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
+msgid "Vibrate with message sound"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:122
+msgid "Other sounds:"
+msgstr "其他聲音："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:138
+msgid "Lock sound"
+msgstr "聲音鎖定"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SilentModeWarning.qml:30
+msgid "The phone is in Silent Mode."
+msgstr "電話現於無聲模式。"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:29
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:73
+msgid "Phone locking"
+msgstr "鎖定電話"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:40
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:105
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:212
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:220
+msgid "None"
+msgstr "無"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:41
+msgid "Passcode"
+msgstr "密碼"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:42
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:332
+msgid "Passphrase"
+msgstr "密語"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:44
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:30
+msgid "Lock security"
+msgstr "保安鎖定"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:62
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
+msgid "Lock when idle"
+msgstr "閒置時鎖定"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:63
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
+msgid "Sleep when idle"
+msgstr "閒置時睡眠"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:65
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:75
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 分鐘"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr "睡眠時馬上鎖定"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:33
+#: settings.js:40
+msgid "Security & Privacy"
+msgstr "保安與私隱"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:50
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:124
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:50
+msgid "Phone and Internet"
+msgstr "電話與互聯網"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:52
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:125
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:50
+msgid "Phone only"
+msgstr "僅電話"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:68
+msgid "Security:"
+msgstr "保安："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:84
+msgid "SIM PIN"
+msgstr "SIM 密碼"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:90
+msgid "Privacy:"
+msgstr "私隱："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:94
+msgid "Stats on welcome screen"
+msgstr "歡迎畫面的統計"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:107
+msgid "Messages on welcome screen"
+msgstr "歡迎畫面的訊息"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:122
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:29
+msgid "Dash search"
+msgstr "Dash 搜尋"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:140
+msgid "Location access"
+msgstr "位置存取"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:148
+msgid "Other app access"
+msgstr "其他程式存取"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:153
+msgid "Diagnostics"
+msgstr "診斷"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:158
+msgid "Sent"
+msgstr "已傳送"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:161
+msgid "Not sent"
+msgstr "不傳送"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:49
+msgid "Return results from:"
+msgstr "傳回來自此處的結果："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:30
 msgid "Location"
 msgstr "位置"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:48
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:48
 msgid "Location detection"
 msgstr "位置偵測"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:70
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr "以 GPS 偵測你的大約位置。關閉 GPS 以省電。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:72
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr "以 Wi-Fi 和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:74
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr "以 Wi-Fi (目前關閉) 偵測你的大約位置。關閉位置偵測以省電。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:76
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr "以 Wi-Fi、無線電話基地台和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:78
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr "以 Wi-Fi、無線電話基地台 (目前沒有連線) 和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:80
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr "以 Wi-Fi (目前關閉)、無線電話基地台和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:82
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:82
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr "以 Wi-Fi (目前關閉)、無線電話基地台 (目前沒有連線) 和 GPS 偵測你的大約位置。關閉位置偵測以省電。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Location.qml:89
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
 msgstr "允許存取位置："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:29
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:73
-msgid "Phone locking"
-msgstr "鎖定電話"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:40
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:105
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:212
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:220
-msgid "None"
-msgstr "無"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:41
-msgid "Passcode"
-msgstr "密碼"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:42
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:332
-msgid "Passphrase"
-msgstr "密語"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:44
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:30
-msgid "Lock security"
-msgstr "保安鎖定"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:62
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:302
-msgid "Lock when idle"
-msgstr "閒置時鎖定"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:63
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:302
-msgid "Sleep when idle"
-msgstr "閒置時睡眠"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:65
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:75
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 分鐘"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
-msgstr "睡眠時馬上鎖定"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:33
-#: settings.js:50
-msgid "Security & Privacy"
-msgstr "保安與私隱"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:50
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:124
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Dash.qml:50
-msgid "Phone and Internet"
-msgstr "電話與互聯網"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:52
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:125
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Dash.qml:50
-msgid "Phone only"
-msgstr "僅電話"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:68
-msgid "Security:"
-msgstr "保安："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:84
-msgid "SIM PIN"
-msgstr "SIM 密碼"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:90
-msgid "Privacy:"
-msgstr "私隱："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:94
-msgid "Stats on welcome screen"
-msgstr "歡迎畫面的統計"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:107
-msgid "Messages on welcome screen"
-msgstr "歡迎畫面的訊息"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:122
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "Dash 搜尋"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:140
-msgid "Location access"
-msgstr "位置存取"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:148
-msgid "Other app access"
-msgstr "其他程式存取"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:153
-msgid "Diagnostics"
-msgstr "診斷"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:158
-msgid "Sent"
-msgstr "已傳送"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//PageComponent.qml:161
-msgid "Not sent"
-msgstr "不傳送"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:78
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
 msgstr "更改密碼"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:80
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
 msgstr "更改密語"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:87
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
 msgstr "改為輕掃"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:89
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
 msgstr "改為密碼"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:91
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:91
 msgid "Switch to passphrase"
 msgstr "改為密語"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:100
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:100
 msgid "Existing passcode"
 msgstr "現有密碼"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:102
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:102
 msgid "Existing passphrase"
 msgstr "現有密語"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:150
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
 msgstr "密碼不對。請重試。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:153
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
 msgstr "密語不對。請重試。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:166
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:166
 msgid "Choose passcode"
 msgstr "選擇密碼"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:168
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:168
 msgid "Choose passphrase"
 msgstr "選擇密語"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:212
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:212
 msgid "Confirm passcode"
 msgstr "確認密碼"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:214
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:214
 msgid "Confirm passphrase"
 msgstr "確認密語"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:256
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
 msgstr "密碼不符。請重試。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:259
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
 msgstr "密語不符。請重試。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:273
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:273
 msgid "Unset"
 msgstr "取消設定"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:274
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:274
 msgid "Continue"
 msgstr "繼續"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:326
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
 msgstr "以此為電話解鎖："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:330
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
 msgstr "輕掃 (無保安)"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:331
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
 msgstr "4位密碼"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:333
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
 msgstr "輕掃 (無保安)… "
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:334
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
 msgstr "4位密碼…"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:335
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
 msgstr "密語…"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:376
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
 msgstr "更改密碼…"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//LockSecurity.qml:377
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
 msgstr "更改密語…"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/security-privacy//Dash.qml:49
-msgid "Return results from:"
-msgstr "傳回來自此處的結果："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//SpellChecking.qml:27
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//SpellChecking.qml:36
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:97
-msgid "Spell checking"
-msgstr "拼字檢查"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "目前會檢查拼字的語言："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "所有可用語言："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr "顯示語言"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//DisplayLanguage.qml:111
-msgid "Confirm"
-msgstr "確認"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//KeyboardLayouts.qml:26
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:81
-msgid "Keyboard layouts"
-msgstr "鍵盤配置"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "目前配置："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "所有可用配置："
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:31
-#: settings.js:58
-msgid "Language & Text"
-msgstr "語言與文字"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:67
-msgid "Display language…"
-msgstr ""
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:109
-msgid "Auto completion"
-msgstr "自動完成"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:121
-msgid "Word suggestions"
-msgstr ""
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:134
-msgid "Auto capitalization"
-msgstr "自動大寫"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:144
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "在每句句子開頭打開 Shift 使首個字母大寫"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/language//PageComponent.qml:154
-msgid "Keyboard sound"
-msgstr ""
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:33
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:127
-msgid "Storage"
-msgstr "儲存空間"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:88
-msgid "Used by Ubuntu"
-msgstr "Ubuntu 所使用"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:89
-msgid "Movies"
-msgstr "電影"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:90
-msgid "Audio"
-msgstr "音訊"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:91
-msgid "Pictures"
-msgstr "圖片"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:92
-msgid "Other files"
-msgstr "其他檔案"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:93
-msgid "Used by apps"
-msgstr "程式所使用"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:143
-msgid "Total storage"
-msgstr "總計儲存空間"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:155
-msgid "Free space"
-msgstr "可用空間"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:175
-msgid "Installed apps"
-msgstr "已安裝程式"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:176
-msgid "By name"
-msgstr "按名稱"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:176
-msgid "By size"
-msgstr "按大小"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Storage.qml:204
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:85
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:93
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:115
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:129
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:236
-msgid "N/A"
-msgstr "不適用"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//Software.qml:10
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:139
-msgid "Software licenses"
-msgstr "軟件授權條款"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:33
-#: settings.js:68
-msgid "About this phone"
-msgstr "關於本電話"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:84
-msgid "Serial"
-msgstr "序號"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:98
-msgid "Software:"
-msgstr "軟件："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:103
-msgid "OS"
-msgstr "作業系統"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:110
-msgid "Last updated"
-msgstr "最近更新"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:111
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:53
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:330
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:96
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:311
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:320
-msgid "Never"
-msgstr "從未更新"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:117
-msgid "Check for updates"
-msgstr "檢查更新"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:134
-msgid "Legal:"
-msgstr "法律資訊："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/about//PageComponent.qml:147
-msgid "Regulatory info"
-msgstr "管制資訊"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//SoundsList.qml:58
-msgid "Stop playing"
-msgstr "停止播放"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:32
-#: settings.js:76
-msgid "Sound"
-msgstr "聲音"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:55
-msgid "Phone calls:"
-msgstr "通話數："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:59
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:65
-msgid "Ringtone"
-msgstr "鈴聲"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:76
-msgid "Vibrate when ringing"
-msgstr "鈴聲響時震動"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:84
-msgid "Vibrate in silent mode"
-msgstr "無聲模式時震動"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:89
-msgid "Other sounds:"
-msgstr "其他聲音："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:93
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:99
-msgid "Message received"
-msgstr "收到訊息"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:109
-msgid "Keyboard sounds"
-msgstr "鍵盤聲音"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//PageComponent.qml:117
-msgid "Lock sound"
-msgstr "聲音鎖定"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/sound//SilentModeWarning.qml:30
-msgid "The phone is in Silent Mode."
-msgstr "電話現於無聲模式。"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:27
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:60
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:46
-msgid "Call forwarding"
-msgstr "來電轉駁"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:74
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr "當無法接聽、忙線、關機或信號接收不到時將電話轉駁至另一個號碼。"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:91
-msgid "Call forwarding status can’t be checked right now. Try again later."
-msgstr "現時無法檢查電話轉駁的狀態。請稍候重試。"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:102
-msgid "Divert to"
-msgstr "轉駁至"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:113
-msgid "Contacts…"
-msgstr "聯絡人…"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallForwarding.qml:113
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:182
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Preview.qml:102
-msgid "Set"
-msgstr "設定"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//Services.qml:30
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:61
-#, qt-format
-msgid "%1 Services"
-msgstr "%1 服務"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallWaiting.qml:27
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallWaiting.qml:53
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:52
-msgid "Call waiting"
-msgstr "電話待接"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//CallWaiting.qml:67
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr "讓您在接聽電話時接聽另一個電話、或開始另一個電話，又或在兩者之間切換"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:28
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:82
-#: settings.js:82
-msgid "Phone"
-msgstr "電話"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr "SIM 卡"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/phone//ServiceInfo.qml:35
-msgid "Call"
-msgstr "通話"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:29
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:327
-msgid "Auto download"
-msgstr "自動下載"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:34
-msgid "Download future updates automatically:"
-msgstr "自動下載未來更新："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:54
-msgid "When on wi-fi"
-msgstr "當有 Wi-Fi 時"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:55
-msgid "On any data connection"
-msgstr "當有任何數據連線時"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//Download.qml:56
-msgid "Data charges may apply."
-msgstr "可能要數據費。"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:32
-#: settings.js:88
-msgid "Updates"
-msgstr "更新"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:51
-msgid "Checking for updates…"
-msgstr "正在檢查更新..."
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:88
-msgid "Apply update failed:"
-msgstr "未能套用更新："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:98
-msgid "Pause failed:"
-msgstr "未能暫停："
-
-#. TRANSLATORS: %1 is the size of the update in GB
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:113
-#, qt-format
-msgid "%1 GB"
-msgstr "%1 GB"
-
-#. TRANSLATORS: %1 is the size of the update in MB
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:116
-#, qt-format
-msgid "%1 MB"
-msgstr "%1 MB"
-
-#. TRANSLATORS: %1 is the date when the device was last updated
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:125
-msgid "No software update available"
-msgstr "無軟件更新提供"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:125
-#, qt-format
-msgid "Last updated %1"
-msgstr "最後更新於 %1"
-
-#. TRANSLATORS: %1 is the number of seconds remaining
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:138
-#, qt-format
-msgid "About %1 second remaining"
-msgid_plural "About %1 seconds remaining"
-msgstr[0] "大約還有 %1 秒"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:140
-msgid "No estimate for the download"
-msgstr "無估計下載時間"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:146
-msgid "Paused"
-msgstr "暫停"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:155
-msgid "Download failed:"
-msgstr "未能下載："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:210
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:305
-msgid "Retry"
-msgstr "重試"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:275
-msgid "Pause downloading"
-msgstr "暫停下載"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:282
-msgid "Resume downloading"
-msgstr "恢復下載"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:298
-msgid "Download"
-msgstr "下載"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:312
-msgid "Install & Restart"
-msgstr "安裝並重新啟動"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:332
-msgid "On wi-fi"
-msgstr "當有 Wi-Fi 時"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/system-update//PageComponent.qml:334
-msgid "Always"
-msgstr "一定"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//ChooseCarrier.qml:28
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:114
-msgid "Carrier"
-msgstr "通訊商"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//ChooseCarrier.qml:78
-msgid "Refresh"
-msgstr "刷新"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//ChooseCarrier.qml:95
-msgid "Searching"
-msgstr "正在搜尋"
-
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:28
-#: settings.js:98
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:28
+#: settings.js:48
 msgid "Cellular"
 msgstr "手機"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:67
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:67
 msgid "Cellular data:"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:68
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:68
 msgid "Off"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:69
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:69
 msgid "2G only (saves battery)"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:70
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:70
 msgid "2G/3G/4G (faster)"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:81
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:81
 msgid "Cellular data"
 msgstr "手機數據"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:90
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:90
 msgid "Data roaming"
 msgstr "數據漫遊"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:99
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:99
 msgid "Data usage statistics"
 msgstr "數據用量統計"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:108
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:108
 msgid "Choose carrier:"
 msgstr "選擇通訊商："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:109
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:47
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:66
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:109
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:66
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:47
 msgid "Automatically"
 msgstr "自動"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:109
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:47
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:66
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:109
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:66
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:47
 msgid "Manually"
 msgstr "手動"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/cellular//PageComponent.qml:125
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:114
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:28
+msgid "Carrier"
+msgstr "通訊商"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:115
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:203
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:85
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:93
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:129
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:236
+msgid "N/A"
+msgstr "不適用"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:125
 msgid "APN"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePasskeyDialog.qml:28
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePinCodeDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr "藍牙配對請求"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:78
+msgid "Refresh"
+msgstr "刷新"
 
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "請確定顯示在「%1」的密碼和這個相同"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:95
+msgid "Searching"
+msgstr "正在搜尋"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "確認密碼"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:30
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr "啟動器的內容與版面配置、主畫面的篩選條件等，皆會還原至原始設定。"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:32
+msgid "Reset launcher & home screen"
+msgstr "重置啟動器與主畫面"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:32
+#: settings.js:60
+msgid "Reset phone"
+msgstr "重置手機"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:62
+msgid "Reset launcher & home screen…"
+msgstr "重置啟動器與主畫面…"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:75
+msgid "Reset all system settings…"
+msgstr "重置所有系統設定…"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:88
+msgid "Erase & reset everything…"
+msgstr "抹除並重置每項設定…"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:29
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr "所有文件、儲存的遊戲、設定以及其他項目皆會從此手機永久刪除。"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:31
+msgid "Erase & reset everything"
+msgstr "抹除並重設每個設定"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "重置所有系統設定"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:29
+#: settings.js:66
+msgid "Time & Date"
+msgstr "時間與日期"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:52
+msgid "Time zone:"
+msgstr "時區："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:65
+msgid "Set the time and date:"
+msgstr "設定時間與日期："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "設定時間與日期"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "時間"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "時"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "分"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "秒"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "日期"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "日"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "月"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "年"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:182
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:102
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
+msgid "Set"
+msgstr "設定"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "時區"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "設定時區："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:114
+msgid "Enter your current location."
+msgstr "輸入你目前的位置。"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:114
+msgid "No matching place"
+msgstr "無符合的地點"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Software.qml:10
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:139
+msgid "Software licenses"
+msgstr "軟件授權條款"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:33
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:127
+msgid "Storage"
+msgstr "儲存空間"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:88
+msgid "Used by Ubuntu"
+msgstr "Ubuntu 所使用"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
+msgid "Videos"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
+msgid "Audio"
+msgstr "音訊"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:91
+msgid "Pictures"
+msgstr "圖片"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:92
+msgid "Other files"
+msgstr "其他檔案"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:93
+msgid "Used by apps"
+msgstr "程式所使用"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:143
+msgid "Total storage"
+msgstr "總計儲存空間"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:155
+msgid "Free space"
+msgstr "可用空間"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:175
+msgid "By name"
+msgstr "按名稱"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:175
+msgid "By size"
+msgstr "按大小"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:33
+#: settings.js:76
+msgid "About this phone"
+msgstr "關於本電話"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:84
+msgid "Serial"
+msgstr "序號"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:98
+msgid "Software:"
+msgstr "軟件："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:103
+msgid "OS"
+msgstr "作業系統"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:110
+msgid "Last updated"
+msgstr "最近更新"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:111
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:312
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:321
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:96
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:52
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:374
+msgid "Never"
+msgstr "從未更新"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:117
+msgid "Check for updates"
+msgstr "檢查更新"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:134
+msgid "Legal:"
+msgstr "法律資訊："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:147
+msgid "Regulatory info"
+msgstr "管制資訊"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:71
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:71
 #, qt-format
 msgid "%1 (Connecting…)"
 msgstr "%1 (連接中…)"
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:74
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:74
 #, qt-format
 msgid "%1 (Disconnecting…)"
 msgstr "%1 (斷線中…)"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:81
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:81
 msgid "Computer"
 msgstr "電腦"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:83
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:82
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:28
+#: settings.js:130
+msgid "Phone"
+msgstr "電話"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:83
 msgid "Modem"
 msgstr "數據機"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:84
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:137
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:84
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:139
 msgid "Network"
 msgstr "網絡"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:85
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
 msgstr "耳機(Headset)"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:86
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:86
 msgid "Headphones"
 msgstr "耳筒"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:87
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:87
 msgid "Video"
 msgstr "影片"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:88
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:88
 msgid "Other Audio"
 msgstr "其他音訊"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:89
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:89
 msgid "Joypad"
 msgstr "遊戲手柄"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:90
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:90
 msgid "Keyboard"
 msgstr "鍵盤"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:91
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:91
 msgid "Tablet"
 msgstr "繪圖板"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:92
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:92
 msgid "Mouse"
 msgstr "滑鼠"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:93
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:93
 msgid "Printer"
 msgstr "打印機"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:94
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:94
 msgid "Camera"
 msgstr "相機"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:95
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:95
 msgid "Other"
 msgstr "其他"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:101
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:101
 msgid "Excellent"
 msgstr "極好"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:102
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:102
 msgid "Good"
 msgstr "好"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:103
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:103
 msgid "Fair"
 msgstr "普通"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:104
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:104
 msgid "Poor"
 msgstr "差"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:111
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:130
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:360
-#: settings.js:110
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:111
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:130
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:361
+#: settings.js:92
 msgid "Bluetooth"
 msgstr "藍牙"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:149
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:149
 msgid "Connected headset:"
 msgstr "已連接耳機(Headset)："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:177
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:177
 msgid "Connect a different headset:"
 msgstr "連接不同耳機(Headset)："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:177
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:177
 msgid "Connect a headset:"
 msgstr "連接耳機(Headset)："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:203
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:203
 msgid "None detected"
 msgstr "偵測不到"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:219
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:219
 msgid "Name"
 msgstr "名稱"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:223
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:223
 msgid "Type"
 msgstr "類型"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:227
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:227
 msgid "Signal Strength"
 msgstr "訊號強度"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//PageComponent.qml:232
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:232
 msgid "Disconnect"
 msgstr "斷線"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "藍牙配對請求"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
 msgstr "「%1」的密碼"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePasskeyDialog.qml:62
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/bluetooth//ProvidePinCodeDialog.qml:62
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:62
 msgid "Pair"
 msgstr "配對"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "設定時間與日期"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "時間"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "時"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "分"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "秒"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "日期"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "日"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "月"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "年"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "時區"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "設定時區："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:113
-msgid "Enter your current location."
-msgstr "輸入你目前的位置。"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//ChooseTimeZone.qml:113
-msgid "No matching place"
-msgstr "無符合的地點"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:29
-#: settings.js:116
-msgid "Time & Date"
-msgstr "時間與日期"
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:52
-msgid "Time zone:"
-msgstr "時區："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/time-date//PageComponent.qml:65
-msgid "Set the time and date:"
-msgstr "設定時間與日期："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr "當不使用此時間後鎖定電話："
-
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "令電話睡眠，當不使用："
-
-#. TRANSLATORS: %1 is the number of minutes
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:77
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:81
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:85
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:89
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:93
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:308
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:317
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "%1 分鐘後"
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "請確定顯示在「%1」的密碼和這個相同"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr "較短的時間會較安全。電話在談話或播放影片時不會鎖定。"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "確認密碼"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
-msgstr "電話在談話或播放影片時不會睡眠。"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//WallpaperGrid.qml:121
+msgid "Remove"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:41
+msgid "Choose background"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:42
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:173
+msgid "Home screen"
+msgstr "主畫面"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:42
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:130
+msgid "Welcome screen"
+msgstr "歡迎畫面"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:46
+msgid "Photo/Image"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:86
+msgid "Ubuntu Art"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:101
+msgid "Custom"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:67
+msgid "Preview"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:31
+#: settings.js:98
+msgid "Background"
+msgstr "背景"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:198
+msgid "Same background for both"
+msgstr "兩者使用相同背景"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:199
+msgid "Different background for each"
+msgstr "各自使用不同背景"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:35
-#: settings.js:126
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:35
+#: settings.js:114
 msgid "Battery"
 msgstr "電池"
 
 #. TRANSLATORS: %1 is the number of seconds
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:47
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:47
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
 msgstr[0] "%1 秒前"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:50
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:50
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] "%1 分鐘前"
 
 #. TRANSLATORS: %1 is the number of hours
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:53
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:53
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] "%1 小時前"
 
 #. TRANSLATORS: %1 is the number of days
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:56
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:56
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
 msgstr[0] "%1 天前"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:76
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:76
 msgid "Charging now"
 msgstr "正在充電"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:81
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:81
 msgid "Last full charge"
 msgstr "最後充滿電"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:86
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:86
 msgid "Fully charged"
 msgstr "充滿電"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:124
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:124
 msgid "Charge level"
 msgstr "充電水平"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:132
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:132
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:241
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:241
 msgid "Ways to reduce battery use:"
 msgstr "減少使用電池的方法："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:245
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:245
 msgid "Display brightness"
 msgstr "顯示亮度"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:391
+#. TRANSLATORS: %1 is the number of minutes
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:309
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:318
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:77
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:81
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:85
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:89
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "%1 分鐘後"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:392
 msgid "GPS"
 msgstr "GPS"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/battery//PageComponent.qml:410
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:411
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "要準確偵測位置需要 GPS 和/或 Wi-Fi。"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:31
-#: settings.js:132
-msgid "Background"
-msgstr "背景"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "當不使用此時間後鎖定電話："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:130
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:42
-msgid "Welcome screen"
-msgstr "歡迎畫面"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "令電話睡眠，當不使用："
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:173
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:42
-msgid "Home screen"
-msgstr "主畫面"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:107
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr "較短的時間會較安全。電話在談話或播放影片時不會鎖定。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:198
-msgid "Same background for both"
-msgstr "兩者使用相同背景"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "電話在談話或播放影片時不會睡眠。"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//MainPage.qml:199
-msgid "Different background for each"
-msgstr "各自使用不同背景"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:29
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:371
+msgid "Auto download"
+msgstr "自動下載"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//WallpaperGrid.qml:121
-msgid "Remove"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:34
+msgid "Download future updates automatically:"
+msgstr "自動下載未來更新："
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:53
+msgid "When on wi-fi"
+msgstr "當有 Wi-Fi 時"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:54
+msgid "On any data connection"
+msgstr "當有任何數據連線時"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:55
+msgid "Data charges may apply."
+msgstr "可能要數據費。"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:34
+#: settings.js:120
+msgid "Updates"
+msgstr "更新"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:46
+msgid "Update System"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Preview.qml:67
-msgid "Preview"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:47
+msgid "The phone needs to restart to install the system update."
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:41
-msgid "Choose background"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:50
+msgid "Install & Restart"
+msgstr "安裝並重新啟動"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:59
+msgid "Not Now"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:46
-msgid "Photo/Image"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:65
+msgid "Install"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:86
-msgid "Ubuntu Art"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:83
+msgid "Software is up to date"
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/plugins/background//Wallpapers.qml:101
-msgid "Custom"
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:90
+msgid "System update has failed."
 msgstr ""
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:106
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:145
+msgid "System update failed."
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:176
+msgid "Checking for updates…"
+msgstr "正在檢查更新..."
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:194
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:195
+msgid "Pause All"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:256
+msgid "Retry"
+msgstr "重試"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:272
+msgid "Download"
+msgstr "下載"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:272
+msgid "Update"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:273
+msgid "Resume"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:274
+msgid "Pause"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:319
+msgid "Installing"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:355
+msgid "Version: "
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:376
+msgid "On wi-fi"
+msgstr "當有 Wi-Fi 時"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:378
+msgid "Always"
+msgstr "一定"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:432
+msgid "Installing update…"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:446
+msgid " bytes"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:449
+msgid " KiB"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:452
+msgid " MiB"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:455
+msgid " GiB"
+msgstr ""
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:30
+msgid "SIM"
+msgstr "SIM 卡"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:46
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:27
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:60
+msgid "Call forwarding"
+msgstr "來電轉駁"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:52
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:27
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:53
+msgid "Call waiting"
+msgstr "電話待接"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:61
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//Services.qml:30
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 服務"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:67
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr "讓您在接聽電話時接聽另一個電話、或開始另一個電話，又或在兩者之間切換"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//ServiceInfo.qml:35
+msgid "Call"
+msgstr "通話"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:74
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr "當無法接聽、忙線、關機或信號接收不到時將電話轉駁至另一個號碼。"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:91
+msgid "Call forwarding status can’t be checked right now. Try again later."
+msgstr "現時無法檢查電話轉駁的狀態。請稍候重試。"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:102
+msgid "Divert to"
+msgstr "轉駁至"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
+msgid "Contacts…"
+msgstr "聯絡人…"
+
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:107
 msgid "System Settings"
 msgstr "系統設定"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:124
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:125
 msgid "Search"
 msgstr "搜尋"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:142
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:144
 msgid "Personal"
 msgstr "個人"
 
-#: /home/laney/dev/canonical/upstream/touch/system-settings/ubuntu-system-settings/src/qml/MainWindow.qml:147
+#: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:149
 msgid "System"
 msgstr "系統"
 
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: settings.js:2
+msgid "Orientation Lock"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:4
-msgid "reset"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:6 settings.js:26 settings.js:32 settings.js:48 settings.js:56
-#: settings.js:66 settings.js:80 settings.js:86 settings.js:96 settings.js:108
-#: settings.js:114 settings.js:124
-msgid "settings"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:8
-msgid "Flight mode"
-msgstr "飛航模式"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:10
-msgid "flight"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:12
-msgid "plane"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:14
-msgid "offline"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:18 settings.js:102
-msgid "network"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:20
-msgid "wireless"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:22
-msgid "wifi"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:24
-msgid "wi-fi"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: settings.js:28
-msgid "Brightness"
-msgstr "亮度"
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: settings.js:30
-msgid "brightness"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:34
-msgid "Example"
-msgstr "例子"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:36
-msgid "example"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:38
-msgid "test"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:40
-msgid "sample"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:42
-msgid "Accessibility"
-msgstr "無障礙"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:44
-msgid "accessibility"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:46
-msgid "a11y"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:52
-msgid "security"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:54
-msgid "privacy"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:60
-msgid "language"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:62
-msgid "lang"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:64
-msgid "i18n"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:70
-msgid "about"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:72
-msgid "device"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:74
-msgid "info"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: settings.js:78
-msgid "sound"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: settings.js:84
-msgid "phone"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:90
-msgid "system"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:92
-msgid "software"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:94
-msgid "update"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:100
-msgid "cellular"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:104
-msgid "mobile"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:106
-msgid "gsm"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: settings.js:112
-msgid "bluetooth"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:118
-msgid "time"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:120
-msgid "date"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:122
-msgid "timezone"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:128
-msgid "battery"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:130
-msgid "power"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:134
-msgid "appearance"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:136
-msgid "background"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:138
-msgid "wallpaper"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:140
-msgid "Orientation lock"
-msgstr "鎖定方向"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:142
 msgid "rotation"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:144
+#: settings.js:6
 msgid "orientation"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:146
+#: settings.js:8
 msgid "lock"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:148
+#: settings.js:10
 msgid "screen"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: settings.js:14
+msgid "language"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: settings.js:16
+msgid "lang"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: settings.js:18
+msgid "i18n"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: settings.js:20 settings.js:32 settings.js:38 settings.js:46 settings.js:58
+#: settings.js:64 settings.js:74 settings.js:96 settings.js:128
+#: settings.js:134 settings.js:140 settings.js:148
+msgid "settings"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: settings.js:24 settings.js:52
+msgid "network"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: settings.js:26
+msgid "wireless"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: settings.js:28
+msgid "wifi"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: settings.js:30
+msgid "wi-fi"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: settings.js:36
+msgid "sound"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: settings.js:42
+msgid "security"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: settings.js:44
+msgid "privacy"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: settings.js:50
+msgid "cellular"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: settings.js:54
+msgid "mobile"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: settings.js:56
+msgid "gsm"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: settings.js:62
+msgid "reset"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: settings.js:68
+msgid "time"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: settings.js:70
+msgid "date"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: settings.js:72
+msgid "timezone"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: settings.js:78
+msgid "about"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: settings.js:80
+msgid "device"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: settings.js:82
+msgid "info"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: settings.js:84
+msgid "Flight Mode"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: settings.js:86
+msgid "flight"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: settings.js:88
+msgid "plane"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: settings.js:90
+msgid "offline"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: settings.js:94
+msgid "bluetooth"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: settings.js:100
+msgid "appearance"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: settings.js:102
+msgid "background"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: settings.js:104
+msgid "wallpaper"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: settings.js:106
+msgid "Example"
+msgstr "例子"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: settings.js:108
+msgid "example"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: settings.js:110
+msgid "test"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: settings.js:112
+msgid "sample"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: settings.js:116
+msgid "battery"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: settings.js:118
+msgid "power"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: settings.js:122
+msgid "system"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: settings.js:124
+msgid "software"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: settings.js:126
+msgid "update"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: settings.js:132
+msgid "phone"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: settings.js:136
+msgid "Brightness"
+msgstr "亮度"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: settings.js:138
+msgid "brightness"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: settings.js:142
+msgid "Accessibility"
+msgstr "無障礙"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: settings.js:144
+msgid "accessibility"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: settings.js:146
+msgid "a11y"
 msgstr ""
