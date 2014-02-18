@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2014-01-15 14:27+0000\n"
-"Last-Translator: ivarela <ivarela@ubuntu.com>\n"
+"PO-Revision-Date: 2014-02-06 20:08+0000\n"
+"Last-Translator: Xuacu Saturio <xuacusk8@gmail.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-02-01 06:54+0000\n"
+"X-Launchpad-Export-Date: 2014-02-07 07:16+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
@@ -132,11 +132,11 @@ msgstr "Vibrar cola llamada"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "Vibrar en mou silenciosu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
 msgid "Messages:"
-msgstr ""
+msgstr "Mensaxes:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:93
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
@@ -145,7 +145,7 @@ msgstr "Mensaxe recibíu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "Vibrar con soníu de mensaxe"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:122
 msgid "Other sounds:"
@@ -464,15 +464,15 @@ msgstr "Datos móviles:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:68
 msgid "Off"
-msgstr ""
+msgstr "Desactiváu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:69
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Sólo 2G (aforra batería)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:70
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (más rápido)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:81
 msgid "Cellular data"
@@ -518,7 +518,7 @@ msgstr "N/A"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:125
 msgid "APN"
-msgstr ""
+msgstr "Nome del puntu d'accesu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:78
 msgid "Refresh"
@@ -663,7 +663,7 @@ msgstr "Usáu por Ubuntu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
 msgid "Videos"
-msgstr ""
+msgstr "Videos"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
 msgid "Audio"
@@ -1086,11 +1086,11 @@ msgstr "Anovamientos"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:46
 msgid "Update System"
-msgstr ""
+msgstr "Anovar el sistema"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:47
 msgid "The phone needs to restart to install the system update."
-msgstr ""
+msgstr "Ye necesario reaniciar pa instalar l'anovamientu del sistema."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:50
 msgid "Install & Restart"
