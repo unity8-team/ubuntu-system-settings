@@ -110,7 +110,7 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
-    """ Class for cellular tests which sets up an Ofono mock """"
+    """ Class for cellular tests which sets up an Ofono mock """
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
