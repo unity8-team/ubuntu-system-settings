@@ -103,7 +103,8 @@ ItemPage {
                                            {homeScreen: systemSettingsSettings.backgroundDuplicate ? true : false,
                                                useSame: systemSettingsSettings.backgroundDuplicate,
                                                backgroundPanel: backgroundPanel,
-                                               current: welcomeBackground
+                                               current: welcomeBackground,
+                                               defaultBackground: defaultBackground
                                             });
 
                             var curItem = pageStack.currentPage;
@@ -146,7 +147,8 @@ ItemPage {
                                            {homeScreen: true,
                                                useSame: systemSettingsSettings.backgroundDuplicate,
                                                backgroundPanel: backgroundPanel,
-                                               current: homeBackground
+                                               current: homeBackground,
+                                               defaultBackground: defaultBackground
                                             });
                             var curItem = pageStack.currentPage;
                             selectedItemConnection.target = curItem;
