@@ -61,7 +61,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
         """ Return pointer """
         return Pointer(self.input_device_class.create())
 
-    def scroll_to_and_click(self, obj):
+    def scroll_to(self, obj):
         self.app.select_single(toolkit_emulators.Toolbar).close()
         page = self.main_view.select_single(objectName='systemSettingsPage')
         page_right = page.globalRect[0] + page.globalRect[2]
@@ -73,6 +73,9 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
                     page_center_x, page_center_y - obj.height * 2)
             # avoid a flick
             sleep(0.5)
+
+    def scroll_to_and_click(self, obj):
+        self.scroll_to(obj)
         self.pointer.click_object(obj)
 
 
@@ -103,6 +106,31 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
         self.add_mock_battery()
         self.launch_system_settings()
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
+
+
+class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
+                                        dbusmock.DBusTestCase):
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+        # Add a mock Ofono environment so we get consistent results
+        (klass.p_mock, klass.obj_ofono) = klass.spawn_server_template(
+            'ofono', stdout=subprocess.PIPE)
+        klass.dbusmock = dbus.Interface(klass.obj_ofono, dbusmock.MOCK_IFACE)
+
+    def setUp(self, panel=None):
+        self.obj_ofono.Reset()
+        super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
+
+    @property
+    def cellular_page(self):
+        """ Returns 'About' page """
+        return self.main_view.select_single(objectName='cellularPage')
+
+    @property
+    def choose_page(self):
+        return self.main_view.select_single(objectName="chooseCarrierPage")
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
