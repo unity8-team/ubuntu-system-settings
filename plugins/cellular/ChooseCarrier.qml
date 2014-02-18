@@ -45,7 +45,8 @@ ItemPage {
         var oS = new Array();
         for (var i in operators)
         {
-            console.log(operators[i].name);
+            if (operators[i].status == "forbidden")
+                continue
             oN.push(operators[i].name);
             oS.push(operators[i].status);
         }
