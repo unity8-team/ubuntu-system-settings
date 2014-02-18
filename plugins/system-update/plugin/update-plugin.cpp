@@ -50,18 +50,23 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     m_systemUpdate(this)
 {
     setVisibility(false);
+    /*
     QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
                   this, SLOT(changeVisibility(const QString&, Update*)));
 
     m_systemUpdate.checkForUpdate();
+    */
 }
 
 void UpdateItem::changeVisibility(const QString& package, Update* update)
 {
     Q_UNUSED(package);
+    /* Disabled as concurrent checking for updates is broken due to
+     * https://bugs.launchpad.net/ubuntu-system-image/+bug/1277589
     if (update->updateRequired()) {
         setVisibility(true);
     }
+    */
 }
 
 void UpdateItem::setVisibility(bool visible)
