@@ -43,34 +43,14 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
                 objectName="carrierSelector")
         # TODO: Once there is a proper ItemSelector emulator, get the items
         # from it and check 'fake.tel' is the selected one.
-        manual = carriers.select_single('Label', text=_("fake.tel"))
+        manual = carriers.select_single('Label', text="fake.tel")
         self.assertThat(manual, NotEquals(None))
         self.assertThat(carriers.selectedIndex, Equals(0))
 
-    @expectedFailure
     def test_alt_network(self):
-        self.dbusmock.AddObject('/ril_0/operator/op2',
-                'org.ofono.NetworkOperator',
-                {
-                    'Name': 'my.cool.telco',
-                    'Status': 'available',
-                    'MobileCountryCode': '777',
-                    'MobileNetworkCode': '22',
-                    'Technologies': ['gsm'],
-                },
-                [
-                    ('GetProperties', '', 'a{sv}',
-                        'ret = self.GetAll("org.ofono.NetworkOperator")'),
-                    ('Register', '', '', ''),
-                ]
-                )
         self.navigate_to_manual()
-        # import pdb
-        # pdb.set_trace()
-        # self.dbus_con.get_object('org.ofono', '/ril_0').GetOperators(dbus_interface='org.ofono.NetworkRegistration')
-        # it's there? what? why doesn't system-settings see it?
         carriers = self.choose_page.select_single(
                 toolkit_emulators.ItemSelector,
                 objectName="carrierSelector")
-        manual = carriers.select_single('Label', text=_("my.cool.telco"))
+        manual = carriers.select_single('Label', text="my.cool.telco")
         self.assertThat(manual, NotEquals(None))

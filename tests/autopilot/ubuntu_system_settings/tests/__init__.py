@@ -121,6 +121,21 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
     def setUp(self, panel=None):
         self.obj_ofono.Reset()
+        self.dbusmock.AddObject('/ril_0/operator/op2',
+                'org.ofono.NetworkOperator',
+                {
+                    'Name': 'my.cool.telco',
+                    'Status': 'available',
+                    'MobileCountryCode': '777',
+                    'MobileNetworkCode': '22',
+                    'Technologies': ['gsm'],
+                },
+                [
+                    ('GetProperties', '', 'a{sv}',
+                        'ret = self.GetAll("org.ofono.NetworkOperator")'),
+                    ('Register', '', '', ''),
+                ]
+                )
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 
     @property
