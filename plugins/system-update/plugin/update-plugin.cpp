@@ -59,9 +59,12 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
 void UpdateItem::changeVisibility(const QString& package, Update* update)
 {
     Q_UNUSED(package);
+    /* Disabled as concurrent checking for updates is broken due to
+     * https://bugs.launchpad.net/ubuntu-system-image/+bug/1277589
     if (update->updateRequired()) {
         setVisibility(true);
     }
+    */
 }
 
 void UpdateItem::setVisibility(bool visible)
