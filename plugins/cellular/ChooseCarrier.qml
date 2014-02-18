@@ -26,6 +26,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     title: i18n.tr("Carrier")
+    objectName: "chooseCarrierPage"
+
     property var netReg
     property variant operators: netReg.operators
     property bool scanning: netReg.scanning
@@ -55,6 +57,7 @@ ItemPage {
 
    ListItem.ItemSelector {
         id: carrierSelector
+        objectName: "carrierSelector"
         expanded: true
         /* FIXME: This is disabled since it is currently a
          * read-only setting
@@ -71,6 +74,7 @@ ItemPage {
     ListItem.SingleControl {
         anchors.bottom: parent.bottom
         control: Button {
+            objectName: "refreshButton"
             width: parent.width - units.gu(4)
             text: i18n.tr("Refresh")
             onTriggered: netReg.scan()
