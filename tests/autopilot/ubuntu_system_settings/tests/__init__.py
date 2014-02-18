@@ -136,6 +136,21 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     ('Register', '', '', ''),
                 ]
                 )
+        self.dbusmock.AddObject('/ril_0/operator/op3',
+                'org.ofono.NetworkOperator',
+                {
+                    'Name': 'my.bad.telco',
+                    'Status': 'forbidden',
+                    'MobileCountryCode': '777',
+                    'MobileNetworkCode': '22',
+                    'Technologies': ['gsm'],
+                },
+                [
+                    ('GetProperties', '', 'a{sv}',
+                        'ret = self.GetAll("org.ofono.NetworkOperator")'),
+                    ('Register', '', '', ''),
+                ]
+                )
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 
     @property

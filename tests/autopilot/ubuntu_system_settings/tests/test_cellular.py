@@ -7,9 +7,9 @@
 
 from time import sleep
 
-from autopilot.platform import model
+from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
-from testtools.matchers import Equals, NotEquals, GreaterThan
+from testtools.matchers import Equals, NotEquals, raises
 from unittest import expectedFailure
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsOfonoTestCase
@@ -54,3 +54,11 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
                 objectName="carrierSelector")
         manual = carriers.select_single('Label', text="my.cool.telco")
         self.assertThat(manual, NotEquals(None))
+
+    def test_no_forbidden_network(self):
+        self.navigate_to_manual()
+        carriers = self.choose_page.select_single(
+                toolkit_emulators.ItemSelector,
+                objectName="carrierSelector")
+        self.assertThat(lambda: carriers.select_single('Label', text="my.bad.telco"),
+            raises(StateNotFoundError))
