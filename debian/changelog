@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.1+14.04.20140218.1-0ubuntu1) trusty; urgency=low
+
+  [ Iain Lane ]
+  * Don't check for updates in the EntryComponent of the update plugin.
+    Temporarily disables the feature. Will be re-enabled when bug
+    #1277589 is fixed. (LP: #1277589)
+  * Show default wallpaper in the "Ubuntu art" section of the background
+    selector
+  * Add some initial AP tests for manual selection of cellular network.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Feb 2014 21:36:59 +0000
+
 ubuntu-system-settings (0.1+14.04.20140218-0ubuntu1) trusty; urgency=low
 
   [ Sebastien Bacher ]
