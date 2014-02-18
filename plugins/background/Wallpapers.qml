@@ -35,6 +35,7 @@ ItemPage {
     property bool useSame
     property var activeTransfer
     property var store
+    property string defaultBackground
     property string current
     signal save (bool homeScreen, string uri)
 
@@ -81,7 +82,13 @@ ItemPage {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 columns: 3
-                bgmodel: backgroundPanel.ubuntuArt
+                bgmodel: {
+                    // Make a shallow copy
+                    var backgrounds = backgroundPanel.ubuntuArt.slice(0)
+                    if (backgroundPanel.fileExists(defaultBackground))
+                        backgrounds.push(Qt.resolvedUrl(defaultBackground))
+                    return backgrounds
+                }
                 backgroundPanel: backgroundPanel
                 title: i18n.tr("Ubuntu Art")
                 current: selectSourcePage.current
