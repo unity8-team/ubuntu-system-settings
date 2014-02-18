@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.1+14.04.20140218-0ubuntu1) trusty; urgency=low
+
+  [ Sebastien Bacher ]
+  * security-privacy: don't use a Column, the toolkit has a bug that
+    makes the OptionSelection widget in it not displayed. The Dash page
+    currently has only one element so the column is not strictly
+    required. (LP: #1277050)
+
+  [ Iain Lane ]
+  * Remove the Column since it's not necessary and a UITK bug means its
+    contents are hidden (LP: #1273610) (LP: #1273610)
+  * Don't show forbidden networks, since we can't ever connect to them
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Feb 2014 10:54:02 +0000
+
 ubuntu-system-settings (0.1+14.04.20140206-0ubuntu1) trusty; urgency=low
 
   [ Diego Sarmentero ]
