@@ -51,23 +51,18 @@ ItemPage {
         operatorStatus = oS;
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-       ListItem.ItemSelector {
-            id: carrierSelector
-            expanded: true
-            /* FIXME: This is disabled since it is currently a
-             * read-only setting
-             * enabled: cellularDataControl.checked
-             */
-            enabled: true
-            model: operatorNames
-            selectedIndex: curOp
-            onSelectedIndexChanged: {
-                operators[selectedIndex].registerOp();
-            }
+   ListItem.ItemSelector {
+        id: carrierSelector
+        expanded: true
+        /* FIXME: This is disabled since it is currently a
+         * read-only setting
+         * enabled: cellularDataControl.checked
+         */
+        enabled: true
+        model: operatorNames
+        selectedIndex: curOp
+        onSelectedIndexChanged: {
+            operators[selectedIndex].registerOp();
         }
     }
 
