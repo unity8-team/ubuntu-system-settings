@@ -110,6 +110,7 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
+    """ Class for cellular tests which sets up an Ofono mock """"
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
@@ -121,6 +122,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
     def setUp(self, panel=None):
         self.obj_ofono.Reset()
+        # Add an available carrier
         self.dbusmock.AddObject('/ril_0/operator/op2',
                 'org.ofono.NetworkOperator',
                 {
@@ -136,6 +138,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     ('Register', '', '', ''),
                 ]
                 )
+        # Add a forbidden carrier
         self.dbusmock.AddObject('/ril_0/operator/op3',
                 'org.ofono.NetworkOperator',
                 {

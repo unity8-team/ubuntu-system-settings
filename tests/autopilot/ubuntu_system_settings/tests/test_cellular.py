@@ -37,6 +37,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.assertThat(self.cellular_page.title, Equals(_('Cellular')))
 
     def test_current_network(self):
+        """ Tests whether the current network is visible and selected """
         self.navigate_to_manual()
         carriers = self.choose_page.select_single(
                 toolkit_emulators.ItemSelector,
@@ -48,6 +49,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.assertThat(carriers.selectedIndex, Equals(0))
 
     def test_alt_network(self):
+        """ Tests whether an alternative available network is displayed """
         self.navigate_to_manual()
         carriers = self.choose_page.select_single(
                 toolkit_emulators.ItemSelector,
@@ -56,6 +58,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.assertThat(manual, NotEquals(None))
 
     def test_no_forbidden_network(self):
+        """ Ensures that a forbidden network is not shown """
         self.navigate_to_manual()
         carriers = self.choose_page.select_single(
                 toolkit_emulators.ItemSelector,
