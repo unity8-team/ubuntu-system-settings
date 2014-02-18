@@ -26,6 +26,7 @@ import Ubuntu.SystemSettings.Phone 1.0
 
 ItemPage {
     title: i18n.tr("Cellular")
+    objectName: "cellularPage"
 
     NetworkRegistration {
         id: netReg
@@ -103,6 +104,7 @@ ItemPage {
 
         ListItem.ItemSelector {
             id: chooseCarrier
+            objectName: "autoChooseCarrierSelector"
             expanded: true
             enabled: netReg.mode != "auto-only"
             text: i18n.tr("Choose carrier:")
@@ -112,6 +114,7 @@ ItemPage {
 
         ListItem.SingleValue {
             text: i18n.tr("Carrier")
+            objectName: "chooseCarrier"
             value: carrierName ? carrierName : i18n.tr("N/A")
             property bool enabled: chooseCarrier.selectedIndex == 1 // Manually
             progression: enabled
