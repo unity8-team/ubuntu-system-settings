@@ -50,10 +50,12 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     m_systemUpdate(this)
 {
     setVisibility(false);
+    /*
     QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
                   this, SLOT(changeVisibility(const QString&, Update*)));
 
     m_systemUpdate.checkForUpdate();
+    */
 }
 
 void UpdateItem::changeVisibility(const QString& package, Update* update)
