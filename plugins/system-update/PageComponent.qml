@@ -115,10 +115,8 @@ ItemPage {
         objectName: "updateManager"
 
         Component.onCompleted: {
-            if (!updateList.visible) {
-                root.state = "SEARCHING";
-                updateManager.checkUpdates();
-            }
+            root.state = "SEARCHING";
+            updateManager.checkUpdates();
         }
 
         onUpdateAvailableFound: {
