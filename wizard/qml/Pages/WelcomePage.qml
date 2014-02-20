@@ -75,7 +75,7 @@ LocalComponents.Page {
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
                 pageStack.push(Qt.resolvedUrl(simCardPresent
-                                              ? "AboutYouPage.qml"
+                                              ? "LocationPage.qml"
                                               : "SimCardPage.qml"))
             }
         }

@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>qml/main.qml</file>
         <file>qml/Components/Page.qml</file>
-        <file>qml/Pages/AboutYouPage.qml</file>
         <file>qml/Pages/LocationPage.qml</file>
         <file>qml/Pages/SetupCompletePage.qml</file>
         <file>qml/Pages/SimCardPage.qml</file>

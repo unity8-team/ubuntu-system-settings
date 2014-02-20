@@ -1,6 +1,5 @@
 add_subdirectory(about)
 #add_subdirectory(accessibility)
-add_subdirectory(account)
 add_subdirectory(background)
 add_subdirectory(battery)
 add_subdirectory(bluetooth)

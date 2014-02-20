@@ -37,7 +37,7 @@ LocalComponents.Page {
         id: forwardButton
         Button {
             text: i18n.tr("Connect")
-            onClicked: pageStack.push(Qt.resolvedUrl("AboutYouPage.qml"))
+            onClicked: pageStack.push(Qt.resolvedUrl("LocationPage.qml"))
         }
     }
 }
