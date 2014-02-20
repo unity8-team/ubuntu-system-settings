@@ -78,11 +78,14 @@ ItemPage {
             PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
+            PropertyChanges { target: notification; visible: false}
+            PropertyChanges { target: updatedNotification; visible: false}
         },
         State {
             name: "NOUPDATES"
             PropertyChanges { target: updatedNotification; text: i18n.tr("Software is up to date")}
             PropertyChanges { target: updatedNotification; visible: true}
+            PropertyChanges { target: updateList; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
         },
@@ -100,6 +103,7 @@ ItemPage {
         State {
             name: "UPDATE"
             PropertyChanges { target: notification; visible: false}
+            PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: installAllButton; visible: true}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
             PropertyChanges { target: updatedNotification; visible: false}
@@ -111,8 +115,10 @@ ItemPage {
         objectName: "updateManager"
 
         Component.onCompleted: {
-            root.state = "SEARCHING";
-            updateManager.checkUpdates();
+            if (!updateList.visible) {
+                root.state = "SEARCHING";
+                updateManager.checkUpdates();
+            }
         }
 
         onUpdateAvailableFound: {
@@ -222,6 +228,7 @@ ItemPage {
     ListView {
         id: updateList
         objectName: "updateList"
+        visible: false
         anchors {
             left: parent.left
             right: parent.right
@@ -363,6 +370,7 @@ ItemPage {
 
     ListItem.Standard {
         id: notification
+        visible: false
         anchors.bottom: configuration.top
     }
 
