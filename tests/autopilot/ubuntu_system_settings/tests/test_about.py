@@ -12,8 +12,13 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from unittest import expectedFailure
 
-from ubuntu_system_settings.tests import AboutBaseTestCase, StorageBaseTestCase, LicenseBaseTestCase
+from ubuntu_system_settings.tests import (
+    AboutBaseTestCase,
+    StorageBaseTestCase,
+    LicenseBaseTestCase
+)
 from ubuntu_system_settings.utils.i18n import ugettext as _
+
 
 class AboutTestCase(AboutBaseTestCase):
     """ Tests for About this phone Page """
@@ -96,7 +101,7 @@ class StorageTestCase(StorageBaseTestCase):
     """ Tests for Storage """
 
     def test_storage_page(self):
-        """ Check whether Storage page is available """ 
+        """ Check whether Storage page is available """
         self.assertThat(self.storage_page, NotEquals(None))
 
     def test_disk(self):
@@ -136,7 +141,9 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_installed_apps(self):
         """ Checks whether Installed Apps list is available """
-        installed_apps_list_view = self.storage_page.select_single(objectName='installedAppsListView')
+        installed_apps_list_view = self.storage_page.select_single(
+            objectName='installedAppsListView'
+        )
         self.assertThat(installed_apps_list_view, NotEquals(None))
 
 
@@ -145,6 +152,5 @@ class LicenseTestCase(LicenseBaseTestCase):
 
     @expectedFailure
     def test_licenses_page(self):
-        """ Check whether Storage page is available """ 
+        """ Check whether Storage page is available """
         self.assertThat(self.licenses_page, NotEquals(None))
-

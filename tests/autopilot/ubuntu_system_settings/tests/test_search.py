@@ -18,6 +18,7 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 
 """ Tests for Ubuntu System Settings """
 
+
 class SearchTestCases(UbuntuSystemSettingsTestCase):
     """ Tests for Search """
 
@@ -37,8 +38,9 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         sound = self.main_view.select_single(objectName='entryComponent-sound')
         self.assertThat(sound, NotEquals(None))
         try:
-            background = self.main_view.select_single(objectName='entryComponent-background')
+            background = self.main_view.select_single(
+                objectName='entryComponent-background'
+            )
         except StateNotFoundError:
             background = None
         self.assertThat(background, Equals(None))
- 
