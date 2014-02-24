@@ -57,7 +57,6 @@ ListView {
             }
         }
         enabled: model.enabled
-
     }
 
     add: Transition {

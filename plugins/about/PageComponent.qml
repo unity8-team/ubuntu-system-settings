@@ -41,7 +41,7 @@ ItemPage {
         id: deviceInfos
     }
 
-    UbuntuUpdatePanel {
+    UpdateManager {
         id: updateBackend
     }
 

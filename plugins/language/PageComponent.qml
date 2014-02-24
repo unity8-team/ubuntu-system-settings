@@ -100,6 +100,16 @@ ItemPage {
             }
 
             ListItem.Standard {
+                text: i18n.tr("Spell checking")
+
+                control: Switch {
+                    checked: plugin.spellChecking
+
+                    onClicked: plugin.spellChecking = checked
+                }
+            }
+
+            ListItem.Standard {
                 text: i18n.tr("Auto completion")
 
                 control: Switch {

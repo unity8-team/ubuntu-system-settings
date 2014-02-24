@@ -158,7 +158,8 @@ SubsetModel::setAllowEmpty(bool allowEmpty)
     if (allowEmpty != m_allowEmpty) {
         m_allowEmpty = allowEmpty;
 
-        if (!m_allowEmpty && m_checked == 0) {
+        // Check the first element if we can't have an empty subset.
+        if (!m_allowEmpty && m_state.length() > 0 && m_checked == 0) {
             m_subset += 0;
             m_state[0]->checked = true;
             m_checked = 1;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -14,159 +14,110 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Didier Roche <didier.roche@canonical.com>
+ * Diego Sarmentero <diego.sarmentero@canonical.com>
  *
 */
 
 #include "update.h"
-#include <QDebug>
-#include <QEvent>
-#include <QDBusReply>
-#include <unistd.h>
+#include <QStringList>
+#include <apt-pkg/debversion.h>
 
-// FIXME: need to do this better including #include "../../src/i18n.h"
-// and linking to it
-#include <libintl.h>
-QString _(const char *text)
-{
-    return QString::fromUtf8(dgettext(0, text));
-}
+namespace UpdatePlugin {
 
 Update::Update(QObject *parent) :
     QObject(parent),
-    m_infoMessage(""),
-    m_downloadMode(-1),
-    m_currentBuildNumber(-1),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_SystemServiceIface ("com.canonical.SystemImage",
-                         "/Service",
-                         "com.canonical.SystemImage",
-                         m_systemBusConnection)
+    m_binary_filesize(0),
+    m_download_progress(0),
+    m_error(""),
+    m_icon_url(""),
+    m_lastUpdateDate(""),
+    m_local_version(""),
+    m_packagename(""),
+    m_remote_version(""),
+    m_selected(false),
+    m_systemUpdate(false),
+    m_title(""),
+    m_update(false),
+    m_update_ready(false),
+    m_update_state(false)
 {
-
-    connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QString)),
-               this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QString)));
-    // signals to forward directly to QML
-    connect(&m_SystemServiceIface, SIGNAL(UpdateProgress(int, double)),
-                this, SIGNAL(updateProgress(int, double)));
-    connect(&m_SystemServiceIface, SIGNAL(UpdatePaused(int)),
-                this, SIGNAL(updatePaused(int)));
-    connect(&m_SystemServiceIface, SIGNAL(UpdateDownloaded()),
-                this, SIGNAL(updateDownloaded()));
-    connect(&m_SystemServiceIface, SIGNAL(UpdateFailed(int, QString)),
-                this, SIGNAL(updateFailed(int, QString)));
-    connect(&m_SystemServiceIface, SIGNAL(SettingChanged(QString, QString)),
-                this, SLOT(ProcessSettingChanged(QString, QString)));
-
-    this->CheckForUpdate();
-
 }
 
-Update::~Update() {
+Update::~Update()
+{
 }
 
-void Update::CheckForUpdate() {
-    m_SystemServiceIface.asyncCall("CheckForUpdate");
+void Update::initializeApplication(QString packagename, QString title,
+                                   QString version)
+{
+    m_packagename = packagename;
+    m_title = title;
+    m_local_version = version;
 }
 
-void Update::DownloadUpdate() {
-    m_SystemServiceIface.asyncCall("DownloadUpdate");
+void Update::setRemoteVersion(QString& version)
+{
+    m_remote_version = version;
+
+    int result = debVS.CmpVersion(m_local_version.toUtf8().data(),
+                                  m_remote_version.toUtf8().data());
+
+    m_update = result < 0;
 }
 
-QString Update::ApplyUpdate() {
-    QDBusReply<QString> reply = m_SystemServiceIface.call("ApplyUpdate");
-    if (reply.isValid())
-        return reply.value();
-    return _("Can't apply the current update (can't contact service)");
-}
-
-QString Update::CancelUpdate() {
-    QDBusReply<QString> reply = m_SystemServiceIface.call("CancelUpdate");
-    if (reply.isValid())
-        return reply.value();
-    return _("Can't cancel current request (can't contact service)");
-}
-
-QString Update::PauseDownload() {
-    QDBusReply<QString> reply = m_SystemServiceIface.call("PauseDownload");
-    if (reply.isValid())
-        return reply.value();
-    return _("Can't pause current request (can't contact service)");
-}
-
-QString Update::InfoMessage() {
-    return m_infoMessage;
-}
-
-void Update::SetInfoMessage(QString infoMessage) {
-    m_infoMessage = infoMessage;
-    Q_EMIT infoMessageChanged();
-}
-
-int Update::currentBuildNumber() {
-    if (m_currentBuildNumber != -1)
-        return m_currentBuildNumber;
-
-    QDBusReply<int> reply = m_SystemServiceIface.call("Info");
-    if (reply.isValid())
-        m_currentBuildNumber = reply.value();
-
-    return m_currentBuildNumber;
-}
-
-int Update::DownloadMode() {
-    if (m_downloadMode != -1)
-        return m_downloadMode;
-
-    QDBusReply<QString> reply = m_SystemServiceIface.call("GetSetting", "auto_download");
-    int default_mode = 1;
-    if (reply.isValid()) {
-        bool ok;
-        int result;
-        result = reply.value().toInt(&ok);
-        if (ok)
-            m_downloadMode = result;
-        else
-            m_downloadMode = default_mode;
-    }
-    else
-        m_downloadMode = default_mode;
-    return m_downloadMode;
-}
-
-void Update::SetDownloadMode(int value) {
-    if (m_downloadMode == value)
-        return;
-
-    m_downloadMode = value;
-    m_SystemServiceIface.asyncCall("SetSetting", "auto_download", QString::number(value));
-}
-
-void Update::ProcessSettingChanged(QString key, QString newvalue) {
-    if(key == "auto_download") {
-        bool ok;
-        int newintValue;
-        newintValue = newvalue.toInt(&ok);
-        if (ok) {
-            m_downloadMode = newintValue;
-            Q_EMIT downloadModeChanged();
-        }
+void Update::setError(QString error)
+{
+    m_error = error;
+    if (!m_error.isEmpty()) {
+        Q_EMIT errorChanged();
     }
 }
 
-QString Update::TranslateFromBackend(QString msg) {
-    // TODO: load in the backend context .mo file
-    return msg;
-}
-
-void Update::ProcessAvailableStatus(bool isAvailable, bool downloading, QString availableVersion, int updateSize, QString lastUpdateDate, QString errorReason)
+void Update::setSystemUpdate(bool isSystem)
 {
-    //TODO: bind with the real description once we can listen to the signal
-    QStringList descriptions;
-    descriptions.append("Description for update1");
-    descriptions.append("Description for update2");
-    descriptions.append("Description for update3");
-
-    Q_EMIT updateAvailableStatus(isAvailable, downloading, availableVersion, updateSize, lastUpdateDate, descriptions, errorReason);
+    m_systemUpdate = isSystem;
+    Q_EMIT systemUpdateChanged();
 }
 
+void Update::setUpdateState(bool state)
+{
+    m_update_state = state;
+    Q_EMIT updatesStateChanged();
+}
+
+void Update::setUpdateReady(bool ready)
+{
+    m_update_ready = ready;
+    Q_EMIT updatesReadyChanged();
+}
+
+void Update::setSelected(bool value)
+{
+    m_selected = value;
+    Q_EMIT selectedChanged();
+}
+
+void Update::setBinaryFilesize(int size)
+{
+    m_binary_filesize = size;
+    Q_EMIT binaryFilesizeChanged();
+}
+
+void Update::setIconUrl(QString icon) {
+    m_icon_url = icon;
+    Q_EMIT iconUrlChanged();
+}
+
+void Update::setLastUpdateDate(const QString date)
+{
+    m_lastUpdateDate = date;
+    Q_EMIT lastUpdateDateChanged();
+}
+
+void Update::setDownloadProgress(int progress)
+{
+    m_download_progress = progress;
+    Q_EMIT downloadProgressChanged();
+}
+
+}
