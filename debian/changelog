@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.1+14.04.20140224.1-0ubuntu1) trusty; urgency=low
+
+  [ Iain Lane ]
+  * Re-enable updates on the main screen
+
+  [ Diego Sarmentero ]
+  * Avoid conflicts between concurrent calls to checkForUpdates ( (LP:
+    #1279006)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 24 Feb 2014 23:23:06 +0000
+
 ubuntu-system-settings (0.1+14.04.20140218.1-0ubuntu1) trusty; urgency=low
 
   [ Iain Lane ]
