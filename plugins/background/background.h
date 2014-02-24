@@ -49,6 +49,7 @@ public:
     ~Background();
     QString backgroundFile();
     void setBackgroundFile(QUrl backgroundFile);
+    Q_INVOKABLE bool fileExists(const QString &file);
     Q_INVOKABLE void rmFile(const QString &file);
     QStringList customBackgrounds();
     QStringList ubuntuArt();

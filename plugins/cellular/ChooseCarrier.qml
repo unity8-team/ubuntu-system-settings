@@ -26,6 +26,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     title: i18n.tr("Carrier")
+    objectName: "chooseCarrierPage"
+
     property var netReg
     property variant operators: netReg.operators
     property bool scanning: netReg.scanning
@@ -43,6 +45,8 @@ ItemPage {
         var oS = new Array();
         for (var i in operators)
         {
+            if (operators[i].status == "forbidden")
+                continue
             oN.push(operators[i].name);
             oS.push(operators[i].status);
         }
@@ -51,29 +55,26 @@ ItemPage {
         operatorStatus = oS;
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-       ListItem.ItemSelector {
-            id: carrierSelector
-            expanded: true
-            /* FIXME: This is disabled since it is currently a
-             * read-only setting
-             * enabled: cellularDataControl.checked
-             */
-            enabled: true
-            model: operatorNames
-            selectedIndex: curOp
-            onSelectedIndexChanged: {
-                operators[selectedIndex].registerOp();
-            }
+   ListItem.ItemSelector {
+        id: carrierSelector
+        objectName: "carrierSelector"
+        expanded: true
+        /* FIXME: This is disabled since it is currently a
+         * read-only setting
+         * enabled: cellularDataControl.checked
+         */
+        enabled: true
+        model: operatorNames
+        selectedIndex: curOp
+        onSelectedIndexChanged: {
+            operators[selectedIndex].registerOp();
         }
     }
 
     ListItem.SingleControl {
         anchors.bottom: parent.bottom
         control: Button {
+            objectName: "refreshButton"
             width: parent.width - units.gu(4)
             text: i18n.tr("Refresh")
             onTriggered: netReg.scan()

@@ -1,2 +1,3 @@
 module SystemSettings
 ItemPage 1.0 ItemPage.qml
+BrightnessSlider 1.0 BrightnessSlider.qml

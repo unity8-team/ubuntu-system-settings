@@ -119,6 +119,14 @@ void Background::updateUbuntuArt()
     Q_EMIT ubuntuArtChanged();
 }
 
+bool Background::fileExists(const QString &file)
+{
+    if (file.isEmpty() || file.isNull())
+        return false;
+
+    return QFile(file).exists();
+}
+
 void Background::rmFile(const QString &file)
 {
     if (file.isEmpty() || file.isNull())

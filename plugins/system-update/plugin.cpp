@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -21,14 +21,20 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
+#include "update_manager.h"
+#include "system_update.h"
 #include "update.h"
+
+using namespace UpdatePlugin;
 
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     
-    qmlRegisterType<Update>(uri, 1, 0, "UbuntuUpdatePanel");
+    qmlRegisterType<UpdateManager>(uri, 1, 0, "UpdateManager");
+    qmlRegisterType<SystemUpdate>(uri, 1, 0, "SystemUpdate");
+    qmlRegisterType<Update>(uri, 1, 0, "Update");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

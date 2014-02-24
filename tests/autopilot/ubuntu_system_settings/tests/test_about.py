@@ -76,7 +76,8 @@ class AboutTestCase(AboutBaseTestCase):
         if (len(date) == 1):
             self.assertThat(item.value, Equals(_('Never')))
         else:
-            self.assertThat(len(item.value), Equals(3))
+            # 2013-10-19
+            self.assertThat(len(item.value), Equals(10))
 
     def test_legal(self):
         """ Checks whether Legal info is available """
@@ -115,7 +116,7 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_space_movies(self):
         """ Checks whether space item is available """
-        self.assert_space_item('moviesItem', _('Movies'))
+        self.assert_space_item('moviesItem', _('Videos'))
 
     def test_space_audio(self):
         """ Checks whether space item is available """
