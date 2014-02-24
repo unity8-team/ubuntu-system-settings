@@ -8,7 +8,6 @@
 from time import sleep
 
 from autopilot.platform import model
-from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from unittest import expectedFailure
 

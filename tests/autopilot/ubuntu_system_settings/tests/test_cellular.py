@@ -5,12 +5,8 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from time import sleep
-
 from autopilot.introspection.dbus import StateNotFoundError
-from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, raises
-from unittest import expectedFailure
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsOfonoTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _

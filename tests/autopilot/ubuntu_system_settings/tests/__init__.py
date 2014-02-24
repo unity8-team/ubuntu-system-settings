@@ -13,7 +13,6 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from autopilot.input import Mouse, Touch, Pointer
 from autopilot.platform import model
-from autopilot.testcase import AutopilotTestCase
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
@@ -201,7 +200,6 @@ class StorageBaseTestCase(AboutBaseTestCase):
         item = self.storage_page.select_single(objectName=object_name)
         self.assertThat(item, NotEquals(None))
         label = item.label  # Label
-        space = item.value  # Disk space (bytes)
         self.assertThat(label, Equals(text))
         # Get item's label
         size_label = item.select_single(objectName='sizeLabel')
