@@ -27,6 +27,8 @@ namespace UpdatePlugin {
 Update::Update(QObject *parent) :
     QObject(parent),
     m_binary_filesize(0),
+    m_click_url(""),
+    m_downloadUrl(""),
     m_download_progress(0),
     m_error(""),
     m_icon_url(""),
@@ -118,6 +120,11 @@ void Update::setDownloadProgress(int progress)
 {
     m_download_progress = progress;
     Q_EMIT downloadProgressChanged();
+}
+
+void Update::setDownloadUrl(const QString &url) {
+    m_downloadUrl = url;
+    Q_EMIT downloadUrlChanged();
 }
 
 }

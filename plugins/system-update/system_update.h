@@ -56,6 +56,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void updateAvailable(const QString& packageName, Update *update);
+    void updateNotFound();
     void updateProgress(int percentage, double eta);
     void updatePaused(int percentage);
     void updateDownloaded();
