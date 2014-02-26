@@ -133,6 +133,11 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         self.assertThat(plugin, NotEquals(None))
 
 
+@skipIf(
+        model() == 'Desktop',
+        'Disable on desktop as causes apport window to popup, not'
+        'something for us to fix.'
+    )
 class SystemSettingsUpowerTestCases(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(SystemSettingsUpowerTestCases, self).setUp()
@@ -147,11 +152,6 @@ class SystemSettingsUpowerTestCases(UbuntuSystemSettingsUpowerTestCase):
             raises(StateNotFoundError)
         )
 
-    @skipIf(
-        model() == 'Desktop',
-        'Disable on desktop as causes apport window to popup not'
-        'something for us to fix.'
-    )
     def test_battery_plugin_battery_hotplugging(self):
         """ Checks whether hotplugging a battery makes the panel visible """
         self.add_mock_battery()
