@@ -20,7 +20,7 @@
 
 #include "download_tracker.h"
 #include "network/network.h"
-//#include <ubuntu/download_manager/download_struct.h>
+#include <ubuntu/download_manager/download_struct.h>
 #include <QProcessEnvironment>
 
 #define DOWNLOAD_COMMAND "post-download-command"
@@ -33,13 +33,13 @@ DownloadTracker::DownloadTracker(QObject *parent) :
     QObject(parent),
     m_clickToken(""),
     m_downloadUrl(""),
-//    m_download(nullptr),
+    m_download(nullptr),
     m_progress(0)
 {
-//    m_manager = Manager::createSessionManager("", this);
+    m_manager = Manager::createSessionManager("", this);
 
-//    QObject::connect(m_manager, SIGNAL(downloadCreated(Download*)),
-//                     this, SLOT(downloadFileCreated(Download*)));
+    QObject::connect(m_manager, SIGNAL(downloadCreated(Download*)),
+                     this, SLOT(bindDownload(Download*)));
 }
 
 void DownloadTracker::setDownload(const QString& url)
@@ -69,29 +69,29 @@ void DownloadTracker::setPackageName(const QString& package)
 void DownloadTracker::startService()
 {
     if (!m_clickToken.isEmpty() && !m_downloadUrl.isEmpty() && !m_packageName.isEmpty()) {
-//        QVariantMap vmap;
-//        QStringList args;
-//        QString command = getPkconCommand();
-//        args << command << "-p" << "install-local" << "$file";
-//        vmap[DOWNLOAD_COMMAND] = args;
-//        vmap[APP_ID] = m_packageName;
-//        StringMap map;
-//        map[X_CLICK_TOKEN] = m_clickToken;
-//        DownloadStruct dstruct = DownloadStruct(m_downloadUrl, vmap, map);
-//        m_manager->createDownload(dstruct);
+        QVariantMap vmap;
+        QStringList args;
+        QString command = getPkconCommand();
+        args << command << "-p" << "install-local" << "$file";
+        vmap[DOWNLOAD_COMMAND] = args;
+        vmap[APP_ID] = m_packageName;
+        StringMap map;
+        map[X_CLICK_TOKEN] = m_clickToken;
+        DownloadStruct dstruct = DownloadStruct(m_downloadUrl, vmap, map);
+        m_manager->createDownload(dstruct);
     }
 }
 
-//void DownloadTracker::bindDownload(Download* download)
-//{
-//    m_download = download;
-//    connect(m_download, SIGNAL(finished(const QString &)), this,
-//            SIGNAL(finished(const QString &)));
-//    connect(m_download, SIGNAL(progress(qulonglong, qulonglong)), this,
-//            SLOT(setProgress(qulonglong, qulonglong)));
+void DownloadTracker::bindDownload(Download* download)
+{
+    m_download = download;
+    connect(m_download, SIGNAL(finished(const QString &)), this,
+            SIGNAL(finished(const QString &)));
+    connect(m_download, SIGNAL(progress(qulonglong, qulonglong)), this,
+            SLOT(setProgress(qulonglong, qulonglong)));
 
-//    m_download->start();
-//}
+    m_download->start();
+}
 
 void DownloadTracker::pause()
 {

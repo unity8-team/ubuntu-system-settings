@@ -26,8 +26,9 @@
 #include <QtQml>
 #include <QList>
 #include <QString>
-//#include <ubuntu/download_manager/download.h>
-//#include <ubuntu/download_manager/manager.h>
+#include <ubuntu/download_manager/download.h>
+#include <ubuntu/download_manager/error.h>
+#include <ubuntu/download_manager/manager.h>
 
 namespace UpdatePlugin {
 
@@ -41,7 +42,7 @@ class DownloadTracker : public QObject
 
 public:
     explicit DownloadTracker(QObject *parent = 0);
-    ~DownloadTracker();
+    ~DownloadTracker() {}
 
     Q_INVOKABLE void pause();
     Q_INVOKABLE void resume();
@@ -55,7 +56,7 @@ public:
     int progress() { return m_progress; }
 
 public Q_SLOTS:
-//    void bindDownload(Ubuntu::DownloadManager::Download* download);
+    void bindDownload(Ubuntu::DownloadManager::Download* download);
     void setProgress(qulonglong received, qulonglong total);
 
 Q_SIGNALS:
@@ -67,8 +68,8 @@ private:
     QString m_clickToken;
     QString m_downloadUrl;
     QString m_packageName;
-//    Ubuntu::DownloadManager::Download* m_download;
-//    Ubuntu::DownloadManager::Manager* m_manager;
+    Ubuntu::DownloadManager::Download* m_download;
+    Ubuntu::DownloadManager::Manager* m_manager;
     int m_progress;
 
     void startService();

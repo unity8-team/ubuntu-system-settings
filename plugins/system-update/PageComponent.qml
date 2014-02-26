@@ -370,24 +370,23 @@ ItemPage {
                     anchors.topMargin: units.gu(1)
                     anchors.right: parent.right
                     opacity: modelData.selected ? 1 : 0
-                    value: modelData.downloadProgress
+                    value: modelData.systemUpdate ? modelData.downloadProgress : tracker.progress
                     minimumValue: 0
                     maximumValue: 100
-                    progress: tracker.progress
 
-//                    DownloadTracker {
-//                        id: tracker
-//                        objectName: "tracker"
-//                        packageName: modelData.packageName
-//                        clickToken: modelData.clickToken
-//                        download: modelData.downloadUrl
+                    DownloadTracker {
+                        id: tracker
+                        objectName: "tracker"
+                        packageName: modelData.packageName
+                        clickToken: modelData.clickToken
+                        download: modelData.downloadUrl
 
-//                        onFinished: {
-//                            progress.visible = false;
-//                            buttonAppUpdate.visible = false;
-//                            textArea.message = i18n.tr("Installed");
-//                        }
-//                    }
+                        onFinished: {
+                            progress.visible = false;
+                            buttonAppUpdate.visible = false;
+                            textArea.message = i18n.tr("Installed");
+                        }
+                    }
 
                     Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
                 }
