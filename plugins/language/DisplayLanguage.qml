@@ -109,6 +109,7 @@ SheetBase {
             id: confirmButton
 
             text: i18n.tr("Confirm")
+            enabled: languageList.currentIndex != plugin.currentLanguage
 
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right

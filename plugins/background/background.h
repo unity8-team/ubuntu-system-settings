@@ -21,6 +21,8 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
+#include "accountsservice.h"
+
 #include <QDBusInterface>
 #include <QObject>
 #include <QProcess>
@@ -33,24 +35,40 @@ class Background : public QObject
                 READ backgroundFile
                 WRITE setBackgroundFile
                 NOTIFY backgroundFileChanged )
+
+    Q_PROPERTY( QStringList customBackgrounds
+                READ customBackgrounds
+                NOTIFY customBackgroundsChanged )
+
+    Q_PROPERTY( QStringList ubuntuArt
+                READ ubuntuArt
+                NOTIFY ubuntuArtChanged )
     
 public:
     explicit Background(QObject *parent = 0);
     ~Background();
     QString backgroundFile();
     void setBackgroundFile(QUrl backgroundFile);
+    Q_INVOKABLE bool fileExists(const QString &file);
+    Q_INVOKABLE void rmFile(const QString &file);
+    QStringList customBackgrounds();
+    QStringList ubuntuArt();
 
 public Q_SLOTS:
     void slotChanged();
 
 Q_SIGNALS:
     void backgroundFileChanged();
+    void customBackgroundsChanged();
+    void ubuntuArtChanged();
 
 private:
+    AccountsService m_accountsService;
+    QStringList m_ubuntuArt;
+    QStringList m_customBackgrounds;
+    void updateCustomBackgrounds();
+    void updateUbuntuArt();
     QString m_backgroundFile;
-    QDBusConnection m_systemBusConnection;
-    QString m_objectPath;
-    QDBusInterface m_accountsserviceIface;
     QString getBackgroundFile();
 };
 

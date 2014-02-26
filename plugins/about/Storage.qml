@@ -29,6 +29,7 @@ import Ubuntu.SystemSettings.StorageAbout 1.0
 ItemPage {
     id: storagePage
 
+    objectName: "storagePage"
     title: i18n.tr("Storage")
     flickable: scrollWidget
 
@@ -85,7 +86,7 @@ ItemPage {
         UbuntuColors.lightAubergine]
     property variant spaceLabels: [
         i18n.tr("Used by Ubuntu"),
-        i18n.tr("Movies"),
+        i18n.tr("Videos"),
         i18n.tr("Audio"),
         i18n.tr("Pictures"),
         i18n.tr("Other files"),
@@ -97,6 +98,13 @@ ItemPage {
         backendInfo.picturesSize,
         otherSize, //Other Files
         backendInfo.totalClickSize]
+    property variant spaceObjectNames: [
+        "usedByUbuntuItem",
+        "moviesItem",
+        "audioItem",
+        "picturesItem",
+        "otherFilesItem",
+        "usedByAppsItem"]
 
     GSettings {
         id: settingsId
@@ -131,6 +139,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: diskItem
+                objectName: "diskItem"
                 text: i18n.tr("Total storage")
                 value: backendInfo.formatSize(diskSpace)
                 showDivider: false
@@ -141,6 +150,7 @@ ItemPage {
             }
 
             StorageItem {
+                objectName: "storageItem"
                 colorName: "white"
                 label: i18n.tr("Free space")
                 value: freediskSpace
@@ -151,6 +161,7 @@ ItemPage {
                 model: spaceColors
 
                 StorageItem {
+                    objectName: spaceObjectNames[index]
                     colorName: modelData
                     label: spaceLabels[index]
                     value: spaceValues[index]
@@ -160,7 +171,7 @@ ItemPage {
 
             ListItem.ItemSelector {
                 id: valueSelect
-                text: i18n.tr("Installed apps")
+                objectName: "installedAppsItemSelector"
                 model: [i18n.tr("By name"), i18n.tr("By size")]
                 selectedIndex:
                     (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?
@@ -175,6 +186,7 @@ ItemPage {
             }
 
             ListView {
+                objectName: "installedAppsListView"
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: childrenRect.height
@@ -182,6 +194,7 @@ ItemPage {
                 interactive: false
                 model: backendInfo.clickList
                 delegate: ListItem.SingleValue {
+                    objectName: "appItem" + displayName
                     icon: iconPath
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
                     text: displayName

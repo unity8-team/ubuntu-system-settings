@@ -19,55 +19,33 @@
 */
 
 #include "background.h"
+
+#include <QDir>
+#include <QStandardPaths>
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
+#include <QDebug>
 
 Background::Background(QObject *parent) :
-    QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_accountsserviceIface ("org.freedesktop.Accounts",
-                            "/org/freedesktop/Accounts",
-                            "org.freedesktop.Accounts",
-                             m_systemBusConnection)
+    QObject(parent)
 {
-    if (!m_accountsserviceIface.isValid()) {
-        return;
-    }
-
-    QDBusReply<QDBusObjectPath> qObjectPath = m_accountsserviceIface.call(
-                "FindUserById", qlonglong(getuid()));
-
-    if (qObjectPath.isValid()) {
-        m_objectPath = qObjectPath.value().path();
-    }
-
-     m_systemBusConnection.connect("org.freedesktop.Accounts",
-                                  m_objectPath,
-                                  "org.freedesktop.Accounts.User",
-                                  "Changed",
-                                  this,
-                                  SLOT(slotChanged()));
+    QObject::connect(&m_accountsService,
+                     SIGNAL (changed ()),
+                     this,
+                     SLOT (slotChanged()));
+    updateUbuntuArt();
+    updateCustomBackgrounds();
 }
 
 QString Background::getBackgroundFile()
 {
-    QDBusInterface userInterface (
-                "org.freedesktop.Accounts",
-                m_objectPath,
-                "org.freedesktop.DBus.Properties",
-                m_systemBusConnection,
-                this);
+    QVariant answer = m_accountsService.getUserProperty(
+                "org.freedesktop.Accounts.User",
+                "BackgroundFile");
 
-    if (userInterface.isValid()) {
-        QDBusReply<QDBusVariant> answer = userInterface.call (
-                    "Get",
-                    "org.freedesktop.Accounts.User",
-                    "BackgroundFile");
-
-        if (answer.isValid())
-            return answer.value().variant().toString();
-    }
+    if (answer.isValid())
+        return answer.toString();
 
     return QString();
 }
@@ -77,25 +55,18 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     if (!backgroundFile.isLocalFile())
         return;
 
-    QDBusInterface userInterface (
-                "org.freedesktop.Accounts",
-                m_objectPath,
-                "org.freedesktop.Accounts.User",
-                m_systemBusConnection,
-                this);
-
-    if (!userInterface.isValid())
+    if (backgroundFile.url() == m_backgroundFile)
         return;
 
-    QString backgroundFileSave = backgroundFile.path();
-    m_backgroundFile = backgroundFileSave;
-    userInterface.call("SetBackgroundFile", backgroundFileSave);
+    m_backgroundFile = backgroundFile.url();
+    m_accountsService.customSetUserProperty("SetBackgroundFile",
+                                            backgroundFile.path());
     Q_EMIT backgroundFileChanged();
 }
 
 void Background::slotChanged()
 {
-    QString new_background = getBackgroundFile();
+    QString new_background = QUrl::fromLocalFile(getBackgroundFile()).url();
     if (new_background != m_backgroundFile) {
         m_backgroundFile = new_background;
         Q_EMIT backgroundFileChanged();
@@ -105,9 +76,75 @@ void Background::slotChanged()
 QString Background::backgroundFile()
 {
     if (m_backgroundFile.isEmpty() || m_backgroundFile.isNull())
-        m_backgroundFile = getBackgroundFile();
+        m_backgroundFile = QUrl::fromLocalFile(getBackgroundFile()).url();
 
      return m_backgroundFile;
+}
+
+QStringList Background::customBackgrounds()
+{
+    return m_customBackgrounds;
+}
+
+void Background::updateCustomBackgrounds()
+{
+    m_customBackgrounds.clear();
+    QString customPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation)+"/Pictures";
+    QDir dir(customPath);
+    dir.setFilter(QDir::Files | QDir::NoSymLinks);
+    QFileInfoList tmpList = dir.entryInfoList();
+    if (!tmpList.isEmpty())
+    {
+        foreach (QFileInfo f, tmpList)
+            m_customBackgrounds.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+    }
+    Q_EMIT customBackgroundsChanged();
+}
+
+QStringList Background::ubuntuArt()
+{
+    return m_ubuntuArt;
+}
+void Background::updateUbuntuArt()
+{
+
+    QDir dir("/usr/share/backgrounds/");
+    dir.setFilter(QDir::Files | QDir::NoSymLinks);
+    QFileInfoList tmpList = dir.entryInfoList();
+    foreach (QFileInfo f, tmpList)
+    {
+        if (f.fileName() != "warty-final-ubuntu.png")
+            m_ubuntuArt.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
+    }
+    Q_EMIT ubuntuArtChanged();
+}
+
+bool Background::fileExists(const QString &file)
+{
+    if (file.isEmpty() || file.isNull())
+        return false;
+
+    return QFile(file).exists();
+}
+
+void Background::rmFile(const QString &file)
+{
+    if (file.isEmpty() || file.isNull())
+        return;
+
+    if (!file.contains(QStandardPaths::writableLocation(QStandardPaths::DataLocation)))
+        return;
+
+    QUrl fileUri(file);
+    if (!fileUri.isLocalFile())
+        return;
+
+    QFile filePath(fileUri.path());
+    if (filePath.exists())
+    {
+        if (filePath.remove())
+            updateCustomBackgrounds();
+    }
 }
 
 Background::~Background() {

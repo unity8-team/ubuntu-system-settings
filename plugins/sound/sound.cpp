@@ -40,6 +40,3 @@ QStringList Sound::listSounds(const QString &dirString)
     }
     return m_soundsList;
 }
-
-Sound::~Sound() {
-}

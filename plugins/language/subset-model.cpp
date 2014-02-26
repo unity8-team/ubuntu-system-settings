@@ -158,7 +158,8 @@ SubsetModel::setAllowEmpty(bool allowEmpty)
     if (allowEmpty != m_allowEmpty) {
         m_allowEmpty = allowEmpty;
 
-        if (!m_allowEmpty && m_checked == 0) {
+        // Check the first element if we can't have an empty subset.
+        if (!m_allowEmpty && m_state.length() > 0 && m_checked == 0) {
             m_subset += 0;
             m_state[0]->checked = true;
             m_checked = 1;
@@ -371,8 +372,7 @@ SubsetModel::timerExpired()
                     Q_EMIT subsetChanged();
                 }
             }
-        }
-        else {
+        } else {
             if (change->start > m_state[change->element]->check) {
                 for (int i(0); i < m_subset.length(); i++) {
                     while (i < m_subset.length() && m_subset[i] == change->element) {

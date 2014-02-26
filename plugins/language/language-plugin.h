@@ -40,6 +40,8 @@ private:
 
     Q_OBJECT
 
+public:
+
     Q_PROPERTY(QStringList languageNames
                READ languageNames
                CONSTANT)
@@ -57,14 +59,14 @@ private:
                READ keyboardLayoutsModel
                CONSTANT)
 
+    Q_PROPERTY(SubsetModel *spellCheckingModel
+               READ spellCheckingModel
+               CONSTANT)
+
     Q_PROPERTY(bool spellChecking
                READ spellChecking
                WRITE setSpellChecking
                NOTIFY spellCheckingChanged)
-
-    Q_PROPERTY(SubsetModel *spellCheckingModel
-               READ spellCheckingModel
-               CONSTANT)
 
     Q_PROPERTY(bool autoCapitalization
                READ autoCapitalization
@@ -86,8 +88,6 @@ private:
                WRITE setKeyPressFeedback
                NOTIFY keyPressFeedbackChanged)
 
-public:
-
     explicit LanguagePlugin(QObject *parent = NULL);
 
     virtual ~LanguagePlugin();
@@ -100,14 +100,14 @@ public:
     Q_SIGNAL void currentLanguageChanged() const;
 
     SubsetModel *keyboardLayoutsModel();
-    Q_SLOT void updateKeyboardLayouts();
+    Q_SLOT void keyboardLayoutsModelChanged();
+
+    SubsetModel *spellCheckingModel();
+    Q_SLOT void spellCheckingModelChanged();
 
     bool spellChecking() const;
     void setSpellChecking(bool value);
     Q_SIGNAL void spellCheckingChanged() const;
-
-    SubsetModel *spellCheckingModel();
-    Q_SLOT void updateSpellChecking();
 
     bool autoCapitalization() const;
     void setAutoCapitalization(bool value);
@@ -127,28 +127,26 @@ public:
 
 private:
 
-    mutable QList<QLocale> *m_languageLocales;
-    mutable QStringList *m_languageNames;
-    mutable QStringList *m_languageCodes;
-    mutable QHash<QString, unsigned int> *m_indicesByBcp47Name;
-    mutable QHash<QString, unsigned int> *m_indicesByLocaleName;
-    const QList<QLocale> &languageLocales() const;
-    int indexForLocale(const QLocale &locale) const;
-    int indexForLanguage(const QString &language) const;
+    void updateLanguageNamesAndCodes();
+    void updateCurrentLanguage();
+    void updateEnabledLayouts();
+    void updateKeyboardLayouts();
+    void updateKeyboardLayoutsModel();
+    void updateSpellCheckingModel();
 
-    mutable int m_currentLanguage;
-    int m_nextCurrentLanguage;
-    ActUserManager *m_manager;
-    ActUser *m_user;
+    int indexForLocale(const QString &name);
 
-    mutable GSettings *m_maliitSettings;
-    GSettings *maliitSettings() const;
+    void userLoaded();
 
-    mutable QList<KeyboardLayout *> *m_keyboardLayouts;
-    const QList<KeyboardLayout *> &keyboardLayouts() const;
+    friend void userLoaded(GObject    *object,
+                           GParamSpec *pspec,
+                           gpointer    user_data);
 
-    SubsetModel *m_keyboardLayoutsModel;
-    SubsetModel *m_spellCheckingModel;
+    void managerLoaded();
+
+    friend void managerLoaded(GObject    *object,
+                              GParamSpec *pspec,
+                              gpointer    user_data);
 
     void enabledLayoutsChanged();
 
@@ -156,17 +154,19 @@ private:
                                       gchar     *key,
                                       gpointer   user_data);
 
-    void userSetCurrentLanguage(ActUser *user);
+    QStringList m_languageNames;
+    QStringList m_languageCodes;
+    QHash<QString, unsigned int> m_indicesByLocale;
 
-    friend void userSetCurrentLanguage(GObject    *object,
-                                       GParamSpec *pspec,
-                                       gpointer    user_data);
+    int m_currentLanguage;
+    int m_nextCurrentLanguage;
+    ActUserManager *m_manager;
+    ActUser *m_user;
 
-    void managerSetCurrentLanguage(ActUserManager *manager);
-
-    friend void managerSetCurrentLanguage(GObject    *object,
-                                          GParamSpec *pspec,
-                                          gpointer    user_data);
+    GSettings *m_maliitSettings;
+    QList<KeyboardLayout *> m_keyboardLayouts;
+    SubsetModel m_keyboardLayoutsModel;
+    SubsetModel m_spellCheckingModel;
 };
 
 #endif // LANGUAGE_PLUGIN_H

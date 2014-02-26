@@ -4,20 +4,23 @@ Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: dbus-test-runner,
                debhelper (>= 9),
-               gdb,
+               python:any (>= 2.7),
+               python-setuptools,
+               gdb:any,
                libaccountsservice-dev,
                libandroid-properties-dev,
                libglib2.0-dev (>= 2.37.92),
+               libicu-dev,
                libnm-glib-dev,
                libofono-qt-dev,
                libqmenumodel-dev,
-               libqt5xmlpatterns5-dev,
                libtimezonemap1-dev (>= 0.4.1),
                libupower-glib-dev,
                pkg-config,
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
+               libapt-pkg-dev,
                xvfb,
                cmake,
 Standards-Version: 3.9.4
@@ -32,9 +35,10 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          accountsservice,
+         accountsservice-ubuntu-touch-schemas,
          bluez (>= 4.36),
          gsettings-desktop-schemas,
-         gsettings-ubuntu-touch-schemas (>= 0.0.1+13.10.20130730),
+         gsettings-ubuntu-touch-schemas (>= 0.0.1+14.04.20140130.1),
          indicator-bluetooth (>> 0.0.6+13.10.20131010),
          indicator-network (>= 0.5.0+13.10.20130918),
          powerd | gnome-settings-daemon,
@@ -44,7 +48,7 @@ Depends: ${misc:Depends},
          qtdeclarative5-gsettings1.0 (>=0.0+13.10.20130717),
          qtdeclarative5-systeminfo-plugin,
          qtdeclarative5-ubuntu-content0.1,
-         qtdeclarative5-ubuntu-ui-toolkit-plugin (>= 0.1.46+13.10.20130901),
+         qtdeclarative5-ubuntu-ui-toolkit-plugin (>= 0.1.46+14.04.20131126-0ubuntu1),
          whoopsie-preferences (>= 0.9),
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 0.9),
@@ -82,3 +86,20 @@ Description: System Settings for Ubuntu Touch - development files
  This package contains the System Settings application used on the 
  Ubuntu Touch images, it's designed for phones, tablets and convergent 
  devices.
+
+Package: ubuntu-system-settings-autopilot
+Architecture: all
+Depends: ubuntu-system-settings,
+         python-autopilot,
+         python-dbusmock (>= 0.10.1),
+         libautopilot-qt,
+         ubuntu-ui-toolkit-autopilot,
+         dpkg-dev,
+         ${misc:Depends},
+         ${python:Depends},
+Description: System Settings for Ubuntu Touch - Autopilot tests
+ This package contains the System Settings application used on the 
+ Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ devices.
+
+

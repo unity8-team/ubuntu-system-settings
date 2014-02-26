@@ -20,6 +20,8 @@
 #ifndef SECURITYPRIVACY_H
 #define SECURITYPRIVACY_H
 
+#include "accountsservice.h"
+
 #include <QDBusServiceWatcher>
 #include <QStringList>
 #include <QtDBus/QDBusInterface>
@@ -67,8 +69,8 @@ public:
     void setSecurityValue(QString value);
 
 public Q_SLOTS:
-    void slotChanged(QString, QVariantMap, QStringList);
-    void slotNameOwnerChanged(QString, QString, QString);
+    void slotChanged(QString, QString);
+    void slotNameOwnerChanged();
 
 Q_SIGNALS:
     void statsWelcomeScreenChanged();
@@ -77,16 +79,8 @@ Q_SIGNALS:
     void securityValueChanged();
 
 private:
-    QDBusConnection m_systemBusConnection;
-    QDBusServiceWatcher m_serviceWatcher;
-    QDBusInterface m_accountsserviceIface;
-    QString m_objectPath;
     QSettings m_lockSettings;
-
-    QVariant getUserProperty(const QString &property);
-    void setUserProperty(const QString &property,
-                         const QVariant &value);
-    void setUpInterface();
+    AccountsService m_accountsService;
 
 };
 

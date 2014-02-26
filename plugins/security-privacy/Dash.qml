@@ -40,18 +40,13 @@ ItemPage {
         }
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        ListItem.ItemSelector {
-            id: selectorId
-            text: i18n.tr("Return results from:")
-            model: [i18n.tr("Phone only"), i18n.tr("Phone and Internet")]
-            selectedIndex: (unitySettings.remoteContentSearch === 'all') ? 1 : 0
-            expanded: true
-            onSelectedIndexChanged:
-                unitySettings.remoteContentSearch = (selectorId.selectedIndex == 0) ? "none" : "all"
-        }
+    ListItem.ItemSelector {
+        id: selectorId
+        text: i18n.tr("Return results from:")
+        model: [i18n.tr("Phone only"), i18n.tr("Phone and Internet")]
+        selectedIndex: (unitySettings.remoteContentSearch === 'all') ? 1 : 0
+        expanded: true
+        onSelectedIndexChanged:
+            unitySettings.remoteContentSearch = (selectorId.selectedIndex == 0) ? "none" : "all"
     }
 }
