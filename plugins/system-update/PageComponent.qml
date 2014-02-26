@@ -79,12 +79,12 @@ ItemPage {
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
             PropertyChanges { target: notification; visible: false}
-            PropertyChanges { target: updatedNotification; visible: false}
+            PropertyChanges { target: updateNotification; visible: false}
         },
         State {
             name: "NOUPDATES"
-            PropertyChanges { target: updatedNotification; text: i18n.tr("Software is up to date")}
-            PropertyChanges { target: updatedNotification; visible: true}
+            PropertyChanges { target: updateNotification; text: i18n.tr("Software is up to date")}
+            PropertyChanges { target: updateNotification; visible: true}
             PropertyChanges { target: updateList; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
@@ -98,7 +98,7 @@ ItemPage {
             PropertyChanges { target: installingImageUpdate; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
-            PropertyChanges { target: updatedNotification; visible: false}
+            PropertyChanges { target: updateNotification; visible: false}
         },
         State {
             name: "UPDATE"
@@ -106,9 +106,24 @@ ItemPage {
             PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: installAllButton; visible: true}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
-            PropertyChanges { target: updatedNotification; visible: false}
+            PropertyChanges { target: updateNotification; visible: false}
+        },
+        State {
+            name: "NOCREDENTIALS"
+            PropertyChanges { target: notification; text: i18n.tr("<a href='settings:///system/online-accounts'>Please log into your Ubuntu One account</a>.")}
+            PropertyChanges { target: notification; onClicked: root.open_online_accounts() }
+            PropertyChanges { target: notification; progression: true}
+            PropertyChanges { target: notification; visible: true}
+            PropertyChanges { target: updateNotification; text: i18n.tr("Credentials not found")}
+            PropertyChanges { target: updateNotification; visible: true}
+            PropertyChanges { target: installAllButton; visible: false}
+            PropertyChanges { target: checkForUpdatesArea; visible: false}
         }
     ]
+
+    function open_online_accounts() {
+        Qt.openUrlExternally("settings:///system/online-accounts");
+    }
 
     UpdateManager {
         id: updateManager
@@ -129,6 +144,10 @@ ItemPage {
 
         onUpdatesNotFound: {
             root.state = "NOUPDATES";
+        }
+
+        onCredentialsNotFound: {
+            root.state = "NOCREDENTIALS";
         }
 
         onSystemUpdateDownloaded: {
@@ -289,10 +308,20 @@ ItemPage {
                             updateManager.applySystemUpdate();
                             installingImageUpdate.visible = true;
                         } else if (modelData.updateState) {
-                            updateManager.pauseDownload(modelData.packageName);
+                            if (modelData.systemUpdate) {
+                                updateManager.pauseDownload(modelData.packageName);
+                            } else {
+                                modelData.updateState = false;
+                                tracker.pause();
+                            }
                         } else {
-                            modelData.selected = true;
-                            updateManager.startDownload(modelData.packageName);
+                            if (!modelData.selected || modelData.systemUpdate) {
+                                modelData.selected = true;
+                                updateManager.startDownload(modelData.packageName);
+                            } else {
+                                modelData.updateState = true;
+                                tracker.resume();
+                            }
                         }
                     }
                 }
@@ -317,7 +346,7 @@ ItemPage {
                     height: units.gu(3)
                     text: modelData.title
                     font.bold: true
-                    elide: Text.ElideRight
+                    elide: buttonAppUpdate.visible ? Text.ElideRight : Text.ElideNone
                 }
 
                 Label {
@@ -344,6 +373,21 @@ ItemPage {
                     value: modelData.downloadProgress
                     minimumValue: 0
                     maximumValue: 100
+                    progress: tracker.progress
+
+//                    DownloadTracker {
+//                        id: tracker
+//                        objectName: "tracker"
+//                        packageName: modelData.packageName
+//                        clickToken: modelData.clickToken
+//                        download: modelData.downloadUrl
+
+//                        onFinished: {
+//                            progress.visible = false;
+//                            buttonAppUpdate.visible = false;
+//                            textArea.message = i18n.tr("Installed");
+//                        }
+//                    }
 
                     Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
                 }
@@ -389,7 +433,7 @@ ItemPage {
     }
 
     Rectangle {
-        id: updatedNotification
+        id: updateNotification
         anchors {
             left: parent.left
             right: parent.right
@@ -407,7 +451,7 @@ ItemPage {
             anchors.centerIn: parent
 
             Label {
-                text: updatedNotification.text
+                text: updateNotification.text
                 anchors.horizontalCenter: parent.horizontalCenter
                 fontSize: "large"
             }

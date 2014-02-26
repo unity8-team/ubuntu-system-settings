@@ -1,7 +1,7 @@
 set(QML_SOURCES PageComponent.qml Configuration.qml)
 
 add_library(UbuntuUpdatePanel MODULE plugin.h system_update.h update_manager.h update.h
-network/network.h download_tracker.h plugin.cpp system_update.cpp update_manager.cpp 
+network/network.h download_tracker.h plugin.cpp system_update.cpp update_manager.cpp
 update.cpp network/network.cpp download_tracker.cpp
 ${QML_SOURCES})
 

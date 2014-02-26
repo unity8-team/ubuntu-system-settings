@@ -55,7 +55,7 @@ class Update : public QObject
     Q_PROPERTY(int downloadProgress READ downloadProgress
                NOTIFY downloadProgressChanged)
     Q_PROPERTY(QString downloadUrl READ downloadUrl NOTIFY downloadUrlChanged)
-    Q_PROPERTY(QString clickToken READ clickToken)
+    Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
 
 Q_SIGNALS:
     void systemUpdateChanged();
@@ -71,6 +71,7 @@ Q_SIGNALS:
     void downloadProgressChanged();
     void lastUpdateDateChanged();
     void downloadUrlChanged();
+    void clickTokenChanged();
 
 public:
     explicit Update(QObject *parent = 0);
