@@ -14,7 +14,6 @@ from ubuntu_system_settings.tests import (
     UbuntuSystemSettingsUpowerTestCase,
     UbuntuSystemSettingsBatteryTestCase
 )
-from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
 class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
@@ -27,7 +26,7 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         """ Checks whether the main_view title is correct """
         header = self.main_view.select_single(objectName='systemSettingsPage')
         self.assertThat(header, NotEquals(None))
-        self.assertThat(header.title, Eventually(Equals(_('System Settings'))))
+        self.assertThat(header.title, Eventually(Equals('System Settings')))
 
     def test_search(self):
         """ Checks whether the Search box is available """
@@ -41,7 +40,7 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         )
         self.assertThat(category, NotEquals(None))
         self.assertThat(
-            category.categoryName, Eventually(Equals(_('Network')))
+            category.categoryName, Eventually(Equals('Network'))
         )
 
     def test_personal_category(self):
@@ -51,7 +50,7 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         )
         self.assertThat(category, NotEquals(None))
         self.assertThat(
-            category.categoryName, Eventually(Equals(_('Personal')))
+            category.categoryName, Eventually(Equals('Personal'))
         )
 
     def test_system_category(self):
@@ -60,7 +59,7 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
             objectName='categoryGrid-system'
         )
         self.assertThat(category, NotEquals(None))
-        self.assertThat(category.categoryName, Eventually(Equals(_('System'))))
+        self.assertThat(category.categoryName, Eventually(Equals('System')))
 
     def test_wifi_plugin(self):
         """ Checks whether the Wi-Fi plugin is available """

@@ -13,7 +13,6 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
-from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
@@ -53,7 +52,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def test_time_date_page(self):
         """ Checks whether Time & Date page is available """
         self.assertThat(self.time_date_page, NotEquals(None))
-        self.assertThat(self.time_date_page.title, Equals(_('Time & Date')))
+        self.assertThat(self.time_date_page.title, Equals('Time & Date'))
 
     def test_tz_list_initially_empty(self):
         """ Checks that no list is displayed initially """
@@ -89,7 +88,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         london = listview.select_many(toolkit_emulators.Standard)[0]
         self.pointer.click_object(london)
         header = self.main_view.select_single(objectName='MainView_Header')
-        self.assertThat(header.title, Eventually(Equals(_('Time & Date'))))
+        self.assertThat(header.title, Eventually(Equals('Time & Date')))
         self.assertThat(self.tz_page.text, Equals('Europe/London'))
 
     def test_same_tz_selection(self):
@@ -107,4 +106,4 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         # The timer is 1 second, wait and see that we haven't moved pages
         sleep(2)
         header = self.main_view.select_single(objectName='MainView_Header')
-        self.assertThat(header.title, Eventually(Equals(_('Time zone'))))
+        self.assertThat(header.title, Eventually(Equals('Time zone')))

@@ -9,7 +9,6 @@ from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
-from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
 """ Tests for Ubuntu System Settings """
@@ -29,7 +28,7 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         # Move to text field
         self.scroll_to_and_click(search)
         # Filter by string
-        self.keyboard.type(_('Sound'))
+        self.keyboard.type('Sound')
         # Search component
         sound = self.main_view.select_single(objectName='entryComponent-sound')
         self.assertThat(sound, NotEquals(None))

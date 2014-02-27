@@ -9,7 +9,6 @@ from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsOfonoTestCase
-from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
@@ -22,18 +21,18 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             toolkit_emulators.ItemSelector,
             objectName="autoChooseCarrierSelector"
         )
-        manual = selector.select_single('Label', text=_("Manually"))
+        manual = selector.select_single('Label', text="Manually")
         self.pointer.click_object(manual)
         choosecarrier = self.cellular_page.select_single(
             objectName="chooseCarrier"
         )
         self.pointer.click_object(choosecarrier)
-        self.assertThat(self.choose_page.title, Equals(_("Carrier")))
+        self.assertThat(self.choose_page.title, Equals("Carrier"))
 
     def test_cellular_page(self):
         """ Checks whether Cellular page is available """
         self.assertThat(self.cellular_page, NotEquals(None))
-        self.assertThat(self.cellular_page.title, Equals(_('Cellular')))
+        self.assertThat(self.cellular_page.title, Equals('Cellular'))
 
     def test_current_network(self):
         """ Tests whether the current network is visible and selected """
