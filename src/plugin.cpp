@@ -56,6 +56,7 @@ private:
     mutable ItemBase *m_item;
     mutable QPluginLoader m_loader;
     mutable PluginInterface *m_plugin;
+    mutable PluginInterface2 *m_plugin2;
     QString m_baseName;
     QVariantMap m_data;
 };
@@ -65,7 +66,9 @@ private:
 PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
     q_ptr(q),
     m_item(0),
-    m_baseName(manifest.completeBaseName())
+    m_baseName(manifest.completeBaseName()),
+    m_plugin(0),
+    m_plugin2(0)
 {
     QFile file(manifest.filePath());
     if (Q_UNLIKELY(!file.open(QIODevice::ReadOnly | QIODevice::Text))) {
@@ -106,8 +109,15 @@ bool PluginPrivate::ensureLoaded() const
         return false;
     }
 
-    m_plugin = qobject_cast<SystemSettings::PluginInterface*>(
+    m_plugin2 = qobject_cast<SystemSettings::PluginInterface2*>(
                 m_loader.instance());
+
+    if (m_plugin2)
+        m_plugin = m_plugin2;
+    else
+        m_plugin = qobject_cast<SystemSettings::PluginInterface*>(
+                    m_loader.instance());
+
     if (Q_UNLIKELY(m_plugin == 0)) {
         qWarning() << name << "doesn't implement PluginInterface";
         return false;
@@ -227,12 +237,10 @@ void Plugin::reset()
 {
     Q_D(const Plugin);
 
-    qDebug() << "Resetting" << this->displayName();
-
     d->ensureLoaded();
 
     // Try to use the plugin's reset method
-    if (d->m_plugin && d->m_plugin->reset())
+    if (d->m_plugin2 && d->m_plugin2->reset())
         return;
 
     // Otherwise, try to use one from the page component
@@ -255,8 +263,6 @@ void Plugin::reset()
     if (index >= 0) {
         QMetaMethod method = metaObject->method(index);
         method.invoke(object, Qt::DirectConnection);
-    } else {
-        qDebug() << "Method not found";
     }
 
     delete object;
