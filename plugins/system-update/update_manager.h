@@ -99,12 +99,12 @@ private Q_SLOTS:
     void processOutput();
     void processUpdates();
     void downloadUrlObtained(const QString &packagename, const QString &url);
-//    void downloadCreated(const QString &packagename, const QString &dbuspath);
 //    void downloadNotCreated(const QString &packagename, const QString &error);
     void handleCredentialsFound(Token token);
     void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
+    int m_checkingUpdates;
     QHash<QString, Update*> m_apps;
     int m_downloadMode;
     QVariantList m_model;

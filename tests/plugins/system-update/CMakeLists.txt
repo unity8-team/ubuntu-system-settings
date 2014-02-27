@@ -2,14 +2,13 @@ set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ../../../plugins/system-update)
 add_definitions(-DTESTS)
 
+# Need to get libsignon/accounts here, as they get exposed in headers
 find_package (PkgConfig REQUIRED)
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
 add_executable(tst-update-manager
     tst_updatemanager.cpp
-    fakedownloader.cpp
-    fakedownloader.h
     fakeprocess.cpp
     fakeprocess.h
     fakenetwork.cpp
@@ -30,7 +29,7 @@ add_executable(tst-update
 # set the path to the library folder
 include_directories(/usr/include/apt-pkg/)
 
-target_link_libraries(tst-update-manager apt-pkg  ${UBUNTUONEAUTH_LDFLAGS})
+target_link_libraries(tst-update-manager apt-pkg ${UBUNTUONEAUTH_LDFLAGS})
 qt5_use_modules(tst-update-manager Qml Quick Core DBus Xml Network Test)
 add_test(NAME tst-update-manager COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-update-manager)
 

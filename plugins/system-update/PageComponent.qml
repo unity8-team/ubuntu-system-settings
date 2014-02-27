@@ -110,7 +110,7 @@ ItemPage {
         },
         State {
             name: "NOCREDENTIALS"
-            PropertyChanges { target: notification; text: i18n.tr("<a href='settings:///system/online-accounts'>Please log into your Ubuntu One account</a>.")}
+            PropertyChanges { target: notification; text: i18n.tr("Please log into your Ubuntu One account.")}
             PropertyChanges { target: notification; onClicked: root.open_online_accounts() }
             PropertyChanges { target: notification; progression: true}
             PropertyChanges { target: notification; visible: true}
@@ -143,7 +143,9 @@ ItemPage {
         }
 
         onUpdatesNotFound: {
-            root.state = "NOUPDATES";
+            if (root.state != "NOCREDENTIALS") {
+                root.state = "NOUPDATES";
+            }
         }
 
         onCredentialsNotFound: {
@@ -340,8 +342,9 @@ ItemPage {
                     anchors {
                         top: parent.top
                         left: parent.left
-                        right: buttonAppUpdate.right
+                        right: buttonAppUpdate.left
                         topMargin: units.gu(1)
+                        rightMargin: units.gu(1)
                     }
                     height: units.gu(3)
                     text: modelData.title
@@ -386,6 +389,11 @@ ItemPage {
                             buttonAppUpdate.visible = false;
                             textArea.message = i18n.tr("Installed");
                         }
+
+                        onErrorFound: {
+                            modelData.updateState = false;
+                            textArea.message = error;
+                        }
                     }
 
                     Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
@@ -396,8 +404,8 @@ ItemPage {
                     anchors {
                         left: parent.left
                         right: buttonAppUpdate.right
-                        top: progress.bottom
-                        topMargin: units.gu(1)
+                        top: (!progress.visible || progress.opacity == 0) ? labelTitle.bottom : progress.bottom
+                        topMargin: (!progress.visible || progress.opacity == 0) ? 0 : units.gu(1)
                         bottom: parent.bottom
                         bottomMargin: units.gu(1)
                     }

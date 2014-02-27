@@ -110,7 +110,7 @@ public:
     void setLastUpdateDate(const QString date);
     void setClickUrl(const QString &url) { m_click_url = url; }
     void setDownloadUrl(const QString &url);
-    void setClickToken(const QString &token) { m_clickToken = token; }
+    void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
 
 private:
     int m_binary_filesize;

@@ -21,6 +21,7 @@
 #include "download_tracker.h"
 #include "network/network.h"
 #include <ubuntu/download_manager/download_struct.h>
+#include <ubuntu/download_manager/error.h>
 #include <QProcessEnvironment>
 
 #define DOWNLOAD_COMMAND "post-download-command"
@@ -34,12 +35,9 @@ DownloadTracker::DownloadTracker(QObject *parent) :
     m_clickToken(""),
     m_downloadUrl(""),
     m_download(nullptr),
+    m_manager(nullptr),
     m_progress(0)
 {
-    m_manager = Manager::createSessionManager("", this);
-
-    QObject::connect(m_manager, SIGNAL(downloadCreated(Download*)),
-                     this, SLOT(bindDownload(Download*)));
 }
 
 void DownloadTracker::setDownload(const QString& url)
@@ -69,6 +67,12 @@ void DownloadTracker::setPackageName(const QString& package)
 void DownloadTracker::startService()
 {
     if (!m_clickToken.isEmpty() && !m_downloadUrl.isEmpty() && !m_packageName.isEmpty()) {
+        if (m_manager == nullptr) {
+            m_manager = Manager::createSessionManager("", this);
+
+            QObject::connect(m_manager, SIGNAL(downloadCreated(Download*)),
+                             this, SLOT(bindDownload(Download*)));
+        }
         QVariantMap vmap;
         QStringList args;
         QString command = getPkconCommand();
@@ -87,20 +91,31 @@ void DownloadTracker::bindDownload(Download* download)
     m_download = download;
     connect(m_download, SIGNAL(finished(const QString &)), this,
             SIGNAL(finished(const QString &)));
+    connect(m_download, SIGNAL(error(Error*)), this,
+            SLOT(registerError(Error*)));
     connect(m_download, SIGNAL(progress(qulonglong, qulonglong)), this,
             SLOT(setProgress(qulonglong, qulonglong)));
 
     m_download->start();
 }
 
+void DownloadTracker::registerError(Error* error)
+{
+    Q_EMIT errorFound(error->errorString());
+}
+
 void DownloadTracker::pause()
 {
-//    m_download->pause();
+    if (m_download != nullptr) {
+        m_download->pause();
+    }
 }
 
 void DownloadTracker::resume()
 {
-//    m_download->resume();
+    if (m_download != nullptr) {
+        m_download->resume();
+    }
 }
 
 QString DownloadTracker::getPkconCommand()

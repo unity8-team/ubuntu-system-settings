@@ -32,7 +32,8 @@
 namespace UpdatePlugin {
 
 UpdateManager::UpdateManager(QObject *parent):
-    QObject(parent)
+    QObject(parent),
+    m_checkingUpdates(0)
 {
     // SSO SERVICE
     QObject::connect(&m_service, SIGNAL(credentialsFound(const Token&)),
@@ -78,13 +79,15 @@ UpdateManager::~UpdateManager()
 
 void UpdateManager::updateNotAvailable()
 {
-    if (m_model.count() == 0) {
+    m_checkingUpdates--;
+    if (m_checkingUpdates == 0 && m_model.count() == 0) {
         Q_EMIT updatesNotFound();
     }
 }
 
 void UpdateManager::checkUpdates()
 {
+    m_checkingUpdates = 2;
     m_model.clear();
     m_apps.clear();
     Q_EMIT modelChanged();
@@ -214,21 +217,6 @@ void UpdateManager::downloadUrlObtained(const QString &packagename,
         app->setError("Invalid User Token");
     }
 }
-
-//void UpdateManager::downloadCreated(const QString &packagename,
-//                                    const QString &dbuspath)
-//{
-//    Q_UNUSED(packagename);
-//    m_apps[packagename]->setDbusPath(dbuspath);
-//}
-
-//void UpdateManager::downloadNotCreated(const QString &packagename,
-//                                       const QString &error)
-//{
-//    Update *app = m_apps[packagename];
-//    app->setUpdateState(false);
-//    app->setError(error);
-//}
 
 void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)
 {

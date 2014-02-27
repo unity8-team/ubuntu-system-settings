@@ -1,14 +1,17 @@
 set(QML_SOURCES PageComponent.qml Configuration.qml)
+SET (CMAKE_AUTOMOC ON)
 
 add_library(UbuntuUpdatePanel MODULE plugin.h system_update.h update_manager.h update.h
 network/network.h download_tracker.h plugin.cpp system_update.cpp update_manager.cpp
 update.cpp network/network.cpp download_tracker.cpp
 ${QML_SOURCES})
 
-qt5_use_modules(UbuntuUpdatePanel Qml Quick DBus)
+qt5_use_modules(UbuntuUpdatePanel Qml Quick Network DBus)
 include_directories(/usr/include/apt-pkg/)
 
 find_package (PkgConfig REQUIRED)
+pkg_check_modules(UBUNTU_DOWNLOAD_MANAGER_CLIENT REQUIRED ubuntu-download-manager-client)
+pkg_check_modules(UBUNTU_DOWNLOAD_MANAGER_COMMON REQUIRED ubuntu-download-manager-common)
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 target_link_libraries(UbuntuUpdatePanel
