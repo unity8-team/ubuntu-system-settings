@@ -6,10 +6,8 @@
 # by the Free Software Foundation.
 
 from autopilot.introspection.dbus import StateNotFoundError
-from autopilot.platform import model
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, raises
-from testtools import skipIf
 
 from ubuntu_system_settings.tests import (
     UbuntuSystemSettingsTestCase,
@@ -133,11 +131,6 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
         self.assertThat(plugin, NotEquals(None))
 
 
-@skipIf(
-        model() == 'Desktop',
-        'Disable on desktop as causes apport window to popup, not'
-        'something for us to fix.'
-    )
 class SystemSettingsUpowerTestCases(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(SystemSettingsUpowerTestCases, self).setUp()
