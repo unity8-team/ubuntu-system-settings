@@ -127,6 +127,18 @@ QMap<QString, Plugin *> PluginManager::plugins(const QString &category) const
     return d->m_plugins.value(category);
 }
 
+void PluginManager::resetPlugins()
+{
+    Q_D(const PluginManager);
+
+    typedef QMap<QString, Plugin *> Plugins;
+    Q_FOREACH (const Plugins &plugins, d->m_plugins.values()) {
+        Q_FOREACH (Plugin *plugin, plugins.values()) {
+            plugin->reset();
+        }
+    }
+}
+
 QAbstractItemModel *PluginManager::itemModel(const QString &category)
 {
     Q_D(PluginManager);

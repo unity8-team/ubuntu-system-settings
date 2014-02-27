@@ -55,6 +55,7 @@ private:
     mutable Plugin *q_ptr;
     mutable ItemBase *m_item;
     mutable QPluginLoader m_loader;
+    mutable PluginInterface *m_plugin;
     QString m_baseName;
     QVariantMap m_data;
 };
@@ -105,14 +106,14 @@ bool PluginPrivate::ensureLoaded() const
         return false;
     }
 
-    PluginInterface *interface =
-        qobject_cast<SystemSettings::PluginInterface*>(m_loader.instance());
-    if (Q_UNLIKELY(interface == 0)) {
+    m_plugin = qobject_cast<SystemSettings::PluginInterface*>(
+                m_loader.instance());
+    if (Q_UNLIKELY(m_plugin == 0)) {
         qWarning() << name << "doesn't implement PluginInterface";
         return false;
     }
 
-    m_item = interface->createItem(m_data);
+    m_item = m_plugin->createItem(m_data);
     if (m_item == 0) return false;
 
     QObject::connect(m_item, SIGNAL(iconChanged()),
@@ -220,6 +221,47 @@ bool Plugin::hideByDefault() const
 {
     Q_D(const Plugin);
     return d->m_data.value(keyHideByDefault, false).toBool();
+}
+
+void Plugin::reset()
+{
+    Q_D(const Plugin);
+
+    qDebug() << "Resetting" << this->displayName();
+
+    d->ensureLoaded();
+
+    // Try to use the plugin's reset method
+    if (d->m_plugin && d->m_plugin->reset())
+        return;
+
+    // Otherwise, try to use one from the page component
+    QQmlComponent *component = pageComponent();
+
+    if (!component)
+        return;
+
+    QObject *object = component->create();
+
+    // If it's there, try to search for the method
+    if (!object)
+        return;
+
+    const QMetaObject *metaObject = object->metaObject();
+    int index = metaObject->indexOfMethod(
+                QMetaObject::normalizedSignature("reset(void)"));
+
+    // and if that exists, call it
+    if (index >= 0) {
+        QMetaMethod method = metaObject->method(index);
+        method.invoke(object, Qt::DirectConnection);
+    } else {
+        qDebug() << "Method not found";
+    }
+
+    delete object;
+    delete component;
+
 }
 
 QQmlComponent *Plugin::entryComponent()

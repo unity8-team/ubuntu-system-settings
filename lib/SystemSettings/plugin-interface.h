@@ -33,6 +33,8 @@ class PluginInterface
 public:
     virtual ItemBase *createItem(const QVariantMap &staticData,
                                  QObject *parent = 0) = 0;
+    /* Return true if a reset has been performed */
+    virtual bool reset() { return false; }
 };
 
 } // namespace
