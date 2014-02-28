@@ -43,7 +43,7 @@ class UpdateManager : public QObject
 Q_SIGNALS:
     void modelChanged();
     void updatesNotFound();
-    void updateAvailableFound();
+    void updateAvailableFound(bool downloading);
     void errorFound();
     void downloadModeChanged();
     void systemUpdateDownloaded();

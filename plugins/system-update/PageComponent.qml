@@ -122,6 +122,7 @@ ItemPage {
         onUpdateAvailableFound: {
             if (updateManager.model.length > 0) {
                 root.state = "UPDATE";
+                root.installAll = downloading
             } else {
                 root.state = "NOUPDATES";
             }
