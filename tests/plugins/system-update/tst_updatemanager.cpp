@@ -21,7 +21,6 @@
 
 #include "update_manager.h"
 #include "update.h"
-#include "fakedownloader.h"
 
 using namespace UpdatePlugin;
 
