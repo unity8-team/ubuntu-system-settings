@@ -21,6 +21,7 @@
 #include "test-plugin.h"
 
 #include <QDebug>
+#include <QEventLoop>
 #include <QStringList>
 #include <SystemSettings/ItemBase>
 
@@ -40,6 +41,13 @@ public:
                                          QObject *parent = 0);
 private:
     QQmlComponent *m_pageComponent;
+    void waitForComponentReady(QQmlComponent *component);
+
+Q_SIGNALS:
+    void componentReady();
+
+private Q_SLOTS:
+    void slotStatusChanged(QQmlComponent *);
 };
 
 TestItem::TestItem(const QVariantMap &staticData, QObject *parent):
@@ -62,6 +70,26 @@ QQmlComponent *TestItem::entryComponent(QQmlEngine *engine, QObject *parent)
     return 0;
 }
 
+void TestItem::slotStatusChanged(QQmlComponent * component)
+{
+    if (component->isReady())
+        Q_EMIT (componentReady());
+}
+
+void TestItem::waitForComponentReady(QQmlComponent *component)
+{
+    if (component->isReady())
+        return;
+
+    QEventLoop loop;
+
+    loop.connect(this, SIGNAL(componentReady()), SLOT(quit()));
+    QObject::connect(component, SIGNAL(statusChanged(QQmlComponent::Status)),
+                     this, SLOT(slotStatusChanged(QQmlComponent *)));
+
+    loop.exec();
+}
+
 QQmlComponent *TestItem::pageComponent(QQmlEngine *engine, QObject *parent)
 {
     if (m_pageComponent == NULL) {
@@ -75,6 +103,7 @@ QQmlComponent *TestItem::pageComponent(QQmlEngine *engine, QObject *parent)
                       "  color: \"red\""
                       "}",
                       QUrl());
+        waitForComponentReady(page);
         m_pageComponent = page;
     }
     return m_pageComponent;
