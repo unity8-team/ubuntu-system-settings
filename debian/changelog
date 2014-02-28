@@ -1,3 +1,27 @@
+ubuntu-system-settings (0.1+14.04.20140228-0ubuntu1) trusty; urgency=low
+
+  [ Michael Terry ]
+  * Add disabled skeleton of a "Welcome to Ubuntu" wizard for first-time
+    boot. Will be enabled when it is more complete.
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Andrea Cimitan ]
+  * Add disabled skeleton of a "Welcome to Ubuntu" wizard for first-time
+    boot. Will be enabled when it is more complete.
+
+  [ Iain Lane ]
+  * Add a 'downloading' parameter to updateAvailableFound so that the UI
+    can adjust itself. We need to know if a download is already in
+    progress when we enter the update screen to display 'pause' or
+    'install' as appropriate.
+
+  [ Sebastien Bacher ]
+  * Workarount qt bug that could lead to non working scrolling
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Feb 2014 18:36:12 +0000
+
 ubuntu-system-settings (0.1+14.04.20140224.1-0ubuntu1) trusty; urgency=low
 
   [ Iain Lane ]
