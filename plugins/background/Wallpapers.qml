@@ -120,12 +120,12 @@ ItemPage {
                     if (target.state === "saved") {
                         save(homeScreen, target.uri);
                         if (activeTransfer.state === ContentTransfer.Collected)
-                            activeTransfer.finalize();
+                            activeTransfer.state = ContentTransfer.Finalized;
                     }
                     if ((target.state === "cancelled") &&
                         (activeTransfer.state === ContentTransfer.Collected)) {
                         backgroundPanel.rmFile(target.uri);
-                        activeTransfer.finalize();
+                        activeTransfer.state = ContentTransfer.Finalized;
                     }
                 }
             }
@@ -147,18 +147,24 @@ ItemPage {
         }
     }
 
+    ContentPeer {
+        id: peer
+        contentType: ContentType.Pictures
+        handler: ContentHandler.Source
+        selectionType: ContentTransfer.Single
+    }
+
+    ContentStore {
+        id: appStore
+        scope: ContentScope.App
+    }
+
     function startContentTransfer(callback) {
         if (callback)
             contentHubConnection.imageCallback = callback
-        var transfer = ContentHub.importContent(
-                    ContentType.Pictures,
-                    ContentHub.defaultSourceForType(ContentType.Pictures));
-        if (transfer != null) {
-            transfer.selectionType = ContentTransfer.Single;
-            store = ContentHub.defaultStoreForType(ContentType.Pictures);
-            transfer.setStore(store);
+        var transfer = peer.request(appStore);
+        if (transfer !== null) {
             activeTransfer = transfer;
-            activeTransfer.start();
         }
     }
 }
