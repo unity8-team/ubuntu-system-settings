@@ -9,6 +9,10 @@ add_library(test-plugin SHARED test-plugin.cpp test-plugin.h)
 target_link_librarieS(test-plugin SystemSettings)
 qt5_use_modules(test-plugin Core Qml)
 
+add_library(test-plugin2 SHARED test-plugin2.cpp test-plugin2.h)
+target_link_librarieS(test-plugin2 SystemSettings)
+qt5_use_modules(test-plugin2 Core Qml)
+
 add_executable(tst-plugins 
     tst_plugins.cpp
     ../src/debug.cpp

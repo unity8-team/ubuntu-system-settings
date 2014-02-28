@@ -38,10 +38,13 @@ public:
                                           QObject *parent = 0);
     virtual QQmlComponent *pageComponent(QQmlEngine *engine,
                                          QObject *parent = 0);
+private:
+    QQmlComponent *m_pageComponent;
 };
 
 TestItem::TestItem(const QVariantMap &staticData, QObject *parent):
-    ItemBase(staticData, parent)
+    ItemBase(staticData, parent),
+    m_pageComponent(0)
 {
     QStringList keywords;
     keywords << "one" << "two" << "three";
@@ -61,15 +64,20 @@ QQmlComponent *TestItem::entryComponent(QQmlEngine *engine, QObject *parent)
 
 QQmlComponent *TestItem::pageComponent(QQmlEngine *engine, QObject *parent)
 {
-    QQmlComponent *page = new QQmlComponent(engine, parent);
-    page->setData("import QtQuick 2.0\n"
-                  "Rectangle {\n"
-                  "  width: 200; height: 200;\n"
-                  "  objectName: \"myRect\"\n"
-                  "  color: \"red\""
-                  "}",
-                  QUrl());
-    return page;
+    if (m_pageComponent == NULL) {
+        QQmlComponent *page = new QQmlComponent(engine, parent);
+        page->setData("import QtQuick 2.0\n"
+                      "Rectangle {\n"
+                      " property bool reset: false\n"
+                      " function reset() { console.log('Hello') }\n"
+                      "  width: 200; height: 200;\n"
+                      "  objectName: \"myRect\"\n"
+                      "  color: \"red\""
+                      "}",
+                      QUrl());
+        m_pageComponent = page;
+    }
+    return m_pageComponent;
 }
 
 TestPlugin::TestPlugin():
