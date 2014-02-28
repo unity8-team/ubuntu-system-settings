@@ -8,6 +8,7 @@ include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
 
 override_dh_install:
+	rm -r debian/tmp/usr/share/upstart # not ready yet; also, do not enable wizard without tests!
 	cd tests/autopilot; \
 	set -ex; for python in $(shell pyversions -r); do \
 		$$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
