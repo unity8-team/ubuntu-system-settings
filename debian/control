@@ -21,6 +21,8 @@ Build-Depends: dbus-test-runner,
                qtbase5-dev,
                qtdeclarative5-dev,
                libapt-pkg-dev,
+# test-deps
+               qtdeclarative5-qtquick2-plugin,
                xvfb,
                cmake,
 Standards-Version: 3.9.4

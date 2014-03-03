@@ -250,17 +250,6 @@ void Plugin::reset()
     if (!component)
         return;
 
-    while (component->isLoading()) {
-        QEventLoop loop;
-
-        QObject::connect(component,
-                         SIGNAL(statusChanged(QQmlComponent::Status)),
-                         &loop,
-                         SLOT(quit()));
-
-        loop.exec();
-    }
-
     QObject *object = component->create();
 
     // If it's there, try to search for the method
