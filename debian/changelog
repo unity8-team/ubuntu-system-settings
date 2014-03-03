@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.1+14.04.20140303-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Iain Lane ]
+  * Also store the ringtone, messages and silent mode settings in
+    AccountsService. (LP: #1265528)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 03 Mar 2014 17:03:35 +0000
+
 ubuntu-system-settings (0.1+14.04.20140228-0ubuntu1) trusty; urgency=low
 
   [ Michael Terry ]
