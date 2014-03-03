@@ -21,6 +21,7 @@
 #include "debug.h"
 #include "plugin.h"
 
+#include <QEventLoop>
 #include <QDir>
 #include <QFileInfo>
 #include <QJsonDocument>
@@ -248,6 +249,17 @@ void Plugin::reset()
 
     if (!component)
         return;
+
+    while (component->isLoading()) {
+        QEventLoop loop;
+
+        QObject::connect(component,
+                         SIGNAL(statusChanged(QQmlComponent::Status)),
+                         &loop,
+                         SLOT(quit()));
+
+        loop.exec();
+    }
 
     QObject *object = component->create();
 
