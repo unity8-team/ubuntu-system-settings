@@ -96,8 +96,7 @@ QQmlComponent *TestItem::pageComponent(QQmlEngine *engine, QObject *parent)
         QQmlComponent *page = new QQmlComponent(engine, parent);
         page->setData("import QtQuick 2.0\n"
                       "Rectangle {\n"
-                      " property bool reset: false\n"
-                      " function reset() { console.log('Hello') }\n"
+                      "  function reset() { console.log('Hello') }\n"
                       "  width: 200; height: 200;\n"
                       "  objectName: \"myRect\"\n"
                       "  color: \"red\""

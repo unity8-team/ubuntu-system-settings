@@ -252,8 +252,10 @@ void Plugin::reset()
     QObject *object = component->create();
 
     // If it's there, try to search for the method
-    if (!object)
+    if (!object) {
+        delete component;
         return;
+    }
 
     const QMetaObject *metaObject = object->metaObject();
     int index = metaObject->indexOfMethod(
