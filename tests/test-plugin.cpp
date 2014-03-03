@@ -21,7 +21,6 @@
 #include "test-plugin.h"
 
 #include <QDebug>
-#include <QEventLoop>
 #include <QStringList>
 #include <SystemSettings/ItemBase>
 
