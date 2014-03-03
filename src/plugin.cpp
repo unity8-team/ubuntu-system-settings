@@ -240,6 +240,13 @@ void Plugin::reset()
 
     d->ensureLoaded();
 
+    /* If the plugin implements version 1 of the interface but not version
+     * 2, we assume that we won't find a "reset()" method in the
+     * pageComponent either.
+     */
+    if (d->m_plugin && !d->m_plugin2)
+        return;
+
     // Try to use the plugin's reset method
     if (d->m_plugin2 && d->m_plugin2->reset())
         return;
