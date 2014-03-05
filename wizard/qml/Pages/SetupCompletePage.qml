@@ -38,7 +38,7 @@ LocalComponents.Page {
             fontSize: "large"
             text: i18n.tr("It’s great to have you in the Ubuntu Community.") +
                   "\n\n" +
-                  i18n.tr("You’re now ready to enjoy your new phone.")
+                  i18n.tr("Enjoy your new phone.")
         }
     }
     Component {

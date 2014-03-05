@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "qrc:/qml/Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Your phone settings")
+    title: i18n.tr("Phone settings")
     forwardButtonSourceComponent: forwardButton
 
     Item {

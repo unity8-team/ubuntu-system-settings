@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "qrc:/qml/Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("No SIM installed")
+    title: i18n.tr("No SIM card")
     forwardButtonSourceComponent: forwardButton
 
     Item {
@@ -27,33 +27,20 @@ LocalComponents.Page {
         anchors {
             fill: parent
             topMargin: topMargin
+            leftMargin: leftMargin
             rightMargin: rightMargin
             bottomMargin: bottomMargin
         }
 
-        Image {
-            id: image
-            anchors {
-                top: parent.top
-                left: parent.left
-                leftMargin: units.gu(2.5)
-            }
-            source: "data/meet_ubuntu_simcard@30.png"
-            height: units.gu(9)
-            width: units.gu(12.5)
-        }
-
         Label {
-            anchors {
-                top: image.bottom
-                left: parent.left
-                topMargin: units.gu(2)
-                leftMargin: leftMargin
-            }
-            width: content.width
+            width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("You need a valid SIM to use telephone and SMS features.")
+            text: i18n.tr("Don’t worry, you can insert a SIM card later.") +
+                  "\n\n" +
+                  i18n.tr("For the time being, you won’t have phone or SMS features.") +
+                  "\n\n" +
+                  i18n.tr("You can find a SIM in your phone package or contact your provider.")
         }
     }
 
@@ -61,7 +48,8 @@ LocalComponents.Page {
         id: forwardButton
         Button {
             text: i18n.tr("Skip")
-            onClicked: pageStack.push(Qt.resolvedUrl("WiFiPage.qml"))
+            //onClicked: pageStack.push(Qt.resolvedUrl("WiFiPage.qml"))
+            onClicked: pageStack.push(Qt.resolvedUrl("LocationPage.qml"))
         }
     }
 }
