@@ -23,6 +23,8 @@
 #include <QQuickView>
 #include <QtQml>
 
+#include "PageList.h"
+
 void start_xsession()
 {
     // When we get a request to stop, we don't quit but rather start xsession
@@ -51,12 +53,18 @@ int main(int argc, char **argv)
     bindtextdomain(I18N_DOMAIN, NULL);
     textdomain(I18N_DOMAIN);
 
+    QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
+    if (rootDir.isEmpty())
+        rootDir = WIZARD_ROOT;
+
+    PageList pageList(QDir(rootDir + "/qml/Pages"));
     QQuickView view;
     QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
-    view.setSource(QUrl("qrc:/qml/main.qml"));
+    view.rootContext()->setContextProperty("pageList", &pageList);
+    view.setSource(QUrl(rootDir + "/qml/main.qml"));
     view.show();
 //    view.showFullScreen();
 
