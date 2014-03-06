@@ -369,6 +369,7 @@ ItemPage {
 
     ListItem.Standard {
         id: notification
+        objectName: "notification"
         visible: false
         anchors.bottom: configuration.top
     }
@@ -391,6 +392,7 @@ ItemPage {
 
     Rectangle {
         id: updatedNotification
+        objectName: "updateNotification"
         anchors {
             left: parent.left
             right: parent.right

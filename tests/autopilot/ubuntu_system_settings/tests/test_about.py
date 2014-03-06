@@ -20,7 +20,6 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_about_page(self):
         """ Checks whether About page is available """
-        self.assertThat(self.about_page, NotEquals(None))
         self.assertThat(self.about_page.title, Equals(_('About this phone')))
 
     def test_device(self):
