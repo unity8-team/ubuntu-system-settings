@@ -20,7 +20,8 @@
  * This class lets the list of wizard pages be dynamic.
  * - To add new ones, drop them into
  *   /usr/share/ubuntu/settings/wizard/qml/Pages with a numbered prefix, like
- *   "21-custom-page.qml".
+ *   "21-custom-page.qml".  The number determines the order in the page
+ *   sequence that your page will appear.
  * - To disable an existing page, rename it so that it no longer starts with a
  *   number.
  * - To go to the next page, use pageStack.next()
