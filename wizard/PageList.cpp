@@ -16,6 +16,21 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * This class lets the list of wizard pages be dynamic.
+ * - To add new ones, drop them into
+ *   /usr/share/ubuntu/settings/wizard/qml/Pages with a numbered prefix, like
+ *   "21-custom-page.qml".
+ * - To disable an existing page, rename it so that it no longer starts with a
+ *   number.
+ * - To go to the next page, use pageStack.next()
+ * - To go back to the previous page, use pageStack.prev()
+ * - To load a page outside of the normal flow (so that it doesn't affect the
+ *   back button), use pageStack.push(Qt.resolvedUrl("custom-page.qml")) in
+ *   your page.
+ * - See default pages for plenty of examples.
+ */
+
 #include "PageList.h"
 
 PageList::PageList(const QDir &dir, QObject *parent)
