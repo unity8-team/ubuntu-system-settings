@@ -59,6 +59,7 @@ ItemPage {
             action: selectDefaultPeer
         }
         opened: true
+        locked: true
     }
 
     UbuntuBackgroundPanel {
