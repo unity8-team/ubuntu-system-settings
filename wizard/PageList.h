@@ -19,8 +19,9 @@
 #ifndef PAGELIST_H
 #define PAGEList_H
 
-#include <QDir>
-#include <QStringList>
+#include <QMap>
+#include <QObject>
+#include <QString>
 
 class PageList : public QObject
 {
@@ -28,9 +29,11 @@ class PageList : public QObject
     Q_PROPERTY(int index READ index NOTIFY indexChanged)
 
 public:
-    explicit PageList(const QDir &dir, QObject *parent = 0);
+    explicit PageList(QObject *parent = 0);
 
-    int index();
+    QStringList entries() const;
+    QStringList paths() const;
+    int index() const;
 
 public Q_SLOTS:
     QString prev();
@@ -42,9 +45,8 @@ Q_SIGNALS:
 private:
     int setIndex(int index);
 
-    QDir m_dir;
     int m_index;
-    QStringList m_pages;
+    QMap<QString, QString> m_pages;
 };
 
 #endif // PAGELIST_H

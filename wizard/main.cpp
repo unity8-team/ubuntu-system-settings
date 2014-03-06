@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     if (rootDir.isEmpty())
         rootDir = WIZARD_ROOT;
 
-    PageList pageList(QDir(rootDir + "/qml/Pages"));
+    PageList pageList;
     QQuickView view;
     QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);
     view.setResizeMode(QQuickView::SizeRootObjectToView);

@@ -19,11 +19,10 @@
 /**
  * This class lets the list of wizard pages be dynamic.
  * - To add new ones, drop them into
- *   /usr/share/ubuntu/settings/wizard/qml/Pages with a numbered prefix, like
- *   "21-custom-page.qml".  The number determines the order in the page
+ *   $XDG_DATA_DIRS/ubuntu/settings/wizard/qml/Pages with a numbered prefix,
+ *   like "21-custom-page.qml".  The number determines the order in the page
  *   sequence that your page will appear.
- * - To disable an existing page, rename it so that it no longer starts with a
- *   number.
+ * - To disable an existing page, add a file like "21-custom-page.qml.disabled"
  * - To go to the next page, use pageStack.next()
  * - To go back to the previous page, use pageStack.prev()
  * - To load a page outside of the normal flow (so that it doesn't affect the
@@ -33,18 +32,46 @@
  */
 
 #include "PageList.h"
+#include <QDir>
+#include <QStandardPaths>
 
-PageList::PageList(const QDir &dir, QObject *parent)
+#include <QDebug>
+PageList::PageList(QObject *parent)
     : QObject(parent),
-      m_dir(dir),
       m_index(-1),
       m_pages()
 {
-    QStringList filters("[0-9]*");
-    m_pages = dir.entryList(filters, QDir::Files | QDir::Readable, QDir::Name);
+    QStringList dataDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+    Q_FOREACH(const QString &dataDir, dataDirs) {
+        QDir dir(dataDir + "/ubuntu/settings/wizard/qml/Pages");
+        QStringList entries = dir.entryList(QStringList("[0-9]*"), QDir::Files | QDir::Readable);
+        Q_FOREACH(const QString &entry, entries) {
+            if (!m_pages.contains(entry))
+                m_pages.insert(entry, dir.absoluteFilePath(entry));
+        }
+    }
+
+    // Now remove any explicitly disabled entries
+    QString disableSuffix = ".disabled";
+    Q_FOREACH(const QString &page, m_pages.keys()) {
+        if (page.endsWith(disableSuffix)) {
+            m_pages.remove(page);
+            m_pages.remove(page.left(page.size() - disableSuffix.size()));
+        }
+    }
 }
 
-int PageList::index()
+QStringList PageList::entries() const
+{
+    return m_pages.keys();
+}
+
+QStringList PageList::paths() const
+{
+    return m_pages.values();
+}
+
+int PageList::index() const
 {
     return m_index;
 }
@@ -52,15 +79,15 @@ int PageList::index()
 QString PageList::prev()
 {
     if (m_index > 0)
-        return m_dir.absoluteFilePath(m_pages[setIndex(m_index - 1)]);
+        return m_pages.values()[setIndex(m_index - 1)];
     else
         return QString();
 }
 
 QString PageList::next()
 {
-    if (m_index < m_pages.length() - 1)
-        return m_dir.absoluteFilePath(m_pages[setIndex(m_index + 1)]);
+    if (m_index < m_pages.count() - 1)
+        return m_pages.values()[setIndex(m_index + 1)];
     else
         return QString();
 }
