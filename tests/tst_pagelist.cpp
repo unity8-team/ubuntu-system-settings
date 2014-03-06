@@ -36,6 +36,7 @@ private Q_SLOTS:
     void testCollect();
     void testIterate();
     void testIgnoreNonNumbered();
+    void testIgnoreDuplicates();
     void testDisabled();
 
 private:
@@ -108,6 +109,17 @@ void PageListTest::testIgnoreNonNumbered()
 
     PageList pageList;
     QCOMPARE(pageList.entries(), QStringList() << "1");
+}
+
+void PageListTest::testIgnoreDuplicates()
+{
+    QTemporaryDir root;
+    fillRoot(root);
+    makeFile(root, "a", "1");
+    makeFile(root, "b", "1");
+
+    PageList pageList;
+    QCOMPARE(pageList.paths(), QStringList() << root.path() + "/a/" + PAGES_PATH + "/1");
 }
 
 void PageListTest::testDisabled()
