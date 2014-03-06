@@ -88,8 +88,9 @@ void PageListTest::testIterate()
     makeFile(root, "a", "3");
 
     PageList pageList;
-    QCOMPARE(pageList.prev(), QString());
+    QCOMPARE(pageList.index(), -1);
     QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/1");
+    QCOMPARE(pageList.prev(), QString());
     QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/2");
     QCOMPARE(pageList.prev(), root.path() + "/a/" + PAGES_PATH + "/1");
     QCOMPARE(pageList.index(), 0);
