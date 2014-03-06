@@ -24,21 +24,31 @@ ItemPage {
                              {return soundsDir+sound})
             soundDisplayNames = Utilities.buildSoundValues(soundFileNames)
             if (soundType == 0)
-                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, soundSettings.incomingCallSound)
+                soundSelector.selectedIndex =
+                        Utilities.indexSelectedFile(soundFileNames,
+                                                    incomingCallSound)
             else if (soundType == 1)
-                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, soundSettings.incomingMessageSound)
+                soundSelector.selectedIndex =
+                        Utilities.indexSelectedFile(soundFileNames,
+                                                    incomingMessageSound)
+        }
+        onIncomingCallSoundChanged: {
+            if (soundType == 0)
+                soundSelector.selectedIndex =
+                        Utilities.indexSelectedFile(soundFileNames,
+                                                    incomingCallSound)
+        }
+        onIncomingMessageSoundChanged: {
+            if (soundType == 1)
+                soundSelector.selectedIndex =
+                        Utilities.indexSelectedFile(soundFileNames,
+                                                    incomingMessageSound)
         }
     }
 
     GSettings {
         id: soundSettings
         schema.id: "com.ubuntu.touch.sound"
-        onChanged: {
-            if (soundType == 0 && key == "incomingCallSound")
-                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, value)
-            if (soundType == 1 && key == "incomingMessageSound")
-                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, value)
-        }
     }
 
     Audio {
@@ -50,7 +60,7 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        SilentModeWarning { visible: soundSettings.silentMode }
+        SilentModeWarning { visible: backendInfo.silentMode }
 
         ListItem.SingleControl {
             id: listId
@@ -61,7 +71,7 @@ ItemPage {
                     soundEffect.stop()
             }
             enabled: soundEffect.playbackState == Audio.PlayingState
-            visible: showStopButton && !soundSettings.silentMode
+            visible: showStopButton && !backendInfo.silentMode
         }
     }
 
@@ -74,12 +84,15 @@ ItemPage {
         expanded: true
         model: soundDisplayNames
         onDelegateClicked: {
-            if (soundType == 0)
+            if (soundType == 0) {
                 soundSettings.incomingCallSound = soundFileNames[index]
-            else if (soundType == 1)
+                backendInfo.incomingCallSound = soundFileNames[index]
+            } else if (soundType == 1) {
                 soundSettings.incomingMessageSound = soundFileNames[index]
+                backendInfo.incomingMessageSound = soundFileNames[index]
+            }
             /* Only preview the file if not in silent mode */
-            if (!soundSettings.silentMode) {
+            if (!backendInfo.silentMode) {
                 soundEffect.source = soundFileNames[index]
                 soundEffect.play()
             }
