@@ -23,6 +23,7 @@
  
 import dbus
 import os
+import sys
 
 from gi.repository import Gio
 
@@ -42,8 +43,11 @@ def get_bool(key):
     return gsettings.get_boolean(key)
 
 def set_as_setting(interface, setting, value):
-    user_proxy.Set(interface, setting, value, 
-                   dbus_interface=dbus.PROPERTIES_IFACE)
+    try:
+        user_proxy.Set(interface, setting, value, 
+                       dbus_interface=dbus.PROPERTIES_IFACE)
+    except dbus.exceptions.DBusException as e:
+        print("Couldn't update %s: %s" % (setting, e), file=sys.stderr) 
 
 # (gsettings key, accountsservice key, function to retrieve from gsettings)
 keys = [('silent-mode', 'SilentMode', get_bool),
