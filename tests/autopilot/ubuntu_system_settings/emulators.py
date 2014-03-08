@@ -51,6 +51,7 @@ class PageComponent(MainWindow):
 
     # updates pages
     def click_install_all_button(self):
+        """click install all button"""
         button = self._get_install_all_button()
         self.click_obj(button)
         return button
@@ -133,6 +134,7 @@ class PageComponent(MainWindow):
                                        objectName='checkForUpdatesArea')
 
     def _get_check_for_updates_label(self):
+        """return label for check updates area"""
         area = self.get_check_for_updates_area()
         return area.select_single('Label')
 
@@ -141,11 +143,13 @@ class Dialog(MainWindow):
     # updates page dialog
     # TODO add object names to qml file
     def click_not_now(self):
+        """Click not now button"""
         button = self.click_obj(
             self.wait_select_single('Button', text='Not Now'))
         button.wait_for_destroyed()
 
     def click_install_and_restart(self):
+        """Click install and restart button"""
         button = self.click_obj(
             self.wait_select_single('Button', text='Install & Restart'))
         button.wait_for_destroyed()

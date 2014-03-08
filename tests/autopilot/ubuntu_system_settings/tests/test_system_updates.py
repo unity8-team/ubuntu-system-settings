@@ -6,8 +6,7 @@
 # by the Free Software Foundation.
 
 from autopilot.introspection.dbus import StateNotFoundError
-from autopilot.matchers import Eventually
-from testtools.matchers import Equals, raises, StartsWith
+from testtools.matchers import Equals, raises
 
 from ubuntu_system_settings.tests import SystemUpdatesBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
@@ -27,26 +26,8 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         """Check the page title is Updates """
         self.assertThat(self.updates_page.title, Equals(_('Updates')))
 
-    def test_text_area_text(self):
-        text = self.updates_page.get_check_for_updates_label().text
-        self.assertThat(
-            text,
-            Eventually(StartsWith('Checking for updates'))
-        )
-
-    def test_get_state(self):
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-        print self.updates_page.get_state()
-
     def test_updates_not_in_main(self):
         """Check that the updates notification is shown in main."""
         self.assertThat(lambda: self.main_view.select_single(
-            objectName='entryComponent-updates'), raises(StateNotFoundError))
+            objectName='entryComponent-updates'),
+            raises(StateNotFoundError))
