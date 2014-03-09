@@ -193,9 +193,12 @@ class StorageBaseTestCase(AboutBaseTestCase):
         """ Go to Storage Page """
         super(StorageBaseTestCase, self).setUp()
         # Click on 'Storage' option
-        button = self.about_page.select_single(objectName='storageItem')
-        self.assertThat(button, NotEquals(None))
+        button = self.about_page.select_single(
+            'Standard', objectName='storageItem'
+        )
         self.scroll_to_and_click(button)
+
+        self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
@@ -209,10 +212,17 @@ class StorageBaseTestCase(AboutBaseTestCase):
         values = size_label.text.split(' ')  # Format: "00.0 (bytes|MB|GB)"
         self.assertThat(len(values), GreaterThan(1))
 
+    def get_storage_space_used_by_category(self, objectName):
+        return self.main_view.wait_select_single(
+            'StorageItem', objectName=objectName
+            ).value
+
     @property
     def storage_page(self):
         """ Return 'Storage' page """
-        return self.main_view.select_single(objectName='storagePage')
+        return self.main_view.select_single(
+            'Storage', objectName='storagePage'
+        )
 
 
 class LicenseBaseTestCase(AboutBaseTestCase):

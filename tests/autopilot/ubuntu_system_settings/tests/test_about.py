@@ -5,12 +5,12 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from time import sleep
+import subprocess
+import os
 
 from autopilot.platform import model
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
-from unittest import expectedFailure
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
@@ -99,15 +99,15 @@ class AboutTestCase(AboutBaseTestCase):
 class StorageTestCase(StorageBaseTestCase):
     """ Tests for Storage """
 
-    def test_storage_page(self):
-        """ Check whether Storage page is available """
-        self.assertThat(self.storage_page, NotEquals(None))
+    def _get_space_by_directory(self, dir_name):
+        location = os.path.expanduser('~/' + dir_name)
+        output = subprocess.check_output(['du', '--block-size=1', location])
+        disk_space = output.split()[len(output.split()) - 2]
+        return disk_space
 
     def test_disk(self):
         """ Checks whether disk item is available """
-        sleep(5)
-        disk_item = self.storage_page.select_single(objectName='diskItem')
-        self.assertThat(disk_item, NotEquals(None))
+        disk_item = self.storage_page.wait_select_single(objectName='diskItem')
         self.assertThat(disk_item.text, Equals('Total storage'))
 
     def test_space(self):
@@ -118,17 +118,35 @@ class StorageTestCase(StorageBaseTestCase):
         """ Checks storage item """
         self.assert_space_item('usedByUbuntuItem', 'Used by Ubuntu')
 
-    def test_space_movies(self):
-        """ Checks whether space item is available """
-        self.assert_space_item('moviesItem', 'Videos')
+    def test_space_used_by_movies(self):
+        """ Checks whether space shown to be used by movies is
+        correct. """
+        movie_space = self._get_space_by_directory('Videos')
+        movie_space_in_ui = self.get_storage_space_used_by_category(
+            'moviesItem'
+        )
 
-    def test_space_audio(self):
-        """ Checks whether space item is available """
-        self.assert_space_item('audioItem', 'Audio')
+        self.assertEquals(movie_space_in_ui, movie_space)
 
-    def test_space_pictures(self):
-        """ Checks whether space item is available """
-        self.assert_space_item('picturesItem', 'Pictures')
+    def test_space_used_by_music(self):
+        """ Checks whether space shown to be used by music is
+        correct. """
+        music_space = self._get_space_by_directory('Music')
+        music_space_in_ui = self.get_storage_space_used_by_category(
+            'audioItem'
+        )
+
+        self.assertEquals(music_space_in_ui, music_space)
+
+    def test_space_used_by_pictures(self):
+        """ Checks whether space shown to be used by pictures is
+        correct. """
+        pictures_space = self._get_space_by_directory('Pictures')
+        pictures_space_in_ui = self.get_storage_space_used_by_category(
+            'picturesItem'
+        )
+
+        self.assertEquals(pictures_space_in_ui, pictures_space)
 
     def test_space_other_files(self):
         """ Checks whether space item is available """
