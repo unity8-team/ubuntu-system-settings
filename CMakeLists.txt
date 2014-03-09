@@ -68,6 +68,7 @@ include_directories(src)
 add_subdirectory(plugins)
 add_subdirectory(src)
 add_subdirectory(tests)
+add_subdirectory(wizard)
 
 configure_file(ubuntu-system-settings.desktop.in ubuntu-system-settings.desktop @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-system-settings.desktop DESTINATION share/applications)
