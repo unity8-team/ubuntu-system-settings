@@ -8,7 +8,6 @@ ItemPage {
     property string binary;
 
     id: licensesPage
-    objectName: "licensesPage"
     title: binary
     flickable: scrollWidget
 

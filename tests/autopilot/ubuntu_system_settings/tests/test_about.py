@@ -8,6 +8,7 @@
 from time import sleep
 
 from autopilot.platform import model
+from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 from unittest import expectedFailure
 
@@ -148,7 +149,6 @@ class StorageTestCase(StorageBaseTestCase):
 class LicenseTestCase(LicenseBaseTestCase):
     """ Tests for Licenses """
 
-    @expectedFailure
     def test_licenses_page(self):
         """ Check whether Storage page is available """
-        self.assertThat(self.licenses_page, NotEquals(None))
+        self.assertThat(self.licenses_page.active, Eventually(Equals(True)))

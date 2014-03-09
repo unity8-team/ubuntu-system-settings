@@ -222,15 +222,17 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """ Go to License Page """
         super(LicenseBaseTestCase, self).setUp()
         # Click on 'Software licenses' option
-        button = self.main_view.select_single(objectName='licenseItem')
-        self.assertThat(button, NotEquals(None))
-        self.assertThat(button.text, Equals('Software licenses'))
+        button = self.main_view.select_single(
+            'Standard', objectName='licenseItem'
+        )
         self.scroll_to_and_click(button)
 
     @property
     def licenses_page(self):
         """ Return 'License' page """
-        return self.main_view.select_single(objectName='licensesPage')
+        return self.main_view.wait_select_single(
+            'ItemPage', objectName='licensesPage'
+        )
 
 
 class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
