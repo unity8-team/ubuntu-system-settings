@@ -1,0 +1,34 @@
+# -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
+# Copyright 2013 Canonical
+#
+# This program is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 3, as published
+# by the Free Software Foundation.
+
+import unittest
+import subprocess
+
+
+class StaticCodeTests(unittest.TestCase):
+
+    def _is_tool_installed(tool):
+        return subprocess.call(['which', tool],
+                               stdout=subprocess.PIPE)
+
+    @unittest.skipIf(
+        _is_tool_installed('pyflakes') != 0, 'pyflakes not installed'
+    )
+    def test_pyflakes(self):
+        pyflakes = subprocess.Popen(['pyflakes', '.'], stdout=subprocess.PIPE,
+                                    universal_newlines=True)
+        (out, err) = pyflakes.communicate()
+        self.assertEqual(pyflakes.returncode, 0, out)
+
+    @unittest.skipIf(
+        _is_tool_installed('pep8') != 0, 'pep8 not installed'
+    )
+    def test_pep8(self):
+        pep8 = subprocess.Popen(['pep8', '.'], stdout=subprocess.PIPE,
+                                universal_newlines=True)
+        (out, err) = pep8.communicate()
+        self.assertEqual(pep8.returncode, 0, out)
