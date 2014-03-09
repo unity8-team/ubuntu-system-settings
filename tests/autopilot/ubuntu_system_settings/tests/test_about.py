@@ -5,12 +5,13 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-import subprocess
 import os
+import subprocess
 
-from autopilot.platform import model
 from autopilot.matchers import Eventually
-from testtools.matchers import Equals, NotEquals, GreaterThan
+from autopilot.platform import model
+from testtools import skipUnless
+from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
@@ -18,20 +19,27 @@ from ubuntu_system_settings.tests import (
     LicenseBaseTestCase
 )
 
+import dbus
+
 
 class AboutTestCase(AboutBaseTestCase):
     """ Tests for About this phone Page """
 
-    def test_about_page(self):
-        """ Checks whether About page is available """
-        self.assertThat(self.about_page, NotEquals(None))
-        self.assertThat(self.about_page.title, Equals('About this phone'))
+    def _get_imei_from_dbus(self):
+        bus = dbus.SystemBus()
+        manager = dbus.Interface(
+            bus.get_object('org.ofono', '/'), 'org.ofono.Manager'
+        )
+        modems = manager.GetModems()
 
-    def test_device(self):
-        """ Checks whether Device info is shown """
-        device_label = self.about_page.select_single(objectName='deviceLabel')
-        self.assertThat(device_label, NotEquals(None))
-        self.assertThat(device_label.text, NotEquals(''))
+        for path, properties in modems:
+            return properties['Serial']
+
+    def _get_os_name(self):
+        os_id = subprocess.check_output(['lsb_release', '-is'])
+        os_release = subprocess.check_output(['lsb_release', '-rs'])
+
+        return '{} {}'.format(os_id.strip(), os_release.strip())
 
     def test_serial(self):
         """ Checks whether Serial info is available """
@@ -43,33 +51,23 @@ class AboutTestCase(AboutBaseTestCase):
         else:
             self.assertThat(item.value, NotEquals('N/A'))
 
-    def test_imei(self):
-        """ Checks whether IMEI info is available """
-        item = self.about_page.select_single(objectName='imeiItem')
-        self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('IMEI'))
-        if (model() == 'Desktop'):
-            self.assertThat(item.value, Equals('N/A'))
-        else:
-            self.assertThat(item.value, NotEquals('N/A'))
+    @skipUnless(
+        model() == 'Nexus 4',
+        'Nexus 4 is currently the only telephony device that we support'
+    )
+    def test_imei_information_is_correct(self):
+        """Checks whether the UI is exposing the right IMEI."""
+        imei = self.about_page.wait_select_single(
+            objectName='imeiItem').value
 
-    def test_software(self):
-        """ Checks whether Software info is available """
-        item = self.about_page.select_single(objectName='softwareItem')
-        self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('Software:'))
+        self.assertEquals(imei, self._get_imei_from_dbus())
 
-    def test_os(self):
-        """ Checks whether OS info is available """
+    def test_settings_show_correct_version_of_the_os(self):
+        """Ensure the UI is showing the correct version of the OS."""
         item = self.about_page.select_single(objectName='osItem')
-        self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('OS'))
-        info = item.value.split()
-        self.assertThat(len(info), GreaterThan(1))
-        self.assertThat(info[0], Equals('Ubuntu'))
-        self.assertThat(info[1], NotEquals(''))
-        if (len(info) > 2):
-            self.assertThat(info[2], NotEquals(''))
+        # TODO: find a way to check the image build number as well
+        # -- om26er 10-03-2014
+        self.assertTrue(self._get_os_name() in item.value)
 
     def test_last_updated(self):
         """ Checks whether Last Updated info is available """
@@ -82,18 +80,6 @@ class AboutTestCase(AboutBaseTestCase):
         else:
             # 2013-10-19
             self.assertThat(len(item.value), Equals(10))
-
-    def test_legal(self):
-        """ Checks whether Legal info is available """
-        item = self.about_page.select_single(objectName='legalItem')
-        self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('Legal:'))
-
-    def test_update(self):
-        """ Checks whether Update button is available """
-        button = self.about_page.select_single(objectName='updateButton')
-        self.assertThat(button, NotEquals(None))
-        self.assertThat(button.text, Equals('Check for updates'))
 
 
 class StorageTestCase(StorageBaseTestCase):

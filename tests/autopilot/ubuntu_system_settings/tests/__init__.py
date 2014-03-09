@@ -179,6 +179,7 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """ Go to About page """
         super(AboutBaseTestCase, self).setUp('about')
+        self.assertThat(self.about_page.active, Eventually(Equals(True)))
 
     @property
     def about_page(self):
