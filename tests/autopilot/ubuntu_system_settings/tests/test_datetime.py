@@ -94,7 +94,6 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def test_same_tz_selection(self):
         """ Check that manually setting a timezone then setting the same one
             doesn't take you back to the index.
-
         """
         self.test_manual_tz_selection()
         self.click_tz_search_field()

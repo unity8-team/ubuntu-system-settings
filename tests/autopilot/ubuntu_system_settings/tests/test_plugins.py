@@ -136,8 +136,7 @@ class SystemSettingsUpowerTestCases(UbuntuSystemSettingsUpowerTestCase):
 
     def test_no_battery_plugin_without_battery(self):
         """ Checks whether the Battery plugin is not available as we
-        have no battery
-
+        have no battery.
         """
         self.assertThat(lambda: self.main_view.select_single(
             objectName='entryComponent-battery'),
