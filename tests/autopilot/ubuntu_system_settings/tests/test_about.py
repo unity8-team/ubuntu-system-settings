@@ -72,7 +72,7 @@ class AboutTestCase(AboutBaseTestCase):
     def test_serial(self):
         """Checks whether the UI is showing the correct serial number."""
         item = self.about_page.select_single(objectName='serialItem')
-        
+
         if model() == 'Desktop':
             self.assertThat(item.value, Equals(_('N/A')))
         else:
@@ -117,7 +117,7 @@ class AboutTestCase(AboutBaseTestCase):
         last_updated = self.about_page.select_single(
             objectName='lastUpdatedItem'
             ).value
-        
+
         self.assertEquals(last_updated, self._get_last_updated_date())
 
 
