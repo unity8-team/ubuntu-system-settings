@@ -9,6 +9,8 @@
 
 from __future__ import absolute_import
 
+from ubuntu_system_settings.utils.i18n import ugettext as _
+
 from autopilot.input import Mouse, Touch, Pointer
 from autopilot.platform import model
 from autopilot.matchers import Eventually
@@ -32,10 +34,6 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        # make sure the environment language is always english because
-        # our tests are heavily relying on strings, need to change that
-        # ASAP -- om26er 28-02-14
-        self.patch_environment('LC_MESSAGES', 'en_US.UTF-8')
         self.launch_system_settings(panel=panel)
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
@@ -224,7 +222,7 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         # Click on 'Software licenses' option
         button = self.main_view.select_single(objectName='licenseItem')
         self.assertThat(button, NotEquals(None))
-        self.assertThat(button.text, Equals('Software licenses'))
+        self.assertThat(button.text, Equals(_('Software licenses')))
         self.scroll_to_and_click(button)
 
     @property

@@ -16,6 +16,7 @@ from ubuntu_system_settings.tests import (
     StorageBaseTestCase,
     LicenseBaseTestCase
 )
+from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
 class AboutTestCase(AboutBaseTestCase):
@@ -24,7 +25,7 @@ class AboutTestCase(AboutBaseTestCase):
     def test_about_page(self):
         """ Checks whether About page is available """
         self.assertThat(self.about_page, NotEquals(None))
-        self.assertThat(self.about_page.title, Equals('About this phone'))
+        self.assertThat(self.about_page.title, Equals(_('About this phone')))
 
     def test_device(self):
         """ Checks whether Device info is shown """
@@ -36,36 +37,36 @@ class AboutTestCase(AboutBaseTestCase):
         """ Checks whether Serial info is available """
         item = self.about_page.select_single(objectName='serialItem')
         self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('Serial'))
+        self.assertThat(item.text, Equals(_('Serial')))
         if (model() == 'Desktop'):
-            self.assertThat(item.value, Equals('N/A'))
+            self.assertThat(item.value, Equals(_('N/A')))
         else:
-            self.assertThat(item.value, NotEquals('N/A'))
+            self.assertThat(item.value, NotEquals(_('N/A')))
 
     def test_imei(self):
         """ Checks whether IMEI info is available """
         item = self.about_page.select_single(objectName='imeiItem')
         self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('IMEI'))
+        self.assertThat(item.text, Equals(_('IMEI')))
         if (model() == 'Desktop'):
-            self.assertThat(item.value, Equals('N/A'))
+            self.assertThat(item.value, Equals(_('N/A')))
         else:
-            self.assertThat(item.value, NotEquals('N/A'))
+            self.assertThat(item.value, NotEquals(_('N/A')))
 
     def test_software(self):
         """ Checks whether Software info is available """
         item = self.about_page.select_single(objectName='softwareItem')
         self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('Software:'))
+        self.assertThat(item.text, Equals(_('Software:')))
 
     def test_os(self):
         """ Checks whether OS info is available """
         item = self.about_page.select_single(objectName='osItem')
         self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('OS'))
+        self.assertThat(item.text, Equals(_('OS')))
         info = item.value.split()
         self.assertThat(len(info), GreaterThan(1))
-        self.assertThat(info[0], Equals('Ubuntu'))
+        self.assertThat(info[0], Equals(_('Ubuntu')))
         self.assertThat(info[1], NotEquals(''))
         if (len(info) > 2):
             self.assertThat(info[2], NotEquals(''))
@@ -74,10 +75,10 @@ class AboutTestCase(AboutBaseTestCase):
         """ Checks whether Last Updated info is available """
         item = self.about_page.select_single(objectName='lastUpdatedItem')
         self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('Last updated'))
+        self.assertThat(item.text, Equals(_('Last updated')))
         date = item.value.split('-')
         if (len(date) == 1):
-            self.assertThat(item.value, Equals('Never'))
+            self.assertThat(item.value, Equals(_('Never')))
         else:
             # 2013-10-19
             self.assertThat(len(item.value), Equals(10))
@@ -86,13 +87,13 @@ class AboutTestCase(AboutBaseTestCase):
         """ Checks whether Legal info is available """
         item = self.about_page.select_single(objectName='legalItem')
         self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals('Legal:'))
+        self.assertThat(item.text, Equals(_('Legal:')))
 
     def test_update(self):
         """ Checks whether Update button is available """
         button = self.about_page.select_single(objectName='updateButton')
         self.assertThat(button, NotEquals(None))
-        self.assertThat(button.text, Equals('Check for updates'))
+        self.assertThat(button.text, Equals(_('Check for updates')))
 
 
 class StorageTestCase(StorageBaseTestCase):
@@ -107,35 +108,35 @@ class StorageTestCase(StorageBaseTestCase):
         sleep(5)
         disk_item = self.storage_page.select_single(objectName='diskItem')
         self.assertThat(disk_item, NotEquals(None))
-        self.assertThat(disk_item.text, Equals('Total storage'))
+        self.assertThat(disk_item.text, Equals(_('Total storage')))
 
     def test_space(self):
         """ Checks whether storage item is available """
-        self.assert_space_item('storageItem', 'Free space')
+        self.assert_space_item('storageItem', _('Free space'))
 
     def test_space_ubuntu(self):
         """ Checks storage item """
-        self.assert_space_item('usedByUbuntuItem', 'Used by Ubuntu')
+        self.assert_space_item('usedByUbuntuItem', _('Used by Ubuntu'))
 
     def test_space_movies(self):
         """ Checks whether space item is available """
-        self.assert_space_item('moviesItem', 'Videos')
+        self.assert_space_item('moviesItem', _('Videos'))
 
     def test_space_audio(self):
         """ Checks whether space item is available """
-        self.assert_space_item('audioItem', 'Audio')
+        self.assert_space_item('audioItem', _('Audio'))
 
     def test_space_pictures(self):
         """ Checks whether space item is available """
-        self.assert_space_item('picturesItem', 'Pictures')
+        self.assert_space_item('picturesItem', _('Pictures'))
 
     def test_space_other_files(self):
         """ Checks whether space item is available """
-        self.assert_space_item('otherFilesItem', 'Other files')
+        self.assert_space_item('otherFilesItem', _('Other files'))
 
     def test_space_used_by_apps(self):
         """ Checks whether space item is available """
-        self.assert_space_item('usedByAppsItem', 'Used by apps')
+        self.assert_space_item('usedByAppsItem', _('Used by apps'))
 
     def test_installed_apps(self):
         """ Checks whether Installed Apps list is available """
