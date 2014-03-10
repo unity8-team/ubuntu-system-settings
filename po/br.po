@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2014-03-05 12:09+0000\n"
+"PO-Revision-Date: 2014-03-06 08:26+0000\n"
 "Last-Translator: Fohanno Thierry <thierry.fohanno@ofis-bzh.org>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-06 06:17+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 07:26+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
@@ -38,7 +38,7 @@ msgstr "Nullañ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:111
 msgid "Confirm"
-msgstr "Mat eo din"
+msgstr "Kadarnaat"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:31
@@ -78,7 +78,7 @@ msgstr "Lakaat pennlizherennoù ent emgefre"
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 "Gweredekaat Pennl. evit ober ur bennlizherenn eus lizherenn gentañ pep "
-"frazenn"
+"frazenn."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:153
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:130
@@ -155,11 +155,11 @@ msgstr "Sonioù all :"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:138
 msgid "Lock sound"
-msgstr "Prennañ ar son"
+msgstr "Son ar prennañ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr "Er Mod didrouz emañ ar pellgomzer"
+msgstr "Er Mod didrouz emañ ar pellgomzer."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:29
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:73
@@ -283,11 +283,11 @@ msgstr "Kas disoc'hoù eus :"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr "Lec'hiadur"
+msgstr "Lec'h"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr "Dinoiñ al lec'hiadur"
+msgstr "Dinoiñ al lec'h"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:70
 msgid ""
@@ -640,7 +640,7 @@ msgstr "Takad-eur"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr "Lakaat an takad-eur :"
+msgstr "Lakaat an takad-eur :"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:114
 msgid "Enter your current location."
@@ -682,7 +682,7 @@ msgstr "Restroù all"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:93
 msgid "Used by apps"
-msgstr "Implijet gant arloadoù"
+msgstr "Implijet gant an arloadoù"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:143
 msgid "Total storage"
@@ -720,7 +720,7 @@ msgstr "RK"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:110
 msgid "Last updated"
-msgstr "Hizivaet da ziwezhañ"
+msgstr "Hizivadenn diwezhañ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:111
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:312
@@ -789,7 +789,7 @@ msgstr "Video"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:88
 msgid "Other Audio"
-msgstr "Son all"
+msgstr "Sonioù all"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:89
 msgid "Joypad"
@@ -1039,7 +1039,7 @@ msgstr "GPS"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:411
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "Evit ul lec'hiadur mat ez eus ezhomm eus ar GPS ha/pe Wi-Fi"
+msgstr "Evit ul lec'hiadur mat ez eus ezhomm eus ar GPS ha/pe ar Wi-Fi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
@@ -1082,7 +1082,7 @@ msgstr "Pa vezer gant forzh peseurt kevreadur roadennoù"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:55
 msgid "Data charges may apply."
-msgstr "Mizoù a c'hall bezañ lakaet da baeañ evit ar roadennoù"
+msgstr "Mizoù a c'hall bezañ lakaet da baeañ evit ar roadennoù."
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:34
@@ -1155,7 +1155,7 @@ msgstr "Kenderc'hel"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:274
 msgid "Pause"
-msgstr "Ehan"
+msgstr "Ehanañ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:319
 msgid "Installing"
@@ -1163,7 +1163,7 @@ msgstr "O staliañ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:355
 msgid "Version: "
-msgstr "Doare : "
+msgstr "Doare : "
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:376
 msgid "On wi-fi"

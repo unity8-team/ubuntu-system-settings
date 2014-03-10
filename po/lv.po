@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2014-01-25 14:49+0000\n"
-"Last-Translator: jogijs <e.blumbergs@gmail.com>\n"
+"PO-Revision-Date: 2014-03-06 21:14+0000\n"
+"Last-Translator: Jānis-Marks Gailis <jeanmarc.gailis@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-04 08:30+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 07:27+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
@@ -53,14 +53,14 @@ msgstr ""
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:78
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "Tastatūras izkārtojumi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:93
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:103
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:27
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:36
 msgid "Spell checking"
-msgstr ""
+msgstr "Pareizrakstības pārbaude"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:113
 msgid "Auto completion"
