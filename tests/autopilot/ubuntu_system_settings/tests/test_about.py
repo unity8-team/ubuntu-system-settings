@@ -10,7 +10,7 @@ import subprocess
 
 from autopilot.matchers import Eventually
 from autopilot.platform import model
-from testtools import skipUnless
+from testtools import skipUnless, skipIf
 from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import (
@@ -42,15 +42,43 @@ class AboutTestCase(AboutBaseTestCase):
 
         return '{} {}'.format(os_id.strip(), os_release.strip())
 
+    def _get_device_serial_number(self):
+        return subprocess.check_output(['getprop', 'ro.serialno']).strip()
+
+    def _get_device_manufacturer_and_model(self):
+        manufacturer = subprocess.check_output(
+            ['getprop', 'ro.product.manufacturer']
+            ).strip()
+        model = subprocess.check_output(
+            ['getprop', 'ro.product.model']
+            ).strip()
+
+        return '{} {}'.format(manufacturer, model)
+
+    def _get_system_image_iface(self):
+        bus = dbus.SystemBus()
+        service = bus.get_object('com.canonical.SystemImage', '/Service')
+        iface = dbus.Interface(service, 'com.canonical.SystemImage')
+        return iface.Info()
+
+    def _get_last_updated_date(self):
+        info = self._get_system_image_iface()[3]
+
+        if info == 'Unknown':
+            return _('Never')
+        else:
+            return str(info.split()[0])
+
     def test_serial(self):
-        """ Checks whether Serial info is available """
+        """Checks whether the UI is showing the correct serial number."""
         item = self.about_page.select_single(objectName='serialItem')
-        self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals(_('Serial')))
-        if (model() == 'Desktop'):
+        
+        if model() == 'Desktop':
             self.assertThat(item.value, Equals(_('N/A')))
         else:
-            self.assertThat(item.value, NotEquals(_('N/A')))
+            self.assertThat(
+                item.value, Equals(self._get_device_serial_number())
+            )
 
     @skipUnless(
         model() == 'Nexus 4',
@@ -70,17 +98,27 @@ class AboutTestCase(AboutBaseTestCase):
         # -- om26er 10-03-2014
         self.assertTrue(self._get_os_name() in item.value)
 
+    @skipIf(
+        model() == 'Desktop',
+        'Only run on android devices where getprop is available')
+    def test_hardware_name(self):
+        """Ensure the UI is showing the correct device name."""
+        device_label = self.about_page.select_single(objectName='deviceLabel')
+        device_name_from_getprop = self._get_device_manufacturer_and_model()
+
+        self.assertEquals(device_label, device_name_from_getprop)
+
+    @skipIf(
+        model() == 'Desktop',
+        'Image based upgrades are only available on touch devices, for now.'
+    )
     def test_last_updated(self):
-        """ Checks whether Last Updated info is available """
-        item = self.about_page.select_single(objectName='lastUpdatedItem')
-        self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals(_('Last updated')))
-        date = item.value.split('-')
-        if (len(date) == 1):
-            self.assertThat(item.value, Equals(_('Never')))
-        else:
-            # 2013-10-19
-            self.assertThat(len(item.value), Equals(10))
+        """Checks whether Last Updated info is correct."""
+        last_updated = self.about_page.select_single(
+            objectName='lastUpdatedItem'
+            ).value
+        
+        self.assertEquals(last_updated, self._get_last_updated_date())
 
 
 class StorageTestCase(StorageBaseTestCase):
