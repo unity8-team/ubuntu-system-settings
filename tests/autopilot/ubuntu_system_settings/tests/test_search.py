@@ -10,6 +10,7 @@ from testtools.matchers import Equals
 from autopilot.matchers import Eventually
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
+from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
 """ Tests for Ubuntu System Settings """
@@ -31,7 +32,7 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
             objectName='searchTextField'
         )
         self.scroll_to_and_click(search_box)
-        self.keyboard.type(text)
+        self.keyboard.type(_(text))
         self.assertThat(search_box.text, Eventually(Equals(text)))
 
     def test_search_filter_results(self):

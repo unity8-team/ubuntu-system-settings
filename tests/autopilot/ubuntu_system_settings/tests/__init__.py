@@ -32,10 +32,6 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        # make sure the environment language is always english because
-        # our tests are heavily relying on strings, need to change that
-        # ASAP -- om26er 28-02-14
-        self.patch_environment('LC_MESSAGES', 'en_US.UTF-8')
         self.launch_system_settings(panel=panel)
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 

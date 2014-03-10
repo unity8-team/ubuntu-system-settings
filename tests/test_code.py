@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # Copyright 2014 Canonical
 #
@@ -5,8 +7,9 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-import unittest
 import subprocess
+import sys
+import unittest
 
 
 class StaticCodeTests(unittest.TestCase):
@@ -19,8 +22,10 @@ class StaticCodeTests(unittest.TestCase):
         _is_tool_installed('pyflakes') != 0, 'pyflakes not installed'
     )
     def test_pyflakes(self):
-        pyflakes = subprocess.Popen(['pyflakes', '.'], stdout=subprocess.PIPE,
-                                    universal_newlines=True)
+        pyflakes = subprocess.Popen(
+            ['pyflakes', '.'],
+            stdout=subprocess.PIPE, universal_newlines=True
+        )
         (out, err) = pyflakes.communicate()
         self.assertEqual(pyflakes.returncode, 0, out)
 
@@ -28,7 +33,15 @@ class StaticCodeTests(unittest.TestCase):
         _is_tool_installed('pep8') != 0, 'pep8 not installed'
     )
     def test_pep8(self):
-        pep8 = subprocess.Popen(['pep8', '.'], stdout=subprocess.PIPE,
-                                universal_newlines=True)
+        pep8 = subprocess.Popen(
+            ['pep8', '.'],
+            stdout=subprocess.PIPE, universal_newlines=True
+        )
         (out, err) = pep8.communicate()
         self.assertEqual(pep8.returncode, 0, out)
+
+
+if __name__ == '__main__':
+    unittest.main(
+        testRunner=unittest.TextTestRunner(stream=sys.stdout, verbosity=2)
+    )
