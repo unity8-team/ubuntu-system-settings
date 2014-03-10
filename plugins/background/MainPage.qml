@@ -41,6 +41,15 @@ ItemPage {
     property real thumbWidth: mainPage.width * 0.43
     property real thumbHeight: mainPage.height * 0.4
 
+    function reset() {
+        background.schema.reset("pictureUri")
+        // We can't get the default value in Qt
+        backgroundPanel.backgroundFile = background.pictureUri
+        systemSettingsSettings.schema.reset("backgroundDuplicate")
+        systemSettingsSettings.schema.reset("previouslySetValue")
+        systemSettingsSettings.schema.reset("backgroundDuplicate")
+    }
+
     UbuntuBackgroundPanel {
         id: backgroundPanel
 
