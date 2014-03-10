@@ -103,7 +103,9 @@ class AboutTestCase(AboutBaseTestCase):
         'Only run on android devices where getprop is available')
     def test_hardware_name(self):
         """Ensure the UI is showing the correct device name."""
-        device_label = self.about_page.select_single(objectName='deviceLabel')
+        device_label = self.about_page.select_single(
+            objectName='deviceLabel'
+            ).text
         device_name_from_getprop = self._get_device_manufacturer_and_model()
 
         self.assertEquals(device_label, device_name_from_getprop)
