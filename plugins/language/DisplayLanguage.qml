@@ -51,6 +51,9 @@ SheetBase {
 
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: contentHeight > root.height ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
         currentIndex: plugin.currentLanguage
 

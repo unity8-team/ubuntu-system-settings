@@ -21,6 +21,8 @@
 #ifndef SOUND_H
 #define SOUND_H
 
+#include "accountsservice.h"
+
 #include <QObject>
 #include <QProcess>
 
@@ -31,10 +33,39 @@ class Sound : public QObject
 public:
     explicit Sound(QObject *parent = 0);
     Q_INVOKABLE QStringList listSounds(const QString &dirString);
+    Q_PROPERTY (QString incomingCallSound
+                READ getIncomingCallSound
+                WRITE setIncomingCallSound
+                NOTIFY incomingCallSoundChanged)
+    Q_PROPERTY (QString incomingMessageSound
+                READ getIncomingMessageSound
+                WRITE setIncomingMessageSound
+                NOTIFY incomingMessageSoundChanged)
+    Q_PROPERTY (bool silentMode
+                READ getSilentMode
+                WRITE setSilentMode
+                NOTIFY silentModeChanged)
 
+
+public Q_SLOTS:
+    void slotChanged(QString, QString);
+    void slotNameOwnerChanged();
+
+Q_SIGNALS:
+    void incomingCallSoundChanged();
+    void incomingMessageSoundChanged();
+    void silentModeChanged();
 
 private:
+    AccountsService m_accountsService;
     QStringList m_soundsList;
+
+    QString getIncomingCallSound();
+    void setIncomingCallSound(QString sound);
+    QString getIncomingMessageSound();
+    void setIncomingMessageSound(QString sound);
+    bool getSilentMode();
+    void setSilentMode(bool enabled);
 };
 
 #endif // SOUND_H
