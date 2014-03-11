@@ -20,9 +20,12 @@
 
 # Migrate ubuntu-system-settings sound panel settings from GSettings to
 # AccountsService
- 
+
+from __future__ import print_function
+
 import dbus
 import os
+import sys
 
 from gi.repository import Gio
 
@@ -30,20 +33,27 @@ system_bus = dbus.SystemBus()
 manager_proxy = system_bus.get_object('org.freedesktop.Accounts',
                                       '/org/freedesktop/Accounts')
 object_path = manager_proxy.FindUserById(
-        os.getuid(), dbus_interface='org.freedesktop.Accounts')
+    os.getuid(), dbus_interface='org.freedesktop.Accounts'
+)
 user_proxy = system_bus.get_object('org.freedesktop.Accounts', object_path)
 
 gsettings = Gio.Settings(schema="com.ubuntu.touch.sound")
 
+
 def get_string(key):
     return gsettings.get_string(key)
+
 
 def get_bool(key):
     return gsettings.get_boolean(key)
 
+
 def set_as_setting(interface, setting, value):
-    user_proxy.Set(interface, setting, value, 
-                   dbus_interface=dbus.PROPERTIES_IFACE)
+    try:
+        user_proxy.Set(interface, setting, value,
+                       dbus_interface=dbus.PROPERTIES_IFACE)
+    except dbus.exceptions.DBusException as e:
+        print("Couldn't update %s: %s" % (setting, e), file=sys.stderr)
 
 # (gsettings key, accountsservice key, function to retrieve from gsettings)
 keys = [('silent-mode', 'SilentMode', get_bool),

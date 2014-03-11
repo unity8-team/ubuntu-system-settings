@@ -5,29 +5,28 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from time import sleep
-
 from autopilot.introspection.dbus import StateNotFoundError
-from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, raises
-from unittest import expectedFailure
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsOfonoTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
+
 class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Tests for cellular Page """
 
     def navigate_to_manual(self):
         selector = self.cellular_page.select_single(
-                toolkit_emulators.ItemSelector,
-                objectName="autoChooseCarrierSelector")
+            toolkit_emulators.ItemSelector,
+            objectName="autoChooseCarrierSelector"
+        )
         manual = selector.select_single('Label', text=_("Manually"))
         self.pointer.click_object(manual)
         choosecarrier = self.cellular_page.select_single(
-                objectName="chooseCarrier")
+            objectName="chooseCarrier"
+        )
         self.pointer.click_object(choosecarrier)
         self.assertThat(self.choose_page.title, Equals(_("Carrier")))
 
@@ -40,8 +39,9 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         """ Tests whether the current network is visible and selected """
         self.navigate_to_manual()
         carriers = self.choose_page.select_single(
-                toolkit_emulators.ItemSelector,
-                objectName="carrierSelector")
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
         # TODO: Once there is a proper ItemSelector emulator, get the items
         # from it and check 'fake.tel' is the selected one.
         manual = carriers.select_single('Label', text="fake.tel")
@@ -52,8 +52,9 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         """ Tests whether an alternative available network is displayed """
         self.navigate_to_manual()
         carriers = self.choose_page.select_single(
-                toolkit_emulators.ItemSelector,
-                objectName="carrierSelector")
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
         manual = carriers.select_single('Label', text="my.cool.telco")
         self.assertThat(manual, NotEquals(None))
 
@@ -61,7 +62,10 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         """ Ensures that a forbidden network is not shown """
         self.navigate_to_manual()
         carriers = self.choose_page.select_single(
-                toolkit_emulators.ItemSelector,
-                objectName="carrierSelector")
-        self.assertThat(lambda: carriers.select_single('Label', text="my.bad.telco"),
-            raises(StateNotFoundError))
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
+        self.assertThat(
+            lambda: carriers.select_single('Label', text="my.bad.telco"),
+            raises(StateNotFoundError)
+        )

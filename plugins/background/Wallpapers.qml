@@ -58,6 +58,8 @@ ItemPage {
         ToolbarButton {
             action: selectDefaultPeer
         }
+        opened: true
+        locked: true
     }
 
     UbuntuBackgroundPanel {

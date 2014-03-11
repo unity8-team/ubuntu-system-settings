@@ -24,6 +24,8 @@ Build-Depends: dbus-test-runner,
                libapt-pkg-dev,
                xvfb,
                cmake,
+               pep8,
+               pyflakes,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
@@ -59,7 +61,7 @@ Depends: ${misc:Depends},
          python3-gi,
          python3-dbus,
          gir1.2-glib-2.0
-Recommends: ubuntu-mobile-icons,
+Recommends: suru-icon-theme,
             ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example
