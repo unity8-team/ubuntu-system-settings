@@ -35,6 +35,7 @@ ItemPage {
     title: i18n.tr("Updates")
 
     property bool installAll: false
+    property int updatesAvailable: 0
 
     DeviceInfo {
         id: deviceInfo
@@ -87,7 +88,6 @@ ItemPage {
             PropertyChanges { target: updateNotification; visible: true}
             PropertyChanges { target: updateList; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
-            PropertyChanges { target: checkForUpdatesArea; visible: false}
         },
         State {
             name: "SYSTEMUPDATEFAILED"
@@ -105,7 +105,6 @@ ItemPage {
             PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: installAllButton; visible: true}
-            PropertyChanges { target: checkForUpdatesArea; visible: false}
             PropertyChanges { target: updateNotification; visible: false}
         },
         State {
@@ -117,7 +116,6 @@ ItemPage {
             PropertyChanges { target: updateNotification; text: i18n.tr("Credentials not found")}
             PropertyChanges { target: updateNotification; visible: true}
             PropertyChanges { target: installAllButton; visible: false}
-            PropertyChanges { target: checkForUpdatesArea; visible: false}
         }
     ]
 
@@ -136,6 +134,7 @@ ItemPage {
 
         onUpdateAvailableFound: {
             if (updateManager.model.length > 0) {
+                root.updatesAvailable = updateManager.model.length;
                 root.state = "UPDATE";
             } else {
                 root.state = "NOUPDATES";
@@ -148,11 +147,16 @@ ItemPage {
             }
         }
 
+        onCheckFinished: {
+            checkForUpdatesArea.visible = false;
+        }
+
         onCredentialsNotFound: {
             root.state = "NOCREDENTIALS";
         }
 
         onSystemUpdateDownloaded: {
+            root.updatesAvailable -= 1;
             PopupUtils.open(dialogInstallComponent);
         }
 
@@ -217,7 +221,7 @@ ItemPage {
         id: installAllButton
         objectName: "installAllButton"
 
-        property string primaryText: i18n.tr("Install %1 update", "Install %1 updates", updateManager.model.length).arg(updateManager.model.length)
+        property string primaryText: i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
         property string secondaryText: i18n.tr("Pause All")
         text: root.installAll ? secondaryText : primaryText
         anchors {
@@ -237,11 +241,15 @@ ItemPage {
                 updateList.currentIndex = i;
                 var item = updateList.currentItem;
                 var modelItem = updateManager.model[i];
-                if (modelItem.updateState == !root.installAll) {
+                if (modelItem.updateState != root.installAll && !modelItem.updateReady) {
                     item.actionButton.clicked();
                 }
             }
         }
+        opacity: root.updatesAvailable > 0 ? 1 : 0
+
+        Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SlowDuration
+                easing: UbuntuAnimation.StandardEasing } }
     }
 
     ListView {
@@ -388,6 +396,7 @@ ItemPage {
                             progress.visible = false;
                             buttonAppUpdate.visible = false;
                             textArea.message = i18n.tr("Installed");
+                            root.updatesAvailable -= 1;
                         }
 
                         onErrorFound: {
@@ -504,7 +513,7 @@ ItemPage {
             result = bytes + i18n.tr(" bytes");
         } else if (bytes < SIZE_IN_MIB) {
             size = (bytes / SIZE_IN_KIB).toFixed(1);
-            result = bytes + i18n.tr(" KiB");
+            result = size + i18n.tr(" KiB");
         } else if (bytes < SIZE_IN_GIB) {
             size = (bytes / SIZE_IN_MIB).toFixed(1);
             result = size + i18n.tr(" MiB");

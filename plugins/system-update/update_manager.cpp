@@ -33,6 +33,8 @@ namespace UpdatePlugin {
 
 UpdateManager::UpdateManager(QObject *parent):
     QObject(parent),
+    m_systemCheckingUpdate(false),
+    m_clickCheckingUpdate(false),
     m_checkingUpdates(0)
 {
     // SSO SERVICE
@@ -40,6 +42,8 @@ UpdateManager::UpdateManager(QObject *parent):
                      this, SLOT(handleCredentialsFound(Token)));
     QObject::connect(&m_service, SIGNAL(credentialsNotFound()),
                      this, SIGNAL(credentialsNotFound()));
+    QObject::connect(&m_service, SIGNAL(credentialsNotFound()),
+                  this, SLOT(clickUpdateNotAvailable()));
     // PROCESS
     QObject::connect(&(m_process), SIGNAL(finished(int)),
                   this, SLOT(processOutput()));
@@ -47,7 +51,7 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&(m_network), SIGNAL(updatesFound()),
                   this, SLOT(processUpdates()));
     QObject::connect(&(m_network), SIGNAL(updatesNotFound()),
-                  this, SLOT(updateNotAvailable()));
+                  this, SLOT(clickUpdateNotAvailable()));
     QObject::connect(&(m_network), SIGNAL(errorOccurred()),
                   this, SIGNAL(errorFound()));
     QObject::connect(&(m_network),
@@ -60,7 +64,7 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
                   this, SLOT(registerSystemUpdate(const QString&, Update*)));
     QObject::connect(&m_systemUpdate, SIGNAL(updateNotFound()),
-                  this, SLOT(updateNotAvailable()));
+                  this, SLOT(systemUpdateNotAvailable()));
     QObject::connect(&m_systemUpdate, SIGNAL(downloadModeChanged()),
                   SIGNAL(downloadModeChanged()));
     QObject::connect(&m_systemUpdate, SIGNAL(updateDownloaded()),
@@ -77,6 +81,20 @@ UpdateManager::~UpdateManager()
 {
 }
 
+void UpdateManager::clickUpdateNotAvailable()
+{
+    m_clickCheckingUpdate = false;
+    reportCheckState();
+    updateNotAvailable();
+}
+
+void UpdateManager::systemUpdateNotAvailable()
+{
+    m_systemCheckingUpdate = false;
+    reportCheckState();
+    updateNotAvailable();
+}
+
 void UpdateManager::updateNotAvailable()
 {
     m_checkingUpdates--;
@@ -85,8 +103,17 @@ void UpdateManager::updateNotAvailable()
     }
 }
 
+void UpdateManager::reportCheckState()
+{
+    if (!m_clickCheckingUpdate && !m_systemCheckingUpdate) {
+        Q_EMIT checkFinished();
+    }
+}
+
 void UpdateManager::checkUpdates()
 {
+    m_systemCheckingUpdate = true;
+    m_clickCheckingUpdate = true;
     m_checkingUpdates = 2;
     m_model.clear();
     m_apps.clear();
@@ -135,6 +162,7 @@ void UpdateManager::processOutput()
 
 void UpdateManager::processUpdates()
 {
+    m_clickCheckingUpdate = false;
     bool updateAvailable = false;
     foreach (QString id, m_apps.keys()) {
         Update *app = m_apps.value(id);
@@ -148,20 +176,19 @@ void UpdateManager::processUpdates()
         Q_EMIT modelChanged();
         Q_EMIT updateAvailableFound();
     }
+    reportCheckState();
 }
 
 void UpdateManager::registerSystemUpdate(const QString& packageName, Update *update)
 {
-    if (update->updateRequired()) {
-        if (!m_apps.contains(packageName)) {
-            m_apps[packageName] = update;
-            m_model.insert(0, QVariant::fromValue(update));
-            Q_EMIT modelChanged();
-        }
-        Q_EMIT updateAvailableFound();
-    } else {
-        Q_EMIT updatesNotFound();
+    m_systemCheckingUpdate = false;
+    if (!m_apps.contains(packageName)) {
+        m_apps[packageName] = update;
+        m_model.insert(0, QVariant::fromValue(update));
+        Q_EMIT modelChanged();
     }
+    Q_EMIT updateAvailableFound();
+    reportCheckState();
 }
 
 void UpdateManager::systemUpdatePaused(int value)

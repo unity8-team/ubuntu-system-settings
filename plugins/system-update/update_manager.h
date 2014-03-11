@@ -56,6 +56,7 @@ class UpdateManager : public QObject
     Q_PROPERTY(int currentBuildNumber READ currentBuildNumber)
 
 Q_SIGNALS:
+    void checkFinished();
     void modelChanged();
     void updatesNotFound();
     void updateAvailableFound();
@@ -94,16 +95,18 @@ public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
 
 private Q_SLOTS:
-    void updateNotAvailable();
+    void clickUpdateNotAvailable();
+    void systemUpdateNotAvailable();
     void systemUpdatePaused(int value);
     void processOutput();
     void processUpdates();
     void downloadUrlObtained(const QString &packagename, const QString &url);
-//    void downloadNotCreated(const QString &packagename, const QString &error);
     void handleCredentialsFound(Token token);
     void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
+    bool m_systemCheckingUpdate;
+    bool m_clickCheckingUpdate;
     int m_checkingUpdates;
     QHash<QString, Update*> m_apps;
     int m_downloadMode;
@@ -124,6 +127,8 @@ private:
 
     void checkForUpdates();
     QString getClickCommand();
+    void reportCheckState();
+    void updateNotAvailable();
 };
 
 }
