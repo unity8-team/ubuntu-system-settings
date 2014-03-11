@@ -36,9 +36,9 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("It’s great to have you in the Ubuntu Community.") +
+            text: i18n.tr("It’s great to have you in the Ubuntu community.") +
                   "\n\n" +
-                  i18n.tr("You’re now ready to enjoy your new phone.")
+                  i18n.tr("Enjoy your new phone.")
         }
     }
     Component {
