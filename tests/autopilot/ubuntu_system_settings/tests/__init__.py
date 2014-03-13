@@ -71,7 +71,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
         page_center_y = int(page_bottom / 2)
         while obj.globalRect[1] + obj.height > page_bottom:
             self.pointer.drag(page_center_x, page_center_y,
-                    page_center_x, page_center_y - obj.height * 2)
+                              page_center_x, page_center_y - obj.height * 2)
             # avoid a flick
             sleep(0.5)
 
