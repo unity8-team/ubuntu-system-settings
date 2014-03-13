@@ -25,17 +25,24 @@ class AboutTestCase(AboutBaseTestCase):
     def test_about_page(self):
         """ Checks whether About page is available """
         self.assertThat(self.main_window.about_page, NotEquals(None))
-        self.assertThat(self.main_window.about_page.title, Equals(_('About this phone')))
+        self.assertThat(
+            self.main_window.about_page.title,
+            Equals(_('About this phone'))
+        )
 
     def test_device(self):
         """ Checks whether Device info is shown """
-        device_label = self.main_window.about_page.select_single(objectName='deviceLabel')
+        device_label = self.main_window.about_page.select_single(
+            objectName='deviceLabel'
+        )
         self.assertThat(device_label, NotEquals(None))
         self.assertThat(device_label.text, NotEquals(''))
 
     def test_serial(self):
         """ Checks whether Serial info is available """
-        item = self.main_window.about_page.select_single(objectName='serialItem')
+        item = self.main_window.about_page.select_single(
+            objectName='serialItem'
+        )
         self.assertThat(item, NotEquals(None))
         self.assertThat(item.text, Equals(_('Serial')))
         if (model() == 'Desktop'):
@@ -45,7 +52,9 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_imei(self):
         """ Checks whether IMEI info is available """
-        item = self.main_window.about_page.select_single(objectName='imeiItem')
+        item = self.main_window.about_page.select_single(
+            objectName='imeiItem'
+        )
         self.assertThat(item, NotEquals(None))
         self.assertThat(item.text, Equals(_('IMEI')))
         if (model() == 'Desktop'):
@@ -55,13 +64,17 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_software(self):
         """ Checks whether Software info is available """
-        item = self.main_window.about_page.select_single(objectName='softwareItem')
+        item = self.main_window.about_page.select_single(
+            objectName='softwareItem'
+        )
         self.assertThat(item, NotEquals(None))
         self.assertThat(item.text, Equals(_('Software:')))
 
     def test_os(self):
         """ Checks whether OS info is available """
-        item = self.main_window.about_page.select_single(objectName='osItem')
+        item = self.main_window.about_page.select_single(
+            objectName='osItem'
+        )
         self.assertThat(item, NotEquals(None))
         self.assertThat(item.text, Equals(_('OS')))
         info = item.value.split()
@@ -73,7 +86,9 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_last_updated(self):
         """ Checks whether Last Updated info is available """
-        item = self.main_window.about_page.select_single(objectName='lastUpdatedItem')
+        item = self.main_window.about_page.select_single(
+            objectName='lastUpdatedItem'
+        )
         self.assertThat(item, NotEquals(None))
         self.assertThat(item.text, Equals(_('Last updated')))
         date = item.value.split('-')
@@ -85,13 +100,17 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_legal(self):
         """ Checks whether Legal info is available """
-        item = self.main_window.about_page.select_single(objectName='legalItem')
+        item = self.main_window.about_page.select_single(
+            objectName='legalItem'
+        )
         self.assertThat(item, NotEquals(None))
         self.assertThat(item.text, Equals(_('Legal:')))
 
     def test_update(self):
         """ Checks whether Update button is available """
-        button = self.main_window.about_page.select_single(objectName='updateButton')
+        button = self.main_window.about_page.select_single(
+            objectName='updateButton'
+        )
         self.assertThat(button, NotEquals(None))
         self.assertThat(button.text, Equals(_('Check for updates')))
 
@@ -100,13 +119,15 @@ class StorageTestCase(StorageBaseTestCase):
     """ Tests for Storage """
 
     def test_storage_page(self):
-        """ Check whether Storage page is available """ 
+        """ Check whether Storage page is available """
         self.assertThat(self.main_window.storage_page, NotEquals(None))
 
     def test_disk(self):
         """ Checks whether disk item is available """
         sleep(5)
-        disk_item = self.main_window.storage_page.select_single(objectName='diskItem')
+        disk_item = self.main_window.storage_page.select_single(
+            objectName='diskItem'
+        )
         self.assertThat(disk_item, NotEquals(None))
         self.assertThat(disk_item.text, Equals(_('Total storage')))
 

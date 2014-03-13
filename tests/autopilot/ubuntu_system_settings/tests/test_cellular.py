@@ -28,12 +28,18 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             objectName="chooseCarrier"
         )
         self.main_window.pointer.click_object(choosecarrier)
-        self.assertThat(self.main_window.choose_page.title, Equals(_("Carrier")))
+        self.assertThat(
+            self.main_window.choose_page.title,
+            Equals(_("Carrier"))
+        )
 
     def test_cellular_page(self):
         """ Checks whether Cellular page is available """
         self.assertThat(self.main_window.cellular_page, NotEquals(None))
-        self.assertThat(self.main_window.cellular_page.title, Equals(_('Cellular')))
+        self.assertThat(
+            self.main_window.cellular_page.title,
+            Equals(_('Cellular'))
+        )
 
     def test_current_network(self):
         """ Tests whether the current network is visible and selected """

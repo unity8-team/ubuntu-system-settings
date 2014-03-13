@@ -13,18 +13,16 @@ from ubuntu_system_settings.utils.i18n import ugettext as _
 from ubuntu_system_settings.emulators import MainWindow
 from ubuntu_system_settings.helpers import launch_system_settings
 
-from autopilot.input import Mouse, Touch, Pointer
+from autopilot.input import Mouse, Touch
 from autopilot.platform import model
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
-from ubuntuuitoolkit import emulators as toolkit_emulators
 
 import dbus
 import dbusmock
 import subprocess
-from time import sleep
 
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
@@ -142,13 +140,17 @@ class StorageBaseTestCase(AboutBaseTestCase):
         """ Go to Storage Page """
         super(StorageBaseTestCase, self).setUp()
         # Click on 'Storage' option
-        button = self.main_window.about_page.select_single(objectName='storageItem')
+        button = self.main_window.about_page.select_single(
+            objectName='storageItem'
+        )
         self.assertThat(button, NotEquals(None))
         self.main_window.scroll_to_and_click(button)
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.main_window.storage_page.select_single(objectName=object_name)
+        item = self.main_window.storage_page.select_single(
+            objectName=object_name
+        )
         self.assertThat(item, NotEquals(None))
         label = item.label  # Label
         self.assertThat(label, Equals(text))
@@ -184,4 +186,3 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
         self.assertThat(button, NotEquals(None))
         self.main_window.pointer.move_to_object(button)
         self.main_window.pointer.click()
-

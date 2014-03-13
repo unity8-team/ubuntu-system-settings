@@ -75,7 +75,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         """ Check that searching for an invalid location shows nothing """
         self.click_tz_search_field()
         self.keyboard.type('Oh no you don\'t!')
-        listview = self.main_window.select_single(objectName='locationsListView')
+        listview = self.main_window.select_single(
+            objectName='locationsListView'
+        )
         self.assertThat(listview.count, Equals(0))
         labelVisible = self.main_window.select_single(
             objectName='nothingLabel').visible
@@ -85,7 +87,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         """ Check that manually selecting a timezone sets it properly """
         self.click_tz_search_field()
         self.keyboard.type('London, United Kingdom')
-        listview = self.main_window.select_single(objectName='locationsListView')
+        listview = self.main_window.select_single(
+            objectName='locationsListView'
+        )
         london = listview.select_many(toolkit_emulators.Standard)[0]
         self.main_window.pointer.click_object(london)
         header = self.main_window.select_single(objectName='MainView_Header')
@@ -100,7 +104,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         self.click_tz_search_field()
         # This is also in Europe/London
         self.keyboard.type('Preston, United Kingdom')
-        listview = self.main_window.select_single(objectName='locationsListView')
+        listview = self.main_window.select_single(
+            objectName='locationsListView'
+        )
         preston = listview.select_many(toolkit_emulators.Standard)[0]
         self.main_window.pointer.click_object(preston)
         # The timer is 1 second, wait and see that we haven't moved pages

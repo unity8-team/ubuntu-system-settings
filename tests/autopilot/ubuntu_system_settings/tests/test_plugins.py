@@ -25,7 +25,9 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
 
     def test_title(self):
         """ Checks whether the main_window title is correct """
-        header = self.main_window.select_single(objectName='systemSettingsPage')
+        header = self.main_window.select_single(
+            objectName='systemSettingsPage'
+        )
         self.assertThat(header, NotEquals(None))
         self.assertThat(header.title, Eventually(Equals(_('System Settings'))))
 
@@ -64,7 +66,9 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
 
     def test_wifi_plugin(self):
         """ Checks whether the Wi-Fi plugin is available """
-        plugin = self.main_window.select_single(objectName='entryComponent-wifi')
+        plugin = self.main_window.select_single(
+            objectName='entryComponent-wifi'
+        )
         self.assertThat(plugin, NotEquals(None))
 
     def test_cellular_plugin(self):
@@ -136,7 +140,8 @@ class SystemSettingsUpowerTestCases(UbuntuSystemSettingsUpowerTestCase):
         super(SystemSettingsUpowerTestCases, self).setUp()
 
     def test_no_battery_plugin_without_battery(self):
-        """ Checks whether the Battery plugin is not available as we have no battery """
+        """ Checks whether the Battery plugin is not available
+        as we have no battery """
         self.assertThat(lambda: self.main_window.select_single(
             objectName='entryComponent-battery'),
             raises(StateNotFoundError)
@@ -156,7 +161,7 @@ class SystemSettingsBatteryTestCases(UbuntuSystemSettingsBatteryTestCase):
         super(SystemSettingsBatteryTestCases, self).setUp()
 
     def test_battery_plugin(self):
-        """ checks whether the Battery plugin is available """
+        """ Checks whether the Battery plugin is available """
         plugin = self.main_window.select_single(
             objectName='entryComponent-battery'
         )

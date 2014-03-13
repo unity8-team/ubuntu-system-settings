@@ -14,7 +14,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+from time import sleep
+
 from ubuntuuitoolkit import emulators as toolkit_emulators
+
 
 class MainWindow(toolkit_emulators.MainView):
     """An emulator class that makes it easy to interact with the app."""
@@ -32,8 +35,12 @@ class MainWindow(toolkit_emulators.MainView):
         page_center_x = int(page_right / 2)
         page_center_y = int(page_bottom / 2)
         while obj.globalRect[1] + obj.height > page_bottom:
-            self.pointer.drag(page_center_x, page_center_y, 
-                    page_center_x, page_center_y - obj.height * 2)
+            self.pointer.drag(
+                page_center_x,
+                page_center_y,
+                page_center_x,
+                page_center_y - obj.height * 2
+            )
             # avoid a flick
             sleep(0.5)
 
@@ -55,7 +62,6 @@ class MainWindow(toolkit_emulators.MainView):
     def choose_page(self):
         """ Return 'Choose carrier' page """
         return self.select_single(objectName="chooseCarrierPage")
-
 
     @property
     def licenses_page(self):
