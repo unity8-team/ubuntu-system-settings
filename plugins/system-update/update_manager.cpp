@@ -187,7 +187,7 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
         m_model.insert(0, QVariant::fromValue(update));
         Q_EMIT modelChanged();
     }
-    Q_EMIT updateAvailableFound();
+    Q_EMIT updateAvailableFound(update->updateState());
     reportCheckState();
 }
 

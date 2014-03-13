@@ -59,7 +59,7 @@ void UpdateManagerTest::testRegisterSystemUpdateRequired()
 {
     UpdateManager manager;
     QSignalSpy spy(&manager, SIGNAL(modelChanged()));
-    QSignalSpy spy2(&manager, SIGNAL(updateAvailableFound()));
+    QSignalSpy spy2(&manager, SIGNAL(updateAvailableFound(bool)));
     QTRY_COMPARE(spy.count(), 0);
     QTRY_COMPARE(spy2.count(), 0);
     QTRY_COMPARE(manager.get_apps().size(), 0);
@@ -83,7 +83,7 @@ void UpdateManagerTest::testRegisterSystemUpdateNotRequired()
 {
     UpdateManager manager;
     QSignalSpy spy(&manager, SIGNAL(modelChanged()));
-    QSignalSpy spy2(&manager, SIGNAL(updateAvailableFound()));
+    QSignalSpy spy2(&manager, SIGNAL(updateAvailableFound(bool)));
     QSignalSpy spy3(&manager, SIGNAL(updatesNotFound()));
     QTRY_COMPARE(spy.count(), 0);
     QTRY_COMPARE(spy2.count(), 0);

@@ -58,6 +58,9 @@ ItemPage {
         boundsBehavior: contentHeight > root.height ?
                         Flickable.DragAndOvershootBounds :
                         Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
         Column {
             anchors.fill: parent
@@ -66,7 +69,6 @@ ItemPage {
                 iconSource: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
                 text: i18n.tr("Display language…")
                 value: plugin.languageNames[plugin.currentLanguage]
-                progression: true
 
                 onClicked: PopupUtils.open(displayLanguage)
             }

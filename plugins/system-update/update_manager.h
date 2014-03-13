@@ -59,8 +59,8 @@ Q_SIGNALS:
     void checkFinished();
     void modelChanged();
     void updatesNotFound();
-    void updateAvailableFound();
     void credentialsNotFound();
+    void updateAvailableFound(bool downloading);
     void errorFound();
     void downloadModeChanged();
     void systemUpdateDownloaded();
