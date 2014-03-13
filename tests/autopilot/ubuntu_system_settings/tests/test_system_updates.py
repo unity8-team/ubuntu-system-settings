@@ -5,15 +5,10 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from time import sleep
-
-from autopilot.matchers import Eventually
 from autopilot.introspection.dbus import StateNotFoundError
-from testtools.matchers import Contains, Equals, NotEquals, GreaterThan, raises
-from unittest import skip
+from testtools.matchers import NotEquals, raises
 
 from ubuntu_system_settings.tests import SystemUpdatesBaseTestCase
-from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
 """ Tests for Ubuntu System Settings """

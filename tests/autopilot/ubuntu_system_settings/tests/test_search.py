@@ -5,18 +5,15 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from time import sleep
-
-from autopilot.matchers import Eventually
 from autopilot.introspection.dbus import StateNotFoundError
-from testtools.matchers import Contains, Equals, NotEquals, GreaterThan
-from unittest import skip
+from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
 """ Tests for Ubuntu System Settings """
+
 
 class SearchTestCases(UbuntuSystemSettingsTestCase):
     """ Tests for Search """
@@ -37,8 +34,9 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         sound = self.main_window.select_single(objectName='entryComponent-sound')
         self.assertThat(sound, NotEquals(None))
         try:
-            background = self.main_window.select_single(objectName='entryComponent-background')
+            background = self.main_window.select_single(
+                objectName='entryComponent-background'
+            )
         except StateNotFoundError:
             background = None
         self.assertThat(background, Equals(None))
- 

@@ -57,6 +57,7 @@ LocalComponents.Page {
                 id: languageList
                 text: i18n.tr("Select your language")
                 model: plugin.languageNames
+                expanded: true
                 selectedIndex: plugin.currentLanguage
                 onSelectedIndexChanged: {
                     i18n.language = plugin.languageCodes[selectedIndex]
@@ -71,7 +72,7 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         Button {
-            text: i18n.tr("Start")
+            text: i18n.tr("Continue")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
                 pageStack.push(Qt.resolvedUrl(simCardPresent

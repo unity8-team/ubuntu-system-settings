@@ -8,6 +8,5 @@
         <file>qml/Pages/SpinnerPage.qml</file>
         <file>qml/Pages/WelcomePage.qml</file>
         <file>qml/Pages/WiFiPage.qml</file>
-        <file>qml/Pages/data/meet_ubuntu_simcard@30.png</file>
     </qresource>
 </RCC>

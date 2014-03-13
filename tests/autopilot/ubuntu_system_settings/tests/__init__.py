@@ -15,7 +15,6 @@ from ubuntu_system_settings.helpers import launch_system_settings
 
 from autopilot.input import Mouse, Touch, Pointer
 from autopilot.platform import model
-from autopilot.testcase import AutopilotTestCase
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
@@ -27,25 +26,24 @@ import dbusmock
 import subprocess
 from time import sleep
 
+
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
     if model() == 'Desktop':
-        scenarios = [ ('with mouse', dict(input_device_class=Mouse)) ]
+        scenarios = [('with mouse', dict(input_device_class=Mouse))]
     else:
-        scenarios = [ ('with touch', dict(input_device_class=Touch)) ]
+        scenarios = [('with touch', dict(input_device_class=Touch))]
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.app = launch_system_settings(
-            self,
-            panel=panel,
-            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)
-        self.assertThat(self.main_window.visible, Eventually(Equals(True)))
+        self.launch_system_settings(panel=panel)
+        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
     @property
     def main_window(self):
         """ Return main view """
         return self.app.select_single(MainWindow)
+
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
                                          dbusmock.DBusTestCase):
@@ -64,7 +62,9 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
 
     def add_mock_battery(self):
         """ Make sure we have a battery """
-        self.dbusmock.AddDischargingBattery('mock_BATTERY', 'Battery', 50.0, 10)
+        self.dbusmock.AddDischargingBattery(
+            'mock_BATTERY', 'Battery', 50.0, 10
+        )
 
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
@@ -91,37 +91,39 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def setUp(self, panel=None):
         self.obj_ofono.Reset()
         # Add an available carrier
-        self.dbusmock.AddObject('/ril_0/operator/op2',
-                'org.ofono.NetworkOperator',
-                {
-                    'Name': 'my.cool.telco',
-                    'Status': 'available',
-                    'MobileCountryCode': '777',
-                    'MobileNetworkCode': '22',
-                    'Technologies': ['gsm'],
-                },
-                [
-                    ('GetProperties', '', 'a{sv}',
-                        'ret = self.GetAll("org.ofono.NetworkOperator")'),
-                    ('Register', '', '', ''),
-                ]
-                )
+        self.dbusmock.AddObject(
+            '/ril_0/operator/op2',
+            'org.ofono.NetworkOperator',
+            {
+                'Name': 'my.cool.telco',
+                'Status': 'available',
+                'MobileCountryCode': '777',
+                'MobileNetworkCode': '22',
+                'Technologies': ['gsm'],
+            },
+            [
+                ('GetProperties', '', 'a{sv}',
+                    'ret = self.GetAll("org.ofono.NetworkOperator")'),
+                ('Register', '', '', ''),
+            ]
+        )
         # Add a forbidden carrier
-        self.dbusmock.AddObject('/ril_0/operator/op3',
-                'org.ofono.NetworkOperator',
-                {
-                    'Name': 'my.bad.telco',
-                    'Status': 'forbidden',
-                    'MobileCountryCode': '777',
-                    'MobileNetworkCode': '22',
-                    'Technologies': ['gsm'],
-                },
-                [
-                    ('GetProperties', '', 'a{sv}',
-                        'ret = self.GetAll("org.ofono.NetworkOperator")'),
-                    ('Register', '', '', ''),
-                ]
-                )
+        self.dbusmock.AddObject(
+            '/ril_0/operator/op3',
+            'org.ofono.NetworkOperator',
+            {
+                'Name': 'my.bad.telco',
+                'Status': 'forbidden',
+                'MobileCountryCode': '777',
+                'MobileNetworkCode': '22',
+                'Technologies': ['gsm'],
+            },
+            [
+                ('GetProperties', '', 'a{sv}',
+                    'ret = self.GetAll("org.ofono.NetworkOperator")'),
+                ('Register', '', '', ''),
+            ]
+        )
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 
 
@@ -148,8 +150,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
         """ Checks whether an space item exists and returns a value """
         item = self.main_window.storage_page.select_single(objectName=object_name)
         self.assertThat(item, NotEquals(None))
-        label = item.label # Label
-        space = item.value # Disk space (bytes)
+        label = item.label  # Label
         self.assertThat(label, Equals(text))
         # Get item's label
         size_label = item.select_single(objectName='sizeLabel')

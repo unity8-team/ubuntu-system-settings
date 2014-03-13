@@ -5,12 +5,10 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-import dbus
 import dbusmock
 import subprocess
 from time import sleep
 
-from autopilot.platform import model
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
@@ -18,6 +16,7 @@ from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
+
 
 class TimeDateTestCase(UbuntuSystemSettingsTestCase,
                        dbusmock.DBusTestCase):
@@ -27,8 +26,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(klass):
         klass.start_system_bus()
         klass.dbus_con = klass.get_dbus(True)
-        (klass.p_mock,klass.obj_timedate1) = klass.spawn_server_template(
-            'timedated', {}, stdout=subprocess.PIPE)
+        (klass.p_mock, klass.obj_timedate1) = klass.spawn_server_template(
+            'timedated', {}, stdout=subprocess.PIPE
+        )
 
     def setUp(self):
         """ Go to Time & Date page """
@@ -45,7 +45,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
 
     def click_tz_search_field(self):
         self.main_window.scroll_to_and_click(self.tz_page)
-        text_field = self.main_window.select_single(objectName='selectTimeZoneField')
+        text_field = self.main_window.select_single(
+            objectName='selectTimeZoneField'
+        )
         self.main_window.pointer.move_to_object(text_field)
 
     def test_time_date_page(self):
@@ -56,14 +58,17 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def test_tz_list_initially_empty(self):
         """ Checks that no list is displayed initially """
         self.main_window.scroll_to_and_click(self.tz_page)
-        labelVisible = self.main_window.select_single(objectName='nothingLabel').visible
+        labelVisible = self.main_window.select_single(
+            objectName='nothingLabel').visible
         self.assertThat(labelVisible, Equals(True))
 
     def test_searching_tz(self):
         """ Check that searching for a valid location shows something """
         self.click_tz_search_field()
         self.keyboard.type('London, United Kingdom')
-        listview = self.main_window.select_single(objectName='locationsListView')
+        listview = self.main_window.select_single(
+            objectName='locationsListView'
+        )
         self.assertThat(listview.count, GreaterThan(0))
 
     def test_searching_tz_not_found(self):
@@ -72,7 +77,8 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         self.keyboard.type('Oh no you don\'t!')
         listview = self.main_window.select_single(objectName='locationsListView')
         self.assertThat(listview.count, Equals(0))
-        labelVisible = self.main_window.select_single(objectName='nothingLabel').visible
+        labelVisible = self.main_window.select_single(
+            objectName='nothingLabel').visible
         self.assertThat(labelVisible, Equals(True))
 
     def test_manual_tz_selection(self):
@@ -87,8 +93,9 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         self.assertThat(self.tz_page.text, Equals('Europe/London'))
 
     def test_same_tz_selection(self):
-        """ Check that manually setting a timezone then setting the same one doesn't
-            take you back to the index """
+        """Check that manually setting a timezone then setting the same one
+        doesn't take you back to the index.
+        """
         self.test_manual_tz_selection()
         self.click_tz_search_field()
         # This is also in Europe/London
