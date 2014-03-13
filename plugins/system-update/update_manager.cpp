@@ -174,7 +174,7 @@ void UpdateManager::processUpdates()
 
     if (updateAvailable) {
         Q_EMIT modelChanged();
-        Q_EMIT updateAvailableFound();
+        Q_EMIT updateAvailableFound(false);
     }
     reportCheckState();
 }
