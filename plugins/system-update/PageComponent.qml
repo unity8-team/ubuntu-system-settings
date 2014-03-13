@@ -338,6 +338,7 @@ ItemPage {
 
                 Label {
                     id: labelSize
+                    objectName: "labelSize"
                     text: convert_bytes_to_size(modelData.binaryFilesize)
                     anchors.bottom: labelVersion.bottom
                     anchors.right: parent.right
@@ -347,6 +348,7 @@ ItemPage {
 
                 Label {
                     id: labelTitle
+                    objectName: "labelTitle"
                     anchors {
                         top: parent.top
                         left: parent.left
@@ -362,6 +364,7 @@ ItemPage {
 
                 Label {
                     id: labelUpdateStatus
+                    objectName: "labelUpdateStatus"
                     text: i18n.tr("Installing")
                     anchors.top: labelTitle.bottom
                     anchors.left: parent.left
@@ -410,6 +413,7 @@ ItemPage {
 
                 Label {
                     id: labelVersion
+                    objectName: "labelVersion"
                     anchors {
                         left: parent.left
                         right: buttonAppUpdate.right
@@ -428,12 +432,14 @@ ItemPage {
 
     ListItem.Standard {
         id: notification
+        objectName: "notification"
         visible: false
         anchors.bottom: configuration.top
     }
 
     ListItem.SingleValue {
         id: configuration
+        objectName: "configuration"
         anchors.bottom: parent.bottom
         text: i18n.tr("Auto download")
         value: {
@@ -450,6 +456,7 @@ ItemPage {
 
     Rectangle {
         id: updateNotification
+        objectName: "updateNotification"
         anchors {
             left: parent.left
             right: parent.right
@@ -476,6 +483,7 @@ ItemPage {
 
     Rectangle {
         id: installingImageUpdate
+        objectName: "installingImageUpdate"
         anchors.fill: parent
         visible: false
 

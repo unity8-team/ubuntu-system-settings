@@ -39,3 +39,8 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         """Check that the updates notification is shown in main."""
         self.assertThat(lambda: self.main_view.select_single(
             objectName='entryComponent-updates'), raises(StateNotFoundError))
+
+    def test_searching_state(self):
+        """Check how the ui reacts to searching state."""
+        updates = self.updates_page
+        self.assertThat(updates, NotEquals(None))

@@ -69,7 +69,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
         page_center_x = int(page_right / 2)
         page_center_y = int(page_bottom / 2)
         while obj.globalRect[1] + obj.height > page_bottom:
-            self.pointer.drag(page_center_x, page_center_y, 
+            self.pointer.drag(page_center_x, page_center_y,
                     page_center_x, page_center_y - obj.height * 2)
             # avoid a flick
             sleep(0.5)
@@ -243,5 +243,4 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
     @property
     def updates_page(self):
         """ Return 'System Update' page """
-        return self.main_view.select_single(
-            objectName='entryComponent-system-update')
+        return self.main_view.select_single(objectName='systemUpdatesPage')
