@@ -21,25 +21,25 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Tests for cellular Page """
 
     def navigate_to_manual(self):
-        selector = self.cellular_page.select_single(
+        selector = self.main_window.cellular_page.select_single(
                 toolkit_emulators.ItemSelector,
                 objectName="autoChooseCarrierSelector")
         manual = selector.select_single('Label', text=_("Manually"))
-        self.pointer.click_object(manual)
-        choosecarrier = self.cellular_page.select_single(
+        self.main_window.pointer.click_object(manual)
+        choosecarrier = self.main_window.cellular_page.select_single(
                 objectName="chooseCarrier")
-        self.pointer.click_object(choosecarrier)
-        self.assertThat(self.choose_page.title, Equals(_("Carrier")))
+        self.main_window.pointer.click_object(choosecarrier)
+        self.assertThat(self.main_window.choose_page.title, Equals(_("Carrier")))
 
     def test_cellular_page(self):
         """ Checks whether Cellular page is available """
-        self.assertThat(self.cellular_page, NotEquals(None))
-        self.assertThat(self.cellular_page.title, Equals(_('Cellular')))
+        self.assertThat(self.main_window.cellular_page, NotEquals(None))
+        self.assertThat(self.main_window.cellular_page.title, Equals(_('Cellular')))
 
     def test_current_network(self):
         """ Tests whether the current network is visible and selected """
         self.navigate_to_manual()
-        carriers = self.choose_page.select_single(
+        carriers = self.main_window.choose_page.select_single(
                 toolkit_emulators.ItemSelector,
                 objectName="carrierSelector")
         # TODO: Once there is a proper ItemSelector emulator, get the items
@@ -51,7 +51,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
     def test_alt_network(self):
         """ Tests whether an alternative available network is displayed """
         self.navigate_to_manual()
-        carriers = self.choose_page.select_single(
+        carriers = self.main_window.choose_page.select_single(
                 toolkit_emulators.ItemSelector,
                 objectName="carrierSelector")
         manual = carriers.select_single('Label', text="my.cool.telco")
@@ -60,7 +60,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
     def test_no_forbidden_network(self):
         """ Ensures that a forbidden network is not shown """
         self.navigate_to_manual()
-        carriers = self.choose_page.select_single(
+        carriers = self.main_window.choose_page.select_single(
                 toolkit_emulators.ItemSelector,
                 objectName="carrierSelector")
         self.assertThat(lambda: carriers.select_single('Label', text="my.bad.telco"),

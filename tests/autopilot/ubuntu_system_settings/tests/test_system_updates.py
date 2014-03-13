@@ -29,13 +29,13 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def test_show_updates(self):
         """ Checks whether Search box actually filters the results """
-        updates = self.updates_page
+        updates = self.main_window.updates_page
         self.assertThat(updates, NotEquals(None))
         # Move to text field
-        self.pointer.move_to_object(updates)
-        self.pointer.click()
+        self.main_window.pointer.move_to_object(updates)
+        self.main_window.pointer.click()
 
     def test_updates_not_in_main(self):
         """Check that the updates notification is shown in main."""
-        self.assertThat(lambda: self.main_view.select_single(
+        self.assertThat(lambda: self.main_window.select_single(
             objectName='entryComponent-updates'), raises(StateNotFoundError))

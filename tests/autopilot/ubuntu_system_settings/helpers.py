@@ -17,17 +17,21 @@
 APP_PATH = '/usr/bin/system-settings'
 DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
 
-def launch_system_settings(panel=None, emulator_base=None):
-    """ Launch system settings application """
+from autopilot import platform
+
+from ubuntuuitoolkit import emulators as toolkit_emulators
+
+def launch_system_settings(testobj, panel=None, emulator_base=None):
+    """ Launch system settings application"""
     params = [APP_PATH]
-    if (model() != 'Desktop'):
+    if (platform.model() != 'Desktop'):
         params.append('--desktop_file_hint={}'.format(DESKTOP_FILE))
 
     # Launch to a specific panel
     if panel is not None:
         params.append(panel)
 
-    app = self.launch_test_application(
+    app = testobj.launch_test_application(
         *params,
         app_type='qt',
         emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)

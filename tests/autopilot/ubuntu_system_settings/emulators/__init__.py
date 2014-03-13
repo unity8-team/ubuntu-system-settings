@@ -44,31 +44,31 @@ class MainWindow(toolkit_emulators.MainView):
     @property
     def about_page(self):
         """ Return 'About' page """
-        return self.main_view.select_single(objectName='aboutPage')
+        return self.select_single(objectName='aboutPage')
 
     @property
     def cellular_page(self):
         """ Return 'About' page """
-        return self.main_view.select_single(objectName='cellularPage')
+        return self.select_single(objectName='cellularPage')
 
     @property
     def choose_page(self):
         """ Return 'Choose carrier' page """
-        return self.main_view.select_single(objectName="chooseCarrierPage")
+        return self.select_single(objectName="chooseCarrierPage")
 
 
     @property
     def licenses_page(self):
         """ Return 'License' page """
-        return self.main_view.select_single(objectName='licensesPage')
+        return self.select_single(objectName='licensesPage')
 
     @property
     def storage_page(self):
         """ Return 'Storage' page """
-        return self.main_view.select_single(objectName='storagePage')
+        return self.select_single(objectName='storagePage')
 
     @property
     def updates_page(self):
         """ Return 'System Update' page """
-        return self.main_view.select_single(
+        return self.select_single(
             objectName='entryComponent-system-update')

@@ -37,12 +37,13 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
         self.app = launch_system_settings(
+            self,
             panel=panel,
             emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)
-        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
+        self.assertThat(self.main_window.visible, Eventually(Equals(True)))
 
     @property
-    def main_view(self):
+    def main_window(self):
         """ Return main view """
         return self.app.select_single(MainWindow)
 
@@ -71,8 +72,8 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.launch_system_settings()
-        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
+        launch_system_settings(self)
+        self.assertThat(self.main_window.visible, Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
@@ -139,13 +140,13 @@ class StorageBaseTestCase(AboutBaseTestCase):
         """ Go to Storage Page """
         super(StorageBaseTestCase, self).setUp()
         # Click on 'Storage' option
-        button = self.about_page.select_single(objectName='storageItem')
+        button = self.main_window.about_page.select_single(objectName='storageItem')
         self.assertThat(button, NotEquals(None))
-        self.scroll_to_and_click(button)
+        self.main_window.scroll_to_and_click(button)
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.storage_page.select_single(objectName=object_name)
+        item = self.main_window.storage_page.select_single(objectName=object_name)
         self.assertThat(item, NotEquals(None))
         label = item.label # Label
         space = item.value # Disk space (bytes)
@@ -164,10 +165,10 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """ Go to License Page """
         super(LicenseBaseTestCase, self).setUp()
         # Click on 'Software licenses' option
-        button = self.main_view.select_single(objectName='licenseItem')
+        button = self.main_window.select_single(objectName='licenseItem')
         self.assertThat(button, NotEquals(None))
         self.assertThat(button.text, Equals(_('Software licenses')))
-        self.scroll_to_and_click(button)
+        self.main_window.scroll_to_and_click(button)
 
 
 class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -177,9 +178,9 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
         """ Go to SystemUpdates Page """
         super(SystemUpdatesBaseTestCase, self).setUp()
         # Click on 'System Updates' option
-        button = self.main_view.select_single(
+        button = self.main_window.select_single(
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
-        self.pointer.move_to_object(button)
-        self.pointer.click()
+        self.main_window.pointer.move_to_object(button)
+        self.main_window.pointer.click()
 
