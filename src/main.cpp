@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 
     initTr(I18N_DOMAIN, NULL);
     /* HACK: force the theme until lp #1098578 is fixed */
-    QIcon::setThemeName("ubuntu-mobile");
+    QIcon::setThemeName("suru");
 
     /* Parse the commandline options to see if we've been given a panel to load,
      * and other options for the panel.

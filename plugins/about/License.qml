@@ -25,7 +25,7 @@ ItemPage {
            otherwise the UI might end up in a situation where scrolling doesn't work */
         flickableDirection: Flickable.VerticalFlick
 
-        Text {
+        Label {
             id: textId
             text: backendInfo.licenseInfo(binary)
             width: scrollWidget.width
