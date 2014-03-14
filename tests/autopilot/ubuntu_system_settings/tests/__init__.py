@@ -35,7 +35,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
         launch_system_settings(self, panel=panel)
-        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
+        self.assertThat(self.main_window.visible, Eventually(Equals(True)))
 
     @property
     def main_window(self):
