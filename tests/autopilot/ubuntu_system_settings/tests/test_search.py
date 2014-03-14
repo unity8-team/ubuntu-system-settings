@@ -31,7 +31,9 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         # Filter by string
         self.keyboard.type(_('Sound'))
         # Search component
-        sound = self.main_window.select_single(objectName='entryComponent-sound')
+        sound = self.main_window.select_single(
+            objectName='entryComponent-sound'
+        )
         self.assertThat(sound, NotEquals(None))
         try:
             background = self.main_window.select_single(

@@ -24,7 +24,7 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 
 def launch_system_settings(testobj, panel=None, emulator_base=None):
     """ Launch system settings application
-    
+
         :param testobj: An AutopilotTestCase object, needed to call
         testobj.launch_test_application()
 
