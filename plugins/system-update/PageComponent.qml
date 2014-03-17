@@ -79,7 +79,6 @@ ItemPage {
             PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
-            PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: updateNotification; visible: false}
         },
         State {

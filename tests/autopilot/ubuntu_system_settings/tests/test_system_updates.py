@@ -6,7 +6,8 @@
 # by the Free Software Foundation.
 
 from autopilot.introspection.dbus import StateNotFoundError
-from testtools.matchers import NotEquals, raises
+from autopilot.matchers import Eventually
+from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import SystemUpdatesBaseTestCase
 
@@ -35,7 +36,84 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         self.assertThat(lambda: self.main_view.select_single(
             objectName='entryComponent-updates'), raises(StateNotFoundError))
 
+    def test_configuration(self):
+        """Check the configuration button."""
+        self.assertThat(lambda: self.main_view.select_single(
+            objectName='configurationPage'), raises(StateNotFoundError))
+        updates = self.updates_page
+        self.assertThat(updates, NotEquals(None))
+        configuration = updates.select_single(objectName='configuration')
+        self.assertThat(configuration, NotEquals(None))
+        self.pointer.move_to_object(configuration)
+        self.pointer.click()
+
+    def test_check_for_updates_area(self):
+        """Check that the updates area is shown on opening."""
+        updates = self.updates_page
+        self.assertThat(updates, NotEquals(None))
+        checkForUpdatesArea = updates.select_single(
+            objectName='checkForUpdatesArea')
+        self.assertThat(checkForUpdatesArea, NotEquals(None))
+        self.assertThat(checkForUpdatesArea.visible, Equals(True))
+        self.assertThat(checkForUpdatesArea.visible,
+                        Eventually(NotEquals(True)))
+
     def test_searching_state(self):
         """Check how the ui reacts to searching state."""
         updates = self.updates_page
         self.assertThat(updates, NotEquals(None))
+        self.assertThat(updates.state, Equals("SEARCHING"))
+        notification = updates.select_single(
+            objectName='notification')
+        self.assertThat(notification, NotEquals(None))
+        self.assertThat(notification.visible, Equals(False))
+        installAllButton = updates.select_single(
+            objectName='installAllButton')
+        self.assertThat(installAllButton, NotEquals(None))
+        self.assertThat(installAllButton.visible, Equals(False))
+        updateNotification = updates.select_single(
+            objectName='updateNotification')
+        self.assertThat(updateNotification, NotEquals(None))
+        self.assertThat(updateNotification.visible, Equals(False))
+        checkForUpdatesArea = updates.select_single(
+            objectName='checkForUpdatesArea')
+        self.assertThat(checkForUpdatesArea, NotEquals(None))
+        self.assertThat(checkForUpdatesArea.visible, Equals(True))
+
+    def test_no_updates_state(self):
+        """Check how the ui reacts to no updates state."""
+        updates = self.updates_page
+        self.assertThat(updates, NotEquals(None))
+        updates.state.wait_for("NOUPDATES")
+        self.assertThat(updates.state, Equals("NOUPDATES"))
+        updateList = updates.select_single(
+            objectName='updateList')
+        self.assertThat(updateList, NotEquals(None))
+        self.assertThat(updateList.visible, Equals(False))
+        installAllButton = updates.select_single(
+            objectName='installAllButton')
+        self.assertThat(installAllButton, NotEquals(None))
+        self.assertThat(installAllButton.visible, Equals(False))
+        updateNotification = updates.select_single(
+            objectName='updateNotification')
+        self.assertThat(updateNotification, NotEquals(None))
+        self.assertThat(updateNotification.visible, Equals(True))
+
+    def test_updates_state(self):
+        """Check how the ui reacts to updates state."""
+        updates = self.updates_page
+        self.assertThat(updates, NotEquals(None))
+        updates.state.wait_for("NOUPDATES")
+        self.assertThat(updates.state, Equals("NOUPDATES"))
+        updateList = updates.select_single(
+            objectName='updateList')
+        self.assertThat(updateList, NotEquals(None))
+        self.assertThat(updateList.visible, Equals(False))
+        installAllButton = updates.select_single(
+            objectName='installAllButton')
+        self.assertThat(installAllButton, NotEquals(None))
+        self.assertThat(installAllButton.visible, Equals(False))
+        updateNotification = updates.select_single(
+            objectName='updateNotification')
+        self.assertThat(updateNotification, NotEquals(None))
+        self.assertThat(updateNotification.visible, Equals(True))

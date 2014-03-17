@@ -119,7 +119,12 @@ void UpdateManager::checkUpdates()
     m_apps.clear();
     Q_EMIT modelChanged();
     m_systemUpdate.checkForUpdate();
-    m_service.getCredentials();
+    if (getCheckForCredentials()) {
+        m_service.getCredentials();
+    } else {
+        Token token("", "", "", "");
+        handleCredentialsFound(token);
+    }
 }
 
 void UpdateManager::handleCredentialsFound(Token token)
@@ -136,6 +141,13 @@ QString UpdateManager::getClickCommand()
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString command = environment.value("CLICK_COMMAND", QString(CLICK_COMMAND));
     return command;
+}
+
+bool UpdateManager::getCheckForCredentials()
+{
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    QString value = environment.value("IGNORE_CREDENTIALS", QString("CHECK_CREDENTIALS"));
+    return value == "CHECK_CREDENTIALS";
 }
 
 void UpdateManager::processOutput()

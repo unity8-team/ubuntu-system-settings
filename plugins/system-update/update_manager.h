@@ -127,6 +127,7 @@ private:
 
     void checkForUpdates();
     QString getClickCommand();
+    bool getCheckForCredentials();
     void reportCheckState();
     void updateNotAvailable();
 };
