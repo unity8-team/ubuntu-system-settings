@@ -5,6 +5,10 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
+from __future__ import absolute_import
+
+import os
+
 from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, raises
@@ -21,6 +25,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def setUp(self):
         # Set environment variables
+        os.environ["IGNORE_CREDENTIALS"] = "True"
         super(SystemUpdatesTestCases, self).setUp()
 
     def test_show_updates(self):
@@ -62,6 +67,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         """Check how the ui reacts to searching state."""
         updates = self.updates_page
         self.assertThat(updates, NotEquals(None))
+        updates.state.wait_for("SEARCHING")
         self.assertThat(updates.state, Equals("SEARCHING"))
         notification = updates.select_single(
             objectName='notification')
@@ -82,25 +88,6 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def test_no_updates_state(self):
         """Check how the ui reacts to no updates state."""
-        updates = self.updates_page
-        self.assertThat(updates, NotEquals(None))
-        updates.state.wait_for("NOUPDATES")
-        self.assertThat(updates.state, Equals("NOUPDATES"))
-        updateList = updates.select_single(
-            objectName='updateList')
-        self.assertThat(updateList, NotEquals(None))
-        self.assertThat(updateList.visible, Equals(False))
-        installAllButton = updates.select_single(
-            objectName='installAllButton')
-        self.assertThat(installAllButton, NotEquals(None))
-        self.assertThat(installAllButton.visible, Equals(False))
-        updateNotification = updates.select_single(
-            objectName='updateNotification')
-        self.assertThat(updateNotification, NotEquals(None))
-        self.assertThat(updateNotification.visible, Equals(True))
-
-    def test_updates_state(self):
-        """Check how the ui reacts to updates state."""
         updates = self.updates_page
         self.assertThat(updates, NotEquals(None))
         updates.state.wait_for("NOUPDATES")
