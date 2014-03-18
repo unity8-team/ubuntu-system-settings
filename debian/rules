@@ -20,4 +20,7 @@ override_dh_makeshlibs:
 	dh_makeshlibs -Xusr/lib/$(DEB_HOST_MULTIARCH)/ubuntu-system-settings
 
 %:
-	dh $@ --fail-missing --with python2
+	dh $@ --fail-missing --with python2,migrations
+
+override_dh_auto_test:
+	python tests/test_code.py
