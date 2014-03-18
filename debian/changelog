@@ -1,3 +1,39 @@
+ubuntu-system-settings (0.1+14.04.20140311.1-0ubuntu1) trusty; urgency=low
+
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 11 Mar 2014 17:25:38 +0000
+
+ubuntu-system-settings (0.1+14.04.20140311-0ubuntu1) trusty; urgency=low
+
+  [ Sebastien Bacher ]
+  * license: use Label widget instead of Text, it looks more integrated
+    (LP: #1286262)
+  * language: don't display an chevron for the language item, the list
+    displayed is a sheet widget and not a page stack one. (lp: #1289287)
+    (LP: #1289287)
+
+  [ Iain Lane ]
+  * background selector: lock the toolbar open, per the design (LP:
+    #1288361)
+  * Don't crash if the migration script can't set values (LP: #1288833)
+
+  [ Michael Terry ]
+  * Tweak some of the wording of the wizard, and start the language
+    combo expanded
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Omer Akram ]
+  * autopilot tests code: fix pep8 and pyflakes warnings. add tests to
+    make sure we don't regress on pep8/pyflakes .
+
+  [ Didier Roche ]
+  * switch to suru icon theme
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 11 Mar 2014 15:14:22 +0000
+
 ubuntu-system-settings (0.1+14.04.20140303-0ubuntu1) trusty; urgency=low
 
   [ CI bot ]
