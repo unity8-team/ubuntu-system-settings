@@ -48,7 +48,7 @@ Page {
         visible: pageStack.depth > 1 && hasBackButton
         gradient: UbuntuColors.greyGradient
 
-        onClicked: pageStack.pop()
+        onClicked: pageStack.prev()
     }
 
     Loader {

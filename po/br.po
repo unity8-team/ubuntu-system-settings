@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2014-03-06 08:26+0000\n"
+"PO-Revision-Date: 2014-03-11 12:57+0000\n"
 "Last-Translator: Fohanno Thierry <thierry.fohanno@ofis-bzh.org>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 07:26+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 05:29+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -53,7 +53,7 @@ msgstr "Dibab ar yezh..."
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:78
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr "Kenaozadurioù ar c'havier"
+msgstr "Fichadurioù ar c'havier"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:93
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:103
@@ -87,11 +87,11 @@ msgstr "Son ar c'hlavier"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr "Kefluniadurioù a vremañ :"
+msgstr "Fichadurioù a vremañ :"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr "An holl gefluniadurioù zo da gaout :"
+msgstr "An holl fichadurioù a c'haller dibab :"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -159,7 +159,7 @@ msgstr "Son ar prennañ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr "Er Mod didrouz emañ ar pellgomzer."
+msgstr "Er mod didrouz emañ ar pellgomzer."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:29
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:73
@@ -180,7 +180,7 @@ msgstr "Kod-tremen"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:42
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:332
 msgid "Passphrase"
-msgstr "Lavarenn-dremen"
+msgstr "Frazenn-dremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:44
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:30
@@ -203,7 +203,7 @@ msgstr "Lakaat da gousket pa vez dizoberiant"
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] "%1 munut"
+msgstr[0] "%1 vunutenn"
 msgstr[1] "%1 munut"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:79
@@ -361,7 +361,7 @@ msgstr "Cheñch ar c'hod-tremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr "Cheñch al lavarenn-dremen"
+msgstr "Cheñch ar frazenn-dremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
@@ -373,7 +373,7 @@ msgstr "Prennañ gant ar c'hod-tremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr "Prennañ gant al lavarenn-dremen"
+msgstr "Prennañ gant ar frazenn-dremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:100
 msgid "Existing passcode"
@@ -381,7 +381,7 @@ msgstr "Kod-tremen a vremañ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr "Lavarenn-dremen a vremañ"
+msgstr "Frazenn-dremen a vremañ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
@@ -389,7 +389,7 @@ msgstr "Kod-tremen direizh. Esaeit en-dro."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr "Lavarenn-dremen direizh. Esaeit en-dro"
+msgstr "Frazenn-dremen direizh. Esaeit en-dro"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:166
 msgid "Choose passcode"
@@ -397,7 +397,7 @@ msgstr "Dibabit ho kod-tremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr "Dibabit ho lavarenn-dremen"
+msgstr "Dibabit ho frazenn-dremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:212
 msgid "Confirm passcode"
@@ -405,7 +405,7 @@ msgstr "Kadarnaat ar c'hod-tremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr "Kadarnaat al lavarenn-dremen"
+msgstr "Kadarnaat ar frazenn-dremen"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
@@ -413,7 +413,7 @@ msgstr "Ne glot ket ar c'hodoù-tremen-se. Esaeit en-dro."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr "Ne glot ket al lavarennoù-tremen-se. Esaeit en-dro"
+msgstr "Ne glot ket ar frazennoù-tremen-se. Esaeit en-dro"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:273
 msgid "Unset"
@@ -445,7 +445,7 @@ msgstr "Kod-tremen gant 4 sifr..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr "Lavarenn-dremen..."
+msgstr "Frazenn-dremen..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
@@ -453,7 +453,7 @@ msgstr "Cheñch ar c'hod-tremen..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr "Cheñch al lavarenn-dremen..."
+msgstr "Cheñch ar frazenn-dremen..."
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:28
@@ -537,8 +537,8 @@ msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
-"Endalc'had ha neuz al lañser, ha siloù ar bajenn degemer a vo adlakaet en o "
-"zalvoudoù orin."
+"Endalc'had ha fichadur al lañser, ha siloù ar bajenn degemer a vo adlakaet "
+"en o zalvoudoù orin."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
@@ -606,7 +606,7 @@ msgstr "Eur"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr "Munut"
+msgstr "Munutenn"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:109
 msgid "Second"
@@ -970,7 +970,7 @@ msgstr[1] "%1 eilenn zo"
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] "%1 munut zo"
+msgstr[0] "%1 vunutenn zo"
 msgstr[1] "%1 munut zo"
 
 #. TRANSLATORS: %1 is the number of hours
@@ -1013,7 +1013,7 @@ msgstr "%1%"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:241
 msgid "Ways to reduce battery use:"
-msgstr "Doareoù da zigreskiñ implij ar batiri :"
+msgstr "Doareoù da implijout nebeutoc'h ar batiri :"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:245
 msgid "Display brightness"
@@ -1030,7 +1030,7 @@ msgstr "Skedusted an diskwel"
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] "Goude %1 munut"
+msgstr[0] "Goude %1 vunutenn"
 msgstr[1] "Goude %1 munut"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:392
@@ -1074,7 +1074,7 @@ msgstr "Pellgargañ an hizivadennoù ent emgefre hiviziken :"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:53
 msgid "When on wi-fi"
-msgstr "Pa vezer gant wi-fi"
+msgstr "Pa vezer gant ar wi-fi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:54
 msgid "On any data connection"
@@ -1167,7 +1167,7 @@ msgstr "Doare : "
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:376
 msgid "On wi-fi"
-msgstr "Gant wi-fi"
+msgstr "Gant ar wi-fi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:378
 msgid "Always"
@@ -1413,17 +1413,17 @@ msgstr "titouroù"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:84
 msgid "Flight Mode"
-msgstr "Mod karr-nij"
+msgstr "Mod nijerez"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:86
 msgid "flight"
-msgstr "karr-nij"
+msgstr "nijerez"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:88
 msgid "plane"
-msgstr "karr-nij"
+msgstr "nijerez"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:90

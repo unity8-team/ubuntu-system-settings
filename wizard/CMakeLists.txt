@@ -4,11 +4,13 @@ add_definitions(-DPLUGIN_MANIFEST_DIR="${PLUGIN_MANIFEST_DIR}")
 add_definitions(-DPLUGIN_QML_DIR="${PLUGIN_QML_DIR}")
 add_definitions(-DPLUGIN_MODULE_DIR="${PLUGIN_MODULE_DIR}")
 
+set(WIZARD_ROOT "${CMAKE_INSTALL_PREFIX}/share/ubuntu/settings/wizard")
+add_definitions(-DWIZARD_ROOT="${WIZARD_ROOT}")
+
 set(WIZARD_SOURCES
     main.cpp
+    PageList.cpp
 )
-
-QT5_ADD_RESOURCES(system-settings-wizard-resources ui.qrc)
 
 add_executable(system-settings-wizard ${WIZARD_SOURCES} ${system-settings-wizard-resources})
 
@@ -16,3 +18,5 @@ qt5_use_modules(system-settings-wizard Core Gui Quick Qml)
 
 install(TARGETS system-settings-wizard RUNTIME DESTINATION bin)
 install(FILES ubuntu-system-settings-wizard.conf DESTINATION share/upstart)
+
+install(DIRECTORY qml DESTINATION ${WIZARD_ROOT})
