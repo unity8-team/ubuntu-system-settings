@@ -71,7 +71,7 @@ LocalComponents.Page {
 
     Component {
         id: forwardButton
-        Button {
+        LocalComponents.ForwardButton {
             text: i18n.tr("Continue")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
