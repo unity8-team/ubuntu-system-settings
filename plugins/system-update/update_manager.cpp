@@ -118,8 +118,8 @@ void UpdateManager::checkUpdates()
     m_model.clear();
     m_apps.clear();
     Q_EMIT modelChanged();
-    m_systemUpdate.checkForUpdate();
     if (getCheckForCredentials()) {
+        m_systemUpdate.checkForUpdate();
         m_service.getCredentials();
     } else {
         Token token("", "", "", "");
