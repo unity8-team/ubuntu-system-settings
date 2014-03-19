@@ -130,6 +130,8 @@ private:
     bool m_update;
     bool m_update_ready;
     bool m_update_state;
+
+    bool getIgnoreUpdates();
 };
 
 }

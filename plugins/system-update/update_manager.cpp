@@ -122,6 +122,7 @@ void UpdateManager::checkUpdates()
         m_systemUpdate.checkForUpdate();
         m_service.getCredentials();
     } else {
+        systemUpdateNotAvailable();
         Token token("", "", "", "");
         handleCredentialsFound(token);
     }

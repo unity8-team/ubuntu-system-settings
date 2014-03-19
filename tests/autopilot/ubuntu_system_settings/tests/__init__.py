@@ -241,8 +241,7 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
         button = self.main_view.select_single(
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
-        self.pointer.move_to_object(button)
-        self.pointer.click()
+        self.pointer.click_object(button)
 
     @property
     def updates_page(self):
