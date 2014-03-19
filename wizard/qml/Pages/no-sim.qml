@@ -16,11 +16,12 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import "qrc:/qml/Components" as LocalComponents
+import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Phone settings")
+    title: i18n.tr("No SIM card")
     forwardButtonSourceComponent: forwardButton
+    hasBackButton: false
 
     Item {
         id: content
@@ -36,17 +37,19 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.") +
+            text: i18n.tr("Don’t worry, you can insert a SIM card later.") +
                   "\n\n" +
-                  i18n.tr("Your phone is setup to detect your location. This can be disabled in system settings.")
+                  i18n.tr("For the time being, you won’t have phone or SMS features.") +
+                  "\n\n" +
+                  i18n.tr("You can find a SIM in your phone package or contact your provider.")
         }
     }
 
     Component {
         id: forwardButton
         Button {
-            text: i18n.tr("Continue")
-            onClicked: pageStack.push(Qt.resolvedUrl("SetupCompletePage.qml"))
+            text: i18n.tr("Skip")
+            onClicked: pageStack.next()
         }
     }
 }

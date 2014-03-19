@@ -51,6 +51,20 @@ MainView {
 
     PageStack {
         id: pageStack
-        Component.onCompleted: push(Qt.resolvedUrl("Pages/WelcomePage.qml"))
+
+        function next() {
+            // If we've opened any extra (non-main) pages, pop them before
+            // continuing so back button returns to the previous main page.
+            while (pageList.index < pageStack.depth - 1)
+                pop()
+            push(pageList.next())
+        }
+
+        function prev() {
+            pageList.prev() // to update pageList.index
+            pop()
+        }
+
+        Component.onCompleted: next()
     }
 }
