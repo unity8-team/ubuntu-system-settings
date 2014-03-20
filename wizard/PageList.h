@@ -27,6 +27,7 @@ class PageList : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int index READ index NOTIFY indexChanged)
+    Q_PROPERTY(int numPages READ numPages NOTIFY numPagesChanged)
 
 public:
     explicit PageList(QObject *parent = 0);
@@ -34,6 +35,7 @@ public:
     QStringList entries() const;
     QStringList paths() const;
     int index() const;
+    int numPages() const;
 
 public Q_SLOTS:
     QString prev();
@@ -41,6 +43,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void indexChanged();
+    void numPagesChanged(); // never emitted, just here to quiet Qml warnings
 
 private:
     int setIndex(int index);
