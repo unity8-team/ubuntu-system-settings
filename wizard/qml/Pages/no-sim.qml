@@ -64,7 +64,7 @@ LocalComponents.Page {
 
     Component {
         id: forwardButton
-        Button {
+        LocalComponents.ForwardButton {
             text: i18n.tr("Skip")
             onClicked: pageStack.next()
         }
