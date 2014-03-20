@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.1+14.04.20140320-0ubuntu1) trusty; urgency=low
+
+  [ Michael Terry ]
+  * Add pagination breadcrumbs to wizard.
+  * Restore SIM card image in welcome wizard.
+
+  [ Andrea Cimitan ]
+  * Use green button for forward
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 20 Mar 2014 09:51:42 +0000
+
 ubuntu-system-settings (0.1+14.04.20140318-0ubuntu1) trusty; urgency=low
 
   [ Michael Terry ]
