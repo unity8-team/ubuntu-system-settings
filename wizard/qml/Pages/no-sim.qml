@@ -32,8 +32,25 @@ LocalComponents.Page {
             rightMargin: rightMargin
             bottomMargin: bottomMargin
         }
+ 
+        Image {
+            id: image
+            anchors {
+                top: parent.top
+                left: parent.left
+            }
+            source: "data/meet_ubuntu_simcard@30.png"
+            height: units.gu(9)
+            width: units.gu(12.5)
+        }
 
         Label {
+            anchors {
+                top: image.bottom
+                left: parent.left
+                topMargin: units.gu(2)
+            }
+
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
