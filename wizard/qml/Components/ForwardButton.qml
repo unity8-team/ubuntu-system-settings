@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,28 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import "../Components" as LocalComponents
 
-LocalComponents.Page {
-    title: i18n.tr("Connect to Wi-Fi")
-    forwardButtonSourceComponent: forwardButton
-
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
-        }
-    }
-
-    Component {
-        id: forwardButton
-        LocalComponents.ForwardButton {
-            text: i18n.tr("Connect")
-            onClicked: pageStack.next()
-        }
-    }
+Button {
+    color: "#38b44a"
 }

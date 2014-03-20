@@ -76,6 +76,11 @@ int PageList::index() const
     return m_index;
 }
 
+int PageList::numPages() const
+{
+    return m_pages.size();
+}
+
 QString PageList::prev()
 {
     if (m_index > 0)
