@@ -44,7 +44,7 @@ LocalComponents.Page {
 
     Component {
         id: forwardButton
-        Button {
+        LocalComponents.ForwardButton {
             text: i18n.tr("Continue")
             onClicked: pageStack.next()
         }

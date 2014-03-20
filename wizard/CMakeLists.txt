@@ -7,12 +7,20 @@ add_definitions(-DPLUGIN_MODULE_DIR="${PLUGIN_MODULE_DIR}")
 set(WIZARD_ROOT "${CMAKE_INSTALL_PREFIX}/share/ubuntu/settings/wizard")
 add_definitions(-DWIZARD_ROOT="${WIZARD_ROOT}")
 
+file(GLOB_RECURSE QML_FILES
+    qml/*
+)
+
 set(WIZARD_SOURCES
     main.cpp
     PageList.cpp
 )
 
-add_executable(system-settings-wizard ${WIZARD_SOURCES} ${system-settings-wizard-resources})
+add_executable(system-settings-wizard
+    ${WIZARD_SOURCES}
+    ${system-settings-wizard-resources}
+    ${QML_FILES} # This is to make qml and image files appear in the IDE's project tree
+)
 
 qt5_use_modules(system-settings-wizard Core Gui Quick Qml)
 
