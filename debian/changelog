@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.1+14.04.20140321-0ubuntu1) trusty; urgency=low
+
+  [ Ken VanDine ]
+  * Updates for the QML binding changes in the content-hub
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 21 Mar 2014 00:38:52 +0000
+
 ubuntu-system-settings (0.1+14.04.20140320-0ubuntu1) trusty; urgency=low
 
   [ Michael Terry ]
