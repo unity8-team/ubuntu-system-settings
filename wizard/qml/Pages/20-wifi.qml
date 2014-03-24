@@ -21,6 +21,7 @@ import QMenuModel 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
+    id: wifiPage
     title: i18n.tr("Connect to Wi-Fi")
     forwardButtonSourceComponent: forwardButton
 
@@ -46,7 +47,7 @@ LocalComponents.Page {
         }
     }
 
-    MenuItemFactory {
+    LocalComponents.MenuItemFactory {
         id: menuFactory
         model: mainMenu.model
     }
@@ -83,7 +84,7 @@ LocalComponents.Page {
 
         // Only allow flicking if the content doesn't fit on the page
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > wifibase.height) ?
+        boundsBehavior: (contentHeight > wifiPage.height) ?
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
 

@@ -26,70 +26,7 @@ Item {
     property var model: null
 
     property var _map:  {
-        "unity.widgets.systemsettings.tablet.switch"        : switchMenu,
-
-        "com.canonical.indicator.div"       : divMenu,
-        "com.canonical.indicator.section"   : sectionMenu,
-        "com.canonical.indicator.switch"    : switchMenu,
-
-        "com.canonical.unity.switch"    : switchMenu,
-
-        "unity.widgets.systemsettings.tablet.wifisection" : wifiSection,
         "unity.widgets.systemsettings.tablet.accesspoint" : accessPoint,
-    }
-
-    Component { id: divMenu; DivMenuItem {} }
-
-    Component {
-        id: sectionMenu;
-        SectionMenuItem {
-            property QtObject menu: null
-
-            text: menu && menu.label ? menu.label : ""
-        }
-    }
-
-    Component {
-        id: standardMenu;
-        StandardMenuItem {
-            property QtObject menu: null
-
-            text: menu && menu.label ? menu.label : ""
-            icon: menu ? menu.icon : ""
-            checkable: menu ? (menu.isCheck || menu.isRadio) : false
-            checked: checkable ? menu.isToggled : false
-            enabled: menu ? menu.sensitive : false
-
-            onActivate: model.activate(modelIndex);
-        }
-    }
-
-    Component {
-        id: switchMenu;
-        SwitchMenuItem {
-            property QtObject menu: null
-
-            text: menu && menu.label ? menu.label : ""
-            icon: menu ? menu.icon : ""
-            checked: menu ? menu.isToggled : false
-            enabled: menu ? menu.sensitive : false
-
-            onActivate: model.activate(modelIndex);
-        }
-    }
-
-    Component {
-        id: wifiSection;
-        SectionMenuItem {
-            property QtObject menu: null
-
-            text: menu && menu.label ? menu.label : ""
-            busy: menu ? menu.ext.xCanonicalBusyAction : false
-
-            Component.onCompleted: {
-                model.loadExtendedAttributes(modelIndex, {'x-canonical-busy-action': 'bool'});
-            }
-        }
     }
 
     Component {
@@ -124,11 +61,12 @@ Item {
             if (component !== undefined) {
                 return component;
             }
-        } else {
+        }
+        /*else {
             if (modelData.isSeparator) {
                 return divMenu;
             }
         }
-        return standardMenu;
+        return standardMenu; */
     }
 }
