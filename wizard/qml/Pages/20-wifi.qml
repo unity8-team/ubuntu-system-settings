@@ -132,80 +132,49 @@ LocalComponents.Page {
                                     Flickable.StopAtBounds
 
                 currentIndex: -1
-                delegate: Item {
+                delegate: Menus.AccessPointMenu {
                     id: menuDelegate
+                    objectName: "accessPoint"
+
+                    property QtObject menuData: model
+                    property var unityMenuModel: unitymenumodel
+                    property int menuIndex: menuModel.mapRowToSource(index)
+                    property var extendedData: menuData && menuData.ext || undefined
+                    property var strengthAction: QMenuModel.UnityMenuAction {
+                        model: unityMenuModel
+                        index: menuIndex
+                        name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
+                    }
 
                     anchors {
                         left: parent.left
                         right: parent.right
                     }
-                    height: loader.height
                     visible: height > 0
+                    text: menuData && menuData.label || ""
+                    enabled: menuData && menuData.sensitive || false
+                    checked: menuData && menuData.isToggled || false
+                    secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
+                    adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
+                    signalStrength: strengthAction.valid ? strengthAction.state : 0
 
-                    Loader {
-                        id: loader
-                        asynchronous: true
+                    onUnityMenuModelChanged: {
+                        loadAttributes();
+                    }
+                    onMenuIndexChanged: {
+                        loadAttributes();
+                    }
+                    onTriggered: {
+                        unityMenuModel.activate(menuIndex);
+                    }
 
-                        property int modelIndex: index
-
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
-
-                        sourceComponent: accessPoint
-
-                        onLoaded: {
-                            if (item.hasOwnProperty("menuData")) {
-                                item.menuData = Qt.binding(function() { return model; });
-                            }
-                            if (item.hasOwnProperty("menuIndex")) {
-                                item.menuIndex = Qt.binding(function() { return modelIndex; });
-                            }
-                        }
+                    function loadAttributes() {
+                        if (!unityMenuModel || menuIndex == -1) return;
+                        unityMenuModel.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
+                                                                          'x-canonical-wifi-ap-is-secure': 'bool',
+                                                                          'x-canonical-wifi-ap-strength-action': 'string'});
                     }
                 }
-            }
-        }
-    }
-
-    Component {
-        id: accessPoint;
-        Menus.AccessPointMenu {
-            objectName: "accessPoint"
-            property QtObject menuData: null
-            property var menuModel: unitymenumodel
-            property int menuIndex: -1
-            property var extendedData: menuData && menuData.ext || undefined
-
-            property var strengthAction: QMenuModel.UnityMenuAction {
-                model: menuModel
-                index: menuIndex
-                name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
-            }
-
-            text: menuData && menuData.label || ""
-            enabled: menuData && menuData.sensitive || false
-            checked: menuData && menuData.isToggled || false
-            secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
-            adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
-            signalStrength: strengthAction.valid ? strengthAction.state : 0
-
-            onMenuModelChanged: {
-                loadAttributes();
-            }
-            onMenuIndexChanged: {
-                loadAttributes();
-            }
-            onTriggered: {
-                menuModel.activate(menuIndex);
-            }
-
-            function loadAttributes() {
-                if (!menuModel || menuIndex == -1) return;
-                menuModel.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
-                                                             'x-canonical-wifi-ap-is-secure': 'bool',
-                                                             'x-canonical-wifi-ap-strength-action': 'string'});
             }
         }
     }
