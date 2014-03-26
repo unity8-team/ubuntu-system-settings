@@ -134,6 +134,7 @@ LocalComponents.Page {
 
                     property int menuIndex: menuModel.mapRowToSource(index)
                     property var extendedData: model.ext
+                    property var serverToggle: model.isToggled
                     property var strengthAction: QMenuModel.UnityMenuAction {
                         model: unitymenumodel
                         index: menuIndex
@@ -153,6 +154,9 @@ LocalComponents.Page {
 
                     onMenuIndexChanged: {
                         loadAttributes();
+                    }
+                    onServerToggleChanged: {
+                        checked = serverToggle;
                     }
                     onTriggered: {
                         unitymenumodel.activate(menuIndex);
