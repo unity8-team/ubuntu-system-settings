@@ -132,9 +132,8 @@ LocalComponents.Page {
                 delegate: Menus.AccessPointMenu {
                     id: menuDelegate
 
-                    property QtObject menuData: model
                     property int menuIndex: menuModel.mapRowToSource(index)
-                    property var extendedData: menuData && menuData.ext || undefined
+                    property var extendedData: model.ext
                     property var strengthAction: QMenuModel.UnityMenuAction {
                         model: unitymenumodel
                         index: menuIndex
@@ -145,9 +144,9 @@ LocalComponents.Page {
                         left: parent.left
                         right: parent.right
                     }
-                    text: menuData && menuData.label || ""
-                    enabled: menuData && menuData.sensitive || false
-                    checked: menuData && menuData.isToggled || false
+                    text: model.label
+                    enabled: model.sensitive
+                    checked: model.isToggled
                     secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
                     adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
                     signalStrength: strengthAction.valid ? strengthAction.state : 0
