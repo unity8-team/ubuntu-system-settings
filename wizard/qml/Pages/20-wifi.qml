@@ -199,7 +199,6 @@ LocalComponents.Page {
             }
             onTriggered: {
                 menuModel.activate(menuIndex);
-                console.log(menuIndex)
             }
 
             function loadAttributes() {
