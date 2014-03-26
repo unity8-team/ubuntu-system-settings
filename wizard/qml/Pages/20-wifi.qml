@@ -35,9 +35,6 @@ LocalComponents.Page {
     property bool active: true
     property string deviceMenuObjectPath: menuObjectPaths.hasOwnProperty(device) ? menuObjectPaths[device] : ""
 
-    signal actionGroupUpdated()
-    signal modelUpdated()
-
     function getExtendedProperty(object, propertyName, defaultValue) {
         if (object && object.hasOwnProperty(propertyName)) {
             return object[propertyName];
@@ -62,7 +59,7 @@ LocalComponents.Page {
         anchors {
             fill: parent
             topMargin: units.gu(1)
-            bottomMargin: bottomMargin
+            bottomMargin: wifiPage.bottomMargin
         }
 
         Label {
@@ -71,8 +68,8 @@ LocalComponents.Page {
                 top: parent.top
                 left: parent.left
                 right: parent.right
-                leftMargin: leftMargin
-                rightMargin: rightMargin
+                leftMargin: wifiPage.leftMargin
+                rightMargin: wifiPage.rightMargin
             }
             wrapMode: Text.WordWrap
             fontSize: "large"
@@ -97,8 +94,8 @@ LocalComponents.Page {
                 left: parent.left
                 right: parent.right
                 topMargin: units.gu(1)
-                leftMargin: leftMargin
-                rightMargin: rightMargin
+                leftMargin: wifiPage.leftMargin
+                rightMargin: wifiPage.rightMargin
             }
             wrapMode: Text.WordWrap
             text: i18n.tr("Connect to a Wi-Fi network to customize your setup.")
@@ -111,8 +108,8 @@ LocalComponents.Page {
                 left: parent.left
                 right: parent.right
                 topMargin: units.gu(2)
-                leftMargin: leftMargin
-                rightMargin: rightMargin
+                leftMargin: wifiPage.leftMargin
+                rightMargin: wifiPage.rightMargin
             }
             radius: "medium"
 
@@ -134,14 +131,12 @@ LocalComponents.Page {
                 currentIndex: -1
                 delegate: Menus.AccessPointMenu {
                     id: menuDelegate
-                    objectName: "accessPoint"
 
                     property QtObject menuData: model
-                    property var unityMenuModel: unitymenumodel
                     property int menuIndex: menuModel.mapRowToSource(index)
                     property var extendedData: menuData && menuData.ext || undefined
                     property var strengthAction: QMenuModel.UnityMenuAction {
-                        model: unityMenuModel
+                        model: unitymenumodel
                         index: menuIndex
                         name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
                     }
@@ -150,7 +145,6 @@ LocalComponents.Page {
                         left: parent.left
                         right: parent.right
                     }
-                    visible: height > 0
                     text: menuData && menuData.label || ""
                     enabled: menuData && menuData.sensitive || false
                     checked: menuData && menuData.isToggled || false
@@ -158,19 +152,16 @@ LocalComponents.Page {
                     adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
                     signalStrength: strengthAction.valid ? strengthAction.state : 0
 
-                    onUnityMenuModelChanged: {
-                        loadAttributes();
-                    }
                     onMenuIndexChanged: {
                         loadAttributes();
                     }
                     onTriggered: {
-                        unityMenuModel.activate(menuIndex);
+                        unitymenumodel.activate(menuIndex);
                     }
 
                     function loadAttributes() {
-                        if (!unityMenuModel || menuIndex == -1) return;
-                        unityMenuModel.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
+                        if (!unitymenumodel || menuIndex == -1) return;
+                        unitymenumodel.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
                                                                           'x-canonical-wifi-ap-is-secure': 'bool',
                                                                           'x-canonical-wifi-ap-strength-action': 'string'});
                     }
