@@ -147,7 +147,6 @@ LocalComponents.Page {
                     }
                     text: model.label
                     enabled: model.sensitive
-                    checked: model.isToggled
                     secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
                     adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
                     signalStrength: strengthAction.valid ? strengthAction.state : 0
