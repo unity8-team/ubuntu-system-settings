@@ -159,14 +159,8 @@ LocalComponents.Page {
                             if (item.hasOwnProperty("menuData")) {
                                 item.menuData = Qt.binding(function() { return model; });
                             }
-
-                            if (item.hasOwnProperty("menuActivated")) {
-                                item.menuActivated = Qt.binding(function() { return ListView.isCurrentItem; });
-                                item.selectMenu.connect(function() { ListView.view.currentIndex = index });
-                                item.deselectMenu.connect(function() { ListView.view.currentIndex = -1 });
-                            }
-                            if (item.hasOwnProperty("menu")) {
-                                item.menu = Qt.binding(function() { return model; });
+                            if (item.hasOwnProperty("menuIndex")) {
+                                item.menuIndex = Qt.binding(function() { return modelIndex; });
                             }
                         }
                     }
@@ -205,6 +199,7 @@ LocalComponents.Page {
             }
             onTriggered: {
                 menuModel.activate(menuIndex);
+                console.log(menuIndex)
             }
 
             function loadAttributes() {
