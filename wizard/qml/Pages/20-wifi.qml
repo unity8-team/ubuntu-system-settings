@@ -27,13 +27,7 @@ LocalComponents.Page {
     title: i18n.tr("Connect to Wi-Fi")
     forwardButtonSourceComponent: forwardButton
 
-    property string busName: "com.canonical.indicator.network"
-    property string actionsObjectPath: "/com/canonical/indicator/network"
-    property var menuObjectPaths: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
-    readonly property string device: "phone_wifi_settings"
-    property string rootMenuType: "com.canonical.indicator.root"
-    property bool active: true
-    property string deviceMenuObjectPath: menuObjectPaths.hasOwnProperty(device) ? menuObjectPaths[device] : ""
+    readonly property bool connected: mainMenu.connectedAPs === 1
 
     function getExtendedProperty(object, propertyName, defaultValue) {
         if (object && object.hasOwnProperty(propertyName)) {
@@ -115,6 +109,9 @@ LocalComponents.Page {
 
             ListView {
                 id: mainMenu
+
+                property int connectedAPs: 0
+
                 model: menuModel
                 anchors.fill: parent
                 clip: true
@@ -151,6 +148,13 @@ LocalComponents.Page {
                     adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
                     signalStrength: strengthAction.valid ? strengthAction.state : 0
 
+                    onCheckedChanged: {
+                        if (checked) {
+                            mainMenu.connectedAPs++
+                        } else {
+                            mainMenu.connectedAPs--
+                        }
+                    }
                     onMenuIndexChanged: {
                         loadAttributes();
                     }
@@ -175,7 +179,7 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         LocalComponents.ForwardButton {
-            text: i18n.tr("Connect")
+            text: connected ? i18n.tr("Continue") : i18n.tr("Skip")
             onClicked: pageStack.next()
         }
     }
