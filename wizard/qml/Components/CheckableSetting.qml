@@ -21,10 +21,13 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ListItem.Empty {
     id: listItem
+
     property alias text: label.text
     property alias checked: checkBox.checked
     property real leftMargin
     property real rightMargin
+
+    implicitHeight: label.height + units.gu(2)
 
     onClicked: checked = !checked
 
@@ -44,10 +47,12 @@ ListItem.Empty {
             id: label
             anchors {
                 left: checkBox.right
+                right: parent.right
                 verticalCenter: parent.verticalCenter
                 leftMargin: units.gu(2)
                 rightMargin: listItem.rightMargin
             }
+            wrapMode: Text.WordWrap
         }
     }
 }
