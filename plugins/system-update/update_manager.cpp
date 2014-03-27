@@ -45,19 +45,19 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_service, SIGNAL(credentialsNotFound()),
                   this, SLOT(clickUpdateNotAvailable()));
     // PROCESS
-    QObject::connect(&(m_process), SIGNAL(finished(int)),
+    QObject::connect(&m_process, SIGNAL(finished(int)),
                   this, SLOT(processOutput()));
     // NETWORK
-    QObject::connect(&(m_network), SIGNAL(updatesFound()),
+    QObject::connect(&m_network, SIGNAL(updatesFound()),
                   this, SLOT(processUpdates()));
-    QObject::connect(&(m_network), SIGNAL(updatesNotFound()),
+    QObject::connect(&m_network, SIGNAL(updatesNotFound()),
                   this, SLOT(clickUpdateNotAvailable()));
-    QObject::connect(&(m_network), SIGNAL(errorOccurred()),
+    QObject::connect(&m_network, SIGNAL(errorOccurred()),
                   this, SIGNAL(errorFound()));
-    QObject::connect(&(m_network),
+    QObject::connect(&m_network,
                      SIGNAL(clickTokenObtained(Update*, const QString&)),
                      this, SLOT(clickTokenReceived(Update*, const QString&)));
-    QObject::connect(&(m_network),
+    QObject::connect(&m_network,
                      SIGNAL(downloadUrlFound(const QString&, const QString&)),
                      this, SLOT(downloadUrlObtained(const QString&, const QString&)));
     // SYSTEM UPDATE
