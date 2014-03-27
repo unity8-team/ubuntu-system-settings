@@ -52,39 +52,25 @@ LocalComponents.Page {
         id: content
         anchors {
             fill: parent
-            topMargin: units.gu(1)
             bottomMargin: wifiPage.bottomMargin
         }
 
-        Label {
-            id: topLabel
+        LocalComponents.SectionHeader {
+            id: availableNetworksSectionHeader
             anchors {
                 top: parent.top
                 left: parent.left
                 right: parent.right
-                leftMargin: wifiPage.leftMargin
-                rightMargin: wifiPage.rightMargin
             }
-            wrapMode: Text.WordWrap
-            fontSize: "large"
+            leftMargin: wifiPage.leftMargin
+            rightMargin: wifiPage.rightMargin
             text: i18n.tr("Available networks")
-        }
-
-        Menus.SeparatorMenu {
-            id: separator
-            anchors {
-                top: topLabel.bottom
-                left: parent.left
-                right: parent.right
-                topMargin: units.gu(1)
-            }
-            height: units.dp(2)
         }
 
         Label {
             id: label
             anchors {
-                top: separator.bottom
+                top: availableNetworksSectionHeader.bottom
                 left: parent.left
                 right: parent.right
                 topMargin: units.gu(1)
