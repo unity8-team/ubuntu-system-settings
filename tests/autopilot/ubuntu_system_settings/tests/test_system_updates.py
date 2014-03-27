@@ -34,7 +34,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         updates = self.updates_page
         self.assertThat(updates, NotEquals(None))
         # Move to text field
-        self.pointer.scroll_to_and_click(updates)
+        self.scroll_to_and_click(updates)
 
     def test_updates_not_in_main(self):
         """Check that the updates notification is shown in main."""
@@ -49,7 +49,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         self.assertThat(updates, NotEquals(None))
         configuration = updates.select_single(objectName='configuration')
         self.assertThat(configuration, NotEquals(None))
-        self.pointer.scroll_to_and_click(configuration)
+        self.scroll_to_and_click(configuration)
 
     def test_check_for_updates_area(self):
         """Check that the updates area is shown on opening."""
