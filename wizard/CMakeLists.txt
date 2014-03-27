@@ -24,6 +24,8 @@ add_executable(system-settings-wizard
 
 qt5_use_modules(system-settings-wizard Core Gui Quick Qml)
 
+add_subdirectory(Utils)
+
 install(TARGETS system-settings-wizard RUNTIME DESTINATION bin)
 install(FILES ubuntu-system-settings-wizard.conf DESTINATION share/upstart)
 

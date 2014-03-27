@@ -65,8 +65,8 @@ int main(int argc, char **argv)
     view.engine()->addImportPath(PLUGIN_QML_DIR);
     view.rootContext()->setContextProperty("pageList", &pageList);
     view.setSource(QUrl(rootDir + "/qml/main.qml"));
-    view.show();
-//    view.showFullScreen();
+//    view.show();
+    view.showFullScreen();
 
     return app.exec();
 }
