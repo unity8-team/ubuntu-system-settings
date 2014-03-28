@@ -35,6 +35,7 @@ ItemPage {
     title: i18n.tr("Updates")
 
     property bool installAll: false
+    property int updatesAvailable: 0
 
     DeviceInfo {
         id: deviceInfo
@@ -78,16 +79,14 @@ ItemPage {
             PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
-            PropertyChanges { target: notification; visible: false}
-            PropertyChanges { target: updatedNotification; visible: false}
+            PropertyChanges { target: updateNotification; visible: false}
         },
         State {
             name: "NOUPDATES"
-            PropertyChanges { target: updatedNotification; text: i18n.tr("Software is up to date")}
-            PropertyChanges { target: updatedNotification; visible: true}
+            PropertyChanges { target: updateNotification; text: i18n.tr("Software is up to date")}
+            PropertyChanges { target: updateNotification; visible: true}
             PropertyChanges { target: updateList; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
-            PropertyChanges { target: checkForUpdatesArea; visible: false}
         },
         State {
             name: "SYSTEMUPDATEFAILED"
@@ -98,17 +97,30 @@ ItemPage {
             PropertyChanges { target: installingImageUpdate; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
-            PropertyChanges { target: updatedNotification; visible: false}
+            PropertyChanges { target: updateNotification; visible: false}
         },
         State {
             name: "UPDATE"
             PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: installAllButton; visible: true}
-            PropertyChanges { target: checkForUpdatesArea; visible: false}
-            PropertyChanges { target: updatedNotification; visible: false}
+            PropertyChanges { target: updateNotification; visible: false}
+        },
+        State {
+            name: "NOCREDENTIALS"
+            PropertyChanges { target: notification; text: i18n.tr("Please log into your Ubuntu One account.")}
+            PropertyChanges { target: notification; onClicked: root.open_online_accounts() }
+            PropertyChanges { target: notification; progression: true}
+            PropertyChanges { target: notification; visible: true}
+            PropertyChanges { target: updateNotification; text: i18n.tr("Credentials not found")}
+            PropertyChanges { target: updateNotification; visible: true}
+            PropertyChanges { target: installAllButton; visible: false}
         }
     ]
+
+    function open_online_accounts() {
+        Qt.openUrlExternally("settings:///system/online-accounts");
+    }
 
     UpdateManager {
         id: updateManager
@@ -121,6 +133,7 @@ ItemPage {
 
         onUpdateAvailableFound: {
             if (updateManager.model.length > 0) {
+                root.updatesAvailable = updateManager.model.length;
                 root.state = "UPDATE";
                 root.installAll = downloading
             } else {
@@ -129,10 +142,21 @@ ItemPage {
         }
 
         onUpdatesNotFound: {
-            root.state = "NOUPDATES";
+            if (root.state != "NOCREDENTIALS") {
+                root.state = "NOUPDATES";
+            }
+        }
+
+        onCheckFinished: {
+            checkForUpdatesArea.visible = false;
+        }
+
+        onCredentialsNotFound: {
+            root.state = "NOCREDENTIALS";
         }
 
         onSystemUpdateDownloaded: {
+            root.updatesAvailable -= 1;
             PopupUtils.open(dialogInstallComponent);
         }
 
@@ -197,7 +221,7 @@ ItemPage {
         id: installAllButton
         objectName: "installAllButton"
 
-        property string primaryText: i18n.tr("Install %1 update", "Install %1 updates", updateManager.model.length).arg(updateManager.model.length)
+        property string primaryText: i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
         property string secondaryText: i18n.tr("Pause All")
         text: root.installAll ? secondaryText : primaryText
         anchors {
@@ -217,11 +241,15 @@ ItemPage {
                 updateList.currentIndex = i;
                 var item = updateList.currentItem;
                 var modelItem = updateManager.model[i];
-                if (modelItem.updateState == !root.installAll) {
+                if (modelItem.updateState != root.installAll && !modelItem.updateReady) {
                     item.actionButton.clicked();
                 }
             }
         }
+        opacity: root.updatesAvailable > 0 ? 1 : 0
+
+        Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SlowDuration
+                easing: UbuntuAnimation.StandardEasing } }
     }
 
     ListView {
@@ -290,16 +318,27 @@ ItemPage {
                             updateManager.applySystemUpdate();
                             installingImageUpdate.visible = true;
                         } else if (modelData.updateState) {
-                            updateManager.pauseDownload(modelData.packageName);
+                            if (modelData.systemUpdate) {
+                                updateManager.pauseDownload(modelData.packageName);
+                            } else {
+                                modelData.updateState = false;
+                                tracker.pause();
+                            }
                         } else {
-                            modelData.selected = true;
-                            updateManager.startDownload(modelData.packageName);
+                            if (!modelData.selected || modelData.systemUpdate) {
+                                modelData.selected = true;
+                                updateManager.startDownload(modelData.packageName);
+                            } else {
+                                modelData.updateState = true;
+                                tracker.resume();
+                            }
                         }
                     }
                 }
 
                 Label {
                     id: labelSize
+                    objectName: "labelSize"
                     text: convert_bytes_to_size(modelData.binaryFilesize)
                     anchors.bottom: labelVersion.bottom
                     anchors.right: parent.right
@@ -309,20 +348,23 @@ ItemPage {
 
                 Label {
                     id: labelTitle
+                    objectName: "labelTitle"
                     anchors {
                         top: parent.top
                         left: parent.left
-                        right: buttonAppUpdate.right
+                        right: buttonAppUpdate.left
                         topMargin: units.gu(1)
+                        rightMargin: units.gu(1)
                     }
                     height: units.gu(3)
                     text: modelData.title
                     font.bold: true
-                    elide: Text.ElideRight
+                    elide: buttonAppUpdate.visible ? Text.ElideRight : Text.ElideNone
                 }
 
                 Label {
                     id: labelUpdateStatus
+                    objectName: "labelUpdateStatus"
                     text: i18n.tr("Installing")
                     anchors.top: labelTitle.bottom
                     anchors.left: parent.left
@@ -342,20 +384,41 @@ ItemPage {
                     anchors.topMargin: units.gu(1)
                     anchors.right: parent.right
                     opacity: modelData.selected ? 1 : 0
-                    value: modelData.downloadProgress
+                    value: modelData.systemUpdate ? modelData.downloadProgress : tracker.progress
                     minimumValue: 0
                     maximumValue: 100
+
+                    DownloadTracker {
+                        id: tracker
+                        objectName: "tracker"
+                        packageName: modelData.packageName
+                        clickToken: modelData.clickToken
+                        download: modelData.downloadUrl
+
+                        onFinished: {
+                            progress.visible = false;
+                            buttonAppUpdate.visible = false;
+                            textArea.message = i18n.tr("Installed");
+                            root.updatesAvailable -= 1;
+                        }
+
+                        onErrorFound: {
+                            modelData.updateState = false;
+                            textArea.message = error;
+                        }
+                    }
 
                     Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
                 }
 
                 Label {
                     id: labelVersion
+                    objectName: "labelVersion"
                     anchors {
                         left: parent.left
                         right: buttonAppUpdate.right
-                        top: progress.bottom
-                        topMargin: units.gu(1)
+                        top: (!progress.visible || progress.opacity == 0) ? labelTitle.bottom : progress.bottom
+                        topMargin: (!progress.visible || progress.opacity == 0) ? 0 : units.gu(1)
                         bottom: parent.bottom
                         bottomMargin: units.gu(1)
                     }
@@ -369,12 +432,14 @@ ItemPage {
 
     ListItem.Standard {
         id: notification
+        objectName: "notification"
         visible: false
         anchors.bottom: configuration.top
     }
 
     ListItem.SingleValue {
         id: configuration
+        objectName: "configuration"
         anchors.bottom: parent.bottom
         text: i18n.tr("Auto download")
         value: {
@@ -390,7 +455,8 @@ ItemPage {
     }
 
     Rectangle {
-        id: updatedNotification
+        id: updateNotification
+        objectName: "updateNotification"
         anchors {
             left: parent.left
             right: parent.right
@@ -408,7 +474,7 @@ ItemPage {
             anchors.centerIn: parent
 
             Label {
-                text: updatedNotification.text
+                text: updateNotification.text
                 anchors.horizontalCenter: parent.horizontalCenter
                 fontSize: "large"
             }
@@ -417,6 +483,7 @@ ItemPage {
 
     Rectangle {
         id: installingImageUpdate
+        objectName: "installingImageUpdate"
         anchors.fill: parent
         visible: false
 
@@ -454,7 +521,7 @@ ItemPage {
             result = bytes + i18n.tr(" bytes");
         } else if (bytes < SIZE_IN_MIB) {
             size = (bytes / SIZE_IN_KIB).toFixed(1);
-            result = bytes + i18n.tr(" KiB");
+            result = size + i18n.tr(" KiB");
         } else if (bytes < SIZE_IN_GIB) {
             size = (bytes / SIZE_IN_MIB).toFixed(1);
             result = size + i18n.tr(" MiB");

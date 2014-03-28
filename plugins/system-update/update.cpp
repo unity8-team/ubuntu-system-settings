@@ -21,12 +21,15 @@
 #include "update.h"
 #include <QStringList>
 #include <apt-pkg/debversion.h>
+#include <QProcessEnvironment>
 
 namespace UpdatePlugin {
 
 Update::Update(QObject *parent) :
     QObject(parent),
     m_binary_filesize(0),
+    m_click_url(""),
+    m_downloadUrl(""),
     m_download_progress(0),
     m_error(""),
     m_icon_url(""),
@@ -58,11 +61,14 @@ void Update::initializeApplication(QString packagename, QString title,
 void Update::setRemoteVersion(QString& version)
 {
     m_remote_version = version;
+    if (getIgnoreUpdates()) {
+        int result = debVS.CmpVersion(m_local_version.toUtf8().data(),
+                                      m_remote_version.toUtf8().data());
 
-    int result = debVS.CmpVersion(m_local_version.toUtf8().data(),
-                                  m_remote_version.toUtf8().data());
-
-    m_update = result < 0;
+        m_update = result < 0;
+    } else {
+        m_update = false;
+    }
 }
 
 void Update::setError(QString error)
@@ -118,6 +124,18 @@ void Update::setDownloadProgress(int progress)
 {
     m_download_progress = progress;
     Q_EMIT downloadProgressChanged();
+}
+
+void Update::setDownloadUrl(const QString &url) {
+    m_downloadUrl = url;
+    Q_EMIT downloadUrlChanged();
+}
+
+bool Update::getIgnoreUpdates()
+{
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    QString value = environment.value("IGNORE_UPDATES", QString("NOT_IGNORE_UPDATES"));
+    return value == "IGNORE_UPDATES";
 }
 
 }
