@@ -1,0 +1,26 @@
+[
+    {
+        "framework": "ubuntu-sdk-13.10",
+        "name": "com.ubuntu.dropping-letters",
+        "title": "Dropping Letters game",
+        "version": "0.1.2.2"
+    },
+    {
+        "framework": "ubuntu-sdk-13.10",
+        "name": "com.ubuntu.stock-ticker-mobile",
+        "title": "A stock trading app with charts, news, and management",
+        "version": "0.3.7ubuntu1"
+    },
+    {
+        "framework": "ubuntu-sdk-13.10",
+        "name": "com.ubuntu.sudoku",
+        "title": "Sudoku game for Ubuntu devices",
+        "version": "0.4.2ubuntu2"
+    },
+    {
+        "framework": "ubuntu-sdk-13.10",
+        "name": "com.ubuntu.developer.xda-app",
+        "title": "XDA Developers App",
+        "version": "0.4.2ubuntu2"
+    }
+]
