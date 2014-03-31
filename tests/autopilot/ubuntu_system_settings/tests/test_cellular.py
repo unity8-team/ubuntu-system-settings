@@ -10,6 +10,7 @@ from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsOfonoTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
+from ubuntu_system_settings.helpers import launch_system_settings
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
