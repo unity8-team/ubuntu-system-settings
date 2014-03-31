@@ -22,7 +22,7 @@ from autopilot import platform
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
-def launch_system_settings(testobj, panel=None, emulator_base=None):
+def launch_system_settings(testobj, panel=None):
     """Launch system settings application
 
        :param testobj: An AutopilotTestCase object, needed to call
@@ -36,7 +36,7 @@ def launch_system_settings(testobj, panel=None, emulator_base=None):
        data is retrievable via this object.
     """
     params = [APP_PATH]
-    if (platform.model() != 'Desktop'):
+    if platform.model() != 'Desktop':
         params.append('--desktop_file_hint={}'.format(DESKTOP_FILE))
 
     # Launch to a specific panel
@@ -45,9 +45,6 @@ def launch_system_settings(testobj, panel=None, emulator_base=None):
 
     # Default emulator base
     emulator = toolkit_emulators.UbuntuUIToolkitEmulatorBase
-    if (emulator_base):
-        # Use this instead
-        emulator = emulator_base
 
     app = testobj.launch_test_application(
         *params,

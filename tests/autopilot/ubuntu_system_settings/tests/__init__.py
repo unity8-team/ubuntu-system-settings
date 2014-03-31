@@ -10,7 +10,7 @@
 from __future__ import absolute_import
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
-from ubuntu_system_settings.helpers import launch_system_settings
+from ubuntu_system_settings import helpers
 
 from autopilot.input import Mouse, Touch, Pointer
 from autopilot.platform import model
@@ -35,7 +35,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.app = launch_system_settings(self, panel=panel)
+        self.app = helpers.launch_system_settings(self, panel=panel)
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
     @property
@@ -93,7 +93,7 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.app = launch_system_settings(self)
+        self.app = helpers.launch_system_settings(self)
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
 
