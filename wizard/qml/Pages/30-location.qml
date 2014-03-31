@@ -16,10 +16,10 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import "qrc:/qml/Components" as LocalComponents
+import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Connect to Wi-Fi")
+    title: i18n.tr("Phone settings")
     forwardButtonSourceComponent: forwardButton
 
     Item {
@@ -31,13 +31,22 @@ LocalComponents.Page {
             rightMargin: rightMargin
             bottomMargin: bottomMargin
         }
+
+        Label {
+            width: parent.width
+            wrapMode: Text.WordWrap
+            fontSize: "large"
+            text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.") +
+                  "\n\n" +
+                  i18n.tr("Your phone is setup to detect your location. This can be disabled in system settings.")
+        }
     }
 
     Component {
         id: forwardButton
-        Button {
-            text: i18n.tr("Connect")
-            onClicked: pageStack.push(Qt.resolvedUrl("LocationPage.qml"))
+        LocalComponents.ForwardButton {
+            text: i18n.tr("Continue")
+            onClicked: pageStack.next()
         }
     }
 }

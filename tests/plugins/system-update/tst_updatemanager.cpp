@@ -33,6 +33,8 @@ private Q_SLOTS:
     void testRegisterSystemUpdateNotRequired();
     void testStartDownload();
     void testPauseDownload();
+    void testCheckUpdatesModelSignal();
+    void testCheckUpdatesUpdateSignal();
 
 private:
     Update* getUpdate();
@@ -118,6 +120,34 @@ void UpdateManagerTest::testPauseDownload()
     update->setUpdateState(true);
     manager.pauseDownload(update->getPackageName());
     QTRY_COMPARE(update->updateState(), false);
+}
+
+void UpdateManagerTest::testCheckUpdatesModelSignal()
+{
+    UpdateManager manager;
+    QSignalSpy spy(&manager, SIGNAL(modelChanged()));
+    QTRY_COMPARE(manager.get_apps().size(), 0);
+    manager.checkUpdates();
+    QTRY_COMPARE(manager.get_apps().size(), 4);
+    QTRY_COMPARE(manager.get_model().size(), 1);
+    Update* app = manager.get_model()[0].value<Update*>();
+    QTRY_COMPARE(app->getTitle(), QString("XDA Developers App"));
+    QTRY_COMPARE(app->updateRequired(), true);
+    QTRY_COMPARE(app->getPackageName(), QString("com.ubuntu.developer.xda-app"));
+}
+
+void UpdateManagerTest::testCheckUpdatesUpdateSignal()
+{
+    UpdateManager manager;
+    QSignalSpy spy(&manager, SIGNAL(updateAvailableFound()));
+    QTRY_COMPARE(manager.get_apps().size(), 0);
+    manager.checkUpdates();
+    QTRY_COMPARE(manager.get_apps().size(), 4);
+    QTRY_COMPARE(manager.get_model().size(), 1);
+    Update* app = manager.get_model()[0].value<Update*>();
+    QTRY_COMPARE(app->getTitle(), QString("XDA Developers App"));
+    QTRY_COMPARE(app->updateRequired(), true);
+    QTRY_COMPARE(app->getPackageName(), QString("com.ubuntu.developer.xda-app"));
 }
 
 
