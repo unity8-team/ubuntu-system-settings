@@ -62,9 +62,7 @@ ItemPage {
             DiagnosticsCheckEntry {
                 id: reportCrashesCheck
                 checked: diagnosticsWidget.canReportCrashes
-                onCheckedChanged: {
-                    diagnosticsWidget.canReportCrashes = checked;
-                }
+                onTriggered: diagnosticsWidget.canReportCrashes = checked
                 textEntry: i18n.tr("App crashes and errors")
             }
 

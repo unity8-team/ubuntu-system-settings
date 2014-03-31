@@ -71,7 +71,7 @@ LocalComponents.Page {
                 rightMargin: userSettingsPage.rightMargin
                 text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.")
                 checked: diagnosticsWidget.canReportCrashes
-                onCheckedChanged: diagnosticsWidget.canReportCrashes = checked;
+                onTriggered: diagnosticsWidget.canReportCrashes = checked;
             }
 
             LocalComponents.SectionHeader {
