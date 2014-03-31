@@ -1,3 +1,51 @@
+ubuntu-system-settings (0.1+14.04.20140328-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Diego Sarmentero ]
+  * Add click updates support. .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Mar 2014 07:24:29 +0000
+
+ubuntu-system-settings (0.1+14.04.20140321-0ubuntu1) trusty; urgency=low
+
+  [ Ken VanDine ]
+  * Updates for the QML binding changes in the content-hub
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 21 Mar 2014 00:38:52 +0000
+
+ubuntu-system-settings (0.1+14.04.20140320-0ubuntu1) trusty; urgency=low
+
+  [ Michael Terry ]
+  * Add pagination breadcrumbs to wizard.
+  * Restore SIM card image in welcome wizard.
+
+  [ Andrea Cimitan ]
+  * Use green button for forward
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 20 Mar 2014 09:51:42 +0000
+
+ubuntu-system-settings (0.1+14.04.20140318-0ubuntu1) trusty; urgency=low
+
+  [ Michael Terry ]
+  * Allow custom wizard pages
+
+  [ Colin Watson ]
+  * Only build the about plugin on architectures that have libandroid-
+    properties-dev.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 18 Mar 2014 17:51:19 +0000
+
+ubuntu-system-settings (0.1+14.04.20140311.1-0ubuntu1) trusty; urgency=low
+
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 11 Mar 2014 17:25:38 +0000
+
 ubuntu-system-settings (0.1+14.04.20140311-0ubuntu1) trusty; urgency=low
 
   [ Sebastien Bacher ]

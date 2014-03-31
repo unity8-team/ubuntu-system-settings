@@ -24,7 +24,7 @@ Page {
     readonly property real topMargin: units.gu(5)
     readonly property real leftMargin: units.gu(3)
     readonly property real rightMargin: units.gu(3)
-    readonly property real bottomMargin: backButton.height + buttonMargin * 2
+    readonly property real bottomMargin: backButton.height + breadcrumbs.height + buttonMargin * 3
 
     property bool hasBackButton: true
     property alias forwardButtonSourceComponent: forwardButton.sourceComponent
@@ -32,6 +32,25 @@ Page {
     visible: false
     tools: ToolbarItems {
         back: null
+    }
+
+    Row {
+        id: breadcrumbs
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: backButton.top
+            bottomMargin: buttonMargin
+        }
+        spacing: units.gu(1)
+
+        Repeater {
+            model: pageList.numPages
+            Image {
+                width: units.gu(1)
+                height: units.gu(1)
+                source: pageList.index >= index ? "data/bullet_active@27.png" : "data/bullet_inactive@27.png"
+            }
+        }
     }
 
     Button {
@@ -48,7 +67,7 @@ Page {
         visible: pageStack.depth > 1 && hasBackButton
         gradient: UbuntuColors.greyGradient
 
-        onClicked: pageStack.pop()
+        onClicked: pageStack.prev()
     }
 
     Loader {

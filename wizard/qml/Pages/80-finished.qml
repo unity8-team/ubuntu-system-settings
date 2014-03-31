@@ -16,10 +16,10 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import "qrc:/qml/Components" as LocalComponents
+import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("No SIM card")
+    title: i18n.tr("That’s it!")
     forwardButtonSourceComponent: forwardButton
 
     Item {
@@ -36,20 +36,16 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("Don’t worry, you can insert a SIM card later.") +
+            text: i18n.tr("It’s great to have you in the Ubuntu community.") +
                   "\n\n" +
-                  i18n.tr("For the time being, you won’t have phone or SMS features.") +
-                  "\n\n" +
-                  i18n.tr("You can find a SIM in your phone package or contact your provider.")
+                  i18n.tr("Enjoy your new phone.")
         }
     }
-
     Component {
         id: forwardButton
-        Button {
-            text: i18n.tr("Skip")
-            //onClicked: pageStack.push(Qt.resolvedUrl("WiFiPage.qml"))
-            onClicked: pageStack.push(Qt.resolvedUrl("LocationPage.qml"))
+        LocalComponents.ForwardButton {
+            text: i18n.tr("Finish")
+            onClicked: pageStack.push(Qt.resolvedUrl("spinner.qml"))
         }
     }
 }

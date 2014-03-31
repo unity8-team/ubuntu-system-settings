@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,29 +16,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
-import "qrc:/qml/Components" as LocalComponents
 
-LocalComponents.Page {
-    title: i18n.tr("That’s it!")
-
-    hasBackButton: false
-
-    Component.onCompleted: Qt.quit()
-
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
-        }
-
-        ActivityIndicator {
-            id: spinner
-            anchors.centerIn: parent
-            running: true
-        }
-    }
+Button {
+    color: "#38b44a"
 }
