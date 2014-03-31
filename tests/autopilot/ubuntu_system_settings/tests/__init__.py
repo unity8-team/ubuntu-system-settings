@@ -11,7 +11,6 @@ from __future__ import absolute_import
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from ubuntu_system_settings.emulators import MainWindow
-from ubuntu_system_settings.helpers import launch_system_settings
 
 from autopilot.input import Mouse, Touch
 from autopilot.platform import model
@@ -19,6 +18,7 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
+from ubuntuuitoolkit import emulators as toolkit_emulators
 
 import dbus
 import dbusmock
@@ -34,13 +34,28 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.app = launch_system_settings(self, panel=panel)
+        self.launch_system_settings(panel=panel)
         self.assertThat(self.main_window.visible, Eventually(Equals(True)))
 
     @property
     def main_window(self):
         """ Return main view """
         return self.app.select_single(MainWindow)
+
+    def launch_system_settings(self, panel=None):
+        params = ['/usr/bin/system-settings']
+        if (model() != 'Desktop'):
+            params.append('--desktop_file_hint=/usr/share/applications/'
+                          'ubuntu-system-settings.desktop')
+
+        # Launch to a specific panel
+        if panel is not None:
+            params.append(panel)
+
+        self.app = self.launch_test_application(
+            *params,
+            app_type='qt',
+            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
@@ -70,7 +85,7 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        launch_system_settings(self)
+        self.launch_system_settings()
         self.assertThat(self.main_window.visible, Eventually(Equals(True)))
 
 
