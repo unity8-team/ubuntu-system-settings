@@ -27,7 +27,6 @@ LocalComponents.Page {
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
-        onReportCrashesChanged: reportCrashesCheck.checked = diagnosticsWidget.canReportCrashes
     }
 
     Item {
@@ -67,11 +66,16 @@ LocalComponents.Page {
 
             LocalComponents.CheckableSetting {
                 id: reportCrashesCheck
+
+                property bool serverValue: diagnosticsWidget.canReportCrashes
+
                 leftMargin: userSettingsPage.leftMargin
                 rightMargin: userSettingsPage.rightMargin
-                text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.")
                 checked: diagnosticsWidget.canReportCrashes
-                onTriggered: diagnosticsWidget.canReportCrashes = checked;
+                text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.")
+
+                onServerValueChanged: checked = serverValue
+                onTriggered: diagnosticsWidget.canReportCrashes = checked
             }
 
             LocalComponents.SectionHeader {

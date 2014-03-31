@@ -32,10 +32,6 @@ ItemPage {
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
-        function maybeUpdate() {
-            reportCrashesCheck.checked = diagnosticsWidget.canReportCrashes
-        }
-        onReportCrashesChanged: maybeUpdate()
     }
     Flickable {
         id: scrollWidget
@@ -61,9 +57,14 @@ ItemPage {
 
             DiagnosticsCheckEntry {
                 id: reportCrashesCheck
+
+                property bool serverValue: diagnosticsWidget.canReportCrashes
+
                 checked: diagnosticsWidget.canReportCrashes
-                onTriggered: diagnosticsWidget.canReportCrashes = checked
                 textEntry: i18n.tr("App crashes and errors")
+
+                onServerValueChanged: checked = serverValue
+                onTriggered: diagnosticsWidget.canReportCrashes = checked
             }
 
             ListItem.SingleValue {
