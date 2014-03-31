@@ -23,23 +23,63 @@ ListItem.Empty {
     id: listItem
 
     property alias text: label.text
-    property alias checked: checkBox.checked
+    property bool checked: false
     property real leftMargin
     property real rightMargin
 
     implicitHeight: label.height + units.gu(2)
-
-    onClicked: checked = !checked
 
     Item {
         anchors.fill: parent
 
         CheckBox {
             id: checkBox
+
+            property bool enableCheckConnection: true
+
             anchors {
                 left: parent.left
                 verticalCenter: parent.verticalCenter
                 leftMargin: listItem.leftMargin
+            }
+
+            Component.onCompleted: {
+                enableCheckConnection = false;
+                checked = listItem.checked;
+                enableCheckConnection = true;
+            }
+
+            // FIXME : should use Checkbox.toggled signal
+            // lp:~nick-dedekind/ubuntu-ui-toolkit/checkbox.toggled
+            onCheckedChanged: {
+                if (!enableCheckConnection) return;
+
+                var oldEnable = enableCheckConnection;
+                enableCheckConnection = false;
+
+                listItem.checked = checked;
+                listItem.triggered(listItem.checked);
+
+                enableCheckConnection = oldEnable;
+            }
+
+            Connections {
+                target: listItem
+                onCheckedChanged: {
+                    if (!checkBox.enableCheckConnection) return;
+
+                    var oldEnable = checkBox.enableCheckConnection;
+                    checkBox.enableCheckConnection = false;
+
+                    checkBox.checked = listItem.checked;
+
+                    checkBox.enableCheckConnection = oldEnable;
+                }
+            }
+
+            Connections {
+                target: listItem.__mouseArea
+                onClicked: checkBox.clicked();
             }
         }
 

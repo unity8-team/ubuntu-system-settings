@@ -64,11 +64,6 @@ ItemPage {
                 checked: diagnosticsWidget.canReportCrashes
                 onCheckedChanged: {
                     diagnosticsWidget.canReportCrashes = checked;
-                    /* Confirm the setting stuck and reflect it in the UI. */
-                    if (checked != diagnosticsWidget.canReportCrashes) {
-                        checked = !checked;
-                    }
-
                 }
                 textEntry: i18n.tr("App crashes and errors")
             }
