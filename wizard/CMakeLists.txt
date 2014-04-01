@@ -4,6 +4,13 @@ add_definitions(-DPLUGIN_MANIFEST_DIR="${PLUGIN_MANIFEST_DIR}")
 add_definitions(-DPLUGIN_QML_DIR="${PLUGIN_QML_DIR}")
 add_definitions(-DPLUGIN_MODULE_DIR="${PLUGIN_MODULE_DIR}")
 
+execute_process(COMMAND ${PKG_CONFIG_EXECUTABLE} --variable=plugindir unity-shell-api OUTPUT_VARIABLE SHELL_PLUGINDIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+if(SHELL_PLUGINDIR STREQUAL "")
+    message(FATAL_ERROR "Could not determine plugin import dir.")
+endif()
+
+add_definitions(-DSHELL_PLUGINDIR="${SHELL_PLUGINDIR}")
+
 set(WIZARD_ROOT "${CMAKE_INSTALL_PREFIX}/share/ubuntu/settings/wizard")
 add_definitions(-DWIZARD_ROOT="${WIZARD_ROOT}")
 

@@ -63,6 +63,7 @@ int main(int argc, char **argv)
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
     view.engine()->addImportPath(PLUGIN_QML_DIR);
+    view.engine()->addImportPath(SHELL_PLUGINDIR);
     view.rootContext()->setContextProperty("pageList", &pageList);
     view.setSource(QUrl(rootDir + "/qml/main.qml"));
 //    view.show();
