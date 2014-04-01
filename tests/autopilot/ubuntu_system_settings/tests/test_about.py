@@ -148,7 +148,7 @@ class StorageTestCase(StorageBaseTestCase):
     def test_space_used_by_movies(self):
         """ Checks whether space shown to be used by movies is
         correct. """
-        movie_space = self._get_space_by_directory('Videos')
+        movie_space = self._get_space_by_directory(_('Videos'))
         movie_space_in_ui = self.get_storage_space_used_by_category(
             'moviesItem'
         )
@@ -158,7 +158,7 @@ class StorageTestCase(StorageBaseTestCase):
     def test_space_used_by_music(self):
         """ Checks whether space shown to be used by music is
         correct. """
-        music_space = self._get_space_by_directory('Music')
+        music_space = self._get_space_by_directory(_('Music'))
         music_space_in_ui = self.get_storage_space_used_by_category(
             'audioItem'
         )
@@ -168,7 +168,7 @@ class StorageTestCase(StorageBaseTestCase):
     def test_space_used_by_pictures(self):
         """ Checks whether space shown to be used by pictures is
         correct. """
-        pictures_space = self._get_space_by_directory('Pictures')
+        pictures_space = self._get_space_by_directory(_('Pictures'))
         pictures_space_in_ui = self.get_storage_space_used_by_category(
             'picturesItem'
         )
