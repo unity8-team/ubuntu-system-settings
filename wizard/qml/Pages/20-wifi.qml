@@ -18,7 +18,7 @@ import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
 import Ubuntu.Components 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
-import Ubuntu.SystemSettings.Utils 0.1
+import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import Ubuntu.Settings.Menus 0.1 as Menus
 import "../Components" as LocalComponents
 
