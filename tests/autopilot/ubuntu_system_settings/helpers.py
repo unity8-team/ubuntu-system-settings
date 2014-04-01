@@ -25,15 +25,15 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 def launch_system_settings(testobj, panel=None):
     """Launch system settings application
 
-       :param testobj: An AutopilotTestCase object, needed to call
-       testobj.launch_test_application()
+    :param testobj: An AutopilotTestCase object, needed to call
+    testobj.launch_test_application()
 
-       :param panel: Launch to a specific panel. Default None.
+    :param panel: Launch to a specific panel. Default None.
 
-       :param emulator_base: emulator_base for launch_test_application.
+    :param emulator_base: emulator_base for launch_test_application.
 
-       :returns: A proxy object that represents the application. Introspection
-       data is retrievable via this object.
+    :returns: A proxy object that represents the application. Introspection
+    data is retrievable via this object.
     """
     params = [APP_PATH]
     if platform.model() != 'Desktop':
