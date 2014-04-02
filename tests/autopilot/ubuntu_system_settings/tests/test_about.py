@@ -172,7 +172,7 @@ class StorageTestCase(StorageBaseTestCase):
             'moviesItem'
         )
 
-        self.assertEquals(movie_space_in_ui, movie_space)
+        self.assertThat(movie_space_in_ui, Eventually(Equals(movie_space)))
 
     def test_space_used_by_music(self):
         """ Checks whether space shown to be used by music is
@@ -182,7 +182,7 @@ class StorageTestCase(StorageBaseTestCase):
             'audioItem'
         )
 
-        self.assertEquals(music_space_in_ui, music_space)
+        self.assertThat(music_space_in_ui, Eventually(Equals(music_space)))
 
     def test_space_used_by_pictures(self):
         """ Checks whether space shown to be used by pictures is
@@ -192,7 +192,9 @@ class StorageTestCase(StorageBaseTestCase):
             'picturesItem'
         )
 
-        self.assertEquals(pictures_space_in_ui, pictures_space)
+        self.assertThat(
+            pictures_space_in_ui, Eventually(Equals(pictures_space))
+        )
 
     def test_space_other_files(self):
         """ Checks whether space item is available """
