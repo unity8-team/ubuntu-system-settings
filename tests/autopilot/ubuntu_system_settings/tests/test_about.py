@@ -146,6 +146,9 @@ class StorageTestCase(StorageBaseTestCase):
                 '{} directory not handled by this fuction, you need to enhance'
                 ' this function to handle that directory.'.format(dir_name)
             )
+
+        if not os.path.exists(location):
+            self.skipTest('glib directory {} does not exist'.format(dir_name))
         
         output = subprocess.check_output(['du', '--block-size=1', location])
         disk_space = output.split()[len(output.split()) - 2]
