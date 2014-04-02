@@ -76,7 +76,7 @@ class AboutTestCase(AboutBaseTestCase):
         item = self.about_page.select_single(objectName='serialItem')
 
         if model() == 'Desktop':
-            self.assertThat(item.value, Equals(_('N/A')))
+            self.assertThat(item.visible, Equals(False))
         else:
             self.assertThat(
                 item.value, Equals(self._get_device_serial_number())
@@ -85,13 +85,12 @@ class AboutTestCase(AboutBaseTestCase):
     def test_imei_information_is_correct(self):
         """Checks whether the UI is exposing the right IMEI."""
         imei_item = self.about_page.wait_select_single(
-            objectName='imeiItem').value
+            objectName='imeiItem')
 
-        IMEI = self._get_imei_from_dbus()
-        if IMEI is None:
-            self.assertEquals(imei_item, _('N/A'))
+        if model() == 'Desktop':
+            self.assertThat(imei_item.visible, Equals(False))
         else:
-            self.assertEquals(imei_item, IMEI)
+            self.assertEquals(imei_item.value, self._get_imei_from_dbus())
 
     def test_settings_show_correct_version_of_the_os(self):
         """Ensure the UI is showing the correct version of the OS."""
