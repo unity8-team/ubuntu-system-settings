@@ -100,9 +100,10 @@ class AboutTestCase(AboutBaseTestCase):
         # -- om26er 10-03-2014
         self.assertTrue(self._get_os_name() in item.value)
 
-    @skipIf(
-        model() == 'Desktop',
-        'Only run on android devices where getprop is available')
+    @skipIf(subprocess.call(
+        ['which', 'getprop'], stdout=subprocess.PIPE) != 0,
+        'program "getprop" not found'
+    )
     def test_hardware_name(self):
         """Ensure the UI is showing the correct device name."""
         device_label = self.about_page.select_single(
