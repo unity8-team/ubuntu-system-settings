@@ -85,7 +85,8 @@ ItemPage {
                 id: serialItem
                 objectName: "serialItem"
                 text: i18n.tr("Serial")
-                value: backendInfos.serialNumber ? backendInfos.serialNumber : i18n.tr("N/A")
+                value: backendInfos.serialNumber
+                visible: backendInfos.serialNumber
             }
 
             ListItem.SingleValue {
@@ -93,7 +94,8 @@ ItemPage {
                 property string imeiNumber
                 imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
-                value: imeiNumber ? imeiNumber : i18n.tr("N/A")
+                value: imeiNumber
+                visible: imeiNumber
             }
 
             ListItem.Standard {
