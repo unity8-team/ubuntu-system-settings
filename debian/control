@@ -65,7 +65,7 @@ Depends: ${misc:Depends},
          python3,
          python3-gi,
          python3-dbus,
-         libunity-api-dev,
+         libunity-api0,
          gir1.2-glib-2.0
 Recommends: suru-icon-theme,
             ubuntu-system-settings-online-accounts,
