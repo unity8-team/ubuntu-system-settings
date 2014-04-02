@@ -8,6 +8,8 @@
 import os
 import subprocess
 
+from gi.repository import GLib
+
 from autopilot.matchers import Eventually
 from autopilot.platform import model
 from testtools import skipUnless, skipIf
@@ -127,7 +129,24 @@ class StorageTestCase(StorageBaseTestCase):
     """ Tests for Storage """
 
     def _get_space_by_directory(self, dir_name):
-        location = os.path.expanduser('~/' + dir_name)
+        if dir_name == 'Music':
+            location = GLib.get_user_special_dir(
+                GLib.UserDirectory.DIRECTORY_MUSIC
+            )
+        elif dir_name == 'Videos':
+            location = GLib.get_user_special_dir(
+                GLib.UserDirectory.DIRECTORY_VIDEOS
+            )
+        elif dir_name == 'Pictures':
+            location = GLib.get_user_special_dir(
+                GLib.UserDirectory.DIRECTORY_PICTURES
+            )
+        else:
+            raise ValueError(
+                '{} directory not handled by this fuction, you need to enhance'
+                ' this function to handle that directory.'.format(dir_name)
+            )
+        
         output = subprocess.check_output(['du', '--block-size=1', location])
         disk_space = output.split()[len(output.split()) - 2]
         return disk_space
@@ -148,7 +167,7 @@ class StorageTestCase(StorageBaseTestCase):
     def test_space_used_by_movies(self):
         """ Checks whether space shown to be used by movies is
         correct. """
-        movie_space = self._get_space_by_directory(_('Videos'))
+        movie_space = self._get_space_by_directory('Videos')
         movie_space_in_ui = self.get_storage_space_used_by_category(
             'moviesItem'
         )
@@ -158,7 +177,7 @@ class StorageTestCase(StorageBaseTestCase):
     def test_space_used_by_music(self):
         """ Checks whether space shown to be used by music is
         correct. """
-        music_space = self._get_space_by_directory(_('Music'))
+        music_space = self._get_space_by_directory('Music')
         music_space_in_ui = self.get_storage_space_used_by_category(
             'audioItem'
         )
@@ -168,7 +187,7 @@ class StorageTestCase(StorageBaseTestCase):
     def test_space_used_by_pictures(self):
         """ Checks whether space shown to be used by pictures is
         correct. """
-        pictures_space = self._get_space_by_directory(_('Pictures'))
+        pictures_space = self._get_space_by_directory('Pictures')
         pictures_space_in_ui = self.get_storage_space_used_by_category(
             'picturesItem'
         )
