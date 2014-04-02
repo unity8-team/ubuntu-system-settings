@@ -26,6 +26,7 @@ Build-Depends: dbus-test-runner,
                cmake,
                pep8,
                pyflakes,
+               libunity-api-dev
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
@@ -60,6 +61,7 @@ Depends: ${misc:Depends},
          python3,
          python3-gi,
          python3-dbus,
+         libunity-api-dev,
          gir1.2-glib-2.0
 Recommends: suru-icon-theme,
             ubuntu-system-settings-online-accounts,
