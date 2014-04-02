@@ -82,16 +82,16 @@ class AboutTestCase(AboutBaseTestCase):
                 item.value, Equals(self._get_device_serial_number())
             )
 
-    @skipUnless(
-        model() == 'Nexus 4',
-        'Nexus 4 is currently the only telephony device that we support'
-    )
     def test_imei_information_is_correct(self):
         """Checks whether the UI is exposing the right IMEI."""
-        imei = self.about_page.wait_select_single(
+        imei_item = self.about_page.wait_select_single(
             objectName='imeiItem').value
 
-        self.assertEquals(imei, self._get_imei_from_dbus())
+        IMEI = self._get_imei_from_dbus()
+        if IMEI is None:
+            self.assertEquals(imei_item, _('N/A'))
+        else:
+            self.assertEquals(imei_item, IMEI)
 
     def test_settings_show_correct_version_of_the_os(self):
         """Ensure the UI is showing the correct version of the OS."""
@@ -112,10 +112,6 @@ class AboutTestCase(AboutBaseTestCase):
 
         self.assertEquals(device_label, device_name_from_getprop)
 
-    @skipIf(
-        model() == 'Desktop',
-        'Image based upgrades are only available on touch devices, for now.'
-    )
     def test_last_updated(self):
         """Checks whether Last Updated info is correct."""
         last_updated = self.about_page.select_single(
