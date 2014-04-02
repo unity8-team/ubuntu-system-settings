@@ -12,7 +12,7 @@ from gi.repository import GLib
 
 from autopilot.matchers import Eventually
 from autopilot.platform import model
-from testtools import skipUnless, skipIf
+from testtools import skipIf
 from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import (
@@ -146,7 +146,7 @@ class StorageTestCase(StorageBaseTestCase):
 
         if not os.path.exists(location):
             self.skipTest('glib directory {} does not exist'.format(dir_name))
-        
+
         output = subprocess.check_output(['du', '--block-size=1', location])
         disk_space = output.split()[len(output.split()) - 2]
         return disk_space
