@@ -51,11 +51,11 @@ class AboutTestCase(AboutBaseTestCase):
         manufacturer = subprocess.check_output(
             ['getprop', 'ro.product.manufacturer']
             ).strip()
-        model = subprocess.check_output(
+        hw_model = subprocess.check_output(
             ['getprop', 'ro.product.model']
             ).strip()
 
-        return '{} {}'.format(manufacturer, model)
+        return '{} {}'.format(manufacturer, hw_model)
 
     def _get_system_image_iface(self):
         bus = dbus.SystemBus()
