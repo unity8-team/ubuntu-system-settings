@@ -9,7 +9,6 @@ ${QML_SOURCES})
 qt5_use_modules(UbuntuUpdatePanel Qml Quick Network DBus)
 include_directories(/usr/include/apt-pkg/)
 
-find_package (PkgConfig REQUIRED)
 pkg_check_modules(UBUNTU_DOWNLOAD_MANAGER_CLIENT REQUIRED ubuntu-download-manager-client)
 pkg_check_modules(UBUNTU_DOWNLOAD_MANAGER_COMMON REQUIRED ubuntu-download-manager-common)
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
