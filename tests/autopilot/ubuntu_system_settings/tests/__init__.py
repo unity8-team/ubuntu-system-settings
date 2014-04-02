@@ -11,6 +11,7 @@ from __future__ import absolute_import
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from ubuntu_system_settings.emulators import MainWindow, SystemSettings
+from ubuntu_system_settings import helpers
 
 from autopilot.input import Mouse, Touch
 from autopilot.platform import model
@@ -34,28 +35,8 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.launch_system_settings(panel=panel)
-        self.assertThat(self.main_window.visible, Eventually(Equals(True)))
-
-    @property
-    def main_window(self):
-        """ Return main view """
-        return self.app.select_single(MainWindow)
-
-    def launch_system_settings(self, panel=None):
-        params = ['/usr/bin/system-settings']
-        if (model() != 'Desktop'):
-            params.append('--desktop_file_hint=/usr/share/applications/'
-                          'ubuntu-system-settings.desktop')
-
-        # Launch to a specific panel
-        if panel is not None:
-            params.append(panel)
-
-        self.app = self.launch_test_application(
-            *params,
-            app_type='qt',
-            emulator_base=SystemSettings)
+        self.app = helpers.launch_system_settings(self, panel=panel)
+        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
@@ -85,8 +66,8 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.launch_system_settings()
-        self.assertThat(self.main_window.visible, Eventually(Equals(True)))
+        self.app = helpers.launch_system_settings(self)
+        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
