@@ -10,7 +10,7 @@
 from __future__ import absolute_import
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
-from ubuntu_system_settings.emulators import MainWindow
+from ubuntu_system_settings.emulators import MainWindow, SystemSettings
 
 from autopilot.input import Mouse, Touch
 from autopilot.platform import model
@@ -55,7 +55,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
         self.app = self.launch_test_application(
             *params,
             app_type='qt',
-            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)
+            emulator_base=SystemSettings)
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
