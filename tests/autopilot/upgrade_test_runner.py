@@ -17,7 +17,7 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
     device_test_path = '/home/phablet/{}'.format(test_suite)
     source = 'system_upgrade'
     unlocker = 'unlock_screen.py'
-    unlocker_location = 'system_upgrade/helpers/' + 'unlock_screen.py'
+    unlocker_location = 'system_upgrade/helpers/' + unlocker
     target_home = '/home/phablet/'
     unlocker_abs_location = target_home + unlocker
 
