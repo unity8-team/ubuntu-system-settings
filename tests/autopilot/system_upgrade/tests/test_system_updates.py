@@ -25,7 +25,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
     """Tests for System Updates."""
 
     def setUp(self):
-        #self.patch_environment('IGNORE_CREDENTIALS', 'True')
+        self.patch_environment('IGNORE_CREDENTIALS', 'True')
         super(SystemUpdatesTestCases, self).setUp()
 
     def _get_updates_view(self):
@@ -36,7 +36,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
     def wait_for_updates_to_download(self, timeout=120):
         while timeout > 0:
             download_state = self._get_updates_view().updatesDownloaded
-            if download_state == 'True':
+            if download_state:
                 return
 
             timeout = timeout - 1

@@ -23,7 +23,7 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
     def setUp(self):
         self.setup_device(
             package_list=PACKAGE_LIST,
-            bootstrap=False,
+            bootstrap=True,
             revision_number='-1'
         )
 
