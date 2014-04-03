@@ -10,7 +10,6 @@
 from __future__ import absolute_import
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
-from ubuntu_system_settings.emulators import MainWindow, SystemSettings
 from ubuntu_system_settings import helpers
 
 from autopilot.input import Mouse, Touch
@@ -19,7 +18,6 @@ from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
-from ubuntuuitoolkit import emulators as toolkit_emulators
 
 import dbus
 import dbusmock
@@ -36,7 +34,7 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
         self.app = helpers.launch_system_settings(self, panel=panel)
-        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
+        self.assertThat(self.app.main_view.visible, Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
@@ -67,7 +65,7 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
         self.app = helpers.launch_system_settings(self)
-        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
+        self.assertThat(self.app.main_view.visible, Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
@@ -136,15 +134,15 @@ class StorageBaseTestCase(AboutBaseTestCase):
         """ Go to Storage Page """
         super(StorageBaseTestCase, self).setUp()
         # Click on 'Storage' option
-        button = self.main_window.about_page.select_single(
+        button = self.app.main_view.about_page.select_single(
             objectName='storageItem'
         )
         self.assertThat(button, NotEquals(None))
-        self.main_window.scroll_to_and_click(button)
+        self.app.main_view.scroll_to_and_click(button)
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.main_window.storage_page.select_single(
+        item = self.app.main_view.storage_page.select_single(
             objectName=object_name
         )
         self.assertThat(item, NotEquals(None))
@@ -164,10 +162,10 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """ Go to License Page """
         super(LicenseBaseTestCase, self).setUp()
         # Click on 'Software licenses' option
-        button = self.main_window.select_single(objectName='licenseItem')
+        button = self.app.main_view.select_single(objectName='licenseItem')
         self.assertThat(button, NotEquals(None))
         self.assertThat(button.text, Equals(_('Software licenses')))
-        self.main_window.scroll_to_and_click(button)
+        self.app.main_view.scroll_to_and_click(button)
 
 
 class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -177,12 +175,7 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
         """ Go to SystemUpdates Page """
         super(SystemUpdatesBaseTestCase, self).setUp()
         # Click on 'System Updates' option
-        button = self.main_window.select_single(
+        button = self.app.main_view.select_single(
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
-        self.main_window.scroll_to_and_click(button)
-
-    @property
-    def updates_page(self):
-        """ Return 'System Update' page """
-        return self.main_view.select_single(objectName='systemUpdatesPage')
+        self.app.main_view.scroll_to_and_click(button)

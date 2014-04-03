@@ -22,9 +22,14 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 class SystemSettings(toolkit_emulators.UbuntuUIToolkitEmulatorBase):
     """An emulator class that makes it easy to interact with the app."""
 
+    @property
+    def main_view(self):
+        """ Return main view """
+        return self.select_single(MainWindow)
+
 
 class MainWindow(toolkit_emulators.MainView):
-    """An emulator class that makes it easy to interact with the app."""
+    """An emulator class that makes it easy to interact with the UI."""
 
     @property
     def pointer(self):
@@ -80,5 +85,4 @@ class MainWindow(toolkit_emulators.MainView):
     @property
     def updates_page(self):
         """ Return 'System Update' page """
-        return self.select_single(
-            objectName='entryComponent-system-update')
+        return self.select_single(objectName='systemUpdatesPage')

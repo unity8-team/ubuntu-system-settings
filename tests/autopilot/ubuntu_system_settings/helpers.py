@@ -19,6 +19,8 @@ DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
 
 from autopilot import platform
 
+from ubuntu_system_settings import emulators
+
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
@@ -29,8 +31,6 @@ def launch_system_settings(testobj, panel=None):
     testobj.launch_test_application()
 
     :param panel: Launch to a specific panel. Default None.
-
-    :param emulator_base: emulator_base for launch_test_application.
 
     :returns: A proxy object that represents the application. Introspection
     data is retrievable via this object.
@@ -43,12 +43,9 @@ def launch_system_settings(testobj, panel=None):
     if panel is not None:
         params.append(panel)
 
-    # Default emulator base
-    emulator = toolkit_emulators.UbuntuUIToolkitEmulatorBase
-
     app = testobj.launch_test_application(
         *params,
         app_type='qt',
-        emulator_base=emulator)
+        emulator_base=emulators.SystemSettings)
 
     return app

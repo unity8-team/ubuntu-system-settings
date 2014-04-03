@@ -37,18 +37,18 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
 
     @property
     def time_date_page(self):
-        return self.main_window.select_single(objectName='timeDatePage')
+        return self.app.main_view.select_single(objectName='timeDatePage')
 
     @property
     def tz_page(self):
-        return self.main_window.select_single(objectName='timeZone')
+        return self.app.main_view.select_single(objectName='timeZone')
 
     def click_tz_search_field(self):
-        self.main_window.scroll_to_and_click(self.tz_page)
-        text_field = self.main_window.select_single(
+        self.app.main_view.scroll_to_and_click(self.tz_page)
+        text_field = self.app.main_view.select_single(
             objectName='selectTimeZoneField'
         )
-        self.main_window.pointer.move_to_object(text_field)
+        self.app.main_view.pointer.move_to_object(text_field)
 
     def test_time_date_page(self):
         """ Checks whether Time & Date page is available """
@@ -57,8 +57,8 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
 
     def test_tz_list_initially_empty(self):
         """ Checks that no list is displayed initially """
-        self.main_window.scroll_to_and_click(self.tz_page)
-        labelVisible = self.main_window.select_single(
+        self.app.main_view.scroll_to_and_click(self.tz_page)
+        labelVisible = self.app.main_view.select_single(
             objectName='nothingLabel').visible
         self.assertThat(labelVisible, Equals(True))
 
@@ -66,7 +66,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         """ Check that searching for a valid location shows something """
         self.click_tz_search_field()
         self.keyboard.type('London, United Kingdom')
-        listview = self.main_window.select_single(
+        listview = self.app.main_view.select_single(
             objectName='locationsListView'
         )
         self.assertThat(listview.count, GreaterThan(0))
@@ -75,11 +75,11 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         """ Check that searching for an invalid location shows nothing """
         self.click_tz_search_field()
         self.keyboard.type('Oh no you don\'t!')
-        listview = self.main_window.select_single(
+        listview = self.app.main_view.select_single(
             objectName='locationsListView'
         )
         self.assertThat(listview.count, Equals(0))
-        labelVisible = self.main_window.select_single(
+        labelVisible = self.app.main_view.select_single(
             objectName='nothingLabel').visible
         self.assertThat(labelVisible, Equals(True))
 
@@ -87,12 +87,12 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         """ Check that manually selecting a timezone sets it properly """
         self.click_tz_search_field()
         self.keyboard.type('London, United Kingdom')
-        listview = self.main_window.select_single(
+        listview = self.app.main_view.select_single(
             objectName='locationsListView'
         )
         london = listview.select_many(toolkit_emulators.Standard)[0]
-        self.main_window.pointer.click_object(london)
-        header = self.main_window.select_single(objectName='MainView_Header')
+        self.app.main_view.pointer.click_object(london)
+        header = self.app.main_view.select_single(objectName='MainView_Header')
         self.assertThat(header.title, Eventually(Equals(_('Time & Date'))))
         self.assertThat(self.tz_page.text, Equals('Europe/London'))
 
@@ -104,12 +104,12 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         self.click_tz_search_field()
         # This is also in Europe/London
         self.keyboard.type('Preston, United Kingdom')
-        listview = self.main_window.select_single(
+        listview = self.app.main_view.select_single(
             objectName='locationsListView'
         )
         preston = listview.select_many(toolkit_emulators.Standard)[0]
-        self.main_window.pointer.click_object(preston)
+        self.app.main_view.pointer.click_object(preston)
         # The timer is 1 second, wait and see that we haven't moved pages
         sleep(2)
-        header = self.main_window.select_single(objectName='MainView_Header')
+        header = self.app.main_view.select_single(objectName='MainView_Header')
         self.assertThat(header.title, Eventually(Equals(_('Time zone'))))
