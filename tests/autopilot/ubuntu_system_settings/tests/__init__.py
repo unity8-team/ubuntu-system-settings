@@ -33,7 +33,8 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.app = helpers.launch_system_settings(self, panel=panel)
+        system_settings = helpers.SystemSettings()
+        self.app = system_settings.launch(self, panel=panel)
         self.assertThat(self.app.main_view.visible, Eventually(Equals(True)))
 
 
@@ -64,7 +65,8 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.app = helpers.launch_system_settings(self)
+        system_settings = helpers.SystemSettings()
+        self.app = system_settings.launch(self)
         self.assertThat(self.app.main_view.visible, Eventually(Equals(True)))
 
 

@@ -19,7 +19,7 @@ from time import sleep
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
-class SystemSettings(toolkit_emulators.UbuntuUIToolkitEmulatorBase):
+class SystemSettingsApp(toolkit_emulators.UbuntuUIToolkitEmulatorBase):
     """An emulator class that makes it easy to interact with the app."""
 
     @property

@@ -21,31 +21,34 @@ from autopilot import platform
 
 from ubuntu_system_settings import emulators
 
-from ubuntuuitoolkit import emulators as toolkit_emulators
 
+class SystemSettings():
+    """Helper class for System Settings application"""
 
-def launch_system_settings(testobj, panel=None):
-    """Launch system settings application
+    emulator_base = emulators.SystemSettingsApp
 
-    :param testobj: An AutopilotTestCase object, needed to call
-    testobj.launch_test_application()
+    def launch(self, testobj, panel=None):
+        """Launch system settings application
 
-    :param panel: Launch to a specific panel. Default None.
+        :param testobj: An AutopilotTestCase object, needed to call
+        testobj.launch_test_application()
 
-    :returns: A proxy object that represents the application. Introspection
-    data is retrievable via this object.
-    """
-    params = [APP_PATH]
-    if platform.model() != 'Desktop':
-        params.append('--desktop_file_hint={}'.format(DESKTOP_FILE))
+        :param panel: Launch to a specific panel. Default None.
 
-    # Launch to a specific panel
-    if panel is not None:
-        params.append(panel)
+        :returns: A proxy object that represents the application. Introspection
+        data is retrievable via this object.
+        """
+        params = [APP_PATH]
+        if platform.model() != 'Desktop':
+            params.append('--desktop_file_hint={}'.format(DESKTOP_FILE))
 
-    app = testobj.launch_test_application(
-        *params,
-        app_type='qt',
-        emulator_base=emulators.SystemSettings)
+        # Launch to a specific panel
+        if panel is not None:
+            params.append(panel)
 
-    return app
+        self.app = testobj.launch_test_application(
+            *params,
+            app_type='qt',
+            emulator_base=self.emulator_base)
+
+        return self.app
