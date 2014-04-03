@@ -6,9 +6,7 @@
 # by the Free Software Foundation.
 
 import subprocess
-import tempfile
 import time
-import os
 
 
 class DeviceImageFlash(object):

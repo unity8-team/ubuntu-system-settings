@@ -9,14 +9,12 @@ import time
 import logging
 import os
 
-from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
-from testtools.matchers import Equals, raises
+from testtools.matchers import Equals
 
 parentdir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-os.sys.path.insert(0,parentdir)
+os.sys.path.insert(0, parentdir)
 
-from ubuntu_system_settings import emulators
 from ubuntu_system_settings.tests import SystemUpdatesBaseTestCase
 
 logging.basicConfig(level=logging.INFO)
@@ -35,7 +33,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
             download_state = self.app.select_single(
                 'PageComponent',
                 objectName='systemUpdatesPage').updatesDownloaded
-            if download_state == True:
+            if download_state == 'True':
                 return
 
             timeout = timeout - 1
@@ -59,7 +57,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         button = self.app.select_single(
             'Button', objectName='btnInstallUpdate'
         )
-        
+
         self.pointer.click_object(button)
 
     def _get_installing_update_screen(self):

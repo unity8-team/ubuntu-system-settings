@@ -9,7 +9,6 @@
 
 from __future__ import absolute_import
 
-from ubuntu_system_settings import emulators
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from autopilot.input import Mouse, Touch, Pointer

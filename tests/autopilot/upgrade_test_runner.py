@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
-import time
 import unittest
-import os
 
 from system_upgrade.helpers.system_image_flasher import DeviceImageFlash
 from system_upgrade.variables import (
@@ -23,12 +21,11 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
     unlocker_abs_location = target_home + unlocker
 
     def setUp(self):
-        print(1)
-        # self.setup_device(
-        #     package_list=PACKAGE_LIST,
-        #     bootstrap=False,
-        #     revision_number='-1'
-        # )
+        self.setup_device(
+            package_list=PACKAGE_LIST,
+            bootstrap=False,
+            revision_number='-1'
+        )
 
     def test_system_update(self):
         self._push_and_run_tests(test_suite=TEST1_PART1)
@@ -48,8 +45,10 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
 
     def _push_and_run_tests(self, test_suite):
         self.push_files_to_device(self.source, self.device_test_path)
-        self.push_files_to_device('ubuntu_system_settings', '/home/phablet/ubuntu_system_settings')
-        #self.unlock_device_screen()
+        self.push_files_to_device(
+            'ubuntu_system_settings', '/home/phablet/ubuntu_system_settings'
+        )
+        self.unlock_device_screen()
         self.run_autopilot_test_on_target(test_suite)
 
     def push_files_to_device(self, source, location):
