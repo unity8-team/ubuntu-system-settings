@@ -35,6 +35,7 @@ ItemPage {
     title: i18n.tr("Updates")
 
     property bool installAll: false
+    property bool updatesDownloaded: false
     property int updatesAvailable: 0
 
     DeviceInfo {
@@ -45,11 +46,13 @@ ItemPage {
          id: dialogInstallComponent
          Dialog {
              id: dialogueInstall
+             objectName: "dialogInstall"
              title: i18n.tr("Update System")
              text: i18n.tr("The phone needs to restart to install the system update.")
 
              Button {
                  text: i18n.tr("Install & Restart")
+                 objectName: "btnInstallUpdate"
                  color: UbuntuColors.orange
                  onClicked: {
                      installingImageUpdate.visible = true;
@@ -157,6 +160,7 @@ ItemPage {
 
         onSystemUpdateDownloaded: {
             root.updatesAvailable -= 1;
+            root.updatesDownloaded = true;
             PopupUtils.open(dialogInstallComponent);
         }
 
