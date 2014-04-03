@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import unittest
+import os
 
 from system_upgrade.helpers.system_image_flasher import DeviceImageFlash
 from system_upgrade.variables import (
@@ -32,15 +33,17 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
         log_file = self.open_log_file()
         self.assertTrue(log_file.endswith('OK\n'))
 
-        self.wait_for_device(timeout=120)
+        self.wait_for_device(timeout=150)
 
         self._push_and_run_tests(test_suite=TEST1_PART2)
         log_file = self.open_log_file()
         self.assertTrue(log_file.endswith('OK\n'))
 
     def open_log_file(self):
-        log_file = open('/tmp/upgrade.log', 'r')
+        log_location = '/tmp/upgrade.log'
+        log_file = open(log_location, 'r')
         self.addCleanup(log_file.close)
+        self.addCleanup(os.remove(log_location))
         return log_file.read()
 
     def _push_and_run_tests(self, test_suite):

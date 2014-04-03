@@ -33,7 +33,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
             'PageComponent', objectName='systemUpdatesPage'
         )
 
-    def wait_for_updates_to_download(self, timeout=120):
+    def wait_for_updates_to_download(self, timeout=200):
         while timeout > 0:
             download_state = self._get_updates_view().updatesDownloaded
             if download_state:
