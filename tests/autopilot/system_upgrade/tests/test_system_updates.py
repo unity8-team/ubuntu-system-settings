@@ -28,11 +28,14 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         #self.patch_environment('IGNORE_CREDENTIALS', 'True')
         super(SystemUpdatesTestCases, self).setUp()
 
+    def _get_updates_view(self):
+        return self.app.select_single(
+            'PageComponent', objectName='systemUpdatesPage'
+        )
+
     def wait_for_updates_to_download(self, timeout=120):
         while timeout > 0:
-            download_state = self.app.select_single(
-                'PageComponent',
-                objectName='systemUpdatesPage').updatesDownloaded
+            download_state = self._get_updates_view().updatesDownloaded
             if download_state == 'True':
                 return
 
@@ -42,6 +45,25 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
             raise ValueError(
                 "Download didn't complete in given time, check your "
                 "internet and try again.")
+
+    def wait_for_state(self, state, timeout=60):
+        """Wait for expected state
+
+        :returns: state
+        :raises: SystemSettingsEmulatorException
+        """
+        for wait in range(timeout):
+            status = self._get_updates_view().state
+            logging.info(
+                'State: {} waiting for {}'.format(status, state)
+            )
+            if state == status:
+                return state
+            time.sleep(1)
+
+        raise ValueError(
+            'Error state {} not found before timeout'.format(state)
+        )
 
     def _get_install_dialog(self):
         return self.app.wait_select_single(
@@ -79,5 +101,5 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def test_state_noupdates(self):
         """Check if system is fully updated."""
-        state = self.updates_page.wait_for_state('NOUPDATES')
+        state = self.wait_for_state('NOUPDATES')
         self.assertThat(state, Equals('NOUPDATES'))
