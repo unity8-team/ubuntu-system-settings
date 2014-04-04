@@ -19,6 +19,8 @@ class DeviceImageFlash(object):
         self.disable_intro_screen()
         self.reboot_device()
 
+        self.setup_network()
+
         if ppa is not None:
             self.add_apt_repository(ppa)
 
