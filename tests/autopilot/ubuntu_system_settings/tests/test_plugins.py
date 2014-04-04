@@ -25,7 +25,7 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
 
     def test_title(self):
         """ Checks whether the app title is correct """
-        header = self.app.main_view.select_single(
+        header = self.system_settings.main_view.select_single(
             objectName='systemSettingsPage'
         )
         self.assertThat(header, NotEquals(None))
@@ -33,12 +33,14 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
 
     def test_search(self):
         """ Checks whether the Search box is available """
-        search = self.app.main_view.select_single(objectName='searchTextField')
+        search = self.system_settings.main_view.select_single(
+            objectName='searchTextField'
+        )
         self.assertThat(search, NotEquals(None))
 
     def test_network_category(self):
         """ Checks whether the Network category is available """
-        category = self.app.main_view.select_single(
+        category = self.system_settings.main_view.select_single(
             objectName='categoryGrid-network'
         )
         self.assertThat(category, NotEquals(None))
@@ -48,7 +50,7 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
 
     def test_personal_category(self):
         """ Checks whether the Personal category is available """
-        category = self.app.main_view.select_single(
+        category = self.system_settings.main_view.select_single(
             objectName='categoryGrid-personal'
         )
         self.assertThat(category, NotEquals(None))
@@ -58,7 +60,7 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
 
     def test_system_category(self):
         """ Checks whether the System category is available """
-        category = self.app.main_view.select_single(
+        category = self.system_settings.main_view.select_single(
             objectName='categoryGrid-system'
         )
         self.assertThat(category, NotEquals(None))
@@ -66,70 +68,70 @@ class SystemSettingsTestCases(UbuntuSystemSettingsTestCase):
 
     def test_wifi_plugin(self):
         """ Checks whether the Wi-Fi plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-wifi'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_cellular_plugin(self):
         """ Checks whether the Cellunar plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-cellular'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_bluetooth_plugin(self):
         """ Checks whether the Bluetooth plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-bluetooth'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_background_plugin(self):
         """ Checks whether the Background plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-background'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_sound_plugin(self):
         """ Checks whether the Sound plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-sound'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_language_plugin(self):
         """ Checks whether the Language plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-language'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_accounts_plugin(self):
         """ Checks whether the Accounts plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-online-accounts'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_timedate_plugin(self):
         """ Checks whether the Time & Date plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-time-date'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_security_plugin(self):
         """ Checks whether the Security plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-security-privacy'
         )
         self.assertThat(plugin, NotEquals(None))
 
     def test_updates_plugin(self):
         """ Checks whether the Updates plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-system-update'
         )
         self.assertThat(plugin, NotEquals(None))
@@ -142,7 +144,7 @@ class SystemSettingsUpowerTestCases(UbuntuSystemSettingsUpowerTestCase):
     def test_no_battery_plugin_without_battery(self):
         """ Checks whether the Battery plugin is not available
         as we have no battery """
-        self.assertThat(lambda: self.app.main_view.select_single(
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
             objectName='entryComponent-battery'),
             raises(StateNotFoundError)
         )
@@ -150,7 +152,7 @@ class SystemSettingsUpowerTestCases(UbuntuSystemSettingsUpowerTestCase):
     def test_battery_plugin_battery_hotplugging(self):
         """ Checks whether hotplugging a battery makes the panel visible """
         self.add_mock_battery()
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-battery'
         )
         self.assertThat(plugin, NotEquals(None))
@@ -162,7 +164,7 @@ class SystemSettingsBatteryTestCases(UbuntuSystemSettingsBatteryTestCase):
 
     def test_battery_plugin(self):
         """ Checks whether the Battery plugin is available """
-        plugin = self.app.main_view.select_single(
+        plugin = self.system_settings.main_view.select_single(
             objectName='entryComponent-battery'
         )
         self.assertThat(plugin, NotEquals(None))

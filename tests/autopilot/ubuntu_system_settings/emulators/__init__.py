@@ -19,15 +19,6 @@ from time import sleep
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
-class SystemSettingsApp(toolkit_emulators.UbuntuUIToolkitEmulatorBase):
-    """An emulator class that makes it easy to interact with the app."""
-
-    @property
-    def main_view(self):
-        """ Return main view """
-        return self.select_single(MainWindow)
-
-
 class MainWindow(toolkit_emulators.MainView):
     """An emulator class that makes it easy to interact with the UI."""
 

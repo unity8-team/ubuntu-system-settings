@@ -10,7 +10,7 @@
 from __future__ import absolute_import
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
-from ubuntu_system_settings import helpers
+from ubuntu_system_settings import SystemSettings
 
 from autopilot.input import Mouse, Touch
 from autopilot.platform import model
@@ -26,6 +26,7 @@ import subprocess
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
+
     if model() == 'Desktop':
         scenarios = [('with mouse', dict(input_device_class=Mouse))]
     else:
@@ -33,13 +34,16 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        system_settings = helpers.SystemSettings()
-        self.app = system_settings.launch(self, panel=panel)
-        self.assertThat(self.app.main_view.visible, Eventually(Equals(True)))
+        self.system_settings = SystemSettings(self, panel=panel)
+        self.assertThat(
+            self.system_settings.main_view.visible,
+            Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
                                          dbusmock.DBusTestCase):
+    """Base class for battery tests that mocks Upower"""
+
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
@@ -62,17 +66,20 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     """ Base class for tests which rely on the presence of a battery """
+
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        system_settings = helpers.SystemSettings()
-        self.app = system_settings.launch(self)
-        self.assertThat(self.app.main_view.visible, Eventually(Equals(True)))
+        self.system_settings = SystemSettings(self)
+        self.assertThat(
+            self.system_settings.main_view.visible,
+            Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
     """ Class for cellular tests which sets up an Ofono mock """
+
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
@@ -136,15 +143,15 @@ class StorageBaseTestCase(AboutBaseTestCase):
         """ Go to Storage Page """
         super(StorageBaseTestCase, self).setUp()
         # Click on 'Storage' option
-        button = self.app.main_view.about_page.select_single(
+        button = self.system_settings.main_view.about_page.select_single(
             objectName='storageItem'
         )
         self.assertThat(button, NotEquals(None))
-        self.app.main_view.scroll_to_and_click(button)
+        self.system_settings.main_view.scroll_to_and_click(button)
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.app.main_view.storage_page.select_single(
+        item = self.system_settings.main_view.storage_page.select_single(
             objectName=object_name
         )
         self.assertThat(item, NotEquals(None))
@@ -164,10 +171,11 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """ Go to License Page """
         super(LicenseBaseTestCase, self).setUp()
         # Click on 'Software licenses' option
-        button = self.app.main_view.select_single(objectName='licenseItem')
+        button = self.system_settings.main_view.select_single(
+            objectName='licenseItem')
         self.assertThat(button, NotEquals(None))
         self.assertThat(button.text, Equals(_('Software licenses')))
-        self.app.main_view.scroll_to_and_click(button)
+        self.system_settings.main_view.scroll_to_and_click(button)
 
 
 class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -177,7 +185,7 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
         """ Go to SystemUpdates Page """
         super(SystemUpdatesBaseTestCase, self).setUp()
         # Click on 'System Updates' option
-        button = self.app.main_view.select_single(
+        button = self.system_settings.main_view.select_single(
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
-        self.app.main_view.scroll_to_and_click(button)
+        self.system_settings.main_view.scroll_to_and_click(button)

@@ -24,15 +24,17 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_about_page(self):
         """ Checks whether About page is available """
-        self.assertThat(self.app.main_view.about_page, NotEquals(None))
         self.assertThat(
-            self.app.main_view.about_page.title,
+            self.system_settings.main_view.about_page,
+            NotEquals(None))
+        self.assertThat(
+            self.system_settings.main_view.about_page.title,
             Equals(_('About this phone'))
         )
 
     def test_device(self):
         """ Checks whether Device info is shown """
-        device_label = self.app.main_view.about_page.select_single(
+        device_label = self.system_settings.main_view.about_page.select_single(
             objectName='deviceLabel'
         )
         self.assertThat(device_label, NotEquals(None))
@@ -40,7 +42,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_serial(self):
         """ Checks whether Serial info is available """
-        item = self.app.main_view.about_page.select_single(
+        item = self.system_settings.main_view.about_page.select_single(
             objectName='serialItem'
         )
         self.assertThat(item, NotEquals(None))
@@ -52,7 +54,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_imei(self):
         """ Checks whether IMEI info is available """
-        item = self.app.main_view.about_page.select_single(
+        item = self.system_settings.main_view.about_page.select_single(
             objectName='imeiItem'
         )
         self.assertThat(item, NotEquals(None))
@@ -64,7 +66,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_software(self):
         """ Checks whether Software info is available """
-        item = self.app.main_view.about_page.select_single(
+        item = self.system_settings.main_view.about_page.select_single(
             objectName='softwareItem'
         )
         self.assertThat(item, NotEquals(None))
@@ -72,7 +74,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_os(self):
         """ Checks whether OS info is available """
-        item = self.app.main_view.about_page.select_single(
+        item = self.system_settings.main_view.about_page.select_single(
             objectName='osItem'
         )
         self.assertThat(item, NotEquals(None))
@@ -86,7 +88,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_last_updated(self):
         """ Checks whether Last Updated info is available """
-        item = self.app.main_view.about_page.select_single(
+        item = self.system_settings.main_view.about_page.select_single(
             objectName='lastUpdatedItem'
         )
         self.assertThat(item, NotEquals(None))
@@ -100,7 +102,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_legal(self):
         """ Checks whether Legal info is available """
-        item = self.app.main_view.about_page.select_single(
+        item = self.system_settings.main_view.about_page.select_single(
             objectName='legalItem'
         )
         self.assertThat(item, NotEquals(None))
@@ -108,7 +110,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_update(self):
         """ Checks whether Update button is available """
-        button = self.app.main_view.about_page.select_single(
+        button = self.system_settings.main_view.about_page.select_single(
             objectName='updateButton'
         )
         self.assertThat(button, NotEquals(None))
@@ -120,12 +122,14 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_storage_page(self):
         """ Check whether Storage page is available """
-        self.assertThat(self.app.main_view.storage_page, NotEquals(None))
+        self.assertThat(
+            self.system_settings.main_view.storage_page,
+            NotEquals(None))
 
     def test_disk(self):
         """ Checks whether disk item is available """
         sleep(5)
-        disk_item = self.app.main_view.storage_page.select_single(
+        disk_item = self.system_settings.main_view.storage_page.select_single(
             objectName='diskItem'
         )
         self.assertThat(disk_item, NotEquals(None))
@@ -161,9 +165,8 @@ class StorageTestCase(StorageBaseTestCase):
 
     def test_installed_apps(self):
         """ Checks whether Installed Apps list is available """
-        installed_apps_list_view = self.app.main_view.storage_page.select_single(
-            objectName='installedAppsListView'
-        )
+        installed_apps_list_view = self.system_settings.main_view.\
+            storage_page.select_single(objectName='installedAppsListView')
         self.assertThat(installed_apps_list_view, NotEquals(None))
 
 
@@ -173,4 +176,6 @@ class LicenseTestCase(LicenseBaseTestCase):
     @expectedFailure
     def test_licenses_page(self):
         """ Check whether Storage page is available """
-        self.assertThat(self.app.main_view.licenses_page, NotEquals(None))
+        self.assertThat(
+            self.system_settings.main_view.licenses_page,
+            NotEquals(None))

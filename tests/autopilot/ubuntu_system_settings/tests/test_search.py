@@ -24,19 +24,21 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
     def test_search(self):
         """ Checks whether Search box actually filters the results """
         # Select search text field
-        search = self.app.main_view.select_single(objectName='searchTextField')
+        search = self.system_settings.main_view.select_single(
+            objectName='searchTextField'
+        )
         self.assertThat(search, NotEquals(None))
         # Move to text field
-        self.app.main_view.scroll_to_and_click(search)
+        self.system_settings.main_view.scroll_to_and_click(search)
         # Filter by string
         self.keyboard.type(_('Sound'))
         # Search component
-        sound = self.app.main_view.select_single(
+        sound = self.system_settings.main_view.select_single(
             objectName='entryComponent-sound'
         )
         self.assertThat(sound, NotEquals(None))
         try:
-            background = self.app.main_view.select_single(
+            background = self.system_settings.main_view.select_single(
                 objectName='entryComponent-background'
             )
         except StateNotFoundError:
