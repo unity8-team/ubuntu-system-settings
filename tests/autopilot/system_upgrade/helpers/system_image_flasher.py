@@ -7,6 +7,7 @@
 
 import subprocess
 import time
+import os
 
 
 class DeviceImageFlash(object):
@@ -54,7 +55,8 @@ class DeviceImageFlash(object):
             shell=True,
         )
 
-        subprocess.call('adb pull /tmp/upgrade.log /tmp', shell=True)
+        self.run_command_on_host('adb pull {} /tmp'.format(self.log_path))
+        self.addCleanup(os.remove, self.log_path)
 
     def flash_device(
             self,

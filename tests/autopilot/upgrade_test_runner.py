@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import unittest
-import os
 
 from system_upgrade.helpers.system_image_flasher import DeviceImageFlash
 from system_upgrade.variables import (
@@ -13,13 +12,14 @@ from system_upgrade.variables import (
 
 class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
 
+    log_path = '/tmp/upgrade.log'
+    source = 'system_upgrade'
+    target_home = '/home/phablet/'
     test_suite = 'system_upgrade'
     device_test_path = '/home/phablet/{}'.format(test_suite)
-    source = 'system_upgrade'
     unlocker = 'unlock_screen.py'
-    unlocker_location = 'system_upgrade/helpers/' + unlocker
-    target_home = '/home/phablet/'
     unlocker_abs_location = target_home + unlocker
+    unlocker_location = 'system_upgrade/helpers/' + unlocker
 
     def setUp(self):
         self.setup_device(
@@ -40,10 +40,8 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
         self.assertTrue(log_file.endswith('OK\n'))
 
     def open_log_file(self):
-        log_location = '/tmp/upgrade.log'
-        log_file = open(log_location, 'r')
+        log_file = open(self.log_path, 'r')
         self.addCleanup(log_file.close)
-        self.addCleanup(os.remove(log_location))
         return log_file.read()
 
     def _push_and_run_tests(self, test_suite):

@@ -33,14 +33,14 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
             'PageComponent', objectName='systemUpdatesPage'
         )
 
-    def wait_for_updates_to_download(self, timeout=200):
+    def wait_for_updates_to_download(self, timeout=40):
         while timeout > 0:
             download_state = self._get_updates_view().updatesDownloaded
             if download_state:
                 return
 
             timeout = timeout - 1
-            time.sleep(1)
+            time.sleep(5)
         else:
             raise ValueError(
                 "Download didn't complete in given time, check your "
@@ -89,6 +89,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def test_image_update_from_ui_works(self):
         """Install latest system update available."""
+        self.wait_for_state('UPDATE')
         logging.info('Waiting for update to download.')
         self.wait_for_updates_to_download()
         logging.info('finished waiting for update')
