@@ -45,11 +45,11 @@ class AboutTestCase(AboutBaseTestCase):
         item = self.system_settings.main_view.about_page.select_single(
             objectName='serialItem'
         )
-        self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals(_('Serial')))
         if (model() == 'Desktop'):
-            self.assertThat(item.value, Equals(_('N/A')))
+            self.assertThat(item.visible, Equals(False))
         else:
+            self.assertThat(item.visible, Equals(True))
+            self.assertThat(item.text, Equals(_('Serial')))
             self.assertThat(item.value, NotEquals(_('N/A')))
 
     def test_imei(self):
@@ -57,11 +57,11 @@ class AboutTestCase(AboutBaseTestCase):
         item = self.system_settings.main_view.about_page.select_single(
             objectName='imeiItem'
         )
-        self.assertThat(item, NotEquals(None))
-        self.assertThat(item.text, Equals(_('IMEI')))
         if (model() == 'Desktop'):
-            self.assertThat(item.value, Equals(_('N/A')))
+            self.assertThat(item.visible, Equals(False))
         else:
+            self.assertThat(item.visible, Equals(True))
+            self.assertThat(item.text, Equals(_('IMEI')))
             self.assertThat(item.value, NotEquals(_('N/A')))
 
     def test_software(self):
