@@ -114,4 +114,14 @@ Description: System Settings for Ubuntu Touch - Autopilot tests
  Ubuntu Touch images, it's designed for phones, tablets and convergent 
  devices.
 
+Package: system-upgrade-tests
+Architecture: all
+Depends: ubuntu-system-settings-autopilot,
+         unity8-autopilot,
+         ${misc:Depends},
+         ${python:Depends},
+Description: System upgrade - Autopilot tests
+ This package contains the automated tests to do system
+ system upgrades.
+
 

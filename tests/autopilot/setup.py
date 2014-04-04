@@ -17,5 +17,7 @@ setup(
     description='Ubuntu System Settings autopilot tests.',
     url='https://launchpad.net/ubuntu-system-settings',
     license='GPLv3',
-    packages=find_packages(),
+    packages=find_packages(
+        '.', include=['ubuntu_system_settings*', 'system_upgrade*']
+    ),
 )

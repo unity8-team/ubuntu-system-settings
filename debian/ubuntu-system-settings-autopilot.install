@@ -1,1 +1,4 @@
-usr/lib/python*
+usr/lib/python*/*/ubuntu_system_settings*.egg-info
+usr/lib/python*/*/ubuntu_system_settings/*.py
+usr/lib/python*/*/ubuntu_system_settings/tests/*.py
+usr/lib/python*/*/ubuntu_system_settings/utils/*.py
