@@ -28,10 +28,11 @@ class SystemSettings():
 
     def __init__(self, testobj, panel=None):
         """Constructor. Launches system settings application
+
         :param testobj: An AutopilotTestCase object, needed to call
         testobj.launch_test_application()
 
-        :param panel: Launch to a specific panel. Default None.       
+        :param panel: Launch to a specific panel. Default None.
         """
         self.testobj = testobj
         self.panel = panel
