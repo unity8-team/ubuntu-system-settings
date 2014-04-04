@@ -1,6 +1,0 @@
-usr/lib/python*/*/system_upgrade/*.py
-usr/lib/python*/*/system_upgrade/helpers/*.py
-usr/lib/python*/*/system_upgrade/tests/*.py
-tests/autopilot/run_upgrade_tests.sh /usr/bin
-tests/autopilot/upgrade_test_runner.py /usr/bin
-

@@ -14,7 +14,7 @@ override_dh_install:
 		$$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
 	done; \
 	cd $(CURDIR)
-	dh_install -X.pyc --fail-missing
+	dh_install -X'*.pyc' --fail-missing
 
 override_dh_makeshlibs:
 	dh_makeshlibs -Xusr/lib/$(DEB_HOST_MULTIARCH)/ubuntu-system-settings
