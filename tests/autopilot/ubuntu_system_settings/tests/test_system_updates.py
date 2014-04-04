@@ -38,12 +38,12 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def test_updates_not_in_main(self):
         """Check that the updates notification is shown in main."""
-        self.assertThat(lambda: self.system_settings.select_single(
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
             objectName='entryComponent-updates'), raises(StateNotFoundError))
 
     def test_configuration(self):
         """Check the configuration button."""
-        self.assertThat(lambda: self.system_settings.select_single(
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
             objectName='configurationPage'), raises(StateNotFoundError))
         updates = self.system_settings.main_view.updates_page
         self.assertThat(updates, NotEquals(None))

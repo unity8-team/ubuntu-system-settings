@@ -18,6 +18,8 @@ from autopilot import platform
 
 from ubuntu_system_settings.emulators import MainWindow
 
+from ubuntuuitoolkit import emulators as toolkit_emulators
+
 class SystemSettings():
     """Helper class for System Settings application"""
 
@@ -61,7 +63,8 @@ class SystemSettings():
 
         app = testobj.launch_test_application(
             *params,
-            app_type='qt')
+            app_type='qt',
+            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)
 
         return app
 
