@@ -71,3 +71,124 @@ int main(int argc, char **argv)
 
     return app.exec();
 }
+
+
+// Qt
+#include <QtQuick/QQuickView>
+#include <QtGui/QGuiApplication>
+#include <QtQml/QQmlEngine>
+#include <QtQml/QQmlContext>
+#include <qpa/qplatformnativeinterface.h>
+#include <QLibrary>
+#include <QDebug>
+#include <libintl.h>
+#include <dlfcn.h>
+#include <csignal>
+
+// local
+#include <paths.h>
+#include "MouseTouchAdaptor.h"
+#include "ApplicationArguments.h"
+
+#include <unity-mir/qmirserver.h>
+
+
+int startShell(int argc, const char** argv, void* server)
+{
+    QGuiApplication::setApplicationName("Unity 8");
+    QGuiApplication *application;
+
+    QLibrary unityMir("unity-mir", 1);
+    unityMir.load();
+
+    typedef QGuiApplication* (*createServerApplication_t)(int&, const char **, void*);
+    createServerApplication_t createQMirServerApplication = (createServerApplication_t) unityMir.resolve("createQMirServerApplication");
+    if (!createQMirServerApplication) {
+        qDebug() << "unable to resolve symbol: createQMirServerApplication";
+        return 4;
+    }
+
+    application = createQMirServerApplication(argc, argv, server);
+
+    bindtextdomain("unity8", translationDirectory().toUtf8().data());
+
+    QQuickView* view = new QQuickView();
+    view->setResizeMode(QQuickView::SizeRootObjectToView);
+    view->setTitle("Qml Phone Shell");
+    view->engine()->setBaseUrl(QUrl::fromLocalFile(::qmlDirectory()));
+    if (args.contains(QLatin1String("-frameless"))) {
+        view->setFlags(Qt::FramelessWindowHint);
+    }
+
+    QPlatformNativeInterface* nativeInterface = QGuiApplication::platformNativeInterface();
+    /* Shell is declared as a system session so that it always receives all
+       input events.
+       FIXME: use the enum value corresponding to SYSTEM_SESSION_TYPE (= 1)
+       when it becomes available.
+    */
+    nativeInterface->setProperty("ubuntuSessionType", 1);
+    view->setProperty("role", 2); // INDICATOR_ACTOR_ROLE
+
+    QUrl source(::qmlDirectory()+"Shell.qml");
+    prependImportPaths(view->engine(), ::overrideImportPaths());
+    appendImportPaths(view->engine(), ::fallbackImportPaths());
+
+    QStringList importPaths = view->engine()->importPathList();
+    importPaths.replaceInStrings(QRegExp("qt5/imports$"), "qt5/imports/Unity-Mir");
+    view->engine()->setImportPathList(importPaths);
+
+    view->setSource(source);
+    view->setColor("transparent");
+
+    view->showFullScreen();
+
+    int result = application->exec();
+
+    delete view;
+    delete mouseTouchAdaptor;
+    delete application;
+
+    return result;
+}
+
+int main(int argc, const char *argv[])
+{
+    /* Workaround Qt platform integration plugin not advertising itself
+       as having the following capabilities:
+        - QPlatformIntegration::ThreadedOpenGL
+        - QPlatformIntegration::BufferQueueingOpenGL
+    */
+    setenv("QML_FORCE_THREADED_RENDERER", "1", 1);
+    setenv("QML_FIXED_ANIMATION_STEP", "1", 1);
+
+    // For ubuntumirserver/ubuntumirclient
+    setenv("QT_QPA_PLATFORM", "ubuntumirserver", 1);
+
+    // If we use unity-mir directly, we automatically link to the Mir-server
+    // platform-api bindings, which result in unexpected behaviour when
+    // running the non-Mir scenario.
+    QLibrary unityMir("unity-mir", 1);
+    unityMir.load();
+    if (!unityMir.isLoaded()) {
+        qDebug() << "Library unity-mir not found/loaded";
+        return 1;
+    }
+
+    typedef QMirServer* (*createServer_t)(int, const char **);
+    createServer_t createQMirServer = (createServer_t) unityMir.resolve("createQMirServer");
+    if (!createQMirServer) {
+        qDebug() << "unable to resolve symbol: createQMirServer";
+        return 2;
+    }
+
+    QMirServer* mirServer = createQMirServer(argc, argv);
+
+    typedef int (*runWithClient_t)(QMirServer*, std::function<int(int, const char**, void*)>);
+    runWithClient_t runWithClient = (runWithClient_t) unityMir.resolve("runQMirServerWithClient");
+    if (!runWithClient) {
+        qDebug() << "unable to resolve symbol: runWithClient";
+        return 3;
+    }
+
+    return runWithClient(mirServer, startShell);
+}

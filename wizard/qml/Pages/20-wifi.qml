@@ -20,9 +20,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import Ubuntu.Settings.Menus 0.1 as Menus
-import Unity.Notifications 1.0 as NotificationBackend
 import "../Components" as LocalComponents
-import "../Notifications"
 
 LocalComponents.Page {
     id: wifiPage
@@ -161,14 +159,6 @@ LocalComponents.Page {
                     }
                 }
             }
-        }
-
-        Notifications {
-            id: notifications
-            model: NotificationBackend.Model
-            margin: units.gu(1)
-            z: 1
-            anchors.fill: parent
         }
     }
 
