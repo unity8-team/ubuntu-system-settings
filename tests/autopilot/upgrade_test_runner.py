@@ -36,6 +36,7 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
         )
 
     def test_system_update(self):
+        self.temporary_patch_system_settings_app()
         self._push_and_run_tests(test_suite=TEST1_PART1)
         log_file = self.open_log_file()
         self.assertTrue(log_file.endswith('OK\n'))
@@ -79,6 +80,17 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
             'chmod +x {}'.format(self.unlocker_abs_location)
         )
         self.run_command_on_target('./unlock_screen.py', user='phablet')
+
+    def temporary_patch_system_settings_app(self):
+        self.push_files_to_device(
+            'system_upgrade/temporary.patch', '/home/phablet'
+        )
+        command = ('adb -s {} shell patch /usr/share/ubuntu/settings/system/'
+                   'qml-plugins/system-update/PageComponent.qml '
+                   '/home/phablet/temporary.patch'.format(self.dut_serial))
+        self.run_command_on_target(command)
+        command = command + ' -R'
+        self.addCleanup(self.run_command_on_target, command)
 
 
 def _parse_command_line_arguments():

@@ -1,0 +1,32 @@
+=== modified file '/usr/share/ubuntu/settings/system/qml-plugins/system-update/PageComponent.qml'
+--- /usr/share/ubuntu/settings/system/qml-plugins/system-update/PageComponent.qml	2014-03-17 02:08:47 +0000
++++ /usr/share/ubuntu/settings/system/qml-plugins/system-update/PageComponent.qml	2014-04-05 20:26:24 +0000
+@@ -35,6 +35,7 @@
+     title: i18n.tr("Updates")
+ 
+     property bool installAll: false
++    property bool updatesDownloaded: false
+     property int updatesAvailable: 0
+ 
+     DeviceInfo {
+@@ -45,11 +46,13 @@
+          id: dialogInstallComponent
+          Dialog {
+              id: dialogueInstall
++             objectName: "dialogInstall"
+              title: i18n.tr("Update System")
+              text: i18n.tr("The phone needs to restart to install the system update.")
+ 
+              Button {
+                  text: i18n.tr("Install & Restart")
++                 objectName: "btnInstallUpdate"
+                  color: UbuntuColors.orange
+                  onClicked: {
+                      installingImageUpdate.visible = true;
+@@ -157,6 +160,7 @@
+ 
+         onSystemUpdateDownloaded: {
+             root.updatesAvailable -= 1;
++            root.updatesDownloaded = true;
+             PopupUtils.open(dialogInstallComponent);
+         }
