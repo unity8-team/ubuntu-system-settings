@@ -30,6 +30,9 @@ class DeviceImageFlash(object):
         if package_list is not None:
             self.apt_get_install(package_list)
 
+        if self.extra_packages is not None:
+            self.apt_get_install(self.extra_packages)
+
     def str_to_lst(self, string):
         result = []
         for char in string.split():

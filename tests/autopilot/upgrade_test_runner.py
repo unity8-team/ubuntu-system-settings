@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
-import unittest
+import argparse
 import sys
+import unittest
 
 from system_upgrade.helpers.system_image_flasher import DeviceImageFlash
 from system_upgrade.variables import (
@@ -23,8 +24,10 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
     unlocker_location = 'system_upgrade/helpers/' + unlocker
 
     def setUp(self):
-        self.dut_serial = sys.argv[1]
+        self.dut_serial = arguments.serial
+        self.extra_packages = arguments.packages
         self.setup_device(
+            ppa=arguments.ppa,
             package_list=PACKAGE_LIST,
             bootstrap=True,
             revision_number='-1'
@@ -73,10 +76,28 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
         self.run_command_on_target('./unlock_screen.py', user='phablet')
 
 
+def _parse_command_line_arguments():
+    parser = argparse.ArgumentParser(
+        description='Ubuntu system update test runner'
+    )
+    parser.add_argument(
+        'serial', metavar='SERIAL_NUMBER', type=str,
+        help='Serial numer of the device to run tests on.'
+    )
+    parser.add_argument(
+        '--ppa', type=str,
+        help='Launchpad ppa to add to the device before installing '
+                'test packages.'
+    )
+    parser.add_argument(
+        '--packages', type=str,
+        help='Names of extra packages to be installed on the test device '
+             'before running the tests.'
+    )
+        
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print('Please specify the serial number of the test device '
-              'for example:')
-        print('{} 04bf2c50e294d599'.format(sys.argv[0]))
-        sys.exit()
+    arguments = _parse_command_line_arguments()
     unittest.main(argv=[sys.argv[0]])
