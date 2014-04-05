@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
+import logging
 import sys
 import unittest
 
@@ -63,6 +64,9 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
         command = 'adb -s {} push {} {}'.format(
             self.dut_serial, source, location
         )
+
+        logger.info('Pushing files to target with command:')
+        logger.info(command)
         self.run_command_on_host(command)
 
     def delete_autopilot_test(self):
@@ -107,4 +111,6 @@ def _parse_command_line_arguments():
 
 if __name__ == '__main__':
     arguments = _parse_command_line_arguments()
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
     unittest.main(argv=[sys.argv[0]])

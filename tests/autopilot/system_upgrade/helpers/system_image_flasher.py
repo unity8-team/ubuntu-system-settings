@@ -5,9 +5,12 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
+import logging
+import os
 import subprocess
 import time
-import os
+
+logger = logging.getLogger(__name__)
 
 
 class DeviceImageFlash(object):
@@ -40,11 +43,12 @@ class DeviceImageFlash(object):
 
         return result
 
-    def run_command_on_host(self, command, str_to_list=True):
+    def run_command_on_host(self, command, str_to_list=True, **kwargs):
+        logger.info('Running command: {}'.format(command))
         if str_to_list is True:
             command = self.str_to_lst(command)
 
-        subprocess.call(command)
+        subprocess.call(command, **kwargs)
 
     def run_autopilot_test_on_target(self, test_suite, user='phablet'):
         test_command = \
@@ -53,10 +57,7 @@ class DeviceImageFlash(object):
         command = 'adb -s {} shell sudo -iu {} bash -ic "{}"'.format(
             self.dut_serial, user, test_command)
 
-        subprocess.call(
-            command,
-            shell=True,
-        )
+        subprocess.call(command, shell=True)
 
         self.run_command_on_host('adb -s {} pull {} /tmp'.format(
             self.dut_serial, self.log_path)
@@ -98,16 +99,27 @@ class DeviceImageFlash(object):
     def wait_for_device(self, timeout=60):
         command = 'adb -s {} wait-for-device'.format(self.dut_serial)
         self.run_command_on_host(command)
+        logger.info(
+            'Waiting {} seconds for the device to settle before '
+            'proceeding further.'.format(timeout)
+        )
         time.sleep(timeout)
+        logger.info('Just to be sure')
         self.run_command_on_host(command)
 
     def set_device_read_write(self):
         command = 'touch /userdata/.writable_image'
+        logger.info('Changing system to read/write.')
         self.run_command_on_target(command)
 
     def reboot_device(self):
+        wait = 10
         self.run_command_on_target('reboot')
-        time.sleep(10)
+        logger.info(
+            'Wating {} seconds to ensure target goes away from adb before '
+            ' waiting for it to come back'.format(wait)
+        )
+        time.sleep(wait)
         self.wait_for_device()
 
     def disable_intro_screen(self):
@@ -125,19 +137,27 @@ class DeviceImageFlash(object):
             command = \
                 'adb -s {} shell nmcli dev wifi connect ubuntu-qa-g-wpa-d '
             'password qalabwireless'.format(self.dut_serial)
+            logger.info('Setting up network on target.')
             self.run_command_on_host(command)
         else:
-            self.run_command_on_host('phablet-network -s {}'.format(
-                self.dut_serial)
+            command = 'phablet-network -s {}'.format(self.dut_serial)
+            logger.warning(
+                'Setting up network on target. you may need to '
+                'enter your password for "{}" to complete.'
             )
+            self.run_command_on_host(command)
 
     def add_apt_repository(self, ppa):
         command = 'add-apt-repository -y {}'.format(ppa)
+        logger.info('Adding ppa {} on target.'.format(ppa))
         self.run_command_on_target(command)
 
     def apt_get_update(self):
-        self.run_command_on_target('apt-get update')
+        command = 'apt-get update'
+        logger.info('Updating apt database.')
+        self.run_command_on_target(command)
 
     def apt_get_install(self, packages):
         command = 'apt-get -y -f --force-yes install {}'.format(packages)
+        logger.info('Installing required packages on target.')
         self.run_command_on_target(command)
