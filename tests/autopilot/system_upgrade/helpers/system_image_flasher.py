@@ -47,15 +47,17 @@ class DeviceImageFlash(object):
         test_command = \
             "autopilot run -f text -o /tmp/upgrade.log -v {}".format(
                 test_suite)
-        command = 'adb shell sudo -iu {} bash -ic "{}"'.format(
-            user, test_command)
+        command = 'adb -s {} shell sudo -iu {} bash -ic "{}"'.format(
+            self.dut_serial, user, test_command)
 
         subprocess.call(
             command,
             shell=True,
         )
 
-        self.run_command_on_host('adb pull {} /tmp'.format(self.log_path))
+        self.run_command_on_host('adb -s {} pull {} /tmp'.format(
+            self.dut_serial, self.log_path)
+        )
         self.addCleanup(os.remove, self.log_path)
 
     def flash_device(
@@ -68,6 +70,8 @@ class DeviceImageFlash(object):
         command = []
         command.append('phablet-flash')
         command.append('ubuntu-system')
+        command.append('--serial')
+        command.append(self.dut_serial)
         command.append('--channel')
         command.append(channel)
         if revision_number is not None:
@@ -80,16 +84,16 @@ class DeviceImageFlash(object):
 
     def run_command_on_target(self, command, user=None, shell=False):
         if user == 'phablet':
-            command = 'adb shell sudo -iu {} bash -ic "{}"'.format(
-                user, command
+            command = 'adb -s {} shell sudo -iu {} bash -ic "{}"'.format(
+                self.dut_serial, user, command
             )
             self.run_command_on_host(command)
         elif user is None:
-            command = 'adb shell {}'.format(command)
+            command = 'adb -s {} shell {}'.format(self.dut_serial, command)
             self.run_command_on_host(command)
 
     def wait_for_device(self, timeout=60):
-        command = 'adb wait-for-devices'
+        command = 'adb -s {} wait-for-device'.format(self.dut_serial)
         self.run_command_on_host(command)
         time.sleep(timeout)
         self.run_command_on_host(command)

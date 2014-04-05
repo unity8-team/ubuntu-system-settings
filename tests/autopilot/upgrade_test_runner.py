@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import unittest
+import sys
 
 from system_upgrade.helpers.system_image_flasher import DeviceImageFlash
 from system_upgrade.variables import (
@@ -22,6 +23,7 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
     unlocker_location = 'system_upgrade/helpers/' + unlocker
 
     def setUp(self):
+        self.dut_serial = sys.argv[1]
         self.setup_device(
             package_list=PACKAGE_LIST,
             bootstrap=True,
@@ -54,7 +56,9 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
 
     def push_files_to_device(self, source, location):
         self.addCleanup(self.delete_autopilot_test)
-        command = 'adb push {} {}'.format(source, location)
+        command = 'adb -s {} push {} {}'.format(
+            self.dut_serial, source, location
+        )
         self.run_command_on_host(command)
 
     def delete_autopilot_test(self):
@@ -70,4 +74,9 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    if len(sys.argv) < 2:
+        print('Please specify the serial number of the test device '
+              'for example:')
+        print('{} 04bf2c50e294d599'.format(sys.argv[0]))
+        sys.exit()
+    unittest.main(argv=[sys.argv[0]])
