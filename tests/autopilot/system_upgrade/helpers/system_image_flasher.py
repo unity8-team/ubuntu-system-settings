@@ -100,7 +100,7 @@ class DeviceImageFlash(object):
         command = 'adb -s {} wait-for-device'.format(self.dut_serial)
         self.run_command_on_host(command)
         logger.info(
-            'Waiting {} seconds for the device to settle before '
+            'Waiting {} seconds for the device to settle before'
             'proceeding further.'.format(timeout)
         )
         time.sleep(timeout)
@@ -134,9 +134,9 @@ class DeviceImageFlash(object):
 
     def setup_network(self):
         if self.running_in_ci:
-            command = \
-                'adb -s {} shell nmcli dev wifi connect ubuntu-qa-g-wpa-d '
-            'password qalabwireless'.format(self.dut_serial)
+            command = ('adb -s {} shell nmcli dev wifi'
+                       'connect ubuntu-qa-g-wpa-d password'
+                       'qalabwireless'.format(self.dut_serial))
             logger.info('Setting up network on target.')
             self.run_command_on_host(command)
         else:
