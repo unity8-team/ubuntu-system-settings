@@ -85,9 +85,9 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
         self.push_files_to_device(
             'system_upgrade/temporary.patch', '/home/phablet'
         )
-        command = ('adb -s {} shell patch /usr/share/ubuntu/settings/system/'
-                   'qml-plugins/system-update/PageComponent.qml '
-                   '/home/phablet/temporary.patch'.format(self.dut_serial))
+        command = ('patch /usr/share/ubuntu/settings/system/qml-plugins/'
+                   'system-update/PageComponent.qml /home/phablet/'
+                   'temporary.patch')
         self.run_command_on_target(command)
         command = command + ' -R'
         self.addCleanup(self.run_command_on_target, command)
