@@ -87,14 +87,14 @@ def _parse_command_line_arguments():
     parser.add_argument(
         '--ppa', type=str,
         help='Launchpad ppa to add to the device before installing '
-                'test packages.'
+             'test packages.'
     )
     parser.add_argument(
         '--packages', type=str,
         help='Names of extra packages to be installed on the test device '
              'before running the tests.'
     )
-        
+
     return parser.parse_args()
 
 
