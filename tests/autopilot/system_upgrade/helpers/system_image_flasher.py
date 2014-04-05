@@ -121,7 +121,15 @@ class DeviceImageFlash(object):
         self.run_command_on_target('touch /.intro_off')
 
     def setup_network(self):
-        self.run_command_on_host('phablet-network')
+        if self.running_in_ci:
+            command = \
+                'adb -s {} shell nmcli dev wifi connect ubuntu-qa-g-wpa-d '
+            'password qalabwireless'.format(self.dut_serial)
+            self.run_command_on_host(command)
+        else:
+            self.run_command_on_host('phablet-network -s {}'.format(
+                self.dut_serial)
+            )
 
     def add_apt_repository(self, ppa):
         command = 'add-apt-repository -y {}'.format(ppa)

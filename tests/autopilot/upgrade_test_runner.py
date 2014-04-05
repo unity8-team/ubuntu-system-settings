@@ -26,6 +26,7 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
     def setUp(self):
         self.dut_serial = arguments.serial
         self.extra_packages = arguments.packages
+        self.running_in_ci = arguments.ci
         self.setup_device(
             ppa=arguments.ppa,
             package_list=PACKAGE_LIST,
@@ -87,12 +88,18 @@ def _parse_command_line_arguments():
     parser.add_argument(
         '--ppa', type=str,
         help='Launchpad ppa to add to the device before installing '
-             'test packages.'
+             'test packages. example: ppa:test/ppa'
     )
     parser.add_argument(
         '--packages', type=str,
         help='Names of extra packages to be installed on the test device '
              'before running the tests.'
+    )
+    parser.add_argument(
+        '--ci', metavar='BOOLEAN', default=False,
+        help='Specify whether the test suite is running in the Canonical '
+             'CI lab so that the network connection could be established '
+             'with the appropriate Wi-Fi network.'
     )
 
     return parser.parse_args()
