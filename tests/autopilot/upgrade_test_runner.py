@@ -2,7 +2,9 @@
 
 import argparse
 import logging
+import os
 import sys
+import time
 import unittest
 
 from system_upgrade.helpers.system_image_flasher import DeviceImageFlash
@@ -47,7 +49,12 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
         log_file = self.open_log_file()
         self.assertTrue(log_file.endswith('OK\n'))
 
-    def open_log_file(self):
+    def open_log_file(self, retries=10):        
+        while not os.path.exists(self.log_path) and retries > 0:
+            time.sleep(1)
+            retries = retries - 1
+        else:
+            raise IOError('no such file or directory {}'.format(self.log_path))
         log_file = open(self.log_path, 'r')
         self.addCleanup(log_file.close)
         return log_file.read()
