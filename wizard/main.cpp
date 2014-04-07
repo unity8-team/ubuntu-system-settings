@@ -82,10 +82,10 @@ int startShell(int argc, const char** argv, void* server)
     QQuickView* view = new QQuickView();
     view->setResizeMode(QQuickView::SizeRootObjectToView);
     view->setTitle("Qml Phone Shell");
-    view->engine()->setBaseUrl(QUrl::fromLocalFile(::qmlDirectory()));
-    if (args.contains(QLatin1String("-frameless"))) {
-        view->setFlags(Qt::FramelessWindowHint);
-    }
+
+    QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
+    if (rootDir.isEmpty())
+        rootDir = WIZARD_ROOT;
 
     QPlatformNativeInterface* nativeInterface = QGuiApplication::platformNativeInterface();
     /* Shell is declared as a system session so that it always receives all
@@ -96,8 +96,6 @@ int startShell(int argc, const char** argv, void* server)
     nativeInterface->setProperty("ubuntuSessionType", 1);
     view->setProperty("role", 2); // INDICATOR_ACTOR_ROLE
 
-    prependImportPaths(view->engine(), ::overrideImportPaths());
-    appendImportPaths(view->engine(), ::fallbackImportPaths());
 
     QStringList importPaths = view->engine()->importPathList();
     importPaths.replaceInStrings(QRegExp("qt5/imports$"), "qt5/imports/Unity-Mir");
@@ -108,10 +106,6 @@ int startShell(int argc, const char** argv, void* server)
     view->rootContext()->setContextProperty("pageList", &pageList);
     view->setSource(QUrl(rootDir + "/qml/main.qml"));
 
-    QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
-    if (rootDir.isEmpty())
-        rootDir = WIZARD_ROOT;
-
 //    QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);
 
     view->setColor("transparent");
@@ -120,7 +114,6 @@ int startShell(int argc, const char** argv, void* server)
     int result = application->exec();
 
     delete view;
-    delete mouseTouchAdaptor;
     delete application;
 
     return result;

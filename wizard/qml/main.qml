@@ -26,10 +26,6 @@ Item {
     width: units.gu(40)
     height: units.gu(71)
 
-    OSKController {
-        anchors.fill: parent
-    }
-
     Component.onCompleted: {
         Theme.name = "Ubuntu.Components.Themes.SuruGradient"
         i18n.domain = "ubuntu-system-settings"
@@ -40,6 +36,10 @@ Item {
         headerColor: "#57365E"
         backgroundColor: "#A55263"
         footerColor: "#D75669"
+
+        OSKController {
+            anchors.fill: parent
+        }
 
         GSettings {
             id: background
