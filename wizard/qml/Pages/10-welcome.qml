@@ -18,16 +18,19 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
+import Ubuntu.SystemSettings.Phone 1.0
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
     title: i18n.tr("Hello!")
     forwardButtonSourceComponent: forwardButton
 
-    readonly property bool simCardPresent: false // TODO: implement this
-
     UbuntuLanguagePlugin {
         id: plugin
+    }
+
+    SimManager {
+        id: simManager
     }
 
     Item {
@@ -75,7 +78,7 @@ LocalComponents.Page {
             text: i18n.tr("Continue")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
-                if (simCardPresent)
+                if (simManager.present)
                     pageStack.next()
                 else
                     pageStack.push(Qt.resolvedUrl("no-sim.qml"))

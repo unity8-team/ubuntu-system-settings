@@ -3,7 +3,6 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ../../../plugins/system-update)
 add_definitions(-DTESTS)
 
 # Need to get libsignon/accounts here, as they get exposed in headers
-find_package (PkgConfig REQUIRED)
 pkg_check_modules(UBUNTUONEAUTH REQUIRED ubuntuoneauth-2.0)
 add_definitions(${UBUNTUONEAUTH_CFLAGS} ${UBUNTUONEAUTH_CFLAGS_OTHER})
 
