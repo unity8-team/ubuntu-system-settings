@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2014 Canonical Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -26,40 +26,34 @@
 #include <libintl.h>
 #include <dlfcn.h>
 #include <csignal>
+#include <unity-mir/qmirserver.h>
 
 #include "PageList.h"
 
-// local
-#include <paths.h>
+void start_xsession()
+{
+    // When we get a request to stop, we don't quit but rather start xsession
+    // in the background.  When xsession finishes loading, we'll be stopped
+    // by upstart.
 
-#include <unity-mir/qmirserver.h>
+    // But first, stop maliit-server, it needs to be started by unity8.
+    // This was an OSK bug in October, need to discover if it is still a
+    // problem, especially once we become a system upstart job.
+    if (system("stop maliit-server") != 0)
+    {} // ignore any errors
 
-//void start_xsession()
-//{
-//    // When we get a request to stop, we don't quit but rather start xsession
-//    // in the background.  When xsession finishes loading, we'll be stopped
-//    // by upstart.
-
-//    // But first, stop maliit-server, it needs to be started by unity8.
-//    // This was an OSK bug in October, need to discover if it is still a
-//    // problem, especially once we become a system upstart job.
-//    if (system("stop maliit-server") != 0)
-//    {} // ignore any errors
-
-//    // Now resume starting xsession, which we interrupted with our upstart job
-//    QString command = "initctl emit xsession";
-//    command += " SESSION=" + qgetenv("DESKTOP_SESSION");
-//    command += " SESSIONTYPE=" + qgetenv("SESSIONTYPE");
-//    command += " &";
-//    if (system(command.toLatin1().data()) != 0)
-//        QGuiApplication::quit(); // just quit if we can't start xsession
-//}
-
-// Qt
+    // Now resume starting xsession, which we interrupted with our upstart job
+    QString command = "initctl emit xsession";
+    command += " SESSION=" + qgetenv("DESKTOP_SESSION");
+    command += " SESSIONTYPE=" + qgetenv("SESSIONTYPE");
+    command += " &";
+    if (system(command.toLatin1().data()) != 0)
+        QGuiApplication::quit(); // just quit if we can't start xsession
+}
 
 int startShell(int argc, const char** argv, void* server)
 {
-    QGuiApplication::setApplicationName("Unity 8");
+    QGuiApplication::setApplicationName("System Settings Wizard");
     QGuiApplication *application;
 
     QLibrary unityMir("unity-mir", 1);
@@ -77,15 +71,9 @@ int startShell(int argc, const char** argv, void* server)
     bindtextdomain(I18N_DOMAIN, NULL);
     textdomain(I18N_DOMAIN);
 
-    PageList pageList;
-
     QQuickView* view = new QQuickView();
     view->setResizeMode(QQuickView::SizeRootObjectToView);
-    view->setTitle("Qml Phone Shell");
-
-    QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
-    if (rootDir.isEmpty())
-        rootDir = WIZARD_ROOT;
+    view->setTitle("System Settings Wizard");
 
     QPlatformNativeInterface* nativeInterface = QGuiApplication::platformNativeInterface();
     /* Shell is declared as a system session so that it always receives all
@@ -94,8 +82,13 @@ int startShell(int argc, const char** argv, void* server)
        when it becomes available.
     */
     nativeInterface->setProperty("ubuntuSessionType", 1);
-    view->setProperty("role", 2); // INDICATOR_ACTOR_ROLE
+//    view->setProperty("role", 2); // INDICATOR_ACTOR_ROLE
 
+    QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
+    if (rootDir.isEmpty())
+        rootDir = WIZARD_ROOT;
+
+    PageList pageList;
 
     QStringList importPaths = view->engine()->importPathList();
     importPaths.replaceInStrings(QRegExp("qt5/imports$"), "qt5/imports/Unity-Mir");
@@ -105,10 +98,10 @@ int startShell(int argc, const char** argv, void* server)
     view->engine()->addImportPath(SHELL_PLUGINDIR);
     view->rootContext()->setContextProperty("pageList", &pageList);
     view->setSource(QUrl(rootDir + "/qml/main.qml"));
-
-//    QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);
-
     view->setColor("transparent");
+
+    QObject::connect(view->engine(), &QQmlEngine::quit, start_xsession);
+
     view->showFullScreen();
 
     int result = application->exec();
