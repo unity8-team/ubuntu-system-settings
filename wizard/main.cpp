@@ -16,64 +16,6 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libintl.h>
-#include <QGuiApplication>
-#include <QQmlContext>
-#include <QUrl>
-#include <QQuickView>
-#include <QtQml>
-
-#include "PageList.h"
-
-void start_xsession()
-{
-    // When we get a request to stop, we don't quit but rather start xsession
-    // in the background.  When xsession finishes loading, we'll be stopped
-    // by upstart.
-
-    // But first, stop maliit-server, it needs to be started by unity8.
-    // This was an OSK bug in October, need to discover if it is still a
-    // problem, especially once we become a system upstart job.
-    if (system("stop maliit-server") != 0)
-    {} // ignore any errors
-
-    // Now resume starting xsession, which we interrupted with our upstart job
-    QString command = "initctl emit xsession";
-    command += " SESSION=" + qgetenv("DESKTOP_SESSION");
-    command += " SESSIONTYPE=" + qgetenv("SESSIONTYPE");
-    command += " &";
-    if (system(command.toLatin1().data()) != 0)
-        QGuiApplication::quit(); // just quit if we can't start xsession
-}
-
-int main(int argc, char **argv)
-{
-    QGuiApplication app(argc, argv);
-
-    bindtextdomain(I18N_DOMAIN, NULL);
-    textdomain(I18N_DOMAIN);
-
-    QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
-    if (rootDir.isEmpty())
-        rootDir = WIZARD_ROOT;
-
-    PageList pageList;
-    QQuickView view;
-    QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    view.engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
-    view.engine()->addImportPath(PLUGIN_QML_DIR);
-    view.engine()->addImportPath(SHELL_PLUGINDIR);
-    view.rootContext()->setContextProperty("pageList", &pageList);
-    view.setSource(QUrl(rootDir + "/qml/main.qml"));
-//    view.show();
-    view.showFullScreen();
-
-    return app.exec();
-}
-
-
-// Qt
 #include <QtQuick/QQuickView>
 #include <QtGui/QGuiApplication>
 #include <QtQml/QQmlEngine>
@@ -85,6 +27,8 @@ int main(int argc, char **argv)
 #include <dlfcn.h>
 #include <csignal>
 
+#include "PageList.h"
+
 // local
 #include <paths.h>
 #include "MouseTouchAdaptor.h"
@@ -92,6 +36,28 @@ int main(int argc, char **argv)
 
 #include <unity-mir/qmirserver.h>
 
+//void start_xsession()
+//{
+//    // When we get a request to stop, we don't quit but rather start xsession
+//    // in the background.  When xsession finishes loading, we'll be stopped
+//    // by upstart.
+
+//    // But first, stop maliit-server, it needs to be started by unity8.
+//    // This was an OSK bug in October, need to discover if it is still a
+//    // problem, especially once we become a system upstart job.
+//    if (system("stop maliit-server") != 0)
+//    {} // ignore any errors
+
+//    // Now resume starting xsession, which we interrupted with our upstart job
+//    QString command = "initctl emit xsession";
+//    command += " SESSION=" + qgetenv("DESKTOP_SESSION");
+//    command += " SESSIONTYPE=" + qgetenv("SESSIONTYPE");
+//    command += " &";
+//    if (system(command.toLatin1().data()) != 0)
+//        QGuiApplication::quit(); // just quit if we can't start xsession
+//}
+
+// Qt
 
 int startShell(int argc, const char** argv, void* server)
 {
@@ -110,7 +76,10 @@ int startShell(int argc, const char** argv, void* server)
 
     application = createQMirServerApplication(argc, argv, server);
 
-    bindtextdomain("unity8", translationDirectory().toUtf8().data());
+    bindtextdomain(I18N_DOMAIN, NULL);
+    textdomain(I18N_DOMAIN);
+
+    PageList pageList;
 
     QQuickView* view = new QQuickView();
     view->setResizeMode(QQuickView::SizeRootObjectToView);
@@ -129,17 +98,25 @@ int startShell(int argc, const char** argv, void* server)
     nativeInterface->setProperty("ubuntuSessionType", 1);
     view->setProperty("role", 2); // INDICATOR_ACTOR_ROLE
 
-    QUrl source(::qmlDirectory()+"Shell.qml");
     prependImportPaths(view->engine(), ::overrideImportPaths());
     appendImportPaths(view->engine(), ::fallbackImportPaths());
 
     QStringList importPaths = view->engine()->importPathList();
     importPaths.replaceInStrings(QRegExp("qt5/imports$"), "qt5/imports/Unity-Mir");
     view->engine()->setImportPathList(importPaths);
+    view->engine()->addImportPath(PLUGIN_PRIVATE_MODULE_DIR);
+    view->engine()->addImportPath(PLUGIN_QML_DIR);
+    view->engine()->addImportPath(SHELL_PLUGINDIR);
+    view->rootContext()->setContextProperty("pageList", &pageList);
+    view->setSource(QUrl(rootDir + "/qml/main.qml"));
 
-    view->setSource(source);
+    QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
+    if (rootDir.isEmpty())
+        rootDir = WIZARD_ROOT;
+
+//    QObject::connect(view.engine(), &QQmlEngine::quit, start_xsession);
+
     view->setColor("transparent");
-
     view->showFullScreen();
 
     int result = application->exec();

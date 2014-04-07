@@ -1,3 +1,10 @@
+pkg_check_modules(UNITY-MIR REQUIRED unity-mir)
+
+include_directories(
+    ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
+    ${UNITY-MIR_INCLUDE_DIRS}
+)
+
 add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
 add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
 add_definitions(-DPLUGIN_MANIFEST_DIR="${PLUGIN_MANIFEST_DIR}")
