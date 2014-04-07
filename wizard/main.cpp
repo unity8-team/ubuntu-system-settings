@@ -31,8 +31,6 @@
 
 // local
 #include <paths.h>
-#include "MouseTouchAdaptor.h"
-#include "ApplicationArguments.h"
 
 #include <unity-mir/qmirserver.h>
 
