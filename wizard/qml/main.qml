@@ -37,10 +37,6 @@ Item {
         backgroundColor: "#A55263"
         footerColor: "#D75669"
 
-        OSKController {
-            anchors.fill: parent
-        }
-
         GSettings {
             id: background
             schema.id: "org.gnome.desktop.background"
@@ -72,6 +68,10 @@ Item {
 
             Component.onCompleted: next()
         }
+    }
+
+    OSKController {
+        anchors.fill: parent
     }
 
     Notifications {
