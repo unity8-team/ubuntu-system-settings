@@ -50,12 +50,10 @@ class SystemImageUpgrader(unittest.TestCase, DeviceImageFlash):
         self.assertTrue(log_file.endswith('OK\n'))
 
     def open_log_file(self, retries=10):        
-        while not os.path.exists(self.log_path) and retries > 0:
+        while not os.path.exists(self.result_log) and retries > 0:
             time.sleep(1)
             retries = retries - 1
-        else:
-            raise IOError('no such file or directory {}'.format(self.log_path))
-        log_file = open(self.log_path, 'r')
+        log_file = open(self.result_log, 'r')
         self.addCleanup(log_file.close)
         return log_file.read()
 

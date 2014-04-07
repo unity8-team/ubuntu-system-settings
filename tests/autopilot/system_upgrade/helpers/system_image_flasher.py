@@ -9,6 +9,7 @@ import logging
 import os
 import subprocess
 import time
+import tempfile
 
 logger = logging.getLogger(__name__)
 
@@ -51,18 +52,20 @@ class DeviceImageFlash(object):
         subprocess.call(command, **kwargs)
 
     def run_autopilot_test_on_target(self, test_suite, user='phablet'):
+        self.result_log = tempfile.mkstemp()[1]
+        autopilot_log_target = '/tmp/upgrade.log'
         test_command = \
-            "autopilot run -f text -o /tmp/upgrade.log -v {}".format(
-                test_suite)
+            "autopilot run -f text -o {} -v {}".format(
+                autopilot_log_target, test_suite)
         command = 'adb -s {} shell sudo -iu {} bash -ic "{}"'.format(
             self.dut_serial, user, test_command)
 
         subprocess.call(command, shell=True)
 
-        self.run_command_on_host('adb -s {} pull {} /tmp'.format(
-            self.dut_serial, self.log_path)
+        self.run_command_on_host('adb -s {} pull {} {}'.format(
+            self.dut_serial, autopilot_log_target, self.result_log)
         )
-        self.addCleanup(os.remove, self.log_path)
+        self.addCleanup(os.remove, self.result_log)
 
     def flash_device(
             self,
