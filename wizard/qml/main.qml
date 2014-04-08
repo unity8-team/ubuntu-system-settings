@@ -72,6 +72,7 @@ Item {
 
     OSKController {
         anchors.fill: parent
+        z: 100
     }
 
     Notifications {
