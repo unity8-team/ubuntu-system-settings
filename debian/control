@@ -20,6 +20,7 @@ Build-Depends: dbus-test-runner,
                pkg-config,
                qt5-default,
                qtbase5-dev,
+               qtbase5-private-dev,
                qtdeclarative5-dev,
                libapt-pkg-dev,
                libubuntuoneauth-2.0-dev,
@@ -29,7 +30,8 @@ Build-Depends: dbus-test-runner,
                cmake,
                pep8,
                pyflakes,
-               libunity-api-dev
+               libunity-api-dev,
+               libunity-mir-dev
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
@@ -66,6 +68,7 @@ Depends: ${misc:Depends},
          python3-gi,
          python3-dbus,
          libunity-api0,
+         libunity-mir1,
          gir1.2-glib-2.0
 Recommends: suru-icon-theme,
             ubuntu-system-settings-online-accounts,

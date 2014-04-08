@@ -39,9 +39,9 @@ void start_xsession()
     // But first, stop maliit-server, it needs to be started by unity8.
     // This was an OSK bug in October, need to discover if it is still a
     // problem, especially once we become a system upstart job.
-    if (system("stop maliit-server") != 0) {
-        qDebug() << "there was an error stopping maliit-server";
-    }
+//    if (system("stop maliit-server") != 0) {
+//        qDebug() << "there was an error stopping maliit-server";
+//    }
 
     // Now resume starting xsession, which we interrupted with our upstart job
     QString command = "initctl emit xsession";
