@@ -11,7 +11,6 @@ import subprocess
 from gi.repository import GLib
 
 from autopilot.matchers import Eventually
-from autopilot.platform import model
 from testtools import skipIf
 from testtools.matchers import Equals, NotEquals
 
@@ -30,11 +29,15 @@ class AboutTestCase(AboutBaseTestCase):
 
     def _get_imei_from_dbus(self):
         bus = dbus.SystemBus()
-        manager = dbus.Interface(
-            bus.get_object('org.ofono', '/'), 'org.ofono.Manager'
-        )
-        modems = manager.GetModems()
+        try:
+            manager = dbus.Interface(
+                bus.get_object('org.ofono', '/'), 'org.ofono.Manager'
+            )
+        except dbus.exceptions.DBusException:
+            # oFono interface not found, probably its a desktop.
+            return None
 
+        modems = manager.GetModems()
         for path, properties in modems:
             return properties['Serial']
 
@@ -45,7 +48,11 @@ class AboutTestCase(AboutBaseTestCase):
         return '{} {}'.format(os_id.strip(), os_release.strip())
 
     def _get_device_serial_number(self):
-        return subprocess.check_output(['getprop', 'ro.serialno']).strip()
+        try:
+            return subprocess.check_output(['getprop', 'ro.serialno']).strip()
+        except OSError:
+            # getprop is only available on android hardware.
+            return None
 
     def _get_device_manufacturer_and_model(self):
         manufacturer = subprocess.check_output(
@@ -74,8 +81,9 @@ class AboutTestCase(AboutBaseTestCase):
     def test_serial(self):
         """Checks whether the UI is showing the correct serial number."""
         item = self.about_page.select_single(objectName='serialItem')
+        serial = self._get_device_serial_number()
 
-        if model() == 'Desktop':
+        if not serial:
             self.assertThat(item.visible, Equals(False))
         else:
             self.assertThat(
@@ -86,11 +94,12 @@ class AboutTestCase(AboutBaseTestCase):
         """Checks whether the UI is exposing the right IMEI."""
         imei_item = self.about_page.wait_select_single(
             objectName='imeiItem')
+        imei_ofono = self._get_imei_from_dbus()
 
-        if model() == 'Desktop':
+        if not imei_ofono:
             self.assertThat(imei_item.visible, Equals(False))
         else:
-            self.assertEquals(imei_item.value, self._get_imei_from_dbus())
+            self.assertEquals(imei_item.value, imei_ofono)
 
     def test_settings_show_correct_version_of_the_os(self):
         """Ensure the UI is showing the correct version of the OS."""
