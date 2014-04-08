@@ -76,7 +76,7 @@ int startShell(int argc, const char** argv, void* server)
 
     QQuickView* view = new QQuickView();
     view->setResizeMode(QQuickView::SizeRootObjectToView);
-    view->setTitle("System Settings Wizard");
+    view->setTitle("Qml Phone Shell"); // Fake to be the shell
 
     QPlatformNativeInterface* nativeInterface = QGuiApplication::platformNativeInterface();
     /* Shell is declared as a system session so that it always receives all
