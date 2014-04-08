@@ -7,11 +7,11 @@
 
 import os
 import subprocess
+import unittest
 
 from gi.repository import GLib
 
 from autopilot.matchers import Eventually
-from autopilot.platform import model
 from testtools import skipIf
 from testtools.matchers import Equals, NotEquals
 
@@ -173,10 +173,9 @@ class StorageTestCase(StorageBaseTestCase):
         """ Checks storage item """
         self.assert_space_item('usedByUbuntuItem', _('Used by Ubuntu'))
 
-    @skipIf(
-        model() == 'Desktop',
-        'Disk calculation can take a long time on desktop depending on the '
-        'space used by Ubuntu. bug 1304328'
+    @unittest.skip(
+        'Disk calculation can take a while depending on different factors '
+        'we dont want to wait for it to calculate.'
     )
     def test_space_used_by_movies(self):
         """ Checks whether space shown to be used by movies is
@@ -188,10 +187,9 @@ class StorageTestCase(StorageBaseTestCase):
 
         self.assertThat(movie_space_in_ui, Eventually(Equals(movie_space)))
 
-    @skipIf(
-        model() == 'Desktop',
-        'Disk calculation can take a long time on desktop depending on the '
-        'space used by Ubuntu. bug 1304328'
+    @unittest.skip(
+        'Disk calculation can take a while depending on different factors '
+        'we dont want to wait for it to calculate.'
     )
     def test_space_used_by_music(self):
         """ Checks whether space shown to be used by music is
@@ -203,10 +201,9 @@ class StorageTestCase(StorageBaseTestCase):
 
         self.assertThat(music_space_in_ui, Eventually(Equals(music_space)))
 
-    @skipIf(
-        model() == 'Desktop',
-        'Disk calculation can take a long time on desktop depending on the '
-        'space used by Ubuntu. bug 1304328'
+    @unittest.skip(
+        'Disk calculation can take a while depending on different factors '
+        'we dont want to wait for it to calculate.'
     )
     def test_space_used_by_pictures(self):
         """ Checks whether space shown to be used by pictures is
