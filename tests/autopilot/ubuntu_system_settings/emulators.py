@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 
 class UpdatesPage(object):
 
-    def __init__(self, *args):
-        super(UpdatesPage, self).__init__(*args)
+    def __init__(self, app):
+        self.app = app
 
     def _get_updates_view(self):
         return self.app.select_single(
@@ -42,7 +42,7 @@ class UpdatesPage(object):
 
         dialog.opacity.wait_for(1.0)
 
-    def _get_installing_update_screen(self):
+    def get_installing_update_screen(self):
         return self.app.wait_select_single(
             'QQuickRectangle', objectName='installingImageUpdate'
         )
