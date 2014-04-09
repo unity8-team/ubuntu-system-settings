@@ -38,7 +38,7 @@ Item {
         Image {
             id: icon
             anchors.horizontalCenter: parent.horizontalCenter
-            width: units.gu(6)
+            width: units.gu(5)
             height: width
             source: model.icon
         }
