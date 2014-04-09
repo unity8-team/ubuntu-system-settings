@@ -84,8 +84,12 @@ int startShell(int argc, const char** argv, void* server)
 
     int result = application->exec();
 
+                qDebug() << "before delete";
+
     delete view;
     delete application;
+
+            qDebug() << "after delete";
 
     return result;
 }
