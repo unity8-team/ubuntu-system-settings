@@ -30,30 +30,6 @@
 
 #include "PageList.h"
 
-void start_xsession()
-{
-    // When we get a request to stop, we don't quit but rather start xsession
-    // in the background. When xsession finishes loading, we'll be stopped
-    // by upstart.
-
-    // But first, stop maliit-server, it needs to be started by unity8.
-    // This was an OSK bug in October, need to discover if it is still a
-    // problem, especially once we become a system upstart job.
-//    if (system("stop maliit-server") != 0) {
-//        qDebug() << "there was an error stopping maliit-server";
-//    }
-
-    // Now resume starting xsession, which we interrupted with our upstart job
-    QString command = "initctl emit xsession";
-    command += " SESSION=" + qgetenv("DESKTOP_SESSION");
-    command += " SESSIONTYPE=" + qgetenv("SESSIONTYPE");
-    command += " &";
-    if (system(command.toLatin1().data()) != 0) {
-        qDebug() << "unable to start xsession";
-        QGuiApplication::quit(); // just quit if we can't start xsession
-    }
-}
-
 int startShell(int argc, const char** argv, void* server)
 {
     QGuiApplication::setApplicationName("System Settings Wizard");
@@ -85,7 +61,6 @@ int startShell(int argc, const char** argv, void* server)
        when it becomes available.
     */
     nativeInterface->setProperty("ubuntuSessionType", 1);
-//    view->setProperty("role", 2); // INDICATOR_ACTOR_ROLE
 
     QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
     if (rootDir.isEmpty())
@@ -103,7 +78,7 @@ int startShell(int argc, const char** argv, void* server)
     view->setSource(QUrl(rootDir + "/qml/main.qml"));
     view->setColor("transparent");
 
-    QObject::connect(view->engine(), &QQmlEngine::quit, start_xsession);
+    QObject::connect(view->engine(), SIGNAL(quit()), application, SLOT(quit()));
 
     view->showFullScreen();
 

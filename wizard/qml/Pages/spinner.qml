@@ -23,7 +23,10 @@ LocalComponents.Page {
 
     hasBackButton: false
 
-    Component.onCompleted: Qt.quit()
+    Component.onCompleted:  {
+        console.log("quit");
+        Qt.quit()
+    }
 
     Item {
         id: content
