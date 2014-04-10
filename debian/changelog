@@ -1,3 +1,9 @@
+ubuntu-system-settings (0.2+14.04.20140402-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Bump version for new package ubuntu-system-settings-wizard
+
+ -- Michael Terry <mterry@ubuntu.com>  Thu, 10 Apr 2014 15:21:31 -0400
+
 ubuntu-system-settings (0.1+14.04.20140402-0ubuntu1) trusty; urgency=low
 
   [ Andrea Cimitan ]

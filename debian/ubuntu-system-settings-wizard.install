@@ -1,0 +1,3 @@
+usr/bin/system-settings-wizard
+usr/share/ubuntu/settings/wizard
+usr/share/upstart/sessions/ubuntu-system-settings-wizard.conf

@@ -41,6 +41,6 @@ qt5_use_modules(system-settings-wizard Core Gui Quick Qml)
 add_subdirectory(Utils)
 
 install(TARGETS system-settings-wizard RUNTIME DESTINATION bin)
-install(FILES ubuntu-system-settings-wizard.conf DESTINATION share/upstart)
+install(FILES ubuntu-system-settings-wizard.conf DESTINATION share/upstart/sessions)
 
 install(DIRECTORY qml DESTINATION ${WIZARD_ROOT})

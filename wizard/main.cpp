@@ -124,8 +124,5 @@ int main(int argc, const char *argv[])
         return 3;
     }
 
-    int result =  runWithClient(mirServer, startShell);
-    qDebug() << result;
-
-    return result;
+    return runWithClient(mirServer, startShell);
 }

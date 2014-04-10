@@ -19,7 +19,7 @@ import GSettings 1.0
 import Ubuntu.Components 0.1
 import Unity.Application 0.1
 import Unity.Notifications 1.0 as NotificationBackend
-import "Notifications"
+import "file:///usr/share/unity8/Notifications" as Notifications
 
 Item {
     id: root
@@ -75,7 +75,7 @@ Item {
         z: 100
     }
 
-    Notifications {
+    Notifications.Notifications {
         id: notifications
         model: NotificationBackend.Model
         margin: units.gu(1)
