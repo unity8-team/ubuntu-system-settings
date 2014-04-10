@@ -17,6 +17,8 @@ Build-Depends: dbus-test-runner,
                libplatform-api-headers,
                libqmenumodel-dev,
                libtimezonemap1-dev (>= 0.4.1),
+               libunity-api-dev,
+               libunity-mir-dev,
                libupower-glib-dev,
                pkg-config,
                qt5-default,
@@ -31,8 +33,6 @@ Build-Depends: dbus-test-runner,
                cmake,
                pep8,
                pyflakes,
-               libunity-api-dev,
-               libunity-mir-dev
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging

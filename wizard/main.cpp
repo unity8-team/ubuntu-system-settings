@@ -28,25 +28,16 @@
 #include <csignal>
 #include <ubuntu/application/ui/session.h>
 #include <unity-mir/qmirserver.h>
+#include <unity-mir/qmirserverapplication.h>
 
 #include "PageList.h"
 
-int startShell(int argc, const char** argv, void* server)
+int startShell(int argc, const char** argv, ShellServerConfiguration* server)
 {
     QGuiApplication::setApplicationName("System Settings Wizard");
     QGuiApplication *application;
 
-    QLibrary unityMir("unity-mir", 1);
-    unityMir.load();
-
-    typedef QGuiApplication* (*createServerApplication_t)(int&, const char **, void*);
-    createServerApplication_t createQMirServerApplication = (createServerApplication_t) unityMir.resolve("createQMirServerApplication");
-    if (!createQMirServerApplication) {
-        qDebug() << "unable to resolve symbol: createQMirServerApplication";
-        return 4;
-    }
-
-    application = createQMirServerApplication(argc, argv, server);
+    application = createQMirServerApplication(argc, (char**)argv, server);
 
     bindtextdomain(I18N_DOMAIN, NULL);
     textdomain(I18N_DOMAIN);
@@ -95,34 +86,7 @@ int main(int argc, const char *argv[])
     setenv("QML_FORCE_THREADED_RENDERER", "1", 1);
     setenv("QML_FIXED_ANIMATION_STEP", "1", 1);
 
-    // For ubuntumirserver/ubuntumirclient
     setenv("QT_QPA_PLATFORM", "ubuntumirserver", 1);
-
-    // If we use unity-mir directly, we automatically link to the Mir-server
-    // platform-api bindings, which result in unexpected behaviour when
-    // running the non-Mir scenario.
-    QLibrary unityMir("unity-mir", 1);
-    unityMir.load();
-    if (!unityMir.isLoaded()) {
-        qDebug() << "Library unity-mir not found/loaded";
-        return 1;
-    }
-
-    typedef QMirServer* (*createServer_t)(int, const char **);
-    createServer_t createQMirServer = (createServer_t) unityMir.resolve("createQMirServer");
-    if (!createQMirServer) {
-        qDebug() << "unable to resolve symbol: createQMirServer";
-        return 2;
-    }
-
     QMirServer* mirServer = createQMirServer(argc, argv);
-
-    typedef int (*runWithClient_t)(QMirServer*, std::function<int(int, const char**, void*)>);
-    runWithClient_t runWithClient = (runWithClient_t) unityMir.resolve("runQMirServerWithClient");
-    if (!runWithClient) {
-        qDebug() << "unable to resolve symbol: runWithClient";
-        return 3;
-    }
-
-    return runWithClient(mirServer, startShell);
+    return runQMirServerWithClient(mirServer, startShell);
 }
