@@ -16,19 +16,15 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtQuick/QQuickView>
-#include <QtGui/QGuiApplication>
-#include <QtQml/QQmlEngine>
-#include <QtQml/QQmlContext>
-#include <qpa/qplatformnativeinterface.h>
-#include <QLibrary>
-#include <QDebug>
 #include <libintl.h>
-#include <dlfcn.h>
-#include <csignal>
+#include <qpa/qplatformnativeinterface.h>
 #include <ubuntu/application/ui/session.h>
 #include <unity-mir/qmirserver.h>
 #include <unity-mir/qmirserverapplication.h>
+#include <QGuiApplication>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickView>
 
 #include "PageList.h"
 
