@@ -26,6 +26,7 @@
 #include <libintl.h>
 #include <dlfcn.h>
 #include <csignal>
+#include <ubuntu/application/ui/session.h>
 #include <unity-mir/qmirserver.h>
 
 #include "PageList.h"
@@ -55,12 +56,7 @@ int startShell(int argc, const char** argv, void* server)
     view->setTitle("Qml Phone Shell"); // Fake to be the shell
 
     QPlatformNativeInterface* nativeInterface = QGuiApplication::platformNativeInterface();
-    /* Shell is declared as a system session so that it always receives all
-       input events.
-       FIXME: use the enum value corresponding to SYSTEM_SESSION_TYPE (= 1)
-       when it becomes available.
-    */
-    nativeInterface->setProperty("ubuntuSessionType", 1);
+    nativeInterface->setProperty("session", U_SYSTEM_SESSION); // receive all input events
 
     QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
     if (rootDir.isEmpty())
@@ -84,13 +80,8 @@ int startShell(int argc, const char** argv, void* server)
 
     int result = application->exec();
 
-                qDebug() << "before delete";
-
     delete view;
     delete application;
-
-            qDebug() << "after delete";
-
     return result;
 }
 
