@@ -82,8 +82,6 @@ Package: ubuntu-system-settings-wizard
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         libunity-api0,
-         libunity-mir1,
          ubuntu-system-settings (= ${binary:Version}),
          unity8,
 Conflicts: ubuntu-system-settings (<< 0.2)
