@@ -23,9 +23,10 @@ LocalComponents.Page {
 
     hasBackButton: false
 
-    Component.onCompleted:  {
-        console.log("quit");
-        Qt.quit()
+    Timer {
+        interval: 1000
+        running: true
+        onTriggered: Qt.quit()
     }
 
     Item {
