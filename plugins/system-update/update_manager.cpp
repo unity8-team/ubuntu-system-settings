@@ -201,6 +201,7 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
         Q_EMIT modelChanged();
     }
     Q_EMIT updateAvailableFound(update->updateState());
+
     reportCheckState();
 }
 
