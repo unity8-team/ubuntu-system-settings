@@ -89,14 +89,15 @@ public:
     int get_downloadMode() { return m_downloadMode; }
     void set_token(Token& t) { m_token = t; }
     Token get_token() { return m_token; }
+    void setCheckintUpdates(int value) { m_checkingUpdates = value; }
 #endif
 
 public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
+    void systemUpdateNotAvailable();
 
 private Q_SLOTS:
     void clickUpdateNotAvailable();
-    void systemUpdateNotAvailable();
     void systemUpdatePaused(int value);
     void processOutput();
     void processUpdates();
