@@ -266,6 +266,8 @@ ItemPage {
         }
         model: updateManager.model
         clip: true
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > (root.height - checkForUpdatesArea.height)) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         delegate: ListItem.Subtitled {
             id: listItem
