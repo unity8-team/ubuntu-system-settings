@@ -195,7 +195,7 @@ ItemPage {
                 model: backendInfo.clickList
                 delegate: ListItem.SingleValue {
                     objectName: "appItem" + displayName
-                    icon: iconPath
+                    iconSource: iconPath
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
                     text: displayName
                     value: installedSize ?

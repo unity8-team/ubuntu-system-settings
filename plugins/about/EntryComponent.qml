@@ -26,7 +26,7 @@ ListItem.Standard {
     id: root
 
     objectName: "entryComponent-about"
-    icon: Qt.resolvedUrl(model.icon)
+    iconSource: Qt.resolvedUrl(model.icon)
     iconFrame: false
     text: i18n.tr(model.displayName)
     progression: true
