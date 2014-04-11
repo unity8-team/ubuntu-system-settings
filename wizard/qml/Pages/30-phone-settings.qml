@@ -27,10 +27,6 @@ LocalComponents.Page {
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
-        function maybeUpdate() {
-            reportCrashesCheck.checked = diagnosticsWidget.canReportCrashes
-        }
-        onReportCrashesChanged: maybeUpdate()
     }
 
     Item {
@@ -70,17 +66,16 @@ LocalComponents.Page {
 
             LocalComponents.CheckableSetting {
                 id: reportCrashesCheck
+
+                property bool serverValue: diagnosticsWidget.canReportCrashes
+
                 leftMargin: userSettingsPage.leftMargin
                 rightMargin: userSettingsPage.rightMargin
-                text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.")
                 checked: diagnosticsWidget.canReportCrashes
-                onCheckedChanged: {
-                    diagnosticsWidget.canReportCrashes = checked;
-                    /* Confirm the setting stuck and reflect it in the UI. */
-                    if (checked != diagnosticsWidget.canReportCrashes) {
-                        checked = !checked;
-                    }
-                }
+                text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.")
+
+                onServerValueChanged: checked = serverValue
+                onTriggered: diagnosticsWidget.canReportCrashes = checked
             }
 
             LocalComponents.SectionHeader {
@@ -96,6 +91,7 @@ LocalComponents.Page {
                 leftMargin: userSettingsPage.leftMargin
                 rightMargin: userSettingsPage.rightMargin
                 text: i18n.tr("Your phone is setup to detect your location. This can be disabled in system settings.")
+                checked: locationActionGroup.enabled.state
                 onClicked: locationActionGroup.enabled.activate()
             }
         }
