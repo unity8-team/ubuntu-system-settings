@@ -25,6 +25,7 @@ import Ubuntu.SystemSettings.Update 1.0
 
 ItemPage {
     id: root
+    objectName: "configurationPage"
     property UpdateManager updateManager
     title: i18n.tr("Auto download")
 

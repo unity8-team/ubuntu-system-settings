@@ -10,6 +10,7 @@
 from __future__ import absolute_import
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
+from ubuntu_system_settings import helpers
 
 from autopilot.input import Mouse, Touch, Pointer
 from autopilot.platform import model
@@ -34,23 +35,8 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.launch_system_settings(panel=panel)
+        self.app = helpers.launch_system_settings(self, panel=panel)
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
-
-    def launch_system_settings(self, panel=None):
-        params = ['/usr/bin/system-settings']
-        if (model() != 'Desktop'):
-            params.append('--desktop_file_hint=/usr/share/applications/'
-                          'ubuntu-system-settings.desktop')
-
-        # Launch to a specific panel
-        if panel is not None:
-            params.append(panel)
-
-        self.app = self.launch_test_application(
-            *params,
-            app_type='qt',
-            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)
 
     @property
     def main_view(self):
@@ -107,7 +93,7 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.launch_system_settings()
+        self.app = helpers.launch_system_settings(self)
         self.assertThat(self.main_view.visible, Eventually(Equals(True)))
 
 
@@ -241,11 +227,9 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
         button = self.main_view.select_single(
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
-        self.pointer.move_to_object(button)
-        self.pointer.click()
+        self.scroll_to_and_click(button)
 
     @property
     def updates_page(self):
         """ Return 'System Update' page """
-        return self.main_view.select_single(
-            objectName='entryComponent-system-update')
+        return self.main_view.select_single(objectName='systemUpdatesPage')

@@ -21,6 +21,6 @@ set_target_properties(Utils-qml PROPERTIES COMPILE_FLAGS -fvisibility=default)
 
 qt5_use_modules(Utils-qml Qml Quick)
 
-set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Utils)
+set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Wizard/Utils)
 install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(TARGETS Utils-qml DESTINATION ${PLUG_DIR})

@@ -165,7 +165,11 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
     update->setLastUpdateDate(lastUpdateDate);
     update->setIconUrl(QString("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"));
 
-    Q_EMIT this->updateAvailable(packageName, update);
+    if (update->updateRequired()) {
+        Q_EMIT updateAvailable(packageName, update);
+    } else {
+        Q_EMIT updateNotFound();
+    }
 }
 
 void SystemUpdate::updateDownloadProgress(int percentage, double eta)

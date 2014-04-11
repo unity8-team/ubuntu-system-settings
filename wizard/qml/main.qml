@@ -18,53 +18,67 @@ import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 0.1
 import Unity.Application 0.1
+import Unity.Notifications 1.0 as NotificationBackend
+import "file:///usr/share/unity8/Notifications" as Notifications
 
-MainView {
+Item {
+    id: root
     width: units.gu(40)
     height: units.gu(71)
-
-    headerColor: "#57365E"
-    backgroundColor: "#A55263"
-    footerColor: "#D75669"
 
     Component.onCompleted: {
         Theme.name = "Ubuntu.Components.Themes.SuruGradient"
         i18n.domain = "ubuntu-system-settings"
     }
 
+    MainView {
+        anchors.fill: parent
+        headerColor: "#57365E"
+        backgroundColor: "#A55263"
+        footerColor: "#D75669"
+
+        GSettings {
+            id: background
+            schema.id: "org.gnome.desktop.background"
+        }
+
+        Image {
+            id: image
+            anchors.fill: parent
+            source: background.pictureUri
+            fillMode: Image.PreserveAspectCrop
+            visible: status === Image.Ready
+        }
+
+        PageStack {
+            id: pageStack
+
+            function next() {
+                // If we've opened any extra (non-main) pages, pop them before
+                // continuing so back button returns to the previous main page.
+                while (pageList.index < pageStack.depth - 1)
+                    pop()
+                push(pageList.next())
+            }
+
+            function prev() {
+                pageList.prev() // to update pageList.index
+                pop()
+            }
+
+            Component.onCompleted: next()
+        }
+    }
+
     OSKController {
         anchors.fill: parent
+        z: 100
     }
 
-    GSettings {
-        id: background
-        schema.id: "org.gnome.desktop.background"
-    }
-
-    Image {
-        id: image
+    Notifications.Notifications {
+        id: notifications
+        model: NotificationBackend.Model
+        margin: units.gu(1)
         anchors.fill: parent
-        source: background.pictureUri
-        fillMode: Image.PreserveAspectCrop
-        visible: status === Image.Ready
-    }
-
-    PageStack {
-        id: pageStack
-
-        function next() {
-            // If we've opened any extra (non-main) pages, pop them before
-            // continuing so back button returns to the previous main page.
-            while (pageList.index < pageStack.depth - 1)
-                pop()
-            push(pageList.next())
-        }
-
-        function prev() {
-            pageList.prev() // to update pageList.index
-            pop()
-        }
-
-        Component.onCompleted: next()
     }
 }

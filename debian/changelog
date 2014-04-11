@@ -1,3 +1,34 @@
+ubuntu-system-settings (0.2+14.04.20140402-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Bump version for new package ubuntu-system-settings-wizard
+
+ -- Michael Terry <mterry@ubuntu.com>  Thu, 10 Apr 2014 15:21:31 -0400
+
+ubuntu-system-settings (0.1+14.04.20140402-0ubuntu1) trusty; urgency=low
+
+  [ Andrea Cimitan ]
+  * Detect SIM and if negative show no sim page
+
+  [ Victor R. Ruiz ]
+  * Autopilot: Move launch_system_settings to a helper module.
+
+  [ Iain Lane ]
+  * Hide 'Serial' and 'IMEI' entries when the info isn't available
+  * Don't look for PkgConfig explicitly, breaks with Multi-Arch.
+    FindPkgConfig.cmake does this for us anyway.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Apr 2014 10:47:05 +0000
+
+ubuntu-system-settings (0.1+14.04.20140328-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Diego Sarmentero ]
+  * Add click updates support. .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 28 Mar 2014 07:24:29 +0000
+
 ubuntu-system-settings (0.1+14.04.20140321-0ubuntu1) trusty; urgency=low
 
   [ Ken VanDine ]

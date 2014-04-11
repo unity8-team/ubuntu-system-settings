@@ -29,6 +29,21 @@
 #include <QVariantList>
 #include "system_update.h"
 #include "update.h"
+#include <token.h>
+
+#ifdef TESTS
+#include "../../tests/plugins/system-update/fakeprocess.h"
+#include "../../tests/plugins/system-update/fakenetwork.h"
+#include "../../tests/plugins/system-update/fakessoservice.h"
+#include "../../tests/plugins/system-update/fakesystemupdate.h"
+#else
+#include <ssoservice.h>
+#include <QProcess>
+#include "network/network.h"
+#include "system_update.h"
+#endif
+
+using namespace UbuntuOne;
 
 namespace UpdatePlugin {
 
@@ -41,8 +56,10 @@ class UpdateManager : public QObject
     Q_PROPERTY(int currentBuildNumber READ currentBuildNumber)
 
 Q_SIGNALS:
+    void checkFinished();
     void modelChanged();
     void updatesNotFound();
+    void credentialsNotFound();
     void updateAvailableFound(bool downloading);
     void errorFound();
     void downloadModeChanged();
@@ -70,21 +87,49 @@ public:
     QHash<QString, Update*> get_apps() { return m_apps; }
     QVariantList get_model() { return m_model; }
     int get_downloadMode() { return m_downloadMode; }
+    void set_token(Token& t) { m_token = t; }
+    Token get_token() { return m_token; }
 #endif
 
 public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
 
 private Q_SLOTS:
+    void clickUpdateNotAvailable();
+    void systemUpdateNotAvailable();
     void systemUpdatePaused(int value);
+    void processOutput();
+    void processUpdates();
+    void downloadUrlObtained(const QString &packagename, const QString &url);
+    void handleCredentialsFound(Token token);
+    void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
+    bool m_systemCheckingUpdate;
+    bool m_clickCheckingUpdate;
+    int m_checkingUpdates;
     QHash<QString, Update*> m_apps;
     int m_downloadMode;
     QVariantList m_model;
+    Token m_token;
+
+#ifdef TESTS
+    FakeNetwork m_network;
+    FakeProcess m_process;
+    FakeSsoService m_service;
+    FakeSystemUpdate m_systemUpdate;
+#else
+    Network m_network;
+    QProcess m_process;
+    SSOService m_service;
     SystemUpdate m_systemUpdate;
+#endif
 
     void checkForUpdates();
+    QString getClickCommand();
+    bool getCheckForCredentials();
+    void reportCheckState();
+    void updateNotAvailable();
 };
 
 }

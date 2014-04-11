@@ -26,7 +26,7 @@
 
 void UtilsPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Utils"));
+    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wizard.Utils"));
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<QSortFilterProxyModelQML>(uri, 0, 1, "SortFilterProxyModel");
 }
