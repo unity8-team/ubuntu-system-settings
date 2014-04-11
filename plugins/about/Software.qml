@@ -7,6 +7,7 @@ import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
     id: licensesPage
+    objectName: "licensesPage"
     title: i18n.tr("Software licenses")
     flickable: softwareList
 
