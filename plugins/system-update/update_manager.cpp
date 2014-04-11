@@ -195,12 +195,16 @@ void UpdateManager::processUpdates()
 void UpdateManager::registerSystemUpdate(const QString& packageName, Update *update)
 {
     m_systemCheckingUpdate = false;
-    if (!m_apps.contains(packageName)) {
+    if (!m_apps.contains(packageName) && update->updateRequired()) {
         m_apps[packageName] = update;
         m_model.insert(0, QVariant::fromValue(update));
         Q_EMIT modelChanged();
     }
-    Q_EMIT updateAvailableFound(update->updateState());
+    if (update->updateRequired())
+        Q_EMIT updateAvailableFound(update->updateState());
+    else
+        Q_EMIT updatesNotFound();
+
     reportCheckState();
 }
 
