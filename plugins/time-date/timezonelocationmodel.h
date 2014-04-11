@@ -22,6 +22,7 @@
 #define TIMEZONELOCATIONMODEL_H
 
 #include <QAbstractTableModel>
+#include <QSet>
 #include <QSortFilterProxyModel>
 #include <QThread>
 
@@ -77,6 +78,15 @@ class TimeZoneFilterProxy: public QSortFilterProxyModel
 
 public:
     TimeZoneFilterProxy(TimeZoneLocationModel *parent = 0);
+    void setFilterRegExp(const QString &pattern);
+
+protected:
+    bool filterAcceptsRow (int source_row,
+                           const QModelIndex &source_parent) const;
+
+private:
+    QString m_currentFilter;
+    mutable QSet<QModelIndex> m_matches;
 };
 
 
