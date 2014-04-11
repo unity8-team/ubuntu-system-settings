@@ -139,7 +139,7 @@ void UpdateManagerTest::testCheckUpdatesModelSignal()
 void UpdateManagerTest::testCheckUpdatesUpdateSignal()
 {
     UpdateManager manager;
-    QSignalSpy spy(&manager, SIGNAL(updateAvailableFound()));
+    QSignalSpy spy(&manager, SIGNAL(updateAvailableFound(bool)));
     QTRY_COMPARE(manager.get_apps().size(), 0);
     manager.checkUpdates();
     QTRY_COMPARE(manager.get_apps().size(), 4);
