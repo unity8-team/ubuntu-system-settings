@@ -19,7 +19,7 @@ import GSettings 1.0
 import Ubuntu.Components 0.1
 import Unity.Application 0.1
 import Unity.Notifications 1.0 as NotificationBackend
-import "file:///usr/share/unity8/Notifications" as Notifications
+import "file:///usr/share/unity8/Notifications" as Notifications // FIXME This should become a module or go away
 
 Item {
     id: root
@@ -72,13 +72,36 @@ Item {
 
     OSKController {
         anchors.fill: parent
-        z: 100
     }
 
     Notifications.Notifications {
         id: notifications
         model: NotificationBackend.Model
         margin: units.gu(1)
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            right: parent.right
+            bottom: parent.bottom
+        }
+        states: [
+            State {
+                name: "narrow"
+                when: parent.width <= units.gu(60)
+                AnchorChanges { target: notifications; anchors.left: parent.left }
+            },
+            State {
+                name: "wide"
+                when: parent.width > units.gu(60)
+                AnchorChanges { target: notifications; anchors.left: undefined }
+                PropertyChanges { target: notifications; width: units.gu(38) }
+            }
+        ]
+
+//        FIXME despite correctly turning blockInput: false when the notification disappears, input is still blocked. Commenting out for now
+//        InputFilterArea {
+//            anchors { left: parent.left; right: parent.right }
+//            height: parent.contentHeight
+//            blockInput: height > 0
+//        }
     }
 }
