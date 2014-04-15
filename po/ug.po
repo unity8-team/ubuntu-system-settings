@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2014-02-13 23:29+0000\n"
-"Last-Translator: Gheyret T.Kenji <Unknown>\n"
+"PO-Revision-Date: 2014-04-14 09:56+0000\n"
+"Last-Translator: BULBUL <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-03-25 07:25+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-15 07:55+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -291,18 +291,23 @@ msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"GPS نى ئىشلىتىپ ئورنىڭىزنى ئېنىقلاڭ. ئۆچۈرۈلگەندە، GPS ئېتىلىپ توك تىجەيدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"wi-fi بىلەن GPS نى ئىشلىتىپ ئورنىڭىزنى ئېنىقلاڭ. ئورۇن بەلگىلەش ئىقتىدارىنى "
+"توختاتقاندا توك تىجەيدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"wi-fi (ھازىر ئېتىكلىك) بىلەن GPS نى ئىشلىتىپ ئورنىڭىزنى ئېنىقلاڭ. ئورۇن "
+"بەلگىلەش ئىقتىدارىنى توختاتقاندا توك تىجەيدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:76
 msgid ""
@@ -407,7 +412,7 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "كارتا سۈركەش (بىخەتەرلىكى يوق)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
@@ -415,7 +420,7 @@ msgstr "4-خانە ئىم"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "كارتا سۈركەش (بىخەتەرلىكى يوق) "
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
@@ -449,11 +454,11 @@ msgstr "تاقا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:69
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "پەقەتلا 2G (توك تىجەيدۇ)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:70
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (تېز)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:81
 msgid "Cellular data"
@@ -461,7 +466,7 @@ msgstr "كۆچمە تېلېفۇن ساندانى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:90
 msgid "Data roaming"
-msgstr ""
+msgstr "سانلىق-مەلۇماتلارنى كۆرۈش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:99
 msgid "Data usage statistics"
@@ -1008,7 +1013,7 @@ msgstr "GPS"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:411
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "توغرا بولغان ئورۇن بەلگىلەش GPS بىلەن Wi-Fi نى تەلەپ قىلىدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
