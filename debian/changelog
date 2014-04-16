@@ -4,6 +4,35 @@ ubuntu-system-settings (0.2+14.04.20140402-0ubuntu1) UNRELEASED; urgency=medium
 
  -- Michael Terry <mterry@ubuntu.com>  Thu, 10 Apr 2014 15:21:31 -0400
 
+ubuntu-system-settings (0.1+14.04.20140411-0ubuntu1) trusty; urgency=low
+
+  [ Ken VanDine ]
+  * system-update: Fix the flickable bounds behavior so it doesn't
+    overshoot when the contentHeight is shorter than the view.
+  * fixed some deprecations in ListItems, iconSource instead of icon
+
+  [ Sebastien Bacher ]
+  * build the lists of devices before connecting the signals, that
+    avoids warning
+
+  [ Iain Lane ]
+  * [time-date] Cache the results so that we can search within a
+    narrower set
+  * Fix click package update checking and update available/not available
+    signal emission. (LP: #1306569)
+
+  [ Omer Akram ]
+  * autopilot tests improvements: * Improved existing tests to compare
+    values with backends instead of just testing the 'item' is there. *
+    Fixed a skipped failing test * Delete label tests and those which
+    are trying to make sure certain elements exist. (LP: #1301214)
+
+  [ Michael Terry ]
+  * Fix click package update checking and update available/not available
+    signal emission. (LP: #1306569)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Apr 2014 16:35:32 +0000
+
 ubuntu-system-settings (0.1+14.04.20140402-0ubuntu1) trusty; urgency=low
 
   [ Andrea Cimitan ]

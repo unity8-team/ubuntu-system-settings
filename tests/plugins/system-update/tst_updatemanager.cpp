@@ -82,6 +82,7 @@ void UpdateManagerTest::testRegisterSystemUpdateRequired()
 void UpdateManagerTest::testRegisterSystemUpdateNotRequired()
 {
     UpdateManager manager;
+    manager.setCheckintUpdates(1);
     QSignalSpy spy(&manager, SIGNAL(modelChanged()));
     QSignalSpy spy2(&manager, SIGNAL(updateAvailableFound(bool)));
     QSignalSpy spy3(&manager, SIGNAL(updatesNotFound()));
@@ -90,17 +91,12 @@ void UpdateManagerTest::testRegisterSystemUpdateNotRequired()
     QTRY_COMPARE(spy3.count(), 0);
     QTRY_COMPARE(manager.get_apps().size(), 0);
 
-    Update *update = getUpdate();
-    update->setUpdateAvailable(false);
-
-    manager.registerSystemUpdate(update->getPackageName(), update);
+    manager.systemUpdateNotAvailable();
     QTRY_COMPARE(spy.count(), 0);
     QTRY_COMPARE(spy2.count(), 0);
     QTRY_COMPARE(spy3.count(), 1);
     QTRY_COMPARE(manager.get_apps().size(), 0);
     QTRY_COMPARE(manager.get_model().size(), 0);
-
-    update->deleteLater();
 }
 
 void UpdateManagerTest::testStartDownload()
@@ -139,7 +135,7 @@ void UpdateManagerTest::testCheckUpdatesModelSignal()
 void UpdateManagerTest::testCheckUpdatesUpdateSignal()
 {
     UpdateManager manager;
-    QSignalSpy spy(&manager, SIGNAL(updateAvailableFound()));
+    QSignalSpy spy(&manager, SIGNAL(updateAvailableFound(bool)));
     QTRY_COMPARE(manager.get_apps().size(), 0);
     manager.checkUpdates();
     QTRY_COMPARE(manager.get_apps().size(), 4);

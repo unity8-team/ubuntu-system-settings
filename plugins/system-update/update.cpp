@@ -61,7 +61,7 @@ void Update::initializeApplication(QString packagename, QString title,
 void Update::setRemoteVersion(QString& version)
 {
     m_remote_version = version;
-    if (getIgnoreUpdates()) {
+    if (!getIgnoreUpdates()) {
         int result = debVS.CmpVersion(m_local_version.toUtf8().data(),
                                       m_remote_version.toUtf8().data());
 

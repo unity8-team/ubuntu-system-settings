@@ -159,12 +159,41 @@ TimeZoneLocationModel::~TimeZoneLocationModel()
 }
 
 TimeZoneFilterProxy::TimeZoneFilterProxy(TimeZoneLocationModel *parent)
-    : QSortFilterProxyModel(parent)
+    : QSortFilterProxyModel(parent),
+      m_currentFilter("^$")
 {
     this->setSourceModel(parent);
     this->setDynamicSortFilter(true);
     this->setFilterRole(TimeZoneLocationModel::SimpleRole);
+    this->setFilterCaseSensitivity(Qt::CaseInsensitive);
     // By default don't display anything
     this->setFilterRegExp("^$");
-    this->setFilterCaseSensitivity(Qt::CaseInsensitive);
+}
+
+void TimeZoneFilterProxy::setFilterRegExp(const QString &pattern)
+{
+    if (!pattern.startsWith(m_currentFilter) || pattern == "^$")
+        m_matches.clear();
+
+    m_currentFilter = pattern;
+    QSortFilterProxyModel::setFilterRegExp(pattern);
+    invalidate();
+}
+
+bool TimeZoneFilterProxy::filterAcceptsRow(
+        int source_row,
+        const QModelIndex &source_parent) const
+{
+    QModelIndex idx = sourceModel()->index(source_row, sortColumn());
+
+    if (m_matches.contains(idx))
+        return false;
+
+    bool accepted =
+            QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+
+    if (!accepted && idx.isValid())
+        m_matches.insert(idx);
+
+    return accepted;
 }

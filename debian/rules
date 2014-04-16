@@ -20,6 +20,3 @@ override_dh_makeshlibs:
 
 %:
 	dh $@ --fail-missing --with python2,migrations
-
-override_dh_auto_test:
-	python tests/test_code.py
