@@ -78,7 +78,6 @@ private:
     QString m_filter;
     QString getTimeZone();
     void setUpInterface();
-    bool m_sortedBefore;
 
 };
 
