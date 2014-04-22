@@ -75,7 +75,7 @@ private:
     QDBusInterface m_timeDateInterface;
     QString m_objectPath;
     TimeZoneLocationModel m_timeZoneModel;
-    TimeZoneFilterProxy m_timeZoneFilterProxy;
+    //TimeZoneFilterProxy m_timeZoneFilterProxy;
     QString m_filter;
     QString getTimeZone();
     void setUpInterface();

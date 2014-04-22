@@ -38,7 +38,6 @@ TimeDate::TimeDate(QObject *parent) :
                          "org.freedesktop.timedate1",
                           m_systemBusConnection),
     m_timeZoneModel(),
-    m_timeZoneFilterProxy(&m_timeZoneModel),
     m_sortedBefore(false)
 {
     connect (&m_serviceWatcher,
@@ -140,7 +139,7 @@ void TimeDate::setTimeZone(QString &time_zone)
 
 QAbstractItemModel *TimeDate::getTimeZoneModel()
 {
-    return &m_timeZoneFilterProxy;
+    return &m_timeZoneModel;
 }
 
 QString TimeDate::getFilter()
@@ -150,16 +149,8 @@ QString TimeDate::getFilter()
 
 void TimeDate::setFilter(QString &new_filter)
 {
-    // Empty string should match nothing
-    if (new_filter.isEmpty())
-        new_filter = "^$";
     m_filter = new_filter;
-    m_timeZoneFilterProxy.setFilterRegExp(new_filter);
-    // Need to explicitly sort() once for the QSortFilterProxyModel to sort
-    if (!m_sortedBefore) {
-        m_timeZoneFilterProxy.sort(0);
-        m_sortedBefore = true;
-    }
+    m_timeZoneModel.filter(m_filter);
 }
 
 void TimeDate::setTime(qlonglong new_time)
