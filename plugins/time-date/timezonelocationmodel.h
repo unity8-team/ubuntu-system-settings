@@ -23,7 +23,6 @@
 
 #include <QAbstractTableModel>
 #include <QSet>
-#include <QSortFilterProxyModel>
 #include <QThread>
 
 #include <QtConcurrent>
