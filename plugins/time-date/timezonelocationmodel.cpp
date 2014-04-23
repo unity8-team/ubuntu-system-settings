@@ -52,9 +52,9 @@ void TimeZoneLocationModel::store()
 {
     qSort(m_originalLocations.begin(), m_originalLocations.end());
     QObject::connect(&m_watcher,
-                     SIGNAL (finished()),
+                     &QFutureWatcher<TzLocation>::finished,
                      this,
-                     SLOT (filterFinished()));
+                     &TimeZoneLocationModel::filterFinished);
 }
 
 void TimeZoneLocationModel::processModelResult(TzLocation location)
