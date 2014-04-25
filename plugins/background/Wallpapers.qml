@@ -46,6 +46,7 @@ ItemPage {
         id: selectDefaultPeer
         text: i18n.tr("Photo/Image")
         iconName: "import-image"
+        objectName: "importImage"
         onTriggered: {
             startContentTransfer(function(uri) {
                 pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
@@ -110,6 +111,7 @@ ItemPage {
                 title: i18n.tr("Custom")
                 current: selectSourcePage.current
                 editable: true
+                objectName: "customGrid"
                 onSelected: {
                     pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
                     selectedItemConnection.target = pageStack.currentPage;
