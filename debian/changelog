@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.1+14.04.20140411-0ubuntu6) UNRELEASED; urgency=medium
+
+  * TEST BUILD
+  * TEST BUILD DEUX
+  * TEST BUILD TROIS
+  * TEST BUILD QUATRE
+
+ -- Allan LeSage <alesage@dioptrique>  Tue, 22 Apr 2014 15:56:52 -0500
+
 ubuntu-system-settings (0.1+14.04.20140411-0ubuntu2) trusty; urgency=medium
 
   * debian/control: alternatively depend on the OpenGLES version of

@@ -28,6 +28,7 @@ import "utilities.js" as Utilities
 
 ItemPage {
     id: mainPage
+    objectName: "backgroundPage"
     title: i18n.tr("Background")
 
     /* TODO: For now hardcoded paths, later we'll use GSettings */
@@ -98,6 +99,7 @@ ItemPage {
                         anchors.top: parent.top
                         height: thumbHeight
                         width: thumbWidth
+                        objectName: "welcomeImage"
                         onClicked: {
                             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
                                            {homeScreen: systemSettingsSettings.backgroundDuplicate ? true : false,
@@ -141,6 +143,7 @@ ItemPage {
                         anchors.top: parent.top
                         height: thumbHeight
                         width: thumbWidth
+                        objectName: "homeImage"
 
                         onClicked: {
                             pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
