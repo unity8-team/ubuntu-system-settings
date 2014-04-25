@@ -112,6 +112,7 @@ ItemPage {
             PropertyChanges { target: notification; onClicked: root.open_online_accounts() }
             PropertyChanges { target: notification; progression: true}
             PropertyChanges { target: notification; visible: true}
+            PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: updateNotification; text: i18n.tr("Credentials not found")}
             PropertyChanges { target: updateNotification; visible: true}
             PropertyChanges { target: installAllButton; visible: false}
