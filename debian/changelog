@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.1+14.10.20140428-0ubuntu1) utopic; urgency=low
+
+  [ Ricardo Salveti de Araujo ]
+  * brightness.cpp: updating code to reflect latest powerd dbus API
+    changes. debian/control: depend on latest powerd .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 28 Apr 2014 16:35:19 +0000
+
 ubuntu-system-settings (0.1+14.04.20140411-0ubuntu2) trusty; urgency=medium
 
   * debian/control: alternatively depend on the OpenGLES version of
