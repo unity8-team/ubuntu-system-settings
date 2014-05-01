@@ -82,17 +82,31 @@ ItemPage {
             text: i18n.tr("Cellular data")
             visible: !showAllUI
             control: Switch {
+                id: dataSwitch
                 checked: connMan.powered
                 onClicked: connMan.powered = checked
             }
          }
 
         ListItem.Standard {
+            id: dataRoamingItem
             text: i18n.tr("Data roaming")
+            enabled: dataSwitch.checked
             control: Switch {
                 id: dataRoamingControl
                 checked: connMan.roamingAllowed
-                onClicked: connMan.roamingAllowed = checked
+                onClicked: {
+                    console.log("no")
+                    connMan.roamingAllowed = checked
+                }
+            }
+            onEnabledChanged: {
+                if (!enabled)
+                    dataRoamingControl.checked = false
+                else
+                    dataRoamingControl.checked = Qt.binding(function() {
+                        return connMan.roamingAllowed
+                    })
             }
         }
 
