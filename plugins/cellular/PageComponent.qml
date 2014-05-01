@@ -52,6 +52,8 @@ ItemPage {
 
     ConnMan {
         id: connMan
+        onRoamingAllowedChanged: console.log("!" + roamingAllowed)
+
     }
 
     property string carrierName: netReg.name
@@ -95,10 +97,7 @@ ItemPage {
             control: Switch {
                 id: dataRoamingControl
                 checked: connMan.roamingAllowed
-                onClicked: {
-                    console.log("no")
-                    connMan.roamingAllowed = checked
-                }
+                onClicked: connMan.roamingAllowed = checked
             }
             onEnabledChanged: {
                 if (!enabled)
