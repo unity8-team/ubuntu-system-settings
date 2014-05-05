@@ -28,6 +28,11 @@
 #include <QProcessEnvironment>
 
 #define CLICK_COMMAND "click"
+#ifdef TESTS
+    #define CHECK_CREDENTIALS "IGNORE_CREDENTIALS"
+#else
+    #define CHECK_CREDENTIALS "CHECK_CREDENTIALS"
+#endif
 
 namespace UpdatePlugin {
 
@@ -118,13 +123,17 @@ void UpdateManager::checkUpdates()
     m_model.clear();
     m_apps.clear();
     Q_EMIT modelChanged();
+    bool enabled = enableAutopilotMode();
     if (getCheckForCredentials()) {
         m_systemUpdate.checkForUpdate();
         m_service.getCredentials();
-    } else {
+    } else if (enabled) {
         systemUpdateNotAvailable();
         Token token("", "", "", "");
         handleCredentialsFound(token);
+    } else {
+        systemUpdateNotAvailable();
+        clickUpdateNotAvailable();
     }
 }
 
@@ -147,8 +156,15 @@ QString UpdateManager::getClickCommand()
 bool UpdateManager::getCheckForCredentials()
 {
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    QString value = environment.value("IGNORE_CREDENTIALS", QString("CHECK_CREDENTIALS"));
+    QString value = environment.value("IGNORE_CREDENTIALS", QString(CHECK_CREDENTIALS));
     return value == "CHECK_CREDENTIALS";
+}
+
+bool UpdateManager::enableAutopilotMode()
+{
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    QString value = environment.value("AUTOPILOT_ENABLED", QString("AUTOPILOT_DISABLED"));
+    return value == "AUTOPILOT_ENABLED";
 }
 
 void UpdateManager::processOutput()
