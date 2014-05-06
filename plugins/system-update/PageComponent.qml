@@ -101,21 +101,19 @@ ItemPage {
         },
         State {
             name: "UPDATE"
-            PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: installAllButton; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
         },
         State {
             name: "NOCREDENTIALS"
+            PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: notification; text: i18n.tr("Please log into your Ubuntu One account.")}
             PropertyChanges { target: notification; onClicked: root.open_online_accounts() }
             PropertyChanges { target: notification; progression: true}
             PropertyChanges { target: notification; visible: true}
-            PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: updateNotification; text: i18n.tr("Credentials not found")}
             PropertyChanges { target: updateNotification; visible: true}
-            PropertyChanges { target: installAllButton; visible: false}
         }
     ]
 
