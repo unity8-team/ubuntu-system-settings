@@ -195,7 +195,8 @@ void UpdateManager::processUpdates()
     bool updateAvailable = false;
     foreach (QString id, m_apps.keys()) {
         Update *app = m_apps.value(id);
-        if(app->updateRequired()) {
+        QString packagename(UBUNTU_PACKAGE_NAME);
+        if(app->getPackageName() != packagename && app->updateRequired()) {
             updateAvailable = true;
             m_model.append(QVariant::fromValue(app));
         }
@@ -210,7 +211,8 @@ void UpdateManager::processUpdates()
 
 void UpdateManager::registerSystemUpdate(const QString& packageName, Update *update)
 {
-    if (m_systemCheckingUpdate) {
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (!m_apps.contains(packagename)) {
         m_apps[packageName] = update;
         m_model.insert(0, QVariant::fromValue(update));
         Q_EMIT modelChanged();
@@ -223,7 +225,7 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
 
 void UpdateManager::systemUpdatePaused(int value)
 {
-    QString packagename("UbuntuImage");
+    QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
         update->setSelected(true);
