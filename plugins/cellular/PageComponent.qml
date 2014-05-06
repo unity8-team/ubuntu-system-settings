@@ -52,8 +52,6 @@ ItemPage {
 
     ConnMan {
         id: connMan
-        onRoamingAllowedChanged: console.log("!" + roamingAllowed)
-
     }
 
     property string carrierName: netReg.name
