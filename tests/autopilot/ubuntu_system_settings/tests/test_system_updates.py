@@ -27,6 +27,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         # Set environment variables
         os.environ["IGNORE_CREDENTIALS"] = "True"
         os.environ["IGNORE_UPDATES"] = "IGNORE_UPDATES"
+        os.environ["AUTOPILOT_ENABLED"] = "AUTOPILOT_ENABLED"
         super(SystemUpdatesTestCases, self).setUp()
 
     def test_show_updates(self):
