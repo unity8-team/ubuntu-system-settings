@@ -3,7 +3,8 @@
 namespace UpdatePlugin {
 
 FakeSsoService::FakeSsoService(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_validCredentials(true)
 {
 }
 
