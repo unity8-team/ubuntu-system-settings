@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.1+14.10.20140507-0ubuntu1) utopic; urgency=low
+
+  [ Diego Sarmentero ]
+  * Avoid duplicate result of Image upadte. Don't ask for credentials on
+    Image update (LP: #1301644)
+  * Ignore real updates during autopilot tests (LP: #1281582)
+
+  [ Iain Lane ]
+  * Disable the data roaming switch and set it to false if data is off
+    (LP: #1287260)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 07 May 2014 16:36:43 +0000
+
 ubuntu-system-settings (0.1+14.10.20140428-0ubuntu1) utopic; urgency=low
 
   [ Ricardo Salveti de Araujo ]
