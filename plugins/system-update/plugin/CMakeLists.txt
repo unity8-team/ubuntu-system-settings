@@ -1,7 +1,5 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_definitions(-DQT_NO_KEYWORDS)
-
 add_library(update-plugin SHARED update-plugin.h update-plugin.cpp ../update.cpp ../update.h ../system_update.cpp ../system_update.h)
 qt5_use_modules(update-plugin Core Qml Quick DBus)
 include_directories(/usr/include/apt-pkg/)
