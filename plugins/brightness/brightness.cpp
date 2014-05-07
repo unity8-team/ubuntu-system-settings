@@ -25,6 +25,7 @@
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {
+        int dim; // Dim brightness
         int min; // Minimum brightness
         int max; // Maximum brightness
         int def; // Default brightness
@@ -36,7 +37,7 @@ const QDBusArgument &operator<<(QDBusArgument &argument,
                                 const BrightnessParams &params)
 {
     argument.beginStructure();
-    argument << params.min << params.max << params.def << params.automatic;
+    argument << params.dim << params.min << params.max << params.def << params.automatic;
     argument.endStructure();
     return argument;
 }
@@ -45,7 +46,7 @@ const QDBusArgument &operator>>(const QDBusArgument &argument,
                                 BrightnessParams &params)
 {
     argument.beginStructure();
-    argument >> params.min >> params.max >> params.def >> params.automatic;
+    argument >> params.dim >> params.min >> params.max >> params.def >> params.automatic;
     argument.endStructure();
     return argument;
 }
@@ -69,7 +70,7 @@ Brightness::Brightness(QObject *parent) :
     if (reply.type() != QDBusMessage::ReplyMessage)
         return;
 
-    // (iiib) -> max, min, default, autobrightness
+    // (iiiib) -> dim, max, min, default, autobrightness
     QDBusArgument result(reply.arguments()[0].value<QDBusArgument>());
     BrightnessParams params = qdbus_cast<BrightnessParams>(result);
     m_autoBrightnessAvailable = params.automatic;

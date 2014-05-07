@@ -9,7 +9,6 @@
 
 from __future__ import absolute_import
 
-from ubuntu_system_settings.utils.i18n import ugettext as _
 from ubuntu_system_settings import SystemSettings
 
 from autopilot.input import Mouse, Touch
@@ -134,6 +133,7 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """ Go to About page """
         super(AboutBaseTestCase, self).setUp('about')
+        self.assertThat(self.about_page.active, Eventually(Equals(True)))
 
 
 class StorageBaseTestCase(AboutBaseTestCase):
@@ -144,10 +144,12 @@ class StorageBaseTestCase(AboutBaseTestCase):
         super(StorageBaseTestCase, self).setUp()
         # Click on 'Storage' option
         button = self.system_settings.main_view.about_page.select_single(
+            'Standard',
             objectName='storageItem'
         )
         self.assertThat(button, NotEquals(None))
         self.system_settings.main_view.scroll_to_and_click(button)
+        self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
@@ -163,6 +165,18 @@ class StorageBaseTestCase(AboutBaseTestCase):
         values = size_label.text.split(' ')  # Format: "00.0 (bytes|MB|GB)"
         self.assertThat(len(values), GreaterThan(1))
 
+    def get_storage_space_used_by_category(self, objectName):
+        return self.main_view.wait_select_single(
+            'StorageItem', objectName=objectName
+            ).value
+
+    @property
+    def storage_page(self):
+        """ Return 'Storage' page """
+        return self.main_view.select_single(
+            'Storage', objectName='storagePage'
+        )
+
 
 class LicenseBaseTestCase(AboutBaseTestCase):
     """ Base class for Licenses page tests """
@@ -172,10 +186,16 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         super(LicenseBaseTestCase, self).setUp()
         # Click on 'Software licenses' option
         button = self.system_settings.main_view.select_single(
+            'Standard',
             objectName='licenseItem')
-        self.assertThat(button, NotEquals(None))
-        self.assertThat(button.text, Equals(_('Software licenses')))
         self.system_settings.main_view.scroll_to_and_click(button)
+
+    @property
+    def licenses_page(self):
+        """ Return 'License' page """
+        return self.main_view.wait_select_single(
+            'ItemPage', objectName='licensesPage'
+        )
 
 
 class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
