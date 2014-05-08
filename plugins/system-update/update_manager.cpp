@@ -113,14 +113,14 @@ void UpdateManager::reportCheckState()
 void UpdateManager::checkUpdates()
 {
     m_systemCheckingUpdate = true;
-    m_clickCheckingUpdate = true;
-    m_checkingUpdates = 2;
+//    m_clickCheckingUpdate = true;
+    m_checkingUpdates = 1; //2
     m_model.clear();
     m_apps.clear();
     Q_EMIT modelChanged();
     if (getCheckForCredentials()) {
         m_systemUpdate.checkForUpdate();
-        m_service.getCredentials();
+//        m_service.getCredentials();
     } else {
         systemUpdateNotAvailable();
         Token token("", "", "", "");
