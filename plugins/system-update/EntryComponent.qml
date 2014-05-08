@@ -50,5 +50,5 @@ ListItem.SingleValue {
         }
     }
 
-    onClicked: main.loadPluginByName("system-update");
+    onClicked: pageStack.push(pluginManager.getByName("system-update").pageComponent);
 }

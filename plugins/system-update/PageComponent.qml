@@ -128,7 +128,7 @@ ItemPage {
 
         Component.onCompleted: {
             root.state = "SEARCHING";
-            updateManager.checkUpdates();
+//            updateManager.checkUpdates();
         }
 
         onUpdateAvailableFound: {
