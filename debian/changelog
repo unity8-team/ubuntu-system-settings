@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.1+14.10.20140507-0ubuntu2) utopic; urgency=medium
+
+  * Renaming dep package qtdeclarative5-qtmultimedia-plugin to
+    qml-module-qtmultimedia
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Fri, 09 May 2014 13:29:19 -0300
+
 ubuntu-system-settings (0.1+14.10.20140507-0ubuntu1) utopic; urgency=low
 
   [ Diego Sarmentero ]
