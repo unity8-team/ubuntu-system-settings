@@ -24,15 +24,11 @@
 #include <QStringList>
 #include <SystemSettings/ItemBase>
 
-#include <token.h>
-#include <ssoservice.h>
-#include <QProcess>
 #include "../system_update.h"
 #include "../update.h"
 
 using namespace SystemSettings;
 using namespace UpdatePlugin;
-using namespace UbuntuOne;
 
 class UpdateItem: public ItemBase
 {
@@ -47,9 +43,6 @@ private Q_SLOTS:
     void changeVisibility(const QString&, Update*);
 
 private:
-    Network m_network;
-    QProcess m_process;
-    SSOService m_service;
     SystemUpdate m_systemUpdate;
 };
 
