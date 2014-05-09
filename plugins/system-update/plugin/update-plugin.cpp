@@ -24,8 +24,7 @@
 #include <QStringList>
 #include <SystemSettings/ItemBase>
 
-#include "../system_update.h"
-#include "../update.h"
+#include "../update_manager.h"
 
 using namespace SystemSettings;
 using namespace UpdatePlugin;
@@ -40,24 +39,24 @@ public:
     ~UpdateItem();
 
 private Q_SLOTS:
-    void changeVisibility(const QString&, Update*);
+    void changeVisibility(bool downloading);
 
 private:
-    SystemUpdate m_systemUpdate;
+    UpdateManager m_updateManager;
 };
 
 UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     ItemBase(staticData, parent),
-    m_systemUpdate(this)
+    m_updateManager(this)
 {
     setVisibility(false);
-    QObject::connect(&m_systemUpdate, SIGNAL(updateAvailable(const QString&, Update*)),
-                  this, SLOT(changeVisibility(const QString&, Update*)));
+    QObject::connect(&m_updateManager, SIGNAL(updateAvailableFound(bool downloading)),
+                  this, SLOT(changeVisibility(bool downloading)));
 
-    m_systemUpdate.checkForUpdate();
+    m_updateManager.checkUpdates();
 }
 
-void UpdateItem::changeVisibility(const QString&, Update*)
+void UpdateItem::changeVisibility(bool)
 {
     setVisibility(true);
 }
