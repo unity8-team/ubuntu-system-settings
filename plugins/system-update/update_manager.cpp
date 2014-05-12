@@ -28,6 +28,11 @@
 #include <QProcessEnvironment>
 
 #define CLICK_COMMAND "click"
+#ifdef TESTS
+    #define CHECK_CREDENTIALS "IGNORE_CREDENTIALS"
+#else
+    #define CHECK_CREDENTIALS "CHECK_CREDENTIALS"
+#endif
 
 namespace UpdatePlugin {
 
@@ -118,13 +123,17 @@ void UpdateManager::checkUpdates()
     m_model.clear();
     m_apps.clear();
     Q_EMIT modelChanged();
+    bool enabled = enableAutopilotMode();
     if (getCheckForCredentials()) {
         m_systemUpdate.checkForUpdate();
         m_service.getCredentials();
-    } else {
+    } else if (enabled) {
         systemUpdateNotAvailable();
         Token token("", "", "", "");
         handleCredentialsFound(token);
+    } else {
+        systemUpdateNotAvailable();
+        clickUpdateNotAvailable();
     }
 }
 
@@ -147,8 +156,15 @@ QString UpdateManager::getClickCommand()
 bool UpdateManager::getCheckForCredentials()
 {
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    QString value = environment.value("IGNORE_CREDENTIALS", QString("CHECK_CREDENTIALS"));
+    QString value = environment.value("IGNORE_CREDENTIALS", QString(CHECK_CREDENTIALS));
     return value == "CHECK_CREDENTIALS";
+}
+
+bool UpdateManager::enableAutopilotMode()
+{
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    QString value = environment.value("AUTOPILOT_ENABLED", QString("AUTOPILOT_DISABLED"));
+    return value == "AUTOPILOT_ENABLED";
 }
 
 void UpdateManager::processOutput()
@@ -179,7 +195,8 @@ void UpdateManager::processUpdates()
     bool updateAvailable = false;
     foreach (QString id, m_apps.keys()) {
         Update *app = m_apps.value(id);
-        if(app->updateRequired()) {
+        QString packagename(UBUNTU_PACKAGE_NAME);
+        if(app->getPackageName() != packagename && app->updateRequired()) {
             updateAvailable = true;
             m_model.append(QVariant::fromValue(app));
         }
@@ -194,20 +211,21 @@ void UpdateManager::processUpdates()
 
 void UpdateManager::registerSystemUpdate(const QString& packageName, Update *update)
 {
-    m_systemCheckingUpdate = false;
-    if (!m_apps.contains(packageName)) {
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (!m_apps.contains(packagename)) {
         m_apps[packageName] = update;
         m_model.insert(0, QVariant::fromValue(update));
         Q_EMIT modelChanged();
+        Q_EMIT updateAvailableFound(update->updateState());
     }
-    Q_EMIT updateAvailableFound(update->updateState());
+    m_systemCheckingUpdate = false;
 
     reportCheckState();
 }
 
 void UpdateManager::systemUpdatePaused(int value)
 {
-    QString packagename("UbuntuImage");
+    QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
         update->setSelected(true);
