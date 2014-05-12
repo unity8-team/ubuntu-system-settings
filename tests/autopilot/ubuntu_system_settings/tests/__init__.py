@@ -133,7 +133,8 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """ Go to About page """
         super(AboutBaseTestCase, self).setUp('about')
-        self.assertThat(self.about_page.active, Eventually(Equals(True)))
+        self.assertThat(self.system_settings.main_view.about_page.active,
+                        Eventually(Equals(True)))
 
 
 class StorageBaseTestCase(AboutBaseTestCase):
@@ -173,7 +174,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
     @property
     def storage_page(self):
         """ Return 'Storage' page """
-        return self.main_view.select_single(
+        return self.system_settings.main_view.select_single(
             'Storage', objectName='storagePage'
         )
 

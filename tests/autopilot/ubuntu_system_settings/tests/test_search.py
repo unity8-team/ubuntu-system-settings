@@ -23,15 +23,15 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         super(SearchTestCases, self).setUp()
 
     def _get_entry_component(self, name):
-        return self.main_view.wait_select_single(
+        return self.system_settings.main_view.wait_select_single(
             objectName='entryComponent-' + name
         )
 
     def _type_into_search_box(self, text):
-        search_box = self.main_view.select_single(
+        search_box = self.system_settings.main_view.select_single(
             objectName='searchTextField'
         )
-        self.scroll_to_and_click(search_box)
+        self.system_settings.main_view.scroll_to_and_click(search_box)
         self.keyboard.type(_(text))
         self.assertThat(search_box.text, Eventually(Equals(text)))
 

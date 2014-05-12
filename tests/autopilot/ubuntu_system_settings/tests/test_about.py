@@ -95,7 +95,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_imei_information_is_correct(self):
         """Checks whether the UI is exposing the right IMEI."""
-        imei_item = self.about_page.wait_select_single(
+        imei_item = self.system_settings.main_view.about_page.wait_select_single(
             objectName='imeiItem')
         imei_ofono = self._get_imei_from_dbus()
 
@@ -106,7 +106,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_settings_show_correct_version_of_the_os(self):
         """Ensure the UI is showing the correct version of the OS."""
-        item = self.about_page.select_single(objectName='osItem')
+        item = self.system_settings.main_view.about_page.select_single(objectName='osItem')
         # TODO: find a way to check the image build number as well
         # -- om26er 10-03-2014
         self.assertTrue(self._get_os_name() in item.value)
@@ -117,7 +117,7 @@ class AboutTestCase(AboutBaseTestCase):
     )
     def test_hardware_name(self):
         """Ensure the UI is showing the correct device name."""
-        device_label = self.about_page.select_single(
+        device_label = self.system_settings.main_view.about_page.select_single(
             objectName='deviceLabel'
             ).text
         device_name_from_getprop = self._get_device_manufacturer_and_model()
