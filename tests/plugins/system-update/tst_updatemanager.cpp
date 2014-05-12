@@ -58,6 +58,7 @@ Update* UpdateManagerTest::getUpdate()
 void UpdateManagerTest::testRegisterSystemUpdateRequired()
 {
     UpdateManager manager;
+    manager.checkUpdates();
     QSignalSpy spy(&manager, SIGNAL(modelChanged()));
     QSignalSpy spy2(&manager, SIGNAL(updateAvailableFound(bool)));
     QTRY_COMPARE(spy.count(), 0);
@@ -66,6 +67,7 @@ void UpdateManagerTest::testRegisterSystemUpdateRequired()
 
     Update *update = getUpdate();
 
+    manager.setCheckSystemUpdates(true);
     manager.registerSystemUpdate(update->getPackageName(), update);
     QTRY_COMPARE(spy.count(), 1);
     QTRY_COMPARE(spy2.count(), 1);
@@ -102,6 +104,7 @@ void UpdateManagerTest::testRegisterSystemUpdateNotRequired()
 void UpdateManagerTest::testStartDownload()
 {
     UpdateManager manager;
+    manager.setCheckSystemUpdates(true);
     Update *update = getUpdate();
     manager.registerSystemUpdate(update->getPackageName(), update);
     manager.startDownload(update->getPackageName());
@@ -111,6 +114,7 @@ void UpdateManagerTest::testStartDownload()
 void UpdateManagerTest::testPauseDownload()
 {
     UpdateManager manager;
+    manager.setCheckSystemUpdates(true);
     Update *update = getUpdate();
     manager.registerSystemUpdate(update->getPackageName(), update);
     update->setUpdateState(true);
@@ -123,7 +127,7 @@ void UpdateManagerTest::testCheckUpdatesModelSignal()
     UpdateManager manager;
     QSignalSpy spy(&manager, SIGNAL(modelChanged()));
     QTRY_COMPARE(manager.get_apps().size(), 0);
-    manager.checkUpdates();
+    manager.getService().getCredentials();
     QTRY_COMPARE(manager.get_apps().size(), 4);
     QTRY_COMPARE(manager.get_model().size(), 1);
     Update* app = manager.get_model()[0].value<Update*>();
@@ -137,7 +141,7 @@ void UpdateManagerTest::testCheckUpdatesUpdateSignal()
     UpdateManager manager;
     QSignalSpy spy(&manager, SIGNAL(updateAvailableFound(bool)));
     QTRY_COMPARE(manager.get_apps().size(), 0);
-    manager.checkUpdates();
+    manager.getService().getCredentials();
     QTRY_COMPARE(manager.get_apps().size(), 4);
     QTRY_COMPARE(manager.get_model().size(), 1);
     Update* app = manager.get_model()[0].value<Update*>();

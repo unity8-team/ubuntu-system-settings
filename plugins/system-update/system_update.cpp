@@ -151,7 +151,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
                                           QString errorReason)
 {
     update = new Update(this);
-    QString packageName("UbuntuImage");
+    QString packageName(UBUNTU_PACKAGE_NAME);
     update->initializeApplication(packageName, "Ubuntu",
                                   QString::number(this->currentBuildNumber()));
 
