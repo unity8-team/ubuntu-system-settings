@@ -56,6 +56,10 @@ void Update::initializeApplication(QString packagename, QString title,
     m_packagename = packagename;
     m_title = title;
     m_local_version = version;
+
+    Q_EMIT packageNameChanged();
+    Q_EMIT titleChanged();
+    Q_EMIT localVersionChanged();
 }
 
 void Update::setRemoteVersion(QString& version)

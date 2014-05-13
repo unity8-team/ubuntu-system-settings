@@ -33,7 +33,7 @@ class Update : public QObject
     Q_OBJECT
     Q_PROPERTY(bool systemUpdate READ systemUpdate WRITE setSystemUpdate
                NOTIFY systemUpdateChanged)
-    Q_PROPERTY(QString packageName READ getPackageName)
+    Q_PROPERTY(QString packageName READ getPackageName NOTIFY packageNameChanged)
     Q_PROPERTY(QString title READ getTitle NOTIFY titleChanged)
     Q_PROPERTY(QString localVersion READ getLocalVersion
                NOTIFY localVersionChanged)
@@ -72,6 +72,7 @@ Q_SIGNALS:
     void lastUpdateDateChanged();
     void downloadUrlChanged();
     void clickTokenChanged();
+    void packageNameChanged();
 
 public:
     explicit Update(QObject *parent = 0);
