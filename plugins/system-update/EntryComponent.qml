@@ -50,5 +50,5 @@ ListItem.SingleValue {
         }
     }
 
-    onClicked: Qt.openUrlExternally("settings:///system/system-update");  //pageStack.push(pluginManager.getByName("system-update").pageComponent);
+    onClicked: main.loadPluginByName("system-update");
 }
