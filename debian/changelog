@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.1+14.10.20140513-0ubuntu1) utopic; urgency=low
+
+  [ Victor R. Ruiz ]
+  * Autopilot test refactoring: add emulators and helpers.
+
+  [ Diego Sarmentero ]
+  * Fix linking property to non-notifyable attribute .
+  * Show click updates notifications in main page. (LP: #1307993)
+  * Loading updates page using loadPluginByName to avoid blank page
+    issue. (LP: #1308162)
+
+  [ Iain Lane ]
+  * Improve performance of the time zone location selection search by
+    doing more work in the background
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 13 May 2014 15:16:45 +0000
+
 ubuntu-system-settings (0.1+14.10.20140507-0ubuntu2) utopic; urgency=medium
 
   * Renaming dep package qtdeclarative5-qtmultimedia-plugin to
