@@ -32,29 +32,29 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def test_show_updates(self):
         """ Checks whether Search box actually filters the results """
-        updates = self.updates_page
+        updates = self.system_settings.main_view.updates_page
         self.assertThat(updates, NotEquals(None))
         # Move to text field
-        self.scroll_to_and_click(updates)
+        self.system_settings.main_view.scroll_to_and_click(updates)
 
     def test_updates_not_in_main(self):
         """Check that the updates notification is shown in main."""
-        self.assertThat(lambda: self.main_view.select_single(
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
             objectName='entryComponent-updates'), raises(StateNotFoundError))
 
     def test_configuration(self):
         """Check the configuration button."""
-        self.assertThat(lambda: self.main_view.select_single(
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
             objectName='configurationPage'), raises(StateNotFoundError))
-        updates = self.updates_page
+        updates = self.system_settings.main_view.updates_page
         self.assertThat(updates, NotEquals(None))
         configuration = updates.select_single(objectName='configuration')
         self.assertThat(configuration, NotEquals(None))
-        self.scroll_to_and_click(configuration)
+        self.system_settings.main_view.scroll_to_and_click(configuration)
 
     def test_check_for_updates_area(self):
         """Check that the updates area is shown on opening."""
-        updates = self.updates_page
+        updates = self.system_settings.main_view.updates_page
         self.assertThat(updates, NotEquals(None))
         checkForUpdatesArea = updates.select_single(
             objectName='checkForUpdatesArea')
@@ -65,7 +65,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def test_searching_state(self):
         """Check how the ui reacts to searching state."""
-        updates = self.updates_page
+        updates = self.system_settings.main_view.updates_page
         self.assertThat(updates, NotEquals(None))
         updates.state.wait_for("SEARCHING")
         self.assertThat(updates.state, Equals("SEARCHING"))
@@ -88,7 +88,7 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
 
     def test_no_updates_state(self):
         """Check how the ui reacts to no updates state."""
-        updates = self.updates_page
+        updates = self.system_settings.main_view.updates_page
         self.assertThat(updates, NotEquals(None))
         updates.state.wait_for("NOUPDATES")
         self.assertThat(updates.state, Equals("NOUPDATES"))
