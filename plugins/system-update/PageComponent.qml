@@ -124,17 +124,15 @@ ItemPage {
         }
 
         onUpdateAvailableFound: {
-            if (updateManager.model.length > 0) {
-                root.updatesAvailable = updateManager.model.length;
-                root.state = "UPDATE";
-                root.installAll = downloading
-            } else {
-                root.state = "NOUPDATES";
-            }
+            root.updatesAvailable = updateManager.model.length;
+            root.state = "UPDATE";
+            root.installAll = downloading;
         }
 
         onUpdatesNotFound: {
-            root.state = "NOUPDATES";
+            if (!credentialsNotification.visible) {
+                root.state = "NOUPDATES";
+            }
         }
 
         onCheckFinished: {
