@@ -88,6 +88,7 @@ ItemPage {
             PropertyChanges { target: updateNotification; visible: true}
             PropertyChanges { target: updateList; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
+            PropertyChanges { target: notification; visible: notification.visible}
         },
         State {
             name: "SYSTEMUPDATEFAILED"
