@@ -80,6 +80,7 @@ ItemPage {
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
+            PropertyChanges { target: credentialsNotification; visible: false}
         },
         State {
             name: "NOUPDATES"
@@ -98,22 +99,14 @@ ItemPage {
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
             PropertyChanges { target: updateNotification; visible: false}
+            PropertyChanges { target: credentialsNotification; visible: false}
         },
         State {
             name: "UPDATE"
             PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: installAllButton; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
-        },
-        State {
-            name: "NOCREDENTIALS"
-            PropertyChanges { target: updateList; visible: true}
-            PropertyChanges { target: notification; text: i18n.tr("Please log into your Ubuntu One account.")}
-            PropertyChanges { target: notification; onClicked: root.open_online_accounts() }
-            PropertyChanges { target: notification; progression: true}
-            PropertyChanges { target: notification; visible: true}
-            PropertyChanges { target: updateNotification; text: i18n.tr("Credentials not found")}
-            PropertyChanges { target: updateNotification; visible: true}
+            PropertyChanges { target: notification; visible: notification.visible}
         }
     ]
 
@@ -141,9 +134,7 @@ ItemPage {
         }
 
         onUpdatesNotFound: {
-            if (root.state != "NOCREDENTIALS") {
-                root.state = "NOUPDATES";
-            }
+            root.state = "NOUPDATES";
         }
 
         onCheckFinished: {
@@ -151,7 +142,7 @@ ItemPage {
         }
 
         onCredentialsNotFound: {
-            root.state = "NOCREDENTIALS";
+            credentialsNotification.visible = true;
         }
 
         onSystemUpdateDownloaded: {
@@ -476,6 +467,32 @@ ItemPage {
 
             Label {
                 text: updateNotification.text
+                anchors.horizontalCenter: parent.horizontalCenter
+                fontSize: "large"
+            }
+        }
+    }
+
+    Rectangle {
+        id: credentialsNotification
+        objectName: "credentialsNotification"
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: installAllButton.bottom
+            bottom: notification.visible ? notification.top : configuration.top
+            margins: units.gu(2)
+            bottomMargin: 0
+        }
+        visible: false
+
+        color: "transparent"
+
+        Column {
+            anchors.centerIn: parent
+
+            Label {
+                text: i18n.tr("Credentials not found")
                 anchors.horizontalCenter: parent.horizontalCenter
                 fontSize: "large"
             }
