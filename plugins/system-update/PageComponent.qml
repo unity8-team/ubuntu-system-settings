@@ -37,6 +37,8 @@ ItemPage {
     property bool installAll: false
     property int updatesAvailable: 0
 
+    property var notificationAction;
+
     DeviceInfo {
         id: deviceInfo
     }
@@ -76,11 +78,9 @@ ItemPage {
     states: [
         State {
             name: "SEARCHING"
-            PropertyChanges { target: notification; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
-            PropertyChanges { target: credentialsNotification; visible: false}
         },
         State {
             name: "NOUPDATES"
@@ -88,26 +88,19 @@ ItemPage {
             PropertyChanges { target: updateNotification; visible: true}
             PropertyChanges { target: updateList; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
-            PropertyChanges { target: notification; visible: notification.visible}
         },
         State {
             name: "SYSTEMUPDATEFAILED"
-            PropertyChanges { target: notification; text: i18n.tr("System update has failed.")}
-            PropertyChanges { target: notification; onClicked: undefined }
-            PropertyChanges { target: notification; progression: false}
-            PropertyChanges { target: notification; visible: true}
             PropertyChanges { target: installingImageUpdate; visible: false}
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: false}
             PropertyChanges { target: updateNotification; visible: false}
-            PropertyChanges { target: credentialsNotification; visible: false}
         },
         State {
             name: "UPDATE"
             PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: installAllButton; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
-            PropertyChanges { target: notification; visible: notification.visible}
         }
     ]
 
@@ -120,6 +113,7 @@ ItemPage {
         objectName: "updateManager"
 
         Component.onCompleted: {
+            credentialsNotification.visible = false;
             root.state = "SEARCHING";
             updateManager.checkUpdates();
         }
@@ -142,6 +136,9 @@ ItemPage {
 
         onCredentialsNotFound: {
             credentialsNotification.visible = true;
+            notification.text = i18n.tr("Please log into your Ubuntu One account.");
+            notification.progression = true;
+            notificationAction = root.open_online_accounts;
         }
 
         onSystemUpdateDownloaded: {
@@ -153,7 +150,11 @@ ItemPage {
             root.state = "SYSTEMUPDATEFAILED";
             if (lastReason) {
                 notification.text = lastReason;
+            } else {
+                notification.text = i18n.tr("System update has failed.");
             }
+            notification.progression = false;
+            notificationAction = undefined;
         }
 
         onUpdateProcessFailed: {
@@ -424,8 +425,14 @@ ItemPage {
     ListItem.Standard {
         id: notification
         objectName: "notification"
-        visible: false
+        visible: updateNotification.visible || credentialsNotification.visible ? true : false
         anchors.bottom: configuration.top
+
+        onClicked: {
+            if (notificationAction) {
+                notificationAction();
+            }
+        }
     }
 
     ListItem.SingleValue {
