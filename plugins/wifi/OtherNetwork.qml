@@ -28,7 +28,7 @@ ItemPage {
     Column {
         id : otherview
         anchors.fill: parent
-        
+
         ListItem.Standard {
             text : i18n.tr("Network name")
             control : TextInput {
@@ -51,15 +51,39 @@ ItemPage {
                 text : "d"
             }
         }
-        
-        Button {
-            text: i18n.tr("Connect")
-            onClicked: pageStack.pop() // FIXME, also connect
-        }
-        
-        Button {
-            text: i18n.tr("Cancel")
-            onClicked: pageStack.pop()
+
+        Item {
+            id: buttonRectangle
+
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            Button {
+                id: cancelButton
+
+                text: i18n.tr("Cancel")
+
+                anchors.left: parent.left
+                anchors.right: parent.horizontalCenter
+
+                onClicked: {
+                    pageStack.pop()
+                }
+            }
+
+            Button {
+                id: connectButton
+
+                text: i18n.tr("Connect")
+//                enabled: languageList.currentIndex != plugin.currentLanguage
+
+                anchors.left: parent.horizontalCenter
+                anchors.right: parent.right
+
+                onClicked: {
+                    pageStack.pop() // Fixme, also do something.
+                }
+            }
         }
     }
 }
