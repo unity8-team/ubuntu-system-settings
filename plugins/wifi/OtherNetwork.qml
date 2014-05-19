@@ -28,13 +28,38 @@ ItemPage {
     Column {
         id : otherview
         anchors.fill: parent
+        
         ListItem.Standard {
-            text : "Network name"
+            text : i18n.tr("Network name")
             control : TextInput {
               id : networkname
               text : "d"
             }
         }
 
+        ListItem.ItemSelector {
+            text: i18n.tr("Security")
+            model : [i18n.tr("None"),
+                     i18n.tr("WPA Personal")
+                     ]
+        }
+        
+        ListItem.Standard {
+            text: i18n.tr("Password")
+            control : TextInput {
+                id : password
+                text : "d"
+            }
+        }
+        
+        Button {
+            text: i18n.tr("Connect")
+            onClicked: pageStack.pop() // FIXME, also connect
+        }
+        
+        Button {
+            text: i18n.tr("Cancel")
+            onClicked: pageStack.pop()
+        }
     }
 }
