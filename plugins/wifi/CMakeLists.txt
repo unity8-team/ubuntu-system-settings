@@ -6,6 +6,7 @@ FramedMenuItem.qml
 HLine.qml
 IndicatorBase.qml
 MenuItemFactory.qml
+OtherNetwork.qml
 PageComponent.qml
 RemoveBackground.qml
 SectionMenuItem.qml

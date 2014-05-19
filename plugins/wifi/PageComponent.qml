@@ -49,10 +49,8 @@ IndicatorBase {
         id: menuStack
     }
 
-    ListView {
-        id: mainMenu
-        model: menuStack.tail ? menuStack.tail : null
-
+    Column{
+    
         anchors {
             fill: parent
             bottomMargin: Qt.inputMethod.visible ? (Qt.inputMethod.keyboardRectangle.height - main.anchors.bottomMargin) : 0
@@ -68,6 +66,10 @@ IndicatorBase {
                 mainMenu.positionViewAtIndex(mainMenu.currentIndex, ListView.End)
             }
         }
+    ListView {
+        id: mainMenu
+        model: menuStack.tail ? menuStack.tail : null
+
 
         // Ensure all delegates are cached in order to improve smoothness of scrolling
         cacheBuffer: 10000
@@ -118,5 +120,11 @@ IndicatorBase {
                 }
             }
         }
+    }
+    
+    Button {
+        text: i18n.tr("Other network")
+        onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
+    }
     }
 }
