@@ -15,8 +15,10 @@ SwitchMenuItem.qml
 )
 
 add_library(UbuntuWifiPanel MODULE
+  wifidbushelper.cpp
   plugin.cpp
   unitymenumodelstack.cpp
+  wifidbushelper.h
   plugin.h
   unitymenumodelstack.h
   ${QML_SOURCES}
