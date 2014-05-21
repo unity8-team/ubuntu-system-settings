@@ -41,7 +41,14 @@ ItemPage {
             id: securityList
             text: i18n.tr("Security")
             model: [i18n.tr("None"),
-                    i18n.tr("WPA Personal")
+                    i18n.tr("WPA Personal"),
+                    i18n.tr("WPA Enterprise TLS"),
+                    i18n.tr("WPA Enterprise TTLS"),
+                    i18n.tr("WPA Enterprise LEAP"),
+                    i18n.tr("WPA Enterprise FAST"),
+                    i18n.tr("WPA Enterprise PEAP"),
+                    i18n.tr("WEP"),
+                    i18n.tr("Dynamic WEP (802.1x)")
                     ]
         }
         
