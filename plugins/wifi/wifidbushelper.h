@@ -34,10 +34,10 @@ public:
     WifiDbusHelper(QObject *parent = nullptr);
     ~WifiDbusHelper() {};
 
-    Q_INVOKABLE void connect(QString ssid, QString security, QString password);
+    Q_INVOKABLE void connect(QString ssid, int security, QString password);
 
 private:
-    QDBusInterface service;
+    //QDBusInterface service;
 
 };
 

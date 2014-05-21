@@ -33,22 +33,23 @@ ItemPage {
             text : i18n.tr("Network name")
             control : TextInput {
               id : networkname
-              text : "d"
+              text : "a"
             }
         }
 
         ListItem.ItemSelector {
+            id: securityList
             text: i18n.tr("Security")
-            model : [i18n.tr("None"),
-                     i18n.tr("WPA Personal")
-                     ]
+            model: [i18n.tr("None"),
+                    i18n.tr("WPA Personal")
+                    ]
         }
         
         ListItem.Standard {
             text: i18n.tr("Password")
             control : TextInput {
                 id : password
-                text : "d"
+                text : "b"
             }
         }
 
@@ -81,7 +82,8 @@ ItemPage {
                 anchors.right: parent.right
 
                 onClicked: {
-                    pageStack.pop() // Fixme, also do something.
+                    DbusHelper.connect(networkname.text, securityList.currentindex, password.text)
+                    pageStack.pop()
                 }
             }
         }

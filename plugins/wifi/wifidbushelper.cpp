@@ -26,14 +26,16 @@
 #define DBUS_INTERFACE "com.something"
 #define DBUS_PATH "/com/something"
 
-WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent),
-    service(DBUS_SERVICE_NAME, DBUS_PATH, DBUS_INTERFACE) {
+WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent)/*,
+    service(DBUS_SERVICE_NAME, DBUS_PATH, DBUS_INTERFACE)*/ {
 }
 
-void WifiDbusHelper::connect(QString ssid, QString security, QString password) {
-    qDebug() << "Connecting to " << ssid << " " << security << " " << password << ".\n";
+void WifiDbusHelper::connect(QString ssid, int security, QString password) {
+    // Convert security enum to NM flags here.
+    printf("Connecting to %s, security %d, password %s.\n",
+            ssid.toUtf8().data(), security, password.toUtf8().data());
 /*
-    QDBusReply<unsigned int> result = service.call("Notify",
-            app_name, replaces_id, app_icon, summary, body, actions, hints, timeout);
+    QDBusReply<unsigned int> result = service.call("XXX",
+            ssid, securityFlags, password);
  */
 }
