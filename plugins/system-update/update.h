@@ -25,6 +25,7 @@
 #include <QtQml>
 #include <QString>
 #include <QStringList>
+#include <QDebug>
 
 namespace UpdatePlugin {
 
@@ -56,6 +57,7 @@ class Update : public QObject
                NOTIFY downloadProgressChanged)
     Q_PROPERTY(QString downloadUrl READ downloadUrl NOTIFY downloadUrlChanged)
     Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
+    Q_PROPERTY(QString changelog READ changelog NOTIFY changelogChanged)
 
 Q_SIGNALS:
     void systemUpdateChanged();
@@ -73,6 +75,7 @@ Q_SIGNALS:
     void downloadUrlChanged();
     void clickTokenChanged();
     void packageNameChanged();
+    void changelogChanged();
 
 public:
     explicit Update(QObject *parent = 0);
@@ -95,6 +98,7 @@ public:
     const QString& getClickUrl() const { return m_click_url; }
     QString downloadUrl() { return m_downloadUrl; }
     QString clickToken() { return m_clickToken; }
+    QString changelog() { return m_changelog; }
 
     void setSystemUpdate(bool isSystem);
     void initializeApplication(QString packagename, QString title,
@@ -112,6 +116,7 @@ public:
     void setClickUrl(const QString &url) { m_click_url = url; }
     void setDownloadUrl(const QString &url);
     void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
+    void setChangelog(const QString &changelog) { qDebug() << changelog; m_changelog = changelog; Q_EMIT changelogChanged(); }
 
 private:
     int m_binary_filesize;
@@ -131,6 +136,7 @@ private:
     bool m_update;
     bool m_update_ready;
     bool m_update_state;
+    QString m_changelog;
 
     bool getIgnoreUpdates();
 };

@@ -112,12 +112,14 @@ void Network::onReply(QNetworkReply *reply)
                 QString name = object.value("name").toString();
                 QString version = object.value("version").toString();
                 QString icon_url = object.value("icon_url").toString();
+                QString changelog = object.value("changelog").toString();
                 int size = object.value("binary_filesize").toVariant().toInt();
                 if (m_apps.contains(name)) {
                     m_apps[name]->setRemoteVersion(version);
                     if (m_apps[name]->updateRequired()) {
                         m_apps[name]->setIconUrl(icon_url);
                         m_apps[name]->setBinaryFilesize(size);
+                        m_apps[name]->setChangelog(changelog);
                         updates = true;
                     }
                 }

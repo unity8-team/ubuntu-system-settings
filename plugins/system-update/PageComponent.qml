@@ -272,8 +272,7 @@ ItemPage {
             id: listItem
             iconSource: Qt.resolvedUrl(modelData.iconUrl)
             iconFrame: false
-            height: modelData.selected ? units.gu(14) : units.gu(8)
-
+            height: (modelData.selected ? units.gu(14) : units.gu(8)) + (labelChangelog.visible ? labelChangelog.paintedHeight : 0)
             property alias actionButton: buttonAppUpdate
 
             Rectangle {
@@ -420,12 +419,38 @@ ItemPage {
                         right: buttonAppUpdate.right
                         top: (!progress.visible || progress.opacity == 0) ? labelTitle.bottom : progress.bottom
                         topMargin: (!progress.visible || progress.opacity == 0) ? 0 : units.gu(1)
-                        bottom: parent.bottom
                         bottomMargin: units.gu(1)
                     }
-                    text: modelData.remoteVersion ? i18n.tr("Version: ") + modelData.remoteVersion : ""
+                    text: modelData.remoteVersion ? (!labelChangelog.visible ? "▸ " : "▾ ") + i18n.tr("Version: ") + modelData.remoteVersion : ""
                     color: "black"
                     elide: Text.ElideRight
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            labelChangelog.visible = !labelChangelog.visible
+                        }
+                    }
+                }
+                Label {
+                    id: labelChangelog
+                    objectName: "labelVersion"
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: labelVersion.bottom
+                        bottomMargin: units.gu(1)
+                    }
+                    width: parent.right - left
+                    text: modelData.changelog
+                    color: "black"
+                    elide: Text.ElideRight
+                    visible: false
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            labelChangelog.visible = !labelChangelog.visible
+                        }
+                    }
                 }
             }
         }
