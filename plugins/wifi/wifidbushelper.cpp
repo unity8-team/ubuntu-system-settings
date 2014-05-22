@@ -23,14 +23,20 @@
 #include <QtDebug>
 #include <QDBusInterface>
 
+namespace {
+
+const QString nm_service("org.freedesktop.NetworkManager");
+const QString nm_object("/org/freedesktop/NetworkManager/Settings");
+const QString settings_interface("org.freedesktop.NetworkManager.Settings");
+const QString connection_interface("org.freedesktop.NetworkManager.Settings.Connection");
+
+}
+
 WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent) {
 }
 
 void WifiDbusHelper::connect(QString ssid, int security, QString password) {
-    const QString nm_name("com.something");
-    const QString nm_interface("com.something");
-    const QString nm_path("/com/something");
-    QDBusInterface service(nm_name, nm_path, nm_interface, QDBusConnection::systemBus());
+    QDBusInterface service(nm_service, nm_object, settings_interface, QDBusConnection::systemBus());
     printf("Connecting to %s, security %d, password %s.\n",
             ssid.toUtf8().data(), security, password.toUtf8().data());
 /*
@@ -44,11 +50,7 @@ QList<QPair<QString, QString>> WifiDbusHelper::getPreviouslyConnectedWifiNetwork
     QList<QPair<QString, QString>> networks;
     const QString wifikey("802-11-wireless");
     const QString idkey("id");
-    const QString service("org.freedesktop.NetworkManager");
-    const QString object("/org/freedesktop/NetworkManager/Settings");
-    const QString baseInterface("org.freedesktop.NetworkManager.Settings");
-    const QString connectionInterface("org.freedesktop.NetworkManager.Settings.Connection");
-    QDBusInterface iface(service, object, baseInterface, QDBusConnection::systemBus());
+    QDBusInterface iface(nm_service, nm_object, settings_interface, QDBusConnection::systemBus());
     //QDBusReply<QStringList> listResult = iface.call("ListConnections");
     QDBusReply<QList<QDBusObjectPath> > listResult = iface.call("ListConnections");
     if(!listResult.isValid()) {
@@ -56,7 +58,7 @@ QList<QPair<QString, QString>> WifiDbusHelper::getPreviouslyConnectedWifiNetwork
         return networks;
     }
     for(const auto &i : listResult.value()) {
-        QDBusInterface connIface(service, i.path(), connectionInterface, QDBusConnection::systemBus());
+        QDBusInterface connIface(nm_service, i.path(), connection_interface, QDBusConnection::systemBus());
         auto replymsg = connIface.call("GetSettings");
         if(replymsg.type() != QDBusMessage::ReplyMessage) {
             printf("Reply is incorrect.\n");
@@ -84,4 +86,12 @@ QList<QPair<QString, QString>> WifiDbusHelper::getPreviouslyConnectedWifiNetwork
         }
     }
     return networks;
+}
+
+void WifiDbusHelper::forgetConnection(const QString dbus_path) {
+    QDBusInterface service(nm_service, dbus_path, connection_interface, QDBusConnection::systemBus());
+    auto reply = service.call("Delete");
+    if(reply.type() == QDBusMessage::ErrorMessage) {
+        qDebug() << "Error forgetting connection: " << reply.errorMessage() << "\n";
+    }
 }
