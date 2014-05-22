@@ -104,6 +104,14 @@ class MainWindow(toolkit_emulators.MainView):
         self.scroll_to(obj)
         self.pointer.click_object(obj)
 
+    def go_to_sound_page(self):
+        sound_button = self.select_single(
+            'EntryComponent', objectName='entryComponent-sound'
+        )
+        self.scroll_to_and_click(sound_button)
+
+        return self.wait_select_single(ItemPage, objectName='soundPage')
+
     @property
     def about_page(self):
         """ Return 'About' page """
@@ -133,3 +141,29 @@ class MainWindow(toolkit_emulators.MainView):
     def updates_page(self):
         """ Return 'System Update' page """
         return self.select_single(objectName='systemUpdatesPage')
+
+    @property
+    def sound_page(self):
+        """Return the 'Sound' page."""
+        return self.select_single('ItemPage', objectName='soundPage')
+
+
+class ItemPage(toolkit_emulators.UbuntuUIToolkitEmulatorBase):
+
+    def get_ringtone_list_item(self):
+        return self.select_single('SingleValue', objectName='ringtoneListItem')
+
+    def click_ringtone_list_item(self):
+        ringtone_list_item = self.get_ringtone_list_item()
+        self.pointing_device.click_object(ringtone_list_item)
+
+        root = self.get_root_instance()
+        return (root.wait_select_single(SoundsList), ringtone_list_item)
+
+
+class SoundsList(ItemPage):
+
+    def click_ringtone(self, name):
+        list_view = self.select_single('QQuickListView', objectName='listView')
+        sleep(1)
+        list_view.click_element('ringtone-' + name)

@@ -29,6 +29,7 @@ import "utilities.js" as Utilities
 
 ItemPage {
     id: root
+    objectName: 'soundPage'
 
     title: i18n.tr("Sound")
     flickable: scrollWidget
@@ -62,6 +63,7 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                objectName: 'ringtoneListItem'
                 text: i18n.tr("Ringtone")
                 value: Utilities.buildDisplayName(
                            backendInfo.incomingCallSound)

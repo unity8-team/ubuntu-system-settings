@@ -210,3 +210,12 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
         self.system_settings.main_view.scroll_to_and_click(button)
+
+
+class SoundBaseTestCase(UbuntuSystemSettingsTestCase):
+    """Base class for Sound settings tests."""
+
+    def setUp(self):
+        """Open the Sound Page."""
+        super(SoundBaseTestCase, self).setUp()
+        self.sound_page = self.system_settings.main_view.go_to_sound_page()
