@@ -83,6 +83,10 @@ ItemPage {
 
         expanded: true
         model: soundDisplayNames
+        delegate: OptionSelectorDelegate {
+            objectName: "ringtone-" + modelData
+            text: modelData
+        }
         onDelegateClicked: {
             if (soundType == 0) {
                 soundSettings.incomingCallSound = soundFileNames[index]
