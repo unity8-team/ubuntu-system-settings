@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2014-05-09 18:53+0000\n"
+"PO-Revision-Date: 2014-05-20 13:56+0000\n"
 "Last-Translator: Phillip Sz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-05-10 07:58+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-22 06:47+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -1129,8 +1129,8 @@ msgstr "Nach Aktualisierungen wird gesucht …"
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 Aktualisierung installieren"
+msgstr[1] "%1 Aktualisierungen installieren"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:195
 msgid "Pause All"
@@ -1182,15 +1182,15 @@ msgstr " Bytes"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:449
 msgid " KiB"
-msgstr ""
+msgstr " KiB"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:452
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:455
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:30
 msgid "SIM"
