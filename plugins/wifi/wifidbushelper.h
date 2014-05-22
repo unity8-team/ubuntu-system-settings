@@ -21,7 +21,6 @@
 #define WIFI_DBUS_HELPER
 
 #include <QObject>
-#include <QDBusInterface>
 
 /**
  * For sending specific dbus messages from QML.
@@ -35,6 +34,7 @@ public:
     ~WifiDbusHelper() {};
 
     Q_INVOKABLE void connect(QString ssid, int security, QString password);
+    QList<QPair<QString, QString>> getPreviouslyConnectedWifiNetworks();
 
 private:
     //QDBusInterface service;

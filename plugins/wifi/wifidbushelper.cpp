@@ -21,21 +21,67 @@
 #include <QStringList>
 #include <QDBusReply>
 #include <QtDebug>
+#include <QDBusInterface>
 
-#define DBUS_SERVICE_NAME "com.something"
-#define DBUS_INTERFACE "com.something"
-#define DBUS_PATH "/com/something"
-
-WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent)/*,
-    service(DBUS_SERVICE_NAME, DBUS_PATH, DBUS_INTERFACE)*/ {
+WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent) {
 }
 
 void WifiDbusHelper::connect(QString ssid, int security, QString password) {
-    // Convert security enum to NM flags here.
+    const QString nm_name("com.something");
+    const QString nm_interface("com.something");
+    const QString nm_path("/com/something");
+    QDBusInterface service(nm_name, nm_path, nm_interface, QDBusConnection::systemBus());
     printf("Connecting to %s, security %d, password %s.\n",
             ssid.toUtf8().data(), security, password.toUtf8().data());
 /*
+    // Convert security enum to NM flags here.
     QDBusReply<unsigned int> result = service.call("XXX",
             ssid, securityFlags, password);
  */
+}
+
+QList<QPair<QString, QString>> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
+    QList<QPair<QString, QString>> networks;
+    const QString wifikey("802-11-wireless");
+    const QString idkey("id");
+    const QString service("org.freedesktop.NetworkManager");
+    const QString object("/org/freedesktop/NetworkManager/Settings");
+    const QString baseInterface("org.freedesktop.NetworkManager.Settings");
+    const QString connectionInterface("org.freedesktop.NetworkManager.Settings.Connection");
+    QDBusInterface iface(service, object, baseInterface, QDBusConnection::systemBus());
+    //QDBusReply<QStringList> listResult = iface.call("ListConnections");
+    QDBusReply<QList<QDBusObjectPath> > listResult = iface.call("ListConnections");
+    if(!listResult.isValid()) {
+        qDebug() << "Could not query network list: " << listResult.error() << "\n";
+        return networks;
+    }
+    for(const auto &i : listResult.value()) {
+        QDBusInterface connIface(service, i.path(), connectionInterface, QDBusConnection::systemBus());
+        auto replymsg = connIface.call("GetSettings");
+        if(replymsg.type() != QDBusMessage::ReplyMessage) {
+            printf("Reply is incorrect.\n");
+            return networks;
+        }
+        auto args = replymsg.arguments();
+        if(args.size() != 1) {
+            qDebug() << "DBus reply is malformed: " << replymsg.errorMessage() << "\n";
+            return networks;
+        }
+        QDBusArgument r = args[0].value<QDBusArgument>();
+        QMap<QString, QVariant> m;
+        r >> m;
+        if(m.find(wifikey) != m.end()) {
+            auto id = m.find(idkey);
+            if(id == m.end()) {
+                qDebug() << "NM object missing required id field.\n";
+            } else {
+                if(id->type() != QVariant::String) {
+                    qDebug() << "NM object id is malformed.\n";
+                } else {
+                    networks.push_back(QPair<QString, QString>(id->toString(), i.path()));
+                }
+            }
+        }
+    }
+    return networks;
 }
