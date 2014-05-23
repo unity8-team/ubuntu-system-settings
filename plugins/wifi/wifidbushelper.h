@@ -34,8 +34,8 @@ public:
     ~WifiDbusHelper() {};
 
     Q_INVOKABLE void connect(QString ssid, int security, QString password);
-    QList<QPair<QString, QString>> getPreviouslyConnectedWifiNetworks();
-    void forgetConnection(const QString dbus_path);
+    Q_INVOKABLE QList<QPair<QString, QString>> getPreviouslyConnectedWifiNetworks();
+    Q_INVOKABLE void forgetConnection(const QString dbus_path);
 
 private:
     //QDBusInterface service;
