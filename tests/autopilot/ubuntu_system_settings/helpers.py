@@ -15,6 +15,8 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
+import os
+
 from gi.repository import GLib, Gio
 
 
@@ -22,7 +24,7 @@ def get_current_ringtone_from_backend():
     """Returns the URI of the current selected tone from
     AccountsService.
     """
-    uid = 1000
+    uid = os.geteuid()
     bus = Gio.bus_get_sync(Gio.BusType.SYSTEM)
     result = bus.call_sync(
         "org.freedesktop.Accounts",
