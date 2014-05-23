@@ -18,6 +18,7 @@
  */
 
 #include "previousnetworkmodel.h"
+#include "wifidbushelper.h"
 #include<QVariant>
 
 struct PreviousNetworkModel::Private {
@@ -25,7 +26,11 @@ struct PreviousNetworkModel::Private {
 };
 
 PreviousNetworkModel::PreviousNetworkModel(QObject *parent) : QAbstractListModel(parent) {
+    //WifiDbusHelper h;
+    //auto networks = h.getPreviouslyConnectedWifiNetworks();
     p = new PreviousNetworkModel::Private();
+    //p->data = networks;
+    // Let's use dummy data for now.
     p->data.push_back(QPair<QString, QString>("network1", "path1"));
     p->data.push_back(QPair<QString, QString>("network2", "path2"));
 }
