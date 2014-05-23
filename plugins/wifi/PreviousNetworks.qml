@@ -25,13 +25,18 @@ ItemPage {
     id: othernetwork
     title: i18n.tr("Previous connections")
 
-    Column {
-        id : otherview
-        anchors.fill: parent
+    PreviousNetworkModel {
+        id: pnmodel
+    }
 
-        ListItem.Standard {
-            text : i18n.tr("Dummy")
-        }
+    Component {
+        id: pnDelegate
+        Text { text: name }
+    }
 
+    ListView {
+        anchors.fill : parent
+        model: pnmodel
+        delegate: pnDelegate
     }
 }
