@@ -19,9 +19,11 @@ add_library(UbuntuWifiPanel MODULE
   wifidbushelper.cpp
   plugin.cpp
   unitymenumodelstack.cpp
+  previousnetworkmodel.cpp
   wifidbushelper.h
   plugin.h
   unitymenumodelstack.h
+  previousnetworkmodel.h
   ${QML_SOURCES}
 )
 qt5_use_modules(UbuntuWifiPanel Qml Quick DBus)

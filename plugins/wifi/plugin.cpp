@@ -20,6 +20,7 @@
 #include "plugin.h"
 #include "unitymenumodelstack.h"
 #include "wifidbushelper.h"
+#include "previousnetworkmodel.h"
 
 WifiDbusHelper *s = nullptr;
 
@@ -38,6 +39,7 @@ void BackendPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wifi"));
     qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
     qmlRegisterSingletonType<WifiDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
+    qmlRegisterType<PreviousNetworkModel>(uri, 1, 0, "PreviousNetworkModel");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
