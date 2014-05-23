@@ -123,8 +123,18 @@ IndicatorBase {
     }
     
     Button {
+        anchors.right: parent.right
+        anchors.left: parent.left
+        text: i18n.tr("Previous networks")
+        onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
+    }
+
+    Button {
+        anchors.right: parent.right
+        anchors.left: parent.left
         text: i18n.tr("Other network")
         onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
     }
+
     }
 }

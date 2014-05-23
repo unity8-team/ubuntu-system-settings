@@ -8,6 +8,7 @@ IndicatorBase.qml
 MenuItemFactory.qml
 OtherNetwork.qml
 PageComponent.qml
+PreviousNetworks.qml
 RemoveBackground.qml
 SectionMenuItem.qml
 StandardMenuItem.qml
