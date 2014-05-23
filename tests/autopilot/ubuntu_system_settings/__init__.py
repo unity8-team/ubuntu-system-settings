@@ -161,18 +161,18 @@ class MainWindow(toolkit_emulators.MainView):
 
 class ItemPage(toolkit_emulators.UbuntuUIToolkitEmulatorBase):
 
-    def _ringtone_setting_button(self):
+    def _get_ringtone_setting_button(self):
         return self.wait_select_single(
             'SingleValue', objectName='ringtoneListItem'
         )
 
-    def ringtone_setting_button_current_value(self):
+    def get_ringtone_setting_button_current_value(self):
         """current value of the ringtone setting button.
 
         :return: name of the currently selected ringtone.
 
         """
-        return self._ringtone_setting_button().value
+        return self._get_ringtone_setting_button().value
 
     @autopilot.logging.log_action(logger.info)
     def open_ringtone_selector(self):
@@ -181,7 +181,7 @@ class ItemPage(toolkit_emulators.UbuntuUIToolkitEmulatorBase):
         :return: The page with ringtones list.
 
         """
-        ringtone_setting_button = self._ringtone_setting_button()
+        ringtone_setting_button = self._get_ringtone_setting_button()
         self.pointing_device.click_object(ringtone_setting_button)
 
         root = self.get_root_instance()

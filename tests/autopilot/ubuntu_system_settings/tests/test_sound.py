@@ -24,7 +24,7 @@ class SoundTestCase(SoundBaseTestCase):
         sounds_list.go_back_to_sound_page()
 
         self.assertThat(
-            self.sound_page.ringtone_setting_button_current_value(),
+            self.sound_page.get_ringtone_setting_button_current_value(),
             Eventually(Equals(ringtone))
         )
 
