@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2013-11-03 15:18+0000\n"
-"Last-Translator: Anthony Wong <anthony.wong@ubuntu.com>\n"
+"PO-Revision-Date: 2014-05-22 12:03+0000\n"
+"Last-Translator: Shuduo Sang <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-05-06 07:32+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-23 09:12+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -48,7 +48,7 @@ msgstr "语言和文字"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:67
 msgid "Display language…"
-msgstr ""
+msgstr "显示语言..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:78
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:26
@@ -64,11 +64,11 @@ msgstr "拼写检查"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:113
 msgid "Auto completion"
-msgstr ""
+msgstr "自动补全"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:123
 msgid "Word suggestions"
-msgstr ""
+msgstr "词语建议"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:136
 msgid "Auto capitalization"
@@ -76,12 +76,12 @@ msgstr "自动大写"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:146
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
+msgstr "打开按Shift键将每个句子的首字母转换成大写的功能。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:153
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:130
 msgid "Keyboard sound"
-msgstr ""
+msgstr "按键音"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -89,15 +89,15 @@ msgstr "当前布局："
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr ""
+msgstr "所有可用的布局："
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "当前拼写检查语言："
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
-msgstr ""
+msgstr "所有可用的语言："
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/wifi//PageComponent.qml:27
@@ -108,7 +108,7 @@ msgstr "Wi-Fi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
-msgstr ""
+msgstr "停止播放"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:32
@@ -132,11 +132,11 @@ msgstr "响铃时震动"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "静音模式开启振动"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
 msgid "Messages:"
-msgstr ""
+msgstr "信息："
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:93
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
@@ -145,15 +145,15 @@ msgstr "收到訊息时"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "短信提示音并震动"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:122
 msgid "Other sounds:"
-msgstr ""
+msgstr "其他提示音："
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:138
 msgid "Lock sound"
-msgstr ""
+msgstr "锁屏提示音"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
@@ -162,38 +162,38 @@ msgstr "手机处于无声模式。"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:29
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:73
 msgid "Phone locking"
-msgstr ""
+msgstr "锁定手机"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:40
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:105
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:212
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:220
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "口令"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:42
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:332
 msgid "Passphrase"
-msgstr ""
+msgstr "密码"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:44
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:30
 msgid "Lock security"
-msgstr ""
+msgstr "锁屏安全设定"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:62
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
 msgid "Lock when idle"
-msgstr ""
+msgstr "闲置时锁屏"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:63
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
 msgid "Sleep when idle"
-msgstr ""
+msgstr "闲置时休眠"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:65
@@ -201,12 +201,11 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 分钟"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "休眠立即锁定"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:33
@@ -228,36 +227,36 @@ msgstr "仅手机"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:68
 msgid "Security:"
-msgstr ""
+msgstr "安全："
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:84
 msgid "SIM PIN"
-msgstr ""
+msgstr "SIM 卡 PIN 码"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:90
 msgid "Privacy:"
-msgstr ""
+msgstr "隐私："
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:94
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "欢迎界面上显示统计数据"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:107
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "欢迎界面上显示消息"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:122
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr ""
+msgstr "Dash 搜索"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:140
 msgid "Location access"
-msgstr ""
+msgstr "位置访问"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:148
 msgid "Other app access"
-msgstr ""
+msgstr "其他应用访问"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:153
 msgid "Diagnostics"
@@ -267,7 +266,7 @@ msgstr "诊断数据"
 #. reports are to be sent by the system.
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:158
 msgid "Sent"
-msgstr ""
+msgstr "发送"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
@@ -281,54 +280,54 @@ msgstr "回传结果来于："
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "位置"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "位置检测"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
-msgstr ""
+msgstr "使用GPS来确定您的大概位置。关闭 GPS 可以节省电池电量。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
-msgstr ""
+msgstr "使用 Wi-Fi 无线基站或 GPS 来确定您的大概位置。关闭定位功能可以节省电池电量。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
-msgstr ""
+msgstr "使用 Wi-Fi 无线基站（已关闭）及 GPS 来确定您的大概位置。关闭定位功能可以节省电池电量。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
-msgstr ""
+msgstr "使用 Wi-Fi 无线基站、运营商基站或 GPS 来确定您的大概位置。关闭定位功能可以节省电池电量。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
-msgstr ""
+msgstr "使用 Wi-Fi 无线基站、运营商基站（当前未连接至蜂窝数据）、或 GPS 来确定您的大概位置。关闭定位功能可以节省电池电量。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
-msgstr ""
+msgstr "使用 Wi-Fi 无线基站（已关闭）、运营商基站或 GPS 来确定您的位置。关闭定位功能可以节省电池电量。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:82
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
-msgstr ""
+msgstr "使用 Wi-Fi 无线基站（已关闭）、运营商基站（当前未连接至蜂窝数据）或 GPS 来确定您的位置。关闭定位功能可以节省电池电量。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
@@ -1009,7 +1008,7 @@ msgstr "GPS"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:411
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "精确定位需要开启 GPS 和/或 Wi-Fi 。"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
@@ -1040,7 +1039,7 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:53
 msgid "When on wi-fi"
-msgstr ""
+msgstr "当连接至 Wi-Fi 时"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:54
 msgid "On any data connection"
@@ -1303,7 +1302,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:30
 msgid "wi-fi"
-msgstr ""
+msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:36
