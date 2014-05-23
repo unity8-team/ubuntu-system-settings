@@ -18,7 +18,10 @@
 from gi.repository import GLib, Gio
 
 
-def get_current_ringtone():
+def get_current_ringtone_from_backend():
+    """Returns the URI of the current selected tone from
+    AccountsService.
+    """
     uid = 1000
     bus = Gio.bus_get_sync(Gio.BusType.SYSTEM)
     result = bus.call_sync(

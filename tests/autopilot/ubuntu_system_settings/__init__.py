@@ -15,9 +15,14 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from time import sleep
+import logging
 
 from autopilot import platform
+import autopilot.logging
+
 from ubuntuuitoolkit import emulators as toolkit_emulators
+
+logger = logging.getLogger(__name__)
 
 
 class SystemSettings():
@@ -104,7 +109,13 @@ class MainWindow(toolkit_emulators.MainView):
         self.scroll_to(obj)
         self.pointer.click_object(obj)
 
+    @autopilot.logging.log_action(logger.info)
     def go_to_sound_page(self):
+        """Open the sound settings page.
+
+        :return: sound settings page.
+
+        """
         sound_button = self.select_single(
             'EntryComponent', objectName='entryComponent-sound'
         )
@@ -150,20 +161,57 @@ class MainWindow(toolkit_emulators.MainView):
 
 class ItemPage(toolkit_emulators.UbuntuUIToolkitEmulatorBase):
 
-    def get_ringtone_list_item(self):
-        return self.select_single('SingleValue', objectName='ringtoneListItem')
+    def _ringtone_setting_button(self):
+        return self.wait_select_single(
+            'SingleValue', objectName='ringtoneListItem'
+        )
 
-    def click_ringtone_list_item(self):
-        ringtone_list_item = self.get_ringtone_list_item()
-        self.pointing_device.click_object(ringtone_list_item)
+    def ringtone_setting_button_current_value(self):
+        """current value of the ringtone setting button.
+
+        :return: name of the currently selected ringtone.
+
+        """
+        return self._ringtone_setting_button().value
+
+    @autopilot.logging.log_action(logger.info)
+    def open_ringtone_selector(self):
+        """Open the ringtone selector.
+
+        :return: The page with ringtones list.
+
+        """
+        ringtone_setting_button = self._ringtone_setting_button()
+        self.pointing_device.click_object(ringtone_setting_button)
 
         root = self.get_root_instance()
-        return (root.wait_select_single(SoundsList), ringtone_list_item)
+        return root.wait_select_single(SoundsList)
 
 
 class SoundsList(ItemPage):
 
-    def click_ringtone(self, name):
+    @autopilot.logging.log_action(logger.info)
+    def choose_ringtone(self, name):
+        """Choose a new ringtone.
+
+        :param name: name of the ringtone to select.
+        :return: newly selected ringtone item.
+
+        """
         list_view = self.select_single('QQuickListView', objectName='listView')
+        # When last item of a long list is preselected the list scrolls
+        # down automatically, wait for the list to scroll down before
+        # trying to do anything. -- om26er.
         sleep(1)
+        list_view.moving.wait_for(False)
         list_view.click_element('ringtone-' + name)
+
+        return self.select_single(
+            'OptionSelectorDelegate', objectName='ringtone-' + name
+        )
+
+    @autopilot.logging.log_action(logger.info)
+    def go_back_to_sound_page(self):
+        """Go back to the sound settings main page."""
+        main_window = self.get_root_instance().select_single(MainWindow)
+        main_window.open_toolbar().click_back_button()

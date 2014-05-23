@@ -15,23 +15,29 @@ from ubuntu_system_settings import helpers
 
 class SoundTestCase(SoundBaseTestCase):
 
-    def test_ringtone_setting_change_ui(self):
-        """Ensure ringtone can be change is shown in UI."""
+    def test_ringtone_setting_change_in_ui(self):
+        """Ensure ringtone change is shown in UI."""
         ringtone = 'Bliss'
-        sounds_list, ringtone_item = self.sound_page.click_ringtone_list_item()
-        sounds_list.click_ringtone(ringtone)
+        sounds_list = self.sound_page.open_ringtone_selector()
+        sounds_list.choose_ringtone(ringtone)
+
+        sounds_list.go_back_to_sound_page()
 
         self.assertThat(
-            ringtone_item.value, Eventually(Equals(ringtone))
+            self.sound_page.ringtone_setting_button_current_value(),
+            Eventually(Equals(ringtone))
         )
 
-    def test_ringtone_setting_change_backend(self):
+    def test_ringtone_setting_change_in_backend(self):
         """Ensure ringtone change saves in backend."""
         ringtone = 'Celestial'
-        sounds_list = self.sound_page.click_ringtone_list_item()[0]
-        sounds_list.click_ringtone(ringtone)
+        sounds_list = self.sound_page.open_ringtone_selector()
+        current_ringtone = sounds_list.choose_ringtone(ringtone)
 
         self.assertThat(
-            lambda: helpers.get_current_ringtone().endswith(ringtone + '.ogg'),
-            Eventually(Equals(True))
+            current_ringtone.selected, Eventually(Equals(True))
+        )
+        self.assertThat(
+            lambda: helpers.get_current_ringtone_from_backend().endswith(
+                ringtone + '.ogg'), Eventually(Equals(True))
         )
