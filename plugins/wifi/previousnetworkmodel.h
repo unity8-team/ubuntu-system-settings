@@ -26,15 +26,20 @@ class PreviousNetworkModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    enum AnimalRoles {
-        TypeRole = Qt::UserRole + 1,
-        SizeRole
+    enum PreviousNetworkRoles {
+        NameRole = Qt::UserRole + 1,
+        ObjectPathRole
     };
 
     PreviousNetworkModel(QObject *parent = 0);
-
+    virtual ~PreviousNetworkModel();
+    QHash<int, QByteArray> roleNames() const;
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex & index, int role) const;
+
+private:
+    struct Private;
+    Private *p;
 };
 
 #endif

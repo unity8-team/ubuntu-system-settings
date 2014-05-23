@@ -20,15 +20,44 @@
 #include "previousnetworkmodel.h"
 #include<QVariant>
 
+struct PreviousNetworkModel::Private {
+    QList<QPair<QString, QString>> data;
+};
+
 PreviousNetworkModel::PreviousNetworkModel(QObject *parent) : QAbstractListModel(parent) {
-
+    p = new PreviousNetworkModel::Private();
+    p->data.push_back(QPair<QString, QString>("network1", "path1"));
+    p->data.push_back(QPair<QString, QString>("network2", "path2"));
 }
 
-int PreviousNetworkModel::rowCount(const QModelIndex &parent) const {
-    return 0;
+PreviousNetworkModel::~PreviousNetworkModel() {
+    delete p;
 }
 
+QHash<int, QByteArray> PreviousNetworkModel::roleNames() const {
+    QHash<int, QByteArray> roles;
+    roles[NameRole] = "name";
+    roles[ObjectPathRole] = "objectpath";
+    return roles;
+}
+
+int PreviousNetworkModel::rowCount(const QModelIndex &/*parent*/) const {
+    return p->data.size();
+}
 
 QVariant PreviousNetworkModel::data(const QModelIndex & index, int role) const {
-    return QVariant();
+    if(!index.isValid()) {
+        return QVariant();
+    }
+
+    switch(role) {
+
+    case NameRole : return QVariant(p->data[index.row()].first);
+
+    case ObjectPathRole : return QVariant(p->data[index.row()].second);
+
+    default : return QVariant();
+
+    }
+
 }
