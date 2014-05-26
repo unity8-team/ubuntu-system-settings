@@ -80,6 +80,7 @@ QList<QPair<QString, QString>> WifiDbusHelper::getPreviouslyConnectedWifiNetwork
                 if(id->type() != QVariant::String) {
                     qDebug() << "NM object id is malformed.\n";
                 } else {
+                    // connection -> timestamp
                     networks.push_back(QPair<QString, QString>(id->toString(), i.path()));
                 }
             }

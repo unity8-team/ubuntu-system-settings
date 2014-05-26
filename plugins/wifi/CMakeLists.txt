@@ -6,6 +6,7 @@ FramedMenuItem.qml
 HLine.qml
 IndicatorBase.qml
 MenuItemFactory.qml
+NetworkDetails.qml
 OtherNetwork.qml
 PageComponent.qml
 PreviousNetworks.qml

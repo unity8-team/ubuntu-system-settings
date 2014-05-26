@@ -23,7 +23,7 @@ import QMenuModel 0.1
 
 ItemPage {
     id: othernetwork
-    title: i18n.tr("Previous connections")
+    title: i18n.tr("Previous networks")
 
     PreviousNetworkModel {
         id: pnmodel
