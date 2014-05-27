@@ -132,6 +132,9 @@ class AboutTestCase(AboutBaseTestCase):
 
         self.assertEquals(last_updated, self._get_last_updated_date())
 
+    def test_infrastructure_test(self):
+        self.assertTrue(False)
+
 
 class StorageTestCase(StorageBaseTestCase):
     """ Tests for Storage """
