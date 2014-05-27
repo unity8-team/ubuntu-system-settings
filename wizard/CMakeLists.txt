@@ -47,4 +47,7 @@ add_subdirectory(Utils)
 install(TARGETS system-settings-wizard RUNTIME DESTINATION bin)
 install(FILES ubuntu-system-settings-wizard.conf DESTINATION share/upstart/sessions)
 
+set(POLKIT_LIB_DIR "${CMAKE_INSTALL_LOCALSTATEDIR}/lib/polkit-1")
+install(FILES 50-com.ubuntu.system-settings.wizard.pkla DESTINATION ${POLKIT_LIB_DIR}/localauthority/10-vendor.d)
+
 install(DIRECTORY qml DESTINATION ${WIZARD_ROOT})
