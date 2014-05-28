@@ -53,6 +53,7 @@ ItemPage {
         }
         
         ListItem.Standard {
+            id: passwordList
             text: i18n.tr("Password")
             control : TextInput {
                 id : password
@@ -63,6 +64,7 @@ ItemPage {
         Item {
             id: buttonRectangle
 
+            anchors.top: passwordList.bottom
             anchors.left: parent.left
             anchors.right: parent.right
 

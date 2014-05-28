@@ -30,7 +30,7 @@ ItemPage {
     title: i18n.tr("Network 'Foo bar'")
 //    anchors.fill: parent.fill
 
-    Item {
+    Row {
         id: lastRectangle
 
         anchors.left: parent.left
@@ -40,8 +40,8 @@ ItemPage {
             id: lastLabel
             text: i18n.tr("Last connected")
 
-            anchors.left: parent.left
-            anchors.right: parent.horizontalCenter
+//            anchors.left: parent.left
+//            anchors.right: parent.horizontalCenter
 
         }
 
@@ -50,15 +50,16 @@ ItemPage {
 
             text: i18n.tr("000")
 
-            anchors.left: parent.horizontalCenter
-            anchors.right: parent.right
+//            anchors.left: parent.horizontalCenter
+//           anchors.right: parent.right
 
         }
     }
 
-    Item {
+    Row {
         id: passwordRectangle
 
+        anchors.top: lastRectangle.bottom
         anchors.left: parent.left
         anchors.right: parent.right
 
@@ -66,8 +67,8 @@ ItemPage {
             id: passwordLabel
             text: i18n.tr("Password")
 
-            anchors.left: parent.left
-            anchors.right: parent.horizontalCenter
+//            anchors.left: parent.left
+//            anchors.right: parent.horizontalCenter
 
         }
 
@@ -76,15 +77,16 @@ ItemPage {
 
             text: i18n.tr("abc")
 
-            anchors.left: parent.horizontalCenter
-            anchors.right: parent.right
+//            anchors.left: parent.horizontalCenter
+//            anchors.right: parent.right
 
         }
+    }
 
-        Button {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            text : i18n.tr("Forget network")
-        }
+    Button {
+       anchors.top: passwordRectangle.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        text : i18n.tr("Forget network")
     }
 }
