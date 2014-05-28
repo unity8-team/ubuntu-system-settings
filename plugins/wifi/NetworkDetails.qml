@@ -30,7 +30,7 @@ ItemPage {
     title: i18n.tr("Network 'Foo bar'")
 //    anchors.fill: parent.fill
 
-    Row {
+    Column {
         id: lastRectangle
 
         anchors.left: parent.left
@@ -40,8 +40,8 @@ ItemPage {
             id: lastLabel
             text: i18n.tr("Last connected")
 
-//            anchors.left: parent.left
-//            anchors.right: parent.horizontalCenter
+            anchors.left: parent.left
+            anchors.right: parent.horizontalCenter
 
         }
 
@@ -50,13 +50,13 @@ ItemPage {
 
             text: i18n.tr("000")
 
-//            anchors.left: parent.horizontalCenter
-//           anchors.right: parent.right
+            anchors.left: parent.horizontalCenter
+            anchors.right: parent.right
 
         }
     }
 
-    Row {
+    Column {
         id: passwordRectangle
 
         anchors.top: lastRectangle.bottom
@@ -67,8 +67,8 @@ ItemPage {
             id: passwordLabel
             text: i18n.tr("Password")
 
-//            anchors.left: parent.left
-//            anchors.right: parent.horizontalCenter
+            anchors.left: parent.left
+            anchors.right: parent.horizontalCenter
 
         }
 
@@ -77,8 +77,8 @@ ItemPage {
 
             text: i18n.tr("abc")
 
-//            anchors.left: parent.horizontalCenter
-//            anchors.right: parent.right
+            anchors.left: parent.horizontalCenter
+            anchors.right: parent.right
 
         }
     }
