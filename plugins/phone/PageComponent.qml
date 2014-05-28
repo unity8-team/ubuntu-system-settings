@@ -43,18 +43,22 @@ ItemPage {
         anchors.fill: parent
 
         ListItem.Standard {
+            visible: showAllUI
             text: i18n.tr("Call forwarding")
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"))
         }
 
         ListItem.Standard {
+            visible: showAllUI
             text: i18n.tr("Call waiting")
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"))
         }
 
-        ListItem.Divider {}
+        ListItem.Divider {
+            visible: showAllUI
+        }
 
         ListItem.Standard {
             // TRANSLATORS: %1 is the name of the (network) carrier
