@@ -133,7 +133,8 @@ IndicatorBase {
         anchors.right: parent.right
         anchors.left: parent.left
         text: i18n.tr("Other network")
-        onClicked: pageStack.push(Qt.resolvedUrl("NetworkDetails.qml"))
+        onClicked: pageStack.push(Qt.resolvedUrl("NetworkDetails.qml"),
+         {networkName : "some network", password : "1234", lastUsed : "2014/05/03"})
 //        onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
     }
 

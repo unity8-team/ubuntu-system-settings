@@ -27,7 +27,11 @@ import Ubuntu.SystemSettings.Phone 1.0
 ItemPage {
 
     id: networkDetails
-    title: i18n.tr("Network 'Foo bar'")
+    property string networkName
+    property string password
+    property string lastUsed
+
+    title: i18n.tr("Network") + " '" + networkName  + "'"
 //    anchors.fill: parent.fill
 
     Column {
@@ -48,7 +52,7 @@ ItemPage {
         ListItem.Standard {
             id: lastField
 
-            text: i18n.tr("000")
+            text: networkDetails.lastUsed
 
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right
@@ -75,7 +79,7 @@ ItemPage {
         ListItem.Standard {
             id: passwordField
 
-            text: i18n.tr("abc")
+            text: networkDetails.password
 
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right
