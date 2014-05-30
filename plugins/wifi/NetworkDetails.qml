@@ -23,6 +23,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Phone 1.0
+import Ubuntu.SystemSettings.Wifi 1.0
 
 ItemPage {
 
@@ -30,6 +31,7 @@ ItemPage {
     property string networkName
     property string password
     property string lastUsed
+    property string dbusPath
 
     title: i18n.tr("Network") + " '" + networkName  + "'"
 //    anchors.fill: parent.fill
@@ -92,5 +94,9 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
         text : i18n.tr("Forget network")
+        onClicked : {
+          DbusHelper.forgetConnection(dbusPath)
+          pageStack.pop()
+        }
     }
 }

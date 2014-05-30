@@ -90,9 +90,11 @@ QList<QPair<QString, QString>> WifiDbusHelper::getPreviouslyConnectedWifiNetwork
 }
 
 void WifiDbusHelper::forgetConnection(const QString dbus_path) {
+    /*
     QDBusInterface service(nm_service, dbus_path, connection_interface, QDBusConnection::systemBus());
     auto reply = service.call("Delete");
     if(reply.type() == QDBusMessage::ErrorMessage) {
         qDebug() << "Error forgetting connection: " << reply.errorMessage() << "\n";
-    }
+    }*/
+    printf("Forgetting network with path %s.\n", dbus_path.toUtf8().data());
 }
