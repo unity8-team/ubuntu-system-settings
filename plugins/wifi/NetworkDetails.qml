@@ -36,6 +36,9 @@ ItemPage {
     title: i18n.tr("Network") + " '" + networkName  + "'"
 //    anchors.fill: parent.fill
 
+    // Yes, I know a Column is the wrong widget here.
+    // Currently a hack as this is the only way I could
+    // get the widgets to not overlap.
     Column {
         id: lastRectangle
 
@@ -78,19 +81,27 @@ ItemPage {
 
         }
 
-        ListItem.Standard {
+        // BUG, this field is editable even though it should not be.
+        TextField {
             id: passwordField
-
             text: networkDetails.password
-
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right
-
+            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
         }
     }
 
+    ListItem.Standard {
+        text: i18n.tr("Password visible")
+        id: passwordVisible
+        control: Switch {
+            id: passwordVisibleSwitch
+        }
+        anchors.top: passwordRectangle.bottom
+    }
+
     Button {
-       anchors.top: passwordRectangle.bottom
+        anchors.top: passwordVisible.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         text : i18n.tr("Forget network")
