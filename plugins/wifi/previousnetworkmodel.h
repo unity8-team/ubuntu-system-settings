@@ -28,7 +28,9 @@ class PreviousNetworkModel : public QAbstractListModel
 public:
     enum PreviousNetworkRoles {
         NameRole = Qt::UserRole + 1,
-        ObjectPathRole
+        ObjectPathRole,
+        PasswordRole,
+        LastUsedRole,
     };
 
     PreviousNetworkModel(QObject *parent = 0);

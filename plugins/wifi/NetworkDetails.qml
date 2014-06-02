@@ -97,6 +97,9 @@ ItemPage {
         onClicked : {
           DbusHelper.forgetConnection(dbusPath)
           pageStack.pop()
+          // Go back two steps so we don't have to update the model.
+          // If the user goes back to network list, the model is rebuilt.
+          pageStack.pop()
         }
     }
 }

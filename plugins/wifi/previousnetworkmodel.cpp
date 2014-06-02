@@ -22,7 +22,7 @@
 #include<QVariant>
 
 struct PreviousNetworkModel::Private {
-    QList<QPair<QString, QString>> data;
+    QList<QStringList> data;
 };
 
 PreviousNetworkModel::PreviousNetworkModel(QObject *parent) : QAbstractListModel(parent) {
@@ -31,8 +31,8 @@ PreviousNetworkModel::PreviousNetworkModel(QObject *parent) : QAbstractListModel
     p = new PreviousNetworkModel::Private();
     //p->data = networks;
     // Let's use dummy data for now.
-    p->data.push_back(QPair<QString, QString>("network1", "path1"));
-    p->data.push_back(QPair<QString, QString>("network2", "path2"));
+    p->data.push_back(QStringList() << "network1" << "path1" << "password1" << "2014/01/01");
+    p->data.push_back(QStringList() << "network2" << "path2" << "password2" << "2014/02/02");
 }
 
 PreviousNetworkModel::~PreviousNetworkModel() {
@@ -42,7 +42,9 @@ PreviousNetworkModel::~PreviousNetworkModel() {
 QHash<int, QByteArray> PreviousNetworkModel::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
-    roles[ObjectPathRole] = "objectpath";
+    roles[ObjectPathRole] = "objectPath";
+    roles[PasswordRole] = "password";
+    roles[LastUsedRole] = "lastUsed";
     return roles;
 }
 
@@ -55,11 +57,14 @@ QVariant PreviousNetworkModel::data(const QModelIndex & index, int role) const {
         return QVariant();
     }
 
+    const auto &row = p->data[index.row()];
+
     switch(role) {
 
-    case NameRole : return QVariant(p->data[index.row()].first);
-
-    case ObjectPathRole : return QVariant(p->data[index.row()].second);
+    case NameRole : return QVariant(row[0]);
+    case ObjectPathRole : return QVariant(row[1]);
+    case PasswordRole : return QVariant(row[2]);
+    case LastUsedRole : return QVariant(row[3]);
 
     default : return QVariant();
 

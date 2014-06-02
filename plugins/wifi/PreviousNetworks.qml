@@ -29,14 +29,16 @@ ItemPage {
         id: pnmodel
     }
 
-    Component {
-        id: pnDelegate
-        Text { text: name }
-    }
-
     ListView {
         anchors.fill : parent
         model: pnmodel
-        delegate: pnDelegate
+        delegate: ListItem.Standard {
+            text: name
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("NetworkDetails.qml"),
+                {networkName : name, password : password, lastUsed : lastUsed,
+                dbusPath : objectPath})
+            }
+        }
     }
 }
