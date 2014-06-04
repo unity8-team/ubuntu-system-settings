@@ -55,12 +55,21 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     if (!backgroundFile.isLocalFile())
         return;
 
-    QUrl customFile = getCustomBackgroundPathForUrl(backgroundFile);
+    QUrl customFile = backgroundFile;
+    bool fromContentHub = backgroundFile.path().contains(getContentHubFolder());
+    if (fromContentHub)
+        customFile = getCustomBackgroundPathForUrl(backgroundFile);
+
     if (customFile.url() == m_backgroundFile)
         return;
 
-    QFile(backgroundFile.path()).rename(customFile.path());
-    updateCustomBackgrounds();
+    if (fromContentHub)
+    {
+        // Move file from local content hub dump to shared greeter data folder
+        QDir::root().mkpath(customBackgroundFolder());
+        QFile::rename(backgroundFile.path(), customFile.path());
+        updateCustomBackgrounds();
+    }
 
     m_backgroundFile = customFile.url();
     m_accountsService.customSetUserProperty("SetBackgroundFile",
