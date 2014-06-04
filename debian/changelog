@@ -1,3 +1,23 @@
+ubuntu-system-settings (0.1+14.10.20140604-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Use the new header design. There is currently only one page in USS
+    that includes a toolbar action, the background panel has a button to
+    import photos from gallery. It works well with the new header.
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Diego Sarmentero ]
+  * Not dismiss Credentials warning with other messages. .
+
+  [ Brendan Donegan ]
+  * Add test for Check for Updates button and fix search test cases,
+    plus add a new one for searches that shouldn't find anything.
+  * Get vendor and model from dmi on desktops for test_hardware_name
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Jun 2014 09:02:49 +0000
+
 ubuntu-system-settings (0.1+14.10.20140521-0ubuntu1) utopic; urgency=low
 
   [ Brendan Donegan ]
