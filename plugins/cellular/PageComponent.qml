@@ -18,15 +18,21 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import GSettings 1.0
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Phone 1.0
+import Ubuntu.SystemSettings.Cellular 1.0
 
 ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
+
+    UbuntuCellularPanel {
+        id: cellularPanel
+    }
 
     NetworkRegistration {
         id: netReg
@@ -60,24 +66,6 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        /* TODO: use selector once ofono supports those options (bug #1211804) */
-        ListItem.ItemSelector {
-            id: dataTypeSelector
-            expanded: true
-            visible: showAllUI
-            text: i18n.tr("Cellular data:")
-            model: [i18n.tr("Off"),
-                i18n.tr("2G only (saves battery)"),
-                i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: !connMan.powered ? 0 : 2
-            onSelectedIndexChanged: {
-                if (selectedIndex == 0)
-                    connMan.powered = false;
-                else
-                    connMan.powered = true;
-            }
-        }
-
         ListItem.Standard {
             text: i18n.tr("Cellular data")
             visible: !showAllUI
@@ -87,6 +75,53 @@ ItemPage {
                 onClicked: connMan.powered = checked
             }
          }
+
+
+        ListModel {
+            id: techPreference
+            ListElement { name: "Off"; description: ""; key: "off" }
+            ListElement { name: "Automatic"; description: ""; key: "any" }
+            ListElement { name: "2G"; description: "Slower and saves battery"; key: "gsm" }
+            ListElement { name: "3G"; description: "Faster"; key: "umts" }
+            ListElement { name: "4G"; description: "Fastest"; key: "lte" }
+
+            function getIndexByKey (k) {
+                for (var i=0; i < techPreference.count; i++) {
+                    if (techPreference.get(i).key === k) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+        }
+
+        Component {
+            id: techPreferenceDelegate
+            OptionSelectorDelegate { text: i18n.tr(name); subText: i18n.tr(description); }
+        }
+
+        ListItem.ItemSelector {
+            id: dataTypeSelector
+            expanded: true
+            visible: true
+            delegate: techPreferenceDelegate
+            model: techPreference
+            selectedIndex: techPreference.getIndexByKey(radioSettings.TechnologyPreference)
+            onSelectedIndexChanged: {
+                console.warn('techpreference ' + radioSettings.TechnologyPreference);
+                radioSettings.TechnologyPreference = techPreference.get(selectedIndex).key
+            }
+
+            GSettings {
+                id: radioSettings
+                schema.id: "org.ofono.RadioSettings"
+                onChanged: {
+                    if (key == "TechnologyPreference")
+                        dataTypeSelector.selectedIndex = techPreference.getIndexByKey(value)
+                }
+            }
+
+        }
 
         ListItem.Standard {
             id: dataRoamingItem

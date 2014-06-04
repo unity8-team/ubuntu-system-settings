@@ -77,3 +77,22 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             lambda: carriers.select_single('Label', text="my.bad.telco"),
             raises(StateNotFoundError)
         )
+
+class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
+
+    def setUp(self):
+        super(TechnologyPreferenceTestCase, self).setUp()
+
+        self.dbusmock.AddProperty(
+            'org.ofono.RadioSettings',
+            'TechnologyPreference',
+            'any'
+        )
+
+
+    def test_something(self):
+        selector = self.system_settings.main_view.cellular_page.select_single(
+            '*',
+            id='dataTypeSelector'
+        )
+
