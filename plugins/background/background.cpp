@@ -89,8 +89,7 @@ QStringList Background::customBackgrounds()
 void Background::updateCustomBackgrounds()
 {
     m_customBackgrounds.clear();
-    QString customPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation)+"/Pictures";
-    QDir dir(customPath);
+    QDir dir(customBackgroundFolder());
     dir.setFilter(QDir::Files | QDir::NoSymLinks);
     QFileInfoList tmpList = dir.entryInfoList();
     if (!tmpList.isEmpty())
@@ -99,6 +98,16 @@ void Background::updateCustomBackgrounds()
             m_customBackgrounds.append(QUrl::fromLocalFile(f.absoluteFilePath()).toString());
     }
     Q_EMIT customBackgroundsChanged();
+}
+
+QString Background::customBackgroundFolder()
+{
+    // We want a location we can share with the greeter
+    QString dataDir(qgetenv("XDG_GREETER_DATA_DIR"));
+    if (dataDir.isEmpty())
+        return QStandardPaths::writableLocation(QStandardPaths::DataLocation)+"/Pictures";
+    else
+        return dataDir + "/ubuntu-system-settings/Pictures";
 }
 
 QStringList Background::ubuntuArt()
