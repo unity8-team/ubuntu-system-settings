@@ -76,6 +76,8 @@ private:
     void updateUbuntuArt();
     QString m_backgroundFile;
     QString getBackgroundFile();
+    QString getContentHubFolder();
+    QUrl getCustomBackgroundPathForUrl(const QUrl &url);
 };
 
 #endif // BACKGROUND_H

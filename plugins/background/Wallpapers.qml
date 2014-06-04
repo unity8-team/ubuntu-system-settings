@@ -159,7 +159,6 @@ ItemPage {
     ContentStore {
         id: appStore
         scope: ContentScope.App
-        uri: "file://" + backgroundPanel.customBackgroundFolder
     }
 
     function startContentTransfer(callback) {

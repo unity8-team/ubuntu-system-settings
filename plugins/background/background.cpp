@@ -55,12 +55,16 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     if (!backgroundFile.isLocalFile())
         return;
 
-    if (backgroundFile.url() == m_backgroundFile)
+    QUrl customFile = getCustomBackgroundPathForUrl(backgroundFile);
+    if (customFile.url() == m_backgroundFile)
         return;
 
-    m_backgroundFile = backgroundFile.url();
+    QFile(backgroundFile.path()).rename(customFile.path());
+    updateCustomBackgrounds();
+
+    m_backgroundFile = customFile.url();
     m_accountsService.customSetUserProperty("SetBackgroundFile",
-                                            backgroundFile.path());
+                                            customFile.path());
     Q_EMIT backgroundFileChanged();
 }
 
@@ -79,6 +83,11 @@ QString Background::backgroundFile()
         m_backgroundFile = QUrl::fromLocalFile(getBackgroundFile()).url();
 
      return m_backgroundFile;
+}
+
+QUrl Background::getCustomBackgroundPathForUrl(const QUrl &url)
+{
+    return QUrl("file://" + customBackgroundFolder() + "/" + url.fileName());
 }
 
 QStringList Background::customBackgrounds()
@@ -105,9 +114,14 @@ QString Background::customBackgroundFolder()
     // We want a location we can share with the greeter
     QString dataDir(qgetenv("XDG_GREETER_DATA_DIR"));
     if (dataDir.isEmpty())
-        return QStandardPaths::writableLocation(QStandardPaths::DataLocation)+"/Pictures";
+        return getContentHubFolder();
     else
         return dataDir + "/ubuntu-system-settings/Pictures";
+}
+
+QString Background::getContentHubFolder()
+{
+    return QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/Pictures";
 }
 
 QStringList Background::ubuntuArt()
@@ -141,7 +155,7 @@ void Background::rmFile(const QString &file)
     if (file.isEmpty() || file.isNull())
         return;
 
-    if (!file.contains(QStandardPaths::writableLocation(QStandardPaths::DataLocation)))
+    if (!file.contains(customBackgroundFolder()) && !file.contains(getContentHubFolder()))
         return;
 
     QUrl fileUri(file);
