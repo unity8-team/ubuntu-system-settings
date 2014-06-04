@@ -25,10 +25,6 @@
 #include <QDBusReply>
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
-#include <glib.h>
-#include <glib-object.h>
-#include <unistd.h>
-#include <iostream>
 
 namespace {
     const QString c_service("org.ofono.RadioSettings");
@@ -45,9 +41,8 @@ RadioSettings::RadioSettings(QObject *parent) :
     m_serviceWatcher (c_service,
                       m_systemBusConnection,
                       QDBusServiceWatcher::WatchForOwnerChange),
-    // create an interface to radioSettigns
     m_radioSettingsInterface (c_service,
-                         QString("/ril_0/%s").arg(c_object), // FIXME: make argument of modem
+                         QString("/ril_0/%s").arg(c_object), // FIXME: less hard coding of modem
                          c_service,
                           m_systemBusConnection)
 {
@@ -80,18 +75,16 @@ void RadioSettings::slotChanged(QString interface,
     Q_UNUSED (interface);
     Q_UNUSED (changed_properties);
     Q_UNUSED (invalidated_properties);
-    //QString slots(invalidated_properties.join(", "));
-    printf("slotChanged %s.\n", "foo");
+    // TODO
 }
 
+// FIXME: figure out what exactly is required here
 void RadioSettings::slotNameOwnerChanged(QString name,
                                     QString oldOwner,
                                     QString newOwner)
 {
     Q_UNUSED (oldOwner);
     Q_UNUSED (newOwner);
-
-    qDebug() << name << "foooo";
 
     if (name != c_service)
         return;
@@ -101,5 +94,6 @@ void RadioSettings::slotNameOwnerChanged(QString name,
     Q_EMIT technologyPreferenceChanged();
 }
 
+// destructor
 RadioSettings::~RadioSettings() {
 }

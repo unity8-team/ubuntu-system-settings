@@ -1,4 +1,3 @@
-include_directories(${GLIB_INCLUDE_DIRS})
 install(FILES cellular.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-cellular.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 
@@ -17,7 +16,6 @@ add_library(UbuntuCellularPanel MODULE
     ${QML_SOURCES})
 
 qt5_use_modules(UbuntuCellularPanel Quick Qml DBus)
-target_link_libraries(UbuntuCellularPanel ${GLIB_LDFLAGS})
 
 # We need a dummy target so the QML files show up in Qt Creator
 # If this plugin gets some C++ sources, remove this.

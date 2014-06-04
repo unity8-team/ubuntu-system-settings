@@ -89,10 +89,26 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
             'any'
         )
 
+        # TODO: mock more technologies (gsm, lte, umts)
 
-    def test_something(self):
-        selector = self.system_settings.main_view.cellular_page.select_single(
-            '*',
-            id='dataTypeSelector'
-        )
+    def test_any_or_automatic_technology_is_selected(self):
+        # assert that any (from mock from setup) is selected
+        pass
 
+    def test_available_preferences_are_enumerated(self):
+        # see that mocked tech prefs
+        pass
+
+    def test_can_change_preferred_technology(self):
+        # choose another technology (gsm)
+        # assert that ofono.RadioSettings registers the change
+        pass
+
+    def test_no_technologies_available(self):
+        # change dbusmock to have no technologies
+        # assert that things does not break
+        pass
+
+    def test_turn_off_cellular_data(self):
+        # turn off cellular data, leave preferred tech alone
+        pass

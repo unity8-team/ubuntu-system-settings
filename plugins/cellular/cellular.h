@@ -24,6 +24,7 @@
 
 #include "radiosettings.h"
 
+// TODO: enumerate radiosettings relevant for the cellular page
 class Cellular : public QObject
 {
     Q_OBJECT

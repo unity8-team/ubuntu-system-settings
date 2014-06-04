@@ -25,8 +25,6 @@
 #include <QDBusReply>
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
-#include <QProcess>
-
 
 class RadioSettings : public QObject
 {
@@ -36,12 +34,11 @@ class RadioSettings : public QObject
 
 public:
     explicit RadioSettings(QObject *parent = 0);
-    // empty destructor
     ~RadioSettings();
-    // string holding the current tech pref (any/gsm/umts/lte)
 
     void setPreference (QString pref);
     QString getPreference();
+    // string holding the current tech pref (any/gsm/umts/lte)
     QString technologyPreference();
 
     enum TechnologyPreference {
