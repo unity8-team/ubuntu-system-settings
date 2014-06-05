@@ -50,7 +50,7 @@ public:
     ~Background();
     QString backgroundFile();
     void setBackgroundFile(QUrl backgroundFile);
-    Q_INVOKABLE QUrl prepareBackgroundFile(const QUrl &url);
+    Q_INVOKABLE QUrl prepareBackgroundFile(const QUrl &url, bool shareWithGreeter);
     Q_INVOKABLE bool fileExists(const QString &file);
     Q_INVOKABLE void rmFile(const QString &file);
     QStringList customBackgrounds();

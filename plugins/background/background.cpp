@@ -89,9 +89,10 @@ QStringList Background::customBackgrounds()
 void Background::updateCustomBackgrounds()
 {
     m_customBackgrounds.clear();
-    QDir dir(getCustomBackgroundFolder());
-    dir.setFilter(QDir::Files | QDir::NoSymLinks);
-    QFileInfoList tmpList = dir.entryInfoList();
+    QFileInfoList tmpList;
+    tmpList << getCustomBackgroundFolder().entryInfoList(QDir::Files | QDir::NoSymLinks);
+    if (getCustomBackgroundFolder() != getContentHubFolder())
+        tmpList << getContentHubFolder().entryInfoList(QDir::Files | QDir::NoSymLinks);
     if (!tmpList.isEmpty())
     {
         foreach (QFileInfo f, tmpList)
@@ -100,18 +101,29 @@ void Background::updateCustomBackgrounds()
     Q_EMIT customBackgroundsChanged();
 }
 
-QUrl Background::prepareBackgroundFile(const QUrl &url)
+QUrl Background::prepareBackgroundFile(const QUrl &url, bool shareWithGreeter)
 {
     QUrl prepared = url;
 
-    bool fromContentHub = url.path().startsWith(getContentHubFolder().path());
-    if (fromContentHub)
+    if (getCustomBackgroundFolder() != getContentHubFolder() &&
+        url.path().startsWith(getContentHubFolder().path()))
     {
         QDir backgroundFolder = getCustomBackgroundFolder();
         QUrl newPath = QUrl::fromLocalFile(backgroundFolder.path() + "/" + url.fileName());
 
+        if (QFile(newPath.path()).exists())
+        {
+            // The file already exists in the shared greeter data folder...
+            // Likely we just pulled the same file from ContentHub again.
+            // We don't want to show both versions in the picker grid, so just
+            // promote it to greeter location so we still just have one copy.
+            if (QFile(newPath.path()).remove())
+                shareWithGreeter = true;
+        }
+
         // Move file from local ContentHub dump to shared greeter data folder
-        if (QDir::root().mkpath(backgroundFolder.path()) &&
+        if (shareWithGreeter &&
+            QDir::root().mkpath(backgroundFolder.path()) &&
             QFile::rename(url.path(), newPath.path()))
         {
             updateCustomBackgrounds();
