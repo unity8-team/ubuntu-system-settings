@@ -23,8 +23,9 @@
 
 #include <QAbstractTableModel>
 #include <QSet>
-#include <QSortFilterProxyModel>
 #include <QThread>
+
+#include <QtConcurrent>
 
 class TimeZoneLocationModel : public QAbstractTableModel
 {
@@ -57,38 +58,34 @@ public:
         QString full_country;
     };
 
+    void filter(const QString& pattern);
+
     // implemented virtual methods from QAbstractTableModel
     int rowCount (const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
 
+Q_SIGNALS:
+    void filterBegin();
+    void filterComplete();
+
 public Q_SLOTS:
     void processModelResult(TzLocation);
+    void store();
+    void filterFinished();
 
 private:
     QList<TzLocation> m_locations;
+    QList<TzLocation> m_originalLocations;
+    QString m_pattern;
+
+    bool substringFilter(const QString& input);
+    QFutureWatcher<TzLocation> m_watcher;
+    void setModel(QList<TzLocation> locations);
 };
 
 Q_DECLARE_METATYPE (TimeZoneLocationModel::TzLocation)
-
-class TimeZoneFilterProxy: public QSortFilterProxyModel
-{
-    Q_OBJECT
-
-public:
-    TimeZoneFilterProxy(TimeZoneLocationModel *parent = 0);
-    void setFilterRegExp(const QString &pattern);
-
-protected:
-    bool filterAcceptsRow (int source_row,
-                           const QModelIndex &source_parent) const;
-
-private:
-    QString m_currentFilter;
-    mutable QSet<QModelIndex> m_matches;
-};
-
 
 class TimeZonePopulateWorker : public QThread
 {

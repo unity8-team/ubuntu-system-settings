@@ -30,6 +30,8 @@
 
 #include "update.h"
 
+#define UBUNTU_PACKAGE_NAME "UbuntuImage"
+
 namespace UpdatePlugin {
 
 class SystemUpdate : public QObject
