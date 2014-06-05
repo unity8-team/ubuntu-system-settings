@@ -34,11 +34,11 @@ function setBackground(homeScreen, uri) {
 }
 
 function updateWelcome(uri) {
-    backgroundPanel.backgroundFile = uri;
+    backgroundPanel.backgroundFile = backgroundPanel.prepareBackgroundFile(uri);
 }
 
 function updateHome(uri) {
-    background.pictureUri = uri;
+    background.pictureUri = backgroundPanel.prepareBackgroundFile(uri);
 }
 
 function updateBoth(uri) {

@@ -55,25 +55,12 @@ void Background::setBackgroundFile(QUrl backgroundFile)
     if (!backgroundFile.isLocalFile())
         return;
 
-    QUrl customFile = backgroundFile;
-    bool fromContentHub = backgroundFile.path().contains(getContentHubFolder());
-    if (fromContentHub)
-        customFile = getCustomBackgroundPathForUrl(backgroundFile);
-
-    if (customFile.url() == m_backgroundFile)
+    if (backgroundFile.url() == m_backgroundFile)
         return;
 
-    if (fromContentHub)
-    {
-        // Move file from local content hub dump to shared greeter data folder
-        QDir::root().mkpath(getCustomBackgroundFolder());
-        QFile::rename(backgroundFile.path(), customFile.path());
-        updateCustomBackgrounds();
-    }
-
-    m_backgroundFile = customFile.url();
+    m_backgroundFile = backgroundFile.url();
     m_accountsService.customSetUserProperty("SetBackgroundFile",
-                                            customFile.path());
+                                            backgroundFile.path());
     Q_EMIT backgroundFileChanged();
 }
 
@@ -92,11 +79,6 @@ QString Background::backgroundFile()
         m_backgroundFile = QUrl::fromLocalFile(getBackgroundFile()).url();
 
      return m_backgroundFile;
-}
-
-QUrl Background::getCustomBackgroundPathForUrl(const QUrl &url)
-{
-    return QUrl("file://" + getCustomBackgroundFolder() + "/" + url.fileName());
 }
 
 QStringList Background::customBackgrounds()
@@ -118,7 +100,29 @@ void Background::updateCustomBackgrounds()
     Q_EMIT customBackgroundsChanged();
 }
 
-QString Background::getCustomBackgroundFolder()
+QUrl Background::prepareBackgroundFile(const QUrl &url)
+{
+    QUrl prepared = url;
+
+    bool fromContentHub = url.path().startsWith(getContentHubFolder().path());
+    if (fromContentHub)
+    {
+        QDir backgroundFolder = getCustomBackgroundFolder();
+        QUrl newPath = QUrl::fromLocalFile(backgroundFolder.path() + "/" + url.fileName());
+
+        // Move file from local ContentHub dump to shared greeter data folder
+        if (QDir::root().mkpath(backgroundFolder.path()) &&
+            QFile::rename(url.path(), newPath.path()))
+        {
+            updateCustomBackgrounds();
+            prepared = newPath;
+        }
+    }
+
+    return prepared;
+}
+
+QDir Background::getCustomBackgroundFolder()
 {
     // We want a location we can share with the greeter
     QString dataDir(qgetenv("XDG_GREETER_DATA_DIR"));
@@ -128,7 +132,7 @@ QString Background::getCustomBackgroundFolder()
         return dataDir + "/ubuntu-system-settings/Pictures";
 }
 
-QString Background::getContentHubFolder()
+QDir Background::getContentHubFolder()
 {
     return QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/Pictures";
 }
@@ -164,7 +168,7 @@ void Background::rmFile(const QString &file)
     if (file.isEmpty() || file.isNull())
         return;
 
-    if (!file.contains(getCustomBackgroundFolder()) && !file.contains(getContentHubFolder()))
+    if (!file.contains(getCustomBackgroundFolder().path()) && !file.contains(getContentHubFolder().path()))
         return;
 
     QUrl fileUri(file);
