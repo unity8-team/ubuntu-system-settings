@@ -106,19 +106,21 @@ ItemPage {
             visible: true
             delegate: techPreferenceDelegate
             model: techPreference
-            selectedIndex: techPreference.getIndexByKey(radioSettings.TechnologyPreference)
+            selectedIndex: techPreference.getIndexByKey(cellularPanel.technologyPreference)
             onSelectedIndexChanged: {
-                console.warn('techpreference ' + radioSettings.TechnologyPreference);
-                radioSettings.TechnologyPreference = techPreference.get(selectedIndex).key
-            }
+                var key = techPreference.get(selectedIndex).key;
+                console.warn('current cellularPanel.technologyPreference == ' + cellularPanel.technologyPreference);
 
-            GSettings {
-                id: radioSettings
-                schema.id: "org.ofono.RadioSettings"
-                onChanged: {
-                    if (key == "TechnologyPreference")
-                        dataTypeSelector.selectedIndex = techPreference.getIndexByKey(value)
+                if (key === 'off') {
+                    connMan.powered = false;
+                    console.warn('conman.powered: off');
+                } else {
+                    connMan.powered = true;
+                    cellularPanel.technologyPreference = key
+                    console.warn('conman.powered: on');
+                    console.warn('setting new technologyPreference: ' + key);
                 }
+
             }
 
         }

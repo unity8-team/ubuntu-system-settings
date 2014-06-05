@@ -22,18 +22,28 @@
 
 #include <QObject>
 
-#include "radiosettings.h"
+//#include "radiosettings.h"
 
-// TODO: enumerate radiosettings relevant for the cellular page
+// TODO: enumerate RadioSettings relevant for the cellular page
 class Cellular : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY ( QString technologyPreference READ technologyPreference WRITE setTechnologyPreference NOTIFY technologyPreferenceChanged )
 public:
     explicit Cellular(QObject *parent = 0);
+    QString technologyPreference();
+    void setTechnologyPreference(QString &pref);
 
 signals:
 
+Q_SIGNALS:
+    void technologyPreferenceChanged();
+
 public slots:
+
+private:
+    QString m_currentTechnologyPreference;
+    QString getTechnologyPreference();
 
 };
 

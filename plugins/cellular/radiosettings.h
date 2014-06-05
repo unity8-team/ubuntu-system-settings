@@ -29,16 +29,13 @@
 class RadioSettings : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY ( QString technologyPreference READ technologyPreference NOTIFY technologyPreferenceChanged )
-    Q_ENUMS(TechnologyPreference)
+    //Q_ENUMS(TechnologyPreference)
 
 public:
     explicit RadioSettings(QObject *parent = 0);
     ~RadioSettings();
 
     void setPreference (QString pref);
-    QString getPreference();
-    // string holding the current tech pref (any/gsm/umts/lte)
     QString technologyPreference();
 
     enum TechnologyPreference {
@@ -57,10 +54,6 @@ private:
     // list of possible preferences
     QList<QString*> m_technologyPreferences;
 
-    // DBus constants
-    const QString c_service;
-    const QString c_object;
-
     // DBus members
     QDBusConnection m_systemBusConnection;
     QDBusServiceWatcher m_serviceWatcher;
@@ -72,8 +65,6 @@ public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
     void slotNameOwnerChanged(QString, QString, QString);
 
-Q_SIGNALS:
-    void technologyPreferenceChanged();
 
 };
 

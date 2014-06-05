@@ -18,11 +18,31 @@
  *
 */
 #include <QObject>
+#include <QtDebug>
 
 #include "cellular.h"
 
 Cellular::Cellular(QObject *parent) :
     QObject(parent)
 {
+    qCritical() << "Cellular: ctor";
+}
 
+QString Cellular::getTechnologyPreference()
+{
+    return QString("any");
+}
+
+QString Cellular::technologyPreference()
+{
+    if (m_currentTechnologyPreference.isEmpty() || m_currentTechnologyPreference.isNull())
+        m_currentTechnologyPreference = getTechnologyPreference();
+
+     return m_currentTechnologyPreference;
+}
+
+void Cellular::setTechnologyPreference(QString &pref)
+{
+    m_currentTechnologyPreference = pref;
+    Q_EMIT technologyPreferenceChanged();
 }

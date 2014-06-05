@@ -26,11 +26,6 @@
 #include <QDBusInterface>
 #include <QDBusServiceWatcher>
 
-namespace {
-    const QString c_service("org.ofono.RadioSettings");
-    const QString c_object("/org/ofono/RadioSettings/");
-}
-
 RadioSettings::RadioSettings(QObject *parent) :
     QObject(parent),
 
@@ -38,12 +33,12 @@ RadioSettings::RadioSettings(QObject *parent) :
     m_systemBusConnection (QDBusConnection::systemBus()),
 
     // watch the service
-    m_serviceWatcher (c_service,
+    m_serviceWatcher ("org.ofono.RadioSettings",
                       m_systemBusConnection,
                       QDBusServiceWatcher::WatchForOwnerChange),
-    m_radioSettingsInterface (c_service,
-                         QString("/ril_0/%s").arg(c_object), // FIXME: less hard coding of modem
-                         c_service,
+    m_radioSettingsInterface ("org.ofono.RadioSettings",
+                         "/org/ofono/RadioSettings/ril_0/", // FIXME: less hard coding of modem
+                         "org.ofono.RadioSettings",
                           m_systemBusConnection)
 {
     // get notified when setting change
@@ -53,8 +48,15 @@ RadioSettings::RadioSettings(QObject *parent) :
          SLOT (slotNameOwnerChanged (QString, QString, QString)));
 
     if (m_radioSettingsInterface.isValid()) {
+        qCritical() << "RadioSettings: valid interface, setting up interface";
         setUpInterface();
+    } else {
+        qCritical() << "RadioSettings: failed to set up interface";
     }
+
+    qCritical() << "RadioSettings: ctor";
+    QString technologyPreference("any");
+
 }
 
 void RadioSettings::setUpInterface()
@@ -66,6 +68,7 @@ void RadioSettings::setUpInterface()
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
+        qCritical() << "radiosettings: setUpInterface";
     }
 
 void RadioSettings::slotChanged(QString interface,
@@ -76,6 +79,7 @@ void RadioSettings::slotChanged(QString interface,
     Q_UNUSED (changed_properties);
     Q_UNUSED (invalidated_properties);
     // TODO
+    qCritical() << "radiosettings: slotChanged";
 }
 
 // FIXME: figure out what exactly is required here
@@ -86,12 +90,10 @@ void RadioSettings::slotNameOwnerChanged(QString name,
     Q_UNUSED (oldOwner);
     Q_UNUSED (newOwner);
 
-    if (name != c_service)
+    if (name != QString("org.ofono.RadioSettings"))
         return;
 
     setUpInterface();
-    // Tell QML so that it refreshes its view of the property
-    Q_EMIT technologyPreferenceChanged();
 }
 
 // destructor
