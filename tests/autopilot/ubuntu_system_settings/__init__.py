@@ -89,7 +89,6 @@ class MainWindow(toolkit_emulators.MainView):
         return toolkit_emulators.get_pointing_device()
 
     def scroll_to(self, obj):
-        self.close_toolbar()
         page = self.select_single(objectName='systemSettingsPage')
         page_right = page.globalRect[0] + page.globalRect[2]
         page_bottom = page.globalRect[1] + page.globalRect[3]

@@ -30,6 +30,7 @@ MainView {
     applicationName: "SystemSettings"
     objectName: "mainView"
     automaticOrientation: true
+    useDeprecatedToolbar: false
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)
