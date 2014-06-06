@@ -5,14 +5,17 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from testtools.matchers import Equals
 from autopilot.matchers import Eventually
+from testtools import skipIf
+from testtools.matchers import Equals
+from autopilot import platform
 
 
 from ubuntu_system_settings.tests import SoundBaseTestCase
 from ubuntu_system_settings import helpers
 
 
+@skipIf(platform.model() == 'Desktop', 'Phones only')
 class SoundTestCase(SoundBaseTestCase):
 
     def test_ringtone_setting_change_in_ui(self):
