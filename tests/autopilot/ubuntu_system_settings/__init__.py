@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 class SystemSettings():
     """Helper class for System Settings application"""
 
+    APP_PATH = '/usr/bin/system-settings'
     APP_UPSTART_ID = 'ubuntu-system-settings'
 
     def __init__(self, testobj, panel=None):
@@ -43,9 +44,10 @@ class SystemSettings():
         # Launches application
         self.app = self.launch(
             self.testobj,
+            self.APP_PATH,
             panel=self.panel)
 
-    def launch(self, testobj, panel=None):
+    def launch(self, testobj, app_path, panel=None):
         """Launch system settings application
 
         :param testobj: An AutopilotTestCase object, needed to call
@@ -56,17 +58,25 @@ class SystemSettings():
         :returns: A proxy object that represents the application. Introspection
         data is retrievable via this object.
         """
-        params = [self.APP_UPSTART_ID]
+        if platform.model() == 'Desktop':
+            params = [app_path]
+        else:
+            params = [self.APP_UPSTART_ID]
 
         # Launch to a specific panel
         if panel is not None:
             params.append(panel)
 
-        
-        app = testobj.launch_upstart_application(
-            *params,
-            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase
-        )
+        if platform.model() == 'Desktop':
+            app = testobj.launch_test_application(
+                *params,
+                emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase
+            )
+        else:
+            app = testobj.launch_upstart_application(
+                *params,
+                emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase
+            )
 
         return app
 
