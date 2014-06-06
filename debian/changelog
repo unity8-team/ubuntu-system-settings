@@ -1,3 +1,22 @@
+ubuntu-system-settings (0.1+14.10.20140606-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Use XDG_GREETER_DATA_DIR to store background files in a folder that
+    the greeter can also read. This fixes the recent regression in not
+    being able to choose a ContentHub file for the welcome screen. (LP:
+    #1325505)
+
+  [ Iain Lane ]
+  * Inline setUpImages(), otherwise the function call doesn't do
+    anything.
+
+  [ Brendan Donegan ]
+  * Make test_tz_list_initially_empty more robust by using
+    wait_select_single instead of select_single to get the label. (LP:
+    #1319711)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 06 Jun 2014 14:39:39 +0000
+
 ubuntu-system-settings (0.1+14.10.20140604-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
