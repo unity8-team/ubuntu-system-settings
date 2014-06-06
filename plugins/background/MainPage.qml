@@ -255,22 +255,19 @@ ItemPage {
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
             if (key == "backgroundDuplicate") {
-                var mostRecent =
-                    (systemSettingsSettings.backgroundSetLast === "home")
-                        ? testHomeImage : testWelcomeImage;
+                var mostRecent = (backgroundSetLast === "home")
+                    ? testHomeImage : testWelcomeImage;
                 var leastRecent = (mostRecent === testHomeImage) ?
                     testWelcomeImage : testHomeImage;
 
-                if (systemSettingsSettings.backgroundDuplicate) { //same
+                if (backgroundDuplicate) { //same
                     /* save value of least recently changed to restore later */
-                    systemSettingsSettings.backgroundPreviouslySetValue =
-                        leastRecent.source;
+                    backgroundPreviouslySetValue = leastRecent.source;
                     /* copy most recently changed to least recently changed */
                     leastRecent.update(mostRecent.source);
                 } else { // different
                     /* restore least recently changed to previous value */
-                    leastRecent.update(
-                            systemSettingsSettings.backgroundPreviouslySetValue);
+                    leastRecent.update(backgroundPreviouslySetValue);
                 }
             }
         }
