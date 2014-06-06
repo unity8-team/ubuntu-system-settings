@@ -248,30 +248,28 @@ ItemPage {
     }
 
     function setUpImages() {
-        var mostRecent = (systemSettingsSettings.backgroundSetLast === "home") ?
-                    testHomeImage : testWelcomeImage;
-        var leastRecent = (mostRecent === testHomeImage) ?
-                    testWelcomeImage : testHomeImage;
-
-        if (systemSettingsSettings.backgroundDuplicate) { //same
-            /* save value of least recently changed to restore later */
-            systemSettingsSettings.backgroundPreviouslySetValue =
-                    leastRecent.source;
-            /* copy most recently changed to least recently changed */
-            leastRecent.update(mostRecent.source);
-        } else { // different
-            /* restore least recently changed to previous value */
-            leastRecent.update(
-                    systemSettingsSettings.backgroundPreviouslySetValue);
-        }
     }
 
     GSettings {
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
-            if (key == "backgroundDuplicate")
-                setUpImages();
+            if (key == "backgroundDuplicate") {
+                var mostRecent = (backgroundSetLast === "home")
+                    ? testHomeImage : testWelcomeImage;
+                var leastRecent = (mostRecent === testHomeImage) ?
+                    testWelcomeImage : testHomeImage;
+
+                if (backgroundDuplicate) { //same
+                    /* save value of least recently changed to restore later */
+                    backgroundPreviouslySetValue = leastRecent.source;
+                    /* copy most recently changed to least recently changed */
+                    leastRecent.update(mostRecent.source);
+                } else { // different
+                    /* restore least recently changed to previous value */
+                    leastRecent.update(backgroundPreviouslySetValue);
+                }
+            }
         }
         Component.onCompleted: {
             if (systemSettingsSettings.backgroundDuplicate)
