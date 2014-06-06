@@ -107,6 +107,7 @@ Depends: ubuntu-system-settings,
          libautopilot-qt,
          ubuntu-ui-toolkit-autopilot,
          dpkg-dev,
+         upstart-app-launch-tools,
          ${misc:Depends},
          ${python:Depends},
 Description: System Settings for Ubuntu Touch - Autopilot tests
