@@ -91,6 +91,7 @@ ItemPage {
 
         ListItem.ItemSelector {
             id: dataTypeSelector
+            objectName: "chooseDataTypeSelector"
             expanded: true
             visible: true
             delegate: techPreferenceDelegate

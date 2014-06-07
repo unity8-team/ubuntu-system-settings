@@ -112,7 +112,7 @@ class MainWindow(toolkit_emulators.MainView):
 
     @property
     def cellular_page(self):
-        """ Return 'About' page """
+        """ Return 'Cellular' page """
         return self.select_single(objectName='cellularPage')
 
     @property

@@ -81,11 +81,40 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
 class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
 
-    def test_any_or_automatic_technology_is_selected(self):
-        # assert that any (from mock from setup) is selected
-        sleep(5)
-        self.assertThat(False, Eventually(Equals(_('Time & Date'))))
-        pass
+    def test_initial_selected(self):
+        # assert that 'any' (from mock from setup) is selected
+        data_type = self.system_settings.main_view.cellular_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="chooseDataTypeSelector"
+        )
+        # assert that 'any' is selected
+        self.assertThat(data_type.selectedIndex, Equals(1))
+
+    def test_setting_persistence(self):
+        data_type = self.system_settings.main_view.cellular_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="chooseDataTypeSelector"
+        )
+
+        # click 2G
+        type_2g = data_type.select_single('Label', text="2G")
+        self.system_settings.main_view.pointer.click_object(type_2g)
+
+        # go back
+        self.system_settings.main_view.open_toolbar().click_back_button()
+        # re-enter cellular settings
+        cellular_item = self.system_settings.main_view.select_single(
+            '*', objectName="entryComponent-cellular"
+        )
+        self.system_settings.main_view.pointer.click_object(cellular_item)
+
+        # assert that "2G" is selected
+        data_type = self.system_settings.main_view.cellular_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="chooseDataTypeSelector"
+        )
+        self.assertThat(data_type.selectedIndex, Equals(2))
+
 
     def test_available_preferences_are_enumerated(self):
         # see that mocked tech prefs
