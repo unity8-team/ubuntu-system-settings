@@ -134,7 +134,14 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             [
                 (
                     'GetProperties', '', 'a{sv}',
-                    'ret = self.GetAll("org.ofono.RadioSettings")')
+                    'ret = self.GetAll("org.ofono.RadioSettings")'),
+                (
+                    'SetProperty',
+                    'sv',
+                    '',
+                    'self.Set("org.ofono.RadioSettings", args[0], args[1]); '
+                    'self.EmitSignal("org.ofono.RadioSettings",\
+                        "PropertyChanged", "sv", [args[0], args[1]])'),
             ])
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
