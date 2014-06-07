@@ -65,7 +65,8 @@ class SystemSettings():
         app = testobj.launch_test_application(
             *params,
             app_type='qt',
-            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase)
+            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase,
+            capture_output=True)
 
         return app
 

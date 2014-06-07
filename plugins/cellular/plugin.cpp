@@ -21,14 +21,14 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
-#include "cellular.h"
+#include "radiosettings.h"
 
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
 
-    qmlRegisterType<Cellular>(uri, 1, 0, "UbuntuCellularPanel");
+    qmlRegisterType<RadioSettings>(uri, 1, 0, "RadioSettings");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

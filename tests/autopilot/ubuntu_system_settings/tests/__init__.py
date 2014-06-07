@@ -124,6 +124,19 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                 ('Register', '', '', ''),
             ]
         )
+
+        self.dbus_con.get_object(
+            'org.ofono', '/ril_0').AddProperty(
+            'org.ofono.RadioSettings', 'TechnologyPreference', 'any')
+        self.dbus_con.get_object(
+            'org.ofono', '/ril_0').AddMethods(
+            'org.ofono.RadioSettings',
+            [
+                (
+                    'GetProperties', '', 'a{sv}',
+                    'ret = self.GetAll("org.ofono.RadioSettings")')
+            ])
+
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 
 
@@ -168,8 +181,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
 
     def get_storage_space_used_by_category(self, objectName):
         return self.main_view.wait_select_single(
-            'StorageItem', objectName=objectName
-            ).value
+            'StorageItem', objectName=objectName).value
 
     @property
     def storage_page(self):

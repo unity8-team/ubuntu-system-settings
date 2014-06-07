@@ -30,8 +30,8 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    UbuntuCellularPanel {
-        id: cellularPanel
+    RadioSettings {
+        id: radioSettings
     }
 
     NetworkRegistration {
@@ -66,17 +66,6 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListItem.Standard {
-            text: i18n.tr("Cellular data")
-            visible: !showAllUI
-            control: Switch {
-                id: dataSwitch
-                checked: connMan.powered
-                onClicked: connMan.powered = checked
-            }
-         }
-
-
         ListModel {
             id: techPreference
             ListElement { name: "Off"; description: ""; key: "off" }
@@ -106,17 +95,17 @@ ItemPage {
             visible: true
             delegate: techPreferenceDelegate
             model: techPreference
-            selectedIndex: techPreference.getIndexByKey(cellularPanel.technologyPreference)
+            selectedIndex: techPreference.getIndexByKey(radioSettings.technologyPreference)
             onSelectedIndexChanged: {
                 var key = techPreference.get(selectedIndex).key;
-                console.warn('current cellularPanel.technologyPreference == ' + cellularPanel.technologyPreference);
+                console.warn('current radioSettings.technologyPreference == ' + radioSettings.technologyPreference);
 
                 if (key === 'off') {
                     connMan.powered = false;
                     console.warn('conman.powered: off');
                 } else {
                     connMan.powered = true;
-                    cellularPanel.technologyPreference = key
+                    radioSettings.technologyPreference = key
                     console.warn('conman.powered: on');
                     console.warn('setting new technologyPreference: ' + key);
                 }
@@ -128,7 +117,7 @@ ItemPage {
         ListItem.Standard {
             id: dataRoamingItem
             text: i18n.tr("Data roaming")
-            enabled: dataSwitch.checked
+            enabled: connMan.powered
             control: Switch {
                 id: dataRoamingControl
                 checked: connMan.roamingAllowed

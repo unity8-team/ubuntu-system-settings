@@ -17,85 +17,67 @@
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
-
 #include "radiosettings.h"
-#include <QObject>
-#include <QtDebug>
-#include <QStringList>
-#include <QDBusReply>
-#include <QDBusInterface>
-#include <QDBusServiceWatcher>
 
+/* A Wrapper class for OfonoRadioSettings
+ *
+ * This class provides properties and functions related to
+ * radio settings.
+ */
 RadioSettings::RadioSettings(QObject *parent) :
-    QObject(parent),
-
-    // connect to system bus
-    m_systemBusConnection (QDBusConnection::systemBus()),
-
-    // watch the service
-    m_serviceWatcher ("org.ofono.RadioSettings",
-                      m_systemBusConnection,
-                      QDBusServiceWatcher::WatchForOwnerChange),
-    m_radioSettingsInterface ("org.ofono.RadioSettings",
-                         "/org/ofono/RadioSettings/ril_0/", // FIXME: less hard coding of modem
-                         "org.ofono.RadioSettings",
-                          m_systemBusConnection)
+    QObject(parent)
 {
-    // get notified when setting change
-    connect (&m_serviceWatcher,
-         SIGNAL (serviceOwnerChanged (QString, QString, QString)),
-         this,
-         SLOT (slotNameOwnerChanged (QString, QString, QString)));
-
-    if (m_radioSettingsInterface.isValid()) {
-        qCritical() << "RadioSettings: valid interface, setting up interface";
-        setUpInterface();
-    } else {
-        qCritical() << "RadioSettings: failed to set up interface";
-    }
+    m_ofonoRadioSettings = new OfonoRadioSettings(OfonoModem::AutomaticSelect, QString(), this);
 
     qCritical() << "RadioSettings: ctor";
-    QString technologyPreference("any");
 
-}
-
-void RadioSettings::setUpInterface()
-{
-    m_radioSettingsInterface.connection().connect(
-        m_radioSettingsInterface.service(),
-        m_radioSettingsInterface.path(),
-        "org.freedesktop.DBus.Properties",
-        "PropertiesChanged",
+    QObject::connect(m_ofonoRadioSettings,
+        SIGNAL (technologyPreferenceChanged (const QString&)),
         this,
-        SLOT(slotChanged(QString, QVariantMap, QStringList)));
-        qCritical() << "radiosettings: setUpInterface";
+        SLOT (operatorPreferedTechnologyChanged(const QString&)));
+    m_preferedTechnology = m_ofonoRadioSettings->technologyPreference();
+    qCritical() << "RadioSettings: " << m_preferedTechnology;
+    qCritical() << "RadioSettings: m_if->path() " << m_ofonoRadioSettings;
+}
+
+
+/* Converts the technology provided from ofono as a string to an enum.
+ * The possible values from ofono are: "gsm", "edge", "umts", "hspa", "lte"
+ */
+RadioSettings::TechnologyPreference technologyPreferenceToInt(const QString &technologyPreference)
+{
+    if (technologyPreference == QString(QStringLiteral("gsm")))
+        return RadioSettings::GsmTechnologyPreference;
+    else if (technologyPreference == QString(QStringLiteral("umts")))
+        return RadioSettings::UmtsTechnologyPreference;
+    else if (technologyPreference == QString(QStringLiteral("lte")))
+        return RadioSettings::LteTechnologyPreference;
+    else if (technologyPreference == QString(QStringLiteral("any")))
+        return RadioSettings::AnyTechnologyPreference;
+    return RadioSettings::UnknownTechnologyPreference;
+}
+
+/* Contains the name of the operator currently register */
+QString RadioSettings::preferedTechnology() const
+{
+    return m_preferedTechnology;
+}
+
+void RadioSettings::operatorPreferedTechnologyChanged(const QString &preferedTechnology)
+{
+    m_preferedTechnology = preferedTechnology;
+    // Q_EMIT preferedTechnologyChanged();
+}
+
+void RadioSettings::setPreferedTechnology(QString &preferedTechnology)
+{
+    if (preferedTechnology != m_preferedTechnology)
+    {
+        m_preferedTechnology = preferedTechnology;
+        // Q_EMIT preferedTechnologyChanged();
     }
-
-void RadioSettings::slotChanged(QString interface,
-                           QVariantMap changed_properties,
-                           QStringList invalidated_properties)
-{
-    Q_UNUSED (interface);
-    Q_UNUSED (changed_properties);
-    Q_UNUSED (invalidated_properties);
-    // TODO
-    qCritical() << "radiosettings: slotChanged";
 }
 
-// FIXME: figure out what exactly is required here
-void RadioSettings::slotNameOwnerChanged(QString name,
-                                    QString oldOwner,
-                                    QString newOwner)
+RadioSettings::~RadioSettings()
 {
-    Q_UNUSED (oldOwner);
-    Q_UNUSED (newOwner);
-
-    if (name != QString("org.ofono.RadioSettings"))
-        return;
-
-    setUpInterface();
-}
-
-// destructor
-RadioSettings::~RadioSettings() {
 }

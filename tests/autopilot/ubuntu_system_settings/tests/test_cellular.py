@@ -80,19 +80,9 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
 class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
 
-    def setUp(self):
-        super(TechnologyPreferenceTestCase, self).setUp()
-
-        self.dbusmock.AddProperty(
-            'org.ofono.RadioSettings',
-            'TechnologyPreference',
-            'any'
-        )
-
-        # TODO: mock more technologies (gsm, lte, umts)
-
     def test_any_or_automatic_technology_is_selected(self):
         # assert that any (from mock from setup) is selected
+        self.assertTrue(False)
         pass
 
     def test_available_preferences_are_enumerated(self):

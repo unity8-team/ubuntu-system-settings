@@ -17,55 +17,48 @@
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
-
 #ifndef RADIOSETTINGS_H
 #define RADIOSETTINGS_H
 
+
 #include <QObject>
-#include <QDBusReply>
-#include <QDBusInterface>
-#include <QDBusServiceWatcher>
+#include <QtCore>
+#include <ofonoradiosettings.h>
 
 class RadioSettings : public QObject
 {
     Q_OBJECT
-    //Q_ENUMS(TechnologyPreference)
+    Q_PROPERTY(QString preferedTechnology READ preferedTechnology WRITE setPreferedTechnology NOTIFY preferedTechnologyChanged)
+    Q_ENUMS(PreferedTechnology)
 
 public:
-    explicit RadioSettings(QObject *parent = 0);
+    RadioSettings(QObject *parent=0);
     ~RadioSettings();
 
-    void setPreference (QString pref);
-    QString technologyPreference();
-
     enum TechnologyPreference {
-        UnknownPreference = 0,
-        AnyPreference,
-        GsmPreference,
-        UmtsPreference,
-        LtePreference
+        UnknownTechnologyPreference = 0,
+        AnyTechnologyPreference,
+        GsmTechnologyPreference,
+        UmtsTechnologyPreference,
+        LteTechnologyPreference
     };
 
-signals:
-    // signal for when this preference change
-    void technologyPreferenceChanged(QString pref);
+    /* Properties */
+    QString preferedTechnology() const;
+    void setPreferedTechnology(QString &preferedTechnology);
+
+
+Q_SIGNALS:
+    void preferedTechnologyChanged(const QString &preferedTechnology);
 
 private:
-    // list of possible preferences
-    QList<QString*> m_technologyPreferences;
+    OfonoRadioSettings *m_ofonoRadioSettings;
+    QString m_preferedTechnology;
 
-    // DBus members
-    QDBusConnection m_systemBusConnection;
-    QDBusServiceWatcher m_serviceWatcher;
-    QDBusInterface m_radioSettingsInterface;
-
-    void setUpInterface();
-
-public Q_SLOTS:
-    void slotChanged(QString, QVariantMap, QStringList);
-    void slotNameOwnerChanged(QString, QString, QString);
-
+private Q_SLOTS:
+    void operatorPreferedTechnologyChanged(const QString &preferedTechnology);
 
 };
+
 
 #endif // RADIOSETTINGS_H

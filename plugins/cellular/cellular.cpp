@@ -23,26 +23,87 @@
 #include "cellular.h"
 
 Cellular::Cellular(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_systemBusConnection (QDBusConnection::systemBus()),
+    m_radioSettingsIface ("org.ofono.RadioSettings",
+                            "/org/ofono/RadioSettings/ril_0",
+                            "org.ofono.RadioSettings",
+                             m_systemBusConnection)
 {
     qCritical() << "Cellular: ctor";
+    if (!m_radioSettingsIface.isValid()) {
+        qCritical() << "Cellular: interface invalid: " << m_radioSettingsIface.lastError();
+        return;
+    }
+    qCritical() << "Cellular: valid";
+
+    connect (&m_radioSettingsIface,
+             SIGNAL (propertyChanged (QString, QString)),
+             this,
+             SLOT (slotChanged (QString, QString)));
+
+    QDBusReply<QStringList> prefs = m_radioSettingsIface.call("GetProperties");
+    if (!prefs.isValid()) {
+        qCritical() << "Error:" << prefs.error().message();
+        exit(1);
+    }
+    foreach (QString name, prefs.value())
+        qCritical() << name;
 }
 
 QString Cellular::getTechnologyPreference()
 {
-    return QString("any");
-}
 
-QString Cellular::technologyPreference()
-{
-    if (m_currentTechnologyPreference.isEmpty() || m_currentTechnologyPreference.isNull())
-        m_currentTechnologyPreference = getTechnologyPreference();
-
-     return m_currentTechnologyPreference;
+    qCritical() << m_radioSettingsIface.call("GetProperties");
+    return "any";
 }
 
 void Cellular::setTechnologyPreference(QString &pref)
 {
-    m_currentTechnologyPreference = pref;
-    Q_EMIT technologyPreferenceChanged();
+    if (pref == getTechnologyPreference())
+        return;
+
+    Q_EMIT(technologyPreferenceChanged());
+}
+
+/* Converts the preference provided from ofono as a string to an enum.
+ * The possible values from ofono are: "any", "gsm", "umts", "lte"
+ */
+Cellular::TechnologyPreference technologyPreferenceToInt(const QString &preference)
+{
+    if (preference == QString(QStringLiteral("any")))
+        return Cellular::AnyTechnologyPreference;
+    else if (preference == QString(QStringLiteral("gsm")))
+        return Cellular::GsmTechnologyPreference;
+    else if (preference == QString(QStringLiteral("umts")))
+        return Cellular::UmtsTechnologyPreference;
+    else if (preference == QString(QStringLiteral("lte")))
+        return Cellular::LteTechnologyPreference;
+    return Cellular::UnknownTechnologyPreference;
+}
+
+void Cellular::slotChanged(QString interface,
+                                  QString property)
+{
+    qCritical() << "Interface: " << interface;
+    qCritical() << "Property: " << property;
+    if (property == "TechnologyPreference") {
+        Q_EMIT technologyPreferenceChanged();
+    }
+}
+
+
+/* Contains the enum of the technology of the current network.
+ *
+ * The possible values are:
+ *     UnknownTechnologyPreference
+ *     AnyTechnologyPreference
+ *     GsmTechnologyPreference
+ *     UmtsTechnologyPreference
+ *     LteTechnologyPreference
+ *
+ */
+Cellular::TechnologyPreference Cellular::technologyPreference() const
+{
+    return m_technologyPreference;
 }

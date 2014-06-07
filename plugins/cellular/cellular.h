@@ -20,31 +20,43 @@
 #ifndef CELLULAR_H
 #define CELLULAR_H
 
+
 #include <QObject>
+#include <QtCore>
+#include <ofonoradiosettings.h>
 
-//#include "radiosettings.h"
-
-// TODO: enumerate RadioSettings relevant for the cellular page
 class Cellular : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY ( QString technologyPreference READ technologyPreference WRITE setTechnologyPreference NOTIFY technologyPreferenceChanged )
+    Q_PROPERTY(QString preferedTechnology READ getPreferedTechnology WRITE setPreferedTechnology NOTIFY preferedTechnologyChanged)
+    Q_ENUMS(PreferedTechnology)
+
 public:
-    explicit Cellular(QObject *parent = 0);
-    QString technologyPreference();
-    void setTechnologyPreference(QString &pref);
+    Cellular(const QString& modemId, QObject *parent=0);
+    ~Cellular();
+
+    enum TechnologyPreference {
+        UnknownTechnologyPreference = 0,
+        AnyTechnologyPreference,
+        GsmTechnologyPreference,
+        UmtsTechnologyPreference,
+        LteTechnologyPreference
+    };
+
+    /* Properties */
+    QString preferedTechnology() const;
 
 signals:
-
-Q_SIGNALS:
-    void technologyPreferenceChanged();
-
-public slots:
+    void preferedTechnologyChanged(const QString &name);
 
 private:
-    QString m_currentTechnologyPreference;
-    QString getTechnologyPreference();
+    OfonoRadioSettings *m_ofonoRadioSettings;
+    QString m_preferedTechnology;
+
+private Q_SLOTS:
+    void operatorPreferedTechnologyChanged(const QString &preferedTechnology);
 
 };
+
 
 #endif // CELLULAR_H
