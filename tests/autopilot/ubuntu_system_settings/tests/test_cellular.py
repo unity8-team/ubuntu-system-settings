@@ -4,6 +4,7 @@
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
+from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Equals, NotEquals, raises
@@ -82,7 +83,8 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     def test_any_or_automatic_technology_is_selected(self):
         # assert that any (from mock from setup) is selected
-        self.assertTrue(False)
+        sleep(5)
+        self.assertThat(False, Eventually(Equals(_('Time & Date'))))
         pass
 
     def test_available_preferences_are_enumerated(self):

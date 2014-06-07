@@ -95,17 +95,17 @@ ItemPage {
             visible: true
             delegate: techPreferenceDelegate
             model: techPreference
-            selectedIndex: techPreference.getIndexByKey(radioSettings.technologyPreference)
+            selectedIndex: techPreference.getIndexByKey(radioSettings.preferedTechnology)
             onSelectedIndexChanged: {
                 var key = techPreference.get(selectedIndex).key;
-                console.warn('current radioSettings.technologyPreference == ' + radioSettings.technologyPreference);
+                console.warn('current radioSettings.preferedTechnology == ' + radioSettings.preferedTechnology);
 
                 if (key === 'off') {
                     connMan.powered = false;
                     console.warn('conman.powered: off');
                 } else {
                     connMan.powered = true;
-                    radioSettings.technologyPreference = key
+                    radioSettings.preferedTechnology = key
                     console.warn('conman.powered: on');
                     console.warn('setting new technologyPreference: ' + key);
                 }
