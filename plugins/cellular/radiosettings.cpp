@@ -65,17 +65,19 @@ QString RadioSettings::preferedTechnology() const
 
 void RadioSettings::operatorPreferedTechnologyChanged(const QString &preferedTechnology)
 {
-    m_preferedTechnology = preferedTechnology;
-    // Q_EMIT preferedTechnologyChanged();
+    if (preferedTechnology != m_preferedTechnology)
+    {
+        m_preferedTechnology = preferedTechnology;
+        Q_EMIT preferedTechnologyChanged();
+        qCritical() << "RadioSettings: operatorPreferedTechnologyChanged, new val: " << preferedTechnology;
+    } else {
+        qCritical() << "RadioSettings: operatorPreferedTechnologyChanged changed, no change";
+    }
 }
 
 void RadioSettings::setPreferedTechnology(QString &preferedTechnology)
 {
-    if (preferedTechnology != m_preferedTechnology)
-    {
-        m_preferedTechnology = preferedTechnology;
-        // Q_EMIT preferedTechnologyChanged();
-    }
+    m_ofonoRadioSettings->setTechnologyPreference(preferedTechnology);
 }
 
 RadioSettings::~RadioSettings()

@@ -49,7 +49,7 @@ public:
 
 
 Q_SIGNALS:
-    void preferedTechnologyChanged(const QString &preferedTechnology);
+    void preferedTechnologyChanged();
 
 private:
     OfonoRadioSettings *m_ofonoRadioSettings;
