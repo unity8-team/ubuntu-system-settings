@@ -146,7 +146,7 @@ ItemPage {
 
             ListItem.Standard {
                 id: connectedHeader
-                text: i18n.tr("Connected device:")
+                text: i18n.tr("Connected devices:")
 
                 enabled: bluetoothActionGroup.enabled
                 visible: connectedList.visible
@@ -174,7 +174,7 @@ ItemPage {
 
             ListItem.Standard {
                 id: disconnectedHeader
-                text: connectedList.visible ? i18n.tr("Connect a different device:") : i18n.tr("Connect a device:")
+                text: connectedList.visible ? i18n.tr("Connect a different device:") : i18n.tr("Connect another device:")
                 enabled: bluetoothActionGroup.enabled
                 control: ActivityIndicator {
                     visible: backend.discovering

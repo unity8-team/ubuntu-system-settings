@@ -112,7 +112,7 @@ void Bluetooth::disconnectDevice()
 
     if (m_selectedDevice)
         type = m_selectedDevice->getType();
-	if (type == Device::Type::Headset)
+        if (type == Device::Type::Headset)
             m_selectedDevice->disconnect(Device::ConnectionMode::HeadsetMode);
         else if (type == Device::Type::Headphones)
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);

@@ -43,7 +43,7 @@ Device::Device(const QString &path, QDBusConnection &bus)
     initInterface(m_deviceInterface,      path, "org.bluez.Device",      bus);
     initInterface(m_audioInterface,       path, "org.bluez.Audio",       bus);
     initInterface(m_audioSourceInterface, path, "org.bluez.AudioSource", bus);
-    initInterface(m_audioSinkInterface,	  path, "org.bluez.AudioSink",   bus);
+    initInterface(m_audioSinkInterface,   path, "org.bluez.AudioSink",   bus);
     initInterface(m_headsetInterface,     path, "org.bluez.Headset",     bus);
 }
 
