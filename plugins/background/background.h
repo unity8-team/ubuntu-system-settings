@@ -24,6 +24,7 @@
 #include "accountsservice.h"
 
 #include <QDBusInterface>
+#include <QDir>
 #include <QObject>
 #include <QProcess>
 #include <QUrl>
@@ -49,6 +50,7 @@ public:
     ~Background();
     QString backgroundFile();
     void setBackgroundFile(QUrl backgroundFile);
+    Q_INVOKABLE QUrl prepareBackgroundFile(const QUrl &url, bool shareWithGreeter);
     Q_INVOKABLE bool fileExists(const QString &file);
     Q_INVOKABLE void rmFile(const QString &file);
     QStringList customBackgrounds();
@@ -70,6 +72,8 @@ private:
     void updateUbuntuArt();
     QString m_backgroundFile;
     QString getBackgroundFile();
+    QDir getCustomBackgroundFolder();
+    QDir getContentHubFolder();
 };
 
 #endif // BACKGROUND_H

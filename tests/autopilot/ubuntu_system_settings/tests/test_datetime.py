@@ -62,7 +62,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     def test_tz_list_initially_empty(self):
         """ Checks that no list is displayed initially """
         self.system_settings.main_view.scroll_to_and_click(self.tz_page)
-        labelVisible = self.system_settings.main_view.select_single(
+        labelVisible = self.system_settings.main_view.wait_select_single(
             objectName='nothingLabel').visible
         self.assertThat(labelVisible, Equals(True))
 

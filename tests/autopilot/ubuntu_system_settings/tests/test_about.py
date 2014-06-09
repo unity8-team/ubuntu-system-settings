@@ -12,6 +12,7 @@ import unittest
 from gi.repository import GLib
 
 from autopilot.matchers import Eventually
+from autopilot.platform import model
 from testtools import skipIf
 from testtools.matchers import Equals, NotEquals
 
@@ -56,11 +57,19 @@ class AboutTestCase(AboutBaseTestCase):
             return None
 
     def _get_device_manufacturer_and_model(self):
-        manufacturer = subprocess.check_output(
-            ['getprop', 'ro.product.manufacturer']
+        if model() == 'Desktop':
+            manufacturer = open(
+                '/sys/devices/virtual/dmi/id/sys_vendor'
+            ).read().strip()
+            hw_model = open(
+                '/sys/devices/virtual/dmi/id/product_name'
+            ).read().strip()
+        else:
+            manufacturer = subprocess.check_output(
+                ['getprop', 'ro.product.manufacturer']
             ).strip()
-        hw_model = subprocess.check_output(
-            ['getprop', 'ro.product.model']
+            hw_model = subprocess.check_output(
+                ['getprop', 'ro.product.model']
             ).strip()
 
         return '{} {}'.format(manufacturer, hw_model)
@@ -132,6 +141,16 @@ class AboutTestCase(AboutBaseTestCase):
 
         self.assertEquals(last_updated, self._get_last_updated_date())
 
+    def test_check_for_updates(self):
+        """
+        Checks whether clicking on Check for Updates brings us 
+        to the Updates page.
+        """
+        update_button = self.system_settings.main_view.about_page.select_single(
+            objectName='updateButton')
+        self.system_settings.main_view.pointer.click_object(update_button)
+        self.assertThat(self.system_settings.main_view.updates_page.visible,
+            Eventually(Equals(True)))
 
 class StorageTestCase(StorageBaseTestCase):
     """ Tests for Storage """
