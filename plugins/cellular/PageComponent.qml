@@ -31,8 +31,7 @@ ItemPage {
     RadioSettings {
         id: radioSettings
         onPreferedTechnologyChanged: {
-            var cellularDataIsOff = techPreference[dataTypeSelector.selectedIndex].key === 'Off';
-            if(!cellularDataIsOff) {
+            if(connMan.powered) {
                 dataTypeSelector.selectedIndex = techPreference.keyToIndex(radioSettings.preferedTechnology)
                 console.warn('qml: cellular not off, setting preferedTechnology to:' + radioSettings.preferedTechnology);
             } else {
