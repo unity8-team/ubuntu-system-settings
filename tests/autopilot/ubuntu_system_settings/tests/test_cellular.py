@@ -173,6 +173,7 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
             'sv',
             ['TechnologyPreference',  dbus.String('gsm', variant_level=1)])
 
+        # TODO: use 'eventually' instead
         sleep(1)
 
         # assert that "Off" has not changed
