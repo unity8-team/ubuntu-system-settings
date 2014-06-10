@@ -29,19 +29,10 @@ class RadioSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString preferedTechnology READ preferedTechnology WRITE setPreferedTechnology NOTIFY preferedTechnologyChanged)
-    Q_ENUMS(PreferedTechnology)
 
 public:
     RadioSettings(QObject *parent=0);
     ~RadioSettings();
-
-    enum TechnologyPreference {
-        UnknownTechnologyPreference = 0,
-        AnyTechnologyPreference,
-        GsmTechnologyPreference,
-        UmtsTechnologyPreference,
-        LteTechnologyPreference
-    };
 
     /* Properties */
     QString preferedTechnology() const;

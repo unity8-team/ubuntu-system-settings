@@ -1,2 +1,0 @@
-module Ubuntu.SystemSettings.Cellular
-plugin UbuntuCellularPanel

@@ -24,14 +24,16 @@
 #include "connman.h"
 #include "simmanager.h"
 #include "networkregistration.h"
+#include "radiosettings.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Phone"));
-    
+
     qmlRegisterType<SimManager>(uri, 1, 0, "SimManager");
     qmlRegisterType<NetworkRegistration>(uri, 1, 0, "NetworkRegistration");
     qmlRegisterType<ConnMan>(uri, 1, 0, "ConnMan");
+    qmlRegisterType<RadioSettings>(uri, 1, 0, "RadioSettings");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

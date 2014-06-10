@@ -4,8 +4,8 @@
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
+import dbus
 from time import sleep
-
 from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Equals, NotEquals, raises
 
@@ -131,6 +131,7 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.assert_selected_preference(1)
 
     def test_off_setting_disables_roaming(self):
+        """Test that switching off cellular data disables roaming switch"""
         roaming_switch = self.system_settings.main_view.select_single(
             '*', objectName="dataRoamingSwitch"
         )
@@ -144,9 +145,35 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
         # make sure roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
 
+    def test_modem_changes_reflected_in_UI(self):
+        """Assert that DBus change to org.ofono.RadioSettings
+        is reflected in the UI"""
+        # fake dbus signal, changing to gsm
+        self.dbus_con.get_object(
+            'org.ofono', '/ril_0').EmitSignal(
+            'org.ofono.RadioSettings',
+            'PropertyChanged',
+            'sv',
+            ['TechnologyPreference',  dbus.String('gsm', variant_level=1)])
 
+        # assert that "2G" is selected
+        self.assert_selected_preference(1)
 
-    # def test_no_technologies_available(self):
-    #     # change dbusmock to have no technologies
-    #     # assert that things does not break
-    #     pass
+    def test_modem_cannot_turn_on_cellular_data(self):
+        """Assert that the modem, changing DBus, cannot turn on
+        cellular data if it previously was off"""
+        # turn off cellular data
+        self.select_preference('Off')
+
+        # fake dbus signal, changing to gsm
+        self.dbus_con.get_object(
+            'org.ofono', '/ril_0').EmitSignal(
+            'org.ofono.RadioSettings',
+            'PropertyChanged',
+            'sv',
+            ['TechnologyPreference',  dbus.String('gsm', variant_level=1)])
+
+        sleep(1)
+
+        # assert that "Off" has not changed
+        self.assert_selected_preference(0)

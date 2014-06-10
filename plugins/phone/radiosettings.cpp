@@ -40,23 +40,6 @@ RadioSettings::RadioSettings(QObject *parent) :
     qCritical() << "RadioSettings: m_if->path() " << m_ofonoRadioSettings;
 }
 
-
-/* Converts the technology provided from ofono as a string to an enum.
- * The possible values from ofono are: "gsm", "edge", "umts", "hspa", "lte"
- */
-RadioSettings::TechnologyPreference technologyPreferenceToInt(const QString &technologyPreference)
-{
-    if (technologyPreference == QString(QStringLiteral("gsm")))
-        return RadioSettings::GsmTechnologyPreference;
-    else if (technologyPreference == QString(QStringLiteral("umts")))
-        return RadioSettings::UmtsTechnologyPreference;
-    else if (technologyPreference == QString(QStringLiteral("lte")))
-        return RadioSettings::LteTechnologyPreference;
-    else if (technologyPreference == QString(QStringLiteral("any")))
-        return RadioSettings::AnyTechnologyPreference;
-    return RadioSettings::UnknownTechnologyPreference;
-}
-
 /* Contains the name of the operator currently register */
 QString RadioSettings::preferedTechnology() const
 {
@@ -65,6 +48,7 @@ QString RadioSettings::preferedTechnology() const
 
 void RadioSettings::operatorPreferedTechnologyChanged(const QString &preferedTechnology)
 {
+    qCritical() << "operatorPreferedTechnologyChanged: " << preferedTechnology;
     if (preferedTechnology != m_preferedTechnology)
     {
         m_preferedTechnology = preferedTechnology;
