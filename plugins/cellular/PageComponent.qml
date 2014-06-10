@@ -69,10 +69,8 @@ ItemPage {
         ListModel {
             id: techPreference
             ListElement { name: "Off"; description: ""; key: "off" }
-            ListElement { name: "Automatic"; description: ""; key: "any" }
-            ListElement { name: "2G"; description: "Slower and saves battery"; key: "gsm" }
-            ListElement { name: "3G"; description: "Faster"; key: "umts" }
-            ListElement { name: "4G"; description: "Fastest"; key: "lte" }
+            ListElement { name: "2G only"; description: "Saves battery"; key: "gsm" }
+            ListElement { name: "2G/3G/4G"; description: "Faster"; key: "any" }
 
             function getIndexByKey (k) {
                 for (var i=0; i < techPreference.count; i++) {
@@ -117,8 +115,9 @@ ItemPage {
 
         ListItem.Standard {
             id: dataRoamingItem
+            objectName: "dataRoamingSwitch"
             text: i18n.tr("Data roaming")
-            enabled: connMan.powered
+            enabled: (dataTypeSelector.selectedIndex != 0)
             control: Switch {
                 id: dataRoamingControl
                 checked: connMan.roamingAllowed
