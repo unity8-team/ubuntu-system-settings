@@ -10,7 +10,7 @@ add_library(UbuntuTimeDatePanel MODULE plugin.h
   timezonelocationmodel.cpp
   ${QML_SOURCES}
 )
-qt5_use_modules(UbuntuTimeDatePanel Qml Quick DBus)
+qt5_use_modules(UbuntuTimeDatePanel Qml Quick DBus Concurrent)
 target_link_libraries(UbuntuTimeDatePanel ${GLIB_LDFLAGS} ${TIMEZONEMAP_LDFLAGS})
 
 

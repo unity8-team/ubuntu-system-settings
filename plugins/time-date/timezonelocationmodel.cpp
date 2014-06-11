@@ -26,7 +26,9 @@
 #include <QDebug>
 
 TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
-    QAbstractTableModel(parent)
+    QAbstractTableModel(parent),
+    m_pattern(),
+    m_watcher()
 {
     qRegisterMetaType<TzLocation>();
 
@@ -37,18 +39,40 @@ TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
             &TimeZoneLocationModel::processModelResult);
     QObject::connect(workerThread,
             &TimeZonePopulateWorker::finished,
+            this,
+            &TimeZoneLocationModel::store);
+    QObject::connect(workerThread,
+            &TimeZonePopulateWorker::finished,
             workerThread,
             &QObject::deleteLater);
     workerThread->start();
 }
 
+void TimeZoneLocationModel::store()
+{
+    qSort(m_originalLocations.begin(), m_originalLocations.end());
+    QObject::connect(&m_watcher,
+                     &QFutureWatcher<TzLocation>::finished,
+                     this,
+                     &TimeZoneLocationModel::filterFinished);
+}
+
 void TimeZoneLocationModel::processModelResult(TzLocation location)
 {
-    QModelIndex root;
-    int rows = rowCount();
-    beginInsertRows(root, rows, rows);
-    m_locations.append(location);
-    endInsertRows();
+    m_originalLocations.append(location);
+}
+
+void TimeZoneLocationModel::setModel(QList<TzLocation> locations)
+{
+    beginResetModel();
+    m_locations = locations;
+    endResetModel();
+    Q_EMIT(filterComplete());
+}
+
+void TimeZoneLocationModel::filterFinished()
+{
+    setModel(m_watcher.future().results());
 }
 
 int TimeZoneLocationModel::rowCount(const QModelIndex &parent) const
@@ -112,6 +136,41 @@ QHash<int, QByteArray> TimeZoneLocationModel::roleNames() const
     return m_roleNames;
 }
 
+void TimeZoneLocationModel::filter(const QString& pattern)
+{
+    QList<TzLocation> list;
+
+    if (m_watcher.isRunning())
+        m_watcher.cancel();
+
+    if (pattern.isEmpty() || pattern.isNull()) {
+        setModel(QList<TzLocation>());
+        m_pattern = pattern;
+        return;
+    }
+
+    if (!m_pattern.isEmpty() && !m_locations.isEmpty() &&
+            pattern.startsWith(m_pattern))
+        list = m_locations; // search in the smaller list
+    else
+        list = m_originalLocations; //search in the whole list
+
+    m_pattern = pattern;
+
+    QFuture<TzLocation> future (QtConcurrent::filtered(
+                list,
+                [pattern] (const TzLocation& tz) {
+        QString display("%1, %2");
+        return display.arg(tz.city)
+                .arg(tz.full_country.isEmpty() ? tz.country : tz.full_country)
+                .contains(pattern, Qt::CaseInsensitive);
+    }));
+
+    Q_EMIT (filterBegin());
+
+    m_watcher.setFuture(future);
+}
+
 void TimeZonePopulateWorker::run()
 {
     buildCityMap();
@@ -156,44 +215,4 @@ void TimeZonePopulateWorker::buildCityMap()
 
 TimeZoneLocationModel::~TimeZoneLocationModel()
 {
-}
-
-TimeZoneFilterProxy::TimeZoneFilterProxy(TimeZoneLocationModel *parent)
-    : QSortFilterProxyModel(parent),
-      m_currentFilter("^$")
-{
-    this->setSourceModel(parent);
-    this->setDynamicSortFilter(true);
-    this->setFilterRole(TimeZoneLocationModel::SimpleRole);
-    this->setFilterCaseSensitivity(Qt::CaseInsensitive);
-    // By default don't display anything
-    this->setFilterRegExp("^$");
-}
-
-void TimeZoneFilterProxy::setFilterRegExp(const QString &pattern)
-{
-    if (!pattern.startsWith(m_currentFilter) || pattern == "^$")
-        m_matches.clear();
-
-    m_currentFilter = pattern;
-    QSortFilterProxyModel::setFilterRegExp(pattern);
-    invalidate();
-}
-
-bool TimeZoneFilterProxy::filterAcceptsRow(
-        int source_row,
-        const QModelIndex &source_parent) const
-{
-    QModelIndex idx = sourceModel()->index(source_row, sortColumn());
-
-    if (m_matches.contains(idx))
-        return false;
-
-    bool accepted =
-            QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
-
-    if (!accepted && idx.isValid())
-        m_matches.insert(idx);
-
-    return accepted;
 }

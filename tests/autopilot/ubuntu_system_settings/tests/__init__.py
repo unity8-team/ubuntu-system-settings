@@ -9,24 +9,23 @@
 
 from __future__ import absolute_import
 
-from ubuntu_system_settings import helpers
+from ubuntu_system_settings import SystemSettings
 
-from autopilot.input import Mouse, Touch, Pointer
+from autopilot.input import Mouse, Touch
 from autopilot.platform import model
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
-from ubuntuuitoolkit import emulators as toolkit_emulators
 
 import dbus
 import dbusmock
 import subprocess
-from time import sleep
 
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
+
     if model() == 'Desktop':
         scenarios = [('with mouse', dict(input_device_class=Mouse))]
     else:
@@ -34,39 +33,16 @@ class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.app = helpers.launch_system_settings(self, panel=panel)
-        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
-
-    @property
-    def main_view(self):
-        """ Return main view """
-        return self.app.select_single("QQuickView")
-
-    @property
-    def pointer(self):
-        """ Return pointer """
-        return Pointer(self.input_device_class.create())
-
-    def scroll_to(self, obj):
-        self.app.select_single(toolkit_emulators.Toolbar).close()
-        page = self.main_view.select_single(objectName='systemSettingsPage')
-        page_right = page.globalRect[0] + page.globalRect[2]
-        page_bottom = page.globalRect[1] + page.globalRect[3]
-        page_center_x = int(page_right / 2)
-        page_center_y = int(page_bottom / 2)
-        while obj.globalRect[1] + obj.height > page_bottom:
-            self.pointer.drag(page_center_x, page_center_y,
-                              page_center_x, page_center_y - obj.height * 2)
-            # avoid a flick
-            sleep(0.5)
-
-    def scroll_to_and_click(self, obj):
-        self.scroll_to(obj)
-        self.pointer.click_object(obj)
+        self.system_settings = SystemSettings(self, panel=panel)
+        self.assertThat(
+            self.system_settings.main_view.visible,
+            Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
                                          dbusmock.DBusTestCase):
+    """Base class for battery tests that mocks Upower"""
+
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
@@ -89,16 +65,20 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     """ Base class for tests which rely on the presence of a battery """
+
     def setUp(self):
         super(UbuntuSystemSettingsBatteryTestCase, self).setUp()
         self.add_mock_battery()
-        self.app = helpers.launch_system_settings(self)
-        self.assertThat(self.main_view.visible, Eventually(Equals(True)))
+        self.system_settings = SystemSettings(self)
+        self.assertThat(
+            self.system_settings.main_view.visible,
+            Eventually(Equals(True)))
 
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
     """ Class for cellular tests which sets up an Ofono mock """
+
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
@@ -146,15 +126,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         )
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 
-    @property
-    def cellular_page(self):
-        """ Returns 'About' page """
-        return self.main_view.select_single(objectName='cellularPage')
-
-    @property
-    def choose_page(self):
-        return self.main_view.select_single(objectName="chooseCarrierPage")
-
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     """ Base class for About this phone tests """
@@ -162,12 +133,8 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """ Go to About page """
         super(AboutBaseTestCase, self).setUp('about')
-        self.assertThat(self.about_page.active, Eventually(Equals(True)))
-
-    @property
-    def about_page(self):
-        """ Returns 'About' page """
-        return self.main_view.select_single(objectName='aboutPage')
+        self.assertThat(self.system_settings.main_view.about_page.active,
+                        Eventually(Equals(True)))
 
 
 class StorageBaseTestCase(AboutBaseTestCase):
@@ -177,16 +144,19 @@ class StorageBaseTestCase(AboutBaseTestCase):
         """ Go to Storage Page """
         super(StorageBaseTestCase, self).setUp()
         # Click on 'Storage' option
-        button = self.about_page.select_single(
-            'Standard', objectName='storageItem'
+        button = self.system_settings.main_view.about_page.select_single(
+            'Standard',
+            objectName='storageItem'
         )
-        self.scroll_to_and_click(button)
-
+        self.assertThat(button, NotEquals(None))
+        self.system_settings.main_view.scroll_to_and_click(button)
         self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
     def assert_space_item(self, object_name, text):
         """ Checks whether an space item exists and returns a value """
-        item = self.storage_page.select_single(objectName=object_name)
+        item = self.system_settings.main_view.storage_page.select_single(
+            objectName=object_name
+        )
         self.assertThat(item, NotEquals(None))
         label = item.label  # Label
         self.assertThat(label, Equals(text))
@@ -204,7 +174,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
     @property
     def storage_page(self):
         """ Return 'Storage' page """
-        return self.main_view.select_single(
+        return self.system_settings.main_view.select_single(
             'Storage', objectName='storagePage'
         )
 
@@ -216,10 +186,10 @@ class LicenseBaseTestCase(AboutBaseTestCase):
         """ Go to License Page """
         super(LicenseBaseTestCase, self).setUp()
         # Click on 'Software licenses' option
-        button = self.main_view.select_single(
-            'Standard', objectName='licenseItem'
-        )
-        self.scroll_to_and_click(button)
+        button = self.system_settings.main_view.select_single(
+            'Standard',
+            objectName='licenseItem')
+        self.system_settings.main_view.scroll_to_and_click(button)
 
     @property
     def licenses_page(self):
@@ -236,12 +206,7 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
         """ Go to SystemUpdates Page """
         super(SystemUpdatesBaseTestCase, self).setUp()
         # Click on 'System Updates' option
-        button = self.main_view.select_single(
+        button = self.system_settings.main_view.select_single(
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
-        self.scroll_to_and_click(button)
-
-    @property
-    def updates_page(self):
-        """ Return 'System Update' page """
-        return self.main_view.select_single(objectName='systemUpdatesPage')
+        self.system_settings.main_view.scroll_to_and_click(button)

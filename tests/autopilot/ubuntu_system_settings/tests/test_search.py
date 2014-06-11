@@ -23,15 +23,19 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         super(SearchTestCases, self).setUp()
 
     def _get_entry_component(self, name):
-        return self.main_view.wait_select_single(
+        return self.system_settings.main_view.wait_select_single(
             objectName='entryComponent-' + name
         )
 
+    def _get_all_entry_components(self):
+        return self.system_settings.main_view.select_many(
+            'EntryComponent')
+
     def _type_into_search_box(self, text):
-        search_box = self.main_view.select_single(
+        search_box = self.system_settings.main_view.select_single(
             objectName='searchTextField'
         )
-        self.scroll_to_and_click(search_box)
+        self.system_settings.main_view.scroll_to_and_click(search_box)
         self.keyboard.type(_(text))
         self.assertThat(search_box.text, Eventually(Equals(text)))
 
@@ -41,6 +45,9 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         sound_icon = self._get_entry_component('sound')
 
         self.assertThat(sound_icon.visible, Eventually(Equals(True)))
-        self.assertRaises(
-            StateNotFoundError, self._get_entry_component, 'background'
-        )
+        self.assertEquals(len(self._get_all_entry_components()), 1)
+
+    def test_search_filter_no_matches(self):
+        """ Checks that no results are returned if nothing matches """
+        self._type_into_search_box('foobar')
+        self.assertEquals(len(self._get_all_entry_components()), 0)

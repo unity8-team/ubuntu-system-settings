@@ -15,11 +15,15 @@ public:
     explicit FakeSsoService(QObject *parent = 0);
 
     void getCredentials();
+
+    void setValidCredentials(bool value) { m_validCredentials = value; }
     
 signals:
     void credentialsFound(const Token&);
     void credentialsNotFound();
 
+private:
+    bool m_validCredentials;
 };
 
 }
