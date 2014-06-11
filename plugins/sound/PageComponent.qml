@@ -23,6 +23,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.LanguagePlugin 1.0
 import Ubuntu.SystemSettings.Sound 1.0
 
 import "utilities.js" as Utilities
@@ -34,6 +35,10 @@ ItemPage {
     flickable: scrollWidget
 
     UbuntuSoundPanel { id: backendInfo }
+
+    UbuntuLanguagePlugin {
+        id: plugin
+    }
 
     GSettings {
         id: soundSettings
@@ -126,15 +131,16 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Other sounds:")
-                visible: showAllUI
             }
 
             ListItem.Standard {
-                control: Switch {
-                    checked: false
-                }
                 text: i18n.tr("Keyboard sound")
-                visible: showAllUI
+
+                control: Switch {
+                    checked: plugin.keyPressFeedback
+
+                    onClicked: plugin.keyPressFeedback = checked
+                }
             }
 
             ListItem.Standard {
