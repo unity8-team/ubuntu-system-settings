@@ -31,6 +31,8 @@ import "utilities.js" as Utilities
 ItemPage {
     id: root
 
+    objectName: "soundPage"
+
     title: i18n.tr("Sound")
     flickable: scrollWidget
 
@@ -137,6 +139,7 @@ ItemPage {
                 text: i18n.tr("Keyboard sound")
 
                 control: Switch {
+                    objectName: "keyboardSoundSwitch"
                     checked: plugin.keyPressFeedback
 
                     onClicked: plugin.keyPressFeedback = checked
