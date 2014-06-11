@@ -39,7 +39,7 @@ ItemPage {
     UbuntuSoundPanel { id: backendInfo }
 
     UbuntuLanguagePlugin {
-        id: plugin
+        id: languagePlugin
     }
 
     GSettings {
@@ -140,9 +140,9 @@ ItemPage {
 
                 control: Switch {
                     objectName: "keyboardSoundSwitch"
-                    checked: plugin.keyPressFeedback
+                    checked: languagePlugin.keyPressFeedback
 
-                    onClicked: plugin.keyPressFeedback = checked
+                    onClicked: languagePlugin.keyPressFeedback = checked
                 }
             }
 
