@@ -34,83 +34,46 @@ ItemPage {
     property string dbusPath
 
     title: i18n.tr("Network") + " '" + networkName  + "'"
-//    anchors.fill: parent.fill
 
-    // Yes, I know a Column is the wrong widget here.
-    // Currently a hack as this is the only way I could
-    // get the widgets to not overlap.
     Column {
-        id: lastRectangle
-
-        anchors.left: parent.left
-        anchors.right: parent.right
 
         ListItem.Standard {
             id: lastLabel
             text: i18n.tr("Last connected")
+            control: Label {
+                id: lastField
 
-            anchors.left: parent.left
-            anchors.right: parent.horizontalCenter
-
+                text: networkDetails.lastUsed
+            }
         }
-
-        ListItem.Standard {
-            id: lastField
-
-            text: networkDetails.lastUsed
-
-            anchors.left: parent.horizontalCenter
-            anchors.right: parent.right
-
-        }
-    }
-
-    Column {
-        id: passwordRectangle
-
-        anchors.top: lastRectangle.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
 
         ListItem.Standard {
             id: passwordLabel
             text: i18n.tr("Password")
-
-            anchors.left: parent.left
-            anchors.right: parent.horizontalCenter
-
+            control: TextInput {
+                id: passwordField
+                text: networkDetails.password
+                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+            }
         }
 
-        // BUG, this field is editable even though it should not be.
-        TextField {
-            id: passwordField
-            text: networkDetails.password
-            anchors.left: parent.horizontalCenter
-            anchors.right: parent.right
-            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+        ListItem.Standard {
+            text: i18n.tr("Password visible")
+            id: passwordVisible
+            control: Switch {
+                id: passwordVisibleSwitch
+            }
         }
-    }
 
-    ListItem.Standard {
-        text: i18n.tr("Password visible")
-        id: passwordVisible
-        control: Switch {
-            id: passwordVisibleSwitch
-        }
-        anchors.top: passwordRectangle.bottom
-    }
-
-    Button {
-        anchors.top: passwordVisible.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        text : i18n.tr("Forget network")
-        onClicked : {
-          DbusHelper.forgetConnection(dbusPath)
-          pageStack.pop()
-          // Go back two steps so we don't have to update the model.
-          // If the user goes back to network list, the model is rebuilt.
-          pageStack.pop()
+        Button {
+            text : i18n.tr("Forget network")
+            onClicked : {
+                DbusHelper.forgetConnection(dbusPath)
+                pageStack.pop()
+                // Go back two steps so we don't have to update the model.
+                // If the user goes back to network list, the model is rebuilt.
+                pageStack.pop()
+            }
         }
     }
 }
