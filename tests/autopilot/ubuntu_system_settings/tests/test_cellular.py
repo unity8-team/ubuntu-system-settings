@@ -81,6 +81,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
 class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
 
+    """Caches the technology preference selector"""
     _pref_selector = None
 
     @property

@@ -33,9 +33,6 @@ ItemPage {
         onPreferedTechnologyChanged: {
             if(connMan.powered) {
                 dataTypeSelector.selectedIndex = techPreference.keyToIndex(radioSettings.preferedTechnology)
-                console.warn('qml: cellular not off, setting preferedTechnology to:' + radioSettings.preferedTechnology);
-            } else {
-                console.warn('qml: cellular data off, not doing anything');
             }
         }
     }
@@ -74,6 +71,7 @@ ItemPage {
 
         ListModel {
             id: techPreference
+
             ListElement { name: "Off"; description: ""; key: "off" }
             ListElement { name: "2G only"; description: "Saves battery"; key: "gsm" }
             ListElement { name: "2G/3G/4G"; description: "Faster"; key: "any" }
@@ -103,16 +101,11 @@ ItemPage {
             selectedIndex: techPreference.keyToIndex(radioSettings.preferedTechnology)
             onSelectedIndexChanged: {
                 var key = techPreference.get(selectedIndex).key;
-                console.warn('qml: current radioSettings.preferedTechnology == ' + radioSettings.preferedTechnology);
-
                 if (key === 'off') {
                     connMan.powered = false;
-                    console.warn('qml: conman.powered: off');
                 } else {
                     connMan.powered = true;
                     radioSettings.preferedTechnology = key
-                    console.warn('qml: conman.powered: on');
-                    console.warn('qml: setting new technologyPreference: ' + key);
                 }
 
             }
