@@ -29,16 +29,18 @@
 FlightModeHelper::FlightModeHelper(QObject *parent)
     : QObject(parent)
 {
-   m_urfkill = new org::freedesktop::URfkill(QLatin1String("org.freedesktop.URfkill"),
-                                             QLatin1String("/org/freedesktop/URfkill"),
-                                             QDBusConnection::systemBus(),
-                                             this);
+    m_urfkill = new org::freedesktop::URfkill(QLatin1String("org.freedesktop.URfkill"),
+                                              QLatin1String("/org/freedesktop/URfkill"),
+                                              QDBusConnection::systemBus(),
+                                              this);
     auto reply = m_urfkill->IsFlightMode();
     reply.waitForFinished();
     if (reply.isError()) {
         qWarning("Failed to get flight-mode status: %s", qPrintable(reply.error().message()));
+        m_isFlightMode = false;
+    } else {
+        m_isFlightMode = reply.value();
     }
-    m_isFlightMode = reply.value();
 
     connect(m_urfkill, &org::freedesktop::URfkill::FlightModeChanged, [this](bool value)
     {
