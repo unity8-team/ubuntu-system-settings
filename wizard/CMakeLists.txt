@@ -36,12 +36,9 @@ add_executable(system-settings-wizard
     ${QML_FILES} # This is to make qml and image files appear in the IDE's project tree
 )
 
-target_link_libraries(system-settings-wizard
-    ${UNITY-MIR_LIBRARIES}
-)
-
 qt5_use_modules(system-settings-wizard Core Gui Quick Qml)
 
+add_subdirectory(Unity)
 add_subdirectory(Utils)
 
 install(TARGETS system-settings-wizard RUNTIME DESTINATION bin)
