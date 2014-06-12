@@ -37,6 +37,8 @@ ItemPage {
 
     Column {
 
+        anchors.fill: parent
+        
         ListItem.Standard {
             id: lastLabel
             text: i18n.tr("Last connected")
@@ -67,6 +69,8 @@ ItemPage {
 
         Button {
             text : i18n.tr("Forget network")
+            anchors.left: parent.left
+            anchors.right: parent.right
             onClicked : {
                 DbusHelper.forgetConnection(dbusPath)
                 pageStack.pop()
