@@ -22,7 +22,6 @@
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
-#include <QDebug>
 
 Diagnostics::Diagnostics(QObject *parent) :
     QObject(parent),
