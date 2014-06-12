@@ -31,12 +31,12 @@ class Bluetooth : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY (QAbstractItemModel* connectedHeadsets
-                READ getConnectedHeadsets
+    Q_PROPERTY (QAbstractItemModel* connectedDevices
+                READ getConnectedDevices
                 CONSTANT)
 
-    Q_PROPERTY (QAbstractItemModel* disconnectedHeadsets
-                READ getDisconnectedHeadsets
+    Q_PROPERTY (QAbstractItemModel* disconnectedDevices
+                READ getDisconnectedDevices
                 CONSTANT)
 
     Q_PROPERTY (QObject * selectedDevice
@@ -62,22 +62,22 @@ public:
     ~Bluetooth() {}
 
     Q_INVOKABLE void setSelectedDevice(const QString &address);
-    Q_INVOKABLE void connectHeadset(const QString &address);
-    Q_INVOKABLE void disconnectHeadset();
+    Q_INVOKABLE void connectDevice(const QString &address);
+    Q_INVOKABLE void disconnectDevice();
 
 public:
     Agent * getAgent();
     Device * getSelectedDevice();
-    QAbstractItemModel * getConnectedHeadsets();
-    QAbstractItemModel * getDisconnectedHeadsets();
+    QAbstractItemModel * getConnectedDevices();
+    QAbstractItemModel * getDisconnectedDevices();
 
     bool isDiscovering() const { return m_devices.isDiscovering(); }
 
 private:
     QDBusConnection m_dbus;
     DeviceModel m_devices;
-    DeviceFilter m_connectedHeadsets;
-    DeviceFilter m_disconnectedHeadsets;
+    DeviceFilter m_connectedDevices;
+    DeviceFilter m_disconnectedDevices;
     QSharedPointer<Device> m_selectedDevice;
 
     Agent m_agent;

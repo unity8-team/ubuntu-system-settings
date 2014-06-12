@@ -398,9 +398,9 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
 ****
 ***/
 
-void DeviceFilter::filterOnType(Device::Type type)
+void DeviceFilter::filterOnType(QVector<Device::Type> types)
 {
-    m_type = type;
+    m_types = types;
     m_typeEnabled = true;
     invalidateFilter();
 }
@@ -420,7 +420,7 @@ bool DeviceFilter::filterAcceptsRow(int sourceRow,
 
     if (accepts && m_typeEnabled) {
         const int type = childIndex.model()->data(childIndex, DeviceModel::TypeRole).value<int>();
-        accepts = type == m_type;
+        accepts = m_types.contains((Device::Type)type);
     }
 
     if (accepts && m_connectionsEnabled) {
