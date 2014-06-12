@@ -55,6 +55,7 @@ ItemPage {
             control: TextInput {
                 id: ssidField
                 text: DbusHelper.getHotspotName()
+                readOnly: hotspotSwitch.checked
             }
         }
 
@@ -65,6 +66,7 @@ ItemPage {
                 id: passwordField
                 text: DbusHelper.getHotspotPassword()
                 echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+                readOnly: hotspotSwitch.checked
             }
         }
 
