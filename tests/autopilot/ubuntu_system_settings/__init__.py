@@ -132,3 +132,8 @@ class MainWindow(toolkit_emulators.MainView):
     def updates_page(self):
         """ Return 'System Update' page """
         return self.select_single(objectName='systemUpdatesPage')
+
+    @property
+    def sound_page(self):
+        """ Return 'Sound' page """
+        return self.select_single(objectName='soundPage')
