@@ -169,7 +169,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
     def get_storage_space_used_by_category(self, objectName):
         return self.main_view.wait_select_single(
             'StorageItem', objectName=objectName
-            ).value
+        ).value
 
     @property
     def storage_page(self):
@@ -210,3 +210,13 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
         self.system_settings.main_view.scroll_to_and_click(button)
+
+
+class SoundBaseTestCase(UbuntuSystemSettingsTestCase):
+    """ Base class for sound settings tests"""
+
+    def setUp(self):
+        """ Go to Sound page """
+        super(SoundBaseTestCase, self).setUp('sound')
+        self.assertThat(self.system_settings.main_view.sound_page.active,
+                        Eventually(Equals(True)))

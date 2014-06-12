@@ -1,3 +1,23 @@
+ubuntu-system-settings (0.2+14.10.20140612-0ubuntu1) utopic; urgency=low
+
+  [ Mathieu Trudel-Lapierre ]
+  * Enable devices other than headsets: headphones and generic audio devices,
+    and make the strings referring to headset more generic.
+
+  [ jonas-drange ]
+  * Rewrite "Keyboard sound" component in "Sound" panel to use
+    "LanguagePlugin" which provides means to toggle keyboard sound
+    setting.
+
+  [ Iain Lane ]
+  * time-date: Don't try to search while the model is building. Display
+    an ActivityIndicator when searching while constructing the model to
+    avoid confusing message. (LP: #1326475)
+  * Make time-date tests more robust in the face of things taking a
+    while to complete. (LP: #1329245)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 12 Jun 2014 16:36:03 +0000
+
 ubuntu-system-settings (0.1+14.10.20140606-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
