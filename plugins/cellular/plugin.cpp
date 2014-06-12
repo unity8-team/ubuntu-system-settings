@@ -18,8 +18,8 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
+#include "cellulardbushelper.h"
 
-#if 0
 CellularDbusHelper *s = nullptr;
 
 static QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
@@ -28,14 +28,13 @@ static QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
     // Because I'm not sure if the Qml engine tries to delete the
     // pointer we return when it is shut down.
     if(!s)
-        s = new WifiDbusHelper(engine);
+        s = new CellularDbusHelper(engine);
     return s;
 }
-#endif
 
 void BackendPlugin::registerTypes(const char *uri)
 {
-//    qmlRegisterSingletonType<CellularDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
+    qmlRegisterSingletonType<CellularDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

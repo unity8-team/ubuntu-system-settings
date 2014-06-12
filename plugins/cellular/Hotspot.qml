@@ -22,6 +22,7 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Cellular 1.0
 
 ItemPage {
 
@@ -37,6 +38,14 @@ ItemPage {
             text: i18n.tr("Hotspot")
             control: Switch {
                 id: hotspotSwitch
+                checked: DbusHelper.isHotspotActive()
+                enabled: ssidField.text != "" && passwordField != ""
+                onCheckedChanged: {
+                    if(checked) {
+                        DbusHelper.setHotspotSettings(ssidField.text, passwordField.text)
+                    }
+                    DbusHelper.toggleHotspot(checked)
+                }
             }
         }
 
@@ -45,7 +54,7 @@ ItemPage {
             text: i18n.tr("Network name")
             control: TextInput {
                 id: ssidField
-                text: "Ubuntu hotspot"
+                text: DbusHelper.getHotspotName()
             }
         }
 
@@ -54,7 +63,7 @@ ItemPage {
             text: i18n.tr("WPA password")
             control: TextInput {
                 id: passwordField
-                text: "qwerty1"
+                text: DbusHelper.getHotspotPassword()
                 echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
             }
         }
