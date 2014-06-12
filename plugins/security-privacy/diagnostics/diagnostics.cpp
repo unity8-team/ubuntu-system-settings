@@ -22,6 +22,7 @@
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
+#include <QDebug>
 
 Diagnostics::Diagnostics(QObject *parent) :
     QObject(parent),
@@ -36,12 +37,17 @@ Diagnostics::Diagnostics(QObject *parent) :
 {
     connect(&m_watcher, SIGNAL(serviceOwnerChanged(QString, QString, QString)),
             this, SLOT(createInterface(QString, QString, QString)));
-    createInterface("", "", "");
+    createInterface("com.ubuntu.WhoopsiePreferences", "", "");
 }
 
-void Diagnostics::createInterface(const QString&, const QString&, const QString& newOwner)
+void Diagnostics::createInterface(const QString& name,
+                                  const QString& oldOwner,
+                                  const QString& newOwner)
 {
-    if (!m_whoopsieInterface.isValid()) {
+    Q_UNUSED (oldOwner);
+
+    if (!m_whoopsieInterface.connection().isConnected() ||
+            name != "com.ubuntu.WhoopsiePreferences") {
         return;
     }
 
