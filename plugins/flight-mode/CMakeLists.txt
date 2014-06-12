@@ -5,6 +5,7 @@ add_library(FlightModeHelper MODULE
   flight-mode-helper.h
   plugin.cpp
   plugin.h
+  # Proxy class for interface org.freedesktop.URfkill, /org/freedesktop/URfkill
   # manually generated with qdbusxml2cpp
   # if the API changes, get the introspection data
   # from the service and regenerate the file
