@@ -18,19 +18,34 @@
  *
  */
 
-#ifndef PLUGIN_H
-#define PLUGIN_H
+#include <QObject>
+#include "urfkill-proxy.h"
 
-#include <QtQml/QQmlEngine>
-#include <QtQml/QQmlExtensionPlugin>
+#ifndef FLIGHT_MODE_HELPER_H
+#define FLIGHT_MODE_HELPER_H
 
-class BackendPlugin : public QQmlExtensionPlugin
+class FlightModeHelper : public QObject
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
-    
+
+    Q_PROPERTY(bool inFlightMode
+               READ inFlightMode
+               NOTIFY inFlightModeChanged)
+
 public:
-    void registerTypes(const char *uri);
-    void initializeEngine(QQmlEngine *engine, const char *uri);
+    FlightModeHelper(QObject *parent = 0);
+    ~FlightModeHelper();
+
+    Q_INVOKABLE void setFlightMode(bool value);
+
+    bool inFlightMode();
+
+signals:
+    void inFlightModeChanged();
+
+private:
+    org::freedesktop::URfkill *m_urfkill;
+    bool m_isFlightMode;
 };
-#endif // PLUGIN_H
+
+#endif

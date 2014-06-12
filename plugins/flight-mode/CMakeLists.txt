@@ -1,8 +1,11 @@
 set(QML_SOURCES EntryComponent.qml)
 
 add_library(FlightModeHelper MODULE
+  flight-mode-helper.cpp
+  flight-mode-helper.h
   plugin.cpp
   plugin.h
+  urfkill-proxy.h
   ${QML_SOURCES}
 )
 qt5_use_modules(FlightModeHelper Qml Quick DBus)

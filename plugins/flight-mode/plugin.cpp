@@ -22,15 +22,13 @@
 #include <QtQml/QQmlContext>
 #include "plugin.h"
 
+#include "flight-mode-helper.h"
+
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.FlightMode"));
     
-//    qmlRegisterType<Bluetooth>(uri, 1, 0, "UbuntuBluetoothPanel");
-//    qmlRegisterType<Device>(uri, 1, 0, "Device");
-//    qmlRegisterType<Device>(uri, 1, 0, "Agent");
-//    qRegisterMetaType<Device*>("Device*");
-//    qRegisterMetaType<Agent*>("Agent*");
+    qmlRegisterType<FlightModeHelper>(uri, 1, 0, "Helper");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
