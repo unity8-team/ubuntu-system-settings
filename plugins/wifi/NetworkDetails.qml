@@ -54,6 +54,7 @@ ItemPage {
             text: i18n.tr("Password")
             control: TextInput {
                 id: passwordField
+                readOnly: true
                 text: networkDetails.password
                 echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
             }
