@@ -5,6 +5,9 @@ add_library(FlightModeHelper MODULE
   flight-mode-helper.h
   plugin.cpp
   plugin.h
+  # manually generated with qdbusxml2cpp
+  # if the API changes, get the introspection data
+  # from the service and regenerate the file
   urfkill-proxy.h
   ${QML_SOURCES}
 )
