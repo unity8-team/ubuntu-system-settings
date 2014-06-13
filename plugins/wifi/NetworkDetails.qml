@@ -61,7 +61,7 @@ ItemPage {
         }
 
         ListItem.Standard {
-            text: i18n.tr("Password visible")
+            text: i18n.tr("Show password")
             id: passwordVisible
             control: Switch {
                 id: passwordVisibleSwitch
