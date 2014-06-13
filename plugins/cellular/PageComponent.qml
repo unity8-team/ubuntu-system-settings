@@ -107,6 +107,13 @@ ItemPage {
             }
         }
 
+        ListItem.SingleValue {
+            text: i18n.tr("Wifi hotspot")
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+            }
+        }
+
         ListItem.Standard {
             text: i18n.tr("Data usage statistics")
             progression: true
