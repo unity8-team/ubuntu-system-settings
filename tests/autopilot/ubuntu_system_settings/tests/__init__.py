@@ -169,7 +169,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
     def get_storage_space_used_by_category(self, objectName):
         return self.main_view.wait_select_single(
             'StorageItem', objectName=objectName
-            ).value
+        ).value
 
     @property
     def storage_page(self):
@@ -210,3 +210,57 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
             objectName='entryComponent-system-update')
         self.assertThat(button, NotEquals(None))
         self.system_settings.main_view.scroll_to_and_click(button)
+
+
+class BackgroundBaseTestCase(
+        UbuntuSystemSettingsTestCase,
+        dbusmock.DBusTestCase):
+    """ Base class for Background tests """
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+
+    def setUp(self):
+        """Mock account service dbus, go to background page"""
+
+        user_props = { # NOQA
+            'BackgroundFile': dbus.String('background.png', variant_level=1)
+        }
+
+        user_object_path = "/user/foo"
+        self.mock_server = self.spawn_server(
+            'org.freedesktop.Accounts',
+            '/org/freedesktop/Accounts',
+            'org.freedesktop.Accounts',
+            system_bus=True,
+            stdout=subprocess.PIPE)
+
+        self.account_service_mock = dbus.Interface(self.dbus_con.get_object(
+            'org.freedesktop.Accounts', '/org/freedesktop/Accounts'),
+            dbusmock.MOCK_IFACE)
+
+        # let accountservice find a user object path
+        self.account_service_mock.AddMethod(
+            'org.freedesktop.Accounts',
+            'FindUserById',
+            'x',
+            'o',
+            'ret = "%s"' % user_object_path)
+
+        self.account_service_mock.AddMethods(
+            'org.freedesktop.DBus.Properties',
+            [
+                ('Get', 's', 'v', 'ret = user_props[args[0]]'),
+                ('Set', 'sv', '', 'user_props[args[0]] = args[1]')
+            ])
+
+        self.account_service_mock.AddObject(
+            user_object_path,
+            'org.freedesktop.Accounts.User',
+            user_props, [])
+
+        super(BackgroundBaseTestCase, self).setUp('background')
+        self.assertThat(self.system_settings.main_view.background_page.active,
+                        Eventually(Equals(True)))

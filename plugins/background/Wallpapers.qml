@@ -26,41 +26,14 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Content 0.1
 import Ubuntu.SystemSettings.Background 1.0
 
-ItemPage {
+Column {
     id: selectSourcePage
-    flickable: sourceSelector
     anchors.fill: parent
 
-    property bool homeScreen
-    property bool useSame
-    property var activeTransfer
-    property var store
     property string defaultBackground
     property string current
-    signal save (bool homeScreen, string uri)
 
-    title: useSame ? i18n.tr("Choose background") : homeScreen ?
-                         i18n.tr("Home screen") : i18n.tr("Welcome screen")
-
-    Action {
-        id: selectDefaultPeer
-        text: i18n.tr("Photo/Image")
-        iconName: "import-image"
-        onTriggered: {
-            startContentTransfer(function(uri) {
-                pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
-                selectedItemConnection.target = pageStack.currentPage;
-            });
-        }
-    }
-
-    tools: ToolbarItems {
-        ToolbarButton {
-            action: selectDefaultPeer
-        }
-        opened: true
-        locked: true
-    }
+    signal save (string uri)
 
     UbuntuBackgroundPanel {
         id: backgroundPanel
@@ -95,8 +68,7 @@ ItemPage {
                 title: i18n.tr("Ubuntu Art")
                 current: selectSourcePage.current
                 onSelected: {
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
-                    selectedItemConnection.target = pageStack.currentPage;
+                    mainPage.pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
                 }
             }
 
@@ -111,24 +83,8 @@ ItemPage {
                 current: selectSourcePage.current
                 editable: true
                 onSelected: {
-                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
-                    selectedItemConnection.target = pageStack.currentPage;
-                }
-            }
-
-            Connections {
-                id: selectedItemConnection
-                onStateChanged: {
-                    if (target.state === "saved") {
-                        save(homeScreen, target.uri);
-                        if (activeTransfer.state === ContentTransfer.Collected)
-                            activeTransfer.state = ContentTransfer.Finalized;
-                    }
-                    if ((target.state === "cancelled") &&
-                        (activeTransfer.state === ContentTransfer.Collected)) {
-                        backgroundPanel.rmFile(target.uri);
-                        activeTransfer.state = ContentTransfer.Finalized;
-                    }
+                    mainPage.pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    mainPage.selectedItemConnection.target = mainPage.pageStack.currentPage;
                 }
             }
             ListItem.Empty {}
@@ -138,11 +94,11 @@ ItemPage {
     Connections {
         id: contentHubConnection
         property var imageCallback
-        target: activeTransfer ? activeTransfer : null
+        target: mainPage.activeTransfer ? mainPage.activeTransfer : null
         onStateChanged: {
-            if (activeTransfer.state === ContentTransfer.Charged) {
-                if (activeTransfer.items.length > 0) {
-                    var imageUrl = activeTransfer.items[0].url;
+            if (mainPage.activeTransfer.state === ContentTransfer.Charged) {
+                if (mainPage.activeTransfer.items.length > 0) {
+                    var imageUrl = mainPage.activeTransfer.items[0].url;
                     imageCallback(imageUrl);
                 }
             }
@@ -161,12 +117,13 @@ ItemPage {
         scope: ContentScope.App
     }
 
+    // requests an active transfer from peer
     function startContentTransfer(callback) {
         if (callback)
             contentHubConnection.imageCallback = callback
         var transfer = peer.request(appStore);
         if (transfer !== null) {
-            activeTransfer = transfer;
+            mainPage.activeTransfer = transfer;
         }
     }
 }

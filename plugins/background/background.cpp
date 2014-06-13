@@ -43,8 +43,9 @@ QString Background::getBackgroundFile()
     QVariant answer = m_accountsService.getUserProperty(
                 "org.freedesktop.Accounts.User",
                 "BackgroundFile");
-
+    qCritical() << "getBackgroundFile";
     if (answer.isValid())
+        qCritical() << "getBackgroundFile: was valid " << answer.toString();
         return answer.toString();
 
     return QString();

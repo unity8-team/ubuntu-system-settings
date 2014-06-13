@@ -18,32 +18,6 @@
  *
  */
 
-function setBackground(homeScreen, uri) {
-    if (systemSettingsSettings.backgroundDuplicate) {
-        updateBoth(uri);
-    } else {
-        if (homeScreen) {
-            updateHome(uri);
-            systemSettingsSettings.backgroundSetLast = "home";
-        } else {
-            updateWelcome(uri);
-            systemSettingsSettings.backgroundSetLast = "welcome";
-        }
-    }
-    pageStack.pop();
-}
-
-function updateWelcome(uri) {
+function setBackground(uri) {
     backgroundPanel.backgroundFile = backgroundPanel.prepareBackgroundFile(uri, true);
-}
-
-function updateHome(uri) {
-    background.pictureUri = backgroundPanel.prepareBackgroundFile(uri, false);
-}
-
-function updateBoth(uri) {
-    // multiple prepares on a uri is fine
-    uri = backgroundPanel.prepareBackgroundFile(uri, true);
-    updateWelcome(uri);
-    updateHome(uri);
 }

@@ -20,6 +20,7 @@
 
 #include "accountsservice.h"
 
+#include <QDebug>
 #include <QDBusReply>
 
 #include <unistd.h>
@@ -78,9 +79,10 @@ void AccountsService::setUpInterface()
 {
     QDBusReply<QDBusObjectPath> qObjectPath = m_accountsserviceIface.call(
                 "FindUserById", qlonglong(getuid()));
-
+    qCritical() << "setUpInterface: Find by user id " << getuid();
     if (qObjectPath.isValid()) {
         m_objectPath = qObjectPath.value().path();
+        qCritical() << "setUpInterface: object path was valid " << m_objectPath;
         m_accountsserviceIface.connection().connect(
             m_accountsserviceIface.service(),
             m_objectPath,
