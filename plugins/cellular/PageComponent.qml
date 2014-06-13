@@ -22,36 +22,47 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.SystemSettings.Phone 1.0
+import MeeGo.QOfono 0.2
 
 ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
+    OfonoManager {
+        id: manager
+        onAvailableChanged: {
+           console.log("Ofono is " + available)
+        }
+        onModemAdded: {
+            console.log("modem added "+modem)
+        }
+        onModemRemoved: console.log("modem removed")
+    }
 
-    NetworkRegistration {
+
+    OfonoSimManager {
+        id: sim
+        modemPath: manager.modems[0]
+        Component.onCompleted: {
+            console.log ("OfonoSimManager: " + present);
+        }
+    }
+
+
+    OfonoNetworkRegistration {
         id: netReg
+        modemPath: manager.modems[0]
+        property bool scanning: false
         onModeChanged: {
             if (mode === "manual")
                 chooseCarrier.selectedIndex = 1;
             else
                 chooseCarrier.selectedIndex = 0;
         }
-        Component.onCompleted: {
-            /* NetworkRegistration provides an enum for data technology,
-             * including:
-             *     UnknownDataTechnology
-             *     GprsDataTechnology
-             *     EdgeDataTechnology
-             *     UmtsDataTechnology
-             *     HspaDataTechnology
-             */
-            if (technology == NetworkRegistration.UnknownDataTechnology)
-                console.log ("Unknown data technology");
-        }
     }
 
-    ConnMan {
+    OfonoConnMan {
         id: connMan
+        modemPath: manager.modems[0]
     }
 
     property string carrierName: netReg.name
@@ -117,10 +128,10 @@ ItemPage {
             id: chooseCarrier
             objectName: "autoChooseCarrierSelector"
             expanded: true
-            enabled: netReg.mode != "auto-only"
+            enabled: netReg.mode !== "auto-only"
             text: i18n.tr("Choose carrier:")
             model: [i18n.tr("Automatically"), i18n.tr("Manually")]
-            selectedIndex: netReg.mode == "manual" ? 1 : 0
+            selectedIndex: netReg.mode === "manual" ? 1 : 0
         }
 
         ListItem.SingleValue {

@@ -23,20 +23,40 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Phone 1.0
+import MeeGo.QOfono 0.2
 
 ItemPage {
     title: i18n.tr("Phone")
     property string carrierName: netop.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
-    NetworkRegistration {
-        id: netop;
-        onNameChanged:
-            carrierName = netop.name
+    OfonoManager {
+        id: manager
+        onAvailableChanged: {
+           console.log("Ofono is " + available)
+        }
+        onModemAdded: {
+            console.log("modem added "+modem)
+        }
+        onModemRemoved: console.log("modem removed")
     }
 
-    SimManager {
+    OfonoNetworkRegistration {
+        id: netop;
+        modemPath: manager.modems[0]
+
+        Component.onCompleted: {
+            console.log ("OfonoNetworkRegistration: " + name);
+        }
+        onNameChanged: carrierName = netop.name
+    }
+
+    OfonoSimManager {
         id: sim
+        modemPath: manager.modems[0]
+        Component.onCompleted: {
+            console.log ("OfonoSimManager: " + present);
+        }
     }
 
     Column {
