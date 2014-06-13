@@ -23,14 +23,10 @@
 #include <QtDebug>
 #include <QDBusInterface>
 
-namespace {
+#include "nm_settings_proxy.h"
+#include "nm_settings_connection_proxy.h"
 
-const QString nm_service("org.freedesktop.NetworkManager");
-const QString nm_object("/org/freedesktop/NetworkManager/Settings");
-const QString settings_interface("org.freedesktop.NetworkManager.Settings");
-const QString connection_interface("org.freedesktop.NetworkManager.Settings.Connection");
-
-}
+#include <iostream>
 
 WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent) {
 }
@@ -46,55 +42,179 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password) {
  */
 }
 
-QList<QPair<QString, QString>> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
-    QList<QPair<QString, QString>> networks;
-    const QString wifikey("802-11-wireless");
-    const QString idkey("id");
-    QDBusInterface iface(nm_service, nm_object, settings_interface, QDBusConnection::systemBus());
-    //QDBusReply<QStringList> listResult = iface.call("ListConnections");
-    QDBusReply<QList<QDBusObjectPath> > listResult = iface.call("ListConnections");
-    if(!listResult.isValid()) {
-        qDebug() << "Could not query network list: " << listResult.error() << "\n";
-        return networks;
+struct Network : public QObject
+{
+    struct DontCare : public std::exception {};
+
+    QString id;
+
+    enum class Mode {
+        infrastructure,
+        adhoc
+    };
+    Mode mode;
+
+    enum class Type {
+        wireless,
+        other
+    };
+    Type type;
+
+    qulonglong timestamp;
+
+    bool isValid;
+    QString path;
+
+    enum class Security
+    {
+        open,
+        secured
+    };
+    Security security;
+    QString password;
+
+    void parseConnection()
+    {
+        if (!settings.contains("connection"))
+            throw DontCare();
+
+        auto connection = settings["connection"];
+        id = connection["id"].toString();
+
+        // we only care about wifi
+        auto type_str = connection["type"].toString();
+        if (type_str != "802-11-wireless")
+            throw DontCare();
+        type = Type::wireless;
+
+        // if the configuration does not have timestamp it means
+        // it has never been succesfully activated and there is no
+        // point in showing it.
+        if (!connection.contains("timestamp"))
+            throw DontCare();
+        timestamp = connection["timestamp"].toULongLong();
     }
-    for(const auto &i : listResult.value()) {
-        QDBusInterface connIface(nm_service, i.path(), connection_interface, QDBusConnection::systemBus());
-        auto replymsg = connIface.call("GetSettings");
-        if(replymsg.type() != QDBusMessage::ReplyMessage) {
-            printf("Reply is incorrect.\n");
-            return networks;
+
+    void parseWireless()
+    {
+        if (!settings.contains("802-11-wireless"))
+            throw DontCare();
+
+        auto wireless = settings["802-11-wireless"];
+
+        auto mode_str = wireless["mode"];
+        if (mode_str == "infrastructure")
+            mode = Mode::infrastructure;
+        else if (mode_str == "adhoc")
+            mode = Mode::adhoc;
+        else
+            throw DontCare();
+
+        if (wireless.contains("security"))
+        {
+            auto security_str = wireless["security"];
+            if (security_str != "802-11-wireless-security")
+                throw DontCare();
+            security = Security::secured;
+            parseWirelessSecurity();
+        } else {
+            security = Security::open;
         }
-        auto args = replymsg.arguments();
-        if(args.size() != 1) {
-            qDebug() << "DBus reply is malformed: " << replymsg.errorMessage() << "\n";
-            return networks;
+    }
+
+    void parseWirelessSecurity()
+    {
+        if (!settings.contains("802-11-wireless-security"))
+            throw DontCare();
+
+        auto security = settings["802-11-wireless-security"];
+        auto keymgmt = security["key-mgmt"];
+        auto authalg = security["auth-alg"];
+
+        auto reply = m_iface.GetSecrets("802-11-wireless-security");
+        reply.waitForFinished();
+        auto secrects = reply.value();
+
+        if (!secrects.contains("802-11-wireless-security"))
+            throw DontCare();
+
+        auto secrects_security = secrects["802-11-wireless-security"];
+
+        if (keymgmt == "none") {
+            if (!secrects_security.contains("wep-key0"))
+                throw DontCare();
+            password = secrects_security["wep-key0"].toString();
+        } else if (keymgmt == "wpa-psk" && authalg == "open") {
+            if (!secrects_security.contains("psk"))
+                throw DontCare();
+            password = secrects_security["psk"].toString();
+        } else {
+            throw DontCare();
         }
-        QDBusArgument r = args[0].value<QDBusArgument>();
-        QMap<QString, QVariant> m;
-        r >> m;
-        if(m.find(wifikey) != m.end()) {
-            auto id = m.find(idkey);
-            if(id == m.end()) {
-                qDebug() << "NM object missing required id field.\n";
-            } else {
-                if(id->type() != QVariant::String) {
-                    qDebug() << "NM object id is malformed.\n";
-                } else {
-                    // connection -> timestamp
-                    networks.push_back(QPair<QString, QString>(id->toString(), i.path()));
-                }
+    }
+
+    Network() = delete;
+    Network(QString path)
+        : path{path},
+          m_iface("org.freedesktop.NetworkManager",
+                  path,
+                  QDBusConnection::systemBus())
+    {
+        auto reply = m_iface.GetSettings();
+        reply.waitForFinished();
+        settings = reply.value();
+
+        parseConnection();
+        if (type == Type::wireless)
+            parseWireless();
+    }
+
+    OrgFreedesktopNetworkManagerSettingsConnectionInterface m_iface;
+    QMap<QString, QVariantMap> settings;
+};
+
+QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
+    QList<QStringList> networks;
+
+   OrgFreedesktopNetworkManagerSettingsInterface foo
+            ("org.freedesktop.NetworkManager",
+             "/org/freedesktop/NetworkManager/Settings",
+             QDBusConnection::systemBus(),
+             this);
+    auto reply = foo.ListConnections();
+    reply.waitForFinished();
+    if (reply.isValid()) {
+        for(const auto &c: reply.value()) {
+            try {
+                Network network(c.path());
+                QStringList tmp;
+                tmp.push_back(network.id);
+                tmp.push_back(network.path);
+                tmp.push_back(network.password);
+                QLocale locale;
+                tmp.push_back(locale.toString(QDateTime::fromMSecsSinceEpoch(network.timestamp*1000), locale.dateFormat()));
+                networks.push_back(tmp);
+            } catch (const Network::DontCare &) {
+                continue;
             }
         }
+    } else {
+        std::cout << "ERROR" << qPrintable(reply.error().message()) << std::endl;
     }
+
+    std::sort(networks.begin(), networks.end(), [](const QStringList &a, const QStringList &b){
+        return a[0].toLower() < b[0].toLower();
+    });
     return networks;
 }
 
 void WifiDbusHelper::forgetConnection(const QString dbus_path) {
-    /*
-    QDBusInterface service(nm_service, dbus_path, connection_interface, QDBusConnection::systemBus());
-    auto reply = service.call("Delete");
-    if(reply.type() == QDBusMessage::ErrorMessage) {
-        qDebug() << "Error forgetting connection: " << reply.errorMessage() << "\n";
-    }*/
-    printf("Forgetting network with path %s.\n", dbus_path.toUtf8().data());
+    OrgFreedesktopNetworkManagerSettingsConnectionInterface bar
+            ("org.freedesktop.NetworkManager",
+             dbus_path,
+             QDBusConnection::systemBus(),
+             this);
+    auto reply = bar.Delete();
+    reply.waitForFinished();
+    printf("Forgotten network with path %s.\n", dbus_path.toUtf8().data());
 }

@@ -26,13 +26,12 @@ struct PreviousNetworkModel::Private {
 };
 
 PreviousNetworkModel::PreviousNetworkModel(QObject *parent) : QAbstractListModel(parent) {
-    //WifiDbusHelper h;
-    //auto networks = h.getPreviouslyConnectedWifiNetworks();
     p = new PreviousNetworkModel::Private();
-    //p->data = networks;
-    // Let's use dummy data for now.
-    p->data.push_back(QStringList() << "network1" << "path1" << "password1" << "2014/01/01");
-    p->data.push_back(QStringList() << "network2" << "path2" << "password2" << "2014/02/02");
+
+    WifiDbusHelper h;
+    auto networks = h.getPreviouslyConnectedWifiNetworks();
+
+    p->data = networks;
 }
 
 PreviousNetworkModel::~PreviousNetworkModel() {

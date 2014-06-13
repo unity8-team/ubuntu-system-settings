@@ -25,6 +25,8 @@ add_library(UbuntuWifiPanel MODULE
   plugin.h
   unitymenumodelstack.h
   previousnetworkmodel.h
+  nm_settings_proxy.h
+  nm_settings_connection_proxy.h
   ${QML_SOURCES}
 )
 qt5_use_modules(UbuntuWifiPanel Qml Quick DBus)
