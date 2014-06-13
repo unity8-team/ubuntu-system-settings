@@ -27,8 +27,15 @@
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickView>
+#include <QTimer>
 
 #include "PageList.h"
+
+void hideAndQuit()
+{
+    // Let qml finish drawing final black frames before quitting
+    QTimer::singleShot(500, QCoreApplication::instance(), SLOT(quit()));
+}
 
 int startShell(int argc, const char** argv, void* server)
 {
@@ -79,7 +86,7 @@ int startShell(int argc, const char** argv, void* server)
     view->setSource(QUrl(rootDir + "/qml/main.qml"));
     view->setColor("transparent");
 
-    QObject::connect(view->engine(), SIGNAL(quit()), application, SLOT(quit()));
+    QObject::connect(view->engine(), &QQmlEngine::quit, hideAndQuit);
 
     if (isUbuntuMirServer) {
         view->showFullScreen();
