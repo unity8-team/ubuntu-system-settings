@@ -121,18 +121,16 @@ IndicatorBase {
             }
         }
     }
-    
-    Button {
-        anchors.right: parent.right
-        anchors.left: parent.left
+
+    ListItem.SingleValue {
         text: i18n.tr("Previous networks")
+        progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
     }
 
-    Button {
-        anchors.right: parent.right
-        anchors.left: parent.left
+    ListItem.SingleValue {
         text: i18n.tr("Other network")
+        progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
     }
 
