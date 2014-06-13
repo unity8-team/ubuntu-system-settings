@@ -61,9 +61,13 @@ ItemPage {
             anchors.top: passwordList.bottom
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.topMargin: units.gu(1)
 
             Button {
                 id: cancelButton
+                anchors.leftMargin: units.gu(2)
+                anchors.rightMargin: units.gu(1)
+                anchors.bottomMargin: units.gu(1)
 
                 text: i18n.tr("Cancel")
 
@@ -78,6 +82,9 @@ ItemPage {
             Button {
                 id: connectButton
 
+                anchors.leftMargin: units.gu(1)
+                anchors.rightMargin: units.gu(2)
+                anchors.bottomMargin: units.gu(1)
                 text: i18n.tr("Connect")
 //                enabled: languageList.currentIndex != plugin.currentLanguage
 

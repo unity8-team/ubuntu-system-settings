@@ -72,6 +72,10 @@ ItemPage {
             text : i18n.tr("Forget network")
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.topMargin: units.gu(1)
+            anchors.leftMargin: units.gu(2)
+            anchors.rightMargin: units.gu(2)
+            anchors.bottomMargin: units.gu(1)
             onClicked : {
                 DbusHelper.forgetConnection(dbusPath)
                 pageStack.pop()
