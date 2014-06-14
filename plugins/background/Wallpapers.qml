@@ -69,6 +69,7 @@ Column {
                 current: selectSourcePage.current
                 onSelected: {
                     mainPage.pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    console.warn('WallpaperGrid: pushed Preview.qml with uri:', uri);
                 }
             }
 

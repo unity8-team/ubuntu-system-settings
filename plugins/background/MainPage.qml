@@ -108,7 +108,7 @@ ItemPage {
                 current: welcomeBackground
                 onSelected: {
                     pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
-                    fooConnection.target = pageStack.currentPage;
+                    selectedItemConnection.target = pageStack.currentPage;
                 }
             }
 
@@ -124,34 +124,11 @@ ItemPage {
             //     editable: true
             //     onSelected: {
             //         pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
-            //         fooConnection.target = pageStack.currentPage
+            //         selectedItemConnection.target = pageStack.currentPage
             //     }
             // }
 
             ListItem.Empty {}
-
-            Connections {
-                id: fooConnection
-                onStateChanged: {
-                    console.warn('selectedItemConnection.onStateChanged: new state: ', target.state);
-                    var trans = mainPage.activeTransfer;
-                    if (target.state === "saved") {
-                        save(target.uri);
-                        console.warn('selectedItemConnection.onStateChanged: activeTransfer', trans);
-
-                        // if a transfer is done, clean up
-                        if (trans && trans.state === ContentTransfer.Collected) {
-                            trans.state = ContentTransfer.Finalized;
-                        }
-                    }
-                    // if we did an import, clean up
-                    if ((target.state === "cancelled") &&
-                        (trans && trans.state === ContentTransfer.Collected)) {
-                        backgroundPanel.rmFile(target.uri);
-                        trans.state = ContentTransfer.Finalized;
-                    }
-                }
-            }
 
             Connections {
                 id: contentHubConnection
@@ -197,8 +174,28 @@ ItemPage {
     Connections {
         id: selectedItemConnection
         onSave: {
-            console.warn('selectedItemConnection.onSave', uri);
-            Utilities.setBackground(uri)
+            console.warn('selectedItemConnection.onSave', target.uri);
+            Utilities.setBackground(target.uri)
+        }
+        onStateChanged: {
+            console.warn('selectedItemConnection.onStateChanged: new state: ', target.state);
+            var trans = mainPage.activeTransfer;
+            if (target.state === "saved") {
+                save(target.uri);
+                console.warn('selectedItemConnection.onStateChanged: save', target.uri);
+                console.warn('selectedItemConnection.onStateChanged: activeTransfer', trans);
+
+                // if a transfer is done, clean up
+                if (trans && trans.state === ContentTransfer.Collected) {
+                    trans.state = ContentTransfer.Finalized;
+                }
+            }
+            // if we did an import, clean up
+            if ((target.state === "cancelled") &&
+                (trans && trans.state === ContentTransfer.Collected)) {
+                backgroundPanel.rmFile(target.uri);
+                trans.state = ContentTransfer.Finalized;
+            }
         }
     }
 
