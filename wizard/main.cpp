@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QGuiApplication>
 #include <QLibrary>
+#include <QProcess>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickView>
@@ -31,10 +32,9 @@
 
 #include "PageList.h"
 
-void hideAndQuit()
+void quitViaUpstart()
 {
-    // Let qml finish drawing final black frames before quitting
-    QTimer::singleShot(500, QCoreApplication::instance(), SLOT(quit()));
+    QProcess::startDetached("initctl start ubuntu-system-settings-wizard-cleanup");
 }
 
 int startShell(int argc, const char** argv, void* server)
@@ -86,7 +86,7 @@ int startShell(int argc, const char** argv, void* server)
     view->setSource(QUrl(rootDir + "/qml/main.qml"));
     view->setColor("transparent");
 
-    QObject::connect(view->engine(), &QQmlEngine::quit, hideAndQuit);
+    QObject::connect(view->engine(), &QQmlEngine::quit, quitViaUpstart);
 
     if (isUbuntuMirServer) {
         view->showFullScreen();
