@@ -21,14 +21,9 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
-
-IndicatorBase {
+ItemPage {
     id: wifibase
     title: i18n.tr("Wi-Fi")
-    busName: "com.canonical.indicator.network"
-    actionsObjectPath: "/com/canonical/indicator/network"
-    menuObjectPaths: {"phone_wifi_settings": "/com/canonical/indicator/network/phone_wifi_settings"}
-    active: true
 
     UnityMenuModel {
         id: menuModel
@@ -39,100 +34,110 @@ IndicatorBase {
             menuStack.head = menuModel;
         }
     }
-
+    UnityMenuModelStack {
+        id: menuStack
+    }
     MenuItemFactory {
         id: menuFactory
         model: mainMenu.model
     }
 
-    UnityMenuModelStack {
-        id: menuStack
+    // workaround of getting the following error on startup:
+    // WARNING - file:///usr/..../wifi/PageComponent.qml:24:1: QML Page: Binding loop detected for property "flickable"
+    flickable: null
+    Component.onCompleted: {
+        flickable = pageFlickable
     }
 
-    Column{
+    Flickable {
+        id: pageFlickable
+        anchors.fill: parent
 
-        anchors {
-            fill: parent
-            bottomMargin: Qt.inputMethod.visible ? (Qt.inputMethod.keyboardRectangle.height - main.anchors.bottomMargin) : 0
-
-            Behavior on bottomMargin {
-                NumberAnimation {
-                    duration: 175
-                    easing.type: Easing.OutQuad
-                }
+        Column {
+            anchors {
+                fill: parent
             }
-            // TODO - does ever frame.
-            onBottomMarginChanged: {
-                mainMenu.positionViewAtIndex(mainMenu.currentIndex, ListView.End)
-            }
-        }
-        ListView {
-            id: mainMenu
-            model: menuStack.tail ? menuStack.tail : null
 
-
-            // Ensure all delegates are cached in order to improve smoothness of scrolling
-            cacheBuffer: 10000
-
-            // Only allow flicking if the content doesn't fit on the page
-            contentHeight: contentItem.childrenRect.height
-            boundsBehavior: (contentHeight > wifibase.height) ?
-                                Flickable.DragAndOvershootBounds :
-                                Flickable.StopAtBounds
-
-            currentIndex: -1
-            delegate: Item {
-                id: menuDelegate
-
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                height: loader.height
-                visible: height > 0
-
-                Loader {
-                    id: loader
-                    asynchronous: true
-
-                    property int modelIndex: index
+            Repeater {
+                id: mainMenu
+                model: menuStack.tail ? menuStack.tail : null
+                delegate: Item {
+                    id: menuDelegate
 
                     anchors {
                         left: parent.left
                         right: parent.right
                     }
+                    height: loader.height
+                    visible: height > 0
 
-                    sourceComponent: menuFactory.load(model)
+                    Loader {
+                        id: loader
+                        asynchronous: true
 
-                    onLoaded: {
-                        if (model.type === rootMenuType) {
-                            menuStack.push(mainMenu.model.submenu(index));
+                        property int modelIndex: index
+
+                        anchors {
+                            left: parent.left
+                            right: parent.right
                         }
 
-                        if (item.hasOwnProperty("menuActivated")) {
-                            item.menuActivated = Qt.binding(function() { return ListView.isCurrentItem; });
-                            item.selectMenu.connect(function() { ListView.view.currentIndex = index });
-                            item.deselectMenu.connect(function() { ListView.view.currentIndex = -1 });
-                        }
-                        if (item.hasOwnProperty("menu")) {
-                            item.menu = Qt.binding(function() { return model; });
+                        sourceComponent: menuFactory.load(model)
+
+                        onLoaded: {
+                            if (model.type === "com.canonical.indicator.root") {
+                                menuStack.push(mainMenu.model.submenu(index));
+                            }
+
+                            if (item.hasOwnProperty("menuActivated")) {
+                                item.menuActivated = Qt.binding(function() { return ListView.isCurrentItem; });
+                                item.selectMenu.connect(function() { ListView.view.currentIndex = index });
+                                item.deselectMenu.connect(function() { ListView.view.currentIndex = -1 });
+                            }
+                            if (item.hasOwnProperty("menu")) {
+                                item.menu = Qt.binding(function() { return model; });
+                            }
                         }
                     }
                 }
+                onCountChanged: {
+                    // make sure our flickable is positioned correctly when we resize the Repeater.
+                    pageFlickable.returnToBounds()
+                }
+            }
+
+            DivMenuItem {}
+
+            ListItem.SingleValue {
+                text: i18n.tr("Previous networks")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
+            }
+
+            ListItem.SingleValue {
+                text: i18n.tr("Other network")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
             }
         }
 
-        ListItem.SingleValue {
-            text: i18n.tr("Previous networks")
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
+        bottomMargin: Qt.inputMethod.visible ? (Qt.inputMethod.keyboardRectangle.height - main.anchors.bottomMargin) : 0
+
+        Behavior on bottomMargin {
+            NumberAnimation {
+                duration: 175
+                easing.type: Easing.OutQuad
+            }
+        }
+        // TODO - does ever frame.
+        onBottomMarginChanged: {
+            mainMenu.positionViewAtIndex(mainMenu.currentIndex, ListView.End)
         }
 
-        ListItem.SingleValue {
-            text: i18n.tr("Other network")
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
-        }
-
+        // Only allow flicking if the content doesn't fit on the page
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > wifibase.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
     }
 }
