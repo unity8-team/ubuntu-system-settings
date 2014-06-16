@@ -50,7 +50,7 @@ IndicatorBase {
     }
 
     Column{
-    
+
         anchors {
             fill: parent
             bottomMargin: Qt.inputMethod.visible ? (Qt.inputMethod.keyboardRectangle.height - main.anchors.bottomMargin) : 0
@@ -66,73 +66,73 @@ IndicatorBase {
                 mainMenu.positionViewAtIndex(mainMenu.currentIndex, ListView.End)
             }
         }
-    ListView {
-        id: mainMenu
-        model: menuStack.tail ? menuStack.tail : null
+        ListView {
+            id: mainMenu
+            model: menuStack.tail ? menuStack.tail : null
 
 
-        // Ensure all delegates are cached in order to improve smoothness of scrolling
-        cacheBuffer: 10000
+            // Ensure all delegates are cached in order to improve smoothness of scrolling
+            cacheBuffer: 10000
 
-        // Only allow flicking if the content doesn't fit on the page
-        contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > wifibase.height) ?
-                            Flickable.DragAndOvershootBounds :
-                            Flickable.StopAtBounds
+            // Only allow flicking if the content doesn't fit on the page
+            contentHeight: contentItem.childrenRect.height
+            boundsBehavior: (contentHeight > wifibase.height) ?
+                                Flickable.DragAndOvershootBounds :
+                                Flickable.StopAtBounds
 
-        currentIndex: -1
-        delegate: Item {
-            id: menuDelegate
-
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            height: loader.height
-            visible: height > 0
-
-            Loader {
-                id: loader
-                asynchronous: true
-
-                property int modelIndex: index
+            currentIndex: -1
+            delegate: Item {
+                id: menuDelegate
 
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
+                height: loader.height
+                visible: height > 0
 
-                sourceComponent: menuFactory.load(model)
+                Loader {
+                    id: loader
+                    asynchronous: true
 
-                onLoaded: {
-                    if (model.type === rootMenuType) {
-                        menuStack.push(mainMenu.model.submenu(index));
+                    property int modelIndex: index
+
+                    anchors {
+                        left: parent.left
+                        right: parent.right
                     }
 
-                    if (item.hasOwnProperty("menuActivated")) {
-                        item.menuActivated = Qt.binding(function() { return ListView.isCurrentItem; });
-                        item.selectMenu.connect(function() { ListView.view.currentIndex = index });
-                        item.deselectMenu.connect(function() { ListView.view.currentIndex = -1 });
-                    }
-                    if (item.hasOwnProperty("menu")) {
-                        item.menu = Qt.binding(function() { return model; });
+                    sourceComponent: menuFactory.load(model)
+
+                    onLoaded: {
+                        if (model.type === rootMenuType) {
+                            menuStack.push(mainMenu.model.submenu(index));
+                        }
+
+                        if (item.hasOwnProperty("menuActivated")) {
+                            item.menuActivated = Qt.binding(function() { return ListView.isCurrentItem; });
+                            item.selectMenu.connect(function() { ListView.view.currentIndex = index });
+                            item.deselectMenu.connect(function() { ListView.view.currentIndex = -1 });
+                        }
+                        if (item.hasOwnProperty("menu")) {
+                            item.menu = Qt.binding(function() { return model; });
+                        }
                     }
                 }
             }
         }
-    }
 
-    ListItem.SingleValue {
-        text: i18n.tr("Previous networks")
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
-    }
+        ListItem.SingleValue {
+            text: i18n.tr("Previous networks")
+            progression: true
+            onClicked: pageStack.push(Qt.resolvedUrl("PreviousNetworks.qml"))
+        }
 
-    ListItem.SingleValue {
-        text: i18n.tr("Other network")
-        progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
-    }
+        ListItem.SingleValue {
+            text: i18n.tr("Other network")
+            progression: true
+            onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
+        }
 
     }
 }
