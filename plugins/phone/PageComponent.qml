@@ -31,31 +31,17 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        onAvailableChanged: {
-           console.log("Ofono is " + available)
-        }
-        onModemAdded: {
-            console.log("modem added "+modem)
-        }
-        onModemRemoved: console.log("modem removed")
     }
 
     OfonoNetworkRegistration {
         id: netop;
         modemPath: manager.modems[0]
-
-        Component.onCompleted: {
-            console.log ("OfonoNetworkRegistration: " + name);
-        }
         onNameChanged: carrierName = netop.name
     }
 
     OfonoSimManager {
         id: sim
         modemPath: manager.modems[0]
-        Component.onCompleted: {
-            console.log ("OfonoSimManager: " + present);
-        }
     }
 
     Column {

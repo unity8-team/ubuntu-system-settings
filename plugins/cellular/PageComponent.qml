@@ -29,24 +29,13 @@ ItemPage {
     objectName: "cellularPage"
     OfonoManager {
         id: manager
-        onAvailableChanged: {
-           console.log("Ofono is " + available)
-        }
-        onModemAdded: {
-            console.log("modem added "+modem)
-        }
-        onModemRemoved: console.log("modem removed")
     }
 
 
     OfonoSimManager {
         id: sim
-        modemPath: manager.modems[0]
-        Component.onCompleted: {
-            console.log ("OfonoSimManager: " + present);
-        }
+        modemPath: manager.modems[0]        
     }
-
 
     OfonoNetworkRegistration {
         id: netReg
@@ -138,7 +127,7 @@ ItemPage {
             text: i18n.tr("Carrier")
             objectName: "chooseCarrier"
             value: carrierName ? carrierName : i18n.tr("N/A")
-            property bool enabled: chooseCarrier.selectedIndex == 1 // Manually
+            property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
             progression: enabled
             onClicked: {
                 if (enabled)

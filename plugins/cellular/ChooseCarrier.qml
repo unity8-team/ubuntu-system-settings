@@ -37,9 +37,7 @@ ItemPage {
 
     Connections {
         target: netReg
-        onNetworkOperatorsChanged: {
-            buildLists();
-        }
+        onNetworkOperatorsChanged: buildLists()
         onScanFinished: netReg.scanning = false;
     }
 
@@ -48,10 +46,9 @@ ItemPage {
         operators = [];
         var oN = new Array();
         var oS = new Array();
-        for (var i in netReg.networkOperators)
+        for (var i; i < netReg.networkOperators.length; i++)
         {
             var tempOp = netOp.createObject(parent, {"operatorPath": netReg.networkOperators[i]});
-
             if (tempOp.status === "forbidden")
                 continue
             oN.push(tempOp.name);
@@ -66,9 +63,8 @@ ItemPage {
     Component {
         id: netOp
         OfonoNetworkOperator {
-            modemPath: netReg.modemPath
             onRegisterComplete: {
-                print ("registerComplete: " + errorString);
+                console.log ("registerComplete: " + errorString);
             }
         }
     }
