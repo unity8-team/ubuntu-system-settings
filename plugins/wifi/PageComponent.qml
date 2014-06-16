@@ -69,7 +69,9 @@ IndicatorBase {
         ListView {
             id: mainMenu
             model: menuStack.tail ? menuStack.tail : null
-
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: units.gu(50)
 
             // Ensure all delegates are cached in order to improve smoothness of scrolling
             cacheBuffer: 10000
