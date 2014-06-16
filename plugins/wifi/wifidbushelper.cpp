@@ -32,7 +32,7 @@ WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent) {
 }
 
 void WifiDbusHelper::connect(QString ssid, int security, QString password) {
-    QDBusInterface service(nm_service, nm_object, settings_interface, QDBusConnection::systemBus());
+    //QDBusInterface service(nm_service, nm_object, settings_interface, QDBusConnection::systemBus());
     printf("Connecting to %s, security %d, password %s.\n",
             ssid.toUtf8().data(), security, password.toUtf8().data());
 /*
