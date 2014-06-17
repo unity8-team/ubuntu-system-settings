@@ -20,7 +20,6 @@
 #include <libintl.h>
 #include <qpa/qplatformnativeinterface.h>
 #include <ubuntu/application/ui/session.h>
-#include <unity-mir/qmirserver.h>
 #include <QDebug>
 #include <QGuiApplication>
 #include <QLibrary>
@@ -125,6 +124,7 @@ int main(int argc, const char *argv[])
             return 1;
         }
 
+        class QMirServer;
         typedef QMirServer* (*createServer_t)(int, const char **);
         createServer_t createQMirServer = (createServer_t) unityMir.resolve("createQMirServer");
         if (!createQMirServer) {
