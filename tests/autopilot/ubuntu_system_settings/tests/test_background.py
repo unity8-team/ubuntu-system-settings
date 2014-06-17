@@ -108,6 +108,11 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         self.assertNotEqual(new, old)
 
         # assert that dbus changed
-        dbus_value = "file://%s" % self.user_obj.GetBackgroundFile()
+        dbus_value = "file://%s" % self.user_proxy.GetBackgroundFile()
         self.assertEqual(dbus_value, new)
 
+class EternalTestCase(BackgroundBaseTestCase):
+    """ Tests for Background Page """
+
+    def test_go_to_sleep(self):
+        sleep(1000)

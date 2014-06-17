@@ -23,6 +23,10 @@ import dbus
 import dbusmock
 import subprocess
 
+ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
+ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
+ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
+
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
@@ -218,18 +222,18 @@ class BackgroundBaseTestCase(
         dbusmock.DBusTestCase):
     """ Base class for Background tests """
 
-    user_props = None
-
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
         klass.dbus_con = klass.get_dbus(True)
 
+    # TODO: create dbusmock template
     def setUp(self):
         """Mock account service dbus, go to background page"""
 
+        # mock ubuntu art directory using a local path
         art_dir = '%s/../background_images/' % os.getcwd()
-        user_object_path = "/user/foo"
+        user_obj = '/user/foo'
 
         self.user_props = {
             'BackgroundFile': dbus.String(
@@ -237,47 +241,42 @@ class BackgroundBaseTestCase(
         }
 
         # start dbus system bus
-        self.mock_server = self.spawn_server(
-            'org.freedesktop.Accounts', '/org/freedesktop/Accounts',
-            'org.freedesktop.Accounts', system_bus=True,
-            stdout=subprocess.PIPE)
+        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
+                                             ACCOUNTS_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
 
-        # make proxy of account service
-        self.account_service_mock = dbus.Interface(self.dbus_con.get_object(
-            'org.freedesktop.Accounts', '/org/freedesktop/Accounts'),
-            dbusmock.MOCK_IFACE)
+        # create account proxy
+        self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
+            ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
 
         # let accountservice find a user object path
-        self.account_service_mock.AddMethod(
-            'org.freedesktop.Accounts', 'FindUserById', 'x', 'o',
-            'ret = "%s"' % user_object_path)
+        self.acc_proxy.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
+                                 'ret = "%s"' % user_obj)
 
-        # expose methods in accountservice
-        self.account_service_mock.AddMethods(
+        # add getter and setter to mock
+        self.acc_proxy.AddMethods(
             'org.freedesktop.DBus.Properties',
             [('Get', 's', 'v', 'ret = self.user_props[args[0]]'),
                 ('Set', 'sv', '', 'self.user_props[args[0]] = args[1]')])
 
-        self.account_service_mock.AddObject(
-            user_object_path, 'org.freedesktop.Accounts.User', self.user_props,
+        # add user object to mock
+        self.acc_proxy.AddObject(
+            user_obj, ACCOUNTS_USER_IFACE, self.user_props,
             [
                 (
                     'SetBackgroundFile', 'v', '',
-                    'self.Set("org.freedesktop.Accounts.User",\
-                        "BackgroundFile", args[0]);'),
+                    'self.Set("%s", "BackgroundFile", args[0]);' %
+                    ACCOUNTS_USER_IFACE),
                 (
                     'GetBackgroundFile', '', 'v',
-                    'ret = self.Get("org.freedesktop.Accounts.User",\
-                        "BackgroundFile")')
+                    'ret = self.Get("%s", "BackgroundFile")' %
+                    ACCOUNTS_USER_IFACE)
             ])
 
-        self.user_mock = dbus.Interface(self.dbus_con.get_object(
-            'org.freedesktop.Accounts', user_object_path),
-            dbusmock.MOCK_IFACE)
-
-        self.user_obj = dbus.Interface(self.dbus_con.get_object(
-            'org.freedesktop.Accounts', user_object_path),
-            'org.freedesktop.Accounts.User')
+        # create user proxy
+        self.user_proxy = dbus.Interface(self.dbus_con.get_object(
+            ACCOUNTS_IFACE, user_obj),
+            ACCOUNTS_USER_IFACE)
 
         # patch env variable
         self.useFixture(EnvironmentVariable(

@@ -113,21 +113,21 @@ ItemPage {
                 }
             }
 
-            // WallpaperGrid {
-            //     id: customGrid
-            //     anchors.left: parent.left
-            //     anchors.right: parent.right
-            //     columns: 3
-            //     bgmodel: backgroundPanel.customBackgrounds
-            //     backgroundPanel: backgroundPanel
-            //     title: i18n.tr("Custom")
-            //     current: welcomeBackground
-            //     editable: true
-            //     onSelected: {
-            //         pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
-            //         selectedItemConnection.target = pageStack.currentPage
-            //     }
-            // }
+            WallpaperGrid {
+                id: customGrid
+                anchors.left: parent.left
+                anchors.right: parent.right
+                columns: 3
+                bgmodel: backgroundPanel.customBackgrounds
+                backgroundPanel: backgroundPanel
+                title: i18n.tr("Custom")
+                current: welcomeBackground
+                editable: true
+                onSelected: {
+                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    selectedItemConnection.target = pageStack.currentPage
+                }
+            }
 
             ListItem.Empty {}
 
