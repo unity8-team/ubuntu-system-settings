@@ -60,6 +60,7 @@ void Background::setBackgroundFile(QUrl backgroundFile)
         return;
 
     m_backgroundFile = backgroundFile.url();
+    qCritical() << "setBackgroundFile" << backgroundFile.path();
     m_accountsService.customSetUserProperty("SetBackgroundFile",
                                             backgroundFile.path());
     Q_EMIT backgroundFileChanged();
@@ -157,7 +158,19 @@ QStringList Background::ubuntuArt()
 void Background::updateUbuntuArt()
 {
 
-    QDir dir("/usr/share/backgrounds/");
+    QString envDir(qgetenv("SYSTEM_SETTINGS_UBUNTU_ART_DIR"));
+
+    qCritical() << "envDir:" << envDir;
+
+    QDir dir;
+
+    if (envDir != "")
+        dir = QDir(envDir);
+    else
+        dir = QDir("/usr/share/backgrounds/");
+
+    qCritical() << "dir:" << dir;
+
     dir.setFilter(QDir::Files | QDir::NoSymLinks);
     QFileInfoList tmpList = dir.entryInfoList();
     foreach (QFileInfo f, tmpList)

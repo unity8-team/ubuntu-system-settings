@@ -147,6 +147,7 @@ void AccountsService::setUserProperty(const QString &interface,
 void AccountsService::customSetUserProperty(const QString &method,
                                             const QVariant &value)
 {
+    qCritical() << "setting customSetUserProperty" << method << value;
     QDBusInterface iface ("org.freedesktop.Accounts",
                           m_objectPath,
                           "org.freedesktop.Accounts.User",
@@ -154,6 +155,6 @@ void AccountsService::customSetUserProperty(const QString &method,
                           this);
 
     if (iface.isValid())
+        qCritical() << "customSetUserProperty, iface valid";
         iface.call(method, value);
-
 }

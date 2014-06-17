@@ -6,11 +6,12 @@
 # by the Free Software Foundation.
 
 """ Tests for Ubuntu System Settings """
-
 from __future__ import absolute_import
 
-from ubuntu_system_settings import SystemSettings
+import os
+from fixtures import EnvironmentVariable
 
+from ubuntu_system_settings import SystemSettings
 from autopilot.input import Mouse, Touch
 from autopilot.platform import model
 from autopilot.matchers import Eventually
@@ -217,6 +218,8 @@ class BackgroundBaseTestCase(
         dbusmock.DBusTestCase):
     """ Base class for Background tests """
 
+    user_props = None
+
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
@@ -225,42 +228,66 @@ class BackgroundBaseTestCase(
     def setUp(self):
         """Mock account service dbus, go to background page"""
 
-        user_props = { # NOQA
-            'BackgroundFile': dbus.String('background.png', variant_level=1)
+        art_dir = '%s/../background_images/' % os.getcwd()
+        user_object_path = "/user/foo"
+
+        self.user_props = {
+            'BackgroundFile': dbus.String(
+                '%slaunchpad.jpg' % art_dir, variant_level=1)
         }
 
-        user_object_path = "/user/foo"
+        # start dbus system bus
         self.mock_server = self.spawn_server(
-            'org.freedesktop.Accounts',
-            '/org/freedesktop/Accounts',
-            'org.freedesktop.Accounts',
-            system_bus=True,
+            'org.freedesktop.Accounts', '/org/freedesktop/Accounts',
+            'org.freedesktop.Accounts', system_bus=True,
             stdout=subprocess.PIPE)
 
+        # make proxy of account service
         self.account_service_mock = dbus.Interface(self.dbus_con.get_object(
             'org.freedesktop.Accounts', '/org/freedesktop/Accounts'),
             dbusmock.MOCK_IFACE)
 
         # let accountservice find a user object path
         self.account_service_mock.AddMethod(
-            'org.freedesktop.Accounts',
-            'FindUserById',
-            'x',
-            'o',
+            'org.freedesktop.Accounts', 'FindUserById', 'x', 'o',
             'ret = "%s"' % user_object_path)
 
+        # expose methods in accountservice
         self.account_service_mock.AddMethods(
             'org.freedesktop.DBus.Properties',
-            [
-                ('Get', 's', 'v', 'ret = user_props[args[0]]'),
-                ('Set', 'sv', '', 'user_props[args[0]] = args[1]')
-            ])
+            [('Get', 's', 'v', 'ret = self.user_props[args[0]]'),
+                ('Set', 'sv', '', 'self.user_props[args[0]] = args[1]')])
 
         self.account_service_mock.AddObject(
-            user_object_path,
-            'org.freedesktop.Accounts.User',
-            user_props, [])
+            user_object_path, 'org.freedesktop.Accounts.User', self.user_props,
+            [
+                (
+                    'SetBackgroundFile', 'v', '',
+                    'self.Set("org.freedesktop.Accounts.User",\
+                        "BackgroundFile", args[0]);'),
+                (
+                    'GetBackgroundFile', '', 'v',
+                    'ret = self.Get("org.freedesktop.Accounts.User",\
+                        "BackgroundFile")')
+            ])
+
+        self.user_mock = dbus.Interface(self.dbus_con.get_object(
+            'org.freedesktop.Accounts', user_object_path),
+            dbusmock.MOCK_IFACE)
+
+        self.user_obj = dbus.Interface(self.dbus_con.get_object(
+            'org.freedesktop.Accounts', user_object_path),
+            'org.freedesktop.Accounts.User')
+
+        # patch env variable
+        self.useFixture(EnvironmentVariable(
+            'SYSTEM_SETTINGS_UBUNTU_ART_DIR', art_dir))
 
         super(BackgroundBaseTestCase, self).setUp('background')
         self.assertThat(self.system_settings.main_view.background_page.active,
                         Eventually(Equals(True)))
+
+    def tearDown(self):
+        self.mock_server.terminate()
+        self.mock_server.wait()
+        super(BackgroundBaseTestCase, self).tearDown()

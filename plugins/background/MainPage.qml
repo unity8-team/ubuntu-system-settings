@@ -93,6 +93,7 @@ ItemPage {
             spacing: units.gu(1)
 
             WallpaperGrid {
+                objectName: "UbuntuArtGrid"
                 anchors.left: parent.left
                 anchors.right: parent.right
                 columns: 3

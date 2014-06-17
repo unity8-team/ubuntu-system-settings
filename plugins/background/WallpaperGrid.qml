@@ -62,6 +62,7 @@ Column {
         spacing: units.dp(1)
         height: childrenRect.height
         Repeater {
+            objectName: "gridRepeater"
             model: bgmodel
             Item {
                 width: itemWidth
@@ -72,6 +73,7 @@ Column {
                     color: UbuntuColors.orange
                     radius: "medium"
                     visible: (current === modelData) && (itemImage.status === Image.Ready)
+                    objectName: "SelectedShape"
                 }
                 UbuntuShape {
                     anchors.centerIn: parent
@@ -80,7 +82,9 @@ Column {
                     height: itemHeight  - (anchors.margins * 2)
                     radius: itemBorder.radius
                     image: Image {
+                        property bool current: current === modelData
                         id: itemImage
+                        objectName: "itemImg"
                         source: modelData
                         width: itemWidth - (anchors.margins * 2)
                         height: itemHeight  - (anchors.margins * 2)
