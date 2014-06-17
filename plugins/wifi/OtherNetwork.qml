@@ -72,12 +72,21 @@ ItemPage {
         TextField {
             id : password
             width: parent.width
+            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Password visible")
+            id: passwordVisible
+            control: Switch {
+                id: passwordVisibleSwitch
+            }
         }
 
         Item {
             id: buttonRectangle
 
-            anchors.top: password.bottom
+            anchors.top: passwordVisible.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.topMargin: units.gu(1)
