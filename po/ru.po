@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2014-01-26 15:27+0000\n"
+"PO-Revision-Date: 2014-05-15 20:06+0000\n"
 "Last-Translator: Zonov Roman <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-25 07:25+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-05-16 06:49+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -134,11 +134,11 @@ msgstr "Вибрация при звонке"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "Вибрация при бесшумном режиме"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
 msgid "Messages:"
-msgstr ""
+msgstr "Сообщения:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:93
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:99
@@ -147,7 +147,7 @@ msgstr "Сообщение принято"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "Вибрировать при получении сообщения"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:122
 msgid "Other sounds:"
@@ -666,7 +666,7 @@ msgstr "Занято Ubuntu"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
 msgid "Videos"
-msgstr ""
+msgstr "Видеозаписи"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:90
 msgid "Audio"
@@ -1097,11 +1097,11 @@ msgstr "Обновления"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:46
 msgid "Update System"
-msgstr ""
+msgstr "Обновить систему"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:47
 msgid "The phone needs to restart to install the system update."
-msgstr ""
+msgstr "Требуется перезагрузка, чтобы установить системные обновления."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:50
 msgid "Install & Restart"
@@ -1109,23 +1109,23 @@ msgstr "Установить (требуется перезагрузка)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:59
 msgid "Not Now"
-msgstr ""
+msgstr "Не сейчас"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:65
 msgid "Install"
-msgstr ""
+msgstr "Установить"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:83
 msgid "Software is up to date"
-msgstr ""
+msgstr "Программное обеспечение актуально."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:90
 msgid "System update has failed."
-msgstr ""
+msgstr "Произошла ошибка при обновлении системы."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:145
 msgid "System update failed."
-msgstr ""
+msgstr "Не удалось обновить систему."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:176
 msgid "Checking for updates…"
@@ -1135,12 +1135,13 @@ msgstr "Проверка обновлений..."
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Установлено %1 обновление"
+msgstr[1] "Установлено %1 обновления"
+msgstr[2] "Установлено %1 обновлений"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:195
 msgid "Pause All"
-msgstr ""
+msgstr "Приостановить все"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:256
 msgid "Retry"
@@ -1152,23 +1153,23 @@ msgstr "Загрузка"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:272
 msgid "Update"
-msgstr ""
+msgstr "Обновить"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:273
 msgid "Resume"
-msgstr ""
+msgstr "Продолжить"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:274
 msgid "Pause"
-msgstr ""
+msgstr "Приостановить"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:319
 msgid "Installing"
-msgstr ""
+msgstr "Установка"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:355
 msgid "Version: "
-msgstr ""
+msgstr "Версия: "
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:376
 msgid "On wi-fi"
@@ -1180,23 +1181,23 @@ msgstr "Всегда"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:432
 msgid "Installing update…"
-msgstr ""
+msgstr "Установка обновления…"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:446
 msgid " bytes"
-msgstr ""
+msgstr " байт"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:449
 msgid " KiB"
-msgstr ""
+msgstr " КБ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:452
 msgid " MiB"
-msgstr ""
+msgstr " МБ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:455
 msgid " GiB"
-msgstr ""
+msgstr " ГБ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:30
 msgid "SIM"
@@ -1273,7 +1274,7 @@ msgstr "Настройки системы"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:2
 msgid "Orientation Lock"
-msgstr ""
+msgstr "Запрет автоповорота экрана"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:4
@@ -1417,7 +1418,7 @@ msgstr "информация"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:84
 msgid "Flight Mode"
-msgstr ""
+msgstr "Авиарежим"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:86

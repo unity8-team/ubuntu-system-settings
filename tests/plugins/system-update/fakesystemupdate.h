@@ -22,6 +22,8 @@
 #include <QObject>
 #include "../../../plugins/system-update/update.h"
 
+#define UBUNTU_PACKAGE_NAME "UbuntuImage"
+
 namespace UpdatePlugin {
 
 class FakeSystemUpdate: public QObject

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-01-31 12:33+0100\n"
-"PO-Revision-Date: 2014-04-14 09:56+0000\n"
-"Last-Translator: BULBUL <Unknown>\n"
+"PO-Revision-Date: 2014-06-14 23:37+0000\n"
+"Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-04-15 07:55+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-06-16 06:28+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -53,14 +53,14 @@ msgstr "تىلنى كۆرسىتىش"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:78
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr "ھەرپتاختا ئورۇنلاشتۇرۇلۇشى"
+msgstr "ھەرپتاختا جايلاشتۇرۇلۇشى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:93
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:103
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:27
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:36
 msgid "Spell checking"
-msgstr "ئىملا تەكشۈرۈڭ"
+msgstr "ئىملا تەكشۈرۈش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:113
 msgid "Auto completion"
@@ -68,7 +68,7 @@ msgstr "ئاپتوماتىك  تاماملا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:123
 msgid "Word suggestions"
-msgstr "تەۋىسىيە سۆزلەر"
+msgstr "تەۋسىيە سۆزلەر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:136
 msgid "Auto capitalization"
@@ -77,19 +77,21 @@ msgstr "چوڭ كىچىك يېزىلىشى ئاپتوماتىك"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:146
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
+"ھەر بىر جۈملىنىڭ باش ھەرپىنى چوڭ قىلىپ كۆرسىتىش ئۈچۈن Shift كۇنۇپكىنى ئېچىپ "
+"قويىدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//PageComponent.qml:153
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:130
 msgid "Keyboard sound"
-msgstr "ھەرىپتاختا ئاۋازى"
+msgstr "ھەرپتاختا ئاۋازى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr "نۆۋەتتىكى ئۇسلۇب:"
+msgstr "نۆۋەتتىكى ئورۇنلاشتۇرۇش:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr "كىرەكلىك ئۇسلۇبلار:"
+msgstr "ئىشلەتكىلى بولىدىغان ئورۇنلاشتۇرۇشلار:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -104,7 +106,7 @@ msgstr "ئىشلەتكىلى بولىدىغان بارلىق تىللار:"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:331
 #: settings.js:22
 msgid "Wi-Fi"
-msgstr "سمسىز تور (wi-fi)"
+msgstr "Wi-Fi"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SoundsList.qml:58
 msgid "Stop playing"
@@ -114,11 +116,11 @@ msgstr "توختات"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:32
 #: settings.js:34
 msgid "Sound"
-msgstr "ئۈن"
+msgstr "ئاۋاز"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:55
 msgid "Phone calls:"
-msgstr "تېلېفون"
+msgstr "تېلېفونلار:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:59
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:65
@@ -132,7 +134,7 @@ msgstr "جىرىڭلىغاندا تىترىسۇن"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:84
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:117
 msgid "Vibrate in Silent Mode"
-msgstr "تىترىگەندە ئۈنسىز ھالەت"
+msgstr "ئۈنسىز ھالەتتە تىترىسۇن"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:89
 msgid "Messages:"
@@ -145,7 +147,7 @@ msgstr "ئۇچۇر كەلدى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:109
 msgid "Vibrate with message sound"
-msgstr "تىترەش ۋە ئۇچۇر ئاۋازى"
+msgstr "ئۇچۇر ئاۋازى بىلەن بىرگە تىترىسۇن"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:122
 msgid "Other sounds:"
@@ -153,16 +155,16 @@ msgstr "باشقا ئۈنلەر:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//PageComponent.qml:138
 msgid "Lock sound"
-msgstr "ئۈننى قولۇپلا"
+msgstr "ئۈننى قۇلۇپلا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr "تېلېفۇن ئۈنسىز ھالەتتە."
+msgstr "تېلېفون ئۈنسىز ھالەتتە."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:29
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:73
 msgid "Phone locking"
-msgstr "تېلېفۇن قۇلۇپلاندى"
+msgstr "تېلېفون قۇلۇپلاش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:40
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:105
@@ -183,17 +185,17 @@ msgstr "ئىم جۈملىسى"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:44
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:30
 msgid "Lock security"
-msgstr "بىخەتەر قۇلۇپلاندى"
+msgstr "قۇلۇپلاش بىخەتەرلىكى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:62
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
 msgid "Lock when idle"
-msgstr "بوش ۋاقىتتا قۇلۇپلا"
+msgstr "بوش ۋاقىتتا قۇلۇپلىسۇن"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:63
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:303
 msgid "Sleep when idle"
-msgstr "بوش ۋاقىتتا ئۆچەككە كىر"
+msgstr "بوش ۋاقىتتا ئۈچەككە كىرسۇن"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:65
@@ -205,54 +207,54 @@ msgstr[0] "%1 مىنۇت"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr "دەرھال ئۆچەككە كىر"
+msgstr "دەرھال ئۈچەككە كىرسۇن"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:33
 #: settings.js:40
 msgid "Security & Privacy"
-msgstr "بىخەتەرلك &شەخسىيەت"
+msgstr "بىخەتەرلىك ۋە شەخسىيەت"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:50
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:124
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:50
 msgid "Phone and Internet"
-msgstr "تېلېفۇن ۋە تور"
+msgstr "تېلېفون ۋە ئىنتېرنېت"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:52
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:125
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:50
 msgid "Phone only"
-msgstr "تېلېفۇن"
+msgstr "تېلېفون"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:68
 msgid "Security:"
-msgstr "بىخەتەرلىك"
+msgstr "بىخەتەرلىك:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:84
 msgid "SIM PIN"
-msgstr "SIM PIN"
+msgstr "SIM نىڭ ئىمى(PIN)  نومۇرى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:90
 msgid "Privacy:"
-msgstr "شەخسىيەت"
+msgstr "شەخسىيەت:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:94
 msgid "Stats on welcome screen"
-msgstr "قارشى ئېلىش ئىكرانى"
+msgstr "مەرھابا ئېكرانىنىڭ ھالەتلىرى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:107
 msgid "Messages on welcome screen"
-msgstr "ئۇچۇر قارشى ئېلىش ئىكرانى"
+msgstr "مەرھابا ئېكرانىدىكى ئۇچۇرلار"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:122
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr "ئىزدەش ئۇسلۇبى"
+msgstr "باش تاختا ئىزدەش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:140
 msgid "Location access"
-msgstr "زىيارەت ئورنى"
+msgstr "ئورۇن زىيارىتى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:148
 msgid "Other app access"
@@ -260,7 +262,7 @@ msgstr "زىيارەت قىلىنغان ئەپلەر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:153
 msgid "Diagnostics"
-msgstr "دئاگنوزچى"
+msgstr "دىئاگنوز"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
@@ -272,7 +274,7 @@ msgstr "ئەۋەتكەنلىرى"
 #. reports are not to be sent by the system
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//PageComponent.qml:161
 msgid "Not sent"
-msgstr "ئەۋەتلمدى"
+msgstr "ئەۋەتىلمىگەنلىرى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Dash.qml:49
 msgid "Return results from:"
@@ -284,14 +286,14 @@ msgstr "ئورنى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr "ئورۇن بايقا"
+msgstr "ئورۇن بايقاش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
-"GPS نى ئىشلىتىپ ئورنىڭىزنى ئېنىقلاڭ. ئۆچۈرۈلگەندە، GPS ئېتىلىپ توك تىجەيدۇ."
+"GPS نى ئىشلىتىپ ئورنىڭىزنى ئېنىقلاڭ. ئۆچۈرۈلگەندە، GPS ئېتىلىپ توك تېجەيدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:72
 msgid ""
@@ -299,7 +301,7 @@ msgid ""
 "detection saves battery."
 msgstr ""
 "wi-fi بىلەن GPS نى ئىشلىتىپ ئورنىڭىزنى ئېنىقلاڭ. ئورۇن بەلگىلەش ئىقتىدارىنى "
-"توختاتقاندا توك تىجەيدۇ."
+"توختاتقاندا توك تېجەيدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:74
 msgid ""
@@ -307,7 +309,7 @@ msgid ""
 "off location detection saves battery."
 msgstr ""
 "wi-fi (ھازىر ئېتىكلىك) بىلەن GPS نى ئىشلىتىپ ئورنىڭىزنى ئېنىقلاڭ. ئورۇن "
-"بەلگىلەش ئىقتىدارىنى توختاتقاندا توك تىجەيدۇ."
+"بەلگىلەش ئىقتىدارىنى توختاتقاندا توك تېجەيدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:76
 msgid ""
@@ -336,7 +338,7 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr "زىيارەت ئورنىغا يول قوي"
+msgstr "بۇ ئورۇنلارنى زىيارەت قىلىشقا ئىجازەت:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
@@ -348,19 +350,19 @@ msgstr "ئىم جۈملىسى ئۆزگەرت"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "سىيرىپ ئالماشتۇرۇش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr "ئىم ئالماشتۇر"
+msgstr "ئىم ئالماشتۇرۇش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr "ئىم جۈملىسى ئالماشتۇر"
+msgstr "ئىم جۈملىسى ئالماشتۇرۇش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr "نۆۋەتتكى ئىم"
+msgstr "نۆۋەتتىكى ئىم"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:102
 msgid "Existing passphrase"
@@ -368,7 +370,7 @@ msgstr "نۆۋەتتىكى ئىم جۈملىسى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr "ئىم ماس كەلمدى، قايتا سناڭ."
+msgstr "ئىم ماس كەلمىدى، قايتا سىناڭ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
@@ -384,11 +386,11 @@ msgstr "ئىم جۈملىسى تاللاڭ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr "ئىمنى جەزىملەڭ"
+msgstr "ئىمنى جەزملەڭ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr "ئىم جۈملىسى جەزىملەڭ"
+msgstr "ئىم جۈملىسى جەزملەڭ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
@@ -408,23 +410,23 @@ msgstr "داۋاملاشتۇر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "تېلېفوننى قۇلۇپلاش ئۈچۈن:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr "كارتا سۈركەش (بىخەتەرلىكى يوق)"
+msgstr "سىيرىش(بىخەتەرلىكى يوق)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr "4-خانە ئىم"
+msgstr "4 خانىلىق رەقەملىك ئىم"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr "كارتا سۈركەش (بىخەتەرلىكى يوق) "
+msgstr "سىيرىش(بىخەتەرلىكى يوق)… "
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr "4-خانە ئىم"
+msgstr "4 خانىلىق رەقەملىك ئىم…"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
@@ -432,11 +434,11 @@ msgstr "ئىم جۈملىسى..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr "ئىم ئۆزگەرتىۋاتىدۇ..."
+msgstr "ئىم ئۆزگەرتىش…"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr "ئىم جۈملىسى ئۆزگەرتىۋاتىدۇ..."
+msgstr "ئىم جۈملىسى ئۆزگەرتىش…"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:28
@@ -446,7 +448,7 @@ msgstr "كۆچمە تور"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:67
 msgid "Cellular data:"
-msgstr "كۆچمە تور ساندانى"
+msgstr "كۆچمە تور سانلىق-مەلۇمات:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:68
 msgid "Off"
@@ -454,7 +456,7 @@ msgstr "تاقا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:69
 msgid "2G only (saves battery)"
-msgstr "پەقەتلا 2G (توك تىجەيدۇ)"
+msgstr "پەقەتلا 2G (توك تېجەيدۇ)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:70
 msgid "2G/3G/4G (faster)"
@@ -462,19 +464,19 @@ msgstr "2G/3G/4G (تېز)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:81
 msgid "Cellular data"
-msgstr "كۆچمە تېلېفۇن ساندانى"
+msgstr "كۆچمە تور سانلىق-مەلۇماتى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:90
 msgid "Data roaming"
-msgstr "سانلىق-مەلۇماتلارنى كۆرۈش"
+msgstr "سانلىق-مەلۇمات ھالقىش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:99
 msgid "Data usage statistics"
-msgstr "سىتاتىستىكا قىلىنغان سانداننى ئىشلىتىش ئۇسۇلى"
+msgstr "سانلىق-مەلۇمات ستاتىستىكىسى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:108
 msgid "Choose carrier:"
-msgstr "ساقلىغۇچ تاللاش"
+msgstr "توشۇغۇچى(شىركەت) تاللاش:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:109
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:66
@@ -486,7 +488,7 @@ msgstr "ئاپتوماتىك"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:66
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:47
 msgid "Manually"
-msgstr "قولىدا"
+msgstr "قولدا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//PageComponent.qml:114
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/cellular//ChooseCarrier.qml:28
@@ -523,21 +525,21 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
-msgstr ""
+msgstr "ئىجراچىنى ئەسلىگە كەلتۈرۈش ۋە ماكان ئېكران"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:32
 #: settings.js:60
 msgid "Reset phone"
-msgstr "تېلېفۇننى ئەسلىگە قايتۇر"
+msgstr "تېلېفوننى ئەسلىگە قايتۇر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:62
 msgid "Reset launcher & home screen…"
-msgstr "قوزغلىشنى ئەسلىگە كەلتۈرۈش&ماكان مۇندەرىجە..."
+msgstr "ئىجراچىنى ئەسلىگە كەلتۈرۈش ۋە ماكان ئېكران..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:75
 msgid "Reset all system settings…"
-msgstr "بارلىق سستېما تەڭشىكىنى ئەسلىگە قايتۇرىۋاتىدۇ.."
+msgstr "بارلىق سىستېما تەڭشىكىنى ئەسلىگە قايتۇر.."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//PageComponent.qml:88
 msgid "Erase & reset everything…"
@@ -551,17 +553,17 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr "ھەممىنى تازىلا&ئەسلگە كەلتۈر"
+msgstr "ھەممىنى تازىلا ۋە ئەسلگە قايتۇر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr "بارلىق سستېما تەڭشىكىنى ئەسلىگە قايتۇر"
+msgstr "بارلىق سىستېما تەڭشىكىنى ئەسلىگە قايتۇر"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:29
 #: settings.js:66
 msgid "Time & Date"
-msgstr "ۋاقىت بىلەن چىسلا"
+msgstr "ۋاقىت ۋە چېسلا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:52
 msgid "Time zone:"
@@ -569,11 +571,11 @@ msgstr "ۋاقىت رايونى:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//PageComponent.qml:65
 msgid "Set the time and date:"
-msgstr "ۋاقىت رايۇن تەڭشىكىنى بەلگىلەڭ:"
+msgstr "ۋاقىت ۋە چېسلا بەلگىلەش:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr "ۋاقىت & چسلا تەڭشىكى"
+msgstr "ۋاقىت ۋە چېسلا بەلگىلە"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//TimePicker.qml:68
 msgid "Time"
@@ -611,19 +613,19 @@ msgstr "يىل"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Preview.qml:102
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
 msgid "Set"
-msgstr "تەڭشەك"
+msgstr "بەلگىلە"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr "ۋاقىت رايونى:"
+msgstr "ۋاقىت رايونى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr "ۋاقىت رايۇن تەڭشىكىنى كىرگۈزۈڭ"
+msgstr "ۋاقىت رايونىنى بەلگىلەش:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:114
 msgid "Enter your current location."
-msgstr "نۆۋەتتىكى ئورنىڭىزنى كىرگۈزۈڭ"
+msgstr "نۆۋەتتىكى ئورنىڭىزنى كىرگۈزۈڭ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/time-date//ChooseTimeZone.qml:114
 msgid "No matching place"
@@ -632,7 +634,7 @@ msgstr "ماس ئورۇن يوق"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Software.qml:10
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:139
 msgid "Software licenses"
-msgstr "يۇمشاق دىتال ئىجازەتنامىسى"
+msgstr "يۇمشاق دېتال ئىجازەتنامىسى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:33
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:127
@@ -641,7 +643,7 @@ msgstr "ساقلىغۇچ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:88
 msgid "Used by Ubuntu"
-msgstr "Ubuntuئىشلەتكەنلىرى"
+msgstr "ئۇبۇنتۇ ئىشلەتكىنى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:89
 msgid "Videos"
@@ -653,7 +655,7 @@ msgstr "ئۈن"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:91
 msgid "Pictures"
-msgstr "رەسىملەر"
+msgstr "سۈرەتلەر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:92
 msgid "Other files"
@@ -661,7 +663,7 @@ msgstr "باشقا ھۆججەتلەر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:93
 msgid "Used by apps"
-msgstr "ئشلىتلگەن ئەپلەر"
+msgstr "ئەپلەر ئىشلەتكىنى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:143
 msgid "Total storage"
@@ -669,7 +671,7 @@ msgstr "ھەممە ساقلىغۇچ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:155
 msgid "Free space"
-msgstr "ئىشلىتىشچان بوشلۇق: [1]"
+msgstr "بىكار بوشلۇق"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//Storage.qml:175
 msgid "By name"
@@ -683,7 +685,7 @@ msgstr "چوڭلۇقى بويىچە"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:33
 #: settings.js:76
 msgid "About this phone"
-msgstr "بۇ تېلېفۇن ھەققىدە"
+msgstr "بۇ تېلېفون ھەققىدە"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:84
 msgid "Serial"
@@ -699,7 +701,7 @@ msgstr "OS"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:110
 msgid "Last updated"
-msgstr "ئاخىرقى قېتم يېڭىلانغىنى"
+msgstr "ئاخىرقى قېتىم يېڭىلانغىنى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:111
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:312
@@ -708,11 +710,11 @@ msgstr "ئاخىرقى قېتم يېڭىلانغىنى"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:52
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:374
 msgid "Never"
-msgstr "ھەرگىز"
+msgstr "بىر قېتىممۇ يېڭىلانمىغان"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:117
 msgid "Check for updates"
-msgstr "يېڭىلانما بارمۇ تەكشۈرۈش"
+msgstr "يېڭىلانما  تەكشۈر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:134
 msgid "Legal:"
@@ -720,19 +722,19 @@ msgstr "تەكشۈرۈش:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/about//PageComponent.qml:147
 msgid "Regulatory info"
-msgstr "نازارەت قىلىش ئۇچۇررى"
+msgstr "نازارەت قىلىش ئۇچۇرى"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:71
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr ""
+msgstr "%1 (باغلىنىۋاتىدۇ…)"
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:74
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr ""
+msgstr "%1 (ئۈزۈۋاتىدۇ…)"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:81
 msgid "Computer"
@@ -756,7 +758,7 @@ msgstr "تور"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
-msgstr "مىكروفونلىق تىڭشىغۇچ"
+msgstr "مىكروفونلۇق تىڭشىغۇچ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:86
 msgid "Headphones"
@@ -764,7 +766,7 @@ msgstr "تىڭشىغۇچ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:87
 msgid "Video"
-msgstr "سىن(~V)…"
+msgstr "سىن"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:88
 msgid "Other Audio"
@@ -776,7 +778,7 @@ msgstr "قول"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:90
 msgid "Keyboard"
-msgstr "ھەرىپتاختا"
+msgstr "ھەرپتاختا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:91
 msgid "Tablet"
@@ -824,15 +826,15 @@ msgstr "كۆكچىش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:149
 msgid "Connected headset:"
-msgstr "مىكروفونلىق تىڭشىغۇچ ئۇلاندى"
+msgstr "باغلانغان مىكروفونلۇق تىڭشىغۇچ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:177
 msgid "Connect a different headset:"
-msgstr "باشقا مىكروفونلىق تىڭشغۇچ ئۇلاڭ"
+msgstr "باشقا مىكروفونلۇق تىڭشىغۇچقا باغلا:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:177
 msgid "Connect a headset:"
-msgstr "مىكروفونلىق تىڭشىغۇچ ئۇلاڭ"
+msgstr "مىكروفونلۇق تىڭشىغۇچقا باغلا:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:203
 msgid "None detected"
@@ -852,34 +854,34 @@ msgstr "سىگنال كۈچلۈكلۈكى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//PageComponent.qml:232
 msgid "Disconnect"
-msgstr "ئۈزۈش"
+msgstr "ئۈز"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr "كۆكچش ماس ئىلتىماسى"
+msgstr "كۆكچىش جۈپلىشىش ئىلتىماسى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "'%1' نىڭ PIN نومۇرى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ProvidePasskeyDialog.qml:62
 msgid "Pair"
-msgstr "جۈپ"
+msgstr "جۈپلە"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "بۇنىڭ بىلەن ‹%1› نىڭدا كۆرسىتىلگەن PIN نومۇرى ئوخشاشمۇ تەكشۈرۈڭ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr "PINجەزىملە"
+msgstr "PIN جەزملە"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//WallpaperGrid.qml:121
 msgid "Remove"
@@ -897,15 +899,15 @@ msgstr "ماكان ئېكران"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:42
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:130
 msgid "Welcome screen"
-msgstr "قارشى ئېلىش ئىكرانى"
+msgstr "مەرھابا ئېكرانى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:46
 msgid "Photo/Image"
-msgstr "سۈرەت /تەسۋىر"
+msgstr "سۈرەت /رەسىم"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:86
 msgid "Ubuntu Art"
-msgstr "Ubuntuسەنئىتى"
+msgstr "ئۇبۇنتۇ سەنئىتى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//Wallpapers.qml:101
 msgid "Custom"
@@ -923,11 +925,11 @@ msgstr "تەگلىك"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:198
 msgid "Same background for both"
-msgstr ""
+msgstr "ئىككىلىسىنىڭ تەگلىكى ئوخشاش بولسۇن"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/background//MainPage.qml:199
 msgid "Different background for each"
-msgstr ""
+msgstr "ئىككىسىنىڭ تەگلىكى ئايرىم بولسۇن"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:35
@@ -973,11 +975,11 @@ msgstr "ئاخىرىغىچە تولۇق قاچىلا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:86
 msgid "Fully charged"
-msgstr "تولۇق قاچىلا"
+msgstr "تولۇق توكلاندى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:124
 msgid "Charge level"
-msgstr "قاچلاش دەرىجىسى"
+msgstr "توكلاش دەرىجىسى"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:132
@@ -987,11 +989,11 @@ msgstr "%1%"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:241
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "توكداننىڭ ئىشلىتىلىشىنى ئازلىتىش ئۇسۇللىرى:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:245
 msgid "Display brightness"
-msgstr "يورۇقلۇق دەرىجىسىنى كۆرسەت"
+msgstr "كۆرسەتكۈچنىڭ يورۇقلۇقى"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:309
@@ -1004,8 +1006,7 @@ msgstr "يورۇقلۇق دەرىجىسىنى كۆرسەت"
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 مىنۇتتىن كېيىن"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//PageComponent.qml:392
 msgid "GPS"
@@ -1017,26 +1018,28 @@ msgstr "توغرا بولغان ئورۇن بەلگىلەش GPS بىلەن Wi-Fi
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr "تېلېفۇننى ئىشلەتمىگەندە قولۇپلىسۇن"
+msgstr "تېلېفوننى ئىشلەتمىگەندە قۇلۇپلىسۇن:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "تېلېفون ئىشلىتىلمىگەندە ئۇخلىسۇن:"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
+"ۋاقىت قىسقا بولسا تېخىمۇ بەك بىخەتەر بولىدۇ. سۆزلىشىۋاتقاندا ۋە سىن "
+"قويۇۋاتقاندا قۇلۇپلانمايدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
+msgstr "سۆزلىشىۋاتقاندا ۋە سىن قويۇۋاتقاندا ئۇخلاپ قالمايدۇ."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:29
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:371
 msgid "Auto download"
-msgstr "ئاپتوماتك چۈشۈر"
+msgstr "ئاپتوماتىك چۈشۈر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:34
 msgid "Download future updates automatically:"
@@ -1052,7 +1055,7 @@ msgstr "ھەر قانداق سانلىق مەلۇمات باغلىنىشىنى �
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//Configuration.qml:55
 msgid "Data charges may apply."
-msgstr ""
+msgstr "سانلىق -مەلۇماتقا پۇل كېتىشى مۇمكىن."
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:34
@@ -1066,42 +1069,42 @@ msgstr "سىستېما يېڭىلا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:47
 msgid "The phone needs to restart to install the system update."
-msgstr "تېلېفۇننى قايتا قوزغىتىپ، سىستىما يېڭىلانمىسنى قاچىلاڭ"
+msgstr ""
+"سىستېما يېڭىلانمىلىرىنى ئورنىتىش ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:50
 msgid "Install & Restart"
-msgstr "قاچىلا&قايتا قوزغات"
+msgstr "ئورنات ۋە قايتا قوزغات"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:59
 msgid "Not Now"
-msgstr "كىيىن"
+msgstr "ھازىر ئەمەس"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:65
 msgid "Install"
-msgstr "قاچىلا"
+msgstr "ئورنات"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:83
 msgid "Software is up to date"
-msgstr "يۇمشاق دىتال ئەڭ يېڭى ھالەتتە"
+msgstr "يۇمشاق دېتال ئەڭ يېڭى ھالەتتە"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:90
 msgid "System update has failed."
-msgstr "سىستېما يېڭىنالمىدى"
+msgstr "سىستېما يېڭىلاش مەغلۇپ بولدى."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:145
 msgid "System update failed."
-msgstr "سىستىما يېڭىلاش مەغلۇپ بولدى"
+msgstr "سىستېما يېڭىلاش مەغلۇپ بولدى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:176
 msgid "Checking for updates…"
-msgstr "يېڭىلانما تەكشۈرۇۋاتىدۇ..."
+msgstr "يېڭىلانمىلار بارمۇ-يوق تەكشۈرۈۋاتىدۇ…"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:194
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "يېڭىلانمىدىن %1 نى ئورنات"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:195
 msgid "Pause All"
@@ -1113,7 +1116,7 @@ msgstr "قايتا سىنا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:272
 msgid "Download"
-msgstr "چۈشۈر(~D)"
+msgstr "چۈشۈرۈش"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:272
 msgid "Update"
@@ -1121,23 +1124,23 @@ msgstr "يېڭىلا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:273
 msgid "Resume"
-msgstr "داۋاملاشتۇر(~R)"
+msgstr "داۋاملاشتۇر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:274
 msgid "Pause"
-msgstr "ۋاقىتلىق توختات"
+msgstr "ۋاقىتلىق توختا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:319
 msgid "Installing"
-msgstr "قاچىلاۋاتىدۇ…"
+msgstr "ئورنىتىۋاتىدۇ"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:355
 msgid "Version: "
-msgstr "نەشرى(~V): "
+msgstr "نەشرى: "
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:376
 msgid "On wi-fi"
-msgstr "سمسىز تور (wi-fi) نى ئاچ"
+msgstr "سىمسىز تور (wi-fi) دا"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:378
 msgid "Always"
@@ -1145,7 +1148,7 @@ msgstr "ھەمىشە"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:432
 msgid "Installing update…"
-msgstr "يېڭىلانمىنى قاچىلاۋاتىدۇ..."
+msgstr "يېڭىلانمىنى ئورنىتىۋاتىدۇ..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:446
 msgid " bytes"
@@ -1153,15 +1156,15 @@ msgstr " بايت"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:449
 msgid " KiB"
-msgstr " KiB"
+msgstr " كىلوبايت"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:452
 msgid " MiB"
-msgstr " MiB"
+msgstr " مېگابايت"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/system-update//PageComponent.qml:455
 msgid " GiB"
-msgstr " GiB"
+msgstr " گىگابايت"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:30
 msgid "SIM"
@@ -1171,20 +1174,20 @@ msgstr "SIM"
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:27
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:60
 msgid "Call forwarding"
-msgstr "چاقرىلىشنى يۆتكە"
+msgstr "چاقىرىلىشنى يۆتكە"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:52
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:27
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:53
 msgid "Call waiting"
-msgstr "چاقىرىۋاتىدۇ"
+msgstr "كۈتۈۋاتىدۇ"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//PageComponent.qml:61
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//Services.qml:30
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "%1 مۇلازىمەتلەر"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallWaiting.qml:67
 msgid ""
@@ -1212,11 +1215,11 @@ msgstr ""
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/plugins/phone//CallForwarding.qml:113
 msgid "Contacts…"
-msgstr "ئالاقەداش..."
+msgstr "ئالاقەداشلار..."
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:107
 msgid "System Settings"
-msgstr "سىستېما تەڭشىكى"
+msgstr "سىستېما تەڭشەكلىرى"
 
 #: /tmp/build/ubuntu-system-settings-0.1+14.04.20140108.1/src/qml/MainWindow.qml:125
 msgid "Search"
@@ -1233,12 +1236,12 @@ msgstr "سىستېما"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:2
 msgid "Orientation Lock"
-msgstr "نىشاننى قۇلۇپلا"
+msgstr "يۆنىلىشنى قۇلۇپلاش"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:4
 msgid "rotation"
-msgstr "ئايلاندۇر"
+msgstr "چۆرگىلەت"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:6
@@ -1263,7 +1266,7 @@ msgstr "تىل"
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:16
 msgid "lang"
-msgstr "lang"
+msgstr "تىل"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:18
@@ -1302,7 +1305,7 @@ msgstr "سىمسىز"
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:28
 msgid "wifi"
-msgstr "سىمسىز تور(wi-fi)"
+msgstr "سىمسىز تور(wifi)"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:30
@@ -1327,7 +1330,7 @@ msgstr "شەخسىيەت"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:50
 msgid "cellular"
-msgstr "كۈچمە تۇر"
+msgstr "كۆچمە تۇر"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:54
@@ -1357,12 +1360,12 @@ msgstr "چېسلا"
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:72
 msgid "timezone"
-msgstr "ۋاقىت رايۇنى"
+msgstr "ۋاقىت رايونى"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:78
 msgid "about"
-msgstr "ھەققدە"
+msgstr "ھەققىدە"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:80
@@ -1372,27 +1375,27 @@ msgstr "ئۈسكۈنە"
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:82
 msgid "info"
-msgstr "INFO"
+msgstr "ئۇچۇر"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:84
 msgid "Flight Mode"
-msgstr ""
+msgstr "ئايروپىلان ھالىتى"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:86
 msgid "flight"
-msgstr ""
+msgstr "ئۇچۇش"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:88
 msgid "plane"
-msgstr "ئايرىپىلان"
+msgstr "ئايروپىلان"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:90
 msgid "offline"
-msgstr "تورسىز"
+msgstr "توردا يوق"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: settings.js:94
@@ -1417,17 +1420,17 @@ msgstr "تام قەغىزى"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:106
 msgid "Example"
-msgstr "مىسال"
+msgstr "مىساللار"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:108
 msgid "example"
-msgstr "مىسال"
+msgstr "مىساللار"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:110
 msgid "test"
-msgstr "سنا"
+msgstr "سىناق"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:112
@@ -1467,7 +1470,7 @@ msgstr "تېلېفون"
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:136
 msgid "Brightness"
-msgstr "يورۇقلۇق"
+msgstr "يورۇقلۇقى"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:138
@@ -1482,7 +1485,7 @@ msgstr "ياردەم ئىقتىدارى"
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:144
 msgid "accessibility"
-msgstr "ياردەم ئىقتىدارى"
+msgstr "قوشۇمچە ئىقتىدارى"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:146

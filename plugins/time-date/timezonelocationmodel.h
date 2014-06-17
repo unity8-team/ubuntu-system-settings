@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -23,8 +23,11 @@
 
 #include <QAbstractTableModel>
 #include <QSet>
-#include <QSortFilterProxyModel>
 #include <QThread>
+
+#include <QtConcurrent>
+
+class TimeZonePopulateWorker;
 
 class TimeZoneLocationModel : public QAbstractTableModel
 {
@@ -57,38 +60,39 @@ public:
         QString full_country;
     };
 
+    void filter(const QString& pattern);
+
     // implemented virtual methods from QAbstractTableModel
     int rowCount (const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
 
+    bool modelUpdating;
+
+Q_SIGNALS:
+    void filterBegin();
+    void filterComplete();
+    void modelUpdated();
+
 public Q_SLOTS:
     void processModelResult(TzLocation);
+    void store();
+    void filterFinished();
 
 private:
     QList<TzLocation> m_locations;
+    QList<TzLocation> m_originalLocations;
+    QString m_pattern;
+
+    TimeZonePopulateWorker *m_workerThread;
+
+    bool substringFilter(const QString& input);
+    QFutureWatcher<TzLocation> m_watcher;
+    void setModel(QList<TzLocation> locations);
 };
 
 Q_DECLARE_METATYPE (TimeZoneLocationModel::TzLocation)
-
-class TimeZoneFilterProxy: public QSortFilterProxyModel
-{
-    Q_OBJECT
-
-public:
-    TimeZoneFilterProxy(TimeZoneLocationModel *parent = 0);
-    void setFilterRegExp(const QString &pattern);
-
-protected:
-    bool filterAcceptsRow (int source_row,
-                           const QModelIndex &source_parent) const;
-
-private:
-    QString m_currentFilter;
-    mutable QSet<QModelIndex> m_matches;
-};
-
 
 class TimeZonePopulateWorker : public QThread
 {

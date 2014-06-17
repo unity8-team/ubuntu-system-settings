@@ -43,6 +43,7 @@ Device::Device(const QString &path, QDBusConnection &bus)
     initInterface(m_deviceInterface,      path, "org.bluez.Device",      bus);
     initInterface(m_audioInterface,       path, "org.bluez.Audio",       bus);
     initInterface(m_audioSourceInterface, path, "org.bluez.AudioSource", bus);
+    initInterface(m_audioSinkInterface,   path, "org.bluez.AudioSink",   bus);
     initInterface(m_headsetInterface,     path, "org.bluez.Headset",     bus);
 }
 
@@ -102,8 +103,6 @@ void Device::disconnect(ConnectionMode mode)
         m_headsetInterface->asyncCall("Disconnect");
     else if (m_audioInterface && (mode == Audio))
         m_audioInterface->asyncCall("Disconnect");
-    else if (m_audioSourceInterface && (mode == AudioSource))
-        m_audioSourceInterface->asyncCall("Disconnect");
     else
         qWarning() << "Unhandled connection mode" << mode;
 }
@@ -114,8 +113,6 @@ void Device::connect(ConnectionMode mode)
         m_headsetInterface->asyncCall("Connect");
     else if (m_audioInterface && (mode == Audio))
         m_audioInterface->asyncCall("Connect");
-    else if (m_audioSourceInterface && (mode == AudioSource))
-        m_audioSourceInterface->asyncCall("Connect");
     else
         qWarning() << "Unhandled connection mode" << mode;
 }
@@ -182,7 +179,7 @@ void Device::updateIcon()
 
     const auto type = getType();
 
-    if (type == Type::Headset)
+    if (type == Type::Headset || type == Type::Headphones || type == Type::OtherAudio)
         setIconName("image://theme/audio-headset");
     else if (type == Type::Phone)
         setIconName("image://theme/phone");
