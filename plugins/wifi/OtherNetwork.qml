@@ -25,6 +25,21 @@ ItemPage {
     id: othernetwork
     title: i18n.tr("Other network")
 
+    function settingsValid() {
+        if(networkname.length == 0) {
+            return false;
+        }
+        if(securityList.selectedIndex == 0) {
+            return true
+        }
+        if(securityList.selectedIndex == 1) {
+            return password.length >= 8
+        }
+        // WEP
+        return password.length==5 || password.length == 10;
+    }
+
+
     Column {
         id : otherview
         anchors.fill: parent
@@ -94,6 +109,8 @@ ItemPage {
 
                 anchors.left: parent.horizontalCenter
                 anchors.right: parent.right
+
+                enabled: settingsValid()
 
                 onClicked: {
                     DbusHelper.connect(networkname.text, securityList.currentindex, password.text)
