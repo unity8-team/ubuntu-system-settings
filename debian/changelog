@@ -1,3 +1,42 @@
+ubuntu-system-settings (0.2+14.10.20140612-0ubuntu1) utopic; urgency=low
+
+  [ Mathieu Trudel-Lapierre ]
+  * Enable devices other than headsets: headphones and generic audio devices,
+    and make the strings referring to headset more generic.
+
+  [ jonas-drange ]
+  * Rewrite "Keyboard sound" component in "Sound" panel to use
+    "LanguagePlugin" which provides means to toggle keyboard sound
+    setting.
+
+  [ Iain Lane ]
+  * time-date: Don't try to search while the model is building. Display
+    an ActivityIndicator when searching while constructing the model to
+    avoid confusing message. (LP: #1326475)
+  * Make time-date tests more robust in the face of things taking a
+    while to complete. (LP: #1329245)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 12 Jun 2014 16:36:03 +0000
+
+ubuntu-system-settings (0.1+14.10.20140606-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Use XDG_GREETER_DATA_DIR to store background files in a folder that
+    the greeter can also read. This fixes the recent regression in not
+    being able to choose a ContentHub file for the welcome screen. (LP:
+    #1325505)
+
+  [ Iain Lane ]
+  * Inline setUpImages(), otherwise the function call doesn't do
+    anything.
+
+  [ Brendan Donegan ]
+  * Make test_tz_list_initially_empty more robust by using
+    wait_select_single instead of select_single to get the label. (LP:
+    #1319711)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 06 Jun 2014 14:39:39 +0000
+
 ubuntu-system-settings (0.1+14.10.20140604-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
