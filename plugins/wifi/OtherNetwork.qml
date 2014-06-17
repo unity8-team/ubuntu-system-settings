@@ -31,10 +31,11 @@ ItemPage {
 
         ListItem.Standard {
             text : i18n.tr("Network name")
-            control : TextInput {
-              id : networkname
-              text : "a"
-            }
+        }
+
+        TextField {
+            id : networkname
+            width: parent.width
         }
 
         ListItem.ItemSelector {
@@ -50,15 +51,18 @@ ItemPage {
             id: passwordList
             text: i18n.tr("Password")
             control : TextInput {
-                id : password
-                text : "b"
             }
+        }
+
+        TextField {
+            id : password
+            width: parent.width
         }
 
         Item {
             id: buttonRectangle
 
-            anchors.top: passwordList.bottom
+            anchors.top: password.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.topMargin: units.gu(1)
