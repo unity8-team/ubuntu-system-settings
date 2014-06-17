@@ -55,7 +55,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
     @property
     def selected_wallpaper(self):
         """Return the currently selected QQuickImage.
-        We grab the orange border and travers a bit to get to this image"""
+        We grab the orange border and traverse a bit to get to this image"""
         selected_shape = self.system_settings.main_view.background_page.\
             select_single(
                 'UbuntuShape', objectName='SelectedShape', visible=True)
@@ -64,6 +64,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
             'QQuickImage', objectName='itemImg')
 
     def save_wallpaper(self):
+        """Click on Set/Save button when previewing a wallpaper"""
         save = self.system_settings.main_view.wait_select_single(
             '*', objectName='saveButton')
         self.system_settings.main_view.scroll_to_and_click(save)
@@ -78,7 +79,6 @@ class BackgroundTestCase(BackgroundBaseTestCase):
             self.system_settings.main_view.background_page.title,
             Equals(_('Background'))
         )
-
 
     def test_that_the_currently_selected_background_comes_from_dbus(self):
         """Test that background file from dbus is selected in UI"""
@@ -110,6 +110,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         # assert that dbus changed
         dbus_value = "file://%s" % self.user_proxy.GetBackgroundFile()
         self.assertEqual(dbus_value, new)
+
 
 class EternalTestCase(BackgroundBaseTestCase):
     """ Tests for Background Page """
