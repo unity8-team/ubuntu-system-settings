@@ -25,12 +25,6 @@ import Ubuntu.Components.Popups 0.1
 
 Column {
     id: wallpaperGrid
-    anchors {
-        left: parent.left
-        right: parent.right
-    }
-    height: childrenRect.height
-    spacing: units.gu(1)
 
     property var bgmodel
     property int columns
@@ -38,17 +32,56 @@ Column {
     property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
     property string title
     property string current
+    property bool holdsCurrent: (bgmodel.indexOf(current) >= 0)
     property bool editable: false
     property var backgroundPanel
     signal selected (string uri)
 
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
+
+    height: childrenRect.height
+    spacing: units.gu(1)
+
     visible: bgmodel.length > 0
 
-    ListItem.Standard {
+    state: holdsCurrent ? "" : "collapsed"
+    states: [
+        State {
+            name: "collapsed"
+            PropertyChanges {
+                target: grid
+                height: 0
+            }
+        }
+    ]
+
+    ListItemsHeader {
+        id: header
         anchors.left: parent.left
         anchors.right: parent.right
         text: title
-        showDivider: false
+        image: {
+            if (parent.holdsCurrent) {
+                return "bullet.png"
+            }
+            return parent.state === "collapsed" ? "header_handlearrow.png" : "header_handlearrow2.png"
+        }
+        onClicked: {
+            // if current grid holds current image, do nothing
+            if (holdsCurrent) {
+                return
+            }
+
+            if (parent.state === "collapsed") {
+                parent.state = ""
+            }
+            else {
+                parent.state = "collapsed"
+            }
+        }
     }
 
     Grid {
@@ -61,6 +94,8 @@ Column {
         columns: wallpaperGrid.columns
         spacing: units.dp(1)
         height: childrenRect.height
+        clip: true
+
         Repeater {
             objectName: "gridRepeater"
             model: bgmodel

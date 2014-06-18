@@ -51,8 +51,8 @@ ItemPage {
     // Action to import image
     Action {
         id: selectDefaultPeer
-        text: i18n.tr("Photo/Image")
-        iconName: "import-image"
+        // text: i18n.tr("Photo/Image")
+        // iconName: "import-image"
 
         // when action has been activated, request a transfer, providing
         // a callback that pushes the preview stack
@@ -90,7 +90,26 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
-            spacing: units.gu(1)
+
+            spacing: units.gu(0)
+
+
+            Item {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: units.gu(2)
+                    rightMargin: units.gu(2)
+                }
+
+                height: childrenRect.height
+
+                Button {
+                    text: i18n.tr("Add an Image…")
+                    action: selectDefaultPeer
+                }
+            }
+
 
             WallpaperGrid {
                 objectName: "UbuntuArtGrid"
@@ -128,46 +147,43 @@ ItemPage {
                     selectedItemConnection.target = pageStack.currentPage
                 }
             }
+        }
+    }
 
-            ListItem.Empty {}
 
-            Connections {
-                id: contentHubConnection
-                property var imageCallback
-                target: mainPage.activeTransfer ? mainPage.activeTransfer : null
-                onStateChanged: {
-                    if (mainPage.activeTransfer.state === ContentTransfer.Charged) {
-                        if (mainPage.activeTransfer.items.length > 0) {
-                            var imageUrl = mainPage.activeTransfer.items[0].url;
-                            imageCallback(imageUrl);
-                        }
-                    }
+    Connections {
+        id: contentHubConnection
+        property var imageCallback
+        target: activeTransfer ? activeTransfer : null
+        onStateChanged: {
+            if (activeTransfer.state === ContentTransfer.Charged) {
+                if (activeTransfer.items.length > 0) {
+                    var imageUrl = activeTransfer.items[0].url;
+                    imageCallback(imageUrl);
                 }
             }
+        }
+    }
 
-            ContentPeer {
-                id: peer
-                contentType: ContentType.Pictures
-                handler: ContentHandler.Source
-                selectionType: ContentTransfer.Single
-            }
+    ContentPeer {
+        id: peer
+        contentType: ContentType.Pictures
+        handler: ContentHandler.Source
+        selectionType: ContentTransfer.Single
+    }
 
-            ContentStore {
-                id: appStore
-                scope: ContentScope.App
-            }
+    ContentStore {
+        id: appStore
+        scope: ContentScope.App
+    }
 
-            // requests an active transfer from peer
-            function startContentTransfer(callback) {
-                if (callback)
-                    contentHubConnection.imageCallback = callback
-                var transfer = peer.request(appStore);
-                if (transfer !== null) {
-                    mainPage.activeTransfer = transfer;
-                }
-            }
-
-
+    // requests an active transfer from peer
+    function startContentTransfer(callback) {
+        if (callback)
+            contentHubConnection.imageCallback = callback
+        var transfer = peer.request(appStore);
+        if (transfer !== null) {
+            activeTransfer = transfer;
         }
     }
 
