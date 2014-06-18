@@ -41,11 +41,16 @@ LocalComponents.Page {
                   i18n.tr("Enjoy your new phone.")
         }
     }
+
     Component {
         id: forwardButton
         LocalComponents.ForwardButton {
             text: i18n.tr("Finish")
-            onClicked: Qt.quit()
+            onClicked: {
+                // Immediately go to black to give quick feedback
+                blackCover.visible = true
+                Qt.quit()
+            }
         }
     }
 }
