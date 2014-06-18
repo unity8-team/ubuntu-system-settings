@@ -1,9 +1,14 @@
-ubuntu-system-settings (0.3) UNRELEASED; urgency=medium
+ubuntu-system-settings (0.3+14.10.20140618-0ubuntu1) utopic; urgency=medium
 
+  [ Michael Terry ]
   * Add Wi-Fi support to the system settings wizard
   * Correctly set up language variables before unity8 runs the first time
 
- -- Michael Terry <mterry@ubuntu.com>  Wed, 18 Jun 2014 11:02:02 -0400
+  [ Iain Lane ]
+  * When connecting to whoopsie-preferences on the bus, don't require
+    the interface to be valid. It won't be when the service has exited.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Jun 2014 15:08:38 +0000
 
 ubuntu-system-settings (0.2+14.10.20140612-0ubuntu1) utopic; urgency=low
 
