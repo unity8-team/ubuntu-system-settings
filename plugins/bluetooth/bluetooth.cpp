@@ -36,15 +36,19 @@ Bluetooth::Bluetooth(QObject *parent):
     if(!m_dbus.registerObject(DBUS_AGENT_PATH, &m_agent))
         qFatal("Couldn't register agent at " DBUS_AGENT_PATH);
 
-    m_connectedHeadsets.filterOnType(Device::Type::Headset);
-    m_connectedHeadsets.filterOnConnections(Device::Connection::Connected |
-                                            Device::Connection::Disconnecting);
-    m_connectedHeadsets.setSourceModel(&m_devices);
+    QVector<Device::Type> types;
+    types.append(Device::Type::Headset);
+    types.append(Device::Type::Headphones);
+    types.append(Device::Type::OtherAudio);
+    m_connectedDevices.filterOnType(types);
+    m_connectedDevices.filterOnConnections(Device::Connection::Connected |
+                                           Device::Connection::Disconnecting);
+    m_connectedDevices.setSourceModel(&m_devices);
 
-    m_disconnectedHeadsets.filterOnType(Device::Type::Headset);
-    m_disconnectedHeadsets.filterOnConnections(Device::Connection::Connecting |
-                                               Device::Connection::Disconnected);
-    m_disconnectedHeadsets.setSourceModel(&m_devices);
+    m_disconnectedDevices.filterOnType(types);
+    m_disconnectedDevices.filterOnConnections(Device::Connection::Connecting |
+                                              Device::Connection::Disconnected);
+    m_disconnectedDevices.setSourceModel(&m_devices);
 
     QObject::connect(&m_devices, SIGNAL(discoveringChanged(bool)),
                      this, SIGNAL(discoveringChanged(bool)));
@@ -83,16 +87,16 @@ Agent * Bluetooth::getAgent()
     return ret;
 }
 
-QAbstractItemModel * Bluetooth::getConnectedHeadsets()
+QAbstractItemModel * Bluetooth::getConnectedDevices()
 {
-    auto ret = &m_connectedHeadsets;
+    auto ret = &m_connectedDevices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
 
-QAbstractItemModel * Bluetooth::getDisconnectedHeadsets()
+QAbstractItemModel * Bluetooth::getDisconnectedDevices()
 {
-    auto ret = &m_disconnectedHeadsets;
+    auto ret = &m_disconnectedDevices;
     QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
     return ret;
 }
@@ -102,18 +106,36 @@ QAbstractItemModel * Bluetooth::getDisconnectedHeadsets()
 ****
 ***/
 
-void Bluetooth::disconnectHeadset()
+void Bluetooth::disconnectDevice()
 {
+    Device::Type type;
+
     if (m_selectedDevice)
-        m_selectedDevice->disconnect(Device::HeadsetMode);
+        type = m_selectedDevice->getType();
+        if (type == Device::Type::Headset)
+            m_selectedDevice->disconnect(Device::ConnectionMode::HeadsetMode);
+        else if (type == Device::Type::Headphones)
+            m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
+        else if (type == Device::Type::OtherAudio)
+            m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
 }
 
-void Bluetooth::connectHeadset(const QString &address)
+void Bluetooth::connectDevice(const QString &address)
 {
-    const Device::ConnectionMode connMode = Device::HeadsetMode;
+    Device::ConnectionMode connMode;
     auto device = m_devices.getDeviceFromAddress(address);
+    Device::Type type;
+
     if (!device)
         return;
+
+    type = device->getType();
+    if (type == Device::Type::Headset)
+        connMode = Device::ConnectionMode::HeadsetMode;
+    else if (type == Device::Type::Headphones)
+        connMode = Device::ConnectionMode::Audio;
+    else if (type == Device::Type::OtherAudio)
+        connMode = Device::ConnectionMode::Audio;
 
     if (device->isPaired()) {
         device->connect(connMode);
