@@ -19,7 +19,6 @@
 #include <csignal>
 #include <libintl.h>
 #include <qpa/qplatformnativeinterface.h>
-#include <ubuntu/application/ui/session.h>
 #include <QDebug>
 #include <QGuiApplication>
 #include <QLibrary>
@@ -67,7 +66,7 @@ int startShell(int argc, const char** argv, void* server)
     view->setTitle("Qml Phone Shell"); // Fake to be the shell
 
     QPlatformNativeInterface* nativeInterface = QGuiApplication::platformNativeInterface();
-    nativeInterface->setProperty("session", U_SYSTEM_SESSION); // receive all input events
+    nativeInterface->setProperty("session", 1); // system session, receives all input events
 
     QString rootDir = qgetenv("UBUNTU_SYSTEM_SETTINGS_WIZARD_ROOT"); // for testing
     if (rootDir.isEmpty())
