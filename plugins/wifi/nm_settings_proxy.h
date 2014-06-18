@@ -20,9 +20,6 @@
 #include <QtCore/QVariant>
 #include <QtDBus/QtDBus>
 
-typedef QMap<QString,QVariantMap> unholyVariantFuck;
-Q_DECLARE_METATYPE(unholyVariantFuck)
-
 /*
  * Proxy class for interface org.freedesktop.NetworkManager.Settings
  */
@@ -36,9 +33,7 @@ public:
 public:
     OrgFreedesktopNetworkManagerSettingsInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0)
         : QDBusAbstractInterface(service, path, staticInterfaceName(), connection, parent)
-    {
-        qDBusRegisterMetaType<unholyVariantFuck>();
-    }
+    {}
 
     ~OrgFreedesktopNetworkManagerSettingsInterface()
     {}

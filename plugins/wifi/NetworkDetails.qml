@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -33,25 +34,33 @@ ItemPage {
     property string lastUsed
     property string dbusPath
 
-    title: i18n.tr("Network") + " '" + networkName  + "'"
+    title: i18n.tr("Network details")
 
     Column {
 
         anchors.fill: parent
-        
+
+        ListItem.Standard {
+            text: i18n.tr("Name")
+            control: Label {
+                text: networkName
+            }
+        }
+
         ListItem.Standard {
             id: lastLabel
             text: i18n.tr("Last connected")
             control: Label {
                 id: lastField
 
-                text: networkDetails.lastUsed
+                text: networkDetails.lastUsed.length !== 0 ? networkDetails.lastUsed : i18n.tr("Never")
             }
         }
 
         ListItem.Standard {
             id: passwordLabel
             text: i18n.tr("Password")
+            visible: networkDetails.password.length !== 0
             control: TextInput {
                 id: passwordField
                 readOnly: true
@@ -61,21 +70,23 @@ ItemPage {
         }
 
         ListItem.Standard {
-            text: i18n.tr("Show password")
             id: passwordVisible
+            text: i18n.tr("Show password")
+            visible: networkDetails.password.length !== 0
             control: Switch {
                 id: passwordVisibleSwitch
             }
         }
 
+        ListItem.Divider {}
+
         Button {
             text : i18n.tr("Forget network")
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.topMargin: units.gu(1)
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
-            anchors.bottomMargin: units.gu(1)
+            anchors {
+                left: parent.left
+                right: parent.right
+                margins: units.gu(2)
+            }
             onClicked : {
                 DbusHelper.forgetConnection(dbusPath)
                 pageStack.pop()

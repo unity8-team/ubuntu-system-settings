@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -36,13 +37,20 @@ ItemPage {
             return password.length >= 8
         }
         // WEP
-        return password.length==5 || password.length == 10;
+        return password.length === 5  ||
+               password.length === 10 ||
+               password.length === 13 ||
+               password.length === 26;
     }
 
 
     Column {
         id : otherview
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
 
         ListItem.Standard {
             text : i18n.tr("Network name")
@@ -56,14 +64,15 @@ ItemPage {
         ListItem.ItemSelector {
             id: securityList
             text: i18n.tr("Security")
-            model: [i18n.tr("None"),
-                    i18n.tr("WPA & WPA2 Personal"),
-                    i18n.tr("WEP"),
+            model: [i18n.tr("None"),                 // index: 0
+                    i18n.tr("WPA & WPA2 Personal"),  // index: 1
+                    i18n.tr("WEP"),                  // index: 2
                     ]
         }
 
         ListItem.Standard {
             id: passwordList
+            visible: securityList.selectedIndex !== 0
             text: i18n.tr("Password")
             control : TextInput {
             }
@@ -71,60 +80,49 @@ ItemPage {
 
         TextField {
             id : password
+            visible: securityList.selectedIndex !== 0
             width: parent.width
             echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
         }
 
         ListItem.Standard {
             text: i18n.tr("Password visible")
+            visible: securityList.selectedIndex !== 0
             id: passwordVisible
             control: Switch {
                 id: passwordVisibleSwitch
             }
         }
+    }
 
-        Item {
-            id: buttonRectangle
+    RowLayout {
+        id: buttonRow
 
-            anchors.top: passwordVisible.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.topMargin: units.gu(1)
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            margins: units.gu(2)
+        }
+        spacing: units.gu(2)
 
-            Button {
-                id: cancelButton
-                anchors.leftMargin: units.gu(2)
-                anchors.rightMargin: units.gu(1)
-                anchors.bottomMargin: units.gu(1)
-
-                text: i18n.tr("Cancel")
-
-                anchors.left: parent.left
-                anchors.right: parent.horizontalCenter
-
-                onClicked: {
-                    pageStack.pop()
-                }
+        Button {
+            id: cancelButton
+            Layout.fillWidth: true
+            text: i18n.tr("Cancel")
+            onClicked: {
+                pageStack.pop()
             }
+        }
 
-            Button {
-                id: connectButton
-
-                anchors.leftMargin: units.gu(1)
-                anchors.rightMargin: units.gu(2)
-                anchors.bottomMargin: units.gu(1)
-                text: i18n.tr("Connect")
-//                enabled: languageList.currentIndex != plugin.currentLanguage
-
-                anchors.left: parent.horizontalCenter
-                anchors.right: parent.right
-
-                enabled: settingsValid()
-
-                onClicked: {
-                    DbusHelper.connect(networkname.text, securityList.currentindex, password.text)
-                    pageStack.pop()
-                }
+        Button {
+            id: connectButton
+            Layout.fillWidth: true
+            text: i18n.tr("Connect")
+            enabled: settingsValid()
+            onClicked: {
+                DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
+                pageStack.pop()
             }
         }
     }

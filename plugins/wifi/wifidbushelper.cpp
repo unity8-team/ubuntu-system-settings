@@ -23,23 +23,97 @@
 #include <QtDebug>
 #include <QDBusInterface>
 
+#include "nm_manager_proxy.h"
 #include "nm_settings_proxy.h"
 #include "nm_settings_connection_proxy.h"
 
 #include <iostream>
 
-WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent) {
+typedef QMap<QString,QVariantMap> ConfigurationData;
+Q_DECLARE_METATYPE(ConfigurationData)
+
+WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent)
+{
+    qDBusRegisterMetaType<ConfigurationData>();
 }
 
-void WifiDbusHelper::connect(QString ssid, int security, QString password) {
-    //QDBusInterface service(nm_service, nm_object, settings_interface, QDBusConnection::systemBus());
+void WifiDbusHelper::connect(QString ssid, int security, QString password)
+{
+
     printf("Connecting to %s, security %d, password %s.\n",
             ssid.toUtf8().data(), security, password.toUtf8().data());
-/*
-    // Convert security enum to NM flags here.
-    QDBusReply<unsigned int> result = service.call("XXX",
-            ssid, securityFlags, password);
- */
+
+    OrgFreedesktopNetworkManagerInterface mgr("org.freedesktop.NetworkManager",
+                                              "/org/freedesktop/NetworkManager",
+                                              QDBusConnection::systemBus());
+
+    QMap<QString, QVariantMap> configuration;
+
+    QVariantMap connection;
+    connection["type"] = QString("802-11-wireless");
+    configuration["connection"] = connection;
+
+    QVariantMap wireless;
+    wireless["ssid"] = ssid.toLatin1();
+
+    // security:
+    // 0: None
+    // 1: WPA & WPA2 Personal
+    // 2: WEP
+    if (security != 0) {
+        wireless["security"] = QString("802-11-wireless-security");
+
+        QVariantMap wireless_security;
+
+        if (security == 1) {
+            wireless_security["key-mgmt"] = QString("wpa-psk");
+            wireless_security["psk"] = password;
+        } else if (security == 2) {
+            wireless_security["key-mgmt"] = QString("none");
+            wireless_security["auth-alg"] = QString("open");
+            wireless_security["wep-key0"] = password;
+            wireless_security["wep-key-type"] = QVariant(uint(1));
+        } else {
+            // QML side and c++ side have gotten out of sync.
+            // Can't do anything here.
+            return;
+        }
+
+        configuration["802-11-wireless-security"] = wireless_security;
+    }
+
+    configuration["802-11-wireless"] = wireless;
+
+
+    // find the first wlan adapter for now
+    auto reply1 = mgr.GetDevices();
+    reply1.waitForFinished();
+    auto devices = reply1.value();
+
+    QDBusObjectPath dev;
+    for (const auto &d : devices) {
+        QDBusInterface iface("org.freedesktop.NetworkManager",
+                             d.path(),
+                             "org.freedesktop.NetworkManager.Device",
+                             QDBusConnection::systemBus());
+
+        auto type_v = iface.property("DeviceType");
+        if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
+            dev = d;
+            break;
+        }
+    }
+
+    if (dev.path().isEmpty()) {
+        // didn't find a wifi device
+        return;
+    }
+
+    QDBusObjectPath tmp;
+    auto reply2 = mgr.AddAndActivateConnection(configuration,
+                                               dev,
+                                               QDBusObjectPath("/"),
+                                               tmp);
 }
 
 struct Network : public QObject
@@ -50,7 +124,8 @@ struct Network : public QObject
 
     enum class Mode {
         infrastructure,
-        adhoc
+        adhoc,
+        unknown
     };
     Mode mode;
 
@@ -87,12 +162,11 @@ struct Network : public QObject
             throw DontCare();
         type = Type::wireless;
 
-        // if the configuration does not have timestamp it means
-        // it has never been succesfully activated and there is no
-        // point in showing it.
-        if (!connection.contains("timestamp"))
-            throw DontCare();
-        timestamp = connection["timestamp"].toULongLong();
+        if (!connection.contains("timestamp")) {
+            timestamp = 0;
+        } else {
+            timestamp = connection["timestamp"].toULongLong();
+        }
     }
 
     void parseWireless()
@@ -108,7 +182,7 @@ struct Network : public QObject
         else if (mode_str == "adhoc")
             mode = Mode::adhoc;
         else
-            throw DontCare();
+            mode = Mode::unknown;
 
         if (wireless.contains("security"))
         {
@@ -125,7 +199,7 @@ struct Network : public QObject
     void parseWirelessSecurity()
     {
         if (!settings.contains("802-11-wireless-security"))
-            throw DontCare();
+            return;
 
         auto security = settings["802-11-wireless-security"];
         auto keymgmt = security["key-mgmt"];
@@ -135,21 +209,15 @@ struct Network : public QObject
         reply.waitForFinished();
         auto secrects = reply.value();
 
-        if (!secrects.contains("802-11-wireless-security"))
-            throw DontCare();
+        if (secrects.contains("802-11-wireless-security")) {
+            auto secrects_security = secrects["802-11-wireless-security"];
 
-        auto secrects_security = secrects["802-11-wireless-security"];
-
-        if (keymgmt == "none") {
-            if (!secrects_security.contains("wep-key0"))
-                throw DontCare();
-            password = secrects_security["wep-key0"].toString();
-        } else if (keymgmt == "wpa-psk" && authalg == "open") {
-            if (!secrects_security.contains("psk"))
-                throw DontCare();
-            password = secrects_security["psk"].toString();
-        } else {
-            throw DontCare();
+            if (keymgmt == "none") {
+                password = secrects_security["wep-key0"].toString();
+            } else if (keymgmt == "wpa-psk" && authalg == "open") {
+                password = secrects_security["psk"].toString();
+            } else {
+            }
         }
     }
 
@@ -164,9 +232,21 @@ struct Network : public QObject
         reply.waitForFinished();
         settings = reply.value();
 
-        parseConnection();
-        if (type == Type::wireless)
-            parseWireless();
+        try {
+            parseConnection();
+        } catch (const DontCare &) {
+            std::cout << "Ignoring a network based on connection block." << std::endl;
+            throw;
+        }
+
+        if (type == Type::wireless) {
+            try {
+                parseWireless();
+            } catch (const DontCare &) {
+                std::cout << "Ignoring a network based on wireless block. " << qPrintable(m_iface.path()) << std::endl;
+                throw;
+            }
+        }
     }
 
     OrgFreedesktopNetworkManagerSettingsConnectionInterface m_iface;
@@ -179,8 +259,7 @@ QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
    OrgFreedesktopNetworkManagerSettingsInterface foo
             ("org.freedesktop.NetworkManager",
              "/org/freedesktop/NetworkManager/Settings",
-             QDBusConnection::systemBus(),
-             this);
+             QDBusConnection::systemBus());
     auto reply = foo.ListConnections();
     reply.waitForFinished();
     if (reply.isValid()) {
@@ -191,8 +270,12 @@ QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
                 tmp.push_back(network.id);
                 tmp.push_back(network.path);
                 tmp.push_back(network.password);
+                QString lastConnected = "";
                 QLocale locale;
-                tmp.push_back(locale.toString(QDateTime::fromMSecsSinceEpoch(network.timestamp*1000), locale.dateFormat()));
+                if (network.timestamp != 0) {
+                    lastConnected = locale.toString(QDateTime::fromMSecsSinceEpoch(network.timestamp*1000), locale.dateFormat());
+                }
+                tmp.push_back(lastConnected);
                 networks.push_back(tmp);
             } catch (const Network::DontCare &) {
                 continue;
@@ -212,8 +295,7 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     OrgFreedesktopNetworkManagerSettingsConnectionInterface bar
             ("org.freedesktop.NetworkManager",
              dbus_path,
-             QDBusConnection::systemBus(),
-             this);
+             QDBusConnection::systemBus());
     auto reply = bar.Delete();
     reply.waitForFinished();
     printf("Forgotten network with path %s.\n", dbus_path.toUtf8().data());

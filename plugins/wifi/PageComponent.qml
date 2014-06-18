@@ -106,7 +106,7 @@ ItemPage {
                 }
             }
 
-            DivMenuItem {}
+            ListItem.Divider {}
 
             ListItem.SingleValue {
                 text: i18n.tr("Previous networks")
