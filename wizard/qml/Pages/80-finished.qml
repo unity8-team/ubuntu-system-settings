@@ -45,7 +45,7 @@ LocalComponents.Page {
         id: forwardButton
         LocalComponents.ForwardButton {
             text: i18n.tr("Finish")
-            onClicked: pageStack.push(Qt.resolvedUrl("spinner.qml"))
+            onClicked: Qt.quit()
         }
     }
 }
