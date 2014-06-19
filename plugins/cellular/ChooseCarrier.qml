@@ -64,7 +64,7 @@ ItemPage {
         id: netOp
         OfonoNetworkOperator {
             onRegisterComplete: {
-                console.log ("registerComplete: " + errorString);
+                console.warn ("registerComplete: " + errorString);
             }
         }
     }

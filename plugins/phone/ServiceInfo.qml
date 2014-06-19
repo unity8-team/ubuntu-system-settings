@@ -28,6 +28,7 @@ import "dateUtils.js" as DateUtils
 ItemPage {
     property string serviceName
     property string serviceNumber
+    property string lastTimestamp
     title: serviceName            
 
     HistoryEventModel {
@@ -39,6 +40,7 @@ ItemPage {
         }
 
         property string phoneNumber: serviceNumber
+        onCountChanged: lastTimestamp = historyEventModel.at(0).timestamp
 
         filter: HistoryUnionFilter {
             // FIXME: this is not the best API for this case, but will be changed later
@@ -85,7 +87,6 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
             height: lastCalledCol.height + units.gu(6)
-            visible: index === 0
             Column {
                 id: lastCalledCol
                 anchors.left: parent.left
@@ -96,7 +97,7 @@ ItemPage {
                 Icon {
                     anchors.horizontalCenter: parent.horizontalCenter
                     name: "contact"
-                    width: 24
+                    width: 144
                     height: width
                 }
 
@@ -104,7 +105,8 @@ ItemPage {
                     id: calledLabel
                     objectName: "calledLabel"
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: i18n.tr("Last called %1").arg(DateUtils.formatFriendlyDate(historyEventModel[0].timestamp))
+                    visible: lastTimestamp
+                    text: i18n.tr("Last called %1").arg(DateUtils.formatFriendlyDate(lastTimestamp))
                 }
             }
         }
