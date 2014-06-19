@@ -207,6 +207,7 @@ ItemPage {
                     iconName: iconName
                     text: getDisplayName(connection, displayName)
                     onClicked: {
+                        backend.stopDiscovery();
                         backend.connectDevice(addressName);
                     }
                 }

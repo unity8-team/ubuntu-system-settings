@@ -70,6 +70,9 @@ public:
     Q_INVOKABLE void setSelectedDevice(const QString &address);
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice();
+    Q_INVOKABLE void toggleDiscovery();
+    Q_INVOKABLE void startDiscovery();
+    Q_INVOKABLE void stopDiscovery();
 
 public:
     Agent * getAgent();

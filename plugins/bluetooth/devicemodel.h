@@ -67,6 +67,9 @@ public:
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
     void pairDevice(const QString &address);
+    void stopDiscovery();
+    void startDiscovery();
+    void toggleDiscovery();
 
 Q_SIGNALS: 
     void discoveringChanged(bool isDiscovering);
@@ -85,9 +88,6 @@ private:
     bool m_isDiscovering = false;
     bool m_isDiscoverable = false;
     QTimer m_timer;
-    void stopDiscovery();
-    void startDiscovery();
-    void toggleDiscovery();
     void restartTimer();
     void trySetDiscoverable(bool discoverable);
     void setDiscoverable(bool discoverable);

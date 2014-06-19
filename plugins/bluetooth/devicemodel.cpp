@@ -244,7 +244,6 @@ void DeviceModel::setDiscoverable(bool discoverable)
 
 void DeviceModel::slotEnableDiscoverable()
 {
-    qWarning() << "Trying to set discoverable";
     trySetDiscoverable(true);
 }
 
@@ -257,7 +256,6 @@ void DeviceModel::trySetDiscoverable(bool discoverable)
     value.setValue(disc);
 
     if (m_bluezAdapter && m_bluezAdapter->isValid()) {
-        qWarning() << "Setting device discoverable " << discoverable;
         reply = m_bluezAdapter->call("SetProperty", "Discoverable", value);
         if (!reply.isValid())
             qWarning() << "Error setting device discoverable:" << reply.error();
