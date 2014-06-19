@@ -68,7 +68,7 @@ public:
     enum Connection { Disconnected=1, Connecting=2,
                       Connected=4, Disconnecting=8 };
 
-    enum ConnectionMode { Audio, AudioSource, HandsfreeGateway,
+    enum ConnectionMode { Audio, AudioSource, AudioSink, HandsfreeGateway,
                           HeadsetMode, Input };
 
     Q_ENUMS(Type Strength Connection ConnectionMode)
@@ -109,6 +109,7 @@ public:
     QSharedPointer<QDBusInterface> m_deviceInterface;
     QSharedPointer<QDBusInterface> m_audioInterface;
     QSharedPointer<QDBusInterface> m_audioSourceInterface;
+    QSharedPointer<QDBusInterface> m_audioSinkInterface;
     QSharedPointer<QDBusInterface> m_headsetInterface;
 
   protected:
