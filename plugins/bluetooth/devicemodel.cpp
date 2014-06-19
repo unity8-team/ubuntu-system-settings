@@ -19,6 +19,7 @@
 */
 
 #include <QDBusReply>
+#include <QDebug>
 
 #include "devicemodel.h"
 #include "dbus-shared.h"
@@ -135,6 +136,7 @@ void DeviceModel::clearAdapter()
         const QString interface = m_bluezAdapter->interface();
 
         stopDiscovery();
+        trySetDiscoverable(false);
 
         bus.disconnect(service, path, interface, "DeviceCreated",
                        this, SLOT(slotDeviceCreated(const QDBusObjectPath&)));
@@ -144,8 +146,11 @@ void DeviceModel::clearAdapter()
                        this, SLOT(slotDeviceFound(const QString&, const QMap<QString,QVariant>&)));
         bus.disconnect(service, path, interface, "DeviceDisappeared",
                        this, SLOT(slotDeviceDisappeared(const QString&)));
+        bus.disconnect(service, path, interface, "PropertyChanged",
+                       this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&)));
 
         m_bluezAdapter.reset(0);
+        m_adapterName.clear();
 
         beginResetModel();
         m_devices.clear();
@@ -171,10 +176,18 @@ void DeviceModel::setAdapterFromPath(const QString &path)
                        this, SLOT(slotDeviceFound(const QString&, const QMap<QString,QVariant>&)));
         m_dbus.connect(service, path, interface, "DeviceDisappeared", 
                        this, SLOT(slotDeviceDisappeared(const QString&)));
+        m_dbus.connect(service, path, interface, "PropertyChanged",
+                       this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&)));
 
         m_bluezAdapter.reset(i);
         startDiscovery();
         updateDevices();
+
+        QDBusReply<QMap<QString,QVariant> > properties = m_bluezAdapter->call("GetProperties");
+        if (properties.isValid())
+            setProperties(properties.value());
+
+        QTimer::singleShot(1000, this, SLOT(slotEnableDiscoverable()));
     }
 }
 
@@ -197,6 +210,64 @@ void DeviceModel::updateDevices()
             for (auto path : reply.value())
                 addDevice(path.path());
     }
+}
+
+void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
+{
+    QMapIterator<QString,QVariant> it(properties);
+    while (it.hasNext()) {
+        it.next();
+        updateProperty(it.key(), it.value());
+    }
+}
+
+void DeviceModel::updateProperty(const QString &key, const QVariant &value)
+{
+    if (key == "Name") {
+        m_adapterName = value.toString();
+    } else if (key == "Address") {
+        m_adapterAddress = value.toString();
+    } else if (key == "Pairable") {
+        m_isPairable = value.toBool();
+    } else if (key == "Discoverable") {
+        setDiscoverable(value.toBool());
+    }
+}
+
+void DeviceModel::setDiscoverable(bool discoverable)
+{
+    if (m_isDiscoverable != discoverable) {
+        m_isDiscoverable = discoverable;
+        Q_EMIT(discoverableChanged(m_isDiscoverable));
+    }
+}
+
+void DeviceModel::slotEnableDiscoverable()
+{
+    qWarning() << "Trying to set discoverable";
+    trySetDiscoverable(true);
+}
+
+void DeviceModel::trySetDiscoverable(bool discoverable)
+{
+    QVariant value;
+    QDBusVariant disc(discoverable);
+    QDBusReply<void > reply;
+
+    value.setValue(disc);
+
+    if (m_bluezAdapter && m_bluezAdapter->isValid()) {
+        qWarning() << "Setting device discoverable " << discoverable;
+        reply = m_bluezAdapter->call("SetProperty", "Discoverable", value);
+        if (!reply.isValid())
+            qWarning() << "Error setting device discoverable:" << reply.error();
+    }
+}
+
+void DeviceModel::slotPropertyChanged(const QString      &key,
+                                      const QDBusVariant &value)
+{
+    updateProperty (key, value.variant());
 }
 
 /***
@@ -293,6 +364,11 @@ void DeviceModel::slotDeviceChanged()
 
     if (row != -1)
         emitRowChanged(row);
+}
+
+QString DeviceModel::getAdapterName()
+{
+    return m_adapterName;
 }
 
 QSharedPointer<Device> DeviceModel::getDeviceFromAddress(const QString &address)

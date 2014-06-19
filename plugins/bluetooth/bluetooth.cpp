@@ -53,6 +53,9 @@ Bluetooth::Bluetooth(QObject *parent):
     QObject::connect(&m_devices, SIGNAL(discoveringChanged(bool)),
                      this, SIGNAL(discoveringChanged(bool)));
 
+    QObject::connect(&m_devices, SIGNAL(discoverableChanged(bool)),
+                     this, SIGNAL(discoverableChanged(bool)));
+
     QObject::connect(&m_agent, SIGNAL(onPairingDone()),
                      this, SLOT(onPairingDone()));
 }
@@ -68,6 +71,11 @@ void Bluetooth::setSelectedDevice(const QString &address)
 /***
 ****
 ***/
+
+QString Bluetooth::getAdapterName()
+{
+    return m_devices.getAdapterName();
+}
 
 Device * Bluetooth::getSelectedDevice()
 {

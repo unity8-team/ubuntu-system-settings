@@ -142,8 +142,21 @@ ItemPage {
                 value: bluetoothActionGroup.enabled.state
             }
 
-            //  Connnected Headset(s)
+            // Discoverability
+            ListItem.Subtitled {
+                text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
+                enabled: bluetoothActionGroup.enabled
+                //Component.onCompleted: clicked.connect(btSwitch.clicked)
+                //control: ActivityIndicator {
+                //    visible: !backend.discoverable
+                //    running: true
+                //}
+                // Until we can have control in a Subtitled ListItem:
+                subText: backend.discoverable ? backend.getAdapterName() : ""
+                progression: !backend.discoverable
+            }
 
+            //  Connnected Headset(s)
             ListItem.Standard {
                 id: connectedHeader
                 text: i18n.tr("Connected devices:")

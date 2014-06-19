@@ -61,24 +61,36 @@ public:
 
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
+    QString getAdapterName();
 
 public:
     bool isDiscovering() const { return m_isDiscovering; }
+    bool isDiscoverable() const { return m_isDiscoverable; }
     void pairDevice(const QString &address);
 
 Q_SIGNALS: 
     void discoveringChanged(bool isDiscovering);
+    void discoverableChanged(bool isDiscoverable);
 
 private:
     QDBusConnection m_dbus;
     QDBusInterface m_bluezManager;
 
+    void setProperties(const QMap<QString,QVariant> &properties);
+    void updateProperty(const QString &key, const QVariant &value);
+
+    QString m_adapterName;
+    QString m_adapterAddress;
+    bool m_isPairable = false;
     bool m_isDiscovering = false;
+    bool m_isDiscoverable = false;
     QTimer m_timer;
     void stopDiscovery();
     void startDiscovery();
     void toggleDiscovery();
     void restartTimer();
+    void trySetDiscoverable(bool discoverable);
+    void setDiscoverable(bool discoverable);
 
     QScopedPointer<QDBusInterface> m_bluezAdapter;
     void clearAdapter();
@@ -93,7 +105,9 @@ private:
     void emitRowChanged(int row);
 
 private Q_SLOTS:
+    void slotPropertyChanged(const QString &key, const QDBusVariant &value);
     void slotTimeout();
+    void slotEnableDiscoverable();
     void slotDeviceChanged();
     void slotDeviceCreated(const QDBusObjectPath &);
     void slotDeviceRemoved(const QDBusObjectPath &);
