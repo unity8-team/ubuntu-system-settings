@@ -13,6 +13,7 @@ import unittest
 import dbus
 from gi.repository import GLib
 
+from autopilot.introspection.dbus import CustomEmulatorBase
 from autopilot.matchers import Eventually
 from testtools import skipIf
 from testtools.matchers import Equals, NotEquals
@@ -23,9 +24,12 @@ from ubuntu_system_settings.tests import (
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
+class MainPage(CustomEmulatorBase):
+    pass
+
 
 class BackgroundBaseTestCase(UbuntuSystemSettingsTestCase):
-    """ Base class for Background this phone tests """
+    """Base class for Background phone tests """
 
     def setUp(self):
         """Go to Background page."""
@@ -35,7 +39,11 @@ class BackgroundBaseTestCase(UbuntuSystemSettingsTestCase):
     @property
     def background_page(self):
         """Returns 'Background' page."""
-        return self.main_view.select_single(objectName='backgroundPage')
+        self.system_settings.main_view.print_tree("/home/phablet/tree.log")
+        return self.system_settings.main_view.select_single(
+            MainPage,
+            objectName='backgroundPage'
+        )
 
 
 class BackgroundTestCase(BackgroundBaseTestCase):
@@ -59,63 +67,18 @@ class BackgroundTestCase(BackgroundBaseTestCase):
 
     def test_select_new_welcome_image(self):
         self._click_welcome_image()
-        photo_image_button = self.main_view.wait_select_single(
-            'ActionItem',
-            text='Photo/Image'
+        image_filepath = 'file:///home/phablet/.local/share/SystemSettings/Pictures/image20140605_0001.jpg'
+        custom_background_image = self.main_view.wait_select_single(
+            'QQuickImage',
+            source=image_filepath
         )
-        self.pointer.click_object(photo_image_button)
-        #self._click_item('importImage')
-        #self.main_view.print_tree('/home/alesage/Desktop/background.log')
-        sleep(10)
-
-
-#    def test_serial(self):
-#        """Checks whether the UI is showing the correct serial number."""
-#        item = self.about_page.select_single(objectName='serialItem')
-#        serial = self._get_device_serial_number()
-#
-#        if not serial:
-#            self.assertThat(item.visible, Equals(False))
-#        else:
-#            self.assertThat(
-#                item.value, Equals(self._get_device_serial_number())
-#            )
-#
-#    def test_imei_information_is_correct(self):
-#        """Checks whether the UI is exposing the right IMEI."""
-#        imei_item = self.about_page.wait_select_single(
-#            objectName='imeiItem')
-#        imei_ofono = self._get_imei_from_dbus()
-#
-#        if not imei_ofono:
-#            self.assertThat(imei_item.visible, Equals(False))
-#        else:
-#            self.assertEquals(imei_item.value, imei_ofono)
-#
-#    def test_settings_show_correct_version_of_the_os(self):
-#        """Ensure the UI is showing the correct version of the OS."""
-#        item = self.about_page.select_single(objectName='osItem')
-#        # TODO: find a way to check the image build number as well
-#        # -- om26er 10-03-2014
-#        self.assertTrue(self._get_os_name() in item.value)
-#
-#    @skipIf(subprocess.call(
-#        ['which', 'getprop'], stdout=subprocess.PIPE) != 0,
-#        'program "getprop" not found'
-#    )
-#    def test_hardware_name(self):
-#        """Ensure the UI is showing the correct device name."""
-#        device_label = self.about_page.select_single(
-#            objectName='deviceLabel'
-#            ).text
-#        device_name_from_getprop = self._get_device_manufacturer_and_model()
-#
-#        self.assertEquals(device_label, device_name_from_getprop)
-#
-#    def test_last_updated(self):
-#        """Checks whether Last Updated info is correct."""
-#        last_updated = self.about_page.select_single(
-#            objectName='lastUpdatedItem'
-#            ).value
-#
-#        self.assertEquals(last_updated, self._get_last_updated_date())
+        self.pointer.click_object(custom_background_image)
+        set_button = self.main_view.wait_select_single(
+            'Button',
+            text='Set'
+        )
+        self.pointer.click_object(set_button)
+        main_page = self.main_view.wait_select_single(
+            'MainPage',
+            welcomeBackground=image_filepath
+        )
