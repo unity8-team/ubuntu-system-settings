@@ -40,7 +40,7 @@ ItemPage {
         }
 
         property string phoneNumber: serviceNumber
-        onCountChanged: lastTimestamp = historyEventModel.at(0).timestamp
+        onCountChanged: lastTimestamp = historyEventModel.get(0).timestamp
 
         filter: HistoryUnionFilter {
             // FIXME: this is not the best API for this case, but will be changed later
