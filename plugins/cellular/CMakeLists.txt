@@ -13,6 +13,7 @@ add_library(UbuntuCellularPanel MODULE
   plugin.h
   cellulardbushelper.cpp
   cellulardbushelper.h
+  nm_manager_proxy.h
   ${QML_SOURCES}
 )
 qt5_use_modules(UbuntuCellularPanel Qml Quick DBus)

@@ -40,7 +40,8 @@ public:
     Q_INVOKABLE void toggleHotspot(bool on);
 
 private:
-    //QDBusInterface service;
+    QString ssid;
+    QString password;
 
 };
 
