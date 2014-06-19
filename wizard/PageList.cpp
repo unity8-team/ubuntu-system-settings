@@ -41,23 +41,24 @@ PageList::PageList(QObject *parent)
       m_index(-1),
       m_pages()
 {
+    QString qmlSuffix = ".qml";
+    QString disabledSuffix = ".disabled";
+    QSet<QString> disabledPages;
     QStringList dataDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
     Q_FOREACH(const QString &dataDir, dataDirs) {
         QDir dir(dataDir + "/ubuntu/settings/wizard/qml/Pages");
         QStringList entries = dir.entryList(QStringList("[0-9]*"), QDir::Files | QDir::Readable);
         Q_FOREACH(const QString &entry, entries) {
-            if (!m_pages.contains(entry))
+            if (!m_pages.contains(entry) && entry.endsWith(qmlSuffix))
                 m_pages.insert(entry, dir.absoluteFilePath(entry));
+            else if (entry.endsWith(qmlSuffix + disabledSuffix))
+                disabledPages.insert(entry.left(entry.size() - disabledSuffix.size()));
         }
     }
 
     // Now remove any explicitly disabled entries
-    QString disableSuffix = ".disabled";
-    Q_FOREACH(const QString &page, m_pages.keys()) {
-        if (page.endsWith(disableSuffix)) {
-            m_pages.remove(page);
-            m_pages.remove(page.left(page.size() - disableSuffix.size()));
-        }
+    Q_FOREACH(const QString &page, disabledPages) {
+        m_pages.remove(page);
     }
 }
 
