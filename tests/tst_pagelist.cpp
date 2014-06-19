@@ -36,6 +36,7 @@ private Q_SLOTS:
     void testCollect();
     void testIterate();
     void testIgnoreNonNumbered();
+    void testIgnoreNonQml();
     void testIgnoreDuplicates();
     void testDisabled();
 
@@ -68,34 +69,34 @@ void PageListTest::testCollect()
 {
     QTemporaryDir root;
     fillRoot(root);
-    makeFile(root, "a", "3");
-    makeFile(root, "b", "1");
-    makeFile(root, "c", "2");
+    makeFile(root, "a", "3.qml");
+    makeFile(root, "b", "1.qml");
+    makeFile(root, "c", "2.qml");
 
     PageList pageList;
-    QCOMPARE(pageList.entries(), QStringList() << "1" << "2" << "3");
-    QCOMPARE(pageList.paths(), QStringList() << root.path() + "/b/" + PAGES_PATH + "/1"
-                                             << root.path() + "/c/" + PAGES_PATH + "/2"
-                                             << root.path() + "/a/" + PAGES_PATH + "/3");
+    QCOMPARE(pageList.entries(), QStringList() << "1.qml" << "2.qml" << "3.qml");
+    QCOMPARE(pageList.paths(), QStringList() << root.path() + "/b/" + PAGES_PATH + "/1.qml"
+                                             << root.path() + "/c/" + PAGES_PATH + "/2.qml"
+                                             << root.path() + "/a/" + PAGES_PATH + "/3.qml");
 }
 
 void PageListTest::testIterate()
 {
     QTemporaryDir root;
     fillRoot(root);
-    makeFile(root, "a", "1");
-    makeFile(root, "a", "2");
-    makeFile(root, "a", "3");
+    makeFile(root, "a", "1.qml");
+    makeFile(root, "a", "2.qml");
+    makeFile(root, "a", "3.qml");
 
     PageList pageList;
     QCOMPARE(pageList.index(), -1);
-    QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/1");
+    QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/1.qml");
     QCOMPARE(pageList.prev(), QString());
-    QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/2");
-    QCOMPARE(pageList.prev(), root.path() + "/a/" + PAGES_PATH + "/1");
+    QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/2.qml");
+    QCOMPARE(pageList.prev(), root.path() + "/a/" + PAGES_PATH + "/1.qml");
     QCOMPARE(pageList.index(), 0);
-    QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/2");
-    QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/3");
+    QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/2.qml");
+    QCOMPARE(pageList.next(), root.path() + "/a/" + PAGES_PATH + "/3.qml");
     QCOMPARE(pageList.index(), 2);
     QCOMPARE(pageList.next(), QString());
     QCOMPARE(pageList.index(), 2);
@@ -105,38 +106,50 @@ void PageListTest::testIgnoreNonNumbered()
 {
     QTemporaryDir root;
     fillRoot(root);
-    makeFile(root, "a", "1");
-    makeFile(root, "a", "nope");
+    makeFile(root, "a", "1.qml");
+    makeFile(root, "a", "nope.qml");
 
     PageList pageList;
-    QCOMPARE(pageList.entries(), QStringList() << "1");
+    QCOMPARE(pageList.entries(), QStringList() << "1.qml");
+}
+
+void PageListTest::testIgnoreNonQml()
+{
+    QTemporaryDir root;
+    fillRoot(root);
+    makeFile(root, "a", "1.qml");
+    makeFile(root, "a", "2");
+    makeFile(root, "a", "2.txt");
+
+    PageList pageList;
+    QCOMPARE(pageList.entries(), QStringList() << "1.qml");
 }
 
 void PageListTest::testIgnoreDuplicates()
 {
     QTemporaryDir root;
     fillRoot(root);
-    makeFile(root, "a", "1");
-    makeFile(root, "b", "1");
+    makeFile(root, "a", "1.qml");
+    makeFile(root, "b", "1.qml");
 
     PageList pageList;
-    QCOMPARE(pageList.paths(), QStringList() << root.path() + "/a/" + PAGES_PATH + "/1");
+    QCOMPARE(pageList.paths(), QStringList() << root.path() + "/a/" + PAGES_PATH + "/1.qml");
 }
 
 void PageListTest::testDisabled()
 {
     QTemporaryDir root;
     fillRoot(root);
-    makeFile(root, "a", "1.disabled"); // before the fact
-    makeFile(root, "b", "1");
-    makeFile(root, "b", "2");
-    makeFile(root, "b", "2.disabled"); // same dir
-    makeFile(root, "b", "3");
-    makeFile(root, "b", "4"); // only survivor
-    makeFile(root, "c", "3.disabled"); // after the fact
+    makeFile(root, "a", "1.qml.disabled"); // before the fact
+    makeFile(root, "b", "1.qml");
+    makeFile(root, "b", "2.qml");
+    makeFile(root, "b", "2.qml.disabled"); // same dir
+    makeFile(root, "b", "3.qml");
+    makeFile(root, "b", "4.qml"); // only survivor
+    makeFile(root, "c", "3.qml.disabled"); // after the fact
 
     PageList pageList;
-    QCOMPARE(pageList.entries(), QStringList() << "4");
+    QCOMPARE(pageList.entries(), QStringList() << "4.qml");
 }
 
 QTEST_MAIN(PageListTest)

@@ -7,8 +7,12 @@ export DH_VERBOSE=1
 include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
 
+override_dh_auto_configure:
+	# Debian defines CMAKE_INSTALL_LOCALSTATEDIR as /usr/var, which is wrong.
+	# So until Debian bug 719148 is fixed, do it ourselves.
+	dh_auto_configure -- -DCMAKE_INSTALL_LOCALSTATEDIR="/var"
+
 override_dh_install:
-	rm -r debian/tmp/usr/share/upstart # not ready yet; also, do not enable wizard without tests!
 	cd tests/autopilot; \
 	set -ex; for python in $(shell pyversions -r); do \
 		$$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
