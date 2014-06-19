@@ -22,40 +22,54 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-
+import MeeGo.QOfono 0.2
 
 ItemPage {
     title: i18n.tr("Carrier")
     objectName: "chooseCarrierPage"
 
     property var netReg
-    property variant operators: netReg.operators
+    property variant operators: []
     property bool scanning: netReg.scanning
     property variant operatorNames
     property variant operatorStatus
     property int curOp
 
-    onOperatorsChanged: {
-        buildLists();
+    Connections {
+        target: netReg
+        onNetworkOperatorsChanged: buildLists()
+        onScanFinished: netReg.scanning = false;
     }
 
     function buildLists()
     {
+        operators = [];
         var oN = new Array();
         var oS = new Array();
-        for (var i in operators)
+        for (var i; i < netReg.networkOperators.length; i++)
         {
-            if (operators[i].status == "forbidden")
+            var tempOp = netOp.createObject(parent, {"operatorPath": netReg.networkOperators[i]});
+            if (tempOp.status === "forbidden")
                 continue
-            oN.push(operators[i].name);
-            oS.push(operators[i].status);
+            oN.push(tempOp.name);
+            oS.push(tempOp.status);
+            operators.push(tempOp)
         }
         curOp = oS.indexOf("current");
         operatorNames = oN;
         operatorStatus = oS;
     }
 
-   ListItem.ItemSelector {
+    Component {
+        id: netOp
+        OfonoNetworkOperator {
+            onRegisterComplete: {
+                console.warn ("registerComplete: " + errorString);
+            }
+        }
+    }
+
+    ListItem.ItemSelector {
         id: carrierSelector
         objectName: "carrierSelector"
         expanded: true
@@ -67,7 +81,8 @@ ItemPage {
         model: operatorNames
         selectedIndex: curOp
         onSelectedIndexChanged: {
-            operators[selectedIndex].registerOp();
+            netOp.operatorPath =
+            operators[selectedIndex].registerOperator();
         }
     }
 
@@ -77,7 +92,10 @@ ItemPage {
             objectName: "refreshButton"
             width: parent.width - units.gu(4)
             text: i18n.tr("Refresh")
-            onTriggered: netReg.scan()
+            onTriggered: {
+                netReg.scanning = true;
+                netReg.scan();
+            }
         }
     }
 
