@@ -14,5 +14,4 @@
     "page-component": "PageComponent.qml",
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
-    "hide-by-default": true
 }
