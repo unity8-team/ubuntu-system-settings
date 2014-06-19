@@ -14,14 +14,12 @@ add_library(UbuntuPhonePanel MODULE
     simmanager.h
     networkoperator.h
     networkregistration.h
-    radiosettings.h
     plugin.cpp
     connman.cpp
     simservice.cpp
     simmanager.cpp
     networkoperator.cpp
     networkregistration.cpp
-    radiosettings.cpp
     plugin.h
     ${QML_SOURCES}
 )

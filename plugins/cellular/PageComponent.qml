@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import QOfonoQtDeclarative 0.2
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -28,14 +29,14 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    RadioSettings {
-        id: radioSettings
-        onPreferedTechnologyChanged: {
-            if(connMan.powered) {
-                dataTypeSelector.selectedIndex = techPreference.keyToIndex(radioSettings.preferedTechnology)
-            }
-        }
-    }
+    // RadioSettings {
+    //     id: radioSettings
+    //     onPreferedTechnologyChanged: {
+    //         if(connMan.powered) {
+    //             dataTypeSelector.selectedIndex = techPreference.keyToIndex(radioSettings.preferedTechnology)
+    //         }
+    //     }
+    // }
 
     NetworkRegistration {
         id: netReg
@@ -69,54 +70,54 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListModel {
-            id: techPreference
+        // ListModel {
+        //     id: techPreference
 
-            ListElement { name: "Off"; description: ""; key: "off" }
-            ListElement { name: "2G only"; description: "Saves battery"; key: "gsm" }
-            ListElement { name: "2G/3G/4G"; description: "Faster"; key: "any" }
+        //     ListElement { name: "Off"; description: ""; key: "off" }
+        //     ListElement { name: "2G only"; description: "Saves battery"; key: "gsm" }
+        //     ListElement { name: "2G/3G/4G"; description: "Faster"; key: "any" }
 
-            function keyToIndex (k) {
-                for (var i=0; i < techPreference.count; i++) {
-                    if (techPreference.get(i).key === k) {
-                        return i;
-                    }
-                }
-                return -1;
-            }
-        }
+        //     function keyToIndex (k) {
+        //         for (var i=0; i < techPreference.count; i++) {
+        //             if (techPreference.get(i).key === k) {
+        //                 return i;
+        //             }
+        //         }
+        //         return -1;
+        //     }
+        // }
 
-        Component {
-            id: techPreferenceDelegate
-            OptionSelectorDelegate { text: i18n.tr(name); subText: i18n.tr(description); }
-        }
+        // Component {
+        //     id: techPreferenceDelegate
+        //     OptionSelectorDelegate { text: i18n.tr(name); subText: i18n.tr(description); }
+        // }
 
-        ListItem.ItemSelector {
-            id: dataTypeSelector
-            objectName: "chooseDataTypeSelector"
-            expanded: true
-            visible: true
-            delegate: techPreferenceDelegate
-            model: techPreference
-            selectedIndex: techPreference.keyToIndex(radioSettings.preferedTechnology)
-            onSelectedIndexChanged: {
-                var key = techPreference.get(selectedIndex).key;
-                if (key === 'off') {
-                    connMan.powered = false;
-                } else {
-                    connMan.powered = true;
-                    radioSettings.preferedTechnology = key
-                }
+        // ListItem.ItemSelector {
+        //     id: dataTypeSelector
+        //     objectName: "chooseDataTypeSelector"
+        //     expanded: true
+        //     visible: true
+        //     delegate: techPreferenceDelegate
+        //     model: techPreference
+        //     selectedIndex: techPreference.keyToIndex(radioSettings.preferedTechnology)
+        //     onSelectedIndexChanged: {
+        //         var key = techPreference.get(selectedIndex).key;
+        //         if (key === 'off') {
+        //             connMan.powered = false;
+        //         } else {
+        //             connMan.powered = true;
+        //             radioSettings.preferedTechnology = key
+        //         }
 
-            }
+        //     }
 
-        }
+        // }
 
         ListItem.Standard {
             id: dataRoamingItem
             objectName: "dataRoamingSwitch"
             text: i18n.tr("Data roaming")
-            enabled: (dataTypeSelector.selectedIndex != 0)
+            //enabled: (dataTypeSelector.selectedIndex != 0)
             control: Switch {
                 id: dataRoamingControl
                 checked: connMan.roamingAllowed
