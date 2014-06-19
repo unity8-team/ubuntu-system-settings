@@ -18,6 +18,21 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Tests for cellular Page """
 
+    """Caches the technology preference selector"""
+    _pref_selector = None
+
+    @property
+    def data_preference_selector(self):
+        """Return data_preference_selector"""
+        try:
+            self._pref_selector.get_properties()
+        except:
+            self._pref_selector = self.system_settings.main_view.cellular_page.select_single(
+                toolkit_emulators.ItemSelector,
+                objectName="chooseDataTypeSelector"
+            )
+        return self._pref_selector
+
     def navigate_to_manual(self):
         selector = self.system_settings.main_view.cellular_page.select_single(
             toolkit_emulators.ItemSelector,
@@ -79,26 +94,6 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             raises(StateNotFoundError)
         )
 
-class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
-
-    """Caches the technology preference selector"""
-    _pref_selector = None
-
-    @property
-    def data_preference_selector(self):
-        """Return data_preference_selector"""
-        try:
-            self._pref_selector.get_properties()
-        except:
-            self._pref_selector = self.system_settings.main_view.cellular_page.select_single(
-                toolkit_emulators.ItemSelector,
-                objectName="chooseDataTypeSelector"
-            )
-        return self._pref_selector
-
-    def setUp(self):
-        super(TechnologyPreferenceTestCase, self).setUp('cellular')
-
     def select_preference(self, label):
         """Helper method that clicks a preference that matches provided label"""
         pref = self.data_preference_selector.select_single('Label', text=label)
@@ -109,27 +104,12 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
         is that of index"""
         self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
 
-    def test_initial_selected(self):
+    def test_that_technology_UI_reflects_DBus(self):
         """DBus has been mocked and the 'any' preference is selected
         Assert that this is also selected in the UI
         """
         # assert that 'any' is selected
         self.assert_selected_preference(2)
-
-    def test_setting_persistence(self):
-        """Assert that settings persist"""
-        # click 2G
-        self.select_preference('2G only')
-
-        # go back
-        self.system_settings.main_view.open_toolbar().click_back_button()
-        # re-enter cellular settings
-        cellular_item = self.system_settings.main_view.select_single(
-            '*', objectName="entryComponent-cellular")
-        self.system_settings.main_view.pointer.click_object(cellular_item)
-
-        # assert that "2G" is selected
-        self.assert_selected_preference(1)
 
     def test_off_setting_disables_roaming(self):
         """Test that switching off cellular data disables roaming switch"""
@@ -138,7 +118,7 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
         )
 
         # select 2G only
-        self.select_preference('2G only')
+        self.select_preference('2G only (saves battery)')
         self.assertTrue(roaming_switch.get_properties()['enabled'])
 
         # click off
@@ -150,8 +130,7 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
         """Assert that DBus change to org.ofono.RadioSettings
         is reflected in the UI"""
         # fake dbus signal, changing to gsm
-        self.dbus_con.get_object(
-            'org.ofono', '/ril_0').EmitSignal(
+        self.modem_0.EmitSignal(
             'org.ofono.RadioSettings',
             'PropertyChanged',
             'sv',
@@ -160,15 +139,14 @@ class TechnologyPreferenceTestCase(UbuntuSystemSettingsOfonoTestCase):
         # assert that "2G" is selected
         self.assert_selected_preference(1)
 
-    def test_modem_cannot_turn_on_cellular_data(self):
+    def test_that_technology_UI_is_not_inadvertently_changed_by_DBus(self):
         """Assert that the modem, changing DBus, cannot turn on
         cellular data if it previously was off"""
         # turn off cellular data
         self.select_preference('Off')
 
         # fake dbus signal, changing to gsm
-        self.dbus_con.get_object(
-            'org.ofono', '/ril_0').EmitSignal(
+        self.modem_0.EmitSignal(
             'org.ofono.RadioSettings',
             'PropertyChanged',
             'sv',

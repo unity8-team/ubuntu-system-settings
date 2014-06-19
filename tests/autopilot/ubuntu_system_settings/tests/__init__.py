@@ -22,6 +22,8 @@ import dbus
 import dbusmock
 import subprocess
 
+CONNECTION_MANAGER_IFACE = 'org.ofono.ConnectionManager'
+
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
     """ Base class for Ubuntu System Settings """
@@ -79,18 +81,27 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
     """ Class for cellular tests which sets up an Ofono mock """
 
-    @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
-        # Add a mock Ofono environment so we get consistent results
-        (klass.p_mock, klass.obj_ofono) = klass.spawn_server_template(
-            'ofono', stdout=subprocess.PIPE)
-        klass.dbusmock = dbus.Interface(klass.obj_ofono, dbusmock.MOCK_IFACE)
+    modem_powered = True
 
-    def setUp(self, panel=None):
-        self.obj_ofono.Reset()
-        # Add an available carrier
+    def mock_connection_manager(self):
+        self.modem_0.AddProperty(CONNECTION_MANAGER_IFACE, 'Powered',
+                                 self.modem_powered)
+
+        self.modem_0.AddMethods(
+            CONNECTION_MANAGER_IFACE,
+            [
+                (
+                    'GetProperties', '', 'a{sv}',
+                    'ret = self.GetAll("%s")' % CONNECTION_MANAGER_IFACE),
+                (
+                    'SetProperty', 'sv', '',
+                    'self.Set("IFACE", args[0], args[1]); '
+                    'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
+                        [args[0], args[1]])'.replace(
+                    "IFACE", CONNECTION_MANAGER_IFACE)),
+            ])
+
+    def mock_carriers(self):
         self.dbusmock.AddObject(
             '/ril_0/operator/op2',
             'org.ofono.NetworkOperator',
@@ -125,24 +136,43 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             ]
         )
 
-        self.dbus_con.get_object(
-            'org.ofono', '/ril_0').AddProperty(
-            'org.ofono.RadioSettings', 'TechnologyPreference', 'any')
-        self.dbus_con.get_object(
-            'org.ofono', '/ril_0').AddMethods(
+    def mock_radio_settings(self):
+        self.modem_0.AddProperty('org.ofono.RadioSettings',
+                                 'TechnologyPreference', 'any')
+        self.modem_0.AddMethods(
             'org.ofono.RadioSettings',
             [
                 (
                     'GetProperties', '', 'a{sv}',
                     'ret = self.GetAll("org.ofono.RadioSettings")'),
                 (
-                    'SetProperty',
-                    'sv',
-                    '',
+                    'SetProperty', 'sv', '',
                     'self.Set("org.ofono.RadioSettings", args[0], args[1]); '
                     'self.EmitSignal("org.ofono.RadioSettings",\
                         "PropertyChanged", "sv", [args[0], args[1]])'),
             ])
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+        # Add a mock Ofono environment so we get consistent results
+        (klass.p_mock, klass.obj_ofono) = klass.spawn_server_template(
+            'ofono', stdout=subprocess.PIPE)
+        klass.dbusmock = dbus.Interface(klass.obj_ofono, dbusmock.MOCK_IFACE)
+
+    def setUp(self, panel=None):
+        self.obj_ofono.Reset()
+
+        # create modem_0 proxy
+        self.modem_0 = self.dbus_con.get_object('org.ofono', '/ril_0')
+
+        # Add an available carrier
+        self.mock_carriers()
+
+        self.mock_radio_settings()
+
+        self.mock_connection_manager()
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 

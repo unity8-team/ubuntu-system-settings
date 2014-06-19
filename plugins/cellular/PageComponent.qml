@@ -19,7 +19,6 @@
  */
 
 import QtQuick 2.0
-import QOfonoQtDeclarative 0.2
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -29,19 +28,20 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    // RadioSettings {
-    //     id: radioSettings
-    //     onPreferedTechnologyChanged: {
-    //         if(connMan.powered) {
-    //             dataTypeSelector.selectedIndex = techPreference.keyToIndex(radioSettings.preferedTechnology)
-    //         }
-    //     }
-    // }
+    OfonoRadioSettings {
+        id: radioSettings
+        modemPath: manager.modems[0]
+        onTechnologyPreferenceChanged: {
+            if(connMan.powered) {
+                dataTypeSelector.selectedIndex = techPreference.keyToIndex(radioSettings.technologyPreference)
+            }
+            console.warn('connMan.powered',connMan.powered)
+        }
+    }
 
     OfonoManager {
         id: manager
     }
-
 
     OfonoSimManager {
         id: sim
@@ -63,6 +63,7 @@ ItemPage {
     OfonoConnMan {
         id: connMan
         modemPath: manager.modems[0]
+        onPoweredChanged: console.warn('powered changed', connMan.powered)
     }
 
     property string carrierName: netReg.name
@@ -71,66 +72,62 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        // ListModel {
-        //     id: techPreference
+        ListModel {
+            id: techPreference
 
-        //     ListElement { name: "Off"; description: ""; key: "off" }
-        //     ListElement { name: "2G only"; description: "Saves battery"; key: "gsm" }
-        //     ListElement { name: "2G/3G/4G"; description: "Faster"; key: "any" }
+            ListElement { name: "Off"; key: "off" }
+            ListElement { name: "2G only (saves battery)"; key: "gsm"; }
+            ListElement { name: "2G/3G/4G (faster)"; key: "any"; }
 
-        //     function keyToIndex (k) {
-        //         for (var i=0; i < techPreference.count; i++) {
-        //             if (techPreference.get(i).key === k) {
-        //                 return i;
-        //             }
-        //         }
-        //         return -1;
-        //     }
-        // }
+            function keyToIndex (k) {
+                console.warn('connMan.roamingAllowed', connMan.roamingAllowed);
+                for (var i=0; i < techPreference.count; i++) {
+                    if (techPreference.get(i).key === k) {
+                        return i;
+                    }
+                }
 
-        // Component {
-        //     id: techPreferenceDelegate
-        //     OptionSelectorDelegate { text: i18n.tr(name); subText: i18n.tr(description); }
-        // }
+                // make settings "lte", "umts" and all other unknown techs,
+                // synonymous with the "any" setting
+                return techPreference.get(techPreference.count - 1);
+            }
+        }
 
-        // ListItem.ItemSelector {
-        //     id: dataTypeSelector
-        //     objectName: "chooseDataTypeSelector"
-        //     expanded: true
-        //     visible: true
-        //     delegate: techPreferenceDelegate
-        //     model: techPreference
-        //     selectedIndex: techPreference.keyToIndex(radioSettings.preferedTechnology)
-        //     onSelectedIndexChanged: {
-        //         var key = techPreference.get(selectedIndex).key;
-        //         if (key === 'off') {
-        //             connMan.powered = false;
-        //         } else {
-        //             connMan.powered = true;
-        //             radioSettings.preferedTechnology = key
-        //         }
+        Component {
+            id: techPreferenceDelegate
+            OptionSelectorDelegate { text: i18n.tr(name); }
+        }
 
-        //     }
+        ListItem.ItemSelector {
+            id: dataTypeSelector
+            objectName: "chooseDataTypeSelector"
+            expanded: true
+            delegate: techPreferenceDelegate
+            model: techPreference
+            selectedIndex: techPreference.keyToIndex(radioSettings.technologyPreference)
+            onSelectedIndexChanged: {
+                console.warn('onSelectedIndexChanged', selectedIndex, techPreference.get(selectedIndex).key)
+                var key = techPreference.get(selectedIndex).key;
+                if (key === 'off') {
+                    connMan.powered = false;
+                } else {
+                    connMan.powered = true;
+                    radioSettings.technologyPreference = key
+                }
 
-        // }
+            }
+        }
 
         ListItem.Standard {
             id: dataRoamingItem
             objectName: "dataRoamingSwitch"
             text: i18n.tr("Data roaming")
-            //enabled: (dataTypeSelector.selectedIndex != 0)
+            // sensitive to data type, and disabled if "Off" is selected
+            enabled: dataTypeSelector.selectedIndex !== 0
             control: Switch {
                 id: dataRoamingControl
                 checked: connMan.roamingAllowed
                 onClicked: connMan.roamingAllowed = checked
-            }
-            onEnabledChanged: {
-                if (!enabled)
-                    dataRoamingControl.checked = false
-                else
-                    dataRoamingControl.checked = Qt.binding(function() {
-                        return connMan.roamingAllowed
-                    })
             }
         }
 
