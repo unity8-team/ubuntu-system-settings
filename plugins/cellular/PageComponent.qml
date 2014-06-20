@@ -31,11 +31,11 @@ ItemPage {
     objectName: "cellularPage"
 
     OfonoRadioSettings {
-        id: rdoSetting
+        id: rdoSettings
         modemPath: manager.modems[0]
         onTechnologyPreferenceChanged: {
             if(connMan.powered) {
-                techPrefSelector.selectedIndex = Utilities.techPrefKeyToIndex(rdoSetting.technologyPreference)
+                techPrefSelector.selectedIndex = Utilities.techPrefKeyToIndex(rdoSettings.technologyPreference)
             }
         }
     }
@@ -80,24 +80,26 @@ ItemPage {
         }
 
         Component {
-            id: techPrefSelectorDelegate
+            id: techPrefDelegate
             OptionSelectorDelegate { text: i18n.tr(name); }
         }
 
         ListItem.ItemSelector {
             id: techPrefSelector
-            objectName: "chooseDataTypeSelector"
+            objectName: "technologyPreferenceSelector"
             expanded: true
-            delegate: techPrefSelectorDelegate
+            delegate: techPrefDelegate
             model: techPrefModel
-            selectedIndex: Utilities.techPrefKeyToIndex(rdoSetting.technologyPreference)
+            text: i18n.tr("Cellular data:")
+            selectedIndex: Utilities.techPrefKeyToIndex(rdoSettings.technologyPreference)
             onSelectedIndexChanged: {
+
                 var key = techPrefModel.get(selectedIndex).key;
                 if (key === 'off') {
                     connMan.powered = false;
                 } else {
                     connMan.powered = true;
-                    rdoSetting.technologyPreference = key
+                    rdoSettings.technologyPreference = key
                 }
             }
         }
@@ -106,8 +108,8 @@ ItemPage {
             id: dataRoamingItem
             objectName: "dataRoamingSwitch"
             text: i18n.tr("Data roaming")
-            // sensitive to technology preference
-            enabled: techPrefSelector.selectedIndex !== 0 // Off
+            // sensitive to data type, and disabled if "Off" is selected
+            enabled: techPrefSelector.selectedIndex !== 0
             control: Switch {
                 id: dataRoamingControl
                 checked: connMan.roamingAllowed
@@ -137,15 +139,16 @@ ItemPage {
             value: carrierName ? carrierName : i18n.tr("N/A")
             property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
             progression: enabled
+            onClicked: {
                 if (enabled)
                     pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
             }
         }
 
         ListItem.Standard {
-           text: i18n.tr("technology preference
+           text: i18n.tr("APN")
             progression: true
             visible: showAllUI
-        } // Off
+        }
     }
 }
