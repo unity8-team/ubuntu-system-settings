@@ -66,7 +66,7 @@ public:
     Bluetooth(QObject *parent = 0);
     ~Bluetooth() {}
 
-    Q_INVOKABLE QString getAdapterName();
+    Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }
     Q_INVOKABLE void setSelectedDevice(const QString &address);
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice();

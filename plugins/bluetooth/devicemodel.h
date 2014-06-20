@@ -61,7 +61,7 @@ public:
 
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
-    QString getAdapterName();
+    QString adapterName() const { return m_adapterName; }
 
 public:
     bool isDiscovering() const { return m_isDiscovering; }

@@ -369,11 +369,6 @@ void DeviceModel::slotDeviceChanged()
         emitRowChanged(row);
 }
 
-QString DeviceModel::getAdapterName()
-{
-    return m_adapterName;
-}
-
 QSharedPointer<Device> DeviceModel::getDeviceFromAddress(const QString &address)
 {
     QSharedPointer<Device> device;

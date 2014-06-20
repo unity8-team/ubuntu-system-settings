@@ -87,11 +87,6 @@ void Bluetooth::stopDiscovery()
 ****
 ***/
 
-QString Bluetooth::getAdapterName()
-{
-    return m_devices.getAdapterName();
-}
-
 Device * Bluetooth::getSelectedDevice()
 {
     if (m_selectedDevice) {
