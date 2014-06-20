@@ -136,7 +136,7 @@ void Bluetooth::disconnectDevice()
     if (m_selectedDevice)
         type = m_selectedDevice->getType();
         if (type == Device::Type::Headset)
-            m_selectedDevice->disconnect(Device::ConnectionMode::HeadsetMode);
+            m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
         else if (type == Device::Type::Headphones)
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
         else if (type == Device::Type::OtherAudio)
@@ -154,7 +154,7 @@ void Bluetooth::connectDevice(const QString &address)
 
     type = device->getType();
     if (type == Device::Type::Headset)
-        connMode = Device::ConnectionMode::HeadsetMode;
+        connMode = Device::ConnectionMode::Audio;
     else if (type == Device::Type::Headphones)
         connMode = Device::ConnectionMode::Audio;
     else if (type == Device::Type::OtherAudio)
