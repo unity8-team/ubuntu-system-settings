@@ -136,6 +136,7 @@ void DeviceModel::clearAdapter()
         const QString interface = m_bluezAdapter->interface();
 
         stopDiscovery();
+        m_discoverableTimer.stop();
         trySetDiscoverable(false);
 
         bus.disconnect(service, path, interface, "DeviceCreated",
@@ -187,7 +188,11 @@ void DeviceModel::setAdapterFromPath(const QString &path)
         if (properties.isValid())
             setProperties(properties.value());
 
-        QTimer::singleShot(1000, this, SLOT(slotEnableDiscoverable()));
+        // Delay enabling discoverability by 1 second.
+        m_discoverableTimer.setSingleShot(true);
+        connect(&m_discoverableTimer, SIGNAL(timeout()), this, SLOT(slotEnableDiscoverable()));
+        m_discoverableTimer.start(1000);
+
     }
 }
 

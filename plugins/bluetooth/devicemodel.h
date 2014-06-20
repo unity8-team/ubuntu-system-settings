@@ -88,6 +88,7 @@ private:
     bool m_isDiscovering = false;
     bool m_isDiscoverable = false;
     QTimer m_timer;
+    QTimer m_discoverableTimer;
     void restartTimer();
     void trySetDiscoverable(bool discoverable);
     void setDiscoverable(bool discoverable);
