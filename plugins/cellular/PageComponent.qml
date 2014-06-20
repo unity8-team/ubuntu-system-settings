@@ -23,19 +23,20 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
+import "utilities.js" as Utilities
+
 
 ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
     OfonoRadioSettings {
-        id: radioSettings
+        id: rdoSetting
         modemPath: manager.modems[0]
         onTechnologyPreferenceChanged: {
             if(connMan.powered) {
-                dataTypeSelector.selectedIndex = techPreference.keyToIndex(radioSettings.technologyPreference)
+                techPrefSelector.selectedIndex = Utilities.techPrefKeyToIndex(rdoSetting.technologyPreference)
             }
-            console.warn('connMan.powered',connMan.powered)
         }
     }
 
@@ -63,7 +64,6 @@ ItemPage {
     OfonoConnMan {
         id: connMan
         modemPath: manager.modems[0]
-        onPoweredChanged: console.warn('powered changed', connMan.powered)
     }
 
     property string carrierName: netReg.name
@@ -73,48 +73,32 @@ ItemPage {
         anchors.right: parent.right
 
         ListModel {
-            id: techPreference
-
+            id: techPrefModel
             ListElement { name: "Off"; key: "off" }
             ListElement { name: "2G only (saves battery)"; key: "gsm"; }
             ListElement { name: "2G/3G/4G (faster)"; key: "any"; }
-
-            function keyToIndex (k) {
-                console.warn('connMan.roamingAllowed', connMan.roamingAllowed);
-                for (var i=0; i < techPreference.count; i++) {
-                    if (techPreference.get(i).key === k) {
-                        return i;
-                    }
-                }
-
-                // make settings "lte", "umts" and all other unknown techs,
-                // synonymous with the "any" setting
-                return techPreference.get(techPreference.count - 1);
-            }
         }
 
         Component {
-            id: techPreferenceDelegate
+            id: techPrefSelectorDelegate
             OptionSelectorDelegate { text: i18n.tr(name); }
         }
 
         ListItem.ItemSelector {
-            id: dataTypeSelector
+            id: techPrefSelector
             objectName: "chooseDataTypeSelector"
             expanded: true
-            delegate: techPreferenceDelegate
-            model: techPreference
-            selectedIndex: techPreference.keyToIndex(radioSettings.technologyPreference)
+            delegate: techPrefSelectorDelegate
+            model: techPrefModel
+            selectedIndex: Utilities.techPrefKeyToIndex(rdoSetting.technologyPreference)
             onSelectedIndexChanged: {
-                console.warn('onSelectedIndexChanged', selectedIndex, techPreference.get(selectedIndex).key)
-                var key = techPreference.get(selectedIndex).key;
+                var key = techPrefModel.get(selectedIndex).key;
                 if (key === 'off') {
                     connMan.powered = false;
                 } else {
                     connMan.powered = true;
-                    radioSettings.technologyPreference = key
+                    rdoSetting.technologyPreference = key
                 }
-
             }
         }
 
@@ -122,8 +106,8 @@ ItemPage {
             id: dataRoamingItem
             objectName: "dataRoamingSwitch"
             text: i18n.tr("Data roaming")
-            // sensitive to data type, and disabled if "Off" is selected
-            enabled: dataTypeSelector.selectedIndex !== 0
+            // sensitive to technology preference
+            enabled: techPrefSelector.selectedIndex !== 0 // Off
             control: Switch {
                 id: dataRoamingControl
                 checked: connMan.roamingAllowed
@@ -153,16 +137,15 @@ ItemPage {
             value: carrierName ? carrierName : i18n.tr("N/A")
             property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
             progression: enabled
-            onClicked: {
                 if (enabled)
                     pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
             }
         }
 
         ListItem.Standard {
-            text: i18n.tr("APN")
+           text: i18n.tr("technology preference
             progression: true
             visible: showAllUI
-        }
+        } // Off
     }
 }
