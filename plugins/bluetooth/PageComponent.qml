@@ -144,16 +144,46 @@ ItemPage {
 
             // Discoverability
             ListItem.Subtitled {
-                text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
                 enabled: bluetoothActionGroup.enabled
-                //Component.onCompleted: clicked.connect(btSwitch.clicked)
-                //control: ActivityIndicator {
-                //    visible: !backend.discoverable
-                //    running: true
-                //}
-                // Until we can have control in a Subtitled ListItem:
-                subText: backend.discoverable ? backend.getAdapterName() : ""
-                progression: !backend.discoverable
+
+                Rectangle {
+                    color: "transparent"
+                    anchors.fill: parent
+                    anchors.topMargin: units.gu(1)
+
+                    Label {
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                            topMargin: units.gu(1)
+                        }
+                        height: units.gu(3)
+                        text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
+                    }
+
+                    Label {
+                        anchors {
+                            top: parent.top
+                            right: parent.right
+                            topMargin: units.gu(1)
+                        }
+                        height: units.gu(3)
+                        text: backend.discoverable ? backend.getAdapterName() : ""
+                        color: "darkgrey"
+                        visible: backend.discoverable
+                        enabled: false
+                    }
+
+                    ActivityIndicator {
+                        anchors {
+                            top: parent.top
+                            right: parent.right
+                            topMargin: units.gu(1)
+                        }
+                        visible: !backend.discoverable
+                        running: !backend.discoverable
+                    }
+                }
             }
 
             //  Connnected Headset(s)
