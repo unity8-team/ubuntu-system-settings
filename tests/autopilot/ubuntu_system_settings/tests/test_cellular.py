@@ -29,7 +29,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         except:
             self._pref_selector = self.system_settings.main_view.cellular_page.select_single(
                 toolkit_emulators.ItemSelector,
-                objectName="chooseDataTypeSelector"
+                objectName="technologyPreferenceSelector"
             )
         return self._pref_selector
 
