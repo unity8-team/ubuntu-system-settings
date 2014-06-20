@@ -125,8 +125,6 @@ void Device::makeTrusted()
 
         value.setValue(trusted);
 
-        qWarning() << "Making paired device trusted";
-
         m_deviceInterface->asyncCall("SetProperty", "Trusted", value);
 }
 
@@ -178,7 +176,6 @@ void Device::setPaired(bool paired)
 void Device::setTrusted(bool trusted)
 {
     if (m_trusted != trusted) {
-        qWarning() << "trusted property changed";
         m_trusted = trusted;
         Q_EMIT(trustedChanged());
     }
