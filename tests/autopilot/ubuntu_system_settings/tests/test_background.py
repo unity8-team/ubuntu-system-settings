@@ -10,16 +10,15 @@ from __future__ import absolute_import
 import os
 
 from time import sleep
-from autopilot.introspection.dbus import StateNotFoundError
-from testtools.matchers import Equals, NotEquals, raises
+from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import BackgroundBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
-from ubuntuuitoolkit import emulators as toolkit_emulators
 
 def get_wallpapers_from_grid(grid):
     return grid.select_many('*', objectName='itemImg')
+
 
 class BackgroundTestCase(BackgroundBaseTestCase):
     """ Tests for Background Page """
@@ -96,7 +95,8 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         old = self.selected_wallpaper.get_properties()['source']
 
         # click a wallpaper that is not selected
-        self.system_settings.main_view.pointer.click_object(self.all_wallpapers[3])
+        self.system_settings.main_view.pointer.click_object(
+            self.all_wallpapers[3])
 
         # click set/save
         self.save_wallpaper()
