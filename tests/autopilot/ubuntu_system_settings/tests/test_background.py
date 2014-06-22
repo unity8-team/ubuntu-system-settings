@@ -10,12 +10,11 @@ from __future__ import absolute_import
 import os
 from time import sleep
 
-from autopilot.introspection.dbus import StateNotFoundError, CustomEmulatorBase
-from testtools.matchers import Equals, NotEquals, raises
-from ubuntuuitoolkit import emulators as toolkit_emulators
+from testtools.matchers import Equals
 
 from ubuntu_system_settings.tests import BackgroundBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
+
 
 def get_wallpapers_from_grid(grid):
     return grid.select_many(objectName='itemImg')
@@ -59,7 +58,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         """Return the currently selected QQuickImage.
         We grab the orange border and traverse a bit to get to this image"""
         selected_shape = self.background_page.select_single(
-                'UbuntuShape', objectName='SelectedShape', visible=True)
+            'UbuntuShape', objectName='SelectedShape', visible=True)
 
         return selected_shape.get_parent().select_single(
             'QQuickImage', objectName='itemImg')
@@ -90,7 +89,8 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         old = self.selected_wallpaper.source
 
         # click a wallpaper that is not selected
-        self.system_settings.main_view.pointer.click_object(self.all_wallpapers[3])
+        self.system_settings.main_view.pointer.click_object(
+            self.all_wallpapers[3])
 
         # click set/save
         self.save_wallpaper()
