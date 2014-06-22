@@ -8,17 +8,17 @@
 from __future__ import absolute_import
 
 import os
-
 from time import sleep
+
 from autopilot.introspection.dbus import StateNotFoundError, CustomEmulatorBase
 from testtools.matchers import Equals, NotEquals, raises
+from ubuntuuitoolkit import emulators as toolkit_emulators
 
 from ubuntu_system_settings.tests import BackgroundBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
-from ubuntuuitoolkit import emulators as toolkit_emulators
 
 def get_wallpapers_from_grid(grid):
-    return grid.select_many('*', objectName='itemImg')
+    return grid.select_many(objectName='itemImg')
 
 
 class BackgroundTestCase(BackgroundBaseTestCase):
@@ -67,7 +67,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
     def save_wallpaper(self):
         """Click on Set/Save button when previewing a wallpaper"""
         save = self.system_settings.main_view.wait_select_single(
-            '*', objectName='saveButton')
+            objectName='saveButton')
         self.system_settings.main_view.scroll_to_and_click(save)
 
     def test_background_page_title_is_correct(self):
@@ -76,7 +76,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
 
     def test_that_the_currently_selected_background_comes_from_dbus(self):
         """Test that background file from dbus is selected in UI"""
-        current_file = self.selected_wallpaper.get_properties()['source']
+        current_file = self.selected_wallpaper.source
 
         dbus_file = os.path.realpath(self.user_props['BackgroundFile'])
         dbus_file = 'file://%s' % dbus_file
@@ -87,7 +87,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         """Test happy path for changing background"""
 
         # wallpaper source that is selected now
-        old = self.selected_wallpaper.get_properties()['source']
+        old = self.selected_wallpaper.source
 
         # click a wallpaper that is not selected
         self.system_settings.main_view.pointer.click_object(self.all_wallpapers[3])
@@ -96,7 +96,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         self.save_wallpaper()
 
         # the newly selected wallpaper source
-        new = self.selected_wallpaper.get_properties()['source']
+        new = self.selected_wallpaper.source
 
         # assert that UI is updated
         self.assertNotEqual(new, old)
