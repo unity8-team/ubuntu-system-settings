@@ -53,6 +53,9 @@ Bluetooth::Bluetooth(QObject *parent):
     QObject::connect(&m_devices, SIGNAL(discoveringChanged(bool)),
                      this, SIGNAL(discoveringChanged(bool)));
 
+    QObject::connect(&m_devices, SIGNAL(discoverableChanged(bool)),
+                     this, SIGNAL(discoverableChanged(bool)));
+
     QObject::connect(&m_agent, SIGNAL(onPairingDone()),
                      this, SLOT(onPairingDone()));
 }
@@ -63,6 +66,21 @@ void Bluetooth::setSelectedDevice(const QString &address)
         m_selectedDevice = m_devices.getDeviceFromAddress(address);
         Q_EMIT(selectedDeviceChanged());
     }
+}
+
+void Bluetooth::toggleDiscovery()
+{
+    m_devices.toggleDiscovery();
+}
+
+void Bluetooth::startDiscovery()
+{
+    m_devices.startDiscovery();
+}
+
+void Bluetooth::stopDiscovery()
+{
+    m_devices.stopDiscovery();
 }
 
 /***
@@ -113,7 +131,7 @@ void Bluetooth::disconnectDevice()
     if (m_selectedDevice)
         type = m_selectedDevice->getType();
         if (type == Device::Type::Headset)
-            m_selectedDevice->disconnect(Device::ConnectionMode::HeadsetMode);
+            m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
         else if (type == Device::Type::Headphones)
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
         else if (type == Device::Type::OtherAudio)
@@ -131,7 +149,7 @@ void Bluetooth::connectDevice(const QString &address)
 
     type = device->getType();
     if (type == Device::Type::Headset)
-        connMode = Device::ConnectionMode::HeadsetMode;
+        connMode = Device::ConnectionMode::Audio;
     else if (type == Device::Type::Headphones)
         connMode = Device::ConnectionMode::Audio;
     else if (type == Device::Type::OtherAudio)
