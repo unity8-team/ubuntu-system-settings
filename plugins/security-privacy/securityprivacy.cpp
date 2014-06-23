@@ -36,6 +36,13 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
 {
     m_lockSettings.beginGroup(qgetenv("USER"));
 
+    // Ensure that file is 0600
+    QFile settingsFile(m_lockSettings.fileName());
+    settingsFile.open(QIODevice::ReadWrite);
+    settingsFile.setPermissions(QFileDevice::ReadOwner |
+                                QFileDevice::WriteOwner);
+    m_lockSettings.sync();
+
     connect (&m_accountsService,
              SIGNAL (propertyChanged (QString, QString)),
              this,

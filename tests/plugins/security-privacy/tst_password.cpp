@@ -17,6 +17,7 @@
  */
 
 #include <QDebug>
+#include <QFile>
 #include <QObject>
 #include <QProcess>
 #include <QTest>
@@ -32,6 +33,8 @@ public:
 
 private Q_SLOTS:
     void init();
+    void testNewFilePermissions();
+    void testOldFilePermissions();
     void testMakeSecurityValue();
     void testSecurityValueMatches();
 };
@@ -39,6 +42,35 @@ private Q_SLOTS:
 void PasswordTest::init()
 {
     QCOMPARE(QProcess::execute("rm -f " + qgetenv("HOME") + "/.unity8-greeter-demo"), 0);
+}
+
+void PasswordTest::testNewFilePermissions()
+{
+    QFile passwd(qgetenv("HOME") + "/.unity8-greeter-demo");
+    QVERIFY(!passwd.exists());
+
+    SecurityPrivacy panel;
+    QVERIFY(passwd.exists());
+    QCOMPARE(passwd.permissions(), QFileDevice::ReadOwner |
+                                   QFileDevice::WriteOwner |
+                                   QFileDevice::ReadUser |
+                                   QFileDevice::WriteUser);
+}
+
+void PasswordTest::testOldFilePermissions()
+{
+    QFile passwd(qgetenv("HOME") + "/.unity8-greeter-demo");
+    QVERIFY(!passwd.exists());
+
+    passwd.open(QIODevice::ReadWrite);
+    passwd.setPermissions(QFileDevice::ReadGroup | QFileDevice::WriteGroup);
+
+    SecurityPrivacy panel;
+    QVERIFY(passwd.exists());
+    QCOMPARE(passwd.permissions(), QFileDevice::ReadOwner |
+                                   QFileDevice::WriteOwner |
+                                   QFileDevice::ReadUser |
+                                   QFileDevice::WriteUser);
 }
 
 void PasswordTest::testMakeSecurityValue()
