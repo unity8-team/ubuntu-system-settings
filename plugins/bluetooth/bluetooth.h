@@ -50,9 +50,14 @@ class Bluetooth : public QObject
                 READ isDiscovering
                 NOTIFY discoveringChanged);
 
+    Q_PROPERTY (bool discoverable
+                READ isDiscoverable
+                NOTIFY discoverableChanged);
+
 Q_SIGNALS:
     void selectedDeviceChanged();
     void discoveringChanged(bool isActive);
+    void discoverableChanged(bool isActive);
 
 private Q_SLOTS:
     void onPairingDone();
@@ -61,9 +66,13 @@ public:
     Bluetooth(QObject *parent = 0);
     ~Bluetooth() {}
 
+    Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }
     Q_INVOKABLE void setSelectedDevice(const QString &address);
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice();
+    Q_INVOKABLE void toggleDiscovery();
+    Q_INVOKABLE void startDiscovery();
+    Q_INVOKABLE void stopDiscovery();
 
 public:
     Agent * getAgent();
@@ -72,6 +81,7 @@ public:
     QAbstractItemModel * getDisconnectedDevices();
 
     bool isDiscovering() const { return m_devices.isDiscovering(); }
+    bool isDiscoverable() const { return m_devices.isDiscoverable(); }
 
 private:
     QDBusConnection m_dbus;
