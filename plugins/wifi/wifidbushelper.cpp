@@ -205,18 +205,22 @@ struct Network : public QObject
         auto keymgmt = security["key-mgmt"];
         auto authalg = security["auth-alg"];
 
-        auto reply = m_iface.GetSecrets("802-11-wireless-security");
-        reply.waitForFinished();
-        auto secrects = reply.value();
+        // If the connection has never been activated succesfully there is a
+        // high chance that it has no stored secrects.
+        if (timestamp != 0) {
+            auto reply = m_iface.GetSecrets("802-11-wireless-security");
+            reply.waitForFinished();
+            auto secrects = reply.value();
 
-        if (secrects.contains("802-11-wireless-security")) {
-            auto secrects_security = secrects["802-11-wireless-security"];
+            if (secrects.contains("802-11-wireless-security")) {
+                auto secrects_security = secrects["802-11-wireless-security"];
 
-            if (keymgmt == "none") {
-                password = secrects_security["wep-key0"].toString();
-            } else if (keymgmt == "wpa-psk" && authalg == "open") {
-                password = secrects_security["psk"].toString();
-            } else {
+                if (keymgmt == "none") {
+                    password = secrects_security["wep-key0"].toString();
+                } else if (keymgmt == "wpa-psk" && authalg == "open") {
+                    password = secrects_security["psk"].toString();
+                } else {
+                }
             }
         }
     }
