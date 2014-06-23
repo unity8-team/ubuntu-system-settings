@@ -53,9 +53,15 @@ ItemPage {
         id: pageFlickable
         anchors.fill: parent
 
+        contentWidth: parent.width
+        contentHeight: contentItem.childrenRect.height
+
+
         Column {
             anchors {
-                fill: parent
+                left: parent.left
+                right: parent.right
+                top: parent.top
             }
 
             Repeater {
@@ -100,10 +106,6 @@ ItemPage {
                         }
                     }
                 }
-                onCountChanged: {
-                    // make sure our flickable is positioned correctly when we resize the Repeater.
-                    pageFlickable.returnToBounds()
-                }
             }
 
             ListItem.Divider {}
@@ -135,7 +137,6 @@ ItemPage {
         }
 
         // Only allow flicking if the content doesn't fit on the page
-        contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > wifibase.height) ?
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
