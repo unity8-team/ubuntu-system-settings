@@ -34,6 +34,7 @@ ItemPage {
         model: pnmodel
         delegate: ListItem.Standard {
             text: name
+            progression: true
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("NetworkDetails.qml"),
                 {networkName : name, password : password, lastUsed : lastUsed,
