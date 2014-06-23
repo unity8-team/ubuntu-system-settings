@@ -21,7 +21,7 @@
 #define CELLULAR_DBUS_HELPER
 
 #include <QObject>
-
+#include <QDBusObjectPath>
 /**
  * For exposing dbus data to Qml.
  */
@@ -33,16 +33,18 @@ public:
     CellularDbusHelper(QObject *parent = nullptr);
     ~CellularDbusHelper() {};
 
-    Q_INVOKABLE QString getHotspotName();
+    Q_INVOKABLE QByteArray getHotspotName();
     Q_INVOKABLE QString getHotspotPassword();
-    Q_INVOKABLE void setHotspotSettings(QString ssid, QString password);
+    Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password);
     Q_INVOKABLE bool isHotspotActive();
-    Q_INVOKABLE void toggleHotspot(bool on);
+    Q_INVOKABLE void disableHotspot();
 
 private:
-    QString ssid;
+    QByteArray ssid;
     QString password;
-
+    QString settingsPath;
+    QDBusObjectPath devicePath;
+    bool isActive;
 };
 
 

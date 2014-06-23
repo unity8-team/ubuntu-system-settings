@@ -109,6 +109,7 @@ ItemPage {
 
         ListItem.SingleValue {
             text: i18n.tr("Wifi hotspot")
+            progression: true
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
             }

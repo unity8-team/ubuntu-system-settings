@@ -39,12 +39,13 @@ ItemPage {
             control: Switch {
                 id: hotspotSwitch
                 checked: DbusHelper.isHotspotActive()
-                enabled: ssidField.text != "" && passwordField != ""
+                enabled: ssidField.text != "" && passwordField.length >= 8
                 onCheckedChanged: {
                     if(checked) {
-                        DbusHelper.setHotspotSettings(ssidField.text, passwordField.text)
+                        DbusHelper.setupHotspot(ssidField.text, passwordField.text)
+                    } else {
+                        DbusHelper.disableHotspot(checked)
                     }
-                    DbusHelper.toggleHotspot(checked)
                 }
             }
         }
@@ -52,22 +53,28 @@ ItemPage {
         ListItem.Standard {
             id: ssidLabel
             text: i18n.tr("Network name")
-            control: TextInput {
-                id: ssidField
-                text: DbusHelper.getHotspotName()
-                readOnly: hotspotSwitch.checked
-            }
+        }
+        
+        TextField {
+            id: ssidField
+            text: DbusHelper.getHotspotName()
+            readOnly: hotspotSwitch.checked
+            anchors.left: parent.left
+            anchors.right: parent.right
         }
 
         ListItem.Standard {
             id: passwordLabel
             text: i18n.tr("WPA password")
-            control: TextInput {
-                id: passwordField
-                text: DbusHelper.getHotspotPassword()
-                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
-                readOnly: hotspotSwitch.checked
-            }
+        }
+        
+        TextField {
+            id: passwordField
+            text: DbusHelper.getHotspotPassword()
+            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+            readOnly: hotspotSwitch.checked
+            anchors.left: parent.left
+            anchors.right: parent.right
         }
 
         ListItem.Standard {
