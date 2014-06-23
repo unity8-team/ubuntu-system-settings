@@ -54,6 +54,10 @@ class UpdateManager : public QObject
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
     Q_PROPERTY(int currentBuildNumber READ currentBuildNumber)
+    Q_PROPERTY(QString currentUbuntuBuildNumber READ currentUbuntuBuildNumber
+               NOTIFY versionChanged)
+    Q_PROPERTY(QString currentDeviceBuildNumber READ currentDeviceBuildNumber
+               NOTIFY versionChanged)
 
 Q_SIGNALS:
     void checkFinished();
@@ -66,6 +70,7 @@ Q_SIGNALS:
     void systemUpdateDownloaded();
     void updateProcessFailed(QString message);
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
+    void versionChanged();
     
 public:
     explicit UpdateManager(QObject *parent = 0);
@@ -81,6 +86,8 @@ public:
     int downloadMode() { return m_systemUpdate.downloadMode(); }
     void setDownloadMode(int mode) { m_systemUpdate.setDownloadMode(mode); }
     int currentBuildNumber() { return m_systemUpdate.currentBuildNumber(); }
+    QString currentUbuntuBuildNumber() { return m_systemUpdate.currentUbuntuBuildNumber(); }
+    QString currentDeviceBuildNumber() { return m_systemUpdate.currentDeviceBuildNumber(); }
 
 #ifdef TESTS
     // For testing purposes
@@ -135,6 +142,7 @@ private:
     bool enableAutopilotMode();
     void reportCheckState();
     void updateNotAvailable();
+    void setCurrentDetailedVersion();
 };
 
 }

@@ -108,6 +108,8 @@ ItemPage {
                 text: i18n.tr("OS")
                 value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
                        (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
             }
 
             ListItem.SingleValue {

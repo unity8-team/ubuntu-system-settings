@@ -16,6 +16,7 @@
  * Authors:
  * Didier Roche <didier.roche@canonical.com>
  * Diego Sarmentero <diego.sarmentero@canonical.com>
+ * Sergio Schvezov <sergio.schvezov@canonical.com>
  *
 */
 
@@ -37,6 +38,7 @@ namespace UpdatePlugin {
 SystemUpdate::SystemUpdate(QObject *parent) :
     QObject(parent),
     m_currentBuildNumber(-1),
+    m_detailedVersion(),
     m_downloadMode(-1),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_SystemServiceIface ("com.canonical.SystemImage",
@@ -45,6 +47,8 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                          m_systemBusConnection)
 {
     update = nullptr;
+
+    qDBusRegisterMetaType<QMap<QString, QString> >();
 
     connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QString)),
                this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QString)));
@@ -92,15 +96,37 @@ void SystemUpdate::pauseDownload() {
         Q_EMIT updateProcessFailed(_("Can't pause current request (can't contact service)"));
 }
 
-int SystemUpdate::currentBuildNumber() {
-    if (m_currentBuildNumber != -1)
-        return m_currentBuildNumber;
+void SystemUpdate::setCurrentDetailedVersion() {
+    QDBusPendingReply<int, QString, QString, QString, QMap<QString, QString> > reply = m_SystemServiceIface.call("Info");
+    reply.waitForFinished(); 
+    if (reply.isValid()) {
+        m_currentBuildNumber = reply.argumentAt<0>();
+        m_detailedVersion = reply.argumentAt<4>();
+        Q_EMIT versionChanged();
+    } else {
+        qDebug() << "Error when retrieving version information: " << reply.error();
+    }
+}
 
-    QDBusReply<int> reply = m_SystemServiceIface.call("Info");
-    if (reply.isValid())
-        m_currentBuildNumber = reply.value();
+int SystemUpdate::currentBuildNumber() {
+    if (m_currentBuildNumber == -1)
+        setCurrentDetailedVersion();
 
     return m_currentBuildNumber;
+}
+
+QString SystemUpdate::currentUbuntuBuildNumber() {
+    if (!m_detailedVersion.contains("ubuntu"))
+        setCurrentDetailedVersion();
+
+    return m_detailedVersion.value("ubuntu", "Unavailable");
+}
+
+QString SystemUpdate::currentDeviceBuildNumber() {
+    if (!m_detailedVersion.contains("device"))
+        setCurrentDetailedVersion();
+
+    return m_detailedVersion.value("device", "Unavailable");
 }
 
 int SystemUpdate::downloadMode() {
