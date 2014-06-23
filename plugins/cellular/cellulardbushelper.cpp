@@ -81,14 +81,6 @@ void enableHotspot(const QString &ssid, const QString &password,
     }
 }
 
-void disableHotspot(const QDBusObjectPath &path) {
-    QDBusInterface device(nm_service, path.path(), nm_device_interface);
-    QDBusReply<void> reply = device.call("Disconnect");
-    if(!reply.isValid()) {
-        qDebug() << "Disconnecting hotspot failed: " << reply.error().message() << "\n";
-    }
-}
-
 #define NM_METHOD_NAME "AddAndActivateConnection"
 
 int startAdhoc(const QByteArray &ssid, const QString &password, const QDBusObjectPath &devicePath) {
@@ -153,11 +145,10 @@ bool detectAdhoc(QString &dbusPath, QByteArray &ssid, QString &password, bool &i
                 QDBusConnection::systemBus());
         QDBusReply<QVariant> conname = iface.call("Get", activeIface, connProp);
         if(!conname.isValid()) {
-            printf("Error: %s\n", conname.error().message().toUtf8().data());
-            exit(1);
+            qWarning() << "Error getting connamd: " << conname.error().message() << "\n";
+            continue;
         }
         QDBusObjectPath mainConnection = qvariant_cast<QDBusObjectPath>(conname.value());
-        //    printf("Conn: %s mainConn: %s\n",conn.path().toUtf8().data(), mainConnection.path().toUtf8().data());
         actives.insert(mainConnection);
     }
     const char wifiKey[] = "802-11-wireless";
@@ -239,7 +230,7 @@ void CellularDbusHelper::setupHotspot(QByteArray ssid_, QString password_) {
     password = password_;
     if(!settingsPath.isEmpty()) {
         // Prints a warning message if the connection has disappeared already.
-        disableHotspot(); // Destroys all traces of the old setup, which is what we want.
+        destroyHotspot();
     }
     startAdhoc(ssid, password, devicePath);
     detectAdhoc(settingsPath, ssid, password, isActive);
@@ -250,6 +241,26 @@ bool CellularDbusHelper::isHotspotActive() {
 }
 
 void CellularDbusHelper::disableHotspot() {
+    static const QString activeIface("org.freedesktop.NetworkManager.Connection.Active");
+    static const QString connProp("Connection");
+    OrgFreedesktopNetworkManagerInterface mgr(nm_service,
+            nm_dbus_path,
+            QDBusConnection::systemBus());
+    auto activeConnections = mgr.activeConnections();
+    for(const auto &aConn : activeConnections) {
+        QDBusInterface iface(nm_service, aConn.path(), "org.freedesktop.DBus.Properties",
+                QDBusConnection::systemBus());
+        QDBusReply<QVariant> conname = iface.call("Get", activeIface, connProp);
+        QDBusObjectPath backinbConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+        if(backinbConnection.path() == settingsPath) {
+            mgr.DeactivateConnection(aConn);
+            return;
+        }
+    }
+    qWarning() << "Could not find a hotspot setup to disable.\n";
+}
+
+void CellularDbusHelper::destroyHotspot() {
     assert(!settingsPath.isEmpty());
     QDBusInterface control(nm_service, settingsPath, nm_connection_interface,
             QDBusConnection::systemBus());
@@ -259,4 +270,5 @@ void CellularDbusHelper::disableHotspot() {
     } else {
         isActive = false;
     }
+
 }
