@@ -33,6 +33,8 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
     m_lockSettings(QDir::home().filePath(".unity8-greeter-demo"),
                    QSettings::NativeFormat)
 {
+    m_lockSettings.beginGroup(qgetenv("USER"));
+
     connect (&m_accountsService,
              SIGNAL (propertyChanged (QString, QString)),
              this,
