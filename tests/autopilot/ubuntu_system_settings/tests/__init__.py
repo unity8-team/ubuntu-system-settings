@@ -169,7 +169,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
     def get_storage_space_used_by_category(self, objectName):
         return self.main_view.wait_select_single(
             'StorageItem', objectName=objectName
-            ).value
+        ).value
 
     @property
     def storage_page(self):

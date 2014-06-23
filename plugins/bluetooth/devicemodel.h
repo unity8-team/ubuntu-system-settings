@@ -110,7 +110,7 @@ class DeviceFilter: public QSortFilterProxyModel
 public:
     DeviceFilter() {}
     virtual ~DeviceFilter() {}
-    void filterOnType(Device::Type);
+    void filterOnType(const QVector<Device::Type>);
     void filterOnConnections(Device::Connections);
 
 protected:
@@ -118,7 +118,7 @@ protected:
     virtual bool lessThan(const QModelIndex&, const QModelIndex&) const;
 
 private:
-    Device::Type m_type = Device::Type::Other;
+    QVector<Device::Type> m_types = QVector<Device::Type>();
     bool m_typeEnabled = false;
     Device::Connections m_connections = Device::Connection::Connected;
     bool m_connectionsEnabled = false;
