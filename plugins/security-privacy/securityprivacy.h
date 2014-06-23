@@ -47,7 +47,6 @@ class SecurityPrivacy: public QObject
                 WRITE setSecurityType
                 NOTIFY securityTypeChanged)
     Q_PROPERTY (QString securityValue
-                READ getSecurityValue
                 WRITE setSecurityValue
                 NOTIFY securityValueChanged)
 
@@ -65,8 +64,10 @@ public:
     void setMessagesWelcomeScreen(bool enabled);
     SecurityType getSecurityType();
     void setSecurityType(SecurityType type);
-    QString getSecurityValue();
+    Q_INVOKABLE bool securityValueMatches(QString value);
     void setSecurityValue(QString value);
+
+    static QString makeSecurityValue(QString salt, QString password);
 
 public Q_SLOTS:
     void slotChanged(QString, QString);
@@ -79,9 +80,10 @@ Q_SIGNALS:
     void securityValueChanged();
 
 private:
+    QStringList getSecurityValues();
+
     QSettings m_lockSettings;
     AccountsService m_accountsService;
-
 };
 
 #endif //SECURITYPRIVACY_H

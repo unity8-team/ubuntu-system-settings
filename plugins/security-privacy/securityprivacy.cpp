@@ -19,6 +19,7 @@
 
 #include "securityprivacy.h"
 #include <QtCore/QDir>
+#include <QtCore/QProcess>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusConnectionInterface>
 #include <QtDBus/QDBusMessage>
@@ -135,17 +136,56 @@ void SecurityPrivacy::setSecurityType(SecurityType type)
     Q_EMIT (securityTypeChanged());
 }
 
-// XXX: passwordValue is invalid when security type is Swipe; handle this?
-QString SecurityPrivacy::getSecurityValue()
+bool SecurityPrivacy::securityValueMatches(QString value)
 {
+    bool result = false;
     QVariant password(m_lockSettings.value("passwordValue", QString()));
+    QStringList passwordParts = password.toString().split('$', QString::SkipEmptyParts);
 
-    return password.toString();
+    switch (getSecurityType()) {
+    case SecurityPrivacy::Passcode:
+    case SecurityPrivacy::Passphrase:
+        // We only support passwd type 6 (sha512) for now
+        if (passwordParts.length() != 3 || passwordParts[0] != "6")
+            return false;
+        result = makeSecurityValue(passwordParts[1], value) == password;
+        break;
+
+    case SecurityPrivacy::Swipe:
+    default:
+        result = true;
+        break;
+    }
+
+    return result;
 }
 
 void SecurityPrivacy::setSecurityValue(QString value)
 {
-    m_lockSettings.setValue("passwordValue", value);
+    QString hash = makeSecurityValue(QString(), value);
+    m_lockSettings.setValue("passwordValue", hash);
     m_lockSettings.sync();
     Q_EMIT (securityValueChanged());
+}
+
+QStringList SecurityPrivacy::getSecurityValues()
+{
+    QVariant password(m_lockSettings.value("passwordValue", QString()));
+    return password.toString().split('$', QString::SkipEmptyParts);
+}
+
+QString SecurityPrivacy::makeSecurityValue(QString salt, QString password)
+{
+    // We only support passwd type 6 (sha512) for now
+    QString command = "mkpasswd --method=sha-512 --stdin";
+    if (!salt.isEmpty())
+        command += " --salt=" + salt;
+
+    QProcess process;
+    process.start(command);
+    process.write(password.toLatin1());
+    process.closeWriteChannel();
+    process.waitForFinished();
+
+    return QString(process.readAllStandardOutput()).trimmed();
 }

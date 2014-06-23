@@ -275,7 +275,7 @@ ItemPage {
             enabled: false
             onClicked: {
                 var correct = !currentInput.visible ||
-                        (currentInput.text == securityPrivacy.securityValue)
+                        (securityPrivacy.securityValueMatches(currentInput.text))
                 var match = (newInput.text == confirmInput.text)
 
                 incorrect.visible = !correct
