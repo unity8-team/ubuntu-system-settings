@@ -41,6 +41,7 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
     settingsFile.open(QIODevice::ReadWrite);
     settingsFile.setPermissions(QFileDevice::ReadOwner |
                                 QFileDevice::WriteOwner);
+    settingsFile.close();
     m_lockSettings.sync();
 
     connect (&m_accountsService,

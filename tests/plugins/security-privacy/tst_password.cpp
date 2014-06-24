@@ -35,6 +35,7 @@ private Q_SLOTS:
     void init();
     void testNewFilePermissions();
     void testOldFilePermissions();
+    void testFileContents();
     void testMakeSecurityValue();
     void testSecurityValueMatches();
 };
@@ -71,6 +72,18 @@ void PasswordTest::testOldFilePermissions()
                                    QFileDevice::WriteOwner |
                                    QFileDevice::ReadUser |
                                    QFileDevice::WriteUser);
+}
+
+void PasswordTest::testFileContents()
+{
+    SecurityPrivacy panel;
+    panel.setSecurityType(SecurityPrivacy::Passphrase);
+    panel.setSecurityValue("test");
+
+    QFile passwd(qgetenv("HOME") + "/.unity8-greeter-demo");
+    QVERIFY(passwd.open(QIODevice::ReadOnly));
+    QRegExp regexp("\\[testuser\\]\npassword=keyboard\npasswordValue=$6$*$*", Qt::CaseSensitive, QRegExp::WildcardUnix);
+    QVERIFY(regexp.exactMatch(passwd.readAll()));
 }
 
 void PasswordTest::testMakeSecurityValue()
