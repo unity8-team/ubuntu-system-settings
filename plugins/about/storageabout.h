@@ -78,6 +78,18 @@ class StorageAbout : public QObject
                WRITE setSortRole
                NOTIFY sortRoleChanged)
 
+    Q_PROPERTY( QString deviceBuildDisplayID
+                READ deviceBuildDisplayID
+                CONSTANT)
+
+    Q_PROPERTY( QString customizationBuildID
+                READ customizationBuildID
+                CONSTANT)
+
+    Q_PROPERTY( QString ubuntuBuildID
+                READ ubuntuBuildID
+                CONSTANT)
+
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
@@ -85,6 +97,9 @@ public:
     QString serialNumber();
     QString vendorString();
     QString updateDate();
+    QString deviceBuildDisplayID();
+    QString customizationBuildID();
+    QString ubuntuBuildID();
     Q_INVOKABLE QString licenseInfo(const QString &subdir) const;
     ClickModel::Roles getSortRole();
     void setSortRole(ClickModel::Roles newRole);
@@ -105,6 +120,9 @@ private:
     QString m_serialNumber;
     QString m_vendorString;
     QString m_updateDate;
+    QString m_deviceBuildDisplayID;
+    QString m_ubuntuBuildID;
+    QString m_customizationBuildID;
     ClickModel m_clickModel;
     ClickFilterProxy m_clickFilterProxy;
     quint64 m_moviesSize;

@@ -26,6 +26,7 @@ import Qt.labs.folderlistmodel 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
 
 ItemPage {
@@ -33,8 +34,12 @@ ItemPage {
     objectName: "versionPage"
     title: i18n.tr("OS Build Details")
 
+    UbuntuStorageAboutPanel {
+        id: storedInfo
+    }
+
     UpdateManager {
-        id: updateBackend
+        id: updateBackendInfo
     }
 
     Flickable {
@@ -46,19 +51,96 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "versionBuildNumberItem"
                 text: i18n.tr("OS build number")
-                value: updateBackend.currentBuildNumber
+                value: updateBackendInfo.currentBuildNumber ? updateBackendInfo.currentBuildNumber : "Non system image"
             }
 
             ListItem.SingleValue {
                 objectName: "ubuntuVersionBuildNumberItem"
-                text: i18n.tr("Ubuntu build number")
-                value: updateBackend.currentUbuntuBuildNumber
+                text: i18n.tr("Ubuntu Image part")
+                value: updateBackendInfo.currentUbuntuBuildNumber
+                visible: updateBackendInfo.currentUbuntuBuildNumber
+            }
+
+            ListItem.SingleValue {
+                objectName: "ubuntuBuildIDItem"
+                height: ubuntuBuildIDColumn.childrenRect.height + units.gu(2)
+                visible: storedInfo.ubuntuBuildID
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+
+                Column {
+                    anchors.fill: parent
+                    anchors.topMargin: units.gu(1)
+
+                    id: ubuntuBuildIDColumn
+                    spacing: units.gu(1)
+                    Label {
+                        anchors {
+                            left:parent.left
+                            right:parent.right
+                        }
+                        wrapMode: Text.WordWrap
+                        text: i18n.tr("Ubuntu build description")
+                    }
+                    Label {
+                        anchors {
+                            left:parent.left
+                            right:parent.right
+                        }
+                        wrapMode: Text.WordWrap
+                        text: storedInfo.ubuntuBuildID
+                    }
+                }
             }
 
             ListItem.SingleValue {
                 objectName: "deviceVersionBuildNumberItem"
-                text: i18n.tr("Device build number")
-                value: updateBackend.currentDeviceBuildNumber
+                text: i18n.tr("Device Image part")
+                value: updateBackendInfo.currentDeviceBuildNumber
+                visible: updateBackendInfo.currentDeviceBuildNumber
+            }
+
+            ListItem.SingleValue {
+                objectName: "deviceBuildIDItem"
+                height: deviceBuildIDColumn.childrenRect.height + units.gu(2)
+                visible: storedInfo.deviceBuildDisplayID
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+
+                Column {
+                    anchors.fill: parent
+                    anchors.topMargin: units.gu(1)
+
+                    id: deviceBuildIDColumn
+                    spacing: units.gu(1)
+                    Label {
+                        anchors {
+                            left:parent.left
+                            right:parent.right
+                        }
+                        wrapMode: Text.WordWrap
+                        text: i18n.tr("Device build description")
+                    }
+                    Label {
+                        anchors {
+                            left:parent.left
+                            right:parent.right
+                        }
+                        wrapMode: Text.WordWrap
+                        text: storedInfo.deviceBuildDisplayID
+                    }
+                }
+            }
+
+            ListItem.SingleValue {
+                objectName: "customizationBuildNumberItem"
+                text: i18n.tr("Customization Image part")
+                value: storedInfo.customizationBuildID
+                visible: storedInfo.customizationBuildID
             }
         }
     }
