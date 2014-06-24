@@ -37,6 +37,7 @@ private Q_SLOTS:
     void testOldFilePermissions();
     void testFileContents();
     void testMakeSecurityValue();
+    void testMakeEncryptedPinValue();
     void testSecurityValueMatches();
 };
 
@@ -82,21 +83,35 @@ void PasswordTest::testFileContents()
 
     QFile passwd(qgetenv("HOME") + "/.unity8-greeter-demo");
     QVERIFY(passwd.open(QIODevice::ReadOnly));
-    QRegExp regexp("\\[testuser\\]\npassword=keyboard\npasswordValue=$6$*$*\n", Qt::CaseSensitive, QRegExp::WildcardUnix);
+    QRegExp regexp("\\[testuser\\]\npassword=keyboard\npasswordEncryptedValue=*\npasswordValue=$6$*$*\n", Qt::CaseSensitive, QRegExp::WildcardUnix);
     regexp.setMinimal(true);
     QVERIFY(regexp.exactMatch(passwd.readAll()));
 }
 
 void PasswordTest::testMakeSecurityValue()
 {
-    QCOMPARE(SecurityPrivacy::makeSecurityValue("GsxQABd.", "test"), QString("$6$GsxQABd.$yPRjjnkXwOSj4F53jJLnV6dXs/TodrSVL7BQ0BPfJAZ8Iqskvlpa.NpzJQdG4hEFPZjhKhqEOKt7t/ZDyVv340"));
+    QCOMPARE(SecurityPrivacy::makeSecurityValue("test", "GsxQABd."), QString("$6$GsxQABd.$yPRjjnkXwOSj4F53jJLnV6dXs/TodrSVL7BQ0BPfJAZ8Iqskvlpa.NpzJQdG4hEFPZjhKhqEOKt7t/ZDyVv340"));
 
-    QString noSalt = SecurityPrivacy::makeSecurityValue(QString(), "test");
+    QString noSalt = SecurityPrivacy::makeSecurityValue("test");
     QStringList noSaltParts = noSalt.split('$');
     QCOMPARE(noSaltParts.length(), 4);
     QCOMPARE(noSaltParts[0], QString(""));
     QCOMPARE(noSaltParts[1], QString("6"));
-    QCOMPARE(noSalt, SecurityPrivacy::makeSecurityValue(noSaltParts[2], QString("test")));
+    QCOMPARE(noSalt, SecurityPrivacy::makeSecurityValue("test", noSaltParts[2]));
+}
+
+void PasswordTest::testMakeEncryptedPinValue()
+{
+    QCOMPARE(SecurityPrivacy::makeEncryptedPinValue("1234", "1898aab9cf41c018c6ae310000000003\n"), QByteArray("\xfd\x98\xa1\x75\x2d\x8f\x05\x00\x35\xde\x10\x90\x2a\xda\x54\x5b", 16));
+
+    // Test that we can read it back if necessary
+    SecurityPrivacy panel;
+    panel.setSecurityType(SecurityPrivacy::Passcode);
+    panel.setSecurityValue("1234");
+
+    QSettings passwd(qgetenv("HOME") + "/.unity8-greeter-demo", QSettings::NativeFormat);
+    QVariant encrypted(passwd.value("testuser/passwordEncryptedValue", QByteArray()));
+    QCOMPARE(encrypted.toByteArray().length(), 16);
 }
 
 void PasswordTest::testSecurityValueMatches()

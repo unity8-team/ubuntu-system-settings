@@ -13,7 +13,7 @@ ${QML_SOURCES})
 qt5_use_modules(UbuntuSecurityPrivacyPanel Qml Quick DBus)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/SecurityPrivacy)
-target_link_libraries (UbuntuSecurityPrivacyPanel uss-accountsservice)
+target_link_libraries (UbuntuSecurityPrivacyPanel gcrypt uss-accountsservice)
 install(TARGETS UbuntuSecurityPrivacyPanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/security-privacy)

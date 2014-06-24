@@ -67,7 +67,8 @@ public:
     Q_INVOKABLE bool securityValueMatches(QString value);
     void setSecurityValue(QString value);
 
-    static QString makeSecurityValue(QString salt, QString password);
+    static QString makeSecurityValue(QString password, QString salt = QString());
+    static QByteArray makeEncryptedPinValue(QString password, QString salt = QString());
 
 public Q_SLOTS:
     void slotChanged(QString, QString);
