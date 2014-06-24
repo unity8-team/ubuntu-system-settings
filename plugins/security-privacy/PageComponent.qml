@@ -80,6 +80,7 @@ ItemPage {
                                5).arg(5)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
+                visible: showAllUI
             }
             ListItem.SingleValue {
                 id: simControl
