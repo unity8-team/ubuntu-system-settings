@@ -81,10 +81,9 @@ Q_SIGNALS:
     void securityValueChanged();
 
 private:
-    QStringList getSecurityValues();
-
     QSettings m_lockSettings;
     AccountsService m_accountsService;
+
 };
 
 #endif //SECURITYPRIVACY_H

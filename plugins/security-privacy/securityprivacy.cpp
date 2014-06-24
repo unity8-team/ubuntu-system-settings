@@ -179,12 +179,6 @@ void SecurityPrivacy::setSecurityValue(QString value)
     Q_EMIT (securityValueChanged());
 }
 
-QStringList SecurityPrivacy::getSecurityValues()
-{
-    QVariant password(m_lockSettings.value("passwordValue", QString()));
-    return password.toString().split('$', QString::SkipEmptyParts);
-}
-
 QString SecurityPrivacy::makeSecurityValue(QString password, QString salt)
 {
     // This function makes a /etc/shadow-compatible hash of the user's
