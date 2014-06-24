@@ -82,7 +82,8 @@ void PasswordTest::testFileContents()
 
     QFile passwd(qgetenv("HOME") + "/.unity8-greeter-demo");
     QVERIFY(passwd.open(QIODevice::ReadOnly));
-    QRegExp regexp("\\[testuser\\]\npassword=keyboard\npasswordValue=$6$*$*", Qt::CaseSensitive, QRegExp::WildcardUnix);
+    QRegExp regexp("\\[testuser\\]\npassword=keyboard\npasswordValue=$6$*$*\n", Qt::CaseSensitive, QRegExp::WildcardUnix);
+    regexp.setMinimal(true);
     QVERIFY(regexp.exactMatch(passwd.readAll()));
 }
 
