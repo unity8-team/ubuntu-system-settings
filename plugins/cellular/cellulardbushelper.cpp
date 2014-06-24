@@ -231,13 +231,17 @@ void CellularDbusHelper::setupHotspot(QByteArray ssid_, QString password_) {
     if(!settingsPath.isEmpty()) {
         // Prints a warning message if the connection has disappeared already.
         destroyHotspot();
+        // NM returns from the dbus call immediately but only destroys the
+        // connection some time later. There is no callback for when this happens.
+        // So this is the best we can do with reasonable effort.
+        QThread::sleep(1);
     }
     startAdhoc(ssid, password, devicePath);
     detectAdhoc(settingsPath, ssid, password, isActive);
 }
 
 bool CellularDbusHelper::isHotspotActive() {
-    return false;
+    return isActive;
 }
 
 void CellularDbusHelper::disableHotspot() {
@@ -251,8 +255,8 @@ void CellularDbusHelper::disableHotspot() {
         QDBusInterface iface(nm_service, aConn.path(), "org.freedesktop.DBus.Properties",
                 QDBusConnection::systemBus());
         QDBusReply<QVariant> conname = iface.call("Get", activeIface, connProp);
-        QDBusObjectPath backinbConnection = qvariant_cast<QDBusObjectPath>(conname.value());
-        if(backinbConnection.path() == settingsPath) {
+        QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(conname.value());
+        if(backingConnection.path() == settingsPath) {
             mgr.DeactivateConnection(aConn);
             return;
         }
