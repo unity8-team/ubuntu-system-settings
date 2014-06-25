@@ -28,7 +28,7 @@ ItemPage {
 
     id: hotspot
 
-    title: i18n.tr("Wifi hotspot")
+    title: i18n.tr("Wi-Fi hotspot")
 
     Column {
 
@@ -40,7 +40,7 @@ ItemPage {
                 id: hotspotSwitch
                 checked: DbusHelper.isHotspotActive()
                 enabled: ssidField.text != "" && passwordField.length >= 8
-                onCheckedChanged: {
+                onTriggered: {
                     if(checked) {
                         DbusHelper.setupHotspot(ssidField.text, passwordField.text)
                     } else {
