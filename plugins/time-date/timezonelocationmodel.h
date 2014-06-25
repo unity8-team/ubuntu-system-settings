@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -26,6 +26,8 @@
 #include <QThread>
 
 #include <QtConcurrent>
+
+class TimeZonePopulateWorker;
 
 class TimeZoneLocationModel : public QAbstractTableModel
 {
@@ -66,9 +68,12 @@ public:
     QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
 
+    bool modelUpdating;
+
 Q_SIGNALS:
     void filterBegin();
     void filterComplete();
+    void modelUpdated();
 
 public Q_SLOTS:
     void processModelResult(TzLocation);
@@ -79,6 +84,8 @@ private:
     QList<TzLocation> m_locations;
     QList<TzLocation> m_originalLocations;
     QString m_pattern;
+
+    TimeZonePopulateWorker *m_workerThread;
 
     bool substringFilter(const QString& input);
     QFutureWatcher<TzLocation> m_watcher;

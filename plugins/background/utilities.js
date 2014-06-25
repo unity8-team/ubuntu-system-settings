@@ -19,5 +19,6 @@
  */
 
 function setBackground(uri) {
+    console.warn('Utilities.setBackground', uri);
     backgroundPanel.backgroundFile = backgroundPanel.prepareBackgroundFile(uri, true);
 }

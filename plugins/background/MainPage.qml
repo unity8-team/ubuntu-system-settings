@@ -65,6 +65,22 @@ ItemPage {
         }
     }
 
+    Action {
+        id: deleteCustomBackgrounds
+        onTriggered: {
+            var bgs = backgroundPanel.customBackgrounds.slice(0);
+            bgs.forEach(function (bg) {
+                console.warn('removing', bg, 'welcomeBackground', welcomeBackground);
+                if (bg === welcomeBackground) {
+                    console.warn('removing bg which is same as welcomeBackground');
+                    Utilities.setBackground(Qt.resolvedUrl(defaultBackground));
+                }
+                backgroundPanel.rmFile(bg);
+            });
+        }
+    }
+
+
     tools: ToolbarItems {
         ToolbarButton {
             action: selectDefaultPeer
@@ -80,7 +96,11 @@ ItemPage {
 
     Flickable {
         id: sources
-        anchors.fill: parent
+
+        anchors {
+            fill: parent
+            topMargin: units.gu(2)
+        }
         visible: true
         contentHeight: sourceColumn.height + sourceColumn.anchors.bottomMargin
 
@@ -90,26 +110,6 @@ ItemPage {
                 left: parent.left
                 right: parent.right
             }
-
-            spacing: units.gu(0)
-
-
-            Item {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    leftMargin: units.gu(2)
-                    rightMargin: units.gu(2)
-                }
-
-                height: childrenRect.height
-
-                Button {
-                    text: i18n.tr("Add an Image…")
-                    action: selectDefaultPeer
-                }
-            }
-
 
             WallpaperGrid {
                 objectName: "UbuntuArtGrid"
@@ -142,11 +142,16 @@ ItemPage {
                 title: i18n.tr("Custom")
                 current: welcomeBackground
                 editable: true
+                isCustom: true
                 onSelected: {
                     pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
                     selectedItemConnection.target = pageStack.currentPage
                 }
             }
+
+
+            ListItem.ThinDivider {}
+
         }
     }
 

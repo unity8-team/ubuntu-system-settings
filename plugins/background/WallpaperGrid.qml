@@ -34,6 +34,7 @@ Column {
     property string current
     property bool holdsCurrent: (bgmodel.indexOf(current) >= 0)
     property bool editable: false
+    property bool isCustom: false
     property var backgroundPanel
     signal selected (string uri)
 
@@ -42,11 +43,8 @@ Column {
         right: parent.right
     }
 
-    height: childrenRect.height
-    spacing: units.gu(1)
-
-    visible: bgmodel.length > 0
-
+    height: visible ? childrenRect.height : 0
+    visible: bgmodel.length > 0 || isCustom
     state: holdsCurrent ? "" : "collapsed"
     states: [
         State {
@@ -74,7 +72,6 @@ Column {
             if (holdsCurrent) {
                 return
             }
-
             if (parent.state === "collapsed") {
                 parent.state = ""
             }
@@ -92,7 +89,6 @@ Column {
             margins: units.gu(2)
         }
         columns: wallpaperGrid.columns
-        spacing: units.dp(1)
         height: childrenRect.height
         clip: true
 
@@ -163,6 +159,39 @@ Column {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    Row {
+        id: customButtons
+        visible: parent.isCustom && parent.state === "" // not collapsed
+        spacing: units.gu(2)
+        width: parent.width - spacing * 2
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+        }
+        height: visible ? childrenRect.height + (spacing * 2) : 0
+        Button {
+            id: addCustomBgsButton
+            action: selectDefaultPeer
+            objectName: "addCustomBackgroundsButton"
+            text: i18n.tr("Add an Image…")
+            width: (customButtons.width - parent.spacing) / 2
+            anchors {
+                verticalCenter: parent.verticalCenter
+            }
+        }
+
+        Button {
+            id: rmCustomBgsButton
+            action: deleteCustomBackgrounds
+            gradient: UbuntuColors.greyGradient
+            objectName: "removeCustomBackgroundsButton"
+            text: i18n.tr("Remove Images…")
+            width: (customButtons.width - parent.spacing) / 2
+            anchors {
+                verticalCenter: parent.verticalCenter
             }
         }
     }

@@ -290,3 +290,14 @@ class BackgroundBaseTestCase(
         self.mock_server.terminate()
         self.mock_server.wait()
         super(BackgroundBaseTestCase, self).tearDown()
+
+
+class SoundBaseTestCase(UbuntuSystemSettingsTestCase):
+    """ Base class for sound settings tests"""
+
+    def setUp(self):
+
+        """ Go to Sound page """
+        super(SoundBaseTestCase, self).setUp('sound')
+        self.assertThat(self.system_settings.main_view.sound_page.active,
+                        Eventually(Equals(True)))

@@ -49,6 +49,10 @@ struct Device: QObject
                READ isPaired
                NOTIFY pairedChanged)
 
+    Q_PROPERTY(bool trusted
+               READ isTrusted
+               NOTIFY trustedChanged)
+
     Q_PROPERTY(Connection connection
                READ getConnection
                NOTIFY connectionChanged)
@@ -68,7 +72,7 @@ public:
     enum Connection { Disconnected=1, Connecting=2,
                       Connected=4, Disconnecting=8 };
 
-    enum ConnectionMode { Audio, AudioSource, HandsfreeGateway,
+    enum ConnectionMode { Audio, AudioSource, AudioSink, HandsfreeGateway,
                           HeadsetMode, Input };
 
     Q_ENUMS(Type Strength Connection ConnectionMode)
@@ -81,6 +85,7 @@ Q_SIGNALS:
     void addressChanged();
     void typeChanged();
     void pairedChanged();
+    void trustedChanged();
     void connectionChanged();
     void strengthChanged();
     void deviceChanged(); // catchall for any change
@@ -91,6 +96,7 @@ public:
     const QString& getIconName() const { return m_iconName; }
     Type getType() const { return m_type; }
     bool isPaired() const { return m_paired; }
+    bool isTrusted() const { return m_trusted; }
     Connection getConnection() const { return m_connection; }
     Strength getStrength() const { return m_strength; }
     QString getPath() const { return m_deviceInterface->path(); }
@@ -103,12 +109,14 @@ public:
     QString m_fallbackIconName;
     Type m_type = Type::Other;
     bool m_paired = false;
+    bool m_trusted = false;
     Connection m_connection = Connection::Disconnected;
     Strength m_strength = Strength::Fair;
     bool m_isConnected = false;
     QSharedPointer<QDBusInterface> m_deviceInterface;
     QSharedPointer<QDBusInterface> m_audioInterface;
     QSharedPointer<QDBusInterface> m_audioSourceInterface;
+    QSharedPointer<QDBusInterface> m_audioSinkInterface;
     QSharedPointer<QDBusInterface> m_headsetInterface;
 
   protected:
@@ -117,6 +125,7 @@ public:
     void setAddress(const QString &address);
     void setType(Type type);
     void setPaired(bool paired);
+    void setTrusted(bool trusted);
     void setConnection(Connection connection);
     void setStrength(Strength strength);
     void updateIcon();
@@ -128,6 +137,7 @@ public:
     Device(const QString &path, QDBusConnection &bus);
     bool isValid() const { return getType() != Type::Other; }
     void connect(ConnectionMode);
+    void makeTrusted();
     void disconnect(ConnectionMode);
     void setProperties(const QMap<QString,QVariant> &properties);
 

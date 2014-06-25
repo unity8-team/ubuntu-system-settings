@@ -47,6 +47,19 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
             objectName='timeZone'
         )
 
+    @staticmethod
+    def wait_select_listview_first(listview):
+        ntries = 0
+        while True:
+            try:
+                return listview.select_many(toolkit_emulators.Standard)[0]
+            except IndexError as e:
+                if ntries < 10:
+                    ntries += 1
+                    sleep(1)
+                else:
+                    raise e
+
     def click_tz_search_field(self):
         self.system_settings.main_view.scroll_to_and_click(self.tz_page)
         text_field = self.system_settings.main_view.select_single(
@@ -73,7 +86,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         listview = self.system_settings.main_view.select_single(
             objectName='locationsListView'
         )
-        self.assertThat(listview.count, GreaterThan(0))
+        self.assertThat(listview.count, Eventually(GreaterThan(0)))
 
     def test_searching_tz_not_found(self):
         """ Check that searching for an invalid location shows nothing """
@@ -94,7 +107,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         listview = self.system_settings.main_view.select_single(
             objectName='locationsListView'
         )
-        london = listview.select_many(toolkit_emulators.Standard)[0]
+        london = TimeDateTestCase.wait_select_listview_first(listview)
         self.system_settings.main_view.pointer.click_object(london)
         header = self.system_settings.main_view.select_single(
             objectName='MainView_Header'
@@ -113,8 +126,10 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         listview = self.system_settings.main_view.select_single(
             objectName='locationsListView'
         )
-        preston = listview.select_many(toolkit_emulators.Standard)[0]
+
+        preston = TimeDateTestCase.wait_select_listview_first(listview)
         self.system_settings.main_view.pointer.click_object(preston)
+
         # The timer is 1 second, wait and see that we haven't moved pages
         sleep(2)
         header = self.system_settings.main_view.select_single(
