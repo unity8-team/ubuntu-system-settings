@@ -1,20 +1,21 @@
-# Swedish translation for ubuntu-system-settings
-# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# Romanian translation for ubuntu-system-settings
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the ubuntu-system-settings package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-06-24 11:40+0200\n"
-"PO-Revision-Date: 2014-06-17 16:43+0000\n"
-"Last-Translator: Joachim Johansson <Unknown>\n"
-"Language-Team: Swedish <sv@li.org>\n"
+"PO-Revision-Date: 2014-06-24 21:39+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
+"== 0) && (n != 0))) ? 2: 1));\n"
 "X-Launchpad-Export-Date: 2014-06-25 06:15+0000\n"
 "X-Generator: Launchpad (build 17065)\n"
 
@@ -26,7 +27,7 @@ msgstr ""
 #: plugins/sound//PageComponent.qml:36
 #: settings.js:2
 msgid "Sound"
-msgstr "Ljud"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:68
 msgid "Phone calls:"
@@ -35,7 +36,7 @@ msgstr ""
 #: plugins/sound//PageComponent.qml:72
 #: plugins/sound//PageComponent.qml:78
 msgid "Ringtone"
-msgstr "Ringsignal"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:89
 msgid "Vibrate when ringing"
@@ -48,12 +49,12 @@ msgstr ""
 
 #: plugins/sound//PageComponent.qml:102
 msgid "Messages:"
-msgstr "Meddelanden:"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
 msgid "Message received"
-msgstr "Meddelande mottaget"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
@@ -61,7 +62,7 @@ msgstr ""
 
 #: plugins/sound//PageComponent.qml:135
 msgid "Other sounds:"
-msgstr "Övrida ljud:"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:139
 #: plugins/language//PageComponent.qml:155
@@ -70,11 +71,11 @@ msgstr ""
 
 #: plugins/sound//PageComponent.qml:153
 msgid "Lock sound"
-msgstr "Låsningsljud"
+msgstr ""
 
 #: plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr "Telefonen är i ljudlöst läge."
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: plugins/time-date//PageComponent.qml:29
@@ -84,23 +85,23 @@ msgstr ""
 
 #: plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr "Tidszon:"
+msgstr ""
 
 #: plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
-msgstr "Ställ in tid och datum"
+msgstr ""
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
 #: plugins/cellular//PageComponent.qml:122
 msgid "Automatically"
-msgstr "Automatiskt"
+msgstr ""
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
 #: plugins/cellular//PageComponent.qml:122
 msgid "Manually"
-msgstr "Manuellt"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
@@ -132,11 +133,11 @@ msgstr ""
 
 #: plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr "Månad"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr "År"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:173
 #: plugins/security-privacy//LockSecurity.qml:310
@@ -150,7 +151,7 @@ msgstr "År"
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:54
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:182
 #: plugins/phone//CallForwarding.qml:113
@@ -160,7 +161,7 @@ msgstr ""
 
 #: plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr "Tidszon"
+msgstr ""
 
 #: plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
@@ -361,7 +362,7 @@ msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
-msgstr "Säkerhet:"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:76
 #: plugins/security-privacy//PhoneLocking.qml:29
@@ -374,8 +375,8 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] "%1 minut"
-msgstr[1] "%1 minuter"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/security-privacy//PageComponent.qml:87
 msgid "SIM PIN"
@@ -387,11 +388,11 @@ msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:97
 msgid "Stats on welcome screen"
-msgstr "Statistik på välkomstskärmen"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:110
 msgid "Messages on welcome screen"
-msgstr "Meddelanden på välkomstskärmen"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:125
 #: plugins/security-privacy//Dash.qml:29
@@ -400,7 +401,7 @@ msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
-msgstr "Platsåtkomst"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:151
 msgid "Other app access"
@@ -471,7 +472,7 @@ msgstr ""
 #: plugins/language//SpellChecking.qml:27
 #: plugins/language//SpellChecking.qml:36
 msgid "Spell checking"
-msgstr "Stavningskontroll"
+msgstr ""
 
 #: plugins/language//PageComponent.qml:115
 msgid "Auto completion"
@@ -503,7 +504,7 @@ msgstr ""
 
 #: plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
-msgstr "Bekräfta"
+msgstr ""
 
 #: plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -524,32 +525,32 @@ msgstr ""
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] "%1 sekund sedan"
-msgstr[1] "%1 sekunder sedan"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] "%1 minut sedan"
-msgstr[1] "%1 minuter sedan"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of hours
 #: plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] "%1 timme sedan"
-msgstr[1] "%1 timmar sedan"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of days
 #: plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] "%1 dag sedan"
-msgstr[1] "%1 dagar sedan"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/battery//PageComponent.qml:75
 msgid "Charging now"
@@ -578,11 +579,11 @@ msgstr ""
 #: plugins/battery//PageComponent.qml:120
 #, qt-format
 msgid "%1%"
-msgstr "%1%"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:229
 msgid "Ways to reduce battery use:"
-msgstr "Sätt att minska batterianvändningen:"
+msgstr ""
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/battery//PageComponent.qml:246
@@ -605,14 +606,14 @@ msgstr[1] ""
 #: plugins/system-update//Configuration.qml:53
 #: plugins/about//PageComponent.qml:116
 msgid "Never"
-msgstr "Aldrig"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: plugins/battery//PageComponent.qml:268
 #: plugins/wifi//PageComponent.qml:27
 #: settings.js:60
 msgid "Wi-Fi"
-msgstr "Wi-Fi"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: plugins/battery//PageComponent.qml:298
@@ -624,7 +625,7 @@ msgstr ""
 
 #: plugins/battery//PageComponent.qml:329
 msgid "GPS"
-msgstr "GPS"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:348
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
@@ -659,7 +660,7 @@ msgstr ""
 #: plugins/bluetooth//PageComponent.qml:82
 #: settings.js:72
 msgid "Phone"
-msgstr "Telefon"
+msgstr ""
 
 #: plugins/phone//PageComponent.qml:30
 msgid "SIM"
@@ -678,7 +679,7 @@ msgstr ""
 
 #: plugins/phone//ServiceInfo.qml:35
 msgid "Call"
-msgstr "Samtal"
+msgstr ""
 
 #: plugins/phone//CallForwarding.qml:74
 msgid ""
@@ -724,7 +725,7 @@ msgstr ""
 
 #: plugins/system-update//PageComponent.qml:63
 msgid "Not Now"
-msgstr "Inte nu"
+msgstr ""
 
 #: plugins/system-update//PageComponent.qml:69
 msgid "Install"
@@ -754,8 +755,8 @@ msgstr ""
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] "Installera %1 uppdatering"
-msgstr[1] "Installera %1 uppdateringar"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/system-update//PageComponent.qml:215
 msgid "Pause All"
@@ -783,7 +784,7 @@ msgstr ""
 
 #: plugins/system-update//PageComponent.qml:360
 msgid "Installing"
-msgstr "Installerar"
+msgstr ""
 
 #: plugins/system-update//PageComponent.qml:393
 msgid "Installed"
@@ -791,7 +792,7 @@ msgstr ""
 
 #: plugins/system-update//PageComponent.qml:417
 msgid "Version: "
-msgstr "Version: "
+msgstr ""
 
 #: plugins/system-update//PageComponent.qml:442
 #: plugins/system-update//Configuration.qml:30
@@ -885,15 +886,15 @@ msgstr ""
 #: plugins/reset//PageComponent.qml:32
 #: settings.js:104
 msgid "Reset phone"
-msgstr "Återställ telefonen"
+msgstr ""
 
 #: plugins/reset//PageComponent.qml:62
 msgid "Reset launcher & home screen…"
-msgstr "Återställ programstartaren och hemskärmen"
+msgstr ""
 
 #: plugins/reset//PageComponent.qml:75
 msgid "Reset all system settings…"
-msgstr "Återställ alla systeminställningar..."
+msgstr ""
 
 #: plugins/reset//PageComponent.qml:88
 msgid "Erase & reset everything…"
@@ -920,7 +921,7 @@ msgstr ""
 #: plugins/background//MainPage.qml:131
 #: plugins/background//Wallpapers.qml:43
 msgid "Welcome screen"
-msgstr "Välkomstskärm"
+msgstr ""
 
 #: plugins/background//MainPage.qml:175
 #: plugins/background//Wallpapers.qml:43
@@ -982,7 +983,7 @@ msgstr ""
 #: plugins/bluetooth//PageComponent.qml:71
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr "%1 (Ansluter...)"
+msgstr ""
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
 #: plugins/bluetooth//PageComponent.qml:74
@@ -992,15 +993,15 @@ msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:81
 msgid "Computer"
-msgstr "Dator"
+msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:83
 msgid "Modem"
-msgstr "Modem"
+msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:84 src/qml/MainWindow.qml:144
 msgid "Network"
-msgstr "Nätverk"
+msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
@@ -1096,7 +1097,7 @@ msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:271
 msgid "Signal Strength"
-msgstr "Signalstyrka"
+msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:276
 msgid "Disconnect"
@@ -1147,7 +1148,7 @@ msgstr ""
 
 #: plugins/cellular//PageComponent.qml:139
 msgid "APN"
-msgstr "APN"
+msgstr ""
 
 #: plugins/cellular//ChooseCarrier.qml:79
 msgid "Refresh"
@@ -1165,35 +1166,35 @@ msgstr ""
 #: plugins/about//PageComponent.qml:33
 #: settings.js:144
 msgid "About this phone"
-msgstr "Om den här telefonen"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:87
 msgid "Serial"
-msgstr "Serienummer"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:103
 msgid "Software:"
-msgstr "Programvara:"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:108
 msgid "OS"
-msgstr "Operativsystem"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:115
 msgid "Last updated"
-msgstr "Senast uppdaterad"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:122
 msgid "Check for updates"
-msgstr "Sök efter updateringar"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:132 plugins/about//Storage.qml:33
 msgid "Storage"
-msgstr "Lagring"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:139
 msgid "Legal:"
-msgstr "Juridisk information:"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:152
 msgid "Regulatory info"
@@ -1229,7 +1230,7 @@ msgstr ""
 
 #: plugins/about//Storage.qml:155
 msgid "Free space"
-msgstr "Ledigt utrymme"
+msgstr ""
 
 #: plugins/about//Storage.qml:175
 msgid "By name"
@@ -1241,7 +1242,7 @@ msgstr ""
 
 #: src/qml/MainWindow.qml:109
 msgid "System Settings"
-msgstr "Systeminställningar"
+msgstr ""
 
 #: src/qml/MainWindow.qml:130
 msgid "Search"
@@ -1249,11 +1250,11 @@ msgstr ""
 
 #: src/qml/MainWindow.qml:149
 msgid "Personal"
-msgstr "Personligt"
+msgstr ""
 
 #: src/qml/MainWindow.qml:154
 msgid "System"
-msgstr "System"
+msgstr ""
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
@@ -1491,7 +1492,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:78
 msgid "Example"
-msgstr "Exempel"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:80
