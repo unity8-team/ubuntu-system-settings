@@ -121,8 +121,8 @@ ItemPage {
 
         onUpdateAvailableFound: {
             root.updatesAvailable = updateManager.model.length;
-            if (model.length > 0)
-                includeSystemUpdate = updateManager.model[0].systemUpdate
+            if (root.updatesAvailable > 0)
+                root.includeSystemUpdate = updateManager.model[0].systemUpdate
             root.state = "UPDATE";
             root.installAll = downloading;
         }
@@ -252,7 +252,7 @@ ItemPage {
         anchors {
             left: parent.left
             right: parent.right
-            top: installAllButton.bottom
+            top: installAllButton.visible ? installAllButton.bottom : parent.top
             bottom: notification.visible ? notification.top : configuration.top
             margins: units.gu(2)
             bottomMargin: 0
@@ -261,6 +261,7 @@ ItemPage {
         clip: true
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > (root.height - checkForUpdatesArea.height)) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        visible: false
 
         delegate: ListItem.Subtitled {
             id: listItem
