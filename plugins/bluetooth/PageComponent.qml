@@ -142,8 +142,51 @@ ItemPage {
                 value: bluetoothActionGroup.enabled.state
             }
 
-            //  Connnected Headset(s)
+            // Discoverability
+            ListItem.Subtitled {
+                enabled: bluetoothActionGroup.enabled
 
+                Rectangle {
+                    color: "transparent"
+                    anchors.fill: parent
+                    anchors.topMargin: units.gu(1)
+
+                    Label {
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                            topMargin: units.gu(1)
+                        }
+                        height: units.gu(3)
+                        text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
+                    }
+
+                    Label {
+                        anchors {
+                            top: parent.top
+                            right: parent.right
+                            topMargin: units.gu(1)
+                        }
+                        height: units.gu(3)
+                        text: backend.discoverable ? backend.adapterName() : ""
+                        color: "darkgrey"
+                        visible: backend.discoverable
+                        enabled: false
+                    }
+
+                    ActivityIndicator {
+                        anchors {
+                            top: parent.top
+                            right: parent.right
+                            topMargin: units.gu(1)
+                        }
+                        visible: !backend.discoverable
+                        running: !backend.discoverable
+                    }
+                }
+            }
+
+            //  Connnected Headset(s)
             ListItem.Standard {
                 id: connectedHeader
                 text: i18n.tr("Connected devices:")
@@ -194,6 +237,7 @@ ItemPage {
                     iconName: iconName
                     text: getDisplayName(connection, displayName)
                     onClicked: {
+                        backend.stopDiscovery();
                         backend.connectDevice(addressName);
                     }
                 }
