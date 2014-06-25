@@ -73,7 +73,7 @@ LocalComponents.Page {
                 leftMargin: userSettingsPage.leftMargin
                 rightMargin: userSettingsPage.rightMargin
                 checked: diagnosticsWidget.canReportCrashes
-                text: i18n.tr("Your phone is setup to automatically report errors to Canonical. This can be disabled in system settings.")
+                text: i18n.tr("Your phone is set up to automatically report errors to Canonical. This can be disabled in system settings.")
 
                 onServerValueChanged: checked = serverValue
                 onTriggered: diagnosticsWidget.canReportCrashes = checked
@@ -100,7 +100,7 @@ LocalComponents.Page {
                         rightMargin: userSettingsPage.rightMargin
                     }
                     wrapMode: Text.WordWrap
-                    text: i18n.tr("Your phone is setup to detect your location. This can be disabled in system settings.")
+                    text: i18n.tr("Your phone is set up to detect your location. This can be disabled in system settings.")
                 }
             }
 
