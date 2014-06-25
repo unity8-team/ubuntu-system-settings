@@ -66,6 +66,7 @@ BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
     m_addedHandler(0),
     m_removedHandler(0)
 {
+    deviceChanged(m_client, NULL, this);
     m_addedHandler = g_signal_connect (m_client,
                                       "device-added",
                                       G_CALLBACK (::deviceChanged),
@@ -74,7 +75,6 @@ BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
                                         "device-removed",
                                         G_CALLBACK (::deviceChanged),
                                         this /* user_data */);
-    deviceChanged(m_client, NULL, this);
 }
 
 void BatteryItem::setVisibility(bool visible)

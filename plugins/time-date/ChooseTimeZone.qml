@@ -1,7 +1,7 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2013-2014 Canonical Ltd.
  *
  * Contact: Iain Lane <iain.lane@canonical.com>
  *
@@ -109,11 +109,21 @@ ItemPage {
         }
     }
 
+    ActivityIndicator {
+        anchors.centerIn: parent
+        running: setTimeZoneSelector.selectedIndex == 1 &&
+                 locationsListView.count == 0 &&
+                 filterCities.length > 0 &&
+                 timeDatePanel.listUpdating
+    }
+
     Label {
         objectName: "nothingLabel"
         anchors.centerIn: parent
-        visible: setTimeZoneSelector.selectedIndex ==1 &&
-                 locationsListView.count == 0
-        text: (filterCities.length == 0) ? i18n.tr("Enter your current location.") : i18n.tr("No matching place")
+        visible: setTimeZoneSelector.selectedIndex == 1 &&
+                 locationsListView.count == 0 &&
+                 (filterCities.length == 0 || !timeDatePanel.listUpdating)
+        text: (filterCities.length == 0) ? i18n.tr("Enter your current location.")
+                                         : i18n.tr("No matching place")
     }
 }

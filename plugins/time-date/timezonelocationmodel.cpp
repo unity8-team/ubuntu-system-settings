@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -26,29 +26,64 @@
 #include <QDebug>
 
 TimeZoneLocationModel::TimeZoneLocationModel(QObject *parent):
-    QAbstractTableModel(parent)
+    QAbstractTableModel(parent),
+    modelUpdating(true),
+    m_pattern(),
+    m_workerThread(new TimeZonePopulateWorker()),
+    m_watcher()
 {
     qRegisterMetaType<TzLocation>();
 
-    TimeZonePopulateWorker *workerThread = new TimeZonePopulateWorker();
-    QObject::connect(workerThread,
+    QObject::connect(m_workerThread,
             &TimeZonePopulateWorker::resultReady,
             this,
             &TimeZoneLocationModel::processModelResult);
-    QObject::connect(workerThread,
+    QObject::connect(m_workerThread,
             &TimeZonePopulateWorker::finished,
-            workerThread,
+            this,
+            &TimeZoneLocationModel::store);
+    QObject::connect(m_workerThread,
+            &TimeZonePopulateWorker::finished,
+            m_workerThread,
             &QObject::deleteLater);
-    workerThread->start();
+    QObject::connect(m_workerThread,
+            &TimeZonePopulateWorker::finished,
+            this,
+            &TimeZoneLocationModel::modelUpdated);
+
+    m_workerThread->start();
+}
+
+void TimeZoneLocationModel::store()
+{
+    m_workerThread = nullptr;
+    modelUpdating = false;
+    qSort(m_originalLocations.begin(), m_originalLocations.end());
+    QObject::connect(&m_watcher,
+                     &QFutureWatcher<TzLocation>::finished,
+                     this,
+                     &TimeZoneLocationModel::filterFinished);
+
+    if (!m_pattern.isEmpty())
+        filter(m_pattern);
 }
 
 void TimeZoneLocationModel::processModelResult(TzLocation location)
 {
-    QModelIndex root;
-    int rows = rowCount();
-    beginInsertRows(root, rows, rows);
-    m_locations.append(location);
-    endInsertRows();
+    m_originalLocations.append(location);
+}
+
+void TimeZoneLocationModel::setModel(QList<TzLocation> locations)
+{
+    beginResetModel();
+    m_locations = locations;
+    endResetModel();
+    Q_EMIT(filterComplete());
+}
+
+void TimeZoneLocationModel::filterFinished()
+{
+    setModel(m_watcher.future().results());
 }
 
 int TimeZoneLocationModel::rowCount(const QModelIndex &parent) const
@@ -112,6 +147,42 @@ QHash<int, QByteArray> TimeZoneLocationModel::roleNames() const
     return m_roleNames;
 }
 
+void TimeZoneLocationModel::filter(const QString& pattern)
+{
+    QList<TzLocation> list;
+
+    if (m_watcher.isRunning())
+        m_watcher.cancel();
+
+    if (pattern.isEmpty() || pattern.isNull() ||
+            (m_workerThread && m_workerThread->isRunning())) {
+        setModel(QList<TzLocation>());
+        m_pattern = pattern;
+        return;
+    }
+
+    if (!m_pattern.isEmpty() && !m_locations.isEmpty() &&
+            pattern.startsWith(m_pattern))
+        list = m_locations; // search in the smaller list
+    else
+        list = m_originalLocations; //search in the whole list
+
+    m_pattern = pattern;
+
+    QFuture<TzLocation> future (QtConcurrent::filtered(
+                list,
+                [pattern] (const TzLocation& tz) {
+        QString display("%1, %2");
+        return display.arg(tz.city)
+                .arg(tz.full_country.isEmpty() ? tz.country : tz.full_country)
+                .contains(pattern, Qt::CaseInsensitive);
+    }));
+
+    Q_EMIT (filterBegin());
+
+    m_watcher.setFuture(future);
+}
+
 void TimeZonePopulateWorker::run()
 {
     buildCityMap();
@@ -156,15 +227,4 @@ void TimeZonePopulateWorker::buildCityMap()
 
 TimeZoneLocationModel::~TimeZoneLocationModel()
 {
-}
-
-TimeZoneFilterProxy::TimeZoneFilterProxy(TimeZoneLocationModel *parent)
-    : QSortFilterProxyModel(parent)
-{
-    this->setSourceModel(parent);
-    this->setDynamicSortFilter(true);
-    this->setFilterRole(TimeZoneLocationModel::SimpleRole);
-    // By default don't display anything
-    this->setFilterRegExp("^$");
-    this->setFilterCaseSensitivity(Qt::CaseInsensitive);
 }

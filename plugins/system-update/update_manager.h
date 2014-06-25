@@ -89,14 +89,18 @@ public:
     int get_downloadMode() { return m_downloadMode; }
     void set_token(Token& t) { m_token = t; }
     Token get_token() { return m_token; }
+    void setCheckintUpdates(int value) { m_checkingUpdates = value; }
+    void setCheckSystemUpdates(int value) { m_systemCheckingUpdate = value; }
+    void setCheckClickUpdates(int value) { m_clickCheckingUpdate = value; }
+    FakeSsoService& getService() { return m_service; }
 #endif
 
 public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
+    void systemUpdateNotAvailable();
 
 private Q_SLOTS:
     void clickUpdateNotAvailable();
-    void systemUpdateNotAvailable();
     void systemUpdatePaused(int value);
     void processOutput();
     void processUpdates();
@@ -128,6 +132,7 @@ private:
     void checkForUpdates();
     QString getClickCommand();
     bool getCheckForCredentials();
+    bool enableAutopilotMode();
     void reportCheckState();
     void updateNotAvailable();
 };
