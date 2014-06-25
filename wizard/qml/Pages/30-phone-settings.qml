@@ -17,6 +17,7 @@
 import QtQuick 2.0
 import QMenuModel 0.1
 import Ubuntu.Components 0.1
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Diagnostics 1.0
 import "../Components" as LocalComponents
 
@@ -86,6 +87,24 @@ LocalComponents.Page {
                 text: i18n.tr("Location services")
             }
 
+            ListItem.Empty {
+                width: parent.width
+
+                Label {
+                    id: label
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: userSettingsPage.leftMargin
+                        rightMargin: userSettingsPage.rightMargin
+                    }
+                    wrapMode: Text.WordWrap
+                    text: i18n.tr("Your phone is setup to detect your location. This can be disabled in system settings.")
+                }
+            }
+
+            /* When location services will actually work.
             LocalComponents.CheckableSetting {
                 id: locationOn
                 leftMargin: userSettingsPage.leftMargin
@@ -93,7 +112,7 @@ LocalComponents.Page {
                 text: i18n.tr("Your phone is setup to detect your location. This can be disabled in system settings.")
                 checked: locationActionGroup.enabled.state
                 onClicked: locationActionGroup.enabled.activate()
-            }
+            } */
         }
     }
 

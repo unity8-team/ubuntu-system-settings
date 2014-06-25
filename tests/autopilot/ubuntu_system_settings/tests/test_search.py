@@ -6,7 +6,8 @@
 # by the Free Software Foundation.
 
 from autopilot.introspection.dbus import StateNotFoundError
-from testtools.matchers import Equals, NotEquals
+from testtools.matchers import Equals
+from autopilot.matchers import Eventually
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
@@ -21,22 +22,32 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
     def setUp(self):
         super(SearchTestCases, self).setUp()
 
-    def test_search(self):
+    def _get_entry_component(self, name):
+        return self.system_settings.main_view.wait_select_single(
+            objectName='entryComponent-' + name
+        )
+
+    def _get_all_entry_components(self):
+        return self.system_settings.main_view.select_many(
+            'EntryComponent')
+
+    def _type_into_search_box(self, text):
+        search_box = self.system_settings.main_view.select_single(
+            objectName='searchTextField'
+        )
+        self.system_settings.main_view.scroll_to_and_click(search_box)
+        self.keyboard.type(_(text))
+        self.assertThat(search_box.text, Eventually(Equals(text)))
+
+    def test_search_filter_results(self):
         """ Checks whether Search box actually filters the results """
-        # Select search text field
-        search = self.main_view.select_single(objectName='searchTextField')
-        self.assertThat(search, NotEquals(None))
-        # Move to text field
-        self.scroll_to_and_click(search)
-        # Filter by string
-        self.keyboard.type(_('Sound'))
-        # Search component
-        sound = self.main_view.select_single(objectName='entryComponent-sound')
-        self.assertThat(sound, NotEquals(None))
-        try:
-            background = self.main_view.select_single(
-                objectName='entryComponent-background'
-            )
-        except StateNotFoundError:
-            background = None
-        self.assertThat(background, Equals(None))
+        self._type_into_search_box('Sound')
+        sound_icon = self._get_entry_component('sound')
+
+        self.assertThat(sound_icon.visible, Eventually(Equals(True)))
+        self.assertEquals(len(self._get_all_entry_components()), 1)
+
+    def test_search_filter_no_matches(self):
+        """ Checks that no results are returned if nothing matches """
+        self._type_into_search_box('foobar')
+        self.assertEquals(len(self._get_all_entry_components()), 0)

@@ -31,6 +31,16 @@ Item {
         i18n.domain = "ubuntu-system-settings"
     }
 
+    // This is just a little screen to immediately go to black once the wizard
+    // is done, to give quick feedback to the user.
+    Rectangle {
+        id: blackCover
+        color: "#000000"
+        anchors.fill: parent
+        z: 1
+        visible: false
+    }
+
     MainView {
         anchors.fill: parent
         headerColor: "#57365E"
