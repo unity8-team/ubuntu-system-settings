@@ -27,5 +27,9 @@
             <summary>Whether the applications should be sorted by name.</summary>
             <description>If true the applications are sorted by name, otherwise by disk size.</description>
         </key>
+        <key name="cellular-data-technology-preference" type="s">
+            <default>"any"</default>
+            <description>What data technology the user prefers. See possible values in https://github.com/rilmodem/ofono/blob/master/doc/radio-settings-api.txt</description>
+        </key>
     </schema>
 </schemalist>

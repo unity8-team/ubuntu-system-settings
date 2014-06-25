@@ -23,6 +23,7 @@ import dbusmock
 import subprocess
 
 CONNECTION_MANAGER_IFACE = 'org.ofono.ConnectionManager'
+RADIOSETTINGS_IFACE = 'org.ofono.RadioSettings'
 
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
@@ -137,19 +138,24 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         )
 
     def mock_radio_settings(self):
-        self.modem_0.AddProperty('org.ofono.RadioSettings',
-                                 'TechnologyPreference', 'any')
+        modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+        modem_interfaces.append(RADIOSETTINGS_IFACE)
+        self.modem_0.AddProperty(RADIOSETTINGS_IFACE,
+                                 'TechnologyPreference', 'gsm')
+        self.modem_0.SetProperty('Interfaces', modem_interfaces)
         self.modem_0.AddMethods(
-            'org.ofono.RadioSettings',
+            RADIOSETTINGS_IFACE,
             [
                 (
                     'GetProperties', '', 'a{sv}',
-                    'ret = self.GetAll("org.ofono.RadioSettings")'),
+                    'ret = self.GetAll("%s")'
+                    % RADIOSETTINGS_IFACE),
                 (
                     'SetProperty', 'sv', '',
-                    'self.Set("org.ofono.RadioSettings", args[0], args[1]); '
-                    'self.EmitSignal("org.ofono.RadioSettings",\
-                        "PropertyChanged", "sv", [args[0], args[1]])'),
+                    'self.Set("IFACE", args[0], args[1]); '
+                    'self.EmitSignal("IFACE",\
+                        "PropertyChanged", "sv", [args[0], args[1]])'.replace(
+                    'IFACE', RADIOSETTINGS_IFACE)),
             ])
 
     @classmethod

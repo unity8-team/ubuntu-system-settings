@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -30,14 +31,22 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
+    GSettings {
+        id: systemSettingsSettings
+        schema.id: "com.ubuntu.touch.system-settings"
+        onChanged: {
+            if (key == "cellularDataTechnologyPreference") {
+                rdoSettings.technologyPreference = cellularDataTechnologyPreference;
+                console.warn('cellularDataTechnologyPreference changed', cellularDataTechnologyPreference);
+            }
+        }
+    }
+
     OfonoRadioSettings {
         id: rdoSettings
         modemPath: manager.modems[0]
-        onTechnologyPreferenceChanged: {
-            if(connMan.powered) {
-                techPrefSelector.selectedIndex = Utilities.techPrefKeyToIndex(rdoSettings.technologyPreference)
-            }
-        }
+        technologyPreference: systemSettingsSettings.cellularDataTechnologyPreference
+        onTechnologyPreferenceChanged: Utilities.preferenceChanged(preference)
     }
 
     OfonoManager {
@@ -64,6 +73,13 @@ ItemPage {
     OfonoConnMan {
         id: connMan
         modemPath: manager.modems[0]
+        onPoweredChanged: Utilities.poweredChanged(powered)
+    }
+
+    OfonoModem {
+        id: modem
+        modemPath: manager.modems[0]
+
     }
 
     property string carrierName: netReg.name
@@ -82,26 +98,18 @@ ItemPage {
         Component {
             id: techPrefDelegate
             OptionSelectorDelegate { text: i18n.tr(name); }
+
         }
 
         ListItem.ItemSelector {
+
             id: techPrefSelector
             objectName: "technologyPreferenceSelector"
             expanded: true
             delegate: techPrefDelegate
             model: techPrefModel
             text: i18n.tr("Cellular data:")
-            selectedIndex: Utilities.techPrefKeyToIndex(rdoSettings.technologyPreference)
-            onSelectedIndexChanged: {
-
-                var key = techPrefModel.get(selectedIndex).key;
-                if (key === 'off') {
-                    connMan.powered = false;
-                } else {
-                    connMan.powered = true;
-                    rdoSettings.technologyPreference = key
-                }
-            }
+            onSelectedIndexChanged: Utilities.selectedIndexChanged(selectedIndex)
         }
 
         ListItem.Standard {

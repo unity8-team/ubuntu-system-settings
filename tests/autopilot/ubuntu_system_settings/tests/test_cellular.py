@@ -7,12 +7,19 @@
 import dbus
 from time import sleep
 from autopilot.introspection.dbus import StateNotFoundError
+from gi.repository import Gio
 from testtools.matchers import Equals, NotEquals, raises
 
-from ubuntu_system_settings.tests import UbuntuSystemSettingsOfonoTestCase
+from ubuntu_system_settings.tests import (
+    UbuntuSystemSettingsOfonoTestCase, CONNECTION_MANAGER_IFACE, RADIOSETTINGS_IFACE)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
+
+
+PREFERENCE_2G = '2G only (saves battery)'
+PREFERENCE_ANY = '2G/3G/4G (faster)'
+PREFERENCE_OFF = 'Off'
 
 
 class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
@@ -59,28 +66,28 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             Equals(_('Cellular'))
         )
 
-    def test_current_network(self):
-        """ Tests whether the current network is visible and selected """
-        self.navigate_to_manual()
-        carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
-            objectName="carrierSelector"
-        )
-        # TODO: Once there is a proper ItemSelector emulator, get the items
-        # from it and check 'fake.tel' is the selected one.
-        manual = carriers.select_single('Label', text="fake.tel")
-        self.assertThat(manual, NotEquals(None))
-        self.assertThat(carriers.selectedIndex, Equals(0))
+    # def test_current_network(self):
+    #     """ Tests whether the current network is visible and selected """
+    #     self.navigate_to_manual()
+    #     carriers = self.system_settings.main_view.choose_page.select_single(
+    #         toolkit_emulators.ItemSelector,
+    #         objectName="carrierSelector"
+    #     )
+    #     # TODO: Once there is a proper ItemSelector emulator, get the items
+    #     # from it and check 'fake.tel' is the selected one.
+    #     manual = carriers.select_single('Label', text="fake.tel")
+    #     self.assertThat(manual, NotEquals(None))
+    #     self.assertThat(carriers.selectedIndex, Equals(0))
 
-    def test_alt_network(self):
-        """ Tests whether an alternative available network is displayed """
-        self.navigate_to_manual()
-        carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
-            objectName="carrierSelector"
-        )
-        manual = carriers.select_single('Label', text="my.cool.telco")
-        self.assertThat(manual, NotEquals(None))
+    # def test_alt_network(self):
+    #     """ Tests whether an alternative available network is displayed """
+    #     self.navigate_to_manual()
+    #     carriers = self.system_settings.main_view.choose_page.select_single(
+    #         toolkit_emulators.ItemSelector,
+    #         objectName="carrierSelector"
+    #     )
+    #     manual = carriers.select_single('Label', text="my.cool.telco")
+    #     self.assertThat(manual, NotEquals(None))
 
     def test_no_forbidden_network(self):
         """ Ensures that a forbidden network is not shown """
@@ -104,13 +111,6 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         is that of index"""
         self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
 
-    def test_that_technology_UI_reflects_DBus(self):
-        """DBus has been mocked and the 'any' preference is selected
-        Assert that this is also selected in the UI
-        """
-        # assert that 'any' is selected
-        self.assert_selected_preference(2)
-
     def test_off_setting_disables_roaming(self):
         """Test that switching off cellular data disables roaming switch"""
         roaming_switch = self.system_settings.main_view.select_single(
@@ -118,32 +118,51 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         )
 
         # select 2G only
-        self.select_preference('2G only (saves battery)')
+        self.select_preference(PREFERENCE_2G)
+        # assert that roaming_switch is enabled
         self.assertTrue(roaming_switch.get_properties()['enabled'])
 
         # click off
-        self.select_preference('Off')
-        # make sure roaming_switch is disabled
+        self.select_preference(PREFERENCE_OFF)
+        # assert roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
 
-    def test_modem_changes_reflected_in_UI(self):
+    def test_unwanted_technology_preference_changes_does_not_affect_UI(self):
         """Assert that DBus change to org.ofono.RadioSettings
-        is reflected in the UI"""
-        # fake dbus signal, changing to gsm
+        is not reflected if unwanted (differs from gsetting)"""
+
+        self.select_preference(PREFERENCE_2G)
+
+        # fake dbus signal, changing from gsm to any
         self.modem_0.EmitSignal(
             'org.ofono.RadioSettings',
             'PropertyChanged',
             'sv',
-            ['TechnologyPreference',  dbus.String('gsm', variant_level=1)])
+            ['TechnologyPreference',  dbus.String('any', variant_level=1)])
 
         # assert that "2G" is selected
         self.assert_selected_preference(1)
 
+    def test_changes_to_technology_preference_is_reflected_by_DBus(self):
+        self.select_preference(PREFERENCE_2G)
+
+        sleep(1)
+
+        self.select_preference(PREFERENCE_ANY)
+
+        sleep(1)
+
+        print self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference')
+
+        self.assertTrue(False)
+        #self.assertEqual(PREFERENCE_ANY, self.modem_0.GetProperties()['TechnologyPreference'])
+
     def test_that_technology_UI_is_not_inadvertently_changed_by_DBus(self):
-        """Assert that the modem, changing DBus, cannot turn on
-        cellular data if it previously was off"""
+        """Assert that if the modem, if turned off, cannot be turned on
+        by a change in technology preference"""
+
         # turn off cellular data
-        self.select_preference('Off')
+        self.select_preference(PREFERENCE_OFF)
 
         # fake dbus signal, changing to gsm
         self.modem_0.EmitSignal(
@@ -157,3 +176,58 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         # assert that "Off" has not changed
         self.assert_selected_preference(0)
+
+    def test_that_technology_UI_reflects_setting_when_modem_is_powered_up(self):
+        """Assert that when modem comes online, UI should reflect this"""
+
+        self.select_preference(PREFERENCE_2G)
+        self.select_preference(PREFERENCE_OFF)
+
+        sleep(1)
+
+        self.modem_0.EmitSignal(
+            CONNECTION_MANAGER_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Powered', 'true'])
+
+        sleep(1)
+
+        # assert that 2G is selected
+        self.assert_selected_preference(1)
+
+    def test_that_technology_UI_properly_handles_invalid_preference(self):
+
+        self.modem_0.EmitSignal(
+            'org.ofono.RadioSettings',
+            'PropertyChanged',
+            'sv',
+            ['TechnologyPreference',  dbus.String('weird_stuff', variant_level=1)])
+
+        sleep(1)
+
+
+    # def test_that_technology_UI_is_sensitive_to_radiosettings_interface(self):
+    #     """Assert that the technology UI is sensitive to the RadioSettings
+    #     interface being present"""
+
+    #     # remove radio settings interface
+    #     # this simulates locking of SIM
+    #     modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+    #     modem_interfaces.remove(RADIOSETTINGS_IFACE)
+    #     self.modem_0.SetProperty('Interfaces', modem_interfaces)
+
+    #     sleep(1)
+
+    #     self.select_preference(PREFERENCE_ANY)
+
+    #     sleep(1)
+
+    #     # add the radio settings interface
+    #     modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+    #     modem_interfaces.append(RADIOSETTINGS_IFACE)
+    #     self.modem_0.SetProperty('Interfaces', modem_interfaces)
+
+    #     sleep(1)
+
+    #     self.assert_selected_preference(2)
