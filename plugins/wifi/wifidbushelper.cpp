@@ -22,12 +22,11 @@
 #include <QDBusReply>
 #include <QtDebug>
 #include <QDBusInterface>
+#include <algorithm>
 
 #include "nm_manager_proxy.h"
 #include "nm_settings_proxy.h"
 #include "nm_settings_connection_proxy.h"
-
-#include <iostream>
 
 typedef QMap<QString,QVariantMap> ConfigurationData;
 Q_DECLARE_METATYPE(ConfigurationData)
@@ -39,9 +38,10 @@ WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent)
 
 void WifiDbusHelper::connect(QString ssid, int security, QString password)
 {
-
-    printf("Connecting to %s, security %d, password %s.\n",
-            ssid.toUtf8().data(), security, password.toUtf8().data());
+    if(security<0 || security>2) {
+        qWarning() << "Qml and C++ have gotten out of sync. Can't connect.\n";
+        return;
+    }
 
     OrgFreedesktopNetworkManagerInterface mgr("org.freedesktop.NetworkManager",
                                               "/org/freedesktop/NetworkManager",
@@ -50,7 +50,7 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
     QMap<QString, QVariantMap> configuration;
 
     QVariantMap connection;
-    connection["type"] = QString("802-11-wireless");
+    connection["type"] = QStringLiteral("802-11-wireless");
     configuration["connection"] = connection;
 
     QVariantMap wireless;
@@ -61,24 +61,19 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
     // 1: WPA & WPA2 Personal
     // 2: WEP
     if (security != 0) {
-        wireless["security"] = QString("802-11-wireless-security");
+        wireless["security"] = QStringLiteral("802-11-wireless-security");
 
         QVariantMap wireless_security;
 
         if (security == 1) {
-            wireless_security["key-mgmt"] = QString("wpa-psk");
+            wireless_security["key-mgmt"] = QStringLiteral("wpa-psk");
             wireless_security["psk"] = password;
         } else if (security == 2) {
-            wireless_security["key-mgmt"] = QString("none");
-            wireless_security["auth-alg"] = QString("open");
+            wireless_security["key-mgmt"] = QStringLiteral("none");
+            wireless_security["auth-alg"] = QStringLiteral("open");
             wireless_security["wep-key0"] = password;
             wireless_security["wep-key-type"] = QVariant(uint(1));
-        } else {
-            // QML side and c++ side have gotten out of sync.
-            // Can't do anything here.
-            return;
         }
-
         configuration["802-11-wireless-security"] = wireless_security;
     }
 
@@ -239,7 +234,7 @@ struct Network : public QObject
         try {
             parseConnection();
         } catch (const DontCare &) {
-            std::cout << "Ignoring a network based on connection block." << std::endl;
+            qDebug() << "Ignoring a network based on connection block.\n";
             throw;
         }
 
@@ -247,7 +242,7 @@ struct Network : public QObject
             try {
                 parseWireless();
             } catch (const DontCare &) {
-                std::cout << "Ignoring a network based on wireless block. " << qPrintable(m_iface.path()) << std::endl;
+                qDebug() << "Ignoring a network based on wireless block. " << qPrintable(m_iface.path()) << "\n";
                 throw;
             }
         }
@@ -286,7 +281,7 @@ QList<QStringList> WifiDbusHelper::getPreviouslyConnectedWifiNetworks() {
             }
         }
     } else {
-        std::cout << "ERROR" << qPrintable(reply.error().message()) << std::endl;
+        qWarning() << "ERROR " << reply.error().message() << "\n";
     }
 
     std::sort(networks.begin(), networks.end(), [](const QStringList &a, const QStringList &b){
@@ -302,5 +297,7 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
              QDBusConnection::systemBus());
     auto reply = bar.Delete();
     reply.waitForFinished();
-    printf("Forgotten network with path %s.\n", dbus_path.toUtf8().data());
+    if(!reply.isValid()) {
+        qWarning() << "Error forgetting network: " << reply.error().message() << "\n";
+    }
 }

@@ -52,7 +52,7 @@ int PreviousNetworkModel::rowCount(const QModelIndex &/*parent*/) const {
 }
 
 QVariant PreviousNetworkModel::data(const QModelIndex & index, int role) const {
-    if(!index.isValid()) {
+    if(!index.isValid() || index.row() >= p->data.size()) {
         return QVariant();
     }
 

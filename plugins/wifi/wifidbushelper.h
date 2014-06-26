@@ -37,9 +37,6 @@ public:
     Q_INVOKABLE QList<QStringList> getPreviouslyConnectedWifiNetworks();
     Q_INVOKABLE void forgetConnection(const QString dbus_path);
 
-private:
-    //QDBusInterface service;
-
 };
 
 

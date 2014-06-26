@@ -22,16 +22,20 @@
 #include "wifidbushelper.h"
 #include "previousnetworkmodel.h"
 
+namespace {
+
 WifiDbusHelper *s = nullptr;
 
-static QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
+QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
 {
     // Why are we not using static WifiDbusHelper here, you ask?
     // Because I'm not sure if the Qml engine tries to delete the
-    // pointer we return when it is shut down.
+    // pointer we return when it is shuts down.
     if(!s)
         s = new WifiDbusHelper(engine);
     return s;
+}
+
 }
 
 void BackendPlugin::registerTypes(const char *uri)
