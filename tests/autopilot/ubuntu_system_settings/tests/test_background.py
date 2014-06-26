@@ -11,8 +11,7 @@ import os
 
 from testtools.matchers import Equals
 
-from ubuntu_system_settings.tests import (
-    BackgroundBaseTestCase, ACCOUNTS_IFACE)
+from ubuntu_system_settings.tests import BackgroundBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
