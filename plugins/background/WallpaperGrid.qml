@@ -22,6 +22,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
+import "utilities.js" as Utilities
 
 Column {
     id: wallpaperGrid
@@ -31,11 +32,23 @@ Column {
     property int itemWidth: ((mainPage.width - (grid.spacing * (columns - 1))) - (grid.anchors.margins * 2)) / columns
     property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
     property string title
+
+    // path to current background
     property string current
+
+    // whether or not the current background in this model
     property bool holdsCurrent: (bgmodel.indexOf(current) >= 0)
+
+    // can backgrounds be removed
     property bool editable: false
+
+    // the grid a user can populate
     property bool isCustom: false
+
+    // plugin
     property var backgroundPanel
+
+    // signal for when a background was selected
     signal selected (string uri)
 
     anchors {
@@ -43,7 +56,8 @@ Column {
         right: parent.right
     }
 
-    height: visible ? childrenRect.height : 0
+    height: state === "" ? childrenRect.height : header.height
+    clip: true
     visible: bgmodel.length > 0 || isCustom
     state: holdsCurrent ? "" : "collapsed"
     states: [
@@ -61,6 +75,7 @@ Column {
         anchors.left: parent.left
         anchors.right: parent.right
         text: title
+        enabled: !holdsCurrent
         image: {
             if (parent.holdsCurrent) {
                 return "bullet.png"
@@ -68,10 +83,6 @@ Column {
             return parent.state === "collapsed" ? "header_handlearrow.png" : "header_handlearrow2.png"
         }
         onClicked: {
-            // if current grid holds current image, do nothing
-            if (holdsCurrent) {
-                return
-            }
             if (parent.state === "collapsed") {
                 parent.state = ""
             }
@@ -91,7 +102,6 @@ Column {
         columns: wallpaperGrid.columns
         height: childrenRect.height
         clip: true
-
         Repeater {
             objectName: "gridRepeater"
             model: bgmodel
@@ -154,7 +164,14 @@ Column {
                         actions: ActionList {
                             Action {
                                 text: i18n.tr("Remove")
-                                onTriggered: backgroundPanel.rmFile(modelData)
+                                onTriggered: {
+
+                                    // removing current background, revert to default
+                                    if (modelData === current) {
+                                        Utilities.revertBackgroundToDefault();
+                                    }
+                                    backgroundPanel.rmFile(modelData)
+                                }
                             }
                         }
                     }
@@ -163,15 +180,21 @@ Column {
         }
     }
 
+    Item {
+        width: parent.width
+        height: units.gu(2)
+        visible: !parent.isCustom
+    }
+
     Row {
         id: customButtons
-        visible: parent.isCustom && parent.state === "" // not collapsed
+        visible: parent.isCustom
         spacing: units.gu(2)
         width: parent.width - spacing * 2
         anchors {
             horizontalCenter: parent.horizontalCenter
         }
-        height: visible ? childrenRect.height + (spacing * 2) : 0
+        height: addCustomBgsButton.height + (spacing * 2)
         Button {
             id: addCustomBgsButton
             action: selectDefaultPeer

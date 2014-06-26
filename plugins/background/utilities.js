@@ -19,6 +19,10 @@
  */
 
 function setBackground(uri) {
-    console.warn('Utilities.setBackground', uri);
     backgroundPanel.backgroundFile = backgroundPanel.prepareBackgroundFile(uri, true);
+}
+
+function revertBackgroundToDefault () {
+    setBackground(Qt.resolvedUrl(mainPage.defaultBackground));
+    uArtGrid.state = "";
 }

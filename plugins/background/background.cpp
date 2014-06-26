@@ -43,9 +43,8 @@ QString Background::getBackgroundFile()
     QVariant answer = m_accountsService.getUserProperty(
                 "org.freedesktop.Accounts.User",
                 "BackgroundFile");
-    qCritical() << "getBackgroundFile";
+
     if (answer.isValid())
-        qCritical() << "getBackgroundFile: was valid " << answer.toString();
         return answer.toString();
 
     return QString();
@@ -60,7 +59,6 @@ void Background::setBackgroundFile(QUrl backgroundFile)
         return;
 
     m_backgroundFile = backgroundFile.url();
-    qCritical() << "setBackgroundFile" << backgroundFile.path();
     m_accountsService.customSetUserProperty("SetBackgroundFile",
                                             backgroundFile.path());
     Q_EMIT backgroundFileChanged();
@@ -159,9 +157,6 @@ void Background::updateUbuntuArt()
 {
 
     QString envDir(qgetenv("SYSTEM_SETTINGS_UBUNTU_ART_DIR"));
-
-    qCritical() << "envDir:" << envDir;
-
     QDir dir;
 
     if (envDir != "")
@@ -169,7 +164,6 @@ void Background::updateUbuntuArt()
     else
         dir = QDir("/usr/share/backgrounds/");
 
-    qCritical() << "dir:" << dir;
 
     dir.setFilter(QDir::Files | QDir::NoSymLinks);
     QFileInfoList tmpList = dir.entryInfoList();

@@ -51,9 +51,6 @@ ItemPage {
     // Action to import image
     Action {
         id: selectDefaultPeer
-        // text: i18n.tr("Photo/Image")
-        // iconName: "import-image"
-
         // when action has been activated, request a transfer, providing
         // a callback that pushes the preview stack
         onTriggered: {
@@ -65,21 +62,20 @@ ItemPage {
         }
     }
 
+    // Delete all custom backgrounds
     Action {
         id: deleteCustomBackgrounds
         onTriggered: {
             var bgs = backgroundPanel.customBackgrounds.slice(0);
             bgs.forEach(function (bg) {
-                console.warn('removing', bg, 'welcomeBackground', welcomeBackground);
+                // if we are deleting the currently used background, revert to default
                 if (bg === welcomeBackground) {
-                    console.warn('removing bg which is same as welcomeBackground');
-                    Utilities.setBackground(Qt.resolvedUrl(defaultBackground));
+                    Utilities.revertBackgroundToDefault();
                 }
                 backgroundPanel.rmFile(bg);
             });
         }
     }
-
 
     tools: ToolbarItems {
         ToolbarButton {
@@ -112,6 +108,7 @@ ItemPage {
             }
 
             WallpaperGrid {
+                id: uArtGrid
                 objectName: "UbuntuArtGrid"
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -196,16 +193,12 @@ ItemPage {
     Connections {
         id: selectedItemConnection
         onSave: {
-            console.warn('selectedItemConnection.onSave', target.uri);
             Utilities.setBackground(target.uri)
         }
         onStateChanged: {
-            console.warn('selectedItemConnection.onStateChanged: new state: ', target.state);
             var trans = mainPage.activeTransfer;
             if (target.state === "saved") {
                 save(target.uri);
-                console.warn('selectedItemConnection.onStateChanged: save', target.uri);
-                console.warn('selectedItemConnection.onStateChanged: activeTransfer', trans);
 
                 // if a transfer is done, clean up
                 if (trans && trans.state === ContentTransfer.Collected) {

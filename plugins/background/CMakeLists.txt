@@ -1,8 +1,5 @@
 set(QML_SOURCES
     MainPage.qml
-    OverlayImage.qml
-    SwappableImage.qml
-    Wallpapers.qml
     WallpaperGrid.qml
     ListItemsHeader.qml
     Preview.qml

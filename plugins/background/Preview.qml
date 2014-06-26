@@ -49,7 +49,6 @@ ItemPage {
             name: "saved"
             StateChangeScript {
                 script: {
-                    console.warn('Preview.qml: saved. uri prop:', uri);
                     save();
                     pageStack.pop();
                 }

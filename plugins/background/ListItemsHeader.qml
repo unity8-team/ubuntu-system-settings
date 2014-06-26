@@ -19,11 +19,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Item {
-    /*!
-     \preliminary
-     The text that is shown as the header text.
-     \qmlproperty string text
-    */
     property alias text: label.text
     property alias image: image.source
 
@@ -62,7 +57,6 @@ Item {
             width: parent.width - image.width - image.leftMargin - anchors.leftMargin
         }
 
-
         Image {
             id: image
             readonly property double leftMargin: units.gu(1)
@@ -73,8 +67,6 @@ Item {
             height: units.gu(2.1)
             fillMode: Image.PreserveAspectFit
         }
-
-
     }
 
     MouseArea {
