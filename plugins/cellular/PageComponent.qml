@@ -35,17 +35,22 @@ ItemPage {
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
+            console.warn('systemSettingsSettings changed', key);
             if (key == "cellularDataTechnologyPreference") {
                 rdoSettings.technologyPreference = cellularDataTechnologyPreference;
                 console.warn('cellularDataTechnologyPreference changed', cellularDataTechnologyPreference);
             }
+        }
+        Component.onCompleted: {
+            var s = cellularDataTechnologyPreference;
+            rdoSettings.technologyPreference = s;
+            techPrefSelector.selectedIndex = modem.powered ? Utilities.techPrefKeyToIndex(s) : 0;
         }
     }
 
     OfonoRadioSettings {
         id: rdoSettings
         modemPath: manager.modems[0]
-        technologyPreference: systemSettingsSettings.cellularDataTechnologyPreference
         onTechnologyPreferenceChanged: Utilities.preferenceChanged(preference)
     }
 
@@ -73,13 +78,13 @@ ItemPage {
     OfonoConnMan {
         id: connMan
         modemPath: manager.modems[0]
-        onPoweredChanged: Utilities.poweredChanged(powered)
+        //onPoweredChanged: Utilities.poweredChanged(powered)
     }
 
     OfonoModem {
         id: modem
         modemPath: manager.modems[0]
-
+        onInterfacesChanged: Utilities.interfacesChanged(interfaces)
     }
 
     property string carrierName: netReg.name

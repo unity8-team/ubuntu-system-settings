@@ -111,6 +111,15 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         is that of index"""
         self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
 
+    def test_turn_off_modem(self):
+        # select 2G only
+        sleep(1)
+        self.select_preference(PREFERENCE_OFF)
+
+        sleep(3)
+
+        self.assertEqual(False, self.modem_0.GetProperties()['Powered'])
+
     def test_off_setting_disables_roaming(self):
         """Test that switching off cellular data disables roaming switch"""
         roaming_switch = self.system_settings.main_view.select_single(
@@ -147,15 +156,13 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.select_preference(PREFERENCE_2G)
 
         sleep(1)
+        self.assertEqual('gsm', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
 
         self.select_preference(PREFERENCE_ANY)
 
         sleep(1)
 
-        print self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference')
-
-        self.assertTrue(False)
-        #self.assertEqual(PREFERENCE_ANY, self.modem_0.GetProperties()['TechnologyPreference'])
+        self.assertEqual('any', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
 
     def test_that_technology_UI_is_not_inadvertently_changed_by_DBus(self):
         """Assert that if the modem, if turned off, cannot be turned on
@@ -206,28 +213,46 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         sleep(1)
 
+        # is reverted back to GSettings default
+        self.assertEqual('any', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
 
-    # def test_that_technology_UI_is_sensitive_to_radiosettings_interface(self):
-    #     """Assert that the technology UI is sensitive to the RadioSettings
-    #     interface being present"""
+    def test_that_technology_UI_is_sensitive_to_radiosettings_interface(self):
+        """Assert that changes the radiosetting interface will be reflected in the UI.
+        The reason to test this is that if the SIM is locked, the interface is absent.
+        When unlocked, it becomes available.
+        """
 
-    #     # remove radio settings interface
-    #     # this simulates locking of SIM
-    #     modem_interfaces = self.modem_0.GetProperties()['Interfaces']
-    #     modem_interfaces.remove(RADIOSETTINGS_IFACE)
-    #     self.modem_0.SetProperty('Interfaces', modem_interfaces)
+        # remove radio settings interface
+        # this simulates locking of SIM
+        modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+        modem_interfaces.remove(RADIOSETTINGS_IFACE)
+        self.modem_0.SetProperty('Interfaces', modem_interfaces)
 
-    #     sleep(1)
+        sleep(1)
 
-    #     self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_2G)
 
-    #     sleep(1)
+        sleep(1)
 
-    #     # add the radio settings interface
-    #     modem_interfaces = self.modem_0.GetProperties()['Interfaces']
-    #     modem_interfaces.append(RADIOSETTINGS_IFACE)
-    #     self.modem_0.SetProperty('Interfaces', modem_interfaces)
+        # add the radio settings interface
+        modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+        modem_interfaces.append(RADIOSETTINGS_IFACE)
+        self.modem_0.SetProperty('Interfaces', modem_interfaces)
 
-    #     sleep(1)
+        # let it be crazy and come back online trying to be in LTE mode
+        self.modem_0.Set(RADIOSETTINGS_IFACE, 'TechnologyPreference', 'lte')
+        self.modem_0.EmitSignal(
+            'org.ofono.RadioSettings',
+            'PropertyChanged',
+            'sv',
+            ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
 
-    #     self.assert_selected_preference(2)
+        sleep(1)
+
+        # assert that the preference is GSM
+        self.assert_selected_preference(1)
+
+        # assert that the modem preference matches our selected preference
+        self.assertEqual('gsm', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
+
+        self.assertEqual(1,2)

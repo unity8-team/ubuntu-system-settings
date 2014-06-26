@@ -18,14 +18,6 @@ function techPrefKeyToIndex (k) {
     return -1;
 }
 
-// // function syncTechPrefUI (powered) {
-// //     console.warn('syncTechPrefUI: ', connMan.powered, powered)
-// //     if(connMan.powered || powered) {
-// //         console.warn('syncTechPrefUI: powered, setting to', rdoSettings.technologyPreference)
-// //         techPrefSelector.selectedIndex = techPrefKeyToIndex(rdoSettings.technologyPreference)
-// //     }
-// // }
-
 function preferenceChanged (preference) {
     var userPref = systemSettingsSettings.cellularDataTechnologyPreference;
 
@@ -43,20 +35,11 @@ function preferenceChanged (preference) {
 
 }
 
-// function preferenceChanged (preference) {
-//     var newIndex = techPrefKeyToIndex(preference);
-//     console.warn('onTechnologyPreferenceChanged', preference, newIndex);
-//     if (newIndex > 0) {
-//         techPrefSelector.selectedIndex = techPrefKeyToIndex(preference);
-//     }
-
-// }
-
 function poweredChanged (powered) {
     var userPrefIndex = techPrefKeyToIndex(systemSettingsSettings.cellularDataTechnologyPreference);
     console.warn('Powered changed', powered, 'userPrefIndex', userPrefIndex, 'systemSettingsSettings.cellularDataTechnologyPreference', systemSettingsSettings.cellularDataTechnologyPreference);
 
-    // modem powered on before setting ready
+    // user preference not ready, exit
     if(userPrefIndex < 0) {
         return;
     }
@@ -86,46 +69,6 @@ function selectedIndexChanged (index) {
     }
 }
 
-
-// // function selectedIndexChanged (index) {
-// //     var key = techPrefModel.get(selectedIndex).key;
-
-// //     if (key === 'off') {
-// //         //connMan.powered = false;
-// //         console.warn('onSelectedIndexChanged wanted to power down')
-// //     } else {
-// //         //connMan.powered = true;
-// //         console.warn('onSelectedIndexChanged wanted to power Up')
-// //         console.warn('onSelectedIndexChanged changing technologyPreference to', key)
-// //         rdoSettings.technologyPreference = key
-// //     }
-// // }
-
-// // function selectedIndexChanged (index) {
-
-// //     var key = techPrefModel.get(index).key;
-// //     console.warn('selectedIndex changed', index);
-// //     if (key === 'off') {
-// //         connMan.powered = false;
-// //         console.warn('onSelectedIndexChanged wanted to power down')
-// //     } else if (key !== "") {
-// //         connMan.powered = true;
-// //         console.warn('onSelectedIndexChanged wanted to power Up')
-// //         console.warn('onSelectedIndexChanged changing technologyPreference to', key)
-// //         rdoSettings.technologyPreference = key
-// //     } else {
-// //         console.warn('onSelectedIndexChanged wanted to nuke rdoSettings', index, key)
-// //     }
-// // }
-
-
-// function selectedIndexChanged (index) {
-//     console.warn('Index changed', index);
-//     if (index === 0) {
-//         connMan.powered = false;
-//     } else {
-//         // set new radioSetting
-//         rdoSettings.technologyPreference = techPrefModel.get(index).key
-//     }
-
-// }
+function interfacesChanged (interfaces) {
+    console.warn(interfaces);
+}
