@@ -83,6 +83,10 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
     // find the first wlan adapter for now
     auto reply1 = mgr.GetDevices();
     reply1.waitForFinished();
+    if(!reply1.isValid()) {
+        qWarning() << "Could not get network device: " << reply1.error().message() << "\n";
+        return;
+    }
     auto devices = reply1.value();
 
     QDBusObjectPath dev;
@@ -157,10 +161,11 @@ struct Network : public QObject
             throw DontCare();
         type = Type::wireless;
 
-        if (!connection.contains("timestamp")) {
+        auto match = connection.find("timestamp");
+        if (match == connection.end()) {
             timestamp = 0;
         } else {
-            timestamp = connection["timestamp"].toULongLong();
+            timestamp = (*match).toULongLong();
         }
     }
 
@@ -179,9 +184,10 @@ struct Network : public QObject
         else
             mode = Mode::unknown;
 
-        if (wireless.contains("security"))
+        auto match = wireless.find("security");
+        if (match != wireless.end())
         {
-            auto security_str = wireless["security"];
+            auto security_str = *match;
             if (security_str != "802-11-wireless-security")
                 throw DontCare();
             security = Security::secured;
@@ -205,10 +211,15 @@ struct Network : public QObject
         if (timestamp != 0) {
             auto reply = m_iface.GetSecrets("802-11-wireless-security");
             reply.waitForFinished();
+            if(!reply.isValid()) {
+                qWarning() << "Error querying secrects: " << reply.error().message() << "\n";
+                return;
+            }
             auto secrects = reply.value();
 
-            if (secrects.contains("802-11-wireless-security")) {
-                auto secrects_security = secrects["802-11-wireless-security"];
+            auto match = secrects.find("802-11-wireless-security");
+            if (match != secrects.end()) {
+                auto secrects_security = *match;
 
                 if (keymgmt == "none") {
                     password = secrects_security["wep-key0"].toString();
@@ -229,6 +240,10 @@ struct Network : public QObject
     {
         auto reply = m_iface.GetSettings();
         reply.waitForFinished();
+        if(!reply.isValid()) {
+            qWarning() << "Error getting network info: " << reply.error().message() << "\n";
+            throw DontCare();
+        }
         settings = reply.value();
 
         try {
