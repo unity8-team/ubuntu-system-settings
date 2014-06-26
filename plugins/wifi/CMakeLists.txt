@@ -6,7 +6,10 @@ FramedMenuItem.qml
 HLine.qml
 IndicatorBase.qml
 MenuItemFactory.qml
+NetworkDetails.qml
+OtherNetwork.qml
 PageComponent.qml
+PreviousNetworks.qml
 RemoveBackground.qml
 SectionMenuItem.qml
 StandardMenuItem.qml
@@ -14,10 +17,17 @@ SwitchMenuItem.qml
 )
 
 add_library(UbuntuWifiPanel MODULE
+  wifidbushelper.cpp
   plugin.cpp
   unitymenumodelstack.cpp
+  previousnetworkmodel.cpp
+  wifidbushelper.h
   plugin.h
   unitymenumodelstack.h
+  previousnetworkmodel.h
+  nm_manager_proxy.h
+  nm_settings_proxy.h
+  nm_settings_connection_proxy.h
   ${QML_SOURCES}
 )
 qt5_use_modules(UbuntuWifiPanel Qml Quick DBus)
