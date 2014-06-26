@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-06-24 11:40+0200\n"
-"PO-Revision-Date: 2014-06-14 10:25+0000\n"
-"Last-Translator: JoanColl <Unknown>\n"
+"PO-Revision-Date: 2014-06-25 11:40+0000\n"
+"Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-25 06:13+0000\n"
+"X-Launchpad-Export-Date: 2014-06-26 07:11+0000\n"
 "X-Generator: Launchpad (build 17065)\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -769,7 +769,7 @@ msgstr "El programari està actualitzat"
 
 #: plugins/system-update//PageComponent.qml:139
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Inicieu la sessió al vostre compte de l'Ubuntu One"
 
 #: plugins/system-update//PageComponent.qml:154
 msgid "System update has failed."
@@ -820,7 +820,7 @@ msgstr "S'està instal·lant"
 
 #: plugins/system-update//PageComponent.qml:393
 msgid "Installed"
-msgstr ""
+msgstr "Instal·lat"
 
 #: plugins/system-update//PageComponent.qml:417
 msgid "Version: "
@@ -841,7 +841,7 @@ msgstr "Sempre"
 
 #: plugins/system-update//PageComponent.qml:501
 msgid "Credentials not found"
-msgstr ""
+msgstr "No s'han trobat les credencials"
 
 #: plugins/system-update//PageComponent.qml:531
 msgid "Installing update…"
@@ -887,7 +887,7 @@ msgstr "Brillantor"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Ajusta automàticament"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
@@ -1101,23 +1101,23 @@ msgstr "Dolenta"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "Es pot descobrir"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "No es pot descrobrir"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Dispositius connectats:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Connecta un dispositiu diferent:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Connecta un altre dispositiu:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1294,11 +1294,11 @@ msgstr "Sistema"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "Enrere"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Paràmetres del telèfon"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
@@ -1314,15 +1314,15 @@ msgstr ""
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "Sense targeta SIM"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Podeu inserir una targeta SIM més endavant."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "Per ara, no podreu fer trucades ni enviar missatges de text."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
@@ -1330,31 +1330,31 @@ msgstr ""
 
 #: wizard/qml/Pages//no-sim.qml:68 wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Omet"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "Això és tot!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Us donem la benvinguda a la comunitat de l'Ubuntu."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Gaudiu del telèfon now."
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Finalitza"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Connecta't a la xarxa Wi-Fi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "Xarxes disponibles"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
@@ -1362,11 +1362,11 @@ msgstr ""
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "Hola!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "Us donem la benvinguda a la comunitat de l'Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
@@ -1374,7 +1374,7 @@ msgstr ""
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Seleccioneu la vostra llengua"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
