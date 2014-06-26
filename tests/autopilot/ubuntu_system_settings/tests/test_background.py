@@ -8,11 +8,11 @@
 from __future__ import absolute_import
 
 import os
-from time import sleep
 
 from testtools.matchers import Equals
 
-from ubuntu_system_settings.tests import BackgroundBaseTestCase
+from ubuntu_system_settings.tests import (
+    BackgroundBaseTestCase, ACCOUNTS_IFACE)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
@@ -73,15 +73,6 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         """ Checks whether Background page is available """
         self.assertThat(self.background_page.title, Equals(_('Background')))
 
-    def test_that_the_currently_selected_background_comes_from_dbus(self):
-        """Test that background file from dbus is selected in UI"""
-        current_file = self.selected_wallpaper.source
-
-        dbus_file = os.path.realpath(self.user_props['BackgroundFile'])
-        dbus_file = 'file://%s' % dbus_file
-
-        self.assertEqual(current_file, dbus_file)
-
     def test_change_background(self):
         """Test happy path for changing background"""
 
@@ -90,7 +81,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
 
         # click a wallpaper that is not selected
         self.system_settings.main_view.pointer.click_object(
-            self.all_wallpapers[3])
+            self.all_wallpapers[2])
 
         # click set/save
         self.save_wallpaper()
@@ -105,9 +96,22 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         dbus_value = "file://%s" % self.user_proxy.GetBackgroundFile()
         self.assertEqual(dbus_value, new)
 
+    def test_that_the_currently_selected_background_comes_from_dbus(self):
+        """Test that background file from dbus is selected in UI"""
+        current_file = self.selected_wallpaper.source
 
-class EternalTestCase(BackgroundBaseTestCase):
-    """ Tests for Background Page """
+        dbus_file = os.path.realpath(self.user_proxy.GetBackgroundFile())
+        dbus_file = 'file://%s' % dbus_file
 
-    def test_go_to_sleep(self):
-        sleep(1000)
+        self.assertEqual(current_file, dbus_file)
+
+    def test_expand_collapse_custom(self):
+        """Test that clicking the custom header changes its state"""
+        custom = self.background_page.select_single(
+            objectName='customArtGrid')
+        custom_header = self.background_page.select_single(
+            objectName='CustomHeader')
+
+        self.assertEqual(custom.state, 'collapsed')
+        self.system_settings.main_view.pointer.click_object(custom_header)
+        self.assertEqual(custom.state, '')

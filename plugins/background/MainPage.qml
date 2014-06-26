@@ -39,6 +39,8 @@ ItemPage {
     signal save (string uri)
 
     /* TODO: For now hardcoded paths, later we'll use GSettings */
+    /* TODO: fix bug where rotating in uss will change default
+    background to tablet_back… thus losing track of phone_back… */
     property string defaultBackground:
         mainPage.width >= units.gu(60) ?
             "/usr/share/unity8/graphics/tablet_background.jpg" :
@@ -131,6 +133,7 @@ ItemPage {
 
             WallpaperGrid {
                 id: customGrid
+                objectName: "customArtGrid"
                 anchors.left: parent.left
                 anchors.right: parent.right
                 columns: 3

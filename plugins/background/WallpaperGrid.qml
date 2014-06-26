@@ -72,6 +72,7 @@ Column {
 
     ListItemsHeader {
         id: header
+        objectName: title.toString() + "Header"
         anchors.left: parent.left
         anchors.right: parent.right
         text: title
