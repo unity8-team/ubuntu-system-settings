@@ -8,27 +8,29 @@
 from __future__ import absolute_import
 
 import os
-
 from time import sleep
-from autopilot.introspection.dbus import StateNotFoundError
-from testtools.matchers import Equals, NotEquals, raises
+
+from testtools.matchers import Equals
 
 from ubuntu_system_settings.tests import BackgroundBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
-from ubuntuuitoolkit import emulators as toolkit_emulators
 
 def get_wallpapers_from_grid(grid):
-    return grid.select_many('*', objectName='itemImg')
+    return grid.select_many(objectName='itemImg')
+
 
 class BackgroundTestCase(BackgroundBaseTestCase):
     """ Tests for Background Page """
 
+    def setUp(self):
+        super(BackgroundTestCase, self).setUp()
+        self.background_page = self.system_settings.main_view.background_page
+
     def get_wallpapergrid(self, name):
         """Return a WallpaperGrid with given name, or
         all of them"""
-        return self.system_settings.main_view.background_page.\
-            select_single('WallpaperGrid', objectName=name)
+        return self.select_single('WallpaperGrid', objectName=name)
 
     def get_wallpapers(self, name=None):
         """Return individual wallpapers (QQuickImage) in given grid,
@@ -41,8 +43,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
     @property
     def all_wallpapergrids(self):
         """Return all WallpaperGrids"""
-        return self.system_settings.main_view.background_page.\
-            select_many('WallpaperGrid')
+        return self.background_page.select_many('WallpaperGrid')
 
     @property
     def all_wallpapers(self):
@@ -56,9 +57,8 @@ class BackgroundTestCase(BackgroundBaseTestCase):
     def selected_wallpaper(self):
         """Return the currently selected QQuickImage.
         We grab the orange border and traverse a bit to get to this image"""
-        selected_shape = self.system_settings.main_view.background_page.\
-            select_single(
-                'UbuntuShape', objectName='SelectedShape', visible=True)
+        selected_shape = self.background_page.select_single(
+            'UbuntuShape', objectName='SelectedShape', visible=True)
 
         return selected_shape.get_parent().select_single(
             'QQuickImage', objectName='itemImg')
@@ -66,23 +66,16 @@ class BackgroundTestCase(BackgroundBaseTestCase):
     def save_wallpaper(self):
         """Click on Set/Save button when previewing a wallpaper"""
         save = self.system_settings.main_view.wait_select_single(
-            '*', objectName='saveButton')
+            objectName='saveButton')
         self.system_settings.main_view.scroll_to_and_click(save)
 
-    def test_background_page(self):
+    def test_background_page_title_is_correct(self):
         """ Checks whether Background page is available """
-        self.assertThat(
-            self.system_settings.main_view.background_page,
-            NotEquals(None)
-        )
-        self.assertThat(
-            self.system_settings.main_view.background_page.title,
-            Equals(_('Background'))
-        )
+        self.assertThat(self.background_page.title, Equals(_('Background')))
 
     def test_that_the_currently_selected_background_comes_from_dbus(self):
         """Test that background file from dbus is selected in UI"""
-        current_file = self.selected_wallpaper.get_properties()['source']
+        current_file = self.selected_wallpaper.source
 
         dbus_file = os.path.realpath(self.user_props['BackgroundFile'])
         dbus_file = 'file://%s' % dbus_file
@@ -93,16 +86,17 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         """Test happy path for changing background"""
 
         # wallpaper source that is selected now
-        old = self.selected_wallpaper.get_properties()['source']
+        old = self.selected_wallpaper.source
 
         # click a wallpaper that is not selected
-        self.system_settings.main_view.pointer.click_object(self.all_wallpapers[3])
+        self.system_settings.main_view.pointer.click_object(
+            self.all_wallpapers[3])
 
         # click set/save
         self.save_wallpaper()
 
         # the newly selected wallpaper source
-        new = self.selected_wallpaper.get_properties()['source']
+        new = self.selected_wallpaper.source
 
         # assert that UI is updated
         self.assertNotEqual(new, old)
