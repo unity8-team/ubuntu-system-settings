@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.3+14.10.20140626.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * updated translation template
+
+  [ Jussi Pakkanen ]
+  * Wifi: * Connecto to Other (hidden) Network * Previous Networks
+
+  [ Antti Kaijanmäki ]
+  * Wifi: * Connecto to Other (hidden) Network * Previous Networks
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Jun 2014 18:14:08 +0000
+
 ubuntu-system-settings (0.3+14.10.20140623-0ubuntu1) utopic; urgency=low
 
   [ Mathieu Trudel-Lapierre ]
