@@ -61,24 +61,37 @@ public:
 
     QSharedPointer<Device> getDeviceFromAddress(const QString &address);
     QSharedPointer<Device> getDeviceFromPath(const QString &path);
+    QString adapterName() const { return m_adapterName; }
 
 public:
     bool isDiscovering() const { return m_isDiscovering; }
+    bool isDiscoverable() const { return m_isDiscoverable; }
     void pairDevice(const QString &address);
+    void stopDiscovery();
+    void startDiscovery();
+    void toggleDiscovery();
 
 Q_SIGNALS: 
     void discoveringChanged(bool isDiscovering);
+    void discoverableChanged(bool isDiscoverable);
 
 private:
     QDBusConnection m_dbus;
     QDBusInterface m_bluezManager;
 
+    void setProperties(const QMap<QString,QVariant> &properties);
+    void updateProperty(const QString &key, const QVariant &value);
+
+    QString m_adapterName;
+    QString m_adapterAddress;
+    bool m_isPairable = false;
     bool m_isDiscovering = false;
+    bool m_isDiscoverable = false;
     QTimer m_timer;
-    void stopDiscovery();
-    void startDiscovery();
-    void toggleDiscovery();
+    QTimer m_discoverableTimer;
     void restartTimer();
+    void trySetDiscoverable(bool discoverable);
+    void setDiscoverable(bool discoverable);
 
     QScopedPointer<QDBusInterface> m_bluezAdapter;
     void clearAdapter();
@@ -93,7 +106,9 @@ private:
     void emitRowChanged(int row);
 
 private Q_SLOTS:
+    void slotPropertyChanged(const QString &key, const QDBusVariant &value);
     void slotTimeout();
+    void slotEnableDiscoverable();
     void slotDeviceChanged();
     void slotDeviceCreated(const QDBusObjectPath &);
     void slotDeviceRemoved(const QDBusObjectPath &);
@@ -110,7 +125,7 @@ class DeviceFilter: public QSortFilterProxyModel
 public:
     DeviceFilter() {}
     virtual ~DeviceFilter() {}
-    void filterOnType(Device::Type);
+    void filterOnType(const QVector<Device::Type>);
     void filterOnConnections(Device::Connections);
 
 protected:
@@ -118,7 +133,7 @@ protected:
     virtual bool lessThan(const QModelIndex&, const QModelIndex&) const;
 
 private:
-    Device::Type m_type = Device::Type::Other;
+    QVector<Device::Type> m_types = QVector<Device::Type>();
     bool m_typeEnabled = false;
     Device::Connections m_connections = Device::Connection::Connected;
     bool m_connectionsEnabled = false;

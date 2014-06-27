@@ -19,11 +19,31 @@
 #include <QtQml/QQmlContext>
 #include "plugin.h"
 #include "unitymenumodelstack.h"
+#include "wifidbushelper.h"
+#include "previousnetworkmodel.h"
+
+namespace {
+
+WifiDbusHelper *s = nullptr;
+
+QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
+{
+    // Why are we not using static WifiDbusHelper here, you ask?
+    // Because I'm not sure if the Qml engine tries to delete the
+    // pointer we return when it is shuts down.
+    if(!s)
+        s = new WifiDbusHelper(engine);
+    return s;
+}
+
+}
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wifi"));
     qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
+    qmlRegisterSingletonType<WifiDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
+    qmlRegisterType<PreviousNetworkModel>(uri, 1, 0, "PreviousNetworkModel");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

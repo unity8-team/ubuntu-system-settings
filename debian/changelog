@@ -1,3 +1,110 @@
+ubuntu-system-settings (0.3+14.10.20140626.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * updated translation template
+
+  [ Jussi Pakkanen ]
+  * Wifi: * Connecto to Other (hidden) Network * Previous Networks
+
+  [ Antti Kaijanmäki ]
+  * Wifi: * Connecto to Other (hidden) Network * Previous Networks
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Jun 2014 18:14:08 +0000
+
+ubuntu-system-settings (0.3+14.10.20140623-0ubuntu1) utopic; urgency=low
+
+  [ Mathieu Trudel-Lapierre ]
+  * Implement discoverability and some bluetooth fixes: -
+    Discoverability: make the system visible to other bluetooth devices
+    - Trusted: when successfully paired and connected, mark device as
+    Trusted so it can automatically connect again. - Connect the Audio
+    interface for all audio devices, including Headsets. Some bluetooth
+    audio devices that don't contain a microphone still show up as
+    Headsets, and won't connect successfully otherwise. This will still
+    work for standard headsets, since Audio connects all audio
+    interfaces. - Stop discovery when a device is selected for
+    connection, and it sometimes causes connection attempts to fail.
+    (LP: #1268047)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 23 Jun 2014 13:52:19 +0000
+
+ubuntu-system-settings (0.3+14.10.20140618-0ubuntu1) utopic; urgency=medium
+
+  [ Michael Terry ]
+  * Add Wi-Fi support to the system settings wizard
+  * Correctly set up language variables before unity8 runs the first time
+
+  [ Iain Lane ]
+  * When connecting to whoopsie-preferences on the bus, don't require
+    the interface to be valid. It won't be when the service has exited.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Jun 2014 15:08:38 +0000
+
+ubuntu-system-settings (0.2+14.10.20140612-0ubuntu1) utopic; urgency=low
+
+  [ Mathieu Trudel-Lapierre ]
+  * Enable devices other than headsets: headphones and generic audio devices,
+    and make the strings referring to headset more generic.
+
+  [ jonas-drange ]
+  * Rewrite "Keyboard sound" component in "Sound" panel to use
+    "LanguagePlugin" which provides means to toggle keyboard sound
+    setting.
+
+  [ Iain Lane ]
+  * time-date: Don't try to search while the model is building. Display
+    an ActivityIndicator when searching while constructing the model to
+    avoid confusing message. (LP: #1326475)
+  * Make time-date tests more robust in the face of things taking a
+    while to complete. (LP: #1329245)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 12 Jun 2014 16:36:03 +0000
+
+ubuntu-system-settings (0.2) UNRELEASED; urgency=medium
+
+  * Bump version for new package ubuntu-system-settings-wizard
+
+ -- Michael Terry <mterry@ubuntu.com>  Thu, 10 Apr 2014 15:21:31 -0400
+
+ubuntu-system-settings (0.1+14.10.20140606-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Use XDG_GREETER_DATA_DIR to store background files in a folder that
+    the greeter can also read. This fixes the recent regression in not
+    being able to choose a ContentHub file for the welcome screen. (LP:
+    #1325505)
+
+  [ Iain Lane ]
+  * Inline setUpImages(), otherwise the function call doesn't do
+    anything.
+
+  [ Brendan Donegan ]
+  * Make test_tz_list_initially_empty more robust by using
+    wait_select_single instead of select_single to get the label. (LP:
+    #1319711)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 06 Jun 2014 14:39:39 +0000
+
+ubuntu-system-settings (0.1+14.10.20140604-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Use the new header design. There is currently only one page in USS
+    that includes a toolbar action, the background panel has a button to
+    import photos from gallery. It works well with the new header.
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Diego Sarmentero ]
+  * Not dismiss Credentials warning with other messages. .
+
+  [ Brendan Donegan ]
+  * Add test for Check for Updates button and fix search test cases,
+    plus add a new one for searches that shouldn't find anything.
+  * Get vendor and model from dmi on desktops for test_hardware_name
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 04 Jun 2014 09:02:49 +0000
+
 ubuntu-system-settings (0.1+14.10.20140521-0ubuntu1) utopic; urgency=low
 
   [ Brendan Donegan ]
