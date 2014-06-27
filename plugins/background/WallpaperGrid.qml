@@ -29,8 +29,15 @@ Column {
 
     property var bgmodel
     property int columns
-    property int itemWidth: ((mainPage.width - (grid.spacing * (columns - 1))) - (grid.anchors.margins * 2)) / columns
+
+    // actual grid width, that is the main page's width minus spacing and margins
+    property int gridWidth: mainPage.width
+                            - ((columns - 1) * grid.spacing)
+                            - (grid.anchors.leftMargin * 2)
+
+    property int itemWidth: gridWidth / columns
     property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
+
     property string title
 
     // path to current background
@@ -42,7 +49,7 @@ Column {
     // can backgrounds be removed
     property bool editable: false
 
-    // the grid a user can populate
+    // user can add/remove backgrounds
     property bool isCustom: false
 
     // plugin
@@ -56,6 +63,7 @@ Column {
         right: parent.right
     }
 
+    // if collapsed, reduce height to that of the header
     height: state === "" ? childrenRect.height : header.height
     clip: true
     visible: bgmodel.length > 0 || isCustom
@@ -63,10 +71,6 @@ Column {
     states: [
         State {
             name: "collapsed"
-            PropertyChanges {
-                target: grid
-                height: 0
-            }
         }
     ]
 
@@ -98,38 +102,47 @@ Column {
         anchors {
             left: parent.left
             right: parent.right
-            margins: units.gu(2)
+            leftMargin: units.gu(2)
+            rightMargin: units.gu(2)
         }
         columns: wallpaperGrid.columns
         height: childrenRect.height
-        clip: true
+        spacing: units.gu(2)
+        visible: parent.state === ""
         Repeater {
             objectName: "gridRepeater"
             model: bgmodel
             Item {
                 width: itemWidth
                 height: itemHeight
-                UbuntuShape {
-                    id: itemBorder
-                    anchors.fill: parent
-                    color: UbuntuColors.orange
-                    radius: "medium"
-                    visible: (current === modelData) && (itemImage.status === Image.Ready)
-                    objectName: "SelectedShape"
-                }
-                UbuntuShape {
+                // Rectangle {
+                //     id: itemBorder
+                //     anchors.fill: parent
+                //     color: UbuntuColors.orange
+                //     visible: (current === modelData) && (itemImage.status === Image.Ready)
+                //     objectName: "SelectedShape"
+                // }
+                Rectangle {
                     anchors.centerIn: parent
-                    anchors.margins: units.dp(5)
-                    width: itemWidth - (anchors.margins * 2)
-                    height: itemHeight  - (anchors.margins * 2)
-                    radius: itemBorder.radius
-                    image: Image {
+                    width: itemWidth
+                    height: itemHeight
+                    Rectangle {
+                        border.width: units.gu(1)
+                        border.color: UbuntuColors.orange
+                        height: itemHeight + units.gu(2)
+                        anchors.centerIn: parent
+                        width: itemWidth + units.gu(2)
+                        visible: (current === modelData) && (itemImage.status === Image.Ready)
+                        z: 1
+                        color: "transparent"
+                    }
+                    Image {
                         property bool current: current === modelData
                         id: itemImage
                         objectName: "itemImg"
                         source: modelData
-                        width: itemWidth - (anchors.margins * 2)
-                        height: itemHeight  - (anchors.margins * 2)
+                        width: parent.width
+                        height: parent.height
                         sourceSize.width: 512
                         fillMode: Image.PreserveAspectCrop
                         asynchronous: true
@@ -187,36 +200,15 @@ Column {
         visible: !parent.isCustom
     }
 
-    Row {
-        id: customButtons
+    BatchRemoveBackgrounds {
         visible: parent.isCustom
         spacing: units.gu(2)
         width: parent.width - spacing * 2
         anchors {
             horizontalCenter: parent.horizontalCenter
         }
-        height: addCustomBgsButton.height + (spacing * 2)
-        Button {
-            id: addCustomBgsButton
-            action: selectDefaultPeer
-            objectName: "addCustomBackgroundsButton"
-            text: i18n.tr("Add an Image…")
-            width: (customButtons.width - parent.spacing) / 2
-            anchors {
-                verticalCenter: parent.verticalCenter
-            }
-        }
-
-        Button {
-            id: rmCustomBgsButton
-            action: deleteCustomBackgrounds
-            gradient: UbuntuColors.greyGradient
-            objectName: "removeCustomBackgroundsButton"
-            text: i18n.tr("Remove Images…")
-            width: (customButtons.width - parent.spacing) / 2
-            anchors {
-                verticalCenter: parent.verticalCenter
-            }
-        }
+        height: children[0].height + (spacing * 2)
+        buttonWidth: (width - spacing) / 2
     }
+
 }

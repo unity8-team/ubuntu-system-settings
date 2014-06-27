@@ -24,7 +24,7 @@ Item {
 
     signal clicked(variant mouse)
 
-    height: units.gu(5)
+    height: units.gu(6)
 
     Item {
 

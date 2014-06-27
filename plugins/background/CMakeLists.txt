@@ -3,6 +3,7 @@ set(QML_SOURCES
     WallpaperGrid.qml
     ListItemsHeader.qml
     Preview.qml
+    BatchRemoveBackgrounds.qml
     utilities.js
 )
 add_library(UbuntuBackgroundPanel MODULE

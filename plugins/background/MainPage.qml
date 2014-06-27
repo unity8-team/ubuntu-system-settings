@@ -24,6 +24,7 @@ import SystemSettings 1.0
 import Ubuntu.Content 0.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Background 1.0
 import "utilities.js" as Utilities
 
@@ -65,19 +66,19 @@ ItemPage {
     }
 
     // Delete all custom backgrounds
-    Action {
-        id: deleteCustomBackgrounds
-        onTriggered: {
-            var bgs = backgroundPanel.customBackgrounds.slice(0);
-            bgs.forEach(function (bg) {
-                // if we are deleting the currently used background, revert to default
-                if (bg === welcomeBackground) {
-                    Utilities.revertBackgroundToDefault();
-                }
-                backgroundPanel.rmFile(bg);
-            });
-        }
-    }
+    // Action {
+    //     id: deleteCustomBackgrounds
+    //     onTriggered: {
+    //             var bgs = backgroundPanel.customBackgrounds.slice(0);
+    //             bgs.forEach(function (bg) {
+    //                 // if we are deleting the currently used background, revert to default
+    //                 if (bg === welcomeBackground) {
+    //                     Utilities.revertBackgroundToDefault();
+    //                 }
+    //                 backgroundPanel.rmFile(bg);
+    //             });
+    //     }
+    // }
 
     tools: ToolbarItems {
         ToolbarButton {
