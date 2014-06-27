@@ -32,11 +32,13 @@ Column {
 
     // actual grid width, that is the main page's width minus spacing and margins
     property int gridWidth: mainPage.width
+                            // subtract spacing
                             - ((columns - 1) * grid.spacing)
-                            - (grid.anchors.leftMargin * 2)
+                            // subtract margins
+                            - (grid.anchors.leftMargin + grid.anchors.rightMargin)
 
     property int itemWidth: gridWidth / columns
-    property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
+    property int itemHeight: (mainPage.height / gridWidth) * itemWidth
 
     property string title
 
