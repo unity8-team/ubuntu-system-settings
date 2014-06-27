@@ -73,6 +73,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
                 if (!appinfo) {
                     g_warning ("Couldn't parse desktop file %s",
                                desktopFileName);
+                    g_free (desktopFileName);
                     return;
                 }
 
