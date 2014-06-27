@@ -34,6 +34,7 @@ static QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
     qmlRegisterSingletonType<CellularDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
 }
 

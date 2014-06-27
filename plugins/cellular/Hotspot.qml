@@ -3,8 +3,6 @@
  *
  * Copyright (C) 2014 Canonical Ltd.
  *
- * Contact: Iain Lane <iain.lane@canonical.com>
- *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
  * by the Free Software Foundation.
@@ -36,8 +34,6 @@ ItemPage {
 
         Label {
             width: parent.width
-            //autoSize: true
-            //readOnly: true
             wrapMode: Text.WordWrap
             anchors.margins: units.gu(2)
             text : i18n.tr("A Wi-Fi hotspot allows other devices to use your cellular data connection. Normal data charges apply.") 

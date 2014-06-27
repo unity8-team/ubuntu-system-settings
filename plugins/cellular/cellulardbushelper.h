@@ -41,11 +41,11 @@ public:
     void destroyHotspot();
 
 private:
-    QByteArray ssid;
-    QString password;
-    QString settingsPath;
-    QDBusObjectPath devicePath;
-    bool isActive;
+    QByteArray m_ssid;
+    QString m_password;
+    QString m_settingsPath;
+    QDBusObjectPath m_devicePath;
+    bool m_isActive;
 };
 
 

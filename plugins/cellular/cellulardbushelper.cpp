@@ -158,32 +158,32 @@ QDBusObjectPath detectWirelessDevice() {
 }
 
 CellularDbusHelper::CellularDbusHelper(QObject *parent) : QObject(parent),
-        devicePath(detectWirelessDevice()) {
+        m_devicePath(detectWirelessDevice()) {
     static bool isRegistered = false;
     if(!isRegistered) {
         qDBusRegisterMetaType<nmConnectionArg>();
         isRegistered = true;
     }
-    if(!detectAdhoc(settingsPath, ssid, password, isActive)) {
-        settingsPath = "";
-        ssid = "Ubuntu hotspot";
-        password = "";
-        isActive = false;
+    if(!detectAdhoc(m_settingsPath, m_ssid, m_password, m_isActive)) {
+        m_settingsPath = "";
+        m_ssid = "Ubuntu hotspot";
+        m_password = "";
+        m_isActive = false;
     }
 }
 
 QByteArray CellularDbusHelper::getHotspotName() {
-    return ssid;
+    return m_ssid;
 }
 
 QString CellularDbusHelper::getHotspotPassword() {
-    return password;
+    return m_password;
 }
 
 void CellularDbusHelper::setupHotspot(QByteArray ssid_, QString password_) {
-    ssid = ssid_;
-    password = password_;
-    if(!settingsPath.isEmpty()) {
+    m_ssid = ssid_;
+    m_password = password_;
+    if(!m_settingsPath.isEmpty()) {
         // Prints a warning message if the connection has disappeared already.
         destroyHotspot();
         // NM returns from the dbus call immediately but only destroys the
@@ -191,12 +191,12 @@ void CellularDbusHelper::setupHotspot(QByteArray ssid_, QString password_) {
         // So this is the best we can do with reasonable effort.
         QThread::sleep(1);
     }
-    startAdhoc(ssid, password, devicePath);
-    detectAdhoc(settingsPath, ssid, password, isActive);
+    startAdhoc(m_ssid, m_password, m_devicePath);
+    detectAdhoc(m_settingsPath, m_ssid, m_password, m_isActive);
 }
 
 bool CellularDbusHelper::isHotspotActive() {
-    return isActive;
+    return m_isActive;
 }
 
 void CellularDbusHelper::disableHotspot() {
@@ -211,7 +211,7 @@ void CellularDbusHelper::disableHotspot() {
                 QDBusConnection::systemBus());
         QDBusReply<QVariant> conname = iface.call("Get", activeIface, connProp);
         QDBusObjectPath backingConnection = qvariant_cast<QDBusObjectPath>(conname.value());
-        if(backingConnection.path() == settingsPath) {
+        if(backingConnection.path() == m_settingsPath) {
             mgr.DeactivateConnection(aConn);
             return;
         }
@@ -220,16 +220,16 @@ void CellularDbusHelper::disableHotspot() {
 }
 
 void CellularDbusHelper::destroyHotspot() {
-    if(settingsPath.isEmpty()) {
+    if(m_settingsPath.isEmpty()) {
         qWarning() << "Tried to destroy nonexisting hotspot.\n";
         return;
     }
-    QDBusInterface control(nm_service, settingsPath, nm_connection_interface,
+    QDBusInterface control(nm_service, m_settingsPath, nm_connection_interface,
             QDBusConnection::systemBus());
     QDBusReply<void> reply = control.call("Delete");
     if(!reply.isValid()) {
         qWarning() << "Could not disconnect adhoc network: " << reply.error().message() << "\n";
     } else {
-        isActive = false;
+        m_isActive = false;
     }
 }
