@@ -102,8 +102,8 @@ QList<ClickModel::Click> ClickModel::buildClickList()
         if (hooks.isValid()) {
             QVariantMap allHooks(hooks.toMap());
 
-            if (allHooks.contains(newClick.name)) {
-                QVariantMap appHooks(allHooks.value(newClick.name).toMap());
+            if (allHooks.contains(newClick.name.toLower())) {
+                QVariantMap appHooks(allHooks.value(newClick.name.toLower()).toMap());
                 if (!appHooks.isEmpty() &&
                     appHooks.contains("desktop") &&
                     directory.exists()) {
@@ -111,8 +111,8 @@ QList<ClickModel::Click> ClickModel::buildClickList()
                                 directory.absoluteFilePath(
                                     appHooks.value("desktop",
                                                    "undefined").toString()));
-                    const char * desktopFileName =
-                        desktopFile.fileName().toLocal8Bit().constData();
+                    gchar * desktopFileName =
+                        g_strdup(desktopFile.fileName().toLocal8Bit().constData());
                     g_debug ("Desktop file: %s", desktopFileName);
                     if (desktopFile.exists()) {
                         GDesktopAppInfo *appinfo =
@@ -150,6 +150,7 @@ QList<ClickModel::Click> ClickModel::buildClickList()
                             }
                         }
                     }
+                    g_free (desktopFileName);
                 }
             }
         }
