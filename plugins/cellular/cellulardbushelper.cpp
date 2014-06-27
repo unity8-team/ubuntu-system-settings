@@ -39,80 +39,38 @@ const QString nm_connection_interface("org.freedesktop.NetworkManager.Settings.C
 const QString nm_dbus_path("/org/freedesktop/NetworkManager");
 const QString nm_device_interface("org.freedesktop.NetworkManager.Device");
 
-void enableHotspot(const QString &ssid, const QString &password,
-        const QDBusObjectPath &device, const QDBusObjectPath &specific) {
-    nmConnectionArg connection;
-
-    QVariantMap wireless;
-    wireless[QString("security")] = QVariant(QString("802-11-wireless-security"));
-    wireless[QString("ssid")] = QVariant(ssid.toUtf8());
-    wireless[QString("mode")] = QVariant(QString("adhoc"));
-    connection["802-11-wireless"] = wireless;
-
-    QVariantMap connsettings;
-    connsettings[QString("autoconnect")] = QVariant(false);
-    connsettings[QString("uuid")] = QVariant(QString("aab22b5d-7342-48dc-8920-1b7da31d6829"));
-    connsettings[QString("type")] = QVariant(QString("802-11-wireless"));
-    connection["connection"] = connsettings;
-
-    QVariantMap ipv4;
-    ipv4[QString("addressess")] = QVariant(QStringList());
-    ipv4[QString("dns")] = QVariant(QStringList());
-    ipv4[QString("method")] = QVariant(QString("shared"));
-    ipv4[QString("routes")] = QVariant(QStringList());
-    connection["ipv4"] = ipv4;
-
-    QVariantMap security;
-    security[QString("proto")] = QVariant(QStringList{"rsn"});
-    security[QString("pairwise")] = QVariant(QStringList{"ccmp"});
-    security[QString("group")] = QVariant(QStringList{"ccmp"});
-    security[QString("key-mgmt")] = QVariant(QString("wpa-psk"));
-    security[QString("psk")] = QVariant(password);
-    connection["802-11-wireless-security"] = security;
-
-    OrgFreedesktopNetworkManagerInterface mgr(nm_service,
-            nm_dbus_path, QDBusConnection::systemBus());
-    auto reply = mgr.AddAndActivateConnection(connection, device, specific);
-    reply.waitForFinished();
-    if(!reply.isValid()) {
-        qDebug() << "Creating hotspot failed: " << reply.error().message() << "\n";
-    } else {
-        qDebug() << "Successfully created wifi hotspot.\n";
-    }
-}
-
 #define NM_METHOD_NAME "AddAndActivateConnection"
 
-int startAdhoc(const QByteArray &ssid, const QString &password, const QDBusObjectPath &devicePath) {
+void startAdhoc(const QByteArray &ssid, const QString &password, const QDBusObjectPath &devicePath) {
     nmConnectionArg connection;
 
     QDBusObjectPath specific("/");
 
     QVariantMap wireless;
-    wireless[QString("security")] = QVariant(QString("802-11-wireless-security"));
-    wireless[QString("ssid")] = QVariant(ssid);
-    wireless[QString("mode")] = QVariant(QString("adhoc"));
+    wireless[QStringLiteral("security")] = QVariant(QStringLiteral("802-11-wireless-security"));
+    wireless[QStringLiteral("ssid")] = QVariant(ssid);
+    wireless[QStringLiteral("mode")] = QVariant(QStringLiteral("adhoc"));
     connection["802-11-wireless"] = wireless;
 
     QVariantMap connsettings;
-    connsettings[QString("autoconnect")] = QVariant(false);
-    connsettings[QString("uuid")] = QVariant(QString("aab22b5d-7342-48dc-8920-1b7da31d6829"));
-    connsettings[QString("type")] = QVariant(QString("802-11-wireless"));
+    connsettings[QStringLiteral("autoconnect")] = QVariant(false);
+    connsettings[QStringLiteral("uuid")] = QVariant(QStringLiteral("aab22b5d-7342-48dc-8920-1b7da31d6829"));
+    connsettings[QStringLiteral("type")] = QVariant(QStringLiteral("802-11-wireless"));
     connection["connection"] = connsettings;
 
     QVariantMap ipv4;
-    ipv4[QString("addressess")] = QVariant(QStringList());
-    ipv4[QString("dns")] = QVariant(QStringList());
-    ipv4[QString("method")] = QVariant(QString("shared"));
-    ipv4[QString("routes")] = QVariant(QStringList());
+    ipv4[QStringLiteral("addressess")] = QVariant(QStringList());
+    ipv4[QStringLiteral("dns")] = QVariant(QStringList());
+    ipv4[QStringLiteral("method")] = QVariant(QStringLiteral("shared"));
+    ipv4[QStringLiteral("routes")] = QVariant(QStringList());
     connection["ipv4"] = ipv4;
 
     QVariantMap security;
-    security[QString("proto")] = QVariant(QStringList{"rsn"});
-    security[QString("pairwise")] = QVariant(QStringList{"ccmp"});
-    security[QString("group")] = QVariant(QStringList{"ccmp"});
-    security[QString("key-mgmt")] = QVariant(QString("wpa-psk"));
-    security[QString("psk")] = QVariant(password);
+    security[QStringLiteral("proto")] = QVariant(QStringList{"rsn"});
+    security[QStringLiteral("pairwise")] = QVariant(QStringList{"ccmp"});
+    security[QStringLiteral("group")] = QVariant(QStringList{"ccmp"});
+    security[QStringLiteral("key-mgmt")] = QVariant(QStringLiteral("wpa-psk"));
+    security[QStringLiteral("psk")] = QVariant(password);
     connection["802-11-wireless-security"] = security;
 
     OrgFreedesktopNetworkManagerInterface mgr(nm_service,
@@ -121,12 +79,9 @@ int startAdhoc(const QByteArray &ssid, const QString &password, const QDBusObjec
     auto reply = mgr.AddAndActivateConnection(connection, devicePath, specific);
     reply.waitForFinished();
     if(!reply.isValid()) {
-        printf("Failed to start adhoc network: %s\n", reply.error().message().toUtf8().data());
+        qWarning() << "Failed to start adhoc network: " << reply.error().message() << "\n";
     }
-    return 0;
 }
-
-#include<cassert>
 
 bool detectAdhoc(QString &dbusPath, QByteArray &ssid, QString &password, bool &isActive) {
     static const QString activeIface("org.freedesktop.NetworkManager.Connection.Active");
@@ -265,7 +220,10 @@ void CellularDbusHelper::disableHotspot() {
 }
 
 void CellularDbusHelper::destroyHotspot() {
-    assert(!settingsPath.isEmpty());
+    if(settingsPath.isEmpty()) {
+        qWarning() << "Tried to destroy nonexisting hotspot.\n";
+        return;
+    }
     QDBusInterface control(nm_service, settingsPath, nm_connection_interface,
             QDBusConnection::systemBus());
     QDBusReply<void> reply = control.call("Delete");
@@ -274,5 +232,4 @@ void CellularDbusHelper::destroyHotspot() {
     } else {
         isActive = false;
     }
-
 }

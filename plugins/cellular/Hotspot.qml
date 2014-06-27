@@ -34,6 +34,15 @@ ItemPage {
 
         anchors.fill: parent
 
+        Label {
+            width: parent.width
+            //autoSize: true
+            //readOnly: true
+            wrapMode: Text.WordWrap
+            anchors.margins: units.gu(2)
+            text : i18n.tr("A Wi-Fi hotspot allows other devices to use your cellular data connection. Normal data charges apply.") 
+        }
+
         ListItem.Standard {
             text: i18n.tr("Hotspot")
             control: Switch {
@@ -78,7 +87,7 @@ ItemPage {
         }
 
         ListItem.Standard {
-            text: i18n.tr("Password visible")
+            text: i18n.tr("Show key")
             id: passwordVisible
             control: Switch {
                 id: passwordVisibleSwitch
