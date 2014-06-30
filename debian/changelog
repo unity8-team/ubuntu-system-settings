@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.4+14.10.20140623-0ubuntu1) utopic; urgency=low
+
+  [ Mathieu Trudel-Lapierre ]
+  * Implement discoverability and some bluetooth fixes: -
+    Discoverability: make the system visible to other bluetooth devices
+    - Trusted: when successfully paired and connected, mark device as
+    Trusted so it can automatically connect again. - Connect the Audio
+    interface for all audio devices, including Headsets. Some bluetooth
+    audio devices that don't contain a microphone still show up as
+    Headsets, and won't connect successfully otherwise. This will still
+    work for standard headsets, since Audio connects all audio
+    interfaces. - Stop discovery when a device is selected for
+    connection, and it sometimes causes connection attempts to fail.
+    (LP: #1268047)
+
+ -- Jonas G. Drange <jonas.drange@canonical.com>  Mon, 24 Jun 2014 13:52:19 +0000
+
 ubuntu-system-settings (0.3+14.10.20140623-0ubuntu1) utopic; urgency=low
 
   [ Mathieu Trudel-Lapierre ]
