@@ -30,7 +30,6 @@ import "utilities.js" as Utilities
 
 ItemPage {
     id: root
-    objectName: 'soundPage'
 
     objectName: "soundPage"
 
