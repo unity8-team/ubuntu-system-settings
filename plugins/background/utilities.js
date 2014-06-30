@@ -26,3 +26,19 @@ function revertBackgroundToDefault () {
     setBackground(Qt.resolvedUrl(mainPage.defaultBackground));
     uArtGrid.state = "";
 }
+
+function deSelectBackgrounds (repeater) {
+    for (var i=0, j=repeater.count; i < j; i++) {
+        repeater.itemAt(i).state = "";
+    }
+}
+
+function getSelected (repeater) {
+    var s = 0;
+    for (var i=0, j=repeater.count; i < j; i++) {
+        if (repeater.itemAt(i).state === "selected") {
+            s++;
+        }
+    }
+    return s;
+}

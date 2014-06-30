@@ -1,9 +1,9 @@
+add_subdirectory(Components)
+
 set(QML_SOURCES
     MainPage.qml
     WallpaperGrid.qml
-    ListItemsHeader.qml
     Preview.qml
-    BatchRemoveBackgrounds.qml
     utilities.js
 )
 add_library(UbuntuBackgroundPanel MODULE

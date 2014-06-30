@@ -22,6 +22,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
+import "Components"
 import "utilities.js" as Utilities
 
 Column {
@@ -73,6 +74,10 @@ Column {
     states: [
         State {
             name: "collapsed"
+            PropertyChanges {
+                target: grid
+                visible: false
+            }
         }
     ]
 
@@ -111,33 +116,39 @@ Column {
         height: childrenRect.height
         spacing: units.gu(2)
         visible: parent.state === ""
+        states: [
+            State {
+                name: ""
+                StateChangeScript {
+                    name: "deSelectBackgrounds"
+                    script: Utilities.deSelectBackgrounds(gridRepeater);
+                }
+            },
+            State {
+                name: "selection"
+            }
+        ]
         Repeater {
+            id: gridRepeater
             objectName: "gridRepeater"
             model: bgmodel
             Item {
                 width: itemWidth
                 height: itemHeight
-                // Rectangle {
-                //     id: itemBorder
-                //     anchors.fill: parent
-                //     color: UbuntuColors.orange
-                //     visible: (current === modelData) && (itemImage.status === Image.Ready)
-                //     objectName: "SelectedShape"
-                // }
+                id: gridItem
+                states: [
+                    State {
+                        name: "selected"
+                        PropertyChanges {
+                            target: selectionTick
+                            visible: true
+                        }
+                    }
+                ]
                 Rectangle {
                     anchors.centerIn: parent
-                    width: itemWidth
-                    height: itemHeight
-                    Rectangle {
-                        border.width: units.gu(1)
-                        border.color: UbuntuColors.orange
-                        height: itemHeight + units.gu(2)
-                        anchors.centerIn: parent
-                        width: itemWidth + units.gu(2)
-                        visible: (current === modelData) && (itemImage.status === Image.Ready)
-                        z: 1
-                        color: "transparent"
-                    }
+                    width: parent.width
+                    height: parent.height
                     Image {
                         property bool current: current === modelData
                         id: itemImage
@@ -150,6 +161,12 @@ Column {
                         asynchronous: true
                         smooth: true
                     }
+                    HighlightedOverlay {
+                        id: highLight
+                    }
+                    SelectedOverlay {
+                        id: selectionTick
+                    }
                     ActivityIndicator {
                         anchors.centerIn: parent
                         running: parent.status === Image.Loading
@@ -159,17 +176,6 @@ Column {
                     Item {
                         id: emptyItemForCaller
                         anchors.centerIn: parent
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onPressAndHold: {
-                            if (editable)
-                                actPop.show();
-                        }
-                        onClicked: {
-                            if (!actPop.visible)
-                                selected(modelData);
-                        }
                     }
                     ActionSelectionPopover {
                         id: actPop
@@ -181,13 +187,30 @@ Column {
                             Action {
                                 text: i18n.tr("Remove")
                                 onTriggered: {
-
                                     // removing current background, revert to default
                                     if (modelData === current) {
                                         Utilities.revertBackgroundToDefault();
                                     }
-                                    backgroundPanel.rmFile(modelData)
+                                    backgroundPanel.rmFile(modelData);
                                 }
+                            }
+                        }
+                    }
+                    MouseArea {
+                        id: imgMouseArea
+                        anchors.fill: parent
+                        onPressAndHold: {
+                            if (editable && (grid.state === "")) {
+                                actPop.show();
+                            }
+                        }
+                        onClicked: {
+                            if (!actPop.visible && (grid.state === "")) {
+                                selected(modelData);
+                            }
+
+                            if (grid.state === "selection") {
+                                gridItem.state = gridItem.state === "" ? "selected" : "";
                             }
                         }
                     }
@@ -196,21 +219,55 @@ Column {
         }
     }
 
+    // add some spacing
     Item {
         width: parent.width
         height: units.gu(2)
         visible: !parent.isCustom
     }
 
-    BatchRemoveBackgrounds {
-        visible: parent.isCustom
-        spacing: units.gu(2)
-        width: parent.width - spacing * 2
+    AddRemove {
         anchors {
             horizontalCenter: parent.horizontalCenter
         }
+        visible: parent.isCustom
+        spacing: units.gu(2)
+        width: parent.width - spacing * 2
         height: children[0].height + (spacing * 2)
         buttonWidth: (width - spacing) / 2
+        repeater: gridRepeater
+        onEnteredQueueMode: {
+            grid.state = "selection"
+        }
+        onLeftQueueMode: {
+            grid.state = ""
+        }
+        onRemoveQueued: {
+            removeBackgrounds.trigger();
+            grid.state = ""
+        }
+    }
+
+    // Action for removing backgrounds
+    Action {
+        id: removeBackgrounds
+        onTriggered: {
+            var toDelete = [];
+            // select backgrounds to remove
+            for (var i=0, j=gridRepeater.count; i < j; i++) {
+                if (gridRepeater.itemAt(i).state === "selected") {
+                    console.warn('queued file', i, '/', j, 'is selected', 'removing', bgmodel[i]);
+                    toDelete.push(bgmodel[i]);
+                }
+            }
+            // remove backgrounds
+            toDelete.forEach(function (bg) {
+                if (bg === current) {
+                    Utilities.revertBackgroundToDefault();
+                }
+                backgroundPanel.rmFile(bg);
+            });
+        }
     }
 
 }

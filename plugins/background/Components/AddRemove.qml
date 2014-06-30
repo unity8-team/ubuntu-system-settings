@@ -21,31 +21,30 @@
 import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
-
-
-// Action {
-//     id: openAction
-//     text: "&Open"
-//     shortcut: "Ctrl+O"
-//     iconSource: "images/document-open.png"
-//     onTriggered: fileDialog.open()
-//     tooltip: "Open an Image"
-// }
+import "../utilities.js" as Utilities
 
 Row {
 
     id: row
 
     property int buttonWidth
+    property var repeater
+
+    signal enteredQueueMode ()
+    signal leftQueueMode ()
+    signal removeQueued ()
 
     states: [
         State {
-            name: "queueForDeletion"
+            name: "noneQueued"
             PropertyChanges {
                 target: add
                 text: i18n.tr("Cancel")
                 gradient: UbuntuColors.greyGradient
-                onClicked: parent.state = ""
+                onClicked: {
+                    parent.state = "";
+                    leftQueueMode();
+                }
             }
             PropertyChanges {
                 target: queue
@@ -54,18 +53,21 @@ Row {
             }
         },
         State {
-            name: "readyToDelete"
-            PropertyChanges {
-                target: add
-                text: i18n.tr("Cancel")
-                gradient: UbuntuColors.greyGradient
-                onClicked: parent.state = ""
-            }
+            name: "someQueued"
+            extend: "noneQueued"
+            when: Utilities.getSelected(repeater) > 0
             PropertyChanges {
                 target: queue
-                enabled: false
-                text: i18n.tr("No images selected")
+                enabled: true
                 gradient: null
+                text: {
+                    var count = Utilities.getSelected(repeater);
+                    return i18n.tr("Delete %1 image", "Delete %1 images", count).arg(count)
+                }
+                onClicked: {
+                    parent.state = "";
+                    removeQueued();
+                }
             }
         }
     ]
@@ -90,8 +92,11 @@ Row {
         anchors {
             verticalCenter: parent.verticalCenter
         }
-        enabled: wallpaperGrid.bgmodel.length > 0
-        onClicked: parent.state = "queueForDeletion"
+        enabled: repeater.model.length > 0
+        onClicked: {
+            parent.state = "noneQueued"
+            enteredQueueMode();
+        }
     }
 
 }
