@@ -20,6 +20,7 @@
 
 import QtQuick 2.0
 import Ubuntu.Components 0.1
+import Ubuntu.Settings.Components 0.1
 
 Item {
     id: root
@@ -35,13 +36,13 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        Image {
+        StatusIcon {
             id: icon
             anchors.horizontalCenter: parent.horizontalCenter
-            width: units.gu(5)
-            height: width
+            height: units.gu(4)
             source: model.icon
         }
+
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
             text: i18n.dtr(model.item.translations, model.displayName)

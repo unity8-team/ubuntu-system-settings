@@ -66,7 +66,8 @@ ItemPage {
             anchors.fill: parent
 
             ListItem.SingleValue {
-                iconSource: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
+                iconSource: "image://theme/language-chooser"
+                iconFrame: false
                 text: i18n.tr("Display language…")
                 value: plugin.languageNames[plugin.currentLanguage]
 
