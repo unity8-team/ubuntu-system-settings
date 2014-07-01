@@ -75,7 +75,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             if (!appinfo) {
                 g_warning ("Couldn't parse desktop file %s",
                            desktopFileName);
-                return;
+                goto out;
             }
 
             const char * name = g_app_info_get_name ((GAppInfo *) appinfo);
