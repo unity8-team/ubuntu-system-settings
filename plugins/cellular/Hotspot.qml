@@ -28,6 +28,10 @@ ItemPage {
 
     title: i18n.tr("Wi-Fi hotspot")
 
+    DBusHelper {
+        id: dbusHelper
+    }
+
     Column {
 
         anchors.fill: parent
@@ -43,13 +47,13 @@ ItemPage {
             text: i18n.tr("Hotspot")
             control: Switch {
                 id: hotspotSwitch
-                checked: DbusHelper.isHotspotActive()
+                checked: dbusHelper.isHotspotActive()
                 enabled: ssidField.text != "" && passwordField.length >= 8
                 onTriggered: {
                     if(checked) {
-                        DbusHelper.setupHotspot(ssidField.text, passwordField.text)
+                        dbusHelper.setupHotspot(ssidField.text, passwordField.text)
                     } else {
-                        DbusHelper.disableHotspot(checked)
+                        dbusHelper.disableHotspot(checked)
                     }
                 }
             }
@@ -59,10 +63,10 @@ ItemPage {
             id: ssidLabel
             text: i18n.tr("Network name")
         }
-        
+
         TextField {
             id: ssidField
-            text: DbusHelper.getHotspotName()
+            text: dbusHelper.getHotspotName()
             readOnly: hotspotSwitch.checked
             anchors.left: parent.left
             anchors.right: parent.right
@@ -72,10 +76,10 @@ ItemPage {
             id: passwordLabel
             text: i18n.tr("WPA password")
         }
-        
+
         TextField {
             id: passwordField
-            text: DbusHelper.getHotspotPassword()
+            text: dbusHelper.getHotspotPassword()
             echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
             readOnly: hotspotSwitch.checked
             anchors.left: parent.left

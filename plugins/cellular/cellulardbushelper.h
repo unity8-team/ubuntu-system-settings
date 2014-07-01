@@ -26,7 +26,7 @@
  * For exposing dbus data to Qml.
  */
 
-class CellularDbusHelper final : public QObject {
+class CellularDbusHelper : public QObject {
     Q_OBJECT
 
 public:

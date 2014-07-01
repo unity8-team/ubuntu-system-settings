@@ -20,22 +20,10 @@
 #include "plugin.h"
 #include "cellulardbushelper.h"
 
-CellularDbusHelper *s = nullptr;
-
-static QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
-{
-    // Why are we not using static WifiDbusHelper here, you ask?
-    // Because I'm not sure if the Qml engine tries to delete the
-    // pointer we return when it is shut down.
-    if(!s)
-        s = new CellularDbusHelper(engine);
-    return s;
-}
-
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
-    qmlRegisterSingletonType<CellularDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);
+    qmlRegisterType<CellularDbusHelper>(uri, 1, 0, "DBusHelper");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
