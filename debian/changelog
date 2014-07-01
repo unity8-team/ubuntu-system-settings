@@ -1,4 +1,4 @@
-ubuntu-system-settings (0.4+14.10.20140623-0ubuntu1) utopic; urgency=low
+ubuntu-system-settings (0.6+14.10.20140623-0ubuntu1) utopic; urgency=low
 
   [ Mathieu Trudel-Lapierre ]
   * Implement discoverability and some bluetooth fixes: -

@@ -116,6 +116,16 @@ Column {
         height: childrenRect.height
         spacing: units.gu(2)
         visible: parent.state === ""
+        move: Transition {
+            NumberAnimation {
+                properties: "x,y"
+                easing.type: Easing.InOutQuad
+                duration: 300
+                onStopped: {
+                    console.warn('stopped')
+                }
+            }
+        }
         states: [
             State {
                 name: ""
@@ -258,15 +268,16 @@ Column {
                 if (gridRepeater.itemAt(i).state === "selected") {
                     console.warn('queued file', i, '/', j, 'is selected', 'removing', bgmodel[i]);
                     toDelete.push(bgmodel[i]);
+                    gridRepeater.itemAt(i).visible = false;
                 }
             }
             // remove backgrounds
-            toDelete.forEach(function (bg) {
-                if (bg === current) {
-                    Utilities.revertBackgroundToDefault();
-                }
-                backgroundPanel.rmFile(bg);
-            });
+            // toDelete.forEach(function (bg) {
+            //     if (bg === current) {
+            //         Utilities.revertBackgroundToDefault();
+            //     }
+            //     backgroundPanel.rmFile(bg);
+            // });
         }
     }
 
