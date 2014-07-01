@@ -112,7 +112,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
                                 QDir::cleanPath(qIcon)));
                     if (iconFile.exists())
                         newClick->icon = iconFile.fileName();
-                    else if (QIcon::hasThemeIcon(qIcon))
+                    else if (QIcon::hasThemeIcon(qIcon)) // try the icon theme
                         newClick->icon = qIcon;
                 }
             }
@@ -141,7 +141,7 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
 
         if (directory.exists()) {
             QFile icon(directory.absoluteFilePath(iconFile.simplified()));
-            if (!icon.exists() && QIcon::hasThemeIcon(iconFile))
+            if (!icon.exists() && QIcon::hasThemeIcon(iconFile)) // try the icon theme
                 newClick.icon = iconFile;
             else
                 newClick.icon = icon.fileName();
@@ -154,6 +154,7 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
 
     if (hooks.isValid()) {
         QVariantMap allHooks(hooks.toMap());
+        // The desktop file contains an icon and the display name
         populateFromDesktopFile(&newClick, allHooks, directory);
    }
 
