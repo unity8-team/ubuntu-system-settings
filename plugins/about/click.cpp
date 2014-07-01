@@ -47,6 +47,8 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
                                           QDir directory)
 {
     QVariantMap appHooks;
+    GKeyFile *appinfo = g_key_file_new();
+    gchar *desktopFileName = NULL;
 
     QVariantMap::ConstIterator begin(hooks.constBegin());
     QVariantMap::ConstIterator end(hooks.constEnd());
@@ -61,34 +63,43 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             QFile desktopFile(directory.absoluteFilePath(
                         appHooks.value("desktop", "undefined").toString()));
 
-            gchar * desktopFileName =
-                g_strdup(desktopFile.fileName().toLocal8Bit().constData());
+           desktopFileName =
+               g_strdup(desktopFile.fileName().toLocal8Bit().constData());
 
             g_debug ("Desktop file: %s", desktopFileName);
 
             if (!desktopFile.exists())
                 goto out;
 
-            GDesktopAppInfo *appinfo = g_desktop_app_info_new_from_filename (
-                    desktopFileName);
+            gboolean loaded = g_key_file_load_from_file(appinfo,
+                                                        desktopFileName,
+                                                        G_KEY_FILE_NONE,
+                                                        NULL);
 
-            if (!appinfo) {
-                g_warning ("Couldn't parse desktop file %s",
-                           desktopFileName);
+            if (!loaded) {
+                g_warning ("Couldn't parse desktop file %s", desktopFileName);
                 goto out;
             }
 
-            const char * name = g_app_info_get_name ((GAppInfo *) appinfo);
+            gchar * name = g_key_file_get_string (appinfo,
+                                                  G_KEY_FILE_DESKTOP_GROUP,
+                                                  G_KEY_FILE_DESKTOP_KEY_NAME,
+                                                  NULL);
 
             if (name) {
                 g_debug ("Name is %s", name);
                 newClick->displayName = name;
+                g_free (name);
+                name = NULL;
             }
 
             // Overwrite the icon with the .desktop file's one if we have it.
             // This is the one that the app scope displays so use that if we
             // can.
-            const char * icon = g_desktop_app_info_get_string (appinfo, "Icon");
+            gchar * icon = g_key_file_get_string (appinfo,
+                                                  G_KEY_FILE_DESKTOP_GROUP,
+                                                  G_KEY_FILE_DESKTOP_KEY_ICON,
+                                                  NULL);
 
             if (icon) {
                 g_debug ("Icon is %s", icon);
@@ -96,16 +107,19 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
                 if (iconFile.exists()) {
                     newClick->icon = icon;
                 } else {
+                    QString qIcon(QString::fromLocal8Bit(icon));
                     iconFile.setFileName(directory.absoluteFilePath(
-                                QDir::cleanPath(
-                                    QString::fromLocal8Bit(icon))));
+                                QDir::cleanPath(qIcon)));
                     if (iconFile.exists())
                         newClick->icon = iconFile.fileName();
+                    else if (QIcon::hasThemeIcon(qIcon))
+                        newClick->icon = qIcon;
                 }
             }
         }
 out:
         g_free (desktopFileName);
+        g_key_file_free (appinfo);
         return;
     }
 }
@@ -126,7 +140,7 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
         QString iconFile(manifest.value("icon", "undefined").toString());
 
         if (directory.exists()) {
-            QFile icon(directory.absoluteFilePath(filePath(iconFile.simplified()));
+            QFile icon(directory.absoluteFilePath(iconFile.simplified()));
             if (!icon.exists() && QIcon::hasThemeIcon(iconFile))
                 newClick.icon = iconFile;
             else
