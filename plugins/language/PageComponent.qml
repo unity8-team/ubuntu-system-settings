@@ -23,6 +23,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -65,11 +66,14 @@ ItemPage {
         Column {
             anchors.fill: parent
 
-            ListItem.SingleValue {
+            Menus.StandardMenu {
                 iconSource: "image://theme/language-chooser"
-                iconFrame: false
                 text: i18n.tr("Display language…")
-                value: plugin.languageNames[plugin.currentLanguage]
+                component: Label {
+                    text: plugin.languageNames[plugin.currentLanguage]
+                    elide: Text.ElideRight
+                    opacity: enabled ? 1.0 : 0.5
+                }
 
                 onClicked: PopupUtils.open(displayLanguage)
             }
