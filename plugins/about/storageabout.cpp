@@ -206,6 +206,7 @@ void StorageAbout::setSortRole(ClickModel::Roles newRole)
     m_clickFilterProxy.sort(0, newRole == ClickModel::InstalledSizeRole ?
                                 Qt::DescendingOrder :
                                 Qt::AscendingOrder);
+    m_clickFilterProxy.invalidate();
     Q_EMIT(sortRoleChanged());
 }
 
