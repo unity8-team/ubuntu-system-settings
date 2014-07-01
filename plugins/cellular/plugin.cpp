@@ -18,12 +18,12 @@
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
-#include "cellulardbushelper.h"
+#include "hotspotmanager.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
-    qmlRegisterType<CellularDbusHelper>(uri, 1, 0, "DBusHelper");
+    qmlRegisterType<HotspotManager>(uri, 1, 0, "HotspotManager");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

@@ -26,12 +26,12 @@
  * For exposing dbus data to Qml.
  */
 
-class CellularDbusHelper : public QObject {
+class HotspotManager : public QObject {
     Q_OBJECT
 
 public:
-    CellularDbusHelper(QObject *parent = nullptr);
-    ~CellularDbusHelper() {};
+    HotspotManager(QObject *parent = nullptr);
+    ~HotspotManager() {};
 
     Q_INVOKABLE QByteArray getHotspotName();
     Q_INVOKABLE QString getHotspotPassword();

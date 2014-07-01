@@ -11,8 +11,8 @@ set(QML_SOURCES
 add_library(UbuntuCellularPanel MODULE
   plugin.cpp
   plugin.h
-  cellulardbushelper.cpp
-  cellulardbushelper.h
+  hotspotmanager.cpp
+  hotspotmanager.h
   nm_manager_proxy.h
   nm_settings_proxy.h
   nm_settings_connection_proxy.h

@@ -20,7 +20,7 @@
 #include "nm_manager_proxy.h"
 #include "nm_settings_proxy.h"
 #include "nm_settings_connection_proxy.h"
-#include "cellulardbushelper.h"
+#include "hotspotmanager.h"
 #include <QStringList>
 #include <QDBusReply>
 #include <QtDebug>
@@ -157,7 +157,7 @@ QDBusObjectPath detectWirelessDevice() {
 
 }
 
-CellularDbusHelper::CellularDbusHelper(QObject *parent) : QObject(parent),
+HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
         m_devicePath(detectWirelessDevice()) {
     static bool isRegistered = false;
     if(!isRegistered) {
@@ -172,15 +172,15 @@ CellularDbusHelper::CellularDbusHelper(QObject *parent) : QObject(parent),
     }
 }
 
-QByteArray CellularDbusHelper::getHotspotName() {
+QByteArray HotspotManager::getHotspotName() {
     return m_ssid;
 }
 
-QString CellularDbusHelper::getHotspotPassword() {
+QString HotspotManager::getHotspotPassword() {
     return m_password;
 }
 
-void CellularDbusHelper::setupHotspot(QByteArray ssid_, QString password_) {
+void HotspotManager::setupHotspot(QByteArray ssid_, QString password_) {
     m_ssid = ssid_;
     m_password = password_;
     if(!m_settingsPath.isEmpty()) {
@@ -195,11 +195,11 @@ void CellularDbusHelper::setupHotspot(QByteArray ssid_, QString password_) {
     detectAdhoc(m_settingsPath, m_ssid, m_password, m_isActive);
 }
 
-bool CellularDbusHelper::isHotspotActive() {
+bool HotspotManager::isHotspotActive() {
     return m_isActive;
 }
 
-void CellularDbusHelper::disableHotspot() {
+void HotspotManager::disableHotspot() {
     static const QString activeIface("org.freedesktop.NetworkManager.Connection.Active");
     static const QString connProp("Connection");
     OrgFreedesktopNetworkManagerInterface mgr(nm_service,
@@ -219,7 +219,7 @@ void CellularDbusHelper::disableHotspot() {
     qWarning() << "Could not find a hotspot setup to disable.\n";
 }
 
-void CellularDbusHelper::destroyHotspot() {
+void HotspotManager::destroyHotspot() {
     if(m_settingsPath.isEmpty()) {
         qWarning() << "Tried to destroy nonexisting hotspot.\n";
         return;
