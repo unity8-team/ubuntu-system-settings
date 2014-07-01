@@ -51,61 +51,62 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
     QVariantMap::ConstIterator begin(hooks.constBegin());
     QVariantMap::ConstIterator end(hooks.constEnd());
 
+    // Look through the hooks for a 'desktop' key which points to a desktop
+    // file referring to this app.
     while (begin != end) {
         appHooks = (*begin++).toMap();
         if (!appHooks.isEmpty() &&
             appHooks.contains("desktop") &&
             directory.exists()) {
-            QFile desktopFile(
-                        directory.absoluteFilePath(
-                            appHooks.value("desktop",
-                                           "undefined").toString()));
+            QFile desktopFile(directory.absoluteFilePath(
+                        appHooks.value("desktop", "undefined").toString()));
 
             gchar * desktopFileName =
                 g_strdup(desktopFile.fileName().toLocal8Bit().constData());
 
             g_debug ("Desktop file: %s", desktopFileName);
-            if (desktopFile.exists()) {
-                GDesktopAppInfo *appinfo =
-                        g_desktop_app_info_new_from_filename (
-                            desktopFileName);
 
-                if (!appinfo) {
-                    g_warning ("Couldn't parse desktop file %s",
-                               desktopFileName);
-                    return;
-                }
+            if (!desktopFile.exists())
+                goto out;
 
-                const char * name = g_app_info_get_name (
-                            (GAppInfo *) appinfo);
+            GDesktopAppInfo *appinfo = g_desktop_app_info_new_from_filename (
+                    desktopFileName);
 
-                if (name) {
-                    g_debug ("Name is %s", name);
-                    newClick->displayName = name;
-                }
+            if (!appinfo) {
+                g_warning ("Couldn't parse desktop file %s",
+                           desktopFileName);
+                return;
+            }
 
-                // Overwrite the icon with the .desktop file's one
-                // if we have it. This one is more reliable.
-                const char * icon = g_desktop_app_info_get_string (
-                            appinfo, "Icon");
-                if (icon) {
-                    g_debug ("Icon is %s", icon);
-                    QFile iconFile(icon);
-                    if (iconFile.exists()) {
-                        newClick->icon = icon;
-                    } else {
-                        iconFile.setFileName(
-                                    directory.absoluteFilePath(
-                                        QDir::cleanPath(
-                                            QString::fromLocal8Bit(icon))));
-                        if (iconFile.exists())
-                            newClick->icon = iconFile.fileName();
-                    }
+            const char * name = g_app_info_get_name ((GAppInfo *) appinfo);
+
+            if (name) {
+                g_debug ("Name is %s", name);
+                newClick->displayName = name;
+            }
+
+            // Overwrite the icon with the .desktop file's one if we have it.
+            // This is the one that the app scope displays so use that if we
+            // can.
+            const char * icon = g_desktop_app_info_get_string (appinfo, "Icon");
+
+            if (icon) {
+                g_debug ("Icon is %s", icon);
+                QFile iconFile(icon);
+                if (iconFile.exists()) {
+                    newClick->icon = icon;
+                } else {
+                    iconFile.setFileName(directory.absoluteFilePath(
+                                QDir::cleanPath(
+                                    QString::fromLocal8Bit(icon))));
+                    if (iconFile.exists())
+                        newClick->icon = iconFile.fileName();
                 }
             }
-            g_free (desktopFileName);
-            return;
         }
+out:
+        g_free (desktopFileName);
+        return;
     }
 }
 
@@ -117,14 +118,21 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
     newClick.name = manifest.value("title",
                               gettext("Unknown title")).toString();
 
+    // This key is the base directory where the click package is installed to.
+    // We'll look for files relative to this.
     if (manifest.contains("_directory")) {
         directory = manifest.value("_directory", "/undefined").toString();
-        // Set the icon from the click package
+        // Set the icon from the click package. Might be a path or a reference to a themed icon.
         QString iconFile(manifest.value("icon", "undefined").toString());
+
         if (directory.exists()) {
-            QString icon(directory.filePath(iconFile.simplified()));
-            newClick.icon = icon;
+            QFile icon(directory.absoluteFilePath(filePath(iconFile.simplified()));
+            if (!icon.exists() && QIcon::hasThemeIcon(iconFile))
+                newClick.icon = iconFile;
+            else
+                newClick.icon = icon.fileName();
         }
+
     }
 
     // "hooks" → title → "desktop" / "icon"
@@ -136,7 +144,7 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
    }
 
     newClick.installSize = manifest.value("installed-size",
-                                     "0").toString().toUInt()*1024;
+        "0").toString().toUInt()*1024;
 
     m_totalClickSize += newClick.installSize;
 
