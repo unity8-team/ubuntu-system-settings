@@ -44,8 +44,10 @@ class AboutTestCase(AboutBaseTestCase):
             return properties['Serial']
 
     def _get_os_name(self):
-        os_id = subprocess.check_output(['lsb_release', '-is'])
-        os_release = subprocess.check_output(['lsb_release', '-rs'])
+        os_id = subprocess.check_output(
+            ['lsb_release', '-is'], universal_newlines=True)
+        os_release = subprocess.check_output(
+            ['lsb_release', '-rs'], universal_newlines=True)
 
         return '{} {}'.format(os_id.strip(), os_release.strip())
 
@@ -143,7 +145,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_check_for_updates(self):
         """
-        Checks whether clicking on Check for Updates brings us 
+        Checks whether clicking on Check for Updates brings us
         to the Updates page.
         """
         update_button = self.system_settings.main_view.about_page.select_single(

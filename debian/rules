@@ -14,7 +14,7 @@ override_dh_auto_configure:
 
 override_dh_install:
 	cd tests/autopilot; \
-	set -ex; for python in $(shell pyversions -r); do \
+	set -ex; for python in $(shell py3versions -r); do \
 		$$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
 	done; \
 	cd $(CURDIR)
@@ -24,4 +24,4 @@ override_dh_makeshlibs:
 	dh_makeshlibs -Xusr/lib/$(DEB_HOST_MULTIARCH)/ubuntu-system-settings
 
 %:
-	dh $@ --fail-missing --with python2,migrations
+	dh $@ --fail-missing --with python3,migrations
