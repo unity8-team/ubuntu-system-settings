@@ -30,6 +30,7 @@ Build-Depends: dbus-test-runner,
                libubuntu-download-manager-common-dev,
                xvfb,
                cmake,
+               pep8,
                python3-pep8,
                pyflakes,
 Standards-Version: 3.9.4
