@@ -172,8 +172,9 @@ ItemPage {
                 id: valueSelect
                 objectName: "installedAppsItemSelector"
                 model: [i18n.tr("By name"), i18n.tr("By size")]
-                onSelectedIndexChanged: //true = name
-                    settingsId.storageSortByName = selectedIndex == 0
+                onSelectedIndexChanged:
+                    settingsId.storageSortByName = (selectedIndex == 0)
+                                                   // 0 → by name, 1 → by size
             }
 
             Binding {
@@ -189,7 +190,8 @@ ItemPage {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: childrenRect.height
-                /* Desactivate the listview flicking, we want to scroll on the column */
+                /* Deactivate the listview flicking, we want to scroll on the
+                 * column */
                 interactive: false
                 model: backendInfo.clickList
                 delegate: ListItem.SingleValue {
