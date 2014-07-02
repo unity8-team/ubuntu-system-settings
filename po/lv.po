@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-06-24 11:40+0200\n"
-"PO-Revision-Date: 2014-06-06 17:34+0000\n"
+"PO-Revision-Date: 2014-06-29 19:22+0000\n"
 "Last-Translator: Jānis-Marks Gailis <jm-gailis@fai-vianet.fr>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-25 06:14+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
+"X-Launchpad-Export-Date: 2014-06-30 06:10+0000\n"
+"X-Generator: Launchpad (build 17077)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -419,11 +419,11 @@ msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
-msgstr ""
+msgstr "Lokalizācijas pieeja"
 
 #: plugins/security-privacy//PageComponent.qml:151
 msgid "Other app access"
-msgstr ""
+msgstr "Citu aplikāciju pieeju"
 
 #: plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
