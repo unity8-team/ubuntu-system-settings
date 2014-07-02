@@ -74,7 +74,7 @@ ItemPage {
 
         ListItem.Standard {
             id: passwordLabel
-            text: i18n.tr("WPA password")
+            text: i18n.tr("WPA password (must be 8 characters or longer)")
         }
 
         TextField {
