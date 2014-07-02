@@ -12,6 +12,7 @@ set(QML_SOURCES
     Storage.qml
     StorageBar.qml
     StorageItem.qml
+    Version.qml
     fakepkgslist.xml
 )
 

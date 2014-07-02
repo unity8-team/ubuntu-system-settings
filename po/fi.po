@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-06-24 11:40+0200\n"
-"PO-Revision-Date: 2014-05-18 17:13+0000\n"
+"PO-Revision-Date: 2014-06-26 14:24+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-25 06:14+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
+"X-Launchpad-Export-Date: 2014-06-28 06:06+0000\n"
+"X-Generator: Launchpad (build 17077)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -761,7 +761,7 @@ msgstr "Ohjelmiston on ajan tasalla"
 
 #: plugins/system-update//PageComponent.qml:139
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Kirjaudu Ubuntu One -tilillesi."
 
 #: plugins/system-update//PageComponent.qml:154
 msgid "System update has failed."
@@ -812,7 +812,7 @@ msgstr "Asennetaan"
 
 #: plugins/system-update//PageComponent.qml:393
 msgid "Installed"
-msgstr ""
+msgstr "Asennettu"
 
 #: plugins/system-update//PageComponent.qml:417
 msgid "Version: "
@@ -833,7 +833,7 @@ msgstr "Aina"
 
 #: plugins/system-update//PageComponent.qml:501
 msgid "Credentials not found"
-msgstr ""
+msgstr "Tunnuksia ei löytynyt"
 
 #: plugins/system-update//PageComponent.qml:531
 msgid "Installing update…"
@@ -879,11 +879,11 @@ msgstr "Kirkkaus"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Säädä manuaalisesti"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Säätää näytön valotuksen ympäristön valotuksen mukaan"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1093,23 +1093,23 @@ msgstr "Heikko"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "Löydettävissä"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Ei löydettävissä"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Yhdistetyt laitteet:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Yhdistä eri laitteeseen:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Yhdistä toiseen laitteeseen:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1286,87 +1286,93 @@ msgstr "Järjestelmä"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "Takaisin"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Puhelimen asetukset"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is setup to automatically report errors to Canonical. This can be "
 "disabled in system settings."
 msgstr ""
+"Puhelimesi on asetettu lähettämään virheilmoitukset automaattisesti "
+"Canonicalille. Voit muuttaa asetusta järjestelmän asetuksista."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is setup to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Puhelimesi on asetettu havaitsemaan sijaintisi. Voit muuttaa asetusta "
+"järjestelmän asetuksista."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "Ei SIM-korttia"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Älä huoli, voit liittää SIM-kortin myöhemmin."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
 msgstr ""
+"Sillä aikaa puhelin- ja tekstiviestiominaisuudet eivät ole käytettävissä."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
+"SIM-kortti on yleensä puhelinpakkauksessa tai saatavilla palveluntarjoajalta."
 
 #: wizard/qml/Pages//no-sim.qml:68 wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Ohita"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "Siinä kaikki!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Mukava saada sinut mukaan Ubuntu-yhteisöön."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Nauti uudesta puhelimestasi."
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Valmis"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Yhdistä wifiin"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "Saatavilla olevat verkot"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+msgstr "Yhdistä wifi-verkkoon mukauttaaksesi kokoonpanoasi."
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "Hei!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "Tervetuloa Ubuntuun."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "Aloitetaan."
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Valitse kieli"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1555,7 +1561,7 @@ msgstr "päivitys"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Päivityksiä saatavilla"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100

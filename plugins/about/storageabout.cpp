@@ -176,6 +176,49 @@ QString StorageAbout::updateDate()
     return m_updateDate;
 }
 
+QString StorageAbout::deviceBuildDisplayID()
+{
+    static char serialBuffer[PROP_NAME_MAX];
+
+    if (m_deviceBuildDisplayID.isEmpty() || m_deviceBuildDisplayID.isNull())
+    {
+        property_get("ro.build.display.id", serialBuffer, "");
+        m_deviceBuildDisplayID = QString(serialBuffer);
+    }
+
+    return m_deviceBuildDisplayID;
+}
+
+QString StorageAbout::customizationBuildID()
+{
+    if (m_customizationBuildID.isEmpty() || m_customizationBuildID.isNull())
+    {
+        QFile file("/custom/build_id");
+        if (!file.exists())
+            return "";
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        m_customizationBuildID = QString(file.readAll().trimmed());
+        file.close();
+    }
+
+    return m_customizationBuildID;
+}
+
+QString StorageAbout::ubuntuBuildID()
+{
+    if (m_ubuntuBuildID.isEmpty() || m_ubuntuBuildID.isNull())
+    {
+        QFile file("/etc/media-info");
+        if (!file.exists())
+            return "";
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        m_ubuntuBuildID = QString(file.readAll());
+        file.close();
+    }
+
+    return m_ubuntuBuildID;
+}
+
 QString StorageAbout::licenseInfo(const QString &subdir) const
 {
 

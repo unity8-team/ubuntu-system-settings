@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-06-24 11:40+0200\n"
-"PO-Revision-Date: 2014-06-26 04:36+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2014-06-28 07:12+0000\n"
+"Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-26 07:11+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
+"X-Launchpad-Export-Date: 2014-06-29 06:01+0000\n"
+"X-Generator: Launchpad (build 17077)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -761,7 +761,7 @@ msgstr "El software está actualizado"
 
 #: plugins/system-update//PageComponent.qml:139
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Por favor inicia la sesión en tu cuenta Ubuntu One"
 
 #: plugins/system-update//PageComponent.qml:154
 msgid "System update has failed."
@@ -812,7 +812,7 @@ msgstr "Instalando"
 
 #: plugins/system-update//PageComponent.qml:393
 msgid "Installed"
-msgstr ""
+msgstr "Instalado"
 
 #: plugins/system-update//PageComponent.qml:417
 msgid "Version: "
@@ -833,7 +833,7 @@ msgstr "Siempre"
 
 #: plugins/system-update//PageComponent.qml:501
 msgid "Credentials not found"
-msgstr ""
+msgstr "Credenciales no encontradas"
 
 #: plugins/system-update//PageComponent.qml:531
 msgid "Installing update…"
@@ -883,7 +883,7 @@ msgstr "Ajuste automático"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Aclara y oscurece la pantalla para adaptarla a las condiciones"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1297,12 +1297,16 @@ msgid ""
 "Your phone is setup to automatically report errors to Canonical. This can be "
 "disabled in system settings."
 msgstr ""
+"El teléfono está configurado automáticamente para informar de los errores a "
+"Canonical. Esto se puede desactivar en la configuración del sistema."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is setup to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"El teléfono está configurado para detectar su ubicación. Esto se puede "
+"desactivar en la configuración del sistema."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
@@ -1310,7 +1314,7 @@ msgstr "No hay tarjeta SIM"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "No te preocupes, podrás insertar la tarjeta SIM más tarde"
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
@@ -1319,10 +1323,12 @@ msgstr "Por ahora no podrá usar las funciones de telefonía y SMS."
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
+"Puede encontrar una SIM en el paquete de su teléfono o contactar con su "
+"vendedor."
 
 #: wizard/qml/Pages//no-sim.qml:68 wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Omitir"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
@@ -1330,11 +1336,11 @@ msgstr "Es todo."
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Es un placer contar con usted en la comunidad Ubuntu."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Disfruta de tu nuevo teléfono"
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1342,7 +1348,7 @@ msgstr "Finalizar"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Conectar a Wi-Fi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
@@ -1350,7 +1356,7 @@ msgstr "Redes disponibles"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+msgstr "Conectar a una red Wi-Fi para personalizar la configuración"
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
