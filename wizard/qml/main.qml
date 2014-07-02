@@ -80,7 +80,7 @@ Item {
         }
     }
 
-    OSKController {
+    InputMethod {
         anchors.fill: parent
     }
 
@@ -106,12 +106,5 @@ Item {
                 PropertyChanges { target: notifications; width: units.gu(38) }
             }
         ]
-
-//        FIXME despite correctly turning blockInput: false when the notification disappears, input is still blocked. Commenting out for now
-//        InputFilterArea {
-//            anchors { left: parent.left; right: parent.right }
-//            height: parent.contentHeight
-//            blockInput: height > 0
-//        }
     }
 }
