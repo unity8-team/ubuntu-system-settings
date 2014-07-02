@@ -53,7 +53,8 @@ class AboutTestCase(AboutBaseTestCase):
 
     def _get_device_serial_number(self):
         try:
-            return subprocess.check_output(['getprop', 'ro.serialno']).strip()
+            return subprocess.check_output(
+                ['getprop', 'ro.serialno'], universal_newlines=True).strip()
         except OSError:
             # getprop is only available on android hardware.
             return None
@@ -68,10 +69,12 @@ class AboutTestCase(AboutBaseTestCase):
             ).read().strip()
         else:
             manufacturer = subprocess.check_output(
-                ['getprop', 'ro.product.manufacturer']
+                ['getprop', 'ro.product.manufacturer'],
+                universal_newlines=True
             ).strip()
             hw_model = subprocess.check_output(
-                ['getprop', 'ro.product.model']
+                ['getprop', 'ro.product.model'],
+                universal_newlines=True
             ).strip()
 
         return '{} {}'.format(manufacturer, hw_model)
