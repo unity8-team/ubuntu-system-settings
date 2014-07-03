@@ -242,13 +242,6 @@ class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return licenses_page
 
 
-class ItemPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
-
-    @classmethod
-    def validate_dbus_object(cls, path, state):
-        return False
-
-
 class LicensesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Licenses page."""
