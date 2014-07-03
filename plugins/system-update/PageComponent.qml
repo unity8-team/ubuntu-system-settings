@@ -261,7 +261,6 @@ ItemPage {
         clip: true
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > (root.height - checkForUpdatesArea.height)) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        visible: false
 
         delegate: ListItem.Subtitled {
             id: listItem
