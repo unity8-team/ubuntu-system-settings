@@ -31,6 +31,7 @@ Build-Depends: dbus-test-runner,
                cmake,
                pep8,
                pyflakes,
+               dh-apparmor,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
