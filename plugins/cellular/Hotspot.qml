@@ -67,7 +67,7 @@ ItemPage {
         TextField {
             id: ssidField
             text: hotspotManager.getHotspotName()
-            readOnly: hotspotSwitch.checked
+            enabled: !hotspotSwitch.checked
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.leftMargin: units.gu(2)
@@ -83,7 +83,7 @@ ItemPage {
             id: passwordField
             text: hotspotManager.getHotspotPassword()
             echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
-            readOnly: hotspotSwitch.checked
+            enabled: !hotspotSwitch.checked
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.leftMargin: units.gu(2)
