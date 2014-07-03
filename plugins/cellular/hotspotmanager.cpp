@@ -155,6 +155,16 @@ QDBusObjectPath detectWirelessDevice() {
     return QDBusObjectPath();
 }
 
+std::string generate_password() {
+    static const std::string items("abcdefghijklmnopqrstuvwxyz01234567890");
+    const int passwordLength = 8;
+    std::string result;
+    for(int i=0; i<passwordLength; i++) {
+        result.push_back(items[std::rand() % items.length()]);
+    }
+    return result;
+}
+
 }
 
 HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
@@ -167,7 +177,7 @@ HotspotManager::HotspotManager(QObject *parent) : QObject(parent),
     if(!detectAdhoc(m_settingsPath, m_ssid, m_password, m_isActive)) {
         m_settingsPath = "";
         m_ssid = "Ubuntu hotspot";
-        m_password = "";
+        m_password = generate_password().c_str();
         m_isActive = false;
     }
 }
