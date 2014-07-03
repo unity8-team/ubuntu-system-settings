@@ -21,6 +21,26 @@ import Ubuntu.Components 0.1
 Item {
     id: root
 
+    Connections {
+        target: SurfaceManager
+        onSurfaceCreated: {
+            if (surface.type == MirSurfaceItem.InputMethod) {
+                root.surface = surface;
+            }
+        }
+
+        onSurfaceDestroyed: {
+            if (root.surface == surface) {
+                root.surface = null;
+                surface.parent = null;
+            }
+            if (!surface.parent) {
+                // there's no one displaying it. delete it right away
+                surface.release();
+            }
+        }
+    }
+
     property var surface: null
 
     property int transitionDuration: UbuntuAnimation.FastDuration
