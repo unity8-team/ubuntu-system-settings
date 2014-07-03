@@ -71,14 +71,6 @@ int main(int argc, const char *argv[])
 
     QObject::connect(view->engine(), &QQmlEngine::quit, quitViaUpstart);
 
-    //    if (!isMirServer) {
-    //        if (qgetenv("UPSTART_JOB") == "unity8") {
-    //            // Emit SIGSTOP as expected by upstart, under Mir it's unity-mir that will raise it.
-    //            // see http://upstart.ubuntu.com/cookbook/#expect-stop
-    //            raise(SIGSTOP);
-    //        }
-    //    }
-
     if (isMirServer) {
         view->showFullScreen();
     } else {
