@@ -63,12 +63,9 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void changeVisibility(const QString&, Update*);
-    void systemUpdatePaused(int value);
     void processOutput();
     void processUpdates();
-    void downloadUrlObtained(const QString &packagename, const QString &url);
     void handleCredentialsFound(Token token);
-    void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
     SystemUpdate m_systemUpdate;
