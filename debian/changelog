@@ -1,3 +1,32 @@
+ubuntu-system-settings (0.3+14.10.20140703.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Kill maliit-server when wizard is done. This is because maliit-
+    server is normally tied to the Mir server that launched it. Unless
+    we kill it, it won't be re-associated with unity8 correctly. (LP:
+    #1335917)
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Iain Lane ]
+  * [about] Look harder for the desktop file so we can display more
+    icons in the list of apps (LP: #1324618)
+  * Fix storage by name/by size sorting and remember the selected value.
+    (LP: #1320160)
+  * update-plugin: Don't declare prototypes that aren't used
+
+  [ Steve Langasek ]
+  * Don't use 'setup' as a verb. (LP: #1336181)
+
+  [ Sebastien Bacher ]
+  * updates: tweak the interface don't use dividers between list items.
+    use the labels specified in the design. show the "install n updates"
+    button only when there are several updates (LP: #1333565)
+  * Tweak items order to match design, add a separator
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 03 Jul 2014 15:29:07 +0000
+
 ubuntu-system-settings (0.3+14.10.20140702.1-0ubuntu1) utopic; urgency=low
 
   [ Sebastien Bacher ]
