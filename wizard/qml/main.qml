@@ -19,6 +19,7 @@ import GSettings 1.0
 import Ubuntu.Components 0.1
 import Unity.Application 0.1
 import Unity.Notifications 1.0 as NotificationBackend
+import "Components"
 import "file:///usr/share/unity8/Notifications" as Notifications // FIXME This should become a module or go away
 
 Item {
