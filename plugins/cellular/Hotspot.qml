@@ -70,6 +70,8 @@ ItemPage {
             readOnly: hotspotSwitch.checked
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.leftMargin: units.gu(2)
+            anchors.rightMargin: units.gu(2)
         }
 
         ListItem.Standard {
@@ -84,6 +86,8 @@ ItemPage {
             readOnly: hotspotSwitch.checked
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.leftMargin: units.gu(2)
+            anchors.rightMargin: units.gu(2)
         }
 
         ListItem.Standard {
