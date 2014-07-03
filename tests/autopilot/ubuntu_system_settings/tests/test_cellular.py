@@ -23,10 +23,11 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             objectName="autoChooseCarrierSelector"
         )
         manual = selector.select_single('Label', text=_("Manually"))
-        self.system_settings.main_view.pointer.click_object(manual)
+        self.system_settings.main_view.pointing_device.click_object(manual)
         choosecarrier = self.system_settings.main_view.cellular_page.\
             select_single(objectName="chooseCarrier")
-        self.system_settings.main_view.pointer.click_object(choosecarrier)
+        self.system_settings.main_view.pointing_device.click_object(
+            choosecarrier)
         self.assertThat(
             self.system_settings.main_view.choose_page.title,
             Equals(_("Carrier"))

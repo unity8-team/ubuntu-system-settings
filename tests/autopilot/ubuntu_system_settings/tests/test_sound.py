@@ -1,9 +1,19 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
+#
 # Copyright 2014 Canonical
 #
-# This program is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License version 3, as published
-# by the Free Software Foundation.
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation; version 3.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 
 from testtools.matchers import Equals, NotEquals
 
@@ -30,5 +40,6 @@ class SoundTestCase(SoundBaseTestCase):
         kbd_snd = self.system_settings.main_view.sound_page.select_single(
             objectName="keyboardSoundSwitch")
         current_value = kbd_snd.get_properties()["checked"]
-        self.system_settings.main_view.pointer.click_object(kbd_snd)
-        self.assertThat(kbd_snd.get_properties()["checked"], NotEquals(current_value))
+        self.system_settings.main_view.pointing_device.click_object(kbd_snd)
+        self.assertThat(
+            kbd_snd.get_properties()["checked"], NotEquals(current_value))
