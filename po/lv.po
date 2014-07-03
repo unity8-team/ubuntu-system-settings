@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-06-24 11:40+0200\n"
-"PO-Revision-Date: 2014-06-29 19:22+0000\n"
+"PO-Revision-Date: 2014-07-02 10:16+0000\n"
 "Last-Translator: Jānis-Marks Gailis <jm-gailis@fai-vianet.fr>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-06-30 06:10+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
+"X-Launchpad-Export-Date: 2014-07-03 06:09+0000\n"
+"X-Generator: Launchpad (build 17082)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -1570,7 +1570,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:114
 msgid "plane"
-msgstr ""
+msgstr "lidmašīna"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:116
@@ -1600,7 +1600,7 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:134
 msgid "cellular"
-msgstr ""
+msgstr "mobilais"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:138
@@ -1610,7 +1610,7 @@ msgstr "mobilais"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:140
 msgid "gsm"
-msgstr ""
+msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:146
