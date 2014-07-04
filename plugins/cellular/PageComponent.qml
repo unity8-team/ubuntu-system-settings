@@ -133,7 +133,7 @@ ItemPage {
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
             }
-            visible: actionGroup.actionObject.valid ? actionGroup.actionObject.state : false
+            visible: true//actionGroup.actionObject.valid ? actionGroup.actionObject.state : false
         }
 
         ListItem.Standard {

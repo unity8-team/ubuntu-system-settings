@@ -36,65 +36,39 @@ ItemPage {
 
         anchors.fill: parent
 
-        Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
-            anchors.margins: units.gu(2)
-            text : i18n.tr("A Wi-Fi hotspot allows other devices to use your cellular data connection. Normal data charges apply.") 
-        }
-
         ListItem.Standard {
             text: i18n.tr("Hotspot")
             control: Switch {
                 id: hotspotSwitch
                 checked: hotspotManager.isHotspotActive()
-                enabled: ssidField.text != "" && passwordField.length >= 8
                 onTriggered: {
                     if(checked) {
-                        hotspotManager.setupHotspot(ssidField.text, passwordField.text)
+                        hotspotManager.enableHotspot()
                     } else {
-                        hotspotManager.disableHotspot(checked)
+                        hotspotManager.disableHotspot()
                     }
                 }
             }
         }
 
-        ListItem.Standard {
-            id: ssidLabel
-            text: i18n.tr("Network name")
+        Label {
+            width: parent.width
+            wrapMode: Text.WordWrap
+            anchors.leftMargin: units.gu(2)
+            anchors.rightMargin: units.gu(2)
+            text : hotspotSwitch.enabled ?
+              i18n.tr("When hotspot is on, other devices can user your cellular data connection over Wi-Fi. Normal data charges apply.")
+              : i18n.tr("Other devices can user your cellular data connection over the Wi-Fi network. Normal data charges apply.") 
         }
 
-        TextField {
-            id: ssidField
-            text: hotspotManager.getHotspotName()
-            enabled: !hotspotSwitch.checked
+        Button {
+            text: i18n.tr("Set up hotspot")
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.leftMargin: units.gu(2)
             anchors.rightMargin: units.gu(2)
-        }
-
-        ListItem.Standard {
-            id: passwordLabel
-            text: i18n.tr("WPA password (must be 8 characters or longer)")
-        }
-
-        TextField {
-            id: passwordField
-            text: hotspotManager.getHotspotPassword()
-            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
-            enabled: !hotspotSwitch.checked
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.leftMargin: units.gu(2)
-            anchors.rightMargin: units.gu(2)
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Show key")
-            id: passwordVisible
-            control: Switch {
-                id: passwordVisibleSwitch
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("HotspotSetup.qml"), {hotspotManager: hotspotManager})
             }
         }
 

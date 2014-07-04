@@ -193,6 +193,9 @@ QString HotspotManager::getHotspotPassword() {
 void HotspotManager::setupHotspot(QByteArray ssid_, QString password_) {
     m_ssid = ssid_;
     m_password = password_;
+}
+
+void HotspotManager::enableHotspot() {
     if(!m_settingsPath.isEmpty()) {
         // Prints a warning message if the connection has disappeared already.
         destroyHotspot();

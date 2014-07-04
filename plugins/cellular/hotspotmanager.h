@@ -37,6 +37,7 @@ public:
     Q_INVOKABLE QString getHotspotPassword();
     Q_INVOKABLE void setupHotspot(QByteArray ssid, QString password);
     Q_INVOKABLE bool isHotspotActive();
+    Q_INVOKABLE void enableHotspot();
     Q_INVOKABLE void disableHotspot();
     void destroyHotspot();
 
