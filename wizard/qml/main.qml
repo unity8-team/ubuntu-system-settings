@@ -81,7 +81,8 @@ Item {
     }
 
     OSKController {
-        anchors.topMargin: units.gu(3) + units.dp(2) //FIXME UbuntuKeyboardInfo communicates coordinates including the height of the panel
+        //FIXME UbuntuKeyboardInfo communicates coordinates relative to the panel
+        anchors.topMargin: units.gu(3) + units.dp(2)
         anchors.fill: parent
     }
 
