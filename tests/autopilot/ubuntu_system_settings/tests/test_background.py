@@ -57,7 +57,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         """Return the currently selected QQuickImage.
         We grab the orange border and traverse a bit to get to this image"""
         selected_shape = self.background_page.select_single(
-            'UbuntuShape', objectName='SelectedShape', visible=True)
+            objectName='highLight', visible=True)
 
         return selected_shape.get_parent().select_single(
             'QQuickImage', objectName='itemImg')
@@ -80,7 +80,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
 
         # click a wallpaper that is not selected
         self.system_settings.main_view.pointer.click_object(
-            self.all_wallpapers[2])
+            self.all_wallpapers[3])
 
         # click set/save
         self.save_wallpaper()

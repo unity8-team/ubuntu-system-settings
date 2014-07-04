@@ -163,6 +163,7 @@ Column {
                     }
                     HighlightedOverlay {
                         id: highLight
+                        objectName: "highLight"
                     }
                     SelectedOverlay {
                         id: selectionTick
@@ -256,7 +257,6 @@ Column {
             // select backgrounds to remove
             for (var i=0, j=gridRepeater.count; i < j; i++) {
                 if (gridRepeater.itemAt(i).state === "selected") {
-                    // console.warn('queued file', i, '/', j, 'is selected', 'removing', bgmodel[i]);
                     toDelete.push(bgmodel[i]);
                 }
             }

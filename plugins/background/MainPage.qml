@@ -65,21 +65,6 @@ ItemPage {
         }
     }
 
-    // Delete all custom backgrounds
-    // Action {
-    //     id: deleteCustomBackgrounds
-    //     onTriggered: {
-    //             var bgs = backgroundPanel.customBackgrounds.slice(0);
-    //             bgs.forEach(function (bg) {
-    //                 // if we are deleting the currently used background, revert to default
-    //                 if (bg === welcomeBackground) {
-    //                     Utilities.revertBackgroundToDefault();
-    //                 }
-    //                 backgroundPanel.rmFile(bg);
-    //             });
-    //     }
-    // }
-
     tools: ToolbarItems {
         ToolbarButton {
             action: selectDefaultPeer
