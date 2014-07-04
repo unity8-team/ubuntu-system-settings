@@ -40,7 +40,6 @@ Row {
             PropertyChanges {
                 target: add
                 text: i18n.tr("Cancel")
-                gradient: UbuntuColors.greyGradient
                 onClicked: {
                     parent.state = "";
                     leftQueueMode();
@@ -49,6 +48,7 @@ Row {
             PropertyChanges {
                 target: queue
                 enabled: false
+                opacity: 0.75
                 text: i18n.tr("No images selected")
             }
         },
@@ -59,7 +59,7 @@ Row {
             PropertyChanges {
                 target: queue
                 enabled: true
-                gradient: null
+                opacity: 1
                 text: {
                     var count = Utilities.getSelected(repeater);
                     return i18n.tr("Delete %1 image", "Delete %1 images", count).arg(count)
@@ -76,6 +76,7 @@ Row {
         id: add
         action: selectDefaultPeer
         objectName: "addCustomBackgroundsButton"
+        gradient: UbuntuColors.greyGradient
         text: i18n.tr("Add an Image…")
         width: buttonWidth
         anchors {
@@ -85,8 +86,8 @@ Row {
 
     Button {
         id: queue
-        gradient: UbuntuColors.greyGradient
         objectName: "removeCustomBackgroundsButton"
+        gradient: UbuntuColors.greyGradient
         text: i18n.tr("Remove Images…")
         width: buttonWidth
         anchors {
