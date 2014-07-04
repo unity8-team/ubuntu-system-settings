@@ -123,7 +123,7 @@ ItemPage {
 
         ListItem.SingleValue {
             text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-            visible: !hotspotItem.visible
+            visible: showAllUI && !hotspotItem.visible
         }
 
         ListItem.SingleValue {
@@ -133,7 +133,7 @@ ItemPage {
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
             }
-            visible: true//actionGroup.actionObject.valid ? actionGroup.actionObject.state : false
+            visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
         }
 
         ListItem.Standard {
