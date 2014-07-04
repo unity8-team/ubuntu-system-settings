@@ -27,6 +27,5 @@ Rectangle {
     width: parent.width + units.gu(2)
     height: parent.height + units.gu(2)
     anchors.centerIn: parent
-    visible: (current === modelData) && (itemImage.status === Image.Ready)
     color: "transparent"
 }

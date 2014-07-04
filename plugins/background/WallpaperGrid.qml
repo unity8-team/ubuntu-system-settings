@@ -164,6 +164,7 @@ Column {
                     HighlightedOverlay {
                         id: highLight
                         objectName: "highLight"
+                        visible: (current === modelData) && (itemImage.status === Image.Ready)
                     }
                     SelectedOverlay {
                         id: selectionTick
