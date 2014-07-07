@@ -34,8 +34,10 @@ ItemPage {
         id: diagnosticsWidget
         function maybeUpdate() {
             reportCrashesCheck.checked = diagnosticsWidget.canReportCrashes
+            reportWifiAndCellIdsCheck.checked = diagnosticsWidget.canReportWifiAndCellIds
         }
         onReportCrashesChanged: maybeUpdate()
+        onReportWifiAndCellIdsChanged: maybeUpdate()
     }
     Flickable {
         id: scrollWidget
@@ -88,6 +90,24 @@ ItemPage {
 
             ListItem.Caption {
                 text: i18n.tr("Includes info about what an app was doing when it failed.")
+            }
+
+            DiagnosticsCheckEntry {
+                id: reportWifiAndCellIdsCheck
+                checked: diagnosticsWidget.canReportWifiAndCellIds
+                onCheckedChanged: {
+                    diagnosticsWidget.canReportWifiAndCellIds = checked;
+                    /* Confirm the setting stuck and reflect it in the UI. */
+                    if (checked != diagnosticsWidget.canReportWifiAndCellIds) {
+                        checked = !checked;
+                    }
+
+                }
+                textEntry: i18n.tr("Wi-Fi access points")
+            }
+
+            ListItem.Caption {
+                text: i18n.tr("Improves location accuracy for all Ubuntu Phone users.")
             }
         }
     }

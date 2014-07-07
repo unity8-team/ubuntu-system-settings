@@ -23,30 +23,64 @@
 #include <QDBusReply>
 #include <unistd.h>
 
-Diagnostics::Diagnostics(QObject *parent) :
-    QObject(parent),
-    m_watcher ("com.ubuntu.WhoopsiePreferences",
-        QDBusConnection::systemBus(),
-        QDBusServiceWatcher::WatchForOwnerChange),
-    m_whoopsieInterface (
-        "com.ubuntu.WhoopsiePreferences",
-        "/com/ubuntu/WhoopsiePreferences",
-        "com.ubuntu.WhoopsiePreferences",
-        QDBusConnection::systemBus())
+namespace
 {
-    connect(&m_watcher, SIGNAL(serviceOwnerChanged(QString, QString, QString)),
-            this, SLOT(createInterface(QString, QString, QString)));
-    createInterface("com.ubuntu.WhoopsiePreferences", "", "");
+namespace whoopsie
+{
+constexpr const char* service_name{"com.ubuntu.WhoopsiePreferences"};
+constexpr const char* object_path{"/com/ubuntu/WhoopsiePreferences"};
+constexpr const char* interface_name{"com.ubuntu.WhoopsiePreferences"};
 }
 
-void Diagnostics::createInterface(const QString& name,
-                                  const QString& oldOwner,
-                                  const QString& newOwner)
+namespace location_service
+{
+constexpr const char* service_name{"com.ubuntu.location.Service"};
+constexpr const char* object_path{"/com/ubuntu/location/Service"};
+constexpr const char* interface_name{"com.ubuntu.location.Service"};
+}
+}
+
+Diagnostics::Diagnostics(QObject *parent) :
+    QObject(parent),
+    m_watcher (),
+    m_whoopsieInterface (
+        whoopsie::service_name,
+        whoopsie::object_path,
+        whoopsie::interface_name,
+        QDBusConnection::systemBus()),
+    m_locationServiceInterface(
+        location_service::service_name,
+        location_service::object_path,
+        location_service::interface_name,
+        QDBusConnection::systemBus())
+{
+    m_watcher.setConnection(QDBusConnection::systemBus());
+    m_watcher.setWatchMode(QDBusServiceWatcher::WatchForOwnerChange);
+    m_watcher.addWatchedService(whoopsie::service_name);
+    m_watcher.addWatchedService(location_service::service_name);
+
+    connect(&m_watcher,
+            SIGNAL(serviceOwnerChanged(QString, QString, QString)),
+            this,
+            SLOT(createWhoopsieInterface(QString, QString, QString)));
+
+    connect(&m_watcher,
+            SIGNAL(serviceOwnerChanged(QString, QString, QString)),
+            this,
+            SLOT(createLocationServiceInterface(QString, QString, QString)));
+
+    createWhoopsieInterface(whoopsie::service_name, "", "");
+    createLocationServiceInterface(location_service::service_name, "", "");
+}
+
+void Diagnostics::createWhoopsieInterface(const QString& name,
+                                          const QString& oldOwner,
+                                          const QString& newOwner)
 {
     Q_UNUSED (oldOwner);
 
     if (!m_whoopsieInterface.connection().isConnected() ||
-            name != "com.ubuntu.WhoopsiePreferences") {
+            name != whoopsie::service_name) {
         return;
     }
 
@@ -66,15 +100,51 @@ void Diagnostics::createInterface(const QString& name,
     }
 }
 
+void Diagnostics::createLocationServiceInterface(const QString& name,
+                                                 const QString& oldOwner,
+                                                 const QString& newOwner)
+{
+    Q_UNUSED (oldOwner);
+
+    if (!m_locationServiceInterface.connection().isConnected() ||
+            name != location_service::service_name) {
+        return;
+    }
+
+    m_locationServiceInterface.connection().connect(
+        m_locationServiceInterface.service(),
+        m_locationServiceInterface.path(),
+        "org.freedesktop.DBus.Properties",
+        "PropertiesChanged",
+        this,
+        SLOT(slotChanged()));
+
+    m_systemIdentifier = getIdentifier();
+
+    if(!newOwner.isEmpty()) {
+        /* Tell the UI to refresh its view of the properties */
+        slotChanged();
+    }
+}
+
 void Diagnostics::slotChanged()
 {
     Q_EMIT reportCrashesChanged();
+    Q_EMIT reportWifiAndCellIdsChanged();
 }
 
 bool Diagnostics::canReportCrashes()
 {
     if (m_whoopsieInterface.isValid()) {
         return m_whoopsieInterface.property("ReportCrashes").toBool();
+    }
+    return false;
+}
+
+bool Diagnostics::canReportWifiAndCellIds()
+{
+    if (m_locationServiceInterface.isValid()) {
+        return m_locationServiceInterface.property("DoesReportCellAndWifiIds").toBool();
     }
     return false;
 }
@@ -92,6 +162,11 @@ void Diagnostics::setReportCrashes(bool report)
 {
     m_whoopsieInterface.call("SetReportCrashes", report);
     m_whoopsieInterface.call("SetAutomaticallyReportCrashes", report);
+}
+
+void Diagnostics::setReportWifiAndCellIds(bool report)
+{
+    m_locationServiceInterface.property("DoesReportCellAndWifiIds").setValue(report);
 }
 
 QString Diagnostics::systemIdentifier() {

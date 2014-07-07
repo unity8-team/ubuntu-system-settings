@@ -33,24 +33,39 @@ class Diagnostics : public QObject
                 READ canReportCrashes
                 WRITE setReportCrashes
                 NOTIFY reportCrashesChanged )
+
+    Q_PROPERTY( bool canReportWifiAndCellIds
+                READ canReportWifiAndCellIds
+                WRITE setReportWifiAndCellIds
+                NOTIFY reportWifiAndCellIdsChanged )
     
 public:
     explicit Diagnostics(QObject *parent = 0);
     ~Diagnostics();
+
     bool canReportCrashes();
+    bool canReportWifiAndCellIds();
+
     Q_INVOKABLE void setReportCrashes(bool report);
+    Q_INVOKABLE void setReportWifiAndCellIds(bool report);
+
     Q_INVOKABLE QString systemIdentifier();
 
 public Q_SLOTS:
     void slotChanged();
-    void createInterface(const QString&, const QString&, const QString& newOwner);
+    void createWhoopsieInterface(const QString&, const QString&, const QString& newOwner);
+    void createLocationServiceInterface(const QString&, const QString&, const QString& newOwner);
 
 Q_SIGNALS:
     void reportCrashesChanged();
+    void reportWifiAndCellIdsChanged();
 
 private:
     QDBusServiceWatcher m_watcher;
+
     QDBusInterface m_whoopsieInterface;
+    QDBusInterface m_locationServiceInterface;
+
     QString m_systemIdentifier;
     QString getIdentifier();
 };
