@@ -62,7 +62,7 @@ Row {
                 opacity: 1
                 text: {
                     var count = Utilities.getSelected(repeater);
-                    return i18n.tr("Delete %1 image", "Delete %1 images", count).arg(count)
+                    return i18n.tr("Remove %1 image", "Remove %1 images", count).arg(count)
                 }
                 onClicked: {
                     parent.state = "";
@@ -77,7 +77,7 @@ Row {
         action: selectDefaultPeer
         objectName: "addCustomBackgroundsButton"
         gradient: UbuntuColors.greyGradient
-        text: i18n.tr("Add an Image…")
+        text: i18n.tr("Add an image…")
         width: buttonWidth
         anchors {
             verticalCenter: parent.verticalCenter
@@ -88,7 +88,7 @@ Row {
         id: queue
         objectName: "removeCustomBackgroundsButton"
         gradient: UbuntuColors.greyGradient
-        text: i18n.tr("Remove Images…")
+        text: i18n.tr("Remove images…")
         width: buttonWidth
         anchors {
             verticalCenter: parent.verticalCenter
