@@ -4,6 +4,7 @@ set(QML_SOURCES
     PageComponent.qml
     ServiceInfo.qml
     Services.qml
+    dateUtils.js
 )
 
 # We need a dummy target so the QML files show up in Qt Creator
