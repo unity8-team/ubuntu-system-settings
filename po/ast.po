@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-06-24 11:40+0200\n"
-"PO-Revision-Date: 2014-03-21 01:28+0000\n"
-"Last-Translator: Xuacu Saturio <xuacusk8@gmail.com>\n"
+"PO-Revision-Date: 2014-07-05 16:50+0000\n"
+"Last-Translator: ivarela <ivarela@ubuntu.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-25 06:13+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
+"X-Launchpad-Export-Date: 2014-07-06 06:03+0000\n"
+"X-Generator: Launchpad (build 17086)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -761,7 +761,7 @@ msgstr "El software ta anováu"
 
 #: plugins/system-update//PageComponent.qml:139
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Por favor, anicia sesión na to cuenta d'Ubuntu One"
 
 #: plugins/system-update//PageComponent.qml:154
 msgid "System update has failed."
@@ -812,7 +812,7 @@ msgstr "Instalando"
 
 #: plugins/system-update//PageComponent.qml:393
 msgid "Installed"
-msgstr ""
+msgstr "Instaláu"
 
 #: plugins/system-update//PageComponent.qml:417
 msgid "Version: "
@@ -833,7 +833,7 @@ msgstr "Siempre"
 
 #: plugins/system-update//PageComponent.qml:501
 msgid "Credentials not found"
-msgstr ""
+msgstr "Nun s'alcontraron credenciales"
 
 #: plugins/system-update//PageComponent.qml:531
 msgid "Installing update…"
@@ -879,11 +879,11 @@ msgstr "Brillu"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Axustar automáticamente"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Aclara y escurez la pantalla p'adautala a les condiciones"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1093,23 +1093,23 @@ msgstr "Mala"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "Visible"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Non visible"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Preseos coneutaos:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Coneutar un preséu distintu:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Coneutar otru preséu:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1286,87 +1286,92 @@ msgstr "Sistema"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "Atrás"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Axustes del teléfonu"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is setup to automatically report errors to Canonical. This can be "
 "disabled in system settings."
 msgstr ""
+"El teléfonu ta configuráu automáticamente pa informar de los fallos a "
+"Canonical. Esto pues desactivalo nos axustes del sistema."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is setup to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"El teléfonu ta configuráu pa deteutar la to llocalización. Esto pues "
+"desactivalo nos axustes del sistema."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "Nun hai tarxeta SIM"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Nun t'esmolezas, pues inxertar dempués una tarxeta SIM."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "Pel momentu, nun vas poder usar les funciones de telefonía y SMS."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
+"Pues alcontrar una SIM nel paquete del teléfonu o contautar col vendedor."
 
 #: wizard/qml/Pages//no-sim.qml:68 wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Saltar"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "Eso ye too!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Préstanos que te xunas a la comunidá Ubuntu."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Qu'esfrutes del teléfonu."
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Finar"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Coneutar a Wi-Fi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "Redes disponibles"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+msgstr "Coneutar a una rede Wi-Fi pa personalizar los axustes"
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "¡Bones!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "Dámoste l'acoyida n'Ubuntu"
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "Vamos entamar."
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Seleiciona la to llingua"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1555,7 +1560,7 @@ msgstr "anovar"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Anovamientos disponibles"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
