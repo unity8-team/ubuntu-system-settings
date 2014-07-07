@@ -118,6 +118,16 @@ ItemPage {
                 visible: imeiNumber
             }
 
+            ListItem.Divider {}
+
+            ListItem.Standard {
+                id: storageItem
+                objectName: "storageItem"
+                text: i18n.tr("Storage")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
+            }
+
             ListItem.Standard {
                 objectName: "softwareItem"
                 text: i18n.tr("Software:")
@@ -128,6 +138,8 @@ ItemPage {
                 text: i18n.tr("OS")
                 value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
                        (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
             }
 
             ListItem.SingleValue {
@@ -144,14 +156,6 @@ ItemPage {
                     onClicked:
                         pageStack.push(pluginManager.getByName("system-update").pageComponent)
                 }
-            }
-
-            ListItem.Standard {
-                id: storageItem
-                objectName: "storageItem"
-                text: i18n.tr("Storage")
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
             ListItem.Standard {

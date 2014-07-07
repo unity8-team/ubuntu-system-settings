@@ -36,6 +36,8 @@ public:
     int downloadMode() { return 0; }
     void setDownloadMode(int) {}
     int currentBuildNumber() { return 123;}
+    QString currentUbuntuBuildNumber() { return QString("20140927");}
+    QString currentDeviceBuildNumber() { return QString("20140927");}
 
     void checkForUpdate() {}
     void downloadUpdate() {}
