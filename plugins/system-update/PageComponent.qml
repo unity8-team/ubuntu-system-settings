@@ -108,6 +108,7 @@ ItemPage {
                      var modelItem = updateManager.model[0];
                      item.actionButton.text = i18n.tr("Install");
                      modelItem.updateReady = true;
+                     modelItem.selected = false;
                      PopupUtils.close(dialogueInstall);
                  }
              }
