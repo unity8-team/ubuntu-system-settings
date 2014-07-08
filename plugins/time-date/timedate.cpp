@@ -44,10 +44,7 @@ TimeDate::TimeDate(QObject *parent) :
              this,
              SLOT (slotNameOwnerChanged (QString, QString, QString)));
 
-    if (m_timeDateInterface.isValid()) {
-        setUpInterface();
-    }
-
+    setUpInterface();
 }
 
 void TimeDate::setUpInterface()
@@ -59,7 +56,7 @@ void TimeDate::setUpInterface()
         "PropertiesChanged",
         this,
         SLOT(slotChanged(QString, QVariantMap, QStringList)));
-    }
+}
 
 QString TimeDate::timeZone()
 {
@@ -71,19 +68,20 @@ QString TimeDate::timeZone()
 
 QString TimeDate::getTimeZone()
 {
+    QVariant tz(m_timeDateInterface.property("Timezone"));
 
-    if (m_timeDateInterface.isValid()) {
-        return m_timeDateInterface.property("Timezone").toString();
-    }
+    if (tz.isValid())
+        return tz.toString();
 
     return QString();
 }
 
 bool TimeDate::getUseNTP()
 {
-    if (m_timeDateInterface.isValid()) {
-        return m_timeDateInterface.property("NTP").toBool();
-    }
+    QVariant useNTP(m_timeDateInterface.property("NTP"));
+
+    if (useNTP.isValid())
+        return useNTP.toBool();
 
     // Default to false
     return false;
@@ -91,9 +89,7 @@ bool TimeDate::getUseNTP()
 
 void TimeDate::setUseNTP(bool enabled)
 {
-    if (m_timeDateInterface.isValid()) {
-        m_timeDateInterface.call("SetNTP", enabled, false);
-    }
+    m_timeDateInterface.call("SetNTP", enabled, false);
 }
 
 void TimeDate::slotChanged(QString interface,
@@ -122,6 +118,7 @@ void TimeDate::slotNameOwnerChanged(QString name,
 {
     Q_UNUSED (oldOwner);
     Q_UNUSED (newOwner);
+
     if (name != "org.freedesktop.timedate1")
         return;
 
