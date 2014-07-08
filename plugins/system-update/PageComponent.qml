@@ -347,8 +347,7 @@ ItemPage {
                             textArea.retry = false;
                             updateManager.retryDownload(modelData.packageName);
                         } else if (modelData.updateReady) {
-                            updateManager.applySystemUpdate();
-                            installingImageUpdate.visible = true;
+                            PopupUtils.open(dialogInstallComponent);
                         } else if (modelData.updateState) {
                             if (modelData.systemUpdate) {
                                 updateManager.pauseDownload(modelData.packageName);
