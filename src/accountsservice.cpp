@@ -146,5 +146,4 @@ void AccountsService::customSetUserProperty(const QString &method,
                           this);
 
     iface.call(method, value);
-
 }
