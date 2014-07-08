@@ -166,6 +166,7 @@ void Background::updateUbuntuArt()
 
 
     dir.setFilter(QDir::Files | QDir::NoSymLinks);
+    dir.setSorting(QDir::Name);
     QFileInfoList tmpList = dir.entryInfoList();
     foreach (QFileInfo f, tmpList)
     {
