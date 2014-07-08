@@ -39,7 +39,7 @@ function poweredChanged (powered) {
     if(powered) {
         if (i === 0) {
             if (newIndex >= 0) {
-                techPrefSelector.selectedIndex = ;
+                techPrefSelector.selectedIndex = newIndex;
             }
         }
     } else {
