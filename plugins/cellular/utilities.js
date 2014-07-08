@@ -1,8 +1,6 @@
 
 /*
-return number index of key in the technology preference model
-LTE, UMTS and unknown ("") will return ANY
-
+return index of k in techPrefModel
 API docs: http://git.kernel.org/cgit/network/ofono/ofono.git/plain/doc/radio-settings-api.txt
 */
 function techPrefKeyToIndex (k) {
@@ -28,6 +26,7 @@ function preferenceChanged (preference) {
     // only change the selection if preference (Radio Settings interface available)
     // and the modem is powered
     if(preference !== '' && connMan.powered) {
+        console.warn('preferenceChanged, setting selectedIndex to', techPrefKeyToIndex(preference));
         techPrefSelector.selectedIndex = techPrefKeyToIndex(preference);
     }
 }
@@ -39,11 +38,13 @@ function poweredChanged (powered) {
     if(powered) {
         if (i === 0) {
             if (newIndex >= 0) {
+                console.warn('poweredChanged, setting selectedIndex to', newIndex);
                 techPrefSelector.selectedIndex = newIndex;
             }
         }
     } else {
         if (i > 0) {
+            console.warn('poweredChanged, setting selectedIndex to', 0);
             techPrefSelector.selectedIndex = 0;
         }
     }
@@ -63,12 +64,23 @@ function selectedIndexChanged (index) {
 }
 
 function interfacesChanged (interfaces) {
-    console.warn(interfaces);
+
+    var pref;
+
     if(interfaces.indexOf('org.ofono.RadioSettings') >= 0) {
-        console.warn('online: org.ofono.RadioSettings');
-        console.warn('interfacesChanged so setting selectedIndex to', techPrefKeyToIndex(rdoSettings.technologyPreference));
-        techPrefSelector.enabled = true;
-        techPrefSelector.selectedIndex = techPrefKeyToIndex(rdoSettings.technologyPreference)
+        pref = rdoSettings.technologyPreference;
+        if (pref === 'umts' || pref === 'lte') {
+            console.warn('interfacesChanged[RadioSettings online]: saw', pref, 'setting to any');
+            rdoSettings.technologyPreference = 'any';
+        } else if (pref === '') {
+            console.warn('interfacesChanged[RadioSettings online]: saw empty pref');
+            return;
+        } else {
+            console.warn('interfacesChanged[RadioSettings online]: saw ok pref', pref, 'setting to', techPrefKeyToIndex(rdoSettings.technologyPreference));
+            techPrefSelector.selectedIndex = techPrefKeyToIndex(rdoSettings.technologyPreference)
+            techPrefSelector.enabled = true;
+        }
+
     } else {
         console.warn('offline: org.ofono.RadioSettings');
         techPrefSelector.enabled = false;
