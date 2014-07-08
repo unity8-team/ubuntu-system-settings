@@ -1,6 +1,6 @@
 {
     "plugin": "update-plugin",
-    "icon": "/usr/share/ubuntu/settings/system/icons/settings-about.svg",
+    "icon": "ubuntu-logo-symbolic",
     "name": "Updates available",
     "translations": "ubuntu-system-settings",
     "category": "uncategorized-top",

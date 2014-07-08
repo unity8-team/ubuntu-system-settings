@@ -16,3 +16,6 @@ system-settings.pro.user
 /debian/tmp/
 /debian/ubuntu-system-settings/
 /debian/ubuntu-system-settings-example/
+.cproject
+.project
+.settings
