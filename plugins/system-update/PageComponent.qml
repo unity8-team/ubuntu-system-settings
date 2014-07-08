@@ -107,6 +107,7 @@ ItemPage {
                      var item = updateList.currentItem;
                      var modelItem = updateManager.model[0];
                      item.actionButton.text = i18n.tr("Install");
+                     item.progressBar.opacity = 0;
                      modelItem.updateReady = true;
                      modelItem.selected = false;
                      PopupUtils.close(dialogueInstall);
@@ -307,6 +308,7 @@ ItemPage {
             height: modelData.selected ? units.gu(14) : units.gu(8)
 
             property alias actionButton: buttonAppUpdate
+            property alias progressBar: progress
 
             Rectangle {
                 id: textArea
