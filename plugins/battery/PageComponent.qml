@@ -195,7 +195,7 @@ ItemPage {
                     ctx.fillText("|", zeroMark, axisHeight + units.dp(6) + 2*fontHeight)
 
                     labelWidth = context.measureText(i18n.tr("Today")).width;
-                    if(labelWidth < (width - zeroMark - rightMargin))
+                    if(labelWidth < (width - zeroMark - rightMargin - axisWidth - ctx.lineWidth))
                         ctx.fillText(i18n.tr("Today"), zeroMark + (width - zeroMark - labelWidth)/2, axisHeight + units.dp(6) + 2*fontHeight)
 
                     ctx.stroke()
