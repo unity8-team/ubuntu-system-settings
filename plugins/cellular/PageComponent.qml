@@ -23,10 +23,24 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Phone 1.0
+import QMenuModel 0.1
 
 ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
+
+    QDBusActionGroup {
+        id: actionGroup
+        busType: 1
+        busName: "com.canonical.indicator.network"
+        objectPath: "/com/canonical/indicator/network"
+
+        property variant actionObject: action("wifi.enable")
+
+        Component.onCompleted: {
+            start()
+        }
+    }
 
     NetworkRegistration {
         id: netReg
@@ -105,6 +119,21 @@ ItemPage {
                         return connMan.roamingAllowed
                     })
             }
+        }
+
+        ListItem.SingleValue {
+            text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
+            visible: showAllUI && !hotspotItem.visible
+        }
+
+        ListItem.SingleValue {
+            id: hotspotItem
+            text: i18n.tr("Wi-Fi hotspot")
+            progression: true
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+            }
+            visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
         }
 
         ListItem.Standard {
