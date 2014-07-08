@@ -111,13 +111,21 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         is that of index"""
         self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
 
-    def test_turn_off_modem(self):
+    def test_turn_modem_off(self):
         self.select_preference(PREFERENCE_OFF)
 
         sleep(1)
 
         self.assertEqual(False, self.modem_0.Get(CONNECTION_MANAGER_IFACE, 'Powered'))
 
+    def test_turn_modem_on(self):
+        self.select_preference(PREFERENCE_OFF)
+        sleep(1)
+        self.assertEqual(False, self.modem_0.Get(CONNECTION_MANAGER_IFACE, 'Powered'))
+
+        self.select_preference(PREFERENCE_ANY)
+        sleep(1)
+        self.assertEqual(True, self.modem_0.Get(CONNECTION_MANAGER_IFACE, 'Powered'))
 
     def test_off_setting_disables_roaming(self):
         """Test that switching off cellular data disables roaming switch"""
@@ -186,7 +194,8 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         # assert that 2G is selected
         self.assert_selected_preference(1)
 
-    def test_that_lte_and_umts_are_equal_to_any(self):
+    def test_that_settings_default_whatever_is_selected(self):
+        self.select_preference(PREFERENCE_2G)
 
         self.modem_0.EmitSignal(
             'org.ofono.RadioSettings',
@@ -196,35 +205,35 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         sleep(1)
 
-        self.assertEqual('any', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
+        self.assertEqual('gsm', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
 
         # assert that the preference is any
-        self.assert_selected_preference(2)
-
-    def test_that_technology_UI_is_sensitive_to_radiosettings_interface(self):
-        """Assert that changes the radiosetting interface will be reflected in the UI.
-        The reason to test this is that if the SIM is locked, the interface is absent.
-        When unlocked, it becomes available and should trigger change in UI.
-        """
-
-        # remove radio settings interface
-        # this simulates locking of SIM
-        modem_interfaces = self.modem_0.GetProperties()['Interfaces']
-        modem_interfaces.remove(RADIOSETTINGS_IFACE)
-        self.modem_0.SetProperty('Interfaces', modem_interfaces)
-
-        sleep(1)
-
-        # since the radiosettings interface is gone, the tech
-        # pref selector is disabled
-        self.assertFalse(self.data_preference_selector.enabled)
-
-        # add the radio settings interface
-        modem_interfaces = self.modem_0.GetProperties()['Interfaces']
-        modem_interfaces.append(RADIOSETTINGS_IFACE)
-        self.modem_0.SetProperty('Interfaces', modem_interfaces)
-
-        sleep(1)
-
-        # assert that the preference is GSM
         self.assert_selected_preference(1)
+
+    # def test_that_technology_UI_is_sensitive_to_radiosettings_interface(self):
+    #     """Assert that changes the radiosetting interface will be reflected in the UI.
+    #     The reason to test this is that if the SIM is locked, the interface is absent.
+    #     When unlocked, it becomes available and should trigger change in UI.
+    #     """
+
+    #     # remove radio settings interface
+    #     # this simulates locking of SIM
+    #     modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+    #     modem_interfaces.remove(RADIOSETTINGS_IFACE)
+    #     self.modem_0.SetProperty('Interfaces', modem_interfaces)
+
+    #     sleep(1)
+
+    #     # since the radiosettings interface is gone, the tech
+    #     # pref selector is disabled
+    #     self.assertFalse(self.data_preference_selector.enabled)
+
+    #     # add the radio settings interface
+    #     modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+    #     modem_interfaces.append(RADIOSETTINGS_IFACE)
+    #     self.modem_0.SetProperty('Interfaces', modem_interfaces)
+
+    #     sleep(1)
+
+    #     # assert that the preference is GSM
+    #     self.assert_selected_preference(1)

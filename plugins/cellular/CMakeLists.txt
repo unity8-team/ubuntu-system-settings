@@ -1,7 +1,7 @@
 set(QML_SOURCES
     ChooseCarrier.qml
     PageComponent.qml
-    utilities.js
+    rdosettings-helpers.js
 )
 
 # We need a dummy target so the QML files show up in Qt Creator

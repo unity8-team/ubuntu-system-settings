@@ -24,7 +24,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
-import "utilities.js" as Utilities
+import "rdosettings-helpers.js" as RSHelpers
 
 
 ItemPage {
@@ -34,7 +34,7 @@ ItemPage {
     OfonoRadioSettings {
         id: rdoSettings
         modemPath: manager.modems[0]
-        onTechnologyPreferenceChanged: Utilities.preferenceChanged(preference)
+        onTechnologyPreferenceChanged: RSHelpers.preferenceChanged(preference);
     }
 
     OfonoManager {
@@ -61,13 +61,13 @@ ItemPage {
     OfonoConnMan {
         id: connMan
         modemPath: manager.modems[0]
-        onPoweredChanged: Utilities.poweredChanged(powered)
+        powered: techPrefSelector.selectedIndex !== 0
+        onPoweredChanged: RSHelpers.poweredChanged(powered);
     }
 
     OfonoModem {
         id: modem
         modemPath: manager.modems[0]
-        onInterfacesChanged: Utilities.interfacesChanged(interfaces)
     }
 
     property string carrierName: netReg.name
@@ -96,7 +96,15 @@ ItemPage {
             model: techPrefModel
             text: i18n.tr("Cellular data:")
             enabled: rdoSettings.technologyPreference !== ""
-            onSelectedIndexChanged: Utilities.selectedIndexChanged(selectedIndex)
+            selectedIndex: {
+                var pref = rdoSettings.technologyPreference;
+                if (pref === "") {
+                    return 0;
+                } else {
+                    return RSHelpers.keyToIndex(RSHelpers.normalizeKey(pref));
+                }
+            }
+            onDelegateClicked: RSHelpers.delegateClicked(index)
         }
 
         ListItem.Standard {
