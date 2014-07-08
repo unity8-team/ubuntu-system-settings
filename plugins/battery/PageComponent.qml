@@ -165,9 +165,11 @@ ItemPage {
                     ctx.lineTo(0, -ctx.lineWidth)
 
                     // 24 ticks with 6, 12, 18, 24 being big
-                    for (i = 1; i <= 24; i++) {
+                    for (i = 0; i <= 24; i++) {
                         /* the marks need to be shifted on the hours */
                         x = ((i - currentMinutes / 60) / 24) * (width - axisWidth - ctx.lineWidth - rightMargin)
+                        if (x < 0)
+                            continue
                         y = (i % 6 == 0) ? axisHeight : axisHeight -
                                             Math.floor(axisHeight / 2)
                         ctx.moveTo(x, 0)
