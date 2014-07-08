@@ -122,10 +122,8 @@ void TimeDate::slotNameOwnerChanged(QString name,
     if (name != "org.freedesktop.timedate1")
         return;
 
-    setUpInterface();
-    // Tell QML so that it refreshes its view of the property
-    Q_EMIT timeZoneChanged();
-    Q_EMIT useNTPChanged();
+    if (m_timeDateInterface.isValid())
+        setUpInterface();
 }
 
 void TimeDate::setTimeZone(QString &time_zone)
