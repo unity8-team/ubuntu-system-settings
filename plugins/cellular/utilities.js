@@ -14,46 +14,39 @@ function techPrefKeyToIndex (k) {
         }
     }
 
+
     // we did not find a suitable ui item
     return -1;
 }
 
 function preferenceChanged (preference) {
-    var userPref = systemSettingsSettings.cellularDataTechnologyPreference;
-
-    // preference changed, but it differs from what the user wants
-    // revert it
-    if (preference !== userPref) {
-        console.warn('preferenceChanged: new pref', preference, 'unlike user pref', userPref)
-        rdoSettings.technologyPreference = userPref;
-        return;
-    } else {
-        // assume it was request by user, do nothing
-        console.warn('preferenceChanged: new pref', preference, 'matches user pref');
+    console.warn('preferenceChanged', preference);
+    if(preference === 'lte' || preference === 'umts') {
+        rdoSettings.technologyPreference = 'any';
         return;
     }
-
+    // only change the selection if preference (Radio Settings interface available)
+    // and the modem is powered
+    if(preference !== '' && connMan.powered) {
+        techPrefSelector.selectedIndex = techPrefKeyToIndex(preference);
+    }
 }
 
 function poweredChanged (powered) {
-    var userPrefIndex = techPrefKeyToIndex(systemSettingsSettings.cellularDataTechnologyPreference);
-    console.warn('Powered changed', powered, 'userPrefIndex', userPrefIndex, 'systemSettingsSettings.cellularDataTechnologyPreference', systemSettingsSettings.cellularDataTechnologyPreference);
-
-    // user preference not ready, exit
-    if(userPrefIndex < 0) {
-        return;
+    var i = techPrefSelector.selectedIndex;
+    var newIndex = techPrefKeyToIndex(rdoSettings.technologyPreference);
+    console.warn('poweredChanged', powered, i);
+    if(powered) {
+        if (i === 0) {
+            if (newIndex >= 0) {
+                techPrefSelector.selectedIndex = ;
+            }
+        }
+    } else {
+        if (i > 0) {
+            techPrefSelector.selectedIndex = 0;
+        }
     }
-
-    // if powering up, make sure we switch to the correct setting
-    if(powered && (techPrefSelector.selectedIndex === 0)) {
-        techPrefSelector.selectedIndex = userPrefIndex;
-    }
-
-    // powering down, only make a change if necessary
-    if(!powered && (techPrefSelector.selectedIndex > 0)) {
-        techPrefSelector.selectedIndex = 0;
-    }
-
 }
 
 
@@ -65,10 +58,19 @@ function selectedIndexChanged (index) {
         connMan.powered = true;
         console.warn('onSelectedIndexChanged wanted to power up');
         console.warn('onSelectedIndexChanged setting user pref', techPrefModel.get(index).key);
-        systemSettingsSettings.cellularDataTechnologyPreference = techPrefModel.get(index).key;
+        rdoSettings.technologyPreference = techPrefModel.get(index).key;
     }
 }
 
 function interfacesChanged (interfaces) {
     console.warn(interfaces);
+    if(interfaces.indexOf('org.ofono.RadioSettings') >= 0) {
+        console.warn('online: org.ofono.RadioSettings');
+        console.warn('interfacesChanged so setting selectedIndex to', techPrefKeyToIndex(rdoSettings.technologyPreference));
+        techPrefSelector.enabled = true;
+        techPrefSelector.selectedIndex = techPrefKeyToIndex(rdoSettings.technologyPreference)
+    } else {
+        console.warn('offline: org.ofono.RadioSettings');
+        techPrefSelector.enabled = false;
+    }
 }

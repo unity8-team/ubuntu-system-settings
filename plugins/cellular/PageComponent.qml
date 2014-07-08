@@ -31,23 +31,6 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    GSettings {
-        id: systemSettingsSettings
-        schema.id: "com.ubuntu.touch.system-settings"
-        onChanged: {
-            console.warn('systemSettingsSettings changed', key);
-            if (key == "cellularDataTechnologyPreference") {
-                rdoSettings.technologyPreference = cellularDataTechnologyPreference;
-                console.warn('cellularDataTechnologyPreference changed', cellularDataTechnologyPreference);
-            }
-        }
-        Component.onCompleted: {
-            var s = cellularDataTechnologyPreference;
-            rdoSettings.technologyPreference = s;
-            techPrefSelector.selectedIndex = modem.powered ? Utilities.techPrefKeyToIndex(s) : 0;
-        }
-    }
-
     OfonoRadioSettings {
         id: rdoSettings
         modemPath: manager.modems[0]
@@ -78,7 +61,7 @@ ItemPage {
     OfonoConnMan {
         id: connMan
         modemPath: manager.modems[0]
-        //onPoweredChanged: Utilities.poweredChanged(powered)
+        onPoweredChanged: Utilities.poweredChanged(powered)
     }
 
     OfonoModem {
@@ -103,17 +86,16 @@ ItemPage {
         Component {
             id: techPrefDelegate
             OptionSelectorDelegate { text: i18n.tr(name); }
-
         }
 
         ListItem.ItemSelector {
-
             id: techPrefSelector
             objectName: "technologyPreferenceSelector"
             expanded: true
             delegate: techPrefDelegate
             model: techPrefModel
             text: i18n.tr("Cellular data:")
+            enabled: rdoSettings.technologyPreference !== ""
             onSelectedIndexChanged: Utilities.selectedIndexChanged(selectedIndex)
         }
 

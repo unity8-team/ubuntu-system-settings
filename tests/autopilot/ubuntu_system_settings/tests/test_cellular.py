@@ -112,13 +112,12 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
 
     def test_turn_off_modem(self):
-        # select 2G only
-        sleep(1)
         self.select_preference(PREFERENCE_OFF)
 
-        sleep(3)
+        sleep(1)
 
-        self.assertEqual(False, self.modem_0.GetProperties()['Powered'])
+        self.assertEqual(False, self.modem_0.Get(CONNECTION_MANAGER_IFACE, 'Powered'))
+
 
     def test_off_setting_disables_roaming(self):
         """Test that switching off cellular data disables roaming switch"""
@@ -135,22 +134,6 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.select_preference(PREFERENCE_OFF)
         # assert roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
-
-    def test_unwanted_technology_preference_changes_does_not_affect_UI(self):
-        """Assert that DBus change to org.ofono.RadioSettings
-        is not reflected if unwanted (differs from gsetting)"""
-
-        self.select_preference(PREFERENCE_2G)
-
-        # fake dbus signal, changing from gsm to any
-        self.modem_0.EmitSignal(
-            'org.ofono.RadioSettings',
-            'PropertyChanged',
-            'sv',
-            ['TechnologyPreference',  dbus.String('any', variant_level=1)])
-
-        # assert that "2G" is selected
-        self.assert_selected_preference(1)
 
     def test_changes_to_technology_preference_is_reflected_by_DBus(self):
         self.select_preference(PREFERENCE_2G)
@@ -171,12 +154,12 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         # turn off cellular data
         self.select_preference(PREFERENCE_OFF)
 
-        # fake dbus signal, changing to gsm
+        # fake dbus signal, changing to any
         self.modem_0.EmitSignal(
             'org.ofono.RadioSettings',
             'PropertyChanged',
             'sv',
-            ['TechnologyPreference',  dbus.String('gsm', variant_level=1)])
+            ['TechnologyPreference',  dbus.String('any', variant_level=1)])
 
         # TODO: use 'eventually' instead
         sleep(1)
@@ -203,23 +186,25 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         # assert that 2G is selected
         self.assert_selected_preference(1)
 
-    def test_that_technology_UI_properly_handles_invalid_preference(self):
+    def test_that_lte_and_umts_are_equal_to_any(self):
 
         self.modem_0.EmitSignal(
             'org.ofono.RadioSettings',
             'PropertyChanged',
             'sv',
-            ['TechnologyPreference',  dbus.String('weird_stuff', variant_level=1)])
+            ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
 
         sleep(1)
 
-        # is reverted back to GSettings default
         self.assertEqual('any', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
+
+        # assert that the preference is any
+        self.assert_selected_preference(2)
 
     def test_that_technology_UI_is_sensitive_to_radiosettings_interface(self):
         """Assert that changes the radiosetting interface will be reflected in the UI.
         The reason to test this is that if the SIM is locked, the interface is absent.
-        When unlocked, it becomes available.
+        When unlocked, it becomes available and should trigger change in UI.
         """
 
         # remove radio settings interface
@@ -230,29 +215,16 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         sleep(1)
 
-        self.select_preference(PREFERENCE_2G)
-
-        sleep(1)
+        # since the radiosettings interface is gone, the tech
+        # pref selector is disabled
+        self.assertFalse(self.data_preference_selector.enabled)
 
         # add the radio settings interface
         modem_interfaces = self.modem_0.GetProperties()['Interfaces']
         modem_interfaces.append(RADIOSETTINGS_IFACE)
         self.modem_0.SetProperty('Interfaces', modem_interfaces)
 
-        # let it be crazy and come back online trying to be in LTE mode
-        self.modem_0.Set(RADIOSETTINGS_IFACE, 'TechnologyPreference', 'lte')
-        self.modem_0.EmitSignal(
-            'org.ofono.RadioSettings',
-            'PropertyChanged',
-            'sv',
-            ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
-
         sleep(1)
 
         # assert that the preference is GSM
         self.assert_selected_preference(1)
-
-        # assert that the modem preference matches our selected preference
-        self.assertEqual('gsm', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
-
-        self.assertEqual(1,2)
