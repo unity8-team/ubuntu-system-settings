@@ -29,42 +29,60 @@ ItemPage {
     objectName: "chooseCarrierPage"
 
     property var netReg
-    property variant operators: []
-    property bool scanning: netReg.scanning
+    property var operators: []
+    property bool scanning: false
     property variant operatorNames
     property variant operatorStatus
     property int curOp
+    Component.onCompleted: buildLists();
 
     Connections {
         target: netReg
-        onNetworkOperatorsChanged: buildLists()
-        onScanFinished: netReg.scanning = false;
+        onStatusChanged: {
+            console.warn("onStatusChanged: " + netReg.status);
+            if (netReg.status === "registered")
+                buildLists();
+        }
+        onNetworkOperatorsChanged: buildLists();
+        onScanFinished: scanning = false;
+        onScanError: {
+            scanning = false;
+            console.warn ("onScanError: " + message);
+        }
     }
 
     function buildLists()
     {
-        operators = [];
+        var ops = [];
         var oN = new Array();
         var oS = new Array();
-        for (var i; i < netReg.networkOperators.length; i++)
-        {
+        for (var i = 0; i < netReg.networkOperators.length; i++) {
             var tempOp = netOp.createObject(parent, {"operatorPath": netReg.networkOperators[i]});
             if (tempOp.status === "forbidden")
                 continue
             oN.push(tempOp.name);
             oS.push(tempOp.status);
-            operators.push(tempOp)
+            ops.push(tempOp)
         }
         curOp = oS.indexOf("current");
         operatorNames = oN;
         operatorStatus = oS;
+        operators = ops;
+        carrierSelector.selectedIndex = curOp;
     }
 
     Component {
         id: netOp
         OfonoNetworkOperator {
             onRegisterComplete: {
-                console.warn ("registerComplete: " + errorString);
+                if (error === OfonoNetworkOperator.NoError)
+                    console.warn("registerComplete: SUCCESS");
+                else if (error === OfonoNetworkOperator.InProgressError)
+                    console.warn("registerComplete failed with error: " + errorString);
+                else {
+                    console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
+                    netReg.registration();
+                }
             }
         }
     }
@@ -79,10 +97,11 @@ ItemPage {
          */
         enabled: true
         model: operatorNames
-        selectedIndex: curOp
         onSelectedIndexChanged: {
-            netOp.operatorPath =
-            operators[selectedIndex].registerOperator();
+            if ((selectedIndex !== curOp) && operators[selectedIndex]) {
+                console.warn("onSelectedIndexChanged status: " + operators[selectedIndex].status);
+                operators[selectedIndex].registerOperator();
+            }
         }
     }
 
@@ -92,8 +111,9 @@ ItemPage {
             objectName: "refreshButton"
             width: parent.width - units.gu(4)
             text: i18n.tr("Refresh")
+            enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
             onTriggered: {
-                netReg.scanning = true;
+                scanning = true;
                 netReg.scan();
             }
         }

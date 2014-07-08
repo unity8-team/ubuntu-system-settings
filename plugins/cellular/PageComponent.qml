@@ -31,7 +31,6 @@ ItemPage {
         id: manager
     }
 
-
     OfonoSimManager {
         id: sim
         modemPath: manager.modems[0]        
@@ -40,8 +39,11 @@ ItemPage {
     OfonoNetworkRegistration {
         id: netReg
         modemPath: manager.modems[0]
-        property bool scanning: false
+        onStatusChanged: {
+            console.warn ("onStatusChanged: " + netReg.status);
+        }
         onModeChanged: {
+            console.warn ("onModeChanged: " + mode);
             if (mode === "manual")
                 chooseCarrier.selectedIndex = 1;
             else
@@ -53,8 +55,6 @@ ItemPage {
         id: connMan
         modemPath: manager.modems[0]
     }
-
-    property string carrierName: netReg.name
 
     Column {
         anchors.left: parent.left
@@ -121,12 +121,16 @@ ItemPage {
             text: i18n.tr("Choose carrier:")
             model: [i18n.tr("Automatically"), i18n.tr("Manually")]
             selectedIndex: netReg.mode === "manual" ? 1 : 0
+            onSelectedIndexChanged: {
+                if (selectedIndex === 0)
+                    netReg.registration();
+            }
         }
 
         ListItem.SingleValue {
             text: i18n.tr("Carrier")
             objectName: "chooseCarrier"
-            value: carrierName ? carrierName : i18n.tr("N/A")
+            value: netReg.name ? netReg.name : i18n.tr("N/A")
             property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
             progression: enabled
             onClicked: {
