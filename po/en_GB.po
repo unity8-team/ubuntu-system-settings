@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-24 11:40+0200\n"
+"POT-Creation-Date: 2014-07-07 13:08+0200\n"
 "PO-Revision-Date: 2014-06-05 13:21+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-06-25 06:15+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
+"X-Launchpad-Export-Date: 2014-07-08 07:00+0000\n"
+"X-Generator: Launchpad (build 17086)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -64,7 +64,7 @@ msgid "Other sounds:"
 msgstr "Other sounds:"
 
 #: plugins/sound//PageComponent.qml:139
-#: plugins/language//PageComponent.qml:155
+#: plugins/language//PageComponent.qml:160
 msgid "Keyboard sound"
 msgstr "Keyboard sound"
 
@@ -141,6 +141,7 @@ msgstr ""
 #: plugins/time-date//TimePicker.qml:173
 #: plugins/security-privacy//LockSecurity.qml:310
 #: plugins/language//DisplayLanguage.qml:94
+#: plugins/wifi//OtherNetwork.qml:112
 #: plugins/phone//CallForwarding.qml:113
 #: plugins/reset//EraseEverything.qml:36
 #: plugins/reset//ResetAllSettings.qml:36
@@ -245,7 +246,7 @@ msgstr "Unset"
 
 #: plugins/security-privacy//LockSecurity.qml:274
 #: wizard/qml/Pages//30-location.qml:48
-#: wizard/qml/Pages//20-wifi.qml:168 wizard/qml/Pages//10-welcome.qml:78
+#: wizard/qml/Pages//20-wifi.qml:168 ../wizard/qml/Pages//10-welcome.qml:78
 msgid "Continue"
 msgstr "Continue"
 
@@ -442,6 +443,7 @@ msgid "Return results from:"
 msgstr "Return results from:"
 
 #: plugins/security-privacy//PhoneLocking.qml:40
+#: plugins/wifi//OtherNetwork.qml:67
 #: plugins/bluetooth//PageComponent.qml:105
 #: plugins/bluetooth//PageComponent.qml:256
 #: plugins/bluetooth//PageComponent.qml:264
@@ -467,40 +469,40 @@ msgid "Sleep locks immediately"
 msgstr "Sleep locks immediately"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: plugins/language//PageComponent.qml:31
+#: plugins/language//PageComponent.qml:32
 #: settings.js:44
 msgid "Language & Text"
 msgstr "Language & Text"
 
-#: plugins/language//PageComponent.qml:70
+#: plugins/language//PageComponent.qml:71
 msgid "Display language…"
 msgstr "Display language…"
 
-#: plugins/language//PageComponent.qml:80
+#: plugins/language//PageComponent.qml:85
 #: plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
 msgstr "Keyboard layouts"
 
-#: plugins/language//PageComponent.qml:95
-#: plugins/language//PageComponent.qml:105
+#: plugins/language//PageComponent.qml:100
+#: plugins/language//PageComponent.qml:110
 #: plugins/language//SpellChecking.qml:27
 #: plugins/language//SpellChecking.qml:36
 msgid "Spell checking"
 msgstr "Spell checking"
 
-#: plugins/language//PageComponent.qml:115
+#: plugins/language//PageComponent.qml:120
 msgid "Auto completion"
 msgstr "Auto completion"
 
-#: plugins/language//PageComponent.qml:125
+#: plugins/language//PageComponent.qml:130
 msgid "Word suggestions"
 msgstr "Word suggestions"
 
-#: plugins/language//PageComponent.qml:138
+#: plugins/language//PageComponent.qml:143
 msgid "Auto capitalization"
 msgstr "Auto capitalisation"
 
-#: plugins/language//PageComponent.qml:148
+#: plugins/language//PageComponent.qml:153
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "Turns on Shift to capitalise the first letter of each sentence."
 
@@ -585,7 +587,7 @@ msgstr ""
 #: plugins/battery//PageComponent.qml:117
 #: plugins/battery//PageComponent.qml:224
 #: plugins/cellular//PageComponent.qml:129
-#: plugins/about//Storage.qml:203
+#: plugins/about//Storage.qml:204
 msgid "N/A"
 msgstr "N/A"
 
@@ -616,15 +618,16 @@ msgstr[1] ""
 #: plugins/battery//PageComponent.qml:249
 #: plugins/battery//PageComponent.qml:258
 #: plugins/battery//SleepValues.qml:96
-#: plugins/system-update//PageComponent.qml:445
+#: plugins/wifi//NetworkDetails.qml:56
+#: plugins/system-update//PageComponent.qml:449
 #: plugins/system-update//Configuration.qml:53
-#: plugins/about//PageComponent.qml:116
+#: plugins/about//PageComponent.qml:128
 msgid "Never"
 msgstr "Never"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: plugins/battery//PageComponent.qml:268
-#: plugins/wifi//PageComponent.qml:27
+#: plugins/wifi//PageComponent.qml:26
 #: settings.js:60
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
@@ -663,8 +666,66 @@ msgstr ""
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 
+#: plugins/wifi//PageComponent.qml:114
+#: plugins/wifi//PreviousNetworks.qml:26
+msgid "Previous networks"
+msgstr ""
+
+#: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
+msgid "Other network"
+msgstr ""
+
+#: plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr ""
+
+#: plugins/wifi//OtherNetwork.qml:66
+msgid "Security"
+msgstr ""
+
+#: plugins/wifi//OtherNetwork.qml:68
+msgid "WPA & WPA2 Personal"
+msgstr ""
+
+#: plugins/wifi//OtherNetwork.qml:69
+msgid "WEP"
+msgstr ""
+
+#: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
+msgid "Password"
+msgstr ""
+
+#: plugins/wifi//OtherNetwork.qml:89
+msgid "Password visible"
+msgstr ""
+
+#: plugins/wifi//OtherNetwork.qml:121
+msgid "Connect"
+msgstr ""
+
+#: plugins/wifi//NetworkDetails.qml:37
+msgid "Network details"
+msgstr ""
+
+#: plugins/wifi//NetworkDetails.qml:44
+#: plugins/bluetooth//PageComponent.qml:263
+msgid "Name"
+msgstr ""
+
+#: plugins/wifi//NetworkDetails.qml:52
+msgid "Last connected"
+msgstr ""
+
+#: plugins/wifi//NetworkDetails.qml:74
+msgid "Show password"
+msgstr ""
+
+#: plugins/wifi//NetworkDetails.qml:84
+msgid "Forget network"
+msgstr ""
+
 #. TRANSLATORS: %1 is the name of the (network) carrier
-#: plugins/phone//Services.qml:30 plugins/phone//PageComponent.qml:61
+#: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
 #, qt-format
 msgid "%1 Services"
 msgstr ""
@@ -686,7 +747,7 @@ msgstr ""
 msgid "Call forwarding"
 msgstr ""
 
-#: plugins/phone//PageComponent.qml:52 plugins/phone//CallWaiting.qml:27
+#: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
 #: plugins/phone//CallWaiting.qml:53
 msgid "Call waiting"
 msgstr ""
@@ -725,123 +786,126 @@ msgstr ""
 msgid "Updates"
 msgstr "Updates"
 
-#: plugins/system-update//PageComponent.qml:50
+#: plugins/system-update//PageComponent.qml:51
 msgid "Update System"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:51
+#: plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:54
+#: plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:63
+#: plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:69
+#: plugins/system-update//PageComponent.qml:70
 msgid "Install"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:87
+#: plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:139
+#: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:154
+#: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:165
+#: plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:196
+#: plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:214
+#: plugins/system-update//PageComponent.qml:217
 #, qt-format
-msgid "Install %1 update"
-msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgid "Install %1 updates…"
+msgstr ""
 
-#: plugins/system-update//PageComponent.qml:215
+#: plugins/system-update//PageComponent.qml:217
+#, qt-format
+msgid "Install %1 updates"
+msgstr ""
+
+#: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:283
+#: plugins/system-update//PageComponent.qml:287
 msgid "Retry"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:299
+#: plugins/system-update//PageComponent.qml:303
 msgid "Download"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:299
+#: plugins/system-update//PageComponent.qml:303
 msgid "Update"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:300
+#: plugins/system-update//PageComponent.qml:304
 msgid "Resume"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:301
+#: plugins/system-update//PageComponent.qml:305
 msgid "Pause"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:360
+#: plugins/system-update//PageComponent.qml:364
 msgid "Installing"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:393
+#: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:417
+#: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:442
+#: plugins/system-update//PageComponent.qml:446
 #: plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:447
+#: plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:449
+#: plugins/system-update//PageComponent.qml:453
 msgid "Always"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:501
+#: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:531
+#: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:545
+#: plugins/system-update//PageComponent.qml:549
 msgid " bytes"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:548
+#: plugins/system-update//PageComponent.qml:552
 msgid " KiB"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:551
+#: plugins/system-update//PageComponent.qml:555
 msgid " MiB"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:554
+#: plugins/system-update//PageComponent.qml:558
 msgid " GiB"
 msgstr ""
 
@@ -1017,7 +1081,7 @@ msgstr ""
 msgid "Modem"
 msgstr ""
 
-#: plugins/bluetooth//PageComponent.qml:84 src/qml/MainWindow.qml:144
+#: plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
 msgid "Network"
 msgstr "Network"
 
@@ -1105,10 +1169,6 @@ msgstr ""
 msgid "None detected"
 msgstr ""
 
-#: plugins/bluetooth//PageComponent.qml:263
-msgid "Name"
-msgstr ""
-
 #: plugins/bluetooth//PageComponent.qml:267
 msgid "Type"
 msgstr ""
@@ -1176,9 +1236,37 @@ msgstr ""
 msgid "Searching"
 msgstr ""
 
-#: plugins/about//Software.qml:11 plugins/about//PageComponent.qml:144
+#: plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:148
 msgid "Software licenses"
 msgstr "Software licenses"
+
+#: plugins/about//Version.qml:35
+msgid "OS Build Details"
+msgstr ""
+
+#: plugins/about//Version.qml:53
+msgid "OS build number"
+msgstr ""
+
+#: plugins/about//Version.qml:59
+msgid "Ubuntu Image part"
+msgstr ""
+
+#: plugins/about//Version.qml:85
+msgid "Ubuntu build description"
+msgstr ""
+
+#: plugins/about//Version.qml:100
+msgid "Device Image part"
+msgstr ""
+
+#: plugins/about//Version.qml:126
+msgid "Device build description"
+msgstr ""
+
+#: plugins/about//Version.qml:141
+msgid "Customization Image part"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1190,71 +1278,71 @@ msgstr "About this phone"
 msgid "Serial"
 msgstr "Serial"
 
-#: plugins/about//PageComponent.qml:103
-msgid "Software:"
-msgstr "Software:"
-
-#: plugins/about//PageComponent.qml:108
-msgid "OS"
-msgstr "OS"
-
-#: plugins/about//PageComponent.qml:115
-msgid "Last updated"
-msgstr "Last updated"
-
-#: plugins/about//PageComponent.qml:122
-msgid "Check for updates"
-msgstr "Check for updates"
-
-#: plugins/about//PageComponent.qml:132 plugins/about//Storage.qml:33
+#: plugins/about//PageComponent.qml:106 ../plugins/about//Storage.qml:33
 msgid "Storage"
 msgstr "Storage"
 
-#: plugins/about//PageComponent.qml:139
+#: plugins/about//PageComponent.qml:113
+msgid "Software:"
+msgstr "Software:"
+
+#: plugins/about//PageComponent.qml:118
+msgid "OS"
+msgstr "OS"
+
+#: plugins/about//PageComponent.qml:127
+msgid "Last updated"
+msgstr "Last updated"
+
+#: plugins/about//PageComponent.qml:134
+msgid "Check for updates"
+msgstr "Check for updates"
+
+#: plugins/about//PageComponent.qml:143
 msgid "Legal:"
 msgstr "Legal:"
 
-#: plugins/about//PageComponent.qml:152
+#: plugins/about//PageComponent.qml:156
 msgid "Regulatory info"
 msgstr "Regulatory info"
 
-#: plugins/about//Storage.qml:88
+#: plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
 msgstr "Used by Ubuntu"
 
-#: plugins/about//Storage.qml:89
+#: plugins/about//Storage.qml:88
 msgid "Videos"
 msgstr ""
 
-#: plugins/about//Storage.qml:90
+#: plugins/about//Storage.qml:89
 msgid "Audio"
 msgstr "Audio"
 
-#: plugins/about//Storage.qml:91
+#: plugins/about//Storage.qml:90
 msgid "Pictures"
 msgstr "Pictures"
 
-#: plugins/about//Storage.qml:92
+#: plugins/about//Storage.qml:91
 msgid "Other files"
 msgstr "Other files"
 
-#: plugins/about//Storage.qml:93
+#: plugins/about//Storage.qml:92
 msgid "Used by apps"
 msgstr "Used by apps"
 
-#: plugins/about//Storage.qml:143
+#: plugins/about//Storage.qml:142
 msgid "Total storage"
 msgstr "Total storage"
 
-#: plugins/about//Storage.qml:155
+#: plugins/about//Storage.qml:154
 msgid "Free space"
 msgstr "Free space"
 
-#: plugins/about//Storage.qml:175
+#: plugins/about//Storage.qml:174
 msgid "By name"
 msgstr "By name"
 
-#: plugins/about//Storage.qml:175
+#: plugins/about//Storage.qml:174
 msgid "By size"
 msgstr "By size"
 
@@ -1284,13 +1372,13 @@ msgstr ""
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
-"Your phone is setup to automatically report errors to Canonical. This can be "
-"disabled in system settings."
+"Your phone is set up to automatically report errors to Canonical. This can "
+"be disabled in system settings."
 msgstr ""
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
-"Your phone is setup to detect your location. This can be disabled in system "
+"Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
 
@@ -1310,7 +1398,7 @@ msgstr ""
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
 
-#: wizard/qml/Pages//no-sim.qml:68 wizard/qml/Pages//20-wifi.qml:168
+#: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
 msgstr ""
 
