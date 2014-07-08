@@ -184,19 +184,25 @@ ItemPage {
                         /* Write the x-axis legend */
                         if (i % 6 == 0 && i != 0) {
                             labelWidth = context.measureText("%1".arg(displayHour)).width;
-                            ctx.fillText("%1".arg(displayHour), x - labelWidth/2, axisHeight + units.dp(1) + fontHeight)
+                            ctx.fillText("%1".arg(displayHour),
+                                         x - labelWidth/2,
+                                         axisHeight + units.dp(1) + fontHeight)
                         }
                     }
 
                     labelWidth = context.measureText(i18n.tr("Yesterday")).width;
                     if(labelWidth < zeroMark)
-                        ctx.fillText(i18n.tr("Yesterday"), (zeroMark - labelWidth)/2, axisHeight + units.dp(6) + 2*fontHeight)
+                        ctx.fillText(i18n.tr("Yesterday"),
+                                     (zeroMark - labelWidth)/2,
+                                     axisHeight + units.dp(6) + 2*fontHeight)
 
                     ctx.fillText("|", zeroMark, axisHeight + units.dp(6) + 2*fontHeight)
 
                     labelWidth = context.measureText(i18n.tr("Today")).width;
                     if(labelWidth < (width - zeroMark - rightMargin - axisWidth - ctx.lineWidth))
-                        ctx.fillText(i18n.tr("Today"), zeroMark + (width - zeroMark - labelWidth)/2, axisHeight + units.dp(6) + 2*fontHeight)
+                        ctx.fillText(i18n.tr("Today"),
+                                     zeroMark + (width - zeroMark - labelWidth)/2,
+                                     axisHeight + units.dp(6) + 2*fontHeight)
 
                     ctx.stroke()
                     ctx.restore()
@@ -229,7 +235,8 @@ ItemPage {
                     ctx.translate(axisWidth, axisHeight + bottomMargin)
                     // Scale to avoid the axes so we can draw as if they aren't
                     // there
-                    ctx.scale(1 - ((axisWidth + rightMargin) / width), 1 - (axisHeight + bottomMargin) / height)
+                    ctx.scale(1 - ((axisWidth + rightMargin) / width),
+                              1 - (axisHeight + bottomMargin) / height)
 
                     var gradient = ctx.createLinearGradient(0, 0, 0, height);
                     gradient.addColorStop(1, "green");
