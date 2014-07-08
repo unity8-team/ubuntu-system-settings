@@ -36,11 +36,53 @@ ItemPage {
 
     property bool installAll: false
     property int updatesAvailable: 0
-
     property var notificationAction;
+    property bool batterySafeForUpdate: false
 
     DeviceInfo {
         id: deviceInfo
+    }
+
+    BatteryInfo {
+        id: batteryInfo
+
+        monitorChargingState: true
+        monitorBatteryStatus: true
+        monitorRemainingCapacity: true
+
+        onRemainingCapacityChanged: {
+            capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
+            if (capacity < 50) {
+                root.batterySafeForUpdate = false;
+            } else {
+                root.batterySafeForUpdate = true;
+            }
+        }
+
+        onChargingStateChanged: {
+            if (state === BatteryInfo.Charging) {
+                label.text = i18n.tr("Charging now")
+                root.batterySafeForUpdate = true;
+            }
+            else if (state === BatteryInfo.Discharging &&
+                     batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
+                label.text = i18n.tr("Last full charge")
+                capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
+                if (capacity < 50) {
+                    root.batterySafeForUpdate = false;
+                } else {
+                    root.batterySafeForUpdate = true;
+                }
+            }
+            else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
+                     state === BatteryInfo.NotCharging) {
+                label.text = i18n.tr("Fully charged")
+                root.batterySafeForUpdate = true;
+            }
+        }
+        Component.onCompleted: {
+            onChargingStateChanged(0, chargingState(0))
+        }
     }
 
     Component {
@@ -48,11 +90,12 @@ ItemPage {
          Dialog {
              id: dialogueInstall
              title: i18n.tr("Update System")
-             text: i18n.tr("The phone needs to restart to install the system update.")
+             text: root.batterySafeForUpdate ? i18n.tr("The phone needs to restart to install the system update.") : i18n.tr("Connect the phone to power before installing the system update.")
 
              Button {
                  text: i18n.tr("Install & Restart")
                  color: UbuntuColors.orange
+                 visible: root.batterySafeForUpdate ? true : false
                  onClicked: {
                      installingImageUpdate.visible = true;
                      updateManager.applySystemUpdate();
