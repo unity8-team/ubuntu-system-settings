@@ -168,7 +168,7 @@ ItemPage {
                     for (i = 1; i <= 24; i++) {
                         /* the marks need to be shifted on the hours */
                         x = ((i - currentMinutes / 60) / 24) * (width - axisWidth - ctx.lineWidth - rightMargin)
-                        y = (i % 6 == 0 && i != 0) ? axisHeight : axisHeight -
+                        y = (i % 6 == 0) ? axisHeight : axisHeight -
                                             Math.floor(axisHeight / 2)
                         ctx.moveTo(x, 0)
                         ctx.lineTo(x, y)
@@ -182,7 +182,7 @@ ItemPage {
                             zeroMark = x
 
                         /* Write the x-axis legend */
-                        if (i % 6 == 0 && i != 0) {
+                        if (i % 6 == 0) {
                             labelWidth = context.measureText("%1".arg(displayHour)).width;
                             ctx.fillText("%1".arg(displayHour),
                                          x - labelWidth/2,
