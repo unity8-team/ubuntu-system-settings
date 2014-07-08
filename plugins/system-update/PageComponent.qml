@@ -61,12 +61,10 @@ ItemPage {
 
         onChargingStateChanged: {
             if (state === BatteryInfo.Charging) {
-                label.text = i18n.tr("Charging now")
                 root.batterySafeForUpdate = true;
             }
             else if (state === BatteryInfo.Discharging &&
                      batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
-                label.text = i18n.tr("Last full charge")
                 capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
                 if (capacity < 50) {
                     root.batterySafeForUpdate = false;
@@ -76,12 +74,11 @@ ItemPage {
             }
             else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
                      state === BatteryInfo.NotCharging) {
-                label.text = i18n.tr("Fully charged")
                 root.batterySafeForUpdate = true;
             }
         }
         Component.onCompleted: {
-            onChargingStateChanged(0, chargingState(0))
+            onChargingStateChanged(0, chargingState(0));
         }
     }
 
