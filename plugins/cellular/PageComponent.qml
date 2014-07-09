@@ -27,6 +27,7 @@ import QMenuModel 0.1
 import "rdosettings-helpers.js" as RSHelpers
 
 ItemPage {
+    id: root
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
@@ -85,110 +86,117 @@ ItemPage {
         modemPath: manager.modems[0]
     }
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        anchors.fill: parent
+        contentWidth: parent.width
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        ListModel {
-            id: techPrefModel
-            ListElement { name: "Off"; key: "off" }
-            ListElement { name: "2G only (saves battery)"; key: "gsm"; }
-            ListElement { name: "2G/3G/4G (faster)"; key: "any"; }
-        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        Component {
-            id: techPrefDelegate
-            OptionSelectorDelegate { text: i18n.tr(name); }
-        }
+            ListModel {
+                id: techPrefModel
+                ListElement { name: "Off"; key: "off" }
+                ListElement { name: "2G only (saves battery)"; key: "gsm"; }
+                ListElement { name: "2G/3G/4G (faster)"; key: "any"; }
+            }
 
-        ListItem.ItemSelector {
-            id: techPrefSelector
-            objectName: "technologyPreferenceSelector"
-            expanded: true
-            delegate: techPrefDelegate
-            model: techPrefModel
-            text: i18n.tr("Cellular data:")
+            Component {
+                id: techPrefDelegate
+                OptionSelectorDelegate { text: i18n.tr(name); }
+            }
 
-            // technologyPreference "" is not valid, assume sim locked or data unavailable
-            enabled: rdoSettings.technologyPreference !== ""
-            selectedIndex: {
-                var pref = rdoSettings.technologyPreference;
-                // make nothing selected if the string from OfonoRadioSettings is empty
-                if (pref === "") {
-                    console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
-                    return -1;
-                } else {
-                    // normalizeKey turns "lte" and "umts" into "any"
-                    return RSHelpers.keyToIndex(RSHelpers.normalizeKey(pref));
+            ListItem.ItemSelector {
+                id: techPrefSelector
+                objectName: "technologyPreferenceSelector"
+                expanded: true
+                delegate: techPrefDelegate
+                model: techPrefModel
+                text: i18n.tr("Cellular data:")
+
+                // technologyPreference "" is not valid, assume sim locked or data unavailable
+                enabled: rdoSettings.technologyPreference !== ""
+                selectedIndex: {
+                    var pref = rdoSettings.technologyPreference;
+                    // make nothing selected if the string from OfonoRadioSettings is empty
+                    if (pref === "") {
+                        console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
+                        return -1;
+                    } else {
+                        // normalizeKey turns "lte" and "umts" into "any"
+                        return RSHelpers.keyToIndex(RSHelpers.normalizeKey(pref));
+                    }
+                }
+                onDelegateClicked: RSHelpers.delegateClicked(index)
+            }
+
+            ListItem.Standard {
+                id: dataRoamingItem
+                objectName: "dataRoamingSwitch"
+                text: i18n.tr("Data roaming")
+                // sensitive to data type, and disabled if "Off" is selected
+                enabled: techPrefSelector.selectedIndex !== 0
+                control: Switch {
+                    id: dataRoamingControl
+                    checked: connMan.roamingAllowed
+                    onClicked: connMan.roamingAllowed = checked
                 }
             }
-            onDelegateClicked: RSHelpers.delegateClicked(index)
-        }
 
-        ListItem.Standard {
-            id: dataRoamingItem
-            objectName: "dataRoamingSwitch"
-            text: i18n.tr("Data roaming")
-            // sensitive to data type, and disabled if "Off" is selected
-            enabled: techPrefSelector.selectedIndex !== 0
-            control: Switch {
-                id: dataRoamingControl
-                checked: connMan.roamingAllowed
-                onClicked: connMan.roamingAllowed = checked
+            ListItem.SingleValue {
+                text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
+                visible: showAllUI && !hotspotItem.visible
             }
-        }
 
-        ListItem.SingleValue {
-            text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-            visible: showAllUI && !hotspotItem.visible
-        }
-
-        ListItem.SingleValue {
-            id: hotspotItem
-            text: i18n.tr("Wi-Fi hotspot")
-            progression: true
-            onClicked: {
-                pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+            ListItem.SingleValue {
+                id: hotspotItem
+                text: i18n.tr("Wi-Fi hotspot")
+                progression: true
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+                }
+                visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
             }
-            visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
-        }
 
-        ListItem.Standard {
-            text: i18n.tr("Data usage statistics")
-            progression: true
-            visible: showAllUI
-        }
-
-        ListItem.ItemSelector {
-            id: chooseCarrier
-            objectName: "autoChooseCarrierSelector"
-            expanded: true
-            enabled: netReg.mode !== "auto-only"
-            text: i18n.tr("Choose carrier:")
-            model: [i18n.tr("Automatically"), i18n.tr("Manually")]
-            selectedIndex: netReg.mode === "manual" ? 1 : 0
-            onSelectedIndexChanged: {
-                if (selectedIndex === 0)
-                    netReg.registration();
+            ListItem.Standard {
+                text: i18n.tr("Data usage statistics")
+                progression: true
+                visible: showAllUI
             }
-        }
 
-        ListItem.SingleValue {
-            text: i18n.tr("Carrier")
-            objectName: "chooseCarrier"
-            value: netReg.name ? netReg.name : i18n.tr("N/A")
-            property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
-            progression: enabled
-            onClicked: {
-                if (enabled)
-                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
+            ListItem.ItemSelector {
+                id: chooseCarrier
+                objectName: "autoChooseCarrierSelector"
+                expanded: true
+                enabled: netReg.mode !== "auto-only"
+                text: i18n.tr("Choose carrier:")
+                model: [i18n.tr("Automatically"), i18n.tr("Manually")]
+                selectedIndex: netReg.mode === "manual" ? 1 : 0
+                onSelectedIndexChanged: {
+                    if (selectedIndex === 0)
+                        netReg.registration();
+                }
             }
-        }
 
-        ListItem.Standard {
-            text: i18n.tr("APN")
-            progression: true
-            visible: showAllUI
+            ListItem.SingleValue {
+                text: i18n.tr("Carrier")
+                objectName: "chooseCarrier"
+                value: netReg.name ? netReg.name : i18n.tr("N/A")
+                property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
+                progression: enabled
+                onClicked: {
+                    if (enabled)
+                        pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("APN")
+                progression: true
+                visible: showAllUI
+            }
         }
     }
 }
