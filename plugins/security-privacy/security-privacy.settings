@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/ubuntu/settings/system/icons/settings-security-privacy.svg",
+    "icon": "preferences-system-privacy-symbolic",
     "name": "Security & Privacy",
     "translations": "ubuntu-system-settings",
     "category": "system",

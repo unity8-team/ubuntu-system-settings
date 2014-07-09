@@ -1,6 +1,6 @@
 {
     "plugin": "brightness-plugin",
-    "icon": "/usr/share/ubuntu/settings/system/icons/settings-brightness.svg",
+    "icon": "display-brightness-symbolic",
     "name": "Brightness",
     "translations": "ubuntu-system-settings",
     "category": "system",
