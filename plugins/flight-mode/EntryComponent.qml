@@ -18,10 +18,10 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import GSettings 1.0
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.FlightMode 1.0 as FlightMode
 
 ListItem.Standard {
     id: root
@@ -30,16 +30,12 @@ ListItem.Standard {
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
-        checked: networkSettings.flightMode
-        onCheckedChanged: networkSettings.flightMode = checked
+        checked: helper.inFlightMode
+        onTriggered: helper.setFlightMode(checked)
+    }
 
-        GSettings {
-            id: networkSettings
-            schema.id: "com.ubuntu.touch.network"
-            onChanged: {
-                if (key == "flightMode")
-                    control.checked = value
-            }
-        }
+    FlightMode.Helper {
+        id: helper
+        onInFlightModeChanged: control.checked = inFlightMode
     }
 }
