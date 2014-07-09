@@ -233,7 +233,7 @@ class BackgroundBaseTestCase(
         """Mock account service dbus, go to background page"""
 
         # mock ubuntu art directory using a local path
-        art_dir = '/usr/local/share/ubuntu/settings/system/background_images/'
+        art_dir = 'background_images/'
         user_obj = '/user/foo'
 
         self.user_props = {

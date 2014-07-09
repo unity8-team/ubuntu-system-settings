@@ -42,4 +42,3 @@ add_test(tst-pagelist tst-pagelist)
 add_test(NAME python COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/test_code.py")
 
 add_subdirectory(plugins)
-add_subdirectory(background_images)

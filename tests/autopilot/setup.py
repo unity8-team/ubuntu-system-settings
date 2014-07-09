@@ -18,4 +18,13 @@ setup(
     url='https://launchpad.net/ubuntu-system-settings',
     license='GPLv3',
     packages=find_packages(),
+    data_files=[
+        ('lib/python2.7/dist-packages/ubuntu_system_settings/background_images',
+            [
+                'background_images/cakes.jpg',
+                'background_images/launchpad.jpg',
+                'background_images/redtrain.jpg',
+                'background_images/spaceman.jpg',
+            ]),
+    ]
 )
