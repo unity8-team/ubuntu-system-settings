@@ -23,9 +23,9 @@ import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import MeeGo.QOfono 0.2
+import Ubuntu.SystemSettings.Phone 1.0
+import QMenuModel 0.1
 import "rdosettings-helpers.js" as RSHelpers
-
 
 ItemPage {
     title: i18n.tr("Cellular")
@@ -46,7 +46,20 @@ ItemPage {
         modemPath: manager.modems[0]
     }
 
-    OfonoNetworkRegistration {
+    QDBusActionGroup {
+        id: actionGroup
+        busType: 1
+        busName: "com.canonical.indicator.network"
+        objectPath: "/com/canonical/indicator/network"
+
+        property variant actionObject: action("wifi.enable")
+
+        Component.onCompleted: {
+            start()
+        }
+    }
+
+    NetworkRegistration {
         id: netReg
         modemPath: manager.modems[0]
         property bool scanning: false
@@ -123,6 +136,21 @@ ItemPage {
                 checked: connMan.roamingAllowed
                 onClicked: connMan.roamingAllowed = checked
             }
+        }
+
+        ListItem.SingleValue {
+            text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
+            visible: showAllUI && !hotspotItem.visible
+        }
+
+        ListItem.SingleValue {
+            id: hotspotItem
+            text: i18n.tr("Wi-Fi hotspot")
+            progression: true
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+            }
+            visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
         }
 
         ListItem.Standard {
