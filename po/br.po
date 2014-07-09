@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-05-26 12:32+0000\n"
+"PO-Revision-Date: 2014-07-08 09:23+0000\n"
 "Last-Translator: Fohanno Thierry <thierry.fohanno@ofis-bzh.org>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-07-08 06:58+0000\n"
-"X-Generator: Launchpad (build 17086)\n"
+"X-Launchpad-Export-Date: 2014-07-09 06:33+0000\n"
+"X-Generator: Launchpad (build 17100)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -679,43 +679,43 @@ msgstr ""
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "Rouedadoù kent"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Rouedad all"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Anv ar rouedad"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Surentez"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA & WPA2 Personel"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Ger-tremen"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Ger-tremen hewel"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Kevreañ"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "Munudoù ar rouedad"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -724,15 +724,15 @@ msgstr "Anv"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "Kevreet da ziwezhañ"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Diskouez ar ger-tremen"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "Ankouaat ar rouedad"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -828,7 +828,7 @@ msgstr "Ar meziant n'en deus ket ezhomm da vezañ hizivaet"
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Kevreit ouzh ho kont Ubuntu One, mar plij."
 
 #: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
@@ -845,12 +845,12 @@ msgstr "O wiriañ daoust hag-eñ ez eus hizivadennoù..."
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Saliañ %1 hizivadenn…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Staliañ %1 hizivadenn"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -882,7 +882,7 @@ msgstr "O staliañ"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "Staliet"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
@@ -903,7 +903,7 @@ msgstr "Bepred"
 
 #: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "N'eo ket bet kavet an daveoù"
 
 #: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
@@ -949,11 +949,11 @@ msgstr "Skedusted"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Keidañ ent emgefre"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Sklaeraat ha teñvalaat evit ober diouzh an endro"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1164,23 +1164,23 @@ msgstr "Dister"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "A c'haller dizoleiñ"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Na c'haller ket dizoleiñ"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Ardivinkoù kevreet :"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Kevreañ un ardivink disheñvel :"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Kevreañ un ardivink all :"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1259,31 +1259,31 @@ msgstr "Aotreoù-implijout ar meziant"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "Munudoù stumm ar RK"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "Niverenn stumm ar RK"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Lodenn skeudenn Ubuntu"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Deskrivadur stumm ar RK"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Lodenn skeudenn an ardivink"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Deskrivadur stumm an ardivink"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Lodenn personelaat skeudenn"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1381,87 +1381,93 @@ msgstr "Reizhiad"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "Distreiñ"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Arventennoù ar pellgomzer"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"Arventennet eo ho pellgomzer ent emgefre evit titourañ ar fazioù da "
+"gCanonical. Diweredekaet e c'hall bezañ en arventennoù ar reizhiad."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Arventennet eo ho pellgomzer evit dinoiñ al lec'h m'emaoc'h. Diweredekaet e "
+"c'hall bezañ en arventennoù ar reizhiad."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "N'eus ket a gartenn SIM"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Nebaon, gallout a reoc'h lakaat ur gartenn SIM diwezhatoc'h."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "Evit poent ne c'halloc'h ket pellgomz na kas SMSoù."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
+"Gallout a rit kavout ur gartenn SIM e boest ho pellgomzer, pe kit e "
+"darempred gant ho pourchaser."
 
 #: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Tremen hebiou"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "Se eo !"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Mat-kaer eo kavout ac'hanoc'h e kumuniezh Ubuntu."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Ho pet plijadur gant ho pellgomzer nevez."
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Echuiñ"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Kevreañ ouzh ar Wi-Fi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "Rouedad da gevreañ outo"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+msgstr "Kevreit ouzh ur rouedad Wi-Fi evit personelaat ho kefluniadur."
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "Demat !"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "Deuet-mat oc'h en Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "Krogomp ganti."
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Diuzit ho yezh"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1650,7 +1656,7 @@ msgstr "hizivaat"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Hizivadennoù zo da gaout"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100

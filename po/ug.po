@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-03 20:05+0000\n"
+"PO-Revision-Date: 2014-07-09 03:30+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-08 07:00+0000\n"
-"X-Generator: Launchpad (build 17086)\n"
+"X-Launchpad-Export-Date: 2014-07-09 06:35+0000\n"
+"X-Generator: Launchpad (build 17100)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -669,7 +669,7 @@ msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "بىخەتەرلىك"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
@@ -677,11 +677,11 @@ msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "ئىم"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
@@ -689,7 +689,7 @@ msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "باغلان"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
@@ -706,7 +706,7 @@ msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "ئىم كۆرسەت"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
