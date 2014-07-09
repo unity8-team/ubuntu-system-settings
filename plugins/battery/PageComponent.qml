@@ -252,7 +252,7 @@ ItemPage {
                     /* time is the offset in seconds compared to the current time (negative value)
                        we display the charge on a day, which is 86400 seconds, the value is the % */
                     ctx.moveTo((86400 - chargeDatas[0].time) / 86400 * width,
-                               (chargeDatas[0].value / 100) * height)
+                               (chargeDatas[0].value / 100) * width)
                     for (var i = 1; i < chargeDatas.length; i++) {
                         ctx.lineTo((86400-chargeDatas[i].time) / 86400 * width,
                                    (chargeDatas[i].value / 100) * height)
