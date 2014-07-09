@@ -9,7 +9,7 @@ add_library(test-plugin SHARED test-plugin.cpp test-plugin.h)
 target_link_librarieS(test-plugin SystemSettings)
 qt5_use_modules(test-plugin Core Qml)
 
-add_executable(tst-plugins 
+add_executable(tst-plugins
     tst_plugins.cpp
     ../src/debug.cpp
     ../src/item-model.cpp
@@ -42,3 +42,4 @@ add_test(tst-pagelist tst-pagelist)
 add_test(NAME python COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/test_code.py")
 
 add_subdirectory(plugins)
+add_subdirectory(background_images)

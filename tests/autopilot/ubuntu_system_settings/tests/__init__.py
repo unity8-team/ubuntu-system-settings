@@ -8,7 +8,6 @@
 """ Tests for Ubuntu System Settings """
 from __future__ import absolute_import
 
-import os
 from fixtures import EnvironmentVariable
 
 from ubuntu_system_settings import SystemSettings
@@ -22,6 +21,8 @@ from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
 import dbus
 import dbusmock
 import subprocess
+
+from time import sleep
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
@@ -232,7 +233,7 @@ class BackgroundBaseTestCase(
         """Mock account service dbus, go to background page"""
 
         # mock ubuntu art directory using a local path
-        art_dir = '%s/../background_images/' % os.getcwd()
+        art_dir = '/usr/local/share/ubuntu/settings/system/background_images/'
         user_obj = '/user/foo'
 
         self.user_props = {
@@ -244,6 +245,8 @@ class BackgroundBaseTestCase(
         self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
                                              ACCOUNTS_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
+
+        sleep(2)
 
         # create account proxy
         self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
