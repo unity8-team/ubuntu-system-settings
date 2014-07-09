@@ -54,7 +54,7 @@ ItemPage {
         id: sim
         modemPath: manager.modems[0]
     }
- 
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -94,7 +94,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: numberItem
                 objectName: "numberItem"
-                text: i18n.tr("Phone Number")
+                text: i18n.tr("Phone number")
                 property string phoneNumber
                 phoneNumber: sim.subscriberNumbers.length > 0 ? sim.subscriberNumbers[0] : ""
                 value: phoneNumber

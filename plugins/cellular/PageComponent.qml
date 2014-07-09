@@ -23,7 +23,7 @@ import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.SystemSettings.Phone 1.0
+import MeeGo.QOfono 0.2
 import QMenuModel 0.1
 import "rdosettings-helpers.js" as RSHelpers
 
@@ -59,11 +59,23 @@ ItemPage {
         }
     }
 
-    NetworkRegistration {
+    OfonoManager {
+        id: manager
+    }
+
+    OfonoSimManager {
+        id: sim
+        modemPath: manager.modems[0]
+    }
+
+    OfonoNetworkRegistration {
         id: netReg
         modemPath: manager.modems[0]
-        property bool scanning: false
+        onStatusChanged: {
+            console.warn ("onStatusChanged: " + netReg.status);
+        }
         onModeChanged: {
+            console.warn ("onModeChanged: " + mode);
             if (mode === "manual")
                 chooseCarrier.selectedIndex = 1;
             else
@@ -82,8 +94,6 @@ ItemPage {
         id: modem
         modemPath: manager.modems[0]
     }
-
-    property string carrierName: netReg.name
 
     Column {
         anchors.left: parent.left
@@ -153,6 +163,21 @@ ItemPage {
             visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
         }
 
+        ListItem.SingleValue {
+            text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
+            visible: showAllUI && !hotspotItem.visible
+        }
+
+        ListItem.SingleValue {
+            id: hotspotItem
+            text: i18n.tr("Wi-Fi hotspot")
+            progression: true
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+            }
+            visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
+        }
+
         ListItem.Standard {
             text: i18n.tr("Data usage statistics")
             progression: true
@@ -167,12 +192,16 @@ ItemPage {
             text: i18n.tr("Choose carrier:")
             model: [i18n.tr("Automatically"), i18n.tr("Manually")]
             selectedIndex: netReg.mode === "manual" ? 1 : 0
+            onSelectedIndexChanged: {
+                if (selectedIndex === 0)
+                    netReg.registration();
+            }
         }
 
         ListItem.SingleValue {
             text: i18n.tr("Carrier")
             objectName: "chooseCarrier"
-            value: carrierName ? carrierName : i18n.tr("N/A")
+            value: netReg.name ? netReg.name : i18n.tr("N/A")
             property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
             progression: enabled
             onClicked: {
