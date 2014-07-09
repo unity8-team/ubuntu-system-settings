@@ -37,15 +37,6 @@ ItemPage {
         onTechnologyPreferenceChanged: RSHelpers.preferenceChanged(preference);
     }
 
-    OfonoManager {
-        id: manager
-    }
-
-    OfonoSimManager {
-        id: sim
-        modemPath: manager.modems[0]
-    }
-
     QDBusActionGroup {
         id: actionGroup
         busType: 1
@@ -146,21 +137,6 @@ ItemPage {
                 checked: connMan.roamingAllowed
                 onClicked: connMan.roamingAllowed = checked
             }
-        }
-
-        ListItem.SingleValue {
-            text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-            visible: showAllUI && !hotspotItem.visible
-        }
-
-        ListItem.SingleValue {
-            id: hotspotItem
-            text: i18n.tr("Wi-Fi hotspot")
-            progression: true
-            onClicked: {
-                pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
-            }
-            visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
         }
 
         ListItem.SingleValue {
