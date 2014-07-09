@@ -11,8 +11,6 @@ function keyToIndex (k) {
             return i;
         }
     }
-
-
     // we did not find a suitable ui item
     return -1;
 }
@@ -21,9 +19,10 @@ function indexToKey (i) {
     return techPrefModel.get(i).key;
 }
 
-function getCurrentlySelectedKey () {
+function getSelectedKey () {
     var sI = techPrefSelector.selectedIndex;
-    return techPrefModel.get(sI).key;
+    var model = techPrefModel.get(sI);
+    return model ? model.key : null;
 }
 
 function normalizeKey (k) {
@@ -36,27 +35,36 @@ function normalizeKey (k) {
 
 function preferenceChanged (preference) {
     var sI = techPrefSelector.selectedIndex;
-    var rdoPref = rdoSettings.technologyPreference;
+    var rdoKey = rdoSettings.technologyPreference;
+
     // if preference changes, but the user has chosen one already,
-    // revert it
+    // make sure the user's setting is respected
     if (sI > 0) {
-        console.warn('pref change [rdo=', rdoPref, '], [ui=', getCurrentlySelectedKey(), ']');
-        rdoPref = getCurrentlySelectedKey();
-    } else {
-        // if the modem wants umts or lte, normalize it (set to any)
-        console.warn('pref change [rdo=', rdoPref, ' => ', normalizeKey(rdoPref), '], [ui=', getCurrentlySelectedKey(), ']');
-        rdoPref = normalizeKey(rdoPref);
+        console.warn('pref change [rdo=', rdoKey, '], [ui=', getSelectedKey(), ']');
+        rdoKey = getSelectedKey();
+        return;
     }
+
+    // if the pref changes and the modem is on,
+    // normlize and update the UI
+    if (connMan.powered) {
+        sI = keyToIndex(normalizeKey(rdoKey));
+    } else {
+        // if the modem is off,
+        // just normalize
+        rdoKey = normalizeKey(rdoKey);
+    }
+
 }
 
 function poweredChanged (powered) {
-    var rdoPref = rdoSettings.technologyPreference;
-    console.warn('power change [power=', powered, '], [rdo=', rdoPref, ']');
+    var rdoKey = rdoSettings.technologyPreference;
+    console.warn('power change [power=', powered, '], [rdo=', rdoKey, ']');
     if (powered) {
-        if (rdoPref === '') {
+        if (rdoKey === '') {
             return;
         } else {
-            techPrefSelector.selectedIndex = keyToIndex(normalizeKey(rdoPref));
+            techPrefSelector.selectedIndex = keyToIndex(normalizeKey(rdoKey));
         }
     } else {
         techPrefSelector.selectedIndex = 0;

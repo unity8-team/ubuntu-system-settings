@@ -11,7 +11,7 @@ from gi.repository import Gio
 from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import (
-    UbuntuSystemSettingsOfonoTestCase, CONNECTION_MANAGER_IFACE, RADIOSETTINGS_IFACE)
+    UbuntuSystemSettingsOfonoTestCase, CONNMAN_IFACE, RDO_IFACE)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
@@ -39,6 +39,16 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
                 objectName="technologyPreferenceSelector"
             )
         return self._pref_selector
+
+    def select_preference(self, label):
+        """Helper method that clicks a preference that matches provided label"""
+        pref = self.data_preference_selector.select_single('Label', text=label)
+        self.system_settings.main_view.pointer.click_object(pref)
+
+    def assert_selected_preference(self, index):
+        """Helper method asserting that the selected data technology preference
+        is that of index"""
+        self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
 
     def navigate_to_manual(self):
         selector = self.system_settings.main_view.cellular_page.select_single(
@@ -101,33 +111,23 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             raises(StateNotFoundError)
         )
 
-    def select_preference(self, label):
-        """Helper method that clicks a preference that matches provided label"""
-        pref = self.data_preference_selector.select_single('Label', text=label)
-        self.system_settings.main_view.pointer.click_object(pref)
-
-    def assert_selected_preference(self, index):
-        """Helper method asserting that the selected data technology preference
-        is that of index"""
-        self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
-
-    def test_turn_modem_off(self):
+    def test_set_modem_offline(self):
         self.select_preference(PREFERENCE_OFF)
 
         sleep(1)
 
-        self.assertEqual(False, self.modem_0.Get(CONNECTION_MANAGER_IFACE, 'Powered'))
+        self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
-    def test_turn_modem_on(self):
+    def test_set_modem_online(self):
         self.select_preference(PREFERENCE_OFF)
         sleep(1)
-        self.assertEqual(False, self.modem_0.Get(CONNECTION_MANAGER_IFACE, 'Powered'))
+        self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
         self.select_preference(PREFERENCE_ANY)
         sleep(1)
-        self.assertEqual(True, self.modem_0.Get(CONNECTION_MANAGER_IFACE, 'Powered'))
+        self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
-    def test_off_setting_disables_roaming(self):
+    def test_modem_online_status_toggles_data_roaming_switch(self):
         """Test that switching off cellular data disables roaming switch"""
         roaming_switch = self.system_settings.main_view.select_single(
             '*', objectName="dataRoamingSwitch"
@@ -143,22 +143,19 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         # assert roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
 
-    def test_changes_to_technology_preference_is_reflected_by_DBus(self):
+    def test_data_preference_change_is_reflected_by_dbus(self):
         self.select_preference(PREFERENCE_2G)
 
         sleep(1)
-        self.assertEqual('gsm', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
+        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
         self.select_preference(PREFERENCE_ANY)
 
         sleep(1)
 
-        self.assertEqual('any', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
+        self.assertEqual('any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
-    def test_that_technology_UI_is_not_inadvertently_changed_by_DBus(self):
-        """Assert that if the modem, if turned off, cannot be turned on
-        by a change in technology preference"""
-
+    def test_modem_online_status_insensitive_to_radio_preference(self):
         # turn off cellular data
         self.select_preference(PREFERENCE_OFF)
 
@@ -175,16 +172,14 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         # assert that "Off" has not changed
         self.assert_selected_preference(0)
 
-    def test_that_technology_UI_reflects_setting_when_modem_is_powered_up(self):
-        """Assert that when modem comes online, UI should reflect this"""
-
+    def test_ui_reacts_to_modem_set_coming_online(self):
         self.select_preference(PREFERENCE_2G)
         self.select_preference(PREFERENCE_OFF)
 
         sleep(1)
 
         self.modem_0.EmitSignal(
-            CONNECTION_MANAGER_IFACE,
+            CONNMAN_IFACE,
             'PropertyChanged',
             'sv',
             ['Powered', 'true'])
@@ -194,7 +189,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         # assert that 2G is selected
         self.assert_selected_preference(1)
 
-    def test_that_settings_default_whatever_is_selected(self):
+    def test_radio_preference_change_does_not_override_user_selection(self):
         self.select_preference(PREFERENCE_2G)
 
         self.modem_0.EmitSignal(
@@ -205,10 +200,45 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         sleep(1)
 
-        self.assertEqual('gsm', self.modem_0.Get(RADIOSETTINGS_IFACE, 'TechnologyPreference'))
+        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
         # assert that the preference is any
         self.assert_selected_preference(1)
+
+    def test_ui_if_sim_was_unlocked_on_opening(self):
+        '''Like it would if the sim was locked, e.g.'''
+        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', dbus.String('', variant_level=1))
+
+        self.system_settings.main_view.go_back()
+
+        self.system_settings.main_view.pointer.click_object(
+            self.system_settings.main_view.select_single(
+                objectName='entryComponent-cellular'))
+
+        self.assert_selected_preference(-1)
+        self.assertFalse(self.data_preference_selector.enabled)
+
+        self.modem_0.EmitSignal(
+            'org.ofono.RadioSettings',
+            'PropertyChanged',
+            'sv',
+            ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
+
+        sleep(1)
+
+        self.assert_selected_preference(2)
+
+    def test_ui_if_sim_locks(self):
+        pref = dbus.String('', variant_level=1)
+        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', pref)
+        self.modem_0.EmitSignal(
+            'org.ofono.RadioSettings',
+            'PropertyChanged',
+            'sv',
+            ['TechnologyPreference',  pref])
+
+        self.assert_selected_preference(-1)
+        self.assertFalse(self.data_preference_selector.enabled)
 
     # def test_that_technology_UI_is_sensitive_to_radiosettings_interface(self):
     #     """Assert that changes the radiosetting interface will be reflected in the UI.
@@ -219,7 +249,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
     #     # remove radio settings interface
     #     # this simulates locking of SIM
     #     modem_interfaces = self.modem_0.GetProperties()['Interfaces']
-    #     modem_interfaces.remove(RADIOSETTINGS_IFACE)
+    #     modem_interfaces.remove(RDO_IFACE)
     #     self.modem_0.SetProperty('Interfaces', modem_interfaces)
 
     #     sleep(1)
@@ -230,7 +260,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     #     # add the radio settings interface
     #     modem_interfaces = self.modem_0.GetProperties()['Interfaces']
-    #     modem_interfaces.append(RADIOSETTINGS_IFACE)
+    #     modem_interfaces.append(RDO_IFACE)
     #     self.modem_0.SetProperty('Interfaces', modem_interfaces)
 
     #     sleep(1)

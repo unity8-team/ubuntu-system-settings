@@ -98,8 +98,9 @@ ItemPage {
             enabled: rdoSettings.technologyPreference !== ""
             selectedIndex: {
                 var pref = rdoSettings.technologyPreference;
+                // make nothing selected if the string from OfonoRadioSettings is empty
                 if (pref === "") {
-                    return 0;
+                    return -1;
                 } else {
                     return RSHelpers.keyToIndex(RSHelpers.normalizeKey(pref));
                 }

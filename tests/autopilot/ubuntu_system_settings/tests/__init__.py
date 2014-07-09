@@ -22,8 +22,8 @@ import dbus
 import dbusmock
 import subprocess
 
-CONNECTION_MANAGER_IFACE = 'org.ofono.ConnectionManager'
-RADIOSETTINGS_IFACE = 'org.ofono.RadioSettings'
+CONNMAN_IFACE = 'org.ofono.ConnectionManager'
+RDO_IFACE = 'org.ofono.RadioSettings'
 
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
@@ -83,23 +83,24 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     """ Class for cellular tests which sets up an Ofono mock """
 
     modem_powered = True
+    technology_preference = 'gsm'
 
     def mock_connection_manager(self):
-        self.modem_0.AddProperty(CONNECTION_MANAGER_IFACE, 'Powered',
+        self.modem_0.AddProperty(CONNMAN_IFACE, 'Powered',
                                  self.modem_powered)
 
         self.modem_0.AddMethods(
-            CONNECTION_MANAGER_IFACE,
+            CONNMAN_IFACE,
             [
                 (
                     'GetProperties', '', 'a{sv}',
-                    'ret = self.GetAll("%s")' % CONNECTION_MANAGER_IFACE),
+                    'ret = self.GetAll("%s")' % CONNMAN_IFACE),
                 (
                     'SetProperty', 'sv', '',
                     'self.Set("IFACE", args[0], args[1]); '
                     'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
                         [args[0], args[1]])'.replace(
-                    "IFACE", CONNECTION_MANAGER_IFACE)),
+                    "IFACE", CONNMAN_IFACE)),
             ])
 
     def mock_carriers(self):
@@ -139,23 +140,23 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
     def mock_radio_settings(self):
         modem_interfaces = self.modem_0.GetProperties()['Interfaces']
-        modem_interfaces.append(RADIOSETTINGS_IFACE)
-        self.modem_0.AddProperty(RADIOSETTINGS_IFACE,
-                                 'TechnologyPreference', 'gsm')
+        modem_interfaces.append(RDO_IFACE)
+        self.modem_0.AddProperty(
+            RDO_IFACE, 'TechnologyPreference', self.technology_preference)
         self.modem_0.SetProperty('Interfaces', modem_interfaces)
         self.modem_0.AddMethods(
-            RADIOSETTINGS_IFACE,
+            RDO_IFACE,
             [
                 (
                     'GetProperties', '', 'a{sv}',
                     'ret = self.GetAll("%s")'
-                    % RADIOSETTINGS_IFACE),
+                    % RDO_IFACE),
                 (
                     'SetProperty', 'sv', '',
                     'self.Set("IFACE", args[0], args[1]); '
                     'self.EmitSignal("IFACE",\
                         "PropertyChanged", "sv", [args[0], args[1]])'.replace(
-                    'IFACE', RADIOSETTINGS_IFACE)),
+                    'IFACE', RDO_IFACE)),
             ])
 
     @classmethod
