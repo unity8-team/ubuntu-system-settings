@@ -19,8 +19,8 @@ function indexToKey (i) {
 
 /* return currently selected key or null if none selected */
 function getSelectedKey () {
-    var sI = techPrefSelector.selectedIndex;
-    var model = techPrefModel.get(sI);
+    var i = techPrefSelector.selectedIndex;
+    var model = techPrefModel.get(i);
     return model ? model.key : null;
 }
 
@@ -38,14 +38,14 @@ function normalizeKey (k) {
 
 /* handler for when RadioSettings TechnologyPreference changes */
 function preferenceChanged (preference) {
-    var sI = techPrefSelector.selectedIndex;
+    var i = techPrefSelector.selectedIndex;
     var rdoKey = rdoSettings.technologyPreference;
     var selKey = getSelectedKey();
 
     // if preference changes, but the user has chosen one already,
     // make sure the user's setting is respected
-    if (sI > 0) {
-        console.log('overriding RadioSettings TechnologyPreference signal', preference, 'with user selection', selKey);
+    if (i > 0) {
+        console.warn('overriding RadioSettings TechnologyPreference signal', preference, 'with user selection', selKey);
         rdoSettings.technologyPreference = selKey;
         return;
     }
@@ -53,13 +53,13 @@ function preferenceChanged (preference) {
     // if the pref changes and the modem is on,
     // normlize and update the UI
     if (connMan.powered) {
-        sI = keyToIndex(normalizeKey(rdoKey));
+        techPrefSelector.selectedIndex = keyToIndex(normalizeKey(rdoKey));
     } else {
         // if the modem is off,
         // just normalize
         rdoSettings.technologyPreference = normalizeKey(rdoKey);
     }
-    console.log('modem', connMan.powered ? 'online' : 'offline', 'TechnologyPreference', rdoKey);
+    console.warn('modem', connMan.powered ? 'online' : 'offline', 'TechnologyPreference', rdoKey);
 }
 
 /* handler for when ConnectionManager powered changes */
@@ -70,11 +70,11 @@ function poweredChanged (powered) {
             console.warn('modem came online but TechnologyPreference is empty');
             return;
         } else {
-            console.log('modem came online, TechnologyPreference', rdoKey);
+            console.warn('modem came online, TechnologyPreference', rdoKey);
             techPrefSelector.selectedIndex = keyToIndex(normalizeKey(rdoKey));
         }
     } else {
-        console.log('modem went offline');
+        console.warn('modem went offline');
         techPrefSelector.selectedIndex = 0;
     }
 }
