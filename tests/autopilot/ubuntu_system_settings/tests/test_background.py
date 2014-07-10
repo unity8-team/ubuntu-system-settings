@@ -13,7 +13,7 @@ from testtools.matchers import Equals
 
 from ubuntu_system_settings.tests import BackgroundBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
-
+from time import sleep
 
 def get_wallpapers_from_grid(grid):
     return grid.select_many(objectName='itemImg')
@@ -105,6 +105,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         self.assertEqual(current_file, dbus_file)
 
     def test_expand_collapse_custom(self):
+        sleep(3)
         """Test that clicking the custom header changes its state"""
         custom = self.background_page.select_single(
             objectName='customArtGrid')
@@ -112,5 +113,5 @@ class BackgroundTestCase(BackgroundBaseTestCase):
             objectName='CustomHeader')
 
         self.assertEqual(custom.state, 'collapsed')
-        self.system_settings.main_view.pointer.click_object(custom_header)
+        self.system_settings.main_view.scroll_to_and_click(custom_header)
         self.assertEqual(custom.state, '')

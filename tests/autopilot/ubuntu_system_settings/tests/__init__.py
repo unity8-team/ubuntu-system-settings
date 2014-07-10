@@ -20,6 +20,7 @@ from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
 
 import dbus
 import dbusmock
+import os
 import subprocess
 
 from time import sleep
@@ -233,7 +234,8 @@ class BackgroundBaseTestCase(
         """Mock account service dbus, go to background page"""
 
         # mock ubuntu art directory using a local path
-        art_dir = 'background_images/'
+        art_dir = '%s/../background_images/' % (
+            os.path.dirname(os.path.realpath(__file__)))
         user_obj = '/user/foo'
 
         self.user_props = {
