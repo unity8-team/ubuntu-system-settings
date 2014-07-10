@@ -111,6 +111,27 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             raises(StateNotFoundError)
         )
 
+    def test_carrier_item_changes_depending_on_modems(self):
+        carrier = self.system_settings.main_view.cellular_page.select_single(
+            toolkit_emulators.SingleValue,
+            objectName="chooseCarrier"
+        )
+        carriers = self.system_settings.main_view.cellular_page.select_single(
+            toolkit_emulators.SingleValue,
+            objectName="chooseCarriers"
+        )
+        self.assertTrue(carrier.visible)
+        self.assertFalse(carriers.visible)
+
+        # add modem
+        self.params['ModemName'] = 'ril_1'
+        self.dbusmock.AddModem('ril_1', {'Powered': True})
+
+        sleep(1)
+
+        self.assertFalse(carrier.visible)
+        self.assertTrue(carriers.visible)
+
     def test_set_modem_offline(self):
         self.select_preference(PREFERENCE_OFF)
 

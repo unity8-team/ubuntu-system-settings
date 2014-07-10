@@ -183,12 +183,24 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Carrier")
                 objectName: "chooseCarrier"
+                visible: manager.modems.length === 1
                 value: netReg.name ? netReg.name : i18n.tr("N/A")
                 property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
                 progression: enabled
                 onClicked: {
                     if (enabled)
                         pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
+                }
+            }
+
+            ListItem.SingleValue {
+                text: i18n.tr("Carriers")
+                objectName: "chooseCarriers"
+                visible: manager.modems.length === 2
+                progression: enabled
+                onClicked: {
+                    if (enabled)
+                        pageStack.push(Qt.resolvedUrl("ChooseCarriers.qml"), {netReg: netReg})
                 }
             }
 

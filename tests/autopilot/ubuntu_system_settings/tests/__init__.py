@@ -163,9 +163,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(klass):
         klass.start_system_bus()
         klass.dbus_con = klass.get_dbus(True)
+        klass.params = dbus.Dictionary({}, signature='sv')
         # Add a mock Ofono environment so we get consistent results
         (klass.p_mock, klass.obj_ofono) = klass.spawn_server_template(
-            'ofono', stdout=subprocess.PIPE)
+            'ofono', parameters=klass.params, stdout=subprocess.PIPE)
         klass.dbusmock = dbus.Interface(klass.obj_ofono, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
