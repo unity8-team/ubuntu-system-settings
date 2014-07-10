@@ -45,7 +45,7 @@ function preferenceChanged (preference) {
     // if preference changes, but the user has chosen one already,
     // make sure the user's setting is respected
     if (i > 0) {
-        console.warn('overriding RadioSettings TechnologyPreference signal', preference, 'with user selection', selKey);
+        console.warn('Overriding RadioSettings TechnologyPreference signal', preference, 'with user selection', selKey);
         rdoSettings.technologyPreference = selKey;
         return;
     }
@@ -59,7 +59,7 @@ function preferenceChanged (preference) {
         // just normalize
         rdoSettings.technologyPreference = normalizeKey(rdoKey);
     }
-    console.warn('modem', connMan.powered ? 'online' : 'offline', 'TechnologyPreference', rdoKey);
+    console.warn('Modem', connMan.powered ? 'online' : 'offline', 'TechnologyPreference', rdoKey);
 }
 
 /* handler for when ConnectionManager powered changes */
@@ -67,22 +67,24 @@ function poweredChanged (powered) {
     var rdoKey = rdoSettings.technologyPreference;
     if (powered) {
         if (rdoKey === '') {
-            console.warn('modem came online but TechnologyPreference is empty');
+            console.warn('Modem came online but TechnologyPreference is empty');
             return;
         } else {
-            console.warn('modem came online, TechnologyPreference', rdoKey);
+            console.warn('Modem came online, TechnologyPreference', rdoKey);
             techPrefSelector.selectedIndex = keyToIndex(normalizeKey(rdoKey));
         }
     } else {
-        console.warn('modem went offline');
+        console.warn('Modem went offline');
         techPrefSelector.selectedIndex = 0;
     }
 }
 
 /* handler for when user clicks the TechnologyPreference item selector */
 function delegateClicked (index) {
+    console.warn('delegateClicked', index);
     // if the user selects a TechnologyPreference, update RadioSettings
     if (index > 0) {
         rdoSettings.technologyPreference = indexToKey(index);
+        console.warn('delegateClicked setting TechnologyPreference to', indexToKey(index));
     }
 }
