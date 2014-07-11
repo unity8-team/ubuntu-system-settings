@@ -79,7 +79,8 @@ class SystemSettings():
         app = testobj.launch_test_application(
             *params,
             app_type='qt',
-            emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase)
+            emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
+            capture_output=True)
 
         return app
 
@@ -140,7 +141,7 @@ class MainWindow(ubuntuuitoolkit.MainView):
 
     @property
     def cellular_page(self):
-        """ Return 'About' page """
+        """ Return 'Cellular' page """
         return self.select_single(objectName='cellularPage')
 
     @property

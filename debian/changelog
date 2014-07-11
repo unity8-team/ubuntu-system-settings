@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+14.10.20140709.2-0ubuntu1) utopic; urgency=low
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Antti Kaijanmäki ]
+  * Implement the flight-mode toggle on the quick-access area.
+    debian/control: added urfkill to Depends .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 09 Jul 2014 10:08:39 +0000
+
 ubuntu-system-settings (0.3+14.10.20140708.1-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]

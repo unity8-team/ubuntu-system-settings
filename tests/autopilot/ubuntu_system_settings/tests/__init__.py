@@ -33,6 +33,10 @@ from testtools.matchers import Equals, NotEquals, GreaterThan
 from ubuntu_system_settings import SystemSettings
 
 
+CONNMAN_IFACE = 'org.ofono.ConnectionManager'
+RDO_IFACE = 'org.ofono.RadioSettings'
+
+
 class UbuntuSystemSettingsTestCase(
         ubuntuuitoolkit.base.UbuntuUIToolkitAppTestCase):
 
@@ -86,18 +90,28 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
     """ Class for cellular tests which sets up an Ofono mock """
 
-    @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
-        # Add a mock Ofono environment so we get consistent results
-        (klass.p_mock, klass.obj_ofono) = klass.spawn_server_template(
-            'ofono', stdout=subprocess.PIPE)
-        klass.dbusmock = dbus.Interface(klass.obj_ofono, dbusmock.MOCK_IFACE)
+    modem_powered = True
+    technology_preference = 'gsm'
 
-    def setUp(self, panel=None):
-        self.obj_ofono.Reset()
-        # Add an available carrier
+    def mock_connection_manager(self):
+        self.modem_0.AddProperty(CONNMAN_IFACE, 'Powered',
+                                 self.modem_powered)
+
+        self.modem_0.AddMethods(
+            CONNMAN_IFACE,
+            [
+                (
+                    'GetProperties', '', 'a{sv}',
+                    'ret = self.GetAll("%s")' % CONNMAN_IFACE),
+                (
+                    'SetProperty', 'sv', '',
+                    'self.Set("IFACE", args[0], args[1]); '
+                    'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
+                        [args[0], args[1]])'.replace(
+                    "IFACE", CONNMAN_IFACE)),
+            ])
+
+    def mock_carriers(self):
         self.dbusmock.AddObject(
             '/ril_0/operator/op2',
             'org.ofono.NetworkOperator',
@@ -131,6 +145,50 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                 ('Register', '', '', ''),
             ]
         )
+
+    def mock_radio_settings(self):
+        modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+        modem_interfaces.append(RDO_IFACE)
+        self.modem_0.AddProperty(
+            RDO_IFACE, 'TechnologyPreference', self.technology_preference)
+        self.modem_0.SetProperty('Interfaces', modem_interfaces)
+        self.modem_0.AddMethods(
+            RDO_IFACE,
+            [
+                (
+                    'GetProperties', '', 'a{sv}',
+                    'ret = self.GetAll("%s")'
+                    % RDO_IFACE),
+                (
+                    'SetProperty', 'sv', '',
+                    'self.Set("IFACE", args[0], args[1]); '
+                    'self.EmitSignal("IFACE",\
+                        "PropertyChanged", "sv", [args[0], args[1]])'.replace(
+                    'IFACE', RDO_IFACE)),
+            ])
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+        # Add a mock Ofono environment so we get consistent results
+        (klass.p_mock, klass.obj_ofono) = klass.spawn_server_template(
+            'ofono', stdout=subprocess.PIPE)
+        klass.dbusmock = dbus.Interface(klass.obj_ofono, dbusmock.MOCK_IFACE)
+
+    def setUp(self, panel=None):
+        self.obj_ofono.Reset()
+
+        # create modem_0 proxy
+        self.modem_0 = self.dbus_con.get_object('org.ofono', '/ril_0')
+
+        # Add an available carrier
+        self.mock_carriers()
+
+        self.mock_radio_settings()
+
+        self.mock_connection_manager()
+
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 
 
@@ -170,8 +228,7 @@ class StorageBaseTestCase(AboutBaseTestCase):
 
     def get_storage_space_used_by_category(self, objectName):
         return self.main_view.wait_select_single(
-            'StorageItem', objectName=objectName
-        ).value
+            'StorageItem', objectName=objectName).value
 
     @property
     def storage_page(self):
