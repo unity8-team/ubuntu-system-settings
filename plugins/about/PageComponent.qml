@@ -54,7 +54,7 @@ ItemPage {
         id: sim
         modemPath: manager.modems[0]
     }
- 
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
