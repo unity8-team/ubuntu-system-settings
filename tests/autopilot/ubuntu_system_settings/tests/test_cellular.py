@@ -44,7 +44,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
     def select_preference(self, label):
         """Helper method that clicks a preference that matches provided label"""
         pref = self.data_preference_selector.select_single('Label', text=label)
-        self.system_settings.main_view.pointer.click_object(pref)
+        self.system_settings.main_view.pointing_device.click_object(pref)
 
     def assert_selected_preference(self, index):
         """Helper method asserting that the selected data technology preference
@@ -213,7 +213,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         self.system_settings.main_view.go_back()
 
-        self.system_settings.main_view.pointer.click_object(
+        self.system_settings.main_view.pointing_device.click_object(
             self.system_settings.main_view.select_single(
                 objectName='entryComponent-cellular'))
 
