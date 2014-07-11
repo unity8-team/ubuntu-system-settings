@@ -22,10 +22,11 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.SystemSettings.Phone 1.0
+import MeeGo.QOfono 0.2
 import QMenuModel 0.1
 
 ItemPage {
+    id: root
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
@@ -42,132 +43,144 @@ ItemPage {
         }
     }
 
-    NetworkRegistration {
+    OfonoManager {
+        id: manager
+    }
+
+    OfonoSimManager {
+        id: sim
+        modemPath: manager.modems[0]        
+    }
+
+    OfonoNetworkRegistration {
         id: netReg
+        modemPath: manager.modems[0]
+        onStatusChanged: {
+            console.warn ("onStatusChanged: " + netReg.status);
+        }
         onModeChanged: {
+            console.warn ("onModeChanged: " + mode);
             if (mode === "manual")
                 chooseCarrier.selectedIndex = 1;
             else
                 chooseCarrier.selectedIndex = 0;
         }
-        Component.onCompleted: {
-            /* NetworkRegistration provides an enum for data technology,
-             * including:
-             *     UnknownDataTechnology
-             *     GprsDataTechnology
-             *     EdgeDataTechnology
-             *     UmtsDataTechnology
-             *     HspaDataTechnology
-             */
-            if (technology == NetworkRegistration.UnknownDataTechnology)
-                console.log ("Unknown data technology");
-        }
     }
 
-    ConnMan {
+    OfonoConnMan {
         id: connMan
+        modemPath: manager.modems[0]
     }
 
-    property string carrierName: netReg.name
+    Flickable {
+        anchors.fill: parent
+        contentWidth: parent.width
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        /* TODO: use selector once ofono supports those options (bug #1211804) */
-        ListItem.ItemSelector {
-            id: dataTypeSelector
-            expanded: true
-            visible: showAllUI
-            text: i18n.tr("Cellular data:")
-            model: [i18n.tr("Off"),
-                i18n.tr("2G only (saves battery)"),
-                i18n.tr("2G/3G/4G (faster)")]
-            selectedIndex: !connMan.powered ? 0 : 2
-            onSelectedIndexChanged: {
-                if (selectedIndex == 0)
-                    connMan.powered = false;
-                else
-                    connMan.powered = true;
+            /* TODO: use selector once ofono supports those options (bug #1211804) */
+            ListItem.ItemSelector {
+                id: dataTypeSelector
+                expanded: true
+                visible: showAllUI
+                text: i18n.tr("Cellular data:")
+                model: [i18n.tr("Off"),
+                    i18n.tr("2G only (saves battery)"),
+                    i18n.tr("2G/3G/4G (faster)")]
+                selectedIndex: !connMan.powered ? 0 : 2
+                onSelectedIndexChanged: {
+                    if (selectedIndex == 0)
+                        connMan.powered = false;
+                    else
+                        connMan.powered = true;
+                }
             }
-        }
 
-        ListItem.Standard {
-            text: i18n.tr("Cellular data")
-            visible: !showAllUI
-            control: Switch {
-                id: dataSwitch
-                checked: connMan.powered
-                onClicked: connMan.powered = checked
+            ListItem.Standard {
+                text: i18n.tr("Cellular data")
+                visible: !showAllUI
+                control: Switch {
+                    id: dataSwitch
+                    checked: connMan.powered
+                    onClicked: connMan.powered = checked
+                }
+             }
+
+            ListItem.Standard {
+                id: dataRoamingItem
+                text: i18n.tr("Data roaming")
+                enabled: dataSwitch.checked
+                control: Switch {
+                    id: dataRoamingControl
+                    checked: connMan.roamingAllowed
+                    onClicked: connMan.roamingAllowed = checked
+                }
+                onEnabledChanged: {
+                    if (!enabled)
+                        dataRoamingControl.checked = false
+                    else
+                        dataRoamingControl.checked = Qt.binding(function() {
+                            return connMan.roamingAllowed
+                        })
+                }
             }
-         }
 
-        ListItem.Standard {
-            id: dataRoamingItem
-            text: i18n.tr("Data roaming")
-            enabled: dataSwitch.checked
-            control: Switch {
-                id: dataRoamingControl
-                checked: connMan.roamingAllowed
-                onClicked: connMan.roamingAllowed = checked
+            ListItem.SingleValue {
+                text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
+                visible: showAllUI && !hotspotItem.visible
             }
-            onEnabledChanged: {
-                if (!enabled)
-                    dataRoamingControl.checked = false
-                else
-                    dataRoamingControl.checked = Qt.binding(function() {
-                        return connMan.roamingAllowed
-                    })
+
+            ListItem.SingleValue {
+                id: hotspotItem
+                text: i18n.tr("Wi-Fi hotspot")
+                progression: true
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+                }
+                visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
             }
-        }
 
-        ListItem.SingleValue {
-            text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-            visible: showAllUI && !hotspotItem.visible
-        }
-
-        ListItem.SingleValue {
-            id: hotspotItem
-            text: i18n.tr("Wi-Fi hotspot")
-            progression: true
-            onClicked: {
-                pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+            ListItem.Standard {
+                text: i18n.tr("Data usage statistics")
+                progression: true
+                visible: showAllUI
             }
-            visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
-        }
 
-        ListItem.Standard {
-            text: i18n.tr("Data usage statistics")
-            progression: true
-            visible: showAllUI
-        }
-
-        ListItem.ItemSelector {
-            id: chooseCarrier
-            objectName: "autoChooseCarrierSelector"
-            expanded: true
-            enabled: netReg.mode != "auto-only"
-            text: i18n.tr("Choose carrier:")
-            model: [i18n.tr("Automatically"), i18n.tr("Manually")]
-            selectedIndex: netReg.mode == "manual" ? 1 : 0
-        }
-
-        ListItem.SingleValue {
-            text: i18n.tr("Carrier")
-            objectName: "chooseCarrier"
-            value: carrierName ? carrierName : i18n.tr("N/A")
-            property bool enabled: chooseCarrier.selectedIndex == 1 // Manually
-            progression: enabled
-            onClicked: {
-                if (enabled)
-                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
+            ListItem.ItemSelector {
+                id: chooseCarrier
+                objectName: "autoChooseCarrierSelector"
+                expanded: true
+                enabled: netReg.mode !== "auto-only"
+                text: i18n.tr("Choose carrier:")
+                model: [i18n.tr("Automatically"), i18n.tr("Manually")]
+                selectedIndex: netReg.mode === "manual" ? 1 : 0
+                onSelectedIndexChanged: {
+                    if (selectedIndex === 0)
+                        netReg.registration();
+                }
             }
-        }
 
-        ListItem.Standard {
-            text: i18n.tr("APN")
-            progression: true
-            visible: showAllUI
+            ListItem.SingleValue {
+                text: i18n.tr("Carrier")
+                objectName: "chooseCarrier"
+                value: netReg.name ? netReg.name : i18n.tr("N/A")
+                property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
+                progression: enabled
+                onClicked: {
+                    if (enabled)
+                        pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("APN")
+                progression: true
+                visible: showAllUI
+            }
         }
     }
 }

@@ -25,6 +25,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
+import MeeGo.QOfono 0.2
 
 ItemPage {
     id: root
@@ -45,6 +46,15 @@ ItemPage {
         id: updateBackend
     }
 
+    OfonoManager {
+        id: manager
+    }
+
+    OfonoSimManager {
+        id: sim
+        modemPath: manager.modems[0]
+    }
+ 
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -79,6 +89,16 @@ ItemPage {
                         text: deviceInfos.manufacturer() ? deviceInfos.manufacturer() + " " + deviceInfos.model() : backendInfos.vendorString
                     }
                 }
+            }
+
+            ListItem.SingleValue {
+                id: numberItem
+                objectName: "numberItem"
+                text: i18n.tr("Phone number")
+                property string phoneNumber
+                phoneNumber: sim.subscriberNumbers.length > 0 ? sim.subscriberNumbers[0] : ""
+                value: phoneNumber
+                visible: phoneNumber.length > 0
             }
 
             ListItem.SingleValue {
