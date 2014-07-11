@@ -13,25 +13,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
- * Iain Lane <iain.lane@canonical.com>
- *
 */
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
-#include "connman.h"
-#include "simmanager.h"
-#include "networkregistration.h"
+#include "hotspotmanager.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Phone"));
-    
-    qmlRegisterType<SimManager>(uri, 1, 0, "SimManager");
-    qmlRegisterType<NetworkRegistration>(uri, 1, 0, "NetworkRegistration");
-    qmlRegisterType<ConnMan>(uri, 1, 0, "ConnMan");
+    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
+    qmlRegisterType<HotspotManager>(uri, 1, 0, "HotspotManager");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

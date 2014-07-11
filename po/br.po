@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-24 11:40+0200\n"
-"PO-Revision-Date: 2014-05-26 12:32+0000\n"
+"POT-Creation-Date: 2014-07-07 13:08+0200\n"
+"PO-Revision-Date: 2014-07-08 09:23+0000\n"
 "Last-Translator: Fohanno Thierry <thierry.fohanno@ofis-bzh.org>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-06-25 06:13+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
+"X-Launchpad-Export-Date: 2014-07-09 06:33+0000\n"
+"X-Generator: Launchpad (build 17100)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -64,7 +64,7 @@ msgid "Other sounds:"
 msgstr "Sonioù all :"
 
 #: plugins/sound//PageComponent.qml:139
-#: plugins/language//PageComponent.qml:155
+#: plugins/language//PageComponent.qml:160
 msgid "Keyboard sound"
 msgstr "Son ar c'hlavier"
 
@@ -141,6 +141,7 @@ msgstr "Bloaz"
 #: plugins/time-date//TimePicker.qml:173
 #: plugins/security-privacy//LockSecurity.qml:310
 #: plugins/language//DisplayLanguage.qml:94
+#: plugins/wifi//OtherNetwork.qml:112
 #: plugins/phone//CallForwarding.qml:113
 #: plugins/reset//EraseEverything.qml:36
 #: plugins/reset//ResetAllSettings.qml:36
@@ -245,7 +246,7 @@ msgstr "N'eo ket termenet"
 
 #: plugins/security-privacy//LockSecurity.qml:274
 #: wizard/qml/Pages//30-location.qml:48
-#: wizard/qml/Pages//20-wifi.qml:168 wizard/qml/Pages//10-welcome.qml:78
+#: wizard/qml/Pages//20-wifi.qml:168 ../wizard/qml/Pages//10-welcome.qml:78
 msgid "Continue"
 msgstr "Kenderc'hel"
 
@@ -446,6 +447,7 @@ msgid "Return results from:"
 msgstr "Kas disoc'hoù eus :"
 
 #: plugins/security-privacy//PhoneLocking.qml:40
+#: plugins/wifi//OtherNetwork.qml:67
 #: plugins/bluetooth//PageComponent.qml:105
 #: plugins/bluetooth//PageComponent.qml:256
 #: plugins/bluetooth//PageComponent.qml:264
@@ -471,40 +473,40 @@ msgid "Sleep locks immediately"
 msgstr "Lakaat da gousket a brenn diouzhtu-dak"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: plugins/language//PageComponent.qml:31
+#: plugins/language//PageComponent.qml:32
 #: settings.js:44
 msgid "Language & Text"
 msgstr "Yezh & testenn"
 
-#: plugins/language//PageComponent.qml:70
+#: plugins/language//PageComponent.qml:71
 msgid "Display language…"
 msgstr "Dibab ar yezh..."
 
-#: plugins/language//PageComponent.qml:80
+#: plugins/language//PageComponent.qml:85
 #: plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
 msgstr "Fichadurioù ar c'havier"
 
-#: plugins/language//PageComponent.qml:95
-#: plugins/language//PageComponent.qml:105
+#: plugins/language//PageComponent.qml:100
+#: plugins/language//PageComponent.qml:110
 #: plugins/language//SpellChecking.qml:27
 #: plugins/language//SpellChecking.qml:36
 msgid "Spell checking"
 msgstr "Difazier reizhskrivadur"
 
-#: plugins/language//PageComponent.qml:115
+#: plugins/language//PageComponent.qml:120
 msgid "Auto completion"
 msgstr "Klokaat emgefre"
 
-#: plugins/language//PageComponent.qml:125
+#: plugins/language//PageComponent.qml:130
 msgid "Word suggestions"
 msgstr "Kinnig gerioù"
 
-#: plugins/language//PageComponent.qml:138
+#: plugins/language//PageComponent.qml:143
 msgid "Auto capitalization"
 msgstr "Lakaat pennlizherennoù ent emgefre"
 
-#: plugins/language//PageComponent.qml:148
+#: plugins/language//PageComponent.qml:153
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 "Gweredekaat Pennl. evit ober ur bennlizherenn eus lizherenn gentañ pep "
@@ -591,7 +593,7 @@ msgstr "Live ar garg"
 #: plugins/battery//PageComponent.qml:117
 #: plugins/battery//PageComponent.qml:224
 #: plugins/cellular//PageComponent.qml:129
-#: plugins/about//Storage.qml:203
+#: plugins/about//Storage.qml:204
 msgid "N/A"
 msgstr "N/A"
 
@@ -622,15 +624,16 @@ msgstr[1] "Goude %1 a vunutoù"
 #: plugins/battery//PageComponent.qml:249
 #: plugins/battery//PageComponent.qml:258
 #: plugins/battery//SleepValues.qml:96
-#: plugins/system-update//PageComponent.qml:445
+#: plugins/wifi//NetworkDetails.qml:56
+#: plugins/system-update//PageComponent.qml:449
 #: plugins/system-update//Configuration.qml:53
-#: plugins/about//PageComponent.qml:116
+#: plugins/about//PageComponent.qml:128
 msgid "Never"
 msgstr "Morse"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: plugins/battery//PageComponent.qml:268
-#: plugins/wifi//PageComponent.qml:27
+#: plugins/wifi//PageComponent.qml:26
 #: settings.js:60
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
@@ -673,8 +676,66 @@ msgstr ""
 "Ne vo ket lakaet ar pellgomzer da gousket e-pad ar pellgomzadennoù pe pa "
 "lenn videoioù."
 
+#: plugins/wifi//PageComponent.qml:114
+#: plugins/wifi//PreviousNetworks.qml:26
+msgid "Previous networks"
+msgstr "Rouedadoù kent"
+
+#: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
+msgid "Other network"
+msgstr "Rouedad all"
+
+#: plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr "Anv ar rouedad"
+
+#: plugins/wifi//OtherNetwork.qml:66
+msgid "Security"
+msgstr "Surentez"
+
+#: plugins/wifi//OtherNetwork.qml:68
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 Personel"
+
+#: plugins/wifi//OtherNetwork.qml:69
+msgid "WEP"
+msgstr "WEP"
+
+#: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
+msgid "Password"
+msgstr "Ger-tremen"
+
+#: plugins/wifi//OtherNetwork.qml:89
+msgid "Password visible"
+msgstr "Ger-tremen hewel"
+
+#: plugins/wifi//OtherNetwork.qml:121
+msgid "Connect"
+msgstr "Kevreañ"
+
+#: plugins/wifi//NetworkDetails.qml:37
+msgid "Network details"
+msgstr "Munudoù ar rouedad"
+
+#: plugins/wifi//NetworkDetails.qml:44
+#: plugins/bluetooth//PageComponent.qml:263
+msgid "Name"
+msgstr "Anv"
+
+#: plugins/wifi//NetworkDetails.qml:52
+msgid "Last connected"
+msgstr "Kevreet da ziwezhañ"
+
+#: plugins/wifi//NetworkDetails.qml:74
+msgid "Show password"
+msgstr "Diskouez ar ger-tremen"
+
+#: plugins/wifi//NetworkDetails.qml:84
+msgid "Forget network"
+msgstr "Ankouaat ar rouedad"
+
 #. TRANSLATORS: %1 is the name of the (network) carrier
-#: plugins/phone//Services.qml:30 plugins/phone//PageComponent.qml:61
+#: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
 #, qt-format
 msgid "%1 Services"
 msgstr "Servijoù %1"
@@ -696,7 +757,7 @@ msgstr "SIM"
 msgid "Call forwarding"
 msgstr "Treuzkas pellgomzadennoù"
 
-#: plugins/phone//PageComponent.qml:52 plugins/phone//CallWaiting.qml:27
+#: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
 #: plugins/phone//CallWaiting.qml:53
 msgid "Call waiting"
 msgstr "Pellgomzadenn o c'hortoz"
@@ -741,123 +802,126 @@ msgstr ""
 msgid "Updates"
 msgstr "Hizivadennoù"
 
-#: plugins/system-update//PageComponent.qml:50
+#: plugins/system-update//PageComponent.qml:51
 msgid "Update System"
 msgstr "Hizivaat ar reizhiad"
 
-#: plugins/system-update//PageComponent.qml:51
+#: plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
 msgstr "Ret eo adlañsañ ar pellgomzer evit staliañ hizivadenn ar reizhiad."
 
-#: plugins/system-update//PageComponent.qml:54
+#: plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
 msgstr "Staliañ & Adlañsañ"
 
-#: plugins/system-update//PageComponent.qml:63
+#: plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
 msgstr "Pas bremañ"
 
-#: plugins/system-update//PageComponent.qml:69
+#: plugins/system-update//PageComponent.qml:70
 msgid "Install"
 msgstr "Staliañ"
 
-#: plugins/system-update//PageComponent.qml:87
+#: plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
 msgstr "Ar meziant n'en deus ket ezhomm da vezañ hizivaet"
 
-#: plugins/system-update//PageComponent.qml:139
+#: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Kevreit ouzh ho kont Ubuntu One, mar plij."
 
-#: plugins/system-update//PageComponent.qml:154
+#: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
 msgstr "C'hwitet eo hizivadenn ar reizhiad."
 
-#: plugins/system-update//PageComponent.qml:165
+#: plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
 msgstr "C'hwitet eo hizivadenn ar reizhiad."
 
-#: plugins/system-update//PageComponent.qml:196
+#: plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
 msgstr "O wiriañ daoust hag-eñ ez eus hizivadennoù..."
 
-#: plugins/system-update//PageComponent.qml:214
+#: plugins/system-update//PageComponent.qml:217
 #, qt-format
-msgid "Install %1 update"
-msgid_plural "Install %1 updates"
-msgstr[0] "Staliañ %1 hizivadenn"
-msgstr[1] "Staliañ %1 hizivadenn"
+msgid "Install %1 updates…"
+msgstr "Saliañ %1 hizivadenn…"
 
-#: plugins/system-update//PageComponent.qml:215
+#: plugins/system-update//PageComponent.qml:217
+#, qt-format
+msgid "Install %1 updates"
+msgstr "Staliañ %1 hizivadenn"
+
+#: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
 msgstr "Ehanañ pep tra"
 
-#: plugins/system-update//PageComponent.qml:283
+#: plugins/system-update//PageComponent.qml:287
 msgid "Retry"
 msgstr "Esaeañ en-dro"
 
-#: plugins/system-update//PageComponent.qml:299
+#: plugins/system-update//PageComponent.qml:303
 msgid "Download"
 msgstr "Pellgargañ"
 
-#: plugins/system-update//PageComponent.qml:299
+#: plugins/system-update//PageComponent.qml:303
 msgid "Update"
 msgstr "Hizivaat"
 
-#: plugins/system-update//PageComponent.qml:300
+#: plugins/system-update//PageComponent.qml:304
 msgid "Resume"
 msgstr "Kenderc'hel"
 
-#: plugins/system-update//PageComponent.qml:301
+#: plugins/system-update//PageComponent.qml:305
 msgid "Pause"
 msgstr "Ehanañ"
 
-#: plugins/system-update//PageComponent.qml:360
+#: plugins/system-update//PageComponent.qml:364
 msgid "Installing"
 msgstr "O staliañ"
 
-#: plugins/system-update//PageComponent.qml:393
+#: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "Staliet"
 
-#: plugins/system-update//PageComponent.qml:417
+#: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
 msgstr "Doare : "
 
-#: plugins/system-update//PageComponent.qml:442
+#: plugins/system-update//PageComponent.qml:446
 #: plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr "Pellgargañ emgefre"
 
-#: plugins/system-update//PageComponent.qml:447
+#: plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
 msgstr "Gant ar wi-fi"
 
-#: plugins/system-update//PageComponent.qml:449
+#: plugins/system-update//PageComponent.qml:453
 msgid "Always"
 msgstr "Bepred"
 
-#: plugins/system-update//PageComponent.qml:501
+#: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "N'eo ket bet kavet an daveoù"
 
-#: plugins/system-update//PageComponent.qml:531
+#: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
 msgstr "O staliañ an hizivadenn..."
 
-#: plugins/system-update//PageComponent.qml:545
+#: plugins/system-update//PageComponent.qml:549
 msgid " bytes"
 msgstr " okted"
 
-#: plugins/system-update//PageComponent.qml:548
+#: plugins/system-update//PageComponent.qml:552
 msgid " KiB"
 msgstr " Ko"
 
-#: plugins/system-update//PageComponent.qml:551
+#: plugins/system-update//PageComponent.qml:555
 msgid " MiB"
 msgstr " Mo"
 
-#: plugins/system-update//PageComponent.qml:554
+#: plugins/system-update//PageComponent.qml:558
 msgid " GiB"
 msgstr " Go"
 
@@ -885,11 +949,11 @@ msgstr "Skedusted"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Keidañ ent emgefre"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Sklaeraat ha teñvalaat evit ober diouzh an endro"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1034,7 +1098,7 @@ msgstr "Urzhiataer"
 msgid "Modem"
 msgstr "Modem"
 
-#: plugins/bluetooth//PageComponent.qml:84 src/qml/MainWindow.qml:144
+#: plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
 msgid "Network"
 msgstr "Rouedad"
 
@@ -1100,31 +1164,27 @@ msgstr "Dister"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "A c'haller dizoleiñ"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Na c'haller ket dizoleiñ"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Ardivinkoù kevreet :"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Kevreañ un ardivink disheñvel :"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Kevreañ un ardivink all :"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
 msgstr "N'eus bet dinoet hini ebet"
-
-#: plugins/bluetooth//PageComponent.qml:263
-msgid "Name"
-msgstr "Anv"
 
 #: plugins/bluetooth//PageComponent.qml:267
 msgid "Type"
@@ -1193,9 +1253,37 @@ msgstr "Freskaat"
 msgid "Searching"
 msgstr "O klask"
 
-#: plugins/about//Software.qml:11 plugins/about//PageComponent.qml:144
+#: plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:148
 msgid "Software licenses"
 msgstr "Aotreoù-implijout ar meziant"
+
+#: plugins/about//Version.qml:35
+msgid "OS Build Details"
+msgstr "Munudoù stumm ar RK"
+
+#: plugins/about//Version.qml:53
+msgid "OS build number"
+msgstr "Niverenn stumm ar RK"
+
+#: plugins/about//Version.qml:59
+msgid "Ubuntu Image part"
+msgstr "Lodenn skeudenn Ubuntu"
+
+#: plugins/about//Version.qml:85
+msgid "Ubuntu build description"
+msgstr "Deskrivadur stumm ar RK"
+
+#: plugins/about//Version.qml:100
+msgid "Device Image part"
+msgstr "Lodenn skeudenn an ardivink"
+
+#: plugins/about//Version.qml:126
+msgid "Device build description"
+msgstr "Deskrivadur stumm an ardivink"
+
+#: plugins/about//Version.qml:141
+msgid "Customization Image part"
+msgstr "Lodenn personelaat skeudenn"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1207,71 +1295,71 @@ msgstr "Diwar-benn ar pellgomzer-mañ"
 msgid "Serial"
 msgstr "Niverenn steudad"
 
-#: plugins/about//PageComponent.qml:103
-msgid "Software:"
-msgstr "Meziant :"
-
-#: plugins/about//PageComponent.qml:108
-msgid "OS"
-msgstr "RK"
-
-#: plugins/about//PageComponent.qml:115
-msgid "Last updated"
-msgstr "Hizivadenn diwezhañ"
-
-#: plugins/about//PageComponent.qml:122
-msgid "Check for updates"
-msgstr "Gwiriañ hag-eñ ez eus hizivadennoù"
-
-#: plugins/about//PageComponent.qml:132 plugins/about//Storage.qml:33
+#: plugins/about//PageComponent.qml:106 ../plugins/about//Storage.qml:33
 msgid "Storage"
 msgstr "Memor"
 
-#: plugins/about//PageComponent.qml:139
+#: plugins/about//PageComponent.qml:113
+msgid "Software:"
+msgstr "Meziant :"
+
+#: plugins/about//PageComponent.qml:118
+msgid "OS"
+msgstr "RK"
+
+#: plugins/about//PageComponent.qml:127
+msgid "Last updated"
+msgstr "Hizivadenn diwezhañ"
+
+#: plugins/about//PageComponent.qml:134
+msgid "Check for updates"
+msgstr "Gwiriañ hag-eñ ez eus hizivadennoù"
+
+#: plugins/about//PageComponent.qml:143
 msgid "Legal:"
 msgstr "Menegoù lezennel :"
 
-#: plugins/about//PageComponent.qml:152
+#: plugins/about//PageComponent.qml:156
 msgid "Regulatory info"
 msgstr "Titouroù reoliañ"
 
-#: plugins/about//Storage.qml:88
+#: plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
 msgstr "Implijet gant Ubuntu"
 
-#: plugins/about//Storage.qml:89
+#: plugins/about//Storage.qml:88
 msgid "Videos"
 msgstr "Videoioù"
 
-#: plugins/about//Storage.qml:90
+#: plugins/about//Storage.qml:89
 msgid "Audio"
 msgstr "Kleved"
 
-#: plugins/about//Storage.qml:91
+#: plugins/about//Storage.qml:90
 msgid "Pictures"
 msgstr "Skeudennoù"
 
-#: plugins/about//Storage.qml:92
+#: plugins/about//Storage.qml:91
 msgid "Other files"
 msgstr "Restroù all"
 
-#: plugins/about//Storage.qml:93
+#: plugins/about//Storage.qml:92
 msgid "Used by apps"
 msgstr "Implijet gant an arloadoù"
 
-#: plugins/about//Storage.qml:143
+#: plugins/about//Storage.qml:142
 msgid "Total storage"
 msgstr "Memor en holl"
 
-#: plugins/about//Storage.qml:155
+#: plugins/about//Storage.qml:154
 msgid "Free space"
 msgstr "Egor dieub"
 
-#: plugins/about//Storage.qml:175
+#: plugins/about//Storage.qml:174
 msgid "By name"
 msgstr "Dre anv"
 
-#: plugins/about//Storage.qml:175
+#: plugins/about//Storage.qml:174
 msgid "By size"
 msgstr "Dre vent"
 
@@ -1293,87 +1381,93 @@ msgstr "Reizhiad"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "Distreiñ"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Arventennoù ar pellgomzer"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
-"Your phone is setup to automatically report errors to Canonical. This can be "
-"disabled in system settings."
+"Your phone is set up to automatically report errors to Canonical. This can "
+"be disabled in system settings."
 msgstr ""
+"Arventennet eo ho pellgomzer ent emgefre evit titourañ ar fazioù da "
+"gCanonical. Diweredekaet e c'hall bezañ en arventennoù ar reizhiad."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
-"Your phone is setup to detect your location. This can be disabled in system "
+"Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Arventennet eo ho pellgomzer evit dinoiñ al lec'h m'emaoc'h. Diweredekaet e "
+"c'hall bezañ en arventennoù ar reizhiad."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "N'eus ket a gartenn SIM"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Nebaon, gallout a reoc'h lakaat ur gartenn SIM diwezhatoc'h."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "Evit poent ne c'halloc'h ket pellgomz na kas SMSoù."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
+"Gallout a rit kavout ur gartenn SIM e boest ho pellgomzer, pe kit e "
+"darempred gant ho pourchaser."
 
-#: wizard/qml/Pages//no-sim.qml:68 wizard/qml/Pages//20-wifi.qml:168
+#: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Tremen hebiou"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "Se eo !"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Mat-kaer eo kavout ac'hanoc'h e kumuniezh Ubuntu."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Ho pet plijadur gant ho pellgomzer nevez."
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Echuiñ"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Kevreañ ouzh ar Wi-Fi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "Rouedad da gevreañ outo"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+msgstr "Kevreit ouzh ur rouedad Wi-Fi evit personelaat ho kefluniadur."
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "Demat !"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "Deuet-mat oc'h en Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "Krogomp ganti."
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Diuzit ho yezh"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1562,7 +1656,7 @@ msgstr "hizivaat"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Hizivadennoù zo da gaout"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100

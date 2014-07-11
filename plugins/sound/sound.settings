@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/ubuntu/settings/system/icons/settings-sounds.svg",
+    "icon": "preferences-desktop-sounds-symbolic",
     "name": "Sound",
     "translations": "ubuntu-system-settings",
     "category": "personal",

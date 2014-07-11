@@ -35,6 +35,7 @@ ItemPage {
     title: i18n.tr("Updates")
 
     property bool installAll: false
+    property bool includeSystemUpdate: false
     property int updatesAvailable: 0
 
     property var notificationAction;
@@ -99,7 +100,7 @@ ItemPage {
         State {
             name: "UPDATE"
             PropertyChanges { target: updateList; visible: true}
-            PropertyChanges { target: installAllButton; visible: true}
+            PropertyChanges { target: installAllButton; visible: true && root.updatesAvailable > 1}
             PropertyChanges { target: updateNotification; visible: false}
         }
     ]
@@ -120,6 +121,8 @@ ItemPage {
 
         onUpdateAvailableFound: {
             root.updatesAvailable = updateManager.model.length;
+            if (root.updatesAvailable > 0)
+                root.includeSystemUpdate = updateManager.model[0].systemUpdate
             root.state = "UPDATE";
             root.installAll = downloading;
         }
@@ -211,7 +214,7 @@ ItemPage {
         id: installAllButton
         objectName: "installAllButton"
 
-        property string primaryText: i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
+        property string primaryText: includeSystemUpdate ? i18n.tr("Install %1 updates…").arg(root.updatesAvailable) : i18n.tr("Install %1 updates").arg(root.updatesAvailable)
         property string secondaryText: i18n.tr("Pause All")
         text: root.installAll ? secondaryText : primaryText
         anchors {
@@ -249,7 +252,7 @@ ItemPage {
         anchors {
             left: parent.left
             right: parent.right
-            top: installAllButton.bottom
+            top: installAllButton.visible ? installAllButton.bottom : parent.top
             bottom: notification.visible ? notification.top : configuration.top
             margins: units.gu(2)
             bottomMargin: 0
@@ -264,6 +267,7 @@ ItemPage {
             iconSource: Qt.resolvedUrl(modelData.iconUrl)
             iconFrame: false
             height: modelData.selected ? units.gu(14) : units.gu(8)
+            showDivider: false
 
             property alias actionButton: buttonAppUpdate
 
