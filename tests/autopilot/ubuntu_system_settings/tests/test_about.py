@@ -44,14 +44,17 @@ class AboutTestCase(AboutBaseTestCase):
             return properties['Serial']
 
     def _get_os_name(self):
-        os_id = subprocess.check_output(['lsb_release', '-is'])
-        os_release = subprocess.check_output(['lsb_release', '-rs'])
+        os_id = subprocess.check_output(
+            ['lsb_release', '-is'], universal_newlines=True)
+        os_release = subprocess.check_output(
+            ['lsb_release', '-rs'], universal_newlines=True)
 
         return '{} {}'.format(os_id.strip(), os_release.strip())
 
     def _get_device_serial_number(self):
         try:
-            return subprocess.check_output(['getprop', 'ro.serialno']).strip()
+            return subprocess.check_output(
+                ['getprop', 'ro.serialno'], universal_newlines=True).strip()
         except OSError:
             # getprop is only available on android hardware.
             return None
@@ -66,10 +69,12 @@ class AboutTestCase(AboutBaseTestCase):
             ).read().strip()
         else:
             manufacturer = subprocess.check_output(
-                ['getprop', 'ro.product.manufacturer']
+                ['getprop', 'ro.product.manufacturer'],
+                universal_newlines=True
             ).strip()
             hw_model = subprocess.check_output(
-                ['getprop', 'ro.product.model']
+                ['getprop', 'ro.product.model'],
+                universal_newlines=True
             ).strip()
 
         return '{} {}'.format(manufacturer, hw_model)
@@ -143,7 +148,7 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_check_for_updates(self):
         """
-        Checks whether clicking on Check for Updates brings us 
+        Checks whether clicking on Check for Updates brings us
         to the Updates page.
         """
         update_button = self.system_settings.main_view.about_page.select_single(

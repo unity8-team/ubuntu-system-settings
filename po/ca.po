@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-06-25 11:40+0000\n"
+"PO-Revision-Date: 2014-07-10 20:39+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:33+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-11 06:14+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -681,43 +681,43 @@ msgstr ""
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "Xarxes anteriors"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Altres xarxes"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Nom de la xarxa"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Seguretat"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA i WPA2 personal"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "﻿Contrasenya"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Contrasenya visible"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Connecta-t'hi"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "Detalls de la xarxa"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -726,15 +726,15 @@ msgstr "Nom"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "Darrera connexió"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Mostra la contrasenya"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "Oblida la xarxa"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -847,12 +847,12 @@ msgstr "S'estan comprovant les actualitzacions..."
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Instal·la %1 actualitzacions…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Instal·la %1 actualitzacions"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -1169,7 +1169,7 @@ msgstr "Es pot descobrir"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr "No es pot descrobrir"
+msgstr "No es pot descobrir"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
@@ -1235,7 +1235,7 @@ msgstr "Estadístiques d'ús de dades"
 
 #: plugins/cellular//PageComponent.qml:121
 msgid "Choose carrier:"
-msgstr "Escolliu l'operador:"
+msgstr "Escull l'operador:"
 
 #: plugins/cellular//PageComponent.qml:127
 #: plugins/cellular//ChooseCarrier.qml:28
@@ -1651,7 +1651,7 @@ msgstr "actualitza"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Actualitzacions disponibles"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
