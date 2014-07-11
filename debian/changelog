@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.3+14.10.20140711.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Dropped QML bindings for ofono-qt from the phone plugin and ported
+    to libqofono's QML bindings. Show last time called for each service
+    under SIM services and enabled the call button, to launch the
+    dialer. (LP: #1221908)
+
+  [ jonas-drange ]
+  * use libqofono bindings to allow for technology preference changes
+
+  [ Iain Lane ]
+  * [accountsservice] Don't guard D-Bus calls with isValid, because that
+    doesn't work if the service has timed out.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Jul 2014 16:12:27 +0000
+
 ubuntu-system-settings (0.3+14.10.20140711-0ubuntu1) utopic; urgency=low
 
   [ Andrea Cimitan ]
