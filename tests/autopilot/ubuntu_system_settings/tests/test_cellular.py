@@ -9,6 +9,7 @@ import dbus
 from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
+from gi.repository import Gio
 from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import (
