@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.3+14.10.20140711-0ubuntu1) utopic; urgency=low
+
+  [ Andrea Cimitan ]
+  * Workaround for OSK input area (LP: #1334429)
+
+  [ Sebastien Bacher ]
+  * battery, draw the x axis labels (LP: #1289460)
+
+  [ Iain Lane ]
+  * [time-date] Ask for properties over D-Bus even when the object is
+    not considered valued (due to the service timing out), to cause it
+    to be activated.
+
+  [ Leo Arias ]
+  * Ported the autopilot package to python3. (LP: #1327325)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Jul 2014 08:55:46 +0000
+
 ubuntu-system-settings (0.3+14.10.20140709.2-0ubuntu1) utopic; urgency=low
 
   [ Ubuntu daily release ]
