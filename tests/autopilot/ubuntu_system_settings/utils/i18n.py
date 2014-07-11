@@ -21,4 +21,4 @@ language = gettext.translation(
 )
 
 # UTF-8
-ugettext = language.ugettext
+ugettext = language.gettext
