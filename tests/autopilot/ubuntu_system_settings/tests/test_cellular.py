@@ -52,9 +52,9 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         )
         # TODO: Once there is a proper ItemSelector emulator, get the items
         # from it and check 'fake.tel' is the selected one.
-        manual = carriers.select_single('Label', text="fake.tel")
-        self.assertThat(manual, NotEquals(None))
-        self.assertThat(carriers.selectedIndex, Equals(0))
+        selected_delegate = carriers.select_single(
+            'OptionSelectorDelegate', selected=True)
+        selected_delegate.select_single('Label', text="fake.tel")
 
     def test_alt_network(self):
         """ Tests whether an alternative available network is displayed """
