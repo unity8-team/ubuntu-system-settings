@@ -63,6 +63,7 @@ Depends: ${misc:Depends},
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 0.9),
          click,
+         ubuntu-location-service-bin,
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
 # for the session-migration script
          python3,

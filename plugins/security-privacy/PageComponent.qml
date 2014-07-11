@@ -155,7 +155,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
                 progression: true
-                value: diagnosticsWidget.canReportCrashes ?
+                value: (diagnosticsWidget.canReportCrashes || diagnosticsWidget.canReportWifiAndCellIds) ?
                            /* TRANSLATORS: This string is shown when crash
                               reports are to be sent by the system. */
                            i18n.tr("Sent") :

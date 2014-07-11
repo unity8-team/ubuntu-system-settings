@@ -103,11 +103,11 @@ ItemPage {
                     }
 
                 }
-                textEntry: i18n.tr("Wi-Fi access points")
+                textEntry: i18n.tr("Location information")
             }
 
             ListItem.Caption {
-                text: i18n.tr("Improves location accuracy for all Ubuntu Phone users.")
+                text: i18n.tr("Includes anonymous data about nearby wifi and mobile network access points.")
             }
         }
     }
