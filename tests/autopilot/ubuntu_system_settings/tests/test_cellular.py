@@ -124,13 +124,18 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.assertFalse(carriers.visible)
 
         # add modem
-        self.params['ModemName'] = 'ril_1'
         self.dbusmock.AddModem('ril_1', {'Powered': True})
-
-        sleep(1)
 
         self.assertFalse(carrier.visible)
         self.assertTrue(carriers.visible)
+
+
+    def test_one_modem(self):
+        self.assertTrue(False)
+
+    def test_two_modems(self):
+        self.dbusmock.AddModem('ril_1', {'Powered': True})
+        self.assertTrue(False)
 
     def test_set_modem_offline(self):
         self.select_preference(PREFERENCE_OFF)

@@ -9,6 +9,7 @@ set(QML_SOURCES
     HotspotSetup.qml
     PageComponent.qml
     rdosettings-helpers.js
+    modem-helpers.js
 )
 
 
