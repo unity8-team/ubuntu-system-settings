@@ -162,6 +162,19 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='soundPage')
 
 
+class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Sound page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'cellularPage':
+                return True
+        return False
+
+
 class SoundPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Sound page."""
