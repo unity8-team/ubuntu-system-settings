@@ -76,28 +76,28 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             Equals(_('Cellular'))
         )
 
-    # def test_current_network(self):
-    #     """ Tests whether the current network is visible and selected """
-    #     self.navigate_to_manual()
-    #     carriers = self.system_settings.main_view.choose_page.select_single(
-    #         toolkit_emulators.ItemSelector,
-    #         objectName="carrierSelector"
-    #     )
-    #     # TODO: Once there is a proper ItemSelector emulator, get the items
-    #     # from it and check 'fake.tel' is the selected one.
-    #     manual = carriers.select_single('Label', text="fake.tel")
-    #     self.assertThat(manual, NotEquals(None))
-    #     self.assertThat(carriers.selectedIndex, Equals(0))
+    def test_current_network(self):
+        """ Tests whether the current network is visible and selected """
+        self.navigate_to_manual()
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
+        # TODO: Once there is a proper ItemSelector emulator, get the items
+        # from it and check 'fake.tel' is the selected one.
+        manual = carriers.select_single('Label', text="fake.tel")
+        self.assertThat(manual, NotEquals(None))
+        self.assertThat(carriers.selectedIndex, Equals(0))
 
-    # def test_alt_network(self):
-    #     """ Tests whether an alternative available network is displayed """
-    #     self.navigate_to_manual()
-    #     carriers = self.system_settings.main_view.choose_page.select_single(
-    #         toolkit_emulators.ItemSelector,
-    #         objectName="carrierSelector"
-    #     )
-    #     manual = carriers.select_single('Label', text="my.cool.telco")
-    #     self.assertThat(manual, NotEquals(None))
+    def test_alt_network(self):
+        """ Tests whether an alternative available network is displayed """
+        self.navigate_to_manual()
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
+        manual = carriers.select_single('Label', text="my.cool.telco")
+        self.assertThat(manual, NotEquals(None))
 
     def test_no_forbidden_network(self):
         """ Ensures that a forbidden network is not shown """
