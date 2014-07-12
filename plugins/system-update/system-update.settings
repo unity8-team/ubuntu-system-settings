@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/ubuntu/settings/system/icons/settings-system-update.svg",
+    "icon": "preferences-system-updates-symbolic",
     "name": "Updates",
     "translations": "ubuntu-system-settings",
     "category": "system",

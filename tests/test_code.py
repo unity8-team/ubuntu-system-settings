@@ -19,11 +19,11 @@ class StaticCodeTests(unittest.TestCase):
                                stdout=subprocess.PIPE)
 
     @unittest.skipIf(
-        _is_tool_installed('pyflakes') != 0, 'pyflakes not installed'
+        _is_tool_installed('pyflakes3') != 0, 'python-pyflakes3 not installed'
     )
     def test_pyflakes(self):
         pyflakes = subprocess.Popen(
-            ['pyflakes', '.'],
+            ['pyflakes3', '.'],
             stdout=subprocess.PIPE, universal_newlines=True
         )
         (out, err) = pyflakes.communicate()

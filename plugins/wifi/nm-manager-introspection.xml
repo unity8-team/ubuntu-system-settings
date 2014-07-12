@@ -1,0 +1,79 @@
+  <interface name="org.freedesktop.NetworkManager">
+    <method name="state">
+      <arg name="state" type="u" direction="out"/>
+    </method>
+    <method name="CheckConnectivity">
+      <arg name="connectivity" type="u" direction="out"/>
+    </method>
+    <method name="GetLogging">
+      <arg name="level" type="s" direction="out"/>
+      <arg name="domains" type="s" direction="out"/>
+    </method>
+    <method name="SetLogging">
+      <arg name="level" type="s" direction="in"/>
+      <arg name="domains" type="s" direction="in"/>
+    </method>
+    <method name="GetPermissions">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QMap&lt;QString, QString&gt;"/>
+      <arg name="permissions" type="a{ss}" direction="out"/>
+    </method>
+    <method name="Enable">
+      <arg name="enable" type="b" direction="in"/>
+    </method>
+    <method name="Sleep">
+      <arg name="sleep" type="b" direction="in"/>
+    </method>
+    <method name="DeactivateConnection">
+      <arg name="active_connection" type="o" direction="in"/>
+    </method>
+    <method name="AddAndActivateConnection">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QMap&lt;QString, QVariantMap&gt;"/>
+      <arg name="connection" type="a{sa{sv}}" direction="in"/>
+      <arg name="device" type="o" direction="in"/>
+      <arg name="specific_object" type="o" direction="in"/>
+      <arg name="path" type="o" direction="out"/>
+      <arg name="active_connection" type="o" direction="out"/>
+    </method>
+    <method name="ActivateConnection">
+      <arg name="connection" type="o" direction="in"/>
+      <arg name="device" type="o" direction="in"/>
+      <arg name="specific_object" type="o" direction="in"/>
+      <arg name="active_connection" type="o" direction="out"/>
+    </method>
+    <method name="GetDeviceByIpIface">
+      <arg name="iface" type="s" direction="in"/>
+      <arg name="device" type="o" direction="out"/>
+    </method>
+    <method name="GetDevices">
+      <arg name="devices" type="ao" direction="out"/>
+    </method>
+    <signal name="DeviceRemoved">
+      <arg type="o"/>
+    </signal>
+    <signal name="DeviceAdded">
+      <arg type="o"/>
+    </signal>
+    <signal name="PropertiesChanged">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="QVariantMap"/>
+      <arg type="a{sv}"/>
+    </signal>
+    <signal name="StateChanged">
+      <arg type="u"/>
+    </signal>
+    <signal name="CheckPermissions">
+    </signal>
+    <property name="Connectivity" type="u" access="read"/>
+    <property name="State" type="u" access="read"/>
+    <property name="Version" type="s" access="read"/>
+    <property name="ActivatingConnection" type="o" access="read"/>
+    <property name="PrimaryConnection" type="o" access="read"/>
+    <property name="ActiveConnections" type="ao" access="read"/>
+    <property name="WimaxHardwareEnabled" type="b" access="read"/>
+    <property name="WimaxEnabled" type="b" access="readwrite"/>
+    <property name="WwanHardwareEnabled" type="b" access="read"/>
+    <property name="WwanEnabled" type="b" access="readwrite"/>
+    <property name="WirelessHardwareEnabled" type="b" access="read"/>
+    <property name="WirelessEnabled" type="b" access="readwrite"/>
+    <property name="NetworkingEnabled" type="b" access="read"/>
+  </interface>
+

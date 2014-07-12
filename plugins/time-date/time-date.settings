@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/ubuntu/settings/system/icons/settings-time-date.svg",
+    "icon": "preferences-system-time-symbolic",
     "name": "Time & Date",
     "translations": "ubuntu-system-settings",
     "category": "system",

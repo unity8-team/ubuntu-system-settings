@@ -1,3 +1,150 @@
+ubuntu-system-settings (0.3+14.10.20140711.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Dropped QML bindings for ofono-qt from the phone plugin and ported
+    to libqofono's QML bindings. Show last time called for each service
+    under SIM services and enabled the call button, to launch the
+    dialer. (LP: #1221908)
+
+  [ jonas-drange ]
+  * use libqofono bindings to allow for technology preference changes
+
+  [ Iain Lane ]
+  * [accountsservice] Don't guard D-Bus calls with isValid, because that
+    doesn't work if the service has timed out.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Jul 2014 16:12:27 +0000
+
+ubuntu-system-settings (0.3+14.10.20140711-0ubuntu1) utopic; urgency=low
+
+  [ Andrea Cimitan ]
+  * Workaround for OSK input area (LP: #1334429)
+
+  [ Sebastien Bacher ]
+  * battery, draw the x axis labels (LP: #1289460)
+
+  [ Iain Lane ]
+  * [time-date] Ask for properties over D-Bus even when the object is
+    not considered valued (due to the service timing out), to cause it
+    to be activated.
+
+  [ Leo Arias ]
+  * Ported the autopilot package to python3. (LP: #1327325)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Jul 2014 08:55:46 +0000
+
+ubuntu-system-settings (0.3+14.10.20140709.2-0ubuntu1) utopic; urgency=low
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+  [ Antti Kaijanmäki ]
+  * Implement the flight-mode toggle on the quick-access area.
+    debian/control: added urfkill to Depends .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 09 Jul 2014 10:08:39 +0000
+
+ubuntu-system-settings (0.3+14.10.20140708.1-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Jussi Pakkanen ]
+  * Add support for creating a hotspot. (LP: #1326271)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 08 Jul 2014 16:17:14 +0000
+
+ubuntu-system-settings (0.3+14.10.20140707.2-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Sebastien Bacher ]
+  * updated translations template
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 07 Jul 2014 15:10:49 +0000
+
+ubuntu-system-settings (0.3+14.10.20140703.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Kill maliit-server when wizard is done. This is because maliit-
+    server is normally tied to the Mir server that launched it. Unless
+    we kill it, it won't be re-associated with unity8 correctly. (LP:
+    #1335917)
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Iain Lane ]
+  * [about] Look harder for the desktop file so we can display more
+    icons in the list of apps (LP: #1324618)
+  * Fix storage by name/by size sorting and remember the selected value.
+    (LP: #1320160)
+  * update-plugin: Don't declare prototypes that aren't used
+
+  [ Steve Langasek ]
+  * Don't use 'setup' as a verb. (LP: #1336181)
+
+  [ Sebastien Bacher ]
+  * updates: tweak the interface don't use dividers between list items.
+    use the labels specified in the design. show the "install n updates"
+    button only when there are several updates (LP: #1333565)
+  * Tweak items order to match design, add a separator
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 03 Jul 2014 15:29:07 +0000
+
+ubuntu-system-settings (0.3+14.10.20140702.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  * No change rebuild for new ubuntu-download-manager. 
+
+ -- Manuel de la Pena <manuel.delapena@canonical.com>  Thu, 03 Jul 2014 16:33:54 +0200
+
+ubuntu-system-settings (0.3+14.10.20140702.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * Use new icons from suru theme.
+
+  [ Michał Sawicz ]
+  * Use new icons from suru theme.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Jul 2014 07:16:18 +0000
+
+ubuntu-system-settings (0.3+14.10.20140702-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Sergio Schvezov ]
+  * Adding extra build information from the .Info interface method call
+    when expanding OS.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Jul 2014 01:53:01 +0000
+
+ubuntu-system-settings (0.3+14.10.20140626.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * updated translation template
+
+  [ Jussi Pakkanen ]
+  * Wifi: * Connecto to Other (hidden) Network * Previous Networks
+
+  [ Antti Kaijanmäki ]
+  * Wifi: * Connecto to Other (hidden) Network * Previous Networks
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Jun 2014 18:14:08 +0000
+
+ubuntu-system-settings (0.3+14.10.20140623-0ubuntu2) UNRELEASED; urgency=medium
+
+  [ Jamie Strandboge ]
+  * add lenient AppArmor profile to allow connecting to ofono (LP: #1296415)
+    - add debian/usr.bin.system-settings
+    - debian/control: Build-Depends on dh-apparmor
+    - debian/rules: update override_dh_installdeb to use dh_apparmor
+    - debian/ubuntu-system-settings.dirs: add etc/apparmor.d
+    - debian/ubuntu-system-settings.install: install profile in to place
+
+ -- Jamie Strandboge <jamie@ubuntu.com>  Mon, 23 Jun 2014 17:27:13 -0500
+
 ubuntu-system-settings (0.3+14.10.20140623-0ubuntu1) utopic; urgency=low
 
   [ Mathieu Trudel-Lapierre ]

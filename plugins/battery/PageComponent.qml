@@ -127,43 +127,84 @@ ItemPage {
                 id: canvas
                 width:parent.width - units.gu(4)
                 anchors.horizontalCenter: parent.horizontalCenter
-                height: units.gu(15)
+                height: units.gu(23)
 
                 antialiasing: true
 
-                function drawAxes(ctx, axisWidth, axisHeight) {
+                function drawAxes(ctx, axisWidth, axisHeight, bottomMargin, rightMargin) {
+
+                    var currentHour = Qt.formatDateTime(new Date(), "h")
+                    var currentMinutes = Qt.formatDateTime(new Date(), "m")
+                    var displayHour
+                    var labelWidth
+                    var zeroMark
+
                     ctx.save()
                     ctx.beginPath()
                     ctx.strokeStyle = UbuntuColors.lightAubergine
 
                     ctx.lineWidth = units.dp(2)
 
+                    var fontHeight = FontUtils.sizeToPixels("small")
+                    ctx.font="%1px Ubuntu".arg(fontHeight)
+
                     ctx.translate(0, 1)
 
                     // 11 ticks with 0, 5, 10 being big
                     for (var i = 0; i <= 10; i++) {
                         var x = (i % 5 == 0) ? 0 : Math.floor(axisWidth / 2)
-                        var y = (i / 10) * (height - axisHeight - ctx.lineWidth)
+                        var y = (i / 10) * (height - axisHeight - bottomMargin - ctx.lineWidth)
                         ctx.moveTo(x, y)
                         ctx.lineTo(axisWidth, y)
                     }
 
                     ctx.translate(axisWidth + ctx.lineWidth / 2,
-                                  height - axisHeight - ctx.lineWidth / 2)
+                                  height - axisHeight - bottomMargin - ctx.lineWidth / 2)
 
                     ctx.moveTo(0, 0)
                     ctx.lineTo(0, -ctx.lineWidth)
 
-                    // 25 ticks with 0, 6, 12, 18, 24 being big
+                    // 24 ticks with 6, 12, 18, 24 being big
                     for (i = 0; i <= 24; i++) {
-                        x = (i / 24) * (width - axisWidth - ctx.lineWidth)
+                        /* the marks need to be shifted on the hours */
+                        x = ((i - currentMinutes / 60) / 24) * (width - axisWidth - ctx.lineWidth - rightMargin)
+                        if (x < 0)
+                            continue
                         y = (i % 6 == 0) ? axisHeight : axisHeight -
                                             Math.floor(axisHeight / 2)
                         ctx.moveTo(x, 0)
                         ctx.lineTo(x, y)
+
+                        /* Determine the hour to display */
+                        displayHour = (currentHour - (24-i))
+                        if (displayHour < 0)
+                            displayHour = displayHour + 24
+                        /* Store the x for the day change line */
+                        if (displayHour === 0)
+                            zeroMark = x
+
+                        /* Write the x-axis legend */
+                        if (i % 6 == 0) {
+                            labelWidth = context.measureText("%1".arg(displayHour)).width;
+                            ctx.fillText("%1".arg(displayHour),
+                                         x - labelWidth/2,
+                                         axisHeight + units.dp(1) + fontHeight)
+                        }
                     }
 
-                    ctx.translate(0, 0)
+                    labelWidth = context.measureText(i18n.tr("Yesterday")).width;
+                    if(labelWidth < zeroMark)
+                        ctx.fillText(i18n.tr("Yesterday"),
+                                     (zeroMark - labelWidth)/2,
+                                     axisHeight + units.dp(6) + 2*fontHeight)
+
+                    ctx.fillText("|", zeroMark, axisHeight + units.dp(6) + 2*fontHeight)
+
+                    labelWidth = context.measureText(i18n.tr("Today")).width;
+                    if(labelWidth < (width - zeroMark - rightMargin - axisWidth - ctx.lineWidth))
+                        ctx.fillText(i18n.tr("Today"),
+                                     zeroMark + (width - zeroMark - labelWidth)/2,
+                                     axisHeight + units.dp(6) + 2*fontHeight)
 
                     ctx.stroke()
                     ctx.restore()
@@ -174,12 +215,14 @@ ItemPage {
                     ctx.save();
                     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-                    var axisWidth = 10
-                    var axisHeight = 10
+                    var axisWidth = units.gu(1)
+                    var axisHeight = units.gu(1)
 
-                    var graphHeight = height - axisHeight
+                    /* Space to write the legend */
+                    var bottomMargin = units.gu(6)
+                    var rightMargin = units.gu(1)
 
-                    drawAxes(ctx, axisWidth, axisHeight)
+                    drawAxes(ctx, axisWidth, axisHeight, bottomMargin, rightMargin)
 
                     /* Display the charge history */
                     ctx.beginPath();
@@ -191,10 +234,11 @@ ItemPage {
                     // Invert the y axis so we draw from the bottom left
                     ctx.scale(1, -1)
                     // Move the origin to just above the axes
-                    ctx.translate(axisWidth, axisHeight)
+                    ctx.translate(axisWidth, axisHeight + bottomMargin)
                     // Scale to avoid the axes so we can draw as if they aren't
                     // there
-                    ctx.scale(1 - (axisWidth / width), 1 - axisHeight / height)
+                    ctx.scale(1 - ((axisWidth + rightMargin) / width),
+                              1 - (axisHeight + bottomMargin) / height)
 
                     var gradient = ctx.createLinearGradient(0, 0, 0, height);
                     gradient.addColorStop(1, "green");
