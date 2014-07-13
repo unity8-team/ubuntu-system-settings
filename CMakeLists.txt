@@ -42,6 +42,7 @@ pkg_search_module(OFONO REQUIRED ofono-qt)
 pkg_search_module(TIMEZONEMAP REQUIRED timezonemap)
 pkg_search_module(ICU REQUIRED icu-i18n)
 pkg_search_module(ANDR_PROP libandroid-properties)
+pkg_search_module(POLKIT_AGENT polkit-agent-1)
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)

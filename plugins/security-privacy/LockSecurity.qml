@@ -27,6 +27,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
 ItemPage {
+    id: page
     title: i18n.tr("Lock security")
 
     UbuntuSecurityPrivacyPanel {
@@ -58,14 +59,28 @@ ItemPage {
     Dialog {
         id: changeSecurityDialog
 
-        property int oldMethod: securityPrivacy.securityType
-        property int newMethod: indexToMethod(unlockMethod.selectedIndex)
+        property int oldMethod
+        property int newMethod
+
+        function open() {
+            // Set manually rather than have these be dynamically bound, since
+            // the security type can change out from under us, but we don't
+            // want dialog to change in that case.
+            oldMethod = securityPrivacy.securityType
+            newMethod = indexToMethod(unlockMethod.selectedIndex)
+            show()
+        }
+
+        function close() {
+            PopupUtils.close(changeSecurityDialog)
+            clearInputs()
+        }
 
         function clearInputs() {
             currentInput.text = ""
             newInput.text = ""
             confirmInput.text = ""
-            incorrect.visible = false
+            incorrect.text = ""
             notMatching.visible = false
             confirmButton.enabled = false
         }
@@ -144,18 +159,8 @@ ItemPage {
 
         Label {
             id: incorrect
-            text: {
-                if (changeSecurityDialog.oldMethod ===
-                        UbuntuSecurityPrivacyPanel.Passcode)
-                    return i18n.tr("Incorrect passcode. Try again.")
-                if (changeSecurityDialog.oldMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase)
-                    return i18n.tr("Incorrect passphrase. Try again.")
-
-                //Fallback to prevent warnings. Not displayed.
-                return ""
-            }
-            visible: false
+            text: ""
+            visible: text !== ""
             color: "darkred"
         }
 
@@ -274,46 +279,40 @@ ItemPage {
                       i18n.tr("Continue")
             enabled: false
             onClicked: {
-                var correct = !currentInput.visible ||
-                        (securityPrivacy.securityValueMatches(currentInput.text))
+                changeSecurityDialog.enabled = false
+
                 var match = (newInput.text == confirmInput.text)
-
-                incorrect.visible = !correct
-
-                if (correct) // one problem at a time
-                    notMatching.visible = !match
-
-                if (correct && match) {
-                    PopupUtils.close(changeSecurityDialog)
-                    securityPrivacy.securityType =
-                            indexToMethod(unlockMethod.selectedIndex)
-                    securityPrivacy.securityValue = newInput.text
-                    changeSecurityDialog.clearInputs()
+                notMatching.visible = !match
+                if (!match) {
+                    changeSecurityDialog.enabled = true
+                    newInput.forceActiveFocus()
+                    newInput.selectAll()
+                    return
                 }
 
-                if (!correct) {
+                var errorText = securityPrivacy.setSecurity(
+                    currentInput.visible ? currentInput.text : "",
+                    newInput.text,
+                    changeSecurityDialog.newMethod)
+                incorrect.text = errorText
+                if (errorText !== "") {
+                    changeSecurityDialog.enabled = true
                     currentInput.forceActiveFocus()
                     currentInput.selectAll()
                     return
                 }
 
-
-                if (!match) {
-                    newInput.forceActiveFocus()
-                    newInput.selectAll()
-                }
+                changeSecurityDialog.enabled = true
+                changeSecurityDialog.close()
             }
-
         }
 
         Button {
             text: i18n.tr("Cancel")
             onClicked: {
-                PopupUtils.close(changeSecurityDialog)
-                unlockMethod.skip = true
+                changeSecurityDialog.close()
                 unlockMethod.selectedIndex =
                         methodToIndex(securityPrivacy.securityType)
-                changeSecurityDialog.clearInputs()
             }
         }
     }
@@ -334,9 +333,6 @@ ItemPage {
             property string passcodeAlt: i18n.tr("4-digit passcode…")
             property string passphraseAlt: i18n.tr("Passphrase…")
 
-            property bool skip: true
-            property bool firstRun: true
-
             id: unlockMethod
             model: 3
             delegate: OptionSelectorDelegate {
@@ -345,20 +341,12 @@ ItemPage {
                                    (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
             }
             expanded: true
-            onSelectedIndexChanged: {
-                if (securityPrivacy.securityType ===
-                        UbuntuSecurityPrivacyPanel.Swipe && firstRun) {
-                    changeSecurityDialog.show()
-                    firstRun = false
-                }
+            onDelegateClicked: {
+                if (selectedIndex === index && !changeControl.visible)
+                    return // nothing to do
 
-                // Otherwise the dialogs pop up the first time
-                if (skip) {
-                    skip = false
-                    return
-                }
-
-                changeSecurityDialog.show()
+                selectedIndex = index
+                changeSecurityDialog.open()
             }
         }
         Binding {
@@ -369,6 +357,7 @@ ItemPage {
 
         ListItem.SingleControl {
 
+            id: changeControl
             visible: securityPrivacy.securityType !==
                         UbuntuSecurityPrivacyPanel.Swipe
 
@@ -384,7 +373,7 @@ ItemPage {
                 text: passcode ? changePasscode : changePassphrase
                 width: parent.width - units.gu(4)
 
-                onClicked: changeSecurityDialog.show()
+                onClicked: changeSecurityDialog.open()
             }
         }
     }

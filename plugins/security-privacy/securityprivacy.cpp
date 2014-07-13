@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical, Ltd.
+ * Copyright (C) 2013,2014 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,33 +18,33 @@
  */
 
 #include "securityprivacy.h"
-#include <gcrypt.h>
-#include <QtCore/QDir>
 #include <QtCore/QProcess>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusConnectionInterface>
 #include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusVariant>
-#include <unistd.h>
-#include <sys/types.h>
+#include <act/act.h>
 
-#define AS_INTERFACE "com.ubuntu.touch.AccountsService.SecurityPrivacy"
+// FIXME: need to do this better including #include "../../src/i18n.h"
+// and linking to it
+#include <libintl.h>
+QString _(const char *text)
+{
+    return QString::fromUtf8(dgettext(0, text));
+}
+
+#define AS_INTERFACE "com.ubuntu.AccountsService.SecurityPrivacy"
+#define AS_TOUCH_INTERFACE "com.ubuntu.touch.AccountsService.SecurityPrivacy"
+
+void managerLoaded(GObject    *object,
+                   GParamSpec *pspec,
+                   gpointer    user_data);
 
 SecurityPrivacy::SecurityPrivacy(QObject* parent)
   : QObject(parent),
-    m_lockSettings(QDir::home().filePath(".unity8-greeter-demo"),
-                   QSettings::NativeFormat)
+    m_manager(act_user_manager_get_default()),
+    m_user(NULL)
 {
-    m_lockSettings.beginGroup(qgetenv("USER"));
-
-    // Ensure that file is 0600
-    QFile settingsFile(m_lockSettings.fileName());
-    settingsFile.open(QIODevice::ReadWrite);
-    settingsFile.setPermissions(QFileDevice::ReadOwner |
-                                QFileDevice::WriteOwner);
-    settingsFile.close();
-    m_lockSettings.sync();
-
     connect (&m_accountsService,
              SIGNAL (propertyChanged (QString, QString)),
              this,
@@ -54,12 +54,25 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
              SIGNAL (nameOwnerChanged()),
              this,
              SLOT (slotNameOwnerChanged()));
+
+    if (m_manager != NULL) {
+        g_object_ref(m_manager);
+
+        gboolean loaded;
+        g_object_get(m_manager, "is-loaded", &loaded, NULL);
+
+        if (loaded)
+            managerLoaded();
+        else
+            g_signal_connect(m_manager, "notify::is-loaded",
+                             G_CALLBACK(::managerLoaded), this);
+    }
 }
 
 void SecurityPrivacy::slotChanged(QString interface,
                                   QString property)
 {
-    if (interface != AS_INTERFACE)
+    if (interface != AS_TOUCH_INTERFACE)
         return;
 
     if (property == "MessagesWelcomeScreen") {
@@ -78,7 +91,7 @@ void SecurityPrivacy::slotNameOwnerChanged()
 
 bool SecurityPrivacy::getStatsWelcomeScreen()
 {
-    return m_accountsService.getUserProperty(AS_INTERFACE,
+    return m_accountsService.getUserProperty(AS_TOUCH_INTERFACE,
                                              "StatsWelcomeScreen").toBool();
 }
 
@@ -87,7 +100,7 @@ void SecurityPrivacy::setStatsWelcomeScreen(bool enabled)
     if (enabled == getStatsWelcomeScreen())
         return;
 
-    m_accountsService.setUserProperty(AS_INTERFACE,
+    m_accountsService.setUserProperty(AS_TOUCH_INTERFACE,
                                       "StatsWelcomeScreen",
                                       QVariant::fromValue(enabled));
     Q_EMIT(statsWelcomeScreenChanged());
@@ -95,7 +108,7 @@ void SecurityPrivacy::setStatsWelcomeScreen(bool enabled)
 
 bool SecurityPrivacy::getMessagesWelcomeScreen()
 {
-    return m_accountsService.getUserProperty(AS_INTERFACE,
+    return m_accountsService.getUserProperty(AS_TOUCH_INTERFACE,
                                              "MessagesWelcomeScreen").toBool();
 }
 
@@ -104,7 +117,7 @@ void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
     if (enabled == getMessagesWelcomeScreen())
         return;
 
-    m_accountsService.setUserProperty(AS_INTERFACE,
+    m_accountsService.setUserProperty(AS_TOUCH_INTERFACE,
                                       "MessagesWelcomeScreen",
                                       QVariant::fromValue(enabled));
     Q_EMIT(messagesWelcomeScreenChanged());
@@ -112,152 +125,237 @@ void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
 
 SecurityPrivacy::SecurityType SecurityPrivacy::getSecurityType()
 {
-    QVariant password(m_lockSettings.value("password", "none"));
+    if (m_user == NULL || !act_user_is_loaded(m_user))
+        return SecurityPrivacy::Passphrase; // we need to return something
 
-     if (password == "pin")
+    if (act_user_get_password_mode(m_user) == ACT_USER_PASSWORD_MODE_NONE)
+        return SecurityPrivacy::Swipe;
+    else if (m_accountsService.getUserProperty(AS_INTERFACE,
+                                               "PasswordDisplayHint").toInt() == 1)
         return SecurityPrivacy::Passcode;
-    else if (password == "keyboard")
-        return SecurityPrivacy::Passphrase;
     else
-         return SecurityPrivacy::Swipe;
-
+        return SecurityPrivacy::Passphrase;
 }
 
-void SecurityPrivacy::setSecurityType(SecurityType type)
+bool SecurityPrivacy::setDisplayHint(SecurityType type)
 {
-    QVariant sec;
+    if (!m_accountsService.setUserProperty(AS_INTERFACE, "PasswordDisplayHint",
+                                           (type == SecurityPrivacy::Passcode) ? 1 : 0)) {
+        return false;
+    }
 
+    Q_EMIT securityTypeChanged();
+    return true;
+}
+
+bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
+{
+    ActUserPasswordMode newMode = (type == SecurityPrivacy::Swipe) ?
+                                  ACT_USER_PASSWORD_MODE_NONE :
+                                  ACT_USER_PASSWORD_MODE_REGULAR;
+
+    // act_user_set_password_mode() will involve a check with policykit to see
+    // if we have admin authorization.  Since Touch doesn't have a general
+    // policykit agent yet (and the design for this panel involves asking for
+    // the password up from anyway), we will spawn our own agent just for this
+    // call.  It will only authorize one request for this pid and it will use
+    // the password we pass it via stdin.  We can drop this helper code when
+    // Touch has a real policykit agent and/or the design for this panel
+    // changes.
+
+    QProcess polkitHelper;
+    polkitHelper.setProgram(HELPER_EXEC);
+    polkitHelper.start();
+    polkitHelper.write(QString::number(getpid()).toUtf8() + "\n");
+    polkitHelper.write(password.toUtf8() + "\n");
+    polkitHelper.closeWriteChannel();
+
+    while (polkitHelper.canReadLine() || polkitHelper.waitForReadyRead()) {
+        QString output = polkitHelper.readLine();
+        if (output == "ready\n")
+            break;
+    }
+
+    act_user_set_password_mode(m_user, newMode);
+
+    polkitHelper.kill(); // kill because maybe it wasn't even needed (polkit might not have need to auth us)
+    polkitHelper.waitForFinished();
+
+    // act_user_set_password_mode() does not return success/failure, and we
+    // can't easily check get_password_mode() after setting to make sure it
+    // took, because that value is updated asynchronously when a change signal
+    // is received from AS.  So instead we just see whether our polkit helper
+    // authenticated correctly.
+
+    if (polkitHelper.exitStatus() == QProcess::NormalExit &&
+        polkitHelper.exitCode() != 0) {
+        return false;
+    }
+
+    return true;
+}
+
+QString SecurityPrivacy::setPassword(QString oldValue, QString value)
+{
+    QByteArray passwdData;
+    if (!oldValue.isEmpty())
+        passwdData += oldValue.toUtf8() + '\n';
+    passwdData += value.toUtf8() + '\n' + value.toUtf8() + '\n';
+
+    QProcess pamHelper;
+    pamHelper.setProgram("/usr/bin/passwd");
+    pamHelper.start();
+    pamHelper.write(passwdData);
+    pamHelper.closeWriteChannel();
+    pamHelper.setReadChannel(QProcess::StandardError);
+
+    pamHelper.waitForFinished();
+    if (pamHelper.state() == QProcess::Running || // after 30s!
+        pamHelper.exitStatus() != QProcess::NormalExit ||
+        pamHelper.exitCode() != 0) {
+        QString output = QString::fromUtf8(pamHelper.readLine());
+        if (output.isEmpty()) {
+            return "Internal error: could not run passwd";
+        } else {	
+            // Grab everything on first line after the last colon.  This is because
+            // passwd will bunch it up like so:
+            // "(current) UNIX password: Enter new UNIX password: Retype new UNIX password: You must choose a longer password"
+            return output.section(':', -1).trimmed();
+        }
+    }
+
+    return "";
+}
+
+QString SecurityPrivacy::badPasswordMessage(SecurityType type)
+{
     switch (type) {
-    case SecurityPrivacy::Passcode:
-        sec = "pin";
-        break;
-    case SecurityPrivacy::Passphrase:
-        sec = "keyboard";
-        break;
-    case SecurityPrivacy::Swipe:
-    default:
-        sec = "none";
-        break;
+        case SecurityPrivacy::Passcode:
+            return _("Incorrect passcode. Try again.");
+        case SecurityPrivacy::Passphrase:
+            return _("Incorrect passphrase. Try again.");
+        default:
+        case SecurityPrivacy::Swipe:
+            return _("Could not set security mode");
     }
-
-    m_lockSettings.setValue("password", sec);
-    m_lockSettings.sync();
-    Q_EMIT (securityTypeChanged());
 }
 
-bool SecurityPrivacy::securityValueMatches(QString value)
+QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityType type)
 {
-    bool result = false;
-    QVariant password(m_lockSettings.value("passwordValue", QString()));
-    QStringList passwordParts = password.toString().split('$', QString::SkipEmptyParts);
+    if (m_user == NULL || !act_user_is_loaded(m_user))
+        return "Internal error: user not loaded";
+    else if (type == SecurityPrivacy::Swipe && !value.isEmpty())
+        return "Internal error: trying to set password with swipe mode"; // enforce swipe == no password
 
-    switch (getSecurityType()) {
-    case SecurityPrivacy::Passcode:
-    case SecurityPrivacy::Passphrase:
-        // We only support passwd type 6 (sha512) for now
-        if (passwordParts.length() != 3 || passwordParts[0] != "6")
-            return false;
-        result = makeSecurityValue(value, passwordParts[1]) == password;
-        break;
+    SecurityType oldType = getSecurityType();
+    if (type == oldType && value == oldValue)
+        return ""; // nothing to do
 
-    case SecurityPrivacy::Swipe:
-    default:
-        result = true;
-        break;
+    // We need to set three pieces of metadata:
+    //
+    // 1) PasswordDisplayHint
+    // 2) AccountsService password mode (i.e. is user in nopasswdlogin group)
+    // 3) The user's actual password
+    //
+    // If we fail any one of them, the whole thing is a wash and we try to roll
+    // the already-changed metadata pieces back to their original values.
+
+    if (!setDisplayHint(type)) {
+        return _("Could not set security display hint");
     }
 
-    return result;
+    if (type == SecurityPrivacy::Swipe) {
+        if (!setPasswordMode(type, oldValue)) {
+            setDisplayHint(oldType);
+            return badPasswordMessage(oldType);
+        }
+    } else {
+        QString errorText = setPassword(oldValue, value);
+        if (!errorText.isEmpty()) {
+            setDisplayHint(oldType);
+            // Special case this common message because the one PAM gives is so awful
+            if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error"))
+                return badPasswordMessage(type);
+            else
+                return errorText;
+        }
+        if (!setPasswordMode(type, value)) {
+            setDisplayHint(oldType);
+            setPassword(value, oldValue);
+            return badPasswordMessage(oldType);
+        }
+    }
+
+    return "";
 }
 
-void SecurityPrivacy::setSecurityValue(QString value)
+void securityTypeChanged(GObject    *object,
+                         GParamSpec *pspec,
+                         gpointer    user_data)
 {
-    QString hash = makeSecurityValue(value);
-    QByteArray encrypted = makeEncryptedPinValue(value);
-    m_lockSettings.setValue("passwordValue", hash);
-    m_lockSettings.setValue("passwordEncryptedValue", encrypted);
-    m_lockSettings.sync();
-    Q_EMIT (securityValueChanged());
+    Q_UNUSED(object);
+    Q_UNUSED(pspec);
+
+    SecurityPrivacy *plugin(static_cast<SecurityPrivacy *>(user_data));
+    Q_EMIT plugin->securityTypeChanged();
 }
 
-QString SecurityPrivacy::makeSecurityValue(QString password, QString salt)
+void SecurityPrivacy::userLoaded()
 {
-    // This function makes a /etc/shadow-compatible hash of the user's
-    // password.  The goal is to be able to stuff it into /etc/shadow when we
-    // actually migrate to PAM.
+    if (act_user_is_loaded(m_user)) {
+        g_signal_handlers_disconnect_by_data(m_user, this);
 
-    // We only support passwd type 6 (sha512) for now
-    QString command = "mkpasswd --method=sha-512 --stdin";
-    if (!salt.isEmpty())
-        command += " --salt=" + salt;
-
-    QProcess process;
-    process.start(command);
-    process.write(password.toLatin1());
-    process.closeWriteChannel();
-    process.waitForFinished();
-
-    return QString(process.readAllStandardOutput()).trimmed();
+        g_signal_connect(m_user, "notify::password-mode", G_CALLBACK(::securityTypeChanged), this);
+        Q_EMIT securityTypeChanged();
+    }
 }
 
-QByteArray SecurityPrivacy::makeEncryptedPinValue(QString password, QString salt)
+void userLoaded(GObject    *object,
+                GParamSpec *pspec,
+                gpointer    user_data)
 {
-    // OK.  So this function.  Like makeSecurityValue above, we are looking to
-    // the future, when we migrate to PAM.  The way PIN passwords work in PAM
-    // is via the pam_pin module provided by AccountsService.  This module
-    // encrypts the user's password with a pin and puts it in a file on the
-    // system only readable by root.  So when we migrate to PAM, we are going
-    // to want to be able to recreate that encrypted version.  So we record the
-    // encrypted version now and keep it in the keyfile.  But we never actually
-    // use it.  It's just for eventual migration to PAM.  All the details of
-    // this algorithm were just copied from pam_pin, to match what it does.
-    // (Note that we're just encrypting the pin with itself here.  Touch
-    // doesn't use a separate password and pin.)
+    Q_UNUSED(object);
+    Q_UNUSED(pspec);
 
-    // Initialize gcrypt library (I know it doesn't look like an init function)
-    gcry_check_version (GCRYPT_VERSION);
-
-    size_t blockSize;
-    gcry_cipher_algo_info (GCRY_CIPHER_AES256, GCRYCTL_GET_BLKLEN, NULL, &blockSize);
-
-    if (salt.isEmpty()) {
-        // Grab machine id, we'll use this as a salt
-        QFile machineIdFile("/etc/machine-id");
-        if (!machineIdFile.open(QIODevice::ReadOnly))
-            return QByteArray();
-        salt = machineIdFile.readAll(); // do *not* trim
-    }
-
-    // Derive key from password
-    QByteArray key(256/8, 0);
-    if (gcry_kdf_derive(password.toLatin1(), password.length(),
-                        GCRY_KDF_PBKDF2, GCRY_MD_SHA1,
-                        salt.toLatin1(), salt.length(),
-                        100000, key.length(), key.data()))
-        return QByteArray();
-
-    // Encrypt password with this key
-    gcry_cipher_hd_t hd = NULL;
-    if (gcry_cipher_open(&hd, GCRY_CIPHER_AES256, GCRY_CIPHER_MODE_CBC, 0))
-        return QByteArray();
-
-    QByteArray iv(blockSize, 0);
-    gcry_cipher_setiv(hd, iv.data(), iv.length());
-    gcry_cipher_setkey(hd, key.data(), key.length());
-
-    QByteArray padded(password.toLatin1());
-    int remainder = padded.length() % blockSize;
-    if (remainder != 0) {
-        for (int i = 0; i < (int)blockSize - remainder; i++)
-            padded.append((char)0);
-    }
-
-    QByteArray ciphertext(padded.length(), 0);
-    if (gcry_cipher_encrypt(hd, ciphertext.data(), ciphertext.length(),
-                            padded.data(), padded.length())) {
-        gcry_cipher_close(hd);
-        return QByteArray();
-    }
-
-    gcry_cipher_close(hd);
-    return ciphertext;
+    SecurityPrivacy *plugin(static_cast<SecurityPrivacy *>(user_data));
+    plugin->userLoaded();
 }
+
+void SecurityPrivacy::managerLoaded()
+{
+    gboolean loaded;
+    g_object_get(m_manager, "is-loaded", &loaded, NULL);
+
+    if (loaded) {
+        g_signal_handlers_disconnect_by_data(m_manager, this);
+
+        const char *name(qPrintable(qgetenv("USER")));
+
+        if (name != NULL) {
+            m_user = act_user_manager_get_user(m_manager, name);
+
+            if (m_user != NULL) {
+                g_object_ref(m_user);
+
+                if (act_user_is_loaded(m_user))
+                    userLoaded();
+                else
+                    g_signal_connect(m_user, "notify::is-loaded",
+                                     G_CALLBACK(::userLoaded), this);
+            }
+        }
+    }
+}
+
+void managerLoaded(GObject    *object,
+                   GParamSpec *pspec,
+                   gpointer    user_data)
+{
+    Q_UNUSED(object);
+    Q_UNUSED(pspec);
+
+    SecurityPrivacy *plugin(static_cast<SecurityPrivacy *>(user_data));
+    plugin->managerLoaded();
+}
+
+#include "securityprivacy.moc"
