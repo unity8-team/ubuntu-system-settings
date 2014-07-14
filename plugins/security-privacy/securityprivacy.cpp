@@ -163,7 +163,7 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
     // Touch has a real policykit agent and/or the design for this panel
     // changes.
     //
-    // The reason we do this as a seperate helper rather than in-process is
+    // The reason we do this as a separate helper rather than in-process is
     // that glib's thread signal handling (needed to not block on the agent)
     // and QProcess's signal handling conflict.  They seem to get in each
     // other's way for the same signals.  So we just do this out-of-process.
