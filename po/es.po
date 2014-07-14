@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-06-28 07:12+0000\n"
-"Last-Translator: Paco Molinero <paco@byasl.com>\n"
+"PO-Revision-Date: 2014-07-13 07:33+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:35+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-14 07:09+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -84,7 +84,7 @@ msgstr "Fecha y hora"
 
 #: plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr "Huso horario:"
+msgstr "Zona horaria:"
 
 #: plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
@@ -161,11 +161,11 @@ msgstr "Definir"
 
 #: plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr "Huso horario"
+msgstr "Zona horaria"
 
 #: plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr "Definir el huso horario:"
+msgstr "Definir la zona horaria:"
 
 #: plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
@@ -324,15 +324,15 @@ msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
-"Usa wifi, ubicaciones de torres celulares y GPS para detectar su ubicación "
-"aproximada. Desactive esta detección para ahorrar energía."
+"Usa wifi, ubicaciones de torres para móviles y GPS para detectar su "
+"ubicación aproximada. Desactive esta detección para ahorrar energía."
 
 #: plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
-"Usa wifi, ubicaciones de torres celulares (no hay conexión celular "
+"Usa wifi, ubicaciones de torres para móviles (no hay conexión móvil "
 "actualmente) y GPS para detectar su ubicación aproximada. Desactive esta "
 "detección para ahorrar energía."
 
@@ -341,8 +341,8 @@ msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
-"Usa wifi (apagado actualmente), ubicaciones de torres celulares y GPS para "
-"detectar su ubicación aproximada. Desactive esta detección para ahorrar "
+"Usa wifi (apagado actualmente), ubicaciones de torres para móviles y GPS "
+"para detectar su ubicación aproximada. Desactive esta detección para ahorrar "
 "energía."
 
 #: plugins/security-privacy//Location.qml:82
@@ -351,8 +351,8 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Usa wifi (apagado actualmente), ubicaciones de torres celulares (no hay "
-"conexión celular actualmente) y GPS para detectar su ubicación aproximada. "
+"Usa wifi (apagado actualmente), ubicaciones de torres para móviles (no hay "
+"conexión móvil actualmente) y GPS para detectar su ubicación aproximada. "
 "Desactive esta detección para ahorrar energía."
 
 #: plugins/security-privacy//Location.qml:89
@@ -510,7 +510,7 @@ msgstr "Activa Mayús al principio de cada oración."
 
 #: plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr "Idiomas ortográficos actuales:"
+msgstr "Ortografías actuales para idiomas:"
 
 #: plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
@@ -648,11 +648,11 @@ msgstr "GPS"
 
 #: plugins/battery//PageComponent.qml:348
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "Para detectar la ubicación con precisión necesita GPS y/o wifi."
+msgstr "Para detectar la ubicación con precisión necesita GPS o wifi."
 
 #: plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr "Bloquear el teléfono cuando no está en uso:"
+msgstr "Bloquear el teléfono cuando no esté en uso:"
 
 #: plugins/battery//SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
@@ -673,43 +673,43 @@ msgstr "Inhibir la suspensión durante llamadas o reproducción de vídeos."
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "Redes anteriores"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Otra red"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Nombre de la red"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Seguridad"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA y WPA2 personal"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Contraseña visible"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Conectarse"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "Detalles de la red"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -718,15 +718,15 @@ msgstr "Nombre"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "Última conexión"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Mostrar contraseña"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "Olvidar la red"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -766,7 +766,7 @@ msgid ""
 "phone is busy, turned off, or out of range."
 msgstr ""
 "Redirige las llamadas telefónicas a otro número si no contesta o si el "
-"teléfono está ocupado, apagado o fuera de área."
+"teléfono está ocupado, apagado o fuera de cobertura."
 
 #: plugins/phone//CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
@@ -822,7 +822,7 @@ msgstr "El software está actualizado"
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr "Por favor inicia la sesión en tu cuenta Ubuntu One"
+msgstr "Acceda a su cuenta de Ubuntu One."
 
 #: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
@@ -839,12 +839,12 @@ msgstr "Comprobando actualizaciones…"
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Instalar %1 actualizaciones…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Instalar %1 actualizaciones"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -1252,31 +1252,31 @@ msgstr "Licencias de software"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "Detalles de la construcción del SO"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "Número de la construcción del SO"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Parte de la imagen de Ubuntu"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Descripción de la construcción de Ubuntu"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Parte de la imagen del dispositivo"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Descripción de la construcción del dispositivo"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Parte de la imagen de la personalización"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1326,7 +1326,7 @@ msgstr "Vídeos"
 
 #: plugins/about//Storage.qml:89
 msgid "Audio"
-msgstr "Sonido"
+msgstr "Audio"
 
 #: plugins/about//Storage.qml:90
 msgid "Pictures"
@@ -1342,7 +1342,7 @@ msgstr "Usado por las aplicaciones"
 
 #: plugins/about//Storage.qml:142
 msgid "Total storage"
-msgstr "Memoria total"
+msgstr "Almacenamiento total"
 
 #: plugins/about//Storage.qml:154
 msgid "Free space"
@@ -1385,12 +1385,16 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"Su teléfono está configurado para enviar automáticamente informes de error a "
+"Canonical. Esto puede desactivarse en la configuración del sistema."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Su teléfono está configurado para detectar su localización. Esto puede "
+"desactivarse en la configuración del sistema."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
@@ -1398,7 +1402,7 @@ msgstr "No hay tarjeta SIM"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr "No te preocupes, podrás insertar la tarjeta SIM más tarde"
+msgstr "No se preocupes, podrá insertar la tarjeta SIM más tarde"
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
@@ -1424,7 +1428,7 @@ msgstr "Es un placer contar con usted en la comunidad Ubuntu."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr "Disfruta de tu nuevo teléfono"
+msgstr "Disfrute de su nuevo teléfono"
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1448,7 +1452,7 @@ msgstr "¡Hola!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr "Le damos la bienvenida a Ubuntu."
+msgstr "Bienvenido/a Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
@@ -1503,7 +1507,7 @@ msgstr "fecha"
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:14
 msgid "timezone"
-msgstr "huso horario"
+msgstr "zona horaria"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
