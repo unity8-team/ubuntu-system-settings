@@ -167,7 +167,10 @@ ItemPage {
         ListItem.Standard {
             text: i18n.tr("APN")
             progression: true
-            visible: showAllUI
+            visible: true
+            onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Apn.qml"), {connMan: connMan})
+            }
         }
     }
 }
