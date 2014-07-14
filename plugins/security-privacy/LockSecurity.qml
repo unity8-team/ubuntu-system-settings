@@ -58,10 +58,10 @@ ItemPage {
     }
 
     function openDialog() {
+        var dlg = PopupUtils.open(dialogComponent)
         // Set manually rather than have these be dynamically bound, since
         // the security type can change out from under us, but we don't
         // want dialog to change in that case.
-        var dlg = PopupUtils.open(dialogComponent)
         dlg.oldMethod = securityPrivacy.securityType
         dlg.newMethod = indexToMethod(unlockMethod.selectedIndex)
     }
@@ -72,22 +72,17 @@ ItemPage {
         Dialog {
             id: changeSecurityDialog
 
+            // This is a bit hacky, but the contents of this dialog get so tall
+            // that on a mako device, they don't fit with the OSK also visible.
+            // So we scrunch up spacing.
+            Binding {
+                target: __foreground
+                property: "itemSpacing"
+                value: units.gu(1)
+            }
+
             property int oldMethod
             property int newMethod
-
-            function close() {
-                PopupUtils.close(changeSecurityDialog)
-                clearInputs()
-            }
-
-            function clearInputs() {
-                currentInput.text = ""
-                newInput.text = ""
-                confirmInput.text = ""
-                incorrect.text = ""
-                notMatching.visible = false
-                confirmButton.enabled = false
-            }
 
             title: {
                 if (changeSecurityDialog.newMethod ==
@@ -281,7 +276,7 @@ ItemPage {
                     Layout.fillWidth: true
                     text: i18n.tr("Cancel")
                     onClicked: {
-                        changeSecurityDialog.close()
+                        PopupUtils.close(changeSecurityDialog)
                         unlockMethod.selectedIndex =
                                 methodToIndex(securityPrivacy.securityType)
                     }
@@ -327,7 +322,7 @@ ItemPage {
                         }
 
                         changeSecurityDialog.enabled = true
-                        changeSecurityDialog.close()
+                        PopupUtils.close(changeSecurityDialog)
                     }
                 }
             }
