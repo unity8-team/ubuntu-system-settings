@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-06-24 15:58+0000\n"
+"PO-Revision-Date: 2014-07-13 17:01+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:35+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-14 07:09+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
 "Language: uk\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -690,43 +690,43 @@ msgstr ""
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "Попередні мережі"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Інша мережа"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Назва мережі"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Захист"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "Персональний WPA та WPA2"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Видимість пароля"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "З’єднатися"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "Параметри мережі"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -735,15 +735,15 @@ msgstr "Назва"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "Останнє з’єднання"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Показувати пароль"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "Забути про мережу"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -857,12 +857,12 @@ msgstr "Перевірка наявності оновлень…"
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Встановити оновлення (%1)…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Встановлення оновлень (%1)"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -1271,31 +1271,31 @@ msgstr "Ліцензування програмного забезпечення
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "Параметри збирання ОС"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "Номер збірки ОС"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Частина образу Ubuntu"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Опис збірки Ubuntu"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Частина образу пристрою"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Опис збірки для пристрою"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Частина налаштовування образу"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1404,12 +1404,16 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"Ваш телефон налаштовано на автоматичне надсилання сповіщень щодо помилок до "
+"Canonical. Надсилання сповіщень можна вимкнути у параметрах системи."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Ваш телефон налаштовано на визначення вашого місця перебування. Вимкнути це "
+"можна у параметрах системи."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
