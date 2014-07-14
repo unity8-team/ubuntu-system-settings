@@ -170,7 +170,6 @@ ItemPage {
             visible: true
             onClicked: {
                     pageStack.push(Qt.resolvedUrl("Apn.qml"), {connMan: connMan})
-            }
         }
     }
 }

@@ -6,6 +6,7 @@ set(QML_SOURCES
     Hotspot.qml
     HotspotSetup.qml
     PageComponent.qml
+    rdosettings-helpers.js
 )
 
 

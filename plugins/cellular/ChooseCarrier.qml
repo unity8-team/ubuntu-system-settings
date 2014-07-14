@@ -22,40 +22,72 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-
+import MeeGo.QOfono 0.2
 
 ItemPage {
     title: i18n.tr("Carrier")
     objectName: "chooseCarrierPage"
 
     property var netReg
-    property variant operators: netReg.operators
-    property bool scanning: netReg.scanning
+    property var operators: []
+    property bool scanning: false
     property variant operatorNames
     property variant operatorStatus
     property int curOp
+    Component.onCompleted: buildLists();
 
-    onOperatorsChanged: {
-        buildLists();
+    Connections {
+        target: netReg
+        onStatusChanged: {
+            console.warn("onStatusChanged: " + netReg.status);
+            if (netReg.status === "registered")
+                buildLists();
+        }
+        onNetworkOperatorsChanged: buildLists();
+        onScanFinished: scanning = false;
+        onScanError: {
+            scanning = false;
+            console.warn ("onScanError: " + message);
+        }
     }
 
     function buildLists()
     {
+        var ops = [];
         var oN = new Array();
         var oS = new Array();
-        for (var i in operators)
-        {
-            if (operators[i].status == "forbidden")
+        for (var i = 0; i < netReg.networkOperators.length; i++) {
+            var tempOp = netOp.createObject(parent, {"operatorPath": netReg.networkOperators[i]});
+            if (tempOp.status === "forbidden")
                 continue
-            oN.push(operators[i].name);
-            oS.push(operators[i].status);
+            oN.push(tempOp.name);
+            oS.push(tempOp.status);
+            ops.push(tempOp)
         }
         curOp = oS.indexOf("current");
         operatorNames = oN;
         operatorStatus = oS;
+        operators = ops;
+        carrierSelector.selectedIndex = curOp;
     }
 
-   ListItem.ItemSelector {
+    Component {
+        id: netOp
+        OfonoNetworkOperator {
+            onRegisterComplete: {
+                if (error === OfonoNetworkOperator.NoError)
+                    console.warn("registerComplete: SUCCESS");
+                else if (error === OfonoNetworkOperator.InProgressError)
+                    console.warn("registerComplete failed with error: " + errorString);
+                else {
+                    console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
+                    netReg.registration();
+                }
+            }
+        }
+    }
+
+    ListItem.ItemSelector {
         id: carrierSelector
         objectName: "carrierSelector"
         expanded: true
@@ -65,9 +97,11 @@ ItemPage {
          */
         enabled: true
         model: operatorNames
-        selectedIndex: curOp
         onSelectedIndexChanged: {
-            operators[selectedIndex].registerOp();
+            if ((selectedIndex !== curOp) && operators[selectedIndex]) {
+                console.warn("onSelectedIndexChanged status: " + operators[selectedIndex].status);
+                operators[selectedIndex].registerOperator();
+            }
         }
     }
 
@@ -77,7 +111,11 @@ ItemPage {
             objectName: "refreshButton"
             width: parent.width - units.gu(4)
             text: i18n.tr("Refresh")
-            onTriggered: netReg.scan()
+            enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
+            onTriggered: {
+                scanning = true;
+                netReg.scan();
+            }
         }
     }
 
