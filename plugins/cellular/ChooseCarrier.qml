@@ -25,15 +25,21 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 
 ItemPage {
+    id: root
     title: i18n.tr("Carrier")
     objectName: "chooseCarrierPage"
 
     property var netReg
+    property var connMan
     property var operators: []
     property bool scanning: false
     property variant operatorNames
     property variant operatorStatus
     property int curOp
+    property int mode
+
+    mode: netReg.mode === "manual" ? 1 : 0
+
     Component.onCompleted: buildLists();
 
     Connections {
@@ -43,12 +49,23 @@ ItemPage {
             if (netReg.status === "registered")
                 buildLists();
         }
+        onModeChanged: {
+            console.warn ("onModeChanged: " + mode);
+            if (mode === "manual")
+                chooseCarrier.selectedIndex = 1;
+            else
+                chooseCarrier.selectedIndex = 0;
+        }
         onNetworkOperatorsChanged: buildLists();
         onScanFinished: scanning = false;
         onScanError: {
             scanning = false;
             console.warn ("onScanError: " + message);
         }
+    }
+
+    Connections {
+        target: connMan
     }
 
     function buildLists()
@@ -87,20 +104,61 @@ ItemPage {
         }
     }
 
-    ListItem.ItemSelector {
-        id: carrierSelector
-        objectName: "carrierSelector"
-        expanded: true
-        /* FIXME: This is disabled since it is currently a
+    Flickable {
+        id: scrollWidget
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        flickableDirection: Flickable.VerticalFlick
+
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            ListItem.ItemSelector {
+                id: chooseCarrier
+                objectName: "autoChooseCarrierSelector"
+                expanded: true
+                enabled: netReg.mode !== "auto-only"
+                text: i18n.tr("Choose carrier:")
+                model: [i18n.tr("Automatically"), i18n.tr("Manually")]
+                //showDivider: false
+                delegate: OptionSelectorDelegate { showDivider: false }
+                selectedIndex: netReg.mode === "manual" ? 1 : 0
+                onSelectedIndexChanged: {
+                    if (selectedIndex === 0)
+                        netReg.registration();
+                }
+            }
+
+            //                property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
+
+            ListItem.ItemSelector {
+                id: carrierSelector
+                objectName: "carrierSelector"
+                expanded: true
+                /* FIXME: This is disabled since it is currently a
          * read-only setting
          * enabled: cellularDataControl.checked
          */
-        enabled: true
-        model: operatorNames
-        onSelectedIndexChanged: {
-            if ((selectedIndex !== curOp) && operators[selectedIndex]) {
-                console.warn("onSelectedIndexChanged status: " + operators[selectedIndex].status);
-                operators[selectedIndex].registerOperator();
+                enabled: true
+                model: operatorNames
+                onSelectedIndexChanged: {
+                    if ((selectedIndex !== curOp) && operators[selectedIndex]) {
+                        console.warn("onSelectedIndexChanged status: " + operators[selectedIndex].status);
+                        operators[selectedIndex].registerOperator();
+                    }
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("APN")
+                progression: true
+                visible: true
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Apn.qml"), {connMan: connMan})
+                }
+
             }
         }
     }

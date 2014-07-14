@@ -30,7 +30,7 @@ ItemPage {
     title: i18n.tr("APN")
     objectName: "apnPage"
 
-    property variant connMan
+    property var connMan
     // arrays holding the APN contexts
     property variant internetApns: []
     property variant mmsApns: []
