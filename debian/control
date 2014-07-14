@@ -5,15 +5,15 @@ Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: dbus-test-runner,
                debhelper (>= 9),
                dh-migrations,
-               python:any (>= 2.7),
-               python-setuptools,
+               dh-python,
+               python3-setuptools,
+               python3-all:any,
                gdb:any,
                libaccountsservice-dev,
                libandroid-properties-dev [amd64 armhf i386],
                libglib2.0-dev (>= 2.37.92),
                libicu-dev,
                libnm-glib-dev,
-               libofono-qt-dev,
                libpolkit-agent-1-dev,
                libqmenumodel-dev,
                libtimezonemap1-dev (>= 0.4.1),
@@ -31,13 +31,16 @@ Build-Depends: dbus-test-runner,
                xvfb,
                cmake,
                pep8,
+               python3-pep8,
                pyflakes,
+               dh-apparmor,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
 # changes, just go ahead.  ~system-settings-touch will notice and sync up the
 # code again.
 Vcs-Bzr: https://code.launchpad.net/~system-settings-touch/ubuntu-system-settings/trunk
+X-Python3-Version: >= 3.2
 
 Package: ubuntu-system-settings
 Architecture: any
@@ -55,14 +58,17 @@ Depends: ${misc:Depends},
          qtdeclarative5-folderlistmodel-plugin,
          qml-module-qtmultimedia | qml-module-qtmultimedia-gles,
          qtdeclarative5-gsettings1.0 (>=0.0+13.10.20130717),
+         qtdeclarative5-ofono0.2,
          qtdeclarative5-systeminfo-plugin,
          qtdeclarative5-ubuntu-content0.1,
+         qtdeclarative5-ubuntu-settings-components (> 0.2),
          qtdeclarative5-ubuntu-ui-toolkit-plugin (>= 0.1.46+14.04.20131126-0ubuntu1) | qtdeclarative5-ubuntu-ui-toolkit-plugin-gles,
          whoopsie-preferences (>= 0.9),
          libsystemsettings1 (= ${binary:Version}),
          system-image-dbus (>= 0.9),
          click,
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
+         urfkill,
 # for the session-migration script
          python3,
          python3-gi,
@@ -73,8 +79,8 @@ Recommends: suru-icon-theme,
             ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example
 Description: System Settings application for Ubuntu Touch
- This package contains the System Settings application used on the 
- Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ This package contains the System Settings application used on the
+ Ubuntu Touch images, it's designed for phones, tablets and convergent
  devices.
 
 Package: ubuntu-system-settings-wizard
@@ -97,8 +103,8 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
 Pre-Depends: dpkg (>= 1.15.6~), ${misc:Pre-Depends}
 Description: System Settings Library for Ubuntu Touch
- This package contains the System Settings application used on the 
- Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ This package contains the System Settings application used on the
+ Ubuntu Touch images, it's designed for phones, tablets and convergent
  devices.
 
 Package: libsystemsettings-dev
@@ -110,23 +116,21 @@ Depends: ${misc:Depends},
          libsystemsettings1 (= ${binary:Version}),
 Pre-Depends: dpkg (>= 1.15.6~), ${misc:Pre-Depends}
 Description: System Settings for Ubuntu Touch - development files
- This package contains the System Settings application used on the 
- Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ This package contains the System Settings application used on the
+ Ubuntu Touch images, it's designed for phones, tablets and convergent
  devices.
 
 Package: ubuntu-system-settings-autopilot
 Architecture: all
 Depends: ubuntu-system-settings,
-         python-autopilot,
-         python-dbusmock (>= 0.10.1),
+         python3-autopilot,
+         python3-dbusmock (>= 0.10.1),
          libautopilot-qt,
          ubuntu-ui-toolkit-autopilot,
          dpkg-dev,
          ${misc:Depends},
-         ${python:Depends},
+         ${python3:Depends},
 Description: System Settings for Ubuntu Touch - Autopilot tests
- This package contains the System Settings application used on the 
- Ubuntu Touch images, it's designed for phones, tablets and convergent 
+ This package contains the System Settings application used on the
+ Ubuntu Touch images, it's designed for phones, tablets and convergent
  devices.
-
-

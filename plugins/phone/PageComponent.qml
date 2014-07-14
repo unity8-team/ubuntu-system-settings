@@ -22,21 +22,26 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.SystemSettings.Phone 1.0
+import MeeGo.QOfono 0.2
 
 ItemPage {
     title: i18n.tr("Phone")
     property string carrierName: netop.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
-    NetworkRegistration {
-        id: netop;
-        onNameChanged:
-            carrierName = netop.name
+    OfonoManager {
+        id: manager
     }
 
-    SimManager {
+    OfonoNetworkRegistration {
+        id: netop;
+        modemPath: manager.modems[0]
+        onNameChanged: carrierName = netop.name
+    }
+
+    OfonoSimManager {
         id: sim
+        modemPath: manager.modems[0]
     }
 
     Column {
@@ -44,17 +49,23 @@ ItemPage {
 
         ListItem.Standard {
             text: i18n.tr("Call forwarding")
+            /* Hide until implemented */
+            visible: showAllUI
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"))
         }
 
         ListItem.Standard {
             text: i18n.tr("Call waiting")
+            /* Hide until implemented */
+            visible: showAllUI
             progression: true
             onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"))
         }
 
-        ListItem.Divider {}
+        ListItem.Divider {
+            visible: showAllUI
+        }
 
         ListItem.Standard {
             // TRANSLATORS: %1 is the name of the (network) carrier

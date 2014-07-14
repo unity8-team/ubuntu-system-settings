@@ -25,6 +25,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
+import MeeGo.QOfono 0.2
 
 ItemPage {
     id: root
@@ -43,6 +44,15 @@ ItemPage {
 
     UpdateManager {
         id: updateBackend
+    }
+
+    OfonoManager {
+        id: manager
+    }
+
+    OfonoSimManager {
+        id: sim
+        modemPath: manager.modems[0]
     }
 
     Flickable {
@@ -82,6 +92,16 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                id: numberItem
+                objectName: "numberItem"
+                text: i18n.tr("Phone number")
+                property string phoneNumber
+                phoneNumber: sim.subscriberNumbers.length > 0 ? sim.subscriberNumbers[0] : ""
+                value: phoneNumber
+                visible: phoneNumber.length > 0
+            }
+
+            ListItem.SingleValue {
                 id: serialItem
                 objectName: "serialItem"
                 text: i18n.tr("Serial")
@@ -98,6 +118,16 @@ ItemPage {
                 visible: imeiNumber
             }
 
+            ListItem.Divider {}
+
+            ListItem.Standard {
+                id: storageItem
+                objectName: "storageItem"
+                text: i18n.tr("Storage")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
+            }
+
             ListItem.Standard {
                 objectName: "softwareItem"
                 text: i18n.tr("Software:")
@@ -108,6 +138,8 @@ ItemPage {
                 text: i18n.tr("OS")
                 value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
                        (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
             }
 
             ListItem.SingleValue {
@@ -124,14 +156,6 @@ ItemPage {
                     onClicked:
                         pageStack.push(pluginManager.getByName("system-update").pageComponent)
                 }
-            }
-
-            ListItem.Standard {
-                id: storageItem
-                objectName: "storageItem"
-                text: i18n.tr("Storage")
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
             ListItem.Standard {

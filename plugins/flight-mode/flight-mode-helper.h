@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -14,39 +14,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Ken VanDine <ken.vandine@canonical.com>
+ * Antti Kaijanmäki <antti.kaijanmaki@canonical.com>
  *
-*/
-
-#ifndef SIMSERVICE_H
-#define SIMSERVICE_H
+ */
 
 #include <QObject>
+#include "urfkill-proxy.h"
 
-class SimService : public QObject
+#ifndef FLIGHT_MODE_HELPER_H
+#define FLIGHT_MODE_HELPER_H
+
+class FlightModeHelper : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged)
+    Q_PROPERTY(bool inFlightMode
+               READ inFlightMode
+               NOTIFY inFlightModeChanged)
 
 public:
-    SimService(QObject *parent=0);
-    SimService(const QString &name, const QString &value, QObject *parent=0);
+    FlightModeHelper(QObject *parent = 0);
+    ~FlightModeHelper();
 
-    QString name() const;
-    void setName(const QString &name);
+    Q_INVOKABLE void setFlightMode(bool value);
 
-    QString value() const;
-    void setValue(const QString &value);
+    bool inFlightMode();
 
 signals:
-    void nameChanged();
-    void valueChanged();
+    void inFlightModeChanged();
 
 private:
-    QString m_name;
-    QString m_value;
+    org::freedesktop::URfkill *m_urfkill;
+    bool m_isFlightMode;
 };
 
-#endif // SIMSERVICE_H
+#endif
