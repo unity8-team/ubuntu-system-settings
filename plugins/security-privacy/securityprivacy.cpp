@@ -162,6 +162,11 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
     // the password we pass it via stdin.  We can drop this helper code when
     // Touch has a real policykit agent and/or the design for this panel
     // changes.
+    //
+    // The reason we do this as a seperate helper rather than in-process is
+    // that glib's thread signal handling (needed to not block on the agent)
+    // and QProcess's signal handling conflict.  They seem to get in each
+    // other's way for the same signals.  So we just do this out-of-process.
 
     QProcess polkitHelper;
     polkitHelper.setProgram(HELPER_EXEC);
@@ -245,7 +250,7 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
     if (m_user == NULL || !act_user_is_loaded(m_user))
         return "Internal error: user not loaded";
     else if (type == SecurityPrivacy::Swipe && !value.isEmpty())
-        return "Internal error: trying to set password with swipe mode"; // enforce swipe == no password
+        return "Internal error: trying to set password with swipe mode";
 
     SecurityType oldType = getSecurityType();
     if (type == oldType && value == oldValue)
