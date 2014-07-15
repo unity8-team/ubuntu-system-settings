@@ -23,8 +23,12 @@ logging.basicConfig(filename='warning.log', level=logging.WARNING)
 
 from time import sleep
 
-from autopilot import platform
-from ubuntuuitoolkit import emulators as toolkit_emulators
+import autopilot.logging
+import ubuntuuitoolkit
+from autopilot import introspection, platform
+
+
+logger = logging.getLogger(__name__)
 
 
 class SystemSettings():
@@ -72,7 +76,7 @@ class SystemSettings():
         app = testobj.launch_test_application(
             *params,
             app_type='qt',
-            emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase,
+            emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
             capture_output=True)
 
         return app
@@ -83,13 +87,34 @@ class SystemSettings():
         return self.app.select_single(MainWindow)
 
 
-class MainWindow(toolkit_emulators.MainView):
+class MainWindow(ubuntuuitoolkit.MainView):
     """An emulator class that makes it easy to interact with the UI."""
 
-    @property
-    def pointer(self):
-        """ Return pointer """
-        return toolkit_emulators.get_pointing_device()
+    @autopilot.logging.log_action(logger.debug)
+    def click_item(self, object_name):
+        """Click a system settings item.
+
+        :param object_name: The objectName property of the item to click.
+
+        """
+        item = self.select_single(objectName=object_name)
+        item.swipe_into_view()
+        self.pointing_device.click_object(item)
+
+    @autopilot.logging.log_action(logger.info)
+    def go_to_about_page(self):
+        """Open the About page.
+
+        :return: The About page.
+
+        """
+        return self._go_to_page('entryComponent-about', 'aboutPage')
+
+    def _go_to_page(self, item_object_name, page_object_name):
+        self.click_item(item_object_name)
+        page = self.wait_select_single(objectName=page_object_name)
+        page.active.wait_for(True)
+        return page
 
     def scroll_to(self, obj):
         page = self.select_single(objectName='systemSettingsPage')
@@ -98,7 +123,7 @@ class MainWindow(toolkit_emulators.MainView):
         page_center_x = int(page_right / 2)
         page_center_y = int(page_bottom / 2)
         while obj.globalRect[1] + obj.height > page_bottom:
-            self.pointer.drag(
+            self.pointing_device.drag(
                 page_center_x,
                 page_center_y,
                 page_center_x,
@@ -109,12 +134,7 @@ class MainWindow(toolkit_emulators.MainView):
 
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
-        self.pointer.click_object(obj)
-
-    @property
-    def about_page(self):
-        """ Return 'About' page """
-        return self.select_single(objectName='aboutPage')
+        self.pointing_device.click_object(obj)
 
     @property
     def cellular_page(self):
@@ -125,11 +145,6 @@ class MainWindow(toolkit_emulators.MainView):
     def choose_page(self):
         """ Return 'Choose carrier' page """
         return self.select_single(objectName="chooseCarrierPage")
-
-    @property
-    def licenses_page(self):
-        """ Return 'License' page """
-        return self.select_single(objectName='licensesPage')
 
     @property
     def storage_page(self):
@@ -145,3 +160,123 @@ class MainWindow(toolkit_emulators.MainView):
     def sound_page(self):
         """ Return 'Sound' page """
         return self.select_single(objectName='soundPage')
+
+
+class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Sound page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'cellularPage':
+                return True
+        return False
+
+
+class SoundPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Sound page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'soundPage':
+                return True
+        return False
+
+
+class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the About page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'aboutPage':
+                return True
+        return False
+
+    def get_device_name(self):
+        device_label = self.select_single(objectName='deviceLabel')
+        return device_label.text
+
+    def is_serial_visible(self):
+        serial_item = self._get_serial_item()
+        return serial_item.visible
+
+    def _get_serial_item(self):
+        return self.select_single(objectName='serialItem')
+
+    def get_serial(self):
+        serial_item = self._get_serial_item()
+        return serial_item.value
+
+    def is_imei_visible(self):
+        imei_item = self._get_imei_item()
+        return imei_item.visible
+
+    def _get_imei_item(self):
+        return self.wait_select_single(objectName='imeiItem')
+
+    def get_imei(self):
+        imei_item = self._get_imei_item()
+        return imei_item.value
+
+    def get_os_information(self):
+        os_item = self.select_single(objectName='osItem')
+        return os_item.value
+
+    def get_last_updated_date(self):
+        last_updated_item = self.select_single(objectName='lastUpdatedItem')
+        return last_updated_item.value
+
+    @autopilot.logging.log_action(logger.info)
+    def go_to_check_for_updates(self):
+        check_for_updates_button = self.select_single(
+            objectName='updateButton')
+        self.pointing_device.click_object(check_for_updates_button)
+        system_updates_page = self.get_root_instance().wait_select_single(
+            objectName='systemUpdatesPage')
+        system_updates_page.active.wait_for(True)
+        return system_updates_page
+
+    @autopilot.logging.log_action(logger.info)
+    def go_to_software_licenses(self):
+        license_item = self.select_single(
+            ubuntuuitoolkit.listitems.Standard, objectName='licenseItem')
+        license_item.swipe_into_view()
+        self.pointing_device.click_object(license_item)
+        licenses_page = self.get_root_instance().wait_select_single(
+            objectName='licensesPage')
+        licenses_page.active.wait_for(True)
+        return licenses_page
+
+
+class LicensesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Licenses page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'licensesPage':
+                return True
+        return False
+
+
+class SystemUpdatesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the System Updates page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'systemUpdatesPage':
+                return True
+        return False
