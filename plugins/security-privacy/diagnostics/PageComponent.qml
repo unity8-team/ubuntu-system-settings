@@ -107,7 +107,7 @@ ItemPage {
             }
 
             ListItem.Caption {
-                text: i18n.tr("Includes anonymous data about nearby wifi and mobile network access points.")
+                text: i18n.tr("Includes anonymous location information which helps improve accuracy for everyone.")
             }
         }
     }
