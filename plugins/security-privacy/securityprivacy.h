@@ -60,6 +60,8 @@ public:
     };
 
     explicit SecurityPrivacy(QObject *parent = 0);
+    virtual ~SecurityPrivacy();
+
     bool getStatsWelcomeScreen();
     void setStatsWelcomeScreen(bool enabled);
     bool getMessagesWelcomeScreen();

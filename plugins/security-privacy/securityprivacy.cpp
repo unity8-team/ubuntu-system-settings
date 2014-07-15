@@ -69,6 +69,19 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
     }
 }
 
+SecurityPrivacy::~SecurityPrivacy()
+{
+    if (m_user != NULL) {
+        g_signal_handlers_disconnect_by_data(m_user, this);
+        g_object_unref(m_user);
+    }
+
+    if (m_manager != NULL) {
+        g_signal_handlers_disconnect_by_data(m_manager, this);
+        g_object_unref(m_manager);
+    }
+}
+
 void SecurityPrivacy::slotChanged(QString interface,
                                   QString property)
 {
