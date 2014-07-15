@@ -41,7 +41,7 @@ class AboutTestCase(AboutBaseTestCase):
 
         modems = manager.GetModems()
         for path, properties in modems:
-            return properties['Serial']
+            return properties['Serial'] if 'Serial' in properties else None
 
     def _get_os_name(self):
         os_id = subprocess.check_output(
