@@ -22,6 +22,7 @@ import dbus
 import dbusmock
 import subprocess
 
+MODEM_IFACE = 'org.ofono.Modem'
 CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 
@@ -94,6 +95,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def mock_connection_manager(self):
         self.modem_0.AddProperty(CONNMAN_IFACE, 'Powered',
                                  self.modem_powered)
+        self.modem_0.AddProperty(MODEM_IFACE, 'Serial', '1234567890')
 
         self.modem_0.AddMethods(
             CONNMAN_IFACE,
@@ -187,7 +189,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         self.mock_connection_manager()
 
-        super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
+        super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
 
     @classmethod
     def tearDownClass(klass):
@@ -195,8 +197,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         klass.p_mock.terminate()
         klass.p_mock.wait()
 
+class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+    def setUp(self):
+        """ Go to Cellular page """
+        super(CellularBaseTestCase, self).setUp('cellular')
 
-class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
+class AboutBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for About this phone tests """
 
     def setUp(self):

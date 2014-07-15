@@ -30,7 +30,7 @@ class AboutTestCase(AboutBaseTestCase):
     """ Tests for About this phone Page """
 
     def _get_imei_from_dbus(self):
-        bus = dbus.SystemBus()
+        bus = self.get_dbus(system_bus=True)
         try:
             manager = dbus.Interface(
                 bus.get_object('org.ofono', '/'), 'org.ofono.Manager'
