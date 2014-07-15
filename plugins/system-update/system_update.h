@@ -45,6 +45,8 @@ public:
     int downloadMode();
     void setDownloadMode(int);
     int currentBuildNumber();
+    QString currentUbuntuBuildNumber();
+    QString currentDeviceBuildNumber();
 
     void checkForUpdate();
     void downloadUpdate();
@@ -64,6 +66,7 @@ Q_SIGNALS:
     void updateDownloaded();
     void updateFailed(int consecutiveFailureCount, QString lastReason);
     void downloadModeChanged();
+    void versionChanged();
     void updateProcessFailed(const QString& reason);
 
 private Q_SLOTS:
@@ -71,12 +74,15 @@ private Q_SLOTS:
 
 private:
     int m_currentBuildNumber;
+    QMap<QString, QString> m_detailedVersion;
     int m_downloadMode;
 
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;
     QDBusInterface m_SystemServiceIface;
     Update *update;
+
+    void setCurrentDetailedVersion();
 };
 
 }

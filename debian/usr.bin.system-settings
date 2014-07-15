@@ -1,0 +1,16 @@
+#include <tunables/global>
+
+# Permissive profile to have profile name to limit access to ofonod (LP: #1296415)
+/usr/bin/system-settings (attach_disconnected) {
+  capability,
+  mount,
+  remount,
+  umount,
+  network,
+  /   rwkl,
+  /** rwlkm,
+  /** pix,
+  dbus,
+  signal,
+  ptrace,
+}

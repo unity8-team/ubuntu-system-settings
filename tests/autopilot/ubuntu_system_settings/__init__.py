@@ -14,8 +14,14 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from time import sleep
 import logging
+
+# TODO This is a workaround for bug #1327325 that will make phabet-test-run
+# fail if something is printed to stdout.
+logging.basicConfig(filename='warning.log', level=logging.WARNING)
+
+
+from time import sleep
 
 from autopilot import platform
 import autopilot.logging
@@ -70,7 +76,8 @@ class SystemSettings():
         if platform.model() == 'Desktop':
             app = testobj.launch_test_application(
                 *params,
-                emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase
+                emulator_base=toolkit_emulators.UbuntuUIToolkitEmulatorBase,
+                capture_output=True
             )
         else:
             app = testobj.launch_upstart_application(
@@ -135,7 +142,7 @@ class MainWindow(toolkit_emulators.MainView):
 
     @property
     def cellular_page(self):
-        """ Return 'About' page """
+        """ Return 'Cellular' page """
         return self.select_single(objectName='cellularPage')
 
     @property

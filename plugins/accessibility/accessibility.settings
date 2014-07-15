@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/ubuntu/settings/system/icons/settings-accessibility.svg",
+    "icon": "preferences-desktop-accessibility-symbolic",
     "name": "Accessibility",
     "translations": "ubuntu-system-settings",
     "category": "personal",
