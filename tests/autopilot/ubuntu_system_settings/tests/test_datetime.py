@@ -30,6 +30,11 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
             'timedated', {}, stdout=subprocess.PIPE
         )
 
+    @classmethod
+    def tearDownClass(klass):
+        klass.p_mock.terminate()
+        klass.p_mock.wait()
+
     def setUp(self):
         """ Go to Time & Date page """
         self.obj_timedate1.Reset()

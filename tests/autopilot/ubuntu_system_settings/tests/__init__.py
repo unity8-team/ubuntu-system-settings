@@ -65,6 +65,11 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
             'mock_BATTERY', 'Battery', 50.0, 10
         )
 
+    @classmethod
+    def tearDownClass(klass):
+        klass.p_mock.terminate()
+        klass.p_mock.wait()
+
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
     """ Base class for tests which rely on the presence of a battery """
@@ -182,6 +187,11 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.mock_connection_manager()
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
+
+    @classmethod
+    def tearDownClass(klass):
+        klass.p_mock.terminate()
+        klass.p_mock.wait()
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
