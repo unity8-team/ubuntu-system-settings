@@ -22,7 +22,7 @@ import MeeGo.QOfono 0.2
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Hello!")
+    title: i18n.tr("Hello")
     forwardButtonSourceComponent: forwardButton
 
     UbuntuLanguagePlugin {
@@ -57,8 +57,7 @@ LocalComponents.Page {
                 width: content.width
                 wrapMode: Text.WordWrap
                 fontSize: "large"
-                text: i18n.tr("Welcome to Ubuntu.") + "\n" +
-                      i18n.tr("Let’s get started.")
+                text: i18n.tr("Welcome to your Ubuntu phone. Let’s get started.")
             }
 
             OptionSelector {
@@ -80,7 +79,7 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         LocalComponents.ForwardButton {
-            text: i18n.tr("Continue")
+            text: i18n.tr("Start")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
                 if (simManager.present)
