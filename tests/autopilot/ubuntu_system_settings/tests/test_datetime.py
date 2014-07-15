@@ -32,6 +32,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
 
     @classmethod
     def tearDownClass(klass):
+        super(TimeDateTestCase, klass).tearDownClass()
         klass.p_mock.terminate()
         klass.p_mock.wait()
 

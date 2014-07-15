@@ -67,6 +67,7 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
 
     @classmethod
     def tearDownClass(klass):
+        super(UbuntuSystemSettingsUpowerTestCase, klass).tearDownClass()
         klass.p_mock.terminate()
         klass.p_mock.wait()
 
@@ -190,6 +191,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
     @classmethod
     def tearDownClass(klass):
+        super(UbuntuSystemSettingsOfonoTestCase, klass).tearDownClass()
         klass.p_mock.terminate()
         klass.p_mock.wait()
 
