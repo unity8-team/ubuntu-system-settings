@@ -23,7 +23,6 @@ import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.SystemSettings.Phone 1.0
 import Ubuntu.SystemSettings.Wifi 1.0
 
 ItemPage {
