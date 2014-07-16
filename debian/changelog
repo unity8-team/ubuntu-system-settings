@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+14.10.20140715-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Refresh the wording of the welcome wizard dialogs to match latest
+    from design.
+
+  [ Jussi Pakkanen ]
+  * Remove bad import statement. (LP: #1341580)
+
+  [ Leo Arias ]
+  * Refactored the About autopilot tests to use the page object pattern.
+    Added the click_item public helper to be used by UX tests.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Jul 2014 14:25:44 +0000
+
 ubuntu-system-settings (0.3+14.10.20140714-0ubuntu1) utopic; urgency=low
 
   [ Michał Sawicz ]

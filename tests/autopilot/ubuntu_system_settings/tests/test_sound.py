@@ -30,5 +30,6 @@ class SoundTestCase(SoundBaseTestCase):
         kbd_snd = self.system_settings.main_view.sound_page.select_single(
             objectName="keyboardSoundSwitch")
         current_value = kbd_snd.get_properties()["checked"]
-        self.system_settings.main_view.pointer.click_object(kbd_snd)
-        self.assertThat(kbd_snd.get_properties()["checked"], NotEquals(current_value))
+        self.system_settings.main_view.pointing_device.click_object(kbd_snd)
+        self.assertThat(
+            kbd_snd.get_properties()["checked"], NotEquals(current_value))

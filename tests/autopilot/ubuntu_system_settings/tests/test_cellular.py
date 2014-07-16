@@ -4,8 +4,10 @@
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
+
 import dbus
 from time import sleep
+
 from autopilot.introspection.dbus import StateNotFoundError
 from gi.repository import Gio
 from testtools.matchers import Equals, NotEquals, raises
@@ -43,7 +45,7 @@ class CellularTestCase(CellularBaseTestCase):
     def select_preference(self, label):
         """Helper method that clicks a preference that matches provided label"""
         pref = self.data_preference_selector.select_single('Label', text=label)
-        self.system_settings.main_view.pointer.click_object(pref)
+        self.system_settings.main_view.pointing_device.click_object(pref)
 
     def assert_selected_preference(self, index):
         """Helper method asserting that the selected data technology preference
@@ -56,10 +58,11 @@ class CellularTestCase(CellularBaseTestCase):
             objectName="autoChooseCarrierSelector"
         )
         manual = selector.select_single('Label', text=_("Manually"))
-        self.system_settings.main_view.pointer.click_object(manual)
+        self.system_settings.main_view.pointing_device.click_object(manual)
         choosecarrier = self.system_settings.main_view.cellular_page.\
             select_single(objectName="chooseCarrier")
-        self.system_settings.main_view.pointer.click_object(choosecarrier)
+        self.system_settings.main_view.pointing_device.click_object(
+            choosecarrier)
         self.assertThat(
             self.system_settings.main_view.choose_page.title,
             Equals(_("Carrier"))
@@ -211,7 +214,7 @@ class CellularTestCase(CellularBaseTestCase):
 
         self.system_settings.main_view.go_back()
 
-        self.system_settings.main_view.pointer.click_object(
+        self.system_settings.main_view.pointing_device.click_object(
             self.system_settings.main_view.select_single(
                 objectName='entryComponent-cellular'))
 

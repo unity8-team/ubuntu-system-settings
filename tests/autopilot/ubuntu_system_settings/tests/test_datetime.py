@@ -71,7 +71,8 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         text_field = self.system_settings.main_view.select_single(
             objectName='selectTimeZoneField'
         )
-        self.system_settings.main_view.pointer.move_to_object(text_field)
+        self.system_settings.main_view.pointing_device.move_to_object(
+            text_field)
 
     def test_time_date_page(self):
         """ Checks whether Time & Date page is available """
@@ -114,7 +115,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
             objectName='locationsListView'
         )
         london = TimeDateTestCase.wait_select_listview_first(listview)
-        self.system_settings.main_view.pointer.click_object(london)
+        self.system_settings.main_view.pointing_device.click_object(london)
         header = self.system_settings.main_view.select_single(
             objectName='MainView_Header'
         )
@@ -134,7 +135,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         )
 
         preston = TimeDateTestCase.wait_select_listview_first(listview)
-        self.system_settings.main_view.pointer.click_object(preston)
+        self.system_settings.main_view.pointing_device.click_object(preston)
 
         # The timer is 1 second, wait and see that we haven't moved pages
         sleep(2)

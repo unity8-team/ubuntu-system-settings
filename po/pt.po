@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-05-15 14:49+0000\n"
-"Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
+"PO-Revision-Date: 2014-07-15 15:15+0000\n"
+"Last-Translator: Alexandre Fidalgo <alexandremagnos15@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:35+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-16 07:27+0000\n"
+"X-Generator: Launchpad (build 17112)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -80,31 +80,31 @@ msgstr "O telemóvel está no modo silencioso."
 #: plugins/time-date//PageComponent.qml:29
 #: settings.js:8
 msgid "Time & Date"
-msgstr ""
+msgstr "Data & Hora"
 
 #: plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr ""
+msgstr "Fuso horário:"
 
 #: plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Defina a data e a hora:"
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
 #: plugins/cellular//PageComponent.qml:122
 msgid "Automatically"
-msgstr ""
+msgstr "Automaticamente"
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
 #: plugins/cellular//PageComponent.qml:122
 msgid "Manually"
-msgstr ""
+msgstr "Manualmente"
 
 #: plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Definir data e hora"
 
 #: plugins/time-date//TimePicker.qml:68
 msgid "Time"

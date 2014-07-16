@@ -9,31 +9,27 @@
 
 from __future__ import absolute_import
 
-from ubuntu_system_settings import SystemSettings
-
-from autopilot.input import Mouse, Touch
-from autopilot.platform import model
-from autopilot.matchers import Eventually
-from testtools.matchers import Equals, NotEquals, GreaterThan
-
-from ubuntuuitoolkit.base import UbuntuUIToolkitAppTestCase
 
 import dbus
 import dbusmock
 import subprocess
+
+import ubuntuuitoolkit
+from autopilot.matchers import Eventually
+from testtools.matchers import Equals, NotEquals, GreaterThan
+
+from ubuntu_system_settings import SystemSettings
+
 
 MODEM_IFACE = 'org.ofono.Modem'
 CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 
 
-class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
-    """ Base class for Ubuntu System Settings """
+class UbuntuSystemSettingsTestCase(
+        ubuntuuitoolkit.base.UbuntuUIToolkitAppTestCase):
 
-    if model() == 'Desktop':
-        scenarios = [('with mouse', dict(input_device_class=Mouse))]
-    else:
-        scenarios = [('with touch', dict(input_device_class=Touch))]
+    """Base class for Ubuntu System Settings."""
 
     def setUp(self, panel=None):
         super(UbuntuSystemSettingsTestCase, self).setUp()
@@ -203,28 +199,23 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         super(CellularBaseTestCase, self).setUp('cellular')
 
 class AboutBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+
     """ Base class for About this phone tests """
 
     def setUp(self):
-        """ Go to About page """
-        super(AboutBaseTestCase, self).setUp('about')
-        self.assertThat(self.system_settings.main_view.about_page.active,
-                        Eventually(Equals(True)))
+        """Go to About page."""
+        super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
+        self.about_page = self.system_settings.main_view.go_to_about_page()
 
 
 class StorageBaseTestCase(AboutBaseTestCase):
-    """ Base class for Storage page tests """
+
+    """Base class for Storage page tests."""
 
     def setUp(self):
-        """ Go to Storage Page """
+        """Go to Storage Page."""
         super(StorageBaseTestCase, self).setUp()
-        # Click on 'Storage' option
-        button = self.system_settings.main_view.about_page.select_single(
-            'Standard',
-            objectName='storageItem'
-        )
-        self.assertThat(button, NotEquals(None))
-        self.system_settings.main_view.scroll_to_and_click(button)
+        self.system_settings.main_view.click_item('storageItem')
         self.assertThat(self.storage_page.active, Eventually(Equals(True)))
 
     def assert_space_item(self, object_name, text):
@@ -254,36 +245,24 @@ class StorageBaseTestCase(AboutBaseTestCase):
 
 
 class LicenseBaseTestCase(AboutBaseTestCase):
-    """ Base class for Licenses page tests """
+
+    """Base class for Licenses page tests."""
 
     def setUp(self):
-        """ Go to License Page """
+        """Go to License Page."""
         super(LicenseBaseTestCase, self).setUp()
-        # Click on 'Software licenses' option
-        button = self.system_settings.main_view.select_single(
-            'Standard',
-            objectName='licenseItem')
-        self.system_settings.main_view.scroll_to_and_click(button)
-
-    @property
-    def licenses_page(self):
-        """ Return 'License' page """
-        return self.main_view.wait_select_single(
-            'ItemPage', objectName='licensesPage'
-        )
+        self.licenses_page = self.about_page.go_to_software_licenses()
 
 
 class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
-    """ Base class for SystemUpdates page tests """
+
+    """Base class for SystemUpdates page tests."""
 
     def setUp(self):
-        """ Go to SystemUpdates Page """
+        """Go to SystemUpdates Page."""
         super(SystemUpdatesBaseTestCase, self).setUp()
-        # Click on 'System Updates' option
-        button = self.system_settings.main_view.select_single(
-            objectName='entryComponent-system-update')
-        self.assertThat(button, NotEquals(None))
-        self.system_settings.main_view.scroll_to_and_click(button)
+        self.system_settings.main_view.click_item(
+            'entryComponent-system-update')
 
 
 class SoundBaseTestCase(UbuntuSystemSettingsTestCase):
