@@ -22,27 +22,38 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import MeeGo.QOfono 0.2
 
 ItemPage {
     title: i18n.tr("Call waiting")
+    property string modem
 
-    /* Simulate going off and retreiving the status, TODO: replace by real data */
-    Timer {
-        id: callWaitingTimer
-        interval: 3000
-        running: true
-    }
-
-    Switch {
-        id: callWaitingSwitch
-        checked: false
-        visible: callWaitingItem.control == callWaitingSwitch
+    OfonoCallSettings {
+        id: callSettings
+        modemPath: modem
+        onVoiceCallWaitingChanged: {
+            console.warn ("onVoiceCallWaitingChanged: " + voiceCallWaiting);
+            callWaitingIndicator.running = false;
+        }
     }
 
     ActivityIndicator {
         id: callWaitingIndicator
         running: true
-        visible: callWaitingItem.control == callWaitingIndicator
+        visible: running
+    }
+
+    Switch {
+        id: callWaitingSwitch
+        visible: !callWaitingIndicator.running
+        checked: callSettings.voiceCallWaiting !== "disabled"
+        onClicked: {
+            callWaitingIndicator.running = true;
+            if (checked)
+                callSettings.voiceCallWaiting = "enabled";
+            else
+                callSettings.voiceCallWaiting = "disabled";
+        }
     }
 
     Column {
@@ -50,13 +61,13 @@ ItemPage {
 
         ListItem.Standard {
             id: callWaitingItem
-            text: i18n.tr("Call waiting")
-            control: callWaitingTimer.running ? callWaitingIndicator : callWaitingSwitch
+            text: i18n.tr("Call waiting")           
+            control: callWaitingIndicator.running ? callWaitingIndicator : callWaitingSwitch
         }
 
         ListItem.Base {
             height: textItem.height + units.gu(2)
-            Text {
+            Label {
                 id: textItem
                 anchors {
                     left: parent.left
