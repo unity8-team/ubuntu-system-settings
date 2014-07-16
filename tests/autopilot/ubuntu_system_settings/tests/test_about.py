@@ -18,6 +18,8 @@ from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
+    AboutSystemImageBaseTestCase,
+    AboutOfonoBaseTestCase,
     StorageBaseTestCase,
     LicenseBaseTestCase
 )
@@ -29,20 +31,6 @@ import dbus
 class AboutTestCase(AboutBaseTestCase):
 
     """Tests for About this phone Page."""
-
-    def _get_imei_from_dbus(self):
-        bus = self.get_dbus(system_bus=True)
-        try:
-            manager = dbus.Interface(
-                bus.get_object('org.ofono', '/'), 'org.ofono.Manager'
-            )
-        except dbus.exceptions.DBusException:
-            # oFono interface not found, probably its a desktop.
-            return None
-
-        modems = manager.GetModems()
-        for path, properties in modems:
-            return properties['Serial'] if 'Serial' in properties else None
 
     def _get_os_name(self):
         os_id = subprocess.check_output(
@@ -80,20 +68,6 @@ class AboutTestCase(AboutBaseTestCase):
 
         return '{} {}'.format(manufacturer, hw_model)
 
-    def _get_system_image_iface(self):
-        bus = dbus.SystemBus()
-        service = bus.get_object('com.canonical.SystemImage', '/Service')
-        iface = dbus.Interface(service, 'com.canonical.SystemImage')
-        return iface.Info()
-
-    def _get_last_updated_date(self):
-        info = self._get_system_image_iface()[3]
-
-        if info == 'Unknown':
-            return _('Never')
-        else:
-            return str(info.split()[0])
-
     def test_device_with_serial_number_must_display_it(self):
         """Checks whether the UI is showing the correct serial number."""
         device_serial = self._get_device_serial_number()
@@ -111,23 +85,6 @@ class AboutTestCase(AboutBaseTestCase):
             self.skipTest('The device has serial number.')
         else:
             self.assertFalse(self.about_page.is_serial_visible())
-
-    def test_device_with_imei_must_display_it(self):
-        """Checks whether the UI is exposing the right IMEI."""
-        device_imei = self._get_imei_from_dbus()
-        if not device_imei:
-            self.skipTest('The device has no imei.')
-        else:
-            self.assertTrue(self.about_page.is_imei_visible())
-            displayed_imei = self.about_page.get_imei()
-            self.assertThat(displayed_imei, Equals(device_imei))
-
-    def test_device_without_imei_must_not_display_it(self):
-        device_imei = self._get_imei_from_dbus()
-        if device_imei:
-            self.skipTest('The device has imei.')
-        else:
-            self.assertFalse(self.about_page.is_imei_visible())
 
     def test_settings_show_correct_version_of_the_os(self):
         """Ensure the UI is showing the correct version of the OS."""
@@ -147,6 +104,55 @@ class AboutTestCase(AboutBaseTestCase):
         device_name_from_getprop = self._get_device_manufacturer_and_model()
 
         self.assertEquals(displayed_device_name, device_name_from_getprop)
+
+class AboutOfonoTestCase(AboutOfonoBaseTestCase):
+    def _get_imei_from_dbus(self):
+        bus = self.get_dbus(system_bus=True)
+        try:
+            manager = dbus.Interface(
+                bus.get_object('org.ofono', '/'), 'org.ofono.Manager'
+            )
+        except dbus.exceptions.DBusException:
+            # oFono interface not found, probably its a desktop.
+            return None
+
+        modems = manager.GetModems()
+        for path, properties in modems:
+            return properties['Serial'] if 'Serial' in properties else None
+
+    def test_device_with_imei_must_display_it(self):
+        """Checks whether the UI is exposing the right IMEI."""
+        device_imei = self._get_imei_from_dbus()
+        if not device_imei:
+            self.skipTest('The device has no imei.')
+        else:
+            self.assertTrue(self.about_page.is_imei_visible())
+            displayed_imei = self.about_page.get_imei()
+            self.assertThat(displayed_imei, Equals(device_imei))
+
+    def test_device_without_imei_must_not_display_it(self):
+        device_imei = self._get_imei_from_dbus()
+        if device_imei:
+            self.skipTest('The device has imei.')
+        else:
+            self.assertFalse(self.about_page.is_imei_visible())
+
+
+class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
+
+    def _get_system_image_iface(self):
+        bus = self.get_dbus(system_bus=True)
+        service = bus.get_object('com.canonical.SystemImage', '/Service')
+        iface = dbus.Interface(service, 'com.canonical.SystemImage')
+        return iface.Info()
+
+    def _get_last_updated_date(self):
+        info = self._get_system_image_iface()[3]
+
+        if info == 'Unknown':
+            return _('Never')
+        else:
+            return str(info.split()[0])
 
     def test_last_updated(self):
         """Checks whether Last Updated info is correct."""

@@ -18,6 +18,8 @@ import ubuntuuitoolkit
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
+from datetime import datetime
+
 from ubuntu_system_settings import SystemSettings
 
 
@@ -64,9 +66,9 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
 
     @classmethod
     def tearDownClass(klass):
-        super(UbuntuSystemSettingsUpowerTestCase, klass).tearDownClass()
         klass.p_mock.terminate()
         klass.p_mock.wait()
+        super(UbuntuSystemSettingsUpowerTestCase, klass).tearDownClass()
 
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
@@ -189,23 +191,63 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
     @classmethod
     def tearDownClass(klass):
-        super(UbuntuSystemSettingsOfonoTestCase, klass).tearDownClass()
         klass.p_mock.terminate()
         klass.p_mock.wait()
+        super(UbuntuSystemSettingsOfonoTestCase, klass).tearDownClass()
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp('cellular')
 
-class AboutBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
-
-    """ Base class for About this phone tests """
-
+class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """Go to About page."""
-        super(UbuntuSystemSettingsOfonoTestCase, self).setUp()
-        self.about_page = self.system_settings.main_view.go_to_about_page()
+        super(AboutBaseTestCase, self).setUp('about')
+        self.about_page = self.system_settings.main_view.select_single(
+            objectName='aboutPage'
+        )
+
+class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+    def setUp(self):
+        """Go to About page."""
+        super(AboutOfonoBaseTestCase, self).setUp('about')
+        self.about_page = self.system_settings.main_view.select_single(
+            objectName='aboutPage'
+        )
+
+class AboutSystemImageBaseTestCase(AboutBaseTestCase,
+                                   dbusmock.DBusTestCase):
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+        klass.p_mock = klass.spawn_server('com.canonical.SystemImage',
+                                          '/Service',
+                                          'com.canonical.SystemImage',
+                                          system_bus=True,
+                                          stdout=subprocess.PIPE)
+        klass.dbusmock = dbus.Interface(klass.dbus_con.get_object(
+            'com.canonical.SystemImage',
+            '/Service'),
+            dbusmock.MOCK_IFACE)
+
+        date = datetime.now().replace(microsecond=0).isoformat()
+
+        klass.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
+                                 'ret = (0, "", "", "%s", [])' % date)
+
+    def setUp(self):
+        self.wait_for_bus_object('com.canonical.SystemImage',
+                                 '/Service',
+                                 system_bus=True)
+        super(AboutSystemImageBaseTestCase, self).setUp()
+
+    @classmethod
+    def tearDownClass(klass):
+        klass.p_mock.terminate()
+        klass.p_mock.wait()
+        super(AboutSystemImageBaseTestCase, klass).tearDownClass()
 
 
 class StorageBaseTestCase(AboutBaseTestCase):
