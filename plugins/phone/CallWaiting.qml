@@ -32,7 +32,6 @@ ItemPage {
         id: callSettings
         modemPath: modem
         onVoiceCallWaitingChanged: {
-            console.warn ("onVoiceCallWaitingChanged: " + voiceCallWaiting);
             callWaitingIndicator.running = false;
         }
     }
