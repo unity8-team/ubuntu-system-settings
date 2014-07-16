@@ -44,6 +44,7 @@ public:
 
     int downloadMode();
     void setDownloadMode(int);
+    QString lastUpdateDate();
     int currentBuildNumber();
     QString currentUbuntuBuildNumber();
     QString currentDeviceBuildNumber();
@@ -75,6 +76,7 @@ private Q_SLOTS:
 private:
     int m_currentBuildNumber;
     QMap<QString, QString> m_detailedVersion;
+    QString m_lastUpdateDate;
     int m_downloadMode;
 
     QDBusConnection m_systemBusConnection;

@@ -145,7 +145,8 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: backendInfos.updateDate ? backendInfos.updateDate : i18n.tr("Never")
+                value: updateBackend.lastUpdateDate && updateBackend.lastUpdateDate != 'Unknown' ?
+                    updateBackend.lastUpdateDate : i18n.tr("Never")
             }
 
             ListItem.SingleControl {
