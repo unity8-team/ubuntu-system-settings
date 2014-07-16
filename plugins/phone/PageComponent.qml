@@ -69,7 +69,8 @@ ItemPage {
             text: i18n.tr("%1 Services").arg(carrierString)
             progression: true
             enabled: sim.present
-            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {carrierString: carrierString, sim: sim})
+            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"),
+                                      {carrierString: carrierString, sim: sim})
         }
     }
 }

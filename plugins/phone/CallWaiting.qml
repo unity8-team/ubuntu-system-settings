@@ -61,8 +61,9 @@ ItemPage {
 
         ListItem.Standard {
             id: callWaitingItem
-            text: i18n.tr("Call waiting")           
-            control: callWaitingIndicator.running ? callWaitingIndicator : callWaitingSwitch
+            text: i18n.tr("Call waiting")
+            control: callWaitingIndicator.running ?
+                     callWaitingIndicator : callWaitingSwitch
         }
 
         ListItem.Base {
