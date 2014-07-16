@@ -106,7 +106,7 @@ void SystemUpdate::setCurrentDetailedVersion() {
         m_detailedVersion = reply.argumentAt<4>();
         Q_EMIT versionChanged();
     } else {
-        qDebug() << "Error when retrieving version information: " << reply.error();
+        qWarning() << "Error when retrieving version information: " << reply.error();
     }
 }
 
