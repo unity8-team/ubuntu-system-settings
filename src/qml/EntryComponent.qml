@@ -56,5 +56,7 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: root.clicked()
+        onPressed: root.opacity = 0.9
+        onReleased: root.opacity = 1.0
     }
 }
