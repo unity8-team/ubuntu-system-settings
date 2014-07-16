@@ -38,6 +38,7 @@ namespace UpdatePlugin {
 SystemUpdate::SystemUpdate(QObject *parent) :
     QObject(parent),
     m_currentBuildNumber(-1),
+    m_lastUpdateDate(QStringLiteral("")),
     m_detailedVersion(),
     m_downloadMode(-1),
     m_systemBusConnection (QDBusConnection::systemBus()),
@@ -101,11 +102,19 @@ void SystemUpdate::setCurrentDetailedVersion() {
     reply.waitForFinished(); 
     if (reply.isValid()) {
         m_currentBuildNumber = reply.argumentAt<0>();
+        m_lastUpdateDate = reply.argumentAt<3>();
         m_detailedVersion = reply.argumentAt<4>();
         Q_EMIT versionChanged();
     } else {
         qDebug() << "Error when retrieving version information: " << reply.error();
     }
+}
+
+QString SystemUpdate::lastUpdateDate() {
+    if (m_lastUpdateDate == QStringLiteral(""))
+        setCurrentDetailedVersion();
+
+    return m_lastUpdateDate;
 }
 
 int SystemUpdate::currentBuildNumber() {
