@@ -68,6 +68,24 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
+
+        ListItem.Standard {
+	    text: i18n.tr ("Back")
+            control: Button {
+                id: backButton
+                text: "Back"
+	        color: "gray"
+                width: units.gu(19)
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: pageStack.pop()
+                    onPressed: backButton.color = "blue"
+                    onReleased: backButton.color = "gray"
+                }
+            }
+        }
+
+
             ListItem.Base {
                 height: ubuntuLabel.height + deviceLabel.height + units.gu(6)
 
