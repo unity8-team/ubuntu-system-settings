@@ -63,6 +63,9 @@ ItemPage {
 
     OfonoManager {
         id: manager
+        Component.onCompleted: {
+            console.warn('manager complete with', modems.length, 'modems');
+        }
     }
 
     // ofono bindings of first sim
@@ -122,8 +125,12 @@ ItemPage {
                 id: cellData
                 anchors.left: parent.left
                 anchors.right: parent.right
+
+                // bind cellData.sims to root.sims
                 onLoaded: {
                     simBinder.target = cellData.item
+                    roamingBinder.target = cellData.item
+                    roamingControlBinder.target = cellData.item
                 }
             }
 
@@ -133,15 +140,25 @@ ItemPage {
                 value: sims
             }
 
+            Binding {
+                id: roamingBinder
+                property: "dataEnabled"
+                value: dataRoamingItem.enabled
+            }
+
+            Binding {
+                id: roamingControlBinder
+                property: "roamingAllowed"
+                value: dataRoamingControl.checked
+            }
+
             ListItem.Standard {
                 id: dataRoamingItem
                 objectName: "dataRoamingSwitch"
                 text: i18n.tr("Data roaming")
                 // sensitive to data type, and disabled if "Off" is selected
-                enabled: cellData.item.dataEnabled
                 control: Switch {
                     id: dataRoamingControl
-                    checked: cellData.item.roamingAllowed
                     onClicked: cellData.item.roamingAllowed = checked
                 }
             }
