@@ -22,6 +22,7 @@
 
 #include "system_update.h"
 #include <QEvent>
+#include <QDateTime>
 #include <QDBusReply>
 #include <unistd.h>
 
@@ -38,8 +39,8 @@ namespace UpdatePlugin {
 SystemUpdate::SystemUpdate(QObject *parent) :
     QObject(parent),
     m_currentBuildNumber(-1),
-    m_lastUpdateDate(QStringLiteral("")),
     m_detailedVersion(),
+    m_lastUpdateDate(),
     m_downloadMode(-1),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_SystemServiceIface ("com.canonical.SystemImage",
@@ -99,10 +100,10 @@ void SystemUpdate::pauseDownload() {
 
 void SystemUpdate::setCurrentDetailedVersion() {
     QDBusPendingReply<int, QString, QString, QString, QMap<QString, QString> > reply = m_SystemServiceIface.call("Info");
-    reply.waitForFinished(); 
+    reply.waitForFinished();
     if (reply.isValid()) {
         m_currentBuildNumber = reply.argumentAt<0>();
-        m_lastUpdateDate = reply.argumentAt<3>();
+        m_lastUpdateDate = QDateTime::fromString(reply.argumentAt<3>(), Qt::ISODate);
         m_detailedVersion = reply.argumentAt<4>();
         Q_EMIT versionChanged();
     } else {
@@ -110,8 +111,8 @@ void SystemUpdate::setCurrentDetailedVersion() {
     }
 }
 
-QString SystemUpdate::lastUpdateDate() {
-    if (m_lastUpdateDate == QStringLiteral(""))
+QDateTime SystemUpdate::lastUpdateDate() {
+    if (!m_lastUpdateDate.isValid())
         setCurrentDetailedVersion();
 
     return m_lastUpdateDate;

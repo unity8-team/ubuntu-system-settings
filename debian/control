@@ -124,6 +124,7 @@ Architecture: all
 Depends: ubuntu-system-settings,
          python3-autopilot,
          python3-dbusmock (>= 0.10.1),
+         python3-dateutil,
          libautopilot-qt,
          ubuntu-ui-toolkit-autopilot,
          dpkg-dev,
