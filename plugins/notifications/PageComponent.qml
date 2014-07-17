@@ -74,7 +74,8 @@ ItemPage {
 
         delegate: ListItem.Standard {
             text: modelData.title
-            iconSource: modelData.icon
+            iconName: modelData.icon
+            iconFrame: false
             control: Switch {
                 checked: modelData.status
 

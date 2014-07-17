@@ -27,6 +27,8 @@
 #include <QVariant>
 #include <QVariantList>
 
+typedef struct _GSettings GSettings;
+
 namespace NotificationsPlugin {
 
 class NotificationsManager : public QObject
@@ -45,11 +47,12 @@ public:
 
 private Q_SLOTS:
     void checkUpdates(QString id, bool value);
+    void loadModel();
 
 private:
     QVariantList m_model;
-
-    void loadModel();
+    QProcess m_process;
+    GSettings *m_pushSettings;
 };
 
 }

@@ -18,50 +18,76 @@
  *
 */
 
+#include <gio/gio.h>
+
 #include "notification_manager.h"
 #include "notification_item.h"
 #include <QDebug>
+#include <iostream>
+
+
+#define CLICK_COMMAND "click"
+#define BLACKLIST_CONFIG_SCHEMA_ID "com.ubuntu.touch.notifications"
 
 namespace NotificationsPlugin {
 
+// XXX: lots of code copied from the update plugin.
+// XXX: and lots of it is also reimplemented differently
+// XXX: in the about plugin!
+// XXX: And all of it should be replaced with libclick calls
+// XXX: instead of calling out to the click command
+
 NotificationsManager::NotificationsManager(QObject *parent):
-    QObject(parent)
+    QObject(parent),
+    m_pushSettings(g_settings_new(BLACKLIST_CONFIG_SCHEMA_ID))
 {
-    loadModel();
+    QObject::connect(&m_process, SIGNAL(finished(int)),
+                  this, SLOT(loadModel()));
+
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    QString command = environment.value("CLICK_COMMAND", QString(CLICK_COMMAND));
+    QStringList args("list");
+    args << "--manifest";
+    m_process.start(command, args);
 }
 
 NotificationsManager::~NotificationsManager()
 {
+    g_object_unref(m_pushSettings);
 }
 
 void NotificationsManager::loadModel()
 {
-    // LOAD ALL THE APPS THAT SUPPORT PUSH NOTIFICATIONS
-    // EXAMPLE:
-    NotificationItem *item = new NotificationItem();
-    item->setItemData("App1", "icon", false);
-    m_model.append(QVariant::fromValue(item));
-    connect(item, &NotificationItem::updateNotificationStatus,
-            this, &NotificationsManager::checkUpdates);
+    // Load the blacklist
 
-    NotificationItem *item2 = new NotificationItem();
-    item2->setItemData("App2", "icon", true);
-    m_model.append(QVariant::fromValue(item2));
-    connect(item, &NotificationItem::updateNotificationStatus,
-            this, &NotificationsManager::checkUpdates);
 
-    NotificationItem *item3 = new NotificationItem();
-    item3->setItemData("App3", "icon", false);
-    m_model.append(QVariant::fromValue(item3));
-    connect(item, &NotificationItem::updateNotificationStatus,
-            this, &NotificationsManager::checkUpdates);
+    // LOAD ALL THE APPS
+    // XXX: maybe this should only load the apps that have the right
+    // apparmor bit to support push but that's not available in manifest
 
+    QString output(m_process.readAllStandardOutput());
+    QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
+    QJsonArray array = document.array();
+
+    int i;
+    for (i = 0; i < array.size(); i++) {
+        QJsonObject object = array.at(i).toObject();
+        QString title = object.value("title").toString();
+        QString icon = object.value("icon").toString(); //+"/"+object.value("icon").toString();
+        if (icon.isEmpty()) {icon = "distributor-logo";};
+        NotificationItem *item = new NotificationItem();
+        item->setItemData(title, icon, false);
+        m_model.append(QVariant::fromValue(item));
+        connect(item, &NotificationItem::updateNotificationStatus,
+                this, &NotificationsManager::checkUpdates);
+    }
     Q_EMIT modelChanged();
+
 }
 
 void NotificationsManager::checkUpdates(QString id, bool value)
 {
-    qDebug() << id << value;
+    std::cout << id.toStdString() << value;
 }
 
 }

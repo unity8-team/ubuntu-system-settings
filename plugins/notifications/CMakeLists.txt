@@ -6,6 +6,8 @@ notification_item.h notification_item.cpp
 plugin.cpp notification_manager.cpp
 ${QML_SOURCES})
 
+include_directories(${GIO_INCLUDE_DIRS})
+target_link_libraries(UbuntuNotificationsPanel ${GLIB_LDFLAGS} ${GIO_LD_FLAGS})
 qt5_use_modules(UbuntuNotificationsPanel Qml Quick)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Notifications)
