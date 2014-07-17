@@ -24,6 +24,8 @@ import subprocess
 
 CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
+SIM_IFACE = 'org.ofono.SimManager'
+NETREG_IFACE = 'org.ofono.NetworkRegistration'
 
 
 class UbuntuSystemSettingsTestCase(UbuntuUIToolkitAppTestCase):
@@ -82,14 +84,11 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
     """ Class for cellular tests which sets up an Ofono mock """
 
-    modem_powered = True
     technology_preference = 'gsm'
 
-    def mock_connection_manager(self):
-        self.modem_0.AddProperty(CONNMAN_IFACE, 'Powered',
-                                 self.modem_powered)
-
-        self.modem_0.AddMethods(
+    def mock_connection_manager(self, modem):
+        modem.AddProperty(CONNMAN_IFACE, 'Powered', True)
+        modem.AddMethods(
             CONNMAN_IFACE,
             [
                 (
@@ -103,12 +102,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     "IFACE", CONNMAN_IFACE)),
             ])
 
-    def mock_carriers(self):
+    def mock_carriers(self, name):
         self.dbusmock.AddObject(
-            '/ril_0/operator/op2',
+            '/%s/operator/op2' % name,
             'org.ofono.NetworkOperator',
             {
-                'Name': 'my.cool.telco',
+                'Name': 'my.cool.telco (%s)' % name,
                 'Status': 'available',
                 'MobileCountryCode': '777',
                 'MobileNetworkCode': '22',
@@ -122,10 +121,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         )
         # Add a forbidden carrier
         self.dbusmock.AddObject(
-            '/ril_0/operator/op3',
+            '/%s/operator/op3' % name,
             'org.ofono.NetworkOperator',
             {
-                'Name': 'my.bad.telco',
+                'Name': 'my.bad.telco (%s)' % name,
                 'Status': 'forbidden',
                 'MobileCountryCode': '777',
                 'MobileNetworkCode': '22',
@@ -138,13 +137,13 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             ]
         )
 
-    def mock_radio_settings(self):
-        modem_interfaces = self.modem_0.GetProperties()['Interfaces']
+    def mock_radio_settings(self, modem):
+        modem_interfaces = modem.GetProperties()['Interfaces']
         modem_interfaces.append(RDO_IFACE)
-        self.modem_0.AddProperty(
+        modem.AddProperty(
             RDO_IFACE, 'TechnologyPreference', self.technology_preference)
-        self.modem_0.SetProperty('Interfaces', modem_interfaces)
-        self.modem_0.AddMethods(
+        modem.SetProperty('Interfaces', modem_interfaces)
+        modem.AddMethods(
             RDO_IFACE,
             [
                 (
@@ -157,6 +156,30 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     'self.EmitSignal("IFACE",\
                         "PropertyChanged", "sv", [args[0], args[1]])'.replace(
                     'IFACE', RDO_IFACE)),
+            ])
+
+    def mock_sim_manager(self, modem, properties=None):
+        if not properties:
+            properties = {
+                'SubscriberNumbers': ['123456', '234567']
+            }
+        modem_interfaces = modem.GetProperties()['Interfaces']
+        modem_interfaces.append(SIM_IFACE)
+        modem.AddProperties(SIM_IFACE, properties)
+        modem.SetProperty('Interfaces', modem_interfaces)
+        modem.AddMethods(
+            SIM_IFACE,
+            [
+                (
+                    'GetProperties', '', 'a{sv}',
+                    'ret = self.GetAll("%s")'
+                    % SIM_IFACE),
+                (
+                    'SetProperty', 'sv', '',
+                    'self.Set("IFACE", args[0], args[1]); '
+                    'self.EmitSignal("IFACE",\
+                        "PropertyChanged", "sv", [args[0], args[1]])'.replace(
+                    'IFACE', SIM_IFACE)),
             ])
 
     @classmethod
@@ -176,11 +199,13 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.modem_0 = self.dbus_con.get_object('org.ofono', '/ril_0')
 
         # Add an available carrier
-        self.mock_carriers()
+        self.mock_carriers('ril_0')
 
-        self.mock_radio_settings()
+        self.mock_radio_settings(self.modem_0)
 
-        self.mock_connection_manager()
+        self.mock_connection_manager(self.modem_0)
+
+        self.mock_sim_manager(self.modem_0)
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 

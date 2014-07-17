@@ -33,6 +33,21 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
+    property var sims: [sim1]
+
+    states: [
+        State {
+            name: "singleSim"
+            PropertyChanges { target: cellData; source: "Components/CellularSingleSim.qml" }
+            when: manager.modems.length === 1
+        },
+        State {
+            name: "dualSim"
+            PropertyChanges { target: cellData; source: "Components/CellularDualSim.qml" }
+            PropertyChanges { target: sim2Loader; source: "Components/Sim.qml" }
+            when: manager.modems.length === 2
+        }
+    ]
 
     QDBusActionGroup {
         id: actionGroup
@@ -49,35 +64,44 @@ ItemPage {
 
     OfonoManager {
         id: manager
-        // Component.onCompleted: {
-        //     ModemHelpers.build(modems);
-        // }
-        onModemAdded: console.warn('Modem added', modem)
+    }
+
+    Sim {
+        id: sim1
+        name: "SIM 1"
+        path: manager.modems[0]
+    }
+
+    Loader {
+        id: sim2Loader
+        onLoaded: {
+            sim2Path.target = sim2Loader.item;
+            sim2Name.target = sim2Loader.item;
+            root.sims = [sim1, sim2Loader.item]
+        }
+    }
+
+    Binding {
+        id: sim2Path
+        property: "path"
+        value: manager.modems[1]
+    }
+
+    Binding {
+        id: sim2Name
+        property: "name"
+        value: "SIM 2"
     }
 
     OfonoNetworkRegistration {
         id: netReg
         modemPath: manager.modems[0]
         onStatusChanged: {
-            console.warn ("onStatusChanged: " + status);
+            console.warn ("netReg onStatusChanged: " + status, modemPath);
         }
         onModeChanged: {
-            console.warn ("onModeChanged: " + mode);
-            // if (mode === "manual")
-            //     chooseCarrier.selectedIndex = 1;
-            // else
-            //     chooseCarrier.selectedIndex = 0;
+            console.warn ("netReg onModeChanged: " + mode, modemPath);
         }
-    }
-
-    OfonoGroup {
-        id: modem1
-        modemPath: manager.modems[0]
-    }
-
-    OfonoGroup {
-        id: modem2
-        modemPath: manager.modems[1]
     }
 
     Flickable {
@@ -90,54 +114,33 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            // ListModel {
-            //     id: techPrefModel
-            //     ListElement { name: "Off"; key: "off" }
-            //     ListElement { name: "2G only (saves battery)"; key: "gsm"; }
-            //     ListElement { name: "2G/3G/4G (faster)"; key: "any"; }
-            // }
+            Loader {
+                id: cellData
+                anchors.left: parent.left
+                anchors.right: parent.right
+                onLoaded: {
+                    simBinder.target = cellData.item
+                }
+            }
 
-            // Component {
-            //     id: techPrefDelegate
-            //     OptionSelectorDelegate { text: i18n.tr(name); }
-            // }
+            Binding {
+                id: simBinder
+                property: "sims"
+                value: sims
+            }
 
-            // ListItem.ItemSelector {
-            //     id: techPrefSelector
-            //     objectName: "technologyPreferenceSelector"
-            //     expanded: true
-            //     delegate: techPrefDelegate
-            //     model: techPrefModel
-            //     text: i18n.tr("Cellular data:")
-
-            //     // technologyPreference "" is not valid, assume sim locked or data unavailable
-            //     enabled: rdoSettings.technologyPreference !== ""
-            //     selectedIndex: {
-            //         var pref = rdoSettings.technologyPreference;
-            //         // make nothing selected if the string from OfonoRadioSettings is empty
-            //         if (pref === "") {
-            //             console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
-            //             return -1;
-            //         } else {
-            //             // normalizeKey turns "lte" and "umts" into "any"
-            //             return RSHelpers.keyToIndex(RSHelpers.normalizeKey(pref));
-            //         }
-            //     }
-            //     onDelegateClicked: RSHelpers.delegateClicked(index)
-            // }
-
-            // ListItem.Standard {
-            //     id: dataRoamingItem
-            //     objectName: "dataRoamingSwitch"
-            //     text: i18n.tr("Data roaming")
-            //     // sensitive to data type, and disabled if "Off" is selected
-            //     enabled: techPrefSelector.selectedIndex !== 0
-            //     control: Switch {
-            //         id: dataRoamingControl
-            //         checked: connMan.roamingAllowed
-            //         onClicked: connMan.roamingAllowed = checked
-            //     }
-            // }
+            ListItem.Standard {
+                id: dataRoamingItem
+                objectName: "dataRoamingSwitch"
+                text: i18n.tr("Data roaming")
+                // sensitive to data type, and disabled if "Off" is selected
+                enabled: cellData.item.dataEnabled
+                control: Switch {
+                    id: dataRoamingControl
+                    checked: cellData.item.roamingAllowed
+                    onClicked: cellData.item.roamingAllowed = checked
+                }
+            }
 
             // ListItem.SingleValue {
             //     text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
@@ -154,54 +157,44 @@ ItemPage {
             //     visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
             // }
 
-            ListItem.Standard {
-                text: i18n.tr("Data usage statistics")
-                progression: true
-                visible: showAllUI
-            }
-
-            // ListItem.ItemSelector {
-            //     id: chooseCarrier
-            //     objectName: "autoChooseCarrierSelector"
-            //     expanded: true
-            //     enabled: netReg.mode !== "auto-only"
-            //     text: i18n.tr("Choose carrier:")
-            //     model: [i18n.tr("Automatically"), i18n.tr("Manually")]
-            //     selectedIndex: netReg.mode === "manual" ? 1 : 0
-            //     onSelectedIndexChanged: {
-            //         if (selectedIndex === 0)
-            //             netReg.registration();
-            //     }
-            // }
-
-            ListItem.SingleValue {
-                text: i18n.tr("Carrier")
-                objectName: "chooseCarrier"
-                visible: manager.modems.length === 1
-                value: netReg.name ? netReg.name : i18n.tr("N/A")
-                progression: enabled
-                onClicked: {
-                    if (enabled)
-                        pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg})
-                }
-            }
-
-            ListItem.SingleValue {
-                text: i18n.tr("Carriers")
-                objectName: "chooseCarriers"
-                visible: manager.modems.length === 2
-                progression: enabled
-                onClicked: {
-                    if (enabled)
-                        pageStack.push(Qt.resolvedUrl("ChooseCarriers.qml"), {netReg: netReg})
-                }
-            }
-
             // ListItem.Standard {
-            //     text: i18n.tr("APN")
+            //     text: i18n.tr("Data usage statistics")
             //     progression: true
             //     visible: showAllUI
             // }
+
+            ListItem.SingleValue {
+                text: i18n.tr("Carrier", "Carriers", manager.modems.length);
+                objectName: "chooseCarrier"
+                value: {
+                    if (manager.modems.length === 1) {
+                        return netReg.name ? netReg.name : i18n.tr("N/A")
+                    } else {
+                        return ''
+                    }
+                }
+                progression: enabled
+                onClicked: {
+                    if (manager.modems.length === 1) {
+                        pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {
+                            netReg: netReg,
+                            title: i18n.tr("Carrier")
+                        })
+                    } else if (manager.modems.length === 2) {
+                        pageStack.push(Qt.resolvedUrl("ChooseCarriers.qml"), {
+                            netReg: netReg,
+                            sim1: sims[0],
+                            sim2: sims[1]
+                        });
+                    }
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("APN")
+                progression: true
+                visible: showAllUI
+            }
         }
     }
 }

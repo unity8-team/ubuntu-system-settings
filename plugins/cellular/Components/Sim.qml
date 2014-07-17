@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -18,41 +18,41 @@
  *
 */
 import QtQuick 2.0
-import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
-import QMenuModel 0.1
 
 Item {
 
-    property var modemPath
-    property var name
-    //property bool preferred: netReg.modemPath === modemPath
+    property string name
+    property string title: {
+        var number = simMng.subscriberNumbers[0] || simMng.subscriberIdentity;
+        return name + (number ? " (" + number + ")" : "");
+    }
+    property var color: null
+    property string path
+
+    property var modem: modem
+    property var radioSettings: radioSettings
+    property var simMng: simMng
+    property var connMan: connMan
 
     OfonoModem {
         id: modem
-        modemPath: modemPath
+        modemPath: path
     }
 
     OfonoRadioSettings {
-        id: rdoSet
-        modemPath: modemPath
-        //onTechnologyPreferenceChanged: RSHelpers.preferenceChanged(preference);
+        id: radioSettings
+        modemPath: path
     }
 
     OfonoSimManager {
         id: simMng
-        modemPath: modemPath
+        modemPath: path
     }
 
     OfonoConnMan {
         id: connMan
-        modemPath: modemPath
-        powered: techPrefSelector.selectedIndex !== 0
-        //onPoweredChanged: RSHelpers.poweredChanged(powered);
+        modemPath: path
     }
-
-    Component.onCompleted: console.warn('OfonoGroup: created group for', modemPath)
 
 }

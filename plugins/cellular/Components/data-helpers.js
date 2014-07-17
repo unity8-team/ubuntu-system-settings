@@ -1,27 +1,42 @@
 
-/* return index of key k using data in techPrefModel */
+
+/* return index of key k using data in techPref.model */
 function keyToIndex (k) {
-    console.warn('keyToIndex key:', k)
-    for (var i=0; i < techPrefModel.count; i++) {
-        if (indexToKey(i) === k) {
-            return i;
-        }
+    var ret;
+    switch (k) {
+        case 'gsm':
+            ret = 1;
+            break;
+        case 'umts':
+        case 'lte':
+        case 'any':
+            ret = 2;
+            break;
+        default:
+            ret = -1;
+            break;
     }
-    // we did not find a suitable ui item
-    console.warn('keyToIndex did not find matching index for key', k);
-    return -1;
+    console.warn('keyToIndex for key', k, ret);
+    return ret;
 }
 
-/* return key of index i using data in techPrefModel */
 function indexToKey (i) {
-    return techPrefModel.get(i).key;
+    if (i === 1) {
+        return 'gsm';
+    } else if (i === 2) {
+        return 'any'
+    } else {
+        return -1
+    }
 }
 
 /* return currently selected key or null if none selected */
 function getSelectedKey () {
-    var i = techPrefSelector.selectedIndex;
-    var model = techPrefModel.get(i);
-    return model ? model.key : null;
+    var i = selector.selectedIndex;
+    if (i < 0) {
+        return null;
+    }
+    return indexToKey(i);
 }
 
 /* return key or 'any' if key matches 'lte' or 'umts'
@@ -38,44 +53,44 @@ function normalizeKey (k) {
 
 /* handler for when RadioSettings TechnologyPreference changes */
 function preferenceChanged (preference) {
-    var i = techPrefSelector.selectedIndex;
-    var rdoKey = rdoSettings.technologyPreference;
+    var i = selector.selectedIndex;
+    var rdoKey = radioSettings.technologyPreference;
     var selKey = getSelectedKey();
 
     // if preference changes, but the user has chosen one already,
     // make sure the user's setting is respected
     if (i > 0) {
         console.warn('Overriding RadioSettings TechnologyPreference signal', preference, 'with user selection', selKey);
-        rdoSettings.technologyPreference = selKey;
+        radioSettings.technologyPreference = selKey;
         return;
     }
 
     // if the pref changes and the modem is on,
     // normlize and update the UI
     if (connMan.powered) {
-        techPrefSelector.selectedIndex = keyToIndex(normalizeKey(rdoKey));
+        selector.selectedIndex = keyToIndex(normalizeKey(rdoKey));
     } else {
         // if the modem is off,
         // just normalize
-        rdoSettings.technologyPreference = normalizeKey(rdoKey);
+        radioSettings.technologyPreference = normalizeKey(rdoKey);
     }
     console.warn('Modem', connMan.powered ? 'online' : 'offline', 'TechnologyPreference', rdoKey);
 }
 
 /* handler for when ConnectionManager powered changes */
 function poweredChanged (powered) {
-    var rdoKey = rdoSettings.technologyPreference;
+    var rdoKey = radioSettings.technologyPreference;
     if (powered) {
         if (rdoKey === '') {
             console.warn('Modem came online but TechnologyPreference is empty');
             return;
         } else {
             console.warn('Modem came online, TechnologyPreference', rdoKey);
-            techPrefSelector.selectedIndex = keyToIndex(normalizeKey(rdoKey));
+            selector.selectedIndex = keyToIndex(normalizeKey(rdoKey));
         }
     } else {
         console.warn('Modem went offline');
-        techPrefSelector.selectedIndex = 0;
+        selector.selectedIndex = 0;
     }
 }
 
@@ -84,7 +99,7 @@ function delegateClicked (index) {
     console.warn('delegateClicked', index);
     // if the user selects a TechnologyPreference, update RadioSettings
     if (index > 0) {
-        rdoSettings.technologyPreference = indexToKey(index);
+        radioSettings.technologyPreference = indexToKey(index);
         console.warn('delegateClicked setting TechnologyPreference to', indexToKey(index));
     }
 }

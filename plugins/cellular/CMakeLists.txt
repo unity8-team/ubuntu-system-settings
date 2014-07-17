@@ -5,11 +5,10 @@ install(FILES settings-cellular.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 
 set(QML_SOURCES
     ChooseCarrier.qml
+    ChooseCarriers.qml
     Hotspot.qml
     HotspotSetup.qml
     PageComponent.qml
-    rdosettings-helpers.js
-    modem-helpers.js
 )
 
 

@@ -7,11 +7,11 @@
 import dbus
 from time import sleep
 from autopilot.introspection.dbus import StateNotFoundError
-from gi.repository import Gio
 from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import (
-    UbuntuSystemSettingsOfonoTestCase, CONNMAN_IFACE, RDO_IFACE)
+    UbuntuSystemSettingsOfonoTestCase, CONNMAN_IFACE, RDO_IFACE,
+    NETREG_IFACE,)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
@@ -39,6 +39,42 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
                 objectName="technologyPreferenceSelector"
             )
         return self._pref_selector
+
+    def mock_for_dual_sim(self):
+        '''Mock two modems/sims for the dual sim story'''
+        first_modem = 'ril_0'
+        second_modem = 'ril_1'
+
+        def get_all_operators(name, slow=False):
+            return 'ret = [(m, objects[m].GetAll("org.ofono.NetworkOperator")) ' \
+                   'for m in objects if "%s/operator/" in m]' % name
+
+        self.dbusmock.AddModem(second_modem, {'Powered': True})
+        self.modem_1 = self.dbus_con.get_object('org.ofono', '/%s' % second_modem)
+        self.modem_1.AddMethods('org.ofono.NetworkRegistration', [
+            ('GetProperties', '', 'a{sv}', 'ret = self.GetAll("org.ofono.NetworkRegistration")'),
+            ('Register', '', '', ''),
+            ('GetOperators', '', 'a(oa{sv})', get_all_operators(second_modem)),
+            ('Scan', '', 'a(oa{sv})', get_all_operators(second_modem, slow=True)),
+        ])
+        self.modem_1.AddMethods(NETREG_IFACE, [
+            ('Scan', '', 'a(oa{sv})', get_all_operators(second_modem)),
+        ])
+        self.mock_carriers(second_modem)
+        self.mock_connection_manager(self.modem_1)
+
+        self.mock_sim_manager(self.modem_1, {
+            'SubscriberNumbers': ['08123', '938762783']
+        })
+
+        # patch first modem
+        self.modem_0.AddMethods('org.ofono.NetworkRegistration', [
+            ('GetProperties', '', 'a{sv}', 'ret = self.GetAll("org.ofono.NetworkRegistration")'),
+            ('Register', '', '', ''),
+            ('GetOperators', '', 'a(oa{sv})', get_all_operators(first_modem)),
+            ('Scan', '', 'a(oa{sv})', get_all_operators(first_modem, slow=True)),
+        ])
+
 
     def select_preference(self, label):
         """Helper method that clicks a preference that matches provided label"""
@@ -111,30 +147,15 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             raises(StateNotFoundError)
         )
 
-    def test_carrier_item_changes_depending_on_modems(self):
-        carrier = self.system_settings.main_view.cellular_page.select_single(
-            toolkit_emulators.SingleValue,
-            objectName="chooseCarrier"
-        )
-        carriers = self.system_settings.main_view.cellular_page.select_single(
-            toolkit_emulators.SingleValue,
-            objectName="chooseCarriers"
-        )
-        self.assertTrue(carrier.visible)
-        self.assertFalse(carriers.visible)
-
-        # add modem
-        self.dbusmock.AddModem('ril_1', {'Powered': True})
-
-        self.assertFalse(carrier.visible)
-        self.assertTrue(carriers.visible)
-
-
     def test_one_modem(self):
+        sleep(5)
         self.assertTrue(False)
 
     def test_two_modems(self):
-        self.dbusmock.AddModem('ril_1', {'Powered': True})
+        self.mock_for_dual_sim()
+
+        sleep(3)
+
         self.assertTrue(False)
 
     def test_set_modem_offline(self):
