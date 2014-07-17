@@ -1,142 +1,142 @@
-# Korean translation for ubuntu-system-settings
-# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# Marathi translation for ubuntu-system-settings
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the ubuntu-system-settings package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-16 02:56+0000\n"
-"Last-Translator: MinSik CHO <Unknown>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"PO-Revision-Date: 2014-07-16 13:18+0000\n"
+"Last-Translator: Rohan Deshmukh <Unknown>\n"
+"Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2014-07-17 06:36+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
-msgstr "재생 정지"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: plugins/sound//PageComponent.qml:36
 #: settings.js:2
 msgid "Sound"
-msgstr "소리"
+msgstr "आवाज"
 
 #: plugins/sound//PageComponent.qml:68
 msgid "Phone calls:"
-msgstr "전화 통화:"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:72
 #: plugins/sound//PageComponent.qml:78
 msgid "Ringtone"
-msgstr "벨소리"
+msgstr "रिंगटोन"
 
 #: plugins/sound//PageComponent.qml:89
 msgid "Vibrate when ringing"
-msgstr "전화 수신 시 진동하기"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:97
 #: plugins/sound//PageComponent.qml:130
 msgid "Vibrate in Silent Mode"
-msgstr "조용히 모드에서 진동하기"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:102
 msgid "Messages:"
-msgstr "메시지:"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
 msgid "Message received"
-msgstr "메세지를 수신했습니다."
+msgstr "संदेश प्राप्त"
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
-msgstr "메세지 도착음과 같이 진동하기"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:135
 msgid "Other sounds:"
-msgstr "기타 소리:"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:139
 #: plugins/language//PageComponent.qml:160
 msgid "Keyboard sound"
-msgstr "키보드 소리"
+msgstr ""
 
 #: plugins/sound//PageComponent.qml:153
 msgid "Lock sound"
-msgstr "잠금 소리"
+msgstr ""
 
 #: plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr "현재 무음 모드에 있습니다."
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: plugins/time-date//PageComponent.qml:29
 #: settings.js:8
 msgid "Time & Date"
-msgstr "날짜와 시간"
+msgstr "वेळ व दिनांक"
 
 #: plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr "시간대:"
+msgstr "टाइम झोन:"
 
 #: plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
-msgstr "시간과 날짜 설정:"
+msgstr ""
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
 #: plugins/cellular//PageComponent.qml:122
 msgid "Automatically"
-msgstr "자동"
+msgstr "आपोआप"
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
 #: plugins/cellular//PageComponent.qml:122
 msgid "Manually"
-msgstr "수동"
+msgstr "स्वहस्ते"
 
 #: plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr "시간과 날짜 설정"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr "시간"
+msgstr "वेळ"
 
 #: plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr "시"
+msgstr "तास"
 
 #: plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr "분"
+msgstr "मिनीट"
 
 #: plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr "초"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr "날짜"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr "일"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr "월"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr "년"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:173
 #: plugins/security-privacy//LockSecurity.qml:310
@@ -151,188 +151,185 @@ msgstr "년"
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:54
 msgid "Cancel"
-msgstr "취소"
+msgstr ""
 
 #: plugins/time-date//TimePicker.qml:182
 #: plugins/phone//CallForwarding.qml:113
 #: plugins/background//Preview.qml:102
 msgid "Set"
-msgstr "설정"
+msgstr ""
 
 #: plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr "시간대"
+msgstr ""
 
 #: plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr "시간대 설정:"
+msgstr ""
 
 #: plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr "현재 위치를 입력하십시오."
+msgstr ""
 
 #: plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr "맞는 장소가 없습니다."
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:30
 #: plugins/security-privacy//PhoneLocking.qml:44
 msgid "Lock security"
-msgstr "보안 잠금"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
-msgstr "암호 변경"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr "암호문 바꾸기"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr "스와이프로 바꾸기"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr "암호로 바꾸기"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr "암호문으로 바꾸기"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr "현재 암호"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr "현재 암호문"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr "암호가 다릅니다. 다시 시도해 주십시오."
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr "암호문이 다릅니다. 다시 시도해 주십시오."
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr "암호 입력"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr "암호문 입력"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr "암호 확인"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr "암호문 확인"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr "입력된 암호가 다릅니다. 다시 시도해 주십시오."
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr "입력된 암호문이 다릅니다. 다시 시도해 주십시오."
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:273
 msgid "Unset"
-msgstr "해제"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:274
 #: wizard/qml/Pages//30-location.qml:48
 #: wizard/qml/Pages//20-wifi.qml:168 ../wizard/qml/Pages//10-welcome.qml:78
 msgid "Continue"
-msgstr "계속"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr "다음을 이용하여 잠금 해제:"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr "스와이프 (보안 기능 없음)"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr "4 자리수 암호"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:332
 #: plugins/security-privacy//PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr "암호문"
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr "스와이프 (보안 기능 없음)... "
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr "4 자리수 암호..."
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr "암호문..."
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr "암호 변경..."
+msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr "암호문 변경..."
+msgstr ""
 
 #: plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr "위치"
+msgstr ""
 
 #: plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr "위치 감지"
+msgstr ""
 
 #: plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
-msgstr "GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리를 절약하기 위해 GPS를 끕니다."
+msgstr ""
 
 #: plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
-msgstr "Wi-Fi와 GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리를 절약합니다."
+msgstr ""
 
 #: plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
-msgstr "Wi-Fi (현재 해제됨)와 GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
+msgstr ""
 
 #: plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
-msgstr "Wi-Fi, 셀타워 위치, GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
+msgstr ""
 
 #: plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
-"Wi-Fi, 셀타워 위치 (현재 셀룰러 네트워크에 연결되지 않음), GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 "
-"배터리가 절약됩니다."
 
 #: plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
-"Wi-Fi (현재 해제됨), 셀타워 위치, GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
 
 #: plugins/security-privacy//Location.qml:82
 msgid ""
@@ -340,39 +337,37 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Wi-Fi (현재 해제됨), 셀타워 위치 (현제 셀룰러 네트워크에 연결되지 않음), GPS를 사용하여 대략적인 위치를 감지합니다. 이 "
-"설정을 해제하면 배터리가 절약됩니다."
 
 #: plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr "위치 정보에 접근 허용:"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: plugins/security-privacy//PageComponent.qml:33
 #: settings.js:28
 msgid "Security & Privacy"
-msgstr "보안 & 사생활 보호"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:50
 #: plugins/security-privacy//PageComponent.qml:127
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr "전화와 인터넷"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:52
 #: plugins/security-privacy//PageComponent.qml:128
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr "전화만 사용"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
-msgstr "보안:"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:76
 #: plugins/security-privacy//PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr "폰 잠금"
+msgstr ""
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/security-privacy//PageComponent.qml:78
@@ -380,56 +375,57 @@ msgstr "폰 잠금"
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] "%1분"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/security-privacy//PageComponent.qml:87
 msgid "SIM PIN"
-msgstr "심카드 핀"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:93
 msgid "Privacy:"
-msgstr "사생활 보호:"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:97
 msgid "Stats on welcome screen"
-msgstr "환영 스크린의 정보"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:110
 msgid "Messages on welcome screen"
-msgstr "환영 스크린 문구"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:125
 #: plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr "대쉬 검색"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
-msgstr "위치 정보 사용"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:151
 msgid "Other app access"
-msgstr "다른 앱 접근"
+msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
-msgstr "진단"
+msgstr ""
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: plugins/security-privacy//PageComponent.qml:161
 msgid "Sent"
-msgstr "전송 완료"
+msgstr ""
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: plugins/security-privacy//PageComponent.qml:164
 msgid "Not sent"
-msgstr "전송되지 않음"
+msgstr ""
 
 #: plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr "다음에서 결과를 가져오기:"
+msgstr ""
 
 #: plugins/security-privacy//PhoneLocking.qml:40
 #: plugins/wifi//OtherNetwork.qml:67
@@ -437,154 +433,158 @@ msgstr "다음에서 결과를 가져오기:"
 #: plugins/bluetooth//PageComponent.qml:256
 #: plugins/bluetooth//PageComponent.qml:264
 msgid "None"
-msgstr "없음"
+msgstr ""
 
 #: plugins/security-privacy//PhoneLocking.qml:41
 msgid "Passcode"
-msgstr "암호"
+msgstr ""
 
 #: plugins/security-privacy//PhoneLocking.qml:62
 #: plugins/battery//PageComponent.qml:240
 msgid "Lock when idle"
-msgstr "사용하지 않을때 잠금"
+msgstr ""
 
 #: plugins/security-privacy//PhoneLocking.qml:63
 #: plugins/battery//PageComponent.qml:240
 msgid "Sleep when idle"
-msgstr "사용하지 않을때 잠자기"
+msgstr ""
 
 #: plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr "잠자기 모드는 즉시 휴대 전화를 잠급니다."
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: plugins/language//PageComponent.qml:32
 #: settings.js:44
 msgid "Language & Text"
-msgstr "언어 & 글"
+msgstr ""
 
 #: plugins/language//PageComponent.qml:71
 msgid "Display language…"
-msgstr "표시 언어..."
+msgstr ""
 
 #: plugins/language//PageComponent.qml:85
 #: plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr "키보드 레이아웃"
+msgstr ""
 
 #: plugins/language//PageComponent.qml:100
 #: plugins/language//PageComponent.qml:110
 #: plugins/language//SpellChecking.qml:27
 #: plugins/language//SpellChecking.qml:36
 msgid "Spell checking"
-msgstr "맞춤법 검사"
+msgstr ""
 
 #: plugins/language//PageComponent.qml:120
 msgid "Auto completion"
-msgstr "자동 완성"
+msgstr ""
 
 #: plugins/language//PageComponent.qml:130
 msgid "Word suggestions"
-msgstr "단어 추천"
+msgstr ""
 
 #: plugins/language//PageComponent.qml:143
 msgid "Auto capitalization"
-msgstr "자동 대문자화"
+msgstr ""
 
 #: plugins/language//PageComponent.qml:153
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "문장의 첫 글자를 자동으로 대문자화합니다."
+msgstr ""
 
 #: plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr "현재 맞춤법 검사 언어:"
+msgstr ""
 
 #: plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
-msgstr "사용 가능한 언어:"
+msgstr ""
 
 #: plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr "표시 언어"
+msgstr ""
 
 #: plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
-msgstr "확인"
+msgstr ""
 
 #: plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr "현재 레이아웃:"
+msgstr ""
 
 #: plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr "사용 가능한 레이아웃:"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: plugins/battery//PageComponent.qml:34
 #: settings.js:54
 msgid "Battery"
-msgstr "배터리"
+msgstr ""
 
 #. TRANSLATORS: %1 is the number of seconds
 #: plugins/battery//PageComponent.qml:46
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] "%1 초 전"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] "%1 분 전"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of hours
 #: plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] "%1 시간 전"
+msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: %1 is the number of days
 #: plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] "%1 일 전"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/battery//PageComponent.qml:75
 msgid "Charging now"
-msgstr "충전중"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
-msgstr "마지막 완전 충전"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
-msgstr "완전히 충전됨"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:111
 msgid "Charge level"
-msgstr "충전 상태 단계"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:117
 #: plugins/battery//PageComponent.qml:224
 #: plugins/cellular//PageComponent.qml:129
 #: plugins/about//Storage.qml:204
 msgid "N/A"
-msgstr "없음"
+msgstr ""
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: plugins/battery//PageComponent.qml:120
 #, qt-format
 msgid "%1%"
-msgstr "%1%"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:229
 msgid "Ways to reduce battery use:"
-msgstr "배터리 사용량을 줄이는 방법"
+msgstr ""
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/battery//PageComponent.qml:246
@@ -597,7 +597,8 @@ msgstr "배터리 사용량을 줄이는 방법"
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] "%1 분 후"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/battery//PageComponent.qml:249
 #: plugins/battery//PageComponent.qml:258
@@ -607,14 +608,14 @@ msgstr[0] "%1 분 후"
 #: plugins/system-update//Configuration.qml:53
 #: plugins/about//PageComponent.qml:128
 msgid "Never"
-msgstr "절대로 사용하지 않음"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: plugins/battery//PageComponent.qml:268
 #: plugins/wifi//PageComponent.qml:26
 #: settings.js:60
 msgid "Wi-Fi"
-msgstr "Wi-Fi"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: plugins/battery//PageComponent.qml:298
@@ -622,133 +623,133 @@ msgstr "Wi-Fi"
 #: plugins/bluetooth//PageComponent.qml:130
 #: settings.js:126
 msgid "Bluetooth"
-msgstr "블루투스"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:329
 msgid "GPS"
-msgstr "GPS"
+msgstr ""
 
 #: plugins/battery//PageComponent.qml:348
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "정확한 위치를 파악하기 위해서는 GPS와/또는 Wi-Fi가 필요합니다."
+msgstr ""
 
 #: plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr "휴대전화를 사용하지 않을때 잠금:"
+msgstr ""
 
 #: plugins/battery//SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr "휴대전화를 사용하지 않을 때 잠자기 모드로 전환:"
+msgstr ""
 
 #: plugins/battery//SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
-msgstr "시간이 짧을수록 더 안전합니다. 통화중이거나 동영상을 재생하고 있을 때는 휴대전화가 잠기지 않습니다."
+msgstr ""
 
 #: plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr "통화 중이거나 동영상을 재생하고 있을때에는 잠자기모드로 전환되지 않습니다."
+msgstr ""
 
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr "이전에 사용한 네트워크"
+msgstr ""
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr "다른 네트워크"
+msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr "네트워크 이름"
+msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr "보안"
+msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr "WPA-개인 또는 WPA2-개인"
+msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr "WEP"
+msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr "암호"
+msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr "암호를 보여주기"
+msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr "접속"
+msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr "네트워크 정보"
+msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
 msgid "Name"
-msgstr "이름"
+msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr "마지막으로 연결"
+msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr "암호 표시"
+msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr "네트워크를 저장하지 않기"
+msgstr ""
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
 #, qt-format
 msgid "%1 Services"
-msgstr "%1 서비스"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: plugins/phone//PageComponent.qml:28
 #: plugins/bluetooth//PageComponent.qml:82
 #: settings.js:72
 msgid "Phone"
-msgstr "휴대전화"
+msgstr ""
 
 #: plugins/phone//PageComponent.qml:30
 msgid "SIM"
-msgstr "심 (SIM) 카드"
+msgstr ""
 
 #: plugins/phone//PageComponent.qml:46
 #: plugins/phone//CallForwarding.qml:27
 #: plugins/phone//CallForwarding.qml:60
 msgid "Call forwarding"
-msgstr "착신전환"
+msgstr ""
 
 #: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
 #: plugins/phone//CallWaiting.qml:53
 msgid "Call waiting"
-msgstr "통화 대기"
+msgstr ""
 
 #: plugins/phone//ServiceInfo.qml:35
 msgid "Call"
-msgstr "전화"
+msgstr ""
 
 #: plugins/phone//CallForwarding.qml:74
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
-msgstr "전화를 받지 못하거나 통화 중인 경우, 또는 휴대 전화가 서비스 지역을 이탈한 경우에 다른 번호로 전달합니다."
+msgstr ""
 
 #: plugins/phone//CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
-msgstr "착신 전환 설정을 확인할 수 없습니다. 나중에 다시 시도해 주십시오."
+msgstr ""
 
 #: plugins/phone//CallForwarding.qml:102
 msgid "Divert to"
@@ -1063,7 +1064,7 @@ msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
 msgid "Network"
-msgstr "네트워크"
+msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
@@ -1252,11 +1253,11 @@ msgstr ""
 #: plugins/about//PageComponent.qml:33
 #: settings.js:144
 msgid "About this phone"
-msgstr "이 폰에 대하여"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:87
 msgid "Serial"
-msgstr "시리얼"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:106 ../plugins/about//Storage.qml:33
 msgid "Storage"
@@ -1268,7 +1269,7 @@ msgstr ""
 
 #: plugins/about//PageComponent.qml:118
 msgid "OS"
-msgstr "OS"
+msgstr ""
 
 #: plugins/about//PageComponent.qml:127
 msgid "Last updated"
@@ -1340,7 +1341,7 @@ msgstr ""
 
 #: src/qml/MainWindow.qml:154
 msgid "System"
-msgstr "시스템"
+msgstr ""
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"

@@ -53,12 +53,10 @@ LocalComponents.Page {
 
             width: parent.width
             wrapMode: Text.WordWrap
-            fontSize: "large"
-            text: i18n.tr("Don’t worry, you can insert a SIM card later.") +
-                  "\n\n" +
-                  i18n.tr("For the time being, you won’t have phone or SMS features.") +
-                  "\n\n" +
-                  i18n.tr("You can find a SIM in your phone package or contact your provider.")
+            textFormat: Text.StyledText
+            text: i18n.tr("To use the telephone and SMS features a SIM must be installed.") +
+                  "<br><br>" +
+                  "<b>" + i18n.tr("Install a SIM before continuing.") + "</b>"
         }
     }
 
