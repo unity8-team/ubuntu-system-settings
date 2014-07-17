@@ -44,6 +44,7 @@ Item {
         }
 
         Label {
+            id: label
             anchors.horizontalCenter: parent.horizontalCenter
             text: i18n.dtr(model.item.translations, model.displayName)
             width: col.width
@@ -56,7 +57,13 @@ Item {
     MouseArea {
         anchors.fill: parent
         onClicked: root.clicked()
-        onPressed: root.opacity = 0.9
-        onReleased: root.opacity = 1.0
+        onPressed: {
+		label.color = "blue"
+		icon.color = "blue"
+	}
+        onReleased: {
+		label.color = "gray"
+		icon.color = "gray"
+	}
     }
 }

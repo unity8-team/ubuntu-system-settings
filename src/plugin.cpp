@@ -240,7 +240,7 @@ QQmlComponent *Plugin::entryComponent()
         return d->m_item->entryComponent(context->engine(), this);
     } else {
         return new QQmlComponent(context->engine(),
-                                 QUrl("file:///home/EntryComponent.qml"),
+                                 QUrl("qrc:/qml/EntryComponent.qml"),
                                  this);
     }
 }
