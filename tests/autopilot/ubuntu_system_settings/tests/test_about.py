@@ -5,6 +5,9 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
+import datetime
+import dateutil.parser
+import locale
 import os
 import subprocess
 import unittest
@@ -152,11 +155,12 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
         if info == 'Unknown':
             return _('Never')
         else:
-            return str(info.split()[0])
+            return dateutil.parser.parse(info.split()[0])
 
     def test_last_updated(self):
         """Checks whether Last Updated info is correct."""
-        last_updated_date_displayed = self.about_page.get_last_updated_date()
+        last_updated_date_displayed = \
+            dateutil.parser.parse(self.about_page.get_last_updated_date())
         self.assertEquals(
             last_updated_date_displayed, self._get_last_updated_date())
 

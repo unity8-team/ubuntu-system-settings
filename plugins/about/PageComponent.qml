@@ -145,8 +145,8 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: updateBackend.lastUpdateDate && updateBackend.lastUpdateDate != 'Unknown' ?
-                    updateBackend.lastUpdateDate : i18n.tr("Never")
+                value: updateBackend.lastUpdateDate && !isNaN(updateBackend.lastUpdateDate) ?
+                    Qt.formatDate(updateBackend.lastUpdateDate) : i18n.tr("Never")
             }
 
             ListItem.SingleControl {

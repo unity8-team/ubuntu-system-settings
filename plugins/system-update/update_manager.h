@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QtQml>
+#include <QDateTime>
 #include <QHash>
 #include <QList>
 #include <QVariant>
@@ -54,7 +55,7 @@ class UpdateManager : public QObject
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
     Q_PROPERTY(int currentBuildNumber READ currentBuildNumber CONSTANT)
-    Q_PROPERTY(QString lastUpdateDate READ lastUpdateDate CONSTANT)
+    Q_PROPERTY(QDateTime lastUpdateDate READ lastUpdateDate CONSTANT)
     Q_PROPERTY(QString currentUbuntuBuildNumber READ currentUbuntuBuildNumber
                NOTIFY versionChanged)
     Q_PROPERTY(QString currentDeviceBuildNumber READ currentDeviceBuildNumber
@@ -87,7 +88,7 @@ public:
     int downloadMode() { return m_systemUpdate.downloadMode(); }
     void setDownloadMode(int mode) { m_systemUpdate.setDownloadMode(mode); }
     int currentBuildNumber() { return m_systemUpdate.currentBuildNumber(); }
-    QString lastUpdateDate() { return m_systemUpdate.lastUpdateDate(); }
+    QDateTime lastUpdateDate() { return m_systemUpdate.lastUpdateDate(); }
     QString currentUbuntuBuildNumber() { return m_systemUpdate.currentUbuntuBuildNumber(); }
     QString currentDeviceBuildNumber() { return m_systemUpdate.currentDeviceBuildNumber(); }
 
