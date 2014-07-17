@@ -21,7 +21,6 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import "data-helpers.js" as DataHelpers
-//import "dualdata-helpers.js" as DualDataHelpers
 
 Column {
 
@@ -38,7 +37,7 @@ Column {
     }
 
     // returns the first powered modem
-    // TODO: make this saner
+    // TODO: make this saner/conform to some sort of user preference
     function getPoweredModem () {
         if (sim1.connMan.powered) {
             return sim1;
@@ -49,12 +48,12 @@ Column {
         }
     }
 
-    function getRadioSettings () {
+    function getTechnologyPreference () {
         var poweredModem = getPoweredModem();
         if (poweredModem) {
-            return poweredModem.radioSettings;
+            return poweredModem.radioSettings.technologyPreference;
         } else {
-            return null;
+            return "";
         }
     }
 
@@ -64,7 +63,7 @@ Column {
 
     property bool dataEnabled: getPoweredModem()
     property bool roamingAllowed: getRoamingAllowed()
-    property var radioSettings: getRadioSettings()
+    property string radioSettings: getTechnologyPreference()
 
     ListItem.ItemSelector {
         id: use
@@ -83,6 +82,7 @@ Column {
             }
         }
         model: [i18n.tr("Off"), sim1.title, sim2.title]
+        onDelegateClicked: DataHelpers.simSelectorClicked(index)
     }
 
     ListItem.ItemSelector {
@@ -92,9 +92,9 @@ Column {
         model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
 
         // technologyPreference "" is not valid, assume sim locked or data unavailable
-        enabled: radioSettings && radioSettings.technologyPreference !== ""
+        enabled: getPoweredModem() && (getTechnologyPreference() !== "")
         selectedIndex: {
-            var pref = radioSettings ? radioSettings.technologyPreference : "";
+            var pref = getTechnologyPreference();
             // make nothing selected if the string from OfonoRadioSettings is empty
             if (pref === "") {
                 console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");

@@ -95,11 +95,21 @@ function poweredChanged (powered) {
 }
 
 /* handler for when user clicks the TechnologyPreference item selector */
-function delegateClicked (index) {
+function techSelectorClicked (index) {
     console.warn('delegateClicked', index);
     // if the user selects a TechnologyPreference, update RadioSettings
     if (index > 0) {
         radioSettings.technologyPreference = indexToKey(index);
         console.warn('delegateClicked setting TechnologyPreference to', indexToKey(index));
     }
+}
+
+function dualTechSelectorClicked (index) {
+
+}
+
+function simSelectorClicked (i) {
+    console.warn('simSelectorClicked', i);
+    sim1.connMan.powered = (i === 1);
+    sim2.connMan.powered = (i === 2);
 }

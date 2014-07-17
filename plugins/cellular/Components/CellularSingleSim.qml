@@ -54,7 +54,7 @@ Column {
                 return DataHelpers.keyToIndex(DataHelpers.normalizeKey(pref));
             }
         }
-        onDelegateClicked: DataHelpers.delegateClicked(index)
+        onDelegateClicked: DataHelpers.techSelectorClicked(index)
     }
 
     Connections {

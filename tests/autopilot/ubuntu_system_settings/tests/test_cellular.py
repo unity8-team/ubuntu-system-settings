@@ -147,16 +147,16 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             raises(StateNotFoundError)
         )
 
-    def test_one_modem(self):
-        sleep(5)
-        self.assertTrue(False)
+    # def test_one_modem(self):
+    #     sleep(5)
+    #     self.assertTrue(False)
 
-    def test_two_modems(self):
-        self.mock_for_dual_sim()
+    # def test_two_modems(self):
+    #     self.mock_for_dual_sim()
 
-        sleep(3)
+    #     sleep(3)
 
-        self.assertTrue(False)
+    #     self.assertTrue(False)
 
     def test_set_modem_offline(self):
         self.select_preference(PREFERENCE_OFF)
