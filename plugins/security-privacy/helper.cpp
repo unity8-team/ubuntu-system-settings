@@ -17,11 +17,16 @@
 #include "polkitlistener.h"
 #include <iostream>
 
+#define SUCCESS         0
+#define CANNOT_RUN      1
+#define CANNOT_REGISTER 2
+#define CANNOT_INIT     3
+
 int main()
 {
     UssPolkitListener *polkitListener = uss_polkit_listener_new();
     if (polkitListener == nullptr)
-        return 3;
+        return CANNOT_INIT;
 
     // Read pid
     std::string pid;
@@ -34,14 +39,14 @@ int main()
     uss_polkit_listener_set_password(polkitListener, password.c_str());
 
     if (!uss_polkit_listener_register(polkitListener))
-        return 2;
+        return CANNOT_REGISTER;
 
     // Tell caller that we're ready to start
     std::cout << "ready" << std::endl;
 
     if (!uss_polkit_listener_run(polkitListener))
-        return 1;
+        return CANNOT_RUN;
 
     uss_polkit_listener_free(polkitListener);
-    return 0;
+    return SUCCESS;
 }
