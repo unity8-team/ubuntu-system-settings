@@ -19,6 +19,7 @@
 */
 
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 
 #include "notification_manager.h"
 #include "notification_item.h"
@@ -28,6 +29,8 @@
 #define CLICK_COMMAND "click"
 #define BLACKLIST_CONFIG_SCHEMA_ID "com.ubuntu.touch.notifications"
 #define BLACKLIST_KEY "popup-blacklist"
+
+const char *app_data_from_desktop_id (const char* desktop_id);
 
 namespace NotificationsPlugin {
 
@@ -67,7 +70,6 @@ void NotificationsManager::loadModel()
     gchar *app;
     m_blacklist.clear();
     while (g_variant_iter_loop (iter, "(ss)", &pkg, &app)) {
-        std::cout << pkg << app;
         m_blacklist[QString(pkg)+"_"+app] = true;
     }
     g_variant_iter_free (iter);
@@ -85,8 +87,8 @@ void NotificationsManager::loadModel()
         QJsonObject object = array.at(i).toObject();
 
         QString pkgname = object.value("name").toString();
-        QString title = object.value("title").toString();
         QString icon = object.value("icon").toString();
+        QString version = object.value("version").toString();
         if (icon.isEmpty()) {icon = "distributor-logo";};
 
         // This iterates over apps
@@ -94,14 +96,21 @@ void NotificationsManager::loadModel()
         QList<QString> keys = hooks.keys();
         for (int j = 0; j < keys.size(); ++j) {
             QString key = pkgname+"_"+keys.at(j);
-            // FIXME: get the real app name from the .desktop file in the hook dictionary
-            std::cout << "key: " << key.toStdString() <<"\n";
-            NotificationItem *item = new NotificationItem();
-            bool blacklisted = m_blacklist.contains(key);
-            item->setItemData(title, icon, blacklisted, key);
-            m_model.append(QVariant::fromValue(item));
-            connect(item, &NotificationItem::updateNotificationStatus,
-                    this, &NotificationsManager::checkUpdates);
+            QVariantMap hook = hooks.value(keys.at(j)).toMap();
+            // If this hooks section has a "desktop" key, then it's "an app"
+            if (hook.contains("desktop")) {
+                QString appid = key+"_"+version+".desktop";
+                const char *display_name = app_data_from_desktop_id(appid.toUtf8().constData());
+                NotificationItem *item = new NotificationItem();
+                bool blacklisted = m_blacklist.contains(key);
+                item->setItemData(QString(display_name), icon, blacklisted, key);
+                m_model.append(QVariant::fromValue(item));
+                connect(item, &NotificationItem::updateNotificationStatus,
+                        this, &NotificationsManager::checkUpdates);
+            }
+            else {
+            }
+
         }
     }
     Q_EMIT modelChanged();
@@ -109,7 +118,20 @@ void NotificationsManager::loadModel()
 
 void NotificationsManager::checkUpdates(QString id, bool value)
 {
-    std::cout << id.toStdString() << value;
+    std::cout << "CU" << id.toStdString() << value << "\n\n";
 }
 
+}
+
+const char *app_data_from_desktop_id (const char* desktop_id) {
+    GAppInfo* app_info = (GAppInfo*)g_desktop_app_info_new(desktop_id);
+    if (app_info != NULL) {
+        return g_app_info_get_display_name(app_info);
+//         GIcon* icon = g_app_info_get_icon (app_info);
+//         if (icon != NULL) {
+//             icon_fname = g_icon_to_string (icon);
+//             // g_app_info_get_icon has "transfer none"
+//         }
+        g_object_unref (app_info);
+    }
 }
