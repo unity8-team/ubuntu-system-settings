@@ -24,8 +24,6 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 import QMenuModel 0.1
-import "rdosettings-helpers.js" as RSHelpers
-import "modem-helpers.js" as ModemHelpers
 import "Components"
 
 ItemPage {
@@ -44,7 +42,8 @@ ItemPage {
         State {
             name: "dualSim"
             PropertyChanges { target: cellData; source: "Components/CellularDualSim.qml" }
-            PropertyChanges { target: sim2Loader; source: "Components/Sim.qml" }
+            // dynamically load ofono bindings for second sim
+            PropertyChanges { target: secondSimLoader; source: "Components/Sim.qml" }
             when: manager.modems.length === 2
         }
     ]
@@ -66,29 +65,34 @@ ItemPage {
         id: manager
     }
 
+    // ofono bindings of first sim
     Sim {
         id: sim1
+        // TODO: replace with user chosen name
         name: "SIM 1"
         path: manager.modems[0]
     }
 
+    // ofono bindings for a second sim, dynamically loaded
     Loader {
-        id: sim2Loader
+        id: secondSimLoader
         onLoaded: {
-            sim2Path.target = sim2Loader.item;
-            sim2Name.target = sim2Loader.item;
-            root.sims = [sim1, sim2Loader.item]
+            secondSimPath.target = secondSimLoader.item;
+            secondSimName.target = secondSimLoader.item;
+            root.sims = [sim1, secondSimLoader.item]
         }
     }
 
+    // if second modem, bind its path to sim2
     Binding {
-        id: sim2Path
+        id: secondSimPath
         property: "path"
         value: manager.modems[1]
     }
 
+    // if second modem, bind its name to sim2
     Binding {
-        id: sim2Name
+        id: secondSimName
         property: "name"
         value: "SIM 2"
     }
@@ -167,7 +171,7 @@ ItemPage {
                 text: i18n.tr("Carrier", "Carriers", manager.modems.length);
                 objectName: "chooseCarrier"
                 value: {
-                    if (manager.modems.length === 1) {
+                    if (root.state === 'singleSim') {
                         return netReg.name ? netReg.name : i18n.tr("N/A")
                     } else {
                         return ''
@@ -175,12 +179,12 @@ ItemPage {
                 }
                 progression: enabled
                 onClicked: {
-                    if (manager.modems.length === 1) {
+                    if (root.state === 'singleSim') {
                         pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {
                             netReg: netReg,
                             title: i18n.tr("Carrier")
                         })
-                    } else if (manager.modems.length === 2) {
+                    } else if (root.state === 'dualSim') {
                         pageStack.push(Qt.resolvedUrl("ChooseCarriers.qml"), {
                             netReg: netReg,
                             sim1: sims[0],

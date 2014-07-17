@@ -31,23 +31,20 @@ Column {
     function getRoamingAllowed () {
         var poweredModem = getPoweredModem();
         if (poweredModem) {
-            console.warn('getRoamingAllowed returns', poweredModem.connMan.roamingAllowed);
             return poweredModem.connMan.roamingAllowed;
         } else {
-            console.warn('getRoamingAllowed returns false');
             return false;
         }
     }
 
+    // returns the first powered modem
+    // TODO: make this saner
     function getPoweredModem () {
         if (sim1.connMan.powered) {
-            console.warn('getPoweredModem: sim1 is powered');
             return sim1;
         } else if (sim2.connMan.powered) {
-            console.warn('getPoweredModem: sim2 is powered');
             return sim2;
         } else {
-            console.warn('getPoweredModem: no sim is powered');
             return null;
         }
     }
@@ -55,10 +52,8 @@ Column {
     function getRadioSettings () {
         var poweredModem = getPoweredModem();
         if (poweredModem) {
-            console.warn('getRadioSettings returns actual radioSettings', poweredModem.radioSettings);
             return poweredModem.radioSettings;
         } else {
-            console.warn('getRadioSettings returns null');
             return null;
         }
     }
@@ -96,19 +91,19 @@ Column {
         expanded: true
         model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
 
-        // // technologyPreference "" is not valid, assume sim locked or data unavailable
-        // enabled: radioSettings && radioSettings.technologyPreference !== ""
-        // selectedIndex: {
-        //     var pref = radioSettings ? radioSettings.technologyPreference : "";
-        //     // make nothing selected if the string from OfonoRadioSettings is empty
-        //     if (pref === "") {
-        //         console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
-        //         return -1;
-        //     } else {
-        //         // normalizeKey turns "lte" and "umts" into "any"
-        //         return DataHelpers.keyToIndex(DataHelpers.normalizeKey(pref));
-        //     }
-        // }
-        // onDelegateClicked: DataHelpers.delegateClicked(index)
+        // technologyPreference "" is not valid, assume sim locked or data unavailable
+        enabled: radioSettings && radioSettings.technologyPreference !== ""
+        selectedIndex: {
+            var pref = radioSettings ? radioSettings.technologyPreference : "";
+            // make nothing selected if the string from OfonoRadioSettings is empty
+            if (pref === "") {
+                console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
+                return -1;
+            } else {
+                // normalizeKey turns "lte" and "umts" into "any"
+                return DataHelpers.keyToIndex(DataHelpers.normalizeKey(pref));
+            }
+        }
+        onDelegateClicked: DataHelpers.delegateClicked(index)
     }
 }
