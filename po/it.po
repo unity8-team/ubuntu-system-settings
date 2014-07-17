@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-09 07:49+0000\n"
+"PO-Revision-Date: 2014-07-16 14:38+0000\n"
 "Last-Translator: Claudio Arseni <claudio.arseni@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-10 07:29+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-17 06:36+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -1266,7 +1266,7 @@ msgstr "Numero versione (build) SO"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Partizione di Ubuntu"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
@@ -1274,7 +1274,7 @@ msgstr "Descrizione versione (build) Ubuntu"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Partizione del dispositivo"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
@@ -1282,7 +1282,7 @@ msgstr "Descrizione versione (build) dispositivo"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Partizione personalizzata"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33

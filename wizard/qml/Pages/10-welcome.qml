@@ -18,19 +18,24 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
-import Ubuntu.SystemSettings.Phone 1.0
+import MeeGo.QOfono 0.2
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Hello!")
+    title: i18n.tr("Hello")
     forwardButtonSourceComponent: forwardButton
 
     UbuntuLanguagePlugin {
         id: plugin
     }
 
-    SimManager {
+    OfonoManager {
+        id: manager
+    }
+
+    OfonoSimManager {
         id: simManager
+        modemPath: manager.modems[0]
     }
 
     Item {
@@ -52,8 +57,7 @@ LocalComponents.Page {
                 width: content.width
                 wrapMode: Text.WordWrap
                 fontSize: "large"
-                text: i18n.tr("Welcome to Ubuntu.") + "\n" +
-                      i18n.tr("Let’s get started.")
+                text: i18n.tr("Welcome to your Ubuntu phone. Let’s get started.")
             }
 
             OptionSelector {
@@ -75,7 +79,7 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         LocalComponents.ForwardButton {
-            text: i18n.tr("Continue")
+            text: i18n.tr("Start")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
                 if (simManager.present)
