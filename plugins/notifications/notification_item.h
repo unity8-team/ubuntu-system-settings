@@ -34,6 +34,7 @@ class NotificationItem : public QObject
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)
     Q_PROPERTY(bool status READ status WRITE setStatus NOTIFY statusChanged)
+    Q_PROPERTY(QString key MEMBER m_key)
 
 Q_SIGNALS:
     void statusChanged();
@@ -44,7 +45,7 @@ Q_SIGNALS:
 public:
     explicit NotificationItem(QObject *parent = 0);
     virtual ~NotificationItem();
-    void setItemData(QString title, QString icon, bool status);
+    void setItemData(QString title, QString icon, bool status, QString key);
 
     bool status() { return m_status; }
     QString title() { return m_title; }
@@ -55,6 +56,7 @@ public:
 private:
     QString m_title;
     QString m_icon;
+    QString m_key;
     bool m_status;
 };
 

@@ -31,11 +31,12 @@ NotificationItem::~NotificationItem()
 {
 }
 
-void NotificationItem::setItemData(QString title, QString icon, bool status)
+void NotificationItem::setItemData(QString title, QString icon, bool status, QString key)
 {
     m_title = title;
     m_icon = icon;
     m_status = status;
+    m_key = key;
     Q_EMIT titleChanged();
     Q_EMIT iconChanged();
     Q_EMIT statusChanged();

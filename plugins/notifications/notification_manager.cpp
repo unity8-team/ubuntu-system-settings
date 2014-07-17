@@ -22,12 +22,12 @@
 
 #include "notification_manager.h"
 #include "notification_item.h"
-#include <QDebug>
 #include <iostream>
 
 
 #define CLICK_COMMAND "click"
 #define BLACKLIST_CONFIG_SCHEMA_ID "com.ubuntu.touch.notifications"
+#define BLACKLIST_KEY "popup-blacklist"
 
 namespace NotificationsPlugin {
 
@@ -60,6 +60,18 @@ void NotificationsManager::loadModel()
 {
     // Load the blacklist
 
+    GVariant *blacklist = g_settings_get_value(m_pushSettings, BLACKLIST_KEY);
+    GVariantIter *iter;
+    g_variant_get (blacklist, "a(ss)", &iter);
+    gchar *pkg;
+    gchar *app;
+    m_blacklist.clear();
+    while (g_variant_iter_loop (iter, "(ss)", &pkg, &app)) {
+        std::cout << pkg << app;
+        m_blacklist[QString(pkg)+"_"+app] = true;
+    }
+    g_variant_iter_free (iter);
+    g_variant_unref (blacklist);
 
     // LOAD ALL THE APPS
     // XXX: maybe this should only load the apps that have the right
@@ -69,20 +81,30 @@ void NotificationsManager::loadModel()
     QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
     QJsonArray array = document.array();
 
-    int i;
-    for (i = 0; i < array.size(); i++) {
+    for (int i = 0; i < array.size(); i++) { // This iterates over packages
         QJsonObject object = array.at(i).toObject();
+
+        QString pkgname = object.value("name").toString();
         QString title = object.value("title").toString();
-        QString icon = object.value("icon").toString(); //+"/"+object.value("icon").toString();
+        QString icon = object.value("icon").toString();
         if (icon.isEmpty()) {icon = "distributor-logo";};
-        NotificationItem *item = new NotificationItem();
-        item->setItemData(title, icon, false);
-        m_model.append(QVariant::fromValue(item));
-        connect(item, &NotificationItem::updateNotificationStatus,
-                this, &NotificationsManager::checkUpdates);
+
+        // This iterates over apps
+        QVariantMap hooks = object.value("hooks").toObject().toVariantMap();
+        QList<QString> keys = hooks.keys();
+        for (int j = 0; j < keys.size(); ++j) {
+            QString key = pkgname+"_"+keys.at(j);
+            // FIXME: get the real app name from the .desktop file in the hook dictionary
+            std::cout << "key: " << key.toStdString() <<"\n";
+            NotificationItem *item = new NotificationItem();
+            bool blacklisted = m_blacklist.contains(key);
+            item->setItemData(title, icon, blacklisted, key);
+            m_model.append(QVariant::fromValue(item));
+            connect(item, &NotificationItem::updateNotificationStatus,
+                    this, &NotificationsManager::checkUpdates);
+        }
     }
     Q_EMIT modelChanged();
-
 }
 
 void NotificationsManager::checkUpdates(QString id, bool value)

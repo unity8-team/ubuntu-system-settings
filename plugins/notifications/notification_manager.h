@@ -22,6 +22,7 @@
 #define NOTIFICATIONMANAGER_H
 
 #include <QObject>
+#include <QMap>
 #include <QtQml>
 #include <QList>
 #include <QVariant>
@@ -53,6 +54,7 @@ private:
     QVariantList m_model;
     QProcess m_process;
     GSettings *m_pushSettings;
+    QMap <QString, bool> m_blacklist;
 };
 
 }
