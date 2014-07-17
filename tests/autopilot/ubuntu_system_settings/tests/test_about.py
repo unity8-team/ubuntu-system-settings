@@ -155,12 +155,13 @@ class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
         if info == 'Unknown':
             return _('Never')
         else:
-            return dateutil.parser.parse(info.split()[0])
+            return dateutil.parser.parse(info.split()[0]).date()
 
     def test_last_updated(self):
         """Checks whether Last Updated info is correct."""
         last_updated_date_displayed = \
-            dateutil.parser.parse(self.about_page.get_last_updated_date())
+            dateutil.parser.parse(
+                self.about_page.get_last_updated_date()).date()
         self.assertEquals(
             last_updated_date_displayed, self._get_last_updated_date())
 
