@@ -184,7 +184,6 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
     QProcess polkitHelper;
     polkitHelper.setProgram(HELPER_EXEC);
     polkitHelper.start();
-    polkitHelper.write(QString::number(getpid()).toUtf8() + "\n");
     polkitHelper.write(password.toUtf8() + "\n");
     polkitHelper.closeWriteChannel();
 

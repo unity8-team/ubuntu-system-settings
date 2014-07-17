@@ -104,7 +104,7 @@ bool uss_polkit_listener_register(UssPolkitListener *listener)
 {
     UssPolkitListenerPrivate *priv = listener->priv;
 
-    PolkitSubject *subject = polkit_unix_process_new_for_owner(priv->pid, 0, -1);
+    PolkitSubject *subject = polkit_unix_process_new_for_owner(priv->pid, 0, getuid());
     priv->registration = polkit_agent_listener_register(POLKIT_AGENT_LISTENER(listener),
                                                         POLKIT_AGENT_REGISTER_FLAGS_RUN_IN_THREAD,
                                                         subject, NULL, NULL, NULL);

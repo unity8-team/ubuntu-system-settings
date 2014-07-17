@@ -16,11 +16,13 @@
 
 #include "polkitlistener.h"
 #include <iostream>
+#include <unistd.h>
 
 #define SUCCESS         0
 #define CANNOT_RUN      1
 #define CANNOT_REGISTER 2
 #define CANNOT_INIT     3
+#define BAD_PPID        4
 
 int main()
 {
@@ -28,10 +30,11 @@ int main()
     if (polkitListener == nullptr)
         return CANNOT_INIT;
 
-    // Read pid
-    std::string pid;
-    std::getline(std::cin, pid);
-    uss_polkit_listener_set_pid(polkitListener, atoi(pid.c_str()));
+    // Get pid
+    pid_t ppid = getppid();
+    if (ppid == 1)
+        return BAD_PPID;
+    uss_polkit_listener_set_pid(polkitListener, ppid);
 
     // Read password
     std::string password;
