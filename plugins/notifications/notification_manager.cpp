@@ -184,7 +184,7 @@ void NotificationsManager::checkUpdates(QString key, bool value)
     GVariantBuilder *builder = g_variant_builder_new(G_VARIANT_TYPE("a(ss)"));
     QList<QString> keys = m_blacklist.keys();
     for (int j = 0; j < keys.size(); ++j) {
-        // Keys are package_app
+        // Keys are in the form package::::app for click or appid::::appid for legacy apps
         QStringList splitted = keys.at(j).split("::::");
         if (splitted.count() != 2) {
             // Should never ever ever ever ever happen
