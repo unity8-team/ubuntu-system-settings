@@ -44,6 +44,10 @@ void app_data_from_desktop_id (const char* desktop_id, char **display_name, char
         }
         g_object_unref (app_info);
     }
+    else {
+        *display_name = NULL;
+        *icon_fname = NULL;
+    }
 }
 
 
@@ -84,7 +88,7 @@ void NotificationsManager::loadModel()
     gchar *app;
     m_blacklist.clear();
     while (g_variant_iter_loop (iter, "(ss)", &pkg, &app)) {
-        m_blacklist[QString(pkg)+"_"+app] = true;
+        m_blacklist[QString(pkg)+"::::"+app] = true;
     }
     g_free(pkg);
     g_free(app);
@@ -122,13 +126,17 @@ void NotificationsManager::loadModel()
         // It has a helper, so add items for all entries that have
         // a "desktop" key.
         for (int j = 0; j < keys.size(); ++j) {
-            QString key = pkgname+"_"+keys.at(j);
-            QVariantMap hook = hooks.value(keys.at(j)).toMap();
+            QString appname = keys.at(j);
+            QString key = pkgname+"::::"+appname;
+            QVariantMap hook = hooks.value(appname).toMap();
             if (hook.contains("desktop")) {
-                QString appid = key+"_"+version+".desktop"; // Full versioned APP_ID + ".desktop"
+                QString appid = pkgname+"_"+appname+"_"+version+".desktop"; // Full versioned APP_ID + ".desktop"
                 char *display_name;
                 char *icon_fname;
                 app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
+                if (!display_name || !icon_fname) {
+                    continue; // Broken .desktop file
+                }
                 NotificationItem *item = new NotificationItem();
                 bool blacklisted = m_blacklist.contains(key);
                 item->setItemData(QString(display_name), QString(icon_fname), blacklisted, key);
@@ -140,7 +148,9 @@ void NotificationsManager::loadModel()
             }
         }
     }
+    std::cout << "FLAG7\n\n";
     Q_EMIT modelChanged();
+    std::cout << "FLAG8\n\n";
 }
 
 void NotificationsManager::checkUpdates(QString key, bool value)
@@ -161,10 +171,13 @@ void NotificationsManager::checkUpdates(QString key, bool value)
     QList<QString> keys = m_blacklist.keys();
     for (int j = 0; j < keys.size(); ++j) {
         // Keys are package_app
-        QStringList splitted = keys.at(j).split("_");
+        QStringList splitted = keys.at(j).split("::::");
+        if (splitted.count() != 2) {
+            // Should never ever ever ever ever happen
+            continue;
+        }
         QString pkgname = splitted.at(0);
         QString appname = splitted.at(1);
-        std::cout << "BL" << pkgname.toStdString() << "---" << appname.toStdString() << "\n\n";
         g_variant_builder_add(builder, "(ss)", pkgname.toUtf8().constData(), appname.toUtf8().constData());
     }
     GVariant *bl = g_variant_new("a(ss)", builder);
