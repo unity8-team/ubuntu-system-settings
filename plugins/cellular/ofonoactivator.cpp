@@ -24,12 +24,14 @@
 #include"nm_settings_connection_proxy.h"
 #include<QCoreApplication>
 
+typedef QMap<QString,QVariantMap> Vardict;
+Q_DECLARE_METATYPE(Vardict)
+
+namespace {
+
 QString nmService("org.freedesktop.NetworkManager");
 QString nmSettingsPath("/org/freedesktop/NetworkManager/Settings");
 QString nmPath("/org/freedesktop/NetworkManager");
-
-typedef QMap<QString,QVariantMap> ConfigurationData;
-Q_DECLARE_METATYPE(ConfigurationData)
 
 QDBusObjectPath detectConnection(const QString &ofonoContext) {
     auto ofonoContextBase = ofonoContext.split('/').back();
@@ -91,10 +93,12 @@ void activateOfono(QDBusObjectPath connection, QDBusObjectPath device) {
     nm.ActivateConnection(connection, device, QDBusObjectPath("/"));
 }
 
+}
+
 OfonoActivator::OfonoActivator(QObject *parent) : QObject(parent) {
     static bool isRegistered = false;
     if(!isRegistered) {
-        qDBusRegisterMetaType<ConfigurationData>();
+        qDBusRegisterMetaType<Vardict>();
         isRegistered = true;
     }
 }
