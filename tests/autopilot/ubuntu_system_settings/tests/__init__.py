@@ -46,13 +46,13 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
     """Base class for battery tests that mocks Upower"""
 
     @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
+    def setUpClass(cls):
+        cls.start_system_bus()
+        cls.dbus_con = cls.get_dbus(True)
         # Add a mock Upower environment so we get consistent results
-        (klass.p_mock, klass.obj_upower) = klass.spawn_server_template(
+        (cls.p_mock, cls.obj_upower) = cls.spawn_server_template(
             'upower', {'OnBattery': True}, stdout=subprocess.PIPE)
-        klass.dbusmock = dbus.Interface(klass.obj_upower, dbusmock.MOCK_IFACE)
+        cls.dbusmock = dbus.Interface(cls.obj_upower, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
         self.obj_upower.Reset()
@@ -65,10 +65,10 @@ class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
         )
 
     @classmethod
-    def tearDownClass(klass):
-        klass.p_mock.terminate()
-        klass.p_mock.wait()
-        super(UbuntuSystemSettingsUpowerTestCase, klass).tearDownClass()
+    def tearDownClass(cls):
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
+        super(UbuntuSystemSettingsUpowerTestCase, cls).tearDownClass()
 
 
 class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
@@ -166,13 +166,13 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             ])
 
     @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
+    def setUpClass(cls):
+        cls.start_system_bus()
+        cls.dbus_con = cls.get_dbus(True)
         # Add a mock Ofono environment so we get consistent results
-        (klass.p_mock, klass.obj_ofono) = klass.spawn_server_template(
+        (cls.p_mock, cls.obj_ofono) = cls.spawn_server_template(
             'ofono', stdout=subprocess.PIPE)
-        klass.dbusmock = dbus.Interface(klass.obj_ofono, dbusmock.MOCK_IFACE)
+        cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
         self.obj_ofono.Reset()
@@ -190,10 +190,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
 
     @classmethod
-    def tearDownClass(klass):
-        klass.p_mock.terminate()
-        klass.p_mock.wait()
-        super(UbuntuSystemSettingsOfonoTestCase, klass).tearDownClass()
+    def tearDownClass(cls):
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
+        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
@@ -219,22 +219,22 @@ class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 class AboutSystemImageBaseTestCase(AboutBaseTestCase,
                                    dbusmock.DBusTestCase):
     @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
-        klass.p_mock = klass.spawn_server('com.canonical.SystemImage',
-                                          '/Service',
-                                          'com.canonical.SystemImage',
-                                          system_bus=True,
-                                          stdout=subprocess.PIPE)
-        klass.dbusmock = dbus.Interface(klass.dbus_con.get_object(
+    def setUpClass(cls):
+        cls.start_system_bus()
+        cls.dbus_con = cls.get_dbus(True)
+        cls.p_mock = cls.spawn_server('com.canonical.SystemImage',
+                                      '/Service',
+                                      'com.canonical.SystemImage',
+                                      system_bus=True,
+                                      stdout=subprocess.PIPE)
+        cls.dbusmock = dbus.Interface(cls.dbus_con.get_object(
             'com.canonical.SystemImage',
             '/Service'),
             dbusmock.MOCK_IFACE)
 
         date = datetime.now().replace(microsecond=0).isoformat()
 
-        klass.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
+        cls.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
                                  'ret = (0, "", "", "%s", [])' % date)
 
     def setUp(self):
@@ -244,10 +244,10 @@ class AboutSystemImageBaseTestCase(AboutBaseTestCase,
         super(AboutSystemImageBaseTestCase, self).setUp()
 
     @classmethod
-    def tearDownClass(klass):
-        klass.p_mock.terminate()
-        klass.p_mock.wait()
-        super(AboutSystemImageBaseTestCase, klass).tearDownClass()
+    def tearDownClass(cls):
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
+        super(AboutSystemImageBaseTestCase, cls).tearDownClass()
 
 
 class StorageBaseTestCase(AboutBaseTestCase):
