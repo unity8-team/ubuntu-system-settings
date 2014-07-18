@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-05 16:50+0000\n"
+"PO-Revision-Date: 2014-07-15 16:54+0000\n"
 "Last-Translator: ivarela <ivarela@ubuntu.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:33+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-16 07:26+0000\n"
+"X-Generator: Launchpad (build 17112)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -674,43 +674,43 @@ msgstr "El móvil nun va suspendese durante les llamaes o vídeos."
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "Redes anteriores"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Otra rede"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Nome de rede"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Seguridá"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA y WPA2 personal"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Contraseña visible"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Coneutar"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "Detalles de la rede"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -719,15 +719,15 @@ msgstr "Nome"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "Cabera conexón"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Amosar contraseña"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "Escaecer la rede"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -839,12 +839,12 @@ msgstr "Comprobando anovamientos…"
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Instalar %1 anovamientos…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Instalar %1 anovamientos"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -1252,31 +1252,31 @@ msgstr "Llicencies de software"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "Detalles de la construcción del SO"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "Númberu de la construcción del SO"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Parte de la imaxe d'Ubuntu"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Descripción de la construcción d'Ubuntu"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Parte de la imaxe del preséu"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Descripción de la construcción del preséu"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Parte de la imaxe de la personalización"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1385,12 +1385,16 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"El teléfonu ta configuráu pa unviar automáticamente informes de fallu a "
+"Canonical. Esto pue desactivase nos Axustes del sistema."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"El teléfonu ta configuráu pa deteutar la llocalización. Esto pue desactivase "
+"nos Axustes del sistema."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"

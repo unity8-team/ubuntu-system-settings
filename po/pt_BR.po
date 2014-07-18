@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-02-05 12:24+0000\n"
+"PO-Revision-Date: 2014-07-17 05:39+0000\n"
 "Last-Translator: Pablo Diego Moço <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:35+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-18 05:27+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -44,11 +44,11 @@ msgstr "Vibrar ao tocar"
 #: plugins/sound//PageComponent.qml:97
 #: plugins/sound//PageComponent.qml:130
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "Vibrar em modo silencioso"
 
 #: plugins/sound//PageComponent.qml:102
 msgid "Messages:"
-msgstr ""
+msgstr "Mensagens:"
 
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
@@ -57,7 +57,7 @@ msgstr "Mensagem recebida"
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "Vibrar com som de mensagem"
 
 #: plugins/sound//PageComponent.qml:135
 msgid "Other sounds:"
@@ -674,31 +674,31 @@ msgstr "O telefone não dormirá durante chamadas ou reprodução de vídeos."
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "Redes anteriores"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Outra rede"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Nome da rede"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Segurança"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA & WPA2 pessoal"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Senha"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
@@ -706,11 +706,11 @@ msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Conectar"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "Detalhes da rede"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -723,11 +723,11 @@ msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Mostrar senha"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "Esquecer rede"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -799,7 +799,7 @@ msgstr "Atualizações"
 
 #: plugins/system-update//PageComponent.qml:51
 msgid "Update System"
-msgstr ""
+msgstr "Atualizar o sistema"
 
 #: plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
@@ -811,11 +811,11 @@ msgstr "Instalar e reiniciar"
 
 #: plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
-msgstr ""
+msgstr "Agora não"
 
 #: plugins/system-update//PageComponent.qml:70
 msgid "Install"
-msgstr ""
+msgstr "Instalar"
 
 #: plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
@@ -831,7 +831,7 @@ msgstr ""
 
 #: plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
-msgstr ""
+msgstr "Falha na atualização do sistema."
 
 #: plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
@@ -849,7 +849,7 @@ msgstr ""
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
-msgstr ""
+msgstr "Pausar todos"
 
 #: plugins/system-update//PageComponent.qml:287
 msgid "Retry"
@@ -861,27 +861,27 @@ msgstr "Baixar"
 
 #: plugins/system-update//PageComponent.qml:303
 msgid "Update"
-msgstr ""
+msgstr "Atualizar"
 
 #: plugins/system-update//PageComponent.qml:304
 msgid "Resume"
-msgstr ""
+msgstr "Continuar"
 
 #: plugins/system-update//PageComponent.qml:305
 msgid "Pause"
-msgstr ""
+msgstr "Pausar"
 
 #: plugins/system-update//PageComponent.qml:364
 msgid "Installing"
-msgstr ""
+msgstr "Instalando"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "Instalado"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
-msgstr ""
+msgstr "Versão: "
 
 #: plugins/system-update//PageComponent.qml:446
 #: plugins/system-update//Configuration.qml:30
@@ -898,27 +898,27 @@ msgstr "Sempre"
 
 #: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "Credenciais não encontradas"
 
 #: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
-msgstr ""
+msgstr "Instalando atualização..."
 
 #: plugins/system-update//PageComponent.qml:549
 msgid " bytes"
-msgstr ""
+msgstr " bytes"
 
 #: plugins/system-update//PageComponent.qml:552
 msgid " KiB"
-msgstr ""
+msgstr " KiB"
 
 #: plugins/system-update//PageComponent.qml:555
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #: plugins/system-update//PageComponent.qml:558
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #: plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
@@ -944,7 +944,7 @@ msgstr "Brilho"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Ajustar automaticamente"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
@@ -1166,15 +1166,15 @@ msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Dispositivos conectados:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Conectar um dispositivo diferente:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Conectar outro dispositivo:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1323,7 +1323,7 @@ msgstr "Usado pelo Ubuntu"
 
 #: plugins/about//Storage.qml:88
 msgid "Videos"
-msgstr ""
+msgstr "Vídeos"
 
 #: plugins/about//Storage.qml:89
 msgid "Audio"
@@ -1375,7 +1375,7 @@ msgstr "Sistema"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "Voltar"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
@@ -1395,11 +1395,11 @@ msgstr ""
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "Sem cartão SIM"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Não se preocupe, você pode inserir o cartão SIM mais tarde."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
@@ -1411,7 +1411,7 @@ msgstr ""
 
 #: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Ignorar"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
@@ -1427,7 +1427,7 @@ msgstr ""
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Finalizar"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
@@ -1435,7 +1435,7 @@ msgstr ""
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "Redes disponíveis"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
@@ -1443,7 +1443,7 @@ msgstr ""
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "Olá!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
@@ -1455,7 +1455,7 @@ msgstr ""
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Escolha seu idioma"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1644,7 +1644,7 @@ msgstr "atualizar"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Atualizações disponíveis"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
@@ -1659,7 +1659,7 @@ msgstr "restaurar"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110
 msgid "Flight Mode"
-msgstr ""
+msgstr "Modo avião"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:112
