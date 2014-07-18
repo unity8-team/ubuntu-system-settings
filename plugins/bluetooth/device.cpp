@@ -149,7 +149,7 @@ void Device::callInterface(const QSharedPointer<QDBusInterface> &interface, cons
     m_retryCount = 0;
     while (m_retryCount < 4) {
         reply = interface->call(method);
-        if (reply.isValid()) {
+        if (reply.isValid())
             break;
         QThread::msleep(500);
         m_retryCount++;
