@@ -47,8 +47,6 @@ void app_data_from_desktop_id (const char* desktop_id, char **display_name, char
     }
 }
 
-
-
 // XXX: lots of code copied from the update plugin.
 // XXX: and lots of it is also reimplemented differently
 // XXX: in the about plugin!
@@ -91,7 +89,31 @@ void NotificationsManager::loadModel()
     g_variant_iter_free (iter);
     g_variant_unref (blacklist);
 
-    // Load all the packages
+    // Add legacy dpkg apps
+    QDir legacy_helpers_dir = QDir("/usr/lib/ubuntu-push-client/legacy-helpers/");
+    legacy_helpers_dir.setFilter(QDir::Files);
+    QStringList legacy_helpers = legacy_helpers_dir.entryList();
+    for (int i = 0; i < legacy_helpers.size(); ++i) {
+            QString appid = legacy_helpers.at(i) + ".desktop"; // APP_ID + ".desktop"
+            QString key = appid+"::::"+appid;
+            char *display_name;
+            char *icon_fname;
+            app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
+            if (!display_name || !icon_fname) {
+                continue; // Broken .desktop file
+            }
+            NotificationItem *item = new NotificationItem();
+            bool blacklisted = m_blacklist.contains(key);
+            item->setItemData(QString(display_name), QString(icon_fname), blacklisted, key);
+            g_free(display_name);
+            g_free(icon_fname);
+            m_model.append(QVariant::fromValue(item));
+            connect(item, &NotificationItem::updateNotificationStatus,
+                    this, &NotificationsManager::checkUpdates);
+    }
+
+    // Add Click Packages
+
     QString output(m_process.readAllStandardOutput());
     QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
     QJsonArray array = document.array();
