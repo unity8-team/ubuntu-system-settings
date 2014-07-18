@@ -13,9 +13,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
- * Didier Roche <didier.roche@canonical.com>
- *
 */
 
 #include <QtQml>
@@ -30,7 +27,7 @@ using namespace NotificationsPlugin;
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Notifications"));
-    
+
     qmlRegisterType<NotificationsManager>(uri, 1, 0, "NotificationsManager");
     qmlRegisterType<NotificationItem>(uri, 1, 0, "NotificationItem");
 }
