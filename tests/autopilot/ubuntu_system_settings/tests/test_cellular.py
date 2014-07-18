@@ -9,7 +9,6 @@ import dbus
 from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
-from gi.repository import Gio
 from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import (
@@ -36,21 +35,23 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         try:
             self._pref_selector.get_properties()
         except:
-            self._pref_selector = self.system_settings.main_view.cellular_page.select_single(
-                toolkit_emulators.ItemSelector,
-                objectName="technologyPreferenceSelector"
-            )
+            self._pref_selector = \
+                self.system_settings.main_view.cellular_page.select_single(
+                    toolkit_emulators.ItemSelector,
+                    objectName="technologyPreferenceSelector"
+                )
         return self._pref_selector
 
     def select_preference(self, label):
-        """Helper method that clicks a preference that matches provided label"""
+        """Helper method to click a preference which matches provided label"""
         pref = self.data_preference_selector.select_single('Label', text=label)
         self.system_settings.main_view.pointing_device.click_object(pref)
 
     def assert_selected_preference(self, index):
         """Helper method asserting that the selected data technology preference
         is that of index"""
-        self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
+        self.assertThat(self.data_preference_selector.selectedIndex,
+                        Equals(index))
 
     def navigate_to_manual(self):
         selector = self.system_settings.main_view.cellular_page.select_single(
@@ -150,13 +151,15 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.select_preference(PREFERENCE_2G)
 
         sleep(1)
-        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
+                                                 'TechnologyPreference'))
 
         self.select_preference(PREFERENCE_ANY)
 
         sleep(1)
 
-        self.assertEqual('any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+        self.assertEqual('any', self.modem_0.Get(RDO_IFACE,
+                                                 'TechnologyPreference'))
 
     def test_modem_online_status_insensitive_to_radio_preference(self):
         # turn off cellular data
@@ -203,14 +206,16 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         sleep(1)
 
-        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
+                                                 'TechnologyPreference'))
 
         # assert that the preference is any
         self.assert_selected_preference(1)
 
     def test_ui_if_sim_was_unlocked_on_opening(self):
         '''Like it would if the sim was locked, e.g.'''
-        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', dbus.String('', variant_level=1))
+        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference',
+                         dbus.String('', variant_level=1))
 
         self.system_settings.main_view.go_back()
 

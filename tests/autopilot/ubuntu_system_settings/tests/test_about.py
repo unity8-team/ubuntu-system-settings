@@ -5,9 +5,7 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-import datetime
 import dateutil.parser
-import locale
 import os
 import subprocess
 import unittest
