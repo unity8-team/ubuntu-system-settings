@@ -51,7 +51,7 @@ void app_data_from_desktop_id (const char* desktop_id, char **display_name, char
 // XXX: lots of code copied from the update plugin.
 // XXX: and lots of it is also reimplemented differently
 // XXX: in the about plugin!
-// XXX: And all of it should be replaced with libclick calls
+// XXX: And all of them should be replaced with libclick calls
 // XXX: instead of calling out to the click command
 
 NotificationsManager::NotificationsManager(QObject *parent):
@@ -86,6 +86,8 @@ void NotificationsManager::loadModel()
     while (g_variant_iter_loop (iter, "(ss)", &pkg, &app)) {
         m_blacklist[QString(pkg)+"_"+app] = true;
     }
+    g_free(pkg);
+    g_free(app);
     g_variant_iter_free (iter);
     g_variant_unref (blacklist);
 
@@ -106,7 +108,7 @@ void NotificationsManager::loadModel()
         QList<QString> keys = hooks.keys();
 
         // We need one app that has a push-helper key
-        bool has_helper = true; // FIXME: this is just to check settings, should be false
+        bool has_helper = true; // FIXME: before merging set this to false
         for (int j = 0; j < keys.size(); ++j) {
             QVariantMap hook = hooks.value(keys.at(j)).toMap();
             if (hook.contains("push-helper")) {
@@ -123,7 +125,7 @@ void NotificationsManager::loadModel()
             QString key = pkgname+"_"+keys.at(j);
             QVariantMap hook = hooks.value(keys.at(j)).toMap();
             if (hook.contains("desktop")) {
-                QString appid = key+"_"+version+".desktop";
+                QString appid = key+"_"+version+".desktop"; // Full versioned APP_ID + ".desktop"
                 char *display_name;
                 char *icon_fname;
                 app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
