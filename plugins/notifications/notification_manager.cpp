@@ -30,9 +30,23 @@
 #define BLACKLIST_CONFIG_SCHEMA_ID "com.ubuntu.touch.notifications"
 #define BLACKLIST_KEY "popup-blacklist"
 
-const char *app_data_from_desktop_id (const char* desktop_id);
 
 namespace NotificationsPlugin {
+
+void app_data_from_desktop_id (const char* desktop_id, char **display_name, char **icon_fname) {
+    GAppInfo* app_info = (GAppInfo*)g_desktop_app_info_new(desktop_id);
+    if (app_info != NULL) {
+        *display_name = g_strdup(g_app_info_get_display_name(app_info));
+        GIcon* icon = g_app_info_get_icon (app_info);
+        if (icon != NULL) {
+            *icon_fname = g_icon_to_string (icon);
+            // g_app_info_get_icon has "transfer none"
+        }
+        g_object_unref (app_info);
+    }
+}
+
+
 
 // XXX: lots of code copied from the update plugin.
 // XXX: and lots of it is also reimplemented differently
@@ -100,10 +114,15 @@ void NotificationsManager::loadModel()
             // If this hooks section has a "desktop" key, then it's "an app"
             if (hook.contains("desktop")) {
                 QString appid = key+"_"+version+".desktop";
-                const char *display_name = app_data_from_desktop_id(appid.toUtf8().constData());
+                char *display_name;
+                char *icon_fname;
+                app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
                 NotificationItem *item = new NotificationItem();
                 bool blacklisted = m_blacklist.contains(key);
-                item->setItemData(QString(display_name), icon, blacklisted, key);
+                item->setItemData(QString(display_name), QString(icon_fname), blacklisted, key);
+                std::cout << "ICON:" << icon_fname <<"--\n";
+                g_free(display_name);
+                g_free(icon_fname);
                 m_model.append(QVariant::fromValue(item));
                 connect(item, &NotificationItem::updateNotificationStatus,
                         this, &NotificationsManager::checkUpdates);
@@ -123,15 +142,3 @@ void NotificationsManager::checkUpdates(QString id, bool value)
 
 }
 
-const char *app_data_from_desktop_id (const char* desktop_id) {
-    GAppInfo* app_info = (GAppInfo*)g_desktop_app_info_new(desktop_id);
-    if (app_info != NULL) {
-        return g_app_info_get_display_name(app_info);
-//         GIcon* icon = g_app_info_get_icon (app_info);
-//         if (icon != NULL) {
-//             icon_fname = g_icon_to_string (icon);
-//             // g_app_info_get_icon has "transfer none"
-//         }
-        g_object_unref (app_info);
-    }
-}
