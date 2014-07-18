@@ -31,19 +31,25 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    property var sims: [sim1]
+    property alias sim1: simOneLoader.item
+    property alias sim2: simTwoLoader.item
 
     states: [
         State {
             name: "singleSim"
-            PropertyChanges { target: cellData; source: "Components/CellularSingleSim.qml" }
+            StateChangeScript {
+                name: "loadSim"
+                script: simOneLoader.setSource("Components/Sim.qml", { path: manager.modems[0] })
+            }
             when: manager.modems.length === 1
         },
         State {
             name: "dualSim"
-            PropertyChanges { target: cellData; source: "Components/CellularDualSim.qml" }
-            // dynamically load ofono bindings for second sim
-            PropertyChanges { target: secondSimLoader; source: "Components/Sim.qml" }
+            extend: "singleSim"
+            StateChangeScript {
+                name: "loadSims"
+                script: simTwoLoader.setSource("Components/Sim.qml", { path: manager.modems[1] })
+            }
             when: manager.modems.length === 2
         }
     ]
@@ -68,41 +74,31 @@ ItemPage {
         }
     }
 
-    // ofono bindings of first sim
-    Sim {
-        id: sim1
-        // TODO: replace with user chosen name
-        name: "SIM 1"
-        path: manager.modems[0]
-    }
-
-    // ofono bindings for a second sim, dynamically loaded
+    // ofono bindings for sims
     Loader {
-        id: secondSimLoader
+        id: simOneLoader
         onLoaded: {
-            secondSimPath.target = secondSimLoader.item;
-            secondSimName.target = secondSimLoader.item;
-            root.sims = [sim1, secondSimLoader.item]
+            if (parent.state === "singleSim") {
+                cellData.setSource("Components/CellularSingleSim.qml", {
+                    sim1: sim1
+                });
+            }
         }
     }
 
-    // if second modem, bind its path to sim2
-    Binding {
-        id: secondSimPath
-        property: "path"
-        value: manager.modems[1]
-    }
-
-    // if second modem, bind its name to sim2
-    Binding {
-        id: secondSimName
-        property: "name"
-        value: "SIM 2"
+    Loader {
+        id: simTwoLoader
+        onLoaded: {
+            cellData.setSource("Components/CellularDualSim.qml", {
+                sim1: sim1,
+                sim2: sim2
+            });
+        }
     }
 
     OfonoNetworkRegistration {
         id: netReg
-        modemPath: manager.modems[0]
+        modemPath: manager.modems[0] || ""
         onStatusChanged: {
             console.warn ("netReg onStatusChanged: " + status, modemPath);
         }
@@ -126,40 +122,11 @@ ItemPage {
                 anchors.left: parent.left
                 anchors.right: parent.right
 
-                // bind cellData.sims to root.sims
-                Component.onCompleted: {
-                    simBinder.target = cellData.item
-                    roamingBinder.target = cellData.item
-                    roamingControlBinder.target = cellData.item
-                }
-            }
-
-            Binding {
-                id: simBinder
-                property: "sims"
-                value: sims
-            }
-
-            Binding {
-                id: roamingBinder
-                property: "dataEnabled"
-                value: dataRoamingItem.enabled
-            }
-
-            Binding {
-                id: roamingControlBinder
-                property: "roamingAllowed"
-                value: dataRoamingControl.checked
-            }
-
-            ListItem.Standard {
-                id: dataRoamingItem
-                objectName: "dataRoamingSwitch"
-                text: i18n.tr("Data roaming")
-                // sensitive to data type, and disabled if "Off" is selected
-                control: Switch {
-                    id: dataRoamingControl
-                    onClicked: cellData.item.roamingAllowed = checked
+                onLoaded: {
+                    cellData.item.sim1 = sim1
+                    if (root.sim2) {
+                        cellData.item.sim2 = root.sim2
+                    }
                 }
             }
 

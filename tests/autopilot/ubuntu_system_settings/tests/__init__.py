@@ -88,6 +88,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
     def mock_connection_manager(self, modem):
         modem.AddProperty(CONNMAN_IFACE, 'Powered', True)
+        modem.AddProperty(CONNMAN_IFACE, 'RoamingAllowed', False)
         modem.AddMethods(
             CONNMAN_IFACE,
             [

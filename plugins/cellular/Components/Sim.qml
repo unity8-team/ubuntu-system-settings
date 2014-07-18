@@ -22,18 +22,18 @@ import MeeGo.QOfono 0.2
 
 Item {
 
+
+    property alias modem: modem
+    property alias radioSettings: radioSettings
+    property alias simMng: simMng
+    property alias connMan: connMan
+
     property string name
     property string title: {
         var number = simMng.subscriberNumbers[0] || simMng.subscriberIdentity;
         return name + (number ? " (" + number + ")" : "");
     }
-    property var color: null
     property string path
-
-    property var modem: modem
-    property var radioSettings: radioSettings
-    property var simMng: simMng
-    property var connMan: connMan
 
     OfonoModem {
         id: modem

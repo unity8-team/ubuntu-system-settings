@@ -152,16 +152,16 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             raises(StateNotFoundError)
         )
 
-    # def test_one_modem(self):
-    #     sleep(5)
-    #     self.assertTrue(False)
+    def test_one_modem(self):
+        sleep(3)
+        self.assertTrue(False)
 
-    # def test_two_modems(self):
-    #     self.mock_for_dual_sim()
+    def test_two_modems(self):
+        self.mock_for_dual_sim()
 
-    #     sleep(3)
+        sleep(3)
 
-    #     self.assertTrue(False)
+        self.assertTrue(False)
 
     def test_set_modem_offline(self):
         self.select_preference(PREFERENCE_OFF)
@@ -179,7 +179,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         sleep(1)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
-    def test_modem_online_status_toggles_data_roaming_switch(self):
+    def test_roaming_switch(self):
         """Test that switching off cellular data disables roaming switch"""
         roaming_switch = self.system_settings.main_view.select_single(
             '*', objectName="dataRoamingSwitch"
@@ -196,7 +196,15 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         # assert roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
 
-    def test_data_preference_change_is_reflected_by_dbus(self):
+    def test_allow_roaming(self):
+        roaming_switch = self.system_settings.main_view.select_single(
+            '*', objectName="dataRoamingSwitch"
+        )
+        self.system_settings.main_view.pointer.click_object(roaming_switch)
+        sleep(1)
+        self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
+
+    def test_change_data_preference(self):
         self.select_preference(PREFERENCE_2G)
 
         sleep(1)
@@ -258,7 +266,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         # assert that the preference is any
         self.assert_selected_preference(1)
 
-    def test_ui_if_sim_was_unlocked_on_opening(self):
+    def test_unlocking_sim(self):
         '''Like it would if the sim was locked, e.g.'''
         self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', dbus.String('', variant_level=1))
 
@@ -281,7 +289,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         self.assert_selected_preference(2)
 
-    def test_dualsim_online_modem_1(self):
+    def test_dualsim_online_modem1(self):
         self.mock_for_dual_sim()
 
         pref = self.system_settings.main_view.cellular_page.select_single(

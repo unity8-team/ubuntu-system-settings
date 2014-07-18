@@ -23,64 +23,31 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import "data-helpers.js" as DataHelpers
 
 Column {
-    id: root
+
     height: childrenRect.height
 
-    function getRoamingAllowed () {
-        var poweredModem = getPoweredModem();
-        if (poweredModem) {
-            return poweredModem.connMan.roamingAllowed;
-        } else {
-            return false;
-        }
-    }
+    property var sim1
+    property var sim2
+    property var selector: selector
 
-    // returns the first powered modem
-    // TODO: make this saner/conform to some sort of user preference
-    function getPoweredModem () {
-        if (sim1.connMan.powered) {
+    function getSelectedSim () {
+        var i = use.selectedIndex;
+        if (i === 1) {
             return sim1;
-        } else if (sim2.connMan.powered) {
+        } else if (i === 2) {
             return sim2;
         } else {
             return null;
         }
     }
 
-    function getRadioSettings () {
-        var poweredModem = getPoweredModem();
-        if (poweredModem) {
-            return poweredModem.radioSettings;
-        } else {
-            return null;
-        }
-    }
-
-    property var sim1: sims[0]
-    property var sim2: sims[1]
-    property var selector: selector
-
-    property bool dataEnabled: getPoweredModem()
-    property bool roamingAllowed: getRoamingAllowed()
-    property var radioSettings: getRadioSettings()
-
     ListItem.ItemSelector {
         id: use
         objectName: "use"
         text: i18n.tr("Cellular data:")
         expanded: true
-        selectedIndex: {
-            if (sim1.connMan.powered) {
-                return 1;
-            } else if (sim2.connMan.powered) {
-                return 2;
-            } else {
-                // both off
-                // TODO: or both on
-                return 0
-            }
-        }
         model: [i18n.tr("Off"), sim1.title, sim2.title]
+        selectedIndex: [true, sim1.connMan.powered, sim2.connMan.powered].lastIndexOf(true);
         onDelegateClicked: DataHelpers.simSelectorClicked(index)
     }
 
@@ -91,19 +58,39 @@ Column {
         model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
 
         // technologyPreference "" is not valid, assume sim locked or data unavailable
-        enabled: getPoweredModem() && (radioSettings.technologyPreference !== "")
+        enabled: getSelectedSim() && (getSelectedSim().radioSettings.technologyPreference !== "")
         selectedIndex: {
-            var pref = radioSettings.technologyPreference;
-            console.warn('selectedIndex pref', pref, radioSettings);
+            var pref = getSelectedSim() ? getSelectedSim().radioSettings.technologyPreference : "";
+            console.warn('selectedIndex pref', pref, getSelectedSim() ? getSelectedSim().radioSettings.technologyPreference : "");
             // make nothing selected if the string from OfonoRadioSettings is empty
             if (pref === "") {
                 console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
                 return -1;
             } else {
                 // normalizeKey turns "lte" and "umts" into "any"
-                return DataHelpers.keyToIndex(DataHelpers.normalizeKey(pref));
+                return DataHelpers.dualKeyToIndex(DataHelpers.normalizeKey(pref));
             }
         }
         onDelegateClicked: DataHelpers.dualTechSelectorClicked(index)
+    }
+
+    ListItem.Standard {
+        id: dataRoamingItem
+        objectName: "dataRoamingSwitch"
+        text: i18n.tr("Data roaming")
+        enabled: getSelectedSim() ? getSelectedSim().connMan.powered : false
+        control: Switch {
+            id: dataRoamingControl
+            checked: getSelectedSim() ? getSelectedSim().connMan.powered : false
+            onClicked: getSelectedSim().connMan.roamingAllowed = checked
+        }
+    }
+
+
+    Component.onCompleted: {
+        // now what
+        if (sim1.connMan.powered && sim2.connMan.powered) {
+            sim2.connMan.powered = false;
+        }
     }
 }
