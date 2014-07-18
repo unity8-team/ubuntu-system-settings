@@ -22,34 +22,51 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import MeeGo.QOfono 0.2
 
 ItemPage {
     title: i18n.tr("Call forwarding")
     property bool canCheckForwarding: true
+    property bool forwarding: callForwarding.voiceUnconditional !== ""
+    property string modem
 
-    /* Simulate going off and retreiving the status, TODO: replace by real data */
-    Timer {
-        id: callForwardingTimer
-        interval: 3000
-        running: true
-        onTriggered: canCheckForwarding = false
+    onForwardingChanged: {
+        console.warn("onForwardingChanged: " + forwarding);
+        callForwardingSwitch.checked = forwarding;
+    }
+
+    OfonoCallForwarding {
+        id: callForwarding
+        modemPath: modem
+        onVoiceUnconditionalChanged: {
+            console.warn ("voiceUnconditionalChanged: " + voiceUnconditional);
+        }
+        onVoiceUnconditionalComplete: {
+            console.warn ("voiceUnconditionalComplete: " + success);
+            callForwardingIndicator.running = false;
+            if (success)
+                forwardToItem.control = contactLabel;
+        }
     }
 
     Switch {
         id: callForwardingSwitch
-        checked: false
-        visible: callForwardingItem.control == callForwardingSwitch
+        checked: forwarding
+        enabled: (forwarding === checked)
+        visible: callForwardingItem.control === callForwardingSwitch
+        onCheckedChanged: {
+            console.warn("onCheckedChanged: " + callForwarding.voiceUnconditional);
+            if (!checked) {
+                callForwarding.voiceUnconditional = "";
+            }
+        }
     }
 
     ActivityIndicator {
         id: callForwardingIndicator
-        running: true
-        visible: callForwardingItem.control == callForwardingIndicator
-    }
-
-    Label {
-        id: contactLabel
-        text: "Not working yet"
+        running: false
+        visible: running
+        onRunningChanged: console.warn("onRunningChanged: " + running)
     }
 
     Column {
@@ -58,12 +75,12 @@ ItemPage {
         ListItem.Standard {
             id: callForwardingItem
             text: i18n.tr("Call forwarding")
-            control: callForwardingTimer.running ? callForwardingIndicator : callForwardingSwitch
+            control: callForwardingIndicator.running ? callForwardingIndicator : callForwardingSwitch
         }
 
         ListItem.Base {
             height: textItem.height + units.gu(2)
-            Text {
+            Label {
                 id: textItem
                 anchors {
                     left: parent.left
@@ -80,7 +97,7 @@ ItemPage {
         }
 
         ListItem.Base {
-            Text {
+            Label {
                 id: errorTextItem
                 anchors {
                     left: parent.left
@@ -98,10 +115,30 @@ ItemPage {
         }
 
         ListItem.Standard {
+            id: forwardToItem
             property string contactName: ""
-            text: i18n.tr("Divert to")
-            control: contactLabel
+            text: i18n.tr("Forward to")
+            control: (forwarding !== callForwardingSwitch.checked) ? destNumberField : contactLabel
             visible: callForwardingSwitch.checked
+            Label {
+                id: contactLabel
+                text: callForwarding.voiceUnconditional
+                visible: forwardToItem.control !== destNumberField
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (forwardToItem.control === contactLabel)
+                            forwardToItem.control = destNumberField;
+                    }
+                }
+            }
+
+            TextField {
+                id: destNumberField
+                inputMethodHints: Qt.ImhDialableCharactersOnly
+                text: callForwarding.voiceUnconditional
+                visible: forwardToItem.control !== contactLabel
+            }
         }
 
         ListItem.Base {
@@ -109,11 +146,25 @@ ItemPage {
             Row {
                 anchors.centerIn: parent
                 spacing: units.gu(2)
-                Repeater {
-                    model: [i18n.tr("Contacts…"), i18n.tr("Cancel"), i18n.tr("Set") ]
-                    Button {
-                        text: modelData
-                        width: (buttonsRowId.width-units.gu(2)*4)/3
+
+                Button {
+                    text: i18n.tr("Cancel")
+                    width: (buttonsRowId.width-units.gu(2)*4)/3
+                    onClicked: {
+                        destNumberField.text = callForwarding.voiceUnconditional;
+                        if (forwarding !== callForwardingSwitch.checked)
+                            callForwardingSwitch.checked = forwarding;
+                        forwardToItem.control = contactLabel;
+                    }
+                }
+
+                Button {
+                    text: i18n.tr("Set")
+                    width: (buttonsRowId.width-units.gu(2)*4)/3
+                    onClicked: {
+                        console.warn(destNumberField.text);
+                        callForwardingIndicator.running = true;
+                        callForwarding.voiceUnconditional = destNumberField.text;
                     }
                 }
             }
