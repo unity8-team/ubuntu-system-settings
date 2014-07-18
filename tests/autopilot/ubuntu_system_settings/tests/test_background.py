@@ -78,7 +78,7 @@ class BackgroundTestCase(BackgroundBaseTestCase):
         old = self.selected_wallpaper.source
 
         # click a wallpaper that is not selected
-        self.system_settings.main_view.pointer.click_object(
+        self.system_settings.main_view.scroll_to_and_click(
             self.all_wallpapers[3])
 
         # click set/save
