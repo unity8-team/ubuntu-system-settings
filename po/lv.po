@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-02 10:16+0000\n"
+"PO-Revision-Date: 2014-07-15 19:19+0000\n"
 "Last-Translator: Jānis-Marks Gailis <jm-gailis@fai-vianet.fr>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:34+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-16 07:27+0000\n"
+"X-Generator: Launchpad (build 17112)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -545,32 +545,36 @@ msgstr "Baterija"
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pirms %1 sekundu"
+msgstr[1] "pirms %1 sekundes"
+msgstr[2] "pirms %1 sekundem"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pirms %1 minūtes"
+msgstr[1] "pirms %1 minūtēm"
+msgstr[2] "pirms %1 minūšu"
 
 #. TRANSLATORS: %1 is the number of hours
 #: plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pirms %1 stundas"
+msgstr[1] "pirms %1 stundām"
+msgstr[2] "pirms %1 stundu"
 
 #. TRANSLATORS: %1 is the number of days
 #: plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pirms %1 dienas"
+msgstr[1] "pirms %1 dienām"
+msgstr[2] "pirms %1 dienu"
 
 #: plugins/battery//PageComponent.qml:75
 msgid "Charging now"
@@ -593,7 +597,7 @@ msgstr "Uzlādes līmenis"
 #: plugins/cellular//PageComponent.qml:129
 #: plugins/about//Storage.qml:204
 msgid "N/A"
-msgstr ""
+msgstr "Nav pieejams"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: plugins/battery//PageComponent.qml:120
@@ -681,11 +685,11 @@ msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Tīkla nosaukums"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Drošība"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
@@ -693,19 +697,19 @@ msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Parole"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Redzama parole"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Savienoties"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
@@ -722,7 +726,7 @@ msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Rādīt paroli"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
@@ -796,7 +800,7 @@ msgstr ""
 
 #: plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
-msgstr ""
+msgstr "Ir jāpārstartē telefonu lai pabeigt sistēmas atjaunināšanu."
 
 #: plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
@@ -833,12 +837,12 @@ msgstr "Pārbauda atjauninājumus…"
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Instalē %1 atjauninājumus..."
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Instalē %1 atjauninājumus"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -870,7 +874,7 @@ msgstr "Instalē"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "Instalēts"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
@@ -937,7 +941,7 @@ msgstr "Spilgtums"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Automātiski pielāgot"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
@@ -1003,7 +1007,7 @@ msgstr "Fons"
 #: plugins/background//MainPage.qml:131
 #: plugins/background//Wallpapers.qml:43
 msgid "Welcome screen"
-msgstr ""
+msgstr "Ievada ekrāns"
 
 #: plugins/background//MainPage.qml:175
 #: plugins/background//Wallpapers.qml:43
@@ -1432,11 +1436,11 @@ msgstr ""
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "Sveiki!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "Sveicināts uz Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
@@ -1444,7 +1448,7 @@ msgstr ""
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Izvēlēties jūsu valodu."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1541,7 +1545,7 @@ msgstr "pieejamība"
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:40
 msgid "a11y"
-msgstr ""
+msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:46
@@ -1566,7 +1570,7 @@ msgstr "baterija"
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: settings.js:58
 msgid "power"
-msgstr ""
+msgstr "strāva"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -1633,7 +1637,7 @@ msgstr "atjaunināt"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Pieejami atjauninājumi"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100

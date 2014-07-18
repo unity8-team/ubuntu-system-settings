@@ -56,23 +56,21 @@ ItemPage {
         }
 
         ListItem.Standard {
-            text: i18n.tr("Call waiting")
-            /* Hide until implemented */
-            visible: showAllUI
+            text: i18n.tr("Call waiting")            
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"))
+            onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {modem: manager.modems[0]})
+            showDivider: false
         }
 
-        ListItem.Divider {
-            visible: showAllUI
-        }
+        ListItem.Divider {}
 
         ListItem.Standard {
             // TRANSLATORS: %1 is the name of the (network) carrier
             text: i18n.tr("%1 Services").arg(carrierString)
             progression: true
             enabled: sim.present
-            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {carrierString: carrierString, sim: sim})
+            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"),
+                                      {carrierString: carrierString, sim: sim})
         }
     }
 }

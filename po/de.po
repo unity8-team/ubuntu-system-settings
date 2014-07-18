@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-14 13:29+0000\n"
+"PO-Revision-Date: 2014-07-15 12:29+0000\n"
 "Last-Translator: Phillip Sz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-15 05:59+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-07-16 07:26+0000\n"
+"X-Generator: Launchpad (build 17112)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -948,7 +948,7 @@ msgstr "Helligkeit"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Automatisch anpassen"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
@@ -1167,7 +1167,7 @@ msgstr "Sichtbar"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Nicht feststellbar"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
@@ -1175,11 +1175,11 @@ msgstr "Verbundene Geräte:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Verbinden Sie ein unterschiedliches Gerät:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Verbinden Sie ein anderes Gerät:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1258,31 +1258,31 @@ msgstr "Software-Lizenzen"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "OS-Build-Details"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "OS-Build-Nummer"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Ubuntu-Abbild-Teil"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Ubuntu-Build-Beschreibung"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Geräte-Abbild-Teil"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Geräte-Build-Beschreibung"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Anpassungs-Abbild-Teil"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1404,11 +1404,11 @@ msgstr "Keine SIM-Karte"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Keine Angst, Sie können auch später eine SIM-Karte einlegen."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "Vorerst haben Sie keine Telefon- oder SMS-Funktionen."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
@@ -1424,11 +1424,11 @@ msgstr "Das war's!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Es ist großartig Sie in der Ubuntu-Gemeinschaft zu haben."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Genießen Sie Ihr neues Telefon."
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1436,7 +1436,7 @@ msgstr "Beendet"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Zu einen WLAN-Netz verbinden"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
@@ -1456,7 +1456,7 @@ msgstr "Willkommen zu Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "Los geht's."
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
