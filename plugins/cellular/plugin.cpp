@@ -19,11 +19,13 @@
 #include <QtQml/QQmlContext>
 #include "plugin.h"
 #include "hotspotmanager.h"
+#include "ofonoactivator.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
     qmlRegisterType<HotspotManager>(uri, 1, 0, "HotspotManager");
+    qmlRegisterType<OfonoActivator>(uri, 1, 0, "OfonoActivator");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
