@@ -84,13 +84,16 @@ void Bluetooth::stopDiscovery()
 
 bool Bluetooth::isSupportedType(const int type)
 {
-    QVector<Device::Type> types;
+    switch((Device::Type)type) {
 
-    types.append(Device::Type::Headset);
-    types.append(Device::Type::Headphones);
-    types.append(Device::Type::OtherAudio);
+    case Device::Type::Headset:
+    case Device::Type::Headphones:
+    case Device::Type::OtherAudio:
+        return true;
 
-    return types.contains((Device::Type)type);
+    default:
+        return false;
+    }
 }
 
 /***
@@ -180,7 +183,7 @@ void Bluetooth::connectDevice(const QString &address)
     if (device->isTrusted()) {
         device->connect(connMode);
     } else {
-        m_devices.setConnectAfterPairing(address, connMode);
+        m_devices.addConnectAfterPairing(address, connMode);
         m_devices.createDevice(address);
     }
 }

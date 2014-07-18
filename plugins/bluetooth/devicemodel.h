@@ -68,7 +68,7 @@ public:
     bool isPowered() const { return m_isPowered; }
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
-    void setConnectAfterPairing(const QString &address, Device::ConnectionMode mode);
+    void addConnectAfterPairing(const QString &address, Device::ConnectionMode mode);
     void createDevice(const QString &address);
     void removeDevice(const QString &path);
     void stopDiscovery();

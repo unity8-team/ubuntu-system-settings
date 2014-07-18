@@ -126,7 +126,7 @@ void Device::connectPending()
 ****
 ***/
 
-void Device::setConnectAfterPairing(ConnectionMode mode)
+void Device::addConnectAfterPairing(ConnectionMode mode)
 {
     m_connectAfterPairing.append(mode);
 }
@@ -145,17 +145,18 @@ void Device::discoverServices()
 void Device::callInterface(const QSharedPointer<QDBusInterface> &interface, const QString &method)
 {
     QDBusReply<void> reply;
+    constexpr int maxTries = 4;
+    int retryCount = 0;
 
-    m_retryCount = 0;
-    while (m_retryCount < 4) {
+    while (retryCount < maxTries) {
         reply = interface->call(method);
         if (reply.isValid())
             break;
         QThread::msleep(500);
-        m_retryCount++;
+        retryCount++;
     }
 
-    if (m_retryCount >= 5 && !reply.isValid()) {
+    if (retryCount >= maxTries && !reply.isValid()) {
         qWarning() << "Could not" << method << "the interface" << interface->interface();
     }
 }

@@ -433,11 +433,11 @@ QSharedPointer<Device> DeviceModel::getDeviceFromPath(const QString &path)
     return QSharedPointer<Device>();
 }
 
-void DeviceModel::setConnectAfterPairing(const QString &address, Device::ConnectionMode mode)
+void DeviceModel::addConnectAfterPairing(const QString &address, Device::ConnectionMode mode)
 {
     auto device = getDeviceFromAddress(address);
     if (device) {
-        device->setConnectAfterPairing(mode);
+        device->addConnectAfterPairing(mode);
     } else {
         qWarning() << "Device could not be found, can't add an operation";
     }

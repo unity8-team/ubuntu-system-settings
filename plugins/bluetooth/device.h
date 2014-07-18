@@ -119,7 +119,6 @@ public:
     Connection m_connection = Connection::Disconnected;
     Strength m_strength = Strength::Fair;
     bool m_isConnected = false;
-    int m_retryCount;
     QSharedPointer<QDBusInterface> m_deviceInterface;
     QSharedPointer<QDBusInterface> m_audioInterface;
     QSharedPointer<QDBusInterface> m_audioSourceInterface;
@@ -153,7 +152,7 @@ public:
     void makeTrusted(bool trusted);
     void disconnect(ConnectionMode);
     void setProperties(const QMap<QString,QVariant> &properties);
-    void setConnectAfterPairing(const ConnectionMode mode);
+    void addConnectAfterPairing(const ConnectionMode mode);
 
   private Q_SLOTS:
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);

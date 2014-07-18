@@ -83,7 +83,7 @@ public:
     Q_INVOKABLE void toggleDiscovery();
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
-    Q_INVOKABLE bool isSupportedType(const int type);
+    Q_INVOKABLE static bool isSupportedType(const int type);
 
 public:
     Agent * getAgent();
