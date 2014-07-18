@@ -45,7 +45,7 @@ void NotificationItem::setItemData(QString title, QString icon, bool status, QSt
 void NotificationItem::setStatus(bool status) {
     m_status = status;
     Q_EMIT statusChanged();
-    Q_EMIT updateNotificationStatus(m_title, m_status);
+    Q_EMIT updateNotificationStatus(m_key, m_status);
 }
 
 }

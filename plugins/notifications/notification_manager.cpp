@@ -90,8 +90,6 @@ void NotificationsManager::loadModel()
     g_variant_unref (blacklist);
 
     // LOAD ALL THE APPS
-    // XXX: maybe this should only load the apps that have the right
-    // apparmor bit to support push but that's not available in manifest
 
     QString output(m_process.readAllStandardOutput());
     QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
@@ -101,17 +99,29 @@ void NotificationsManager::loadModel()
         QJsonObject object = array.at(i).toObject();
 
         QString pkgname = object.value("name").toString();
-        QString icon = object.value("icon").toString();
         QString version = object.value("version").toString();
-        if (icon.isEmpty()) {icon = "distributor-logo";};
 
         // This iterates over apps
         QVariantMap hooks = object.value("hooks").toObject().toVariantMap();
         QList<QString> keys = hooks.keys();
+
+        // We need one app that has a push-helper key
+        bool has_helper = true; // FIXME: this is just to check settings, should be false
+        for (int j = 0; j < keys.size(); ++j) {
+            QVariantMap hook = hooks.value(keys.at(j)).toMap();
+            if (hook.contains("push-helper")) {
+                has_helper = true;
+            }
+        }
+        if (!has_helper) {
+            continue;
+        }
+
+        // It has a helper, so add items for all entries that have
+        // a "desktop" key.
         for (int j = 0; j < keys.size(); ++j) {
             QString key = pkgname+"_"+keys.at(j);
             QVariantMap hook = hooks.value(keys.at(j)).toMap();
-            // If this hooks section has a "desktop" key, then it's "an app"
             if (hook.contains("desktop")) {
                 QString appid = key+"_"+version+".desktop";
                 char *display_name;
@@ -120,24 +130,39 @@ void NotificationsManager::loadModel()
                 NotificationItem *item = new NotificationItem();
                 bool blacklisted = m_blacklist.contains(key);
                 item->setItemData(QString(display_name), QString(icon_fname), blacklisted, key);
-                std::cout << "ICON:" << icon_fname <<"--\n";
                 g_free(display_name);
                 g_free(icon_fname);
                 m_model.append(QVariant::fromValue(item));
                 connect(item, &NotificationItem::updateNotificationStatus,
                         this, &NotificationsManager::checkUpdates);
             }
-            else {
-            }
-
         }
     }
     Q_EMIT modelChanged();
 }
 
-void NotificationsManager::checkUpdates(QString id, bool value)
+void NotificationsManager::checkUpdates(QString key, bool value)
 {
-    std::cout << "CU" << id.toStdString() << value << "\n\n";
+    std::cout << "CU" << key.toStdString() << "->" << value << "\n\n";
+    // Update the internal blacklist
+    if (value) {
+        if (!m_blacklist.contains(key)) {
+            m_blacklist[key] = true;
+        }
+    } else {
+        if (m_blacklist.contains(key)) {
+            m_blacklist.remove(key);
+        }
+    }
+    // Save the config settings
+    QList<QString> keys = m_blacklist.keys();
+    for (int j = 0; j < keys.size(); ++j) {
+        // Keys are package_app
+        QStringList splitted = keys.at(j).split("_");
+        QString pkgname = splitted.at(0);
+        QString appname = splitted.at(1);
+        std::cout << "BL" << pkgname.toStdString() << "---" << appname.toStdString() << "\n\n";
+    }
 }
 
 }
