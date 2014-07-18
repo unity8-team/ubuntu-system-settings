@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-16 02:56+0000\n"
-"Last-Translator: MinSik CHO <Unknown>\n"
+"PO-Revision-Date: 2014-07-17 06:40+0000\n"
+"Last-Translator: freegilyeon <freegilyeon@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-17 06:36+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 05:26+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -752,89 +752,89 @@ msgstr "착신 전환 설정을 확인할 수 없습니다. 나중에 다시 시
 
 #: plugins/phone//CallForwarding.qml:102
 msgid "Divert to"
-msgstr ""
+msgstr "전환하기"
 
 #: plugins/phone//CallForwarding.qml:113
 msgid "Contacts…"
-msgstr ""
+msgstr "연락처..."
 
 #: plugins/phone//CallWaiting.qml:67
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
-msgstr ""
+msgstr "통화 중에 다른 통화를 걸거나 받고, 통화 간 전환을 할 수 있도록 합니다."
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: plugins/system-update//PageComponent.qml:35
 #: settings.js:86
 msgid "Updates"
-msgstr ""
+msgstr "업데이트"
 
 #: plugins/system-update//PageComponent.qml:51
 msgid "Update System"
-msgstr ""
+msgstr "시스템 업데이트하기"
 
 #: plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
-msgstr ""
+msgstr "시스템 업데이트를 설치하려면, 휴대 전화를 재시작해야 합니다."
 
 #: plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
-msgstr ""
+msgstr "설치 및 다시 시작"
 
 #: plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
-msgstr ""
+msgstr "나중에 하기"
 
 #: plugins/system-update//PageComponent.qml:70
 msgid "Install"
-msgstr ""
+msgstr "설치"
 
 #: plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
-msgstr ""
+msgstr "소프트웨어가 최신 상태입니다."
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "우분투 원 계정을 로그인해주세요."
 
 #: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
-msgstr ""
+msgstr "시스템 업데이트가 실패하였습니다."
 
 #: plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
-msgstr ""
+msgstr "시스템 업데이트가 실패하였습니다."
 
 #: plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
-msgstr ""
+msgstr "업데이트 확인 중..."
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "%1 업데이트 설치..."
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "%1 업데이트 설치"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
-msgstr ""
+msgstr "모두 일시 중지"
 
 #: plugins/system-update//PageComponent.qml:287
 msgid "Retry"
-msgstr ""
+msgstr "재시도"
 
 #: plugins/system-update//PageComponent.qml:303
 msgid "Download"
-msgstr ""
+msgstr "내려받기"
 
 #: plugins/system-update//PageComponent.qml:303
 msgid "Update"
-msgstr ""
+msgstr "업데이트"
 
 #: plugins/system-update//PageComponent.qml:304
 msgid "Resume"
