@@ -19,6 +19,7 @@
 
 #include <QDBusReply>
 #include <QDebug> // qWarning()
+#include <QThread>
 
 #include "dbus-shared.h"
 #include "device.h"
@@ -27,7 +28,17 @@
 ****
 ***/
 
+Device::Device(const QMap<QString,QVariant> &properties)
+{
+    setProperties(properties);
+}
+
 Device::Device(const QString &path, QDBusConnection &bus)
+{
+    initDevice(path, bus);
+}
+
+void Device::initDevice(const QString &path, QDBusConnection &bus)
 {
     /* whenever any of the properties changes,
        trigger the catch-all deviceChanged() signal */
@@ -46,6 +57,8 @@ Device::Device(const QString &path, QDBusConnection &bus)
     initInterface(m_audioSourceInterface, path, "org.bluez.AudioSource", bus);
     initInterface(m_audioSinkInterface,   path, "org.bluez.AudioSink",   bus);
     initInterface(m_headsetInterface,     path, "org.bluez.Headset",     bus);
+
+    Q_EMIT(pathChanged());
 }
 
 /***
@@ -94,38 +107,103 @@ void Device::setProperties(const QMap<QString,QVariant> &properties)
     }
 }
 
+void Device::connectPending()
+{
+    if (m_paired && !m_trusted) {
+	// Give the device a bit of time to settle.
+        QThread::sleep(1);
+
+        discoverServices();
+
+        while (!m_connectAfterPairing.isEmpty()) {
+            ConnectionMode mode = m_connectAfterPairing.takeFirst();
+            connect(mode);
+        }
+    }
+}
+
 /***
 ****
 ***/
 
+void Device::setConnectAfterPairing(ConnectionMode mode)
+{
+    m_connectAfterPairing.append(mode);
+}
+
+void Device::discoverServices()
+{
+    if (m_deviceInterface) {
+        QDBusReply<void> reply = m_deviceInterface->call("DiscoverServices", QLatin1String(""));
+        if (!reply.isValid())
+            qWarning() << "Could not initiate service discovery:" << reply.error().message();
+    } else {
+        qWarning() << "Can't do service discovery: the device interface is not ready.";
+    }
+}
+
+void Device::callInterface(const QSharedPointer<QDBusInterface> &interface, const QString &method)
+{
+    QDBusReply<void> reply;
+
+    m_retryCount = 0;
+    while (m_retryCount < 4) {
+        reply = interface->call(method);
+        if (reply.isValid()) {
+            break;
+        QThread::msleep(500);
+        m_retryCount++;
+    }
+
+    if (m_retryCount >= 5 && !reply.isValid()) {
+        qWarning() << "Could not" << method << "the interface" << interface->interface();
+    }
+}
+
 void Device::disconnect(ConnectionMode mode)
 {
+    QSharedPointer<QDBusInterface> interface;
+
     if (m_headsetInterface && (mode == HeadsetMode))
-        m_headsetInterface->asyncCall("Disconnect");
+        interface = m_headsetInterface;
     else if (m_audioInterface && (mode == Audio))
-        m_audioInterface->asyncCall("Disconnect");
-    else
+        interface = m_audioInterface;
+    else {
         qWarning() << "Unhandled connection mode" << mode;
+        return;
+    }
+
+    callInterface(interface, "Disconnect");
 }
 
 void Device::connect(ConnectionMode mode)
 {
+    QSharedPointer<QDBusInterface> interface;
+
     if (m_headsetInterface && (mode == HeadsetMode))
-        m_headsetInterface->asyncCall("Connect");
+        interface = m_headsetInterface;
     else if (m_audioInterface && (mode == Audio))
-        m_audioInterface->asyncCall("Connect");
-    else
+        interface = m_audioInterface;
+    else {
         qWarning() << "Unhandled connection mode" << mode;
+        return;
+    }
+
+    callInterface(interface, "Connect");
 }
 
-void Device::makeTrusted()
+void Device::makeTrusted(bool trusted)
 {
         QVariant value;
-        QDBusVariant trusted(true);
+        QDBusVariant variant(trusted);
 
-        value.setValue(trusted);
+        value.setValue(variant);
 
-        m_deviceInterface->asyncCall("SetProperty", "Trusted", value);
+        if (m_deviceInterface) {
+            m_deviceInterface->asyncCall("SetProperty", "Trusted", value);
+        } else {
+            qWarning() << "Can't set device trusted before it is added in BlueZ";
+        }
 }
 
 /***
@@ -198,12 +276,41 @@ void Device::updateIcon()
 
     const auto type = getType();
 
-    if (type == Type::Headset || type == Type::Headphones || type == Type::OtherAudio)
-        setIconName("image://theme/audio-headset");
-    else if (type == Type::Phone)
-        setIconName("image://theme/phone");
-    else if (!m_fallbackIconName.isEmpty())
+    switch (type) {
+    case Type::Headset:
+        setIconName("image://theme/audio-headset-symbolic");
+        break;
+    case Type::Headphones:
+        setIconName("image://theme/audio-headphones-symbolic");
+        break;
+    case Type::Carkit:
+        setIconName("image://theme/audio-carkit-symbolic");
+        break;
+    case Type::Speakers:
+    case Type::OtherAudio:
+        setIconName("image://theme/audio-speakers-symbolic");
+        break;
+    case Type::Mouse:
+        setIconName("image://theme/input-mouse-symbolic");
+        break;
+    case Type::Keyboard:
+        setIconName("image://theme/input-keyboard-symbolic");
+        break;
+    case Type::Cellular:
+        setIconName("image://theme/phone-cellular-symbolic");
+        break;
+    case Type::Smartphone:
+        setIconName("image://theme/phone-smartphone-symbolic");
+        break;
+    case Type::Phone:
+        setIconName("image://theme/phone-uncategorized-symbolic");
+        break;
+    case Type::Computer:
+        setIconName("image://theme/computer-symbolic");
+        break;
+    default: 
         setIconName(QString("image://theme/%1").arg(m_fallbackIconName));
+    }
 }
 
 void Device::updateConnection()
@@ -224,7 +331,7 @@ void Device::updateConnection()
         c = m_isConnected ? Connection::Connected : Connection::Disconnected;
 
     if (m_isConnected && m_paired && !m_trusted)
-        makeTrusted();
+        makeTrusted(true);
 
     setConnection(c);
 }
@@ -245,6 +352,7 @@ void Device::updateProperty(const QString &key, const QVariant &value)
         setType(getTypeFromClass(value.toUInt()));
     } else if (key == "Paired") { // org.bluez.Device
         setPaired(value.toBool());
+        connectPending();
         updateConnection();
     } else if (key == "Trusted") { // org.bluez.Device
         setTrusted(value.toBool());
@@ -269,13 +377,13 @@ Device::Type Device::getTypeFromClass (quint32 c)
     case 0x02:
         switch ((c & 0xfc) >> 2) {
         case 0x01:
-        case 0x02:
+            return Type::Cellular;
         case 0x03:
-        case 0x05:
-            return Type::Phone;
-
+            return Type::Smartphone;
         case 0x04:
             return Type::Modem;
+        default:
+            return Type::Phone;
         }
         break;
 
@@ -288,8 +396,14 @@ Device::Type Device::getTypeFromClass (quint32 c)
         case 0x02:
             return Type::Headset;
 
+        case 0x05:
+            return Type::Speakers;
+
         case 0x06:
             return Type::Headphones;
+
+        case 0x08:
+            return Type::Carkit;
 
         case 0x0b: // vcr
         case 0x0c: // video camera

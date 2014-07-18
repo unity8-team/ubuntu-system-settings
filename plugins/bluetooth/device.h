@@ -29,6 +29,10 @@ struct Device: QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(QString path
+               READ getPath
+               NOTIFY pathChanged)
+
     Q_PROPERTY(QString name
                READ getName
                NOTIFY nameChanged)
@@ -51,6 +55,7 @@ struct Device: QObject
 
     Q_PROPERTY(bool trusted
                READ isTrusted
+               WRITE makeTrusted
                NOTIFY trustedChanged)
 
     Q_PROPERTY(Connection connection
@@ -63,9 +68,9 @@ struct Device: QObject
 
 public:
 
-    enum Type { Other, Computer, Phone, Modem, Network, Headset,
-                Headphones, Video, OtherAudio, Joypad, Keypad,
-                Keyboard, Tablet, Mouse, Printer, Camera };
+    enum Type { Other, Computer, Cellular, Smartphone, Phone, Modem, Network,
+                Headset, Speakers, Headphones, Video, OtherAudio, Joypad,
+                Keypad, Keyboard, Tablet, Mouse, Printer, Camera, Carkit };
 
     enum Strength { None, Poor, Fair, Good, Excellent };
 
@@ -80,6 +85,7 @@ public:
     Q_DECLARE_FLAGS(Connections, Connection)
 
 Q_SIGNALS:
+    void pathChanged();
     void nameChanged();
     void iconNameChanged();
     void addressChanged();
@@ -99,7 +105,7 @@ public:
     bool isTrusted() const { return m_trusted; }
     Connection getConnection() const { return m_connection; }
     Strength getStrength() const { return m_strength; }
-    QString getPath() const { return m_deviceInterface->path(); }
+    QString getPath() const { return m_deviceInterface ? m_deviceInterface->path() : QString(); }
 
   private:
     QString m_name;
@@ -113,11 +119,13 @@ public:
     Connection m_connection = Connection::Disconnected;
     Strength m_strength = Strength::Fair;
     bool m_isConnected = false;
+    int m_retryCount;
     QSharedPointer<QDBusInterface> m_deviceInterface;
     QSharedPointer<QDBusInterface> m_audioInterface;
     QSharedPointer<QDBusInterface> m_audioSourceInterface;
     QSharedPointer<QDBusInterface> m_audioSinkInterface;
     QSharedPointer<QDBusInterface> m_headsetInterface;
+    QList<ConnectionMode> m_connectAfterPairing;
 
   protected:
     void setName(const QString &name);
@@ -135,11 +143,17 @@ public:
     Device() {}
     ~Device() {}
     Device(const QString &path, QDBusConnection &bus);
+    Device(const QMap<QString,QVariant> &properties);
+    void initDevice(const QString &path, QDBusConnection &bus);
     bool isValid() const { return getType() != Type::Other; }
+    void callInterface(const QSharedPointer<QDBusInterface> &interface, const QString &method);
+    void discoverServices();
     void connect(ConnectionMode);
-    void makeTrusted();
+    void connectPending();
+    void makeTrusted(bool trusted);
     void disconnect(ConnectionMode);
     void setProperties(const QMap<QString,QVariant> &properties);
+    void setConnectAfterPairing(const ConnectionMode mode);
 
   private Q_SLOTS:
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
