@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-03 08:01+0000\n"
-"Last-Translator: Joachim Johansson <Unknown>\n"
+"PO-Revision-Date: 2014-07-16 22:25+0000\n"
+"Last-Translator: Josef Andersson <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:35+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-17 06:36+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
-msgstr ""
+msgstr "Stoppa uppspelning"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: plugins/sound//PageComponent.qml:36
@@ -39,7 +39,7 @@ msgstr "Ringsignal"
 
 #: plugins/sound//PageComponent.qml:89
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "Vibrera vid samtal"
 
 #: plugins/sound//PageComponent.qml:97
 #: plugins/sound//PageComponent.qml:130
@@ -104,31 +104,31 @@ msgstr "Manuellt"
 
 #: plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Ställ in tid och datum"
 
 #: plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Tid"
 
 #: plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Timme"
 
 #: plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Minut"
 
 #: plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Sekund"
 
 #: plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Dag"
 
 #: plugins/time-date//TimePicker.qml:144
 msgid "Month"
@@ -157,7 +157,7 @@ msgstr "Avbryt"
 #: plugins/phone//CallForwarding.qml:113
 #: plugins/background//Preview.qml:102
 msgid "Set"
-msgstr ""
+msgstr "Ange"
 
 #: plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -186,7 +186,7 @@ msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "Ändra lösenfras"
 
 #: plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"

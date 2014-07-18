@@ -105,8 +105,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     'SetProperty', 'sv', '',
                     'self.Set("IFACE", args[0], args[1]); '
                     'self.EmitSignal("IFACE", "PropertyChanged", "sv",\
-                        [args[0], args[1]])'.replace(
-                    "IFACE", CONNMAN_IFACE)),
+                        [args[0], args[1]])'.replace("IFACE", CONNMAN_IFACE)),
             ])
 
     def mock_carriers(self):
@@ -162,7 +161,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     'self.Set("IFACE", args[0], args[1]); '
                     'self.EmitSignal("IFACE",\
                         "PropertyChanged", "sv", [args[0], args[1]])'.replace(
-                    'IFACE', RDO_IFACE)),
+                        'IFACE', RDO_IFACE)),
             ])
 
     @classmethod

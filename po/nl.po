@@ -8,87 +8,87 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2013-12-11 16:31+0000\n"
-"Last-Translator: StevenA <Unknown>\n"
+"PO-Revision-Date: 2014-07-16 21:23+0000\n"
+"Last-Translator: Niels Vermaut <nielsvermaut@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:33+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-17 06:36+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
-msgstr ""
+msgstr "Afspelen stoppen"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: plugins/sound//PageComponent.qml:36
 #: settings.js:2
 msgid "Sound"
-msgstr ""
+msgstr "Geluid"
 
 #: plugins/sound//PageComponent.qml:68
 msgid "Phone calls:"
-msgstr ""
+msgstr "Telefoongesprekken:"
 
 #: plugins/sound//PageComponent.qml:72
 #: plugins/sound//PageComponent.qml:78
 msgid "Ringtone"
-msgstr ""
+msgstr "Ringtone"
 
 #: plugins/sound//PageComponent.qml:89
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "Trillen als beltoon"
 
 #: plugins/sound//PageComponent.qml:97
 #: plugins/sound//PageComponent.qml:130
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "Trillen in stille modus"
 
 #: plugins/sound//PageComponent.qml:102
 msgid "Messages:"
-msgstr ""
+msgstr "Berichten:"
 
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
 msgid "Message received"
-msgstr ""
+msgstr "Bericht ontvangen"
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "Trillen met geluid"
 
 #: plugins/sound//PageComponent.qml:135
 msgid "Other sounds:"
-msgstr ""
+msgstr "Andere geluiden"
 
 #: plugins/sound//PageComponent.qml:139
 #: plugins/language//PageComponent.qml:160
 msgid "Keyboard sound"
-msgstr ""
+msgstr "Toetsenbordtoon"
 
 #: plugins/sound//PageComponent.qml:153
 msgid "Lock sound"
-msgstr ""
+msgstr "Vergrendeltoon"
 
 #: plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "Stille modus is ingeschakeld."
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: plugins/time-date//PageComponent.qml:29
 #: settings.js:8
 msgid "Time & Date"
-msgstr ""
+msgstr "Datum & tijd"
 
 #: plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr ""
+msgstr "Tijdzone:"
 
 #: plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Stel datum en tijd in:"
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
@@ -104,39 +104,39 @@ msgstr "Handmatig"
 
 #: plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Datum & tijd instellen"
 
 #: plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Tijd"
 
 #: plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "Uur"
 
 #: plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "Minuut"
 
 #: plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "Seconde"
 
 #: plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "Dag"
 
 #: plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "Maand"
 
 #: plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "Jaar"
 
 #: plugins/time-date//TimePicker.qml:173
 #: plugins/security-privacy//LockSecurity.qml:310
@@ -161,175 +161,187 @@ msgstr "Instellen"
 
 #: plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "Tijdzone"
 
 #: plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Stel de tijdszone in:"
 
 #: plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr ""
+msgstr "Voer uw huidige locatie in."
 
 #: plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr ""
+msgstr "Plaats niet gevonden"
 
 #: plugins/security-privacy//LockSecurity.qml:30
 #: plugins/security-privacy//PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "Vergrendelbeveiliging"
 
 #: plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "Toegangscode wijzigen"
 
 #: plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "Wachtwoord wijzigen"
 
 #: plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "Overschakelen naar vegen"
 
 #: plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "Overschakelen naar toegangscode"
 
 #: plugins/security-privacy//LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "Overschakelen naar wachtwoordzin"
 
 #: plugins/security-privacy//LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "Huidige toegangscode"
 
 #: plugins/security-privacy//LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "Huidige wachtwoordzin"
 
 #: plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "Verkeerde toegangscode. Probeer opnieuw."
 
 #: plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Verkeerde wachtwoordzin. Probeer opnieuw."
 
 #: plugins/security-privacy//LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "Kies een toegangscode"
 
 #: plugins/security-privacy//LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Kies een wachtwoordzin"
 
 #: plugins/security-privacy//LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "Bevestig de toegangscode"
 
 #: plugins/security-privacy//LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Bevestig de wachtwoordzin"
 
 #: plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "De toegangscodes komen niet overeen. Probeer het opnieuw."
 
 #: plugins/security-privacy//LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Deze wachtwoordzinnen komen niet overeen. Probeer het opnieuw."
 
 #: plugins/security-privacy//LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "Niet ingesteld"
 
 #: plugins/security-privacy//LockSecurity.qml:274
 #: wizard/qml/Pages//30-location.qml:48
 #: wizard/qml/Pages//20-wifi.qml:168 ../wizard/qml/Pages//10-welcome.qml:78
 msgid "Continue"
-msgstr ""
+msgstr "Doorgaan"
 
 #: plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "De telefoon ontgrendelen met:"
 
 #: plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Vegen (geen beveiliging)"
 
 #: plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "Vier-cijferige pincode"
 
 #: plugins/security-privacy//LockSecurity.qml:332
 #: plugins/security-privacy//PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "Wachtwoordzin"
 
 #: plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Vegen (geen beveiliging)… "
 
 #: plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "Viercijferige pincode…"
 
 #: plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "Wachtwoordzin..."
 
 #: plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "Wijzig toegangscode..."
 
 #: plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Wijzig wachtwoordzin..."
 
 #: plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "Locatie"
 
 #: plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "Locatiebepaling"
 
 #: plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"GPS wordt gebruikt om uw locatie bij benadering te bepalen. Wanneer de GPS "
+"uitstaat, bespaart dat stroom."
 
 #: plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"GPS en Wi-Fi worden gebruikt om uw locatie bij benadering te bepalen. "
+"Wanneer de locatiebepaling uitstaat, bespaart dat stroom."
 
 #: plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"Uw GPS en Wi-Fi (momenteel uit) worden gebruikt om ruwweg uw locatie te "
+"bepalen. Wanneer locatiebepaling uitstaat, bespaart u stroom."
 
 #: plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"Gebruikt GPS, Wi-Fi en 3G om ruwweg uw locatie te bepalen. Wanneer "
+"locatiebepaling uitstaat, bespaart u stroom."
 
 #: plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"Gebruikt wi-fi, zendmasten (thans geen mobiele verbinding) en GPS om ruwweg "
+"uw locatie te bepalen. Wanneer locatiebepaling uitstaat, bespaart u stroom."
 
 #: plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"Gebruikt wi-fi (nu uit), zendmasten en GPS om ruwweg uw locatie te bepalen. "
+"Wanneer locatiebepaling uitstaat, bespaart u stroom."
 
 #: plugins/security-privacy//Location.qml:82
 msgid ""
@@ -337,6 +349,9 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Gebruikt wi-fi (nu uit), zendmasten (thans geen mobiele verbinding) en GPS "
+"om ruwweg uw locatie te bepalen. Wanneer locatiebepaling uitstaat, bespaart "
+"u stroom."
 
 #: plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
@@ -346,7 +361,7 @@ msgstr "Sta toegang tot locatie toe:"
 #: plugins/security-privacy//PageComponent.qml:33
 #: settings.js:28
 msgid "Security & Privacy"
-msgstr ""
+msgstr "Beveiliging & Privacy"
 
 #: plugins/security-privacy//PageComponent.qml:50
 #: plugins/security-privacy//PageComponent.qml:127
@@ -358,16 +373,16 @@ msgstr "Telefoon en internet"
 #: plugins/security-privacy//PageComponent.qml:128
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr ""
+msgstr "Alleen telefoon"
 
 #: plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
-msgstr ""
+msgstr "Beveiliging:"
 
 #: plugins/security-privacy//PageComponent.qml:76
 #: plugins/security-privacy//PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "Telefoon vergrendelen"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/security-privacy//PageComponent.qml:78
