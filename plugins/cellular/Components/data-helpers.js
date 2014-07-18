@@ -1,33 +1,39 @@
-
+// maps keys to index of preference selector
+function getIndexMap () {
+    return sims.length === 2 ? {
+        'gsm': 0,
+        'any': 1,
+        'lte': 1,
+        'umts': 1,
+        '': -1
+    } : {
+        'off': 0,
+        'gsm': 1,
+        'any': 2,
+        'lte': 2,
+        'umts': 2,
+        '': -1
+    };
+}
 
 /* return index of key k using data in techPref.model */
 function keyToIndex (k) {
-    var ret;
-    switch (k) {
-        case 'gsm':
-            ret = 1;
-            break;
-        case 'umts':
-        case 'lte':
-        case 'any':
-            ret = 2;
-            break;
-        default:
-            ret = -1;
-            break;
-    }
-    console.warn('keyToIndex for key', k, ret);
-    return ret;
+    console.warn('keyToIndex for key', k, getIndexMap()[k], '(have sims.lenght)', sims.length);
+    return getIndexMap()[k];
 }
 
 function indexToKey (i) {
-    if (i === 1) {
-        return 'gsm';
-    } else if (i === 2) {
-        return 'any'
-    } else {
-        return -1
+    var indices = getIndexMap();
+    for (var k in indices) {
+        if (indices.hasOwnProperty(k)) {
+            if (indices[k] === i) {
+                console.warn('indexToKey for i', i, k);
+                return k;
+            }
+        }
     }
+    console.warn('indexToKey for i', i, '[empty]');
+    return ''
 }
 
 /* return currently selected key or null if none selected */
@@ -80,6 +86,7 @@ function preferenceChanged (preference) {
 /* handler for when ConnectionManager powered changes */
 function poweredChanged (powered) {
     var rdoKey = radioSettings.technologyPreference;
+    console.log('poweredChanged rdoKey', rdoKey);
     if (powered) {
         if (rdoKey === '') {
             console.warn('Modem came online but TechnologyPreference is empty');
@@ -96,16 +103,17 @@ function poweredChanged (powered) {
 
 /* handler for when user clicks the TechnologyPreference item selector */
 function techSelectorClicked (index) {
-    console.warn('delegateClicked', index);
+    console.warn('techSelectorClicked', index);
     // if the user selects a TechnologyPreference, update RadioSettings
     if (index > 0) {
         radioSettings.technologyPreference = indexToKey(index);
-        console.warn('delegateClicked setting TechnologyPreference to', indexToKey(index));
+        console.warn('techSelectorClicked setting TechnologyPreference to', indexToKey(index));
     }
 }
 
 function dualTechSelectorClicked (index) {
-
+    console.warn('dualTechSelectorClicked setting TechnologyPreference to', indexToKey(index));
+    radioSettings.technologyPreference = indexToKey(index);
 }
 
 function simSelectorClicked (i) {

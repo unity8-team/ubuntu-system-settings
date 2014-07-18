@@ -127,7 +127,7 @@ ItemPage {
                 anchors.right: parent.right
 
                 // bind cellData.sims to root.sims
-                onLoaded: {
+                Component.onCompleted: {
                     simBinder.target = cellData.item
                     roamingBinder.target = cellData.item
                     roamingControlBinder.target = cellData.item

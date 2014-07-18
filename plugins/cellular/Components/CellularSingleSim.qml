@@ -23,27 +23,64 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import "data-helpers.js" as DataHelpers
 
 Column {
-
+    id: root
     height: childrenRect.height
-    width: parent.width
+    //width: parent.width
 
-    property bool dataEnabled: connMan.powered
-    property bool roamingAllowed: connMan.roamingAllowed
+    property bool dataEnabled
+    property bool roamingAllowed
 
-    property var sim: sims[0]
+    property alias sim: root.sims[0]
+    property alias radioSettings: root.sims[0].radioSettings
+    property alias connMan: root.sims[0].connMan
+
     property var selector: selector
-    property var radioSettings: sim.radioSettings
-    property var connMan: sim.connMan
 
     ListItem.ItemSelector {
         id: selector
         objectName: "technologyPreferenceSelector"
         expanded: true
         model: [i18n.tr("Off"), i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
+        onDelegateClicked: DataHelpers.techSelectorClicked(index)
+    }
+
+    Connections {
+        target: connMan
+        onPoweredChanged: DataHelpers.poweredChanged(powered)
+    }
+
+    Connections {
+        target: radioSettings
+        onTechnologyPreferenceChanged: DataHelpers.preferenceChanged(preference)
+    }
+
+    Binding {
+        id: powerBinding
+        property: "powered"
+        value: selector.selectedIndex !== 0
+    }
+
+    Binding {
+        id: dataEnabledBinding
+        property: "powered"
+        value: dataEnabled
+    }
+
+    Binding {
+        id: roamingBinding
+        property: "roamingAllowed"
+        value: roamingAllowed
+    }
+
+
+    Component.onCompleted: {
+        powerBinding.target = connMan
+        dataEnabled.target = connMan
+        roamingBinding.target = connMan
 
         // technologyPreference "" is not valid, assume sim locked or data unavailable
-        enabled: radioSettings.technologyPreference !== ""
-        selectedIndex: {
+        selector.enabled = radioSettings.technologyPreference !== ""
+        selector.selectedIndex = function () {
             var pref = radioSettings.technologyPreference;
             // make nothing selected if the string from OfonoRadioSettings is empty
             if (pref === "") {
@@ -54,22 +91,5 @@ Column {
                 return DataHelpers.keyToIndex(DataHelpers.normalizeKey(pref));
             }
         }
-        onDelegateClicked: DataHelpers.techSelectorClicked(index)
-    }
-
-    Connections {
-        target: connMan
-        onPoweredChanged: DataHelpers.poweredChanged(powered)
-    }
-
-    Binding {
-        target: connMan
-        property: "powered"
-        value: selector.selectedIndex !== 0
-    }
-
-    Connections {
-        target: radioSettings
-        onTechnologyPreferenceChanged: DataHelpers.preferenceChanged(preference)
     }
 }

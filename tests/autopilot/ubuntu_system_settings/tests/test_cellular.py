@@ -20,6 +20,9 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 PREFERENCE_2G = '2G only (saves battery)'
 PREFERENCE_ANY = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
+LABEL_SIM_1 = 'SIM 1 (123456)'
+LABEL_SIM_2 = 'SIM 2 (08123)'
+LABEL_OFF = 'Off'
 
 
 class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
@@ -45,6 +48,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         first_modem = 'ril_0'
         second_modem = 'ril_1'
 
+        # TODO: remove this when it has been fixed in dbusmock
         def get_all_operators(name, slow=False):
             return 'ret = [(m, objects[m].GetAll("org.ofono.NetworkOperator")) ' \
                    'for m in objects if "%s/operator/" in m]' % name
@@ -61,6 +65,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             ('Scan', '', 'a(oa{sv})', get_all_operators(second_modem)),
         ])
         self.mock_carriers(second_modem)
+        self.mock_radio_settings(self.modem_1)
         self.mock_connection_manager(self.modem_1)
 
         self.mock_sim_manager(self.modem_1, {
@@ -187,6 +192,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         # click off
         self.select_preference(PREFERENCE_OFF)
+
         # assert roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
 
@@ -274,3 +280,135 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         sleep(1)
 
         self.assert_selected_preference(2)
+
+    def test_dualsim_online_modem_1(self):
+        self.mock_for_dual_sim()
+
+        pref = self.system_settings.main_view.cellular_page.select_single(
+            objectName="use"
+        ).select_single('Label', text=LABEL_SIM_1)
+        self.system_settings.main_view.pointer.click_object(pref)
+
+        sleep(0.5)
+        self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
+        self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
+
+    def test_dualsim_online_modem_2(self):
+        self.mock_for_dual_sim()
+
+        pref = self.system_settings.main_view.cellular_page.select_single(
+            objectName="use"
+        ).select_single('Label', text=LABEL_SIM_2)
+        self.system_settings.main_view.pointer.click_object(pref)
+
+        sleep(0.5)
+        self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
+        self.assertEqual(True, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
+
+    def test_dualsim_offline_both_modems(self):
+        self.mock_for_dual_sim()
+
+        pref = self.system_settings.main_view.cellular_page.select_single(
+            objectName="use"
+        ).select_single('Label', text=LABEL_OFF)
+        self.system_settings.main_view.pointer.click_object(pref)
+
+        # wait for dbus
+        sleep(1)
+        self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
+        self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
+
+    def test_dualsim_gsm_modem_1(self):
+        self.mock_for_dual_sim()
+
+        pref = self.system_settings.main_view.cellular_page.select_single(
+            objectName="use"
+        ).select_single('Label', text=LABEL_SIM_1)
+        self.system_settings.main_view.pointer.click_object(pref)
+
+        self.select_preference(PREFERENCE_2G)
+
+        # wait for dbus
+        sleep(1)
+
+        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+
+    def test_dualsim_any_modem_1(self):
+        self.mock_for_dual_sim()
+
+        pref = self.system_settings.main_view.cellular_page.select_single(
+            objectName="use"
+        ).select_single('Label', text=LABEL_SIM_1)
+        self.system_settings.main_view.pointer.click_object(pref)
+
+        self.select_preference(PREFERENCE_ANY)
+
+        # wait for dbus
+        sleep(1)
+
+        self.assertEqual('any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+
+    def test_dualsim_gsm_modem_2(self):
+        self.mock_for_dual_sim()
+
+        pref = self.system_settings.main_view.cellular_page.select_single(
+            objectName="use"
+        ).select_single('Label', text=LABEL_SIM_2)
+        self.system_settings.main_view.pointer.click_object(pref)
+
+        self.select_preference(PREFERENCE_2G)
+
+        # wait for dbus
+        sleep(1)
+
+        self.assertEqual('gsm', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+
+    def test_dualsim_any_modem_2(self):
+        self.mock_for_dual_sim()
+
+        pref = self.system_settings.main_view.cellular_page.select_single(
+            objectName="use"
+        ).select_single('Label', text=LABEL_SIM_2)
+        self.system_settings.main_view.pointer.click_object(pref)
+
+        self.select_preference(PREFERENCE_ANY)
+
+        # wait for dbus
+        sleep(1)
+
+        self.assertEqual('any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+
+    # def test_dualsim_modem_1_comes_online(self):
+    #     self.mock_for_dual_sim()
+
+    #     pref = self.system_settings.main_view.cellular_page.select_single(
+    #         objectName="use"
+    #     ).select_single('Label', text=LABEL_OFF)
+    #     self.system_settings.main_view.pointer.click_object(pref)
+
+    #     # wait for dbus
+    #     sleep(1)
+
+
+
+    #     self.assertEqual('any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+
+    # def test_dualsim_modem_2_comes_online(self):
+    #     #self.mock_for_dual_sim()
+    #     pass
+
+    # def test_dualsim_both_modems_comes_online(self):
+    #     #self.mock_for_dual_sim()
+    #     pass
+
+    # def test_dualsim_change_op_modem_1(self):
+    #     #self.mock_for_dual_sim()
+    #     pass
+
+    # def test_dualsim_change_op_modem_2(self):
+    #     #self.mock_for_dual_sim()
+    #     pass
+
+    # def test_dualsim_do_op_search(self):
+    #     #self.mock_for_dual_sim()
+    #     pass

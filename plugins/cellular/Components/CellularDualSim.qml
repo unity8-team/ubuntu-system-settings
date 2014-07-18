@@ -23,9 +23,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import "data-helpers.js" as DataHelpers
 
 Column {
-
+    id: root
     height: childrenRect.height
-    width: parent.width
 
     function getRoamingAllowed () {
         var poweredModem = getPoweredModem();
@@ -48,12 +47,12 @@ Column {
         }
     }
 
-    function getTechnologyPreference () {
+    function getRadioSettings () {
         var poweredModem = getPoweredModem();
         if (poweredModem) {
-            return poweredModem.radioSettings.technologyPreference;
+            return poweredModem.radioSettings;
         } else {
-            return "";
+            return null;
         }
     }
 
@@ -63,7 +62,7 @@ Column {
 
     property bool dataEnabled: getPoweredModem()
     property bool roamingAllowed: getRoamingAllowed()
-    property string radioSettings: getTechnologyPreference()
+    property var radioSettings: getRadioSettings()
 
     ListItem.ItemSelector {
         id: use
@@ -92,9 +91,10 @@ Column {
         model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
 
         // technologyPreference "" is not valid, assume sim locked or data unavailable
-        enabled: getPoweredModem() && (getTechnologyPreference() !== "")
+        enabled: getPoweredModem() && (radioSettings.technologyPreference !== "")
         selectedIndex: {
-            var pref = getTechnologyPreference();
+            var pref = radioSettings.technologyPreference;
+            console.warn('selectedIndex pref', pref, radioSettings);
             // make nothing selected if the string from OfonoRadioSettings is empty
             if (pref === "") {
                 console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
@@ -104,6 +104,6 @@ Column {
                 return DataHelpers.keyToIndex(DataHelpers.normalizeKey(pref));
             }
         }
-        onDelegateClicked: DataHelpers.delegateClicked(index)
+        onDelegateClicked: DataHelpers.dualTechSelectorClicked(index)
     }
 }
