@@ -80,7 +80,6 @@ NotificationsManager::~NotificationsManager()
 void NotificationsManager::loadModel()
 {
     // Load the blacklist
-
     GVariant *blacklist = g_settings_get_value(m_pushSettings, BLACKLIST_KEY);
     GVariantIter *iter;
     g_variant_get (blacklist, "a(ss)", &iter);
@@ -95,8 +94,7 @@ void NotificationsManager::loadModel()
     g_variant_iter_free (iter);
     g_variant_unref (blacklist);
 
-    // LOAD ALL THE APPS
-
+    // Load all the packages
     QString output(m_process.readAllStandardOutput());
     QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
     QJsonArray array = document.array();
@@ -148,14 +146,11 @@ void NotificationsManager::loadModel()
             }
         }
     }
-    std::cout << "FLAG7\n\n";
     Q_EMIT modelChanged();
-    std::cout << "FLAG8\n\n";
 }
 
 void NotificationsManager::checkUpdates(QString key, bool value)
 {
-    std::cout << "CU" << key.toStdString() << "->" << value << "\n\n";
     // Update the internal blacklist
     if (value) {
         if (!m_blacklist.contains(key)) {
