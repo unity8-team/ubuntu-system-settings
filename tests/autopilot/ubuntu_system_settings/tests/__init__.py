@@ -194,10 +194,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         cls.p_mock.wait()
         super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
 
+
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp('cellular')
+
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
@@ -207,6 +209,7 @@ class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
             objectName='aboutPage'
         )
 
+
 class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """Go to About page."""
@@ -214,6 +217,7 @@ class AboutOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.about_page = self.system_settings.main_view.select_single(
             objectName='aboutPage'
         )
+
 
 class AboutSystemImageBaseTestCase(AboutBaseTestCase,
                                    dbusmock.DBusTestCase):
@@ -227,14 +231,14 @@ class AboutSystemImageBaseTestCase(AboutBaseTestCase,
                                       system_bus=True,
                                       stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.dbus_con.get_object(
-            'com.canonical.SystemImage',
-            '/Service'),
-            dbusmock.MOCK_IFACE)
+                                      'com.canonical.SystemImage',
+                                      '/Service'),
+                                      dbusmock.MOCK_IFACE)
 
         date = datetime.now().replace(microsecond=0).isoformat()
 
         cls.dbusmock.AddMethod('', 'Info', '', 'isssa{ss}',
-                                 'ret = (0, "", "", "%s", [])' % date)
+                               'ret = (0, "", "", "%s", [])' % date)
 
     def setUp(self):
         self.wait_for_bus_object('com.canonical.SystemImage',

@@ -5,9 +5,7 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-import datetime
 import dateutil.parser
-import locale
 import os
 import subprocess
 import unittest
@@ -107,6 +105,7 @@ class AboutTestCase(AboutBaseTestCase):
         device_name_from_getprop = self._get_device_manufacturer_and_model()
 
         self.assertEquals(displayed_device_name, device_name_from_getprop)
+
 
 class AboutOfonoTestCase(AboutOfonoBaseTestCase):
     def _get_imei_from_dbus(self):
