@@ -24,22 +24,15 @@ import "data-helpers.js" as DataHelpers
 
 Column {
 
+    id: ds
+
     height: childrenRect.height
 
     property var sim1
     property var sim2
+    property alias useSim: ds.sim1
     property var selector: selector
-
-    function getSelectedSim () {
-        var i = use.selectedIndex;
-        if (i === 1) {
-            return sim1;
-        } else if (i === 2) {
-            return sim2;
-        } else {
-            return null;
-        }
-    }
+    property var prefMap: ['gsm', 'any']
 
     ListItem.ItemSelector {
         id: use
@@ -47,8 +40,13 @@ Column {
         text: i18n.tr("Cellular data:")
         expanded: true
         model: [i18n.tr("Off"), sim1.title, sim2.title]
-        selectedIndex: [true, sim1.connMan.powered, sim2.connMan.powered].lastIndexOf(true);
-        onDelegateClicked: DataHelpers.simSelectorClicked(index)
+        // selectedIndex: [true, sim1.connMan.powered, sim2.connMan.powered].lastIndexOf(true);
+    }
+
+    Binding {
+        target: useSim.connMan
+        property: "powered"
+        value: useSim === sim1 ? use.selectedIndex === 1 : use.selectedIndex === 2
     }
 
     ListItem.ItemSelector {
@@ -57,40 +55,29 @@ Column {
         expanded: true
         model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
 
-        // technologyPreference "" is not valid, assume sim locked or data unavailable
-        enabled: getSelectedSim() && (getSelectedSim().radioSettings.technologyPreference !== "")
-        selectedIndex: {
-            var pref = getSelectedSim() ? getSelectedSim().radioSettings.technologyPreference : "";
-            console.warn('selectedIndex pref', pref, getSelectedSim() ? getSelectedSim().radioSettings.technologyPreference : "");
-            // make nothing selected if the string from OfonoRadioSettings is empty
-            if (pref === "") {
-                console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
-                return -1;
-            } else {
-                // normalizeKey turns "lte" and "umts" into "any"
-                return DataHelpers.dualKeyToIndex(DataHelpers.normalizeKey(pref));
-            }
-        }
-        onDelegateClicked: DataHelpers.dualTechSelectorClicked(index)
+        // enabled: useSim.radioSettings.technologyPreference !== ""
+        // selectedIndex: prefMap.indexOf(useSim.radioSettings.technologyPreference)
+
+        //onDelegateClicked: DataHelpers.dualTechSelectorClicked(index)
+    }
+
+
+    Binding {
+        target: useSim.radioSettings
+        property: "technologyPreference"
+        value: prefMap[selector.selectedIndex]
     }
 
     ListItem.Standard {
         id: dataRoamingItem
         objectName: "dataRoamingSwitch"
         text: i18n.tr("Data roaming")
-        enabled: getSelectedSim() ? getSelectedSim().connMan.powered : false
+        enabled: use.selectedIndex !== 0
         control: Switch {
             id: dataRoamingControl
-            checked: getSelectedSim() ? getSelectedSim().connMan.powered : false
-            onClicked: getSelectedSim().connMan.roamingAllowed = checked
+            checked: useSim.connMan.roamingAllowed
+            onClicked: useSim.connMan.roamingAllowed = checked
         }
     }
 
-
-    Component.onCompleted: {
-        // now what
-        if (sim1.connMan.powered && sim2.connMan.powered) {
-            sim2.connMan.powered = false;
-        }
-    }
 }

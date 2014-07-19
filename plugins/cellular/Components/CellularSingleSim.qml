@@ -34,26 +34,7 @@ Column {
         expanded: true
         enabled: sim1.radioSettings.technologyPreference !== ""
         model: [i18n.tr("Off"), i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
-        selectedIndex: {
-            var pref = sim1.radioSettings.technologyPreference;
-            // make nothing selected if the string from OfonoRadioSettings is empty
-            if (pref === "") {
-                console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
-                return -1;
-            } else {
-                return DataHelpers.singleKeyToIndex(pref);
-            }
-        }
-        onDelegateClicked: {
-            console.warn('selector clicked:', index);
-            var k;
-            // if the user selects a TechnologyPreference, update RadioSettings
-            if (index > 0) {
-                k = DataHelpers.singleIndexToKey(index);
-                sim1.radioSettings.technologyPreference = k;
-                console.warn('selector clicked will set TechnologyPreference to', k);
-            }
-        }
+        selectedIndex: DataHelpers.singleSimKeyToIndex(sim1.radioSettings.technologyPreference)
     }
 
     ListItem.Standard {
@@ -68,22 +49,12 @@ Column {
         }
     }
 
-
     Connections {
         target: sim1.connMan
         onPoweredChanged: {
-            var rdoKey = sim1.radioSettings.technologyPreference;
-            console.log('poweredChanged rdoKey', rdoKey, 'powered', powered);
             if (powered) {
-                if (rdoKey === '') {
-                    console.warn('Modem came online but TechnologyPreference is empty');
-                    return;
-                } else {
-                    console.warn('Modem came online, TechnologyPreference', rdoKey, 'new selectedIndex', DataHelpers.singleKeyToIndex(rdoKey));
-                    selector.selectedIndex = DataHelpers.singleKeyToIndex(rdoKey)
-                }
+                selector.selectedIndex = DataHelpers.singleSimKeyToIndex(sim1.radioSettings.technologyPreference);
             } else {
-                console.warn('Modem went offline');
                 selector.selectedIndex = 0;
             }
         }
@@ -92,26 +63,9 @@ Column {
     Connections {
         target: sim1.radioSettings
         onTechnologyPreferenceChanged: {
-            var i = selector.selectedIndex;
-            var rdoKey = sim1.radioSettings.technologyPreference;
-            var normalizedKey;
-
-            // if preference changes, but the user has chosen one already make sure the user's setting is respected
-            if (i > 0) {
-                console.warn('Overriding RadioSettings TechnologyPreference signal', preference, 'with user selection', DataHelpers.singleIndexToKey(i));
-                sim1.radioSettings.technologyPreference = DataHelpers.singleIndexToKey(i);
-                return;
-            }
-
-            normalizedKey = DataHelpers.normalizeKey(rdoKey);
-            // if the pref changes and the modem is on normlize and update the UI
             if (connMan.powered) {
-                selector.selectedIndex = DataHelpers.singleKeyToIndex(normalizedKey);
-            } else {
-                // if the modem is off, just normalize
-                sim1.radioSettings.technologyPreference = normalizedKey;
+                selector.selectedIndex = DataHelpers.singleSimKeyToIndex(preference);
             }
-            console.warn('Modem', connMan.powered ? 'online' : 'offline', 'TechnologyPreference', rdoKey);
         }
     }
 
@@ -119,5 +73,20 @@ Column {
         target: sim1.connMan
         property: "powered"
         value: selector.selectedIndex !== 0
+    }
+
+    Binding {
+        target: sim1.radioSettings
+        property: "technologyPreference"
+        value: {
+            var i = selector.selectedIndex;
+            if (i === 1) {
+                return 'gsm';
+            } else if (i === 2) {
+                return 'any';
+            } else {
+                return sim1.radioSettings.technologyPreference
+            }
+        }
     }
 }

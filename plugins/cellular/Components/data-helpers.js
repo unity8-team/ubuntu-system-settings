@@ -21,13 +21,15 @@ function singleIndexToKey (i) {
     }
 }
 
-function singleKeyToIndex (k) {
+function singleSimKeyToIndex (k) {
     if (k === 'off') {
         return 0;
     } else if (k === 'gsm') {
         return 1;
-    } else {
+    } else if (k === 'any' || k === 'lte' || k === 'umts') {
         return 2;
+    } else {
+        return -1;
     }
 }
 

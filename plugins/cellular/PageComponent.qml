@@ -39,16 +39,30 @@ ItemPage {
             name: "singleSim"
             StateChangeScript {
                 name: "loadSim"
-                script: simOneLoader.setSource("Components/Sim.qml", { path: manager.modems[0] })
+                script: simOneLoader.setSource("Components/Sim.qml", {
+                    path: manager.modems[0],
+                    name: "SIM 1"
+                })
             }
             when: manager.modems.length === 1
         },
         State {
             name: "dualSim"
-            extend: "singleSim"
             StateChangeScript {
-                name: "loadSims"
-                script: simTwoLoader.setSource("Components/Sim.qml", { path: manager.modems[1] })
+                name: "loadSecondSim"
+                script: {
+                    // only load sim one if not loaded
+                    if (!simOneLoader.source) {
+                        simOneLoader.setSource("Components/Sim.qml", {
+                            path: manager.modems[0],
+                            name: "SIM 1"
+                        });
+                    }
+                    simTwoLoader.setSource("Components/Sim.qml", {
+                        path: manager.modems[1],
+                        name: "SIM 2"
+                    });
+                }
             }
             when: manager.modems.length === 2
         }
@@ -89,6 +103,7 @@ ItemPage {
     Loader {
         id: simTwoLoader
         onLoaded: {
+            cellData.source = "";
             cellData.setSource("Components/CellularDualSim.qml", {
                 sim1: sim1,
                 sim2: sim2

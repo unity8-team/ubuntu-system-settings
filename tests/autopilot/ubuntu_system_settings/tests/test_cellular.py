@@ -291,6 +291,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     def test_dualsim_online_modem1(self):
         self.mock_for_dual_sim()
+        sleep(3)
 
         pref = self.system_settings.main_view.cellular_page.select_single(
             objectName="use"
