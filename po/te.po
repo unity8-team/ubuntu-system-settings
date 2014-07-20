@@ -8,135 +8,135 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2013-11-29 20:35+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2014-07-19 10:21+0000\n"
+"Last-Translator: Praveen Illa <mail2ipn@gmail.com>\n"
 "Language-Team: Telugu <te@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:35+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-20 06:17+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
-msgstr ""
+msgstr "ఆడించుట ఆపివేయి"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: plugins/sound//PageComponent.qml:36
 #: settings.js:2
 msgid "Sound"
-msgstr ""
+msgstr "శబ్దం"
 
 #: plugins/sound//PageComponent.qml:68
 msgid "Phone calls:"
-msgstr ""
+msgstr "ఫోను కాల్స్:"
 
 #: plugins/sound//PageComponent.qml:72
 #: plugins/sound//PageComponent.qml:78
 msgid "Ringtone"
-msgstr ""
+msgstr "రింగుటోను"
 
 #: plugins/sound//PageComponent.qml:89
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "మోగేటప్పుడు కంపించు"
 
 #: plugins/sound//PageComponent.qml:97
 #: plugins/sound//PageComponent.qml:130
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "నిశ్శబ్ద రీతిలో కంపించు"
 
 #: plugins/sound//PageComponent.qml:102
 msgid "Messages:"
-msgstr ""
+msgstr "సందేశాలు:"
 
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
 msgid "Message received"
-msgstr ""
+msgstr "సందేశం స్వీకరించబడింది"
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "సందేశ శబ్దంతో కంపించు"
 
 #: plugins/sound//PageComponent.qml:135
 msgid "Other sounds:"
-msgstr ""
+msgstr "ఇతర శబ్దాలు:"
 
 #: plugins/sound//PageComponent.qml:139
 #: plugins/language//PageComponent.qml:160
 msgid "Keyboard sound"
-msgstr ""
+msgstr "కీబోర్డు శబ్దం"
 
 #: plugins/sound//PageComponent.qml:153
 msgid "Lock sound"
-msgstr ""
+msgstr "తాళం శబ్దం"
 
 #: plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "ఫోను నిశ్శబ్ద రీతిలో ఉంది."
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: plugins/time-date//PageComponent.qml:29
 #: settings.js:8
 msgid "Time & Date"
-msgstr ""
+msgstr "సమయం & తేది"
 
 #: plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr ""
+msgstr "సమయ క్షేత్రం:"
 
 #: plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
-msgstr ""
+msgstr "సమయం మరియు తేదీలను అమర్చండి:"
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
 #: plugins/cellular//PageComponent.qml:122
 msgid "Automatically"
-msgstr ""
+msgstr "స్వయంచాలకం"
 
 #: plugins/time-date//PageComponent.qml:69
 #: plugins/time-date//ChooseTimeZone.qml:47
 #: plugins/cellular//PageComponent.qml:122
 msgid "Manually"
-msgstr ""
+msgstr "మానవీయం"
 
 #: plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "సమయం & తేదీలను అమర్చు"
 
 #: plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "సమయం"
 
 #: plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "గంట"
 
 #: plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "నిమిషం"
 
 #: plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "క్షణం"
 
 #: plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "తేదీ"
 
 #: plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "రోజు"
 
 #: plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "నెల"
 
 #: plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "సంవత్సరం"
 
 #: plugins/time-date//TimePicker.qml:173
 #: plugins/security-privacy//LockSecurity.qml:310
@@ -151,149 +151,149 @@ msgstr ""
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:54
 msgid "Cancel"
-msgstr ""
+msgstr "రద్దుచేయి"
 
 #: plugins/time-date//TimePicker.qml:182
 #: plugins/phone//CallForwarding.qml:113
 #: plugins/background//Preview.qml:102
 msgid "Set"
-msgstr ""
+msgstr "అమర్చు"
 
 #: plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "సమయ క్షేత్రం"
 
 #: plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "సమయ క్షేత్రాన్ని అమర్చు:"
 
 #: plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr ""
+msgstr "మీ ప్రస్తుత స్థానాన్ని ఇవ్వండి."
 
 #: plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr ""
+msgstr "సరిపోలే స్థానము ఏమీలేదు"
 
 #: plugins/security-privacy//LockSecurity.qml:30
 #: plugins/security-privacy//PhoneLocking.qml:44
 msgid "Lock security"
-msgstr ""
+msgstr "తాళం భద్రత"
 
 #: plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
-msgstr ""
+msgstr "సంకేతసంఖ్యను మార్చండి"
 
 #: plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr ""
+msgstr "రహస్యపదాన్ని మార్చండి"
 
 #: plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr ""
+msgstr "స్వైప్ రీతికి మారండి"
 
 #: plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
-msgstr ""
+msgstr "సంకేతసంఖ్య రీతికి మారండి"
 
 #: plugins/security-privacy//LockSecurity.qml:91
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "రహస్యపదం రీతికి మారండి"
 
 #: plugins/security-privacy//LockSecurity.qml:100
 msgid "Existing passcode"
-msgstr ""
+msgstr "ఇదివరకటి సంకేతసంఖ్య"
 
 #: plugins/security-privacy//LockSecurity.qml:102
 msgid "Existing passphrase"
-msgstr ""
+msgstr "ఇదివరకటి రహస్యపదం"
 
 #: plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr ""
+msgstr "సంకేతసంఖ్య తప్పు. మళ్ళీ ప్రయత్నించండి."
 
 #: plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "రహస్యపదం తప్పు. మళ్ళీ ప్రయత్నించండి."
 
 #: plugins/security-privacy//LockSecurity.qml:166
 msgid "Choose passcode"
-msgstr ""
+msgstr "సంకేతసంఖ్యను ఎంచుకోండి"
 
 #: plugins/security-privacy//LockSecurity.qml:168
 msgid "Choose passphrase"
-msgstr ""
+msgstr "రహస్యపదాన్ని ఎంచుకోండి"
 
 #: plugins/security-privacy//LockSecurity.qml:212
 msgid "Confirm passcode"
-msgstr ""
+msgstr "సంకేతసంఖ్యను నిర్ధారించండి"
 
 #: plugins/security-privacy//LockSecurity.qml:214
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "రహస్యపదాన్ని నిర్ధారించండి"
 
 #: plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "ఆ సంకేతసంఖ్యలు సరిపోలలేదు. మళ్ళీ ప్రయత్నించండి."
 
 #: plugins/security-privacy//LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "ఆ రహస్యపదాలు సరిపోలలేదు. మళ్ళీ ప్రయత్నించండి."
 
 #: plugins/security-privacy//LockSecurity.qml:273
 msgid "Unset"
-msgstr ""
+msgstr "అనమర్చు"
 
 #: plugins/security-privacy//LockSecurity.qml:274
 #: wizard/qml/Pages//30-location.qml:48
 #: wizard/qml/Pages//20-wifi.qml:168 ../wizard/qml/Pages//10-welcome.qml:78
 msgid "Continue"
-msgstr ""
+msgstr "కొనసాగించు"
 
 #: plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "దీనిని వాడి ఫోను తాళంతీయి:"
 
 #: plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "గీకడం (ఎటువంటి భద్రత ఉండదు)"
 
 #: plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4-అంకెల సంకేతసంఖ్య"
 
 #: plugins/security-privacy//LockSecurity.qml:332
 #: plugins/security-privacy//PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "రహస్యపదం"
 
 #: plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "గీకడం (ఎటువంటి భద్రత ఉండదు)… "
 
 #: plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4-అంకెల సంకేతసంఖ్య…"
 
 #: plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr ""
+msgstr "రహస్యపదం…"
 
 #: plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr ""
+msgstr "సంకేతసంఖ్యను మార్చండి…"
 
 #: plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr ""
+msgstr "రహస్యపదాన్ని మార్చండి…"
 
 #: plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "స్థానం"
 
 #: plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "స్థాన గుర్తింపు"
 
 #: plugins/security-privacy//Location.qml:70
 msgid ""
@@ -346,28 +346,28 @@ msgstr ""
 #: plugins/security-privacy//PageComponent.qml:33
 #: settings.js:28
 msgid "Security & Privacy"
-msgstr ""
+msgstr "భద్రత & గోప్యత"
 
 #: plugins/security-privacy//PageComponent.qml:50
 #: plugins/security-privacy//PageComponent.qml:127
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr ""
+msgstr "ఫోను మరియు అంతర్జాలం"
 
 #: plugins/security-privacy//PageComponent.qml:52
 #: plugins/security-privacy//PageComponent.qml:128
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr ""
+msgstr "ఫోను మాత్రమే"
 
 #: plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
-msgstr ""
+msgstr "భద్రత:"
 
 #: plugins/security-privacy//PageComponent.qml:76
 #: plugins/security-privacy//PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "ఫోను తాళంవేయుట"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/security-privacy//PageComponent.qml:78
@@ -375,24 +375,24 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 నిమిషం"
+msgstr[1] "%1 నిమిషాలు"
 
 #: plugins/security-privacy//PageComponent.qml:87
 msgid "SIM PIN"
-msgstr ""
+msgstr "సిమ్ పిన్"
 
 #: plugins/security-privacy//PageComponent.qml:93
 msgid "Privacy:"
-msgstr ""
+msgstr "గోప్యత:"
 
 #: plugins/security-privacy//PageComponent.qml:97
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "స్వాగత తెరపై గణాంకాలు"
 
 #: plugins/security-privacy//PageComponent.qml:110
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "స్వాగత తెరపై సందేశాలు"
 
 #: plugins/security-privacy//PageComponent.qml:125
 #: plugins/security-privacy//Dash.qml:29
@@ -401,27 +401,27 @@ msgstr ""
 
 #: plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
-msgstr ""
+msgstr "స్థాన ప్రాప్యత"
 
 #: plugins/security-privacy//PageComponent.qml:151
 msgid "Other app access"
-msgstr ""
+msgstr "వేరే అనువర్తన ప్రాప్తి"
 
 #: plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
-msgstr ""
+msgstr "విశ్లేషణలు"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: plugins/security-privacy//PageComponent.qml:161
 msgid "Sent"
-msgstr ""
+msgstr "పంపబడింది"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: plugins/security-privacy//PageComponent.qml:164
 msgid "Not sent"
-msgstr ""
+msgstr "పంపబడలేదు"
 
 #: plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
@@ -433,16 +433,16 @@ msgstr ""
 #: plugins/bluetooth//PageComponent.qml:256
 #: plugins/bluetooth//PageComponent.qml:264
 msgid "None"
-msgstr ""
+msgstr "ఏదీకాదు"
 
 #: plugins/security-privacy//PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "సంకేతసంఖ్య"
 
 #: plugins/security-privacy//PhoneLocking.qml:62
 #: plugins/battery//PageComponent.qml:240
 msgid "Lock when idle"
-msgstr ""
+msgstr "జడంగా ఉన్నప్పుడు తాళంవేయి"
 
 #: plugins/security-privacy//PhoneLocking.qml:63
 #: plugins/battery//PageComponent.qml:240
@@ -457,16 +457,16 @@ msgstr ""
 #: plugins/language//PageComponent.qml:32
 #: settings.js:44
 msgid "Language & Text"
-msgstr ""
+msgstr "భాష & పాఠ్యం"
 
 #: plugins/language//PageComponent.qml:71
 msgid "Display language…"
-msgstr ""
+msgstr "ప్రదర్శన భాష…"
 
 #: plugins/language//PageComponent.qml:85
 #: plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "కీబోర్డు నమూనాలు"
 
 #: plugins/language//PageComponent.qml:100
 #: plugins/language//PageComponent.qml:110
@@ -481,7 +481,7 @@ msgstr ""
 
 #: plugins/language//PageComponent.qml:130
 msgid "Word suggestions"
-msgstr ""
+msgstr "పద సూచనలు"
 
 #: plugins/language//PageComponent.qml:143
 msgid "Auto capitalization"
@@ -497,94 +497,94 @@ msgstr ""
 
 #: plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
-msgstr ""
+msgstr "అన్ని భాషలు లభ్యం:"
 
 #: plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr ""
+msgstr "ప్రదర్శన భాష"
 
 #: plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
-msgstr ""
+msgstr "నిర్ధారించండి"
 
 #: plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr ""
+msgstr "ప్రస్తుత నమూనాలు:"
 
 #: plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr ""
+msgstr "అన్ని నమూనాలు లభ్యం:"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: plugins/battery//PageComponent.qml:34
 #: settings.js:54
 msgid "Battery"
-msgstr ""
+msgstr "బ్యాటరీ"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: plugins/battery//PageComponent.qml:46
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 క్షణం క్రితం"
+msgstr[1] "%1 క్షణాల క్రితం"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 నిమిషం క్రితం"
+msgstr[1] "%1 నిమిషాల క్రితం"
 
 #. TRANSLATORS: %1 is the number of hours
 #: plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 గంట క్రితం"
+msgstr[1] "%1 గంటల క్రితం"
 
 #. TRANSLATORS: %1 is the number of days
 #: plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 రోజు క్రితం"
+msgstr[1] "%1 రోజుల క్రితం"
 
 #: plugins/battery//PageComponent.qml:75
 msgid "Charging now"
-msgstr ""
+msgstr "చార్జవుతోంది"
 
 #: plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
-msgstr ""
+msgstr "చివరి పూర్తి చార్జు"
 
 #: plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
-msgstr ""
+msgstr "పూర్తిగా చార్జయింది"
 
 #: plugins/battery//PageComponent.qml:111
 msgid "Charge level"
-msgstr ""
+msgstr "చార్జీ స్థాయి"
 
 #: plugins/battery//PageComponent.qml:117
 #: plugins/battery//PageComponent.qml:224
 #: plugins/cellular//PageComponent.qml:129
 #: plugins/about//Storage.qml:204
 msgid "N/A"
-msgstr ""
+msgstr "వర్తించదు"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: plugins/battery//PageComponent.qml:120
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: plugins/battery//PageComponent.qml:229
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "బ్యాటరీ వాడకాన్ని తగ్గించే మార్గాలు:"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/battery//PageComponent.qml:246
@@ -597,8 +597,8 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 నిమిషం తరువాత"
+msgstr[1] "%1 నిమిషాల తరువాత"
 
 #: plugins/battery//PageComponent.qml:249
 #: plugins/battery//PageComponent.qml:258
@@ -608,14 +608,14 @@ msgstr[1] ""
 #: plugins/system-update//Configuration.qml:53
 #: plugins/about//PageComponent.qml:128
 msgid "Never"
-msgstr ""
+msgstr "ఎప్పటికీవద్దు"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: plugins/battery//PageComponent.qml:268
 #: plugins/wifi//PageComponent.qml:26
 #: settings.js:60
 msgid "Wi-Fi"
-msgstr ""
+msgstr "వై-ఫై"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: plugins/battery//PageComponent.qml:298
@@ -623,11 +623,11 @@ msgstr ""
 #: plugins/bluetooth//PageComponent.qml:130
 #: settings.js:126
 msgid "Bluetooth"
-msgstr ""
+msgstr "బ్లూటూత్"
 
 #: plugins/battery//PageComponent.qml:329
 msgid "GPS"
-msgstr ""
+msgstr "జిపియస్"
 
 #: plugins/battery//PageComponent.qml:348
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
@@ -654,31 +654,31 @@ msgstr ""
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "గత నెట్​వర్కులు"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "ఇతర నెట్​వర్కులు"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "నెట్​వర్క్ పేరు"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "భద్రత"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA & WPA2 వ్యక్తిగతం"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "సంకేతపదం"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
@@ -686,45 +686,45 @@ msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "అనుసంధానించు"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "నెట్​వర్క్ వివరాలు"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
 msgid "Name"
-msgstr ""
+msgstr "పేరు"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "చివరి అనుసంధానత"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "సంకేతపదాన్ని చూపించు"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "నెట్​వర్క్ మర్చిపోవు"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "%1 సేవలు"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: plugins/phone//PageComponent.qml:28
 #: plugins/bluetooth//PageComponent.qml:82
 #: settings.js:72
 msgid "Phone"
-msgstr ""
+msgstr "ఫోను"
 
 #: plugins/phone//PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "సిమ్"
 
 #: plugins/phone//PageComponent.qml:46
 #: plugins/phone//CallForwarding.qml:27
@@ -735,7 +735,7 @@ msgstr ""
 #: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
 #: plugins/phone//CallWaiting.qml:53
 msgid "Call waiting"
-msgstr ""
+msgstr "కాల్ నిరీక్షణ"
 
 #: plugins/phone//ServiceInfo.qml:35
 msgid "Call"
@@ -757,7 +757,7 @@ msgstr ""
 
 #: plugins/phone//CallForwarding.qml:113
 msgid "Contacts…"
-msgstr ""
+msgstr "పరిచయాలు…"
 
 #: plugins/phone//CallWaiting.qml:67
 msgid ""
@@ -769,31 +769,31 @@ msgstr ""
 #: plugins/system-update//PageComponent.qml:35
 #: settings.js:86
 msgid "Updates"
-msgstr ""
+msgstr "నవీకరణ‌లు"
 
 #: plugins/system-update//PageComponent.qml:51
 msgid "Update System"
-msgstr ""
+msgstr "వ్యవస్థను నవీకరించు"
 
 #: plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
-msgstr ""
+msgstr "వ్యవస్థ నవీకరణలు స్థాపించాలంటే ఫోను పునఃప్రారంభం అవసరం."
 
 #: plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
-msgstr ""
+msgstr "స్థాపించు & పునఃప్రారంభించు"
 
 #: plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
-msgstr ""
+msgstr "ఇప్పుడు కాదు"
 
 #: plugins/system-update//PageComponent.qml:70
 msgid "Install"
-msgstr ""
+msgstr "స్థాపించు"
 
 #: plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
-msgstr ""
+msgstr "సాఫ్ట్​వేర్ తాజాగావుంది"
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
@@ -805,7 +805,7 @@ msgstr ""
 
 #: plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
-msgstr ""
+msgstr "వ్యవస్థ నవీకరణ విఫలమైంది."
 
 #: plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
@@ -1257,19 +1257,19 @@ msgstr ""
 
 #: plugins/about//PageComponent.qml:87
 msgid "Serial"
-msgstr ""
+msgstr "క్రమం"
 
 #: plugins/about//PageComponent.qml:106 ../plugins/about//Storage.qml:33
 msgid "Storage"
-msgstr ""
+msgstr "నిల్వ"
 
 #: plugins/about//PageComponent.qml:113
 msgid "Software:"
-msgstr ""
+msgstr "సాఫ్ట్​వేర్:"
 
 #: plugins/about//PageComponent.qml:118
 msgid "OS"
-msgstr ""
+msgstr "ఓయస్"
 
 #: plugins/about//PageComponent.qml:127
 msgid "Last updated"
@@ -1277,7 +1277,7 @@ msgstr ""
 
 #: plugins/about//PageComponent.qml:134
 msgid "Check for updates"
-msgstr ""
+msgstr "నవీకరణల కోసం చూడు"
 
 #: plugins/about//PageComponent.qml:143
 msgid "Legal:"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-17 19:48+0000\n"
+"PO-Revision-Date: 2014-07-19 18:23+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-18 05:26+0000\n"
+"X-Launchpad-Export-Date: 2014-07-20 06:17+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -151,7 +151,7 @@ msgstr "Jaar"
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:54
 msgid "Cancel"
-msgstr "Annuleer"
+msgstr "Annuleren"
 
 #: plugins/time-date//TimePicker.qml:182
 #: plugins/phone//CallForwarding.qml:113
@@ -576,7 +576,7 @@ msgstr "Aan het opladen"
 
 #: plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
-msgstr "Laatste complete herlaadbeurt"
+msgstr "Laatste complete oplaadbeurt"
 
 #: plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
@@ -756,7 +756,7 @@ msgstr "Gesprek doorschakelen"
 #: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
 #: plugins/phone//CallWaiting.qml:53
 msgid "Call waiting"
-msgstr "Gesprek in wachtmodus"
+msgstr "Gesprek in de wacht"
 
 #: plugins/phone//ServiceInfo.qml:35
 msgid "Call"
@@ -888,7 +888,7 @@ msgstr "Versie: "
 #: plugins/system-update//PageComponent.qml:446
 #: plugins/system-update//Configuration.qml:30
 msgid "Auto download"
-msgstr "Automatisch downloaden"
+msgstr "Autom. downloaden"
 
 #: plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
@@ -1029,7 +1029,7 @@ msgstr "Dezelfde achtergrond voor beide"
 
 #: plugins/background//MainPage.qml:201
 msgid "Different background for each"
-msgstr "Verschillende achtergrond pe"
+msgstr "Verschillende achtergronden voor beide"
 
 #: plugins/background//Wallpapers.qml:42
 msgid "Choose background"
@@ -1057,7 +1057,7 @@ msgstr "Bluetooth koppelingsverzoek"
 #: plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "Bevestig dat de PIN weergegeven op '%1' gelijk is aan deze."
+msgstr "Bevestig dat de pincode weergegeven op '%1' gelijk is aan deze."
 
 #: plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
@@ -1067,7 +1067,7 @@ msgstr "Pincode bevestigen"
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr "PIN voor '%1'"
+msgstr "Pincode voor '%1'"
 
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:62
@@ -1230,12 +1230,12 @@ msgstr "Statistieken datagebruik"
 
 #: plugins/cellular//PageComponent.qml:121
 msgid "Choose carrier:"
-msgstr "Kies mobiele operator:"
+msgstr "Kies mobiele provider:"
 
 #: plugins/cellular//PageComponent.qml:127
 #: plugins/cellular//ChooseCarrier.qml:28
 msgid "Carrier"
-msgstr "Drager"
+msgstr "Provider"
 
 #: plugins/cellular//PageComponent.qml:139
 msgid "APN"
@@ -1247,11 +1247,11 @@ msgstr "Verversen"
 
 #: plugins/cellular//ChooseCarrier.qml:96
 msgid "Searching"
-msgstr "Bezig met Zoeken"
+msgstr "Zoeken"
 
 #: plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:148
 msgid "Software licenses"
-msgstr "Software-licenties"
+msgstr "Softwarelicenties"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
@@ -1317,7 +1317,7 @@ msgstr "Wettelijk:"
 
 #: plugins/about//PageComponent.qml:156
 msgid "Regulatory info"
-msgstr "Regelgevende info"
+msgstr "Bijkomende info"
 
 #: plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
@@ -1341,7 +1341,7 @@ msgstr "Andere bestanden"
 
 #: plugins/about//Storage.qml:92
 msgid "Used by apps"
-msgstr "Gebruikt door applicaties"
+msgstr "Gebruikt door apps"
 
 #: plugins/about//Storage.qml:142
 msgid "Total storage"
@@ -1353,11 +1353,11 @@ msgstr "Vrije ruimte"
 
 #: plugins/about//Storage.qml:174
 msgid "By name"
-msgstr "Naam"
+msgstr "Op naam"
 
 #: plugins/about//Storage.qml:174
 msgid "By size"
-msgstr "Grootte"
+msgstr "Op grootte"
 
 #: src/qml/MainWindow.qml:109
 msgid "System Settings"

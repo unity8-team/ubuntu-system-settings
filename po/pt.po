@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-18 21:30+0000\n"
-"Last-Translator: Filipe André Pinho <Unknown>\n"
+"PO-Revision-Date: 2014-07-19 17:05+0000\n"
+"Last-Translator: Pedro Albuquerque <palbuquerque73@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-19 06:18+0000\n"
+"X-Launchpad-Export-Date: 2014-07-20 06:17+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -234,7 +234,7 @@ msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:256
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "Os códigos não coincidem. Tente novamente."
 
 #: plugins/security-privacy//LockSecurity.qml:259
 msgid "Those passphrases don't match. Try again."
@@ -252,11 +252,11 @@ msgstr ""
 
 #: plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "Desbloquear o telemóvel usando:"
 
 #: plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Deslizar (sem segurança)"
 
 #: plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
@@ -269,7 +269,7 @@ msgstr "Frase de acesso"
 
 #: plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Deslizar (sem segurança)… "
 
 #: plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
@@ -289,7 +289,7 @@ msgstr ""
 
 #: plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "Localização"
 
 #: plugins/security-privacy//Location.qml:48
 msgid "Location detection"
@@ -346,13 +346,13 @@ msgstr "Permitir acesso à localização:"
 #: plugins/security-privacy//PageComponent.qml:33
 #: settings.js:28
 msgid "Security & Privacy"
-msgstr ""
+msgstr "Segurança e Privacidade"
 
 #: plugins/security-privacy//PageComponent.qml:50
 #: plugins/security-privacy//PageComponent.qml:127
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr ""
+msgstr "Telefone e Internet"
 
 #: plugins/security-privacy//PageComponent.qml:52
 #: plugins/security-privacy//PageComponent.qml:128
@@ -461,7 +461,7 @@ msgstr "Linguagem e texto"
 
 #: plugins/language//PageComponent.qml:71
 msgid "Display language…"
-msgstr ""
+msgstr "Idioma..."
 
 #: plugins/language//PageComponent.qml:85
 #: plugins/language//KeyboardLayouts.qml:26
@@ -489,7 +489,7 @@ msgstr "Maiúsculas automáticas"
 
 #: plugins/language//PageComponent.qml:153
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
+msgstr "Liga o Shift no inicio da frase para pôr a primeira letra maiúscula."
 
 #: plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -501,7 +501,7 @@ msgstr "Todos os idiomas disponíveis:"
 
 #: plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr ""
+msgstr "Idioma"
 
 #: plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
@@ -519,7 +519,7 @@ msgstr "Todas as disposições disponíveis:"
 #: plugins/battery//PageComponent.qml:34
 #: settings.js:54
 msgid "Battery"
-msgstr ""
+msgstr "Bateria"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: plugins/battery//PageComponent.qml:46
@@ -680,11 +680,11 @@ msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Palavra-passe"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Palavra-passe visível"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
@@ -697,7 +697,7 @@ msgstr "Detalhes da rede"
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
@@ -705,7 +705,7 @@ msgstr ""
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Mostrar palavra-passe"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
@@ -902,11 +902,11 @@ msgstr ""
 
 #: plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Quando em wi-fi"
 
 #: plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "Em qualquer ligação de dados"
 
 #: plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
@@ -916,7 +916,7 @@ msgstr ""
 #: plugins/brightness//PageComponent.qml:32
 #: settings.js:98
 msgid "Brightness"
-msgstr ""
+msgstr "Brilho"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
@@ -1005,7 +1005,7 @@ msgstr ""
 
 #: plugins/background//Wallpapers.qml:42
 msgid "Choose background"
-msgstr ""
+msgstr "Escolher fundo"
 
 #: plugins/background//Wallpapers.qml:47
 msgid "Photo/Image"
@@ -1013,7 +1013,7 @@ msgstr "Fotografia/Imagem"
 
 #: plugins/background//Wallpapers.qml:95
 msgid "Ubuntu Art"
-msgstr ""
+msgstr "Arte Ubuntu"
 
 #: plugins/background//Wallpapers.qml:110
 msgid "Custom"
@@ -1033,7 +1033,7 @@ msgstr "Confirme se o PIN mostrado em '%1' coincide com este"
 
 #: plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "Confirme o PIN"
 
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:36
@@ -1072,23 +1072,23 @@ msgstr "Rede"
 
 #: plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
-msgstr ""
+msgstr "Auricular"
 
 #: plugins/bluetooth//PageComponent.qml:86
 msgid "Headphones"
-msgstr ""
+msgstr "Auscultadores"
 
 #: plugins/bluetooth//PageComponent.qml:87
 msgid "Video"
-msgstr ""
+msgstr "Vídeo"
 
 #: plugins/bluetooth//PageComponent.qml:88
 msgid "Other Audio"
-msgstr ""
+msgstr "Outro áudio"
 
 #: plugins/bluetooth//PageComponent.qml:89
 msgid "Joypad"
-msgstr ""
+msgstr "Comando de jogos"
 
 #: plugins/bluetooth//PageComponent.qml:90
 msgid "Keyboard"
@@ -1144,11 +1144,11 @@ msgstr "Dispositivos ligados:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Ligar um dispositivo diferente:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Ligar outro dispositivo:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1160,7 +1160,7 @@ msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:271
 msgid "Signal Strength"
-msgstr ""
+msgstr "Potência do sinal"
 
 #: plugins/bluetooth//PageComponent.qml:276
 msgid "Disconnect"
@@ -1202,12 +1202,12 @@ msgstr "Utilização de dados moveis"
 
 #: plugins/cellular//PageComponent.qml:121
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Escolha uma operadora:"
 
 #: plugins/cellular//PageComponent.qml:127
 #: plugins/cellular//ChooseCarrier.qml:28
 msgid "Carrier"
-msgstr ""
+msgstr "Operadora"
 
 #: plugins/cellular//PageComponent.qml:139
 msgid "APN"
@@ -1257,7 +1257,7 @@ msgstr ""
 #: plugins/about//PageComponent.qml:33
 #: settings.js:144
 msgid "About this phone"
-msgstr ""
+msgstr "Acerca deste telefone"
 
 #: plugins/about//PageComponent.qml:87
 msgid "Serial"
@@ -1297,7 +1297,7 @@ msgstr "Usado pelo Ubuntu"
 
 #: plugins/about//Storage.qml:88
 msgid "Videos"
-msgstr ""
+msgstr "Vídeos"
 
 #: plugins/about//Storage.qml:89
 msgid "Audio"
@@ -1305,7 +1305,7 @@ msgstr "Áudio"
 
 #: plugins/about//Storage.qml:90
 msgid "Pictures"
-msgstr ""
+msgstr "Imagens"
 
 #: plugins/about//Storage.qml:91
 msgid "Other files"
@@ -1313,11 +1313,11 @@ msgstr "Outros ficheiros"
 
 #: plugins/about//Storage.qml:92
 msgid "Used by apps"
-msgstr ""
+msgstr "Usado pelas aplicações"
 
 #: plugins/about//Storage.qml:142
 msgid "Total storage"
-msgstr ""
+msgstr "Armazenamento total"
 
 #: plugins/about//Storage.qml:154
 msgid "Free space"
@@ -1333,7 +1333,7 @@ msgstr "Por tamanho"
 
 #: src/qml/MainWindow.qml:109
 msgid "System Settings"
-msgstr ""
+msgstr "Definições do sistema"
 
 #: src/qml/MainWindow.qml:130
 msgid "Search"
@@ -1341,7 +1341,7 @@ msgstr ""
 
 #: src/qml/MainWindow.qml:149
 msgid "Personal"
-msgstr ""
+msgstr "Pessoal"
 
 #: src/qml/MainWindow.qml:154
 msgid "System"
@@ -1353,7 +1353,7 @@ msgstr ""
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Definições do telefone"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
@@ -1377,7 +1377,7 @@ msgstr "Não se preocupe, pode inserir um cartão SIM mais tarde."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "Por enquanto, não terá as funcionalidades de telefone ou SMS."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
@@ -1405,7 +1405,7 @@ msgstr "Concluir"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Ligar a Wi-Fi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
@@ -1461,7 +1461,7 @@ msgstr ""
 #: settings.js:130
 #: settings.js:142
 msgid "settings"
-msgstr ""
+msgstr "definições"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:10
@@ -1476,7 +1476,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:14
 msgid "timezone"
-msgstr ""
+msgstr "fuso horário"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
@@ -1598,7 +1598,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:84
 msgid "sample"
-msgstr ""
+msgstr "amostra"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:88
@@ -1623,7 +1623,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
 msgid "brightness"
-msgstr ""
+msgstr "brilho"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: settings.js:106
@@ -1633,7 +1633,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110
 msgid "Flight Mode"
-msgstr ""
+msgstr "Modo de voo"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:112
@@ -1658,12 +1658,12 @@ msgstr "aparência"
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:122
 msgid "background"
-msgstr ""
+msgstr "fundo"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:124
 msgid "wallpaper"
-msgstr ""
+msgstr "papel de parede"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: settings.js:128
@@ -1673,22 +1673,22 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:134
 msgid "cellular"
-msgstr ""
+msgstr "telemóvel"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:138
 msgid "mobile"
-msgstr ""
+msgstr "móvel"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:140
 msgid "gsm"
-msgstr ""
+msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:146
 msgid "about"
-msgstr ""
+msgstr "acerca de"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:148
