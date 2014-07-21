@@ -191,9 +191,9 @@ ItemPage {
 
             onClicked: {
                 if (!theContext.active) {
-                // tell network manager to set it active
+                    activator.activate(theContext.contextPath);
                 }
-                //pageStack.pop();
+                pageStack.pop();
             }
         }
     } // item for buttons
