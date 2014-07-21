@@ -1,3 +1,82 @@
+ubuntu-system-settings (0.3+14.10.20140718.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [phone] Call waiting implementation
+
+  [ Iain Lane ]
+  * [sound] Set the index on construction to avoid a disconcerting
+    animation when entering the page. (LP: #1342533)
+  * Run pylint and pyflakes on the right directory so they actually work
+    and fix the errors.
+  * revert lenient AppArmor profile since we won't be limiting access to
+    ofono in this manner. Furthermore, due to a naive check in media-
+    hub-server for the connecting process' profile name, this allows
+    system-settings to playback files via media-hub-server again (LP:
+    #1342321) (LP: #1342321)
+
+  [ William Hua ]
+  * Sort ignoring case, filter out unnamed locales. (LP: #1342326)
+  * Set only left and right anchors in language panel. (LP: #1343513)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 19:15:36 +0000
+
+ubuntu-system-settings (0.3+14.10.20140715-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Refresh the wording of the welcome wizard dialogs to match latest
+    from design.
+
+  [ Jussi Pakkanen ]
+  * Remove bad import statement. (LP: #1341580)
+
+  [ Leo Arias ]
+  * Refactored the About autopilot tests to use the page object pattern.
+    Added the click_item public helper to be used by UX tests.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 15 Jul 2014 14:25:44 +0000
+
+ubuntu-system-settings (0.3+14.10.20140714-0ubuntu1) utopic; urgency=low
+
+  [ Michał Sawicz ]
+  * Move wizard welcome page to libqofono SIM backend. (LP: #1341007)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 14 Jul 2014 14:32:35 +0000
+
+ubuntu-system-settings (0.3+14.10.20140711.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Dropped QML bindings for ofono-qt from the phone plugin and ported
+    to libqofono's QML bindings. Show last time called for each service
+    under SIM services and enabled the call button, to launch the
+    dialer. (LP: #1221908)
+
+  [ jonas-drange ]
+  * use libqofono bindings to allow for technology preference changes
+
+  [ Iain Lane ]
+  * [accountsservice] Don't guard D-Bus calls with isValid, because that
+    doesn't work if the service has timed out.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Jul 2014 16:12:27 +0000
+
+ubuntu-system-settings (0.3+14.10.20140711-0ubuntu1) utopic; urgency=low
+
+  [ Andrea Cimitan ]
+  * Workaround for OSK input area (LP: #1334429)
+
+  [ Sebastien Bacher ]
+  * battery, draw the x axis labels (LP: #1289460)
+
+  [ Iain Lane ]
+  * [time-date] Ask for properties over D-Bus even when the object is
+    not considered valued (due to the service timing out), to cause it
+    to be activated.
+
+  [ Leo Arias ]
+  * Ported the autopilot package to python3. (LP: #1327325)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 11 Jul 2014 08:55:46 +0000
+
 ubuntu-system-settings (0.3+14.10.20140709.2-0ubuntu1) utopic; urgency=low
 
   [ Ubuntu daily release ]

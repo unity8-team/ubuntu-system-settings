@@ -19,11 +19,11 @@ class StaticCodeTests(unittest.TestCase):
                                stdout=subprocess.PIPE)
 
     @unittest.skipIf(
-        _is_tool_installed('pyflakes') != 0, 'pyflakes not installed'
+        _is_tool_installed('pyflakes3') != 0, 'python-pyflakes3 not installed'
     )
     def test_pyflakes(self):
         pyflakes = subprocess.Popen(
-            ['pyflakes', '.'],
+            ['pyflakes3', '@CMAKE_CURRENT_SOURCE_DIR@'],
             stdout=subprocess.PIPE, universal_newlines=True
         )
         (out, err) = pyflakes.communicate()
@@ -34,7 +34,7 @@ class StaticCodeTests(unittest.TestCase):
     )
     def test_pep8(self):
         pep8 = subprocess.Popen(
-            ['pep8', '.'],
+            ['pep8', '@CMAKE_CURRENT_SOURCE_DIR@'],
             stdout=subprocess.PIPE, universal_newlines=True
         )
         (out, err) = pep8.communicate()

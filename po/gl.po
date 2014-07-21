@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-09 12:44+0000\n"
+"PO-Revision-Date: 2014-07-19 15:57+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-10 07:29+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-20 06:17+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
+"Language: Galician\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -35,7 +36,7 @@ msgstr "Chamadas de teléfono:"
 #: plugins/sound//PageComponent.qml:72
 #: plugins/sound//PageComponent.qml:78
 msgid "Ringtone"
-msgstr "Ton de chamada"
+msgstr "Son das chamadas"
 
 #: plugins/sound//PageComponent.qml:89
 msgid "Vibrate when ringing"
@@ -53,7 +54,7 @@ msgstr "Mensaxes:"
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
 msgid "Message received"
-msgstr "Recibiuse unha mensaxe"
+msgstr "Ao recibir unha mensaxe"
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
@@ -190,7 +191,7 @@ msgstr "Cambiar a frase secreta"
 
 #: plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr "Cambiar a esvarar"
+msgstr "Cambiar a esvarar o dedo"
 
 #: plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
@@ -256,7 +257,7 @@ msgstr "Desbloquear o móbil usando:"
 
 #: plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr "Esvarar o dedo (sen seguranza)"
+msgstr "Esvarar o dedo (non segura)"
 
 #: plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
@@ -269,7 +270,7 @@ msgstr "Frase secreta"
 
 #: plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr "Esvarar o dedo (sen seguranza)... "
+msgstr "Esvarar o dedo (non segura)... "
 
 #: plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
@@ -342,7 +343,7 @@ msgid ""
 "rough location. Turning off location detection saves battery."
 msgstr ""
 "Usa wifi (actualmente apagada), localización por antenas de telefonía e GPS "
-"para detectar a súa situación aproximada. Apagando a detección de "
+"para detectar a súa situación aproximada. Apagando a detección da "
 "localización aforrará batería."
 
 #: plugins/security-privacy//Location.qml:82
@@ -353,7 +354,7 @@ msgid ""
 msgstr ""
 "Usa wifi (actualmente apagada), localización por antenas de telefonía (sen "
 "conexión móbil actualmente) e GPS para detectar a súa situación aproximada. "
-"Apagando a detección de localización aforrará batería."
+"Apagando a detección da localización aforrará batería."
 
 #: plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
@@ -375,7 +376,7 @@ msgstr "Teléfono e internet"
 #: plugins/security-privacy//PageComponent.qml:128
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr "Só teléfono"
+msgstr "Só do teléfono"
 
 #: plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
@@ -384,7 +385,7 @@ msgstr "Seguranza:"
 #: plugins/security-privacy//PageComponent.qml:76
 #: plugins/security-privacy//PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr "Bloqueo do móbil"
+msgstr "Bloqueo do teléfono"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/security-privacy//PageComponent.qml:78
@@ -414,7 +415,7 @@ msgstr "Mensaxes na pantalla de inicio"
 #: plugins/security-privacy//PageComponent.qml:125
 #: plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr "Buscar no Panel"
+msgstr "Buscas no Panel"
 
 #: plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
@@ -426,7 +427,7 @@ msgstr "Outro acceso a aplicativos"
 
 #: plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
-msgstr "Diagnóstico"
+msgstr "Diagnósticos"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
@@ -442,7 +443,7 @@ msgstr "Non enviado"
 
 #: plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr "Obter resultados de:"
+msgstr "Recibir resultados de:"
 
 #: plugins/security-privacy//PhoneLocking.qml:40
 #: plugins/wifi//OtherNetwork.qml:67
@@ -450,16 +451,16 @@ msgstr "Obter resultados de:"
 #: plugins/bluetooth//PageComponent.qml:256
 #: plugins/bluetooth//PageComponent.qml:264
 msgid "None"
-msgstr "Ningún"
+msgstr "Ningunha"
 
 #: plugins/security-privacy//PhoneLocking.qml:41
 msgid "Passcode"
-msgstr "Código"
+msgstr "Clave"
 
 #: plugins/security-privacy//PhoneLocking.qml:62
 #: plugins/battery//PageComponent.qml:240
 msgid "Lock when idle"
-msgstr "Bloquear se está inactivo"
+msgstr "Bloquear cando estea inactivo"
 
 #: plugins/security-privacy//PhoneLocking.qml:63
 #: plugins/battery//PageComponent.qml:240
@@ -478,7 +479,7 @@ msgstr "Idioma e texto"
 
 #: plugins/language//PageComponent.qml:71
 msgid "Display language…"
-msgstr "Mostrar idioma..."
+msgstr "Idioma da pantalla..."
 
 #: plugins/language//PageComponent.qml:85
 #: plugins/language//KeyboardLayouts.qml:26
@@ -510,15 +511,15 @@ msgstr "Activar maiúsculas para capitalizar a primeira letra das frases."
 
 #: plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr "Ortografías de idiomas actuais:"
+msgstr "Ortografía dos idiomas actuais:"
 
 #: plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
-msgstr "Todos os idiomas"
+msgstr "Idiomas dispoñíbeis:"
 
 #: plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr "Mostrar idioma"
+msgstr "Idioma da pantalla"
 
 #: plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
@@ -632,7 +633,7 @@ msgstr "Nunca"
 #: plugins/wifi//PageComponent.qml:26
 #: settings.js:60
 msgid "Wi-Fi"
-msgstr "Wi-Fi"
+msgstr "Wifi"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: plugins/battery//PageComponent.qml:298
@@ -648,32 +649,32 @@ msgstr "GPS"
 
 #: plugins/battery//PageComponent.qml:348
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "A localización exacta require GPS e/ou Wi-fi"
+msgstr "A localización exacta require GPS e/ou Wifi."
 
 #: plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr "Bloquear o móbil cando no estea en uso:"
+msgstr "Bloquear o teléfono cando no estea en uso:"
 
 #: plugins/battery//SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr "Suspender o móbil cando non estea en uso:"
+msgstr "Suspender o teléfono cando non estea en uso:"
 
 #: plugins/battery//SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
-"Os tempos máis curtos son máis seguros. Non se bloqueará durante as chamadas "
-"ou vídeos."
+"Tempos máis curtos son máis seguros. Non se bloqueará durante as chamadas ou "
+"vídeos."
 
 #: plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr "O móbil non se suspenderá durante as chamadas ou vídeos."
+msgstr "O teléfono non se suspenderá durante as chamadas ou vídeos."
 
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr "Redes previas"
+msgstr "Redes anteriores"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
@@ -739,7 +740,7 @@ msgstr "%1 servizos"
 #: plugins/bluetooth//PageComponent.qml:82
 #: settings.js:72
 msgid "Phone"
-msgstr "Móbil"
+msgstr "Teléfono"
 
 #: plugins/phone//PageComponent.qml:30
 msgid "SIM"
@@ -766,13 +767,13 @@ msgid ""
 "phone is busy, turned off, or out of range."
 msgstr ""
 "Redirecciona as chamadas a outro número cando vostede non responde ou o "
-"móbil está ocupado, apagado ou fóra de cobertura."
+"teléfono está ocupado, apagado ou fóra de cobertura."
 
 #: plugins/phone//CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
 msgstr ""
-"Non se pode comprobar o estado do redireccionamento neste intre. Ténteo máis "
-"tarde."
+"Non é posíbel comprobar o estado do redireccionamento neste intre. Ténteo "
+"máis tarde."
 
 #: plugins/phone//CallForwarding.qml:102
 msgid "Divert to"
@@ -787,14 +788,14 @@ msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
-"Permite contestar ou facer unha nova chamada cando está atendendo outra, "
-"tamén permite o cambio entre elas"
+"Permite contestar ou facer unha chamada cando está atendendo outra, tamén "
+"permite alternar entre elas"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: plugins/system-update//PageComponent.qml:35
 #: settings.js:86
 msgid "Updates"
-msgstr "Actualizacións"
+msgstr "Actualización"
 
 #: plugins/system-update//PageComponent.qml:51
 msgid "Update System"
@@ -849,7 +850,7 @@ msgstr "Instalar %1 actualizacións"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
-msgstr "Pausar todo"
+msgstr "Deter todo"
 
 #: plugins/system-update//PageComponent.qml:287
 msgid "Retry"
@@ -930,11 +931,11 @@ msgstr "En modo wifi"
 
 #: plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
-msgstr "Con conexión de datos"
+msgstr "Con calquera conexión de datos"
 
 #: plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
-msgstr "Pódese aplicar tarifa de datos."
+msgstr "Pódese aplicar a tarifa de datos."
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: plugins/brightness//PageComponent.qml:32
@@ -948,7 +949,7 @@ msgstr "Axustar automaticamente"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr "Axuste o brillo e a luz da pantalla para adaptarse ao contorno"
+msgstr "Ilumina e escurece a pantalla para adaptarse ao contorno"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -956,7 +957,7 @@ msgid ""
 "deleted from this phone."
 msgstr ""
 "Todos os documentos, xogos gardados, axustes e outros elementos eliminaranse "
-"permanentemente deste móbil."
+"permanentemente deste teléfono."
 
 #: plugins/reset//EraseEverything.qml:31
 msgid "Erase & reset everything"
@@ -969,7 +970,7 @@ msgid ""
 "will be returned to their original settings."
 msgstr ""
 "Restabeleceranse os axustes orixinais dos contidos e deseño do iniciador, "
-"así como dos filtros na pantalla de inicio."
+"así como os filtros na pantalla de inicio."
 
 #: plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
@@ -979,15 +980,15 @@ msgstr "Restabelecer todos os axustes do sistema"
 #: plugins/reset//PageComponent.qml:32
 #: settings.js:104
 msgid "Reset phone"
-msgstr "Restabelecer teléfono"
+msgstr "Restabelecer o teléfono"
 
 #: plugins/reset//PageComponent.qml:62
 msgid "Reset launcher & home screen…"
-msgstr "Restabelecer iniciador e pantalla de inicio"
+msgstr "Restabelecer o iniciador e a pantalla de inicio"
 
 #: plugins/reset//PageComponent.qml:75
 msgid "Reset all system settings…"
-msgstr "Restabelecer as preferencias do sistema…"
+msgstr "Restabelecer todos os axustes do sistema…"
 
 #: plugins/reset//PageComponent.qml:88
 msgid "Erase & reset everything…"
@@ -1003,7 +1004,7 @@ msgstr "Vista previa"
 
 #: plugins/background//WallpaperGrid.qml:121
 msgid "Remove"
-msgstr "Retirar"
+msgstr "Eliminar"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: plugins/background//MainPage.qml:31
@@ -1023,15 +1024,15 @@ msgstr "Pantalla de inicio"
 
 #: plugins/background//MainPage.qml:200
 msgid "Same background for both"
-msgstr "O mesmo fondo para ambos"
+msgstr "O mesmo fondo para ambas"
 
 #: plugins/background//MainPage.qml:201
 msgid "Different background for each"
-msgstr "Un fondo diferente para cada un"
+msgstr "Un fondo diferente para cada unha"
 
 #: plugins/background//Wallpapers.qml:42
 msgid "Choose background"
-msgstr "Seleccionar fondo"
+msgstr "Seleccionar un fondo"
 
 #: plugins/background//Wallpapers.qml:47
 msgid "Photo/Image"
@@ -1039,7 +1040,7 @@ msgstr "Foto/Imaxe"
 
 #: plugins/background//Wallpapers.qml:95
 msgid "Ubuntu Art"
-msgstr "Imaxes de Ubuntu"
+msgstr "Ubuntu Art"
 
 #: plugins/background//Wallpapers.qml:110
 msgid "Custom"
@@ -1110,11 +1111,11 @@ msgstr "Vídeo"
 
 #: plugins/bluetooth//PageComponent.qml:88
 msgid "Other Audio"
-msgstr "Outro audio"
+msgstr "Outro son"
 
 #: plugins/bluetooth//PageComponent.qml:89
 msgid "Joypad"
-msgstr "Mandos do xogo"
+msgstr "Joypad"
 
 #: plugins/bluetooth//PageComponent.qml:90
 msgid "Keyboard"
@@ -1178,7 +1179,7 @@ msgstr "Conectar outro dispositivo:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
-msgstr "Ningún detectado"
+msgstr "Non se detectou ningún"
 
 #: plugins/bluetooth//PageComponent.qml:267
 msgid "Type"
@@ -1216,7 +1217,7 @@ msgstr "2G/3G/4G (máis rápida)"
 
 #: plugins/cellular//PageComponent.qml:82
 msgid "Cellular data"
-msgstr "Datos de móbil"
+msgstr "Datos do móbil"
 
 #: plugins/cellular//PageComponent.qml:93
 msgid "Data roaming"
@@ -1237,7 +1238,7 @@ msgstr "Operadora"
 
 #: plugins/cellular//PageComponent.qml:139
 msgid "APN"
-msgstr "Nome do punto de acceso"
+msgstr "Punto de acceso"
 
 #: plugins/cellular//ChooseCarrier.qml:79
 msgid "Refresh"
@@ -1456,7 +1457,7 @@ msgstr "Benvido/a a Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr "Comecemos."
+msgstr "Imos aló!"
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
@@ -1659,12 +1660,12 @@ msgstr "brillo"
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: settings.js:106
 msgid "reset"
-msgstr "restaurar"
+msgstr "restabelecer"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110
 msgid "Flight Mode"
-msgstr "Modo vó"
+msgstr "Modo voo"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:112

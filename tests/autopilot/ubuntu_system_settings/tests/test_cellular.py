@@ -4,8 +4,10 @@
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
+
 import dbus
 from time import sleep
+
 from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Equals, NotEquals, raises
 from unittest import skip
@@ -37,21 +39,23 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         try:
             self._pref_selector.get_properties()
         except:
-            self._pref_selector = self.system_settings.main_view.cellular_page.select_single(
-                toolkit_emulators.ItemSelector,
-                objectName="technologyPreferenceSelector"
-            )
+            self._pref_selector = \
+                self.system_settings.main_view.cellular_page.select_single(
+                    toolkit_emulators.ItemSelector,
+                    objectName="technologyPreferenceSelector"
+                )
         return self._pref_selector
 
     def select_preference(self, label):
-        """Helper method that clicks a preference that matches provided label"""
+        """Helper method to click a preference which matches provided label"""
         pref = self.data_preference_selector.select_single('Label', text=label)
-        self.system_settings.main_view.pointer.click_object(pref)
+        self.system_settings.main_view.pointing_device.click_object(pref)
 
     def assert_selected_preference(self, index):
         """Helper method asserting that the selected data technology preference
         is that of index"""
-        self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
+        self.assertThat(self.data_preference_selector.selectedIndex,
+                        Equals(index))
 
     def navigate_to_carrier_page(self):
         selector = self.system_settings.main_view.cellular_page.select_single(
@@ -65,10 +69,11 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             objectName="autoChooseCarrierSelector"
         )
         manual = selector.select_single('Label', text=_("Manually"))
-        self.system_settings.main_view.pointer.click_object(manual)
+        self.system_settings.main_view.pointing_device.click_object(manual)
         choosecarrier = self.system_settings.main_view.cellular_page.\
             select_single(objectName="chooseCarrier")
-        self.system_settings.main_view.pointer.click_object(choosecarrier)
+        self.system_settings.main_view.pointing_device.click_object(
+            choosecarrier)
         self.assertThat(
             self.system_settings.main_view.choose_page.title,
             Equals(_("Carrier"))
@@ -95,9 +100,9 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         )
         # TODO: Once there is a proper ItemSelector emulator, get the items
         # from it and check 'fake.tel' is the selected one.
-        manual = carriers.select_single('Label', text="fake.tel")
-        self.assertThat(manual, NotEquals(None))
-        self.assertThat(carriers.selectedIndex, Equals(0))
+        selected_delegate = carriers.select_single(
+            'OptionSelectorDelegate', selected=True)
+        selected_delegate.select_single('Label', text="fake.tel")
 
     def test_alt_network(self):
         """ Tests whether an alternative available network is displayed """
@@ -168,13 +173,15 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.select_preference(PREFERENCE_2G)
 
         sleep(1)
-        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
+                                                 'TechnologyPreference'))
 
         self.select_preference(PREFERENCE_ANY)
 
         sleep(1)
 
-        self.assertEqual('any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+        self.assertEqual('any', self.modem_0.Get(RDO_IFACE,
+                                                 'TechnologyPreference'))
 
     def test_sim_online_status_insensitive_to_radio_preference(self):
         # turn off cellular data
@@ -221,18 +228,20 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
         sleep(1)
 
-        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
+                                                 'TechnologyPreference'))
 
         # assert that the preference is any
         self.assert_selected_preference(1)
 
     def test_unlocking_sim(self):
         '''Like it would if the sim was locked, e.g.'''
-        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', dbus.String('', variant_level=1))
+        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference',
+                         dbus.String('', variant_level=1))
 
         self.system_settings.main_view.go_back()
 
-        self.system_settings.main_view.pointer.click_object(
+        self.system_settings.main_view.pointing_device.click_object(
             self.system_settings.main_view.select_single(
                 objectName='entryComponent-cellular'))
 

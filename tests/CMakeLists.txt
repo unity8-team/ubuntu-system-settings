@@ -9,7 +9,7 @@ add_library(test-plugin SHARED test-plugin.cpp test-plugin.h)
 target_link_librarieS(test-plugin SystemSettings)
 qt5_use_modules(test-plugin Core Qml)
 
-add_executable(tst-plugins 
+add_executable(tst-plugins
     tst_plugins.cpp
     ../src/debug.cpp
     ../src/item-model.cpp
@@ -39,6 +39,7 @@ set_target_properties(tst-pagelist PROPERTIES
                       INCLUDE_DIRECTORIES "${CMAKE_CURRENT_BINARY_DIR};${CMAKE_SOURCE_DIR}/wizard")
 qt5_use_modules(tst-pagelist Core Test)
 add_test(tst-pagelist tst-pagelist)
-add_test(NAME python COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/test_code.py")
+configure_file (test_code.py.in test_code.py)
+add_test(NAME python3 COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_code.py")
 
 add_subdirectory(plugins)

@@ -52,33 +52,20 @@ LocalComponents.Page {
         id: content
         anchors {
             fill: parent
+            topMargin: wifiPage.topMargin
             bottomMargin: wifiPage.bottomMargin
-        }
-
-        LocalComponents.SectionHeader {
-            id: availableNetworksSectionHeader
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
             leftMargin: wifiPage.leftMargin
             rightMargin: wifiPage.rightMargin
-            text: i18n.tr("Available networks")
         }
 
         Label {
             id: label
             anchors {
-                top: availableNetworksSectionHeader.bottom
+                top: parent.top
                 left: parent.left
                 right: parent.right
-                topMargin: units.gu(1)
-                leftMargin: wifiPage.leftMargin
-                rightMargin: wifiPage.rightMargin
             }
-            wrapMode: Text.WordWrap
-            text: i18n.tr("Connect to a Wi-Fi network to customize your setup.")
+            text: i18n.tr("Available networks")
         }
 
         UbuntuShape {
@@ -88,8 +75,6 @@ LocalComponents.Page {
                 left: parent.left
                 right: parent.right
                 topMargin: units.gu(2)
-                leftMargin: wifiPage.leftMargin
-                rightMargin: wifiPage.rightMargin
             }
             radius: "medium"
 

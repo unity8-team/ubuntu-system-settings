@@ -78,12 +78,12 @@ LanguageLocale::LanguageLocale(const QString &name) :
 bool LanguageLocale::operator<(const LanguageLocale &l) const
 {
     // Likely locales should precede unlikely ones of the same language.
-    if (strcmp(locale.getLanguage(), l.locale.getLanguage()) == 0) {
+    if (strcasecmp(locale.getLanguage(), l.locale.getLanguage()) == 0) {
         if (likely || l.likely)
             return likely && !l.likely;
     }
 
-    return displayName < l.displayName;
+    return displayName.compare(l.displayName, Qt::CaseInsensitive) < 0;
 }
 
 void managerLoaded(GObject    *object,
@@ -373,6 +373,11 @@ LanguagePlugin::updateLanguageNamesAndCodes()
             continue;
 
         LanguageLocale languageLocale(*i);
+
+        // Filter out locales for which we have no display name.
+        if (languageLocale.displayName.isEmpty())
+            continue;
+
         QString language(languageLocale.locale.getLanguage());
 
         if (!likelyLocaleForLanguage.contains(language)) {
