@@ -6,6 +6,7 @@ add_definitions(-DPLUGIN_QML_DIR="${PLUGIN_QML_DIR}")
 add_definitions(-DPLUGIN_MODULE_DIR="${PLUGIN_MODULE_DIR}")
 
 add_subdirectory(SystemSettings)
+add_subdirectory(service)
 
 set(USS_SOURCES
     debug.cpp

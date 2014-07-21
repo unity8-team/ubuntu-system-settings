@@ -1,0 +1,9 @@
+description "System settings service"
+author "William Hua <william.hua@canonical.com>"
+
+start on started dbus
+stop on stopping dbus
+
+respawn
+
+exec @SERVICE_INSTALL_DIR@/system-settings-service
