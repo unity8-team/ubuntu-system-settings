@@ -23,12 +23,18 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     """ Tests for the Time & Date Page """
 
     @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
-        (klass.p_mock, klass.obj_timedate1) = klass.spawn_server_template(
+    def setUpClass(cls):
+        cls.start_system_bus()
+        cls.dbus_con = cls.get_dbus(True)
+        (cls.p_mock, cls.obj_timedate1) = cls.spawn_server_template(
             'timedated', {}, stdout=subprocess.PIPE
         )
+
+    @classmethod
+    def tearDownClass(cls):
+        super(TimeDateTestCase, cls).tearDownClass()
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
 
     def setUp(self):
         """ Go to Time & Date page """
