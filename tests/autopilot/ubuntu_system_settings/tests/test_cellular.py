@@ -401,6 +401,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     def test_both_sims_comes_online(self):
         self.use_selector(LABEL_OFF)
+        sleep(0.3)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_0.EmitSignal(
             CONNMAN_IFACE,
@@ -414,35 +415,35 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             'PropertyChanged',
             'sv',
             ['Powered', 'true'])
-
+        sleep(0.3)
         self.assert_used(1)
         self.assert_selected_preference(0)
 
-    # def test_roaming_switch(self):
-    #     roaming_switch = self.system_settings.main_view.select_single(
-    #         objectName="dataRoamingSwitch"
-    #     )
-    #     # assert that roaming_switch is enabled
-    #     self.assertTrue(roaming_switch.get_properties()['enabled'])
+    def test_roaming_switch(self):
+        roaming_switch = self.system_settings.main_view.select_single(
+            objectName="dataRoamingSwitch"
+        )
+        # assert that roaming_switch is enabled
+        self.assertTrue(roaming_switch.get_properties()['enabled'])
 
-    #     # click off
-    #     self.use_selector(LABEL_OFF)
-    #     sleep(0.3)
+        # click off
+        self.use_selector(LABEL_OFF)
+        sleep(0.3)
 
-    #     # assert roaming_switch is disabled
-    #     self.assertFalse(roaming_switch.get_properties()['enabled'])
+        # assert roaming_switch is disabled
+        self.assertFalse(roaming_switch.get_properties()['enabled'])
 
-    # def test_allow_roaming(self):
-    #     self.use_selector(LABEL_SIM_1)
-    #     self.assertEqual(
-    #         False, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
-    #     roaming_switch = self.system_settings.main_view.select_single(
-    #         objectName="dataRoamingSwitch"
-    #     )
-    #     self.system_settings.main_view.scroll_to_and_click(roaming_switch)
-    #     sleep(2)
-    #     self.assertEqual(
-    #         True, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
+    def test_allow_roaming(self):
+        self.use_selector(LABEL_SIM_1)
+        self.assertEqual(
+            False, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
+        roaming_switch = self.system_settings.main_view.select_single(
+            objectName="dataRoamingSwitch"
+        )
+        self.system_settings.main_view.scroll_to_and_click(roaming_switch)
+        sleep(2)
+        self.assertEqual(
+            True, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
     def test_no_radio_preference(self):
         self.select_preference(PREFERENCE_ANY)

@@ -166,8 +166,8 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                 ('SetProperty', 'sv', '',
                  'self.Set("IFACE", args[0], args[1]); '
                  'self.EmitSignal("IFACE",\
-                 "PropertyChanged", "sv", [args[0], args[1]])'.replace(
-                 'IFACE', RDO_IFACE)), ])
+                 "PropertyChanged", "sv", [args[0], args[1]])'
+                    .replace('IFACE', RDO_IFACE)), ])
 
     def mock_sim_manager(self, modem, properties=None):
         if not properties:
@@ -185,8 +185,8 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                 ('SetProperty', 'sv', '',
                  'self.Set("IFACE", args[0], args[1]); '
                  'self.EmitSignal("IFACE",\
-                 "PropertyChanged", "sv", [args[0], args[1]])'.replace(
-                 'IFACE', SIM_IFACE)), ])
+                 "PropertyChanged", "sv", [args[0], args[1]])'
+                    .replace('IFACE', SIM_IFACE)), ])
 
     def add_sim1(self):
         # create modem_0 proxy
