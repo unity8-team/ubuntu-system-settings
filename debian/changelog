@@ -1,3 +1,25 @@
+ubuntu-system-settings (0.3+14.10.20140718.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [phone] Call waiting implementation
+
+  [ Iain Lane ]
+  * [sound] Set the index on construction to avoid a disconcerting
+    animation when entering the page. (LP: #1342533)
+  * Run pylint and pyflakes on the right directory so they actually work
+    and fix the errors.
+  * revert lenient AppArmor profile since we won't be limiting access to
+    ofono in this manner. Furthermore, due to a naive check in media-
+    hub-server for the connecting process' profile name, this allows
+    system-settings to playback files via media-hub-server again (LP:
+    #1342321) (LP: #1342321)
+
+  [ William Hua ]
+  * Sort ignoring case, filter out unnamed locales. (LP: #1342326)
+  * Set only left and right anchors in language panel. (LP: #1343513)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 19:15:36 +0000
+
 ubuntu-system-settings (0.3+14.10.20140718-0ubuntu0) UNRELEASED; urgency=medium
 
   * Bluetooth UI redesign:
