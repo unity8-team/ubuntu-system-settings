@@ -5,6 +5,7 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
+import dateutil.parser
 import os
 import subprocess
 import unittest
@@ -92,7 +93,7 @@ class AboutTestCase(AboutBaseTestCase):
         if info == 'Unknown':
             return _('Never')
         else:
-            return str(info.split()[0])
+            return dateutil.parser.parse(info.split()[0])
 
     def test_device_with_serial_number_must_display_it(self):
         """Checks whether the UI is showing the correct serial number."""
@@ -150,7 +151,8 @@ class AboutTestCase(AboutBaseTestCase):
 
     def test_last_updated(self):
         """Checks whether Last Updated info is correct."""
-        last_updated_date_displayed = self.about_page.get_last_updated_date()
+        last_updated_date_displayed = \
+            dateutil.parser.parse(self.about_page.get_last_updated_date())
         self.assertEquals(
             last_updated_date_displayed, self._get_last_updated_date())
 
