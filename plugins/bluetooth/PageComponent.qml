@@ -358,9 +358,9 @@ ItemPage {
                 value: getSignalString(backend.selectedDevice ? backend.selectedDevice.strength : Device.None)
             }
             ListItem.Standard {
-                id: trustedSwitch
+                id: trustedCheck
                 text: i18n.tr("Connect automatically when detected:")
-                control: Switch {
+                control: CheckBox {
                     onClicked: {
                         if (backend.selectedDevice) {
                             backend.selectedDevice.trusted = !backend.selectedDevice.trusted
@@ -369,7 +369,7 @@ ItemPage {
                     checked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                 }
                 Component.onCompleted:
-                    clicked.connect(trustedSwitch.clicked)
+                    clicked.connect(trustedCheck.clicked)
             }
             ListItem.SingleControl {
                 control: Button {
