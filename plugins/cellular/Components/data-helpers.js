@@ -1,7 +1,3 @@
-/* return key or 'any' if key matches 'lte' or 'umts'
-The UI currently does not support umts/lte only
-*/
-
 function normalizeKey (k) {
     if (k === 'lte' || k === 'umts') {
         console.warn("normalizeKey saw", k);
@@ -41,7 +37,7 @@ function dualIndexToKey (i) {
     }
 }
 
-function dualKeyToIndex (k) {
+function dualSimKeyToIndex (k) {
     if (k === 'gsm') {
         return 0;
     } else {
@@ -49,13 +45,3 @@ function dualKeyToIndex (k) {
     }
 }
 
-function dualTechSelectorClicked (index) {
-    console.warn('dualTechSelectorClicked setting TechnologyPreference to', dualIndexToKey(index));
-    getSelectedSim().radioSettings.technologyPreference = dualIndexToKey(index);
-}
-
-function simSelectorClicked (i) {
-    console.warn('simSelectorClicked', i);
-    sim1.connMan.powered = (i === 1);
-    sim2.connMan.powered = (i === 2);
-}

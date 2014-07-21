@@ -54,5 +54,4 @@ Item {
         id: connMan
         modemPath: path
     }
-
 }

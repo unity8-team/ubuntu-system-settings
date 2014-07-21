@@ -31,6 +31,7 @@ Column {
     ListItem.ItemSelector {
         id: selector
         objectName: "technologyPreferenceSelector"
+        text: i18n.tr("Cellular data:")
         expanded: true
         enabled: sim1.radioSettings.technologyPreference !== ""
         model: [i18n.tr("Off"), i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]

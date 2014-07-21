@@ -85,6 +85,12 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     """ Class for cellular tests which sets up an Ofono mock """
 
     technology_preference = 'gsm'
+    use_sims = 1
+
+    # TODO: remove this when it has been fixed in dbusmock
+    def get_all_operators(self, name, slow=False):
+        return 'ret = [(m, objects[m].GetAll("org.ofono.NetworkOperator")) ' \
+               'for m in objects if "%s/operator/" in m]' % name
 
     def mock_connection_manager(self, modem):
         modem.AddProperty(CONNMAN_IFACE, 'Powered', True)
@@ -183,6 +189,51 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                     'IFACE', SIM_IFACE)),
             ])
 
+    def add_sim1(self):
+        # create modem_0 proxy
+        self.modem_0 = self.dbus_con.get_object('org.ofono', '/ril_0')
+
+        # Add an available carrier
+        self.mock_carriers('ril_0')
+
+        self.mock_radio_settings(self.modem_0)
+
+        self.mock_connection_manager(self.modem_0)
+
+        self.mock_sim_manager(self.modem_0)
+
+        self.modem_0.AddMethods('org.ofono.NetworkRegistration', [
+            ('GetProperties', '', 'a{sv}',
+                'ret = self.GetAll("org.ofono.NetworkRegistration")'),
+            ('Register', '', '', ''),
+            ('GetOperators', '', 'a(oa{sv})', self.get_all_operators('ril_0')),
+            ('Scan', '', 'a(oa{sv})', self.get_all_operators('ril_0')),
+        ])
+
+    def add_sim2(self):
+        '''Mock two modems/sims for the dual sim story'''
+        second_modem = 'ril_1'
+
+        self.dbusmock.AddModem(second_modem, {'Powered': True})
+        self.modem_1 = self.dbus_con.get_object(
+            'org.ofono', '/%s' % second_modem)
+        self.modem_1.AddMethods(NETREG_IFACE, [
+            ('GetProperties', '', 'a{sv}',
+                'ret = self.GetAll("org.ofono.NetworkRegistration")'),
+            ('Register', '', '', ''),
+            ('GetOperators', '', 'a(oa{sv})',
+                self.get_all_operators(second_modem)),
+            ('Scan', '', 'a(oa{sv})',
+                self.get_all_operators(second_modem, slow=True)),
+        ])
+        self.mock_carriers(second_modem)
+        self.mock_radio_settings(self.modem_1)
+        self.mock_connection_manager(self.modem_1)
+
+        self.mock_sim_manager(self.modem_1, {
+            'SubscriberNumbers': ['08123', '938762783']
+        })
+
     @classmethod
     def setUpClass(klass):
         klass.start_system_bus()
@@ -196,17 +247,9 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def setUp(self, panel=None):
         self.obj_ofono.Reset()
 
-        # create modem_0 proxy
-        self.modem_0 = self.dbus_con.get_object('org.ofono', '/ril_0')
-
-        # Add an available carrier
-        self.mock_carriers('ril_0')
-
-        self.mock_radio_settings(self.modem_0)
-
-        self.mock_connection_manager(self.modem_0)
-
-        self.mock_sim_manager(self.modem_0)
+        self.add_sim1()
+        if self.use_sims == 2:
+            self.add_sim2()
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp('cellular')
 

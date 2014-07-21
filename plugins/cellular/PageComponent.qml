@@ -44,27 +44,24 @@ ItemPage {
                     name: "SIM 1"
                 })
             }
-            when: manager.modems.length === 1
         },
         State {
             name: "dualSim"
             StateChangeScript {
                 name: "loadSecondSim"
                 script: {
-                    // only load sim one if not loaded
-                    if (!simOneLoader.source) {
-                        simOneLoader.setSource("Components/Sim.qml", {
-                            path: manager.modems[0],
-                            name: "SIM 1"
-                        });
-                    }
+                    // the ordering is completely depending on manager
+                    // TODO: proper sim names (from gsettings?)
+                    simOneLoader.setSource("Components/Sim.qml", {
+                        path: manager.modems[0],
+                        name: "SIM 1"
+                    });
                     simTwoLoader.setSource("Components/Sim.qml", {
                         path: manager.modems[1],
                         name: "SIM 2"
                     });
                 }
             }
-            when: manager.modems.length === 2
         }
     ]
 
@@ -85,6 +82,11 @@ ItemPage {
         id: manager
         Component.onCompleted: {
             console.warn('manager complete with', modems.length, 'modems');
+            if (modems.length === 1) {
+                root.state = "singleSim";
+            } else if (modems.length === 2) {
+                root.state = "dualSim";
+            }
         }
     }
 
@@ -136,13 +138,6 @@ ItemPage {
                 id: cellData
                 anchors.left: parent.left
                 anchors.right: parent.right
-
-                onLoaded: {
-                    cellData.item.sim1 = sim1
-                    if (root.sim2) {
-                        cellData.item.sim2 = root.sim2
-                    }
-                }
             }
 
             // ListItem.SingleValue {
@@ -170,7 +165,7 @@ ItemPage {
                 text: i18n.tr("Carrier", "Carriers", manager.modems.length);
                 objectName: "chooseCarrier"
                 value: {
-                    if (root.state === 'singleSim') {
+                    if (root.state === "singleSim") {
                         return netReg.name ? netReg.name : i18n.tr("N/A")
                     } else {
                         return ''
