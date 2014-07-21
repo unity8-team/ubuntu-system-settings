@@ -12,7 +12,7 @@ from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import (
-    UbuntuSystemSettingsOfonoTestCase, CONNMAN_IFACE, RDO_IFACE)
+    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
@@ -23,7 +23,7 @@ PREFERENCE_ANY = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
 
 
-class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
+class CellularTestCase(CellularBaseTestCase):
     """ Tests for cellular Page """
 
     """Caches the technology preference selector"""
