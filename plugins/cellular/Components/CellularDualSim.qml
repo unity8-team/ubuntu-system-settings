@@ -121,6 +121,14 @@ Column {
         }
     }
 
+    ListItem.ItemSelector {
+        id: selector
+        objectName: "technologyPreferenceSelector"
+        expanded: true
+        model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
+        enabled: use.selectedIndex !== 0
+    }
+
     Connections {
         target: sim1.radioSettings
         onTechnologyPreferenceChanged: {
@@ -139,15 +147,6 @@ Column {
             }
             console.warn('pref changed on sim2', preference);
         }
-    }
-
-
-    ListItem.ItemSelector {
-        id: selector
-        objectName: "technologyPreferenceSelector"
-        expanded: true
-        model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
-        enabled: use.selectedIndex !== 0
     }
 
     Binding {
@@ -179,10 +178,5 @@ Column {
         property: "checked"
         value: getUsedSim().connMan.roamingAllowed
         when: getUsedSim()
-    }
-
-    Component.onCompleted: {
-        console.warn('sim1 powered', sim1.connMan.powered);
-        console.warn('sim2 powered', sim2.connMan.powered);
     }
 }

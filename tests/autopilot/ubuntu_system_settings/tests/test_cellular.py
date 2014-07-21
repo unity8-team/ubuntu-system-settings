@@ -8,10 +8,10 @@ import dbus
 from time import sleep
 from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Equals, NotEquals, raises
+from unittest import skip
 
 from ubuntu_system_settings.tests import (
-    UbuntuSystemSettingsOfonoTestCase, CONNMAN_IFACE, RDO_IFACE,
-    NETREG_IFACE,)
+    UbuntuSystemSettingsOfonoTestCase, CONNMAN_IFACE, RDO_IFACE,)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
@@ -53,8 +53,14 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         is that of index"""
         self.assertThat(self.data_preference_selector.selectedIndex, Equals(index))
 
-    def navigate_to_manual(self):
+    def navigate_to_carrier_page(self):
         selector = self.system_settings.main_view.cellular_page.select_single(
+            objectName="chooseCarrier"
+        )
+        self.system_settings.main_view.pointer.click_object(selector)
+
+    def navigate_to_manual(self):
+        selector = self.choose_carrier_page.select_single(
             toolkit_emulators.ItemSelector,
             objectName="autoChooseCarrierSelector"
         )
@@ -79,55 +85,58 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             Equals(_('Cellular'))
         )
 
-    # def test_current_network(self):
-    #     """ Tests whether the current network is visible and selected """
-    #     self.navigate_to_manual()
-    #     carriers = self.system_settings.main_view.choose_page.select_single(
-    #         toolkit_emulators.ItemSelector,
-    #         objectName="carrierSelector"
-    #     )
-    #     # TODO: Once there is a proper ItemSelector emulator, get the items
-    #     # from it and check 'fake.tel' is the selected one.
-    #     manual = carriers.select_single('Label', text="fake.tel")
-    #     self.assertThat(manual, NotEquals(None))
-    #     self.assertThat(carriers.selectedIndex, Equals(0))
+    def test_current_network(self):
+        """ Tests whether the current network is visible and selected """
+        self.navigate_to_carrier_page()
+        self.navigate_to_manual()
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
+        # TODO: Once there is a proper ItemSelector emulator, get the items
+        # from it and check 'fake.tel' is the selected one.
+        manual = carriers.select_single('Label', text="fake.tel")
+        self.assertThat(manual, NotEquals(None))
+        self.assertThat(carriers.selectedIndex, Equals(0))
 
-    # def test_alt_network(self):
-    #     """ Tests whether an alternative available network is displayed """
-    #     self.navigate_to_manual()
-    #     carriers = self.system_settings.main_view.choose_page.select_single(
-    #         toolkit_emulators.ItemSelector,
-    #         objectName="carrierSelector"
-    #     )
-    #     manual = carriers.select_single('Label', text="my.cool.telco")
-    #     self.assertThat(manual, NotEquals(None))
+    def test_alt_network(self):
+        """ Tests whether an alternative available network is displayed """
+        self.navigate_to_carrier_page()
+        self.navigate_to_manual()
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
+        manual = carriers.select_single('Label', text="my.cool.telco")
+        self.assertThat(manual, NotEquals(None))
 
-    # def test_no_forbidden_network(self):
-    #     """ Ensures that a forbidden network is not shown """
-    #     self.navigate_to_manual()
-    #     carriers = self.system_settings.main_view.choose_page.select_single(
-    #         toolkit_emulators.ItemSelector,
-    #         objectName="carrierSelector"
-    #     )
-    #     self.assertThat(
-    #         lambda: carriers.select_single('Label', text="my.bad.telco"),
-    #         raises(StateNotFoundError)
-    #     )
+    def test_no_forbidden_network(self):
+        """ Ensures that a forbidden network is not shown """
+        self.navigate_to_carrier_page()
+        self.navigate_to_manual()
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
+        self.assertThat(
+            lambda: carriers.select_single('Label', text="my.bad.telco"),
+            raises(StateNotFoundError)
+        )
 
     def test_set_sim_offline(self):
         self.select_preference(PREFERENCE_OFF)
 
-        sleep(1)
+        sleep(0.5)
 
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_set_sim_online(self):
         self.select_preference(PREFERENCE_OFF)
-        sleep(1)
+        sleep(0.5)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
         self.select_preference(PREFERENCE_ANY)
-        sleep(1)
+        sleep(0.5)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_roaming_switch(self):
@@ -152,18 +161,18 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             objectName="dataRoamingSwitch"
         )
         self.system_settings.main_view.pointer.click_object(roaming_switch)
-        sleep(1)
+        sleep(0.5)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
     def test_change_data_preference(self):
         self.select_preference(PREFERENCE_2G)
 
-        sleep(1)
+        sleep(0.5)
         self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
         self.select_preference(PREFERENCE_ANY)
 
-        sleep(1)
+        sleep(0.5)
 
         self.assertEqual('any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
@@ -179,7 +188,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             ['TechnologyPreference',  dbus.String('any', variant_level=1)])
 
         # TODO: use 'eventually' instead
-        sleep(1)
+        sleep(0.5)
 
         # assert that "Off" has not changed
         self.assert_selected_preference(0)
@@ -188,7 +197,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.select_preference(PREFERENCE_2G)
         self.select_preference(PREFERENCE_OFF)
 
-        sleep(1)
+        sleep(0.5)
 
         self.modem_0.EmitSignal(
             CONNMAN_IFACE,
@@ -196,7 +205,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             'sv',
             ['Powered', 'true'])
 
-        sleep(1)
+        sleep(0.5)
 
         # assert that 2G is selected
         self.assert_selected_preference(1)
@@ -210,7 +219,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             'sv',
             ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
 
-        sleep(1)
+        sleep(0.5)
 
         self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
@@ -236,7 +245,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             'sv',
             ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
 
-        sleep(1)
+        sleep(0.5)
 
         self.assert_selected_preference(2)
 
@@ -244,6 +253,33 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     use_sims = 2
+
+    def navigate_to_carriers_page(self):
+        selector = self.system_settings.main_view.cellular_page.select_single(
+            objectName="chooseCarrier"
+        )
+        self.system_settings.main_view.pointer.click_object(selector)
+
+    def navigate_to_carrier_page_for_sim(self, n):
+        selector = self.choose_carriers_page.select_single(
+            objectName="chooseCarrierSim%d" % n
+        )
+        self.system_settings.main_view.pointer.click_object(selector)
+
+    def navigate_to_manual(self):
+        selector = self.choose_carrier_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="autoChooseCarrierSelector"
+        )
+        manual = selector.select_single('Label', text=_("Manually"))
+        self.system_settings.main_view.pointer.click_object(manual)
+        choosecarrier = self.system_settings.main_view.cellular_page.\
+            select_single(objectName="chooseCarrier")
+        self.system_settings.main_view.pointer.click_object(choosecarrier)
+        self.assertThat(
+            self.system_settings.main_view.choose_page.title,
+            Equals(_("Carrier"))
+        )
 
     @property
     def data_preference_selector(self):
@@ -283,7 +319,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.use_selector(LABEL_OFF)
         self.use_selector(LABEL_SIM_1)
 
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual(True, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
@@ -291,46 +327,46 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.use_selector(LABEL_OFF)
         self.use_selector(LABEL_SIM_2)
 
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_turn_off_both_sims(self):
         self.use_selector(LABEL_OFF)
 
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_use_gsm_for_sim_1(self):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_2G)
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual('gsm', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_any_for_sim_1(self):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_ANY)
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual('any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_gsm_for_sim_2(self):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_2G)
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual('gsm', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_any_for_sim_2(self):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_ANY)
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual('any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_when_sim_1_comes_online_ui_is_correct(self):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_ANY)
         self.use_selector(LABEL_OFF)
-        sleep(0.3)
+        sleep(0.5)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_1.EmitSignal(
             CONNMAN_IFACE,
@@ -338,7 +374,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             'sv',
             ['Powered', 'true'])
 
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual('any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
         self.assert_used(1)
         self.assert_selected_preference(1)
@@ -347,7 +383,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.use_selector(LABEL_SIM_2)
         self.select_preference(PREFERENCE_ANY)
         self.use_selector(LABEL_OFF)
-        sleep(0.3)
+        sleep(0.5)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_0.EmitSignal(
             CONNMAN_IFACE,
@@ -355,14 +391,14 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             'sv',
             ['Powered', 'true'])
 
-        sleep(0.3)
+        sleep(0.5)
         self.assertEqual('any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
         self.assert_used(2)
         self.assert_selected_preference(1)
 
     def test_both_sims_comes_online(self):
         self.use_selector(LABEL_OFF)
-        sleep(0.3)
+        sleep(0.5)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_0.EmitSignal(
             CONNMAN_IFACE,
@@ -377,7 +413,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             'sv',
             ['Powered', 'true'])
 
-        sleep(0.3)
+        sleep(0.5)
         self.assert_used(1)
         self.assert_selected_preference(0)
 
@@ -401,7 +437,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             objectName="dataRoamingSwitch"
         )
         self.system_settings.main_view.pointer.click_object(roaming_switch)
-        sleep(1)
+        sleep(0.5)
         self.assertEqual(True, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
     def test_no_radio_preference(self):
@@ -427,17 +463,31 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             'sv',
             ['TechnologyPreference', 'any'])
 
-        sleep(0.3)
+        sleep(0.5)
         self.assert_selected_preference(1)
 
-    # def test_change_op_sim_1(self):
-    #     pass
+    # skipped due to a dbusmock bug
+    # see https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/3
+    @skip
+    def test_change_op_sim_1(self):
+        self.navigate_to_carriers_page()
+        self.navigate_to_carrier_page_for_sim(1)
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
+        manual = carriers.select_single('Label', text="my.cool.telco")
+        self.assertThat(manual, NotEquals(None))
 
-    # def test_change_op_sim_2(self):
-    #     pass
-
-    # def test_do_op_search(self):
-    #     pass
-
-    def test_two_sims(self):
-        sleep(5)
+    # skipped due to a dbusmock bug
+    # see https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/3
+    @skip
+    def test_change_op_sim_2(self):
+        self.navigate_to_carriers_page()
+        self.navigate_to_carrier_page_for_sim(2)
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="carrierSelector"
+        )
+        manual = carriers.select_single('Label', text="my.cool.telco")
+        self.assertThat(manual, NotEquals(None))

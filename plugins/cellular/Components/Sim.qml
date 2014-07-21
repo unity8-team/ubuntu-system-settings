@@ -21,8 +21,6 @@ import QtQuick 2.0
 import MeeGo.QOfono 0.2
 
 Item {
-
-
     property alias modem: modem
     property alias radioSettings: radioSettings
     property alias simMng: simMng

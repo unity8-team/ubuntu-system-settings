@@ -174,15 +174,15 @@ ItemPage {
                 progression: enabled
                 onClicked: {
                     if (root.state === 'singleSim') {
-                        pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {
+                        pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                             netReg: netReg,
                             title: i18n.tr("Carrier")
                         })
                     } else if (root.state === 'dualSim') {
-                        pageStack.push(Qt.resolvedUrl("ChooseCarriers.qml"), {
+                        pageStack.push(Qt.resolvedUrl("PageChooseCarriers.qml"), {
                             netReg: netReg,
-                            sim1: sims[0],
-                            sim2: sims[1]
+                            sim1: sim1,
+                            sim2: sim2
                         });
                     }
                 }

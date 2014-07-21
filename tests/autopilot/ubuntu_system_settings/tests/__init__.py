@@ -82,10 +82,24 @@ class UbuntuSystemSettingsBatteryTestCase(UbuntuSystemSettingsUpowerTestCase):
 
 class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                                         dbusmock.DBusTestCase):
-    """ Class for cellular tests which sets up an Ofono mock """
+    """Class for cellular tests which sets up an Ofono mock """
 
     technology_preference = 'gsm'
     use_sims = 1
+
+    @property
+    def choose_carrier_page(self):
+        """Return carrier selection page"""
+        return self.system_settings.main_view.select_single(
+            objectName='chooseCarrierPage'
+        )
+
+    @property
+    def choose_carriers_page(self):
+        """Return carriers selection page"""
+        return self.system_settings.main_view.select_single(
+            objectName='chooseCarriersPage'
+        )
 
     # TODO: remove this when it has been fixed in dbusmock
     def get_all_operators(self, name, slow=False):
@@ -114,7 +128,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             '/%s/operator/op2' % name,
             'org.ofono.NetworkOperator',
             {
-                'Name': 'my.cool.telco (%s)' % name,
+                'Name': 'my.cool.telco',
                 'Status': 'available',
                 'MobileCountryCode': '777',
                 'MobileNetworkCode': '22',
@@ -131,7 +145,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             '/%s/operator/op3' % name,
             'org.ofono.NetworkOperator',
             {
-                'Name': 'my.bad.telco (%s)' % name,
+                'Name': 'my.bad.telco',
                 'Status': 'forbidden',
                 'MobileCountryCode': '777',
                 'MobileNetworkCode': '22',

@@ -26,7 +26,7 @@ import MeeGo.QOfono 0.2
 ItemPage {
     id: root
     title: i18n.tr("Carriers")
-    objectName: "carriersPage"
+    objectName: "chooseCarriersPage"
 
     property var netReg
     property var sim1
@@ -58,10 +58,11 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                objectName: "chooseCarrierSim1"
                 value: netReg.name ? netReg.name : i18n.tr("N/A")
                 progression: true
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {
+                    pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                         netReg: netReg,
                         title: sim1.title
                     })
@@ -73,10 +74,11 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                objectName: "chooseCarrierSim2"
                 value: netReg2.name ? netReg2.name : i18n.tr("N/A")
                 progression: true
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {
+                    pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                         netReg: netReg2,
                         title: sim2.title
                     })

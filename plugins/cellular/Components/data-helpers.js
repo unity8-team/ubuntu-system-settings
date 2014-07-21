@@ -1,22 +1,3 @@
-function normalizeKey (k) {
-    if (k === 'lte' || k === 'umts') {
-        console.warn("normalizeKey saw", k);
-        return 'any';
-    } else {
-        return k;
-    }
-}
-
-function singleIndexToKey (i) {
-    if (i === 0) {
-        return 'off';
-    } else if (i === 1) {
-        return 'gsm';
-    } else {
-        return 'any';
-    }
-}
-
 function singleSimKeyToIndex (k) {
     if (k === 'off') {
         return 0;
@@ -26,14 +7,6 @@ function singleSimKeyToIndex (k) {
         return 2;
     } else {
         return -1;
-    }
-}
-
-function dualIndexToKey (i) {
-    if (i === 0) {
-        return 'gsm';
-    } else {
-        return 'any';
     }
 }
 
