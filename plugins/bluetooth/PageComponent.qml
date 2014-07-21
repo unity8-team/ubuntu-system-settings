@@ -267,7 +267,7 @@ ItemPage {
                 id: disconnectedNone
                 text: i18n.tr("None detected")
                 visible: !disconnectedList.visible
-                enabled: !backend.discovering
+                enabled: false
             }
 
             //  Devices that connect automatically
