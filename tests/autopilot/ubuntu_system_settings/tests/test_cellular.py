@@ -61,7 +61,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         selector = self.system_settings.main_view.cellular_page.select_single(
             objectName="chooseCarrier"
         )
-        self.system_settings.main_view.pointer.click_object(selector)
+        self.system_settings.main_view.scroll_to_and_click(selector)
 
     def navigate_to_manual(self):
         selector = self.choose_carrier_page.select_single(
@@ -165,7 +165,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         roaming_switch = self.system_settings.main_view.select_single(
             objectName="dataRoamingSwitch"
         )
-        self.system_settings.main_view.pointer.click_object(roaming_switch)
+        self.system_settings.main_view.scroll_to_and_click(roaming_switch)
         sleep(1)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
@@ -267,13 +267,13 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         selector = self.system_settings.main_view.cellular_page.select_single(
             objectName="chooseCarrier"
         )
-        self.system_settings.main_view.pointer.click_object(selector)
+        self.system_settings.main_view.scroll_to_and_click(selector)
 
     def navigate_to_carrier_page_for_sim(self, n):
         selector = self.choose_carriers_page.select_single(
             objectName="chooseCarrierSim%d" % n
         )
-        self.system_settings.main_view.pointer.click_object(selector)
+        self.system_settings.main_view.scroll_to_and_click(selector)
 
     def navigate_to_manual(self):
         selector = self.choose_carrier_page.select_single(
@@ -281,10 +281,10 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
             objectName="autoChooseCarrierSelector"
         )
         manual = selector.select_single('Label', text=_("Manually"))
-        self.system_settings.main_view.pointer.click_object(manual)
+        self.system_settings.main_view.scroll_to_and_click(manual)
         choosecarrier = self.system_settings.main_view.cellular_page.\
             select_single(objectName="chooseCarrier")
-        self.system_settings.main_view.pointer.click_object(choosecarrier)
+        self.system_settings.main_view.scroll_to_and_click(choosecarrier)
         self.assertThat(
             self.system_settings.main_view.choose_page.title,
             Equals(_("Carrier"))
@@ -305,7 +305,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
     def select_preference(self, label):
         """Helper method that clicks a preference that matches provided label"""
         pref = self.data_preference_selector.select_single('Label', text=label)
-        self.system_settings.main_view.pointer.click_object(pref)
+        self.system_settings.main_view.scroll_to_and_click(pref)
 
     def assert_selected_preference(self, index):
         """Helper method asserting that the selected data technology preference
@@ -316,7 +316,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         obj = self.system_settings.main_view.cellular_page.select_single(
             objectName="use"
         ).select_single('Label', text=label)
-        self.system_settings.main_view.pointer.click_object(obj)
+        self.system_settings.main_view.scroll_to_and_click(obj)
 
     def assert_used(self, index):
         obj = self.system_settings.main_view.cellular_page.select_single(
@@ -445,7 +445,7 @@ class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         roaming_switch = self.system_settings.main_view.select_single(
             objectName="dataRoamingSwitch"
         )
-        self.system_settings.main_view.pointer.click_object(roaming_switch)
+        self.system_settings.main_view.scroll_to_and_click(roaming_switch)
         sleep(1)
         self.assertEqual(True, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
