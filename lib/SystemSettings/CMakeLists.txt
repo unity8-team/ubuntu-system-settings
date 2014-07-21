@@ -11,7 +11,7 @@ SOVERSION 1
 qt5_use_modules(SystemSettings Core Gui Quick Qml)
 
 install(TARGETS SystemSettings LIBRARY DESTINATION ${LIBDIR})
-install(FILES item-base.h ItemBase plugin-interface.h PluginInterface ${CMAKE_CURRENT_BINARY_DIR}/service.h Service
+install(FILES item-base.h ItemBase plugin-interface.h PluginInterface ${CMAKE_CURRENT_BINARY_DIR}/service.h
 DESTINATION include/SystemSettings)
 
 set(SYSTEMSETTINGS_LIB SystemSettings)
