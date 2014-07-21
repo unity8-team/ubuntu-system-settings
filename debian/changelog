@@ -1,9 +1,18 @@
-ubuntu-system-settings (0.3+14.10.20140718.1-0ubuntu2) UNRELEASED; urgency=low
+ubuntu-system-settings (0.3+14.10.20140721.1-0ubuntu1) utopic; urgency=low
 
+  [ Ubuntu daily release ]
   * debian/ubuntu-system-settings.maintscript: auto-update to released
     version
 
- -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 21 Jul 2014 14:50:59 +0000
+  [ Iain Lane ]
+  * Remove leftover /etc/apparmor.d/usr.bin.system-settings conffile.
+  * Use the last updated date returned by 'Info' on system-image's D-Bus
+    interface instead of reading a file on the fs, which is an
+    implementation detail.
+  * Clean up AP tests to try to fix test failures. Run ofono and system-
+    image tests on the about page under mocks.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 21 Jul 2014 14:51:03 +0000
 
 ubuntu-system-settings (0.3+14.10.20140718.1-0ubuntu1) utopic; urgency=low
 
