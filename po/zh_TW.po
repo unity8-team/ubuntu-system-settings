@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-02-08 06:26+0000\n"
+"PO-Revision-Date: 2014-07-18 10:13+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:36+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-19 06:18+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -30,7 +30,7 @@ msgstr "音效"
 
 #: plugins/sound//PageComponent.qml:68
 msgid "Phone calls:"
-msgstr "通話數："
+msgstr "來電："
 
 #: plugins/sound//PageComponent.qml:72
 #: plugins/sound//PageComponent.qml:78
@@ -66,15 +66,15 @@ msgstr "其他音效："
 #: plugins/sound//PageComponent.qml:139
 #: plugins/language//PageComponent.qml:160
 msgid "Keyboard sound"
-msgstr "鍵盤聲音"
+msgstr "鍵盤聲"
 
 #: plugins/sound//PageComponent.qml:153
 msgid "Lock sound"
-msgstr "音效鎖定"
+msgstr "鎖定音效"
 
 #: plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr "電話置於無聲模式。"
+msgstr "手機處於無聲模式。"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: plugins/time-date//PageComponent.qml:29
@@ -178,7 +178,7 @@ msgstr "無符合的地點"
 #: plugins/security-privacy//LockSecurity.qml:30
 #: plugins/security-privacy//PhoneLocking.qml:44
 msgid "Lock security"
-msgstr "安全鎖定"
+msgstr "鎖定安全"
 
 #: plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
@@ -190,7 +190,7 @@ msgstr "變更密語"
 
 #: plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
-msgstr "切換為輕掃"
+msgstr "切換為滑開"
 
 #: plugins/security-privacy//LockSecurity.qml:89
 msgid "Switch to passcode"
@@ -252,15 +252,15 @@ msgstr "繼續"
 
 #: plugins/security-privacy//LockSecurity.qml:326
 msgid "Unlock the phone using:"
-msgstr "以此為電話解鎖："
+msgstr "手機解鎖方式："
 
 #: plugins/security-privacy//LockSecurity.qml:330
 msgid "Swipe (no security)"
-msgstr "輕掃 (不安全)"
+msgstr "滑開 (不安全)"
 
 #: plugins/security-privacy//LockSecurity.qml:331
 msgid "4-digit passcode"
-msgstr "4位密碼"
+msgstr "4 位密碼"
 
 #: plugins/security-privacy//LockSecurity.qml:332
 #: plugins/security-privacy//PhoneLocking.qml:42
@@ -269,11 +269,11 @@ msgstr "密語"
 
 #: plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr "輕掃 (不安全)… "
+msgstr "滑開 (不安全)… "
 
 #: plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr "4位密碼…"
+msgstr "4 位密碼…"
 
 #: plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
@@ -299,44 +299,44 @@ msgstr "位置偵測"
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
-msgstr "以 GPS 偵測您的大約位置。關閉 GPS 以省電。"
+msgstr "以 GPS 偵測您的約略位置。關閉 GPS 可以省電。"
 
 #: plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
-msgstr "以 Wi-Fi 和 GPS 偵測您的大約位置。關閉位置偵測以省電。"
+msgstr "以 Wi-Fi 和 GPS 偵測您的約略位置。關閉位置偵測可以省電。"
 
 #: plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
-msgstr "以 Wi-Fi (目前關閉) 偵測您的大約位置。關閉位置偵測以省電。"
+msgstr "以 Wi-Fi (目前關閉) 偵測您的約略位置。關閉位置偵測可以省電。"
 
 #: plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
-msgstr "以 Wi-Fi、無線電話基地台和 GPS 偵測您的大約位置。關閉位置偵測以省電。"
+msgstr "以 Wi-Fi、無線電話基地臺和 GPS 偵測您的約略位置。關閉位置偵測可以省電。"
 
 #: plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
-msgstr "以 Wi-Fi、無線電話基地台 (目前沒有連線) 和 GPS 偵測您的大約位置。關閉位置偵測以省電。"
+msgstr "以 Wi-Fi、無線電話基地臺 (目前沒有連線) 和 GPS 偵測您的約略位置。關閉位置偵測可以省電。"
 
 #: plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
-msgstr "以 Wi-Fi (目前關閉)、無線電話基地台和 GPS 偵測您的大約位置。關閉位置偵測以省電。"
+msgstr "以 Wi-Fi (目前關閉)、無線電話基地臺和 GPS 偵測您的約略位置。關閉位置偵測可以省電。"
 
 #: plugins/security-privacy//Location.qml:82
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
-msgstr "以 Wi-Fi (目前關閉)、無線電話基地台 (目前沒有連線) 和 GPS 偵測您的大約位置。關閉位置偵測以省電。"
+msgstr "以 Wi-Fi (目前關閉)、無線電話基地臺 (目前沒有連線) 和 GPS 偵測您的約略位置。關閉位置偵測可以省電。"
 
 #: plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
@@ -352,13 +352,13 @@ msgstr "安全與隱私"
 #: plugins/security-privacy//PageComponent.qml:127
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr "電話與網際網路"
+msgstr "手機與網際網路"
 
 #: plugins/security-privacy//PageComponent.qml:52
 #: plugins/security-privacy//PageComponent.qml:128
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr "僅電話"
+msgstr "僅手機"
 
 #: plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
@@ -367,7 +367,7 @@ msgstr "安全："
 #: plugins/security-privacy//PageComponent.qml:76
 #: plugins/security-privacy//PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr "鎖定電話"
+msgstr "手機鎖定"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/security-privacy//PageComponent.qml:78
@@ -379,7 +379,7 @@ msgstr[0] "%1 分鐘"
 
 #: plugins/security-privacy//PageComponent.qml:87
 msgid "SIM PIN"
-msgstr "SIM PIN 碼"
+msgstr "SIM 卡 PIN 碼"
 
 #: plugins/security-privacy//PageComponent.qml:93
 msgid "Privacy:"
@@ -424,7 +424,7 @@ msgstr "不傳送"
 
 #: plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr "傳回來自此處的結果："
+msgstr "傳回此處的結果："
 
 #: plugins/security-privacy//PhoneLocking.qml:40
 #: plugins/wifi//OtherNetwork.qml:67
@@ -450,7 +450,7 @@ msgstr "閒置時睡眠"
 
 #: plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr "睡眠時馬上鎖定"
+msgstr "睡眠時立即鎖定"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: plugins/language//PageComponent.qml:32
@@ -476,7 +476,7 @@ msgstr "拼字檢查"
 
 #: plugins/language//PageComponent.qml:120
 msgid "Auto completion"
-msgstr "自動完成"
+msgstr "自動補完"
 
 #: plugins/language//PageComponent.qml:130
 msgid "Word suggestions"
@@ -488,7 +488,7 @@ msgstr "自動大寫"
 
 #: plugins/language//PageComponent.qml:153
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "在每句句子開首打開 Shift 使首個字母大寫"
+msgstr "在每個句子的起首開啟 Shift 鍵使首字母大寫。"
 
 #: plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -554,11 +554,11 @@ msgstr "正在充電"
 
 #: plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
-msgstr "最後充滿電"
+msgstr "上次完全充電"
 
 #: plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
-msgstr "充滿電"
+msgstr "完全充電"
 
 #: plugins/battery//PageComponent.qml:111
 msgid "Charge level"
@@ -579,7 +579,7 @@ msgstr "%1%"
 
 #: plugins/battery//PageComponent.qml:229
 msgid "Ways to reduce battery use:"
-msgstr "減少使用電池的方法："
+msgstr "減少電池使用量的方法："
 
 #. TRANSLATORS: %1 is the number of minutes
 #: plugins/battery//PageComponent.qml:246
@@ -602,7 +602,7 @@ msgstr[0] "%1 分鐘之後"
 #: plugins/system-update//Configuration.qml:53
 #: plugins/about//PageComponent.qml:128
 msgid "Never"
-msgstr "從未更新過"
+msgstr "永不"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: plugins/battery//PageComponent.qml:268
@@ -629,62 +629,62 @@ msgstr "要準確偵測位置需要 GPS 和/或 Wi-Fi。"
 
 #: plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr "當不使用此時間後鎖定電話："
+msgstr "當不使用手機這段時間後鎖定："
 
 #: plugins/battery//SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr "令電話睡眠，當不使用："
+msgstr "當不使用手機這段時間後睡眠："
 
 #: plugins/battery//SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
-msgstr "較短的時間會較安全。電話在談話或播放影片時不會鎖定。"
+msgstr "時間越短越安全。手機在通話時或播放影片時不會鎖定。"
 
 #: plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr "電話在談話或播放影片時不會睡眠。"
+msgstr "手機在通話時或播放影片時不會睡眠。"
 
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "之前的網路"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "其他網路"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "往路名稱"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "安全"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA 與 WPA2 個人"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "密碼"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "查看密碼"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "連接"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "網路細節"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -693,15 +693,15 @@ msgstr "名稱"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "上次連接"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "顯示密碼"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "忘記網路"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -724,12 +724,12 @@ msgstr "SIM 卡"
 #: plugins/phone//CallForwarding.qml:27
 #: plugins/phone//CallForwarding.qml:60
 msgid "Call forwarding"
-msgstr "來電轉駁"
+msgstr "來電轉接"
 
 #: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
 #: plugins/phone//CallWaiting.qml:53
 msgid "Call waiting"
-msgstr "電話待接"
+msgstr "來電待接"
 
 #: plugins/phone//ServiceInfo.qml:35
 msgid "Call"
@@ -739,15 +739,15 @@ msgstr "通話"
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
-msgstr "當無法接聽、忙線、關機或信號接收不到時將電話轉駁至另一個號碼。"
+msgstr "當無法接聽、忙線、關機或接收不到信號時，將手機轉接給另一個號碼。"
 
 #: plugins/phone//CallForwarding.qml:91
 msgid "Call forwarding status can’t be checked right now. Try again later."
-msgstr "現時無法檢查電話轉駁的狀態。請稍候重試。"
+msgstr "現在無法檢查電話的轉接狀態。請稍候重試。"
 
 #: plugins/phone//CallForwarding.qml:102
 msgid "Divert to"
-msgstr "轉駁至"
+msgstr "轉接給"
 
 #: plugins/phone//CallForwarding.qml:113
 msgid "Contacts…"
@@ -787,11 +787,11 @@ msgstr "安裝"
 
 #: plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
-msgstr "軟體已處最新狀態"
+msgstr "軟體已處於最新狀態"
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "請登入您的 Ubuntu One 帳號。"
 
 #: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
@@ -803,17 +803,17 @@ msgstr "系統更新失敗。"
 
 #: plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
-msgstr "正在檢查有否更新..."
+msgstr "正在檢查有否更新…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "安裝 %1 項更新…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "安裝 %1 項更新"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -841,11 +841,11 @@ msgstr "暫停"
 
 #: plugins/system-update//PageComponent.qml:364
 msgid "Installing"
-msgstr "正在安裝"
+msgstr "安裝中"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "已安裝"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
@@ -866,7 +866,7 @@ msgstr "一定"
 
 #: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "找不到憑證"
 
 #: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
@@ -890,7 +890,7 @@ msgstr " GiB"
 
 #: plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
-msgstr "自動下載未來更新："
+msgstr "自動下載後續更新："
 
 #: plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
@@ -902,7 +902,7 @@ msgstr "當有任何數據連線時"
 
 #: plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
-msgstr "可能要數據費。"
+msgstr "可能需要數據費用。"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: plugins/brightness//PageComponent.qml:32
@@ -912,11 +912,11 @@ msgstr "亮度"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "自動調整"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "增亮與減暗螢幕以適應周遭環境"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1019,17 +1019,17 @@ msgstr "藍牙配對請求"
 #: plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "請確定顯示在「%1」的密碼和這個相同"
+msgstr "請確定顯示在「%1」的 PIN 碼和這個相同"
 
 #: plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr "確認密碼"
+msgstr "確認 PIN 碼"
 
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr "「%1」的密碼"
+msgstr "「%1」的 PIN 碼"
 
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:62
@@ -1062,15 +1062,15 @@ msgstr "網路"
 
 #: plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
-msgstr "耳機連話筒(Headset)"
+msgstr "頭戴耳麥"
 
 #: plugins/bluetooth//PageComponent.qml:86
 msgid "Headphones"
-msgstr "耳機(Headphone)"
+msgstr "頭戴耳機"
 
 #: plugins/bluetooth//PageComponent.qml:87
 msgid "Video"
-msgstr "影片"
+msgstr "視訊"
 
 #: plugins/bluetooth//PageComponent.qml:88
 msgid "Other Audio"
@@ -1122,23 +1122,23 @@ msgstr "差"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "可被找到"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "不被找到"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "連接的裝置："
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "連接不同的裝置："
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "連接另一個裝置："
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1160,11 +1160,11 @@ msgstr "斷線"
 #: plugins/cellular//PageComponent.qml:28
 #: settings.js:132
 msgid "Cellular"
-msgstr "手機"
+msgstr "行動網路"
 
 #: plugins/cellular//PageComponent.qml:68
 msgid "Cellular data:"
-msgstr "流動數據："
+msgstr "行動數據："
 
 #: plugins/cellular//PageComponent.qml:69
 msgid "Off"
@@ -1180,7 +1180,7 @@ msgstr "2G/3G/4G (較快)"
 
 #: plugins/cellular//PageComponent.qml:82
 msgid "Cellular data"
-msgstr "流動數據"
+msgstr "行動數據"
 
 #: plugins/cellular//PageComponent.qml:93
 msgid "Data roaming"
@@ -1192,12 +1192,12 @@ msgstr "數據用量統計"
 
 #: plugins/cellular//PageComponent.qml:121
 msgid "Choose carrier:"
-msgstr "選擇通信商："
+msgstr "選擇電信商："
 
 #: plugins/cellular//PageComponent.qml:127
 #: plugins/cellular//ChooseCarrier.qml:28
 msgid "Carrier"
-msgstr "通信商"
+msgstr "電信商"
 
 #: plugins/cellular//PageComponent.qml:139
 msgid "APN"
@@ -1217,31 +1217,31 @@ msgstr "軟體授權條款"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "作業系統建置細節"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "作業系統建置編號"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Ubuntu 映像部份"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Ubuntu 建置描述"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "裝置映像部份"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "裝置建置描述"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "自訂映像部份"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1339,87 +1339,87 @@ msgstr "系統"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "返回"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "手機設定"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
-msgstr ""
+msgstr "您的手機已設置為自動回報錯誤資訊給 Canonical。您可以在系統設定中停用這項動作。"
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
-msgstr ""
+msgstr "您的手機已設置為偵測您的所在位置。您可以在系統設定中停用這項動作。"
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "無 SIM 卡"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "別擔心，您可以稍後插入 SIM　卡。"
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "在這段期間，您不會有電話的通話功能，或是 SMS 功能。"
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
-msgstr ""
+msgstr "您可以在您的手機包裝中找到 SIM 卡，若沒有請聯絡您的電信商。"
 
 #: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "略過"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "就是如此簡單！"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "很高興您成為 Ubuntu 社群的一分子。"
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "請享受您的新手機。"
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "完成"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "連接 Wi-Fi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "可用網路"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+msgstr "請連接 Wi-Fi 網路以自訂您的設置。"
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "您好！"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "歡迎使用 Ubuntu。"
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "讓我們開始起步。"
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "選取您的語言"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1471,7 +1471,7 @@ msgstr "時區"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
 msgid "Orientation Lock"
-msgstr "方向鎖"
+msgstr "方向鎖定"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:20
@@ -1521,7 +1521,7 @@ msgstr "a11y"
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:46
 msgid "language"
-msgstr "語言"
+msgstr "多國語言"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:48
@@ -1568,7 +1568,7 @@ msgstr "wi-fi"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: settings.js:74
 msgid "phone"
-msgstr "電話"
+msgstr "手機"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:78
@@ -1588,7 +1588,7 @@ msgstr "測試"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:84
 msgid "sample"
-msgstr "範例"
+msgstr "樣本"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:88
@@ -1608,7 +1608,7 @@ msgstr "更新"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "有可用的更新"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
@@ -1628,12 +1628,12 @@ msgstr "飛安模式"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:112
 msgid "flight"
-msgstr "飛航"
+msgstr "飛安"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:114
 msgid "plane"
-msgstr "飛機"
+msgstr "飛航"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:116

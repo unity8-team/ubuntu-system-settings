@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-17 06:40+0000\n"
-"Last-Translator: freegilyeon <freegilyeon@gmail.com>\n"
+"PO-Revision-Date: 2014-07-18 14:21+0000\n"
+"Last-Translator: MinSik CHO <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-18 05:26+0000\n"
+"X-Launchpad-Export-Date: 2014-07-19 06:18+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -838,228 +838,228 @@ msgstr "업데이트"
 
 #: plugins/system-update//PageComponent.qml:304
 msgid "Resume"
-msgstr ""
+msgstr "다시 시작"
 
 #: plugins/system-update//PageComponent.qml:305
 msgid "Pause"
-msgstr ""
+msgstr "일시정지"
 
 #: plugins/system-update//PageComponent.qml:364
 msgid "Installing"
-msgstr ""
+msgstr "설치 중"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "설치됨"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
-msgstr ""
+msgstr "버전: "
 
 #: plugins/system-update//PageComponent.qml:446
 #: plugins/system-update//Configuration.qml:30
 msgid "Auto download"
-msgstr ""
+msgstr "자동 다운로드"
 
 #: plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
-msgstr ""
+msgstr "Wi-Fi 에서"
 
 #: plugins/system-update//PageComponent.qml:453
 msgid "Always"
-msgstr ""
+msgstr "항상"
 
 #: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "자격 증명을 찾을 수 없습니다."
 
 #: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
-msgstr ""
+msgstr "업데이트 설치 중..."
 
 #: plugins/system-update//PageComponent.qml:549
 msgid " bytes"
-msgstr ""
+msgstr " 바이트"
 
 #: plugins/system-update//PageComponent.qml:552
 msgid " KiB"
-msgstr ""
+msgstr " 킬로바이트"
 
 #: plugins/system-update//PageComponent.qml:555
 msgid " MiB"
-msgstr ""
+msgstr " 메가바이트"
 
 #: plugins/system-update//PageComponent.qml:558
 msgid " GiB"
-msgstr ""
+msgstr " 기가바이트"
 
 #: plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "업데이트를 자동으로 다운로드 합니다:"
 
 #: plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Wi-Fi에 연결되어 있을때"
 
 #: plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "어떤 네트워크이든 연결되어 있을때"
 
 #: plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "데이터 요금이 부과될 수 있습니다."
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: plugins/brightness//PageComponent.qml:32
 #: settings.js:98
 msgid "Brightness"
-msgstr ""
+msgstr "밝기"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "자동으로 조절하기"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "주변 환경에 따라 밝기가 조정됩니다."
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
-msgstr ""
+msgstr "모든 문서와 저장된 게임, 설정 그리고 기타 다른 항목들이 영구히 지워집니다."
 
 #: plugins/reset//EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr ""
+msgstr "모두 삭제하고 초기화"
 
 #: plugins/reset//ResetAllSettings.qml:29
 #: plugins/reset//ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
-msgstr ""
+msgstr "런쳐의 내용, 레이아웃, 그리고 홈스크린의 필터들이 모두 초기 설정으로 복원 됩니다."
 
 #: plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "모든 시스템 설정 초기화"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: plugins/reset//PageComponent.qml:32
 #: settings.js:104
 msgid "Reset phone"
-msgstr ""
+msgstr "휴대폰 초기화"
 
 #: plugins/reset//PageComponent.qml:62
 msgid "Reset launcher & home screen…"
-msgstr ""
+msgstr "런쳐와 홈스크린 초기화..."
 
 #: plugins/reset//PageComponent.qml:75
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "모든 시스템 설정 초기화..."
 
 #: plugins/reset//PageComponent.qml:88
 msgid "Erase & reset everything…"
-msgstr ""
+msgstr "모두 삭제하고 초기화..."
 
 #: plugins/reset//ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
-msgstr ""
+msgstr "런쳐와 홈스크린 초기화"
 
 #: plugins/background//Preview.qml:67
 msgid "Preview"
-msgstr ""
+msgstr "미리보기"
 
 #: plugins/background//WallpaperGrid.qml:121
 msgid "Remove"
-msgstr ""
+msgstr "삭제"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: plugins/background//MainPage.qml:31
 #: settings.js:118
 msgid "Background"
-msgstr ""
+msgstr "배경"
 
 #: plugins/background//MainPage.qml:131
 #: plugins/background//Wallpapers.qml:43
 msgid "Welcome screen"
-msgstr ""
+msgstr "초기 화면"
 
 #: plugins/background//MainPage.qml:175
 #: plugins/background//Wallpapers.qml:43
 msgid "Home screen"
-msgstr ""
+msgstr "홈 화면"
 
 #: plugins/background//MainPage.qml:200
 msgid "Same background for both"
-msgstr ""
+msgstr "같은 배경화면 사용"
 
 #: plugins/background//MainPage.qml:201
 msgid "Different background for each"
-msgstr ""
+msgstr "각각 다른 배경화면"
 
 #: plugins/background//Wallpapers.qml:42
 msgid "Choose background"
-msgstr ""
+msgstr "배경화면 선택하기"
 
 #: plugins/background//Wallpapers.qml:47
 msgid "Photo/Image"
-msgstr ""
+msgstr "사진/이미지"
 
 #: plugins/background//Wallpapers.qml:95
 msgid "Ubuntu Art"
-msgstr ""
+msgstr "우분투 기본 배경화면"
 
 #: plugins/background//Wallpapers.qml:110
 msgid "Custom"
-msgstr ""
+msgstr "사용자 정의"
 
 #: plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
-msgstr ""
+msgstr "블루투스 페어링 요청"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "'%1'에 표시된 PIN 번호와 같은지 확인해 주십시오."
 
 #: plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "PIN 번호 확인"
 
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "'%1'의 PIN 번호"
 
 #: plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: plugins/bluetooth//ProvidePasskeyDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "페어링"
 
 #. TRANSLATORS: %1 is the display name of the device that is connecting
 #: plugins/bluetooth//PageComponent.qml:71
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr ""
+msgstr "%1 (연결중...)"
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
 #: plugins/bluetooth//PageComponent.qml:74
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr ""
+msgstr "%1 (연결 해제중...)"
 
 #: plugins/bluetooth//PageComponent.qml:81
 msgid "Computer"
-msgstr ""
+msgstr "컴퓨터"
 
 #: plugins/bluetooth//PageComponent.qml:83
 msgid "Modem"
-msgstr ""
+msgstr "모뎀"
 
 #: plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
 msgid "Network"
@@ -1067,186 +1067,186 @@ msgstr "네트워크"
 
 #: plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
-msgstr ""
+msgstr "헤드셋"
 
 #: plugins/bluetooth//PageComponent.qml:86
 msgid "Headphones"
-msgstr ""
+msgstr "헤드폰"
 
 #: plugins/bluetooth//PageComponent.qml:87
 msgid "Video"
-msgstr ""
+msgstr "동영상"
 
 #: plugins/bluetooth//PageComponent.qml:88
 msgid "Other Audio"
-msgstr ""
+msgstr "다른 음악"
 
 #: plugins/bluetooth//PageComponent.qml:89
 msgid "Joypad"
-msgstr ""
+msgstr "조이패드"
 
 #: plugins/bluetooth//PageComponent.qml:90
 msgid "Keyboard"
-msgstr ""
+msgstr "키보드"
 
 #: plugins/bluetooth//PageComponent.qml:91
 msgid "Tablet"
-msgstr ""
+msgstr "태블릿"
 
 #: plugins/bluetooth//PageComponent.qml:92
 msgid "Mouse"
-msgstr ""
+msgstr "마우스"
 
 #: plugins/bluetooth//PageComponent.qml:93
 msgid "Printer"
-msgstr ""
+msgstr "프린터"
 
 #: plugins/bluetooth//PageComponent.qml:94
 msgid "Camera"
-msgstr ""
+msgstr "카메라"
 
 #: plugins/bluetooth//PageComponent.qml:95
 msgid "Other"
-msgstr ""
+msgstr "기타"
 
 #: plugins/bluetooth//PageComponent.qml:101
 msgid "Excellent"
-msgstr ""
+msgstr "매우 좋음"
 
 #: plugins/bluetooth//PageComponent.qml:102
 msgid "Good"
-msgstr ""
+msgstr "좋음"
 
 #: plugins/bluetooth//PageComponent.qml:103
 msgid "Fair"
-msgstr ""
+msgstr "보통"
 
 #: plugins/bluetooth//PageComponent.qml:104
 msgid "Poor"
-msgstr ""
+msgstr "나쁨"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "검색할 수 있음"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "검색할 수 없음"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "연결된 장치:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "다른 장치에 연결하기:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "다른 장치에 연결하기:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
-msgstr ""
+msgstr "검색되지 않음"
 
 #: plugins/bluetooth//PageComponent.qml:267
 msgid "Type"
-msgstr ""
+msgstr "종류"
 
 #: plugins/bluetooth//PageComponent.qml:271
 msgid "Signal Strength"
-msgstr ""
+msgstr "신호 강도"
 
 #: plugins/bluetooth//PageComponent.qml:276
 msgid "Disconnect"
-msgstr ""
+msgstr "연결 해제"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: plugins/cellular//PageComponent.qml:28
 #: settings.js:132
 msgid "Cellular"
-msgstr ""
+msgstr "셀룰러 네트워크"
 
 #: plugins/cellular//PageComponent.qml:68
 msgid "Cellular data:"
-msgstr ""
+msgstr "셀룰러 데이터:"
 
 #: plugins/cellular//PageComponent.qml:69
 msgid "Off"
-msgstr ""
+msgstr "끔"
 
 #: plugins/cellular//PageComponent.qml:70
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "2G만 사용 (배터리 절약)"
 
 #: plugins/cellular//PageComponent.qml:71
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (속도 향상)"
 
 #: plugins/cellular//PageComponent.qml:82
 msgid "Cellular data"
-msgstr ""
+msgstr "셀룰러 데이터"
 
 #: plugins/cellular//PageComponent.qml:93
 msgid "Data roaming"
-msgstr ""
+msgstr "데이터 로밍"
 
 #: plugins/cellular//PageComponent.qml:111
 msgid "Data usage statistics"
-msgstr ""
+msgstr "데이터 사용 통계"
 
 #: plugins/cellular//PageComponent.qml:121
 msgid "Choose carrier:"
-msgstr ""
+msgstr "네트워크 선택하기:"
 
 #: plugins/cellular//PageComponent.qml:127
 #: plugins/cellular//ChooseCarrier.qml:28
 msgid "Carrier"
-msgstr ""
+msgstr "네트워크"
 
 #: plugins/cellular//PageComponent.qml:139
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: plugins/cellular//ChooseCarrier.qml:79
 msgid "Refresh"
-msgstr ""
+msgstr "새로 고침"
 
 #: plugins/cellular//ChooseCarrier.qml:96
 msgid "Searching"
-msgstr ""
+msgstr "검색 중"
 
 #: plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:148
 msgid "Software licenses"
-msgstr ""
+msgstr "소프트웨어 라이선스"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "우분투 빌드 정보"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "우분투 빌드 번호"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "우분투 이미지"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "우분투 빌드 정보"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "장치 이미지"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "장치 빌드 정보"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "사용자화 이미지"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1260,11 +1260,11 @@ msgstr "시리얼"
 
 #: plugins/about//PageComponent.qml:106 ../plugins/about//Storage.qml:33
 msgid "Storage"
-msgstr ""
+msgstr "저장 공간"
 
 #: plugins/about//PageComponent.qml:113
 msgid "Software:"
-msgstr ""
+msgstr "소프트웨어:"
 
 #: plugins/about//PageComponent.qml:118
 msgid "OS"
@@ -1272,71 +1272,71 @@ msgstr "OS"
 
 #: plugins/about//PageComponent.qml:127
 msgid "Last updated"
-msgstr ""
+msgstr "마지막 업데이트"
 
 #: plugins/about//PageComponent.qml:134
 msgid "Check for updates"
-msgstr ""
+msgstr "업데이트 확인"
 
 #: plugins/about//PageComponent.qml:143
 msgid "Legal:"
-msgstr ""
+msgstr "법률 정보:"
 
 #: plugins/about//PageComponent.qml:156
 msgid "Regulatory info"
-msgstr ""
+msgstr "규정 정보"
 
 #: plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
-msgstr ""
+msgstr "우분투에 의해 사용됨"
 
 #: plugins/about//Storage.qml:88
 msgid "Videos"
-msgstr ""
+msgstr "비디오"
 
 #: plugins/about//Storage.qml:89
 msgid "Audio"
-msgstr ""
+msgstr "오디오"
 
 #: plugins/about//Storage.qml:90
 msgid "Pictures"
-msgstr ""
+msgstr "사진"
 
 #: plugins/about//Storage.qml:91
 msgid "Other files"
-msgstr ""
+msgstr "다른 파일"
 
 #: plugins/about//Storage.qml:92
 msgid "Used by apps"
-msgstr ""
+msgstr "애플리케이션에 의해 사용됨"
 
 #: plugins/about//Storage.qml:142
 msgid "Total storage"
-msgstr ""
+msgstr "총 저장 공간"
 
 #: plugins/about//Storage.qml:154
 msgid "Free space"
-msgstr ""
+msgstr "빈 공간"
 
 #: plugins/about//Storage.qml:174
 msgid "By name"
-msgstr ""
+msgstr "이름 순으로"
 
 #: plugins/about//Storage.qml:174
 msgid "By size"
-msgstr ""
+msgstr "크기 순으로"
 
 #: src/qml/MainWindow.qml:109
 msgid "System Settings"
-msgstr ""
+msgstr "시스템 설정"
 
 #: src/qml/MainWindow.qml:130
 msgid "Search"
-msgstr ""
+msgstr "검색"
 
 #: src/qml/MainWindow.qml:149
 msgid "Personal"
-msgstr ""
+msgstr "개인"
 
 #: src/qml/MainWindow.qml:154
 msgid "System"
@@ -1344,92 +1344,92 @@ msgstr "시스템"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "뒤로"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "휴대전화 설정"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
-msgstr ""
+msgstr "시스템 오류가 발생하면 자동으로 캐노니컬에 제출하도록 설정되어 있습니다. 이 설정은 시스템 설정에서 변경하실 수 있습니다."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
-msgstr ""
+msgstr "휴대전화가 자동으로 위치를 감지하도록 설정되어 있습니다. 이 설정은 시스템 설정에서 변경하실 수 있습니다."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "SIM 카드 없음"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "걱정하지 마세요, SIM 카드는 나중에 삽입하셔도 됩니다."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "SIM 카드가 없기 때문에 당분간 전화나 문자 메시지 기능을 사용하실 수 없습니다."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
-msgstr ""
+msgstr "SIM 카드는 휴대전화 패키지에서 찾을 수 있거나, 이동통신사를 통해 구하실 수 있습니다."
 
 #: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "건너뛰기"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "바로 그거에요!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "우분투 커뮤니티에 일원이 되신 것을 환영합니다."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "새 휴대전화를 즐기세요."
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "완료"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi에 연결하기"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "사용 가능한 네트워크"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+msgstr "사용자 설정을 마치려면, Wi-Fi 네트워크에 연결하세요."
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "안녕하세요!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "우분투를 사용하시게 된 것을 환영합니다."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "시작해봅시다."
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "언어를 선택하세요."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
 msgid "sound"
-msgstr ""
+msgstr "소리"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
@@ -1456,241 +1456,241 @@ msgstr ""
 #: settings.js:130
 #: settings.js:142
 msgid "settings"
-msgstr ""
+msgstr "설정"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:10
 msgid "time"
-msgstr ""
+msgstr "시간"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:12
 msgid "date"
-msgstr ""
+msgstr "날짜"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: settings.js:14
 msgid "timezone"
-msgstr ""
+msgstr "시간대"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
 msgid "Orientation Lock"
-msgstr ""
+msgstr "화면 방향 잠금"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:20
 msgid "rotation"
-msgstr ""
+msgstr "회전"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:22
 msgid "orientation"
-msgstr ""
+msgstr "방향"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:24
 msgid "lock"
-msgstr ""
+msgstr "잠금"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:26
 msgid "screen"
-msgstr ""
+msgstr "화면"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: settings.js:30
 msgid "security"
-msgstr ""
+msgstr "보안"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: settings.js:32
 msgid "privacy"
-msgstr ""
+msgstr "사생활 보호"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:36
 msgid "Accessibility"
-msgstr ""
+msgstr "접근성"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:38
 msgid "accessibility"
-msgstr ""
+msgstr "접근성"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: settings.js:40
 msgid "a11y"
-msgstr ""
+msgstr "접근성"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:46
 msgid "language"
-msgstr ""
+msgstr "언어"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:48
 msgid "lang"
-msgstr ""
+msgstr "언어"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: settings.js:50
 msgid "i18n"
-msgstr ""
+msgstr "지역화"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: settings.js:56
 msgid "battery"
-msgstr ""
+msgstr "배터리"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: settings.js:58
 msgid "power"
-msgstr ""
+msgstr "전원"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:62
 #: settings.js:136
 msgid "network"
-msgstr ""
+msgstr "네트워크"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:64
 msgid "wireless"
-msgstr ""
+msgstr "무선"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:66
 msgid "wifi"
-msgstr ""
+msgstr "와이파이"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: settings.js:68
 msgid "wi-fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: settings.js:74
 msgid "phone"
-msgstr ""
+msgstr "휴대 전화"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:78
 msgid "Example"
-msgstr ""
+msgstr "예시"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:80
 msgid "example"
-msgstr ""
+msgstr "예시"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:82
 msgid "test"
-msgstr ""
+msgstr "테스트"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: settings.js:84
 msgid "sample"
-msgstr ""
+msgstr "예제"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:88
 msgid "system"
-msgstr ""
+msgstr "시스템"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:90
 msgid "software"
-msgstr ""
+msgstr "소프트웨어"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: settings.js:92
 msgid "update"
-msgstr ""
+msgstr "업데이트"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "사용 가능한 업데이트"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
 msgid "brightness"
-msgstr ""
+msgstr "밝기"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: settings.js:106
 msgid "reset"
-msgstr ""
+msgstr "초기화"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110
 msgid "Flight Mode"
-msgstr ""
+msgstr "비행 중 모드"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:112
 msgid "flight"
-msgstr ""
+msgstr "비행 중"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:114
 msgid "plane"
-msgstr ""
+msgstr "비행기"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:116
 msgid "offline"
-msgstr ""
+msgstr "오프라인"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:120
 msgid "appearance"
-msgstr ""
+msgstr "모양"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:122
 msgid "background"
-msgstr ""
+msgstr "배경"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: settings.js:124
 msgid "wallpaper"
-msgstr ""
+msgstr "배경 화면"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: settings.js:128
 msgid "bluetooth"
-msgstr ""
+msgstr "블루투스"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:134
 msgid "cellular"
-msgstr ""
+msgstr "셀룰러"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:138
 msgid "mobile"
-msgstr ""
+msgstr "휴대 전화"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: settings.js:140
 msgid "gsm"
-msgstr ""
+msgstr "모바일 네트워크"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:146
 msgid "about"
-msgstr ""
+msgstr "정보"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:148
 msgid "device"
-msgstr ""
+msgstr "장치"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: settings.js:150
 msgid "info"
-msgstr ""
+msgstr "정보"
