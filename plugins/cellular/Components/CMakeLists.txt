@@ -1,5 +1,4 @@
 set(QML_SOURCES
-    CarrierSelection.qml
     CellularSingleSim.qml
     data-helpers.js
     CellularDualSim.qml

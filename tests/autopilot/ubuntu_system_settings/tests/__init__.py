@@ -161,18 +161,13 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         modem.SetProperty('Interfaces', modem_interfaces)
         modem.AddMethods(
             RDO_IFACE,
-            [
-                (
-                    'GetProperties', '', 'a{sv}',
-                    'ret = self.GetAll("%s")'
-                    % RDO_IFACE),
-                (
-                    'SetProperty', 'sv', '',
-                    'self.Set("IFACE", args[0], args[1]); '
-                    'self.EmitSignal("IFACE",\
-                        "PropertyChanged", "sv", [args[0], args[1]])'.replace(
-                        'IFACE', RDO_IFACE)),
-            ])
+            [('GetProperties', '', 'a{sv}',
+              'ret = self.GetAll("%s")' % RDO_IFACE),
+                ('SetProperty', 'sv', '',
+                 'self.Set("IFACE", args[0], args[1]); '
+                 'self.EmitSignal("IFACE",\
+                 "PropertyChanged", "sv", [args[0], args[1]])'.replace(
+                 'IFACE', RDO_IFACE)), ])
 
     def mock_sim_manager(self, modem, properties=None):
         if not properties:
@@ -185,18 +180,13 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         modem.SetProperty('Interfaces', modem_interfaces)
         modem.AddMethods(
             SIM_IFACE,
-            [
-                (
-                    'GetProperties', '', 'a{sv}',
-                    'ret = self.GetAll("%s")'
-                    % SIM_IFACE),
-                (
-                    'SetProperty', 'sv', '',
-                    'self.Set("IFACE", args[0], args[1]); '
-                    'self.EmitSignal("IFACE",\
-                        "PropertyChanged", "sv", [args[0], args[1]])'.replace(
-                    'IFACE', SIM_IFACE)),
-            ])
+            [('GetProperties', '', 'a{sv}',
+                'ret = self.GetAll("%s")' % SIM_IFACE),
+                ('SetProperty', 'sv', '',
+                 'self.Set("IFACE", args[0], args[1]); '
+                 'self.EmitSignal("IFACE",\
+                 "PropertyChanged", "sv", [args[0], args[1]])'.replace(
+                 'IFACE', SIM_IFACE)), ])
 
     def add_sim1(self):
         # create modem_0 proxy

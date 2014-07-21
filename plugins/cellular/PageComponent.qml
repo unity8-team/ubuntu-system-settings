@@ -31,6 +31,7 @@ ItemPage {
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
+    // pointers to sim 1 and 2, lazy loaded
     property alias sim1: simOneLoader.item
     property alias sim2: simTwoLoader.item
 
@@ -81,7 +82,6 @@ ItemPage {
     OfonoManager {
         id: manager
         Component.onCompleted: {
-            console.warn('manager complete with', modems.length, 'modems');
             if (modems.length === 1) {
                 root.state = "singleSim";
             } else if (modems.length === 2) {
@@ -90,7 +90,6 @@ ItemPage {
         }
     }
 
-    // ofono bindings for sims
     Loader {
         id: simOneLoader
         onLoaded: {
@@ -140,26 +139,26 @@ ItemPage {
                 anchors.right: parent.right
             }
 
-            // ListItem.SingleValue {
-            //     text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
-            //     visible: showAllUI && !hotspotItem.visible
-            // }
+            ListItem.SingleValue {
+                text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
+                visible: showAllUI && !hotspotItem.visible
+            }
 
-            // ListItem.SingleValue {
-            //     id: hotspotItem
-            //     text: i18n.tr("Wi-Fi hotspot")
-            //     progression: true
-            //     onClicked: {
-            //         pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
-            //     }
-            //     visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
-            // }
+            ListItem.SingleValue {
+                id: hotspotItem
+                text: i18n.tr("Wi-Fi hotspot")
+                progression: true
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+                }
+                visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
+            }
 
-            // ListItem.Standard {
-            //     text: i18n.tr("Data usage statistics")
-            //     progression: true
-            //     visible: showAllUI
-            // }
+            ListItem.Standard {
+                text: i18n.tr("Data usage statistics")
+                progression: true
+                visible: showAllUI
+            }
 
             ListItem.SingleValue {
                 text: i18n.tr("Carrier", "Carriers", manager.modems.length);

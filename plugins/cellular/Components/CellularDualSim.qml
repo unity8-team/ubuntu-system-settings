@@ -31,13 +31,13 @@ Column {
 
     function getUsedSim () {
         if (state === "sim1") {
-            console.warn('getUsedSim: sim1')
+            console.warn('getUsedSim returned sim1');
             return sim1;
         } else if (state === "sim2") {
-            console.warn('getUsedSim: sim2')
+            console.warn('getUsedSim returned sim2');
             return sim2;
         } else {
-            console.warn('getUsedSim: null')
+            console.warn('getUsedSim returned null');
             return null;
         }
     }
@@ -47,17 +47,18 @@ Column {
         State {
             name: "sim1"
             when: sim1.connMan.powered && !sim2.connMan.powered
-            StateChangeScript { script: {
-                prefBinding.target = sim1.radioSettings;
-                console.warn('state: sim1');
-            }}
         },
         State {
             name: "sim2"
             when: sim2.connMan.powered && !sim1.connMan.powered
+        },
+        State {
+            name: "bothOnline"
+            when: sim1.connMan.powered && sim2.connMan.powered
             StateChangeScript { script: {
-                prefBinding.target = sim2.radioSettings;
-                console.warn('state: sim2');
+                console.warn('state: both');
+                sim2.connMan.powered = false;
+                console.warn('forced sim2 offline due to both being online');
             }}
         }
     ]
@@ -79,27 +80,14 @@ Column {
             }
             return t;
         }}
-        selectedIndex: {
-            // TODO: conflicting state should select preferred sim
-            if (sim1.connMan.powered && sim2.connMan.powered) {
-                console.warn('forced sim2 offline due to both being online');
-                return 1;
-            }
-            return [true, sim1.connMan.powered, sim2.connMan.powered].lastIndexOf(true);
+        selectedIndex: [true, sim1.connMan.powered, sim2.connMan.powered].lastIndexOf(true)
+        onDelegateClicked: {
+            sim1.connMan.powered = (index === 1)
+            sim2.connMan.powered = (index === 2)
         }
     }
 
-    Binding {
-        target: sim1.connMan
-        property: "powered"
-        value: use.selectedIndex === 1
-    }
-
-    Binding {
-        target: sim2.connMan
-        property: "powered"
-        value: use.selectedIndex === 2
-    }
+    ListItem.ThinDivider {}
 
     Connections {
         target: sim1.connMan
@@ -127,6 +115,7 @@ Column {
         expanded: true
         model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
         enabled: use.selectedIndex !== 0
+        onDelegateClicked: getUsedSim().radioSettings.technologyPreference = prefMap[index];
     }
 
     Connections {
@@ -150,12 +139,6 @@ Column {
     }
 
     Binding {
-        id: prefBinding
-        property: "technologyPreference"
-        value: root.prefMap[selector.selectedIndex]
-    }
-
-    Binding {
         target: selector
         property: "enabled"
         value: getUsedSim() && (getUsedSim().radioSettings.technologyPreference !== "")
@@ -176,7 +159,7 @@ Column {
     Binding {
         target: dataRoamingControl
         property: "checked"
-        value: getUsedSim().connMan.roamingAllowed
+        value: getUsedSim() && getUsedSim().connMan.roamingAllowed
         when: getUsedSim()
     }
 }
