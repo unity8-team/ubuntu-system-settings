@@ -372,6 +372,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_ANY)
         self.use_selector(LABEL_OFF)
+        sleep(0.7)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_1.EmitSignal(
             CONNMAN_IFACE,
@@ -389,6 +390,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.use_selector(LABEL_SIM_2)
         self.select_preference(PREFERENCE_ANY)
         self.use_selector(LABEL_OFF)
+        sleep(0.7)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_0.EmitSignal(
             CONNMAN_IFACE,
