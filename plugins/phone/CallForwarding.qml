@@ -31,7 +31,6 @@ ItemPage {
     property string modem
 
     onForwardingChanged: {
-        console.warn("onForwardingChanged: " + forwarding);
         if (callForwardingSwitch.checked !== forwarding)
             callForwardingSwitch.checked = forwarding;
     }
@@ -40,11 +39,9 @@ ItemPage {
         id: callForwarding
         modemPath: modem
         onVoiceUnconditionalChanged: {
-            console.warn ("voiceUnconditionalChanged: " + voiceUnconditional);
             destNumberField.text = voiceUnconditional;
         }
         onVoiceUnconditionalComplete: {
-            console.warn ("voiceUnconditionalComplete: " + success);
             callForwardingIndicator.running = false;
             if (callForwardingSwitch.checked !== forwarding)
                 callForwardingSwitch.checked = forwarding;
@@ -57,7 +54,6 @@ ItemPage {
         enabled: (forwarding === checked)
         visible: callForwardingItem.control === callForwardingSwitch
         onCheckedChanged: {
-            console.warn("onCheckedChanged: " + callForwarding.voiceUnconditional);
             if (!checked && forwarding) {
                 callForwardingIndicator.running = true;
                 callForwarding.voiceUnconditional = "";
@@ -69,7 +65,6 @@ ItemPage {
         id: callForwardingIndicator
         running: false
         visible: running
-        onRunningChanged: console.warn("onRunningChanged: " + running)
     }
 
     Column {
@@ -154,7 +149,6 @@ ItemPage {
                     width: (buttonsRowId.width-units.gu(2)*4)/3
                     enabled: !callForwardingIndicator.running
                     onClicked: {
-                        console.warn(destNumberField.text);
                         callForwardingIndicator.running = true;
                         callForwarding.voiceUnconditional = destNumberField.text;
                     }
