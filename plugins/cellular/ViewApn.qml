@@ -43,6 +43,8 @@ ItemPage {
 
     flickable: scrollWidget
 
+    activator: OfonoActivator
+
     function initialize() {
 
         console.warn("setting fields")
