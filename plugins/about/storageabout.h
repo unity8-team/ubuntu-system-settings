@@ -45,10 +45,6 @@ class StorageAbout : public QObject
                 READ vendorString
                 CONSTANT)
 
-    Q_PROPERTY( QString updateDate
-                READ updateDate
-                CONSTANT)
-
     Q_PROPERTY(QAbstractItemModel *clickList
                READ getClickList
                CONSTANT)
@@ -96,7 +92,6 @@ public:
     QAbstractItemModel *getClickList();
     QString serialNumber();
     QString vendorString();
-    QString updateDate();
     QString deviceBuildDisplayID();
     QString customizationBuildID();
     QString ubuntuBuildID();
@@ -119,7 +114,6 @@ Q_SIGNALS:
 private:
     QString m_serialNumber;
     QString m_vendorString;
-    QString m_updateDate;
     QString m_deviceBuildDisplayID;
     QString m_ubuntuBuildID;
     QString m_customizationBuildID;
