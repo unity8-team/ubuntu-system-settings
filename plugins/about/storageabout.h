@@ -86,6 +86,14 @@ class StorageAbout : public QObject
                 READ ubuntuBuildID
                 CONSTANT)
 
+    Q_PROPERTY( bool developerModeState
+                READ developerModeState
+                CONSTANT)
+
+    Q_PROPERTY( bool developerModeToggle
+                READ developerModeToggle
+                CONSTANT)
+
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
@@ -106,6 +114,8 @@ public:
     Q_INVOKABLE QString formatSize (quint64 size) const;
     Q_INVOKABLE void populateSizes();
     Q_INVOKABLE QString getDevicePath (const QString mount_point);
+    bool developerModeState();
+    bool developerModeToggle();
 
 Q_SIGNALS:
     void sortRoleChanged();
@@ -124,6 +134,9 @@ private:
     quint64 m_picturesSize;
     quint64 m_otherSize;
     quint64 m_homeSize;
+
+    bool m_developerModeState;
+    bool m_devModeToggled;
 
     QMap<QString, QString> m_mounts;
 

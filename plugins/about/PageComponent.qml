@@ -179,6 +179,13 @@ ItemPage {
                 visible: regulatoryInfo
                 onClicked: pageStack.push(regulatoryInfo.pageComponent)
             }
+
+            ListItem.SingleValue {
+                objectName: "devmodeItem"
+                text: i18n.tr("Developer Mode")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
+            }
         }
     }
 }

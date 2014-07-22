@@ -34,6 +34,7 @@
 #include <QVariant>
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
+#include <QDBusInterface>
 
 struct MeasureData {
     uint *running;
@@ -204,6 +205,37 @@ QString StorageAbout::ubuntuBuildID()
     }
 
     return m_ubuntuBuildID;
+}
+
+bool StorageAbout::developerModeState()
+{
+    static char devModeBuffer[PROP_NAME_MAX];
+    m_developerModeState = false;
+
+    QRegExp rx("*adb");
+    rx.setPatternSyntax(QRegExp::Wildcard);
+
+    property_get("persist.sys.usb.config", devModeBuffer, "");
+    if (rx.exactMatch(QString(devModeBuffer)))
+    {
+        m_developerModeState = true;
+    }
+
+    return m_developerModeState;
+}
+
+bool StorageAbout::developerModeToggle()
+{
+    m_devModeToggled = !developerModeState();
+    QDBusConnection bus = QDBusConnection::systemBus();
+    QDBusInterface *interface = new QDBusInterface("com.canonical.PropertyService",
+        "/com/canonical/PropertyService",
+        "com.canonical.PropertyService",
+        bus,
+        this);
+    interface->call("SetProperty", "adb", m_devModeToggled);
+
+    return developerModeState();
 }
 
 QString StorageAbout::licenseInfo(const QString &subdir) const
