@@ -82,6 +82,7 @@ ItemPage {
     OfonoManager {
         id: manager
         Component.onCompleted: {
+            console.warn('Manager complete with', modems.length, 'modems.');
             if (modems.length === 1) {
                 root.state = "singleSim";
             } else if (modems.length === 2) {
@@ -98,17 +99,20 @@ ItemPage {
                     sim1: sim1
                 });
             }
+            console.warn('sim1 loaded, loading CellularSingleSim.qml into cellData');
         }
     }
 
     Loader {
         id: simTwoLoader
         onLoaded: {
+            // unload any single sim setup
             cellData.source = "";
             cellData.setSource("Components/CellularDualSim.qml", {
                 sim1: sim1,
                 sim2: sim2
             });
+            console.warn('sim2 loaded, loading CellularDualSim.qml into cellData');
         }
     }
 
