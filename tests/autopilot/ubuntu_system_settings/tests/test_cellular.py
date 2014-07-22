@@ -149,14 +149,15 @@ class CellularTestCase(CellularBaseTestCase):
         roaming_switch = self.system_settings.main_view.select_single(
             objectName="dataRoamingSwitch"
         )
-
         # select 2G only
         self.select_preference(PREFERENCE_2G)
+        sleep(2)
         # assert that roaming_switch is enabled
         self.assertTrue(roaming_switch.get_properties()['enabled'])
 
         # click off
         self.select_preference(PREFERENCE_OFF)
+        sleep(2)
 
         # assert roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
@@ -335,6 +336,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_turn_off_both_sims(self):
         self.use_selector(LABEL_OFF)
+        sleep(0.7)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
@@ -379,7 +381,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         self.assertEqual(
             'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
-        sleep(0.7)
+        sleep(2)
         self.assert_used(1)
         self.assert_selected_preference(1)
 
@@ -396,12 +398,13 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         self.assertEqual(
             'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+        sleep(2)
         self.assert_used(2)
         self.assert_selected_preference(1)
 
     def test_both_sims_comes_online(self):
         self.use_selector(LABEL_OFF)
-        sleep(0.7)
+        sleep(2)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_0.EmitSignal(
             CONNMAN_IFACE,
@@ -415,7 +418,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             'PropertyChanged',
             'sv',
             ['Powered', 'true'])
-        sleep(0.7)
+        sleep(2)
         self.assert_used(1)
         self.assert_selected_preference(0)
 
@@ -428,7 +431,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         # click off
         self.use_selector(LABEL_OFF)
-        sleep(0.7)
+        sleep(2)
 
         # assert roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
