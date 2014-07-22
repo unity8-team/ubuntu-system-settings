@@ -63,7 +63,7 @@ public class Server : Object {
 					                         "/com/canonical/UbuntuSystemSettings",
 					                         "org.freedesktop.DBus.Properties",
 					                         "PropertiesChanged",
-					                         new Variant.parsed ("('com.ubuntu.Settings', { 'language' : <%s> }, @as [])", _language));
+					                         new Variant.parsed ("('com.ubuntu.Settings', { 'Language' : <%s> }, @as [])", _language));
 				} catch (Error error) {
 					warning ("Notify signal on language not emitted: %s", error.message);
 				}
@@ -83,7 +83,7 @@ public class Server : Object {
 					                         "/com/canonical/UbuntuSystemSettings",
 					                         "org.freedesktop.DBus.Properties",
 					                         "PropertiesChanged",
-					                         new Variant.parsed ("('com.ubuntu.Settings', { 'locale' : <%s> }, @as [])", _locale));
+					                         new Variant.parsed ("('com.ubuntu.Settings', { 'Locale' : <%s> }, @as [])", _locale));
 				} catch (Error error) {
 					warning ("Notify signal on locale not emitted: %s", error.message);
 				}
