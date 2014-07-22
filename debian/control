@@ -33,6 +33,8 @@ Build-Depends: dbus-test-runner,
                python3-pep8,
                pyflakes,
                dh-apparmor,
+               libgirepository1.0-dev,
+               valac,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
