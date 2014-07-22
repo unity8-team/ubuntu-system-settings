@@ -35,7 +35,13 @@ Column {
         expanded: true
         enabled: sim1.radioSettings.technologyPreference !== ""
         model: [i18n.tr("Off"), i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
-        selectedIndex: DataHelpers.singleSimKeyToIndex(sim1.radioSettings.technologyPreference)
+        selectedIndex: {
+            if (sim1.connMan.powered) {
+                return DataHelpers.singleSimKeyToIndex(sim1.radioSettings.technologyPreference);
+            } else {
+                return 0;
+            }
+        }
     }
 
     ListItem.Standard {
