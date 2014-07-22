@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-05-29 09:34+0000\n"
+"PO-Revision-Date: 2014-07-18 15:37+0000\n"
 "Last-Translator: Anthony Wong <anthony.wong@ubuntu.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:36+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-19 06:18+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -656,35 +656,35 @@ msgstr ""
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "网络名称"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "安全"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA 及 WPA2 个人级"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "密码可见"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "连接"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "网络详情"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -693,15 +693,15 @@ msgstr "名称"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "最后连接"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "显示密码"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "忘记网络"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -791,7 +791,7 @@ msgstr "软件已是最新"
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "请登录您的 Ubuntu One 账号。"
 
 #: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
@@ -845,7 +845,7 @@ msgstr "正在安装"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "已安装"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
@@ -912,11 +912,11 @@ msgstr "亮度"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "自动调节"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "按周围环境调节屏幕亮度"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1122,15 +1122,15 @@ msgstr "差"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "可被发现"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "不可被发现"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "已连接设备："
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
@@ -1138,7 +1138,7 @@ msgstr ""
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "连接另一个设备："
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1339,7 +1339,7 @@ msgstr "系统"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "后退"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
@@ -1359,11 +1359,11 @@ msgstr ""
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "没有 SIM 卡"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "别担心，待会您可以插入 SIM 卡。"
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
@@ -1375,7 +1375,7 @@ msgstr ""
 
 #: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "跳过"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
@@ -1383,7 +1383,7 @@ msgstr ""
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "非常高兴您加入 Ubuntu 社区。"
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
@@ -1391,15 +1391,15 @@ msgstr ""
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "完成"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "连接 Wi-Fi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "可用网络"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
@@ -1407,11 +1407,11 @@ msgstr ""
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "您好！"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "欢迎来到 Ubuntu。"
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."

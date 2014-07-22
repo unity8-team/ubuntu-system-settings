@@ -38,6 +38,7 @@ public:
     int currentBuildNumber() { return 123;}
     QString currentUbuntuBuildNumber() { return QString("20140927");}
     QString currentDeviceBuildNumber() { return QString("20140927");}
+    QDateTime lastUpdateDate() { return QDateTime::currentDateTime(); }
 
     void checkForUpdate() {}
     void downloadUpdate() {}
