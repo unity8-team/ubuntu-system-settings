@@ -13,7 +13,7 @@ from testtools.matchers import Equals, NotEquals, raises
 from unittest import skip
 
 from ubuntu_system_settings.tests import (
-    UbuntuSystemSettingsOfonoTestCase, CONNMAN_IFACE, RDO_IFACE,)
+    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
@@ -27,7 +27,7 @@ LABEL_SIM_2 = 'SIM 2 (123456)'
 LABEL_OFF = 'Off'
 
 
-class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
+class CellularTestCase(CellularBaseTestCase):
     """ Tests for cellular Page """
 
     """Caches the technology preference selector"""
@@ -251,7 +251,7 @@ class CellularTestCase(UbuntuSystemSettingsOfonoTestCase):
         self.assert_selected_preference(2)
 
 
-class DualSimCellularTestCase(UbuntuSystemSettingsOfonoTestCase):
+class DualSimCellularTestCase(CellularBaseTestCase):
 
     use_sims = 2
 
