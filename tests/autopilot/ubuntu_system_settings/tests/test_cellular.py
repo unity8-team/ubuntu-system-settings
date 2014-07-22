@@ -131,17 +131,17 @@ class CellularTestCase(CellularBaseTestCase):
     def test_set_sim_offline(self):
         self.select_preference(PREFERENCE_OFF)
 
-        sleep(0.3)
+        sleep(0.7)
 
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_set_sim_online(self):
         self.select_preference(PREFERENCE_OFF)
-        sleep(0.3)
+        sleep(0.7)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
         self.select_preference(PREFERENCE_ANY)
-        sleep(0.3)
+        sleep(0.7)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_roaming_switch(self):
@@ -173,13 +173,13 @@ class CellularTestCase(CellularBaseTestCase):
     def test_change_data_preference(self):
         self.select_preference(PREFERENCE_2G)
 
-        sleep(0.3)
+        sleep(0.7)
         self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
                                                  'TechnologyPreference'))
 
         self.select_preference(PREFERENCE_ANY)
 
-        sleep(0.3)
+        sleep(0.7)
 
         self.assertEqual('any', self.modem_0.Get(RDO_IFACE,
                                                  'TechnologyPreference'))
@@ -202,7 +202,7 @@ class CellularTestCase(CellularBaseTestCase):
         self.select_preference(PREFERENCE_2G)
         self.select_preference(PREFERENCE_OFF)
 
-        sleep(0.3)
+        sleep(0.7)
 
         self.modem_0.EmitSignal(
             CONNMAN_IFACE,
@@ -322,14 +322,14 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_use_sim_1(self):
         self.use_selector(LABEL_OFF)
         self.use_selector(LABEL_SIM_1)
-        sleep(0.3)
+        sleep(0.7)
         self.assertEqual(True, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_use_sim_2(self):
         self.use_selector(LABEL_OFF)
         self.use_selector(LABEL_SIM_2)
-        sleep(0.3)
+        sleep(0.7)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
@@ -341,21 +341,21 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_use_gsm_for_sim_1(self):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_2G)
-        sleep(0.3)
+        sleep(0.7)
         self.assertEqual(
             'gsm', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_any_for_sim_1(self):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_ANY)
-        sleep(0.3)
+        sleep(0.7)
         self.assertEqual(
             'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_gsm_for_sim_2(self):
         self.use_selector(LABEL_SIM_1)
         self.select_preference(PREFERENCE_2G)
-        sleep(0.3)
+        sleep(0.7)
         self.assertEqual(
             'gsm', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
@@ -379,7 +379,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         self.assertEqual(
             'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
-        sleep(0.3)
+        sleep(0.7)
         self.assert_used(1)
         self.assert_selected_preference(1)
 
@@ -401,7 +401,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_both_sims_comes_online(self):
         self.use_selector(LABEL_OFF)
-        sleep(0.3)
+        sleep(0.7)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_0.EmitSignal(
             CONNMAN_IFACE,
@@ -415,7 +415,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             'PropertyChanged',
             'sv',
             ['Powered', 'true'])
-        sleep(0.3)
+        sleep(0.7)
         self.assert_used(1)
         self.assert_selected_preference(0)
 
@@ -428,7 +428,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         # click off
         self.use_selector(LABEL_OFF)
-        sleep(0.3)
+        sleep(0.7)
 
         # assert roaming_switch is disabled
         self.assertFalse(roaming_switch.get_properties()['enabled'])
