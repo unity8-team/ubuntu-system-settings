@@ -32,7 +32,8 @@ ItemPage {
 
     onForwardingChanged: {
         console.warn("onForwardingChanged: " + forwarding);
-        callForwardingSwitch.checked = forwarding;
+        if (callForwardingSwitch.checked !== forwarding)
+            callForwardingSwitch.checked = forwarding;
     }
 
     OfonoCallForwarding {
@@ -44,7 +45,9 @@ ItemPage {
         }
         onVoiceUnconditionalComplete: {
             console.warn ("voiceUnconditionalComplete: " + success);
-            callForwardingIndicator.running = false;           
+            callForwardingIndicator.running = false;
+            if (callForwardingSwitch.checked !== forwarding)
+                callForwardingSwitch.checked = forwarding;
         }
     }
 
@@ -55,7 +58,8 @@ ItemPage {
         visible: callForwardingItem.control === callForwardingSwitch
         onCheckedChanged: {
             console.warn("onCheckedChanged: " + callForwarding.voiceUnconditional);
-            if (!checked) {
+            if (!checked && forwarding) {
+                callForwardingIndicator.running = true;
                 callForwarding.voiceUnconditional = "";
             }
         }
