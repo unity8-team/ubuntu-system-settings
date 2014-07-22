@@ -163,19 +163,6 @@ QString StorageAbout::vendorString()
     return m_vendorString;
 }
 
-QString StorageAbout::updateDate()
-{
-    if (m_updateDate.isEmpty() || m_updateDate.isNull())
-    {
-        QFile file("/userdata/.last_update");
-        if (!file.exists())
-            return "";
-        m_updateDate = QFileInfo(file).created().toString("yyyy-MM-dd");
-    }
-
-    return m_updateDate;
-}
-
 QString StorageAbout::deviceBuildDisplayID()
 {
     static char serialBuffer[PROP_NAME_MAX];
@@ -321,7 +308,7 @@ void StorageAbout::populateSizes()
 }
 
 QString StorageAbout::getDevicePath(const QString mount_point)
-{    
+{
     QString s_mount_point;
 
     GUnixMountEntry * g_mount_point = NULL;
