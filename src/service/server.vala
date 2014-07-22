@@ -127,7 +127,7 @@ public class Server : Object {
 
 	private void watch_accountsservice_user (Act.User user) {
 		_accountsservice_user_id[0] = user.notify["language"].connect (() => { language = user.language; });
-		_accountsservice_user_id[1] = user.notify["formats_locale"].connect (() => { locale = user.formats_locale; });
+		_accountsservice_user_id[1] = user.notify["formats-locale"].connect (() => { locale = user.formats_locale; });
 		language = user.language;
 		locale = user.formats_locale;
 	}
