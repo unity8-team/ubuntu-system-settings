@@ -84,8 +84,6 @@ void NotificationsManager::loadModel()
     while (g_variant_iter_loop (iter, "(ss)", &pkg, &app)) {
         m_blacklist[QString(pkg)+"::::"+app] = true;
     }
-    g_free(pkg);
-    g_free(app);
     g_variant_iter_free (iter);
     g_variant_unref (blacklist);
 
