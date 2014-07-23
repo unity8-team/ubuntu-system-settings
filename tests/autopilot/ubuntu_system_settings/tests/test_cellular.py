@@ -9,6 +9,7 @@ import dbus
 from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
+from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals, raises
 from unittest import skip
 
@@ -55,7 +56,7 @@ class CellularTestCase(CellularBaseTestCase):
         """Helper method asserting that the selected data technology preference
         is that of index"""
         self.assertThat(self.data_preference_selector.selectedIndex,
-                        Equals(index))
+                        Eventually(Equals(index)))
 
     def navigate_to_carrier_page(self):
         selector = self.system_settings.main_view.cellular_page.select_single(
@@ -151,16 +152,18 @@ class CellularTestCase(CellularBaseTestCase):
         )
         # select 2G only
         self.select_preference(PREFERENCE_2G)
-        sleep(2)
+
         # assert that roaming_switch is enabled
-        self.assertTrue(roaming_switch.get_properties()['enabled'])
+        self.assertThat(
+            roaming_switch.get_properties()['enabled'],
+            Eventually(Equals(True)))
 
         # click off
         self.select_preference(PREFERENCE_OFF)
-        sleep(2)
-
         # assert roaming_switch is disabled
-        self.assertFalse(roaming_switch.get_properties()['enabled'])
+        self.assertThat(
+            roaming_switch.get_properties()['enabled'],
+            Eventually(Equals(False)))
 
     def test_allow_roaming(self):
         roaming_switch = self.system_settings.main_view.select_single(
@@ -173,15 +176,11 @@ class CellularTestCase(CellularBaseTestCase):
 
     def test_change_data_preference(self):
         self.select_preference(PREFERENCE_2G)
-
         sleep(0.7)
         self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
                                                  'TechnologyPreference'))
-
         self.select_preference(PREFERENCE_ANY)
-
         sleep(0.7)
-
         self.assertEqual('any', self.modem_0.Get(RDO_IFACE,
                                                  'TechnologyPreference'))
 
@@ -306,7 +305,8 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         """Helper method asserting that the selected
         data technology preference is that of index"""
         self.assertThat(
-            self.data_preference_selector.selectedIndex, Equals(index))
+            self.data_preference_selector.selectedIndex,
+            Eventually(Equals(index)))
 
     def use_selector(self, label):
         obj = self.system_settings.main_view.cellular_page.select_single(
@@ -318,7 +318,8 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         obj = self.system_settings.main_view.cellular_page.select_single(
             objectName="use"
         )
-        self.assertThat(obj.selectedIndex, Equals(index))
+        self.assertThat(
+            obj.selectedIndex, Eventually(Equals(index)))
 
     def test_use_sim_1(self):
         self.use_selector(LABEL_OFF)
@@ -382,7 +383,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         self.assertEqual(
             'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
-        sleep(2)
         self.assert_used(1)
         self.assert_selected_preference(1)
 
@@ -400,7 +400,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         self.assertEqual(
             'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
-        sleep(2)
         self.assert_used(2)
         self.assert_selected_preference(1)
 
@@ -420,7 +419,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             'PropertyChanged',
             'sv',
             ['Powered', 'true'])
-        sleep(2)
         self.assert_used(1)
         self.assert_selected_preference(0)
 
@@ -433,10 +431,11 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         # click off
         self.use_selector(LABEL_OFF)
-        sleep(2)
 
         # assert roaming_switch is disabled
-        self.assertFalse(roaming_switch.get_properties()['enabled'])
+        self.assertThat(
+            roaming_switch.get_properties()['enabled'],
+            Eventually(Equals(False)))
 
     def test_allow_roaming(self):
         self.use_selector(LABEL_SIM_1)
@@ -461,8 +460,9 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             'sv',
             ['TechnologyPreference', ''])
 
-        self.assertFalse(
-            self.data_preference_selector.get_properties()['enabled'])
+        self.assertThat(
+            self.data_preference_selector.get_properties()['enabled'],
+            Eventually(Equals(False)))
 
     def test_radio_preference_changes(self):
         self.use_selector(LABEL_SIM_1)
