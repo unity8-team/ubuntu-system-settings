@@ -22,10 +22,11 @@
             <default>""</default>
             <description>When background-duplicate is 'true', the value to restore the least recently changed screen to.</description>
         </key>
-        <key name="storage-sort-by-name" type="b">
-            <default>true</default>
-            <summary>Whether the applications should be sorted by name.</summary>
-            <description>If true the applications are sorted by name, otherwise by disk size.</description>
+        <key name="modem-path-to-sim-name" type="a{ss}">
+            <description>Modem paths mapped to a sim name, e.g. ('/ril_0', 'SIM 1')</description>
+            <default>
+                {'/ril_0': 'SIM 1', '/ril_1': 'SIM 2'}
+            </default>
         </key>
     </schema>
 </schemalist>

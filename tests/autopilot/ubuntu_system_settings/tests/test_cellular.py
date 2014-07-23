@@ -501,3 +501,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         )
         manual = carriers.select_single('Label', text="my.cool.telco")
         self.assertThat(manual, NotEquals(None))
+
+    def test_two_modems(self):
+        sleep(5)
+        self.assertFalse(True)

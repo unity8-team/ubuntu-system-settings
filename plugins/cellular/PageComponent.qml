@@ -83,6 +83,9 @@ ItemPage {
         id: manager
         Component.onCompleted: {
             console.warn('Manager complete with', modems.length, 'sims.');
+            for (var i=0, j=modems.length; i<j; i++) {
+                console.warn('sim', i, modems[i]);
+            }
             if (modems.length === 1) {
                 root.state = "singleSim";
             } else if (modems.length === 2) {
