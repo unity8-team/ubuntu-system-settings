@@ -63,7 +63,7 @@ private Q_SLOTS:
     void onPairingDone();
 
 public:
-    Bluetooth(QObject *parent = 0);
+    explicit Bluetooth(QObject *parent = 0);
     ~Bluetooth() {}
 
     Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }

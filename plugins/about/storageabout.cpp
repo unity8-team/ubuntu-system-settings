@@ -17,6 +17,8 @@
  *
 */
 
+#include "storageabout.h"
+
 #include <QDebug>
 
 #include <gio/gio.h>
@@ -32,7 +34,6 @@
 #include <QJsonObject>
 #include <QProcess>
 #include <QVariant>
-#include "storageabout.h"
 #include <hybris/properties/properties.h>
 
 struct MeasureData {
@@ -63,8 +64,8 @@ static void measure_file(const char * filename,
                 G_FILE_MEASURE_NONE,
                 G_PRIORITY_LOW,
                 data->cancellable, /* cancellable */
-                NULL, /* progress_callback */
-                NULL, /* progress_data */
+                nullptr, /* progress_callback */
+                nullptr, /* progress_data */
                 callback,
                 user_data);
 
@@ -94,7 +95,7 @@ static void measure_finished(GObject *source_object,
                              GAsyncResult *result,
                              gpointer user_data)
 {
-    GError *err = NULL;
+    GError *err = nullptr;
     GFile *file = G_FILE (source_object);
 
     MeasureData *data = (MeasureData *) user_data;
@@ -105,11 +106,11 @@ static void measure_finished(GObject *source_object,
                 file,
                 result,
                 size,
-                NULL, /* num_dirs */
-                NULL, /* num_files */
+                nullptr, /* num_dirs */
+                nullptr, /* num_files */
                 &err);
 
-    if (err != NULL) {
+    if (err != nullptr) {
         if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
             delete data->running;
             delete data;
@@ -131,7 +132,7 @@ StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
     m_clickFilterProxy(&m_clickModel),
-    m_cancellable(NULL)
+    m_cancellable(nullptr)
 {
 }
 
@@ -311,10 +312,10 @@ QString StorageAbout::getDevicePath(const QString mount_point)
 {
     QString s_mount_point;
 
-    GUnixMountEntry * g_mount_point = NULL;
+    GUnixMountEntry * g_mount_point = nullptr;
 
     if (!mount_point.isNull() && !mount_point.isEmpty()) {
-         g_mount_point = g_unix_mount_at(mount_point.toLocal8Bit(), NULL);
+         g_mount_point = g_unix_mount_at(mount_point.toLocal8Bit(), nullptr);
     }
 
     if (g_mount_point) {

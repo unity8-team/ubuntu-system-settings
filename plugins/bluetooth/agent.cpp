@@ -18,9 +18,10 @@
  *
  */
 
+#include "agent.h"
+
 #include <cassert>
 
-#include "agent.h"
 
 /***
 ****

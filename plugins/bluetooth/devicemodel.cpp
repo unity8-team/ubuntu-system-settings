@@ -18,10 +18,11 @@
  *
 */
 
+#include "devicemodel.h"
+
 #include <QDBusReply>
 #include <QDebug>
 
-#include "devicemodel.h"
 #include "dbus-shared.h"
 
 namespace
