@@ -47,7 +47,7 @@ class Plugin: public QObject
     Q_PROPERTY(bool hideByDefault READ hideByDefault CONSTANT)
 
 public:
-    Plugin(const QFileInfo &manifest, QObject *parent = 0);
+    explicit Plugin(const QFileInfo &manifest, QObject *parent = 0);
     ~Plugin();
 
     QString baseName() const;

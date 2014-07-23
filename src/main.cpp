@@ -67,7 +67,7 @@ int main(int argc, char **argv)
             setLoggingLevel(value);
     }
 
-    initTr(I18N_DOMAIN, NULL);
+    initTr(I18N_DOMAIN, nullptr);
     /* HACK: force the theme until lp #1098578 is fixed */
     QIcon::setThemeName("suru");
 

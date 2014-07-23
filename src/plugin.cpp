@@ -18,8 +18,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "debug.h"
 #include "plugin.h"
+#include "debug.h"
 
 #include <QDir>
 #include <QFileInfo>

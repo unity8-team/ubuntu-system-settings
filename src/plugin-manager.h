@@ -42,7 +42,7 @@ class PluginManager: public QObject, public QQmlParserStatus
                 NOTIFY filterChanged)
 
 public:
-    PluginManager(QObject *parent = 0);
+    explicit PluginManager(QObject *parent = 0);
     ~PluginManager();
 
     QStringList categories() const;

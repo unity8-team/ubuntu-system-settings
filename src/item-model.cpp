@@ -18,10 +18,11 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "item-model.h"
+
 #include <libintl.h>
 
 #include "debug.h"
-#include "item-model.h"
 #include "plugin.h"
 
 using namespace SystemSettings;
