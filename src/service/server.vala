@@ -19,8 +19,8 @@
 [DBus (name = "com.ubuntu.Settings")]
 public class Server : Object {
 
-	private string _language;
-	private string _locale;
+	private string? _language;
+	private string? _locale;
 
 	private DBusConnection _connection;
 
@@ -51,43 +51,28 @@ public class Server : Object {
 		}
 	}
 
-	public string language {
-		get { return _language; }
+	public string get_language () {
+		return _language != null ? (!) _language : "";
+	}
 
-		private set {
-			if (value != _language) {
-				_language = value;
+	public string get_locale () {
+		return _locale != null ? (!) _locale : "";
+	}
 
-				try {
-					_connection.emit_signal (null,
-					                         "/com/canonical/UbuntuSystemSettings",
-					                         "org.freedesktop.DBus.Properties",
-					                         "PropertiesChanged",
-					                         new Variant.parsed ("('com.ubuntu.Settings', { 'Language' : <%s> }, @as [])", _language));
-				} catch (Error error) {
-					warning ("Notify signal on language not emitted: %s", error.message);
-				}
-			}
+	public signal void language_changed (string language);
+	public signal void locale_changed (string locale);
+
+	private void set_language (string language) {
+		if (language != _language) {
+			_language = language;
+			language_changed (language);
 		}
 	}
 
-	public string locale {
-		get { return _locale; }
-
-		private set {
-			if (value != _locale) {
-				_locale = value;
-
-				try {
-					_connection.emit_signal (null,
-					                         "/com/canonical/UbuntuSystemSettings",
-					                         "org.freedesktop.DBus.Properties",
-					                         "PropertiesChanged",
-					                         new Variant.parsed ("('com.ubuntu.Settings', { 'Locale' : <%s> }, @as [])", _locale));
-				} catch (Error error) {
-					warning ("Notify signal on locale not emitted: %s", error.message);
-				}
-			}
+	private void set_locale (string locale) {
+		if (locale != _locale) {
+			_locale = locale;
+			locale_changed (locale);
 		}
 	}
 
@@ -126,10 +111,10 @@ public class Server : Object {
 	}
 
 	private void watch_accountsservice_user (Act.User user) {
-		_accountsservice_user_id[0] = user.notify["language"].connect (() => { language = user.language; });
-		_accountsservice_user_id[1] = user.notify["formats-locale"].connect (() => { locale = user.formats_locale; });
-		language = user.language;
-		locale = user.formats_locale;
+		_accountsservice_user_id[0] = user.notify["language"].connect (() => { set_language (user.language); });
+		_accountsservice_user_id[1] = user.notify["formats-locale"].connect (() => { set_locale (user.formats_locale); });
+		_language = user.language;
+		_locale = user.formats_locale;
 	}
 }
 
