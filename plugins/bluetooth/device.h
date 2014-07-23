@@ -156,6 +156,7 @@ public:
 
   private Q_SLOTS:
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
+    void slotServiceDiscoveryDone(QDBusPendingCallWatcher *call);
 
   private:
     void updateProperties(QSharedPointer<QDBusInterface>);

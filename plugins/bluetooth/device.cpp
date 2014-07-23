@@ -113,12 +113,10 @@ void Device::connectPending()
 	// Give the device a bit of time to settle.
         QThread::sleep(1);
 
+        /* Once service discovery is done, it will call connect() on the
+         * pending interfaces.
+         */
         discoverServices();
-
-        while (!m_connectAfterPairing.isEmpty()) {
-            ConnectionMode mode = m_connectAfterPairing.takeFirst();
-            connect(mode);
-        }
     }
 }
 
@@ -131,12 +129,33 @@ void Device::addConnectAfterPairing(ConnectionMode mode)
     m_connectAfterPairing.append(mode);
 }
 
+void Device::slotServiceDiscoveryDone(QDBusPendingCallWatcher *call)
+{
+    QDBusPendingReply<void> reply = *call;
+
+    if (!reply.isError()) {
+        while (!m_connectAfterPairing.isEmpty()) {
+            ConnectionMode mode = m_connectAfterPairing.takeFirst();
+            connect(mode);
+        }
+    } else {
+        qWarning() << "Could not initiate service discovery:"
+                   << reply.error().message();
+    }
+}
+
 void Device::discoverServices()
 {
     if (m_deviceInterface) {
-        QDBusReply<void> reply = m_deviceInterface->call("DiscoverServices", QLatin1String(""));
-        if (!reply.isValid())
-            qWarning() << "Could not initiate service discovery:" << reply.error().message();
+        QDBusPendingCall pcall
+            = m_deviceInterface->asyncCall("DiscoverServices",
+                                           QLatin1String(""));
+
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall,
+                                                                       this);
+        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                         this,
+                         SLOT(slotServiceDiscoveryDone(QDBusPendingCallWatcher*)));
     } else {
         qWarning() << "Can't do service discovery: the device interface is not ready.";
     }
@@ -157,7 +176,8 @@ void Device::callInterface(const QSharedPointer<QDBusInterface> &interface, cons
     }
 
     if (retryCount >= maxTries && !reply.isValid()) {
-        qWarning() << "Could not" << method << "the interface" << interface->interface();
+        qWarning() << "Could not" << method << "the interface" << interface->interface()
+                   << ":" << reply.error().message();
     }
 }
 
