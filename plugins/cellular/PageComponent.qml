@@ -82,7 +82,7 @@ ItemPage {
     OfonoManager {
         id: manager
         Component.onCompleted: {
-            console.warn('Manager complete with', modems.length, 'modems.');
+            console.warn('Manager complete with', modems.length, 'sims.');
             if (modems.length === 1) {
                 root.state = "singleSim";
             } else if (modems.length === 2) {
