@@ -36,6 +36,10 @@ ItemPage {
     property var typeText
     property var ismms
 
+    OfonoActivator {
+        id:activator
+    }
+
     typeText: type === "internet" ? i18n.tr("Internet") : i18n.tr("MMS")
     ismms: type === "mms"
     title: i18n.tr("Custom ") + typeText + i18n.tr(" APN")
@@ -90,7 +94,7 @@ ItemPage {
         }
         // assume we want the new one active?
         //theContext.active = true;
-        //todo: tell network manager
+        //activator.activate(theContext.contextPath)
         console.warn("APN updated: " + theContext.name)
     }
 
