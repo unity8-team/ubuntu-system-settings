@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-20 19:08+0000\n"
-"Last-Translator: rob <linuxned@gmail.com>\n"
+"PO-Revision-Date: 2014-07-22 07:16+0000\n"
+"Last-Translator: Hannie Dumoleyn <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-21 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-07-22 07:16+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -1263,7 +1263,7 @@ msgstr "Versienummer van besturingssysteem"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Imagedeel Ubuntu"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
@@ -1271,7 +1271,7 @@ msgstr "Beschrijving van Ubuntuversie"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Imagedeel Apparaat"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
@@ -1279,7 +1279,7 @@ msgstr "Beschrijving van apparaatversie"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Imagedeel Aanpassing"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33

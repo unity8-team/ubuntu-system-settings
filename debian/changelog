@@ -1,3 +1,31 @@
+ubuntu-system-settings (0.3+14.10.20140723-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * Hi, this branch seeks to address most of the design changes to the
+    Background panel in System Settings (post Malta) The current spec
+    and designs are here:
+    https://wiki.ubuntu.com/Appearance#Phone.2BAC8-tablet Related bugs:
+    https://bugs.launchpad.net/ubuntu/+source/ubuntu-system-
+    settings/+bug/1297418 https://bugs.launchpad.net/ubuntu-autopilot-
+    tests/+bug/1322074 Changes: Removed all functionality and code
+    related to changing scope background. Added autopilot tests. New
+    header design that collapses/expands. Not part of this branch:
+    Scaling in preview has not been implemented. It should have its own
+    branch. After rotating the phone in system settings, the default
+    background will appear to have been deselected. This is because the
+    current background is now the default tablet background. Confirmed
+    on mako. Will file bug. Thank you. (LP: #1322074)
+
+  [ Iain Lane ]
+  * Add 1 gu of spacing between rows in the main screen's grid
+
+  [ Pawel Stolowski ]
+  * Added X-Ubuntu-Default-Department-ID key to the desktop file. This
+    is required by click scope to support departments for preinstalled
+    applications.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 23 Jul 2014 00:45:42 +0000
+
 ubuntu-system-settings (0.3+14.10.20140721.1-0ubuntu1) utopic; urgency=low
 
   [ Ubuntu daily release ]
