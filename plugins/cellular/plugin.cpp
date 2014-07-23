@@ -15,9 +15,10 @@
  *
 */
 
+#include "plugin.h"
+
 #include <QtQml>
 #include <QtQml/QQmlContext>
-#include "plugin.h"
 #include "hotspotmanager.h"
 
 void BackendPlugin::registerTypes(const char *uri)

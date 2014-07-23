@@ -44,7 +44,7 @@ KeyboardLayout::KeyboardLayout(const QFileInfo &fileInfo,
     std::string string;
 
     locale.getDisplayName(locale, unicodeString);
-    unicodeString.toTitle(NULL, locale).toUTF8String(string);
+    unicodeString.toTitle(nullptr, locale).toUTF8String(string);
 
     m_language = locale.getLanguage();
     m_displayName = string.c_str();

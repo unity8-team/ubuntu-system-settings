@@ -19,8 +19,9 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtQml>
 #include "plugin.h"
+
+#include <QtQml>
 #include "subset-model.h"
 #include "language-plugin.h"
 

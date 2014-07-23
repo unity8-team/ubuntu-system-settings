@@ -30,7 +30,7 @@ class HotspotManager : public QObject {
     Q_OBJECT
 
 public:
-    HotspotManager(QObject *parent = nullptr);
+    explicit HotspotManager(QObject *parent = nullptr);
     ~HotspotManager() {};
 
     Q_INVOKABLE QByteArray getHotspotName();

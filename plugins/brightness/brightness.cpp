@@ -18,10 +18,11 @@
  *
  */
 
+#include "brightness.h"
+
 #include <QDBusArgument>
 #include <QDBusReply>
 #include <QDBusMetaType>
-#include "brightness.h"
 
 // Returned data from getBrightnessParams
 struct BrightnessParams {

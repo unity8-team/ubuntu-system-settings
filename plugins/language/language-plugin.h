@@ -88,7 +88,7 @@ public:
                WRITE setKeyPressFeedback
                NOTIFY keyPressFeedbackChanged)
 
-    explicit LanguagePlugin(QObject *parent = NULL);
+    explicit LanguagePlugin(QObject *parent = nullptr);
 
     virtual ~LanguagePlugin();
 
