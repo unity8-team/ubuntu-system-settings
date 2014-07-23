@@ -2,7 +2,7 @@ include_directories(SYSTEM ${GIO_INCLUDE_DIRS} ${ACCOUNTSSERVICE_INCLUDE_DIRS})
 link_directories(${GIO_LIBRARY_DIRS} ${ACCOUNTSSERVICE_LIBRARY_DIRS})
 
 add_executable(service-bin server.c)
-set_target_properties(service-bin PROPERTIES OUTPUT_NAME system-settings-service)
+set_target_properties(service-bin PROPERTIES OUTPUT_NAME session-settings-service)
 target_link_libraries(service-bin ${GIO_LIBRARIES} ${ACCOUNTSSERVICE_LIBRARIES})
 install(TARGETS service-bin RUNTIME DESTINATION ${SERVICE_INSTALL_DIR})
 

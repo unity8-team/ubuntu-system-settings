@@ -4,6 +4,6 @@ usr/share/applications
 usr/share/glib-2.0
 usr/share/locale
 usr/share/ubuntu/settings/system
-usr/share/upstart/sessions/system-settings-service.conf
+usr/share/upstart/sessions/session-settings-service.conf
 usr/share/url-dispatcher
 debian/usr.bin.system-settings etc/apparmor.d

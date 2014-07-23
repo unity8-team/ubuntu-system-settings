@@ -1,4 +1,4 @@
-description "System settings service"
+description "Session settings service"
 author "William Hua <william.hua@canonical.com>"
 
 start on started dbus
@@ -6,4 +6,4 @@ stop on stopping dbus
 
 respawn
 
-exec @SERVICE_INSTALL_DIR@/system-settings-service
+exec @SERVICE_INSTALL_DIR@/session-settings-service
