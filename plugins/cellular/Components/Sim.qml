@@ -26,7 +26,7 @@ Item {
     property alias simMng: simMng
     property alias connMan: connMan
 
-    property string name
+    property string name: "SIM"
     property string title: {
         var number = simMng.subscriberNumbers[0] || simMng.subscriberIdentity;
         return name + (number ? " (" + number + ")" : "");

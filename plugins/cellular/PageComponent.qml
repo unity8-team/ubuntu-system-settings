@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -41,8 +42,7 @@ ItemPage {
             StateChangeScript {
                 name: "loadSim"
                 script: simOneLoader.setSource("Components/Sim.qml", {
-                    path: manager.modems[0],
-                    name: "SIM 1"
+                    path: manager.modems[0]
                 })
             }
         },
@@ -54,12 +54,10 @@ ItemPage {
                     // the ordering is completely depending on manager
                     // TODO: proper sim names (from gsettings?)
                     simOneLoader.setSource("Components/Sim.qml", {
-                        path: manager.modems[0],
-                        name: "SIM 1"
+                        path: manager.modems[0]
                     });
                     simTwoLoader.setSource("Components/Sim.qml", {
-                        path: manager.modems[1],
-                        name: "SIM 2"
+                        path: manager.modems[1]
                     });
                 }
             }
@@ -201,4 +199,31 @@ ItemPage {
             }
         }
     }
+
+    GSettings {
+        id: systemSettingsSettings
+        schema.id: "com.ubuntu.touch.system-settings"
+        // onChanged: {
+        //     if (key == "modemPathToSimName") {
+
+        //     }
+        // }
+        // Component.onCompleted: {
+        //     console.warn('GSettings completed:', systemSettingsSettings.modemPathToSimName);
+
+        //     for (var i=0, j=manager.modems.length; i < j; i++) {
+        //         if(manager.modems[i] in systemSettingsSettings.modemPathToSimName) {
+        //             if (sim1.path === manager.modems[i]) {
+        //                 sim1.name = systemSettingsSettings.modemPathToSimName[manager.modems[i]];
+        //                 console.warn('setting sim1 name to', systemSettingsSettings.modemPathToSimName[manager.modems[i]]);
+        //             }
+        //             if (sim2.path === manager.modems[i]) {
+        //                 sim2.name = systemSettingsSettings.modemPathToSimName[manager.modems[i]];
+        //                 console.warn('setting sim2 name to', systemSettingsSettings.modemPathToSimName[manager.modems[i]]);
+        //             }
+        //         }
+        //     }
+        // }
+    }
+
 }

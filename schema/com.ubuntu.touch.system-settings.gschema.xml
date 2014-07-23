@@ -23,10 +23,8 @@
             <description>When background-duplicate is 'true', the value to restore the least recently changed screen to.</description>
         </key>
         <key name="modem-path-to-sim-name" type="a{ss}">
-            <description>Modem paths mapped to a sim name, e.g. ('/ril_0', 'SIM 1')</description>
-            <default>
-                {'/ril_0': 'SIM 1', '/ril_1': 'SIM 2'}
-            </default>
+            <description>Modem paths mapped to a sim name.</description>
+            <default>{'/ril_0': 'SIM 1', '/ril_1': 'SIM 2'}</default>
         </key>
     </schema>
 </schemalist>
