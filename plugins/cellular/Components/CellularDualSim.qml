@@ -87,8 +87,6 @@ Column {
         }
     }
 
-    ListItem.ThinDivider {}
-
     Connections {
         target: sim1.connMan
         onPoweredChanged: {
