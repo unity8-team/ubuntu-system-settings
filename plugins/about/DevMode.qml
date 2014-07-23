@@ -78,7 +78,7 @@ ItemPage {
                 control: Switch {
                     id: devModeSwitch
                     checked: storedInfo.getDeveloperMode
-                    onClicked: storedInfo.toggleDeveloperMode
+                    onClicked: checked = storedInfo.toggleDeveloperMode
                 }
             }
 

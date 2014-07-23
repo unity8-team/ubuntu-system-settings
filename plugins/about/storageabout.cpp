@@ -219,7 +219,7 @@ bool StorageAbout::getDeveloperMode()
         PROPERTY_SERVICE_PATH,
         PROPERTY_SERVICE_OBJ,
         QDBusConnection::systemBus(),
-        this); 
+        this);
     QDBusReply<bool> reply = interface.call("GetProperty", "adb");
 
     if (reply.isValid()) {
@@ -236,11 +236,8 @@ bool StorageAbout::toggleDeveloperMode()
         PROPERTY_SERVICE_PATH,
         PROPERTY_SERVICE_OBJ,
         QDBusConnection::systemBus(),
-        this); 
-    QDBusReply<bool> reply = interface.call("GetProperty", "adb");
-
-    if (reply.isValid())
-        interface.call("SetProperty", "adb", !reply.value());
+        this);
+    interface.call("SetProperty", "adb", !getDeveloperMode());
 
     return getDeveloperMode();
 }
