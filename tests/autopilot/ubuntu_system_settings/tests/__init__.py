@@ -6,23 +6,27 @@
 # by the Free Software Foundation.
 
 """ Tests for Ubuntu System Settings """
-
 from __future__ import absolute_import
 
 
 import dbus
 import dbusmock
+import os
 import subprocess
+from time import sleep
 
 import ubuntuuitoolkit
 from autopilot.matchers import Eventually
+from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, NotEquals, GreaterThan
 
 from datetime import datetime
 
 from ubuntu_system_settings import SystemSettings
 
-
+ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
+ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
+ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
 MODEM_IFACE = 'org.ofono.Modem'
 CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
@@ -310,10 +314,89 @@ class SystemUpdatesBaseTestCase(UbuntuSystemSettingsTestCase):
             'entryComponent-system-update')
 
 
+class BackgroundBaseTestCase(
+        UbuntuSystemSettingsTestCase,
+        dbusmock.DBusTestCase):
+    """ Base class for Background tests """
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+
+    # TODO: create dbusmock template
+    def setUp(self):
+        """Mock account service dbus, go to background page"""
+
+        # mock ubuntu art directory using a local path
+        art_dir = '%s/../background_images/' % (
+            os.path.dirname(os.path.realpath(__file__)))
+        user_obj = '/user/foo'
+
+        self.user_props = {
+            'BackgroundFile': dbus.String(
+                '%slaunchpad.jpg' % art_dir, variant_level=1)
+        }
+
+        # start dbus system bus
+        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
+                                             ACCOUNTS_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+
+        sleep(2)
+
+        # create account proxy
+        self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
+            ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
+
+        # let accountservice find a user object path
+        self.acc_proxy.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
+                                 'ret = "%s"' % user_obj)
+
+        # add getter and setter to mock
+        self.acc_proxy.AddMethods(
+            'org.freedesktop.DBus.Properties',
+            [('Get', 's', 'v', 'ret = self.user_props[args[0]]'),
+                ('Set', 'sv', '', 'self.user_props[args[0]] = args[1]')])
+
+        # add user object to mock
+        self.acc_proxy.AddObject(
+            user_obj, ACCOUNTS_USER_IFACE, self.user_props,
+            [
+                (
+                    'SetBackgroundFile', 'v', '',
+                    'self.Set("%s", "BackgroundFile", args[0]);' %
+                    ACCOUNTS_USER_IFACE),
+                (
+                    'GetBackgroundFile', '', 'v',
+                    'ret = self.Get("%s", "BackgroundFile")' %
+                    ACCOUNTS_USER_IFACE)
+            ])
+
+        # create user proxy
+        self.user_proxy = dbus.Interface(self.dbus_con.get_object(
+            ACCOUNTS_IFACE, user_obj),
+            ACCOUNTS_USER_IFACE)
+
+        # patch env variable
+        self.useFixture(EnvironmentVariable(
+            'SYSTEM_SETTINGS_UBUNTU_ART_DIR', art_dir))
+
+        super(BackgroundBaseTestCase, self).setUp('background')
+        self.assertThat(self.system_settings.main_view.background_page.active,
+                        Eventually(Equals(True)))
+
+    def tearDown(self):
+        self.mock_server.terminate()
+        self.mock_server.wait()
+        super(BackgroundBaseTestCase, self).tearDown()
+
+
 class SoundBaseTestCase(UbuntuSystemSettingsTestCase):
     """ Base class for sound settings tests"""
 
     def setUp(self):
+
         """ Go to Sound page """
         super(SoundBaseTestCase, self).setUp('sound')
         self.assertThat(self.system_settings.main_view.sound_page.active,

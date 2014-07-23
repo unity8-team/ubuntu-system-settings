@@ -148,6 +148,11 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='systemUpdatesPage')
 
     @property
+    def background_page(self):
+        """ Return 'Background' page """
+        return self.select_single(objectName='backgroundPage')
+
+    @property
     def sound_page(self):
         """ Return 'Sound' page """
         return self.select_single(objectName='soundPage')

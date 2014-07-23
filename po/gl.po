@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-19 15:57+0000\n"
+"PO-Revision-Date: 2014-07-21 15:46+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-20 06:17+0000\n"
+"X-Launchpad-Export-Date: 2014-07-22 07:16+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: Galician\n"
 
@@ -1437,7 +1437,7 @@ msgstr "Rematar"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr "Concectar a wifi"
+msgstr "Conectar a unha rede wifi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"

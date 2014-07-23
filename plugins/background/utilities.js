@@ -18,32 +18,27 @@
  *
  */
 
-function setBackground(homeScreen, uri) {
-    if (systemSettingsSettings.backgroundDuplicate) {
-        updateBoth(uri);
-    } else {
-        if (homeScreen) {
-            updateHome(uri);
-            systemSettingsSettings.backgroundSetLast = "home";
-        } else {
-            updateWelcome(uri);
-            systemSettingsSettings.backgroundSetLast = "welcome";
-        }
-    }
-    pageStack.pop();
-}
-
-function updateWelcome(uri) {
+function setBackground(uri) {
     backgroundPanel.backgroundFile = backgroundPanel.prepareBackgroundFile(uri, true);
 }
 
-function updateHome(uri) {
-    background.pictureUri = backgroundPanel.prepareBackgroundFile(uri, false);
+function revertBackgroundToDefault () {
+    setBackground(Qt.resolvedUrl(mainPage.defaultBackground));
+    uArtGrid.state = "";
 }
 
-function updateBoth(uri) {
-    // multiple prepares on a uri is fine
-    uri = backgroundPanel.prepareBackgroundFile(uri, true);
-    updateWelcome(uri);
-    updateHome(uri);
+function deSelectBackgrounds (repeater) {
+    for (var i=0, j=repeater.count; i < j; i++) {
+        repeater.itemAt(i).state = "";
+    }
+}
+
+function getSelected (repeater) {
+    var s = 0;
+    for (var i=0, j=repeater.count; i < j; i++) {
+        if (repeater.itemAt(i).state === "selected") {
+            s++;
+        }
+    }
+    return s;
 }
