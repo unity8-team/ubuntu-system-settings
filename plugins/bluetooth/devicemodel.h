@@ -40,7 +40,7 @@ class DeviceModel: public QAbstractListModel
     Q_OBJECT
 
 public:
-    DeviceModel(QDBusConnection &dbus, QObject *parent = 0);
+    explicit DeviceModel(QDBusConnection &dbus, QObject *parent = 0);
     ~DeviceModel();
 
     enum Roles

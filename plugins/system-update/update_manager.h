@@ -44,8 +44,6 @@
 #include "system_update.h"
 #endif
 
-using namespace UbuntuOne;
-
 namespace UpdatePlugin {
 
 class UpdateManager : public QObject
@@ -115,7 +113,7 @@ private Q_SLOTS:
     void processOutput();
     void processUpdates();
     void downloadUrlObtained(const QString &packagename, const QString &url);
-    void handleCredentialsFound(Token token);
+    void handleCredentialsFound(UbuntuOne::Token token);
     void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
@@ -125,7 +123,7 @@ private:
     QHash<QString, Update*> m_apps;
     int m_downloadMode;
     QVariantList m_model;
-    Token m_token;
+    UbuntuOne::Token m_token;
 
 #ifdef TESTS
     FakeNetwork m_network;
@@ -135,7 +133,7 @@ private:
 #else
     Network m_network;
     QProcess m_process;
-    SSOService m_service;
+    UbuntuOne::SSOService m_service;
     SystemUpdate m_systemUpdate;
 #endif
 

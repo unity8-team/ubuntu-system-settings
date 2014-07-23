@@ -204,7 +204,7 @@ void TimeZonePopulateWorker::buildCityMap()
                            "zone", &zone,
                            "state", &state,
                            "full_country", &full_country,
-                           NULL);
+                           nullptr);
         // There are empty entries in the DB
         if (g_strcmp0(en_name, "") != 0) {
             tmpTz.city = en_name;

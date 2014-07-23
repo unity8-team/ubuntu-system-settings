@@ -27,6 +27,8 @@
 #include <QJsonValue>
 #include <QProcessEnvironment>
 
+using namespace UbuntuOne;
+
 #define CLICK_COMMAND "click"
 #ifdef TESTS
     #define CHECK_CREDENTIALS "IGNORE_CREDENTIALS"

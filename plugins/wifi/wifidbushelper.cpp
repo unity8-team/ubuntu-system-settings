@@ -232,7 +232,7 @@ struct Network : public QObject
     }
 
     Network() = delete;
-    Network(QString path)
+    explicit Network(QString path)
         : path{path},
           m_iface("org.freedesktop.NetworkManager",
                   path,
