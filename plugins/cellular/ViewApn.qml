@@ -43,7 +43,9 @@ ItemPage {
 
     flickable: scrollWidget
 
-    activator: OfonoActivator
+    OfonoActivator {
+        id:activator
+    }
 
     function initialize() {
 
