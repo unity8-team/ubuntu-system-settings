@@ -53,18 +53,22 @@ ItemPage {
 
                     id: warningColumn
                     spacing: units.gu(2)
-                    Icon {
+                    Icon { 
                         id: warnIcon
                         width: parent.width/4
                         height: width
-                        name: "security-alert"
+                        name: "security-alert" 
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
                     Label {
                         id: warnText
                         width: parent.width
+                        horizontalAlignment: Text.AlignHCenter
                         wrapMode: Text.WordWrap
-                        text: i18n.tr("In Developer Mode, anyone can access, change or delete anything on this phone by connecting it to another device")
+                        text: i18n.tr("In Developer Mode, anyone can access, " +
+                                       "change or delete anything on this " +
+                                       "phone by connecting it to " +
+                                       "another device.")
                     }
                 }
             }
@@ -73,8 +77,8 @@ ItemPage {
                 text: i18n.tr("Developer Mode")
                 control: Switch {
                     id: devModeSwitch
-                    checked: storedInfo.developerModeState
-                    onClicked: storedInfo.developerModeToggle
+                    checked: storedInfo.getDeveloperMode
+                    onClicked: storedInfo.toggleDeveloperMode
                 }
             }
 
@@ -84,14 +88,17 @@ ItemPage {
                 Label {
                     id: "lockSecurityLabel"
                     anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    horizontalAlignment: Text.AlignHCenter
                     wrapMode: Text.WordWrap
-                    text: i18n.tr("You need a passcode or passphrase set to use Developer Mode:")
+                    text: i18n.tr("You need a passcode or passphrase set " +
+                                  "to use Developer Mode.")
                 }
             }
 
             ListItem.SingleValue {
                 objectName: "lockSecurityItem"
-                text: i18n.tr("Lock Security")
+                text: i18n.tr("Lock security")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("../security-privacy/LockSecurity.qml"))
             }

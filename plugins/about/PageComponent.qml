@@ -182,7 +182,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 objectName: "devmodeItem"
-                text: i18n.tr("Developer Mode")
+                text: i18n.tr("Developer mode")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
             }

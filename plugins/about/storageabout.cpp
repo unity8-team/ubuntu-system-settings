@@ -35,6 +35,12 @@
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
 #include <QDBusInterface>
+#include <QDBusReply>
+
+namespace {
+    const QString PROPERTY_SERVICE_PATH = "/com/canonical/PropertyService";
+    const QString PROPERTY_SERVICE_OBJ = "com.canonical.PropertyService";
+}
 
 struct MeasureData {
     uint *running;
@@ -207,35 +213,36 @@ QString StorageAbout::ubuntuBuildID()
     return m_ubuntuBuildID;
 }
 
-bool StorageAbout::developerModeState()
+bool StorageAbout::getDeveloperMode()
 {
-    static char devModeBuffer[PROP_NAME_MAX];
-    m_developerModeState = false;
+    QDBusInterface interface(PROPERTY_SERVICE_OBJ,
+        PROPERTY_SERVICE_PATH,
+        PROPERTY_SERVICE_OBJ,
+        QDBusConnection::systemBus(),
+        this); 
+    QDBusReply<bool> reply = interface.call("GetProperty", "adb");
 
-    QRegExp rx("*adb");
-    rx.setPatternSyntax(QRegExp::Wildcard);
-
-    property_get("persist.sys.usb.config", devModeBuffer, "");
-    if (rx.exactMatch(QString(devModeBuffer)))
-    {
-        m_developerModeState = true;
+    if (reply.isValid()) {
+        return reply.value();
+    } else {
+        qWarning("devMode: no reply from dbus property service");
+        return false;
     }
-
-    return m_developerModeState;
 }
 
-bool StorageAbout::developerModeToggle()
+bool StorageAbout::toggleDeveloperMode()
 {
-    m_devModeToggled = !developerModeState();
-    QDBusConnection bus = QDBusConnection::systemBus();
-    QDBusInterface *interface = new QDBusInterface("com.canonical.PropertyService",
-        "/com/canonical/PropertyService",
-        "com.canonical.PropertyService",
-        bus,
-        this);
-    interface->call("SetProperty", "adb", m_devModeToggled);
+    QDBusInterface interface(PROPERTY_SERVICE_OBJ,
+        PROPERTY_SERVICE_PATH,
+        PROPERTY_SERVICE_OBJ,
+        QDBusConnection::systemBus(),
+        this); 
+    QDBusReply<bool> reply = interface.call("GetProperty", "adb");
 
-    return developerModeState();
+    if (reply.isValid())
+        interface.call("SetProperty", "adb", !reply.value());
+
+    return getDeveloperMode();
 }
 
 QString StorageAbout::licenseInfo(const QString &subdir) const
