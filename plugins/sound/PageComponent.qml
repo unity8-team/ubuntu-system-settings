@@ -50,22 +50,6 @@ ItemPage {
         schema.id: "com.ubuntu.touch.sound"
     }
 
-    UnityMenuModel {
-        id: menuModel
-        busName: "com.canonical.indicator.sound"
-        actions: { "indicator": "/com/canonical/indicator/sound" }
-        menuObjectPath: "/com/canonical/indicator/sound/phone"
-        Component.onCompleted: {
-            console.warn("onCompleted: " + menuModel.length);
-            //menuFactory.model = menuModel;
-        }
-    }
-
-    MenuItemFactory {
-        id: menuFactory
-        menuModel: menuModel
-    }
-
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -96,75 +80,32 @@ ItemPage {
                 text: i18n.tr("Ringer:")
             }
 
-            Repeater {
-                id: mainMenu
-                model: menuFactory.menuModel //menuModel.submenu(0)
-                delegate: Item {
-                    id: menuDelegate
+            QDBusActionGroup {
+                id: soundActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.sound"
+                objectPath: "/com/canonical/indicator/sound"
 
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    height: loader.height
-                    visible: height > 0
+                property variant volume: action("volume")
 
-                    Loader {
-                        id: loader
-                        asynchronous: true
+                Component.onCompleted: start()
+            }
 
-                        property int modelIndex: index
-
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
-
-                        sourceComponent: menuFactory.load(model)
-
-                        onLoaded: {
-                            console.warn("onLoaded: " + model.type);
-                            if (model.type === "com.canonical.indicator.root") {
-                                //mainMenu.model = menuFactory.menuModel.submenu(index);
-                                menuFactory.menuModel = menuFactory.menuModel.submenu(index);
-                            }
-
-                            if (model.type === "com.canonical.unity.slider") {
-                                mainMenu.model.loadExtendedAttributes(index, {'min-value': 'double',
-                                                             'max-value': 'double',
-                                                             'min-icon': 'icon',
-                                                             'max-icon': 'icon'});
-                            }
-
-                            if (item.hasOwnProperty("menu")) {
-                                console.warn("onLoaded: has menu");
-                                item.menu = Qt.binding(function() { return model; });
-                            }
-                            if (item.hasOwnProperty("selected")) {
-                                item.selected = mainMenu.selectedIndex == index;
-                            }
-                            if (item.hasOwnProperty("menuSelected")) {
-                                item.menuSelected.connect(function() { mainMenu.selectedIndex = index; });
-                            }
-                            if (item.hasOwnProperty("menuDeselected")) {
-                                item.menuDeselected.connect(function() { mainMenu.selectedIndex = -1; });
-                            }
-                            if (item.hasOwnProperty("menuData")) {
-                                item.menuData = Qt.binding(function() { return model; });
-                                console.warn("onLoaded: has menuData " + item.menuData);
-                            }
-                            if (item.hasOwnProperty("menuIndex")) {
-                                item.menuIndex = Qt.binding(function() { return modelIndex; });
-                            }
-                        }
-
-                        Binding {
-                            target: loader.item ? loader.item : null
-                            property: "objectName"
-                            value: model.action
-                        }
-                    }
-                }
+            Binding {
+                target: sliderMenu
+                property: "value"
+                value: soundActionGroup.volume.state
+            }
+ 
+            Menus.SliderMenu {
+                id: sliderMenu
+                objectName: "sliderMenu"
+                value: soundActionGroup.volume.state
+                minimumValue: 0.0
+                maximumValue: 1.0
+                minIcon: "/usr/share/icons/ubuntu-mobile/status/scalable/audio-volume-low.svg"
+                maxIcon: "/usr/share/icons/ubuntu-mobile/status/scalable/audio-volume-high.svg"
+                onUpdated: soundActionGroup.volume.updateState(value);
             }
 
             ListItem.Standard {
