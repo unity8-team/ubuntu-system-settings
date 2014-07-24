@@ -87,6 +87,7 @@ ItemPage {
             ListItem.SingleValue {
                 Label {
                     id: "lockSecurityLabel"
+                    width: parent.width
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                     horizontalAlignment: Text.AlignHCenter
