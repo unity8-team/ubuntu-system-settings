@@ -93,12 +93,14 @@ ItemPage {
             spacing: units.gu(2)
 
             Button {
+                objectName: "cancelButton"
                 text: i18n.tr("Cancel")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 gradient: UbuntuColors.greyGradient
                 onClicked: preview.state = "cancelled"
             }
             Button {
+                objectName: "saveButton"
                 text: i18n.tr("Set")
                 width: (previewButtons.width-units.gu(2)*4)/2
                 onClicked: preview.state = "saved"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-22 08:17+0000\n"
+"PO-Revision-Date: 2014-07-23 09:26+0000\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-23 07:00+0000\n"
+"X-Launchpad-Export-Date: 2014-07-24 06:31+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -1267,11 +1267,11 @@ msgstr "ផ្នែក​រូបភាព​ឧបករណ៍"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "ការពណ៌នា​បង្កើតឧបករណ៍"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "ការ​ប្ដូរ​ផ្នែក​រូបភាព​តាម​តម្រូវ​ការ"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1369,87 +1369,93 @@ msgstr "ប្រព័ន្ធ"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "ថយ​ក្រោយ​"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "ការ​កំណត់​ទូរស័ព្ទ"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"ទូរស័ព្ទ​របស់​អ្នក​ត្រូវ​បាន​រៀបចំ​ ដើម្បី​ផ្ញើ​របាយការណ៍​កំហុស​​ទៅ "
+"Canonical ដោយ​ស្វ័យ​ប្រវត្តិ។ វា​អាច​ត្រូវ​បាន​បិទ​ក្នុង​ការ​កំណត់​ប្រព័ន្ធ។"
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"ទូរស័ព្ទ​របស់​អ្នក​ត្រូវ​បាន​រៀបចំ​ដើម្បី​រក​ឃើញ​ទីតាំង​របស់​អ្នក។ "
+"វា​អាច​ត្រូវ​បាន​បិទ​ក្នុង​ការ​កំណត់​ប្រព័ន្ធ។"
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "គ្មាន​ស៊ីមកាត"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "កុំ​បារម្ភ អ្នក​អាច​បញ្ចូល​ស៊ីមកាត​ពេល​ក្រោយ​បាន។"
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "នៅ​ពេលនេះ អ្នក​នឹង​មិន​មាន​ទូរស័ព្ទ ឬ​លក្ខណៈ​សារ SMS ។"
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
+"អ្នក​អាច​រក​ស៊ីមកាត​ក្នុង​កញ្ចប់​ទូរស័ព្ទ ឬ​ទាក់ទង​ក្រុមហ៊ុន​ផ្ដល់​របស់​អ្នក។"
 
 #: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "រំលង"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "នោះ​គឺ​វា!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "ល្អ​ណាស់​ដែល​​មាន​អ្នក​ក្នុង​សហគមន៍ Ubuntu ។"
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "សូម​រីករាយ​ជា​មួយ​ទូរស័ព្ទ​ថ្មី​របស់​អ្នក។"
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "បញ្ចប់"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "ភ្ជាប់​វ៉ាយហ្វាយ"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "បណ្ដាញ​ដែល​អាច​ប្រើបាន"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
 msgstr ""
+"ភ្ជាប់​បណ្ដាញ​វ៉ាយហ្វាយ​ដើម្បី​ប្ដូរ​ការ​រៀបចំ​របស់​អ្នក​តាម​តម្រូវ​ការ។"
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "សួស្ដី!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "សូម​ស្វាគមន៍​មក​កាន់ Ubuntu ។"
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "ចាប់ផ្ដើម។"
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "ជ្រើស​ភាសា"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1638,7 +1644,7 @@ msgstr "បច្ចុប្បន្នភាព"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "មាន​បច្ចុប្បន្នភាព"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
