@@ -44,6 +44,10 @@
 #include "system_update.h"
 #endif
 
+// Having the full namespaced name in a slot seems to confuse
+// SignalSpy so we need this declaration.
+using UbuntuOne::Token;
+
 namespace UpdatePlugin {
 
 class UpdateManager : public QObject
@@ -113,7 +117,7 @@ private Q_SLOTS:
     void processOutput();
     void processUpdates();
     void downloadUrlObtained(const QString &packagename, const QString &url);
-    void handleCredentialsFound(UbuntuOne::Token token);
+    void handleCredentialsFound(Token token);
     void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
@@ -123,7 +127,7 @@ private:
     QHash<QString, Update*> m_apps;
     int m_downloadMode;
     QVariantList m_model;
-    UbuntuOne::Token m_token;
+    Token m_token;
 
 #ifdef TESTS
     FakeNetwork m_network;
