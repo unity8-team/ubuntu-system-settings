@@ -214,7 +214,8 @@ class SoundsList(ItemPage):
         # When last item of a long list is preselected the list scrolls
         # down automatically, wait for the list to scroll down before
         # trying to do anything. -- om26er.
-        sleep(1)
+        sleep(3)
+        list_view.dragging.wait_for(False)
         list_view.moving.wait_for(False)
         list_view.click_element('ringtone-' + name)
 

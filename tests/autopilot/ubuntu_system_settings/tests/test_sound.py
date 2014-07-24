@@ -40,7 +40,7 @@ class SoundTestCase(SoundBaseTestCase):
     @skipIf(platform.model() == 'Desktop', 'Phones only')
     def test_ringtone_setting_change_in_ui(self):
         """Ensure ringtone change is shown in UI."""
-        ringtone = 'Bliss'
+        ringtone = 'Supreme'
         sounds_list = self.sound_page.open_ringtone_selector()
         sounds_list.choose_ringtone(ringtone)
 
@@ -54,7 +54,7 @@ class SoundTestCase(SoundBaseTestCase):
     @skipIf(platform.model() == 'Desktop', 'Phones only')
     def test_ringtone_setting_change_in_backend(self):
         """Ensure ringtone change saves in backend."""
-        ringtone = 'Celestial'
+        ringtone = 'Supreme'
         sounds_list = self.sound_page.open_ringtone_selector()
         current_ringtone = sounds_list.choose_ringtone(ringtone)
 

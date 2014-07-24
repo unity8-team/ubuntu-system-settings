@@ -17,7 +17,7 @@
 
 import os
 
-from gi.repository import GLib, Gio
+import dbus
 
 
 def get_current_ringtone_from_backend():
@@ -25,15 +25,11 @@ def get_current_ringtone_from_backend():
     AccountsService.
     """
     uid = os.geteuid()
-    bus = Gio.bus_get_sync(Gio.BusType.SYSTEM)
-    result = bus.call_sync(
-        "org.freedesktop.Accounts",
-        ("/org/freedesktop/Accounts/User{}".format(uid)),
-        "org.freedesktop.DBus.Properties", "Get",
-        GLib.Variant("(ss)",
-                    ("com.ubuntu.touch.AccountsService.Sound",
-                        "IncomingCallSound")),
-        GLib.VariantType.new("(v)"), Gio.DBusCallFlags.NONE, -1
-    )
-
-    return result.get_child_value(0).get_variant().get_string()
+    bus = dbus.SystemBus()
+    proxy = bus.get_object(
+        'org.freedesktop.Accounts',
+        '/org/freedesktop/Accounts/User{}'.format(uid))
+    
+    return str(iface.Get(
+        'com.ubuntu.touch.AccountsService.Sound',
+        'IncomingCallSound'))
