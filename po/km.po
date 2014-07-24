@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-02-10 03:19+0000\n"
+"PO-Revision-Date: 2014-07-22 08:17+0000\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:34+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-23 07:00+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -665,43 +665,43 @@ msgstr "ទូរស័ព្ទ​នឹង​មិន​ដេក​ពេល
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "បណ្ដាញ​ពី​មុន"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "បណ្ដាញ​ផ្សេង"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "ឈ្មោះ​បណ្ដាញ"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "សន្តិសុខ"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA & WPA2 Personal"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "ពាក្យសម្ងាត់"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "ពាក្យ​សម្ងាត់មើលឃើញ"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "តភ្ជាប់"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "ព័ត៌មាន​លម្អិត​បណ្ដាញ"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -710,15 +710,15 @@ msgstr "ឈ្មោះ"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "បា​ន​តភ្ជាប់​ចុងក្រោយ"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "បង្ហាញ​ពាក្យ​សម្ងាត់"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "ភ្លេច​បណ្ដាញ"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -815,7 +815,7 @@ msgstr "កម្មវិធី​ទាន់សម័យ​ហើយ"
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "សូម​ចូល​គណនី Ubuntu One របស់​អ្នក។"
 
 #: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
@@ -832,12 +832,12 @@ msgstr "កំពុង​ពិនិត្យមើល​បច្ចុប្
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "ដំឡើង​បច្ចុប្បន្នភាព %1​…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "ដំឡើង​បច្ចុប្បន្នភាព %1"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -869,7 +869,7 @@ msgstr "ដំឡើង"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "បាន​ដំឡើង"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
@@ -890,7 +890,7 @@ msgstr "ជានិច្ច"
 
 #: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "រក​មិន​ឃើញ​ព័ត៌មាន​សម្ងាត់"
 
 #: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
@@ -936,11 +936,11 @@ msgstr "ពន្លឺ"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "កែសម្រួល​ស្វ័យ​ប្រវត្តិ"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "ធ្វើ​ឲ្យ​ការ​បង្ហាញ​​ភ្លឺ និង​ងងឹត​ឲ្យ​សម​នឹង​បរិយាកាស​ជុំវិញ"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1152,23 +1152,23 @@ msgstr "ខ្សោយ"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "អាច​រកឃើញ"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "មិន​អាច​រក​ឃើញ"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "ឧបករណ៍​បាន​ភ្ជាប់៖"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "ភ្ជាប់​ឧបករណ៍​ផ្សេង៖"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "ភ្ជាប់​ឧបករណ៍​ផ្សេង៖"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1247,23 +1247,23 @@ msgstr "អាជ្ញាប័ណ្ណ​កម្មវិធី"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "ព័ត៌មាន​លម្អិត​បង្កើត​ប្រព័ន្ធ​ប្រតិបត្តិការ"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "លេខ​បង្កើត​ប្រព័ន្ធ​ប្រតិបត្តិការ"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "ផ្នែក​រូបភាព Ubuntu"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "ការ​ពណ៌នា​បង្កើត Ubuntu"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "ផ្នែក​រូបភាព​ឧបករណ៍"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
