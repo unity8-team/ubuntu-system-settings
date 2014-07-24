@@ -5,7 +5,6 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from autopilot.introspection.dbus import StateNotFoundError
 from testtools.matchers import Equals
 from autopilot.matchers import Eventually
 

@@ -5,6 +5,7 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
+import dateutil.parser
 import os
 import subprocess
 import unittest
@@ -18,6 +19,8 @@ from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
+    AboutSystemImageBaseTestCase,
+    AboutOfonoBaseTestCase,
     StorageBaseTestCase,
     LicenseBaseTestCase
 )
@@ -27,21 +30,8 @@ import dbus
 
 
 class AboutTestCase(AboutBaseTestCase):
-    """ Tests for About this phone Page """
 
-    def _get_imei_from_dbus(self):
-        bus = dbus.SystemBus()
-        try:
-            manager = dbus.Interface(
-                bus.get_object('org.ofono', '/'), 'org.ofono.Manager'
-            )
-        except dbus.exceptions.DBusException:
-            # oFono interface not found, probably its a desktop.
-            return None
-
-        modems = manager.GetModems()
-        for path, properties in modems:
-            return properties['Serial']
+    """Tests for About this phone Page."""
 
     def _get_os_name(self):
         os_id = subprocess.check_output(
@@ -79,8 +69,81 @@ class AboutTestCase(AboutBaseTestCase):
 
         return '{} {}'.format(manufacturer, hw_model)
 
+    def test_device_with_serial_number_must_display_it(self):
+        """Checks whether the UI is showing the correct serial number."""
+        device_serial = self._get_device_serial_number()
+        if not device_serial:
+            self.skipTest('The device has no serial number.')
+        else:
+            self.assertTrue(self.about_page.is_serial_visible())
+            displayed_serial = self.about_page.get_serial()
+            self.assertThat(
+                displayed_serial, Equals(device_serial))
+
+    def test_device_without_serial_must_not_display_it(self):
+        device_serial = self._get_device_serial_number()
+        if device_serial:
+            self.skipTest('The device has serial number.')
+        else:
+            self.assertFalse(self.about_page.is_serial_visible())
+
+    def test_settings_show_correct_version_of_the_os(self):
+        """Ensure the UI is showing the correct version of the OS."""
+        device_os_version = self._get_os_name()
+        displayed_os_info = self.about_page.get_os_information()
+        # TODO: find a way to check the image build number as well
+        # -- om26er 10-03-2014
+        self.assertTrue(device_os_version in displayed_os_info)
+
+    @skipIf(subprocess.call(
+        ['which', 'getprop'], stdout=subprocess.PIPE) != 0,
+        'program "getprop" not found'
+    )
+    def test_hardware_name(self):
+        """Ensure the UI is showing the correct device name."""
+        displayed_device_name = self.about_page.get_device_name()
+        device_name_from_getprop = self._get_device_manufacturer_and_model()
+
+        self.assertEquals(displayed_device_name, device_name_from_getprop)
+
+
+class AboutOfonoTestCase(AboutOfonoBaseTestCase):
+    def _get_imei_from_dbus(self):
+        bus = self.get_dbus(system_bus=True)
+        try:
+            manager = dbus.Interface(
+                bus.get_object('org.ofono', '/'), 'org.ofono.Manager'
+            )
+        except dbus.exceptions.DBusException:
+            # oFono interface not found, probably its a desktop.
+            return None
+
+        modems = manager.GetModems()
+        for path, properties in modems:
+            return properties['Serial'] if 'Serial' in properties else None
+
+    def test_device_with_imei_must_display_it(self):
+        """Checks whether the UI is exposing the right IMEI."""
+        device_imei = self._get_imei_from_dbus()
+        if not device_imei:
+            self.skipTest('The device has no imei.')
+        else:
+            self.assertTrue(self.about_page.is_imei_visible())
+            displayed_imei = self.about_page.get_imei()
+            self.assertThat(displayed_imei, Equals(device_imei))
+
+    def test_device_without_imei_must_not_display_it(self):
+        device_imei = self._get_imei_from_dbus()
+        if device_imei:
+            self.skipTest('The device has imei.')
+        else:
+            self.assertFalse(self.about_page.is_imei_visible())
+
+
+class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
+
     def _get_system_image_iface(self):
-        bus = dbus.SystemBus()
+        bus = self.get_dbus(system_bus=True)
         service = bus.get_object('com.canonical.SystemImage', '/Service')
         iface = dbus.Interface(service, 'com.canonical.SystemImage')
         return iface.Info()
@@ -91,71 +154,25 @@ class AboutTestCase(AboutBaseTestCase):
         if info == 'Unknown':
             return _('Never')
         else:
-            return str(info.split()[0])
-
-    def test_serial(self):
-        """Checks whether the UI is showing the correct serial number."""
-        item = self.system_settings.main_view.about_page.select_single(
-            objectName='serialItem'
-        )
-        serial = self._get_device_serial_number()
-
-        if not serial:
-            self.assertThat(item.visible, Equals(False))
-        else:
-            self.assertThat(
-                item.value, Equals(self._get_device_serial_number())
-            )
-
-    def test_imei_information_is_correct(self):
-        """Checks whether the UI is exposing the right IMEI."""
-        imei_item = self.system_settings.main_view.about_page.wait_select_single(
-            objectName='imeiItem')
-        imei_ofono = self._get_imei_from_dbus()
-
-        if not imei_ofono:
-            self.assertThat(imei_item.visible, Equals(False))
-        else:
-            self.assertEquals(imei_item.value, imei_ofono)
-
-    def test_settings_show_correct_version_of_the_os(self):
-        """Ensure the UI is showing the correct version of the OS."""
-        item = self.system_settings.main_view.about_page.select_single(objectName='osItem')
-        # TODO: find a way to check the image build number as well
-        # -- om26er 10-03-2014
-        self.assertTrue(self._get_os_name() in item.value)
-
-    @skipIf(subprocess.call(
-        ['which', 'getprop'], stdout=subprocess.PIPE) != 0,
-        'program "getprop" not found'
-    )
-    def test_hardware_name(self):
-        """Ensure the UI is showing the correct device name."""
-        device_label = self.system_settings.main_view.about_page.select_single(
-            objectName='deviceLabel'
-            ).text
-        device_name_from_getprop = self._get_device_manufacturer_and_model()
-
-        self.assertEquals(device_label, device_name_from_getprop)
+            return dateutil.parser.parse(info.split()[0]).date()
 
     def test_last_updated(self):
         """Checks whether Last Updated info is correct."""
-        last_updated = self.system_settings.main_view.about_page.select_single(
-            objectName='lastUpdatedItem'
-            ).value
-
-        self.assertEquals(last_updated, self._get_last_updated_date())
+        last_updated_date_displayed = \
+            dateutil.parser.parse(
+                self.about_page.get_last_updated_date()).date()
+        self.assertEquals(
+            last_updated_date_displayed, self._get_last_updated_date())
 
     def test_check_for_updates(self):
         """
         Checks whether clicking on Check for Updates brings us
         to the Updates page.
         """
-        update_button = self.system_settings.main_view.about_page.select_single(
-            objectName='updateButton')
-        self.system_settings.main_view.pointer.click_object(update_button)
-        self.assertThat(self.system_settings.main_view.updates_page.visible,
-            Eventually(Equals(True)))
+        system_updates_page = self.about_page.go_to_check_for_updates()
+        self.assertThat(
+            system_updates_page.visible, Eventually(Equals(True)))
+
 
 class StorageTestCase(StorageBaseTestCase):
     """ Tests for Storage """
@@ -261,10 +278,12 @@ class StorageTestCase(StorageBaseTestCase):
 
 
 class LicenseTestCase(LicenseBaseTestCase):
-    """ Tests for Licenses """
 
-    def test_licenses_page(self):
-        """ Check whether Storage page is available """
-        self.assertThat(
-            self.system_settings.main_view.licenses_page.active,
-            Eventually(Equals(True)))
+    """Tests for Licenses."""
+
+    def test_open_licenses_page(self):
+        """Check whether Storage page is available."""
+        # FIXME this is not a good Autopilot tests. It would be better if it
+        # opens one of the licenses and checks that it is visible.
+        # --elopio - 2014-07-02
+        self.assertThat(self.licenses_page.active, Equals(True))

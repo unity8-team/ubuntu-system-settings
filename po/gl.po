@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-10 17:42+0000\n"
+"PO-Revision-Date: 2014-07-21 15:46+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-11 06:14+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-07-22 07:16+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "Language: Galician\n"
 
 #: plugins/sound//SoundsList.qml:68
@@ -36,7 +36,7 @@ msgstr "Chamadas de teléfono:"
 #: plugins/sound//PageComponent.qml:72
 #: plugins/sound//PageComponent.qml:78
 msgid "Ringtone"
-msgstr "Ton de chamada"
+msgstr "Son das chamadas"
 
 #: plugins/sound//PageComponent.qml:89
 msgid "Vibrate when ringing"
@@ -54,7 +54,7 @@ msgstr "Mensaxes:"
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
 msgid "Message received"
-msgstr "Recibiuse unha mensaxe"
+msgstr "Ao recibir unha mensaxe"
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
@@ -343,7 +343,7 @@ msgid ""
 "rough location. Turning off location detection saves battery."
 msgstr ""
 "Usa wifi (actualmente apagada), localización por antenas de telefonía e GPS "
-"para detectar a súa situación aproximada. Apagando a detección de "
+"para detectar a súa situación aproximada. Apagando a detección da "
 "localización aforrará batería."
 
 #: plugins/security-privacy//Location.qml:82
@@ -354,7 +354,7 @@ msgid ""
 msgstr ""
 "Usa wifi (actualmente apagada), localización por antenas de telefonía (sen "
 "conexión móbil actualmente) e GPS para detectar a súa situación aproximada. "
-"Apagando a detección de localización aforrará batería."
+"Apagando a detección da localización aforrará batería."
 
 #: plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
@@ -376,7 +376,7 @@ msgstr "Teléfono e internet"
 #: plugins/security-privacy//PageComponent.qml:128
 #: plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr "Só teléfono"
+msgstr "Só do teléfono"
 
 #: plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
@@ -415,7 +415,7 @@ msgstr "Mensaxes na pantalla de inicio"
 #: plugins/security-privacy//PageComponent.qml:125
 #: plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr "Buscar no Panel"
+msgstr "Buscas no Panel"
 
 #: plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
@@ -427,7 +427,7 @@ msgstr "Outro acceso a aplicativos"
 
 #: plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
-msgstr "Diagnóstico"
+msgstr "Diagnósticos"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
@@ -451,7 +451,7 @@ msgstr "Recibir resultados de:"
 #: plugins/bluetooth//PageComponent.qml:256
 #: plugins/bluetooth//PageComponent.qml:264
 msgid "None"
-msgstr "Ningún"
+msgstr "Ningunha"
 
 #: plugins/security-privacy//PhoneLocking.qml:41
 msgid "Passcode"
@@ -479,7 +479,7 @@ msgstr "Idioma e texto"
 
 #: plugins/language//PageComponent.qml:71
 msgid "Display language…"
-msgstr "Mostrar idioma..."
+msgstr "Idioma da pantalla..."
 
 #: plugins/language//PageComponent.qml:85
 #: plugins/language//KeyboardLayouts.qml:26
@@ -519,7 +519,7 @@ msgstr "Idiomas dispoñíbeis:"
 
 #: plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr "Mostrar idioma"
+msgstr "Idioma da pantalla"
 
 #: plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
@@ -674,7 +674,7 @@ msgstr "O teléfono non se suspenderá durante as chamadas ou vídeos."
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr "Redes previas"
+msgstr "Redes anteriores"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
@@ -795,7 +795,7 @@ msgstr ""
 #: plugins/system-update//PageComponent.qml:35
 #: settings.js:86
 msgid "Updates"
-msgstr "Actualizacións"
+msgstr "Actualización"
 
 #: plugins/system-update//PageComponent.qml:51
 msgid "Update System"
@@ -949,7 +949,7 @@ msgstr "Axustar automaticamente"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr "Axuste o brillo e a luz da pantalla para adaptarse ao contorno"
+msgstr "Ilumina e escurece a pantalla para adaptarse ao contorno"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1024,15 +1024,15 @@ msgstr "Pantalla de inicio"
 
 #: plugins/background//MainPage.qml:200
 msgid "Same background for both"
-msgstr "O mesmo fondo para ambos"
+msgstr "O mesmo fondo para ambas"
 
 #: plugins/background//MainPage.qml:201
 msgid "Different background for each"
-msgstr "Un fondo diferente para cada un"
+msgstr "Un fondo diferente para cada unha"
 
 #: plugins/background//Wallpapers.qml:42
 msgid "Choose background"
-msgstr "Seleccionar fondo"
+msgstr "Seleccionar un fondo"
 
 #: plugins/background//Wallpapers.qml:47
 msgid "Photo/Image"
@@ -1179,7 +1179,7 @@ msgstr "Conectar outro dispositivo:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
-msgstr "Ningún detectado"
+msgstr "Non se detectou ningún"
 
 #: plugins/bluetooth//PageComponent.qml:267
 msgid "Type"
@@ -1437,7 +1437,7 @@ msgstr "Rematar"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr "Concectar a wifi"
+msgstr "Conectar a unha rede wifi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
@@ -1457,7 +1457,7 @@ msgstr "Benvido/a a Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr "Comecemos."
+msgstr "Imos aló!"
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"

@@ -22,33 +22,86 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
+import "Components"
+import "utilities.js" as Utilities
 
 Column {
     id: wallpaperGrid
+
+    property var bgmodel
+    property int columns
+
+    // actual grid width, that is the main page's width minus spacing and margins
+    property int gridWidth: mainPage.width
+                            // subtract spacing
+                            - ((columns - 1) * grid.spacing)
+                            // subtract margins
+                            - (grid.anchors.leftMargin + grid.anchors.rightMargin)
+
+    property int itemWidth: gridWidth / columns
+    property int itemHeight: (mainPage.height / gridWidth) * itemWidth
+
+    property string title
+
+    // path to current background
+    property string current
+
+    // whether or not the current background in this model
+    property bool holdsCurrent: (bgmodel.indexOf(current) >= 0)
+
+    // can backgrounds be removed
+    property bool editable: false
+
+    // user can add/remove backgrounds
+    property bool isCustom: false
+
+    // plugin
+    property var backgroundPanel
+
+    // signal for when a background was selected
+    signal selected (string uri)
+
     anchors {
         left: parent.left
         right: parent.right
     }
-    height: childrenRect.height
-    spacing: units.gu(1)
 
-    property var bgmodel
-    property int columns
-    property int itemWidth: ((mainPage.width - (grid.spacing * (columns - 1))) - (grid.anchors.margins * 2)) / columns
-    property int itemHeight: (mainPage.height / mainPage.width) * itemWidth
-    property string title
-    property string current
-    property bool editable: false
-    property var backgroundPanel
-    signal selected (string uri)
+    // if collapsed, reduce height to that of the header
+    height: state === "" ? childrenRect.height : header.height
+    clip: true
+    visible: bgmodel.length > 0 || isCustom
+    state: holdsCurrent ? "" : "collapsed"
+    states: [
+        State {
+            name: "collapsed"
+            PropertyChanges {
+                target: grid
+                visible: false
+            }
+        }
+    ]
 
-    visible: bgmodel.length > 0
-
-    ListItem.Standard {
+    ListItemsHeader {
+        id: header
+        objectName: title.toString() + "Header"
         anchors.left: parent.left
         anchors.right: parent.right
         text: title
-        showDivider: false
+        enabled: !holdsCurrent
+        image: {
+            if (parent.holdsCurrent) {
+                return "bullet.png"
+            }
+            return parent.state === "collapsed" ? "header_handlearrow.png" : "header_handlearrow2.png"
+        }
+        onClicked: {
+            if (parent.state === "collapsed") {
+                parent.state = ""
+            }
+            else {
+                parent.state = "collapsed"
+            }
+        }
     }
 
     Grid {
@@ -56,38 +109,65 @@ Column {
         anchors {
             left: parent.left
             right: parent.right
-            margins: units.gu(2)
+            leftMargin: units.gu(2)
+            rightMargin: units.gu(2)
         }
         columns: wallpaperGrid.columns
-        spacing: units.dp(1)
         height: childrenRect.height
+        spacing: units.gu(2)
+        visible: parent.state === ""
+        states: [
+            State {
+                name: ""
+                StateChangeScript {
+                    name: "deSelectBackgrounds"
+                    script: Utilities.deSelectBackgrounds(gridRepeater);
+                }
+            },
+            State {
+                name: "selection"
+            }
+        ]
         Repeater {
+            id: gridRepeater
+            objectName: "gridRepeater"
             model: bgmodel
             Item {
                 width: itemWidth
                 height: itemHeight
-                UbuntuShape {
-                    id: itemBorder
-                    anchors.fill: parent
-                    color: UbuntuColors.orange
-                    radius: "medium"
-                    visible: (current === modelData) && (itemImage.status === Image.Ready)
-                }
-                UbuntuShape {
+                id: gridItem
+                states: [
+                    State {
+                        name: "selected"
+                        PropertyChanges {
+                            target: selectionTick
+                            visible: true
+                        }
+                    }
+                ]
+                Rectangle {
                     anchors.centerIn: parent
-                    anchors.margins: units.dp(5)
-                    width: itemWidth - (anchors.margins * 2)
-                    height: itemHeight  - (anchors.margins * 2)
-                    radius: itemBorder.radius
-                    image: Image {
+                    width: parent.width
+                    height: parent.height
+                    Image {
+                        property bool current: current === modelData
                         id: itemImage
+                        objectName: "itemImg"
                         source: modelData
-                        width: itemWidth - (anchors.margins * 2)
-                        height: itemHeight  - (anchors.margins * 2)
+                        width: parent.width
+                        height: parent.height
                         sourceSize.width: 512
                         fillMode: Image.PreserveAspectCrop
                         asynchronous: true
                         smooth: true
+                    }
+                    HighlightedOverlay {
+                        id: highLight
+                        objectName: "highLight"
+                        visible: (current === modelData) && (itemImage.status === Image.Ready)
+                    }
+                    SelectedOverlay {
+                        id: selectionTick
                     }
                     ActivityIndicator {
                         anchors.centerIn: parent
@@ -99,17 +179,6 @@ Column {
                         id: emptyItemForCaller
                         anchors.centerIn: parent
                     }
-                    MouseArea {
-                        anchors.fill: parent
-                        onPressAndHold: {
-                            if (editable)
-                                actPop.show();
-                        }
-                        onClicked: {
-                            if (!actPop.visible)
-                                selected(modelData);
-                        }
-                    }
                     ActionSelectionPopover {
                         id: actPop
                         caller: emptyItemForCaller
@@ -119,7 +188,31 @@ Column {
                         actions: ActionList {
                             Action {
                                 text: i18n.tr("Remove")
-                                onTriggered: backgroundPanel.rmFile(modelData)
+                                onTriggered: {
+                                    // removing current background, revert to default
+                                    if (modelData === current) {
+                                        Utilities.revertBackgroundToDefault();
+                                    }
+                                    backgroundPanel.rmFile(modelData);
+                                }
+                            }
+                        }
+                    }
+                    MouseArea {
+                        id: imgMouseArea
+                        anchors.fill: parent
+                        onPressAndHold: {
+                            if (editable && (grid.state === "")) {
+                                actPop.show();
+                            }
+                        }
+                        onClicked: {
+                            if (!actPop.visible && (grid.state === "")) {
+                                selected(modelData);
+                            }
+
+                            if (grid.state === "selection") {
+                                gridItem.state = gridItem.state === "" ? "selected" : "";
                             }
                         }
                     }
@@ -127,4 +220,55 @@ Column {
             }
         }
     }
+
+    // add some spacing
+    Item {
+        width: parent.width
+        height: units.gu(2)
+        visible: !parent.isCustom
+    }
+
+    AddRemove {
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+        }
+        visible: parent.isCustom
+        spacing: units.gu(2)
+        width: parent.width - spacing * 2
+        height: children[0].height + (spacing * 2)
+        buttonWidth: (width - spacing) / 2
+        repeater: gridRepeater
+        onEnteredQueueMode: {
+            grid.state = "selection"
+        }
+        onLeftQueueMode: {
+            grid.state = ""
+        }
+        onRemoveQueued: {
+            removeBackgrounds.trigger();
+            grid.state = ""
+        }
+    }
+
+    // Action for removing backgrounds
+    Action {
+        id: removeBackgrounds
+        onTriggered: {
+            var toDelete = [];
+            // select backgrounds to remove
+            for (var i=0, j=gridRepeater.count; i < j; i++) {
+                if (gridRepeater.itemAt(i).state === "selected") {
+                    toDelete.push(bgmodel[i]);
+                }
+            }
+            // remove backgrounds
+            toDelete.forEach(function (bg) {
+                if (bg === current) {
+                    Utilities.revertBackgroundToDefault();
+                }
+                backgroundPanel.rmFile(bg);
+            });
+        }
+    }
+
 }
