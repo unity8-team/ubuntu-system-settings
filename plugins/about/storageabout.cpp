@@ -34,7 +34,6 @@
 #include <QVariant>
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
-#include <QDBusInterface>
 #include <QDBusReply>
 
 namespace {
@@ -138,6 +137,10 @@ StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
     m_clickFilterProxy(&m_clickModel),
+    m_propertyService(new QDBusInterface(PROPERTY_SERVICE_OBJ,
+        PROPERTY_SERVICE_PATH,
+        PROPERTY_SERVICE_OBJ,
+        QDBusConnection::systemBus())),
     m_cancellable(NULL)
 {
 }
@@ -215,12 +218,7 @@ QString StorageAbout::ubuntuBuildID()
 
 bool StorageAbout::getDeveloperMode()
 {
-    QDBusInterface interface(PROPERTY_SERVICE_OBJ,
-        PROPERTY_SERVICE_PATH,
-        PROPERTY_SERVICE_OBJ,
-        QDBusConnection::systemBus(),
-        this);
-    QDBusReply<bool> reply = interface.call("GetProperty", "adb");
+    QDBusReply<bool> reply = m_propertyService->call("GetProperty", "adb");
 
     if (reply.isValid()) {
         return reply.value();
@@ -232,13 +230,7 @@ bool StorageAbout::getDeveloperMode()
 
 bool StorageAbout::toggleDeveloperMode()
 {
-    QDBusInterface interface(PROPERTY_SERVICE_OBJ,
-        PROPERTY_SERVICE_PATH,
-        PROPERTY_SERVICE_OBJ,
-        QDBusConnection::systemBus(),
-        this);
-    interface.call("SetProperty", "adb", !getDeveloperMode());
-
+    m_propertyService->call("SetProperty", "adb", !getDeveloperMode());
     return getDeveloperMode();
 }
 
