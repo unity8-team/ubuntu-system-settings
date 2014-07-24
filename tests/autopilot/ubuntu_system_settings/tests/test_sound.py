@@ -11,12 +11,17 @@ from testtools import skipIf
 from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings import helpers
+from ubuntu_system_settings import fixture_setup
 from ubuntu_system_settings.tests import SoundBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
 class SoundTestCase(SoundBaseTestCase):
     """ Tests for Sound Page """
+
+    def setUp(self):
+        self.useFixture(fixture_setup.RingtoneBackup())
+        super(SoundTestCase, self).setUp()
 
     def test_sound_page(self):
         """ Checks whether Sound page is available """

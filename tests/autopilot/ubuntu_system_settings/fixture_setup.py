@@ -14,24 +14,26 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import os
 
-import dbus
+import fixtures
 
-
-def get_accounts_service_iface():
-    uid = os.geteuid()
-    bus = dbus.SystemBus()
-    proxy = bus.get_object(
-        'org.freedesktop.Accounts',
-        '/org/freedesktop/Accounts/User{}'.format(uid))
-
-    return dbus.Interface(proxy, 'org.freedesktop.DBus.Properties')
+from ubuntu_system_settings import helpers
 
 
-def get_current_ringtone_from_backend():
-    accounts_iface = get_accounts_service_iface()
+class RingtoneBackup(fixtures.Fixture):
 
-    return accounts_iface.Get(
-        'com.ubuntu.touch.AccountsService.Sound',
-        'IncomingCallSound')
+    def setUp(self):
+        super(RingtoneBackup, self).setUp()
+        self.addCleanup(self._restore_ringtone)
+        self._backup_ringtone()
+
+    def _backup_ringtone(self):
+        self.ringtone_backup = helpers.get_current_ringtone_from_backend()
+
+    def _restore_ringtone(self):
+        iface = helpers.get_accounts_service_iface()
+
+        iface.Set(
+            'com.ubuntu.touch.AccountsService.Sound',
+            'IncomingCallSound',
+            self.ringtone_backup)
