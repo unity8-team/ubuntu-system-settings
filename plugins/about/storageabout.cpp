@@ -34,7 +34,6 @@
 #include <QVariant>
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
-#include <QDBusInterface>
 #include <QDBusReply>
 
 namespace {
