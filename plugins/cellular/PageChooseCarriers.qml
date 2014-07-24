@@ -28,20 +28,8 @@ ItemPage {
     title: i18n.tr("Carriers")
     objectName: "chooseCarriersPage"
 
-    property var netReg
     property var sim1
     property var sim2
-
-    OfonoNetworkRegistration {
-        id: netReg2
-        modemPath: sim2.path
-        onStatusChanged: {
-            console.warn ("netReg2 onStatusChanged: " + status, modemPath);
-        }
-        onModeChanged: {
-            console.warn ("netReg2 onModeChanged: " + mode, modemPath);
-        }
-    }
 
     Flickable {
         anchors.fill: parent
@@ -59,11 +47,11 @@ ItemPage {
 
             ListItem.SingleValue {
                 objectName: "chooseCarrierSim1"
-                value: netReg.name ? netReg.name : i18n.tr("N/A")
+                value: sim1.netReg.name ? sim1.netReg.name : i18n.tr("N/A")
                 progression: true
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        netReg: netReg,
+                        netReg: sim1.netReg,
                         title: sim1.title
                     })
                 }
@@ -75,11 +63,11 @@ ItemPage {
 
             ListItem.SingleValue {
                 objectName: "chooseCarrierSim2"
-                value: netReg2.name ? netReg2.name : i18n.tr("N/A")
+                value: sim2.netReg.name ? sim2.netReg.name : i18n.tr("N/A")
                 progression: true
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        netReg: netReg2,
+                        netReg: sim2.netReg,
                         title: sim2.title
                     })
                 }

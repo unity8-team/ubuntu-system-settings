@@ -250,6 +250,9 @@ class CellularTestCase(CellularBaseTestCase):
 
         self.assert_selected_preference(2)
 
+    def test_modem(self):
+        sleep(5)
+
 
 class DualSimCellularTestCase(CellularBaseTestCase):
 

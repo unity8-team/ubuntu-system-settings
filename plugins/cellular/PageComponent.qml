@@ -116,17 +116,6 @@ ItemPage {
         }
     }
 
-    OfonoNetworkRegistration {
-        id: netReg
-        modemPath: manager.modems[0] || ""
-        onStatusChanged: {
-            console.warn ("netReg onStatusChanged: " + status, modemPath);
-        }
-        onModeChanged: {
-            console.warn ("netReg onModeChanged: " + mode, modemPath);
-        }
-    }
-
     Flickable {
         anchors.fill: parent
         contentWidth: parent.width
@@ -166,29 +155,29 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: i18n.tr("Carrier", "Carriers", manager.modems.length);
+                id: chooseCarrier
                 objectName: "chooseCarrier"
-                value: {
-                    if (root.state === "singleSim") {
-                        return netReg.name ? netReg.name : i18n.tr("N/A")
-                    } else {
-                        return ''
-                    }
-                }
                 progression: enabled
                 onClicked: {
                     if (root.state === 'singleSim') {
                         pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                            netReg: netReg,
+                            netReg: sim1.netReg,
                             title: i18n.tr("Carrier")
                         })
                     } else if (root.state === 'dualSim') {
                         pageStack.push(Qt.resolvedUrl("PageChooseCarriers.qml"), {
-                            netReg: netReg,
                             sim1: sim1,
                             sim2: sim2
                         });
                     }
                 }
+            }
+
+            Binding {
+                target: chooseCarrier
+                property: "value"
+                value: sim1.netReg.name || i18n.tr("N/A")
+                when: (simOneLoader.status === Loader.Ready) && root.state === "singleSim"
             }
 
             ListItem.Standard {
