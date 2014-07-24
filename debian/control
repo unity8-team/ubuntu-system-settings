@@ -3,6 +3,7 @@ Section: gnome
 Priority: optional
 Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
 Build-Depends: dbus-test-runner,
+               dbus-property-service,
                debhelper (>= 9),
                dh-migrations,
                dh-python,
@@ -27,6 +28,7 @@ Build-Depends: dbus-test-runner,
                libubuntuoneauth-2.0-dev,
                libubuntu-download-manager-client-dev,
                libubuntu-download-manager-common-dev,
+               suru-icon-theme,
                xvfb,
                cmake,
                pep8,
