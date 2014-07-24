@@ -29,6 +29,7 @@
 #include <QObject>
 #include <QProcess>
 #include <QVariant>
+#include <QDBusInterface>
 
 
 class StorageAbout : public QObject
@@ -136,6 +137,8 @@ private:
     quint64 m_homeSize;
 
     QMap<QString, QString> m_mounts;
+
+    QScopedPointer<QDBusInterface> m_propertyService;
 
     GCancellable *m_cancellable;
 };
