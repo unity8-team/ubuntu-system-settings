@@ -65,7 +65,7 @@ QDBusObjectPath detectConnection(const QString &ofonoContext) {
 }
 
 QDBusObjectPath detectDevice(const QString &ofonoContext) {
-    auto ofonoContextBase = ofonoContext.split('/')[1];
+    auto expectedIface = QString("/") + ofonoContext.split('/')[1];
     OrgFreedesktopNetworkManagerInterface nm(nmService, nmPath, QDBusConnection::systemBus());
     auto reply = nm.GetDevices();
     reply.waitForFinished();
@@ -81,7 +81,7 @@ QDBusObjectPath detectDevice(const QString &ofonoContext) {
             continue;
         }
         auto devIface = ifaceReply.value().variant().toString();
-        if(devIface == ofonoContextBase) {
+        if(devIface == expectedIface) {
             return device;
         }
     }
