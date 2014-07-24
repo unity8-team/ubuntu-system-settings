@@ -25,6 +25,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
+import Ubuntu.SystemSettings.Cellular 1.0
 
 ItemPage {
     objectName: "viewapnPage"
