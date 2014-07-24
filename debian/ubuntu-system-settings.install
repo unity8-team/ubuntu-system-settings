@@ -6,4 +6,3 @@ usr/share/locale
 usr/share/ubuntu/settings/system
 usr/share/upstart/sessions/session-settings-service.conf
 usr/share/url-dispatcher
-debian/usr.bin.system-settings etc/apparmor.d

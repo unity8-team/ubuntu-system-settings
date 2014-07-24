@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-18 00:26+0000\n"
+"PO-Revision-Date: 2014-07-21 15:46+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-18 05:26+0000\n"
+"X-Launchpad-Export-Date: 2014-07-22 07:16+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: Galician\n"
 
@@ -36,7 +36,7 @@ msgstr "Chamadas de teléfono:"
 #: plugins/sound//PageComponent.qml:72
 #: plugins/sound//PageComponent.qml:78
 msgid "Ringtone"
-msgstr "Ton das chamadas"
+msgstr "Son das chamadas"
 
 #: plugins/sound//PageComponent.qml:89
 msgid "Vibrate when ringing"
@@ -54,7 +54,7 @@ msgstr "Mensaxes:"
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
 msgid "Message received"
-msgstr "Recibiuse unha mensaxe"
+msgstr "Ao recibir unha mensaxe"
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
@@ -1437,7 +1437,7 @@ msgstr "Rematar"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr "Concectar a wifi"
+msgstr "Conectar a unha rede wifi"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"

@@ -101,15 +101,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         item.swipe_into_view()
         self.pointing_device.click_object(item)
 
-    @autopilot.logging.log_action(logger.info)
-    def go_to_about_page(self):
-        """Open the About page.
-
-        :return: The About page.
-
-        """
-        return self._go_to_page('entryComponent-about', 'aboutPage')
-
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -155,6 +146,11 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def updates_page(self):
         """ Return 'System Update' page """
         return self.select_single(objectName='systemUpdatesPage')
+
+    @property
+    def background_page(self):
+        """ Return 'Background' page """
+        return self.select_single(objectName='backgroundPage')
 
     @property
     def sound_page(self):
