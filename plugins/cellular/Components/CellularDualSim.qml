@@ -31,13 +31,10 @@ Column {
 
     function getUsedSim () {
         if (state === "sim1") {
-            console.warn('getUsedSim returned sim1');
             return sim1;
         } else if (state === "sim2") {
-            console.warn('getUsedSim returned sim2');
             return sim2;
         } else {
-            console.warn('getUsedSim returned null');
             return null;
         }
     }
@@ -56,9 +53,7 @@ Column {
             name: "bothOnline"
             when: sim1.connMan.powered && sim2.connMan.powered
             StateChangeScript { script: {
-                console.warn('state: both');
                 sim2.connMan.powered = false;
-                console.warn('forced sim2 offline due to both being online');
             }}
         }
     ]
@@ -90,7 +85,6 @@ Column {
     Connections {
         target: sim1.connMan
         onPoweredChanged: {
-            console.warn('sim1 now', powered ? 'online' : 'offline');
             if (powered) {
                 use.selectedIndex = 1;
             }
@@ -100,7 +94,6 @@ Column {
     Connections {
         target: sim2.connMan
         onPoweredChanged: {
-            console.warn('sim2 now', powered ? 'online' : 'offline');
             if (powered) {
                 use.selectedIndex = 2;
             }
@@ -122,7 +115,6 @@ Column {
             if (sim1.connMan.powered) {
                 selector.selectedIndex = DataHelpers.dualSimKeyToIndex(preference);
             }
-            console.warn('pref changed on sim1', preference);
         }
     }
 
@@ -132,7 +124,6 @@ Column {
             if (sim2.connMan.powered) {
                 selector.selectedIndex = DataHelpers.dualSimKeyToIndex(preference);
             }
-            console.warn('pref changed on sim2', preference);
         }
     }
 

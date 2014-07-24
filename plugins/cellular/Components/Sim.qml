@@ -22,6 +22,7 @@ import MeeGo.QOfono 0.2
 
 Item {
     property alias modem: modem
+    property alias netReg: netReg
     property alias radioSettings: radioSettings
     property alias simMng: simMng
     property alias connMan: connMan
@@ -36,6 +37,11 @@ Item {
 
     OfonoModem {
         id: modem
+        modemPath: path
+    }
+
+    OfonoNetworkRegistration {
+        id: netReg
         modemPath: path
     }
 

@@ -70,7 +70,7 @@ Column {
     Connections {
         target: sim1.radioSettings
         onTechnologyPreferenceChanged: {
-            if (connMan.powered) {
+            if (sim1.connMan.powered) {
                 selector.selectedIndex = DataHelpers.singleSimKeyToIndex(preference);
             }
         }

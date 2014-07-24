@@ -39,7 +39,6 @@ ItemPage {
     Connections {
         target: netReg
         onStatusChanged: {
-            console.warn("onStatusChanged: " + netReg.status);
             if (netReg.status === "registered")
                 buildLists();
         }
@@ -56,7 +55,6 @@ ItemPage {
         var ops = [];
         var oN = new Array();
         var oS = new Array();
-        console.warn('buildLists saw', netReg.networkOperators.length, 'networkOperators');
         for (var i = 0; i < netReg.networkOperators.length; i++) {
             var tempOp = netOp.createObject(parent, {"operatorPath": netReg.networkOperators[i]});
             if (tempOp.status === "forbidden")
@@ -76,11 +74,9 @@ ItemPage {
         id: netOp
         OfonoNetworkOperator {
             onRegisterComplete: {
-                if (error === OfonoNetworkOperator.NoError)
-                    console.warn("registerComplete: SUCCESS");
-                else if (error === OfonoNetworkOperator.InProgressError)
+                if (error === OfonoNetworkOperator.InProgressError) {
                     console.warn("registerComplete failed with error: " + errorString);
-                else {
+                } else if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
                     netReg.registration();
                 }
@@ -120,7 +116,6 @@ ItemPage {
                 model: operatorNames
                 onSelectedIndexChanged: {
                     if ((selectedIndex !== curOp) && operators[selectedIndex]) {
-                        console.warn("onSelectedIndexChanged status: " + operators[selectedIndex].status);
                         operators[selectedIndex].registerOperator();
                     }
                 }
