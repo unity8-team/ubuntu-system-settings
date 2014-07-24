@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-01-07 18:02+0000\n"
-"Last-Translator: Mátó Péter <Unknown>\n"
+"PO-Revision-Date: 2014-07-23 10:11+0000\n"
+"Last-Translator: Kristóf Kiszel <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:34+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-24 06:31+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -44,11 +44,11 @@ msgstr "Csörgéskor rezeg"
 #: plugins/sound//PageComponent.qml:97
 #: plugins/sound//PageComponent.qml:130
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "Rezgés csendes módban"
 
 #: plugins/sound//PageComponent.qml:102
 msgid "Messages:"
-msgstr ""
+msgstr "Üzenetek:"
 
 #: plugins/sound//PageComponent.qml:106
 #: plugins/sound//PageComponent.qml:112
@@ -57,7 +57,7 @@ msgstr "Üzenet érkezett"
 
 #: plugins/sound//PageComponent.qml:122
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "Rezgés üzenethanggal"
 
 #: plugins/sound//PageComponent.qml:135
 msgid "Other sounds:"
@@ -673,43 +673,43 @@ msgstr "A telefon nem alszik el telefonhívások vagy videó lejátszás közben
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "Előző hálózatok"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Más hálózat"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Hálózatnév"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Biztonság"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA és személyes WPA2"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Jelszó"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "A jelszó látható"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Csatlakozás"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "Hálózat részletei"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -718,15 +718,15 @@ msgstr "Név"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "Legutóbb csatlakozott"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Jelszó megjelenítése"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "Hálózat elfelejtése"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -797,11 +797,11 @@ msgstr "Frissítések"
 
 #: plugins/system-update//PageComponent.qml:51
 msgid "Update System"
-msgstr ""
+msgstr "Rendszer frissítése"
 
 #: plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
-msgstr ""
+msgstr "A telefon újraindítást igényel a rendszerfrissítés telepítéséhez."
 
 #: plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
@@ -809,27 +809,27 @@ msgstr "Telepítés és újraindítás"
 
 #: plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
-msgstr ""
+msgstr "Most nem"
 
 #: plugins/system-update//PageComponent.qml:70
 msgid "Install"
-msgstr ""
+msgstr "Telepítés"
 
 #: plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
-msgstr ""
+msgstr "A szoftver naprakész"
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Jelentkezzen be az Ubuntu One fiókjába."
 
 #: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
-msgstr ""
+msgstr "A rendszerfrissítés nem sikerült."
 
 #: plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
-msgstr ""
+msgstr "A rendszerfrissítés nem sikerült."
 
 #: plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
@@ -838,16 +838,16 @@ msgstr "Frissítések keresése…"
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "%1 frissítés telepítése…"
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "%1 frissítés telepítése"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
-msgstr ""
+msgstr "Összes szüneteltetése"
 
 #: plugins/system-update//PageComponent.qml:287
 msgid "Retry"
@@ -859,27 +859,27 @@ msgstr "Letöltés"
 
 #: plugins/system-update//PageComponent.qml:303
 msgid "Update"
-msgstr ""
+msgstr "Frissítés"
 
 #: plugins/system-update//PageComponent.qml:304
 msgid "Resume"
-msgstr ""
+msgstr "Folytatás"
 
 #: plugins/system-update//PageComponent.qml:305
 msgid "Pause"
-msgstr ""
+msgstr "Szünet"
 
 #: plugins/system-update//PageComponent.qml:364
 msgid "Installing"
-msgstr ""
+msgstr "Telepítés"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "Telepítve"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
-msgstr ""
+msgstr "Verzió: "
 
 #: plugins/system-update//PageComponent.qml:446
 #: plugins/system-update//Configuration.qml:30
@@ -896,27 +896,27 @@ msgstr "Mindig"
 
 #: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "Nem találhatók hitelesítési adatok"
 
 #: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
-msgstr ""
+msgstr "Frissítés telepítése…"
 
 #: plugins/system-update//PageComponent.qml:549
 msgid " bytes"
-msgstr ""
+msgstr " bájt"
 
 #: plugins/system-update//PageComponent.qml:552
 msgid " KiB"
-msgstr ""
+msgstr " KiB"
 
 #: plugins/system-update//PageComponent.qml:555
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #: plugins/system-update//PageComponent.qml:558
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #: plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
@@ -942,11 +942,11 @@ msgstr "Fényerő"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Automatikus beállítás"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "A környezethez igazítja a kijelző fényerejét"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1156,23 +1156,23 @@ msgstr "Gyenge"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "Észlelhető"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Nem észlelhető"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Csatlakoztatott eszközök:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Egy másik eszköz csatlakoztatása:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Másik eszköz csatlakoztatása:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1251,31 +1251,31 @@ msgstr "Szoftver licencek"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "OS fordítás részletei"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "OS fordítási szám"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Ubuntu képrész"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Ubuntu fordítási leírás"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Eszköz képrész"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Eszköz ferdítási leírás"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Képrész testreszabása"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1321,7 +1321,7 @@ msgstr "Az Ubuntu által használt"
 
 #: plugins/about//Storage.qml:88
 msgid "Videos"
-msgstr ""
+msgstr "Videók"
 
 #: plugins/about//Storage.qml:89
 msgid "Audio"
@@ -1373,87 +1373,95 @@ msgstr "Rendszer"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "Vissza"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Telefon beállítások"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"A telefonja automatikusan elküldi a hibajelentéseket a Canonicalnak. Ezt a "
+"rendszerbeállításokban kapcsolhatja ki."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"A telefon beazonosítja az Ön helyét. Ezt a rendszerbeállításokban "
+"kapcsolhatja ki."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "Nincs SIM kártya"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Ne aggódjon, később is behelyezheti a SIM kártyát."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
 msgstr ""
+"Addig azonban nem tudja használni a telefonos és SMS szolgáltatásokat."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
+"A SIM kártyát megtalálja a telefon csomagjában, vagy keresse fel "
+"szolgáltatóját."
 
 #: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Kihagyás"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "Ez az!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Örülünk, hogy Önt is az Ubuntu közösségben tudhatjuk."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Élvezze új telefonját!"
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Befejezés"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Csatlakozás WiFi-hez"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "Elérhető hálózatok"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
 msgstr ""
+"Kapcsolódjon egy vezetéknélküli hálózathoz a beállítások testreszabásához."
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "Helló!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "Üdvözli az Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "Kezdjünk is neki."
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Válasszon nyelvet"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1505,7 +1513,7 @@ msgstr "időzóna"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:18
 msgid "Orientation Lock"
-msgstr ""
+msgstr "Tájolás zárolása"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: settings.js:20
@@ -1642,7 +1650,7 @@ msgstr "frissítés"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Frissítések érhetők el"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
@@ -1657,7 +1665,7 @@ msgstr "visszaállítás"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:110
 msgid "Flight Mode"
-msgstr ""
+msgstr "Repülőgépes mód"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: settings.js:112
