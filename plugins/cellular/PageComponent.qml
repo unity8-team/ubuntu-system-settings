@@ -42,24 +42,20 @@ ItemPage {
             StateChangeScript {
                 name: "loadSim"
                 script: simOneLoader.setSource("Components/Sim.qml", {
-                    path: manager.modems[0]
+                    path: manager.modems[0],
+                    settings: systemSettingsSettings
                 })
             }
         },
         State {
             name: "dualSim"
+            extend: "singleSim"
             StateChangeScript {
                 name: "loadSecondSim"
-                script: {
-                    // the ordering is completely depending on manager
-                    // TODO: proper sim names (from gsettings?)
-                    simOneLoader.setSource("Components/Sim.qml", {
-                        path: manager.modems[0]
-                    });
-                    simTwoLoader.setSource("Components/Sim.qml", {
-                        path: manager.modems[1]
-                    });
-                }
+                script: simTwoLoader.setSource("Components/Sim.qml", {
+                    path: manager.modems[1],
+                    settings: systemSettingsSettings
+                })
             }
         }
     ]
@@ -82,7 +78,7 @@ ItemPage {
         Component.onCompleted: {
             console.warn('Manager complete with', modems.length, 'sims.');
             for (var i=0, j=modems.length; i<j; i++) {
-                console.warn('sim', i, modems[i]);
+                console.warn('manager: sim', i, 'has path', modems[i]);
             }
             if (modems.length === 1) {
                 root.state = "singleSim";
@@ -197,33 +193,38 @@ ItemPage {
                 progression: true
                 visible: showAllUI
             }
+
+            SimEditor {
+                enabled: root.state === "dualSim"
+            }
+
         }
     }
 
     GSettings {
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
-        // onChanged: {
-        //     if (key == "modemPathToSimName") {
+        onChanged: {
+            if (key == "sim1Name") {
 
-        //     }
-        // }
-        // Component.onCompleted: {
-        //     console.warn('GSettings completed:', systemSettingsSettings.modemPathToSimName);
-
-        //     for (var i=0, j=manager.modems.length; i < j; i++) {
-        //         if(manager.modems[i] in systemSettingsSettings.modemPathToSimName) {
-        //             if (sim1.path === manager.modems[i]) {
-        //                 sim1.name = systemSettingsSettings.modemPathToSimName[manager.modems[i]];
-        //                 console.warn('setting sim1 name to', systemSettingsSettings.modemPathToSimName[manager.modems[i]]);
-        //             }
-        //             if (sim2.path === manager.modems[i]) {
-        //                 sim2.name = systemSettingsSettings.modemPathToSimName[manager.modems[i]];
-        //                 console.warn('setting sim2 name to', systemSettingsSettings.modemPathToSimName[manager.modems[i]]);
-        //             }
-        //         }
-        //     }
-        // }
+            }
+        }
+        Component.onCompleted: {
+            var m = manager.modems;
+            var s = systemSettingsSettings;
+            // update settings modem paths
+            m.forEach(function (path, i) {
+                var n = i + 1;
+                if (path === s.sim1Path) {
+                    console.warn('path', path, 'equals sim1Path');
+                } else if (path === s.sim2Path) {
+                    console.warn('path', path, 'equals sim2Path');
+                } else {
+                    console.warn('path', path, 'new, setting sim' + n + 'Path');
+                    s["sim" + n + "Path"] = path;
+                }
+            });
+        }
     }
 
 }

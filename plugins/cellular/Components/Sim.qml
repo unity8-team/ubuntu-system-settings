@@ -26,12 +26,13 @@ Item {
     property alias simMng: simMng
     property alias connMan: connMan
 
-    property string name: "SIM"
+    property string path
+    property string name: getName()
     property string title: {
         var number = simMng.subscriberNumbers[0] || simMng.subscriberIdentity;
         return name + (number ? " (" + number + ")" : "");
     }
-    property string path
+    property var settings
 
     OfonoModem {
         id: modem
@@ -52,4 +53,16 @@ Item {
         id: connMan
         modemPath: path
     }
+
+    function getName () {
+        return (path === settings.sim1Path) ? settings.sim1Name : settings.sim2Name;
+    }
+
+    Connections {
+        target: settings
+        onChanged: {
+            console.warn('settings changed');
+        }
+    }
+
 }

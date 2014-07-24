@@ -22,9 +22,29 @@
             <default>""</default>
             <description>When background-duplicate is 'true', the value to restore the least recently changed screen to.</description>
         </key>
-        <key name="modem-path-to-sim-name" type="a{ss}">
-            <description>Modem paths mapped to a sim name.</description>
-            <default>{'/ril_0': 'SIM 1', '/ril_1': 'SIM 2'}</default>
+        <key name="sim1-name" type="s">
+            <description>Sim 1 name</description>
+            <default>"SIM 1"</default>
+        </key>
+        <key name="sim1-path" type="s">
+            <description>Sim 1 modem path</description>
+            <default>"/ril_0"</default>
+        </key>
+        <key name="sim2-name" type="s">
+            <description>Sim 2 name</description>
+            <default>"SIM 2"</default>
+        </key>
+        <key name="sim2-path" type="s">
+            <description>Sim 2 modem path</description>
+            <default>"/ril_1"</default>
+        </key>
+        <key name="default-sim-for-calls" type="s">
+            <description>Default sim card to use for calls, defined by a modem path</description>
+            <default>""</default>
+        </key>
+        <key name="default-sim-for-messages" type="s">
+            <description>Default sim card to use for messages, defined by a modem path</description>
+            <default>""</default>
         </key>
     </schema>
 </schemalist>
