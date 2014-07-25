@@ -14,13 +14,13 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-
 import fixtures
 
 from ubuntu_system_settings import helpers
 
 
 class RingtoneBackup(fixtures.Fixture):
+    """Fixture to backup and restore ringtone."""
 
     def setUp(self):
         super(RingtoneBackup, self).setUp()

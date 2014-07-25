@@ -20,6 +20,7 @@ import dbus
 
 
 def get_accounts_service_iface():
+    """Return the accountsservice dbus interface."""
     uid = os.geteuid()
     bus = dbus.SystemBus()
     proxy = bus.get_object(
@@ -30,6 +31,7 @@ def get_accounts_service_iface():
 
 
 def get_current_ringtone_from_backend():
+    """Return the URI of the current ringtone."""
     accounts_iface = get_accounts_service_iface()
 
     return accounts_iface.Get(
