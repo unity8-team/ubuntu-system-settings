@@ -99,6 +99,7 @@ ItemPage {
             Menus.SliderMenu {
                 id: sliderMenu
                 objectName: "sliderMenu"
+                enabled: soundActionGroup.volume.state != null
                 minimumValue: 0.0
                 maximumValue: 1.0
                 minIcon: "image://theme/audio-volume-low" 
