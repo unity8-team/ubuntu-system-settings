@@ -35,16 +35,27 @@ ItemPage {
     // pointers to sim 1 and 2, lazy loaded
     property alias sim1: simOneLoader.item
     property alias sim2: simTwoLoader.item
+    property var modemsSorted: manager.modems.slice(0).sort()
 
     states: [
         State {
             name: "singleSim"
             StateChangeScript {
                 name: "loadSim"
-                script: simOneLoader.setSource("Components/Sim.qml", {
-                    path: manager.modems[0],
-                    settings: systemSettingsSettings
-                })
+                script: {
+                    console.warn('modems sorted', modemsSorted);
+                    var p = modemsSorted[0];
+                    var name;
+                    if (p === ussS.sim1Path) {
+                        name = ussS.sim1Name;
+                    } else if (p === ussS.sim2Path) {
+                        name = ussS.sim2Name;
+                    }
+                    simOneLoader.setSource("Components/Sim.qml", {
+                        path: p,
+                        name: name
+                    });
+                }
             }
         },
         State {
@@ -52,10 +63,19 @@ ItemPage {
             extend: "singleSim"
             StateChangeScript {
                 name: "loadSecondSim"
-                script: simTwoLoader.setSource("Components/Sim.qml", {
-                    path: manager.modems[1],
-                    settings: systemSettingsSettings
-                })
+                script: {
+                    var p = modemsSorted[1];
+                    var name;
+                    if (p === ussS.sim1Path) {
+                        name = ussS.sim1Name;
+                    } else if (p === ussS.sim2Path) {
+                        name = ussS.sim2Name;
+                    }
+                    simTwoLoader.setSource("Components/Sim.qml", {
+                        path: p,
+                        name: name
+                    });
+                }
             }
         }
     ]
@@ -185,47 +205,25 @@ ItemPage {
 
             SimEditor {
                 enabled: root.state === "dualSim"
-                onRenamed: {
-                    console.warn('caught signal: renamed(', path, name, ')');
-                    var s = systemSettingsSettings;
-                    if (path === s.sim1Path) {
-                        s.sim1Name = name;
-                    } else {
-                        s.sim2Name = name;
-                    }
-                }
             }
 
         }
     }
 
     GSettings {
-        id: systemSettingsSettings
+        id: ussS
         schema.id: "com.ubuntu.touch.system-settings"
-        onChanged: {
-            var s = systemSettingsSettings;
-            if (key === "sim1Name") {
-                sim1.name = s.sim1Name;
-            } else if (key === "sim2Name") {
-                sim2.name = s.sim2Name;
-            }
-        }
-        Component.onCompleted: {
-            var m = manager.modems;
-            var s = systemSettingsSettings;
-            // update settings modem paths
-            m.forEach(function (path, i) {
-                var n = i + 1;
-                if (path === s.sim1Path) {
-                    console.warn('path', path, 'equals sim1Path');
-                } else if (path === s.sim2Path) {
-                    console.warn('path', path, 'equals sim2Path');
-                } else {
-                    console.warn('path', path, 'new, setting sim' + n + 'Path');
-                    s["sim" + n + "Path"] = path;
-                }
-            });
-        }
     }
 
+    Binding {
+        target: sim1
+        property: "name"
+        value: ussS.sim1Name
+    }
+
+    Binding {
+        target: sim2
+        property: "name"
+        value: ussS.sim2Name
+    }
 }

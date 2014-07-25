@@ -28,8 +28,6 @@ Column {
     anchors.left: parent.left
     anchors.right: parent.right
 
-    signal renamed (string path, string name)
-
     states: [
         State {
             name: "editing"
@@ -43,7 +41,6 @@ Column {
             name: "editingSim1"
             PropertyChanges {
                 target: nameField
-                path: sim1.path
                 text: sim1.name
             }
             ParentChange {
@@ -56,7 +53,6 @@ Column {
             name: "editingSim2"
             PropertyChanges {
                 target: nameField
-                path: sim2.path
                 text: sim2.name
             }
             ParentChange {
@@ -72,8 +68,7 @@ Column {
 
     Column {
 
-        anchors.left: parent.left
-        anchors.right: parent.right
+        width: parent.width
         spacing: units.gu(2)
 
         ListItem.Standard {
@@ -112,8 +107,6 @@ Column {
 
     Column {
         id: editor
-        property alias newPath: nameField.path
-        property alias newName: nameField.text
         visible: false
 
         width: simList.width - units.gu(4)
@@ -123,7 +116,6 @@ Column {
         }
 
         TextField {
-            property string path
             id: nameField
             maximumLength: 30
             width: simList.width - units.gu(4)
@@ -156,7 +148,11 @@ Column {
         Action {
             id: renameAction
             onTriggered: {
-                renamed(editor.newPath, editor.newName);
+                if (simList.state === "editingSim1") {
+                    ussS.sim1Name = nameField.text;
+                } else if (simList.state === "editingSim2") {
+                    ussS.sim2Name = nameField.text;
+                }
                 simList.state = "";
             }
         }
