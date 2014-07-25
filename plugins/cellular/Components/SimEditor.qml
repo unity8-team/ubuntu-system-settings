@@ -23,45 +23,143 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
 
+    id: simList
+
     anchors.left: parent.left
     anchors.right: parent.right
+
+    signal renamed (string path, string name)
+
+    states: [
+        State {
+            name: "editing"
+            PropertyChanges {
+                target: editor
+                visible: true
+            }
+        },
+        State {
+            extend: "editing"
+            name: "editingSim1"
+            PropertyChanges {
+                target: nameField
+                path: sim1.path
+                text: sim1.name
+            }
+            ParentChange {
+                target: editor
+                parent: sim1Placeholder
+            }
+        },
+        State {
+            extend: "editing"
+            name: "editingSim2"
+            PropertyChanges {
+                target: nameField
+                path: sim2.path
+                text: sim2.name
+            }
+            ParentChange {
+                target: editor
+                parent: sim2Placeholder
+            }
+        }
+    ]
 
     ListItem.Standard {
         text: i18n.tr("Edit SIM Name")
     }
 
-    ListItem.Standard {
-        text: sim1.title
-        progression: true
-        onClicked: {
+    Column {
 
-        }
-    }
+        anchors.left: parent.left
+        anchors.right: parent.right
+        spacing: units.gu(2)
 
-    ListItem.Standard {
-        text: sim2.title
-        progression: true
-    }
-
-    Item {
-
-        id: editor
-        height: childrenRect.height
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-
-        TextField {
-            id: field
-            text: "sim foo"
-            maximumLength: 30
-            width: parent.width - units.gu(4)
-            anchors {
-                topMargin: units.gu(2)
-                horizontalCenter: parent.horizontalCenter
+        ListItem.Standard {
+            id: sim1Item
+            text: sim1.title
+            progression: true
+            onClicked: {
+                simList.state = "editingSim1";
             }
         }
 
+        Column {
+            id: sim1Placeholder
+        }
+    }
+
+    Column {
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        spacing: units.gu(2)
+
+        ListItem.Standard {
+            id: sim2Item
+            text: sim2.title
+            progression: true
+            onClicked: {
+                simList.state = "editingSim2";
+            }
+        }
+
+        Column {
+            id: sim2Placeholder
+        }
+    }
+
+    Column {
+        id: editor
+        property alias newPath: nameField.path
+        property alias newName: nameField.text
+        visible: false
+
+        width: simList.width - units.gu(4)
+        spacing: units.gu(2)
+        anchors {
+            horizontalCenter: simList.horizontalCenter
+        }
+
+        TextField {
+            property string path
+            id: nameField
+            maximumLength: 30
+            width: simList.width - units.gu(4)
+        }
+
+        Row {
+
+            spacing: units.gu(2)
+
+            Button {
+                id: cancel
+                objectName: "cancelRename"
+                gradient: UbuntuColors.greyGradient
+                text: i18n.tr("Cancel")
+                width: (editor.width / 2) - units.gu(1)
+                onClicked: {
+                    simList.state = "";
+                }
+            }
+
+            Button {
+                id: rename
+                objectName: "doRename"
+                text: i18n.tr("OK")
+                width: (editor.width / 2) - units.gu(1)
+                action: renameAction
+            }
+        }
+
+        Action {
+            id: renameAction
+            onTriggered: {
+                renamed(editor.newPath, editor.newName);
+                simList.state = "";
+            }
+        }
     }
 }
+

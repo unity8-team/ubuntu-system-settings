@@ -503,5 +503,5 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertThat(manual, NotEquals(None))
 
     def test_two_modems(self):
-        sleep(3)
+        sleep(9)
         self.assertFalse(True)

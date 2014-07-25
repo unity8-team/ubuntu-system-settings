@@ -185,6 +185,15 @@ ItemPage {
 
             SimEditor {
                 enabled: root.state === "dualSim"
+                onRenamed: {
+                    console.warn('caught signal: renamed(', path, name, ')');
+                    var s = systemSettingsSettings;
+                    if (path === s.sim1Path) {
+                        s.sim1Name = name;
+                    } else {
+                        s.sim2Name = name;
+                    }
+                }
             }
 
         }
@@ -194,8 +203,11 @@ ItemPage {
         id: systemSettingsSettings
         schema.id: "com.ubuntu.touch.system-settings"
         onChanged: {
-            if (key == "sim1Name") {
-
+            var s = systemSettingsSettings;
+            if (key === "sim1Name") {
+                sim1.name = s.sim1Name;
+            } else if (key === "sim2Name") {
+                sim2.name = s.sim2Name;
             }
         }
         Component.onCompleted: {
