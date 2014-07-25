@@ -2,6 +2,7 @@ add_subdirectory(diagnostics)
 
 set(QML_SOURCES
     AppAccess.qml
+    AppAccessControl.qml
     Dash.qml
     Location.qml
     LockSecurity.qml

@@ -18,6 +18,7 @@
 
 #include "trust-store-model.h"
 
+#include <QDebug>
 #include <QList>
 #include <QMap>
 #include <QSet>
@@ -27,21 +28,20 @@
 #include <core/trust/resolve.h>
 #include <core/trust/store.h>
 
-namespace dbus = core::dbus;
-
 class Application
 {
 public:
     Application() {}
 
-    void setProfile(const QString &profile) {
-        this->profile = profile;
+    void setId(const QString &id) {
+        this->id = id;
 
         QString localShare =
             QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
         QSettings desktopFile(QString("%1/applications/%2.desktop").
-                              arg(localShare).arg(profile),
+                              arg(localShare).arg(id),
                               QSettings::IniFormat);
+        desktopFile.beginGroup("Desktop Entry");
         displayName = desktopFile.value("Name").toString();
         iconName = desktopFile.value("Icon").toString();
     }
@@ -49,12 +49,14 @@ public:
     void addRequest(const core::trust::Request &request) {
         if (request.answer == core::trust::Request::Answer::granted) {
             grantedFeatures.insert(request.feature);
+        } else {
+            grantedFeatures.remove(request.feature);
         }
     }
 
     bool hasGrants() const { return !grantedFeatures.isEmpty(); }
 
-    QString profile;
+    QString id;
     QString displayName;
     QString iconName;
     QSet<std::uint64_t> grantedFeatures;
@@ -70,6 +72,7 @@ public:
     ~TrustStoreModelPrivate();
 
     void update();
+    void updateRow(int row);
     void updateGrantedCount();
 
 private:
@@ -108,26 +111,69 @@ void TrustStoreModelPrivate::update()
 
     trustStore = core::trust::resolve_store_in_session_with_name(
         serviceName.toStdString());
-    auto query = trustStore->query();
-    query->execute();
+
+    /* Test is the trustStore is valid; ideally, there should be an API on the
+     * trust-store to check this. See
+     * https://bugs.launchpad.net/bugs/1348215 */
+    try {
+        auto query = trustStore->query();
+    } catch (std::exception &e) {
+        qWarning() << "Exception " << e.what();
+        trustStore.reset();
+    }
 
     QMap<QString,Application> appMap;
-    while (query->status() != core::trust::Store::Query::Status::eor) {
-        auto r = query->current();
 
-        QString profile = QString::fromStdString(r.from);
+    if (trustStore) {
+        auto query = trustStore->query();
+        query->execute();
 
-        Application &app = appMap[profile];
-        app.setProfile(profile);
-        app.addRequest(r);
+        while (query->status() != core::trust::Store::Query::Status::eor) {
+            auto r = query->current();
 
-        query->next();
+            QString applicationId = QString::fromStdString(r.from);
+
+            Application &app = appMap[applicationId];
+            app.setId(applicationId);
+            app.addRequest(r);
+
+            query->next();
+        }
     }
 
     applications = appMap.values();
     updateGrantedCount();
 
     q->endResetModel();
+}
+
+void TrustStoreModelPrivate::updateRow(int row)
+{
+    Q_Q(TrustStoreModel);
+
+    Q_ASSERT(trustStore);
+    Q_ASSERT(row >= 0 && row < d->applications.count());
+
+    Application &app = applications[row];
+    app.grantedFeatures.clear();
+
+    auto query = trustStore->query();
+    query->for_application_id(app.id.toStdString());
+    query->execute();
+
+    while (query->status() != core::trust::Store::Query::Status::eor) {
+        auto r = query->current();
+
+        app.addRequest(r);
+
+        query->next();
+    }
+
+    updateGrantedCount();
+
+    /* Let the model emit the change notification */
+    QModelIndex index = q->index(row);
+    q->dataChanged(index, index);
 }
 
 void TrustStoreModelPrivate::updateGrantedCount()
@@ -151,7 +197,8 @@ TrustStoreModel::TrustStoreModel(QObject *parent):
     d_ptr(new TrustStoreModelPrivate(this))
 {
     Q_D(TrustStoreModel);
-    d->roleNames[ProfileRole] = "profile";
+    d->roleNames[Qt::DisplayRole] = "applicationName";
+    d->roleNames[ApplicationIdRole] = "applicationId";
     d->roleNames[IconNameRole] = "iconName";
     d->roleNames[GrantedRole] = "granted";
 
@@ -200,6 +247,43 @@ int TrustStoreModel::grantedCount() const
     return d->grantedCount;
 }
 
+void TrustStoreModel::setEnabled(int row, bool enabled)
+{
+    Q_D(TrustStoreModel);
+
+    if (Q_UNLIKELY(!d->trustStore)) {
+        qWarning() << "Trust store is NULL on setEnabled call";
+        return;
+    }
+
+    if (Q_UNLIKELY(row >= d->applications.count())) return;
+
+    const Application &app = d->applications.at(row);
+
+    core::trust::Request r;
+    r.from = app.id.toStdString();
+    r.feature = core::trust::Request::default_feature;
+    r.answer = enabled ?
+        core::trust::Request::Answer::granted : core::trust::Request::Answer::denied;
+    r.when = std::chrono::system_clock::now();
+
+    d->trustStore->add(r);
+
+    /* When disabling, we must disable all the features */
+    if (!enabled) {
+        Q_FOREACH(std::int64_t feature, app.grantedFeatures) {
+            /* Skip the default feature, we already disabled it */
+            if (feature == core::trust::Request::default_feature) continue;
+
+            r.feature = feature;
+            d->trustStore->add(r);
+        }
+    }
+
+    /* Reload the application from the trust store */
+    d->updateRow(row);
+}
+
 QVariant TrustStoreModel::get(int row, const QString &roleName) const
 {
     int role = roleNames().key(roleName.toLatin1(), -1);
@@ -229,8 +313,8 @@ QVariant TrustStoreModel::data(const QModelIndex &index, int role) const
     case IconNameRole:
         ret = app.iconName;
         break;
-    case ProfileRole:
-        ret = app.profile;
+    case ApplicationIdRole:
+        ret = app.id;
         break;
     case GrantedRole:
         ret = app.hasGrants();

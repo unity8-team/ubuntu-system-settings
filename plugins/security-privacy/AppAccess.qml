@@ -25,7 +25,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
 ItemPage {
-    id: dashPage
+    id: root
     title: i18n.tr("Other app access")
 
     Column {
@@ -41,12 +41,12 @@ ItemPage {
             ListElement {
                 name: "Camera"
                 caption: "Apps that have requested access to your camera"
-                trustStoreService: "camera"
+                trustStoreService: "CameraService"
             }
             ListElement {
                 name: "Mic"
                 caption: "Apps that have requested access to your mic"
-                trustStoreService: "pulse"
+                trustStoreService: "PulseAudio"
             }
         }
 
@@ -55,11 +55,13 @@ ItemPage {
 
             ListItem.SingleValue {
                 text: model.name
-                enabled: model.appsCount > 0
-                value: model.appsCount > 0 ?
+                enabled: trustStoreModel.count > 0
+                value: trustStoreModel.count > 0 ?
                     i18n.tr("%1/%2").arg(trustStoreModel.grantedCount).arg(trustStoreModel.count) :
                     i18n.tr("0")
                 onClicked: pageStack.push(Qt.resolvedUrl("AppAccessControl.qml"), {
+                    "title": model.name,
+                    "caption": model.caption,
                     "model": trustStoreModel,
                 })
 

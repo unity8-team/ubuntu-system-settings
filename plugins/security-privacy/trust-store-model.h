@@ -39,7 +39,7 @@ public:
     ~TrustStoreModel();
 
     enum Roles {
-        ProfileRole = Qt::UserRole + 1,
+        ApplicationIdRole = Qt::UserRole + 1,
         IconNameRole,
         GrantedRole,
     };
@@ -49,6 +49,7 @@ public:
 
     int grantedCount() const;
 
+    Q_INVOKABLE void setEnabled(int row, bool enabled);
     Q_INVOKABLE QVariant get(int row, const QString &roleName) const;
 
     // reimplemented virtual methods
