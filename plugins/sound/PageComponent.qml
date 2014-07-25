@@ -26,7 +26,6 @@ import SystemSettings 1.0
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 import Ubuntu.SystemSettings.Sound 1.0
 import Ubuntu.Settings.Menus 0.1 as Menus
-import Ubuntu.Settings.Components 0.1 as SettingsComponents
 import QMenuModel 0.1
 
 import "utilities.js" as Utilities
