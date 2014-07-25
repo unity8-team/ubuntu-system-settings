@@ -41,6 +41,8 @@ pkg_search_module(ACCOUNTSSERVICE REQUIRED accountsservice)
 pkg_search_module(TIMEZONEMAP REQUIRED timezonemap)
 pkg_search_module(ICU REQUIRED icu-i18n)
 pkg_search_module(ANDR_PROP libandroid-properties)
+pkg_check_modules(QTDBUSMOCK REQUIRED libqtdbusmock-1 REQUIRED)
+pkg_check_modules(QTDBUSTEST REQUIRED libqtdbustest-1 REQUIRED)
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)

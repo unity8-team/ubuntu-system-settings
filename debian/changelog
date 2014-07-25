@@ -1,3 +1,22 @@
+ubuntu-system-settings (0.3+14.10.20140718-0ubuntu0) UNRELEASED; urgency=medium
+
+  * Bluetooth UI redesign:
+    - Redesign the UI to follow the specification.
+    - Create devices only when attempting to connect.
+    - Bugfixes for displaying icons for devices.
+    - Show new icons for common device types.
+    - Support more device types.
+    - Show Trusted (known) devices in a separate list from the devices detected
+      by Discovery.
+    - Allow for a way to forget (unpair) a known device. (LP: #1336197)
+    - Follow the state of the Bluetooth adapter for whether Bluetooth
+      is enabled. (LP: #1272317)
+    - Miscellaneous bug fixes.
+  * debian/control: add Build-Depends on libqtdbusmock1-dev and
+    libqtdbustest1-dev for Bluetooth testing.
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Thu, 17 Jul 2014 14:46:42 -0400
+
 ubuntu-system-settings (0.3+14.10.20140721.1-0ubuntu1) utopic; urgency=low
 
   [ Ubuntu daily release ]
@@ -35,23 +54,6 @@ ubuntu-system-settings (0.3+14.10.20140718.1-0ubuntu1) utopic; urgency=low
   * Set only left and right anchors in language panel. (LP: #1343513)
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 19:15:36 +0000
-
-ubuntu-system-settings (0.3+14.10.20140718-0ubuntu0) UNRELEASED; urgency=medium
-
-  * Bluetooth UI redesign:
-    - Redesign the UI to follow the specification.
-    - Create devices only when attempting to connect.
-    - Bugfixes for displaying icons for devices.
-    - Show new icons for common device types.
-    - Support more device types.
-    - Show Trusted (known) devices in a separate list from the devices detected
-      by Discovery.
-    - Allow for a way to forget (unpair) a known device. (LP: #1336197)
-    - Follow the state of the Bluetooth adapter for whether Bluetooth
-      is enabled. (LP: #1272317)
-    - Miscellaneous bug fixes.
-
- -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Thu, 17 Jul 2014 14:46:42 -0400
 
 ubuntu-system-settings (0.3+14.10.20140715-0ubuntu1) utopic; urgency=low
 
