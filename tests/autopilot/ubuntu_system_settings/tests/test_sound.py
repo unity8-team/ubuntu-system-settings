@@ -42,36 +42,36 @@ class SoundTestCase(SoundBaseTestCase):
 
 class RingtoneSettingTestCase(SoundBaseTestCase):
 
-   def setUp(self):
+    ringtone = 'Supreme'
+    
+    def setUp(self):
         self.useFixture(fixture_setup.RingtoneBackup())
         super(SoundTestCase, self).setUp() 
 
     @skipIf(platform.model() is 'Desktop', 'Phones only')
     def test_ringtone_setting_change_in_ui(self):
         """Ensure ringtone change is shown in UI."""
-        ringtone = 'Supreme'
         sounds_list = self.sound_page.open_ringtone_selector()
-        sounds_list.choose_ringtone(ringtone)
+        sounds_list.choose_ringtone(self.ringtone)
 
         sounds_list.go_back_to_sound_page()
 
         self.assertThat(
             self.sound_page.get_ringtone_setting_button_current_value(),
-            Eventually(Equals(ringtone))
+            Eventually(Equals(self.ringtone))
         )
 
     @skipIf(platform.model() is 'Desktop', 'Phones only')
     def test_ringtone_setting_change_in_backend(self):
         """Ensure ringtone change saves in backend."""
-        ringtone = 'Supreme'
         sounds_list = self.sound_page.open_ringtone_selector()
-        current_ringtone = sounds_list.choose_ringtone(ringtone)
+        current_ringtone = sounds_list.choose_ringtone(self.ringtone)
 
         self.assertThat(
             current_ringtone.selected, Eventually(Equals(True))
         )
         self.assertThat(
             lambda: helpers.get_current_ringtone_from_backend().endswith(
-                ringtone + '.ogg'), Eventually(Equals(True))
+                self.ringtone + '.ogg'), Eventually(Equals(True))
         )
 
