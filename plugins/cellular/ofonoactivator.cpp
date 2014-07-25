@@ -104,6 +104,7 @@ OfonoActivator::OfonoActivator(QObject *parent) : QObject(parent) {
 }
 
 Q_INVOKABLE bool OfonoActivator::activate(const QString ofonoContext) {
+    printf("Activating ofono context: %s\n", ofonoContext.toUtf8().data());
     auto conn = detectConnection(ofonoContext);
     if(conn.path() == "") {
         qWarning() << "Could not detect connection object to use for Ofono activation.\n";

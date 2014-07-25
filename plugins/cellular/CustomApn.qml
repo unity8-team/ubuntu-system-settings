@@ -91,7 +91,7 @@ ItemPage {
         if (ismms) {
             theContext.messageCenter = mmsc.text;
             // assume this is how to add the port
-            port.length = 0 ? theContext.messageProxy = proxy.text : theContext.messageProxy = proxy.text + ":" + port.text;
+            port.length == 0 ? theContext.messageProxy = proxy.text : theContext.messageProxy = proxy.text + ":" + port.text;
         }
         // assume we want the new one active?
         //theContext.active = true;
