@@ -68,9 +68,6 @@ Q_SIGNALS:
     void discoveringChanged(bool isActive);
     void discoverableChanged(bool isActive);
 
-private Q_SLOTS:
-    void onPairingDone();
-
 public:
     Bluetooth(QObject *parent = 0);
     Bluetooth(QDBusConnection &dbus, QObject *parent = 0);
