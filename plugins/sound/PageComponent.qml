@@ -103,8 +103,8 @@ ItemPage {
                 value: soundActionGroup.volume.state
                 minimumValue: 0.0
                 maximumValue: 1.0
-                minIcon: "/usr/share/icons/ubuntu-mobile/status/scalable/audio-volume-low.svg"
-                maxIcon: "/usr/share/icons/ubuntu-mobile/status/scalable/audio-volume-high.svg"
+                minIcon: "image://theme/audio-volume-low" 
+                maxIcon: "image://theme/audio-volume-high" 
                 onUpdated: soundActionGroup.volume.updateState(value);
             }
 
