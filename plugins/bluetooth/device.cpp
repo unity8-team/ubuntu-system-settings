@@ -142,6 +142,7 @@ void Device::slotServiceDiscoveryDone(QDBusPendingCallWatcher *call)
         qWarning() << "Could not initiate service discovery:"
                    << reply.error().message();
     }
+    call->deleteLater();
 }
 
 void Device::discoverServices()
