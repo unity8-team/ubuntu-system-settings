@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: Josef Andersson <josef.andersson@fripost.org>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-19 16:02+0000\n"
+"PO-Revision-Date: 2014-07-24 13:56+0000\n"
 "Last-Translator: Josef Andersson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se.>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-20 06:17+0000\n"
+"X-Launchpad-Export-Date: 2014-07-25 07:53+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "Language: sv\n"
 
@@ -45,7 +45,7 @@ msgstr "Vibrera vid ringsignal"
 #: plugins/sound//PageComponent.qml:97
 #: plugins/sound//PageComponent.qml:130
 msgid "Vibrate in Silent Mode"
-msgstr "Vibrera i Tyst läge"
+msgstr "Vibrera i tyst läge"
 
 #: plugins/sound//PageComponent.qml:102
 msgid "Messages:"
@@ -75,7 +75,7 @@ msgstr "Låsljud"
 
 #: plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr "Telefonen är i Tyst läge."
+msgstr "Telefonen är i tyst läge."
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: plugins/time-date//PageComponent.qml:29
@@ -357,7 +357,7 @@ msgstr ""
 
 #: plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr "Tlllåt platsåtkomst:"
+msgstr "Tillåt platsåtkomst:"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: plugins/security-privacy//PageComponent.qml:33
@@ -581,7 +581,7 @@ msgstr "Senast fulladdad"
 
 #: plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
-msgstr "Fulladdad"
+msgstr "Fulladdat"
 
 #: plugins/battery//PageComponent.qml:111
 msgid "Charge level"
@@ -1426,7 +1426,7 @@ msgstr "Klart!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr "Det är toppen att du är med i Ubuntu-gemenskapen."
+msgstr "Det är fantastiskt att ha dig med i Ubuntu-gemenskapen."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."

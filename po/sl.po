@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-03-15 08:08+0000\n"
+"PO-Revision-Date: 2014-07-24 07:25+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:35+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-07-25 07:53+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: plugins/sound//SoundsList.qml:68
 msgid "Stop playing"
@@ -687,43 +687,43 @@ msgstr ""
 #: plugins/wifi//PageComponent.qml:114
 #: plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "Predhodna omrežja"
 
 #: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Druga omrežja"
 
 #: plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Ime omrežja"
 
 #: plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Varnost"
 
 #: plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "Osebni WPA in WPA2"
 
 #: plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
 msgid "Password"
-msgstr ""
+msgstr "Geslo"
 
 #: plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Vidnost gesla"
 
 #: plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Poveži"
 
 #: plugins/wifi//NetworkDetails.qml:37
 msgid "Network details"
-msgstr ""
+msgstr "Podrobnosti omrežja"
 
 #: plugins/wifi//NetworkDetails.qml:44
 #: plugins/bluetooth//PageComponent.qml:263
@@ -732,15 +732,15 @@ msgstr "Ime"
 
 #: plugins/wifi//NetworkDetails.qml:52
 msgid "Last connected"
-msgstr ""
+msgstr "Nazadnje povezano"
 
 #: plugins/wifi//NetworkDetails.qml:74
 msgid "Show password"
-msgstr ""
+msgstr "Pokaži geslo"
 
 #: plugins/wifi//NetworkDetails.qml:84
 msgid "Forget network"
-msgstr ""
+msgstr "Pozabi omrežje"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
@@ -836,7 +836,7 @@ msgstr "Programska oprema je posodobljena"
 
 #: plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Prijavite se v vaš račun Ubuntu One."
 
 #: plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
@@ -853,12 +853,12 @@ msgstr "Preverjanje za posodobitve ..."
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Namesti %1 posodobitev ..."
 
 #: plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Namesti %1 posodobitev"
 
 #: plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -890,7 +890,7 @@ msgstr "Nameščanje"
 
 #: plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "Nameščeno"
 
 #: plugins/system-update//PageComponent.qml:421
 msgid "Version: "
@@ -911,7 +911,7 @@ msgstr "Vedno"
 
 #: plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "Poveril ni mogoče najti"
 
 #: plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
@@ -957,11 +957,11 @@ msgstr "Svetlost"
 
 #: plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Prilagodi samodejno"
 
 #: plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Osvetli in zatemni zaslon, da se prilagodi okolici"
 
 #: plugins/reset//EraseEverything.qml:29
 msgid ""
@@ -1171,23 +1171,23 @@ msgstr "Slabo"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "Viden"
 
 #: plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Neviden"
 
 #: plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Povezane naprave:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Poveži drugačno napravo:"
 
 #: plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Poveži drugo napravo:"
 
 #: plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1266,31 +1266,31 @@ msgstr "Programska dovoljenja"
 
 #: plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "Podrobnosti izgradnje OS-a"
 
 #: plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "Številka izgradnje OS-a"
 
 #: plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Del odtisa Ubuntu"
 
 #: plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Opis izgradnje Ubuntuja"
 
 #: plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Del odtisa naprave"
 
 #: plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Opis izgradnje naprave"
 
 #: plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "Del odtisa prilagoditve"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: plugins/about//PageComponent.qml:33
@@ -1388,87 +1388,93 @@ msgstr "Sistem"
 
 #: wizard/qml/Components//Page.qml:66
 msgid "Back"
-msgstr ""
+msgstr "Nazaj"
 
 #: wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Nastavitve telefona"
 
 #: wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"Vaš telefon je nastavljen, da samodejno poroča napaka Canonicalu. To je "
+"mogoče onemogočiti v sistemskih nastavitvah."
 
 #: wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Vaš telefon je nastavljen, da zaznava vaš položaj. To je mogoče onemogočiti "
+"v sistemskih nastavitvah."
 
 #: wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "Ni kartice SIM"
 
 #: wizard/qml/Pages//no-sim.qml:57
 msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
+msgstr "Ne skrbite, kartico SIM lahko vstavite kasneje."
 
 #: wizard/qml/Pages//no-sim.qml:59
 msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+msgstr "Za zdaj vaš telefon ne bo imel zmožnosti SMS-ov."
 
 #: wizard/qml/Pages//no-sim.qml:61
 msgid "You can find a SIM in your phone package or contact your provider."
 msgstr ""
+"SIM lahko najdete v paketu s telefonom ali pa navežite stik z vašim "
+"ponudnikom."
 
 #: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
 msgid "Skip"
-msgstr ""
+msgstr "Preskoči"
 
 #: wizard/qml/Pages//80-finished.qml:22
 msgid "That’s it!"
-msgstr ""
+msgstr "To je vse!"
 
 #: wizard/qml/Pages//80-finished.qml:39
 msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
+msgstr "Lepo vas je imeti v skupnosti Ubuntu."
 
 #: wizard/qml/Pages//80-finished.qml:41
 msgid "Enjoy your new phone."
-msgstr ""
+msgstr "Uživajte v vašem novem telefonu."
 
 #: wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Dokončaj"
 
 #: wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Poveži se z Wi-Fi-jem"
 
 #: wizard/qml/Pages//20-wifi.qml:67
 msgid "Available networks"
-msgstr ""
+msgstr "Razpoložljiva omrežja"
 
 #: wizard/qml/Pages//20-wifi.qml:81
 msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+msgstr "Poveži se z omrežjem Wi-Fi za prilagoditev vaših nastavitev."
 
 #: wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello!"
-msgstr ""
+msgstr "Pozdravljeni!"
 
 #: wizard/qml/Pages//10-welcome.qml:55
 msgid "Welcome to Ubuntu."
-msgstr ""
+msgstr "Dobrodošli v Ubuntu."
 
 #: wizard/qml/Pages//10-welcome.qml:56
 msgid "Let’s get started."
-msgstr ""
+msgstr "Pa začnimo."
 
 #: wizard/qml/Pages//10-welcome.qml:61
 msgid "Select your language"
-msgstr ""
+msgstr "Izberite jezik"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: settings.js:4
@@ -1657,7 +1663,7 @@ msgstr "posodobitve"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Na voljo so posodobitve"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: settings.js:100
