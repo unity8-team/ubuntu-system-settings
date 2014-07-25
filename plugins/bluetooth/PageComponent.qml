@@ -155,6 +155,7 @@ ItemPage {
             // Discoverability
             ListItem.Standard {
                 enabled: bluetoothActionGroup.enabled
+                showDivider: false
 
                 Rectangle {
                     color: "transparent"
