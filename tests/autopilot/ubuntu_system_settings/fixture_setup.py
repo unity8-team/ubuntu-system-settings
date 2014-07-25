@@ -32,7 +32,6 @@ class RingtoneBackup(fixtures.Fixture):
 
     def _restore_ringtone(self):
         iface = helpers.get_accounts_service_iface()
-
         iface.Set(
             'com.ubuntu.touch.AccountsService.Sound',
             'IncomingCallSound',
