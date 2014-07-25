@@ -8,6 +8,10 @@ function singleSimKeyToIndex (k) {
     }
 }
 
+function singleSimIndexToKey (i) {
+    return i === 1 ? 'gsm' : 'any';
+}
+
 function dualSimKeyToIndex (k) {
     if (k === 'gsm') {
         return 0;
