@@ -183,6 +183,61 @@ class SoundPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
+    def _get_ringtone_setting_button(self):
+        return self.wait_select_single(
+            'SingleValue', objectName='ringtoneListItem'
+        )
+
+    def get_ringtone_setting_button_current_value(self):
+        """current value of the ringtone setting button.
+
+        :return: name of the currently selected ringtone.
+
+        """
+        return self._get_ringtone_setting_button().value
+
+    @autopilot.logging.log_action(logger.info)
+    def open_ringtone_selector(self):
+        """Open the ringtone selector.
+
+        :return: The page with ringtones list.
+
+        """
+        ringtone_setting_button = self._get_ringtone_setting_button()
+        self.pointing_device.click_object(ringtone_setting_button)
+
+        root = self.get_root_instance()
+        return root.wait_select_single(SoundsList)
+
+
+class SoundsList(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    def choose_ringtone(self, name):
+        """Choose a new ringtone.
+
+        :param name: name of the ringtone to select.
+        :return: newly selected ringtone item.
+
+        """
+        list_view = self.select_single('QQuickListView', objectName='listView')
+        # When last item of a long list is preselected the list scrolls
+        # down automatically, wait for the list to scroll down before
+        # trying to do anything. -- om26er.
+        sleep(3)
+        list_view.dragging.wait_for(False)
+        list_view.moving.wait_for(False)
+        list_view.click_element('ringtone-' + name)
+
+        return self.select_single(
+            'OptionSelectorDelegate', objectName='ringtone-' + name
+        )
+
+    @autopilot.logging.log_action(logger.info)
+    def go_back_to_sound_page(self):
+        """Go back to the sound settings main page."""
+        main_window = self.get_root_instance().select_single(MainWindow)
+        main_window.go_back()
+
 
 class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 

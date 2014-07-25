@@ -43,10 +43,10 @@ class SoundTestCase(SoundBaseTestCase):
 class RingtoneSettingTestCase(SoundBaseTestCase):
 
     ringtone = 'Supreme'
-    
+
     def setUp(self):
         self.useFixture(fixture_setup.RingtoneBackup())
-        super(SoundTestCase, self).setUp() 
+        super(RingtoneSettingTestCase, self).setUp()
 
     @skipIf(platform.model() is 'Desktop', 'Phones only')
     def test_ringtone_setting_change_in_ui(self):
@@ -74,4 +74,3 @@ class RingtoneSettingTestCase(SoundBaseTestCase):
             lambda: helpers.get_current_ringtone_from_backend().endswith(
                 self.ringtone + '.ogg'), Eventually(Equals(True))
         )
-

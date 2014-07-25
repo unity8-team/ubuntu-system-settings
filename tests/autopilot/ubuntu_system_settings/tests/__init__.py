@@ -396,8 +396,7 @@ class SoundBaseTestCase(UbuntuSystemSettingsTestCase):
     """ Base class for sound settings tests"""
 
     def setUp(self):
-
-        """ Go to Sound page """
+        """Go to Sound page."""
         super(SoundBaseTestCase, self).setUp('sound')
-        self.assertThat(self.system_settings.main_view.sound_page.active,
-                        Eventually(Equals(True)))
+        self.sound_page = self.system_settings.main_view.select_single(
+            objectName='soundPage')
