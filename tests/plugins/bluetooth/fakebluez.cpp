@@ -16,36 +16,98 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "utils.h"
+#include <QDBusReply>
+#include <QDebug>
 
-namespace Utils {
+#include "fakebluez.h"
+
+namespace Bluez {
 
 FakeBluez::FakeBluez(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_dbusMock(m_dbusTestRunner)
 {
+    DBusMock::registerMetaTypes();
+
+    m_dbusMock.registerTemplate(BLUEZ_SERVICE, "bluez4",
+                                QDBusConnection::SystemBus);
+    m_dbusTestRunner.startServices();
+
+    m_bluezMock = new QDBusInterface(BLUEZ_SERVICE,
+                                     BLUEZ_MAIN_OBJECT,
+                                     BLUEZ_MOCK_IFACE,
+                                     m_dbusTestRunner.systemConnection());
 }
 
-void FakeNetwork::checkForNewVersions(QHash<QString, Update*> &apps)
+QString
+FakeBluez::addAdapter(const QString &name, const QString &system_name)
 {
-    if(apps.contains("com.ubuntu.developer.xda-app")) {
-        Update* app = apps.value("com.ubuntu.developer.xda-app");
-        QString version("0.5.2ubuntu2");
-        app->setRemoteVersion(version);
-        emit this->updatesFound();
+    QDBusReply<QString> reply = m_bluezMock->call("AddAdapter",
+                                                    name, system_name);
+
+    if (reply.isValid()) {
+        m_currentAdapter = reply.value().replace("/org/bluez/", "");
+    } else {
+        qWarning() << "Failed to add mock adapter:" << reply.error().message();
     }
+
+    return reply.isValid() ? reply.value() : QString();
 }
 
-void FakeNetwork::getResourceUrl(const QString& packagename)
+QString
+FakeBluez::addDevice(const QString& name, const QString &address)
 {
-    emit this->downloadUrlFound(packagename, "http://canonical.com");
+    QDBusReply<QString> reply = m_bluezMock->call("AddDevice",
+                                                  m_currentAdapter,
+                                                  address, name);
+
+    if (reply.isValid()) {
+        m_devices.append(reply.value());
+    } else {
+        qWarning() << "Failed to add mock device:" << reply.error().message();
+    }
+
+    return reply.isValid() ? reply.value() : QString();
 }
 
-void FakeNetwork::getClickToken(Update* app, const QString& url, const QString& authHeader)
+QVariant
+FakeBluez::getProperty(const QString &path,
+                       const QString &interface,
+                       const QString &property)
 {
-    Q_UNUSED(url);
-    Q_UNUSED(authHeader);
-    QString fakeHeader("x-click-token-header");
-    emit this->clickTokenObtained(app, fakeHeader);
+    QDBusInterface iface(BLUEZ_SERVICE, path,
+                         "org.freedesktop.DBus.Properties",
+                         m_dbusTestRunner.systemConnection());
+
+    QDBusReply<QVariant> reply = iface.call("Get", interface, property);
+
+    if (reply.isValid()) {
+        return reply.value();
+    } else {
+        qWarning() << "Error getting property from mock:"
+                   << reply.error().message();
+    }
+
+    return reply.isValid() ? reply.value() : QVariant();
+}
+
+void
+FakeBluez::setProperty(const QString &path,
+                       const QString &interface,
+                       const QString &property,
+                       const QVariant &value)
+{
+    QDBusInterface iface(BLUEZ_SERVICE, path,
+                         interface,
+                         m_dbusTestRunner.systemConnection());
+
+    QDBusReply<void> reply = iface.call("SetProperty",
+                                        property, value);
+
+    if (!reply.isValid()) {
+        qWarning() << "Error setting property on mock:"
+                   << reply.error().message();
+    }
 }
 
 }
