@@ -23,6 +23,9 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 PREFERENCE_2G = '2G only (saves battery)'
 PREFERENCE_ANY = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
+USE_OFF = "useOff"
+USE_SIM_1 = "usesim1"
+USE_SIM_2 = "usesim2"
 
 
 class CellularTestCase(CellularBaseTestCase):
@@ -311,7 +314,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def use_selector(self, label):
         obj = self.system_settings.main_view.cellular_page.select_single(
             objectName="use"
-        ).select_single('Label', text=label)
+        ).select_single(objectName=label)
         self.system_settings.main_view.scroll_to_and_click(obj)
 
     def assert_used(self, index):
@@ -326,57 +329,57 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
 
     def test_use_sim_1(self):
-        self.use_selector(LABEL_OFF)
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_OFF)
+        self.use_selector(USE_SIM_1)
         sleep(0.7)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_use_sim_2(self):
-        self.use_selector(LABEL_OFF)
-        self.use_selector(LABEL_SIM_2)
+        self.use_selector(USE_OFF)
+        self.use_selector(USE_SIM_2)
         sleep(0.7)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(True, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_turn_off_both_sims(self):
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
         sleep(0.7)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_use_gsm_for_sim_1(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_2G)
         sleep(0.7)
         self.assertEqual(
             'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_any_for_sim_1(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_ANY)
         sleep(0.7)
         self.assertEqual(
             'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_gsm_for_sim_2(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_2G)
         sleep(0.7)
         self.assertEqual(
             'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_any_for_sim_2(self):
-        self.use_selector(LABEL_SIM_2)
+        self.use_selector(USE_SIM_2)
         self.select_preference(PREFERENCE_ANY)
         sleep(1)
         self.assertEqual(
             'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_when_sim_1_comes_online_ui_is_correct(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_ANY)
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
         sleep(0.7)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_0.EmitSignal(
@@ -391,9 +394,9 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assert_selected_preference(1)
 
     def test_when_sim_2_comes_online_ui_is_correct(self):
-        self.use_selector(LABEL_SIM_2)
+        self.use_selector(USE_SIM_2)
         self.select_preference(PREFERENCE_ANY)
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
         sleep(0.7)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_1.EmitSignal(
@@ -407,25 +410,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assert_used(2)
         self.assert_selected_preference(1)
 
-    def test_both_sims_comes_online(self):
-        self.use_selector(LABEL_OFF)
-        sleep(2)
-        self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
-        self.modem_0.EmitSignal(
-            CONNMAN_IFACE,
-            'PropertyChanged',
-            'sv',
-            ['Powered', 'true'])
-
-        self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
-        self.modem_1.EmitSignal(
-            CONNMAN_IFACE,
-            'PropertyChanged',
-            'sv',
-            ['Powered', 'true'])
-        self.assert_used(1)
-        self.assert_selected_preference(0)
-
     def test_roaming_switch(self):
         roaming_switch = self.system_settings.main_view.select_single(
             objectName="dataRoamingSwitch"
@@ -434,7 +418,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertTrue(roaming_switch.get_properties()['enabled'])
 
         # click off
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
 
         # assert roaming_switch is disabled
         self.assertThat(
@@ -442,7 +426,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals(False)))
 
     def test_allow_roaming(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.assertEqual(
             False, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
         roaming_switch = self.system_settings.main_view.select_single(
@@ -455,7 +439,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_no_radio_preference(self):
         self.select_preference(PREFERENCE_ANY)
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
 
         self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', '')
         self.modem_0.EmitSignal(
@@ -469,7 +453,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals(False)))
 
     def test_radio_preference_changes(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
 
         self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', 'any')
         self.modem_0.EmitSignal(
