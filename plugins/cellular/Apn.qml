@@ -108,8 +108,8 @@ ItemPage {
         id: apnContext
         OfonoContextConnection {
             onActiveChanged: {
-                console.warn("Connection changed ")
-                // can we get the reporting object here? otherwise rebuild the lists
+                console.warn("Connection changed ");
+                buildLists();
             }
             onProvisioningFinished: {
                console.warn("Provisioned")
