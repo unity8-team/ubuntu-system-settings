@@ -204,7 +204,7 @@ ItemPage {
             }
 
             SimEditor {
-                enabled: root.state === "dualSim"
+                visible: root.state === "dualSim"
                 objectName: "simEditor"
             }
 

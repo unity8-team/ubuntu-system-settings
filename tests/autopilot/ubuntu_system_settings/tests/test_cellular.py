@@ -255,7 +255,7 @@ class CellularTestCase(CellularBaseTestCase):
         editor = self.system_settings.main_view.cellular_page.select_single(
             objectName="simEditor"
         )
-        self.assertFalse(editor.get_properties()['enabled'])
+        self.assertFalse(editor.get_properties()['visible'])
 
 
 class DualSimCellularTestCase(CellularBaseTestCase):
