@@ -497,7 +497,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertThat(manual, NotEquals(None))
 
     def test_radio_preference_changes(self):
-        sleep(20)
         self.use_selector(USE_SIM_1)
 
         self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', 'any')
