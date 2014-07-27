@@ -6,6 +6,7 @@
 # by the Free Software Foundation.
 
 import dbus
+from gi.repository import Gio, GLib
 from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
@@ -250,8 +251,11 @@ class CellularTestCase(CellularBaseTestCase):
 
         self.assert_selected_preference(2)
 
-        def test_that_sim_editor_is_hidden(self):
-            pass
+    def test_that_sim_editor_is_hidden(self):
+        editor = self.system_settings.main_view.cellular_page.select_single(
+            objectName="simEditor"
+        )
+        self.assertFalse(editor.get_properties()['enabled'])
 
 
 class DualSimCellularTestCase(CellularBaseTestCase):
@@ -324,9 +328,26 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertThat(
             obj.selectedIndex, Eventually(Equals(index)))
 
-    def use_sim(self, num):
-        """Manipulate use selector"""
+    def get_sim_name(self, num):
+        obj = self.system_settings.main_view.cellular_page.select_single(
+            objectName="simEditor"
+        ).select_single(objectName="editSim%d" % num)
+        return obj.get_properties()['text']
 
+    def rename_sim(self, num, new_name):
+        obj = self.system_settings.main_view.cellular_page.select_single(
+            objectName="simEditor"
+        ).select_single(objectName="editSim%d" % num)
+        self.system_settings.main_view.scroll_to_and_click(obj)
+        field = self.system_settings.main_view.cellular_page.select_single(
+            objectName="nameField"
+        )
+        self.system_settings.main_view.scroll_to_and_click(field)
+        self.system_settings.main_view.scroll_to_and_click(
+            field.select_single(objectName="clear_button"))
+        self.keyboard.type(new_name)
+        self.system_settings.main_view.scroll_to_and_click(
+            self.system_settings.main_view.cellular_page.select_single(objectName="doRename"))
 
     def test_use_sim_1(self):
         self.use_selector(USE_OFF)
@@ -453,6 +474,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals(False)))
 
     def test_radio_preference_changes(self):
+        sleep(20)
         self.use_selector(USE_SIM_1)
 
         self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', 'any')
@@ -464,52 +486,44 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         self.assert_selected_preference(1)
 
-    # see
-    # https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/3
-    @skip('skipped due to bug in dbusmock')
-    def test_change_op_sim_1(self):
-        self.navigate_to_carriers_page()
-        self.navigate_to_carrier_page_for_sim(1)
-        carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
-            objectName="carrierSelector"
-        )
-        manual = carriers.select_single('Label', text="my.cool.telco")
-        self.assertThat(manual, NotEquals(None))
+    def test_changing_sim1_name(self):
+        gsettings = Gio.Settings.new('com.ubuntu.touch.system-settings')
+        old_name = gsettings.get_value('sim1-name').get_string()
+        new_name = 'FOO BAR'
+        self.rename_sim(1, new_name)
+        sleep(1)
+        try:
+            self.assertEqual(new_name, gsettings.get_value('sim1-name').get_string())
+        except Exception as e:
+            raise e
+        finally:
+            self.rename_sim(1, old_name)
+            sleep(1)
 
-    # see
-    # https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/3
-    @skip('skipped due to bug in dbusmock')
-    def test_change_op_sim_2(self):
-        self.navigate_to_carriers_page()
-        self.navigate_to_carrier_page_for_sim(2)
-        carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
-            objectName="carrierSelector"
-        )
-        manual = carriers.select_single('Label', text="my.cool.telco")
-        self.assertThat(manual, NotEquals(None))
+    def test_changing_sim2_name(self):
+        gsettings = Gio.Settings.new('com.ubuntu.touch.system-settings')
+        old_name = gsettings.get_value('sim2-name').get_string()
+        new_name = 'BAR BAZ'
+        self.rename_sim(2, new_name)
+        sleep(1)
+        try:
+            self.assertEqual(new_name, gsettings.get_value('sim2-name').get_string())
+        except Exception as e:
+            raise e
+        finally:
+            self.rename_sim(2, old_name)
+            sleep(1)
 
-    # def test_two_modems(self):
-    #     sleep(9)
-    #     self.assertFalse(True)
-
-    # def test_changing_sim1_name(self):
-    #     pass
-
-    # def test_changing_sim2_name(self):
-    #     pass
-
-    # def test_changes_to_sim_names_in_gsettings_are_reflected_in_ui(self):
-    #     pass
-
-    # def test_changing_sim_name_to_empty(self):
-    #     pass
-
-    # def test_sim_name_when_no_number_or_SIMS(self):
-    #     pass
-
-    # def test_changing_sim_name_to_something_weird(self):
-    #     pass
-
-
+    def test_changes_to_sim_names_in_gsettings_are_reflected_in_ui(self):
+        gsettings = Gio.Settings.new('com.ubuntu.touch.system-settings')
+        old_name = gsettings.get_value('sim1-name')
+        new_name = GLib.Variant.new_string('BAZ QUX')
+        gsettings.set_value('sim1-name', new_name)
+        sleep(1)
+        try:
+            self.assertIn(new_name.get_string(), self.get_sim_name(1))
+        except Exception as e:
+            raise e
+        finally:
+            gsettings.set_value('sim1-name', old_name)
+            sleep(1)

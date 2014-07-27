@@ -203,9 +203,10 @@ ItemPage {
                 visible: showAllUI
             }
 
-            // SimEditor {
-            //     enabled: root.state === "dualSim"
-            // }
+            SimEditor {
+                enabled: root.state === "dualSim"
+                objectName: "simEditor"
+            }
 
         }
     }
@@ -215,15 +216,15 @@ ItemPage {
         schema.id: "com.ubuntu.touch.system-settings"
     }
 
-    // Binding {
-    //     target: sim1
-    //     property: "name"
-    //     value: ussS.sim1Name
-    // }
+    Binding {
+        target: sim1
+        property: "name"
+        value: ussS.sim1Name
+    }
 
-    // Binding {
-    //     target: sim2
-    //     property: "name"
-    //     value: ussS.sim2Name
-    // }
+    Binding {
+        target: sim2
+        property: "name"
+        value: ussS.sim2Name
+    }
 }

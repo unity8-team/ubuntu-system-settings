@@ -74,6 +74,7 @@ Column {
         ListItem.Standard {
             id: sim1Item
             text: sim1.title
+            objectName: "editSim1"
             progression: true
             onClicked: {
                 simList.state = "editingSim1";
@@ -94,6 +95,7 @@ Column {
         ListItem.Standard {
             id: sim2Item
             text: sim2.title
+            objectName: "editSim2"
             progression: true
             onClicked: {
                 simList.state = "editingSim2";
@@ -117,6 +119,7 @@ Column {
 
         TextField {
             id: nameField
+            objectName: "nameField"
             maximumLength: 30
             width: simList.width - units.gu(4)
         }
@@ -139,6 +142,7 @@ Column {
             Button {
                 id: rename
                 objectName: "doRename"
+                enabled: nameField.text
                 text: i18n.tr("OK")
                 width: (editor.width / 2) - units.gu(1)
                 action: renameAction

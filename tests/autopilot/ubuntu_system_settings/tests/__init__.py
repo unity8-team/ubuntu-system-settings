@@ -163,11 +163,8 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         )
 
     def mock_radio_settings(self, modem):
-        modem_interfaces = modem.GetProperties()['Interfaces']
-        modem_interfaces.append(RDO_IFACE)
         modem.AddProperty(
             RDO_IFACE, 'TechnologyPreference', self.technology_preference)
-        modem.SetProperty('Interfaces', modem_interfaces)
         modem.AddMethods(
             RDO_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -259,12 +256,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             self.add_sim2()
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
