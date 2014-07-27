@@ -347,7 +347,8 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             field.select_single(objectName="clear_button"))
         self.keyboard.type(new_name)
         self.system_settings.main_view.scroll_to_and_click(
-            self.system_settings.main_view.cellular_page.select_single(objectName="doRename"))
+            self.system_settings.main_view.cellular_page.select_single(
+                objectName="doRename"))
 
     def test_use_sim_1(self):
         self.use_selector(USE_OFF)
@@ -473,6 +474,28 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             self.data_preference_selector.get_properties()['enabled'],
             Eventually(Equals(False)))
 
+    # see
+    # https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/3
+    @skip('skipped due to bug in dbusmock')
+    def test_change_op_sim_1(self):
+        self.navigate_to_carriers_page()
+        self.navigate_to_carrier_page_for_sim(1)
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector, objectName="carrierSelector")
+        manual = carriers.select_single('Label', text="my.cool.telco")
+        self.assertThat(manual, NotEquals(None))
+
+    # see
+    # https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/3
+    @skip('skipped due to bug in dbusmock')
+    def test_change_op_sim_2(self):
+        self.navigate_to_carriers_page()
+        self.navigate_to_carrier_page_for_sim(2)
+        carriers = self.system_settings.main_view.choose_page.select_single(
+            toolkit_emulators.ItemSelector, objectName="carrierSelector")
+        manual = carriers.select_single('Label', text="my.cool.telco")
+        self.assertThat(manual, NotEquals(None))
+
     def test_radio_preference_changes(self):
         sleep(20)
         self.use_selector(USE_SIM_1)
@@ -493,7 +516,8 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.rename_sim(1, new_name)
         sleep(1)
         try:
-            self.assertEqual(new_name, gsettings.get_value('sim1-name').get_string())
+            self.assertEqual(
+                new_name, gsettings.get_value('sim1-name').get_string())
         except Exception as e:
             raise e
         finally:
@@ -507,7 +531,8 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.rename_sim(2, new_name)
         sleep(1)
         try:
-            self.assertEqual(new_name, gsettings.get_value('sim2-name').get_string())
+            self.assertEqual(
+                new_name, gsettings.get_value('sim2-name').get_string())
         except Exception as e:
             raise e
         finally:
