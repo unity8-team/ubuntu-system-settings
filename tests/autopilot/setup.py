@@ -18,4 +18,9 @@ setuptools.setup(
     url='https://launchpad.net/ubuntu-system-settings',
     license='GPLv3',
     packages=setuptools.find_packages(),
+    package_dir={
+        'ubuntu_system_settings': './ubuntu_system_settings'},
+    package_data={
+        'ubuntu_system_settings': ['background_images/*.jpg'],
+    }
 )

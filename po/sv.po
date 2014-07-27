@@ -7,296 +7,190 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: Josef Andersson <josef.andersson@fripost.org>\n"
-"POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-19 16:02+0000\n"
+"POT-Creation-Date: 2014-07-26 19:47+0100\n"
+"PO-Revision-Date: 2014-07-24 13:56+0000\n"
 "Last-Translator: Josef Andersson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se.>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-20 06:17+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-07-27 06:34+0000\n"
+"X-Generator: Launchpad (build 17131)\n"
 "Language: sv\n"
 
-#: plugins/sound//SoundsList.qml:68
-msgid "Stop playing"
-msgstr "Stoppa uppspelning"
+#: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
+msgid "Other network"
+msgstr "Övriga nätverk"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: plugins/sound//PageComponent.qml:36
-#: settings.js:2
-msgid "Sound"
-msgstr "Ljud"
+#: ../plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr "Nätverksnamn"
 
-#: plugins/sound//PageComponent.qml:68
-msgid "Phone calls:"
-msgstr "Telefonsamtal:"
+#: ../plugins/wifi//OtherNetwork.qml:66
+msgid "Security"
+msgstr "Säkerhet"
 
-#: plugins/sound//PageComponent.qml:72
-#: plugins/sound//PageComponent.qml:78
-msgid "Ringtone"
-msgstr "Ringsignal"
+#: ../plugins/wifi//OtherNetwork.qml:67
+#: ../plugins/security-privacy//PhoneLocking.qml:40
+#: ../plugins/bluetooth//PageComponent.qml:105
+#: ../plugins/bluetooth//PageComponent.qml:256
+#: ../plugins/bluetooth//PageComponent.qml:264
+msgid "None"
+msgstr "Ingen"
 
-#: plugins/sound//PageComponent.qml:89
-msgid "Vibrate when ringing"
-msgstr "Vibrera vid ringsignal"
+#: ../plugins/wifi//OtherNetwork.qml:68
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 Personal"
 
-#: plugins/sound//PageComponent.qml:97
-#: plugins/sound//PageComponent.qml:130
-msgid "Vibrate in Silent Mode"
-msgstr "Vibrera i Tyst läge"
+#: ../plugins/wifi//OtherNetwork.qml:69
+msgid "WEP"
+msgstr "WEP"
 
-#: plugins/sound//PageComponent.qml:102
-msgid "Messages:"
-msgstr "Meddelanden:"
+#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
+msgid "Password"
+msgstr "Lösenord"
 
-#: plugins/sound//PageComponent.qml:106
-#: plugins/sound//PageComponent.qml:112
-msgid "Message received"
-msgstr "Meddelande mottaget"
+#: ../plugins/wifi//OtherNetwork.qml:89
+msgid "Password visible"
+msgstr "Synligt lösenord"
 
-#: plugins/sound//PageComponent.qml:122
-msgid "Vibrate with message sound"
-msgstr "Vibrera med meddelandeljud"
-
-#: plugins/sound//PageComponent.qml:135
-msgid "Other sounds:"
-msgstr "Övriga ljud:"
-
-#: plugins/sound//PageComponent.qml:139
-#: plugins/language//PageComponent.qml:160
-msgid "Keyboard sound"
-msgstr "Tangentbordsljud"
-
-#: plugins/sound//PageComponent.qml:153
-msgid "Lock sound"
-msgstr "Låsljud"
-
-#: plugins/sound//SilentModeWarning.qml:30
-msgid "The phone is in Silent Mode."
-msgstr "Telefonen är i Tyst läge."
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: plugins/time-date//PageComponent.qml:29
-#: settings.js:8
-msgid "Time & Date"
-msgstr "Tid & Datum"
-
-#: plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "Tidszon:"
-
-#: plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "Ställ in tid och datum:"
-
-#: plugins/time-date//PageComponent.qml:69
-#: plugins/time-date//ChooseTimeZone.qml:47
-#: plugins/cellular//PageComponent.qml:122
-msgid "Automatically"
-msgstr "Automatiskt"
-
-#: plugins/time-date//PageComponent.qml:69
-#: plugins/time-date//ChooseTimeZone.qml:47
-#: plugins/cellular//PageComponent.qml:122
-msgid "Manually"
-msgstr "Manuellt"
-
-#: plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "Ställ in tid & datum"
-
-#: plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "Tid"
-
-#: plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "Timme"
-
-#: plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "Minut"
-
-#: plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "Sekund"
-
-#: plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "Datum"
-
-#: plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "Dag"
-
-#: plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "Månad"
-
-#: plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "År"
-
-#: plugins/time-date//TimePicker.qml:173
-#: plugins/security-privacy//LockSecurity.qml:310
-#: plugins/language//DisplayLanguage.qml:94
-#: plugins/wifi//OtherNetwork.qml:112
-#: plugins/phone//CallForwarding.qml:113
-#: plugins/reset//EraseEverything.qml:36
-#: plugins/reset//ResetAllSettings.qml:36
-#: plugins/reset//ResetLauncherHome.qml:40
-#: plugins/background//Preview.qml:96
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/security-privacy//LockSecurity.qml:310
+#: ../plugins/language//DisplayLanguage.qml:94
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/background//Preview.qml:97
+#: ../plugins/phone//CallForwarding.qml:136
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/reset//EraseEverything.qml:36
+#: ../plugins/reset//ResetAllSettings.qml:36
+#: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: plugins/time-date//TimePicker.qml:182
-#: plugins/phone//CallForwarding.qml:113
-#: plugins/background//Preview.qml:102
-msgid "Set"
-msgstr "Ange"
+#: ../plugins/wifi//OtherNetwork.qml:121
+msgid "Connect"
+msgstr "Anslut"
 
-#: plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "Tidszon"
+#: ../plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:114
+msgid "Previous networks"
+msgstr "Tidigare nätverk"
 
-#: plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "Ange tidszon:"
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr "Nätverksdetaljer"
 
-#: plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "Ange din aktuella plats."
+#: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:263
+msgid "Name"
+msgstr "Namn"
 
-#: plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "Ingen matchande plats"
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr "Senast ansluten"
 
-#: plugins/security-privacy//LockSecurity.qml:30
-#: plugins/security-privacy//PhoneLocking.qml:44
-msgid "Lock security"
-msgstr "Låssäkerhet"
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/about//PageComponent.qml:149
+#: ../plugins/battery//SleepValues.qml:96
+#: ../plugins/battery//PageComponent.qml:293
+#: ../plugins/battery//PageComponent.qml:302
+#: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/system-update//PageComponent.qml:449
+msgid "Never"
+msgstr "Aldrig"
 
-#: plugins/security-privacy//LockSecurity.qml:78
-msgid "Change passcode"
-msgstr "Ändra kod"
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr "Visa lösenord"
 
-#: plugins/security-privacy//LockSecurity.qml:80
-msgid "Change passphrase"
-msgstr "Ändra lösenfras"
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr "Glöm nätverk"
 
-#: plugins/security-privacy//LockSecurity.qml:87
-msgid "Switch to swipe"
-msgstr "Byt till gest"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/wifi//PageComponent.qml:26
+#: ../plugins/battery//PageComponent.qml:312
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:2
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
 
-#: plugins/security-privacy//LockSecurity.qml:89
-msgid "Switch to passcode"
-msgstr "Byt till kod"
+#: ../plugins/security-privacy//PhoneLocking.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:76
+msgid "Phone locking"
+msgstr "Telefonlås"
 
-#: plugins/security-privacy//LockSecurity.qml:91
-msgid "Switch to passphrase"
-msgstr "Byt till lösenfras"
+#: ../plugins/security-privacy//PhoneLocking.qml:41
+msgid "Passcode"
+msgstr "Kod"
 
-#: plugins/security-privacy//LockSecurity.qml:100
-msgid "Existing passcode"
-msgstr "Befintlig kod"
-
-#: plugins/security-privacy//LockSecurity.qml:102
-msgid "Existing passphrase"
-msgstr "Befintlig lösenfras"
-
-#: plugins/security-privacy//LockSecurity.qml:150
-msgid "Incorrect passcode. Try again."
-msgstr "Ogiltig kod. Prova igen."
-
-#: plugins/security-privacy//LockSecurity.qml:153
-msgid "Incorrect passphrase. Try again."
-msgstr "Ogiltig lösenfras. Prova igen."
-
-#: plugins/security-privacy//LockSecurity.qml:166
-msgid "Choose passcode"
-msgstr "Välj kod"
-
-#: plugins/security-privacy//LockSecurity.qml:168
-msgid "Choose passphrase"
-msgstr "Välj lösenfras"
-
-#: plugins/security-privacy//LockSecurity.qml:212
-msgid "Confirm passcode"
-msgstr "Bekräfta kod"
-
-#: plugins/security-privacy//LockSecurity.qml:214
-msgid "Confirm passphrase"
-msgstr "Bekräfta lösenfras"
-
-#: plugins/security-privacy//LockSecurity.qml:256
-msgid "Those passcodes don't match. Try again."
-msgstr "Koderna stämmer inte med varandra. Prova igen."
-
-#: plugins/security-privacy//LockSecurity.qml:259
-msgid "Those passphrases don't match. Try again."
-msgstr "Lösenfraserna stämmer inte med varandra. Prova igen."
-
-#: plugins/security-privacy//LockSecurity.qml:273
-msgid "Unset"
-msgstr "Avaktivera"
-
-#: plugins/security-privacy//LockSecurity.qml:274
-#: wizard/qml/Pages//30-location.qml:48
-#: wizard/qml/Pages//20-wifi.qml:168 ../wizard/qml/Pages//10-welcome.qml:78
-msgid "Continue"
-msgstr "Fortsätt"
-
-#: plugins/security-privacy//LockSecurity.qml:326
-msgid "Unlock the phone using:"
-msgstr "Lås upp telefonen med:"
-
-#: plugins/security-privacy//LockSecurity.qml:330
-msgid "Swipe (no security)"
-msgstr "Gest (ingen säkerhet)"
-
-#: plugins/security-privacy//LockSecurity.qml:331
-msgid "4-digit passcode"
-msgstr "fyrsiffrig kod"
-
-#: plugins/security-privacy//LockSecurity.qml:332
-#: plugins/security-privacy//PhoneLocking.qml:42
+#: ../plugins/security-privacy//PhoneLocking.qml:42
+#: ../plugins/security-privacy//LockSecurity.qml:332
 msgid "Passphrase"
 msgstr "Lösenfras"
 
-#: plugins/security-privacy//LockSecurity.qml:333
-msgid "Swipe (no security)… "
-msgstr "Gest (ingen säkerhet)… "
+#: ../plugins/security-privacy//PhoneLocking.qml:44
+#: ../plugins/security-privacy//LockSecurity.qml:30
+#: ../plugins/about//DevMode.qml:102
+msgid "Lock security"
+msgstr "Låssäkerhet"
 
-#: plugins/security-privacy//LockSecurity.qml:334
-msgid "4-digit passcode…"
-msgstr "fyrsiffrig kod…"
+#: ../plugins/security-privacy//PhoneLocking.qml:62
+#: ../plugins/battery//PageComponent.qml:284
+msgid "Lock when idle"
+msgstr "Lås om inaktiv"
 
-#: plugins/security-privacy//LockSecurity.qml:335
-msgid "Passphrase…"
-msgstr "Lösenfras…"
+#: ../plugins/security-privacy//PhoneLocking.qml:63
+#: ../plugins/battery//PageComponent.qml:284
+msgid "Sleep when idle"
+msgstr "Vänteläge om inaktiv"
 
-#: plugins/security-privacy//LockSecurity.qml:376
-msgid "Change passcode…"
-msgstr "Ändra kod…"
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:65
+#: ../plugins/security-privacy//PageComponent.qml:78
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minut"
+msgstr[1] "%1 minuter"
 
-#: plugins/security-privacy//LockSecurity.qml:377
-msgid "Change passphrase…"
-msgstr "Ändra lösenfras…"
+#: ../plugins/security-privacy//PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr "Vänteläge låser omedelbart"
 
-#: plugins/security-privacy//Location.qml:30
+#: ../plugins/security-privacy//Dash.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:125
+msgid "Dash search"
+msgstr "Sök i Dash"
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "Returnera resultat från:"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:52
+#: ../plugins/security-privacy//PageComponent.qml:128
+msgid "Phone only"
+msgstr "Endast telefon"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:50
+#: ../plugins/security-privacy//PageComponent.qml:127
+msgid "Phone and Internet"
+msgstr "Telefon och Internet"
+
+#: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
 msgstr "Plats"
 
-#: plugins/security-privacy//Location.qml:48
+#: ../plugins/security-privacy//Location.qml:48
 msgid "Location detection"
 msgstr "Platsbestämning"
 
-#: plugins/security-privacy//Location.qml:70
+#: ../plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
@@ -304,7 +198,7 @@ msgstr ""
 "Använd GPS för att bestämma din ungefärliga plats. När avstängd, stängs GPS "
 "av för att spara batteri."
 
-#: plugins/security-privacy//Location.qml:72
+#: ../plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
@@ -312,7 +206,7 @@ msgstr ""
 "Använder wi-fi och GPS för att bestämma din ungefärliga plats. Att slå av "
 "platsbestämning sparar batteri."
 
-#: plugins/security-privacy//Location.qml:74
+#: ../plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
@@ -320,7 +214,7 @@ msgstr ""
 "Använder wi-fi (avstängd) och GPS för att bestämma din ungefärliga plats. "
 "Att slå av platsbestämning sparar batteri."
 
-#: plugins/security-privacy//Location.qml:76
+#: ../plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
@@ -328,7 +222,7 @@ msgstr ""
 "Använder wi-fi, mastlokalisering och GPS för att bestämma din ungefärliga "
 "plats. Att slå av platsbestämning sparar batteri."
 
-#: plugins/security-privacy//Location.qml:78
+#: ../plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
@@ -337,7 +231,7 @@ msgstr ""
 "GPS för att bestämma din ungefärliga plats. Att slå av platsbestämning "
 "sparar batteri."
 
-#: plugins/security-privacy//Location.qml:80
+#: ../plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
@@ -345,7 +239,7 @@ msgstr ""
 "Använder wi-fi (för tillfället avstängd), mastlokalisering och GPS för att "
 "bestämma din ungefärliga plats. Att slå av platsbestämning sparar batteri."
 
-#: plugins/security-privacy//Location.qml:82
+#: ../plugins/security-privacy//Location.qml:82
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
@@ -355,311 +249,389 @@ msgstr ""
 "anslutning till mast) och GPS för att bestämma din ungefärliga plats. Att "
 "slå av platsbestämning sparar batteri."
 
-#: plugins/security-privacy//Location.qml:89
+#: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr "Tlllåt platsåtkomst:"
+msgstr "Tillåt platsåtkomst:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:78
+msgid "Change passcode"
+msgstr "Ändra kod"
+
+#: ../plugins/security-privacy//LockSecurity.qml:80
+msgid "Change passphrase"
+msgstr "Ändra lösenfras"
+
+#: ../plugins/security-privacy//LockSecurity.qml:87
+msgid "Switch to swipe"
+msgstr "Byt till gest"
+
+#: ../plugins/security-privacy//LockSecurity.qml:89
+msgid "Switch to passcode"
+msgstr "Byt till kod"
+
+#: ../plugins/security-privacy//LockSecurity.qml:91
+msgid "Switch to passphrase"
+msgstr "Byt till lösenfras"
+
+#: ../plugins/security-privacy//LockSecurity.qml:100
+msgid "Existing passcode"
+msgstr "Befintlig kod"
+
+#: ../plugins/security-privacy//LockSecurity.qml:102
+msgid "Existing passphrase"
+msgstr "Befintlig lösenfras"
+
+#: ../plugins/security-privacy//LockSecurity.qml:150
+msgid "Incorrect passcode. Try again."
+msgstr "Ogiltig kod. Prova igen."
+
+#: ../plugins/security-privacy//LockSecurity.qml:153
+msgid "Incorrect passphrase. Try again."
+msgstr "Ogiltig lösenfras. Prova igen."
+
+#: ../plugins/security-privacy//LockSecurity.qml:166
+msgid "Choose passcode"
+msgstr "Välj kod"
+
+#: ../plugins/security-privacy//LockSecurity.qml:168
+msgid "Choose passphrase"
+msgstr "Välj lösenfras"
+
+#: ../plugins/security-privacy//LockSecurity.qml:212
+msgid "Confirm passcode"
+msgstr "Bekräfta kod"
+
+#: ../plugins/security-privacy//LockSecurity.qml:214
+msgid "Confirm passphrase"
+msgstr "Bekräfta lösenfras"
+
+#: ../plugins/security-privacy//LockSecurity.qml:256
+msgid "Those passcodes don't match. Try again."
+msgstr "Koderna stämmer inte med varandra. Prova igen."
+
+#: ../plugins/security-privacy//LockSecurity.qml:259
+msgid "Those passphrases don't match. Try again."
+msgstr "Lösenfraserna stämmer inte med varandra. Prova igen."
+
+#: ../plugins/security-privacy//LockSecurity.qml:273
+msgid "Unset"
+msgstr "Avaktivera"
+
+#: ../plugins/security-privacy//LockSecurity.qml:274
+#: ../wizard/qml/Pages//20-wifi.qml:153
+#: ../wizard/qml/Pages//30-location.qml:48
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: ../plugins/security-privacy//LockSecurity.qml:326
+msgid "Unlock the phone using:"
+msgstr "Lås upp telefonen med:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:330
+msgid "Swipe (no security)"
+msgstr "Gest (ingen säkerhet)"
+
+#: ../plugins/security-privacy//LockSecurity.qml:331
+msgid "4-digit passcode"
+msgstr "fyrsiffrig kod"
+
+#: ../plugins/security-privacy//LockSecurity.qml:333
+msgid "Swipe (no security)… "
+msgstr "Gest (ingen säkerhet)… "
+
+#: ../plugins/security-privacy//LockSecurity.qml:334
+msgid "4-digit passcode…"
+msgstr "fyrsiffrig kod…"
+
+#: ../plugins/security-privacy//LockSecurity.qml:335
+msgid "Passphrase…"
+msgstr "Lösenfras…"
+
+#: ../plugins/security-privacy//LockSecurity.qml:376
+msgid "Change passcode…"
+msgstr "Ändra kod…"
+
+#: ../plugins/security-privacy//LockSecurity.qml:377
+msgid "Change passphrase…"
+msgstr "Ändra lösenfras…"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: plugins/security-privacy//PageComponent.qml:33
-#: settings.js:28
+#: ../plugins/security-privacy//PageComponent.qml:33
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:22
 msgid "Security & Privacy"
 msgstr "Säkerhet & integritet"
 
-#: plugins/security-privacy//PageComponent.qml:50
-#: plugins/security-privacy//PageComponent.qml:127
-#: plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "Telefon och Internet"
-
-#: plugins/security-privacy//PageComponent.qml:52
-#: plugins/security-privacy//PageComponent.qml:128
-#: plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "Endast telefon"
-
-#: plugins/security-privacy//PageComponent.qml:71
+#: ../plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
 msgstr "Säkerhet:"
 
-#: plugins/security-privacy//PageComponent.qml:76
-#: plugins/security-privacy//PhoneLocking.qml:29
-msgid "Phone locking"
-msgstr "Telefonlås"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: plugins/security-privacy//PageComponent.qml:78
-#: plugins/security-privacy//PhoneLocking.qml:65
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 minut"
-msgstr[1] "%1 minuter"
-
-#: plugins/security-privacy//PageComponent.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:87
 msgid "SIM PIN"
 msgstr "SIM-PIN"
 
-#: plugins/security-privacy//PageComponent.qml:93
+#: ../plugins/security-privacy//PageComponent.qml:93
 msgid "Privacy:"
 msgstr "Integritet:"
 
-#: plugins/security-privacy//PageComponent.qml:97
+#: ../plugins/security-privacy//PageComponent.qml:97
 msgid "Stats on welcome screen"
 msgstr "Statistik på välkomstskärmen"
 
-#: plugins/security-privacy//PageComponent.qml:110
+#: ../plugins/security-privacy//PageComponent.qml:110
 msgid "Messages on welcome screen"
 msgstr "Meddelanden på välkomstskärmen"
 
-#: plugins/security-privacy//PageComponent.qml:125
-#: plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "Sök i Dash"
-
-#: plugins/security-privacy//PageComponent.qml:143
+#: ../plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
 msgstr "Platsåtkomst"
 
-#: plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//PageComponent.qml:151
 msgid "Other app access"
 msgstr "Övrig programåtkomst"
 
-#: plugins/security-privacy//PageComponent.qml:156
+#: ../plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
 msgstr "Diagnostik"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:161
 msgid "Sent"
 msgstr "Skickat"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: plugins/security-privacy//PageComponent.qml:164
+#: ../plugins/security-privacy//PageComponent.qml:164
 msgid "Not sent"
 msgstr "Inte skickat"
 
-#: plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "Returnera resultat från:"
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
+msgid "Software licenses"
+msgstr "Programvarulicenser"
 
-#: plugins/security-privacy//PhoneLocking.qml:40
-#: plugins/wifi//OtherNetwork.qml:67
-#: plugins/bluetooth//PageComponent.qml:105
-#: plugins/bluetooth//PageComponent.qml:256
-#: plugins/bluetooth//PageComponent.qml:264
-msgid "None"
-msgstr "Ingen"
+#: ../plugins/about//Version.qml:35
+msgid "OS Build Details"
+msgstr "OS-byggdetaljer"
 
-#: plugins/security-privacy//PhoneLocking.qml:41
-msgid "Passcode"
-msgstr "Kod"
+#: ../plugins/about//Version.qml:53
+msgid "OS build number"
+msgstr "OS-byggnummer"
 
-#: plugins/security-privacy//PhoneLocking.qml:62
-#: plugins/battery//PageComponent.qml:240
-msgid "Lock when idle"
-msgstr "Lås om inaktiv"
+#: ../plugins/about//Version.qml:59
+msgid "Ubuntu Image part"
+msgstr "Ubuntu-avbildningsdel"
 
-#: plugins/security-privacy//PhoneLocking.qml:63
-#: plugins/battery//PageComponent.qml:240
-msgid "Sleep when idle"
-msgstr "Vänteläge om inaktiv"
+#: ../plugins/about//Version.qml:85
+msgid "Ubuntu build description"
+msgstr "Ubunut-byggbeskrivning"
 
-#: plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
-msgstr "Vänteläge låser omedelbart"
+#: ../plugins/about//Version.qml:100
+msgid "Device Image part"
+msgstr "Enhetsavbildningsdel"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: plugins/language//PageComponent.qml:32
-#: settings.js:44
-msgid "Language & Text"
-msgstr "Språk & text"
+#: ../plugins/about//Version.qml:126
+msgid "Device build description"
+msgstr "Byggbeskrivning för enhet"
 
-#: plugins/language//PageComponent.qml:71
-msgid "Display language…"
-msgstr "Visningsspråk…"
+#: ../plugins/about//Version.qml:141
+msgid "Customization Image part"
+msgstr "Anpassad avbildningdel"
 
-#: plugins/language//PageComponent.qml:85
-#: plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "Tangentbordslayouter…"
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
+msgid "Storage"
+msgstr "Lagring"
 
-#: plugins/language//PageComponent.qml:100
-#: plugins/language//PageComponent.qml:110
-#: plugins/language//SpellChecking.qml:27
-#: plugins/language//SpellChecking.qml:36
-msgid "Spell checking"
-msgstr "Stavningskontroll"
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "Använd av Ubuntu"
 
-#: plugins/language//PageComponent.qml:120
-msgid "Auto completion"
-msgstr "Autofyll"
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr "Filmer"
 
-#: plugins/language//PageComponent.qml:130
-msgid "Word suggestions"
-msgstr "Ordförslag"
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr "Ljud"
 
-#: plugins/language//PageComponent.qml:143
-msgid "Auto capitalization"
-msgstr "Automatiska versaler"
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr "Bilder"
 
-#: plugins/language//PageComponent.qml:153
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
-"Slår på Skift för att göra versal av första bokstaven i varje mening."
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr "Övriga filer"
 
-#: plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "Aktuella rättstavningspråk:"
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "Använd av program"
 
-#: plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "Alla tillgängliga språk:"
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
+msgstr "Total storlek"
 
-#: plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr "Visningsspråk"
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "Ledigt utrymme"
 
-#: plugins/language//DisplayLanguage.qml:114
-msgid "Confirm"
-msgstr "Bekräfta"
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr "Efter namn"
 
-#: plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "Aktuella layouter:"
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr "Efter storlek"
 
-#: plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "Alla tillgängliga layouter:"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: plugins/battery//PageComponent.qml:34
-#: settings.js:54
-msgid "Battery"
-msgstr "Batteri"
-
-#. TRANSLATORS: %1 is the number of seconds
-#: plugins/battery//PageComponent.qml:46
-#, qt-format
-msgid "%1 second ago"
-msgid_plural "%1 seconds ago"
-msgstr[0] "för %1 sekund sedan"
-msgstr[1] "för %1 sekunder sedan"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: plugins/battery//PageComponent.qml:49
-#, qt-format
-msgid "%1 minute ago"
-msgid_plural "%1 minutes ago"
-msgstr[0] "för %1 minut sedan"
-msgstr[1] "för %1 minuter sedan"
-
-#. TRANSLATORS: %1 is the number of hours
-#: plugins/battery//PageComponent.qml:52
-#, qt-format
-msgid "%1 hour ago"
-msgid_plural "%1 hours ago"
-msgstr[0] "för %1 timme sedan"
-msgstr[1] "för %1 timmar sedan"
-
-#. TRANSLATORS: %1 is the number of days
-#: plugins/battery//PageComponent.qml:55
-#, qt-format
-msgid "%1 day ago"
-msgid_plural "%1 days ago"
-msgstr[0] "för %1 dag sedan"
-msgstr[1] "för %1 dagar sedan"
-
-#: plugins/battery//PageComponent.qml:75
-msgid "Charging now"
-msgstr "Laddar nu"
-
-#: plugins/battery//PageComponent.qml:80
-msgid "Last full charge"
-msgstr "Senast fulladdad"
-
-#: plugins/battery//PageComponent.qml:85
-msgid "Fully charged"
-msgstr "Fulladdad"
-
-#: plugins/battery//PageComponent.qml:111
-msgid "Charge level"
-msgstr "Laddnivå"
-
-#: plugins/battery//PageComponent.qml:117
-#: plugins/battery//PageComponent.qml:224
-#: plugins/cellular//PageComponent.qml:129
-#: plugins/about//Storage.qml:204
+#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:117
+#: ../plugins/battery//PageComponent.qml:268
+#: ../plugins/cellular//PageChooseCarriers.qml:50
+#: ../plugins/cellular//PageChooseCarriers.qml:66
+#: ../plugins/cellular//PageComponent.qml:179
 msgid "N/A"
 msgstr "Ej tillämplig"
 
-#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: plugins/battery//PageComponent.qml:120
-#, qt-format
-msgid "%1%"
-msgstr "%1%"
+#: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
+msgid "Developer Mode"
+msgstr ""
 
-#: plugins/battery//PageComponent.qml:229
-msgid "Ways to reduce battery use:"
-msgstr "Sätt att minska batterianvändningen:"
+#: ../plugins/about//DevMode.qml:68
+msgid "In Developer Mode, anyone can access, "
+msgstr ""
+
+#: ../plugins/about//DevMode.qml:95
+msgid "You need a passcode or passphrase set "
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:30
+msgid "About this phone"
+msgstr "Om den här telefonen"
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:107
+msgid "Serial"
+msgstr "Serienummer"
+
+#: ../plugins/about//PageComponent.qml:133
+msgid "Software:"
+msgstr "Programvara:"
+
+#: ../plugins/about//PageComponent.qml:138
+msgid "OS"
+msgstr "OS"
+
+#: ../plugins/about//PageComponent.qml:147
+msgid "Last updated"
+msgstr "Senast uppdaterad"
+
+#: ../plugins/about//PageComponent.qml:155
+msgid "Check for updates"
+msgstr "Sök efter updateringar"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Legal:"
+msgstr "Juridisk information:"
+
+#: ../plugins/about//PageComponent.qml:177
+msgid "Regulatory info"
+msgstr "Regleringsinfo"
+
+#: ../plugins/about//PageComponent.qml:185
+msgid "Developer mode"
+msgstr ""
+
+#: ../plugins/sound//SoundsList.qml:59
+msgid "Stop playing"
+msgstr "Stoppa uppspelning"
+
+#: ../plugins/sound//SilentModeWarning.qml:30
+msgid "The phone is in Silent Mode."
+msgstr "Telefonen är i tyst läge."
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:38
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:38
+msgid "Sound"
+msgstr "Ljud"
+
+#: ../plugins/sound//PageComponent.qml:73
+msgid "Silent Mode"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:79
+msgid "Ringer:"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:111
+msgid "Phone calls:"
+msgstr "Telefonsamtal:"
+
+#: ../plugins/sound//PageComponent.qml:115
+#: ../plugins/sound//PageComponent.qml:121
+msgid "Ringtone"
+msgstr "Ringsignal"
+
+#: ../plugins/sound//PageComponent.qml:132
+msgid "Vibrate when ringing"
+msgstr "Vibrera vid ringsignal"
+
+#: ../plugins/sound//PageComponent.qml:140
+#: ../plugins/sound//PageComponent.qml:173
+msgid "Vibrate in Silent Mode"
+msgstr "Vibrera i tyst läge"
+
+#: ../plugins/sound//PageComponent.qml:145
+msgid "Messages:"
+msgstr "Meddelanden:"
+
+#: ../plugins/sound//PageComponent.qml:149
+#: ../plugins/sound//PageComponent.qml:155
+msgid "Message received"
+msgstr "Meddelande mottaget"
+
+#: ../plugins/sound//PageComponent.qml:165
+msgid "Vibrate with message sound"
+msgstr "Vibrera med meddelandeljud"
+
+#: ../plugins/sound//PageComponent.qml:178
+msgid "Other sounds:"
+msgstr "Övriga ljud:"
+
+#: ../plugins/sound//PageComponent.qml:182
+#: ../plugins/language//PageComponent.qml:161
+msgid "Keyboard sound"
+msgstr "Tangentbordsljud"
+
+#: ../plugins/sound//PageComponent.qml:196
+msgid "Lock sound"
+msgstr "Låsljud"
+
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "Lås telefonen när den inte används:"
+
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "Försätt telefonen i vänteläge när den inte används:"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: plugins/battery//PageComponent.qml:246
-#: plugins/battery//PageComponent.qml:255
-#: plugins/battery//SleepValues.qml:77
-#: plugins/battery//SleepValues.qml:81
-#: plugins/battery//SleepValues.qml:85
-#: plugins/battery//SleepValues.qml:89
-#: plugins/battery//SleepValues.qml:93
+#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:81
+#: ../plugins/battery//SleepValues.qml:85
+#: ../plugins/battery//SleepValues.qml:89
+#: ../plugins/battery//SleepValues.qml:93
+#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/battery//PageComponent.qml:299
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
 msgstr[0] "Efter %1 minut"
 msgstr[1] "Efter %1 minuter"
 
-#: plugins/battery//PageComponent.qml:249
-#: plugins/battery//PageComponent.qml:258
-#: plugins/battery//SleepValues.qml:96
-#: plugins/wifi//NetworkDetails.qml:56
-#: plugins/system-update//PageComponent.qml:449
-#: plugins/system-update//Configuration.qml:53
-#: plugins/about//PageComponent.qml:128
-msgid "Never"
-msgstr "Aldrig"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: plugins/battery//PageComponent.qml:268
-#: plugins/wifi//PageComponent.qml:26
-#: settings.js:60
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: plugins/battery//PageComponent.qml:298
-#: plugins/bluetooth//PageComponent.qml:111
-#: plugins/bluetooth//PageComponent.qml:130
-#: settings.js:126
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: plugins/battery//PageComponent.qml:329
-msgid "GPS"
-msgstr "GPS"
-
-#: plugins/battery//PageComponent.qml:348
-msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "Precis platsbestämning kräver GPS och/eller Wi-Fi."
-
-#: plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr "Lås telefonen när den inte används:"
-
-#: plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "Försätt telefonen i vänteläge när den inte används:"
-
-#: plugins/battery//SleepValues.qml:107
+#: ../plugins/battery//SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
@@ -667,124 +639,376 @@ msgstr ""
 "Kortare tider ger mer säkerhet. Telefonen kommer inte att låsas under samtal "
 "eller videouppspelning."
 
-#: plugins/battery//SleepValues.qml:107
+#: ../plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 "Telefon kommer inte att försättas i vänteläge under samtal eller "
 "videouppspelning."
 
-#: plugins/wifi//PageComponent.qml:114
-#: plugins/wifi//PreviousNetworks.qml:26
-msgid "Previous networks"
-msgstr "Tidigare nätverk"
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:34
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:44
+msgid "Battery"
+msgstr "Batteri"
 
-#: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
-msgstr "Övriga nätverk"
-
-#: plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr "Nätverksnamn"
-
-#: plugins/wifi//OtherNetwork.qml:66
-msgid "Security"
-msgstr "Säkerhet"
-
-#: plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 Personal"
-
-#: plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr "WEP"
-
-#: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
-msgid "Password"
-msgstr "Lösenord"
-
-#: plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
-msgstr "Synligt lösenord"
-
-#: plugins/wifi//OtherNetwork.qml:121
-msgid "Connect"
-msgstr "Anslut"
-
-#: plugins/wifi//NetworkDetails.qml:37
-msgid "Network details"
-msgstr "Nätverksdetaljer"
-
-#: plugins/wifi//NetworkDetails.qml:44
-#: plugins/bluetooth//PageComponent.qml:263
-msgid "Name"
-msgstr "Namn"
-
-#: plugins/wifi//NetworkDetails.qml:52
-msgid "Last connected"
-msgstr "Senast ansluten"
-
-#: plugins/wifi//NetworkDetails.qml:74
-msgid "Show password"
-msgstr "Visa lösenord"
-
-#: plugins/wifi//NetworkDetails.qml:84
-msgid "Forget network"
-msgstr "Glöm nätverk"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery//PageComponent.qml:46
 #, qt-format
-msgid "%1 Services"
-msgstr "%1-tjänster"
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "för %1 sekund sedan"
+msgstr[1] "för %1 sekunder sedan"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:49
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "för %1 minut sedan"
+msgstr[1] "för %1 minuter sedan"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery//PageComponent.qml:52
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "för %1 timme sedan"
+msgstr[1] "för %1 timmar sedan"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery//PageComponent.qml:55
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "för %1 dag sedan"
+msgstr[1] "för %1 dagar sedan"
+
+#: ../plugins/battery//PageComponent.qml:75
+msgid "Charging now"
+msgstr "Laddar nu"
+
+#: ../plugins/battery//PageComponent.qml:80
+msgid "Last full charge"
+msgstr "Senast fulladdad"
+
+#: ../plugins/battery//PageComponent.qml:85
+msgid "Fully charged"
+msgstr "Fulladdat"
+
+#: ../plugins/battery//PageComponent.qml:111
+msgid "Charge level"
+msgstr "Laddnivå"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery//PageComponent.qml:120
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../plugins/battery//PageComponent.qml:195
+#: ../plugins/battery//PageComponent.qml:197
+msgid "Yesterday"
+msgstr ""
+
+#: ../plugins/battery//PageComponent.qml:203
+#: ../plugins/battery//PageComponent.qml:205
+msgid "Today"
+msgstr ""
+
+#: ../plugins/battery//PageComponent.qml:273
+msgid "Ways to reduce battery use:"
+msgstr "Sätt att minska batterianvändningen:"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:342
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:130
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:74
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../plugins/battery//PageComponent.qml:373
+msgid "GPS"
+msgstr "GPS"
+
+#: ../plugins/battery//PageComponent.qml:392
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "Precis platsbestämning kräver GPS och/eller Wi-Fi."
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:50
+msgid "Brightness"
+msgstr "Ljussstyrka"
+
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "Justera automatiskt"
+
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings"
+msgstr "Ökar och dämpar skärmens ljusstyrka utifrån omgivningen"
+
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+#: ../plugins/language//PageComponent.qml:101
+#: ../plugins/language//PageComponent.qml:111
+msgid "Spell checking"
+msgstr "Stavningskontroll"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "Aktuella rättstavningspråk:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Alla tillgängliga språk:"
+
+#: ../plugins/language//KeyboardLayouts.qml:26
+#: ../plugins/language//PageComponent.qml:86
+msgid "Keyboard layouts"
+msgstr "Tangentbordslayouter…"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "Aktuella layouter:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "Alla tillgängliga layouter:"
+
+#: ../plugins/language//DisplayLanguage.qml:33
+msgid "Display language"
+msgstr "Visningsspråk"
+
+#: ../plugins/language//DisplayLanguage.qml:114
+msgid "Confirm"
+msgstr "Bekräfta"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:32
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:56
+msgid "Language & Text"
+msgstr "Språk & text"
+
+#: ../plugins/language//PageComponent.qml:72
+msgid "Display language…"
+msgstr "Visningsspråk…"
+
+#: ../plugins/language//PageComponent.qml:121
+msgid "Auto completion"
+msgstr "Autofyll"
+
+#: ../plugins/language//PageComponent.qml:131
+msgid "Word suggestions"
+msgstr "Ordförslag"
+
+#: ../plugins/language//PageComponent.qml:144
+msgid "Auto capitalization"
+msgstr "Automatiska versaler"
+
+#: ../plugins/language//PageComponent.qml:154
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr ""
+"Slår på Skift för att göra versal av första bokstaven i varje mening."
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "Bluetooth-begäran om ihopparning"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "Bekräfta att visad PIN på ”%1” matchar denna"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "Bekräfta PIN"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "PIN för ”%1”"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+msgid "Pair"
+msgstr "Parkoppla"
+
+#. TRANSLATORS: %1 is the display name of the device that is connecting
+#: ../plugins/bluetooth//PageComponent.qml:71
+#, qt-format
+msgid "%1 (Connecting…)"
+msgstr "%1 (Ansluter…)"
+
+#. TRANSLATORS: %1 is the display name of the device that is disconnecting
+#: ../plugins/bluetooth//PageComponent.qml:74
+#, qt-format
+msgid "%1 (Disconnecting…)"
+msgstr "%1 (Kopplar från…)"
+
+#: ../plugins/bluetooth//PageComponent.qml:81
+msgid "Computer"
+msgstr "Dator"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: plugins/phone//PageComponent.qml:28
-#: plugins/bluetooth//PageComponent.qml:82
-#: settings.js:72
+#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/phone//PageComponent.qml:28
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:98
 msgid "Phone"
 msgstr "Telefon"
 
-#: plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr "SIM"
+#: ../plugins/bluetooth//PageComponent.qml:83
+msgid "Modem"
+msgstr "Modem"
 
-#: plugins/phone//PageComponent.qml:46
-#: plugins/phone//CallForwarding.qml:27
-#: plugins/phone//CallForwarding.qml:60
-msgid "Call forwarding"
-msgstr "Vidarekoppling"
+#: ../plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
+msgid "Network"
+msgstr "Nätverk"
 
-#: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
-#: plugins/phone//CallWaiting.qml:53
-msgid "Call waiting"
-msgstr "Väntande samtal"
+#: ../plugins/bluetooth//PageComponent.qml:85
+msgid "Headset"
+msgstr "Headset"
 
-#: plugins/phone//ServiceInfo.qml:35
+#: ../plugins/bluetooth//PageComponent.qml:86
+msgid "Headphones"
+msgstr "Hörlurar"
+
+#: ../plugins/bluetooth//PageComponent.qml:87
+msgid "Video"
+msgstr "Film"
+
+#: ../plugins/bluetooth//PageComponent.qml:88
+msgid "Other Audio"
+msgstr "Övrigt ljud"
+
+#: ../plugins/bluetooth//PageComponent.qml:89
+msgid "Joypad"
+msgstr "Joypad"
+
+#: ../plugins/bluetooth//PageComponent.qml:90
+msgid "Keyboard"
+msgstr "Tangentbord"
+
+#: ../plugins/bluetooth//PageComponent.qml:91
+msgid "Tablet"
+msgstr "Pekplatta"
+
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Mouse"
+msgstr "Mus"
+
+#: ../plugins/bluetooth//PageComponent.qml:93
+msgid "Printer"
+msgstr "Skrivare"
+
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Camera"
+msgstr "Kamera"
+
+#: ../plugins/bluetooth//PageComponent.qml:95
+msgid "Other"
+msgstr "Övrigt"
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Excellent"
+msgstr "Utmärkt"
+
+#: ../plugins/bluetooth//PageComponent.qml:102
+msgid "Good"
+msgstr "Bra"
+
+#: ../plugins/bluetooth//PageComponent.qml:103
+msgid "Fair"
+msgstr "Okej"
+
+#: ../plugins/bluetooth//PageComponent.qml:104
+msgid "Poor"
+msgstr "Dålig"
+
+#: ../plugins/bluetooth//PageComponent.qml:161
+msgid "Discoverable"
+msgstr "Upptäckbar"
+
+#: ../plugins/bluetooth//PageComponent.qml:161
+msgid "Not discoverable"
+msgstr "Ej upptäckbar"
+
+#: ../plugins/bluetooth//PageComponent.qml:192
+msgid "Connected devices:"
+msgstr "Anslutna enheter:"
+
+#: ../plugins/bluetooth//PageComponent.qml:220
+msgid "Connect a different device:"
+msgstr "Anslut en annan enhet:"
+
+#: ../plugins/bluetooth//PageComponent.qml:220
+msgid "Connect another device:"
+msgstr "Anslut annan enhet:"
+
+#: ../plugins/bluetooth//PageComponent.qml:247
+msgid "None detected"
+msgstr "Ingen upptäckt"
+
+#: ../plugins/bluetooth//PageComponent.qml:267
+msgid "Type"
+msgstr "Typ"
+
+#: ../plugins/bluetooth//PageComponent.qml:271
+msgid "Signal Strength"
+msgstr "Signalstyrka"
+
+#: ../plugins/bluetooth//PageComponent.qml:276
+msgid "Disconnect"
+msgstr "Koppla från"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:90
+msgid "Background"
+msgstr "Bakgrund"
+
+#: ../plugins/background//MainPage.qml:112
+msgid "Ubuntu Art"
+msgstr "Ubuntu-konst"
+
+#: ../plugins/background//MainPage.qml:128
+msgid "Custom"
+msgstr "Anpassad"
+
+#: ../plugins/background//WallpaperGrid.qml:190
+msgid "Remove"
+msgstr "Ta bort"
+
+#: ../plugins/background//Preview.qml:67
+msgid "Preview"
+msgstr "Förhandsgranskning"
+
+#: ../plugins/background//Preview.qml:104
+#: ../plugins/phone//CallForwarding.qml:148
+#: ../plugins/time-date//TimePicker.qml:182
+msgid "Set"
+msgstr "Ange"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr ""
+
+#: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
 msgstr "Samtal"
 
-#: plugins/phone//CallForwarding.qml:74
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"Vidarekoppla telefonsamtal till ett annat nummer närhelst du inte svarar, "
-"din telefon är upptagen, avstängd eller utanför räckhåll."
+#: ../plugins/phone//CallWaiting.qml:28 ../plugins/phone//CallWaiting.qml:63
+#: ../plugins/phone//PageComponent.qml:57
+msgid "Call waiting"
+msgstr "Väntande samtal"
 
-#: plugins/phone//CallForwarding.qml:91
-msgid "Call forwarding status can’t be checked right now. Try again later."
-msgstr ""
-"Vidarekopplingsstatus kan inte kontrolleras just nu. Prova igen senare."
-
-#: plugins/phone//CallForwarding.qml:102
-msgid "Divert to"
-msgstr "Koppla till"
-
-#: plugins/phone//CallForwarding.qml:113
-msgid "Contacts…"
-msgstr "Kontakter…"
-
-#: plugins/phone//CallWaiting.qml:67
+#: ../plugins/phone//CallWaiting.qml:78
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
@@ -792,166 +1016,344 @@ msgstr ""
 "Låter dig svara eller starta ett nytt samtal under tiden du är i ett annat "
 "samtal, samt växla mellan dem."
 
+#: ../plugins/phone//CallForwarding.qml:28
+#: ../plugins/phone//CallForwarding.qml:75
+#: ../plugins/phone//PageComponent.qml:51
+msgid "Call forwarding"
+msgstr "Vidarekoppling"
+
+#: ../plugins/phone//CallForwarding.qml:90
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"Vidarekoppla telefonsamtal till ett annat nummer närhelst du inte svarar, "
+"din telefon är upptagen, avstängd eller utanför räckhåll."
+
+#: ../plugins/phone//CallForwarding.qml:100
+msgid "Forward to"
+msgstr ""
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
+#, qt-format
+msgid "%1 Services"
+msgstr "%1-tjänster"
+
+#: ../plugins/phone//PageComponent.qml:30
+msgid "SIM"
+msgstr "SIM"
+
+#: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//PageComponent.qml:142
+msgid "Wi-Fi hotspot"
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can user your cellular data connection "
+"over Wi-Fi. Normal data charges apply."
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can user your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr ""
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+msgid "Carriers"
+msgstr ""
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "Välj operatör:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Automatically"
+msgstr "Automatiskt"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Manually"
+msgstr "Manuellt"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "Uppdatera"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "Söker"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:31
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:104
+msgid "Cellular"
+msgstr "Mobil"
+
+#: ../plugins/cellular//PageComponent.qml:136
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr ""
+
+#: ../plugins/cellular//PageComponent.qml:151
+msgid "Data usage statistics"
+msgstr "Statisk över dataanvändning"
+
+#: ../plugins/cellular//PageComponent.qml:157
+#: ../plugins/cellular//PageComponent.qml:165
+msgid "Carrier"
+msgid_plural "Carriers"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/cellular//PageComponent.qml:184
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:30
+#: ../plugins/system-update//PageComponent.qml:446
+msgid "Auto download"
+msgstr "Autohämta"
+
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr "Hämta framtida uppdateringar automatiskt:"
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr "Om wi-fi ansluten"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr "Om vilken dataanslutning som helst"
+
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr "Datakostnader kan tillkomma."
+
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: plugins/system-update//PageComponent.qml:35
-#: settings.js:86
+#: ../plugins/system-update//PageComponent.qml:35
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:116
 msgid "Updates"
 msgstr "Uppdateringar"
 
-#: plugins/system-update//PageComponent.qml:51
+#: ../plugins/system-update//PageComponent.qml:51
 msgid "Update System"
 msgstr "Uppdatera system"
 
-#: plugins/system-update//PageComponent.qml:52
+#: ../plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
 msgstr "Telefonen behöver starta om för att installera systemuppdateringen."
 
-#: plugins/system-update//PageComponent.qml:55
+#: ../plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
 msgstr "Installera & starta om"
 
-#: plugins/system-update//PageComponent.qml:64
+#: ../plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
 msgstr "Inte nu"
 
-#: plugins/system-update//PageComponent.qml:70
+#: ../plugins/system-update//PageComponent.qml:70
 msgid "Install"
 msgstr "Installera"
 
-#: plugins/system-update//PageComponent.qml:88
+#: ../plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
 msgstr "Programvaran är uppdaterad"
 
-#: plugins/system-update//PageComponent.qml:142
+#: ../plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
 msgstr "Logga in till ditt Ubuntu One-konto."
 
-#: plugins/system-update//PageComponent.qml:157
+#: ../plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
 msgstr "Systemuppdatering misslyckades."
 
-#: plugins/system-update//PageComponent.qml:168
+#: ../plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
 msgstr "Systemuppdatering misslyckades."
 
-#: plugins/system-update//PageComponent.qml:199
+#: ../plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
 msgstr "Söker efter uppdateringar…"
 
-#: plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
 msgstr "Installerar %1 uppdateringar…"
 
-#: plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
 msgstr "Installerar %1 uppdateringar"
 
-#: plugins/system-update//PageComponent.qml:218
+#: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
 msgstr "Pausa alla"
 
-#: plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Retry"
 msgstr "Försök igen"
 
-#: plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:303
 msgid "Download"
 msgstr "Hämta"
 
-#: plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:303
 msgid "Update"
 msgstr "Uppdatera"
 
-#: plugins/system-update//PageComponent.qml:304
+#: ../plugins/system-update//PageComponent.qml:304
 msgid "Resume"
 msgstr "Återuppta"
 
-#: plugins/system-update//PageComponent.qml:305
+#: ../plugins/system-update//PageComponent.qml:305
 msgid "Pause"
 msgstr "Pausa"
 
-#: plugins/system-update//PageComponent.qml:364
+#: ../plugins/system-update//PageComponent.qml:364
 msgid "Installing"
 msgstr "Installerar"
 
-#: plugins/system-update//PageComponent.qml:397
+#: ../plugins/system-update//PageComponent.qml:397
 msgid "Installed"
 msgstr "Installerade"
 
-#: plugins/system-update//PageComponent.qml:421
+#: ../plugins/system-update//PageComponent.qml:421
 msgid "Version: "
 msgstr "Version: "
 
-#: plugins/system-update//PageComponent.qml:446
-#: plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr "Autohämta"
-
-#: plugins/system-update//PageComponent.qml:451
+#: ../plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
 msgstr "På wi-fi"
 
-#: plugins/system-update//PageComponent.qml:453
+#: ../plugins/system-update//PageComponent.qml:453
 msgid "Always"
 msgstr "Alltid"
 
-#: plugins/system-update//PageComponent.qml:505
+#: ../plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
 msgstr "Inloggningsuppgifter inte funna"
 
-#: plugins/system-update//PageComponent.qml:535
+#: ../plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
 msgstr "Installerar uppdatering…"
 
-#: plugins/system-update//PageComponent.qml:549
+#: ../plugins/system-update//PageComponent.qml:549
 msgid " bytes"
 msgstr " byte"
 
-#: plugins/system-update//PageComponent.qml:552
+#: ../plugins/system-update//PageComponent.qml:552
 msgid " KiB"
 msgstr " KiB"
 
-#: plugins/system-update//PageComponent.qml:555
+#: ../plugins/system-update//PageComponent.qml:555
 msgid " MiB"
 msgstr " MiB"
 
-#: plugins/system-update//PageComponent.qml:558
+#: ../plugins/system-update//PageComponent.qml:558
 msgid " GiB"
 msgstr " GiB"
 
-#: plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "Hämta framtida uppdateringar automatiskt:"
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Tidszon"
 
-#: plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "Om wi-fi ansluten"
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "Ange tidszon:"
 
-#: plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "Om vilken dataanslutning som helst"
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "Ange din aktuella plats."
 
-#: plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "Datakostnader kan tillkomma."
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "Ingen matchande plats"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: plugins/brightness//PageComponent.qml:32
-#: settings.js:98
-msgid "Brightness"
-msgstr "Ljussstyrka"
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "Ställ in tid & datum"
 
-#: plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "Justera automatiskt"
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "Tid"
 
-#: plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings"
-msgstr "Ökar och dämpar skärmens ljusstyrka utifrån omgivningen"
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "Timme"
 
-#: plugins/reset//EraseEverything.qml:29
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "Minut"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "Sekund"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "Datum"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "Dag"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "Månad"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "År"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:128
+msgid "Time & Date"
+msgstr "Tid & Datum"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Tidszon:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Ställ in tid och datum:"
+
+#: ../plugins/reset//EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
@@ -959,12 +1361,12 @@ msgstr ""
 "Alla dokument, sparade spel, inställningar och andra objekt kommer permanent "
 "att tas bort från denna telefon."
 
-#: plugins/reset//EraseEverything.qml:31
+#: ../plugins/reset//EraseEverything.qml:31
 msgid "Erase & reset everything"
 msgstr "Radera & återställ allting"
 
-#: plugins/reset//ResetAllSettings.qml:29
-#: plugins/reset//ResetLauncherHome.qml:30
+#: ../plugins/reset//ResetAllSettings.qml:29
+#: ../plugins/reset//ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
@@ -972,417 +1374,95 @@ msgstr ""
 "Innehåll och layout på programstartaren och filtren på hemskärmen kommer att "
 "återställas till dess ursprungliga inställningar."
 
-#: plugins/reset//ResetAllSettings.qml:31
+#: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
 msgstr "Återställa alla systeminställningar"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: plugins/reset//PageComponent.qml:32
-#: settings.js:104
+#: ../plugins/reset//PageComponent.qml:32
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:138
 msgid "Reset phone"
 msgstr "Återställ telefonen"
 
-#: plugins/reset//PageComponent.qml:62
+#: ../plugins/reset//PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr "Återställ programstartaren och hemskärmen…"
 
-#: plugins/reset//PageComponent.qml:75
+#: ../plugins/reset//PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr "Återställ alla systeminställningar…"
 
-#: plugins/reset//PageComponent.qml:88
+#: ../plugins/reset//PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr "Radera & återställ allting…"
 
-#: plugins/reset//ResetLauncherHome.qml:32
+#: ../plugins/reset//ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr "Återställl programstartaren & hemskärmen"
 
-#: plugins/background//Preview.qml:67
-msgid "Preview"
-msgstr "Förhandsgranskning"
-
-#: plugins/background//WallpaperGrid.qml:121
-msgid "Remove"
-msgstr "Ta bort"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: plugins/background//MainPage.qml:31
-#: settings.js:118
-msgid "Background"
-msgstr "Bakgrund"
-
-#: plugins/background//MainPage.qml:131
-#: plugins/background//Wallpapers.qml:43
-msgid "Welcome screen"
-msgstr "Välkomstskärm"
-
-#: plugins/background//MainPage.qml:175
-#: plugins/background//Wallpapers.qml:43
-msgid "Home screen"
-msgstr "Hemskärm"
-
-#: plugins/background//MainPage.qml:200
-msgid "Same background for both"
-msgstr "Samma bakgrund för båda"
-
-#: plugins/background//MainPage.qml:201
-msgid "Different background for each"
-msgstr "Olika bakgrunder för båda"
-
-#: plugins/background//Wallpapers.qml:42
-msgid "Choose background"
-msgstr "Välj bakgrund"
-
-#: plugins/background//Wallpapers.qml:47
-msgid "Photo/Image"
-msgstr "Foto/Bild"
-
-#: plugins/background//Wallpapers.qml:95
-msgid "Ubuntu Art"
-msgstr "Ubuntu-konst"
-
-#: plugins/background//Wallpapers.qml:110
-msgid "Custom"
-msgstr "Anpassad"
-
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr "Bluetooth-begäran om ihopparning"
-
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "Bekräfta att visad PIN på ”%1” matchar denna"
-
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "Bekräfta PIN"
-
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "PIN för ”%1”"
-
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr "Parkoppla"
-
-#. TRANSLATORS: %1 is the display name of the device that is connecting
-#: plugins/bluetooth//PageComponent.qml:71
-#, qt-format
-msgid "%1 (Connecting…)"
-msgstr "%1 (Ansluter…)"
-
-#. TRANSLATORS: %1 is the display name of the device that is disconnecting
-#: plugins/bluetooth//PageComponent.qml:74
-#, qt-format
-msgid "%1 (Disconnecting…)"
-msgstr "%1 (Kopplar från…)"
-
-#: plugins/bluetooth//PageComponent.qml:81
-msgid "Computer"
-msgstr "Dator"
-
-#: plugins/bluetooth//PageComponent.qml:83
-msgid "Modem"
-msgstr "Modem"
-
-#: plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
-msgid "Network"
-msgstr "Nätverk"
-
-#: plugins/bluetooth//PageComponent.qml:85
-msgid "Headset"
-msgstr "Headset"
-
-#: plugins/bluetooth//PageComponent.qml:86
-msgid "Headphones"
-msgstr "Hörlurar"
-
-#: plugins/bluetooth//PageComponent.qml:87
-msgid "Video"
-msgstr "Film"
-
-#: plugins/bluetooth//PageComponent.qml:88
-msgid "Other Audio"
-msgstr "Övrigt ljud"
-
-#: plugins/bluetooth//PageComponent.qml:89
-msgid "Joypad"
-msgstr "Joypad"
-
-#: plugins/bluetooth//PageComponent.qml:90
-msgid "Keyboard"
-msgstr "Tangentbord"
-
-#: plugins/bluetooth//PageComponent.qml:91
-msgid "Tablet"
-msgstr "Pekplatta"
-
-#: plugins/bluetooth//PageComponent.qml:92
-msgid "Mouse"
-msgstr "Mus"
-
-#: plugins/bluetooth//PageComponent.qml:93
-msgid "Printer"
-msgstr "Skrivare"
-
-#: plugins/bluetooth//PageComponent.qml:94
-msgid "Camera"
-msgstr "Kamera"
-
-#: plugins/bluetooth//PageComponent.qml:95
-msgid "Other"
-msgstr "Övrigt"
-
-#: plugins/bluetooth//PageComponent.qml:101
-msgid "Excellent"
-msgstr "Utmärkt"
-
-#: plugins/bluetooth//PageComponent.qml:102
-msgid "Good"
-msgstr "Bra"
-
-#: plugins/bluetooth//PageComponent.qml:103
-msgid "Fair"
-msgstr "Okej"
-
-#: plugins/bluetooth//PageComponent.qml:104
-msgid "Poor"
-msgstr "Dålig"
-
-#: plugins/bluetooth//PageComponent.qml:161
-msgid "Discoverable"
-msgstr "Upptäckbar"
-
-#: plugins/bluetooth//PageComponent.qml:161
-msgid "Not discoverable"
-msgstr "Ej upptäckbar"
-
-#: plugins/bluetooth//PageComponent.qml:192
-msgid "Connected devices:"
-msgstr "Anslutna enheter:"
-
-#: plugins/bluetooth//PageComponent.qml:220
-msgid "Connect a different device:"
-msgstr "Anslut en annan enhet:"
-
-#: plugins/bluetooth//PageComponent.qml:220
-msgid "Connect another device:"
-msgstr "Anslut annan enhet:"
-
-#: plugins/bluetooth//PageComponent.qml:247
-msgid "None detected"
-msgstr "Ingen upptäckt"
-
-#: plugins/bluetooth//PageComponent.qml:267
-msgid "Type"
-msgstr "Typ"
-
-#: plugins/bluetooth//PageComponent.qml:271
-msgid "Signal Strength"
-msgstr "Signalstyrka"
-
-#: plugins/bluetooth//PageComponent.qml:276
-msgid "Disconnect"
-msgstr "Koppla från"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: plugins/cellular//PageComponent.qml:28
-#: settings.js:132
-msgid "Cellular"
-msgstr "Mobil"
-
-#: plugins/cellular//PageComponent.qml:68
-msgid "Cellular data:"
-msgstr "Mobildata:"
-
-#: plugins/cellular//PageComponent.qml:69
-msgid "Off"
-msgstr "Av"
-
-#: plugins/cellular//PageComponent.qml:70
-msgid "2G only (saves battery)"
-msgstr "Endast 2G (sparar batteri)"
-
-#: plugins/cellular//PageComponent.qml:71
-msgid "2G/3G/4G (faster)"
-msgstr "2G/3G/4G (snabbare)"
-
-#: plugins/cellular//PageComponent.qml:82
-msgid "Cellular data"
-msgstr "Mobildata"
-
-#: plugins/cellular//PageComponent.qml:93
-msgid "Data roaming"
-msgstr "Dataroaming"
-
-#: plugins/cellular//PageComponent.qml:111
-msgid "Data usage statistics"
-msgstr "Statisk över dataanvändning"
-
-#: plugins/cellular//PageComponent.qml:121
-msgid "Choose carrier:"
-msgstr "Välj operatör:"
-
-#: plugins/cellular//PageComponent.qml:127
-#: plugins/cellular//ChooseCarrier.qml:28
-msgid "Carrier"
-msgstr "Operatör"
-
-#: plugins/cellular//PageComponent.qml:139
-msgid "APN"
-msgstr "APN"
-
-#: plugins/cellular//ChooseCarrier.qml:79
-msgid "Refresh"
-msgstr "Uppdatera"
-
-#: plugins/cellular//ChooseCarrier.qml:96
-msgid "Searching"
-msgstr "Söker"
-
-#: plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:148
-msgid "Software licenses"
-msgstr "Programvarulicenser"
-
-#: plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr "OS-byggdetaljer"
-
-#: plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr "OS-byggnummer"
-
-#: plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr "Ubuntu-avbildningsdel"
-
-#: plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr "Ubunut-byggbeskrivning"
-
-#: plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr "Enhetsavbildningsdel"
-
-#: plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr "Byggbeskrivning för enhet"
-
-#: plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr "Anpassad avbildningdel"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: plugins/about//PageComponent.qml:33
-#: settings.js:144
-msgid "About this phone"
-msgstr "Om den här telefonen"
-
-#: plugins/about//PageComponent.qml:87
-msgid "Serial"
-msgstr "Serienummer"
-
-#: plugins/about//PageComponent.qml:106 ../plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "Lagring"
-
-#: plugins/about//PageComponent.qml:113
-msgid "Software:"
-msgstr "Programvara:"
-
-#: plugins/about//PageComponent.qml:118
-msgid "OS"
-msgstr "OS"
-
-#: plugins/about//PageComponent.qml:127
-msgid "Last updated"
-msgstr "Senast uppdaterad"
-
-#: plugins/about//PageComponent.qml:134
-msgid "Check for updates"
-msgstr "Sök efter updateringar"
-
-#: plugins/about//PageComponent.qml:143
-msgid "Legal:"
-msgstr "Juridisk information:"
-
-#: plugins/about//PageComponent.qml:156
-msgid "Regulatory info"
-msgstr "Regleringsinfo"
-
-#: plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "Använd av Ubuntu"
-
-#: plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "Filmer"
-
-#: plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "Ljud"
-
-#: plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "Bilder"
-
-#: plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "Övriga filer"
-
-#: plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "Använd av program"
-
-#: plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "Total storlek"
-
-#: plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "Ledigt utrymme"
-
-#: plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "Efter namn"
-
-#: plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "Efter storlek"
-
-#: src/qml/MainWindow.qml:109
+#: ../src/qml/MainWindow.qml:109
 msgid "System Settings"
 msgstr "Systeminställningar"
 
-#: src/qml/MainWindow.qml:130
+#: ../src/qml/MainWindow.qml:130
 msgid "Search"
 msgstr "Sök"
 
-#: src/qml/MainWindow.qml:149
+#: ../src/qml/MainWindow.qml:149
 msgid "Personal"
 msgstr "Personligt"
 
-#: src/qml/MainWindow.qml:154
+#: ../src/qml/MainWindow.qml:154
 msgid "System"
 msgstr "System"
 
-#: wizard/qml/Components//Page.qml:66
-msgid "Back"
-msgstr "Bakåt"
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi-Fi"
+msgstr "Anslut till Wi-Fi"
 
-#: wizard/qml/Pages//30-location.qml:22
+#: ../wizard/qml/Pages//20-wifi.qml:68
+msgid "Available networks"
+msgstr "Tillgängliga nätverk"
+
+#: ../wizard/qml/Pages//20-wifi.qml:153 ../wizard/qml/Pages//no-sim.qml:66
+msgid "Skip"
+msgstr "Hoppa över"
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "No SIM card"
+msgstr "Inget SIM-kort"
+
+#: ../wizard/qml/Pages//no-sim.qml:57
+msgid "To use the telephone and SMS features a SIM must be installed."
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:59
+msgid "Install a SIM before continuing."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "Setup complete"
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:39
+msgid ""
+"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
+"the good folks at Canonical."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:41
+msgid "Now you can start using your Ubuntu phone."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:48
+msgid "Finish"
+msgstr "Avsluta"
+
+#: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
 msgstr "Telefoninställningar"
 
-#: wizard/qml/Pages//30-location.qml:39
+#: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
@@ -1390,7 +1470,7 @@ msgstr ""
 "Din telefon är inställd på att automatiskt rapportera fel till Canonical. "
 "Det kan inaktiveras i systeminställningar."
 
-#: wizard/qml/Pages//30-location.qml:41
+#: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
@@ -1398,337 +1478,291 @@ msgstr ""
 "Din telefon är inställd på att bestämma din plats. Det kan inaktiveras i "
 "systeminställningar."
 
-#: wizard/qml/Pages//no-sim.qml:22
-msgid "No SIM card"
-msgstr "Inget SIM-kort"
-
-#: wizard/qml/Pages//no-sim.qml:57
-msgid "Don’t worry, you can insert a SIM card later."
-msgstr "Ingen fara, du kan stoppa i ett SIM-kort senare."
-
-#: wizard/qml/Pages//no-sim.qml:59
-msgid "For the time being, you won’t have phone or SMS features."
-msgstr "För stunden kommer du inte att ha telefon- eller SMS-egenskaper."
-
-#: wizard/qml/Pages//no-sim.qml:61
-msgid "You can find a SIM in your phone package or contact your provider."
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hello"
 msgstr ""
-"Du kan få tag i ett SIM i ditt telefonpaket eller genom att kontakta din "
-"leverantör."
 
-#: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
-msgid "Skip"
-msgstr "Hoppa över"
+#: ../wizard/qml/Pages//10-welcome.qml:60
+msgid "Welcome to your Ubuntu phone. Let’s get started."
+msgstr ""
 
-#: wizard/qml/Pages//80-finished.qml:22
-msgid "That’s it!"
-msgstr "Klart!"
-
-#: wizard/qml/Pages//80-finished.qml:39
-msgid "It’s great to have you in the Ubuntu community."
-msgstr "Det är toppen att du är med i Ubuntu-gemenskapen."
-
-#: wizard/qml/Pages//80-finished.qml:41
-msgid "Enjoy your new phone."
-msgstr "Ha det bra med din nya telefon."
-
-#: wizard/qml/Pages//80-finished.qml:48
-msgid "Finish"
-msgstr "Avsluta"
-
-#: wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Anslut till Wi-Fi"
-
-#: wizard/qml/Pages//20-wifi.qml:67
-msgid "Available networks"
-msgstr "Tillgängliga nätverk"
-
-#: wizard/qml/Pages//20-wifi.qml:81
-msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr "Anslut till ett Wi-Fi-nätverk för att anpassa dina inställningar."
-
-#: wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello!"
-msgstr "Hej!"
-
-#: wizard/qml/Pages//10-welcome.qml:55
-msgid "Welcome to Ubuntu."
-msgstr "Välkommen till Ubuntu."
-
-#: wizard/qml/Pages//10-welcome.qml:56
-msgid "Let’s get started."
-msgstr "Låt oss komma igång."
-
-#: wizard/qml/Pages//10-welcome.qml:61
+#: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
 msgstr "Välj ditt språk"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: settings.js:4
-msgid "sound"
-msgstr "ljud"
+#: ../wizard/qml/Pages//10-welcome.qml:82
+msgid "Start"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:6
-#: settings.js:16
-#: settings.js:34
-#: settings.js:42
-#: settings.js:52
-#: settings.js:70
-#: settings.js:76
-#: settings.js:94
-#: settings.js:102
-#: settings.js:108
-#: settings.js:130
-#: settings.js:142
-msgid "settings"
-msgstr "inställningar"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:10
-msgid "time"
-msgstr "tid"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:12
-msgid "date"
-msgstr "datum"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:14
-msgid "timezone"
-msgstr "tidszon"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:18
-msgid "Orientation Lock"
-msgstr "Orienteringslås"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:20
-msgid "rotation"
-msgstr "rotation"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:22
-msgid "orientation"
-msgstr "orientering"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:24
-msgid "lock"
-msgstr "lås"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:26
-msgid "screen"
-msgstr "skärm"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:30
-msgid "security"
-msgstr "säkerhet"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:32
-msgid "privacy"
-msgstr "integritet"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:36
-msgid "Accessibility"
-msgstr "Tillgänglighet"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:38
-msgid "accessibility"
-msgstr "tillgänglighet"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:40
-msgid "a11y"
-msgstr "a11y"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:46
-msgid "language"
-msgstr "språk"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:48
-msgid "lang"
-msgstr "språk"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:50
-msgid "i18n"
-msgstr "i18n"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:56
-msgid "battery"
-msgstr "batteri"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:58
-msgid "power"
-msgstr "ström"
+#: ../wizard/qml/Components//Page.qml:47
+msgid "Back"
+msgstr "Bakåt"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:62
-#: settings.js:136
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:4
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:108
 msgid "network"
 msgstr "nätverk"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:64
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:6
 msgid "wireless"
 msgstr "trådlös"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:66
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:8
 msgid "wifi"
 msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:68
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:10
 msgid "wi-fi"
 msgstr "wi-fi"
 
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: settings.js:74
-msgid "phone"
-msgstr "telefon"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:78
-msgid "Example"
-msgstr "Exempel"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:80
-msgid "example"
-msgstr "exempel"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:82
-msgid "test"
-msgstr "test"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:84
-msgid "sample"
-msgstr "smakprov"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:88
-msgid "system"
-msgstr "system"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:90
-msgid "software"
-msgstr "programvara"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:92
-msgid "update"
-msgstr "uppdatering"
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: settings.js:96
-msgid "Updates available"
-msgstr "Uppdateringar tillgängliga"
-
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: settings.js:100
-msgid "brightness"
-msgstr "ljusstyrka"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: settings.js:106
-msgid "reset"
-msgstr "återställ"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:110
-msgid "Flight Mode"
-msgstr "Flygplansläge"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:112
-msgid "flight"
-msgstr "flyg"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:114
-msgid "plane"
-msgstr "plan"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:116
-msgid "offline"
-msgstr "frånkopplad"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:120
-msgid "appearance"
-msgstr "utseende"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:122
-msgid "background"
-msgstr "bakgrund"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:124
-msgid "wallpaper"
-msgstr "bakgrundsbild"
-
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: settings.js:128
-msgid "bluetooth"
-msgstr "bluetooth"
-
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:134
-msgid "cellular"
-msgstr "mobil"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:12
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:20
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:28
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:42
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:54
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:64
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:78
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:102
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:114
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:124
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:136
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:142
+msgid "settings"
+msgstr "inställningar"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:138
-msgid "mobile"
-msgstr "mobil"
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:14
+msgid "Accessibility"
+msgstr "Tillgänglighet"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:140
-msgid "gsm"
-msgstr "gsm"
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:16
+msgid "accessibility"
+msgstr "tillgänglighet"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:18
+msgid "a11y"
+msgstr "a11y"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:24
+msgid "security"
+msgstr "säkerhet"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:26
+msgid "privacy"
+msgstr "integritet"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:146
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:32
 msgid "about"
 msgstr "om"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:148
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:34
 msgid "device"
 msgstr "enhet"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:150
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:36
 msgid "info"
 msgstr "info"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:40
+msgid "sound"
+msgstr "ljud"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:46
+msgid "battery"
+msgstr "batteri"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:48
+msgid "power"
+msgstr "ström"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:52
+msgid "brightness"
+msgstr "ljusstyrka"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:58
+msgid "language"
+msgstr "språk"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:60
+msgid "lang"
+msgstr "språk"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:62
+msgid "i18n"
+msgstr "i18n"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:66
+msgid "Flight Mode"
+msgstr "Flygplansläge"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:68
+msgid "flight"
+msgstr "flyg"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:70
+msgid "plane"
+msgstr "plan"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:72
+msgid "offline"
+msgstr "frånkopplad"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:76
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:80
+msgid "Orientation Lock"
+msgstr "Orienteringslås"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:82
+msgid "rotation"
+msgstr "rotation"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:84
+msgid "orientation"
+msgstr "orientering"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:86
+msgid "lock"
+msgstr "lås"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:88
+msgid "screen"
+msgstr "skärm"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:92
+msgid "appearance"
+msgstr "utseende"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:94
+msgid "background"
+msgstr "bakgrund"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:96
+msgid "wallpaper"
+msgstr "bakgrundsbild"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:100
+msgid "phone"
+msgstr "telefon"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:106
+msgid "cellular"
+msgstr "mobil"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:110
+msgid "mobile"
+msgstr "mobil"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:112
+msgid "gsm"
+msgstr "gsm"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:118
+msgid "system"
+msgstr "system"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:120
+msgid "software"
+msgstr "programvara"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:122
+msgid "update"
+msgstr "uppdatering"
+
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:126
+msgid "Updates available"
+msgstr "Uppdateringar tillgängliga"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:130
+msgid "time"
+msgstr "tid"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:132
+msgid "date"
+msgstr "datum"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:134
+msgid "timezone"
+msgstr "tidszon"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:140
+msgid "reset"
+msgstr "återställ"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:144
+msgid "Example"
+msgstr "Exempel"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:146
+msgid "example"
+msgstr "exempel"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:148
+msgid "test"
+msgstr "test"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:150
+msgid "sample"
+msgstr "smakprov"
