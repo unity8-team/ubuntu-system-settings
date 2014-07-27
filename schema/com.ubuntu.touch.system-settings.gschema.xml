@@ -39,11 +39,11 @@
             <default>"/ril_1"</default>
         </key>
         <key name="default-sim-for-calls" type="s">
-            <description>Default sim card to use for calls, defined by a modem path</description>
+            <description>Default sim card to use for calls, defined by a modem path or empty for "ask"</description>
             <default>""</default>
         </key>
         <key name="default-sim-for-messages" type="s">
-            <description>Default sim card to use for messages, defined by a modem path</description>
+            <description>Default sim card to use for messages, defined by a modem path or empty for "ask"</description>
             <default>""</default>
         </key>
     </schema>
