@@ -7,295 +7,190 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2014-07-15 19:19+0000\n"
+"POT-Creation-Date: 2014-07-26 19:47+0100\n"
+"PO-Revision-Date: 2014-07-27 07:47+0000\n"
 "Last-Translator: Jānis-Marks Gailis <jm-gailis@fai-vianet.fr>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-07-16 07:27+0000\n"
-"X-Generator: Launchpad (build 17112)\n"
+"X-Launchpad-Export-Date: 2014-07-28 06:43+0000\n"
+"X-Generator: Launchpad (build 17131)\n"
 
-#: plugins/sound//SoundsList.qml:68
-msgid "Stop playing"
-msgstr "Apturēt spēlēšanu"
+#: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
+msgid "Other network"
+msgstr "Citi tīkli"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: plugins/sound//PageComponent.qml:36
-#: settings.js:2
-msgid "Sound"
-msgstr "Skaņa"
+#: ../plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr "Tīkla nosaukums"
 
-#: plugins/sound//PageComponent.qml:68
-msgid "Phone calls:"
-msgstr "Tālruņa zvani:"
+#: ../plugins/wifi//OtherNetwork.qml:66
+msgid "Security"
+msgstr "Drošība"
 
-#: plugins/sound//PageComponent.qml:72
-#: plugins/sound//PageComponent.qml:78
-msgid "Ringtone"
-msgstr "Zvana melodija"
+#: ../plugins/wifi//OtherNetwork.qml:67
+#: ../plugins/security-privacy//PhoneLocking.qml:40
+#: ../plugins/bluetooth//PageComponent.qml:105
+#: ../plugins/bluetooth//PageComponent.qml:256
+#: ../plugins/bluetooth//PageComponent.qml:264
+msgid "None"
+msgstr "Nav"
 
-#: plugins/sound//PageComponent.qml:89
-msgid "Vibrate when ringing"
-msgstr "Vibrēt, kad zvana"
-
-#: plugins/sound//PageComponent.qml:97
-#: plugins/sound//PageComponent.qml:130
-msgid "Vibrate in Silent Mode"
+#: ../plugins/wifi//OtherNetwork.qml:68
+msgid "WPA & WPA2 Personal"
 msgstr ""
 
-#: plugins/sound//PageComponent.qml:102
-msgid "Messages:"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:69
+msgid "WEP"
+msgstr "WEP"
 
-#: plugins/sound//PageComponent.qml:106
-#: plugins/sound//PageComponent.qml:112
-msgid "Message received"
-msgstr "Saņemts ziņojums"
+#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
+msgid "Password"
+msgstr "Parole"
 
-#: plugins/sound//PageComponent.qml:122
-msgid "Vibrate with message sound"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:89
+msgid "Password visible"
+msgstr "Redzama parole"
 
-#: plugins/sound//PageComponent.qml:135
-msgid "Other sounds:"
-msgstr "Citas skaņas:"
-
-#: plugins/sound//PageComponent.qml:139
-#: plugins/language//PageComponent.qml:160
-msgid "Keyboard sound"
-msgstr "Tastatūras skaņa"
-
-#: plugins/sound//PageComponent.qml:153
-msgid "Lock sound"
-msgstr "Aizslēgšanas skaņa"
-
-#: plugins/sound//SilentModeWarning.qml:30
-msgid "The phone is in Silent Mode."
-msgstr "Tālrunis ir klusuma režīmā"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: plugins/time-date//PageComponent.qml:29
-#: settings.js:8
-msgid "Time & Date"
-msgstr "Laiks un datums"
-
-#: plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "Laika josla:"
-
-#: plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "Iestatīt laiku un datumu"
-
-#: plugins/time-date//PageComponent.qml:69
-#: plugins/time-date//ChooseTimeZone.qml:47
-#: plugins/cellular//PageComponent.qml:122
-msgid "Automatically"
-msgstr "Automātiski"
-
-#: plugins/time-date//PageComponent.qml:69
-#: plugins/time-date//ChooseTimeZone.qml:47
-#: plugins/cellular//PageComponent.qml:122
-msgid "Manually"
-msgstr "Pašrocīgi"
-
-#: plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "Iestatīt laiku & datumu"
-
-#: plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "Laiks"
-
-#: plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "Stunda"
-
-#: plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "Minūte"
-
-#: plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "Sekunde"
-
-#: plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "Datums"
-
-#: plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "Diena"
-
-#: plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "Mēnesis"
-
-#: plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "Gads"
-
-#: plugins/time-date//TimePicker.qml:173
-#: plugins/security-privacy//LockSecurity.qml:310
-#: plugins/language//DisplayLanguage.qml:94
-#: plugins/wifi//OtherNetwork.qml:112
-#: plugins/phone//CallForwarding.qml:113
-#: plugins/reset//EraseEverything.qml:36
-#: plugins/reset//ResetAllSettings.qml:36
-#: plugins/reset//ResetLauncherHome.qml:40
-#: plugins/background//Preview.qml:96
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/security-privacy//LockSecurity.qml:310
+#: ../plugins/language//DisplayLanguage.qml:94
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/background//Preview.qml:97
+#: ../plugins/phone//CallForwarding.qml:136
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/reset//EraseEverything.qml:36
+#: ../plugins/reset//ResetAllSettings.qml:36
+#: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: plugins/time-date//TimePicker.qml:182
-#: plugins/phone//CallForwarding.qml:113
-#: plugins/background//Preview.qml:102
-msgid "Set"
-msgstr "Uzstādīt"
+#: ../plugins/wifi//OtherNetwork.qml:121
+msgid "Connect"
+msgstr "Savienoties"
 
-#: plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "Laika josla"
-
-#: plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "Iestatīt laika joslu"
-
-#: plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "Ievadiet savu pašreizējo atrašanos vietu"
-
-#: plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "Vietu nevar atrast"
-
-#: plugins/security-privacy//LockSecurity.qml:30
-#: plugins/security-privacy//PhoneLocking.qml:44
-msgid "Lock security"
-msgstr "Aizslēgšanas drošība"
-
-#: plugins/security-privacy//LockSecurity.qml:78
-msgid "Change passcode"
-msgstr "Mainīt kodu"
-
-#: plugins/security-privacy//LockSecurity.qml:80
-msgid "Change passphrase"
-msgstr "Mainīt paroles frāzi"
-
-#: plugins/security-privacy//LockSecurity.qml:87
-msgid "Switch to swipe"
+#: ../plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:114
+msgid "Previous networks"
 msgstr ""
 
-#: plugins/security-privacy//LockSecurity.qml:89
-msgid "Switch to passcode"
-msgstr "Pārslēgties uz kodu"
-
-#: plugins/security-privacy//LockSecurity.qml:91
-msgid "Switch to passphrase"
-msgstr "Pārslēgties uz paroles frāzi"
-
-#: plugins/security-privacy//LockSecurity.qml:100
-msgid "Existing passcode"
-msgstr "Esošais paroles kods"
-
-#: plugins/security-privacy//LockSecurity.qml:102
-msgid "Existing passphrase"
-msgstr "Esošā paroles frāze"
-
-#: plugins/security-privacy//LockSecurity.qml:150
-msgid "Incorrect passcode. Try again."
-msgstr "Nepareizs kods. Mēģiniet vēlreiz."
-
-#: plugins/security-privacy//LockSecurity.qml:153
-msgid "Incorrect passphrase. Try again."
-msgstr "Nepareiza parole. Mēģiniet vēlreiz."
-
-#: plugins/security-privacy//LockSecurity.qml:166
-msgid "Choose passcode"
-msgstr "Izvēlieties kodu"
-
-#: plugins/security-privacy//LockSecurity.qml:168
-msgid "Choose passphrase"
-msgstr "Izvēlieties paroli"
-
-#: plugins/security-privacy//LockSecurity.qml:212
-msgid "Confirm passcode"
-msgstr "Apstipriniet kodu"
-
-#: plugins/security-privacy//LockSecurity.qml:214
-msgid "Confirm passphrase"
-msgstr "Apstipriniet paroli"
-
-#: plugins/security-privacy//LockSecurity.qml:256
-msgid "Those passcodes don't match. Try again."
-msgstr "Šie kodi nesakrīt. Mēģiniet vēlreiz."
-
-#: plugins/security-privacy//LockSecurity.qml:259
-msgid "Those passphrases don't match. Try again."
-msgstr "Šīs paroļes nesakrīt. Mēģiniet vēlreiz."
-
-#: plugins/security-privacy//LockSecurity.qml:273
-msgid "Unset"
-msgstr "Atstatīt"
-
-#: plugins/security-privacy//LockSecurity.qml:274
-#: wizard/qml/Pages//30-location.qml:48
-#: wizard/qml/Pages//20-wifi.qml:168 ../wizard/qml/Pages//10-welcome.qml:78
-msgid "Continue"
-msgstr "Turpināt"
-
-#: plugins/security-privacy//LockSecurity.qml:326
-msgid "Unlock the phone using:"
-msgstr "Atbloķēt tālruni ar:"
-
-#: plugins/security-privacy//LockSecurity.qml:330
-msgid "Swipe (no security)"
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
 msgstr ""
 
-#: plugins/security-privacy//LockSecurity.qml:331
-msgid "4-digit passcode"
-msgstr "4 ciparu kods"
+#: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:263
+msgid "Name"
+msgstr "Nosaukums"
 
-#: plugins/security-privacy//LockSecurity.qml:332
-#: plugins/security-privacy//PhoneLocking.qml:42
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/about//PageComponent.qml:149
+#: ../plugins/battery//SleepValues.qml:96
+#: ../plugins/battery//PageComponent.qml:293
+#: ../plugins/battery//PageComponent.qml:302
+#: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/system-update//PageComponent.qml:449
+msgid "Never"
+msgstr "Nekad"
+
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr "Rādīt paroli"
+
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/wifi//PageComponent.qml:26
+#: ../plugins/battery//PageComponent.qml:312
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:2
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:76
+msgid "Phone locking"
+msgstr "Tālruņa bloķēšana"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:41
+msgid "Passcode"
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:42
+#: ../plugins/security-privacy//LockSecurity.qml:332
 msgid "Passphrase"
 msgstr "Parole"
 
-#: plugins/security-privacy//LockSecurity.qml:333
-msgid "Swipe (no security)… "
+#: ../plugins/security-privacy//PhoneLocking.qml:44
+#: ../plugins/security-privacy//LockSecurity.qml:30
+#: ../plugins/about//DevMode.qml:102
+msgid "Lock security"
+msgstr "Aizslēgšanas drošība"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:62
+#: ../plugins/battery//PageComponent.qml:284
+msgid "Lock when idle"
 msgstr ""
 
-#: plugins/security-privacy//LockSecurity.qml:334
-msgid "4-digit passcode…"
-msgstr "4 ciparu kods..."
+#: ../plugins/security-privacy//PhoneLocking.qml:63
+#: ../plugins/battery//PageComponent.qml:284
+msgid "Sleep when idle"
+msgstr ""
 
-#: plugins/security-privacy//LockSecurity.qml:335
-msgid "Passphrase…"
-msgstr "Parole..."
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:65
+#: ../plugins/security-privacy//PageComponent.qml:78
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minūte"
+msgstr[1] "%1 minūtes"
+msgstr[2] "%1 minūšu"
 
-#: plugins/security-privacy//LockSecurity.qml:376
-msgid "Change passcode…"
-msgstr "Mainīt kodu..."
+#: ../plugins/security-privacy//PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr ""
 
-#: plugins/security-privacy//LockSecurity.qml:377
-msgid "Change passphrase…"
-msgstr "Mainīt paroli..."
+#: ../plugins/security-privacy//Dash.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:125
+msgid "Dash search"
+msgstr ""
 
-#: plugins/security-privacy//Location.qml:30
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "Sūtīt rezultātus no:"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:52
+#: ../plugins/security-privacy//PageComponent.qml:128
+msgid "Phone only"
+msgstr "Tikai tālrunis"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:50
+#: ../plugins/security-privacy//PageComponent.qml:127
+msgid "Phone and Internet"
+msgstr "Tālrunis un internets"
+
+#: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
 msgstr "Atrašanās vieta"
 
-#: plugins/security-privacy//Location.qml:48
+#: ../plugins/security-privacy//Location.qml:48
 msgid "Location detection"
 msgstr "Atrašanās vietas noteikšana"
 
-#: plugins/security-privacy//Location.qml:70
+#: ../plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
@@ -303,7 +198,7 @@ msgstr ""
 "Izmanto GPS, lai noteiktu aptuvenu atrašanās vietu. Kad izslēgts, GPS "
 "izslēdzas, lai taupītu bateriju."
 
-#: plugins/security-privacy//Location.qml:72
+#: ../plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
@@ -311,7 +206,7 @@ msgstr ""
 "Izmanto wi-fi un GPS, lai noteiktu aptuvenu atrašanās vietu. Izslēdzot "
 "atrašanās vietas noteikšanu, tiek taupīta baterija."
 
-#: plugins/security-privacy//Location.qml:74
+#: ../plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
@@ -319,7 +214,7 @@ msgstr ""
 "Izmanto wi-fi (pašreiz izslēgts) un GPS, lai noteiktu aptuvenu atrašanās "
 "vietu. Izslēdzot atrašanās vietas noteikšanu, tiek taupīta baterija."
 
-#: plugins/security-privacy//Location.qml:76
+#: ../plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
@@ -328,7 +223,7 @@ msgstr ""
 "atrašanās vietu. Izslēdzot atrašanās vietas noteikšanu, tiek taupīta "
 "baterija."
 
-#: plugins/security-privacy//Location.qml:78
+#: ../plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
@@ -337,7 +232,7 @@ msgstr ""
 "savienojums) un GPS, lai noteiktu aptuvenu atrašanās vietu. Izslēdzot "
 "atrašanās vietas noteikšanu, tiek taupīta baterija."
 
-#: plugins/security-privacy//Location.qml:80
+#: ../plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
@@ -346,7 +241,7 @@ msgstr ""
 "noteiktu aptuvenu atrašanās vietu. Izslēdzot atrašanās vietas noteikšanu, "
 "tiek taupīta baterija."
 
-#: plugins/security-privacy//Location.qml:82
+#: ../plugins/security-privacy//Location.qml:82
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
@@ -356,192 +251,407 @@ msgstr ""
 "pieejams mobilais savienojums) un GPS, lai noteiktu aptuvenu atrašanās "
 "vietu. Izslēdzot atrašanās vietas noteikšanu, tiek taupīta baterija."
 
-#: plugins/security-privacy//Location.qml:89
+#: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
 msgstr "Atļaut piekļuvi atrašanās vietai:"
 
+#: ../plugins/security-privacy//LockSecurity.qml:78
+msgid "Change passcode"
+msgstr "Mainīt kodu"
+
+#: ../plugins/security-privacy//LockSecurity.qml:80
+msgid "Change passphrase"
+msgstr "Mainīt paroles frāzi"
+
+#: ../plugins/security-privacy//LockSecurity.qml:87
+msgid "Switch to swipe"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:89
+msgid "Switch to passcode"
+msgstr "Pārslēgties uz kodu"
+
+#: ../plugins/security-privacy//LockSecurity.qml:91
+msgid "Switch to passphrase"
+msgstr "Pārslēgties uz paroles frāzi"
+
+#: ../plugins/security-privacy//LockSecurity.qml:100
+msgid "Existing passcode"
+msgstr "Esošais paroles kods"
+
+#: ../plugins/security-privacy//LockSecurity.qml:102
+msgid "Existing passphrase"
+msgstr "Esošā paroles frāze"
+
+#: ../plugins/security-privacy//LockSecurity.qml:150
+msgid "Incorrect passcode. Try again."
+msgstr "Nepareizs kods. Mēģiniet vēlreiz."
+
+#: ../plugins/security-privacy//LockSecurity.qml:153
+msgid "Incorrect passphrase. Try again."
+msgstr "Nepareiza parole. Mēģiniet vēlreiz."
+
+#: ../plugins/security-privacy//LockSecurity.qml:166
+msgid "Choose passcode"
+msgstr "Izvēlieties kodu"
+
+#: ../plugins/security-privacy//LockSecurity.qml:168
+msgid "Choose passphrase"
+msgstr "Izvēlieties paroli"
+
+#: ../plugins/security-privacy//LockSecurity.qml:212
+msgid "Confirm passcode"
+msgstr "Apstipriniet kodu"
+
+#: ../plugins/security-privacy//LockSecurity.qml:214
+msgid "Confirm passphrase"
+msgstr "Apstipriniet paroli"
+
+#: ../plugins/security-privacy//LockSecurity.qml:256
+msgid "Those passcodes don't match. Try again."
+msgstr "Šie kodi nesakrīt. Mēģiniet vēlreiz."
+
+#: ../plugins/security-privacy//LockSecurity.qml:259
+msgid "Those passphrases don't match. Try again."
+msgstr "Šīs paroļes nesakrīt. Mēģiniet vēlreiz."
+
+#: ../plugins/security-privacy//LockSecurity.qml:273
+msgid "Unset"
+msgstr "Atstatīt"
+
+#: ../plugins/security-privacy//LockSecurity.qml:274
+#: ../wizard/qml/Pages//20-wifi.qml:153
+#: ../wizard/qml/Pages//30-location.qml:48
+msgid "Continue"
+msgstr "Turpināt"
+
+#: ../plugins/security-privacy//LockSecurity.qml:326
+msgid "Unlock the phone using:"
+msgstr "Atbloķēt tālruni ar:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:330
+msgid "Swipe (no security)"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:331
+msgid "4-digit passcode"
+msgstr "4 ciparu kods"
+
+#: ../plugins/security-privacy//LockSecurity.qml:333
+msgid "Swipe (no security)… "
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:334
+msgid "4-digit passcode…"
+msgstr "4 ciparu kods..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:335
+msgid "Passphrase…"
+msgstr "Parole..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:376
+msgid "Change passcode…"
+msgstr "Mainīt kodu..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:377
+msgid "Change passphrase…"
+msgstr "Mainīt paroli..."
+
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: plugins/security-privacy//PageComponent.qml:33
-#: settings.js:28
+#: ../plugins/security-privacy//PageComponent.qml:33
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:22
 msgid "Security & Privacy"
 msgstr "Drošība & privātums"
 
-#: plugins/security-privacy//PageComponent.qml:50
-#: plugins/security-privacy//PageComponent.qml:127
-#: plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "Tālrunis un internets"
-
-#: plugins/security-privacy//PageComponent.qml:52
-#: plugins/security-privacy//PageComponent.qml:128
-#: plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "Tikai tālrunis"
-
-#: plugins/security-privacy//PageComponent.qml:71
+#: ../plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
 msgstr "Drošība:"
 
-#: plugins/security-privacy//PageComponent.qml:76
-#: plugins/security-privacy//PhoneLocking.qml:29
-msgid "Phone locking"
-msgstr "Tālruņa bloķēšana"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: plugins/security-privacy//PageComponent.qml:78
-#: plugins/security-privacy//PhoneLocking.qml:65
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 minūte"
-msgstr[1] "%1 minūtes"
-msgstr[2] "%1 minūšu"
-
-#: plugins/security-privacy//PageComponent.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:87
 msgid "SIM PIN"
 msgstr "SIM PIN"
 
-#: plugins/security-privacy//PageComponent.qml:93
+#: ../plugins/security-privacy//PageComponent.qml:93
 msgid "Privacy:"
 msgstr "Privātums:"
 
-#: plugins/security-privacy//PageComponent.qml:97
+#: ../plugins/security-privacy//PageComponent.qml:97
 msgid "Stats on welcome screen"
 msgstr "Statistika sākuma ekrānā"
 
-#: plugins/security-privacy//PageComponent.qml:110
+#: ../plugins/security-privacy//PageComponent.qml:110
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Īsziņas uz sakuma ekrānu"
 
-#: plugins/security-privacy//PageComponent.qml:125
-#: plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr ""
-
-#: plugins/security-privacy//PageComponent.qml:143
+#: ../plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
 msgstr "Lokalizācijas pieeja"
 
-#: plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//PageComponent.qml:151
 msgid "Other app access"
 msgstr "Citu aplikāciju pieeju"
 
-#: plugins/security-privacy//PageComponent.qml:156
+#: ../plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
 msgstr "Diagnostika"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:161
 msgid "Sent"
 msgstr "Nosūtīts"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: plugins/security-privacy//PageComponent.qml:164
+#: ../plugins/security-privacy//PageComponent.qml:164
 msgid "Not sent"
 msgstr "Nav nosūtīts"
 
-#: plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
+msgid "Software licenses"
+msgstr "Programmatūras licences"
+
+#: ../plugins/about//Version.qml:35
+msgid "OS Build Details"
 msgstr ""
 
-#: plugins/security-privacy//PhoneLocking.qml:40
-#: plugins/wifi//OtherNetwork.qml:67
-#: plugins/bluetooth//PageComponent.qml:105
-#: plugins/bluetooth//PageComponent.qml:256
-#: plugins/bluetooth//PageComponent.qml:264
-msgid "None"
-msgstr "Nav"
-
-#: plugins/security-privacy//PhoneLocking.qml:41
-msgid "Passcode"
+#: ../plugins/about//Version.qml:53
+msgid "OS build number"
 msgstr ""
 
-#: plugins/security-privacy//PhoneLocking.qml:62
-#: plugins/battery//PageComponent.qml:240
-msgid "Lock when idle"
+#: ../plugins/about//Version.qml:59
+msgid "Ubuntu Image part"
 msgstr ""
 
-#: plugins/security-privacy//PhoneLocking.qml:63
-#: plugins/battery//PageComponent.qml:240
-msgid "Sleep when idle"
+#: ../plugins/about//Version.qml:85
+msgid "Ubuntu build description"
 msgstr ""
 
-#: plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
+#: ../plugins/about//Version.qml:100
+msgid "Device Image part"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: plugins/language//PageComponent.qml:32
-#: settings.js:44
-msgid "Language & Text"
-msgstr "Valoda un teksts"
-
-#: plugins/language//PageComponent.qml:71
-msgid "Display language…"
+#: ../plugins/about//Version.qml:126
+msgid "Device build description"
 msgstr ""
 
-#: plugins/language//PageComponent.qml:85
-#: plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "Tastatūras izkārtojumi"
-
-#: plugins/language//PageComponent.qml:100
-#: plugins/language//PageComponent.qml:110
-#: plugins/language//SpellChecking.qml:27
-#: plugins/language//SpellChecking.qml:36
-msgid "Spell checking"
-msgstr "Pareizrakstības pārbaude"
-
-#: plugins/language//PageComponent.qml:120
-msgid "Auto completion"
+#: ../plugins/about//Version.qml:141
+msgid "Customization Image part"
 msgstr ""
 
-#: plugins/language//PageComponent.qml:130
-msgid "Word suggestions"
-msgstr "Vārdu piedāvāšana"
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
+msgid "Storage"
+msgstr "Krātuve"
 
-#: plugins/language//PageComponent.qml:143
-msgid "Auto capitalization"
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "Ubuntu izmantots"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr "Video"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr "Audio"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr "Attēli"
+
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr "Citas datnes"
+
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "Aplikāciju izmantots"
+
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
 msgstr ""
 
-#: plugins/language//PageComponent.qml:153
-msgid "Turns on Shift to capitalize the first letter of each sentence."
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "Brīva vieta"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr "Pēc nosaukuma"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr "Pēc izmēra"
+
+#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:117
+#: ../plugins/battery//PageComponent.qml:268
+#: ../plugins/cellular//PageChooseCarriers.qml:50
+#: ../plugins/cellular//PageChooseCarriers.qml:66
+#: ../plugins/cellular//PageComponent.qml:179
+msgid "N/A"
+msgstr "Nav pieejams"
+
+#: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
+msgid "Developer Mode"
 msgstr ""
 
-#: plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
+#: ../plugins/about//DevMode.qml:68
+msgid "In Developer Mode, anyone can access, "
 msgstr ""
 
-#: plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "Visas pieejamas valodas:"
-
-#: plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
+#: ../plugins/about//DevMode.qml:95
+msgid "You need a passcode or passphrase set "
 msgstr ""
 
-#: plugins/language//DisplayLanguage.qml:114
-msgid "Confirm"
-msgstr "Apstiprināt"
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:30
+msgid "About this phone"
+msgstr "Par šo telefonu"
 
-#: plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Tālruņa numurs"
+
+#: ../plugins/about//PageComponent.qml:107
+msgid "Serial"
+msgstr "Sērija"
+
+#: ../plugins/about//PageComponent.qml:133
+msgid "Software:"
+msgstr "Programmatūra:"
+
+#: ../plugins/about//PageComponent.qml:138
+msgid "OS"
+msgstr "Operētājsistēma"
+
+#: ../plugins/about//PageComponent.qml:147
+msgid "Last updated"
 msgstr ""
 
-#: plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
+#: ../plugins/about//PageComponent.qml:155
+msgid "Check for updates"
+msgstr "Pārbaudīt atjauninājumus"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Legal:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:177
+msgid "Regulatory info"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:185
+msgid "Developer mode"
+msgstr "Izstrādātāja režīms"
+
+#: ../plugins/sound//SoundsList.qml:59
+msgid "Stop playing"
+msgstr "Apturēt spēlēšanu"
+
+#: ../plugins/sound//SilentModeWarning.qml:30
+msgid "The phone is in Silent Mode."
+msgstr "Tālrunis ir klusuma režīmā"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:38
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:38
+msgid "Sound"
+msgstr "Skaņa"
+
+#: ../plugins/sound//PageComponent.qml:73
+msgid "Silent Mode"
+msgstr "Klusais režīms"
+
+#: ../plugins/sound//PageComponent.qml:79
+msgid "Ringer:"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:111
+msgid "Phone calls:"
+msgstr "Tālruņa zvani:"
+
+#: ../plugins/sound//PageComponent.qml:115
+#: ../plugins/sound//PageComponent.qml:121
+msgid "Ringtone"
+msgstr "Zvana melodija"
+
+#: ../plugins/sound//PageComponent.qml:132
+msgid "Vibrate when ringing"
+msgstr "Vibrēt, kad zvana"
+
+#: ../plugins/sound//PageComponent.qml:140
+#: ../plugins/sound//PageComponent.qml:173
+msgid "Vibrate in Silent Mode"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:145
+msgid "Messages:"
+msgstr "Īsziņas:"
+
+#: ../plugins/sound//PageComponent.qml:149
+#: ../plugins/sound//PageComponent.qml:155
+msgid "Message received"
+msgstr "Saņemts ziņojums"
+
+#: ../plugins/sound//PageComponent.qml:165
+msgid "Vibrate with message sound"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:178
+msgid "Other sounds:"
+msgstr "Citas skaņas:"
+
+#: ../plugins/sound//PageComponent.qml:182
+#: ../plugins/language//PageComponent.qml:161
+msgid "Keyboard sound"
+msgstr "Tastatūras skaņa"
+
+#: ../plugins/sound//PageComponent.qml:196
+msgid "Lock sound"
+msgstr "Aizslēgšanas skaņa"
+
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr ""
+
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr ""
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:81
+#: ../plugins/battery//SleepValues.qml:85
+#: ../plugins/battery//SleepValues.qml:89
+#: ../plugins/battery//SleepValues.qml:93
+#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/battery//PageComponent.qml:299
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "Pēc %1 minūtes"
+msgstr[1] "Pēc %1 minūtes"
+msgstr[2] "Pēc %1 minūtēm"
+
+#: ../plugins/battery//SleepValues.qml:107
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+
+#: ../plugins/battery//SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: plugins/battery//PageComponent.qml:34
-#: settings.js:54
+#: ../plugins/battery//PageComponent.qml:34
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:44
 msgid "Battery"
 msgstr "Baterija"
 
 #. TRANSLATORS: %1 is the number of seconds
-#: plugins/battery//PageComponent.qml:46
+#: ../plugins/battery//PageComponent.qml:46
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
@@ -550,7 +660,7 @@ msgstr[1] "pirms %1 sekundes"
 msgstr[2] "pirms %1 sekundem"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: plugins/battery//PageComponent.qml:49
+#: ../plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
@@ -559,7 +669,7 @@ msgstr[1] "pirms %1 minūtēm"
 msgstr[2] "pirms %1 minūšu"
 
 #. TRANSLATORS: %1 is the number of hours
-#: plugins/battery//PageComponent.qml:52
+#: ../plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
@@ -568,7 +678,7 @@ msgstr[1] "pirms %1 stundām"
 msgstr[2] "pirms %1 stundu"
 
 #. TRANSLATORS: %1 is the number of days
-#: plugins/battery//PageComponent.qml:55
+#: ../plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
@@ -576,1145 +686,1073 @@ msgstr[0] "pirms %1 dienas"
 msgstr[1] "pirms %1 dienām"
 msgstr[2] "pirms %1 dienu"
 
-#: plugins/battery//PageComponent.qml:75
+#: ../plugins/battery//PageComponent.qml:75
 msgid "Charging now"
 msgstr "Uzlādē"
 
-#: plugins/battery//PageComponent.qml:80
+#: ../plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
 msgstr "Pēdēja pilnā uzlādi"
 
-#: plugins/battery//PageComponent.qml:85
+#: ../plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
 msgstr "Pilnībā uzlādēts"
 
-#: plugins/battery//PageComponent.qml:111
+#: ../plugins/battery//PageComponent.qml:111
 msgid "Charge level"
 msgstr "Uzlādes līmenis"
 
-#: plugins/battery//PageComponent.qml:117
-#: plugins/battery//PageComponent.qml:224
-#: plugins/cellular//PageComponent.qml:129
-#: plugins/about//Storage.qml:204
-msgid "N/A"
-msgstr "Nav pieejams"
-
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: plugins/battery//PageComponent.qml:120
+#: ../plugins/battery//PageComponent.qml:120
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: plugins/battery//PageComponent.qml:229
+#: ../plugins/battery//PageComponent.qml:195
+#: ../plugins/battery//PageComponent.qml:197
+msgid "Yesterday"
+msgstr "Vakar"
+
+#: ../plugins/battery//PageComponent.qml:203
+#: ../plugins/battery//PageComponent.qml:205
+msgid "Today"
+msgstr "Šodien"
+
+#: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
 msgstr "Veidi ka samazināt baterijas lietošana:"
 
-#. TRANSLATORS: %1 is the number of minutes
-#: plugins/battery//PageComponent.qml:246
-#: plugins/battery//PageComponent.qml:255
-#: plugins/battery//SleepValues.qml:77
-#: plugins/battery//SleepValues.qml:81
-#: plugins/battery//SleepValues.qml:85
-#: plugins/battery//SleepValues.qml:89
-#: plugins/battery//SleepValues.qml:93
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: plugins/battery//PageComponent.qml:249
-#: plugins/battery//PageComponent.qml:258
-#: plugins/battery//SleepValues.qml:96
-#: plugins/wifi//NetworkDetails.qml:56
-#: plugins/system-update//PageComponent.qml:449
-#: plugins/system-update//Configuration.qml:53
-#: plugins/about//PageComponent.qml:128
-msgid "Never"
-msgstr "Nekad"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: plugins/battery//PageComponent.qml:268
-#: plugins/wifi//PageComponent.qml:26
-#: settings.js:60
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: plugins/battery//PageComponent.qml:298
-#: plugins/bluetooth//PageComponent.qml:111
-#: plugins/bluetooth//PageComponent.qml:130
-#: settings.js:126
+#: ../plugins/battery//PageComponent.qml:342
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:130
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:74
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: plugins/battery//PageComponent.qml:329
+#: ../plugins/battery//PageComponent.qml:373
 msgid "GPS"
 msgstr "GPS"
 
-#: plugins/battery//PageComponent.qml:348
+#: ../plugins/battery//PageComponent.qml:392
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
-#: plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:50
+msgid "Brightness"
+msgstr "Spilgtums"
+
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "Automātiski pielāgot"
+
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings"
 msgstr ""
 
-#: plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+#: ../plugins/language//PageComponent.qml:101
+#: ../plugins/language//PageComponent.qml:111
+msgid "Spell checking"
+msgstr "Pareizrakstības pārbaude"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
 msgstr ""
 
-#: plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Visas pieejamas valodas:"
+
+#: ../plugins/language//KeyboardLayouts.qml:26
+#: ../plugins/language//PageComponent.qml:86
+msgid "Keyboard layouts"
+msgstr "Tastatūras izkārtojumi"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
 msgstr ""
 
-#: plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
 msgstr ""
 
-#: plugins/wifi//PageComponent.qml:114
-#: plugins/wifi//PreviousNetworks.qml:26
-msgid "Previous networks"
+#: ../plugins/language//DisplayLanguage.qml:33
+msgid "Display language"
 msgstr ""
 
-#: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
+#: ../plugins/language//DisplayLanguage.qml:114
+msgid "Confirm"
+msgstr "Apstiprināt"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:32
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:56
+msgid "Language & Text"
+msgstr "Valoda un teksts"
+
+#: ../plugins/language//PageComponent.qml:72
+msgid "Display language…"
 msgstr ""
 
-#: plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr "Tīkla nosaukums"
-
-#: plugins/wifi//OtherNetwork.qml:66
-msgid "Security"
-msgstr "Drošība"
-
-#: plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
+#: ../plugins/language//PageComponent.qml:121
+msgid "Auto completion"
 msgstr ""
 
-#: plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr "WEP"
+#: ../plugins/language//PageComponent.qml:131
+msgid "Word suggestions"
+msgstr "Vārdu piedāvāšana"
 
-#: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
-msgid "Password"
-msgstr "Parole"
-
-#: plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
-msgstr "Redzama parole"
-
-#: plugins/wifi//OtherNetwork.qml:121
-msgid "Connect"
-msgstr "Savienoties"
-
-#: plugins/wifi//NetworkDetails.qml:37
-msgid "Network details"
+#: ../plugins/language//PageComponent.qml:144
+msgid "Auto capitalization"
 msgstr ""
 
-#: plugins/wifi//NetworkDetails.qml:44
-#: plugins/bluetooth//PageComponent.qml:263
-msgid "Name"
-msgstr "Nosaukums"
-
-#: plugins/wifi//NetworkDetails.qml:52
-msgid "Last connected"
+#: ../plugins/language//PageComponent.qml:154
+msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 
-#: plugins/wifi//NetworkDetails.qml:74
-msgid "Show password"
-msgstr "Rādīt paroli"
-
-#: plugins/wifi//NetworkDetails.qml:84
-msgid "Forget network"
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+msgid "Bluetooth Pairing Request"
 msgstr ""
 
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
-msgid "%1 Services"
-msgstr "%1 Pakalpojumi"
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr ""
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "Apstiprināt"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "PIN priekš '%1'"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+msgid "Pair"
+msgstr "Sapārot"
+
+#. TRANSLATORS: %1 is the display name of the device that is connecting
+#: ../plugins/bluetooth//PageComponent.qml:71
+#, qt-format
+msgid "%1 (Connecting…)"
+msgstr "%1 (Pieslēdzas…)"
+
+#. TRANSLATORS: %1 is the display name of the device that is disconnecting
+#: ../plugins/bluetooth//PageComponent.qml:74
+#, qt-format
+msgid "%1 (Disconnecting…)"
+msgstr "%1 (Atslēdzas…)"
+
+#: ../plugins/bluetooth//PageComponent.qml:81
+msgid "Computer"
+msgstr "Dators"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: plugins/phone//PageComponent.qml:28
-#: plugins/bluetooth//PageComponent.qml:82
-#: settings.js:72
+#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/phone//PageComponent.qml:28
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:98
 msgid "Phone"
 msgstr "Telefons"
 
-#: plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr "SIM"
+#: ../plugins/bluetooth//PageComponent.qml:83
+msgid "Modem"
+msgstr "Modems"
 
-#: plugins/phone//PageComponent.qml:46
-#: plugins/phone//CallForwarding.qml:27
-#: plugins/phone//CallForwarding.qml:60
-msgid "Call forwarding"
+#: ../plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
+msgid "Network"
+msgstr "Tīkls"
+
+#: ../plugins/bluetooth//PageComponent.qml:85
+msgid "Headset"
+msgstr "Austiņas ar mikrofonu"
+
+#: ../plugins/bluetooth//PageComponent.qml:86
+msgid "Headphones"
+msgstr "Austiņas"
+
+#: ../plugins/bluetooth//PageComponent.qml:87
+msgid "Video"
+msgstr "Video"
+
+#: ../plugins/bluetooth//PageComponent.qml:88
+msgid "Other Audio"
 msgstr ""
 
-#: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
-#: plugins/phone//CallWaiting.qml:53
-msgid "Call waiting"
+#: ../plugins/bluetooth//PageComponent.qml:89
+msgid "Joypad"
+msgstr "Spēļu manipulators"
+
+#: ../plugins/bluetooth//PageComponent.qml:90
+msgid "Keyboard"
+msgstr "Tastatūra"
+
+#: ../plugins/bluetooth//PageComponent.qml:91
+msgid "Tablet"
+msgstr "Planšete"
+
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Mouse"
+msgstr "Pele"
+
+#: ../plugins/bluetooth//PageComponent.qml:93
+msgid "Printer"
+msgstr "Printeris"
+
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Camera"
+msgstr "Kamera"
+
+#: ../plugins/bluetooth//PageComponent.qml:95
+msgid "Other"
+msgstr "Cits"
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Excellent"
+msgstr "Teicami"
+
+#: ../plugins/bluetooth//PageComponent.qml:102
+msgid "Good"
+msgstr "Labi"
+
+#: ../plugins/bluetooth//PageComponent.qml:103
+msgid "Fair"
+msgstr "Mērens"
+
+#: ../plugins/bluetooth//PageComponent.qml:104
+msgid "Poor"
+msgstr "Vājš"
+
+#: ../plugins/bluetooth//PageComponent.qml:161
+msgid "Discoverable"
 msgstr ""
 
-#: plugins/phone//ServiceInfo.qml:35
+#: ../plugins/bluetooth//PageComponent.qml:161
+msgid "Not discoverable"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:192
+msgid "Connected devices:"
+msgstr "Pieslēgtas ierīces:"
+
+#: ../plugins/bluetooth//PageComponent.qml:220
+msgid "Connect a different device:"
+msgstr "Pieslēgt atšķirīgu ierīci:"
+
+#: ../plugins/bluetooth//PageComponent.qml:220
+msgid "Connect another device:"
+msgstr "Pieslēgt citu ierīci:"
+
+#: ../plugins/bluetooth//PageComponent.qml:247
+msgid "None detected"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:267
+msgid "Type"
+msgstr "Veids"
+
+#: ../plugins/bluetooth//PageComponent.qml:271
+msgid "Signal Strength"
+msgstr "Signāla stiprums"
+
+#: ../plugins/bluetooth//PageComponent.qml:276
+msgid "Disconnect"
+msgstr "Atvienoties"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:90
+msgid "Background"
+msgstr "Fons"
+
+#: ../plugins/background//MainPage.qml:112
+msgid "Ubuntu Art"
+msgstr "Ubuntu Māksla"
+
+#: ../plugins/background//MainPage.qml:128
+msgid "Custom"
+msgstr "Pielāgots"
+
+#: ../plugins/background//WallpaperGrid.qml:190
+msgid "Remove"
+msgstr "Izņemt"
+
+#: ../plugins/background//Preview.qml:67
+msgid "Preview"
+msgstr "Priekšskatījums"
+
+#: ../plugins/background//Preview.qml:104
+#: ../plugins/phone//CallForwarding.qml:148
+#: ../plugins/time-date//TimePicker.qml:182
+msgid "Set"
+msgstr "Uzstādīt"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr ""
+
+#: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
 msgstr "Zvanīt"
 
-#: plugins/phone//CallForwarding.qml:74
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
+#: ../plugins/phone//CallWaiting.qml:28 ../plugins/phone//CallWaiting.qml:63
+#: ../plugins/phone//PageComponent.qml:57
+msgid "Call waiting"
 msgstr ""
 
-#: plugins/phone//CallForwarding.qml:91
-msgid "Call forwarding status can’t be checked right now. Try again later."
-msgstr ""
-
-#: plugins/phone//CallForwarding.qml:102
-msgid "Divert to"
-msgstr ""
-
-#: plugins/phone//CallForwarding.qml:113
-msgid "Contacts…"
-msgstr "Kontakti"
-
-#: plugins/phone//CallWaiting.qml:67
+#: ../plugins/phone//CallWaiting.qml:78
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
 
+#: ../plugins/phone//CallForwarding.qml:28
+#: ../plugins/phone//CallForwarding.qml:75
+#: ../plugins/phone//PageComponent.qml:51
+msgid "Call forwarding"
+msgstr ""
+
+#: ../plugins/phone//CallForwarding.qml:90
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+
+#: ../plugins/phone//CallForwarding.qml:100
+msgid "Forward to"
+msgstr "Pārsūtīt uz"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 Pakalpojumi"
+
+#: ../plugins/phone//PageComponent.qml:30
+msgid "SIM"
+msgstr "SIM"
+
+#: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//PageComponent.qml:142
+msgid "Wi-Fi hotspot"
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can user your cellular data connection "
+"over Wi-Fi. Normal data charges apply."
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can user your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr ""
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+msgid "Carriers"
+msgstr ""
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr ""
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Automatically"
+msgstr "Automātiski"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Manually"
+msgstr "Pašrocīgi"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "Atsvaidzināt"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "Meklē"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:31
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:104
+msgid "Cellular"
+msgstr ""
+
+#: ../plugins/cellular//PageComponent.qml:136
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr ""
+
+#: ../plugins/cellular//PageComponent.qml:151
+msgid "Data usage statistics"
+msgstr ""
+
+#: ../plugins/cellular//PageComponent.qml:157
+#: ../plugins/cellular//PageComponent.qml:165
+msgid "Carrier"
+msgid_plural "Carriers"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/cellular//PageComponent.qml:184
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "Parādīt atslēgu"
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr "Mainīt"
+
+#: ../plugins/system-update//Configuration.qml:30
+#: ../plugins/system-update//PageComponent.qml:446
+msgid "Auto download"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr "Kad lieto wi-fi"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: plugins/system-update//PageComponent.qml:35
-#: settings.js:86
+#: ../plugins/system-update//PageComponent.qml:35
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:116
 msgid "Updates"
 msgstr "Atjauninājumi"
 
-#: plugins/system-update//PageComponent.qml:51
+#: ../plugins/system-update//PageComponent.qml:51
 msgid "Update System"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:52
+#: ../plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
 msgstr "Ir jāpārstartē telefonu lai pabeigt sistēmas atjaunināšanu."
 
-#: plugins/system-update//PageComponent.qml:55
+#: ../plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
 msgstr "Instalēt & Parstartēt"
 
-#: plugins/system-update//PageComponent.qml:64
+#: ../plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
 msgstr "Ne tagad"
 
-#: plugins/system-update//PageComponent.qml:70
+#: ../plugins/system-update//PageComponent.qml:70
 msgid "Install"
 msgstr "Instalēt"
 
-#: plugins/system-update//PageComponent.qml:88
+#: ../plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:142
+#: ../plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:157
+#: ../plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:168
+#: ../plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
 msgstr "Sistēmas atjaunināšana neizdevās."
 
-#: plugins/system-update//PageComponent.qml:199
+#: ../plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
 msgstr "Pārbauda atjauninājumus…"
 
-#: plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
 msgstr "Instalē %1 atjauninājumus..."
 
-#: plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
 msgstr "Instalē %1 atjauninājumus"
 
-#: plugins/system-update//PageComponent.qml:218
+#: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
 msgstr "Pauzēt visus"
 
-#: plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Retry"
 msgstr "Mēģināt vēlreiz"
 
-#: plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:303
 msgid "Download"
 msgstr "Lejupielādēt"
 
-#: plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:303
 msgid "Update"
 msgstr "Atjaunināt"
 
-#: plugins/system-update//PageComponent.qml:304
+#: ../plugins/system-update//PageComponent.qml:304
 msgid "Resume"
 msgstr "Atsākt"
 
-#: plugins/system-update//PageComponent.qml:305
+#: ../plugins/system-update//PageComponent.qml:305
 msgid "Pause"
 msgstr "Pauzēt"
 
-#: plugins/system-update//PageComponent.qml:364
+#: ../plugins/system-update//PageComponent.qml:364
 msgid "Installing"
 msgstr "Instalē"
 
-#: plugins/system-update//PageComponent.qml:397
+#: ../plugins/system-update//PageComponent.qml:397
 msgid "Installed"
 msgstr "Instalēts"
 
-#: plugins/system-update//PageComponent.qml:421
+#: ../plugins/system-update//PageComponent.qml:421
 msgid "Version: "
 msgstr "Versija: "
 
-#: plugins/system-update//PageComponent.qml:446
-#: plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr ""
-
-#: plugins/system-update//PageComponent.qml:451
+#: ../plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
 msgstr "Uz wi-fi"
 
-#: plugins/system-update//PageComponent.qml:453
+#: ../plugins/system-update//PageComponent.qml:453
 msgid "Always"
 msgstr "Vienmēr"
 
-#: plugins/system-update//PageComponent.qml:505
+#: ../plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
 msgstr ""
 
-#: plugins/system-update//PageComponent.qml:535
+#: ../plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
 msgstr "Instalē atjauninājumus..."
 
-#: plugins/system-update//PageComponent.qml:549
+#: ../plugins/system-update//PageComponent.qml:549
 msgid " bytes"
 msgstr " baiti"
 
-#: plugins/system-update//PageComponent.qml:552
+#: ../plugins/system-update//PageComponent.qml:552
 msgid " KiB"
 msgstr " KiB"
 
-#: plugins/system-update//PageComponent.qml:555
+#: ../plugins/system-update//PageComponent.qml:555
 msgid " MiB"
 msgstr " MiB"
 
-#: plugins/system-update//PageComponent.qml:558
+#: ../plugins/system-update//PageComponent.qml:558
 msgid " GiB"
 msgstr " GiB"
 
-#: plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr ""
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Laika josla"
 
-#: plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "Kad lieto wi-fi"
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "Iestatīt laika joslu"
 
-#: plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr ""
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "Ievadiet savu pašreizējo atrašanos vietu"
 
-#: plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr ""
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "Vietu nevar atrast"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: plugins/brightness//PageComponent.qml:32
-#: settings.js:98
-msgid "Brightness"
-msgstr "Spilgtums"
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "Iestatīt laiku & datumu"
 
-#: plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "Automātiski pielāgot"
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "Laiks"
 
-#: plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "Stunda"
 
-#: plugins/reset//EraseEverything.qml:29
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "Minūte"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "Sekunde"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "Datums"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "Diena"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "Mēnesis"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "Gads"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:128
+msgid "Time & Date"
+msgstr "Laiks un datums"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Laika josla:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Iestatīt laiku un datumu"
+
+#: ../plugins/reset//EraseEverything.qml:29
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
 
-#: plugins/reset//EraseEverything.qml:31
+#: ../plugins/reset//EraseEverything.qml:31
 msgid "Erase & reset everything"
 msgstr ""
 
-#: plugins/reset//ResetAllSettings.qml:29
-#: plugins/reset//ResetLauncherHome.qml:30
+#: ../plugins/reset//ResetAllSettings.qml:29
+#: ../plugins/reset//ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
 
-#: plugins/reset//ResetAllSettings.qml:31
+#: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: plugins/reset//PageComponent.qml:32
-#: settings.js:104
+#: ../plugins/reset//PageComponent.qml:32
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:138
 msgid "Reset phone"
 msgstr ""
 
-#: plugins/reset//PageComponent.qml:62
+#: ../plugins/reset//PageComponent.qml:62
 msgid "Reset launcher & home screen…"
 msgstr ""
 
-#: plugins/reset//PageComponent.qml:75
+#: ../plugins/reset//PageComponent.qml:75
 msgid "Reset all system settings…"
 msgstr ""
 
-#: plugins/reset//PageComponent.qml:88
+#: ../plugins/reset//PageComponent.qml:88
 msgid "Erase & reset everything…"
 msgstr ""
 
-#: plugins/reset//ResetLauncherHome.qml:32
+#: ../plugins/reset//ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
 msgstr ""
 
-#: plugins/background//Preview.qml:67
-msgid "Preview"
-msgstr "Priekšskatījums"
-
-#: plugins/background//WallpaperGrid.qml:121
-msgid "Remove"
-msgstr "Izņemt"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: plugins/background//MainPage.qml:31
-#: settings.js:118
-msgid "Background"
-msgstr "Fons"
-
-#: plugins/background//MainPage.qml:131
-#: plugins/background//Wallpapers.qml:43
-msgid "Welcome screen"
-msgstr "Ievada ekrāns"
-
-#: plugins/background//MainPage.qml:175
-#: plugins/background//Wallpapers.qml:43
-msgid "Home screen"
-msgstr "Mājas ekrāns"
-
-#: plugins/background//MainPage.qml:200
-msgid "Same background for both"
-msgstr ""
-
-#: plugins/background//MainPage.qml:201
-msgid "Different background for each"
-msgstr ""
-
-#: plugins/background//Wallpapers.qml:42
-msgid "Choose background"
-msgstr "Izvelieties fonu"
-
-#: plugins/background//Wallpapers.qml:47
-msgid "Photo/Image"
-msgstr ""
-
-#: plugins/background//Wallpapers.qml:95
-msgid "Ubuntu Art"
-msgstr ""
-
-#: plugins/background//Wallpapers.qml:110
-msgid "Custom"
-msgstr "Pielāgots"
-
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr ""
-
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
-
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "Apstiprināt"
-
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "PIN priekš '%1'"
-
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr "Sapārot"
-
-#. TRANSLATORS: %1 is the display name of the device that is connecting
-#: plugins/bluetooth//PageComponent.qml:71
-#, qt-format
-msgid "%1 (Connecting…)"
-msgstr ""
-
-#. TRANSLATORS: %1 is the display name of the device that is disconnecting
-#: plugins/bluetooth//PageComponent.qml:74
-#, qt-format
-msgid "%1 (Disconnecting…)"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:81
-msgid "Computer"
-msgstr "Dators"
-
-#: plugins/bluetooth//PageComponent.qml:83
-msgid "Modem"
-msgstr "Modems"
-
-#: plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
-msgid "Network"
-msgstr "Tīkls"
-
-#: plugins/bluetooth//PageComponent.qml:85
-msgid "Headset"
-msgstr "Austiņas ar mikrofonu"
-
-#: plugins/bluetooth//PageComponent.qml:86
-msgid "Headphones"
-msgstr "Austiņas"
-
-#: plugins/bluetooth//PageComponent.qml:87
-msgid "Video"
-msgstr "Video"
-
-#: plugins/bluetooth//PageComponent.qml:88
-msgid "Other Audio"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:89
-msgid "Joypad"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:90
-msgid "Keyboard"
-msgstr "Tastatūra"
-
-#: plugins/bluetooth//PageComponent.qml:91
-msgid "Tablet"
-msgstr "Planšete"
-
-#: plugins/bluetooth//PageComponent.qml:92
-msgid "Mouse"
-msgstr "Pele"
-
-#: plugins/bluetooth//PageComponent.qml:93
-msgid "Printer"
-msgstr "Printeris"
-
-#: plugins/bluetooth//PageComponent.qml:94
-msgid "Camera"
-msgstr "Kamera"
-
-#: plugins/bluetooth//PageComponent.qml:95
-msgid "Other"
-msgstr "Cits"
-
-#: plugins/bluetooth//PageComponent.qml:101
-msgid "Excellent"
-msgstr "Teicami"
-
-#: plugins/bluetooth//PageComponent.qml:102
-msgid "Good"
-msgstr "Labi"
-
-#: plugins/bluetooth//PageComponent.qml:103
-msgid "Fair"
-msgstr "Mērens"
-
-#: plugins/bluetooth//PageComponent.qml:104
-msgid "Poor"
-msgstr "Vājš"
-
-#: plugins/bluetooth//PageComponent.qml:161
-msgid "Discoverable"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:161
-msgid "Not discoverable"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:192
-msgid "Connected devices:"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:220
-msgid "Connect a different device:"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:220
-msgid "Connect another device:"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:247
-msgid "None detected"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:267
-msgid "Type"
-msgstr "Veids"
-
-#: plugins/bluetooth//PageComponent.qml:271
-msgid "Signal Strength"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:276
-msgid "Disconnect"
-msgstr "Atvienoties"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: plugins/cellular//PageComponent.qml:28
-#: settings.js:132
-msgid "Cellular"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:68
-msgid "Cellular data:"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:69
-msgid "Off"
-msgstr "Izslēgts"
-
-#: plugins/cellular//PageComponent.qml:70
-msgid "2G only (saves battery)"
-msgstr "Tikai 2G (taupa bateriju)"
-
-#: plugins/cellular//PageComponent.qml:71
-msgid "2G/3G/4G (faster)"
-msgstr "2G/3G/4G (atraks)"
-
-#: plugins/cellular//PageComponent.qml:82
-msgid "Cellular data"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:93
-msgid "Data roaming"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:111
-msgid "Data usage statistics"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:121
-msgid "Choose carrier:"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:127
-#: plugins/cellular//ChooseCarrier.qml:28
-msgid "Carrier"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:139
-msgid "APN"
-msgstr "APN"
-
-#: plugins/cellular//ChooseCarrier.qml:79
-msgid "Refresh"
-msgstr "Atsvaidzināt"
-
-#: plugins/cellular//ChooseCarrier.qml:96
-msgid "Searching"
-msgstr "Meklē"
-
-#: plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:148
-msgid "Software licenses"
-msgstr ""
-
-#: plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr ""
-
-#: plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr ""
-
-#: plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr ""
-
-#: plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr ""
-
-#: plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr ""
-
-#: plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr ""
-
-#: plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: plugins/about//PageComponent.qml:33
-#: settings.js:144
-msgid "About this phone"
-msgstr "Par šo telefonu"
-
-#: plugins/about//PageComponent.qml:87
-msgid "Serial"
-msgstr "Sērija"
-
-#: plugins/about//PageComponent.qml:106 ../plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "Krātuve"
-
-#: plugins/about//PageComponent.qml:113
-msgid "Software:"
-msgstr "Programmatūra:"
-
-#: plugins/about//PageComponent.qml:118
-msgid "OS"
-msgstr "Operētājsistēma"
-
-#: plugins/about//PageComponent.qml:127
-msgid "Last updated"
-msgstr ""
-
-#: plugins/about//PageComponent.qml:134
-msgid "Check for updates"
-msgstr "Pārbaudīt atjauninājumus"
-
-#: plugins/about//PageComponent.qml:143
-msgid "Legal:"
-msgstr ""
-
-#: plugins/about//PageComponent.qml:156
-msgid "Regulatory info"
-msgstr ""
-
-#: plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "Ubuntu izmantots"
-
-#: plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "Video"
-
-#: plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "Audio"
-
-#: plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "Attēli"
-
-#: plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "Citas datnes"
-
-#: plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "Aplikāciju izmantots"
-
-#: plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr ""
-
-#: plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "Brīva vieta"
-
-#: plugins/about//Storage.qml:174
-msgid "By name"
-msgstr ""
-
-#: plugins/about//Storage.qml:174
-msgid "By size"
-msgstr ""
-
-#: src/qml/MainWindow.qml:109
+#: ../src/qml/MainWindow.qml:109
 msgid "System Settings"
 msgstr "Sistēmas iestatījumi"
 
-#: src/qml/MainWindow.qml:130
+#: ../src/qml/MainWindow.qml:130
 msgid "Search"
 msgstr "Meklēt"
 
-#: src/qml/MainWindow.qml:149
+#: ../src/qml/MainWindow.qml:149
 msgid "Personal"
 msgstr "Personīgie"
 
-#: src/qml/MainWindow.qml:154
+#: ../src/qml/MainWindow.qml:154
 msgid "System"
 msgstr "Sistēma"
 
-#: wizard/qml/Components//Page.qml:66
-msgid "Back"
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi-Fi"
 msgstr ""
 
-#: wizard/qml/Pages//30-location.qml:22
+#: ../wizard/qml/Pages//20-wifi.qml:68
+msgid "Available networks"
+msgstr "Pieejamie tīkli"
+
+#: ../wizard/qml/Pages//20-wifi.qml:153 ../wizard/qml/Pages//no-sim.qml:66
+msgid "Skip"
+msgstr "Izlaist"
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "No SIM card"
+msgstr "Nav SIM kartes"
+
+#: ../wizard/qml/Pages//no-sim.qml:57
+msgid "To use the telephone and SMS features a SIM must be installed."
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:59
+msgid "Install a SIM before continuing."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "Setup complete"
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:39
+msgid ""
+"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
+"the good folks at Canonical."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:41
+msgid "Now you can start using your Ubuntu phone."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:48
+msgid "Finish"
+msgstr "Pabeigt"
+
+#: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
 msgstr ""
 
-#: wizard/qml/Pages//30-location.qml:39
+#: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
 
-#: wizard/qml/Pages//30-location.qml:41
+#: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
 
-#: wizard/qml/Pages//no-sim.qml:22
-msgid "No SIM card"
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hello"
+msgstr "Sveiki"
+
+#: ../wizard/qml/Pages//10-welcome.qml:60
+msgid "Welcome to your Ubuntu phone. Let’s get started."
 msgstr ""
 
-#: wizard/qml/Pages//no-sim.qml:57
-msgid "Don’t worry, you can insert a SIM card later."
-msgstr ""
-
-#: wizard/qml/Pages//no-sim.qml:59
-msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
-
-#: wizard/qml/Pages//no-sim.qml:61
-msgid "You can find a SIM in your phone package or contact your provider."
-msgstr ""
-
-#: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
-msgid "Skip"
-msgstr ""
-
-#: wizard/qml/Pages//80-finished.qml:22
-msgid "That’s it!"
-msgstr ""
-
-#: wizard/qml/Pages//80-finished.qml:39
-msgid "It’s great to have you in the Ubuntu community."
-msgstr ""
-
-#: wizard/qml/Pages//80-finished.qml:41
-msgid "Enjoy your new phone."
-msgstr ""
-
-#: wizard/qml/Pages//80-finished.qml:48
-msgid "Finish"
-msgstr ""
-
-#: wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr ""
-
-#: wizard/qml/Pages//20-wifi.qml:67
-msgid "Available networks"
-msgstr ""
-
-#: wizard/qml/Pages//20-wifi.qml:81
-msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
-
-#: wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello!"
-msgstr "Sveiki!"
-
-#: wizard/qml/Pages//10-welcome.qml:55
-msgid "Welcome to Ubuntu."
-msgstr "Sveicināts uz Ubuntu."
-
-#: wizard/qml/Pages//10-welcome.qml:56
-msgid "Let’s get started."
-msgstr ""
-
-#: wizard/qml/Pages//10-welcome.qml:61
+#: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
 msgstr "Izvēlēties jūsu valodu."
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: settings.js:4
-msgid "sound"
-msgstr "skaņa"
+#: ../wizard/qml/Pages//10-welcome.qml:82
+msgid "Start"
+msgstr "Sākt"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:6
-#: settings.js:16
-#: settings.js:34
-#: settings.js:42
-#: settings.js:52
-#: settings.js:70
-#: settings.js:76
-#: settings.js:94
-#: settings.js:102
-#: settings.js:108
-#: settings.js:130
-#: settings.js:142
-msgid "settings"
-msgstr "iestatījumi"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:10
-msgid "time"
-msgstr "laiks"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:12
-msgid "date"
-msgstr "datums"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:14
-msgid "timezone"
-msgstr "laikajosla"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:18
-msgid "Orientation Lock"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:20
-msgid "rotation"
-msgstr "rotācija"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:22
-msgid "orientation"
-msgstr "orientācija"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:24
-msgid "lock"
-msgstr "slēgt"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:26
-msgid "screen"
-msgstr "ekrāns"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:30
-msgid "security"
-msgstr "drošība"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:32
-msgid "privacy"
-msgstr "privātums"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:36
-msgid "Accessibility"
-msgstr "Pieejamība"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:38
-msgid "accessibility"
-msgstr "pieejamība"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:40
-msgid "a11y"
-msgstr "a11y"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:46
-msgid "language"
-msgstr "valoda"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:48
-msgid "lang"
-msgstr "valoda"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:50
-msgid "i18n"
-msgstr "i18n"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:56
-msgid "battery"
-msgstr "baterija"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:58
-msgid "power"
-msgstr "strāva"
+#: ../wizard/qml/Components//Page.qml:47
+msgid "Back"
+msgstr "Atpakaļ"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:62
-#: settings.js:136
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:4
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:108
 msgid "network"
 msgstr "tīkls"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:64
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:6
 msgid "wireless"
 msgstr "bezvadu"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:66
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:8
 msgid "wifi"
 msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:68
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:10
 msgid "wi-fi"
 msgstr "wi-fi"
 
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: settings.js:74
-msgid "phone"
-msgstr "tālrunis"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:78
-msgid "Example"
-msgstr "Piemērs"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:80
-msgid "example"
-msgstr "piemērs"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:82
-msgid "test"
-msgstr "tests"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:84
-msgid "sample"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:88
-msgid "system"
-msgstr "sistēma"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:90
-msgid "software"
-msgstr "programmatūra"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:92
-msgid "update"
-msgstr "atjaunināt"
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: settings.js:96
-msgid "Updates available"
-msgstr "Pieejami atjauninājumi"
-
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: settings.js:100
-msgid "brightness"
-msgstr "spilgtums"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: settings.js:106
-msgid "reset"
-msgstr "atiestatīt"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:110
-msgid "Flight Mode"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:112
-msgid "flight"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:114
-msgid "plane"
-msgstr "lidmašīna"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:116
-msgid "offline"
-msgstr "nesaistē"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:120
-msgid "appearance"
-msgstr "izskats"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:122
-msgid "background"
-msgstr "fons"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:124
-msgid "wallpaper"
-msgstr "ekrāntapete"
-
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: settings.js:128
-msgid "bluetooth"
-msgstr "bluetooth"
-
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:134
-msgid "cellular"
-msgstr "mobilais"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:12
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:20
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:28
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:42
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:54
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:64
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:78
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:102
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:114
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:124
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:136
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:142
+msgid "settings"
+msgstr "iestatījumi"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:138
-msgid "mobile"
-msgstr "mobilais"
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:14
+msgid "Accessibility"
+msgstr "Pieejamība"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:140
-msgid "gsm"
-msgstr "gsm"
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:16
+msgid "accessibility"
+msgstr "pieejamība"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:18
+msgid "a11y"
+msgstr "a11y"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:24
+msgid "security"
+msgstr "drošība"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:26
+msgid "privacy"
+msgstr "privātums"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:146
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:32
 msgid "about"
 msgstr "par"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:148
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:34
 msgid "device"
 msgstr "ierīce"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:150
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:36
 msgid "info"
 msgstr "info"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:40
+msgid "sound"
+msgstr "skaņa"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:46
+msgid "battery"
+msgstr "baterija"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:48
+msgid "power"
+msgstr "strāva"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:52
+msgid "brightness"
+msgstr "spilgtums"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:58
+msgid "language"
+msgstr "valoda"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:60
+msgid "lang"
+msgstr "valoda"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:62
+msgid "i18n"
+msgstr "i18n"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:66
+msgid "Flight Mode"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:68
+msgid "flight"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:70
+msgid "plane"
+msgstr "lidmašīna"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:72
+msgid "offline"
+msgstr "nesaistē"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:76
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:80
+msgid "Orientation Lock"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:82
+msgid "rotation"
+msgstr "rotācija"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:84
+msgid "orientation"
+msgstr "orientācija"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:86
+msgid "lock"
+msgstr "slēgt"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:88
+msgid "screen"
+msgstr "ekrāns"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:92
+msgid "appearance"
+msgstr "izskats"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:94
+msgid "background"
+msgstr "fons"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:96
+msgid "wallpaper"
+msgstr "ekrāntapete"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:100
+msgid "phone"
+msgstr "tālrunis"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:106
+msgid "cellular"
+msgstr "mobilais"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:110
+msgid "mobile"
+msgstr "mobilais"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:112
+msgid "gsm"
+msgstr "gsm"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:118
+msgid "system"
+msgstr "sistēma"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:120
+msgid "software"
+msgstr "programmatūra"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:122
+msgid "update"
+msgstr "atjaunināt"
+
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:126
+msgid "Updates available"
+msgstr "Pieejami atjauninājumi"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:130
+msgid "time"
+msgstr "laiks"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:132
+msgid "date"
+msgstr "datums"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:134
+msgid "timezone"
+msgstr "laikajosla"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:140
+msgid "reset"
+msgstr "atiestatīt"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:144
+msgid "Example"
+msgstr "Piemērs"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:146
+msgid "example"
+msgstr "piemērs"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:148
+msgid "test"
+msgstr "tests"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/laney/temp/ubuntu-system-settings/po/settings.js:150
+msgid "sample"
+msgstr ""
