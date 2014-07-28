@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-23 18:57+0000\n"
-"Last-Translator: Pjotr12345 <Unknown>\n"
+"PO-Revision-Date: 2014-07-27 18:40+0000\n"
+"Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:31+0000\n"
+"X-Launchpad-Export-Date: 2014-07-28 06:43+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
@@ -257,7 +257,7 @@ msgstr "Toegangscode wijzigen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:80
 msgid "Change passphrase"
-msgstr "Wachtwoord wijzigen"
+msgstr "Wachtwoordzin wijzigen"
 
 #: ../plugins/security-privacy//LockSecurity.qml:87
 msgid "Switch to swipe"
@@ -281,11 +281,11 @@ msgstr "Huidige wachtwoordzin"
 
 #: ../plugins/security-privacy//LockSecurity.qml:150
 msgid "Incorrect passcode. Try again."
-msgstr "Verkeerde toegangscode. Probeer het opnieuw."
+msgstr "Onjuiste toegangscode. Probeer het opnieuw."
 
 #: ../plugins/security-privacy//LockSecurity.qml:153
 msgid "Incorrect passphrase. Try again."
-msgstr "Verkeerde wachtwoordzin. Probeer het opnieuw."
+msgstr "Onjuiste wachtwoordzin. Probeer het opnieuw."
 
 #: ../plugins/security-privacy//LockSecurity.qml:166
 msgid "Choose passcode"
@@ -489,15 +489,15 @@ msgstr "N.v.t."
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
-msgstr ""
+msgstr "Ontwikkelaarsmodus"
 
 #: ../plugins/about//DevMode.qml:68
 msgid "In Developer Mode, anyone can access, "
-msgstr ""
+msgstr "In de ontwikkelaarsmodus, heeft iedereen toegang, "
 
 #: ../plugins/about//DevMode.qml:95
 msgid "You need a passcode or passphrase set "
-msgstr ""
+msgstr "U moet een toegangscode of wachtwoordzin instellen "
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -507,7 +507,7 @@ msgstr "Over deze telefoon"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Telefoonnummer"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -539,7 +539,7 @@ msgstr "Bijkomende info"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Ontwikkelaarsmodus"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -557,11 +557,11 @@ msgstr "Geluid"
 
 #: ../plugins/sound//PageComponent.qml:73
 msgid "Silent Mode"
-msgstr ""
+msgstr "Stille modus"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "Overgaan:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -706,12 +706,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "Gisteren"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "Vandaag"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -996,7 +996,7 @@ msgstr "Instellen"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Laatst gebeld %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -1031,7 +1031,7 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Doorschakelen naar"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
@@ -1046,31 +1046,36 @@ msgstr "SIM"
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//PageComponent.qml:142
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "Wi-Fihotspot"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "Hotspot"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
 "When hotspot is on, other devices can user your cellular data connection "
 "over Wi-Fi. Normal data charges apply."
 msgstr ""
+"Wanneer hotspot ingeschakeld is, kunnen andere apparaten gebruik maken van "
+"het Wi-Finetwerk van uw mobiel. U zal de eventuele extra kosten hiervan "
+"moeten betalen."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can user your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Andere apparaten kunnen gebruik maken van het Wi-Finetwerk van uw mobiel. U "
+"zal de eventuele extra kosten hiervan moeten betalen."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "Hotspot instellen"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
-msgstr ""
+msgstr "Providers"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1104,7 +1109,7 @@ msgstr "Mobiel"
 
 #: ../plugins/cellular//PageComponent.qml:136
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "Hotspot uitgeschakeld omdat Wi-Fi uitstaat."
 
 #: ../plugins/cellular//PageComponent.qml:151
 msgid "Data usage statistics"
@@ -1114,8 +1119,8 @@ msgstr "Statistieken van verbruik gegevenstransport"
 #: ../plugins/cellular//PageComponent.qml:165
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Provider"
+msgstr[1] "Providers"
 
 #: ../plugins/cellular//PageComponent.qml:184
 msgid "APN"
@@ -1123,23 +1128,23 @@ msgstr "APN"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "Hotspotinstellingen wijzigen"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "Hotspotnaam"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "Wachtwoord (moet minimaal 8 tekens zijn of langer)"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "Wachtwoord tonen"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Wijzigen"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -1152,7 +1157,7 @@ msgstr "Toekomstige updates automatisch ophalen:"
 
 #: ../plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
-msgstr "Alleen bij een Wi-Fi-verbinding"
+msgstr "Alleen bij een Wi-Fiverbinding"
 
 #: ../plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
@@ -1257,7 +1262,7 @@ msgstr "Versie: "
 
 #: ../plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
-msgstr "Via Wi-FI"
+msgstr "Via Wi-Fi"
 
 #: ../plugins/system-update//PageComponent.qml:453
 msgid "Always"
@@ -1418,7 +1423,7 @@ msgstr "Systeem"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr "Verbinding maken met een Wi-Fi-netwerk"
+msgstr "Verbinding maken met Wi-Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
@@ -1434,25 +1439,27 @@ msgstr "Geen SIM-kaart"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
+msgstr "Om te kunnen bellen en sms'en, dient u een SIM-kaart te plaatsen."
 
 #: ../wizard/qml/Pages//no-sim.qml:59
 msgid "Install a SIM before continuing."
-msgstr ""
+msgstr "Plaats een SIM-kaart voordat u verder gaat."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "Instellen voltooid"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Welkom bij Ubuntu op uw telefoon, mogelijk gemaakt door duizenden "
+"vrijwilligers en de goede mensen van Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "U bent nu klaar om uw Ubuntutelefoon te gaan gebruiken."
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1480,11 +1487,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Hallo"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Welkom bij uw Ubuntutelefoon. Laten we beginnen."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
@@ -1492,7 +1499,7 @@ msgstr "Kies uw taal"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Beginnen"
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"

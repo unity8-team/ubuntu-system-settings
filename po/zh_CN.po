@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-18 15:37+0000\n"
-"Last-Translator: Anthony Wong <anthony.wong@ubuntu.com>\n"
+"PO-Revision-Date: 2014-07-27 15:47+0000\n"
+"Last-Translator: Aron Xu <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:34+0000\n"
+"X-Launchpad-Export-Date: 2014-07-28 06:43+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
-msgstr ""
+msgstr "其他网络"
 
 #: ../plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
@@ -77,7 +77,7 @@ msgstr "连接"
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
 msgid "Previous networks"
-msgstr ""
+msgstr "前一网络"
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -393,11 +393,11 @@ msgstr "软件许可"
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "系统版本详情"
 
 #: ../plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "系统版本号"
 
 #: ../plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
@@ -473,7 +473,7 @@ msgstr "不适用"
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
-msgstr ""
+msgstr "开发者模式"
 
 #: ../plugins/about//DevMode.qml:68
 msgid "In Developer Mode, anyone can access, "
@@ -491,7 +491,7 @@ msgstr "关于此手机"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "电话号码"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -523,7 +523,7 @@ msgstr "管制信息"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "开发者模式"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -541,11 +541,11 @@ msgstr "声音"
 
 #: ../plugins/sound//PageComponent.qml:73
 msgid "Silent Mode"
-msgstr ""
+msgstr "静音模式"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "铃声："
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -681,12 +681,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "昨天"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "今日"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -916,7 +916,7 @@ msgstr "已连接设备："
 
 #: ../plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "连接另一个设备："
 
 #: ../plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
@@ -1000,7 +1000,7 @@ msgstr "在您没有接听来电，或者在手机处于忙碌、关机、或无
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "转发至"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
@@ -1015,11 +1015,11 @@ msgstr "SIM 卡"
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//PageComponent.qml:142
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "Wi-Fi 热点"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "热点"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
@@ -1035,11 +1035,11 @@ msgstr ""
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "设置热点"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
-msgstr ""
+msgstr "运营商"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1073,7 +1073,7 @@ msgstr "移动网络"
 
 #: ../plugins/cellular//PageComponent.qml:136
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "由于 Wi-Fi 处于关闭状态，热点已关闭。"
 
 #: ../plugins/cellular//PageComponent.qml:151
 msgid "Data usage statistics"
@@ -1083,8 +1083,7 @@ msgstr "数据用量统计"
 #: ../plugins/cellular//PageComponent.qml:165
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "运营商"
 
 #: ../plugins/cellular//PageComponent.qml:184
 msgid "APN"
@@ -1092,23 +1091,23 @@ msgstr "APN"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "更改热点设置"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "热点名称"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "密码(至少8个字符)"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "显示密码"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "更改"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -1180,12 +1179,12 @@ msgstr "正在检查更新…"
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "安装 %1 个更新..."
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "安装 %1 个更新"
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -1398,15 +1397,15 @@ msgstr "没有 SIM 卡"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
+msgstr "必须安装SIM卡以使用电话和短信。"
 
 #: ../wizard/qml/Pages//no-sim.qml:59
 msgid "Install a SIM before continuing."
-msgstr ""
+msgstr "请安装SIM卡。"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "完成设置"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
@@ -1440,7 +1439,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "您好"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
