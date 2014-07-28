@@ -292,7 +292,7 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
             setDisplayHint(oldType);
             // Special case this common message because the one PAM gives is so awful
             if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error"))
-                return badPasswordMessage(type);
+                return badPasswordMessage(oldType);
             else
                 return errorText;
         }
