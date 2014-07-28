@@ -185,8 +185,7 @@ class SoundPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     def _get_ringtone_setting_button(self):
         return self.wait_select_single(
-            'SingleValue', objectName='ringtoneListItem'
-        )
+            'SingleValue', objectName='ringtoneListItem')
 
     def get_ringtone_setting_button_current_value(self):
         """current value of the ringtone setting button.
@@ -229,8 +228,7 @@ class SoundsList(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         list_view.click_element('ringtone-' + name)
 
         return self.select_single(
-            'OptionSelectorDelegate', objectName='ringtone-' + name
-        )
+            'OptionSelectorDelegate', objectName='ringtone-' + name)
 
     @autopilot.logging.log_action(logger.info)
     def go_back_to_sound_page(self):

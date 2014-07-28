@@ -23,12 +23,10 @@ class SoundTestCase(SoundBaseTestCase):
         """ Checks whether Sound page is available """
         self.assertThat(
             self.system_settings.main_view.sound_page,
-            NotEquals(None)
-        )
+            NotEquals(None))
         self.assertThat(
             self.system_settings.main_view.sound_page.title,
-            Equals(_('Sound'))
-        )
+            Equals(_('Sound')))
 
     def test_keyboard_sound_switch(self):
         """ Check that keyboard sound is present and clickable"""
@@ -58,8 +56,7 @@ class RingtoneSettingTestCase(SoundBaseTestCase):
 
         self.assertThat(
             self.sound_page.get_ringtone_setting_button_current_value(),
-            Eventually(Equals(self.ringtone))
-        )
+            Eventually(Equals(self.ringtone)))
 
     @skipIf(platform.model() is 'Desktop', 'Phones only')
     def test_ringtone_setting_change_in_backend(self):
@@ -68,9 +65,7 @@ class RingtoneSettingTestCase(SoundBaseTestCase):
         current_ringtone = sounds_list.choose_ringtone(self.ringtone)
 
         self.assertThat(
-            current_ringtone.selected, Eventually(Equals(True))
-        )
+            current_ringtone.selected, Eventually(Equals(True)))
         self.assertThat(
             lambda: helpers.get_current_ringtone_from_backend().endswith(
-                self.ringtone + '.ogg'), Eventually(Equals(True))
-        )
+                self.ringtone + '.ogg'), Eventually(Equals(True)))
