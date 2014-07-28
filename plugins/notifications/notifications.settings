@@ -1,5 +1,5 @@
 {
-    "icon": "preferences-system-updates-symbolic",
+    "icon": "preferences-desktop-notifications-symbolic",
     "name": "Notifications",
     "translations": "ubuntu-system-settings",
     "category": "personal",
