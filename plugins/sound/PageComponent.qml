@@ -67,7 +67,8 @@ ItemPage {
             SilentModeWarning { visible: backendInfo.silentMode }
 
             ListItem.Standard {
-                control: Switch {                   
+                control: Switch {
+                    objectName: "silentMode"
                     checked: backendInfo.silentMode
                     onCheckedChanged: backendInfo.silentMode = checked
                 }
@@ -126,7 +127,7 @@ ItemPage {
 
             ListItem.Standard {
                 control: CheckBox {
-                    id: callVibrate
+                    objectName: "callVibrate"
                     checked: backendInfo.incomingCallVibrate
                     onCheckedChanged: backendInfo.incomingCallVibrate = checked
                 }
@@ -135,6 +136,7 @@ ItemPage {
 
             ListItem.Standard {
                 control: CheckBox {
+                    objectName: "callVibrateSilentMode"
                     checked: backendInfo.incomingCallVibrateSilentMode
                     onCheckedChanged: backendInfo.incomingCallVibrateSilentMode = checked
                 }
@@ -160,6 +162,7 @@ ItemPage {
 
             ListItem.Standard {
                 control: CheckBox {
+                    objectName: "messageVibrate"
                     checked: backendInfo.incomingMessageVibrate
                     onCheckedChanged: backendInfo.incomingMessageVibrate = checked
                 }
@@ -168,6 +171,7 @@ ItemPage {
 
             ListItem.Standard {
                 control: CheckBox {
+                    objectName: "messageVibrateSilentMode"
                     checked: backendInfo.incomingMessageVibrateSilentMode
                     onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
                 }

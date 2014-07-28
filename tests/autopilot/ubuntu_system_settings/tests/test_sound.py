@@ -33,3 +33,58 @@ class SoundTestCase(SoundBaseTestCase):
         self.system_settings.main_view.pointing_device.click_object(kbd_snd)
         self.assertThat(
             kbd_snd.get_properties()["checked"], NotEquals(current_value))
+
+    def test_silent_mode_sound_switch(self):
+        """ Check that silent_mode is present and clickable"""
+        snd = self.system_settings.main_view.sound_page.select_single(
+            objectName="silentMode")
+        current_value = snd.get_properties()["checked"]
+        self.system_settings.main_view.pointing_device.click_object(snd)
+        self.assertThat(
+            snd.get_properties()["checked"], NotEquals(current_value))
+
+    def test_silent_mode_warning(self):
+        """ Check that silent_mode warning is shown"""
+        snd = self.system_settings.main_view.sound_page.select_single(
+            objectName="silentMode")
+        sndwarn = self.system_settings.main_view.sound_page.select_single(
+            objectName="silentModeWarning")
+        self.system_settings.main_view.pointing_device.click_object(snd)
+        self.assertThat(
+            sndwarn.get_properties()["visible"], Equals(True))
+
+    def test_call_vibrate_sound_switch(self):
+        """ Check that call vibrate is present and clickable"""
+        snd = self.system_settings.main_view.sound_page.select_single(
+            objectName="callVibrate")
+        current_value = snd.get_properties()["checked"]
+        self.system_settings.main_view.pointing_device.click_object(snd)
+        self.assertThat(
+            snd.get_properties()["checked"], NotEquals(current_value))
+
+    def test_call_vibrate_silent_mode_sound_switch(self):
+        """ Check that call vibrate is present and clickable"""
+        snd = self.system_settings.main_view.sound_page.select_single(
+            objectName="callVibrateSilentMode")
+        current_value = snd.get_properties()["checked"]
+        self.system_settings.main_view.pointing_device.click_object(snd)
+        self.assertThat(
+            snd.get_properties()["checked"], NotEquals(current_value))
+
+    def test_message_vibrate_sound_switch(self):
+        """ Check that message vibrate is present and clickable"""
+        snd = self.system_settings.main_view.sound_page.select_single(
+            objectName="messageVibrate")
+        current_value = snd.get_properties()["checked"]
+        self.system_settings.main_view.pointing_device.click_object(snd)
+        self.assertThat(
+            snd.get_properties()["checked"], NotEquals(current_value))
+
+    def test_message_vibrate_silent_mode_sound_switch(self):
+        """ Check that call vibrate is present and clickable"""
+        snd = self.system_settings.main_view.sound_page.select_single(
+            objectName="messageVibrateSilentMode")
+        current_value = snd.get_properties()["checked"]
+        self.system_settings.main_view.pointing_device.click_object(snd)
+        self.assertThat(
+            snd.get_properties()["checked"], NotEquals(current_value))
