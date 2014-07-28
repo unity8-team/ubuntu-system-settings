@@ -39,13 +39,13 @@ ItemPage {
         ListModel {
             id: appsModel
             ListElement {
-                name: "Camera"
-                caption: "Apps that have requested access to your camera"
+                name: QT_TR_NOOP("Camera")
+                caption: QT_TR_NOOP("Apps that have requested access to your camera")
                 trustStoreService: "CameraService"
             }
             ListElement {
-                name: "Mic"
-                caption: "Apps that have requested access to your mic"
+                name: QT_TR_NOOP("Mic")
+                caption: QT_TR_NOOP("Apps that have requested access to your mic")
                 trustStoreService: "PulseAudio"
             }
         }
@@ -60,8 +60,8 @@ ItemPage {
                     i18n.tr("%1/%2").arg(trustStoreModel.grantedCount).arg(trustStoreModel.count) :
                     i18n.tr("0")
                 onClicked: pageStack.push(Qt.resolvedUrl("AppAccessControl.qml"), {
-                    "title": model.name,
-                    "caption": model.caption,
+                    "title": i18n.tr(model.name),
+                    "caption": i18n.tr(model.caption),
                     "model": trustStoreModel,
                 })
 

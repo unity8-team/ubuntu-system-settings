@@ -23,6 +23,7 @@ add_custom_target(pot-qml
                             --copyright=\"Canonical Ltd.\"
                             --package-name ubuntu-system-settings
                             --qt --c++ --add-comments=TRANSLATORS
+                            --keyword=QT_TR_NOOP
                             --keyword=tr --keyword=tr:1,2 --from-code=UTF-8
                             ${QMLFILES} "${CMAKE_CURRENT_BINARY_DIR}/settings.js"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
