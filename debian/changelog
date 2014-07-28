@@ -1,3 +1,103 @@
+ubuntu-system-settings (0.3+14.10.20140725.4-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [sound] Added volume slider to the sound pane
+
+  [ jonas-drange ]
+  * Cellular panel changes: new carrier design. Carrier selection for
+    two sims (individual selection). Using either sim1 or sim2 for
+    cellular data. Data technology preference selection refactor to work
+    for dual sim scenario as well.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 25 Jul 2014 18:13:24 +0000
+
+ubuntu-system-settings (0.3+14.10.20140725.3-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [phone] Call forwarding implementation
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Oliver Grawert ]
+  * Add DeveloperMode page to "About this device" (see: .
+    https://wiki.ubuntu.com/AboutThisDevice#developer-mode) Enable
+    toggling of the adb usb gadget driver in DeveloperMode page through
+    the dbus-property-service interface. Add shortcut from DeveloperMode
+    page to Lock screen settings (since the final dev mode will require
+    that you can lock before enabling it). Depend on suru-icon-theme
+    since we are using the security alert icon on the Developer Mode
+    page. Depend on dbus-property-service on the arches where it is
+    available since we use it in Developer Mode .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 25 Jul 2014 15:32:46 +0000
+
+ubuntu-system-settings (0.3+14.10.20140723-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * Hi, this branch seeks to address most of the design changes to the
+    Background panel in System Settings (post Malta) The current spec
+    and designs are here:
+    https://wiki.ubuntu.com/Appearance#Phone.2BAC8-tablet Related bugs:
+    https://bugs.launchpad.net/ubuntu/+source/ubuntu-system-
+    settings/+bug/1297418 https://bugs.launchpad.net/ubuntu-autopilot-
+    tests/+bug/1322074 Changes: Removed all functionality and code
+    related to changing scope background. Added autopilot tests. New
+    header design that collapses/expands. Not part of this branch:
+    Scaling in preview has not been implemented. It should have its own
+    branch. After rotating the phone in system settings, the default
+    background will appear to have been deselected. This is because the
+    current background is now the default tablet background. Confirmed
+    on mako. Will file bug. Thank you. (LP: #1322074)
+
+  [ Iain Lane ]
+  * Add 1 gu of spacing between rows in the main screen's grid
+
+  [ Pawel Stolowski ]
+  * Added X-Ubuntu-Default-Department-ID key to the desktop file. This
+    is required by click scope to support departments for preinstalled
+    applications.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 23 Jul 2014 00:45:42 +0000
+
+ubuntu-system-settings (0.3+14.10.20140721.1-0ubuntu1) utopic; urgency=low
+
+  [ Ubuntu daily release ]
+  * debian/ubuntu-system-settings.maintscript: auto-update to released
+    version
+
+  [ Iain Lane ]
+  * Remove leftover /etc/apparmor.d/usr.bin.system-settings conffile.
+  * Use the last updated date returned by 'Info' on system-image's D-Bus
+    interface instead of reading a file on the fs, which is an
+    implementation detail.
+  * Clean up AP tests to try to fix test failures. Run ofono and system-
+    image tests on the about page under mocks.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 21 Jul 2014 14:51:03 +0000
+
+ubuntu-system-settings (0.3+14.10.20140718.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [phone] Call waiting implementation
+
+  [ Iain Lane ]
+  * [sound] Set the index on construction to avoid a disconcerting
+    animation when entering the page. (LP: #1342533)
+  * Run pylint and pyflakes on the right directory so they actually work
+    and fix the errors.
+  * revert lenient AppArmor profile since we won't be limiting access to
+    ofono in this manner. Furthermore, due to a naive check in media-
+    hub-server for the connecting process' profile name, this allows
+    system-settings to playback files via media-hub-server again (LP:
+    #1342321) (LP: #1342321)
+
+  [ William Hua ]
+  * Sort ignoring case, filter out unnamed locales. (LP: #1342326)
+  * Set only left and right anchors in language panel. (LP: #1343513)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 19:15:36 +0000
+
 ubuntu-system-settings (0.3+14.10.20140715-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
