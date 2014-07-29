@@ -39,6 +39,11 @@ FakeBluez::FakeBluez(QObject *parent) :
                                      m_dbusTestRunner.systemConnection());
 }
 
+FakeBluez::~FakeBluez()
+{
+    delete m_bluezMock;
+}
+
 QString
 FakeBluez::addAdapter(const QString &name, const QString &system_name)
 {

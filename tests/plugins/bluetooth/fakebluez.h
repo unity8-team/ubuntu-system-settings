@@ -59,6 +59,8 @@ private:
 public:
     explicit FakeBluez(QObject *parent = 0);
 
+    ~FakeBluez();
+
     const QString currentAdapter() { return m_currentAdapter; }
     const QList<QString> devices() { return m_devices; }
     const QDBusConnection & dbus() { return m_dbusTestRunner.systemConnection(); }
