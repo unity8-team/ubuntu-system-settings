@@ -196,10 +196,8 @@ void Bluetooth::connectDevice(const QString &address)
 
 void Bluetooth::removeDevice()
 {
-    QString path;
-
     if (m_selectedDevice) {
-        path = m_selectedDevice->getPath();
+        QString path = m_selectedDevice->getPath();
         m_devices.removeDevice(path);
     } else {
         qWarning() << "No selected device to remove.";
