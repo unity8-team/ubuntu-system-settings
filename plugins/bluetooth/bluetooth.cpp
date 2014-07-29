@@ -25,25 +25,17 @@
 #include "bluetooth.h"
 #include "dbus-shared.h"
 
-Bluetooth::Bluetooth(QDBusConnection &dbus, QObject *parent):
+Bluetooth::Bluetooth(QObject *parent):
+    Bluetooth(QDBusConnection::systemBus())
+{
+    Q_UNUSED(parent);
+}
+
+Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
     QObject(parent),
     m_dbus(dbus),
     m_devices(m_dbus),
     m_agent(m_dbus, m_devices)
-{
-    initBluetooth();
-}
-
-Bluetooth::Bluetooth(QObject *parent):
-    QObject(parent),
-    m_dbus(QDBusConnection::systemBus()),
-    m_devices(m_dbus),
-    m_agent(m_dbus, m_devices)
-{
-    initBluetooth();
-}
-
-void Bluetooth::initBluetooth()
 {
     // export our Agent to handle pairing requests
     new AgentAdaptor(&m_agent);

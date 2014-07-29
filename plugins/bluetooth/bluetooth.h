@@ -70,7 +70,7 @@ Q_SIGNALS:
 
 public:
     Bluetooth(QObject *parent = 0);
-    Bluetooth(QDBusConnection &dbus, QObject *parent = 0);
+    Bluetooth(const QDBusConnection &dbus, QObject *parent = 0);
     ~Bluetooth() {}
 
     Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }
@@ -103,8 +103,6 @@ private:
     QSharedPointer<Device> m_selectedDevice;
 
     Agent m_agent;
-
-    void initBluetooth();
 };
 
 #endif // BLUETOOTH_H
