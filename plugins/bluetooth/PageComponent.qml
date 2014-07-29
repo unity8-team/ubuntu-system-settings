@@ -73,16 +73,13 @@ ItemPage {
     }
 
     function getStatusString(connection) {
-      if (connection == Device.Connected)
-        return i18n.tr("Connected");
-      else if (connection == Device.Connecting)
-        return i18n.tr("Connecting…");
-      else if (connection == Device.Disconnecting)
-        return i18n.tr("Disconnecting…");
-      else if (connection == Device.Disconnected)
-        return i18n.tr("Disconnected");
-      else
-        return i18n.tr("Unknown");
+      switch (connection) {
+      case Device.Connected:     return i18n.tr("Connected");
+      case Device.Connecting:    return i18n.tr("Connecting…");
+      case Device.Disconnecting: return i18n.tr("Disconnecting…");
+      case Device.Disconnected:  return i18n.tr("Disconnected");
+      default:                   return i18n.tr("Unknown");
+      }
     }
 
     function getTypeString(type) {
