@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-27 15:47+0000\n"
-"Last-Translator: Aron Xu <Unknown>\n"
+"PO-Revision-Date: 2014-07-28 13:19+0000\n"
+"Last-Translator: Luo Lei <luolei@ubuntukylin.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-28 06:43+0000\n"
+"X-Launchpad-Export-Date: 2014-07-29 06:49+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
@@ -401,23 +401,23 @@ msgstr "系统版本号"
 
 #: ../plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Ubuntu 映像部分"
 
 #: ../plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Ubuntu 版本描述"
 
 #: ../plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "设备映像部分"
 
 #: ../plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "设备版本描述"
 
 #: ../plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "定制映像部分"
 
 #: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
 msgid "Storage"
@@ -969,7 +969,7 @@ msgstr "设置"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "最后呼叫 %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -1025,13 +1025,13 @@ msgstr "热点"
 msgid ""
 "When hotspot is on, other devices can user your cellular data connection "
 "over Wi-Fi. Normal data charges apply."
-msgstr ""
+msgstr "启用热点时，其他设备可以通过 Wi-Fi 使用您的蜂窝数据连接，您会被收取正常的数据费用。"
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can user your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
-msgstr ""
+msgstr "其他设备可以通过 Wi-Fi 使用您的蜂窝数据连接，您会被收取正常的数据费用。"
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1232,7 +1232,7 @@ msgstr "总是"
 
 #: ../plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "找不到证书"
 
 #: ../plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
@@ -1415,7 +1415,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "现在您可以开始使用 Ubuntu 手机了。"
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1423,19 +1423,19 @@ msgstr "完成"
 
 #: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "手机设置"
 
 #: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
-msgstr ""
+msgstr "您的手机被设置为自动向 Canonical 报告错误，您可以通过系统设置禁止该功能。"
 
 #: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
-msgstr ""
+msgstr "您的手机被设置为自动检测地理位置，您可以通过系统设置禁止该功能。"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
@@ -1443,15 +1443,15 @@ msgstr "您好"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "欢迎您使用 Ubuntu 手机，让我们马上开始。"
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
-msgstr ""
+msgstr "选择语言"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "开始"
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
@@ -1684,7 +1684,7 @@ msgstr "更新"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:126
 msgid "Updates available"
-msgstr ""
+msgstr "有可用的更新"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:130
