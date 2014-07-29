@@ -60,11 +60,10 @@ bool Reset::resetLauncher()
     QVariantMap defaults;
     defaults.insert("defaults", true);
     items << defaults;
-    /* TODO: test again-enable once the unity side lands
-        userInterface.call("Set",
-                       "com.canonical.unity.AccountsService",
-                       "launcher-items",
-                       QVariant::fromValue(items));*/
+    userInterface.call("Set",
+                   "com.canonical.unity.AccountsService",
+                   "launcher-items",
+                   QVariant::fromValue(items));
     return true;
 }
 
