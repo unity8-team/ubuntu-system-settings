@@ -337,11 +337,13 @@ void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
 {
     const QString service = "org.bluez";
     const QString interface = "org.bluez.Device";
-    auto bluezDevice = new QDBusInterface(service, path.path(), interface, m_dbus);
+    QScopedPointer<QDBusInterface> bluezDevice(
+        new QDBusInterface(service, path.path(), interface, m_dbus));
 
     // A device was created. Now, we likely already have it, so let's find it
     // again and finish the initialization.
-    QDBusReply<QMap<QString,QVariant> > properties = bluezDevice->call("GetProperties");
+    QDBusReply<QMap<QString,QVariant> > properties
+        = bluezDevice->call("GetProperties");
     if (properties.isValid()) {
         QMapIterator<QString,QVariant> it(properties);
         while (it.hasNext()) {
