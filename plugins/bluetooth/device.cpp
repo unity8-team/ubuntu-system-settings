@@ -214,18 +214,37 @@ void Device::connect(ConnectionMode mode)
     callInterface(interface, "Connect");
 }
 
+void Device::slotMakeTrustedDone(QDBusPendingCallWatcher *call)
+{
+    QDBusPendingReply<void> reply = *call;
+
+    if (reply.isError()) {
+        qWarning() << "Could not set device as trusted:"
+                   << reply.error().message();
+    }
+    call->deleteLater();
+}
+
 void Device::makeTrusted(bool trusted)
 {
-        QVariant value;
-        QDBusVariant variant(trusted);
+    QVariant value;
+    QDBusVariant variant(trusted);
 
-        value.setValue(variant);
+    value.setValue(variant);
 
-        if (m_deviceInterface) {
-            m_deviceInterface->asyncCall("SetProperty", "Trusted", value);
-        } else {
-            qWarning() << "Can't set device trusted before it is added in BlueZ";
-        }
+    if (m_deviceInterface) {
+        QDBusPendingCall pcall
+            = m_deviceInterface->asyncCall("SetProperty", "Trusted", value);
+
+        QDBusPendingCallWatcher *watcher
+            = new QDBusPendingCallWatcher(pcall, this);
+        QObject::connect(watcher,
+                         SIGNAL(finished(QDBusPendingCallWatcher*)),
+                         this,
+                         SLOT(slotServiceDiscoveryDone(QDBusPendingCallWatcher*)));
+    } else {
+        qWarning() << "Can't set device trusted before it is added in BlueZ";
+    }
 }
 
 /***
