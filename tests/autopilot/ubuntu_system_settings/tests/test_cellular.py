@@ -551,3 +551,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         finally:
             gsettings.set_value('sim1-name', old_name)
             sleep(1)
+
+    def test_two_modems(self):
+        sleep(30)
+        self.assertFalse(True)

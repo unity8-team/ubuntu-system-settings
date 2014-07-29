@@ -66,45 +66,35 @@ Column {
         text: i18n.tr("Edit SIM Name")
     }
 
-    Column {
 
-        width: parent.width
-        spacing: units.gu(2)
-
-        ListItem.Standard {
-            id: sim1Item
-            text: sim1.title
-            objectName: "editSim1"
-            progression: true
-            onClicked: {
-                simList.state = "editingSim1";
-            }
-        }
-
-        Column {
-            id: sim1Placeholder
+    ListItem.Standard {
+        id: sim1Item
+        text: sim1.title
+        objectName: "editSim1"
+        progression: true
+        onClicked: {
+            simList.state = "editingSim1";
+            nameField.forceActiveFocus();
         }
     }
 
     Column {
+        id: sim1Placeholder
+    }
 
-        anchors.left: parent.left
-        anchors.right: parent.right
-        spacing: units.gu(2)
-
-        ListItem.Standard {
-            id: sim2Item
-            text: sim2.title
-            objectName: "editSim2"
-            progression: true
-            onClicked: {
-                simList.state = "editingSim2";
-            }
+    ListItem.Standard {
+        id: sim2Item
+        text: sim2.title
+        objectName: "editSim2"
+        progression: true
+        onClicked: {
+            simList.state = "editingSim2";
+            nameField.forceActiveFocus();
         }
+    }
 
-        Column {
-            id: sim2Placeholder
-        }
+    Column {
+        id: sim2Placeholder
     }
 
     Column {
@@ -117,11 +107,17 @@ Column {
             horizontalCenter: simList.horizontalCenter
         }
 
+        Item {
+            height: units.gu(0.1)
+            width: parent.width
+        }
+
         TextField {
             id: nameField
             objectName: "nameField"
             maximumLength: 30
             width: simList.width - units.gu(4)
+            onTriggered: renameAction
         }
 
         Row {
@@ -153,9 +149,9 @@ Column {
             id: renameAction
             onTriggered: {
                 if (simList.state === "editingSim1") {
-                    ussS.sim1Name = nameField.text;
+                    //ussS.sim1Name = nameField.text;
                 } else if (simList.state === "editingSim2") {
-                    ussS.sim2Name = nameField.text;
+                    //ussS.sim2Name = nameField.text;
                 }
                 simList.state = "";
             }

@@ -27,29 +27,5 @@
             <summary>Whether the applications should be sorted by name.</summary>
             <description>If true the applications are sorted by name, otherwise by disk size.</description>
         </key>
-        <key name="sim1-name" type="s">
-            <description>Sim 1 name</description>
-            <default>"SIM 1"</default>
-        </key>
-        <key name="sim1-path" type="s">
-            <description>Sim 1 modem path</description>
-            <default>"/ril_0"</default>
-        </key>
-        <key name="sim2-name" type="s">
-            <description>Sim 2 name</description>
-            <default>"SIM 2"</default>
-        </key>
-        <key name="sim2-path" type="s">
-            <description>Sim 2 modem path</description>
-            <default>"/ril_1"</default>
-        </key>
-        <key name="default-sim-for-calls" type="s">
-            <description>Default sim card to use for calls, defined by a modem path or empty for "ask"</description>
-            <default>""</default>
-        </key>
-        <key name="default-sim-for-messages" type="s">
-            <description>Default sim card to use for messages, defined by a modem path or empty for "ask"</description>
-            <default>""</default>
-        </key>
     </schema>
 </schemalist>
