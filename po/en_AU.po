@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2013-08-15 02:15+0000\n"
-"Last-Translator: Jackson Doak <Doak.jackson@gmail.com>\n"
+"PO-Revision-Date: 2014-07-27 13:35+0000\n"
+"Last-Translator: Boden Matthews <Unknown>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:34+0000\n"
+"X-Launchpad-Export-Date: 2014-07-28 06:43+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
-msgstr ""
+msgstr "Other network"
 
 #: ../plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Network name"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Security"
 
 #: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PhoneLocking.qml:40
@@ -36,23 +36,23 @@ msgstr ""
 #: ../plugins/bluetooth//PageComponent.qml:256
 #: ../plugins/bluetooth//PageComponent.qml:264
 msgid "None"
-msgstr ""
+msgstr "None"
 
 #: ../plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA & WPA2 Personal"
 
 #: ../plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: ../plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Password visible"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/security-privacy//LockSecurity.qml:310
@@ -68,29 +68,29 @@ msgstr ""
 #: ../plugins/reset//ResetAllSettings.qml:36
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Connect"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
 msgid "Previous networks"
-msgstr ""
+msgstr "Previous networks"
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
-msgstr ""
+msgstr "Network details"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
 #: ../plugins/bluetooth//PageComponent.qml:263
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: ../plugins/wifi//NetworkDetails.qml:51
 msgid "Last connected"
-msgstr ""
+msgstr "Last connected"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
 #: ../plugins/about//PageComponent.qml:149
@@ -104,32 +104,32 @@ msgstr "Never"
 
 #: ../plugins/wifi//NetworkDetails.qml:73
 msgid "Show password"
-msgstr ""
+msgstr "Show password"
 
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
-msgstr ""
+msgstr "Forget network"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
 #: ../plugins/battery//PageComponent.qml:312
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:2
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:29
 #: ../plugins/security-privacy//PageComponent.qml:76
 msgid "Phone locking"
-msgstr ""
+msgstr "Phone locking"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "Passcode"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:42
 #: ../plugins/security-privacy//LockSecurity.qml:332
 msgid "Passphrase"
-msgstr ""
+msgstr "Passphrase"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:44
 #: ../plugins/security-privacy//LockSecurity.qml:30
