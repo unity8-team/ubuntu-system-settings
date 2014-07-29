@@ -13,13 +13,14 @@ set(QML_SOURCES
     StorageBar.qml
     StorageItem.qml
     Version.qml
+    DevMode.qml
     fakepkgslist.xml
 )
 
 add_library(UbuntuStorageAboutPanel MODULE
 plugin.cpp storageabout.cpp click.cpp plugin.h storageabout.h click.h
 ${QML_SOURCES}) # So they show up in Qt designer.
-qt5_use_modules(UbuntuStorageAboutPanel Qml Quick)
+qt5_use_modules(UbuntuStorageAboutPanel Qml Quick DBus)
 target_link_libraries(UbuntuStorageAboutPanel
 ${ANDR_PROP_LDFLAGS} ${GLIB_LDFLAGS} ${GIO_LDFLAGS})
 

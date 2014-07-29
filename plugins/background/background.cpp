@@ -156,8 +156,17 @@ QStringList Background::ubuntuArt()
 void Background::updateUbuntuArt()
 {
 
-    QDir dir("/usr/share/backgrounds/");
+    QString envDir(qgetenv("SYSTEM_SETTINGS_UBUNTU_ART_DIR"));
+    QDir dir;
+
+    if (envDir != "")
+        dir = QDir(envDir);
+    else
+        dir = QDir("/usr/share/backgrounds/");
+
+
     dir.setFilter(QDir::Files | QDir::NoSymLinks);
+    dir.setSorting(QDir::Name);
     QFileInfoList tmpList = dir.entryInfoList();
     foreach (QFileInfo f, tmpList)
     {
