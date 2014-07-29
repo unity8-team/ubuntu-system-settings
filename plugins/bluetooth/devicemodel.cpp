@@ -349,7 +349,7 @@ void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
         while (it.hasNext()) {
             it.next();
             if (it.key() == "Address") {
-                auto device = getDeviceFromAddress(it.value().toString());
+                QSharedPointer<Device> device = getDeviceFromAddress(it.value().toString());
 
                 if (device) {
                     device->initDevice(path.path(), m_dbus);
@@ -372,7 +372,8 @@ void DeviceModel::slotDeviceFound(const QString                &address,
 {
     Q_UNUSED(properties);
 
-    auto device = getDeviceFromAddress(address);
+    QSharedPointer<Device> device = getDeviceFromAddress(address);
+
     if (!device) {
         QSharedPointer<Device> device(new Device(properties));
         if (device->isValid()) {
@@ -437,7 +438,7 @@ QSharedPointer<Device> DeviceModel::getDeviceFromPath(const QString &path)
 
 void DeviceModel::addConnectAfterPairing(const QString &address, Device::ConnectionMode mode)
 {
-    auto device = getDeviceFromAddress(address);
+    QSharedPointer<Device> device = getDeviceFromAddress(address);
     if (device) {
         device->addConnectAfterPairing(mode);
     } else {
