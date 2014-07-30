@@ -57,8 +57,8 @@ ItemPage {
             anchors.leftMargin: units.gu(2)
             anchors.rightMargin: units.gu(2)
             text : hotspotSwitch.enabled ?
-              i18n.tr("When hotspot is on, other devices can user your cellular data connection over Wi-Fi. Normal data charges apply.")
-              : i18n.tr("Other devices can user your cellular data connection over the Wi-Fi network. Normal data charges apply.") 
+              i18n.tr("When hotspot is on, other devices can use your cellular data connection over Wi-Fi. Normal data charges apply.")
+              : i18n.tr("Other devices can use your cellular data connection over the Wi-Fi network. Normal data charges apply.") 
         }
 
         Button {
