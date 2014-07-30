@@ -17,9 +17,10 @@ class ResetTestCase(ResetBaseTestCase):
 
     def assert_pagestack_popped(self):
         try:
-            self.system_settings.main_view.wait_select_single(objectName='entryComponent-resets'),
-        except Exception:
-            self.fail("pageStack was not popped (or entryComponent-reset not found)")
+            self.system_settings.main_view.wait_select_single(
+                objectName='entryComponent-reset'),
+        except Exception as e:
+            self.fail("pageStack was not popped, %s" % e)
 
     @property
     def reset_launcher(self):
@@ -50,8 +51,10 @@ class ResetTestCase(ResetBaseTestCase):
             Equals(_('Reset phone')))
 
     def test_reset_launcher(self):
-        self.system_settings.main_view.scroll_to_and_click(self.reset_launcher)
-        self.system_settings.main_view.scroll_to_and_click(self.reset_launcher_action)
+        self.system_settings.main_view.scroll_to_and_click(
+            self.reset_launcher)
+        self.system_settings.main_view.scroll_to_and_click(
+            self.reset_launcher_action)
 
         sleep(0.5)
         calls = self.user_mock.GetCalls()
@@ -59,11 +62,12 @@ class ResetTestCase(ResetBaseTestCase):
         self.assert_pagestack_popped()
 
     def test_factory_reset(self):
-        self.system_settings.main_view.scroll_to_and_click(self.factory_reset)
-        self.system_settings.main_view.scroll_to_and_click(self.factory_reset_action)
+        self.system_settings.main_view.scroll_to_and_click(
+            self.factory_reset)
+        self.system_settings.main_view.scroll_to_and_click(
+            self.factory_reset_action)
 
         sleep(0.5)
         calls = self.sys_mock.GetCalls()
         self.assertIn('FactoryReset', str(calls))
         self.assert_pagestack_popped()
-
