@@ -34,7 +34,7 @@ ItemPage {
 
     Label {
         id: labelSubtitle
-        text: i18n.tr("Apps that can show notifications bubbles:")
+        text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notification Center.")
         wrapMode: Text.WordWrap
         anchors {
             top: parent.top
