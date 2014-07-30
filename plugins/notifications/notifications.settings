@@ -5,9 +5,8 @@
     "category": "personal",
     "priority": 5,
     "keywords": [
-        "system",
         "software",
-        "update",
+        "notifications",
         "settings"
     ],
     "has-dynamic-keywords": false,
