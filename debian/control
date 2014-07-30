@@ -84,13 +84,11 @@ Description: System Settings application for Ubuntu Touch
  devices.
 
 Package: ubuntu-system-settings-wizard
-# Same as mir
-Architecture: amd64 i386 armhf
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          ubuntu-system-settings (= ${binary:Version}),
-         qtdeclarative5-qtmir-plugin (>= 0.4),
          unity8,
+Recommends: qtdeclarative5-qtmir-plugin (>= 0.4)
 Conflicts: ubuntu-system-settings (<< 0.3)
 Breaks: ubuntu-system-settings (<< 0.3)
 Description: Welcome Wizard for Ubuntu Touch
