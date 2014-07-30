@@ -69,7 +69,30 @@ ItemPage {
             ListItem.Standard {
                 id: securityTitle
                 text: i18n.tr("Security:")
-                visible: lockingControl.visible || simControl.visible
+                // visible: lockingControl.visible || simControl.visible
+            }
+            /* When more of the phone locking page is implemented, we can
+             * remove the next item below, which is a duplicate of an item in
+             * PhoneLocking.qml, and uncomment the visible line above. */
+            ListItem.SingleValue {
+                property string swipe: i18n.tr("None")
+                property string passcode: i18n.tr("Passcode")
+                property string passphrase: i18n.tr("Passphrase")
+
+                text: i18n.tr("Lock security")
+                value: {
+                    switch (securityPrivacy.securityType) {
+                        case UbuntuSecurityPrivacyPanel.Swipe:
+                            return swipe
+                        case UbuntuSecurityPrivacyPanel.Passcode:
+                            return passcode
+                        case UbuntuSecurityPrivacyPanel.Passphrase:
+                            return passphrase
+                    }
+                }
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
+                visible: !showAllUI
             }
             ListItem.SingleValue {
                 id: lockingControl
