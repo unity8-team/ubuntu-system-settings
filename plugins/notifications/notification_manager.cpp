@@ -115,6 +115,11 @@ void NotificationsManager::loadModel()
     QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
     QJsonArray array = document.array();
 
+
+	// Iterate over all the installed click packages,
+	// and, for those packages that have a push-helper hook,
+	// list all apps (hooks entries with a desktop field)
+
     for (int i = 0; i < array.size(); i++) { // This iterates over packages
         QJsonObject object = array.at(i).toObject();
 
