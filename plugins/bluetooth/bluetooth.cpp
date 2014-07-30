@@ -26,9 +26,8 @@
 #include "dbus-shared.h"
 
 Bluetooth::Bluetooth(QObject *parent):
-    Bluetooth(QDBusConnection::systemBus())
+    Bluetooth(QDBusConnection::systemBus(), parent)
 {
-    Q_UNUSED(parent);
 }
 
 Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
