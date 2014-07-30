@@ -42,7 +42,7 @@ class SoundTestCase(SoundBaseTestCase):
             objectName="silentMode")
         prev_value = self.obj_test.GetSilentMode()
         self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(0.7)
+        sleep(2)
         self.assertNotEqual(
             self.obj_test.GetSilentMode(),
             prev_value)
@@ -54,7 +54,7 @@ class SoundTestCase(SoundBaseTestCase):
         snd = self.system_settings.main_view.sound_page.select_single(
             objectName="silentMode")
         self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(0.7)
+        sleep(2)
         self.assertThat(
             sndwarn.get_properties()["visible"],
             Eventually(Equals(True)))
@@ -65,7 +65,7 @@ class SoundTestCase(SoundBaseTestCase):
             objectName="callVibrate")
         prev_value = self.obj_test.GetIncomingCallVibrate()
         self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(0.7)
+        sleep(2)
         self.assertNotEqual(
             self.obj_test.GetIncomingCallVibrate(),
             prev_value)
@@ -76,7 +76,7 @@ class SoundTestCase(SoundBaseTestCase):
             objectName="callVibrateSilentMode")
         prev_value = self.obj_test.GetIncomingCallVibrateSilentMode()
         self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(0.7)
+        sleep(2)
         self.assertNotEqual(
             self.obj_test.GetIncomingCallVibrateSilentMode(),
             prev_value)
@@ -87,7 +87,7 @@ class SoundTestCase(SoundBaseTestCase):
             objectName="messageVibrate")
         prev_value = self.obj_test.GetIncomingMessageVibrate()
         self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(0.7)
+        sleep(2)
         self.assertNotEqual(
             self.obj_test.GetIncomingMessageVibrate(),
             prev_value)
@@ -98,7 +98,7 @@ class SoundTestCase(SoundBaseTestCase):
             objectName="messageVibrateSilentMode")
         prev_value = self.obj_test.GetIncomingMessageVibrateSilentMode()
         self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(0.7)
+        sleep(2)
         self.assertNotEqual(
             self.obj_test.GetIncomingMessageVibrateSilentMode(),
             prev_value)
