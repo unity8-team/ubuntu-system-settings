@@ -5,7 +5,6 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-import dbus
 from time import sleep
 from autopilot.matchers import Eventually
 from testtools.matchers import Equals, NotEquals

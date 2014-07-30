@@ -483,16 +483,18 @@ class SoundBaseTestCase(
         self.accts_snd_props = {
             'SilentMode': dbus.Boolean(False, variant_level=1),
             'IncomingCallVibrate': dbus.Boolean(False, variant_level=1),
-            'IncomingCallVibrateSilentMode': dbus.Boolean(False, variant_level=1),
-            'IncomingMessageVibrate': dbus.Boolean(False, variant_level=1),
-            'IncomingMessageVibrateSilentMode': dbus.Boolean(False, variant_level=1)
-        }
+            'IncomingCallVibrateSilentMode': dbus.Boolean(False,
+                                                          variant_level=1),
+            'IncomingMessageVibrate': dbus.Boolean(False,
+                                                   variant_level=1),
+            'IncomingMessageVibrateSilentMode': dbus.Boolean(False,
+                                                             variant_level=1)
+            }
 
         # start dbus system bus
         self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
                                              ACCOUNTS_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
-
 
         sleep(2)
 
@@ -505,62 +507,52 @@ class SoundBaseTestCase(
         self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
                                  'ret = "%s"' % user_obj)
 
-        self.dbus_mock.AddProperties(ACCOUNTS_SOUND_IFACE, self.accts_snd_props)
+        self.dbus_mock.AddProperties(ACCOUNTS_SOUND_IFACE,
+                                     self.accts_snd_props)
 
         # add getter and setter to mock
         self.dbus_mock.AddMethods(
             'org.freedesktop.DBus.Properties',
-            [('self.Get', 's', 'v', 'ret = self.accts_snd_props[args[0]]'),
-                ('self.Set', 'sv', '', 'self.accts_snd_props[args[0]] = args[1]')])
+            [
+                ('self.Get',
+                 's',
+                 'v',
+                 'ret = self.accts_snd_props[args[0]]'),
+                ('self.Set',
+                 'sv',
+                 '',
+                 'self.accts_snd_props[args[0]] = args[1]')
+            ])
 
         # add user object to mock
         self.dbus_mock.AddObject(
             user_obj, ACCOUNTS_SOUND_IFACE, self.accts_snd_props,
             [
                 (
-                    'SetSilentMode', 'v', '',
-                    'self.Set("%s", "SilentMode", args[0]);' %
-                    ACCOUNTS_SOUND_IFACE),
-                (
                     'GetSilentMode', '', 'v',
                     'ret = self.Get("%s", "SilentMode")' %
-                    ACCOUNTS_SOUND_IFACE),
-                (
-                    'SetIncomingCallVibrate', 'v', '',
-                    'self.Set("%s", "IncomingCallVibrate", args[0]);' %
                     ACCOUNTS_SOUND_IFACE),
                 (
                     'GetIncomingCallVibrate', '', 'v',
                     'ret = self.Get("%s", "IncomingCallVibrate")' %
                     ACCOUNTS_SOUND_IFACE),
                 (
-                    'SetIncomingMessageVibrate', 'v', '',
-                    'self.Set("%s", "IncomingMessageVibrate", args[0]);' %
-                    ACCOUNTS_SOUND_IFACE),
-                (
                     'GetIncomingMessageVibrate', '', 'v',
                     'ret = self.Get("%s", "IncomingMessageVibrate")' %
-                    ACCOUNTS_SOUND_IFACE),
-                (
-                    'SetIncomingCallVibrateSilentMode', 'v', '',
-                    'self.Set("%s", "IncomingCallVibrateSilentMode", args[0]);' %
                     ACCOUNTS_SOUND_IFACE),
                 (
                     'GetIncomingCallVibrateSilentMode', '', 'v',
                     'ret = self.Get("%s", "IncomingCallVibrateSilentMode")' %
                     ACCOUNTS_SOUND_IFACE),
                 (
-                    'SetIncomingMessageVibrateSilentMode', 'v', '',
-                    'self.Set("%s", "IncomingMessageVibrateSilentMode", args[0]);' %
-                    ACCOUNTS_SOUND_IFACE),
-                (
                     'GetIncomingMessageVibrateSilentMode', '', 'v',
-                    'ret = self.Get("%s", "IncomingMessageVibrateSilentMode")' %
+                    'ret = self.Get("%s", \
+                                    "IncomingMessageVibrateSilentMode")' %
                     ACCOUNTS_SOUND_IFACE)
             ])
 
-
-        self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj, ACCOUNTS_IFACE)
+        self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
+                                                 ACCOUNTS_IFACE)
 
         super(SoundBaseTestCase, self).setUp('sound')
 
