@@ -37,7 +37,6 @@ void app_data_from_desktop_id (const char* desktop_id, char **display_name, char
         GIcon* icon = g_app_info_get_icon (app_info);
         if (icon != NULL) {
             *icon_fname = g_icon_to_string (icon);
-            // g_app_info_get_icon has "transfer none"
         }
         g_object_unref (app_info);
     }
