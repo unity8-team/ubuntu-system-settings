@@ -84,6 +84,7 @@ Description: System Settings application for Ubuntu Touch
  devices.
 
 Package: ubuntu-system-settings-wizard
+Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          ubuntu-system-settings (= ${binary:Version}),
