@@ -34,6 +34,7 @@ public:
     explicit Reset(QObject *parent = 0);
     ~Reset();
     Q_INVOKABLE bool resetLauncher(void);
+    Q_INVOKABLE bool factoryReset(void);
 
 private:
     QDBusConnection m_systemBusConnection;

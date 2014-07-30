@@ -23,6 +23,10 @@
 #include <QDBusReply>
 #include <unistd.h>
 #include <QtCore/QDebug>
+#include <QDBusMetaType>
+
+typedef QList<QVariantMap> resetLauncherItemsArg;
+Q_DECLARE_METATYPE(resetLauncherItemsArg)
 
 Reset::Reset(QObject *parent) :
     QObject(parent),
@@ -32,6 +36,12 @@ Reset::Reset(QObject *parent) :
                             "org.freedesktop.Accounts",
                              m_systemBusConnection)
 {
+    static bool isRegistered = false;
+    if(!isRegistered) {
+        qDBusRegisterMetaType<resetLauncherItemsArg>();
+        isRegistered = true;
+    }
+
     if (!m_accountsserviceIface.isValid()) {
         return;
     }
@@ -64,6 +74,25 @@ bool Reset::resetLauncher()
                    "com.canonical.unity.AccountsService",
                    "launcher-items",
                    QVariant::fromValue(items));
+    return true;
+}
+
+bool Reset::factoryReset()
+{
+    QDBusInterface systemServiceInterface (
+                "com.canonical.SystemImage",
+                "/Service",
+                "com.canonical.SystemImage",
+                m_systemBusConnection,
+                this);
+
+    if (!systemServiceInterface.isValid())
+        return false;
+
+    QDBusReply<QString> reply = systemServiceInterface.call("FactoryReset");
+    if (!reply.isValid())
+        return false;
+
     return true;
 }
 

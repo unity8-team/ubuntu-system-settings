@@ -157,6 +157,11 @@ class MainWindow(ubuntuuitoolkit.MainView):
         """ Return 'Sound' page """
         return self.select_single(objectName='soundPage')
 
+    @property
+    def reset_page(self):
+        """Return 'Reset' page"""
+        return self.select_single(objectName='resetPage')
+
 
 class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
