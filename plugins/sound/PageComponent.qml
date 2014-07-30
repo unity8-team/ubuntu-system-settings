@@ -112,6 +112,7 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                objectName: 'ringtoneListItem'
                 text: i18n.tr("Ringtone")
                 value: Utilities.buildDisplayName(
                            backendInfo.incomingCallSound)

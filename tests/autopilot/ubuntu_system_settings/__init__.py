@@ -35,49 +35,70 @@ class SystemSettings():
     """Helper class for System Settings application"""
 
     APP_PATH = '/usr/bin/system-settings'
+    APP_UPSTART_ID = 'ubuntu-system-settings'
     DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
 
-    def __init__(self, testobj, panel=None):
+    def __init__(self, testobj, panel=None, upstart_launch=False):
         """Constructor. Launches system settings application
 
         :param testobj: An AutopilotTestCase object, needed to call
         testobj.launch_test_application()
 
         :param panel: Launch to a specific panel. Default None.
+        :param upstart_launch: whether to launch settings with upstart.
         """
         self.testobj = testobj
         self.panel = panel
+        self.upstart_launch = upstart_launch
         # Launches application
         self.app = self.launch(
             self.testobj,
             self.APP_PATH,
             self.DESKTOP_FILE,
-            panel=self.panel)
+            panel=self.panel,
+            upstart_launch=self.upstart_launch)
 
-    def launch(self, testobj, app_path, desktop_file, panel=None):
+    def launch(
+            self,
+            testobj,
+            app_path,
+            desktop_file,
+            panel=None,
+            upstart_launch=False):
         """Launch system settings application
 
         :param testobj: An AutopilotTestCase object, needed to call
         testobj.launch_test_application()
 
         :param panel: Launch to a specific panel. Default None.
+        :param upstart_launch: whether to launch settings with upstart.
 
         :returns: A proxy object that represents the application. Introspection
         data is retrievable via this object.
         """
-        params = [app_path]
-        if platform.model() != 'Desktop':
+        if upstart_launch:
+            params = [self.APP_UPSTART_ID]
+        elif platform.model() is 'Desktop':
+            params = [app_path]
+        else:
+            params = [app_path]
             params.append('--desktop_file_hint={}'.format(desktop_file))
 
         # Launch to a specific panel
         if panel is not None:
             params.append(panel)
 
-        app = testobj.launch_test_application(
-            *params,
-            app_type='qt',
-            emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
-            capture_output=True)
+        toolkit_base = ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase
+        if upstart_launch:
+            app = testobj.launch_upstart_application(
+                *params,
+                emulator_base=toolkit_base)
+        else:
+            app = testobj.launch_test_application(
+                *params,
+                app_type='qt',
+                emulator_base=toolkit_base,
+                capture_output=True)
 
         return app
 
@@ -182,6 +203,59 @@ class SoundPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             if state['objectName'][1] == 'soundPage':
                 return True
         return False
+
+    def _get_ringtone_setting_button(self):
+        return self.wait_select_single(
+            'SingleValue', objectName='ringtoneListItem')
+
+    def get_ringtone_setting_button_current_value(self):
+        """current value of the ringtone setting button.
+
+        :return: name of the currently selected ringtone.
+
+        """
+        return self._get_ringtone_setting_button().value
+
+    @autopilot.logging.log_action(logger.info)
+    def open_ringtone_selector(self):
+        """Open the ringtone selector.
+
+        :return: The page with ringtones list.
+
+        """
+        ringtone_setting_button = self._get_ringtone_setting_button()
+        self.pointing_device.click_object(ringtone_setting_button)
+
+        root = self.get_root_instance()
+        return root.wait_select_single(SoundsList)
+
+
+class SoundsList(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    def choose_ringtone(self, name):
+        """Choose a new ringtone.
+
+        :param name: name of the ringtone to select.
+        :return: newly selected ringtone item.
+
+        """
+        list_view = self.select_single('QQuickListView', objectName='listView')
+        # When last item of a long list is preselected the list scrolls
+        # down automatically, wait for the list to scroll down before
+        # trying to do anything. -- om26er.
+        sleep(3)
+        list_view.dragging.wait_for(False)
+        list_view.moving.wait_for(False)
+        list_view.click_element('ringtone-' + name)
+
+        return self.select_single(
+            'OptionSelectorDelegate', objectName='ringtone-' + name)
+
+    @autopilot.logging.log_action(logger.info)
+    def go_back_to_sound_page(self):
+        """Go back to the sound settings main page."""
+        main_window = self.get_root_instance().select_single(MainWindow)
+        main_window.go_back()
 
 
 class AboutPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):

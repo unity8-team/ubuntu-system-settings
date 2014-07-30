@@ -39,9 +39,10 @@ class UbuntuSystemSettingsTestCase(
 
     """Base class for Ubuntu System Settings."""
 
-    def setUp(self, panel=None):
+    def setUp(self, panel=None, upstart_launch=False):
         super(UbuntuSystemSettingsTestCase, self).setUp()
-        self.system_settings = SystemSettings(self, panel=panel)
+        self.system_settings = SystemSettings(
+            self, panel=panel, upstart_launch=upstart_launch)
         self.assertThat(
             self.system_settings.main_view.visible,
             Eventually(Equals(True)))
@@ -467,9 +468,8 @@ class BackgroundBaseTestCase(
 class SoundBaseTestCase(UbuntuSystemSettingsTestCase):
     """ Base class for sound settings tests"""
 
-    def setUp(self):
-
-        """ Go to Sound page """
-        super(SoundBaseTestCase, self).setUp('sound')
-        self.assertThat(self.system_settings.main_view.sound_page.active,
-                        Eventually(Equals(True)))
+    def setUp(self, panel='sound', upstart_launch=False):
+        """Go to Sound page."""
+        super(SoundBaseTestCase, self).setUp(panel, upstart_launch)
+        self.sound_page = self.system_settings.main_view.select_single(
+            objectName='soundPage')
