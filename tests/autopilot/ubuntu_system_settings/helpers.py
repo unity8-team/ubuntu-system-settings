@@ -19,7 +19,7 @@ import os
 import dbus
 
 
-def get_accounts_service_iface():
+def _get_accounts_service_iface():
     """Return the accountsservice dbus interface."""
     uid = os.geteuid()
     bus = dbus.SystemBus()
@@ -30,9 +30,9 @@ def get_accounts_service_iface():
     return dbus.Interface(proxy, 'org.freedesktop.DBus.Properties')
 
 
-def get_current_ringtone_uri_from_backend():
+def _get_current_ringtone_uri_from_backend():
     """Return the URI of the current ringtone."""
-    accounts_iface = get_accounts_service_iface()
+    accounts_iface = _get_accounts_service_iface()
 
     return accounts_iface.Get(
         'com.ubuntu.touch.AccountsService.Sound',
@@ -41,7 +41,7 @@ def get_current_ringtone_uri_from_backend():
 
 def get_current_ringtone_name_from_backend():
     """Return the name of the current ringtone stripped from URI."""
-    ringtone_uri = get_current_ringtone_uri_from_backend()
+    ringtone_uri = _get_current_ringtone_uri_from_backend()
 
     return ringtone_uri.lstrip(
         '/usr/share/sounds/ubuntu/ringtones/').rstrip('.ogg')
