@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+14.10.20140730-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Iain Lane ]
+  * Move the arch-restricted Depends on qtmir to the wizard binary
+    package which uses it, and lower it to Recommends since there's a
+    non-mir path too.
+
+  [ Adolfo Jayme Barrientos ]
+  * Fix typo in user-facing strings: user → use (LP: #1349855)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Jul 2014 19:48:02 +0000
+
 ubuntu-system-settings (0.3+14.10.20140729.2-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
