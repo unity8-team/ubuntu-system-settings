@@ -20,6 +20,7 @@
 #include <QDBusReply>
 #include <QDebug> // qWarning()
 #include <QThread>
+#include <QTimer>
 
 #include "dbus-shared.h"
 #include "device.h"
@@ -110,13 +111,11 @@ void Device::setProperties(const QMap<QString,QVariant> &properties)
 void Device::connectPending()
 {
     if (m_paired && !m_trusted) {
-	// Give the device a bit of time to settle.
-        QThread::sleep(1);
-
-        /* Once service discovery is done, it will call connect() on the
+        /* Give the device a bit of time to settle.
+         * Once service discovery is done, it will call connect() on the
          * pending interfaces.
          */
-        discoverServices();
+        QTimer::singleShot(1, this, SLOT(discoverServices()));
     }
 }
 

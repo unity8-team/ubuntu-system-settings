@@ -146,13 +146,15 @@ public:
     void initDevice(const QString &path, QDBusConnection &bus);
     bool isValid() const { return getType() != Type::Other; }
     void callInterface(const QSharedPointer<QDBusInterface> &interface, const QString &method);
-    void discoverServices();
     void connect(ConnectionMode);
     void connectPending();
     void makeTrusted(bool trusted);
     void disconnect(ConnectionMode);
     void setProperties(const QMap<QString,QVariant> &properties);
     void addConnectAfterPairing(const ConnectionMode mode);
+
+  public Q_SLOTS:
+    void discoverServices();
 
   private Q_SLOTS:
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
