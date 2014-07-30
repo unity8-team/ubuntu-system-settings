@@ -158,7 +158,7 @@ void NotificationsManager::loadModel()
                 }
                 NotificationItem *item = new NotificationItem();
                 bool blacklisted = m_blacklist.contains(key);
-                item->setItemData(QString(display_name), QString(icon_fname), blacklisted, key);
+                item->setItemData(QString(display_name), QString(icon_fname), !blacklisted, key);
                 g_free(display_name);
                 g_free(icon_fname);
                 m_model.append(QVariant::fromValue(item));
@@ -173,7 +173,7 @@ void NotificationsManager::loadModel()
 void NotificationsManager::checkUpdates(QString key, bool value)
 {
     // Update the internal blacklist
-    if (value) {
+    if (!value) {
         if (!m_blacklist.contains(key)) {
             m_blacklist[key] = true;
         }
