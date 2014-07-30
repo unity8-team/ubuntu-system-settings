@@ -1,3 +1,56 @@
+ubuntu-system-settings (0.3+14.10.20140729.1-0ubuntu1) utopic; urgency=low
+
+  [ Gerry Boland ]
+  * Use QtMir instead of the older Unity-Mir Need for Qt Compositor.
+
+  [ Iain Lane ]
+  * Update pot
+
+  [ Michał Sawicz ]
+  * Use QtMir instead of the older Unity-Mir Need for Qt Compositor.
+
+  [ Robert Bruce Park ]
+  * Add a build-dep on qtmir to avoid building on inappropriate arches.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 29 Jul 2014 20:54:05 +0000
+
+ubuntu-system-settings (0.3+14.10.20140725.4-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [sound] Added volume slider to the sound pane
+
+  [ jonas-drange ]
+  * Cellular panel changes: new carrier design. Carrier selection for
+    two sims (individual selection). Using either sim1 or sim2 for
+    cellular data. Data technology preference selection refactor to work
+    for dual sim scenario as well.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 25 Jul 2014 18:13:24 +0000
+
+ubuntu-system-settings (0.3+14.10.20140725.3-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [phone] Call forwarding implementation
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Oliver Grawert ]
+  * Add DeveloperMode page to "About this device" (see: .
+    https://wiki.ubuntu.com/AboutThisDevice#developer-mode) Enable
+    toggling of the adb usb gadget driver in DeveloperMode page through
+    the dbus-property-service interface. Add shortcut from DeveloperMode
+    page to Lock screen settings (since the final dev mode will require
+    that you can lock before enabling it). Depend on suru-icon-theme
+    since we are using the security alert icon on the Developer Mode
+    page. Depend on dbus-property-service on the arches where it is
+    available since we use it in Developer Mode .
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 25 Jul 2014 15:32:46 +0000
+
 ubuntu-system-settings (0.3+14.10.20140723-0ubuntu1) utopic; urgency=low
 
   [ jonas-drange ]
