@@ -19,9 +19,9 @@
 #define UPDATE_H
 
 #include <QObject>
-#include <QtQml>
 #include <QString>
 #include <QStringList>
+#include <QtQml>
 
 namespace NotificationsPlugin {
 
