@@ -10,7 +10,6 @@ from autopilot.matchers import Eventually
 from testtools import skipIf
 from testtools.matchers import Equals, NotEquals
 
-from ubuntu_system_settings import fixture_setup
 from ubuntu_system_settings import helpers
 from ubuntu_system_settings.tests import SoundBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
@@ -40,18 +39,16 @@ class SoundTestCase(SoundBaseTestCase):
 
 class RingtoneSettingTestCase(SoundBaseTestCase):
 
-    ringtone = 'Supreme'
-
     def setUp(self):
-        self.useFixture(fixture_setup.RingtoneBackup())
         super(RingtoneSettingTestCase, self).setUp()
+        self.old_ringtone = helpers.get_current_ringtone_name_from_backend()
+        self.addCleanup(self.sound_page.change_ringtone, self.old_ringtone)
 
     @skipIf(platform.model() is 'Desktop', 'Phones only')
     def test_ringtone_setting_change_in_ui(self):
         """Ensure ringtone change is shown in UI."""
-        sounds_list = self.sound_page.open_ringtone_selector()
-        sounds_list.choose_ringtone(self.ringtone)
-
+        self.ringtone = helpers.get_non_selected_ringtone()
+        sounds_list = self.sound_page.change_ringtone(self.ringtone)
         sounds_list.go_back_to_sound_page()
 
         self.assertThat(
@@ -61,11 +58,14 @@ class RingtoneSettingTestCase(SoundBaseTestCase):
     @skipIf(platform.model() is 'Desktop', 'Phones only')
     def test_ringtone_setting_change_in_backend(self):
         """Ensure ringtone change saves in backend."""
+        self.ringtone = helpers.get_non_selected_ringtone()
         sounds_list = self.sound_page.open_ringtone_selector()
         current_ringtone = sounds_list.choose_ringtone(self.ringtone)
 
         self.assertThat(
             current_ringtone.selected, Eventually(Equals(True)))
         self.assertThat(
-            lambda: helpers.get_current_ringtone_from_backend().endswith(
-                self.ringtone + '.ogg'), Eventually(Equals(True)))
+            lambda: helpers.get_current_ringtone_name_from_backend(),
+            Eventually(Equals(self.ringtone)))
+
+        sounds_list.go_back_to_sound_page()

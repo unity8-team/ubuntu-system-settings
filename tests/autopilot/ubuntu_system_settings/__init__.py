@@ -208,6 +208,18 @@ class SoundPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         root = self.get_root_instance()
         return root.wait_select_single(SoundsList)
 
+    @autopilot.logging.log_action(logger.info)
+    def change_ringtone(self, ringtone):
+        """Open the ringtone list and select one from it.
+
+        :param ringtone: name of the ringtone to select.
+
+        """
+        sound_list = self.open_ringtone_selector()
+        sound_list.choose_ringtone(ringtone)
+
+        return sound_list
+
 
 class SoundsList(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
