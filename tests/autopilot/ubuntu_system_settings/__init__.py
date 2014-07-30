@@ -35,7 +35,7 @@ class SystemSettings():
     """Helper class for System Settings application"""
 
     APP_PATH = '/usr/bin/system-settings'
-    DESKTOP_FILE = '/usr/share/applications/ubuntu-system-settings.desktop'
+    APP_UPSTART_ID = 'ubuntu-system-settings'
 
     def __init__(self, testobj, panel=None):
         """Constructor. Launches system settings application
@@ -51,10 +51,9 @@ class SystemSettings():
         self.app = self.launch(
             self.testobj,
             self.APP_PATH,
-            self.DESKTOP_FILE,
             panel=self.panel)
 
-    def launch(self, testobj, app_path, desktop_file, panel=None):
+    def launch(self, testobj, app_path, panel=None):
         """Launch system settings application
 
         :param testobj: An AutopilotTestCase object, needed to call
@@ -65,19 +64,26 @@ class SystemSettings():
         :returns: A proxy object that represents the application. Introspection
         data is retrievable via this object.
         """
-        params = [app_path]
-        if platform.model() != 'Desktop':
-            params.append('--desktop_file_hint={}'.format(desktop_file))
+        if platform.model() is 'Desktop':
+            params = [app_path]
+        else:
+            params = [self.APP_UPSTART_ID]
 
         # Launch to a specific panel
         if panel is not None:
             params.append(panel)
 
-        app = testobj.launch_test_application(
-            *params,
-            app_type='qt',
-            emulator_base=ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase,
-            capture_output=True)
+        toolkit_base = ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase
+
+        if platform.model() is 'Desktop':
+            app = testobj.launch_test_application(
+                *params,
+                emulator_base=toolkit_base,
+                capture_output=True)
+        else:
+            app = testobj.launch_upstart_application(
+                *params,
+                emulator_base=toolkit_base)
 
         return app
 
