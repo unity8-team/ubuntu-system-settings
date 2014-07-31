@@ -97,6 +97,7 @@ void NotificationsManager::loadModel()
             char *icon_fname;
             app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
             bool blacklisted = m_blacklist.contains(key);
+            std::cerr << "=====" << icon_fname << "\n\n";
             if (!display_name || !icon_fname) {
                 continue; // Broken .desktop file
             }
@@ -131,7 +132,7 @@ void NotificationsManager::loadModel()
         QList<QString> keys = hooks.keys();
 
         // We need one app that has a push-helper key
-        bool has_helper = false;
+        bool has_helper = true;
         for (int j = 0; j < keys.size(); ++j) {
             QVariantMap hook = hooks.value(keys.at(j)).toMap();
             if (hook.contains("push-helper")) {
@@ -153,6 +154,7 @@ void NotificationsManager::loadModel()
                 char *display_name;
                 char *icon_fname;
                 app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
+                std::cerr << "\n\n\n\n\n*****---" << QString(icon_fname).toStdString() << "----*****" << "\n\n";
                 if (!display_name || !icon_fname) {
                     continue; // Broken .desktop file
                 }
