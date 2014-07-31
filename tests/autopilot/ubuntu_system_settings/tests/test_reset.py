@@ -21,7 +21,7 @@ class ResetTestCase(ResetBaseTestCase):
             self.system_settings.main_view.wait_select_single(
                 objectName='entryComponent-reset'),
         except Exception as e:
-            self.fail('pageStack was not popped, %s' % e)
+            self.fail('pageStack was not popped, {}'.format(e))
 
     @property
     def _reset_launcher_dialog_button(self):
