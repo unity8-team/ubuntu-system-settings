@@ -1,3 +1,46 @@
+ubuntu-system-settings (0.3+14.10.20140730-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Iain Lane ]
+  * Move the arch-restricted Depends on qtmir to the wizard binary
+    package which uses it, and lower it to Recommends since there's a
+    non-mir path too.
+
+  [ Adolfo Jayme Barrientos ]
+  * Fix typo in user-facing strings: user → use (LP: #1349855)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Jul 2014 19:48:02 +0000
+
+ubuntu-system-settings (0.3+14.10.20140729.2-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Stop storing user's password in plaintext. Instead, store it in PAM
+    the same way the Desktop images do. Also, expose the UI to set it.
+    (LP: #1234983)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 29 Jul 2014 23:31:40 +0000
+
+ubuntu-system-settings (0.3+14.10.20140729.1-0ubuntu1) utopic; urgency=low
+
+  [ Gerry Boland ]
+  * Use QtMir instead of the older Unity-Mir Need for Qt Compositor.
+
+  [ Iain Lane ]
+  * Update pot
+
+  [ Michał Sawicz ]
+  * Use QtMir instead of the older Unity-Mir Need for Qt Compositor.
+
+  [ Robert Bruce Park ]
+  * Add a build-dep on qtmir to avoid building on inappropriate arches.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 29 Jul 2014 20:54:05 +0000
+
 ubuntu-system-settings (0.3+14.10.20140725.4-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]

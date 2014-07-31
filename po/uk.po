@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-13 17:01+0000\n"
+"PO-Revision-Date: 2014-07-29 07:58+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:34+0000\n"
+"X-Launchpad-Export-Date: 2014-07-31 07:13+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 "Language: uk\n"
 
@@ -501,15 +501,15 @@ msgstr "н/д"
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
-msgstr ""
+msgstr "Режим розробника"
 
 #: ../plugins/about//DevMode.qml:68
 msgid "In Developer Mode, anyone can access, "
-msgstr ""
+msgstr "У режимі розробника усі користувачі мають доступ, "
 
 #: ../plugins/about//DevMode.qml:95
 msgid "You need a passcode or passphrase set "
-msgstr ""
+msgstr "Вам слід визначити пароль "
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -519,7 +519,7 @@ msgstr "Про цей телефон"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Номер телефону"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -551,7 +551,7 @@ msgstr "Дані щодо обмежень"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Режим розробника"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -569,11 +569,11 @@ msgstr "Звук"
 
 #: ../plugins/sound//PageComponent.qml:73
 msgid "Silent Mode"
-msgstr ""
+msgstr "Тихий режим"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "Абонент:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -723,12 +723,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "Вчора"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "Сьогодні"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -1012,7 +1012,7 @@ msgstr "Встановити"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Останній дзвінок: %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -1047,7 +1047,7 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Переспрямувати"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
@@ -1062,31 +1062,37 @@ msgstr "SIM"
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//PageComponent.qml:142
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "Точка Wi-Fi"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "Точка"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
 "When hotspot is on, other devices can user your cellular data connection "
 "over Wi-Fi. Normal data charges apply."
 msgstr ""
+"Якщо увімкнено точку доступу, інші пристрої можуть використовувати з’єднання "
+"для обміну даними за допомогою Wi-Fi. Обмін даними за допомогою такого "
+"з’єднання підлягає звичайній тарифікації."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can user your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Інші пристрої можуть використовувати з’єднання для обміну даними за "
+"допомогою Wi-Fi. Обмін даними за допомогою такого з’єднання підлягає "
+"звичайній тарифікації."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "Налаштувати точку доступу"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
-msgstr ""
+msgstr "Носії сигналу"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1120,7 +1126,7 @@ msgstr "Мобільний"
 
 #: ../plugins/cellular//PageComponent.qml:136
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "Точку доступу вимкнено, оскільки вимкнено Wi-Fi."
 
 #: ../plugins/cellular//PageComponent.qml:151
 msgid "Data usage statistics"
@@ -1130,8 +1136,9 @@ msgstr "Статистика щодо використання даних"
 #: ../plugins/cellular//PageComponent.qml:165
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Носій сигналу"
+msgstr[1] "Носії сигналу"
+msgstr[2] "Носії сигналу"
 
 #: ../plugins/cellular//PageComponent.qml:184
 msgid "APN"
@@ -1139,23 +1146,23 @@ msgstr "APN"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "Змінити налаштування точки доступу"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "Назва точки"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "Ключ (має складатися з принаймні 8 символів)"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "Показувати ключ"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Змінити"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -1450,25 +1457,27 @@ msgstr "Немає SIM-картки"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
+msgstr "Щоб можна було телефонувати та надсилати SMS, потрібна SIM-картка."
 
 #: ../wizard/qml/Pages//no-sim.qml:59
 msgid "Install a SIM before continuing."
-msgstr ""
+msgstr "Встановіть SIM-картку."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "Налаштовування завершено"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Вітаємо у Ubuntu на вашому телефоні. Цю систему створено тисячами чудових "
+"людей у Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "Тепер вашим телефоном з Ubuntu можна користуватися."
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1496,11 +1505,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Привіт!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Вітаємо у вашому телефоні з Ubuntu. Почнімо роботу."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
@@ -1508,7 +1517,7 @@ msgstr "Виберіть мову інтерфейсу"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Почати"
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
