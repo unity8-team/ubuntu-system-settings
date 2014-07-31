@@ -509,7 +509,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assert_selected_preference(1)
 
     def test_changing_sim1_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.touch.system-settings')
+        gsettings = Gio.Settings.new('com.ubuntu.touch.phone')
         old_name = gsettings.get_value('sim1-name').get_string()
         new_name = 'FOO BAR'
         self.rename_sim(1, new_name)
@@ -524,7 +524,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             sleep(1)
 
     def test_changing_sim2_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.touch.system-settings')
+        gsettings = Gio.Settings.new('com.ubuntu.touch.phone')
         old_name = gsettings.get_value('sim2-name').get_string()
         new_name = 'BAR BAZ'
         self.rename_sim(2, new_name)
@@ -539,7 +539,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             sleep(1)
 
     def test_changes_to_sim_names_in_gsettings_are_reflected_in_ui(self):
-        gsettings = Gio.Settings.new('com.ubuntu.touch.system-settings')
+        gsettings = Gio.Settings.new('com.ubuntu.touch.phone')
         old_name = gsettings.get_value('sim1-name')
         new_name = GLib.Variant.new_string('BAZ QUX')
         gsettings.set_value('sim1-name', new_name)
