@@ -198,7 +198,20 @@ ItemPage {
 
     GSettings {
         id: phoneSettings
-        schema.id: "com.ubuntu.touch.phone"
+        schema.id: "com.ubuntu.phone"
+        Component.onCompleted: {
+            // set default names
+            var simNames = phoneSettings.simNames;
+            var m0 = modemsSorted[0];
+            var m1 = modemsSorted[1];
+            if (!simNames[m0]) {
+                simNames[m0] = "SIM 1";
+            }
+            if (!simNames[m1]) {
+                simNames[m1] = "SIM 2";
+            }
+            phoneSettings.simNames = simNames;
+        }
     }
 
     Binding {

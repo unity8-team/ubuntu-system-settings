@@ -509,14 +509,16 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assert_selected_preference(1)
 
     def test_changing_sim1_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.touch.phone')
-        old_name = gsettings.get_value('sim1-name').get_string()
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        old_name = gsettings.get_value('sim-names')['/ril_0']
         new_name = 'FOO BAR'
         self.rename_sim(1, new_name)
+
+        # wait for gsettings
         sleep(1)
         try:
             self.assertEqual(
-                new_name, gsettings.get_value('sim1-name').get_string())
+                new_name, gsettings.get_value('sim-names')['/ril_0'])
         except Exception as e:
             raise e
         finally:
@@ -524,34 +526,39 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             sleep(1)
 
     def test_changing_sim2_name(self):
-        gsettings = Gio.Settings.new('com.ubuntu.touch.phone')
-        old_name = gsettings.get_value('sim2-name').get_string()
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        old_name = gsettings.get_value('sim-names')['/ril_1']
         new_name = 'BAR BAZ'
         self.rename_sim(2, new_name)
+
+        # wait for gsettings
         sleep(1)
         try:
             self.assertEqual(
-                new_name, gsettings.get_value('sim2-name').get_string())
+                new_name, gsettings.get_value('sim-names')['/ril_1'])
         except Exception as e:
             raise e
         finally:
             self.rename_sim(2, old_name)
+            # wait for gsettings
             sleep(1)
 
     def test_changes_to_sim_names_in_gsettings_are_reflected_in_ui(self):
-        gsettings = Gio.Settings.new('com.ubuntu.touch.phone')
-        old_name = gsettings.get_value('sim1-name')
-        new_name = GLib.Variant.new_string('BAZ QUX')
-        gsettings.set_value('sim1-name', new_name)
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        old_names = gsettings.get_value('sim-names')
+
+        new_names = old_names.unpack()
+        new_names['/ril_0'] = 'BAS QUX'
+        new_names = GLib.Variant('a{ss}', new_names)
+        gsettings.set_value('sim-names', new_names)
+
+        # wait for gsettings
         sleep(1)
         try:
-            self.assertIn(new_name.get_string(), self.get_sim_name(1))
+            self.assertIn(new_names['/ril_0'], self.get_sim_name(1))
         except Exception as e:
             raise e
         finally:
-            gsettings.set_value('sim1-name', old_name)
+            gsettings.set_value('sim-names', old_names)
+            # wait for gsettings
             sleep(1)
-
-    def test_two_modems(self):
-        sleep(30)
-        self.assertFalse(True)
