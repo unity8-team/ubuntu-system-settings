@@ -33,7 +33,6 @@ ItemPage {
     title: i18n.tr("Storage")
     flickable: scrollWidget
 
-    property bool sortByName: settingsId.storageSortByName
     property var allDrives: {
         var drives = ["/"] // Always consider /
         var paths = [backendInfo.getDevicePath("/")]
@@ -109,10 +108,6 @@ ItemPage {
     GSettings {
         id: settingsId
         schema.id: "com.ubuntu.touch.system-settings"
-        onChanged: {
-            if (key == "storageSortByName")
-                sortByName = value
-        }
     }
 
     UbuntuStorageAboutPanel {
@@ -121,6 +116,10 @@ ItemPage {
         // All of these events come simultaneously
         onMoviesSizeChanged: ready = true
         Component.onCompleted: populateSizes()
+        sortRole: settingsId.storageSortByName ?
+                      ClickRoles.DisplayNameRole :
+                      ClickRoles.InstalledSizeRole
+
     }
 
     StorageInfo {
@@ -173,16 +172,17 @@ ItemPage {
                 id: valueSelect
                 objectName: "installedAppsItemSelector"
                 model: [i18n.tr("By name"), i18n.tr("By size")]
-                selectedIndex:
-                    (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?
+                onSelectedIndexChanged:
+                    settingsId.storageSortByName = (selectedIndex == 0)
+                                                   // 0 → by name, 1 → by size
+            }
+
+            Binding {
+                target: valueSelect
+                property: 'selectedIndex'
+                value: (backendInfo.sortRole === ClickRoles.DisplayNameRole) ?
                         0 :
                         1
-                onSelectedIndexChanged: {
-                    backendInfo.sortRole =
-                            (selectedIndex == 0) ?
-                                ClickRoles.DisplayNameRole :
-                                ClickRoles.InstalledSizeRole
-                }
             }
 
             ListView {
@@ -190,12 +190,13 @@ ItemPage {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: childrenRect.height
-                /* Desactivate the listview flicking, we want to scroll on the column */
+                /* Deactivate the listview flicking, we want to scroll on the
+                 * column */
                 interactive: false
                 model: backendInfo.clickList
                 delegate: ListItem.SingleValue {
                     objectName: "appItem" + displayName
-                    icon: iconPath
+                    iconSource: iconPath
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
                     text: displayName
                     value: installedSize ?

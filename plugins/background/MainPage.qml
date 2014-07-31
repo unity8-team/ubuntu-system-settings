@@ -21,268 +21,186 @@
 import QtQuick 2.0
 import GSettings 1.0
 import SystemSettings 1.0
+import Ubuntu.Content 0.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Background 1.0
 import "utilities.js" as Utilities
 
 ItemPage {
     id: mainPage
+
+    objectName: "backgroundPage"
+
+    flickable: sources
+
     title: i18n.tr("Background")
 
+    signal save (string uri)
+
     /* TODO: For now hardcoded paths, later we'll use GSettings */
+    /* TODO: fix bug where rotating in uss will change default
+    background to tablet_back… thus losing track of phone_back… */
     property string defaultBackground:
         mainPage.width >= units.gu(60) ?
             "/usr/share/unity8/graphics/tablet_background.jpg" :
             "/usr/share/unity8/graphics/phone_background.jpg"
 
-    property string homeBackground: background.pictureUri
     property string welcomeBackground: backgroundPanel.backgroundFile
-    property real thumbWidth: mainPage.width * 0.43
-    property real thumbHeight: mainPage.height * 0.4
 
+    property var activeTransfer
+
+    // Action to import image
+    Action {
+        id: selectDefaultPeer
+        // when action has been activated, request a transfer, providing
+        // a callback that pushes the preview stack
+        onTriggered: {
+            startContentTransfer(function(uri) {
+                pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                // set Connection target
+                selectedItemConnection.target = pageStack.currentPage;
+            });
+        }
+    }
+
+    tools: ToolbarItems {
+        ToolbarButton {
+            action: selectDefaultPeer
+        }
+        opened: true
+        locked: true
+    }
+
+    // qml bindings for background stuff
     UbuntuBackgroundPanel {
         id: backgroundPanel
-
-        function maybeUpdateSource() {
-            var source = backgroundPanel.backgroundFile
-            if (source != "" && source != undefined) {
-                testWelcomeImage.source = source;
-            }
-            if (testWelcomeImage.source == "") {
-                testWelcomeImage.source = testWelcomeImage.fallback;
-            }
-        }
-
-        onBackgroundFileChanged: maybeUpdateSource()
-        Component.onCompleted: maybeUpdateSource()
     }
 
-    GSettings {
-        id: background
-        schema.id: "org.gnome.desktop.background"
-        onChanged: {
-            if (key == "pictureUri")
-                testHomeImage.source = value;
-        }
-    }
+    Flickable {
+        id: sources
 
-    Column {
-        id: previewsRow
         anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            topMargin: spacing
+            fill: parent
+            topMargin: units.gu(2)
         }
-        height: childrenRect.height
-        spacing: units.gu(2)
+        visible: true
+        contentHeight: sourceColumn.height + sourceColumn.anchors.bottomMargin
 
-        Item {
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: thumbRow.height
-            width: thumbRow.width
-            Row {
-                id: thumbRow
-                spacing: units.gu(2)
-                height: childrenRect.height
-                width: childrenRect.width
-
-                Item {
-                    anchors.top: parent.top
-                    height: childrenRect.height
-                    width: thumbWidth
-
-                    SwappableImage {
-                        id: welcomeImage
-                        anchors.top: parent.top
-                        height: thumbHeight
-                        width: thumbWidth
-                        onClicked: {
-                            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
-                                           {homeScreen: systemSettingsSettings.backgroundDuplicate ? true : false,
-                                               useSame: systemSettingsSettings.backgroundDuplicate,
-                                               backgroundPanel: backgroundPanel,
-                                               current: welcomeBackground,
-                                               defaultBackground: defaultBackground
-                                            });
-
-                            var curItem = pageStack.currentPage;
-                            selectedItemConnection.target = curItem;
-                            updateImage(testWelcomeImage, welcomeImage);
-                        }
-
-                        Component.onCompleted: updateImage(testWelcomeImage,
-                                                           welcomeImage)
-
-                        OverlayImage {
-                            anchors.fill: parent
-                            source: "welcomeoverlay.svg"
-                        }
-                    }
-                    Label {
-                        id: welcomeLabel
-
-                        anchors {
-                            topMargin: units.gu(1)
-                            top: welcomeImage.bottom
-                            horizontalCenter: parent.horizontalCenter
-                        }
-                        text: i18n.tr("Welcome screen")
-                    }
-                }
-
-                Item {
-                    anchors.top: parent.top
-                    height: childrenRect.height
-                    width: thumbWidth
-                    SwappableImage {
-                        id: homeImage
-                        anchors.top: parent.top
-                        height: thumbHeight
-                        width: thumbWidth
-
-                        onClicked: {
-                            pageStack.push(Qt.resolvedUrl("Wallpapers.qml"),
-                                           {homeScreen: true,
-                                               useSame: systemSettingsSettings.backgroundDuplicate,
-                                               backgroundPanel: backgroundPanel,
-                                               current: homeBackground,
-                                               defaultBackground: defaultBackground
-                                            });
-                            var curItem = pageStack.currentPage;
-                            selectedItemConnection.target = curItem;
-                            updateImage(testHomeImage, homeImage);
-                        }
-                        Component.onCompleted: updateImage(testHomeImage,
-                                                           homeImage)
-
-                        OverlayImage {
-                            anchors.fill: parent
-                            source: "homeoverlay.svg"
-                        }
-                    }
-
-                    Label {
-                        id: homeLabel
-
-                        anchors {
-                            top: homeImage.bottom
-                            topMargin: units.gu(1)
-                            horizontalCenter: parent.horizontalCenter
-                        }
-
-                        text: i18n.tr("Home screen")
-                    }
-                }
-
+        Column {
+            id: sourceColumn
+            anchors {
+                left: parent.left
+                right: parent.right
             }
-            MouseArea {
-                anchors {
-                    top: parent.top
-                    left: parent.left
-                    right: parent.right
+
+            WallpaperGrid {
+                id: uArtGrid
+                objectName: "UbuntuArtGrid"
+                anchors.left: parent.left
+                anchors.right: parent.right
+                columns: 3
+                bgmodel: {
+                    // Make a shallow copy
+                    var backgrounds = backgroundPanel.ubuntuArt.slice(0)
+                    if (backgroundPanel.fileExists(defaultBackground))
+                        backgrounds.push(Qt.resolvedUrl(defaultBackground))
+                    return backgrounds
                 }
-                height: thumbHeight
-                visible: systemSettingsSettings.backgroundDuplicate
-                onClicked: homeImage.clicked()
+                backgroundPanel: backgroundPanel
+                title: i18n.tr("Ubuntu Art")
+                current: welcomeBackground
+                onSelected: {
+                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    selectedItemConnection.target = pageStack.currentPage;
+                }
             }
-        }
 
-        ListItem.ThinDivider {}
-
-        OptionSelector {
-            id: optionSelector
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - units.gu(4)
-            expanded: true
-
-            model: [i18n.tr("Same background for both"),
-                i18n.tr("Different background for each")]
-            selectedIndex: systemSettingsSettings.backgroundDuplicate ? 0 : 1
-            onSelectedIndexChanged: {
-                if (selectedIndex === 0 && !systemSettingsSettings.backgroundDuplicate)
-                    systemSettingsSettings.backgroundDuplicate = true;
-                else if (selectedIndex === 1 && systemSettingsSettings.backgroundDuplicate)
-                    systemSettingsSettings.backgroundDuplicate = false;
+            WallpaperGrid {
+                id: customGrid
+                objectName: "customArtGrid"
+                anchors.left: parent.left
+                anchors.right: parent.right
+                columns: 3
+                bgmodel: backgroundPanel.customBackgrounds
+                backgroundPanel: backgroundPanel
+                title: i18n.tr("Custom")
+                current: welcomeBackground
+                editable: true
+                isCustom: true
+                onSelected: {
+                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                    selectedItemConnection.target = pageStack.currentPage
+                }
             }
+
+
+            ListItem.ThinDivider {}
+
         }
     }
 
-    /* We don't have a good way of doing this after passing an invalid image to
-       SwappableImage, so test the image is valid /before/ showing it and show a
-       fallback if it isn't. */
-    function updateImage(testImage, targetImage) {
-        if (testImage.status === Image.Ready) {
-            targetImage.source = testImage.source;
-        } else if (testImage.status === Image.Error) {
-            targetImage.source = testImage.fallback;
-        }
-    }
-
-    Image {
-        id: testWelcomeImage
-
-        function update(uri) {
-            // Will update source
-            Utilities.updateWelcome(uri);
-        }
-
-        property string fallback: defaultBackground
-        visible: false
-        onStatusChanged: updateImage(testWelcomeImage, welcomeImage)
-    }
-
-    Image {
-        id: testHomeImage
-
-        function update(uri) {
-            // Will update source
-            Utilities.updateHome(uri);
-        }
-
-        property string fallback: defaultBackground
-        source: background.pictureUri
-        visible: false
-        onStatusChanged: updateImage(testHomeImage, homeImage)
-    }
-
-    function setUpImages() {
-        var mostRecent = (systemSettingsSettings.backgroundSetLast === "home") ?
-                    testHomeImage : testWelcomeImage;
-        var leastRecent = (mostRecent === testHomeImage) ?
-                    testWelcomeImage : testHomeImage;
-
-        if (systemSettingsSettings.backgroundDuplicate) { //same
-            /* save value of least recently changed to restore later */
-            systemSettingsSettings.backgroundPreviouslySetValue =
-                    leastRecent.source;
-            /* copy most recently changed to least recently changed */
-            leastRecent.update(mostRecent.source);
-        } else { // different
-            /* restore least recently changed to previous value */
-            leastRecent.update(
-                    systemSettingsSettings.backgroundPreviouslySetValue);
-        }
-    }
-
-    GSettings {
-        id: systemSettingsSettings
-        schema.id: "com.ubuntu.touch.system-settings"
-        onChanged: {
-            if (key == "backgroundDuplicate")
-                setUpImages();
-        }
-        Component.onCompleted: {
-            if (systemSettingsSettings.backgroundDuplicate)
-                optionSelector.selectedIndex = 0;
-            else
-                optionSelector.selectedIndex = 1;
-        }
-    }
 
     Connections {
-        id: selectedItemConnection
-        onSave: Utilities.setBackground(homeScreen, uri)
+        id: contentHubConnection
+        property var imageCallback
+        target: activeTransfer ? activeTransfer : null
+        onStateChanged: {
+            if (activeTransfer.state === ContentTransfer.Charged) {
+                if (activeTransfer.items.length > 0) {
+                    var imageUrl = activeTransfer.items[0].url;
+                    imageCallback(imageUrl);
+                }
+            }
+        }
     }
+
+    ContentPeer {
+        id: peer
+        contentType: ContentType.Pictures
+        handler: ContentHandler.Source
+        selectionType: ContentTransfer.Single
+    }
+
+    ContentStore {
+        id: appStore
+        scope: ContentScope.App
+    }
+
+    // requests an active transfer from peer
+    function startContentTransfer(callback) {
+        if (callback)
+            contentHubConnection.imageCallback = callback
+        var transfer = peer.request(appStore);
+        if (transfer !== null) {
+            activeTransfer = transfer;
+        }
+    }
+
+    // set up connections
+    Connections {
+        id: selectedItemConnection
+        onSave: {
+            Utilities.setBackground(target.uri)
+        }
+        onStateChanged: {
+            var trans = mainPage.activeTransfer;
+            if (target.state === "saved") {
+                save(target.uri);
+
+                // if a transfer is done, clean up
+                if (trans && trans.state === ContentTransfer.Collected) {
+                    trans.state = ContentTransfer.Finalized;
+                }
+            }
+            // if we did an import, clean up
+            if ((target.state === "cancelled") &&
+                (trans && trans.state === ContentTransfer.Collected)) {
+                backgroundPanel.rmFile(target.uri);
+                trans.state = ContentTransfer.Finalized;
+            }
+        }
+    }
+
 }

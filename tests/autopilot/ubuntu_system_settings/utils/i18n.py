@@ -8,15 +8,17 @@
 import locale
 import gettext
 
-APP_NAME='ubuntu-system-settings'
-LOCALE_DIR='/usr/share/locale/'
+APP_NAME = 'ubuntu-system-settings'
+LOCALE_DIR = '/usr/share/locale/'
 
 lc, encoding = locale.getdefaultlocale()
 
 if not lc:
     lc = 'C'
 
-language = gettext.translation(APP_NAME, LOCALE_DIR, languages=[lc], fallback=True)
+language = gettext.translation(
+    APP_NAME, LOCALE_DIR, languages=[lc], fallback=True
+)
 
 # UTF-8
-ugettext = language.ugettext
+ugettext = language.gettext

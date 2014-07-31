@@ -1,2 +1,0 @@
-module Ubuntu.SystemSettings.Phone
-plugin UbuntuPhonePanel

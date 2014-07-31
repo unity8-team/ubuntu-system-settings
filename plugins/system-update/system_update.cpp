@@ -16,11 +16,13 @@
  * Authors:
  * Didier Roche <didier.roche@canonical.com>
  * Diego Sarmentero <diego.sarmentero@canonical.com>
+ * Sergio Schvezov <sergio.schvezov@canonical.com>
  *
 */
 
 #include "system_update.h"
 #include <QEvent>
+#include <QDateTime>
 #include <QDBusReply>
 #include <unistd.h>
 
@@ -37,6 +39,8 @@ namespace UpdatePlugin {
 SystemUpdate::SystemUpdate(QObject *parent) :
     QObject(parent),
     m_currentBuildNumber(-1),
+    m_detailedVersion(),
+    m_lastUpdateDate(),
     m_downloadMode(-1),
     m_systemBusConnection (QDBusConnection::systemBus()),
     m_SystemServiceIface ("com.canonical.SystemImage",
@@ -45,6 +49,8 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                          m_systemBusConnection)
 {
     update = nullptr;
+
+    qDBusRegisterMetaType<QMap<QString, QString> >();
 
     connect(&m_SystemServiceIface, SIGNAL(UpdateAvailableStatus(bool, bool, QString, int, QString, QString)),
                this, SLOT(ProcessAvailableStatus(bool, bool, QString, int, QString, QString)));
@@ -92,15 +98,45 @@ void SystemUpdate::pauseDownload() {
         Q_EMIT updateProcessFailed(_("Can't pause current request (can't contact service)"));
 }
 
-int SystemUpdate::currentBuildNumber() {
-    if (m_currentBuildNumber != -1)
-        return m_currentBuildNumber;
+void SystemUpdate::setCurrentDetailedVersion() {
+    QDBusPendingReply<int, QString, QString, QString, QMap<QString, QString> > reply = m_SystemServiceIface.call("Info");
+    reply.waitForFinished();
+    if (reply.isValid()) {
+        m_currentBuildNumber = reply.argumentAt<0>();
+        m_lastUpdateDate = QDateTime::fromString(reply.argumentAt<3>(), Qt::ISODate);
+        m_detailedVersion = reply.argumentAt<4>();
+        Q_EMIT versionChanged();
+    } else {
+        qWarning() << "Error when retrieving version information: " << reply.error();
+    }
+}
 
-    QDBusReply<int> reply = m_SystemServiceIface.call("Info");
-    if (reply.isValid())
-        m_currentBuildNumber = reply.value();
+QDateTime SystemUpdate::lastUpdateDate() {
+    if (!m_lastUpdateDate.isValid())
+        setCurrentDetailedVersion();
+
+    return m_lastUpdateDate;
+}
+
+int SystemUpdate::currentBuildNumber() {
+    if (m_currentBuildNumber == -1)
+        setCurrentDetailedVersion();
 
     return m_currentBuildNumber;
+}
+
+QString SystemUpdate::currentUbuntuBuildNumber() {
+    if (!m_detailedVersion.contains("ubuntu"))
+        setCurrentDetailedVersion();
+
+    return m_detailedVersion.value("ubuntu", "Unavailable");
+}
+
+QString SystemUpdate::currentDeviceBuildNumber() {
+    if (!m_detailedVersion.contains("device"))
+        setCurrentDetailedVersion();
+
+    return m_detailedVersion.value("device", "Unavailable");
 }
 
 int SystemUpdate::downloadMode() {
@@ -151,7 +187,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
                                           QString errorReason)
 {
     update = new Update(this);
-    QString packageName("UbuntuImage");
+    QString packageName(UBUNTU_PACKAGE_NAME);
     update->initializeApplication(packageName, "Ubuntu",
                                   QString::number(this->currentBuildNumber()));
 
@@ -165,7 +201,11 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
     update->setLastUpdateDate(lastUpdateDate);
     update->setIconUrl(QString("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png"));
 
-    Q_EMIT this->updateAvailable(packageName, update);
+    if (update->updateRequired()) {
+        Q_EMIT updateAvailable(packageName, update);
+    } else {
+        Q_EMIT updateNotFound();
+    }
 }
 
 void SystemUpdate::updateDownloadProgress(int percentage, double eta)

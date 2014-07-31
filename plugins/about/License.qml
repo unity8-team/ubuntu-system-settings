@@ -8,7 +8,6 @@ ItemPage {
     property string binary;
 
     id: licensesPage
-    objectName: "licensesPage"
     title: binary
     flickable: scrollWidget
 
@@ -21,8 +20,11 @@ ItemPage {
         anchors.fill: parent
         anchors.margins: units.gu(2)
         contentHeight: textId.height
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        Text {
+        Label {
             id: textId
             text: backendInfo.licenseInfo(binary)
             width: scrollWidget.width

@@ -18,30 +18,27 @@
  *
  */
 
-function setBackground(homeScreen, uri) {
-    if (systemSettingsSettings.backgroundDuplicate) {
-        updateBoth(uri);
-    } else {
-        if (homeScreen) {
-            updateHome(uri);
-            systemSettingsSettings.backgroundSetLast = "home";
-        } else {
-            updateWelcome(uri);
-            systemSettingsSettings.backgroundSetLast = "welcome";
+function setBackground(uri) {
+    backgroundPanel.backgroundFile = backgroundPanel.prepareBackgroundFile(uri, true);
+}
+
+function revertBackgroundToDefault () {
+    setBackground(Qt.resolvedUrl(mainPage.defaultBackground));
+    uArtGrid.state = "";
+}
+
+function deSelectBackgrounds (repeater) {
+    for (var i=0, j=repeater.count; i < j; i++) {
+        repeater.itemAt(i).state = "";
+    }
+}
+
+function getSelected (repeater) {
+    var s = 0;
+    for (var i=0, j=repeater.count; i < j; i++) {
+        if (repeater.itemAt(i).state === "selected") {
+            s++;
         }
     }
-    pageStack.pop();
-}
-
-function updateWelcome(uri) {
-    backgroundPanel.backgroundFile = uri;
-}
-
-function updateHome(uri) {
-    background.pictureUri = uri;
-}
-
-function updateBoth(uri) {
-    updateWelcome(uri);
-    updateHome(uri);
+    return s;
 }

@@ -1,4 +1,6 @@
-add_subdirectory(about)
+if(ANDR_PROP_FOUND)
+    add_subdirectory(about)
+endif()
 #add_subdirectory(accessibility)
 add_subdirectory(background)
 add_subdirectory(battery)

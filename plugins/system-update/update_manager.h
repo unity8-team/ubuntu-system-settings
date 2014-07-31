@@ -23,12 +23,28 @@
 
 #include <QObject>
 #include <QtQml>
+#include <QDateTime>
 #include <QHash>
 #include <QList>
 #include <QVariant>
 #include <QVariantList>
 #include "system_update.h"
 #include "update.h"
+#include <token.h>
+
+#ifdef TESTS
+#include "../../tests/plugins/system-update/fakeprocess.h"
+#include "../../tests/plugins/system-update/fakenetwork.h"
+#include "../../tests/plugins/system-update/fakessoservice.h"
+#include "../../tests/plugins/system-update/fakesystemupdate.h"
+#else
+#include <ssoservice.h>
+#include <QProcess>
+#include "network/network.h"
+#include "system_update.h"
+#endif
+
+using namespace UbuntuOne;
 
 namespace UpdatePlugin {
 
@@ -38,17 +54,25 @@ class UpdateManager : public QObject
     Q_PROPERTY(QVariantList model READ model NOTIFY modelChanged)
     Q_PROPERTY(int downloadMode READ downloadMode WRITE setDownloadMode
                NOTIFY downloadModeChanged)
-    Q_PROPERTY(int currentBuildNumber READ currentBuildNumber)
+    Q_PROPERTY(int currentBuildNumber READ currentBuildNumber CONSTANT)
+    Q_PROPERTY(QDateTime lastUpdateDate READ lastUpdateDate CONSTANT)
+    Q_PROPERTY(QString currentUbuntuBuildNumber READ currentUbuntuBuildNumber
+               NOTIFY versionChanged)
+    Q_PROPERTY(QString currentDeviceBuildNumber READ currentDeviceBuildNumber
+               NOTIFY versionChanged)
 
 Q_SIGNALS:
+    void checkFinished();
     void modelChanged();
     void updatesNotFound();
-    void updateAvailableFound();
+    void credentialsNotFound();
+    void updateAvailableFound(bool downloading);
     void errorFound();
     void downloadModeChanged();
     void systemUpdateDownloaded();
     void updateProcessFailed(QString message);
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
+    void versionChanged();
     
 public:
     explicit UpdateManager(QObject *parent = 0);
@@ -64,27 +88,64 @@ public:
     int downloadMode() { return m_systemUpdate.downloadMode(); }
     void setDownloadMode(int mode) { m_systemUpdate.setDownloadMode(mode); }
     int currentBuildNumber() { return m_systemUpdate.currentBuildNumber(); }
+    QDateTime lastUpdateDate() { return m_systemUpdate.lastUpdateDate(); }
+    QString currentUbuntuBuildNumber() { return m_systemUpdate.currentUbuntuBuildNumber(); }
+    QString currentDeviceBuildNumber() { return m_systemUpdate.currentDeviceBuildNumber(); }
 
 #ifdef TESTS
     // For testing purposes
     QHash<QString, Update*> get_apps() { return m_apps; }
     QVariantList get_model() { return m_model; }
     int get_downloadMode() { return m_downloadMode; }
+    void set_token(Token& t) { m_token = t; }
+    Token get_token() { return m_token; }
+    void setCheckintUpdates(int value) { m_checkingUpdates = value; }
+    void setCheckSystemUpdates(int value) { m_systemCheckingUpdate = value; }
+    void setCheckClickUpdates(int value) { m_clickCheckingUpdate = value; }
+    FakeSsoService& getService() { return m_service; }
 #endif
 
 public Q_SLOTS:
     void registerSystemUpdate(const QString& packageName, Update *update);
+    void systemUpdateNotAvailable();
 
 private Q_SLOTS:
+    void clickUpdateNotAvailable();
     void systemUpdatePaused(int value);
+    void processOutput();
+    void processUpdates();
+    void downloadUrlObtained(const QString &packagename, const QString &url);
+    void handleCredentialsFound(Token token);
+    void clickTokenReceived(Update *app, const QString &clickToken);
 
 private:
+    bool m_systemCheckingUpdate;
+    bool m_clickCheckingUpdate;
+    int m_checkingUpdates;
     QHash<QString, Update*> m_apps;
     int m_downloadMode;
     QVariantList m_model;
+    Token m_token;
+
+#ifdef TESTS
+    FakeNetwork m_network;
+    FakeProcess m_process;
+    FakeSsoService m_service;
+    FakeSystemUpdate m_systemUpdate;
+#else
+    Network m_network;
+    QProcess m_process;
+    SSOService m_service;
     SystemUpdate m_systemUpdate;
+#endif
 
     void checkForUpdates();
+    QString getClickCommand();
+    bool getCheckForCredentials();
+    bool enableAutopilotMode();
+    void reportCheckState();
+    void updateNotAvailable();
+    void setCurrentDetailedVersion();
 };
 
 }

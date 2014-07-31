@@ -33,7 +33,7 @@ class Update : public QObject
     Q_OBJECT
     Q_PROPERTY(bool systemUpdate READ systemUpdate WRITE setSystemUpdate
                NOTIFY systemUpdateChanged)
-    Q_PROPERTY(QString packageName READ getPackageName)
+    Q_PROPERTY(QString packageName READ getPackageName NOTIFY packageNameChanged)
     Q_PROPERTY(QString title READ getTitle NOTIFY titleChanged)
     Q_PROPERTY(QString localVersion READ getLocalVersion
                NOTIFY localVersionChanged)
@@ -54,6 +54,8 @@ class Update : public QObject
                NOTIFY lastUpdateDateChanged)
     Q_PROPERTY(int downloadProgress READ downloadProgress
                NOTIFY downloadProgressChanged)
+    Q_PROPERTY(QString downloadUrl READ downloadUrl NOTIFY downloadUrlChanged)
+    Q_PROPERTY(QString clickToken READ clickToken NOTIFY clickTokenChanged)
 
 Q_SIGNALS:
     void systemUpdateChanged();
@@ -68,6 +70,9 @@ Q_SIGNALS:
     void errorChanged();
     void downloadProgressChanged();
     void lastUpdateDateChanged();
+    void downloadUrlChanged();
+    void clickTokenChanged();
+    void packageNameChanged();
 
 public:
     explicit Update(QObject *parent = 0);
@@ -87,6 +92,9 @@ public:
     bool updateReady() { return m_update_ready; }
     bool selected() { return m_selected; }
     QString getError() { return m_error; }
+    const QString& getClickUrl() const { return m_click_url; }
+    QString downloadUrl() { return m_downloadUrl; }
+    QString clickToken() { return m_clickToken; }
 
     void setSystemUpdate(bool isSystem);
     void initializeApplication(QString packagename, QString title,
@@ -101,9 +109,15 @@ public:
     void setError(QString error);
     void setUpdateAvailable(bool available) { m_update = available; }
     void setLastUpdateDate(const QString date);
+    void setClickUrl(const QString &url) { m_click_url = url; }
+    void setDownloadUrl(const QString &url);
+    void setClickToken(const QString &token) { m_clickToken = token; Q_EMIT clickTokenChanged(); }
 
 private:
     int m_binary_filesize;
+    QString m_click_url;
+    QString m_clickToken;
+    QString m_downloadUrl;
     int m_download_progress;
     QString m_error;
     QString m_icon_url;
@@ -117,6 +131,8 @@ private:
     bool m_update;
     bool m_update_ready;
     bool m_update_state;
+
+    bool getIgnoreUpdates();
 };
 
 }

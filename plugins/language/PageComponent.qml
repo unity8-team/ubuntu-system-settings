@@ -23,6 +23,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Settings.Menus 0.1 as Menus
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
@@ -58,15 +59,22 @@ ItemPage {
         boundsBehavior: contentHeight > root.height ?
                         Flickable.DragAndOvershootBounds :
                         Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
         Column {
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-            ListItem.SingleValue {
-                iconSource: "/usr/share/icons/ubuntu-mobile/actions/scalable/language-chooser.svg"
+            Menus.StandardMenu {
+                iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
-                value: plugin.languageNames[plugin.currentLanguage]
-                progression: true
+                component: Label {
+                    text: plugin.languageNames[plugin.currentLanguage]
+                    elide: Text.ElideRight
+                    opacity: enabled ? 1.0 : 0.5
+                }
 
                 onClicked: PopupUtils.open(displayLanguage)
             }

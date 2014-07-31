@@ -25,6 +25,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
+import MeeGo.QOfono 0.2
 
 ItemPage {
     id: root
@@ -45,11 +46,23 @@ ItemPage {
         id: updateBackend
     }
 
+    OfonoManager {
+        id: manager
+    }
+
+    OfonoSimManager {
+        id: sim
+        modemPath: manager.modems[0]
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
         Column {
             anchors.left: parent.left
@@ -79,10 +92,21 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                id: numberItem
+                objectName: "numberItem"
+                text: i18n.tr("Phone number")
+                property string phoneNumber
+                phoneNumber: sim.subscriberNumbers.length > 0 ? sim.subscriberNumbers[0] : ""
+                value: phoneNumber
+                visible: phoneNumber.length > 0
+            }
+
+            ListItem.SingleValue {
                 id: serialItem
                 objectName: "serialItem"
                 text: i18n.tr("Serial")
-                value: backendInfos.serialNumber ? backendInfos.serialNumber : i18n.tr("N/A")
+                value: backendInfos.serialNumber
+                visible: backendInfos.serialNumber
             }
 
             ListItem.SingleValue {
@@ -90,7 +114,18 @@ ItemPage {
                 property string imeiNumber
                 imeiNumber: deviceInfos.imei(0)
                 text: "IMEI"
-                value: imeiNumber ? imeiNumber : i18n.tr("N/A")
+                value: imeiNumber
+                visible: imeiNumber
+            }
+
+            ListItem.Divider {}
+
+            ListItem.Standard {
+                id: storageItem
+                objectName: "storageItem"
+                text: i18n.tr("Storage")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
             ListItem.Standard {
@@ -103,12 +138,15 @@ ItemPage {
                 text: i18n.tr("OS")
                 value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
                        (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
             }
 
             ListItem.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: backendInfos.updateDate ? backendInfos.updateDate : i18n.tr("Never")
+                value: updateBackend.lastUpdateDate && !isNaN(updateBackend.lastUpdateDate) ?
+                    Qt.formatDate(updateBackend.lastUpdateDate) : i18n.tr("Never")
             }
 
             ListItem.SingleControl {
@@ -119,14 +157,6 @@ ItemPage {
                     onClicked:
                         pageStack.push(pluginManager.getByName("system-update").pageComponent)
                 }
-            }
-
-            ListItem.Standard {
-                id: storageItem
-                objectName: "storageItem"
-                text: i18n.tr("Storage")
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("Storage.qml"))
             }
 
             ListItem.Standard {
@@ -148,6 +178,13 @@ ItemPage {
                 progression: true
                 visible: regulatoryInfo
                 onClicked: pageStack.push(regulatoryInfo.pageComponent)
+            }
+
+            ListItem.SingleValue {
+                objectName: "devmodeItem"
+                text: i18n.tr("Developer mode")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
             }
         }
     }

@@ -34,6 +34,12 @@
 #include <QVariant>
 #include "storageabout.h"
 #include <hybris/properties/properties.h>
+#include <QDBusReply>
+
+namespace {
+    const QString PROPERTY_SERVICE_PATH = "/com/canonical/PropertyService";
+    const QString PROPERTY_SERVICE_OBJ = "com.canonical.PropertyService";
+}
 
 struct MeasureData {
     uint *running;
@@ -131,6 +137,10 @@ StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
     m_clickFilterProxy(&m_clickModel),
+    m_propertyService(new QDBusInterface(PROPERTY_SERVICE_OBJ,
+        PROPERTY_SERVICE_PATH,
+        PROPERTY_SERVICE_OBJ,
+        QDBusConnection::systemBus())),
     m_cancellable(NULL)
 {
 }
@@ -163,17 +173,65 @@ QString StorageAbout::vendorString()
     return m_vendorString;
 }
 
-QString StorageAbout::updateDate()
+QString StorageAbout::deviceBuildDisplayID()
 {
-    if (m_updateDate.isEmpty() || m_updateDate.isNull())
+    static char serialBuffer[PROP_NAME_MAX];
+
+    if (m_deviceBuildDisplayID.isEmpty() || m_deviceBuildDisplayID.isNull())
     {
-        QFile file("/userdata/.last_update");
-        if (!file.exists())
-            return "";
-        m_updateDate = QFileInfo(file).created().toString("yyyy-MM-dd");
+        property_get("ro.build.display.id", serialBuffer, "");
+        m_deviceBuildDisplayID = QString(serialBuffer);
     }
 
-    return m_updateDate;
+    return m_deviceBuildDisplayID;
+}
+
+QString StorageAbout::customizationBuildID()
+{
+    if (m_customizationBuildID.isEmpty() || m_customizationBuildID.isNull())
+    {
+        QFile file("/custom/build_id");
+        if (!file.exists())
+            return "";
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        m_customizationBuildID = QString(file.readAll().trimmed());
+        file.close();
+    }
+
+    return m_customizationBuildID;
+}
+
+QString StorageAbout::ubuntuBuildID()
+{
+    if (m_ubuntuBuildID.isEmpty() || m_ubuntuBuildID.isNull())
+    {
+        QFile file("/etc/media-info");
+        if (!file.exists())
+            return "";
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        m_ubuntuBuildID = QString(file.readAll());
+        file.close();
+    }
+
+    return m_ubuntuBuildID;
+}
+
+bool StorageAbout::getDeveloperMode()
+{
+    QDBusReply<bool> reply = m_propertyService->call("GetProperty", "adb");
+
+    if (reply.isValid()) {
+        return reply.value();
+    } else {
+        qWarning("devMode: no reply from dbus property service");
+        return false;
+    }
+}
+
+bool StorageAbout::toggleDeveloperMode()
+{
+    m_propertyService->call("SetProperty", "adb", !getDeveloperMode());
+    return getDeveloperMode();
 }
 
 QString StorageAbout::licenseInfo(const QString &subdir) const
@@ -206,6 +264,7 @@ void StorageAbout::setSortRole(ClickModel::Roles newRole)
     m_clickFilterProxy.sort(0, newRole == ClickModel::InstalledSizeRole ?
                                 Qt::DescendingOrder :
                                 Qt::AscendingOrder);
+    m_clickFilterProxy.invalidate();
     Q_EMIT(sortRoleChanged());
 }
 
@@ -277,7 +336,7 @@ void StorageAbout::populateSizes()
 }
 
 QString StorageAbout::getDevicePath(const QString mount_point)
-{    
+{
     QString s_mount_point;
 
     GUnixMountEntry * g_mount_point = NULL;

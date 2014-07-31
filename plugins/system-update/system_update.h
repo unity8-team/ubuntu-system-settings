@@ -30,6 +30,8 @@
 
 #include "update.h"
 
+#define UBUNTU_PACKAGE_NAME "UbuntuImage"
+
 namespace UpdatePlugin {
 
 class SystemUpdate : public QObject
@@ -42,7 +44,10 @@ public:
 
     int downloadMode();
     void setDownloadMode(int);
+    QDateTime lastUpdateDate();
     int currentBuildNumber();
+    QString currentUbuntuBuildNumber();
+    QString currentDeviceBuildNumber();
 
     void checkForUpdate();
     void downloadUpdate();
@@ -56,11 +61,13 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void updateAvailable(const QString& packageName, Update *update);
+    void updateNotFound();
     void updateProgress(int percentage, double eta);
     void updatePaused(int percentage);
     void updateDownloaded();
     void updateFailed(int consecutiveFailureCount, QString lastReason);
     void downloadModeChanged();
+    void versionChanged();
     void updateProcessFailed(const QString& reason);
 
 private Q_SLOTS:
@@ -68,12 +75,16 @@ private Q_SLOTS:
 
 private:
     int m_currentBuildNumber;
+    QMap<QString, QString> m_detailedVersion;
+    QDateTime m_lastUpdateDate;
     int m_downloadMode;
 
     QDBusConnection m_systemBusConnection;
     QString m_objectPath;
     QDBusInterface m_SystemServiceIface;
     Update *update;
+
+    void setCurrentDetailedVersion();
 };
 
 }

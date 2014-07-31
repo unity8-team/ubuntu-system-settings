@@ -9,8 +9,12 @@ import Ubuntu.SystemSettings.Sound 1.0
 import "utilities.js" as Utilities
 
 ItemPage {
-    property variant soundDisplayNames
-    property variant soundFileNames
+    property variant soundDisplayNames:
+        Utilities.buildSoundValues(soundFileNames)
+    property variant soundFileNames:
+        backendInfo.listSounds(soundsDir).map(function (sound) {
+            return soundsDir+sound
+        })
     property bool showStopButton: false
     property int soundType // 0: ringtone, 1: message
     property string soundsDir
@@ -19,26 +23,23 @@ ItemPage {
 
     UbuntuSoundPanel {
         id: backendInfo
-        Component.onCompleted: {
-            soundFileNames = listSounds(soundsDir).map(function (sound)
-                             {return soundsDir+sound})
-            soundDisplayNames = Utilities.buildSoundValues(soundFileNames)
+        onIncomingCallSoundChanged: {
             if (soundType == 0)
-                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, soundSettings.incomingCallSound)
-            else if (soundType == 1)
-                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, soundSettings.incomingMessageSound)
+                soundSelector.selectedIndex =
+                        Utilities.indexSelectedFile(soundFileNames,
+                                                    incomingCallSound)
+        }
+        onIncomingMessageSoundChanged: {
+            if (soundType == 1)
+                soundSelector.selectedIndex =
+                        Utilities.indexSelectedFile(soundFileNames,
+                                                    incomingMessageSound)
         }
     }
 
     GSettings {
         id: soundSettings
         schema.id: "com.ubuntu.touch.sound"
-        onChanged: {
-            if (soundType == 0 && key == "incomingCallSound")
-                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, value)
-            if (soundType == 1 && key == "incomingMessageSound")
-                soundSelector.selectedIndex = Utilities.indexSelectedFile(soundFileNames, value)
-        }
     }
 
     Audio {
@@ -50,7 +51,7 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        SilentModeWarning { visible: soundSettings.silentMode }
+        SilentModeWarning { visible: backendInfo.silentMode }
 
         ListItem.SingleControl {
             id: listId
@@ -61,7 +62,7 @@ ItemPage {
                     soundEffect.stop()
             }
             enabled: soundEffect.playbackState == Audio.PlayingState
-            visible: showStopButton && !soundSettings.silentMode
+            visible: showStopButton && !backendInfo.silentMode
         }
     }
 
@@ -73,13 +74,26 @@ ItemPage {
 
         expanded: true
         model: soundDisplayNames
-        onDelegateClicked: {
+        selectedIndex: {
             if (soundType == 0)
-                soundSettings.incomingCallSound = soundFileNames[index]
+                soundSelector.selectedIndex =
+                        Utilities.indexSelectedFile(soundFileNames,
+                            backendInfo.incomingCallSound)
             else if (soundType == 1)
+                soundSelector.selectedIndex =
+                        Utilities.indexSelectedFile(soundFileNames,
+                            backendInfo.incomingMessageSound)
+        }
+        onDelegateClicked: {
+            if (soundType == 0) {
+                soundSettings.incomingCallSound = soundFileNames[index]
+                backendInfo.incomingCallSound = soundFileNames[index]
+            } else if (soundType == 1) {
                 soundSettings.incomingMessageSound = soundFileNames[index]
+                backendInfo.incomingMessageSound = soundFileNames[index]
+            }
             /* Only preview the file if not in silent mode */
-            if (!soundSettings.silentMode) {
+            if (!backendInfo.silentMode) {
                 soundEffect.source = soundFileNames[index]
                 soundEffect.play()
             }

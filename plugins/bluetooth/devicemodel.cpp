@@ -19,6 +19,7 @@
 */
 
 #include <QDBusReply>
+#include <QDebug>
 
 #include "devicemodel.h"
 #include "dbus-shared.h"
@@ -135,6 +136,8 @@ void DeviceModel::clearAdapter()
         const QString interface = m_bluezAdapter->interface();
 
         stopDiscovery();
+        m_discoverableTimer.stop();
+        trySetDiscoverable(false);
 
         bus.disconnect(service, path, interface, "DeviceCreated",
                        this, SLOT(slotDeviceCreated(const QDBusObjectPath&)));
@@ -144,8 +147,11 @@ void DeviceModel::clearAdapter()
                        this, SLOT(slotDeviceFound(const QString&, const QMap<QString,QVariant>&)));
         bus.disconnect(service, path, interface, "DeviceDisappeared",
                        this, SLOT(slotDeviceDisappeared(const QString&)));
+        bus.disconnect(service, path, interface, "PropertyChanged",
+                       this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&)));
 
         m_bluezAdapter.reset(0);
+        m_adapterName.clear();
 
         beginResetModel();
         m_devices.clear();
@@ -171,10 +177,22 @@ void DeviceModel::setAdapterFromPath(const QString &path)
                        this, SLOT(slotDeviceFound(const QString&, const QMap<QString,QVariant>&)));
         m_dbus.connect(service, path, interface, "DeviceDisappeared", 
                        this, SLOT(slotDeviceDisappeared(const QString&)));
+        m_dbus.connect(service, path, interface, "PropertyChanged",
+                       this, SLOT(slotPropertyChanged(const QString&, const QDBusVariant&)));
 
         m_bluezAdapter.reset(i);
         startDiscovery();
         updateDevices();
+
+        QDBusReply<QMap<QString,QVariant> > properties = m_bluezAdapter->call("GetProperties");
+        if (properties.isValid())
+            setProperties(properties.value());
+
+        // Delay enabling discoverability by 1 second.
+        m_discoverableTimer.setSingleShot(true);
+        connect(&m_discoverableTimer, SIGNAL(timeout()), this, SLOT(slotEnableDiscoverable()));
+        m_discoverableTimer.start(1000);
+
     }
 }
 
@@ -197,6 +215,62 @@ void DeviceModel::updateDevices()
             for (auto path : reply.value())
                 addDevice(path.path());
     }
+}
+
+void DeviceModel::setProperties(const QMap<QString,QVariant> &properties)
+{
+    QMapIterator<QString,QVariant> it(properties);
+    while (it.hasNext()) {
+        it.next();
+        updateProperty(it.key(), it.value());
+    }
+}
+
+void DeviceModel::updateProperty(const QString &key, const QVariant &value)
+{
+    if (key == "Name") {
+        m_adapterName = value.toString();
+    } else if (key == "Address") {
+        m_adapterAddress = value.toString();
+    } else if (key == "Pairable") {
+        m_isPairable = value.toBool();
+    } else if (key == "Discoverable") {
+        setDiscoverable(value.toBool());
+    }
+}
+
+void DeviceModel::setDiscoverable(bool discoverable)
+{
+    if (m_isDiscoverable != discoverable) {
+        m_isDiscoverable = discoverable;
+        Q_EMIT(discoverableChanged(m_isDiscoverable));
+    }
+}
+
+void DeviceModel::slotEnableDiscoverable()
+{
+    trySetDiscoverable(true);
+}
+
+void DeviceModel::trySetDiscoverable(bool discoverable)
+{
+    QVariant value;
+    QDBusVariant disc(discoverable);
+    QDBusReply<void > reply;
+
+    value.setValue(disc);
+
+    if (m_bluezAdapter && m_bluezAdapter->isValid()) {
+        reply = m_bluezAdapter->call("SetProperty", "Discoverable", value);
+        if (!reply.isValid())
+            qWarning() << "Error setting device discoverable:" << reply.error();
+    }
+}
+
+void DeviceModel::slotPropertyChanged(const QString      &key,
+                                      const QDBusVariant &value)
+{
+    updateProperty (key, value.variant());
 }
 
 /***
@@ -398,9 +472,9 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
 ****
 ***/
 
-void DeviceFilter::filterOnType(Device::Type type)
+void DeviceFilter::filterOnType(QVector<Device::Type> types)
 {
-    m_type = type;
+    m_types = types;
     m_typeEnabled = true;
     invalidateFilter();
 }
@@ -420,7 +494,7 @@ bool DeviceFilter::filterAcceptsRow(int sourceRow,
 
     if (accepts && m_typeEnabled) {
         const int type = childIndex.model()->data(childIndex, DeviceModel::TypeRole).value<int>();
-        accepts = type == m_type;
+        accepts = m_types.contains((Device::Type)type);
     }
 
     if (accepts && m_connectionsEnabled) {

@@ -22,34 +22,49 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import MeeGo.QOfono 0.2
 
 ItemPage {
     title: i18n.tr("Call forwarding")
-    property bool canCheckForwarding: true
 
-    /* Simulate going off and retreiving the status, TODO: replace by real data */
-    Timer {
-        id: callForwardingTimer
-        interval: 3000
-        running: true
-        onTriggered: canCheckForwarding = false
+    property bool forwarding: callForwarding.voiceUnconditional !== ""
+    property string modem
+
+    onForwardingChanged: {
+        if (callForwardingSwitch.checked !== forwarding)
+            callForwardingSwitch.checked = forwarding;
+    }
+
+    OfonoCallForwarding {
+        id: callForwarding
+        modemPath: modem
+        onVoiceUnconditionalChanged: {
+            destNumberField.text = voiceUnconditional;
+        }
+        onVoiceUnconditionalComplete: {
+            callForwardingIndicator.running = false;
+            if (callForwardingSwitch.checked !== forwarding)
+                callForwardingSwitch.checked = forwarding;
+        }
     }
 
     Switch {
         id: callForwardingSwitch
-        checked: false
-        visible: callForwardingItem.control == callForwardingSwitch
+        checked: forwarding
+        enabled: (forwarding === checked)
+        visible: callForwardingItem.control === callForwardingSwitch
+        onCheckedChanged: {
+            if (!checked && forwarding) {
+                callForwardingIndicator.running = true;
+                callForwarding.voiceUnconditional = "";
+            }
+        }
     }
 
     ActivityIndicator {
         id: callForwardingIndicator
-        running: true
-        visible: callForwardingItem.control == callForwardingIndicator
-    }
-
-    Label {
-        id: contactLabel
-        text: "Not working yet"
+        running: false
+        visible: running
     }
 
     Column {
@@ -58,12 +73,13 @@ ItemPage {
         ListItem.Standard {
             id: callForwardingItem
             text: i18n.tr("Call forwarding")
-            control: callForwardingTimer.running ? callForwardingIndicator : callForwardingSwitch
+            control: callForwardingIndicator.running ?
+                         callForwardingIndicator : callForwardingSwitch
         }
 
         ListItem.Base {
             height: textItem.height + units.gu(2)
-            Text {
+            Label {
                 id: textItem
                 anchors {
                     left: parent.left
@@ -79,29 +95,35 @@ ItemPage {
             visible: !callForwardingSwitch.checked
         }
 
-        ListItem.Base {
-            Text {
-                id: errorTextItem
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                }
-
-                text: i18n.tr("Call forwarding status can’t be checked right now. Try again later.")
-                color: "red" // TODO: replace by the standard 'error color' if we get one in the toolkit
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.WordWrap
-            }
-            showDivider: false
-            visible: !callForwardingSwitch.checked && !canCheckForwarding
-        }
-
         ListItem.Standard {
-            property string contactName: ""
-            text: i18n.tr("Divert to")
-            control: contactLabel
+            id: forwardToItem
+            text: i18n.tr("Forward to")
             visible: callForwardingSwitch.checked
+            control: TextInput {
+                id: destNumberField
+                horizontalAlignment: TextInput.AlignRight
+                width: forwardToItem.width/2
+                inputMethodHints: Qt.ImhDialableCharactersOnly
+                text: callForwarding.voiceUnconditional
+                font.pixelSize: units.dp(18)
+                font.weight: Font.Light
+                font.family: "Ubuntu"
+                color: "#AAAAAA"
+                maximumLength: 20
+                focus: true
+                cursorVisible: text !== callForwarding.voiceUnconditional ||
+                               text === ""
+                clip: true
+                opacity: 0.9
+
+                cursorDelegate: Rectangle {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    width: units.dp(1)
+                    color: "#DD4814"
+                    visible: destNumberField.cursorVisible
+                }
+            }
         }
 
         ListItem.Base {
@@ -109,15 +131,32 @@ ItemPage {
             Row {
                 anchors.centerIn: parent
                 spacing: units.gu(2)
-                Repeater {
-                    model: [i18n.tr("Contacts…"), i18n.tr("Cancel"), i18n.tr("Set") ]
-                    Button {
-                        text: modelData
-                        width: (buttonsRowId.width-units.gu(2)*4)/3
+
+                Button {
+                    text: i18n.tr("Cancel")
+                    width: (buttonsRowId.width-units.gu(2)*4)/3
+                    enabled: !callForwardingIndicator.running
+                    onClicked: {
+                        destNumberField.text =
+                                callForwarding.voiceUnconditional;
+                        if (forwarding !== callForwardingSwitch.checked)
+                            callForwardingSwitch.checked = forwarding;
+                    }
+                }
+
+                Button {
+                    text: i18n.tr("Set")
+                    width: (buttonsRowId.width-units.gu(2)*4)/3
+                    enabled: !callForwardingIndicator.running
+                    onClicked: {
+                        callForwardingIndicator.running = true;
+                        callForwarding.voiceUnconditional = destNumberField.text;
                     }
                 }
             }
-            visible: callForwardingSwitch.checked
+            visible: callForwardingSwitch.checked &&
+                     (destNumberField.text !==
+                      callForwarding.voiceUnconditional)
         }
     }
 }

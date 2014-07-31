@@ -30,6 +30,12 @@
 #include <QtCore/QSettings>
 #include <QtCore/QString>
 
+typedef struct _ActUser ActUser;
+typedef struct _ActUserManager ActUserManager;
+typedef struct _GObject GObject;
+typedef struct _GParamSpec GParamSpec;
+typedef void *gpointer;
+
 class SecurityPrivacy: public QObject
 {
     Q_OBJECT
@@ -44,12 +50,7 @@ class SecurityPrivacy: public QObject
                 NOTIFY messagesWelcomeScreenChanged)
     Q_PROPERTY (SecurityType securityType
                 READ getSecurityType
-                WRITE setSecurityType
                 NOTIFY securityTypeChanged)
-    Q_PROPERTY (QString securityValue
-                READ getSecurityValue
-                WRITE setSecurityValue
-                NOTIFY securityValueChanged)
 
 public:
     enum SecurityType {
@@ -59,14 +60,16 @@ public:
     };
 
     explicit SecurityPrivacy(QObject *parent = 0);
+    virtual ~SecurityPrivacy();
+
     bool getStatsWelcomeScreen();
     void setStatsWelcomeScreen(bool enabled);
     bool getMessagesWelcomeScreen();
     void setMessagesWelcomeScreen(bool enabled);
     SecurityType getSecurityType();
-    void setSecurityType(SecurityType type);
-    QString getSecurityValue();
-    void setSecurityValue(QString value);
+
+    // Returns error text, if an error occurred
+    Q_INVOKABLE QString setSecurity(QString oldValue, QString value, SecurityType type);
 
 public Q_SLOTS:
     void slotChanged(QString, QString);
@@ -76,12 +79,29 @@ Q_SIGNALS:
     void statsWelcomeScreenChanged();
     void messagesWelcomeScreenChanged();
     void securityTypeChanged();
-    void securityValueChanged();
 
 private:
-    QSettings m_lockSettings;
-    AccountsService m_accountsService;
+    void loadUser();
 
+    void managerLoaded();
+    friend void managerLoaded(GObject    *object,
+                              GParamSpec *pspec,
+                              gpointer    user_data);
+
+    void userLoaded();
+    friend void userLoaded(GObject    *object,
+                           GParamSpec *pspec,
+                           gpointer    user_data);
+
+    QString badPasswordMessage(SecurityType type);
+    bool setDisplayHint(SecurityType type);
+    bool setPasswordMode(SecurityType type, QString password);
+    QString setPassword(QString oldValue, QString value);
+
+    AccountsService m_accountsService;
+    ActUserManager *m_manager;
+    ActUser *m_user;
+    QString m_username;
 };
 
 #endif //SECURITYPRIVACY_H

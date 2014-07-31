@@ -6,7 +6,8 @@ set(QML_SOURCES
 
 add_library(UbuntuSoundPanel MODULE plugin.h sound.h plugin.cpp sound.cpp
 ${QML_SOURCES})
-qt5_use_modules(UbuntuSoundPanel Qml Quick)
+target_link_libraries(UbuntuSoundPanel uss-accountsservice)
+qt5_use_modules(UbuntuSoundPanel Qml Quick DBus)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Sound)
 install(TARGETS UbuntuSoundPanel DESTINATION ${PLUG_DIR})

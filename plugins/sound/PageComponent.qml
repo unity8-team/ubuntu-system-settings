@@ -23,14 +23,26 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.LanguagePlugin 1.0
+import Ubuntu.SystemSettings.Sound 1.0
+import Ubuntu.Settings.Menus 0.1 as Menus
+import QMenuModel 0.1
 
 import "utilities.js" as Utilities
 
 ItemPage {
     id: root
 
+    objectName: "soundPage"
+
     title: i18n.tr("Sound")
     flickable: scrollWidget
+
+    UbuntuSoundPanel { id: backendInfo }
+
+    UbuntuLanguagePlugin {
+        id: languagePlugin
+    }
 
     GSettings {
         id: soundSettings
@@ -44,12 +56,56 @@ ItemPage {
         boundsBehavior: (contentHeight > root.height) ?
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
         Column {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            SilentModeWarning { visible: soundSettings.silentMode }
+            SilentModeWarning { visible: backendInfo.silentMode }
+
+            ListItem.Standard {
+                control: Switch {
+                    checked: false
+                }
+                text: i18n.tr("Silent Mode")
+                visible: showAllUI
+            }
+
+
+            ListItem.Standard {
+                text: i18n.tr("Ringer:")
+            }
+
+            QDBusActionGroup {
+                id: soundActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.sound"
+                objectPath: "/com/canonical/indicator/sound"
+
+                property variant volume: action("volume")
+
+                Component.onCompleted: start()
+            }
+
+            Binding {
+                target: sliderMenu
+                property: "value"
+                value: soundActionGroup.volume.state
+            }
+ 
+            Menus.SliderMenu {
+                id: sliderMenu
+                objectName: "sliderMenu"
+                enabled: soundActionGroup.volume.state != null
+                minimumValue: 0.0
+                maximumValue: 1.0
+                minIcon: "image://theme/audio-volume-low" 
+                maxIcon: "image://theme/audio-volume-high" 
+                onUpdated: soundActionGroup.volume.updateState(value);
+            }
 
             ListItem.Standard {
                 text: i18n.tr("Phone calls:")
@@ -58,7 +114,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Ringtone")
                 value: Utilities.buildDisplayName(
-                           soundSettings.incomingCallSound)
+                           backendInfo.incomingCallSound)
                 progression: true
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SoundsList.qml"),
@@ -92,12 +148,12 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Message received")
                 value:Utilities.buildDisplayName(
-                          soundSettings.incomingMessageSound)
+                          backendInfo.incomingMessageSound)
                 progression: true
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SoundsList.qml"),
                                { title: i18n.tr("Message received"),
-                                 soundType: 1,
+                                  soundType: 1,
                                  soundsDir:
                                    "/usr/share/sounds/ubuntu/notifications/" })
             }
@@ -120,15 +176,17 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Other sounds:")
-                visible: showAllUI
             }
 
             ListItem.Standard {
-                control: Switch {
-                    checked: false
-                }
                 text: i18n.tr("Keyboard sound")
-                visible: showAllUI
+
+                control: Switch {
+                    objectName: "keyboardSoundSwitch"
+                    checked: languagePlugin.keyPressFeedback
+
+                    onClicked: languagePlugin.keyPressFeedback = checked
+                }
             }
 
             ListItem.Standard {

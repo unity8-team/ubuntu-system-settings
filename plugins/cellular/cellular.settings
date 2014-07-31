@@ -1,5 +1,5 @@
 {
-    "icon": "/usr/share/ubuntu/settings/system/icons/settings-cellular.svg",
+    "icon": "gsm-3g-high",
     "name": "Cellular",
     "translations": "ubuntu-system-settings",
     "category": "network",

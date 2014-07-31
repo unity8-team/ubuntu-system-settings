@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2013-2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -46,6 +46,9 @@ class TimeDate : public QObject
                READ getUseNTP
                WRITE setUseNTP
                NOTIFY useNTPChanged)
+    Q_PROPERTY (bool listUpdating
+                READ getListUpdating
+                NOTIFY listUpdatingChanged)
 
 public:
     explicit TimeDate(QObject *parent = 0);
@@ -58,6 +61,7 @@ public:
     bool getUseNTP();
     void setUseNTP(bool enabled);
     Q_INVOKABLE void setTime (qlonglong new_time);
+    bool getListUpdating();
 
 public Q_SLOTS:
     void slotChanged(QString, QVariantMap, QStringList);
@@ -67,6 +71,7 @@ Q_SIGNALS:
     void timeZoneChanged();
     void timeZoneModelChanged();
     void useNTPChanged();
+    void listUpdatingChanged();
 
 private:
     QString m_currentTimeZone;
@@ -75,11 +80,9 @@ private:
     QDBusInterface m_timeDateInterface;
     QString m_objectPath;
     TimeZoneLocationModel m_timeZoneModel;
-    TimeZoneFilterProxy m_timeZoneFilterProxy;
     QString m_filter;
     QString getTimeZone();
     void setUpInterface();
-    bool m_sortedBefore;
 
 };
 
