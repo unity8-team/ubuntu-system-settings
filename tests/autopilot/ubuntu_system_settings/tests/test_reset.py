@@ -10,10 +10,12 @@ from testtools.matchers import Equals
 from ubuntu_system_settings.tests import ResetBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from time import sleep
+from gi.repository import Gio
 
 
 class ResetTestCase(ResetBaseTestCase):
     """Tests for Reset Page"""
+
 
     def assert_pagestack_popped(self):
         try:
@@ -51,15 +53,23 @@ class ResetTestCase(ResetBaseTestCase):
             Equals(_('Reset phone')))
 
     def test_reset_launcher(self):
-        self.system_settings.main_view.scroll_to_and_click(
-            self.reset_launcher)
-        self.system_settings.main_view.scroll_to_and_click(
-            self.reset_launcher_action)
-
-        sleep(0.5)
-        calls = self.user_mock.GetCalls()
-        self.assertIn('com.canonical.unity.AccountsService', str(calls))
-        self.assert_pagestack_popped()
+        gsettings = Gio.Settings.new('com.canonical.Unity.Launcher')
+        favs = gsettings.get_value('favorites')
+        try:
+            self.system_settings.main_view.scroll_to_and_click(
+                self.reset_launcher)
+            self.system_settings.main_view.scroll_to_and_click(
+                self.reset_launcher_action)
+            sleep(0.5)
+            calls = self.user_mock.GetCalls()
+            self.assertIn('com.canonical.unity.AccountsService', str(calls))
+            self.assert_pagestack_popped()
+        except Exception as e:
+            raise e
+        finally:
+            gsettings.set_value('favorites', favs)
+            # wait for gsettings
+            sleep(1)
 
     def test_factory_reset(self):
         self.system_settings.main_view.scroll_to_and_click(
