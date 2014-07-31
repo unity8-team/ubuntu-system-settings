@@ -45,12 +45,6 @@ ItemPage {
                 script: {
                     console.warn('modems sorted', modemsSorted);
                     var p = modemsSorted[0];
-                    var name;
-                    // if (p === ussS.sim1Path) {
-                    //     name = ussS.sim1Name;
-                    // } else if (p === ussS.sim2Path) {
-                    //     name = ussS.sim2Name;
-                    // }
                     simOneLoader.setSource("Components/Sim.qml", {
                         path: p
                     });
@@ -64,12 +58,6 @@ ItemPage {
                 name: "loadSecondSim"
                 script: {
                     var p = modemsSorted[1];
-                    var name;
-                    // if (p === ussS.sim1Path) {
-                    //     name = ussS.sim1Name;
-                    // } else if (p === ussS.sim2Path) {
-                    //     name = ussS.sim2Name;
-                    // }
                     simTwoLoader.setSource("Components/Sim.qml", {
                         path: p
                     });
@@ -211,29 +199,17 @@ ItemPage {
     GSettings {
         id: phoneSettings
         schema.id: "com.ubuntu.touch.phone"
-        Component.onCompleted: {
-
-            // set defaults
-            if (!phoneSettings.simNames[modemsSorted[0]]) {
-                phoneSettings.simNames[modemsSorted[0]] = 'SIM 1';
-            }
-            if (!phoneSettings.simNames[modemsSorted[1]]) {
-                phoneSettings.simNames[modemsSorted[1]] = 'SIM 2';
-            }
-        }
     }
 
     Binding {
         target: sim1
         property: "name"
         value: phoneSettings.simNames[modemsSorted[0]]
-        when: phoneSettings.status === Component.Ready
     }
 
     Binding {
         target: sim2
         property: "name"
         value: phoneSettings.simNames[modemsSorted[1]]
-        when: phoneSettings.status === Component.Ready
     }
 }

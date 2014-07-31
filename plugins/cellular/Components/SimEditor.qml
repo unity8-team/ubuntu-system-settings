@@ -148,11 +148,17 @@ Column {
         Action {
             id: renameAction
             onTriggered: {
+                var tmpSimNames = {};
                 if (simList.state === "editingSim1") {
-                    //ussS.sim1Name = nameField.text;
+                    tmpSimNames[sim1.path] = nameField.text;
+                    tmpSimNames[sim2.path] = sim2.name;
+                    console.warn('sat simName for', sim1.path, 'to', nameField.text)
                 } else if (simList.state === "editingSim2") {
-                    //ussS.sim2Name = nameField.text;
+                    console.warn('sat simName for', sim2.path, 'to', nameField.text)
+                    tmpSimNames[sim1.path] = sim1.name;
+                    tmpSimNames[sim2.path] = nameField.text;
                 }
+                phoneSettings.simNames = tmpSimNames;
                 simList.state = "";
             }
         }
