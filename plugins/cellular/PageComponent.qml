@@ -60,6 +60,7 @@ ItemPage {
                     simTwoLoader.setSource("Components/Sim.qml", {
                         path: p
                     });
+                    defaultSimLoader.source = "Components/DefaultSim.qml";
                 }
             }
         }
@@ -182,9 +183,24 @@ ItemPage {
                 visible: showAllUI
             }
 
+            ListItem.Divider {}
+
             SimEditor {
                 visible: root.state === "dualSim"
                 objectName: "simEditor"
+            }
+
+            ListItem.Divider {}
+
+            Loader {
+                id: defaultSimLoader
+                anchors.left: parent.left
+                anchors.right: parent.right
+            }
+
+            ListItem.Caption {
+                visible: root.state === "dualSim"
+                text: i18n.tr("You can change the SIM for individual calls, or for contacts in the address book.")
             }
         }
     }

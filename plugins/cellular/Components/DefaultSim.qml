@@ -21,29 +21,13 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
-
 ListItem.ItemSelector {
-    objectName: "defaultSim"
+    id: callsDefaultSim
     text: i18n.tr("For outgoing calls, use:")
     expanded: true
-    model: ["Off", "sim1", "sim2"]
-    delegate: OptionSelectorDelegate {
-        objectName: "use" + modelData
-        text: {
-            var t;
-            if (modelData === "sim1") {
-                t = sim1.title
-            } else if (modelData === "sim2") {
-                t = sim2.title
-            } else {
-                t = i18n.tr(modelData);
-            }
-            return t;
-        }
-    }
-    selectedIndex: [true, sim1.connMan.powered, sim2.connMan.powered].lastIndexOf(true)
+    model: [sim1.title, sim2.title]
+    selectedIndex: [sim1.path, sim2.path].lastIndexOf(phoneSettings.defaultSimForCalls)
     onDelegateClicked: {
-        sim1.connMan.powered = (index === 1)
-        sim2.connMan.powered = (index === 2)
+        phoneSettings.defaultSimForCalls = (index === 0) ? sim1.path : sim2.path;
     }
 }
