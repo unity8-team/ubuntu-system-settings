@@ -43,7 +43,6 @@ ItemPage {
             StateChangeScript {
                 name: "loadSim"
                 script: {
-                    console.warn('modems sorted', modemsSorted);
                     var p = modemsSorted[0];
                     simOneLoader.setSource("Components/Sim.qml", {
                         path: p
@@ -82,10 +81,6 @@ ItemPage {
     OfonoManager {
         id: manager
         Component.onCompleted: {
-            console.warn('Manager complete with', modems.length, 'sims.');
-            for (var i=0, j=modems.length; i<j; i++) {
-                console.warn('manager: sim', i, 'has path', modems[i]);
-            }
             if (modems.length === 1) {
                 root.state = "singleSim";
             } else if (modems.length === 2) {
@@ -102,7 +97,6 @@ ItemPage {
                     sim1: sim1
                 });
             }
-            console.warn('sim1 loaded, loading CellularSingleSim.qml into cellData');
         }
     }
 
@@ -115,7 +109,6 @@ ItemPage {
                 sim1: sim1,
                 sim2: sim2
             });
-            console.warn('sim2 loaded, loading CellularDualSim.qml into cellData');
         }
     }
 
