@@ -489,6 +489,8 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
                                              ACCOUNTS_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
 
+        # spawn_server does not wait properly
+        sleep(2)
         self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
             ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
 
@@ -509,7 +511,8 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,
                                              SYSTEM_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
-
+        # spawn_server does not wait properly
+        sleep(2)
         self.sys_mock = dbus.Interface(self.dbus_con.get_object(
             SYSTEM_IFACE, SYSTEM_SERVICE_OBJ), dbusmock.MOCK_IFACE)
 
