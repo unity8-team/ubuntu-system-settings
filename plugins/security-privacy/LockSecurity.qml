@@ -20,6 +20,7 @@
 
 import GSettings 1.0
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
@@ -27,6 +28,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
 ItemPage {
+    id: page
     title: i18n.tr("Lock security")
 
     UbuntuSecurityPrivacyPanel {
@@ -55,265 +57,274 @@ ItemPage {
         }
     }
 
-    Dialog {
-        id: changeSecurityDialog
+    function openDialog() {
+        var dlg = PopupUtils.open(dialogComponent)
+        // Set manually rather than have these be dynamically bound, since
+        // the security type can change out from under us, but we don't
+        // want dialog to change in that case.
+        dlg.oldMethod = securityPrivacy.securityType
+        dlg.newMethod = indexToMethod(unlockMethod.selectedIndex)
+    }
 
-        property int oldMethod: securityPrivacy.securityType
-        property int newMethod: indexToMethod(unlockMethod.selectedIndex)
+    Component {
+        id: dialogComponent
 
-        function clearInputs() {
-            currentInput.text = ""
-            newInput.text = ""
-            confirmInput.text = ""
-            incorrect.visible = false
-            notMatching.visible = false
-            confirmButton.enabled = false
-        }
+        Dialog {
+            id: changeSecurityDialog
 
-        title: {
-            if (changeSecurityDialog.newMethod ==
-                    changeSecurityDialog.oldMethod) { // Changing existing
-                switch (changeSecurityDialog.newMethod) {
-                case UbuntuSecurityPrivacyPanel.Passcode:
-                    return i18n.tr("Change passcode")
-                case UbuntuSecurityPrivacyPanel.Passphrase:
-                    return i18n.tr("Change passphrase")
-                default: // To stop the runtime complaining
+            // This is a bit hacky, but the contents of this dialog get so tall
+            // that on a mako device, they don't fit with the OSK also visible.
+            // So we scrunch up spacing.
+            Binding {
+                target: __foreground
+                property: "itemSpacing"
+                value: units.gu(1)
+            }
+
+            property int oldMethod
+            property int newMethod
+
+            title: {
+                if (changeSecurityDialog.newMethod ==
+                        changeSecurityDialog.oldMethod) { // Changing existing
+                    switch (changeSecurityDialog.newMethod) {
+                    case UbuntuSecurityPrivacyPanel.Passcode:
+                        return i18n.tr("Change passcode")
+                    case UbuntuSecurityPrivacyPanel.Passphrase:
+                        return i18n.tr("Change passphrase")
+                    default: // To stop the runtime complaining
+                        return ""
+                    }
+                } else {
+                    switch (changeSecurityDialog.newMethod) {
+                    case UbuntuSecurityPrivacyPanel.Swipe:
+                        return i18n.tr("Switch to swipe")
+                    case UbuntuSecurityPrivacyPanel.Passcode:
+                        return i18n.tr("Switch to passcode")
+                    case UbuntuSecurityPrivacyPanel.Passphrase:
+                        return i18n.tr("Switch to passphrase")
+                    }
+                }
+            }
+
+            Label {
+                text: {
+                    switch (changeSecurityDialog.oldMethod) {
+                    case UbuntuSecurityPrivacyPanel.Passcode:
+                        return i18n.tr("Existing passcode")
+                    case UbuntuSecurityPrivacyPanel.Passphrase:
+                        return i18n.tr("Existing passphrase")
+                    // Shouldn't be reached when visible but still evaluated
+                    default:
+                        return ""
+                    }
+                }
+
+                visible: currentInput.visible
+            }
+
+            TextField {
+                id: currentInput
+                echoMode: TextInput.Password
+                inputMethodHints: {
+                    if (changeSecurityDialog.oldMethod ===
+                            UbuntuSecurityPrivacyPanel.Passphrase)
+                        return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
+                    else if (changeSecurityDialog.oldMethod ===
+                             UbuntuSecurityPrivacyPanel.Passcode)
+                        return Qt.ImhNoAutoUppercase |
+                               Qt.ImhSensitiveData |
+                               Qt.ImhDigitsOnly
+                    else
+                        return Qt.ImhNone
+                }
+                inputMask: {
+                    if (changeSecurityDialog.oldMethod ===
+                            UbuntuSecurityPrivacyPanel.Passcode)
+                        return "9999"
+                    else
+                        return ""
+                }
+                visible: changeSecurityDialog.oldMethod ===
+                            UbuntuSecurityPrivacyPanel.Passphrase ||
+                         changeSecurityDialog.oldMethod ===
+                             UbuntuSecurityPrivacyPanel.Passcode
+                onTextChanged: {
+                    if (changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Swipe)
+                        confirmButton.enabled = text.length > 0
+                }
+            }
+
+            Label {
+                id: incorrect
+                text: ""
+                visible: text !== ""
+                color: "darkred"
+            }
+
+            Label {
+                text: {
+                    switch (changeSecurityDialog.newMethod) {
+                    case UbuntuSecurityPrivacyPanel.Passcode:
+                        return i18n.tr("Choose passcode")
+                    case UbuntuSecurityPrivacyPanel.Passphrase:
+                        return i18n.tr("Choose passphrase")
+                    // Shouldn't be reached when visible but still evaluated
+                    default:
+                        return ""
+                    }
+                }
+                visible: newInput.visible
+            }
+
+            TextField {
+                id: newInput
+                echoMode: TextInput.Password
+                inputMethodHints: {
+                    if (changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passphrase)
+                        return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
+                    else if (changeSecurityDialog.newMethod ===
+                             UbuntuSecurityPrivacyPanel.Passcode)
+                        return Qt.ImhNoAutoUppercase |
+                               Qt.ImhSensitiveData |
+                               Qt.ImhDigitsOnly
+                    else
+                        return Qt.ImhNone
+                }
+                inputMask: {
+                    if (changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passcode)
+                        return "9999"
+                    else
+                        return ""
+                }
+                visible: changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passcode ||
+                         changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passphrase
+                // Doesn't get updated if you set this in enabled of confirmButton
+                onTextChanged: confirmButton.enabled =
+                               (acceptableInput && (!visible || text.length > 0))
+            }
+
+            Label {
+                text: {
+                    switch (changeSecurityDialog.newMethod) {
+                    case UbuntuSecurityPrivacyPanel.Passcode:
+                        return i18n.tr("Confirm passcode")
+                    case UbuntuSecurityPrivacyPanel.Passphrase:
+                        return i18n.tr("Confirm passphrase")
+                    // Shouldn't be reached when visible but still evaluated
+                    default:
+                        return ""
+                    }
+                }
+                visible: confirmInput.visible
+            }
+
+            TextField {
+                id: confirmInput
+                echoMode: TextInput.Password
+                inputMethodHints: {
+                    if (changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passphrase)
+                        return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
+                    else if (changeSecurityDialog.newMethod ===
+                             UbuntuSecurityPrivacyPanel.Passcode)
+                        return Qt.ImhNoAutoUppercase |
+                               Qt.ImhSensitiveData |
+                               Qt.ImhDigitsOnly
+                    else
+                        return Qt.ImhNone
+                }
+                inputMask: {
+                    if (changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passcode)
+                        return "9999"
+                    else
+                        return ""
+                }
+                visible: changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passcode ||
+                         changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passphrase
+            }
+
+            Label {
+                id: notMatching
+                text: {
+                    if (changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passcode)
+                        return i18n.tr("Those passcodes don't match. Try again.")
+                    if (changeSecurityDialog.newMethod ===
+                            UbuntuSecurityPrivacyPanel.Passphrase)
+                        return i18n.tr("Those passphrases don't match. Try again.")
+
+                    //Fallback to prevent warnings. Not displayed.
                     return ""
                 }
-            } else {
-                switch (changeSecurityDialog.newMethod) {
-                case UbuntuSecurityPrivacyPanel.Swipe:
-                    return i18n.tr("Switch to swipe")
-                case UbuntuSecurityPrivacyPanel.Passcode:
-                    return i18n.tr("Switch to passcode")
-                case UbuntuSecurityPrivacyPanel.Passphrase:
-                    return i18n.tr("Switch to passphrase")
-                }
-            }
-        }
-
-        Label {
-            text: {
-                switch (changeSecurityDialog.oldMethod) {
-                case UbuntuSecurityPrivacyPanel.Passcode:
-                    return i18n.tr("Existing passcode")
-                case UbuntuSecurityPrivacyPanel.Passphrase:
-                    return i18n.tr("Existing passphrase")
-                // Shouldn't be reached when visible but still evaluated
-                default:
-                    return ""
-                }
+                visible: false
+                color: "darkred"
             }
 
-            visible: currentInput.visible
-        }
+            RowLayout {
+                spacing: units.gu(1)
 
-        TextField {
-            id: currentInput
-            echoMode: TextInput.Password
-            inputMethodHints: {
-                if (changeSecurityDialog.oldMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase)
-                    return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
-                else if (changeSecurityDialog.oldMethod ===
-                         UbuntuSecurityPrivacyPanel.Passcode)
-                    return Qt.ImhNoAutoUppercase |
-                           Qt.ImhSensitiveData |
-                           Qt.ImhDigitsOnly
-                else
-                    return Qt.ImhNone
-            }
-            inputMask: {
-                if (changeSecurityDialog.oldMethod ===
-                        UbuntuSecurityPrivacyPanel.Passcode)
-                    return "9999"
-                else
-                    return ""
-            }
-            visible: changeSecurityDialog.oldMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase ||
-                     changeSecurityDialog.oldMethod ===
-                         UbuntuSecurityPrivacyPanel.Passcode
-            onTextChanged: {
-                if (changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Swipe)
-                    confirmButton.enabled = text.length > 0
-            }
-        }
-
-        Label {
-            id: incorrect
-            text: {
-                if (changeSecurityDialog.oldMethod ===
-                        UbuntuSecurityPrivacyPanel.Passcode)
-                    return i18n.tr("Incorrect passcode. Try again.")
-                if (changeSecurityDialog.oldMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase)
-                    return i18n.tr("Incorrect passphrase. Try again.")
-
-                //Fallback to prevent warnings. Not displayed.
-                return ""
-            }
-            visible: false
-            color: "darkred"
-        }
-
-        Label {
-            text: {
-                switch (changeSecurityDialog.newMethod) {
-                case UbuntuSecurityPrivacyPanel.Passcode:
-                    return i18n.tr("Choose passcode")
-                case UbuntuSecurityPrivacyPanel.Passphrase:
-                    return i18n.tr("Choose passphrase")
-                // Shouldn't be reached when visible but still evaluated
-                default:
-                    return ""
-                }
-            }
-            visible: newInput.visible
-        }
-
-        TextField {
-            id: newInput
-            echoMode: TextInput.Password
-            inputMethodHints: {
-                if (changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase)
-                    return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
-                else if (changeSecurityDialog.newMethod ===
-                         UbuntuSecurityPrivacyPanel.Passcode)
-                    return Qt.ImhNoAutoUppercase |
-                           Qt.ImhSensitiveData |
-                           Qt.ImhDigitsOnly
-                else
-                    return Qt.ImhNone
-            }
-            inputMask: {
-                if (changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passcode)
-                    return "9999"
-                else
-                    return ""
-            }
-            visible: changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passcode ||
-                     changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase
-            // Doesn't get updated if you set this in enabled of confirmButton
-            onTextChanged: confirmButton.enabled =
-                           (acceptableInput && (!visible || text.length > 0))
-        }
-
-        Label {
-            text: {
-                switch (changeSecurityDialog.newMethod) {
-                case UbuntuSecurityPrivacyPanel.Passcode:
-                    return i18n.tr("Confirm passcode")
-                case UbuntuSecurityPrivacyPanel.Passphrase:
-                    return i18n.tr("Confirm passphrase")
-                // Shouldn't be reached when visible but still evaluated
-                default:
-                    return ""
-                }
-            }
-            visible: confirmInput.visible
-        }
-
-        TextField {
-            id: confirmInput
-            echoMode: TextInput.Password
-            inputMethodHints: {
-                if (changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase)
-                    return Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
-                else if (changeSecurityDialog.newMethod ===
-                         UbuntuSecurityPrivacyPanel.Passcode)
-                    return Qt.ImhNoAutoUppercase |
-                           Qt.ImhSensitiveData |
-                           Qt.ImhDigitsOnly
-                else
-                    return Qt.ImhNone
-            }
-            inputMask: {
-                if (changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passcode)
-                    return "9999"
-                else
-                    return ""
-            }
-            visible: changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passcode ||
-                     changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase
-        }
-
-        Label {
-            id: notMatching
-            text: {
-                if (changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passcode)
-                    return i18n.tr("Those passcodes don't match. Try again.")
-                if (changeSecurityDialog.newMethod ===
-                        UbuntuSecurityPrivacyPanel.Passphrase)
-                    return i18n.tr("Those passphrases don't match. Try again.")
-
-                //Fallback to prevent warnings. Not displayed.
-                return ""
-            }
-            visible: false
-            color: "darkred"
-        }
-
-        Button {
-            id: confirmButton
-
-            text: changeSecurityDialog.newMethod ===
-                    UbuntuSecurityPrivacyPanel.Swipe ?
-                      i18n.tr("Unset") :
-                      i18n.tr("Continue")
-            enabled: false
-            onClicked: {
-                var correct = !currentInput.visible ||
-                        (currentInput.text == securityPrivacy.securityValue)
-                var match = (newInput.text == confirmInput.text)
-
-                incorrect.visible = !correct
-
-                if (correct) // one problem at a time
-                    notMatching.visible = !match
-
-                if (correct && match) {
-                    PopupUtils.close(changeSecurityDialog)
-                    securityPrivacy.securityType =
-                            indexToMethod(unlockMethod.selectedIndex)
-                    securityPrivacy.securityValue = newInput.text
-                    changeSecurityDialog.clearInputs()
+                Button {
+                    Layout.fillWidth: true
+                    text: i18n.tr("Cancel")
+                    onClicked: {
+                        PopupUtils.close(changeSecurityDialog)
+                        unlockMethod.selectedIndex =
+                                methodToIndex(securityPrivacy.securityType)
+                    }
                 }
 
-                if (!correct) {
-                    currentInput.forceActiveFocus()
-                    currentInput.selectAll()
-                    return
+                Button {
+                    id: confirmButton
+                    Layout.fillWidth: true
+
+                    text: {
+                        if (changeSecurityDialog.newMethod ===
+                                UbuntuSecurityPrivacyPanel.Swipe)
+                            return i18n.tr("Unset")
+                        else if (changeSecurityDialog.oldMethod ===
+                                changeSecurityDialog.newMethod)
+                            return i18n.tr("Change")
+                        else
+                            return i18n.tr("Set")
+                    }
+                    enabled: false
+                    onClicked: {
+                        changeSecurityDialog.enabled = false
+
+                        var match = (newInput.text == confirmInput.text)
+                        notMatching.visible = !match
+                        if (!match) {
+                            changeSecurityDialog.enabled = true
+                            newInput.forceActiveFocus()
+                            newInput.selectAll()
+                            return
+                        }
+
+                        var errorText = securityPrivacy.setSecurity(
+                            currentInput.visible ? currentInput.text : "",
+                            newInput.text,
+                            changeSecurityDialog.newMethod)
+                        incorrect.text = errorText
+                        if (errorText !== "") {
+                            changeSecurityDialog.enabled = true
+                            currentInput.forceActiveFocus()
+                            currentInput.selectAll()
+                            return
+                        }
+
+                        changeSecurityDialog.enabled = true
+                        PopupUtils.close(changeSecurityDialog)
+                    }
                 }
-
-
-                if (!match) {
-                    newInput.forceActiveFocus()
-                    newInput.selectAll()
-                }
-            }
-
-        }
-
-        Button {
-            text: i18n.tr("Cancel")
-            onClicked: {
-                PopupUtils.close(changeSecurityDialog)
-                unlockMethod.skip = true
-                unlockMethod.selectedIndex =
-                        methodToIndex(securityPrivacy.securityType)
-                changeSecurityDialog.clearInputs()
             }
         }
     }
@@ -334,9 +345,6 @@ ItemPage {
             property string passcodeAlt: i18n.tr("4-digit passcode…")
             property string passphraseAlt: i18n.tr("Passphrase…")
 
-            property bool skip: true
-            property bool firstRun: true
-
             id: unlockMethod
             model: 3
             delegate: OptionSelectorDelegate {
@@ -345,20 +353,12 @@ ItemPage {
                                    (unlockMethod.selectedIndex == 2 ? unlockMethod.passphrase : unlockMethod.passphraseAlt))
             }
             expanded: true
-            onSelectedIndexChanged: {
-                if (securityPrivacy.securityType ===
-                        UbuntuSecurityPrivacyPanel.Swipe && firstRun) {
-                    changeSecurityDialog.show()
-                    firstRun = false
-                }
+            onDelegateClicked: {
+                if (selectedIndex === index && !changeControl.visible)
+                    return // nothing to do
 
-                // Otherwise the dialogs pop up the first time
-                if (skip) {
-                    skip = false
-                    return
-                }
-
-                changeSecurityDialog.show()
+                selectedIndex = index
+                openDialog()
             }
         }
         Binding {
@@ -369,6 +369,7 @@ ItemPage {
 
         ListItem.SingleControl {
 
+            id: changeControl
             visible: securityPrivacy.securityType !==
                         UbuntuSecurityPrivacyPanel.Swipe
 
@@ -384,7 +385,7 @@ ItemPage {
                 text: passcode ? changePasscode : changePassphrase
                 width: parent.width - units.gu(4)
 
-                onClicked: changeSecurityDialog.show()
+                onClicked: openDialog()
             }
         }
     }

@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-28 22:30+0000\n"
+"PO-Revision-Date: 2014-07-30 12:38+0000\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-29 06:49+0000\n"
+"X-Launchpad-Export-Date: 2014-07-31 07:13+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
@@ -209,7 +209,7 @@ msgid ""
 "detection saves battery."
 msgstr ""
 "Bruger wi-fi og GPS til at tilnærme din position. Ved at slå dette fra, kan "
-"der spares batteri."
+"der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:74
 msgid ""
@@ -217,7 +217,7 @@ msgid ""
 "off location detection saves battery."
 msgstr ""
 "Bruger wi-fi (i øjeblikket slået fra) og GPS til at tilnærme din position. "
-"Ved at slå dette fra, kan der spares batteri."
+"Ved at slå dette fra, kan der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:76
 msgid ""
@@ -225,7 +225,7 @@ msgid ""
 "Turning off location detection saves battery."
 msgstr ""
 "Bruger wi-fi, mobilmaster og GPS til at tilnærme din position. Ved at slå "
-"dette fra, kan der spares batteri."
+"dette fra, kan der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:78
 msgid ""
@@ -234,7 +234,7 @@ msgid ""
 msgstr ""
 "Bruger wi-fi, mobilmaster (der er ingen mobiltelefonforbindelse i "
 "øjeblikket) og GPS til at tilnærme din position. Ved at slå dette fra, kan "
-"der spares batteri."
+"der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:80
 msgid ""
@@ -242,7 +242,7 @@ msgid ""
 "rough location. Turning off location detection saves battery."
 msgstr ""
 "Bruger wi-fi (i øjeblikket slået fra), mobilmaster og GPS til at tilnærme "
-"din position. Ved at slå dette fra, kan der spares batteri."
+"din position. Ved at slå dette fra, kan der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:82
 msgid ""
@@ -252,7 +252,7 @@ msgid ""
 msgstr ""
 "Bruger wi-fi (i øjeblikket slået fra), mobilmaster (der er ingen "
 "mobiltelefonforbindelse i øjeblikket) og GPS til at tilnærme din position. "
-"Ved at slå dette fra, kan der spares batteri."
+"Ved at slå dette fra, kan der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
@@ -436,10 +436,9 @@ msgstr "Ubuntu-build-beskrivelse"
 msgid "Device Image part"
 msgstr "Enhedsbilledpart"
 
-# ?
 #: ../plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr "Enhedsbyggebeskrivelse"
+msgstr "Enheds-build-beskrivelse"
 
 # ?
 #: ../plugins/about//Version.qml:141
@@ -500,15 +499,15 @@ msgstr "-"
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
-msgstr ""
+msgstr "Udviklertilstand"
 
 #: ../plugins/about//DevMode.qml:68
 msgid "In Developer Mode, anyone can access, "
-msgstr ""
+msgstr "I udviklertilstand kan enhver tilgå "
 
 #: ../plugins/about//DevMode.qml:95
 msgid "You need a passcode or passphrase set "
-msgstr ""
+msgstr "Du skal have adgangskode eller -frase indstillet "
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -518,7 +517,7 @@ msgstr "Om denne telefon"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Telefonnummer"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -550,7 +549,7 @@ msgstr "Regulationsinfo"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Udviklertilstand"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -568,11 +567,11 @@ msgstr "Lyd"
 
 #: ../plugins/sound//PageComponent.qml:73
 msgid "Silent Mode"
-msgstr ""
+msgstr "Stille tilstand"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "Ringer:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -715,12 +714,12 @@ msgstr "%1 %"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "I går"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "I dag"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -1003,7 +1002,7 @@ msgstr "Indstil"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Sidst ringet til %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -1039,7 +1038,7 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Videresend til"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
@@ -1054,31 +1053,35 @@ msgstr "SIM"
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//PageComponent.qml:142
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "Wi-Fi-adgangspunkt"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "Adgangspunkt"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
 "When hotspot is on, other devices can user your cellular data connection "
 "over Wi-Fi. Normal data charges apply."
 msgstr ""
+"Når adgangspunktet er slået til, kan andre enheder bruge din "
+"mobildataforbindelse over Wi-Fi. Normale datapriser er gældende."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can user your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Andre enheder kan bruge din mobildataforbindelse over Wi-Fi-netværket. "
+"Normale datapriser er gældende."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "Indstil adgangspunkt"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
-msgstr ""
+msgstr "Udbydere"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1112,7 +1115,7 @@ msgstr "Mobil"
 
 #: ../plugins/cellular//PageComponent.qml:136
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "Adgangspunkt deaktiveret fordi Wi-Fi er slået fra."
 
 #: ../plugins/cellular//PageComponent.qml:151
 msgid "Data usage statistics"
@@ -1122,8 +1125,8 @@ msgstr "Dataforbrugsstatistik"
 #: ../plugins/cellular//PageComponent.qml:165
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Udbyder"
+msgstr[1] "Udbydere"
 
 #: ../plugins/cellular//PageComponent.qml:184
 msgid "APN"
@@ -1131,23 +1134,23 @@ msgstr "APN"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "Ændr konfiguration af adgangspunkt"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "Navn på adgangspunkt"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "Nøgle (skal være 8 tegn eller længere)"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "Vis nøgle"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Skift"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -1214,7 +1217,7 @@ msgstr "Systemopdatering mislykkedes."
 
 #: ../plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
-msgstr "Tjekker for opdateringer…"
+msgstr "Kontrollerer om der er opdateringer…"
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
@@ -1441,25 +1444,27 @@ msgstr "Intet SIM-kort"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
+msgstr "Der skal være et SIM-kort for at bruge telefon- og SMS-funktioner."
 
 #: ../wizard/qml/Pages//no-sim.qml:59
 msgid "Install a SIM before continuing."
-msgstr ""
+msgstr "Indsæt et SIM-kort før du fortsætter."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "Opsætning fuldført"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Velkommen til Ubuntu på din mobiltelefon, takket være tusinder af frivillige "
+"samt de flinke folk hos Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "Nu kan du begynde at bruge din Ubuntutelefon."
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1487,11 +1492,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Hej"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Velkommen til din Ubuntutelefon. Lad os komme i gang."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
@@ -1499,7 +1504,7 @@ msgstr "Vælg dit sprog"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
@@ -1657,7 +1662,7 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:80
 msgid "Orientation Lock"
-msgstr "Lås orientation"
+msgstr "Lås retning"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:82
@@ -1667,7 +1672,7 @@ msgstr "rotation"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:84
 msgid "orientation"
-msgstr "orientation"
+msgstr "retning"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:86
