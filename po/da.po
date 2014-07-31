@@ -13,14 +13,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-22 15:45+0000\n"
+"PO-Revision-Date: 2014-07-29 23:16+0000\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:31+0000\n"
+"X-Launchpad-Export-Date: 2014-07-30 07:02+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
@@ -121,7 +121,7 @@ msgstr "Glem netværk"
 #: ../plugins/battery//PageComponent.qml:312
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:2
 msgid "Wi-Fi"
-msgstr "Trådløs forbindelse"
+msgstr "Wi-Fi"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:29
 #: ../plugins/security-privacy//PageComponent.qml:76
@@ -208,41 +208,41 @@ msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Bruger trådløst netværk og GPS til at tilnærme din position. Ved at slå "
-"dette fra, kan der spares batteri."
+"Bruger wi-fi og GPS til at tilnærme din position. Ved at slå dette fra, kan "
+"der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
-"Bruger trådløst netværk (i øjeblikket slået fra) og GPS til at tilnærme din "
-"position. Ved at slå dette fra, kan der spares batteri."
+"Bruger wi-fi (i øjeblikket slået fra) og GPS til at tilnærme din position. "
+"Ved at slå dette fra, kan der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
-"Bruger trådløst netværk, mobilmaster og GPS til at tilnærme din position. "
-"Ved at slå dette fra, kan der spares batteri."
+"Bruger wi-fi, mobilmaster og GPS til at tilnærme din position. Ved at slå "
+"dette fra, kan der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
-"Bruger trådløst netværk, mobilmaster (der er ingen mobiltelefonforbindelse i "
+"Bruger wi-fi, mobilmaster (der er ingen mobiltelefonforbindelse i "
 "øjeblikket) og GPS til at tilnærme din position. Ved at slå dette fra, kan "
-"der spares batteri."
+"der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
-"Bruger trådløst netværk (i øjeblikket slået fra), mobilmaster og GPS til at "
-"tilnærme din position. Ved at slå dette fra, kan der spares batteri."
+"Bruger wi-fi (i øjeblikket slået fra), mobilmaster og GPS til at tilnærme "
+"din position. Ved at slå dette fra, kan der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:82
 msgid ""
@@ -250,9 +250,9 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Bruger trådløst netværk (i øjeblikket slået fra), mobilmaster (der er ingen "
+"Bruger wi-fi (i øjeblikket slået fra), mobilmaster (der er ingen "
 "mobiltelefonforbindelse i øjeblikket) og GPS til at tilnærme din position. "
-"Ved at slå dette fra, kan der spares batteri."
+"Ved at slå dette fra, kan der spares strøm."
 
 #: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
@@ -436,10 +436,9 @@ msgstr "Ubuntu-build-beskrivelse"
 msgid "Device Image part"
 msgstr "Enhedsbilledpart"
 
-# ?
 #: ../plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr "Enhedsbyggebeskrivelse"
+msgstr "Enheds-build-beskrivelse"
 
 # ?
 #: ../plugins/about//Version.qml:141
@@ -518,7 +517,7 @@ msgstr "Om denne telefon"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Telefonnummer"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -550,7 +549,7 @@ msgstr "Regulationsinfo"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Udviklertilstand"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -715,12 +714,12 @@ msgstr "%1 %"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "I går"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "I dag"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -740,7 +739,7 @@ msgstr "GPS"
 
 #: ../plugins/battery//PageComponent.qml:392
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "Nøjagtig positionsbestemmelse kræver GPS og/eller trådløst netværk."
+msgstr "Nøjagtig positionsbestemmelse kræver GPS og/eller Wi-Fi."
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
@@ -1020,8 +1019,8 @@ msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
-"Lader dig svare på eller starte et nyt opkald mens du allerede er i et "
-"opkald, og skifte mellem dem"
+"Lader dig svare på eller starte et nyt opkald, mens du allerede er i et "
+"opkald, og så skifte mellem dem"
 
 #: ../plugins/phone//CallForwarding.qml:28
 #: ../plugins/phone//CallForwarding.qml:75
@@ -1039,7 +1038,7 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Videresend til"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
@@ -1160,7 +1159,7 @@ msgstr "Hent fremtidige opdateringer automatisk:"
 
 #: ../plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
-msgstr "Over trådløst netværk"
+msgstr "Over wi-fi"
 
 #: ../plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
@@ -1214,7 +1213,7 @@ msgstr "Systemopdatering mislykkedes."
 
 #: ../plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
-msgstr "Tjekker for opdateringer…"
+msgstr "Kontrollerer om der er opdateringer…"
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
@@ -1264,7 +1263,7 @@ msgstr "Version: "
 
 #: ../plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
-msgstr "På trådløst netværk"
+msgstr "På wi-fi"
 
 #: ../plugins/system-update//PageComponent.qml:453
 msgid "Always"
@@ -1425,7 +1424,7 @@ msgstr "System"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr "Forbind til trådløst netværk"
+msgstr "Forbind til Wi-Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
@@ -1449,7 +1448,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "Opsætning fuldført"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
@@ -1487,7 +1486,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Hej"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
@@ -1499,7 +1498,7 @@ msgstr "Vælg dit sprog"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
@@ -1520,7 +1519,7 @@ msgstr "trådløs"
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:8
 msgid "wifi"
-msgstr "trådløst"
+msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:10
@@ -1657,7 +1656,7 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:80
 msgid "Orientation Lock"
-msgstr "Lås orientation"
+msgstr "Lås retning"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:82
@@ -1667,7 +1666,7 @@ msgstr "rotation"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:84
 msgid "orientation"
-msgstr "orientation"
+msgstr "retning"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:86

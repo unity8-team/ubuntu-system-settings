@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-10 23:17+0000\n"
+"PO-Revision-Date: 2014-07-28 10:50+0000\n"
 "Last-Translator: Alan Pope ㋛ <alan@ubuntu.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:34+0000\n"
+"X-Launchpad-Export-Date: 2014-07-29 06:49+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
@@ -489,15 +489,15 @@ msgstr "N/A"
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
-msgstr ""
+msgstr "Developer Mode"
 
 #: ../plugins/about//DevMode.qml:68
 msgid "In Developer Mode, anyone can access, "
-msgstr ""
+msgstr "In Developer Mode, anyone can access, "
 
 #: ../plugins/about//DevMode.qml:95
 msgid "You need a passcode or passphrase set "
-msgstr ""
+msgstr "You need a passcode or passphrase set "
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -507,7 +507,7 @@ msgstr "About this phone"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Phone number"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -539,7 +539,7 @@ msgstr "Regulatory info"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Developer mode"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -557,11 +557,11 @@ msgstr "Sound"
 
 #: ../plugins/sound//PageComponent.qml:73
 msgid "Silent Mode"
-msgstr ""
+msgstr "Silent Mode"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "Ringer:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -704,12 +704,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "Yesterday"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "Today"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -992,7 +992,7 @@ msgstr "Set"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Last called %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -1027,7 +1027,7 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Forward to"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
@@ -1042,31 +1042,35 @@ msgstr "SIM"
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//PageComponent.qml:142
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "Wi-Fi hotspot"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "Hotspot"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
 "When hotspot is on, other devices can user your cellular data connection "
 "over Wi-Fi. Normal data charges apply."
 msgstr ""
+"When hotspot is on, other devices can user your cellular data connection "
+"over Wi-Fi. Normal data charges apply."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can user your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Other devices can user your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "Set up hotspot"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
-msgstr ""
+msgstr "Carriers"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1100,7 +1104,7 @@ msgstr "Cellular"
 
 #: ../plugins/cellular//PageComponent.qml:136
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "Hotspot disabled because Wi-Fi is off."
 
 #: ../plugins/cellular//PageComponent.qml:151
 msgid "Data usage statistics"
@@ -1110,8 +1114,8 @@ msgstr "Data usage statistics"
 #: ../plugins/cellular//PageComponent.qml:165
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Carrier"
+msgstr[1] "Carriers"
 
 #: ../plugins/cellular//PageComponent.qml:184
 msgid "APN"
@@ -1119,23 +1123,23 @@ msgstr "APN"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "Change hotspot setup"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "Hotspot name"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "Key (must be 8 characters or longer)"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "Show key"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Change"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -1429,25 +1433,27 @@ msgstr "No SIM card"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
+msgstr "To use the telephone and SMS features a SIM must be installed."
 
 #: ../wizard/qml/Pages//no-sim.qml:59
 msgid "Install a SIM before continuing."
-msgstr ""
+msgstr "Install a SIM before continuing."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "Setup complete"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
+"the good folks at Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "Now you can start using your Ubuntu phone."
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1475,11 +1481,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Hello"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Welcome to your Ubuntu phone. Let’s get started."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
@@ -1487,7 +1493,7 @@ msgstr "Select your language"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
