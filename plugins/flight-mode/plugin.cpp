@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -14,24 +14,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Iain Lane <iain.lane@canonical.com>
+ * Antti Kaijanmäki <antti.kaijanmaki@canonical.com>
  *
-*/
+ */
 
 #include <QtQml>
 #include <QtQml/QQmlContext>
 #include "plugin.h"
-#include "connman.h"
-#include "simmanager.h"
-#include "networkregistration.h"
+
+#include "flight-mode-helper.h"
 
 void BackendPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Phone"));
+    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.FlightMode"));
     
-    qmlRegisterType<SimManager>(uri, 1, 0, "SimManager");
-    qmlRegisterType<NetworkRegistration>(uri, 1, 0, "NetworkRegistration");
-    qmlRegisterType<ConnMan>(uri, 1, 0, "ConnMan");
+    qmlRegisterType<FlightModeHelper>(uri, 1, 0, "Helper");
 }
 
 void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

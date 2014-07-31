@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -14,23 +14,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Iain Lane <iain.lane@canonical.com>
+ * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
 
-#ifndef PLUGIN_H
-#define PLUGIN_H
+import QtQuick 2.0
+import Ubuntu.Components 0.1
 
-#include <QtQml/QQmlEngine>
-#include <QtQml/QQmlExtensionPlugin>
-
-class BackendPlugin : public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
-    
-public:
-    void registerTypes(const char *uri);
-    void initializeEngine(QQmlEngine *engine, const char *uri);
-};
-#endif // PLUGIN_H
+Rectangle {
+    border.width: units.gu(1)
+    border.color: UbuntuColors.orange
+    width: parent.width + units.gu(2)
+    height: parent.height + units.gu(2)
+    anchors.centerIn: parent
+    color: "transparent"
+}

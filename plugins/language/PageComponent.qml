@@ -64,7 +64,8 @@ ItemPage {
         flickableDirection: Flickable.VerticalFlick
 
         Column {
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
 
             Menus.StandardMenu {
                 iconSource: "image://theme/language-chooser"

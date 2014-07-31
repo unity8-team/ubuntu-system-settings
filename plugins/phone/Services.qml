@@ -25,20 +25,30 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
     property string carrierString
-    property var sim
+    property variant sim
+    property var names: []
+
     // TRANSLATORS: %1 is the name of the (network) carrier
     title: i18n.tr("%1 Services").arg(carrierString)
+
+    Component.onCompleted: {
+        var keys = [];
+        for (var x in sim.serviceNumbers) {
+            keys.push(x);
+        }
+        names = keys;
+    }
 
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
         Repeater {
-            model: sim.serviceNumbers
+            model: names
 
             ListItem.Standard {
                 progression: true
-                text: modelData.name
-                onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData.name, serviceNumber: modelData.value})
+                text: modelData
+                onClicked: pageStack.push(Qt.resolvedUrl("ServiceInfo.qml"), {serviceName: modelData, serviceNumber: sim.serviceNumbers[modelData]})
             }
         }
     }

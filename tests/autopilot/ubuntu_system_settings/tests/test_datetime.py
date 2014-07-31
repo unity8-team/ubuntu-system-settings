@@ -23,12 +23,18 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
     """ Tests for the Time & Date Page """
 
     @classmethod
-    def setUpClass(klass):
-        klass.start_system_bus()
-        klass.dbus_con = klass.get_dbus(True)
-        (klass.p_mock, klass.obj_timedate1) = klass.spawn_server_template(
+    def setUpClass(cls):
+        cls.start_system_bus()
+        cls.dbus_con = cls.get_dbus(True)
+        (cls.p_mock, cls.obj_timedate1) = cls.spawn_server_template(
             'timedated', {}, stdout=subprocess.PIPE
         )
+
+    @classmethod
+    def tearDownClass(cls):
+        super(TimeDateTestCase, cls).tearDownClass()
+        cls.p_mock.terminate()
+        cls.p_mock.wait()
 
     def setUp(self):
         """ Go to Time & Date page """
@@ -65,7 +71,8 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         text_field = self.system_settings.main_view.select_single(
             objectName='selectTimeZoneField'
         )
-        self.system_settings.main_view.pointer.move_to_object(text_field)
+        self.system_settings.main_view.pointing_device.move_to_object(
+            text_field)
 
     def test_time_date_page(self):
         """ Checks whether Time & Date page is available """
@@ -108,7 +115,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
             objectName='locationsListView'
         )
         london = TimeDateTestCase.wait_select_listview_first(listview)
-        self.system_settings.main_view.pointer.click_object(london)
+        self.system_settings.main_view.pointing_device.click_object(london)
         header = self.system_settings.main_view.select_single(
             objectName='MainView_Header'
         )
@@ -128,7 +135,7 @@ class TimeDateTestCase(UbuntuSystemSettingsTestCase,
         )
 
         preston = TimeDateTestCase.wait_select_listview_first(listview)
-        self.system_settings.main_view.pointer.click_object(preston)
+        self.system_settings.main_view.pointing_device.click_object(preston)
 
         # The timer is 1 second, wait and see that we haven't moved pages
         sleep(2)

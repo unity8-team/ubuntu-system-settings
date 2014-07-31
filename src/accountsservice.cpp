@@ -45,9 +45,7 @@ AccountsService::AccountsService(QObject *parent)
              this,
              SLOT (slotNameOwnerChanged (QString, QString, QString)));
 
-    if (m_accountsserviceIface.isValid()) {
-        setUpInterface();
-    }
+    setUpInterface();
 }
 
 void AccountsService::slotChanged(QString interface,
@@ -101,8 +99,6 @@ void AccountsService::setUpInterface()
 QVariant AccountsService::getUserProperty(const QString &interface,
                                           const QString &property)
 {
-    if (!m_accountsserviceIface.isValid())
-        return QVariant();
 
     QDBusInterface iface (
                 "org.freedesktop.Accounts",
@@ -123,7 +119,7 @@ QVariant AccountsService::getUserProperty(const QString &interface,
     return QVariant();
 }
 
-void AccountsService::setUserProperty(const QString &interface,
+bool AccountsService::setUserProperty(const QString &interface,
                                       const QString &property,
                                       const QVariant &value)
 {
@@ -133,16 +129,15 @@ void AccountsService::setUserProperty(const QString &interface,
                 "org.freedesktop.DBus.Properties",
                 m_systemBusConnection,
                 this);
-    if (iface.isValid()) {
-        // The value needs to be carefully wrapped
-        iface.call("Set",
-                   interface,
-                   property,
-                   QVariant::fromValue(QDBusVariant(value)));
-    }
+    // The value needs to be carefully wrapped
+    QDBusMessage msg = iface.call("Set",
+                                  interface,
+                                  property,
+                                  QVariant::fromValue(QDBusVariant(value)));
+    return msg.type() == QDBusMessage::ReplyMessage;
 }
 
-void AccountsService::customSetUserProperty(const QString &method,
+bool AccountsService::customSetUserProperty(const QString &method,
                                             const QVariant &value)
 {
     QDBusInterface iface ("org.freedesktop.Accounts",
@@ -151,7 +146,5 @@ void AccountsService::customSetUserProperty(const QString &method,
                           m_systemBusConnection,
                           this);
 
-    if (iface.isValid())
-        iface.call(method, value);
-
+    return iface.call(method, value).type() == QDBusMessage::ReplyMessage;
 }
