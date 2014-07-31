@@ -132,7 +132,7 @@ void NotificationsManager::loadModel()
         QList<QString> keys = hooks.keys();
 
         // We need one app that has a push-helper key
-        bool has_helper = true;
+        bool has_helper = false;
         for (int j = 0; j < keys.size(); ++j) {
             QVariantMap hook = hooks.value(keys.at(j)).toMap();
             if (hook.contains("push-helper")) {
