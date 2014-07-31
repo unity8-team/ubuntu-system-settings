@@ -16,39 +16,10 @@ from gi.repository import Gio
 class ResetTestCase(ResetBaseTestCase):
     """Tests for Reset Page"""
 
-    def assert_pagestack_popped(self):
-        try:
-            self.system_settings.main_view.wait_select_single(
-                objectName='entryComponent-reset'),
-        except Exception as e:
-            self.fail('pageStack was not popped, {}'.format(e))
-
-    @property
-    def _reset_launcher_dialog_button(self):
-        return self.system_settings.main_view.reset_page.wait_select_single(
-            objectName='resetLauncher')
-
-    @property
-    def _reset_launcher_button(self):
-        return self.system_settings.main_view.wait_select_single(
-            objectName='resetLauncherDialog').wait_select_single(
-                objectName='resetLauncherAction')
-
-    @property
-    def _factory_reset_dialog_button(self):
-        return self.system_settings.main_view.reset_page.wait_select_single(
-            objectName='factoryReset')
-
-    @property
-    def _factory_reset_button(self):
-        return self.system_settings.main_view.wait_select_single(
-            objectName='factoryResetDialog').wait_select_single(
-                objectName='factoryResetAction')
-
     def test_reset_page_title_is_correct(self):
         """Checks whether Reset page is available"""
         self.assertThat(
-            self.system_settings.main_view.reset_page.title,
+            self.reset_page.title,
             Equals(_('Reset phone')))
 
     def test_reset_launcher(self):
@@ -58,12 +29,12 @@ class ResetTestCase(ResetBaseTestCase):
         # make sure we reset launcher favorites even if test fails
         # TODO: use decorator
         try:
-            self.reset_launcher()
+            self.reset_page.reset_launcher()
             # wait for calls to dbus
             sleep(0.5)
             calls = self.user_mock.GetCalls()
+            import pdb; pdb.set_trace()
             self.assertIn('com.canonical.unity.AccountsService', str(calls))
-            self.assert_pagestack_popped()
         except Exception as e:
             raise e
         finally:
@@ -72,36 +43,8 @@ class ResetTestCase(ResetBaseTestCase):
             sleep(1)
 
     def test_factory_reset(self):
-        self.factory_reset()
+        self.reset_page.erase_and_reset_everything()
         # wait for calls to dbus
         sleep(0.5)
         calls = self.sys_mock.GetCalls()
         self.assertIn('FactoryReset', str(calls))
-        self.assert_pagestack_popped()
-
-    def _show_factory_reset_dialog(self):
-        self.system_settings.main_view.scroll_to_and_click(
-            self._factory_reset_dialog_button)
-
-    def _click_factory_reset_button(self):
-        self.system_settings.main_view.scroll_to_and_click(
-            self._factory_reset_button)
-
-    def factory_reset(self):
-        self._show_factory_reset_dialog()
-        self._click_factory_reset_button()
-
-    def _show_reset_launcher_dialog(self):
-        self.system_settings.main_view.scroll_to_and_click(
-            self._reset_launcher_dialog_button)
-
-    def _click_reset_launcher_button(self):
-        self.system_settings.main_view.scroll_to_and_click(
-            self._reset_launcher_button)
-
-    def reset_launcher(self):
-        self._show_reset_launcher_dialog()
-        self._click_reset_launcher_button()
-
-    def reset_all_settings(self):
-        raise NotImplementedError()

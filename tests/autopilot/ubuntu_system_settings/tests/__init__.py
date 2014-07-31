@@ -528,9 +528,9 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
     def setUp(self):
         self.mock_for_launcher_reset()
         self.mock_for_factory_reset()
-        super(ResetBaseTestCase, self).setUp('reset')
-        self.assertThat(self.system_settings.main_view.reset_page.active,
-                        Eventually(Equals(True)))
+
+        super(ResetBaseTestCase, self).setUp()
+        self.reset_page = self.system_settings.main_view.go_to_reset_phone()
 
     def tearDown(self):
         self.mock_server.terminate()
