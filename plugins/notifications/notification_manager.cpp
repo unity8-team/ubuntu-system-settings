@@ -96,12 +96,12 @@ void NotificationsManager::loadModel()
             char *display_name;
             char *icon_fname;
             app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
+            bool blacklisted = m_blacklist.contains(key);
             if (!display_name || !icon_fname) {
                 continue; // Broken .desktop file
             }
             NotificationItem *item = new NotificationItem();
-            bool blacklisted = m_blacklist.contains(key);
-            item->setItemData(QString(display_name), QString(icon_fname), blacklisted, key);
+            item->setItemData(QString(display_name), QString(icon_fname), !blacklisted, key);
             g_free(display_name);
             g_free(icon_fname);
             m_model.append(QVariant::fromValue(item));
