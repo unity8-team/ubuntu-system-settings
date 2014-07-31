@@ -21,7 +21,7 @@ class ResetTestCase(ResetBaseTestCase):
             self.system_settings.main_view.wait_select_single(
                 objectName='entryComponent-reset'),
         except Exception as e:
-            self.fail("pageStack was not popped, %s" % e)
+            self.fail('pageStack was not popped, %s' % e)
 
     @property
     def _reset_launcher_dialog_button(self):
@@ -31,8 +31,8 @@ class ResetTestCase(ResetBaseTestCase):
     @property
     def _reset_launcher_button(self):
         return self.system_settings.main_view.wait_select_single(
-            objectName="resetLauncherDialog").wait_select_single(
-                objectName="resetLauncherAction")
+            objectName='resetLauncherDialog').wait_select_single(
+                objectName='resetLauncherAction')
 
     @property
     def _factory_reset_dialog_button(self):
@@ -42,8 +42,8 @@ class ResetTestCase(ResetBaseTestCase):
     @property
     def _factory_reset_button(self):
         return self.system_settings.main_view.wait_select_single(
-            objectName="factoryResetDialog").wait_select_single(
-                objectName="factoryResetAction")
+            objectName='factoryResetDialog').wait_select_single(
+                objectName='factoryResetAction')
 
     def test_reset_page_title_is_correct(self):
         """Checks whether Reset page is available"""
