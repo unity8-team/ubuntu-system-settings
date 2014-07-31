@@ -37,8 +37,6 @@ class ResetTestCase(ResetBaseTestCase):
         self.addCleanup(
             self.set_unity_launcher_favorites, gsettings, favorites)
 
-        # make sure we reset launcher favorites even if test fails
-        # TODO: use decorator
         self.reset_page.reset_launcher()
 
         self.assertThat(
