@@ -6,15 +6,24 @@
 # by the Free Software Foundation.
 
 from __future__ import absolute_import
-from testtools.matchers import Equals
+
+from time import sleep
+
+from autopilot.matchers import Eventually
+from gi.repository import Gio
+from testtools.matchers import Contains, Equals
+
 from ubuntu_system_settings.tests import ResetBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
-from time import sleep
-from gi.repository import Gio
 
 
 class ResetTestCase(ResetBaseTestCase):
     """Tests for Reset Page"""
+
+    def set_unity_launcher_favorites(self, gsettings, favorites):
+        gsettings.set_value('favorites', favorites)
+        # wait for gsettings
+        sleep(1)
 
     def test_reset_page_title_is_correct(self):
         """Checks whether Reset page is available"""
@@ -24,27 +33,20 @@ class ResetTestCase(ResetBaseTestCase):
 
     def test_reset_launcher(self):
         gsettings = Gio.Settings.new('com.canonical.Unity.Launcher')
-        favs = gsettings.get_value('favorites')
+        favorites = gsettings.get_value('favorites')
+        self.addCleanup(
+            self.set_unity_launcher_favorites, gsettings, favorites)
 
         # make sure we reset launcher favorites even if test fails
         # TODO: use decorator
-        try:
-            self.reset_page.reset_launcher()
-            # wait for calls to dbus
-            sleep(0.5)
-            calls = self.user_mock.GetCalls()
-            import pdb; pdb.set_trace()
-            self.assertIn('com.canonical.unity.AccountsService', str(calls))
-        except Exception as e:
-            raise e
-        finally:
-            gsettings.set_value('favorites', favs)
-            # wait for gsettings
-            sleep(1)
+        self.reset_page.reset_launcher()
+
+        self.assertThat(
+            lambda: str(self.user_mock.GetCalls()),
+            Eventually(Contains('com.canonical.unity.AccountsService')))
 
     def test_factory_reset(self):
         self.reset_page.erase_and_reset_everything()
-        # wait for calls to dbus
-        sleep(0.5)
-        calls = self.sys_mock.GetCalls()
-        self.assertIn('FactoryReset', str(calls))
+        self.assertThat(
+            lambda: str(self.sys_mock.GetCalls()),
+            Eventually(Contains('FactoryReset')))
