@@ -59,7 +59,7 @@ bool Reset::resetLauncher()
     QDBusInterface userInterface (
                 "org.freedesktop.Accounts",
                 m_objectPath,
-                "org.freedesktop.DBus.Properties.Set",
+                "org.freedesktop.DBus.Properties",
                 m_systemBusConnection,
                 this);
 
