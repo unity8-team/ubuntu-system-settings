@@ -24,7 +24,7 @@
 
 
 #define CLICK_COMMAND "click"
-#define BLACKLIST_CONFIG_SCHEMA_ID "com.ubuntu.postal.notifications"
+#define BLACKLIST_CONFIG_SCHEMA_ID "com.ubuntu.notifications.hub"
 #define BLACKLIST_KEY "blacklist"
 
 
