@@ -8,28 +8,28 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-05-15 20:06+0000\n"
-"Last-Translator: Zonov Roman <Unknown>\n"
+"PO-Revision-Date: 2014-07-31 11:50+0000\n"
+"Last-Translator: Jay ZDLin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:33+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-01 07:12+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
-msgstr ""
+msgstr "Другая сеть"
 
 #: ../plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Имя сети"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "Безопасность"
 
 #: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PhoneLocking.qml:40
@@ -41,19 +41,19 @@ msgstr "Отсутствует"
 
 #: ../plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA и WPA2 Personal"
 
 #: ../plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: ../plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Отображать пароль"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/security-privacy//LockSecurity.qml:310
@@ -73,16 +73,16 @@ msgstr "Отмена"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "Подключиться"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
 msgid "Previous networks"
-msgstr ""
+msgstr "Предыдущие сети"
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
-msgstr ""
+msgstr "Информация о сети"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
 #: ../plugins/bluetooth//PageComponent.qml:263
@@ -91,7 +91,7 @@ msgstr "Имя"
 
 #: ../plugins/wifi//NetworkDetails.qml:51
 msgid "Last connected"
-msgstr ""
+msgstr "Последнее подключение"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
 #: ../plugins/about//PageComponent.qml:149
@@ -105,11 +105,11 @@ msgstr "Никогда"
 
 #: ../plugins/wifi//NetworkDetails.qml:73
 msgid "Show password"
-msgstr ""
+msgstr "Показать пароль"
 
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
-msgstr ""
+msgstr "Забыть сеть"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -414,11 +414,11 @@ msgstr "Лицензии на ПО"
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "Информация об ОС"
 
 #: ../plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "Номер сборки ОС"
 
 #: ../plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
@@ -426,7 +426,7 @@ msgstr ""
 
 #: ../plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Описание сборки Ubuntu"
 
 #: ../plugins/about//Version.qml:100
 msgid "Device Image part"
@@ -434,7 +434,7 @@ msgstr ""
 
 #: ../plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Описание сборки устройства"
 
 #: ../plugins/about//Version.qml:141
 msgid "Customization Image part"
@@ -494,15 +494,15 @@ msgstr "Н/Д"
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
-msgstr ""
+msgstr "Режим разработчика"
 
 #: ../plugins/about//DevMode.qml:68
 msgid "In Developer Mode, anyone can access, "
-msgstr ""
+msgstr "В режиме разработчика имеется доступ к "
 
 #: ../plugins/about//DevMode.qml:95
 msgid "You need a passcode or passphrase set "
-msgstr ""
+msgstr "Необходимо назначить пароль или кодовую фразу "
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -512,7 +512,7 @@ msgstr "Об устройстве"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Номер телефона"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -544,7 +544,7 @@ msgstr "Правовая информация"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Режим разработчика"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -562,11 +562,11 @@ msgstr "Звук"
 
 #: ../plugins/sound//PageComponent.qml:73
 msgid "Silent Mode"
-msgstr ""
+msgstr "Беззвучный режим"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "Звонок:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -716,12 +716,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "Вчера"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "Сегодня"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -751,11 +751,11 @@ msgstr "Яркость"
 
 #: ../plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "Автонастройка"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Настройка яркости экрана в зависимости от освещенности"
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
@@ -941,23 +941,23 @@ msgstr "Плохо"
 
 #: ../plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "Видимый"
 
 #: ../plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Скрытый"
 
 #: ../plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
-msgstr ""
+msgstr "Подключённые устройства:"
 
 #: ../plugins/bluetooth//PageComponent.qml:220
 msgid "Connect a different device:"
-msgstr ""
+msgstr "Подключить другое устройство:"
 
 #: ../plugins/bluetooth//PageComponent.qml:220
 msgid "Connect another device:"
-msgstr ""
+msgstr "Подключить другое устройство:"
 
 #: ../plugins/bluetooth//PageComponent.qml:247
 msgid "None detected"
@@ -1006,7 +1006,7 @@ msgstr "Установить"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Последний вызов %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -1041,7 +1041,7 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Переадресовать"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
@@ -1056,31 +1056,36 @@ msgstr "SIM"
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//PageComponent.qml:142
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "Wi-Fi точка доступа"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "Точка доступа"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
 "When hotspot is on, other devices can user your cellular data connection "
 "over Wi-Fi. Normal data charges apply."
 msgstr ""
+"Когда включена функция точки доступа, другие устройства могут использовать "
+"вашу сотовую сеть передачи данных через Wi-Fi. Взимается обычная плата за "
+"передачу данных."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can user your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Другие устройства могут использовать вашу сотовую сеть передачи данных через "
+"сеть Wi-Fi. Взимается обычная плата за передачу данных."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "Настройка точки доступа"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
-msgstr ""
+msgstr "Операторы"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1114,7 +1119,7 @@ msgstr "Связь"
 
 #: ../plugins/cellular//PageComponent.qml:136
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "Точка доступа недоступна по причине отключения Wi-Fi."
 
 #: ../plugins/cellular//PageComponent.qml:151
 msgid "Data usage statistics"
@@ -1124,8 +1129,9 @@ msgstr "Использование трафика"
 #: ../plugins/cellular//PageComponent.qml:165
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Оператор"
+msgstr[1] "Оператора"
+msgstr[2] "Операторов"
 
 #: ../plugins/cellular//PageComponent.qml:184
 msgid "APN"
@@ -1133,23 +1139,23 @@ msgstr "APN"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "Изменение настроек точки доступа"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "Имя точки доступа"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "Пароль (должен состоять из 8 или более символов)"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "Показать пароль"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Изменить"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -1204,7 +1210,7 @@ msgstr "Программное обеспечение актуально."
 
 #: ../plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Войдите в вашу учётную запись Ubuntu One."
 
 #: ../plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
@@ -1221,12 +1227,12 @@ msgstr "Проверка обновлений..."
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Установить %1 обновления…"
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Установить %1 обновления"
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -1258,7 +1264,7 @@ msgstr "Установка"
 
 #: ../plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "Установлено"
 
 #: ../plugins/system-update//PageComponent.qml:421
 msgid "Version: "
@@ -1274,7 +1280,7 @@ msgstr "Всегда"
 
 #: ../plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "Учётные данные отсутствуют"
 
 #: ../plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
@@ -1427,81 +1433,87 @@ msgstr "Настройки системы"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Подключиться к Wi-Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
-msgstr ""
+msgstr "Доступные сети"
 
 #: ../wizard/qml/Pages//20-wifi.qml:153 ../wizard/qml/Pages//no-sim.qml:66
 msgid "Skip"
-msgstr ""
+msgstr "Пропустить"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "SIM-карта отсутствует"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
+msgstr "Чтобы воспользоваться телефоном и СМС, требуется наличие SIM-карты."
 
 #: ../wizard/qml/Pages//no-sim.qml:59
 msgid "Install a SIM before continuing."
-msgstr ""
+msgstr "Установите SIM-карту прежде, чем продолжить."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "Настройка завершена"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Добро пожаловать в Ubuntu на вашем телефоне, это стало возможным, благодаря "
+"тысячам добровольцев и хороших ребят из Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "Теперь вы можете приступить к использованию вашего Ubuntu-фона."
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "Завершить"
 
 #: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Настройки телефона"
 
 #: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"Ваш телефон настроен на автоматическую отправку отчётов об ошибках в "
+"Canonical. Отключить данную функцию можно в настройках системы."
 
 #: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Ваш телефон настроен на определение вашего местоположения. Отключить данную "
+"функцию можно в настройках системы."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Приветствие"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Добро пожаловать в ваш Ubuntu-фон. Приступим."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
-msgstr ""
+msgstr "Выберите язык"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Старт"
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -1730,7 +1742,7 @@ msgstr "обновление"
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:126
 msgid "Updates available"
-msgstr ""
+msgstr "Доступные обновления"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:130

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2013-11-03 15:03+0000\n"
+"PO-Revision-Date: 2014-07-31 16:36+0000\n"
 "Last-Translator: Anthony Wong <anthony.wong@ubuntu.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:34+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-01 07:12+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -752,7 +752,7 @@ msgstr "所有可用配置："
 
 #: ../plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr "顯示語言"
+msgstr "螢幕語言"
 
 #: ../plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
@@ -766,7 +766,7 @@ msgstr "語言與文字"
 
 #: ../plugins/language//PageComponent.qml:72
 msgid "Display language…"
-msgstr ""
+msgstr "螢幕語言..."
 
 #: ../plugins/language//PageComponent.qml:121
 msgid "Auto completion"
@@ -1412,7 +1412,7 @@ msgstr ""
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
-msgstr ""
+msgstr "歡迎使用您的 Ubuntu 手機，由約一千位志願者和 Canonical 公司的員工爲您帶來。"
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
@@ -1444,11 +1444,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "歡迎使用 Ubuntu 手機，我們現在就開始吧。"
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
-msgstr ""
+msgstr "請選擇語言"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
