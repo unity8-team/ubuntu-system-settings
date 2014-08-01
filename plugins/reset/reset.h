@@ -21,7 +21,10 @@
 #ifndef RESET_H
 #define RESET_H
 
+#include "accountsservice.h"
+
 #include <QDBusInterface>
+#include <QDBusServiceWatcher>
 #include <QObject>
 #include <QProcess>
 #include <QUrl>
@@ -37,9 +40,8 @@ public:
     Q_INVOKABLE bool factoryReset(void);
 
 private:
+    AccountsService m_accountsService;
     QDBusConnection m_systemBusConnection;
-    QString m_objectPath;
-    QDBusInterface m_accountsserviceIface;
 };
 
 #endif // RESET_H

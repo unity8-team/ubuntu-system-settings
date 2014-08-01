@@ -506,7 +506,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
             dbusmock.MOCK_IFACE)
 
         self.user_mock.AddMethod(
-            'org.freedesktop.DBus.Properties.Set', 'Set', 'ssaa{sv}', '', '')
+            'org.freedesktop.DBus.Properties', 'Set', 'ssaa{sv}', '', '')
 
     def mock_for_factory_reset(self):
         self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,

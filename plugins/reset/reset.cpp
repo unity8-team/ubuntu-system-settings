@@ -28,53 +28,34 @@
 typedef QList<QVariantMap> resetLauncherItemsArg;
 Q_DECLARE_METATYPE(resetLauncherItemsArg)
 
-Reset::Reset(QObject *parent) :
-    QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_accountsserviceIface ("org.freedesktop.Accounts",
-                            "/org/freedesktop/Accounts",
-                            "org.freedesktop.Accounts",
-                             m_systemBusConnection)
+Reset::Reset(QObject *parent)
+    : QObject(parent),
+    m_systemBusConnection(QDBusConnection::systemBus())
 {
     static bool isRegistered = false;
     if(!isRegistered) {
         qDBusRegisterMetaType<resetLauncherItemsArg>();
         isRegistered = true;
     }
-
-    if (!m_accountsserviceIface.isValid()) {
-        return;
-    }
-
-    QDBusReply<QDBusObjectPath> qObjectPath = m_accountsserviceIface.call(
-                "FindUserById", qlonglong(getuid()));
-
-    if (qObjectPath.isValid()) {
-        m_objectPath = qObjectPath.value().path();
-    }
 }
 
 bool Reset::resetLauncher()
 {
-    QDBusInterface userInterface (
-                "org.freedesktop.Accounts",
-                m_objectPath,
-                "org.freedesktop.DBus.Properties",
-                m_systemBusConnection,
-                this);
-
-    if (!userInterface.isValid())
-        return false;
-
+    qWarning() << "resetLauncher";
     QList<QVariantMap> items;
     QVariantMap defaults;
     defaults.insert("defaults", true);
     items << defaults;
-    userInterface.call("Set",
-                   "com.canonical.unity.AccountsService",
-                   "launcher-items",
-                   QVariant::fromValue(items));
-    return true;
+    QVariant answer = m_accountsService.setUserProperty(
+                "com.canonical.unity.AccountsService",
+                "launcher-items",
+                QVariant::fromValue(items));
+
+    if (answer.isValid())
+        return true;
+
+    qWarning() << "Failed making call";
+    return false;
 }
 
 bool Reset::factoryReset()
