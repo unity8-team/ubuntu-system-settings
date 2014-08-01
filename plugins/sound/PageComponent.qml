@@ -68,12 +68,12 @@ ItemPage {
 
             ListItem.Standard {
                 control: Switch {
-                    checked: false
+                    objectName: "silentMode"
+                    checked: backendInfo.silentMode
+                    onCheckedChanged: backendInfo.silentMode = checked
                 }
                 text: i18n.tr("Silent Mode")
-                visible: showAllUI
             }
-
 
             ListItem.Standard {
                 text: i18n.tr("Ringer:")
@@ -127,18 +127,20 @@ ItemPage {
 
             ListItem.Standard {
                 control: CheckBox {
-                    checked: false
+                    objectName: "callVibrate"
+                    checked: backendInfo.incomingCallVibrate
+                    onCheckedChanged: backendInfo.incomingCallVibrate = checked
                 }
                 text: i18n.tr("Vibrate when ringing")
-                visible: showAllUI
             }
 
             ListItem.Standard {
                 control: CheckBox {
-                    checked: false
+                    objectName: "callVibrateSilentMode"
+                    checked: backendInfo.incomingCallVibrateSilentMode
+                    onCheckedChanged: backendInfo.incomingCallVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
-                visible: showAllUI
             }
 
             ListItem.Standard {
@@ -160,18 +162,20 @@ ItemPage {
 
             ListItem.Standard {
                 control: CheckBox {
-                    checked: false
+                    objectName: "messageVibrate"
+                    checked: backendInfo.incomingMessageVibrate
+                    onCheckedChanged: backendInfo.incomingMessageVibrate = checked
                 }
                 text: i18n.tr("Vibrate with message sound")
-                visible: showAllUI
             }
 
             ListItem.Standard {
                 control: CheckBox {
-                    checked: false
+                    objectName: "messageVibrateSilentMode"
+                    checked: backendInfo.incomingMessageVibrateSilentMode
+                    onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
-                visible: showAllUI
             }
 
             ListItem.Standard {

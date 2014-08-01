@@ -21,7 +21,7 @@
 import GSettings 1.0
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
@@ -274,6 +274,7 @@ ItemPage {
 
                 Button {
                     Layout.fillWidth: true
+                    color: UbuntuColors.lightGrey
                     text: i18n.tr("Cancel")
                     onClicked: {
                         PopupUtils.close(changeSecurityDialog)
@@ -285,6 +286,7 @@ ItemPage {
                 Button {
                     id: confirmButton
                     Layout.fillWidth: true
+                    color: UbuntuColors.green
 
                     text: {
                         if (changeSecurityDialog.newMethod ===
