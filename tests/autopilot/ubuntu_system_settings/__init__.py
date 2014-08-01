@@ -173,8 +173,21 @@ class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'cellularPage':
+                return True
+        return False
+
+
+class TimeAndDatePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Sound page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'timeDatePage':
                 return True
         return False
 
@@ -280,7 +293,7 @@ class SystemUpdatesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'systemUpdatesPage':
                 return True
         return False
