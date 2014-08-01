@@ -24,8 +24,8 @@
 
 
 #define CLICK_COMMAND "click"
-#define BLACKLIST_CONFIG_SCHEMA_ID "com.ubuntu.touch.notifications"
-#define BLACKLIST_KEY "popup-blacklist"
+#define BLACKLIST_CONFIG_SCHEMA_ID "com.ubuntu.postal.notifications"
+#define BLACKLIST_KEY "blacklist"
 
 
 namespace NotificationsPlugin {
