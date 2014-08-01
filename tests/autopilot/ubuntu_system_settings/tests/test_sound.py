@@ -27,22 +27,13 @@ class SoundTestCase(SoundBaseTestCase):
             Equals(_('Sound'))
         )
 
-    def test_keyboard_sound_switch(self):
-        """ Check that keyboard sound is present and clickable"""
-        kbd_snd = self.system_settings.main_view.sound_page.select_single(
-            objectName="keyboardSoundSwitch")
-        current_value = kbd_snd.get_properties()["checked"]
-        self.system_settings.main_view.pointing_device.click_object(kbd_snd)
-        self.assertThat(
-            kbd_snd.get_properties()["checked"], NotEquals(current_value))
-
     def test_silent_mode_sound_switch(self):
         """ Check that silent_mode is present and clickable"""
         snd = self.system_settings.main_view.sound_page.select_single(
             objectName="silentMode")
         prev_value = self.obj_test.GetSilentMode()
-        self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(2)
+        self.system_settings.main_view.scroll_to_and_click(snd)
+        sleep(0.2)
         self.assertNotEqual(
             self.obj_test.GetSilentMode(),
             prev_value)
@@ -53,8 +44,8 @@ class SoundTestCase(SoundBaseTestCase):
             objectName="silentModeWarning")
         snd = self.system_settings.main_view.sound_page.select_single(
             objectName="silentMode")
-        self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(2)
+        self.system_settings.main_view.scroll_to_and_click(snd)
+        sleep(0.2)
         self.assertThat(
             sndwarn.get_properties()["visible"],
             Eventually(Equals(True)))
@@ -64,8 +55,8 @@ class SoundTestCase(SoundBaseTestCase):
         snd = self.system_settings.main_view.sound_page.select_single(
             objectName="callVibrate")
         prev_value = self.obj_test.GetIncomingCallVibrate()
-        self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(2)
+        self.system_settings.main_view.scroll_to_and_click(snd)
+        sleep(0.2)
         self.assertNotEqual(
             self.obj_test.GetIncomingCallVibrate(),
             prev_value)
@@ -75,8 +66,8 @@ class SoundTestCase(SoundBaseTestCase):
         snd = self.system_settings.main_view.sound_page.select_single(
             objectName="callVibrateSilentMode")
         prev_value = self.obj_test.GetIncomingCallVibrateSilentMode()
-        self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(2)
+        self.system_settings.main_view.scroll_to_and_click(snd)
+        sleep(0.2)
         self.assertNotEqual(
             self.obj_test.GetIncomingCallVibrateSilentMode(),
             prev_value)
@@ -86,8 +77,8 @@ class SoundTestCase(SoundBaseTestCase):
         snd = self.system_settings.main_view.sound_page.select_single(
             objectName="messageVibrate")
         prev_value = self.obj_test.GetIncomingMessageVibrate()
-        self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(2)
+        self.system_settings.main_view.scroll_to_and_click(snd)
+        sleep(0.2)
         self.assertNotEqual(
             self.obj_test.GetIncomingMessageVibrate(),
             prev_value)
@@ -97,8 +88,18 @@ class SoundTestCase(SoundBaseTestCase):
         snd = self.system_settings.main_view.sound_page.select_single(
             objectName="messageVibrateSilentMode")
         prev_value = self.obj_test.GetIncomingMessageVibrateSilentMode()
-        self.system_settings.main_view.pointing_device.click_object(snd)
-        sleep(2)
+        self.system_settings.main_view.scroll_to_and_click(snd)
+        sleep(0.2)
         self.assertNotEqual(
             self.obj_test.GetIncomingMessageVibrateSilentMode(),
             prev_value)
+
+    def test_keyboard_sound_switch(self):
+        """ Check that keyboard sound is present and clickable"""
+        kbd_snd = self.system_settings.main_view.sound_page.select_single(
+            objectName="keyboardSoundSwitch")
+        current_value = kbd_snd.get_properties()["checked"]
+        self.system_settings.main_view.scroll_to_and_click(kbd_snd)
+        self.assertThat(
+            kbd_snd.get_properties()["checked"], NotEquals(current_value))
+
