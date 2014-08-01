@@ -57,7 +57,6 @@ ItemPage {
             right: parent.right
             top: subtitle.bottom
             bottom: parent.bottom
-            margins: units.gu(2)
         }
         model: notificationsManager.model
         clip: true
