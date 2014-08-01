@@ -490,6 +490,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
                                              stdout=subprocess.PIPE)
 
         # spawn_server does not wait properly
+        # Reported as bug here: http://pad.lv/1350833
         sleep(2)
         self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
             ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
@@ -512,6 +513,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
                                              SYSTEM_IFACE, system_bus=True,
                                              stdout=subprocess.PIPE)
         # spawn_server does not wait properly
+        # Reported as bug here: http://pad.lv/1350833
         sleep(2)
         self.sys_mock = dbus.Interface(self.dbus_con.get_object(
             SYSTEM_IFACE, SYSTEM_SERVICE_OBJ), dbusmock.MOCK_IFACE)
@@ -526,9 +528,9 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
     def setUp(self):
         self.mock_for_launcher_reset()
         self.mock_for_factory_reset()
-        super(ResetBaseTestCase, self).setUp('reset')
-        self.assertThat(self.system_settings.main_view.reset_page.active,
-                        Eventually(Equals(True)))
+
+        super(ResetBaseTestCase, self).setUp()
+        self.reset_page = self.system_settings.main_view.go_to_reset_phone()
 
     def tearDown(self):
         self.mock_server.terminate()
