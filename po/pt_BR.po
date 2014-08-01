@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-17 05:39+0000\n"
-"Last-Translator: Pablo Diego Moço <Unknown>\n"
+"PO-Revision-Date: 2014-07-30 18:24+0000\n"
+"Last-Translator: Salomão Carneiro de Brito <salomaocar@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:34+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-01 07:12+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -52,7 +52,7 @@ msgstr "Senha"
 
 #: ../plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Senha visível"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/security-privacy//LockSecurity.qml:310
@@ -90,7 +90,7 @@ msgstr "Nome"
 
 #: ../plugins/wifi//NetworkDetails.qml:51
 msgid "Last connected"
-msgstr ""
+msgstr "Última conexão"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
 #: ../plugins/about//PageComponent.qml:149
@@ -411,27 +411,27 @@ msgstr "Licenças de software"
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "Detalhes da compilaçao do SO"
 
 #: ../plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "Número de compilação do SO"
 
 #: ../plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Parte da imagem do Ubuntu"
 
 #: ../plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Descrição da compilação do Ubuntu"
 
 #: ../plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "Parte do dispositivo de imagem"
 
 #: ../plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "Descrição do dispositivo de compilação"
 
 #: ../plugins/about//Version.qml:141
 msgid "Customization Image part"
@@ -491,7 +491,7 @@ msgstr "N/A"
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
-msgstr ""
+msgstr "Modo desenvolvedor"
 
 #: ../plugins/about//DevMode.qml:68
 msgid "In Developer Mode, anyone can access, "

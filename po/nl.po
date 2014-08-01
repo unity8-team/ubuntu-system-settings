@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-29 18:34+0000\n"
-"Last-Translator: rob <linuxned@gmail.com>\n"
+"PO-Revision-Date: 2014-07-30 10:52+0000\n"
+"Last-Translator: Pjotr12345 <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-30 07:02+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-01 07:12+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -249,7 +249,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr "Sta toegang tot locatie toe:"
+msgstr "Sta toegang tot uw locatie toe:"
 
 #: ../plugins/security-privacy//LockSecurity.qml:78
 msgid "Change passcode"
@@ -731,7 +731,7 @@ msgstr "GPS"
 
 #: ../plugins/battery//PageComponent.qml:392
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "U hebt GPS en/of Wi-Fi nodig voor een correcte locatiebepaling."
+msgstr "U hebt GPS en/of Wi-Fi nodig voor een precieze locatiebepaling."
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32

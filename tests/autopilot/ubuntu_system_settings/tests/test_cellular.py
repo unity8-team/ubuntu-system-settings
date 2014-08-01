@@ -6,6 +6,7 @@
 # by the Free Software Foundation.
 
 import dbus
+from gi.repository import Gio, GLib
 from time import sleep
 
 from autopilot.introspection.dbus import StateNotFoundError
@@ -23,9 +24,9 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 PREFERENCE_2G = '2G only (saves battery)'
 PREFERENCE_ANY = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
-LABEL_SIM_1 = 'SIM 1 (08123)'
-LABEL_SIM_2 = 'SIM 2 (123456)'
-LABEL_OFF = 'Off'
+USE_OFF = "useOff"
+USE_SIM_1 = "usesim1"
+USE_SIM_2 = "usesim2"
 
 
 class CellularTestCase(CellularBaseTestCase):
@@ -170,7 +171,7 @@ class CellularTestCase(CellularBaseTestCase):
             objectName="dataRoamingSwitch"
         )
         self.system_settings.main_view.scroll_to_and_click(roaming_switch)
-        sleep(2)
+        sleep(1.5)
         self.assertEqual(
             True, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
@@ -250,6 +251,12 @@ class CellularTestCase(CellularBaseTestCase):
 
         self.assert_selected_preference(2)
 
+    def test_that_sim_editor_is_hidden(self):
+        editor = self.system_settings.main_view.cellular_page.select_single(
+            objectName="simEditor"
+        )
+        self.assertFalse(editor.get_properties()['visible'])
+
 
 class DualSimCellularTestCase(CellularBaseTestCase):
 
@@ -311,7 +318,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def use_selector(self, label):
         obj = self.system_settings.main_view.cellular_page.select_single(
             objectName="use"
-        ).select_single('Label', text=label)
+        ).select_single(objectName=label)
         self.system_settings.main_view.scroll_to_and_click(obj)
 
     def assert_used(self, index):
@@ -321,75 +328,80 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertThat(
             obj.selectedIndex, Eventually(Equals(index)))
 
-    def test_use_sim_1(self):
-        self.use_selector(LABEL_OFF)
-        self.use_selector(LABEL_SIM_1)
-        sleep(0.7)
-        self.assertEqual(True, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
-        self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
+    def get_sim_name(self, num):
+        obj = self.system_settings.main_view.cellular_page.select_single(
+            objectName="simEditor"
+        ).select_single(objectName="editSim%d" % num)
+        return obj.get_properties()['text']
 
-    def test_use_sim_2(self):
-        self.use_selector(LABEL_OFF)
-        self.use_selector(LABEL_SIM_2)
+    def rename_sim(self, num, new_name):
+        obj = self.system_settings.main_view.cellular_page.select_single(
+            objectName="simEditor"
+        ).select_single(objectName="editSim%d" % num)
+        self.system_settings.main_view.scroll_to_and_click(obj)
+        field = self.system_settings.main_view.cellular_page.select_single(
+            objectName="nameField"
+        )
+        self.system_settings.main_view.scroll_to_and_click(field)
+        self.system_settings.main_view.scroll_to_and_click(
+            field.select_single(objectName="clear_button"))
+        self.keyboard.type(new_name)
+        self.system_settings.main_view.scroll_to_and_click(
+            self.system_settings.main_view.cellular_page.select_single(
+                objectName="doRename"))
+
+    def test_use_sim_1(self):
+        self.use_selector(USE_OFF)
+        self.use_selector(USE_SIM_1)
         sleep(0.7)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
+    def test_use_sim_2(self):
+        self.use_selector(USE_OFF)
+        self.use_selector(USE_SIM_2)
+        sleep(0.7)
+        self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
+        self.assertEqual(True, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
+
     def test_turn_off_both_sims(self):
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
         sleep(0.7)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
         self.assertEqual(False, self.modem_1.Get(CONNMAN_IFACE, 'Powered'))
 
     def test_use_gsm_for_sim_1(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_2G)
         sleep(0.7)
         self.assertEqual(
-            'gsm', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+            'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_any_for_sim_1(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_ANY)
         sleep(0.7)
         self.assertEqual(
-            'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+            'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_gsm_for_sim_2(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_2G)
         sleep(0.7)
         self.assertEqual(
-            'gsm', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+            'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_any_for_sim_2(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_2)
         self.select_preference(PREFERENCE_ANY)
         sleep(1)
         self.assertEqual(
             'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_when_sim_1_comes_online_ui_is_correct(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_ANY)
-        self.use_selector(LABEL_OFF)
-        sleep(0.7)
-        self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
-        self.modem_1.EmitSignal(
-            CONNMAN_IFACE,
-            'PropertyChanged',
-            'sv',
-            ['Powered', 'true'])
-
-        self.assertEqual(
-            'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
-        self.assert_used(1)
-        self.assert_selected_preference(1)
-
-    def test_when_sim_2_comes_online_ui_is_correct(self):
-        self.use_selector(LABEL_SIM_2)
-        self.select_preference(PREFERENCE_ANY)
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
         sleep(0.7)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_0.EmitSignal(
@@ -400,27 +412,25 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
         self.assertEqual(
             'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
-        self.assert_used(2)
+        self.assert_used(1)
         self.assert_selected_preference(1)
 
-    def test_both_sims_comes_online(self):
-        self.use_selector(LABEL_OFF)
-        sleep(2)
-        self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
-        self.modem_0.EmitSignal(
-            CONNMAN_IFACE,
-            'PropertyChanged',
-            'sv',
-            ['Powered', 'true'])
-
+    def test_when_sim_2_comes_online_ui_is_correct(self):
+        self.use_selector(USE_SIM_2)
+        self.select_preference(PREFERENCE_ANY)
+        self.use_selector(USE_OFF)
+        sleep(0.7)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_1.EmitSignal(
             CONNMAN_IFACE,
             'PropertyChanged',
             'sv',
             ['Powered', 'true'])
-        self.assert_used(1)
-        self.assert_selected_preference(0)
+
+        self.assertEqual(
+            'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+        self.assert_used(2)
+        self.assert_selected_preference(1)
 
     def test_roaming_switch(self):
         roaming_switch = self.system_settings.main_view.select_single(
@@ -430,7 +440,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertTrue(roaming_switch.get_properties()['enabled'])
 
         # click off
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
 
         # assert roaming_switch is disabled
         self.assertThat(
@@ -438,23 +448,23 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             Eventually(Equals(False)))
 
     def test_allow_roaming(self):
-        self.use_selector(LABEL_SIM_1)
+        self.use_selector(USE_SIM_1)
         self.assertEqual(
-            False, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
+            False, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
         roaming_switch = self.system_settings.main_view.select_single(
             objectName="dataRoamingSwitch"
         )
         self.system_settings.main_view.scroll_to_and_click(roaming_switch)
-        sleep(2)
+        sleep(1.5)
         self.assertEqual(
-            True, self.modem_1.Get(CONNMAN_IFACE, 'RoamingAllowed'))
+            True, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
     def test_no_radio_preference(self):
         self.select_preference(PREFERENCE_ANY)
-        self.use_selector(LABEL_OFF)
+        self.use_selector(USE_OFF)
 
-        self.modem_1.Set(RDO_IFACE, 'TechnologyPreference', '')
-        self.modem_1.EmitSignal(
+        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', '')
+        self.modem_0.EmitSignal(
             CONNMAN_IFACE,
             'PropertyChanged',
             'sv',
@@ -464,18 +474,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             self.data_preference_selector.get_properties()['enabled'],
             Eventually(Equals(False)))
 
-    def test_radio_preference_changes(self):
-        self.use_selector(LABEL_SIM_1)
-
-        self.modem_1.Set(RDO_IFACE, 'TechnologyPreference', 'any')
-        self.modem_1.EmitSignal(
-            RDO_IFACE,
-            'PropertyChanged',
-            'sv',
-            ['TechnologyPreference', 'any'])
-
-        self.assert_selected_preference(1)
-
     # see
     # https://gitorious.org/python-dbusmock/python-dbusmock/merge_requests/3
     @skip('skipped due to bug in dbusmock')
@@ -483,9 +481,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.navigate_to_carriers_page()
         self.navigate_to_carrier_page_for_sim(1)
         carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
-            objectName="carrierSelector"
-        )
+            toolkit_emulators.ItemSelector, objectName="carrierSelector")
         manual = carriers.select_single('Label', text="my.cool.telco")
         self.assertThat(manual, NotEquals(None))
 
@@ -496,8 +492,73 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.navigate_to_carriers_page()
         self.navigate_to_carrier_page_for_sim(2)
         carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
-            objectName="carrierSelector"
-        )
+            toolkit_emulators.ItemSelector, objectName="carrierSelector")
         manual = carriers.select_single('Label', text="my.cool.telco")
         self.assertThat(manual, NotEquals(None))
+
+    def test_radio_preference_changes(self):
+        self.use_selector(USE_SIM_1)
+
+        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', 'any')
+        self.modem_0.EmitSignal(
+            RDO_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['TechnologyPreference', 'any'])
+
+        self.assert_selected_preference(1)
+
+    def test_changing_sim1_name(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        old_name = gsettings.get_value('sim-names')['/ril_0']
+        new_name = 'FOO BAR'
+        self.rename_sim(1, new_name)
+
+        # wait for gsettings
+        sleep(1)
+        try:
+            self.assertEqual(
+                new_name, gsettings.get_value('sim-names')['/ril_0'])
+        except Exception as e:
+            raise e
+        finally:
+            self.rename_sim(1, old_name)
+            sleep(1)
+
+    def test_changing_sim2_name(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        old_name = gsettings.get_value('sim-names')['/ril_1']
+        new_name = 'BAR BAZ'
+        self.rename_sim(2, new_name)
+
+        # wait for gsettings
+        sleep(1)
+        try:
+            self.assertEqual(
+                new_name, gsettings.get_value('sim-names')['/ril_1'])
+        except Exception as e:
+            raise e
+        finally:
+            self.rename_sim(2, old_name)
+            # wait for gsettings
+            sleep(1)
+
+    def test_changes_to_sim_names_in_gsettings_are_reflected_in_ui(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        old_names = gsettings.get_value('sim-names')
+
+        new_names = old_names.unpack()
+        new_names['/ril_0'] = 'BAS QUX'
+        new_names = GLib.Variant('a{ss}', new_names)
+        gsettings.set_value('sim-names', new_names)
+
+        # wait for gsettings
+        sleep(1)
+        try:
+            self.assertIn(new_names['/ril_0'], self.get_sim_name(1))
+        except Exception as e:
+            raise e
+        finally:
+            gsettings.set_value('sim-names', old_names)
+            # wait for gsettings
+            sleep(1)

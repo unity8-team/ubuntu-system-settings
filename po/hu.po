@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-29 07:23+0000\n"
-"Last-Translator: Gabor Kelemen <kelemeng@openscope.org>\n"
+"PO-Revision-Date: 2014-07-31 11:21+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-30 07:02+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-01 07:12+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -135,7 +135,7 @@ msgstr "Jelmondat"
 #: ../plugins/security-privacy//LockSecurity.qml:30
 #: ../plugins/about//DevMode.qml:102
 msgid "Lock security"
-msgstr "Zárolás biztonsága"
+msgstr "Képernyőzár"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:62
 #: ../plugins/battery//PageComponent.qml:284
@@ -167,7 +167,7 @@ msgstr "Dash keresés"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr "Visszatérési érték innen:"
+msgstr "Találatok innen:"
 
 #: ../plugins/security-privacy//Dash.qml:46
 #: ../plugins/security-privacy//PageComponent.qml:52
@@ -337,23 +337,23 @@ msgstr "4 jegyű jelkód"
 
 #: ../plugins/security-privacy//LockSecurity.qml:333
 msgid "Swipe (no security)… "
-msgstr "Csúsztatás (nincs zárolás)... "
+msgstr "Csúsztatás (nincs zárolás)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:334
 msgid "4-digit passcode…"
-msgstr "4 jegyű jelkód..."
+msgstr "4 jegyű jelkód…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:335
 msgid "Passphrase…"
-msgstr "Jelmondat..."
+msgstr "Jelmondat…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:376
 msgid "Change passcode…"
-msgstr "Jelkód módosítása..."
+msgstr "Jelkód módosítása…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:377
 msgid "Change passphrase…"
-msgstr "Jelmondat módosítása..."
+msgstr "Jelmondat módosítása…"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:33
@@ -411,15 +411,15 @@ msgstr "Szoftver licencek"
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr "OS fordítás részletei"
+msgstr "Rendszer fordítás részletei"
 
 #: ../plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr "OS fordítási szám"
+msgstr "Rendszer buildszám"
 
 #: ../plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr "Ubuntu képrész"
+msgstr "Ubuntu lemezkép"
 
 #: ../plugins/about//Version.qml:85
 msgid "Ubuntu build description"
@@ -427,15 +427,15 @@ msgstr "Ubuntu fordítási leírás"
 
 #: ../plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr "Eszköz képrész"
+msgstr "Eszköz lemezkép"
 
 #: ../plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr "Eszköz ferdítási leírás"
+msgstr "Eszköz fordítási leírás"
 
 #: ../plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr "Képrész testreszabása"
+msgstr "Testreszabási lemezkép"
 
 #: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
 msgid "Storage"
@@ -459,7 +459,7 @@ msgstr "Képek"
 
 #: ../plugins/about//Storage.qml:91
 msgid "Other files"
-msgstr "Egyéb"
+msgstr "Egyéb fájlok"
 
 #: ../plugins/about//Storage.qml:92
 msgid "Used by apps"
@@ -521,7 +521,7 @@ msgstr "Szoftver:"
 
 #: ../plugins/about//PageComponent.qml:138
 msgid "OS"
-msgstr "OS"
+msgstr "Rendszer"
 
 #: ../plugins/about//PageComponent.qml:147
 msgid "Last updated"
@@ -752,7 +752,7 @@ msgstr "A környezethez igazítja a kijelző fényerejét"
 #: ../plugins/language//PageComponent.qml:101
 #: ../plugins/language//PageComponent.qml:111
 msgid "Spell checking"
-msgstr "Helyesírás ellenőrzés"
+msgstr "Helyesírás-ellenőrzés"
 
 #: ../plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -773,7 +773,7 @@ msgstr "Jelenlegi kiosztások:"
 
 #: ../plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr "A rendelkezésre álló kiosztások:"
+msgstr "Rendelkezésre álló kiosztások:"
 
 #: ../plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -791,7 +791,7 @@ msgstr "Nyelv és szöveg"
 
 #: ../plugins/language//PageComponent.qml:72
 msgid "Display language…"
-msgstr "Megjelenítési nyelv..."
+msgstr "Megjelenítési nyelv…"
 
 #: ../plugins/language//PageComponent.qml:121
 msgid "Auto completion"
@@ -799,7 +799,7 @@ msgstr "Automatikus kiegészítés"
 
 #: ../plugins/language//PageComponent.qml:131
 msgid "Word suggestions"
-msgstr "Szó javaslatok"
+msgstr "Szójavaslatok"
 
 #: ../plugins/language//PageComponent.qml:144
 msgid "Auto capitalization"
@@ -819,7 +819,8 @@ msgstr "Bluetooth párosítási kérés"
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "Erősítse meg, hogy a \"%1\" által megjelenített PIN megegyezik ezzel"
+msgstr ""
+"Erősítse meg, hogy a(z) „%1” által megjelenített PIN megegyezik ezzel"
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
@@ -829,7 +830,7 @@ msgstr "PIN megerősítése"
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr "PIN a következőhöz: %1"
+msgstr "„%1” PIN kódja"
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
@@ -840,13 +841,13 @@ msgstr "Párosítás"
 #: ../plugins/bluetooth//PageComponent.qml:71
 #, qt-format
 msgid "%1 (Connecting…)"
-msgstr "%1 (Kapcsolódás...)"
+msgstr "%1 (Kapcsolódás…)"
 
 #. TRANSLATORS: %1 is the display name of the device that is disconnecting
 #: ../plugins/bluetooth//PageComponent.qml:74
 #, qt-format
 msgid "%1 (Disconnecting…)"
-msgstr "%1 (Leválasztás...)"
+msgstr "%1 (Leválasztás…)"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Computer"
@@ -869,7 +870,7 @@ msgstr "Hálózat"
 
 #: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Headset"
-msgstr "Headset"
+msgstr "Fejhallgató"
 
 #: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Headphones"
@@ -885,7 +886,7 @@ msgstr "Egyéb hang"
 
 #: ../plugins/bluetooth//PageComponent.qml:89
 msgid "Joypad"
-msgstr "Joypad"
+msgstr "Játékvezérlő"
 
 #: ../plugins/bluetooth//PageComponent.qml:90
 msgid "Keyboard"
@@ -971,11 +972,11 @@ msgstr "Háttér"
 
 #: ../plugins/background//MainPage.qml:112
 msgid "Ubuntu Art"
-msgstr "Ubuntu Art"
+msgstr "Ubuntu kinézet"
 
 #: ../plugins/background//MainPage.qml:128
 msgid "Custom"
-msgstr "Egyedi beállítás"
+msgstr "Egyéni"
 
 #: ../plugins/background//WallpaperGrid.qml:190
 msgid "Remove"
@@ -1003,29 +1004,29 @@ msgstr "Hívás"
 #: ../plugins/phone//CallWaiting.qml:28 ../plugins/phone//CallWaiting.qml:63
 #: ../plugins/phone//PageComponent.qml:57
 msgid "Call waiting"
-msgstr "Hívás várakoztatás"
+msgstr "Hívásvárakoztatás"
 
 #: ../plugins/phone//CallWaiting.qml:78
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
-"Lehetővé teszi, hogy új hívást indítson vagy fogadjon, egy másik hívás "
-"közben és váltson közöttük"
+"Lehetővé teszi, hogy új hívást indítson vagy fogadjon egy másik hívás "
+"közben, és akár váltson is közöttük"
 
 #: ../plugins/phone//CallForwarding.qml:28
 #: ../plugins/phone//CallForwarding.qml:75
 #: ../plugins/phone//PageComponent.qml:51
 msgid "Call forwarding"
-msgstr "Hívás továbbítás"
+msgstr "Hívástovábbítás"
 
 #: ../plugins/phone//CallForwarding.qml:90
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
-"Egy másik számra irányítja a hívást ha nem veszi fel, a telefon foglalt, ki "
-"van kapcsolva vagy nincs térerő."
+"Egy másik számra irányítja a hívást, ha nem szeretné felvenni, foglalt a "
+"telefonja, ki van kapcsolva vagy nincs térerő."
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
@@ -1359,8 +1360,8 @@ msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
-"Minden dokumentum, elmentett játék, beállítások és egyéb elemek véglegesen "
-"törölve lesznek erről a telefonról."
+"Minden dokumentum, elmentett játék, beállítás és egyéb dolog véglegesen "
+"törölve lesz a telefonról."
 
 #: ../plugins/reset//EraseEverything.qml:31
 msgid "Erase & reset everything"
@@ -1403,7 +1404,7 @@ msgstr "Az indító és a kezdő képernyő visszaállítása"
 
 #: ../src/qml/MainWindow.qml:109
 msgid "System Settings"
-msgstr "Alapértelmezett beállítás"
+msgstr "Rendszerbeállítások"
 
 #: ../src/qml/MainWindow.qml:130
 msgid "Search"
@@ -1553,7 +1554,7 @@ msgstr "beállítások"
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:14
 msgid "Accessibility"
-msgstr "Kisegítő lehetőségek"
+msgstr "Akadálymentesítés"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:16
@@ -1603,7 +1604,7 @@ msgstr "akkumulátor"
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:48
 msgid "power"
-msgstr "áramellátás"
+msgstr "energia"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:52
