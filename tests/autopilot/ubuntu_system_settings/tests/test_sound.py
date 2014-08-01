@@ -102,4 +102,3 @@ class SoundTestCase(SoundBaseTestCase):
         self.system_settings.main_view.scroll_to_and_click(kbd_snd)
         self.assertThat(
             kbd_snd.get_properties()["checked"], NotEquals(current_value))
-
