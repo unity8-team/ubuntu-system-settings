@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: Josef Andersson <josef.andersson@fripost.org>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-24 13:56+0000\n"
+"PO-Revision-Date: 2014-08-02 19:07+0000\n"
 "Last-Translator: Josef Andersson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se.>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:34+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-03 06:13+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "Language: sv\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
@@ -491,7 +491,7 @@ msgstr "Ej tillämplig"
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
-msgstr ""
+msgstr "Utvecklarläge"
 
 #: ../plugins/about//DevMode.qml:68
 msgid "In Developer Mode, anyone can access, "
@@ -509,7 +509,7 @@ msgstr "Om den här telefonen"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Telefonnummer"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -541,7 +541,7 @@ msgstr "Regleringsinfo"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Utvecklarläge"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -708,12 +708,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "Igår"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "Idag"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -1136,11 +1136,11 @@ msgstr ""
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "Visa nyckel"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Ändra"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -1480,7 +1480,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Hej"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
