@@ -100,7 +100,7 @@ void DeviceModel::stopDiscovery()
 
 void DeviceModel::startDiscovery()
 {
-    if (m_bluezAdapter && !m_isDiscovering) {
+    if (m_bluezAdapter && m_isPowered && !m_isDiscovering) {
         m_bluezAdapter->asyncCall("StartDiscovery");
         m_isDiscovering = true;
         Q_EMIT(discoveringChanged(m_isDiscovering));
@@ -236,6 +236,8 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
         m_isPairable = value.toBool();
     } else if (key == "Discoverable") {
         setDiscoverable(value.toBool());
+    } else if (key == "Powered") {
+        setPowered(value.toBool());
     }
 }
 
@@ -244,6 +246,14 @@ void DeviceModel::setDiscoverable(bool discoverable)
     if (m_isDiscoverable != discoverable) {
         m_isDiscoverable = discoverable;
         Q_EMIT(discoverableChanged(m_isDiscoverable));
+    }
+}
+
+void DeviceModel::setPowered(bool powered)
+{
+    if (m_isPowered != powered) {
+        m_isPowered = powered;
+        Q_EMIT(poweredChanged(m_isPowered));
     }
 }
 
@@ -325,7 +335,36 @@ void DeviceModel::emitRowChanged(int row)
 
 void DeviceModel::slotDeviceCreated(const QDBusObjectPath &path)
 {
-    addDevice(path.path());
+    const QString service = "org.bluez";
+    const QString interface = "org.bluez.Device";
+    QScopedPointer<QDBusInterface> bluezDevice(
+        new QDBusInterface(service, path.path(), interface, m_dbus));
+
+    // A device was created. Now, we likely already have it, so let's find it
+    // again and finish the initialization.
+    QDBusReply<QMap<QString,QVariant> > properties
+        = bluezDevice->call("GetProperties");
+    if (properties.isValid()) {
+        QMapIterator<QString,QVariant> it(properties);
+        while (it.hasNext()) {
+            it.next();
+            if (it.key() == "Address") {
+                QSharedPointer<Device> device = getDeviceFromAddress(it.value().toString());
+
+                if (device) {
+                    device->initDevice(path.path(), m_dbus);
+                    QObject::connect(device.data(), SIGNAL(deviceChanged()),
+                                     this, SLOT(slotDeviceChanged()));
+                    addDevice(device);
+                } else {
+                    addDevice(path.path());
+                }
+                break;
+            }
+        }
+    } else {
+        qWarning() << "Invalid device properties for" << path.path();
+    }
 }
 
 void DeviceModel::slotDeviceFound(const QString                &address,
@@ -333,18 +372,26 @@ void DeviceModel::slotDeviceFound(const QString                &address,
 {
     Q_UNUSED(properties);
 
-    auto device = getDeviceFromAddress(address);
-    if (!device) // hey, we haven't seen this one before
-        m_bluezAdapter->asyncCall(QLatin1String("CreateDevice"), address);
+    QSharedPointer<Device> device = getDeviceFromAddress(address);
+
+    if (!device) {
+        QSharedPointer<Device> device(new Device(properties));
+        if (device->isValid()) {
+            addDevice(device);
+        }
+    }
 }
 
 void DeviceModel::slotDeviceRemoved(const QDBusObjectPath &path)
 {
-    Q_UNUSED(path);
+    /* Remove the device immediately, it will be listed again
+       once discovery results are returned.  */
 
-    /* This is a no-op because we want to list both paired & unpaired devices.
-       So, keep it in m_devices until a call to slotDeviceDisappeared()
-       indicates the device has disappeared altogether */
+    auto device = getDeviceFromPath(path.path());
+
+    const int row = findRowFromAddress(device->getAddress());
+    if ((row >= 0))
+        removeRow(row);
 }
 
 void DeviceModel::slotDeviceDisappeared(const QString &address)
@@ -389,13 +436,63 @@ QSharedPointer<Device> DeviceModel::getDeviceFromPath(const QString &path)
     return QSharedPointer<Device>();
 }
 
-void DeviceModel::pairDevice (const QString &address)
+void DeviceModel::addConnectAfterPairing(const QString &address, Device::ConnectionMode mode)
+{
+    QSharedPointer<Device> device = getDeviceFromAddress(address);
+    if (device) {
+        device->addConnectAfterPairing(mode);
+    } else {
+        qWarning() << "Device could not be found, can't add an operation";
+    }
+}
+
+void DeviceModel::slotCreateFinished(QDBusPendingCallWatcher *call)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = *call;
+
+    if (reply.isError()) {
+        qWarning() << "Could not create device:" << reply.error().message();
+    }
+
+    call->deleteLater();
+}
+
+void DeviceModel::createDevice (const QString &address)
 {
     if (m_bluezAdapter) {
-        m_bluezAdapter->asyncCall("CreatePairedDevice",
-                                  address,
-                                  qVariantFromValue(QDBusObjectPath(DBUS_AGENT_PATH)),
-                                  QString(DBUS_AGENT_CAPABILITY));
+        QDBusPendingCall pcall = m_bluezAdapter->asyncCall("CreatePairedDevice",
+                                                           address,
+                                                           qVariantFromValue(QDBusObjectPath(DBUS_AGENT_PATH)),
+                                                           QString(DBUS_AGENT_CAPABILITY));
+
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
+        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                         this, SLOT(slotCreateFinished(QDBusPendingCallWatcher*)));
+    } else {
+        qWarning() << "Default adapter is not available for device creation";
+    }
+}
+
+void DeviceModel::slotRemoveFinished(QDBusPendingCallWatcher *call)
+{
+    QDBusPendingReply<void> reply = *call;
+
+    if (reply.isError()) {
+        qWarning() << "Could not remove device:" << reply.error().message();
+    }
+    call->deleteLater();
+}
+
+void DeviceModel::removeDevice (const QString &path)
+{
+    if (m_bluezAdapter) {
+        QDBusPendingCall pcall = m_bluezAdapter->asyncCall("RemoveDevice", qVariantFromValue(QDBusObjectPath(path)));
+
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
+        QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+                         this, SLOT(slotRemoveFinished(QDBusPendingCallWatcher*)));
+    } else {
+        qWarning() << "Default adapter is not available for device removal";
     }
 }
 
@@ -417,11 +514,12 @@ QHash<int,QByteArray> DeviceModel::roleNames() const
 
     if (Q_UNLIKELY(names.empty())) {
         names[Qt::DisplayRole] = "displayName";
-        names[Qt::DecorationRole] = "iconName";
+        names[IconRole] = "iconPath";
         names[TypeRole] = "type";
         names[StrengthRole] = "strength";
         names[ConnectionRole] = "connection";
         names[AddressRole] = "addressName";
+        names[TrustedRole] = "trusted";
     }
 
     return names;
@@ -440,7 +538,7 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
             ret = device->isPaired() ? device->getName() : device->getName() + "…";
             break;
 
-        case Qt::DecorationRole:
+        case IconRole:
             ret = device->getIconName();
             break;
 
@@ -458,6 +556,10 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
 
         case AddressRole:
             ret = device->getAddress();
+            break;
+
+        case TrustedRole:
+            ret = device->isTrusted();
             break;
         }
     }
@@ -486,6 +588,13 @@ void DeviceFilter::filterOnConnections(Device::Connections connections)
     invalidateFilter();
 }
 
+void DeviceFilter::filterOnTrusted(bool trusted)
+{
+    m_trustedEnabled = true;
+    m_trustedFilter = trusted;
+    invalidateFilter();
+}
+
 bool DeviceFilter::filterAcceptsRow(int sourceRow,
                                     const QModelIndex &sourceParent) const
 {
@@ -500,6 +609,11 @@ bool DeviceFilter::filterAcceptsRow(int sourceRow,
     if (accepts && m_connectionsEnabled) {
         const int connection = childIndex.model()->data(childIndex, DeviceModel::ConnectionRole).value<int>();
         accepts = (m_connections & connection) != 0;
+    }
+
+    if (accepts && m_trustedEnabled) {
+        const bool trusted = childIndex.model()->data(childIndex, DeviceModel::TrustedRole).value<bool>();
+        accepts = trusted == m_trustedFilter;
     }
 
     return accepts;

@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -34,32 +35,30 @@ ItemPage {
     // pointers to sim 1 and 2, lazy loaded
     property alias sim1: simOneLoader.item
     property alias sim2: simTwoLoader.item
+    property var modemsSorted: manager.modems.slice(0).sort()
 
     states: [
         State {
             name: "singleSim"
             StateChangeScript {
                 name: "loadSim"
-                script: simOneLoader.setSource("Components/Sim.qml", {
-                    path: manager.modems[0],
-                    name: "SIM 1"
-                })
+                script: {
+                    var p = modemsSorted[0];
+                    simOneLoader.setSource("Components/Sim.qml", {
+                        path: p
+                    });
+                }
             }
         },
         State {
             name: "dualSim"
+            extend: "singleSim"
             StateChangeScript {
                 name: "loadSecondSim"
                 script: {
-                    // the ordering is completely depending on manager
-                    // TODO: proper sim names (from gsettings?)
-                    simOneLoader.setSource("Components/Sim.qml", {
-                        path: manager.modems[0],
-                        name: "SIM 1"
-                    });
+                    var p = modemsSorted[1];
                     simTwoLoader.setSource("Components/Sim.qml", {
-                        path: manager.modems[1],
-                        name: "SIM 2"
+                        path: p
                     });
                 }
             }
@@ -82,7 +81,6 @@ ItemPage {
     OfonoManager {
         id: manager
         Component.onCompleted: {
-            console.warn('Manager complete with', modems.length, 'sims.');
             if (modems.length === 1) {
                 root.state = "singleSim";
             } else if (modems.length === 2) {
@@ -99,7 +97,6 @@ ItemPage {
                     sim1: sim1
                 });
             }
-            console.warn('sim1 loaded, loading CellularSingleSim.qml into cellData');
         }
     }
 
@@ -112,7 +109,6 @@ ItemPage {
                 sim1: sim1,
                 sim2: sim2
             });
-            console.warn('sim2 loaded, loading CellularDualSim.qml into cellData');
         }
     }
 
@@ -185,6 +181,41 @@ ItemPage {
                 progression: true
                 visible: showAllUI
             }
+
+            SimEditor {
+                visible: root.state === "dualSim"
+                objectName: "simEditor"
+            }
         }
+    }
+
+    GSettings {
+        id: phoneSettings
+        schema.id: "com.ubuntu.phone"
+        Component.onCompleted: {
+            // set default names
+            var simNames = phoneSettings.simNames;
+            var m0 = modemsSorted[0];
+            var m1 = modemsSorted[1];
+            if (!simNames[m0]) {
+                simNames[m0] = "SIM 1";
+            }
+            if (!simNames[m1]) {
+                simNames[m1] = "SIM 2";
+            }
+            phoneSettings.simNames = simNames;
+        }
+    }
+
+    Binding {
+        target: sim1
+        property: "name"
+        value: phoneSettings.simNames[modemsSorted[0]]
+    }
+
+    Binding {
+        target: sim2
+        property: "name"
+        value: phoneSettings.simNames[modemsSorted[1]]
     }
 }
