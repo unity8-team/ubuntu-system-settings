@@ -148,14 +148,18 @@ void NotificationsManager::loadModel()
         for (int j = 0; j < keys.size(); ++j) {
             QString appname = keys.at(j);
             QVariantMap hook = hooks.value(appname).toMap();
-            if (hook.contains("desktop")) {
+            if (hook.contains("desktop") || hook.contains("scope")) {
                 QString key = pkgname+"::::"+appname;
                 QString appid = pkgname+"_"+appname+"_"+version+".desktop"; // Full versioned APP_ID + ".desktop"
                 char *display_name;
                 char *icon_fname;
                 app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
-                if (!display_name || !icon_fname) {
-                    continue; // Broken .desktop file
+                // fall back to the manifest's title & icon if missing from .desktop
+                if (!display_name) {
+                    display_name = object.value("title").toString();
+                }
+                if (!icon_fname) {
+                    icon_fname =  object.value("icon").toString();
                 }
                 NotificationItem *item = new NotificationItem();
                 bool blacklisted = m_blacklist.contains(key);
