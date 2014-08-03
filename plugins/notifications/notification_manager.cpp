@@ -91,8 +91,9 @@ void NotificationsManager::loadModel()
     legacy_helpers_dir.setFilter(QDir::Files);
     QStringList legacy_helpers = legacy_helpers_dir.entryList();
     for (int i = 0; i < legacy_helpers.size(); ++i) {
-            QString appid = legacy_helpers.at(i) + ".desktop"; // APP_ID + ".desktop"
-            QString key = appid+"::::"+appid;
+            QString appname = legacy_helpers.at(i);
+            QString appid = appname + ".desktop";
+            QString key = "::::"+appname;
             char *display_name;
             char *icon_fname;
             app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
@@ -146,9 +147,9 @@ void NotificationsManager::loadModel()
         // a "desktop" key.
         for (int j = 0; j < keys.size(); ++j) {
             QString appname = keys.at(j);
-            QString key = pkgname+"::::"+appname;
             QVariantMap hook = hooks.value(appname).toMap();
             if (hook.contains("desktop")) {
+                QString key = pkgname+"::::"+appname;
                 QString appid = pkgname+"_"+appname+"_"+version+".desktop"; // Full versioned APP_ID + ".desktop"
                 char *display_name;
                 char *icon_fname;
