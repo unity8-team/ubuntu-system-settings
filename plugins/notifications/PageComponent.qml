@@ -33,21 +33,21 @@ ItemPage {
     }
 
     ListItem.Base {
-		id: subtitle
-		height: labelSubtitle.height + units.gu(2)
-		Label {
-			id: labelSubtitle
-			text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notification Center.")
-			wrapMode: Text.WordWrap
-			anchors {
-				top: parent.top
-				left: parent.left
-				right: parent.right
-				margins: units.gu(1)
-			}
-			fontSize: "large"
-		}
-	}
+        id: subtitle
+        height: labelSubtitle.height + units.gu(2)
+        Label {
+            id: labelSubtitle
+            text: i18n.tr("Selected apps can alert you using notification bubbles, sounds, vibrations, and the Notification Center.")
+            wrapMode: Text.WordWrap
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+                margins: units.gu(1)
+            }
+            fontSize: "large"
+        }
+    }
 
     ListView {
         id: notificationsList
