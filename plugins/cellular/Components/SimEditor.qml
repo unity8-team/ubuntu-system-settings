@@ -26,7 +26,10 @@ Column {
     id: simList
     objectName: "simEditor"
 
-    anchors { left: parent.left; right: parent.right }
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
 
     states: [
         State {
@@ -75,22 +78,35 @@ Column {
     }
 
     ListItem.ExpandablesColumn {
-        anchors { left: parent.left; right: parent.right }
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
         height: expandedItem ? childrenRect.height + editor.height : childrenRect.height
 
         ListItem.Expandable {
             id: sim1Exp
-            expandedHeight: sim1Col.height + editor.height
+            expandedHeight: sim1Col.height
             objectName: "editSim1"
             Column {
                 id: sim1Col
-                anchors { left: parent.left; right: parent.right }
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 Item {
-                    anchors { left: parent.left; right: parent.right }
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
                     height: sim1Exp.collapsedHeight
                     Label {
                         objectName: "simLabel1"
-                        anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                        }
                         text: sim1.title
                     }
                 }
@@ -106,17 +122,27 @@ Column {
 
         ListItem.Expandable {
             id: sim2Exp
-            expandedHeight: sim2Col.height + units.gu(1)
+            expandedHeight: sim2Col.height
             objectName: "editSim2"
             Column {
                 id: sim2Col
-                anchors { left: parent.left; right: parent.right }
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 Item {
-                    anchors { left: parent.left; right: parent.right }
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
                     height: sim2Exp.collapsedHeight
                     Label {
                         objectName: "simLabel2"
-                        anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                        }
                         text: sim2.title
                     }
                 }
@@ -179,7 +205,6 @@ Column {
             height: units.gu(1)
             width: parent.width
         }
-
 
         Action {
             id: renameAction
