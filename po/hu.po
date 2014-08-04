@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-31 11:21+0000\n"
+"PO-Revision-Date: 2014-08-03 10:31+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-01 07:12+0000\n"
-"X-Generator: Launchpad (build 17141)\n"
+"X-Launchpad-Export-Date: 2014-08-04 06:31+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -1432,7 +1432,7 @@ msgstr "Kihagyás"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr "Nincs SIM kártya"
+msgstr "Nem található SIM kártya"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
@@ -1444,19 +1444,19 @@ msgstr "Folytatás előtt helyezzen be egy SIM kártyát."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr "Beállítás kész"
+msgstr "A beállítás befejeződött"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
-"Üdvözöljük az Ubuntu telefonos változatában. Melyben több ezer önkéntes és "
-"Canonical alkalmazott keze munkája van benne."
+"Üdvözöljük az Ubuntu telefonos változatában, mely több ezer önkéntes és "
+"Canonical alkalmazott munkája révén jut el Önhöz."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr "Most már elkezdheti használni az Ubuntu telefonját"
+msgstr "Most már elkezdheti használni az Ubuntus telefonját"
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1464,31 +1464,31 @@ msgstr "Befejezés"
 
 #: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr "Telefon beállítások"
+msgstr "Telefonbeállítások"
 
 #: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
-"A telefonja automatikusan elküldi a hibajelentéseket a Canonicalnak. Ezt a "
-"rendszerbeállításokban kapcsolhatja ki."
+"A telefonja automatikusan hibajelentéseket küld a Canonical-nak. Ezt a "
+"rendszerbeállításokban kikapcsolhatja."
 
 #: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
-"A telefon beazonosítja az Ön helyét. Ezt a rendszerbeállításokban "
+"A telefon beazonosítja az Ön helyét. Ezt szintén a rendszerbeállításokban "
 "kapcsolhatja ki."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr "Üdv"
+msgstr "Üdvözöljük"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr "Üdvözöljük az Ubuntu telefonban. Kezdjünk bele."
+msgstr "Üdvözöljük az Ubuntu telefonos változatában. Kezdjünk bele."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
