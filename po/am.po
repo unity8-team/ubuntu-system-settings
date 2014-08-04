@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-08-03 01:55+0000\n"
+"PO-Revision-Date: 2014-08-04 01:21+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-03 06:13+0000\n"
+"X-Launchpad-Export-Date: 2014-08-04 06:31+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
@@ -108,7 +108,7 @@ msgstr "የመግቢያ ቃል ማሳያ"
 
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
-msgstr ""
+msgstr "ኔትዎርክን መተው"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -163,11 +163,11 @@ msgstr "ወዲያውኑ ማስተኛ መቆለፊያ"
 #: ../plugins/security-privacy//Dash.qml:29
 #: ../plugins/security-privacy//PageComponent.qml:125
 msgid "Dash search"
-msgstr ""
+msgstr "ዳሽ ውስጥ መፈለጊያ"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr ""
+msgstr "የተመለሰው ውጤት ከ:"
 
 #: ../plugins/security-privacy//Dash.qml:46
 #: ../plugins/security-privacy//PageComponent.qml:52
@@ -342,7 +342,7 @@ msgstr "የ ማለፊያ ሕረግ መቀየሪያ…"
 #: ../plugins/security-privacy//PageComponent.qml:33
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:22
 msgid "Security & Privacy"
-msgstr ""
+msgstr "ደህንነት & የ ግል"
 
 #: ../plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
@@ -350,19 +350,19 @@ msgstr "ደህንነት:"
 
 #: ../plugins/security-privacy//PageComponent.qml:87
 msgid "SIM PIN"
-msgstr ""
+msgstr "SIM PIN"
 
 #: ../plugins/security-privacy//PageComponent.qml:93
 msgid "Privacy:"
-msgstr ""
+msgstr "የ ግል:"
 
 #: ../plugins/security-privacy//PageComponent.qml:97
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "የ እንኳን ደህና መጡ ሁኔታ መመልከቻ"
 
 #: ../plugins/security-privacy//PageComponent.qml:110
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "የ እንኳን ደህና መጡ መልእክቶች መመልከቻ"
 
 #: ../plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
@@ -374,7 +374,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
-msgstr ""
+msgstr "መመርመሪያ"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
@@ -390,7 +390,7 @@ msgstr "አልተላከም"
 
 #: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
 msgid "Software licenses"
-msgstr ""
+msgstr "የ ሶፍትዌር ፍቃዶች"
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
@@ -426,7 +426,7 @@ msgstr "ማጠራቀሚያ"
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
-msgstr ""
+msgstr "ኡቡንቱ የሚጠቀማቸው"
 
 #: ../plugins/about//Storage.qml:88
 msgid "Videos"
@@ -446,7 +446,7 @@ msgstr "ሌሎች ፋይሎች"
 
 #: ../plugins/about//Storage.qml:92
 msgid "Used by apps"
-msgstr ""
+msgstr "መተግበሪያ የሚጠቀማቸው"
 
 #: ../plugins/about//Storage.qml:142
 msgid "Total storage"
@@ -470,7 +470,7 @@ msgstr "በ መጠን"
 #: ../plugins/cellular//PageChooseCarriers.qml:66
 #: ../plugins/cellular//PageComponent.qml:179
 msgid "N/A"
-msgstr ""
+msgstr "ዝግጁ አይደለም"
 
 #: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
 msgid "Developer Mode"
@@ -492,11 +492,11 @@ msgstr "ስለዚህ ስልክ"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "የ ስልክ ቁጥር"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
-msgstr ""
+msgstr "ተከታታይ"
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -504,7 +504,7 @@ msgstr "ሶፍትዌር:"
 
 #: ../plugins/about//PageComponent.qml:138
 msgid "OS"
-msgstr ""
+msgstr "ስራት"
 
 #: ../plugins/about//PageComponent.qml:147
 msgid "Last updated"
@@ -532,7 +532,7 @@ msgstr "ጨዋታውን ማስቆሚያ"
 
 #: ../plugins/sound//SilentModeWarning.qml:30
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "ስልኩ ያለው በ ዝምታ ዘዴ ነው"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
@@ -542,11 +542,11 @@ msgstr "ድምፅ"
 
 #: ../plugins/sound//PageComponent.qml:73
 msgid "Silent Mode"
-msgstr ""
+msgstr "በ ዝምታ ዘዴ"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "ደዋይ:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -559,12 +559,12 @@ msgstr "የ ስልክ ጥሪ ድምፅ"
 
 #: ../plugins/sound//PageComponent.qml:132
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "በሚደወል ጊዜ ማንቀጥቀጫ"
 
 #: ../plugins/sound//PageComponent.qml:140
 #: ../plugins/sound//PageComponent.qml:173
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "በ ዝምታ ዘዴ ማንቀጥቀጫ"
 
 #: ../plugins/sound//PageComponent.qml:145
 msgid "Messages:"
@@ -577,7 +577,7 @@ msgstr "የተቀበሉት መልእክቶች"
 
 #: ../plugins/sound//PageComponent.qml:165
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "ማንቀጥቀጫ ከ መልእክት ድምፅ ጋር"
 
 #: ../plugins/sound//PageComponent.qml:178
 msgid "Other sounds:"
@@ -668,7 +668,7 @@ msgstr "አሁን በመሙላት ላይ"
 
 #: ../plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
-msgstr ""
+msgstr "መጨረሻ ሙሉ የተሞላው"
 
 #: ../plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
@@ -687,12 +687,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "ትናንት"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "ዛሬ"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -750,11 +750,11 @@ msgstr "የ ፊደል ገበታ አቀራረብ"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr ""
+msgstr "የ አሁኑ እቅድ:"
 
 #: ../plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr ""
+msgstr "ሁሉም እቅዶች ዝግጁ ናቸው:"
 
 #: ../plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
