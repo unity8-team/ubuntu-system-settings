@@ -330,8 +330,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def get_sim_name(self, num):
         obj = self.system_settings.main_view.cellular_page.select_single(
-            objectName="simEditor"
-        ).select_single(objectName="editSim%d" % num)
+            objectName="simLabel%d" % num)
         return obj.get_properties()['text']
 
     def rename_sim(self, num, new_name):

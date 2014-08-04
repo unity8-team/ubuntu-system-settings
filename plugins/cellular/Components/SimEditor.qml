@@ -89,6 +89,7 @@ Column {
                     anchors { left: parent.left; right: parent.right }
                     height: sim1Exp.collapsedHeight
                     Label {
+                        objectName: "simLabel1"
                         anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
                         text: sim1.title
                     }
@@ -114,6 +115,7 @@ Column {
                     anchors { left: parent.left; right: parent.right }
                     height: sim2Exp.collapsedHeight
                     Label {
+                        objectName: "simLabel2"
                         anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
                         text: sim2.title
                     }
