@@ -156,10 +156,10 @@ void NotificationsManager::loadModel()
                 app_data_from_desktop_id(appid.toUtf8().constData(), &display_name, &icon_fname);
                 // fall back to the manifest's title & icon if missing from .desktop
                 if (!display_name) {
-                    display_name = object.value("title").toString();
+                    display_name = object.value("title").toString().toUtf8().data();
                 }
                 if (!icon_fname) {
-                    icon_fname =  object.value("icon").toString();
+                    icon_fname =  object.value("icon").toString().toUtf8().data();
                 }
                 NotificationItem *item = new NotificationItem();
                 bool blacklisted = m_blacklist.contains(key);
