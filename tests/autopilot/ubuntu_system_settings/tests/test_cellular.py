@@ -251,12 +251,6 @@ class CellularTestCase(CellularBaseTestCase):
 
         self.assert_selected_preference(2)
 
-    def test_that_sim_editor_is_hidden(self):
-        editor = self.system_settings.main_view.cellular_page.select_single(
-            objectName="simEditor"
-        )
-        self.assertFalse(editor.get_properties()['visible'])
-
 
 class DualSimCellularTestCase(CellularBaseTestCase):
 
