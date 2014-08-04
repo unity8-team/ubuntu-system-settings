@@ -109,6 +109,7 @@ ItemPage {
                 sim1: sim1,
                 sim2: sim2
             });
+            simEditorLoader.source = "Components/SimEditor.qml";
         }
     }
 
@@ -119,13 +120,11 @@ ItemPage {
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors { left: parent.left; right: parent.right }
 
             Loader {
                 id: cellData
-                anchors.left: parent.left
-                anchors.right: parent.right
+                anchors { left: parent.left; right: parent.right }
             }
 
             ListItem.SingleValue {
@@ -182,9 +181,9 @@ ItemPage {
                 visible: showAllUI
             }
 
-            SimEditor {
-                visible: root.state === "dualSim"
-                objectName: "simEditor"
+            Loader {
+                id: simEditorLoader
+                anchors { left: parent.left; right: parent.right }
             }
         }
     }
