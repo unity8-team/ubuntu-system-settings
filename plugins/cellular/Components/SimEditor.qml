@@ -81,7 +81,7 @@ Column {
         ListItem.Expandable {
             id: sim1Exp
             expandedHeight: sim1Col.height + editor.height
-
+            objectName: "editSim1"
             Column {
                 id: sim1Col
                 anchors { left: parent.left; right: parent.right }
@@ -106,7 +106,7 @@ Column {
         ListItem.Expandable {
             id: sim2Exp
             expandedHeight: sim2Col.height + units.gu(1)
-
+            objectName: "editSim2"
             Column {
                 id: sim2Col
                 anchors { left: parent.left; right: parent.right }
