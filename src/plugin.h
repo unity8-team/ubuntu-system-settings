@@ -60,6 +60,8 @@ public:
     bool isVisible() const;
     bool hideByDefault() const;
 
+    void reset();
+
     QQmlComponent *entryComponent();
     QQmlComponent *pageComponent();
 

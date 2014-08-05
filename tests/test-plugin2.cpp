@@ -1,9 +1,9 @@
 /*
  * This file is part of system-settings
  *
- * Copyright (C) 2013 Canonical Ltd.
+ * Copyright (C) 2014 Canonical Ltd.
  *
- * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+ * Contact: Iain Lane <iain.lane@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published
@@ -18,21 +18,27 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SYSTEM_SETTINGS_BRIGHTNESS_PLUGIN_H
-#define SYSTEM_SETTINGS_BRIGHTNESS_PLUGIN_H
+#include "test-plugin2.h"
 
-#include <QObject>
-#include <SystemSettings/PluginInterface>
+#include <QDebug>
 
-class BrightnessPlugin: public QObject, public SystemSettings::PluginInterface2
+using namespace SystemSettings;
+
+TestPlugin2::TestPlugin2():
+    QObject()
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
-    Q_INTERFACES(SystemSettings::PluginInterface2)
+}
 
-public:
-    SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
-                                         QObject *parent = 0);
-};
+ItemBase *TestPlugin2::createItem(const QVariantMap &staticData,
+                                  QObject *parent)
+{
+    return NULL;
+}
 
-#endif // SYSTEM_SETTINGS_BRIGHTNESS_PLUGIN_H
+bool TestPlugin2::reset()
+{
+    qDebug() << "reset function in plugin";
+    return true;
+}
+
+#include "test-plugin2.moc"
