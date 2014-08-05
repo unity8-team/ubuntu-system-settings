@@ -1,9 +1,11 @@
 set(QML_SOURCES
     CallForwarding.qml
     CallWaiting.qml
+    DualSim.qml
     PageComponent.qml
     ServiceInfo.qml
     Services.qml
+    SingleSim.qml
     dateUtils.js
 )
 

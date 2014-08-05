@@ -25,10 +25,11 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 
 ItemPage {
-    title: i18n.tr("Call forwarding")
 
+    title: headerTitle
     property bool forwarding: callForwarding.voiceUnconditional !== ""
     property string modem
+    property string headerTitle: i18n.tr("Call forwarding")
 
     onForwardingChanged: {
         if (callForwardingSwitch.checked !== forwarding)

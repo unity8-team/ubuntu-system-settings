@@ -1,4 +1,4 @@
-/*
+ /*
  * This file is part of system-settings
  *
  * Copyright (C) 2013 Canonical Ltd.
@@ -25,8 +25,10 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 
 ItemPage {
-    title: i18n.tr("Call waiting")
+
+    title: headerTitle
     property string modem
+    property string headerTitle: i18n.tr("Call waiting")
 
     OfonoCallSettings {
         id: callSettings

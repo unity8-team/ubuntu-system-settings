@@ -24,12 +24,15 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
+
+    title: headerTitle
     property string carrierString
     property variant sim
     property var names: []
 
     // TRANSLATORS: %1 is the name of the (network) carrier
-    title: i18n.tr("%1 Services").arg(carrierString)
+    property string headerTitle: i18n.tr("%1 Services").arg(carrierString)
+
 
     Component.onCompleted: {
         var keys = [];

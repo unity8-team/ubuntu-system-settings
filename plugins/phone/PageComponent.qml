@@ -25,50 +25,62 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 
 ItemPage {
+    id: root
     title: i18n.tr("Phone")
-    property string carrierName: netop.name
-    property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
+    flickable: flick
+
+    property var modemsSorted: manager.modems.slice(0).sort()
+
+    states: [
+        State {
+            name: "singleSim"
+            PropertyChanges {
+                target: singleSim
+                source: "SingleSim.qml"
+            }
+        },
+        State {
+            name: "dualSim"
+            PropertyChanges {
+                target: dualSim
+                source: "DualSim.qml"
+            }
+        }
+    ]
 
     OfonoManager {
         id: manager
+        Component.onCompleted: {
+            if (modems.length === 1) {
+                root.state = "singleSim";
+            } else if (modems.length === 2) {
+                root.state = "dualSim";
+            }
+        }
     }
 
-    OfonoNetworkRegistration {
-        id: netop;
-        modemPath: manager.modems[0]
-        onNameChanged: carrierName = netop.name
-    }
-
-    OfonoSimManager {
-        id: sim
-        modemPath: manager.modems[0]
-    }
-
-    Column {
+    Flickable {
+        id: flick
         anchors.fill: parent
+        contentWidth: parent.width
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        ListItem.Standard {
-            text: i18n.tr("Call forwarding")
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {modem: manager.modems[0]})
-        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        ListItem.Standard {
-            text: i18n.tr("Call waiting")            
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {modem: manager.modems[0]})
-            showDivider: false
-        }
+            Loader {
+                id: singleSim
+                anchors.left: parent.left
+                anchors.right: parent.right
+            }
 
-        ListItem.Divider {}
-
-        ListItem.Standard {
-            // TRANSLATORS: %1 is the name of the (network) carrier
-            text: i18n.tr("%1 Services").arg(carrierString)
-            progression: true
-            enabled: sim.present
-            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"),
-                                      {carrierString: carrierString, sim: sim})
+            Loader {
+                id: dualSim
+                anchors.left: parent.left
+                anchors.right: parent.right
+            }
         }
     }
 }
