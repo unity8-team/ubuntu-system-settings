@@ -24,7 +24,7 @@ if len(sys.argv) != 3:
     sys.exit(1)
 
 f1, f2 = sys.argv[1:3]
-gettext.install("ubuntu-system-settings")
+_ = gettext.translation("ubuntu-system-settings").gettext
 
 # here you should look at the input (the contents of the file whose
 # name is in f1, which are guaranteed to be json). If it's a broadcast
@@ -61,6 +61,7 @@ gettext.install("ubuntu-system-settings")
 # broadcast notification, and notifies the user directly:
 
 
+icon = "/usr/share/ubuntu/settings/system/icons/settings-system-update.svg"
 obj = {
     "notification": {
         "emblem-counter": {
@@ -68,14 +69,14 @@ obj = {
             "visible": True,
         },
         "vibrate": {
-            "pattern": [50,150],
+            "pattern": [50, 150],
             "repeat": 3,
         },
         "card": {
             "summary": _("There's an updated system image."),
             "body": _("Tap to open the system updater."),
             "actions": ["settings:///system/system-update"],
-            "icon": "/usr/share/ubuntu/settings/system/icons/settings-system-update.svg",
+            "icon": icon,
             "timestamp": int(time.time()),
             "persist": True,
             "popup": True,
@@ -83,4 +84,4 @@ obj = {
     },
 }
 
-json.dump(obj, open(f2,"w"))
+json.dump(obj, open(f2, "w"))
