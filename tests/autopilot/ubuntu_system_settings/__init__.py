@@ -101,6 +101,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
         item.swipe_into_view()
         self.pointing_device.click_object(item)
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_phone_page(self):
+        return self._go_to_page('entryComponent-phone', 'phonePage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -156,6 +160,11 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def sound_page(self):
         """ Return 'Sound' page """
         return self.select_single(objectName='soundPage')
+
+    @property
+    def phone_page(self):
+        """ Return 'Phone' page """
+        return self.select_single(objectName='phonePage')
 
 
 class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -276,3 +285,109 @@ class SystemUpdatesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             if state['objectName'][1] == 'systemUpdatesPage':
                 return True
         return False
+
+
+class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Phone page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'phonePage':
+                return True
+        return False
+
+    def open_call_forwarding(self, sim=None):
+        """Return a call forwarding page"""
+        return self._go_to_call_forwarding(sim)
+
+    def _go_to_call_forwarding(self, sim):
+        find = "callFwd"
+        if sim:
+            find = "callFwdSim%d" % sim
+
+        return self._go_to_page(find, 'callForwardingPage')
+
+    def open_call_waiting(self, sim=None):
+        """Return a call waiting page"""
+        return self._go_to_call_waiting(sim)
+
+    def _go_to_call_waiting(self, sim):
+        find = "callWait"
+        if sim:
+            find = "callWaitSim%d" % sim
+
+        return self._go_to_page(find, 'callWaitingPage')
+
+    def open_sim_services(self, sim=None):
+        """Return a sim services page"""
+        return self._go_to_sim_services(sim)
+
+    def _go_to_sim_services(self, sim):
+        find = "simServices"
+        if sim:
+            find = "simServicesSim%d" % sim
+
+        return self._go_to_page(find, 'simServicesPage')
+
+
+class CallWaitingPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Call waiting page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'callWaitingPage':
+                return True
+        return False
+
+    def enable_call_waiting(self):
+        pass
+
+    def disable_call_waiting(self):
+        pass
+
+
+class CallForwardingPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Call forwarding page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'callForwardingPage':
+                return True
+        return False
+
+    def enable_call_forwarding(self):
+        pass
+
+    def disable_call_forwarding(self):
+        pass
+
+    def forward_to(self, to):
+        pass
+
+
+class SimServicesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Call waiting page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'simServicesPage':
+                return True
+        return False
+
+    def open_sim_service(self, service):
+        """Return a sim service page"""
+        pass
+
+# TODO: add pages for each relevant sim services page

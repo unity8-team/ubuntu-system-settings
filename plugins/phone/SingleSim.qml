@@ -36,12 +36,14 @@ Column {
     }
 
     ListItem.Standard {
+        objectName: "callFwd"
         text: i18n.tr("Call forwarding")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {modem: sim.path})
     }
 
     ListItem.Standard {
+        objectName: "callWait"
         text: i18n.tr("Call waiting")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {modem: sim.path})
@@ -51,6 +53,7 @@ Column {
     ListItem.Divider {}
 
     ListItem.Standard {
+        objectName: "simServices"
         // TRANSLATORS: %1 is the name of the (network) carrier
         text: i18n.tr("%1 Services").arg(carrierString)
         progression: true

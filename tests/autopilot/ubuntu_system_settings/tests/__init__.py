@@ -270,6 +270,13 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
         super(CellularBaseTestCase, self).setUp('cellular')
 
 
+class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+    def setUp(self):
+        """ Go to Phone page """
+        super(PhoneOfonoBaseTestCase, self).setUp('phone')
+        self.phone_page = self.system_settings.main_view.go_to_phone_page()
+
+
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         """Go to About page."""
@@ -479,8 +486,7 @@ class SoundBaseTestCase(
             'IncomingMessageVibrate': dbus.Boolean(False,
                                                    variant_level=1),
             'IncomingMessageVibrateSilentMode': dbus.Boolean(False,
-                                                             variant_level=1)
-            }
+                                                             variant_level=1)}
 
         # start dbus system bus
         self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,

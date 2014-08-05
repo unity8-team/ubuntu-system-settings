@@ -43,6 +43,7 @@ Column {
     }
 
     ListItem.Standard {
+        objectName: "callFwdSim1"
         text: i18n.tr("Call forwarding")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
@@ -52,6 +53,7 @@ Column {
     }
 
     ListItem.Standard {
+        objectName: "callWaitSim1"
         text: i18n.tr("Call waiting")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
@@ -61,6 +63,7 @@ Column {
     }
 
     ListItem.Standard {
+        objectName: "simServicesSim1"
         text: i18n.tr("Services")
         progression: true
         enabled: sim1.simMng.present
@@ -78,6 +81,7 @@ Column {
     }
 
     ListItem.Standard {
+        objectName: "callFwdSim2"
         text: i18n.tr("Call forwarding")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
@@ -87,6 +91,7 @@ Column {
     }
 
     ListItem.Standard {
+        objectName: "callWaitSim2"
         text: i18n.tr("Call waiting")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
@@ -96,6 +101,7 @@ Column {
     }
 
     ListItem.Standard {
+        objectName: "simServicesSim2"
         text: i18n.tr("Services")
         progression: true
         enabled: sim2.simMng.present

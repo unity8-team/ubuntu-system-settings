@@ -26,6 +26,7 @@ import MeeGo.QOfono 0.2
 
 ItemPage {
     id: root
+    objectName: "phonePage"
     title: i18n.tr("Phone")
     flickable: flick
 
