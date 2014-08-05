@@ -14,8 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
- * Sebastien Bacher <sebastien.bacher@canonical.com>
- *
+ * Alberto Mardegan <alberto.mardegan@canonical.com>
  */
 
 import QtQuick 2.0
