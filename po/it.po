@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-29 11:21+0000\n"
+"PO-Revision-Date: 2014-07-30 11:43+0000\n"
 "Last-Translator: Claudio Arseni <claudio.arseni@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-30 07:02+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-01 07:12+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -1060,12 +1060,17 @@ msgid ""
 "When hotspot is on, other devices can user your cellular data connection "
 "over Wi-Fi. Normal data charges apply."
 msgstr ""
+"Quando l'hotspot è attivo, altri dispositivi possono usare la connessioni "
+"dati del cellulare attraverso il wifi. I normali costi di connessione "
+"verranno applicati."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can user your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Altri dispositivi possono usare la connessione dati del cellulare attraverso "
+"il wifi. I normali costi di connessione verranno applicati."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1453,6 +1458,8 @@ msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Benvenuti in Ubuntu, offerto da migliaia di volontari e dalla brava gente di "
+"Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
@@ -1484,11 +1491,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Ciao"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Benvenuti in Ubuntu. Iniziamo."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"

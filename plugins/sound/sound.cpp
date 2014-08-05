@@ -50,6 +50,14 @@ void Sound::slotChanged(QString interface,
         Q_EMIT incomingCallSoundChanged();
     } else if (property == "IncomingMessageSound") {
         Q_EMIT incomingMessageSoundChanged();
+    } else if (property == "IncomingCallVibrate") {
+        Q_EMIT incomingCallVibrateChanged();
+    } else if (property == "IncomingMessageVibrate") {
+        Q_EMIT incomingMessageVibrateChanged();
+    } else if (property == "IncomingCallVibrateSilentMode") {
+        Q_EMIT incomingCallVibrateSilentModeChanged();
+    } else if (property == "IncomingMessageVibrateSilentMode") {
+        Q_EMIT incomingMessageVibrateSilentModeChanged();
     }
 }
 
@@ -59,6 +67,10 @@ void Sound::slotNameOwnerChanged()
     Q_EMIT incomingCallSoundChanged();
     Q_EMIT incomingMessageSoundChanged();
     Q_EMIT silentModeChanged();
+    Q_EMIT incomingCallVibrateChanged();
+    Q_EMIT incomingMessageVibrateChanged();
+    Q_EMIT incomingCallVibrateSilentModeChanged();
+    Q_EMIT incomingMessageVibrateSilentModeChanged();
 }
 
 QString Sound::getIncomingCallSound()
@@ -110,6 +122,74 @@ void Sound::setSilentMode(bool enabled)
                                       "SilentMode",
                                       QVariant::fromValue(enabled));
     Q_EMIT(silentModeChanged());
+}
+
+bool Sound::getIncomingCallVibrate()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "IncomingCallVibrate").toBool();
+}
+
+void Sound::setIncomingCallVibrate(bool enabled)
+{
+    if (enabled == getIncomingCallVibrate())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "IncomingCallVibrate",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(incomingCallVibrateChanged());
+}
+
+bool Sound::getIncomingCallVibrateSilentMode()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "IncomingCallVibrateSilentMode").toBool();
+}
+
+void Sound::setIncomingCallVibrateSilentMode(bool enabled)
+{
+    if (enabled == getIncomingCallVibrateSilentMode())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "IncomingCallVibrateSilentMode",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(incomingCallVibrateSilentModeChanged());
+}
+
+bool Sound::getIncomingMessageVibrate()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "IncomingMessageVibrate").toBool();
+}
+
+void Sound::setIncomingMessageVibrate(bool enabled)
+{
+    if (enabled == getIncomingMessageVibrate())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "IncomingMessageVibrate",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(incomingMessageVibrateChanged());
+}
+
+bool Sound::getIncomingMessageVibrateSilentMode()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "IncomingMessageVibrateSilentMode").toBool();
+}
+
+void Sound::setIncomingMessageVibrateSilentMode(bool enabled)
+{
+    if (enabled == getIncomingMessageVibrateSilentMode())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "IncomingMessageVibrateSilentMode",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(incomingMessageVibrateSilentModeChanged());
 }
 
 QStringList Sound::listSounds(const QString &dirString)
