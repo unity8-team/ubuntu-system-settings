@@ -80,9 +80,10 @@ Depends: ${misc:Depends},
 Recommends: suru-icon-theme,
             ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
-Conflicts: ubuntu-system-settings-example,
+Conflicts: ubuntu-system-settings-example
 # ubuntu-push-client shipped the system settings push helper until 0.60:
-           ubuntu-push-client (<<0.61),
+Breaks: ubuntu-push-client (<<0.61),
+Replaces: ubuntu-push-client (<<0.61),
 Description: System Settings application for Ubuntu Touch
  This package contains the System Settings application used on the
  Ubuntu Touch images, it's designed for phones, tablets and convergent
