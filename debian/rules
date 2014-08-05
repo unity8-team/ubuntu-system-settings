@@ -15,8 +15,6 @@ override_dh_auto_configure:
 	dh_auto_configure -- -DCMAKE_INSTALL_LOCALSTATEDIR="/var"
 
 override_dh_install:
-	cd debian/tmp && mkdir -p $(HELPER_DIR)
-	cp software-updates-helper.py debian/tmp/$(HELPER_DIR)/ubuntu-system-settings
 	cd tests/autopilot; \
 	set -ex; for python in $(shell py3versions -r); do \
 		$$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
