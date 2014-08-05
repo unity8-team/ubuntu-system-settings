@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
+#
 # Software Updates Push Notifications helper.
 #
 # This helper is called with one of three things:
