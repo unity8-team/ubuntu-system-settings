@@ -26,12 +26,14 @@ if len(sys.argv) != 3:
 f1, f2 = sys.argv[1:3]
 gettext.install("ubuntu-system-settings")
 
-# here you should look at the input. If it's a broadcast it will be the most
-# recent we've received, and will have passed a minimum amount of sanity
-# checking, but you can probably do more. As per the design on
-# https://wiki.ubuntu.com/SoftwareUpdates#Prompting if things are set to
-# auto-download you should go download them (in a child process -- this helper
-# process itself has 4 more seconds to live).
+# here you should look at the input (the contents of the file whose
+# name is in f1, which are guaranteed to be json). If it's a broadcast
+# it will be the most recent we've received, and will have passed a
+# minimum amount of sanity checking, but you can probably do more. As
+# per the design on https://wiki.ubuntu.com/SoftwareUpdates#Prompting
+# if things are set to auto-download you should go download them (in a
+# child process -- this helper process itself has 4 more seconds to
+# live).
 #
 # the broadcast payload will be a single json object looking like
 #   { image-channel/device-model": [build-number, channel-alias]}
@@ -50,6 +52,13 @@ gettext.install("ubuntu-system-settings")
 # send a notification as below, over dbus to Post. That's the third payload
 # this script will be called with; for that case you'd just pass the payload
 # through.
+#
+# For cases when you don't want to notify the user (yet), the correct
+# output (to be written to a file whose name is f2) is “{}”, i.e. an
+# empty json object.
+#
+# For now, this script assumes everything that comes in is a valid
+# broadcast notification, and notifies the user directly:
 
 
 obj = {
