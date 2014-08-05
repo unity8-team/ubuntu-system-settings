@@ -72,7 +72,7 @@ Depends: ${misc:Depends},
          click,
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
          urfkill,
-# for the session-migration script
+# for the session-migration script (python3 itself also for the push helper)
          python3,
          python3-gi,
          python3-dbus,
@@ -80,7 +80,9 @@ Depends: ${misc:Depends},
 Recommends: suru-icon-theme,
             ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
-Conflicts: ubuntu-system-settings-example
+Conflicts: ubuntu-system-settings-example,
+# ubuntu-push-client shipped the system settings push helper until 0.60:
+           ubuntu-push-client (<<0.61),
 Description: System Settings application for Ubuntu Touch
  This package contains the System Settings application used on the
  Ubuntu Touch images, it's designed for phones, tablets and convergent

@@ -7,12 +7,16 @@ export DH_VERBOSE=1
 include /usr/share/dpkg/buildflags.mk
 include /usr/share/dpkg/architecture.mk
 
+HELPER_DIR=usr/lib/ubuntu-push-client/legacy-helpers
+
 override_dh_auto_configure:
 	# Debian defines CMAKE_INSTALL_LOCALSTATEDIR as /usr/var, which is wrong.
 	# So until Debian bug 719148 is fixed, do it ourselves.
 	dh_auto_configure -- -DCMAKE_INSTALL_LOCALSTATEDIR="/var"
 
 override_dh_install:
+	cd debian/tmp && mkdir -p $(HELPER_DIR)
+	cp software-updates-helper.py debian/tmp/$(HELPER_DIR)/ubuntu-system-settings
 	cd tests/autopilot; \
 	set -ex; for python in $(shell py3versions -r); do \
 		$$python setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb; \
