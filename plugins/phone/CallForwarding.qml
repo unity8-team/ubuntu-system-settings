@@ -26,6 +26,7 @@ import MeeGo.QOfono 0.2
 
 ItemPage {
 
+    objectName: "callForwardingPage"
     title: headerTitle
     property bool forwarding: callForwarding.voiceUnconditional !== ""
     property string modem

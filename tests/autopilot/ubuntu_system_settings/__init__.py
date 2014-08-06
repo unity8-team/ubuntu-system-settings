@@ -169,11 +169,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         """ Return 'Sound' page """
         return self.select_single(objectName='soundPage')
 
-    @property
-    def phone_page(self):
-        """ Return 'Phone' page """
-        return self.select_single(objectName='phonePage')
-
 
 class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
@@ -315,38 +310,58 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'phonePage':
                 return True
         return False
 
-    def open_call_forwarding(self, sim=None):
-        """Return a call forwarding page"""
-        return self._go_to_call_forwarding(sim)
+    @autopilot.logging.log_action(logger.info)
+    def go_to_call_forwarding(self, sim=None):
+        """Open the Call Forwarding settings page.
 
-    def _go_to_call_forwarding(self, sim):
+        :param sim: TODO I'm not sure what this is for.
+        :returns: The Call Forwarding settings page.
+
+        """
         find = "callFwd"
         if sim:
             find = "callFwdSim%d" % sim
 
         return self._go_to_page(find, 'callForwardingPage')
 
-    def open_call_waiting(self, sim=None):
-        """Return a call waiting page"""
-        return self._go_to_call_waiting(sim)
+    def _go_to_page(self, item_object_name, page_object_name):
+        self._click_item(item_object_name)
+        page = self.get_root_instance().wait_select_single(
+            objectName=page_object_name)
+        page.active.wait_for(True)
+        return page
 
-    def _go_to_call_waiting(self, sim):
+    def _click_item(self, object_name):
+        item = self.select_single(objectName=object_name)
+        item.swipe_into_view()
+        self.pointing_device.click_object(item)
+
+    @autopilot.logging.log_action(logger.info)
+    def go_to_call_waiting(self, sim=None):
+        """Open the Call Waiting settings page.
+
+        :param sim: TODO I'm not sure what this is for.
+        :returns: The Call Waiting settings page.
+
+        """
         find = "callWait"
         if sim:
             find = "callWaitSim%d" % sim
-
         return self._go_to_page(find, 'callWaitingPage')
 
-    def open_sim_services(self, sim=None):
-        """Return a sim services page"""
-        return self._go_to_sim_services(sim)
+    @autopilot.logging.log_action(logger.info)
+    def go_to_sim_services(self, sim=None):
+        """Open the SIM Services settings page.
 
-    def _go_to_sim_services(self, sim):
+        :param sim: TODO I'm not sure what this is for.
+        :returns: The SIM Services settings page.
+
+        """
         find = "simServices"
         if sim:
             find = "simServicesSim%d" % sim
@@ -373,17 +388,9 @@ class CallWaitingPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         pass
 
 
-class CallForwardingPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call forwarding page."""
-
-    @classmethod
-    def validate_dbus_object(cls, path, state):
-        name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
-            if state['objectName'][1] == 'callForwardingPage':
-                return True
-        return False
 
     def enable_call_forwarding(self):
         pass

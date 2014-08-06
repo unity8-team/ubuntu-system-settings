@@ -7,18 +7,11 @@
 
 from __future__ import absolute_import
 
-from time import sleep
-
-from autopilot.matchers import Eventually
-from gi.repository import Gio
-from testtools.matchers import Contains, Equals
-
 from ubuntu_system_settings.tests import PhoneOfonoBaseTestCase
-from ubuntu_system_settings.utils.i18n import ugettext as _
 
 
 class PhoneTestCase(PhoneOfonoBaseTestCase):
     """Tests for Phone Page"""
 
     def test_call_fwd(self):
-        self.phone_page.open_call_forwarding()
+        self.phone_page.go_to_call_forwarding()
