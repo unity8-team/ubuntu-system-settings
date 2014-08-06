@@ -80,7 +80,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Developer Mode")
-                enabled: { if (securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe) true; else false;}
+                enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 control: Switch {
                     id: devModeSwitch
                     checked: storedInfo.getDeveloperMode
