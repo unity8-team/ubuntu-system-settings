@@ -273,7 +273,7 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """
-        super(PhoneOfonoBaseTestCase, self).setUp('phone')
+        super(PhoneOfonoBaseTestCase, self).setUp()
         self.phone_page = self.system_settings.main_view.go_to_phone_page()
 
 
