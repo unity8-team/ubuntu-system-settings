@@ -1,3 +1,14 @@
+ubuntu-system-settings (0.3+14.10.20140806-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Stop the wizard from crashing on exit by not redefining a property
+    that blew up when the wifi list was emptied. (LP: #1335298)
+
+  [ John R. Lenton ]
+  * Fix the depends to be on the right gsettings schema version.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 06 Aug 2014 05:58:03 +0000
+
 ubuntu-system-settings (0.3+14.10.20140805-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
