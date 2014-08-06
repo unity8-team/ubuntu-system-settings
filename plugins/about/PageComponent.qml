@@ -26,7 +26,6 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.StorageAbout 1.0
 import Ubuntu.SystemSettings.Update 1.0
 import MeeGo.QOfono 0.2
-import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: root
@@ -37,10 +36,6 @@ ItemPage {
 
     UbuntuStorageAboutPanel {
         id: backendInfos
-    }
-
-    UbuntuSecurityPrivacyPanel {
-        id: securityPrivacy
     }
 
     DeviceInfo {
