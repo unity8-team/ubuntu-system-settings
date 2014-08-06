@@ -24,6 +24,8 @@
 
 #include <QDebug>
 #include <QObject>
+#include <QQmlContext>
+#include <QQmlEngine>
 #include <QSignalSpy>
 #include <QTest>
 
@@ -40,6 +42,8 @@ private Q_SLOTS:
     void testCategory();
     void testKeywords();
     void testSorting();
+    void testReset();
+    void testResetInPlugin();
 };
 
 void PluginsTest::testCategory()
@@ -49,7 +53,7 @@ void PluginsTest::testCategory()
     manager.componentComplete();
 
     QSet<QString> expectedCategories;
-    expectedCategories << "phone" << "network";
+    expectedCategories << "phone" << "network" << "misc";
     QCOMPARE(manager.categories().toSet(), expectedCategories);
 
     QMap<QString, Plugin *> plugins = manager.plugins("phone");
@@ -116,6 +120,47 @@ void PluginsTest::testSorting()
 
     QCOMPARE(wireless->displayName(), QString("Wireless"));
     QCOMPARE(cellular->displayName(), QString("Bluetooth"));
+}
+
+void PluginsTest::testReset()
+{
+
+    PluginManager manager;
+    manager.classBegin();
+    manager.componentComplete();
+
+    QAbstractItemModel *model(manager.itemModel("network"));
+    Plugin *wireless = (Plugin *) model->data(model->index(0, 0),
+                                         ItemModel::ItemRole).value<QObject *>();
+
+    QQmlEngine engine;
+    QQmlContext *context = new QQmlContext(engine.rootContext());
+    QQmlEngine::setContextForObject(wireless, context);
+
+    /* This is how you check that a debug message was printed */
+    QTest::ignoreMessage(QtDebugMsg, "Hello");
+    wireless->reset();
+}
+
+void PluginsTest::testResetInPlugin()
+{
+    PluginManager manager;
+    manager.classBegin();
+    manager.componentComplete();
+
+    QAbstractItemModel *model(manager.itemModel("misc"));
+    Plugin *phone = (Plugin *) model->data(model->index(0, 0),
+                                         ItemModel::ItemRole).value<QObject *>();
+
+    QQmlEngine engine;
+    QQmlContext *context = new QQmlContext(engine.rootContext());
+    QQmlEngine::setContextForObject(phone, context);
+
+    /* This is how you check that a debug message was printed */
+    /* qDebug() inserts a space at the end */
+    QTest::ignoreMessage(QtDebugMsg, "reset function in plugin ");
+
+    phone->reset();
 }
 
 QTEST_MAIN(PluginsTest);

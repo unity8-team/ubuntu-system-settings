@@ -1,0 +1,9 @@
+{
+    "name": "Phone",
+    "icon": "nm-device-wireless",
+    "category": "misc",
+    "priority": 0,
+    "has-dynamic-keywords": true,
+    "has-dynamic-visibility": false,
+    "plugin": "test-plugin2"
+}
