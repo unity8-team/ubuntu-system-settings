@@ -30,7 +30,17 @@ ItemPage {
     id: root
 
     title: i18n.tr("Reset phone")
+    objectName: "resetPage"
     flickable: scrollWidget
+
+    // workaround for #1231729
+    // delay destroying popup until pageStack has been popped
+    property var popup
+    function done () {
+        popup.opacity = 0;
+        pageStack.pop();
+        popup.destroy(1000);
+    }
 
     Loader {
         id: buttonActions
@@ -59,24 +69,26 @@ ItemPage {
             ListItem.SingleControl {
                 control: Button {
                     id: resetLauncherHomeButton
-                    text: i18n.tr("Reset launcher & home screen…")
+                    objectName: "resetLauncher"
+                    text: i18n.tr("Reset Launcher")
                     width: parent.width - units.gu(4)
                     onClicked: {
-                        buttonActions.source = "ResetLauncherHome.qml"
-                        PopupUtils.open(buttonActions.item)
+                        buttonActions.source = "ResetLauncherHome.qml";
+                        root.popup = PopupUtils.open(buttonActions.item);
                     }
                 }
                 showDivider: false
             }
 
             ListItem.SingleControl {
+                visible: false // enabled when backend is ready/useful
                 control: Button {
                     id: resetAllSettingsButton
                     text: i18n.tr("Reset all system settings…")
                     width: parent.width - units.gu(4)
                     onClicked: {
-                        buttonActions.source = "ResetAllSettings.qml"
-                        PopupUtils.open(buttonActions.item)
+                        buttonActions.source = "ResetAllSettings.qml";
+                        root.popup = PopupUtils.open(buttonActions.item);
                     }
                 }
                 showDivider: false
@@ -85,11 +97,12 @@ ItemPage {
             ListItem.SingleControl {
                 control: Button {
                     id: eraseEverythingButton
-                    text: i18n.tr("Erase & reset everything…")
+                    objectName: "factoryReset"
+                    text: i18n.tr("Erase & Reset Everything…")
                     width: parent.width - units.gu(4)
                     onClicked: {
-                        buttonActions.source = "EraseEverything.qml"
-                        PopupUtils.open(buttonActions.item)
+                        buttonActions.source = "EraseEverything.qml";
+                        root.popup = PopupUtils.open(buttonActions.item);
                     }
                 }
                 showDivider: false

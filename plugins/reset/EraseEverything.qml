@@ -26,15 +26,33 @@ Component {
     id: eraseEverything
     Dialog {
         id: dialog
+        states: State {
+            name: "clicked"
+            PropertyChanges {
+                target: action
+                enabled: false
+            }
+            PropertyChanges {
+                target: cancel
+                enabled: false
+            }
+        }
+        objectName: "factoryResetDialog"
         text: i18n.tr("All documents, saved games, settings, and other items will be permanently deleted from this phone.")
         Button {
-            text: i18n.tr("Erase & reset everything")
-            enabled: false /* TODO: enable when there is a backend */
-            onClicked: PopupUtils.close(dialog)
+            id: action
+            text: i18n.tr("Erase & Reset Everything")
+            objectName: "factoryResetAction"
+            onClicked: {
+                dialog.state = "clicked";
+                resetBackend.factoryReset();
+                root.done();
+            }
         }
         Button {
+            id: cancel
             text: i18n.tr("Cancel")
-            onClicked: PopupUtils.close(dialog)
+            onClicked: PopupUtils.close(dialog);
         }
     }
 }

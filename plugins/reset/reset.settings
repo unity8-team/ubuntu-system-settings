@@ -12,5 +12,5 @@
     "has-dynamic-visibility": false,
     "entry-component": "EntryComponent.qml",
     "page-component": "PageComponent.qml",
-    "hide-by-default": true
+    "hide-by-default": false
 }

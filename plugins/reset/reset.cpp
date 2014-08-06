@@ -23,48 +23,57 @@
 #include <QDBusReply>
 #include <unistd.h>
 #include <QtCore/QDebug>
+#include <QDBusMetaType>
 
-Reset::Reset(QObject *parent) :
-    QObject(parent),
-    m_systemBusConnection (QDBusConnection::systemBus()),
-    m_accountsserviceIface ("org.freedesktop.Accounts",
-                            "/org/freedesktop/Accounts",
-                            "org.freedesktop.Accounts",
-                             m_systemBusConnection)
+typedef QList<QVariantMap> resetLauncherItemsArg;
+Q_DECLARE_METATYPE(resetLauncherItemsArg)
+
+Reset::Reset(QObject *parent)
+    : QObject(parent),
+    m_systemBusConnection(QDBusConnection::systemBus())
 {
-    if (!m_accountsserviceIface.isValid()) {
-        return;
-    }
-
-    QDBusReply<QDBusObjectPath> qObjectPath = m_accountsserviceIface.call(
-                "FindUserById", qlonglong(getuid()));
-
-    if (qObjectPath.isValid()) {
-        m_objectPath = qObjectPath.value().path();
+    static bool isRegistered = false;
+    if(!isRegistered) {
+        qDBusRegisterMetaType<resetLauncherItemsArg>();
+        isRegistered = true;
     }
 }
 
 bool Reset::resetLauncher()
 {
-    QDBusInterface userInterface (
-                "org.freedesktop.Accounts",
-                m_objectPath,
-                "org.freedesktop.DBus.Properties.Set",
-                m_systemBusConnection,
-                this);
-
-    if (!userInterface.isValid())
-        return false;
-
+    qWarning() << "resetLauncher";
     QList<QVariantMap> items;
     QVariantMap defaults;
     defaults.insert("defaults", true);
     items << defaults;
-    /* TODO: test again-enable once the unity side lands
-        userInterface.call("Set",
-                       "com.canonical.unity.AccountsService",
-                       "launcher-items",
-                       QVariant::fromValue(items));*/
+    QVariant answer = m_accountsService.setUserProperty(
+                "com.canonical.unity.AccountsService",
+                "launcher-items",
+                QVariant::fromValue(items));
+
+    if (answer.isValid())
+        return true;
+
+    qWarning() << "Failed making call";
+    return false;
+}
+
+bool Reset::factoryReset()
+{
+    QDBusInterface systemServiceInterface (
+                "com.canonical.SystemImage",
+                "/Service",
+                "com.canonical.SystemImage",
+                m_systemBusConnection,
+                this);
+
+    if (!systemServiceInterface.isValid())
+        return false;
+
+    QDBusReply<QString> reply = systemServiceInterface.call("FactoryReset");
+    if (!reply.isValid())
+        return false;
+
     return true;
 }
 

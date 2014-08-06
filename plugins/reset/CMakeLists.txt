@@ -14,6 +14,8 @@ add_library(UbuntuResetPanel MODULE
 )
 qt5_use_modules(UbuntuResetPanel Qml Quick DBus)
 
+target_link_libraries(UbuntuResetPanel uss-accountsservice)
+
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Reset)
 install(TARGETS UbuntuResetPanel DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})

@@ -24,19 +24,34 @@ import Ubuntu.Components.Popups 0.1
 
 Component {
     id: resetLauncherHome
-
     Dialog {
         id: dialog
-        text: i18n.tr("The contents and layout of the launcher, and the filters in the home screen will be returned to their original settings.")
+        states: State {
+            name: "clicked"
+            PropertyChanges {
+                target: action
+                enabled: false
+            }
+            PropertyChanges {
+                target: cancel
+                enabled: false
+            }
+        }
+        text: i18n.tr("The Launcher will be returned to its original contents.")
+        objectName: "resetLauncherDialog"
         Button {
-            text: i18n.tr("Reset launcher & home screen")
+            id: action
+            text: i18n.tr("Reset Launcher")
+            objectName: "resetLauncherAction"
             onClicked: {
-                unitySettings.schema.reset("favorites")
-                resetBackend.resetLauncher()
-                PopupUtils.close(dialog)
+                dialog.state = "clicked";
+                unitySettings.schema.reset("favorites");
+                resetBackend.resetLauncher();
+                root.done();
             }
         }
         Button {
+            id: cancel
             text: i18n.tr("Cancel")
             onClicked: PopupUtils.close(dialog)
         }
