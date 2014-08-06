@@ -34,6 +34,8 @@ CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 SIM_IFACE = 'org.ofono.SimManager'
 NETREG_IFACE = 'org.ofono.NetworkRegistration'
+CALL_FWD_IFACE = 'org.ofono.CallForwarding'
+CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
 SYSTEM_IFACE = 'com.canonical.SystemImage'
 SYSTEM_SERVICE_OBJ = '/Service'
 
@@ -202,18 +204,43 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', SIM_IFACE)), ])
 
+    def mock_call_forwarding(self, modem):
+        modem.AddProperty(
+            CALL_FWD_IFACE, 'VoiceUnconditional', '')
+        modem.AddMethods(
+            CALL_FWD_IFACE,
+            [('GetProperties', '', 'a{sv}',
+              'ret = self.GetAll("%s")' % CALL_FWD_IFACE),
+                ('SetProperty', 'sv', '',
+                 'self.Set("IFACE", args[0], args[1]); '
+                 'self.EmitSignal("IFACE",\
+                 "PropertyChanged", "sv", [args[0], args[1]])'
+                    .replace('IFACE', CALL_FWD_IFACE)), ])
+
+    def mock_call_settings(self, modem):
+        modem.AddProperty(
+            CALL_SETTINGS_IFACE, 'VoiceCallWaiting', 'disabled')
+        modem.AddMethods(
+            CALL_SETTINGS_IFACE,
+            [('GetProperties', '', 'a{sv}',
+              'ret = self.GetAll("%s")' % CALL_SETTINGS_IFACE),
+                ('SetProperty', 'sv', '',
+                 'self.Set("IFACE", args[0], args[1]); '
+                 'self.EmitSignal("IFACE",\
+                 "PropertyChanged", "sv", [args[0], args[1]])'
+                    .replace('IFACE', CALL_SETTINGS_IFACE)), ])
+
     def add_sim1(self):
         # create modem_0 proxy
         self.modem_0 = self.dbus_con.get_object('org.ofono', '/ril_0')
 
         # Add an available carrier
         self.mock_carriers('ril_0')
-
         self.mock_radio_settings(self.modem_0)
-
         self.mock_connection_manager(self.modem_0)
-
         self.mock_sim_manager(self.modem_0)
+        self.mock_call_forwarding(self.modem_0)
+        self.mock_call_settings(self.modem_0)
 
         self.modem_0.AddMethods('org.ofono.NetworkRegistration', [
             ('GetProperties', '', 'a{sv}',
@@ -242,6 +269,8 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.mock_carriers(second_modem)
         self.mock_radio_settings(self.modem_1)
         self.mock_connection_manager(self.modem_1)
+        self.mock_call_forwarding(self.modem_1)
+        self.mock_call_settings(self.modem_1)
 
         self.mock_sim_manager(self.modem_1, {
             'SubscriberNumbers': ['08123', '938762783']

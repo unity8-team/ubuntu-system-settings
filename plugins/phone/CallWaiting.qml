@@ -25,7 +25,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 
 ItemPage {
-
+    objectName: "callWaitingPage"
     title: headerTitle
     property string modem
     property string headerTitle: i18n.tr("Call waiting")
@@ -46,6 +46,7 @@ ItemPage {
 
     Switch {
         id: callWaitingSwitch
+        objectName: "callWaitingSwitch"
         visible: !callWaitingIndicator.running
         checked: callSettings.voiceCallWaiting !== "disabled"
         onClicked: {

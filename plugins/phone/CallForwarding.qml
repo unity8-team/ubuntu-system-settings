@@ -52,6 +52,7 @@ ItemPage {
 
     Switch {
         id: callForwardingSwitch
+        objectName: "callForwardingSwitch"
         checked: forwarding
         enabled: (forwarding === checked)
         visible: callForwardingItem.control === callForwardingSwitch
@@ -103,6 +104,7 @@ ItemPage {
             visible: callForwardingSwitch.checked
             control: TextInput {
                 id: destNumberField
+                objectName: "destNumberField"
                 horizontalAlignment: TextInput.AlignRight
                 width: forwardToItem.width/2
                 inputMethodHints: Qt.ImhDialableCharactersOnly
@@ -135,6 +137,7 @@ ItemPage {
                 spacing: units.gu(2)
 
                 Button {
+                    objectName: "cancel"
                     text: i18n.tr("Cancel")
                     width: (buttonsRowId.width-units.gu(2)*4)/3
                     enabled: !callForwardingIndicator.running
@@ -147,6 +150,7 @@ ItemPage {
                 }
 
                 Button {
+                    objectName: "set"
                     text: i18n.tr("Set")
                     width: (buttonsRowId.width-units.gu(2)*4)/3
                     enabled: !callForwardingIndicator.running

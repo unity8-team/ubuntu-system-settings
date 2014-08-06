@@ -24,7 +24,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ItemPage {
-
+    objectName: "servicesPage"
     title: headerTitle
     property string carrierString
     property variant sim

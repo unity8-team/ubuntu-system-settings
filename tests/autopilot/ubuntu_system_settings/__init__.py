@@ -26,6 +26,7 @@ from time import sleep
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection, platform
+from autopilot.input import Keyboard
 
 
 logger = logging.getLogger(__name__)
@@ -319,7 +320,8 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def go_to_call_forwarding(self, sim=None):
         """Open the Call Forwarding settings page.
 
-        :param sim: TODO I'm not sure what this is for.
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
         :returns: The Call Forwarding settings page.
 
         """
@@ -345,7 +347,8 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def go_to_call_waiting(self, sim=None):
         """Open the Call Waiting settings page.
 
-        :param sim: TODO I'm not sure what this is for.
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
         :returns: The Call Waiting settings page.
 
         """
@@ -358,7 +361,8 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def go_to_sim_services(self, sim=None):
         """Open the SIM Services settings page.
 
-        :param sim: TODO I'm not sure what this is for.
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
         :returns: The SIM Services settings page.
 
         """
@@ -366,53 +370,86 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         if sim:
             find = "simServicesSim%d" % sim
 
-        return self._go_to_page(find, 'simServicesPage')
+        return self._go_to_page(find, 'servicesPage')
 
 
-class CallWaitingPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call waiting page."""
 
-    @classmethod
-    def validate_dbus_object(cls, path, state):
-        name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
-            if state['objectName'][1] == 'callWaitingPage':
-                return True
-        return False
+    def _get_switch_checked(self):
+        return self.wait_select_single(
+            objectName="callWaitingSwitch").checked
+
+    def _click_switch(self):
+        switch = self.wait_select_single(
+            objectName="callWaitingSwitch")
+        self.pointing_device.click_object(switch)
 
     def enable_call_waiting(self):
-        pass
+        if not self._get_switch_checked():
+            self._click_switch()
 
     def disable_call_waiting(self):
-        pass
+        if self._get_switch_checked():
+            self._click_switch()
 
 
 class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call forwarding page."""
 
+    def _get_switch_checked(self):
+        return self.wait_select_single(
+            objectName="callForwardingSwitch").checked
+
+    def _click_switch(self):
+        switch = self.wait_select_single(
+            objectName="callForwardingSwitch")
+        self.pointing_device.click_object(switch)
+
+    def _focus_number_input(self):
+        inpt = self.wait_select_single(
+            objectName="destNumberField")
+        self.pointing_device.click_object(inpt)
+
+    def _click_set(self):
+        button = self.wait_select_single(
+            objectName="set")
+        self.pointing_device.click_object(button)
+
+    def _click_cancel(self):
+        button = self.wait_select_single(
+            objectName="cancel")
+        self.pointing_device.click_object(button)
+
+    @property
+    def get_forwarding(self):
+        return self.wait_select_single(
+            objectName="destNumberField").text
+
     def enable_call_forwarding(self):
-        pass
+        if not self._get_switch_checked():
+            self._click_switch()
 
     def disable_call_forwarding(self):
-        pass
+        if self._get_switch_checked():
+            self._click_switch()
 
-    def forward_to(self, to):
-        pass
+    def set_forward(self, number, input_method=None):
+        if not input_method:
+            input_method = Keyboard.create()
+
+        self.enable_call_forwarding()
+
+        self._focus_number_input()
+        input_method.type(number)
+        self._click_set()
 
 
-class SimServicesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class Services(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call waiting page."""
-
-    @classmethod
-    def validate_dbus_object(cls, path, state):
-        name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
-            if state['objectName'][1] == 'simServicesPage':
-                return True
-        return False
 
     def open_sim_service(self, service):
         """Return a sim service page"""
