@@ -320,22 +320,27 @@ class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         item.swipe_into_view()
         self.pointing_device.click_object(item)
 
-    def open_call_waiting(self, sim=None):
-        """Return a call waiting page"""
-        return self._go_to_call_waiting(sim)
+    @autopilot.logging.log_action(logger.info)
+    def go_to_call_waiting(self, sim=None):
+        """Open the Call Waiting settings page.
 
-    def _go_to_call_waiting(self, sim):
+        :param sim: TODO I'm not sure what this is for.
+        :returns: The Call Waiting settings page.
+
+        """
         find = "callWait"
         if sim:
             find = "callWaitSim%d" % sim
-
         return self._go_to_page(find, 'callWaitingPage')
 
-    def open_sim_services(self, sim=None):
-        """Return a sim services page"""
-        return self._go_to_sim_services(sim)
+    @autopilot.logging.log_action(logger.info)
+    def go_to_sim_services(self, sim=None):
+        """Open the SIM Services settings page.
 
-    def _go_to_sim_services(self, sim):
+        :param sim: TODO I'm not sure what this is for.
+        :returns: The SIM Services settings page.
+
+        """
         find = "simServices"
         if sim:
             find = "simServicesSim%d" % sim
