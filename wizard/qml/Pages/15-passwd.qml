@@ -26,7 +26,7 @@ import "../Components" as LocalComponents
  * answer.  We don't run as root, so if we did set the password immediately,
  * we'd need to prompt for their previous password when they came back and
  * changed their answer.  Which is silly UX.  So instead, we just keep track
- * of their choice and set the password at the end (see 80-finished.qml).
+ * of their choice and set the password at the end (see main.qml).
  * Setting the password shouldn't fail, since Ubuntu Touch has loose password
  * requirements, but we'll check what we can here.  Ideally we'd be able to ask
  * the system if a password is legal without actually setting that password.
