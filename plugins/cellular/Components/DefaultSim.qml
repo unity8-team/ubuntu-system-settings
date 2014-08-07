@@ -21,25 +21,47 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
-ListItem.ItemSelector {
+Column {
 
     property var m: ["ask", sim1.path, sim2.path]
 
     function getNameFromIndex (index) {
         return [i18n.tr("Ask me each time"), sim1.title, sim2.title][index];
-
     }
 
-    id: callsDefaultSim
-    text: i18n.tr("For outgoing calls, use:")
-    expanded: true
-    model: m
-    delegate: OptionSelectorDelegate {
-        text: getNameFromIndex(index);
+    ListItem.ItemSelector {
+        id: callsDefaultSim
+        text: i18n.tr("For outgoing calls, use:")
+        expanded: true
+        model: m
+        delegate: OptionSelectorDelegate {
+            text: getNameFromIndex(index);
+        }
+        selectedIndex: m.indexOf(phoneSettings.defaultSimForCalls)
+        onDelegateClicked: {
+            phoneSettings.defaultSimForCalls = m[index];
+        }
     }
-    selectedIndex: m.indexOf(phoneSettings.defaultSimForCalls)
-    onDelegateClicked: {
-        phoneSettings.defaultSimForCalls = m[index];
 
+    ListItem.Caption {
+        text: i18n.tr("You can change the SIM for individual calls, or for contacts in the address book.")
+    }
+
+    ListItem.Divider {}
+
+    ListItem.ItemSelector {
+        id: messagesDefaultSim
+        text: i18n.tr("For messages, use:")
+        expanded: true
+        model: m
+        delegate: OptionSelectorDelegate {
+            text: getNameFromIndex(index);
+        }
+        selectedIndex: m.indexOf(phoneSettings.defaultSimForMessages)
+        onDelegateClicked: {
+            phoneSettings.defaultSimForMessages = m[index];
+
+        }
     }
 }
+

@@ -197,11 +197,6 @@ ItemPage {
                 anchors.left: parent.left
                 anchors.right: parent.right
             }
-
-            ListItem.Caption {
-                visible: root.state === "dualSim"
-                text: i18n.tr("You can change the SIM for individual calls, or for contacts in the address book.")
-            }
         }
     }
 
