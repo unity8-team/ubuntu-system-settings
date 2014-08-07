@@ -23,7 +23,7 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forwarding,
+            call_fwd_page.current_forwarding,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -54,7 +54,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forwarding,
+            call_fwd_page.current_forwarding,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
@@ -69,7 +69,7 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
         # Check that the forward has been set
         self.assertThat(
-            call_fwd_page.get_forwarding,
+            call_fwd_page.current_forwarding,
             Eventually(Equals('41444424')))
 
         # Check that dbus properties have been updated
