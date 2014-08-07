@@ -8,9 +8,10 @@
 from __future__ import absolute_import
 
 from autopilot.matchers import Eventually
-from testtools.matchers import Equals
+from testtools.matchers import Contains, Equals
 
-from ubuntu_system_settings.tests import PhoneOfonoBaseTestCase
+from ubuntu_system_settings.tests import (
+    PhoneOfonoBaseTestCase, CALL_FWD_IFACE, CALL_SETTINGS_IFACE)
 
 
 class PhoneTestCase(PhoneOfonoBaseTestCase):
@@ -25,9 +26,21 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
             call_fwd_page.get_forwarding,
             Eventually(Equals('41444424')))
 
+        # Check that dbus properties have been updated
+        self.assertThat(
+            lambda: str(self.modem_0.Get(CALL_FWD_IFACE,
+                                         'VoiceUnconditional')),
+            Eventually(Contains('41444424')))
+
     def test_call_waiting(self):
         call_wait = self.phone_page.go_to_call_waiting()
         call_wait.enable_call_waiting()
+
+        # Check that dbus properties have been updated
+        self.assertThat(
+            lambda: str(self.modem_0.Get(CALL_SETTINGS_IFACE,
+                                         'VoiceCallWaiting')),
+            Eventually(Contains('enabled')))
 
 
 class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
@@ -44,6 +57,12 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
             call_fwd_page.get_forwarding,
             Eventually(Equals('41444424')))
 
+        # Check that dbus properties have been updated
+        self.assertThat(
+            lambda: str(self.modem_0.Get(CALL_FWD_IFACE,
+                                         'VoiceUnconditional')),
+            Eventually(Contains('41444424')))
+
     def test_call_fwd_sim_2(self):
         call_fwd_page = self.phone_page.go_to_call_forwarding(sim=2)
         call_fwd_page.set_forward("41444424")
@@ -53,13 +72,28 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
             call_fwd_page.get_forwarding,
             Eventually(Equals('41444424')))
 
+        # Check that dbus properties have been updated
+        self.assertThat(
+            lambda: str(self.modem_1.Get(CALL_FWD_IFACE,
+                                         'VoiceUnconditional')),
+            Eventually(Contains('41444424')))
 
     def test_call_waiting_sim_1(self):
         call_wait = self.phone_page.go_to_call_waiting(sim=1)
         call_wait.enable_call_waiting()
 
+        # Check that dbus properties have been updated
+        self.assertThat(
+            lambda: str(self.modem_0.Get(CALL_SETTINGS_IFACE,
+                                         'VoiceCallWaiting')),
+            Eventually(Contains('enabled')))
 
     def test_call_waiting_sim_2(self):
         call_wait = self.phone_page.go_to_call_waiting(sim=2)
         call_wait.enable_call_waiting()
 
+        # Check that dbus properties have been updated
+        self.assertThat(
+            lambda: str(self.modem_1.Get(CALL_SETTINGS_IFACE,
+                                         'VoiceCallWaiting')),
+            Eventually(Contains('enabled')))

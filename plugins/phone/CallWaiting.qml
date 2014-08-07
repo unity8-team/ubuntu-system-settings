@@ -1,4 +1,4 @@
- /*
+/*
  * This file is part of system-settings
  *
  * Copyright (C) 2013 Canonical Ltd.
