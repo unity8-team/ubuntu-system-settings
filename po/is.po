@@ -1,4 +1,3 @@
-# translation of po_ubuntu-system-settings-is.po to icelandic
 # translation of po_ubuntu-system-settings-is to Icelandic
 # Icelandic translation for ubuntu-system-settings
 # Copyright (c) 2014 Icelandic translators of FOSS software
@@ -11,15 +10,15 @@ msgstr ""
 "Project-Id-Version: po_ubuntu-system-settings-is\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-23 05:56+0000\n"
+"PO-Revision-Date: 2014-08-05 02:47+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:32+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-07 06:26+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "Language: is\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
@@ -171,19 +170,19 @@ msgstr ""
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr ""
+msgstr "Gefa niðurstöður frá:"
 
 #: ../plugins/security-privacy//Dash.qml:46
 #: ../plugins/security-privacy//PageComponent.qml:52
 #: ../plugins/security-privacy//PageComponent.qml:128
 msgid "Phone only"
-msgstr ""
+msgstr "Einungis sími"
 
 #: ../plugins/security-privacy//Dash.qml:46
 #: ../plugins/security-privacy//PageComponent.qml:50
 #: ../plugins/security-privacy//PageComponent.qml:127
 msgid "Phone and Internet"
-msgstr "Sími og Internet"
+msgstr "Sími og internet"
 
 #: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
@@ -362,19 +361,19 @@ msgstr "Gagnaleynd:"
 
 #: ../plugins/security-privacy//PageComponent.qml:97
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "Tölfræði á upphafsskjá"
 
 #: ../plugins/security-privacy//PageComponent.qml:110
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Skilaboð á upphafsskjá"
 
 #: ../plugins/security-privacy//PageComponent.qml:143
 msgid "Location access"
-msgstr ""
+msgstr "Aðgangur að staðsetningu"
 
 #: ../plugins/security-privacy//PageComponent.qml:151
 msgid "Other app access"
-msgstr ""
+msgstr "Aðrar heimildir forrita"
 
 #: ../plugins/security-privacy//PageComponent.qml:156
 msgid "Diagnostics"
@@ -390,7 +389,7 @@ msgstr "Sent"
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy//PageComponent.qml:164
 msgid "Not sent"
-msgstr ""
+msgstr "Ekki sent"
 
 #: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
 msgid "Software licenses"
@@ -680,7 +679,7 @@ msgstr "Full hleðsla"
 
 #: ../plugins/battery//PageComponent.qml:111
 msgid "Charge level"
-msgstr ""
+msgstr "Hleðsla rafhlöðu"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery//PageComponent.qml:120
@@ -700,7 +699,7 @@ msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "Leiðir til að minnka rafhlöðunotkun:"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:342
@@ -741,7 +740,7 @@ msgstr "Stafsetningarleiðrétting"
 
 #: ../plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "Uppsett stafsetningartungumál"
 
 #: ../plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
@@ -784,11 +783,11 @@ msgstr "Orðaklárun"
 
 #: ../plugins/language//PageComponent.qml:131
 msgid "Word suggestions"
-msgstr ""
+msgstr "Stinga upp á orðum"
 
 #: ../plugins/language//PageComponent.qml:144
 msgid "Auto capitalization"
-msgstr ""
+msgstr "Sjálfvirkir hástafir"
 
 #: ../plugins/language//PageComponent.qml:154
 msgid "Turns on Shift to capitalize the first letter of each sentence."
@@ -956,7 +955,7 @@ msgstr "Bakgrunnur"
 
 #: ../plugins/background//MainPage.qml:112
 msgid "Ubuntu Art"
-msgstr ""
+msgstr "Ubuntu myndefni"
 
 #: ../plugins/background//MainPage.qml:128
 msgid "Custom"
@@ -1339,7 +1338,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:31
 msgid "Erase & reset everything"
-msgstr ""
+msgstr "Hreinsa og frumstilla allt"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 #: ../plugins/reset//ResetLauncherHome.qml:30
@@ -1360,19 +1359,19 @@ msgstr "Frumstilla síma"
 
 #: ../plugins/reset//PageComponent.qml:62
 msgid "Reset launcher & home screen…"
-msgstr ""
+msgstr "Frumstilla ræsi og heimaskjá..."
 
 #: ../plugins/reset//PageComponent.qml:75
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "Frumstilla allar kerfisstillingar..."
 
 #: ../plugins/reset//PageComponent.qml:88
 msgid "Erase & reset everything…"
-msgstr ""
+msgstr "Hreinsa og frumstilla allt..."
 
 #: ../plugins/reset//ResetLauncherHome.qml:32
 msgid "Reset launcher & home screen"
-msgstr ""
+msgstr "Frumstilla ræsi og heimaskjá"
 
 #: ../src/qml/MainWindow.qml:109
 msgid "System Settings"

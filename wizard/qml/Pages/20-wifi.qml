@@ -91,7 +91,6 @@ LocalComponents.Page {
                 cacheBuffer: 10000
 
                 // Only allow flicking if the content doesn't fit on the page
-                contentHeight: contentItem.childrenRect.height
                 boundsBehavior: (contentHeight > mainMenu.height) ?
                                     Flickable.DragAndOvershootBounds :
                                     Flickable.StopAtBounds
