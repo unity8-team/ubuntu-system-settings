@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authors:
+ * Ken Vandine <ken.vandine@canonical.com>
  * Jonas G. Drange <jonas.drange@canonical.com>
  *
 */
