@@ -22,7 +22,6 @@
 #include <QEvent>
 #include <QDBusReply>
 #include <unistd.h>
-#include <QtCore/QDebug>
 #include <QDBusMetaType>
 
 typedef QList<QVariantMap> resetLauncherItemsArg;
@@ -41,7 +40,6 @@ Reset::Reset(QObject *parent)
 
 bool Reset::resetLauncher()
 {
-    qWarning() << "resetLauncher";
     QList<QVariantMap> items;
     QVariantMap defaults;
     defaults.insert("defaults", true);
@@ -54,7 +52,6 @@ bool Reset::resetLauncher()
     if (answer.isValid())
         return true;
 
-    qWarning() << "Failed making call";
     return false;
 }
 
