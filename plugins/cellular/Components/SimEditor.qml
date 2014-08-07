@@ -82,7 +82,8 @@ Column {
             left: parent.left
             right: parent.right
         }
-        height: expandedItem ? childrenRect.height + editor.height : childrenRect.height
+        height: expandedItem ?
+            childrenRect.height + editor.height : childrenRect.height
 
         ListItem.Expandable {
             id: sim1Exp
