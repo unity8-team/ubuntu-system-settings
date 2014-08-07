@@ -26,7 +26,6 @@ from time import sleep
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection, platform
-from autopilot.input import Keyboard
 
 
 logger = logging.getLogger(__name__)
@@ -377,73 +376,59 @@ class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call waiting page."""
 
-    def _get_switch_checked(self):
+    @property
+    def _switch(self):
         return self.wait_select_single(
-            objectName="callWaitingSwitch").checked
-
-    def _click_switch(self):
-        switch = self.wait_select_single(
-            objectName="callWaitingSwitch")
-        self.pointing_device.click_object(switch)
+            ubuntuuitoolkit.Checkbox,
+            objectName='callWaitingSwitch')
 
     def enable_call_waiting(self):
-        if not self._get_switch_checked():
-            self._click_switch()
+        self._switch.check()
 
     def disable_call_waiting(self):
-        if self._get_switch_checked():
-            self._click_switch()
+        self._switch.uncheck()
 
 
 class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call forwarding page."""
 
-    def _get_switch_checked(self):
+    @property
+    def _switch(self):
         return self.wait_select_single(
-            objectName="callForwardingSwitch").checked
+            ubuntuuitoolkit.Checkbox,
+            objectName='callForwardingSwitch')
 
-    def _click_switch(self):
-        switch = self.wait_select_single(
-            objectName="callForwardingSwitch")
-        self.pointing_device.click_object(switch)
-
-    def _focus_number_input(self):
-        inpt = self.wait_select_single(
-            objectName="destNumberField")
-        self.pointing_device.click_object(inpt)
+    @property
+    def _number_field(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.TextField,
+            objectName='destNumberField')
 
     def _click_set(self):
         button = self.wait_select_single(
-            objectName="set")
+            objectName='set')
         self.pointing_device.click_object(button)
 
     def _click_cancel(self):
         button = self.wait_select_single(
-            objectName="cancel")
+            objectName='cancel')
         self.pointing_device.click_object(button)
 
     @property
-    def get_forwarding(self):
+    def current_forwarding(self):
         return self.wait_select_single(
-            objectName="destNumberField").text
+            objectName='destNumberField').text
 
     def enable_call_forwarding(self):
-        if not self._get_switch_checked():
-            self._click_switch()
+        self._switch.check()
 
     def disable_call_forwarding(self):
-        if self._get_switch_checked():
-            self._click_switch()
+        self._switch.uncheck()
 
-    def set_forward(self, number, input_method=None):
-        if not input_method:
-            input_method = Keyboard.create()
-
+    def set_forward(self, number):
         self.enable_call_forwarding()
-
-        self._focus_number_input()
-        input_method.type(number)
+        self._number_field.write(number)
         self._click_set()
 
 
@@ -451,11 +436,10 @@ class Services(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Call waiting page."""
 
+    # TODO: add pages for each relevant sim services page
     def open_sim_service(self, service):
         """Return a sim service page"""
         pass
-
-# TODO: add pages for each relevant sim services page
 
 
 class ResetPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
