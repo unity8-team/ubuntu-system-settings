@@ -22,12 +22,24 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ListItem.ItemSelector {
+
+    property var m: ["ask", sim1.path, sim2.path]
+
+    function getNameFromIndex (index) {
+        return [i18n.tr("Ask me each time"), sim1.title, sim2.title][index];
+
+    }
+
     id: callsDefaultSim
     text: i18n.tr("For outgoing calls, use:")
     expanded: true
-    model: [sim1.title, sim2.title]
-    selectedIndex: [sim1.path, sim2.path].lastIndexOf(phoneSettings.defaultSimForCalls)
+    model: m
+    delegate: OptionSelectorDelegate {
+        text: getNameFromIndex(index);
+    }
+    selectedIndex: m.indexOf(phoneSettings.defaultSimForCalls)
     onDelegateClicked: {
-        phoneSettings.defaultSimForCalls = (index === 0) ? sim1.path : sim2.path;
+        phoneSettings.defaultSimForCalls = m[index];
+
     }
 }
