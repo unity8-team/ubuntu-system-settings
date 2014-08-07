@@ -22,7 +22,7 @@ Column {
     }
 
     Grid {
-        property int itemWidth: units.gu(9)
+        property int itemWidth: units.gu(12)
 
         // The amount of whitespace, including column spacing
         property int space: parent.width - columns * itemWidth

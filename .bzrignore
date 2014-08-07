@@ -19,3 +19,4 @@ system-settings.pro.user
 .cproject
 .project
 .settings
+__pycache__

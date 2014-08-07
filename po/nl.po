@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-30 10:52+0000\n"
-"Last-Translator: Pjotr12345 <Unknown>\n"
+"PO-Revision-Date: 2014-08-06 18:51+0000\n"
+"Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-31 07:13+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-07 06:26+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -561,7 +561,7 @@ msgstr "Stille modus"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr "Overgaan:"
+msgstr "Belvolume:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-30 18:24+0000\n"
+"PO-Revision-Date: 2014-08-04 20:34+0000\n"
 "Last-Translator: Salomão Carneiro de Brito <salomaocar@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-07-31 07:14+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-05 06:44+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -499,7 +499,7 @@ msgstr ""
 
 #: ../plugins/about//DevMode.qml:95
 msgid "You need a passcode or passphrase set "
-msgstr ""
+msgstr "Você precisa de um código de acesso ou senha "
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -509,7 +509,7 @@ msgstr "Sobre este telefone"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Número de telefone"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -541,7 +541,7 @@ msgstr "Informações regulamentares"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Modo desenvolvedor"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -559,7 +559,7 @@ msgstr "Som"
 
 #: ../plugins/sound//PageComponent.qml:73
 msgid "Silent Mode"
-msgstr ""
+msgstr "Modo silencioso"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
@@ -706,12 +706,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "Ontem"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "Hoje"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -745,7 +745,7 @@ msgstr "Ajustar automaticamente"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Clareia ou escurece a tela de acordo com o ambiente"
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
@@ -930,11 +930,11 @@ msgstr "Ruim"
 
 #: ../plugins/bluetooth//PageComponent.qml:161
 msgid "Discoverable"
-msgstr ""
+msgstr "Visível"
 
 #: ../plugins/bluetooth//PageComponent.qml:161
 msgid "Not discoverable"
-msgstr ""
+msgstr "Não detectável"
 
 #: ../plugins/bluetooth//PageComponent.qml:192
 msgid "Connected devices:"
@@ -995,7 +995,7 @@ msgstr "Definir"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Última chamada %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -1030,7 +1030,7 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Encaminhar para"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
@@ -1045,27 +1045,32 @@ msgstr "SIM"
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//PageComponent.qml:142
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "Hotspot Wi-Fi"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "Hotspot"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
 "When hotspot is on, other devices can user your cellular data connection "
 "over Wi-Fi. Normal data charges apply."
 msgstr ""
+"Quando hotspot está ligado, outros dispositivos podem usar a conexão de "
+"dados do celular através de Wi-Fi gratuito. Taxas de dados normais são "
+"aplicadas."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can user your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Outros dispositivos podem usar a conexão de dados do celular através da rede "
+"Wi-Fi gratuito. Taxas de dados normais são aplicadas."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "Configurar hotspot"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
@@ -1103,7 +1108,7 @@ msgstr "Celular"
 
 #: ../plugins/cellular//PageComponent.qml:136
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "Hotspot desativado porque o Wi-Fi está desligado."
 
 #: ../plugins/cellular//PageComponent.qml:151
 msgid "Data usage statistics"
@@ -1122,23 +1127,23 @@ msgstr "APN"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "Alterar configuração do hotspot"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "Nome do Hotspot"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "Chave (deve ser de 8 caracteres ou mais)"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "Mostrar chave"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Mudar"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -1174,6 +1179,7 @@ msgstr "Atualizar o sistema"
 #: ../plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
 msgstr ""
+"O telefone precisa ser reiniciado para instalar a atualização do sistema."
 
 #: ../plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
@@ -1189,15 +1195,15 @@ msgstr "Instalar"
 
 #: ../plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
-msgstr ""
+msgstr "Software está atualizado"
 
 #: ../plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Por favor, faça login em sua conta Ubuntu One."
 
 #: ../plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
-msgstr ""
+msgstr "A atualização do sistema falhou"
 
 #: ../plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
@@ -1210,12 +1216,12 @@ msgstr "Verificando por atualizações..."
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Instalar %1 atualizações..."
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Instalar %1 atualizações"
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -1416,7 +1422,7 @@ msgstr "Sistema"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Conecte-se ao Wifi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
@@ -1432,25 +1438,27 @@ msgstr "Sem cartão SIM"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
+msgstr "Para usar o telefone e SMS, um SIM deve ser instalado."
 
 #: ../wizard/qml/Pages//no-sim.qml:59
 msgid "Install a SIM before continuing."
-msgstr ""
+msgstr "Instalar um cartão SIM antes de continuar."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "Configuração completa"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Bem-vindo ao Ubuntu em seu telefone, trazido a você por mais de 1000 "
+"voluntários além do pessoal da Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "Agora você pode começar a usar o seu telefone Ubuntu."
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1458,27 +1466,31 @@ msgstr "Finalizar"
 
 #: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "configurações do telefone"
 
 #: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"O seu telefone está configurado para reportar erros automaticamente para a "
+"Canonical. Isso pode ser desativado nas configurações do sistema."
 
 #: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"O seu telefone está configurado para detectar a sua localização. Isso pode "
+"ser desativado nas configurações do sistema."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Olá"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Bem-vindo ao seu telefone Ubuntu. Vamos começar."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
@@ -1486,7 +1498,7 @@ msgstr "Escolha seu idioma"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Inicio"
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
@@ -1644,7 +1656,7 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:80
 msgid "Orientation Lock"
-msgstr ""
+msgstr "Bloqueio de orientação"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:82

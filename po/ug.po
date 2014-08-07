@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-07-30 09:04+0000\n"
+"PO-Revision-Date: 2014-08-01 04:28+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-31 07:13+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-02 06:39+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
 msgid "Other network"
@@ -398,7 +398,7 @@ msgstr "يۇمشاق دېتال ئىجازەتنامىسى"
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "OS ھاسىللاش تەپسىلاتلىرى"
 
 #: ../plugins/about//Version.qml:53
 msgid "OS build number"
@@ -1093,8 +1093,7 @@ msgstr "سانلىق-مەلۇمات ستاتىستىكىسى"
 #: ../plugins/cellular//PageComponent.qml:165
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "توشۇغۇچى"
 
 #: ../plugins/cellular//PageComponent.qml:184
 msgid "APN"

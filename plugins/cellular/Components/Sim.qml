@@ -27,12 +27,12 @@ Item {
     property alias simMng: simMng
     property alias connMan: connMan
 
+    property string path
     property string name
     property string title: {
         var number = simMng.subscriberNumbers[0] || simMng.subscriberIdentity;
         return name + (number ? " (" + number + ")" : "");
     }
-    property string path
 
     OfonoModem {
         id: modem

@@ -35,9 +35,18 @@ public:
                                  QObject *parent = 0) = 0;
 };
 
+class PluginInterface2: public PluginInterface
+{
+public:
+    /* Return true if a reset has been performed */
+    virtual bool reset() { return false; }
+};
+
 } // namespace
 
 Q_DECLARE_INTERFACE(SystemSettings::PluginInterface,
                     "com.ubuntu.SystemSettings.PluginInterface")
+Q_DECLARE_INTERFACE(SystemSettings::PluginInterface2,
+                    "com.ubuntu.SystemSettings.PluginInterface/2.0")
 
 #endif // SYSTEM_SETTINGS_PLUGIN_INTERFACE_H
