@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-05 06:44+0000\n"
+"X-Launchpad-Export-Date: 2014-08-07 06:26+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
 "Language: is\n"
 
@@ -1735,57 +1735,3 @@ msgstr "prófa"
 #: /home/laney/temp/ubuntu-system-settings/po/settings.js:150
 msgid "sample"
 msgstr "sýnishorn"
-
-#~ msgid "Divert to"
-#~ msgstr "Áframsenda í"
-
-#~ msgid "Contacts…"
-#~ msgstr "Tengiliðir…"
-
-#~ msgid "Welcome screen"
-#~ msgstr "Upphafsskjár"
-
-#~ msgid "Home screen"
-#~ msgstr "Heimaskjár"
-
-#~ msgid "Same background for both"
-#~ msgstr "Sami bakgrunnur fyrir bæði"
-
-#~ msgid "Different background for each"
-#~ msgstr "Mismunandi bakgrunnur fyrir hvorn"
-
-#~ msgid "Choose background"
-#~ msgstr "Veldu bakgrunn"
-
-#~ msgid "Photo/Image"
-#~ msgstr "Ljósmynd/Mynd"
-
-#~ msgid "Off"
-#~ msgstr "Slökkt"
-
-#~ msgid "2G only (saves battery)"
-#~ msgstr "Aðeins 2G (sparar rafhlöðu)"
-
-#~ msgid "2G/3G/4G (faster)"
-#~ msgstr "2G/3G/4G (hraðara)"
-
-#~ msgid "That’s it!"
-#~ msgstr "Þetta er allt og sumt!"
-
-#~ msgid "It’s great to have you in the Ubuntu community."
-#~ msgstr "Það er gott að hafa þig með í Ubuntu-hópnum."
-
-#~ msgid "Enjoy your new phone."
-#~ msgstr "Njóttu nýja símans þíns."
-
-#~ msgid "Connect to a Wi-Fi network to customize your setup."
-#~ msgstr "Tengjast við þráðlaust net til sérsníða uppsetninguna."
-
-#~ msgid "Hello!"
-#~ msgstr "Sælinú!"
-
-#~ msgid "Welcome to Ubuntu."
-#~ msgstr "Velkomin(n) í Ubuntu."
-
-#~ msgid "Let’s get started."
-#~ msgstr "Hefjumst nú handa."

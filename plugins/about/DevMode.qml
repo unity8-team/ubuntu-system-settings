@@ -26,6 +26,7 @@ import Qt.labs.folderlistmodel 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
@@ -35,6 +36,10 @@ ItemPage {
 
     UbuntuStorageAboutPanel {
         id: storedInfo
+    }
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
     }
 
     Flickable {
@@ -75,6 +80,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: i18n.tr("Developer Mode")
+                enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 control: Switch {
                     id: devModeSwitch
                     checked: storedInfo.getDeveloperMode

@@ -1,3 +1,43 @@
+ubuntu-system-settings (0.3+14.10.20140806.1-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Oliver Grawert ]
+  * Tie activity of the developer mode toggle to the selected password
+    type (only make the toggle switch active if the password type is not
+    set to "swipe")
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 06 Aug 2014 16:44:31 +0000
+
+ubuntu-system-settings (0.3+14.10.20140806-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Stop the wizard from crashing on exit by not redefining a property
+    that blew up when the wifi list was emptied. (LP: #1335298)
+
+  [ John R. Lenton ]
+  * Fix the depends to be on the right gsettings schema version.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 06 Aug 2014 05:58:03 +0000
+
+ubuntu-system-settings (0.3+14.10.20140805-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * handle qtdeclarative5-ubuntu-content1 package rename
+
+  [ John R. Lenton ]
+  * This makes the category grid a little bit looser. (LP: #1352866)
+
+  [ Iain Lane ]
+  * Add a 'reset' API so that plugins can reset their settings to
+    default. They can do this in one of two ways: by providing a
+    function 'bool reset()' in their 'plugin' which returns true or by
+    providing a top-level javascript function 'reset' in their page
+    component.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 05 Aug 2014 19:30:58 +0000
+
 ubuntu-system-settings (0.3+14.10.20140804.1-0ubuntu1) utopic; urgency=low
 
   [ Diego Sarmentero ]
