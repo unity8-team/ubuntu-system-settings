@@ -34,6 +34,10 @@ class PhoneTestCase(PhoneOfonoBaseTestCase):
 
     def test_call_waiting(self):
         call_wait = self.phone_page.go_to_call_waiting()
+        # we have to help our test here, this normally takes quite a while
+        self.modem_0.EmitSignal(
+            CALL_SETTINGS_IFACE, 'PropertyChanged', 'sv',
+            ['VoiceCallWaiting', 'disabled'])
         call_wait.enable_call_waiting()
 
         # Check that dbus properties have been updated
@@ -80,6 +84,10 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
     def test_call_waiting_sim_1(self):
         call_wait = self.phone_page.go_to_call_waiting(sim=1)
+        # we have to help our test here, this normally takes quite a while
+        self.modem_0.EmitSignal(
+            CALL_SETTINGS_IFACE, 'PropertyChanged', 'sv',
+            ['VoiceCallWaiting', 'disabled'])
         call_wait.enable_call_waiting()
 
         # Check that dbus properties have been updated
@@ -90,6 +98,10 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
 
     def test_call_waiting_sim_2(self):
         call_wait = self.phone_page.go_to_call_waiting(sim=2)
+        # we have to help our test here, this normally takes quite a while
+        self.modem_1.EmitSignal(
+            CALL_SETTINGS_IFACE, 'PropertyChanged', 'sv',
+            ['VoiceCallWaiting', 'disabled'])
         call_wait.enable_call_waiting()
 
         # Check that dbus properties have been updated
