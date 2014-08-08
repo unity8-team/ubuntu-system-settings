@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+14.10.20140807-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Only turn the wizard off if the user actively presses the Finished
+    button. That is, don't disable the wizard if we crash or the user
+    turns off the phone while still in the wizard. (LP: #1348577)
+  * Avoid making a method call that can return undefined results,
+    potentially causing password or language setting to not work
+    correctly.
+
+  [ jonas-drange ]
+  * [reset] bring back reset and hook it up to the backend. Added happy
+    path tests.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 07 Aug 2014 14:54:57 +0000
+
 ubuntu-system-settings (0.3+14.10.20140806.1-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]

@@ -101,6 +101,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
         item.swipe_into_view()
         self.pointing_device.click_object(item)
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_reset_phone(self):
+        return self._go_to_page('entryComponent-reset', 'resetPage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -108,7 +112,7 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return page
 
     def scroll_to(self, obj):
-        page = self.select_single(objectName='systemSettingsPage')
+        page = self.system_settings_page
         page_right = page.globalRect[0] + page.globalRect[2]
         page_bottom = page.globalRect[1] + page.globalRect[3]
         page_center_x = int(page_right / 2)
@@ -126,6 +130,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def scroll_to_and_click(self, obj):
         self.scroll_to(obj)
         self.pointing_device.click_object(obj)
+
+    @property
+    def system_settings_page(self):
+        return self.select_single(objectName='systemSettingsPage')
 
     @property
     def cellular_page(self):
@@ -165,8 +173,21 @@ class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'cellularPage':
+                return True
+        return False
+
+
+class TimeAndDatePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Sound page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'timeDatePage':
                 return True
         return False
 
@@ -272,7 +293,101 @@ class SystemUpdatesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @classmethod
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
-        if name == b'ItemPage':
+        if name == b'PageComponent':
             if state['objectName'][1] == 'systemUpdatesPage':
                 return True
         return False
+
+
+class ResetPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Reset page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'resetPage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.info)
+    def reset_launcher(self):
+        """Reset the launcher.
+
+        :returns: The main system settings page object, that will be visible
+            after the reset is complete.
+
+        """
+        confirm_dialog = self._click_reset_launcher()
+        confirm_dialog.confirm_reset()
+        return self._wait_and_return_main_system_settins_page()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_reset_launcher(self):
+        button = self.select_single(objectName='resetLauncher')
+        self.pointing_device.click_object(button)
+        return self.get_root_instance().select_single(
+            objectName='resetLauncherDialog')
+
+    def _wait_and_return_main_system_settins_page(self):
+        main_view = self.get_root_instance().select_single(MainWindow)
+        main_view.system_settings_page.active.wait_for(True)
+        return main_view.system_settings_page
+
+    @autopilot.logging.log_action(logger.info)
+    def erase_and_reset_everything(self):
+        """Reset to factory settings.
+
+        :returns: The main system settings page object, that will be visible
+            after the reset is complete.
+
+        """
+        confirm_dialog = self._click_factory_reset()
+        confirm_dialog.confirm_reset()
+        return self._wait_and_return_main_system_settins_page()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_factory_reset(self):
+        button = self.select_single(objectName='factoryReset')
+        self.pointing_device.click_object(button)
+        return self.get_root_instance().select_single(
+            objectName='factoryResetDialog')
+
+
+class ResetLauncherConfirmationDialog(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Reset Launcher Confirmation dialog."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'resetLauncherDialog':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def confirm_reset(self):
+        button = self.select_single('Button', objectName='resetLauncherAction')
+        self.pointing_device.click_object(button)
+
+
+class FactoryResetConfirmationDialog(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Reset Launcher Confirmation dialog."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'factoryResetDialog':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def confirm_reset(self):
+        button = self.select_single('Button', objectName='factoryResetAction')
+        self.pointing_device.click_object(button)

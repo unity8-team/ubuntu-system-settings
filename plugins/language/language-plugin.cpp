@@ -613,20 +613,16 @@ LanguagePlugin::managerLoaded()
     if (loaded) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
 
-        const char *name(qPrintable(qgetenv("USER")));
+        m_user = act_user_manager_get_user_by_id(m_manager, geteuid());
 
-        if (name != NULL) {
-            m_user = act_user_manager_get_user(m_manager, name);
+        if (m_user != NULL) {
+            g_object_ref(m_user);
 
-            if (m_user != NULL) {
-                g_object_ref(m_user);
-
-                if (act_user_is_loaded(m_user))
-                    userLoaded();
-                else
-                    g_signal_connect(m_user, "notify::is-loaded",
-                                     G_CALLBACK(::userLoaded), this);
-            }
+            if (act_user_is_loaded(m_user))
+                userLoaded();
+            else
+                g_signal_connect(m_user, "notify::is-loaded",
+                                 G_CALLBACK(::userLoaded), this);
         }
     }
 }
