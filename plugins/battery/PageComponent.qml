@@ -384,8 +384,7 @@ ItemPage {
                     signal clicked
                     onClicked: item.clicked()
                 }
-                visible: showAllUI && // Hidden until the indicator works
-                         locationActionGroup.enabled.state !== undefined
+                visible: locationActionGroup.enabled.state !== undefined
             }
 
             ListItem.Caption {
