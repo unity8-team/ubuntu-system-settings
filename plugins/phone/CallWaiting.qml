@@ -27,12 +27,11 @@ import MeeGo.QOfono 0.2
 ItemPage {
     objectName: "callWaitingPage"
     title: headerTitle
-    property string modem
+    property var sim
     property string headerTitle: i18n.tr("Call waiting")
 
-    OfonoCallSettings {
-        id: callSettings
-        modemPath: modem
+    Connections {
+        target: sim.callSettings
         onVoiceCallWaitingChanged: {
             callWaitingIndicator.running = false;
         }
@@ -48,13 +47,13 @@ ItemPage {
         id: callWaitingSwitch
         objectName: "callWaitingSwitch"
         visible: !callWaitingIndicator.running
-        checked: callSettings.voiceCallWaiting !== "disabled"
+        checked: sim.callSettings.voiceCallWaiting !== "disabled"
         onClicked: {
             callWaitingIndicator.running = true;
             if (checked)
-                callSettings.voiceCallWaiting = "enabled";
+                sim.callSettings.voiceCallWaiting = "enabled";
             else
-                callSettings.voiceCallWaiting = "disabled";
+                sim.callSettings.voiceCallWaiting = "disabled";
         }
     }
 

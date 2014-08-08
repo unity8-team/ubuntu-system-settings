@@ -22,19 +22,18 @@ import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import "../cellular/Components"
 
 Column {
 
     anchors.left: parent.left
     anchors.right: parent.right
 
-    Sim {
+    Ofono {
         id: sim1
         path: modemsSorted[0]
     }
 
-    Sim {
+    Ofono {
         id: sim2
         path: modemsSorted[1]
     }
@@ -48,7 +47,7 @@ Column {
         text: i18n.tr("Call forwarding")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-            modem: sim1.path,
+            sim: sim1,
             headerTitle: sim1.title
         })
     }
@@ -58,7 +57,7 @@ Column {
         text: i18n.tr("Call waiting")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
-            modem: sim1.path,
+            sim: sim1,
             headerTitle: sim1.title
         })
     }
@@ -86,7 +85,7 @@ Column {
         text: i18n.tr("Call forwarding")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-            modem: sim2.path,
+            sim: sim2,
             headerTitle: sim2.title
         })
     }
@@ -96,7 +95,7 @@ Column {
         text: i18n.tr("Call waiting")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
-            modem: sim2.path,
+            sim: sim2,
             headerTitle: sim2.title
         })
     }

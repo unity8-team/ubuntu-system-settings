@@ -28,8 +28,8 @@ ItemPage {
 
     objectName: "callForwardingPage"
     title: headerTitle
-    property bool forwarding: callForwarding.voiceUnconditional !== ""
-    property string modem
+    property var sim
+    property bool forwarding: sim.callForwarding.voiceUnconditional !== ""
     property string headerTitle: i18n.tr("Call forwarding")
 
     onForwardingChanged: {
@@ -37,9 +37,8 @@ ItemPage {
             callForwardingSwitch.checked = forwarding;
     }
 
-    OfonoCallForwarding {
-        id: callForwarding
-        modemPath: modem
+    Connections {
+        target: sim.callForwarding
         onVoiceUnconditionalChanged: {
             destNumberField.text = voiceUnconditional;
         }
@@ -59,7 +58,7 @@ ItemPage {
         onCheckedChanged: {
             if (!checked && forwarding) {
                 callForwardingIndicator.running = true;
-                callForwarding.voiceUnconditional = "";
+                sim.callForwarding.voiceUnconditional = "";
             }
         }
     }
@@ -108,14 +107,14 @@ ItemPage {
                 horizontalAlignment: TextInput.AlignRight
                 width: forwardToItem.width/2
                 inputMethodHints: Qt.ImhDialableCharactersOnly
-                text: callForwarding.voiceUnconditional
+                text: sim.callForwarding.voiceUnconditional
                 font.pixelSize: units.dp(18)
                 font.weight: Font.Light
                 font.family: "Ubuntu"
                 color: "#AAAAAA"
                 maximumLength: 20
                 focus: true
-                cursorVisible: text !== callForwarding.voiceUnconditional ||
+                cursorVisible: text !== sim.callForwarding.voiceUnconditional ||
                                text === ""
                 clip: true
                 opacity: 0.9
@@ -143,7 +142,7 @@ ItemPage {
                     enabled: !callForwardingIndicator.running
                     onClicked: {
                         destNumberField.text =
-                                callForwarding.voiceUnconditional;
+                                sim.callForwarding.voiceUnconditional;
                         if (forwarding !== callForwardingSwitch.checked)
                             callForwardingSwitch.checked = forwarding;
                     }
@@ -156,13 +155,13 @@ ItemPage {
                     enabled: !callForwardingIndicator.running
                     onClicked: {
                         callForwardingIndicator.running = true;
-                        callForwarding.voiceUnconditional = destNumberField.text;
+                        sim.callForwarding.voiceUnconditional = destNumberField.text;
                     }
                 }
             }
             visible: callForwardingSwitch.checked &&
                      (destNumberField.text !==
-                      callForwarding.voiceUnconditional)
+                      sim.callForwarding.voiceUnconditional)
         }
     }
 }

@@ -23,6 +23,7 @@ logging.basicConfig(filename='warning.log', level=logging.WARNING)
 
 from time import sleep
 
+from autopilot.input import Keyboard
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection, platform
@@ -379,7 +380,7 @@ class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @property
     def _switch(self):
         return self.wait_select_single(
-            ubuntuuitoolkit.Checkbox,
+            ubuntuuitoolkit.CheckBox,
             objectName='callWaitingSwitch')
 
     def enable_call_waiting(self):
@@ -396,13 +397,12 @@ class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     @property
     def _switch(self):
         return self.wait_select_single(
-            ubuntuuitoolkit.Checkbox,
+            ubuntuuitoolkit.CheckBox,
             objectName='callForwardingSwitch')
 
     @property
     def _number_field(self):
         return self.wait_select_single(
-            ubuntuuitoolkit.TextField,
             objectName='destNumberField')
 
     def _click_set(self):
@@ -427,8 +427,10 @@ class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         self._switch.uncheck()
 
     def set_forward(self, number):
+        input_method = Keyboard.create()
         self.enable_call_forwarding()
-        self._number_field.write(number)
+        self.pointing_device.click_object(self._number_field)
+        input_method.type(number)
         self._click_set()
 
 

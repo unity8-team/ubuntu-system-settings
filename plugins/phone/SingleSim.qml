@@ -21,7 +21,6 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import "../cellular/Components"
 
 Column {
 
@@ -31,7 +30,7 @@ Column {
     property string carrierName: sim.netReg.name
     property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
 
-    Sim {
+    Ofono {
         id: sim
         path: modemsSorted[0]
     }
@@ -40,14 +39,14 @@ Column {
         objectName: "callFwd"
         text: i18n.tr("Call forwarding")
         progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {modem: sim.path})
+        onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
     }
 
     ListItem.Standard {
         objectName: "callWait"
         text: i18n.tr("Call waiting")
         progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {modem: sim.path})
+        onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {sim: sim})
         showDivider: false
     }
 

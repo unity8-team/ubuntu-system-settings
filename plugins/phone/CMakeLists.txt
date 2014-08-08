@@ -2,6 +2,7 @@ set(QML_SOURCES
     CallForwarding.qml
     CallWaiting.qml
     DualSim.qml
+    Ofono.qml
     PageComponent.qml
     ServiceInfo.qml
     Services.qml
