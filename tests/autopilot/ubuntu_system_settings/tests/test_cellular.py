@@ -471,7 +471,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             ['TechnologyPreference', ''])
 
         self.assertThat(
-            self.data_preference_selector.get_properties()['enabled'],
+            self.data_preference_selector.get_properties()['visible'],
             Eventually(Equals(False)))
 
     # see
