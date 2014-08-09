@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:03+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:45+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: Galician\n"
 
@@ -1812,47 +1812,3 @@ msgstr "dispositivo"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "información"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Restabelecer o iniciador e a pantalla de inicio"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (conectando…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (desconectando…)"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Borrar e restabelecer todo..."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Borrar e restabelecer todo"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Código incorrecto. Ténteo de novo."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Frase secreta incorrecta. Ténteo de novo."
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Conectar un dispositivo diferente:"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Restabelecer o iniciador e a pantalla de inicio"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Cando o punto de acceso está activado, outros dispositivos pode usar a túa "
-#~ "conexión de datos de móbil mediante wifi. Aplicarase a tarifa de datos "
-#~ "habitual."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Outros dispositivos poden usar a conexión de datos do móbil por medio da "
-#~ "rede wifi. Aplicarase a tarifa de datos normal."

@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:04+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1809,46 +1809,3 @@ msgstr "peranti"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "maklumat"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Menyambung…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Terputus…)"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Padam & tetap semula segalanya..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Tetap semula pelancar & skrin rumah"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Tetap semula pelancar & skrin rumah..."
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Kod laluan tidak betul. Cuba lagi."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Frasa laluan tidak betul. Cuba lagi."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Padam & tetap semula segalanya"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Sambung dengan peranti lain:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Bila hotspot hidup, peranti lain dapat guna sambungan data selular anda "
-#~ "menerusi Wi-Fi. Cas data biasa dikira."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Peranti lain dapat guna sambungan data selular anda menerusi Wi-Fi. Cas data "
-#~ "biasa dikira."

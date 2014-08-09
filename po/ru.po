@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:04+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1823,47 +1823,3 @@ msgstr "устройство"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "информация"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Сбросить настройки панели запуска и домашнего экрана..."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Стереть и выполнить полный сброс"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Стереть и выполнить полный сброс..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Сбросить настройки панели запуска и домашнего экрана"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Соединение...)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Отключение...)"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Неправильный цифровой пароль. Попробуйте еще раз."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Неправильная кодовая фраза. Попробуйте еще раз."
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Подключить другое устройство:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Когда включена функция точки доступа, другие устройства могут использовать "
-#~ "вашу сотовую сеть передачи данных через Wi-Fi. Взимается обычная плата за "
-#~ "передачу данных."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Другие устройства могут использовать вашу сотовую сеть передачи данных через "
-#~ "сеть Wi-Fi. Взимается обычная плата за передачу данных."

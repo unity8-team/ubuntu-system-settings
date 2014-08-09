@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: Josef Andersson <josef.andersson@fripost.org>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-08-04 17:24+0000\n"
-"Last-Translator: Josef Andersson <Unknown>\n"
+"PO-Revision-Date: 2014-08-08 08:09+0000\n"
+"Last-Translator: Gunnar Hjalmarsson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se.>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: sv\n"
 
@@ -976,7 +976,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Radera & återställ allt"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -999,7 +999,7 @@ msgstr "Återställ telefonen"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Återställ programhanteraren"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1007,15 +1007,15 @@ msgstr "Återställ alla systeminställningar…"
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Radera & återställ allt..."
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "Programhanteraren kommer att återställas till ursprungsskicket."
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "Telefonen behöver startas om för att fullborda ändringarna."
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
@@ -1043,13 +1043,15 @@ msgstr "Anpassad"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "Aviseringar"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"Valda appar kan påkalla din uppmärksamhet genom aviseringsbubblor, ljud, "
+"vibrationer och Aviseringscentret."
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1080,23 +1082,23 @@ msgstr "Parkoppla"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "Ansluten"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "Ansluter..."
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Kopplar från..."
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "Frånkopplad"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "Okänd"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1188,7 +1190,7 @@ msgstr "Anslut annan enhet:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "Anslut en enhet:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -1197,7 +1199,7 @@ msgstr "Ingen upptäckt"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Anslut hittad enhet automatiskt:"
 
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
@@ -1205,7 +1207,7 @@ msgstr "Typ"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -1217,7 +1219,7 @@ msgstr "Koppla från"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "Glöm denna enhet"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1778,7 +1780,7 @@ msgstr "bakgrundsbild"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
 msgid "notifications"
-msgstr ""
+msgstr "aviseringar"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
@@ -1814,46 +1816,3 @@ msgstr "enhet"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "info"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Ogiltig kod. Prova igen."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Ogiltig lösenfras. Prova igen."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Radera & återställ allting"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Återställ programstartaren och hemskärmen…"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Radera & återställ allting…"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Återställl programstartaren & hemskärmen"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Ansluter…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Kopplar från…)"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Anslut en annan enhet:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "När accesspunkten är på kan andra enheter använda din mobildataanslutning "
-#~ "över Wi-Fi. Normala datakostnader gäller."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Andra enheter kan använda din mobildataanslutning över Wi-Fi-nätverket. "
-#~ "Normala datakostnader gäller."

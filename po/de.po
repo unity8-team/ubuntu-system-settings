@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-07-15 12:29+0000\n"
-"Last-Translator: Phillip Sz <Unknown>\n"
+"PO-Revision-Date: 2014-08-08 08:21+0000\n"
+"Last-Translator: Martin Pitt <martin.pitt@ubuntu.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:02+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:45+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -30,7 +30,7 @@ msgstr "Audio"
 
 #: ../plugins/sound//PageComponent.qml:75
 msgid "Silent Mode"
-msgstr ""
+msgstr "Stiller Modus"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
@@ -251,7 +251,7 @@ msgstr "Zurücksetzen"
 #: ../plugins/security-privacy//LockSecurity.qml:297
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Ändern"
 
 #: ../plugins/security-privacy//LockSecurity.qml:339
 msgid "Unlock the phone using:"
@@ -610,12 +610,12 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "Gestern"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
@@ -781,7 +781,7 @@ msgstr "Anklopfen"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Zuletzt angerufen: %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -797,7 +797,7 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Weiterleiten an"
 
 #: ../plugins/phone//CallWaiting.qml:78
 msgid ""
@@ -966,7 +966,7 @@ msgstr "Automatisch anpassen"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "Stellt die Bildschirmhelligkeit passend zur Umgebung ein"
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
@@ -978,7 +978,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Alles löschen und zurücksetzen"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1001,7 +1001,7 @@ msgstr "Telefon zurücksetzen"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Starter zurücksetzen"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1009,15 +1009,15 @@ msgstr "Alle Systemeinstellungen zurücksetzen …"
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Alles löschen und zurücksetzen"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "Der Starter wird auf den Originalinhalt zurückgesetzt."
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "Das Telefon muss dafür neu gestartet werden."
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
@@ -1045,7 +1045,7 @@ msgstr "Benutzerdefiniert"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "Benachrichtigungen"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
@@ -1083,23 +1083,23 @@ msgstr "Koppeln"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "Verbunden"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "Verbinde..."
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Trenne…"
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "Getrennt"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1191,7 +1191,7 @@ msgstr "Verbinden Sie ein anderes Gerät:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "Mit einem Gerät verbinden:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -1200,7 +1200,7 @@ msgstr "Keines gefunden"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Automatisch verbinden wenn gefunden:"
 
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
@@ -1208,7 +1208,7 @@ msgstr "Typ"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -1220,7 +1220,7 @@ msgstr "Verbindung trennen"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "Dieses Gerät vergessen"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1236,19 +1236,19 @@ msgstr "Suchen"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "Hotspot-Einstellungen ändern"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "Name des Hotspots"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "Schlüssel (mindestens 8 Zeichen)"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "Schlüssel anzeigen"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -1258,12 +1258,12 @@ msgstr "Netz"
 
 #: ../plugins/cellular//PageComponent.qml:132
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "Hotspot nicht verfügbar, WLAN ist ausgeschaltet."
 
 #: ../plugins/cellular//PageComponent.qml:138
 #: ../plugins/cellular//Hotspot.qml:29
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "WLAN-Hotspot"
 
 #: ../plugins/cellular//PageComponent.qml:147
 msgid "Data usage statistics"
@@ -1273,8 +1273,8 @@ msgstr "Datennutzungsstatistiken"
 #: ../plugins/cellular//PageComponent.qml:161
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Anbieter"
+msgstr[1] "Anbieter"
 
 #: ../plugins/cellular//PageComponent.qml:180
 msgid "APN"
@@ -1282,27 +1282,31 @@ msgstr "Zugangspunkt"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "Hotspot"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Mit einem Hotspot können andere Geräte die mobile Datenverbindung über WLAN "
+"nutzen. Dafür entstehen normale Kosten."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Andere Geräte können die mobile Datenverbindung über WLAN nutzen. Dafür "
+"entstehen normale Kosten."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "Hotspot einrichten"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
-msgstr ""
+msgstr "Anbieter"
 
 #: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
 msgid "Software licenses"
@@ -1310,7 +1314,7 @@ msgstr "Software-Lizenzen"
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:82
 msgid "Developer Mode"
-msgstr ""
+msgstr "Entwicklermodus"
 
 #: ../plugins/about//DevMode.qml:73
 msgid "In Developer Mode, anyone can access, "
@@ -1318,7 +1322,7 @@ msgstr ""
 
 #: ../plugins/about//DevMode.qml:101
 msgid "You need a passcode or passphrase set "
-msgstr ""
+msgstr "Sie benötigen ein Passwort. "
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
@@ -1356,7 +1360,7 @@ msgstr "Info zu diesem Gerät"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Telefonnummer"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -1392,7 +1396,7 @@ msgstr "Rechtliche Info"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Entwicklermodus"
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
@@ -1463,12 +1467,16 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"Ihr Telefon sendet automatisch Fehlerberichte zu Canonical. Dies kann in den "
+"Systemeinstellungen ausgeschaltet werden."
 
 #: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Ihr Telefon kann Ihren Standort ermitteln. Dies kann in den "
+"Systemeinstellungen ausgeschaltet werden."
 
 #: ../wizard/qml/Pages//30-location.qml:48
 #: ../wizard/qml/Pages//20-wifi.qml:152
@@ -1481,11 +1489,11 @@ msgstr "Keine SIM-Karte"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
+msgstr "Zum Telefonieren und für SMS muss eine SIM-Karte installiert sein."
 
 #: ../wizard/qml/Pages//no-sim.qml:59
 msgid "Install a SIM before continuing."
-msgstr ""
+msgstr "Installieren Sie eine SIM-Karte um fortzufahren."
 
 #: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
 msgid "Skip"
@@ -1493,25 +1501,27 @@ msgstr "Überspringen"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "Einrichtung vollständig"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Wilkommen zu Ubuntu auf Ihrem Telefon, erstellt von Tausenden Freiwilligen "
+"und den freundlichen Mitarbeitern von Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "Sie können jetzt Ihr Ubuntu-Telefon benutzen."
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr "Beendet"
+msgstr "Beenden"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr "Zu einen WLAN-Netz verbinden"
+msgstr "Mit einem WLAN verbinden"
 
 #: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
@@ -1519,11 +1529,11 @@ msgstr "Verfügbare Netzwerke"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Hallo"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Wilkommen zum Ubuntu-Telefon! Los gehts."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
@@ -1531,7 +1541,7 @@ msgstr "Wählen Sie Ihre Sprache"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Los"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:4
@@ -1810,32 +1820,3 @@ msgstr "Gerät"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "Info"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Starter & Startbildschirm zurücksetzen …"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Alles löschen & zurücksetzen …"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Alles löschen & zurücksetzen"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Starter & Startbildschirm zurücksetzen"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Verbinden …)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Trennen …)"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Falsche Geheimzahl. Versuchen Sie es erneut."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Falsches Kennwort. Versuchen Sie es erneut."
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Verbinden Sie ein unterschiedliches Gerät:"

@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:03+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:45+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1805,47 +1805,3 @@ msgstr "ឧបករណ៍"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "ព័ត៌មាន"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (កំពុង​ភ្ជាប់…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (កំពុង​ផ្ដាច់…)"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "លុប & កំណត់​អ្វី​ផ្សេងៗ​ឡើងវិញ"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "លុប & កំណត់​អ្វី​ផ្សេងៗ​ឡើងវិញ"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "កំណត់​កម្មវិធី​ចាប់ផ្ដើម & អេក្រង់​​ដើម​ឡើងវិញ…"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "កំណត់​កម្មវិធី​ចាប់ផ្ដើម & អេក្រង់​ដើម​ឡើងវិញ"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ​។ ព្យាយាម​ម្ដងទៀត។"
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "ឃ្លា​សម្ងាត់​មិន​ត្រឹមត្រូវ។ ព្យាយាម​ម្ដងទៀត។"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "ភ្ជាប់​ឧបករណ៍​ផ្សេង៖"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "ពេល​បើក​ហតស្ប៉ត, "
-#~ "ឧបករណ៍​ផ្សេង​អាច​ប្រើ​ការ​តភ្ជាប់​ទិន្នន័យ​ចល័ត​របស់​អ្នក​តាម​វ៉ាយហ្វាយ​បាន។ "
-#~ "គិត​ប្រាក់​តាម​ទិន្នន័យ​ធម្មតា។"
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "ឧបករណ៍​ផ្សេង​អាច​ប្រើ​ការ​តភ្ជាប់​ទិន្នន័យ​ចល័ត​របស់​អ្នក​តាម​បណ្ដាញ​វ៉ាយហ្វា"
-#~ "យ​បាន។ គិត​ប្រាក់​តាម​ទិន្នន័យ​ធម្មតា។"

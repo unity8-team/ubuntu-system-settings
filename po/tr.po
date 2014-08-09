@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1804,29 +1804,3 @@ msgstr "aygıt"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "bilgi"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Başlatıcı ve ana ekranı sıfırla..."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Her şeyi sil ve sıfırla"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Başlatıcı ve ana ekranı sıfırla"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Her şeyi sil ve sıfırla..."
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Bağlanıyor...)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Bağlantı Kesiliyor...)"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Şifre yanlış. Tekrar deneyin."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Parola yanlış. Tekrar deneyin."

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-08-05 01:42+0000\n"
+"PO-Revision-Date: 2014-08-09 02:41+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:01+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -183,7 +183,7 @@ msgstr "የ አሁኑን አካባቢ ያስገቡ"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr ""
+msgstr "ተመሳሳይ ቦታ የለም"
 
 #: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../plugins/security-privacy//PageComponent.qml:82
@@ -663,11 +663,11 @@ msgstr "ስልኩን ማስተኛ በማይጠቀሙበት ጊዜ:"
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
-msgstr ""
+msgstr "ስልኩ ወደ ማስተኛ ዘዴ አይሄድም በ ጥሪ ላይ ወይንም ቪዲዮ በድጋሚ ሲያጫውቱ አጭር ጊዜ ለደህንነት ጥሩ ነው"
 
 #: ../plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
+msgstr "ስልኩ ወደ ማስተኛ ዘዴ አይሄድም በ ጥሪ ላይ ወይንም ቪዲዮ በድጋሚ ሲያጫውቱ"
 
 #: ../plugins/wifi//PageComponent.qml:114
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -920,7 +920,7 @@ msgstr "በ ዋይ-ፋይ ላይ በሚሆን ጊዜ"
 
 #: ../plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "በማንኛውም የዳታ ግንኙነት"
 
 #: ../plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
@@ -948,7 +948,7 @@ msgstr "ሁሉም ሰነዶች: የተቀመጡ ጨዋታዎች: ማሰናጃዎ
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -969,7 +969,7 @@ msgstr "ስልኩን እንደ ነበር መመለሻ"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "ማስነሻውን እንደ ነበር መመለሻ"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -977,7 +977,7 @@ msgstr "ሁሉንም የ ስርአት ማሰናጃ እንደ ነበር መመለ
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ…"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -1013,7 +1013,7 @@ msgstr ""
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "ማስታወቂያዎች"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
@@ -1050,23 +1050,23 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "ተገናኝቷል"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "በመገናኘት ላይ…"
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "በማቋረጥ ላይ …"
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "ተቋርጧል"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "ያልታወቀ"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1158,7 +1158,7 @@ msgstr "ሌላ አካል መገናኛ:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "አካል ማገናኛ:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -1175,7 +1175,7 @@ msgstr "አይነት"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "ሁኔታው"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -1741,7 +1741,7 @@ msgstr "የ ግድግዳ ወረቀት"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
 msgid "notifications"
-msgstr ""
+msgstr "ማስታወቂያዎች"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
@@ -1777,26 +1777,3 @@ msgstr "አካል"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "መረጃ"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ..."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (በ መገናኘት ላይ…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (በ ማቋረጥ ላይ…)"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "የተለየ አካል መገናኛ:"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "የተሳሳተ ማለፊያ ኮድ: እባክዎን እንደገና ይሞክሩ"
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "የተሳሳተ ማለፊያ ሐረግ: እባክዎን እንደገና ይሞክሩ"

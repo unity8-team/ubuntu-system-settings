@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-07-28 12:26+0000\n"
-"Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
+"PO-Revision-Date: 2014-08-08 18:28+0000\n"
+"Last-Translator: Filipe André Pinho <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:04+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1013,6 +1013,7 @@ msgstr ""
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
+"O telefone necessita de reiniciar para as alterações surtirem efeito."
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
@@ -1040,13 +1041,15 @@ msgstr "Personalizar"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "Notificações"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"As aplicações selecionadas emitir alertas usando balões de notificação, "
+"sons, vibrações e na central de notificações."
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1081,7 +1084,7 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "A ligar..."
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
@@ -1093,7 +1096,7 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1194,7 +1197,7 @@ msgstr "Nenhum detetado"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Ligar automaticamente quando detectado:"
 
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
@@ -1214,7 +1217,7 @@ msgstr "Desligar"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "Esquecer este dispositivo"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1776,7 +1779,7 @@ msgstr "papel de parede"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
 msgid "notifications"
-msgstr ""
+msgstr "notificações"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
@@ -1812,46 +1815,3 @@ msgstr "dispositivo"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "informação"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Código incorreto. Tente novamente."
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (A ligar…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (A desligar…)"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Apagar & repor tudo..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Repor Lançador & ecrã inicial"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Repor Lançador & ecrã inicial..."
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Ligar um dispositivo diferente:"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Apagar e repor tudo"
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Frase-senha incorrecta. Tente novamente"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Quando o ponto de acesso está ligado, outros equipamentos podem usar os seus "
-#~ "dados móveis através de WiFi. Custos normais são aplicados."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Outros equipamentos podem usar os seus dados móveis através da rede WiFi. "
-#~ "Custos normais são aplicados."

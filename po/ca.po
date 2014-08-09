@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-08-05 15:19+0000\n"
+"PO-Revision-Date: 2014-08-08 07:20+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:02+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -34,7 +34,7 @@ msgstr "Mode silenciós"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "To de trucada:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -970,6 +970,8 @@ msgstr "Ajusta automàticament"
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
 msgstr ""
+"Incrementa o disminueix la brillantor del dispositiu per adaptar-se a "
+"l'ambient"
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
@@ -981,7 +983,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Suprimeix i reinicialitza-ho tot"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1004,7 +1006,7 @@ msgstr "Reinicialitza el telèfon"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Reinicialitza el llançador"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1012,7 +1014,7 @@ msgstr "Reinicialitza tots els paràmetres del sistema..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Suprimeix i reinicialitza-ho tot..."
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -1048,7 +1050,7 @@ msgstr "Personalitzat"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "Notificacions"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
@@ -1085,7 +1087,7 @@ msgstr "Aparella"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "Connectat"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
@@ -1815,32 +1817,3 @@ msgstr "dispositiu"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "info"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Reinicia el llançador i la pantalla d'inici..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Reinicia el llançador i la pantalla d'inici"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "El codi d'accés no és el correcte. Torneu-ho a intentar."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "La contrasenya no és la correcta. Torneu-ho a intentar."
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (s'està connectant...)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (s'està desconnectant...)"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Suprimeix i reinicia-ho tot..."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Suprimeix i reinicia-ho tot"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Connecta un dispositiu diferent:"

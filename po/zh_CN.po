@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:06+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:47+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1770,42 +1770,3 @@ msgstr "设备"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "信息"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "清空并重置整个手机"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "重置启动器与主屏幕"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "密码错误，请重新输入。"
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "密码短语不正确，请重新输入。"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "删除并重置所有数据…"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "重置启动器和主屏幕…"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1（正在连接…）"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1（正在断开…）"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "连接另一个设备："
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr "启用热点时，其他设备可以通过 Wi-Fi 使用您的蜂窝数据连接，您会被收取正常的数据费用。"
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr "其他设备可以通过 Wi-Fi 使用您的蜂窝数据连接，您会被收取正常的数据费用。"

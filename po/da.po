@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:02+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1819,46 +1819,3 @@ msgstr "enhed"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "info"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Forkert adgangskode. Prøv igen."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Forkert adgangsfrase. Prøv igen."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Slet & nulstil alting"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Nulstil opstarter & hjemmeskærm…"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Slet & nulstil alting…"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Nulstil opstarter & hjemmeskærm"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Forbinder…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Afbryder…)"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Forbind en anden enhed:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Når adgangspunktet er slået til, kan andre enheder bruge din "
-#~ "mobildataforbindelse over Wi-Fi. Normale datapriser er gældende."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Andre enheder kan bruge din mobildataforbindelse over Wi-Fi-netværket. "
-#~ "Normale datapriser er gældende."

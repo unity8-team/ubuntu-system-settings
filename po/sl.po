@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1828,47 +1828,3 @@ msgstr "naprava"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "podrobnosti"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Ponastavi zaganjalnik in domači zaslon ..."
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Izbriši in ponastavi vse ..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Ponastavi zaganjalnik in domači zaslon"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Izbriši in ponastavi vse"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Povezovanje …)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Prekinjanje …)"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Nepravilno geslo. Poskusite znova."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Nepravilno šifrirno reklo. Poskusite znova."
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Poveži drugačno napravo:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Ko vroča vstopna točka deluje, lahko druge naprave uporabljajo vašo povezavo "
-#~ "z mobilnimi podatki preko omrežja Wi-Fi. Veljajo običajne tarife porabe "
-#~ "podatkov."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Druge naprave lahko uporabljajo vašo povezavo z mobilnimi podatki preko "
-#~ "omrežja Wi-Fi. Veljajo običajne tarife porabe podatkov."

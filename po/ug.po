@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:47+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1787,32 +1787,3 @@ msgstr "ئۈسكۈنە"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "ئۇچۇر"
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "ئىم جۈملىسى ماس كەلمىدى، قايتا سىناڭ"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "ھەممىنى تازىلا&ئەسلگە كەلتۈر"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "ئىم ماس كەلمىدى، قايتا سىناڭ."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "ئىجراچىنى ئەسلىگە كەلتۈرۈش ۋە ماكان ئېكران"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "ئىجراچىنى ئەسلىگە كەلتۈرۈش ۋە ماكان ئېكران..."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "ھەممىنى تازىلا ۋە ئەسلگە قايتۇر"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (باغلىنىۋاتىدۇ…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (ئۈزۈۋاتىدۇ…)"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "باشقا ئۈسكۈنىگە باغلان:"

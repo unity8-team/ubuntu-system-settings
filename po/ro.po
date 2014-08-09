@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-08-07 14:24+0000\n"
+"PO-Revision-Date: 2014-08-08 12:16+0000\n"
 "Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:04+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -987,7 +987,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Șterge și resetează tot"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1010,7 +1010,7 @@ msgstr "Resetare telefon"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Resetare Lansator"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1018,15 +1018,16 @@ msgstr "Resetează toate configurările de sistem..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Șterge și resetează tot..."
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "Lansatorul va fi readus la conținutul original."
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
+"Trebuie să reporniți telefonul pentru ca modificările să producă efecte."
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
@@ -1054,13 +1055,15 @@ msgstr "Personalizat"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "Notificări"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"Aplicațiile selectate vă pot alerta utilizând baloane de notificare, sunete, "
+"vibrații și Centrul de notificări."
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1091,23 +1094,23 @@ msgstr "Asociază"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "Conectat"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "Se conectează…"
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Se deconectează..."
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "Deconectat"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "Necunoscut"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1199,7 +1202,7 @@ msgstr "Conectați un alt dispozitiv:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "Conectează un dispozitiv:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -1208,7 +1211,7 @@ msgstr "Nimic detectat"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Conectare automată la detectare:"
 
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
@@ -1216,7 +1219,7 @@ msgstr "Tip"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "Stare"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -1228,7 +1231,7 @@ msgstr "Deconectare"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "Uită acest dispozitiv"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1298,12 +1301,16 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Dacă hotspotul este pornit, alte dispozitive pot utiliza conexiunea de date "
+"gsm prin rețeaua fără fir. Se aplică abonamentul standard."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Alte dispozitive pot utiliza conexiunea de date gsm prin rețeaua fără fir. "
+"Se aplică abonamentul standard."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1791,7 +1798,7 @@ msgstr "imagine de fundal"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
 msgid "notifications"
-msgstr ""
+msgstr "notificări"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
@@ -1827,46 +1834,3 @@ msgstr "dispozitiv"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "informații"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Parolă greșită. Încercați din nou."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Frază parolă greșită. Încercați din nou."
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Conectare…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Deconectare…)"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Conectați un dispozitiv diferit:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Când hotspotul este pornit, alte dispozitive pot accesa conexiunea de date "
-#~ "gsm prin rețeaua fără fir. Se aplică tarifele standard."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Alte dispozitive pot accesa conexiunea de date gsm prin rețeaua fără fir. Se "
-#~ "aplică tarifele standard."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Șterge și resetează tot"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Resetare lansator și ecran principal..."
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Șterge și resetează tot..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Resetează lansatorul și ecranul principal"

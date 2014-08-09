@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:01+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1811,46 +1811,3 @@ msgstr "preséu"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "info"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (coneutando…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (desconeutando…)"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Desaniciar y restablecer too"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Desaniciar y restablecer too..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Restablecer el llanzador y la pantalla d'aniciu"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Restablecer llanzador y pantalla d'aniciu…"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Códigu incorreutu. Inténtalo otra vegada."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Frase secreta incorreuta. Inténtalo otra vegada."
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Coneutar un preséu distintu:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Cuando'l puntu d'accesu ta activáu, otros preseos puen usar la to conexón de "
-#~ "datos de móvil per aciu de wifi. Aplicaráse la tarifa de datos habitual."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Otros preseos puen usar la to conexón de datos de móvil per aciu de wifi. "
-#~ "Aplicaráse la tarifa de datos habitual."

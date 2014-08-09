@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-07-28 12:54+0000\n"
+"PO-Revision-Date: 2014-08-08 09:30+0000\n"
 "Last-Translator: Åka Sikrom <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:04+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -977,7 +977,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Slett og tilbakestill alt"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1000,7 +1000,7 @@ msgstr "Nullstill telefonen"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Tilbakestill programoppstarter"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1008,15 +1008,15 @@ msgstr "Nullstill alle systeminnstillinger …"
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Slett og tilbakestill alt …"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "Oppstarteren blir tilbakestilt til opprinnelig innhold."
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "Telefonen må startes på nytt for at endringene skal tre i kraft."
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
@@ -1044,13 +1044,15 @@ msgstr "Tilpasset"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "Varslinger"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"Valgte programmer kan varsle deg med informasjonsbobler, lyder, vibrasjoner "
+"og via varslingssenteret."
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1082,23 +1084,23 @@ msgstr "Sammenkoble"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "Tilkoblet"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "Kobler til …"
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Kobler fra …"
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "Frakoblet"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1190,7 +1192,7 @@ msgstr "Koble til en annen enhet:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "Koble til en enhet:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -1199,7 +1201,7 @@ msgstr "Fant ingen"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Koble til automatisk ved oppdagelse:"
 
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
@@ -1207,7 +1209,7 @@ msgstr "Type"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -1219,7 +1221,7 @@ msgstr "Koble fra"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "Glem denne enheten"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1290,12 +1292,16 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Når deling er slått på, kan andre enheter bruke mobildata-tilkoblinga di "
+"over trådløst nettverk. Du belastes for databruk som normalt."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Andre enheter kan bruke mobildata-tilkoblinga di over trådløst nettverk. Du "
+"belastes for databruk som normalt."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1781,7 +1787,7 @@ msgstr "bakgrunnsbilde"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
 msgid "notifications"
-msgstr ""
+msgstr "varslinger"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
@@ -1817,47 +1823,3 @@ msgstr "enhet"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "info"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Nullstill oppstarter og hjemmeskjerm …"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Feil kode. Prøv igjen."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Feil passordfrase. Prøv igjen."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Tilbakestill oppstarter og hjemmeskjerm"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Slett og tilbakestill alt …"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Slett og tilbakestill alt"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Kobler til …)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Kobler fra …)"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Koble til en annen type enhet:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Når du slår på deling av trådløst nett kan andre enheter bruke telefonen din "
-#~ "som internettforbindelse via trådløst nettverk. Du belastes for databruk av "
-#~ "av operatøren din som normalt."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Andre enheter kan bruke telefonen din som internettforbindelse via trådløst "
-#~ "nettverk. Du belastes for databruk av av operatøren din som normalt."

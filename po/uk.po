@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-07-29 07:58+0000\n"
+"PO-Revision-Date: 2014-08-08 12:23+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:47+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: uk\n"
 
@@ -991,7 +991,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Витерти і скинути усе"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1014,7 +1014,7 @@ msgstr "Відновити початковий стан"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Скинути засіб запуску"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1022,15 +1022,16 @@ msgstr "Відновити усі початкові параметри…"
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Витерти і скинути усе…"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "Засобу запуску буде повернуто його початковий вміст."
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
+"Щоб зміни набули чинності операційну систему телефону слід перезавантажити."
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
@@ -1058,13 +1059,15 @@ msgstr "Нетипове"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "Сповіщення"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"Виберіть програми, які зможуть сповіщати вас про події за допомогою панелей-"
+"вигульків, звуків, вібрації та Центру сповіщень."
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1096,23 +1099,23 @@ msgstr "Пов’язування"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "З'єднано"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "З’єднуємося…"
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Від’єднуємося…"
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "Від’єднано"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомо"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1204,7 +1207,7 @@ msgstr "З’єднатися з іншим пристроєм:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "З’єднати пристрій:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -1213,7 +1216,7 @@ msgstr "Не виявлено жодної"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "З’єднуватися автоматично, якщо виявлено:"
 
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
@@ -1221,7 +1224,7 @@ msgstr "Тип"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "Стан"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -1233,7 +1236,7 @@ msgstr "Від'єднатися"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "Забути про цей пристрій"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1303,12 +1306,18 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Якщо точку доступу увімкнено, інші пристрої можуть користуватися "
+"стільниковим з’єднанням за допомогою Wi-Fi. Тарифікація обміну даними "
+"виконуватиметься відповідно до вашого тарифного плану."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Інші пристрої можуть користуватися стільниковим з’єднанням за допомогою Wi-"
+"Fi. Тарифікація обміну даними виконуватиметься відповідно до вашого "
+"тарифного плану."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1794,7 +1803,7 @@ msgstr "шпалери"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
 msgid "notifications"
-msgstr ""
+msgstr "сповіщення"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
@@ -1830,48 +1839,3 @@ msgstr "пристрій"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "інформація"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Відновити початковий стан засобу запуску та початкового екрана…"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (встановлення з’єднання…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (роз’єднання…)"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Відновити початкові налаштування панелі запуску і домашнього екрана"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Витерти усі дані і відновити початкові налаштування…"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Витерти усі дані і відновити початкові налаштування"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Помилковий код. Повторіть спробу."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Помилковий пароль. Повторіть спробу."
-
-#~ msgid "Connect a different device:"
-#~ msgstr "З’єднатися з іншим пристроєм:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Якщо увімкнено точку доступу, інші пристрої можуть використовувати з’єднання "
-#~ "для обміну даними за допомогою Wi-Fi. Обмін даними за допомогою такого "
-#~ "з’єднання підлягає звичайній тарифікації."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Інші пристрої можуть використовувати з’єднання для обміну даними за "
-#~ "допомогою Wi-Fi. Обмін даними за допомогою такого з’єднання підлягає "
-#~ "звичайній тарифікації."

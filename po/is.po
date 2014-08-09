@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:03+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:45+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: is\n"
 
@@ -1780,32 +1780,3 @@ msgstr "tæki"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "upplýsingar"
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Rangt lykilorð. Reyndu aftur."
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Rangur lykilkóði. Reyndu aftur."
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (tengist…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (aftengist…)"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Tengjast öðru tæki:"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Hreinsa og frumstilla allt"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Frumstilla ræsi og heimaskjá..."
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Hreinsa og frumstilla allt..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Frumstilla ræsi og heimaskjá"

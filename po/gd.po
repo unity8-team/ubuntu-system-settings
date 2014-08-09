@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-07-30 23:17+0000\n"
+"PO-Revision-Date: 2014-08-08 11:29+0000\n"
 "Last-Translator: Akerbeltz <fios@akerbeltz.org>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:03+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:45+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: gd\n"
 
@@ -994,7 +994,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Sguab às ⁊ ath-shuidhich a h-uile rud"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1017,7 +1017,7 @@ msgstr "Ath-shuidhich am fòn"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Ath-shuidhich an lòinsear"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1025,15 +1025,16 @@ msgstr "Ath-shuidhich gach roghainn an t-siostaim…"
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Sguab às ⁊ ath-shuidhich a h-uile rud..."
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "Thèid an t-susbaint a bha aig an lòinsear an toiseach a thilleadh."
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
+"Feumaidh am fòn ath-thòiseachadh mus bi buaidh aig na dh'atharraich thu."
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
@@ -1061,13 +1062,15 @@ msgstr "Gnàthaichte"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
 msgid "Notifications"
-msgstr ""
+msgstr "Brathan"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"'S urrainn do chuid dhe na h-aplacaidean agus do dh'aonad nam brathan "
+"builgean, fuaimean is crith a nochdadh mar rabhadh dhut."
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
@@ -1099,23 +1102,23 @@ msgstr "Paidhrich"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "Ceangailte"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "A' dèanamh ceangal…"
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "A' dì-cheangal..."
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "Air a dhì-cheangal"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "Neo-aithnichte"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1207,7 +1210,7 @@ msgstr "Ceangail uidheam eile:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "Ceangail uidheam ris:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -1216,7 +1219,7 @@ msgstr "Cha do mhothaich sinn do ghin"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Dèan ceangal gu fèin-obrachail ma mhothaichear ris:"
 
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
@@ -1224,7 +1227,7 @@ msgstr "Seòrsa"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "Staid"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -1236,7 +1239,7 @@ msgstr "Dì-cheangail"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "Dìochuimhnich an t-uidheam seo"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1307,12 +1310,17 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Ma chruthaich thu hotspot, 's urrainn do dh'uidheaman eile an ceangal dàta "
+"aig an fhòn-làimhe agad a chleachdadh slighe WiFi. Èiridh na cosgaisean dàta "
+"àbhaisteach dhut."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"'S urrainn do dh'uidheaman eile an ceangal dàta aig an fhòn-làimhe agad a "
+"chleachdadh slighe WiFi. Èiridh na cosgaisean dàta àbhaisteach dhut."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1801,7 +1809,7 @@ msgstr "wallpaper;pàipear-balla"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
 msgid "notifications"
-msgstr ""
+msgstr "brathan"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
@@ -1837,47 +1845,3 @@ msgstr "device;uidheam"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "fiosrachadh;info"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Tha an còd-faire cearr. Feuch ris a-rithist."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Tha an abairt-fhaire cearr. Feuch ris a-rithist."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Ath-shuidhich an lòinsear ⁊ an sgrìn mhòr"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Ath-shuidhich an lòinsear ⁊ an sgrìn mhòr…"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Suath às ⁊ ath-shuidhich a h-uile rud…"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Suath às ⁊ ath-shuidhich a h-uile rud"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 ('Ga cheangal…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 ('Ga dhì-cheangal…)"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Ceangail uidheam eile:"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Ma tha Hotspot air, 's urrainn do dh'uidheaman eile ceangal dàta an fhòn-"
-#~ "làimhe agad a chleachdadh slighe WiFi. Èiridh na tàillean dàta àbhaisteach "
-#~ "dhut."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "'S urrainn do dh'uidheaman eile ceangal dàta an fhòn-làimhe agad a "
-#~ "chleachdadh slighe WiFi. Èiridh na tàillean dàta àbhaisteach dhut."

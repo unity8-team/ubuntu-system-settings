@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:02+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1818,47 +1818,3 @@ msgstr "benveg"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "titouroù"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Diverkañ hag adderaouekaat pep tra..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Adderaouekaat al lañser hag ar skramm degemer"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Adderaouekaat al lañser hag ar skramm degemer..."
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Kod-tremen direizh. Esaeit en-dro."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Diverkañ & adderaouekaat pep tra"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (O tigevreañ…)"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (O kevreañ…)"
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Frazenn-dremen direizh. Esaeit en-dro"
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Kevreañ un ardivink disheñvel :"
-
-#~ msgid ""
-#~ "When hotspot is on, other devices can user your cellular data connection "
-#~ "over Wi-Fi. Normal data charges apply."
-#~ msgstr ""
-#~ "Pa vez al lec'h Wi-Fi o vont en-dro e c'hall binvioù all implijout ho "
-#~ "kevreadur ho pellgomzer hezoug evit ar Wi-Fi. Ar prizioù ordinal zo da baeañ "
-#~ "evit ar roadennoù."
-
-#~ msgid ""
-#~ "Other devices can user your cellular data connection over the Wi-Fi network. "
-#~ "Normal data charges apply."
-#~ msgstr ""
-#~ "Gallout a ra binvioù all implijout ho kevreadur ho pellgomzer hezoug evit ar "
-#~ "Wi-Fi. Ar prizioù ordinal zo da baeañ evit ar roadennoù."

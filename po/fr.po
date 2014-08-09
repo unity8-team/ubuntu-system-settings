@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:02+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:45+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: \n"
 
@@ -1819,32 +1819,3 @@ msgstr "périphérique"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "info"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Supprimer et tout réinitialiser"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Supprimer et tout réinitialiser..."
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Réinitialiser le lanceur et l'écran de bienvenue"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Réinitialiser le lanceur et la page d'accueil…"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Connexion en cours…)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Déconnexion en cours…)"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Mot de passe incorrect. Veuillez réessayer."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Phrase secrète incorrecte. Veuillez réessayer."
-
-#~ msgid "Connect a different device:"
-#~ msgstr "Connecter à un appareil différent :"

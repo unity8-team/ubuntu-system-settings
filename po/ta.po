@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1809,29 +1809,3 @@ msgstr ""
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr ""
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (இணைக்கிறது...)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (துண்டிக்கிறது...)"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "தொடக்கம் மற்றும் முகப்பு திரையை மீட்டமை..."
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "அனைத்தையும் அழி & மீட்டமை.."
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "அனைத்தையும் அழி & மீட்டமை"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "தொடக்கும் & முகப்பு திரையை மீட்டமை"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "தவயான கடவுக்குறியீடு. மீண்டும் முயற்சி"
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "தவயான கடவுச்சொல். மீண்டும் முயற்சி"

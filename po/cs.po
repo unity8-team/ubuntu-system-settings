@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-08 07:02+0000\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -1808,29 +1808,3 @@ msgstr "zařízení"
 #: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "info"
-
-#, qt-format
-#~ msgid "%1 (Connecting…)"
-#~ msgstr "%1 (Připojování...)"
-
-#, qt-format
-#~ msgid "%1 (Disconnecting…)"
-#~ msgstr "%1 (Odpojování)"
-
-#~ msgid "Erase & reset everything"
-#~ msgstr "Smazat a vše resetovat"
-
-#~ msgid "Erase & reset everything…"
-#~ msgstr "Smazat  a vše resetovat"
-
-#~ msgid "Reset launcher & home screen"
-#~ msgstr "Resetovat launcher a domovskou obrazovku"
-
-#~ msgid "Reset launcher & home screen…"
-#~ msgstr "Resetovat launcher a domácí obrazovku"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Špatný kód. Zkuste to znova."
-
-#~ msgid "Incorrect passphrase. Try again."
-#~ msgstr "Nesprávné přístupové heslo. Zkuste to znova."
