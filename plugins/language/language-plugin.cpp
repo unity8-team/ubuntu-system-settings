@@ -615,7 +615,7 @@ LanguagePlugin::managerLoaded()
 
         m_user = act_user_manager_get_user_by_id(m_manager, geteuid());
 
-        if (m_user != NULL) {
+        if (m_user != nullptr) {
             g_object_ref(m_user);
 
             if (act_user_is_loaded(m_user))

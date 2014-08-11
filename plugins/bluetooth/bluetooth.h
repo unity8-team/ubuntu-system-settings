@@ -70,7 +70,7 @@ Q_SIGNALS:
 
 public:
     explicit Bluetooth(QObject *parent = nullptr);
-    Bluetooth(const QDBusConnection &dbus, QObject *parent = nullptr);
+    explicit Bluetooth(const QDBusConnection &dbus, QObject *parent = nullptr);
     ~Bluetooth() {}
 
     Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }

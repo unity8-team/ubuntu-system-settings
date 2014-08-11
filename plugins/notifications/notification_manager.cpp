@@ -15,6 +15,7 @@
  *
 */
 
+
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 
@@ -32,17 +33,17 @@ namespace NotificationsPlugin {
 
 void app_data_from_desktop_id (const char* desktop_id, char **display_name, char **icon_fname) {
     GAppInfo* app_info = (GAppInfo*)g_desktop_app_info_new(desktop_id);
-    if (app_info != NULL) {
+    if (app_info != nullptr) {
         *display_name = g_strdup(g_app_info_get_display_name(app_info));
         GIcon* icon = g_app_info_get_icon (app_info);
-        if (icon != NULL) {
+        if (icon != nullptr) {
             *icon_fname = g_icon_to_string (icon);
         }
         g_object_unref (app_info);
     }
     else {
-        *display_name = NULL;
-        *icon_fname = NULL;
+        *display_name = nullptr;
+        *icon_fname = nullptr;
     }
 }
 
