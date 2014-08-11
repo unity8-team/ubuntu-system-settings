@@ -35,6 +35,7 @@ Column {
         expanded: true
         model: m
         delegate: OptionSelectorDelegate {
+            objectName: "defaultForCalls" + modelData
             text: getNameFromIndex(index);
         }
         selectedIndex: m.indexOf(phoneSettings.defaultSimForCalls)
@@ -55,6 +56,7 @@ Column {
         expanded: true
         model: m
         delegate: OptionSelectorDelegate {
+            objectName: "defaultForMessages" + modelData
             text: getNameFromIndex(index);
         }
         selectedIndex: m.indexOf(phoneSettings.defaultSimForMessages)
