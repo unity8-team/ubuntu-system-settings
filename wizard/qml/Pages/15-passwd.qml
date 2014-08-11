@@ -69,7 +69,10 @@ LocalComponents.Page {
             id: combo
 
             text: listview.currentItem.text
-            onClicked: expanded = !expanded
+            onClicked: {
+                expanded = !expanded
+                forceActiveFocus() // hides OSK if up
+            }
             UbuntuListView {
                 id: listview
                 width: parent.width
