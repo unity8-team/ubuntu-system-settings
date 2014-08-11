@@ -19,6 +19,7 @@ import GSettings 1.0
 import Ubuntu.Components 0.1
 import Unity.Application 0.1
 import Unity.Notifications 1.0 as NotificationBackend
+import "Components"
 import "file:///usr/share/unity8/Notifications" as Notifications // FIXME This should become a module or go away
 
 Item {
@@ -80,9 +81,7 @@ Item {
         }
     }
 
-    OSKController {
-        //FIXME UbuntuKeyboardInfo communicates coordinates relative to the panel
-        anchors.topMargin: units.gu(3) + units.dp(2)
+    InputMethod {
         anchors.fill: parent
     }
 
@@ -108,12 +107,5 @@ Item {
                 PropertyChanges { target: notifications; width: units.gu(38) }
             }
         ]
-
-//        FIXME despite correctly turning blockInput: false when the notification disappears, input is still blocked. Commenting out for now
-//        InputFilterArea {
-//            anchors { left: parent.left; right: parent.right }
-//            height: parent.contentHeight
-//            blockInput: height > 0
-//        }
     }
 }

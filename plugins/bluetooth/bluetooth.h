@@ -39,12 +39,20 @@ class Bluetooth : public QObject
                 READ getDisconnectedDevices
                 CONSTANT)
 
+    Q_PROPERTY (QAbstractItemModel* autoconnectDevices
+                READ getAutoconnectDevices
+                CONSTANT)
+
     Q_PROPERTY (QObject * selectedDevice
                 READ getSelectedDevice
                 NOTIFY selectedDeviceChanged);
 
     Q_PROPERTY (QObject * agent
                 READ getAgent);
+
+    Q_PROPERTY (bool powered
+                READ isPowered
+                NOTIFY poweredChanged);
 
     Q_PROPERTY (bool discovering
                 READ isDiscovering
@@ -56,30 +64,33 @@ class Bluetooth : public QObject
 
 Q_SIGNALS:
     void selectedDeviceChanged();
+    void poweredChanged(bool powered);
     void discoveringChanged(bool isActive);
     void discoverableChanged(bool isActive);
 
-private Q_SLOTS:
-    void onPairingDone();
-
 public:
-    explicit Bluetooth(QObject *parent = 0);
+    explicit Bluetooth(QObject *parent = nullptr);
+    Bluetooth(const QDBusConnection &dbus, QObject *parent = nullptr);
     ~Bluetooth() {}
 
     Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }
     Q_INVOKABLE void setSelectedDevice(const QString &address);
     Q_INVOKABLE void connectDevice(const QString &address);
     Q_INVOKABLE void disconnectDevice();
+    Q_INVOKABLE void removeDevice();
     Q_INVOKABLE void toggleDiscovery();
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
+    Q_INVOKABLE static bool isSupportedType(const int type);
 
 public:
     Agent * getAgent();
     Device * getSelectedDevice();
     QAbstractItemModel * getConnectedDevices();
     QAbstractItemModel * getDisconnectedDevices();
+    QAbstractItemModel * getAutoconnectDevices();
 
+    bool isPowered() const { return m_devices.isPowered(); }
     bool isDiscovering() const { return m_devices.isDiscovering(); }
     bool isDiscoverable() const { return m_devices.isDiscoverable(); }
 
@@ -88,11 +99,10 @@ private:
     DeviceModel m_devices;
     DeviceFilter m_connectedDevices;
     DeviceFilter m_disconnectedDevices;
+    DeviceFilter m_autoconnectDevices;
     QSharedPointer<Device> m_selectedDevice;
 
     Agent m_agent;
-
-    QMap<QString,Device::ConnectionMode> m_connectAfterPairing;
 };
 
 #endif // BLUETOOTH_H

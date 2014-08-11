@@ -50,6 +50,7 @@ public:
 
     Q_INVOKABLE QObject *getByName(const QString &name) const;
     Q_INVOKABLE QAbstractItemModel *itemModel(const QString &category);
+    Q_INVOKABLE void resetPlugins();
     QString getFilter();
     void setFilter(const QString &filter);
 

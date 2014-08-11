@@ -27,8 +27,13 @@
 #include "dbus-shared.h"
 
 Bluetooth::Bluetooth(QObject *parent):
+    Bluetooth(QDBusConnection::systemBus(), parent)
+{
+}
+
+Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
     QObject(parent),
-    m_dbus(QDBusConnection::systemBus()),
+    m_dbus(dbus),
     m_devices(m_dbus),
     m_agent(m_dbus, m_devices)
 {
@@ -37,28 +42,27 @@ Bluetooth::Bluetooth(QObject *parent):
     if(!m_dbus.registerObject(DBUS_AGENT_PATH, &m_agent))
         qFatal("Couldn't register agent at " DBUS_AGENT_PATH);
 
-    QVector<Device::Type> types;
-    types.append(Device::Type::Headset);
-    types.append(Device::Type::Headphones);
-    types.append(Device::Type::OtherAudio);
-    m_connectedDevices.filterOnType(types);
     m_connectedDevices.filterOnConnections(Device::Connection::Connected |
+                                           Device::Connection::Connecting |
                                            Device::Connection::Disconnecting);
     m_connectedDevices.setSourceModel(&m_devices);
 
-    m_disconnectedDevices.filterOnType(types);
-    m_disconnectedDevices.filterOnConnections(Device::Connection::Connecting |
-                                              Device::Connection::Disconnected);
+    m_disconnectedDevices.filterOnConnections(Device::Connection::Disconnected);
+    m_disconnectedDevices.filterOnTrusted(false);
     m_disconnectedDevices.setSourceModel(&m_devices);
+
+    m_autoconnectDevices.filterOnConnections(Device::Connection::Disconnected);
+    m_autoconnectDevices.filterOnTrusted(true);
+    m_autoconnectDevices.setSourceModel(&m_devices);
+
+    QObject::connect(&m_devices, SIGNAL(poweredChanged(bool)),
+                     this, SIGNAL(poweredChanged(bool)));
 
     QObject::connect(&m_devices, SIGNAL(discoveringChanged(bool)),
                      this, SIGNAL(discoveringChanged(bool)));
 
     QObject::connect(&m_devices, SIGNAL(discoverableChanged(bool)),
                      this, SIGNAL(discoverableChanged(bool)));
-
-    QObject::connect(&m_agent, SIGNAL(onPairingDone()),
-                     this, SLOT(onPairingDone()));
 }
 
 void Bluetooth::setSelectedDevice(const QString &address)
@@ -82,6 +86,20 @@ void Bluetooth::startDiscovery()
 void Bluetooth::stopDiscovery()
 {
     m_devices.stopDiscovery();
+}
+
+bool Bluetooth::isSupportedType(const int type)
+{
+    switch((Device::Type)type) {
+
+    case Device::Type::Headset:
+    case Device::Type::Headphones:
+    case Device::Type::OtherAudio:
+        return true;
+
+    default:
+        return false;
+    }
 }
 
 /***
@@ -120,6 +138,13 @@ QAbstractItemModel * Bluetooth::getDisconnectedDevices()
     return ret;
 }
 
+QAbstractItemModel * Bluetooth::getAutoconnectDevices()
+{
+    auto ret = &m_autoconnectDevices;
+    QQmlEngine::setObjectOwnership(ret, QQmlEngine::CppOwnership);
+    return ret;
+}
+
 
 /***
 ****
@@ -129,7 +154,7 @@ void Bluetooth::disconnectDevice()
 {
     Device::Type type;
 
-    if (m_selectedDevice)
+    if (m_selectedDevice) {
         type = m_selectedDevice->getType();
         if (type == Device::Type::Headset)
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
@@ -137,6 +162,9 @@ void Bluetooth::disconnectDevice()
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
         else if (type == Device::Type::OtherAudio)
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
+    } else {
+        qWarning() << "No selected device to disconnect";
+    }
 }
 
 void Bluetooth::connectDevice(const QString &address)
@@ -145,8 +173,10 @@ void Bluetooth::connectDevice(const QString &address)
     auto device = m_devices.getDeviceFromAddress(address);
     Device::Type type;
 
-    if (!device)
+    if (!device) {
+        qWarning() << "No device to connect.";
         return;
+    }
 
     type = device->getType();
     if (type == Device::Type::Headset)
@@ -156,24 +186,21 @@ void Bluetooth::connectDevice(const QString &address)
     else if (type == Device::Type::OtherAudio)
         connMode = Device::ConnectionMode::Audio;
 
-    if (device->isPaired()) {
+    if (device->isTrusted()) {
         device->connect(connMode);
     } else {
-        m_connectAfterPairing[address] = connMode;
-        m_devices.pairDevice(address);
+        m_devices.addConnectAfterPairing(address, connMode);
+        m_devices.createDevice(address);
     }
 }
 
-void Bluetooth::onPairingDone()
+void Bluetooth::removeDevice()
 {
-    QMapIterator<QString,Device::ConnectionMode> it(m_connectAfterPairing);
-    while (it.hasNext()) {
-        it.next();
-        const QString &address = it.key();
-        auto device = m_devices.getDeviceFromAddress(address);
-        if (device)
-            device->connect(it.value());
+    if (m_selectedDevice) {
+        QString path = m_selectedDevice->getPath();
+        m_devices.removeDevice(path);
+    } else {
+        qWarning() << "No selected device to remove.";
     }
-
-    m_connectAfterPairing.clear();
 }
+

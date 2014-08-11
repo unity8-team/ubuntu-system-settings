@@ -24,11 +24,12 @@
 #include <QObject>
 #include <SystemSettings/PluginInterface>
 
-class CheckUpdatesPlugin: public QObject, public SystemSettings::PluginInterface
+class CheckUpdatesPlugin: public QObject,
+                          public SystemSettings::PluginInterface2
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface")
-    Q_INTERFACES(SystemSettings::PluginInterface)
+    Q_PLUGIN_METADATA(IID "com.ubuntu.SystemSettings.PluginInterface/2.0")
+    Q_INTERFACES(SystemSettings::PluginInterface2)
 
 public:
     CheckUpdatesPlugin();

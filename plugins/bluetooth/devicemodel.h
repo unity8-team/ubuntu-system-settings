@@ -46,12 +46,13 @@ public:
     enum Roles
     {
       // Qt::DisplayRole holds device name
-      // Qt::DecorationRole has icon
       TypeRole = Qt::UserRole,
+      IconRole,
       StrengthRole,
       ConnectionRole,
       AddressRole,
-      LastRole = AddressRole
+      TrustedRole,
+      LastRole = TrustedRole
     };
 
     // implemented virtual methods from QAbstractTableModel
@@ -64,14 +65,18 @@ public:
     QString adapterName() const { return m_adapterName; }
 
 public:
+    bool isPowered() const { return m_isPowered; }
     bool isDiscovering() const { return m_isDiscovering; }
     bool isDiscoverable() const { return m_isDiscoverable; }
-    void pairDevice(const QString &address);
+    void addConnectAfterPairing(const QString &address, Device::ConnectionMode mode);
+    void createDevice(const QString &address);
+    void removeDevice(const QString &path);
     void stopDiscovery();
     void startDiscovery();
     void toggleDiscovery();
 
 Q_SIGNALS: 
+    void poweredChanged(bool powered);
     void discoveringChanged(bool isDiscovering);
     void discoverableChanged(bool isDiscoverable);
 
@@ -84,6 +89,7 @@ private:
 
     QString m_adapterName;
     QString m_adapterAddress;
+    bool m_isPowered = false;
     bool m_isPairable = false;
     bool m_isDiscovering = false;
     bool m_isDiscoverable = false;
@@ -92,6 +98,7 @@ private:
     void restartTimer();
     void trySetDiscoverable(bool discoverable);
     void setDiscoverable(bool discoverable);
+    void setPowered(bool powered);
 
     QScopedPointer<QDBusInterface> m_bluezAdapter;
     void clearAdapter();
@@ -106,6 +113,8 @@ private:
     void emitRowChanged(int row);
 
 private Q_SLOTS:
+    void slotCreateFinished(QDBusPendingCallWatcher *call);
+    void slotRemoveFinished(QDBusPendingCallWatcher *call);
     void slotPropertyChanged(const QString &key, const QDBusVariant &value);
     void slotTimeout();
     void slotEnableDiscoverable();
@@ -127,6 +136,7 @@ public:
     virtual ~DeviceFilter() {}
     void filterOnType(const QVector<Device::Type>);
     void filterOnConnections(Device::Connections);
+    void filterOnTrusted(bool trusted);
 
 protected:
     virtual bool filterAcceptsRow(int, const QModelIndex&) const;
@@ -137,6 +147,8 @@ private:
     bool m_typeEnabled = false;
     Device::Connections m_connections = Device::Connection::Connected;
     bool m_connectionsEnabled = false;
+    bool m_trustedEnabled = false;
+    bool m_trustedFilter = false;
 };
 
 #endif // BLUETOOTH_DEVICE_MODEL_H

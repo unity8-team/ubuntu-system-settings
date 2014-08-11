@@ -49,10 +49,8 @@ ItemPage {
 
         ListItem.Standard {
             text: i18n.tr("Call forwarding")
-            /* Hide until implemented */
-            visible: showAllUI
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"))
+            onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {modem: manager.modems[0]})
         }
 
         ListItem.Standard {

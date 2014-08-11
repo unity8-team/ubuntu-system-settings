@@ -35,6 +35,12 @@
 #include <QProcess>
 #include <QVariant>
 #include <hybris/properties/properties.h>
+#include <QDBusReply>
+
+namespace {
+    const QString PROPERTY_SERVICE_PATH = "/com/canonical/PropertyService";
+    const QString PROPERTY_SERVICE_OBJ = "com.canonical.PropertyService";
+}
 
 struct MeasureData {
     uint *running;
@@ -132,6 +138,10 @@ StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
     m_clickFilterProxy(&m_clickModel),
+    m_propertyService(new QDBusInterface(PROPERTY_SERVICE_OBJ,
+        PROPERTY_SERVICE_PATH,
+        PROPERTY_SERVICE_OBJ,
+        QDBusConnection::systemBus())),
     m_cancellable(nullptr)
 {
 }
@@ -205,6 +215,24 @@ QString StorageAbout::ubuntuBuildID()
     }
 
     return m_ubuntuBuildID;
+}
+
+bool StorageAbout::getDeveloperMode()
+{
+    QDBusReply<bool> reply = m_propertyService->call("GetProperty", "adb");
+
+    if (reply.isValid()) {
+        return reply.value();
+    } else {
+        qWarning("devMode: no reply from dbus property service");
+        return false;
+    }
+}
+
+bool StorageAbout::toggleDeveloperMode()
+{
+    m_propertyService->call("SetProperty", "adb", !getDeveloperMode());
+    return getDeveloperMode();
 }
 
 QString StorageAbout::licenseInfo(const QString &subdir) const

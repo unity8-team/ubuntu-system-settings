@@ -29,6 +29,7 @@
 #include <QObject>
 #include <QProcess>
 #include <QVariant>
+#include <QDBusInterface>
 
 
 class StorageAbout : public QObject
@@ -86,6 +87,14 @@ class StorageAbout : public QObject
                 READ ubuntuBuildID
                 CONSTANT)
 
+    Q_PROPERTY( bool getDeveloperMode
+                READ getDeveloperMode
+                CONSTANT)
+
+    Q_PROPERTY( bool toggleDeveloperMode
+                READ toggleDeveloperMode
+                CONSTANT)
+
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
@@ -106,6 +115,8 @@ public:
     Q_INVOKABLE QString formatSize (quint64 size) const;
     Q_INVOKABLE void populateSizes();
     Q_INVOKABLE QString getDevicePath (const QString mount_point);
+    bool getDeveloperMode();
+    bool toggleDeveloperMode();
 
 Q_SIGNALS:
     void sortRoleChanged();
@@ -126,6 +137,8 @@ private:
     quint64 m_homeSize;
 
     QMap<QString, QString> m_mounts;
+
+    QScopedPointer<QDBusInterface> m_propertyService;
 
     GCancellable *m_cancellable;
 };

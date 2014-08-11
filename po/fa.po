@@ -7,1430 +7,1536 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-07 13:08+0200\n"
-"PO-Revision-Date: 2013-07-17 19:27+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-08-08 09:44+0800\n"
+"PO-Revision-Date: 2014-08-08 21:08+0000\n"
+"Last-Translator: Danial Behzadi <dani.behzi@gmail.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-07-09 06:34+0000\n"
-"X-Generator: Launchpad (build 17100)\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
-#: plugins/sound//SoundsList.qml:68
+#: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
-msgstr ""
+msgstr "قطع پخش"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: plugins/sound//PageComponent.qml:36
-#: settings.js:2
+#: ../plugins/sound//PageComponent.qml:38
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:2
 msgid "Sound"
-msgstr ""
+msgstr "صدا"
 
-#: plugins/sound//PageComponent.qml:68
+#: ../plugins/sound//PageComponent.qml:75
+msgid "Silent Mode"
+msgstr "حالت بی‌صدا"
+
+#: ../plugins/sound//PageComponent.qml:79
+msgid "Ringer:"
+msgstr "زنگ زدن:"
+
+#: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
-msgstr ""
+msgstr "تماس‌های تلفنی:"
 
-#: plugins/sound//PageComponent.qml:72
-#: plugins/sound//PageComponent.qml:78
+#: ../plugins/sound//PageComponent.qml:115
+#: ../plugins/sound//PageComponent.qml:121
 msgid "Ringtone"
-msgstr ""
+msgstr "صدای زنگ"
 
-#: plugins/sound//PageComponent.qml:89
+#: ../plugins/sound//PageComponent.qml:134
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "لرزش هنگام زنگ زدن"
 
-#: plugins/sound//PageComponent.qml:97
-#: plugins/sound//PageComponent.qml:130
+#: ../plugins/sound//PageComponent.qml:143
+#: ../plugins/sound//PageComponent.qml:178
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "لرزش در حالت بی‌صدا"
 
-#: plugins/sound//PageComponent.qml:102
+#: ../plugins/sound//PageComponent.qml:147
 msgid "Messages:"
-msgstr ""
+msgstr "پیام‌ها:"
 
-#: plugins/sound//PageComponent.qml:106
-#: plugins/sound//PageComponent.qml:112
+#: ../plugins/sound//PageComponent.qml:151
+#: ../plugins/sound//PageComponent.qml:157
 msgid "Message received"
-msgstr ""
+msgstr "پیام رسید"
 
-#: plugins/sound//PageComponent.qml:122
+#: ../plugins/sound//PageComponent.qml:169
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "لرزش با صدای پیام"
 
-#: plugins/sound//PageComponent.qml:135
+#: ../plugins/sound//PageComponent.qml:182
 msgid "Other sounds:"
-msgstr ""
+msgstr "صداهای دیگر:"
 
-#: plugins/sound//PageComponent.qml:139
-#: plugins/language//PageComponent.qml:160
+#: ../plugins/sound//PageComponent.qml:186
+#: ../plugins/language//PageComponent.qml:161
 msgid "Keyboard sound"
-msgstr ""
+msgstr "صدای صفحه‌کلید"
 
-#: plugins/sound//PageComponent.qml:153
+#: ../plugins/sound//PageComponent.qml:200
 msgid "Lock sound"
-msgstr ""
+msgstr "صدای قفل"
 
-#: plugins/sound//SilentModeWarning.qml:30
+#: ../plugins/sound//SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "تلفن در حالت بی‌صداست."
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: plugins/time-date//PageComponent.qml:29
-#: settings.js:8
+#: ../plugins/time-date//PageComponent.qml:29
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:8
 msgid "Time & Date"
-msgstr ""
+msgstr "زمان و تاریخ"
 
-#: plugins/time-date//PageComponent.qml:53
+#: ../plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr ""
+msgstr "منطقه‌ی زمانی:"
 
-#: plugins/time-date//PageComponent.qml:68
+#: ../plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
-msgstr ""
+msgstr "تنظیم زمان و تاریخ:"
 
-#: plugins/time-date//PageComponent.qml:69
-#: plugins/time-date//ChooseTimeZone.qml:47
-#: plugins/cellular//PageComponent.qml:122
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Automatically"
-msgstr ""
+msgstr "به صورت خودکار"
 
-#: plugins/time-date//PageComponent.qml:69
-#: plugins/time-date//ChooseTimeZone.qml:47
-#: plugins/cellular//PageComponent.qml:122
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
-msgstr ""
+msgstr "دستی"
 
-#: plugins/time-date//TimePicker.qml:26
+#: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "تنظیم زمان و تاریخ"
 
-#: plugins/time-date//TimePicker.qml:68
+#: ../plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "زمان"
 
-#: plugins/time-date//TimePicker.qml:81
+#: ../plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "ساعت"
 
-#: plugins/time-date//TimePicker.qml:95
+#: ../plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "دقیقه"
 
-#: plugins/time-date//TimePicker.qml:109
+#: ../plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "ثانیه"
 
-#: plugins/time-date//TimePicker.qml:118
+#: ../plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "تاریخ"
 
-#: plugins/time-date//TimePicker.qml:130
+#: ../plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "روز"
 
-#: plugins/time-date//TimePicker.qml:144
+#: ../plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "ماه"
 
-#: plugins/time-date//TimePicker.qml:162
+#: ../plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "سال"
 
-#: plugins/time-date//TimePicker.qml:173
-#: plugins/security-privacy//LockSecurity.qml:310
-#: plugins/language//DisplayLanguage.qml:94
-#: plugins/wifi//OtherNetwork.qml:112
-#: plugins/phone//CallForwarding.qml:113
-#: plugins/reset//EraseEverything.qml:36
-#: plugins/reset//ResetAllSettings.qml:36
-#: plugins/reset//ResetLauncherHome.qml:40
-#: plugins/background//Preview.qml:96
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/security-privacy//LockSecurity.qml:278
+#: ../plugins/language//DisplayLanguage.qml:94
+#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/phone//CallForwarding.qml:136
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/background//Preview.qml:97
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/cellular//HotspotSetup.qml:85
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
-#: plugins/time-date//TimePicker.qml:182
-#: plugins/phone//CallForwarding.qml:113
-#: plugins/background//Preview.qml:102
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/security-privacy//LockSecurity.qml:299
+#: ../plugins/phone//CallForwarding.qml:148
+#: ../plugins/background//Preview.qml:104
 msgid "Set"
-msgstr ""
+msgstr "تنظیم"
 
-#: plugins/time-date//ChooseTimeZone.qml:28
+#: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "منطقه‌ی زمانی"
 
-#: plugins/time-date//ChooseTimeZone.qml:46
+#: ../plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "تنظیم منطقه‌ی زمانی:"
 
-#: plugins/time-date//ChooseTimeZone.qml:126
+#: ../plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr ""
+msgstr "موقعیت کنونی خود را وارد کنید."
 
-#: plugins/time-date//ChooseTimeZone.qml:127
+#: ../plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr ""
+msgstr "هیچ موقعیت مطابقی یافت نشد"
 
-#: plugins/security-privacy//LockSecurity.qml:30
-#: plugins/security-privacy//PhoneLocking.qml:44
+#: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/security-privacy//PageComponent.qml:82
+#: ../plugins/security-privacy//PhoneLocking.qml:44
+#: ../plugins/about//DevMode.qml:108
 msgid "Lock security"
-msgstr ""
+msgstr "امنیت قفل"
 
-#: plugins/security-privacy//LockSecurity.qml:78
+#: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
-msgstr ""
+msgstr "تعویض رمز عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:80
+#: ../plugins/security-privacy//LockSecurity.qml:94
 msgid "Change passphrase"
-msgstr ""
+msgstr "تعویض عبارت عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:87
+#: ../plugins/security-privacy//LockSecurity.qml:101
 msgid "Switch to swipe"
-msgstr ""
+msgstr "تعویض به لغزش"
 
-#: plugins/security-privacy//LockSecurity.qml:89
+#: ../plugins/security-privacy//LockSecurity.qml:103
 msgid "Switch to passcode"
-msgstr ""
+msgstr "تعویض به رمز عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:91
+#: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "تعویض به عبارت عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:100
+#: ../plugins/security-privacy//LockSecurity.qml:114
 msgid "Existing passcode"
-msgstr ""
+msgstr "رمز عبور موجود"
 
-#: plugins/security-privacy//LockSecurity.qml:102
+#: ../plugins/security-privacy//LockSecurity.qml:116
 msgid "Existing passphrase"
-msgstr ""
+msgstr "عبارت عبور موجود"
 
-#: plugins/security-privacy//LockSecurity.qml:150
-msgid "Incorrect passcode. Try again."
-msgstr ""
-
-#: plugins/security-privacy//LockSecurity.qml:153
-msgid "Incorrect passphrase. Try again."
-msgstr ""
-
-#: plugins/security-privacy//LockSecurity.qml:166
+#: ../plugins/security-privacy//LockSecurity.qml:170
 msgid "Choose passcode"
-msgstr ""
+msgstr "گزینش رمز عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:168
+#: ../plugins/security-privacy//LockSecurity.qml:172
 msgid "Choose passphrase"
-msgstr ""
+msgstr "گزینش عبارت عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:212
+#: ../plugins/security-privacy//LockSecurity.qml:216
 msgid "Confirm passcode"
-msgstr ""
+msgstr "تأیید رمز عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:214
+#: ../plugins/security-privacy//LockSecurity.qml:218
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "تأیید عبارت عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:256
+#: ../plugins/security-privacy//LockSecurity.qml:260
 msgid "Those passcodes don't match. Try again."
-msgstr ""
+msgstr "رمزهای عبور مطابقت نداشتند. دوباره تلاش کنید."
 
-#: plugins/security-privacy//LockSecurity.qml:259
+#: ../plugins/security-privacy//LockSecurity.qml:263
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "عبارت‌های عبور مطابقت نداشتند. دوباره تلاش کنید."
 
-#: plugins/security-privacy//LockSecurity.qml:273
+#: ../plugins/security-privacy//LockSecurity.qml:294
 msgid "Unset"
-msgstr ""
+msgstr "صفر کردن"
 
-#: plugins/security-privacy//LockSecurity.qml:274
-#: wizard/qml/Pages//30-location.qml:48
-#: wizard/qml/Pages//20-wifi.qml:168 ../wizard/qml/Pages//10-welcome.qml:78
-msgid "Continue"
-msgstr ""
+#: ../plugins/security-privacy//LockSecurity.qml:297
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr "تغییر"
 
-#: plugins/security-privacy//LockSecurity.qml:326
+#: ../plugins/security-privacy//LockSecurity.qml:339
 msgid "Unlock the phone using:"
-msgstr ""
+msgstr "باز کردن قفل تلفن با:"
 
-#: plugins/security-privacy//LockSecurity.qml:330
+#: ../plugins/security-privacy//LockSecurity.qml:343
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "لغزش (بدون امنیت)"
 
-#: plugins/security-privacy//LockSecurity.qml:331
+#: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "4-digit passcode"
-msgstr ""
+msgstr "رمز عبور ۴ رقمی"
 
-#: plugins/security-privacy//LockSecurity.qml:332
-#: plugins/security-privacy//PhoneLocking.qml:42
+#: ../plugins/security-privacy//LockSecurity.qml:345
+#: ../plugins/security-privacy//PageComponent.qml:80
+#: ../plugins/security-privacy//PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "عبارت عبور"
 
-#: plugins/security-privacy//LockSecurity.qml:333
+#: ../plugins/security-privacy//LockSecurity.qml:346
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "لغزش (بدون امنیت)… "
 
-#: plugins/security-privacy//LockSecurity.qml:334
+#: ../plugins/security-privacy//LockSecurity.qml:347
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "رمز عبور ۴ رقمی…"
 
-#: plugins/security-privacy//LockSecurity.qml:335
+#: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Passphrase…"
-msgstr ""
+msgstr "عبارت عبور…"
 
-#: plugins/security-privacy//LockSecurity.qml:376
+#: ../plugins/security-privacy//LockSecurity.qml:379
 msgid "Change passcode…"
-msgstr ""
+msgstr "تعویض رمز عبور…"
 
-#: plugins/security-privacy//LockSecurity.qml:377
+#: ../plugins/security-privacy//LockSecurity.qml:380
 msgid "Change passphrase…"
-msgstr ""
+msgstr "تعویض عبارت عبور…"
 
-#: plugins/security-privacy//Location.qml:30
+#: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "موقعیت"
 
-#: plugins/security-privacy//Location.qml:48
+#: ../plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "تشخیص موقعیت"
 
-#: plugins/security-privacy//Location.qml:70
+#: ../plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"برای تشخیص موقعیتتان از جی‌پی‌اس استفاده می‌کند. هنگام خاموشی، جی‌پی‌اس نیز "
+"برای حفظ باتری خاموش می شود."
 
-#: plugins/security-privacy//Location.qml:72
+#: ../plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"برای تشخیص موقعیتتان از بی‌سیم و جی‌پی‌اس استفاده می‌کند.  خاموش کردن تشخیص "
+"موقعیت باتری را حفظ می‌کند."
 
-#: plugins/security-privacy//Location.qml:74
+#: ../plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"برای تشخیص موقعیتتان از بی‌سیم (در حال حاضر خاموش است) و جی‌پی‌اس استفاده "
+"می‌کند.  خاموش کردن تشخیص موقعیت باتری را حفظ می‌کند."
 
-#: plugins/security-privacy//Location.qml:76
+#: ../plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"برای تشخیص موقعیتتان از بی‌سیم، موقعیت برج‌های مخابراتی و جی‌پی‌اس استفاده "
+"می‌کند.  خاموش کردن تشخیص موقعیت باتری را حفظ می‌کند."
 
-#: plugins/security-privacy//Location.qml:78
+#: ../plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"برای تشخیص موقعیتتان از بی‌سیم، موقعیت برج‌های مخابراتی (در حال حاضر اتّصال "
+"سلّولی برقرار نیست) و جی‌پی‌اس استفاده می‌کند.  خاموش کردن تشخیص موقعیت "
+"باتری را حفظ می‌کند."
 
-#: plugins/security-privacy//Location.qml:80
+#: ../plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"برای تشخیص موقعیتتان از بی‌سیم (در حال حاضر خاموش است)، موقعیت برج‌های "
+"مخابراتی و جی‌پی‌اس استفاده می‌کند.  خاموش کردن تشخیص موقعیت باتری را حفظ "
+"می‌کند."
 
-#: plugins/security-privacy//Location.qml:82
+#: ../plugins/security-privacy//Location.qml:82
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"برای تشخیص موقعیتتان از بی‌سیم (در حال حاضر خاموش است)، موقعیت برج‌های "
+"مخابراتی (در حال حاضر اتّصال سلّولی برقرار نیست) و جی‌پی‌اس استفاده می‌کند.  "
+"خاموش کردن تشخیص موقعیت باتری را حفظ می‌کند."
 
-#: plugins/security-privacy//Location.qml:89
+#: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "اجازه‌ی دست‌رسی به موقعیت:"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: plugins/security-privacy//PageComponent.qml:33
-#: settings.js:28
+#: ../plugins/security-privacy//PageComponent.qml:33
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:28
 msgid "Security & Privacy"
-msgstr ""
+msgstr "محرمانگی و امنیت"
 
-#: plugins/security-privacy//PageComponent.qml:50
-#: plugins/security-privacy//PageComponent.qml:127
-#: plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:50
+#: ../plugins/security-privacy//PageComponent.qml:150
+#: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr ""
+msgstr "تلفن و اینترنت"
 
-#: plugins/security-privacy//PageComponent.qml:52
-#: plugins/security-privacy//PageComponent.qml:128
-#: plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:52
+#: ../plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr ""
+msgstr "فقط تلفن"
 
-#: plugins/security-privacy//PageComponent.qml:71
+#: ../plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
-msgstr ""
+msgstr "امنیت:"
 
-#: plugins/security-privacy//PageComponent.qml:76
-#: plugins/security-privacy//PhoneLocking.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:40
+#: ../plugins/wifi//OtherNetwork.qml:67
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:302
+#: ../plugins/bluetooth//PageComponent.qml:310
+msgid "None"
+msgstr "هيچ‌کدام"
+
+#: ../plugins/security-privacy//PageComponent.qml:79
+#: ../plugins/security-privacy//PhoneLocking.qml:41
+msgid "Passcode"
+msgstr "رمز عبور"
+
+#: ../plugins/security-privacy//PageComponent.qml:99
+#: ../plugins/security-privacy//PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "قفل‌کردن گوشی"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: plugins/security-privacy//PageComponent.qml:78
-#: plugins/security-privacy//PhoneLocking.qml:65
+#: ../plugins/security-privacy//PageComponent.qml:101
+#: ../plugins/security-privacy//PhoneLocking.qml:65
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 دقیقه"
 
-#: plugins/security-privacy//PageComponent.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:110
 msgid "SIM PIN"
-msgstr ""
+msgstr "PIN سیم‌کارت"
 
-#: plugins/security-privacy//PageComponent.qml:93
+#: ../plugins/security-privacy//PageComponent.qml:116
 msgid "Privacy:"
-msgstr ""
+msgstr "محرمانگی:"
 
-#: plugins/security-privacy//PageComponent.qml:97
+#: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "آمار در صفحه‌ی خوش‌آمدید"
 
-#: plugins/security-privacy//PageComponent.qml:110
+#: ../plugins/security-privacy//PageComponent.qml:133
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "پیام‌های روی صفحه‌ی خوش‌آمدید"
 
-#: plugins/security-privacy//PageComponent.qml:125
-#: plugins/security-privacy//Dash.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:148
+#: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr ""
+msgstr "جست‌وجوی دش"
 
-#: plugins/security-privacy//PageComponent.qml:143
+#: ../plugins/security-privacy//PageComponent.qml:166
 msgid "Location access"
-msgstr ""
+msgstr "دست‌رسی موقعیتی"
 
-#: plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//PageComponent.qml:174
 msgid "Other app access"
-msgstr ""
+msgstr "دست‌رسی اپ‌های دیگر"
 
-#: plugins/security-privacy//PageComponent.qml:156
+#: ../plugins/security-privacy//PageComponent.qml:179
 msgid "Diagnostics"
-msgstr ""
+msgstr "اشکال‌یابی"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:184
 msgid "Sent"
-msgstr ""
+msgstr "ارسال شده"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: plugins/security-privacy//PageComponent.qml:164
+#: ../plugins/security-privacy//PageComponent.qml:187
 msgid "Not sent"
-msgstr ""
+msgstr "فرستاده نشده"
 
-#: plugins/security-privacy//Dash.qml:45
+#: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr ""
+msgstr "برگرداندن یافته‌ها از:"
 
-#: plugins/security-privacy//PhoneLocking.qml:40
-#: plugins/wifi//OtherNetwork.qml:67
-#: plugins/bluetooth//PageComponent.qml:105
-#: plugins/bluetooth//PageComponent.qml:256
-#: plugins/bluetooth//PageComponent.qml:264
-msgid "None"
-msgstr ""
-
-#: plugins/security-privacy//PhoneLocking.qml:41
-msgid "Passcode"
-msgstr ""
-
-#: plugins/security-privacy//PhoneLocking.qml:62
-#: plugins/battery//PageComponent.qml:240
+#: ../plugins/security-privacy//PhoneLocking.qml:62
+#: ../plugins/battery//PageComponent.qml:284
 msgid "Lock when idle"
-msgstr ""
+msgstr "قفل کردن هنگام بی‌کاری"
 
-#: plugins/security-privacy//PhoneLocking.qml:63
-#: plugins/battery//PageComponent.qml:240
+#: ../plugins/security-privacy//PhoneLocking.qml:63
+#: ../plugins/battery//PageComponent.qml:284
 msgid "Sleep when idle"
-msgstr ""
+msgstr "خوابیدن هنگام بی‌کاری"
 
-#: plugins/security-privacy//PhoneLocking.qml:79
+#: ../plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "خوابیدن بلافاصله قفل کند"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: plugins/language//PageComponent.qml:32
-#: settings.js:44
+#: ../plugins/language//PageComponent.qml:32
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:44
 msgid "Language & Text"
-msgstr ""
+msgstr "زبان و متن"
 
-#: plugins/language//PageComponent.qml:71
+#: ../plugins/language//PageComponent.qml:72
 msgid "Display language…"
-msgstr ""
+msgstr "زبان نمایشی…"
 
-#: plugins/language//PageComponent.qml:85
-#: plugins/language//KeyboardLayouts.qml:26
+#: ../plugins/language//PageComponent.qml:86
+#: ../plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "چینش‌های صفحه‌کلید"
 
-#: plugins/language//PageComponent.qml:100
-#: plugins/language//PageComponent.qml:110
-#: plugins/language//SpellChecking.qml:27
-#: plugins/language//SpellChecking.qml:36
+#: ../plugins/language//PageComponent.qml:101
+#: ../plugins/language//PageComponent.qml:111
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
 msgid "Spell checking"
-msgstr ""
+msgstr "خطایاب املایی"
 
-#: plugins/language//PageComponent.qml:120
+#: ../plugins/language//PageComponent.qml:121
 msgid "Auto completion"
-msgstr ""
+msgstr "تکمیل خودکار"
 
-#: plugins/language//PageComponent.qml:130
+#: ../plugins/language//PageComponent.qml:131
 msgid "Word suggestions"
-msgstr ""
+msgstr "پیشنهادهای واژگان"
 
-#: plugins/language//PageComponent.qml:143
+#: ../plugins/language//PageComponent.qml:144
 msgid "Auto capitalization"
-msgstr ""
+msgstr "بزرگ کردن حروف خودکار"
 
-#: plugins/language//PageComponent.qml:153
+#: ../plugins/language//PageComponent.qml:154
 msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
+msgstr "برای بزرگ کردن نخستین حرف هر جمله، تبدیل را روشن می‌کند."
 
-#: plugins/language//SpellChecking.qml:53
+#: ../plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr ""
+msgstr "زبان‌های املایی جاری:"
 
-#: plugins/language//SpellChecking.qml:54
+#: ../plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
-msgstr ""
+msgstr "همه‌ی زبان‌های موجود:"
 
-#: plugins/language//DisplayLanguage.qml:33
+#: ../plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr ""
+msgstr "زبان نمایشی"
 
-#: plugins/language//DisplayLanguage.qml:114
+#: ../plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
-msgstr ""
+msgstr "تأیید"
 
-#: plugins/language//KeyboardLayouts.qml:39
+#: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr ""
+msgstr "چینش‌های جاری:"
 
-#: plugins/language//KeyboardLayouts.qml:40
+#: ../plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr ""
+msgstr "همه‌ی چینش‌های موجود:"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: plugins/battery//PageComponent.qml:34
-#: settings.js:54
+#: ../plugins/battery//PageComponent.qml:34
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:54
 msgid "Battery"
-msgstr ""
+msgstr "باتری"
 
 #. TRANSLATORS: %1 is the number of seconds
-#: plugins/battery//PageComponent.qml:46
+#: ../plugins/battery//PageComponent.qml:46
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 ثانیه پیش"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: plugins/battery//PageComponent.qml:49
+#: ../plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 دقیقه پیش"
 
 #. TRANSLATORS: %1 is the number of hours
-#: plugins/battery//PageComponent.qml:52
+#: ../plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 ساعت پیش"
 
 #. TRANSLATORS: %1 is the number of days
-#: plugins/battery//PageComponent.qml:55
+#: ../plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 روز پیش"
 
-#: plugins/battery//PageComponent.qml:75
+#: ../plugins/battery//PageComponent.qml:75
 msgid "Charging now"
-msgstr ""
+msgstr "در حال شارژ"
 
-#: plugins/battery//PageComponent.qml:80
+#: ../plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
-msgstr ""
+msgstr "آخرین شارژ کامل"
 
-#: plugins/battery//PageComponent.qml:85
+#: ../plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
-msgstr ""
+msgstr "کاملاً شارژ"
 
-#: plugins/battery//PageComponent.qml:111
+#: ../plugins/battery//PageComponent.qml:111
 msgid "Charge level"
-msgstr ""
+msgstr "مرحله‌ی شارژ"
 
-#: plugins/battery//PageComponent.qml:117
-#: plugins/battery//PageComponent.qml:224
-#: plugins/cellular//PageComponent.qml:129
-#: plugins/about//Storage.qml:204
+#: ../plugins/battery//PageComponent.qml:117
+#: ../plugins/battery//PageComponent.qml:268
+#: ../plugins/cellular//PageComponent.qml:175
+#: ../plugins/cellular//PageChooseCarriers.qml:50
+#: ../plugins/cellular//PageChooseCarriers.qml:66
+#: ../plugins/about//Storage.qml:204
 msgid "N/A"
-msgstr ""
+msgstr "هیچ"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: plugins/battery//PageComponent.qml:120
+#: ../plugins/battery//PageComponent.qml:120
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1٪"
 
-#: plugins/battery//PageComponent.qml:229
+#: ../plugins/battery//PageComponent.qml:195
+#: ../plugins/battery//PageComponent.qml:197
+msgid "Yesterday"
+msgstr "دیروز"
+
+#: ../plugins/battery//PageComponent.qml:203
+#: ../plugins/battery//PageComponent.qml:205
+msgid "Today"
+msgstr "امروز"
+
+#: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "راه های کاهش مصرف باتری:"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: plugins/battery//PageComponent.qml:246
-#: plugins/battery//PageComponent.qml:255
-#: plugins/battery//SleepValues.qml:77
-#: plugins/battery//SleepValues.qml:81
-#: plugins/battery//SleepValues.qml:85
-#: plugins/battery//SleepValues.qml:89
-#: plugins/battery//SleepValues.qml:93
+#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/battery//PageComponent.qml:299
+#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:81
+#: ../plugins/battery//SleepValues.qml:85
+#: ../plugins/battery//SleepValues.qml:89
+#: ../plugins/battery//SleepValues.qml:93
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "بعد از %1 دقیقه"
 
-#: plugins/battery//PageComponent.qml:249
-#: plugins/battery//PageComponent.qml:258
-#: plugins/battery//SleepValues.qml:96
-#: plugins/wifi//NetworkDetails.qml:56
-#: plugins/system-update//PageComponent.qml:449
-#: plugins/system-update//Configuration.qml:53
-#: plugins/about//PageComponent.qml:128
+#: ../plugins/battery//PageComponent.qml:293
+#: ../plugins/battery//PageComponent.qml:302
+#: ../plugins/battery//SleepValues.qml:96
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/system-update//PageComponent.qml:449
+#: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/about//PageComponent.qml:149
 msgid "Never"
-msgstr ""
+msgstr "هرگز"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: plugins/battery//PageComponent.qml:268
-#: plugins/wifi//PageComponent.qml:26
-#: settings.js:60
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/wifi//PageComponent.qml:26
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:60
 msgid "Wi-Fi"
-msgstr ""
+msgstr "بی‌سیم"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: plugins/battery//PageComponent.qml:298
-#: plugins/bluetooth//PageComponent.qml:111
-#: plugins/bluetooth//PageComponent.qml:130
-#: settings.js:126
+#: ../plugins/battery//PageComponent.qml:342
+#: ../plugins/bluetooth//PageComponent.qml:117
+#: ../plugins/bluetooth//PageComponent.qml:136
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:134
 msgid "Bluetooth"
-msgstr ""
+msgstr "بلوتوث"
 
-#: plugins/battery//PageComponent.qml:329
+#: ../plugins/battery//PageComponent.qml:373
 msgid "GPS"
-msgstr ""
+msgstr "جی‌پی‌اس"
 
-#: plugins/battery//PageComponent.qml:348
+#: ../plugins/battery//PageComponent.qml:392
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "مکان یابی دقیق نیاز به جی‌پی‌اس و/یا بی‌سیم دارد."
 
-#: plugins/battery//SleepValues.qml:74
+#: ../plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "قفل کردن گوشی وقتی درحال استفاده نیست:"
 
-#: plugins/battery//SleepValues.qml:74
+#: ../plugins/battery//SleepValues.qml:74
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "خواباندن تلفن وقتی درحال استفاده نیست:"
 
-#: plugins/battery//SleepValues.qml:107
+#: ../plugins/battery//SleepValues.qml:107
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr ""
+"زمان‌های کوتاه امن‌تر هستند. تلفن در طول تماس‌ها یا پخش ویدیو قفل نمی‌شود."
 
-#: plugins/battery//SleepValues.qml:107
+#: ../plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
+msgstr "تلفن در طول تماس‌ها یا پخش ویدیو نمی‌خوابد."
 
-#: plugins/wifi//PageComponent.qml:114
-#: plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:114
+#: ../plugins/wifi//PreviousNetworks.qml:26
 msgid "Previous networks"
-msgstr ""
+msgstr "شبکه‌های پیشین"
 
-#: plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
+#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "شبکه‌ی دیگر"
 
-#: plugins/wifi//OtherNetwork.qml:56
+#: ../plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "نام شبکه"
 
-#: plugins/wifi//OtherNetwork.qml:66
+#: ../plugins/wifi//OtherNetwork.qml:66
 msgid "Security"
-msgstr ""
+msgstr "امنیت"
 
-#: plugins/wifi//OtherNetwork.qml:68
+#: ../plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "‫WPA و WPA2 شخصی"
 
-#: plugins/wifi//OtherNetwork.qml:69
+#: ../plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
-#: plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:62
+#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
 msgid "Password"
-msgstr ""
+msgstr "گذرواژه"
 
-#: plugins/wifi//OtherNetwork.qml:89
+#: ../plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "گذرواژه‌ی قابل نمایش"
 
-#: plugins/wifi//OtherNetwork.qml:121
+#: ../plugins/wifi//OtherNetwork.qml:121
+#: ../plugins/bluetooth//PageComponent.qml:374
 msgid "Connect"
-msgstr ""
+msgstr "اتّصال"
 
-#: plugins/wifi//NetworkDetails.qml:37
+#: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
-msgstr ""
+msgstr "جزئیات شبکه"
 
-#: plugins/wifi//NetworkDetails.qml:44
-#: plugins/bluetooth//PageComponent.qml:263
+#: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:309
 msgid "Name"
-msgstr ""
+msgstr "نام"
 
-#: plugins/wifi//NetworkDetails.qml:52
+#: ../plugins/wifi//NetworkDetails.qml:51
 msgid "Last connected"
-msgstr ""
+msgstr "آخرین اتّصال"
 
-#: plugins/wifi//NetworkDetails.qml:74
+#: ../plugins/wifi//NetworkDetails.qml:73
 msgid "Show password"
-msgstr ""
+msgstr "نمایش گذرواژه"
 
-#: plugins/wifi//NetworkDetails.qml:84
+#: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
-msgstr ""
+msgstr "فراموش کردن شبکه"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
-#: plugins/phone//Services.qml:30 ../plugins/phone//PageComponent.qml:61
+#: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "خدمات %1"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: plugins/phone//PageComponent.qml:28
-#: plugins/bluetooth//PageComponent.qml:82
-#: settings.js:72
+#: ../plugins/phone//PageComponent.qml:28
+#: ../plugins/bluetooth//PageComponent.qml:88
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:72
 msgid "Phone"
-msgstr ""
+msgstr "تلفن"
 
-#: plugins/phone//PageComponent.qml:30
+#: ../plugins/phone//PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "سیم‌کارت"
 
-#: plugins/phone//PageComponent.qml:46
-#: plugins/phone//CallForwarding.qml:27
-#: plugins/phone//CallForwarding.qml:60
+#: ../plugins/phone//PageComponent.qml:51
+#: ../plugins/phone//CallForwarding.qml:28
+#: ../plugins/phone//CallForwarding.qml:75
 msgid "Call forwarding"
-msgstr ""
+msgstr "انتقال تماس"
 
-#: plugins/phone//PageComponent.qml:52 ../plugins/phone//CallWaiting.qml:27
-#: plugins/phone//CallWaiting.qml:53
+#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
+#: ../plugins/phone//CallWaiting.qml:63
 msgid "Call waiting"
-msgstr ""
+msgstr "انتظار تماس"
 
-#: plugins/phone//ServiceInfo.qml:35
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "آخرین تماس %1"
+
+#: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
-msgstr ""
+msgstr "تماس"
 
-#: plugins/phone//CallForwarding.qml:74
+#: ../plugins/phone//CallForwarding.qml:90
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"وقتی تماس‌های تلفنی را جواب ندهید، تلفن مشغول باشد، خاموش باشد یا در دسترس "
+"نباشد، به شماره ی دیگری منتقل می‌کند."
 
-#: plugins/phone//CallForwarding.qml:91
-msgid "Call forwarding status can’t be checked right now. Try again later."
-msgstr ""
+#: ../plugins/phone//CallForwarding.qml:100
+msgid "Forward to"
+msgstr "انتقال به"
 
-#: plugins/phone//CallForwarding.qml:102
-msgid "Divert to"
-msgstr ""
-
-#: plugins/phone//CallForwarding.qml:113
-msgid "Contacts…"
-msgstr ""
-
-#: plugins/phone//CallWaiting.qml:67
+#: ../plugins/phone//CallWaiting.qml:78
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
+"به شما اجازه می‌دهد هنگامی که در حال تماس هستید، تماس دیگری را پاسخ گفته یا "
+"شروع کنید و بین آن‌ها تعویض کنید"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: plugins/system-update//PageComponent.qml:35
-#: settings.js:86
+#: ../plugins/system-update//PageComponent.qml:35
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:86
 msgid "Updates"
-msgstr ""
+msgstr "به‌روز رسانی‌ها"
 
-#: plugins/system-update//PageComponent.qml:51
+#: ../plugins/system-update//PageComponent.qml:51
 msgid "Update System"
-msgstr ""
+msgstr "به‌روز رسانی سامانه"
 
-#: plugins/system-update//PageComponent.qml:52
+#: ../plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
-msgstr ""
+msgstr "تلفن نیاز دارد برای به‌روز رسانی سامانه، راه‌اندازی مجدّد شود."
 
-#: plugins/system-update//PageComponent.qml:55
+#: ../plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
-msgstr ""
+msgstr "نصب و راه‌اندازی مجدّد"
 
-#: plugins/system-update//PageComponent.qml:64
+#: ../plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
-msgstr ""
+msgstr "اکنون نه"
 
-#: plugins/system-update//PageComponent.qml:70
+#: ../plugins/system-update//PageComponent.qml:70
 msgid "Install"
-msgstr ""
+msgstr "نصب"
 
-#: plugins/system-update//PageComponent.qml:88
+#: ../plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
-msgstr ""
+msgstr "نرم‌افزار به‌روز است"
 
-#: plugins/system-update//PageComponent.qml:142
+#: ../plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "لطفاً به حساب اوبونتووان خود وارد شوید."
 
-#: plugins/system-update//PageComponent.qml:157
+#: ../plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
-msgstr ""
+msgstr "به‌روز رسانی سامانه شکست خورد."
 
-#: plugins/system-update//PageComponent.qml:168
+#: ../plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
-msgstr ""
+msgstr "به‌روز رسانی سامانه شکست خورد."
 
-#: plugins/system-update//PageComponent.qml:199
+#: ../plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
-msgstr ""
+msgstr "درحال بررسی برای به‌روز رسانی…"
 
-#: plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "نصب %1 به‌روز رسانی…"
 
-#: plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "نصب %1 به‌روز رسانی"
 
-#: plugins/system-update//PageComponent.qml:218
+#: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
-msgstr ""
+msgstr "مکث همه"
 
-#: plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Retry"
-msgstr ""
+msgstr "تلاش دوباره"
 
-#: plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:303
 msgid "Download"
-msgstr ""
+msgstr "بارگیری"
 
-#: plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:303
 msgid "Update"
-msgstr ""
+msgstr "به‌روز رسانی"
 
-#: plugins/system-update//PageComponent.qml:304
+#: ../plugins/system-update//PageComponent.qml:304
 msgid "Resume"
-msgstr ""
+msgstr "ازسرگیری"
 
-#: plugins/system-update//PageComponent.qml:305
+#: ../plugins/system-update//PageComponent.qml:305
 msgid "Pause"
-msgstr ""
+msgstr "مکث"
 
-#: plugins/system-update//PageComponent.qml:364
+#: ../plugins/system-update//PageComponent.qml:364
 msgid "Installing"
-msgstr ""
+msgstr "درحال نصب"
 
-#: plugins/system-update//PageComponent.qml:397
+#: ../plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "نصب شده"
 
-#: plugins/system-update//PageComponent.qml:421
+#: ../plugins/system-update//PageComponent.qml:421
 msgid "Version: "
-msgstr ""
+msgstr "نگارش: "
 
-#: plugins/system-update//PageComponent.qml:446
-#: plugins/system-update//Configuration.qml:30
+#: ../plugins/system-update//PageComponent.qml:446
+#: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
-msgstr ""
+msgstr "بارگیری خودکار"
 
-#: plugins/system-update//PageComponent.qml:451
+#: ../plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
-msgstr ""
+msgstr "روی بی‌سیم"
 
-#: plugins/system-update//PageComponent.qml:453
+#: ../plugins/system-update//PageComponent.qml:453
 msgid "Always"
-msgstr ""
+msgstr "همیشه"
 
-#: plugins/system-update//PageComponent.qml:505
+#: ../plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "گواهی‌نامه یافت نشد"
 
-#: plugins/system-update//PageComponent.qml:535
+#: ../plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
-msgstr ""
+msgstr "درحال نصب به‌روز رسانی‌ها…"
 
-#: plugins/system-update//PageComponent.qml:549
+#: ../plugins/system-update//PageComponent.qml:549
 msgid " bytes"
-msgstr ""
+msgstr " بایت"
 
-#: plugins/system-update//PageComponent.qml:552
+#: ../plugins/system-update//PageComponent.qml:552
 msgid " KiB"
-msgstr ""
+msgstr " کیبی‌بایت"
 
-#: plugins/system-update//PageComponent.qml:555
+#: ../plugins/system-update//PageComponent.qml:555
 msgid " MiB"
-msgstr ""
+msgstr " مبی‌بایت"
 
-#: plugins/system-update//PageComponent.qml:558
+#: ../plugins/system-update//PageComponent.qml:558
 msgid " GiB"
-msgstr ""
+msgstr " گیبی‌بایت"
 
-#: plugins/system-update//Configuration.qml:35
+#: ../plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "بارگیری به‌روز رسانی‌های آینده به صورت خودکار:"
 
-#: plugins/system-update//Configuration.qml:54
+#: ../plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "وقتی روی بی‌سیم است"
 
-#: plugins/system-update//Configuration.qml:55
+#: ../plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "روی هر اتّصال داده‌ای"
 
-#: plugins/system-update//Configuration.qml:56
+#: ../plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "ممکن است شارژ داده اعمال شود."
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: plugins/brightness//PageComponent.qml:32
-#: settings.js:98
+#: ../plugins/brightness//PageComponent.qml:32
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:98
 msgid "Brightness"
-msgstr ""
+msgstr "روشنایی"
 
-#: plugins/brightness//PageComponent.qml:52
+#: ../plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "تنظیم خودکار"
 
-#: plugins/brightness//PageComponent.qml:65
+#: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
-msgstr ""
+msgstr "نمایشگر را برای تناسب با محیط روشن و تاریک می‌کند"
 
-#: plugins/reset//EraseEverything.qml:29
+#: ../plugins/reset//EraseEverything.qml:41
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
+"همه‌ی مدارک، بازی‌های ذخیره شده، تنظیمات و دیگر موارد برای همیشه از این تلفن "
+"پاک خواهند شد."
 
-#: plugins/reset//EraseEverything.qml:31
-msgid "Erase & reset everything"
-msgstr ""
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "پاک کردن و بازنشانی همه‌چیز"
 
-#: plugins/reset//ResetAllSettings.qml:29
-#: plugins/reset//ResetLauncherHome.qml:30
+#: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
+"درون مایه و چیدمان اجراگر و پالایه‌های صفحه‌ی خانه به تنظیمات اصلی‌شان باز "
+"خواهند گشت."
 
-#: plugins/reset//ResetAllSettings.qml:31
+#: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "بازنشانی همه‌ی تنظیمات سامانه"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: plugins/reset//PageComponent.qml:32
-#: settings.js:104
+#: ../plugins/reset//PageComponent.qml:32
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:104
 msgid "Reset phone"
-msgstr ""
+msgstr "بازنشانی تلفن"
 
-#: plugins/reset//PageComponent.qml:62
-msgid "Reset launcher & home screen…"
-msgstr ""
+#: ../plugins/reset//PageComponent.qml:73
+#: ../plugins/reset//ResetLauncherHome.qml:44
+msgid "Reset Launcher"
+msgstr "بازنشانی اجراگر"
 
-#: plugins/reset//PageComponent.qml:75
+#: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "بازنشانی همه‌ی تنظیمات سامانه…"
 
-#: plugins/reset//PageComponent.qml:88
-msgid "Erase & reset everything…"
-msgstr ""
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr "پاک کردن و بازنشانی همه‌چیز…"
 
-#: plugins/reset//ResetLauncherHome.qml:32
-msgid "Reset launcher & home screen"
-msgstr ""
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "اجراگر به محتویات اصلی‌اش باز خواهد گشت."
 
-#: plugins/background//Preview.qml:67
+#: ../plugins/reset//ResetLauncherHome.qml:59
+msgid "The phone needs to restart for changes to take effect."
+msgstr "تلفنم نیاز دارد برای اعمال تغییرات شروع مجدّد شود."
+
+#: ../plugins/background//Preview.qml:67
 msgid "Preview"
-msgstr ""
+msgstr "پیش‌نمایش"
 
-#: plugins/background//WallpaperGrid.qml:121
+#: ../plugins/background//WallpaperGrid.qml:190
 msgid "Remove"
-msgstr ""
+msgstr "برداشتن"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: plugins/background//MainPage.qml:31
-#: settings.js:118
+#: ../plugins/background//MainPage.qml:38
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:118
 msgid "Background"
-msgstr ""
+msgstr "پس‌زمینه"
 
-#: plugins/background//MainPage.qml:131
-#: plugins/background//Wallpapers.qml:43
-msgid "Welcome screen"
-msgstr ""
-
-#: plugins/background//MainPage.qml:175
-#: plugins/background//Wallpapers.qml:43
-msgid "Home screen"
-msgstr ""
-
-#: plugins/background//MainPage.qml:200
-msgid "Same background for both"
-msgstr ""
-
-#: plugins/background//MainPage.qml:201
-msgid "Different background for each"
-msgstr ""
-
-#: plugins/background//Wallpapers.qml:42
-msgid "Choose background"
-msgstr ""
-
-#: plugins/background//Wallpapers.qml:47
-msgid "Photo/Image"
-msgstr ""
-
-#: plugins/background//Wallpapers.qml:95
+#: ../plugins/background//MainPage.qml:112
 msgid "Ubuntu Art"
-msgstr ""
+msgstr "هنر اوبونتو"
 
-#: plugins/background//Wallpapers.qml:110
+#: ../plugins/background//MainPage.qml:128
 msgid "Custom"
-msgstr ""
+msgstr "سفارشی"
 
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
+msgid "Notifications"
+msgstr "آگهی‌ها"
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
 msgstr ""
+"اپ‌های انتخاب شده می‌توانند با استفاده از حباب‌های هشدار، صداها، لرزش‌ها و "
+"مرکز آگهی‌ها به شما هشدار دهند."
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "درخواست جفت کردن بلوتوث"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
 msgstr ""
+"لطفاً تأیید کنید که کد نمایش داده شده روی «%1» با این یکی مطابقت دارد"
 
-#: plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "تأیید کد"
 
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "کد برای «%1»"
 
-#: plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: plugins/bluetooth//ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "جفت کردن"
 
-#. TRANSLATORS: %1 is the display name of the device that is connecting
-#: plugins/bluetooth//PageComponent.qml:71
-#, qt-format
-msgid "%1 (Connecting…)"
-msgstr ""
+#: ../plugins/bluetooth//PageComponent.qml:77
+msgid "Connected"
+msgstr "متّصل"
 
-#. TRANSLATORS: %1 is the display name of the device that is disconnecting
-#: plugins/bluetooth//PageComponent.qml:74
-#, qt-format
-msgid "%1 (Disconnecting…)"
-msgstr ""
+#: ../plugins/bluetooth//PageComponent.qml:78
+msgid "Connecting…"
+msgstr "در حال اتّصال…"
 
-#: plugins/bluetooth//PageComponent.qml:81
+#: ../plugins/bluetooth//PageComponent.qml:79
+msgid "Disconnecting…"
+msgstr "در خال قطع اتّصال…"
+
+#: ../plugins/bluetooth//PageComponent.qml:80
+msgid "Disconnected"
+msgstr "اتّصال قطع شد"
+
+#: ../plugins/bluetooth//PageComponent.qml:81
+msgid "Unknown"
+msgstr "ناشناس"
+
+#: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
-msgstr ""
+msgstr "رایانه"
 
-#: plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:89
 msgid "Modem"
-msgstr ""
+msgstr "مودم"
 
-#: plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
+#: ../plugins/bluetooth//PageComponent.qml:90 ../src/qml/MainWindow.qml:145
 msgid "Network"
-msgstr ""
+msgstr "شبکه"
 
-#: plugins/bluetooth//PageComponent.qml:85
+#: ../plugins/bluetooth//PageComponent.qml:91
 msgid "Headset"
-msgstr ""
+msgstr "هدست"
 
-#: plugins/bluetooth//PageComponent.qml:86
+#: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Headphones"
-msgstr ""
+msgstr "هدفون‌ها"
 
-#: plugins/bluetooth//PageComponent.qml:87
+#: ../plugins/bluetooth//PageComponent.qml:93
 msgid "Video"
-msgstr ""
+msgstr "ویدیو"
 
-#: plugins/bluetooth//PageComponent.qml:88
+#: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Other Audio"
-msgstr ""
+msgstr "صداهای دیگر"
 
-#: plugins/bluetooth//PageComponent.qml:89
+#: ../plugins/bluetooth//PageComponent.qml:95
 msgid "Joypad"
-msgstr ""
+msgstr "دسته‌ی بازی"
 
-#: plugins/bluetooth//PageComponent.qml:90
+#: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Keyboard"
-msgstr ""
+msgstr "صفحه‌کلید"
 
-#: plugins/bluetooth//PageComponent.qml:91
+#: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Tablet"
-msgstr ""
+msgstr "تبلت"
 
-#: plugins/bluetooth//PageComponent.qml:92
+#: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Mouse"
-msgstr ""
+msgstr "موشی"
 
-#: plugins/bluetooth//PageComponent.qml:93
+#: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Printer"
-msgstr ""
+msgstr "چاپگر"
 
-#: plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Camera"
-msgstr ""
+msgstr "دوربین"
 
-#: plugins/bluetooth//PageComponent.qml:95
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Other"
-msgstr ""
+msgstr "دیگر"
 
-#: plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:107
 msgid "Excellent"
-msgstr ""
+msgstr "عالی"
 
-#: plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:108
 msgid "Good"
-msgstr ""
+msgstr "خوب"
 
-#: plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:109
 msgid "Fair"
-msgstr ""
+msgstr "مناسب"
 
-#: plugins/bluetooth//PageComponent.qml:104
+#: ../plugins/bluetooth//PageComponent.qml:110
 msgid "Poor"
-msgstr ""
+msgstr "ضعیف"
 
-#: plugins/bluetooth//PageComponent.qml:161
+#: ../plugins/bluetooth//PageComponent.qml:171
 msgid "Discoverable"
-msgstr ""
+msgstr "قابل کشف"
 
-#: plugins/bluetooth//PageComponent.qml:161
+#: ../plugins/bluetooth//PageComponent.qml:171
 msgid "Not discoverable"
-msgstr ""
+msgstr "غیرقابل کشف"
 
-#: plugins/bluetooth//PageComponent.qml:192
+#: ../plugins/bluetooth//PageComponent.qml:202
 msgid "Connected devices:"
-msgstr ""
+msgstr "دستگاه‌های متّصل:"
 
-#: plugins/bluetooth//PageComponent.qml:220
-msgid "Connect a different device:"
-msgstr ""
-
-#: plugins/bluetooth//PageComponent.qml:220
+#: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect another device:"
-msgstr ""
+msgstr "اةهصال به یک دستگاه دیگر:"
 
-#: plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:236
+msgid "Connect a device:"
+msgstr "اتّصال یک دستگاه:"
+
+#: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
-msgstr ""
+msgstr "هیچ چیز پیدا نشد"
 
-#: plugins/bluetooth//PageComponent.qml:267
+#: ../plugins/bluetooth//PageComponent.qml:274
+#: ../plugins/bluetooth//PageComponent.qml:360
+msgid "Connect automatically when detected:"
+msgstr "اتّصال خودکار هنگام تشخیص:"
+
+#: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
-msgstr ""
+msgstr "نوع"
 
-#: plugins/bluetooth//PageComponent.qml:271
+#: ../plugins/bluetooth//PageComponent.qml:351
+msgid "Status"
+msgstr "وضعیت"
+
+#: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
-msgstr ""
+msgstr "قدرت سیگنال"
 
-#: plugins/bluetooth//PageComponent.qml:276
+#: ../plugins/bluetooth//PageComponent.qml:374
 msgid "Disconnect"
-msgstr ""
+msgstr "قطع اتّصال"
+
+#: ../plugins/bluetooth//PageComponent.qml:392
+msgid "Forget this device"
+msgstr "فراموش کردن این دستگاه"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "گزینش اپراتور"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "تازه‌سازی"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "در حال جست‌وجو"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "تغییر تنظیمات نقطه‌ی داغ"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "نام نقطه‌ی داغ"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "کلید (باید ۸ نویسه یا بیش‌تر باشد)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "نمایش کلید"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: plugins/cellular//PageComponent.qml:28
-#: settings.js:132
+#: ../plugins/cellular//PageComponent.qml:32
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:140
 msgid "Cellular"
-msgstr ""
+msgstr "سلّولی"
 
-#: plugins/cellular//PageComponent.qml:68
-msgid "Cellular data:"
-msgstr ""
+#: ../plugins/cellular//PageComponent.qml:132
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "به علّت روشن بود بی‌سیم، نقطه‌ی داغ غیرفعّال شد."
 
-#: plugins/cellular//PageComponent.qml:69
-msgid "Off"
-msgstr ""
+#: ../plugins/cellular//PageComponent.qml:138
+#: ../plugins/cellular//Hotspot.qml:29
+msgid "Wi-Fi hotspot"
+msgstr "نقطه‌ی داغ بی‌سیم"
 
-#: plugins/cellular//PageComponent.qml:70
-msgid "2G only (saves battery)"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:71
-msgid "2G/3G/4G (faster)"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:82
-msgid "Cellular data"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:93
-msgid "Data roaming"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:111
+#: ../plugins/cellular//PageComponent.qml:147
 msgid "Data usage statistics"
-msgstr ""
+msgstr "آمار مصرف داده"
 
-#: plugins/cellular//PageComponent.qml:121
-msgid "Choose carrier:"
-msgstr ""
-
-#: plugins/cellular//PageComponent.qml:127
-#: plugins/cellular//ChooseCarrier.qml:28
+#: ../plugins/cellular//PageComponent.qml:153
+#: ../plugins/cellular//PageComponent.qml:161
 msgid "Carrier"
-msgstr ""
+msgid_plural "Carriers"
+msgstr[0] "اپراتور"
 
-#: plugins/cellular//PageComponent.qml:139
+#: ../plugins/cellular//PageComponent.qml:180
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
-#: plugins/cellular//ChooseCarrier.qml:79
-msgid "Refresh"
-msgstr ""
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr "نقطه‌ی داغ"
 
-#: plugins/cellular//ChooseCarrier.qml:96
-msgid "Searching"
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
 msgstr ""
+"وقتی نقطه‌ی داغ روشن است، دیگر دستگاه‌ها می‌توانند از اتّصدال داده‌ی سلَولی "
+"شما توسّط بی‌سیم استفاده کنند. شارژ داده‌ی عادی اعمال مي‌شود."
 
-#: plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:148
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+"دیگر دستگاه‌ها می‌توانند از اتّصدال داده‌ی سلَولی شما توسّط بی‌سیم استفاده "
+"کنند. شارژ داده‌ی عادی اعمال مي‌شود."
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr "برپا کردن نقطه‌ی داغ"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+msgid "Carriers"
+msgstr "اپراتور"
+
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
 msgid "Software licenses"
-msgstr ""
+msgstr "پروانه‌های نرم‌افزاری"
 
-#: plugins/about//Version.qml:35
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:82
+msgid "Developer Mode"
+msgstr "حالت توسعه‌دهنده"
+
+#: ../plugins/about//DevMode.qml:73
+msgid "In Developer Mode, anyone can access, "
+msgstr "در حالت توسعه‌دهنده، هرکسی می‌تواند دست‌رسی داشته باشد، "
+
+#: ../plugins/about//DevMode.qml:101
+msgid "You need a passcode or passphrase set "
+msgstr "نیاز به یک رمز عبور یا عبارت عبور دارید "
+
+#: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "جزئیات ساخت سیستم‌عامل"
 
-#: plugins/about//Version.qml:53
+#: ../plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "شماره‌ی ساخت سیستم‌عامل"
 
-#: plugins/about//Version.qml:59
+#: ../plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "قسمت تصویر اوبونتو"
 
-#: plugins/about//Version.qml:85
+#: ../plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "شرح ساخت اوبونتو"
 
-#: plugins/about//Version.qml:100
+#: ../plugins/about//Version.qml:100
 msgid "Device Image part"
-msgstr ""
+msgstr "قسمت تصویر دستگاه"
 
-#: plugins/about//Version.qml:126
+#: ../plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "شرخ ساخت دستگاه"
 
-#: plugins/about//Version.qml:141
+#: ../plugins/about//Version.qml:141
 msgid "Customization Image part"
-msgstr ""
+msgstr "قسمت تصویر شخصی‌سازی"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: plugins/about//PageComponent.qml:33
-#: settings.js:144
+#: ../plugins/about//PageComponent.qml:34
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:152
 msgid "About this phone"
-msgstr ""
+msgstr "درباره‌ی این تلفن"
 
-#: plugins/about//PageComponent.qml:87
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "شماره تلفن"
+
+#: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
-msgstr ""
+msgstr "سریال"
 
-#: plugins/about//PageComponent.qml:106 ../plugins/about//Storage.qml:33
+#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
 msgid "Storage"
-msgstr ""
+msgstr "حافظه"
 
-#: plugins/about//PageComponent.qml:113
+#: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
-msgstr ""
+msgstr "نرم‌افزار:"
 
-#: plugins/about//PageComponent.qml:118
+#: ../plugins/about//PageComponent.qml:138
 msgid "OS"
-msgstr ""
+msgstr "سیستم‌عامل"
 
-#: plugins/about//PageComponent.qml:127
+#: ../plugins/about//PageComponent.qml:147
 msgid "Last updated"
-msgstr ""
+msgstr "آخرین به‌روزرسانی"
 
-#: plugins/about//PageComponent.qml:134
+#: ../plugins/about//PageComponent.qml:155
 msgid "Check for updates"
-msgstr ""
+msgstr "بررسی برای به‌روزرسانی‌ها"
 
-#: plugins/about//PageComponent.qml:143
+#: ../plugins/about//PageComponent.qml:164
 msgid "Legal:"
-msgstr ""
+msgstr "قانونی:"
 
-#: plugins/about//PageComponent.qml:156
+#: ../plugins/about//PageComponent.qml:177
 msgid "Regulatory info"
-msgstr ""
+msgstr "اطّلاعات رگولاتوری"
 
-#: plugins/about//Storage.qml:87
+#: ../plugins/about//PageComponent.qml:185
+msgid "Developer mode"
+msgstr "حالت توسعه‌دهنده"
+
+#: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
-msgstr ""
+msgstr "استفاده شده توسّط اوبونتو"
 
-#: plugins/about//Storage.qml:88
+#: ../plugins/about//Storage.qml:88
 msgid "Videos"
-msgstr ""
+msgstr "ویدیوها"
 
-#: plugins/about//Storage.qml:89
+#: ../plugins/about//Storage.qml:89
 msgid "Audio"
-msgstr ""
+msgstr "صداها"
 
-#: plugins/about//Storage.qml:90
+#: ../plugins/about//Storage.qml:90
 msgid "Pictures"
-msgstr ""
+msgstr "تصویرها"
 
-#: plugins/about//Storage.qml:91
+#: ../plugins/about//Storage.qml:91
 msgid "Other files"
-msgstr ""
+msgstr "دیگر پرونده‌ها"
 
-#: plugins/about//Storage.qml:92
+#: ../plugins/about//Storage.qml:92
 msgid "Used by apps"
-msgstr ""
+msgstr "استفاده شده توسّط اپ‌ها"
 
-#: plugins/about//Storage.qml:142
+#: ../plugins/about//Storage.qml:142
 msgid "Total storage"
-msgstr ""
+msgstr "کل حافظه"
 
-#: plugins/about//Storage.qml:154
+#: ../plugins/about//Storage.qml:154
 msgid "Free space"
-msgstr ""
+msgstr "فضای آزاد"
 
-#: plugins/about//Storage.qml:174
+#: ../plugins/about//Storage.qml:174
 msgid "By name"
-msgstr ""
+msgstr "با نام"
 
-#: plugins/about//Storage.qml:174
+#: ../plugins/about//Storage.qml:174
 msgid "By size"
-msgstr ""
+msgstr "با اندازه"
 
-#: src/qml/MainWindow.qml:109
+#: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
-msgstr ""
+msgstr "تنظیمات سامانه"
 
-#: src/qml/MainWindow.qml:130
+#: ../src/qml/MainWindow.qml:131
 msgid "Search"
-msgstr ""
+msgstr "جست‌وجو"
 
-#: src/qml/MainWindow.qml:149
+#: ../src/qml/MainWindow.qml:150
 msgid "Personal"
-msgstr ""
+msgstr "شخصی"
 
-#: src/qml/MainWindow.qml:154
+#: ../src/qml/MainWindow.qml:155
 msgid "System"
-msgstr ""
+msgstr "سامانه"
 
-#: wizard/qml/Components//Page.qml:66
+#: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
-msgstr ""
+msgstr "بازگشت"
 
-#: wizard/qml/Pages//30-location.qml:22
+#: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "تنظیمات تلفن"
 
-#: wizard/qml/Pages//30-location.qml:39
+#: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"تلفن شما تنظیم شده که خطاها را به صورت خودکار به کنونیکال گزارش دهد. این "
+"مورد می‌تواند در تنظیمات سامانه غیرفعّال شود."
 
-#: wizard/qml/Pages//30-location.qml:41
+#: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"تلفن شما تنظیم شده که موقعیت شما را تشخیص دهد. این مورد می‌تواند در تنظیمات "
+"سامانه غیرفعّال شود."
 
-#: wizard/qml/Pages//no-sim.qml:22
+#: ../wizard/qml/Pages//30-location.qml:48
+#: ../wizard/qml/Pages//20-wifi.qml:152
+msgid "Continue"
+msgstr "ادامه"
+
+#: ../wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "هیچ سیم‌کارتی موجود نیست"
 
-#: wizard/qml/Pages//no-sim.qml:57
-msgid "Don’t worry, you can insert a SIM card later."
+#: ../wizard/qml/Pages//no-sim.qml:57
+msgid "To use the telephone and SMS features a SIM must be installed."
 msgstr ""
+"برای استفاده از تلفن و ویژگی‌های پیام کوتاه باید یک سیم‌کارت نصب شده باشد."
 
-#: wizard/qml/Pages//no-sim.qml:59
-msgid "For the time being, you won’t have phone or SMS features."
-msgstr ""
+#: ../wizard/qml/Pages//no-sim.qml:59
+msgid "Install a SIM before continuing."
+msgstr "پیش از ادامه یک سیم‌کارت نصب کنید."
 
-#: wizard/qml/Pages//no-sim.qml:61
-msgid "You can find a SIM in your phone package or contact your provider."
-msgstr ""
-
-#: wizard/qml/Pages//no-sim.qml:68 ../wizard/qml/Pages//20-wifi.qml:168
+#: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
 msgid "Skip"
-msgstr ""
+msgstr "پرش"
 
-#: wizard/qml/Pages//80-finished.qml:22
-msgid "That’s it!"
-msgstr ""
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "Setup complete"
+msgstr "تنظیم کامل شد"
 
-#: wizard/qml/Pages//80-finished.qml:39
-msgid "It’s great to have you in the Ubuntu community."
+#: ../wizard/qml/Pages//80-finished.qml:39
+msgid ""
+"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
+"the good folks at Canonical."
 msgstr ""
+"به اوبونتو روی تلفنتان که توسّط هزاران داوطلب و کارمندان خوب کنونیکال به شما "
+"ارائه می‌شود، خوش آمدید،"
 
-#: wizard/qml/Pages//80-finished.qml:41
-msgid "Enjoy your new phone."
-msgstr ""
+#: ../wizard/qml/Pages//80-finished.qml:41
+msgid "Now you can start using your Ubuntu phone."
+msgstr "حالا می‌توانید استفاده از تلفن اوبونتویی خود را شروع کنید."
 
-#: wizard/qml/Pages//80-finished.qml:48
+#: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
-msgstr ""
+msgstr "پایان"
 
-#: wizard/qml/Pages//20-wifi.qml:27
+#: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "اتّصال به بی‌سیم"
 
-#: wizard/qml/Pages//20-wifi.qml:67
+#: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
-msgstr ""
+msgstr "شبکه‌های موجود"
 
-#: wizard/qml/Pages//20-wifi.qml:81
-msgid "Connect to a Wi-Fi network to customize your setup."
-msgstr ""
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hello"
+msgstr "سلام"
 
-#: wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello!"
-msgstr ""
+#: ../wizard/qml/Pages//10-welcome.qml:60
+msgid "Welcome to your Ubuntu phone. Let’s get started."
+msgstr "به تلفن اوبونتویی خود خوش آمدید. بیایید شروع کنیم."
 
-#: wizard/qml/Pages//10-welcome.qml:55
-msgid "Welcome to Ubuntu."
-msgstr ""
-
-#: wizard/qml/Pages//10-welcome.qml:56
-msgid "Let’s get started."
-msgstr ""
-
-#: wizard/qml/Pages//10-welcome.qml:61
+#: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
-msgstr ""
+msgstr "زبانتان را انتخاب کنید"
+
+#: ../wizard/qml/Pages//10-welcome.qml:82
+msgid "Start"
+msgstr "آغاز"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: settings.js:4
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:4
 msgid "sound"
-msgstr ""
+msgstr "صدا"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
@@ -1442,256 +1548,265 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:6
-#: settings.js:16
-#: settings.js:34
-#: settings.js:42
-#: settings.js:52
-#: settings.js:70
-#: settings.js:76
-#: settings.js:94
-#: settings.js:102
-#: settings.js:108
-#: settings.js:130
-#: settings.js:142
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:6
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:16
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:34
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:42
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:52
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:70
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:76
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:94
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:102
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:108
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:132
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:138
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:150
 msgid "settings"
-msgstr ""
+msgstr "تنظیمات"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:10
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:10
 msgid "time"
-msgstr ""
+msgstr "زمان"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:12
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:12
 msgid "date"
-msgstr ""
+msgstr "تاریخ"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: settings.js:14
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:14
 msgid "timezone"
-msgstr ""
+msgstr "منطقه‌ی زمانی"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:18
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:18
 msgid "Orientation Lock"
-msgstr ""
+msgstr "قفل چرخش"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:20
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:20
 msgid "rotation"
-msgstr ""
+msgstr "گردش"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:22
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:22
 msgid "orientation"
-msgstr ""
+msgstr "چرخش"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:24
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:24
 msgid "lock"
-msgstr ""
+msgstr "قفل"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: settings.js:26
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:26
 msgid "screen"
-msgstr ""
+msgstr "صفحه"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:30
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:30
 msgid "security"
-msgstr ""
+msgstr "امنیت"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: settings.js:32
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:32
 msgid "privacy"
-msgstr ""
+msgstr "محرمانگی"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:36
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:36
 msgid "Accessibility"
-msgstr ""
+msgstr "دست‌رسی پذیری"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:38
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:38
 msgid "accessibility"
-msgstr ""
+msgstr "دست‌رس پذیری"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: settings.js:40
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:40
 msgid "a11y"
-msgstr ""
+msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:46
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:46
 msgid "language"
-msgstr ""
+msgstr "زبان"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:48
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:48
 msgid "lang"
-msgstr ""
+msgstr "زبان"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: settings.js:50
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:50
 msgid "i18n"
-msgstr ""
+msgstr "i18n"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:56
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:56
 msgid "battery"
-msgstr ""
+msgstr "باتری"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: settings.js:58
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:58
 msgid "power"
-msgstr ""
+msgstr "توان مصرفی"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:62
-#: settings.js:136
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:62
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:144
 msgid "network"
-msgstr ""
+msgstr "شبکه"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:64
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:64
 msgid "wireless"
-msgstr ""
+msgstr "بدون سیم"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:66
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:66
 msgid "wifi"
-msgstr ""
+msgstr "بی‌سیم"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: settings.js:68
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:68
 msgid "wi-fi"
-msgstr ""
+msgstr "بی سیم"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: settings.js:74
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:74
 msgid "phone"
-msgstr ""
+msgstr "تلفن"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:78
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:78
 msgid "Example"
-msgstr ""
+msgstr "مثال"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:80
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:80
 msgid "example"
-msgstr ""
+msgstr "نمونه"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:82
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:82
 msgid "test"
-msgstr ""
+msgstr "آزمایش"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: settings.js:84
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:84
 msgid "sample"
-msgstr ""
+msgstr "نمونه"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:88
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:88
 msgid "system"
-msgstr ""
+msgstr "سامانه"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:90
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:90
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:128
 msgid "software"
-msgstr ""
+msgstr "نرم‌افزار"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: settings.js:92
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:92
 msgid "update"
-msgstr ""
+msgstr "به‌روز رسانی"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: settings.js:96
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "به‌روز رسانی‌هایی موجودند"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: settings.js:100
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:100
 msgid "brightness"
-msgstr ""
+msgstr "روشنایی"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: settings.js:106
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:106
 msgid "reset"
-msgstr ""
+msgstr "بازنشانی"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:110
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:110
 msgid "Flight Mode"
-msgstr ""
+msgstr "حالت پرواز"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:112
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:112
 msgid "flight"
-msgstr ""
+msgstr "پرواز"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:114
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:114
 msgid "plane"
-msgstr ""
+msgstr "هواپیما"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: settings.js:116
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:116
 msgid "offline"
-msgstr ""
+msgstr "برون‌خط"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:120
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:120
 msgid "appearance"
-msgstr ""
+msgstr "ظاهر"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:122
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:122
 msgid "background"
-msgstr ""
+msgstr "پس‌زمینه"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: settings.js:124
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:124
 msgid "wallpaper"
-msgstr ""
+msgstr "کاغذ دیواری"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
+msgid "notifications"
+msgstr "آگهی‌ها"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: settings.js:128
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
 msgid "bluetooth"
-msgstr ""
+msgstr "بلوتوث"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:134
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:142
 msgid "cellular"
-msgstr ""
+msgstr "شبکه همراه"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:138
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:146
 msgid "mobile"
-msgstr ""
+msgstr "تلفن همراه"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: settings.js:140
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:148
 msgid "gsm"
-msgstr ""
+msgstr "جی‌اس‌ام"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:146
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:154
 msgid "about"
-msgstr ""
+msgstr "درباره"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:148
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:156
 msgid "device"
-msgstr ""
+msgstr "دستگاه"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: settings.js:150
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
 msgid "info"
-msgstr ""
+msgstr "اطّلاعات"
