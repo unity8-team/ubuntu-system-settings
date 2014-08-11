@@ -129,7 +129,10 @@ ItemPage {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: units.gu(23)
 
-                antialiasing: true
+                /* Setting that property makes text not correct aliased for
+                   some reasons, which happens with the value being false or
+                   true, toolkit bug? see https://launchpad.net/bugs/1354363
+                antialiasing: true */
 
                 function drawAxes(ctx, axisWidth, axisHeight, bottomMargin, rightMargin) {
 
