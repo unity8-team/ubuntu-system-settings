@@ -213,7 +213,9 @@ ItemPage {
                 onPaint:{
                     var ctx = canvas.getContext('2d');
                     ctx.save();
-                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                    /* Use reset rather than clearRect due to QTBUG-36761 */
+                    ctx.reset(0, 0, canvas.width, canvas.height)
 
                     var axisWidth = units.gu(1)
                     var axisHeight = units.gu(1)
