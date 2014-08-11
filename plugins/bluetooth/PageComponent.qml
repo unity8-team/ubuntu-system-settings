@@ -118,180 +118,186 @@ ItemPage {
         visible: true
         anchors.fill: parent
 
-        Column {
+        Flickable {
             anchors.fill: parent
+            contentHeight: contentItem.childrenRect.height
+            boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-            QDBusActionGroup {
-                id: bluetoothActionGroup
-                busType: DBus.SessionBus
-                busName: "com.canonical.indicator.bluetooth"
-                objectPath: "/com/canonical/indicator/bluetooth"
+            Column {
+                anchors.fill: parent
 
-                property variant enabled: action("bluetooth-enabled")
+                QDBusActionGroup {
+                    id: bluetoothActionGroup
+                    busType: DBus.SessionBus
+                    busName: "com.canonical.indicator.bluetooth"
+                    objectPath: "/com/canonical/indicator/bluetooth"
 
-                Component.onCompleted: start()
-            }
+                    property variant enabled: action("bluetooth-enabled")
 
-            ListItem.Standard {
-                text: i18n.tr("Bluetooth")
-                control: Switch {
-                    id: btSwitch
-                    // Cannot use onCheckedChanged as this triggers a loop
-                    onClicked: bluetoothActionGroup.enabled.activate()
-                    checked: backend.powered
+                    Component.onCompleted: start()
                 }
-                Component.onCompleted: clicked.connect(btSwitch.clicked)
-            }
 
-            Binding {
-                target: btSwitch
-                property: "checked"
-                value: bluetoothActionGroup.enabled.state
-            }
-
-            // Discoverability
-            ListItem.Standard {
-                enabled: bluetoothActionGroup.enabled
-                showDivider: false
-
-                Rectangle {
-                    color: "transparent"
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-                    anchors.leftMargin: units.gu(2)
-                    anchors.rightMargin: units.gu(2)
-
-                    Label {
-                        anchors {
-                            top: parent.top
-                            left: parent.left
-                            topMargin: units.gu(1)
-                        }
-                        height: units.gu(3)
-                        text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
+                ListItem.Standard {
+                    text: i18n.tr("Bluetooth")
+                    control: Switch {
+                        id: btSwitch
+                        // Cannot use onCheckedChanged as this triggers a loop
+                        onClicked: bluetoothActionGroup.enabled.activate()
+                        checked: backend.powered
                     }
+                    Component.onCompleted: clicked.connect(btSwitch.clicked)
+                }
 
-                    Label {
-                        anchors {
-                            top: parent.top
-                            right: parent.right
-                            topMargin: units.gu(1)
-                        }
-                        height: units.gu(3)
-                        text: backend.discoverable ? backend.adapterName() : ""
-                        color: "darkgrey"
-                        visible: backend.discoverable
-                        enabled: false
-                    }
+                Binding {
+                    target: btSwitch
+                    property: "checked"
+                    value: bluetoothActionGroup.enabled.state
+                }
 
-                    ActivityIndicator {
-                        anchors {
-                            top: parent.top
-                            right: parent.right
-                            topMargin: units.gu(1)
+                // Discoverability
+                ListItem.Standard {
+                    enabled: bluetoothActionGroup.enabled
+                    showDivider: false
+
+                    Rectangle {
+                        color: "transparent"
+                        anchors.fill: parent
+                        anchors.topMargin: units.gu(1)
+                        anchors.leftMargin: units.gu(2)
+                        anchors.rightMargin: units.gu(2)
+
+                        Label {
+                            anchors {
+                                top: parent.top
+                                left: parent.left
+                                topMargin: units.gu(1)
+                            }
+                            height: units.gu(3)
+                            text: backend.discoverable ? i18n.tr("Discoverable") : i18n.tr("Not discoverable")
                         }
-                        visible: backend.powered && !backend.discoverable
-                        running: true
+
+                        Label {
+                            anchors {
+                                top: parent.top
+                                right: parent.right
+                                topMargin: units.gu(1)
+                            }
+                            height: units.gu(3)
+                            text: backend.discoverable ? backend.adapterName() : ""
+                            color: "darkgrey"
+                            visible: backend.discoverable
+                            enabled: false
+                        }
+
+                        ActivityIndicator {
+                            anchors {
+                                top: parent.top
+                                right: parent.right
+                                topMargin: units.gu(1)
+                            }
+                            visible: backend.powered && !backend.discoverable
+                            running: true
+                        }
                     }
                 }
-            }
 
-            //  Connnected Headset(s)
-            ListItem.Standard {
-                id: connectedHeader
-                text: i18n.tr("Connected devices:")
+                //  Connnected Headset(s)
+                ListItem.Standard {
+                    id: connectedHeader
+                    text: i18n.tr("Connected devices:")
 
-                enabled: bluetoothActionGroup.enabled
-                visible: connectedList.visible
-            }
+                    enabled: bluetoothActionGroup.enabled
+                    visible: connectedList.visible
+                }
 
-            ListView {
-                id: connectedList
-                width: parent.width
-                height: connectedHeader.height * count
+                ListView {
+                    id: connectedList
+                    width: parent.width
+                    height: connectedHeader.height * count
 
-                visible: bluetoothActionGroup.enabled && (count > 0)
+                    visible: bluetoothActionGroup.enabled && (count > 0)
 
-                model: backend.connectedDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
+                    model: backend.connectedDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        control: ActivityIndicator {
+                            visible: connection == Device.Connecting
+                            running: true
+                        }
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
+                    }
+                }
+
+                //  Disconnnected Headset(s)
+
+                ListItem.Standard {
+                    id: disconnectedHeader
+                    text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
+                    enabled: bluetoothActionGroup.enabled
                     control: ActivityIndicator {
-                        visible: connection == Device.Connecting
+                        visible: backend.powered && backend.discovering
                         running: true
                     }
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
-                    }
-                    progression: true
                 }
-            }
 
-            //  Disconnnected Headset(s)
+                ListView {
+                    id: disconnectedList
+                    width: parent.width
+                    height: disconnectedHeader.height * count
 
-            ListItem.Standard {
-                id: disconnectedHeader
-                text: connectedList.visible ? i18n.tr("Connect another device:") : i18n.tr("Connect a device:")
-                enabled: bluetoothActionGroup.enabled
-                control: ActivityIndicator {
-                    visible: backend.powered && backend.discovering
-                    running: true
-                }
-            }
+                    visible: bluetoothActionGroup.enabled && (count > 0)
 
-            ListView {
-                id: disconnectedList
-                width: parent.width
-                height: disconnectedHeader.height * count
-
-                visible: bluetoothActionGroup.enabled && (count > 0)
-
-                model: backend.disconnectedDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
-                    enabled: backend.isSupportedType(type)
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
+                    model: backend.disconnectedDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        enabled: backend.isSupportedType(type)
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
                     }
-                    progression: true
                 }
-            }
-            ListItem.Standard {
-                id: disconnectedNone
-                text: i18n.tr("None detected")
-                visible: !disconnectedList.visible
-                enabled: false
-            }
+                ListItem.Standard {
+                    id: disconnectedNone
+                    text: i18n.tr("None detected")
+                    visible: !disconnectedList.visible
+                    enabled: false
+                }
 
-            //  Devices that connect automatically
-            ListItem.Standard {
-                id: autoconnectHeader
-                text: i18n.tr("Connect automatically when detected:")
-                visible: autoconnectList.visible
-                enabled: bluetoothActionGroup.enabled
-            }
-            ListView {
-                id: autoconnectList
-                width: parent.width
-                height: autoconnectHeader.height * count
+                //  Devices that connect automatically
+                ListItem.Standard {
+                    id: autoconnectHeader
+                    text: i18n.tr("Connect automatically when detected:")
+                    visible: autoconnectList.visible
+                    enabled: bluetoothActionGroup.enabled
+                }
+                ListView {
+                    id: autoconnectList
+                    width: parent.width
+                    height: autoconnectHeader.height * count
 
-                visible: bluetoothActionGroup.enabled && (count > 0)
+                    visible: bluetoothActionGroup.enabled && (count > 0)
 
-                model: backend.autoconnectDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
+                    model: backend.autoconnectDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
                     }
-                    progression: true
                 }
             }
         }
@@ -302,100 +308,106 @@ ItemPage {
         title: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
         visible: false
 
-        Column {
+        Flickable {
             anchors.fill: parent
+            contentHeight: contentItem.childrenRect.height
+            boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-            ListItem.SingleValue {
-                text: i18n.tr("Name")
-                value: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
-            }
-            ListItem.Standard {
-                Rectangle {
-                    color: "transparent"
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-                    anchors.leftMargin: units.gu(2)
-                    anchors.rightMargin: units.gu(2)
+            Column {
+                anchors.fill: parent
 
-                    Label {
-                        anchors {
-                            top: parent.top
-                            left: parent.left
-                            topMargin: units.gu(1)
+                ListItem.SingleValue {
+                    text: i18n.tr("Name")
+                    value: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
+                }
+                ListItem.Standard {
+                    Rectangle {
+                        color: "transparent"
+                        anchors.fill: parent
+                        anchors.topMargin: units.gu(1)
+                        anchors.leftMargin: units.gu(2)
+                        anchors.rightMargin: units.gu(2)
+
+                        Label {
+                            anchors {
+                                top: parent.top
+                                left: parent.left
+                                topMargin: units.gu(1)
+                            }
+                            height: units.gu(3)
+                            text: i18n.tr("Type")
                         }
-                        height: units.gu(3)
-                        text: i18n.tr("Type")
-                    }
-                    Image {
-                        anchors {
-                            right: deviceType.left
-                            rightMargin: units.gu(1)
+                        Image {
+                            anchors {
+                                right: deviceType.left
+                                rightMargin: units.gu(1)
+                            }
+                            height: units.gu(4)
+                            width: units.gu(4)
+                            source: backend.selectedDevice ? backend.selectedDevice.iconName : ""
                         }
-                        height: units.gu(4)
-                        width: units.gu(4)
-                        source: backend.selectedDevice ? backend.selectedDevice.iconName : ""
-                    }
-                    Label {
-                        id: deviceType
-                        anchors {
-                            top: parent.top
-                            right: parent.right
-                            topMargin: units.gu(1)
+                        Label {
+                            id: deviceType
+                            anchors {
+                                top: parent.top
+                                right: parent.right
+                                topMargin: units.gu(1)
+                            }
+                            height: units.gu(3)
+                            text: getTypeString(backend.selectedDevice ? backend.selectedDevice.type : Device.OTHER)
                         }
-                        height: units.gu(3)
-                        text: getTypeString(backend.selectedDevice ? backend.selectedDevice.type : Device.OTHER)
                     }
                 }
-            }
-            ListItem.SingleValue {
-                text: i18n.tr("Status")
-                value: getStatusString(backend.selectedDevice ? backend.selectedDevice.connection : Device.Disconnected)
-            }
-            ListItem.SingleValue {
-                text: i18n.tr("Signal Strength")
-                value: getSignalString(backend.selectedDevice ? backend.selectedDevice.strength : Device.None)
-            }
-            ListItem.Standard {
-                id: trustedCheck
-                text: i18n.tr("Connect automatically when detected:")
-                control: CheckBox {
-                    onClicked: {
-                        if (backend.selectedDevice) {
-                            backend.selectedDevice.trusted = !backend.selectedDevice.trusted
-                        }
-                    }
-                    checked: backend.selectedDevice ? backend.selectedDevice.trusted : false
+                ListItem.SingleValue {
+                    text: i18n.tr("Status")
+                    value: getStatusString(backend.selectedDevice ? backend.selectedDevice.connection : Device.Disconnected)
                 }
-                Component.onCompleted:
-                    clicked.connect(trustedCheck.clicked)
-            }
-            ListItem.SingleControl {
-                control: Button {
-                    text: backend.selectedDevice && (backend.selectedDevice.connection == Device.Connected || backend.selectedDevice.connection == Device.Connecting) ? i18n.tr("Disconnect") : i18n.tr("Connect")
-                    width: parent.width - units.gu(8)
-                    onClicked: {
-                        if (backend.selectedDevice
-                            && (backend.selectedDevice.connection == Device.Connected
-                                || backend.selectedDevice.connection == Device.Connecting)) {
-                            backend.disconnectDevice();
-                        } else {
-                            backend.stopDiscovery()
-                            backend.connectDevice(backend.selectedDevice.address);
-                        }
-                        pageStack.pop();
-                    }
-                    visible: backend.selectedDevice ? true : false
+                ListItem.SingleValue {
+                    text: i18n.tr("Signal Strength")
+                    value: getSignalString(backend.selectedDevice ? backend.selectedDevice.strength : Device.None)
                 }
-            }
-            ListItem.SingleControl {
-                control: Button {
-                    text: i18n.tr("Forget this device")
-                    width: parent.width - units.gu(8)
-                    onClicked: {
-                        backend.removeDevice();
-                        pageStack.pop();
+                ListItem.Standard {
+                    id: trustedCheck
+                    text: i18n.tr("Connect automatically when detected:")
+                    control: CheckBox {
+                        onClicked: {
+                            if (backend.selectedDevice) {
+                                backend.selectedDevice.trusted = !backend.selectedDevice.trusted
+                            }
+                        }
+                        checked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                     }
-                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 ? true : false
+                    Component.onCompleted:
+                        clicked.connect(trustedCheck.clicked)
+                }
+                ListItem.SingleControl {
+                    control: Button {
+                        text: backend.selectedDevice && (backend.selectedDevice.connection == Device.Connected || backend.selectedDevice.connection == Device.Connecting) ? i18n.tr("Disconnect") : i18n.tr("Connect")
+                        width: parent.width - units.gu(8)
+                        onClicked: {
+                            if (backend.selectedDevice
+                                && (backend.selectedDevice.connection == Device.Connected
+                                    || backend.selectedDevice.connection == Device.Connecting)) {
+                                backend.disconnectDevice();
+                            } else {
+                                backend.stopDiscovery()
+                                backend.connectDevice(backend.selectedDevice.address);
+                            }
+                            pageStack.pop();
+                        }
+                        visible: backend.selectedDevice ? true : false
+                    }
+                }
+                ListItem.SingleControl {
+                    control: Button {
+                        text: i18n.tr("Forget this device")
+                        width: parent.width - units.gu(8)
+                        onClicked: {
+                            backend.removeDevice();
+                            pageStack.pop();
+                        }
+                        enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 ? true : false
+                    }
                 }
             }
         }
