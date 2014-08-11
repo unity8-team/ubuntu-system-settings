@@ -4,6 +4,7 @@ import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
 ListItem.Base {
+    objectName: "silentModeWarning"
     height: itemId.height + units.gu(4)
 
     Item {

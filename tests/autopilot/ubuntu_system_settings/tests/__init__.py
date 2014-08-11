@@ -27,11 +27,15 @@ from ubuntu_system_settings import SystemSettings
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
+ACCOUNTS_SERVICE = 'com.canonical.unity.AccountsService'
+ACCOUNTS_SOUND_IFACE = 'com.ubuntu.touch.AccountsService.Sound'
 MODEM_IFACE = 'org.ofono.Modem'
 CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 SIM_IFACE = 'org.ofono.SimManager'
 NETREG_IFACE = 'org.ofono.NetworkRegistration'
+SYSTEM_IFACE = 'com.canonical.SystemImage'
+SYSTEM_SERVICE_OBJ = '/Service'
 
 
 class UbuntuSystemSettingsTestCase(
@@ -167,11 +171,8 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         )
 
     def mock_radio_settings(self, modem):
-        modem_interfaces = modem.GetProperties()['Interfaces']
-        modem_interfaces.append(RDO_IFACE)
         modem.AddProperty(
             RDO_IFACE, 'TechnologyPreference', self.technology_preference)
-        modem.SetProperty('Interfaces', modem_interfaces)
         modem.AddMethods(
             RDO_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -263,12 +264,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             self.add_sim2()
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.p_mock.terminate()
-        cls.p_mock.wait()
-        super(UbuntuSystemSettingsOfonoTestCase, cls).tearDownClass()
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
@@ -464,12 +459,160 @@ class BackgroundBaseTestCase(
         super(BackgroundBaseTestCase, self).tearDown()
 
 
-class SoundBaseTestCase(UbuntuSystemSettingsTestCase):
+class SoundBaseTestCase(
+        UbuntuSystemSettingsTestCase,
+        dbusmock.DBusTestCase):
     """ Base class for sound settings tests"""
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
 
     def setUp(self):
 
-        """ Go to Sound page """
+        user_obj = '/user/foo'
+
+        self.accts_snd_props = {
+            'SilentMode': dbus.Boolean(False, variant_level=1),
+            'IncomingCallVibrate': dbus.Boolean(False, variant_level=1),
+            'IncomingCallVibrateSilentMode': dbus.Boolean(False,
+                                                          variant_level=1),
+            'IncomingMessageVibrate': dbus.Boolean(False,
+                                                   variant_level=1),
+            'IncomingMessageVibrateSilentMode': dbus.Boolean(False,
+                                                             variant_level=1)}
+
+        # start dbus system bus
+        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
+                                             ACCOUNTS_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+
+        sleep(2)
+
+        self.dbus_mock = dbus.Interface(self.dbus_con.get_object(
+                                        ACCOUNTS_IFACE,
+                                        ACCOUNTS_OBJ,
+                                        ACCOUNTS_IFACE),
+                                        dbusmock.MOCK_IFACE)
+        # let accountservice find a user object path
+        self.dbus_mock.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
+                                 'ret = "%s"' % user_obj)
+
+        self.dbus_mock.AddProperties(ACCOUNTS_SOUND_IFACE,
+                                     self.accts_snd_props)
+
+        # add getter and setter to mock
+        self.dbus_mock.AddMethods(
+            'org.freedesktop.DBus.Properties',
+            [
+                ('self.Get',
+                 's',
+                 'v',
+                 'ret = self.accts_snd_props[args[0]]'),
+                ('self.Set',
+                 'sv',
+                 '',
+                 'self.accts_snd_props[args[0]] = args[1]')
+            ])
+
+        # add user object to mock
+        self.dbus_mock.AddObject(
+            user_obj, ACCOUNTS_SOUND_IFACE, self.accts_snd_props,
+            [
+                (
+                    'GetSilentMode', '', 'v',
+                    'ret = self.Get("%s", "SilentMode")' %
+                    ACCOUNTS_SOUND_IFACE),
+                (
+                    'GetIncomingCallVibrate', '', 'v',
+                    'ret = self.Get("%s", "IncomingCallVibrate")' %
+                    ACCOUNTS_SOUND_IFACE),
+                (
+                    'GetIncomingMessageVibrate', '', 'v',
+                    'ret = self.Get("%s", "IncomingMessageVibrate")' %
+                    ACCOUNTS_SOUND_IFACE),
+                (
+                    'GetIncomingCallVibrateSilentMode', '', 'v',
+                    'ret = self.Get("%s", "IncomingCallVibrateSilentMode")' %
+                    ACCOUNTS_SOUND_IFACE),
+                (
+                    'GetIncomingMessageVibrateSilentMode', '', 'v',
+                    'ret = self.Get("%s", \
+                                    "IncomingMessageVibrateSilentMode")' %
+                    ACCOUNTS_SOUND_IFACE)
+            ])
+
+        self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
+                                                 ACCOUNTS_IFACE)
+
         super(SoundBaseTestCase, self).setUp('sound')
+
+        """ Go to Sound page """
         self.assertThat(self.system_settings.main_view.sound_page.active,
                         Eventually(Equals(True)))
+
+    def tearDown(self):
+        self.mock_server.terminate()
+        self.mock_server.wait()
+        super(SoundBaseTestCase, self).tearDown()
+
+
+class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
+                        dbusmock.DBusTestCase):
+    """ Base class for reset settings tests"""
+
+    def mock_for_launcher_reset(self):
+        user_obj = '/user/foo'
+        # start dbus system bus
+        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
+                                             ACCOUNTS_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+
+        # spawn_server does not wait properly
+        # Reported as bug here: http://pad.lv/1350833
+        sleep(2)
+        self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
+            ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
+
+        self.acc_proxy.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
+                                 'ret = "%s"' % user_obj)
+
+        self.acc_proxy.AddObject(
+            user_obj, ACCOUNTS_USER_IFACE, {}, [])
+
+        self.user_mock = dbus.Interface(self.dbus_con.get_object(
+            ACCOUNTS_IFACE, user_obj),
+            dbusmock.MOCK_IFACE)
+
+        self.user_mock.AddMethod(
+            'org.freedesktop.DBus.Properties', 'Set', 'ssaa{sv}', '', '')
+
+    def mock_for_factory_reset(self):
+        self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,
+                                             SYSTEM_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+        # spawn_server does not wait properly
+        # Reported as bug here: http://pad.lv/1350833
+        sleep(2)
+        self.sys_mock = dbus.Interface(self.dbus_con.get_object(
+            SYSTEM_IFACE, SYSTEM_SERVICE_OBJ), dbusmock.MOCK_IFACE)
+
+        self.sys_mock.AddMethod(SYSTEM_IFACE, 'FactoryReset', '', '', '')
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+
+    def setUp(self):
+        self.mock_for_launcher_reset()
+        self.mock_for_factory_reset()
+
+        super(ResetBaseTestCase, self).setUp()
+        self.reset_page = self.system_settings.main_view.go_to_reset_phone()
+
+    def tearDown(self):
+        self.mock_server.terminate()
+        self.mock_server.wait()
+        super(ResetBaseTestCase, self).tearDown()

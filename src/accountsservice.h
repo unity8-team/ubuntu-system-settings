@@ -35,10 +35,10 @@ public:
     QString getProperty (QString property);
     QVariant getUserProperty(const QString &interface,
                              const QString &property);
-    void setUserProperty(const QString &interface,
+    bool setUserProperty(const QString &interface,
                          const QString &property,
                          const QVariant &value);
-    void customSetUserProperty(const QString &method,
+    bool customSetUserProperty(const QString &method,
                                const QVariant &value);
 
 

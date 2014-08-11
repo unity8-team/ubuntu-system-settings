@@ -64,17 +64,20 @@ Column {
         text: i18n.tr("Cellular data:")
         expanded: true
         model: ["Off", "sim1", "sim2"]
-        delegate: OptionSelectorDelegate { text: {
-            var t;
-            if (modelData === "sim1") {
-                t = sim1.title
-            } else if (modelData === "sim2") {
-                t = sim2.title
-            } else {
-                t = i18n.tr(modelData);
+        delegate: OptionSelectorDelegate {
+            objectName: "use" + modelData
+            text: {
+                var t;
+                if (modelData === "sim1") {
+                    t = sim1.title
+                } else if (modelData === "sim2") {
+                    t = sim2.title
+                } else {
+                    t = i18n.tr(modelData);
+                }
+                return t;
             }
-            return t;
-        }}
+        }
         selectedIndex: [true, sim1.connMan.powered, sim2.connMan.powered].lastIndexOf(true)
         onDelegateClicked: {
             sim1.connMan.powered = (index === 1)
