@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 09:44+0800\n"
-"PO-Revision-Date: 2014-08-08 18:28+0000\n"
-"Last-Translator: Filipe André Pinho <Unknown>\n"
+"PO-Revision-Date: 2014-08-10 14:55+0000\n"
+"Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
+"X-Launchpad-Export-Date: 2014-08-11 06:30+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/sound//SoundsList.qml:59
@@ -973,7 +973,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Apagar & Restaurar Pré-Definições"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -996,7 +996,7 @@ msgstr "Repor telefone"
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Restaurar Launcher"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
@@ -1004,11 +1004,11 @@ msgstr "Repor todas as definições de sistema..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Apagar & Restaurar Pré-Definições..."
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "O Launcher vai ser reposto com as suas configurações originais."
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
@@ -1080,7 +1080,7 @@ msgstr "Emparelhar"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "Ligado"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
@@ -1088,11 +1088,11 @@ msgstr "A ligar..."
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Desligando..."
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "Desligado"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
@@ -1188,7 +1188,7 @@ msgstr "Ligar outro dispositivo:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "Ligar um equipamento:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -1205,7 +1205,7 @@ msgstr "Tipo"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -1286,12 +1286,16 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Quando o ponto de acesso está ligado, outros equipamentos podem usar a sua "
+"ligação de dados móveis através do Wi-Fi. São aplicados custos normais."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Outros equipamentos podem usar a sua ligação de dados móveis através de uma "
+"ligação Wi-Fi. São aplicados custos normais."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
