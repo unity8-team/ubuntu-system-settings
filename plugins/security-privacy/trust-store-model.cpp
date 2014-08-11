@@ -48,9 +48,9 @@ public:
 
     void addRequest(const core::trust::Request &request) {
         if (request.answer == core::trust::Request::Answer::granted) {
-            grantedFeatures.insert(request.feature);
+            grantedFeatures.insert(request.feature.value);
         } else {
-            grantedFeatures.remove(request.feature);
+            grantedFeatures.remove(request.feature.value);
         }
     }
 
@@ -262,7 +262,7 @@ void TrustStoreModel::setEnabled(int row, bool enabled)
 
     core::trust::Request r;
     r.from = app.id.toStdString();
-    r.feature = core::trust::Request::default_feature;
+    r.feature = core::trust::Feature(core::trust::Request::default_feature);
     r.answer = enabled ?
         core::trust::Request::Answer::granted : core::trust::Request::Answer::denied;
     r.when = std::chrono::system_clock::now();
@@ -275,7 +275,7 @@ void TrustStoreModel::setEnabled(int row, bool enabled)
             /* Skip the default feature, we already disabled it */
             if (feature == core::trust::Request::default_feature) continue;
 
-            r.feature = feature;
+            r.feature = core::trust::Feature(feature);
             d->trustStore->add(r);
         }
     }
