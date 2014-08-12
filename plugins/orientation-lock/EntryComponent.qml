@@ -24,35 +24,36 @@ import QtQuick.Window 2.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
+
 ListItem.Standard {
+
+    function orientationToSetting (o) {
+        switch (o) {
+            case Qt.PrimaryOrientation:
+                return "PrimaryOrientation";
+            case Qt.LandscapeOrientation:
+                return "LandscapeOrientation";
+            case Qt.PortraitOrientation:
+                return "PortraitOrientation";
+            case Qt.InvertedLandscapeOrientation:
+                return "InvertedLandscapeOrientation";
+            case Qt.InvertedPortraitOrientation:
+                return "InvertedPortraitOrientation";
+        }
+        console.warn('Unknown Screen orientation');
+        return "none";
+    }
+
     id: root
     iconSource: model.icon
     iconFrame: true
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
-        checked: systemSettings.orientationLock !== "none"
+        checked: systemSettings.orientationLock && systemSettings.orientationLock !== "none"
         onCheckedChanged: {
-            var setting = systemSettings.orientationLock;
             if (checked) {
-                console.warn('orientation', Screen.orientation);
-                console.warn('PrimaryOrientation', Qt.PrimaryOrientation);
-                console.warn('LandscapeOrientation', Qt.LandscapeOrientation);
-                switch (Screen.orientation) {
-                    case Qt.PrimaryOrientation:
-                        console.warn('setting PrimaryOrientation');
-                        setting = "PrimaryOrientation"; break;
-                    case Qt.LandscapeOrientation:
-                        setting = "LandscapeOrientation"; break;
-                    case Qt.PortraitOrientation:
-                        setting = "PortraitOrientation"; break;
-                    case Qt.InvertedLandscapeOrientation:
-                        setting = "InvertedLandscapeOrientation"; break;
-                    case Qt.InvertedPortraitOrientation:
-                        setting = "InvertedPortraitOrientation"; break;
-                    default:
-                        console.warn('found no orientation match');
-                }
+                systemSettings.orientationLock = orientationToSetting(Screen.orientation);
             } else {
                 systemSettings.orientationLock = "none";
             }
@@ -61,9 +62,6 @@ ListItem.Standard {
         GSettings {
             id: systemSettings
             schema.id: "com.ubuntu.touch.system"
-            Component.onCompleted: {
-                console.warn(systemSettings.orientationLock)
-            }
         }
     }
 }
