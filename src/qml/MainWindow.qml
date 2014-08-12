@@ -193,12 +193,14 @@ MainView {
                 }
                 inputMethodHints: Qt.ImhNoPredictiveText
                 placeholderText: i18n.tr("Search...")
+                objectName: "searchTextField"
                 onActiveFocusChanged: {
                     if (!activeFocus) {
                         text = ""
                         mainPage.searching = false
                     }
                 }
+                onTextChanged: pluginManager.filter = text
             }
         }
     }
