@@ -129,7 +129,10 @@ ItemPage {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: units.gu(23)
 
-                antialiasing: true
+                /* Setting that property makes text not correct aliased for
+                   some reasons, which happens with the value being false or
+                   true, toolkit bug? see https://launchpad.net/bugs/1354363
+                antialiasing: true */
 
                 function drawAxes(ctx, axisWidth, axisHeight, bottomMargin, rightMargin) {
 
@@ -213,7 +216,9 @@ ItemPage {
                 onPaint:{
                     var ctx = canvas.getContext('2d');
                     ctx.save();
-                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                    /* Use reset rather than clearRect due to QTBUG-36761 */
+                    ctx.reset(0, 0, canvas.width, canvas.height)
 
                     var axisWidth = units.gu(1)
                     var axisHeight = units.gu(1)
@@ -384,8 +389,7 @@ ItemPage {
                     signal clicked
                     onClicked: item.clicked()
                 }
-                visible: showAllUI && // Hidden until the indicator works
-                         locationActionGroup.enabled.state !== undefined
+                visible: locationActionGroup.enabled.state !== undefined
             }
 
             ListItem.Caption {
