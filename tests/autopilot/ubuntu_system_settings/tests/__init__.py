@@ -265,6 +265,26 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
 
+    def set_default_for_calls(self, gsettings, default):
+        gsettings.set_value('default-sim-for-calls', default)
+        # wait for gsettings
+        sleep(1)
+
+    def set_default_for_messages(self, gsettings, default):
+        gsettings.set_value('default-sim-for-messages', default)
+        # wait for gsettings
+        sleep(1)
+
+    def get_default_sim_for_calls_selector(self, text):
+        return self.system_settings.main_view.cellular_page.select_single(
+            objectName="defaultForCalls" + text
+        )
+
+    def get_default_sim_for_messages_selector(self, text):
+        return self.system_settings.main_view.cellular_page.select_single(
+            objectName="defaultForMessages" + text
+        )
+
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
