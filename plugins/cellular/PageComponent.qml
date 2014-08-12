@@ -60,6 +60,7 @@ ItemPage {
                     simTwoLoader.setSource("Components/Sim.qml", {
                         path: p
                     });
+                    defaultSimLoader.source = "Components/DefaultSim.qml";
                 }
             }
         }
@@ -184,6 +185,14 @@ ItemPage {
             Loader {
                 id: simEditorLoader
                 anchors { left: parent.left; right: parent.right }
+            }
+
+            ListItem.Divider {}
+
+            Loader {
+                id: defaultSimLoader
+                anchors.left: parent.left
+                anchors.right: parent.right
             }
         }
     }

@@ -555,3 +555,40 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             gsettings.set_value('sim-names', old_names)
             # wait for gsettings
             sleep(1)
+
+    def test_changing_default_sim_for_calls(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        default = gsettings.get_value('default-sim-for-calls')
+
+        self.addCleanup(
+            self.set_default_for_calls, gsettings, default)
+
+        # click ask
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_calls_selector('ask'))
+        # click first sim
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_calls_selector('/ril_0'))
+        # wait for gsettings
+        sleep(1)
+        self.assertEqual(
+            gsettings.get_value('default-sim-for-calls').get_string(),
+            '/ril_0')
+
+    def test_changing_default_sim_for_messages(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        default = gsettings.get_value('default-sim-for-messages')
+        self.addCleanup(
+            self.set_default_for_messages, gsettings, default)
+
+        # click ask
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_messages_selector('ask'))
+        # click second sim
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_messages_selector('/ril_1'))
+        # wait for gsettings
+        sleep(1)
+        self.assertEqual(
+            gsettings.get_value('default-sim-for-messages').get_string(),
+            '/ril_1')
