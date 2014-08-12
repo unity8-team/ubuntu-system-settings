@@ -125,7 +125,7 @@ ItemPage {
             }
 
             ListItem.Standard {
-                text: i18n.tr("Auto completion")
+                text: i18n.tr("Auto correction")
 
                 control: Switch {
                     checked: settings.autoCompletion
@@ -165,12 +165,39 @@ ItemPage {
             }
 
             ListItem.Standard {
+                text: i18n.tr("Auto punctuation")
+
+                control: Switch {
+                    checked: settings.doubleSpaceFullStop
+
+                    onClicked: settings.doubleSpaceFullStop = checked
+                }
+            }
+
+            ListItem.Caption {
+                text: i18n.tr("Adds a period, and any missing quotes or brackets, when you tap Space twice.")
+            }
+
+            ListItem.ThinDivider {
+            }
+
+            ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
 
                 control: Switch {
                     checked: settings.keyPressFeedback
 
                     onClicked: settings.keyPressFeedback = checked
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Keyboard vibration")
+
+                control: Switch {
+                    checked: settings.keyPressHapticFeedback
+
+                    onClicked: settings.keyPressHapticFeedback = checked
                 }
             }
         }
