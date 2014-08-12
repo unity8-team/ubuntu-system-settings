@@ -1,3 +1,33 @@
+ubuntu-system-settings (0.3+14.10.20140812.3-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] Updated based on latest designs, switching from brightness
+    slider to progression which loads the brightness plugin.
+    [brightness] Moved BrightnessSlider component to brightness plugin,
+    since it's now only used in one place. (LP: #1289470)
+
+  [ Sebastien Bacher ]
+  * system-update: tweaks to the "no update available" label (LP:
+    #1348568)
+
+  [ William Hua ]
+  * Use gsettings-qt in language panel.
+  * Add auto-punctuation and keyboard vibration options. Also fix auto-
+    completion to be auto-correction per spec. (LP: #1352398)
+
+  [ Michael Terry ]
+  * Implement a lock security page in the wizard. This page is super
+    ugly right now and just the bare bones functionality needed to set a
+    passcode or otherwise. Design is working on final visual design and
+    we will update later. (LP: #1348362)
+
+  [ jonas-drange ]
+  * [cellular] uis for default SIM settings
+  * [cellular] use expandable to show/hide sim editor and put the sim
+    editor in a Loader element to optimize single sim setups
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 12 Aug 2014 19:23:51 +0000
+
 ubuntu-system-settings (0.3+14.10.20140812-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
