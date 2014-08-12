@@ -472,14 +472,12 @@ ItemPage {
 
         color: "transparent"
 
-        Column {
-            anchors.centerIn: parent
-
-            Label {
-                text: updateNotification.text
-                anchors.horizontalCenter: parent.horizontalCenter
-                fontSize: "large"
-            }
+        Label {
+            anchors.centerIn: updateNotification
+            text: updateNotification.text
+            width: updateNotification.width
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
         }
     }
 
