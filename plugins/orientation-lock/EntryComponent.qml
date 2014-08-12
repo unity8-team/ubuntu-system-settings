@@ -20,6 +20,7 @@
 
 import GSettings 1.0
 import QtQuick 2.0
+import QtQuick.Window 2.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 
@@ -30,15 +31,38 @@ ListItem.Standard {
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
-        checked: systemSettings.rotationLock
-        onCheckedChanged: systemSettings.rotationLock = checked
+        checked: systemSettings.orientationLock !== "none"
+        onCheckedChanged: {
+            var setting = systemSettings.orientationLock;
+            if (checked) {
+                console.warn('orientation', Screen.orientation);
+                console.warn('PrimaryOrientation', Qt.PrimaryOrientation);
+                console.warn('LandscapeOrientation', Qt.LandscapeOrientation);
+                switch (Screen.orientation) {
+                    case Qt.PrimaryOrientation:
+                        console.warn('setting PrimaryOrientation');
+                        setting = "PrimaryOrientation"; break;
+                    case Qt.LandscapeOrientation:
+                        setting = "LandscapeOrientation"; break;
+                    case Qt.PortraitOrientation:
+                        setting = "PortraitOrientation"; break;
+                    case Qt.InvertedLandscapeOrientation:
+                        setting = "InvertedLandscapeOrientation"; break;
+                    case Qt.InvertedPortraitOrientation:
+                        setting = "InvertedPortraitOrientation"; break;
+                    default:
+                        console.warn('found no orientation match');
+                }
+            } else {
+                systemSettings.orientationLock = "none";
+            }
+        }
 
         GSettings {
             id: systemSettings
             schema.id: "com.ubuntu.touch.system"
-            onChanged: {
-                if (key == "rotationLock")
-                    control.checked = value
+            Component.onCompleted: {
+                console.warn(systemSettings.orientationLock)
             }
         }
     }
