@@ -25,7 +25,6 @@ import QMenuModel 0.1
 
 Column {
     signal pressed
-    property int level: indicatorPower.batteryLevel
     readonly property bool pressed: sliderId.pressed
 
     anchors {
@@ -40,7 +39,6 @@ Column {
         objectPath: "/com/canonical/indicator/power"
 
         property variant brightness: action("brightness").state
-        property variant batteryLevel: action("battery-level").state
         onBrightnessChanged: { 
             sliderId.enabled = brightness != null
             sliderId.value = sliderId.enabled ? brightness * 100 : 0.0
