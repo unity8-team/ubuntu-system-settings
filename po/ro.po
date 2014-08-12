@@ -7,224 +7,350 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-26 19:47+0100\n"
-"PO-Revision-Date: 2014-06-24 21:39+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-08-08 09:44+0800\n"
+"PO-Revision-Date: 2014-08-08 12:16+0000\n"
+"Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-07-27 06:33+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-09 05:46+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
-#: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:120
-msgid "Other network"
-msgstr ""
+#: ../plugins/sound//SoundsList.qml:59
+msgid "Stop playing"
+msgstr "Oprește redarea"
 
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:38
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:2
+msgid "Sound"
+msgstr "Sunete"
 
-#: ../plugins/wifi//OtherNetwork.qml:66
-msgid "Security"
-msgstr ""
+#: ../plugins/sound//PageComponent.qml:75
+msgid "Silent Mode"
+msgstr "Mod silențios"
 
-#: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PhoneLocking.qml:40
-#: ../plugins/bluetooth//PageComponent.qml:105
-#: ../plugins/bluetooth//PageComponent.qml:256
-#: ../plugins/bluetooth//PageComponent.qml:264
-msgid "None"
-msgstr ""
+#: ../plugins/sound//PageComponent.qml:79
+msgid "Ringer:"
+msgstr "Sonerie:"
 
-#: ../plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
-msgstr ""
+#: ../plugins/sound//PageComponent.qml:111
+msgid "Phone calls:"
+msgstr "Apeluri:"
 
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr ""
+#: ../plugins/sound//PageComponent.qml:115
+#: ../plugins/sound//PageComponent.qml:121
+msgid "Ringtone"
+msgstr "Ton sonerie"
 
-#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
-msgid "Password"
-msgstr ""
+#: ../plugins/sound//PageComponent.qml:134
+msgid "Vibrate when ringing"
+msgstr "Vibrează în timp ce sună"
 
-#: ../plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
-msgstr ""
+#: ../plugins/sound//PageComponent.qml:143
+#: ../plugins/sound//PageComponent.qml:178
+msgid "Vibrate in Silent Mode"
+msgstr "Vibrează în modul silențios"
 
-#: ../plugins/wifi//OtherNetwork.qml:112
-#: ../plugins/security-privacy//LockSecurity.qml:310
-#: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/background//Preview.qml:97
-#: ../plugins/phone//CallForwarding.qml:136
-#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/sound//PageComponent.qml:147
+msgid "Messages:"
+msgstr "Mesaje:"
+
+#: ../plugins/sound//PageComponent.qml:151
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Message received"
+msgstr "Ați primit un mesaj"
+
+#: ../plugins/sound//PageComponent.qml:169
+msgid "Vibrate with message sound"
+msgstr "Vibrează odată cu sunetul de mesaj"
+
+#: ../plugins/sound//PageComponent.qml:182
+msgid "Other sounds:"
+msgstr "Alte sunete:"
+
+#: ../plugins/sound//PageComponent.qml:186
+#: ../plugins/language//PageComponent.qml:161
+msgid "Keyboard sound"
+msgstr "Feedback audio tastatură"
+
+#: ../plugins/sound//PageComponent.qml:200
+msgid "Lock sound"
+msgstr "Feedback audio la blocare"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "Telefonul este în modul silențios."
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:8
+msgid "Time & Date"
+msgstr "Oră și dată"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Fus orar:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Configurare oră și dată:"
+
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+msgid "Automatically"
+msgstr "Automat"
+
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+msgid "Manually"
+msgstr "Manual"
+
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "Configurare oră și dată"
+
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "Oră"
+
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "Oră"
+
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "Minute"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "A doua"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "Dată"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "Zi"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "Lună"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "An"
+
 #: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/reset//EraseEverything.qml:36
-#: ../plugins/reset//ResetAllSettings.qml:36
-#: ../plugins/reset//ResetLauncherHome.qml:40
+#: ../plugins/security-privacy//LockSecurity.qml:278
+#: ../plugins/language//DisplayLanguage.qml:94
+#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/phone//CallForwarding.qml:136
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/background//Preview.qml:97
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/cellular//HotspotSetup.qml:85
 msgid "Cancel"
-msgstr ""
+msgstr "Anulează"
 
-#: ../plugins/wifi//OtherNetwork.qml:121
-msgid "Connect"
-msgstr ""
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/security-privacy//LockSecurity.qml:299
+#: ../plugins/phone//CallForwarding.qml:148
+#: ../plugins/background//Preview.qml:104
+msgid "Set"
+msgstr "Setează"
 
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr ""
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Fus orar"
 
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr ""
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "Setați fusul orar:"
 
-#: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:263
-msgid "Name"
-msgstr ""
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "Introduceți locul curent."
 
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr ""
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "Niciun loc corespondent"
 
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/about//PageComponent.qml:149
-#: ../plugins/battery//SleepValues.qml:96
-#: ../plugins/battery//PageComponent.qml:293
-#: ../plugins/battery//PageComponent.qml:302
-#: ../plugins/system-update//Configuration.qml:53
-#: ../plugins/system-update//PageComponent.qml:449
-msgid "Never"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/wifi//PageComponent.qml:26
-#: ../plugins/battery//PageComponent.qml:312
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:2
-msgid "Wi-Fi"
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:29
-#: ../plugins/security-privacy//PageComponent.qml:76
-msgid "Phone locking"
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:41
-msgid "Passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:42
-#: ../plugins/security-privacy//LockSecurity.qml:332
-msgid "Passphrase"
-msgstr ""
-
+#: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/security-privacy//PageComponent.qml:82
 #: ../plugins/security-privacy//PhoneLocking.qml:44
-#: ../plugins/security-privacy//LockSecurity.qml:30
-#: ../plugins/about//DevMode.qml:102
+#: ../plugins/about//DevMode.qml:108
 msgid "Lock security"
-msgstr ""
+msgstr "Blocare de securitate"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:62
-#: ../plugins/battery//PageComponent.qml:284
-msgid "Lock when idle"
-msgstr ""
+#: ../plugins/security-privacy//LockSecurity.qml:92
+msgid "Change passcode"
+msgstr "Schimbă parola"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:63
-#: ../plugins/battery//PageComponent.qml:284
-msgid "Sleep when idle"
-msgstr ""
+#: ../plugins/security-privacy//LockSecurity.qml:94
+msgid "Change passphrase"
+msgstr "Schimbă fraza secretă"
 
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PhoneLocking.qml:65
-#: ../plugins/security-privacy//PageComponent.qml:78
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+#: ../plugins/security-privacy//LockSecurity.qml:101
+msgid "Switch to swipe"
+msgstr "Schimbă pe glisare"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
-msgstr ""
+#: ../plugins/security-privacy//LockSecurity.qml:103
+msgid "Switch to passcode"
+msgstr "Schimbă pe parolă"
 
-#: ../plugins/security-privacy//Dash.qml:29
-#: ../plugins/security-privacy//PageComponent.qml:125
-msgid "Dash search"
-msgstr ""
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to passphrase"
+msgstr "Schimbă pe frază secretă"
 
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr ""
+#: ../plugins/security-privacy//LockSecurity.qml:114
+msgid "Existing passcode"
+msgstr "Parolă existentă"
 
-#: ../plugins/security-privacy//Dash.qml:46
-#: ../plugins/security-privacy//PageComponent.qml:52
-#: ../plugins/security-privacy//PageComponent.qml:128
-msgid "Phone only"
-msgstr ""
+#: ../plugins/security-privacy//LockSecurity.qml:116
+msgid "Existing passphrase"
+msgstr "Frază secretă existentă"
 
-#: ../plugins/security-privacy//Dash.qml:46
-#: ../plugins/security-privacy//PageComponent.qml:50
-#: ../plugins/security-privacy//PageComponent.qml:127
-msgid "Phone and Internet"
-msgstr ""
+#: ../plugins/security-privacy//LockSecurity.qml:170
+msgid "Choose passcode"
+msgstr "Alegeți parola"
+
+#: ../plugins/security-privacy//LockSecurity.qml:172
+msgid "Choose passphrase"
+msgstr "Alegeți fraza secretă"
+
+#: ../plugins/security-privacy//LockSecurity.qml:216
+msgid "Confirm passcode"
+msgstr "Confirmare parolă"
+
+#: ../plugins/security-privacy//LockSecurity.qml:218
+msgid "Confirm passphrase"
+msgstr "Confirmare frază parolă"
+
+#: ../plugins/security-privacy//LockSecurity.qml:260
+msgid "Those passcodes don't match. Try again."
+msgstr "Parolele nu se potrivesc. Încercați din nou."
+
+#: ../plugins/security-privacy//LockSecurity.qml:263
+msgid "Those passphrases don't match. Try again."
+msgstr "Frazele parolă nu se potrivesc. Încercați din nou."
+
+#: ../plugins/security-privacy//LockSecurity.qml:294
+msgid "Unset"
+msgstr "Nedefinit"
+
+#: ../plugins/security-privacy//LockSecurity.qml:297
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr "Modifică"
+
+#: ../plugins/security-privacy//LockSecurity.qml:339
+msgid "Unlock the phone using:"
+msgstr "Deblocați telefonul prin:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:343
+msgid "Swipe (no security)"
+msgstr "Glisare (fără securizare)"
+
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "4-digit passcode"
+msgstr "Parolă din 4 cifre"
+
+#: ../plugins/security-privacy//LockSecurity.qml:345
+#: ../plugins/security-privacy//PageComponent.qml:80
+#: ../plugins/security-privacy//PhoneLocking.qml:42
+msgid "Passphrase"
+msgstr "Frază parolă"
+
+#: ../plugins/security-privacy//LockSecurity.qml:346
+msgid "Swipe (no security)… "
+msgstr "Glisare (fără securizare)… "
+
+#: ../plugins/security-privacy//LockSecurity.qml:347
+msgid "4-digit passcode…"
+msgstr "Parolă din 4 cifre..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "Passphrase…"
+msgstr "Frază parolă..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:379
+msgid "Change passcode…"
+msgstr "Schimbă parola..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:380
+msgid "Change passphrase…"
+msgstr "Schimbă fraza parolă..."
 
 #: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "Loc"
 
 #: ../plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "Detecție localizare geografică"
 
 #: ../plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
+"Utilizează GPS pentru a detecta localizarea geografică. Dacă funcția este "
+"oprită este oprit și senzorul GPS pentru a economisi bateria."
 
 #: ../plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Utilizează rețele fără fir și senzorul GPS pentru detectarea localizării "
+"geografice. Oprirea funcției de localizare geografică economisește bateria."
 
 #: ../plugins/security-privacy//Location.qml:74
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
+"Utilizează rețele fără fir (acum oprit) și senzorul GPS pentru detectarea "
+"localizării geografice. Oprirea funcției de localizare geografică "
+"economisește bateria."
 
 #: ../plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"Utilizează rețele fără fir, celulele gsm și senzorul GPS pentru detectarea "
+"localizării geografice. Oprirea funcției de localizare geografică "
+"economisește bateria."
 
 #: ../plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"Utilizează rețele fără fir, celulele gsm (acum nu există conexiune gsm) și "
+"senzorul GPS pentru detectarea localizării geografice. Oprirea funcției de "
+"localizare geografică economisește bateria."
 
 #: ../plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"Utilizează rețele fără fir (acum oprit), celulele gsm și senzorul GPS pentru "
+"detectarea localizării geografice. Oprirea funcției de localizare geografică "
+"economisește bateria."
 
 #: ../plugins/security-privacy//Location.qml:82
 msgid ""
@@ -232,1504 +358,1479 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"Utilizează rețele fără fir (acum oprit), celulele gsm (acum fără conexiune "
+"gsm) și senzorul GPS pentru detectarea localizării geografice. Oprirea "
+"funcției de localizare geografică economisește bateria."
 
 #: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:78
-msgid "Change passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:80
-msgid "Change passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:87
-msgid "Switch to swipe"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:89
-msgid "Switch to passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:91
-msgid "Switch to passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:100
-msgid "Existing passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:102
-msgid "Existing passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:150
-msgid "Incorrect passcode. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:153
-msgid "Incorrect passphrase. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:166
-msgid "Choose passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:168
-msgid "Choose passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:212
-msgid "Confirm passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:214
-msgid "Confirm passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:256
-msgid "Those passcodes don't match. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:259
-msgid "Those passphrases don't match. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:273
-msgid "Unset"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:274
-#: ../wizard/qml/Pages//20-wifi.qml:153
-#: ../wizard/qml/Pages//30-location.qml:48
-msgid "Continue"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:326
-msgid "Unlock the phone using:"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:330
-msgid "Swipe (no security)"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:331
-msgid "4-digit passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:333
-msgid "Swipe (no security)… "
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:334
-msgid "4-digit passcode…"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:335
-msgid "Passphrase…"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:376
-msgid "Change passcode…"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:377
-msgid "Change passphrase…"
-msgstr ""
+msgstr "Permiteți accesul la localizarea geografică:"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:33
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:22
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:28
 msgid "Security & Privacy"
-msgstr ""
+msgstr "Securitate și confidențialitate"
+
+#: ../plugins/security-privacy//PageComponent.qml:50
+#: ../plugins/security-privacy//PageComponent.qml:150
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone and Internet"
+msgstr "Din telefon și Internet"
+
+#: ../plugins/security-privacy//PageComponent.qml:52
+#: ../plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone only"
+msgstr "Numai din telefon"
 
 #: ../plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
-msgstr ""
+msgstr "Securitate:"
 
-#: ../plugins/security-privacy//PageComponent.qml:87
-msgid "SIM PIN"
-msgstr ""
+#: ../plugins/security-privacy//PageComponent.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:40
+#: ../plugins/wifi//OtherNetwork.qml:67
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:302
+#: ../plugins/bluetooth//PageComponent.qml:310
+msgid "None"
+msgstr "Nimic"
 
-#: ../plugins/security-privacy//PageComponent.qml:93
-msgid "Privacy:"
-msgstr ""
+#: ../plugins/security-privacy//PageComponent.qml:79
+#: ../plugins/security-privacy//PhoneLocking.qml:41
+msgid "Passcode"
+msgstr "Parolă"
 
-#: ../plugins/security-privacy//PageComponent.qml:97
-msgid "Stats on welcome screen"
-msgstr ""
+#: ../plugins/security-privacy//PageComponent.qml:99
+#: ../plugins/security-privacy//PhoneLocking.qml:29
+msgid "Phone locking"
+msgstr "Blocare telefon"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PageComponent.qml:101
+#: ../plugins/security-privacy//PhoneLocking.qml:65
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minut"
+msgstr[1] "%1 minute"
+msgstr[2] "%1 de minute"
 
 #: ../plugins/security-privacy//PageComponent.qml:110
+msgid "SIM PIN"
+msgstr "PIN SIM"
+
+#: ../plugins/security-privacy//PageComponent.qml:116
+msgid "Privacy:"
+msgstr "Confidențialitate:"
+
+#: ../plugins/security-privacy//PageComponent.qml:120
+msgid "Stats on welcome screen"
+msgstr "Stare în ecranul de întâmpinare"
+
+#: ../plugins/security-privacy//PageComponent.qml:133
 msgid "Messages on welcome screen"
-msgstr ""
+msgstr "Mesaje în ecranul de întâmpinare"
 
-#: ../plugins/security-privacy//PageComponent.qml:143
+#: ../plugins/security-privacy//PageComponent.qml:148
+#: ../plugins/security-privacy//Dash.qml:29
+msgid "Dash search"
+msgstr "Căutare în panou principal"
+
+#: ../plugins/security-privacy//PageComponent.qml:166
 msgid "Location access"
-msgstr ""
+msgstr "Acces la localizarea geografică"
 
-#: ../plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//PageComponent.qml:174
 msgid "Other app access"
-msgstr ""
+msgstr "Acces pentru alte aplicații"
 
-#: ../plugins/security-privacy//PageComponent.qml:156
+#: ../plugins/security-privacy//PageComponent.qml:179
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnosticare"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:184
 msgid "Sent"
-msgstr ""
+msgstr "Trimis"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:164
+#: ../plugins/security-privacy//PageComponent.qml:187
 msgid "Not sent"
-msgstr ""
+msgstr "Nu s-a trimis"
 
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
-msgid "Software licenses"
-msgstr ""
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "Afișează rezultate:"
 
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr ""
+#: ../plugins/security-privacy//PhoneLocking.qml:62
+#: ../plugins/battery//PageComponent.qml:284
+msgid "Lock when idle"
+msgstr "Blocare când este în așteptare"
 
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr ""
+#: ../plugins/security-privacy//PhoneLocking.qml:63
+#: ../plugins/battery//PageComponent.qml:284
+msgid "Sleep when idle"
+msgstr "Suspendare când este în așteptare"
 
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr ""
+#: ../plugins/security-privacy//PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr "Suspendarea activează imediat blocarea"
 
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:32
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:44
+msgid "Language & Text"
+msgstr "Limbă și text"
 
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr ""
+#: ../plugins/language//PageComponent.qml:72
+msgid "Display language…"
+msgstr "Limba de afișare:"
 
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr ""
+#: ../plugins/language//PageComponent.qml:86
+#: ../plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "Aranjamente de tastatură"
 
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr ""
+#: ../plugins/language//PageComponent.qml:101
+#: ../plugins/language//PageComponent.qml:111
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "Verificare ortografică"
 
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
-msgid "Storage"
-msgstr ""
+#: ../plugins/language//PageComponent.qml:121
+msgid "Auto completion"
+msgstr "Completare automată"
 
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr ""
+#: ../plugins/language//PageComponent.qml:131
+msgid "Word suggestions"
+msgstr "Sugestii de cuvinte"
 
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr ""
+#: ../plugins/language//PageComponent.qml:144
+msgid "Auto capitalization"
+msgstr "Corectare automată majusculă"
 
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
+#: ../plugins/language//PageComponent.qml:154
+msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
+"Apăsați Shift pentru a scrie automat cu majusculă prima literă a propoziției."
 
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr ""
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "Verificare ortografică curentă pentru limbile:"
 
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr ""
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Toate limbile disponibile:"
 
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr ""
+#: ../plugins/language//DisplayLanguage.qml:33
+msgid "Display language"
+msgstr "Limba de afișare"
 
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr ""
+#: ../plugins/language//DisplayLanguage.qml:114
+msgid "Confirm"
+msgstr "Confirmare"
 
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr ""
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "Aranjamente curente:"
 
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr ""
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr ""
-
-#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:117
-#: ../plugins/battery//PageComponent.qml:268
-#: ../plugins/cellular//PageChooseCarriers.qml:50
-#: ../plugins/cellular//PageChooseCarriers.qml:66
-#: ../plugins/cellular//PageComponent.qml:179
-msgid "N/A"
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:34 ../plugins/about//DevMode.qml:77
-msgid "Developer Mode"
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:68
-msgid "In Developer Mode, anyone can access, "
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:95
-msgid "You need a passcode or passphrase set "
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:30
-msgid "About this phone"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:107
-msgid "Serial"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:133
-msgid "Software:"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:138
-msgid "OS"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:147
-msgid "Last updated"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "Check for updates"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Legal:"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Regulatory info"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:185
-msgid "Developer mode"
-msgstr ""
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr ""
-
-#: ../plugins/sound//SilentModeWarning.qml:30
-msgid "The phone is in Silent Mode."
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:38
-msgid "Sound"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:73
-msgid "Silent Mode"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:132
-msgid "Vibrate when ringing"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:140
-#: ../plugins/sound//PageComponent.qml:173
-msgid "Vibrate in Silent Mode"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:145
-msgid "Messages:"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:149
-#: ../plugins/sound//PageComponent.qml:155
-msgid "Message received"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:165
-msgid "Vibrate with message sound"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Other sounds:"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:182
-#: ../plugins/language//PageComponent.qml:161
-msgid "Keyboard sound"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:196
-msgid "Lock sound"
-msgstr ""
-
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr ""
-
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//SleepValues.qml:77
-#: ../plugins/battery//SleepValues.qml:81
-#: ../plugins/battery//SleepValues.qml:85
-#: ../plugins/battery//SleepValues.qml:89
-#: ../plugins/battery//SleepValues.qml:93
-#: ../plugins/battery//PageComponent.qml:290
-#: ../plugins/battery//PageComponent.qml:299
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "Toate aranjamentele disponibile:"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:44
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:54
 msgid "Battery"
-msgstr ""
+msgstr "Baterie"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery//PageComponent.qml:46
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "acum %1 secundă"
+msgstr[1] "acum %1 secunde"
+msgstr[2] "acum %1 de secunde"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "acum %1 minut"
+msgstr[1] "acum %1 minute"
+msgstr[2] "acum %1 de minute"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "acum %1 oră"
+msgstr[1] "acum %1 ore"
+msgstr[2] "acum %1 de ore"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "acum %1 zi"
+msgstr[1] "acum %1 zile"
+msgstr[2] "acum %1 de zile"
 
 #: ../plugins/battery//PageComponent.qml:75
 msgid "Charging now"
-msgstr ""
+msgstr "Se încarcă"
 
 #: ../plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
-msgstr ""
+msgstr "Ultima încărcare completă"
 
 #: ../plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
-msgstr ""
+msgstr "Încărcat complet"
 
 #: ../plugins/battery//PageComponent.qml:111
 msgid "Charge level"
-msgstr ""
+msgstr "Nivel de încărcare"
+
+#: ../plugins/battery//PageComponent.qml:117
+#: ../plugins/battery//PageComponent.qml:268
+#: ../plugins/cellular//PageComponent.qml:175
+#: ../plugins/cellular//PageChooseCarriers.qml:50
+#: ../plugins/cellular//PageChooseCarriers.qml:66
+#: ../plugins/about//Storage.qml:204
+msgid "N/A"
+msgstr "Indisponibil"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery//PageComponent.qml:120
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "Ieri"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "Astăzi"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "Metode pentru a reduce utilizarea bateriei:"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/battery//PageComponent.qml:299
+#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:81
+#: ../plugins/battery//SleepValues.qml:85
+#: ../plugins/battery//SleepValues.qml:89
+#: ../plugins/battery//SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "După %1 minut"
+msgstr[1] "După %1 minute"
+msgstr[2] "După %1 de minute"
+
+#: ../plugins/battery//PageComponent.qml:293
+#: ../plugins/battery//PageComponent.qml:302
+#: ../plugins/battery//SleepValues.qml:96
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/system-update//PageComponent.qml:449
+#: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/about//PageComponent.qml:149
+msgid "Never"
+msgstr "Niciodată"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/wifi//PageComponent.qml:26
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:60
+msgid "Wi-Fi"
+msgstr "Rețea fără fir"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:342
-#: ../plugins/bluetooth//PageComponent.qml:111
-#: ../plugins/bluetooth//PageComponent.qml:130
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:74
+#: ../plugins/bluetooth//PageComponent.qml:117
+#: ../plugins/bluetooth//PageComponent.qml:136
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:134
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #: ../plugins/battery//PageComponent.qml:373
 msgid "GPS"
-msgstr ""
+msgstr "GPS"
 
 #: ../plugins/battery//PageComponent.qml:392
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "Localizarea geografică precisă necesită GPS și/sau rețele fără fir"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:50
-msgid "Brightness"
-msgstr ""
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "Blochează telefonul atunci când nu este utilizat:"
 
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr ""
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "Suspendă telefonul atunci când nu este utilizat:"
 
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings"
+#: ../plugins/battery//SleepValues.qml:107
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
 msgstr ""
+"Timpii mai scurți asigură o securizare mai bună. Telefonul nu se va bloca pe "
+"parcursul apelurilor sau a redării video."
 
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:101
-#: ../plugins/language//PageComponent.qml:111
-msgid "Spell checking"
+#: ../plugins/battery//SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
+"Telefonul nu va intra în suspendare pe parcursul apelurilor sau a redării "
+"video."
 
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr ""
+#: ../plugins/wifi//PageComponent.qml:114
+#: ../plugins/wifi//PreviousNetworks.qml:26
+msgid "Previous networks"
+msgstr "Rețele anterioare"
 
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr ""
+#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
+msgid "Other network"
+msgstr "Altă rețea"
 
-#: ../plugins/language//KeyboardLayouts.qml:26
-#: ../plugins/language//PageComponent.qml:86
-msgid "Keyboard layouts"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr "Nume rețea"
 
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:66
+msgid "Security"
+msgstr "Securitate"
 
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:68
+msgid "WPA & WPA2 Personal"
+msgstr "WPA și WPA2 personal"
 
-#: ../plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:69
+msgid "WEP"
+msgstr "WEP"
 
-#: ../plugins/language//DisplayLanguage.qml:114
-msgid "Confirm"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
+msgid "Password"
+msgstr "Parolă"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:32
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:56
-msgid "Language & Text"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:89
+msgid "Password visible"
+msgstr "Parolă vizibilă"
 
-#: ../plugins/language//PageComponent.qml:72
-msgid "Display language…"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:121
+#: ../plugins/bluetooth//PageComponent.qml:374
+msgid "Connect"
+msgstr "Conectare"
 
-#: ../plugins/language//PageComponent.qml:121
-msgid "Auto completion"
-msgstr ""
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr "Detalii rețea"
 
-#: ../plugins/language//PageComponent.qml:131
-msgid "Word suggestions"
-msgstr ""
+#: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:309
+msgid "Name"
+msgstr "Nume"
 
-#: ../plugins/language//PageComponent.qml:144
-msgid "Auto capitalization"
-msgstr ""
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr "Ultima conectare"
 
-#: ../plugins/language//PageComponent.qml:154
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr "Arată parola"
 
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr ""
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr "Uită rețeaua"
 
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
 #, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
-
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr ""
-
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr ""
-
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
-msgid "Pair"
-msgstr ""
-
-#. TRANSLATORS: %1 is the display name of the device that is connecting
-#: ../plugins/bluetooth//PageComponent.qml:71
-#, qt-format
-msgid "%1 (Connecting…)"
-msgstr ""
-
-#. TRANSLATORS: %1 is the display name of the device that is disconnecting
-#: ../plugins/bluetooth//PageComponent.qml:74
-#, qt-format
-msgid "%1 (Disconnecting…)"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:81
-msgid "Computer"
-msgstr ""
+msgid "%1 Services"
+msgstr "Servicii %1"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:82
 #: ../plugins/phone//PageComponent.qml:28
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:98
-msgid "Phone"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:83
-msgid "Modem"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:84 ../src/qml/MainWindow.qml:144
-msgid "Network"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:85
-msgid "Headset"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:86
-msgid "Headphones"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:87
-msgid "Video"
-msgstr ""
-
 #: ../plugins/bluetooth//PageComponent.qml:88
-msgid "Other Audio"
-msgstr ""
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:72
+msgid "Phone"
+msgstr "Telefon"
 
-#: ../plugins/bluetooth//PageComponent.qml:89
-msgid "Joypad"
-msgstr ""
+#: ../plugins/phone//PageComponent.qml:30
+msgid "SIM"
+msgstr "SIM"
 
-#: ../plugins/bluetooth//PageComponent.qml:90
-msgid "Keyboard"
-msgstr ""
+#: ../plugins/phone//PageComponent.qml:51
+#: ../plugins/phone//CallForwarding.qml:28
+#: ../plugins/phone//CallForwarding.qml:75
+msgid "Call forwarding"
+msgstr "Derivare apel"
 
-#: ../plugins/bluetooth//PageComponent.qml:91
-msgid "Tablet"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:92
-msgid "Mouse"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:93
-msgid "Printer"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:94
-msgid "Camera"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:95
-msgid "Other"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:101
-msgid "Excellent"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:102
-msgid "Good"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:103
-msgid "Fair"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:104
-msgid "Poor"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:161
-msgid "Discoverable"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:161
-msgid "Not discoverable"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:192
-msgid "Connected devices:"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:220
-msgid "Connect a different device:"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:220
-msgid "Connect another device:"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:247
-msgid "None detected"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:267
-msgid "Type"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:271
-msgid "Signal Strength"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:276
-msgid "Disconnect"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:90
-msgid "Background"
-msgstr ""
-
-#: ../plugins/background//MainPage.qml:112
-msgid "Ubuntu Art"
-msgstr ""
-
-#: ../plugins/background//MainPage.qml:128
-msgid "Custom"
-msgstr ""
-
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr ""
-
-#: ../plugins/background//Preview.qml:67
-msgid "Preview"
-msgstr ""
-
-#: ../plugins/background//Preview.qml:104
-#: ../plugins/phone//CallForwarding.qml:148
-#: ../plugins/time-date//TimePicker.qml:182
-msgid "Set"
-msgstr ""
+#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
+#: ../plugins/phone//CallWaiting.qml:63
+msgid "Call waiting"
+msgstr "Apel în așteptare"
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "Ultima apelare %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
-msgstr ""
-
-#: ../plugins/phone//CallWaiting.qml:28 ../plugins/phone//CallWaiting.qml:63
-#: ../plugins/phone//PageComponent.qml:57
-msgid "Call waiting"
-msgstr ""
-
-#: ../plugins/phone//CallWaiting.qml:78
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-
-#: ../plugins/phone//CallForwarding.qml:28
-#: ../plugins/phone//CallForwarding.qml:75
-#: ../plugins/phone//PageComponent.qml:51
-msgid "Call forwarding"
-msgstr ""
+msgstr "Apel"
 
 #: ../plugins/phone//CallForwarding.qml:90
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr ""
+"Redirecționează apelurile telefonice către alt număr atunci când nu "
+"răspundeți, când telefonul este ocupat, închis sau în afara zonei de "
+"acoperire."
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "Redirecționează către"
 
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//Services.qml:32 ../plugins/phone//PageComponent.qml:67
-#, qt-format
-msgid "%1 Services"
-msgstr ""
-
-#: ../plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:29
-#: ../plugins/cellular//PageComponent.qml:142
-msgid "Wi-Fi hotspot"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:40
-msgid "Hotspot"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:60
+#: ../plugins/phone//CallWaiting.qml:78
 msgid ""
-"When hotspot is on, other devices can user your cellular data connection "
-"over Wi-Fi. Normal data charges apply."
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
 msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:61
-msgid ""
-"Other devices can user your cellular data connection over the Wi-Fi network. "
-"Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:65
-msgid "Set up hotspot"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-msgid "Carriers"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
-msgid "Automatically"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/time-date//PageComponent.qml:69
-msgid "Manually"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:31
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:104
-msgid "Cellular"
-msgstr ""
-
-#: ../plugins/cellular//PageComponent.qml:136
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
-
-#: ../plugins/cellular//PageComponent.qml:151
-msgid "Data usage statistics"
-msgstr ""
-
-#: ../plugins/cellular//PageComponent.qml:157
-#: ../plugins/cellular//PageComponent.qml:165
-msgid "Carrier"
-msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../plugins/cellular//PageComponent.qml:184
-msgid "APN"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:30
-#: ../plugins/system-update//PageComponent.qml:446
-msgid "Auto download"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr ""
+"Permite să răspundeți sau să inițiați un apel nou în timp ce desfășurați o "
+"convorbire și să comutați între ele"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:35
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:116
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:86
 msgid "Updates"
-msgstr ""
+msgstr "Actualizări"
 
 #: ../plugins/system-update//PageComponent.qml:51
 msgid "Update System"
-msgstr ""
+msgstr "Actualizare sistem"
 
 #: ../plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
 msgstr ""
+"Trebuie să reporniți telefonul pentru a instala actualizarea de sistem."
 
 #: ../plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
-msgstr ""
+msgstr "Instalare și repornire"
 
 #: ../plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
-msgstr ""
+msgstr "Nu acum"
 
 #: ../plugins/system-update//PageComponent.qml:70
 msgid "Install"
-msgstr ""
+msgstr "Instalează"
 
 #: ../plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
-msgstr ""
+msgstr "Programele sunt la zi"
 
 #: ../plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Autentificați-vă în contul dumneavoastră Ubuntu One."
 
 #: ../plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
-msgstr ""
+msgstr "Actualizarea de sistem a eșuat."
 
 #: ../plugins/system-update//PageComponent.qml:168
 msgid "System update failed."
-msgstr ""
+msgstr "Actualizarea de sistem a eșuat."
 
 #: ../plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
-msgstr ""
+msgstr "Căutare actualizări..."
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates…"
-msgstr ""
+msgstr "Instalează %1 actualizări…"
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 updates"
-msgstr ""
+msgstr "Instalează %1 actualizări"
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
-msgstr ""
+msgstr "Pauză pentru toate"
 
 #: ../plugins/system-update//PageComponent.qml:287
 msgid "Retry"
-msgstr ""
+msgstr "Încercați din nou"
 
 #: ../plugins/system-update//PageComponent.qml:303
 msgid "Download"
-msgstr ""
+msgstr "Descărcare"
 
 #: ../plugins/system-update//PageComponent.qml:303
 msgid "Update"
-msgstr ""
+msgstr "Actualizare"
 
 #: ../plugins/system-update//PageComponent.qml:304
 msgid "Resume"
-msgstr ""
+msgstr "Reia"
 
 #: ../plugins/system-update//PageComponent.qml:305
 msgid "Pause"
-msgstr ""
+msgstr "Pauză"
 
 #: ../plugins/system-update//PageComponent.qml:364
 msgid "Installing"
-msgstr ""
+msgstr "Se instalează"
 
 #: ../plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "Instalată"
 
 #: ../plugins/system-update//PageComponent.qml:421
 msgid "Version: "
-msgstr ""
+msgstr "Versiune: "
+
+#: ../plugins/system-update//PageComponent.qml:446
+#: ../plugins/system-update//Configuration.qml:30
+msgid "Auto download"
+msgstr "Descărcare automată"
 
 #: ../plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
-msgstr ""
+msgstr "Prin rețeaua fără fir"
 
 #: ../plugins/system-update//PageComponent.qml:453
 msgid "Always"
-msgstr ""
+msgstr "Întotdeauna"
 
 #: ../plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
-msgstr ""
+msgstr "Nu au fost găsite acreditările"
 
 #: ../plugins/system-update//PageComponent.qml:535
 msgid "Installing update…"
-msgstr ""
+msgstr "Se instalează actualizarea..."
 
 #: ../plugins/system-update//PageComponent.qml:549
 msgid " bytes"
-msgstr ""
+msgstr " biți"
 
 #: ../plugins/system-update//PageComponent.qml:552
 msgid " KiB"
-msgstr ""
+msgstr " KiB"
 
 #: ../plugins/system-update//PageComponent.qml:555
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #: ../plugins/system-update//PageComponent.qml:558
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr ""
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr "Descarcă automat viitoarele actualizări:"
 
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr ""
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr "Numai prin rețeaua fără fir"
 
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr ""
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr "Folosind conexiunea de date disponibilă"
 
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr ""
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr "Pot apărea costuri generate de traficul de date."
 
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:98
+msgid "Brightness"
+msgstr "Luminozitate"
 
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr ""
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "Ajustare automată"
 
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr ""
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings"
+msgstr "Crește sau diminuează luminozitatea pentru a se potrivi mediului"
 
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr ""
-
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr ""
-
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr ""
-
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr ""
-
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr ""
-
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:128
-msgid "Time & Date"
-msgstr ""
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr ""
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr ""
-
-#: ../plugins/reset//EraseEverything.qml:29
+#: ../plugins/reset//EraseEverything.qml:41
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
+"Toate documentele, jocurile salvate, configurările și alte elemente vor fi "
+"șterse definitiv de pe telefon."
 
-#: ../plugins/reset//EraseEverything.qml:31
-msgid "Erase & reset everything"
-msgstr ""
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "Șterge și resetează tot"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
-#: ../plugins/reset//ResetLauncherHome.qml:30
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
 msgstr ""
+"Conținutul și aspectul lansatorului, precum și filtrele din ecranul "
+"principal vor fi aduse la starea lor originală."
 
 #: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "Resetează toate configurările de sistem"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:138
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:104
 msgid "Reset phone"
-msgstr ""
+msgstr "Resetare telefon"
 
-#: ../plugins/reset//PageComponent.qml:62
-msgid "Reset launcher & home screen…"
-msgstr ""
+#: ../plugins/reset//PageComponent.qml:73
+#: ../plugins/reset//ResetLauncherHome.qml:44
+msgid "Reset Launcher"
+msgstr "Resetare Lansator"
 
-#: ../plugins/reset//PageComponent.qml:75
+#: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "Resetează toate configurările de sistem..."
 
-#: ../plugins/reset//PageComponent.qml:88
-msgid "Erase & reset everything…"
-msgstr ""
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr "Șterge și resetează tot..."
 
-#: ../plugins/reset//ResetLauncherHome.qml:32
-msgid "Reset launcher & home screen"
-msgstr ""
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "Lansatorul va fi readus la conținutul original."
 
-#: ../src/qml/MainWindow.qml:109
-msgid "System Settings"
+#: ../plugins/reset//ResetLauncherHome.qml:59
+msgid "The phone needs to restart for changes to take effect."
 msgstr ""
+"Trebuie să reporniți telefonul pentru ca modificările să producă efecte."
 
-#: ../src/qml/MainWindow.qml:130
-msgid "Search"
-msgstr ""
+#: ../plugins/background//Preview.qml:67
+msgid "Preview"
+msgstr "Previzualizare"
 
-#: ../src/qml/MainWindow.qml:149
-msgid "Personal"
-msgstr ""
+#: ../plugins/background//WallpaperGrid.qml:190
+msgid "Remove"
+msgstr "Șterge"
 
-#: ../src/qml/MainWindow.qml:154
-msgid "System"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:118
+msgid "Background"
+msgstr "Fundal"
 
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr ""
+#: ../plugins/background//MainPage.qml:112
+msgid "Ubuntu Art"
+msgstr "Grafică Ubuntu"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
-msgid "Available networks"
-msgstr ""
+#: ../plugins/background//MainPage.qml:128
+msgid "Custom"
+msgstr "Personalizat"
 
-#: ../wizard/qml/Pages//20-wifi.qml:153 ../wizard/qml/Pages//no-sim.qml:66
-msgid "Skip"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:126
+msgid "Notifications"
+msgstr "Notificări"
 
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "No SIM card"
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:59
-msgid "Install a SIM before continuing."
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:22
-msgid "Setup complete"
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:39
+#: ../plugins/notifications//PageComponent.qml:40
 msgid ""
-"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
-"the good folks at Canonical."
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
 msgstr ""
+"Aplicațiile selectate vă pot alerta utilizând baloane de notificare, sunete, "
+"vibrații și Centrul de notificări."
 
-#: ../wizard/qml/Pages//80-finished.qml:41
-msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "Solicitare asociere Bluetooth"
 
-#: ../wizard/qml/Pages//80-finished.qml:48
-msgid "Finish"
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "Confirmați potrivirea cu codul PIN afișat pe '%1'"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "Confirmare PIN"
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "PIN pentru '%1'"
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+msgid "Pair"
+msgstr "Asociază"
+
+#: ../plugins/bluetooth//PageComponent.qml:77
+msgid "Connected"
+msgstr "Conectat"
+
+#: ../plugins/bluetooth//PageComponent.qml:78
+msgid "Connecting…"
+msgstr "Se conectează…"
+
+#: ../plugins/bluetooth//PageComponent.qml:79
+msgid "Disconnecting…"
+msgstr "Se deconectează..."
+
+#: ../plugins/bluetooth//PageComponent.qml:80
+msgid "Disconnected"
+msgstr "Deconectat"
+
+#: ../plugins/bluetooth//PageComponent.qml:81
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: ../plugins/bluetooth//PageComponent.qml:87
+msgid "Computer"
+msgstr "Calculator"
+
+#: ../plugins/bluetooth//PageComponent.qml:89
+msgid "Modem"
+msgstr "Modem"
+
+#: ../plugins/bluetooth//PageComponent.qml:90 ../src/qml/MainWindow.qml:145
+msgid "Network"
+msgstr "Rețea"
+
+#: ../plugins/bluetooth//PageComponent.qml:91
+msgid "Headset"
+msgstr "Căști cu microfon"
+
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Headphones"
+msgstr "Căști"
+
+#: ../plugins/bluetooth//PageComponent.qml:93
+msgid "Video"
+msgstr "Video"
+
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Other Audio"
+msgstr "Alt audio"
+
+#: ../plugins/bluetooth//PageComponent.qml:95
+msgid "Joypad"
+msgstr "Joypad"
+
+#: ../plugins/bluetooth//PageComponent.qml:96
+msgid "Keyboard"
+msgstr "Tastatură"
+
+#: ../plugins/bluetooth//PageComponent.qml:97
+msgid "Tablet"
+msgstr "Tabletă"
+
+#: ../plugins/bluetooth//PageComponent.qml:98
+msgid "Mouse"
+msgstr "Mouse"
+
+#: ../plugins/bluetooth//PageComponent.qml:99
+msgid "Printer"
+msgstr "Imprimantă"
+
+#: ../plugins/bluetooth//PageComponent.qml:100
+msgid "Camera"
+msgstr "Aparat foto"
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Other"
+msgstr "Altceva"
+
+#: ../plugins/bluetooth//PageComponent.qml:107
+msgid "Excellent"
+msgstr "Excelentă"
+
+#: ../plugins/bluetooth//PageComponent.qml:108
+msgid "Good"
+msgstr "Bună"
+
+#: ../plugins/bluetooth//PageComponent.qml:109
+msgid "Fair"
+msgstr "Rezonabilă"
+
+#: ../plugins/bluetooth//PageComponent.qml:110
+msgid "Poor"
+msgstr "Slabă"
+
+#: ../plugins/bluetooth//PageComponent.qml:171
+msgid "Discoverable"
+msgstr "Vizibil"
+
+#: ../plugins/bluetooth//PageComponent.qml:171
+msgid "Not discoverable"
+msgstr "Invizibil"
+
+#: ../plugins/bluetooth//PageComponent.qml:202
+msgid "Connected devices:"
+msgstr "Dispozitive conectate:"
+
+#: ../plugins/bluetooth//PageComponent.qml:236
+msgid "Connect another device:"
+msgstr "Conectați un alt dispozitiv:"
+
+#: ../plugins/bluetooth//PageComponent.qml:236
+msgid "Connect a device:"
+msgstr "Conectează un dispozitiv:"
+
+#: ../plugins/bluetooth//PageComponent.qml:266
+msgid "None detected"
+msgstr "Nimic detectat"
+
+#: ../plugins/bluetooth//PageComponent.qml:274
+#: ../plugins/bluetooth//PageComponent.qml:360
+msgid "Connect automatically when detected:"
+msgstr "Conectare automată la detectare:"
+
+#: ../plugins/bluetooth//PageComponent.qml:327
+msgid "Type"
+msgstr "Tip"
+
+#: ../plugins/bluetooth//PageComponent.qml:351
+msgid "Status"
+msgstr "Stare"
+
+#: ../plugins/bluetooth//PageComponent.qml:355
+msgid "Signal Strength"
+msgstr "Putere semnal"
+
+#: ../plugins/bluetooth//PageComponent.qml:374
+msgid "Disconnect"
+msgstr "Deconectare"
+
+#: ../plugins/bluetooth//PageComponent.qml:392
+msgid "Forget this device"
+msgstr "Uită acest dispozitiv"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "Alegeți rețeaua:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "Reîmprospătare"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "Se caută"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "Modificare configurări hotspot"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "Nume hotspot"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "Cheie (trebuie să conțină minim 8 caractere)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "Arată cheia"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:140
+msgid "Cellular"
+msgstr "Celulară"
+
+#: ../plugins/cellular//PageComponent.qml:132
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "Hotspot dezactivat deoarece rețeaua fără fir este oprită."
+
+#: ../plugins/cellular//PageComponent.qml:138
+#: ../plugins/cellular//Hotspot.qml:29
+msgid "Wi-Fi hotspot"
+msgstr "Hotspot fără fir"
+
+#: ../plugins/cellular//PageComponent.qml:147
+msgid "Data usage statistics"
+msgstr "Rata de utilizare a datelor"
+
+#: ../plugins/cellular//PageComponent.qml:153
+#: ../plugins/cellular//PageComponent.qml:161
+msgid "Carrier"
+msgid_plural "Carriers"
+msgstr[0] "Rețea"
+msgstr[1] "Rețele"
+msgstr[2] "Rețele"
+
+#: ../plugins/cellular//PageComponent.qml:180
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr "Hotspot"
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
 msgstr ""
+"Dacă hotspotul este pornit, alte dispozitive pot utiliza conexiunea de date "
+"gsm prin rețeaua fără fir. Se aplică abonamentul standard."
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+"Alte dispozitive pot utiliza conexiunea de date gsm prin rețeaua fără fir. "
+"Se aplică abonamentul standard."
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr "Configurare hotspot"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+msgid "Carriers"
+msgstr "Rețele"
+
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
+msgid "Software licenses"
+msgstr "Licențe software"
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:82
+msgid "Developer Mode"
+msgstr "Mod dezvoltator"
+
+#: ../plugins/about//DevMode.qml:73
+msgid "In Developer Mode, anyone can access, "
+msgstr "În Mod dezvoltator, oricine poate accesa, "
+
+#: ../plugins/about//DevMode.qml:101
+msgid "You need a passcode or passphrase set "
+msgstr "Trebuie să configurați o parolă sau o frază parolă "
+
+#: ../plugins/about//Version.qml:35
+msgid "OS Build Details"
+msgstr "Detalii versiune compilare SO"
+
+#: ../plugins/about//Version.qml:53
+msgid "OS build number"
+msgstr "Număr versiune compilare SO"
+
+#: ../plugins/about//Version.qml:59
+msgid "Ubuntu Image part"
+msgstr "Parte Imagine Ubuntu"
+
+#: ../plugins/about//Version.qml:85
+msgid "Ubuntu build description"
+msgstr "Descriere versiune compilare Ubuntu"
+
+#: ../plugins/about//Version.qml:100
+msgid "Device Image part"
+msgstr "Parte Imagine dispozitiv"
+
+#: ../plugins/about//Version.qml:126
+msgid "Device build description"
+msgstr "Descriere versiune compilare dispozitiv"
+
+#: ../plugins/about//Version.qml:141
+msgid "Customization Image part"
+msgstr "Parte Imagine personalizată"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:152
+msgid "About this phone"
+msgstr "Despre telefon"
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Număr telefon"
+
+#: ../plugins/about//PageComponent.qml:107
+msgid "Serial"
+msgstr "Serie"
+
+#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
+msgid "Storage"
+msgstr "Stocare"
+
+#: ../plugins/about//PageComponent.qml:133
+msgid "Software:"
+msgstr "Software:"
+
+#: ../plugins/about//PageComponent.qml:138
+msgid "OS"
+msgstr "SO"
+
+#: ../plugins/about//PageComponent.qml:147
+msgid "Last updated"
+msgstr "Ultima actualizare"
+
+#: ../plugins/about//PageComponent.qml:155
+msgid "Check for updates"
+msgstr "Verifică dacă există actualizări"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Legal:"
+msgstr "Informații juridice:"
+
+#: ../plugins/about//PageComponent.qml:177
+msgid "Regulatory info"
+msgstr "Informații normative"
+
+#: ../plugins/about//PageComponent.qml:185
+msgid "Developer mode"
+msgstr "Mod dezvoltator"
+
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "Utilizată de Ubuntu"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr "Fișiere video"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr "Fișiere audio"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr "Fotografii"
+
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr "Alte fișiere"
+
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "Utilizat de aplicații"
+
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
+msgstr "Spațiu total"
+
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "Spațiu liber"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr "După nume"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr "După dimensiune"
+
+#: ../src/qml/MainWindow.qml:110
+msgid "System Settings"
+msgstr "Configurări de sistem"
+
+#: ../src/qml/MainWindow.qml:131
+msgid "Search"
+msgstr "Căutare"
+
+#: ../src/qml/MainWindow.qml:150
+msgid "Personal"
+msgstr "Personal"
+
+#: ../src/qml/MainWindow.qml:155
+msgid "System"
+msgstr "Sistem"
+
+#: ../wizard/qml/Components//Page.qml:47
+msgid "Back"
+msgstr "Înapoi"
 
 #: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "Configurări telefon"
 
 #: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
+"Telefonul trimite automat rapoarte de eroare către Canonical. Această "
+"funcție poate fi dezactivată din configurările de sistem."
 
 #: ../wizard/qml/Pages//30-location.qml:41
 msgid ""
 "Your phone is set up to detect your location. This can be disabled in system "
 "settings."
 msgstr ""
+"Telefonul este configurat să detecteze localizarea geografică. Această "
+"funcție poate fi dezactivată din configurările de sistem."
+
+#: ../wizard/qml/Pages//30-location.qml:48
+#: ../wizard/qml/Pages//20-wifi.qml:152
+msgid "Continue"
+msgstr "Continuare"
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "No SIM card"
+msgstr "Fără card SIM"
+
+#: ../wizard/qml/Pages//no-sim.qml:57
+msgid "To use the telephone and SMS features a SIM must be installed."
+msgstr ""
+"Trebuie să instalați un card SIM pentru a utiliza telefonul și funcțiile de "
+"mesaje scurte."
+
+#: ../wizard/qml/Pages//no-sim.qml:59
+msgid "Install a SIM before continuing."
+msgstr "Instalați un SIM înainte de a continua."
+
+#: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
+msgid "Skip"
+msgstr "Omite"
+
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "Setup complete"
+msgstr "Configurare finalizată"
+
+#: ../wizard/qml/Pages//80-finished.qml:39
+msgid ""
+"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
+"the good folks at Canonical."
+msgstr ""
+"Bine ați venit! Ubuntu pentru telefoane vă este pus la dispoziție de mii de "
+"voluntari și de oamenii buni de la Canonical."
+
+#: ../wizard/qml/Pages//80-finished.qml:41
+msgid "Now you can start using your Ubuntu phone."
+msgstr "Puteți de acum să începeți să utilizați Ubuntu pentru telefoane."
+
+#: ../wizard/qml/Pages//80-finished.qml:48
+msgid "Finish"
+msgstr "Sfârșit"
+
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi-Fi"
+msgstr "Conectare la rețeaua fără fir"
+
+#: ../wizard/qml/Pages//20-wifi.qml:68
+msgid "Available networks"
+msgstr "Rețele disponibile"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Salutări"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Bine ați venit. Să începem cu Ubuntu pentru telefoane."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
-msgstr ""
+msgstr "Selectare limbă"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
-
-#: ../wizard/qml/Components//Page.qml:47
-msgid "Back"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:4
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:108
-msgid "network"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:6
-msgid "wireless"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:8
-msgid "wifi"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:10
-msgid "wi-fi"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:12
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:20
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:28
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:42
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:54
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:64
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:78
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:102
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:114
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:124
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:136
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:142
-msgid "settings"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:14
-msgid "Accessibility"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:16
-msgid "accessibility"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:18
-msgid "a11y"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:24
-msgid "security"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:26
-msgid "privacy"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:32
-msgid "about"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:34
-msgid "device"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:36
-msgid "info"
-msgstr ""
+msgstr "Start"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:40
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:4
 msgid "sound"
-msgstr ""
+msgstr "sunet"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:46
-msgid "battery"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:48
-msgid "power"
-msgstr ""
-
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:52
-msgid "brightness"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:58
-msgid "language"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:60
-msgid "lang"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:62
-msgid "i18n"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:66
-msgid "Flight Mode"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:68
-msgid "flight"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:70
-msgid "plane"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:72
-msgid "offline"
-msgstr ""
-
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:76
-msgid "bluetooth"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:6
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:16
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:34
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:42
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:52
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:70
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:76
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:94
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:102
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:108
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:132
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:138
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:150
+msgid "settings"
+msgstr "configurări"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:10
+msgid "time"
+msgstr "oră"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:12
+msgid "date"
+msgstr "dată"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:14
+msgid "timezone"
+msgstr "fus orar"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:80
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:18
 msgid "Orientation Lock"
-msgstr ""
+msgstr "Blocare orientare"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:82
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:20
 msgid "rotation"
-msgstr ""
+msgstr "rotire"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:84
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:22
 msgid "orientation"
-msgstr ""
+msgstr "orientare"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:86
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:24
 msgid "lock"
-msgstr ""
+msgstr "blocare"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:88
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:26
 msgid "screen"
-msgstr ""
+msgstr "ecran"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:92
-msgid "appearance"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:30
+msgid "security"
+msgstr "securitate"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:94
-msgid "background"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:32
+msgid "privacy"
+msgstr "confidențialitate"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:96
-msgid "wallpaper"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:36
+msgid "Accessibility"
+msgstr "Tehnologii de asistență"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:38
+msgid "accessibility"
+msgstr "Tehnologii de asistență"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:40
+msgid "a11y"
+msgstr "a11y"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:46
+msgid "language"
+msgstr "limbă"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:48
+msgid "lang"
+msgstr "limbă"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:50
+msgid "i18n"
+msgstr "i18n"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:56
+msgid "battery"
+msgstr "baterie"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:58
+msgid "power"
+msgstr "curent"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:62
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:144
+msgid "network"
+msgstr "rețea"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:64
+msgid "wireless"
+msgstr "fără fir"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:66
+msgid "wifi"
+msgstr "wifi"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:68
+msgid "wi-fi"
+msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:100
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:74
 msgid "phone"
-msgstr ""
+msgstr "telefon"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:106
-msgid "cellular"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:78
+msgid "Example"
+msgstr "Exemplu"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:110
-msgid "mobile"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:80
+msgid "example"
+msgstr "exemplu"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:112
-msgid "gsm"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:82
+msgid "test"
+msgstr "test"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:84
+msgid "sample"
+msgstr "mostră"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:118
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:88
 msgid "system"
-msgstr ""
+msgstr "sistem"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:120
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:90
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:128
 msgid "software"
-msgstr ""
+msgstr "software"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:122
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:92
 msgid "update"
-msgstr ""
+msgstr "actualizare"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:126
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:96
 msgid "Updates available"
-msgstr ""
+msgstr "Actualizări disponibile"
 
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:130
-msgid "time"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:132
-msgid "date"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:134
-msgid "timezone"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:100
+msgid "brightness"
+msgstr "luminozitate"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:140
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:106
 msgid "reset"
-msgstr ""
+msgstr "resetare"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:144
-msgid "Example"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:110
+msgid "Flight Mode"
+msgstr "Mod avion"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:146
-msgid "example"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:112
+msgid "flight"
+msgstr "zbor"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:148
-msgid "test"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:114
+msgid "plane"
+msgstr "avion"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/laney/temp/ubuntu-system-settings/po/settings.js:150
-msgid "sample"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:116
+msgid "offline"
+msgstr "deconectat"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:120
+msgid "appearance"
+msgstr "aspect"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:122
+msgid "background"
+msgstr "fundal"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:124
+msgid "wallpaper"
+msgstr "imagine de fundal"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:130
+msgid "notifications"
+msgstr "notificări"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:136
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:142
+msgid "cellular"
+msgstr "celulară"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:146
+msgid "mobile"
+msgstr "mobil"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:148
+msgid "gsm"
+msgstr "gsm"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:154
+msgid "about"
+msgstr "despre"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:156
+msgid "device"
+msgstr "dispozitiv"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /tmp/build/ubuntu-system-settings-0.3+14.10.20140807/obj-i686-linux-gnu/po/settings.js:158
+msgid "info"
+msgstr "informații"

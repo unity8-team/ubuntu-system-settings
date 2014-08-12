@@ -6,6 +6,8 @@ file(GLOB QMLFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                    "${CMAKE_SOURCE_DIR}/wizard/qml/*/*.qml")
 file(GLOB SETTINGSFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                         "${CMAKE_SOURCE_DIR}/plugins/*/*.settings")
+file(GLOB PYFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+                        "${CMAKE_SOURCE_DIR}/push-helper/*.py")
 
 add_custom_command(OUTPUT settings.js
     COMMAND ./extractsettingsinfo ${SETTINGSFILES} -o ${CMAKE_CURRENT_BINARY_DIR}/settings.js
@@ -41,7 +43,19 @@ add_custom_target(pot-cpp
     DEPENDS pot-qml ${CPPFILES}
 )
 
-add_custom_target(pot DEPENDS pot-qml pot-cpp)
+add_custom_target(pot-py
+    COMMAND ${XGETTEXT_BIN} -o ubuntu-system-settings.pot
+                            --join-existing
+                            --copyright=\"Canonical Ltd.\"
+                            --package-name ubuntu-system-settings
+                            --add-comments=TRANSLATORS
+                            --keyword=_
+                            ${PYFILES}
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    DEPENDS ${PYFILES}
+)
+
+add_custom_target(pot DEPENDS pot-qml pot-cpp pot-py)
 
 set(languages "ar;ast;be;bg;bs;ca;cs;de;el;en_AU;en_GB;eo;es;fa;fi;fr;gl;gu;he;hi;hr;hu;id;it;km;ko;lo;lv;ms;my;nb;pl;pt_BR;pt;ru;shn;sl;sv;tr;ug;uk;xh;zh_CN;zh_HK;zh_TW")
 foreach(i ${languages})
