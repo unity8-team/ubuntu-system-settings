@@ -1,3 +1,27 @@
+ubuntu-system-settings (0.3+14.10.20140812-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] make the GPS switch visible
+
+  [ Sebastien Bacher ]
+  * update translation template
+  * [battery] workaround qt bug that leads the canvas to not update
+    correctly
+  * [battery] don't use antialiasing, it leads to issue with texts (LP:
+    #1354363)
+
+  [ John R. Lenton ]
+  * Bring the system settings push helper over from ubuntu-push.
+
+  [ Roberto Alsina ]
+  * Fix for the lp:1352988 crasher. (LP: #1352988)
+
+  [ Martin Pitt ]
+  * Don't break translatable strings in the middle of the sentence, as
+    that makes them impossible to translate. (LP: #1350921)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 12 Aug 2014 00:39:49 +0000
+
 ubuntu-system-settings (0.3+14.10.20140807-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
