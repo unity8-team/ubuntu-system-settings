@@ -19,7 +19,7 @@
  */
 
 import QtQuick 2.0
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 
@@ -105,11 +105,14 @@ MainView {
         id: pageStack
 
         Page {
+    	    property bool searching: false
+
             id: mainPage
             objectName: "systemSettingsPage"
             title: i18n.tr("System Settings")
             visible: false
             flickable: mainFlickable
+    	    state: searching ? "search" : "default"
 
             Flickable {
                 id: mainFlickable
@@ -123,18 +126,6 @@ MainView {
                 Column {
                     anchors.left: parent.left
                     anchors.right: parent.right
-
-                    ListItem.SingleControl {
-                        id: search
-                        control: TextField {
-                            width: parent.width - units.gu(4)
-                            placeholderText: i18n.tr("Search")
-                            objectName: "searchTextField"
-                            inputMethodHints: Qt.ImhNoPredictiveText
-                            onDisplayTextChanged:
-                                pluginManager.filter = displayText
-                        }
-                    }
 
                     UncategorizedItemsView {
                         model: pluginManager.itemModel("uncategorized-top")
@@ -157,6 +148,55 @@ MainView {
 
                     UncategorizedItemsView {
                         model: pluginManager.itemModel("uncategorized-bottom")
+                    }
+                }
+            }
+
+            states: [
+                PageHeadState {
+                    name: "default"
+                    head: mainPage.head
+                    actions: [
+                        Action {
+                            objectName: "searchAction"
+                            iconName: "search"
+                            onTriggered: {
+                                mainPage.searching = true
+                                searchField.forceActiveFocus()
+                            }
+                        }
+                    ]
+                },
+                PageHeadState {
+                    name: "search"
+                    head: mainPage.head
+                    backAction: Action {
+                        objectName: "cancelSearch"
+                        visible: mainPage.searching
+                        iconName: "close"
+                        text: i18n.tr("Cancel")
+                        onTriggered: {
+                            searchField.text = ""
+                            mainPage.searching = false
+                        }
+                    }
+                    contents: searchField
+                }
+            ]
+
+            TextField {
+                id: searchField
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    rightMargin: units.gu(2)
+                }
+                inputMethodHints: Qt.ImhNoPredictiveText
+                placeholderText: i18n.tr("Search...")
+                onActiveFocusChanged: {
+                    if (!activeFocus) {
+                        text = ""
+                        mainPage.searching = false
                     }
                 }
             }
