@@ -64,6 +64,16 @@ ItemPage {
         id: securityPrivacy
     }
 
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+        property variant brightness: action("brightness").state
+        property variant batteryLevel: action("battery-level").state
+        Component.onCompleted: start()
+    }
+
     BatteryInfo {
         id: batteryInfo
 
@@ -99,8 +109,7 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        interactive: !brightness.pressed
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds        
 
         Column {
             anchors.left: parent.left
@@ -110,10 +119,9 @@ ItemPage {
                 id: chargingLevel
                 text: i18n.tr("Charge level")
                 value: {
-                    var chargeLevel =
-                            brightness.level
+                    var chargeLevel = indicatorPower.batteryLevel
 
-                    if (chargeLevel === null)
+                    if (chargeLevel === undefined)
                         return i18n.tr("N/A")
 
                     /* TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery */
@@ -278,8 +286,11 @@ ItemPage {
                 text: i18n.tr("Ways to reduce battery use:")
             }
 
-            BrightnessSlider {
-                id: brightness
+            ListItem.Standard {
+                text: i18n.tr("Display brightness")
+                progression: true
+                onClicked: pageStack.push(
+                               pluginManager.getByName("brightness").pageComponent)
             }
 
             ListItem.SingleValue {

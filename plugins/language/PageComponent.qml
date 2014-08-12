@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.Popups 0.1
@@ -51,6 +52,12 @@ ItemPage {
         id: spellChecking
 
         SpellChecking {}
+    }
+
+    GSettings {
+        id: settings
+
+        schema.id: "com.canonical.keyboard.maliit"
     }
 
     Flickable {
@@ -111,19 +118,19 @@ ItemPage {
                 text: i18n.tr("Spell checking")
 
                 control: Switch {
-                    checked: plugin.spellChecking
+                    checked: settings.spellChecking
 
-                    onClicked: plugin.spellChecking = checked
+                    onClicked: settings.spellChecking = checked
                 }
             }
 
             ListItem.Standard {
-                text: i18n.tr("Auto completion")
+                text: i18n.tr("Auto correction")
 
                 control: Switch {
-                    checked: plugin.autoCompletion
+                    checked: settings.autoCompletion
 
-                    onClicked: plugin.autoCompletion = checked
+                    onClicked: settings.autoCompletion = checked
                 }
             }
 
@@ -131,9 +138,9 @@ ItemPage {
                 text: i18n.tr("Word suggestions")
 
                 control: Switch {
-                    checked: plugin.predictiveText
+                    checked: settings.predictiveText
 
-                    onClicked: plugin.predictiveText = checked
+                    onClicked: settings.predictiveText = checked
                 }
             }
 
@@ -144,9 +151,9 @@ ItemPage {
                 text: i18n.tr("Auto capitalization")
 
                 control: Switch {
-                    checked: plugin.autoCapitalization
+                    checked: settings.autoCapitalization
 
-                    onClicked: plugin.autoCapitalization = checked
+                    onClicked: settings.autoCapitalization = checked
                 }
             }
 
@@ -158,12 +165,39 @@ ItemPage {
             }
 
             ListItem.Standard {
+                text: i18n.tr("Auto punctuation")
+
+                control: Switch {
+                    checked: settings.doubleSpaceFullStop
+
+                    onClicked: settings.doubleSpaceFullStop = checked
+                }
+            }
+
+            ListItem.Caption {
+                text: i18n.tr("Adds a period, and any missing quotes or brackets, when you tap Space twice.")
+            }
+
+            ListItem.ThinDivider {
+            }
+
+            ListItem.Standard {
                 text: i18n.tr("Keyboard sound")
 
                 control: Switch {
-                    checked: plugin.keyPressFeedback
+                    checked: settings.keyPressFeedback
 
-                    onClicked: plugin.keyPressFeedback = checked
+                    onClicked: settings.keyPressFeedback = checked
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Keyboard vibration")
+
+                control: Switch {
+                    checked: settings.keyPressHapticFeedback
+
+                    onClicked: settings.keyPressHapticFeedback = checked
                 }
             }
         }
