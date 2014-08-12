@@ -251,12 +251,6 @@ class CellularTestCase(CellularBaseTestCase):
 
         self.assert_selected_preference(2)
 
-    def test_that_sim_editor_is_hidden(self):
-        editor = self.system_settings.main_view.cellular_page.select_single(
-            objectName="simEditor"
-        )
-        self.assertFalse(editor.get_properties()['visible'])
-
 
 class DualSimCellularTestCase(CellularBaseTestCase):
 
@@ -330,8 +324,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def get_sim_name(self, num):
         obj = self.system_settings.main_view.cellular_page.select_single(
-            objectName="simEditor"
-        ).select_single(objectName="editSim%d" % num)
+            objectName="simLabel%d" % num)
         return obj.get_properties()['text']
 
     def rename_sim(self, num, new_name):
