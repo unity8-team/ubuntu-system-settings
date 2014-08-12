@@ -1,3 +1,43 @@
+ubuntu-system-settings (0.3+14.10.20140812-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] make the GPS switch visible
+
+  [ Sebastien Bacher ]
+  * update translation template
+  * [battery] workaround qt bug that leads the canvas to not update
+    correctly
+  * [battery] don't use antialiasing, it leads to issue with texts (LP:
+    #1354363)
+
+  [ John R. Lenton ]
+  * Bring the system settings push helper over from ubuntu-push.
+
+  [ Roberto Alsina ]
+  * Fix for the lp:1352988 crasher. (LP: #1352988)
+
+  [ Martin Pitt ]
+  * Don't break translatable strings in the middle of the sentence, as
+    that makes them impossible to translate. (LP: #1350921)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 12 Aug 2014 00:39:49 +0000
+
+ubuntu-system-settings (0.3+14.10.20140807-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Only turn the wizard off if the user actively presses the Finished
+    button. That is, don't disable the wizard if we crash or the user
+    turns off the phone while still in the wizard. (LP: #1348577)
+  * Avoid making a method call that can return undefined results,
+    potentially causing password or language setting to not work
+    correctly.
+
+  [ jonas-drange ]
+  * [reset] bring back reset and hook it up to the backend. Added happy
+    path tests.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 07 Aug 2014 14:54:57 +0000
+
 ubuntu-system-settings (0.3+14.10.20140806.1-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]
