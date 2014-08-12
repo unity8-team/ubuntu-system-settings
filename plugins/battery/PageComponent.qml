@@ -71,6 +71,7 @@ ItemPage {
         objectPath: "/com/canonical/indicator/power"
         property variant brightness: action("brightness").state
         property variant batteryLevel: action("battery-level").state
+        Component.onCompleted: start()
     }
 
     BatteryInfo {
@@ -283,7 +284,6 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("Display brightness")
                 progression: true
-                visible: indicatorPower.brightness !== undefined
                 onClicked: pageStack.push(
                                pluginManager.getByName("brightness").pageComponent)
             }
