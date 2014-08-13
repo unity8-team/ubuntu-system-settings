@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-08 11:29+0000\n"
+"PO-Revision-Date: 2014-08-13 00:17+0000\n"
 "Last-Translator: Akerbeltz <fios@akerbeltz.org>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-08-12 06:40+0000\n"
+"X-Launchpad-Export-Date: 2014-08-13 06:53+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: gd\n"
 
@@ -793,10 +793,15 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"Ma tha e ann am modh an luchd-leasachaidh, 's urrainn do dhuine sam bith "
+"cothrom fhaighinn air rud sam bith air an fhòn seo, atharrachadh no a "
+"sguabadh às an dèidh dhuibh a cheangal ri uidheam eile."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Feumaidh tu còd-faire no abairt-fhaire a shuidheachadh mus urrainn dhut modh "
+"an luchd-leasachaidh a chleachdadh."
 
 #: ../plugins/about//DevMode.qml:104
 #: ../plugins/security-privacy//LockSecurity.qml:32
@@ -1845,10 +1850,3 @@ msgstr "reset;ath-shuidhich"
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
 msgstr "Brightness;soilleireachd"
-
-#~ msgid "You need a passcode or passphrase set "
-#~ msgstr "Feumaidh tu còd-faire no abairt-fhaire a shuidheachadh "
-
-#~ msgid "In Developer Mode, anyone can access, "
-#~ msgstr ""
-#~ "Ann an modh an luchd-leasachaidh, gheibh duine sam bith cothrom air, "

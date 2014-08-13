@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-08 07:20+0000\n"
+"PO-Revision-Date: 2014-08-12 16:47+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-12 06:39+0000\n"
+"X-Launchpad-Export-Date: 2014-08-13 06:53+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
@@ -96,19 +96,19 @@ msgstr "Connectat"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "S'està connectant…"
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "S'està desconnectant..."
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "Desconnectat"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "Desconegut"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -224,7 +224,7 @@ msgstr "Connecta un altre dispositiu:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "Connecta un dispositiu:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -233,7 +233,7 @@ msgstr "No s'ha detectat cap dispositiu"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Connecta automàticament en detectar:"
 
 #: ../plugins/bluetooth//PageComponent.qml:309
 #: ../plugins/wifi//NetworkDetails.qml:43
@@ -246,7 +246,7 @@ msgstr "Tipus"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "Estat"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -263,7 +263,7 @@ msgstr "Connecta-t'hi"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "Oblida aquest dispositiu"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
@@ -775,10 +775,13 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"En el mode de desenvolupador, qualsevol persona pot utilitzar un altre "
+"dispositiu per connectar-se i modificar, suprimir i accedir al contingut "
+"d'aquest dispositiu."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
+msgstr "Cal un codi o contrasenya per utilitzar el mode de desenvolupador"
 
 #: ../plugins/about//DevMode.qml:104
 #: ../plugins/security-privacy//LockSecurity.qml:32
@@ -1492,11 +1495,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "Hola!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "Us donem la benvinguda a l'Ubuntu. Anem a començar."
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
@@ -1504,7 +1507,7 @@ msgstr "Seleccioneu la vostra llengua"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "Inici"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
@@ -1515,10 +1518,12 @@ msgid ""
 "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
 "the good folks at Canonical."
 msgstr ""
+"Us donem la benvinguda a l'Ubuntu en el vostre telèfon, creat per milers de "
+"voluntaris i la gent de Canonical."
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "Ja podeu començar a utilitzar el telèfon Ubuntu"
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1600,7 +1605,7 @@ msgstr "programari"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
 msgid "notifications"
-msgstr ""
+msgstr "notificacions"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
@@ -1818,9 +1823,3 @@ msgstr "reinici"
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
 msgstr "brillantor"
-
-#~ msgid "You need a passcode or passphrase set "
-#~ msgstr "Cal establir una contrasenya "
-
-#~ msgid "In Developer Mode, anyone can access, "
-#~ msgstr "En el mode de desenvolupador, qualsevol pot accedir a "

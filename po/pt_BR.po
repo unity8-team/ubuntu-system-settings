@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-09 13:47+0000\n"
-"Last-Translator: Salomão Carneiro de Brito <salomaocar@gmail.com>\n"
+"PO-Revision-Date: 2014-08-13 04:54+0000\n"
+"Last-Translator: Tiago Hillebrandt <tiagohillebrandt@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-12 06:42+0000\n"
+"X-Launchpad-Export-Date: 2014-08-13 06:54+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
-msgstr "Visualizar"
+msgstr "Pré-visualizar"
 
 #: ../plugins/background//Preview.qml:97
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
@@ -108,7 +108,7 @@ msgstr "Desconectado"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr "Desconhecido(a)"
+msgstr "Desconhecido"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -1820,9 +1820,3 @@ msgstr "restaurar"
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
 msgstr "luminosidade"
-
-#~ msgid "You need a passcode or passphrase set "
-#~ msgstr "Você precisa de um código de acesso ou senha "
-
-#~ msgid "In Developer Mode, anyone can access, "
-#~ msgstr "No modo desenvolvedor, qualquer um pode acessar, "
