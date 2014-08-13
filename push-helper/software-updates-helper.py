@@ -63,27 +63,39 @@ _ = gettext.translation("ubuntu-system-settings").gettext
 # broadcast notification, and notifies the user directly:
 
 
-icon = "/usr/share/ubuntu/settings/system/icons/settings-system-update.svg"
-obj = {
-    "notification": {
-        "emblem-counter": {
-            "count": 1,
-            "visible": True,
-        },
-        "vibrate": {
-            "pattern": [50, 150],
-            "repeat": 3,
-        },
-        "card": {
-            "summary": _("There's an updated system image."),
-            "body": _("Tap to open the system updater."),
-            "actions": ["settings:///system/system-update"],
-            "icon": icon,
-            "timestamp": int(time.time()),
-            "persist": True,
-            "popup": True,
-        },
-    },
-}
+try:
+    with open(f1, 'r') as fd:
+        input_msg = json.loads(fd.read())
+except Exception:
+    input_msg = {}
 
-json.dump(obj, open(f2, "w"))
+
+if 'notification' in input_msg and 'card' in input_msg['notification']:
+    # if it's a valid notification, just forward it "as is"
+    json.dump(input_msg, open(f2,"w"))
+else:
+    # then it's a broadcast message.
+    icon = "/usr/share/ubuntu/settings/system/icons/settings-system-update.svg"
+    obj = {
+        "notification": {
+            "emblem-counter": {
+                "count": 1,
+                "visible": True,
+            },
+            "vibrate": {
+                "pattern": [50, 150],
+                "repeat": 3,
+            },
+            "card": {
+                "summary": _("There's an updated system image."),
+                "body": _("Tap to open the system updater."),
+                "actions": ["settings:///system/system-update"],
+                "icon": icon,
+                "timestamp": int(time.time()),
+                "persist": True,
+                "popup": True,
+            },
+        },
+    }
+
+    json.dump(obj, open(f2, "w"))
