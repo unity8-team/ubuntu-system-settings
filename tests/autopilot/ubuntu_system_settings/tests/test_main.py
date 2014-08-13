@@ -5,14 +5,10 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from autopilot.matchers import Eventually
-from gi.repository import Gio, GLib
-from testtools.matchers import Equals
+from gi.repository import Gio
 from time import sleep
 
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
-from ubuntu_system_settings.utils.i18n import ugettext as _
-
 
 """ Tests for Ubuntu System Settings """
 
@@ -41,9 +37,9 @@ class MainTestCase(UbuntuSystemSettingsTestCase):
         We can just check that it was not set to an empty string, undefined
         or none.
         """
-        self.assertNotIn(gsettings.get_value('orientation-lock').get_string(),
+        self.assertNotIn(
+            gsettings.get_value('orientation-lock').get_string(),
             ['', 'none', 'undefined'])
-
 
     def test_disable_rotation_lock(self):
         gsettings = Gio.Settings.new('com.ubuntu.touch.system')
@@ -58,10 +54,6 @@ class MainTestCase(UbuntuSystemSettingsTestCase):
         # wait for gsettings
         sleep(1)
 
-        """
-        We cannot determine what the system will set this value to.
-        We can just check that it was not set to an empty string, undefined
-        or none.
-        """
-        self.assertEqual(gsettings.get_value('orientation-lock').get_string(),
+        self.assertEqual(
+            gsettings.get_value('orientation-lock').get_string(),
             'none')
