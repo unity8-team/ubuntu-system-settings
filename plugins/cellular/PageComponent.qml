@@ -130,8 +130,8 @@ ItemPage {
     OfonoConnMan {
         id: connMan
         modemPath: manager.modems[0]
-        powered: techPrefSelector.selectedIndex !== 0
-        onPoweredChanged: RSHelpers.poweredChanged(powered);
+        // FIXME powered: techPrefSelector.selectedIndex !== 0
+        // FIXME onPoweredChanged: RSHelpers.poweredChanged(powered);
     }
 
     OfonoModem {
@@ -148,9 +148,59 @@ ItemPage {
         Column {
             anchors { left: parent.left; right: parent.right }
 
+            ListModel {
+                id: techPrefModel
+                ListElement { name: "Off"; key: "off" }
+                ListElement { name: "2G only (saves battery)"; key: "gsm"; }
+                ListElement { name: "2G/3G/4G (faster)"; key: "any"; }
+            }
+
+            Component {
+                id: techPrefDelegate
+                OptionSelectorDelegate { text: i18n.tr(name); }
+            }
+
             Loader {
                 id: cellData
                 anchors { left: parent.left; right: parent.right }
+            }
+/* FIXME this does not work with the new dual sim code. Don't know why or how to fix.
+            ListItem.ItemSelector {
+                id: techPrefSelector
+                objectName: "technologyPreferenceSelector"
+                expanded: true
+                delegate: techPrefDelegate
+                model: techPrefModel
+                text: i18n.tr("Cellular data:")
+
+                // technologyPreference "" is not valid, assume sim locked or data unavailable
+                //enabled: rdoSettings.technologyPreference !== ""
+                enabled: true // FIXME something happened in the two week merge lapse, this is incorrect
+                selectedIndex: {
+                    var pref = rdoSettings.technologyPreference;
+                    // make nothing selected if the string from OfonoRadioSettings is empty
+                    if (pref === "") {
+                        console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
+                        return -1;
+                    } else {
+                        // normalizeKey turns "lte" and "umts" into "any"
+                        return RSHelpers.keyToIndex(RSHelpers.normalizeKey(pref));
+                    }
+                }
+                onDelegateClicked: RSHelpers.delegateClicked(index)
+            }
+*/
+            ListItem.Standard {
+                id: dataRoamingItem
+                objectName: "dataRoamingSwitch"
+                text: i18n.tr("Data roaming")
+                // sensitive to data type, and disabled if "Off" is selected
+                // FIXME enabled: techPrefSelector.selectedIndex !== 0
+                control: Switch {
+                    id: dataRoamingControl
+                    checked: connMan.roamingAllowed
+                    onClicked: connMan.roamingAllowed = checked
+                }
             }
 
             ListItem.SingleValue {
@@ -180,7 +230,6 @@ ItemPage {
                 objectName: "chooseCarrier"
                 value: netReg.name ? netReg.name : i18n.tr("N/A")
                 progression: true
-                progression: enabled
                 onClicked: {
                     if (root.state === 'singleSim') {
                         pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
