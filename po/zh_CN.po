@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-12 06:42+0000\n"
+"X-Launchpad-Export-Date: 2014-08-13 06:55+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
@@ -1771,9 +1771,3 @@ msgstr "重置"
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
 msgstr "亮度"
-
-#~ msgid "In Developer Mode, anyone can access, "
-#~ msgstr "在开发者模式下，任何人均可访问， "
-
-#~ msgid "You need a passcode or passphrase set "
-#~ msgstr "您需要设置一个密码 "
