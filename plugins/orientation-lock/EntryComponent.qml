@@ -39,9 +39,10 @@ ListItem.Standard {
                 return "InvertedLandscapeOrientation";
             case Qt.InvertedPortraitOrientation:
                 return "InvertedPortraitOrientation";
+            default:
+                console.warn('Unknown Screen orientation');
+                return "none";
         }
-        console.warn('Unknown Screen orientation');
-        return "none";
     }
 
     id: root
