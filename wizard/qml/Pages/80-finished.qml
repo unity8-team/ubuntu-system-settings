@@ -36,7 +36,7 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and the good folks at Canonical.") +
+            text: i18n.tr("Welcome to Ubuntu on your phone, brought to you by thousands of volunteers and the good folks at Canonical.") +
                   "\n\n" +
                   i18n.tr("Now you can start using your Ubuntu phone.")
         }
