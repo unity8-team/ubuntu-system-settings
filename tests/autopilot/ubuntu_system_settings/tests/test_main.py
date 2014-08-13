@@ -7,8 +7,8 @@
 
 from gi.repository import Gio
 from time import sleep
-
 from ubuntu_system_settings.tests import UbuntuSystemSettingsTestCase
+from unittest import skip
 
 """ Tests for Ubuntu System Settings """
 
@@ -19,6 +19,7 @@ class MainTestCase(UbuntuSystemSettingsTestCase):
     def setUp(self):
         super(MainTestCase, self).setUp()
 
+    @skip("skipped due to rotation lock being hidden")
     def test_enable_rotation_lock(self):
         gsettings = Gio.Settings.new('com.ubuntu.touch.system')
         current = gsettings.get_value('orientation-lock')
@@ -41,6 +42,7 @@ class MainTestCase(UbuntuSystemSettingsTestCase):
             gsettings.get_value('orientation-lock').get_string(),
             ['', 'none', 'undefined'])
 
+    @skip("skipped due to rotation lock being hidden")
     def test_disable_rotation_lock(self):
         gsettings = Gio.Settings.new('com.ubuntu.touch.system')
         current = gsettings.get_value('orientation-lock')

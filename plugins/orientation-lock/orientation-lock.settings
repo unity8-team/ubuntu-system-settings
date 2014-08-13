@@ -16,5 +16,6 @@
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
-    "entry-component": "EntryComponent.qml"
+    "entry-component": "EntryComponent.qml",
+    "hide-by-default": true
 }
