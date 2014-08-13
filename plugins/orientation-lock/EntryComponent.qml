@@ -40,7 +40,7 @@ ListItem.Standard {
             case Qt.InvertedPortraitOrientation:
                 return "InvertedPortraitOrientation";
             default:
-                console.warn('Unknown Screen orientation');
+                console.warn('Unknown screen orientation');
                 return "none";
         }
     }
@@ -51,8 +51,9 @@ ListItem.Standard {
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
+        objectName: "orientationLockSwitch"
         checked: systemSettings.orientationLock && systemSettings.orientationLock !== "none"
-        onCheckedChanged: {
+        onClicked: {
             if (checked) {
                 systemSettings.orientationLock = orientationToSetting(Screen.orientation);
             } else {
