@@ -234,6 +234,7 @@ ItemPage {
                     if (root.state === 'singleSim') {
                         pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
                             netReg: sim1.netReg,
+                            connMan: connMan,
                             title: i18n.tr("Carrier")
                         })
                     } else if (root.state === 'dualSim') {

@@ -125,11 +125,11 @@ ItemPage {
         OfonoContextConnection {
             onActiveChanged: {
                 console.warn("Connection changed")
-                console.warn("APN: " +apns.name)
+                console.warn("APN: " + name)
             }
             onProvisioningFinished: {
                 console.warn("Provisioned")
-                console.warn("APN: " +apns.name)
+                console.warn("APN: " + name)
             }
             onReportError: {
                 console.warn("Context error: " + errorString)
