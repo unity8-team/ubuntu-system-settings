@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-08 12:16+0000\n"
+"PO-Revision-Date: 2014-08-12 14:39+0000\n"
 "Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-08-12 06:41+0000\n"
+"X-Launchpad-Export-Date: 2014-08-13 06:54+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
@@ -786,10 +786,14 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"În Mod dezvoltator, oricine poate accesa, modifica sau șterge orice de pe "
+"acest telefon, prin conectarea lui la alt dispozitiv."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Pentru a utiliza funcția Mod dezvoltator trebuie să configurați o parolă sau "
+"o frază parolă."
 
 #: ../plugins/about//DevMode.qml:104
 #: ../plugins/security-privacy//LockSecurity.qml:32
@@ -1835,9 +1839,3 @@ msgstr "resetare"
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
 msgstr "luminozitate"
-
-#~ msgid "You need a passcode or passphrase set "
-#~ msgstr "Trebuie să configurați o parolă sau o frază parolă "
-
-#~ msgid "In Developer Mode, anyone can access, "
-#~ msgstr "În Mod dezvoltator, oricine poate accesa, "

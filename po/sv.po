@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-12 06:41+0000\n"
+"X-Launchpad-Export-Date: 2014-08-13 06:54+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: sv\n"
 
@@ -1817,9 +1817,3 @@ msgstr "återställ"
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
 msgstr "ljusstyrka"
-
-#~ msgid "You need a passcode or passphrase set "
-#~ msgstr "Du behöver ha angett en kod eller lösenfras "
-
-#~ msgid "In Developer Mode, anyone can access, "
-#~ msgstr "I utvecklarläge så kan vem som helst komma åt "
