@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-08-12 06:41+0000\n"
+"X-Launchpad-Export-Date: 2014-08-13 06:54+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
@@ -1829,9 +1829,3 @@ msgstr "ponastavi"
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
 msgstr "svetlost"
-
-#~ msgid "You need a passcode or passphrase set "
-#~ msgstr "Potrebujete nastavljeno šifrirno reklo "
-
-#~ msgid "In Developer Mode, anyone can access, "
-#~ msgstr "V načinu za razvijalce lahko vsak dostopa, "

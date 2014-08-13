@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-08 12:23+0000\n"
+"PO-Revision-Date: 2014-08-12 14:36+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-12 06:42+0000\n"
+"X-Launchpad-Export-Date: 2014-08-13 06:54+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: uk\n"
 
@@ -790,10 +790,12 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"У режимі розробника будь-хто може отримувати доступу, змінювати або вилучати "
+"будь-які дані з цього телефону, з’єднавшись із ним з іншого пристрою."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
+msgstr "Щоб скористатися режимом розробника, вам слід встановити пароль."
 
 #: ../plugins/about//DevMode.qml:104
 #: ../plugins/security-privacy//LockSecurity.qml:32
@@ -1840,9 +1842,3 @@ msgstr "скинути"
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
 msgstr "яскравість"
-
-#~ msgid "You need a passcode or passphrase set "
-#~ msgstr "Вам слід визначити пароль "
-
-#~ msgid "In Developer Mode, anyone can access, "
-#~ msgstr "У режимі розробника усі користувачі мають доступ, "
