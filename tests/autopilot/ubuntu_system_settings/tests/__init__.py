@@ -188,10 +188,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             properties = {
                 'SubscriberNumbers': ['123456', '234567']
             }
-        modem_interfaces = modem.GetProperties()['Interfaces']
-        modem_interfaces.append(SIM_IFACE)
         modem.AddProperties(SIM_IFACE, properties)
-        modem.SetProperty('Interfaces', modem_interfaces)
         modem.AddMethods(
             SIM_IFACE,
             [('GetProperties', '', 'a{sv}',
