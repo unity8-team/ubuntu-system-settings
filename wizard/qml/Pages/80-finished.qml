@@ -46,11 +46,7 @@ LocalComponents.Page {
         id: forwardButton
         LocalComponents.ForwardButton {
             text: i18n.tr("Finish")
-            onClicked: {
-                // Immediately go to black to give quick feedback
-                blackCover.visible = true
-                Qt.quit()
-            }
+            onClicked: root.quitWizard()
         }
     }
 }

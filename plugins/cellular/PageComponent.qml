@@ -19,23 +19,52 @@
  */
 
 import QtQuick 2.0
+import GSettings 1.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 import QMenuModel 0.1
-import "rdosettings-helpers.js" as RSHelpers
+import "Components"
 
 ItemPage {
     id: root
     title: i18n.tr("Cellular")
     objectName: "cellularPage"
 
-    OfonoRadioSettings {
-        id: rdoSettings
-        modemPath: manager.modems[0]
-        onTechnologyPreferenceChanged: RSHelpers.preferenceChanged(preference);
-    }
+    // pointers to sim 1 and 2, lazy loaded
+    property alias sim1: simOneLoader.item
+    property alias sim2: simTwoLoader.item
+    property var modemsSorted: manager.modems.slice(0).sort()
+
+    states: [
+        State {
+            name: "singleSim"
+            StateChangeScript {
+                name: "loadSim"
+                script: {
+                    var p = modemsSorted[0];
+                    simOneLoader.setSource("Components/Sim.qml", {
+                        path: p
+                    });
+                }
+            }
+        },
+        State {
+            name: "dualSim"
+            extend: "singleSim"
+            StateChangeScript {
+                name: "loadSecondSim"
+                script: {
+                    var p = modemsSorted[1];
+                    simTwoLoader.setSource("Components/Sim.qml", {
+                        path: p
+                    });
+                    defaultSimLoader.source = "Components/DefaultSim.qml";
+                }
+            }
+        }
+    ]
 
     QDBusActionGroup {
         id: actionGroup
@@ -52,6 +81,37 @@ ItemPage {
 
     OfonoManager {
         id: manager
+        Component.onCompleted: {
+            if (modems.length === 1) {
+                root.state = "singleSim";
+            } else if (modems.length === 2) {
+                root.state = "dualSim";
+            }
+        }
+    }
+
+    Loader {
+        id: simOneLoader
+        onLoaded: {
+            if (parent.state === "singleSim") {
+                cellData.setSource("Components/CellularSingleSim.qml", {
+                    sim1: sim1
+                });
+            }
+        }
+    }
+
+    Loader {
+        id: simTwoLoader
+        onLoaded: {
+            // unload any single sim setup
+            cellData.source = "";
+            cellData.setSource("Components/CellularDualSim.qml", {
+                sim1: sim1,
+                sim2: sim2
+            });
+            simEditorLoader.source = "Components/SimEditor.qml";
+        }
     }
 
     OfonoSimManager {
@@ -86,56 +146,11 @@ ItemPage {
         boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors { left: parent.left; right: parent.right }
 
-            ListModel {
-                id: techPrefModel
-                ListElement { name: "Off"; key: "off" }
-                ListElement { name: "2G only (saves battery)"; key: "gsm"; }
-                ListElement { name: "2G/3G/4G (faster)"; key: "any"; }
-            }
-
-            Component {
-                id: techPrefDelegate
-                OptionSelectorDelegate { text: i18n.tr(name); }
-            }
-
-            ListItem.ItemSelector {
-                id: techPrefSelector
-                objectName: "technologyPreferenceSelector"
-                expanded: true
-                delegate: techPrefDelegate
-                model: techPrefModel
-                text: i18n.tr("Cellular data:")
-
-                // technologyPreference "" is not valid, assume sim locked or data unavailable
-                enabled: rdoSettings.technologyPreference !== ""
-                selectedIndex: {
-                    var pref = rdoSettings.technologyPreference;
-                    // make nothing selected if the string from OfonoRadioSettings is empty
-                    if (pref === "") {
-                        console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
-                        return -1;
-                    } else {
-                        // normalizeKey turns "lte" and "umts" into "any"
-                        return RSHelpers.keyToIndex(RSHelpers.normalizeKey(pref));
-                    }
-                }
-                onDelegateClicked: RSHelpers.delegateClicked(index)
-            }
-
-            ListItem.Standard {
-                id: dataRoamingItem
-                objectName: "dataRoamingSwitch"
-                text: i18n.tr("Data roaming")
-                // sensitive to data type, and disabled if "Off" is selected
-                enabled: techPrefSelector.selectedIndex !== 0
-                control: Switch {
-                    id: dataRoamingControl
-                    checked: connMan.roamingAllowed
-                    onClicked: connMan.roamingAllowed = checked
-                }
+            Loader {
+                id: cellData
+                anchors { left: parent.left; right: parent.right }
             }
 
             ListItem.SingleValue {
@@ -160,16 +175,82 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Carrier")
+                text: i18n.tr("Carrier", "Carriers", manager.modems.length);
+                id: chooseCarrier
                 objectName: "chooseCarrier"
                 value: netReg.name ? netReg.name : i18n.tr("N/A")
                 progression: true
+                progression: enabled
                 onClicked: {
-                    if (enabled)
-                        pageStack.push(Qt.resolvedUrl("ChooseCarrier.qml"), {netReg: netReg, connMan: connMan})
+                    if (root.state === 'singleSim') {
+                        pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                            netReg: sim1.netReg,
+                            title: i18n.tr("Carrier")
+                        })
+                    } else if (root.state === 'dualSim') {
+                        pageStack.push(Qt.resolvedUrl("PageChooseCarriers.qml"), {
+                            sim1: sim1,
+                            sim2: sim2
+                        });
+                    }
                 }
             }
 
+            Binding {
+                target: chooseCarrier
+                property: "value"
+                value: sim1.netReg.name || i18n.tr("N/A")
+                when: (simOneLoader.status === Loader.Ready) && root.state === "singleSim"
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("APN")
+                progression: true
+                visible: showAllUI
+            }
+
+            Loader {
+                id: simEditorLoader
+                anchors { left: parent.left; right: parent.right }
+            }
+
+            ListItem.Divider {}
+
+            Loader {
+                id: defaultSimLoader
+                anchors.left: parent.left
+                anchors.right: parent.right
+            }
         }
+    }
+
+    GSettings {
+        id: phoneSettings
+        schema.id: "com.ubuntu.phone"
+        Component.onCompleted: {
+            // set default names
+            var simNames = phoneSettings.simNames;
+            var m0 = modemsSorted[0];
+            var m1 = modemsSorted[1];
+            if (!simNames[m0]) {
+                simNames[m0] = "SIM 1";
+            }
+            if (!simNames[m1]) {
+                simNames[m1] = "SIM 2";
+            }
+            phoneSettings.simNames = simNames;
+        }
+    }
+
+    Binding {
+        target: sim1
+        property: "name"
+        value: phoneSettings.simNames[modemsSorted[0]]
+    }
+
+    Binding {
+        target: sim2
+        property: "name"
+        value: phoneSettings.simNames[modemsSorted[1]]
     }
 }

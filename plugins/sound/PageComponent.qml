@@ -25,6 +25,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
 import Ubuntu.SystemSettings.Sound 1.0
+import Ubuntu.Settings.Menus 0.1 as Menus
+import QMenuModel 0.1
 
 import "utilities.js" as Utilities
 
@@ -65,6 +67,47 @@ ItemPage {
             SilentModeWarning { visible: backendInfo.silentMode }
 
             ListItem.Standard {
+                control: Switch {
+                    objectName: "silentMode"
+                    checked: backendInfo.silentMode
+                    onCheckedChanged: backendInfo.silentMode = checked
+                }
+                text: i18n.tr("Silent Mode")
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Ringer:")
+            }
+
+            QDBusActionGroup {
+                id: soundActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.sound"
+                objectPath: "/com/canonical/indicator/sound"
+
+                property variant volume: action("volume")
+
+                Component.onCompleted: start()
+            }
+
+            Binding {
+                target: sliderMenu
+                property: "value"
+                value: soundActionGroup.volume.state
+            }
+ 
+            Menus.SliderMenu {
+                id: sliderMenu
+                objectName: "sliderMenu"
+                enabled: soundActionGroup.volume.state != null
+                minimumValue: 0.0
+                maximumValue: 1.0
+                minIcon: "image://theme/audio-volume-low" 
+                maxIcon: "image://theme/audio-volume-high" 
+                onUpdated: soundActionGroup.volume.updateState(value);
+            }
+
+            ListItem.Standard {
                 text: i18n.tr("Phone calls:")
             }
 
@@ -84,18 +127,20 @@ ItemPage {
 
             ListItem.Standard {
                 control: CheckBox {
-                    checked: false
+                    objectName: "callVibrate"
+                    checked: backendInfo.incomingCallVibrate
+                    onCheckedChanged: backendInfo.incomingCallVibrate = checked
                 }
                 text: i18n.tr("Vibrate when ringing")
-                visible: showAllUI
             }
 
             ListItem.Standard {
                 control: CheckBox {
-                    checked: false
+                    objectName: "callVibrateSilentMode"
+                    checked: backendInfo.incomingCallVibrateSilentMode
+                    onCheckedChanged: backendInfo.incomingCallVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
-                visible: showAllUI
             }
 
             ListItem.Standard {
@@ -117,18 +162,20 @@ ItemPage {
 
             ListItem.Standard {
                 control: CheckBox {
-                    checked: false
+                    objectName: "messageVibrate"
+                    checked: backendInfo.incomingMessageVibrate
+                    onCheckedChanged: backendInfo.incomingMessageVibrate = checked
                 }
                 text: i18n.tr("Vibrate with message sound")
-                visible: showAllUI
             }
 
             ListItem.Standard {
                 control: CheckBox {
-                    checked: false
+                    objectName: "messageVibrateSilentMode"
+                    checked: backendInfo.incomingMessageVibrateSilentMode
+                    onCheckedChanged: backendInfo.incomingMessageVibrateSilentMode = checked
                 }
                 text: i18n.tr("Vibrate in Silent Mode")
-                visible: showAllUI
             }
 
             ListItem.Standard {

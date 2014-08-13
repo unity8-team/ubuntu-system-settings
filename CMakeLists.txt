@@ -41,6 +41,9 @@ pkg_search_module(ACCOUNTSSERVICE REQUIRED accountsservice)
 pkg_search_module(TIMEZONEMAP REQUIRED timezonemap)
 pkg_search_module(ICU REQUIRED icu-i18n)
 pkg_search_module(ANDR_PROP libandroid-properties)
+pkg_check_modules(QTDBUSMOCK REQUIRED libqtdbusmock-1 REQUIRED)
+pkg_check_modules(QTDBUSTEST REQUIRED libqtdbustest-1 REQUIRED)
+pkg_search_module(POLKIT_AGENT polkit-agent-1)
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)
@@ -55,6 +58,7 @@ set(PLUGIN_MODULE_DIR "${CMAKE_INSTALL_PREFIX}/${LIBDIR}/${PLUGIN_MODULE_DIR_BAS
 set(PLUGIN_QML_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_QML_DIR_BASE}")
 set(PLUGIN_PRIVATE_MODULE_DIR "${CMAKE_INSTALL_PREFIX}/${LIBDIR}/${PLUGIN_PRIVATE_MODULE_DIR_BASE}")
 set(SETTINGS_SHARE_DIR "${CMAKE_INSTALL_PREFIX}/${PLUGIN_MANIFEST_DIR_BASE}")
+set(PUSH_HELPER_DIR "lib/ubuntu-push-client/legacy-helpers")
 
 SET(CMAKE_INSTALL_RPATH "${PLUGIN_MODULE_DIR}")
 
@@ -72,6 +76,7 @@ configure_file(ubuntu-system-settings.desktop.in ubuntu-system-settings.desktop 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-system-settings.desktop DESTINATION share/applications)
 install(FILES ubuntu-system-settings.url-dispatcher DESTINATION share/url-dispatcher/urls)
 install(FILES screenshot.png DESTINATION ${SETTINGS_SHARE_DIR})
+install(PROGRAMS push-helper/software-updates-helper.py DESTINATION ${PUSH_HELPER_DIR} RENAME ubuntu-system-settings)
 
 if(cmake_build_type_lower MATCHES coverage)
   ENABLE_COVERAGE_REPORT(TARGETS system-settings FILTER /usr/include ${CMAKE_SOURCE_DIR}/tests/* ${CMAKE_BINARY_DIR}/*)

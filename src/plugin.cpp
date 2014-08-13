@@ -21,6 +21,7 @@
 #include "debug.h"
 #include "plugin.h"
 
+#include <QEventLoop>
 #include <QDir>
 #include <QFileInfo>
 #include <QJsonDocument>
@@ -55,6 +56,8 @@ private:
     mutable Plugin *q_ptr;
     mutable ItemBase *m_item;
     mutable QPluginLoader m_loader;
+    mutable PluginInterface *m_plugin;
+    mutable PluginInterface2 *m_plugin2;
     QString m_baseName;
     QVariantMap m_data;
 };
@@ -64,7 +67,9 @@ private:
 PluginPrivate::PluginPrivate(Plugin *q, const QFileInfo &manifest):
     q_ptr(q),
     m_item(0),
-    m_baseName(manifest.completeBaseName())
+    m_baseName(manifest.completeBaseName()),
+    m_plugin(0),
+    m_plugin2(0)
 {
     QFile file(manifest.filePath());
     if (Q_UNLIKELY(!file.open(QIODevice::ReadOnly | QIODevice::Text))) {
@@ -105,14 +110,21 @@ bool PluginPrivate::ensureLoaded() const
         return false;
     }
 
-    PluginInterface *interface =
-        qobject_cast<SystemSettings::PluginInterface*>(m_loader.instance());
-    if (Q_UNLIKELY(interface == 0)) {
+    m_plugin2 = qobject_cast<SystemSettings::PluginInterface2*>(
+                m_loader.instance());
+
+    if (m_plugin2)
+        m_plugin = m_plugin2;
+    else
+        m_plugin = qobject_cast<SystemSettings::PluginInterface*>(
+                    m_loader.instance());
+
+    if (Q_UNLIKELY(m_plugin == 0)) {
         qWarning() << name << "doesn't implement PluginInterface";
         return false;
     }
 
-    m_item = interface->createItem(m_data);
+    m_item = m_plugin->createItem(m_data);
     if (m_item == 0) return false;
 
     QObject::connect(m_item, SIGNAL(iconChanged()),
@@ -220,6 +232,52 @@ bool Plugin::hideByDefault() const
 {
     Q_D(const Plugin);
     return d->m_data.value(keyHideByDefault, false).toBool();
+}
+
+void Plugin::reset()
+{
+    Q_D(const Plugin);
+
+    d->ensureLoaded();
+
+    /* If the plugin implements version 1 of the interface but not version
+     * 2, we assume that we won't find a "reset()" method in the
+     * pageComponent either.
+     */
+    if (d->m_plugin && !d->m_plugin2)
+        return;
+
+    // Try to use the plugin's reset method
+    if (d->m_plugin2 && d->m_plugin2->reset())
+        return;
+
+    // Otherwise, try to use one from the page component
+    QQmlComponent *component = pageComponent();
+
+    if (!component)
+        return;
+
+    QObject *object = component->create();
+
+    // If it's there, try to search for the method
+    if (!object) {
+        delete component;
+        return;
+    }
+
+    const QMetaObject *metaObject = object->metaObject();
+    int index = metaObject->indexOfMethod(
+                QMetaObject::normalizedSignature("reset(void)"));
+
+    // and if that exists, call it
+    if (index >= 0) {
+        QMetaMethod method = metaObject->method(index);
+        method.invoke(object, Qt::DirectConnection);
+    }
+
+    delete object;
+    delete component;
+
 }
 
 QQmlComponent *Plugin::entryComponent()

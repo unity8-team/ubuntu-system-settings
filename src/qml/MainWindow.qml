@@ -31,6 +31,7 @@ MainView {
     objectName: "mainView"
     automaticOrientation: true
     useDeprecatedToolbar: false
+    anchorToKeyboard: true
 
     function loadPluginByName(pluginName, pluginOptions) {
         var plugin = pluginManager.getByName(pluginName)

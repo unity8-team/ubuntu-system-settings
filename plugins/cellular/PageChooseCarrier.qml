@@ -27,6 +27,7 @@ import MeeGo.QOfono 0.2
 ItemPage {
     id: root
     title: i18n.tr("Carrier")
+
     objectName: "chooseCarrierPage"
 
     property var netReg
@@ -45,7 +46,6 @@ ItemPage {
     Connections {
         target: netReg
         onStatusChanged: {
-            console.warn("onStatusChanged: " + netReg.status);
             if (netReg.status === "registered")
                 buildLists();
         }
@@ -92,11 +92,9 @@ ItemPage {
         id: netOp
         OfonoNetworkOperator {
             onRegisterComplete: {
-                if (error === OfonoNetworkOperator.NoError)
-                    console.warn("registerComplete: SUCCESS");
-                else if (error === OfonoNetworkOperator.InProgressError)
+                if (error === OfonoNetworkOperator.InProgressError) {
                     console.warn("registerComplete failed with error: " + errorString);
-                else {
+                } else if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
                     netReg.registration();
                 }
@@ -107,9 +105,9 @@ ItemPage {
     Flickable {
         id: scrollWidget
         anchors.fill: parent
-        contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        flickableDirection: Flickable.VerticalFlick
+        contentWidth: parent.width
+        contentHeight: parent.height
+        boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
             anchors.left: parent.left
@@ -122,6 +120,7 @@ ItemPage {
                 enabled: netReg.mode !== "auto-only"
                 text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically"), i18n.tr("Manually")]
+
                 //showDivider: false
                 delegate: OptionSelectorDelegate { showDivider: false }
                 selectedIndex: netReg.mode === "manual" ? 1 : 0
@@ -131,17 +130,11 @@ ItemPage {
                 }
             }
 
-            //                property bool enabled: chooseCarrier.selectedIndex === 1 // Manually
-
             ListItem.ItemSelector {
                 id: carrierSelector
                 objectName: "carrierSelector"
-                expanded: true
-                /* FIXME: This is disabled since it is currently a
-         * read-only setting
-         * enabled: cellularDataControl.checked
-         */
-                enabled: true
+                expanded: enabled
+                enabled: chooseCarrier.selectedIndex === 1
                 model: operatorNames
                 onSelectedIndexChanged: {
                     if ((selectedIndex !== curOp) && operators[selectedIndex]) {
@@ -150,7 +143,7 @@ ItemPage {
                     }
                 }
             }
-
+            
             ListItem.Standard {
                 text: i18n.tr("APN")
                 progression: true
@@ -158,38 +151,51 @@ ItemPage {
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("Apn.qml"), {connMan: connMan})
                 }
-
             }
         }
-    }
 
-    ListItem.SingleControl {
-        anchors.bottom: parent.bottom
-        control: Button {
-            objectName: "refreshButton"
-            width: parent.width - units.gu(4)
-            text: i18n.tr("Refresh")
-            enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
-            onTriggered: {
-                scanning = true;
-                netReg.scan();
+        ListItem.SingleControl {
+            anchors.bottom: parent.bottom
+            control: Button {
+                objectName: "refreshButton"
+                width: parent.width - units.gu(4)
+                text: i18n.tr("Refresh")
+                enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
+                onTriggered: {
+                    scanning = true;
+                    netReg.scan();
+                }
             }
         }
-    }
 
-    ActivityIndicator {
-        id: activityIndicator
-        anchors.centerIn: parent
-        running: scanning
-    }
-
-    Label {
-        anchors {
-            top: activityIndicator.bottom
-            topMargin: units.gu(2)
-            horizontalCenter: activityIndicator.horizontalCenter
+        ListItem.SingleControl {
+            anchors.bottom: parent.bottom
+            control: Button {
+                objectName: "refreshButton"
+                width: parent.width - units.gu(4)
+                text: i18n.tr("Refresh")
+                enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
+                onTriggered: {
+                    scanning = true;
+                    netReg.scan();
+                }
+            }
         }
-        text: i18n.tr("Searching")
-        visible: activityIndicator.running
+
+        ActivityIndicator {
+            id: activityIndicator
+            anchors.centerIn: parent
+            running: scanning
+        }
+
+        Label {
+            anchors {
+                top: activityIndicator.bottom
+                topMargin: units.gu(2)
+                horizontalCenter: activityIndicator.horizontalCenter
+            }
+            text: i18n.tr("Searching")
+            visible: activityIndicator.running
+        }
     }
 }

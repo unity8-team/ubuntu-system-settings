@@ -22,7 +22,7 @@ Column {
     }
 
     Grid {
-        property int itemWidth: units.gu(9)
+        property int itemWidth: units.gu(12)
 
         // The amount of whitespace, including column spacing
         property int space: parent.width - columns * itemWidth
@@ -31,6 +31,7 @@ Column {
         property int n: 4
 
         columnSpacing: space / ((2 * n) + (columns - 1))
+        rowSpacing: units.gu(1)
         width: (columns * itemWidth) + columnSpacing * (columns - 1)
         anchors.horizontalCenter: parent.horizontalCenter
         columns: {

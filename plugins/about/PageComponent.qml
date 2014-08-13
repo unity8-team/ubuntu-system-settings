@@ -145,7 +145,8 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: backendInfos.updateDate ? backendInfos.updateDate : i18n.tr("Never")
+                value: updateBackend.lastUpdateDate && !isNaN(updateBackend.lastUpdateDate) ?
+                    Qt.formatDate(updateBackend.lastUpdateDate) : i18n.tr("Never")
             }
 
             ListItem.SingleControl {
@@ -177,6 +178,13 @@ ItemPage {
                 progression: true
                 visible: regulatoryInfo
                 onClicked: pageStack.push(regulatoryInfo.pageComponent)
+            }
+
+            ListItem.SingleValue {
+                objectName: "devmodeItem"
+                text: i18n.tr("Developer mode")
+                progression: true
+                onClicked: pageStack.push(Qt.resolvedUrl("DevMode.qml"))
             }
         }
     }

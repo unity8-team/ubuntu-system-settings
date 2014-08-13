@@ -29,6 +29,7 @@
 #include <QObject>
 #include <QProcess>
 #include <QVariant>
+#include <QDBusInterface>
 
 
 class StorageAbout : public QObject
@@ -43,10 +44,6 @@ class StorageAbout : public QObject
 
     Q_PROPERTY( QString vendorString
                 READ vendorString
-                CONSTANT)
-
-    Q_PROPERTY( QString updateDate
-                READ updateDate
                 CONSTANT)
 
     Q_PROPERTY(QAbstractItemModel *clickList
@@ -90,13 +87,20 @@ class StorageAbout : public QObject
                 READ ubuntuBuildID
                 CONSTANT)
 
+    Q_PROPERTY( bool getDeveloperMode
+                READ getDeveloperMode
+                CONSTANT)
+
+    Q_PROPERTY( bool toggleDeveloperMode
+                READ toggleDeveloperMode
+                CONSTANT)
+
 public:
     explicit StorageAbout(QObject *parent = 0);
     ~StorageAbout();
     QAbstractItemModel *getClickList();
     QString serialNumber();
     QString vendorString();
-    QString updateDate();
     QString deviceBuildDisplayID();
     QString customizationBuildID();
     QString ubuntuBuildID();
@@ -111,6 +115,8 @@ public:
     Q_INVOKABLE QString formatSize (quint64 size) const;
     Q_INVOKABLE void populateSizes();
     Q_INVOKABLE QString getDevicePath (const QString mount_point);
+    bool getDeveloperMode();
+    bool toggleDeveloperMode();
 
 Q_SIGNALS:
     void sortRoleChanged();
@@ -119,7 +125,6 @@ Q_SIGNALS:
 private:
     QString m_serialNumber;
     QString m_vendorString;
-    QString m_updateDate;
     QString m_deviceBuildDisplayID;
     QString m_ubuntuBuildID;
     QString m_customizationBuildID;
@@ -132,6 +137,8 @@ private:
     quint64 m_homeSize;
 
     QMap<QString, QString> m_mounts;
+
+    QScopedPointer<QDBusInterface> m_propertyService;
 
     GCancellable *m_cancellable;
 };

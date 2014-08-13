@@ -45,6 +45,22 @@ public:
                 READ getSilentMode
                 WRITE setSilentMode
                 NOTIFY silentModeChanged)
+    Q_PROPERTY (bool incomingCallVibrate
+                READ getIncomingCallVibrate
+                WRITE setIncomingCallVibrate
+                NOTIFY incomingCallVibrateChanged)
+    Q_PROPERTY (bool incomingMessageVibrate
+                READ getIncomingMessageVibrate
+                WRITE setIncomingMessageVibrate
+                NOTIFY incomingMessageVibrateChanged)
+    Q_PROPERTY (bool incomingCallVibrateSilentMode
+                READ getIncomingCallVibrateSilentMode
+                WRITE setIncomingCallVibrateSilentMode
+                NOTIFY incomingCallVibrateSilentModeChanged)
+    Q_PROPERTY (bool incomingMessageVibrateSilentMode
+                READ getIncomingMessageVibrateSilentMode
+                WRITE setIncomingMessageVibrateSilentMode
+                NOTIFY incomingMessageVibrateSilentModeChanged)
 
 
 public Q_SLOTS:
@@ -55,6 +71,10 @@ Q_SIGNALS:
     void incomingCallSoundChanged();
     void incomingMessageSoundChanged();
     void silentModeChanged();
+    void incomingCallVibrateChanged();
+    void incomingMessageVibrateChanged();
+    void incomingCallVibrateSilentModeChanged();
+    void incomingMessageVibrateSilentModeChanged();
 
 private:
     AccountsService m_accountsService;
@@ -66,6 +86,15 @@ private:
     void setIncomingMessageSound(QString sound);
     bool getSilentMode();
     void setSilentMode(bool enabled);
+    bool getIncomingCallVibrate();
+    void setIncomingCallVibrate(bool enabled);
+    bool getIncomingMessageVibrate();
+    void setIncomingMessageVibrate(bool enabled);
+    bool getIncomingCallVibrateSilentMode();
+    void setIncomingCallVibrateSilentMode(bool enabled);
+    bool getIncomingMessageVibrateSilentMode();
+    void setIncomingMessageVibrateSilentMode(bool enabled);
+
 };
 
 #endif // SOUND_H

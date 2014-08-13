@@ -1,14 +1,17 @@
+add_subdirectory(Components)
+
 install(FILES cellular.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-cellular.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 
 set(QML_SOURCES
     Apn.qml
-    ChooseCarrier.qml
     CustomApn.qml
+    PageChooseCarrier.qml
+    PageChooseCarriers.qml
+    PageComponent.qml
     Hotspot.qml
     HotspotSetup.qml
     PageComponent.qml
-    rdosettings-helpers.js
     ViewApn.qml
 )
 
