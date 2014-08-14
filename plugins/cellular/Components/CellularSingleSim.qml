@@ -97,7 +97,7 @@ Column {
             if (i === 1) {
                 return 'gsm';
             } else if (i === 2) {
-                return 'any';
+                return 'umts';
             } else {
                 return sim1.radioSettings.technologyPreference
             }

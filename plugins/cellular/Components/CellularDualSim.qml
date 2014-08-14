@@ -27,7 +27,7 @@ Column {
     property var sim1
     property var sim2
     property var selector: selector
-    property var prefMap: ['gsm', 'any']
+    property var prefMap: ['gsm', 'umts']
 
     function getNameFromIndex (index) {
         return [i18n.tr("Off"), sim1.title, sim2.title][index];
