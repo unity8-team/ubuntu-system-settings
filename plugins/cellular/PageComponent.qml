@@ -164,44 +164,6 @@ ItemPage {
                 id: cellData
                 anchors { left: parent.left; right: parent.right }
             }
-/* FIXME this does not work with the new dual sim code. Don't know why or how to fix.
-            ListItem.ItemSelector {
-                id: techPrefSelector
-                objectName: "technologyPreferenceSelector"
-                expanded: true
-                delegate: techPrefDelegate
-                model: techPrefModel
-                text: i18n.tr("Cellular data:")
-
-                // technologyPreference "" is not valid, assume sim locked or data unavailable
-                //enabled: rdoSettings.technologyPreference !== ""
-                enabled: true // FIXME something happened in the two week merge lapse, this is incorrect
-                selectedIndex: {
-                    var pref = rdoSettings.technologyPreference;
-                    // make nothing selected if the string from OfonoRadioSettings is empty
-                    if (pref === "") {
-                        console.warn("Disabling TechnologyPreference item selector due to empty TechnologyPreference");
-                        return -1;
-                    } else {
-                        // normalizeKey turns "lte" and "umts" into "any"
-                        return RSHelpers.keyToIndex(RSHelpers.normalizeKey(pref));
-                    }
-                }
-                onDelegateClicked: RSHelpers.delegateClicked(index)
-            }
-*/
-            ListItem.Standard {
-                id: dataRoamingItem
-                objectName: "dataRoamingSwitch"
-                text: i18n.tr("Data roaming")
-                // sensitive to data type, and disabled if "Off" is selected
-                // FIXME enabled: techPrefSelector.selectedIndex !== 0
-                control: Switch {
-                    id: dataRoamingControl
-                    checked: connMan.roamingAllowed
-                    onClicked: connMan.roamingAllowed = checked
-                }
-            }
 
             ListItem.SingleValue {
                 text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
