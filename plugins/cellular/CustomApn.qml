@@ -78,7 +78,7 @@ ItemPage {
     }
 
     function updateContext(theContext) {
-
+        console.debug("YYYY: " + theContext)
         if (!validateFields()) return;
         console.warn("updating");
 
@@ -87,6 +87,7 @@ ItemPage {
         theContext.accessPointName = apnName.text;
         theContext.username = userName.text;
         theContext.password = pword.text;
+        theContext.protocol = "ip"; // FIXME support for ipv6 will be added after RTM
         //theContext.protocol = map(protocol.text);
         if (ismms) {
             theContext.messageCenter = mmsc.text;
@@ -135,6 +136,7 @@ ItemPage {
                 console.warn("Context error: " + errorString)
                 // todo pop up an error dialog
             }
+            onAccessPointNameChanged: console.debug("XXXXXXXXXX: " + accessPoint)
         }
     }
 
@@ -227,7 +229,7 @@ ItemPage {
                     id: pword
                     echoMode: TextInput.PasswordEchoOnEdit
                 }
-
+/* // FIXME support for ipv6 will be added after RTM
                 Label {
                     text: i18n.tr("Protocol")
                 }
@@ -238,6 +240,7 @@ ItemPage {
                         i18n.tr("IPv6"),
                         i18n.tr("IPv4IPv6")]
                 }
+*/
             }
             Component.onCompleted: {
                 var theContext;
