@@ -183,7 +183,7 @@ class CellularTestCase(CellularBaseTestCase):
         self.select_preference(PREFERENCE_ANY)
         sleep(0.7)
         self.assertEqual('umts', self.modem_0.Get(RDO_IFACE,
-                                                 'TechnologyPreference'))
+                                                  'TechnologyPreference'))
 
     def test_sim_online_status_insensitive_to_radio_preference(self):
         # turn off cellular data
