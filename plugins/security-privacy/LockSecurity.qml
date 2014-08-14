@@ -254,6 +254,7 @@ ItemPage {
 
             Label {
                 id: notMatching
+                wrapMode: Text.Wrap
                 text: {
                     if (changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passcode)
