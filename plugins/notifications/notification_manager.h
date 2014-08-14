@@ -49,7 +49,7 @@ private Q_SLOTS:
 
 private:
     QVariantList m_model;
-    QProcess m_process;
+    QProcess *m_process;
     GSettings *m_pushSettings;
     QMap <QString, bool> m_blacklist;
 };

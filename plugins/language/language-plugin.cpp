@@ -26,13 +26,8 @@
 
 #define UBUNTU_KEYBOARD_SCHEMA_ID "com.canonical.keyboard.maliit"
 
-#define KEY_ENABLED_LAYOUTS     "enabled-languages"
-#define KEY_CURRENT_LAYOUT      "active-language"
-#define KEY_SPELL_CHECKING      "spell-checking"
-#define KEY_AUTO_CAPITALIZATION "auto-capitalization"
-#define KEY_AUTO_COMPLETION     "auto-completion"
-#define KEY_PREDICTIVE_TEXT     "predictive-text"
-#define KEY_KEY_PRESS_FEEDBACK  "key-press-feedback"
+#define KEY_ENABLED_LAYOUTS "enabled-languages"
+#define KEY_CURRENT_LAYOUT  "active-language"
 
 #define LANGUAGE2LOCALE "/usr/share/language-tools/language2locale"
 #define LAYOUTS_DIR "/usr/share/maliit/plugins/com/ubuntu/lib"
@@ -245,83 +240,6 @@ void
 LanguagePlugin::spellCheckingModelChanged()
 {
     // TODO: update spell checking model
-}
-
-bool
-LanguagePlugin::spellChecking() const
-{
-    return g_settings_get_boolean(m_maliitSettings, KEY_SPELL_CHECKING);
-}
-
-void
-LanguagePlugin::setSpellChecking(bool value)
-{
-    if (value != spellChecking()) {
-        g_settings_set_boolean(m_maliitSettings,
-                               KEY_SPELL_CHECKING, value);
-        Q_EMIT spellCheckingChanged();
-    }
-}
-
-bool
-LanguagePlugin::autoCapitalization() const
-{
-    return g_settings_get_boolean(m_maliitSettings, KEY_AUTO_CAPITALIZATION);
-}
-
-void
-LanguagePlugin::setAutoCapitalization(bool value)
-{
-    if (value != autoCapitalization()) {
-        g_settings_set_boolean(m_maliitSettings,
-                               KEY_AUTO_CAPITALIZATION, value);
-        Q_EMIT autoCapitalizationChanged();
-    }
-}
-
-bool
-LanguagePlugin::autoCompletion() const
-{
-    return g_settings_get_boolean(m_maliitSettings, KEY_AUTO_COMPLETION);
-}
-
-void
-LanguagePlugin::setAutoCompletion(bool value)
-{
-    if (value != autoCompletion()) {
-        g_settings_set_boolean(m_maliitSettings, KEY_AUTO_COMPLETION, value);
-        Q_EMIT autoCompletionChanged();
-    }
-}
-
-bool
-LanguagePlugin::predictiveText() const
-{
-    return g_settings_get_boolean(m_maliitSettings, KEY_PREDICTIVE_TEXT);
-}
-
-void
-LanguagePlugin::setPredictiveText(bool value)
-{
-    if (value != predictiveText()) {
-        g_settings_set_boolean(m_maliitSettings, KEY_PREDICTIVE_TEXT, value);
-        Q_EMIT predictiveTextChanged();
-    }
-}
-
-bool
-LanguagePlugin::keyPressFeedback() const
-{
-    return g_settings_get_boolean(m_maliitSettings, KEY_KEY_PRESS_FEEDBACK);
-}
-
-void
-LanguagePlugin::setKeyPressFeedback(bool value)
-{
-    if (value != keyPressFeedback()) {
-        g_settings_set_boolean(m_maliitSettings, KEY_KEY_PRESS_FEEDBACK, value);
-        Q_EMIT keyPressFeedbackChanged();
-    }
 }
 
 static bool
@@ -613,20 +531,16 @@ LanguagePlugin::managerLoaded()
     if (loaded) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
 
-        const char *name(qPrintable(qgetenv("USER")));
+        m_user = act_user_manager_get_user_by_id(m_manager, geteuid());
 
-        if (name != NULL) {
-            m_user = act_user_manager_get_user(m_manager, name);
+        if (m_user != NULL) {
+            g_object_ref(m_user);
 
-            if (m_user != NULL) {
-                g_object_ref(m_user);
-
-                if (act_user_is_loaded(m_user))
-                    userLoaded();
-                else
-                    g_signal_connect(m_user, "notify::is-loaded",
-                                     G_CALLBACK(::userLoaded), this);
-            }
+            if (act_user_is_loaded(m_user))
+                userLoaded();
+            else
+                g_signal_connect(m_user, "notify::is-loaded",
+                                 G_CALLBACK(::userLoaded), this);
         }
     }
 }

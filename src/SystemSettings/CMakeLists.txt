@@ -1,5 +1,4 @@
 set(QML_SOURCES
-    BrightnessSlider.qml
     ItemPage.qml
 )
 

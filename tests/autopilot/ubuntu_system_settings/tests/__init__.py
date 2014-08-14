@@ -27,13 +27,15 @@ from ubuntu_system_settings import SystemSettings
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
 ACCOUNTS_USER_IFACE = 'org.freedesktop.Accounts.User'
 ACCOUNTS_OBJ = '/org/freedesktop/Accounts'
-
+ACCOUNTS_SERVICE = 'com.canonical.unity.AccountsService'
 ACCOUNTS_SOUND_IFACE = 'com.ubuntu.touch.AccountsService.Sound'
 MODEM_IFACE = 'org.ofono.Modem'
 CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 SIM_IFACE = 'org.ofono.SimManager'
 NETREG_IFACE = 'org.ofono.NetworkRegistration'
+SYSTEM_IFACE = 'com.canonical.SystemImage'
+SYSTEM_SERVICE_OBJ = '/Service'
 
 
 class UbuntuSystemSettingsTestCase(
@@ -186,10 +188,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             properties = {
                 'SubscriberNumbers': ['123456', '234567']
             }
-        modem_interfaces = modem.GetProperties()['Interfaces']
-        modem_interfaces.append(SIM_IFACE)
         modem.AddProperties(SIM_IFACE, properties)
-        modem.SetProperty('Interfaces', modem_interfaces)
         modem.AddMethods(
             SIM_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -262,6 +261,26 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             self.add_sim2()
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
+
+    def set_default_for_calls(self, gsettings, default):
+        gsettings.set_value('default-sim-for-calls', default)
+        # wait for gsettings
+        sleep(1)
+
+    def set_default_for_messages(self, gsettings, default):
+        gsettings.set_value('default-sim-for-messages', default)
+        # wait for gsettings
+        sleep(1)
+
+    def get_default_sim_for_calls_selector(self, text):
+        return self.system_settings.main_view.cellular_page.select_single(
+            objectName="defaultForCalls" + text
+        )
+
+    def get_default_sim_for_messages_selector(self, text):
+        return self.system_settings.main_view.cellular_page.select_single(
+            objectName="defaultForMessages" + text
+        )
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
@@ -479,8 +498,7 @@ class SoundBaseTestCase(
             'IncomingMessageVibrate': dbus.Boolean(False,
                                                    variant_level=1),
             'IncomingMessageVibrateSilentMode': dbus.Boolean(False,
-                                                             variant_level=1)
-            }
+                                                             variant_level=1)}
 
         # start dbus system bus
         self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
@@ -555,3 +573,63 @@ class SoundBaseTestCase(
         self.mock_server.terminate()
         self.mock_server.wait()
         super(SoundBaseTestCase, self).tearDown()
+
+
+class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
+                        dbusmock.DBusTestCase):
+    """ Base class for reset settings tests"""
+
+    def mock_for_launcher_reset(self):
+        user_obj = '/user/foo'
+        # start dbus system bus
+        self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
+                                             ACCOUNTS_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+
+        # spawn_server does not wait properly
+        # Reported as bug here: http://pad.lv/1350833
+        sleep(2)
+        self.acc_proxy = dbus.Interface(self.dbus_con.get_object(
+            ACCOUNTS_IFACE, ACCOUNTS_OBJ), dbusmock.MOCK_IFACE)
+
+        self.acc_proxy.AddMethod(ACCOUNTS_IFACE, 'FindUserById', 'x', 'o',
+                                 'ret = "%s"' % user_obj)
+
+        self.acc_proxy.AddObject(
+            user_obj, ACCOUNTS_USER_IFACE, {}, [])
+
+        self.user_mock = dbus.Interface(self.dbus_con.get_object(
+            ACCOUNTS_IFACE, user_obj),
+            dbusmock.MOCK_IFACE)
+
+        self.user_mock.AddMethod(
+            'org.freedesktop.DBus.Properties', 'Set', 'ssaa{sv}', '', '')
+
+    def mock_for_factory_reset(self):
+        self.mock_server = self.spawn_server(SYSTEM_IFACE, SYSTEM_SERVICE_OBJ,
+                                             SYSTEM_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+        # spawn_server does not wait properly
+        # Reported as bug here: http://pad.lv/1350833
+        sleep(2)
+        self.sys_mock = dbus.Interface(self.dbus_con.get_object(
+            SYSTEM_IFACE, SYSTEM_SERVICE_OBJ), dbusmock.MOCK_IFACE)
+
+        self.sys_mock.AddMethod(SYSTEM_IFACE, 'FactoryReset', '', '', '')
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+
+    def setUp(self):
+        self.mock_for_launcher_reset()
+        self.mock_for_factory_reset()
+
+        super(ResetBaseTestCase, self).setUp()
+        self.reset_page = self.system_settings.main_view.go_to_reset_phone()
+
+    def tearDown(self):
+        self.mock_server.terminate()
+        self.mock_server.wait()
+        super(ResetBaseTestCase, self).tearDown()

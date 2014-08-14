@@ -251,12 +251,6 @@ class CellularTestCase(CellularBaseTestCase):
 
         self.assert_selected_preference(2)
 
-    def test_that_sim_editor_is_hidden(self):
-        editor = self.system_settings.main_view.cellular_page.select_single(
-            objectName="simEditor"
-        )
-        self.assertFalse(editor.get_properties()['visible'])
-
 
 class DualSimCellularTestCase(CellularBaseTestCase):
 
@@ -330,8 +324,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def get_sim_name(self, num):
         obj = self.system_settings.main_view.cellular_page.select_single(
-            objectName="simEditor"
-        ).select_single(objectName="editSim%d" % num)
+            objectName="simLabel%d" % num)
         return obj.get_properties()['text']
 
     def rename_sim(self, num, new_name):
@@ -471,7 +464,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             ['TechnologyPreference', ''])
 
         self.assertThat(
-            self.data_preference_selector.get_properties()['enabled'],
+            self.data_preference_selector.get_properties()['visible'],
             Eventually(Equals(False)))
 
     # see
@@ -562,3 +555,40 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             gsettings.set_value('sim-names', old_names)
             # wait for gsettings
             sleep(1)
+
+    def test_changing_default_sim_for_calls(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        default = gsettings.get_value('default-sim-for-calls')
+
+        self.addCleanup(
+            self.set_default_for_calls, gsettings, default)
+
+        # click ask
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_calls_selector('ask'))
+        # click first sim
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_calls_selector('/ril_0'))
+        # wait for gsettings
+        sleep(1)
+        self.assertEqual(
+            gsettings.get_value('default-sim-for-calls').get_string(),
+            '/ril_0')
+
+    def test_changing_default_sim_for_messages(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        default = gsettings.get_value('default-sim-for-messages')
+        self.addCleanup(
+            self.set_default_for_messages, gsettings, default)
+
+        # click ask
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_messages_selector('ask'))
+        # click second sim
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_messages_selector('/ril_1'))
+        # wait for gsettings
+        sleep(1)
+        self.assertEqual(
+            gsettings.get_value('default-sim-for-messages').get_string(),
+            '/ril_1')

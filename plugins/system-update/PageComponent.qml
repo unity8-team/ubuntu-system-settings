@@ -265,7 +265,6 @@ ItemPage {
         delegate: ListItem.Subtitled {
             id: listItem
             iconSource: Qt.resolvedUrl(modelData.iconUrl)
-            iconFrame: false
             height: modelData.selected ? units.gu(14) : units.gu(8)
             showDivider: false
 
@@ -472,14 +471,12 @@ ItemPage {
 
         color: "transparent"
 
-        Column {
-            anchors.centerIn: parent
-
-            Label {
-                text: updateNotification.text
-                anchors.horizontalCenter: parent.horizontalCenter
-                fontSize: "large"
-            }
+        Label {
+            anchors.centerIn: updateNotification
+            text: updateNotification.text
+            width: updateNotification.width
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
         }
     }
 

@@ -61,7 +61,7 @@ Depends: ${misc:Depends},
          qmenumodel-qml,
          qtdeclarative5-folderlistmodel-plugin,
          qml-module-qtmultimedia | qml-module-qtmultimedia-gles,
-         qtdeclarative5-gsettings1.0 (>=0.0+13.10.20130717),
+         qtdeclarative5-gsettings1.0 (>=0.1+14.10.20140801.1),
          qtdeclarative5-ofono0.2,
          qtdeclarative5-systeminfo-plugin,
          qtdeclarative5-ubuntu-content1,
@@ -74,7 +74,7 @@ Depends: ${misc:Depends},
          click,
          ubuntu-keyboard-data (>= 0.99.trunk.phablet2+13.10.20131001),
          urfkill,
-# for the session-migration script
+# for the session-migration script (python3 itself also for the push helper)
          python3,
          python3-gi,
          python3-dbus,
@@ -83,6 +83,9 @@ Recommends: suru-icon-theme,
             ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example
+# ubuntu-push-client shipped the system settings push helper until 0.60:
+Breaks: ubuntu-push-client (<<0.61),
+Replaces: ubuntu-push-client (<<0.61),
 Description: System Settings application for Ubuntu Touch
  This package contains the System Settings application used on the
  Ubuntu Touch images, it's designed for phones, tablets and convergent
