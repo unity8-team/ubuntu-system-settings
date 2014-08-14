@@ -29,10 +29,14 @@ Column {
     property var selector: selector
     property var prefMap: ['gsm', 'any']
 
+    function getNameFromIndex (index) {
+        return [i18n.tr("Off"), sim1.title, sim2.title][index];
+    }
+
     function getUsedSim () {
-        if (state === "sim1") {
+        if (state === "sim1Online") {
             return sim1;
-        } else if (state === "sim2") {
+        } else if (state === "sim2Online") {
             return sim2;
         } else {
             return null;
@@ -42,12 +46,22 @@ Column {
     height: childrenRect.height
     states: [
         State {
-            name: "sim1"
+            name: "sim1Online"
             when: sim1.connMan.powered && !sim2.connMan.powered
+            StateChangeScript { script: {
+                selector.selectedIndex =
+                    DataHelpers.dualSimKeyToIndex(
+                        sim1.radioSettings.technologyPreference)
+            }}
         },
         State {
-            name: "sim2"
+            name: "sim2Online"
             when: sim2.connMan.powered && !sim1.connMan.powered
+            StateChangeScript { script: {
+                selector.selectedIndex =
+                    DataHelpers.dualSimKeyToIndex(
+                        sim2.radioSettings.technologyPreference)
+            }}
         },
         State {
             name: "bothOnline"
@@ -63,20 +77,10 @@ Column {
         objectName: "use"
         text: i18n.tr("Cellular data:")
         expanded: true
-        model: ["Off", "sim1", "sim2"]
+        model: ["off", "sim1", "sim2"]
         delegate: OptionSelectorDelegate {
             objectName: "use" + modelData
-            text: {
-                var t;
-                if (modelData === "sim1") {
-                    t = sim1.title
-                } else if (modelData === "sim2") {
-                    t = sim2.title
-                } else {
-                    t = i18n.tr(modelData);
-                }
-                return t;
-            }
+            text: getNameFromIndex(index)
         }
         selectedIndex: [true, sim1.connMan.powered, sim2.connMan.powered].lastIndexOf(true)
         onDelegateClicked: {
