@@ -24,7 +24,7 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 PREFERENCE_2G = '2G only (saves battery)'
 PREFERENCE_ANY = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
-USE_OFF = "useOff"
+USE_OFF = "useoff"
 USE_SIM_1 = "usesim1"
 USE_SIM_2 = "usesim2"
 
