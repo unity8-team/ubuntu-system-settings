@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.3+14.10.20140814-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Avoid a race condition when cleaning up the wizard's Mir socket.
+    This way we won't delete unity8's Mir socket out from under it. (LP:
+    #1355726)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 14 Aug 2014 00:37:03 +0000
+
 ubuntu-system-settings (0.3+14.10.20140813-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]
