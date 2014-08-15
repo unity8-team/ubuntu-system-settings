@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Setup complete")
+    title: i18n.tr("All done")
     forwardButtonSourceComponent: forwardButton
 
     Item {
@@ -36,9 +36,7 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("Welcome to Ubuntu on your phone, brought to you by thousands of volunteers and the good folks at Canonical.") +
-                  "\n\n" +
-                  i18n.tr("Now you can start using your Ubuntu phone.")
+            text: i18n.tr("Nice work! Your phone is now ready to use. ")
         }
     }
 
