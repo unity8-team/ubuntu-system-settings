@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-13 08:59-0500\n"
+"POT-Creation-Date: 2014-08-15 13:29-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1458,36 +1458,28 @@ msgid "Continue"
 msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
-msgid "Setup complete"
+msgid "All done"
 msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:39
-msgid ""
-"Welcome to Ubuntu on your phone, brought to you by thousands of volunteers "
-"and the good folks at Canonical."
+msgid "Nice work! Your phone is now ready to use. "
 msgstr ""
 
-#: ../wizard/qml/Pages//80-finished.qml:41
-msgid "Now you can start using your Ubuntu phone."
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:48
+#: ../wizard/qml/Pages//80-finished.qml:46
 msgid "Finish"
 msgstr ""
 
 #: ../wizard/qml/Pages//no-sim.qml:22
-msgid "No SIM card"
+msgid "Add a SIM card"
 msgstr ""
 
 #: ../wizard/qml/Pages//no-sim.qml:57
-msgid "To use the telephone and SMS features a SIM must be installed."
+msgid ""
+"Please insert a SIM card before you continue. Without it, you won’t be able "
+"to make calls or use text messaging."
 msgstr ""
 
-#: ../wizard/qml/Pages//no-sim.qml:59
-msgid "Install a SIM before continuing."
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
+#: ../wizard/qml/Pages//no-sim.qml:64 ../wizard/qml/Pages//20-wifi.qml:152
 msgid "Skip"
 msgstr ""
 
