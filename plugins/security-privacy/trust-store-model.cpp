@@ -19,6 +19,9 @@
 #include "trust-store-model.h"
 
 #include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QIcon>
 #include <QList>
 #include <QMap>
 #include <QSet>
@@ -43,7 +46,28 @@ public:
                               QSettings::IniFormat);
         desktopFile.beginGroup("Desktop Entry");
         displayName = desktopFile.value("Name").toString();
-        iconName = desktopFile.value("Icon").toString();
+        iconName = resolveIcon(desktopFile.value("Icon").toString(),
+                               desktopFile.value("Path").toString());
+    }
+
+    QString resolveIcon(const QString &iconName, const QString &basePath) {
+        /* See if the iconName resolves to a file installed by the click
+         * package (which is extracted in basePath). */
+        QDir baseDir(basePath);
+        QString iconFilePath =
+            baseDir.absoluteFilePath(QDir::cleanPath(iconName));
+        if (QFile::exists(iconFilePath)) {
+            return iconFilePath;
+        }
+
+        /* Is iconName a valid theme icon? */
+        if (QIcon::hasThemeIcon(iconName)) {
+            return "image://theme/" + iconName;
+        }
+
+        /* If not, just return the iconName, and hope that it's a valid
+         * filename */
+        return iconName;
     }
 
     void addRequest(const core::trust::Request &request) {
