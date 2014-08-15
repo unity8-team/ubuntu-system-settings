@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-14 07:15+0000\n"
+"PO-Revision-Date: 2014-08-15 06:20+0000\n"
 "Last-Translator: Kentaro Kazuhama <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-14 07:34+0000\n"
+"X-Launchpad-Export-Date: 2014-08-15 06:25+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
@@ -57,11 +57,11 @@ msgstr ""
 
 #: ../plugins/background//MainPage.qml:128
 msgid "Custom"
-msgstr ""
+msgstr "カスタム"
 
 #: ../plugins/background//WallpaperGrid.qml:190
 msgid "Remove"
-msgstr ""
+msgstr "削除"
 
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
@@ -73,7 +73,7 @@ msgstr "Bluetoothのペアリング要求"
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "'%1'のPIN"
 
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
@@ -84,15 +84,15 @@ msgstr "ペア"
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
+msgstr "この機械と %1 上のPINが一致しているか確認をしてください。"
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "PINを確認"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
-msgstr ""
+msgstr "接続済み"
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
@@ -100,11 +100,11 @@ msgstr "接続しています..."
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "切断しています…"
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "未接続"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
@@ -143,11 +143,11 @@ msgstr "動画"
 
 #: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Other Audio"
-msgstr ""
+msgstr "その他のオーディオ"
 
 #: ../plugins/bluetooth//PageComponent.qml:95
 msgid "Joypad"
-msgstr ""
+msgstr "ゲーム・コントローラ"
 
 #: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Keyboard"
@@ -285,13 +285,13 @@ msgstr ""
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 msgid "Automatically"
-msgstr ""
+msgstr "自動"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 msgid "Manually"
-msgstr ""
+msgstr "手動"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:130
 msgid "Refresh"
@@ -431,7 +431,7 @@ msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:169
 msgid "Vibrate with message sound"
-msgstr ""
+msgstr "メッセージ受信時にバイブする"
 
 #: ../plugins/sound//PageComponent.qml:182
 msgid "Other sounds:"
@@ -448,7 +448,7 @@ msgstr ""
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
-msgstr ""
+msgstr "停止"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
@@ -461,32 +461,28 @@ msgstr ""
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1秒前"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1分前"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1時間前"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1日前"
 
 #: ../plugins/battery//PageComponent.qml:75
 msgid "Charging now"
@@ -498,11 +494,11 @@ msgstr ""
 
 #: ../plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
-msgstr ""
+msgstr "充電完了"
 
 #: ../plugins/battery//PageComponent.qml:111
 msgid "Charge level"
-msgstr ""
+msgstr "バッテリー残量"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery//PageComponent.qml:120
@@ -545,8 +541,7 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1分後"
 
 #: ../plugins/battery//PageComponent.qml:293
 #: ../plugins/battery//PageComponent.qml:302
@@ -556,22 +551,22 @@ msgstr[1] ""
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/system-update//PageComponent.qml:449
 msgid "Never"
-msgstr ""
+msgstr "しない"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:312
 #: ../plugins/wifi//PageComponent.qml:26
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:96
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: ../plugins/battery//PageComponent.qml:373
 msgid "GPS"
-msgstr ""
+msgstr "GPS"
 
 #: ../plugins/battery//PageComponent.qml:392
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "正確に位置を特定するにはGPSとWi-Fiが必要です。"
 
 #: ../plugins/battery//SleepValues.qml:74
 msgid "Lock the phone when it's not in use:"
@@ -585,7 +580,7 @@ msgstr ""
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
-msgstr ""
+msgstr "安全のため、時間はこれよりも短く設定するべきです。電話機は呼び出しやビデオ再生中はロックされません。"
 
 #: ../plugins/battery//SleepValues.qml:107
 msgid "Phone won’t sleep during calls or video playback."
@@ -1036,11 +1031,11 @@ msgstr ""
 #: ../plugins/time-date//PageComponent.qml:29
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:130
 msgid "Time & Date"
-msgstr ""
+msgstr "時刻と日付"
 
 #: ../plugins/time-date//PageComponent.qml:53
 msgid "Time zone:"
-msgstr ""
+msgstr "タイムゾーン:"
 
 #: ../plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
@@ -1052,19 +1047,19 @@ msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "時刻"
 
 #: ../plugins/time-date//TimePicker.qml:81
 msgid "Hour"
-msgstr ""
+msgstr "時"
 
 #: ../plugins/time-date//TimePicker.qml:95
 msgid "Minute"
-msgstr ""
+msgstr "分"
 
 #: ../plugins/time-date//TimePicker.qml:109
 msgid "Second"
-msgstr ""
+msgstr "秒"
 
 #: ../plugins/time-date//TimePicker.qml:118
 msgid "Date"
@@ -1072,19 +1067,19 @@ msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:130
 msgid "Day"
-msgstr ""
+msgstr "日"
 
 #: ../plugins/time-date//TimePicker.qml:144
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 #: ../plugins/time-date//TimePicker.qml:162
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
-msgstr ""
+msgstr "タイムゾーン"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
@@ -1170,7 +1165,7 @@ msgstr ""
 #: ../plugins/security-privacy//PageComponent.qml:80
 #: ../plugins/security-privacy//PhoneLocking.qml:42
 msgid "Passphrase"
-msgstr ""
+msgstr "パスフレーズ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:346
 msgid "Swipe (no security)… "
@@ -1212,7 +1207,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
-msgstr ""
+msgstr "セキュリティ:"
 
 #: ../plugins/security-privacy//PageComponent.qml:79
 #: ../plugins/security-privacy//PhoneLocking.qml:41
@@ -1230,8 +1225,7 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 分"
 
 #: ../plugins/security-privacy//PageComponent.qml:110
 msgid "SIM PIN"
@@ -1239,7 +1233,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:116
 msgid "Privacy:"
-msgstr ""
+msgstr "プライバシー:"
 
 #: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Stats on welcome screen"
@@ -1264,13 +1258,13 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:179
 msgid "Diagnostics"
-msgstr ""
+msgstr "診断"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy//PageComponent.qml:184
 msgid "Sent"
-msgstr ""
+msgstr "送信しました"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
@@ -1288,11 +1282,11 @@ msgstr ""
 
 #: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
-msgstr ""
+msgstr "位置情報"
 
 #: ../plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr ""
+msgstr "位置情報の検知"
 
 #: ../plugins/security-privacy//Location.qml:70
 msgid ""
@@ -1392,7 +1386,7 @@ msgstr ""
 #: ../plugins/brightness//PageComponent.qml:32
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:154
 msgid "Brightness"
-msgstr ""
+msgstr "明るさ"
 
 #: ../plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
@@ -1404,11 +1398,11 @@ msgstr ""
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
-msgstr ""
+msgstr "システム設定"
 
 #: ../src/qml/MainWindow.qml:131
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: ../src/qml/MainWindow.qml:150
 msgid "Personal"
@@ -1416,7 +1410,7 @@ msgstr ""
 
 #: ../src/qml/MainWindow.qml:155
 msgid "System"
-msgstr ""
+msgstr "システム"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
@@ -1433,7 +1427,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:66
 msgid "Skip"
-msgstr ""
+msgstr "スキップ"
 
 #: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
@@ -1453,7 +1447,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
-msgstr ""
+msgstr "こんにちは"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
@@ -1461,15 +1455,15 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
-msgstr ""
+msgstr "言語の選択"
 
 #: ../wizard/qml/Pages//10-welcome.qml:82
 msgid "Start"
-msgstr ""
+msgstr "スタート"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
-msgstr ""
+msgstr "セットアップ完了"
 
 #: ../wizard/qml/Pages//80-finished.qml:39
 msgid ""
@@ -1499,7 +1493,7 @@ msgstr ""
 
 #: ../wizard/qml/Components//Page.qml:47
 msgid "Back"
-msgstr ""
+msgstr "戻る"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:4
@@ -1509,17 +1503,17 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:6
 msgid "background"
-msgstr ""
+msgstr "背景"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:8
 msgid "wallpaper"
-msgstr ""
+msgstr "壁紙"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:12
 msgid "bluetooth"
-msgstr ""
+msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
@@ -1548,14 +1542,14 @@ msgstr ""
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:158
 msgid "settings"
-msgstr ""
+msgstr "設定"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:18
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:114
 msgid "software"
-msgstr ""
+msgstr "ソフトウェア"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
@@ -1580,7 +1574,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:30
 msgid "lock"
-msgstr ""
+msgstr "ロック"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:32
@@ -1590,7 +1584,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:34
 msgid "Example"
-msgstr ""
+msgstr "例"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
@@ -1600,7 +1594,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
 msgid "test"
-msgstr ""
+msgstr "テスト"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:40
@@ -1747,22 +1741,22 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
 msgid "time"
-msgstr ""
+msgstr "時刻"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:134
 msgid "date"
-msgstr ""
+msgstr "日付"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:136
 msgid "timezone"
-msgstr ""
+msgstr "タイムゾーン"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:142
 msgid "security"
-msgstr ""
+msgstr "セキュリティ"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
@@ -1772,9 +1766,9 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
 msgid "reset"
-msgstr ""
+msgstr "リセット"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "brightness"
-msgstr ""
+msgstr "明るさ"
