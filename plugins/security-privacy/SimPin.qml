@@ -41,7 +41,7 @@ ItemPage {
         modemPath: manager.modems[0]
         onChangePinComplete: {
             console.warn("onChangePinComplete: " + errorString);
-            incorrect.text = errorString;
+            errorText = errorString;
             if (error !== OfonoSimManager.NoError) {
                 changePinDialog.enabled = true
                 currentInput.forceActiveFocus()
@@ -53,6 +53,8 @@ ItemPage {
             PopupUtils.close(changePinDialog)
         }
     }
+
+    property string errorText: ""
 
     Component {
         id: dialogComponent
@@ -86,7 +88,7 @@ ItemPage {
 
             Label {
                 id: incorrect
-                text: ""
+                text: errorText
                 visible: text !== ""
                 color: "darkred"
             }
@@ -156,7 +158,7 @@ ItemPage {
                             return
                         }
 
-                        console.warn("lockedPins: " + lockedPins);
+                        console.warn("lockedPins: " + sim.lockedPins);
                         sim.changePin(OfonoSimManager.SimPin, currentInput.visible ? currentInput.text : "", newInput.text);
                     }
                 }
