@@ -74,8 +74,8 @@ ItemPage {
                 id: lockingControl
                 text: i18n.tr("Lock phone")
                 // TRANSLATORS: %1 is the number of minutes
-                value: i18n.tr("%1 minute",
-                               "%1 minutes",
+                value: i18n.tr("After %1 minute",
+                               "After %1 minutes",
                                5).arg(5)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
