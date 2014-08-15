@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-13 09:40+0000\n"
+"PO-Revision-Date: 2014-08-14 20:29+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-14 07:34+0000\n"
+"X-Launchpad-Export-Date: 2014-08-15 06:25+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: Galician\n"
 
@@ -54,7 +54,7 @@ msgstr "Fondo"
 
 #: ../plugins/background//MainPage.qml:112
 msgid "Ubuntu Art"
-msgstr "Creacións de Ubuntu"
+msgstr "Imaxes de Ubuntu"
 
 #: ../plugins/background//MainPage.qml:128
 msgid "Custom"
@@ -89,7 +89,7 @@ msgstr "Confirme que o PIN mostrado en «%1» coincide con este"
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr "Confirmar PIN"
+msgstr "Confirme o PIN"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
@@ -649,7 +649,7 @@ msgid ""
 "between them"
 msgstr ""
 "Permite contestar ou facer unha chamada cando está atendendo outra, tamén "
-"permite alternar entre elas"
+"permite alternar entre elas."
 
 #: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
 msgid "Storage"
@@ -784,7 +784,8 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
-"Precisa estabelecer un código ou frase de paso para usar o Modo Desenvolvedor"
+"Precisa estabelecer unha clave ou frase secreta para usar o Modo "
+"Desenvolvedor"
 
 #: ../plugins/about//DevMode.qml:104
 #: ../plugins/security-privacy//LockSecurity.qml:32
@@ -1110,7 +1111,7 @@ msgstr "Estabelecer a zona horaria:"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr "Introduza a localización actual"
+msgstr "Introduza a súa localización actual"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
@@ -1130,11 +1131,11 @@ msgstr "Cambiar a esvarar o dedo"
 
 #: ../plugins/security-privacy//LockSecurity.qml:103
 msgid "Switch to passcode"
-msgstr "Cambiar para clave"
+msgstr "Cambiar a unha clave"
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to passphrase"
-msgstr "Cambiar para frase secreta"
+msgstr "Cambiar a unha frase secreta"
 
 #: ../plugins/security-privacy//LockSecurity.qml:114
 msgid "Existing passcode"
@@ -1154,11 +1155,11 @@ msgstr "Escolla unha frase secreta"
 
 #: ../plugins/security-privacy//LockSecurity.qml:216
 msgid "Confirm passcode"
-msgstr "Confirmar a clave"
+msgstr "Confirme a clave"
 
 #: ../plugins/security-privacy//LockSecurity.qml:218
 msgid "Confirm passphrase"
-msgstr "Confirmar a frase secreta"
+msgstr "Confirme a frase secreta"
 
 #: ../plugins/security-privacy//LockSecurity.qml:260
 msgid "Those passcodes don't match. Try again."
@@ -1182,7 +1183,7 @@ msgstr "Esvarar o dedo (non segura)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "4-digit passcode"
-msgstr "Código de 4 díxitos"
+msgstr "Clave de 4 díxitos"
 
 #: ../plugins/security-privacy//LockSecurity.qml:345
 #: ../plugins/security-privacy//PageComponent.qml:80
@@ -1220,13 +1221,13 @@ msgstr "Seguranza e privacidade"
 #: ../plugins/security-privacy//PageComponent.qml:150
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr "Local e internet"
+msgstr "Teléfono e internet"
 
 #: ../plugins/security-privacy//PageComponent.qml:52
 #: ../plugins/security-privacy//PageComponent.qml:151
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr "Só en local"
+msgstr "Existente no teléfono"
 
 #: ../plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
@@ -1302,7 +1303,7 @@ msgstr "A suspensión bloquea inmediatamente"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
-msgstr "Recibir resultados de:"
+msgstr "Obter resultados de:"
 
 #: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
@@ -1393,7 +1394,7 @@ msgstr "Restabelecer todos os axustes do sistema…"
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr "Borrar e restabelecer todo..."
+msgstr "Borrar todo e restabelecer..."
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -1425,7 +1426,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr "Borrar e restabelecer todo"
+msgstr "Borrar todo e restabelecer"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
