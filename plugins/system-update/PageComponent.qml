@@ -33,6 +33,7 @@ ItemPage {
     objectName: "systemUpdatesPage"
 
     title: i18n.tr("Updates")
+    flickable: null
 
     property bool installAll: false
     property bool includeSystemUpdate: false
