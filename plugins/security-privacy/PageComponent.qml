@@ -68,53 +68,38 @@ ItemPage {
 
             ListItem.Standard {
                 id: securityTitle
-                text: i18n.tr("Security:")
-                // visible: lockingControl.visible || simControl.visible
-            }
-            /* When more of the phone locking page is implemented, we can
-             * remove the next item below, which is a duplicate of an item in
-             * PhoneLocking.qml, and uncomment the visible line above. */
-            ListItem.SingleValue {
-                property string swipe: i18n.tr("None")
-                property string passcode: i18n.tr("Passcode")
-                property string passphrase: i18n.tr("Passphrase")
-
-                text: i18n.tr("Lock security")
-                value: {
-                    switch (securityPrivacy.securityType) {
-                        case UbuntuSecurityPrivacyPanel.Swipe:
-                            return swipe
-                        case UbuntuSecurityPrivacyPanel.Passcode:
-                            return passcode
-                        case UbuntuSecurityPrivacyPanel.Passphrase:
-                            return passphrase
-                    }
-                }
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
-                visible: !showAllUI
-            }
+                text: i18n.tr("Security")
+            }            
             ListItem.SingleValue {
                 id: lockingControl
-                text: i18n.tr("Phone locking")
+                text: i18n.tr("Lock phone")
                 // TRANSLATORS: %1 is the number of minutes
                 value: i18n.tr("%1 minute",
                                "%1 minutes",
                                5).arg(5)
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
-                visible: showAllUI
             }
             ListItem.SingleValue {
                 id: simControl
                 text: i18n.tr("SIM PIN")
                 value: "Off"
                 progression: true
-                visible: showAllUI
+                onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"))
             }
             ListItem.Standard {
-                text: i18n.tr("Privacy:")
-                visible: securityTitle.visible
+                text: i18n.tr("Encryption")
+                control: Switch {
+                    id: encryptionSwitch
+                    checked: false
+                }
+            }
+            ListItem.Caption {
+                text: i18n.tr(
+                        "Encryption protects against access to phone data when the phone is connected to a PC or other device.")
+            }
+            ListItem.Standard {
+                text: i18n.tr("Privacy")
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")

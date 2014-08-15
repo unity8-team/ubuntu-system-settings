@@ -24,6 +24,7 @@ set(QML_SOURCES
     LockSecurity.qml
     PageComponent.qml
     PhoneLocking.qml
+    SimPin.qml
 )
 
 set(PANEL_SOURCES

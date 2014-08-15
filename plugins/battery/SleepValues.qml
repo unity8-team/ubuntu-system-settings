@@ -93,6 +93,10 @@ ItemPage {
                     i18n.tr("After %1 minute",
                             "After %1 minutes",
                             5).arg(5),
+                    // TRANSLATORS: %1 is the number of minutes
+                    i18n.tr("After %1 minute",
+                            "After %1 minutes",
+                            10).arg(10),
                     i18n.tr("Never")]
                 expanded: true
                 onDelegateClicked: {

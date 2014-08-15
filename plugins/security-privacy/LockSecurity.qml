@@ -89,9 +89,9 @@ ItemPage {
                         changeSecurityDialog.oldMethod) { // Changing existing
                     switch (changeSecurityDialog.newMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Change passcode")
+                        return i18n.tr("Change passcode…")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
-                        return i18n.tr("Change passphrase")
+                        return i18n.tr("Change passphrase…")
                     default: // To stop the runtime complaining
                         return ""
                     }
@@ -390,6 +390,7 @@ ItemPage {
 
                 onClicked: openDialog()
             }
+            showDivider: false
         }
     }
 }
