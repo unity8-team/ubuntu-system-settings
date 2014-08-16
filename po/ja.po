@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-15 06:20+0000\n"
+"PO-Revision-Date: 2014-08-15 09:12+0000\n"
 "Last-Translator: Kentaro Kazuhama <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-15 06:25+0000\n"
+"X-Launchpad-Export-Date: 2014-08-16 06:50+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
@@ -175,19 +175,19 @@ msgstr "その他"
 
 #: ../plugins/bluetooth//PageComponent.qml:107
 msgid "Excellent"
-msgstr ""
+msgstr "最高"
 
 #: ../plugins/bluetooth//PageComponent.qml:108
 msgid "Good"
-msgstr ""
+msgstr "強"
 
 #: ../plugins/bluetooth//PageComponent.qml:109
 msgid "Fair"
-msgstr ""
+msgstr "中"
 
 #: ../plugins/bluetooth//PageComponent.qml:110
 msgid "Poor"
-msgstr ""
+msgstr "弱"
 
 #: ../plugins/bluetooth//PageComponent.qml:111
 #: ../plugins/bluetooth//PageComponent.qml:302
@@ -196,7 +196,7 @@ msgstr ""
 #: ../plugins/security-privacy//PageComponent.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:40
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:117
@@ -208,7 +208,7 @@ msgstr "Bluetooth"
 
 #: ../plugins/bluetooth//PageComponent.qml:171
 msgid "Discoverable"
-msgstr ""
+msgstr "他のデバイスから検知可能"
 
 #: ../plugins/bluetooth//PageComponent.qml:171
 msgid "Not discoverable"
@@ -216,50 +216,50 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:202
 msgid "Connected devices:"
-msgstr ""
+msgstr "接続済みのデバイス："
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect another device:"
-msgstr ""
+msgstr "他のデバイスに接続する："
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "次のデバイスに接続する："
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
-msgstr ""
+msgstr "見つかりませんでした"
 
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "見つかった時は自動的に接続する："
 
 #: ../plugins/bluetooth//PageComponent.qml:309
 #: ../plugins/wifi//NetworkDetails.qml:43
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
-msgstr ""
+msgstr "種類"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "状態"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
-msgstr ""
+msgstr "信号強度"
 
 #: ../plugins/bluetooth//PageComponent.qml:374
 msgid "Disconnect"
-msgstr ""
+msgstr "切断する"
 
 #: ../plugins/bluetooth//PageComponent.qml:374
 #: ../plugins/wifi//OtherNetwork.qml:121
 msgid "Connect"
-msgstr ""
+msgstr "接続する"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
@@ -269,17 +269,17 @@ msgstr ""
 #: ../plugins/notifications//PageComponent.qml:29
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:16
 msgid "Notifications"
-msgstr ""
+msgstr "通知"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
-msgstr ""
+msgstr "選択したアプリは、通知システム、サウンド、バイブレーション、通知センターを用いて通知を行えます。"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
-msgstr ""
+msgstr "キャリアを選択："
 
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 #: ../plugins/time-date//PageComponent.qml:69
@@ -295,11 +295,11 @@ msgstr "手動"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:130
 msgid "Refresh"
-msgstr ""
+msgstr "更新"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:151
 msgid "Searching"
-msgstr ""
+msgstr "検索中"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -311,16 +311,16 @@ msgstr ""
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
-msgstr ""
+msgstr "キー（8文字以上必要です）"
 
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
-msgstr ""
+msgstr "キーを表示する"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
 #: ../plugins/security-privacy//LockSecurity.qml:297
 msgid "Change"
-msgstr ""
+msgstr "変更"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -339,14 +339,13 @@ msgstr ""
 
 #: ../plugins/cellular//PageComponent.qml:147
 msgid "Data usage statistics"
-msgstr ""
+msgstr "データ利用統計"
 
 #: ../plugins/cellular//PageComponent.qml:153
 #: ../plugins/cellular//PageComponent.qml:161
 msgid "Carrier"
 msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "キャリア"
 
 #: ../plugins/cellular//PageComponent.qml:175
 #: ../plugins/cellular//PageChooseCarriers.qml:50
@@ -354,11 +353,11 @@ msgstr[1] ""
 #: ../plugins/battery//PageComponent.qml:117
 #: ../plugins/battery//PageComponent.qml:268 ../plugins/about//Storage.qml:204
 msgid "N/A"
-msgstr ""
+msgstr "なし"
 
 #: ../plugins/cellular//PageComponent.qml:180
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
@@ -382,21 +381,21 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 msgid "Carriers"
-msgstr ""
+msgstr "キャリア"
 
 #: ../plugins/sound//SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
-msgstr ""
+msgstr "サイレントモードになっています。"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:54
 msgid "Sound"
-msgstr ""
+msgstr "サウンド"
 
 #: ../plugins/sound//PageComponent.qml:75
 msgid "Silent Mode"
-msgstr ""
+msgstr "サイレントモード"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
@@ -404,30 +403,30 @@ msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
-msgstr ""
+msgstr "電話着信："
 
 #: ../plugins/sound//PageComponent.qml:115
 #: ../plugins/sound//PageComponent.qml:121
 msgid "Ringtone"
-msgstr ""
+msgstr "着信音"
 
 #: ../plugins/sound//PageComponent.qml:134
 msgid "Vibrate when ringing"
-msgstr ""
+msgstr "着信中にバイブする"
 
 #: ../plugins/sound//PageComponent.qml:143
 #: ../plugins/sound//PageComponent.qml:178
 msgid "Vibrate in Silent Mode"
-msgstr ""
+msgstr "サイレントモードでバイブする"
 
 #: ../plugins/sound//PageComponent.qml:147
 msgid "Messages:"
-msgstr ""
+msgstr "メッセージ受信："
 
 #: ../plugins/sound//PageComponent.qml:151
 #: ../plugins/sound//PageComponent.qml:157
 msgid "Message received"
-msgstr ""
+msgstr "メッセージ受信音"
 
 #: ../plugins/sound//PageComponent.qml:169
 msgid "Vibrate with message sound"
@@ -435,16 +434,16 @@ msgstr "メッセージ受信時にバイブする"
 
 #: ../plugins/sound//PageComponent.qml:182
 msgid "Other sounds:"
-msgstr ""
+msgstr "その他のサウンド："
 
 #: ../plugins/sound//PageComponent.qml:186
 #: ../plugins/language//PageComponent.qml:161
 msgid "Keyboard sound"
-msgstr ""
+msgstr "キーボード音"
 
 #: ../plugins/sound//PageComponent.qml:200
 msgid "Lock sound"
-msgstr ""
+msgstr "ロック時の音"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -454,7 +453,7 @@ msgstr "停止"
 #: ../plugins/battery//PageComponent.qml:34
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:60
 msgid "Battery"
-msgstr ""
+msgstr "バッテリー"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery//PageComponent.qml:46
@@ -486,11 +485,11 @@ msgstr[0] "%1日前"
 
 #: ../plugins/battery//PageComponent.qml:75
 msgid "Charging now"
-msgstr ""
+msgstr "充電中"
 
 #: ../plugins/battery//PageComponent.qml:80
 msgid "Last full charge"
-msgstr ""
+msgstr "最後の充電完了日時："
 
 #: ../plugins/battery//PageComponent.qml:85
 msgid "Fully charged"
@@ -504,31 +503,31 @@ msgstr "バッテリー残量"
 #: ../plugins/battery//PageComponent.qml:120
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../plugins/battery//PageComponent.qml:195
 #: ../plugins/battery//PageComponent.qml:197
 msgid "Yesterday"
-msgstr ""
+msgstr "昨日"
 
 #: ../plugins/battery//PageComponent.qml:203
 #: ../plugins/battery//PageComponent.qml:205
 msgid "Today"
-msgstr ""
+msgstr "今日"
 
 #: ../plugins/battery//PageComponent.qml:273
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "バッテリーの消費を減らす手段:"
 
 #: ../plugins/battery//PageComponent.qml:284
 #: ../plugins/security-privacy//PhoneLocking.qml:62
 msgid "Lock when idle"
-msgstr ""
+msgstr "無操作時にロックする"
 
 #: ../plugins/battery//PageComponent.qml:284
 #: ../plugins/security-privacy//PhoneLocking.qml:63
 msgid "Sleep when idle"
-msgstr ""
+msgstr "無操作時にスリープする"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:290
@@ -590,7 +589,7 @@ msgstr ""
 #: ../plugins/phone//CallForwarding.qml:75
 #: ../plugins/phone//PageComponent.qml:51
 msgid "Call forwarding"
-msgstr ""
+msgstr "着信転送"
 
 #: ../plugins/phone//CallForwarding.qml:90
 msgid ""
@@ -600,16 +599,16 @@ msgstr ""
 
 #: ../plugins/phone//CallForwarding.qml:100
 msgid "Forward to"
-msgstr ""
+msgstr "転送先"
 
 #: ../plugins/phone//PageComponent.qml:30
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
 #: ../plugins/phone//CallWaiting.qml:63
 msgid "Call waiting"
-msgstr ""
+msgstr "通話中着信"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
@@ -624,7 +623,7 @@ msgstr ""
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
-msgstr ""
+msgstr "発信"
 
 #: ../plugins/phone//CallWaiting.qml:78
 msgid ""
@@ -634,47 +633,47 @@ msgstr ""
 
 #: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
 msgid "Storage"
-msgstr ""
+msgstr "ストレージ"
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
-msgstr ""
+msgstr "Ubuntuで使用するファイル"
 
 #: ../plugins/about//Storage.qml:88
 msgid "Videos"
-msgstr ""
+msgstr "動画"
 
 #: ../plugins/about//Storage.qml:89
 msgid "Audio"
-msgstr ""
+msgstr "音楽"
 
 #: ../plugins/about//Storage.qml:90
 msgid "Pictures"
-msgstr ""
+msgstr "画像"
 
 #: ../plugins/about//Storage.qml:91
 msgid "Other files"
-msgstr ""
+msgstr "その他のファイル"
 
 #: ../plugins/about//Storage.qml:92
 msgid "Used by apps"
-msgstr ""
+msgstr "アプリで使用するファイル"
 
 #: ../plugins/about//Storage.qml:142
 msgid "Total storage"
-msgstr ""
+msgstr "全体の容量"
 
 #: ../plugins/about//Storage.qml:154
 msgid "Free space"
-msgstr ""
+msgstr "空き容量"
 
 #: ../plugins/about//Storage.qml:174
 msgid "By name"
-msgstr ""
+msgstr "名前順"
 
 #: ../plugins/about//Storage.qml:174
 msgid "By size"
-msgstr ""
+msgstr "サイズ順"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -684,7 +683,7 @@ msgstr ""
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "電話番号"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
@@ -692,27 +691,27 @@ msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
-msgstr ""
+msgstr "ソフトウェア:"
 
 #: ../plugins/about//PageComponent.qml:138
 msgid "OS"
-msgstr ""
+msgstr "OS"
 
 #: ../plugins/about//PageComponent.qml:147
 msgid "Last updated"
-msgstr ""
+msgstr "最終更新"
 
 #: ../plugins/about//PageComponent.qml:155
 msgid "Check for updates"
-msgstr ""
+msgstr "アップデートの確認"
 
 #: ../plugins/about//PageComponent.qml:164
 msgid "Legal:"
-msgstr ""
+msgstr "法定情報:"
 
 #: ../plugins/about//PageComponent.qml:169 ../plugins/about//Software.qml:11
 msgid "Software licenses"
-msgstr ""
+msgstr "ソフトウェアライセンス"
 
 #: ../plugins/about//PageComponent.qml:177
 msgid "Regulatory info"
@@ -720,15 +719,15 @@ msgstr ""
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "開発者モード"
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
-msgstr ""
+msgstr "OSビルド情報"
 
 #: ../plugins/about//Version.qml:53
 msgid "OS build number"
-msgstr ""
+msgstr "OSビルド番号"
 
 #: ../plugins/about//Version.qml:59
 msgid "Ubuntu Image part"
@@ -736,7 +735,7 @@ msgstr ""
 
 #: ../plugins/about//Version.qml:85
 msgid "Ubuntu build description"
-msgstr ""
+msgstr "Ubuntuビルド概要"
 
 #: ../plugins/about//Version.qml:100
 msgid "Device Image part"
@@ -744,7 +743,7 @@ msgstr ""
 
 #: ../plugins/about//Version.qml:126
 msgid "Device build description"
-msgstr ""
+msgstr "デバイスビルド概要"
 
 #: ../plugins/about//Version.qml:141
 msgid "Customization Image part"
@@ -752,7 +751,7 @@ msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
-msgstr ""
+msgstr "開発者モード"
 
 #: ../plugins/about//DevMode.qml:73
 msgid ""
@@ -785,7 +784,7 @@ msgstr "パスワード"
 
 #: ../plugins/wifi//NetworkDetails.qml:73
 msgid "Show password"
-msgstr ""
+msgstr "パスワードを表示"
 
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
@@ -818,7 +817,7 @@ msgstr "WEP"
 
 #: ../plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "パスワードを表示"
 
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
@@ -831,7 +830,7 @@ msgstr ""
 
 #: ../plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Wi-Fi接続時"
 
 #: ../plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
@@ -845,11 +844,11 @@ msgstr ""
 #: ../plugins/system-update//PageComponent.qml:35
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:110
 msgid "Updates"
-msgstr ""
+msgstr "更新"
 
 #: ../plugins/system-update//PageComponent.qml:51
 msgid "Update System"
-msgstr ""
+msgstr "システムをアップデート"
 
 #: ../plugins/system-update//PageComponent.qml:52
 msgid "The phone needs to restart to install the system update."
@@ -861,11 +860,11 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
-msgstr ""
+msgstr "後で"
 
 #: ../plugins/system-update//PageComponent.qml:70
 msgid "Install"
-msgstr ""
+msgstr "インストール"
 
 #: ../plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
@@ -885,7 +884,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:199
 msgid "Checking for updates…"
-msgstr ""
+msgstr "アップデートの確認中..."
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
@@ -899,7 +898,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
-msgstr ""
+msgstr "すべて停止"
 
 #: ../plugins/system-update//PageComponent.qml:287
 msgid "Retry"
@@ -907,7 +906,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:303
 msgid "Download"
-msgstr ""
+msgstr "ダウンロード"
 
 #: ../plugins/system-update//PageComponent.qml:303
 msgid "Update"
@@ -915,23 +914,23 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:304
 msgid "Resume"
-msgstr ""
+msgstr "再開"
 
 #: ../plugins/system-update//PageComponent.qml:305
 msgid "Pause"
-msgstr ""
+msgstr "一時停止"
 
 #: ../plugins/system-update//PageComponent.qml:364
 msgid "Installing"
-msgstr ""
+msgstr "インストール中"
 
 #: ../plugins/system-update//PageComponent.qml:397
 msgid "Installed"
-msgstr ""
+msgstr "インストール済み"
 
 #: ../plugins/system-update//PageComponent.qml:421
 msgid "Version: "
-msgstr ""
+msgstr "バージョン: "
 
 #: ../plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
@@ -939,7 +938,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:453
 msgid "Always"
-msgstr ""
+msgstr "常に"
 
 #: ../plugins/system-update//PageComponent.qml:505
 msgid "Credentials not found"
@@ -951,26 +950,26 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:549
 msgid " bytes"
-msgstr ""
+msgstr " バイト"
 
 #: ../plugins/system-update//PageComponent.qml:552
 msgid " KiB"
-msgstr ""
+msgstr " KiB"
 
 #: ../plugins/system-update//PageComponent.qml:555
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #: ../plugins/system-update//PageComponent.qml:558
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
 #: ../plugins/language//PageComponent.qml:101
 #: ../plugins/language//PageComponent.qml:111
 msgid "Spell checking"
-msgstr ""
+msgstr "スペルチェック"
 
 #: ../plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -984,7 +983,7 @@ msgstr ""
 #: ../plugins/language//PageComponent.qml:32
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:120
 msgid "Language & Text"
-msgstr ""
+msgstr "言語とテキスト"
 
 #: ../plugins/language//PageComponent.qml:72
 msgid "Display language…"
@@ -993,7 +992,7 @@ msgstr ""
 #: ../plugins/language//PageComponent.qml:86
 #: ../plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr ""
+msgstr "キーボードレイアウト"
 
 #: ../plugins/language//PageComponent.qml:121
 msgid "Auto completion"
@@ -1013,7 +1012,7 @@ msgstr ""
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr ""
+msgstr "現在のレイアウト:"
 
 #: ../plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
@@ -1021,11 +1020,11 @@ msgstr ""
 
 #: ../plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr ""
+msgstr "表示する言語"
 
 #: ../plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
-msgstr ""
+msgstr "確認"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
@@ -1039,11 +1038,11 @@ msgstr "タイムゾーン:"
 
 #: ../plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
-msgstr ""
+msgstr "日付と時間を設定:"
 
 #: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "日付と時間の設定"
 
 #: ../plugins/time-date//TimePicker.qml:68
 msgid "Time"
@@ -1063,7 +1062,7 @@ msgstr "秒"
 
 #: ../plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "日付"
 
 #: ../plugins/time-date//TimePicker.qml:130
 msgid "Day"
@@ -1083,7 +1082,7 @@ msgstr "タイムゾーン"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "タイムゾーンを設定:"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
@@ -1091,7 +1090,7 @@ msgstr ""
 
 #: ../plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr ""
+msgstr "場所が一致しません"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
@@ -1099,7 +1098,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:94
 msgid "Change passphrase"
-msgstr ""
+msgstr "パスフレーズを変更する"
 
 #: ../plugins/security-privacy//LockSecurity.qml:101
 msgid "Switch to swipe"
@@ -1135,7 +1134,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:218
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "パスフレーズの確認"
 
 #: ../plugins/security-privacy//LockSecurity.qml:260
 msgid "Those passcodes don't match. Try again."
@@ -1147,7 +1146,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:294
 msgid "Unset"
-msgstr ""
+msgstr "解除"
 
 #: ../plugins/security-privacy//LockSecurity.qml:339
 msgid "Unlock the phone using:"
@@ -1177,33 +1176,33 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Passphrase…"
-msgstr ""
+msgstr "パスフレーズ…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:379
 msgid "Change passcode…"
-msgstr ""
+msgstr "パスコードの変更…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:380
 msgid "Change passphrase…"
-msgstr ""
+msgstr "パスフレーズの変更…"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:33
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:140
 msgid "Security & Privacy"
-msgstr ""
+msgstr "セキュリティとプライバシー"
 
 #: ../plugins/security-privacy//PageComponent.qml:50
 #: ../plugins/security-privacy//PageComponent.qml:150
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr ""
+msgstr "電話とインターネット"
 
 #: ../plugins/security-privacy//PageComponent.qml:52
 #: ../plugins/security-privacy//PageComponent.qml:151
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr ""
+msgstr "電話のみ"
 
 #: ../plugins/security-privacy//PageComponent.qml:71
 msgid "Security:"
@@ -1212,7 +1211,7 @@ msgstr "セキュリティ:"
 #: ../plugins/security-privacy//PageComponent.qml:79
 #: ../plugins/security-privacy//PhoneLocking.qml:41
 msgid "Passcode"
-msgstr ""
+msgstr "パスコード"
 
 #: ../plugins/security-privacy//PageComponent.qml:99
 #: ../plugins/security-privacy//PhoneLocking.qml:29
@@ -1229,7 +1228,7 @@ msgstr[0] "%1 分"
 
 #: ../plugins/security-privacy//PageComponent.qml:110
 msgid "SIM PIN"
-msgstr ""
+msgstr "SIM PIN"
 
 #: ../plugins/security-privacy//PageComponent.qml:116
 msgid "Privacy:"
@@ -1246,7 +1245,7 @@ msgstr ""
 #: ../plugins/security-privacy//PageComponent.qml:148
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
-msgstr ""
+msgstr "Dash検索"
 
 #: ../plugins/security-privacy//PageComponent.qml:166
 msgid "Location access"
