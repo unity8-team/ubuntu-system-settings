@@ -21,12 +21,14 @@ import QtQuick 2.0
 import MeeGo.QOfono 0.2
 
 Item {
+    id: root
     property alias modem: modem
     property alias netReg: netReg
     property alias radioSettings: radioSettings
     property alias simMng: simMng
     property alias connMan: connMan
 
+    property alias present: simMng.present
     property string path
     property string name
     property string title: {
@@ -52,10 +54,27 @@ Item {
     OfonoSimManager {
         id: simMng
         modemPath: path
+        Component.onCompleted: {
+            console.warn('sim manager complete, path:', path)
+            console.warn('sim manager complete, present:', simMng.present, simMng)
+            console.warn('sim manager complete, SubscriberNumbers', simMng.subscriberNumbers, subscriberNumbers)
+        }
+        onPresenceChanged: {
+            console.warn('sim manager onPresenceChanged, present changed:', present, simMng)
+        }
+        onSubscriberNumbersChanged: {
+            console.warn('sim subscriberNumbers changed')
+        }
     }
 
     OfonoConnMan {
         id: connMan
         modemPath: path
+    }
+
+    Binding {
+        target: root
+        property: "present"
+        value: simMng.present
     }
 }

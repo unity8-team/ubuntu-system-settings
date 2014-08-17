@@ -188,7 +188,8 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             properties = {
                 'SubscriberNumbers': ['123456', '234567']
             }
-        modem.AddProperties(SIM_IFACE, properties)
+        modem.AddProperty(SIM_IFACE, 'Present', True)
+        #modem.AddProperties(SIM_IFACE, properties)
         modem.AddMethods(
             SIM_IFACE,
             [('GetProperties', '', 'a{sv}',
