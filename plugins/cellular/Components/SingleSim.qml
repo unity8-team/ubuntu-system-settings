@@ -25,7 +25,22 @@ Column {
 
     property var sim
 
-    Label {
-        text: "singlesim"
+    CellularSingleSim {
+        anchors { left: parent.left; right: parent.right }
     }
+
+    ListItem.SingleValue {
+        text: i18n.tr("Carrier");
+        id: chooseCarrier
+        objectName: "chooseCarrier"
+        progression: enabled
+        value: sim.netReg.name || i18n.tr("N/A")
+        onClicked: {
+            pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+                netReg: sim.netReg,
+                title: i18n.tr("Carrier")
+            })
+        }
+    }
+
 }
