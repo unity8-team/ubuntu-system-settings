@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-15 09:12+0000\n"
+"PO-Revision-Date: 2014-08-16 13:50+0000\n"
 "Last-Translator: Kentaro Kazuhama <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-16 06:50+0000\n"
+"X-Launchpad-Export-Date: 2014-08-17 06:37+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
@@ -614,7 +614,7 @@ msgstr "通話中着信"
 #: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "サービス: %1"
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
@@ -679,7 +679,7 @@ msgstr "サイズ順"
 #: ../plugins/about//PageComponent.qml:34
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:88
 msgid "About this phone"
-msgstr ""
+msgstr "端末情報"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
@@ -715,7 +715,7 @@ msgstr "ソフトウェアライセンス"
 
 #: ../plugins/about//PageComponent.qml:177
 msgid "Regulatory info"
-msgstr ""
+msgstr "規制情報"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
@@ -757,7 +757,7 @@ msgstr "開発者モード"
 msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
-msgstr ""
+msgstr "開発者モードは、この電話に他のデバイスから接続すれば、誰もが全てにアクセス、変更、削除ができます。"
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a passcode or passphrase set to use Developer Mode."
@@ -776,7 +776,7 @@ msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:51
 msgid "Last connected"
-msgstr ""
+msgstr "最終接続日"
 
 #: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
 msgid "Password"
@@ -822,11 +822,11 @@ msgstr "パスワードを表示"
 #: ../plugins/system-update//Configuration.qml:30
 #: ../plugins/system-update//PageComponent.qml:446
 msgid "Auto download"
-msgstr ""
+msgstr "自動ダウンロード"
 
 #: ../plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "将来のアップデートを自動的にダウンロードする："
 
 #: ../plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
@@ -856,7 +856,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:55
 msgid "Install & Restart"
-msgstr ""
+msgstr "インストールして再起動"
 
 #: ../plugins/system-update//PageComponent.qml:64
 msgid "Not Now"
@@ -868,11 +868,11 @@ msgstr "インストール"
 
 #: ../plugins/system-update//PageComponent.qml:88
 msgid "Software is up to date"
-msgstr ""
+msgstr "ソフトウェアは最新です"
 
 #: ../plugins/system-update//PageComponent.qml:142
 msgid "Please log into your Ubuntu One account."
-msgstr ""
+msgstr "Ubuntu Oneアカウントにログインしてください。"
 
 #: ../plugins/system-update//PageComponent.qml:157
 msgid "System update has failed."
@@ -977,7 +977,7 @@ msgstr ""
 
 #: ../plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
-msgstr ""
+msgstr "すべての言語が利用できます："
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:32
@@ -996,7 +996,7 @@ msgstr "キーボードレイアウト"
 
 #: ../plugins/language//PageComponent.qml:121
 msgid "Auto completion"
-msgstr ""
+msgstr "自動補完"
 
 #: ../plugins/language//PageComponent.qml:131
 msgid "Word suggestions"
@@ -1016,7 +1016,7 @@ msgstr "現在のレイアウト:"
 
 #: ../plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr ""
+msgstr "すべてのレイアウトが利用できます："
 
 #: ../plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -1086,7 +1086,7 @@ msgstr "タイムゾーンを設定:"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr ""
+msgstr "現在の場所を入力してください。"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
@@ -1094,7 +1094,7 @@ msgstr "場所が一致しません"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
-msgstr ""
+msgstr "パスコードを変更する"
 
 #: ../plugins/security-privacy//LockSecurity.qml:94
 msgid "Change passphrase"
@@ -1158,7 +1158,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "4-digit passcode"
-msgstr ""
+msgstr "4桁のパスコード"
 
 #: ../plugins/security-privacy//LockSecurity.qml:345
 #: ../plugins/security-privacy//PageComponent.qml:80
@@ -1168,11 +1168,11 @@ msgstr "パスフレーズ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:346
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "スワイプ(セキュリティーなし)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:347
 msgid "4-digit passcode…"
-msgstr ""
+msgstr "4桁のパスコード…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Passphrase…"
@@ -1216,7 +1216,7 @@ msgstr "パスコード"
 #: ../plugins/security-privacy//PageComponent.qml:99
 #: ../plugins/security-privacy//PhoneLocking.qml:29
 msgid "Phone locking"
-msgstr ""
+msgstr "画面のロック"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PageComponent.qml:101
@@ -1236,7 +1236,7 @@ msgstr "プライバシー:"
 
 #: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Stats on welcome screen"
-msgstr ""
+msgstr "ようこそ画面の状態"
 
 #: ../plugins/security-privacy//PageComponent.qml:133
 msgid "Messages on welcome screen"
@@ -1253,7 +1253,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:174
 msgid "Other app access"
-msgstr ""
+msgstr "他アプリのアクセス"
 
 #: ../plugins/security-privacy//PageComponent.qml:179
 msgid "Diagnostics"
@@ -1273,7 +1273,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
-msgstr ""
+msgstr "スリープしたら即時にロックする"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
@@ -1338,7 +1338,7 @@ msgstr ""
 #: ../plugins/reset//PageComponent.qml:32
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:148
 msgid "Reset phone"
-msgstr ""
+msgstr "電話のリセット"
 
 #: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
@@ -1347,11 +1347,11 @@ msgstr ""
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "システム設定を全てリセット…"
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "削除して全てリセット…"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -1359,7 +1359,7 @@ msgstr ""
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "変更を反映するには電話の再起動が必要です。"
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1369,17 +1369,17 @@ msgstr ""
 
 #: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "システム設定を全てリセット"
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
-msgstr ""
+msgstr "全てのドキュメント、保存したゲーム、設定、その他のアイテムはこの電話から永久に削除されます。"
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "全てを削除してリセット"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
@@ -1389,7 +1389,7 @@ msgstr "明るさ"
 
 #: ../plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
-msgstr ""
+msgstr "自動調整"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings"
@@ -1413,7 +1413,7 @@ msgstr "システム"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Wi-Fiに接続"
 
 #: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
@@ -1430,7 +1430,7 @@ msgstr "スキップ"
 
 #: ../wizard/qml/Pages//30-location.qml:22
 msgid "Phone settings"
-msgstr ""
+msgstr "電話設定"
 
 #: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
@@ -1450,7 +1450,7 @@ msgstr "こんにちは"
 
 #: ../wizard/qml/Pages//10-welcome.qml:60
 msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
+msgstr "ようこそ、Ubuntu phoneへ。さあ、はじめましょう。"
 
 #: ../wizard/qml/Pages//10-welcome.qml:65
 msgid "Select your language"
@@ -1472,7 +1472,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:41
 msgid "Now you can start using your Ubuntu phone."
-msgstr ""
+msgstr "これでUbuntu phoneを利用することができます。"
 
 #: ../wizard/qml/Pages//80-finished.qml:48
 msgid "Finish"
@@ -1480,7 +1480,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "No SIM card"
-msgstr ""
+msgstr "SIMカードなし"
 
 #: ../wizard/qml/Pages//no-sim.qml:57
 msgid "To use the telephone and SMS features a SIM must be installed."
@@ -1553,7 +1553,7 @@ msgstr "ソフトウェア"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
 msgid "notifications"
-msgstr ""
+msgstr "通知"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
@@ -1588,7 +1588,7 @@ msgstr "例"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
 msgid "example"
-msgstr ""
+msgstr "例"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
@@ -1598,7 +1598,7 @@ msgstr "テスト"
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:40
 msgid "sample"
-msgstr ""
+msgstr "サンプル"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:44
@@ -1735,7 +1735,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:126
 msgid "i18n"
-msgstr ""
+msgstr "i18n"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
@@ -1760,7 +1760,7 @@ msgstr "セキュリティ"
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
 msgid "privacy"
-msgstr ""
+msgstr "プライバシー"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
