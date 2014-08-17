@@ -33,12 +33,12 @@ ItemPage {
     objectName: "cellularPage"
 
     property var modemsSorted: manager.modems.slice(0).sort()
-    property int sims: 0
+    property int simsLoaded: 0
 
     states: [
         State {
             name: "noSim"
-            when: !sims || (Sims.getPresentCount() === 0)
+            when: (simsLoaded === 0) || (Sims.getPresentCount() === 0)
             StateChangeScript {
                 script: loader.source = "Components/NoSim.qml"
             }
@@ -47,10 +47,10 @@ ItemPage {
             name: "singleSim"
             StateChangeScript {
                 script: loader.setSource("Components/SingleSim.qml", {
-                    sim: Sims.get(1)
+                    sim: Sims.get(0)
                 })
             }
-            when: sims && (Sims.getPresentCount() === 1)
+            when: simsLoaded && (Sims.getPresentCount() === 1)
         },
         State {
             name: "multiSim"
@@ -60,7 +60,7 @@ ItemPage {
                     modems: modemsSorted
                 })
             }
-            when: sims && (Sims.getPresentCount() > 1)
+            when: simsLoaded && (Sims.getPresentCount() > 1)
         }
     ]
 

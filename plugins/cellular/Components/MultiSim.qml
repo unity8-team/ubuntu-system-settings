@@ -30,7 +30,7 @@ Column {
     // make settings available to all children of root
     property var settings: phoneSettings
 
-    CellularDualSim {
+    CellularMultiSim {
         anchors { left: parent.left; right: parent.right }
     }
 

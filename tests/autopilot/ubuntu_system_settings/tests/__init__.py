@@ -199,9 +199,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  'self.EmitSignal("IFACE",\
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', SIM_IFACE)), ])
-        print(modem.GetAll(SIM_IFACE))
-        modem.GetProperties()
-        print(modem.Get(SIM_IFACE, 'Present'))
 
     def add_sim1(self):
         # create modem_0 proxy

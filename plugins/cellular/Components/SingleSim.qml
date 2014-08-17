@@ -29,6 +29,8 @@ Column {
         anchors { left: parent.left; right: parent.right }
     }
 
+    ListItem.Divider {}
+
     ListItem.SingleValue {
         text: i18n.tr("Carrier");
         id: chooseCarrier
@@ -36,7 +38,7 @@ Column {
         progression: enabled
         value: sim.netReg.name || i18n.tr("N/A")
         onClicked: {
-            pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
+            pageStack.push(Qt.resolvedUrl("../PageChooseCarrier.qml"), {
                 netReg: sim.netReg,
                 title: i18n.tr("Carrier")
             })

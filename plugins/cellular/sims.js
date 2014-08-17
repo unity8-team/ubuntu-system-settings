@@ -2,8 +2,8 @@ var sims = [];
 
 function add (sim) {
     sims.push(sim);
-    console.warn('added sim', sim);
-    root.sims++;
+    // console.warn('added sim', sim);
+    root.simsLoaded++;
 }
 
 function getAll () {
@@ -21,16 +21,16 @@ function getCount () {
 function getPresent () {
     var present = [];
     getAll().forEach(function (sim) {
-        console.warn('foreach in present')
+        // console.warn('foreach in present')
         if (sim.present) {
-            console.warn('sim present');
+            // console.warn('sim present');
             present.push(sim);
         } else {
-            console.warn('sim not present');
+            // console.warn('sim not present');
             return;
         }
     });
-    console.warn('getPresent', present, present.length);
+    // console.warn('getPresent', present, present.length);
     return present;
 }
 
