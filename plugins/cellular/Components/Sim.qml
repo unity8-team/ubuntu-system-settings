@@ -54,17 +54,6 @@ Item {
     OfonoSimManager {
         id: simMng
         modemPath: path
-        Component.onCompleted: {
-            console.warn('sim manager complete, path:', path)
-            console.warn('sim manager complete, present:', simMng.present, simMng)
-            console.warn('sim manager complete, SubscriberNumbers', simMng.subscriberNumbers, subscriberNumbers)
-        }
-        onPresenceChanged: {
-            console.warn('sim manager onPresenceChanged, present changed:', present, simMng)
-        }
-        onSubscriberNumbersChanged: {
-            console.warn('sim subscriberNumbers changed')
-        }
     }
 
     OfonoConnMan {

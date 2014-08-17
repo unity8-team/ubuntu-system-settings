@@ -15,7 +15,7 @@ from testtools.matchers import Equals, NotEquals, raises
 from unittest import skip
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE, SIM_IFACE)
+    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
