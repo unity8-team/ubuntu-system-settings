@@ -1,4 +1,5 @@
 include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}
     ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
 )
 
@@ -41,6 +42,7 @@ add_subdirectory(Utils)
 install(TARGETS system-settings-wizard RUNTIME DESTINATION bin)
 install(FILES ubuntu-system-settings-wizard.conf
               ubuntu-system-settings-wizard-cleanup.conf
+              ubuntu-system-settings-wizard-set-lang.conf
         DESTINATION share/upstart/sessions)
 
 set(POLKIT_LIB_DIR "${CMAKE_INSTALL_LOCALSTATEDIR}/lib/polkit-1")
