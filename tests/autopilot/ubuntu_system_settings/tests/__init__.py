@@ -52,6 +52,11 @@ class UbuntuSystemSettingsTestCase(
             self.system_settings.main_view.visible,
             Eventually(Equals(True)))
 
+    def set_orientation(self, gsettings, value):
+        gsettings.set_value('orientation-lock', value)
+        # wait for gsettings
+        sleep(1)
+
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
                                          dbusmock.DBusTestCase):
@@ -190,10 +195,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             properties = {
                 'SubscriberNumbers': ['123456', '234567']
             }
-        modem_interfaces = modem.GetProperties()['Interfaces']
-        modem_interfaces.append(SIM_IFACE)
         modem.AddProperties(SIM_IFACE, properties)
-        modem.SetProperty('Interfaces', modem_interfaces)
         modem.AddMethods(
             SIM_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -293,6 +295,26 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             self.add_sim2()
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
+
+    def set_default_for_calls(self, gsettings, default):
+        gsettings.set_value('default-sim-for-calls', default)
+        # wait for gsettings
+        sleep(1)
+
+    def set_default_for_messages(self, gsettings, default):
+        gsettings.set_value('default-sim-for-messages', default)
+        # wait for gsettings
+        sleep(1)
+
+    def get_default_sim_for_calls_selector(self, text):
+        return self.system_settings.main_view.cellular_page.select_single(
+            objectName="defaultForCalls" + text
+        )
+
+    def get_default_sim_for_messages_selector(self, text):
+        return self.system_settings.main_view.cellular_page.select_single(
+            objectName="defaultForMessages" + text
+        )
 
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):

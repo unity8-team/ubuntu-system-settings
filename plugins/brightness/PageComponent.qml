@@ -62,7 +62,7 @@ ItemPage {
         }
         ListItem.Caption {
             text: i18n.tr(
-                    "Brightens and dims the display to suit the surroundings")
+                    "Brightens and dims the display to suit the surroundings.")
             visible: adjust.visible
         }
     }

@@ -63,31 +63,6 @@ public:
                READ spellCheckingModel
                CONSTANT)
 
-    Q_PROPERTY(bool spellChecking
-               READ spellChecking
-               WRITE setSpellChecking
-               NOTIFY spellCheckingChanged)
-
-    Q_PROPERTY(bool autoCapitalization
-               READ autoCapitalization
-               WRITE setAutoCapitalization
-               NOTIFY autoCapitalizationChanged)
-
-    Q_PROPERTY(bool autoCompletion
-               READ autoCompletion
-               WRITE setAutoCompletion
-               NOTIFY autoCompletionChanged)
-
-    Q_PROPERTY(bool predictiveText
-               READ predictiveText
-               WRITE setPredictiveText
-               NOTIFY predictiveTextChanged)
-
-    Q_PROPERTY(bool keyPressFeedback
-               READ keyPressFeedback
-               WRITE setKeyPressFeedback
-               NOTIFY keyPressFeedbackChanged)
-
     explicit LanguagePlugin(QObject *parent = NULL);
 
     virtual ~LanguagePlugin();
@@ -104,26 +79,6 @@ public:
 
     SubsetModel *spellCheckingModel();
     Q_SLOT void spellCheckingModelChanged();
-
-    bool spellChecking() const;
-    void setSpellChecking(bool value);
-    Q_SIGNAL void spellCheckingChanged() const;
-
-    bool autoCapitalization() const;
-    void setAutoCapitalization(bool value);
-    Q_SIGNAL void autoCapitalizationChanged() const;
-
-    bool autoCompletion() const;
-    void setAutoCompletion(bool value);
-    Q_SIGNAL void autoCompletionChanged() const;
-
-    bool predictiveText() const;
-    void setPredictiveText(bool value);
-    Q_SIGNAL void predictiveTextChanged() const;
-
-    bool keyPressFeedback() const;
-    void setKeyPressFeedback(bool value);
-    Q_SIGNAL void keyPressFeedbackChanged() const;
 
 private:
 

@@ -108,8 +108,13 @@ Column {
         objectName: "technologyPreferenceSelector"
         expanded: true
         model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
-        enabled: use.selectedIndex !== 0
-        onDelegateClicked: getUsedSim().radioSettings.technologyPreference = prefMap[index];
+        visible: use.selectedIndex !== 0
+        onDelegateClicked: {
+            var sim = getUsedSim();
+            if (sim) {
+                sim.radioSettings.technologyPreference = prefMap[index];
+            }
+        }
     }
 
     Connections {

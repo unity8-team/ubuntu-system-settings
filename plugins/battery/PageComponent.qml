@@ -64,6 +64,16 @@ ItemPage {
         id: securityPrivacy
     }
 
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+        property variant brightness: action("brightness").state
+        property variant batteryLevel: action("battery-level").state
+        Component.onCompleted: start()
+    }
+
     BatteryInfo {
         id: batteryInfo
 
@@ -99,8 +109,7 @@ ItemPage {
         id: scrollWidget
         anchors.fill: parent
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        interactive: !brightness.pressed
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds        
 
         Column {
             anchors.left: parent.left
@@ -110,10 +119,9 @@ ItemPage {
                 id: chargingLevel
                 text: i18n.tr("Charge level")
                 value: {
-                    var chargeLevel =
-                            brightness.level
+                    var chargeLevel = indicatorPower.batteryLevel
 
-                    if (chargeLevel === null)
+                    if (chargeLevel === undefined)
                         return i18n.tr("N/A")
 
                     /* TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery */
@@ -129,7 +137,10 @@ ItemPage {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: units.gu(23)
 
-                antialiasing: true
+                /* Setting that property makes text not correct aliased for
+                   some reasons, which happens with the value being false or
+                   true, toolkit bug? see https://launchpad.net/bugs/1354363
+                antialiasing: true */
 
                 function drawAxes(ctx, axisWidth, axisHeight, bottomMargin, rightMargin) {
 
@@ -213,7 +224,9 @@ ItemPage {
                 onPaint:{
                     var ctx = canvas.getContext('2d');
                     ctx.save();
-                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                    /* Use reset rather than clearRect due to QTBUG-36761 */
+                    ctx.reset(0, 0, canvas.width, canvas.height)
 
                     var axisWidth = units.gu(1)
                     var axisHeight = units.gu(1)
@@ -273,8 +286,11 @@ ItemPage {
                 text: i18n.tr("Ways to reduce battery use:")
             }
 
-            BrightnessSlider {
-                id: brightness
+            ListItem.Standard {
+                text: i18n.tr("Display brightness")
+                progression: true
+                onClicked: pageStack.push(
+                               pluginManager.getByName("brightness").pageComponent)
             }
 
             ListItem.SingleValue {
@@ -384,8 +400,7 @@ ItemPage {
                     signal clicked
                     onClicked: item.clicked()
                 }
-                visible: showAllUI && // Hidden until the indicator works
-                         locationActionGroup.enabled.state !== undefined
+                visible: locationActionGroup.enabled.state !== undefined
             }
 
             ListItem.Caption {
