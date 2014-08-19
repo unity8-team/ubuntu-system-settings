@@ -32,6 +32,28 @@ Column {
     ListItem.Divider {}
 
     ListItem.SingleValue {
+        text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
+        visible: showAllUI && !hotspotItem.visible
+    }
+
+    ListItem.SingleValue {
+        id: hotspotItem
+        text: i18n.tr("Wi-Fi hotspot")
+        progression: true
+        onClicked: {
+            pageStack.push(Qt.resolvedUrl("Hotspot.qml"))
+        }
+        visible: showAllUI && (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
+    }
+
+    ListItem.Standard {
+        text: i18n.tr("Data usage statistics")
+        progression: true
+        visible: showAllUI
+    }
+
+
+    ListItem.SingleValue {
         text: i18n.tr("Carrier");
         id: chooseCarrier
         objectName: "chooseCarrier"
@@ -44,5 +66,12 @@ Column {
             })
         }
     }
+
+    ListItem.Standard {
+        text: i18n.tr("APN")
+        progression: true
+        visible: showAllUI
+    }
+
 
 }
