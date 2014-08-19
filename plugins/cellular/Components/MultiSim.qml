@@ -54,12 +54,15 @@ Column {
     }
 
     ListItem.Standard {
+        id: dataUsage
         text: i18n.tr("Data usage statistics")
         progression: true
         visible: showAllUI
     }
 
-    ListItem.Divider {}
+    ListItem.Divider {
+        visible: hotspotItem.visible || dataUsage.visible
+    }
 
     ListItem.SingleValue {
         text: i18n.tr("Carriers")
