@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-09 17:16+0000\n"
+"PO-Revision-Date: 2014-08-15 02:49+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-13 06:52+0000\n"
+"X-Launchpad-Export-Date: 2014-08-16 06:50+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../plugins/background//Preview.qml:67
@@ -233,7 +233,7 @@ msgstr "ምንም አልተገኘ"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "ራሱ በራሱ መገናኛ በሚገኝበት ጊዜ:"
 
 #: ../plugins/bluetooth//PageComponent.qml:309
 #: ../plugins/wifi//NetworkDetails.qml:43
@@ -263,7 +263,7 @@ msgstr "መገናኛ"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "ይህን አካል ተወው"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29

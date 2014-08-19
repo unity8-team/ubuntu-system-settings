@@ -165,6 +165,18 @@ class MainWindow(ubuntuuitoolkit.MainView):
         """ Return 'Sound' page """
         return self.select_single(objectName='soundPage')
 
+    @property
+    def _orientation_lock_switch(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='orientationLockSwitch')
+
+    def enable_orientation_lock(self):
+        self._orientation_lock_switch.check()
+
+    def disable_orientation_lock(self):
+        self._orientation_lock_switch.uncheck()
+
 
 class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
