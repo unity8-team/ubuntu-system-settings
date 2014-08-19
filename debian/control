@@ -45,6 +45,7 @@ Homepage: https://launchpad.net/ubuntu-system-settings
 # code again.
 Vcs-Bzr: https://code.launchpad.net/~system-settings-touch/ubuntu-system-settings/trunk
 X-Python3-Version: >= 3.2
+X-Ubuntu-Use-Langpack: yes
 
 Package: ubuntu-system-settings
 Architecture: any
