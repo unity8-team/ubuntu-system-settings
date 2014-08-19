@@ -29,8 +29,6 @@ ItemPage {
     id: root
     title: i18n.tr("Phone locking")
 
-    property variant idleValues
-    property var timeOut
     property bool usePowerd
     property variant powerSettings
 
@@ -73,11 +71,26 @@ ItemPage {
                                             UbuntuSecurityPrivacyPanel.Swipe
             text: lockOnSuspend ? i18n.tr("Lock when idle")
                                 : i18n.tr("Sleep when idle")
-            // TRANSLATORS: %1 is the number of minutes
-            value: timeOut === 0 ? i18n.tr("Never") :
-                   i18n.tr("%1 minute",
-                           "%1 minutes",
-                           idleValues.indexOf(timeOut)).arg(timeOut/60)
+            value: {
+                if (usePowerd) {
+                    var timeout = Math.round(powerSettings.activityTimeout/60)
+                    return (powerSettings.activityTimeout != 0) ?
+                                // TRANSLATORS: %1 is the number of minutes
+                                i18n.tr("%1 minute",
+                                        "%1 minutes",
+                                        timeout).arg(timeout) :
+                                i18n.tr("Never")
+                }
+                else {
+                    var timeout = Math.round(powerSettings.idleDelay/60)
+                    return (powerSettings.idleDelay != 0) ?
+                                // TRANSLATORS: %1 is the number of minutes
+                                i18n.tr("%1 minute",
+                                        "%1 minutes",
+                                        timeout).arg(timeout) :
+                                i18n.tr("Never")
+                }
+            }
             progression: true
             onClicked:
                 pageStack.push(

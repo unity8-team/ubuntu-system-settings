@@ -322,7 +322,6 @@ ItemPage {
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SleepValues.qml"),
                                { title: text, lockOnSuspend: lockOnSuspend })
-                visible: showAllUI // TODO: re-enable once bug #1230345 is resolved
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")

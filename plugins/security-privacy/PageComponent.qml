@@ -36,8 +36,6 @@ ItemPage {
 
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
-    property variant idleValues: [60,120,180,240,300,600]
-    property var timeOut
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
@@ -68,12 +66,6 @@ ItemPage {
         schema.id: usePowerd ? "com.ubuntu.touch.system" : "org.gnome.desktop.session"
     }
 
-    Binding {
-        target: root
-        property: "timeOut"
-        value: usePowerd ? powerSettings.activityTimeout : powerSettings.idleDelay
-    }
-
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -94,13 +86,28 @@ ItemPage {
             ListItem.SingleValue {
                 id: lockingControl
                 text: i18n.tr("Lock phone")
-                // TRANSLATORS: %1 is the number of minutes
-                value: timeOut === 0 ? i18n.tr("Manually") :
-                       i18n.tr("After %1 minute",
-                               "After %1 minutes",
-                               idleValues.indexOf(timeOut)).arg(timeOut/60)
+                value: {
+                    if (batteryBackend.powerdRunning ) {
+                        var timeout = Math.round(powerSettings.activityTimeout/60)
+                        return (powerSettings.activityTimeout != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Never")
+                    }
+                    else {
+                        var timeout = Math.round(powerSettings.idleDelay/60)
+                        return (powerSettings.idleDelay != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Manually")
+                    }
+                }
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {idleValues: idleValues, usePowerd: usePowerd, powerSettings: powerSettings})
+                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {usePowerd: usePowerd, powerSettings: powerSettings})
             }
             ListItem.SingleValue {
                 id: simControl
