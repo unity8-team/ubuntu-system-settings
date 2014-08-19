@@ -25,6 +25,7 @@ Item {
     property alias callSettings: callSettings
     property alias netReg: netReg
     property alias simMng: simMng
+    property alias present: simMng.present
 
     property string path
     property string name

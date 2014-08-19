@@ -24,34 +24,23 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
 
-    property var sim
-    property string carrierName: sim.netReg.name
-    property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
-
     ListItem.Standard {
-        objectName: "callFwd"
         text: i18n.tr("Call forwarding")
         progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {sim: sim})
+        enabled: false
     }
 
     ListItem.Standard {
-        objectName: "callWait"
         text: i18n.tr("Call waiting")
         progression: true
-        onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {sim: sim})
-        showDivider: false
+        enabled: false
     }
 
-    ListItem.Divider {}
+    ListItem.Divider {}
 
     ListItem.Standard {
-        objectName: "simServices"
-        // TRANSLATORS: %1 is the name of the (network) carrier
-        text: i18n.tr("%1 Services").arg(carrierString)
+        text: i18n.tr("Services")
         progression: true
-        enabled: sim.simMng.present
-        onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"),
-                                  {carrierString: carrierString, sim: sim.simMng})
+        enabled: false
     }
 }

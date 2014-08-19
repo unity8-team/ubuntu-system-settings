@@ -23,6 +23,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
+import "sims.js" as Sims
 
 ItemPage {
     id: root
@@ -31,32 +32,50 @@ ItemPage {
     flickable: flick
 
     property var modemsSorted: manager.modems.slice(0).sort()
+    property var simsLoaded: 0
 
     states: [
         State {
-            name: "singleSim"
-            PropertyChanges {
-                target: singleSim
-                source: "SingleSim.qml"
+            name: "noSim"
+            StateChangeScript {
+                script: loader.setSource("NoSims.qml")
             }
+            when: (simsLoaded === 0) || (Sims.getPresentCount() === 0)
         },
         State {
-            name: "dualSim"
-            PropertyChanges {
-                target: dualSim
-                source: "DualSim.qml"
+            name: "singleSim"
+            StateChangeScript {
+                script: loader.setSource("SingleSim.qml", { sim: Sims.get(0) })
+
             }
+            when: simsLoaded && (Sims.getPresentCount() === 1)
+        },
+        State {
+            name: "multiSim"
+            StateChangeScript {
+                script: loader.setSource("MultiSim.qml", {
+                    sims: Sims.getAll()
+                })
+            }
+            when: simsLoaded && (Sims.getPresentCount() > 1)
         }
     ]
 
     OfonoManager {
         id: manager
         Component.onCompleted: {
-            if (modems.length === 1) {
-                root.state = "singleSim";
-            } else if (modems.length === 2) {
-                root.state = "dualSim";
-            }
+            // create ofono bindings for all modem paths
+            var component = Qt.createComponent("Ofono.qml");
+            modemsSorted.forEach(function (path) {
+                var sim = component.createObject(root, {
+                    path: path
+                });
+                if (sim === null) {
+                    console.warn('failed to create sim object');
+                } else {
+                    Sims.add(sim);
+                }
+            });
         }
     }
 
@@ -69,19 +88,11 @@ ItemPage {
             Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            anchors { left: parent.left; right: parent.right }
 
             Loader {
-                id: singleSim
-                anchors.left: parent.left
-                anchors.right: parent.right
-            }
-
-            Loader {
-                id: dualSim
-                anchors.left: parent.left
-                anchors.right: parent.right
+                id: loader
+                anchors { left: parent.left; right: parent.right }
             }
         }
     }

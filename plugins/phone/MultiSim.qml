@@ -25,21 +25,10 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
 
-    anchors.left: parent.left
-    anchors.right: parent.right
-
-    Ofono {
-        id: sim1
-        path: modemsSorted[0]
-    }
-
-    Ofono {
-        id: sim2
-        path: modemsSorted[1]
-    }
+    property var sims
 
     ListItem.Standard {
-        text: sim1.title
+        text: sims[0].title
     }
 
     ListItem.Standard {
@@ -47,8 +36,8 @@ Column {
         text: i18n.tr("Call forwarding")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-            sim: sim1,
-            headerTitle: sim1.title
+            sim: sims[0],
+            headerTitle: sims[0].title
         })
     }
 
@@ -57,8 +46,8 @@ Column {
         text: i18n.tr("Call waiting")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
-            sim: sim1,
-            headerTitle: sim1.title
+            sim: sims[0],
+            headerTitle: sims[0].title
         })
     }
 
@@ -66,18 +55,18 @@ Column {
         objectName: "simServicesSim1"
         text: i18n.tr("Services")
         progression: true
-        enabled: sim1.simMng.present
+        enabled: sims[0].simMng.present
         onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
-            carrierString: sim1.netReg.name,
-            sim: sim1.simMng,
-            headerTitle: sim1.title
+            carrierString: sims[0].netReg.name,
+            sim: sims[0].simMng,
+            headerTitle: sims[0].title
         })
     }
 
     ListItem.Divider {}
 
     ListItem.Standard {
-        text: sim2.title
+        text: sims[1].title
     }
 
     ListItem.Standard {
@@ -85,8 +74,8 @@ Column {
         text: i18n.tr("Call forwarding")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {
-            sim: sim2,
-            headerTitle: sim2.title
+            sim: sims[1],
+            headerTitle: sims[1].title
         })
     }
 
@@ -95,8 +84,8 @@ Column {
         text: i18n.tr("Call waiting")
         progression: true
         onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {
-            sim: sim2,
-            headerTitle: sim2.title
+            sim: sims[1],
+            headerTitle: sims[1].title
         })
     }
 
@@ -104,11 +93,11 @@ Column {
         objectName: "simServicesSim2"
         text: i18n.tr("Services")
         progression: true
-        enabled: sim2.simMng.present
+        enabled: sims[1].simMng.present
         onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"), {
-            carrierString: sim2.netReg.name,
-            sim: sim2.simMng,
-            headerTitle: sim2.title
+            carrierString: sims[1].netReg.name,
+            sim: sims[1].simMng,
+            headerTitle: sims[1].title
         })
     }
 
@@ -119,8 +108,8 @@ Column {
         Component.onCompleted: {
             // set default names
             var simNames = phoneSettings.simNames;
-            var m0 = sim1.path
-            var m1 = sim2.path
+            var m0 = sims[0].path
+            var m1 = sims[1].path
             if (!simNames[m0]) {
                 simNames[m0] = "SIM 1";
             }
@@ -132,13 +121,13 @@ Column {
     }
 
     Binding {
-        target: sim1
+        target: sims[0]
         property: "name"
         value: phoneSettings.simNames[modemsSorted[0]]
     }
 
     Binding {
-        target: sim2
+        target: sims[1]
         property: "name"
         value: phoneSettings.simNames[modemsSorted[1]]
     }
