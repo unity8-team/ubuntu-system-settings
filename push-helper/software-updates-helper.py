@@ -62,15 +62,11 @@ _ = gettext.translation("ubuntu-system-settings").gettext
 # For now, this script assumes everything that comes in is a valid
 # broadcast notification, and notifies the user directly:
 
+with open(f1, 'r') as fd:
+    input_msg = json.load(fd)
 
-try:
-    with open(f1, 'r') as fd:
-        input_msg = json.loads(fd.read())
-except Exception:
-    input_msg = {}
-
-
-if 'notification' in input_msg and 'card' in input_msg['notification']:
+if isinstance(input_msg, dict) and 'notification' in input_msg \
+        and 'card' in input_msg['notification']:
     # if it's a valid notification, just forward it "as is"
     json.dump(input_msg, open(f2,"w"))
 else:
