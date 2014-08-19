@@ -21,12 +21,14 @@ import QtQuick 2.0
 import MeeGo.QOfono 0.2
 
 Item {
+    id: root
     property alias modem: modem
     property alias netReg: netReg
     property alias radioSettings: radioSettings
     property alias simMng: simMng
     property alias connMan: connMan
 
+    property alias present: simMng.present
     property string path
     property string name
     property string title: {
