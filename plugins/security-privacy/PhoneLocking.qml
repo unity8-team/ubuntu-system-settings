@@ -26,10 +26,22 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
+    id: root
     title: i18n.tr("Phone locking")
+
+    property variant idleValues
+    property var timeOut
+    property bool usePowerd
+    property variant powerSettings
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
+    }
+
+    Binding {
+        target: root
+        property: "timeOut"
+        value: usePowerd ? powerSettings.activityTimeout : powerSettings.idleDelay
     }
 
     Column {
@@ -62,9 +74,10 @@ ItemPage {
             text: lockOnSuspend ? i18n.tr("Lock when idle")
                                 : i18n.tr("Sleep when idle")
             // TRANSLATORS: %1 is the number of minutes
-            value: i18n.tr("%1 minute",
+            value: timeOut === 0 ? i18n.tr("Never") :
+                   i18n.tr("%1 minute",
                            "%1 minutes",
-                           5).arg(5)
+                           idleValues.indexOf(timeOut)).arg(timeOut/60)
             progression: true
             onClicked:
                 pageStack.push(
