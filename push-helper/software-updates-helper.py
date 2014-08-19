@@ -68,7 +68,7 @@ with open(f1, 'r') as fd:
 if isinstance(input_msg, dict) and 'notification' in input_msg \
         and 'card' in input_msg['notification']:
     # if it's a valid notification, just forward it "as is"
-    json.dump(input_msg, open(f2,"w"))
+    json.dump(input_msg, open(f2, "w"))
 else:
     # then it's a broadcast message.
     icon = "/usr/share/ubuntu/settings/system/icons/settings-system-update.svg"
