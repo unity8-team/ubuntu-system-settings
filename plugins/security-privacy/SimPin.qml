@@ -39,18 +39,48 @@ ItemPage {
     OfonoSimManager {
         id: sim
         modemPath: manager.modems[0]
+        onPinRetriesChanged: {
+            console.warn("retries: " + pinRetries[OfonoSimManager.SimPin]);
+            console.warn("retries: " + pinRetries["1"]);
+
+            for (var prop in pinRetries)
+                         console.log(prop, "=", pinRetries[prop]);
+
+            for (var i=0; i < sim.pinRetries.length; i++) {
+                console.warn("retries3: " + sim.pinRetries[i]);
+            }
+        }
+
+        Component.onCompleted: {
+            //console.warn("isValid: " + sim.isValid());
+            console.warn("lockedPins: " + sim.lockedPins.length);
+        }
+
         onChangePinComplete: {
             console.warn("onChangePinComplete: " + errorString);
             errorText = errorString;
             if (error !== OfonoSimManager.NoError) {
-                changePinDialog.enabled = true
-                currentInput.forceActiveFocus()
-                currentInput.selectAll()
-                return
+                changePinDialog.enabled = true;
+                currentInput.forceActiveFocus();
+                currentInput.selectAll();
+                return;
             }
 
-            changePinDialog.enabled = true
-            PopupUtils.close(changePinDialog)
+            changePinDialog.enabled = true;
+            PopupUtils.close(changePinDialog);
+        }
+        onLockPinComplete: {
+            console.warn("onLockPinComplete: " + errorString);
+            errorText = errorString;
+            if (error !== OfonoSimManager.NoError) {
+                lockPinDialog.enabled = true;
+                prevInput.forceActiveFocus();
+                prevInput.selectAll();
+                return;
+            }
+
+            //lockPinDialog.enabled = true;
+            PopupUtils.close(lockPinDialog);
         }
     }
 
@@ -84,6 +114,11 @@ ItemPage {
                 inputMethodHints: Qt.ImhDialableCharactersOnly
 
                 inputMask: "00000000"
+            }
+
+            Label {
+                id: retries
+                text: i18n.tr("%1 attempts remaining").arg(sim.pinRetries[OfonoSimManager.SimPin])
             }
 
             Label {
@@ -160,6 +195,70 @@ ItemPage {
 
                         console.warn("lockedPins: " + sim.lockedPins);
                         sim.changePin(OfonoSimManager.SimPin, currentInput.visible ? currentInput.text : "", newInput.text);
+                        //sim.lockPin(OfonoSimManager.SimPin, newInput.text);
+                    }
+                }
+            }
+        }
+    }
+
+    Component {
+        id: lockDialogComponent
+
+        Dialog {
+            id: lockPinDialog
+
+            // This is a bit hacky, but the contents of this dialog get so tall
+            // that on a mako device, they don't fit with the OSK also visible.
+            // So we scrunch up spacing.
+            Binding {
+                target: __foreground
+                property: "itemSpacing"
+                value: units.gu(1)
+            }
+
+            title: i18n.tr("Enter previous PIN")
+
+            TextField {
+                id: prevInput
+                echoMode: TextInput.Password
+                inputMethodHints: Qt.ImhDialableCharactersOnly
+
+                inputMask: "00000000"
+            }
+
+            Label {
+                text: i18n.tr("%1 attempts remaining").arg(sim.pinRetries[OfonoSimManager.SimPin])
+            }
+
+            Label {
+                id: incorrect
+                text: errorText
+                visible: text !== ""
+                color: "darkred"
+            }
+
+            RowLayout {
+                spacing: units.gu(1)
+
+                Button {
+                    Layout.fillWidth: true
+                    color: UbuntuColors.lightGrey
+                    text: i18n.tr("Cancel")
+                    onClicked: PopupUtils.close(lockPinDialog)
+                }
+
+                Button {
+                    id: lockButton
+                    Layout.fillWidth: true
+                    color: UbuntuColors.green
+
+                    text: i18n.tr("Lock")
+                    //enabled: false
+                    onClicked: {
+                        lockPinDialog.enabled = false;
+                        console.warn("lockedPins: " + sim.lockedPins);
+                        sim.lockPin(OfonoSimManager.SimPin, prevInput.text);
                     }
                 }
             }
@@ -174,16 +273,21 @@ ItemPage {
             text: i18n.tr("SIM PIN")
             control: Switch {
                 id: simPinSwitch
-                checked: false //sim.pinRequired !== PinType.NoPin
+                checked: sim.lockedPins.length > 0//false //sim.pinRequired !== PinType.NoPin
+                onCheckedChanged: {
+                    if (checked && sim.lockedPins.length <= 0) {
+                        PopupUtils.open(lockDialogComponent);
+                    }
+                    if (!checked)
+                        sim.unlockPin(OfonoSimManager.SimPin, "2468");
+                }
             }
         }
-
 
         ListItem.SingleControl {
 
             id: changeControl
-            visible: simPinSwitch.checked
-
+            visible: sim.lockedPins.length > 0
             control: Button {
                 enabled: parent.visible
                 text: i18n.tr("Change PIN…")
