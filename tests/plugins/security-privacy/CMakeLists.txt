@@ -7,5 +7,5 @@ add_executable(tst-trust-store-model
     ../../../plugins/security-privacy/trust-store-model.cpp
 )
 
-qt5_use_modules(tst-trust-store-model Core DBus Qml Test)
+qt5_use_modules(tst-trust-store-model Core Gui DBus Qml Test)
 add_test(NAME tst-trust-store-model COMMAND ${XVFB_CMD} ${CMAKE_CURRENT_BINARY_DIR}/tst-trust-store-model)

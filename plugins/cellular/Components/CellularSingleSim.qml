@@ -34,10 +34,14 @@ Column {
         text: i18n.tr("Cellular data:")
         expanded: true
         enabled: sim1.radioSettings.technologyPreference !== ""
-        model: [i18n.tr("Off"), i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
+        model: [
+            i18n.tr("Off"),
+            i18n.tr("2G only (saves battery)"),
+            i18n.tr("2G/3G/4G (faster)")]
         selectedIndex: {
             if (sim1.connMan.powered) {
-                return DataHelpers.singleSimKeyToIndex(sim1.radioSettings.technologyPreference);
+                return DataHelpers.singleSimKeyToIndex(
+                    sim1.radioSettings.technologyPreference);
             } else {
                 return 0;
             }
@@ -60,7 +64,8 @@ Column {
         target: sim1.connMan
         onPoweredChanged: {
             if (powered) {
-                selector.selectedIndex = DataHelpers.singleSimKeyToIndex(sim1.radioSettings.technologyPreference);
+                selector.selectedIndex = DataHelpers.singleSimKeyToIndex(
+                    sim1.radioSettings.technologyPreference);
             } else {
                 selector.selectedIndex = 0;
             }
@@ -72,7 +77,8 @@ Column {
         onTechnologyPreferenceChanged: {
             var selIndex = selector.selectedIndex;
             if (selIndex > 0) {
-                sim1.radioSettings.technologyPreference = DataHelpers.singleSimIndexToKey(selIndex);
+                sim1.radioSettings.technologyPreference =
+                    DataHelpers.singleSimIndexToKey(selIndex);
             }
         }
     }
@@ -91,7 +97,7 @@ Column {
             if (i === 1) {
                 return 'gsm';
             } else if (i === 2) {
-                return 'any';
+                return 'umts';
             } else {
                 return sim1.radioSettings.technologyPreference
             }
