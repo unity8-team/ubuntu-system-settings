@@ -51,6 +51,11 @@ public:
     }
 
     QString resolveIcon(const QString &iconName, const QString &basePath) {
+        /* If iconName points to a valid file, use it */
+        if (QFile::exists(iconName)) {
+            return iconName;
+        }
+
         /* See if the iconName resolves to a file installed by the click
          * package (which is extracted in basePath). */
         QDir baseDir(basePath);
@@ -65,9 +70,7 @@ public:
             return "image://theme/" + iconName;
         }
 
-        /* If not, just return the iconName, and hope that it's a valid
-         * filename */
-        return iconName;
+        return QString();
     }
 
     void addRequest(const core::trust::Request &request) {
