@@ -85,7 +85,9 @@ ItemPage {
                 text: i18n.tr("SIM PIN")
                 value: "Off"
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"))
+                visible: showAllUI
+                /* Not implemented yet */
+                //onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"))
             }
             ListItem.Standard {
                 text: i18n.tr("Encryption")
