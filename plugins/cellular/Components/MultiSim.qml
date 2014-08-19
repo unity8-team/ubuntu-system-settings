@@ -24,6 +24,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
 
+    objectName: "multiSim"
+
     property var sims
     property var modems
 

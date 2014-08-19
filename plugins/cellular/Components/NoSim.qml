@@ -23,6 +23,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
 
+    objectName: "noSim"
+
     ListItem.ItemSelector {
         text: i18n.tr("Cellular data:")
         expanded: true

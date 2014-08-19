@@ -69,6 +69,7 @@ ItemPage {
         Component.onCompleted: {
             var component = Qt.createComponent("Components/Sim.qml");
             modemsSorted.forEach(function (path) {
+                console.warn('creating sim object for', path)
                 var sim = component.createObject(root, {
                     path: path
                 });

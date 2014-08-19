@@ -60,10 +60,4 @@ Item {
         id: connMan
         modemPath: path
     }
-
-    Binding {
-        target: root
-        property: "present"
-        value: simMng.present
-    }
 }

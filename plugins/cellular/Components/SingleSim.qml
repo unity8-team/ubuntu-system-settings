@@ -23,6 +23,8 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 Column {
 
+    objectName: "singleSim"
+
     property var sim
 
     CellularSingleSim {
