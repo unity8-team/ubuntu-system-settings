@@ -25,12 +25,16 @@ import "data-helpers.js" as DataHelpers
 Column {
     id: root
     property var selector: selector
-    property var prefMap: ['gsm', 'any']
+    property var prefMap: ['gsm', 'umts']
+
+    function getNameFromIndex (index) {
+        return [i18n.tr("Off"), sims[0].title, sims[1].title][index];
+    }
 
     function getUsedSim () {
-        if (state === "sim1") {
+        if (state === "sim1Online") {
             return sims[0];
-        } else if (state === "sim2") {
+        } else if (state === "sim2Online") {
             return sims[1];
         } else {
             return null;
@@ -40,12 +44,22 @@ Column {
     height: childrenRect.height
     states: [
         State {
-            name: "sim1"
+            name: "sim1Online"
             when: sims[0].connMan.powered && !sims[1].connMan.powered
+            StateChangeScript { script: {
+                selector.selectedIndex =
+                    DataHelpers.dualSimKeyToIndex(
+                        sim1.radioSettings.technologyPreference)
+            }}
         },
         State {
-            name: "sim2"
+            name: "sim2Online"
             when: sims[1].connMan.powered && !sims[0].connMan.powered
+            StateChangeScript { script: {
+                selector.selectedIndex =
+                    DataHelpers.dualSimKeyToIndex(
+                        sim2.radioSettings.technologyPreference)
+            }}
         },
         State {
             name: "bothOnline"
@@ -61,22 +75,13 @@ Column {
         objectName: "use"
         text: i18n.tr("Cellular data:")
         expanded: true
-        model: ["Off", "sim1", "sim2"]
+        model: ["off", "sim1", "sim2"]
         delegate: OptionSelectorDelegate {
             objectName: "use" + modelData
-            text: {
-                var t;
-                if (modelData === "sim1") {
-                    t = sims[0].title
-                } else if (modelData === "sim2") {
-                    t = sims[1].title
-                } else {
-                    t = i18n.tr(modelData);
-                }
-                return t;
-            }
+            text: getNameFromIndex(index)
         }
-        selectedIndex: [true, sims[0].connMan.powered, sims[1].connMan.powered].lastIndexOf(true)
+        selectedIndex: [true, sims[0].connMan.powered, sims[1].connMan.powered]
+            .lastIndexOf(true)
         onDelegateClicked: {
             sims[0].connMan.powered = (index === 1)
             sims[1].connMan.powered = (index === 2)
@@ -105,7 +110,8 @@ Column {
         id: selector
         objectName: "technologyPreferenceSelector"
         expanded: true
-        model: [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
+        model:
+            [i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
         visible: use.selectedIndex !== 0
         onDelegateClicked: {
             var sim = getUsedSim();
@@ -119,7 +125,8 @@ Column {
         target: sims[0].radioSettings
         onTechnologyPreferenceChanged: {
             if (sims[0].connMan.powered) {
-                selector.selectedIndex = DataHelpers.dualSimKeyToIndex(preference);
+                selector.selectedIndex =
+                    DataHelpers.dualSimKeyToIndex(preference);
             }
         }
     }
@@ -128,7 +135,8 @@ Column {
         target: sims[1].radioSettings
         onTechnologyPreferenceChanged: {
             if (sims[1].connMan.powered) {
-                selector.selectedIndex = DataHelpers.dualSimKeyToIndex(preference);
+                selector.selectedIndex =
+                    DataHelpers.dualSimKeyToIndex(preference);
             }
         }
     }
@@ -136,7 +144,8 @@ Column {
     Binding {
         target: selector
         property: "enabled"
-        value: getUsedSim() && (getUsedSim().radioSettings.technologyPreference !== "")
+        value: getUsedSim() &&
+            (getUsedSim().radioSettings.technologyPreference !== "")
         when: getUsedSim()
     }
 

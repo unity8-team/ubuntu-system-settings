@@ -45,7 +45,8 @@ Column {
     }
 
     ListItem.Caption {
-        text: i18n.tr("You can change the SIM for individual calls, or for contacts in the address book.")
+        text: i18n.tr("You can change the SIM for individual calls,
+            or for contacts in the address book.")
     }
 
     ListItem.Divider {}
