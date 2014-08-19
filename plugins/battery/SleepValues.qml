@@ -36,6 +36,7 @@ ItemPage {
 
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
+    property variant idleValues: [60,120,180,240,300,600]
 
     UbuntuBatteryPanel {
         id: batteryBackend
@@ -46,16 +47,17 @@ ItemPage {
         schema.id: usePowerd ? "com.canonical.powerd" : "org.gnome.desktop.session"
         onChanged: {
             if (key == "activityTimeout" || key == "idleDelay")
-                if([60,120,180,240,300].indexOf(value) != -1)
-                    sleepSelector.selectedIndex = (value/60)-1
+                var curIndex = idleValues.indexOf(value);
+                if( curIndex != -1)
+                    sleepSelector.selectedIndex = curIndex
                 else if(value === 0)
-                    sleepSelector.selectedIndex = 5
+                    sleepSelector.selectedIndex = 6
         }
         Component.onCompleted: {
             if (usePowerd)
-                sleepSelector.selectedIndex = (powerSettings.activityTimeout === 0) ? 5 : powerSettings.activityTimeout/60-1
+                sleepSelector.selectedIndex = (powerSettings.activityTimeout === 0) ? 6 : idleValues.indexOf(powerSettings.activityTimeout)
             else
-                sleepSelector.selectedIndex = (powerSettings.idleDelay === 0) ? 5 : powerSettings.idleDelay/60-1
+                sleepSelector.selectedIndex = (powerSettings.idleDelay === 0) ? 6 : idleValues.indexOf(powerSettings.idleDelay)
         }
     }
 
@@ -93,13 +95,17 @@ ItemPage {
                     i18n.tr("After %1 minute",
                             "After %1 minutes",
                             5).arg(5),
+                    // TRANSLATORS: %1 is the number of minutes
+                    i18n.tr("After %1 minute",
+                            "After %1 minutes",
+                            10).arg(10),
                     i18n.tr("Never")]
                 expanded: true
                 onDelegateClicked: {
                   if (usePowerd)
-                    powerSettings.activityTimeout = (index == 5) ? 0 : (index+1)*60
+                    powerSettings.activityTimeout = (index == 6) ? 0 : idleValues[index]
                   else
-                    powerSettings.idleDelay = (index == 5) ? 0 : (index+1)*60
+                    powerSettings.idleDelay = (index == 6) ? 0 : idleValues[index]
                 }
             }
 
