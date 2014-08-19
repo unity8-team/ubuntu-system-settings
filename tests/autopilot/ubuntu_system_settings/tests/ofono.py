@@ -24,16 +24,6 @@ SYSTEM_BUS = True
 NOT_IMPLEMENTED = '''raise dbus.exceptions.DBusException(
     "org.ofono.Error.NotImplemented")'''
 
-
-#  interface org.ofono.Manager {
-#    methods:
-#      GetModems(out a(oa{sv}) modems);
-#    signals:
-#      ModemAdded(o path,
-#                 a{sv} properties);
-#      ModemRemoved(o path);
-#  };
-
 _parameters = {}
 
 
@@ -48,16 +38,6 @@ def load(mock, parameters):
     if not parameters.get('no_modem', False):
         mock.AddModem(parameters.get('ModemName', 'ril_0'), {})
 
-
-#  interface org.ofono.Modem {
-#    methods:
-#      GetProperties(out a{sv} properties);
-#      SetProperty(in  s property,
-#                  in  v value);
-#    signals:
-#      PropertyChanged(s name,
-#                      v value);
-#  };
 
 @dbus.service.method(dbusmock.MOCK_IFACE,
                      in_signature='sa{sv}', out_signature='s')
@@ -107,34 +87,6 @@ def AddModem(self, name, properties):
     props = obj.GetAll('org.ofono.Modem', dbus_interface=dbus.PROPERTIES_IFACE)
     self.EmitSignal(MAIN_IFACE, 'ModemAdded', 'oa{sv}', [path, props])
     return path
-
-#  interface org.ofono.VoiceCallManager {
-#    methods:
-#      GetProperties(out a{sv} properties);
-#      Dial(in  s number,
-#           in  s hide_callerid,
-#           out o path);
-#      Transfer();
-#      SwapCalls();
-#      ReleaseAndAnswer();
-#      ReleaseAndSwap();
-#      HoldAndAnswer();
-#      HangupAll();
-#      PrivateChat(in  o call,
-#                  out ao calls);
-#      CreateMultiparty(out o calls);
-#      HangupMultiparty();
-#      SendTones(in  s SendTones);
-#      GetCalls(out a(oa{sv}) calls_with_properties);
-#    signals:
-#      Forwarded(s type);
-#      BarringActive(s type);
-#      PropertyChanged(s name,
-#                      v value);
-#      CallAdded(o path,
-#                a{sv} properties);
-#      CallRemoved(o path);
-#  };
 
 
 def add_voice_call_api(mock):
@@ -213,28 +165,6 @@ def HangupAll(self):
     assert self.calls == []
 
 
-#  interface org.ofono.NetworkRegistration {
-#    methods:
-#      GetProperties(out a{sv} properties);
-#      Register();
-#      GetOperators(out a(oa{sv}) operators_with_properties);
-#      Scan(out a(oa{sv}) operators_with_properties);
-#    signals:
-#      PropertyChanged(s name,
-#                      v value);
-#  };
-#
-#  for /<modem>/operator/<CountryCode><NetworkCode>:
-#  interface org.ofono.NetworkOperator {
-#          methods:
-#            GetProperties(out a{sv} properties);
-#            Register();
-#          signals:
-#            PropertyChanged(s name,
-#                                                  v value);
-#          properties:
-#        };
-
 def get_all_operators(mock):
     return 'ret = [(m, objects[m].GetAll("org.ofono.NetworkOperator")) ' \
            'for m in objects if "%s/operator/" in m]' % mock.name
@@ -283,82 +213,3 @@ def add_netreg_api(mock):
         ('GetOperators', '', 'a(oa{sv})', get_all_operators(mock)),
         ('Scan', '', 'a(oa{sv})', get_all_operators(mock)),
     ])
-
-# unimplemented Modem object interfaces:
-#
-#  interface org.ofono.SimManager {
-#    methods:
-#      GetProperties(out a{sv} properties);
-#      SetProperty(in  s property,
-#                  in  v value);
-#      ChangePin(in  s type,
-#                in  s oldpin,
-#                in  s newpin);
-#      EnterPin(in  s type,
-#               in  s pin);
-#      ResetPin(in  s type,
-#               in  s puk,
-#               in  s newpin);
-#      LockPin(in  s type,
-#              in  s pin);
-#      UnlockPin(in  s type,
-#                in  s pin);
-#      GetIcon(in  y id,
-#              out ay icon);
-#    signals:
-#      PropertyChanged(s name,
-#                      v value);
-#  };
-#  interface org.ofono.NetworkTime {
-#    methods:
-#      GetNetworkTime(out a{sv} time);
-#    signals:
-#      NetworkTimeChanged(a{sv} time);
-#    properties:
-#  };
-#  interface org.ofono.ConnectionManager {
-#    methods:
-#      GetProperties(out a{sv} properties);
-#      SetProperty(in  s property,
-#                  in  v value);
-#      AddContext(in  s type,
-#                 out o path);
-#      RemoveContext(in  o path);
-#      DeactivateAll();
-#      GetContexts(out a(oa{sv}) contexts_with_properties);
-#    signals:
-#      PropertyChanged(s name,
-#                      v value);
-#      ContextAdded(o path,
-#                   v properties);
-#      ContextRemoved(o path);
-#  };
-#  interface org.ofono.MessageManager {
-#    methods:
-#      GetProperties(out a{sv} properties);
-#      SetProperty(in  s property,
-#                  in  v value);
-#      SendMessage(in  s to,
-#                  in  s text,
-#                  out o path);
-#      GetMessages(out a(oa{sv}) messages);
-#    signals:
-#      PropertyChanged(s name,
-#                      v value);
-#      IncomingMessage(s message,
-#                      a{sv} info);
-#      ImmediateMessage(s message,
-#                       a{sv} info);
-#      MessageAdded(o path,
-#                   a{sv} properties);
-#      MessageRemoved(o path);
-#  };
-#  interface org.ofono.CallVolume {
-#    methods:
-#      GetProperties(out a{sv} properties);
-#      SetProperty(in  s property,
-#                  in  v value);
-#    signals:
-#      PropertyChanged(s property,
-#                      v value);
-#  };
