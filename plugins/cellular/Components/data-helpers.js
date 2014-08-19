@@ -9,7 +9,7 @@ function singleSimKeyToIndex (k) {
 }
 
 function singleSimIndexToKey (i) {
-    return i === 1 ? 'gsm' : 'any';
+    return i === 1 ? 'gsm' : 'umts';
 }
 
 function dualSimKeyToIndex (k) {
