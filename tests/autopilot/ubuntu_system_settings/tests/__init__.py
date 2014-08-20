@@ -181,7 +181,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         modem.AddProperty(
             RDO_IFACE, 'TechnologyPreference', self.technology_preference)
         modem.AddProperty(
-            RDO_IFACE, 'ModemTechnologies', ['gsm', 'umts'])
+            RDO_IFACE, 'ModemTechnologies', ['gsm', 'umts', 'lte'])
         modem.AddMethods(
             RDO_IFACE,
             [('GetProperties', '', 'a{sv}',
