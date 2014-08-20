@@ -27,7 +27,7 @@ Item {
 
     signal clicked
 
-    property alias highlighted: hightlight.visible
+    property bool highlighted: false
 
     height: col.height
 
@@ -64,13 +64,13 @@ Item {
         }
         color: UbuntuColors.lightGrey
         opacity: 0.25
-        visible: false
+        visible: highlighted
     }
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            highlighted = true;
+            root.highlighted = true;
             root.clicked();
         }
     }
