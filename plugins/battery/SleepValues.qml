@@ -31,7 +31,7 @@ import Ubuntu.SystemSettings.Battery 1.0
 
 ItemPage {
     id: root
-
+    objectName: "sleepValues"
     flickable: scrollWidget
 
     property alias usePowerd: batteryBackend.powerdRunning
