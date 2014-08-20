@@ -89,12 +89,9 @@ ItemPage {
             text: i18n.tr("Launcher")
             control: CheckBox {
                 id: launcherCheck
-                checked: securityPrivacy.enableLauncherWhileLocked
-            }
-            Binding {
-                target: securityPrivacy
-                property: "enableLauncherWhileLocked"
-                value: launcherCheck.checked
+                enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                checked: securityPrivacy.enableLauncherWhileLocked || !enabled
+                onClicked: securityPrivacy.enableLauncherWhileLocked = checked
             }
         }
 
@@ -102,13 +99,16 @@ ItemPage {
             text: i18n.tr("Notifications and quick settings")
             control: CheckBox {
                 id: indicatorsCheck
-                checked: securityPrivacy.enableIndicatorsWhileLocked
+                enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                checked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
+                onClicked: securityPrivacy.enableIndicatorsWhileLocked = checked
             }
-            Binding {
-                target: securityPrivacy
-                property: "enableIndicatorsWhileLocked"
-                value: indicatorsCheck.checked
-            }
+        }
+
+        ListItem.Caption {
+            text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
+                  i18n.tr("Turn on lock security to restrict access when the phone is locked.") :
+                  i18n.tr("Other apps and functions will prompt you to unlock.")
         }
     }
 }
