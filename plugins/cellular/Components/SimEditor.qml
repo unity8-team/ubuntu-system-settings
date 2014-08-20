@@ -174,6 +174,7 @@ Column {
             objectName: "nameField"
             maximumLength: 30
             width: simList.width - units.gu(4)
+            inputMethodHints: Qt.ImhNoPredictiveText
             onTriggered: renameAction
         }
 

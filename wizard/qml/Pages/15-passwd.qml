@@ -83,11 +83,11 @@ LocalComponents.Page {
                     text: {
                         var method = indexToMethod(modelData)
                         if (method === UbuntuSecurityPrivacyPanel.Swipe)
-                            return "Swipe"
+                            return i18n.tr("Swipe")
                         else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return "Passcode"
+                            return i18n.tr("Passcode")
                         else
-                            return "Passphrase"
+                            return i18n.tr("Passphrase")
                     }
                     onClicked: {
                         listview.currentIndex = index
