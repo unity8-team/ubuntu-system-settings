@@ -21,14 +21,12 @@ import QtQuick 2.0
 import MeeGo.QOfono 0.2
 
 Item {
-    id: root
-    property alias modem: modem
+    property alias callForwarding: callForwarding
+    property alias callSettings: callSettings
     property alias netReg: netReg
-    property alias radioSettings: radioSettings
     property alias simMng: simMng
-    property alias connMan: connMan
-
     property alias present: simMng.present
+
     property string path
     property string name
     property string title: {
@@ -36,8 +34,13 @@ Item {
         return name + (number ? " (" + number + ")" : "");
     }
 
-    OfonoModem {
-        id: modem
+    OfonoCallSettings {
+        id: callSettings
+        modemPath: path
+    }
+
+    OfonoCallForwarding {
+        id: callForwarding
         modemPath: path
     }
 
@@ -46,18 +49,8 @@ Item {
         modemPath: path
     }
 
-    OfonoRadioSettings {
-        id: radioSettings
-        modemPath: path
-    }
-
     OfonoSimManager {
         id: simMng
-        modemPath: path
-    }
-
-    OfonoConnMan {
-        id: connMan
         modemPath: path
     }
 }

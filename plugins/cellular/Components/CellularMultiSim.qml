@@ -24,20 +24,18 @@ import "data-helpers.js" as DataHelpers
 
 Column {
     id: root
-    property var sim1
-    property var sim2
     property var selector: selector
     property var prefMap: ['gsm', 'umts']
 
     function getNameFromIndex (index) {
-        return [i18n.tr("Off"), sim1.title, sim2.title][index];
+        return [i18n.tr("Off"), sims[0].title, sims[1].title][index];
     }
 
     function getUsedSim () {
         if (state === "sim1Online") {
-            return sim1;
+            return sims[0];
         } else if (state === "sim2Online") {
-            return sim2;
+            return sims[1];
         } else {
             return null;
         }
@@ -47,7 +45,7 @@ Column {
     states: [
         State {
             name: "sim1Online"
-            when: sim1.connMan.powered && !sim2.connMan.powered
+            when: sims[0].connMan.powered && !sims[1].connMan.powered
             StateChangeScript { script: {
                 selector.selectedIndex =
                     DataHelpers.dualSimKeyToIndex(
@@ -56,7 +54,7 @@ Column {
         },
         State {
             name: "sim2Online"
-            when: sim2.connMan.powered && !sim1.connMan.powered
+            when: sims[1].connMan.powered && !sims[0].connMan.powered
             StateChangeScript { script: {
                 selector.selectedIndex =
                     DataHelpers.dualSimKeyToIndex(
@@ -65,9 +63,9 @@ Column {
         },
         State {
             name: "bothOnline"
-            when: sim1.connMan.powered && sim2.connMan.powered
+            when: sims[0].connMan.powered && sims[1].connMan.powered
             StateChangeScript { script: {
-                sim2.connMan.powered = false;
+                sims[1].connMan.powered = false;
             }}
         }
     ]
@@ -82,16 +80,16 @@ Column {
             objectName: "use" + modelData
             text: getNameFromIndex(index)
         }
-        selectedIndex: [true, sim1.connMan.powered, sim2.connMan.powered]
+        selectedIndex: [true, sims[0].connMan.powered, sims[1].connMan.powered]
             .lastIndexOf(true)
         onDelegateClicked: {
-            sim1.connMan.powered = (index === 1)
-            sim2.connMan.powered = (index === 2)
+            sims[0].connMan.powered = (index === 1)
+            sims[1].connMan.powered = (index === 2)
         }
     }
 
     Connections {
-        target: sim1.connMan
+        target: sims[0].connMan
         onPoweredChanged: {
             if (powered) {
                 use.selectedIndex = 1;
@@ -100,7 +98,7 @@ Column {
     }
 
     Connections {
-        target: sim2.connMan
+        target: sims[1].connMan
         onPoweredChanged: {
             if (powered) {
                 use.selectedIndex = 2;
@@ -124,9 +122,9 @@ Column {
     }
 
     Connections {
-        target: sim1.radioSettings
+        target: sims[0].radioSettings
         onTechnologyPreferenceChanged: {
-            if (sim1.connMan.powered) {
+            if (sims[0].connMan.powered) {
                 selector.selectedIndex =
                     DataHelpers.dualSimKeyToIndex(preference);
             }
@@ -134,9 +132,9 @@ Column {
     }
 
     Connections {
-        target: sim2.radioSettings
+        target: sims[1].radioSettings
         onTechnologyPreferenceChanged: {
-            if (sim2.connMan.powered) {
+            if (sims[1].connMan.powered) {
                 selector.selectedIndex =
                     DataHelpers.dualSimKeyToIndex(preference);
             }

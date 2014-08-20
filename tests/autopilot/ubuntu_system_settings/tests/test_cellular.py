@@ -15,7 +15,7 @@ from testtools.matchers import Equals, NotEquals, raises
 from unittest import skip
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE)
+    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE, SIM_IFACE)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
@@ -91,6 +91,14 @@ class CellularTestCase(CellularBaseTestCase):
             self.system_settings.main_view.cellular_page.title,
             Equals(_('Cellular'))
         )
+
+    def test_single_sim_layout(self):
+        self.system_settings.main_view.cellular_page.\
+            select_single(objectName="singleSim")
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='multiSim'), raises(StateNotFoundError))
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='noSim'), raises(StateNotFoundError))
 
     def test_current_network(self):
         """ Tests whether the current network is visible and selected """
@@ -595,3 +603,90 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertEqual(
             gsettings.get_value('default-sim-for-messages').get_string(),
             '/ril_1')
+
+    def test_multi_sim_layout(self):
+        self.system_settings.main_view.cellular_page.\
+            select_single(objectName="multiSim")
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='singleSim'), raises(StateNotFoundError))
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='noSim'), raises(StateNotFoundError))
+
+    def test_remove_one_sim(self):
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.system_settings.main_view.cellular_page.\
+            select_single(objectName="singleSim")
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='multiSim'), raises(StateNotFoundError))
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='noSim'), raises(StateNotFoundError))
+
+    def test_remove_two_sims(self):
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.modem_1.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.system_settings.main_view.cellular_page.\
+            wait_select_single(objectName="noSim")
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='multiSim'), raises(StateNotFoundError))
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='singleSim'), raises(StateNotFoundError))
+
+    def test_remove_and_insert_sims(self):
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.modem_1.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.system_settings.main_view.cellular_page.\
+            wait_select_single(objectName="noSim")
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='multiSim'), raises(StateNotFoundError))
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='singleSim'), raises(StateNotFoundError))
+
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'True'])
+
+        self.modem_1.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'True'])
+
+        self.system_settings.main_view.cellular_page.\
+            wait_select_single(objectName="multiSim")
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='noSim'), raises(StateNotFoundError))
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='singleSim'), raises(StateNotFoundError))
