@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-20 09:47-0400\n"
+"POT-Creation-Date: 2014-08-20 09:53-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -505,12 +505,14 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:77
 #: ../plugins/security-privacy//PhoneLocking.qml:41
+#: ../wizard/qml/Pages//15-passwd.qml:88
 msgid "Passcode"
 msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:42
 #: ../plugins/security-privacy//LockSecurity.qml:346
+#: ../wizard/qml/Pages//15-passwd.qml:90
 msgid "Passphrase"
 msgstr ""
 
@@ -810,7 +812,7 @@ msgid "Change passphrase…"
 msgstr ""
 
 #: ../plugins/system-update//Configuration.qml:30
-#: ../plugins/system-update//PageComponent.qml:445
+#: ../plugins/system-update//PageComponent.qml:446
 msgid "Auto download"
 msgstr ""
 
@@ -819,7 +821,7 @@ msgid "Download future updates automatically:"
 msgstr ""
 
 #: ../plugins/system-update//Configuration.qml:53
-#: ../plugins/system-update//PageComponent.qml:448
+#: ../plugins/system-update//PageComponent.qml:449
 #: ../plugins/wifi//NetworkDetails.qml:55
 #: ../plugins/about//PageComponent.qml:149
 #: ../plugins/battery//SleepValues.qml:96
@@ -846,121 +848,121 @@ msgstr ""
 msgid "Updates"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:51
+#: ../plugins/system-update//PageComponent.qml:52
 msgid "Update System"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:52
+#: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:55
+#: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:64
+#: ../plugins/system-update//PageComponent.qml:65
 msgid "Not Now"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:70
+#: ../plugins/system-update//PageComponent.qml:71
 msgid "Install"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:88
+#: ../plugins/system-update//PageComponent.qml:89
 msgid "Software is up to date"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:142
+#: ../plugins/system-update//PageComponent.qml:143
 msgid "Please log into your Ubuntu One account."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:157
+#: ../plugins/system-update//PageComponent.qml:158
 msgid "System update has failed."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:168
+#: ../plugins/system-update//PageComponent.qml:169
 msgid "System update failed."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:199
+#: ../plugins/system-update//PageComponent.qml:200
 msgid "Checking for updates…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:218
 #, qt-format
 msgid "Install %1 updates…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:218
 #, qt-format
 msgid "Install %1 updates"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:218
+#: ../plugins/system-update//PageComponent.qml:219
 msgid "Pause All"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Retry"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:302
+#: ../plugins/system-update//PageComponent.qml:303
 msgid "Download"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:302
+#: ../plugins/system-update//PageComponent.qml:303
 msgid "Update"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:304
 msgid "Resume"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:304
+#: ../plugins/system-update//PageComponent.qml:305
 msgid "Pause"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:363
+#: ../plugins/system-update//PageComponent.qml:364
 msgid "Installing"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:396
+#: ../plugins/system-update//PageComponent.qml:397
 msgid "Installed"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:420
+#: ../plugins/system-update//PageComponent.qml:421
 msgid "Version: "
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:450
+#: ../plugins/system-update//PageComponent.qml:451
 msgid "On wi-fi"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:452
+#: ../plugins/system-update//PageComponent.qml:453
 msgid "Always"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:502
+#: ../plugins/system-update//PageComponent.qml:503
 msgid "Credentials not found"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:532
+#: ../plugins/system-update//PageComponent.qml:533
 msgid "Installing update…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:546
+#: ../plugins/system-update//PageComponent.qml:547
 msgid " bytes"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:549
+#: ../plugins/system-update//PageComponent.qml:550
 msgid " KiB"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:552
+#: ../plugins/system-update//PageComponent.qml:553
 msgid " MiB"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:555
+#: ../plugins/system-update//PageComponent.qml:556
 msgid " GiB"
 msgstr ""
 
@@ -1540,6 +1542,10 @@ msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
+msgstr ""
+
+#: ../wizard/qml/Pages//15-passwd.qml:86
+msgid "Swipe"
 msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:136

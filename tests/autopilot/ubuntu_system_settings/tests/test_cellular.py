@@ -24,7 +24,7 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 PREFERENCE_2G = '2G only (saves battery)'
 PREFERENCE_ANY = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
-USE_OFF = "useOff"
+USE_OFF = "useoff"
 USE_SIM_1 = "usesim1"
 USE_SIM_2 = "usesim2"
 
@@ -182,19 +182,19 @@ class CellularTestCase(CellularBaseTestCase):
                                                  'TechnologyPreference'))
         self.select_preference(PREFERENCE_ANY)
         sleep(0.7)
-        self.assertEqual('any', self.modem_0.Get(RDO_IFACE,
-                                                 'TechnologyPreference'))
+        self.assertEqual('umts', self.modem_0.Get(RDO_IFACE,
+                                                  'TechnologyPreference'))
 
     def test_sim_online_status_insensitive_to_radio_preference(self):
         # turn off cellular data
         self.select_preference(PREFERENCE_OFF)
 
-        # fake dbus signal, changing to any
+        # fake dbus signal, changing to umts
         self.modem_0.EmitSignal(
             'org.ofono.RadioSettings',
             'PropertyChanged',
             'sv',
-            ['TechnologyPreference',  dbus.String('any', variant_level=1)])
+            ['TechnologyPreference',  dbus.String('umts', variant_level=1)])
 
         # assert that "Off" has not changed
         self.assert_selected_preference(0)
@@ -226,7 +226,7 @@ class CellularTestCase(CellularBaseTestCase):
         self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
                                                  'TechnologyPreference'))
 
-        # assert that the preference is any
+        # assert that the preference is umts
         self.assert_selected_preference(1)
 
     def test_unlocking_sim(self):
@@ -370,12 +370,12 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertEqual(
             'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
-    def test_use_any_for_sim_1(self):
+    def test_use_umts_for_sim_1(self):
         self.use_selector(USE_SIM_1)
         self.select_preference(PREFERENCE_ANY)
         sleep(0.7)
         self.assertEqual(
-            'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+            'umts', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_gsm_for_sim_2(self):
         self.use_selector(USE_SIM_1)
@@ -384,12 +384,12 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertEqual(
             'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
-    def test_use_any_for_sim_2(self):
+    def test_use_umts_for_sim_2(self):
         self.use_selector(USE_SIM_2)
         self.select_preference(PREFERENCE_ANY)
         sleep(1)
         self.assertEqual(
-            'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+            'umts', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_when_sim_1_comes_online_ui_is_correct(self):
         self.use_selector(USE_SIM_1)
@@ -404,7 +404,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             ['Powered', 'true'])
 
         self.assertEqual(
-            'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+            'umts', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
         self.assert_used(1)
         self.assert_selected_preference(1)
 
@@ -421,7 +421,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             ['Powered', 'true'])
 
         self.assertEqual(
-            'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+            'umts', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
         self.assert_used(2)
         self.assert_selected_preference(1)
 
@@ -492,12 +492,12 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_radio_preference_changes(self):
         self.use_selector(USE_SIM_1)
 
-        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', 'any')
+        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', 'umts')
         self.modem_0.EmitSignal(
             RDO_IFACE,
             'PropertyChanged',
             'sv',
-            ['TechnologyPreference', 'any'])
+            ['TechnologyPreference', 'umts'])
 
         self.assert_selected_preference(1)
 
