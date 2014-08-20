@@ -34,10 +34,21 @@ Column {
         text: i18n.tr("Cellular data:")
         expanded: true
         enabled: sim1.radioSettings.technologyPreference !== ""
-        model: [
-            i18n.tr("Off"),
-            i18n.tr("2G only (saves battery)"),
-            i18n.tr("2G/3G/4G (faster)")]
+        model: {
+            var m = sim1.radioSettings.modemTechnologies.slice(0);
+            m.unshift("off");
+            return m;
+        }
+        delegate: OptionSelectorDelegate {
+            text: function () {
+                return {
+                    'off': i18n.tr("Off"),
+                    'gsm': i18n.tr("2G only (saves battery)"),
+                    'umts': i18n.tr("2G/3G (faster)"),
+                    'lte': i18n.tr("2G/3G/4G (faster)")
+                }()[modelData]
+            }
+        }
         selectedIndex: {
             if (sim1.connMan.powered) {
                 return DataHelpers.singleSimKeyToIndex(

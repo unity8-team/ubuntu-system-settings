@@ -178,6 +178,8 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def mock_radio_settings(self, modem):
         modem.AddProperty(
             RDO_IFACE, 'TechnologyPreference', self.technology_preference)
+        modem.AddProperty(
+            RDO_IFACE, 'ModemTechnologies', ['gsm', 'umts'])
         modem.AddMethods(
             RDO_IFACE,
             [('GetProperties', '', 'a{sv}',
