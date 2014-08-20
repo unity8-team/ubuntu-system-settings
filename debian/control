@@ -51,7 +51,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          accountsservice,
-         accountsservice-ubuntu-schemas (>= 0.0.2),
+         accountsservice-ubuntu-schemas (>= 0.0.3),
          bluez (>= 4.36),
          dbus-property-service [amd64 armhf i386],
          gsettings-desktop-schemas,

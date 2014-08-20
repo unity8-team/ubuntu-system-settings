@@ -70,6 +70,7 @@ ItemPage {
                 pageStack.push(
                     Qt.resolvedUrl("../battery/SleepValues.qml"),
                     { title: text, lockOnSuspend: lockOnSuspend } )
+            visible: showAllUI
         }
 
         ListItem.Standard {
@@ -77,15 +78,37 @@ ItemPage {
                 checked: true
             }
             text: i18n.tr("Sleep locks immediately")
+            visible: showAllUI
         }
 
-    /* TODO: once we know how to do this
-    ListItem.Standard {
-        text: i18n.tr("When locked, allow:")
-    }
-    Launcher,
-    Camera,
-    ...
-    */
+        ListItem.Standard {
+            text: i18n.tr("When locked, allow:")
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Launcher")
+            control: CheckBox {
+                id: launcherCheck
+                checked: securityPrivacy.enableLauncherWhileLocked
+            }
+            Binding {
+                target: securityPrivacy
+                property: "enableLauncherWhileLocked"
+                value: launcherCheck.checked
+            }
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Notifications and quick settings")
+            control: CheckBox {
+                id: indicatorsCheck
+                checked: securityPrivacy.enableIndicatorsWhileLocked
+            }
+            Binding {
+                target: securityPrivacy
+                property: "enableIndicatorsWhileLocked"
+                value: indicatorsCheck.checked
+            }
+        }
     }
 }

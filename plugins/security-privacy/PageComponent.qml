@@ -69,17 +69,15 @@ ItemPage {
             ListItem.Standard {
                 id: securityTitle
                 text: i18n.tr("Security:")
-                // visible: lockingControl.visible || simControl.visible
             }
-            /* When more of the phone locking page is implemented, we can
-             * remove the next item below, which is a duplicate of an item in
-             * PhoneLocking.qml, and uncomment the visible line above. */
             ListItem.SingleValue {
+                id: lockingControl
+
                 property string swipe: i18n.tr("None")
                 property string passcode: i18n.tr("Passcode")
                 property string passphrase: i18n.tr("Passphrase")
 
-                text: i18n.tr("Lock security")
+                text: i18n.tr("Phone locking")
                 value: {
                     switch (securityPrivacy.securityType) {
                         case UbuntuSecurityPrivacyPanel.Swipe:
@@ -90,20 +88,19 @@ ItemPage {
                             return passphrase
                     }
                 }
-                progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("LockSecurity.qml"))
-                visible: !showAllUI
-            }
-            ListItem.SingleValue {
-                id: lockingControl
-                text: i18n.tr("Phone locking")
+
+                /* When more of the phone locking page is implemented, we can
+                 * uncomment the below stanzas and remove the above stanzas.
+                 * The spec says to use the number of minutes, but we don't
+                 * actually expose that setting yet. */
+                property string unusedText: i18n.tr("Lock phone")
                 // TRANSLATORS: %1 is the number of minutes
-                value: i18n.tr("%1 minute",
-                               "%1 minutes",
-                               5).arg(5)
+                property string unusedValue: i18n.tr("After %1 minute",
+                                                     "After %1 minutes",
+                                                     5).arg(5)
+
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
-                visible: showAllUI
             }
             ListItem.SingleValue {
                 id: simControl

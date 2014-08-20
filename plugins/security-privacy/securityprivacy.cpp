@@ -85,13 +85,18 @@ SecurityPrivacy::~SecurityPrivacy()
 void SecurityPrivacy::slotChanged(QString interface,
                                   QString property)
 {
-    if (interface != AS_TOUCH_INTERFACE)
-        return;
-
-    if (property == "MessagesWelcomeScreen") {
-        Q_EMIT messagesWelcomeScreenChanged();
-    } else if (property == "StatsWelcomeScreen") {
-        Q_EMIT statsWelcomeScreenChanged();
+    if (interface == AS_INTERFACE) {
+        if (property == "EnableLauncherWhileLocked") {
+            Q_EMIT enableLauncherWhileLockedChanged();
+        } else if (property == "EnableIndicatorsWhileLocked") {
+            Q_EMIT enableIndicatorsWhileLockedChanged();
+        }
+    } else if (interface == AS_TOUCH_INTERFACE) {
+        if (property == "MessagesWelcomeScreen") {
+            Q_EMIT messagesWelcomeScreenChanged();
+        } else if (property == "StatsWelcomeScreen") {
+            Q_EMIT statsWelcomeScreenChanged();
+        }
     }
 }
 
@@ -100,6 +105,8 @@ void SecurityPrivacy::slotNameOwnerChanged()
     // Tell QML so that it refreshes its view of the property
     Q_EMIT messagesWelcomeScreenChanged();
     Q_EMIT statsWelcomeScreenChanged();
+    Q_EMIT enableLauncherWhileLockedChanged();
+    Q_EMIT enableIndicatorsWhileLockedChanged();
 }
 
 bool SecurityPrivacy::getStatsWelcomeScreen()
@@ -134,6 +141,40 @@ void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
                                       "MessagesWelcomeScreen",
                                       QVariant::fromValue(enabled));
     Q_EMIT(messagesWelcomeScreenChanged());
+}
+
+bool SecurityPrivacy::getEnableLauncherWhileLocked()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "EnableLauncherWhileLocked").toBool();
+}
+
+void SecurityPrivacy::setEnableLauncherWhileLocked(bool enabled)
+{
+    if (enabled == getEnableLauncherWhileLocked())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "EnableLauncherWhileLocked",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT enableLauncherWhileLockedChanged();
+}
+
+bool SecurityPrivacy::getEnableIndicatorsWhileLocked()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "EnableIndicatorsWhileLocked").toBool();
+}
+
+void SecurityPrivacy::setEnableIndicatorsWhileLocked(bool enabled)
+{
+    if (enabled == getEnableIndicatorsWhileLocked())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "EnableIndicatorsWhileLocked",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT enableIndicatorsWhileLockedChanged();
 }
 
 SecurityPrivacy::SecurityType SecurityPrivacy::getSecurityType()
