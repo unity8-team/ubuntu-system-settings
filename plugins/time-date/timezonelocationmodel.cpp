@@ -134,6 +134,7 @@ QVariant TimeZoneLocationModel::data(const QModelIndex &index, int role) const
         return QVariant();
         break;
     }
+    throw "Unreachable code";
 }
 
 QHash<int, QByteArray> TimeZoneLocationModel::roleNames() const
