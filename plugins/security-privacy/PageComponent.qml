@@ -30,6 +30,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: root
+    objectName: "securityPrivacyPage"
 
     title: i18n.tr("Security & Privacy")
     flickable: scrollWidget
@@ -85,6 +86,7 @@ ItemPage {
             }            
             ListItem.SingleValue {
                 id: lockingControl
+                objectName: "lockingControl"
                 text: i18n.tr("Lock phone")
                 value: {
                     if (batteryBackend.powerdRunning ) {

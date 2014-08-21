@@ -27,6 +27,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: root
+    objectName: "phoneLockingPage"
     title: i18n.tr("Phone locking")
 
     property bool usePowerd
@@ -67,6 +68,7 @@ ItemPage {
         }
 
         ListItem.SingleValue {
+            objectName: "lockTimeout"
             property bool lockOnSuspend: securityPrivacy.securityType !==
                                             UbuntuSecurityPrivacyPanel.Swipe
             text: lockOnSuspend ? i18n.tr("Lock when idle")
