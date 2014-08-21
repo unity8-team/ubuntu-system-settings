@@ -5,9 +5,7 @@
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
 
-from gi.repository import Gio, GLib
-from time import sleep
-from autopilot.matchers import Eventually
+from gi.repository import Gio
 from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import SecurityBaseTestCase
@@ -19,7 +17,8 @@ class SecurityTestCase(SecurityBaseTestCase):
     """ Tests for Security Page """
 
     def _get_activity_timeout(self):
-        usePowerd = self.system_settings.main_view.security_page.get_properties()['usePowerd']
+        prps = self.system_settings.main_view.security_page.get_properties()
+        usePowerd = prps['usePowerd']
         if usePowerd:
             gsettings = Gio.Settings.new('com.ubuntu.touch.system')
             return gsettings.get_uint('activity-timeout')
@@ -53,17 +52,23 @@ class SecurityTestCase(SecurityBaseTestCase):
 
     def test_locking_control_value(self):
         actTimeout = self._get_activity_timeout()
-        activityTimeout = self.security_page.select_single(objectName='lockingControl').value
+        activityTimeout = self.security_page.select_single(
+            objectName='lockingControl').value
         if actTimeout is 0:
             self.assertEquals(activityTimeout, ('Manually'))
         elif actTimeout is 60:
-            self.assertEquals(activityTimeout, ('After {:d} minute').format(int(actTimeout/60)))
+            self.assertEquals(
+                activityTimeout,
+                ('After {:d} minute').format(int(actTimeout/60)))
         else:
-            self.assertEquals(activityTimeout, ('After {:d} minutes').format(int(actTimeout/60)))
+            self.assertEquals(
+                activityTimeout,
+                ('After {:d} minutes').format(int(actTimeout/60)))
 
     def test_phone_lock_page(self):
         self._go_to_phone_lock()
-        phone_lock_page = self.system_settings.main_view.select_single(objectName='phoneLockingPage')
+        phone_lock_page = self.system_settings.main_view.select_single(
+            objectName='phoneLockingPage')
         self.assertThat(
             phone_lock_page,
             NotEquals(None)
@@ -75,19 +80,28 @@ class SecurityTestCase(SecurityBaseTestCase):
 
     def test_phone_lock_value(self):
         self._go_to_phone_lock()
-        phone_lock_page = self.system_settings.main_view.select_single(objectName='phoneLockingPage')
+        phone_lock_page = self.system_settings.main_view.select_single(
+            objectName='phoneLockingPage')
         actTimeout = self._get_activity_timeout()
-        activityTimeout = phone_lock_page.select_single(objectName='lockTimeout').value
+        activityTimeout = phone_lock_page.select_single(
+            objectName='lockTimeout').value
         if actTimeout is 0:
             self.assertEquals(activityTimeout, ('Never'))
         elif actTimeout is 60:
-            self.assertEquals(activityTimeout, ('{:d} minute').format(int(actTimeout/60)))
+            self.assertEquals(
+                activityTimeout,
+                ('{:d} minute').format(int(actTimeout/60))
+            )
         else:
-            self.assertEquals(activityTimeout, ('{:d} minutes').format(int(actTimeout/60)))
+            self.assertEquals(
+                activityTimeout,
+                ('{:d} minutes').format(int(actTimeout/60))
+            )
 
     def test_sleep_values_page(self):
         self._go_to_sleep_values()
-        sleep_values_page = self.system_settings.main_view.select_single(objectName='sleepValues')
+        sleep_values_page = self.system_settings.main_view.select_single(
+            objectName='sleepValues')
         self.assertThat(
             sleep_values_page,
             NotEquals(None)
