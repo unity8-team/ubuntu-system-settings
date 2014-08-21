@@ -8,6 +8,7 @@
 from gi.repository import Gio
 from time import sleep
 from testtools.matchers import Equals, NotEquals
+from autopilot.matchers import Eventually
 
 from ubuntu_system_settings.tests import SecurityBaseTestCase
 
@@ -35,13 +36,17 @@ class SecurityTestCase(SecurityBaseTestCase):
 
     def set_prev_idle_delay(self, gsettings, prev):
         gsettings.set_uint('idle-delay', prev)
-        # wait for gsettings
-        sleep(0.2)
+        self.assertThat(
+            lambda: int(gsettings.get_uint('idle-delay')),
+            Eventually(Equals(prev))
+        )
 
     def set_prev_activity_timeout(self, gsettings, prev):
         gsettings.set_uint('activity-timeout', prev)
-        # wait for gsettings
-        sleep(0.2)
+        self.assertThat(
+            lambda: int(gsettings.get_uint('activity-timeout')),
+            Eventually(Equals(prev))
+        )
 
     def _get_activity_timeout(self):
         if self.use_powerd:
