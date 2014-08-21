@@ -194,11 +194,10 @@ void TimeZonePopulateWorker::buildCityMap()
     TzDB *tzdb = tz_load_db();
     GPtrArray *tz_locations = tz_get_locations(tzdb);
 
-    CcTimezoneLocation *tmp;
     TimeZoneLocationModel::TzLocation tmpTz;
 
     for (guint i = 0; i < tz_locations->len; ++i) {
-        tmp = (CcTimezoneLocation *) g_ptr_array_index(tz_locations, i);
+        auto tmp = static_cast<CcTimezoneLocation *>(g_ptr_array_index(tz_locations, i));
         gchar *en_name, *country, *zone, *state, *full_country;
         g_object_get (tmp, "en_name", &en_name,
                            "country", &country,
