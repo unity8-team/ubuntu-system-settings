@@ -69,6 +69,7 @@ Item {
 
     MouseArea {
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: {
             root.highlighted = true;
             root.clicked();
@@ -79,5 +80,11 @@ Item {
         onReleased: {
             root.highlighted = false;
         }
+        onExited: {
+            root.highlighted = false;
+        }
+        // onPositionChanged: {
+        //     console.warn('position changed', mouse.x, mouse.y)
+        // }
     }
 }
