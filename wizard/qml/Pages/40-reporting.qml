@@ -36,9 +36,7 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("Your phone is set up to automatically report errors to Canonical. This can be disabled in system settings.") +
-                  "\n\n" +
-                  i18n.tr("Your phone is set up to detect your location. This can be disabled in system settings.")
+            text: i18n.tr("Your phone is set up to automatically report errors to Canonical. This can be disabled in system settings.")
         }
     }
 
