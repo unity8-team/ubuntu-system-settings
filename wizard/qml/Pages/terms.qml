@@ -22,6 +22,7 @@ import "../Components" as LocalComponents
 
 LocalComponents.Page {
     title: i18n.tr("Terms & Conditions")
+    customBack: true
 
     FolderListModel {
         id: termsModel
@@ -29,9 +30,7 @@ LocalComponents.Page {
         nameFilters: ["*.html"]
         showDirs: false
         showOnlyReadable: true
-        onCountChanged: {
-            webview.url = Qt.resolvedUrl("data/" + determineFileName())
-        }
+        onCountChanged: loadFileContent()
     }
 
     function makeFileName(lang, country) {
@@ -71,6 +70,25 @@ LocalComponents.Page {
         }
     }
 
+    function loadFileContent() {
+        var xhr = new XMLHttpRequest
+        xhr.open("GET", "data/" + determineFileName())
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                termsLabel.text = xhr.responseText
+            }
+        }
+        xhr.send()
+    }
+
+    onBackPressed: {
+        if (webview.visible) {
+            termsLabel.visible = true
+        } else {
+            pageStack.prev()
+        }
+    }
+
     Item {
         id: content
         anchors {
@@ -81,9 +99,21 @@ LocalComponents.Page {
             bottomMargin: bottomMargin
         }
 
+        Label {
+            id: termsLabel
+            anchors.fill: parent
+            wrapMode: Text.Wrap
+            linkColor: Theme.palette.normal.foregroundText
+            onLinkActivated: {
+                webview.url = link
+                termsLabel.visible = false
+            }
+        }
+
         WebView {
             id: webview
             anchors.fill: parent
+            visible: !termsLabel.visible
         }
     }
 }
