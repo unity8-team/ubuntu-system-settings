@@ -62,8 +62,7 @@ Item {
             fill: col
             margins: -units.gu(0.25)
         }
-        color: UbuntuColors.lightGrey
-        opacity: 0.25
+        color: Qt.rgba(0, 0, 0, 0.05)
         visible: highlighted
     }
 
