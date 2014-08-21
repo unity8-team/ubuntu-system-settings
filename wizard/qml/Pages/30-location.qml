@@ -50,7 +50,7 @@ LocalComponents.Page {
             showDivider: false
             text: i18n.tr("Use your mobile network and wi-fi to work out where you are.")
             checked: locationActionGroup.enabled.state
-            onClicked: locationActionGroup.enabled.activate()
+            onTriggered: locationActionGroup.enabled.activate()
         }
 
         LocalComponents.CheckableSetting {

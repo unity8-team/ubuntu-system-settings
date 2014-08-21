@@ -17,7 +17,7 @@
 import QtQuick 2.3
 import QMenuModel 0.1
 import Ubuntu.Components 1.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.ListItems 1.0 as ListItem
 
 ListItem.Empty {
     id: listItem
@@ -48,8 +48,8 @@ ListItem.Empty {
             }
 
             onClicked: {
-                listItem.checked = checked;
-                listItem.triggered(listItem.checked);
+                listItem.checked = checked
+                listItem.triggered(listItem.checked)
             }
 
             Connections {
@@ -59,7 +59,7 @@ ListItem.Empty {
 
             Connections {
                 target: listItem.__mouseArea
-                onClicked: checkBox.clicked();
+                onClicked: listItem.checked = !listItem.checked
             }
         }
 
