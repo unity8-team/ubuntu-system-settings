@@ -20,7 +20,6 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import "data-helpers.js" as DataHelpers
 
 Column {
     height: childrenRect.height

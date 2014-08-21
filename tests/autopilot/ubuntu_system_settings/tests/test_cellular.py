@@ -26,8 +26,8 @@ PREFERENCE_UMTS = '2G/3G (faster)'
 PREFERENCE_LTE = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
 USE_OFF = "useoff"
-USE_SIM_1 = "usesim1"
-USE_SIM_2 = "usesim2"
+USE_SIM_1 = "use/ril_0"
+USE_SIM_2 = "use/ril_1"
 
 
 class CellularTestCase(CellularBaseTestCase):
