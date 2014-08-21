@@ -213,27 +213,30 @@ ItemPage {
                 visible: connectedList.visible
             }
 
-            ListView {
+            Column {
                 id: connectedList
-                width: parent.width
-                height: connectedHeader.height * count
-
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 visible: bluetoothActionGroup.enabled && (count > 0)
 
-                model: backend.connectedDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
-                    control: ActivityIndicator {
-                        visible: connection == Device.Connecting
-                        running: true
+                Repeater {
+                    model: backend.connectedDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        control: ActivityIndicator {
+                            visible: connection == Device.Connecting
+                            running: true
+                        }
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
                     }
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
-                    }
-                    progression: true
                 }
             }
 
@@ -249,24 +252,27 @@ ItemPage {
                 }
             }
 
-            ListView {
+            Column {
                 id: disconnectedList
-                width: parent.width
-                height: disconnectedHeader.height * count
-
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 visible: bluetoothActionGroup.enabled && (count > 0)
 
-                model: backend.disconnectedDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
-                    enabled: backend.isSupportedType(type)
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
+                Repeater {
+                    model: backend.disconnectedDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        enabled: backend.isSupportedType(type)
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
                     }
-                    progression: true
                 }
             }
             ListItem.Standard {
@@ -283,23 +289,27 @@ ItemPage {
                 visible: autoconnectList.visible
                 enabled: bluetoothActionGroup.enabled
             }
-            ListView {
+            Column {
                 id: autoconnectList
-                width: parent.width
-                height: autoconnectHeader.height * count
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
 
                 visible: bluetoothActionGroup.enabled && (count > 0)
 
-                model: backend.autoconnectDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
+                Repeater {
+                    model: backend.autoconnectDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
                     }
-                    progression: true
                 }
             }
         }
@@ -321,8 +331,10 @@ ItemPage {
             flickableDirection: Flickable.VerticalFlick
 
             Column {
-                anchors.left: parent.left
-                anchors.right: parent.right
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
 
                 ListItem.SingleValue {
                     text: i18n.tr("Name")
