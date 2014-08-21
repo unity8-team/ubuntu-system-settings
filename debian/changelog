@@ -1,3 +1,80 @@
+ubuntu-system-settings (0.3+14.10.20140819.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * [system-updates] set flickable to null, workaround an issue with the
+    page widget (the panel opens with a listview on top, which the page
+    use, but then a button is added between those and that's not well
+    handled) (LP: #1356292)
+
+  [ Leo Arias ]
+  * Made the wizard security options translatable. (LP: #1357605)
+
+  [ jonas-drange ]
+  * [cellular] fix bug where the ui reverts tech pref to 2G and where
+    ofono rejects 'any' (LP: #1355053)
+
+  [ Ken VanDine ]
+  * Disable predictive text for the SIM name editor, it isn't terribly
+    useful there and currently causes the field to get blocked when the
+    keyboard is raised.
+
+  [ Martin Pitt ]
+  * Mark for using language packs.
+
+  [ Alberto Mardegan ]
+  * Other App Access: get icon from click package Improve the logic for
+    retrieving the icon. (LP: #1356938)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 19 Aug 2014 15:26:55 +0000
+
+ubuntu-system-settings (0.3+14.10.20140815-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Make the wizard properly handle devices with zero, one, or two SIM
+    modem slots. Previously it assumed exactly one slot. (LP: #1332583)
+
+  [ jonas-drange ]
+  * [main panel] point rotation lock at new backend and add (skipped)
+    tests (LP: #1288332)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 15 Aug 2014 16:45:51 +0000
+
+ubuntu-system-settings (0.3+14.10.20140814.1-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Alberto Mardegan ]
+  * Implement the "Other App Access" screen As per
+    https://wiki.ubuntu.com/AccountPrivileges#Phone
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 14 Aug 2014 13:14:19 +0000
+
+ubuntu-system-settings (0.3+14.10.20140814-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Avoid a race condition when cleaning up the wizard's Mir socket.
+    This way we won't delete unity8's Mir socket out from under it. (LP:
+    #1355726)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 14 Aug 2014 00:37:03 +0000
+
+ubuntu-system-settings (0.3+14.10.20140813-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Sebastien Bacher ]
+  * [system-update] use ubuntushaped icons (LP: #1354478)
+  * [security-privacy] let the error messages wrap when needed (LP:
+    #1354503)
+
+  [ jonas-drange ]
+  * [cellular] hide radio settings selector for offline dual sims (LP:
+    #1350380)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 13 Aug 2014 13:31:04 +0000
+
 ubuntu-system-settings (0.3+14.10.20140812.3-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]

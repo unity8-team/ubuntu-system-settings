@@ -50,6 +50,11 @@ class UbuntuSystemSettingsTestCase(
             self.system_settings.main_view.visible,
             Eventually(Equals(True)))
 
+    def set_orientation(self, gsettings, value):
+        gsettings.set_value('orientation-lock', value)
+        # wait for gsettings
+        sleep(1)
+
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
                                          dbusmock.DBusTestCase):
@@ -188,10 +193,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             properties = {
                 'SubscriberNumbers': ['123456', '234567']
             }
-        modem_interfaces = modem.GetProperties()['Interfaces']
-        modem_interfaces.append(SIM_IFACE)
         modem.AddProperties(SIM_IFACE, properties)
-        modem.SetProperty('Interfaces', modem_interfaces)
         modem.AddMethods(
             SIM_IFACE,
             [('GetProperties', '', 'a{sv}',

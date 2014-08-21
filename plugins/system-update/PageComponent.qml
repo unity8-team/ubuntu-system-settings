@@ -33,6 +33,7 @@ ItemPage {
     objectName: "systemUpdatesPage"
 
     title: i18n.tr("Updates")
+    flickable: null
 
     property bool installAll: false
     property bool includeSystemUpdate: false
@@ -265,7 +266,6 @@ ItemPage {
         delegate: ListItem.Subtitled {
             id: listItem
             iconSource: Qt.resolvedUrl(modelData.iconUrl)
-            iconFrame: false
             height: modelData.selected ? units.gu(14) : units.gu(8)
             showDivider: false
 

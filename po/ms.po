@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-08 10:09+0200\n"
+"POT-Creation-Date: 2014-08-15 19:11-0600\n"
 "PO-Revision-Date: 2014-08-03 05:13+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
@@ -15,972 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-13 06:54+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
-
-#: ../plugins/background//Preview.qml:67
-msgid "Preview"
-msgstr "Pratonton"
-
-#: ../plugins/background//Preview.qml:97
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/phone//CallForwarding.qml:136
-#: ../plugins/wifi//OtherNetwork.qml:112
-#: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//LockSecurity.qml:278
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//EraseEverything.qml:54
-msgid "Cancel"
-msgstr "Batal"
-
-#: ../plugins/background//Preview.qml:104
-#: ../plugins/phone//CallForwarding.qml:148
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:299
-msgid "Set"
-msgstr "Tetapkan"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
-msgid "Background"
-msgstr "Latar Belakang"
-
-#: ../plugins/background//MainPage.qml:112
-msgid "Ubuntu Art"
-msgstr "Seni Ubuntu"
-
-#: ../plugins/background//MainPage.qml:128
-msgid "Custom"
-msgstr "Suai"
-
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Buang"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr "Permintaan Perpasangan Bluetooth"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "PIN untuk '%1'"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr "Pasangan"
-
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "Sila sahkan sama ada PIN dipapar pada '%1' adalah sepadan"
-
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "Sahkan PIN"
-
-#: ../plugins/bluetooth//PageComponent.qml:77
-msgid "Connected"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:78
-msgid "Connecting…"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:79
-msgid "Disconnecting…"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:80
-msgid "Disconnected"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:81
-msgid "Unknown"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:87
-msgid "Computer"
-msgstr "Komputer"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:88
-#: ../plugins/phone//PageComponent.qml:28
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:74
-msgid "Phone"
-msgstr "Telefon"
-
-#: ../plugins/bluetooth//PageComponent.qml:89
-msgid "Modem"
-msgstr "Modem"
-
-#: ../plugins/bluetooth//PageComponent.qml:90 ../src/qml/MainWindow.qml:145
-msgid "Network"
-msgstr "Rangkaian"
-
-#: ../plugins/bluetooth//PageComponent.qml:91
-msgid "Headset"
-msgstr "Set Kepala"
-
-#: ../plugins/bluetooth//PageComponent.qml:92
-msgid "Headphones"
-msgstr "Fon Kepala"
-
-#: ../plugins/bluetooth//PageComponent.qml:93
-msgid "Video"
-msgstr "Video"
-
-#: ../plugins/bluetooth//PageComponent.qml:94
-msgid "Other Audio"
-msgstr "Lain-lain Audio"
-
-#: ../plugins/bluetooth//PageComponent.qml:95
-msgid "Joypad"
-msgstr "Kayu Ria"
-
-#: ../plugins/bluetooth//PageComponent.qml:96
-msgid "Keyboard"
-msgstr "Papan Kekunci"
-
-#: ../plugins/bluetooth//PageComponent.qml:97
-msgid "Tablet"
-msgstr "Tablet"
-
-#: ../plugins/bluetooth//PageComponent.qml:98
-msgid "Mouse"
-msgstr "Tetikus"
-
-#: ../plugins/bluetooth//PageComponent.qml:99
-msgid "Printer"
-msgstr "Pencetak"
-
-#: ../plugins/bluetooth//PageComponent.qml:100
-msgid "Camera"
-msgstr "Kamera"
-
-#: ../plugins/bluetooth//PageComponent.qml:101
-msgid "Other"
-msgstr "Lain-lain"
-
-#: ../plugins/bluetooth//PageComponent.qml:107
-msgid "Excellent"
-msgstr "Bagus"
-
-#: ../plugins/bluetooth//PageComponent.qml:108
-msgid "Good"
-msgstr "Baik"
-
-#: ../plugins/bluetooth//PageComponent.qml:109
-msgid "Fair"
-msgstr "Sederhana"
-
-#: ../plugins/bluetooth//PageComponent.qml:110
-msgid "Poor"
-msgstr "Teruk"
-
-#: ../plugins/bluetooth//PageComponent.qml:111
-#: ../plugins/bluetooth//PageComponent.qml:302
-#: ../plugins/bluetooth//PageComponent.qml:310
-#: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PageComponent.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:40
-msgid "None"
-msgstr "Tiada"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:117
-#: ../plugins/bluetooth//PageComponent.qml:136
-#: ../plugins/battery//PageComponent.qml:342
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:10
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../plugins/bluetooth//PageComponent.qml:171
-msgid "Discoverable"
-msgstr "Boleh ditemui"
-
-#: ../plugins/bluetooth//PageComponent.qml:171
-msgid "Not discoverable"
-msgstr "Tidak boleh ditemui"
-
-#: ../plugins/bluetooth//PageComponent.qml:202
-msgid "Connected devices:"
-msgstr "Peranti bersambung:"
-
-#: ../plugins/bluetooth//PageComponent.qml:236
-msgid "Connect another device:"
-msgstr "Sambung peranti lain:"
-
-#: ../plugins/bluetooth//PageComponent.qml:236
-msgid "Connect a device:"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:266
-msgid "None detected"
-msgstr "Tiada dikesan"
-
-#: ../plugins/bluetooth//PageComponent.qml:274
-#: ../plugins/bluetooth//PageComponent.qml:360
-msgid "Connect automatically when detected:"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:309
-#: ../plugins/wifi//NetworkDetails.qml:43
-msgid "Name"
-msgstr "Nama"
-
-#: ../plugins/bluetooth//PageComponent.qml:327
-msgid "Type"
-msgstr "Jenis"
-
-#: ../plugins/bluetooth//PageComponent.qml:351
-msgid "Status"
-msgstr ""
-
-#: ../plugins/bluetooth//PageComponent.qml:355
-msgid "Signal Strength"
-msgstr "Kekuatan Isyarat"
-
-#: ../plugins/bluetooth//PageComponent.qml:374
-msgid "Disconnect"
-msgstr "Putuskan"
-
-#: ../plugins/bluetooth//PageComponent.qml:374
-#: ../plugins/wifi//OtherNetwork.qml:121
-msgid "Connect"
-msgstr "Sambung"
-
-#: ../plugins/bluetooth//PageComponent.qml:392
-msgid "Forget this device"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:16
-msgid "Notifications"
-msgstr ""
-
-#: ../plugins/notifications//PageComponent.qml:40
-msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "Pilih pengangkut:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Automatically"
-msgstr "Secara Automatik"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Manually"
-msgstr "Secara Manual"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "Segar Semula"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "Menggelintar"
-
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr "Ubah persediaan hotspot"
-
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr "Nama hotspot"
-
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr "Kunci (mesti  8 aksara atau lebih)"
-
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr "Tunjuk kunci"
-
-#: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:297
-msgid "Change"
-msgstr "Ubah"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
-msgid "Cellular"
-msgstr "Selular"
-
-#: ../plugins/cellular//PageComponent.qml:132
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr "Hotspot dilumpuhkan kerana Wi-Fi tidak dihidupkan."
-
-#: ../plugins/cellular//PageComponent.qml:138
-#: ../plugins/cellular//Hotspot.qml:29
-msgid "Wi-Fi hotspot"
-msgstr "Hotspot Wi-Fi"
-
-#: ../plugins/cellular//PageComponent.qml:147
-msgid "Data usage statistics"
-msgstr "Statistik penggunaan data"
-
-#: ../plugins/cellular//PageComponent.qml:153
-#: ../plugins/cellular//PageComponent.qml:161
-msgid "Carrier"
-msgid_plural "Carriers"
-msgstr[0] "Pengangkut"
-msgstr[1] "Pengangkut"
-
-#: ../plugins/cellular//PageComponent.qml:175
-#: ../plugins/cellular//PageChooseCarriers.qml:50
-#: ../plugins/cellular//PageChooseCarriers.qml:66
-#: ../plugins/battery//PageComponent.qml:117
-#: ../plugins/battery//PageComponent.qml:268 ../plugins/about//Storage.qml:204
-msgid "N/A"
-msgstr "T/B"
-
-#: ../plugins/cellular//PageComponent.qml:180
-msgid "APN"
-msgstr "APN"
-
-#: ../plugins/cellular//Hotspot.qml:40
-msgid "Hotspot"
-msgstr "Hotspot"
-
-#: ../plugins/cellular//Hotspot.qml:60
-msgid ""
-"When hotspot is on, other devices can use your cellular data connection over "
-"Wi-Fi. Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:61
-msgid ""
-"Other devices can use your cellular data connection over the Wi-Fi network. "
-"Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:65
-msgid "Set up hotspot"
-msgstr "Persediaan hotspot"
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-msgid "Carriers"
-msgstr "Pengangkut"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "Telefon dalam Mod Senyap."
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:54
-msgid "Sound"
-msgstr "Bunyi"
-
-#: ../plugins/sound//PageComponent.qml:75
-msgid "Silent Mode"
-msgstr "Mod Senyap"
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr "Pendering:"
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr "Panggilan telefon:"
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr "Nada dering"
-
-#: ../plugins/sound//PageComponent.qml:134
-msgid "Vibrate when ringing"
-msgstr "Gegar bila mendering"
-
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Vibrate in Silent Mode"
-msgstr "Getar dalam Mod Senyap"
-
-#: ../plugins/sound//PageComponent.qml:147
-msgid "Messages:"
-msgstr "Mesej:"
-
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Message received"
-msgstr "Mesej Diterima"
-
-#: ../plugins/sound//PageComponent.qml:169
-msgid "Vibrate with message sound"
-msgstr "Getar dengan bunyi mesej"
-
-#: ../plugins/sound//PageComponent.qml:182
-msgid "Other sounds:"
-msgstr "Lain-lain bunyi:"
-
-#: ../plugins/sound//PageComponent.qml:186
-#: ../plugins/language//PageComponent.qml:161
-msgid "Keyboard sound"
-msgstr "Bunyi papan kekunci"
-
-#: ../plugins/sound//PageComponent.qml:200
-msgid "Lock sound"
-msgstr "Bunyi kunci"
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr "Henti main"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:34
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:60
-msgid "Battery"
-msgstr "Bateri"
-
-#. TRANSLATORS: %1 is the number of seconds
-#: ../plugins/battery//PageComponent.qml:46
-#, qt-format
-msgid "%1 second ago"
-msgid_plural "%1 seconds ago"
-msgstr[0] "%1 saat yang lalu"
-msgstr[1] "%1 saat yang lalu"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:49
-#, qt-format
-msgid "%1 minute ago"
-msgid_plural "%1 minutes ago"
-msgstr[0] "%1 minit yang lalu"
-msgstr[1] "%1 minit yang lalu"
-
-#. TRANSLATORS: %1 is the number of hours
-#: ../plugins/battery//PageComponent.qml:52
-#, qt-format
-msgid "%1 hour ago"
-msgid_plural "%1 hours ago"
-msgstr[0] "%1 jam yang lalu"
-msgstr[1] "%1 jam yang lalu"
-
-#. TRANSLATORS: %1 is the number of days
-#: ../plugins/battery//PageComponent.qml:55
-#, qt-format
-msgid "%1 day ago"
-msgid_plural "%1 days ago"
-msgstr[0] "%1 hari yang lalu"
-msgstr[1] "%1 hari yang lalu"
-
-#: ../plugins/battery//PageComponent.qml:75
-msgid "Charging now"
-msgstr "Sekarang mengecas"
-
-#: ../plugins/battery//PageComponent.qml:80
-msgid "Last full charge"
-msgstr "Terakhir dicas penuh"
-
-#: ../plugins/battery//PageComponent.qml:85
-msgid "Fully charged"
-msgstr "Sepenuhnya dicas"
-
-#: ../plugins/battery//PageComponent.qml:111
-msgid "Charge level"
-msgstr "Aras cas"
-
-#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:120
-#, qt-format
-msgid "%1%"
-msgstr "%1%"
-
-#: ../plugins/battery//PageComponent.qml:195
-#: ../plugins/battery//PageComponent.qml:197
-msgid "Yesterday"
-msgstr "Semalam"
-
-#: ../plugins/battery//PageComponent.qml:203
-#: ../plugins/battery//PageComponent.qml:205
-msgid "Today"
-msgstr "Hari Ini"
-
-#: ../plugins/battery//PageComponent.qml:273
-msgid "Ways to reduce battery use:"
-msgstr "Cara mengurangkan penggunaan bateri:"
-
-#: ../plugins/battery//PageComponent.qml:284
-#: ../plugins/security-privacy//PhoneLocking.qml:62
-msgid "Lock when idle"
-msgstr "Kunci bila melahu"
-
-#: ../plugins/battery//PageComponent.qml:284
-#: ../plugins/security-privacy//PhoneLocking.qml:63
-msgid "Sleep when idle"
-msgstr "Tidur bila melahu"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:290
-#: ../plugins/battery//PageComponent.qml:299
-#: ../plugins/battery//SleepValues.qml:77
-#: ../plugins/battery//SleepValues.qml:81
-#: ../plugins/battery//SleepValues.qml:85
-#: ../plugins/battery//SleepValues.qml:89
-#: ../plugins/battery//SleepValues.qml:93
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "Selepas %1 minit"
-msgstr[1] "Selepas %1 minit"
-
-#: ../plugins/battery//PageComponent.qml:293
-#: ../plugins/battery//PageComponent.qml:302
-#: ../plugins/battery//SleepValues.qml:96
-#: ../plugins/about//PageComponent.qml:149
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//Configuration.qml:53
-#: ../plugins/system-update//PageComponent.qml:449
-msgid "Never"
-msgstr "Tidak Sesekali"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/wifi//PageComponent.qml:26
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:96
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
-#: ../plugins/battery//PageComponent.qml:373
-msgid "GPS"
-msgstr "GPS"
-
-#: ../plugins/battery//PageComponent.qml:392
-msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "Pengesanan lokasi yang tepat memerlukan GPS dan/atau Wi-Fi."
-
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr "Kunci telefon bila tidak digunakan:"
-
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "Biarkan telefon tidur bila tidak digunakan:"
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-"Masa lebih pendek adalah lebih selamat. Telefon tidak akan dikunci semasa "
-"panggilan telefon atau main balik video."
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
-"Telefon tidak akan tidur semasa panggilan telefon atau main balik video."
-
-#: ../plugins/phone//CallForwarding.qml:28
-#: ../plugins/phone//CallForwarding.qml:75
-#: ../plugins/phone//PageComponent.qml:51
-msgid "Call forwarding"
-msgstr "Pemajuan panggilan"
-
-#: ../plugins/phone//CallForwarding.qml:90
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"Hala semula panggilan telefon ke nombor lain bila anda tidak menjawab, atau "
-"telefon anda sibuk, dimatikan, atau diluar rangkaian."
-
-#: ../plugins/phone//CallForwarding.qml:100
-msgid "Forward to"
-msgstr "Dimajukan kepada"
-
-#: ../plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr "SIM"
-
-#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
-#: ../plugins/phone//CallWaiting.qml:63
-msgid "Call waiting"
-msgstr "Panggilan menunggu"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
-#, qt-format
-msgid "%1 Services"
-msgstr "Perkhidmatan %1"
-
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
-msgstr "Panggilan %1 terakhir"
-
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "Panggilan"
-
-#: ../plugins/phone//CallWaiting.qml:78
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-"Benarkan anda menjawab atau mulakan panggilan baru dalam panggilan lain, dan "
-"tukar diantara mereka"
-
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
-msgid "Storage"
-msgstr "Storan"
-
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "Digunakan oleh Ubuntu"
-
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "Video"
-
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "Audio"
-
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "Gambar"
-
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "Lain-lain fail"
-
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "Digunakan oleh apl"
-
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "Jumlah storan"
-
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "Ruang bebas"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "Mengikut nama"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "Mengikut saiz"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:88
-msgid "About this phone"
-msgstr "Perihal telefon ini"
-
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Nombor telefon"
-
-#: ../plugins/about//PageComponent.qml:107
-msgid "Serial"
-msgstr "Siri"
-
-#: ../plugins/about//PageComponent.qml:133
-msgid "Software:"
-msgstr "Perisian:"
-
-#: ../plugins/about//PageComponent.qml:138
-msgid "OS"
-msgstr "OS"
-
-#: ../plugins/about//PageComponent.qml:147
-msgid "Last updated"
-msgstr "Terakhir dikemaskini"
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "Check for updates"
-msgstr "Periksa kemaskini"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Legal:"
-msgstr "Perundangan:"
-
-#: ../plugins/about//PageComponent.qml:169 ../plugins/about//Software.qml:11
-msgid "Software licenses"
-msgstr "Lesen perisian"
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Regulatory info"
-msgstr "Maklumat peraturan"
-
-#: ../plugins/about//PageComponent.qml:185
-msgid "Developer mode"
-msgstr "Mod pembangun"
-
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr "Perincian Binaan OS"
-
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr "Nombor binaan OS"
-
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr "Bahagian Imej Ubuntu"
-
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr "Keterangan binaan Ubuntu"
-
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr "Bahagian Imej Peranti"
-
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr "Keterangan binaan Peranti"
-
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr "Bahagian Imej Penyuaian"
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
-msgid "Developer Mode"
-msgstr "Mod Pembangun"
-
-#: ../plugins/about//DevMode.qml:73
-msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:104
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/security-privacy//PageComponent.qml:82
-#: ../plugins/security-privacy//PhoneLocking.qml:44
-msgid "Lock security"
-msgstr "Kunci keselamatan"
-
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr "Terakhir disambung"
-
-#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
-msgid "Password"
-msgstr "Kata Laluan"
-
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr "Tunjuk kata laluan"
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr "Lupakan rangkaian"
-
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr "Rangkaian terdahulu"
-
-#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
-msgstr "Rangkaian lain"
-
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr "Nama rangkaian"
-
-#: ../plugins/wifi//OtherNetwork.qml:66
-msgid "Security"
-msgstr "Keselamatan"
-
-#: ../plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 Persendirian"
-
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr "WEP"
-
-#: ../plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
-msgstr "Kata laluan kelihatan"
-
-#: ../plugins/system-update//Configuration.qml:30
-#: ../plugins/system-update//PageComponent.qml:446
-msgid "Auto download"
-msgstr "Muat turun automatik"
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "Muat turun kemaskini akan datang secara automatik:"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "Bila ada wi-fi"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "Bila dalam mana-mana sambungan data"
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "Cas data akan dikenakan."
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:110
-msgid "Updates"
-msgstr "Kemaskini"
-
-#: ../plugins/system-update//PageComponent.qml:51
-msgid "Update System"
-msgstr "Kemaskini Sistem"
-
-#: ../plugins/system-update//PageComponent.qml:52
-msgid "The phone needs to restart to install the system update."
-msgstr "Telefon perlu dimulakan semula untuk pemasangan kemaskini sistem."
-
-#: ../plugins/system-update//PageComponent.qml:55
-msgid "Install & Restart"
-msgstr "Pasang & Mula Semula"
-
-#: ../plugins/system-update//PageComponent.qml:64
-msgid "Not Now"
-msgstr "Bukan Sekarang"
-
-#: ../plugins/system-update//PageComponent.qml:70
-msgid "Install"
-msgstr "Pasang"
-
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "Software is up to date"
-msgstr "Perisian sudah dikemaskini"
-
-#: ../plugins/system-update//PageComponent.qml:142
-msgid "Please log into your Ubuntu One account."
-msgstr "Sila daftar masuk ke akauan Ubuntu One anda."
-
-#: ../plugins/system-update//PageComponent.qml:157
-msgid "System update has failed."
-msgstr "Kemaskini sistem gagal."
-
-#: ../plugins/system-update//PageComponent.qml:168
-msgid "System update failed."
-msgstr "Gagal kemas kini sistem."
-
-#: ../plugins/system-update//PageComponent.qml:199
-msgid "Checking for updates…"
-msgstr "Memeriksa kemaskini..."
-
-#: ../plugins/system-update//PageComponent.qml:217
-#, qt-format
-msgid "Install %1 updates…"
-msgstr "Pasang %1 kemaskini…"
-
-#: ../plugins/system-update//PageComponent.qml:217
-#, qt-format
-msgid "Install %1 updates"
-msgstr "Pasang %1 kemaskini"
-
-#: ../plugins/system-update//PageComponent.qml:218
-msgid "Pause All"
-msgstr "Jeda Semua"
-
-#: ../plugins/system-update//PageComponent.qml:287
-msgid "Retry"
-msgstr "Cuba lagi"
-
-#: ../plugins/system-update//PageComponent.qml:303
-msgid "Download"
-msgstr "Muat turun"
-
-#: ../plugins/system-update//PageComponent.qml:303
-msgid "Update"
-msgstr "Kemas kini"
-
-#: ../plugins/system-update//PageComponent.qml:304
-msgid "Resume"
-msgstr "Sambung semula"
-
-#: ../plugins/system-update//PageComponent.qml:305
-msgid "Pause"
-msgstr "Jeda"
-
-#: ../plugins/system-update//PageComponent.qml:364
-msgid "Installing"
-msgstr "Memasang"
-
-#: ../plugins/system-update//PageComponent.qml:397
-msgid "Installed"
-msgstr "Dipasang"
-
-#: ../plugins/system-update//PageComponent.qml:421
-msgid "Version: "
-msgstr "Versi: "
-
-#: ../plugins/system-update//PageComponent.qml:451
-msgid "On wi-fi"
-msgstr "Dalam wi-fi"
-
-#: ../plugins/system-update//PageComponent.qml:453
-msgid "Always"
-msgstr "Sentiasa"
-
-#: ../plugins/system-update//PageComponent.qml:505
-msgid "Credentials not found"
-msgstr "Kelayakan tidak ditemui"
-
-#: ../plugins/system-update//PageComponent.qml:535
-msgid "Installing update…"
-msgstr "Memasang kemaskini..."
-
-#: ../plugins/system-update//PageComponent.qml:549
-msgid " bytes"
-msgstr " bait"
-
-#: ../plugins/system-update//PageComponent.qml:552
-msgid " KiB"
-msgstr " KiB"
-
-#: ../plugins/system-update//PageComponent.qml:555
-msgid " MiB"
-msgstr " MiB"
-
-#: ../plugins/system-update//PageComponent.qml:558
-msgid " GiB"
-msgstr " GiB"
+"X-Launchpad-Export-Date: 2014-08-20 06:20+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:101
-#: ../plugins/language//PageComponent.qml:111
+#: ../plugins/language//PageComponent.qml:108
+#: ../plugins/language//PageComponent.qml:118
 msgid "Spell checking"
 msgstr "Semak ejaan"
 
@@ -993,35 +34,53 @@ msgid "All languages available:"
 msgstr "Semua bahasa yang tersedia:"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:32
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:120
+#: ../plugins/language//PageComponent.qml:33
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:2
 msgid "Language & Text"
 msgstr "Bahasa & Teks"
 
-#: ../plugins/language//PageComponent.qml:72
+#: ../plugins/language//PageComponent.qml:79
 msgid "Display language…"
 msgstr "Bahasa paparan..."
 
-#: ../plugins/language//PageComponent.qml:86
+#: ../plugins/language//PageComponent.qml:93
 #: ../plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
 msgstr "Bentangan papan kekunci"
 
-#: ../plugins/language//PageComponent.qml:121
-msgid "Auto completion"
-msgstr "Pelengkapan automatik"
+#: ../plugins/language//PageComponent.qml:128
+msgid "Auto correction"
+msgstr ""
 
-#: ../plugins/language//PageComponent.qml:131
+#: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
 msgstr "Cadangan perkataan"
 
-#: ../plugins/language//PageComponent.qml:144
+#: ../plugins/language//PageComponent.qml:151
 msgid "Auto capitalization"
 msgstr "Penulisan huruf besar automatik"
 
-#: ../plugins/language//PageComponent.qml:154
+#: ../plugins/language//PageComponent.qml:161
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr "Hidupkan Shift untuk besarkan huruf pertama bagi setiap ayat."
+
+#: ../plugins/language//PageComponent.qml:168
+msgid "Auto punctuation"
+msgstr ""
+
+#: ../plugins/language//PageComponent.qml:178
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr ""
+
+#: ../plugins/language//PageComponent.qml:185
+#: ../plugins/sound//PageComponent.qml:186
+msgid "Keyboard sound"
+msgstr "Bunyi papan kekunci"
+
+#: ../plugins/language//PageComponent.qml:195
+msgid "Keyboard vibration"
+msgstr ""
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -1035,173 +94,28 @@ msgstr "Semua bentangan tersedia:"
 msgid "Display language"
 msgstr "Bahasa paparan"
 
+#: ../plugins/language//DisplayLanguage.qml:94
+#: ../plugins/security-privacy//LockSecurity.qml:279
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/wifi//OtherNetwork.qml:112 ../plugins/background//Preview.qml:97
+#: ../plugins/phone//CallForwarding.qml:136
+msgid "Cancel"
+msgstr "Batal"
+
 #: ../plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
 msgstr "Sahkan"
 
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:130
-msgid "Time & Date"
-msgstr "Masa & Tarikh"
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "Zon waktu:"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "Tetapkan masa dan tarikh:"
-
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "Tetapkan masa & tarikh"
-
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "Masa"
-
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "Jam"
-
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "Minit"
-
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "Saat"
-
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "Tarikh"
-
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "Hari"
-
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "Bulan"
-
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "Tahun"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "Zon waktu"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "Tetapkan zon waktu:"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "Masukkan lokasi semasa anda."
-
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "Tiada tempat sepadan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:92
-msgid "Change passcode"
-msgstr "Ubah kod laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:94
-msgid "Change passphrase"
-msgstr "Ubah frasa laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:101
-msgid "Switch to swipe"
-msgstr "Tukar ke leret"
-
-#: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr "Tukar ke kod laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:105
-msgid "Switch to passphrase"
-msgstr "Tukar ke frasa laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr "Keluar dari kod laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:116
-msgid "Existing passphrase"
-msgstr "Keluar dari frasa laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr "Pilih kod laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:172
-msgid "Choose passphrase"
-msgstr "Pilih frasa laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr "Sahkan kod laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:218
-msgid "Confirm passphrase"
-msgstr "Sahkan frasa laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:260
-msgid "Those passcodes don't match. Try again."
-msgstr "Kod laluan tersebut tidak sepadan. Cuba lagi."
-
-#: ../plugins/security-privacy//LockSecurity.qml:263
-msgid "Those passphrases don't match. Try again."
-msgstr "Frasa laluan tersebut tidak sepadan. Cuba lagi."
-
-#: ../plugins/security-privacy//LockSecurity.qml:294
-msgid "Unset"
-msgstr "Nyahtetap"
-
-#: ../plugins/security-privacy//LockSecurity.qml:339
-msgid "Unlock the phone using:"
-msgstr "Nyahkunci telefon menggunakan:"
-
-#: ../plugins/security-privacy//LockSecurity.qml:343
-msgid "Swipe (no security)"
-msgstr "Leret (tanpa keselamatan)"
-
-#: ../plugins/security-privacy//LockSecurity.qml:344
-msgid "4-digit passcode"
-msgstr "Kod laluan 4-digit"
-
-#: ../plugins/security-privacy//LockSecurity.qml:345
-#: ../plugins/security-privacy//PageComponent.qml:80
-#: ../plugins/security-privacy//PhoneLocking.qml:42
-msgid "Passphrase"
-msgstr "Frasa laluan"
-
-#: ../plugins/security-privacy//LockSecurity.qml:346
-msgid "Swipe (no security)… "
-msgstr "Leret (tanpa keselamatan)... "
-
-#: ../plugins/security-privacy//LockSecurity.qml:347
-msgid "4-digit passcode…"
-msgstr "Kod laluan 4-digit..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "Passphrase…"
-msgstr "Frasa laluan..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:379
-msgid "Change passcode…"
-msgstr "Ubah kod laluan..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passphrase…"
-msgstr "Ubah frasa laluan..."
-
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:33
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:140
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:12
 msgid "Security & Privacy"
 msgstr "Keselamatan & Persendirian"
 
@@ -1221,10 +135,34 @@ msgstr "Telefon sahaja"
 msgid "Security:"
 msgstr "Keselamatan:"
 
+#: ../plugins/security-privacy//PageComponent.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:40
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:302
+#: ../plugins/bluetooth//PageComponent.qml:310
+#: ../plugins/wifi//OtherNetwork.qml:67
+msgid "None"
+msgstr "Tiada"
+
 #: ../plugins/security-privacy//PageComponent.qml:79
 #: ../plugins/security-privacy//PhoneLocking.qml:41
+#: ../wizard/qml/Pages//15-passwd.qml:88
 msgid "Passcode"
 msgstr "Kod laluan"
+
+#: ../plugins/security-privacy//PageComponent.qml:80
+#: ../plugins/security-privacy//PhoneLocking.qml:42
+#: ../plugins/security-privacy//LockSecurity.qml:346
+#: ../wizard/qml/Pages//15-passwd.qml:90
+msgid "Passphrase"
+msgstr "Frasa laluan"
+
+#: ../plugins/security-privacy//PageComponent.qml:82
+#: ../plugins/security-privacy//PhoneLocking.qml:44
+#: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/about//DevMode.qml:104
+msgid "Lock security"
+msgstr "Kunci keselamatan"
 
 #: ../plugins/security-privacy//PageComponent.qml:99
 #: ../plugins/security-privacy//PhoneLocking.qml:29
@@ -1266,6 +204,7 @@ msgid "Location access"
 msgstr "Capaian lokasi"
 
 #: ../plugins/security-privacy//PageComponent.qml:174
+#: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "Lain-lain capaian apl"
 
@@ -1285,13 +224,19 @@ msgstr "Hantar"
 msgid "Not sent"
 msgstr "Tidak hantar"
 
+#: ../plugins/security-privacy//PhoneLocking.qml:62
+#: ../plugins/battery//PageComponent.qml:300
+msgid "Lock when idle"
+msgstr "Kunci bila melahu"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:63
+#: ../plugins/battery//PageComponent.qml:300
+msgid "Sleep when idle"
+msgstr "Tidur bila melahu"
+
 #: ../plugins/security-privacy//PhoneLocking.qml:79
 msgid "Sleep locks immediately"
 msgstr "Tidur dikunci serta-merta"
-
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "Keputusan dari:"
 
 #: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
@@ -1364,9 +309,654 @@ msgstr ""
 msgid "Allow access to location:"
 msgstr "Benarkan capaian ke lokasi:"
 
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:100
+msgid "Camera"
+msgstr "Kamera"
+
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:59
+#, qt-format
+msgid "%1/%2"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:92
+msgid "Change passcode"
+msgstr "Ubah kod laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:94
+msgid "Change passphrase"
+msgstr "Ubah frasa laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:101
+msgid "Switch to swipe"
+msgstr "Tukar ke leret"
+
+#: ../plugins/security-privacy//LockSecurity.qml:103
+msgid "Switch to passcode"
+msgstr "Tukar ke kod laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to passphrase"
+msgstr "Tukar ke frasa laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:114
+msgid "Existing passcode"
+msgstr "Keluar dari kod laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:116
+msgid "Existing passphrase"
+msgstr "Keluar dari frasa laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:170
+msgid "Choose passcode"
+msgstr "Pilih kod laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:172
+msgid "Choose passphrase"
+msgstr "Pilih frasa laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:216
+msgid "Confirm passcode"
+msgstr "Sahkan kod laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:218
+msgid "Confirm passphrase"
+msgstr "Sahkan frasa laluan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:261
+msgid "Those passcodes don't match. Try again."
+msgstr "Kod laluan tersebut tidak sepadan. Cuba lagi."
+
+#: ../plugins/security-privacy//LockSecurity.qml:264
+msgid "Those passphrases don't match. Try again."
+msgstr "Frasa laluan tersebut tidak sepadan. Cuba lagi."
+
+#: ../plugins/security-privacy//LockSecurity.qml:295
+msgid "Unset"
+msgstr "Nyahtetap"
+
+#: ../plugins/security-privacy//LockSecurity.qml:298
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr "Ubah"
+
+#: ../plugins/security-privacy//LockSecurity.qml:300
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/background//Preview.qml:104
+#: ../plugins/phone//CallForwarding.qml:148
+msgid "Set"
+msgstr "Tetapkan"
+
+#: ../plugins/security-privacy//LockSecurity.qml:340
+msgid "Unlock the phone using:"
+msgstr "Nyahkunci telefon menggunakan:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "Swipe (no security)"
+msgstr "Leret (tanpa keselamatan)"
+
+#: ../plugins/security-privacy//LockSecurity.qml:345
+msgid "4-digit passcode"
+msgstr "Kod laluan 4-digit"
+
+#: ../plugins/security-privacy//LockSecurity.qml:347
+msgid "Swipe (no security)… "
+msgstr "Leret (tanpa keselamatan)... "
+
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "4-digit passcode…"
+msgstr "Kod laluan 4-digit..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "Passphrase…"
+msgstr "Frasa laluan..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:380
+msgid "Change passcode…"
+msgstr "Ubah kod laluan..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:381
+msgid "Change passphrase…"
+msgstr "Ubah frasa laluan..."
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "Keputusan dari:"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+msgid "Carriers"
+msgstr "Pengangkut"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:50
+#: ../plugins/cellular//PageChooseCarriers.qml:66
+#: ../plugins/cellular//PageComponent.qml:175
+#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:125
+#: ../plugins/battery//PageComponent.qml:281
+msgid "N/A"
+msgstr "T/B"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:28
+msgid "Cellular"
+msgstr "Selular"
+
+#: ../plugins/cellular//PageComponent.qml:132
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "Hotspot dilumpuhkan kerana Wi-Fi tidak dihidupkan."
+
+#: ../plugins/cellular//PageComponent.qml:138
+#: ../plugins/cellular//Hotspot.qml:29
+msgid "Wi-Fi hotspot"
+msgstr "Hotspot Wi-Fi"
+
+#: ../plugins/cellular//PageComponent.qml:147
+msgid "Data usage statistics"
+msgstr "Statistik penggunaan data"
+
+#: ../plugins/cellular//PageComponent.qml:153
+#: ../plugins/cellular//PageComponent.qml:161
+msgid "Carrier"
+msgid_plural "Carriers"
+msgstr[0] "Pengangkut"
+msgstr[1] "Pengangkut"
+
+#: ../plugins/cellular//PageComponent.qml:180
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "Pilih pengangkut:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Automatically"
+msgstr "Secara Automatik"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Manually"
+msgstr "Secara Manual"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "Segar Semula"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "Menggelintar"
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr "Hotspot"
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr "Persediaan hotspot"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "Ubah persediaan hotspot"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "Nama hotspot"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "Kunci (mesti  8 aksara atau lebih)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "Tunjuk kunci"
+
+#: ../plugins/bluetooth//PageComponent.qml:77
+msgid "Connected"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:78
+msgid "Connecting…"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:79
+msgid "Disconnecting…"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:80
+msgid "Disconnected"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:81
+msgid "Unknown"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:87
+msgid "Computer"
+msgstr "Komputer"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/bluetooth//PageComponent.qml:88
+#: ../plugins/phone//PageComponent.qml:28
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:104
+msgid "Phone"
+msgstr "Telefon"
+
+#: ../plugins/bluetooth//PageComponent.qml:89
+msgid "Modem"
+msgstr "Modem"
+
+#: ../plugins/bluetooth//PageComponent.qml:90 ../src/qml/MainWindow.qml:145
+msgid "Network"
+msgstr "Rangkaian"
+
+#: ../plugins/bluetooth//PageComponent.qml:91
+msgid "Headset"
+msgstr "Set Kepala"
+
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Headphones"
+msgstr "Fon Kepala"
+
+#: ../plugins/bluetooth//PageComponent.qml:93
+msgid "Video"
+msgstr "Video"
+
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Other Audio"
+msgstr "Lain-lain Audio"
+
+#: ../plugins/bluetooth//PageComponent.qml:95
+msgid "Joypad"
+msgstr "Kayu Ria"
+
+#: ../plugins/bluetooth//PageComponent.qml:96
+msgid "Keyboard"
+msgstr "Papan Kekunci"
+
+#: ../plugins/bluetooth//PageComponent.qml:97
+msgid "Tablet"
+msgstr "Tablet"
+
+#: ../plugins/bluetooth//PageComponent.qml:98
+msgid "Mouse"
+msgstr "Tetikus"
+
+#: ../plugins/bluetooth//PageComponent.qml:99
+msgid "Printer"
+msgstr "Pencetak"
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Other"
+msgstr "Lain-lain"
+
+#: ../plugins/bluetooth//PageComponent.qml:107
+msgid "Excellent"
+msgstr "Bagus"
+
+#: ../plugins/bluetooth//PageComponent.qml:108
+msgid "Good"
+msgstr "Baik"
+
+#: ../plugins/bluetooth//PageComponent.qml:109
+msgid "Fair"
+msgstr "Sederhana"
+
+#: ../plugins/bluetooth//PageComponent.qml:110
+msgid "Poor"
+msgstr "Teruk"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/bluetooth//PageComponent.qml:117
+#: ../plugins/bluetooth//PageComponent.qml:136
+#: ../plugins/battery//PageComponent.qml:358
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:40
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../plugins/bluetooth//PageComponent.qml:171
+msgid "Discoverable"
+msgstr "Boleh ditemui"
+
+#: ../plugins/bluetooth//PageComponent.qml:171
+msgid "Not discoverable"
+msgstr "Tidak boleh ditemui"
+
+#: ../plugins/bluetooth//PageComponent.qml:202
+msgid "Connected devices:"
+msgstr "Peranti bersambung:"
+
+#: ../plugins/bluetooth//PageComponent.qml:236
+msgid "Connect another device:"
+msgstr "Sambung peranti lain:"
+
+#: ../plugins/bluetooth//PageComponent.qml:236
+msgid "Connect a device:"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:266
+msgid "None detected"
+msgstr "Tiada dikesan"
+
+#: ../plugins/bluetooth//PageComponent.qml:274
+#: ../plugins/bluetooth//PageComponent.qml:360
+msgid "Connect automatically when detected:"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:309
+#: ../plugins/wifi//NetworkDetails.qml:43
+msgid "Name"
+msgstr "Nama"
+
+#: ../plugins/bluetooth//PageComponent.qml:327
+msgid "Type"
+msgstr "Jenis"
+
+#: ../plugins/bluetooth//PageComponent.qml:351
+msgid "Status"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:355
+msgid "Signal Strength"
+msgstr "Kekuatan Isyarat"
+
+#: ../plugins/bluetooth//PageComponent.qml:374
+msgid "Disconnect"
+msgstr "Putuskan"
+
+#: ../plugins/bluetooth//PageComponent.qml:374
+#: ../plugins/wifi//OtherNetwork.qml:121
+msgid "Connect"
+msgstr "Sambung"
+
+#: ../plugins/bluetooth//PageComponent.qml:392
+msgid "Forget this device"
+msgstr ""
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "Permintaan Perpasangan Bluetooth"
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "PIN untuk '%1'"
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+msgid "Pair"
+msgstr "Pasangan"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "Sila sahkan sama ada PIN dipapar pada '%1' adalah sepadan"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "Sahkan PIN"
+
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
+msgid "Software licenses"
+msgstr "Lesen perisian"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:46
+msgid "About this phone"
+msgstr "Perihal telefon ini"
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Nombor telefon"
+
+#: ../plugins/about//PageComponent.qml:107
+msgid "Serial"
+msgstr "Siri"
+
+#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
+msgid "Storage"
+msgstr "Storan"
+
+#: ../plugins/about//PageComponent.qml:133
+msgid "Software:"
+msgstr "Perisian:"
+
+#: ../plugins/about//PageComponent.qml:138
+msgid "OS"
+msgstr "OS"
+
+#: ../plugins/about//PageComponent.qml:147
+msgid "Last updated"
+msgstr "Terakhir dikemaskini"
+
+#: ../plugins/about//PageComponent.qml:149
+#: ../plugins/battery//PageComponent.qml:309
+#: ../plugins/battery//PageComponent.qml:318
+#: ../plugins/battery//SleepValues.qml:96
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/system-update//PageComponent.qml:448
+#: ../plugins/system-update//Configuration.qml:53
+msgid "Never"
+msgstr "Tidak Sesekali"
+
+#: ../plugins/about//PageComponent.qml:155
+msgid "Check for updates"
+msgstr "Periksa kemaskini"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Legal:"
+msgstr "Perundangan:"
+
+#: ../plugins/about//PageComponent.qml:177
+msgid "Regulatory info"
+msgstr "Maklumat peraturan"
+
+#: ../plugins/about//PageComponent.qml:185
+msgid "Developer mode"
+msgstr "Mod pembangun"
+
+#: ../plugins/about//Version.qml:35
+msgid "OS Build Details"
+msgstr "Perincian Binaan OS"
+
+#: ../plugins/about//Version.qml:53
+msgid "OS build number"
+msgstr "Nombor binaan OS"
+
+#: ../plugins/about//Version.qml:59
+msgid "Ubuntu Image part"
+msgstr "Bahagian Imej Ubuntu"
+
+#: ../plugins/about//Version.qml:85
+msgid "Ubuntu build description"
+msgstr "Keterangan binaan Ubuntu"
+
+#: ../plugins/about//Version.qml:100
+msgid "Device Image part"
+msgstr "Bahagian Imej Peranti"
+
+#: ../plugins/about//Version.qml:126
+msgid "Device build description"
+msgstr "Keterangan binaan Peranti"
+
+#: ../plugins/about//Version.qml:141
+msgid "Customization Image part"
+msgstr "Bahagian Imej Penyuaian"
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
+msgid "Developer Mode"
+msgstr "Mod Pembangun"
+
+#: ../plugins/about//DevMode.qml:73
+msgid ""
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
+msgstr ""
+
+#: ../plugins/about//DevMode.qml:98
+msgid "You need a passcode or passphrase set to use Developer Mode."
+msgstr ""
+
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "Digunakan oleh Ubuntu"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr "Video"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr "Audio"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr "Gambar"
+
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr "Lain-lain fail"
+
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "Digunakan oleh apl"
+
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
+msgstr "Jumlah storan"
+
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "Ruang bebas"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr "Mengikut nama"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr "Mengikut saiz"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:54
+msgid "Time & Date"
+msgstr "Masa & Tarikh"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Zon waktu:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Tetapkan masa dan tarikh:"
+
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "Tetapkan masa & tarikh"
+
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "Masa"
+
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "Jam"
+
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "Minit"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "Saat"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "Tarikh"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "Hari"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "Bulan"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "Tahun"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Zon waktu"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "Tetapkan zon waktu:"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "Masukkan lokasi semasa anda."
+
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "Tiada tempat sepadan"
+
+#: ../plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+"Kandungan dan bentangan pelancar, dan penapis dalam skrin rumah akan "
+"dikembalikan ke tetapan asalnya."
+
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "Tetap semula semua tetapan sistem"
+
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:148
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:64
 msgid "Reset phone"
 msgstr "Tetap semula telefon"
 
@@ -1391,18 +981,6 @@ msgstr ""
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
 
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr ""
-"Kandungan dan bentangan pelancar, dan penapis dalam skrin rumah akan "
-"dikembalikan ke tetapan asalnya."
-
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "Tetap semula semua tetapan sistem"
-
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
@@ -1415,9 +993,416 @@ msgstr ""
 msgid "Erase & Reset Everything"
 msgstr ""
 
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:70
+msgid "Battery"
+msgstr "Bateri"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery//PageComponent.qml:46
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 saat yang lalu"
+msgstr[1] "%1 saat yang lalu"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:49
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 minit yang lalu"
+msgstr[1] "%1 minit yang lalu"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery//PageComponent.qml:52
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 jam yang lalu"
+msgstr[1] "%1 jam yang lalu"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery//PageComponent.qml:55
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 hari yang lalu"
+msgstr[1] "%1 hari yang lalu"
+
+#: ../plugins/battery//PageComponent.qml:85
+msgid "Charging now"
+msgstr "Sekarang mengecas"
+
+#: ../plugins/battery//PageComponent.qml:90
+msgid "Last full charge"
+msgstr "Terakhir dicas penuh"
+
+#: ../plugins/battery//PageComponent.qml:95
+msgid "Fully charged"
+msgstr "Sepenuhnya dicas"
+
+#: ../plugins/battery//PageComponent.qml:120
+msgid "Charge level"
+msgstr "Aras cas"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery//PageComponent.qml:128
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../plugins/battery//PageComponent.qml:206
+#: ../plugins/battery//PageComponent.qml:208
+msgid "Yesterday"
+msgstr "Semalam"
+
+#: ../plugins/battery//PageComponent.qml:214
+#: ../plugins/battery//PageComponent.qml:216
+msgid "Today"
+msgstr "Hari Ini"
+
+#: ../plugins/battery//PageComponent.qml:286
+msgid "Ways to reduce battery use:"
+msgstr "Cara mengurangkan penggunaan bateri:"
+
+#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr ""
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:81
+#: ../plugins/battery//SleepValues.qml:85
+#: ../plugins/battery//SleepValues.qml:89
+#: ../plugins/battery//SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "Selepas %1 minit"
+msgstr[1] "Selepas %1 minit"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:328
+#: ../plugins/wifi//PageComponent.qml:26
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:76
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../plugins/battery//PageComponent.qml:389
+msgid "GPS"
+msgstr "GPS"
+
+#: ../plugins/battery//PageComponent.qml:407
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "Pengesanan lokasi yang tepat memerlukan GPS dan/atau Wi-Fi."
+
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "Kunci telefon bila tidak digunakan:"
+
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "Biarkan telefon tidur bila tidak digunakan:"
+
+#: ../plugins/battery//SleepValues.qml:107
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+"Masa lebih pendek adalah lebih selamat. Telefon tidak akan dikunci semasa "
+"panggilan telefon atau main balik video."
+
+#: ../plugins/battery//SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
+msgstr ""
+"Telefon tidak akan tidur semasa panggilan telefon atau main balik video."
+
+#: ../plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:114
+msgid "Previous networks"
+msgstr "Rangkaian terdahulu"
+
+#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
+msgid "Other network"
+msgstr "Rangkaian lain"
+
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr "Terakhir disambung"
+
+#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
+msgid "Password"
+msgstr "Kata Laluan"
+
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr "Tunjuk kata laluan"
+
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr "Lupakan rangkaian"
+
+#: ../plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr "Nama rangkaian"
+
+#: ../plugins/wifi//OtherNetwork.qml:66
+msgid "Security"
+msgstr "Keselamatan"
+
+#: ../plugins/wifi//OtherNetwork.qml:68
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 Persendirian"
+
+#: ../plugins/wifi//OtherNetwork.qml:69
+msgid "WEP"
+msgstr "WEP"
+
+#: ../plugins/wifi//OtherNetwork.qml:89
+msgid "Password visible"
+msgstr "Kata laluan kelihatan"
+
+#: ../plugins/background//Preview.qml:67
+msgid "Preview"
+msgstr "Pratonton"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:88
+msgid "Background"
+msgstr "Latar Belakang"
+
+#: ../plugins/background//MainPage.qml:112
+msgid "Ubuntu Art"
+msgstr "Seni Ubuntu"
+
+#: ../plugins/background//MainPage.qml:128
+msgid "Custom"
+msgstr "Suai"
+
+#: ../plugins/background//WallpaperGrid.qml:190
+msgid "Remove"
+msgstr "Buang"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:96
+msgid "Notifications"
+msgstr ""
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr ""
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "Panggilan %1 terakhir"
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "Panggilan"
+
+#: ../plugins/phone//PageComponent.qml:30
+msgid "SIM"
+msgstr "SIM"
+
+#: ../plugins/phone//PageComponent.qml:51
+#: ../plugins/phone//CallForwarding.qml:28
+#: ../plugins/phone//CallForwarding.qml:75
+msgid "Call forwarding"
+msgstr "Pemajuan panggilan"
+
+#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
+#: ../plugins/phone//CallWaiting.qml:63
+msgid "Call waiting"
+msgstr "Panggilan menunggu"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
+#, qt-format
+msgid "%1 Services"
+msgstr "Perkhidmatan %1"
+
+#: ../plugins/phone//CallWaiting.qml:78
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"Benarkan anda menjawab atau mulakan panggilan baru dalam panggilan lain, dan "
+"tukar diantara mereka"
+
+#: ../plugins/phone//CallForwarding.qml:90
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"Hala semula panggilan telefon ke nombor lain bila anda tidak menjawab, atau "
+"telefon anda sibuk, dimatikan, atau diluar rangkaian."
+
+#: ../plugins/phone//CallForwarding.qml:100
+msgid "Forward to"
+msgstr "Dimajukan kepada"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:35
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:110
+msgid "Updates"
+msgstr "Kemaskini"
+
+#: ../plugins/system-update//PageComponent.qml:51
+msgid "Update System"
+msgstr "Kemaskini Sistem"
+
+#: ../plugins/system-update//PageComponent.qml:52
+msgid "The phone needs to restart to install the system update."
+msgstr "Telefon perlu dimulakan semula untuk pemasangan kemaskini sistem."
+
+#: ../plugins/system-update//PageComponent.qml:55
+msgid "Install & Restart"
+msgstr "Pasang & Mula Semula"
+
+#: ../plugins/system-update//PageComponent.qml:64
+msgid "Not Now"
+msgstr "Bukan Sekarang"
+
+#: ../plugins/system-update//PageComponent.qml:70
+msgid "Install"
+msgstr "Pasang"
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Software is up to date"
+msgstr "Perisian sudah dikemaskini"
+
+#: ../plugins/system-update//PageComponent.qml:142
+msgid "Please log into your Ubuntu One account."
+msgstr "Sila daftar masuk ke akauan Ubuntu One anda."
+
+#: ../plugins/system-update//PageComponent.qml:157
+msgid "System update has failed."
+msgstr "Kemaskini sistem gagal."
+
+#: ../plugins/system-update//PageComponent.qml:168
+msgid "System update failed."
+msgstr "Gagal kemas kini sistem."
+
+#: ../plugins/system-update//PageComponent.qml:199
+msgid "Checking for updates…"
+msgstr "Memeriksa kemaskini..."
+
+#: ../plugins/system-update//PageComponent.qml:217
+#, qt-format
+msgid "Install %1 updates…"
+msgstr "Pasang %1 kemaskini…"
+
+#: ../plugins/system-update//PageComponent.qml:217
+#, qt-format
+msgid "Install %1 updates"
+msgstr "Pasang %1 kemaskini"
+
+#: ../plugins/system-update//PageComponent.qml:218
+msgid "Pause All"
+msgstr "Jeda Semua"
+
+#: ../plugins/system-update//PageComponent.qml:286
+msgid "Retry"
+msgstr "Cuba lagi"
+
+#: ../plugins/system-update//PageComponent.qml:302
+msgid "Download"
+msgstr "Muat turun"
+
+#: ../plugins/system-update//PageComponent.qml:302
+msgid "Update"
+msgstr "Kemas kini"
+
+#: ../plugins/system-update//PageComponent.qml:303
+msgid "Resume"
+msgstr "Sambung semula"
+
+#: ../plugins/system-update//PageComponent.qml:304
+msgid "Pause"
+msgstr "Jeda"
+
+#: ../plugins/system-update//PageComponent.qml:363
+msgid "Installing"
+msgstr "Memasang"
+
+#: ../plugins/system-update//PageComponent.qml:396
+msgid "Installed"
+msgstr "Dipasang"
+
+#: ../plugins/system-update//PageComponent.qml:420
+msgid "Version: "
+msgstr "Versi: "
+
+#: ../plugins/system-update//PageComponent.qml:445
+#: ../plugins/system-update//Configuration.qml:30
+msgid "Auto download"
+msgstr "Muat turun automatik"
+
+#: ../plugins/system-update//PageComponent.qml:450
+msgid "On wi-fi"
+msgstr "Dalam wi-fi"
+
+#: ../plugins/system-update//PageComponent.qml:452
+msgid "Always"
+msgstr "Sentiasa"
+
+#: ../plugins/system-update//PageComponent.qml:502
+msgid "Credentials not found"
+msgstr "Kelayakan tidak ditemui"
+
+#: ../plugins/system-update//PageComponent.qml:532
+msgid "Installing update…"
+msgstr "Memasang kemaskini..."
+
+#: ../plugins/system-update//PageComponent.qml:546
+msgid " bytes"
+msgstr " bait"
+
+#: ../plugins/system-update//PageComponent.qml:549
+msgid " KiB"
+msgstr " KiB"
+
+#: ../plugins/system-update//PageComponent.qml:552
+msgid " MiB"
+msgstr " MiB"
+
+#: ../plugins/system-update//PageComponent.qml:555
+msgid " GiB"
+msgstr " GiB"
+
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr "Muat turun kemaskini akan datang secara automatik:"
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr "Bila ada wi-fi"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr "Bila dalam mana-mana sambungan data"
+
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr "Cas data akan dikenakan."
+
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:154
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:130
 msgid "Brightness"
 msgstr "Kecerahan"
 
@@ -1426,8 +1411,69 @@ msgid "Adjust automatically"
 msgstr "Laras secara automatik"
 
 #: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings"
-msgstr "Cerah dan malapkan paparan mengikut kesesuaian persekitaran"
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:38
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:136
+msgid "Sound"
+msgstr "Bunyi"
+
+#: ../plugins/sound//PageComponent.qml:75
+msgid "Silent Mode"
+msgstr "Mod Senyap"
+
+#: ../plugins/sound//PageComponent.qml:79
+msgid "Ringer:"
+msgstr "Pendering:"
+
+#: ../plugins/sound//PageComponent.qml:111
+msgid "Phone calls:"
+msgstr "Panggilan telefon:"
+
+#: ../plugins/sound//PageComponent.qml:115
+#: ../plugins/sound//PageComponent.qml:121
+msgid "Ringtone"
+msgstr "Nada dering"
+
+#: ../plugins/sound//PageComponent.qml:134
+msgid "Vibrate when ringing"
+msgstr "Gegar bila mendering"
+
+#: ../plugins/sound//PageComponent.qml:143
+#: ../plugins/sound//PageComponent.qml:178
+msgid "Vibrate in Silent Mode"
+msgstr "Getar dalam Mod Senyap"
+
+#: ../plugins/sound//PageComponent.qml:147
+msgid "Messages:"
+msgstr "Mesej:"
+
+#: ../plugins/sound//PageComponent.qml:151
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Message received"
+msgstr "Mesej Diterima"
+
+#: ../plugins/sound//PageComponent.qml:169
+msgid "Vibrate with message sound"
+msgstr "Getar dengan bunyi mesej"
+
+#: ../plugins/sound//PageComponent.qml:182
+msgid "Other sounds:"
+msgstr "Lain-lain bunyi:"
+
+#: ../plugins/sound//PageComponent.qml:200
+msgid "Lock sound"
+msgstr "Bunyi kunci"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "Telefon dalam Mod Senyap."
+
+#: ../plugins/sound//SoundsList.qml:59
+msgid "Stop playing"
+msgstr "Henti main"
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
@@ -1445,20 +1491,24 @@ msgstr "Peribadi"
 msgid "System"
 msgstr "Sistem"
 
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Sambung ke Wi-Fi"
+#: ../wizard/qml/Components//Page.qml:47
+msgid "Back"
+msgstr "Undur"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
-msgid "Available networks"
-msgstr "Rangkaian tersedia"
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "No SIM card"
+msgstr "Tiada kad SIM"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152
-#: ../wizard/qml/Pages//30-location.qml:48
-msgid "Continue"
-msgstr "Teruskan"
+#: ../wizard/qml/Pages//no-sim.qml:57
+msgid "To use the telephone and SMS features a SIM must be installed."
+msgstr ""
+"Untuk guna telefon dan fitur SIM, kad SIM mesti dipasang terlebih dahulu."
 
-#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:66
+#: ../wizard/qml/Pages//no-sim.qml:59
+msgid "Install a SIM before continuing."
+msgstr "Pasang kad SIM sebelum diteruskan."
+
+#: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
 msgid "Skip"
 msgstr "Langkau"
 
@@ -1480,21 +1530,10 @@ msgid ""
 "settings."
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
-msgstr "Hello"
-
-#: ../wizard/qml/Pages//10-welcome.qml:60
-msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr ""
-
-#: ../wizard/qml/Pages//10-welcome.qml:65
-msgid "Select your language"
-msgstr "Pilih bahasa anda"
-
-#: ../wizard/qml/Pages//10-welcome.qml:82
-msgid "Start"
-msgstr "Mula"
+#: ../wizard/qml/Pages//30-location.qml:48
+#: ../wizard/qml/Pages//15-passwd.qml:159 ../wizard/qml/Pages//20-wifi.qml:152
+msgid "Continue"
+msgstr "Teruskan"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "Setup complete"
@@ -1516,297 +1555,336 @@ msgstr "Kini anda boleh mula gunakan telefon Ubuntu anda."
 msgid "Finish"
 msgstr "Selesai"
 
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "No SIM card"
-msgstr "Tiada kad SIM"
-
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid "To use the telephone and SMS features a SIM must be installed."
+#: ../wizard/qml/Pages//15-passwd.qml:37
+msgid "Set lock security"
 msgstr ""
-"Untuk guna telefon dan fitur SIM, kad SIM mesti dipasang terlebih dahulu."
 
-#: ../wizard/qml/Pages//no-sim.qml:59
-msgid "Install a SIM before continuing."
-msgstr "Pasang kad SIM sebelum diteruskan."
+#: ../wizard/qml/Pages//15-passwd.qml:86
+msgid "Swipe"
+msgstr ""
 
-#: ../wizard/qml/Components//Page.qml:47
-msgid "Back"
-msgstr "Undur"
+#: ../wizard/qml/Pages//15-passwd.qml:136
+msgid "Those passcodes don't match."
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:4
-msgid "appearance"
-msgstr "penampilan"
+#: ../wizard/qml/Pages//15-passwd.qml:138
+msgid "Those passphrases don't match."
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:6
-msgid "background"
-msgstr "latar belakang"
+#: ../wizard/qml/Pages//15-passwd.qml:146
+msgid "Passcode must be at least four digits long."
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:8
-msgid "wallpaper"
-msgstr "kertas dinding"
+#: ../wizard/qml/Pages//15-passwd.qml:148
+msgid "Passphrase must be at least four characters long."
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:12
-msgid "bluetooth"
-msgstr "bluetooth"
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hello"
+msgstr "Hello"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../wizard/qml/Pages//10-welcome.qml:67
+msgid "Welcome to your Ubuntu phone. Let’s get started."
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:72
+msgid "Select your language"
+msgstr "Pilih bahasa anda"
+
+#: ../wizard/qml/Pages//10-welcome.qml:89
+msgid "Start"
+msgstr "Mula"
+
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi-Fi"
+msgstr "Sambung ke Wi-Fi"
+
+#: ../wizard/qml/Pages//20-wifi.qml:68
+msgid "Available networks"
+msgstr "Rangkaian tersedia"
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:4
+msgid "language"
+msgstr "bahasa"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:6
+msgid "lang"
+msgstr "lang"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:8
+msgid "i18n"
+msgstr "i18n"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:14
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:22
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:52
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:58
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:78
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:86
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:106
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:118
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:128
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:138
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:146
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:158
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:10
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:18
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:38
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:44
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:62
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:68
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:86
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:102
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:108
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:118
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:134
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:140
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:148
 msgid "settings"
 msgstr "tetapan"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:18
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:114
-msgid "software"
-msgstr "perisian"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:14
+msgid "security"
+msgstr "keselamatan"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
-msgid "notifications"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:16
+msgid "privacy"
+msgstr "kerahsiaan"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:20
+msgid "Flight Mode"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
-msgid "Orientation Lock"
-msgstr ""
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:22
+msgid "flight"
+msgstr "penerbangan"
 
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:26
-msgid "rotation"
-msgstr "putaran"
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:24
+msgid "plane"
+msgstr "kapal terbang"
 
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:28
-msgid "orientation"
-msgstr "orientasi"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:30
-msgid "lock"
-msgstr "kunci"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:32
-msgid "screen"
-msgstr "skrin"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:34
-msgid "Example"
-msgstr "Contoh"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
-msgid "example"
-msgstr "contoh"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
-msgid "test"
-msgstr "uji"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:40
-msgid "sample"
-msgstr "sampel"
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:26
+msgid "offline"
+msgstr "luar talian"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:44
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:30
 msgid "cellular"
 msgstr "selular"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:46
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:98
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:78
 msgid "network"
 msgstr "rangkaian"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:48
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:34
 msgid "mobile"
 msgstr "mudah alih"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:50
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:36
 msgid "gsm"
 msgstr "gsm"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
-msgid "sound"
-msgstr "bunyi"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:62
-msgid "battery"
-msgstr "bateri"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:64
-msgid "power"
-msgstr "kuasa"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:66
-msgid "Flight Mode"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:68
-msgid "flight"
-msgstr "penerbangan"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:70
-msgid "plane"
-msgstr "kapal terbang"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
-msgid "offline"
-msgstr "luar talian"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:76
-msgid "phone"
-msgstr "telefon"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
-msgid "Accessibility"
-msgstr "Kebolehcapaian"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:82
-msgid "accessibility"
-msgstr "kebolehcapaian"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:84
-msgid "a11y"
-msgstr "a11y"
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:42
+msgid "bluetooth"
+msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:90
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:48
 msgid "about"
 msgstr "perihal"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:92
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:50
 msgid "device"
 msgstr "peranti"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:94
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:52
 msgid "info"
 msgstr "maklumat"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:100
-msgid "wireless"
-msgstr "tanpa wayar"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:102
-msgid "wifi"
-msgstr "wifi"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:104
-msgid "wi-fi"
-msgstr "wi-fi"
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:108
-msgid "Updates available"
-msgstr "Kemaskini tersedia"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:112
-msgid "system"
-msgstr "sistem"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:116
-msgid "update"
-msgstr "kemaskini"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:122
-msgid "language"
-msgstr "bahasa"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
-msgid "lang"
-msgstr "lang"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:126
-msgid "i18n"
-msgstr "i18n"
-
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:56
 msgid "time"
 msgstr "masa"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:134
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:58
 msgid "date"
 msgstr "tarikh"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:136
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:60
 msgid "timezone"
 msgstr "zon waktu"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:142
-msgid "security"
-msgstr "keselamatan"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
-msgid "privacy"
-msgstr "kerahsiaan"
-
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:66
 msgid "reset"
 msgstr "tetap semula"
 
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:72
+msgid "battery"
+msgstr "bateri"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:74
+msgid "power"
+msgstr "kuasa"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:80
+msgid "wireless"
+msgstr "tanpa wayar"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:82
+msgid "wifi"
+msgstr "wifi"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:84
+msgid "wi-fi"
+msgstr "wi-fi"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:90
+msgid "appearance"
+msgstr "penampilan"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:92
+msgid "background"
+msgstr "latar belakang"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:94
+msgid "wallpaper"
+msgstr "kertas dinding"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:98
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:114
+msgid "software"
+msgstr "perisian"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:100
+msgid "notifications"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:106
+msgid "phone"
+msgstr "telefon"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:112
+msgid "system"
+msgstr "sistem"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:116
+msgid "update"
+msgstr "kemaskini"
+
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:120
+msgid "Updates available"
+msgstr "Kemaskini tersedia"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:122
+msgid "Example"
+msgstr "Contoh"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:124
+msgid "example"
+msgstr "contoh"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:126
+msgid "test"
+msgstr "uji"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:128
+msgid "sample"
+msgstr "sampel"
+
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:132
 msgid "brightness"
 msgstr "kecerahan"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:138
+msgid "sound"
+msgstr "bunyi"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:142
+msgid "Accessibility"
+msgstr "Kebolehcapaian"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:144
+msgid "accessibility"
+msgstr "kebolehcapaian"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:146
+msgid "a11y"
+msgstr "a11y"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:150
+msgid "Orientation Lock"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:152
+msgid "rotation"
+msgstr "putaran"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:154
+msgid "orientation"
+msgstr "orientasi"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:156
+msgid "lock"
+msgstr "kunci"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:158
+msgid "screen"
+msgstr "skrin"
+
+#: ../push-helper/software-updates-helper.py:78
+msgid "There's an updated system image."
+msgstr ""
+
+#: ../push-helper/software-updates-helper.py:79
+msgid "Tap to open the system updater."
+msgstr ""

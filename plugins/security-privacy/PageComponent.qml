@@ -173,7 +173,7 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Other app access")
                 progression: true
-                visible: showAllUI
+                onClicked: pageStack.push(Qt.resolvedUrl("AppAccess.qml"))
             }
             ListItem.SingleValue {
                 text: i18n.tr("Diagnostics")
