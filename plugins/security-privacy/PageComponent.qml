@@ -24,6 +24,7 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
@@ -33,12 +34,19 @@ ItemPage {
     title: i18n.tr("Security & Privacy")
     flickable: scrollWidget
 
+    property alias usePowerd: batteryBackend.powerdRunning
+    property bool lockOnSuspend
+
     UbuntuDiagnostics {
         id: diagnosticsWidget
     }
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
+    }
+
+    UbuntuBatteryPanel {
+        id: batteryBackend
     }
 
     GSettings {
@@ -51,6 +59,11 @@ ItemPage {
                 else
                     dashSearchId.value = i18n.tr("Phone only")
         }
+    }
+
+    GSettings {
+        id: powerSettings
+        schema.id: usePowerd ? "com.ubuntu.touch.system" : "org.gnome.desktop.session"
     }
 
     Flickable {
@@ -73,12 +86,28 @@ ItemPage {
             ListItem.SingleValue {
                 id: lockingControl
                 text: i18n.tr("Lock phone")
-                // TRANSLATORS: %1 is the number of minutes
-                value: i18n.tr("After %1 minute",
-                               "After %1 minutes",
-                               5).arg(5)
+                value: {
+                    if (batteryBackend.powerdRunning ) {
+                        var timeout = Math.round(powerSettings.activityTimeout/60)
+                        return (powerSettings.activityTimeout != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Never")
+                    }
+                    else {
+                        var timeout = Math.round(powerSettings.idleDelay/60)
+                        return (powerSettings.idleDelay != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Manually")
+                    }
+                }
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {usePowerd: usePowerd, powerSettings: powerSettings})
             }
             ListItem.SingleValue {
                 id: simControl
@@ -175,7 +204,6 @@ ItemPage {
                     pageStack.push(Qt.resolvedUrl(path));
                 }
             }
-
         }
     }
 }

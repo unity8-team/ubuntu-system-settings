@@ -44,10 +44,10 @@ ItemPage {
 
     GSettings {
         id: powerSettings
-        schema.id: usePowerd ? "com.canonical.powerd" : "org.gnome.desktop.session"
+        schema.id: usePowerd ? "com.ubuntu.touch.system" : "org.gnome.desktop.session"
         onChanged: {
             if (key == "activityTimeout" || key == "idleDelay")
-                var curIndex = idleValues.indexOf(value);
+                var curIndex = idleValues.indexOf(value)
                 if( curIndex != -1)
                     sleepSelector.selectedIndex = curIndex
                 else if(value === 0)
