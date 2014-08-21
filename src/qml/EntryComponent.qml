@@ -62,7 +62,8 @@ Item {
             fill: col
             margins: -units.gu(0.25)
         }
-        color: Qt.rgba(0, 0, 0, 0.05)
+        opacity: 0.15
+        color: UbuntuColors.darkGrey
         visible: highlighted
     }
 
@@ -71,6 +72,12 @@ Item {
         onClicked: {
             root.highlighted = true;
             root.clicked();
+        }
+        onPressed: {
+            root.highlighted = true;
+        }
+        onReleased: {
+            root.highlighted = false;
         }
     }
 }
