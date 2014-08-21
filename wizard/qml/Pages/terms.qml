@@ -81,7 +81,7 @@ LocalComponents.Page {
         xhr.send()
     }
 
-    onBackPressed: {
+    onBackClicked: {
         if (webview.visible) {
             termsLabel.visible = true
         } else {
