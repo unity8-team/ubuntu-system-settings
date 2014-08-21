@@ -46,7 +46,6 @@ ItemPage {
         id: powerSettings
         schema.id: usePowerd ? "com.ubuntu.touch.system" : "org.gnome.desktop.session"
         onChanged: {
-            console.warn("KEY: " + key)
             if (key == "activityTimeout" || key == "idleDelay")
                 var curIndex = idleValues.indexOf(value)
                 if( curIndex != -1)
