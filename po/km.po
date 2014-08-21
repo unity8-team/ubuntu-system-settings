@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-08-13 04:45+0000\n"
+"PO-Revision-Date: 2014-08-21 03:38+0000\n"
 "Last-Translator: Sok Sophea <sksophea@gmail.com>\n"
 "Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:20+0000\n"
+"X-Launchpad-Export-Date: 2014-08-21 06:45+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -50,7 +50,7 @@ msgstr "ប្លង់​ក្ដារ​ចុច"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "ការ​កែតម្រូវ​ស្វ័យប្រវត្តិ"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -66,12 +66,14 @@ msgstr "បើក​ការ​ប្ដូរ​ទៅ​អក្សរ​​
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "ការ​ដាក់​វណ្ណយុត្តិ​ស្វ័យប្រវត្តិ"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"បន្ថែម​សញ្ញា​ប្រហាក់ប្រហែល និង​សញ្ញា​សម្រង់ ឬ​វង់ក្រចក​ដែល​បាត់ "
+"ពេល​អ្នក​ចុច​ដកឃ្លា​ទ្វេដង។"
 
 #: ../plugins/language//PageComponent.qml:185
 #: ../plugins/sound//PageComponent.qml:186
@@ -80,7 +82,7 @@ msgstr "សំឡេង​ក្ដារ​ចុច"
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "ការ​ញ័រ​របស់​ក្ដារចុច"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -309,7 +311,7 @@ msgstr "អនុញ្ញាត​ឲ្យ​ចូល​ទៅ​ទីតា
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "កម្មវិធី​ដែល​អ្នក​បាន​ផ្ដល់​សិទ្ធិ និង​បាន​ស្នើ​ចូល​ប្រើ៖"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:100
@@ -318,24 +320,24 @@ msgstr "ម៉ាស៊ីន​ថ​ត"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "កម្មវិធី​ដែល​ស្នើ​ចូល​ប្រើ​ម៉ាស៊ីន​ថត​របស់​អ្នក"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "មីក្រូហ្វូន"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "កម្មវិធី​ដែល​បាន​ស្នើ​ចូល​ប្រើ​មីក្រូហ្វូន​របស់​អ្នក"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
@@ -1073,7 +1075,7 @@ msgstr "វិធី​កាត់បន្ថយ​កា​រ​ប្រើ
 #: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "ពន្លឺ​បង្ហាញ"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:306
@@ -1416,7 +1418,7 @@ msgstr "កែសម្រួល​ស្វ័យ​ប្រវត្តិ"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "ធ្វើឲ្យ​ការ​បង្ហាញ​ភ្លឺ ឬ​ស្រអាប់​ស្របតាម​វត្ថុ​ជុំវិញ។"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
@@ -1563,27 +1565,27 @@ msgstr "បញ្ចប់"
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
-msgstr ""
+msgstr "កំណត់​សុវត្ថិភាព​សោ"
 
 #: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
-msgstr ""
+msgstr "រុញ"
 
 #: ../wizard/qml/Pages//15-passwd.qml:136
 msgid "Those passcodes don't match."
-msgstr ""
+msgstr "កូដ​សម្ងាត់​ទាំងនោះ​មិន​ផ្គូផ្គង។"
 
 #: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "ឃ្លា​សម្ងាត់​ទាំងនោះ​មិន​ផ្គូផ្គង។"
 
 #: ../wizard/qml/Pages//15-passwd.qml:146
 msgid "Passcode must be at least four digits long."
-msgstr ""
+msgstr "កូដ​សម្ងាត់​ត្រូវតែ​មាន​យ៉ាង​ហោច​បួន​តួអក្សរ"
 
 #: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "ឃ្លា​សម្ងាត់​ត្រូវតែ​មាន​យ៉ាង​ហោច​បួន​តួអក្សរ"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
@@ -1889,8 +1891,8 @@ msgstr "អេក្រង់"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "មាន​រូបភាព​ប្រព័ន្ធ​ដែល​បាន​ធ្វើ​បច្ចុប្បន្នភាព។"
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "ប៉ះ​ដើម្បី​បើក​កម្មវិធី​ធ្វើ​បច្ចុប្បន្នភាព​ប្រព័ន្ធ។"
