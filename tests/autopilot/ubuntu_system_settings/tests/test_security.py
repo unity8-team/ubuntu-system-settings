@@ -11,6 +11,7 @@ from testtools.matchers import Equals, NotEquals
 from ubuntu_system_settings.tests import SecurityBaseTestCase
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
+from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
 class SecurityTestCase(SecurityBaseTestCase):
@@ -98,7 +99,7 @@ class SecurityTestCase(SecurityBaseTestCase):
                 ('{:d} minutes').format(int(actTimeout/60))
             )
 
-    def test_sleep_values_page(self):
+    def _get_sleep_selector(self):
         self._go_to_sleep_values()
         sleep_values_page = self.system_settings.main_view.select_single(
             objectName='sleepValues')
@@ -106,3 +107,32 @@ class SecurityTestCase(SecurityBaseTestCase):
             sleep_values_page,
             NotEquals(None)
         )
+        self._go_to_sleep_values()
+        sleep_values_page = self.system_settings.main_view.select_single(
+            objectName='sleepValues')
+        return sleep_values_page.select_single(
+            toolkit_emulators.ItemSelector,
+            objectName="sleepSelector"
+        )
+
+    def test_idle_never_timeout(self):
+        selector = self._get_sleep_selector()
+        to_select = selector.select_single(
+            'OptionSelectorDelegate', text='Never')
+        self.system_settings.main_view.pointing_device.click_object(to_select)
+        actTimeout = self._get_activity_timeout()
+        self.assertEquals(actTimeout, 0)
+        selected_delegate = selector.select_single(
+            'OptionSelectorDelegate', selected=True)
+        self.assertEquals(selected_delegate.text, 'Never')
+
+    def test_idle_change_timeout(self):
+        selector = self._get_sleep_selector()
+        to_select = selector.select_single(
+            'OptionSelectorDelegate', text='After 4 minutes')
+        self.system_settings.main_view.pointing_device.click_object(to_select)
+        actTimeout = self._get_activity_timeout()
+        self.assertEquals(actTimeout, 240)
+        selected_delegate = selector.select_single(
+            'OptionSelectorDelegate', selected=True)
+        self.assertEquals(selected_delegate.text, 'After 4 minutes')
