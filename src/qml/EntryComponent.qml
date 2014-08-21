@@ -67,15 +67,22 @@ Item {
         visible: highlighted
     }
 
+    Timer {
+        id: deHightlightTimer
+        onTriggered: root.highlighted = false;
+     }
+
     MouseArea {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
             root.highlighted = true;
+            deHightlightTimer.stop();
             root.clicked();
         }
         onPressed: {
             root.highlighted = true;
+            deHightlightTimer.start();
         }
         onReleased: {
             root.highlighted = false;
@@ -83,8 +90,8 @@ Item {
         onExited: {
             root.highlighted = false;
         }
-        // onPositionChanged: {
-        //     console.warn('position changed', mouse.x, mouse.y)
-        // }
+        onPositionChanged: {
+            deHightlightTimer.restart();
+        }
     }
 }
