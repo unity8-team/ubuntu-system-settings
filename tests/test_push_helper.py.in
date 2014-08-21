@@ -1,0 +1,108 @@
+#!/usr/bin/python
+
+# -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
+# Copyright 2014 Canonical
+#
+# This program is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 3, as published
+# by the Free Software Foundation.
+
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import unittest
+
+
+class PushHelperTests(unittest.TestCase):
+
+    def setUp(self):
+        super(PushHelperTests, self).setUp()
+        self.tmp_dir = tempfile.mkdtemp(suffix='push-helper', prefix='tests')
+        self.helper_path = '@CMAKE_CURRENT_SOURCE_DIR@/../push-helper/' + \
+            'software-updates-helper.py'
+
+    def tearDown(self):
+        super(PushHelperTests, self).tearDown()
+        shutil.rmtree(self.tmp_dir)
+
+    def run_push_helper(self, input_fname, output_fname):
+        subprocess.call([self.helper_path, input_fname, output_fname],
+                        stdout=subprocess.PIPE)
+
+    def create_input_file(self, filename, content):
+        with open(os.path.join(self.tmp_dir, filename), 'w') as fd:
+            fd.write(content)
+
+    def assertSystemUpdateNotification(self, notif):
+        self.assertIn('notification', notif)
+        self.assertIn('card', notif['notification'])
+        self.assertIn('emblem-counter', notif['notification'])
+        self.assertIn('vibrate', notif['notification'])
+        card = notif['notification']['card']
+        self.assertEqual(card['summary'], "There's an updated system image.")
+        self.assertEqual(card['actions'], ['settings:///system/system-update'])
+        self.assertEqual(card['persist'], True)
+        self.assertEqual(card['body'], 'Tap to open the system updater.')
+        self.assertEqual(card['popup'], True)
+        emblem_counter = notif['notification']['emblem-counter']
+        self.assertEqual(emblem_counter, {'visible': True, 'count': 1})
+        vibrate = notif['notification']['vibrate']
+        self.assertEqual(vibrate, {'pattern': [50, 150], 'repeat': 3})
+
+    def test_update_broadcast(self):
+        """Default system-update broadcast."""
+        self.create_input_file('bcast_in', '{"daily/mako": [200, ""]}')
+        input_f = os.path.join(self.tmp_dir, 'bcast_in')
+        output_f = os.path.join(self.tmp_dir, 'bcast_out')
+        self.run_push_helper(input_f, output_f)
+        with open(output_f, 'r') as fd:
+            output = json.load(fd)
+        self.assertSystemUpdateNotification(output)
+
+    def test_valid_json(self):
+        """Handle a valid json input, but not a notification"""
+        self.create_input_file('valid_json_in', '"null"')
+        input_f = os.path.join(self.tmp_dir, 'valid_json_in')
+        output_f = os.path.join(self.tmp_dir, 'valid_json_out')
+        self.run_push_helper(input_f, output_f)
+        with open(output_f, 'r') as fd:
+            output = json.load(fd)
+        self.assertSystemUpdateNotification(output)
+
+    def test_invalid_json(self):
+        """Handle a invalid json input"""
+        self.create_input_file('invalid_json_in', 'invalid!')
+        input_f = os.path.join(self.tmp_dir, 'invalid_json_in')
+        output_f = os.path.join(self.tmp_dir, 'invalid_json_out')
+        self.run_push_helper(input_f, output_f)
+        self.assertFalse(os.path.exists(output_f))
+
+    def test_pass_through(self):
+        """Handling of valid notification format."""
+        notif = {
+            'notification': {
+                'emblem-counter': {'visible': True, 'count': 1},
+                'card': {'icon': '',
+                         'summary': "There's an updated system image.",
+                         'persist': True,
+                         'body': 'Tap to open the system updater.',
+                         'popup': True,
+                         'actions': ['settings:///system/system-update']},
+                'vibrate': {'repeat': 3, 'pattern': [50, 150]}}}
+
+        self.create_input_file('bcast_in', json.dumps(notif))
+        input_f = os.path.join(self.tmp_dir, 'bcast_in')
+        output_f = os.path.join(self.tmp_dir, 'bcast_out')
+        self.run_push_helper(input_f, output_f)
+        with open(output_f, 'r') as fd:
+            output = json.load(fd)
+        self.assertEqual(notif, output)
+
+
+if __name__ == '__main__':
+    unittest.main(
+        testRunner=unittest.TextTestRunner(stream=sys.stdout, verbosity=2)
+    )
