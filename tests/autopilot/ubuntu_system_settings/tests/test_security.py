@@ -147,6 +147,7 @@ class SecurityTestCase(SecurityBaseTestCase):
             'OptionSelectorDelegate', text='Never')
         self.system_settings.main_view.pointing_device.click_object(to_select)
         to_select.selected.wait_for(True)
+        sleep(1)
         actTimeout = self._get_activity_timeout()
         self.assertEquals(actTimeout, 0)
         selected_delegate = selector.select_single(
@@ -159,6 +160,7 @@ class SecurityTestCase(SecurityBaseTestCase):
             'OptionSelectorDelegate', text='After 4 minutes')
         self.system_settings.main_view.pointing_device.click_object(to_select)
         to_select.selected.wait_for(True)
+        sleep(1)
         actTimeout = self._get_activity_timeout()
         self.assertEquals(actTimeout, 240)
         selected_delegate = selector.select_single(
