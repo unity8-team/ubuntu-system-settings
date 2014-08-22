@@ -128,24 +128,8 @@ ItemPage {
         }
         operatorNames = oN;
 
-        var cur = currentOperator();
+        var cur = operators[netReg.currentOperatorPath];
         carrierSelector.selectedIndex = cur === undefined ? -1 : operatorNames.indexOf(cur.name);
-    }
-
-    function currentOperator()
-    {
-        var cur = Object.keys(operators).filter(function(i) {
-            return operators[i].status === "current";
-        });
-
-        if (cur.length > 1) {
-            /// todo, is this possible?
-            throw "more than one current operators.";
-        }
-        if (cur.length === 1)
-            return operators[cur];
-        else
-            return undefined;
     }
 
     Component {
