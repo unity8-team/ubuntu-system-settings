@@ -100,6 +100,7 @@ ItemPage {
         },
         State {
             name: "UPDATE"
+            PropertyChanges { target: updateList; visible: true}
             PropertyChanges { target: installAllButton; visible: true && root.updatesAvailable > 1}
             PropertyChanges { target: updateNotification; visible: false}
         }
