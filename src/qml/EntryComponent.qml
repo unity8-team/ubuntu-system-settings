@@ -19,13 +19,11 @@
  */
 
 import QtQuick 2.0
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.1
 import Ubuntu.Settings.Components 0.1
 
-Item {
+AbstractButton {
     id: root
-
-    signal clicked
 
     height: col.height
 
@@ -53,8 +51,15 @@ Item {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: root.clicked()
+    UbuntuShape {
+        z: -1
+        visible: root.pressed
+        anchors{
+            fill: root
+            margins: -units.gu(0.25)
+        }
+        color: UbuntuColors.darkGrey
+        opacity: 0.15
     }
+
 }
