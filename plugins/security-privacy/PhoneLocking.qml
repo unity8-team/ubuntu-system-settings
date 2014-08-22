@@ -37,12 +37,6 @@ ItemPage {
         id: securityPrivacy
     }
 
-    Binding {
-        target: root
-        property: "timeOut"
-        value: usePowerd ? powerSettings.activityTimeout : powerSettings.idleDelay
-    }
-
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
