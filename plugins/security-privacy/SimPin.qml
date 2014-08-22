@@ -39,25 +39,12 @@ ItemPage {
     OfonoSimManager {
         id: sim
         modemPath: manager.modems[0]
-        onPinRetriesChanged: {
-            console.warn("retries: " + pinRetries[OfonoSimManager.SimPin]);
-            console.warn("retries: " + pinRetries["1"]);
-
-            for (var prop in pinRetries)
-                         console.log(prop, "=", pinRetries[prop]);
-
-            for (var i=0; i < sim.pinRetries.length; i++) {
-                console.warn("retries3: " + sim.pinRetries[i]);
-            }
-        }
-
-        Component.onCompleted: {
-            //console.warn("isValid: " + sim.isValid());
-            console.warn("lockedPins: " + sim.lockedPins.length);
-        }        
     }
 
-    property string errorText: ""
+    property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(sim.pinRetries[OfonoSimManager.SimPin])
+
+    property int simMin: sim.minimumPinLength(OfonoSimManager.SimPin)
+    property int simMax: sim.maximumPinLength(OfonoSimManager.SimPin)
 
     Component {
         id: dialogComponent
@@ -79,14 +66,15 @@ ItemPage {
             Connections {
                 target: sim
                 onChangePinComplete: {
-                    console.warn("onChangePinComplete: " + errorString);
-                    errorText = errorString;
+                    console.warn("onChangePinComplete: " + error);
                     if (error !== OfonoSimManager.NoError) {
+                        incorrect.visible = true;
                         changePinDialog.enabled = true;
                         currentInput.forceActiveFocus();
                         currentInput.selectAll();
                         return;
                     }
+                    incorrect.visible = false;
                     changePinDialog.enabled = true;
                     PopupUtils.close(changePinDialog);
                 }
@@ -94,14 +82,13 @@ ItemPage {
 
             Label {
                 text: i18n.tr("Current PIN:")
-                visible: currentInput.visible
             }
 
             TextField {
                 id: currentInput
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhDialableCharactersOnly
-                inputMask: "00000000"
+                maximumLength: simMax
             }
 
             Label {
@@ -112,36 +99,36 @@ ItemPage {
             Label {
                 id: incorrect
                 text: errorText
-                visible: text !== ""
+                visible: false
                 color: "darkred"
             }
 
             Label {
                 text: i18n.tr("Choose new PIN:")
-                visible: newInput.visible
             }
 
             TextField {
                 id: newInput
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhDialableCharactersOnly
-                inputMask: "00000000"
-
-                // Doesn't get updated if you set this in enabled of confirmButton
-                onTextChanged: confirmButton.enabled =
-                               (acceptableInput && (!visible || text.length > 0))
+                maximumLength: simMax
             }
 
             Label {
                 text: i18n.tr("Confirm new PIN:")
-                visible: confirmInput.visible
             }
 
             TextField {
                 id: confirmInput
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhDialableCharactersOnly
-                inputMask: "00000000"
+                maximumLength: simMax
+
+                // Doesn't get updated if you set this in enabled of confirmButton
+                onTextChanged: confirmButton.enabled =
+                               (acceptableInput &&
+                                text.length >= simMin &&
+                                (text === newInput.text))
             }
 
             Label {
@@ -178,8 +165,7 @@ ItemPage {
                             newInput.selectAll()
                             return
                         }
-                        console.warn("lockedPins: " + sim.lockedPins);
-                        sim.changePin(OfonoSimManager.SimPin, currentInput.visible ? currentInput.text : "", newInput.text);
+                        sim.changePin(OfonoSimManager.SimPin, currentInput.text, newInput.text);
                     }
                 }
             }
@@ -201,33 +187,33 @@ ItemPage {
                 value: units.gu(1)
             }
 
-            title: sim.lockedPins.length > 0 ?
-                       i18n.tr("Enter Previous SIM PIN") :
-                       i18n.tr("Enter SIM PIN")
+            title: i18n.tr("Enter SIM PIN")
 
             Connections {
                 target: sim
                 onLockPinComplete: {
-                    console.warn("onLockPinComplete: " + errorString);
-                    errorText = errorString;
+                    console.warn("onLockPinComplete: " + error);
                     if (error !== OfonoSimManager.NoError) {
+                        incorrect.visible = true;
                         lockPinDialog.enabled = true;
                         prevInput.forceActiveFocus();
                         prevInput.selectAll();
                         return;
                     }
+                    incorrect.visible = false;
                     lockPinDialog.enabled = true;
                     PopupUtils.close(lockPinDialog);
                 }
                 onUnlockPinComplete: {
-                    console.warn("onUnlockPinComplete: " + errorString);
-                    errorText = errorString;
+                    console.warn("onUnlockPinComplete: " + error);
                     if (error !== OfonoSimManager.NoError) {
+                        incorrect.visible = true;
                         lockPinDialog.enabled = true;
                         prevInput.forceActiveFocus();
                         prevInput.selectAll();
                         return;
                     }
+                    incorrect.visible = false;
                     lockPinDialog.enabled = true;
                     PopupUtils.close(lockPinDialog);
                 }
@@ -237,11 +223,11 @@ ItemPage {
                 id: prevInput
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhDialableCharactersOnly
-                inputMask: "00000000"
+                maximumLength: simMax
 
                 // Doesn't get updated if you set this in enabled of confirmButton
                 onTextChanged: lockButton.enabled =
-                               (acceptableInput && (!visible || text.length > 0))
+                               (acceptableInput && text.length >= simMin)
             }
 
             Label {
@@ -251,7 +237,7 @@ ItemPage {
             Label {
                 id: incorrect
                 text: errorText
-                visible: text !== ""
+                visible: false
                 color: "darkred"
             }
 
@@ -274,7 +260,6 @@ ItemPage {
                     enabled: false
                     onClicked: {
                         lockPinDialog.enabled = false;
-                        console.warn("lockedPins: " + sim.lockedPins);
                         if (sim.lockedPins.length > 0)
                             sim.unlockPin(OfonoSimManager.SimPin, prevInput.text);
                         else
