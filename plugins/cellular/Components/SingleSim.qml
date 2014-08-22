@@ -54,7 +54,6 @@ Column {
         visible: showAllUI
     }
 
-
     ListItem.SingleValue {
         text: i18n.tr("Carrier");
         id: chooseCarrier
@@ -74,6 +73,4 @@ Column {
         progression: true
         visible: showAllUI
     }
-
-
 }
