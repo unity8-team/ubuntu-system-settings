@@ -57,7 +57,7 @@ Q_SIGNALS:
     void onPairingDone();
 
 private:
-    Q_DISABLE_COPY(Agent);
+    Q_DISABLE_COPY(Agent)
 
     QDBusConnection m_connection;
     DeviceModel &m_devices;

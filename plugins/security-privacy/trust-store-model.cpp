@@ -179,7 +179,7 @@ void TrustStoreModelPrivate::updateRow(int row)
     Q_Q(TrustStoreModel);
 
     Q_ASSERT(trustStore);
-    Q_ASSERT(row >= 0 && row < d->applications.count());
+    Q_ASSERT(row >= 0 && row < applications.count());
 
     Application &app = applications[row];
     app.grantedFeatures.clear();

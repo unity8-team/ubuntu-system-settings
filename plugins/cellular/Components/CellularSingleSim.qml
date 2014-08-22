@@ -25,7 +25,6 @@ import "data-helpers.js" as DataHelpers
 Column {
     height: childrenRect.height
 
-    property var sim1
     property var selector: selector
 
     ListItem.ItemSelector {
@@ -33,15 +32,15 @@ Column {
         objectName: "technologyPreferenceSelector"
         text: i18n.tr("Cellular data:")
         expanded: true
-        enabled: sim1.radioSettings.technologyPreference !== ""
+        enabled: sim.radioSettings.technologyPreference !== ""
         model: [
             i18n.tr("Off"),
             i18n.tr("2G only (saves battery)"),
             i18n.tr("2G/3G/4G (faster)")]
         selectedIndex: {
-            if (sim1.connMan.powered) {
+            if (sim.connMan.powered) {
                 return DataHelpers.singleSimKeyToIndex(
-                    sim1.radioSettings.technologyPreference);
+                    sim.radioSettings.technologyPreference);
             } else {
                 return 0;
             }
@@ -52,20 +51,20 @@ Column {
         id: dataRoamingItem
         objectName: "dataRoamingSwitch"
         text: i18n.tr("Data roaming")
-        enabled: sim1.connMan.powered
+        enabled: sim.connMan.powered
         control: Switch {
             id: dataRoamingControl
-            checked: sim1.connMan.roamingAllowed
-            onClicked: sim1.connMan.roamingAllowed = checked
+            checked: sim.connMan.roamingAllowed
+            onClicked: sim.connMan.roamingAllowed = checked
         }
     }
 
     Connections {
-        target: sim1.connMan
+        target: sim.connMan
         onPoweredChanged: {
             if (powered) {
                 selector.selectedIndex = DataHelpers.singleSimKeyToIndex(
-                    sim1.radioSettings.technologyPreference);
+                    sim.radioSettings.technologyPreference);
             } else {
                 selector.selectedIndex = 0;
             }
@@ -73,24 +72,24 @@ Column {
     }
 
     Connections {
-        target: sim1.radioSettings
+        target: sim.radioSettings
         onTechnologyPreferenceChanged: {
             var selIndex = selector.selectedIndex;
             if (selIndex > 0) {
-                sim1.radioSettings.technologyPreference =
+                sim.radioSettings.technologyPreference =
                     DataHelpers.singleSimIndexToKey(selIndex);
             }
         }
     }
 
     Binding {
-        target: sim1.connMan
+        target: sim.connMan
         property: "powered"
         value: selector.selectedIndex !== 0
     }
 
     Binding {
-        target: sim1.radioSettings
+        target: sim.radioSettings
         property: "technologyPreference"
         value: {
             var i = selector.selectedIndex;
@@ -99,7 +98,7 @@ Column {
             } else if (i === 2) {
                 return 'umts';
             } else {
-                return sim1.radioSettings.technologyPreference
+                return sim.radioSettings.technologyPreference
             }
         }
     }
