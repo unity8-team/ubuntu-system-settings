@@ -19,7 +19,7 @@
  */
 
 import QtQuick 2.0
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.1
 import Ubuntu.Settings.Components 0.1
 
 Item {
@@ -27,11 +27,14 @@ Item {
 
     signal clicked
 
+    property bool highlighted: false
+
     height: col.height
 
     objectName: "entryComponent-" + model.item.baseName
 
     Column {
+        z: 1
         id: col
         anchors.left: parent.left
         anchors.right: parent.right
@@ -53,8 +56,42 @@ Item {
         }
     }
 
+    UbuntuShape {
+        id: hightlight
+        anchors {
+            fill: col
+            margins: -units.gu(0.25)
+        }
+        opacity: 0.15
+        color: UbuntuColors.darkGrey
+        visible: highlighted
+    }
+
+    Timer {
+        id: deHightlightTimer
+        onTriggered: root.highlighted = false;
+     }
+
     MouseArea {
         anchors.fill: parent
-        onClicked: root.clicked()
+        hoverEnabled: true
+        onClicked: {
+            root.highlighted = true;
+            deHightlightTimer.stop();
+            root.clicked();
+        }
+        onPressed: {
+            root.highlighted = true;
+            deHightlightTimer.start();
+        }
+        onReleased: {
+            root.highlighted = false;
+        }
+        onExited: {
+            root.highlighted = false;
+        }
+        onPositionChanged: {
+            deHightlightTimer.restart();
+        }
     }
 }
