@@ -57,7 +57,7 @@ ItemPage {
 
     GSettings {
         id: powerSettings
-        schema.id: batteryBackend.powerdRunning ? "com.canonical.powerd" : "org.gnome.desktop.session"
+        schema.id: batteryBackend.powerdRunning ? "com.ubuntu.touch.system" : "org.gnome.desktop.session"
     }
 
     UbuntuSecurityPrivacyPanel {
@@ -322,7 +322,6 @@ ItemPage {
                 onClicked: pageStack.push(
                                Qt.resolvedUrl("SleepValues.qml"),
                                { title: text, lockOnSuspend: lockOnSuspend })
-                visible: showAllUI // TODO: re-enable once bug #1230345 is resolved
             }
             ListItem.Standard {
                 text: i18n.tr("Wi-Fi")
