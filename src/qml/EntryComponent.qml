@@ -61,5 +61,4 @@ AbstractButton {
         color: UbuntuColors.darkGrey
         opacity: 0.15
     }
-
 }
