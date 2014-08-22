@@ -27,6 +27,7 @@ import SystemSettings 1.0
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+import MeeGo.QOfono 0.2
 
 ItemPage {
     id: root
@@ -48,6 +49,15 @@ ItemPage {
 
     UbuntuBatteryPanel {
         id: batteryBackend
+    }
+
+    OfonoManager {
+        id: manager
+    }
+
+    OfonoSimManager {
+        id: sim
+        modemPath: manager.modems[0]
     }
 
     GSettings {
@@ -114,7 +124,7 @@ ItemPage {
             ListItem.SingleValue {
                 id: simControl
                 text: i18n.tr("SIM PIN")
-                value: "Off"
+                value: sim.lockedPins.length > 0 ? i18n.tr("On") : i18n.tr("Off")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"))
             }
