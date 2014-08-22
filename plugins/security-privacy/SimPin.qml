@@ -42,7 +42,6 @@ ItemPage {
     }
 
     property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(sim.pinRetries[OfonoSimManager.SimPin])
-
     property int simMin: sim.minimumPinLength(OfonoSimManager.SimPin)
     property int simMax: sim.maximumPinLength(OfonoSimManager.SimPin)
 
@@ -51,6 +50,7 @@ ItemPage {
 
         Dialog {
             id: changePinDialog
+            title: i18n.tr("Change SIM PIN")
 
             // This is a bit hacky, but the contents of this dialog get so tall
             // that on a mako device, they don't fit with the OSK also visible.
@@ -60,8 +60,6 @@ ItemPage {
                 property: "itemSpacing"
                 value: units.gu(1)
             }
-
-            title: i18n.tr("Change SIM PIN")
 
             Connections {
                 target: sim
@@ -177,6 +175,7 @@ ItemPage {
 
         Dialog {
             id: lockPinDialog
+            title: i18n.tr("Enter SIM PIN")
 
             // This is a bit hacky, but the contents of this dialog get so tall
             // that on a mako device, they don't fit with the OSK also visible.
@@ -186,8 +185,6 @@ ItemPage {
                 property: "itemSpacing"
                 value: units.gu(1)
             }
-
-            title: i18n.tr("Enter SIM PIN")
 
             Connections {
                 target: sim
@@ -286,7 +283,6 @@ ItemPage {
         }
 
         ListItem.SingleControl {
-
             id: changeControl
             visible: sim.lockedPins.length > 0
             control: Button {
