@@ -32,16 +32,15 @@ ItemPage {
 
     property var netReg
     property var connMan
-    property var operators: []
     property bool scanning: false
     property variant operatorNames
-    property variant operatorStatus
-    property int curOp
     property int mode
 
     mode: netReg.mode === "manual" ? 1 : 0
 
-    Component.onCompleted: buildLists();
+    Component.onCompleted: {
+        updateNetworkOperators();
+    }
 
     Connections {
         target: netReg
@@ -56,7 +55,7 @@ ItemPage {
             else
                 chooseCarrier.selectedIndex = 0;
         }
-        onNetworkOperatorsChanged: buildLists();
+        onNetworkOperatorsChanged: updateNetworkOperators();
         onScanFinished: scanning = false;
         onScanError: {
             scanning = false;
@@ -68,24 +67,85 @@ ItemPage {
         target: connMan
     }
 
+    // map of operatorPath : netOp
+    property var operators: ({}) // naughty, naughty
+    function updateNetworkOperators()
+    {
+        var tmp = netReg.networkOperators;
+        var added = tmp.filter(function(i) {
+            return operators[i] === undefined;
+        });
+        var removed = Object.keys(operators).filter(function(i) {
+            return tmp.indexOf(i) === -1;
+        })
+
+        removed.forEach(function(currentValue, index, array) {
+            // just asserting to verify the logic
+            // remove once proven functional
+            if (operators[currentValue] === undefined) {
+                throw "updateNetworkOperators: removed is broken";
+            }
+
+            operators[currentValue].destroy();
+            delete operators[currentValue];
+        });
+
+        added.forEach(function(currentValue, index, array) {
+            // just asserting to verify the logic
+            // remove once proven functional
+            if (operators[currentValue] !== undefined) {
+                throw "updateNetworkOperators: added is broken";
+            }
+
+            operators[currentValue] = netOp.createObject(parent,
+                                                         {
+                                                             "operatorPath": currentValue
+                                                         });
+        });
+
+        // just asserting to verify the logic
+        // remove once proven functional
+        if (Object.keys(operators).length !== tmp.length) {
+            throw "Object.keys(operators).length !== tmp.length";
+        }
+        tmp.forEach(function(currentValue, index, array) {
+            if (operators[currentValue] === undefined)
+                throw "operators[currentValue] === undefined";
+        });
+
+        buildLists();
+    }
+
     function buildLists()
     {
-        var ops = [];
         var oN = new Array();
-        var oS = new Array();
-        for (var i = 0; i < netReg.networkOperators.length; i++) {
-            var tempOp = netOp.createObject(parent, {"operatorPath": netReg.networkOperators[i]});
+
+        for (var i in operators) {
+            var tempOp = operators[i];
             if (tempOp.status === "forbidden")
                 continue
             oN.push(tempOp.name);
-            oS.push(tempOp.status);
-            ops.push(tempOp)
         }
-        curOp = oS.indexOf("current");
         operatorNames = oN;
-        operatorStatus = oS;
-        operators = ops;
-        carrierSelector.selectedIndex = curOp;
+
+        var cur = currentOperator();
+        carrierSelector.selectedIndex = cur === undefined ? -1 : operatorNames.indexOf(cur.name);
+    }
+
+    function currentOperator()
+    {
+        var cur = Object.keys(operators).filter(function(i) {
+            return operators[i].status === "current";
+        });
+
+        if (cur.length > 1) {
+            /// todo, is this possible?
+            throw "more than one current operators.";
+        }
+        if (cur.length === 1)
+            return operators[cur];
+        else
+            return undefined;
     }
 
     Component {
@@ -99,7 +159,9 @@ ItemPage {
                     netReg.registration();
                 }
             }
-        }
+            onNameChanged:  buildLists();
+            onStatusChanged: buildLists();
+        }        
     }
 
     Flickable {
@@ -137,10 +199,20 @@ ItemPage {
                 enabled: chooseCarrier.selectedIndex === 1
                 model: operatorNames
                 onSelectedIndexChanged: {
-                    if ((selectedIndex !== curOp) && operators[selectedIndex]) {
-                        console.warn("onSelectedIndexChanged status: " + operators[selectedIndex].status);
-                        operators[selectedIndex].registerOperator();
+                    if (selectedIndex === -1)
+                        return;
+
+                    // this assumes operator names are unique,
+                    // revise if not so
+                    for (var op in operators) {
+                        if (operators[op].name === operatorNames[selectedIndex]) {
+                            operators[op].registerOperator();
+                            return;
+                        }
                     }
+                    // just asserting to verify the logic
+                    // remove once proven functional
+                    throw "should not be reached.";
                 }
             }
             
