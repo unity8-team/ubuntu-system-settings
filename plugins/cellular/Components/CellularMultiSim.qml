@@ -28,9 +28,8 @@ Column {
     function getNameFromIndex (index) {
         if (index === 0) {
             return i18n.tr("Off");
-        } else {
-            // add one to index which offsets for 'off'
-            return sims[index + 1].title;
+        } else if (index > 0) {
+            return sims[index - 1].title;
         }
     }
 
@@ -46,12 +45,12 @@ Column {
 
     height: childrenRect.height
 
-    // TODO: make this work for an arbitrary amount of sims
     states: [
         State {
             name: "sim1Online"
             when: sims[0].connMan.powered && !sims[1].connMan.powered
             StateChangeScript { script: {
+                console.warn('sim1Online');
                 selector.selectedIndex =
                     selector.model.indexOf(
                         sim1.radioSettings.technologyPreference)
@@ -61,6 +60,7 @@ Column {
             name: "sim2Online"
             when: sims[1].connMan.powered && !sims[0].connMan.powered
             StateChangeScript { script: {
+                console.warn('sim2Online');
                 selector.selectedIndex =
                     selector.model.indexOf(
                         sim2.radioSettings.technologyPreference)
@@ -70,6 +70,7 @@ Column {
             name: "bothOnline"
             when: sims[0].connMan.powered && sims[1].connMan.powered
             StateChangeScript { script: {
+                console.warn('both sims online');
                 sims[1].connMan.powered = false;
             }}
         }

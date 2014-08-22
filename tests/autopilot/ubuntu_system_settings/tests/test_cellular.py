@@ -406,7 +406,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.use_selector(USE_SIM_2)
         self.select_preference(PREFERENCE_UMTS)
         self.use_selector(USE_OFF)
-        sleep(0.7)
+        sleep(2)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_1.EmitSignal(
             CONNMAN_IFACE,
@@ -568,6 +568,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertEqual(
             gsettings.get_value('default-sim-for-calls').get_string(),
             '/ril_0')
+        self.assertTrue(False)
 
     def test_changing_default_sim_for_messages(self):
         gsettings = Gio.Settings.new('com.ubuntu.phone')
