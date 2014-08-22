@@ -96,7 +96,8 @@ Item {
             }
 
             function prev() {
-                pageList.prev() // to update pageList.index
+                if (pageList.index >= pageStack.depth - 1)
+                    pageList.prev() // update pageList.index, but not for extra pages
                 pop()
             }
 
