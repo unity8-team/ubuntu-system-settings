@@ -39,7 +39,7 @@ ItemPage {
             console.warn('callSettings, onGetPropertiesFailed');
         }
         onReadyChanged: {
-            console.warn('callSettings: ready changed', sim1.callSettings.ready);
+            console.warn('callSettings: ready changed', sim.callSettings.ready);
         }
         onVoiceCallWaitingComplete: {
             console.warn('callSettings: onVoiceCallWaitingComplete', success);
