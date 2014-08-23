@@ -34,18 +34,13 @@ ItemPage {
         id: callSettings
         modemPath: sim.path
         onVoiceCallWaitingChanged: {
-            console.warn('callSettings: onVoiceCallWaitingChanged', setting);
             callWaitingIndicator.running = false;
         }
         onGetPropertiesFailed: {
             console.warn('callSettings, onGetPropertiesFailed');
             callWaitingIndicator.running = false;
         }
-        onReadyChanged: {
-            console.warn('callSettings: ready changed', callSettings.ready);
-        }
         onVoiceCallWaitingComplete: {
-            console.warn('callSettings: onVoiceCallWaitingComplete', success);
             callWaitingIndicator.running = false;
         }
     }
