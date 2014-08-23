@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("All done")
+    title: i18n.tr("Bug Reporting")
     forwardButtonSourceComponent: forwardButton
 
     Item {
@@ -36,15 +36,15 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             fontSize: "large"
-            text: i18n.tr("Nice work! Your phone is now ready to use. ")
+            text: i18n.tr("Your phone is set up to automatically report errors to Canonical. This can be disabled in system settings.")
         }
     }
 
     Component {
         id: forwardButton
         LocalComponents.ForwardButton {
-            text: i18n.tr("Finish")
-            onClicked: root.quitWizard()
+            text: i18n.tr("Continue")
+            onClicked: pageStack.next()
         }
     }
 }

@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("No SIM card")
+    title: i18n.tr("Add a SIM card")
     forwardButtonSourceComponent: forwardButton
     hasBackButton: false
 
@@ -54,9 +54,7 @@ LocalComponents.Page {
             width: parent.width
             wrapMode: Text.WordWrap
             textFormat: Text.StyledText
-            text: i18n.tr("To use the telephone and SMS features a SIM must be installed.") +
-                  "<br><br>" +
-                  "<b>" + i18n.tr("Install a SIM before continuing.") + "</b>"
+            text: i18n.tr("Please insert a SIM card before you continue. Without it, you won’t be able to make calls or use text messaging.")
         }
     }
 

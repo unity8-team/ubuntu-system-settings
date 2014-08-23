@@ -40,7 +40,8 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject(parent),
     m_systemCheckingUpdate(false),
     m_clickCheckingUpdate(false),
-    m_checkingUpdates(0)
+    m_checkingUpdates(0),
+    m_downloadMode(-1)
 {
     // SSO SERVICE
     QObject::connect(&m_service, SIGNAL(credentialsFound(const Token&)),
