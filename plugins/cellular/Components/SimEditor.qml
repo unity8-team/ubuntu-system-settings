@@ -44,7 +44,7 @@ Column {
             name: "editingSim1"
             PropertyChanges {
                 target: nameField
-                text: sim1.name
+                text: sims[0].name
             }
             ParentChange {
                 target: editor
@@ -60,7 +60,7 @@ Column {
             name: "editingSim2"
             PropertyChanges {
                 target: nameField
-                text: sim2.name
+                text: sims[1].name
             }
             ParentChange {
                 target: editor
@@ -108,7 +108,7 @@ Column {
                             right: parent.right
                             verticalCenter: parent.verticalCenter
                         }
-                        text: sim1.title
+                        text: sims[0].title
                     }
                 }
                 Column {
@@ -144,7 +144,7 @@ Column {
                             right: parent.right
                             verticalCenter: parent.verticalCenter
                         }
-                        text: sim2.title
+                        text: sims[1].title
                     }
                 }
                 Column {
@@ -213,11 +213,11 @@ Column {
             onTriggered: {
                 var tmpSimNames = {};
                 if (simList.state === "editingSim1") {
-                    tmpSimNames[sim1.path] = nameField.text;
-                    tmpSimNames[sim2.path] = sim2.name;
+                    tmpSimNames[sims[0].path] = nameField.text;
+                    tmpSimNames[sims[1].path] = sims[1].name;
                 } else if (simList.state === "editingSim2") {
-                    tmpSimNames[sim1.path] = sim1.name;
-                    tmpSimNames[sim2.path] = nameField.text;
+                    tmpSimNames[sims[0].path] = sims[0].name;
+                    tmpSimNames[sims[1].path] = nameField.text;
                 }
                 phoneSettings.simNames = tmpSimNames;
                 simList.state = "";

@@ -9,6 +9,7 @@ set(QML_SOURCES
     PageComponent.qml
     Hotspot.qml
     HotspotSetup.qml
+    sims.js
 )
 
 
