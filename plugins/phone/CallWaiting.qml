@@ -32,6 +32,17 @@ ItemPage {
     Connections {
         target: sim.callSettings
         onVoiceCallWaitingChanged: {
+            console.warn('callSettings: onVoiceCallWaitingChanged', setting);
+            callWaitingIndicator.running = false;
+        }
+        onGetPropertiesFailed: {
+            console.warn('callSettings, onGetPropertiesFailed');
+        }
+        onReadyChanged: {
+            console.warn('callSettings: ready changed', sim1.callSettings.ready);
+        }
+        onVoiceCallWaitingComplete: {
+            console.warn('callSettings: onVoiceCallWaitingComplete', success);
             callWaitingIndicator.running = false;
         }
     }
@@ -46,6 +57,7 @@ ItemPage {
         id: callWaitingSwitch
         objectName: "callWaitingSwitch"
         visible: !callWaitingIndicator.running
+        enabled: sim.callSettings.ready
         checked: sim.callSettings.voiceCallWaiting !== "disabled"
         onClicked: {
             callWaitingIndicator.running = true;
