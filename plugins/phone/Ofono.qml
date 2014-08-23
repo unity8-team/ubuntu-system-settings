@@ -22,7 +22,6 @@ import MeeGo.QOfono 0.2
 
 Item {
     property alias callForwarding: callForwarding
-    property alias callSettings: callSettings
     property alias netReg: netReg
     property alias simMng: simMng
     property alias present: simMng.present
@@ -32,11 +31,6 @@ Item {
     property string title: {
         var number = simMng.subscriberNumbers[0] || simMng.subscriberIdentity;
         return name + (number ? " (" + number + ")" : "");
-    }
-
-    OfonoCallSettings {
-        id: callSettings
-        modemPath: path
     }
 
     OfonoCallForwarding {
