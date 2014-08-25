@@ -198,6 +198,25 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         modem.AddProperties(SIM_IFACE, properties)
         modem.AddProperty(SIM_IFACE, 'Present', True)
+        modem.AddProperty(SIM_IFACE, 'LockedPins', ['pin'])
+        modem.AddProperty(SIM_IFACE, 'Retries', {'pin': dbus.Byte(3)})
+        modem.AddProperty(SIM_IFACE, 'PinRequired', 'none')
+
+        modem.AddMethod(
+            SIM_IFACE,
+            'UnlockPin', 'ss', '', 'self.Set("IFACE", "LockedPins", ""); '
+                 'self.EmitSignal("IFACE",\
+                 "PropertyChanged", "sv", ["LockedPins", ""])'
+                    .replace('IFACE', SIM_IFACE)
+        )
+        modem.AddMethod(
+            SIM_IFACE,
+            'LockPin', 'ss', '', 'self.Set("IFACE", "LockedPins", ["pin"]); '
+                 'self.EmitSignal("IFACE",\
+                 "PropertyChanged", "sv", ["LockedPins", ["pin"]])'
+                    .replace('IFACE', SIM_IFACE)
+        )
+
         modem.AddMethods(
             SIM_IFACE,
             [('GetProperties', '', 'a{sv}',

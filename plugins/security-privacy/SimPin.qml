@@ -175,6 +175,7 @@ ItemPage {
 
         Dialog {
             id: lockPinDialog
+            objectName: "lockDialogComponent"
             title: i18n.tr("Enter SIM PIN")
 
             // This is a bit hacky, but the contents of this dialog get so tall
@@ -218,6 +219,7 @@ ItemPage {
 
             TextField {
                 id: prevInput
+                objectName: "prevInput"
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhDialableCharactersOnly
                 maximumLength: simMax
@@ -242,6 +244,7 @@ ItemPage {
                 spacing: units.gu(1)
 
                 Button {
+                    objectName: "cancelButton"
                     Layout.fillWidth: true
                     color: UbuntuColors.lightGrey
                     text: i18n.tr("Cancel")
@@ -250,6 +253,7 @@ ItemPage {
 
                 Button {
                     id: lockButton
+                    objectName: "lockButton"
                     Layout.fillWidth: true
                     color: UbuntuColors.green
 
@@ -275,6 +279,7 @@ ItemPage {
             text: i18n.tr("SIM PIN")
             control: Switch {
                 id: simPinSwitch
+                objectName: "simPinSwitch"
                 checked: sim.lockedPins.length > 0
                 onClicked: {
                     PopupUtils.open(lockDialogComponent);

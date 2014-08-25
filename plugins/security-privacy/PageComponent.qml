@@ -58,6 +58,9 @@ ItemPage {
     OfonoSimManager {
         id: sim
         modemPath: manager.modems[0]
+        onLockedPinsChanged: {
+            console.warn("onLockedPinsChanged: " + sim.lockedPins)
+        }
         Component.onCompleted: {
             console.warn("KEN: " + sim.lockedPins);
             console.warn("KEN: " + sim.modemPath);
