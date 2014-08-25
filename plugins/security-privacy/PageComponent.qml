@@ -198,7 +198,8 @@ ItemPage {
             }
             ListItem.SingleValue {
                 text: i18n.tr("Location access")
-                value: "On"
+                value: locationActionGroup.enabled.state ?
+                           i18n.tr("On") : i18n.tr("Off")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
                 visible: showAllUI && // Hidden until the indicator works

@@ -125,7 +125,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                'for m in objects if "%s/operator/" in m]' % name
 
     def mock_connection_manager(self, modem):
-        modem.AddProperty(CONNMAN_IFACE, 'Powered', True)
+        modem.AddProperty(CONNMAN_IFACE, 'Powered', dbus.Boolean(1))
         modem.AddProperty(CONNMAN_IFACE, 'RoamingAllowed', False)
         modem.AddMethods(
             CONNMAN_IFACE,
@@ -195,9 +195,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             }
 
         modem.AddProperties(SIM_IFACE, properties)
-        modem.AddProperty(SIM_IFACE, 'LockedPins', ['pin'])
-        modem.AddProperty(SIM_IFACE, 'Retries', {'pin': dbus.Byte(3)})
-        modem.AddProperty(SIM_IFACE, 'PinRequired', 'none')
+        modem.AddProperty(SIM_IFACE, 'Present', True)
         modem.AddMethods(
             SIM_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -212,7 +210,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         # create modem_0 proxy
         self.modem_0 = self.dbus_con.get_object('org.ofono', '/ril_0')
 
-        # Add an available carrier
         self.mock_carriers('ril_0')
 
         self.mock_radio_settings(self.modem_0)
@@ -236,6 +233,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.dbusmock.AddModem(second_modem, {'Powered': True})
         self.modem_1 = self.dbus_con.get_object(
             'org.ofono', '/%s' % second_modem)
+
         self.modem_1.AddMethods(NETREG_IFACE, [
             ('GetProperties', '', 'a{sv}',
                 'ret = self.GetAll("org.ofono.NetworkRegistration")'),
@@ -257,9 +255,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
+        template = os.path.join(os.path.dirname(__file__), 'ofono.py')
         # Add a mock Ofono environment so we get consistent results
         (cls.p_mock, cls.obj_ofono) = cls.spawn_server_template(
-            'ofono', stdout=subprocess.PIPE)
+            template, stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):

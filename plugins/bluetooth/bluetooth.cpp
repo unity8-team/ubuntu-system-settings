@@ -151,10 +151,8 @@ QAbstractItemModel * Bluetooth::getAutoconnectDevices()
 
 void Bluetooth::disconnectDevice()
 {
-    Device::Type type;
-
     if (m_selectedDevice) {
-        type = m_selectedDevice->getType();
+        auto type = m_selectedDevice->getType();
         if (type == Device::Type::Headset)
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
         else if (type == Device::Type::Headphones)
