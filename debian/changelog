@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.3+14.10.20140822.1-0ubuntu1) utopic; urgency=low
+
+  [ Charles Kerr ]
+  * In the welcome wizard, refresh the text in the 'no sim card' and
+    'all done' pages to match the latest from design.
+
+  [ Michael Terry ]
+  * Add a location page and a terms and conditions page for the HERE
+    service.
+
+  [ Ken VanDine ]
+  * Settings for idle/lock timeout (LP: #1230345)
+  * Added flickable to fix scrolling (LP: #1354161)
+
+  [ Jussi Pakkanen ]
+  * Fix a bunch of compiler warnings.
+
+  [ jonas-drange ]
+  * [cellular] displays cellular UIs based on how many SIMs are present.
+    (LP: #1357393)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 22 Aug 2014 18:57:00 +0000
+
 ubuntu-system-settings (0.3+14.10.20140819.1-0ubuntu1) utopic; urgency=low
 
   [ Sebastien Bacher ]
