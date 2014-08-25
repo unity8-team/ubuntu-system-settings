@@ -640,3 +640,19 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(ResetBaseTestCase, self).tearDown()
+
+
+class SecurityBaseTestCase(UbuntuSystemSettingsTestCase):
+    """ Base class for security and privacy settings tests"""
+
+    def setUp(self):
+        super(SecurityBaseTestCase, self).setUp('security-privacy')
+        """ Go to Security & Privacy page """
+        self.security_page = self.system_settings.main_view.select_single(
+            objectName='securityPrivacyPage'
+        )
+        self.assertThat(self.security_page.active,
+                        Eventually(Equals(True)))
+
+    def tearDown(self):
+        super(SecurityBaseTestCase, self).tearDown()
