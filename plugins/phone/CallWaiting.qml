@@ -22,6 +22,7 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import MeeGo.QOfono 0.2
 
 ItemPage {
     objectName: "callWaitingPage"
@@ -29,9 +30,17 @@ ItemPage {
     property var sim
     property string headerTitle: i18n.tr("Call waiting")
 
-    Connections {
-        target: sim.callSettings
+    OfonoCallSettings {
+        id: callSettings
+        modemPath: sim.path
         onVoiceCallWaitingChanged: {
+            callWaitingIndicator.running = false;
+        }
+        onGetPropertiesFailed: {
+            console.warn('callSettings, onGetPropertiesFailed');
+            callWaitingIndicator.running = false;
+        }
+        onVoiceCallWaitingComplete: {
             callWaitingIndicator.running = false;
         }
     }
@@ -46,13 +55,14 @@ ItemPage {
         id: callWaitingSwitch
         objectName: "callWaitingSwitch"
         visible: !callWaitingIndicator.running
-        checked: sim.callSettings.voiceCallWaiting !== "disabled"
+        enabled: callSettings.ready
+        checked: callSettings.voiceCallWaiting !== "disabled"
         onClicked: {
             callWaitingIndicator.running = true;
             if (checked)
-                sim.callSettings.voiceCallWaiting = "enabled";
+                callSettings.voiceCallWaiting = "enabled";
             else
-                sim.callSettings.voiceCallWaiting = "disabled";
+                callSettings.voiceCallWaiting = "disabled";
         }
     }
 
