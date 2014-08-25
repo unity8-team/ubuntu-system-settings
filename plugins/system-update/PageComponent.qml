@@ -213,9 +213,8 @@ ItemPage {
 
                 control: Button {
                     property string primaryText: includeSystemUpdate ?
-                                                     // TRANSLATORS: %1 is a number of updates > 1
-                                                     i18n.tr("Install %1 updates…", "Install %1 updates…", root.updatesAvailable).arg(root.updatesAvailable) :
-                                                     i18n.tr("Install %1 updates", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
+                                                     i18n.tr("Install %1 update…", "Install %1 updates…", root.updatesAvailable).arg(root.updatesAvailable) :
+                                                     i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
                     property string secondaryText: i18n.tr("Pause All")
                     color: UbuntuColors.orange
                     text: root.installAll ? secondaryText : primaryText
