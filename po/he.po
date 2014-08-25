@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-07-30 13:16+0000\n"
+"PO-Revision-Date: 2014-08-23 11:41+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:19+0000\n"
+"X-Launchpad-Export-Date: 2014-08-24 06:45+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -50,7 +50,7 @@ msgstr "פריסות מקלדת"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "תיקון אוטומטי"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -66,12 +66,12 @@ msgstr "הפעלת Shift להגדלת האות הראשונה של כל משפט
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "פיסוק אוטומטי"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
+msgstr "הוספת נקודה וכל מרכאות או סוגריים חסרים בעת נגיעה כפולה ברווח."
 
 #: ../plugins/language//PageComponent.qml:185
 #: ../plugins/sound//PageComponent.qml:186
@@ -80,7 +80,7 @@ msgstr "צלילי המקלדת"
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "רטט מקלדת"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -310,7 +310,7 @@ msgstr "לאפשר גישה למיקום:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "יישומים שאישרת וביקשו לגשת אל:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:100
@@ -319,24 +319,24 @@ msgstr "מצלמה"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "יישומים שביקשו לגשת למצלמה שלך"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "מיקרופון"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "יישומים שביקשו לגשת למצלמה שלך"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
