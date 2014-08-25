@@ -49,7 +49,7 @@ Column {
             StateChangeScript { script: {
                 selector.selectedIndex =
                     DataHelpers.dualSimKeyToIndex(
-                        sim1.radioSettings.technologyPreference)
+                        sims[0].radioSettings.technologyPreference)
             }}
         },
         State {
@@ -58,7 +58,7 @@ Column {
             StateChangeScript { script: {
                 selector.selectedIndex =
                     DataHelpers.dualSimKeyToIndex(
-                        sim2.radioSettings.technologyPreference)
+                        sims[1].radioSettings.technologyPreference)
             }}
         },
         State {
