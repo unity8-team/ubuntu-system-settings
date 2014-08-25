@@ -568,7 +568,6 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertEqual(
             gsettings.get_value('default-sim-for-calls').get_string(),
             '/ril_0')
-        self.assertTrue(False)
 
     def test_changing_default_sim_for_messages(self):
         gsettings = Gio.Settings.new('com.ubuntu.phone')

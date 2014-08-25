@@ -53,7 +53,7 @@ Column {
                 console.warn('sim1Online');
                 selector.selectedIndex =
                     selector.model.indexOf(
-                        sim1.radioSettings.technologyPreference)
+                        sims[0].radioSettings.technologyPreference)
             }}
         },
         State {
@@ -63,7 +63,7 @@ Column {
                 console.warn('sim2Online');
                 selector.selectedIndex =
                     selector.model.indexOf(
-                        sim2.radioSettings.technologyPreference)
+                        sims[1].radioSettings.technologyPreference)
             }}
         },
         State {
