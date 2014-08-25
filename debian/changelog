@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+14.10.20140825-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Added autopilot tests for security-privacy
+
+  [ jonas-drange ]
+  * [phone] adding dual sim functionality to phone panel
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 25 Aug 2014 15:19:31 +0000
+
 ubuntu-system-settings (0.3+14.10.20140822.1-0ubuntu1) utopic; urgency=low
 
   [ Charles Kerr ]
