@@ -193,7 +193,11 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
             properties = {
                 'SubscriberNumbers': ['123456', '234567']
             }
+
         modem.AddProperties(SIM_IFACE, properties)
+        modem.AddProperty(SIM_IFACE, 'LockedPins', ['pin'])
+        modem.AddProperty(SIM_IFACE, 'Retries', {'pin': dbus.Byte(3)})
+        modem.AddProperty(SIM_IFACE, 'PinRequired', 'none')
         modem.AddMethods(
             SIM_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -640,7 +644,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         super(ResetBaseTestCase, self).tearDown()
 
 
-class SecurityBaseTestCase(UbuntuSystemSettingsTestCase):
+class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for security and privacy settings tests"""
 
     def setUp(self):

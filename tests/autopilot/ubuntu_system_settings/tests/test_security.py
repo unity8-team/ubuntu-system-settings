@@ -10,7 +10,12 @@ from time import sleep
 from testtools.matchers import Equals, NotEquals
 from autopilot.matchers import Eventually
 
-from ubuntu_system_settings.tests import SecurityBaseTestCase
+from ubuntu_system_settings.tests import (
+    SecurityBaseTestCase,
+    CellularBaseTestCase,
+    SIM_IFACE)
+
+import dbus
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from ubuntuuitoolkit import emulators as toolkit_emulators
@@ -21,6 +26,7 @@ class SecurityTestCase(SecurityBaseTestCase):
 
     def setUp(self):
         super(SecurityTestCase, self).setUp()
+        self.assertEqual(['pin'], self.modem_0.Get(SIM_IFACE, 'LockedPins'))
         prps = self.system_settings.main_view.security_page.get_properties()
         self.use_powerd = prps['usePowerd']
         if self.use_powerd:
@@ -112,6 +118,32 @@ class SecurityTestCase(SecurityBaseTestCase):
             self.assertEquals(
                 activityTimeout,
                 ('After {:d} minutes').format(int(actTimeout/60)))
+
+    def test_sim_pin_control_value(self):
+
+        self.modem_0.Set(SIM_IFACE, 'LockedPins', dbus.Array(["pin"], variant_level=1))
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['LockedPins', u'["pin"]'])
+        self.modem_0.Set(SIM_IFACE, 'PinRequired', 'none')
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['PinRequired', 'none'])
+
+        self.assertEqual('none', self.modem_0.Get(SIM_IFACE, 'PinRequired'))
+        self.assertEqual(['pin'], self.modem_0.Get(SIM_IFACE, 'LockedPins'))
+
+        sim_pin_value = self.security_page.select_single(
+            objectName='simControl').value
+
+        self.assertThat(
+            sim_pin_value,
+            Equals(_('On'))
+        )
 
     def test_phone_lock_page(self):
         self._go_to_phone_lock()
