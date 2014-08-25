@@ -46,6 +46,3 @@ class MainTestCase(UbuntuSystemSettingsTestCase):
         self.assertThat(
             lambda: gsettings.get_value('rotation-lock').get_boolean(),
             Eventually(Equals(False)))
-
-
-
