@@ -47,7 +47,10 @@ ItemPage {
             "/usr/share/unity8/graphics/tablet_background.jpg" :
             "/usr/share/unity8/graphics/phone_background.jpg"
 
-    property string welcomeBackground: backgroundPanel.backgroundFile
+    /* If there is no uri then use the default */
+    property string welcomeBackground: (backgroundPanel.backgroundFile === "file:") ?
+                                           "file:///usr/share/unity8/graphics/phone_background.jpg" :
+                                           backgroundPanel.backgroundFile
 
     property var activeTransfer
 
