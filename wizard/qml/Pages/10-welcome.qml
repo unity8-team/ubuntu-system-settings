@@ -89,6 +89,7 @@ LocalComponents.Page {
             text: i18n.tr("Start")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
+                root.updateLanguage()
                 if (manager.modems.length == 0 || simManager0.present || simManager1.present)
                     pageStack.next()
                 else

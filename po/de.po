@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-08-17 17:21+0000\n"
-"Last-Translator: Miguel Guse <gusemiguel@gmail.com>\n"
+"PO-Revision-Date: 2014-08-21 16:09+0000\n"
+"Last-Translator: Martin Pitt <martin.pitt@ubuntu.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:19+0000\n"
+"X-Launchpad-Export-Date: 2014-08-22 07:38+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -50,7 +50,7 @@ msgstr "Tastaturbelegungen"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Automatische Korrektur"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -68,12 +68,14 @@ msgstr ""
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Automatische Satzzeichen"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Fügt einen Punkt und fehlende Anführungszeichen ein, wenn Sie zweimal "
+"Leertaste drücken."
 
 #: ../plugins/language//PageComponent.qml:185
 #: ../plugins/sound//PageComponent.qml:186
@@ -82,7 +84,7 @@ msgstr "Tastaturtöne"
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "Tastatur-Vibration"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -312,7 +314,7 @@ msgstr "Erlaube den Zugriff auf Ihre Position:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "Beantragte und erteilte App-Berechtigungen:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:100
@@ -321,24 +323,24 @@ msgstr "Kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Apps die Zugriff auf die Kamera wünschen"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Mikrofon"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Apps die Zugriff auf das Mikrofon wünschen"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
@@ -837,10 +839,13 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"Im Entwicklermodus können alle Daten auf diesem Telefon gelesen, geändert "
+"oder gelöscht werden, wenn es mit einem Computer verbunden wird."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
+"Sie brauchen eine PIN oder ein Passwort um den Entwicklermodus zu nutzen."
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
@@ -1076,7 +1081,7 @@ msgstr "Möglichkeiten um Energie zu sparen:"
 #: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "Bildschirmhelligkeit"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:306
@@ -1424,7 +1429,7 @@ msgstr "Automatisch anpassen"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Passt die Bildschirmhelligkeit der Umgebung an."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
@@ -1570,27 +1575,27 @@ msgstr "Beenden"
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
-msgstr ""
+msgstr "Sperre setzen"
 
 #: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
-msgstr ""
+msgstr "Wischen"
 
 #: ../wizard/qml/Pages//15-passwd.qml:136
 msgid "Those passcodes don't match."
-msgstr ""
+msgstr "Diese PINs stimmen nicht überein."
 
 #: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "Diese Passwörter stimmen nicht überein."
 
 #: ../wizard/qml/Pages//15-passwd.qml:146
 msgid "Passcode must be at least four digits long."
-msgstr ""
+msgstr "PIN muss aus mindestens 4 Ziffern bestehen."
 
 #: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "Passwort muss aus mindestens 4 Ziffern bestehen."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
@@ -1896,8 +1901,8 @@ msgstr "Bildschirm"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Es gibt eine Systemaktualisierung."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Antippen um die System-Aktualisierung zu starten."

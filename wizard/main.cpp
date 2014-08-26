@@ -22,18 +22,42 @@
 #include <QDebug>
 #include <QGuiApplication>
 #include <QLibrary>
+#include <QObject>
 #include <QProcess>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QQuickItem>
 #include <QQuickView>
 #include <QTimer>
 
 #include "PageList.h"
 
-void quitViaUpstart()
+class SignalHandler : public QObject
 {
-    QProcess::startDetached("initctl start ubuntu-system-settings-wizard-cleanup");
-}
+    Q_OBJECT
+
+public:
+    static SignalHandler *instance()
+    {
+        static SignalHandler instance_;
+        return &instance_;
+    }
+
+public Q_SLOTS:
+    void handleLanguageUpdate()
+    {
+        QProcess::startDetached("sh -c \"initctl start ubuntu-system-settings-wizard-set-lang; initctl emit --no-wait indicator-services-start; initctl start --no-wait maliit-server\"");
+    }
+
+    void handleQuit()
+    {
+        QProcess::startDetached("initctl start ubuntu-system-settings-wizard-cleanup");
+    }
+
+private:
+    SignalHandler() {}
+    Q_DISABLE_COPY(SignalHandler)
+};
 
 int main(int argc, const char *argv[])
 {
@@ -69,7 +93,10 @@ int main(int argc, const char *argv[])
     view->setSource(QUrl(rootDir + "/qml/main.qml"));
     view->setColor("transparent");
 
-    QObject::connect(view->engine(), &QQmlEngine::quit, quitViaUpstart);
+    QObject::connect(view->rootObject(), SIGNAL(updateLanguage()),
+                     SignalHandler::instance(), SLOT(handleLanguageUpdate()));
+    QObject::connect(view->engine(), &QQmlEngine::quit,
+                     SignalHandler::instance(), &SignalHandler::handleQuit);
 
     if (isMirServer) {
         view->showFullScreen();
@@ -83,3 +110,5 @@ int main(int argc, const char *argv[])
     delete application;
     return result;
 }
+
+#include "main.moc"

@@ -20,7 +20,8 @@
 namespace NotificationsPlugin {
 
 NotificationItem::NotificationItem(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    m_status(false)
 {
 }
 

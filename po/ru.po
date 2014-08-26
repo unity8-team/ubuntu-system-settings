@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-08-12 11:23+0000\n"
-"Last-Translator: Ilya Barilo <mail@sourcelocalizer.ru>\n"
+"PO-Revision-Date: 2014-08-26 07:16+0000\n"
+"Last-Translator: Jay ZDLin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:21+0000\n"
+"X-Launchpad-Export-Date: 2014-08-26 07:46+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -51,7 +51,7 @@ msgstr "Раскладки клавиатуры"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Автоисправление"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -68,12 +68,14 @@ msgstr ""
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Пунктуация (автоматически)"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Добавление точек и отсутствующих кавычек или скобок при двойном нажатии "
+"пробела."
 
 #: ../plugins/language//PageComponent.qml:185
 #: ../plugins/sound//PageComponent.qml:186
@@ -82,7 +84,7 @@ msgstr "Звук экранной клавиатуры"
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "Вибрация клавиатуры"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -325,24 +327,24 @@ msgstr "Камера"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Приложения, запросившие доступ к камере"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Микрофон"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Приложения, запросившие доступ к микрофону"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
@@ -1083,7 +1085,7 @@ msgstr "Способы для продления использования от
 #: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "Яркость экрана"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:306
@@ -1429,7 +1431,7 @@ msgstr "Автонастройка"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Автонастройка яркости экрана в зависимости от освещённости."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
@@ -1583,19 +1585,19 @@ msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:136
 msgid "Those passcodes don't match."
-msgstr ""
+msgstr "Коды доступа не совпадают."
 
 #: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "Кодовые фразы не совпадают."
 
 #: ../wizard/qml/Pages//15-passwd.qml:146
 msgid "Passcode must be at least four digits long."
-msgstr ""
+msgstr "Код доступа должен содержать не менее четырёх цифр."
 
 #: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "Кодовая фраза должна содержать не менее четырёх символов."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
@@ -1901,8 +1903,8 @@ msgstr "экран"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Имеется обновлённый образ системы."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Нажмите для открытия мастера обновления системы."

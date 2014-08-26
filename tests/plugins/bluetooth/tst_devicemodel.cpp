@@ -93,5 +93,5 @@ void DeviceModelTest::testGetDeviceFromPath()
     QVERIFY(!device->getPath().isEmpty());
 }
 
-QTEST_MAIN(DeviceModelTest);
+QTEST_MAIN(DeviceModelTest)
 #include "tst_devicemodel.moc"
