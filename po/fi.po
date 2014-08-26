@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-08-18 07:37+0000\n"
+"PO-Revision-Date: 2014-08-22 09:53+0000\n"
 "Last-Translator: Timo Jyrinki <timo.jyrinki@canonical.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:19+0000\n"
+"X-Launchpad-Export-Date: 2014-08-23 07:15+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -50,7 +50,7 @@ msgstr "Näppäimistöasettelut"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Automaattinen korjaus"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -66,12 +66,14 @@ msgstr "Shift-näppäin on käytössä automaattisesti jokaisen lauseen alussa."
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Automaattiset välimerkit"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Lisää pisteen sekä puuttuvat lainausmerkit ja sulut, kun painat välilyöntiä "
+"kahdesti."
 
 #: ../plugins/language//PageComponent.qml:185
 #: ../plugins/sound//PageComponent.qml:186
@@ -80,7 +82,7 @@ msgstr "Näppäimistön ääni"
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "Näppäimistön värinä"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -148,14 +150,14 @@ msgstr "Ei mitään"
 #: ../plugins/security-privacy//PhoneLocking.qml:41
 #: ../wizard/qml/Pages//15-passwd.qml:88
 msgid "Passcode"
-msgstr "Pääsykoodi"
+msgstr "Suojakoodi"
 
 #: ../plugins/security-privacy//PageComponent.qml:80
 #: ../plugins/security-privacy//PhoneLocking.qml:42
 #: ../plugins/security-privacy//LockSecurity.qml:346
 #: ../wizard/qml/Pages//15-passwd.qml:90
 msgid "Passphrase"
-msgstr "Avainlause"
+msgstr "Salasana"
 
 #: ../plugins/security-privacy//PageComponent.qml:82
 #: ../plugins/security-privacy//PhoneLocking.qml:44
@@ -312,7 +314,7 @@ msgstr "Salli sijaintitiedon käyttö:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "Sovellukset, jotka ovat pyytäneet ja joille on annettu oikeudet:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:100
@@ -321,32 +323,32 @@ msgstr "Kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Sovellukset jotka ovat pyytäneet pääsyä kameraan"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Mikrofoni"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Sovellukset jotka ovat pyytäneet pääsyä mikrofoniin"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
-msgstr "Vaihda pääsykoodi"
+msgstr "Vaihda suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:94
 msgid "Change passphrase"
-msgstr "Vaihda avainlause"
+msgstr "Vaihda salasanaa"
 
 #: ../plugins/security-privacy//LockSecurity.qml:101
 msgid "Switch to swipe"
@@ -354,43 +356,43 @@ msgstr "Vaihda pyyhkäisyyn"
 
 #: ../plugins/security-privacy//LockSecurity.qml:103
 msgid "Switch to passcode"
-msgstr "Vaihda pääsykoodiin"
+msgstr "Vaihda suojakoodiin"
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to passphrase"
-msgstr "Vaihda avainlauseeseen"
+msgstr "Vaihda salasanaan"
 
 #: ../plugins/security-privacy//LockSecurity.qml:114
 msgid "Existing passcode"
-msgstr "Nykyinen pääsykoodi"
+msgstr "Nykyinen suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:116
 msgid "Existing passphrase"
-msgstr "Nykyinen avainlause"
+msgstr "Nykyinen salasana"
 
 #: ../plugins/security-privacy//LockSecurity.qml:170
 msgid "Choose passcode"
-msgstr "Valitse pääsykoodi"
+msgstr "Valitse suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:172
 msgid "Choose passphrase"
-msgstr "Valitse avainlause"
+msgstr "Valitse salasana"
 
 #: ../plugins/security-privacy//LockSecurity.qml:216
 msgid "Confirm passcode"
-msgstr "Vahvista pääsykoodi"
+msgstr "Vahvista suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:218
 msgid "Confirm passphrase"
-msgstr "Vahvista avainlause"
+msgstr "Vahvista salasana"
 
 #: ../plugins/security-privacy//LockSecurity.qml:261
 msgid "Those passcodes don't match. Try again."
-msgstr "Pääsykoodit eivät vastaa toisiaan. Yritä uudelleen."
+msgstr "Suojakoodit eivät vastaa toisiaan. Yritä uudelleen."
 
 #: ../plugins/security-privacy//LockSecurity.qml:264
 msgid "Those passphrases don't match. Try again."
-msgstr "Avainlauseet eivät vastaa toisiaan. Yritä uudelleen."
+msgstr "Salasanat eivät vastaa toisiaan. Yritä uudelleen."
 
 #: ../plugins/security-privacy//LockSecurity.qml:295
 msgid "Unset"
@@ -418,7 +420,7 @@ msgstr "Pyyhkäisy (ei turvallinen)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:345
 msgid "4-digit passcode"
-msgstr "4-numeroinen pääsykoodi"
+msgstr "4-numeroinen suojakoodi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:347
 msgid "Swipe (no security)… "
@@ -426,19 +428,19 @@ msgstr "Pyyhkäisy (ei turvallinen)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "4-digit passcode…"
-msgstr "Nelinumeroinen pääsykoodi…"
+msgstr "Nelinumeroinen suojakoodi…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "Passphrase…"
-msgstr "Avainlause…"
+msgstr "Salasana…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:380
 msgid "Change passcode…"
-msgstr "Vaihda pääsykoodi…"
+msgstr "Vaihda suojakoodi…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:381
 msgid "Change passphrase…"
-msgstr "Vaihda avainlause…"
+msgstr "Vaihda salasana…"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
@@ -841,7 +843,7 @@ msgstr ""
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr "Tarvitset kehittäjätilaa varten tunnuskoodin tai salasanan."
+msgstr "Tarvitset kehittäjätilaa varten suojakoodin tai salasanan."
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
@@ -1077,7 +1079,7 @@ msgstr "Säästä akkuvirtaa näin:"
 #: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "Näytön kirkkaus"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:306
@@ -1421,7 +1423,7 @@ msgstr "Säädä manuaalisesti"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Näytön kirkkauden säätö ympäristöön sopivaksi"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
@@ -1567,27 +1569,27 @@ msgstr "Valmis"
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
-msgstr ""
+msgstr "Aseta lukitustapa"
 
 #: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
-msgstr ""
+msgstr "Pyyhkäisy"
 
 #: ../wizard/qml/Pages//15-passwd.qml:136
 msgid "Those passcodes don't match."
-msgstr ""
+msgstr "Suojakoodit eivät täsmää."
 
 #: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "Salasanat eivät täsmää."
 
 #: ../wizard/qml/Pages//15-passwd.qml:146
 msgid "Passcode must be at least four digits long."
-msgstr ""
+msgstr "Suojakoodin tulee olla vähintään neljä numeroa."
 
 #: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "Salasanan tulee olla vähintään neljä kirjainta."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
@@ -1893,8 +1895,8 @@ msgstr "näyttö"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Päivitetty järjestelmäversio saatavilla."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Kosketa avataksesi järjestelmän päivityksen."

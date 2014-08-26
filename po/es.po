@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-08-16 13:20+0000\n"
-"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2014-08-26 05:19+0000\n"
+"Last-Translator: Leo Arias <leo.arias@canonical.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:21+0000\n"
+"X-Launchpad-Export-Date: 2014-08-26 07:46+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -50,7 +50,7 @@ msgstr "Distribuciones de teclado"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Corrección automática"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -66,7 +66,7 @@ msgstr "Activa Mayús al principio de cada oración."
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Puntuación automática"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
@@ -80,7 +80,7 @@ msgstr "Sonido del teclado"
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "Vibración de teclado"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -216,13 +216,13 @@ msgstr "Diagnósticos"
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy//PageComponent.qml:184
 msgid "Sent"
-msgstr "Enviado"
+msgstr "Enviados"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy//PageComponent.qml:187
 msgid "Not sent"
-msgstr "No enviado"
+msgstr "No enviados"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:62
 #: ../plugins/battery//PageComponent.qml:300
@@ -321,24 +321,24 @@ msgstr "Cámara"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Aplicaciones que solicitaron acceso a la cámara"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Micrófono"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Aplicaciones que solicitaron acceso al micrófono"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
@@ -1079,7 +1079,7 @@ msgstr "Formas de reducir el uso de la batería:"
 #: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "Brillo de pantalla"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:306
@@ -1212,8 +1212,8 @@ msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
-"Aplicaciones seleccionadas pueden avisarle usando burbujas de notificación, "
-"sonidos, vibraciones y el Centro de notificaciones."
+"Las aplicaciones seleccionadas pueden alertarle mediante notificaciones, "
+"sonidos, vibración y el Centro de notificaciones."
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
@@ -1397,7 +1397,7 @@ msgstr " GiB"
 
 #: ../plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
-msgstr "Descargar automáticamente actualizaciones futuras:"
+msgstr "Descarga automática de actualizaciones:"
 
 #: ../plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
@@ -1423,7 +1423,7 @@ msgstr "Ajuste automático"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Aumenta o disminuye el brillo de la pantalla según la luz ambiental."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
@@ -1569,11 +1569,11 @@ msgstr "Finalizar"
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
-msgstr ""
+msgstr "Establecer la seguridad de bloqueo"
 
 #: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
-msgstr ""
+msgstr "Deslizar"
 
 #: ../wizard/qml/Pages//15-passwd.qml:136
 msgid "Those passcodes don't match."
@@ -1895,7 +1895,7 @@ msgstr "pantalla"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Hay una actualización de la imagen del sistema disponible."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
