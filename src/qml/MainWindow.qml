@@ -45,6 +45,7 @@ MainView {
             // Got a valid plugin name - load it
             var pageComponent = plugin.pageComponent
             if (pageComponent) {
+                i18n.domain = plugin.translations
                 pageStack.push(pageComponent, opts)
             }
             return true
@@ -159,6 +160,13 @@ MainView {
                         model: pluginManager.itemModel("uncategorized-bottom")
                     }
                 }
+            }
+        }
+
+        onDepthChanged: {
+            if (depth <= 1) {
+                i18n.domain = "ubuntu-system-settings"
+                i18n.bindtextdomain("ubuntu-system-settings", i18nDirectory)
             }
         }
     }

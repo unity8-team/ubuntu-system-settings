@@ -49,6 +49,7 @@ Column {
                     onClicked: {
                         var pageComponent = model.item.pageComponent
                         if (pageComponent) {
+                            i18n.domain = model.item.translations
                             pageStack.push(model.item.pageComponent,
                                            { plugin: model.item,
                                              pluginManager: pluginManager })
