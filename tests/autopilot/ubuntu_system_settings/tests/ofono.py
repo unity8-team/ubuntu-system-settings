@@ -81,6 +81,7 @@ def AddModem(self, name, properties):
         ])
     obj = dbusmock.mockobject.objects[path]
     obj.name = name
+    add_simmanager_api(obj)
     add_voice_call_api(obj)
     add_netreg_api(obj)
     self.modems.append(path)
@@ -88,6 +89,33 @@ def AddModem(self, name, properties):
     self.EmitSignal(MAIN_IFACE, 'ModemAdded', 'oa{sv}', [path, props])
     return path
 
+
+def add_simmanager_api(mock):
+    '''Add org.ofono.SimManager API to a mock'''
+
+    iface = 'org.ofono.SimManager'
+    mock.AddProperties(iface, {
+        'CardIdentifier': _parameters.get('CardIdentifier', 12345),
+        'Present': _parameters.get('Present', dbus.Boolean(True)),
+        'SubscriberNumbers': _parameters.get('SubscriberNumbers', ['123456789', '234567890']),
+        'SubscriberIdentity': _parameters.get('SubscriberIdentity', 23456),
+        'LockedPins': _parameters.get('LockedPins', ['pin']),
+        'Retries': _parameters.get('Retries', {'pin': dbus.Byte(3)}),
+        'PinRequired': _parameters.get('PinRequired', 'none')
+    })
+
+    mock.AddMethods(iface, [
+        ('GetProperties', '', 'a{sv}', 'ret = self.GetAll("%s")' % iface),
+        ('SetProperty', 'sv', '', 'self.Set("%(i)s", args[0], args[1]); '
+         'self.EmitSignal("%(i)s", "PropertyChanged", "sv", [args[0], args[1]])' % {'i': iface}),
+        ('ChangePin', 'sss', '', ''),
+        ('EnterPin', 'ss', '', ''),
+        ('ResetPin', 'sss', '', ''),
+        ('LockPin', 'ss', '', 'if args[1] == "2468": self.Set("%(i)s", "LockedPins", dbus.Array(["pin"]));'
+         'self.EmitSignal("%(i)s", "PropertyChanged", "sv", ["LockedPins", self.Get("%(i)s", "LockedPins")])' % {'i': iface}),
+        ('UnlockPin', 'ss', '', 'if args[1] == "2468": self.Set("%(i)s", "LockedPins", "");'
+         'self.EmitSignal("%(i)s", "PropertyChanged", "sv", ["LockedPins", self.Get("%(i)s", "LockedPins")])' % {'i': iface})
+    ])
 
 def add_voice_call_api(mock):
     '''Add org.ofono.VoiceCallManager API to a mock'''

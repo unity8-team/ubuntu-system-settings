@@ -190,43 +190,14 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', RDO_IFACE)), ])
 
+    def _unlock_sim(self, modem, pin):
+        if pin != "1234":
+            modem.SetProperty("LockedPins", "")
+
     def mock_sim_manager(self, modem, properties=None):
-        if not properties:
-            properties = {
-                'SubscriberNumbers': ['123456', '234567']
-            }
-
-        modem.AddProperties(SIM_IFACE, properties)
-        modem.AddProperty(SIM_IFACE, 'Present', True)
-        modem.AddProperty(SIM_IFACE, 'LockedPins', ['pin'])
-        modem.AddProperty(SIM_IFACE, 'Retries', {'pin': dbus.Byte(3)})
-        modem.AddProperty(SIM_IFACE, 'PinRequired', 'none')
-
-        modem.AddMethod(
-            SIM_IFACE,
-            'UnlockPin', 'ss', '',
-            'self.Set("IFACE", "LockedPins", ""); '
-            'self.EmitSignal("IFACE",\
-            "PropertyChanged", "sv", ["LockedPins", ""])'
-                .replace('IFACE', SIM_IFACE))
-
-        modem.AddMethod(
-            SIM_IFACE,
-            'LockPin', 'ss', '',
-            'self.Set("IFACE", "LockedPins", ["pin"]); '
-            'self.EmitSignal("IFACE",\
-            "PropertyChanged", "sv", ["LockedPins", ["pin"]])'
-                .replace('IFACE', SIM_IFACE))
-
-        modem.AddMethods(
-            SIM_IFACE,
-            [('GetProperties', '', 'a{sv}',
-                'ret = self.GetAll("%s")' % SIM_IFACE),
-                ('SetProperty', 'sv', '',
-                 'self.Set("IFACE", args[0], args[1]); '
-                 'self.EmitSignal("IFACE",\
-                 "PropertyChanged", "sv", [args[0], args[1]])'
-                    .replace('IFACE', SIM_IFACE)), ])
+        if properties:
+            for key in properties.keys():
+                modem.Set(SIM_IFACE, key, properties[key])
 
     def mock_call_forwarding(self, modem):
         modem.AddProperty(
