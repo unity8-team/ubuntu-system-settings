@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-08-23 11:41+0000\n"
+"PO-Revision-Date: 2014-08-25 11:33+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-24 06:45+0000\n"
+"X-Launchpad-Export-Date: 2014-08-26 07:46+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -550,19 +550,19 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:78
 msgid "Connecting…"
-msgstr ""
+msgstr "בהתחברות…"
 
 #: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Disconnecting…"
-msgstr ""
+msgstr "מתבצע ניתוק…"
 
 #: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Disconnected"
-msgstr ""
+msgstr "מנותק"
 
 #: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Unknown"
-msgstr ""
+msgstr "לא ידוע"
 
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
@@ -665,7 +665,7 @@ msgstr "חיבור התקן נוסף:"
 
 #: ../plugins/bluetooth//PageComponent.qml:236
 msgid "Connect a device:"
-msgstr ""
+msgstr "חיבור התקן:"
 
 #: ../plugins/bluetooth//PageComponent.qml:266
 msgid "None detected"
@@ -674,7 +674,7 @@ msgstr "לא זוהו"
 #: ../plugins/bluetooth//PageComponent.qml:274
 #: ../plugins/bluetooth//PageComponent.qml:360
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "חיבור אוטומטי בעת הזיהוי:"
 
 #: ../plugins/bluetooth//PageComponent.qml:309
 #: ../plugins/wifi//NetworkDetails.qml:43
@@ -687,7 +687,7 @@ msgstr "סוג"
 
 #: ../plugins/bluetooth//PageComponent.qml:351
 msgid "Status"
-msgstr ""
+msgstr "מצב"
 
 #: ../plugins/bluetooth//PageComponent.qml:355
 msgid "Signal Strength"
@@ -704,7 +704,7 @@ msgstr "התחברות"
 
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
+msgstr "התעלמות מהתקן זה"
 
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
@@ -977,7 +977,7 @@ msgstr ""
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "על הטלפון להפעיל עצמו מחדש כדי שהשינויים יכנסו לתוקף."
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
@@ -987,7 +987,7 @@ msgstr "כל המסמכים, המשחקים שנשמרו ופריטים אחרי
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "מחיקה ואיפוס של הכול"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
@@ -1066,7 +1066,7 @@ msgstr "דרכים להפחתת השימוש בסוללה:"
 #: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "בהירות התצוגה"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:306
@@ -1192,7 +1192,7 @@ msgstr "הסרה"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:96
 msgid "Notifications"
-msgstr ""
+msgstr "התרעות"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
@@ -1549,11 +1549,11 @@ msgstr "סיום"
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
-msgstr ""
+msgstr "הגדרת הגנת נעילה"
 
 #: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
-msgstr ""
+msgstr "החלקה"
 
 #: ../wizard/qml/Pages//15-passwd.qml:136
 msgid "Those passcodes don't match."
@@ -1781,7 +1781,7 @@ msgstr "תכנה"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:100
 msgid "notifications"
-msgstr ""
+msgstr "התרעות"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:106
@@ -1875,7 +1875,7 @@ msgstr "מסך"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "קיימת תמונת מערכת עדכנית יותר."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."

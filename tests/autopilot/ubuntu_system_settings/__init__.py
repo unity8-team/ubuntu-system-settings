@@ -171,6 +171,11 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='soundPage')
 
     @property
+    def security_page(self):
+        """ Return 'Security' page """
+        return self.select_single(objectName='securityPrivacyPage')
+
+    @property
     def _orientation_lock_switch(self):
         return self.wait_select_single(
             ubuntuuitoolkit.CheckBox,

@@ -30,6 +30,7 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: root
+    objectName: "securityPrivacyPage"
 
     title: i18n.tr("Security & Privacy")
     flickable: scrollWidget
@@ -85,6 +86,7 @@ ItemPage {
             }            
             ListItem.SingleValue {
                 id: lockingControl
+                objectName: "lockingControl"
                 text: i18n.tr("Lock phone")
                 value: {
                     if (batteryBackend.powerdRunning ) {
@@ -124,10 +126,12 @@ ItemPage {
                     id: encryptionSwitch
                     checked: false
                 }
+                visible: showAllUI
             }
             ListItem.Caption {
                 text: i18n.tr(
                         "Encryption protects against access to phone data when the phone is connected to a PC or other device.")
+                visible: showAllUI
             }
             ListItem.Standard {
                 text: i18n.tr("Privacy")

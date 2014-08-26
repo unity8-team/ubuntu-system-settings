@@ -1,3 +1,31 @@
+ubuntu-system-settings (0.3+14.10.20140826-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Hide sleep locks immediately setting, which isn't implemented yet
+    (LP: #1361297) (LP: #1361297)
+
+  [ Sebastien Bacher ]
+  * [system-update] rework the ui to use a column rather than anchors,
+    the layout is quite dynamic and it should be easier to position and
+    stack widgets this way (LP: #1343172)
+
+  [ Michael Terry ]
+  * After selecting the language, update the session environment
+    immediately and restart indicators so that their notifications (like
+    wifi prompt) are translated. (LP: #1354325)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 26 Aug 2014 00:55:20 +0000
+
+ubuntu-system-settings (0.3+14.10.20140825-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Added autopilot tests for security-privacy
+
+  [ jonas-drange ]
+  * [phone] adding dual sim functionality to phone panel
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 25 Aug 2014 15:19:31 +0000
+
 ubuntu-system-settings (0.3+14.10.20140822.1-0ubuntu1) utopic; urgency=low
 
   [ Charles Kerr ]
