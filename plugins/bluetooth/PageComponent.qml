@@ -51,19 +51,22 @@ ItemPage {
     Connections {
         target: backend.agent
         onPasskeyConfirmationNeeded: {
+            var request_tag = tag
             var popup = PopupUtils.open(confirmPasskeyDialog, root, {passkey: passkey, name: device.name})
-            popup.canceled.connect(function() {target.confirmPasskey(tag, false)})
-            popup.confirmed.connect(function() {target.confirmPasskey(tag, true)})
+            popup.canceled.connect(function() {target.confirmPasskey(request_tag, false)})
+            popup.confirmed.connect(function() {target.confirmPasskey(request_tag, true)})
         }
         onPasskeyNeeded: {
+            var request_tag = tag
             var popup = PopupUtils.open(providePasskeyDialog, root, {name: device.name})
-            popup.canceled.connect(function() {target.providePasskey(tag, false, 0)})
-            popup.provided.connect(function(passkey) {target.providePasskey(tag, true, passkey)})
+            popup.canceled.connect(function() {target.providePasskey(request_tag, false, 0)})
+            popup.provided.connect(function(passkey) {target.providePasskey(request_tag, true, passkey)})
         }
         onPinCodeNeeded: {
+            var request_tag = tag
             var popup = PopupUtils.open(providePinCodeDialog, root, {name: device.name})
-            popup.canceled.connect(function() {target.providePinCode(tag, false, "")})
-            popup.provided.connect(function(pinCode) {target.providePinCode(tag, true, pinCode)})
+            popup.canceled.connect(function() {target.providePinCode(request_tag, false, "")})
+            popup.provided.connect(function(pinCode) {target.providePinCode(request_tag, true, pinCode)})
         }
     }
 
