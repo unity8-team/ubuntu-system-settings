@@ -12,10 +12,7 @@ from autopilot.matchers import Eventually
 
 from ubuntu_system_settings.tests import (
     SecurityBaseTestCase,
-    CellularBaseTestCase,
     SIM_IFACE)
-
-import dbus
 
 from ubuntu_system_settings.utils.i18n import ugettext as _
 from ubuntuuitoolkit import emulators as toolkit_emulators
@@ -223,8 +220,6 @@ class SecurityTestCase(SecurityBaseTestCase):
             objectName='prevInput')
         submit_button = self.system_settings.main_view.select_single(
             objectName='lockButton')
-        cancel_button = self.system_settings.main_view.select_single(
-            objectName='cancelButton')
 
         self.assertEqual(
             submit_button.text,
@@ -273,8 +268,6 @@ class SecurityTestCase(SecurityBaseTestCase):
             objectName='prevInput')
         submit_button = self.system_settings.main_view.select_single(
             objectName='lockButton')
-        cancel_button = self.system_settings.main_view.select_single(
-            objectName='cancelButton')
 
         self.assertEqual(
             submit_button.text,
@@ -302,5 +295,3 @@ class SecurityTestCase(SecurityBaseTestCase):
         self.assertEqual(['pin'], self.modem_0.Get(SIM_IFACE, 'LockedPins'))
         locked = len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         self.assertEquals(locked, sim_lock_control.checked)
-
-
