@@ -26,25 +26,6 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 
 
 ListItem.Standard {
-
-    function orientationToSetting (o) {
-        switch (o) {
-            case Qt.PrimaryOrientation:
-                return "PrimaryOrientation";
-            case Qt.LandscapeOrientation:
-                return "LandscapeOrientation";
-            case Qt.PortraitOrientation:
-                return "PortraitOrientation";
-            case Qt.InvertedLandscapeOrientation:
-                return "InvertedLandscapeOrientation";
-            case Qt.InvertedPortraitOrientation:
-                return "InvertedPortraitOrientation";
-            default:
-                console.warn('Unknown screen orientation');
-                return "none";
-        }
-    }
-
     id: root
     iconSource: model.icon
     iconFrame: true
@@ -52,15 +33,10 @@ ListItem.Standard {
     control: Switch {
         id: control
         objectName: "orientationLockSwitch"
-        checked: systemSettings.orientationLock && systemSettings.orientationLock !== "none"
+        checked: systemSettings.rotationLock
         onClicked: {
-            if (checked) {
-                systemSettings.orientationLock = orientationToSetting(Screen.orientation);
-            } else {
-                systemSettings.orientationLock = "none";
-            }
+            systemSettings.rotationLock = checked
         }
-
         GSettings {
             id: systemSettings
             schema.id: "com.ubuntu.touch.system"

@@ -53,9 +53,10 @@ class UbuntuSystemSettingsTestCase(
             Eventually(Equals(True)))
 
     def set_orientation(self, gsettings, value):
-        gsettings.set_value('orientation-lock', value)
-        # wait for gsettings
-        sleep(1)
+        gsettings.set_value('rotation-lock', value)
+        self.assertThat(
+            lambda: gsettings.get_value('rotation-lock').get_boolean(),
+            Eventually(Equals(value.get_boolean())))
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
