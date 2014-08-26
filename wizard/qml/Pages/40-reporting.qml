@@ -22,27 +22,31 @@ LocalComponents.Page {
     title: i18n.tr("Bug Reporting")
     forwardButtonSourceComponent: forwardButton
 
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
+    Column {
+        id: column
+        anchors.fill: content
+
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            fontSize: "large"
+            font.bold: true
+            text: i18n.tr("Your phone is set up to automatically report errors to Canonical.")
         }
 
         Label {
-            width: parent.width
-            wrapMode: Text.WordWrap
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
             fontSize: "large"
-            text: i18n.tr("Your phone is set up to automatically report errors to Canonical. This can be disabled in system settings.")
+            text: i18n.tr("This can be disabled in System Settings.")
         }
     }
 
     Component {
         id: forwardButton
-        LocalComponents.ForwardButton {
+        LocalComponents.StackButton {
             text: i18n.tr("Continue")
             onClicked: pageStack.next()
         }
