@@ -204,18 +204,19 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         modem.AddMethod(
             SIM_IFACE,
-            'UnlockPin', 'ss', '', 'self.Set("IFACE", "LockedPins", ""); '
-                 'self.EmitSignal("IFACE",\
-                 "PropertyChanged", "sv", ["LockedPins", ""])'
-                    .replace('IFACE', SIM_IFACE)
-        )
+            'UnlockPin', 'ss', '',
+            'self.Set("IFACE", "LockedPins", ""); '
+            'self.EmitSignal("IFACE",\
+            "PropertyChanged", "sv", ["LockedPins", ""])'
+                .replace('IFACE', SIM_IFACE))
+
         modem.AddMethod(
             SIM_IFACE,
-            'LockPin', 'ss', '', 'self.Set("IFACE", "LockedPins", ["pin"]); '
-                 'self.EmitSignal("IFACE",\
-                 "PropertyChanged", "sv", ["LockedPins", ["pin"]])'
-                    .replace('IFACE', SIM_IFACE)
-        )
+            'LockPin', 'ss', '',
+            'self.Set("IFACE", "LockedPins", ["pin"]); '
+            'self.EmitSignal("IFACE",\
+            "PropertyChanged", "sv", ["LockedPins", ["pin"]])'
+                .replace('IFACE', SIM_IFACE))
 
         modem.AddMethods(
             SIM_IFACE,
