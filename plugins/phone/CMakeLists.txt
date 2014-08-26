@@ -1,10 +1,15 @@
 set(QML_SOURCES
     CallForwarding.qml
     CallWaiting.qml
+    MultiSim.qml
+    NoSims.qml
+    Ofono.qml
     PageComponent.qml
     ServiceInfo.qml
     Services.qml
+    SingleSim.qml
     dateUtils.js
+    sims.js
 )
 
 # We need a dummy target so the QML files show up in Qt Creator

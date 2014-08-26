@@ -151,5 +151,5 @@ void UpdateManagerTest::testCheckUpdatesUpdateSignal()
 }
 
 
-QTEST_MAIN(UpdateManagerTest);
+QTEST_MAIN(UpdateManagerTest)
 #include "tst_updatemanager.moc"

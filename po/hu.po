@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-08-19 07:08+0000\n"
+"PO-Revision-Date: 2014-08-25 08:04+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:20+0000\n"
+"X-Launchpad-Export-Date: 2014-08-25 08:05+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -41,7 +41,7 @@ msgstr "Nyelv és szöveg"
 
 #: ../plugins/language//PageComponent.qml:79
 msgid "Display language…"
-msgstr "Megjelenítési nyelv…"
+msgstr "Megjelenítés nyelve"
 
 #: ../plugins/language//PageComponent.qml:93
 #: ../plugins/language//KeyboardLayouts.qml:26
@@ -50,7 +50,7 @@ msgstr "Billentyűzetkiosztások"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Automatikus javítás"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -66,12 +66,14 @@ msgstr "A Shift bekapcsolása a mondatok kezdőbetűinek nagybetűsítésére."
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Automatikus központozás"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Új mondatot kezd és hozzáad minden hiányzó idézőjelet vagy zárójelet, ha "
+"megérinti kétszer a Szóközt."
 
 #: ../plugins/language//PageComponent.qml:185
 #: ../plugins/sound//PageComponent.qml:186
@@ -80,7 +82,7 @@ msgstr "Billentyűzet hang"
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "Billentyűzet rezgése"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -312,7 +314,7 @@ msgstr "Hely információ elérésének engedélyezése:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "Alkalmazások amelyek hozzáférhetnek a következőkhöz:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:100
@@ -321,24 +323,24 @@ msgstr "Kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Alkalmazások amelyek hozzáférhetnek a kamerához"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Mikrofon"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Alkalmazások, melyek hozzáférhetnek a mikrofonhoz"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
@@ -1080,7 +1082,7 @@ msgstr "A merülés a következő módokon lassítható:"
 #: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "Kijelző fényereje"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:306
@@ -1424,6 +1426,7 @@ msgstr "Automatikus beállítás"
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
 msgstr ""
+"Élénkíti és elhalványítja a kijelzőt, hogy illeszkedjen a környezethez."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
@@ -1531,7 +1534,7 @@ msgid ""
 "Your phone is set up to automatically report errors to Canonical. This can "
 "be disabled in system settings."
 msgstr ""
-"A telefonja automatikusan hibajelentéseket küld a Canonical-nak. Ezt a "
+"A telefonja automatikusan hibajelentéseket küld a Canonical felé. Ezt a "
 "rendszerbeállításokban kikapcsolhatja."
 
 #: ../wizard/qml/Pages//30-location.qml:41
@@ -1569,27 +1572,27 @@ msgstr "Befejezés"
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
-msgstr ""
+msgstr "Zárolás beállítása"
 
 #: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
-msgstr ""
+msgstr "Csúsztatás"
 
 #: ../wizard/qml/Pages//15-passwd.qml:136
 msgid "Those passcodes don't match."
-msgstr ""
+msgstr "A jelkódok nem egyeznek."
 
 #: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "A jelmondatok nem egyeznek."
 
 #: ../wizard/qml/Pages//15-passwd.qml:146
 msgid "Passcode must be at least four digits long."
-msgstr ""
+msgstr "A jelkódnak legalább négy számjegyből kell állnia."
 
 #: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "A jelmondatnak legalább négy karakterből kell állnia."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
@@ -1895,8 +1898,8 @@ msgstr "képernyő"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Elérhető egy frissített rendszer képfájl."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Koppintson a rendszerfrissítő megnyitásához."

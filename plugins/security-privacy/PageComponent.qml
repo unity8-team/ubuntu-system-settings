@@ -58,6 +58,16 @@ ItemPage {
     OfonoSimManager {
         id: sim
         modemPath: manager.modems[0]
+        onLockedPinsChanged: {
+            console.warn("onLockedPinsChanged: " + sim.lockedPins)
+        }
+        Component.onCompleted: {
+            console.warn("KEN: " + sim.lockedPins);
+            console.warn("KEN: " + sim.modemPath);
+            console.warn("KEN: " + sim.pinRetries);
+            console.warn("KEN: " + sim.pinRetries[OfonoSimManager.SimPin]);
+            console.warn("KEN: " + sim.subscriberNumbers);
+        }
     }
 
     GSettings {
@@ -123,6 +133,7 @@ ItemPage {
             }
             ListItem.SingleValue {
                 id: simControl
+                objectName: "simControl"
                 text: i18n.tr("SIM PIN")
                 value: sim.lockedPins.length > 0 ? i18n.tr("On") : i18n.tr("Off")
                 progression: true
@@ -190,7 +201,8 @@ ItemPage {
             }
             ListItem.SingleValue {
                 text: i18n.tr("Location access")
-                value: "On"
+                value: locationActionGroup.enabled.state ?
+                           i18n.tr("On") : i18n.tr("Off")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
                 visible: showAllUI && // Hidden until the indicator works

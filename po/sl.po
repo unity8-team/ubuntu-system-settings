@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-15 19:11-0600\n"
-"PO-Revision-Date: 2014-08-19 13:07+0000\n"
+"PO-Revision-Date: 2014-08-20 15:39+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:21+0000\n"
+"X-Launchpad-Export-Date: 2014-08-21 06:45+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../plugins/language//SpellChecking.qml:27
@@ -51,7 +51,7 @@ msgstr "Razporeditve tipk"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Samodejno popravljanje"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -67,12 +67,14 @@ msgstr "Vklopi tipko Shift za spreminjanje velikih začetnic v vsaki povedi."
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Samodejno postavljanje ločil"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Doda piko in manjkajoče narekovaje ali oklepaje, ko tapnete dvakrat na "
+"Presledek."
 
 #: ../plugins/language//PageComponent.qml:185
 #: ../plugins/sound//PageComponent.qml:186
@@ -81,7 +83,7 @@ msgstr "Zvok tipkovnice"
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "Vibriranje tipkovnice"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -315,7 +317,7 @@ msgstr "Dovoli dostop do mesta:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "Programi, kateri imajo vaše dovoljenje ter so zahtevali dostop do:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:100
@@ -324,24 +326,24 @@ msgstr "Fotoaparat"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Programi, kateri so zahtevali dostop do vašega fotoaparata"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Mikrofon"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Programi, kateri so zahtevali dostop do vašega mikrofona"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 msgid "Change passcode"
@@ -1093,7 +1095,7 @@ msgstr "Načini za zmanjšanje porabe baterije:"
 #: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "Svetlost zaslona"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:306
@@ -1439,7 +1441,7 @@ msgstr "Prilagodi samodejno"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Osvetli in zatemni zaslon glede na okolje."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
@@ -1587,27 +1589,27 @@ msgstr "Dokončaj"
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
-msgstr ""
+msgstr "Nastavi zaklep"
 
 #: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
-msgstr ""
+msgstr "Poteg"
 
 #: ../wizard/qml/Pages//15-passwd.qml:136
 msgid "Those passcodes don't match."
-msgstr ""
+msgstr "Ti gesli se ne ujemata"
 
 #: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "Ti šifrirni rekli se ne ujemata."
 
 #: ../wizard/qml/Pages//15-passwd.qml:146
 msgid "Passcode must be at least four digits long."
-msgstr ""
+msgstr "Geslo mora biti dolgo vsaj štiri številke."
 
 #: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "Šifrirno reklo mora biti dolgo vsaj štiri znake."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hello"
@@ -1913,8 +1915,8 @@ msgstr "zaslon"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Obstaja posodobljen odtis sistema."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Tapnite za odprtje posodobilnika sistema."
