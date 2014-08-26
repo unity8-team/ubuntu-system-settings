@@ -99,6 +99,7 @@ ItemPage {
                 checked: true
             }
             text: i18n.tr("Sleep locks immediately")
+            visible: showAllUI
         }
 
     /* TODO: once we know how to do this
