@@ -168,5 +168,5 @@ void BluetoothTest::testIsDiscovering()
     QCOMPARE(m_bluetooth->isDiscovering(), true);
 }
 
-QTEST_MAIN(BluetoothTest);
+QTEST_MAIN(BluetoothTest)
 #include "tst_bluetooth.moc"

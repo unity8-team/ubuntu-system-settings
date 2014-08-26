@@ -108,5 +108,5 @@ void ArgumentsTest::testObsoleted()
     QCOMPARE(pluginOptions, expectedOptions);
 }
 
-QTEST_MAIN(ArgumentsTest);
+QTEST_MAIN(ArgumentsTest)
 #include "tst_arguments.moc"

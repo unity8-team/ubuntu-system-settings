@@ -27,7 +27,10 @@ Page {
     readonly property real bottomMargin: backButton.height + buttonMargin * 3
 
     property bool hasBackButton: true
+    property bool customBack: false
     property alias forwardButtonSourceComponent: forwardButton.sourceComponent
+
+    signal backClicked()
 
     visible: false
     tools: ToolbarItems {
@@ -48,7 +51,7 @@ Page {
         visible: pageStack.depth > 1 && hasBackButton
         gradient: UbuntuColors.greyGradient
 
-        onClicked: pageStack.prev()
+        onClicked: customBack ? backClicked() : pageStack.prev()
     }
 
     Loader {

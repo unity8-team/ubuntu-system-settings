@@ -24,14 +24,19 @@ import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import SystemSettings 1.0
+import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
     id: root
+    objectName: "securityPrivacyPage"
 
     title: i18n.tr("Security & Privacy")
     flickable: scrollWidget
+
+    property alias usePowerd: batteryBackend.powerdRunning
+    property bool lockOnSuspend
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
@@ -39,6 +44,10 @@ ItemPage {
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
+    }
+
+    UbuntuBatteryPanel {
+        id: batteryBackend
     }
 
     GSettings {
@@ -51,6 +60,11 @@ ItemPage {
                 else
                     dashSearchId.value = i18n.tr("Phone only")
         }
+    }
+
+    GSettings {
+        id: powerSettings
+        schema.id: usePowerd ? "com.ubuntu.touch.system" : "org.gnome.desktop.session"
     }
 
     Flickable {
@@ -68,39 +82,34 @@ ItemPage {
 
             ListItem.Standard {
                 id: securityTitle
-                text: i18n.tr("Security:")
-            }
+                text: i18n.tr("Security")
+            }            
             ListItem.SingleValue {
                 id: lockingControl
-
-                property string swipe: i18n.tr("None")
-                property string passcode: i18n.tr("Passcode")
-                property string passphrase: i18n.tr("Passphrase")
-
-                text: i18n.tr("Phone locking")
+                objectName: "lockingControl"
+                text: i18n.tr("Lock phone")
                 value: {
-                    switch (securityPrivacy.securityType) {
-                        case UbuntuSecurityPrivacyPanel.Swipe:
-                            return swipe
-                        case UbuntuSecurityPrivacyPanel.Passcode:
-                            return passcode
-                        case UbuntuSecurityPrivacyPanel.Passphrase:
-                            return passphrase
+                    if (batteryBackend.powerdRunning ) {
+                        var timeout = Math.round(powerSettings.activityTimeout/60)
+                        return (powerSettings.activityTimeout != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Never")
+                    }
+                    else {
+                        var timeout = Math.round(powerSettings.idleDelay/60)
+                        return (powerSettings.idleDelay != 0) ?
+                                    // TRANSLATORS: %1 is the number of minutes
+                                    i18n.tr("After %1 minute",
+                                            "After %1 minutes",
+                                            timeout).arg(timeout) :
+                                    i18n.tr("Manually")
                     }
                 }
-
-                /* When more of the phone locking page is implemented, we can
-                 * uncomment the below stanzas and remove the above stanzas.
-                 * The spec says to use the number of minutes, but we don't
-                 * actually expose that setting yet. */
-                property string unusedText: i18n.tr("Lock phone")
-                // TRANSLATORS: %1 is the number of minutes
-                property string unusedValue: i18n.tr("After %1 minute",
-                                                     "After %1 minutes",
-                                                     5).arg(5)
-
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("PhoneLocking.qml"), {usePowerd: usePowerd, powerSettings: powerSettings})
             }
             ListItem.SingleValue {
                 id: simControl
@@ -108,10 +117,24 @@ ItemPage {
                 value: "Off"
                 progression: true
                 visible: showAllUI
+                /* Not implemented yet */
+                //onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"))
             }
             ListItem.Standard {
-                text: i18n.tr("Privacy:")
-                visible: securityTitle.visible
+                text: i18n.tr("Encryption")
+                control: Switch {
+                    id: encryptionSwitch
+                    checked: false
+                }
+                visible: showAllUI
+            }
+            ListItem.Caption {
+                text: i18n.tr(
+                        "Encryption protects against access to phone data when the phone is connected to a PC or other device.")
+                visible: showAllUI
+            }
+            ListItem.Standard {
+                text: i18n.tr("Privacy")
             }
             ListItem.Standard {
                 text: i18n.tr("Stats on welcome screen")
@@ -161,7 +184,8 @@ ItemPage {
             }
             ListItem.SingleValue {
                 text: i18n.tr("Location access")
-                value: "On"
+                value: locationActionGroup.enabled.state ?
+                           i18n.tr("On") : i18n.tr("Off")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
                 visible: showAllUI && // Hidden until the indicator works
@@ -187,7 +211,6 @@ ItemPage {
                     pageStack.push(Qt.resolvedUrl(path));
                 }
             }
-
         }
     }
 }

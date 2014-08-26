@@ -26,7 +26,12 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
+    id: root
+    objectName: "phoneLockingPage"
     title: i18n.tr("Phone locking")
+
+    property bool usePowerd
+    property variant powerSettings
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
@@ -57,20 +62,36 @@ ItemPage {
         }
 
         ListItem.SingleValue {
+            objectName: "lockTimeout"
             property bool lockOnSuspend: securityPrivacy.securityType !==
                                             UbuntuSecurityPrivacyPanel.Swipe
             text: lockOnSuspend ? i18n.tr("Lock when idle")
                                 : i18n.tr("Sleep when idle")
-            // TRANSLATORS: %1 is the number of minutes
-            value: i18n.tr("%1 minute",
-                           "%1 minutes",
-                           5).arg(5)
+            value: {
+                if (usePowerd) {
+                    var timeout = Math.round(powerSettings.activityTimeout/60)
+                    return (powerSettings.activityTimeout != 0) ?
+                                // TRANSLATORS: %1 is the number of minutes
+                                i18n.tr("%1 minute",
+                                        "%1 minutes",
+                                        timeout).arg(timeout) :
+                                i18n.tr("Never")
+                }
+                else {
+                    var timeout = Math.round(powerSettings.idleDelay/60)
+                    return (powerSettings.idleDelay != 0) ?
+                                // TRANSLATORS: %1 is the number of minutes
+                                i18n.tr("%1 minute",
+                                        "%1 minutes",
+                                        timeout).arg(timeout) :
+                                i18n.tr("Never")
+                }
+            }
             progression: true
             onClicked:
                 pageStack.push(
                     Qt.resolvedUrl("../battery/SleepValues.qml"),
                     { title: text, lockOnSuspend: lockOnSuspend } )
-            visible: showAllUI
         }
 
         ListItem.Standard {
