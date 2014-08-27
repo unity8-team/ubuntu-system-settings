@@ -4,15 +4,14 @@ install(FILES cellular.settings DESTINATION ${PLUGIN_MANIFEST_DIR})
 install(FILES settings-cellular.svg DESTINATION ${PLUGIN_MANIFEST_DIR}/icons)
 
 set(QML_SOURCES
-    Apn.qml
-    CustomApn.qml
+    CustomApnEditor.qml
+    PageChooseApn.qml
     PageChooseCarrier.qml
     PageChooseCarriers.qml
     PageComponent.qml
     Hotspot.qml
     HotspotSetup.qml
     PageComponent.qml
-    ViewApn.qml
 )
 
 

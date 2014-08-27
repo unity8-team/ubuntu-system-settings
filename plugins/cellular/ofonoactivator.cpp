@@ -33,8 +33,11 @@ QString nmService("org.freedesktop.NetworkManager");
 QString nmSettingsPath("/org/freedesktop/NetworkManager/Settings");
 QString nmPath("/org/freedesktop/NetworkManager");
 
-QDBusObjectPath detectConnection(const QString &ofonoContext) {
+QDBusObjectPath detectConnection(const QString &ofonoContext, const QString imsi) {
     auto ofonoContextBase = ofonoContext.split('/').back();
+    auto target = "/" + imsi + "/" + ofonoContextBase;
+
+    qWarning() << "TARGET: " << target;
 
     OrgFreedesktopNetworkManagerSettingsInterface settings(nmService, nmSettingsPath,
             QDBusConnection::systemBus());
@@ -55,17 +58,15 @@ QDBusObjectPath detectConnection(const QString &ofonoContext) {
             continue;
         }
         auto settings = reply2.value();
-        auto context = settings["connection"]["id"].toString();
-        auto contextBase = context.split('/').back();
-        if(contextBase == ofonoContextBase) {
+        auto id = settings["connection"]["id"].toString();
+        if(id == target) {
             return c;
         }
     }
     return QDBusObjectPath("");
 }
 
-QDBusObjectPath detectDevice(const QString &ofonoContext) {
-    auto expectedIface = QString("/") + ofonoContext.split('/')[1];
+QDBusObjectPath detectDevice(const QString &modemPath) {
     OrgFreedesktopNetworkManagerInterface nm(nmService, nmPath, QDBusConnection::systemBus());
     auto reply = nm.GetDevices();
     reply.waitForFinished();
@@ -81,18 +82,18 @@ QDBusObjectPath detectDevice(const QString &ofonoContext) {
             continue;
         }
         auto devIface = ifaceReply.value().variant().toString();
-        if(devIface == expectedIface) {
+        if(devIface == modemPath) {
             return device;
         }
     }
     return QDBusObjectPath("");
 }
-
-void activateOfono(QDBusObjectPath connection, QDBusObjectPath device) {
-    OrgFreedesktopNetworkManagerInterface nm(nmService, nmPath, QDBusConnection::systemBus());
-    nm.ActivateConnection(connection, device, QDBusObjectPath("/"));
 }
 
+void activateOfono(QDBusObjectPath connection, QDBusObjectPath device)
+{
+    OrgFreedesktopNetworkManagerInterface nm(nmService, nmPath, QDBusConnection::systemBus());
+    nm.ActivateConnection(connection, device, QDBusObjectPath("/"));
 }
 
 OfonoActivator::OfonoActivator(QObject *parent) : QObject(parent) {
@@ -103,16 +104,16 @@ OfonoActivator::OfonoActivator(QObject *parent) : QObject(parent) {
     }
 }
 
-Q_INVOKABLE bool OfonoActivator::activate(const QString ofonoContext) {
-    printf("Activating ofono context: %s\n", ofonoContext.toUtf8().data());
-    auto conn = detectConnection(ofonoContext);
-    if(conn.path() == "") {
-        qWarning() << "Could not detect connection object to use for Ofono activation.\n";
-        return false;
-    }
-    auto dev = detectDevice(ofonoContext);
+Q_INVOKABLE bool OfonoActivator::activate(const QString ofonoContext, const QString imsi, const QString modemPath)
+{
+    auto dev = detectDevice(modemPath);
     if(dev.path() == "") {
         qWarning() << "Could not detect device object to use for Ofono activation.\n";
+        return false;
+    }
+    auto conn = detectConnection(ofonoContext, imsi);
+    if(conn.path() == "") {
+        qWarning() << "Could not detect connection object to use for Ofono activation.\n";
         return false;
     }
     activateOfono(conn, dev);

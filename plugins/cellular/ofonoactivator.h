@@ -33,7 +33,7 @@ public:
     OfonoActivator(QObject *parent = nullptr);
     ~OfonoActivator() {};
 
-    Q_INVOKABLE bool activate(const QString ofonoContext);
+    Q_INVOKABLE bool activate(const QString ofonoContext,  const QString imsi, const QString modemPath);
 
 private:
 };

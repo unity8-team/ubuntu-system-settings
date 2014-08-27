@@ -205,7 +205,7 @@ ItemPage {
                 progression: true
                 visible: true
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("Apn.qml"), {connMan: connMan})
+                    pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {connMan: connMan})
                 }
             }
         }
@@ -216,20 +216,7 @@ ItemPage {
                 objectName: "refreshButton"
                 width: parent.width - units.gu(4)
                 text: i18n.tr("Refresh")
-                enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
-                onTriggered: {
-                    scanning = true;
-                    netReg.scan();
-                }
-            }
-        }
-
-        ListItem.SingleControl {
-            anchors.bottom: parent.bottom
-            control: Button {
-                objectName: "refreshButton"
-                width: parent.width - units.gu(4)
-                text: i18n.tr("Refresh")
+                /// takes a LONG TIME!
                 enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
                 onTriggered: {
                     scanning = true;
