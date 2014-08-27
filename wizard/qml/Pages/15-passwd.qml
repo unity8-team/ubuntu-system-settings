@@ -96,7 +96,7 @@ LocalComponents.Page {
                         if (method === UbuntuSecurityPrivacyPanel.Swipe)
                             return i18n.tr("Swipe")
                         else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Passcode")
+                            return i18n.tr("PIN code")
                         else
                             return i18n.tr("Passphrase")
                     }
@@ -144,7 +144,7 @@ LocalComponents.Page {
                 if (passwordInput.visible) {
                     if (passwordInput.text !== confirmInput.text) {
                         if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Those passcodes don't match.")
+                            return i18n.tr("Those PIN codes don't match.")
                         else
                             return i18n.tr("Those passphrases don't match.")
                     } else if (passwordInput.text.length < 4) {
@@ -154,7 +154,7 @@ LocalComponents.Page {
                         // to set the password via PAM in a different place
                         // than this page.  See comments at top of file.
                         if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Passcode must be at least four digits long.")
+                            return i18n.tr("PIN code must be at least four digits long.")
                         else
                             return i18n.tr("Passphrase must be at least four characters long.")
                     }

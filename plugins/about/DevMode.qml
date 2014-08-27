@@ -95,7 +95,7 @@ ItemPage {
                     anchors.horizontalCenter: parent.horizontalCenter
                     horizontalAlignment: Text.AlignHCenter
                     wrapMode: Text.WordWrap
-                    text: i18n.tr("You need a passcode or passphrase set to use Developer Mode.")
+                    text: i18n.tr("You need a PIN code or passphrase set to use Developer Mode.")
                 }
             }
 
