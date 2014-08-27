@@ -175,7 +175,9 @@ ItemPage {
         Dialog {
             id: lockPinDialog
             objectName: "lockDialogComponent"
-            title: i18n.tr("Enter SIM PIN")
+            title: curSim.lockedPins.length > 0 ?
+                       i18n.tr("Enter SIM PIN") :
+                       i18n.tr("Enter Previous SIM PIN")
 
             property string errorText: i18n.tr(
                     "Incorrect PIN. %1 attempts remaining."
