@@ -44,7 +44,9 @@ class SearchTestCases(UbuntuSystemSettingsTestCase):
         sound_icon = self._get_entry_component('sound')
 
         self.assertThat(sound_icon.visible, Eventually(Equals(True)))
-        self.assertEquals(len(self._get_all_entry_components()), 1)
+        self.assertThat(
+            lambda: len(self._get_all_entry_components()),
+            Eventually(Equals(1)))
 
     def test_search_filter_no_matches(self):
         """ Checks that no results are returned if nothing matches """
