@@ -61,8 +61,8 @@ ItemPage {
             Connections {
                 target: curSim
                 onChangePinComplete: {
-                    console.warn("onChangePinComplete: " + error);
                     if (error === OfonoSimManager.FailedError) {
+                        console.warn("Change PIN failed with: " + error);
                         incorrect.visible = true;
                         changePinDialog.enabled = true;
                         currentInput.forceActiveFocus();
@@ -196,8 +196,8 @@ ItemPage {
             Connections {
                 target: curSim
                 onLockPinComplete: {
-                    console.warn("onLockPinComplete: " + error);
                     if (error === OfonoSimManager.FailedError) {
+                        console.warn("Lock PIN failed with: " + error);
                         incorrect.visible = true;
                         lockPinDialog.enabled = true;
                         prevInput.forceActiveFocus();
@@ -209,8 +209,8 @@ ItemPage {
                     PopupUtils.close(lockPinDialog);
                 }
                 onUnlockPinComplete: {
-                    console.warn("onUnlockPinComplete: " + error);
                     if (error === OfonoSimManager.FailedError) {
+                        console.warn("Unlock PIN failed with: " + error);
                         incorrect.visible = true;
                         lockPinDialog.enabled = true;
                         prevInput.forceActiveFocus();
@@ -294,7 +294,6 @@ ItemPage {
                 Connections {
                     target: sims[index].simMng
                     onLockedPinsChanged: {
-                        console.warn("onLockedPinsChanged (Connections): " + sims[index].simMng.lockedPins);
                         simPinSwitch.checked =
                                 sims[index].simMng.lockedPins.length > 0;
                     }
