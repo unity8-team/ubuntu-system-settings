@@ -22,38 +22,49 @@ import QtQuick 2.0
 import Ubuntu.Components 1.1
 import Ubuntu.Settings.Components 0.1
 
-AbstractButton {
+Item {
     id: root
 
-    height: col.height
+    signal clicked
+
+    height: button.height
 
     objectName: "entryComponent-" + model.item.baseName
 
-    Column {
-        id: col
+    AbstractButton {
+        id: button
         anchors.left: parent.left
         anchors.right: parent.right
+        onClicked: root.clicked()
 
-        StatusIcon {
-            id: icon
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: units.gu(4)
-            source: model.icon
-        }
+        height: col.height
 
-        Label {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: i18n.dtr(model.item.translations, model.displayName)
-            width: col.width
-            horizontalAlignment: Text.AlignHCenter
-            fontSize: "small"
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        Column {
+            id: col
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            StatusIcon {
+                id: icon
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: units.gu(4)
+                source: model.icon
+            }
+
+            Label {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: i18n.dtr(model.item.translations, model.displayName)
+                width: col.width
+                horizontalAlignment: Text.AlignHCenter
+                fontSize: "small"
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            }
         }
     }
 
     UbuntuShape {
         z: -1
-        visible: root.pressed
+        visible: button.pressed
         anchors{
             fill: root
             margins: -units.gu(0.25)
