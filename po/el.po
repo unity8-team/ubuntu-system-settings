@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-15 19:11-0600\n"
+"POT-Creation-Date: 2014-08-26 13:44+0200\n"
 "PO-Revision-Date: 2014-08-21 13:32+0000\n"
 "Last-Translator: Simos Xenitellis <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -15,8 +15,846 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-22 07:38+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-08-27 07:42+0000\n"
+"X-Generator: Launchpad (build 17174)\n"
+
+#: ../plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:114
+msgid "Previous networks"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:328
+#: ../plugins/wifi//PageComponent.qml:26
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:76
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
+
+#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
+msgid "Other network"
+msgstr ""
+
+#: ../plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr ""
+
+#: ../plugins/wifi//OtherNetwork.qml:66
+msgid "Security"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:40
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:302
+#: ../plugins/bluetooth//PageComponent.qml:310
+#: ../plugins/wifi//OtherNetwork.qml:67
+msgid "None"
+msgstr ""
+
+#: ../plugins/wifi//OtherNetwork.qml:68
+msgid "WPA & WPA2 Personal"
+msgstr ""
+
+#: ../plugins/wifi//OtherNetwork.qml:69
+msgid "WEP"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
+msgid "Password"
+msgstr ""
+
+#: ../plugins/wifi//OtherNetwork.qml:89
+msgid "Password visible"
+msgstr ""
+
+#: ../plugins/language//DisplayLanguage.qml:94
+#: ../plugins/security-privacy//LockSecurity.qml:279
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/wifi//OtherNetwork.qml:112 ../plugins/background//Preview.qml:97
+#: ../plugins/phone//CallForwarding.qml:136
+msgid "Cancel"
+msgstr "Άκυρο"
+
+#: ../plugins/bluetooth//PageComponent.qml:374
+#: ../plugins/wifi//OtherNetwork.qml:121
+msgid "Connect"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:309
+#: ../plugins/wifi//NetworkDetails.qml:43
+msgid "Name"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:149
+#: ../plugins/battery//PageComponent.qml:309
+#: ../plugins/battery//PageComponent.qml:318
+#: ../plugins/battery//SleepValues.qml:96
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/system-update//PageComponent.qml:448
+#: ../plugins/system-update//Configuration.qml:53
+msgid "Never"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr ""
+
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "Ρύθμιση ώρας και ημερομηνίας"
+
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr ""
+
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr ""
+
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "Λεπτό"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "Δευτερόλεπτο"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "Ημέρα"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "Μήνας"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "Έτος"
+
+#: ../plugins/security-privacy//LockSecurity.qml:300
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/background//Preview.qml:104
+#: ../plugins/phone//CallForwarding.qml:148
+msgid "Set"
+msgstr "Καθορισμός"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:54
+msgid "Time & Date"
+msgstr "Ώρα & ημερομηνία"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Ζώνη ώρας:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Ρύθμιση ώρας και ημερομηνίας:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Automatically"
+msgstr "Αυτόματα"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Manually"
+msgstr "Χειροκίνητα"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "Ζώνη ώρας"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "Ρύθμιση ζώνης ώρας:"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "Εισάγετε την τρέχουσα τοποθεσία σας."
+
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "Δεν βρέθηκε τοποθεσία"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:35
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:110
+msgid "Updates"
+msgstr "Ενημερώσεις"
+
+#: ../plugins/system-update//PageComponent.qml:51
+msgid "Update System"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:52
+msgid "The phone needs to restart to install the system update."
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:55
+msgid "Install & Restart"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:64
+msgid "Not Now"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:70
+msgid "Install"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Software is up to date"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:199
+msgid "Checking for updates…"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:216
+#, qt-format
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/system-update//PageComponent.qml:217
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/system-update//PageComponent.qml:218
+msgid "Pause All"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:286
+msgid "Retry"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:302
+msgid "Download"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:302
+msgid "Update"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:303
+msgid "Resume"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:304
+msgid "Pause"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:363
+msgid "Installing"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:396
+msgid "Installed"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:420
+msgid "Version: "
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:425
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:434
+msgid "Sign In…"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:532
+msgid "Installing update…"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:445
+#: ../plugins/system-update//Configuration.qml:30
+msgid "Auto download"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:450
+msgid "On wi-fi"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:452
+msgid "Always"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:546
+msgid " bytes"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:549
+msgid " KiB"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:552
+msgid " MiB"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:555
+msgid " GiB"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr ""
+
+#: ../plugins/sound//SoundsList.qml:59
+msgid "Stop playing"
+msgstr "Διακοπή αναπαραγωγής"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "Το τηλέφωνο είναι σε Αθόρυβη λειτουργία."
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:38
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:136
+msgid "Sound"
+msgstr "Ήχος"
+
+#: ../plugins/sound//PageComponent.qml:75
+msgid "Silent Mode"
+msgstr "Αθόρυβη λειτουργία"
+
+#: ../plugins/sound//PageComponent.qml:79
+msgid "Ringer:"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:111
+msgid "Phone calls:"
+msgstr "Κλήσεις:"
+
+#: ../plugins/sound//PageComponent.qml:115
+#: ../plugins/sound//PageComponent.qml:121
+msgid "Ringtone"
+msgstr "Ήχος κουδουνίσματος"
+
+#: ../plugins/sound//PageComponent.qml:134
+msgid "Vibrate when ringing"
+msgstr "Δόνηση κατά την κλήση"
+
+#: ../plugins/sound//PageComponent.qml:143
+#: ../plugins/sound//PageComponent.qml:178
+msgid "Vibrate in Silent Mode"
+msgstr "Δόνηση στην Αθόρυβη λειτουργία"
+
+#: ../plugins/sound//PageComponent.qml:147
+msgid "Messages:"
+msgstr "Μηνύματα:"
+
+#: ../plugins/sound//PageComponent.qml:151
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Message received"
+msgstr "Ελήφθη μήνυμα"
+
+#: ../plugins/sound//PageComponent.qml:169
+msgid "Vibrate with message sound"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:182
+msgid "Other sounds:"
+msgstr "Άλλοι ήχοι:"
+
+#: ../plugins/language//PageComponent.qml:185
+#: ../plugins/sound//PageComponent.qml:186
+msgid "Keyboard sound"
+msgstr "Ήχος πληκτρολογίου"
+
+#: ../plugins/sound//PageComponent.qml:200
+msgid "Lock sound"
+msgstr "Ήχος κλειδώματος"
+
+#: ../plugins/security-privacy//PageComponent.qml:99
+#: ../plugins/security-privacy//PhoneLocking.qml:29
+msgid "Phone locking"
+msgstr "Κλείδωμα τηλεφώνου"
+
+#: ../plugins/security-privacy//PageComponent.qml:79
+#: ../plugins/security-privacy//PhoneLocking.qml:41
+#: ../wizard/qml/Pages//15-passwd.qml:88
+msgid "Passcode"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:80
+#: ../plugins/security-privacy//PhoneLocking.qml:42
+#: ../plugins/security-privacy//LockSecurity.qml:346
+#: ../wizard/qml/Pages//15-passwd.qml:90
+msgid "Passphrase"
+msgstr "Συνθηματική φράση"
+
+#: ../plugins/security-privacy//PageComponent.qml:82
+#: ../plugins/security-privacy//PhoneLocking.qml:44
+#: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/about//DevMode.qml:104
+msgid "Lock security"
+msgstr "Κλείδωμα ασφαλείας"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:62
+#: ../plugins/battery//PageComponent.qml:300
+msgid "Lock when idle"
+msgstr "Κλείδωμα όταν παραμένει ανενεργό"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:63
+#: ../plugins/battery//PageComponent.qml:300
+msgid "Sleep when idle"
+msgstr "Αναστολή όταν παραμένει ανενεργό"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PageComponent.qml:101
+#: ../plugins/security-privacy//PhoneLocking.qml:65
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 λεπτό"
+msgstr[1] "%1 λεπτά"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr "Άμεσο κλείδωμα κατά την αναστολή"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:33
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:12
+msgid "Security & Privacy"
+msgstr "Ασφάλεια και ιδιωτικότητα"
+
+#: ../plugins/security-privacy//PageComponent.qml:50
+#: ../plugins/security-privacy//PageComponent.qml:150
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone and Internet"
+msgstr "Τηλέφωνο και διαδύκτιο"
+
+#: ../plugins/security-privacy//PageComponent.qml:52
+#: ../plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone only"
+msgstr "Τηλέφωνο μόνο"
+
+#: ../plugins/security-privacy//PageComponent.qml:90
+msgid "Lock phone"
+msgstr ""
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:81
+#: ../plugins/battery//SleepValues.qml:85
+#: ../plugins/battery//SleepValues.qml:89
+#: ../plugins/battery//SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/security-privacy//PageComponent.qml:110
+msgid "SIM PIN"
+msgstr "PIN κάρτας SIM"
+
+#: ../plugins/security-privacy//PageComponent.qml:124
+msgid "Encryption"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:133
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:137
+msgid "Privacy"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:120
+msgid "Stats on welcome screen"
+msgstr "Στατιστικά στην οθόνη καλωσορίσματος"
+
+#: ../plugins/security-privacy//PageComponent.qml:133
+msgid "Messages on welcome screen"
+msgstr "Μηνύματα στην οθόνη καλωσορίσματος"
+
+#: ../plugins/security-privacy//PageComponent.qml:148
+#: ../plugins/security-privacy//Dash.qml:29
+msgid "Dash search"
+msgstr "Αναζήτηση στο Dash"
+
+#: ../plugins/security-privacy//PageComponent.qml:166
+msgid "Location access"
+msgstr "Πρόσβαση στην τοποθεσία σας"
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "On"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:37
+#: ../plugins/cellular//Components//CellularMultiSim.qml:31
+msgid "Off"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:174
+#: ../plugins/security-privacy//AppAccess.qml:28
+msgid "Other app access"
+msgstr "Πρόσβαση άλλων εφαρμογών"
+
+#: ../plugins/security-privacy//PageComponent.qml:179
+msgid "Diagnostics"
+msgstr "Διαγνωστικά"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy//PageComponent.qml:184
+msgid "Sent"
+msgstr "Στάλθηκε"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy//PageComponent.qml:187
+msgid "Not sent"
+msgstr "Δεν στάλθηκε"
+
+#: ../plugins/security-privacy//LockSecurity.qml:380
+msgid "Change passcode…"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:381
+msgid "Change passphrase…"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:101
+msgid "Switch to swipe"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:103
+msgid "Switch to passcode"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:114
+msgid "Existing passcode"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:116
+msgid "Existing passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:170
+msgid "Choose passcode"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:172
+msgid "Choose passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:216
+msgid "Confirm passcode"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:218
+msgid "Confirm passphrase"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:261
+msgid "Those passcodes don't match. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:264
+msgid "Those passphrases don't match. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:295
+msgid "Unset"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:298
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:340
+msgid "Unlock the phone using:"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "Swipe (no security)"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:345
+msgid "4-digit passcode"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:347
+msgid "Swipe (no security)… "
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "4-digit passcode…"
+msgstr ""
+
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "Passphrase…"
+msgstr ""
+
+#: ../plugins/security-privacy//Location.qml:30
+msgid "Location"
+msgstr "Τοποθεσία"
+
+#: ../plugins/security-privacy//Location.qml:48
+msgid "Location detection"
+msgstr "Ανίχνευση τοποθεσίας"
+
+#: ../plugins/security-privacy//Location.qml:70
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+
+#: ../plugins/security-privacy//Location.qml:72
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy//Location.qml:74
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy//Location.qml:76
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy//Location.qml:78
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy//Location.qml:80
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy//Location.qml:82
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+
+#: ../plugins/security-privacy//Location.qml:89
+msgid "Allow access to location:"
+msgstr ""
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:100
+msgid "Camera"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:59
+#, qt-format
+msgid "%1/%2"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr ""
+
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr ""
+
+#: ../plugins/reset//PageComponent.qml:73
+#: ../plugins/reset//ResetLauncherHome.qml:44
+msgid "Reset Launcher"
+msgstr ""
+
+#: ../plugins/reset//ResetLauncherHome.qml:59
+msgid "The phone needs to restart for changes to take effect."
+msgstr ""
+
+#: ../plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+"Τα περιεχόμενα και η διαμόρφωση του εκκινητή, καθώς και τα φίλτρα της "
+"αρχικής οθόνης θα επιστρέψουν στις αρχικές τους ρυθμίσεις."
+
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "Επαναφορά όλων των ρυθμίσεων του συστήματος"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../plugins/reset//PageComponent.qml:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:64
+msgid "Reset phone"
+msgstr "Επαναφορά συσκευής"
+
+#: ../plugins/reset//PageComponent.qml:87
+msgid "Reset all system settings…"
+msgstr "Επαναφορά όλων των ρυθμίσεων του συστήματος..."
+
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr ""
+
+#: ../plugins/reset//EraseEverything.qml:41
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"Όλα τα έγγραφα, αποθηκευμένα παιχνίδια, ρυθμίσεις και άλλα θα διαγραφούν "
+"μόνιμα από αυτή τη συσκευή."
+
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr ""
+
+#: ../plugins/phone//PageComponent.qml:30
+msgid "SIM"
+msgstr ""
+
+#: ../plugins/phone//PageComponent.qml:51
+#: ../plugins/phone//CallForwarding.qml:28
+#: ../plugins/phone//CallForwarding.qml:75
+msgid "Call forwarding"
+msgstr ""
+
+#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
+#: ../plugins/phone//CallWaiting.qml:63
+msgid "Call waiting"
+msgstr ""
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
+#, qt-format
+msgid "%1 Services"
+msgstr ""
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr ""
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/bluetooth//PageComponent.qml:88
+#: ../plugins/phone//PageComponent.qml:28
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:104
+msgid "Phone"
+msgstr "Τηλέφωνο"
+
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
+msgid "Services"
+msgstr ""
+
+#: ../plugins/phone//CallWaiting.qml:78
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+
+#: ../plugins/phone//CallForwarding.qml:90
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+
+#: ../plugins/phone//CallForwarding.qml:100
+msgid "Forward to"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:96
+msgid "Notifications"
+msgstr ""
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr ""
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
@@ -74,11 +912,6 @@ msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:185
-#: ../plugins/sound//PageComponent.qml:186
-msgid "Keyboard sound"
-msgstr "Ήχος πληκτρολογίου"
-
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
 msgstr ""
@@ -95,350 +928,9 @@ msgstr "Όλες οι διαθέσιμες διατάξεις:"
 msgid "Display language"
 msgstr "Γλώσσα συστήματος"
 
-#: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:279
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/wifi//OtherNetwork.qml:112 ../plugins/background//Preview.qml:97
-#: ../plugins/phone//CallForwarding.qml:136
-msgid "Cancel"
-msgstr "Άκυρο"
-
 #: ../plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
 msgstr "Επιβεβαίωση"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:33
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:12
-msgid "Security & Privacy"
-msgstr "Ασφάλεια και ιδιωτικότητα"
-
-#: ../plugins/security-privacy//PageComponent.qml:50
-#: ../plugins/security-privacy//PageComponent.qml:150
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "Τηλέφωνο και διαδύκτιο"
-
-#: ../plugins/security-privacy//PageComponent.qml:52
-#: ../plugins/security-privacy//PageComponent.qml:151
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "Τηλέφωνο μόνο"
-
-#: ../plugins/security-privacy//PageComponent.qml:71
-msgid "Security:"
-msgstr "Ασφάλεια:"
-
-#: ../plugins/security-privacy//PageComponent.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:40
-#: ../plugins/bluetooth//PageComponent.qml:111
-#: ../plugins/bluetooth//PageComponent.qml:302
-#: ../plugins/bluetooth//PageComponent.qml:310
-#: ../plugins/wifi//OtherNetwork.qml:67
-msgid "None"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:79
-#: ../plugins/security-privacy//PhoneLocking.qml:41
-#: ../wizard/qml/Pages//15-passwd.qml:88
-msgid "Passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:80
-#: ../plugins/security-privacy//PhoneLocking.qml:42
-#: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:90
-msgid "Passphrase"
-msgstr "Συνθηματική φράση"
-
-#: ../plugins/security-privacy//PageComponent.qml:82
-#: ../plugins/security-privacy//PhoneLocking.qml:44
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/about//DevMode.qml:104
-msgid "Lock security"
-msgstr "Κλείδωμα ασφαλείας"
-
-#: ../plugins/security-privacy//PageComponent.qml:99
-#: ../plugins/security-privacy//PhoneLocking.qml:29
-msgid "Phone locking"
-msgstr "Κλείδωμα τηλεφώνου"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:101
-#: ../plugins/security-privacy//PhoneLocking.qml:65
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 λεπτό"
-msgstr[1] "%1 λεπτά"
-
-#: ../plugins/security-privacy//PageComponent.qml:110
-msgid "SIM PIN"
-msgstr "PIN κάρτας SIM"
-
-#: ../plugins/security-privacy//PageComponent.qml:116
-msgid "Privacy:"
-msgstr "Ιδιωτικότητα:"
-
-#: ../plugins/security-privacy//PageComponent.qml:120
-msgid "Stats on welcome screen"
-msgstr "Στατιστικά στην οθόνη καλωσορίσματος"
-
-#: ../plugins/security-privacy//PageComponent.qml:133
-msgid "Messages on welcome screen"
-msgstr "Μηνύματα στην οθόνη καλωσορίσματος"
-
-#: ../plugins/security-privacy//PageComponent.qml:148
-#: ../plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "Αναζήτηση στο Dash"
-
-#: ../plugins/security-privacy//PageComponent.qml:166
-msgid "Location access"
-msgstr "Πρόσβαση στην τοποθεσία σας"
-
-#: ../plugins/security-privacy//PageComponent.qml:174
-#: ../plugins/security-privacy//AppAccess.qml:28
-msgid "Other app access"
-msgstr "Πρόσβαση άλλων εφαρμογών"
-
-#: ../plugins/security-privacy//PageComponent.qml:179
-msgid "Diagnostics"
-msgstr "Διαγνωστικά"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:184
-msgid "Sent"
-msgstr "Στάλθηκε"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:187
-msgid "Not sent"
-msgstr "Δεν στάλθηκε"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:62
-#: ../plugins/battery//PageComponent.qml:300
-msgid "Lock when idle"
-msgstr "Κλείδωμα όταν παραμένει ανενεργό"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:63
-#: ../plugins/battery//PageComponent.qml:300
-msgid "Sleep when idle"
-msgstr "Αναστολή όταν παραμένει ανενεργό"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
-msgstr "Άμεσο κλείδωμα κατά την αναστολή"
-
-#: ../plugins/security-privacy//Location.qml:30
-msgid "Location"
-msgstr "Τοποθεσία"
-
-#: ../plugins/security-privacy//Location.qml:48
-msgid "Location detection"
-msgstr "Ανίχνευση τοποθεσίας"
-
-#: ../plugins/security-privacy//Location.qml:70
-msgid ""
-"Uses GPS to detect your rough location. When off, GPS turns off to save "
-"battery."
-msgstr ""
-
-#: ../plugins/security-privacy//Location.qml:72
-msgid ""
-"Uses wi-fi and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-
-#: ../plugins/security-privacy//Location.qml:74
-msgid ""
-"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
-"off location detection saves battery."
-msgstr ""
-
-#: ../plugins/security-privacy//Location.qml:76
-msgid ""
-"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
-"Turning off location detection saves battery."
-msgstr ""
-
-#: ../plugins/security-privacy//Location.qml:78
-msgid ""
-"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
-"to detect your rough location. Turning off location detection saves battery."
-msgstr ""
-
-#: ../plugins/security-privacy//Location.qml:80
-msgid ""
-"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
-"rough location. Turning off location detection saves battery."
-msgstr ""
-
-#: ../plugins/security-privacy//Location.qml:82
-msgid ""
-"Uses wi-fi (currently off), cell tower locations (no current cellular "
-"connection), and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-
-#: ../plugins/security-privacy//Location.qml:89
-msgid "Allow access to location:"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:100
-msgid "Camera"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:59
-#, qt-format
-msgid "%1/%2"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:92
-msgid "Change passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:94
-msgid "Change passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:101
-msgid "Switch to swipe"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:105
-msgid "Switch to passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:116
-msgid "Existing passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:172
-msgid "Choose passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:218
-msgid "Confirm passphrase"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:261
-msgid "Those passcodes don't match. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:264
-msgid "Those passphrases don't match. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:295
-msgid "Unset"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:298
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:300
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/background//Preview.qml:104
-#: ../plugins/phone//CallForwarding.qml:148
-msgid "Set"
-msgstr "Καθορισμός"
-
-#: ../plugins/security-privacy//LockSecurity.qml:340
-msgid "Unlock the phone using:"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:344
-msgid "Swipe (no security)"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:345
-msgid "4-digit passcode"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:347
-msgid "Swipe (no security)… "
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "4-digit passcode…"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:349
-msgid "Passphrase…"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passcode…"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:381
-msgid "Change passphrase…"
-msgstr ""
-
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-msgid "Carriers"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarriers.qml:50
-#: ../plugins/cellular//PageChooseCarriers.qml:66
-#: ../plugins/cellular//PageComponent.qml:175
-#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281
-msgid "N/A"
-msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -446,52 +938,25 @@ msgstr ""
 msgid "Cellular"
 msgstr ""
 
-#: ../plugins/cellular//PageComponent.qml:132
-msgid "Hotspot disabled because Wi-Fi is off."
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
 msgstr ""
 
 #: ../plugins/cellular//PageComponent.qml:138
 #: ../plugins/cellular//Hotspot.qml:29
 msgid "Wi-Fi hotspot"
-msgstr ""
-
-#: ../plugins/cellular//PageComponent.qml:147
-msgid "Data usage statistics"
-msgstr ""
-
-#: ../plugins/cellular//PageComponent.qml:153
-#: ../plugins/cellular//PageComponent.qml:161
-msgid "Carrier"
-msgid_plural "Carriers"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../plugins/cellular//PageComponent.qml:180
-msgid "APN"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Automatically"
-msgstr "Αυτόματα"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Manually"
-msgstr "Χειροκίνητα"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
 msgstr ""
 
 #: ../plugins/cellular//Hotspot.qml:40
@@ -514,21 +979,73 @@ msgstr ""
 msgid "Set up hotspot"
 msgstr ""
 
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+msgid "Carriers"
 msgstr ""
 
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
+#: ../plugins/cellular//PageChooseCarriers.qml:50
+#: ../plugins/cellular//PageChooseCarriers.qml:66
+#: ../plugins/cellular//PageComponent.qml:175
+#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:125
+#: ../plugins/battery//PageComponent.qml:281
+msgid "N/A"
 msgstr ""
 
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
 msgstr ""
 
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
 msgstr ""
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:130
+msgid "Brightness"
+msgstr "Φωτεινότητα"
+
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr ""
+
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr ""
+
+#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr ""
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr ""
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr ""
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+msgid "Pair"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/bluetooth//PageComponent.qml:117
+#: ../plugins/bluetooth//PageComponent.qml:136
+#: ../plugins/battery//PageComponent.qml:358
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:40
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
@@ -553,13 +1070,6 @@ msgstr ""
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
 msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:88
-#: ../plugins/phone//PageComponent.qml:28
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:104
-msgid "Phone"
-msgstr "Τηλέφωνο"
 
 #: ../plugins/bluetooth//PageComponent.qml:89
 msgid "Modem"
@@ -625,14 +1135,6 @@ msgstr ""
 msgid "Poor"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:117
-#: ../plugins/bluetooth//PageComponent.qml:136
-#: ../plugins/battery//PageComponent.qml:358
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:40
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
 #: ../plugins/bluetooth//PageComponent.qml:171
 msgid "Discoverable"
 msgstr ""
@@ -662,11 +1164,6 @@ msgstr ""
 msgid "Connect automatically when detected:"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:309
-#: ../plugins/wifi//NetworkDetails.qml:43
-msgid "Name"
-msgstr ""
-
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
 msgstr ""
@@ -683,30 +1180,8 @@ msgstr ""
 msgid "Disconnect"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:374
-#: ../plugins/wifi//OtherNetwork.qml:121
-msgid "Connect"
-msgstr ""
-
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
-msgstr ""
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr ""
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr ""
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
 msgstr ""
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
@@ -719,263 +1194,22 @@ msgstr ""
 msgid "Confirm PIN"
 msgstr ""
 
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
-msgid "Software licenses"
-msgstr "Άδειες λογισμικού"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:46
-msgid "About this phone"
-msgstr "Σχετικά με αυτή τη συσκευή"
-
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:107
-msgid "Serial"
-msgstr "Σειριακός"
-
-#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "Αποθηκευτικός χώρος"
-
-#: ../plugins/about//PageComponent.qml:133
-msgid "Software:"
-msgstr "Λογισμικό:"
-
-#: ../plugins/about//PageComponent.qml:138
-msgid "OS"
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:147
-msgid "Last updated"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:149
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
-#: ../plugins/battery//SleepValues.qml:96
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:448
-#: ../plugins/system-update//Configuration.qml:53
-msgid "Never"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "Check for updates"
-msgstr "Έλεγχος για ενημερώσεις"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Legal:"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Regulatory info"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:185
-msgid "Developer mode"
-msgstr ""
-
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr ""
-
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr ""
-
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr ""
-
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr ""
-
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr ""
-
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr ""
-
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
-msgid "Developer Mode"
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:73
+#: ../plugins/battery//SleepValues.qml:107
 msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
 msgstr ""
 
-#: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
-
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "Χρησιμοποιείται από το Ubuntu"
-
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr ""
-
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr ""
-
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr ""
-
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr ""
-
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "Χρησιμοποιείται από εφαρμογές"
-
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "Συνολική χωρητικότητα"
-
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "Ελεύθερος χώρος"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr ""
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:54
-msgid "Time & Date"
-msgstr "Ώρα & ημερομηνία"
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "Ζώνη ώρας:"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "Ρύθμιση ώρας και ημερομηνίας:"
-
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "Ρύθμιση ώρας και ημερομηνίας"
-
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr ""
-
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr ""
-
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "Λεπτό"
-
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "Δευτερόλεπτο"
-
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "Ημερομηνία"
-
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "Ημέρα"
-
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "Μήνας"
-
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "Έτος"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "Ζώνη ώρας"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "Ρύθμιση ζώνης ώρας:"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "Εισάγετε την τρέχουσα τοποθεσία σας."
-
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "Δεν βρέθηκε τοποθεσία"
-
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr ""
-"Τα περιεχόμενα και η διαμόρφωση του εκκινητή, καθώς και τα φίλτρα της "
-"αρχικής οθόνης θα επιστρέψουν στις αρχικές τους ρυθμίσεις."
-
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "Επαναφορά όλων των ρυθμίσεων του συστήματος"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:64
-msgid "Reset phone"
-msgstr "Επαναφορά συσκευής"
-
-#: ../plugins/reset//PageComponent.qml:73
-#: ../plugins/reset//ResetLauncherHome.qml:44
-msgid "Reset Launcher"
-msgstr ""
-
-#: ../plugins/reset//PageComponent.qml:87
-msgid "Reset all system settings…"
-msgstr "Επαναφορά όλων των ρυθμίσεων του συστήματος..."
-
-#: ../plugins/reset//PageComponent.qml:101
-msgid "Erase & Reset Everything…"
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr ""
-
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr ""
-"Όλα τα έγγραφα, αποθηκευμένα παιχνίδια, ρυθμίσεις και άλλα θα διαγραφούν "
-"μόνιμα από αυτή τη συσκευή."
-
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
+#: ../plugins/battery//SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
@@ -1052,32 +1286,6 @@ msgstr ""
 msgid "Ways to reduce battery use:"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:290
-#: ../plugins/brightness//BrightnessSlider.qml:51
-msgid "Display brightness"
-msgstr ""
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//SleepValues.qml:77
-#: ../plugins/battery//SleepValues.qml:81
-#: ../plugins/battery//SleepValues.qml:85
-#: ../plugins/battery//SleepValues.qml:89
-#: ../plugins/battery//SleepValues.qml:93
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:328
-#: ../plugins/wifi//PageComponent.qml:26
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:76
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
 #: ../plugins/battery//PageComponent.qml:389
 msgid "GPS"
 msgstr "GPS"
@@ -1086,71 +1294,8 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr ""
-
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
-
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr ""
-
-#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
-msgid "Password"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:66
-msgid "Security"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
+#: ../plugins/background//WallpaperGrid.qml:190
+msgid "Remove"
 msgstr ""
 
 #: ../plugins/background//Preview.qml:67
@@ -1171,287 +1316,244 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
+#: ../plugins/about//Version.qml:35
+msgid "OS Build Details"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:96
-msgid "Notifications"
+#: ../plugins/about//Version.qml:53
+msgid "OS build number"
 msgstr ""
 
-#: ../plugins/notifications//PageComponent.qml:40
+#: ../plugins/about//Version.qml:59
+msgid "Ubuntu Image part"
+msgstr ""
+
+#: ../plugins/about//Version.qml:85
+msgid "Ubuntu build description"
+msgstr ""
+
+#: ../plugins/about//Version.qml:100
+msgid "Device Image part"
+msgstr ""
+
+#: ../plugins/about//Version.qml:126
+msgid "Device build description"
+msgstr ""
+
+#: ../plugins/about//Version.qml:141
+msgid "Customization Image part"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
+msgid "Storage"
+msgstr "Αποθηκευτικός χώρος"
+
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "Χρησιμοποιείται από το Ubuntu"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr ""
+
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr ""
+
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr ""
+
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr ""
+
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "Χρησιμοποιείται από εφαρμογές"
+
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
+msgstr "Συνολική χωρητικότητα"
+
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "Ελεύθερος χώρος"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr ""
+
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr ""
+
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
+msgid "Software licenses"
+msgstr "Άδειες λογισμικού"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:46
+msgid "About this phone"
+msgstr "Σχετικά με αυτή τη συσκευή"
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:107
+msgid "Serial"
+msgstr "Σειριακός"
+
+#: ../plugins/about//PageComponent.qml:133
+msgid "Software:"
+msgstr "Λογισμικό:"
+
+#: ../plugins/about//PageComponent.qml:138
+msgid "OS"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:147
+msgid "Last updated"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:155
+msgid "Check for updates"
+msgstr "Έλεγχος για ενημερώσεις"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Legal:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:177
+msgid "Regulatory info"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:185
+msgid "Developer mode"
+msgstr ""
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
+msgid "Developer Mode"
+msgstr ""
+
+#: ../plugins/about//DevMode.qml:73
 msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
 msgstr ""
 
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
+#: ../plugins/about//DevMode.qml:98
+msgid "You need a passcode or passphrase set to use Developer Mode."
 msgstr ""
 
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
+msgid "Privacy policy"
 msgstr ""
 
-#: ../plugins/phone//PageComponent.qml:30
-msgid "SIM"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
+msgid "Report to Canonical:"
 msgstr ""
 
-#: ../plugins/phone//PageComponent.qml:51
-#: ../plugins/phone//CallForwarding.qml:28
-#: ../plugins/phone//CallForwarding.qml:75
-msgid "Call forwarding"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
+msgid "App crashes and errors"
 msgstr ""
 
-#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
-#: ../plugins/phone//CallWaiting.qml:63
-msgid "Call waiting"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
+msgid "Previous error reports"
 msgstr ""
 
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
-#, qt-format
-msgid "%1 Services"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
+msgid "Includes info about what an app was doing when it failed."
 msgstr ""
 
-#: ../plugins/phone//CallWaiting.qml:78
+#: ../plugins/cellular//PageComponent.qml:132
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr ""
+
+#: ../plugins/cellular//PageComponent.qml:147
+msgid "Data usage statistics"
+msgstr ""
+
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:66
+#: ../plugins/cellular//Components//NoSim.qml:47
+msgid "Carrier"
+msgstr ""
+
+#: ../plugins/cellular//PageComponent.qml:180
+msgid "APN"
+msgstr ""
+
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr ""
+
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr ""
+
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//CellularSingleSim.qml:33
+#: ../plugins/cellular//Components//CellularMultiSim.qml:76
+msgid "Cellular data:"
+msgstr ""
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:38
+#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+msgid "2G only (saves battery)"
+msgstr ""
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:39
+#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+msgid "2G/3G/4G (faster)"
+msgstr ""
+
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:155
+msgid "Data roaming"
+msgstr ""
+
+#: ../plugins/cellular//Components//DefaultSim.qml:29
+msgid "Ask me each time"
+msgstr ""
+
+#: ../plugins/cellular//Components//DefaultSim.qml:34
+msgid "For outgoing calls, use:"
+msgstr ""
+
+#: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
+"You can change the SIM for individual calls, or for contacts in the address "
+"book."
 msgstr ""
 
-#: ../plugins/phone//CallForwarding.qml:90
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
+#: ../plugins/cellular//Components//DefaultSim.qml:55
+msgid "For messages, use:"
 msgstr ""
 
-#: ../plugins/phone//CallForwarding.qml:100
-msgid "Forward to"
+#: ../plugins/background//Components//AddRemove.qml:52
+msgid "No images selected"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:110
-msgid "Updates"
-msgstr "Ενημερώσεις"
-
-#: ../plugins/system-update//PageComponent.qml:51
-msgid "Update System"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:52
-msgid "The phone needs to restart to install the system update."
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:55
-msgid "Install & Restart"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:64
-msgid "Not Now"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:70
-msgid "Install"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "Software is up to date"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:142
-msgid "Please log into your Ubuntu One account."
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:157
-msgid "System update has failed."
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:168
-msgid "System update failed."
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:199
-msgid "Checking for updates…"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:217
+#: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
-msgid "Install %1 updates…"
+msgid "Remove %1 image"
+msgid_plural "Remove %1 images"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/background//Components//AddRemove.qml:80
+msgid "Add an image…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:217
-#, qt-format
-msgid "Install %1 updates"
+#: ../plugins/background//Components//AddRemove.qml:91
+msgid "Remove images…"
 msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:218
-msgid "Pause All"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:286
-msgid "Retry"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:302
-msgid "Download"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:302
-msgid "Update"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:303
-msgid "Resume"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:304
-msgid "Pause"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:363
-msgid "Installing"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:396
-msgid "Installed"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:420
-msgid "Version: "
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:445
-#: ../plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:450
-msgid "On wi-fi"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:452
-msgid "Always"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:502
-msgid "Credentials not found"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:532
-msgid "Installing update…"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:546
-msgid " bytes"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:549
-msgid " KiB"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:552
-msgid " MiB"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:555
-msgid " GiB"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr ""
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:130
-msgid "Brightness"
-msgstr "Φωτεινότητα"
-
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr ""
-
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:136
-msgid "Sound"
-msgstr "Ήχος"
-
-#: ../plugins/sound//PageComponent.qml:75
-msgid "Silent Mode"
-msgstr "Αθόρυβη λειτουργία"
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr "Κλήσεις:"
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr "Ήχος κουδουνίσματος"
-
-#: ../plugins/sound//PageComponent.qml:134
-msgid "Vibrate when ringing"
-msgstr "Δόνηση κατά την κλήση"
-
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Vibrate in Silent Mode"
-msgstr "Δόνηση στην Αθόρυβη λειτουργία"
-
-#: ../plugins/sound//PageComponent.qml:147
-msgid "Messages:"
-msgstr "Μηνύματα:"
-
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Message received"
-msgstr "Ελήφθη μήνυμα"
-
-#: ../plugins/sound//PageComponent.qml:169
-msgid "Vibrate with message sound"
-msgstr ""
-
-#: ../plugins/sound//PageComponent.qml:182
-msgid "Other sounds:"
-msgstr "Άλλοι ήχοι:"
-
-#: ../plugins/sound//PageComponent.qml:200
-msgid "Lock sound"
-msgstr "Ήχος κλειδώματος"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "Το τηλέφωνο είναι σε Αθόρυβη λειτουργία."
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr "Διακοπή αναπαραγωγής"
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
@@ -1469,28 +1571,67 @@ msgstr ""
 msgid "System"
 msgstr "Σύστημα"
 
-#: ../wizard/qml/Components//Page.qml:47
-msgid "Back"
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi-Fi"
 msgstr ""
 
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "No SIM card"
+#: ../wizard/qml/Pages//20-wifi.qml:68
+msgid "Available networks"
 msgstr ""
 
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:59
-msgid "Install a SIM before continuing."
+#: ../wizard/qml/Pages//30-location.qml:48
+#: ../wizard/qml/Pages//15-passwd.qml:159 ../wizard/qml/Pages//20-wifi.qml:152
+msgid "Continue"
 msgstr ""
 
 #: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
 msgid "Skip"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:22
-msgid "Phone settings"
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hello"
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:67
+msgid "Welcome to your Ubuntu phone. Let’s get started."
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:72
+msgid "Select your language"
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:89
+msgid "Start"
+msgstr ""
+
+#: ../wizard/qml/Pages//terms.qml:24
+msgid "Terms & Conditions"
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "Add a SIM card"
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:57
+msgid ""
+"Please insert a SIM card before you continue. Without it, you won’t be able "
+"to make calls or use text messaging."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "All done"
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:39
+msgid "Nice work! Your phone is now ready to use. "
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:48
+msgid "Finish"
+msgstr ""
+
+#: ../wizard/qml/Pages//40-reporting.qml:22
+msgid "Bug Reporting"
 msgstr ""
 
 #: ../wizard/qml/Pages//30-location.qml:39
@@ -1499,33 +1640,14 @@ msgid ""
 "be disabled in system settings."
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:41
+#: ../wizard/qml/Pages//30-location.qml:51
+msgid "Use your mobile network and wi-fi to work out where you are."
+msgstr ""
+
+#: ../wizard/qml/Pages//30-location.qml:59
 msgid ""
-"Your phone is set up to detect your location. This can be disabled in system "
-"settings."
-msgstr ""
-
-#: ../wizard/qml/Pages//30-location.qml:48
-#: ../wizard/qml/Pages//15-passwd.qml:159 ../wizard/qml/Pages//20-wifi.qml:152
-msgid "Continue"
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:22
-msgid "Setup complete"
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:39
-msgid ""
-"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
-"the good folks at Canonical."
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:41
-msgid "Now you can start using your Ubuntu phone."
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:48
-msgid "Finish"
+"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"conditions</a>."
 msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
@@ -1552,43 +1674,30 @@ msgstr ""
 msgid "Passphrase must be at least four characters long."
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
+#: ../wizard/qml/Components//Page.qml:47
+msgid "Back"
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:67
-msgid "Welcome to your Ubuntu phone. Let’s get started."
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:78
+msgid "network"
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:72
-msgid "Select your language"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:80
+msgid "wireless"
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:89
-msgid "Start"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:82
+msgid "wifi"
 msgstr ""
 
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr ""
-
-#: ../wizard/qml/Pages//20-wifi.qml:68
-msgid "Available networks"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:4
-msgid "language"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:6
-msgid "lang"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:8
-msgid "i18n"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:84
+msgid "wi-fi"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
@@ -1620,78 +1729,6 @@ msgstr ""
 msgid "settings"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:14
-msgid "security"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:16
-msgid "privacy"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:20
-msgid "Flight Mode"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:22
-msgid "flight"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:24
-msgid "plane"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:26
-msgid "offline"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:30
-msgid "cellular"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:78
-msgid "network"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:34
-msgid "mobile"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:36
-msgid "gsm"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:42
-msgid "bluetooth"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:48
-msgid "about"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:50
-msgid "device"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:52
-msgid "info"
-msgstr ""
-
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:56
 msgid "time"
@@ -1707,49 +1744,14 @@ msgstr ""
 msgid "timezone"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:66
-msgid "reset"
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:120
+msgid "Updates available"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:72
-msgid "battery"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:74
-msgid "power"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:80
-msgid "wireless"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:82
-msgid "wifi"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:84
-msgid "wi-fi"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:90
-msgid "appearance"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:92
-msgid "background"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:94
-msgid "wallpaper"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:112
+msgid "system"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
@@ -1759,54 +1761,9 @@ msgstr ""
 msgid "software"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:100
-msgid "notifications"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:106
-msgid "phone"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:112
-msgid "system"
-msgstr ""
-
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:116
 msgid "update"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:120
-msgid "Updates available"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:122
-msgid "Example"
-msgstr "Παράδειγμα"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:124
-msgid "example"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:126
-msgid "test"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:128
-msgid "sample"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:132
-msgid "brightness"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
@@ -1814,19 +1771,24 @@ msgstr ""
 msgid "sound"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:142
-msgid "Accessibility"
-msgstr "Προσβασιμότητα"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:144
-msgid "accessibility"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:14
+msgid "security"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:146
-msgid "a11y"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:16
+msgid "privacy"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:66
+msgid "reset"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:106
+msgid "phone"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
@@ -1854,6 +1816,178 @@ msgstr ""
 msgid "screen"
 msgstr ""
 
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:100
+msgid "notifications"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:4
+msgid "language"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:6
+msgid "lang"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:8
+msgid "i18n"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:20
+msgid "Flight Mode"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:22
+msgid "flight"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:24
+msgid "plane"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:26
+msgid "offline"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:122
+msgid "Example"
+msgstr "Παράδειγμα"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:124
+msgid "example"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:126
+msgid "test"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:128
+msgid "sample"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:30
+msgid "cellular"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:34
+msgid "mobile"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:36
+msgid "gsm"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:132
+msgid "brightness"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:42
+msgid "bluetooth"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:72
+msgid "battery"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:74
+msgid "power"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:90
+msgid "appearance"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:92
+msgid "background"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:94
+msgid "wallpaper"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:142
+msgid "Accessibility"
+msgstr "Προσβασιμότητα"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:144
+msgid "accessibility"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:146
+msgid "a11y"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:48
+msgid "about"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:50
+msgid "device"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:52
+msgid "info"
+msgstr ""
+
+#: ../plugins/system-update//system_update.cpp:92
+msgid "Can't cancel current request (can't contact service)"
+msgstr ""
+
+#: ../plugins/system-update//system_update.cpp:98
+msgid "Can't pause current request (can't contact service)"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:251
+msgid "Incorrect passcode. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:253
+msgid "Incorrect passphrase. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:256
+msgid "Could not set security mode"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:281
+msgid "Could not set security display hint"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:294
+msgid "Authentication token manipulation error"
+msgstr ""
+
+#: ../plugins/about//click.cpp:133
+msgid "Unknown title"
+msgstr ""
+
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
 msgstr ""
@@ -1861,3 +1995,9 @@ msgstr ""
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr ""
+
+#~ msgid "Security:"
+#~ msgstr "Ασφάλεια:"
+
+#~ msgid "Privacy:"
+#~ msgstr "Ιδιωτικότητα:"

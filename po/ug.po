@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-15 19:11-0600\n"
+"POT-Creation-Date: 2014-08-26 13:44+0200\n"
 "PO-Revision-Date: 2014-08-09 17:38+0000\n"
 "Last-Translator: omarjan <bahadiromar@outlook.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -15,86 +15,57 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-20 06:21+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-08-27 07:44+0000\n"
+"X-Generator: Launchpad (build 17174)\n"
 
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:108
-#: ../plugins/language//PageComponent.qml:118
-msgid "Spell checking"
-msgstr "ئىملا تەكشۈرۈش"
+#: ../plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:114
+msgid "Previous networks"
+msgstr "بۇرۇنقى تورلار"
 
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "نۆۋەتتىكى ئىملا تەكشۈرىدىغان تىللار:"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:328
+#: ../plugins/wifi//PageComponent.qml:26
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:76
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
 
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "ئىشلەتكىلى بولىدىغان بارلىق تىللار:"
+#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
+msgid "Other network"
+msgstr "باشقا تور"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:33
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:2
-msgid "Language & Text"
-msgstr "تىل ۋە تېكىست"
+#: ../plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr "تور ئاتى"
 
-#: ../plugins/language//PageComponent.qml:79
-msgid "Display language…"
-msgstr "تىلنى كۆرسىتىش"
+#: ../plugins/wifi//OtherNetwork.qml:66
+msgid "Security"
+msgstr "بىخەتەرلىك"
 
-#: ../plugins/language//PageComponent.qml:93
-#: ../plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "ھەرپتاختا جايلاشتۇرۇلۇشى"
+#: ../plugins/security-privacy//PageComponent.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:40
+#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:302
+#: ../plugins/bluetooth//PageComponent.qml:310
+#: ../plugins/wifi//OtherNetwork.qml:67
+msgid "None"
+msgstr "يوق"
 
-#: ../plugins/language//PageComponent.qml:128
-msgid "Auto correction"
-msgstr ""
+#: ../plugins/wifi//OtherNetwork.qml:68
+msgid "WPA & WPA2 Personal"
+msgstr "WPA ۋە WPA2 كىشىلىك نۇسخىسى"
 
-#: ../plugins/language//PageComponent.qml:138
-msgid "Word suggestions"
-msgstr "تەۋسىيە سۆزلەر"
+#: ../plugins/wifi//OtherNetwork.qml:69
+msgid "WEP"
+msgstr "WEP"
 
-#: ../plugins/language//PageComponent.qml:151
-msgid "Auto capitalization"
-msgstr "چوڭ كىچىك يېزىلىشى ئاپتوماتىك"
+#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
+msgid "Password"
+msgstr "ئىم"
 
-#: ../plugins/language//PageComponent.qml:161
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr ""
-"ھەر بىر جۈملىنىڭ باش ھەرپىنى چوڭ قىلىپ كۆرسىتىش ئۈچۈن Shift كۇنۇپكىنى ئېچىپ "
-"قويىدۇ."
-
-#: ../plugins/language//PageComponent.qml:168
-msgid "Auto punctuation"
-msgstr ""
-
-#: ../plugins/language//PageComponent.qml:178
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
-
-#: ../plugins/language//PageComponent.qml:185
-#: ../plugins/sound//PageComponent.qml:186
-msgid "Keyboard sound"
-msgstr "ھەرپتاختا ئاۋازى"
-
-#: ../plugins/language//PageComponent.qml:195
-msgid "Keyboard vibration"
-msgstr ""
-
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "نۆۋەتتىكى ئورۇنلاشتۇرۇش:"
-
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "ئىشلەتكىلى بولىدىغان ئورۇنلاشتۇرۇشلار:"
-
-#: ../plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr "كۆرۈنۈش تىلى"
+#: ../plugins/wifi//OtherNetwork.qml:89
+msgid "Password visible"
+msgstr "ئىم كۆرۈنسۇن"
 
 #: ../plugins/language//DisplayLanguage.qml:94
 #: ../plugins/security-privacy//LockSecurity.qml:279
@@ -111,40 +82,339 @@ msgstr "كۆرۈنۈش تىلى"
 msgid "Cancel"
 msgstr "ئەمەلدىن قالدۇر"
 
-#: ../plugins/language//DisplayLanguage.qml:114
-msgid "Confirm"
-msgstr "جەزملە"
+#: ../plugins/bluetooth//PageComponent.qml:374
+#: ../plugins/wifi//OtherNetwork.qml:121
+msgid "Connect"
+msgstr "باغلان"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:33
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:12
-msgid "Security & Privacy"
-msgstr "بىخەتەرلىك ۋە شەخسىيەت"
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr "تور تەپسىلاتلىرى"
 
-#: ../plugins/security-privacy//PageComponent.qml:50
-#: ../plugins/security-privacy//PageComponent.qml:150
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "تېلېفون ۋە ئىنتېرنېت"
+#: ../plugins/bluetooth//PageComponent.qml:309
+#: ../plugins/wifi//NetworkDetails.qml:43
+msgid "Name"
+msgstr "ئاتى"
 
-#: ../plugins/security-privacy//PageComponent.qml:52
-#: ../plugins/security-privacy//PageComponent.qml:151
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "تېلېفون"
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr "ئەڭ ئاخىرقى قېتىم باغلانغىنى"
 
-#: ../plugins/security-privacy//PageComponent.qml:71
-msgid "Security:"
-msgstr "بىخەتەرلىك:"
+#: ../plugins/about//PageComponent.qml:149
+#: ../plugins/battery//PageComponent.qml:309
+#: ../plugins/battery//PageComponent.qml:318
+#: ../plugins/battery//SleepValues.qml:96
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/system-update//PageComponent.qml:448
+#: ../plugins/system-update//Configuration.qml:53
+msgid "Never"
+msgstr "بىر قېتىممۇ يېڭىلانمىغان"
 
-#: ../plugins/security-privacy//PageComponent.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:40
-#: ../plugins/bluetooth//PageComponent.qml:111
-#: ../plugins/bluetooth//PageComponent.qml:302
-#: ../plugins/bluetooth//PageComponent.qml:310
-#: ../plugins/wifi//OtherNetwork.qml:67
-msgid "None"
-msgstr "يوق"
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr "ئىم كۆرسەت"
+
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr "تورنى ئۇنتۇپ كەت"
+
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "ۋاقىت ۋە چېسلا بەلگىلە"
+
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "ۋاقىت"
+
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "سائەت"
+
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "مىنۇت"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "سېكۇنت"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "چېسلا"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "كۈن"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "ئاي"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "يىل"
+
+#: ../plugins/security-privacy//LockSecurity.qml:300
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/background//Preview.qml:104
+#: ../plugins/phone//CallForwarding.qml:148
+msgid "Set"
+msgstr "بەلگىلە"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:54
+msgid "Time & Date"
+msgstr "ۋاقىت ۋە چېسلا"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "ۋاقىت رايونى:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "ۋاقىت ۋە چېسلا بەلگىلەش:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Automatically"
+msgstr "ئاپتوماتىك"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Manually"
+msgstr "قولدا"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "ۋاقىت رايونى"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "ۋاقىت رايونىنى بەلگىلەش:"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "نۆۋەتتىكى ئورنىڭىزنى كىرگۈزۈڭ."
+
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "ماس ئورۇن يوق"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:35
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:110
+msgid "Updates"
+msgstr "يېڭىلانمىلار"
+
+#: ../plugins/system-update//PageComponent.qml:51
+msgid "Update System"
+msgstr "سىستېما يېڭىلا"
+
+#: ../plugins/system-update//PageComponent.qml:52
+msgid "The phone needs to restart to install the system update."
+msgstr ""
+"سىستېما يېڭىلانمىلىرىنى ئورنىتىش ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
+
+#: ../plugins/system-update//PageComponent.qml:55
+msgid "Install & Restart"
+msgstr "ئورنات ۋە قايتا قوزغات"
+
+#: ../plugins/system-update//PageComponent.qml:64
+msgid "Not Now"
+msgstr "ھازىر ئەمەس"
+
+#: ../plugins/system-update//PageComponent.qml:70
+msgid "Install"
+msgstr "ئورنات"
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Software is up to date"
+msgstr "يۇمشاق دېتال ئەڭ يېڭى ھالەتتە"
+
+#: ../plugins/system-update//PageComponent.qml:199
+msgid "Checking for updates…"
+msgstr "يېڭىلانمىلار بارمۇ-يوق تەكشۈرۈۋاتىدۇ…"
+
+#: ../plugins/system-update//PageComponent.qml:216
+#, qt-format
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/system-update//PageComponent.qml:217
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/system-update//PageComponent.qml:218
+msgid "Pause All"
+msgstr "ھەممىنى ۋاقىتلىق توختات"
+
+#: ../plugins/system-update//PageComponent.qml:286
+msgid "Retry"
+msgstr "قايتا سىنا"
+
+#: ../plugins/system-update//PageComponent.qml:302
+msgid "Download"
+msgstr "چۈشۈرۈش"
+
+#: ../plugins/system-update//PageComponent.qml:302
+msgid "Update"
+msgstr "يېڭىلا"
+
+#: ../plugins/system-update//PageComponent.qml:303
+msgid "Resume"
+msgstr "داۋاملاشتۇر"
+
+#: ../plugins/system-update//PageComponent.qml:304
+msgid "Pause"
+msgstr "ۋاقىتلىق توختا"
+
+#: ../plugins/system-update//PageComponent.qml:363
+msgid "Installing"
+msgstr "ئورنىتىۋاتىدۇ"
+
+#: ../plugins/system-update//PageComponent.qml:396
+msgid "Installed"
+msgstr "ئورنىتىلغان"
+
+#: ../plugins/system-update//PageComponent.qml:420
+msgid "Version: "
+msgstr "نەشرى: "
+
+#: ../plugins/system-update//PageComponent.qml:425
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:434
+msgid "Sign In…"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:532
+msgid "Installing update…"
+msgstr "يېڭىلانمىنى ئورنىتىۋاتىدۇ..."
+
+#: ../plugins/system-update//PageComponent.qml:445
+#: ../plugins/system-update//Configuration.qml:30
+msgid "Auto download"
+msgstr "ئاپتوماتىك چۈشۈر"
+
+#: ../plugins/system-update//PageComponent.qml:450
+msgid "On wi-fi"
+msgstr "سىمسىز تور (wi-fi) دا"
+
+#: ../plugins/system-update//PageComponent.qml:452
+msgid "Always"
+msgstr "ھەمىشە"
+
+#: ../plugins/system-update//PageComponent.qml:546
+msgid " bytes"
+msgstr " بايت"
+
+#: ../plugins/system-update//PageComponent.qml:549
+msgid " KiB"
+msgstr " كىلوبايت"
+
+#: ../plugins/system-update//PageComponent.qml:552
+msgid " MiB"
+msgstr " مېگابايت"
+
+#: ../plugins/system-update//PageComponent.qml:555
+msgid " GiB"
+msgstr " گىگابايت"
+
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr "يېڭىلانمىنى ئاپتوماتىك چۈشۈر"
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr "سىمسىز تۇر(wi-fi)نى ئاچقاندا"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr "ھەر قانداق سانلىق مەلۇمات باغلىنىشىنى ئاچقاندا"
+
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr "سانلىق -مەلۇماتقا پۇل كېتىشى مۇمكىن."
+
+#: ../plugins/sound//SoundsList.qml:59
+msgid "Stop playing"
+msgstr "توختات"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "تېلېفون ئۈنسىز ھالەتتە."
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:38
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:136
+msgid "Sound"
+msgstr "ئاۋاز"
+
+#: ../plugins/sound//PageComponent.qml:75
+msgid "Silent Mode"
+msgstr "جىمىغۇر ھالەت"
+
+#: ../plugins/sound//PageComponent.qml:79
+msgid "Ringer:"
+msgstr "قوڭغىراق"
+
+#: ../plugins/sound//PageComponent.qml:111
+msgid "Phone calls:"
+msgstr "تېلېفونلار:"
+
+#: ../plugins/sound//PageComponent.qml:115
+#: ../plugins/sound//PageComponent.qml:121
+msgid "Ringtone"
+msgstr "قوڭغۇراق ئاۋازى"
+
+#: ../plugins/sound//PageComponent.qml:134
+msgid "Vibrate when ringing"
+msgstr "جىرىڭلىغاندا تىترىسۇن"
+
+#: ../plugins/sound//PageComponent.qml:143
+#: ../plugins/sound//PageComponent.qml:178
+msgid "Vibrate in Silent Mode"
+msgstr "ئۈنسىز ھالەتتە تىترىسۇن"
+
+#: ../plugins/sound//PageComponent.qml:147
+msgid "Messages:"
+msgstr "ئۇچۇرلار:"
+
+#: ../plugins/sound//PageComponent.qml:151
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Message received"
+msgstr "ئۇچۇر كەلدى"
+
+#: ../plugins/sound//PageComponent.qml:169
+msgid "Vibrate with message sound"
+msgstr "ئۇچۇر ئاۋازى بىلەن بىرگە تىترىسۇن"
+
+#: ../plugins/sound//PageComponent.qml:182
+msgid "Other sounds:"
+msgstr "باشقا ئۈنلەر:"
+
+#: ../plugins/language//PageComponent.qml:185
+#: ../plugins/sound//PageComponent.qml:186
+msgid "Keyboard sound"
+msgstr "ھەرپتاختا ئاۋازى"
+
+#: ../plugins/sound//PageComponent.qml:200
+msgid "Lock sound"
+msgstr "ئۈننى قۇلۇپلا"
+
+#: ../plugins/security-privacy//PageComponent.qml:99
+#: ../plugins/security-privacy//PhoneLocking.qml:29
+msgid "Phone locking"
+msgstr "تېلېفون قۇلۇپلاش"
 
 #: ../plugins/security-privacy//PageComponent.qml:79
 #: ../plugins/security-privacy//PhoneLocking.qml:41
@@ -166,10 +436,15 @@ msgstr "ئىم جۈملىسى"
 msgid "Lock security"
 msgstr "قۇلۇپلاش بىخەتەرلىكى"
 
-#: ../plugins/security-privacy//PageComponent.qml:99
-#: ../plugins/security-privacy//PhoneLocking.qml:29
-msgid "Phone locking"
-msgstr "تېلېفون قۇلۇپلاش"
+#: ../plugins/security-privacy//PhoneLocking.qml:62
+#: ../plugins/battery//PageComponent.qml:300
+msgid "Lock when idle"
+msgstr "بوش ۋاقىتتا قۇلۇپلىسۇن"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:63
+#: ../plugins/battery//PageComponent.qml:300
+msgid "Sleep when idle"
+msgstr "بوش ۋاقىتتا ئۈچەككە كىرسۇن"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PageComponent.qml:101
@@ -179,13 +454,62 @@ msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 مىنۇت"
 
+#: ../plugins/security-privacy//PhoneLocking.qml:79
+msgid "Sleep locks immediately"
+msgstr "دەرھال ئۈچەككە كىرسۇن"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:33
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:12
+msgid "Security & Privacy"
+msgstr "بىخەتەرلىك ۋە شەخسىيەت"
+
+#: ../plugins/security-privacy//PageComponent.qml:50
+#: ../plugins/security-privacy//PageComponent.qml:150
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone and Internet"
+msgstr "تېلېفون ۋە ئىنتېرنېت"
+
+#: ../plugins/security-privacy//PageComponent.qml:52
+#: ../plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone only"
+msgstr "تېلېفون"
+
+#: ../plugins/security-privacy//PageComponent.qml:90
+msgid "Lock phone"
+msgstr ""
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//SleepValues.qml:77
+#: ../plugins/battery//SleepValues.qml:81
+#: ../plugins/battery//SleepValues.qml:85
+#: ../plugins/battery//SleepValues.qml:89
+#: ../plugins/battery//SleepValues.qml:93
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "%1 مىنۇتتىن كېيىن"
+
 #: ../plugins/security-privacy//PageComponent.qml:110
 msgid "SIM PIN"
 msgstr "SIM نىڭ ئىمى(PIN)  نومۇرى"
 
-#: ../plugins/security-privacy//PageComponent.qml:116
-msgid "Privacy:"
-msgstr "شەخسىيەت:"
+#: ../plugins/security-privacy//PageComponent.qml:124
+msgid "Encryption"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:133
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:137
+msgid "Privacy"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:120
 msgid "Stats on welcome screen"
@@ -203,6 +527,17 @@ msgstr "باش تاختا ئىزدەش"
 #: ../plugins/security-privacy//PageComponent.qml:166
 msgid "Location access"
 msgstr "ئورۇن زىيارىتى"
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "On"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:37
+#: ../plugins/cellular//Components//CellularMultiSim.qml:31
+msgid "Off"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:174
 #: ../plugins/security-privacy//AppAccess.qml:28
@@ -225,19 +560,90 @@ msgstr "ئەۋەتكەنلىرى"
 msgid "Not sent"
 msgstr "ئەۋەتىلمىگەنلىرى"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:62
-#: ../plugins/battery//PageComponent.qml:300
-msgid "Lock when idle"
-msgstr "بوش ۋاقىتتا قۇلۇپلىسۇن"
+#: ../plugins/security-privacy//LockSecurity.qml:380
+msgid "Change passcode…"
+msgstr "ئىم ئۆزگەرتىش…"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:63
-#: ../plugins/battery//PageComponent.qml:300
-msgid "Sleep when idle"
-msgstr "بوش ۋاقىتتا ئۈچەككە كىرسۇن"
+#: ../plugins/security-privacy//LockSecurity.qml:381
+msgid "Change passphrase…"
+msgstr "ئىم جۈملىسى ئۆزگەرتىش…"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
-msgstr "دەرھال ئۈچەككە كىرسۇن"
+#: ../plugins/security-privacy//LockSecurity.qml:101
+msgid "Switch to swipe"
+msgstr "سىيرىپ ئالماشتۇرۇش"
+
+#: ../plugins/security-privacy//LockSecurity.qml:103
+msgid "Switch to passcode"
+msgstr "ئىم ئالماشتۇرۇش"
+
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to passphrase"
+msgstr "ئىم جۈملىسى ئالماشتۇرۇش"
+
+#: ../plugins/security-privacy//LockSecurity.qml:114
+msgid "Existing passcode"
+msgstr "نۆۋەتتىكى ئىم"
+
+#: ../plugins/security-privacy//LockSecurity.qml:116
+msgid "Existing passphrase"
+msgstr "نۆۋەتتىكى ئىم جۈملىسى"
+
+#: ../plugins/security-privacy//LockSecurity.qml:170
+msgid "Choose passcode"
+msgstr "ئىم تاللاڭ"
+
+#: ../plugins/security-privacy//LockSecurity.qml:172
+msgid "Choose passphrase"
+msgstr "ئىم جۈملىسى تاللاڭ"
+
+#: ../plugins/security-privacy//LockSecurity.qml:216
+msgid "Confirm passcode"
+msgstr "ئىمنى جەزملەڭ"
+
+#: ../plugins/security-privacy//LockSecurity.qml:218
+msgid "Confirm passphrase"
+msgstr "ئىم جۈملىسى جەزملەڭ"
+
+#: ../plugins/security-privacy//LockSecurity.qml:261
+msgid "Those passcodes don't match. Try again."
+msgstr "ئىم ماسلاشمىدى.قايتا سىناڭ"
+
+#: ../plugins/security-privacy//LockSecurity.qml:264
+msgid "Those passphrases don't match. Try again."
+msgstr "ئىم جۈملىسى ماسلاشمىدى، قايتا سىناڭ"
+
+#: ../plugins/security-privacy//LockSecurity.qml:295
+msgid "Unset"
+msgstr "بېكىتىلمىگەن"
+
+#: ../plugins/security-privacy//LockSecurity.qml:298
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr "ئۆزگەرت"
+
+#: ../plugins/security-privacy//LockSecurity.qml:340
+msgid "Unlock the phone using:"
+msgstr "تېلېفوننى قۇلۇپلاش ئۈچۈن:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "Swipe (no security)"
+msgstr "سىيرىش(بىخەتەرلىكى يوق)"
+
+#: ../plugins/security-privacy//LockSecurity.qml:345
+msgid "4-digit passcode"
+msgstr "4 خانىلىق رەقەملىك ئىم"
+
+#: ../plugins/security-privacy//LockSecurity.qml:347
+msgid "Swipe (no security)… "
+msgstr "سىيرىش(بىخەتەرلىكى يوق)… "
+
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "4-digit passcode…"
+msgstr "4 خانىلىق رەقەملىك ئىم…"
+
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "Passphrase…"
+msgstr "ئىم جۈملىسى..."
 
 #: ../plugins/security-privacy//Location.qml:30
 msgid "Location"
@@ -299,6 +705,10 @@ msgstr ""
 msgid "Allow access to location:"
 msgstr "بۇ ئورۇنلارنى زىيارەت قىلىشقا ئىجازەت:"
 
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "نەتىجە قايتۇرۇش :"
+
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
 msgstr ""
@@ -329,121 +739,203 @@ msgstr ""
 msgid "0"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:92
-msgid "Change passcode"
-msgstr "ئىم ئۆزگەرت"
-
-#: ../plugins/security-privacy//LockSecurity.qml:94
-msgid "Change passphrase"
-msgstr "ئىم جۈملىسى ئۆزگەرت"
-
-#: ../plugins/security-privacy//LockSecurity.qml:101
-msgid "Switch to swipe"
-msgstr "سىيرىپ ئالماشتۇرۇش"
-
-#: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr "ئىم ئالماشتۇرۇش"
-
-#: ../plugins/security-privacy//LockSecurity.qml:105
-msgid "Switch to passphrase"
-msgstr "ئىم جۈملىسى ئالماشتۇرۇش"
-
-#: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr "نۆۋەتتىكى ئىم"
-
-#: ../plugins/security-privacy//LockSecurity.qml:116
-msgid "Existing passphrase"
-msgstr "نۆۋەتتىكى ئىم جۈملىسى"
-
-#: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr "ئىم تاللاڭ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:172
-msgid "Choose passphrase"
-msgstr "ئىم جۈملىسى تاللاڭ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr "ئىمنى جەزملەڭ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:218
-msgid "Confirm passphrase"
-msgstr "ئىم جۈملىسى جەزملەڭ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:261
-msgid "Those passcodes don't match. Try again."
-msgstr "ئىم ماسلاشمىدى.قايتا سىناڭ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:264
-msgid "Those passphrases don't match. Try again."
-msgstr "ئىم جۈملىسى ماسلاشمىدى، قايتا سىناڭ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:295
-msgid "Unset"
-msgstr "بېكىتىلمىگەن"
-
-#: ../plugins/security-privacy//LockSecurity.qml:298
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr "ئۆزگەرت"
-
-#: ../plugins/security-privacy//LockSecurity.qml:300
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/background//Preview.qml:104
-#: ../plugins/phone//CallForwarding.qml:148
-msgid "Set"
-msgstr "بەلگىلە"
-
-#: ../plugins/security-privacy//LockSecurity.qml:340
-msgid "Unlock the phone using:"
-msgstr "تېلېفوننى قۇلۇپلاش ئۈچۈن:"
-
-#: ../plugins/security-privacy//LockSecurity.qml:344
-msgid "Swipe (no security)"
-msgstr "سىيرىش(بىخەتەرلىكى يوق)"
-
-#: ../plugins/security-privacy//LockSecurity.qml:345
-msgid "4-digit passcode"
-msgstr "4 خانىلىق رەقەملىك ئىم"
-
-#: ../plugins/security-privacy//LockSecurity.qml:347
-msgid "Swipe (no security)… "
-msgstr "سىيرىش(بىخەتەرلىكى يوق)… "
-
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "4-digit passcode…"
-msgstr "4 خانىلىق رەقەملىك ئىم…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:349
-msgid "Passphrase…"
-msgstr "ئىم جۈملىسى..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passcode…"
-msgstr "ئىم ئۆزگەرتىش…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:381
-msgid "Change passphrase…"
-msgstr "ئىم جۈملىسى ئۆزگەرتىش…"
-
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "نەتىجە قايتۇرۇش :"
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-msgid "Carriers"
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
 msgstr ""
 
-#: ../plugins/cellular//PageChooseCarriers.qml:50
-#: ../plugins/cellular//PageChooseCarriers.qml:66
-#: ../plugins/cellular//PageComponent.qml:175
-#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281
-msgid "N/A"
-msgstr "N/A"
+#: ../plugins/reset//PageComponent.qml:73
+#: ../plugins/reset//ResetLauncherHome.qml:44
+msgid "Reset Launcher"
+msgstr ""
+
+#: ../plugins/reset//ResetLauncherHome.qml:59
+msgid "The phone needs to restart for changes to take effect."
+msgstr ""
+
+#: ../plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "بارلىق سىستېما تەڭشىكىنى ئەسلىگە قايتۇر"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../plugins/reset//PageComponent.qml:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:64
+msgid "Reset phone"
+msgstr "تېلېفوننى ئەسلىگە قايتۇر"
+
+#: ../plugins/reset//PageComponent.qml:87
+msgid "Reset all system settings…"
+msgstr "بارلىق سىستېما تەڭشىكىنى ئەسلىگە قايتۇر.."
+
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr ""
+
+#: ../plugins/reset//EraseEverything.qml:41
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"بارلىق پۈتۈكلەر، ساقلانغان ئويۇنلار ۋە باشقا تۈرلەرنىڭ ھەممىسى مەزكۇر "
+"تېلېفوندىن مەڭگۈ ئۆچۈرۈلىدۇ."
+
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr ""
+
+#: ../plugins/phone//PageComponent.qml:30
+msgid "SIM"
+msgstr "SIM"
+
+#: ../plugins/phone//PageComponent.qml:51
+#: ../plugins/phone//CallForwarding.qml:28
+#: ../plugins/phone//CallForwarding.qml:75
+msgid "Call forwarding"
+msgstr "چاقىرىلىشنى يۆتكە"
+
+#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
+#: ../plugins/phone//CallWaiting.qml:63
+msgid "Call waiting"
+msgstr "كۈتۈۋاتىدۇ"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 مۇلازىمەتلەر"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "ئەڭ ئاخىرقى قېتىم  چاقىرىلغان %1"
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "چاقىر"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/bluetooth//PageComponent.qml:88
+#: ../plugins/phone//PageComponent.qml:28
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:104
+msgid "Phone"
+msgstr "تېلېفون"
+
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
+msgid "Services"
+msgstr ""
+
+#: ../plugins/phone//CallWaiting.qml:78
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+
+#: ../plugins/phone//CallForwarding.qml:90
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"سىز تېلېڧۇننى ئالمىغاندا، تېلېڧون ئالدىراش بولغاندا، تېلېڧون ئېتىك ياكى "
+"سىگنال يوق ھالەتتە باشقا نومۇرغا يۆتكەيدۇ."
+
+#: ../plugins/phone//CallForwarding.qml:100
+msgid "Forward to"
+msgstr "يۆتكەل"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:96
+msgid "Notifications"
+msgstr "ئۇقتۇرۇشلار"
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr ""
+
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+#: ../plugins/language//PageComponent.qml:108
+#: ../plugins/language//PageComponent.qml:118
+msgid "Spell checking"
+msgstr "ئىملا تەكشۈرۈش"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "نۆۋەتتىكى ئىملا تەكشۈرىدىغان تىللار:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "ئىشلەتكىلى بولىدىغان بارلىق تىللار:"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:33
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:2
+msgid "Language & Text"
+msgstr "تىل ۋە تېكىست"
+
+#: ../plugins/language//PageComponent.qml:79
+msgid "Display language…"
+msgstr "تىلنى كۆرسىتىش"
+
+#: ../plugins/language//PageComponent.qml:93
+#: ../plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "ھەرپتاختا جايلاشتۇرۇلۇشى"
+
+#: ../plugins/language//PageComponent.qml:128
+msgid "Auto correction"
+msgstr ""
+
+#: ../plugins/language//PageComponent.qml:138
+msgid "Word suggestions"
+msgstr "تەۋسىيە سۆزلەر"
+
+#: ../plugins/language//PageComponent.qml:151
+msgid "Auto capitalization"
+msgstr "چوڭ كىچىك يېزىلىشى ئاپتوماتىك"
+
+#: ../plugins/language//PageComponent.qml:161
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr ""
+"ھەر بىر جۈملىنىڭ باش ھەرپىنى چوڭ قىلىپ كۆرسىتىش ئۈچۈن Shift كۇنۇپكىنى ئېچىپ "
+"قويىدۇ."
+
+#: ../plugins/language//PageComponent.qml:168
+msgid "Auto punctuation"
+msgstr ""
+
+#: ../plugins/language//PageComponent.qml:178
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr ""
+
+#: ../plugins/language//PageComponent.qml:195
+msgid "Keyboard vibration"
+msgstr ""
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "نۆۋەتتىكى ئورۇنلاشتۇرۇش:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "ئىشلەتكىلى بولىدىغان ئورۇنلاشتۇرۇشلار:"
+
+#: ../plugins/language//DisplayLanguage.qml:33
+msgid "Display language"
+msgstr "كۆرۈنۈش تىلى"
+
+#: ../plugins/language//DisplayLanguage.qml:114
+msgid "Confirm"
+msgstr "جەزملە"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
@@ -451,52 +943,26 @@ msgstr "N/A"
 msgid "Cellular"
 msgstr "كۆچمە تور"
 
-#: ../plugins/cellular//PageComponent.qml:132
-msgid "Hotspot disabled because Wi-Fi is off."
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
 msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "قىزىق نۇقتا ئاتى"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "ئاچقۇچ(چوقۇم 8 ھەرپ ياكى ئۇنىڭ كۆپ بولسۇن)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "ئاچقۇچ كۆرسەت"
 
 #: ../plugins/cellular//PageComponent.qml:138
 #: ../plugins/cellular//Hotspot.qml:29
 msgid "Wi-Fi hotspot"
 msgstr "Wi-Fi قىزىق نۇقتا"
-
-#: ../plugins/cellular//PageComponent.qml:147
-msgid "Data usage statistics"
-msgstr "سانلىق-مەلۇمات ستاتىستىكىسى"
-
-#: ../plugins/cellular//PageComponent.qml:153
-#: ../plugins/cellular//PageComponent.qml:161
-msgid "Carrier"
-msgid_plural "Carriers"
-msgstr[0] "توشۇغۇچى"
-
-#: ../plugins/cellular//PageComponent.qml:180
-msgid "APN"
-msgstr "APN"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "توشۇغۇچى(شىركەت) تاللاش:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Automatically"
-msgstr "ئاپتوماتىك"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Manually"
-msgstr "قولدا"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "يېڭىلا"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "ئىزدەۋاتىدۇ"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
@@ -518,21 +984,73 @@ msgstr ""
 msgid "Set up hotspot"
 msgstr ""
 
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+msgid "Carriers"
 msgstr ""
 
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr "قىزىق نۇقتا ئاتى"
+#: ../plugins/cellular//PageChooseCarriers.qml:50
+#: ../plugins/cellular//PageChooseCarriers.qml:66
+#: ../plugins/cellular//PageComponent.qml:175
+#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:125
+#: ../plugins/battery//PageComponent.qml:281
+msgid "N/A"
+msgstr "N/A"
 
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr "ئاچقۇچ(چوقۇم 8 ھەرپ ياكى ئۇنىڭ كۆپ بولسۇن)"
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "توشۇغۇچى(شىركەت) تاللاش:"
 
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr "ئاچقۇچ كۆرسەت"
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "يېڭىلا"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "ئىزدەۋاتىدۇ"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:130
+msgid "Brightness"
+msgstr "يورۇقلۇقى"
+
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "ئاپتوماتىك تەڭشىسۇن"
+
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr ""
+
+#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr ""
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "كۆكچىش جۈپلىشىش ئىلتىماسى"
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "'%1' نىڭ PIN نومۇرى"
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+msgid "Pair"
+msgstr "جۈپلە"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/bluetooth//PageComponent.qml:117
+#: ../plugins/bluetooth//PageComponent.qml:136
+#: ../plugins/battery//PageComponent.qml:358
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:40
+msgid "Bluetooth"
+msgstr "كۆكچىش"
 
 #: ../plugins/bluetooth//PageComponent.qml:77
 msgid "Connected"
@@ -557,13 +1075,6 @@ msgstr "نامەلۇم"
 #: ../plugins/bluetooth//PageComponent.qml:87
 msgid "Computer"
 msgstr "كومپيۇتېر"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:88
-#: ../plugins/phone//PageComponent.qml:28
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:104
-msgid "Phone"
-msgstr "تېلېفون"
 
 #: ../plugins/bluetooth//PageComponent.qml:89
 msgid "Modem"
@@ -629,14 +1140,6 @@ msgstr "ياخشىراق"
 msgid "Poor"
 msgstr "ناچار"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:117
-#: ../plugins/bluetooth//PageComponent.qml:136
-#: ../plugins/battery//PageComponent.qml:358
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:40
-msgid "Bluetooth"
-msgstr "كۆكچىش"
-
 #: ../plugins/bluetooth//PageComponent.qml:171
 msgid "Discoverable"
 msgstr "بايقىغىلى بولىدۇ"
@@ -666,11 +1169,6 @@ msgstr "بايقالمىدى"
 msgid "Connect automatically when detected:"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:309
-#: ../plugins/wifi//NetworkDetails.qml:43
-msgid "Name"
-msgstr "ئاتى"
-
 #: ../plugins/bluetooth//PageComponent.qml:327
 msgid "Type"
 msgstr "تىپى"
@@ -687,31 +1185,9 @@ msgstr "سىگنال كۈچلۈكلۈكى"
 msgid "Disconnect"
 msgstr "ئۈز"
 
-#: ../plugins/bluetooth//PageComponent.qml:374
-#: ../plugins/wifi//OtherNetwork.qml:121
-msgid "Connect"
-msgstr "باغلان"
-
 #: ../plugins/bluetooth//PageComponent.qml:392
 msgid "Forget this device"
 msgstr ""
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr "كۆكچىش جۈپلىشىش ئىلتىماسى"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "'%1' نىڭ PIN نومۇرى"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr "جۈپلە"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
@@ -723,262 +1199,25 @@ msgstr "بۇنىڭ بىلەن ‹%1› نىڭدا كۆرسىتىلگەن PIN ن�
 msgid "Confirm PIN"
 msgstr "PIN جەزملە"
 
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
-msgid "Software licenses"
-msgstr "يۇمشاق دېتال ئىجازەتنامىسى"
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Lock the phone when it's not in use:"
+msgstr "تېلېفوننى ئىشلەتمىگەندە قۇلۇپلىسۇن:"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:46
-msgid "About this phone"
-msgstr "بۇ تېلېفون ھەققىدە"
+#: ../plugins/battery//SleepValues.qml:74
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "تېلېفون ئىشلىتىلمىگەندە ئۇخلىسۇن:"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "تېلېفون نومۇرى"
-
-#: ../plugins/about//PageComponent.qml:107
-msgid "Serial"
-msgstr "ئارقىمۇئارقا"
-
-#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "ساقلىغۇچ"
-
-#: ../plugins/about//PageComponent.qml:133
-msgid "Software:"
-msgstr "يۇمشاق دېتال:"
-
-#: ../plugins/about//PageComponent.qml:138
-msgid "OS"
-msgstr "OS"
-
-#: ../plugins/about//PageComponent.qml:147
-msgid "Last updated"
-msgstr "ئاخىرقى قېتىم يېڭىلانغىنى"
-
-#: ../plugins/about//PageComponent.qml:149
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
-#: ../plugins/battery//SleepValues.qml:96
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:448
-#: ../plugins/system-update//Configuration.qml:53
-msgid "Never"
-msgstr "بىر قېتىممۇ يېڭىلانمىغان"
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "Check for updates"
-msgstr "يېڭىلانما  تەكشۈر"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Legal:"
-msgstr "تەكشۈرۈش:"
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Regulatory info"
-msgstr "نازارەت قىلىش ئۇچۇرى"
-
-#: ../plugins/about//PageComponent.qml:185
-msgid "Developer mode"
-msgstr "ئىجادىيەتچى ھالىتى"
-
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr "OS ھاسىللاش تەپسىلاتلىرى"
-
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr "OS ھاسىللىنىش نومۇرى"
-
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr "ئۇبۇنتۇنىڭ تەسۋىر قىسمى"
-
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr "ئۇبۇنتۇنىڭ ھاسىللىنىش چۈشەندۈرۈلۈشى"
-
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr "ئۈسكۈنە تەسۋىر قىسمى"
-
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr "ئۈسكۈنىنىڭ ھاسىللىنىش چۈشەندۈرۈلۈشى"
-
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr "ئۆزلەشتۈرۈلگەن تەسۋىر قىسمى"
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
-msgid "Developer Mode"
-msgstr "ئىجادىيەتچى ھالىتى"
-
-#: ../plugins/about//DevMode.qml:73
+#: ../plugins/battery//SleepValues.qml:107
 msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
 msgstr ""
+"ۋاقىت قىسقا بولسا تېخىمۇ بەك بىخەتەر بولىدۇ. سۆزلىشىۋاتقاندا ۋە سىن "
+"قويۇۋاتقاندا قۇلۇپلانمايدۇ."
 
-#: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
-
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "ئۇبۇنتۇ ئىشلەتكىنى"
-
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "سىنلار"
-
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "ئۈن"
-
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "سۈرەتلەر"
-
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "باشقا ھۆججەتلەر"
-
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "ئەپلەر ئىشلەتكىنى"
-
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "ھەممە ساقلىغۇچ"
-
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "بىكار بوشلۇق"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "ئاتى بويىچە"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "چوڭلۇقى بويىچە"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:54
-msgid "Time & Date"
-msgstr "ۋاقىت ۋە چېسلا"
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "ۋاقىت رايونى:"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "ۋاقىت ۋە چېسلا بەلگىلەش:"
-
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "ۋاقىت ۋە چېسلا بەلگىلە"
-
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "ۋاقىت"
-
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "سائەت"
-
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "مىنۇت"
-
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "سېكۇنت"
-
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "چېسلا"
-
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "كۈن"
-
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "ئاي"
-
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "يىل"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "ۋاقىت رايونى"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "ۋاقىت رايونىنى بەلگىلەش:"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "نۆۋەتتىكى ئورنىڭىزنى كىرگۈزۈڭ."
-
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "ماس ئورۇن يوق"
-
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr ""
-
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "بارلىق سىستېما تەڭشىكىنى ئەسلىگە قايتۇر"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:64
-msgid "Reset phone"
-msgstr "تېلېفوننى ئەسلىگە قايتۇر"
-
-#: ../plugins/reset//PageComponent.qml:73
-#: ../plugins/reset//ResetLauncherHome.qml:44
-msgid "Reset Launcher"
-msgstr ""
-
-#: ../plugins/reset//PageComponent.qml:87
-msgid "Reset all system settings…"
-msgstr "بارلىق سىستېما تەڭشىكىنى ئەسلىگە قايتۇر.."
-
-#: ../plugins/reset//PageComponent.qml:101
-msgid "Erase & Reset Everything…"
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr ""
-
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr ""
-"بارلىق پۈتۈكلەر، ساقلانغان ئويۇنلار ۋە باشقا تۈرلەرنىڭ ھەممىسى مەزكۇر "
-"تېلېفوندىن مەڭگۈ ئۆچۈرۈلىدۇ."
-
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr ""
+#: ../plugins/battery//SleepValues.qml:107
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "سۆزلىشىۋاتقاندا ۋە سىن قويۇۋاتقاندا ئۇخلاپ قالمايدۇ."
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
@@ -1050,31 +1289,6 @@ msgstr "بۈگۈن"
 msgid "Ways to reduce battery use:"
 msgstr "توكداننىڭ ئىشلىتىلىشىنى ئازلىتىش ئۇسۇللىرى:"
 
-#: ../plugins/battery//PageComponent.qml:290
-#: ../plugins/brightness//BrightnessSlider.qml:51
-msgid "Display brightness"
-msgstr ""
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//SleepValues.qml:77
-#: ../plugins/battery//SleepValues.qml:81
-#: ../plugins/battery//SleepValues.qml:85
-#: ../plugins/battery//SleepValues.qml:89
-#: ../plugins/battery//SleepValues.qml:93
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "%1 مىنۇتتىن كېيىن"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:328
-#: ../plugins/wifi//PageComponent.qml:26
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:76
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
 #: ../plugins/battery//PageComponent.qml:389
 msgid "GPS"
 msgstr "GPS"
@@ -1083,74 +1297,9 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "توغرا بولغان ئورۇن بەلگىلەش GPS بىلەن Wi-Fi نى تەلەپ قىلىدۇ."
 
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr "تېلېفوننى ئىشلەتمىگەندە قۇلۇپلىسۇن:"
-
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "تېلېفون ئىشلىتىلمىگەندە ئۇخلىسۇن:"
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-"ۋاقىت قىسقا بولسا تېخىمۇ بەك بىخەتەر بولىدۇ. سۆزلىشىۋاتقاندا ۋە سىن "
-"قويۇۋاتقاندا قۇلۇپلانمايدۇ."
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
-msgstr "سۆزلىشىۋاتقاندا ۋە سىن قويۇۋاتقاندا ئۇخلاپ قالمايدۇ."
-
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr "بۇرۇنقى تورلار"
-
-#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
-msgstr "باشقا تور"
-
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr "تور تەپسىلاتلىرى"
-
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr "ئەڭ ئاخىرقى قېتىم باغلانغىنى"
-
-#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
-msgid "Password"
-msgstr "ئىم"
-
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr "ئىم كۆرسەت"
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr "تورنى ئۇنتۇپ كەت"
-
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr "تور ئاتى"
-
-#: ../plugins/wifi//OtherNetwork.qml:66
-msgid "Security"
-msgstr "بىخەتەرلىك"
-
-#: ../plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
-msgstr "WPA ۋە WPA2 كىشىلىك نۇسخىسى"
-
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr "WEP"
-
-#: ../plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
-msgstr "ئىم كۆرۈنسۇن"
+#: ../plugins/background//WallpaperGrid.qml:190
+msgid "Remove"
+msgstr "چىقىرىۋەت"
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
@@ -1170,290 +1319,244 @@ msgstr "ئۇبۇنتۇ سەنئىتى"
 msgid "Custom"
 msgstr "ئىختىيارى"
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "چىقىرىۋەت"
+#: ../plugins/about//Version.qml:35
+msgid "OS Build Details"
+msgstr "OS ھاسىللاش تەپسىلاتلىرى"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:96
-msgid "Notifications"
-msgstr "ئۇقتۇرۇشلار"
+#: ../plugins/about//Version.qml:53
+msgid "OS build number"
+msgstr "OS ھاسىللىنىش نومۇرى"
 
-#: ../plugins/notifications//PageComponent.qml:40
+#: ../plugins/about//Version.qml:59
+msgid "Ubuntu Image part"
+msgstr "ئۇبۇنتۇنىڭ تەسۋىر قىسمى"
+
+#: ../plugins/about//Version.qml:85
+msgid "Ubuntu build description"
+msgstr "ئۇبۇنتۇنىڭ ھاسىللىنىش چۈشەندۈرۈلۈشى"
+
+#: ../plugins/about//Version.qml:100
+msgid "Device Image part"
+msgstr "ئۈسكۈنە تەسۋىر قىسمى"
+
+#: ../plugins/about//Version.qml:126
+msgid "Device build description"
+msgstr "ئۈسكۈنىنىڭ ھاسىللىنىش چۈشەندۈرۈلۈشى"
+
+#: ../plugins/about//Version.qml:141
+msgid "Customization Image part"
+msgstr "ئۆزلەشتۈرۈلگەن تەسۋىر قىسمى"
+
+#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
+msgid "Storage"
+msgstr "ساقلىغۇچ"
+
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "ئۇبۇنتۇ ئىشلەتكىنى"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr "سىنلار"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr "ئۈن"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr "سۈرەتلەر"
+
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr "باشقا ھۆججەتلەر"
+
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "ئەپلەر ئىشلەتكىنى"
+
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
+msgstr "ھەممە ساقلىغۇچ"
+
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "بىكار بوشلۇق"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr "ئاتى بويىچە"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr "چوڭلۇقى بويىچە"
+
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
+msgid "Software licenses"
+msgstr "يۇمشاق دېتال ئىجازەتنامىسى"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:46
+msgid "About this phone"
+msgstr "بۇ تېلېفون ھەققىدە"
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "تېلېفون نومۇرى"
+
+#: ../plugins/about//PageComponent.qml:107
+msgid "Serial"
+msgstr "ئارقىمۇئارقا"
+
+#: ../plugins/about//PageComponent.qml:133
+msgid "Software:"
+msgstr "يۇمشاق دېتال:"
+
+#: ../plugins/about//PageComponent.qml:138
+msgid "OS"
+msgstr "OS"
+
+#: ../plugins/about//PageComponent.qml:147
+msgid "Last updated"
+msgstr "ئاخىرقى قېتىم يېڭىلانغىنى"
+
+#: ../plugins/about//PageComponent.qml:155
+msgid "Check for updates"
+msgstr "يېڭىلانما  تەكشۈر"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Legal:"
+msgstr "تەكشۈرۈش:"
+
+#: ../plugins/about//PageComponent.qml:177
+msgid "Regulatory info"
+msgstr "نازارەت قىلىش ئۇچۇرى"
+
+#: ../plugins/about//PageComponent.qml:185
+msgid "Developer mode"
+msgstr "ئىجادىيەتچى ھالىتى"
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
+msgid "Developer Mode"
+msgstr "ئىجادىيەتچى ھالىتى"
+
+#: ../plugins/about//DevMode.qml:73
 msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
 msgstr ""
 
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
-msgstr "ئەڭ ئاخىرقى قېتىم  چاقىرىلغان %1"
+#: ../plugins/about//DevMode.qml:98
+msgid "You need a passcode or passphrase set to use Developer Mode."
+msgstr ""
 
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "چاقىر"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
+msgid "Privacy policy"
+msgstr ""
 
-#: ../plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr "SIM"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
+msgid "Report to Canonical:"
+msgstr ""
 
-#: ../plugins/phone//PageComponent.qml:51
-#: ../plugins/phone//CallForwarding.qml:28
-#: ../plugins/phone//CallForwarding.qml:75
-msgid "Call forwarding"
-msgstr "چاقىرىلىشنى يۆتكە"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
+msgid "App crashes and errors"
+msgstr ""
 
-#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
-#: ../plugins/phone//CallWaiting.qml:63
-msgid "Call waiting"
-msgstr "كۈتۈۋاتىدۇ"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
+msgid "Previous error reports"
+msgstr ""
 
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
-#, qt-format
-msgid "%1 Services"
-msgstr "%1 مۇلازىمەتلەر"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
+msgid "Includes info about what an app was doing when it failed."
+msgstr ""
 
-#: ../plugins/phone//CallWaiting.qml:78
+#: ../plugins/cellular//PageComponent.qml:132
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr ""
+
+#: ../plugins/cellular//PageComponent.qml:147
+msgid "Data usage statistics"
+msgstr "سانلىق-مەلۇمات ستاتىستىكىسى"
+
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:66
+#: ../plugins/cellular//Components//NoSim.qml:47
+msgid "Carrier"
+msgstr ""
+
+#: ../plugins/cellular//PageComponent.qml:180
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr ""
+
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr ""
+
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//CellularSingleSim.qml:33
+#: ../plugins/cellular//Components//CellularMultiSim.qml:76
+msgid "Cellular data:"
+msgstr ""
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:38
+#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+msgid "2G only (saves battery)"
+msgstr ""
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:39
+#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+msgid "2G/3G/4G (faster)"
+msgstr ""
+
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:155
+msgid "Data roaming"
+msgstr ""
+
+#: ../plugins/cellular//Components//DefaultSim.qml:29
+msgid "Ask me each time"
+msgstr ""
+
+#: ../plugins/cellular//Components//DefaultSim.qml:34
+msgid "For outgoing calls, use:"
+msgstr ""
+
+#: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
+"You can change the SIM for individual calls, or for contacts in the address "
+"book."
 msgstr ""
 
-#: ../plugins/phone//CallForwarding.qml:90
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
+#: ../plugins/cellular//Components//DefaultSim.qml:55
+msgid "For messages, use:"
 msgstr ""
-"سىز تېلېڧۇننى ئالمىغاندا، تېلېڧون ئالدىراش بولغاندا، تېلېڧون ئېتىك ياكى "
-"سىگنال يوق ھالەتتە باشقا نومۇرغا يۆتكەيدۇ."
 
-#: ../plugins/phone//CallForwarding.qml:100
-msgid "Forward to"
-msgstr "يۆتكەل"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:110
-msgid "Updates"
-msgstr "يېڭىلانمىلار"
-
-#: ../plugins/system-update//PageComponent.qml:51
-msgid "Update System"
-msgstr "سىستېما يېڭىلا"
-
-#: ../plugins/system-update//PageComponent.qml:52
-msgid "The phone needs to restart to install the system update."
+#: ../plugins/background//Components//AddRemove.qml:52
+msgid "No images selected"
 msgstr ""
-"سىستېما يېڭىلانمىلىرىنى ئورنىتىش ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
 
-#: ../plugins/system-update//PageComponent.qml:55
-msgid "Install & Restart"
-msgstr "ئورنات ۋە قايتا قوزغات"
-
-#: ../plugins/system-update//PageComponent.qml:64
-msgid "Not Now"
-msgstr "ھازىر ئەمەس"
-
-#: ../plugins/system-update//PageComponent.qml:70
-msgid "Install"
-msgstr "ئورنات"
-
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "Software is up to date"
-msgstr "يۇمشاق دېتال ئەڭ يېڭى ھالەتتە"
-
-#: ../plugins/system-update//PageComponent.qml:142
-msgid "Please log into your Ubuntu One account."
-msgstr "ئۇبۇنتۇ بىر ھېساباتىڭىزغا كىرىڭ."
-
-#: ../plugins/system-update//PageComponent.qml:157
-msgid "System update has failed."
-msgstr "سىستېما يېڭىلاش مەغلۇپ بولدى."
-
-#: ../plugins/system-update//PageComponent.qml:168
-msgid "System update failed."
-msgstr "سىستېما يېڭىلاش مەغلۇپ بولدى"
-
-#: ../plugins/system-update//PageComponent.qml:199
-msgid "Checking for updates…"
-msgstr "يېڭىلانمىلار بارمۇ-يوق تەكشۈرۈۋاتىدۇ…"
-
-#: ../plugins/system-update//PageComponent.qml:217
+#: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
-msgid "Install %1 updates…"
-msgstr "%1 يېڭىلانمىنى ئورنىتىش…"
+msgid "Remove %1 image"
+msgid_plural "Remove %1 images"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../plugins/system-update//PageComponent.qml:217
-#, qt-format
-msgid "Install %1 updates"
-msgstr "%1 يېڭىلانمىنى ئورنىتىش"
-
-#: ../plugins/system-update//PageComponent.qml:218
-msgid "Pause All"
-msgstr "ھەممىنى ۋاقىتلىق توختات"
-
-#: ../plugins/system-update//PageComponent.qml:286
-msgid "Retry"
-msgstr "قايتا سىنا"
-
-#: ../plugins/system-update//PageComponent.qml:302
-msgid "Download"
-msgstr "چۈشۈرۈش"
-
-#: ../plugins/system-update//PageComponent.qml:302
-msgid "Update"
-msgstr "يېڭىلا"
-
-#: ../plugins/system-update//PageComponent.qml:303
-msgid "Resume"
-msgstr "داۋاملاشتۇر"
-
-#: ../plugins/system-update//PageComponent.qml:304
-msgid "Pause"
-msgstr "ۋاقىتلىق توختا"
-
-#: ../plugins/system-update//PageComponent.qml:363
-msgid "Installing"
-msgstr "ئورنىتىۋاتىدۇ"
-
-#: ../plugins/system-update//PageComponent.qml:396
-msgid "Installed"
-msgstr "ئورنىتىلغان"
-
-#: ../plugins/system-update//PageComponent.qml:420
-msgid "Version: "
-msgstr "نەشرى: "
-
-#: ../plugins/system-update//PageComponent.qml:445
-#: ../plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr "ئاپتوماتىك چۈشۈر"
-
-#: ../plugins/system-update//PageComponent.qml:450
-msgid "On wi-fi"
-msgstr "سىمسىز تور (wi-fi) دا"
-
-#: ../plugins/system-update//PageComponent.qml:452
-msgid "Always"
-msgstr "ھەمىشە"
-
-#: ../plugins/system-update//PageComponent.qml:502
-msgid "Credentials not found"
-msgstr "ئىسپاتنامىلەر تېپىلمىدى"
-
-#: ../plugins/system-update//PageComponent.qml:532
-msgid "Installing update…"
-msgstr "يېڭىلانمىنى ئورنىتىۋاتىدۇ..."
-
-#: ../plugins/system-update//PageComponent.qml:546
-msgid " bytes"
-msgstr " بايت"
-
-#: ../plugins/system-update//PageComponent.qml:549
-msgid " KiB"
-msgstr " كىلوبايت"
-
-#: ../plugins/system-update//PageComponent.qml:552
-msgid " MiB"
-msgstr " مېگابايت"
-
-#: ../plugins/system-update//PageComponent.qml:555
-msgid " GiB"
-msgstr " گىگابايت"
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "يېڭىلانمىنى ئاپتوماتىك چۈشۈر"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "سىمسىز تۇر(wi-fi)نى ئاچقاندا"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "ھەر قانداق سانلىق مەلۇمات باغلىنىشىنى ئاچقاندا"
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "سانلىق -مەلۇماتقا پۇل كېتىشى مۇمكىن."
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:130
-msgid "Brightness"
-msgstr "يورۇقلۇقى"
-
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "ئاپتوماتىك تەڭشىسۇن"
-
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
+#: ../plugins/background//Components//AddRemove.qml:80
+msgid "Add an image…"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:136
-msgid "Sound"
-msgstr "ئاۋاز"
-
-#: ../plugins/sound//PageComponent.qml:75
-msgid "Silent Mode"
-msgstr "جىمىغۇر ھالەت"
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr "قوڭغىراق"
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr "تېلېفونلار:"
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr "قوڭغۇراق ئاۋازى"
-
-#: ../plugins/sound//PageComponent.qml:134
-msgid "Vibrate when ringing"
-msgstr "جىرىڭلىغاندا تىترىسۇن"
-
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Vibrate in Silent Mode"
-msgstr "ئۈنسىز ھالەتتە تىترىسۇن"
-
-#: ../plugins/sound//PageComponent.qml:147
-msgid "Messages:"
-msgstr "ئۇچۇرلار:"
-
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Message received"
-msgstr "ئۇچۇر كەلدى"
-
-#: ../plugins/sound//PageComponent.qml:169
-msgid "Vibrate with message sound"
-msgstr "ئۇچۇر ئاۋازى بىلەن بىرگە تىترىسۇن"
-
-#: ../plugins/sound//PageComponent.qml:182
-msgid "Other sounds:"
-msgstr "باشقا ئۈنلەر:"
-
-#: ../plugins/sound//PageComponent.qml:200
-msgid "Lock sound"
-msgstr "ئۈننى قۇلۇپلا"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "تېلېفون ئۈنسىز ھالەتتە."
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr "توختات"
+#: ../plugins/background//Components//AddRemove.qml:91
+msgid "Remove images…"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
@@ -1471,29 +1574,68 @@ msgstr "شەخسىي"
 msgid "System"
 msgstr "سىستېما"
 
-#: ../wizard/qml/Components//Page.qml:47
-msgid "Back"
-msgstr "كەينى"
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi-Fi"
+msgstr "سىمسىز تور(Wi-Fi)غا باغلان"
 
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "No SIM card"
-msgstr "سىم(SIM) كارتىسى يوقكەن"
+#: ../wizard/qml/Pages//20-wifi.qml:68
+msgid "Available networks"
+msgstr "ئىشلەتكىلى بولىدىغان تورلار"
 
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:59
-msgid "Install a SIM before continuing."
-msgstr "داۋاملاشتۇرۇشتىن ئاۋۋال SIM كارتىسى سېلىڭ."
+#: ../wizard/qml/Pages//30-location.qml:48
+#: ../wizard/qml/Pages//15-passwd.qml:159 ../wizard/qml/Pages//20-wifi.qml:152
+msgid "Continue"
+msgstr "داۋاملاشتۇر"
 
 #: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
 msgid "Skip"
 msgstr "ئۆتكۈزۈۋەت"
 
-#: ../wizard/qml/Pages//30-location.qml:22
-msgid "Phone settings"
-msgstr "تېلېفون تەڭشەكلىرى"
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hello"
+msgstr "سالام"
+
+#: ../wizard/qml/Pages//10-welcome.qml:67
+msgid "Welcome to your Ubuntu phone. Let’s get started."
+msgstr "ئۇبۇنتۇ تېلېفونىغا مەرھابا. قېنى باشلاڭ."
+
+#: ../wizard/qml/Pages//10-welcome.qml:72
+msgid "Select your language"
+msgstr "تىلىڭىزنى تاللاڭ"
+
+#: ../wizard/qml/Pages//10-welcome.qml:89
+msgid "Start"
+msgstr "باشلا"
+
+#: ../wizard/qml/Pages//terms.qml:24
+msgid "Terms & Conditions"
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "Add a SIM card"
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:57
+msgid ""
+"Please insert a SIM card before you continue. Without it, you won’t be able "
+"to make calls or use text messaging."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "All done"
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:39
+msgid "Nice work! Your phone is now ready to use. "
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:48
+msgid "Finish"
+msgstr "تامام"
+
+#: ../wizard/qml/Pages//40-reporting.qml:22
+msgid "Bug Reporting"
+msgstr ""
 
 #: ../wizard/qml/Pages//30-location.qml:39
 msgid ""
@@ -1503,36 +1645,15 @@ msgstr ""
 "تېلېفونىڭىز خاتالىقلارنى Canonical غا ئاپتوماتىك مەلۇم قىلىدىغان قىلىپ "
 "تەڭشەلدى. بۇنى سىستېما تەڭشىكىدە ئۆزگەرتكىلى بولىدۇ."
 
-#: ../wizard/qml/Pages//30-location.qml:41
-msgid ""
-"Your phone is set up to detect your location. This can be disabled in system "
-"settings."
-msgstr ""
-"تېلېفونىڭىز تۇرۇۋاتقان يېرىڭىزنى بايقايدىغان قىلىپ تەڭشەلدى. بۇنى سىستېما "
-"تەڭشىكىدە ئۆزگەرتكىلى بولىدۇ."
-
-#: ../wizard/qml/Pages//30-location.qml:48
-#: ../wizard/qml/Pages//15-passwd.qml:159 ../wizard/qml/Pages//20-wifi.qml:152
-msgid "Continue"
-msgstr "داۋاملاشتۇر"
-
-#: ../wizard/qml/Pages//80-finished.qml:22
-msgid "Setup complete"
-msgstr "ئورنىتىش تامام"
-
-#: ../wizard/qml/Pages//80-finished.qml:39
-msgid ""
-"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
-"the good folks at Canonical."
+#: ../wizard/qml/Pages//30-location.qml:51
+msgid "Use your mobile network and wi-fi to work out where you are."
 msgstr ""
 
-#: ../wizard/qml/Pages//80-finished.qml:41
-msgid "Now you can start using your Ubuntu phone."
-msgstr "ئەمدى ئۇبۇنتۇ تېلېفونىڭىزنى ئىشلەتسىڭىز بولىدۇ."
-
-#: ../wizard/qml/Pages//80-finished.qml:48
-msgid "Finish"
-msgstr "تامام"
+#: ../wizard/qml/Pages//30-location.qml:59
+msgid ""
+"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"conditions</a>."
+msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
@@ -1558,44 +1679,31 @@ msgstr ""
 msgid "Passphrase must be at least four characters long."
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
-msgstr "سالام"
+#: ../wizard/qml/Components//Page.qml:47
+msgid "Back"
+msgstr "كەينى"
 
-#: ../wizard/qml/Pages//10-welcome.qml:67
-msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr "ئۇبۇنتۇ تېلېفونىغا مەرھابا. قېنى باشلاڭ."
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:32
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:78
+msgid "network"
+msgstr "تور"
 
-#: ../wizard/qml/Pages//10-welcome.qml:72
-msgid "Select your language"
-msgstr "تىلىڭىزنى تاللاڭ"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:80
+msgid "wireless"
+msgstr "سىمسىز"
 
-#: ../wizard/qml/Pages//10-welcome.qml:89
-msgid "Start"
-msgstr "باشلا"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:82
+msgid "wifi"
+msgstr "سىمسىز تور(wifi)"
 
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "سىمسىز تور(Wi-Fi)غا باغلان"
-
-#: ../wizard/qml/Pages//20-wifi.qml:68
-msgid "Available networks"
-msgstr "ئىشلەتكىلى بولىدىغان تورلار"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:4
-msgid "language"
-msgstr "تىل"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:6
-msgid "lang"
-msgstr "تىل"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:8
-msgid "i18n"
-msgstr "i18n"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:84
+msgid "wi-fi"
+msgstr "سىمسىز تور(wi-fi)"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
@@ -1626,78 +1734,6 @@ msgstr "i18n"
 msgid "settings"
 msgstr "تەڭشەكلەر"
 
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:14
-msgid "security"
-msgstr "بىخەتەرلىك"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:16
-msgid "privacy"
-msgstr "شەخسىيەت"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:20
-msgid "Flight Mode"
-msgstr "ئايروپىلان ھالىتى"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:22
-msgid "flight"
-msgstr "ئۇچۇش"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:24
-msgid "plane"
-msgstr "ئايروپىلان"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:26
-msgid "offline"
-msgstr "توردا يوق"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:30
-msgid "cellular"
-msgstr "كۆچمە تۇر"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:78
-msgid "network"
-msgstr "تور"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:34
-msgid "mobile"
-msgstr "يانفون"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:36
-msgid "gsm"
-msgstr "gsm"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:42
-msgid "bluetooth"
-msgstr "كۆكچىش"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:48
-msgid "about"
-msgstr "ھەققىدە"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:50
-msgid "device"
-msgstr "ئۈسكۈنە"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:52
-msgid "info"
-msgstr "ئۇچۇر"
-
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:56
 msgid "time"
@@ -1713,50 +1749,15 @@ msgstr "چېسلا"
 msgid "timezone"
 msgstr "ۋاقىت رايونى"
 
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:66
-msgid "reset"
-msgstr "ئەسلىگە قايتۇر"
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:120
+msgid "Updates available"
+msgstr "ئىشلەتكىلى بولىدىغان يېڭىلانمىلار بار"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:72
-msgid "battery"
-msgstr "توكدان"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:74
-msgid "power"
-msgstr "توك مەنبەسى"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:80
-msgid "wireless"
-msgstr "سىمسىز"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:82
-msgid "wifi"
-msgstr "سىمسىز تور(wifi)"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:84
-msgid "wi-fi"
-msgstr "سىمسىز تور(wi-fi)"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:90
-msgid "appearance"
-msgstr "كۆرۈنۈش"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:92
-msgid "background"
-msgstr "تەگلىك"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:94
-msgid "wallpaper"
-msgstr "تام قەغىزى"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:112
+msgid "system"
+msgstr "سىستېما"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
@@ -1765,75 +1766,35 @@ msgstr "تام قەغىزى"
 msgid "software"
 msgstr "يۇمشاق دېتال"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:100
-msgid "notifications"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:106
-msgid "phone"
-msgstr "تېلېفون"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:112
-msgid "system"
-msgstr "سىستېما"
-
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:116
 msgid "update"
 msgstr "يېڭىلا"
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:120
-msgid "Updates available"
-msgstr "ئىشلەتكىلى بولىدىغان يېڭىلانمىلار بار"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:122
-msgid "Example"
-msgstr "مىساللار"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:124
-msgid "example"
-msgstr "مىساللار"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:126
-msgid "test"
-msgstr "سىناق"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:128
-msgid "sample"
-msgstr "ئۈلگە"
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:132
-msgid "brightness"
-msgstr "يورۇقلۇقى"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:138
 msgid "sound"
 msgstr "ئۈن"
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:142
-msgid "Accessibility"
-msgstr "ياردەم ئىقتىدارى"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:14
+msgid "security"
+msgstr "بىخەتەرلىك"
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:144
-msgid "accessibility"
-msgstr "قوشۇمچە ئىقتىدارى"
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:16
+msgid "privacy"
+msgstr "شەخسىيەت"
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:146
-msgid "a11y"
-msgstr "a11y"
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:66
+msgid "reset"
+msgstr "ئەسلىگە قايتۇر"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:106
+msgid "phone"
+msgstr "تېلېفون"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:150
@@ -1860,6 +1821,178 @@ msgstr "قۇلۇپلا"
 msgid "screen"
 msgstr "ئېكران"
 
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:100
+msgid "notifications"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:4
+msgid "language"
+msgstr "تىل"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:6
+msgid "lang"
+msgstr "تىل"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:8
+msgid "i18n"
+msgstr "i18n"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:20
+msgid "Flight Mode"
+msgstr "ئايروپىلان ھالىتى"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:22
+msgid "flight"
+msgstr "ئۇچۇش"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:24
+msgid "plane"
+msgstr "ئايروپىلان"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:26
+msgid "offline"
+msgstr "توردا يوق"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:122
+msgid "Example"
+msgstr "مىساللار"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:124
+msgid "example"
+msgstr "مىساللار"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:126
+msgid "test"
+msgstr "سىناق"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:128
+msgid "sample"
+msgstr "ئۈلگە"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:30
+msgid "cellular"
+msgstr "كۆچمە تۇر"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:34
+msgid "mobile"
+msgstr "يانفون"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:36
+msgid "gsm"
+msgstr "gsm"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:132
+msgid "brightness"
+msgstr "يورۇقلۇقى"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:42
+msgid "bluetooth"
+msgstr "كۆكچىش"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:72
+msgid "battery"
+msgstr "توكدان"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:74
+msgid "power"
+msgstr "توك مەنبەسى"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:90
+msgid "appearance"
+msgstr "كۆرۈنۈش"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:92
+msgid "background"
+msgstr "تەگلىك"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:94
+msgid "wallpaper"
+msgstr "تام قەغىزى"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:142
+msgid "Accessibility"
+msgstr "ياردەم ئىقتىدارى"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:144
+msgid "accessibility"
+msgstr "قوشۇمچە ئىقتىدارى"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:146
+msgid "a11y"
+msgstr "a11y"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:48
+msgid "about"
+msgstr "ھەققىدە"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:50
+msgid "device"
+msgstr "ئۈسكۈنە"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:52
+msgid "info"
+msgstr "ئۇچۇر"
+
+#: ../plugins/system-update//system_update.cpp:92
+msgid "Can't cancel current request (can't contact service)"
+msgstr ""
+
+#: ../plugins/system-update//system_update.cpp:98
+msgid "Can't pause current request (can't contact service)"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:251
+msgid "Incorrect passcode. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:253
+msgid "Incorrect passphrase. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:256
+msgid "Could not set security mode"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:281
+msgid "Could not set security display hint"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:294
+msgid "Authentication token manipulation error"
+msgstr ""
+
+#: ../plugins/about//click.cpp:133
+msgid "Unknown title"
+msgstr ""
+
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
 msgstr ""
@@ -1867,3 +2000,57 @@ msgstr ""
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr ""
+
+#~ msgid "Change passcode"
+#~ msgstr "ئىم ئۆزگەرت"
+
+#~ msgid "Change passphrase"
+#~ msgstr "ئىم جۈملىسى ئۆزگەرت"
+
+#~ msgid "Security:"
+#~ msgstr "بىخەتەرلىك:"
+
+#~ msgid "Privacy:"
+#~ msgstr "شەخسىيەت:"
+
+#~ msgid "System update has failed."
+#~ msgstr "سىستېما يېڭىلاش مەغلۇپ بولدى."
+
+#~ msgid "System update failed."
+#~ msgstr "سىستېما يېڭىلاش مەغلۇپ بولدى"
+
+#~ msgid "Please log into your Ubuntu One account."
+#~ msgstr "ئۇبۇنتۇ بىر ھېساباتىڭىزغا كىرىڭ."
+
+#~ msgid "Credentials not found"
+#~ msgstr "ئىسپاتنامىلەر تېپىلمىدى"
+
+#~ msgid "Phone settings"
+#~ msgstr "تېلېفون تەڭشەكلىرى"
+
+#~ msgid "No SIM card"
+#~ msgstr "سىم(SIM) كارتىسى يوقكەن"
+
+#, qt-format
+#~ msgid "Install %1 updates"
+#~ msgstr "%1 يېڭىلانمىنى ئورنىتىش"
+
+#, qt-format
+#~ msgid "Install %1 updates…"
+#~ msgstr "%1 يېڭىلانمىنى ئورنىتىش…"
+
+#~ msgid "Now you can start using your Ubuntu phone."
+#~ msgstr "ئەمدى ئۇبۇنتۇ تېلېفونىڭىزنى ئىشلەتسىڭىز بولىدۇ."
+
+#~ msgid "Setup complete"
+#~ msgstr "ئورنىتىش تامام"
+
+#~ msgid "Install a SIM before continuing."
+#~ msgstr "داۋاملاشتۇرۇشتىن ئاۋۋال SIM كارتىسى سېلىڭ."
+
+#~ msgid ""
+#~ "Your phone is set up to detect your location. This can be disabled in system "
+#~ "settings."
+#~ msgstr ""
+#~ "تېلېفونىڭىز تۇرۇۋاتقان يېرىڭىزنى بايقايدىغان قىلىپ تەڭشەلدى. بۇنى سىستېما "
+#~ "تەڭشىكىدە ئۆزگەرتكىلى بولىدۇ."
