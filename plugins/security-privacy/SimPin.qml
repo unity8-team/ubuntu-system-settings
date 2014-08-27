@@ -26,24 +26,46 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
 import SystemSettings 1.0
 import MeeGo.QOfono 0.2
+import "sims.js" as Sims
 
 
 ItemPage {
-    id: page
+    id: root
     title: i18n.tr("SIM PIN")
+
+    property var modemsSorted: manager.modems.slice(0).sort()
+    property var sims
+    property var simsLoaded: 0
+
+    onSimsChanged: {
+        console.warn("SIMS CHANGED: " + sims[0].title);
+    }
+
+    property var sim
+    onSimChanged: {
+        console.warn("onSimChanged: " + sim);
+    }
 
     OfonoManager {
         id: manager
+        Component.onCompleted: {
+            // create ofono bindings for all modem paths
+            var component = Qt.createComponent("Ofono.qml");
+            modemsSorted.forEach(function (path) {
+                console.warn("PATH: " + path);
+                var sim = component.createObject(root, {
+                    path: path
+                });
+                if (sim === null) {
+                    console.warn('failed to create sim object');
+                } else {
+                    Sims.add(sim);
+                }
+                console.warn("KEN: " + sim.simMng.pinRequired);
+            });
+            root.sims = Sims.getAll();
+        }
     }
-
-    OfonoSimManager {
-        id: sim
-        modemPath: manager.modems[0]
-    }
-
-    property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(sim.pinRetries[OfonoSimManager.SimPin])
-    property int simMin: sim.minimumPinLength(OfonoSimManager.SimPin)
-    property int simMax: sim.maximumPinLength(OfonoSimManager.SimPin)
 
     Component {
         id: dialogComponent
@@ -51,6 +73,10 @@ ItemPage {
         Dialog {
             id: changePinDialog
             title: i18n.tr("Change SIM PIN")
+
+            property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(sim.pinRetries[OfonoSimManager.SimPin])
+            property int simMin: sim.minimumPinLength(OfonoSimManager.SimPin)
+            property int simMax: sim.maximumPinLength(OfonoSimManager.SimPin)
 
             // This is a bit hacky, but the contents of this dialog get so tall
             // that on a mako device, they don't fit with the OSK also visible.
@@ -178,6 +204,10 @@ ItemPage {
             objectName: "lockDialogComponent"
             title: i18n.tr("Enter SIM PIN")
 
+            property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(sim.pinRetries[OfonoSimManager.SimPin])
+            property int simMin: sim.minimumPinLength(OfonoSimManager.SimPin)
+            property int simMax: sim.maximumPinLength(OfonoSimManager.SimPin)
+
             // This is a bit hacky, but the contents of this dialog get so tall
             // that on a mako device, they don't fit with the OSK also visible.
             // So we scrunch up spacing.
@@ -275,28 +305,46 @@ ItemPage {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        ListItem.Standard {
-            text: i18n.tr("SIM PIN")
-            control: Switch {
-                id: simPinSwitch
-                objectName: "simPinSwitch"
-                checked: sim.lockedPins.length > 0
-                onClicked: {
-                    PopupUtils.open(lockDialogComponent);
+        Repeater {
+            model: manager.modems.length
+            Column {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+
+                ListItem.Standard {
+                    text: modelData
+                }
+
+                ListItem.Standard {
+                    text: i18n.tr("SIM PIN (%1)").arg(sims[index].title)
+                    control: Switch {
+                        id: simPinSwitch
+                        objectName: "simPinSwitch"
+                        checked: sims[index].simMng.lockedPins.length > 0
+                        onClicked: {
+                            sim = sims[index].simMng;
+                            PopupUtils.open(lockDialogComponent);
+                        }
+                    }
+                }
+
+                ListItem.SingleControl {
+                    id: changeControl
+                    visible: sims[index].simMng.lockedPins.length > 0
+                    control: Button {
+                        enabled: parent.visible
+                        text: i18n.tr("Change PIN…")
+                        width: parent.width - units.gu(4)
+                        onClicked: {
+                            sim = sims[index].simMng;
+                            PopupUtils.open(dialogComponent);
+                        }
+                    }
+                    showDivider: false
                 }
             }
-        }
-
-        ListItem.SingleControl {
-            id: changeControl
-            visible: sim.lockedPins.length > 0
-            control: Button {
-                enabled: parent.visible
-                text: i18n.tr("Change PIN…")
-                width: parent.width - units.gu(4)
-                onClicked: PopupUtils.open(dialogComponent)
-            }
-            showDivider: false
         }
 
         ListItem.Caption {
