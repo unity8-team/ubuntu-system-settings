@@ -11,7 +11,7 @@ set(QML_SOURCES
     PageComponent.qml
     Hotspot.qml
     HotspotSetup.qml
-    PageComponent.qml
+    sims.js
 )
 
 

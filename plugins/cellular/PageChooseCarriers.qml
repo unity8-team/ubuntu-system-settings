@@ -27,8 +27,7 @@ ItemPage {
     title: i18n.tr("Carriers")
     objectName: "chooseCarriersPage"
 
-    property var sim1
-    property var sim2
+    property var sims
 
     Flickable {
         anchors.fill: parent
@@ -41,33 +40,33 @@ ItemPage {
             anchors.right: parent.right
 
             ListItem.Standard {
-                text: sim1.title
+                text: sims[0].title
             }
 
             ListItem.SingleValue {
                 objectName: "chooseCarrierSim1"
-                value: sim1.netReg.name ? sim1.netReg.name : i18n.tr("N/A")
+                value: sims[0].netReg.name ? sims[0].netReg.name : i18n.tr("N/A")
                 progression: true
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        netReg: sim1.netReg,
-                        title: sim1.title
+                        netReg: sims[0].netReg,
+                        title: sims[0].title
                     })
                 }
             }
 
             ListItem.Standard {
-                text: sim2.title
+                text: sims[1].title
             }
 
             ListItem.SingleValue {
                 objectName: "chooseCarrierSim2"
-                value: sim2.netReg.name ? sim2.netReg.name : i18n.tr("N/A")
+                value: sims[1].netReg.name ? sims[1].netReg.name : i18n.tr("N/A")
                 progression: true
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        netReg: sim2.netReg,
-                        title: sim2.title
+                        netReg: sims[1].netReg,
+                        title: sims[1].title
                     })
                 }
             }

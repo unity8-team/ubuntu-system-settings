@@ -1,7 +1,10 @@
 file(GLOB CPPFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-                   "${CMAKE_SOURCE_DIR}/src/*.cpp")
+                   "${CMAKE_SOURCE_DIR}/plugins/*/*.cpp"
+                   "${CMAKE_SOURCE_DIR}/src/*.cpp"
+                   "${CMAKE_SOURCE_DIR}/wizard/*.cpp")
 file(GLOB QMLFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                    "${CMAKE_SOURCE_DIR}/plugins/*/*.qml"
+                   "${CMAKE_SOURCE_DIR}/plugins/*/*/*.qml"
                    "${CMAKE_SOURCE_DIR}/src/qml/*.qml"
                    "${CMAKE_SOURCE_DIR}/wizard/qml/*/*.qml")
 file(GLOB SETTINGSFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"

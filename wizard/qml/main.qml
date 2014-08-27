@@ -33,6 +33,8 @@ Item {
     property int passwordMethod: UbuntuSecurityPrivacyPanel.Swipe
     property string password: ""
 
+    signal updateLanguage()
+
     Component.onCompleted: {
         Theme.name = "Ubuntu.Components.Themes.SuruGradient"
         i18n.domain = "ubuntu-system-settings"
@@ -96,7 +98,8 @@ Item {
             }
 
             function prev() {
-                pageList.prev() // to update pageList.index
+                if (pageList.index >= pageStack.depth - 1)
+                    pageList.prev() // update pageList.index, but not for extra pages
                 pop()
             }
 

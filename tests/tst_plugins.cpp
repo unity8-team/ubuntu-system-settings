@@ -163,5 +163,5 @@ void PluginsTest::testResetInPlugin()
     phone->reset();
 }
 
-QTEST_MAIN(PluginsTest);
+QTEST_MAIN(PluginsTest)
 #include "tst_plugins.moc"
