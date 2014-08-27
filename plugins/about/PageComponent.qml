@@ -55,6 +55,10 @@ ItemPage {
         modemPath: manager.modems[0]
     }
 
+    NetworkAbout {
+        id: network
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -116,6 +120,12 @@ ItemPage {
                 text: "IMEI"
                 value: imeiNumber
                 visible: imeiNumber
+            }
+
+            ListItem.SingleValue {
+                text: "Wifi address"
+                value: network.hostAddresses[0]
+                visible: network.hostAddresses.length > 0
             }
 
             ListItem.Divider {}
