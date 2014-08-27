@@ -191,23 +191,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', RDO_IFACE)), ])
 
-    def mock_sim_manager(self, modem, properties=None):
-        if not properties:
-            properties = {
-                'SubscriberNumbers': ['123456', '234567']
-            }
-        modem.AddProperties(SIM_IFACE, properties)
-        modem.AddProperty(SIM_IFACE, 'Present', True)
-        modem.AddMethods(
-            SIM_IFACE,
-            [('GetProperties', '', 'a{sv}',
-                'ret = self.GetAll("%s")' % SIM_IFACE),
-                ('SetProperty', 'sv', '',
-                 'self.Set("IFACE", args[0], args[1]); '
-                 'self.EmitSignal("IFACE",\
-                 "PropertyChanged", "sv", [args[0], args[1]])'
-                    .replace('IFACE', SIM_IFACE)), ])
-
     def mock_call_forwarding(self, modem):
         modem.AddProperty(
             CALL_FWD_IFACE, 'VoiceUnconditional', '')
@@ -241,7 +224,6 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.mock_carriers('ril_0')
         self.mock_radio_settings(self.modem_0)
         self.mock_connection_manager(self.modem_0)
-        self.mock_sim_manager(self.modem_0)
         self.mock_call_forwarding(self.modem_0)
         self.mock_call_settings(self.modem_0)
 
@@ -276,9 +258,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.mock_call_forwarding(self.modem_1)
         self.mock_call_settings(self.modem_1)
 
-        self.mock_sim_manager(self.modem_1, {
-            'SubscriberNumbers': ['08123', '938762783']
-        })
+        self.modem_1.Set(
+            SIM_IFACE,
+            'SubscriberNumbers', ['08123', '938762783']
+        )
 
     @classmethod
     def setUpClass(cls):
@@ -679,7 +662,7 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         super(ResetBaseTestCase, self).tearDown()
 
 
-class SecurityBaseTestCase(UbuntuSystemSettingsTestCase):
+class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     """ Base class for security and privacy settings tests"""
 
     def setUp(self):
