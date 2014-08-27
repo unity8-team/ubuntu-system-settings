@@ -27,71 +27,49 @@ Item {
 
     signal clicked
 
-    property bool highlighted: false
-
-    height: col.height
+    height: button.height
 
     objectName: "entryComponent-" + model.item.baseName
 
-    Column {
-        z: 1
-        id: col
+    AbstractButton {
+        id: button
         anchors.left: parent.left
         anchors.right: parent.right
+        onClicked: root.clicked()
 
-        StatusIcon {
-            id: icon
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: units.gu(4)
-            source: model.icon
-        }
+        height: col.height
 
-        Label {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: i18n.dtr(model.item.translations, model.displayName)
-            width: col.width
-            horizontalAlignment: Text.AlignHCenter
-            fontSize: "small"
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        Column {
+            id: col
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            StatusIcon {
+                id: icon
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: units.gu(4)
+                source: model.icon
+            }
+
+            Label {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: i18n.dtr(model.item.translations, model.displayName)
+                width: col.width
+                horizontalAlignment: Text.AlignHCenter
+                fontSize: "small"
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            }
         }
     }
 
     UbuntuShape {
-        id: hightlight
-        anchors {
-            fill: col
+        z: -1
+        visible: button.pressed
+        anchors{
+            fill: root
             margins: -units.gu(0.25)
         }
-        opacity: 0.15
         color: UbuntuColors.darkGrey
-        visible: highlighted
-    }
-
-    Timer {
-        id: deHightlightTimer
-        onTriggered: root.highlighted = false;
-     }
-
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-        onClicked: {
-            root.highlighted = true;
-            deHightlightTimer.stop();
-            root.clicked();
-        }
-        onPressed: {
-            root.highlighted = true;
-            deHightlightTimer.start();
-        }
-        onReleased: {
-            root.highlighted = false;
-        }
-        onExited: {
-            root.highlighted = false;
-        }
-        onPositionChanged: {
-            deHightlightTimer.restart();
-        }
+        opacity: 0.15
     }
 }
