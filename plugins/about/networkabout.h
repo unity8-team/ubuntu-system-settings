@@ -24,23 +24,34 @@
 #include <QObject>
 #include <QStringList>
 #include <QtNetwork>
+#include <QtBluetooth/QBluetoothAddress>
+#include <QtBluetooth/QBluetoothLocalDevice>
+
 
 class NetworkAbout : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY( QStringList hostAddresses
-                READ hostAddresses
-                NOTIFY hostAddressesChanged )
+    Q_PROPERTY( QStringList networkMacAddresses
+                READ networkMacAddresses
+                NOTIFY networkMacAddressesChanged )
+    Q_PROPERTY( QString bluetoothMacAddress
+                READ bluetoothMacAddress
+                NOTIFY bluetoothMacAddressChanged )
 
 public:
     explicit NetworkAbout (QObject *parent = 0);
-    QStringList hostAddresses();
+    QStringList networkMacAddresses();
+    QString bluetoothMacAddress();
 
 Q_SIGNALS:
-    void hostAddressesChanged(QStringList addresses);
+    void networkMacAddressesChanged(QStringList addresses);
+    void bluetoothMacAddressChanged(QString addresses);
 
 private:
-    QStringList m_hostAddresses;
+    QStringList m_networkMacAddresses;
+    QString m_bluetoothMacAddress;
+    void setupNetworkMacAddresses();
+    void setupBluetoothMacAddress();
 };
 
 #endif // NETWORKABOUT_H

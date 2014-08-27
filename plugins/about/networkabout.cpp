@@ -24,22 +24,54 @@
 NetworkAbout::NetworkAbout(QObject *parent)
     : QObject(parent)
 {
-    QList<QHostAddress> addrs = QNetworkInterface::allAddresses();
-    int count = addrs.count();
+
+    setupNetworkMacAddresses();
+    setupBluetoothMacAddress();
+}
+
+void NetworkAbout::setupNetworkMacAddresses()
+{
+    QList<QNetworkInterface> ifaces = QNetworkInterface::allInterfaces();
+    int count = ifaces.count();
 
     QString str = QString();
     for(int i=0;i<count;i++)
     {
-        QHostAddress addr = addrs.at(i);
-        str = addr.toString();
-        if (addr.protocol() == QAbstractSocket::IPv4Protocol && addr != QHostAddress(QHostAddress::LocalHost)) {
-            m_hostAddresses << str;
+        QNetworkInterface iface = ifaces.at(i);
+        str = iface.hardwareAddress();
+        // add interfaces that are not loopback
+        if (!iface.flags().testFlag(QNetworkInterface::IsLoopBack)) {
+            m_networkMacAddresses << str;
         }
     }
+}
+
+void NetworkAbout::setupBluetoothMacAddress()
+{
+    QBluetoothLocalDevice localDevice;
+    if (localDevice.isValid()) {
+        qWarning() << "bt device valid";
+        qWarning() << localDevice.address().toString();
+        m_bluetoothMacAddress = localDevice.address().toString();
+    } else {
+        qWarning() << "bt device invalid";
+
+    }
+    qWarning() << "number of bt devices:" << QBluetoothLocalDevice::allDevices().count();
+    // if (!QBluetoothLocalDevice::allDevices().count()) {
+    //     qWarning() << "no bt devices";
+    //     qWarning() << localDevice.address().toString();
+    //     return;
+    // }
 
 }
 
-QStringList NetworkAbout::hostAddresses()
+QStringList NetworkAbout::networkMacAddresses()
 {
-    return m_hostAddresses;
+    return m_networkMacAddresses;
+}
+
+QString NetworkAbout::bluetoothMacAddress()
+{
+    return m_bluetoothMacAddress;
 }

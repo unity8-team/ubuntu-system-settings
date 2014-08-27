@@ -123,9 +123,15 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: "Wifi address"
-                value: network.hostAddresses[0]
-                visible: network.hostAddresses.length > 0
+                text: "Wi-Fi address"
+                value: network.networkMacAddresses[0]
+                visible: network.networkMacAddresses.length > 0
+            }
+
+            ListItem.SingleValue {
+                text: "Bluetooth address"
+                value: network.bluetoothMacAddress
+                visible: network.bluetoothMacAddress
             }
 
             ListItem.Divider {}
