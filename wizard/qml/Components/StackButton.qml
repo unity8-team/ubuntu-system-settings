@@ -46,13 +46,15 @@ Item {
         anchors.right: parent.right
         visible: hasArrow
         text: {
-            var str = ""
-            if (leftArrow)
-                str += "〈  "
-            str += stackButton.text
-            if (rightArrow)
-                str += "  〉"
-            return str
+            if (leftArrow) {
+                // Translators: This is the arrow for "Back" buttons
+                return i18n.tr("〈  %1".arg(stackButton.text))
+            } else if (rightArrow) {
+                // Translators: This is the arrow for "Forward" buttons
+                return i18n.tr("%1  〉".arg(stackButton.text))
+            } else {
+                return stackButton.text
+            }
         }
         horizontalAlignment: leftArrow ? Text.AlignLeft : Text.AlignRight
 
