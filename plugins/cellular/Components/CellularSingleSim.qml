@@ -20,7 +20,6 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import "data-helpers.js" as DataHelpers
 
 Column {
     height: childrenRect.height
@@ -32,15 +31,35 @@ Column {
         objectName: "technologyPreferenceSelector"
         text: i18n.tr("Cellular data:")
         expanded: true
+
+        // an empty string is not a valid preference, which means
+        // we disregard the interace and disable the selector
         enabled: sim.radioSettings.technologyPreference !== ""
-        model: [
-            i18n.tr("Off"),
-            i18n.tr("2G only (saves battery)"),
-            i18n.tr("2G/3G/4G (faster)")]
+
+        // model for this selector is modemTechnologies, with
+        // 'off' prepended
+        model: {
+            var m = sim.radioSettings.modemTechnologies.slice(0);
+            m.unshift("off");
+            return m;
+        }
+
+        delegate: OptionSelectorDelegate {
+            text: {
+                return {
+                    'off': i18n.tr("Off"),
+                    'gsm': i18n.tr("2G only (saves battery)"),
+                    'umts': i18n.tr("2G/3G (faster)"),
+                    'lte': i18n.tr("2G/3G/4G (faster)")
+                }[modelData]
+            }
+        }
         selectedIndex: {
             if (sim.connMan.powered) {
-                return DataHelpers.singleSimKeyToIndex(
-                    sim.radioSettings.technologyPreference);
+                // will return -1 if empty, which will select nothing.
+                // Makes sense, since the SIM is online, but the
+                // radioSettings interface is not ready yet (sim locked?)
+                return model.indexOf(sim.radioSettings.technologyPreference);
             } else {
                 return 0;
             }
@@ -63,42 +82,33 @@ Column {
         target: sim.connMan
         onPoweredChanged: {
             if (powered) {
-                selector.selectedIndex = DataHelpers.singleSimKeyToIndex(
-                    sim.radioSettings.technologyPreference);
+                // restore the tech preference
+                selector.selectedIndex = selector
+                    .model.indexOf(sim.radioSettings.technologyPreference)
             } else {
                 selector.selectedIndex = 0;
             }
         }
     }
 
-    Connections {
-        target: sim.radioSettings
-        onTechnologyPreferenceChanged: {
-            var selIndex = selector.selectedIndex;
-            if (selIndex > 0) {
-                sim.radioSettings.technologyPreference =
-                    DataHelpers.singleSimIndexToKey(selIndex);
-            }
-        }
-    }
-
+    // binds the SIM online state to the UI
     Binding {
         target: sim.connMan
         property: "powered"
         value: selector.selectedIndex !== 0
     }
 
+    // binds the tech preference to the UI
     Binding {
         target: sim.radioSettings
         property: "technologyPreference"
         value: {
             var i = selector.selectedIndex;
-            if (i === 1) {
-                return 'gsm';
-            } else if (i === 2) {
-                return 'umts';
+            if (i > 0) {
+                return selector.model[i]
             } else {
-                return sim.radioSettings.technologyPreference
+                // if the modem is off, disregard the selector
+                return sim.radioSettings.technologyPreference;
             }
         }
     }

@@ -68,6 +68,9 @@ LanguageLocale::LanguageLocale(const QString &name) :
     locale.getDisplayName(locale, unicodeString);
     unicodeString.toUTF8String(string);
     displayName = string.c_str();
+    /* workaround iso-codes casing being inconsistant */
+    if (displayName.length() > 0)
+        displayName[0] = displayName[0].toUpper();
 }
 
 bool LanguageLocale::operator<(const LanguageLocale &l) const

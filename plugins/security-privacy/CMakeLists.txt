@@ -22,8 +22,11 @@ set(QML_SOURCES
     Dash.qml
     Location.qml
     LockSecurity.qml
+    Ofono.qml
     PageComponent.qml
     PhoneLocking.qml
+    SimPin.qml
+    sims.js
 )
 
 set(PANEL_SOURCES
