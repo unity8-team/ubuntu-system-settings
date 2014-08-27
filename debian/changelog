@@ -1,3 +1,23 @@
+ubuntu-system-settings (0.3+14.10.20140827.3-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * SIM PIN lock implementation
+
+  [ jonas-drange ]
+  * [main panel] add visual feedback on press
+  * [cellular] uses modemtechnologies property from ofono to populate
+    technology preference options (LP: #1346790)
+
+  [ Sebastien Bacher ]
+  * [language] workaround inconsistent languages casing (LP: #1362123)
+  * [background] Display the default background selected (LP: #1349329)
+  * [storage] display translated names (LP: #1360207)
+  * [updates] don't display animations when clicking on update rows (LP:
+    #1360364)
+  * [background] don't use an icon in the headerbar (LP: #1362122)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 27 Aug 2014 22:19:17 +0000
+
 ubuntu-system-settings (0.3+14.10.20140827.1-0ubuntu1) utopic; urgency=low
 
   [ Mathieu Trudel-Lapierre ]
