@@ -41,6 +41,7 @@ ItemPage {
     property bool lockOnSuspend
     property var modemsSorted: manager.modems.slice(0).sort()
     property var sims
+    property int simsPresent: 0
     property int simsLoaded: 0
     property int simsLocked: {
         var t = 0;
@@ -81,6 +82,7 @@ ItemPage {
                     Sims.add(sim);
             });
             root.sims = Sims.getAll();
+            root.simsPresent = Sims.getPresentCount();
         }
     }
 
@@ -162,7 +164,7 @@ ItemPage {
                     else
                         return i18n.tr("Off");
                 }
-                visible: simsLoaded > 0
+                visible: simsPresent > 0
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"), { sims: sims })
             }

@@ -43,7 +43,9 @@ ItemPage {
             id: changePinDialog
             title: i18n.tr("Change SIM PIN")
 
-            property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(curSim.pinRetries[OfonoSimManager.SimPin])
+            property string errorText: i18n.tr(
+                    "Incorrect PIN. %1 attempts remaining."
+                    ).arg(curSim.pinRetries[OfonoSimManager.SimPin] || 3)
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
             property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
 
@@ -60,7 +62,7 @@ ItemPage {
                 target: curSim
                 onChangePinComplete: {
                     console.warn("onChangePinComplete: " + error);
-                    if (error !== OfonoSimManager.NoError) {
+                    if (error === OfonoSimManager.FailedError) {
                         incorrect.visible = true;
                         changePinDialog.enabled = true;
                         currentInput.forceActiveFocus();
@@ -86,7 +88,9 @@ ItemPage {
 
             Label {
                 id: retries
-                text: i18n.tr("%1 attempts remaining").arg(curSim.pinRetries[OfonoSimManager.SimPin])
+                text: i18n.tr("%1 attempts remaining").arg(
+                          curSim.pinRetries[OfonoSimManager.SimPin] || 3)
+                visible: !incorrect.visible
             }
 
             Label {
@@ -173,7 +177,10 @@ ItemPage {
             objectName: "lockDialogComponent"
             title: i18n.tr("Enter SIM PIN")
 
-            property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(curSim.pinRetries[OfonoSimManager.SimPin])
+            property string errorText: i18n.tr(
+                    "Incorrect PIN. %1 attempts remaining."
+                    ).arg(curSim.pinRetries[OfonoSimManager.SimPin] || 3)
+
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
             property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
 
@@ -190,7 +197,7 @@ ItemPage {
                 target: curSim
                 onLockPinComplete: {
                     console.warn("onLockPinComplete: " + error);
-                    if (error !== OfonoSimManager.NoError) {
+                    if (error === OfonoSimManager.FailedError) {
                         incorrect.visible = true;
                         lockPinDialog.enabled = true;
                         prevInput.forceActiveFocus();
@@ -203,7 +210,7 @@ ItemPage {
                 }
                 onUnlockPinComplete: {
                     console.warn("onUnlockPinComplete: " + error);
-                    if (error !== OfonoSimManager.NoError) {
+                    if (error === OfonoSimManager.FailedError) {
                         incorrect.visible = true;
                         lockPinDialog.enabled = true;
                         prevInput.forceActiveFocus();
@@ -229,7 +236,9 @@ ItemPage {
             }
 
             Label {
-                text: i18n.tr("%1 attempts remaining").arg(curSim.pinRetries[OfonoSimManager.SimPin])
+                text: i18n.tr("%1 attempts remaining").arg(
+                          curSim.pinRetries[OfonoSimManager.SimPin] || 3)
+                visible: !incorrect.visible
             }
 
             Label {
@@ -280,6 +289,15 @@ ItemPage {
                 anchors {
                     left: parent.left
                     right: parent.right
+                }
+
+                Connections {
+                    target: sims[index].simMng
+                    onLockedPinsChanged: {
+                        console.warn("onLockedPinsChanged (Connections): " + sims[index].simMng.lockedPins);
+                        simPinSwitch.checked =
+                                sims[index].simMng.lockedPins.length > 0;
+                    }
                 }
 
                 ListItem.Standard {
