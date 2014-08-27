@@ -256,7 +256,13 @@ ItemPage {
                     Layout.fillWidth: true
                     color: UbuntuColors.lightGrey
                     text: i18n.tr("Cancel")
-                    onClicked: PopupUtils.close(lockPinDialog)
+                    onClicked: {
+                        if (curSim.lockedPins.length < 1)
+                            caller.checked = false;
+                        else
+                            caller.checked = true;
+                        PopupUtils.close(lockPinDialog);
+                    }
                 }
 
                 Button {
@@ -312,7 +318,7 @@ ItemPage {
                         checked: sims[index].simMng.lockedPins.length > 0
                         onClicked: {
                             curSim = sims[index].simMng;
-                            PopupUtils.open(lockDialogComponent);
+                            PopupUtils.open(lockDialogComponent, simPinSwitch);
                         }
                     }
                     showDivider: index < (sims.length - 1)  && simPinSwitch.checked
