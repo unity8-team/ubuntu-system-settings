@@ -23,8 +23,8 @@
 #include <ubuntu/download_manager/download_struct.h>
 #include <ubuntu/download_manager/error.h>
 #include <QProcessEnvironment>
-#include <QDBusInterface>
-#include <QDBusReply>
+//#include <QDBusInterface>
+//#include <QDBusReply>
 
 #define DOWNLOAD_COMMAND "post-download-command"
 #define APP_ID "app_id"
@@ -139,11 +139,11 @@ void DownloadTracker::setProgress(qulonglong received, qulonglong total)
 void DownloadTracker::downloadFinished()
 {
     // Refresh click scope
-    QDBusInterface iface("com.canonical.unity.scopes",
-                         "/com/canonical/unity/scopes",
-                         "com.canonical.unity.scopes",
-                         QDBusConnection::systemBus(), 0);
-    iface.call(QLatin1String("InvalidateResults"), QLatin1String("clickscope"));
+//    QDBusInterface iface("com.canonical.unity.scopes",
+//                         "/com/canonical/unity/scopes",
+//                         "com.canonical.unity.scopes",
+//                         QDBusConnection::systemBus(), 0);
+//    iface.call(QLatin1String("InvalidateResults"), QLatin1String("clickscope"));
 }
 
 }
