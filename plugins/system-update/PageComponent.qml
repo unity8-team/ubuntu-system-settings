@@ -244,6 +244,7 @@ ItemPage {
                 model: updateManager.model
                 height: contentItem.childrenRect.height
                 interactive: false
+                highlightFollowsCurrentItem: false
 
                 delegate: ListItem.Subtitled {
                     id: listItem
