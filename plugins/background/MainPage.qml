@@ -65,14 +65,6 @@ ItemPage {
         }
     }
 
-    tools: ToolbarItems {
-        ToolbarButton {
-            action: selectDefaultPeer
-        }
-        opened: true
-        locked: true
-    }
-
     // qml bindings for background stuff
     UbuntuBackgroundPanel {
         id: backgroundPanel
