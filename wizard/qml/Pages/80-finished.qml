@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("All Done")
+    title: i18n.tr("All done")
     forwardButtonSourceComponent: forwardButton
     hasBackButton: false
 

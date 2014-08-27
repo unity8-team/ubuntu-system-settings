@@ -19,7 +19,7 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Bug Reporting")
+    title: i18n.tr("Bug reporting")
     forwardButtonSourceComponent: forwardButton
 
     Column {
