@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+14.10.20140827.1-0ubuntu1) utopic; urgency=low
+
+  [ Mathieu Trudel-Lapierre ]
+  * Fix PIN code or passcode requests by properly matching the tag for
+    the original request. (LP: #1355152)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 27 Aug 2014 15:27:50 +0000
+
 ubuntu-system-settings (0.3+14.10.20140826.1-0ubuntu1) utopic; urgency=low
 
   [ Martin Pitt ]
