@@ -33,39 +33,8 @@ ItemPage {
     id: root
     title: i18n.tr("SIM PIN")
 
-    property var modemsSorted: manager.modems.slice(0).sort()
     property var sims
-    property var simsLoaded: 0
-
-    onSimsChanged: {
-        console.warn("SIMS CHANGED: " + sims[0].title);
-    }
-
-    property var sim
-    onSimChanged: {
-        console.warn("onSimChanged: " + sim);
-    }
-
-    OfonoManager {
-        id: manager
-        Component.onCompleted: {
-            // create ofono bindings for all modem paths
-            var component = Qt.createComponent("Ofono.qml");
-            modemsSorted.forEach(function (path) {
-                console.warn("PATH: " + path);
-                var sim = component.createObject(root, {
-                    path: path
-                });
-                if (sim === null) {
-                    console.warn('failed to create sim object');
-                } else {
-                    Sims.add(sim);
-                }
-                console.warn("KEN: " + sim.simMng.pinRequired);
-            });
-            root.sims = Sims.getAll();
-        }
-    }
+    property var curSim
 
     Component {
         id: dialogComponent
@@ -74,9 +43,9 @@ ItemPage {
             id: changePinDialog
             title: i18n.tr("Change SIM PIN")
 
-            property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(sim.pinRetries[OfonoSimManager.SimPin])
-            property int simMin: sim.minimumPinLength(OfonoSimManager.SimPin)
-            property int simMax: sim.maximumPinLength(OfonoSimManager.SimPin)
+            property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(curSim.pinRetries[OfonoSimManager.SimPin])
+            property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
+            property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
 
             // This is a bit hacky, but the contents of this dialog get so tall
             // that on a mako device, they don't fit with the OSK also visible.
@@ -88,7 +57,7 @@ ItemPage {
             }
 
             Connections {
-                target: sim
+                target: curSim
                 onChangePinComplete: {
                     console.warn("onChangePinComplete: " + error);
                     if (error !== OfonoSimManager.NoError) {
@@ -117,7 +86,7 @@ ItemPage {
 
             Label {
                 id: retries
-                text: i18n.tr("%1 attempts remaining").arg(sim.pinRetries[OfonoSimManager.SimPin])
+                text: i18n.tr("%1 attempts remaining").arg(curSim.pinRetries[OfonoSimManager.SimPin])
             }
 
             Label {
@@ -189,7 +158,7 @@ ItemPage {
                             newInput.selectAll()
                             return
                         }
-                        sim.changePin(OfonoSimManager.SimPin, currentInput.text, newInput.text);
+                        curSim.changePin(OfonoSimManager.SimPin, currentInput.text, newInput.text);
                     }
                 }
             }
@@ -204,9 +173,9 @@ ItemPage {
             objectName: "lockDialogComponent"
             title: i18n.tr("Enter SIM PIN")
 
-            property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(sim.pinRetries[OfonoSimManager.SimPin])
-            property int simMin: sim.minimumPinLength(OfonoSimManager.SimPin)
-            property int simMax: sim.maximumPinLength(OfonoSimManager.SimPin)
+            property string errorText: i18n.tr("Incorrect PIN. %1 attempts remaining.").arg(curSim.pinRetries[OfonoSimManager.SimPin])
+            property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
+            property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
 
             // This is a bit hacky, but the contents of this dialog get so tall
             // that on a mako device, they don't fit with the OSK also visible.
@@ -218,7 +187,7 @@ ItemPage {
             }
 
             Connections {
-                target: sim
+                target: curSim
                 onLockPinComplete: {
                     console.warn("onLockPinComplete: " + error);
                     if (error !== OfonoSimManager.NoError) {
@@ -260,7 +229,7 @@ ItemPage {
             }
 
             Label {
-                text: i18n.tr("%1 attempts remaining").arg(sim.pinRetries[OfonoSimManager.SimPin])
+                text: i18n.tr("%1 attempts remaining").arg(curSim.pinRetries[OfonoSimManager.SimPin])
             }
 
             Label {
@@ -287,14 +256,14 @@ ItemPage {
                     Layout.fillWidth: true
                     color: UbuntuColors.green
 
-                    text: sim.lockedPins.length > 0 ? i18n.tr("Unlock") : i18n.tr("Lock")
+                    text: curSim.lockedPins.length > 0 ? i18n.tr("Unlock") : i18n.tr("Lock")
                     enabled: false
                     onClicked: {
                         lockPinDialog.enabled = false;
-                        if (sim.lockedPins.length > 0)
-                            sim.unlockPin(OfonoSimManager.SimPin, prevInput.text);
+                        if (curSim.lockedPins.length > 0)
+                            curSim.unlockPin(OfonoSimManager.SimPin, prevInput.text);
                         else
-                            sim.lockPin(OfonoSimManager.SimPin, prevInput.text);
+                            curSim.lockPin(OfonoSimManager.SimPin, prevInput.text);
                     }
                 }
             }
@@ -306,7 +275,7 @@ ItemPage {
         anchors.right: parent.right
 
         Repeater {
-            model: manager.modems.length
+            model: sims.length
             Column {
                 anchors {
                     left: parent.left
@@ -314,20 +283,22 @@ ItemPage {
                 }
 
                 ListItem.Standard {
-                    text: modelData
+                    text: i18n.tr("%1").arg(sims[index].title)
+                    visible: sims.length > 1
                 }
 
                 ListItem.Standard {
-                    text: i18n.tr("SIM PIN (%1)").arg(sims[index].title)
+                    text: i18n.tr("SIM PIN")
                     control: Switch {
                         id: simPinSwitch
                         objectName: "simPinSwitch"
                         checked: sims[index].simMng.lockedPins.length > 0
                         onClicked: {
-                            sim = sims[index].simMng;
+                            curSim = sims[index].simMng;
                             PopupUtils.open(lockDialogComponent);
                         }
                     }
+                    showDivider: index < (sims.length - 1)  && simPinSwitch.checked
                 }
 
                 ListItem.SingleControl {
@@ -338,17 +309,25 @@ ItemPage {
                         text: i18n.tr("Change PIN…")
                         width: parent.width - units.gu(4)
                         onClicked: {
-                            sim = sims[index].simMng;
+                            curSim = sims[index].simMng;
                             PopupUtils.open(dialogComponent);
                         }
                     }
                     showDivider: false
                 }
+                ListItem.Divider {
+                    visible: index < (sims.length - 1)
+                }
+
             }
         }
 
         ListItem.Caption {
-            text: i18n.tr("When a SIM PIN is set, it must be entered to access cellular services after restarting the phone or swapping the SIM.  Entering an incorrect PIN repeatedly may lock the SIM permanently.")
+            text: i18n.tr("When a SIM PIN is set, it must be entered to access cellular services after restarting the phone or swapping the SIM.")
+        }
+
+        ListItem.Caption {
+            text: i18n.tr("Entering an incorrect PIN repeatedly may lock the SIM permanently.")
         }
     }
 }
