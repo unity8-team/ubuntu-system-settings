@@ -69,10 +69,6 @@ class SystemUpdatesTestCases(SystemUpdatesBaseTestCase):
         self.assertThat(updates, NotEquals(None))
         updates.state.wait_for("SEARCHING")
         self.assertThat(updates.state, Equals("SEARCHING"))
-        notification = updates.select_single(
-            objectName='notification')
-        self.assertThat(notification, NotEquals(None))
-        self.assertThat(notification.visible, Equals(False))
         installAllButton = updates.select_single(
             objectName='installAllButton')
         self.assertThat(installAllButton, NotEquals(None))
