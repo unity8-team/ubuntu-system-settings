@@ -258,7 +258,10 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.mock_call_forwarding(self.modem_1)
         self.mock_call_settings(self.modem_1)
 
-        self.modem_1.Set(SIM_IFACE, 'SubscriberNumbers', ['08123', '938762783'])
+        self.modem_1.Set(
+            SIM_IFACE,
+            'SubscriberNumbers', ['08123', '938762783']
+        )
 
     @classmethod
     def setUpClass(cls):

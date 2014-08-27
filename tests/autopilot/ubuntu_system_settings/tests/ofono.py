@@ -97,7 +97,8 @@ def add_simmanager_api(mock):
     mock.AddProperties(iface, {
         'CardIdentifier': _parameters.get('CardIdentifier', 12345),
         'Present': _parameters.get('Present', dbus.Boolean(True)),
-        'SubscriberNumbers': _parameters.get('SubscriberNumbers', ['123456789', '234567890']),
+        'SubscriberNumbers': _parameters.get('SubscriberNumbers',
+                                             ['123456789', '234567890']),
         'SubscriberIdentity': _parameters.get('SubscriberIdentity', 23456),
         'LockedPins': _parameters.get('LockedPins', ['pin']),
         'Retries': _parameters.get('Retries', {'pin': dbus.Byte(3)}),
@@ -107,15 +108,20 @@ def add_simmanager_api(mock):
     mock.AddMethods(iface, [
         ('GetProperties', '', 'a{sv}', 'ret = self.GetAll("%s")' % iface),
         ('SetProperty', 'sv', '', 'self.Set("%(i)s", args[0], args[1]); '
-         'self.EmitSignal("%(i)s", "PropertyChanged", "sv", [args[0], args[1]])' % {'i': iface}),
+         'self.EmitSignal("%(i)s", "PropertyChanged", "sv", [args[0], '
+         'args[1]])' % {'i': iface}),
         ('ChangePin', 'sss', '', ''),
         ('EnterPin', 'ss', '', ''),
         ('ResetPin', 'sss', '', ''),
-        ('LockPin', 'ss', '', 'if args[1] == "2468": self.Set("%(i)s", "LockedPins", dbus.Array(["pin"]));'
-         'self.EmitSignal("%(i)s", "PropertyChanged", "sv", ["LockedPins", self.Get("%(i)s", "LockedPins")])' % {'i': iface}),
-        ('UnlockPin', 'ss', '', 'if args[1] == "2468": self.Set("%(i)s", "LockedPins", "");'
-         'self.EmitSignal("%(i)s", "PropertyChanged", "sv", ["LockedPins", self.Get("%(i)s", "LockedPins")])' % {'i': iface})
+        ('LockPin', 'ss', '', 'if args[1] == "2468": self.Set("%(i)s",'
+         '"LockedPins", dbus.Array(["pin"])); self.EmitSignal("%(i)s",'
+         '"PropertyChanged", "sv", ["LockedPins", self.Get("%(i)s", '
+         '"LockedPins")])' % {'i': iface}),
+        ('UnlockPin', 'ss', '', 'if args[1] == "2468": self.Set("%(i)s",'
+         '"LockedPins", ""); self.EmitSignal("%(i)s", "PropertyChanged", "sv",'
+         ' ["LockedPins", self.Get("%(i)s", "LockedPins")])' % {'i': iface})
     ])
+
 
 def add_voice_call_api(mock):
     '''Add org.ofono.VoiceCallManager API to a mock'''

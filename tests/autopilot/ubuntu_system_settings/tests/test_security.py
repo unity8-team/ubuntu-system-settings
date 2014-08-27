@@ -304,7 +304,7 @@ class SecurityTestCase(SecurityBaseTestCase):
             objectName='simPinSwitch')
 
         self.assertTrue(
-           len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
+            len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         )
         self.assertTrue(sim_lock_control.checked)
 
@@ -340,7 +340,7 @@ class SecurityTestCase(SecurityBaseTestCase):
         self.system_settings.main_view.scroll_to_and_click(submit_button)
 
         self.assertTrue(
-           len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
+            len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         )
 
     @unittest.skip('skipped because the simPinSwitch state fails to update')
@@ -351,7 +351,7 @@ class SecurityTestCase(SecurityBaseTestCase):
             objectName='simPinSwitch')
 
         self.assertFalse(
-           len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
+            len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         )
 
         self.system_settings.main_view.scroll_to_and_click(sim_lock_control)
@@ -386,5 +386,5 @@ class SecurityTestCase(SecurityBaseTestCase):
         self.system_settings.main_view.scroll_to_and_click(submit_button)
 
         self.assertFalse(
-           len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
+            len(self.modem_0.Get(SIM_IFACE, 'LockedPins')) > 0
         )
