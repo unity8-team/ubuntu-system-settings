@@ -48,6 +48,14 @@ class SecurityPrivacy: public QObject
                 READ getMessagesWelcomeScreen
                 WRITE setMessagesWelcomeScreen
                 NOTIFY messagesWelcomeScreenChanged)
+    Q_PROPERTY (bool enableLauncherWhileLocked
+                READ getEnableLauncherWhileLocked
+                WRITE setEnableLauncherWhileLocked
+                NOTIFY enableLauncherWhileLockedChanged)
+    Q_PROPERTY (bool enableIndicatorsWhileLocked
+                READ getEnableIndicatorsWhileLocked
+                WRITE setEnableIndicatorsWhileLocked
+                NOTIFY enableIndicatorsWhileLockedChanged)
     Q_PROPERTY (SecurityType securityType
                 READ getSecurityType
                 NOTIFY securityTypeChanged)
@@ -66,6 +74,10 @@ public:
     void setStatsWelcomeScreen(bool enabled);
     bool getMessagesWelcomeScreen();
     void setMessagesWelcomeScreen(bool enabled);
+    bool getEnableLauncherWhileLocked();
+    void setEnableLauncherWhileLocked(bool enabled);
+    bool getEnableIndicatorsWhileLocked();
+    void setEnableIndicatorsWhileLocked(bool enabled);
     SecurityType getSecurityType();
 
     // Returns error text, if an error occurred
@@ -78,6 +90,8 @@ public Q_SLOTS:
 Q_SIGNALS:
     void statsWelcomeScreenChanged();
     void messagesWelcomeScreenChanged();
+    void enableLauncherWhileLockedChanged();
+    void enableIndicatorsWhileLockedChanged();
     void securityTypeChanged();
 
 private:
