@@ -26,6 +26,7 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QProcessEnvironment>
+#include <QDBusInterface>
 
 #define CLICK_COMMAND "click"
 #ifdef TESTS
@@ -283,6 +284,16 @@ void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)
     app->setError("");
     app->setClickToken(clickToken);
     app->setDownloadUrl(app->getClickUrl());
+}
+
+void UpdateManager::updateClickScope()
+{
+    // Refresh click scope
+    QDBusInterface iface("com.canonical.unity.scopes",
+                         "/com/canonical/unity/scopes",
+                         "com.canonical.unity.scopes",
+                         QDBusConnection::sessionBus(), 0);
+    iface.call(QLatin1String("InvalidateResults"), QLatin1String("clickscope"));
 }
 
 }
