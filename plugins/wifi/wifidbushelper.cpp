@@ -34,6 +34,7 @@ Q_DECLARE_METATYPE(ConfigurationData)
 WifiDbusHelper::WifiDbusHelper(QObject *parent) : QObject(parent)
 {
     qDBusRegisterMetaType<ConfigurationData>();
+    setIpAddress();
 }
 
 void WifiDbusHelper::connect(QString ssid, int security, QString password)
@@ -113,6 +114,69 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
                                                dev,
                                                QDBusObjectPath("/"),
                                                tmp);
+}
+
+
+void WifiDbusHelper::setIpAddress()
+{
+    OrgFreedesktopNetworkManagerInterface mgr("org.freedesktop.NetworkManager",
+                                              "/org/freedesktop/NetworkManager",
+                                              QDBusConnection::systemBus());
+
+    // find the first wlan adapter for now
+    auto reply1 = mgr.GetDevices();
+    reply1.waitForFinished();
+    if(!reply1.isValid()) {
+        qWarning() << "Could not get network device: " << reply1.error().message() << "\n";
+        return;
+    }
+    auto devices = reply1.value();
+    int ip4addr;
+
+    QDBusObjectPath dev;
+    for (const auto &d : devices) {
+        QDBusInterface iface("org.freedesktop.NetworkManager",
+                             d.path(),
+                             "org.freedesktop.NetworkManager.Device",
+                             QDBusConnection::systemBus());
+
+        auto type_v = iface.property("DeviceType");
+        if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
+            ip4addr = iface.property("Ip4Address").toInt();
+            dev = d;
+            break;
+        }
+    }
+
+    if (dev.path().isEmpty()) {
+        // didn't find a wifi device
+        return;
+    }
+
+    if (!ip4addr) {
+        return;
+    }
+
+    struct in_addr ip_addr;
+    ip_addr.s_addr = ip4addr;
+    qWarning() << inet_ntoa(ip_addr);
+    m_wifiIp4Address = inet_ntoa(ip_addr);
+    Q_EMIT wifiIp4AddressChanged(m_wifiIp4Address);
+
+
+}
+
+void WifiDbusHelper::deviceStateChanged(int new_state)
+{
+    if (new_state != 100) {
+        m_wifiIp4Address = "";
+        Q_EMIT wifiIp4AddressChanged(m_wifiIp4Address);
+    }
+}
+
+QString WifiDbusHelper::wifiIp4Address()
+{
+    return m_wifiIp4Address;
 }
 
 struct Network : public QObject

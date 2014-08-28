@@ -65,4 +65,9 @@ FramedMenuItem {
             accessPoint.activate();
         }
     }
+    progression: checked
+    onClicked: {
+        pageStack.push(Qt.resolvedUrl("NetworkDetailsBrief.qml"),
+        {networkName : text})
+    }
 }
