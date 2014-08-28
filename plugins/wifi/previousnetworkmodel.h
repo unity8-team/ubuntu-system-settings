@@ -33,7 +33,7 @@ public:
         LastUsedRole,
     };
 
-    PreviousNetworkModel(QObject *parent = 0);
+    explicit PreviousNetworkModel(QObject *parent = 0);
     virtual ~PreviousNetworkModel();
     QHash<int, QByteArray> roleNames() const;
     int rowCount(const QModelIndex &parent) const;
