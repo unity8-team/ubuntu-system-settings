@@ -45,7 +45,7 @@ ItemPage {
 
         property bool isValid : false
 
-        function ields() {
+        function validateFields() {
             if (apnName.text === "") {
                 isValid = false;
                 return
@@ -77,6 +77,10 @@ ItemPage {
         var ctx;
         if (d.isMms) {
             ctx = contexts["mms"];
+            if (ctx === undefined) {
+                // @bug LP(:#1362795)
+                return;
+            }
         } else {
             ctx = contexts["internet"]
         }
@@ -159,7 +163,7 @@ ItemPage {
                 TextField {
                     id: apnName
                     enabled: !doBoth.checked
-                    onTextChanged: d.ields()
+                    onTextChanged: d.validateFields()
                 }
 
                 Label {
@@ -169,7 +173,7 @@ ItemPage {
                 TextField {
                     id: mmsc
                     visible: d.isMms
-                    onTextChanged: d.ields()
+                    onTextChanged: d.validateFields()
                 }
                 Label {
                     text: i18n.tr("Proxy")
@@ -178,7 +182,7 @@ ItemPage {
                 TextField {
                     id: proxy
                     visible: d.isMms
-                    onTextChanged: d.ields()
+                    onTextChanged: d.validateFields()
                 }
                 Label {
                     text: "Port"
@@ -188,7 +192,7 @@ ItemPage {
                     id: port
                     visible: d.isMms
                     maximumLength: 4
-                    onTextChanged: d.ields()
+                    onTextChanged: d.validateFields()
                 }
 
                 Label {
@@ -253,7 +257,7 @@ ItemPage {
         Button {
             id: confirmButton
 
-            text: i18n.tr("Activate")
+            text: d.isMms ? i18n.tr("Save") : i18n.tr("Activate")
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right
             anchors.bottom: parent.bottom
@@ -271,6 +275,25 @@ ItemPage {
                 else
                     ctx = contexts["internet"];
 
+                /// @bug LP(:#1362795)
+                if (d.isMms && ctx === undefined) {
+                    var mmsData = ({})
+                    mmsData["accessPointName"] = apnName.text;
+                    mmsData["username"] = userName.text;
+                    mmsData["password"] = pword.text;
+                    mmsData["messageCenter"] = mmsc.text
+                    var proxyValue = "";
+                    if (proxy.text !== "") {
+                        proxyValue = proxy.text;
+                        if (port.text !== "")
+                            proxyValue = proxyValue + ":" + port.text;
+                    }
+                    mmsData["messageProxy"] = proxyValue;
+                    activateCb("mms", undefined, mmsData);
+                    pageStack.pop();
+                    return;
+                }
+
                 ctx.accessPointName = apnName.text;
                 ctx.username = userName.text;
                 ctx.password = pword.text;
@@ -282,13 +305,14 @@ ItemPage {
                         if (port.text !== "")
                             proxyValue = proxyValue + ":" + port.text;
                     }
+                    ctx.messageProxy = proxyValue
                 }
 
                 console.warn(ctx);
                 console.warn(ctx.accessPointName);
                 // todo map protocol values
                 //protocol.selectedIndex = map(theContext.protocol);
-                activateCb(ctx.contextPath);
+                activateCb(ctx.type, ctx.contextPath);
                 pageStack.pop();
             }
         }
