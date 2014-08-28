@@ -30,7 +30,7 @@ class WifiDbusHelper final : public QObject {
     Q_OBJECT
 
 public:
-    WifiDbusHelper(QObject *parent = nullptr);
+    explicit WifiDbusHelper(QObject *parent = nullptr);
     ~WifiDbusHelper() {};
 
     Q_INVOKABLE void connect(QString ssid, int security, QString password);

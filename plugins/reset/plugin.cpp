@@ -15,9 +15,10 @@
  *
 */
 
+#include "plugin.h"
+
 #include <QtQml>
 #include <QtQml/QQmlContext>
-#include "plugin.h"
 #include "reset.h"
 
 

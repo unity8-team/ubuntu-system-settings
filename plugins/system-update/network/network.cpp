@@ -92,7 +92,7 @@ void Network::onReply(QNetworkReply *reply)
         if (reply->hasRawHeader(X_CLICK_TOKEN)) {
             Update* app = qobject_cast<Update*>(
                         reply->request().originatingObject());
-            if (app != NULL) {
+            if (app != nullptr) {
                 QString header(reply->rawHeader(X_CLICK_TOKEN));
                 Q_EMIT clickTokenObtained(app, header);
             }

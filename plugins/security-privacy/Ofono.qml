@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2014 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -13,21 +13,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * Authors:
+ * Jonas G. Drange <jonas.drange@canonical.com>
+ *
 */
+import QtQuick 2.0
+import MeeGo.QOfono 0.2
 
-#include "plugin.h"
+Item {
+    property alias simMng: simMng
+    property alias present: simMng.present
 
-#include <QtQml>
-#include <QtQml/QQmlContext>
-#include "hotspotmanager.h"
+    property string path
+    property string name
+    property string title: {
+        var number = simMng.subscriberNumbers[0] || simMng.subscriberIdentity;
+        return name + (number ? " (" + number + ")" : "");
+    }
 
-void BackendPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
-    qmlRegisterType<HotspotManager>(uri, 1, 0, "HotspotManager");
-}
-
-void BackendPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    QQmlExtensionPlugin::initializeEngine(engine, uri);
+    OfonoSimManager {
+        id: simMng
+        modemPath: path
+    }
 }

@@ -23,45 +23,32 @@ LocalComponents.Page {
     forwardButtonSourceComponent: forwardButton
     hasBackButton: false
 
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
-        }
- 
-        Image {
-            id: image
-            anchors {
-                top: parent.top
-                left: parent.left
-            }
-            source: "data/meet_ubuntu_simcard@30.png"
-            height: units.gu(9)
-            width: units.gu(12.5)
-        }
+    Column {
+        anchors.fill: content
 
         Label {
-            anchors {
-                top: image.bottom
-                left: parent.left
-                topMargin: units.gu(2)
-            }
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("Please insert a SIM card before you continue.") +
+                  "\n\n" +
+                  i18n.tr("Without it, you won’t be able to make calls or use text messaging.") +
+                  "\n"
+        }
 
-            width: parent.width
-            wrapMode: Text.WordWrap
-            textFormat: Text.StyledText
-            text: i18n.tr("Please insert a SIM card before you continue. Without it, you won’t be able to make calls or use text messaging.")
+        Image {
+            id: image
+            source: "data/meet_ubuntu_simcard@30.png"
+            height: units.gu(6.5)
+            width: units.gu(9)
         }
     }
 
     Component {
         id: forwardButton
-        LocalComponents.ForwardButton {
+        LocalComponents.StackButton {
             text: i18n.tr("Skip")
+            rightArrow: true
             onClicked: pageStack.next()
         }
     }

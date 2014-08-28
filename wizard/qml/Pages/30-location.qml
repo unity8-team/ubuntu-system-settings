@@ -35,20 +35,19 @@ LocalComponents.Page {
     }
 
     Column {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
-        }
+        id: column
+        anchors.fill: content
         spacing: units.gu(4)
+
+        Item { // spacer
+            height: units.gu(1)
+            width: units.gu(1) // needed else it will be ignored
+        }
 
         LocalComponents.CheckableSetting {
             id: locationCheck
             showDivider: false
-            text: i18n.tr("Use your mobile network and wi-fi to work out where you are.")
+            text: i18n.tr("Use your mobile network and Wi-Fi to work out where you are")
             checked: locationActionGroup.enabled.state
             onTriggered: locationActionGroup.enabled.activate()
         }
@@ -56,14 +55,14 @@ LocalComponents.Page {
         LocalComponents.CheckableSetting {
             id: termsCheck
             showDivider: false
-            text: i18n.tr("I have read and agreed to the Ubuntu <a href='terms.qml'>terms and conditions</a>.")
+            text: i18n.tr("I have read and agreed to the Ubuntu <a href='terms.qml'>terms and conditions</a>")
             onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
         }
     }
 
     Component {
         id: forwardButton
-        LocalComponents.ForwardButton {
+        LocalComponents.StackButton {
             text: i18n.tr("Continue")
             onClicked: pageStack.next()
             enabled: termsCheck.checked

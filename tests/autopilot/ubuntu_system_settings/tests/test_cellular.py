@@ -22,11 +22,12 @@ from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
 PREFERENCE_2G = '2G only (saves battery)'
-PREFERENCE_ANY = '2G/3G/4G (faster)'
+PREFERENCE_UMTS = '2G/3G (faster)'
+PREFERENCE_LTE = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
 USE_OFF = "useoff"
-USE_SIM_1 = "usesim1"
-USE_SIM_2 = "usesim2"
+USE_SIM_1 = "use/ril_0"
+USE_SIM_2 = "use/ril_1"
 
 
 class CellularTestCase(CellularBaseTestCase):
@@ -150,7 +151,7 @@ class CellularTestCase(CellularBaseTestCase):
         sleep(0.7)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         sleep(0.7)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
@@ -188,7 +189,7 @@ class CellularTestCase(CellularBaseTestCase):
         sleep(0.7)
         self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
                                                  'TechnologyPreference'))
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         sleep(0.7)
         self.assertEqual('umts', self.modem_0.Get(RDO_IFACE,
                                                   'TechnologyPreference'))
@@ -222,21 +223,6 @@ class CellularTestCase(CellularBaseTestCase):
         # assert that 2G is selected
         self.assert_selected_preference(1)
 
-    def test_radio_preference_change_does_not_override_user_selection(self):
-        self.select_preference(PREFERENCE_2G)
-
-        self.modem_0.EmitSignal(
-            'org.ofono.RadioSettings',
-            'PropertyChanged',
-            'sv',
-            ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
-
-        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
-                                                 'TechnologyPreference'))
-
-        # assert that the preference is umts
-        self.assert_selected_preference(1)
-
     def test_unlocking_sim(self):
         '''Like it would if the sim was locked, e.g.'''
         self.modem_0.Set(RDO_IFACE, 'TechnologyPreference',
@@ -257,7 +243,7 @@ class CellularTestCase(CellularBaseTestCase):
             'sv',
             ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
 
-        self.assert_selected_preference(2)
+        self.assert_selected_preference(3)
 
 
 class DualSimCellularTestCase(CellularBaseTestCase):
@@ -380,7 +366,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_use_umts_for_sim_1(self):
         self.use_selector(USE_SIM_1)
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         sleep(0.7)
         self.assertEqual(
             'umts', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
@@ -394,14 +380,14 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_use_umts_for_sim_2(self):
         self.use_selector(USE_SIM_2)
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         sleep(1)
         self.assertEqual(
             'umts', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_when_sim_1_comes_online_ui_is_correct(self):
         self.use_selector(USE_SIM_1)
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         self.use_selector(USE_OFF)
         sleep(0.7)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
@@ -418,9 +404,9 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_when_sim_2_comes_online_ui_is_correct(self):
         self.use_selector(USE_SIM_2)
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         self.use_selector(USE_OFF)
-        sleep(0.7)
+        sleep(2)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_1.EmitSignal(
             CONNMAN_IFACE,
@@ -461,7 +447,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             True, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
     def test_no_radio_preference(self):
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         self.use_selector(USE_OFF)
 
         self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', '')

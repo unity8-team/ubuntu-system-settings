@@ -44,7 +44,7 @@ void managerLoaded(GObject    *object,
 SecurityPrivacy::SecurityPrivacy(QObject* parent)
   : QObject(parent),
     m_manager(act_user_manager_get_default()),
-    m_user(NULL)
+    m_user(nullptr)
 {
     connect (&m_accountsService,
              SIGNAL (propertyChanged (QString, QString)),
@@ -56,11 +56,11 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
              this,
              SLOT (slotNameOwnerChanged()));
 
-    if (m_manager != NULL) {
+    if (m_manager != nullptr) {
         g_object_ref(m_manager);
 
         gboolean loaded;
-        g_object_get(m_manager, "is-loaded", &loaded, NULL);
+        g_object_get(m_manager, "is-loaded", &loaded, nullptr);
 
         if (loaded)
             managerLoaded();
@@ -72,12 +72,12 @@ SecurityPrivacy::SecurityPrivacy(QObject* parent)
 
 SecurityPrivacy::~SecurityPrivacy()
 {
-    if (m_user != NULL) {
+    if (m_user != nullptr) {
         g_signal_handlers_disconnect_by_data(m_user, this);
         g_object_unref(m_user);
     }
 
-    if (m_manager != NULL) {
+    if (m_manager != nullptr) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
         g_object_unref(m_manager);
     }
@@ -139,7 +139,7 @@ void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
 
 SecurityPrivacy::SecurityType SecurityPrivacy::getSecurityType()
 {
-    if (m_user == NULL || !act_user_is_loaded(m_user))
+    if (m_user == nullptr || !act_user_is_loaded(m_user))
         return SecurityPrivacy::Passphrase; // we need to return something
 
     if (act_user_get_password_mode(m_user) == ACT_USER_PASSWORD_MODE_NONE)
@@ -257,7 +257,7 @@ QString SecurityPrivacy::badPasswordMessage(SecurityType type)
 {
     switch (type) {
         case SecurityPrivacy::Passcode:
-            return _("Incorrect passcode. Try again.");
+            return _("Incorrect PIN code. Try again.");
         case SecurityPrivacy::Passphrase:
             return _("Incorrect passphrase. Try again.");
         default:
@@ -292,7 +292,7 @@ bool SecurityPrivacy::trySetSecurity(SecurityType type)
 
 QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityType type)
 {
-    if (m_user == NULL || !act_user_is_loaded(m_user))
+    if (m_user == nullptr || !act_user_is_loaded(m_user))
         return "Internal error: user not loaded";
     else if (type == SecurityPrivacy::Swipe && !value.isEmpty())
         return "Internal error: trying to set password with swipe mode";
@@ -374,14 +374,14 @@ void userLoaded(GObject    *object,
 void SecurityPrivacy::managerLoaded()
 {
     gboolean loaded;
-    g_object_get(m_manager, "is-loaded", &loaded, NULL);
+    g_object_get(m_manager, "is-loaded", &loaded, nullptr);
 
     if (loaded) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
 
         m_user = act_user_manager_get_user_by_id(m_manager, geteuid());
 
-        if (m_user != NULL) {
+        if (m_user != nullptr) {
             g_object_ref(m_user);
 
             if (act_user_is_loaded(m_user))
