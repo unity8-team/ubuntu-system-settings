@@ -69,8 +69,8 @@ Q_SIGNALS:
     void discoverableChanged(bool isActive);
 
 public:
-    Bluetooth(QObject *parent = 0);
-    Bluetooth(const QDBusConnection &dbus, QObject *parent = 0);
+    explicit Bluetooth(QObject *parent = nullptr);
+    explicit Bluetooth(const QDBusConnection &dbus, QObject *parent = nullptr);
     ~Bluetooth() {}
 
     Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }

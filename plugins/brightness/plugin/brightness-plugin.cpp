@@ -32,7 +32,7 @@ class BrightnessItem: public ItemBase
     Q_OBJECT
 
 public:
-    BrightnessItem(const QVariantMap &staticData, QObject *parent = 0);
+    explicit BrightnessItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
 
 };

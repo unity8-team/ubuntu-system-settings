@@ -17,13 +17,14 @@
  * Charles Kerr <charles.kerr@canonical.com>
  */
 
+#include "device.h"
+
 #include <QDBusReply>
 #include <QDebug> // qWarning()
 #include <QThread>
 #include <QTimer>
 
 #include "dbus-shared.h"
-#include "device.h"
 
 /***
 ****

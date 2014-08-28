@@ -47,10 +47,10 @@ public:
                             const QString &language    = QString(),
                             const QString &displayName = QString(),
                             const QString &shortName   = QString(),
-                            QObject       *parent      = NULL);
+                            QObject       *parent      = nullptr);
 
     explicit KeyboardLayout(const QFileInfo &fileInfo,
-                            QObject         *parent   = NULL);
+                            QObject         *parent   = nullptr);
 
     const QString &name() const;
     const QString &language() const;

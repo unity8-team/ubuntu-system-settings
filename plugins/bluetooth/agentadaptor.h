@@ -62,7 +62,7 @@ class AgentAdaptor: public QDBusAbstractAdaptor
 "  </interface>\n"
         "")
 public:
-    AgentAdaptor(QObject *parent);
+    explicit AgentAdaptor(QObject *parent);
     virtual ~AgentAdaptor();
 
 public: // PROPERTIES
