@@ -293,7 +293,9 @@ void UpdateManager::updateClickScope()
                          "/com/canonical/unity/scopes",
                          "com.canonical.unity.scopes",
                          QDBusConnection::sessionBus(), 0);
-    iface.call(QLatin1String("InvalidateResults"), QLatin1String("clickscope"));
+    if (iface.isValid()) {
+        iface.call(QLatin1String("InvalidateResults"), QLatin1String("clickscope"));
+    }
 }
 
 }
