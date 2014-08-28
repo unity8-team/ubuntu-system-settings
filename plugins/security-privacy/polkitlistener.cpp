@@ -120,7 +120,9 @@ bool uss_polkit_listener_register(UssPolkitListener *listener)
 void uss_polkit_listener_free(UssPolkitListener *listener)
 {
     UssPolkitListenerPrivate *priv = listener->priv;
-    polkit_agent_listener_unregister(priv->registration);
+    if (priv->registration != NULL) {
+        polkit_agent_listener_unregister(priv->registration);
+    }
     g_object_unref(listener);
 }
 
