@@ -17,7 +17,6 @@ set(QML_SOURCES
     fakepkgslist.xml
 )
 
-
 add_library(UbuntuStorageAboutPanel MODULE
     plugin.cpp
     storageabout.cpp
