@@ -250,6 +250,7 @@ ItemPage {
                     id: listItem
                     iconSource: Qt.resolvedUrl(modelData.iconUrl)
                     height: modelData.selected ? units.gu(14) : units.gu(8)
+                    highlightWhenPressed: false
                     showDivider: false
 
                     property alias actionButton: buttonAppUpdate

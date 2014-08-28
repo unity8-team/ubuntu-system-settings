@@ -27,6 +27,8 @@ import SystemSettings 1.0
 import Ubuntu.SystemSettings.Battery 1.0
 import Ubuntu.SystemSettings.Diagnostics 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+import MeeGo.QOfono 0.2
+import "sims.js" as Sims
 
 ItemPage {
     id: root
@@ -37,6 +39,18 @@ ItemPage {
 
     property alias usePowerd: batteryBackend.powerdRunning
     property bool lockOnSuspend
+    property var modemsSorted: manager.modems.slice(0).sort()
+    property var sims
+    property int simsPresent: 0
+    property int simsLoaded: 0
+    property int simsLocked: {
+        var t = 0;
+        sims.forEach(function (sim) {
+            if (sim.simMng.lockedPins.length > 0)
+                t++;
+        });
+        return t;
+    }
 
     UbuntuDiagnostics {
         id: diagnosticsWidget
@@ -48,6 +62,33 @@ ItemPage {
 
     UbuntuBatteryPanel {
         id: batteryBackend
+    }
+
+    OfonoManager {
+        id: manager
+        Component.onCompleted: {
+            // create ofono bindings for all modem paths
+            var component = Qt.createComponent("Ofono.qml");
+            modemsSorted.forEach(function (path, index) {
+                var sim = component.createObject(root, {
+                    path: path,
+                    name: phoneSettings.simNames[path] ?
+                            phoneSettings.simNames[path] :
+                            "SIM " + (index + 1)
+                });
+                if (sim === null)
+                    console.warn('failed to create sim object');
+                else
+                    Sims.add(sim);
+            });
+            root.sims = Sims.getAll();
+            root.simsPresent = Sims.getPresentCount();
+        }
+    }
+
+    GSettings {
+        id: phoneSettings
+        schema.id: "com.ubuntu.phone"
     }
 
     GSettings {
@@ -113,12 +154,19 @@ ItemPage {
             }
             ListItem.SingleValue {
                 id: simControl
+                objectName: "simControl"
                 text: i18n.tr("SIM PIN")
-                value: "Off"
+                value: {
+                    if (simsLoaded === 1 && simsLocked > 0)
+                        return i18n.tr("On");
+                    else if (simsLoaded > 1 && simsLocked > 0)
+                        return simsLocked + "/" + simsLoaded;
+                    else
+                        return i18n.tr("Off");
+                }
+                visible: simsPresent > 0
                 progression: true
-                visible: showAllUI
-                /* Not implemented yet */
-                //onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("SimPin.qml"), { sims: sims })
             }
             ListItem.Standard {
                 text: i18n.tr("Encryption")
