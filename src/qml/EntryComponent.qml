@@ -44,7 +44,7 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            StatusIcon {
+            Icon {
                 id: icon
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: units.gu(4)
