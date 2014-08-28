@@ -34,6 +34,8 @@ CONNMAN_IFACE = 'org.ofono.ConnectionManager'
 RDO_IFACE = 'org.ofono.RadioSettings'
 SIM_IFACE = 'org.ofono.SimManager'
 NETREG_IFACE = 'org.ofono.NetworkRegistration'
+CALL_FWD_IFACE = 'org.ofono.CallForwarding'
+CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
 SYSTEM_IFACE = 'com.canonical.SystemImage'
 SYSTEM_SERVICE_OBJ = '/Service'
 
@@ -49,6 +51,12 @@ class UbuntuSystemSettingsTestCase(
         self.assertThat(
             self.system_settings.main_view.visible,
             Eventually(Equals(True)))
+
+    def set_orientation(self, gsettings, value):
+        gsettings.set_value('rotation-lock', value)
+        self.assertThat(
+            lambda: gsettings.get_value('rotation-lock').get_boolean(),
+            Eventually(Equals(value.get_boolean())))
 
 
 class UbuntuSystemSettingsUpowerTestCase(UbuntuSystemSettingsTestCase,
@@ -120,7 +128,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                'for m in objects if "%s/operator/" in m]' % name
 
     def mock_connection_manager(self, modem):
-        modem.AddProperty(CONNMAN_IFACE, 'Powered', True)
+        modem.AddProperty(CONNMAN_IFACE, 'Powered', dbus.Boolean(1))
         modem.AddProperty(CONNMAN_IFACE, 'RoamingAllowed', False)
         modem.AddMethods(
             CONNMAN_IFACE,
@@ -173,6 +181,8 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
     def mock_radio_settings(self, modem):
         modem.AddProperty(
             RDO_IFACE, 'TechnologyPreference', self.technology_preference)
+        modem.AddProperty(
+            RDO_IFACE, 'ModemTechnologies', ['gsm', 'umts', 'lte'])
         modem.AddMethods(
             RDO_IFACE,
             [('GetProperties', '', 'a{sv}',
@@ -183,37 +193,41 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
                  "PropertyChanged", "sv", [args[0], args[1]])'
                     .replace('IFACE', RDO_IFACE)), ])
 
-    def mock_sim_manager(self, modem, properties=None):
-        if not properties:
-            properties = {
-                'SubscriberNumbers': ['123456', '234567']
-            }
-        modem_interfaces = modem.GetProperties()['Interfaces']
-        modem_interfaces.append(SIM_IFACE)
-        modem.AddProperties(SIM_IFACE, properties)
-        modem.SetProperty('Interfaces', modem_interfaces)
+    def mock_call_forwarding(self, modem):
+        modem.AddProperty(
+            CALL_FWD_IFACE, 'VoiceUnconditional', '')
         modem.AddMethods(
-            SIM_IFACE,
+            CALL_FWD_IFACE,
             [('GetProperties', '', 'a{sv}',
-                'ret = self.GetAll("%s")' % SIM_IFACE),
+              'ret = self.GetAll("%s")' % CALL_FWD_IFACE),
                 ('SetProperty', 'sv', '',
                  'self.Set("IFACE", args[0], args[1]); '
                  'self.EmitSignal("IFACE",\
                  "PropertyChanged", "sv", [args[0], args[1]])'
-                    .replace('IFACE', SIM_IFACE)), ])
+                    .replace('IFACE', CALL_FWD_IFACE)), ])
+
+    def mock_call_settings(self, modem):
+        modem.AddProperty(
+            CALL_SETTINGS_IFACE, 'VoiceCallWaiting', 'disabled')
+        modem.AddMethods(
+            CALL_SETTINGS_IFACE,
+            [('GetProperties', '', 'a{sv}',
+              'ret = self.GetAll("%s")' % CALL_SETTINGS_IFACE),
+                ('SetProperty', 'sv', '',
+                 'self.Set("IFACE", args[0], args[1]); '
+                 'self.EmitSignal("IFACE",\
+                 "PropertyChanged", "sv", [args[0], args[1]])'
+                    .replace('IFACE', CALL_SETTINGS_IFACE)), ])
 
     def add_sim1(self):
         # create modem_0 proxy
         self.modem_0 = self.dbus_con.get_object('org.ofono', '/ril_0')
 
-        # Add an available carrier
         self.mock_carriers('ril_0')
-
         self.mock_radio_settings(self.modem_0)
-
         self.mock_connection_manager(self.modem_0)
-
-        self.mock_sim_manager(self.modem_0)
+        self.mock_call_forwarding(self.modem_0)
+        self.mock_call_settings(self.modem_0)
 
         self.modem_0.AddMethods('org.ofono.NetworkRegistration', [
             ('GetProperties', '', 'a{sv}',
@@ -230,6 +244,7 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.dbusmock.AddModem(second_modem, {'Powered': True})
         self.modem_1 = self.dbus_con.get_object(
             'org.ofono', '/%s' % second_modem)
+
         self.modem_1.AddMethods(NETREG_IFACE, [
             ('GetProperties', '', 'a{sv}',
                 'ret = self.GetAll("org.ofono.NetworkRegistration")'),
@@ -242,18 +257,22 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
         self.mock_carriers(second_modem)
         self.mock_radio_settings(self.modem_1)
         self.mock_connection_manager(self.modem_1)
+        self.mock_call_forwarding(self.modem_1)
+        self.mock_call_settings(self.modem_1)
 
-        self.mock_sim_manager(self.modem_1, {
-            'SubscriberNumbers': ['08123', '938762783']
-        })
+        self.modem_1.Set(
+            SIM_IFACE,
+            'SubscriberNumbers', ['08123', '938762783']
+        )
 
     @classmethod
     def setUpClass(cls):
         cls.start_system_bus()
         cls.dbus_con = cls.get_dbus(True)
+        template = os.path.join(os.path.dirname(__file__), 'ofono.py')
         # Add a mock Ofono environment so we get consistent results
         (cls.p_mock, cls.obj_ofono) = cls.spawn_server_template(
-            'ofono', stdout=subprocess.PIPE)
+            template, stdout=subprocess.PIPE)
         cls.dbusmock = dbus.Interface(cls.obj_ofono, dbusmock.MOCK_IFACE)
 
     def setUp(self, panel=None):
@@ -265,11 +284,38 @@ class UbuntuSystemSettingsOfonoTestCase(UbuntuSystemSettingsTestCase,
 
         super(UbuntuSystemSettingsOfonoTestCase, self).setUp(panel)
 
+    def set_default_for_calls(self, gsettings, default):
+        gsettings.set_value('default-sim-for-calls', default)
+        # wait for gsettings
+        sleep(1)
+
+    def set_default_for_messages(self, gsettings, default):
+        gsettings.set_value('default-sim-for-messages', default)
+        # wait for gsettings
+        sleep(1)
+
+    def get_default_sim_for_calls_selector(self, text):
+        return self.system_settings.main_view.cellular_page.select_single(
+            objectName="defaultForCalls" + text
+        )
+
+    def get_default_sim_for_messages_selector(self, text):
+        return self.system_settings.main_view.cellular_page.select_single(
+            objectName="defaultForMessages" + text
+        )
+
 
 class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Cellular page """
         super(CellularBaseTestCase, self).setUp('cellular')
+
+
+class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+    def setUp(self):
+        """ Go to Phone page """
+        super(PhoneOfonoBaseTestCase, self).setUp()
+        self.phone_page = self.system_settings.main_view.go_to_phone_page()
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -616,3 +662,19 @@ class ResetBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(ResetBaseTestCase, self).tearDown()
+
+
+class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
+    """ Base class for security and privacy settings tests"""
+
+    def setUp(self):
+        super(SecurityBaseTestCase, self).setUp('security-privacy')
+        """ Go to Security & Privacy page """
+        self.security_page = self.system_settings.main_view.select_single(
+            objectName='securityPrivacyPage'
+        )
+        self.assertThat(self.security_page.active,
+                        Eventually(Equals(True)))
+
+    def tearDown(self):
+        super(SecurityBaseTestCase, self).tearDown()

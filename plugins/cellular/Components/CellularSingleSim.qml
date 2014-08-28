@@ -20,12 +20,10 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import "data-helpers.js" as DataHelpers
 
 Column {
     height: childrenRect.height
 
-    property var sim1
     property var selector: selector
 
     ListItem.ItemSelector {
@@ -33,11 +31,35 @@ Column {
         objectName: "technologyPreferenceSelector"
         text: i18n.tr("Cellular data:")
         expanded: true
-        enabled: sim1.radioSettings.technologyPreference !== ""
-        model: [i18n.tr("Off"), i18n.tr("2G only (saves battery)"), i18n.tr("2G/3G/4G (faster)")]
+
+        // an empty string is not a valid preference, which means
+        // we disregard the interace and disable the selector
+        enabled: sim.radioSettings.technologyPreference !== ""
+
+        // model for this selector is modemTechnologies, with
+        // 'off' prepended
+        model: {
+            var m = sim.radioSettings.modemTechnologies.slice(0);
+            m.unshift("off");
+            return m;
+        }
+
+        delegate: OptionSelectorDelegate {
+            text: {
+                return {
+                    'off': i18n.tr("Off"),
+                    'gsm': i18n.tr("2G only (saves battery)"),
+                    'umts': i18n.tr("2G/3G (faster)"),
+                    'lte': i18n.tr("2G/3G/4G (faster)")
+                }[modelData]
+            }
+        }
         selectedIndex: {
-            if (sim1.connMan.powered) {
-                return DataHelpers.singleSimKeyToIndex(sim1.radioSettings.technologyPreference);
+            if (sim.connMan.powered) {
+                // will return -1 if empty, which will select nothing.
+                // Makes sense, since the SIM is online, but the
+                // radioSettings interface is not ready yet (sim locked?)
+                return model.indexOf(sim.radioSettings.technologyPreference);
             } else {
                 return 0;
             }
@@ -48,52 +70,45 @@ Column {
         id: dataRoamingItem
         objectName: "dataRoamingSwitch"
         text: i18n.tr("Data roaming")
-        enabled: sim1.connMan.powered
+        enabled: sim.connMan.powered
         control: Switch {
             id: dataRoamingControl
-            checked: sim1.connMan.roamingAllowed
-            onClicked: sim1.connMan.roamingAllowed = checked
+            checked: sim.connMan.roamingAllowed
+            onClicked: sim.connMan.roamingAllowed = checked
         }
     }
 
     Connections {
-        target: sim1.connMan
+        target: sim.connMan
         onPoweredChanged: {
             if (powered) {
-                selector.selectedIndex = DataHelpers.singleSimKeyToIndex(sim1.radioSettings.technologyPreference);
+                // restore the tech preference
+                selector.selectedIndex = selector
+                    .model.indexOf(sim.radioSettings.technologyPreference)
             } else {
                 selector.selectedIndex = 0;
             }
         }
     }
 
-    Connections {
-        target: sim1.radioSettings
-        onTechnologyPreferenceChanged: {
-            var selIndex = selector.selectedIndex;
-            if (selIndex > 0) {
-                sim1.radioSettings.technologyPreference = DataHelpers.singleSimIndexToKey(selIndex);
-            }
-        }
-    }
-
+    // binds the SIM online state to the UI
     Binding {
-        target: sim1.connMan
+        target: sim.connMan
         property: "powered"
         value: selector.selectedIndex !== 0
     }
 
+    // binds the tech preference to the UI
     Binding {
-        target: sim1.radioSettings
+        target: sim.radioSettings
         property: "technologyPreference"
         value: {
             var i = selector.selectedIndex;
-            if (i === 1) {
-                return 'gsm';
-            } else if (i === 2) {
-                return 'any';
+            if (i > 0) {
+                return selector.model[i]
             } else {
-                return sim1.radioSettings.technologyPreference
+                // if the modem is off, disregard the selector
+                return sim.radioSettings.technologyPreference;
             }
         }
     }

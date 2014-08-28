@@ -17,22 +17,44 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${ACCOUNTSSERVICE_INCLUDE_DIRS} 
 add_definitions(-DHELPER_EXEC="${PLUG_DIR}/UbuntuSecurityPrivacyHelper" -DQT_NO_KEYWORDS)
 
 set(QML_SOURCES
+    AppAccess.qml
+    AppAccessControl.qml
     Dash.qml
     Location.qml
     LockSecurity.qml
+    Ofono.qml
     PageComponent.qml
     PhoneLocking.qml
+    SimPin.qml
+    sims.js
 )
 
 set(PANEL_SOURCES
     plugin.cpp
+    plugin.h
     securityprivacy.cpp
+    securityprivacy.h
+    trust-store-model.cpp
+    trust-store-model.h
+    ${QML_SOURCES}
 )
 
 add_library(UbuntuSecurityPrivacyPanel MODULE ${PANEL_SOURCES} ${QML_SOURCES})
 qt5_use_modules(UbuntuSecurityPrivacyPanel Qml Quick DBus)
 
-target_link_libraries (UbuntuSecurityPrivacyPanel uss-accountsservice ${ACCOUNTSSERVICE_LDFLAGS})
+pkg_check_modules(TRUST_STORE REQUIRED trust-store)
+
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${TRUST_STORE_INCLUDE_DIRS}
+)
+
+set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/SecurityPrivacy)
+target_link_libraries (UbuntuSecurityPrivacyPanel
+    uss-accountsservice
+    ${ACCOUNTSSERVICE_LDFLAGS}
+    ${TRUST_STORE_LDFLAGS}
+)
 install(TARGETS UbuntuSecurityPrivacyPanel UbuntuSecurityPrivacyHelper DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
 install(FILES ${QML_SOURCES} DESTINATION ${PLUGIN_QML_DIR}/security-privacy)

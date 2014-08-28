@@ -61,7 +61,7 @@ static void measure_file(const char * filename,
                          GAsyncReadyCallback callback,
                          gpointer user_data)
 {
-    MeasureData *data = (MeasureData *) user_data;
+    auto *data = static_cast<MeasureData *>(user_data);
 
     GFile *file = g_file_new_for_path (filename);
 
@@ -104,7 +104,7 @@ static void measure_finished(GObject *source_object,
     GError *err = nullptr;
     GFile *file = G_FILE (source_object);
 
-    MeasureData *data = (MeasureData *) user_data;
+    auto data = static_cast<MeasureData *>(user_data);
 
     guint64 *size = (guint64 *) data->size;
 
@@ -138,6 +138,11 @@ StorageAbout::StorageAbout(QObject *parent) :
     QObject(parent),
     m_clickModel(),
     m_clickFilterProxy(&m_clickModel),
+    m_moviesSize(0),
+    m_audioSize(0),
+    m_picturesSize(0),
+    m_otherSize(0),
+    m_homeSize(0),
     m_propertyService(new QDBusInterface(PROPERTY_SERVICE_OBJ,
         PROPERTY_SERVICE_PATH,
         PROPERTY_SERVICE_OBJ,
@@ -148,10 +153,10 @@ StorageAbout::StorageAbout(QObject *parent) :
 
 QString StorageAbout::serialNumber()
 {
-    static char serialBuffer[PROP_NAME_MAX];
 
     if (m_serialNumber.isEmpty() || m_serialNumber.isNull())
     {
+        char serialBuffer[PROP_VALUE_MAX];
         property_get("ro.serialno", serialBuffer, "");
         m_serialNumber = QString(serialBuffer);
     }
@@ -161,11 +166,10 @@ QString StorageAbout::serialNumber()
 
 QString StorageAbout::vendorString()
 {
-    static char manufacturerBuffer[PROP_NAME_MAX];
-    static char modelBuffer[PROP_NAME_MAX];
-
     if (m_vendorString.isEmpty() || m_vendorString.isNull())
     {
+        char manufacturerBuffer[PROP_VALUE_MAX];
+        char modelBuffer[PROP_VALUE_MAX];
         property_get("ro.product.manufacturer", manufacturerBuffer, "");
         property_get("ro.product.model", modelBuffer, "");
         m_vendorString = QString("%1 %2").arg(manufacturerBuffer).arg(modelBuffer);
@@ -176,10 +180,10 @@ QString StorageAbout::vendorString()
 
 QString StorageAbout::deviceBuildDisplayID()
 {
-    static char serialBuffer[PROP_NAME_MAX];
 
     if (m_deviceBuildDisplayID.isEmpty() || m_deviceBuildDisplayID.isNull())
     {
+        char serialBuffer[PROP_VALUE_MAX];
         property_get("ro.build.display.id", serialBuffer, "");
         m_deviceBuildDisplayID = QString(serialBuffer);
     }

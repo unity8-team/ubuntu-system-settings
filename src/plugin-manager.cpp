@@ -32,7 +32,7 @@
 
 using namespace SystemSettings;
 
-static const QLatin1String baseDir(PLUGIN_MANIFEST_DIR);
+static const QLatin1String baseDir{PLUGIN_MANIFEST_DIR};
 
 namespace SystemSettings {
 

@@ -33,9 +33,16 @@ LocalComponents.Page {
         id: manager
     }
 
+    // Ideally we would query the system more cleverly than hardcoding two
+    // modems.  But we don't yet have a more clever way.  :(
     OfonoSimManager {
-        id: simManager
-        modemPath: manager.modems[0]
+        id: simManager0
+        modemPath: manager.modems.length >= 1 ? manager.modems[0] : ""
+    }
+
+    OfonoSimManager {
+        id: simManager1
+        modemPath: manager.modems.length >= 2 ? manager.modems[1] : ""
     }
 
     Item {
@@ -82,7 +89,8 @@ LocalComponents.Page {
             text: i18n.tr("Start")
             onClicked: {
                 plugin.currentLanguage = languageList.selectedIndex
-                if (simManager.present)
+                root.updateLanguage()
+                if (manager.modems.length == 0 || simManager0.present || simManager1.present)
                     pageStack.next()
                 else
                     pageStack.push(Qt.resolvedUrl("no-sim.qml"))

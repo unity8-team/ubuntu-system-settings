@@ -1,3 +1,226 @@
+ubuntu-system-settings (0.3+14.10.20140827.3-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * SIM PIN lock implementation
+
+  [ jonas-drange ]
+  * [main panel] add visual feedback on press
+  * [cellular] uses modemtechnologies property from ofono to populate
+    technology preference options (LP: #1346790)
+
+  [ Sebastien Bacher ]
+  * [language] workaround inconsistent languages casing (LP: #1362123)
+  * [background] Display the default background selected (LP: #1349329)
+  * [storage] display translated names (LP: #1360207)
+  * [updates] don't display animations when clicking on update rows (LP:
+    #1360364)
+  * [background] don't use an icon in the headerbar (LP: #1362122)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 27 Aug 2014 22:19:17 +0000
+
+ubuntu-system-settings (0.3+14.10.20140827.1-0ubuntu1) utopic; urgency=low
+
+  [ Mathieu Trudel-Lapierre ]
+  * Fix PIN code or passcode requests by properly matching the tag for
+    the original request. (LP: #1355152)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 27 Aug 2014 15:27:50 +0000
+
+ubuntu-system-settings (0.3+14.10.20140826.1-0ubuntu1) utopic; urgency=low
+
+  [ Martin Pitt ]
+  * Update PO template
+
+  [ Sebastien Bacher ]
+  * Include extra files for translations (LP: #1359267)
+
+  [ jonas-drange ]
+  * [main panel] show rotation lock, point to correct setting
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 26 Aug 2014 15:48:48 +0000
+
+ubuntu-system-settings (0.3+14.10.20140826-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Hide sleep locks immediately setting, which isn't implemented yet
+    (LP: #1361297) (LP: #1361297)
+
+  [ Sebastien Bacher ]
+  * [system-update] rework the ui to use a column rather than anchors,
+    the layout is quite dynamic and it should be easier to position and
+    stack widgets this way (LP: #1343172)
+
+  [ Michael Terry ]
+  * After selecting the language, update the session environment
+    immediately and restart indicators so that their notifications (like
+    wifi prompt) are translated. (LP: #1354325)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 26 Aug 2014 00:55:20 +0000
+
+ubuntu-system-settings (0.3+14.10.20140825-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Added autopilot tests for security-privacy
+
+  [ jonas-drange ]
+  * [phone] adding dual sim functionality to phone panel
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 25 Aug 2014 15:19:31 +0000
+
+ubuntu-system-settings (0.3+14.10.20140822.1-0ubuntu1) utopic; urgency=low
+
+  [ Charles Kerr ]
+  * In the welcome wizard, refresh the text in the 'no sim card' and
+    'all done' pages to match the latest from design.
+
+  [ Michael Terry ]
+  * Add a location page and a terms and conditions page for the HERE
+    service.
+
+  [ Ken VanDine ]
+  * Settings for idle/lock timeout (LP: #1230345)
+  * Added flickable to fix scrolling (LP: #1354161)
+
+  [ Jussi Pakkanen ]
+  * Fix a bunch of compiler warnings.
+
+  [ jonas-drange ]
+  * [cellular] displays cellular UIs based on how many SIMs are present.
+    (LP: #1357393)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 22 Aug 2014 18:57:00 +0000
+
+ubuntu-system-settings (0.3+14.10.20140819.1-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * [system-updates] set flickable to null, workaround an issue with the
+    page widget (the panel opens with a listview on top, which the page
+    use, but then a button is added between those and that's not well
+    handled) (LP: #1356292)
+
+  [ Leo Arias ]
+  * Made the wizard security options translatable. (LP: #1357605)
+
+  [ jonas-drange ]
+  * [cellular] fix bug where the ui reverts tech pref to 2G and where
+    ofono rejects 'any' (LP: #1355053)
+
+  [ Ken VanDine ]
+  * Disable predictive text for the SIM name editor, it isn't terribly
+    useful there and currently causes the field to get blocked when the
+    keyboard is raised.
+
+  [ Martin Pitt ]
+  * Mark for using language packs.
+
+  [ Alberto Mardegan ]
+  * Other App Access: get icon from click package Improve the logic for
+    retrieving the icon. (LP: #1356938)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 19 Aug 2014 15:26:55 +0000
+
+ubuntu-system-settings (0.3+14.10.20140815-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Make the wizard properly handle devices with zero, one, or two SIM
+    modem slots. Previously it assumed exactly one slot. (LP: #1332583)
+
+  [ jonas-drange ]
+  * [main panel] point rotation lock at new backend and add (skipped)
+    tests (LP: #1288332)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 15 Aug 2014 16:45:51 +0000
+
+ubuntu-system-settings (0.3+14.10.20140814.1-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Alberto Mardegan ]
+  * Implement the "Other App Access" screen As per
+    https://wiki.ubuntu.com/AccountPrivileges#Phone
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 14 Aug 2014 13:14:19 +0000
+
+ubuntu-system-settings (0.3+14.10.20140814-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Avoid a race condition when cleaning up the wizard's Mir socket.
+    This way we won't delete unity8's Mir socket out from under it. (LP:
+    #1355726)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 14 Aug 2014 00:37:03 +0000
+
+ubuntu-system-settings (0.3+14.10.20140813-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Sebastien Bacher ]
+  * [system-update] use ubuntushaped icons (LP: #1354478)
+  * [security-privacy] let the error messages wrap when needed (LP:
+    #1354503)
+
+  [ jonas-drange ]
+  * [cellular] hide radio settings selector for offline dual sims (LP:
+    #1350380)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 13 Aug 2014 13:31:04 +0000
+
+ubuntu-system-settings (0.3+14.10.20140812.3-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] Updated based on latest designs, switching from brightness
+    slider to progression which loads the brightness plugin.
+    [brightness] Moved BrightnessSlider component to brightness plugin,
+    since it's now only used in one place. (LP: #1289470)
+
+  [ Sebastien Bacher ]
+  * system-update: tweaks to the "no update available" label (LP:
+    #1348568)
+
+  [ William Hua ]
+  * Use gsettings-qt in language panel.
+  * Add auto-punctuation and keyboard vibration options. Also fix auto-
+    completion to be auto-correction per spec. (LP: #1352398)
+
+  [ Michael Terry ]
+  * Implement a lock security page in the wizard. This page is super
+    ugly right now and just the bare bones functionality needed to set a
+    passcode or otherwise. Design is working on final visual design and
+    we will update later. (LP: #1348362)
+
+  [ jonas-drange ]
+  * [cellular] uis for default SIM settings
+  * [cellular] use expandable to show/hide sim editor and put the sim
+    editor in a Loader element to optimize single sim setups
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 12 Aug 2014 19:23:51 +0000
+
+ubuntu-system-settings (0.3+14.10.20140812-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * [battery] make the GPS switch visible
+
+  [ Sebastien Bacher ]
+  * update translation template
+  * [battery] workaround qt bug that leads the canvas to not update
+    correctly
+  * [battery] don't use antialiasing, it leads to issue with texts (LP:
+    #1354363)
+
+  [ John R. Lenton ]
+  * Bring the system settings push helper over from ubuntu-push.
+
+  [ Roberto Alsina ]
+  * Fix for the lp:1352988 crasher. (LP: #1352988)
+
+  [ Martin Pitt ]
+  * Don't break translatable strings in the middle of the sentence, as
+    that makes them impossible to translate. (LP: #1350921)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 12 Aug 2014 00:39:49 +0000
+
 ubuntu-system-settings (0.3+14.10.20140807-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]

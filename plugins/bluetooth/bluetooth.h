@@ -45,22 +45,22 @@ class Bluetooth : public QObject
 
     Q_PROPERTY (QObject * selectedDevice
                 READ getSelectedDevice
-                NOTIFY selectedDeviceChanged);
+                NOTIFY selectedDeviceChanged)
 
     Q_PROPERTY (QObject * agent
-                READ getAgent);
+                READ getAgent)
 
     Q_PROPERTY (bool powered
                 READ isPowered
-                NOTIFY poweredChanged);
+                NOTIFY poweredChanged)
 
     Q_PROPERTY (bool discovering
                 READ isDiscovering
-                NOTIFY discoveringChanged);
+                NOTIFY discoveringChanged)
 
     Q_PROPERTY (bool discoverable
                 READ isDiscoverable
-                NOTIFY discoverableChanged);
+                NOTIFY discoverableChanged)
 
 Q_SIGNALS:
     void selectedDeviceChanged();

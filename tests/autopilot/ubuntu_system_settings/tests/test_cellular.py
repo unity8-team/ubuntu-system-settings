@@ -15,18 +15,19 @@ from testtools.matchers import Equals, NotEquals, raises
 from unittest import skip
 
 from ubuntu_system_settings.tests import (
-    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE)
+    CellularBaseTestCase, CONNMAN_IFACE, RDO_IFACE, SIM_IFACE)
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
 from ubuntuuitoolkit import emulators as toolkit_emulators
 
 
 PREFERENCE_2G = '2G only (saves battery)'
-PREFERENCE_ANY = '2G/3G/4G (faster)'
+PREFERENCE_UMTS = '2G/3G (faster)'
+PREFERENCE_LTE = '2G/3G/4G (faster)'
 PREFERENCE_OFF = 'Off'
-USE_OFF = "useOff"
-USE_SIM_1 = "usesim1"
-USE_SIM_2 = "usesim2"
+USE_OFF = "useoff"
+USE_SIM_1 = "use/ril_0"
+USE_SIM_2 = "use/ril_1"
 
 
 class CellularTestCase(CellularBaseTestCase):
@@ -92,6 +93,14 @@ class CellularTestCase(CellularBaseTestCase):
             Equals(_('Cellular'))
         )
 
+    def test_single_sim_layout(self):
+        self.system_settings.main_view.cellular_page.\
+            select_single(objectName="singleSim")
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='multiSim'), raises(StateNotFoundError))
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='noSim'), raises(StateNotFoundError))
+
     def test_current_network(self):
         """ Tests whether the current network is visible and selected """
         self.navigate_to_carrier_page()
@@ -142,7 +151,7 @@ class CellularTestCase(CellularBaseTestCase):
         sleep(0.7)
         self.assertEqual(False, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         sleep(0.7)
         self.assertEqual(True, self.modem_0.Get(CONNMAN_IFACE, 'Powered'))
 
@@ -180,21 +189,21 @@ class CellularTestCase(CellularBaseTestCase):
         sleep(0.7)
         self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
                                                  'TechnologyPreference'))
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         sleep(0.7)
-        self.assertEqual('any', self.modem_0.Get(RDO_IFACE,
-                                                 'TechnologyPreference'))
+        self.assertEqual('umts', self.modem_0.Get(RDO_IFACE,
+                                                  'TechnologyPreference'))
 
     def test_sim_online_status_insensitive_to_radio_preference(self):
         # turn off cellular data
         self.select_preference(PREFERENCE_OFF)
 
-        # fake dbus signal, changing to any
+        # fake dbus signal, changing to umts
         self.modem_0.EmitSignal(
             'org.ofono.RadioSettings',
             'PropertyChanged',
             'sv',
-            ['TechnologyPreference',  dbus.String('any', variant_level=1)])
+            ['TechnologyPreference',  dbus.String('umts', variant_level=1)])
 
         # assert that "Off" has not changed
         self.assert_selected_preference(0)
@@ -212,21 +221,6 @@ class CellularTestCase(CellularBaseTestCase):
             ['Powered', 'true'])
 
         # assert that 2G is selected
-        self.assert_selected_preference(1)
-
-    def test_radio_preference_change_does_not_override_user_selection(self):
-        self.select_preference(PREFERENCE_2G)
-
-        self.modem_0.EmitSignal(
-            'org.ofono.RadioSettings',
-            'PropertyChanged',
-            'sv',
-            ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
-
-        self.assertEqual('gsm', self.modem_0.Get(RDO_IFACE,
-                                                 'TechnologyPreference'))
-
-        # assert that the preference is any
         self.assert_selected_preference(1)
 
     def test_unlocking_sim(self):
@@ -249,13 +243,7 @@ class CellularTestCase(CellularBaseTestCase):
             'sv',
             ['TechnologyPreference',  dbus.String('lte', variant_level=1)])
 
-        self.assert_selected_preference(2)
-
-    def test_that_sim_editor_is_hidden(self):
-        editor = self.system_settings.main_view.cellular_page.select_single(
-            objectName="simEditor"
-        )
-        self.assertFalse(editor.get_properties()['visible'])
+        self.assert_selected_preference(3)
 
 
 class DualSimCellularTestCase(CellularBaseTestCase):
@@ -330,8 +318,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def get_sim_name(self, num):
         obj = self.system_settings.main_view.cellular_page.select_single(
-            objectName="simEditor"
-        ).select_single(objectName="editSim%d" % num)
+            objectName="simLabel%d" % num)
         return obj.get_properties()['text']
 
     def rename_sim(self, num, new_name):
@@ -377,12 +364,12 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertEqual(
             'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
-    def test_use_any_for_sim_1(self):
+    def test_use_umts_for_sim_1(self):
         self.use_selector(USE_SIM_1)
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         sleep(0.7)
         self.assertEqual(
-            'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+            'umts', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_use_gsm_for_sim_2(self):
         self.use_selector(USE_SIM_1)
@@ -391,16 +378,16 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertEqual(
             'gsm', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
 
-    def test_use_any_for_sim_2(self):
+    def test_use_umts_for_sim_2(self):
         self.use_selector(USE_SIM_2)
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         sleep(1)
         self.assertEqual(
-            'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+            'umts', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
 
     def test_when_sim_1_comes_online_ui_is_correct(self):
         self.use_selector(USE_SIM_1)
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         self.use_selector(USE_OFF)
         sleep(0.7)
         self.modem_0.Set(CONNMAN_IFACE, 'Powered', True)
@@ -411,15 +398,15 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             ['Powered', 'true'])
 
         self.assertEqual(
-            'any', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
+            'umts', self.modem_0.Get(RDO_IFACE, 'TechnologyPreference'))
         self.assert_used(1)
         self.assert_selected_preference(1)
 
     def test_when_sim_2_comes_online_ui_is_correct(self):
         self.use_selector(USE_SIM_2)
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         self.use_selector(USE_OFF)
-        sleep(0.7)
+        sleep(2)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
         self.modem_1.EmitSignal(
             CONNMAN_IFACE,
@@ -428,7 +415,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             ['Powered', 'true'])
 
         self.assertEqual(
-            'any', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
+            'umts', self.modem_1.Get(RDO_IFACE, 'TechnologyPreference'))
         self.assert_used(2)
         self.assert_selected_preference(1)
 
@@ -460,7 +447,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             True, self.modem_0.Get(CONNMAN_IFACE, 'RoamingAllowed'))
 
     def test_no_radio_preference(self):
-        self.select_preference(PREFERENCE_ANY)
+        self.select_preference(PREFERENCE_UMTS)
         self.use_selector(USE_OFF)
 
         self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', '')
@@ -471,7 +458,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             ['TechnologyPreference', ''])
 
         self.assertThat(
-            self.data_preference_selector.get_properties()['enabled'],
+            self.data_preference_selector.get_properties()['visible'],
             Eventually(Equals(False)))
 
     # see
@@ -499,12 +486,12 @@ class DualSimCellularTestCase(CellularBaseTestCase):
     def test_radio_preference_changes(self):
         self.use_selector(USE_SIM_1)
 
-        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', 'any')
+        self.modem_0.Set(RDO_IFACE, 'TechnologyPreference', 'umts')
         self.modem_0.EmitSignal(
             RDO_IFACE,
             'PropertyChanged',
             'sv',
-            ['TechnologyPreference', 'any'])
+            ['TechnologyPreference', 'umts'])
 
         self.assert_selected_preference(1)
 
@@ -562,3 +549,127 @@ class DualSimCellularTestCase(CellularBaseTestCase):
             gsettings.set_value('sim-names', old_names)
             # wait for gsettings
             sleep(1)
+
+    def test_changing_default_sim_for_calls(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        default = gsettings.get_value('default-sim-for-calls')
+
+        self.addCleanup(
+            self.set_default_for_calls, gsettings, default)
+
+        # click ask
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_calls_selector('ask'))
+        # click first sim
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_calls_selector('/ril_0'))
+        # wait for gsettings
+        sleep(1)
+        self.assertEqual(
+            gsettings.get_value('default-sim-for-calls').get_string(),
+            '/ril_0')
+
+    def test_changing_default_sim_for_messages(self):
+        gsettings = Gio.Settings.new('com.ubuntu.phone')
+        default = gsettings.get_value('default-sim-for-messages')
+        self.addCleanup(
+            self.set_default_for_messages, gsettings, default)
+
+        # click ask
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_messages_selector('ask'))
+        # click second sim
+        self.system_settings.main_view.scroll_to_and_click(
+            self.get_default_sim_for_messages_selector('/ril_1'))
+        # wait for gsettings
+        sleep(1)
+        self.assertEqual(
+            gsettings.get_value('default-sim-for-messages').get_string(),
+            '/ril_1')
+
+    def test_multi_sim_layout(self):
+        self.system_settings.main_view.cellular_page.\
+            select_single(objectName="multiSim")
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='singleSim'), raises(StateNotFoundError))
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='noSim'), raises(StateNotFoundError))
+
+    def test_remove_one_sim(self):
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.system_settings.main_view.cellular_page.\
+            select_single(objectName="singleSim")
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='multiSim'), raises(StateNotFoundError))
+        self.assertThat(lambda: self.system_settings.main_view.select_single(
+            objectName='noSim'), raises(StateNotFoundError))
+
+    def test_remove_two_sims(self):
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.modem_1.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.system_settings.main_view.cellular_page.\
+            wait_select_single(objectName="noSim")
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='multiSim'), raises(StateNotFoundError))
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='singleSim'), raises(StateNotFoundError))
+
+    def test_remove_and_insert_sims(self):
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.modem_1.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+
+        self.system_settings.main_view.cellular_page.\
+            wait_select_single(objectName="noSim")
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='multiSim'), raises(StateNotFoundError))
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='singleSim'), raises(StateNotFoundError))
+
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'True'])
+
+        self.modem_1.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'True'])
+
+        self.system_settings.main_view.cellular_page.\
+            wait_select_single(objectName="multiSim")
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='noSim'), raises(StateNotFoundError))
+        self.assertThat(
+            lambda: self.system_settings.main_view.select_single(
+                objectName='singleSim'), raises(StateNotFoundError))

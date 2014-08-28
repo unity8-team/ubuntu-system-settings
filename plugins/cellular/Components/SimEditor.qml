@@ -24,9 +24,12 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 Column {
 
     id: simList
+    objectName: "simEditor"
 
-    anchors.left: parent.left
-    anchors.right: parent.right
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
 
     states: [
         State {
@@ -41,11 +44,15 @@ Column {
             name: "editingSim1"
             PropertyChanges {
                 target: nameField
-                text: sim1.name
+                text: sims[0].name
             }
             ParentChange {
                 target: editor
                 parent: sim1Placeholder
+            }
+            PropertyChanges {
+                target: sim1Exp
+                expanded: true
             }
         },
         State {
@@ -53,11 +60,15 @@ Column {
             name: "editingSim2"
             PropertyChanges {
                 target: nameField
-                text: sim2.name
+                text: sims[1].name
             }
             ParentChange {
                 target: editor
                 parent: sim2Placeholder
+            }
+            PropertyChanges {
+                target: sim2Exp
+                expanded: true
             }
         }
     ]
@@ -66,37 +77,88 @@ Column {
         text: i18n.tr("Edit SIM Name")
     }
 
+    ListItem.ExpandablesColumn {
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+        height: expandedItem ?
+            childrenRect.height + editor.height : childrenRect.height
 
-    ListItem.Standard {
-        id: sim1Item
-        text: sim1.title
-        objectName: "editSim1"
-        progression: true
-        onClicked: {
-            simList.state = "editingSim1";
-            nameField.forceActiveFocus();
+        ListItem.Expandable {
+            id: sim1Exp
+            expandedHeight: sim1Col.height
+            objectName: "editSim1"
+            Column {
+                id: sim1Col
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                Item {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    height: sim1Exp.collapsedHeight
+                    Label {
+                        objectName: "simLabel1"
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                        }
+                        text: sims[0].title
+                    }
+                }
+                Column {
+                    id: sim1Placeholder
+                }
+            }
+            onClicked: {
+                simList.state = "editingSim1";
+                nameField.forceActiveFocus();
+            }
+        }
+
+        ListItem.Expandable {
+            id: sim2Exp
+            expandedHeight: sim2Col.height
+            objectName: "editSim2"
+            Column {
+                id: sim2Col
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                Item {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    height: sim2Exp.collapsedHeight
+                    Label {
+                        objectName: "simLabel2"
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                        }
+                        text: sims[1].title
+                    }
+                }
+                Column {
+                    id: sim2Placeholder
+                }
+            }
+            onClicked: {
+                simList.state = "editingSim2";
+                nameField.forceActiveFocus();
+            }
         }
     }
 
-    Column {
-        id: sim1Placeholder
-    }
-
-    ListItem.Standard {
-        id: sim2Item
-        text: sim2.title
-        objectName: "editSim2"
-        progression: true
-        onClicked: {
-            simList.state = "editingSim2";
-            nameField.forceActiveFocus();
-        }
-    }
-
-    Column {
-        id: sim2Placeholder
-    }
-
+    // this column will be re-parented by a simList state change
     Column {
         id: editor
         visible: false
@@ -107,16 +169,12 @@ Column {
             horizontalCenter: simList.horizontalCenter
         }
 
-        Item {
-            height: units.gu(0.1)
-            width: parent.width
-        }
-
         TextField {
             id: nameField
             objectName: "nameField"
             maximumLength: 30
             width: simList.width - units.gu(4)
+            inputMethodHints: Qt.ImhNoPredictiveText
             onTriggered: renameAction
         }
 
@@ -145,16 +203,21 @@ Column {
             }
         }
 
+        Item {
+            height: units.gu(1)
+            width: parent.width
+        }
+
         Action {
             id: renameAction
             onTriggered: {
                 var tmpSimNames = {};
                 if (simList.state === "editingSim1") {
-                    tmpSimNames[sim1.path] = nameField.text;
-                    tmpSimNames[sim2.path] = sim2.name;
+                    tmpSimNames[sims[0].path] = nameField.text;
+                    tmpSimNames[sims[1].path] = sims[1].name;
                 } else if (simList.state === "editingSim2") {
-                    tmpSimNames[sim1.path] = sim1.name;
-                    tmpSimNames[sim2.path] = nameField.text;
+                    tmpSimNames[sims[0].path] = sims[0].name;
+                    tmpSimNames[sims[1].path] = nameField.text;
                 }
                 phoneSettings.simNames = tmpSimNames;
                 simList.state = "";

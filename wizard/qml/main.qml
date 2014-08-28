@@ -17,6 +17,7 @@
 import QtQuick 2.0
 import GSettings 1.0
 import Ubuntu.Components 0.1
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Unity.Application 0.1
 import Unity.Notifications 1.0 as NotificationBackend
 import "Components"
@@ -27,9 +28,32 @@ Item {
     width: units.gu(40)
     height: units.gu(71)
 
+    // These should be set by a security page and we apply the settings when
+    // the user exits the wizard.
+    property int passwordMethod: UbuntuSecurityPrivacyPanel.Swipe
+    property string password: ""
+
+    signal updateLanguage()
+
     Component.onCompleted: {
         Theme.name = "Ubuntu.Components.Themes.SuruGradient"
         i18n.domain = "ubuntu-system-settings"
+    }
+
+    UbuntuSecurityPrivacyPanel {
+        id: securityPrivacy
+    }
+
+    function quitWizard() {
+        // Immediately go to black to give quick feedback
+        blackCover.visible = true
+
+        // Ignore any errors, since we're past where the user set the
+        // method.  Worst case, we just leave the user with a swipe
+        // security method and they fix it in the system settings.
+        securityPrivacy.setSecurity("", password, passwordMethod)
+
+        Qt.quit()
     }
 
     // This is just a little screen to immediately go to black once the wizard
@@ -47,6 +71,7 @@ Item {
         headerColor: "#57365E"
         backgroundColor: "#A55263"
         footerColor: "#D75669"
+        anchorToKeyboard: true
 
         GSettings {
             id: background
@@ -73,7 +98,8 @@ Item {
             }
 
             function prev() {
-                pageList.prev() // to update pageList.index
+                if (pageList.index >= pageStack.depth - 1)
+                    pageList.prev() // update pageList.index, but not for extra pages
                 pop()
             }
 

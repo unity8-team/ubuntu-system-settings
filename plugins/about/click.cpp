@@ -81,9 +81,10 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
                 goto out;
             }
 
-            gchar * name = g_key_file_get_string (appinfo,
+            gchar * name = g_key_file_get_locale_string (appinfo,
                                                   G_KEY_FILE_DESKTOP_GROUP,
                                                   G_KEY_FILE_DESKTOP_KEY_NAME,
+                                                  nullptr,
                                                   nullptr);
 
             if (name) {

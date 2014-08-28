@@ -1,7 +1,10 @@
 set(QML_SOURCES
+    NoSim.qml
+    SingleSim.qml
+    MultiSim.qml
     CellularSingleSim.qml
-    data-helpers.js
-    CellularDualSim.qml
+    CellularMultiSim.qml
+    DefaultSim.qml
     Sim.qml
     SimEditor.qml
 )

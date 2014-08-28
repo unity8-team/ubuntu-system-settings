@@ -28,7 +28,7 @@ static void wireless_enabled_changed (NMDevice *device G_GNUC_UNUSED,
                                       GParamSpec *pspec G_GNUC_UNUSED,
                                       gpointer user_data)
 {
-    Battery * object = (Battery *) user_data;
+    auto object = static_cast<Battery *>(user_data);
 
     Q_EMIT (object->wifiEnabledChanged());
 }
@@ -65,7 +65,6 @@ void Battery::buildDeviceString() {
     UpClient *client;
     gboolean returnIsOk;
     GPtrArray *devices;
-    UpDevice *device;
     UpDeviceKind kind;
 
     client = up_client_new();
@@ -77,6 +76,7 @@ void Battery::buildDeviceString() {
     devices = up_client_get_devices(client);
 
     for (uint i=0; i < devices->len; i++) {
+        UpDevice *device;
         device = (UpDevice *)g_ptr_array_index(devices, i);
         g_object_get(device, "kind", &kind, nullptr);
         if (kind == UP_DEVICE_KIND_BATTERY) {
@@ -111,7 +111,6 @@ int Battery::lastFullCharge() const
 
 void Battery::getLastFullCharge()
 {
-    UpHistoryItem *item;
     GPtrArray *values = nullptr;
     gint32 offset = 0;
     GTimeVal timeval;
@@ -130,7 +129,7 @@ void Battery::getLastFullCharge()
     g_object_get (m_device, "capacity", &maxCapacity, nullptr);
 
     for (uint i=0; i < values->len; i++) {
-        item = (UpHistoryItem *) g_ptr_array_index(values, i);
+        auto item = static_cast<UpHistoryItem *>(g_ptr_array_index(values, i));
 
         /* Getting the next point after full charge, since upower registers only on state changes,
            typically you get no data while the device is fully charged and plugged and you get a discharging
@@ -155,7 +154,6 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     if (deviceString.isNull() || deviceString.isEmpty())
         return QVariantList();
 
-    UpHistoryItem *item;
     GPtrArray *values = nullptr;
     gint32 offset = 0;
     GTimeVal timeval;
@@ -174,7 +172,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     }
 
     for (uint i=values->len-1; i > 0; i--) {
-        item = (UpHistoryItem *) g_ptr_array_index(values, i);
+        auto item = static_cast<UpHistoryItem *>(g_ptr_array_index(values, i));
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
             continue;

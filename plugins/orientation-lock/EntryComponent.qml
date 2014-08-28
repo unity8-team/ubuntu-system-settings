@@ -20,8 +20,10 @@
 
 import GSettings 1.0
 import QtQuick 2.0
+import QtQuick.Window 2.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+
 
 ListItem.Standard {
     id: root
@@ -30,16 +32,14 @@ ListItem.Standard {
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
+        objectName: "orientationLockSwitch"
         checked: systemSettings.rotationLock
-        onCheckedChanged: systemSettings.rotationLock = checked
-
+        onClicked: {
+            systemSettings.rotationLock = checked
+        }
         GSettings {
             id: systemSettings
             schema.id: "com.ubuntu.touch.system"
-            onChanged: {
-                if (key == "rotationLock")
-                    control.checked = value
-            }
         }
     }
 }

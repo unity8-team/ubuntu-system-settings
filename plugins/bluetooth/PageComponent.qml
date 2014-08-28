@@ -29,6 +29,8 @@ import Ubuntu.SystemSettings.Bluetooth 1.0
 
 ItemPage {
     id: root
+    title: i18n.tr("Bluetooth")
+
     UbuntuBluetoothPanel { id: backend }
 
     Component {
@@ -49,19 +51,22 @@ ItemPage {
     Connections {
         target: backend.agent
         onPasskeyConfirmationNeeded: {
+            var request_tag = tag
             var popup = PopupUtils.open(confirmPasskeyDialog, root, {passkey: passkey, name: device.name})
-            popup.canceled.connect(function() {target.confirmPasskey(tag, false)})
-            popup.confirmed.connect(function() {target.confirmPasskey(tag, true)})
+            popup.canceled.connect(function() {target.confirmPasskey(request_tag, false)})
+            popup.confirmed.connect(function() {target.confirmPasskey(request_tag, true)})
         }
         onPasskeyNeeded: {
+            var request_tag = tag
             var popup = PopupUtils.open(providePasskeyDialog, root, {name: device.name})
-            popup.canceled.connect(function() {target.providePasskey(tag, false, 0)})
-            popup.provided.connect(function(passkey) {target.providePasskey(tag, true, passkey)})
+            popup.canceled.connect(function() {target.providePasskey(request_tag, false, 0)})
+            popup.provided.connect(function(passkey) {target.providePasskey(request_tag, true, passkey)})
         }
         onPinCodeNeeded: {
+            var request_tag = tag
             var popup = PopupUtils.open(providePinCodeDialog, root, {name: device.name})
-            popup.canceled.connect(function() {target.providePinCode(tag, false, "")})
-            popup.provided.connect(function(pinCode) {target.providePinCode(tag, true, pinCode)})
+            popup.canceled.connect(function() {target.providePinCode(request_tag, false, "")})
+            popup.provided.connect(function(pinCode) {target.providePinCode(request_tag, true, pinCode)})
         }
     }
 
@@ -112,14 +117,20 @@ ItemPage {
         }
     }
 
-    Page {
-        id: mainPage
-        title: i18n.tr("Bluetooth")
-        visible: true
+
+    Flickable {
         anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+                            Flickable.DragAndOvershootBounds :
+                            Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
         Column {
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
 
             QDBusActionGroup {
                 id: bluetoothActionGroup
@@ -205,27 +216,30 @@ ItemPage {
                 visible: connectedList.visible
             }
 
-            ListView {
+            Column {
                 id: connectedList
-                width: parent.width
-                height: connectedHeader.height * count
-
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 visible: bluetoothActionGroup.enabled && (count > 0)
 
-                model: backend.connectedDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
-                    control: ActivityIndicator {
-                        visible: connection == Device.Connecting
-                        running: true
+                Repeater {
+                    model: backend.connectedDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        control: ActivityIndicator {
+                            visible: connection == Device.Connecting
+                            running: true
+                        }
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
                     }
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
-                    }
-                    progression: true
                 }
             }
 
@@ -241,24 +255,27 @@ ItemPage {
                 }
             }
 
-            ListView {
+            Column {
                 id: disconnectedList
-                width: parent.width
-                height: disconnectedHeader.height * count
-
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 visible: bluetoothActionGroup.enabled && (count > 0)
 
-                model: backend.disconnectedDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
-                    enabled: backend.isSupportedType(type)
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
+                Repeater {
+                    model: backend.disconnectedDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        enabled: backend.isSupportedType(type)
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
                     }
-                    progression: true
                 }
             }
             ListItem.Standard {
@@ -275,23 +292,27 @@ ItemPage {
                 visible: autoconnectList.visible
                 enabled: bluetoothActionGroup.enabled
             }
-            ListView {
+            Column {
                 id: autoconnectList
-                width: parent.width
-                height: autoconnectHeader.height * count
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
 
                 visible: bluetoothActionGroup.enabled && (count > 0)
 
-                model: backend.autoconnectDevices
-                delegate: ListItem.Standard {
-                    iconSource: iconPath
-                    iconFrame: false
-                    text: getDisplayName(type, displayName)
-                    onClicked: {
-                        backend.setSelectedDevice(addressName);
-                        pageStack.push(connectedDevicePage);
+                Repeater {
+                    model: backend.autoconnectDevices
+                    delegate: ListItem.Standard {
+                        iconSource: iconPath
+                        iconFrame: false
+                        text: getDisplayName(type, displayName)
+                        onClicked: {
+                            backend.setSelectedDevice(addressName);
+                            pageStack.push(connectedDevicePage);
+                        }
+                        progression: true
                     }
-                    progression: true
                 }
             }
         }
@@ -302,100 +323,114 @@ ItemPage {
         title: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
         visible: false
 
-        Column {
+        Flickable {
             anchors.fill: parent
+            contentHeight: contentItem.childrenRect.height
+            boundsBehavior: (contentHeight > root.height) ?
+                                Flickable.DragAndOvershootBounds :
+                                Flickable.StopAtBounds
+            /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+               otherwise the UI might end up in a situation where scrolling doesn't work */
+            flickableDirection: Flickable.VerticalFlick
 
-            ListItem.SingleValue {
-                text: i18n.tr("Name")
-                value: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
-            }
-            ListItem.Standard {
-                Rectangle {
-                    color: "transparent"
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-                    anchors.leftMargin: units.gu(2)
-                    anchors.rightMargin: units.gu(2)
+            Column {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
 
-                    Label {
-                        anchors {
-                            top: parent.top
-                            left: parent.left
-                            topMargin: units.gu(1)
+                ListItem.SingleValue {
+                    text: i18n.tr("Name")
+                    value: backend.selectedDevice ? backend.selectedDevice.name : i18n.tr("None")
+                }
+                ListItem.Standard {
+                    Rectangle {
+                        color: "transparent"
+                        anchors.fill: parent
+                        anchors.topMargin: units.gu(1)
+                        anchors.leftMargin: units.gu(2)
+                        anchors.rightMargin: units.gu(2)
+
+                        Label {
+                            anchors {
+                                top: parent.top
+                                left: parent.left
+                                topMargin: units.gu(1)
+                            }
+                            height: units.gu(3)
+                            text: i18n.tr("Type")
                         }
-                        height: units.gu(3)
-                        text: i18n.tr("Type")
-                    }
-                    Image {
-                        anchors {
-                            right: deviceType.left
-                            rightMargin: units.gu(1)
+                        Image {
+                            anchors {
+                                right: deviceType.left
+                                rightMargin: units.gu(1)
+                            }
+                            height: units.gu(4)
+                            width: units.gu(4)
+                            source: backend.selectedDevice ? backend.selectedDevice.iconName : ""
                         }
-                        height: units.gu(4)
-                        width: units.gu(4)
-                        source: backend.selectedDevice ? backend.selectedDevice.iconName : ""
-                    }
-                    Label {
-                        id: deviceType
-                        anchors {
-                            top: parent.top
-                            right: parent.right
-                            topMargin: units.gu(1)
+                        Label {
+                            id: deviceType
+                            anchors {
+                                top: parent.top
+                                right: parent.right
+                                topMargin: units.gu(1)
+                            }
+                            height: units.gu(3)
+                            text: getTypeString(backend.selectedDevice ? backend.selectedDevice.type : Device.OTHER)
                         }
-                        height: units.gu(3)
-                        text: getTypeString(backend.selectedDevice ? backend.selectedDevice.type : Device.OTHER)
                     }
                 }
-            }
-            ListItem.SingleValue {
-                text: i18n.tr("Status")
-                value: getStatusString(backend.selectedDevice ? backend.selectedDevice.connection : Device.Disconnected)
-            }
-            ListItem.SingleValue {
-                text: i18n.tr("Signal Strength")
-                value: getSignalString(backend.selectedDevice ? backend.selectedDevice.strength : Device.None)
-            }
-            ListItem.Standard {
-                id: trustedCheck
-                text: i18n.tr("Connect automatically when detected:")
-                control: CheckBox {
-                    onClicked: {
-                        if (backend.selectedDevice) {
-                            backend.selectedDevice.trusted = !backend.selectedDevice.trusted
-                        }
-                    }
-                    checked: backend.selectedDevice ? backend.selectedDevice.trusted : false
+                ListItem.SingleValue {
+                    text: i18n.tr("Status")
+                    value: getStatusString(backend.selectedDevice ? backend.selectedDevice.connection : Device.Disconnected)
                 }
-                Component.onCompleted:
-                    clicked.connect(trustedCheck.clicked)
-            }
-            ListItem.SingleControl {
-                control: Button {
-                    text: backend.selectedDevice && (backend.selectedDevice.connection == Device.Connected || backend.selectedDevice.connection == Device.Connecting) ? i18n.tr("Disconnect") : i18n.tr("Connect")
-                    width: parent.width - units.gu(8)
-                    onClicked: {
-                        if (backend.selectedDevice
-                            && (backend.selectedDevice.connection == Device.Connected
-                                || backend.selectedDevice.connection == Device.Connecting)) {
-                            backend.disconnectDevice();
-                        } else {
-                            backend.stopDiscovery()
-                            backend.connectDevice(backend.selectedDevice.address);
-                        }
-                        pageStack.pop();
-                    }
-                    visible: backend.selectedDevice ? true : false
+                ListItem.SingleValue {
+                    text: i18n.tr("Signal Strength")
+                    value: getSignalString(backend.selectedDevice ? backend.selectedDevice.strength : Device.None)
                 }
-            }
-            ListItem.SingleControl {
-                control: Button {
-                    text: i18n.tr("Forget this device")
-                    width: parent.width - units.gu(8)
-                    onClicked: {
-                        backend.removeDevice();
-                        pageStack.pop();
+                ListItem.Standard {
+                    id: trustedCheck
+                    text: i18n.tr("Connect automatically when detected:")
+                    control: CheckBox {
+                        onClicked: {
+                            if (backend.selectedDevice) {
+                                backend.selectedDevice.trusted = !backend.selectedDevice.trusted
+                            }
+                        }
+                        checked: backend.selectedDevice ? backend.selectedDevice.trusted : false
                     }
-                    enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 ? true : false
+                    Component.onCompleted:
+                        clicked.connect(trustedCheck.clicked)
+                }
+                ListItem.SingleControl {
+                    control: Button {
+                        text: backend.selectedDevice && (backend.selectedDevice.connection == Device.Connected || backend.selectedDevice.connection == Device.Connecting) ? i18n.tr("Disconnect") : i18n.tr("Connect")
+                        width: parent.width - units.gu(8)
+                        onClicked: {
+                            if (backend.selectedDevice
+                                && (backend.selectedDevice.connection == Device.Connected
+                                    || backend.selectedDevice.connection == Device.Connecting)) {
+                                backend.disconnectDevice();
+                            } else {
+                                backend.stopDiscovery()
+                                backend.connectDevice(backend.selectedDevice.address);
+                            }
+                            pageStack.pop();
+                        }
+                        visible: backend.selectedDevice ? true : false
+                    }
+                }
+                ListItem.SingleControl {
+                    control: Button {
+                        text: i18n.tr("Forget this device")
+                        width: parent.width - units.gu(8)
+                        onClicked: {
+                            backend.removeDevice();
+                            pageStack.pop();
+                        }
+                        enabled: backend.selectedDevice && backend.selectedDevice.path.length > 0 ? true : false
+                    }
                 }
             }
         }

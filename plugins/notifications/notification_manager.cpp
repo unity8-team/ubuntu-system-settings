@@ -57,14 +57,15 @@ NotificationsManager::NotificationsManager(QObject *parent):
     QObject(parent),
     m_pushSettings(g_settings_new(BLACKLIST_CONFIG_SCHEMA_ID))
 {
-    QObject::connect(&m_process, SIGNAL(finished(int)),
+    m_process = new QProcess(this);
+    QObject::connect(m_process, SIGNAL(finished(int)),
                   this, SLOT(loadModel()));
 
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
     QString command = environment.value("CLICK_COMMAND", QString(CLICK_COMMAND));
     QStringList args("list");
     args << "--manifest";
-    m_process.start(command, args);
+    m_process->start(command, args);
 }
 
 NotificationsManager::~NotificationsManager()
@@ -113,7 +114,7 @@ void NotificationsManager::loadModel()
 
     // Add Click Packages
 
-    QString output(m_process.readAllStandardOutput());
+    QString output(m_process->readAllStandardOutput());
     QJsonDocument document = QJsonDocument::fromJson(output.toUtf8());
     QJsonArray array = document.array();
 
