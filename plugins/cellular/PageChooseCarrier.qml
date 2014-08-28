@@ -19,6 +19,7 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
@@ -30,48 +31,37 @@ ItemPage {
 
     objectName: "chooseCarrierPage"
 
-    property var netReg
-    property var connMan
-    property bool scanning: false
+    property var sim
+
     property variant operatorNames
     property int mode
 
-    mode: netReg.mode === "manual" ? 1 : 0
+    QtObject {
+        id: d
+        // work around OptionSelector index behaviour
+        // LP(#1361915)
+        property bool __suppressActivation : true;
+    }
 
     Component.onCompleted: {
         updateNetworkOperators();
     }
 
     Connections {
-        target: netReg
-        onStatusChanged: {
-            if (netReg.status === "registered")
-                buildLists();
-        }
-        onModeChanged: {
-            console.warn ("onModeChanged: " + mode);
-            if (mode === "manual")
-                chooseCarrier.selectedIndex = 1;
-            else
-                chooseCarrier.selectedIndex = 0;
-        }
+        target: sim.netReg
         onNetworkOperatorsChanged: updateNetworkOperators();
-        onScanFinished: scanning = false;
-        onScanError: {
-            scanning = false;
-            console.warn ("onScanError: " + message);
-        }
+        onCurrentOperatorPathChanged: buildLists();
     }
 
     Connections {
-        target: connMan
+        target: sim.connMan
     }
 
     // map of operatorPath : netOp
     property var operators: ({}) // naughty, naughty
     function updateNetworkOperators()
     {
-        var tmp = netReg.networkOperators;
+        var tmp = sim.netReg.networkOperators;
         var added = tmp.filter(function(i) {
             return operators[i] === undefined;
         });
@@ -118,6 +108,7 @@ ItemPage {
 
     function buildLists()
     {
+        d.__suppressActivation = true;
         var oN = new Array();
 
         for (var i in operators) {
@@ -128,8 +119,9 @@ ItemPage {
         }
         operatorNames = oN;
 
-        var cur = operators[netReg.currentOperatorPath];
+        var cur = operators[sim.netReg.currentOperatorPath];
         carrierSelector.selectedIndex = cur === undefined ? -1 : operatorNames.indexOf(cur.name);
+        d.__suppressActivation = false;
     }
 
     Component {
@@ -140,7 +132,7 @@ ItemPage {
                     console.warn("registerComplete failed with error: " + errorString);
                 } else if (error !== OfonoNetworkOperator.NoError) {
                     console.warn("registerComplete failed with error: " + errorString + " Falling back to default");
-                    netReg.registration();
+                    sim.netReg.registration();
                 }
             }
             onNameChanged:  buildLists();
@@ -155,7 +147,7 @@ ItemPage {
         contentHeight: parent.height
         boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        Column {
+        ColumnLayout {
             anchors.left: parent.left
             anchors.right: parent.right
 
@@ -163,82 +155,83 @@ ItemPage {
                 id: chooseCarrier
                 objectName: "autoChooseCarrierSelector"
                 expanded: true
-                enabled: netReg.mode !== "auto-only"
+                enabled: sim.netReg.mode !== "auto-only"
                 text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically"), i18n.tr("Manually")]
 
                 //showDivider: false
                 delegate: OptionSelectorDelegate { showDivider: false }
-                selectedIndex: netReg.mode === "manual" ? 1 : 0
-                onSelectedIndexChanged: {
-                    if (selectedIndex === 0)
-                        netReg.registration();
-                }
-            }
+                selectedIndex: sim.netReg.mode === "manual" ? 1 : 0
 
-            ListItem.ItemSelector {
-                id: carrierSelector
-                objectName: "carrierSelector"
-                expanded: enabled
-                enabled: chooseCarrier.selectedIndex === 1
-                model: operatorNames
+                // we only want to do this per user input
                 onSelectedIndexChanged: {
-                    if (selectedIndex === -1)
+                    if (selectedIndex === -1 || d.__suppressActivation)
                         return;
 
-                    // this assumes operator names are unique,
-                    // revise if not so
-                    for (var op in operators) {
-                        if (operators[op].name === operatorNames[selectedIndex]) {
-                            operators[op].registerOperator();
-                            return;
-                        }
+                    if (selectedIndex === 0) {
+                        sim.netReg.registration();
+                    } else if (selectedIndex === 1) {
+                        if (sim.netReg.status !== "searching")
+                            sim.netReg.scan();
                     }
-                    // just asserting to verify the logic
-                    // remove once proven functional
-                    throw "should not be reached.";
                 }
             }
-            
+            ListItem.SingleControl {
+                control: ColumnLayout {
+                    width: parent.width - units.gu(4)
+                    RowLayout {
+                        id: searchingRow
+                        height: activityIndicator.height + units.gu(3)
+                        spacing: units.gu(1)
+
+                        /// @bug something is breaking the Layouts when playing around with visible.
+                        ///      needs more investigation
+                        // visible: sim.netReg.status === "searching"
+                        opacity: sim.netReg.status === "searching" ? 1 : 0
+                        ActivityIndicator {
+                            id: activityIndicator
+                            anchors.verticalCenter: parent.verticalCenter
+                            // running: parent.visible
+                            running: parent.opacity !== 0;
+                        }
+                        Label {
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: i18n.tr("Searching for carries…")
+                        }
+                    }
+                    OptionSelector {
+                        id: carrierSelector
+                        objectName: "carrierSelector"
+                        expanded: chooseCarrier.selectedIndex === 1
+                        enabled: sim.netReg.status !== "searching" && chooseCarrier.selectedIndex === 1
+                        width: parent.width
+                        model: operatorNames
+                        onSelectedIndexChanged: {
+                            if (selectedIndex === -1 || d.__suppressActivation)
+                                return;
+
+                            // this assumes operator names are unique,
+                            // revise if not so
+                            for (var op in operators) {
+                                if (operators[op].name === operatorNames[selectedIndex]) {
+                                    operators[op].registerOperator();
+                                    return;
+                                }
+                            }
+                            // just asserting to verify the logic
+                            // remove once proven functional
+                            throw "should not be reached.";
+                        }
+                    }
+                }
+            }
             ListItem.Standard {
                 text: i18n.tr("APN")
                 progression: true
-                visible: true
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {connMan: connMan})
+                    pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {sim: sim})
                 }
             }
-        }
-
-        ListItem.SingleControl {
-            anchors.bottom: parent.bottom
-            control: Button {
-                objectName: "refreshButton"
-                width: parent.width - units.gu(4)
-                text: i18n.tr("Refresh")
-                /// takes a LONG TIME!
-                enabled: (netReg.status !== "searching") && (netReg.status !== "denied")
-                onTriggered: {
-                    scanning = true;
-                    netReg.scan();
-                }
-            }
-        }
-
-        ActivityIndicator {
-            id: activityIndicator
-            anchors.centerIn: parent
-            running: scanning
-        }
-
-        Label {
-            anchors {
-                top: activityIndicator.bottom
-                topMargin: units.gu(2)
-                horizontalCenter: activityIndicator.horizontalCenter
-            }
-            text: i18n.tr("Searching")
-            visible: activityIndicator.running
         }
     }
 }

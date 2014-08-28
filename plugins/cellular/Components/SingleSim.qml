@@ -28,10 +28,10 @@ Column {
     property var sim
 
     CellularSingleSim {
-        anchors { left: parent.left; right: parent.right }
+        anchors { left: parent.left; right: parent.right }
     }
 
-    ListItem.Divider {}
+    ListItem.Divider {}
 
     ListItem.SingleValue {
         text : i18n.tr("Hotspot disabled because Wi-Fi is off.")
@@ -62,7 +62,7 @@ Column {
         value: sim.netReg.name || i18n.tr("N/A")
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../PageChooseCarrier.qml"), {
-                netReg: sim.netReg,
+                sim: sim,
                 title: i18n.tr("Carrier")
             })
         }

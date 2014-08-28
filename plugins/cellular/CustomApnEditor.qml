@@ -92,6 +92,9 @@ ItemPage {
         //protocol.selectedIndex = map(theContext.protocol);
 
         if (d.isMms) {
+            /// @todo disabled for now
+            doBoth.checked = false;
+            return;
             var internetApn = contexts["internet"]
             if (ctx.accessPointName === internetApn.accessPointName &&
                 ctx.username == internetApn.username &&
@@ -118,7 +121,9 @@ ItemPage {
             ListItem.Standard {
                 id: sameSwitch
                 anchors.top: parent.top
-                visible: d.isMms
+                /// @todo disable for now
+                //visible: d.isMms
+                visible: false
                 text: i18n.tr("Same APN as for Internet")
                 control: Switch {
                     id: doBoth

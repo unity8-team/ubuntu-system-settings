@@ -31,14 +31,14 @@ ItemPage {
     title: i18n.tr("APN")
     objectName: "apnPage"
 
-    property var connMan
+    property var sim
     // arrays holding the APN contexts
 
 
     QtObject {
         id: d
 
-        // map of contextPath : netOp
+        // map of contextPath : connCtx
         property var mContexts: ({})
 
         readonly property string mCustomContextNameInternet: "___ubuntu_custom_apn_internet"
@@ -52,7 +52,7 @@ ItemPage {
 
         function updateContexts()
         {
-            var tmp = connMan.contexts;
+            var tmp = sim.connMan.contexts;
             var added = tmp.filter(function(i) {
                 return mContexts[i] === undefined;
             });
@@ -138,22 +138,22 @@ ItemPage {
                 customInternet.forEach(function(currentValue, index, array) {
                    if (index === 0)
                        return;
-                   connMan.removeContext(currentValue);
+                   sim.connMan.removeContext(currentValue);
                 });
             }
             if (customMms.length > 1) {
                 customMms.forEach(function(currentValue, index, array) {
                    if (index === 0)
                        return;
-                   connMan.removeContext(currentValue);
+                   sim.connMan.removeContext(currentValue);
                 });
             }
 
             if (customInternet.length === 0) {
-                connMan.addContext("internet");
+                sim.connMan.addContext("internet");
             }
             if (customMms.length === 0) {
-                connMan.addContext("mms");
+                sim.connMan.addContext("mms");
             }
 
             buildLists();
@@ -182,7 +182,7 @@ ItemPage {
             });
             mms = Object.keys(mContexts).filter(function(i) {
                 var ctx = mContexts[i];
-                if (ctx.type === "mms") {
+                if ( ctx.type === "mms") {
                     if (ctx.name === mCustomContextNameMms) {
                         mCustomContextMms = ctx;
                         // don't add yet
@@ -190,6 +190,7 @@ ItemPage {
                     }
                     return true;
                 }
+
                 return false;
             });
 
@@ -198,6 +199,9 @@ ItemPage {
                 internet = internet.concat([mCustomContextInternet.contextPath])
             if (mCustomContextMms !== undefined)
                 mms = mms.concat([mCustomContextMms.contextPath])
+
+            // add "Same APN as for Internet" to be the first on the MMS list
+            mms = ["/same/as/internet"].concat(mms);
 
             mInternetApns = internet;
             mMmsApns = mms;
@@ -226,10 +230,7 @@ ItemPage {
         }
 
         function activateHelper(contextPath) {
-            var sim = Qt.createQmlObject("import MeeGo.QOfono 0.2; OfonoSimManager {}", this);
-            sim.modemPath = mContexts[contextPath].modemPath;
-            activator.activate(contextPath, sim.subscriberIdentity, sim.modemPath)
-            sim.destroy();
+            activator.activate(contextPath, sim.simMng.subscriberIdentity, sim.simMng.modemPath)
         }
     }
 
@@ -240,6 +241,14 @@ ItemPage {
     Component {
         id: connCtx
         OfonoContextConnection {
+
+            property bool dual : false
+            Component.onCompleted:{
+                if (type == "internet")
+                    if (messageCenter !== "")
+                        dual = true
+            }
+
             onActiveChanged: {
                 d.__suppressActivation = true;
                 if (this.active) {
@@ -255,7 +264,7 @@ ItemPage {
             onAccessPointNameChanged: d.buildLists()
 
             onProvisioningFinished: {
-               console.warn("Provisioned")
+                console.warn("Provisioned")
             }
             onReportError: {
                 console.warn("Context error: " + errorString)
@@ -266,7 +275,7 @@ ItemPage {
     }
 
     Connections {
-        target: connMan
+        target: sim.connMan
         onContextsChanged: {
             d.updateContexts()
         }
@@ -319,9 +328,21 @@ ItemPage {
                     }
                     onModelChanged: selectedIndex = -1;
                     onSelectedIndexChanged: {
-                        if (selectedIndex === -1 || d.__suppressActivation)
+                        if (selectedIndex === -1) {
+                            if (mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
+                                                        mmsApnSelector.selectedIndex = -1
                             return;
+                        }
+
                         var ctx = d.mContexts[model[selectedIndex]];
+                        if(ctx.dual)
+                            mmsApnSelector.selectedIndex = mmsApnSelector.model.indexOf("/same/as/internet")
+                        else if (mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
+                            mmsApnSelector.selectedIndex = -1
+
+                        if (d.__suppressActivation)
+                            return;
+
                         console.warn(ctx.contextPath)
                         d.activateHelper(ctx.contextPath);
                     }
@@ -352,7 +373,11 @@ ItemPage {
                     model: d.mMmsApns
                     expanded: true
                     delegate: OptionSelectorDelegate {
+                        showDivider: modelData === "/same/as/internet"
                         text: {
+                            if (modelData === "/same/as/internet") {
+                                return i18n.tr("Same APN as for Internet");
+                            }
                             var ctx = d.mContexts[modelData];
                             if (ctx.name !== "") {
                                 if (ctx.name !== d.mCustomContextNameMms) {
@@ -370,6 +395,17 @@ ItemPage {
                     onSelectedIndexChanged: {
                         if (selectedIndex === -1 || d.__suppressActivation)
                             return;
+
+                        if (model[selectedIndex] === "/same/as/internet") {
+                            // deactivate any separate MMS context
+                            Object.keys(d.mContexts).forEach(function(currentValue, index, array) {
+                                var ctx = d.mContexts[currentValue];
+                                if (ctx.type === "mms" && ctx.active)
+                                    ctx.deactivate()
+                            });
+                            return;
+                        }
+
                         var ctx = d.mContexts[model[selectedIndex]];
                         console.warn(ctx.contextPath)
                         d.activateHelper(ctx.contextPath);

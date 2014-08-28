@@ -49,7 +49,7 @@ ItemPage {
                 progression: true
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        netReg: sims[0].netReg,
+                        sim: sims[0],
                         title: sims[0].title
                     })
                 }
@@ -65,7 +65,7 @@ ItemPage {
                 progression: true
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseCarrier.qml"), {
-                        netReg: sims[1].netReg,
+                        sim: sims[1],
                         title: sims[1].title
                     })
                 }
