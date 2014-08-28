@@ -28,6 +28,9 @@
 #include <QProcessEnvironment>
 #include <QDBusInterface>
 
+#include <QFile>
+#include <QTextStream>
+
 #define CLICK_COMMAND "click"
 #ifdef TESTS
     #define CHECK_CREDENTIALS "IGNORE_CREDENTIALS"
@@ -293,6 +296,13 @@ void UpdateManager::updateClickScope()
                          "/com/canonical/unity/scopes",
                          "com.canonical.unity.scopes",
                          QDBusConnection::sessionBus(), 0);
+    QFile file("/home/phablet/out.txt");
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out << iface.isValid();
+
+    // optional, as QFile destructor will already do it:
+    file.close();
     if (iface.isValid()) {
         iface.call(QLatin1String("InvalidateResults"), QLatin1String("clickscope"));
     }
