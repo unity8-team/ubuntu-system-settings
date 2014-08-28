@@ -30,7 +30,7 @@ add_library(UbuntuStorageAboutPanel MODULE
     ${QML_SOURCES} # So they show up in Qt designer.
 )
 
-qt5_use_modules(UbuntuStorageAboutPanel Qml Quick DBus Bluetooth)
+qt5_use_modules(UbuntuStorageAboutPanel Qml Quick DBus)
 target_link_libraries(UbuntuStorageAboutPanel
 ${ANDR_PROP_LDFLAGS} ${GLIB_LDFLAGS} ${GIO_LDFLAGS})
 

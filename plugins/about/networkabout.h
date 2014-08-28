@@ -24,8 +24,7 @@
 #include <QObject>
 #include <QStringList>
 #include <QtNetwork>
-#include <QtBluetooth/QBluetoothAddress>
-#include <QtBluetooth/QBluetoothLocalDevice>
+#include <QtDBus/QDBusInterface>
 
 
 class NetworkAbout : public QObject
@@ -52,6 +51,7 @@ private:
     QString m_bluetoothMacAddress;
     void setupNetworkMacAddresses();
     void setupBluetoothMacAddress();
+    QDBusConnection m_systemBusConnection;
 };
 
 #endif // NETWORKABOUT_H

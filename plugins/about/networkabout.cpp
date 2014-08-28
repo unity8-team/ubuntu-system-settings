@@ -18,11 +18,14 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "networkabout.h"
 #include <QDebug>
+#include <QDBusReply>
+
+#include "networkabout.h"
 
 NetworkAbout::NetworkAbout(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+    m_systemBusConnection(QDBusConnection::systemBus())
 {
 
     setupNetworkMacAddresses();
@@ -48,22 +51,37 @@ void NetworkAbout::setupNetworkMacAddresses()
 
 void NetworkAbout::setupBluetoothMacAddress()
 {
-    QBluetoothLocalDevice localDevice;
-    if (localDevice.isValid()) {
-        qWarning() << "bt device valid";
-        qWarning() << localDevice.address().toString();
-        m_bluetoothMacAddress = localDevice.address().toString();
-    } else {
-        qWarning() << "bt device invalid";
+    QDBusInterface bluezManagerInterface (
+        "org.bluez",
+        "/",
+        "org.bluez.Manager",
+        m_systemBusConnection,
+        this);
 
+    if (!bluezManagerInterface.isValid()) {
+        return;
     }
-    qWarning() << "number of bt devices:" << QBluetoothLocalDevice::allDevices().count();
-    // if (!QBluetoothLocalDevice::allDevices().count()) {
-    //     qWarning() << "no bt devices";
-    //     qWarning() << localDevice.address().toString();
-    //     return;
-    // }
 
+    QDBusReply<QDBusObjectPath> defaultDevice = bluezManagerInterface.call("DefaultAdapter");
+
+    if (!defaultDevice.isValid()) {
+        return;
+    }
+
+    QDBusInterface adapterInterface (
+        "org.bluez",
+        defaultDevice.value().path(),
+        "org.bluez.Adapter",
+        m_systemBusConnection,
+        this);
+
+    QDBusReply<QVariantMap> props = adapterInterface.call("GetProperties");
+
+    if (!props.isValid()) {
+        return;
+    }
+
+    m_bluetoothMacAddress = props.value()["Address"].toString();
 }
 
 QStringList NetworkAbout::networkMacAddresses()
