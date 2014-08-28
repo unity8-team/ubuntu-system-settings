@@ -109,8 +109,6 @@ class SoundTestCase(SoundBaseTestCase):
             objectName="dialpadSounds")
         prev_value = self.obj_test.GetDialpadSounds()
         self.system_settings.main_view.scroll_to_and_click(snd)
-        sleep(0.2)
-        self.assertNotEqual(
-            self.obj_test.GetDialpadSounds(),
-            prev_value)
-
+        self.assertThat(
+            lambda: self.obj_test.GetDialpadSounds(),
+            Eventually(NotEquals(prev_value)))

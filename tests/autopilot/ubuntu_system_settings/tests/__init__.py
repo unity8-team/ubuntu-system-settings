@@ -515,7 +515,7 @@ class SoundBaseTestCase(
         klass.start_system_bus()
         klass.dbus_con = klass.get_dbus(True)
 
-    def setUp(self):
+    def setUp(self, panel='sound'):
 
         user_obj = '/user/foo'
 
@@ -599,11 +599,12 @@ class SoundBaseTestCase(
         self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
                                                  ACCOUNTS_IFACE)
 
-        super(SoundBaseTestCase, self).setUp('sound')
+        super(SoundBaseTestCase, self).setUp(panel)
 
         """ Go to Sound page """
-        self.assertThat(self.system_settings.main_view.sound_page.active,
-                        Eventually(Equals(True)))
+        if panel == 'sound':
+            self.assertThat(self.system_settings.main_view.sound_page.active,
+                            Eventually(Equals(True)))
 
     def tearDown(self):
         self.mock_server.terminate()
@@ -685,3 +686,12 @@ class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     def tearDown(self):
         super(SecurityBaseTestCase, self).tearDown()
+
+class PhoneSoundBaseTestCase(SoundBaseTestCase):
+    def setUp(self):
+        """ Go to Phone page """
+        super(PhoneSoundBaseTestCase, self).setUp('phone')
+        self.phone_page = self.system_settings.main_view.go_to_phone_page()
+
+    def tearDown(self):
+        super(PhoneSoundBaseTestCase, self).tearDown()
