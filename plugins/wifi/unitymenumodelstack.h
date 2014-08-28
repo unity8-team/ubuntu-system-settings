@@ -36,7 +36,7 @@ class UnityMenuModelStack: public QObject
     Q_PROPERTY(UnityMenuModel *head READ head WRITE setHead NOTIFY headChanged)
     Q_PROPERTY(UnityMenuModel *tail READ tail NOTIFY tailChanged)
 public:
-    UnityMenuModelStack(QObject *parent = 0);
+    explicit UnityMenuModelStack(QObject *parent = 0);
     ~UnityMenuModelStack();
 
     UnityMenuModel *head() const;

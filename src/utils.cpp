@@ -18,8 +18,8 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "debug.h"
 #include "utils.h"
+#include "debug.h"
 
 #include <QUrl>
 #include <QUrlQuery>

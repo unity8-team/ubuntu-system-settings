@@ -34,7 +34,7 @@ class ItemModel: public QAbstractListModel
     Q_OBJECT
 
 public:
-    ItemModel(QObject *parent = 0);
+    explicit ItemModel(QObject *parent = 0);
     ~ItemModel();
 
     enum Roles {
@@ -62,7 +62,7 @@ class ItemModelSortProxy: public QSortFilterProxyModel
     Q_OBJECT
 
 public:
-    ItemModelSortProxy(QObject *parent = 0);
+    explicit ItemModelSortProxy(QObject *parent = 0);
 
 protected:
     virtual bool lessThan(const QModelIndex &left,

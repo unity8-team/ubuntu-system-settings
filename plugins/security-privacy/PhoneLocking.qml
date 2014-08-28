@@ -43,7 +43,7 @@ ItemPage {
 
         ListItem.SingleValue {
             property string swipe: i18n.tr("None")
-            property string passcode: i18n.tr("Passcode")
+            property string passcode: i18n.tr("PIN code")
             property string passphrase: i18n.tr("Passphrase")
 
             text: i18n.tr("Lock security")

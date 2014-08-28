@@ -22,6 +22,7 @@
 
 #include <QDBusConnection>
 #include <QDBusInterface>
+#include <QDBusPendingCallWatcher>
 #include <QSharedPointer>
 #include <QString>
 

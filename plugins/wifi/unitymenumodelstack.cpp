@@ -30,7 +30,7 @@ UnityMenuModelStack::~UnityMenuModelStack()
 
 UnityMenuModel *UnityMenuModelStack::head() const
 {
-    return !m_menuModels.isEmpty() ? m_menuModels.first() : NULL;
+    return !m_menuModels.isEmpty() ? m_menuModels.first() : nullptr;
 }
 
 void UnityMenuModelStack::setHead(UnityMenuModel *model)
@@ -44,7 +44,7 @@ void UnityMenuModelStack::setHead(UnityMenuModel *model)
 
 UnityMenuModel *UnityMenuModelStack::tail() const
 {
-    return !m_menuModels.isEmpty() ? m_menuModels.last() : NULL;
+    return !m_menuModels.isEmpty() ? m_menuModels.last() : nullptr;
 }
 
 void UnityMenuModelStack::push(UnityMenuModel *model)
@@ -56,13 +56,13 @@ void UnityMenuModelStack::push(UnityMenuModel *model)
 UnityMenuModel *UnityMenuModelStack::pop()
 {
     if (m_menuModels.isEmpty()) {
-        return NULL;
+        return nullptr;
     }
     UnityMenuModel *model = m_menuModels.takeLast();
 
     Q_EMIT tailChanged(tail());
     if (m_menuModels.isEmpty()) {
-        Q_EMIT headChanged(NULL);
+        Q_EMIT headChanged(nullptr);
     }
 
     return model;

@@ -31,8 +31,8 @@ class ExampleItem: public ItemBase
     Q_OBJECT
 
 public:
-    ExampleItem(const QVariantMap &staticData, QObject *parent = 0);
-    ~ExampleItem();
+    explicit ExampleItem(const QVariantMap &staticData, QObject *parent = 0);
+    virtual ~ExampleItem();
 
     virtual QQmlComponent *pageComponent(QQmlEngine *engine,
                                          QObject *parent = 0);

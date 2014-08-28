@@ -14,86 +14,78 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import QtQuick 2.3
+import Ubuntu.Components 1.1
+import Ubuntu.Components.ListItems 0.1
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
-import MeeGo.QOfono 0.2
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Hello")
+    title: i18n.tr("Hi!")
     forwardButtonSourceComponent: forwardButton
 
     UbuntuLanguagePlugin {
         id: plugin
     }
 
-    OfonoManager {
-        id: manager
-    }
+    Column {
+        id: column
+        anchors.fill: content
+        spacing: units.gu(1)
 
-    // Ideally we would query the system more cleverly than hardcoding two
-    // modems.  But we don't yet have a more clever way.  :(
-    OfonoSimManager {
-        id: simManager0
-        modemPath: manager.modems.length >= 1 ? manager.modems[0] : ""
-    }
-
-    OfonoSimManager {
-        id: simManager1
-        modemPath: manager.modems.length >= 2 ? manager.modems[1] : ""
-    }
-
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
+        Label {
+            id: label1
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("Welcome to your Ubuntu phone.")
         }
 
-        Column {
-            id: column
-            spacing: units.gu(2)
+        Label {
+            id: label2
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("Let’s get started.")
+        }
 
-            Label {
-                id: label
-                width: content.width
-                wrapMode: Text.WordWrap
-                fontSize: "large"
-                text: i18n.tr("Welcome to your Ubuntu phone. Let’s get started.")
-            }
+        Item { // spacer
+            height: units.gu(2)
+            width: units.gu(1) // needed else it will be ignored
+        }
 
-            OptionSelector {
-                id: languageList
-                text: i18n.tr("Select your language")
+        ComboButton {
+            id: combo
+            anchors.left: parent.left
+            anchors.right: parent.right
+            text: listview.currentItem.text
+            onClicked: expanded = !expanded
+            expandedHeight: column.height - combo.y
+            UbuntuListView {
+                id: listview
                 model: plugin.languageNames
-                expanded: true
-                selectedIndex: plugin.currentLanguage
-                onSelectedIndexChanged: {
-                    i18n.language = plugin.languageCodes[selectedIndex]
-                    i18n.domain = i18n.domain
+                currentIndex: plugin.currentLanguage
+                delegate: Standard {
+                    text: modelData
+                    onClicked: {
+                        listview.currentIndex = index
+                        combo.expanded = false
+                        i18n.language = plugin.languageCodes[index]
+                        i18n.domain = i18n.domain
+                    }
                 }
-                containerHeight: content.height - label.height
-                                 - column.spacing - units.gu(4)
             }
         }
     }
 
     Component {
         id: forwardButton
-        LocalComponents.ForwardButton {
-            text: i18n.tr("Start")
+        LocalComponents.StackButton {
+            text: i18n.tr("Continue")
             onClicked: {
-                plugin.currentLanguage = languageList.selectedIndex
+                plugin.currentLanguage = listview.currentIndex
                 root.updateLanguage()
-                if (manager.modems.length == 0 || simManager0.present || simManager1.present)
-                    pageStack.next()
-                else
-                    pageStack.push(Qt.resolvedUrl("no-sim.qml"))
+                pageStack.next()
             }
         }
     }

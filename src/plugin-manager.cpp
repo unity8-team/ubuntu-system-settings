@@ -18,10 +18,10 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "plugin-manager.h"
 #include "debug.h"
 #include "item-model.h"
 #include "plugin.h"
-#include "plugin-manager.h"
 
 #include <QDir>
 #include <QMap>
@@ -40,7 +40,7 @@ class PluginManagerPrivate
 {
     Q_DECLARE_PUBLIC(PluginManager)
 
-    inline PluginManagerPrivate(PluginManager *q);
+    inline explicit PluginManagerPrivate(PluginManager *q);
     inline ~PluginManagerPrivate();
 
     void clear();
@@ -168,7 +168,7 @@ QObject *PluginManager::getByName(const QString &name) const
         if (plugins.value().contains(name))
             return plugins.value()[name];
     }
-    return NULL;
+    return nullptr;
 }
 
 QString PluginManager::getFilter()
