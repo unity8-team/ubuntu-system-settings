@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+14.10.20140828.3-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Implement the "When locked, allow:" portion of the Security &
+    Privacy panel, so now the user can control whether the launcher
+    and/or indicators are available while locked. (LP: #1358340) (LP:
+    #1358340)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 28 Aug 2014 18:11:51 +0000
+
 ubuntu-system-settings (0.3+14.10.20140828.2-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
