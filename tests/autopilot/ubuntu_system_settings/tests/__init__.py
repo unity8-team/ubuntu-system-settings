@@ -687,6 +687,7 @@ class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def tearDown(self):
         super(SecurityBaseTestCase, self).tearDown()
 
+
 class PhoneSoundBaseTestCase(SoundBaseTestCase):
     def setUp(self):
         """ Go to Phone page """
