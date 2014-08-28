@@ -18,8 +18,9 @@
  *
 */
 
-#include <QDir>
 #include "sound.h"
+
+#include <QDir>
 #include <unistd.h>
 
 #define AS_INTERFACE "com.ubuntu.touch.AccountsService.Sound"

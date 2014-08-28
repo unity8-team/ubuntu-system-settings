@@ -36,7 +36,7 @@ static const char * const LOCALE_BLACKLIST[] = {
     "C",
     "C.UTF-8",
     "POSIX",
-    NULL
+    nullptr
 };
 
 struct LanguageLocale
@@ -93,14 +93,14 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
     m_currentLanguage(-1),
     m_nextCurrentLanguage(-1),
     m_manager(act_user_manager_get_default()),
-    m_user(NULL),
+    m_user(nullptr),
     m_maliitSettings(g_settings_new(UBUNTU_KEYBOARD_SCHEMA_ID))
 {
-    if (m_manager != NULL) {
+    if (m_manager != nullptr) {
         g_object_ref(m_manager);
 
         gboolean loaded;
-        g_object_get(m_manager, "is-loaded", &loaded, NULL);
+        g_object_get(m_manager, "is-loaded", &loaded, nullptr);
 
         if (loaded)
             managerLoaded();
@@ -119,17 +119,17 @@ LanguagePlugin::LanguagePlugin(QObject *parent) :
 
 LanguagePlugin::~LanguagePlugin()
 {
-    if (m_user != NULL) {
+    if (m_user != nullptr) {
         g_signal_handlers_disconnect_by_data(m_user, this);
         g_object_unref(m_user);
     }
 
-    if (m_manager != NULL) {
+    if (m_manager != nullptr) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
         g_object_unref(m_manager);
     }
 
-    if (m_maliitSettings != NULL) {
+    if (m_maliitSettings != nullptr) {
         g_signal_handlers_disconnect_by_data(m_maliitSettings, this);
         g_object_unref(m_maliitSettings);
     }
@@ -341,7 +341,7 @@ LanguagePlugin::updateCurrentLanguage()
 {
     int previousLanguage(m_currentLanguage);
 
-    if (m_user != NULL && act_user_is_loaded(m_user)) {
+    if (m_user != nullptr && act_user_is_loaded(m_user)) {
         if (m_nextCurrentLanguage >= 0) {
             m_currentLanguage = m_nextCurrentLanguage;
             m_nextCurrentLanguage = -1;
@@ -529,14 +529,14 @@ void
 LanguagePlugin::managerLoaded()
 {
     gboolean loaded;
-    g_object_get(m_manager, "is-loaded", &loaded, NULL);
+    g_object_get(m_manager, "is-loaded", &loaded, nullptr);
 
     if (loaded) {
         g_signal_handlers_disconnect_by_data(m_manager, this);
 
         m_user = act_user_manager_get_user_by_id(m_manager, geteuid());
 
-        if (m_user != NULL) {
+        if (m_user != nullptr) {
             g_object_ref(m_user);
 
             if (act_user_is_loaded(m_user))

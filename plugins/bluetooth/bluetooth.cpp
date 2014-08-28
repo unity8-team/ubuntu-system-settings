@@ -18,11 +18,12 @@
  *
  */
 
+#include "bluetooth.h"
+
 #include <QQmlEngine>
 
 #include "agent.h"
 #include "agentadaptor.h"
-#include "bluetooth.h"
 #include "dbus-shared.h"
 
 Bluetooth::Bluetooth(QObject *parent):

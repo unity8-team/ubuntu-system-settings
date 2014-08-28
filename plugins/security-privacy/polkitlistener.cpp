@@ -72,7 +72,7 @@ uss_polkit_listener_finalize(GObject *object)
     UssPolkitListener *listener = USS_POLKIT_LISTENER(object);
     UssPolkitListenerPrivate *priv = listener->priv;
 
-    if (priv->password != NULL)
+    if (priv->password != nullptr)
         g_free(priv->password);
 
     G_OBJECT_CLASS(uss_polkit_listener_parent_class)->finalize(object);
@@ -97,7 +97,7 @@ uss_polkit_listener_class_init(UssPolkitListenerClass *klass)
 UssPolkitListener *
 uss_polkit_listener_new(void)
 {
-    return USS_POLKIT_LISTENER(g_object_new(USS_TYPE_POLKIT_LISTENER, NULL));
+    return USS_POLKIT_LISTENER(g_object_new(USS_TYPE_POLKIT_LISTENER, nullptr));
 }
 
 bool uss_polkit_listener_register(UssPolkitListener *listener)
@@ -107,9 +107,9 @@ bool uss_polkit_listener_register(UssPolkitListener *listener)
     PolkitSubject *subject = polkit_unix_process_new_for_owner(priv->pid, 0, getuid());
     priv->registration = polkit_agent_listener_register(POLKIT_AGENT_LISTENER(listener),
                                                         POLKIT_AGENT_REGISTER_FLAGS_RUN_IN_THREAD,
-                                                        subject, NULL, NULL, NULL);
+                                                        subject, nullptr, nullptr, nullptr);
     g_object_unref(subject);
-    if (priv->registration == NULL) {
+    if (priv->registration == nullptr) {
         g_object_unref(listener);
         return false;
     }
@@ -139,10 +139,10 @@ void uss_polkit_listener_set_pid(UssPolkitListener *listener, int pid)
 bool uss_polkit_listener_run(UssPolkitListener *listener)
 {
     UssPolkitListenerPrivate *priv = listener->priv;
-    if (priv->loop != NULL)
+    if (priv->loop != nullptr)
         return false;
 
-    priv->loop = g_main_loop_new(NULL, FALSE);
+    priv->loop = g_main_loop_new(nullptr, FALSE);
     g_main_loop_run(priv->loop);
 
     return priv->successful;
@@ -162,9 +162,9 @@ on_completed(PolkitAgentSession */*session*/,
     g_clear_object(&priv->simple);
     g_clear_object(&priv->session);
     g_free(priv->password);
-    priv->password = NULL;
+    priv->password = nullptr;
 
-    if (priv->loop != NULL)
+    if (priv->loop != nullptr)
         g_main_loop_quit(priv->loop);
 }
 
@@ -201,7 +201,7 @@ uss_polkit_listener_initiate_authentication(PolkitAgentListener  *agent_listener
                                        callback,
                                        user_data,
                                        (gpointer)uss_polkit_listener_initiate_authentication);
-    if (priv->session != NULL) {
+    if (priv->session != nullptr) {
         g_simple_async_result_set_error(simple, POLKIT_ERROR,
                                         POLKIT_ERROR_FAILED,
                                         "Already one authentication in progress");

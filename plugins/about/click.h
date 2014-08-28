@@ -31,7 +31,7 @@ class ClickModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    ClickModel(QObject *parent = 0);
+    explicit ClickModel(QObject *parent = 0);
     ~ClickModel();
 
     Q_ENUMS(Roles)
@@ -75,7 +75,7 @@ class ClickFilterProxy: public QSortFilterProxyModel
     Q_OBJECT
 
 public:
-    ClickFilterProxy(ClickModel *parent = 0);
+    explicit ClickFilterProxy(ClickModel *parent = 0);
 
 };
 

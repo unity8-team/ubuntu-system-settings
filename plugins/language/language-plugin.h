@@ -63,7 +63,7 @@ public:
                READ spellCheckingModel
                CONSTANT)
 
-    explicit LanguagePlugin(QObject *parent = NULL);
+    explicit LanguagePlugin(QObject *parent = nullptr);
 
     virtual ~LanguagePlugin();
 

@@ -48,7 +48,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
 {
     QVariantMap appHooks;
     GKeyFile *appinfo = g_key_file_new();
-    gchar *desktopFileName = NULL;
+    gchar *desktopFileName = nullptr;
 
     QVariantMap::ConstIterator begin(hooks.constBegin());
     QVariantMap::ConstIterator end(hooks.constEnd());
@@ -74,7 +74,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             gboolean loaded = g_key_file_load_from_file(appinfo,
                                                         desktopFileName,
                                                         G_KEY_FILE_NONE,
-                                                        NULL);
+                                                        nullptr);
 
             if (!loaded) {
                 g_warning ("Couldn't parse desktop file %s", desktopFileName);
@@ -84,14 +84,14 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             gchar * name = g_key_file_get_locale_string (appinfo,
                                                   G_KEY_FILE_DESKTOP_GROUP,
                                                   G_KEY_FILE_DESKTOP_KEY_NAME,
-                                                  NULL,
-                                                  NULL);
+                                                  nullptr,
+                                                  nullptr);
 
             if (name) {
                 g_debug ("Name is %s", name);
                 newClick->displayName = name;
                 g_free (name);
-                name = NULL;
+                name = nullptr;
             }
 
             // Overwrite the icon with the .desktop file's one if we have it.
@@ -100,7 +100,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             gchar * icon = g_key_file_get_string (appinfo,
                                                   G_KEY_FILE_DESKTOP_GROUP,
                                                   G_KEY_FILE_DESKTOP_KEY_ICON,
-                                                  NULL);
+                                                  nullptr);
 
             if (icon) {
                 g_debug ("Icon is %s", icon);

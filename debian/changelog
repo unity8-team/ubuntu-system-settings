@@ -1,3 +1,18 @@
+ubuntu-system-settings (0.3+14.10.20140828.2-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Update look and feel of wizard to more closely match the visual
+    design.
+
+  [ Jussi Pakkanen ]
+  * Minor cleanups.
+
+  [ Roberto Alsina ]
+  * Don't crash the push helper in locales that have no .mo file (LP:
+    #1357506)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 28 Aug 2014 13:55:40 +0000
+
 ubuntu-system-settings (0.3+14.10.20140827.3-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]

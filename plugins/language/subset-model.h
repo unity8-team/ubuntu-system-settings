@@ -51,7 +51,7 @@ public:
                WRITE setAllowEmpty
                NOTIFY allowEmptyChanged)
 
-    explicit SubsetModel(QObject *parent = NULL);
+    explicit SubsetModel(QObject *parent = nullptr);
 
     virtual const QStringList &customRoles() const;
     virtual void setCustomRoles(const QStringList &customRoles);

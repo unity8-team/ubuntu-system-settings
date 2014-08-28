@@ -89,15 +89,9 @@ LocalComponents.Page {
         }
     }
 
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: topMargin
-            leftMargin: leftMargin
-            rightMargin: rightMargin
-            bottomMargin: bottomMargin
-        }
+    Column {
+        id: column
+        anchors.fill: content
 
         Label {
             id: termsLabel
