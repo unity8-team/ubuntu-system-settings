@@ -48,99 +48,93 @@ LocalComponents.Page {
         }
     }
 
-    Item {
-        id: content
-        anchors {
-            fill: parent
-            topMargin: wifiPage.topMargin
-            bottomMargin: wifiPage.bottomMargin
-            leftMargin: wifiPage.leftMargin
-            rightMargin: wifiPage.rightMargin
-        }
+    Column {
+        id: column
+        spacing: units.gu(2)
+        anchors.top: content.top
+        anchors.bottom: content.bottom
+        anchors.left: wifiPage.left
+        anchors.right: wifiPage.right
 
         Label {
             id: label
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
+            anchors.left: parent.left
+            anchors.leftMargin: leftMargin
+            anchors.right: parent.right
+            anchors.rightMargin: rightMargin
+            fontSize: "small"
             text: i18n.tr("Available networks")
         }
 
-        UbuntuShape {
-            anchors {
-                top: label.bottom
-                bottom: parent.bottom
-                left: parent.left
-                right: parent.right
-                topMargin: units.gu(2)
-            }
-            radius: "medium"
+        ListView {
+            id: mainMenu
 
-            ListView {
-                id: mainMenu
+            property int connectedAPs: 0
 
-                property int connectedAPs: 0
+            model: menuModel
+            height: column.height - label.height - column.spacing
+            anchors.left: parent.left
+            anchors.right: parent.right
+            clip: true
 
-                model: menuModel
-                anchors.fill: parent
-                clip: true
+            // Ensure all delegates are cached in order to improve smoothness of scrolling
+            cacheBuffer: 10000
 
-                // Ensure all delegates are cached in order to improve smoothness of scrolling
-                cacheBuffer: 10000
+            // Only allow flicking if the content doesn't fit on the page
+            boundsBehavior: (contentHeight > mainMenu.height) ?
+                                Flickable.DragAndOvershootBounds :
+                                Flickable.StopAtBounds
 
-                // Only allow flicking if the content doesn't fit on the page
-                boundsBehavior: (contentHeight > mainMenu.height) ?
-                                    Flickable.DragAndOvershootBounds :
-                                    Flickable.StopAtBounds
+            currentIndex: -1
+            delegate: Menus.AccessPointMenu {
+                id: menuDelegate
 
-                currentIndex: -1
-                delegate: Menus.AccessPointMenu {
-                    id: menuDelegate
+                property int menuIndex: menuModel.mapRowToSource(index)
+                property var extendedData: model.ext
+                property var serverToggle: model.isToggled
+                property var strengthAction: QMenuModel.UnityMenuAction {
+                    model: unitymenumodel
+                    index: menuIndex
+                    name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
+                }
 
-                    property int menuIndex: menuModel.mapRowToSource(index)
-                    property var extendedData: model.ext
-                    property var serverToggle: model.isToggled
-                    property var strengthAction: QMenuModel.UnityMenuAction {
-                        model: unitymenumodel
-                        index: menuIndex
-                        name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                text: model.label
+                enabled: model.sensitive
+                secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
+                adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
+                signalStrength: strengthAction.valid ? strengthAction.state : 0
+
+                style: Rectangle {
+                    color: "black"
+                    opacity: 0.3
+                }
+
+                onCheckedChanged: {
+                    if (checked) {
+                        mainMenu.connectedAPs++
+                    } else {
+                        mainMenu.connectedAPs--
                     }
+                }
+                onMenuIndexChanged: {
+                    loadAttributes();
+                }
+                onServerToggleChanged: {
+                    checked = serverToggle;
+                }
+                onTriggered: {
+                    unitymenumodel.activate(menuIndex);
+                }
 
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    text: model.label
-                    enabled: model.sensitive
-                    secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
-                    adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
-                    signalStrength: strengthAction.valid ? strengthAction.state : 0
-
-                    onCheckedChanged: {
-                        if (checked) {
-                            mainMenu.connectedAPs++
-                        } else {
-                            mainMenu.connectedAPs--
-                        }
-                    }
-                    onMenuIndexChanged: {
-                        loadAttributes();
-                    }
-                    onServerToggleChanged: {
-                        checked = serverToggle;
-                    }
-                    onTriggered: {
-                        unitymenumodel.activate(menuIndex);
-                    }
-
-                    function loadAttributes() {
-                        if (!unitymenumodel || menuIndex == -1) return;
-                        unitymenumodel.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
-                                                                          'x-canonical-wifi-ap-is-secure': 'bool',
-                                                                          'x-canonical-wifi-ap-strength-action': 'string'});
-                    }
+                function loadAttributes() {
+                    if (!unitymenumodel || menuIndex == -1) return;
+                    unitymenumodel.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
+                                                                      'x-canonical-wifi-ap-is-secure': 'bool',
+                                                                      'x-canonical-wifi-ap-strength-action': 'string'});
                 }
             }
         }
@@ -148,8 +142,9 @@ LocalComponents.Page {
 
     Component {
         id: forwardButton
-        LocalComponents.ForwardButton {
+        LocalComponents.StackButton {
             text: connected ? i18n.tr("Continue") : i18n.tr("Skip")
+            rightArrow: !connected
             onClicked: pageStack.next()
         }
     }
