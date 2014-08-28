@@ -62,6 +62,11 @@ public:
                 WRITE setIncomingMessageVibrateSilentMode
                 NOTIFY incomingMessageVibrateSilentModeChanged)
 
+    Q_PROPERTY (bool dialpadSounds
+                READ getDialpadSounds
+                WRITE setDialpadSounds
+                NOTIFY dialpadSoundsChanged)
+
 
 public Q_SLOTS:
     void slotChanged(QString, QString);
@@ -75,6 +80,7 @@ Q_SIGNALS:
     void incomingMessageVibrateChanged();
     void incomingCallVibrateSilentModeChanged();
     void incomingMessageVibrateSilentModeChanged();
+    void dialpadSoundsChanged();
 
 private:
     AccountsService m_accountsService;
@@ -94,6 +100,8 @@ private:
     void setIncomingCallVibrateSilentMode(bool enabled);
     bool getIncomingMessageVibrateSilentMode();
     void setIncomingMessageVibrateSilentMode(bool enabled);
+    bool getDialpadSounds();
+    void setDialpadSounds(bool enabled);
 
 };
 

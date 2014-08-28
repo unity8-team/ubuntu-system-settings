@@ -144,6 +144,15 @@ ItemPage {
             }
 
             ListItem.Standard {
+                control: Switch {
+                    objectName: "dialpadSounds"
+                    checked: backendInfo.dialpadSounds
+                    onCheckedChanged: backendInfo.dialpadSounds = checked
+                }
+                text: i18n.tr("Dialpad sounds")
+            }
+
+            ListItem.Standard {
                 text: i18n.tr("Messages:")
             }
 
