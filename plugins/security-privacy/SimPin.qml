@@ -88,7 +88,7 @@ ItemPage {
 
             Label {
                 id: retries
-                text: i18n.tr("%1 attempts remaining").arg(
+                text: i18n.tr("%1 attempts allowed.").arg(
                           curSim.pinRetries[OfonoSimManager.SimPin] || 3)
                 visible: !incorrect.visible
             }
@@ -132,7 +132,8 @@ ItemPage {
                 id: notMatching
                 wrapMode: Text.Wrap
                 text: i18n.tr("PINs don't match. Try again.")
-                visible: false
+                visible: (newInput.length === confirmInput.length) &&
+                         (newInput.text != confirmInput.text)
                 color: "darkred"
             }
 
@@ -238,9 +239,11 @@ ItemPage {
             }
 
             Label {
-                text: i18n.tr("%1 attempts remaining").arg(
+                horizontalAlignment: Text.AlignHCenter
+                text: i18n.tr("%1 attempts allowed.").arg(
                           curSim.pinRetries[OfonoSimManager.SimPin] || 3)
                 visible: !incorrect.visible
+                width: parent.width
             }
 
             Label {
