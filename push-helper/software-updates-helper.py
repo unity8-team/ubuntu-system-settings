@@ -26,7 +26,7 @@ if len(sys.argv) != 3:
     sys.exit(1)
 
 f1, f2 = sys.argv[1:3]
-gettext.install("ubuntu-system-settings")
+_ = gettext.translation('ubuntu-system-settings', fallback=True).gettext
 
 # here you should look at the input (the contents of the file whose
 # name is in f1, which are guaranteed to be json). If it's a broadcast
