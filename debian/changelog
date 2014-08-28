@@ -26,13 +26,6 @@ ubuntu-system-settings (0.3+14.10.20140827.1-0ubuntu1) utopic; urgency=low
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 27 Aug 2014 15:27:50 +0000
 
-ubuntu-system-settings (0.3+14.10.20140826.2-0ubuntu1) utopic; urgency=high
-
-  [ Diego Sarmentero ]
-  * Fix progress issues
-
- -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 28 Aug 2014 15:48:48 +0000
-
 ubuntu-system-settings (0.3+14.10.20140826.1-0ubuntu1) utopic; urgency=low
 
   [ Martin Pitt ]
