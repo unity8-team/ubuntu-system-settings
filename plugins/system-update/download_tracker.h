@@ -63,7 +63,6 @@ public Q_SLOTS:
     void bindDownload(Download* download);
     void setProgress(qulonglong received, qulonglong total);
     void registerError(Ubuntu::DownloadManager::Error* error);
-    void downloadFinished();
 
 Q_SIGNALS:
     void error(const QString &errorMessage);
