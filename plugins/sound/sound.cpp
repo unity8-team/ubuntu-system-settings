@@ -193,21 +193,21 @@ void Sound::setIncomingMessageVibrateSilentMode(bool enabled)
     Q_EMIT(incomingMessageVibrateSilentModeChanged());
 }
 
-bool Sound::getDialpadSounds()
+bool Sound::getDialpadSoundsEnabled()
 {
     return m_accountsService.getUserProperty(AS_INTERFACE,
-                                             "DialpadSounds").toBool();
+                                             "DialpadSoundsEnabled").toBool();
 }
 
-void Sound::setDialpadSounds(bool enabled)
+void Sound::setDialpadSoundsEnabled(bool enabled)
 {
-    if (enabled == getDialpadSounds())
+    if (enabled == getDialpadSoundsEnabled())
         return;
 
     m_accountsService.setUserProperty(AS_INTERFACE,
-                                      "DialpadSounds",
+                                      "DialpadSoundsEnabled",
                                       QVariant::fromValue(enabled));
-    Q_EMIT(dialpadSoundsChanged());
+    Q_EMIT(dialpadSoundsEnabledChanged());
 }
 
 QStringList Sound::listSounds(const QString &dirString)

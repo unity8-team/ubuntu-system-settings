@@ -528,8 +528,8 @@ class SoundBaseTestCase(
                                                    variant_level=1),
             'IncomingMessageVibrateSilentMode': dbus.Boolean(False,
                                                              variant_level=1),
-            'DialpadSounds': dbus.Boolean(True,
-                                          variant_level=1)}
+            'DialpadSoundsEnabled': dbus.Boolean(True,
+                                                 variant_level=1)}
 
         # start dbus system bus
         self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
@@ -590,9 +590,9 @@ class SoundBaseTestCase(
                                     "IncomingMessageVibrateSilentMode")' %
                     ACCOUNTS_SOUND_IFACE),
                 (
-                    'GetDialpadSounds', '', 'v',
+                    'GetDialpadSoundsEnabled', '', 'v',
                     'ret = self.Get("%s", \
-                                    "DialpadSounds")' %
+                                    "DialpadSoundsEnabled")' %
                     ACCOUNTS_SOUND_IFACE)
             ])
 
