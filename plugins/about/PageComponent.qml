@@ -52,12 +52,12 @@ ItemPage {
 
     OfonoSimManager {
         id: sim1
-        modemPath: manager.modems[0]
+        modemPath: manager.modems[0] || ""
     }
 
     OfonoSimManager {
         id: sim2
-        modemPath: manager.modems[1]
+        modemPath: manager.modems[1] || ""
     }
 
     Flickable {
