@@ -206,6 +206,10 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
     } else {
         Q_EMIT updateNotFound();
     }
+    if (downloading) {
+        downloadUpdate();
+        update->setSelected(true);
+    }
 }
 
 void SystemUpdate::updateDownloadProgress(int percentage, double eta)

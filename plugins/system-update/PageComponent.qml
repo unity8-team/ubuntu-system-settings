@@ -379,6 +379,7 @@ ItemPage {
                                     buttonAppUpdate.visible = false;
                                     textArea.message = i18n.tr("Installed");
                                     root.updatesAvailable -= 1;
+                                    updateManager.updateClickScope();
                                 }
 
                                 onErrorFound: {
