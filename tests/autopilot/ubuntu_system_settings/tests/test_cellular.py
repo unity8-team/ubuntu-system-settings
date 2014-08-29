@@ -106,7 +106,7 @@ class CellularTestCase(CellularBaseTestCase):
         self.navigate_to_carrier_page()
         self.navigate_to_manual()
         carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
+            toolkit_emulators.OptionSelector,
             objectName="carrierSelector"
         )
         # TODO: Once there is a proper ItemSelector emulator, get the items
@@ -120,7 +120,7 @@ class CellularTestCase(CellularBaseTestCase):
         self.navigate_to_carrier_page()
         self.navigate_to_manual()
         carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
+            toolkit_emulators.OptionSelector,
             objectName="carrierSelector"
         )
         manual = carriers.select_single('Label', text="my.cool.telco")
@@ -131,7 +131,7 @@ class CellularTestCase(CellularBaseTestCase):
         self.navigate_to_carrier_page()
         self.navigate_to_manual()
         carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector,
+            toolkit_emulators.OptionSelector,
             objectName="carrierSelector"
         )
         self.assertThat(
@@ -468,7 +468,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.navigate_to_carriers_page()
         self.navigate_to_carrier_page_for_sim(1)
         carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector, objectName="carrierSelector")
+            toolkit_emulators.OptionSelector, objectName="carrierSelector")
         manual = carriers.select_single('Label', text="my.cool.telco")
         self.assertThat(manual, NotEquals(None))
 
@@ -479,7 +479,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.navigate_to_carriers_page()
         self.navigate_to_carrier_page_for_sim(2)
         carriers = self.system_settings.main_view.choose_page.select_single(
-            toolkit_emulators.ItemSelector, objectName="carrierSelector")
+            toolkit_emulators.OptionSelector, objectName="carrierSelector")
         manual = carriers.select_single('Label', text="my.cool.telco")
         self.assertThat(manual, NotEquals(None))
 
