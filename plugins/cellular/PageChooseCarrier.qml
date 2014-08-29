@@ -191,7 +191,7 @@ ItemPage {
                         }
                         Label {
                             anchors.verticalCenter: parent.verticalCenter
-                            text: i18n.tr("Searching for carries…")
+                            text: i18n.tr("Searching for carriers…")
                         }
                     }
                     OptionSelector {
