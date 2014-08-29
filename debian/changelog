@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.3+14.10.20140829.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * When changing to swipe mode, it was possible that our policykit
+    agent would not unregister itself, making the next attempt to change
+    modes appear to work, but in truth fail. Also, no longer ask for a
+    password to switch to swipe mode if policykit has a cached
+    authentication for us. (LP: #1350381)
+
+  [ Sebastien Bacher ]
+  * [security] tweak some pin locking details to match the design better
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 29 Aug 2014 05:19:18 +0000
+
 ubuntu-system-settings (0.3+14.10.20140828.3-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
