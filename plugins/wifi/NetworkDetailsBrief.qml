@@ -28,6 +28,7 @@ import Ubuntu.SystemSettings.Wifi 1.0
 ItemPage {
 
     property string networkName
+    property var accessPoint
 
     title: i18n.tr("Network details")
 
@@ -38,21 +39,21 @@ ItemPage {
         ListItem.Divider {}
 
         Button {
-            text : i18n.tr("Disconnect")
+            text : i18n.tr("Pisconnect")
             anchors {
                 left: parent.left
                 right: parent.right
                 margins: units.gu(2)
             }
-            onClicked : {
+            onClicked: {
+                accessPoint.checked = false;
+                accessPoint.checkedChanged(false)
+                DbusHelper.deactivateConnection();
             }
         }
 
-        ListItem.Divider {
-        }
-
         ListItem.Standard {
-            text: i18n.tr("IP address")
+            text: i18n.tr("faIP address")
             id: addressItem
             control: TextField {
                 text: DbusHelper.wifiIp4Address

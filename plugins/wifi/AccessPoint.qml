@@ -34,6 +34,11 @@ FramedMenuItem {
     onCheckedChanged: {
         // Can't rely on binding. Checked is assigned on click.
         checkBoxActive.checked = checked;
+
+        // if stack has NetworkDetailsBrief, pop it
+        if (pageStack.depth === 3) {
+            pageStack.pop();
+        }
     }
 
     iconName: {
@@ -67,7 +72,9 @@ FramedMenuItem {
     }
     progression: checked
     onClicked: {
-        pageStack.push(Qt.resolvedUrl("NetworkDetailsBrief.qml"),
-        {networkName : text})
+        if (checked) {
+            pageStack.push(Qt.resolvedUrl("NetworkDetailsBrief.qml"),
+            {networkName : text, accessPoint: accessPoint})
+        }
     }
 }
