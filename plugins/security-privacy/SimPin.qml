@@ -311,7 +311,7 @@ ItemPage {
                 }
 
                 ListItem.Standard {
-                    text: i18n.tr("%1").arg(sims[index].title)
+                    text: "%1".arg(sims[index].title)
                     visible: sims.length > 1
                 }
 
