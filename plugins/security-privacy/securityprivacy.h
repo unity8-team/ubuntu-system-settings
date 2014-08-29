@@ -82,6 +82,7 @@ public:
 
     // Returns error text, if an error occurred
     Q_INVOKABLE QString setSecurity(QString oldValue, QString value, SecurityType type);
+    Q_INVOKABLE bool trySetSecurity(SecurityType type);
 
 public Q_SLOTS:
     void slotChanged(QString, QString);
@@ -109,7 +110,8 @@ private:
 
     QString badPasswordMessage(SecurityType type);
     bool setDisplayHint(SecurityType type);
-    bool setPasswordMode(SecurityType type, QString password);
+    bool setPasswordMode(SecurityType type);
+    bool setPasswordModeWithPolicykit(SecurityType type, QString password);
     QString setPassword(QString oldValue, QString value);
 
     AccountsService m_accountsService;
