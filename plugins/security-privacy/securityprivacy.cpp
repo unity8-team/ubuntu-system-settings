@@ -21,6 +21,7 @@
 #include <QtCore/QProcess>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusConnectionInterface>
+#include <QtDBus/QDBusInterface>
 #include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusVariant>
 #include <act/act.h>
@@ -85,13 +86,18 @@ SecurityPrivacy::~SecurityPrivacy()
 void SecurityPrivacy::slotChanged(QString interface,
                                   QString property)
 {
-    if (interface != AS_TOUCH_INTERFACE)
-        return;
-
-    if (property == "MessagesWelcomeScreen") {
-        Q_EMIT messagesWelcomeScreenChanged();
-    } else if (property == "StatsWelcomeScreen") {
-        Q_EMIT statsWelcomeScreenChanged();
+    if (interface == AS_INTERFACE) {
+        if (property == "EnableLauncherWhileLocked") {
+            Q_EMIT enableLauncherWhileLockedChanged();
+        } else if (property == "EnableIndicatorsWhileLocked") {
+            Q_EMIT enableIndicatorsWhileLockedChanged();
+        }
+    } else if (interface == AS_TOUCH_INTERFACE) {
+        if (property == "MessagesWelcomeScreen") {
+            Q_EMIT messagesWelcomeScreenChanged();
+        } else if (property == "StatsWelcomeScreen") {
+            Q_EMIT statsWelcomeScreenChanged();
+        }
     }
 }
 
@@ -100,6 +106,8 @@ void SecurityPrivacy::slotNameOwnerChanged()
     // Tell QML so that it refreshes its view of the property
     Q_EMIT messagesWelcomeScreenChanged();
     Q_EMIT statsWelcomeScreenChanged();
+    Q_EMIT enableLauncherWhileLockedChanged();
+    Q_EMIT enableIndicatorsWhileLockedChanged();
 }
 
 bool SecurityPrivacy::getStatsWelcomeScreen()
@@ -136,6 +144,40 @@ void SecurityPrivacy::setMessagesWelcomeScreen(bool enabled)
     Q_EMIT(messagesWelcomeScreenChanged());
 }
 
+bool SecurityPrivacy::getEnableLauncherWhileLocked()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "EnableLauncherWhileLocked").toBool();
+}
+
+void SecurityPrivacy::setEnableLauncherWhileLocked(bool enabled)
+{
+    if (enabled == getEnableLauncherWhileLocked())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "EnableLauncherWhileLocked",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT enableLauncherWhileLockedChanged();
+}
+
+bool SecurityPrivacy::getEnableIndicatorsWhileLocked()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "EnableIndicatorsWhileLocked").toBool();
+}
+
+void SecurityPrivacy::setEnableIndicatorsWhileLocked(bool enabled)
+{
+    if (enabled == getEnableIndicatorsWhileLocked())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "EnableIndicatorsWhileLocked",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT enableIndicatorsWhileLockedChanged();
+}
+
 SecurityPrivacy::SecurityType SecurityPrivacy::getSecurityType()
 {
     if (m_user == nullptr || !act_user_is_loaded(m_user))
@@ -161,13 +203,29 @@ bool SecurityPrivacy::setDisplayHint(SecurityType type)
     return true;
 }
 
-bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
+bool SecurityPrivacy::setPasswordMode(SecurityType type)
 {
     ActUserPasswordMode newMode = (type == SecurityPrivacy::Swipe) ?
                                   ACT_USER_PASSWORD_MODE_NONE :
                                   ACT_USER_PASSWORD_MODE_REGULAR;
 
-    // act_user_set_password_mode() will involve a check with policykit to see
+    /* We call SetPasswordMode directly over DBus ourselves, rather than rely
+       on the act_user_set_password_mode call, because that call gives no
+       feedback! How hard would it have been to add a bool return? Ah well. */
+
+    QString path = "/org/freedesktop/Accounts/User" + QString::number(geteuid());
+    QDBusInterface iface("org.freedesktop.Accounts",
+                         path,
+                         "org.freedesktop.Accounts.User",
+                         QDBusConnection::systemBus());
+
+    QDBusReply<void> success = iface.call("SetPasswordMode", newMode);
+    return success.isValid();
+}
+
+bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString password)
+{
+    // SetPasswordMode will involve a check with policykit to see
     // if we have admin authorization.  Since Touch doesn't have a general
     // policykit agent yet (and the design for this panel involves asking for
     // the password up from anyway), we will spawn our own agent just for this
@@ -181,6 +239,10 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
     // and QProcess's signal handling conflict.  They seem to get in each
     // other's way for the same signals.  So we just do this out-of-process.
 
+    // But first, see if we have cached authentication
+    if (setPasswordMode(type))
+        return true;
+
     QProcess polkitHelper;
     polkitHelper.setProgram(HELPER_EXEC);
     polkitHelper.start();
@@ -193,23 +255,11 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type, QString password)
             break;
     }
 
-    act_user_set_password_mode(m_user, newMode);
+    bool success = setPasswordMode(type);
 
-    polkitHelper.kill(); // kill because maybe it wasn't even needed (polkit might not have need to auth us)
     polkitHelper.waitForFinished();
 
-    // act_user_set_password_mode() does not return success/failure, and we
-    // can't easily check get_password_mode() after setting to make sure it
-    // took, because that value is updated asynchronously when a change signal
-    // is received from AS.  So instead we just see whether our polkit helper
-    // authenticated correctly.
-
-    if (polkitHelper.exitStatus() == QProcess::NormalExit &&
-        polkitHelper.exitCode() != 0) {
-        return false;
-    }
-
-    return true;
+    return success;
 }
 
 QString SecurityPrivacy::setPassword(QString oldValue, QString value)
@@ -248,13 +298,37 @@ QString SecurityPrivacy::badPasswordMessage(SecurityType type)
 {
     switch (type) {
         case SecurityPrivacy::Passcode:
-            return _("Incorrect passcode. Try again.");
+            return _("Incorrect PIN code. Try again.");
         case SecurityPrivacy::Passphrase:
             return _("Incorrect passphrase. Try again.");
         default:
         case SecurityPrivacy::Swipe:
             return _("Could not set security mode");
     }
+}
+
+bool SecurityPrivacy::trySetSecurity(SecurityType type)
+{
+    if (m_user == NULL || !act_user_is_loaded(m_user))
+        return false;
+
+    // We only support setting swipe without more information
+    if (type != SecurityPrivacy::Swipe)
+        return false;
+
+    SecurityType oldType = getSecurityType();
+    if (type == oldType)
+        return true; // nothing to do
+
+    if (!setDisplayHint(type))
+        return false;
+
+    if (!setPasswordMode(type)) {
+        setDisplayHint(oldType);
+        return false;
+    }
+
+    return true;
 }
 
 QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityType type)
@@ -282,7 +356,7 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
     }
 
     if (type == SecurityPrivacy::Swipe) {
-        if (!setPasswordMode(type, oldValue)) {
+        if (!setPasswordModeWithPolicykit(type, oldValue)) {
             setDisplayHint(oldType);
             return badPasswordMessage(oldType);
         }
@@ -296,7 +370,7 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
             else
                 return errorText;
         }
-        if (!setPasswordMode(type, value)) {
+        if (!setPasswordModeWithPolicykit(type, value)) {
             setDisplayHint(oldType);
             setPassword(value, oldValue);
             return badPasswordMessage(oldType);
