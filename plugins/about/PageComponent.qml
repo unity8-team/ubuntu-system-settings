@@ -123,7 +123,7 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: "Wi-Fi address"
+                text: i18n.tr("Wi-Fi address")
                 value: network.networkMacAddresses[0]
                 visible: network.networkMacAddresses.length > 0
                 showDivider: bthwaddr.visible
@@ -131,7 +131,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 id: bthwaddr
-                text: "Bluetooth address"
+                text: i18n.tr("Bluetooth address")
                 value: network.bluetoothMacAddress
                 visible: network.bluetoothMacAddress
                 showDivider: false

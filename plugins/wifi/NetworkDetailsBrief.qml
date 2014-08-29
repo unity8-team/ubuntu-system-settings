@@ -30,7 +30,7 @@ ItemPage {
     property string networkName
     property var accessPoint
 
-    title: i18n.tr("Network details")
+    title: networkName
 
     Column {
 
