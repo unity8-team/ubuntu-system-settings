@@ -53,6 +53,31 @@ ItemPage {
         // LP(#1361915)
         property bool __suppressActivation : true;
 
+        function isEmptyCustom (type, ctx)
+        {
+            /* OK, this sucks _hard_,
+             * QOfono does not return the added context, so instead we have to "figure it out"
+             * by looking for "contextAdded" for totally empty context with default Name values.
+             * LP(#1361864)
+             */
+
+            var targetName = "";
+            var targetAccessPointName = "";
+            if (type === "internet") {
+                targetName = "Internet";
+                targetAccessPointName = "";
+            } else if (type == "mms") {
+                targetName = "MMS";
+                targetAccessPointName = "";
+            }
+
+            if (ctx.type === type &&
+                ctx.name === targetName &&
+                ctx.accessPointName === targetAccessPointName)
+                return true;
+            return false;
+        }
+
         function updateContexts()
         {
             var tmp = sim.connMan.contexts;
@@ -92,22 +117,13 @@ ItemPage {
                                                });
                 mContexts[currentValue] = ctx;
 
-                /* OK, this sucks _hard_,
-                 * QOfono does not return the added context, so instead we have to "figure it out"
-                 * by looking for "contextAdded" for totally empty context with default Name values.
-                 * LP(#1361864)
-                 */
-                if (ctx.type === "internet" &&
-                    ctx.name === "Internet" &&
-                    ctx.accessPointName === "")
+                if (isEmptyCustom("internet", ctx))
                 {
                     ctx.name = mCustomContextNameInternet;
                     // name updates async, so return here and
                     // have the buildLists() called from Context::onNameChanged
                     return;
-                } else if (ctx.type === "mms" &&
-                          ctx.name === "MMS" &&
-                          ctx.accessPointName === "")
+                } else if (isEmptyCustom("mms", ctx))
                 {
                     ctx.name = mCustomContextNameMms;
                     ctx.accessPointName = pendingCustomMmsData["accessPointName"];
@@ -140,10 +156,14 @@ ItemPage {
         function checkAndCreateCustomContexts()
         {
             var customInternet = Object.keys(mContexts).filter(function (i) {
-                return mContexts[i].name === mCustomContextNameInternet;
+                var ctx = mContexts[i];
+                return ctx.name === mCustomContextNameInternet ||
+                       isEmptyCustom("internet", ctx);
             });
             var customMms = Object.keys(mContexts).filter(function (i) {
-                return mContexts[i].name === mCustomContextNameMms;
+                var ctx = mContexts[i];
+                return ctx.name === mCustomContextNameMms ||
+                       isEmptyCustom("mms", ctx);
             });
 
             // make sure there is only one context per type
@@ -289,17 +309,7 @@ ItemPage {
                         dual = true
             }
 
-            onActiveChanged: {
-                d.__suppressActivation = true;
-                if (this.active) {
-                    if (this.type == "internet") {
-                        internetApnSelector.selectedIndex = d.mInternetApns.indexOf(this.contextPath);
-                    }
-                    // mms contexts are activated on-demand and we have no way of knowing which
-                    // is the active context.
-                }
-                d.__suppressActivation = false;
-            }
+            onActiveChanged: internetApnSelector.updateSelectedIndex()
             onNameChanged: d.buildLists()
             onAccessPointNameChanged: d.buildLists()
 
@@ -351,6 +361,24 @@ ItemPage {
                     width: parent.width - units.gu(4)
                     model: d.mInternetApns
                     expanded: true
+                    selectedIndex: -1
+                    onModelChanged: updateSelectedIndex()
+
+                    function updateSelectedIndex()
+                    {
+                        var tmp = d.__suppressActivation
+                        d.__suppressActivation = true;
+                        var idx = -1;
+                        if (model) {
+                            model.forEach(function(currentValue, index, array) {
+                                if (d.mContexts[currentValue].active)
+                                    idx = index;
+                            });
+                        }
+                        selectedIndex = idx;
+                        d.__suppressActivation = tmp;
+                    }
+
                     delegate: OptionSelectorDelegate {
                         text: {
                             var ctx = d.mContexts[modelData];
@@ -368,24 +396,26 @@ ItemPage {
                     }
                     onSelectedIndexChanged: {
                         if (selectedIndex === -1) {
-                            if (mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
-                                                        mmsApnSelector.selectedIndex = -1
+                            if (mmsApnSelector && mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
+                                mmsApnSelector.selectedIndex = -1;
                             return;
                         }
 
                         var ctx = d.mContexts[model[selectedIndex]];
-                        if(ctx.dual)
-                            mmsApnSelector.selectedIndex = mmsApnSelector.model.indexOf("/same/as/internet")
+                        if(ctx.dual) {
+                            if (!d.mCustomContextMms)
+                                mmsApnSelector.selectedIndex = mmsApnSelector.model.indexOf("/same/as/internet");
+                        }
                         else if (mmsApnSelector.model[mmsApnSelector.selectedIndex] === "/same/as/internet")
-                            mmsApnSelector.selectedIndex = -1
+                            mmsApnSelector.selectedIndex = -1;
 
                         if (d.__suppressActivation)
                             return;
 
-                        if (model[selectedIndex] === d.mCustomContextNameInternet) {
+                        if (d.mCustomContextInternet && model[selectedIndex] === d.mCustomContextInternet.contextPath) {
                             if (d.mCustomContextInternet.accessPointName === "") {
                                 d.openApnEditor("internet");
-                                selectedIndex = -1;
+                                updateSelectedIndex();
                                 return;
                             }
                         }
@@ -404,7 +434,7 @@ ItemPage {
                 }
             }
 
-            ListItem.ThinDivider {}
+            ListItem.Divider {}
 
             ListItem.Standard {
                 id: heading2
@@ -419,6 +449,7 @@ ItemPage {
                     width: parent.width - units.gu(4)
                     model: d.mMmsApns
                     expanded: true
+                    selectedIndex: -1
                     delegate: OptionSelectorDelegate {
                         showDivider: modelData === "/same/as/internet"
                         text: {
@@ -441,22 +472,33 @@ ItemPage {
                             }
                         }
                     }
-                    onModelChanged: {
+                    onModelChanged: updateSelectedIndex();
+                    function updateSelectedIndex()
+                    {
                         // if we have custom MMS context, it must be active.
                         // @bug LP(#1361864)
                         var tmp = d.__suppressActivation;
                         d.__suppressActivation = true;
                         if (d.mCustomContextMms) {
-                            selectedIndex = model.indexOf(d.mCustomContextMms.contextPath)
+                            selectedIndex = model.indexOf(d.mCustomContextMms.contextPath);
+                        } else if (model.length === 3) {
+                            /* meaning we have:
+                             * 0 - /same/as/internet
+                             * 1 - some provisioned one
+                             * 2 - dummycustom
+                             */
+                            selectedIndex = 1;
+                        } else if (internetApnSelector.model && internetApnSelector.selectedIndex !== -1) {
+                            if (d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]].dual) {
+                                selectedIndex = model.indexOf("/same/as/internet");
+                            } else
+                                selectedIndex = -1;
                         } else {
-                            if (internetApnSelector.model && internetApnSelector.selectedIndex !== -1) {
-                                if (d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]].dual) {
-                                    selectedIndex = model.indexOf("/same/as/internet");
-                                }
-                            }
+                            selectedIndex = -1;
                         }
                         d.__suppressActivation = tmp;
                     }
+
                     onSelectedIndexChanged: {
                         if (selectedIndex === -1 || d.__suppressActivation)
                             return;
@@ -464,12 +506,12 @@ ItemPage {
                         if (model[selectedIndex] === "/same/as/internet") {
                             if (internetApnSelector.selectedIndex == -1) {
                                 PopupUtils.open(noInternetAPNSelected);
-                                selectedIndex = -1;
+                                updateSelectedIndex()
                                 return;
                             }
                             if (!d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]].dual) {
                                 PopupUtils.open(canNotChooseSameAsInternet)
-                                selectedIndex = -1;
+                                updateSelectedIndex()
                                 return;
                             }
 
@@ -489,7 +531,7 @@ ItemPage {
 
                         if (model[selectedIndex] === "dummycustom") {
                             d.openApnEditor("mms");
-                            selectedIndex = -1;
+                            updateSelectedIndex()
                             return;
                         }
 

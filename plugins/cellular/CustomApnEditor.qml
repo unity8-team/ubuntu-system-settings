@@ -71,9 +71,11 @@ ItemPage {
     //: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
     title: i18n.tr("Custom %1 APN").arg(d.typeText)
 
-    flickable: scrollWidget
+    flickable: null
 
     Component.onCompleted: {
+        flickable: scrollWidget
+
         var ctx;
         if (d.isMms) {
             ctx = contexts["mms"];
@@ -114,9 +116,8 @@ ItemPage {
     Flickable {
         id: scrollWidget
         anchors.fill: parent
-        contentHeight: theContents.childrenRect.height + units.gu(5)
-        //boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
-        //flickableDirection: Flickable.VerticalFlick
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        flickableDirection: Flickable.VerticalFlick
 
         Item {
             id: theContents
