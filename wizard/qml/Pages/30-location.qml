@@ -16,6 +16,7 @@
 
 import QtQuick 2.3
 import QMenuModel 0.1
+import Qt.labs.folderlistmodel 2.1
 import Ubuntu.Components 1.1
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import "../Components" as LocalComponents
@@ -33,6 +34,14 @@ LocalComponents.Page {
         property variant enabled: action("location-detection-enabled")
 
         Component.onCompleted: start()
+    }
+
+    FolderListModel {
+        id: termsModel
+        folder: System.hereLicensePath
+        nameFilters: ["*.html"]
+        showDirs: false
+        showOnlyReadable: true
     }
 
     Column {
@@ -56,6 +65,7 @@ LocalComponents.Page {
         LocalComponents.CheckableSetting {
             id: termsCheck
             showDivider: false
+            visible: System.hereLicensePath !== "" && termsModel.count > 0
             text: i18n.tr("I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</a>")
             onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
             checked: System.hereEnabled
