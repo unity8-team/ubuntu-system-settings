@@ -40,7 +40,7 @@ public:
     Q_INVOKABLE void connect(QString ssid, int security, QString password);
     Q_INVOKABLE QList<QStringList> getPreviouslyConnectedWifiNetworks();
     Q_INVOKABLE void forgetConnection(const QString dbus_path);
-    Q_INVOKABLE void deactivateConnection();
+    Q_INVOKABLE bool deactivateConnection();
 
 Q_SIGNALS:
     void wifiIp4AddressChanged(QString wifiIp4Address);

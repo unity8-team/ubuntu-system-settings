@@ -29,10 +29,8 @@
 #include "nm_settings_proxy.h"
 #include "nm_settings_connection_proxy.h"
 
-
-#define AS_SERVICE "org.freedesktop.NetworkManager"
-#define AS_PATH "/org/freedesktop/NetworkManager"
-#define AS_IFACE "org.freedesktop.NetworkManager"
+#define NM_SERVICE "org.freedesktop.NetworkManager"
+#define NM_PATH "/org/freedesktop/NetworkManager"
 
 typedef QMap<QString,QVariantMap> ConfigurationData;
 Q_DECLARE_METATYPE(ConfigurationData)
@@ -50,8 +48,8 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
         return;
     }
 
-    OrgFreedesktopNetworkManagerInterface mgr(AS_SERVICE,
-                                              AS_PATH,
+    OrgFreedesktopNetworkManagerInterface mgr(NM_SERVICE,
+                                              NM_PATH,
                                               m_systemBusConnection);
 
     QMap<QString, QVariantMap> configuration;
@@ -124,8 +122,8 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
 
 QString WifiDbusHelper::getWifiIpAddress()
 {
-    OrgFreedesktopNetworkManagerInterface mgr(AS_SERVICE,
-                                              AS_PATH,
+    OrgFreedesktopNetworkManagerInterface mgr(NM_SERVICE,
+                                              NM_PATH,
                                               m_systemBusConnection);
 
     // find the first wlan adapter for now
@@ -159,13 +157,13 @@ QString WifiDbusHelper::getWifiIpAddress()
     }
 
     if (!ip4addr) {
+        // no ip address
         return QString();
     }
 
 
     struct in_addr ip_addr;
     ip_addr.s_addr = ip4addr;
-    qWarning() << inet_ntoa(ip_addr);
     return QString(inet_ntoa(ip_addr));
 }
 
@@ -371,23 +369,23 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     }
 }
 
-void WifiDbusHelper::deactivateConnection() {
-    OrgFreedesktopNetworkManagerInterface mgr(AS_SERVICE,
-                                              AS_PATH,
+bool WifiDbusHelper::deactivateConnection() {
+    OrgFreedesktopNetworkManagerInterface mgr(NM_SERVICE,
+                                              NM_PATH,
                                               m_systemBusConnection);
     // find the first wlan adapter for now
     auto reply1 = mgr.GetDevices();
     reply1.waitForFinished();
     if(!reply1.isValid()) {
         qWarning() << "deactivateConnection: Could not get network device: " << reply1.error().message() << "\n";
-        return;
+        return false;
     }
     auto devices = reply1.value();
 
     QDBusObjectPath activeConnection;
     QDBusObjectPath dev;
     for (const auto &d : devices) {
-        QDBusInterface iface("org.freedesktop.NetworkManager",
+        QDBusInterface iface(NM_SERVICE,
                              d.path(),
                              "org.freedesktop.NetworkManager.Device",
                              m_systemBusConnection);
@@ -395,7 +393,6 @@ void WifiDbusHelper::deactivateConnection() {
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
             activeConnection = qvariant_cast<QDBusObjectPath>(iface.property("ActiveConnection"));
-            qWarning() << activeConnection.path();
             dev = d;
             break;
         }
@@ -403,17 +400,19 @@ void WifiDbusHelper::deactivateConnection() {
 
     if (dev.path().isEmpty()) {
         // didn't find a wifi device
-        return;
+        return false;
     }
 
     if (activeConnection.path().isEmpty()) {
         // no active connection
-        return;
+        return false;
     }
 
     auto reply = mgr.DeactivateConnection(activeConnection);
     reply.waitForFinished();
     if(!reply.isValid()) {
         qWarning() << "Error deactivating connection: " << reply.error().message() << "\n";
+        return false;
     }
+    return true;
 }

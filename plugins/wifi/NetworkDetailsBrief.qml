@@ -39,21 +39,23 @@ ItemPage {
         ListItem.Divider {}
 
         Button {
-            text : i18n.tr("Pisconnect")
+            text : i18n.tr("Disconnect")
             anchors {
                 left: parent.left
                 right: parent.right
                 margins: units.gu(2)
             }
             onClicked: {
-                accessPoint.checked = false;
-                accessPoint.checkedChanged(false)
-                DbusHelper.deactivateConnection();
+                if (DbusHelper.deactivateConnection()) {
+                    accessPoint.checked = false;
+                    accessPoint.checkedChanged(false)
+                }
+
             }
         }
 
         ListItem.Standard {
-            text: i18n.tr("faIP address")
+            text: i18n.tr("IP address")
             id: addressItem
             control: TextField {
                 text: DbusHelper.wifiIp4Address
