@@ -17,6 +17,7 @@
 import QtQuick 2.3
 import QMenuModel 0.1
 import Ubuntu.Components 1.1
+import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
@@ -55,8 +56,10 @@ LocalComponents.Page {
         LocalComponents.CheckableSetting {
             id: termsCheck
             showDivider: false
-            text: i18n.tr("I have read and agreed to the Ubuntu <a href='terms.qml'>terms and conditions</a>")
+            text: i18n.tr("I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</a>")
             onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
+            checked: System.hereEnabled
+            onTriggered: System.hereEnabled = checked
         }
     }
 
@@ -65,7 +68,6 @@ LocalComponents.Page {
         LocalComponents.StackButton {
             text: i18n.tr("Continue")
             onClicked: pageStack.next()
-            enabled: termsCheck.checked
         }
     }
 }

@@ -17,6 +17,7 @@
 import QtQuick 2.3
 import Qt.labs.folderlistmodel 2.1
 import Ubuntu.Components 1.1
+import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import Ubuntu.Web 0.2
 import "../Components" as LocalComponents
 
@@ -26,7 +27,7 @@ LocalComponents.Page {
 
     FolderListModel {
         id: termsModel
-        folder: "data"
+        folder: System.hereLicensePath
         nameFilters: ["*.html"]
         showDirs: false
         showOnlyReadable: true
@@ -34,7 +35,7 @@ LocalComponents.Page {
     }
 
     function makeFileName(lang, country) {
-        return "HEREposconsent_" + lang + "-" + country + ".html"
+        return lang + "_" + country + ".html"
     }
 
     function defaultCountryForLanguage(lang) {
@@ -72,7 +73,7 @@ LocalComponents.Page {
 
     function loadFileContent() {
         var xhr = new XMLHttpRequest
-        xhr.open("GET", "data/" + determineFileName())
+        xhr.open("GET", System.hereLicensePath + "/" + determineFileName())
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 termsLabel.text = xhr.responseText
