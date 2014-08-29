@@ -515,7 +515,7 @@ class SoundBaseTestCase(
         klass.start_system_bus()
         klass.dbus_con = klass.get_dbus(True)
 
-    def setUp(self):
+    def setUp(self, panel='sound'):
 
         user_obj = '/user/foo'
 
@@ -527,7 +527,9 @@ class SoundBaseTestCase(
             'IncomingMessageVibrate': dbus.Boolean(False,
                                                    variant_level=1),
             'IncomingMessageVibrateSilentMode': dbus.Boolean(False,
-                                                             variant_level=1)}
+                                                             variant_level=1),
+            'DialpadSoundsEnabled': dbus.Boolean(True,
+                                                 variant_level=1)}
 
         # start dbus system bus
         self.mock_server = self.spawn_server(ACCOUNTS_IFACE, ACCOUNTS_OBJ,
@@ -586,17 +588,23 @@ class SoundBaseTestCase(
                     'GetIncomingMessageVibrateSilentMode', '', 'v',
                     'ret = self.Get("%s", \
                                     "IncomingMessageVibrateSilentMode")' %
+                    ACCOUNTS_SOUND_IFACE),
+                (
+                    'GetDialpadSoundsEnabled', '', 'v',
+                    'ret = self.Get("%s", \
+                                    "DialpadSoundsEnabled")' %
                     ACCOUNTS_SOUND_IFACE)
             ])
 
         self.obj_test = self.dbus_con.get_object(ACCOUNTS_IFACE, user_obj,
                                                  ACCOUNTS_IFACE)
 
-        super(SoundBaseTestCase, self).setUp('sound')
+        super(SoundBaseTestCase, self).setUp(panel)
 
         """ Go to Sound page """
-        self.assertThat(self.system_settings.main_view.sound_page.active,
-                        Eventually(Equals(True)))
+        if panel == 'sound':
+            self.assertThat(self.system_settings.main_view.sound_page.active,
+                            Eventually(Equals(True)))
 
     def tearDown(self):
         self.mock_server.terminate()
@@ -678,3 +686,13 @@ class SecurityBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 
     def tearDown(self):
         super(SecurityBaseTestCase, self).tearDown()
+
+
+class PhoneSoundBaseTestCase(SoundBaseTestCase):
+    def setUp(self):
+        """ Go to Phone page """
+        super(PhoneSoundBaseTestCase, self).setUp('phone')
+        self.phone_page = self.system_settings.main_view.go_to_phone_page()
+
+    def tearDown(self):
+        super(PhoneSoundBaseTestCase, self).tearDown()
