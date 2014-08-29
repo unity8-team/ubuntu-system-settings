@@ -32,7 +32,6 @@ ItemPage {
     objectName: "apnPage"
 
     property var sim
-    // arrays holding the APN contexts
 
     QtObject {
         id: d
@@ -48,9 +47,10 @@ ItemPage {
         // LP(:#1362795)
         property var pendingCustomMmsData : ({})
 
-
         // work around OptionSelector index behaviour
         // LP(#1361915)
+        // also suppress any actions that we don't want to take
+        // when updating selectedIndexes, etc
         property bool __suppressActivation : true;
 
         function isEmptyCustom (type, ctx)
@@ -148,7 +148,6 @@ ItemPage {
                     throw "contexts[currentValue] === undefined";
             });
 
-            console.warn("Found " + Object.keys(mContexts).length + " contexts")
             buildLists();
         }
 
@@ -226,7 +225,6 @@ ItemPage {
                     }
                     return true;
                 }
-
                 return false;
             });
 
@@ -302,6 +300,7 @@ ItemPage {
         id: connCtx
         OfonoContextConnection {
 
+            // add helper property to detect dual internet/MMS contexts
             property bool dual : false
             Component.onCompleted:{
                 if (type == "internet")
@@ -309,30 +308,20 @@ ItemPage {
                         dual = true
             }
 
-            onActiveChanged: internetApnSelector.updateSelectedIndex()
+            onActiveChanged: if (type === "internet") internetApnSelector.updateSelectedIndex()
             onNameChanged: d.buildLists()
             onAccessPointNameChanged: d.buildLists()
-
-            onProvisioningFinished: {
-                console.warn("Provisioned")
-            }
-            onReportError: {
-                console.warn("Context error: " + errorString)
-                // how to know which list to set unselected?
-                // todo pop up an error dialog
-            }
+            onReportError: console.error("Context error on " + contextPath + ": " + errorString)
         }
     }
 
     Connections {
         target: sim.connMan
-        onContextsChanged: {
-            d.updateContexts()
-        }
+        onContextsChanged: d.updateContexts()
 
         Component.onCompleted: {
-            // do this once.
             d.updateContexts();
+            // do this once.
             d.checkAndCreateCustomContexts();
         }
     }
@@ -380,6 +369,7 @@ ItemPage {
                     }
 
                     delegate: OptionSelectorDelegate {
+                        showDivider: false
                         text: {
                             var ctx = d.mContexts[modelData];
                             if (ctx.name !== "") {
@@ -420,7 +410,6 @@ ItemPage {
                             }
                         }
 
-                        console.warn(ctx.contextPath)
                         d.activateHelper(ctx.contextPath);
                     }
                 }

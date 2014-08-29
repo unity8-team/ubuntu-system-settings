@@ -53,10 +53,6 @@ ItemPage {
         onCurrentOperatorPathChanged: buildLists();
     }
 
-    Connections {
-        target: sim.connMan
-    }
-
     // map of operatorPath : netOp
     property var operators: ({}) // naughty, naughty
     function updateNetworkOperators()
@@ -159,7 +155,6 @@ ItemPage {
                 text: i18n.tr("Choose carrier:")
                 model: [i18n.tr("Automatically"), i18n.tr("Manually")]
 
-                //showDivider: false
                 delegate: OptionSelectorDelegate { showDivider: false }
                 selectedIndex: sim.netReg.mode === "manual" ? 1 : 0
 

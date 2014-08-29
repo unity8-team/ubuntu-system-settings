@@ -37,7 +37,6 @@ ItemPage {
     /// work around LP(#1361919)
     property var activateCb;
 
-
     QtObject {
         id: d
         property var typeText : type === "internet" ? i18n.tr("Internet") : i18n.tr("MMS")
@@ -55,12 +54,8 @@ ItemPage {
                     isValid = false;
                     return;
                 }
+                /// @todo validate proxy
                 /// @todo force port to be integer and validate it's value
-//                if (proxy !== "" && port <= 0) {
-//                    isValid = false;
-//                    return;
-//                }
-
             }
 
             // @todo the rest
@@ -71,8 +66,9 @@ ItemPage {
     //: %1 is either i18n.tr("Internet") or i18n.tr("MMS")
     title: i18n.tr("Custom %1 APN").arg(d.typeText)
 
+    // workaround of getting the following error on startup:
+    // WARNING - ... : QML Page: Binding loop detected for property "flickable"
     flickable: null
-
     Component.onCompleted: {
         flickable: scrollWidget
 
@@ -94,8 +90,7 @@ ItemPage {
         var proxyText = ctx.messageProxy.split(":");
         proxy.text = proxyText[0] !== undefined ? proxyText[0] : "";
         port.text = proxyText[1] !== undefined ? proxyText[1] : "";
-        // todo map protocol values
-        //protocol.selectedIndex = map(theContext.protocol);
+        /// @todo protocol values
 
         if (d.isMms) {
             /// @todo disabled for now
@@ -212,18 +207,7 @@ ItemPage {
                     enabled: !doBoth.checked
                     echoMode: TextInput.PasswordEchoOnEdit
                 }
-/* // FIXME support for ipv6 will be added after RTM
-                Label {
-                    text: i18n.tr("Protocol")
-                }
-                OptionSelector {
-                    id: protocol
-                    //width: auth.width
-                    model: [i18n.tr("IPv4"),
-                        i18n.tr("IPv6"),
-                        i18n.tr("IPv4IPv6")]
-                }
-*/
+                /// @todo support for ipv6 will be added after RTM
             }
         } // the contents
     } // the flickable
@@ -308,11 +292,8 @@ ItemPage {
                     }
                     ctx.messageProxy = proxyValue
                 }
+                /// @todo map protocol values
 
-                console.warn(ctx);
-                console.warn(ctx.accessPointName);
-                // todo map protocol values
-                //protocol.selectedIndex = map(theContext.protocol);
                 activateCb(ctx.type, ctx.contextPath);
                 pageStack.pop();
             }

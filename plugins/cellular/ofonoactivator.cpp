@@ -37,8 +37,6 @@ QDBusObjectPath detectConnection(const QString &ofonoContext, const QString imsi
     auto ofonoContextBase = ofonoContext.split('/').back();
     auto target = "/" + imsi + "/" + ofonoContextBase;
 
-    qWarning() << "TARGET: " << target;
-
     OrgFreedesktopNetworkManagerSettingsInterface settings(nmService, nmSettingsPath,
             QDBusConnection::systemBus());
     auto reply = settings.ListConnections();
