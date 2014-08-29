@@ -51,8 +51,13 @@ ItemPage {
     }
 
     OfonoSimManager {
-        id: sim
+        id: sim1
         modemPath: manager.modems[0]
+    }
+
+    OfonoSimManager {
+        id: sim2
+        modemPath: manager.modems[1]
     }
 
     Flickable {
@@ -92,13 +97,32 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                id: numberItem
-                objectName: "numberItem"
-                text: i18n.tr("Phone number")
-                property string phoneNumber
-                phoneNumber: sim.subscriberNumbers.length > 0 ? sim.subscriberNumbers[0] : ""
-                value: phoneNumber
-                visible: phoneNumber.length > 0
+                id: numberItem1
+                objectName: "numberItem1"
+                text: (phoneNumber1 && phoneNumber2) ?
+                    i18n.tr("Phone numbers") : i18n.tr("Phone number")
+                property string phoneNumber1
+                property string phoneNumber2
+                phoneNumber1: sim1.subscriberNumbers.length > 0 ? sim1.subscriberNumbers[0] : ""
+                phoneNumber2: sim2.subscriberNumbers.length > 0 ? sim2.subscriberNumbers[0] : ""
+                value: {
+                    var str = "";
+
+                    if (phoneNumber1) {
+                        str += phoneNumber1;
+                    }
+
+                    if (phoneNumber1 && phoneNumber2) {
+                        str += ", ";
+                    }
+
+                    if (phoneNumber2) {
+                        str += phoneNumber2;
+                    }
+
+                    return str;
+                }
+                visible: value
             }
 
             ListItem.SingleValue {
