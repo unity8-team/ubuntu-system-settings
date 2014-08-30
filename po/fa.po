@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-26 13:44+0200\n"
-"PO-Revision-Date: 2014-08-27 20:53+0000\n"
+"POT-Creation-Date: 2014-08-29 08:21+0200\n"
+"PO-Revision-Date: 2014-08-29 20:31+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@gmail.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-28 06:28+0000\n"
-"X-Generator: Launchpad (build 17174)\n"
+"X-Launchpad-Export-Date: 2014-08-30 07:40+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -39,15 +39,15 @@ msgid "Network name"
 msgstr "نام شبکه"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
-#: ../plugins/security-privacy//PageComponent.qml:85
+#: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
 msgstr "امنیت"
 
 #: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PhoneLocking.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:113
-#: ../plugins/bluetooth//PageComponent.qml:320
-#: ../plugins/bluetooth//PageComponent.qml:341
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr "هيچ‌کدام"
 
@@ -69,6 +69,8 @@ msgstr "گذرواژه‌ی قابل نمایش"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/security-privacy//SimPin.qml:145
+#: ../plugins/security-privacy//SimPin.qml:260
 #: ../plugins/security-privacy//LockSecurity.qml:279
 #: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//ResetAllSettings.qml:38
@@ -86,7 +88,7 @@ msgid "Cancel"
 msgstr "لغو"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "اتّصال"
 
@@ -95,7 +97,7 @@ msgid "Network details"
 msgstr "جزئیات شبکه"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:340
+#: ../plugins/bluetooth//PageComponent.qml:343
 msgid "Name"
 msgstr "نام"
 
@@ -104,11 +106,11 @@ msgid "Last connected"
 msgstr "آخرین اتّصال"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:519
+#: ../plugins/system-update//PageComponent.qml:520
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:99
+#: ../plugins/security-privacy//PageComponent.qml:140
 #: ../plugins/battery//SleepValues.qml:106
 #: ../plugins/battery//PageComponent.qml:309
 #: ../plugins/battery//PageComponent.qml:318
@@ -189,7 +191,7 @@ msgstr "به صورت خودکار"
 
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:108
+#: ../plugins/security-privacy//PageComponent.qml:149
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
 msgstr "دستی"
@@ -260,76 +262,76 @@ msgstr[0] "نصب %1 به‌روز رسانی"
 msgid "Pause All"
 msgstr "مکث همه"
 
-#: ../plugins/system-update//PageComponent.qml:269
+#: ../plugins/system-update//PageComponent.qml:270
 msgid "Retry"
 msgstr "تلاش دوباره"
 
-#: ../plugins/system-update//PageComponent.qml:285
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Download"
 msgstr "بارگیری"
 
-#: ../plugins/system-update//PageComponent.qml:285
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Update"
 msgstr "به‌روز رسانی"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Resume"
 msgstr "ازسرگیری"
 
-#: ../plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:288
 msgid "Pause"
 msgstr "مکث"
 
-#: ../plugins/system-update//PageComponent.qml:346
+#: ../plugins/system-update//PageComponent.qml:347
 msgid "Installing"
 msgstr "درحال نصب"
 
-#: ../plugins/system-update//PageComponent.qml:379
+#: ../plugins/system-update//PageComponent.qml:380
 msgid "Installed"
 msgstr "نصب شده"
 
-#: ../plugins/system-update//PageComponent.qml:403
+#: ../plugins/system-update//PageComponent.qml:404
 msgid "Version: "
 msgstr "نگارش: "
 
-#: ../plugins/system-update//PageComponent.qml:425
+#: ../plugins/system-update//PageComponent.qml:426
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr "برای دریافت به‌روز رسانی برای اپ‌ها به اوبونتووان وارد شوید."
 
-#: ../plugins/system-update//PageComponent.qml:434
+#: ../plugins/system-update//PageComponent.qml:435
 msgid "Sign In…"
 msgstr "ورود…"
 
-#: ../plugins/system-update//PageComponent.qml:501
+#: ../plugins/system-update//PageComponent.qml:502
 msgid "Installing update…"
 msgstr "درحال نصب به‌روز رسانی‌ها…"
 
-#: ../plugins/system-update//PageComponent.qml:516
+#: ../plugins/system-update//PageComponent.qml:517
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr "بارگیری خودکار"
 
-#: ../plugins/system-update//PageComponent.qml:521
+#: ../plugins/system-update//PageComponent.qml:522
 msgid "On wi-fi"
 msgstr "روی بی‌سیم"
 
-#: ../plugins/system-update//PageComponent.qml:523
+#: ../plugins/system-update//PageComponent.qml:524
 msgid "Always"
 msgstr "همیشه"
 
-#: ../plugins/system-update//PageComponent.qml:538
+#: ../plugins/system-update//PageComponent.qml:539
 msgid " bytes"
 msgstr " بایت"
 
-#: ../plugins/system-update//PageComponent.qml:541
+#: ../plugins/system-update//PageComponent.qml:542
 msgid " KiB"
 msgstr " کیبی‌بایت"
 
-#: ../plugins/system-update//PageComponent.qml:544
+#: ../plugins/system-update//PageComponent.qml:545
 msgid " MiB"
 msgstr " مبی‌بایت"
 
-#: ../plugins/system-update//PageComponent.qml:547
+#: ../plugins/system-update//PageComponent.qml:548
 msgid " GiB"
 msgstr " گیبی‌بایت"
 
@@ -415,18 +417,100 @@ msgstr "صدای صفحه‌کلید"
 msgid "Lock sound"
 msgstr "صدای قفل"
 
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:316
+#: ../plugins/security-privacy//PageComponent.qml:158
+msgid "SIM PIN"
+msgstr "PIN سیم‌کارت"
+
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr "تغییر PIN سیم‌کارت"
+
+#: ../plugins/security-privacy//SimPin.qml:47
+#: ../plugins/security-privacy//SimPin.qml:183
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr "PIN نادرست است. %1 تلاش باقی‌مانده"
+
+#: ../plugins/security-privacy//SimPin.qml:79
+msgid "Current PIN:"
+msgstr "PIN کنونی:"
+
+#: ../plugins/security-privacy//SimPin.qml:91
+#: ../plugins/security-privacy//SimPin.qml:241
+#, qt-format
+msgid "%1 attempts remaining"
+msgstr "%1 تلاش باقی‌مانده است"
+
+#: ../plugins/security-privacy//SimPin.qml:104
+msgid "Choose new PIN:"
+msgstr "انتخاب PIN جدید:"
+
+#: ../plugins/security-privacy//SimPin.qml:115
+msgid "Confirm new PIN:"
+msgstr "تأیید PIN جدید:"
+
+#: ../plugins/security-privacy//SimPin.qml:134
+msgid "PINs don't match. Try again."
+msgstr "PINها تطابق نداشتند. دوباره تلاش کنید."
+
+#: ../plugins/security-privacy//SimPin.qml:153
+#: ../plugins/security-privacy//LockSecurity.qml:298
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr "تغییر"
+
+#: ../plugins/security-privacy//SimPin.qml:179
+msgid "Enter SIM PIN"
+msgstr "PIN سیم‌کارت را وارد کنید"
+
+#: ../plugins/security-privacy//SimPin.qml:180
+msgid "Enter Previous SIM PIN"
+msgstr "PIN پیشین سیم‌کارت را وارد کنید"
+
+#: ../plugins/security-privacy//SimPin.qml:276
+msgid "Unlock"
+msgstr "بازکردن قفل"
+
+#: ../plugins/security-privacy//SimPin.qml:276
+msgid "Lock"
+msgstr "قفل"
+
+#: ../plugins/security-privacy//SimPin.qml:311
+#, qt-format
+msgid "%1"
+msgstr "%1"
+
+#: ../plugins/security-privacy//SimPin.qml:334
+msgid "Change PIN…"
+msgstr "عوض کردن PIN"
+
+#: ../plugins/security-privacy//SimPin.qml:351
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+"وقتی یک PIN سیم‌کارت تنظیم شود، باید بعد از راه‌اندازی مجدّد تلفن یا تعویض "
+"سیم‌کارت،  برای دست‌رسی به خدمات سلّولی وارد شود."
+
+#: ../plugins/security-privacy//SimPin.qml:355
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr ""
+"وارد کردن چندباره‌ی یک PIN نادرست ممکن است سیم‌کارت را به صورت دائمی قفل کند."
+
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "قفل‌کردن گوشی"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
-#: ../wizard/qml/Pages//15-passwd.qml:88
-msgid "Passcode"
-msgstr "رمز عبور"
+#: ../wizard/qml/Pages//15-passwd.qml:99
+msgid "PIN code"
+msgstr "رمز PIN"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:90
+#: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
 msgstr "عبارت عبور"
 
@@ -458,31 +542,52 @@ msgstr[0] "%1 دقیقه"
 msgid "Sleep locks immediately"
 msgstr "خوابیدن بلافاصله قفل کند"
 
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr "هنگام قفل بودن، اجازه بده:"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr "اجراگر"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr "اطّلاعیه‌ها و تنظیمات سریع"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+"برای محدود کردن دسترسی هنگامی که تلفن قفل است، امنیت قفل را روشن کنید."
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr "اپ‌ها و توابع دیگر از شما می‌خواهند قفل را باز کنید."
+
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:35
+#: ../plugins/security-privacy//PageComponent.qml:37
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
 msgid "Security & Privacy"
 msgstr "محرمانگی و امنیت"
 
-#: ../plugins/security-privacy//PageComponent.qml:59
-#: ../plugins/security-privacy//PageComponent.qml:170
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
 msgstr "تلفن و اینترنت"
 
-#: ../plugins/security-privacy//PageComponent.qml:61
-#: ../plugins/security-privacy//PageComponent.qml:171
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
 msgstr "فقط تلفن"
 
-#: ../plugins/security-privacy//PageComponent.qml:90
+#: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
 msgstr "قفل کردن تلفن"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:96
-#: ../plugins/security-privacy//PageComponent.qml:105
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
 #: ../plugins/battery//SleepValues.qml:83
 #: ../plugins/battery//SleepValues.qml:87
 #: ../plugins/battery//SleepValues.qml:91
@@ -496,15 +601,24 @@ msgid "After %1 minute"
 msgid_plural "After %1 minutes"
 msgstr[0] "بعد از %1 دقیقه"
 
-#: ../plugins/security-privacy//PageComponent.qml:116
-msgid "SIM PIN"
-msgstr "PIN سیم‌کارت"
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:236
+msgid "On"
+msgstr "روشن"
 
-#: ../plugins/security-privacy//PageComponent.qml:124
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+msgid "Off"
+msgstr "خاموش"
+
+#: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
 msgstr "رمزگذاری"
 
-#: ../plugins/security-privacy//PageComponent.qml:133
+#: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
@@ -512,64 +626,53 @@ msgstr ""
 "رمزگذاری در برابر دست‌رسی به داده‌های تلفن هنگام اتّصال به رایانه یا دستگاه "
 "دیگر محافظت می‌کند."
 
-#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
 msgstr "محرمانگی"
 
-#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
 msgstr "آمار در صفحه‌ی خوش‌آمدید"
 
-#: ../plugins/security-privacy//PageComponent.qml:153
+#: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Messages on welcome screen"
 msgstr "پیام‌های روی صفحه‌ی خوش‌آمدید"
 
-#: ../plugins/security-privacy//PageComponent.qml:168
+#: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
 msgstr "جست‌وجوی دش"
 
-#: ../plugins/security-privacy//PageComponent.qml:186
+#: ../plugins/security-privacy//PageComponent.qml:234
 msgid "Location access"
 msgstr "دست‌رسی موقعیتی"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "On"
-msgstr "روشن"
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:31
-msgid "Off"
-msgstr "خاموش"
-
-#: ../plugins/security-privacy//PageComponent.qml:195
+#: ../plugins/security-privacy//PageComponent.qml:243
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "دست‌رسی اپ‌های دیگر"
 
-#: ../plugins/security-privacy//PageComponent.qml:200
+#: ../plugins/security-privacy//PageComponent.qml:248
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "اشکال‌یابی"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:205
+#: ../plugins/security-privacy//PageComponent.qml:253
 msgid "Sent"
 msgstr "ارسال شده"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:208
+#: ../plugins/security-privacy//PageComponent.qml:256
 msgid "Not sent"
 msgstr "فرستاده نشده"
 
 #: ../plugins/security-privacy//LockSecurity.qml:92
 #: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passcode…"
-msgstr "تعویض رمز عبور…"
+msgid "Change PIN code…"
+msgstr "تغییر رمز PIN…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:94
 #: ../plugins/security-privacy//LockSecurity.qml:381
@@ -581,40 +684,40 @@ msgid "Switch to swipe"
 msgstr "تعویض به لغزش"
 
 #: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr "تعویض به رمز عبور"
+msgid "Switch to PIN code"
+msgstr "تعویض به رمز PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to passphrase"
 msgstr "تعویض به عبارت عبور"
 
 #: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr "رمز عبور موجود"
+msgid "Existing PIN code"
+msgstr "رمز PIN موجود"
 
 #: ../plugins/security-privacy//LockSecurity.qml:116
 msgid "Existing passphrase"
 msgstr "عبارت عبور موجود"
 
 #: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr "گزینش رمز عبور"
+msgid "Choose PIN code"
+msgstr "انتخاب رمز PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:172
 msgid "Choose passphrase"
 msgstr "گزینش عبارت عبور"
 
 #: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr "تأیید رمز عبور"
+msgid "Confirm PIN code"
+msgstr "تأیید رمز PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:218
 msgid "Confirm passphrase"
 msgstr "تأیید عبارت عبور"
 
 #: ../plugins/security-privacy//LockSecurity.qml:261
-msgid "Those passcodes don't match. Try again."
-msgstr "رمزهای عبور مطابقت نداشتند. دوباره تلاش کنید."
+msgid "Those PIN codes don't match. Try again."
+msgstr "رمزهای PIN تطابق نداشتند. دوباره تلاش کنید."
 
 #: ../plugins/security-privacy//LockSecurity.qml:264
 msgid "Those passphrases don't match. Try again."
@@ -623,11 +726,6 @@ msgstr "عبارت‌های عبور مطابقت نداشتند. دوباره �
 #: ../plugins/security-privacy//LockSecurity.qml:295
 msgid "Unset"
 msgstr "صفر کردن"
-
-#: ../plugins/security-privacy//LockSecurity.qml:298
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr "تغییر"
 
 #: ../plugins/security-privacy//LockSecurity.qml:340
 msgid "Unlock the phone using:"
@@ -638,16 +736,16 @@ msgid "Swipe (no security)"
 msgstr "لغزش (بدون امنیت)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:345
-msgid "4-digit passcode"
-msgstr "رمز عبور ۴ رقمی"
+msgid "4-digit PIN code"
+msgstr "رمز PIN چهار رقمی"
 
 #: ../plugins/security-privacy//LockSecurity.qml:347
 msgid "Swipe (no security)… "
 msgstr "لغزش (بدون امنیت)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "4-digit passcode…"
-msgstr "رمز عبور ۴ رقمی…"
+msgid "4-digit PIN code…"
+msgstr "رمز PIN چهار رقمی…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "Passphrase…"
@@ -735,7 +833,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr "اپ‌هایی که به آن‌ها اجازه دادید و درخواست دادند:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
 msgstr "دوربین"
 
@@ -845,7 +943,7 @@ msgstr "تماس"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:31
-#: ../plugins/bluetooth//PageComponent.qml:90
+#: ../plugins/bluetooth//PageComponent.qml:93
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
 msgstr "تلفن"
@@ -1082,146 +1180,146 @@ msgstr "جفت کردن"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:144
+#: ../plugins/bluetooth//PageComponent.qml:147
 #: ../plugins/battery//PageComponent.qml:357
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
 msgstr "بلوتوث"
 
-#: ../plugins/bluetooth//PageComponent.qml:79
+#: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
 msgstr "متّصل"
 
-#: ../plugins/bluetooth//PageComponent.qml:80
+#: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
 msgstr "در حال اتّصال…"
 
-#: ../plugins/bluetooth//PageComponent.qml:81
+#: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
 msgstr "در خال قطع اتّصال…"
 
-#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
 msgstr "اتّصال قطع شد"
 
-#: ../plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
 msgstr "ناشناس"
 
-#: ../plugins/bluetooth//PageComponent.qml:89
+#: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
 msgstr "رایانه"
 
-#: ../plugins/bluetooth//PageComponent.qml:91
+#: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Modem"
 msgstr "مودم"
 
-#: ../plugins/bluetooth//PageComponent.qml:92 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
 msgid "Network"
 msgstr "شبکه"
 
-#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Headset"
 msgstr "هدست"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Headphones"
 msgstr "هدفون‌ها"
 
-#: ../plugins/bluetooth//PageComponent.qml:95
+#: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Video"
 msgstr "ویدیو"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Other Audio"
 msgstr "صداهای دیگر"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Joypad"
 msgstr "دسته‌ی بازی"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Keyboard"
 msgstr "صفحه‌کلید"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Tablet"
 msgstr "تبلت"
 
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Mouse"
 msgstr "موشی"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:104
 msgid "Printer"
 msgstr "چاپگر"
 
-#: ../plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:106
 msgid "Other"
 msgstr "دیگر"
 
-#: ../plugins/bluetooth//PageComponent.qml:109
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Excellent"
 msgstr "عالی"
 
-#: ../plugins/bluetooth//PageComponent.qml:110
+#: ../plugins/bluetooth//PageComponent.qml:113
 msgid "Good"
 msgstr "خوب"
 
-#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
 msgstr "مناسب"
 
-#: ../plugins/bluetooth//PageComponent.qml:112
+#: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
 msgstr "ضعیف"
 
-#: ../plugins/bluetooth//PageComponent.qml:179
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Discoverable"
 msgstr "قابل کشف"
 
-#: ../plugins/bluetooth//PageComponent.qml:179
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Not discoverable"
 msgstr "غیرقابل کشف"
 
-#: ../plugins/bluetooth//PageComponent.qml:210
+#: ../plugins/bluetooth//PageComponent.qml:213
 msgid "Connected devices:"
 msgstr "دستگاه‌های متّصل:"
 
-#: ../plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect another device:"
 msgstr "اةهصال به یک دستگاه دیگر:"
 
-#: ../plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
 msgstr "اتّصال یک دستگاه:"
 
-#: ../plugins/bluetooth//PageComponent.qml:280
+#: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
 msgstr "هیچ چیز پیدا نشد"
 
-#: ../plugins/bluetooth//PageComponent.qml:288
-#: ../plugins/bluetooth//PageComponent.qml:391
+#: ../plugins/bluetooth//PageComponent.qml:291
+#: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
 msgstr "اتّصال خودکار هنگام تشخیص:"
 
-#: ../plugins/bluetooth//PageComponent.qml:358
+#: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
 msgstr "نوع"
 
-#: ../plugins/bluetooth//PageComponent.qml:382
+#: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
 msgstr "وضعیت"
 
-#: ../plugins/bluetooth//PageComponent.qml:386
+#: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
 msgstr "قدرت سیگنال"
 
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Disconnect"
 msgstr "قطع اتّصال"
 
-#: ../plugins/bluetooth//PageComponent.qml:423
+#: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "فراموش کردن این دستگاه"
 
@@ -1347,11 +1445,11 @@ msgstr "پیش‌نمایش"
 msgid "Background"
 msgstr "پس‌زمینه"
 
-#: ../plugins/background//MainPage.qml:112
+#: ../plugins/background//MainPage.qml:107
 msgid "Ubuntu Art"
 msgstr "هنر اوبونتو"
 
-#: ../plugins/background//MainPage.qml:128
+#: ../plugins/background//MainPage.qml:123
 msgid "Custom"
 msgstr "سفارشی"
 
@@ -1486,9 +1584,9 @@ msgstr ""
 "به همه‌ی چیزهای رویش دست‌رسی داشته و آن‌ها را تغییر داده یا حذف کند."
 
 #: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
+msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
-"برای استفاده از حالت توسعه‌دهنده، نیاز به یک رمزعبور یا مجموعه‌ی عبارت عبور "
+"برای استفاده از حالت توسعه‌دهنده نیاز به تنظیم یک رمز PIN با عبارت‌عبور "
 "دارید."
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
@@ -1540,26 +1638,26 @@ msgid "OK"
 msgstr "قبول"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:33
-#: ../plugins/cellular//Components//CellularMultiSim.qml:76
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
 msgstr "داده‌های سلّولی:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:38
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
 msgstr "فقط نسل دوم (باتری را حفظ می‌کند)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:39
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
 msgstr "نسل دوم/سوم/چهارم (سریع‌تر)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:155
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
 msgstr "رومینگ داده"
 
@@ -1582,6 +1680,11 @@ msgstr ""
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
 msgstr "برای پیام‌ها استفاده شود:"
+
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+msgid "2G/3G (faster)"
+msgstr "نسل دوم/سوم (سریع‌تر)"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1621,36 +1724,32 @@ msgstr "سامانه"
 msgid "Connect to Wi-Fi"
 msgstr "اتّصال به بی‌سیم"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
+#: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
 msgstr "شبکه‌های موجود"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152
-#: ../wizard/qml/Pages//40-reporting.qml:46
-#: ../wizard/qml/Pages//30-location.qml:67
-#: ../wizard/qml/Pages//15-passwd.qml:159
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//30-location.qml:66
+#: ../wizard/qml/Pages//15-passwd.qml:170
 msgid "Continue"
 msgstr "ادامه"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:64
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
 msgstr "پرش"
 
-#: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
-msgstr "سلام"
+#: ../wizard/qml/Pages//10-welcome.qml:24
+msgid "Hi!"
+msgstr "سلام!"
 
-#: ../wizard/qml/Pages//10-welcome.qml:67
-msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr "به تلفن اوبونتویی خود خوش آمدید. بیایید شروع کنیم."
+#: ../wizard/qml/Pages//10-welcome.qml:41
+msgid "Welcome to your Ubuntu phone."
+msgstr "به تلفن اوبونتوی خودتان خوش آمدید."
 
-#: ../wizard/qml/Pages//10-welcome.qml:72
-msgid "Select your language"
-msgstr "زبانتان را انتخاب کنید"
-
-#: ../wizard/qml/Pages//10-welcome.qml:89
-msgid "Start"
-msgstr "آغاز"
+#: ../wizard/qml/Pages//10-welcome.qml:49
+msgid "Let’s get started."
+msgstr "بیایید شروع کینم."
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
@@ -1660,77 +1759,93 @@ msgstr "شرایط و ضوابط"
 msgid "Add a SIM card"
 msgstr "افزودن یک سیم‌کارت"
 
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid ""
-"Please insert a SIM card before you continue. Without it, you won’t be able "
-"to make calls or use text messaging."
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
+msgstr "لطفاً پیش از ادامه، یک سیم‌کارت وارد کنید."
+
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr ""
-"پیش از ادامه لطفاً یک سیم‌کارت وارد کنید. بدون آن نخواهید توانست تماس بگیرید "
-"با از پیام رسانی متنی استفاده کنید."
+"بدون آن، نخواهید توانست تماس گرفته با از پیام‌رسانی متنی استفاده کنید."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
 msgstr "همه‌چیز انجام شد"
 
-#: ../wizard/qml/Pages//80-finished.qml:39
-msgid "Nice work! Your phone is now ready to use. "
-msgstr "عالی بود. هم‌اکنون تلفن شما آماده به کار است. "
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr "عالی بود!"
 
-#: ../wizard/qml/Pages//80-finished.qml:46
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr "هم‌اکنون تلفن شما آماده‌ی استفاده است."
+
+#: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
 msgstr "پایان"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug Reporting"
-msgstr "گزارش اشکال"
+msgid "Bug reporting"
+msgstr "گرازش اشکال"
 
-#: ../wizard/qml/Pages//40-reporting.qml:39
-msgid ""
-"Your phone is set up to automatically report errors to Canonical. This can "
-"be disabled in system settings."
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
-"تلفن شما تنظیم شده که خطاها را به صورت خودکار به کنونیکال گزارش دهد. این "
-"مورد می‌تواند در تنظیمات سامانه غیرفعّال شود."
+"تلفن شما تنظیم شده تا به صورت خودگار گزارش‌های اشکال را به کنونیکال بفرستد."
 
-#: ../wizard/qml/Pages//30-location.qml:51
-msgid "Use your mobile network and wi-fi to work out where you are."
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
+msgstr "این می‌تواند در تنظیمات سامانه غیرفعّال شود."
+
+#: ../wizard/qml/Pages//30-location.qml:50
+msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
-"از شبکه‌ی تلفن همراه و بی سیم برای دریافتن مکانی که هستید استفاده شود."
+"برای دانستن این که کجا هستید از شبکه‌ی بی‌سیم و تلفن همراهتان استفاده کنید."
 
-#: ../wizard/qml/Pages//30-location.qml:59
+#: ../wizard/qml/Pages//30-location.qml:58
 msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-"conditions</a>."
+"conditions</a>"
 msgstr ""
-"من <a href='terms.qml'>شرایط و ضوابط</a> اوبونتو را خوانده‌ام و قبولشان دارم."
+"من <a href='terms.qml'>شرایط و ضوابط</a> اوبونتو را خوانده‌ام و قبول دارم."
 
-#: ../wizard/qml/Pages//15-passwd.qml:37
+#: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
 msgstr "تنظیم امنیت قفل"
 
-#: ../wizard/qml/Pages//15-passwd.qml:86
+#: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
 msgstr "لغزش"
 
-#: ../wizard/qml/Pages//15-passwd.qml:136
-msgid "Those passcodes don't match."
-msgstr "آن رمزعبورها مطابقت ندارند."
+#: ../wizard/qml/Pages//15-passwd.qml:147
+msgid "Those PIN codes don't match."
+msgstr "رمزهای PIN تطابق نداشتند."
 
-#: ../wizard/qml/Pages//15-passwd.qml:138
+#: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
 msgstr "آن عبارت‌عبورها مطابقت ندارند."
 
-#: ../wizard/qml/Pages//15-passwd.qml:146
-msgid "Passcode must be at least four digits long."
-msgstr "رمزعبور باید خداقل چهار نویسه طول داشته باشد."
+#: ../wizard/qml/Pages//15-passwd.qml:157
+msgid "PIN code must be at least four digits long."
+msgstr "رمز PIN باید خداقل ۴ رقم طول داشته باشد."
 
-#: ../wizard/qml/Pages//15-passwd.qml:148
+#: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
 msgstr "عبارت‌عبور باید خداقل چهار نویسه طول داشته باشد."
 
-#: ../wizard/qml/Components//Page.qml:50
+#: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "بازگشت"
+
+#: ../wizard/qml/Components//StackButton.qml:51
+#, qt-format
+msgid "〈  %1"
+msgstr "〈  %1"
+
+#: ../wizard/qml/Components//StackButton.qml:54
+#, qt-format
+msgid "%1  〉"
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -2020,27 +2135,27 @@ msgid "Can't pause current request (can't contact service)"
 msgstr ""
 "نمی‌توان درخواست جاری را معلّق کرد (نمی‌توان با سرویس ارتباط برقرار کرد)"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:251
-msgid "Incorrect passcode. Try again."
-msgstr "رمزعبور نادرست است. دوباره تلاش کنید."
+#: ../plugins/security-privacy//securityprivacy.cpp:292
+msgid "Incorrect PIN code. Try again."
+msgstr "رمز PIN نادرست است. دوباره تلاش کنید."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:253
+#: ../plugins/security-privacy//securityprivacy.cpp:294
 msgid "Incorrect passphrase. Try again."
 msgstr "عبارت‌عبور نادرست است. دوباره تلاش کنید."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:256
+#: ../plugins/security-privacy//securityprivacy.cpp:297
 msgid "Could not set security mode"
 msgstr "نمی‌توان حالت امنیتی را تنظیم کرد"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:281
+#: ../plugins/security-privacy//securityprivacy.cpp:322
 msgid "Could not set security display hint"
 msgstr "نمی‌توان راهنمای نمایشی امنیتی را تنظیم کرد"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:294
+#: ../plugins/security-privacy//securityprivacy.cpp:335
 msgid "Authentication token manipulation error"
 msgstr "خطا در دست‌کاری توکن تأییدیه"
 
-#: ../plugins/about//click.cpp:133
+#: ../plugins/about//click.cpp:134
 msgid "Unknown title"
 msgstr "عنوان نامعلوم"
 
@@ -2051,3 +2166,86 @@ msgstr "یک تصویر سامانه‌ی به‌روز شده وجود دارد
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr "برای گشودن به‌روز رسان سامانه فشار دهید."
+
+#~ msgid "Passcode"
+#~ msgstr "رمز عبور"
+
+#~ msgid "Switch to passcode"
+#~ msgstr "تعویض به رمز عبور"
+
+#~ msgid "Choose passcode"
+#~ msgstr "گزینش رمز عبور"
+
+#~ msgid "Existing passcode"
+#~ msgstr "رمز عبور موجود"
+
+#~ msgid "Those passcodes don't match. Try again."
+#~ msgstr "رمزهای عبور مطابقت نداشتند. دوباره تلاش کنید."
+
+#~ msgid "4-digit passcode"
+#~ msgstr "رمز عبور ۴ رقمی"
+
+#~ msgid "Confirm passcode"
+#~ msgstr "تأیید رمز عبور"
+
+#~ msgid "Change passcode…"
+#~ msgstr "تعویض رمز عبور…"
+
+#~ msgid "4-digit passcode…"
+#~ msgstr "رمز عبور ۴ رقمی…"
+
+#~ msgid ""
+#~ "Your phone is set up to automatically report errors to Canonical. This can "
+#~ "be disabled in system settings."
+#~ msgstr ""
+#~ "تلفن شما تنظیم شده که خطاها را به صورت خودکار به کنونیکال گزارش دهد. این "
+#~ "مورد می‌تواند در تنظیمات سامانه غیرفعّال شود."
+
+#~ msgid "Start"
+#~ msgstr "آغاز"
+
+#~ msgid "Hello"
+#~ msgstr "سلام"
+
+#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
+#~ msgstr "به تلفن اوبونتویی خود خوش آمدید. بیایید شروع کنیم."
+
+#~ msgid "Select your language"
+#~ msgstr "زبانتان را انتخاب کنید"
+
+#~ msgid "You need a passcode or passphrase set to use Developer Mode."
+#~ msgstr ""
+#~ "برای استفاده از حالت توسعه‌دهنده، نیاز به یک رمزعبور یا مجموعه‌ی عبارت عبور "
+#~ "دارید."
+
+#~ msgid "Those passcodes don't match."
+#~ msgstr "آن رمزعبورها مطابقت ندارند."
+
+#~ msgid "Passcode must be at least four digits long."
+#~ msgstr "رمزعبور باید خداقل چهار نویسه طول داشته باشد."
+
+#~ msgid ""
+#~ "Please insert a SIM card before you continue. Without it, you won’t be able "
+#~ "to make calls or use text messaging."
+#~ msgstr ""
+#~ "پیش از ادامه لطفاً یک سیم‌کارت وارد کنید. بدون آن نخواهید توانست تماس بگیرید "
+#~ "با از پیام رسانی متنی استفاده کنید."
+
+#~ msgid "Use your mobile network and wi-fi to work out where you are."
+#~ msgstr ""
+#~ "از شبکه‌ی تلفن همراه و بی سیم برای دریافتن مکانی که هستید استفاده شود."
+
+#~ msgid ""
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>."
+#~ msgstr ""
+#~ "من <a href='terms.qml'>شرایط و ضوابط</a> اوبونتو را خوانده‌ام و قبولشان دارم."
+
+#~ msgid "Nice work! Your phone is now ready to use. "
+#~ msgstr "عالی بود. هم‌اکنون تلفن شما آماده به کار است. "
+
+#~ msgid "Bug Reporting"
+#~ msgstr "گزارش اشکال"
+
+#~ msgid "Incorrect passcode. Try again."
+#~ msgstr "رمزعبور نادرست است. دوباره تلاش کنید."
