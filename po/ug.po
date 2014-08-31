@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-30 07:41+0000\n"
+"X-Launchpad-Export-Date: 2014-08-31 07:29+0000\n"
 "X-Generator: Launchpad (build 17176)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -39,15 +39,15 @@ msgid "Network name"
 msgstr "تور ئاتى"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
-#: ../plugins/security-privacy//PageComponent.qml:126
+#: ../plugins/security-privacy//PageComponent.qml:85
 msgid "Security"
 msgstr "بىخەتەرلىك"
 
 #: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PhoneLocking.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:116
-#: ../plugins/bluetooth//PageComponent.qml:323
-#: ../plugins/bluetooth//PageComponent.qml:344
+#: ../plugins/bluetooth//PageComponent.qml:113
+#: ../plugins/bluetooth//PageComponent.qml:320
+#: ../plugins/bluetooth//PageComponent.qml:341
 msgid "None"
 msgstr "يوق"
 
@@ -69,8 +69,6 @@ msgstr "ئىم كۆرۈنسۇن"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//SimPin.qml:145
-#: ../plugins/security-privacy//SimPin.qml:260
 #: ../plugins/security-privacy//LockSecurity.qml:279
 #: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//ResetAllSettings.qml:38
@@ -88,7 +86,7 @@ msgid "Cancel"
 msgstr "ئەمەلدىن قالدۇر"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
-#: ../plugins/bluetooth//PageComponent.qml:408
+#: ../plugins/bluetooth//PageComponent.qml:405
 msgid "Connect"
 msgstr "باغلان"
 
@@ -97,7 +95,7 @@ msgid "Network details"
 msgstr "تور تەپسىلاتلىرى"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:343
+#: ../plugins/bluetooth//PageComponent.qml:340
 msgid "Name"
 msgstr "ئاتى"
 
@@ -106,11 +104,11 @@ msgid "Last connected"
 msgstr "ئەڭ ئاخىرقى قېتىم باغلانغىنى"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:520
+#: ../plugins/system-update//PageComponent.qml:519
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/security-privacy//PageComponent.qml:99
 #: ../plugins/battery//SleepValues.qml:106
 #: ../plugins/battery//PageComponent.qml:309
 #: ../plugins/battery//PageComponent.qml:318
@@ -191,7 +189,7 @@ msgstr "ئاپتوماتىك"
 
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:149
+#: ../plugins/security-privacy//PageComponent.qml:108
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
 msgstr "قولدا"
@@ -265,76 +263,76 @@ msgstr[1] ""
 msgid "Pause All"
 msgstr "ھەممىنى ۋاقىتلىق توختات"
 
-#: ../plugins/system-update//PageComponent.qml:270
+#: ../plugins/system-update//PageComponent.qml:269
 msgid "Retry"
 msgstr "قايتا سىنا"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:285
 msgid "Download"
 msgstr "چۈشۈرۈش"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:285
 msgid "Update"
 msgstr "يېڭىلا"
 
-#: ../plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Resume"
 msgstr "داۋاملاشتۇر"
 
-#: ../plugins/system-update//PageComponent.qml:288
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Pause"
 msgstr "ۋاقىتلىق توختا"
 
-#: ../plugins/system-update//PageComponent.qml:347
+#: ../plugins/system-update//PageComponent.qml:346
 msgid "Installing"
 msgstr "ئورنىتىۋاتىدۇ"
 
-#: ../plugins/system-update//PageComponent.qml:380
+#: ../plugins/system-update//PageComponent.qml:379
 msgid "Installed"
 msgstr "ئورنىتىلغان"
 
-#: ../plugins/system-update//PageComponent.qml:404
+#: ../plugins/system-update//PageComponent.qml:403
 msgid "Version: "
 msgstr "نەشرى: "
 
-#: ../plugins/system-update//PageComponent.qml:426
+#: ../plugins/system-update//PageComponent.qml:425
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:435
+#: ../plugins/system-update//PageComponent.qml:434
 msgid "Sign In…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:502
+#: ../plugins/system-update//PageComponent.qml:501
 msgid "Installing update…"
 msgstr "يېڭىلانمىنى ئورنىتىۋاتىدۇ..."
 
-#: ../plugins/system-update//PageComponent.qml:517
+#: ../plugins/system-update//PageComponent.qml:516
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr "ئاپتوماتىك چۈشۈر"
 
-#: ../plugins/system-update//PageComponent.qml:522
+#: ../plugins/system-update//PageComponent.qml:521
 msgid "On wi-fi"
 msgstr "سىمسىز تور (wi-fi) دا"
 
-#: ../plugins/system-update//PageComponent.qml:524
+#: ../plugins/system-update//PageComponent.qml:523
 msgid "Always"
 msgstr "ھەمىشە"
 
-#: ../plugins/system-update//PageComponent.qml:539
+#: ../plugins/system-update//PageComponent.qml:538
 msgid " bytes"
 msgstr " بايت"
 
-#: ../plugins/system-update//PageComponent.qml:542
+#: ../plugins/system-update//PageComponent.qml:541
 msgid " KiB"
 msgstr " كىلوبايت"
 
-#: ../plugins/system-update//PageComponent.qml:545
+#: ../plugins/system-update//PageComponent.qml:544
 msgid " MiB"
 msgstr " مېگابايت"
 
-#: ../plugins/system-update//PageComponent.qml:548
+#: ../plugins/system-update//PageComponent.qml:547
 msgid " GiB"
 msgstr " گىگابايت"
 
@@ -420,9 +418,7 @@ msgstr "ھەرپتاختا ئاۋازى"
 msgid "Lock sound"
 msgstr "ئۈننى قۇلۇپلا"
 
-#: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:316
-#: ../plugins/security-privacy//PageComponent.qml:158
+#: ../plugins/security-privacy//PageComponent.qml:116
 msgid "SIM PIN"
 msgstr "SIM نىڭ ئىمى(PIN)  نومۇرى"
 
@@ -458,7 +454,6 @@ msgstr ""
 msgid "PINs don't match. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:153
 #: ../plugins/security-privacy//LockSecurity.qml:298
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
@@ -510,7 +505,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:101
+#: ../wizard/qml/Pages//15-passwd.qml:90
 msgid "Passphrase"
 msgstr "ئىم جۈملىسى"
 
@@ -563,30 +558,30 @@ msgid "Other apps and functions will prompt you to unlock."
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37
+#: ../plugins/security-privacy//PageComponent.qml:35
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
 msgid "Security & Privacy"
 msgstr "بىخەتەرلىك ۋە شەخسىيەت"
 
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
+#: ../plugins/security-privacy//PageComponent.qml:59
+#: ../plugins/security-privacy//PageComponent.qml:170
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
 msgstr "تېلېفون ۋە ئىنتېرنېت"
 
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
+#: ../plugins/security-privacy//PageComponent.qml:61
+#: ../plugins/security-privacy//PageComponent.qml:171
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
 msgstr "تېلېفون"
 
-#: ../plugins/security-privacy//PageComponent.qml:131
+#: ../plugins/security-privacy//PageComponent.qml:90
 msgid "Lock phone"
 msgstr ""
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/security-privacy//PageComponent.qml:96
+#: ../plugins/security-privacy//PageComponent.qml:105
 #: ../plugins/battery//SleepValues.qml:83
 #: ../plugins/battery//SleepValues.qml:87
 #: ../plugins/battery//SleepValues.qml:91
@@ -600,69 +595,67 @@ msgid "After %1 minute"
 msgid_plural "After %1 minutes"
 msgstr[0] "%1 مىنۇتتىن كېيىن"
 
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/security-privacy//PageComponent.qml:188
 msgid "On"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/security-privacy//PageComponent.qml:188
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+#: ../plugins/cellular//Components//CellularSingleSim.qml:37
+#: ../plugins/cellular//Components//CellularMultiSim.qml:31
 msgid "Off"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:172
+#: ../plugins/security-privacy//PageComponent.qml:124
 msgid "Encryption"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:181
+#: ../plugins/security-privacy//PageComponent.qml:133
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:185
+#: ../plugins/security-privacy//PageComponent.qml:137
 msgid "Privacy"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/security-privacy//PageComponent.qml:140
 msgid "Stats on welcome screen"
 msgstr "مەرھابا ئېكرانىنىڭ ھالەتلىرى"
 
-#: ../plugins/security-privacy//PageComponent.qml:201
+#: ../plugins/security-privacy//PageComponent.qml:153
 msgid "Messages on welcome screen"
 msgstr "مەرھابا ئېكرانىدىكى ئۇچۇرلار"
 
-#: ../plugins/security-privacy//PageComponent.qml:216
+#: ../plugins/security-privacy//PageComponent.qml:168
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
 msgstr "باش تاختا ئىزدەش"
 
-#: ../plugins/security-privacy//PageComponent.qml:234
+#: ../plugins/security-privacy//PageComponent.qml:186
 msgid "Location access"
 msgstr "ئورۇن زىيارىتى"
 
-#: ../plugins/security-privacy//PageComponent.qml:243
+#: ../plugins/security-privacy//PageComponent.qml:195
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "زىيارەت قىلىنغان ئەپلەر"
 
-#: ../plugins/security-privacy//PageComponent.qml:248
+#: ../plugins/security-privacy//PageComponent.qml:200
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "دىئاگنوز"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:253
+#: ../plugins/security-privacy//PageComponent.qml:205
 msgid "Sent"
 msgstr "ئەۋەتكەنلىرى"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:256
+#: ../plugins/security-privacy//PageComponent.qml:208
 msgid "Not sent"
 msgstr "ئەۋەتىلمىگەنلىرى"
 
@@ -818,7 +811,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Camera"
 msgstr "كامېرا"
 
@@ -926,7 +919,7 @@ msgstr "چاقىر"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:31
-#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../plugins/bluetooth//PageComponent.qml:90
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
 msgstr "تېلېفون"
@@ -1155,146 +1148,146 @@ msgstr "جۈپلە"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/bluetooth//PageComponent.qml:144
 #: ../plugins/battery//PageComponent.qml:357
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
 msgstr "كۆكچىش"
 
-#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Connected"
 msgstr "باغلاندى"
 
-#: ../plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Connecting…"
 msgstr "باغلىنىۋاتىدۇ…"
 
-#: ../plugins/bluetooth//PageComponent.qml:84
+#: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Disconnecting…"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:85
+#: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Disconnected"
 msgstr "ئۈزۈلدى"
 
-#: ../plugins/bluetooth//PageComponent.qml:86
+#: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Unknown"
 msgstr "نامەلۇم"
 
-#: ../plugins/bluetooth//PageComponent.qml:92
+#: ../plugins/bluetooth//PageComponent.qml:89
 msgid "Computer"
 msgstr "كومپيۇتېر"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:91
 msgid "Modem"
 msgstr "مودېم"
 
-#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:92 ../src/qml/MainWindow.qml:145
 msgid "Network"
 msgstr "تور"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:93
 msgid "Headset"
 msgstr "مىكروفونلۇق تىڭشىغۇچ"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Headphones"
 msgstr "تىڭشىغۇچ"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:95
 msgid "Video"
 msgstr "سىن"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Other Audio"
 msgstr "باشقا ئۈن"
 
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Joypad"
 msgstr "قول"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Keyboard"
 msgstr "ھەرپتاختا"
 
-#: ../plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Tablet"
 msgstr "سەزگۈر تاختا"
 
-#: ../plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Mouse"
 msgstr "چاشقىنەك"
 
-#: ../plugins/bluetooth//PageComponent.qml:104
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Printer"
 msgstr "پرىنتېر"
 
-#: ../plugins/bluetooth//PageComponent.qml:106
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Other"
 msgstr "باشقا"
 
-#: ../plugins/bluetooth//PageComponent.qml:112
+#: ../plugins/bluetooth//PageComponent.qml:109
 msgid "Excellent"
 msgstr "ناھايىتى ياخشى"
 
-#: ../plugins/bluetooth//PageComponent.qml:113
+#: ../plugins/bluetooth//PageComponent.qml:110
 msgid "Good"
 msgstr "ياخشى"
 
-#: ../plugins/bluetooth//PageComponent.qml:114
+#: ../plugins/bluetooth//PageComponent.qml:111
 msgid "Fair"
 msgstr "ياخشىراق"
 
-#: ../plugins/bluetooth//PageComponent.qml:115
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Poor"
 msgstr "ناچار"
 
-#: ../plugins/bluetooth//PageComponent.qml:182
+#: ../plugins/bluetooth//PageComponent.qml:179
 msgid "Discoverable"
 msgstr "بايقىغىلى بولىدۇ"
 
-#: ../plugins/bluetooth//PageComponent.qml:182
+#: ../plugins/bluetooth//PageComponent.qml:179
 msgid "Not discoverable"
 msgstr "بايقىغىلى بولمايدۇ"
 
-#: ../plugins/bluetooth//PageComponent.qml:213
+#: ../plugins/bluetooth//PageComponent.qml:210
 msgid "Connected devices:"
 msgstr "باغلانغان ئۈسكۈنىلەر"
 
-#: ../plugins/bluetooth//PageComponent.qml:250
+#: ../plugins/bluetooth//PageComponent.qml:247
 msgid "Connect another device:"
 msgstr "باشقا ئۈسكۈنىگە باغلىنالمىدى:"
 
-#: ../plugins/bluetooth//PageComponent.qml:250
+#: ../plugins/bluetooth//PageComponent.qml:247
 msgid "Connect a device:"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:283
+#: ../plugins/bluetooth//PageComponent.qml:280
 msgid "None detected"
 msgstr "بايقالمىدى"
 
-#: ../plugins/bluetooth//PageComponent.qml:291
-#: ../plugins/bluetooth//PageComponent.qml:394
+#: ../plugins/bluetooth//PageComponent.qml:288
+#: ../plugins/bluetooth//PageComponent.qml:391
 msgid "Connect automatically when detected:"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:361
+#: ../plugins/bluetooth//PageComponent.qml:358
 msgid "Type"
 msgstr "تىپى"
 
-#: ../plugins/bluetooth//PageComponent.qml:385
+#: ../plugins/bluetooth//PageComponent.qml:382
 msgid "Status"
 msgstr "ھالەت"
 
-#: ../plugins/bluetooth//PageComponent.qml:389
+#: ../plugins/bluetooth//PageComponent.qml:386
 msgid "Signal Strength"
 msgstr "سىگنال كۈچلۈكلۈكى"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
+#: ../plugins/bluetooth//PageComponent.qml:405
 msgid "Disconnect"
 msgstr "ئۈز"
 
-#: ../plugins/bluetooth//PageComponent.qml:426
+#: ../plugins/bluetooth//PageComponent.qml:423
 msgid "Forget this device"
 msgstr ""
 
@@ -1420,11 +1413,11 @@ msgstr "ئالدىن كۆزەت"
 msgid "Background"
 msgstr "تەگلىك"
 
-#: ../plugins/background//MainPage.qml:107
+#: ../plugins/background//MainPage.qml:112
 msgid "Ubuntu Art"
 msgstr "ئۇبۇنتۇ سەنئىتى"
 
-#: ../plugins/background//MainPage.qml:123
+#: ../plugins/background//MainPage.qml:128
 msgid "Custom"
 msgstr "ئىختىيارى"
 
@@ -1609,26 +1602,26 @@ msgid "OK"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+#: ../plugins/cellular//Components//CellularSingleSim.qml:33
+#: ../plugins/cellular//Components//CellularMultiSim.qml:76
 msgid "Cellular data:"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:51
-#: ../plugins/cellular//Components//CellularMultiSim.qml:138
+#: ../plugins/cellular//Components//CellularSingleSim.qml:38
+#: ../plugins/cellular//Components//CellularMultiSim.qml:114
 msgid "2G only (saves battery)"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:140
+#: ../plugins/cellular//Components//CellularSingleSim.qml:39
+#: ../plugins/cellular//Components//CellularMultiSim.qml:114
 msgid "2G/3G/4G (faster)"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:72
-#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:155
 msgid "Data roaming"
 msgstr ""
 
@@ -1694,18 +1687,18 @@ msgstr "سىستېما"
 msgid "Connect to Wi-Fi"
 msgstr "سىمسىز تور(Wi-Fi)غا باغلان"
 
-#: ../wizard/qml/Pages//20-wifi.qml:66
+#: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
 msgstr "ئىشلەتكىلى بولىدىغان تورلار"
 
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
-#: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//30-location.qml:66
-#: ../wizard/qml/Pages//15-passwd.qml:170
+#: ../wizard/qml/Pages//20-wifi.qml:152
+#: ../wizard/qml/Pages//40-reporting.qml:46
+#: ../wizard/qml/Pages//30-location.qml:67
+#: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Continue"
 msgstr "داۋاملاشتۇر"
 
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
+#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:64
 msgid "Skip"
 msgstr "ئۆتكۈزۈۋەت"
 
@@ -1749,7 +1742,7 @@ msgstr ""
 msgid "Your phone is now ready to use."
 msgstr ""
 
-#: ../wizard/qml/Pages//80-finished.qml:52
+#: ../wizard/qml/Pages//80-finished.qml:46
 msgid "Finish"
 msgstr "تامام"
 
@@ -1775,11 +1768,11 @@ msgid ""
 "conditions</a>"
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:38
+#: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:97
+#: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
 msgstr ""
 
@@ -1787,7 +1780,7 @@ msgstr ""
 msgid "Those PIN codes don't match."
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:149
+#: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
 msgstr ""
 
@@ -1795,11 +1788,11 @@ msgstr ""
 msgid "PIN code must be at least four digits long."
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:159
+#: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
 msgstr ""
 
-#: ../wizard/qml/Components//Page.qml:84
+#: ../wizard/qml/Components//Page.qml:50
 msgid "Back"
 msgstr "كەينى"
 
@@ -2103,23 +2096,23 @@ msgstr ""
 msgid "Incorrect PIN code. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:294
+#: ../plugins/security-privacy//securityprivacy.cpp:253
 msgid "Incorrect passphrase. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:297
+#: ../plugins/security-privacy//securityprivacy.cpp:256
 msgid "Could not set security mode"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:322
+#: ../plugins/security-privacy//securityprivacy.cpp:281
 msgid "Could not set security display hint"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:335
+#: ../plugins/security-privacy//securityprivacy.cpp:294
 msgid "Authentication token manipulation error"
 msgstr ""
 
-#: ../plugins/about//click.cpp:134
+#: ../plugins/about//click.cpp:133
 msgid "Unknown title"
 msgstr ""
 

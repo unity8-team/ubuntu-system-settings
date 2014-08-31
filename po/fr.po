@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-29 08:21+0200\n"
-"PO-Revision-Date: 2014-08-29 16:31+0000\n"
-"Last-Translator: Jean Marc <Unknown>\n"
+"PO-Revision-Date: 2014-08-30 17:00+0000\n"
+"Last-Translator: Anne <anneonyme017@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-30 07:39+0000\n"
+"X-Launchpad-Export-Date: 2014-08-31 07:26+0000\n"
 "X-Generator: Launchpad (build 17176)\n"
 "Language: \n"
 
@@ -40,15 +40,15 @@ msgid "Network name"
 msgstr "Nom du réseau"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
-#: ../plugins/security-privacy//PageComponent.qml:126
+#: ../plugins/security-privacy//PageComponent.qml:85
 msgid "Security"
 msgstr "Sécurité"
 
 #: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PhoneLocking.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:116
-#: ../plugins/bluetooth//PageComponent.qml:323
-#: ../plugins/bluetooth//PageComponent.qml:344
+#: ../plugins/bluetooth//PageComponent.qml:113
+#: ../plugins/bluetooth//PageComponent.qml:320
+#: ../plugins/bluetooth//PageComponent.qml:341
 msgid "None"
 msgstr "Aucun"
 
@@ -70,8 +70,6 @@ msgstr "Mot de passe visible"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//SimPin.qml:145
-#: ../plugins/security-privacy//SimPin.qml:260
 #: ../plugins/security-privacy//LockSecurity.qml:279
 #: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//ResetAllSettings.qml:38
@@ -89,7 +87,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
-#: ../plugins/bluetooth//PageComponent.qml:408
+#: ../plugins/bluetooth//PageComponent.qml:405
 msgid "Connect"
 msgstr "Se connecter"
 
@@ -98,7 +96,7 @@ msgid "Network details"
 msgstr "Détails du réseau"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:343
+#: ../plugins/bluetooth//PageComponent.qml:340
 msgid "Name"
 msgstr "Nom"
 
@@ -107,11 +105,11 @@ msgid "Last connected"
 msgstr "Dernière connexion"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:520
+#: ../plugins/system-update//PageComponent.qml:519
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/security-privacy//PageComponent.qml:99
 #: ../plugins/battery//SleepValues.qml:106
 #: ../plugins/battery//PageComponent.qml:309
 #: ../plugins/battery//PageComponent.qml:318
@@ -192,7 +190,7 @@ msgstr "Automatiquement"
 
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:149
+#: ../plugins/security-privacy//PageComponent.qml:108
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
 msgstr "Manuellement"
@@ -265,77 +263,77 @@ msgstr[1] "Installer %1 mises à jour"
 msgid "Pause All"
 msgstr "Suspendre tout"
 
-#: ../plugins/system-update//PageComponent.qml:270
+#: ../plugins/system-update//PageComponent.qml:269
 msgid "Retry"
 msgstr "Réessayer"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:285
 msgid "Download"
 msgstr "Télécharger"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:285
 msgid "Update"
 msgstr "Mise à jour"
 
-#: ../plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Resume"
 msgstr "Reprendre"
 
-#: ../plugins/system-update//PageComponent.qml:288
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Pause"
 msgstr "Mettre en pause"
 
-#: ../plugins/system-update//PageComponent.qml:347
+#: ../plugins/system-update//PageComponent.qml:346
 msgid "Installing"
 msgstr "Installation en cours"
 
-#: ../plugins/system-update//PageComponent.qml:380
+#: ../plugins/system-update//PageComponent.qml:379
 msgid "Installed"
 msgstr "Installé"
 
-#: ../plugins/system-update//PageComponent.qml:404
+#: ../plugins/system-update//PageComponent.qml:403
 msgid "Version: "
 msgstr "Version : "
 
-#: ../plugins/system-update//PageComponent.qml:426
+#: ../plugins/system-update//PageComponent.qml:425
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr ""
 "S'enregistrer sur Ubuntu One pour recevoir les mises à jour des applications."
 
-#: ../plugins/system-update//PageComponent.qml:435
+#: ../plugins/system-update//PageComponent.qml:434
 msgid "Sign In…"
 msgstr "Enregistrement..."
 
-#: ../plugins/system-update//PageComponent.qml:502
+#: ../plugins/system-update//PageComponent.qml:501
 msgid "Installing update…"
 msgstr "La mise à jour est en cours d'installation..."
 
-#: ../plugins/system-update//PageComponent.qml:517
+#: ../plugins/system-update//PageComponent.qml:516
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr "Téléchargement automatique"
 
-#: ../plugins/system-update//PageComponent.qml:522
+#: ../plugins/system-update//PageComponent.qml:521
 msgid "On wi-fi"
 msgstr "Sur Wi-Fi"
 
-#: ../plugins/system-update//PageComponent.qml:524
+#: ../plugins/system-update//PageComponent.qml:523
 msgid "Always"
 msgstr "Tout le temps"
 
-#: ../plugins/system-update//PageComponent.qml:539
+#: ../plugins/system-update//PageComponent.qml:538
 msgid " bytes"
 msgstr " octets"
 
-#: ../plugins/system-update//PageComponent.qml:542
+#: ../plugins/system-update//PageComponent.qml:541
 msgid " KiB"
 msgstr " Ko"
 
-#: ../plugins/system-update//PageComponent.qml:545
+#: ../plugins/system-update//PageComponent.qml:544
 msgid " MiB"
 msgstr " Mo"
 
-#: ../plugins/system-update//PageComponent.qml:548
+#: ../plugins/system-update//PageComponent.qml:547
 msgid " GiB"
 msgstr " Go"
 
@@ -421,9 +419,7 @@ msgstr "Son du clavier"
 msgid "Lock sound"
 msgstr "Son de verrouillage"
 
-#: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:316
-#: ../plugins/security-privacy//PageComponent.qml:158
+#: ../plugins/security-privacy//PageComponent.qml:116
 msgid "SIM PIN"
 msgstr "Code PIN de la carte SIM"
 
@@ -459,7 +455,6 @@ msgstr "Confirmez le nouveau code PIN :"
 msgid "PINs don't match. Try again."
 msgstr "Les codes PIN ne correspondent pas. Réessayez."
 
-#: ../plugins/security-privacy//SimPin.qml:153
 #: ../plugins/security-privacy//LockSecurity.qml:298
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
@@ -471,7 +466,7 @@ msgstr "Saisissez le code PIN de la carte SIM"
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "Saisissez le code PIN précédent de la carte SIM"
 
 #: ../plugins/security-privacy//SimPin.qml:276
 msgid "Unlock"
@@ -495,6 +490,9 @@ msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"Lorsqu'un code PIN de carte SIM est définit, il doit être saisi pour accéder "
+"aux services du portable après le redémarrage du téléphone ou après "
+"l'échange de carte SIM."
 
 #: ../plugins/security-privacy//SimPin.qml:355
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
@@ -513,7 +511,7 @@ msgstr "Code PIN"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:101
+#: ../wizard/qml/Pages//15-passwd.qml:90
 msgid "Passphrase"
 msgstr "Phrase secrète"
 
@@ -548,7 +546,7 @@ msgstr "La mise en veille verrouille immédiatement"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "Une fois verrouillé, permettre :"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
@@ -556,41 +554,44 @@ msgstr "Lanceur"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "Notifications et réglages rapides"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
+"Activez la sécurité de verrouillage pour restreindre les accès lorsque le "
+"téléphone est verrouillé."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
 msgstr ""
+"Les autres applications et fonctions vous inviteront à déverrouiller."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37
+#: ../plugins/security-privacy//PageComponent.qml:35
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
 msgid "Security & Privacy"
 msgstr "Sécurité et vie privée"
 
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
+#: ../plugins/security-privacy//PageComponent.qml:59
+#: ../plugins/security-privacy//PageComponent.qml:170
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
 msgstr "Téléphone et d'Internet"
 
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
+#: ../plugins/security-privacy//PageComponent.qml:61
+#: ../plugins/security-privacy//PageComponent.qml:171
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
 msgstr "Téléphone uniquement"
 
-#: ../plugins/security-privacy//PageComponent.qml:131
+#: ../plugins/security-privacy//PageComponent.qml:90
 msgid "Lock phone"
 msgstr "Verrouiller le téléphone"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/security-privacy//PageComponent.qml:96
+#: ../plugins/security-privacy//PageComponent.qml:105
 #: ../plugins/battery//SleepValues.qml:83
 #: ../plugins/battery//SleepValues.qml:87
 #: ../plugins/battery//SleepValues.qml:91
@@ -605,24 +606,22 @@ msgid_plural "After %1 minutes"
 msgstr[0] "Après %1 minute"
 msgstr[1] "Après %1 minutes"
 
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/security-privacy//PageComponent.qml:188
 msgid "On"
 msgstr "Activé"
 
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/security-privacy//PageComponent.qml:188
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+#: ../plugins/cellular//Components//CellularSingleSim.qml:37
+#: ../plugins/cellular//Components//CellularMultiSim.qml:31
 msgid "Off"
 msgstr "Désactivé"
 
-#: ../plugins/security-privacy//PageComponent.qml:172
+#: ../plugins/security-privacy//PageComponent.qml:124
 msgid "Encryption"
 msgstr "Chiffrement"
 
-#: ../plugins/security-privacy//PageComponent.qml:181
+#: ../plugins/security-privacy//PageComponent.qml:133
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
@@ -630,46 +629,46 @@ msgstr ""
 "Le chiffrement protège l'accès aux données quand le téléphone est connecté à "
 "un ordinateur ou un autre périphérique."
 
-#: ../plugins/security-privacy//PageComponent.qml:185
+#: ../plugins/security-privacy//PageComponent.qml:137
 msgid "Privacy"
-msgstr ""
+msgstr "Vie privée"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/security-privacy//PageComponent.qml:140
 msgid "Stats on welcome screen"
 msgstr "Statistiques sur l'écran d'accueil"
 
-#: ../plugins/security-privacy//PageComponent.qml:201
+#: ../plugins/security-privacy//PageComponent.qml:153
 msgid "Messages on welcome screen"
 msgstr "Messages sur l'écran d'accueil"
 
-#: ../plugins/security-privacy//PageComponent.qml:216
+#: ../plugins/security-privacy//PageComponent.qml:168
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
 msgstr "Recherche dans le tableau de bord"
 
-#: ../plugins/security-privacy//PageComponent.qml:234
+#: ../plugins/security-privacy//PageComponent.qml:186
 msgid "Location access"
 msgstr "Accès à la localisation"
 
-#: ../plugins/security-privacy//PageComponent.qml:243
+#: ../plugins/security-privacy//PageComponent.qml:195
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "Accès à d'autres applications"
 
-#: ../plugins/security-privacy//PageComponent.qml:248
+#: ../plugins/security-privacy//PageComponent.qml:200
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "Diagnostics"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:253
+#: ../plugins/security-privacy//PageComponent.qml:205
 msgid "Sent"
 msgstr "Envoyé"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:256
+#: ../plugins/security-privacy//PageComponent.qml:208
 msgid "Not sent"
 msgstr "Non envoyé"
 
@@ -749,7 +748,7 @@ msgstr "Glissement (pas de sécurité)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "Code PIN à 4 chiffres..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "Passphrase…"
@@ -842,7 +841,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr "Applications que vous avez autorisées et qui disposent des accès à :"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Camera"
 msgstr "Appareil photo"
 
@@ -953,7 +952,7 @@ msgstr "Appel"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:31
-#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../plugins/bluetooth//PageComponent.qml:90
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
 msgstr "Téléphone"
@@ -1193,146 +1192,146 @@ msgstr "Apparier"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/bluetooth//PageComponent.qml:144
 #: ../plugins/battery//PageComponent.qml:357
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/bluetooth//PageComponent.qml:79
 msgid "Connected"
 msgstr "Connecté"
 
-#: ../plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:80
 msgid "Connecting…"
 msgstr "Connexion…"
 
-#: ../plugins/bluetooth//PageComponent.qml:84
+#: ../plugins/bluetooth//PageComponent.qml:81
 msgid "Disconnecting…"
 msgstr "Déconnexion…"
 
-#: ../plugins/bluetooth//PageComponent.qml:85
+#: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Disconnected"
 msgstr "Déconnecté"
 
-#: ../plugins/bluetooth//PageComponent.qml:86
+#: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../plugins/bluetooth//PageComponent.qml:92
+#: ../plugins/bluetooth//PageComponent.qml:89
 msgid "Computer"
 msgstr "Ordinateur"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:91
 msgid "Modem"
 msgstr "Modem"
 
-#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:92 ../src/qml/MainWindow.qml:145
 msgid "Network"
 msgstr "Réseau"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:93
 msgid "Headset"
 msgstr "Casque"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Headphones"
 msgstr "Écouteurs"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:95
 msgid "Video"
 msgstr "Vidéo"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Other Audio"
 msgstr "Autre audio"
 
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Joypad"
 msgstr "Manette de jeu"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Keyboard"
 msgstr "Clavier"
 
-#: ../plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Tablet"
 msgstr "Tablette"
 
-#: ../plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Mouse"
 msgstr "Souris"
 
-#: ../plugins/bluetooth//PageComponent.qml:104
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Printer"
 msgstr "Imprimante"
 
-#: ../plugins/bluetooth//PageComponent.qml:106
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Other"
 msgstr "Autres"
 
-#: ../plugins/bluetooth//PageComponent.qml:112
+#: ../plugins/bluetooth//PageComponent.qml:109
 msgid "Excellent"
 msgstr "Excellent"
 
-#: ../plugins/bluetooth//PageComponent.qml:113
+#: ../plugins/bluetooth//PageComponent.qml:110
 msgid "Good"
 msgstr "Bon"
 
-#: ../plugins/bluetooth//PageComponent.qml:114
+#: ../plugins/bluetooth//PageComponent.qml:111
 msgid "Fair"
 msgstr "Correct"
 
-#: ../plugins/bluetooth//PageComponent.qml:115
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Poor"
 msgstr "Médiocre"
 
-#: ../plugins/bluetooth//PageComponent.qml:182
+#: ../plugins/bluetooth//PageComponent.qml:179
 msgid "Discoverable"
 msgstr "Découvrable"
 
-#: ../plugins/bluetooth//PageComponent.qml:182
+#: ../plugins/bluetooth//PageComponent.qml:179
 msgid "Not discoverable"
 msgstr "Non découvrable"
 
-#: ../plugins/bluetooth//PageComponent.qml:213
+#: ../plugins/bluetooth//PageComponent.qml:210
 msgid "Connected devices:"
 msgstr "Appareils connectés :"
 
-#: ../plugins/bluetooth//PageComponent.qml:250
+#: ../plugins/bluetooth//PageComponent.qml:247
 msgid "Connect another device:"
 msgstr "Connecter un autre appareil :"
 
-#: ../plugins/bluetooth//PageComponent.qml:250
+#: ../plugins/bluetooth//PageComponent.qml:247
 msgid "Connect a device:"
 msgstr "Connecter un appareil :"
 
-#: ../plugins/bluetooth//PageComponent.qml:283
+#: ../plugins/bluetooth//PageComponent.qml:280
 msgid "None detected"
 msgstr "Aucun détecté"
 
-#: ../plugins/bluetooth//PageComponent.qml:291
-#: ../plugins/bluetooth//PageComponent.qml:394
+#: ../plugins/bluetooth//PageComponent.qml:288
+#: ../plugins/bluetooth//PageComponent.qml:391
 msgid "Connect automatically when detected:"
 msgstr "Connecter automatiquement si detecté :"
 
-#: ../plugins/bluetooth//PageComponent.qml:361
+#: ../plugins/bluetooth//PageComponent.qml:358
 msgid "Type"
 msgstr "Type"
 
-#: ../plugins/bluetooth//PageComponent.qml:385
+#: ../plugins/bluetooth//PageComponent.qml:382
 msgid "Status"
 msgstr "État"
 
-#: ../plugins/bluetooth//PageComponent.qml:389
+#: ../plugins/bluetooth//PageComponent.qml:386
 msgid "Signal Strength"
 msgstr "Force du signal"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
+#: ../plugins/bluetooth//PageComponent.qml:405
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: ../plugins/bluetooth//PageComponent.qml:426
+#: ../plugins/bluetooth//PageComponent.qml:423
 msgid "Forget this device"
 msgstr "Oublier cet appareil"
 
@@ -1465,11 +1464,11 @@ msgstr "Aperçu"
 msgid "Background"
 msgstr "Arrière-plan"
 
-#: ../plugins/background//MainPage.qml:107
+#: ../plugins/background//MainPage.qml:112
 msgid "Ubuntu Art"
 msgstr "Art d'Ubuntu"
 
-#: ../plugins/background//MainPage.qml:123
+#: ../plugins/background//MainPage.qml:128
 msgid "Custom"
 msgstr "Personnalisé"
 
@@ -1606,6 +1605,8 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
+"Vous aurez besoin de définir un code PIN ou une phrase secrète pour utiliser "
+"le Mode Développeur."
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1658,26 +1659,26 @@ msgid "OK"
 msgstr "OK"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+#: ../plugins/cellular//Components//CellularSingleSim.qml:33
+#: ../plugins/cellular//Components//CellularMultiSim.qml:76
 msgid "Cellular data:"
 msgstr "Données cellulaires :"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:51
-#: ../plugins/cellular//Components//CellularMultiSim.qml:138
+#: ../plugins/cellular//Components//CellularSingleSim.qml:38
+#: ../plugins/cellular//Components//CellularMultiSim.qml:114
 msgid "2G only (saves battery)"
 msgstr "2G seulement (économise la batterie)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:140
+#: ../plugins/cellular//Components//CellularSingleSim.qml:39
+#: ../plugins/cellular//Components//CellularMultiSim.qml:114
 msgid "2G/3G/4G (faster)"
 msgstr "2G/3G/4G (plus rapide)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:72
-#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:155
 msgid "Data roaming"
 msgstr "Itinérance des données"
 
@@ -1745,24 +1746,24 @@ msgstr "Système"
 msgid "Connect to Wi-Fi"
 msgstr "Se connecter au Wi-Fi"
 
-#: ../wizard/qml/Pages//20-wifi.qml:66
+#: ../wizard/qml/Pages//20-wifi.qml:68
 msgid "Available networks"
 msgstr "Réseaux disponibles"
 
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
-#: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//30-location.qml:66
-#: ../wizard/qml/Pages//15-passwd.qml:170
+#: ../wizard/qml/Pages//20-wifi.qml:152
+#: ../wizard/qml/Pages//40-reporting.qml:46
+#: ../wizard/qml/Pages//30-location.qml:67
+#: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Continue"
 msgstr "Continuer"
 
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
+#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:64
 msgid "Skip"
 msgstr "Passer"
 
 #: ../wizard/qml/Pages//10-welcome.qml:24
 msgid "Hi!"
-msgstr ""
+msgstr "Bonjour !"
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
@@ -1787,6 +1788,8 @@ msgstr "Veuillez insérer une carte SIM avant de continuer."
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr ""
+"Sans elle, vous ne serez pas en mesure de passer des appels ou d'envoyer des "
+"SMS."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
@@ -1800,13 +1803,13 @@ msgstr "Beau travail !"
 msgid "Your phone is now ready to use."
 msgstr "Votre téléphone est maintenant prêt à être utilisé."
 
-#: ../wizard/qml/Pages//80-finished.qml:52
+#: ../wizard/qml/Pages//80-finished.qml:46
 msgid "Finish"
 msgstr "Terminer"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "Rapport d'anomalies"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
@@ -1816,7 +1819,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "Ceci peut être désactivé dans les Paramètres Système."
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
@@ -1827,20 +1830,22 @@ msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
+"J'ai lu et approuvé les <a href='terms.qml'>conditions d'utilisation</a> "
+"d'Ubuntu"
 
-#: ../wizard/qml/Pages//15-passwd.qml:38
+#: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
 msgstr "Régler la sécurité de verrouillage"
 
-#: ../wizard/qml/Pages//15-passwd.qml:97
+#: ../wizard/qml/Pages//15-passwd.qml:86
 msgid "Swipe"
 msgstr "Glissement"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "Ces codes PIN ne correspondent pas."
 
-#: ../wizard/qml/Pages//15-passwd.qml:149
+#: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
 msgstr "Ces phrases secrètes ne correspondent pas."
 
@@ -1848,11 +1853,11 @@ msgstr "Ces phrases secrètes ne correspondent pas."
 msgid "PIN code must be at least four digits long."
 msgstr "Le code PIN doit comporter au moins quatre chiffres."
 
-#: ../wizard/qml/Pages//15-passwd.qml:159
+#: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
 msgstr "La phrase secrète doit faire au moins quatre caractères de long."
 
-#: ../wizard/qml/Components//Page.qml:84
+#: ../wizard/qml/Components//Page.qml:50
 msgid "Back"
 msgstr "Précédent"
 
@@ -2157,25 +2162,25 @@ msgstr ""
 
 #: ../plugins/security-privacy//securityprivacy.cpp:292
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "Code PIN incorrect. Réessayez."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:294
+#: ../plugins/security-privacy//securityprivacy.cpp:253
 msgid "Incorrect passphrase. Try again."
 msgstr "Phrase secrète incorrecte. Réessayez."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:297
+#: ../plugins/security-privacy//securityprivacy.cpp:256
 msgid "Could not set security mode"
 msgstr "Impossible de définir le mode de sécurité"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:322
+#: ../plugins/security-privacy//securityprivacy.cpp:281
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "Impossible de définir l'affichage de l'indice de sécurité"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:335
+#: ../plugins/security-privacy//securityprivacy.cpp:294
 msgid "Authentication token manipulation error"
 msgstr "Erreur de manipulation du jeton d'authentification"
 
-#: ../plugins/about//click.cpp:134
+#: ../plugins/about//click.cpp:133
 msgid "Unknown title"
 msgstr "Titre inconnu"
 
