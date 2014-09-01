@@ -83,7 +83,7 @@ ItemPage {
                     return i18n.tr("Uses wi-fi (currently off), cell tower locations (no current cellular connection), and GPS to detect your rough location. Turning off location detection saves battery.")
             }
 
-            visible: false /* hide until the information is real */
+            visible: showAllUI /* hide until the information is real */
         }
 
         ListItem.Standard {
