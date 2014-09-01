@@ -48,16 +48,13 @@ ItemPage {
 
     OfonoManager {
         id: manager
-    }
-
-    OfonoSimManager {
-        id: sim1
-        modemPath: manager.modems[0] || ""
-    }
-
-    OfonoSimManager {
-        id: sim2
-        modemPath: manager.modems[1] || ""
+        Component.onCompleted: {
+            if (manager.modems.length === 1) {
+                phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
+            } else {
+                phoneNumbers.setSource("PhoneNumbers.qml", {paths: manager.modems.slice(0).sort()})
+            }
+        }
     }
 
     Flickable {
@@ -96,33 +93,10 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
-                id: numberItem1
-                objectName: "numberItem1"
-                text: (phoneNumber1 && phoneNumber2) ?
-                    i18n.tr("Phone numbers") : i18n.tr("Phone number")
-                property string phoneNumber1
-                property string phoneNumber2
-                phoneNumber1: sim1.subscriberNumbers.length > 0 ? sim1.subscriberNumbers[0] : ""
-                phoneNumber2: sim2.subscriberNumbers.length > 0 ? sim2.subscriberNumbers[0] : ""
-                value: {
-                    var str = "";
-
-                    if (phoneNumber1) {
-                        str += phoneNumber1;
-                    }
-
-                    if (phoneNumber1 && phoneNumber2) {
-                        str += ", ";
-                    }
-
-                    if (phoneNumber2) {
-                        str += phoneNumber2;
-                    }
-
-                    return str;
-                }
-                visible: value
+            Loader {
+                id: phoneNumbers
+                anchors.left: parent.left
+                anchors.right: parent.right
             }
 
             ListItem.SingleValue {

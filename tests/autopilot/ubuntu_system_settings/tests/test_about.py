@@ -12,10 +12,11 @@ import unittest
 
 from gi.repository import GLib
 
+from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
 from autopilot.platform import model
 from testtools import skipIf
-from testtools.matchers import Equals, NotEquals
+from testtools.matchers import Equals, NotEquals, raises
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
@@ -107,6 +108,16 @@ class AboutTestCase(AboutBaseTestCase):
         self.assertEquals(displayed_device_name, device_name_from_getprop)
 
 
+    def test_no_phone_numbers(self):
+        objects = ['numberItem', 'numberItem1', 'numberItem2']
+        for o in objects:
+            self.assertThat(lambda:
+                self.system_settings.main_view.about_page.select_single(
+                    objectName=o
+                ),
+                raises(StateNotFoundError))
+
+
 class AboutOfonoTestCase(AboutOfonoBaseTestCase):
     def _get_imei_from_dbus(self):
         bus = self.get_dbus(system_bus=True)
@@ -139,6 +150,25 @@ class AboutOfonoTestCase(AboutOfonoBaseTestCase):
         else:
             self.assertFalse(self.about_page.is_imei_visible())
 
+    def test_phone_number(self):
+        number = self.system_settings.main_view.about_page.select_single(
+            objectName="numberItem"
+        )
+        self.assertEqual(str(number.value), "123456789")
+
+class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
+
+    use_sims = 2
+
+    def test_phone_numbers(self):
+        number1 = self.system_settings.main_view.about_page.select_single(
+            objectName="numberItem1"
+        )
+        number2 = self.system_settings.main_view.about_page.select_single(
+            objectName="numberItem2"
+        )
+        self.assertEqual(str(number1.value), "123456789")
+        self.assertEqual(str(number2.value), "08123")
 
 class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
 
