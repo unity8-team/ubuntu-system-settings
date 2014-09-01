@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-29 08:21+0200\n"
-"PO-Revision-Date: 2014-08-30 17:00+0000\n"
-"Last-Translator: Anne <anneonyme017@gmail.com>\n"
+"PO-Revision-Date: 2014-08-31 20:11+0000\n"
+"Last-Translator: Jean Marc <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-31 07:26+0000\n"
+"X-Launchpad-Export-Date: 2014-09-01 07:32+0000\n"
 "X-Generator: Launchpad (build 17176)\n"
 "Language: \n"
 
@@ -688,7 +688,7 @@ msgstr "Passer en verrouillage par glissement"
 
 #: ../plugins/security-privacy//LockSecurity.qml:103
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "Verrouiller par code PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to passphrase"
@@ -728,7 +728,7 @@ msgstr "Ces phrases secrètes ne correspondent pas. Veuillez réessayer."
 
 #: ../plugins/security-privacy//LockSecurity.qml:295
 msgid "Unset"
-msgstr "Non configuré"
+msgstr "Déconfigurer"
 
 #: ../plugins/security-privacy//LockSecurity.qml:340
 msgid "Unlock the phone using:"
@@ -1793,7 +1793,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "C'est fini"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
@@ -1823,7 +1823,7 @@ msgstr "Ceci peut être désactivé dans les Paramètres Système."
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
+msgstr "Utiliser vos réseaux mobile et Wi-Fi pour déduire où vous êtes"
 
 #: ../wizard/qml/Pages//30-location.qml:58
 msgid ""

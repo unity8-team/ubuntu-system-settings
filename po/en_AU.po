@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-29 08:21+0200\n"
-"PO-Revision-Date: 2014-08-27 10:03+0000\n"
+"PO-Revision-Date: 2014-08-31 11:22+0000\n"
 "Last-Translator: Jared Norris <jarednorris@ubuntu.com>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-31 07:29+0000\n"
+"X-Launchpad-Export-Date: 2014-09-01 07:32+0000\n"
 "X-Generator: Launchpad (build 17176)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -423,35 +423,35 @@ msgstr "SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "Change SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:183
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "Incorrect PIN. %1 attempts remaining."
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr ""
+msgstr "Current PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:91
 #: ../plugins/security-privacy//SimPin.qml:241
 #, qt-format
 msgid "%1 attempts remaining"
-msgstr ""
+msgstr "%1 attempts remaining"
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "Choose new PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "Confirm new PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "PINs don't match. Try again."
 
 #: ../plugins/security-privacy//LockSecurity.qml:298
 #: ../plugins/cellular//HotspotSetup.qml:94
@@ -460,38 +460,40 @@ msgstr "Change"
 
 #: ../plugins/security-privacy//SimPin.qml:179
 msgid "Enter SIM PIN"
-msgstr ""
+msgstr "Enter SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "Enter Previous SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:276
 msgid "Unlock"
-msgstr ""
+msgstr "Unlock"
 
 #: ../plugins/security-privacy//SimPin.qml:276
 msgid "Lock"
-msgstr ""
+msgstr "Lock"
 
 #: ../plugins/security-privacy//SimPin.qml:311
 #, qt-format
 msgid "%1"
-msgstr ""
+msgstr "%1"
 
 #: ../plugins/security-privacy//SimPin.qml:334
 msgid "Change PIN…"
-msgstr ""
+msgstr "Change PIN…"
 
 #: ../plugins/security-privacy//SimPin.qml:351
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"When a SIM PIN is set, it must be entered to access mobile services after "
+"restarting the phone or swapping the SIM."
 
 #: ../plugins/security-privacy//SimPin.qml:355
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
-msgstr ""
+msgstr "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -500,7 +502,7 @@ msgstr "Phone locking"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
-msgstr ""
+msgstr "PIN code"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:346
@@ -539,23 +541,23 @@ msgstr "Sleep locks immediately"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "When locked, allow:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "Launcher"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "Notifications and quick settings"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
+msgstr "Turn on lock security to restrict access when the phone is locked."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
+msgstr "Other apps and functions will prompt you to unlock."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:35
@@ -665,7 +667,7 @@ msgstr "Not sent"
 #: ../plugins/security-privacy//LockSecurity.qml:92
 #: ../plugins/security-privacy//LockSecurity.qml:380
 msgid "Change PIN code…"
-msgstr ""
+msgstr "Change PIN code…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:94
 #: ../plugins/security-privacy//LockSecurity.qml:381
@@ -678,7 +680,7 @@ msgstr "Switch to swipe"
 
 #: ../plugins/security-privacy//LockSecurity.qml:103
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "Switch to PIN code"
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to passphrase"
@@ -686,7 +688,7 @@ msgstr "Switch to passphrase"
 
 #: ../plugins/security-privacy//LockSecurity.qml:114
 msgid "Existing PIN code"
-msgstr ""
+msgstr "Existing PIN code"
 
 #: ../plugins/security-privacy//LockSecurity.qml:116
 msgid "Existing passphrase"
@@ -694,7 +696,7 @@ msgstr "Existing passphrase"
 
 #: ../plugins/security-privacy//LockSecurity.qml:170
 msgid "Choose PIN code"
-msgstr ""
+msgstr "Choose PIN code"
 
 #: ../plugins/security-privacy//LockSecurity.qml:172
 msgid "Choose passphrase"
@@ -702,7 +704,7 @@ msgstr "Choose passphrase"
 
 #: ../plugins/security-privacy//LockSecurity.qml:216
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "Confirm PIN code"
 
 #: ../plugins/security-privacy//LockSecurity.qml:218
 msgid "Confirm passphrase"
@@ -710,7 +712,7 @@ msgstr "Confirm passphrase"
 
 #: ../plugins/security-privacy//LockSecurity.qml:261
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "Those PIN codes don't match. Try again."
 
 #: ../plugins/security-privacy//LockSecurity.qml:264
 msgid "Those passphrases don't match. Try again."
@@ -730,7 +732,7 @@ msgstr "Swipe (no security)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:345
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "4-digit PIN code"
 
 #: ../plugins/security-privacy//LockSecurity.qml:347
 msgid "Swipe (no security)… "
@@ -738,7 +740,7 @@ msgstr "Swipe (no security)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "4-digit PIN code…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "Passphrase…"
@@ -1579,7 +1581,7 @@ msgstr ""
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr ""
+msgstr "You need a PIN code or passphrase set to use Developer Mode."
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1633,7 +1635,7 @@ msgstr "OK"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:33
 #: ../plugins/cellular//Components//CellularMultiSim.qml:76
 msgid "Cellular data:"
-msgstr ""
+msgstr "Mobile data:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:38
@@ -1676,7 +1678,7 @@ msgstr "For messages, use:"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (faster)"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1734,15 +1736,15 @@ msgstr "Skip"
 
 #: ../wizard/qml/Pages//10-welcome.qml:24
 msgid "Hi!"
-msgstr ""
+msgstr "Hi!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "Welcome to your Ubuntu phone."
 
 #: ../wizard/qml/Pages//10-welcome.qml:49
 msgid "Let’s get started."
-msgstr ""
+msgstr "Let’s get started."
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
@@ -1754,11 +1756,11 @@ msgstr "Add a SIM card"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
-msgstr ""
+msgstr "Please insert a SIM card before you continue."
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
+msgstr "Without it, you won’t be able to make calls or use text messaging."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
@@ -1766,11 +1768,11 @@ msgstr "All done"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "Nice work!"
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "Your phone is now ready to use."
 
 #: ../wizard/qml/Pages//80-finished.qml:46
 msgid "Finish"
@@ -1778,25 +1780,27 @@ msgstr "Finish"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "Bug reporting"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
-msgstr ""
+msgstr "Your phone is set up to automatically report errors to Canonical."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "This can be disabled in System Settings."
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
+msgstr "Use your mobile network and Wi-Fi to work out where you are"
 
 #: ../wizard/qml/Pages//30-location.qml:58
 msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
+"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"conditions</a>"
 
 #: ../wizard/qml/Pages//15-passwd.qml:37
 msgid "Set lock security"
@@ -1808,7 +1812,7 @@ msgstr "Swipe"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "Those PIN codes don't match."
 
 #: ../wizard/qml/Pages//15-passwd.qml:138
 msgid "Those passphrases don't match."
@@ -1816,7 +1820,7 @@ msgstr "Those passphrases don't match."
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "PIN code must be at least four digits long."
 
 #: ../wizard/qml/Pages//15-passwd.qml:148
 msgid "Passphrase must be at least four characters long."
@@ -1829,12 +1833,12 @@ msgstr "Back"
 #: ../wizard/qml/Components//StackButton.qml:51
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:54
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -2124,7 +2128,7 @@ msgstr "Can't pause current request (can't contact service)"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:292
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "Incorrect PIN code. Try again."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:253
 msgid "Incorrect passphrase. Try again."

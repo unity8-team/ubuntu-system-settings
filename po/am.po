@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-29 08:21+0200\n"
-"PO-Revision-Date: 2014-08-31 00:24+0000\n"
+"PO-Revision-Date: 2014-08-31 20:25+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-31 07:25+0000\n"
+"X-Launchpad-Export-Date: 2014-09-01 07:32+0000\n"
 "X-Generator: Launchpad (build 17176)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -296,7 +296,7 @@ msgstr "እትም: "
 
 #: ../plugins/system-update//PageComponent.qml:425
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "የ መተግበሪያዎች ማሻሻያ ለማግኘት ወደ ኡቡንቱ ዋን ይግቡ"
 
 #: ../plugins/system-update//PageComponent.qml:434
 msgid "Sign In…"
@@ -349,7 +349,7 @@ msgstr "በማንኛውም የዳታ ግንኙነት"
 
 #: ../plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
-msgstr ""
+msgstr "የ ዳታ ክፍያ ሊጠየቁ ይችላሉ"
 
 #: ../plugins/sound//SoundsList.qml:59
 msgid "Stop playing"
@@ -423,35 +423,35 @@ msgstr "SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "መቀየሪያ ሲም ፒን"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:183
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "የተሳሳተ ፒን %1 የሚቀረው ሙከራ"
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr ""
+msgstr "የ አሁኑ ፒን:"
 
 #: ../plugins/security-privacy//SimPin.qml:91
 #: ../plugins/security-privacy//SimPin.qml:241
 #, qt-format
 msgid "%1 attempts remaining"
-msgstr ""
+msgstr "%1 የሚቀረው ሙከራ"
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "ይምረጡ አዲስ ፒን:"
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "ማረጋገጫ አዲስ ፒን:"
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "ፒን አይመሳሰልም እንደገና ይሞክሩ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:298
 #: ../plugins/cellular//HotspotSetup.qml:94
@@ -460,11 +460,11 @@ msgstr "መቀየሪያ"
 
 #: ../plugins/security-privacy//SimPin.qml:179
 msgid "Enter SIM PIN"
-msgstr ""
+msgstr "ሲም ፒን ያስገቡ"
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "ያስገቡ ቀደም ያለውን ሲም ፒን"
 
 #: ../plugins/security-privacy//SimPin.qml:276
 msgid "Unlock"
@@ -481,7 +481,7 @@ msgstr "%1"
 
 #: ../plugins/security-privacy//SimPin.qml:334
 msgid "Change PIN…"
-msgstr ""
+msgstr "መቀየሪያ ፒን…"
 
 #: ../plugins/security-privacy//SimPin.qml:351
 msgid ""
@@ -491,7 +491,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:355
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
-msgstr ""
+msgstr "የተሳሳተ ፒን ደጋግሞ ማስገባት በቋሚነት ሲም ን ሊቆልፈው ይችላል"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -500,7 +500,7 @@ msgstr "ስልክ በመቆለፍ ላይ"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
-msgstr ""
+msgstr "ፒን ኮድ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:346
@@ -547,7 +547,7 @@ msgstr "ማስነሻ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "ማስታወቂያዎች እና በፍጥነት ማሰናጃዎች"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
@@ -663,7 +663,7 @@ msgstr "አልተላከም"
 #: ../plugins/security-privacy//LockSecurity.qml:92
 #: ../plugins/security-privacy//LockSecurity.qml:380
 msgid "Change PIN code…"
-msgstr ""
+msgstr "መቀየሪያ የ ፒን ኮድ…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:94
 #: ../plugins/security-privacy//LockSecurity.qml:381
@@ -676,7 +676,7 @@ msgstr "ወደ መጥረጊያ ዘዴ መቀየሪያ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:103
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "መቀየሪያ ወደ ፒን ኮድ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to passphrase"
@@ -684,7 +684,7 @@ msgstr "ወደ ማለፊያ ሐረግ መቀየሪያ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:114
 msgid "Existing PIN code"
-msgstr ""
+msgstr "መውጫ ከ ፒን ኮድ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:116
 msgid "Existing passphrase"
@@ -692,7 +692,7 @@ msgstr "ከ ማለፊያ ሐረግ በ መውጣት ላይ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:170
 msgid "Choose PIN code"
-msgstr ""
+msgstr "ይምረጡ ፒን ኮድ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:172
 msgid "Choose passphrase"
@@ -700,7 +700,7 @@ msgstr "የ ማለፊያ ሐረግ ይምረጡ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:216
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "ማረጋገጫ ፒን ኮድ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:218
 msgid "Confirm passphrase"
@@ -708,7 +708,7 @@ msgstr "የ ማለፊያ ሐረግ ማረጋገጫ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:261
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "እነዚህ ፒን ኮዶች አይመሳሰሉም እንደገና ይሞክሩ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:264
 msgid "Those passphrases don't match. Try again."
@@ -728,7 +728,7 @@ msgstr "መጥረጊያ (ደህንነት የለም)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:345
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "4-ዲጂት ፒን ኮድ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:347
 msgid "Swipe (no security)… "
@@ -736,7 +736,7 @@ msgstr "መጥረጊያ (ደህንነት የለም)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "4-ዲጂት ፒን ኮድ…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "Passphrase…"
@@ -881,7 +881,7 @@ msgstr "ማጥፊያ & ሁሉንም እንደ ነበር መመለሻ"
 
 #: ../plugins/phone//SingleSim.qml:29
 msgid "SIM"
-msgstr ""
+msgstr "ሲም"
 
 #: ../plugins/phone//SingleSim.qml:33 ../plugins/phone//NoSims.qml:28
 #: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
@@ -999,7 +999,7 @@ msgstr ""
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "በራሱ ነጥቦች ማስገቢያ"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
@@ -1030,7 +1030,7 @@ msgstr "ማረጋገጫ"
 #: ../plugins/cellular//PageComponent.qml:32
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:106
 msgid "Cellular"
-msgstr ""
+msgstr "ሴሉላር"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -1129,7 +1129,7 @@ msgstr ""
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "ፒን ለ '%1'"
 
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
@@ -1289,7 +1289,7 @@ msgstr ""
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "ማረጋገጫ ፒን"
 
 #: ../plugins/battery//SleepValues.qml:77
 msgid "Lock the phone when it's not in use:"
