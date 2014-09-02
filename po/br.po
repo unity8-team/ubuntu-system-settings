@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-26 13:44+0200\n"
-"PO-Revision-Date: 2014-08-27 07:09+0000\n"
+"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"PO-Revision-Date: 2014-09-02 06:37+0000\n"
 "Last-Translator: Fohanno Thierry <thierry.fohanno@ofis-bzh.org>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-28 06:27+0000\n"
-"X-Generator: Launchpad (build 17174)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:15+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -25,7 +25,7 @@ msgstr "Rouedadoù kent"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
-#: ../plugins/battery//PageComponent.qml:327
+#: ../plugins/battery//PageComponent.qml:333
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
@@ -39,15 +39,15 @@ msgid "Network name"
 msgstr "Anv ar rouedad"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
-#: ../plugins/security-privacy//PageComponent.qml:85
+#: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
 msgstr "Surentez"
 
 #: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PhoneLocking.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:113
-#: ../plugins/bluetooth//PageComponent.qml:320
-#: ../plugins/bluetooth//PageComponent.qml:341
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr "Hini ebet"
 
@@ -69,7 +69,9 @@ msgstr "Ger-tremen hewel"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//LockSecurity.qml:279
+#: ../plugins/security-privacy//SimPin.qml:146
+#: ../plugins/security-privacy//SimPin.qml:263
+#: ../plugins/security-privacy//LockSecurity.qml:283
 #: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//ResetAllSettings.qml:38
 #: ../plugins/reset//EraseEverything.qml:54
@@ -86,7 +88,7 @@ msgid "Cancel"
 msgstr "Nullañ"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Kevreañ"
 
@@ -95,7 +97,7 @@ msgid "Network details"
 msgstr "Munudoù ar rouedad"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:340
+#: ../plugins/bluetooth//PageComponent.qml:343
 msgid "Name"
 msgstr "Anv"
 
@@ -104,14 +106,14 @@ msgid "Last connected"
 msgstr "Kevreet da ziwezhañ"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:519
+#: ../plugins/system-update//PageComponent.qml:521
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:99
+#: ../plugins/security-privacy//PageComponent.qml:140
 #: ../plugins/battery//SleepValues.qml:106
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
 #: ../plugins/about//PageComponent.qml:149
 msgid "Never"
 msgstr "Morse"
@@ -161,7 +163,7 @@ msgid "Year"
 msgstr "Bloaz"
 
 #: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:300
+#: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/phone//CallForwarding.qml:152
 #: ../plugins/background//Preview.qml:104
 msgid "Set"
@@ -189,7 +191,7 @@ msgstr "Ent emgefre"
 
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:108
+#: ../plugins/security-privacy//PageComponent.qml:149
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
 msgstr "Gant an dorn"
@@ -262,76 +264,76 @@ msgstr[1] "Staliañ %1 a hizivadennoù"
 msgid "Pause All"
 msgstr "Ehanañ pep tra"
 
-#: ../plugins/system-update//PageComponent.qml:269
+#: ../plugins/system-update//PageComponent.qml:270
 msgid "Retry"
 msgstr "Esaeañ en-dro"
 
-#: ../plugins/system-update//PageComponent.qml:285
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Download"
 msgstr "Pellgargañ"
 
-#: ../plugins/system-update//PageComponent.qml:285
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Update"
 msgstr "Hizivaat"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Resume"
 msgstr "Kenderc'hel"
 
-#: ../plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:288
 msgid "Pause"
 msgstr "Ehanañ"
 
-#: ../plugins/system-update//PageComponent.qml:346
+#: ../plugins/system-update//PageComponent.qml:347
 msgid "Installing"
 msgstr "O staliañ"
 
-#: ../plugins/system-update//PageComponent.qml:379
+#: ../plugins/system-update//PageComponent.qml:380
 msgid "Installed"
 msgstr "Staliet"
 
-#: ../plugins/system-update//PageComponent.qml:403
+#: ../plugins/system-update//PageComponent.qml:405
 msgid "Version: "
 msgstr "Doare : "
 
-#: ../plugins/system-update//PageComponent.qml:425
+#: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr "Kevreit ouzh Ubuntu One da resev hizivadennoù evit an arloadoù."
 
-#: ../plugins/system-update//PageComponent.qml:434
+#: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
 msgstr "Kevrañ..."
 
-#: ../plugins/system-update//PageComponent.qml:501
+#: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
 msgstr "O staliañ an hizivadenn..."
 
-#: ../plugins/system-update//PageComponent.qml:516
+#: ../plugins/system-update//PageComponent.qml:518
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr "Pellgargañ emgefre"
 
-#: ../plugins/system-update//PageComponent.qml:521
+#: ../plugins/system-update//PageComponent.qml:523
 msgid "On wi-fi"
 msgstr "Gant ar wi-fi"
 
-#: ../plugins/system-update//PageComponent.qml:523
+#: ../plugins/system-update//PageComponent.qml:525
 msgid "Always"
 msgstr "Bepred"
 
-#: ../plugins/system-update//PageComponent.qml:538
+#: ../plugins/system-update//PageComponent.qml:540
 msgid " bytes"
 msgstr " okted"
 
-#: ../plugins/system-update//PageComponent.qml:541
+#: ../plugins/system-update//PageComponent.qml:543
 msgid " KiB"
 msgstr " Ko"
 
-#: ../plugins/system-update//PageComponent.qml:544
+#: ../plugins/system-update//PageComponent.qml:546
 msgid " MiB"
 msgstr " Mo"
 
-#: ../plugins/system-update//PageComponent.qml:547
+#: ../plugins/system-update//PageComponent.qml:549
 msgid " GiB"
 msgstr " Go"
 
@@ -387,48 +389,137 @@ msgid "Vibrate when ringing"
 msgstr "Krenañ pa son"
 
 #: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
+#: ../plugins/sound//PageComponent.qml:187
 msgid "Vibrate in Silent Mode"
 msgstr "Krenañ hep ober trouz"
 
-#: ../plugins/sound//PageComponent.qml:147
+#: ../plugins/sound//PageComponent.qml:152
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr "Sonioù ar c'hlavier niverennañ"
+
+#: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
 msgstr "Kemennadennoù :"
 
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:160
+#: ../plugins/sound//PageComponent.qml:166
 msgid "Message received"
 msgstr "Kemennadenn resevet"
 
-#: ../plugins/sound//PageComponent.qml:169
+#: ../plugins/sound//PageComponent.qml:178
 msgid "Vibrate with message sound"
 msgstr "Krenañ gant son ur gemennadenn"
 
-#: ../plugins/sound//PageComponent.qml:182
+#: ../plugins/sound//PageComponent.qml:191
 msgid "Other sounds:"
 msgstr "Sonioù all :"
 
-#: ../plugins/sound//PageComponent.qml:186
+#: ../plugins/sound//PageComponent.qml:195
 #: ../plugins/language//PageComponent.qml:185
 msgid "Keyboard sound"
 msgstr "Son ar c'hlavier"
 
-#: ../plugins/sound//PageComponent.qml:200
+#: ../plugins/sound//PageComponent.qml:209
 msgid "Lock sound"
 msgstr "Son ar prennañ"
+
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:319
+#: ../plugins/security-privacy//PageComponent.qml:158
+msgid "SIM PIN"
+msgstr "Kod PIN ar gartenn SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr "Cheñch ar c'hod PIN"
+
+#: ../plugins/security-privacy//SimPin.qml:47
+#: ../plugins/security-privacy//SimPin.qml:184
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr "Kod PIN direizh. Chome a ra %1 taol-esae"
+
+#: ../plugins/security-privacy//SimPin.qml:79
+msgid "Current PIN:"
+msgstr "Kod PIN a vremañ :"
+
+#: ../plugins/security-privacy//SimPin.qml:91
+#: ../plugins/security-privacy//SimPin.qml:243
+#, qt-format
+msgid "%1 attempts allowed."
+msgstr "%1 taol-esae aotreet."
+
+#: ../plugins/security-privacy//SimPin.qml:104
+msgid "Choose new PIN:"
+msgstr "Dibab ur c'hod PIN nevez :"
+
+#: ../plugins/security-privacy//SimPin.qml:115
+msgid "Confirm new PIN:"
+msgstr "Kadarnaat ar c'hod PIN nevez :"
+
+#: ../plugins/security-privacy//SimPin.qml:134
+msgid "PINs don't match. Try again."
+msgstr "Ar c'hodoù PIN ne glotont ket. Esaeit en-dro."
+
+#: ../plugins/security-privacy//SimPin.qml:154
+#: ../plugins/security-privacy//LockSecurity.qml:302
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr "Cheñch"
+
+#: ../plugins/security-privacy//SimPin.qml:180
+msgid "Enter SIM PIN"
+msgstr "Ebarzhit kod PIN ar gartenn SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:181
+msgid "Enter Previous SIM PIN"
+msgstr "Ebarzhit kod PIN kent ar gartenn SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:279
+msgid "Unlock"
+msgstr "Dibrennañ"
+
+#: ../plugins/security-privacy//SimPin.qml:279
+msgid "Lock"
+msgstr "Prennañ"
+
+#: ../plugins/security-privacy//SimPin.qml:314
+#, qt-format
+msgid "%1"
+msgstr "%1"
+
+#: ../plugins/security-privacy//SimPin.qml:337
+msgid "Change PIN…"
+msgstr "Cheñch ar c'hod PIN..."
+
+#: ../plugins/security-privacy//SimPin.qml:354
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+"Pa vez lakaet ur c'hod PIN evit ar gartenn SIM, e rank bezañ merket evit "
+"ober gant servijoù an hezougell goude adlañsañ ar pellgomer pe goude cheñch "
+"kartenn SIM."
+
+#: ../plugins/security-privacy//SimPin.qml:358
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr ""
+"Ma vez merket ur c'hod PIN direizh meur a wech e c'hall ar gartenn SIM bezañ "
+"prennet da viken."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Prennañ ar pellgomzer"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
-#: ../wizard/qml/Pages//15-passwd.qml:88
-msgid "Passcode"
-msgstr "Kod-tremen"
+#: ../wizard/qml/Pages//15-passwd.qml:99
+msgid "PIN code"
+msgstr "Kod PIN"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:90
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
 msgstr "Frazenn-dremen"
 
@@ -439,12 +530,12 @@ msgid "Lock security"
 msgstr "Surentez ar prennañ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:68
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Lock when idle"
 msgstr "Prennañ pa vez dizoberiant"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:69
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Sleep when idle"
 msgstr "Lakaat da gousket pa vez dizoberiant"
 
@@ -461,54 +552,86 @@ msgstr[1] "%1 a vunutoù"
 msgid "Sleep locks immediately"
 msgstr "Lakaat da gousket a brenn diouzhtu-dak"
 
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr "Pa vez prennet, aotren :"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr "Lañser"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr "Kemennoù hag arventennoù buan-ha-buan"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+"Gweredekaat surentez ar prennañ evit mirout na vefe implijet ar pellgomzer "
+"pa vez prennet."
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr ""
+"An arloadoù hag an arc'hwelioù all a c'houlenno diganeoc'h dibrennañ."
+
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:35
+#: ../plugins/security-privacy//PageComponent.qml:37
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
 msgid "Security & Privacy"
 msgstr "Surentez & buhez prevez"
 
-#: ../plugins/security-privacy//PageComponent.qml:59
-#: ../plugins/security-privacy//PageComponent.qml:170
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
 msgstr "Pellgomz hag Internet"
 
-#: ../plugins/security-privacy//PageComponent.qml:61
-#: ../plugins/security-privacy//PageComponent.qml:171
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
 msgstr "Pellgomz hepken"
 
-#: ../plugins/security-privacy//PageComponent.qml:90
+#: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
 msgstr "Prennañ ar pellgomzer"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:96
-#: ../plugins/security-privacy//PageComponent.qml:105
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
 #: ../plugins/battery//SleepValues.qml:83
 #: ../plugins/battery//SleepValues.qml:87
 #: ../plugins/battery//SleepValues.qml:91
 #: ../plugins/battery//SleepValues.qml:95
 #: ../plugins/battery//SleepValues.qml:99
 #: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
 msgstr[0] "Goude %1 vunutenn"
 msgstr[1] "Goude %1 a vunutoù"
 
-#: ../plugins/security-privacy//PageComponent.qml:116
-msgid "SIM PIN"
-msgstr "Kod PIN ar gartenn SIM"
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:236
+msgid "On"
+msgstr "Enaouet"
 
-#: ../plugins/security-privacy//PageComponent.qml:124
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+msgid "Off"
+msgstr "Lazhet"
+
+#: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
 msgstr "Sifradur"
 
-#: ../plugins/security-privacy//PageComponent.qml:133
+#: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
@@ -516,144 +639,128 @@ msgstr ""
 "Ar sifradur a warez diouzh ar moned da roadennoù ar pellgomzer pa vez "
 "kevreet ouzh ur PC pe ur benveg all."
 
-#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
 msgstr "Buhez prevez"
 
-#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
 msgstr "Stadegoù war ar skramm degemer"
 
-#: ../plugins/security-privacy//PageComponent.qml:153
+#: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Messages on welcome screen"
 msgstr "Kemennadennoù war ar skramm degemer"
 
-#: ../plugins/security-privacy//PageComponent.qml:168
+#: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
 msgstr "Klask en daolenn-vourzh"
 
-#: ../plugins/security-privacy//PageComponent.qml:186
+#: ../plugins/security-privacy//PageComponent.qml:234
 msgid "Location access"
 msgstr "Mont d'al lec'hiañ"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "On"
-msgstr "Enaouet"
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:31
-msgid "Off"
-msgstr "Lazhet"
-
-#: ../plugins/security-privacy//PageComponent.qml:195
+#: ../plugins/security-privacy//PageComponent.qml:243
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "Mont da arloadoù all"
 
-#: ../plugins/security-privacy//PageComponent.qml:200
+#: ../plugins/security-privacy//PageComponent.qml:248
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "Diagnostikoù"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:205
+#: ../plugins/security-privacy//PageComponent.qml:253
 msgid "Sent"
 msgstr "Kaset"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:208
+#: ../plugins/security-privacy//PageComponent.qml:256
 msgid "Not sent"
 msgstr "N'eo ket bet kaset"
 
-#: ../plugins/security-privacy//LockSecurity.qml:92
-#: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passcode…"
-msgstr "Cheñch ar c'hod-tremen..."
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
+msgid "Change PIN code…"
+msgstr "Cheñch ar c'hod PIN..."
 
-#: ../plugins/security-privacy//LockSecurity.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:381
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
 msgid "Change passphrase…"
 msgstr "Cheñch ar frazenn-dremen..."
 
-#: ../plugins/security-privacy//LockSecurity.qml:101
+#: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
 msgstr "Prennañ o risklañ"
 
-#: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr "Prennañ gant ar c'hod-tremen"
+#: ../plugins/security-privacy//LockSecurity.qml:107
+msgid "Switch to PIN code"
+msgstr "Prennañ gant ar c'hod PIN"
 
-#: ../plugins/security-privacy//LockSecurity.qml:105
+#: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
 msgstr "Prennañ gant ar frazenn-dremen"
 
-#: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr "Kod-tremen a vremañ"
+#: ../plugins/security-privacy//LockSecurity.qml:118
+msgid "Existing PIN code"
+msgstr "Kod PIN zo anezhañ dija"
 
-#: ../plugins/security-privacy//LockSecurity.qml:116
+#: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
 msgstr "Frazenn-dremen a vremañ"
 
-#: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr "Dibabit ho kod-tremen"
+#: ../plugins/security-privacy//LockSecurity.qml:174
+msgid "Choose PIN code"
+msgstr "Dibabit ur c'hod PIN"
 
-#: ../plugins/security-privacy//LockSecurity.qml:172
+#: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
 msgstr "Dibabit ho frazenn-dremen"
 
-#: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr "Kadarnaat ar c'hod-tremen"
+#: ../plugins/security-privacy//LockSecurity.qml:220
+msgid "Confirm PIN code"
+msgstr "Kadarnaat ar c'hod PIN"
 
-#: ../plugins/security-privacy//LockSecurity.qml:218
+#: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
 msgstr "Kadarnaat ar frazenn-dremen"
 
-#: ../plugins/security-privacy//LockSecurity.qml:261
-msgid "Those passcodes don't match. Try again."
-msgstr "Ne glot ket ar c'hodoù-tremen-se. Esaeit en-dro."
+#: ../plugins/security-privacy//LockSecurity.qml:265
+msgid "Those PIN codes don't match. Try again."
+msgstr "Ar c'hodoù PIN-se ne glotont ket. Esaeit en-dro."
 
-#: ../plugins/security-privacy//LockSecurity.qml:264
+#: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
 msgstr "Ne glot ket ar frazennoù-tremen-se. Esaeit en-dro"
 
-#: ../plugins/security-privacy//LockSecurity.qml:295
+#: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
 msgstr "N'eo ket termenet"
 
-#: ../plugins/security-privacy//LockSecurity.qml:298
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr "Cheñch"
-
-#: ../plugins/security-privacy//LockSecurity.qml:340
+#: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
 msgstr "Dibrennañ ar pellgomzer oc'h implijout :"
 
-#: ../plugins/security-privacy//LockSecurity.qml:344
+#: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Swipe (no security)"
 msgstr "Ur riskladenn (tamm surentez ebet)"
 
-#: ../plugins/security-privacy//LockSecurity.qml:345
-msgid "4-digit passcode"
-msgstr "Ur c'hod-tremen gant 4 sifr"
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "4-digit PIN code"
+msgstr "Kod PIN gant 4 sifr"
 
-#: ../plugins/security-privacy//LockSecurity.qml:347
+#: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
 msgstr "Riskladenn (tamm surentez ebet)... "
 
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "4-digit passcode…"
-msgstr "Kod-tremen gant 4 sifr..."
+#: ../plugins/security-privacy//LockSecurity.qml:352
+msgid "4-digit PIN code…"
+msgstr "Kod PIN gant 4 sifr..."
 
-#: ../plugins/security-privacy//LockSecurity.qml:349
+#: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
 msgstr "Frazenn-dremen..."
 
@@ -741,7 +848,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr "Arloadoù ho peus aotreet hag o deus goulennet mont da :"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
 msgstr "Kamera"
 
@@ -851,8 +958,8 @@ msgid "Call"
 msgstr "Pellgomzadenn"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:31
-#: ../plugins/bluetooth//PageComponent.qml:90
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
 msgstr "Pellgomzer"
@@ -1034,8 +1141,8 @@ msgstr "Oberataerien"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:49
 #: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281 ../plugins/about//Storage.qml:204
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287 ../plugins/about//Storage.qml:204
 #: ../plugins/cellular//Components//SingleSim.qml:62
 #: ../plugins/cellular//Components//NoSim.qml:48
 msgid "N/A"
@@ -1069,7 +1176,7 @@ msgstr ""
 "Kreskiñ ha digreskiñ a ra skedusted an diskwel evit en em ober ouzh an endro."
 
 #: ../plugins/brightness//BrightnessSlider.qml:51
-#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/battery//PageComponent.qml:296
 msgid "Display brightness"
 msgstr "Skedusted an diskwel"
 
@@ -1092,146 +1199,146 @@ msgstr "Koublañ"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:144
-#: ../plugins/battery//PageComponent.qml:357
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/battery//PageComponent.qml:363
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/bluetooth//PageComponent.qml:79
+#: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
 msgstr "Kevreet"
 
-#: ../plugins/bluetooth//PageComponent.qml:80
+#: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
 msgstr "O kevreañ..."
 
-#: ../plugins/bluetooth//PageComponent.qml:81
+#: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
 msgstr "O tigevreañ..."
 
-#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
 msgstr "Digevreet"
 
-#: ../plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
 msgstr "Dianav"
 
-#: ../plugins/bluetooth//PageComponent.qml:89
+#: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
 msgstr "Urzhiataer"
 
-#: ../plugins/bluetooth//PageComponent.qml:91
+#: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Modem"
 msgstr "Modem"
 
-#: ../plugins/bluetooth//PageComponent.qml:92 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
 msgid "Network"
 msgstr "Rouedad"
 
-#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Headset"
 msgstr "Tokarn"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Headphones"
 msgstr "Selaouelloù"
 
-#: ../plugins/bluetooth//PageComponent.qml:95
+#: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Video"
 msgstr "Video"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Other Audio"
 msgstr "Sonioù all"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Keyboard"
 msgstr "Klavier"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Tablet"
 msgstr "Tablezenn"
 
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Mouse"
 msgstr "Logodenn"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:104
 msgid "Printer"
 msgstr "Moullerez"
 
-#: ../plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:106
 msgid "Other"
 msgstr "Traoù all"
 
-#: ../plugins/bluetooth//PageComponent.qml:109
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Excellent"
 msgstr "Mat-tre"
 
-#: ../plugins/bluetooth//PageComponent.qml:110
+#: ../plugins/bluetooth//PageComponent.qml:113
 msgid "Good"
 msgstr "Mat"
 
-#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
 msgstr "Mat a-walc'h"
 
-#: ../plugins/bluetooth//PageComponent.qml:112
+#: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
 msgstr "Dister"
 
-#: ../plugins/bluetooth//PageComponent.qml:179
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Discoverable"
 msgstr "A c'haller dizoleiñ"
 
-#: ../plugins/bluetooth//PageComponent.qml:179
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Not discoverable"
 msgstr "Na c'haller ket dizoleiñ"
 
-#: ../plugins/bluetooth//PageComponent.qml:210
+#: ../plugins/bluetooth//PageComponent.qml:213
 msgid "Connected devices:"
 msgstr "Ardivinkoù kevreet :"
 
-#: ../plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect another device:"
 msgstr "Kevreañ un ardivink all :"
 
-#: ../plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
 msgstr "Kevreañ ur benveg :"
 
-#: ../plugins/bluetooth//PageComponent.qml:280
+#: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
 msgstr "N'eus bet dinoet hini ebet"
 
-#: ../plugins/bluetooth//PageComponent.qml:288
-#: ../plugins/bluetooth//PageComponent.qml:391
+#: ../plugins/bluetooth//PageComponent.qml:291
+#: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
 msgstr "Kevreañ ent emgefre pa vez dinoet :"
 
-#: ../plugins/bluetooth//PageComponent.qml:358
+#: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
 msgstr "Seurt"
 
-#: ../plugins/bluetooth//PageComponent.qml:382
+#: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
 msgstr "Statud"
 
-#: ../plugins/bluetooth//PageComponent.qml:386
+#: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
 msgstr "Kreñvder ar sinal"
 
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Disconnect"
 msgstr "Digevreañ"
 
-#: ../plugins/bluetooth//PageComponent.qml:423
+#: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Ankouaat ar benveg-mañ"
 
@@ -1318,35 +1425,35 @@ msgstr "Kargadenn glok diwezhañ"
 msgid "Fully charged"
 msgstr "Karget klok"
 
-#: ../plugins/battery//PageComponent.qml:120
+#: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
 msgstr "Live ar garg"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:128
+#: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery//PageComponent.qml:206
-#: ../plugins/battery//PageComponent.qml:208
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
 msgstr "Dec'h"
 
-#: ../plugins/battery//PageComponent.qml:214
-#: ../plugins/battery//PageComponent.qml:216
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
 msgstr "Hiziv"
 
-#: ../plugins/battery//PageComponent.qml:286
+#: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
 msgstr "Doareoù da implijout nebeutoc'h ar batiri :"
 
-#: ../plugins/battery//PageComponent.qml:388
+#: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery//PageComponent.qml:406
+#: ../plugins/battery//PageComponent.qml:412
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Evit ul lec'hiadur mat ez eus ezhomm eus ar GPS ha/pe ar Wi-Fi"
 
@@ -1364,11 +1471,11 @@ msgstr "Rakwelet"
 msgid "Background"
 msgstr "Drekleur"
 
-#: ../plugins/background//MainPage.qml:112
+#: ../plugins/background//MainPage.qml:107
 msgid "Ubuntu Art"
 msgstr "Arz Ubuntu"
 
-#: ../plugins/background//MainPage.qml:128
+#: ../plugins/background//MainPage.qml:123
 msgid "Custom"
 msgstr "Personelaet"
 
@@ -1503,10 +1610,10 @@ msgstr ""
 "er pellgomzer-mañ dre gevreañ anezhañ ouzh ur benveg all."
 
 #: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
+msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
-"Ezhomm ho peus da lakaat ur c'hod-tremen pe ur frazenn-dremen evit implijout "
-"ar mod Diorroer"
+"Ret eo deoc'h lakaat ur c'hod PIN pe ur frazenn-dremen evit implijout ar Mod "
+"Diorroer."
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1559,26 +1666,26 @@ msgid "OK"
 msgstr "Mat eo"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:33
-#: ../plugins/cellular//Components//CellularMultiSim.qml:76
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
 msgstr "Roadennoù hezoug :"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:38
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
 msgstr "2G hepken (evit arboellañ ar batiri)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:39
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
 msgstr "2G/3G/4G (primoc'h)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:155
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
 msgstr "Pellgomz adalek an estrenvro"
 
@@ -1601,6 +1708,11 @@ msgstr ""
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
 msgstr "Evit ar c'hemennadennoù, implijout :"
+
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+msgid "2G/3G (faster)"
+msgstr "2G/3G (lijeroc'h)"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1641,36 +1753,32 @@ msgstr "Reizhiad"
 msgid "Connect to Wi-Fi"
 msgstr "Kevreañ ouzh ar Wi-Fi"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
+#: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
 msgstr "Rouedad da gevreañ outo"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152
-#: ../wizard/qml/Pages//40-reporting.qml:46
-#: ../wizard/qml/Pages//30-location.qml:67
-#: ../wizard/qml/Pages//15-passwd.qml:159
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//30-location.qml:66
+#: ../wizard/qml/Pages//15-passwd.qml:170
 msgid "Continue"
 msgstr "Kenderc'hel"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:64
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
 msgstr "Tremen hebiou"
 
-#: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
-msgstr "Demat"
+#: ../wizard/qml/Pages//10-welcome.qml:24
+msgid "Hi!"
+msgstr "Salud !"
 
-#: ../wizard/qml/Pages//10-welcome.qml:67
-msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr "Deuet-mat oc'h en ho pellgomzer Ubuntu. Krogomp ganti."
+#: ../wizard/qml/Pages//10-welcome.qml:41
+msgid "Welcome to your Ubuntu phone."
+msgstr "Deuet-mat oc'h en ho pellgomzer Ubuntu."
 
-#: ../wizard/qml/Pages//10-welcome.qml:72
-msgid "Select your language"
-msgstr "Diuzit ho yezh"
-
-#: ../wizard/qml/Pages//10-welcome.qml:89
-msgid "Start"
-msgstr "Kregiñ"
+#: ../wizard/qml/Pages//10-welcome.qml:49
+msgid "Let’s get started."
+msgstr "Krogomp ganti."
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
@@ -1680,78 +1788,94 @@ msgstr "Penndivizoù implij"
 msgid "Add a SIM card"
 msgstr "Ouzhpennañ ur gartenn SIM"
 
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid ""
-"Please insert a SIM card before you continue. Without it, you won’t be able "
-"to make calls or use text messaging."
-msgstr ""
-"Ensoc'hit ur gartenn SIM a-raok kenderc'hel, mar plij. Peotramant ne vioc'h "
-"ket evit pellgomz pe kas kemennadennoù."
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
+msgstr "Lakait ur gartenn SIM a-raok mont pelloc'h."
+
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
+msgstr "Ne vioc'h ket evit pellgomz pe kas kemennadennoù hepti."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
 msgstr "Echu penn-da-benn"
 
-#: ../wizard/qml/Pages//80-finished.qml:39
-msgid "Nice work! Your phone is now ready to use. "
-msgstr "Gwellat labour ! Prest eo ho pellgomzer da vezañ implijet bremañ. "
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr "Gwellat labour !"
 
-#: ../wizard/qml/Pages//80-finished.qml:46
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr "Prest eo ho pellgomzer da vezañ implijet bremañ."
+
+#: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
 msgstr "Echuiñ"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug Reporting"
+msgid "Bug reporting"
 msgstr "Titourañ drein"
 
-#: ../wizard/qml/Pages//40-reporting.qml:39
-msgid ""
-"Your phone is set up to automatically report errors to Canonical. This can "
-"be disabled in system settings."
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
-"Arventennet eo ho pellgomzer ent emgefre evit titourañ ar fazioù da "
-"gCanonical. Diweredekaet e c'hall bezañ en arventennoù ar reizhiad."
+"Arventennet eo ho pellgomzer evit titourañ ar fazioù da gCanonical ent "
+"emgefre."
 
-#: ../wizard/qml/Pages//30-location.qml:51
-msgid "Use your mobile network and wi-fi to work out where you are."
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
 msgstr ""
-"Implijit ho rouedad hezoug pe ar wi-fi evit didermeniñ pelec'h emaoc'h."
+"Gallout a ra an dra-mañ bezañ diweredekaet an Arventennoù ar Reizhiad."
 
-#: ../wizard/qml/Pages//30-location.qml:59
+#: ../wizard/qml/Pages//30-location.qml:50
+msgid "Use your mobile network and Wi-Fi to work out where you are"
+msgstr ""
+"Implijout ho rouedad pellgomz hag ar Wi-ki evit gouzout pelec'h emaoc'h"
+
+#: ../wizard/qml/Pages//30-location.qml:58
 msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-"conditions</a>."
+"conditions</a>"
 msgstr ""
-"Lennet em eus <a href='terms.qml>penndivizoù</a> Ubuntu hag asantiñ a ran "
-"dezho."
+"Lennet em eus hag aprouiñ a ran <a href='terms.qml'>divizoù implij</a> Ubuntu"
 
-#: ../wizard/qml/Pages//15-passwd.qml:37
+#: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
 msgstr "Lakaat ar prenn surentez"
 
-#: ../wizard/qml/Pages//15-passwd.qml:86
+#: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
 msgstr "Riklañ"
 
-#: ../wizard/qml/Pages//15-passwd.qml:136
-msgid "Those passcodes don't match."
-msgstr "Ar c'hodoù-se ne glotont ket."
+#: ../wizard/qml/Pages//15-passwd.qml:147
+msgid "Those PIN codes don't match."
+msgstr "Ar c'hodoù PIN-se ne glotont ket."
 
-#: ../wizard/qml/Pages//15-passwd.qml:138
+#: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
 msgstr "Ar frazennoù-tremen-se ne glotont ket."
 
-#: ../wizard/qml/Pages//15-passwd.qml:146
-msgid "Passcode must be at least four digits long."
-msgstr "Pevar sifr da nebeutañ a rank bezañ er c'hod-tremen."
+#: ../wizard/qml/Pages//15-passwd.qml:157
+msgid "PIN code must be at least four digits long."
+msgstr "Pevar sifr da nebeutañ a rank bezañ er c'hod PIN."
 
-#: ../wizard/qml/Pages//15-passwd.qml:148
+#: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
 msgstr "Peder arouezenn da nebeutañ a rank bezañ er frazenn-dremen."
 
-#: ../wizard/qml/Components//Page.qml:50
+#: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "Distreiñ"
+
+#: ../wizard/qml/Components//StackButton.qml:51
+#, qt-format
+msgid "〈  %1"
+msgstr "〈  %1"
+
+#: ../wizard/qml/Components//StackButton.qml:54
+#, qt-format
+msgid "%1  〉"
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -2043,27 +2167,27 @@ msgstr ""
 "Ne c'haller ket arsaviñ ar goulenn-mañ (ne c'haller ket mont e darempred "
 "gant ar servij)"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:251
-msgid "Incorrect passcode. Try again."
-msgstr "Ger-tremen direizh. Esaeit en-dro."
+#: ../plugins/security-privacy//securityprivacy.cpp:301
+msgid "Incorrect PIN code. Try again."
+msgstr "Kod PIN direizh. Esaeit en-dro."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:253
+#: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
 msgstr "Frazenn-dremen direizh. Esaeit en-dro."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:256
+#: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
 msgstr "N'eus ket bet gallet lakaat ar mod surentez"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:281
+#: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
 msgstr "N'eus ket bet gallet lakaat an titourig diskwel surentez"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:294
+#: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
 msgstr "Fazi oc'h ober gant ar jedouer dilesañ"
 
-#: ../plugins/about//click.cpp:133
+#: ../plugins/about//click.cpp:134
 msgid "Unknown title"
 msgstr "Titl dianav"
 
@@ -2074,3 +2198,91 @@ msgstr "Bez' ez eus ur skeudenn hizivaet eus ar reizhiad."
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr "Pouezit evit digeriñ hizivaer ar reizhiad."
+
+#~ msgid "Passcode"
+#~ msgstr "Kod-tremen"
+
+#~ msgid "Switch to passcode"
+#~ msgstr "Prennañ gant ar c'hod-tremen"
+
+#~ msgid "Those passcodes don't match. Try again."
+#~ msgstr "Ne glot ket ar c'hodoù-tremen-se. Esaeit en-dro."
+
+#~ msgid "Choose passcode"
+#~ msgstr "Dibabit ho kod-tremen"
+
+#~ msgid "Confirm passcode"
+#~ msgstr "Kadarnaat ar c'hod-tremen"
+
+#~ msgid "4-digit passcode"
+#~ msgstr "Ur c'hod-tremen gant 4 sifr"
+
+#~ msgid "Change passcode…"
+#~ msgstr "Cheñch ar c'hod-tremen..."
+
+#~ msgid "Existing passcode"
+#~ msgstr "Kod-tremen a vremañ"
+
+#~ msgid "4-digit passcode…"
+#~ msgstr "Kod-tremen gant 4 sifr..."
+
+#~ msgid ""
+#~ "Your phone is set up to automatically report errors to Canonical. This can "
+#~ "be disabled in system settings."
+#~ msgstr ""
+#~ "Arventennet eo ho pellgomzer ent emgefre evit titourañ ar fazioù da "
+#~ "gCanonical. Diweredekaet e c'hall bezañ en arventennoù ar reizhiad."
+
+#~ msgid "Select your language"
+#~ msgstr "Diuzit ho yezh"
+
+#~ msgid "Hello"
+#~ msgstr "Demat"
+
+#~ msgid "Start"
+#~ msgstr "Kregiñ"
+
+#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
+#~ msgstr "Deuet-mat oc'h en ho pellgomzer Ubuntu. Krogomp ganti."
+
+#~ msgid "You need a passcode or passphrase set to use Developer Mode."
+#~ msgstr ""
+#~ "Ezhomm ho peus da lakaat ur c'hod-tremen pe ur frazenn-dremen evit implijout "
+#~ "ar mod Diorroer"
+
+#~ msgid "Those passcodes don't match."
+#~ msgstr "Ar c'hodoù-se ne glotont ket."
+
+#~ msgid "Passcode must be at least four digits long."
+#~ msgstr "Pevar sifr da nebeutañ a rank bezañ er c'hod-tremen."
+
+#~ msgid ""
+#~ "Please insert a SIM card before you continue. Without it, you won’t be able "
+#~ "to make calls or use text messaging."
+#~ msgstr ""
+#~ "Ensoc'hit ur gartenn SIM a-raok kenderc'hel, mar plij. Peotramant ne vioc'h "
+#~ "ket evit pellgomz pe kas kemennadennoù."
+
+#~ msgid "Nice work! Your phone is now ready to use. "
+#~ msgstr "Gwellat labour ! Prest eo ho pellgomzer da vezañ implijet bremañ. "
+
+#~ msgid "Bug Reporting"
+#~ msgstr "Titourañ drein"
+
+#~ msgid "Use your mobile network and wi-fi to work out where you are."
+#~ msgstr ""
+#~ "Implijit ho rouedad hezoug pe ar wi-fi evit didermeniñ pelec'h emaoc'h."
+
+#~ msgid ""
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>."
+#~ msgstr ""
+#~ "Lennet em eus <a href='terms.qml>penndivizoù</a> Ubuntu hag asantiñ a ran "
+#~ "dezho."
+
+#~ msgid "Incorrect passcode. Try again."
+#~ msgstr "Ger-tremen direizh. Esaeit en-dro."
+
+#, qt-format
+#~ msgid "%1 attempts remaining"
+#~ msgstr "Chom  a ra %1 taol-esae"
