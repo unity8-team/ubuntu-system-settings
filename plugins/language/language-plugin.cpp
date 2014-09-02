@@ -594,3 +594,8 @@ enabledLayoutsChanged(GSettings *settings,
     LanguagePlugin *plugin(static_cast<LanguagePlugin *>(user_data));
     plugin->enabledLayoutsChanged();
 }
+
+void LanguagePlugin::reboot()
+{
+    m_sessionService.reboot();
+}

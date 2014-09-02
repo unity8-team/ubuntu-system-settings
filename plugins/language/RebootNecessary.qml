@@ -24,11 +24,24 @@ import Ubuntu.Components.Popups 0.1
 
 Dialog {
     id: dialog
+
+    signal reboot()
+
     text: i18n.tr("The phone needs to restart for changes to take effect.")
     objectName: "rebootNecessaryDialog"
     Button {
+        id: reboot
+        text: i18n.tr("Restart")
+        onClicked: {
+            dialog.reboot();
+            PopupUtils.close(dialog)
+        }
+    }
+    Button {
         id: dismiss
-        text: i18n.tr("OK")
-        onClicked: PopupUtils.close(dialog)
+        text: i18n.tr("Restart later")
+        onClicked: {
+            PopupUtils.close(dialog)
+        }
     }
 }

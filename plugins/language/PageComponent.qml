@@ -61,7 +61,11 @@ ItemPage {
     Component {
         id: rebootNecessaryNotification
 
-        RebootNecessary {}
+        RebootNecessary {
+            onReboot: {
+                plugin.reboot();
+            }
+        }
     }
 
     GSettings {
