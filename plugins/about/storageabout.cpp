@@ -246,7 +246,8 @@ QString StorageAbout::licenseInfo(const QString &subdir) const
     QString copyrightText;
 
     QFile file(copyright);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return QString();
     copyrightText = QString(file.readAll());
     file.close();
     return copyrightText;
