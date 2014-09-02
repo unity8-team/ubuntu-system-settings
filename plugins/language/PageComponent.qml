@@ -39,7 +39,11 @@ ItemPage {
     Component {
         id: displayLanguage
 
-        DisplayLanguage {}
+        DisplayLanguage {
+            onLanguageChanged: {
+                PopupUtils.open(rebootNecessaryNotification)
+            }
+        }
     }
 
     Component {
@@ -52,6 +56,12 @@ ItemPage {
         id: spellChecking
 
         SpellChecking {}
+    }
+
+    Component {
+        id: rebootNecessaryNotification
+
+        RebootNecessary {}
     }
 
     GSettings {

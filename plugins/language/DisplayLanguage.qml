@@ -29,6 +29,8 @@ SheetBase {
 
     property string initialLanguage
 
+    signal languageChanged ()
+
     modal: true
     title: i18n.tr("Display language")
 
@@ -123,6 +125,9 @@ SheetBase {
             anchors.bottomMargin: units.gu(1)
 
             onClicked: {
+                if(plugin.currentLanguage != languageList.currentIndex) {
+                    languageChanged();
+                }
                 plugin.currentLanguage = languageList.currentIndex
                 PopupUtils.close(root)
             }
