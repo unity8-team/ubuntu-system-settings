@@ -102,3 +102,13 @@ class SoundTestCase(SoundBaseTestCase):
         self.system_settings.main_view.scroll_to_and_click(kbd_snd)
         self.assertThat(
             kbd_snd.get_properties()["checked"], NotEquals(current_value))
+
+    def test_dialpad_sounds_switch(self):
+        """ Check that dialpad_sounds is present and clickable"""
+        snd = self.system_settings.main_view.sound_page.select_single(
+            objectName="dialpadSounds")
+        prev_value = self.obj_test.GetDialpadSoundsEnabled()
+        self.system_settings.main_view.scroll_to_and_click(snd)
+        self.assertThat(
+            lambda: self.obj_test.GetDialpadSoundsEnabled(),
+            Eventually(NotEquals(prev_value)))

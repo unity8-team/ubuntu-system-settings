@@ -85,6 +85,7 @@ public:
     Q_INVOKABLE void pauseDownload(const QString &packagename);
     Q_INVOKABLE void retryDownload(const QString &packagename);
     Q_INVOKABLE void applySystemUpdate() { m_systemUpdate.applyUpdate(); }
+    Q_INVOKABLE void updateClickScope();
 
     QVariantList model() const { return m_model; }
     int downloadMode() { return m_systemUpdate.downloadMode(); }

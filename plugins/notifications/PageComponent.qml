@@ -45,7 +45,6 @@ ItemPage {
                 right: parent.right
                 margins: units.gu(1)
             }
-            fontSize: "large"
         }
     }
 
@@ -72,7 +71,6 @@ ItemPage {
                     iconSource = modelData.icon
                 }
             }
-            iconFrame: false
             control: Switch {
                 checked: modelData.status
 
