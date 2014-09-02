@@ -45,14 +45,6 @@ LocalComponents.Page {
     }
 
     Component {
-        id: hiddenComponent
-        Item {
-            height: 0
-            visible: false
-        }
-    }
-
-    Component {
         id: accessPointComponent
         ListItem.Standard {
             id: accessPoint
@@ -183,13 +175,11 @@ LocalComponents.Page {
                         id: loader
                         anchors { left: parent.left; right: parent.right; }
                         asynchronous: true
-                        sourceComponent: model.type === "unity.widgets.systemsettings.tablet.accesspoint" ? accessPointComponent : hiddenComponent
+                        sourceComponent: model.type === "unity.widgets.systemsettings.tablet.accesspoint" ? accessPointComponent : null
 
                         onLoaded: {
-                            if (sourceComponent === accessPointComponent) {
-                                item.menuData = Qt.binding(function() { return model; });
-                                item.menuIndex = Qt.binding(function() { return index; });
-                            }
+                            item.menuData = Qt.binding(function() { return model; });
+                            item.menuIndex = Qt.binding(function() { return index; });
                         }
                     }
                 }
