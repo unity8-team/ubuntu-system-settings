@@ -25,7 +25,7 @@ Item {
     readonly property real topMargin: units.gu(8)
     readonly property real leftMargin: units.gu(2)
     readonly property real rightMargin: units.gu(2)
-    readonly property real bottomMargin: backButton.height + buttonMargin * 3
+    readonly property real bottomMargin: backButton.height + buttonMargin * 2
 
     property bool hasBackButton: true
     property bool customBack: false
@@ -51,7 +51,7 @@ Item {
             leftMargin: leftMargin
             rightMargin: rightMargin
         }
-        wrapMode: Text.Wrap
+        wrapMode: Text.WordWrap
         text: title
         color: Theme.palette.normal.baseText
         font.pixelSize: units.gu(4)
