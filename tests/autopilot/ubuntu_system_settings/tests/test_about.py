@@ -108,16 +108,6 @@ class AboutTestCase(AboutBaseTestCase):
         self.assertEquals(displayed_device_name, device_name_from_getprop)
 
 
-    def test_no_phone_numbers(self):
-        objects = ['numberItem', 'numberItem1', 'numberItem2']
-        for o in objects:
-            self.assertThat(lambda:
-                self.system_settings.main_view.about_page.select_single(
-                    objectName=o
-                ),
-                raises(StateNotFoundError))
-
-
 class AboutOfonoTestCase(AboutOfonoBaseTestCase):
     def _get_imei_from_dbus(self):
         bus = self.get_dbus(system_bus=True)

@@ -51,7 +51,7 @@ ItemPage {
         Component.onCompleted: {
             if (manager.modems.length === 1) {
                 phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
-            } else {
+            } else if (manager.modems.length > 1) {
                 phoneNumbers.setSource("PhoneNumbers.qml", {paths: manager.modems.slice(0).sort()})
             }
         }
