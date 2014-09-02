@@ -29,7 +29,7 @@ SheetBase {
 
     property string initialLanguage
 
-    signal languageChanged ()
+    signal languageChanged (int newLanguage, int oldLanguage)
 
     modal: true
     title: i18n.tr("Display language")
@@ -125,11 +125,11 @@ SheetBase {
             anchors.bottomMargin: units.gu(1)
 
             onClicked: {
-                if(plugin.currentLanguage != languageList.currentIndex) {
-                    languageChanged();
-                }
-                plugin.currentLanguage = languageList.currentIndex
-                PopupUtils.close(root)
+                var oldLang = plugin.currentLanguage;
+                var newLang = languageList.currentIndex;
+                languageChanged(newLang, oldLang);
+                plugin.currentLanguage = newLang;
+                PopupUtils.close(root);
             }
         }
     }

@@ -18,34 +18,25 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.Popups 0.1
+#include "sessionservice.h"
 
-Dialog {
-    id: dialog
+#include <QDebug>
 
-    property int revertTo
+#define LM_SERVICE "org.freedesktop.login1"
+#define LM_PATH "/org/freedesktop/login1"
+#define LM_IFACE "org.freedesktop.login1.Manager"
 
-    signal reboot()
-    signal revert(int to)
+SessionService::SessionService(QObject *parent)
+    : QObject(parent),
+      m_systemBusConnection(QDBusConnection::systemBus()),
+      m_loginManager(LM_SERVICE,
+                     LM_PATH,
+                     LM_IFACE,
+                     m_systemBusConnection)
+{
+}
 
-    text: i18n.tr("The phone needs to restart for changes to take effect.")
-    objectName: "rebootNecessaryDialog"
-    Button {
-        id: reboot
-        text: i18n.tr("Restart Now")
-        onClicked: {
-            dialog.reboot();
-            PopupUtils.close(dialog)
-        }
-    }
-    Button {
-        id: revert
-        text: i18n.tr("Cancel")
-        onClicked: {
-            dialog.revert(revertTo);
-            PopupUtils.close(dialog)
-        }
-    }
+void SessionService::reboot()
+{
+    m_loginManager.call("Reboot", false);
 }

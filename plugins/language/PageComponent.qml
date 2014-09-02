@@ -41,7 +41,9 @@ ItemPage {
 
         DisplayLanguage {
             onLanguageChanged: {
-                PopupUtils.open(rebootNecessaryNotification)
+                PopupUtils.open(rebootNecessaryNotification, root, {
+                    revertTo: oldLanguage
+                })
             }
         }
     }
@@ -62,8 +64,12 @@ ItemPage {
         id: rebootNecessaryNotification
 
         RebootNecessary {
+
             onReboot: {
                 plugin.reboot();
+            }
+            onRevert: {
+                plugin.currentLanguage = to;
             }
         }
     }

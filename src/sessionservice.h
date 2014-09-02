@@ -18,34 +18,23 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.Popups 0.1
+#ifndef SESSIONSERVICE_H
+#define SESSIONSERVICE_H
 
-Dialog {
-    id: dialog
+#include <QtDBus/QDBusInterface>
 
-    property int revertTo
+class SessionService : public QObject
+{
+    Q_OBJECT
 
-    signal reboot()
-    signal revert(int to)
+public:
+    explicit SessionService (QObject *parent = 0);
+    void reboot();
 
-    text: i18n.tr("The phone needs to restart for changes to take effect.")
-    objectName: "rebootNecessaryDialog"
-    Button {
-        id: reboot
-        text: i18n.tr("Restart Now")
-        onClicked: {
-            dialog.reboot();
-            PopupUtils.close(dialog)
-        }
-    }
-    Button {
-        id: revert
-        text: i18n.tr("Cancel")
-        onClicked: {
-            dialog.revert(revertTo);
-            PopupUtils.close(dialog)
-        }
-    }
-}
+private:
+    QDBusConnection m_systemBusConnection;
+    QDBusInterface m_loginManager;
+
+};
+
+#endif // SESSIONSERVICE_H
