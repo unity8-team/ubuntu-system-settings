@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-29 08:21+0200\n"
+"POT-Creation-Date: 2014-09-01 16:11+0200\n"
 "PO-Revision-Date: 2014-08-29 15:50+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-31 07:29+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:18+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 "Language: uk\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -28,7 +28,7 @@ msgstr "Попередні мережі"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
-#: ../plugins/battery//PageComponent.qml:327
+#: ../plugins/battery//PageComponent.qml:333
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
@@ -42,15 +42,15 @@ msgid "Network name"
 msgstr "Назва мережі"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
-#: ../plugins/security-privacy//PageComponent.qml:85
+#: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
 msgstr "Захист"
 
 #: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PhoneLocking.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:113
-#: ../plugins/bluetooth//PageComponent.qml:320
-#: ../plugins/bluetooth//PageComponent.qml:341
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr "Немає"
 
@@ -72,7 +72,9 @@ msgstr "Видимість пароля"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//LockSecurity.qml:279
+#: ../plugins/security-privacy//SimPin.qml:146
+#: ../plugins/security-privacy//SimPin.qml:263
+#: ../plugins/security-privacy//LockSecurity.qml:283
 #: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//ResetAllSettings.qml:38
 #: ../plugins/reset//EraseEverything.qml:54
@@ -89,7 +91,7 @@ msgid "Cancel"
 msgstr "Скасувати"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "З’єднатися"
 
@@ -98,7 +100,7 @@ msgid "Network details"
 msgstr "Параметри мережі"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:340
+#: ../plugins/bluetooth//PageComponent.qml:343
 msgid "Name"
 msgstr "Назва"
 
@@ -107,14 +109,14 @@ msgid "Last connected"
 msgstr "Останнє з’єднання"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:519
+#: ../plugins/system-update//PageComponent.qml:521
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:99
+#: ../plugins/security-privacy//PageComponent.qml:140
 #: ../plugins/battery//SleepValues.qml:106
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
 #: ../plugins/about//PageComponent.qml:149
 msgid "Never"
 msgstr "Ніколи"
@@ -164,7 +166,7 @@ msgid "Year"
 msgstr "Рік"
 
 #: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:300
+#: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/phone//CallForwarding.qml:152
 #: ../plugins/background//Preview.qml:104
 msgid "Set"
@@ -192,7 +194,7 @@ msgstr "Автоматично"
 
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:108
+#: ../plugins/security-privacy//PageComponent.qml:149
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
 msgstr "Вручну"
@@ -268,76 +270,76 @@ msgstr[2] "Встановити %1 оновлень"
 msgid "Pause All"
 msgstr "Призупинити всі"
 
-#: ../plugins/system-update//PageComponent.qml:269
+#: ../plugins/system-update//PageComponent.qml:270
 msgid "Retry"
 msgstr "Повторити"
 
-#: ../plugins/system-update//PageComponent.qml:285
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Download"
 msgstr "Отримання"
 
-#: ../plugins/system-update//PageComponent.qml:285
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Update"
 msgstr "Оновити"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Resume"
 msgstr "Продовжити"
 
-#: ../plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:288
 msgid "Pause"
 msgstr "Призупинити"
 
-#: ../plugins/system-update//PageComponent.qml:346
+#: ../plugins/system-update//PageComponent.qml:347
 msgid "Installing"
 msgstr "Встановлення"
 
-#: ../plugins/system-update//PageComponent.qml:379
+#: ../plugins/system-update//PageComponent.qml:380
 msgid "Installed"
 msgstr "Встановлено"
 
-#: ../plugins/system-update//PageComponent.qml:403
+#: ../plugins/system-update//PageComponent.qml:405
 msgid "Version: "
 msgstr "Версія: "
 
-#: ../plugins/system-update//PageComponent.qml:425
+#: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr "Увійдіть до Ubuntu One, щоб отримувати оновлення програм."
 
-#: ../plugins/system-update//PageComponent.qml:434
+#: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
 msgstr "Увійти…"
 
-#: ../plugins/system-update//PageComponent.qml:501
+#: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
 msgstr "Встановлюємо оновлення…"
 
-#: ../plugins/system-update//PageComponent.qml:516
+#: ../plugins/system-update//PageComponent.qml:518
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr "Автоотримання"
 
-#: ../plugins/system-update//PageComponent.qml:521
+#: ../plugins/system-update//PageComponent.qml:523
 msgid "On wi-fi"
 msgstr "З wi-fi"
 
-#: ../plugins/system-update//PageComponent.qml:523
+#: ../plugins/system-update//PageComponent.qml:525
 msgid "Always"
 msgstr "Завжди"
 
-#: ../plugins/system-update//PageComponent.qml:538
+#: ../plugins/system-update//PageComponent.qml:540
 msgid " bytes"
 msgstr " байтів"
 
-#: ../plugins/system-update//PageComponent.qml:541
+#: ../plugins/system-update//PageComponent.qml:543
 msgid " KiB"
 msgstr " КіБ"
 
-#: ../plugins/system-update//PageComponent.qml:544
+#: ../plugins/system-update//PageComponent.qml:546
 msgid " MiB"
 msgstr " МіБ"
 
-#: ../plugins/system-update//PageComponent.qml:547
+#: ../plugins/system-update//PageComponent.qml:549
 msgid " GiB"
 msgstr " ГіБ"
 
@@ -393,37 +395,44 @@ msgid "Vibrate when ringing"
 msgstr "Вібрація з дзвінком"
 
 #: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
+#: ../plugins/sound//PageComponent.qml:187
 msgid "Vibrate in Silent Mode"
 msgstr "Вібрація у тихому режимі"
 
-#: ../plugins/sound//PageComponent.qml:147
+#: ../plugins/sound//PageComponent.qml:152
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
 msgstr "Повідомлення:"
 
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:160
+#: ../plugins/sound//PageComponent.qml:166
 msgid "Message received"
 msgstr "Повідомлення отримано"
 
-#: ../plugins/sound//PageComponent.qml:169
+#: ../plugins/sound//PageComponent.qml:178
 msgid "Vibrate with message sound"
 msgstr "Вібрація зі звуком повідомлення"
 
-#: ../plugins/sound//PageComponent.qml:182
+#: ../plugins/sound//PageComponent.qml:191
 msgid "Other sounds:"
 msgstr "Інші звуки:"
 
-#: ../plugins/sound//PageComponent.qml:186
+#: ../plugins/sound//PageComponent.qml:195
 #: ../plugins/language//PageComponent.qml:185
 msgid "Keyboard sound"
 msgstr "Озвучення клавіатури"
 
-#: ../plugins/sound//PageComponent.qml:200
+#: ../plugins/sound//PageComponent.qml:209
 msgid "Lock sound"
 msgstr "Звук блокування"
 
-#: ../plugins/security-privacy//PageComponent.qml:116
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:319
+#: ../plugins/security-privacy//PageComponent.qml:158
 msgid "SIM PIN"
 msgstr "Пінкод SIM"
 
@@ -432,7 +441,7 @@ msgid "Change SIM PIN"
 msgstr "Зміна PIN-коду SIM-картки"
 
 #: ../plugins/security-privacy//SimPin.qml:47
-#: ../plugins/security-privacy//SimPin.qml:183
+#: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
 msgstr "Помилковий PIN-код. Лишилося %1 спроб."
@@ -442,10 +451,10 @@ msgid "Current PIN:"
 msgstr "Поточний PIN-код:"
 
 #: ../plugins/security-privacy//SimPin.qml:91
-#: ../plugins/security-privacy//SimPin.qml:241
+#: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
-msgid "%1 attempts remaining"
-msgstr "Лишилося %1 спроб"
+msgid "%1 attempts allowed."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
@@ -459,37 +468,38 @@ msgstr "Підтвердіть новий PIN-код:"
 msgid "PINs don't match. Try again."
 msgstr "Значення PIN-кодів не збігаються. Повторіть спробу."
 
-#: ../plugins/security-privacy//LockSecurity.qml:298
+#: ../plugins/security-privacy//SimPin.qml:154
+#: ../plugins/security-privacy//LockSecurity.qml:302
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
 msgstr "Змінити"
 
-#: ../plugins/security-privacy//SimPin.qml:179
+#: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
 msgstr "Введіть PIN-код SIM-картки"
 
-#: ../plugins/security-privacy//SimPin.qml:180
+#: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
 msgstr "Введіть попередній PIN-код SIM-картки"
 
-#: ../plugins/security-privacy//SimPin.qml:276
+#: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
 msgstr "Розблокувати"
 
-#: ../plugins/security-privacy//SimPin.qml:276
+#: ../plugins/security-privacy//SimPin.qml:279
 msgid "Lock"
 msgstr "Заблокувати"
 
-#: ../plugins/security-privacy//SimPin.qml:311
+#: ../plugins/security-privacy//SimPin.qml:314
 #, qt-format
 msgid "%1"
 msgstr "%1"
 
-#: ../plugins/security-privacy//SimPin.qml:334
+#: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Змінити PIN-код…"
 
-#: ../plugins/security-privacy//SimPin.qml:351
+#: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
@@ -498,7 +508,7 @@ msgstr ""
 "до послуг стільникової мережі після перезапуску системи телефону або заміни "
 "SIM-картки."
 
-#: ../plugins/security-privacy//SimPin.qml:355
+#: ../plugins/security-privacy//SimPin.qml:358
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
 "Неможливість введення правильного PIN-коду протягом декількох спроб може "
@@ -514,8 +524,8 @@ msgid "PIN code"
 msgstr "PIN-код"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:90
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
 msgstr "Пароль"
 
@@ -526,12 +536,12 @@ msgid "Lock security"
 msgstr "Захист блокування"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:68
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Lock when idle"
 msgstr "Блокування системи у режимі бездіяльності"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:69
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Sleep when idle"
 msgstr "Присипляння у режимі бездіяльності"
 
@@ -574,38 +584,38 @@ msgstr ""
 "телефон."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:35
+#: ../plugins/security-privacy//PageComponent.qml:37
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
 msgid "Security & Privacy"
 msgstr "Захист і конфіденційність"
 
-#: ../plugins/security-privacy//PageComponent.qml:59
-#: ../plugins/security-privacy//PageComponent.qml:170
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
 msgstr "телефон та інтернет"
 
-#: ../plugins/security-privacy//PageComponent.qml:61
-#: ../plugins/security-privacy//PageComponent.qml:171
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
 msgstr "лише телефон"
 
-#: ../plugins/security-privacy//PageComponent.qml:90
+#: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
 msgstr "Заблокувати телефон"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:96
-#: ../plugins/security-privacy//PageComponent.qml:105
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
 #: ../plugins/battery//SleepValues.qml:83
 #: ../plugins/battery//SleepValues.qml:87
 #: ../plugins/battery//SleepValues.qml:91
 #: ../plugins/battery//SleepValues.qml:95
 #: ../plugins/battery//SleepValues.qml:99
 #: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
@@ -613,22 +623,24 @@ msgstr[0] "за %1 хвилину"
 msgstr[1] "за %1 хвилини"
 msgstr[2] "за %1 хвилин"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:236
 msgid "On"
 msgstr "Увімкн."
 
-#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:236
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:31
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
 msgstr "Вимкн."
 
-#: ../plugins/security-privacy//PageComponent.qml:124
+#: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
 msgstr "Шифрування"
 
-#: ../plugins/security-privacy//PageComponent.qml:133
+#: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
@@ -636,128 +648,128 @@ msgstr ""
 "Шифрування захистить дані вашого телефону від небажаного доступу під час "
 "з’єднання з комп’ютером або іншим пристроєм."
 
-#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
 msgstr "Конфіденційність"
 
-#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
 msgstr "Статистика на екрані вітання"
 
-#: ../plugins/security-privacy//PageComponent.qml:153
+#: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Messages on welcome screen"
 msgstr "Повідомлення на екрані вітання"
 
-#: ../plugins/security-privacy//PageComponent.qml:168
+#: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
 msgstr "Пошук на панелі"
 
-#: ../plugins/security-privacy//PageComponent.qml:186
+#: ../plugins/security-privacy//PageComponent.qml:234
 msgid "Location access"
 msgstr "Доступ до даних щодо місця перебування"
 
-#: ../plugins/security-privacy//PageComponent.qml:195
+#: ../plugins/security-privacy//PageComponent.qml:243
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "Доступ до інших програм"
 
-#: ../plugins/security-privacy//PageComponent.qml:200
+#: ../plugins/security-privacy//PageComponent.qml:248
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "Діагностика"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:205
+#: ../plugins/security-privacy//PageComponent.qml:253
 msgid "Sent"
 msgstr "Надіслано"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:208
+#: ../plugins/security-privacy//PageComponent.qml:256
 msgid "Not sent"
 msgstr "Не надіслано"
 
-#: ../plugins/security-privacy//LockSecurity.qml:92
-#: ../plugins/security-privacy//LockSecurity.qml:380
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
 msgstr "Змінити PIN-код…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:381
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
 msgid "Change passphrase…"
 msgstr "Змінити пароль…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:101
+#: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
 msgstr "Перемкнутися на рух пальцем"
 
-#: ../plugins/security-privacy//LockSecurity.qml:103
+#: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
 msgstr "Перемкнутися на PIN-код"
 
-#: ../plugins/security-privacy//LockSecurity.qml:105
+#: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
 msgstr "Перемкнутися на пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:114
+#: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
 msgstr "Наявний PIN-код"
 
-#: ../plugins/security-privacy//LockSecurity.qml:116
+#: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
 msgstr "Наявні паролі"
 
-#: ../plugins/security-privacy//LockSecurity.qml:170
+#: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
 msgstr "Виберіть PIN-код"
 
-#: ../plugins/security-privacy//LockSecurity.qml:172
+#: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
 msgstr "Виберіть пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:216
+#: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
 msgstr "Підтвердіть PIN-код"
 
-#: ../plugins/security-privacy//LockSecurity.qml:218
+#: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
 msgstr "Підтвердить пароль"
 
-#: ../plugins/security-privacy//LockSecurity.qml:261
+#: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
 msgstr "Ці PIN-коди не збігаються. Повторіть спробу."
 
-#: ../plugins/security-privacy//LockSecurity.qml:264
+#: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
 msgstr "Ці паролі не збігаються один з одним. Повторіть спробу."
 
-#: ../plugins/security-privacy//LockSecurity.qml:295
+#: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
 msgstr "Скасувати"
 
-#: ../plugins/security-privacy//LockSecurity.qml:340
+#: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
 msgstr "Розблокування телефону за допомогою:"
 
-#: ../plugins/security-privacy//LockSecurity.qml:344
+#: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Swipe (no security)"
 msgstr "рухом пальцем (без захисту)"
 
-#: ../plugins/security-privacy//LockSecurity.qml:345
+#: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
 msgstr "4-цифровий PIN-код"
 
-#: ../plugins/security-privacy//LockSecurity.qml:347
+#: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
 msgstr "рухом пальцем (без захисту)… "
 
-#: ../plugins/security-privacy//LockSecurity.qml:348
+#: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
 msgstr "4-цифровий PIN-код…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:349
+#: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
 msgstr "Пароль…"
 
@@ -849,7 +861,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr "Програми, яким ви на запит надали доступ до:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
 msgstr "Відеокамера"
 
@@ -959,8 +971,8 @@ msgid "Call"
 msgstr "Дзвінок"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:31
-#: ../plugins/bluetooth//PageComponent.qml:90
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
 msgstr "Телефон"
@@ -1141,8 +1153,8 @@ msgstr "Носії сигналу"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:49
 #: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281 ../plugins/about//Storage.qml:204
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287 ../plugins/about//Storage.qml:204
 #: ../plugins/cellular//Components//SingleSim.qml:62
 #: ../plugins/cellular//Components//NoSim.qml:48
 msgid "N/A"
@@ -1175,7 +1187,7 @@ msgid "Brightens and dims the display to suit the surroundings."
 msgstr "Коригує яскравість дисплея відповідно до зовнішнього освітлення."
 
 #: ../plugins/brightness//BrightnessSlider.qml:51
-#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/battery//PageComponent.qml:296
 msgid "Display brightness"
 msgstr "Яскравість дисплея"
 
@@ -1198,146 +1210,146 @@ msgstr "Пов’язування"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:144
-#: ../plugins/battery//PageComponent.qml:357
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/battery//PageComponent.qml:363
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../plugins/bluetooth//PageComponent.qml:79
+#: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
 msgstr "З'єднано"
 
-#: ../plugins/bluetooth//PageComponent.qml:80
+#: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
 msgstr "З’єднуємося…"
 
-#: ../plugins/bluetooth//PageComponent.qml:81
+#: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
 msgstr "Від’єднуємося…"
 
-#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
 msgstr "Від’єднано"
 
-#: ../plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: ../plugins/bluetooth//PageComponent.qml:89
+#: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
 msgstr "Комп’ютер"
 
-#: ../plugins/bluetooth//PageComponent.qml:91
+#: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Modem"
 msgstr "Модем"
 
-#: ../plugins/bluetooth//PageComponent.qml:92 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
 msgid "Network"
 msgstr "Мережа"
 
-#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Headset"
 msgstr "Гарнітура"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Headphones"
 msgstr "Навушники"
 
-#: ../plugins/bluetooth//PageComponent.qml:95
+#: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Video"
 msgstr "Відео"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Other Audio"
 msgstr "Інший звуковий пристрій"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Joypad"
 msgstr "Ігровий пульт"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Keyboard"
 msgstr "Клавіатура"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Tablet"
 msgstr "Планшет"
 
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Mouse"
 msgstr "Миша"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:104
 msgid "Printer"
 msgstr "Принтер"
 
-#: ../plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:106
 msgid "Other"
 msgstr "Інше"
 
-#: ../plugins/bluetooth//PageComponent.qml:109
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Excellent"
 msgstr "Відмінне"
 
-#: ../plugins/bluetooth//PageComponent.qml:110
+#: ../plugins/bluetooth//PageComponent.qml:113
 msgid "Good"
 msgstr "Добре"
 
-#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
 msgstr "Достатнє"
 
-#: ../plugins/bluetooth//PageComponent.qml:112
+#: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
 msgstr "Погане"
 
-#: ../plugins/bluetooth//PageComponent.qml:179
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Discoverable"
 msgstr "Можна виявити"
 
-#: ../plugins/bluetooth//PageComponent.qml:179
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Not discoverable"
 msgstr "Не можна виявити"
 
-#: ../plugins/bluetooth//PageComponent.qml:210
+#: ../plugins/bluetooth//PageComponent.qml:213
 msgid "Connected devices:"
 msgstr "З’єднані пристрої:"
 
-#: ../plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect another device:"
 msgstr "З’єднатися з іншим пристроєм:"
 
-#: ../plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
 msgstr "З’єднати пристрій:"
 
-#: ../plugins/bluetooth//PageComponent.qml:280
+#: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
 msgstr "Не виявлено жодної"
 
-#: ../plugins/bluetooth//PageComponent.qml:288
-#: ../plugins/bluetooth//PageComponent.qml:391
+#: ../plugins/bluetooth//PageComponent.qml:291
+#: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
 msgstr "З’єднуватися автоматично, якщо виявлено:"
 
-#: ../plugins/bluetooth//PageComponent.qml:358
+#: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
 msgstr "Тип"
 
-#: ../plugins/bluetooth//PageComponent.qml:382
+#: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
 msgstr "Стан"
 
-#: ../plugins/bluetooth//PageComponent.qml:386
+#: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
 msgstr "Потужність сигналу"
 
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Disconnect"
 msgstr "Від'єднатися"
 
-#: ../plugins/bluetooth//PageComponent.qml:423
+#: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Забути про цей пристрій"
 
@@ -1428,35 +1440,35 @@ msgstr "Востаннє повністю заряджено"
 msgid "Fully charged"
 msgstr "Повністю заряджено"
 
-#: ../plugins/battery//PageComponent.qml:120
+#: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
 msgstr "Рівень заряду"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:128
+#: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery//PageComponent.qml:206
-#: ../plugins/battery//PageComponent.qml:208
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
 msgstr "Вчора"
 
-#: ../plugins/battery//PageComponent.qml:214
-#: ../plugins/battery//PageComponent.qml:216
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
 msgstr "Сьогодні"
 
-#: ../plugins/battery//PageComponent.qml:286
+#: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
 msgstr "Джерела заощадження енергії:"
 
-#: ../plugins/battery//PageComponent.qml:388
+#: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery//PageComponent.qml:406
+#: ../plugins/battery//PageComponent.qml:412
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Точне визначення місця перебування потребує даних GPS і/або Wi-Fi."
 
@@ -1474,11 +1486,11 @@ msgstr "Перегляд"
 msgid "Background"
 msgstr "Тло"
 
-#: ../plugins/background//MainPage.qml:112
+#: ../plugins/background//MainPage.qml:107
 msgid "Ubuntu Art"
 msgstr "Ubuntu Art"
 
-#: ../plugins/background//MainPage.qml:128
+#: ../plugins/background//MainPage.qml:123
 msgid "Custom"
 msgstr "Нетипове"
 
@@ -1667,26 +1679,26 @@ msgid "OK"
 msgstr "Гаразд"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:33
-#: ../plugins/cellular//Components//CellularMultiSim.qml:76
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
 msgstr "Дані стільникового зв’язку:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:38
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
 msgstr "лише 2G (економити енергію)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:39
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
 msgstr "2G/3G/4G (швидше)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:155
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
 msgstr "Роумінґ даних"
 
@@ -1755,18 +1767,18 @@ msgstr "Система"
 msgid "Connect to Wi-Fi"
 msgstr "З’єднатися з Wi-Fi"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
+#: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
 msgstr "Доступні мережі"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152
-#: ../wizard/qml/Pages//40-reporting.qml:46
-#: ../wizard/qml/Pages//30-location.qml:67
-#: ../wizard/qml/Pages//15-passwd.qml:159
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//30-location.qml:66
+#: ../wizard/qml/Pages//15-passwd.qml:170
 msgid "Continue"
 msgstr "Продовжити"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:64
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
 msgstr "Пропустити"
 
@@ -1810,7 +1822,7 @@ msgstr "Чудова робота!"
 msgid "Your phone is now ready to use."
 msgstr "Тепер вашим телефоном можна користуватися."
 
-#: ../wizard/qml/Pages//80-finished.qml:46
+#: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
 msgstr "Завершити"
 
@@ -1840,11 +1852,11 @@ msgstr ""
 "Мною прочитано <a href='terms.qml'>умови надання послуг</a> Ubuntu. Я "
 "погоджуюся з ними."
 
-#: ../wizard/qml/Pages//15-passwd.qml:37
+#: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
 msgstr "Захист блокуванням"
 
-#: ../wizard/qml/Pages//15-passwd.qml:86
+#: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
 msgstr "Рух пальцем"
 
@@ -1852,7 +1864,7 @@ msgstr "Рух пальцем"
 msgid "Those PIN codes don't match."
 msgstr "Ці PIN-коди не збігаються."
 
-#: ../wizard/qml/Pages//15-passwd.qml:138
+#: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
 msgstr "Паролі не збігаються."
 
@@ -1860,11 +1872,11 @@ msgstr "Паролі не збігаються."
 msgid "PIN code must be at least four digits long."
 msgstr "PIN-код має складатися з принаймні чотирьох цифр."
 
-#: ../wizard/qml/Pages//15-passwd.qml:148
+#: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
 msgstr "Пароль має складатися принаймні з чотирьох символів."
 
-#: ../wizard/qml/Components//Page.qml:50
+#: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "Назад"
 
@@ -2166,27 +2178,27 @@ msgid "Can't pause current request (can't contact service)"
 msgstr ""
 "Не вдалося призупити поточний запит (не вдалося з’єднатися зі службою)"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:292
+#: ../plugins/security-privacy//securityprivacy.cpp:301
 msgid "Incorrect PIN code. Try again."
 msgstr "Помилковий PIN-код. Повторіть спробу."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:253
+#: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
 msgstr "Помилковий пароль. Повторіть спробу."
 
-#: ../plugins/security-privacy//securityprivacy.cpp:256
+#: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
 msgstr "Не вдалося встановити режим захисту"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:281
+#: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
 msgstr "Не вдалося встановити підказку щодо захисту"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:294
+#: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
 msgstr "Помилка маніпуляції лексемою розпізнавання"
 
-#: ../plugins/about//click.cpp:133
+#: ../plugins/about//click.cpp:134
 msgid "Unknown title"
 msgstr "Невідомий заголовок"
 
@@ -2281,3 +2293,7 @@ msgstr "Натисніть, щоб відкрити засіб оновленн�
 #~ msgstr ""
 #~ "Мені відомі <a href='terms.qml'>умови надання послуг</a> Ubuntu. Я "
 #~ "погоджуюся з ними."
+
+#, qt-format
+#~ msgid "%1 attempts remaining"
+#~ msgstr "Лишилося %1 спроб"

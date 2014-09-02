@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-29 08:21+0200\n"
-"PO-Revision-Date: 2014-08-21 03:38+0000\n"
+"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"PO-Revision-Date: 2014-09-02 07:09+0000\n"
 "Last-Translator: Sok Sophea <sksophea@gmail.com>\n"
 "Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-31 07:27+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:17+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -25,7 +25,7 @@ msgstr "បណ្ដាញ​ពី​មុន"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
-#: ../plugins/battery//PageComponent.qml:327
+#: ../plugins/battery//PageComponent.qml:333
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
 msgid "Wi-Fi"
 msgstr "វ៉ាយហ្វាយ"
@@ -39,15 +39,15 @@ msgid "Network name"
 msgstr "ឈ្មោះ​បណ្ដាញ"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
-#: ../plugins/security-privacy//PageComponent.qml:85
+#: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
 msgstr "សន្តិសុខ"
 
 #: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PhoneLocking.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:113
-#: ../plugins/bluetooth//PageComponent.qml:320
-#: ../plugins/bluetooth//PageComponent.qml:341
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr "គ្មាន"
 
@@ -69,7 +69,9 @@ msgstr "ពាក្យ​សម្ងាត់មើលឃើញ"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//LockSecurity.qml:279
+#: ../plugins/security-privacy//SimPin.qml:146
+#: ../plugins/security-privacy//SimPin.qml:263
+#: ../plugins/security-privacy//LockSecurity.qml:283
 #: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//ResetAllSettings.qml:38
 #: ../plugins/reset//EraseEverything.qml:54
@@ -86,7 +88,7 @@ msgid "Cancel"
 msgstr "បោះ​បង់"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "តភ្ជាប់"
 
@@ -95,7 +97,7 @@ msgid "Network details"
 msgstr "ព័ត៌មាន​លម្អិត​បណ្ដាញ"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:340
+#: ../plugins/bluetooth//PageComponent.qml:343
 msgid "Name"
 msgstr "ឈ្មោះ"
 
@@ -104,14 +106,14 @@ msgid "Last connected"
 msgstr "បា​ន​តភ្ជាប់​ចុងក្រោយ"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:519
+#: ../plugins/system-update//PageComponent.qml:521
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:99
+#: ../plugins/security-privacy//PageComponent.qml:140
 #: ../plugins/battery//SleepValues.qml:106
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
 #: ../plugins/about//PageComponent.qml:149
 msgid "Never"
 msgstr "កុំ"
@@ -161,7 +163,7 @@ msgid "Year"
 msgstr "ឆ្នាំ"
 
 #: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:300
+#: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/phone//CallForwarding.qml:152
 #: ../plugins/background//Preview.qml:104
 msgid "Set"
@@ -189,7 +191,7 @@ msgstr "ស្វ័យប្រវត្តិ"
 
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:108
+#: ../plugins/security-privacy//PageComponent.qml:149
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
 msgstr "ដោយដៃ"
@@ -249,90 +251,88 @@ msgstr "កំពុង​ពិនិត្យមើល​បច្ចុប្
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ដំឡើង​បច្ចុប្បន្នភាព %1…"
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ដំឡើង​បច្ចុប្បន្នភាព %1"
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
 msgstr "ផ្អាក​ទាំងអស់"
 
-#: ../plugins/system-update//PageComponent.qml:269
+#: ../plugins/system-update//PageComponent.qml:270
 msgid "Retry"
 msgstr "ព្យាយាម​ម្តង​ទៀត"
 
-#: ../plugins/system-update//PageComponent.qml:285
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Download"
 msgstr "ទាញយក"
 
-#: ../plugins/system-update//PageComponent.qml:285
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Update"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Resume"
 msgstr "បន្ត"
 
-#: ../plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:288
 msgid "Pause"
 msgstr "ផ្អាក"
 
-#: ../plugins/system-update//PageComponent.qml:346
+#: ../plugins/system-update//PageComponent.qml:347
 msgid "Installing"
 msgstr "ដំឡើង"
 
-#: ../plugins/system-update//PageComponent.qml:379
+#: ../plugins/system-update//PageComponent.qml:380
 msgid "Installed"
 msgstr "បាន​ដំឡើង"
 
-#: ../plugins/system-update//PageComponent.qml:403
+#: ../plugins/system-update//PageComponent.qml:405
 msgid "Version: "
 msgstr "កំណែ៖ "
 
-#: ../plugins/system-update//PageComponent.qml:425
+#: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "ចូល Ubuntu One ដើម្បី​ទទួល​បាន​បច្ចុប្បន្នភាព​សម្រាប់​កម្មវិធី។"
 
-#: ../plugins/system-update//PageComponent.qml:434
+#: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
-msgstr ""
+msgstr "ចូល..."
 
-#: ../plugins/system-update//PageComponent.qml:501
+#: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
 msgstr "កំពុង​ដំឡើង​បច្ចុប្បន្នភាព…"
 
-#: ../plugins/system-update//PageComponent.qml:516
+#: ../plugins/system-update//PageComponent.qml:518
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr "ទាញយក​ស្វ័យ​ប្រវត្តិ"
 
-#: ../plugins/system-update//PageComponent.qml:521
+#: ../plugins/system-update//PageComponent.qml:523
 msgid "On wi-fi"
 msgstr "បើក​វ៉ាយហ្វាយ"
 
-#: ../plugins/system-update//PageComponent.qml:523
+#: ../plugins/system-update//PageComponent.qml:525
 msgid "Always"
 msgstr "ជានិច្ច"
 
-#: ../plugins/system-update//PageComponent.qml:538
+#: ../plugins/system-update//PageComponent.qml:540
 msgid " bytes"
 msgstr " បៃ"
 
-#: ../plugins/system-update//PageComponent.qml:541
+#: ../plugins/system-update//PageComponent.qml:543
 msgid " KiB"
 msgstr " គីឡូបៃ"
 
-#: ../plugins/system-update//PageComponent.qml:544
+#: ../plugins/system-update//PageComponent.qml:546
 msgid " MiB"
 msgstr " មេកាបៃ"
 
-#: ../plugins/system-update//PageComponent.qml:547
+#: ../plugins/system-update//PageComponent.qml:549
 msgid " GiB"
 msgstr " ជីកាបៃ"
 
@@ -388,111 +388,123 @@ msgid "Vibrate when ringing"
 msgstr "ញ័រ​ពេលរោទ៍"
 
 #: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
+#: ../plugins/sound//PageComponent.qml:187
 msgid "Vibrate in Silent Mode"
 msgstr "ញ័រ​ក្នុង​របៀប​ស្ងាត់"
 
-#: ../plugins/sound//PageComponent.qml:147
+#: ../plugins/sound//PageComponent.qml:152
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr "សំឡេង​បន្ទះ​លេខ"
+
+#: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
 msgstr "សារ៖"
 
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:160
+#: ../plugins/sound//PageComponent.qml:166
 msgid "Message received"
 msgstr "បាន​ទទួល​សារ"
 
-#: ../plugins/sound//PageComponent.qml:169
+#: ../plugins/sound//PageComponent.qml:178
 msgid "Vibrate with message sound"
 msgstr "ញ័រ​ដោយ​សំឡេង​សារ"
 
-#: ../plugins/sound//PageComponent.qml:182
+#: ../plugins/sound//PageComponent.qml:191
 msgid "Other sounds:"
 msgstr "សំឡេង​ផ្សេងៗ៖"
 
-#: ../plugins/sound//PageComponent.qml:186
+#: ../plugins/sound//PageComponent.qml:195
 #: ../plugins/language//PageComponent.qml:185
 msgid "Keyboard sound"
 msgstr "សំឡេង​ក្ដារ​ចុច"
 
-#: ../plugins/sound//PageComponent.qml:200
+#: ../plugins/sound//PageComponent.qml:209
 msgid "Lock sound"
 msgstr "សំឡេង​ចាក់សោ"
 
-#: ../plugins/security-privacy//PageComponent.qml:116
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:319
+#: ../plugins/security-privacy//PageComponent.qml:158
 msgid "SIM PIN"
 msgstr "លេខ​កូដ PIN ស៊ីម"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "ប្ដូរ​លេខ​កូដ PIN ស៊ីម"
 
 #: ../plugins/security-privacy//SimPin.qml:47
-#: ../plugins/security-privacy//SimPin.qml:183
+#: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "លេខ​កូដ PIN មិន​ត្រឹមត្រូវ។ នៅសល់​ការ​ព្យាយាម %1 ។"
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr ""
+msgstr "លេខ​កូដ PIN បច្ចុប្បន្ន៖"
 
 #: ../plugins/security-privacy//SimPin.qml:91
-#: ../plugins/security-privacy//SimPin.qml:241
+#: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
-msgid "%1 attempts remaining"
-msgstr ""
+msgid "%1 attempts allowed."
+msgstr "បាន​ឲ្យ​ព្យាយាម %1 ដង។"
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "ជ្រើស​កូដ PIN ថ្មី៖"
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "បញ្ជាក់​លេខ​កូដ PIN ថ្មី៖"
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "លេខ​កូដ PIN មិន​ផ្គូផ្គង។ ព្យាយាម​ម្ដងទៀត។"
 
-#: ../plugins/security-privacy//LockSecurity.qml:298
+#: ../plugins/security-privacy//SimPin.qml:154
+#: ../plugins/security-privacy//LockSecurity.qml:302
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
 msgstr "ប្ដូរ"
 
-#: ../plugins/security-privacy//SimPin.qml:179
-msgid "Enter SIM PIN"
-msgstr ""
-
 #: ../plugins/security-privacy//SimPin.qml:180
+msgid "Enter SIM PIN"
+msgstr "បញ្ចូល​លេខ​កូដ PIN ស៊ីម"
+
+#: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "បញ្ចូល​លេខ​កូដ PIN ស៊ីម​ពីមុន"
 
-#: ../plugins/security-privacy//SimPin.qml:276
+#: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
-msgstr ""
+msgstr "ដោះ​សោ"
 
-#: ../plugins/security-privacy//SimPin.qml:276
+#: ../plugins/security-privacy//SimPin.qml:279
 msgid "Lock"
-msgstr ""
+msgstr "ចាក់សោ"
 
-#: ../plugins/security-privacy//SimPin.qml:311
+#: ../plugins/security-privacy//SimPin.qml:314
 #, qt-format
 msgid "%1"
-msgstr ""
+msgstr "%1"
 
-#: ../plugins/security-privacy//SimPin.qml:334
+#: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
-msgstr ""
+msgstr "ប្ដូរ​លេខ​កូដ PIN…"
 
-#: ../plugins/security-privacy//SimPin.qml:351
+#: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"ពេល​កំណត់​លេខ​កូដ PIN ស៊ីម, "
+"វា​ត្រូវតែ​បាន​បញ្ចូល​ដើម្បី​ដំណើរការ​សេវា​ចល័ត​បន្ទាប់ពី​ចាប់ផ្ដើម​ទូរស័ព្ទ​"
+"ឡើងវិញ ឬ​ពេល​ប្ដូរ​ស៊ីម។"
 
-#: ../plugins/security-privacy//SimPin.qml:355
+#: ../plugins/security-privacy//SimPin.qml:358
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
+"ការ​បញ្ចូល​លេខ​កូដ PIN ខុស​ជា​បន្ត​បន្ទាប់ អាច​នឹង​ចាក់សោ​ស៊ីម​ជា​រៀង​រហូត"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -501,11 +513,11 @@ msgstr "ការ​ចាក់សោ​ទូរស័ព្ទ"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
-msgstr ""
+msgstr "លេខ​កូដ PIN"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:90
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
 msgstr "ឃ្លាសម្ងាត់"
 
@@ -516,12 +528,12 @@ msgid "Lock security"
 msgstr "ចាក់សោ​សុវត្ថិភាព"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:68
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Lock when idle"
 msgstr "ចាក់​សោ​ពេល​នៅទំនេរ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:69
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Sleep when idle"
 msgstr "ដេក​ពេល​នៅទំនេរ"
 
@@ -539,205 +551,211 @@ msgstr "ចាក់​សោ​ដេក​ភ្លាម​ៗ"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "ពេល​បាន​ចាក់សោ, អនុញ្ញាត៖"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "កម្មវិធី​ចាប់ផ្ដើម"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "ការ​ជូនដំណឹង និង​ការ​កំណត់​រហ័ស"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
+"បើក​សុវត្ថិភាព​ចាក់សោ​ដើម្បី​ដាក់​កម្រិត​ការ​ចូល​ប្រើ "
+"ពេល​បាន​ចាក់សោ​ទូរស័ព្ទ។"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
+msgstr "មុខងារ និង​កម្មវិធី​ផ្សេង​នឹង​ប្រាប់​អ្នក​ឲ្យ​ដោះ​សោ។"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:35
+#: ../plugins/security-privacy//PageComponent.qml:37
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
 msgid "Security & Privacy"
 msgstr "សុវត្ថិភាព និង​​ភាព​ឯកជន"
 
-#: ../plugins/security-privacy//PageComponent.qml:59
-#: ../plugins/security-privacy//PageComponent.qml:170
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
 msgstr "ទូរស័ព្ទ និងអ៊ីនធឺណិត"
 
-#: ../plugins/security-privacy//PageComponent.qml:61
-#: ../plugins/security-privacy//PageComponent.qml:171
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
 msgstr "តែ​ទូរស័ព្ទ"
 
-#: ../plugins/security-privacy//PageComponent.qml:90
+#: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
-msgstr ""
+msgstr "ចាក់សោ​ទូរស័ព្ទ"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:96
-#: ../plugins/security-privacy//PageComponent.qml:105
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
 #: ../plugins/battery//SleepValues.qml:83
 #: ../plugins/battery//SleepValues.qml:87
 #: ../plugins/battery//SleepValues.qml:91
 #: ../plugins/battery//SleepValues.qml:95
 #: ../plugins/battery//SleepValues.qml:99
 #: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
 msgstr[0] "បន្ទាប់​ពី %1 នាទី"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:236
 msgid "On"
-msgstr ""
+msgstr "បើក"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:236
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:31
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
-msgstr ""
+msgstr "បិទ"
 
-#: ../plugins/security-privacy//PageComponent.qml:124
+#: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
-msgstr ""
+msgstr "ការ​ដាក់​លេខ​កូដ"
 
-#: ../plugins/security-privacy//PageComponent.qml:133
+#: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
+"ការ​ដាក់​លេខ​កូដ​គឺ​ការពារ​ពី​ការ​ចូល​ប្រើ​ទិន្នន័យ​ទូរស័ព្ទ "
+"ពេល​បាន​តភ្ជាប់​ទៅ PC ឬ​ឧបករណ៍​ផ្សេង។"
 
-#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
-msgstr ""
+msgstr "ភាព​ឯកជន"
 
-#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
 msgstr "ស្ថានភាព​លើ​អេក្រង់​ស្វាគមន៍"
 
-#: ../plugins/security-privacy//PageComponent.qml:153
+#: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Messages on welcome screen"
 msgstr "សារ​លើអេក្រង់​ស្វាគមន៍"
 
-#: ../plugins/security-privacy//PageComponent.qml:168
+#: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
 msgstr "ស្វែងរក"
 
-#: ../plugins/security-privacy//PageComponent.qml:186
+#: ../plugins/security-privacy//PageComponent.qml:234
 msgid "Location access"
 msgstr "ចូល​ដំណើរការ​ទីតាំង"
 
-#: ../plugins/security-privacy//PageComponent.qml:195
+#: ../plugins/security-privacy//PageComponent.qml:243
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "ចូល​ដំណើរការ​កម្មវិធី​ផ្សេង"
 
-#: ../plugins/security-privacy//PageComponent.qml:200
+#: ../plugins/security-privacy//PageComponent.qml:248
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "ការ​ពិនិត្យ​មើល"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:205
+#: ../plugins/security-privacy//PageComponent.qml:253
 msgid "Sent"
 msgstr "បានផ្ញើ"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:208
+#: ../plugins/security-privacy//PageComponent.qml:256
 msgid "Not sent"
 msgstr "មិន​បាន​ផ្ញើ"
 
-#: ../plugins/security-privacy//LockSecurity.qml:92
-#: ../plugins/security-privacy//LockSecurity.qml:380
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "ប្ដូរ​លេខ​កូដ PIN…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:381
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
 msgid "Change passphrase…"
 msgstr "ប្ដូរ​ឃ្លា​សម្ងាត់..."
 
-#: ../plugins/security-privacy//LockSecurity.qml:101
+#: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
 msgstr "ប្ដូរ​ដើម្បី​ត្រូវ​អូស"
 
-#: ../plugins/security-privacy//LockSecurity.qml:103
+#: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "ប្ដូរ​ទៅ​លេខ​កូដ PIN"
 
-#: ../plugins/security-privacy//LockSecurity.qml:105
+#: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
 msgstr "ប្ដូរ​ទៅ​ឃ្លា​សម្ងាត់"
 
-#: ../plugins/security-privacy//LockSecurity.qml:114
+#: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "បញ្ចប់​លេខ​កូដ PIN"
 
-#: ../plugins/security-privacy//LockSecurity.qml:116
+#: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
 msgstr "ឃ្លា​សម្ងាត់​ដែល​មាន​ស្រាប់"
 
-#: ../plugins/security-privacy//LockSecurity.qml:170
+#: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "ជ្រើស​លេខ​កូដ PIN"
 
-#: ../plugins/security-privacy//LockSecurity.qml:172
+#: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
 msgstr "ជ្រើស​ពាក្យ​សម្ងាត់"
 
-#: ../plugins/security-privacy//LockSecurity.qml:216
+#: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "បញ្ជាក់​លេខ​កូដ PIN"
 
-#: ../plugins/security-privacy//LockSecurity.qml:218
+#: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
 msgstr "បញ្ជាក់​ឃ្លា​សម្ងាត់"
 
-#: ../plugins/security-privacy//LockSecurity.qml:261
+#: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "លេខ​កូដ PIN ទាំងនោះ​មិន​ផ្គូផ្គង។ ព្យាយាម​ម្ដងទៀត។"
 
-#: ../plugins/security-privacy//LockSecurity.qml:264
+#: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
 msgstr "ពាក្យ​សម្ងាត់​ទាំង​នោះ​មិន​ដូច​គ្នា។ ព្យាយាម​ម្ដងទៀត។"
 
-#: ../plugins/security-privacy//LockSecurity.qml:295
+#: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
 msgstr "មិន​កំណត់"
 
-#: ../plugins/security-privacy//LockSecurity.qml:340
+#: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
 msgstr "ដោះ​សោ​ទូរស័ព្ទ​ដោយ​ប្រើ៖"
 
-#: ../plugins/security-privacy//LockSecurity.qml:344
+#: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Swipe (no security)"
 msgstr "អូស (គ្មាន​សុវត្ថិភាព)"
 
-#: ../plugins/security-privacy//LockSecurity.qml:345
+#: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "លេខ​កូដ PIN ៤តួ"
 
-#: ../plugins/security-privacy//LockSecurity.qml:347
+#: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
 msgstr "អូស (គ្មាន​សុវត្ថិភាព)… "
 
-#: ../plugins/security-privacy//LockSecurity.qml:348
+#: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "លេខ​កូដ PIN ៤ ខ្ទង់…"
 
-#: ../plugins/security-privacy//LockSecurity.qml:349
+#: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
 msgstr "ឃ្លា​សម្ងាត់..."
 
@@ -821,7 +839,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr "កម្មវិធី​ដែល​អ្នក​បាន​ផ្ដល់​សិទ្ធិ និង​បាន​ស្នើ​ចូល​ប្រើ៖"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:102
+#: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
 msgstr "ម៉ាស៊ីន​ថ​ត"
 
@@ -931,8 +949,8 @@ msgid "Call"
 msgstr "ហៅ"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:31
-#: ../plugins/bluetooth//PageComponent.qml:90
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
 msgstr "ទូរស័ព្ទ"
@@ -940,7 +958,7 @@ msgstr "ទូរស័ព្ទ"
 #: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
 #: ../plugins/phone//MultiSim.qml:94
 msgid "Services"
-msgstr ""
+msgstr "សេវា"
 
 #: ../plugins/phone//CallWaiting.qml:89
 msgid ""
@@ -1113,8 +1131,8 @@ msgstr "ក្រុមហ៊ុន​បញ្ជូន"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:49
 #: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281 ../plugins/about//Storage.qml:204
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287 ../plugins/about//Storage.qml:204
 #: ../plugins/cellular//Components//SingleSim.qml:62
 #: ../plugins/cellular//Components//NoSim.qml:48
 msgid "N/A"
@@ -1147,7 +1165,7 @@ msgid "Brightens and dims the display to suit the surroundings."
 msgstr "ធ្វើឲ្យ​ការ​បង្ហាញ​ភ្លឺ ឬ​ស្រអាប់​ស្របតាម​វត្ថុ​ជុំវិញ។"
 
 #: ../plugins/brightness//BrightnessSlider.qml:51
-#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/battery//PageComponent.qml:296
 msgid "Display brightness"
 msgstr "ពន្លឺ​បង្ហាញ"
 
@@ -1170,146 +1188,146 @@ msgstr "ផ្គូផ្គង"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:144
-#: ../plugins/battery//PageComponent.qml:357
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/battery//PageComponent.qml:363
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
 msgstr "ប៊្លូធូស"
 
-#: ../plugins/bluetooth//PageComponent.qml:79
+#: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
 msgstr "បាន​តភ្ជាប់"
 
-#: ../plugins/bluetooth//PageComponent.qml:80
+#: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
 msgstr "កំពុង​តភ្ជាប់..."
 
-#: ../plugins/bluetooth//PageComponent.qml:81
+#: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
 msgstr "កំពុង​ផ្ដាច់..."
 
-#: ../plugins/bluetooth//PageComponent.qml:82
+#: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
 msgstr "បាន​ផ្ដាច់"
 
-#: ../plugins/bluetooth//PageComponent.qml:83
+#: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
 msgstr "មិន​ស្គាល់"
 
-#: ../plugins/bluetooth//PageComponent.qml:89
+#: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
 msgstr "កុំព្យូទ័រ"
 
-#: ../plugins/bluetooth//PageComponent.qml:91
+#: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Modem"
 msgstr "ម៉ូដឹម"
 
-#: ../plugins/bluetooth//PageComponent.qml:92 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
 msgid "Network"
 msgstr "បណ្តាញ"
 
-#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Headset"
 msgstr "កាស"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Headphones"
 msgstr "កាស"
 
-#: ../plugins/bluetooth//PageComponent.qml:95
+#: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Video"
 msgstr "វីដេអូ"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Other Audio"
 msgstr "អូឌីយ៉ូ​ផ្សេង"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Joypad"
 msgstr "Joypad"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Keyboard"
 msgstr "ក្ដារចុច"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Tablet"
 msgstr "កុំព្យូទ័រ​បន្ទះ"
 
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Mouse"
 msgstr "កណ្ដុរ"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:104
 msgid "Printer"
 msgstr "ម៉ាស៊ីន​បោះពុម្ព"
 
-#: ../plugins/bluetooth//PageComponent.qml:103
+#: ../plugins/bluetooth//PageComponent.qml:106
 msgid "Other"
 msgstr "ផ្សេងៗ"
 
-#: ../plugins/bluetooth//PageComponent.qml:109
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Excellent"
 msgstr "ល្អ​ណាស់"
 
-#: ../plugins/bluetooth//PageComponent.qml:110
+#: ../plugins/bluetooth//PageComponent.qml:113
 msgid "Good"
 msgstr "ល្អ"
 
-#: ../plugins/bluetooth//PageComponent.qml:111
+#: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
 msgstr "មធ្យម"
 
-#: ../plugins/bluetooth//PageComponent.qml:112
+#: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
 msgstr "ខ្សោយ"
 
-#: ../plugins/bluetooth//PageComponent.qml:179
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Discoverable"
 msgstr "អាច​រកឃើញ"
 
-#: ../plugins/bluetooth//PageComponent.qml:179
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Not discoverable"
 msgstr "មិន​អាច​រក​ឃើញ"
 
-#: ../plugins/bluetooth//PageComponent.qml:210
+#: ../plugins/bluetooth//PageComponent.qml:213
 msgid "Connected devices:"
 msgstr "ឧបករណ៍​បាន​ភ្ជាប់៖"
 
-#: ../plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect another device:"
 msgstr "ភ្ជាប់​ឧបករណ៍​ផ្សេង៖"
 
-#: ../plugins/bluetooth//PageComponent.qml:247
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
 msgstr "តភ្ជាប់​ឧបករណ៍៖"
 
-#: ../plugins/bluetooth//PageComponent.qml:280
+#: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
 msgstr "រក​មិន​ឃើញ"
 
-#: ../plugins/bluetooth//PageComponent.qml:288
-#: ../plugins/bluetooth//PageComponent.qml:391
+#: ../plugins/bluetooth//PageComponent.qml:291
+#: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
 msgstr "តភ្ជាប់​ដោយ​ស្វ័យប្រវត្តិ​ពេល​រក​ឃើញ៖"
 
-#: ../plugins/bluetooth//PageComponent.qml:358
+#: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
 msgstr "ប្រភេទ"
 
-#: ../plugins/bluetooth//PageComponent.qml:382
+#: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
 msgstr "ស្ថានភាព"
 
-#: ../plugins/bluetooth//PageComponent.qml:386
+#: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
 msgstr "កម្លាំង​​សញ្ញា"
 
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Disconnect"
 msgstr "ផ្តាច់"
 
-#: ../plugins/bluetooth//PageComponent.qml:423
+#: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "បំភ្លេច​ឧបករណ៍​នេះ"
 
@@ -1390,35 +1408,35 @@ msgstr "បញ្ចូល​ថ្ម​​ពេញ​ចុងក្រោយ
 msgid "Fully charged"
 msgstr "បាន​បញ្ចូល​ថ្ម​ពេល"
 
-#: ../plugins/battery//PageComponent.qml:120
+#: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
 msgstr "កម្រិត​បញ្ចូល​ថ្ម"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:128
+#: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery//PageComponent.qml:206
-#: ../plugins/battery//PageComponent.qml:208
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
 msgstr "ម្សិលមិញ"
 
-#: ../plugins/battery//PageComponent.qml:214
-#: ../plugins/battery//PageComponent.qml:216
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
 msgstr "ថ្ងៃនេះ"
 
-#: ../plugins/battery//PageComponent.qml:286
+#: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
 msgstr "វិធី​កាត់បន្ថយ​កា​រ​ប្រើ​ថ្មី៖"
 
-#: ../plugins/battery//PageComponent.qml:388
+#: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
 msgstr "ជីភីអេស"
 
-#: ../plugins/battery//PageComponent.qml:406
+#: ../plugins/battery//PageComponent.qml:412
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "រក​ឃើញ​ទីតាំង​ត្រឹមត្រូវ​ទាមទារ​ជីភីអេស និង/ឬ​វ៉ាយហ្វាយ។"
 
@@ -1436,11 +1454,11 @@ msgstr "មើល​ជា​មុន"
 msgid "Background"
 msgstr "ផ្ទៃ​ខាង​ក្រោយ"
 
-#: ../plugins/background//MainPage.qml:112
+#: ../plugins/background//MainPage.qml:107
 msgid "Ubuntu Art"
 msgstr "សិល្បៈ Ubuntu"
 
-#: ../plugins/background//MainPage.qml:128
+#: ../plugins/background//MainPage.qml:123
 msgid "Custom"
 msgstr "ផ្ទាល់ខ្លួន"
 
@@ -1577,26 +1595,27 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
+"អ្នក​ត្រូវ​កំណត់​លេខ​កូដ PIN ឬ ឃ្លា​សម្ងាត់​ដើម្បី​ប្រើ​របៀប​អ្នក​អភិវឌ្ឍន៍។"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "គោលនយោបាយ​ភាព​ឯកជន"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "រាយការណ៍​ទៅ Canonical ៖"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "កំហុស និង​ការ​គាំង​កម្មវិធី"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
-msgstr ""
+msgstr "របាយការណ៍​កំហុស​ពីមុន"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
-msgstr ""
+msgstr "រួមបញ្ចូល​ព័ត៌មាន​ដែល​កម្មវិធី​កំពុង​ដំណើរការ​ពេល​វា​គាំង។"
 
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//MultiSim.qml:42
@@ -1612,7 +1631,7 @@ msgstr "ស្ថិតិ​ប្រើ​ទិន្នន័យ"
 #: ../plugins/cellular//Components//SingleSim.qml:66
 #: ../plugins/cellular//Components//NoSim.qml:47
 msgid "Carrier"
-msgstr ""
+msgstr "ក្រុមហ៊ុន​បញ្ជូន"
 
 #: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
@@ -1620,77 +1639,78 @@ msgstr "APN"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "កែ​ឈ្មោះ​ស៊ីម"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "យល់ព្រម"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:33
-#: ../plugins/cellular//Components//CellularMultiSim.qml:76
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
-msgstr ""
+msgstr "ទិន្នន័យ​ចល័ត៖"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:38
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "2G ប៉ុណ្ណោះ (សន្សំ​ថ្ម)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:39
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (លឿន​ជាង)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:155
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr ""
+msgstr "ទិន្នន័យ​រ៉ូមីង"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
-msgstr ""
+msgstr "សួរ​ខ្ញុំ​រាល់​ពេល"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "សម្រាប់​ការ​ហៅ​ចេញ, ប្រើ៖"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
+"អ្នក​អាច​ប្ដូរ​ស៊ីម​សម្រាប់​ការ​ហៅ​ដាច់​ដោយឡែក "
+"ឬ​សម្រាប់​ទំនាក់ទំនង​នៅ​ក្នុង​សៀវភៅ​អាសយដ្ឋាន។"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr ""
+msgstr "សម្រាប់​ការ​ផ្ញើ​សារ, ប្រើ៖"
 
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (លឿន​ជាង)"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "មិន​បាន​ជ្រើស​រូបភាព"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "លុប​រូបភាព %1"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "បន្ថែម​រូបភាព..."
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr ""
+msgstr "លុប​រូបភាព..."
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
@@ -1712,100 +1732,105 @@ msgstr "ប្រព័ន្ធ"
 msgid "Connect to Wi-Fi"
 msgstr "ភ្ជាប់​វ៉ាយហ្វាយ"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
+#: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
 msgstr "បណ្ដាញ​ដែល​អាច​ប្រើបាន"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152
-#: ../wizard/qml/Pages//40-reporting.qml:46
-#: ../wizard/qml/Pages//30-location.qml:67
-#: ../wizard/qml/Pages//15-passwd.qml:159
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//30-location.qml:66
+#: ../wizard/qml/Pages//15-passwd.qml:170
 msgid "Continue"
 msgstr "បន្ត"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:64
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
 msgstr "រំលង"
 
 #: ../wizard/qml/Pages//10-welcome.qml:24
 msgid "Hi!"
-msgstr ""
+msgstr "សួស្ដី!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "សូម​ស្វាគមន៍​មកកាន់​ទូរស័ព្ទ Ubuntu ។"
 
 #: ../wizard/qml/Pages//10-welcome.qml:49
 msgid "Let’s get started."
-msgstr ""
+msgstr "តោះ​ចាប់ផ្ដើម។"
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "លក្ខខណ្ឌ​ប្រើប្រាស់"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr ""
+msgstr "បន្ថែម​ស៊ីម​កាត"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
-msgstr ""
+msgstr "បញ្ចូល​ស៊ីម​កាត​មុន​នឹង​បន្ត។"
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
+msgstr "បើ​គ្មាន​វា, អ្នក​នឹង​មិន​អាច​ហៅ​ចេញ ឬ​ផ្ញើ​សារ​អត្ថបទ​បាន​ឡើយ។"
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "ធ្វើ​រួច​ទាំងអស់"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "ដំណើរការ​ល្អ!"
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "ទូរស័ព្ទ​របស់​អ្នក​ឥឡូវ​អាច​ប្រើ​បាន។"
 
-#: ../wizard/qml/Pages//80-finished.qml:46
+#: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
 msgstr "បញ្ចប់"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "រាយការណ៍​កំហុស"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
+"ទូរស័ព្ទ​របស់​អ្នក​ត្រូវ​បាន​កំណត់​ឲ្យ​រាយការណ៍​កំហុស​ដោយ​ស្វ័យប្រវត្តិ​ទៅ "
+"Canonical ។"
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "វា​អាច​ត្រូវ​បាន​បិទ​នៅ​ក្នុង​ការ​កំណត់​ប្រព័ន្ធ"
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
+"ប្រើ​បណ្ដាញ​ចល័ត​របស់​អ្នក និង​វ៉ាយហ្វាយ​ដើម្បី​កំណត់​ទីតាំង​របស់​អ្នក"
 
 #: ../wizard/qml/Pages//30-location.qml:58
 msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
+"ខ្ញុំ​បាន​អាន និង​យល់ព្រម​តាម <a href='terms.qml'>លក្ខខណ្ឌ​ប្រើប្រាស់</a> "
+"របស់ Ubuntu"
 
-#: ../wizard/qml/Pages//15-passwd.qml:37
+#: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
 msgstr "កំណត់​សុវត្ថិភាព​សោ"
 
-#: ../wizard/qml/Pages//15-passwd.qml:86
+#: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
 msgstr "រុញ"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "លេខ​កូដ PIN មិន​ផ្គូផ្គង។"
 
-#: ../wizard/qml/Pages//15-passwd.qml:138
+#: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
 msgstr "ឃ្លា​សម្ងាត់​ទាំងនោះ​មិន​ផ្គូផ្គង។"
 
@@ -1813,11 +1838,11 @@ msgstr "ឃ្លា​សម្ងាត់​ទាំងនោះ​មិន
 msgid "PIN code must be at least four digits long."
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:148
+#: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
 msgstr "ឃ្លា​សម្ងាត់​ត្រូវតែ​មាន​យ៉ាង​ហោច​បួន​តួអក្សរ"
 
-#: ../wizard/qml/Components//Page.qml:50
+#: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "ថយ​ក្រោយ​"
 
@@ -2117,27 +2142,27 @@ msgstr ""
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:292
+#: ../plugins/security-privacy//securityprivacy.cpp:301
 msgid "Incorrect PIN code. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:253
+#: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:256
+#: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:281
+#: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:294
+#: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
 msgstr ""
 
-#: ../plugins/about//click.cpp:133
+#: ../plugins/about//click.cpp:134
 msgid "Unknown title"
 msgstr ""
 
@@ -2204,3 +2229,7 @@ msgstr "ប៉ះ​ដើម្បី​បើក​កម្មវិធី​
 
 #~ msgid "Passcode must be at least four digits long."
 #~ msgstr "កូដ​សម្ងាត់​ត្រូវតែ​មាន​យ៉ាង​ហោច​បួន​តួអក្សរ"
+
+#, qt-format
+#~ msgid "%1 attempts remaining"
+#~ msgstr "នៅសល់​ការ​ព្យាយាម %1"
