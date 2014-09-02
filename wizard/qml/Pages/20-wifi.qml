@@ -25,7 +25,7 @@ import "../Components" as LocalComponents
 
 LocalComponents.Page {
     id: wifiPage
-    title: i18n.tr("Connect to Wi-Fi")
+    title: i18n.tr("Connect to Wi‑Fi")
     forwardButtonSourceComponent: forwardButton
 
     readonly property bool connected: mainMenu.connectedAPs === 1
