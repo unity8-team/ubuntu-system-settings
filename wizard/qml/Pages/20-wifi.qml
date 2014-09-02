@@ -159,31 +159,38 @@ LocalComponents.Page {
             text: i18n.tr("Available networks")
         }
 
-        ListView {
-            id: mainMenu
-
-            // FIXME Check connection betterhttps://bugs.launchpad.net/indicator-network/+bug/1349371
-            property int connectedAPs: 0
-
+        Flickable {
             anchors { left: parent.left; right: parent.right; }
             height: column.height - label.height - column.spacing
+            contentHeight: contentItem.childrenRect.height
             clip: true
             flickDeceleration: 1500 * units.gridUnit / 8
             maximumFlickVelocity: 2500 * units.gridUnit / 8
-            model: menuModel
-            cacheBuffer: mainMenu.height * 2
-            boundsBehavior: (contentHeight > mainMenu.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+            boundsBehavior: (contentHeight > height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-            delegate: Loader {
-                id: loader
+            Column {
                 anchors { left: parent.left; right: parent.right; }
-                asynchronous: true
-                sourceComponent: model.type === "unity.widgets.systemsettings.tablet.accesspoint" ? accessPointComponent : hiddenComponent
 
-                onLoaded: {
-                    if (sourceComponent === accessPointComponent) {
-                        item.menuData = Qt.binding(function() { return model; });
-                        item.menuIndex = Qt.binding(function() { return index; });
+                Repeater {
+                    id: mainMenu
+
+                    // FIXME Check connection better https://bugs.launchpad.net/indicator-network/+bug/1349371
+                    property int connectedAPs: 0
+
+                    model: menuModel
+
+                    delegate: Loader {
+                        id: loader
+                        anchors { left: parent.left; right: parent.right; }
+                        asynchronous: true
+                        sourceComponent: model.type === "unity.widgets.systemsettings.tablet.accesspoint" ? accessPointComponent : hiddenComponent
+
+                        onLoaded: {
+                            if (sourceComponent === accessPointComponent) {
+                                item.menuData = Qt.binding(function() { return model; });
+                                item.menuIndex = Qt.binding(function() { return index; });
+                            }
+                        }
                     }
                 }
             }

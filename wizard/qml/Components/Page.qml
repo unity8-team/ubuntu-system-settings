@@ -51,7 +51,7 @@ Item {
             leftMargin: leftMargin
             rightMargin: rightMargin
         }
-        wrapMode: Text.WordWrap
+        wrapMode: Text.Wrap
         text: title
         color: Theme.palette.normal.baseText
         font.pixelSize: units.gu(4)
