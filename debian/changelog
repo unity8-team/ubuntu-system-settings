@@ -1,3 +1,17 @@
+ubuntu-system-settings (0.3+14.10.20140902.2-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Make the HERE license optional, clearly mark it as a HERE license
+    instead of an Ubuntu license, and connect it to the HERE backend.
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Martin Pitt ]
+  * POT update
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Sep 2014 23:27:15 +0000
+
 ubuntu-system-settings (0.3+14.10.20140829.2-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]

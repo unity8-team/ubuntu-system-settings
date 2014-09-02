@@ -33,8 +33,6 @@ Item {
     property int passwordMethod: UbuntuSecurityPrivacyPanel.Swipe
     property string password: ""
 
-    signal updateLanguage()
-
     Component.onCompleted: {
         Theme.name = "Ubuntu.Components.Themes.SuruGradient"
         i18n.domain = "ubuntu-system-settings"

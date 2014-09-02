@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-26 13:44+0200\n"
+"POT-Creation-Date: 2014-09-01 16:11+0200\n"
 "PO-Revision-Date: 2014-07-18 14:21+0000\n"
 "Last-Translator: MinSik CHO <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-27 07:43+0000\n"
-"X-Generator: Launchpad (build 17174)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:17+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -24,9 +24,9 @@ msgid "Previous networks"
 msgstr "이전에 사용한 네트워크"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:328
 #: ../plugins/wifi//PageComponent.qml:26
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:76
+#: ../plugins/battery//PageComponent.qml:333
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -39,15 +39,15 @@ msgid "Network name"
 msgstr "네트워크 이름"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
+#: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
 msgstr "보안"
 
-#: ../plugins/security-privacy//PageComponent.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:40
-#: ../plugins/bluetooth//PageComponent.qml:111
-#: ../plugins/bluetooth//PageComponent.qml:302
-#: ../plugins/bluetooth//PageComponent.qml:310
 #: ../plugins/wifi//OtherNetwork.qml:67
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr "없음"
 
@@ -59,7 +59,7 @@ msgstr "WPA-개인 또는 WPA2-개인"
 msgid "WEP"
 msgstr "WEP"
 
-#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
+#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
 msgid "Password"
 msgstr "암호"
 
@@ -67,23 +67,28 @@ msgstr "암호"
 msgid "Password visible"
 msgstr "암호를 보여주기"
 
+#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/security-privacy//SimPin.qml:146
+#: ../plugins/security-privacy//SimPin.qml:263
+#: ../plugins/security-privacy//LockSecurity.qml:283
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/phone//CallForwarding.qml:139
 #: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:279
 #: ../plugins/cellular//HotspotSetup.qml:85
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/wifi//OtherNetwork.qml:112 ../plugins/background//Preview.qml:97
-#: ../plugins/phone//CallForwarding.qml:136
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/background//Preview.qml:97
+#: ../plugins/cellular//Components//SimEditor.qml:189
+#: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
 msgstr "취소"
 
-#: ../plugins/bluetooth//PageComponent.qml:374
 #: ../plugins/wifi//OtherNetwork.qml:121
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "접속"
 
@@ -91,8 +96,8 @@ msgstr "접속"
 msgid "Network details"
 msgstr "네트워크 정보"
 
-#: ../plugins/bluetooth//PageComponent.qml:309
 #: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:343
 msgid "Name"
 msgstr "이름"
 
@@ -100,13 +105,16 @@ msgstr "이름"
 msgid "Last connected"
 msgstr "마지막으로 연결"
 
-#: ../plugins/about//PageComponent.qml:149
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
-#: ../plugins/battery//SleepValues.qml:96
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:448
+#: ../plugins/system-update//PageComponent.qml:521
 #: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/security-privacy//PhoneLocking.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
+#: ../plugins/about//PageComponent.qml:149
 msgid "Never"
 msgstr "절대로 사용하지 않음"
 
@@ -154,16 +162,16 @@ msgstr "월"
 msgid "Year"
 msgstr "년"
 
-#: ../plugins/security-privacy//LockSecurity.qml:300
 #: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/security-privacy//LockSecurity.qml:304
+#: ../plugins/phone//CallForwarding.qml:152
 #: ../plugins/background//Preview.qml:104
-#: ../plugins/phone//CallForwarding.qml:148
 msgid "Set"
 msgstr "설정"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:54
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:14
 msgid "Time & Date"
 msgstr "날짜와 시간"
 
@@ -175,15 +183,16 @@ msgstr "시간대:"
 msgid "Set the time and date:"
 msgstr "시간과 날짜 설정:"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:103
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Automatically"
 msgstr "자동"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:103
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/security-privacy//PageComponent.qml:149
+#: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
 msgstr "수동"
 
@@ -205,35 +214,35 @@ msgstr "맞는 장소가 없습니다."
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:35
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:110
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:26
 msgid "Updates"
 msgstr "업데이트"
 
-#: ../plugins/system-update//PageComponent.qml:51
+#: ../plugins/system-update//PageComponent.qml:52
 msgid "Update System"
 msgstr "시스템 업데이트하기"
 
-#: ../plugins/system-update//PageComponent.qml:52
+#: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "시스템 업데이트를 설치하려면, 휴대 전화를 재시작해야 합니다."
 
-#: ../plugins/system-update//PageComponent.qml:55
+#: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
 msgstr "설치 및 다시 시작"
 
-#: ../plugins/system-update//PageComponent.qml:64
+#: ../plugins/system-update//PageComponent.qml:65
 msgid "Not Now"
 msgstr "나중에 하기"
 
-#: ../plugins/system-update//PageComponent.qml:70
+#: ../plugins/system-update//PageComponent.qml:71
 msgid "Install"
 msgstr "설치"
 
-#: ../plugins/system-update//PageComponent.qml:88
+#: ../plugins/system-update//PageComponent.qml:89
 msgid "Software is up to date"
 msgstr "소프트웨어가 최신 상태입니다."
 
-#: ../plugins/system-update//PageComponent.qml:199
+#: ../plugins/system-update//PageComponent.qml:198
 msgid "Checking for updates…"
 msgstr "업데이트 확인 중..."
 
@@ -255,76 +264,76 @@ msgstr[1] ""
 msgid "Pause All"
 msgstr "모두 일시 중지"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:270
 msgid "Retry"
 msgstr "재시도"
 
-#: ../plugins/system-update//PageComponent.qml:302
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Download"
 msgstr "내려받기"
 
-#: ../plugins/system-update//PageComponent.qml:302
+#: ../plugins/system-update//PageComponent.qml:286
 msgid "Update"
 msgstr "업데이트"
 
-#: ../plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:287
 msgid "Resume"
 msgstr "다시 시작"
 
-#: ../plugins/system-update//PageComponent.qml:304
+#: ../plugins/system-update//PageComponent.qml:288
 msgid "Pause"
 msgstr "일시정지"
 
-#: ../plugins/system-update//PageComponent.qml:363
+#: ../plugins/system-update//PageComponent.qml:347
 msgid "Installing"
 msgstr "설치 중"
 
-#: ../plugins/system-update//PageComponent.qml:396
+#: ../plugins/system-update//PageComponent.qml:380
 msgid "Installed"
 msgstr "설치됨"
 
-#: ../plugins/system-update//PageComponent.qml:420
+#: ../plugins/system-update//PageComponent.qml:405
 msgid "Version: "
 msgstr "버전: "
 
-#: ../plugins/system-update//PageComponent.qml:425
+#: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:434
+#: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:532
+#: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
 msgstr "업데이트 설치 중..."
 
-#: ../plugins/system-update//PageComponent.qml:445
+#: ../plugins/system-update//PageComponent.qml:518
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr "자동 다운로드"
 
-#: ../plugins/system-update//PageComponent.qml:450
+#: ../plugins/system-update//PageComponent.qml:523
 msgid "On wi-fi"
 msgstr "Wi-Fi 에서"
 
-#: ../plugins/system-update//PageComponent.qml:452
+#: ../plugins/system-update//PageComponent.qml:525
 msgid "Always"
 msgstr "항상"
 
-#: ../plugins/system-update//PageComponent.qml:546
+#: ../plugins/system-update//PageComponent.qml:540
 msgid " bytes"
 msgstr " 바이트"
 
-#: ../plugins/system-update//PageComponent.qml:549
+#: ../plugins/system-update//PageComponent.qml:543
 msgid " KiB"
 msgstr " 킬로바이트"
 
-#: ../plugins/system-update//PageComponent.qml:552
+#: ../plugins/system-update//PageComponent.qml:546
 msgid " MiB"
 msgstr " 메가바이트"
 
-#: ../plugins/system-update//PageComponent.qml:555
+#: ../plugins/system-update//PageComponent.qml:549
 msgid " GiB"
 msgstr " 기가바이트"
 
@@ -354,7 +363,7 @@ msgstr "현재 무음 모드에 있습니다."
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:136
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
 msgid "Sound"
 msgstr "소리"
 
@@ -380,271 +389,371 @@ msgid "Vibrate when ringing"
 msgstr "전화 수신 시 진동하기"
 
 #: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
+#: ../plugins/sound//PageComponent.qml:187
 msgid "Vibrate in Silent Mode"
 msgstr "조용히 모드에서 진동하기"
 
-#: ../plugins/sound//PageComponent.qml:147
+#: ../plugins/sound//PageComponent.qml:152
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
 msgstr "메시지:"
 
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:160
+#: ../plugins/sound//PageComponent.qml:166
 msgid "Message received"
 msgstr "메세지를 수신했습니다."
 
-#: ../plugins/sound//PageComponent.qml:169
+#: ../plugins/sound//PageComponent.qml:178
 msgid "Vibrate with message sound"
 msgstr "메세지 도착음과 같이 진동하기"
 
-#: ../plugins/sound//PageComponent.qml:182
+#: ../plugins/sound//PageComponent.qml:191
 msgid "Other sounds:"
 msgstr "기타 소리:"
 
+#: ../plugins/sound//PageComponent.qml:195
 #: ../plugins/language//PageComponent.qml:185
-#: ../plugins/sound//PageComponent.qml:186
 msgid "Keyboard sound"
 msgstr "키보드 소리"
 
-#: ../plugins/sound//PageComponent.qml:200
+#: ../plugins/sound//PageComponent.qml:209
 msgid "Lock sound"
 msgstr "잠금 소리"
 
-#: ../plugins/security-privacy//PageComponent.qml:99
-#: ../plugins/security-privacy//PhoneLocking.qml:29
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:319
+#: ../plugins/security-privacy//PageComponent.qml:158
+msgid "SIM PIN"
+msgstr "심카드 핀"
+
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:47
+#: ../plugins/security-privacy//SimPin.qml:184
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:79
+msgid "Current PIN:"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:91
+#: ../plugins/security-privacy//SimPin.qml:243
+#, qt-format
+msgid "%1 attempts allowed."
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:104
+msgid "Choose new PIN:"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:115
+msgid "Confirm new PIN:"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:134
+msgid "PINs don't match. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:154
+#: ../plugins/security-privacy//LockSecurity.qml:302
+#: ../plugins/cellular//HotspotSetup.qml:94
+msgid "Change"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:180
+msgid "Enter SIM PIN"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:181
+msgid "Enter Previous SIM PIN"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:279
+msgid "Unlock"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:279
+msgid "Lock"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:314
+#, qt-format
+msgid "%1"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:337
+msgid "Change PIN…"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:354
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:358
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "폰 잠금"
 
-#: ../plugins/security-privacy//PageComponent.qml:79
-#: ../plugins/security-privacy//PhoneLocking.qml:41
-#: ../wizard/qml/Pages//15-passwd.qml:88
-msgid "Passcode"
-msgstr "암호"
+#: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//15-passwd.qml:99
+msgid "PIN code"
+msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:80
-#: ../plugins/security-privacy//PhoneLocking.qml:42
-#: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:90
+#: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
 msgstr "암호문"
 
-#: ../plugins/security-privacy//PageComponent.qml:82
-#: ../plugins/security-privacy//PhoneLocking.qml:44
+#: ../plugins/security-privacy//PhoneLocking.qml:49
 #: ../plugins/security-privacy//LockSecurity.qml:32
 #: ../plugins/about//DevMode.qml:104
 msgid "Lock security"
 msgstr "보안 잠금"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:62
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/security-privacy//PhoneLocking.qml:68
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Lock when idle"
 msgstr "사용하지 않을때 잠금"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:63
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/security-privacy//PhoneLocking.qml:69
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Sleep when idle"
 msgstr "사용하지 않을때 잠자기"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:101
-#: ../plugins/security-privacy//PhoneLocking.qml:65
+#: ../plugins/security-privacy//PhoneLocking.qml:75
+#: ../plugins/security-privacy//PhoneLocking.qml:84
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1분"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:79
+#: ../plugins/security-privacy//PhoneLocking.qml:101
 msgid "Sleep locks immediately"
 msgstr "잠자기 모드는 즉시 휴대 전화를 잠급니다."
 
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:33
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:12
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
 msgid "Security & Privacy"
 msgstr "보안 & 사생활 보호"
 
-#: ../plugins/security-privacy//PageComponent.qml:50
-#: ../plugins/security-privacy//PageComponent.qml:150
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
 msgstr "전화와 인터넷"
 
-#: ../plugins/security-privacy//PageComponent.qml:52
-#: ../plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
 msgstr "전화만 사용"
 
-#: ../plugins/security-privacy//PageComponent.qml:90
+#: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
 msgstr ""
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//SleepValues.qml:77
-#: ../plugins/battery//SleepValues.qml:81
-#: ../plugins/battery//SleepValues.qml:85
-#: ../plugins/battery//SleepValues.qml:89
-#: ../plugins/battery//SleepValues.qml:93
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
 msgstr[0] "%1 분 후"
 
-#: ../plugins/security-privacy//PageComponent.qml:110
-msgid "SIM PIN"
-msgstr "심카드 핀"
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:236
+msgid "On"
+msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:124
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+msgid "Off"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:133
+#: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:120
+#: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
 msgstr "환영 스크린의 정보"
 
-#: ../plugins/security-privacy//PageComponent.qml:133
+#: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Messages on welcome screen"
 msgstr "환영 스크린 문구"
 
-#: ../plugins/security-privacy//PageComponent.qml:148
+#: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
 msgstr "대쉬 검색"
 
-#: ../plugins/security-privacy//PageComponent.qml:166
+#: ../plugins/security-privacy//PageComponent.qml:234
 msgid "Location access"
 msgstr "위치 정보 사용"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "On"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:31
-msgid "Off"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:174
+#: ../plugins/security-privacy//PageComponent.qml:243
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr "다른 앱 접근"
 
-#: ../plugins/security-privacy//PageComponent.qml:179
+#: ../plugins/security-privacy//PageComponent.qml:248
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "진단"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:184
+#: ../plugins/security-privacy//PageComponent.qml:253
 msgid "Sent"
 msgstr "전송 완료"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:187
+#: ../plugins/security-privacy//PageComponent.qml:256
 msgid "Not sent"
 msgstr "전송되지 않음"
 
-#: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passcode…"
-msgstr "암호 변경..."
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
+msgid "Change PIN code…"
+msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:381
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
 msgid "Change passphrase…"
 msgstr "암호문 변경..."
 
-#: ../plugins/security-privacy//LockSecurity.qml:101
+#: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
 msgstr "스와이프로 바꾸기"
 
-#: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr "암호로 바꾸기"
+#: ../plugins/security-privacy//LockSecurity.qml:107
+msgid "Switch to PIN code"
+msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:105
+#: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
 msgstr "암호문으로 바꾸기"
 
-#: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr "현재 암호"
+#: ../plugins/security-privacy//LockSecurity.qml:118
+msgid "Existing PIN code"
+msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:116
+#: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
 msgstr "현재 암호문"
 
-#: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr "암호 입력"
+#: ../plugins/security-privacy//LockSecurity.qml:174
+msgid "Choose PIN code"
+msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:172
+#: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
 msgstr "암호문 입력"
 
-#: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr "암호 확인"
+#: ../plugins/security-privacy//LockSecurity.qml:220
+msgid "Confirm PIN code"
+msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:218
+#: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
 msgstr "암호문 확인"
 
-#: ../plugins/security-privacy//LockSecurity.qml:261
-msgid "Those passcodes don't match. Try again."
-msgstr "입력된 암호가 다릅니다. 다시 시도해 주십시오."
+#: ../plugins/security-privacy//LockSecurity.qml:265
+msgid "Those PIN codes don't match. Try again."
+msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:264
+#: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
 msgstr "입력된 암호문이 다릅니다. 다시 시도해 주십시오."
 
-#: ../plugins/security-privacy//LockSecurity.qml:295
+#: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
 msgstr "해제"
 
-#: ../plugins/security-privacy//LockSecurity.qml:298
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr ""
-
-#: ../plugins/security-privacy//LockSecurity.qml:340
+#: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
 msgstr "다음을 이용하여 잠금 해제:"
 
-#: ../plugins/security-privacy//LockSecurity.qml:344
+#: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Swipe (no security)"
 msgstr "스와이프 (보안 기능 없음)"
 
-#: ../plugins/security-privacy//LockSecurity.qml:345
-msgid "4-digit passcode"
-msgstr "4 자리수 암호"
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "4-digit PIN code"
+msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:347
+#: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
 msgstr "스와이프 (보안 기능 없음)... "
 
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "4-digit passcode…"
-msgstr "4 자리수 암호..."
+#: ../plugins/security-privacy//LockSecurity.qml:352
+msgid "4-digit PIN code…"
+msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:349
+#: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
 msgstr "암호문..."
 
 #: ../plugins/security-privacy//Location.qml:30
+#: ../wizard/qml/Pages//30-location.qml:23
 msgid "Location"
 msgstr "위치"
 
@@ -713,7 +822,7 @@ msgid "Apps that you have granted and have requested access to:"
 msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:100
+#: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
 msgstr "카메라"
 
@@ -742,8 +851,8 @@ msgstr ""
 msgid "The Launcher will be returned to its original contents."
 msgstr ""
 
-#: ../plugins/reset//PageComponent.qml:73
 #: ../plugins/reset//ResetLauncherHome.qml:44
+#: ../plugins/reset//PageComponent.qml:73
 msgid "Reset Launcher"
 msgstr ""
 
@@ -763,7 +872,7 @@ msgstr "모든 시스템 설정 초기화"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:64
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:50
 msgid "Reset phone"
 msgstr "휴대폰 초기화"
 
@@ -785,23 +894,25 @@ msgstr "모든 문서와 저장된 게임, 설정 그리고 기타 다른 항목
 msgid "Erase & Reset Everything"
 msgstr ""
 
-#: ../plugins/phone//PageComponent.qml:30
+#: ../plugins/phone//SingleSim.qml:29
 msgid "SIM"
 msgstr "심 (SIM) 카드"
 
-#: ../plugins/phone//PageComponent.qml:51
-#: ../plugins/phone//CallForwarding.qml:28
-#: ../plugins/phone//CallForwarding.qml:75
+#: ../plugins/phone//SingleSim.qml:33 ../plugins/phone//NoSims.qml:28
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76
 msgid "Call forwarding"
 msgstr "착신전환"
 
-#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
-#: ../plugins/phone//CallWaiting.qml:63
+#: ../plugins/phone//SingleSim.qml:40 ../plugins/phone//NoSims.qml:34
+#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
 msgid "Call waiting"
 msgstr "통화 대기"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
 #, qt-format
 msgid "%1 Services"
 msgstr "%1 서비스"
@@ -816,9 +927,9 @@ msgid "Call"
 msgstr "전화"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:88
-#: ../plugins/phone//PageComponent.qml:28
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:104
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
 msgstr "휴대전화"
 
@@ -827,25 +938,25 @@ msgstr "휴대전화"
 msgid "Services"
 msgstr ""
 
-#: ../plugins/phone//CallWaiting.qml:78
+#: ../plugins/phone//CallWaiting.qml:89
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr "통화 중에 다른 통화를 걸거나 받고, 통화 간 전환을 할 수 있도록 합니다."
 
-#: ../plugins/phone//CallForwarding.qml:90
+#: ../plugins/phone//CallForwarding.qml:91
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
 msgstr "전화를 받지 못하거나 통화 중인 경우, 또는 휴대 전화가 서비스 지역을 이탈한 경우에 다른 번호로 전달합니다."
 
-#: ../plugins/phone//CallForwarding.qml:100
+#: ../plugins/phone//CallForwarding.qml:101
 msgid "Forward to"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:96
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
 msgid "Notifications"
 msgstr ""
 
@@ -872,7 +983,7 @@ msgstr "사용 가능한 언어:"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:2
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
 msgid "Language & Text"
 msgstr "언어 & 글"
 
@@ -932,7 +1043,7 @@ msgstr "확인"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:28
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:106
 msgid "Cellular"
 msgstr "셀룰러 네트워크"
 
@@ -952,8 +1063,9 @@ msgstr ""
 msgid "Show key"
 msgstr ""
 
-#: ../plugins/cellular//PageComponent.qml:138
 #: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//Components//SingleSim.qml:43
+#: ../plugins/cellular//Components//MultiSim.qml:48
 msgid "Wi-Fi hotspot"
 msgstr ""
 
@@ -978,14 +1090,16 @@ msgid "Set up hotspot"
 msgstr ""
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
+#: ../plugins/cellular//Components//MultiSim.qml:68
 msgid "Carriers"
 msgstr ""
 
-#: ../plugins/cellular//PageChooseCarriers.qml:50
-#: ../plugins/cellular//PageChooseCarriers.qml:66
-#: ../plugins/cellular//PageComponent.qml:175
-#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281
+#: ../plugins/cellular//PageChooseCarriers.qml:49
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287 ../plugins/about//Storage.qml:204
+#: ../plugins/cellular//Components//SingleSim.qml:62
+#: ../plugins/cellular//Components//NoSim.qml:48
 msgid "N/A"
 msgstr "없음"
 
@@ -1003,7 +1117,7 @@ msgstr "검색 중"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:130
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:118
 msgid "Brightness"
 msgstr "밝기"
 
@@ -1015,14 +1129,14 @@ msgstr "자동으로 조절하기"
 msgid "Brightens and dims the display to suit the surroundings."
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:290
 #: ../plugins/brightness//BrightnessSlider.qml:51
+#: ../plugins/battery//PageComponent.qml:296
 msgid "Display brightness"
 msgstr ""
 
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "블루투스 페어링 요청"
 
@@ -1038,147 +1152,147 @@ msgid "Pair"
 msgstr "페어링"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:117
-#: ../plugins/bluetooth//PageComponent.qml:136
-#: ../plugins/battery//PageComponent.qml:358
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:40
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/battery//PageComponent.qml:363
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
 msgstr "블루투스"
 
-#: ../plugins/bluetooth//PageComponent.qml:77
+#: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:78
+#: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:79
+#: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:80
+#: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:81
+#: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:87
+#: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
 msgstr "컴퓨터"
 
-#: ../plugins/bluetooth//PageComponent.qml:89
+#: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Modem"
 msgstr "모뎀"
 
-#: ../plugins/bluetooth//PageComponent.qml:90 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
 msgid "Network"
 msgstr "네트워크"
 
-#: ../plugins/bluetooth//PageComponent.qml:91
+#: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Headset"
 msgstr "헤드셋"
 
-#: ../plugins/bluetooth//PageComponent.qml:92
+#: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Headphones"
 msgstr "헤드폰"
 
-#: ../plugins/bluetooth//PageComponent.qml:93
+#: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Video"
 msgstr "동영상"
 
-#: ../plugins/bluetooth//PageComponent.qml:94
+#: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Other Audio"
 msgstr "다른 음악"
 
-#: ../plugins/bluetooth//PageComponent.qml:95
+#: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Joypad"
 msgstr "조이패드"
 
-#: ../plugins/bluetooth//PageComponent.qml:96
+#: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Keyboard"
 msgstr "키보드"
 
-#: ../plugins/bluetooth//PageComponent.qml:97
+#: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Tablet"
 msgstr "태블릿"
 
-#: ../plugins/bluetooth//PageComponent.qml:98
+#: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Mouse"
 msgstr "마우스"
 
-#: ../plugins/bluetooth//PageComponent.qml:99
+#: ../plugins/bluetooth//PageComponent.qml:104
 msgid "Printer"
 msgstr "프린터"
 
-#: ../plugins/bluetooth//PageComponent.qml:101
+#: ../plugins/bluetooth//PageComponent.qml:106
 msgid "Other"
 msgstr "기타"
 
-#: ../plugins/bluetooth//PageComponent.qml:107
+#: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Excellent"
 msgstr "매우 좋음"
 
-#: ../plugins/bluetooth//PageComponent.qml:108
+#: ../plugins/bluetooth//PageComponent.qml:113
 msgid "Good"
 msgstr "좋음"
 
-#: ../plugins/bluetooth//PageComponent.qml:109
+#: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
 msgstr "보통"
 
-#: ../plugins/bluetooth//PageComponent.qml:110
+#: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
 msgstr "나쁨"
 
-#: ../plugins/bluetooth//PageComponent.qml:171
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Discoverable"
 msgstr "검색할 수 있음"
 
-#: ../plugins/bluetooth//PageComponent.qml:171
+#: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Not discoverable"
 msgstr "검색할 수 없음"
 
-#: ../plugins/bluetooth//PageComponent.qml:202
+#: ../plugins/bluetooth//PageComponent.qml:213
 msgid "Connected devices:"
 msgstr "연결된 장치:"
 
-#: ../plugins/bluetooth//PageComponent.qml:236
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect another device:"
 msgstr "다른 장치에 연결하기:"
 
-#: ../plugins/bluetooth//PageComponent.qml:236
+#: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:266
+#: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
 msgstr "검색되지 않음"
 
-#: ../plugins/bluetooth//PageComponent.qml:274
-#: ../plugins/bluetooth//PageComponent.qml:360
+#: ../plugins/bluetooth//PageComponent.qml:291
+#: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:327
+#: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
 msgstr "종류"
 
-#: ../plugins/bluetooth//PageComponent.qml:351
+#: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:355
+#: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
 msgstr "신호 강도"
 
-#: ../plugins/bluetooth//PageComponent.qml:374
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Disconnect"
 msgstr "연결 해제"
 
-#: ../plugins/bluetooth//PageComponent.qml:392
+#: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr ""
 
@@ -1192,27 +1306,27 @@ msgstr "'%1'에 표시된 PIN 번호와 같은지 확인해 주십시오."
 msgid "Confirm PIN"
 msgstr "PIN 번호 확인"
 
-#: ../plugins/battery//SleepValues.qml:74
+#: ../plugins/battery//SleepValues.qml:77
 msgid "Lock the phone when it's not in use:"
 msgstr "휴대전화를 사용하지 않을때 잠금:"
 
-#: ../plugins/battery//SleepValues.qml:74
+#: ../plugins/battery//SleepValues.qml:77
 msgid "Put the phone to sleep when it is not in use:"
 msgstr "휴대전화를 사용하지 않을 때 잠자기 모드로 전환:"
 
-#: ../plugins/battery//SleepValues.qml:107
+#: ../plugins/battery//SleepValues.qml:117
 msgid ""
 "Shorter times are more secure. Phone won't lock during calls or video "
 "playback."
 msgstr "시간이 짧을수록 더 안전합니다. 통화중이거나 동영상을 재생하고 있을 때는 휴대전화가 잠기지 않습니다."
 
-#: ../plugins/battery//SleepValues.qml:107
+#: ../plugins/battery//SleepValues.qml:117
 msgid "Phone won’t sleep during calls or video playback."
 msgstr "통화 중이거나 동영상을 재생하고 있을때에는 잠자기모드로 전환되지 않습니다."
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:70
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:130
 msgid "Battery"
 msgstr "배터리"
 
@@ -1256,35 +1370,35 @@ msgstr "마지막 완전 충전"
 msgid "Fully charged"
 msgstr "완전히 충전됨"
 
-#: ../plugins/battery//PageComponent.qml:120
+#: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
 msgstr "충전 상태 단계"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:128
+#: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery//PageComponent.qml:206
-#: ../plugins/battery//PageComponent.qml:208
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:214
-#: ../plugins/battery//PageComponent.qml:216
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:286
+#: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
 msgstr "배터리 사용량을 줄이는 방법"
 
-#: ../plugins/battery//PageComponent.qml:389
+#: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery//PageComponent.qml:407
+#: ../plugins/battery//PageComponent.qml:412
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "정확한 위치를 파악하기 위해서는 GPS와/또는 Wi-Fi가 필요합니다."
 
@@ -1298,15 +1412,15 @@ msgstr "미리보기"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:88
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:136
 msgid "Background"
 msgstr "배경"
 
-#: ../plugins/background//MainPage.qml:112
+#: ../plugins/background//MainPage.qml:107
 msgid "Ubuntu Art"
 msgstr "우분투 기본 배경화면"
 
-#: ../plugins/background//MainPage.qml:128
+#: ../plugins/background//MainPage.qml:123
 msgid "Custom"
 msgstr "사용자 정의"
 
@@ -1338,7 +1452,7 @@ msgstr "장치 빌드 정보"
 msgid "Customization Image part"
 msgstr "사용자화 이미지"
 
-#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
 msgid "Storage"
 msgstr "저장 공간"
 
@@ -1388,7 +1502,7 @@ msgstr "소프트웨어 라이선스"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:46
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "이 폰에 대하여"
 
@@ -1439,7 +1553,7 @@ msgid ""
 msgstr ""
 
 #: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
+msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
@@ -1462,11 +1576,13 @@ msgstr ""
 msgid "Includes info about what an app was doing when it failed."
 msgstr ""
 
-#: ../plugins/cellular//PageComponent.qml:132
+#: ../plugins/cellular//Components//SingleSim.qml:37
+#: ../plugins/cellular//Components//MultiSim.qml:42
 msgid "Hotspot disabled because Wi-Fi is off."
 msgstr ""
 
-#: ../plugins/cellular//PageComponent.qml:147
+#: ../plugins/cellular//Components//SingleSim.qml:52
+#: ../plugins/cellular//Components//MultiSim.qml:58
 msgid "Data usage statistics"
 msgstr "데이터 사용 통계"
 
@@ -1476,7 +1592,7 @@ msgstr "데이터 사용 통계"
 msgid "Carrier"
 msgstr ""
 
-#: ../plugins/cellular//PageComponent.qml:180
+#: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
 msgstr "APN"
 
@@ -1489,26 +1605,26 @@ msgid "OK"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:33
-#: ../plugins/cellular//Components//CellularMultiSim.qml:76
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:38
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:39
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:155
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
 msgstr ""
 
@@ -1528,6 +1644,11 @@ msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
+msgstr ""
+
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+msgid "2G/3G (faster)"
 msgstr ""
 
 #: ../plugins/background//Components//AddRemove.qml:52
@@ -1569,33 +1690,31 @@ msgstr "시스템"
 msgid "Connect to Wi-Fi"
 msgstr "Wi-Fi에 연결하기"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
+#: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
 msgstr "사용 가능한 네트워크"
 
-#: ../wizard/qml/Pages//30-location.qml:48
-#: ../wizard/qml/Pages//15-passwd.qml:159 ../wizard/qml/Pages//20-wifi.qml:152
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//30-location.qml:66
+#: ../wizard/qml/Pages//15-passwd.qml:170
 msgid "Continue"
 msgstr "계속"
 
-#: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
+#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
 msgstr "건너뛰기"
 
-#: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
+#: ../wizard/qml/Pages//10-welcome.qml:24
+msgid "Hi!"
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:67
-msgid "Welcome to your Ubuntu phone. Let’s get started."
+#: ../wizard/qml/Pages//10-welcome.qml:41
+msgid "Welcome to your Ubuntu phone."
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:72
-msgid "Select your language"
-msgstr "언어를 선택하세요."
-
-#: ../wizard/qml/Pages//10-welcome.qml:89
-msgid "Start"
+#: ../wizard/qml/Pages//10-welcome.qml:49
+msgid "Let’s get started."
 msgstr ""
 
 #: ../wizard/qml/Pages//terms.qml:24
@@ -1606,347 +1725,365 @@ msgstr ""
 msgid "Add a SIM card"
 msgstr ""
 
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid ""
-"Please insert a SIM card before you continue. Without it, you won’t be able "
-"to make calls or use text messaging."
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
 msgstr ""
 
-#: ../wizard/qml/Pages//80-finished.qml:39
-msgid "Nice work! Your phone is now ready to use. "
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
 msgstr ""
 
-#: ../wizard/qml/Pages//80-finished.qml:48
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
 msgstr "완료"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug Reporting"
+msgid "Bug reporting"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:39
-msgid ""
-"Your phone is set up to automatically report errors to Canonical. This can "
-"be disabled in system settings."
-msgstr "시스템 오류가 발생하면 자동으로 캐노니컬에 제출하도록 설정되어 있습니다. 이 설정은 시스템 설정에서 변경하실 수 있습니다."
-
-#: ../wizard/qml/Pages//30-location.qml:51
-msgid "Use your mobile network and wi-fi to work out where you are."
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:59
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
+msgstr ""
+
+#: ../wizard/qml/Pages//30-location.qml:50
+msgid "Use your mobile network and Wi-Fi to work out where you are"
+msgstr ""
+
+#: ../wizard/qml/Pages//30-location.qml:58
 msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-"conditions</a>."
+"conditions</a>"
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:37
+#: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:86
+#: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:136
-msgid "Those passcodes don't match."
+#: ../wizard/qml/Pages//15-passwd.qml:147
+msgid "Those PIN codes don't match."
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:138
+#: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:146
-msgid "Passcode must be at least four digits long."
+#: ../wizard/qml/Pages//15-passwd.qml:157
+msgid "PIN code must be at least four digits long."
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:148
+#: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
 msgstr ""
 
-#: ../wizard/qml/Components//Page.qml:47
+#: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "뒤로"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../wizard/qml/Components//StackButton.qml:51
+#, qt-format
+msgid "〈  %1"
+msgstr ""
+
+#: ../wizard/qml/Components//StackButton.qml:54
+#, qt-format
+msgid "%1  〉"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:78
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:4
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:110
 msgid "network"
 msgstr "네트워크"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:80
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:6
 msgid "wireless"
 msgstr "무선"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:82
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:8
 msgid "wifi"
 msgstr "와이파이"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:84
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:10
 msgid "wi-fi"
 msgstr "Wi-Fi"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:10
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:18
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:44
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:62
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:68
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:86
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:102
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:108
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:118
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:134
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:140
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:148
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:12
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:22
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:34
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:40
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:48
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:54
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:60
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:78
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:88
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:116
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:122
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:128
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
 msgid "settings"
 msgstr "설정"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:56
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:16
 msgid "time"
 msgstr "시간"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:58
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:18
 msgid "date"
 msgstr "날짜"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:60
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
 msgid "timezone"
 msgstr "시간대"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:120
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
 msgid "Updates available"
 msgstr "사용 가능한 업데이트"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:112
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:28
 msgid "system"
 msgstr "시스템"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:98
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:114
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:30
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:74
 msgid "software"
 msgstr "소프트웨어"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:116
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:32
 msgid "update"
 msgstr "업데이트"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:138
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
 msgid "sound"
 msgstr "소리"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:14
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:44
 msgid "security"
 msgstr "보안"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:16
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:46
 msgid "privacy"
 msgstr "사생활 보호"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:66
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:52
 msgid "reset"
 msgstr "초기화"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:106
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:58
 msgid "phone"
 msgstr "휴대 전화"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:150
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:62
 msgid "Orientation Lock"
 msgstr "화면 방향 잠금"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:152
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:64
 msgid "rotation"
 msgstr "회전"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:154
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:66
 msgid "orientation"
 msgstr "방향"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:156
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:68
 msgid "lock"
 msgstr "잠금"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:158
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:70
 msgid "screen"
 msgstr "화면"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:100
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:76
 msgid "notifications"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:4
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:82
 msgid "language"
 msgstr "언어"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:6
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:84
 msgid "lang"
 msgstr "언어"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:8
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:86
 msgid "i18n"
 msgstr "지역화"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:20
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:90
 msgid "Flight Mode"
 msgstr "비행 중 모드"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:22
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:92
 msgid "flight"
 msgstr "비행 중"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:24
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:94
 msgid "plane"
 msgstr "비행기"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:26
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:96
 msgid "offline"
 msgstr "오프라인"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:122
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:98
 msgid "Example"
 msgstr "예시"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:124
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:100
 msgid "example"
 msgstr "예시"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:126
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:102
 msgid "test"
 msgstr "테스트"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:128
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:104
 msgid "sample"
 msgstr "예제"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:30
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:108
 msgid "cellular"
 msgstr "셀룰러"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:34
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:112
 msgid "mobile"
 msgstr "휴대 전화"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:36
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:114
 msgid "gsm"
 msgstr "모바일 네트워크"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:132
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:120
 msgid "brightness"
 msgstr "밝기"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:42
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:126
 msgid "bluetooth"
 msgstr "블루투스"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:72
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
 msgid "battery"
 msgstr "배터리"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:74
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:134
 msgid "power"
 msgstr "전원"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:90
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:138
 msgid "appearance"
 msgstr "모양"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:92
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:140
 msgid "background"
 msgstr "배경"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:94
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:142
 msgid "wallpaper"
 msgstr "배경 화면"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:142
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
 msgid "Accessibility"
 msgstr "접근성"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:144
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:146
 msgid "accessibility"
 msgstr "접근성"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:146
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:148
 msgid "a11y"
 msgstr "접근성"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:48
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:154
 msgid "about"
 msgstr "정보"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:50
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "device"
 msgstr "장치"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:52
+#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:158
 msgid "info"
 msgstr "정보"
 
@@ -1958,27 +2095,27 @@ msgstr ""
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:251
-msgid "Incorrect passcode. Try again."
+#: ../plugins/security-privacy//securityprivacy.cpp:301
+msgid "Incorrect PIN code. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:253
+#: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:256
+#: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:281
+#: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:294
+#: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
 msgstr ""
 
-#: ../plugins/about//click.cpp:133
+#: ../plugins/about//click.cpp:134
 msgid "Unknown title"
 msgstr ""
 
@@ -1990,45 +2127,37 @@ msgstr ""
 msgid "Tap to open the system updater."
 msgstr ""
 
-#~ msgid "Change passcode"
-#~ msgstr "암호 변경"
+#~ msgid "Confirm passcode"
+#~ msgstr "암호 확인"
 
-#~ msgid "Change passphrase"
-#~ msgstr "암호문 바꾸기"
+#~ msgid "Choose passcode"
+#~ msgstr "암호 입력"
 
-#~ msgid "Privacy:"
-#~ msgstr "사생활 보호:"
+#~ msgid "Those passcodes don't match. Try again."
+#~ msgstr "입력된 암호가 다릅니다. 다시 시도해 주십시오."
 
-#~ msgid "Security:"
-#~ msgstr "보안:"
+#~ msgid "4-digit passcode"
+#~ msgstr "4 자리수 암호"
 
-#, qt-format
-#~ msgid "Install %1 updates…"
-#~ msgstr "%1 업데이트 설치..."
+#~ msgid "Passcode"
+#~ msgstr "암호"
 
-#, qt-format
-#~ msgid "Install %1 updates"
-#~ msgstr "%1 업데이트 설치"
+#~ msgid "Existing passcode"
+#~ msgstr "현재 암호"
 
-#~ msgid "Please log into your Ubuntu One account."
-#~ msgstr "우분투 원 계정을 로그인해주세요."
+#~ msgid "Switch to passcode"
+#~ msgstr "암호로 바꾸기"
 
-#~ msgid "System update has failed."
-#~ msgstr "시스템 업데이트가 실패하였습니다."
+#~ msgid "Change passcode…"
+#~ msgstr "암호 변경..."
 
-#~ msgid "System update failed."
-#~ msgstr "시스템 업데이트가 실패하였습니다."
-
-#~ msgid "Credentials not found"
-#~ msgstr "자격 증명을 찾을 수 없습니다."
-
-#~ msgid "Phone settings"
-#~ msgstr "휴대전화 설정"
-
-#~ msgid "No SIM card"
-#~ msgstr "SIM 카드 없음"
+#~ msgid "4-digit passcode…"
+#~ msgstr "4 자리수 암호..."
 
 #~ msgid ""
-#~ "Your phone is set up to detect your location. This can be disabled in system "
-#~ "settings."
-#~ msgstr "휴대전화가 자동으로 위치를 감지하도록 설정되어 있습니다. 이 설정은 시스템 설정에서 변경하실 수 있습니다."
+#~ "Your phone is set up to automatically report errors to Canonical. This can "
+#~ "be disabled in system settings."
+#~ msgstr "시스템 오류가 발생하면 자동으로 캐노니컬에 제출하도록 설정되어 있습니다. 이 설정은 시스템 설정에서 변경하실 수 있습니다."
+
+#~ msgid "Select your language"
+#~ msgstr "언어를 선택하세요."
