@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-08-30 14:25+0000\n"
+"PO-Revision-Date: 2014-09-02 14:01+0000\n"
 "Last-Translator: Данило Шеган <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:18+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-03 07:03+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -399,7 +399,7 @@ msgstr "Вибрирај када је утишан"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Звуци бирања"
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -451,7 +451,7 @@ msgstr "Текући ПИН:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "Дозвољено %1 покушаја."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
