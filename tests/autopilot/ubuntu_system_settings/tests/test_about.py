@@ -145,6 +145,7 @@ class AboutOfonoTestCase(AboutOfonoBaseTestCase):
         )
         self.assertEqual(str(number.value), "123456789")
 
+
 class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
 
     use_sims = 2
@@ -158,6 +159,7 @@ class AboutOfonoMultiSimTestCase(AboutOfonoBaseTestCase):
         )
         self.assertEqual(str(number1.value), "123456789")
         self.assertEqual(str(number2.value), "08123")
+
 
 class AboutSystemImageTestCase(AboutSystemImageBaseTestCase):
 
