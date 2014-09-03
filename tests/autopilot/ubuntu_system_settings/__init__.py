@@ -553,3 +553,81 @@ class FactoryResetConfirmationDialog(
     def confirm_reset(self):
         button = self.select_single('Button', objectName='factoryResetAction')
         self.pointing_device.click_object(button)
+
+
+class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Language page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'ItemPage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.info)
+    def change_display_language(self, lang, revert=False):
+        """Changes display language.
+
+
+        :param lang: The language to change to.
+
+        :param revert: Whether to revert the change or not
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+
+        :returns: The language page
+
+        """
+        pass
+
+
+class ChangeDisplayLanguageDialog(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Display Language dialog."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'SheetBase':
+            if state['objectName'][1] == 'displayLanguageDialog':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_language_item(self):
+        pass
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_accept(self):
+        pass
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_cancel(self):
+        pass
+
+
+class RebootNecessaryDialog(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Reboot Necessary dialog."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'rebootNecessaryDialog':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_reboot(self):
+        pass
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_revert(self):
+        pass

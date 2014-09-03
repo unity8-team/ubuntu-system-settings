@@ -29,6 +29,7 @@ import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
     id: root
+    objectName: "languagePage"
 
     title: i18n.tr("Language & Text")
 

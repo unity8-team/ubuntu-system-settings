@@ -26,6 +26,7 @@ import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 SheetBase {
     id: root
+    objectName: "displayLanguageDialog"
 
     property string initialLanguage
 

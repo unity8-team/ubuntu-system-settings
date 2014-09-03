@@ -24,6 +24,7 @@ import Ubuntu.Components.Popups 0.1
 
 Dialog {
     id: dialog
+    objectName: "rebootNecessaryDialog"
 
     property int revertTo
 
@@ -31,7 +32,6 @@ Dialog {
     signal revert(int to)
 
     text: i18n.tr("The phone needs to restart for changes to take effect.")
-    objectName: "rebootNecessaryDialog"
     Button {
         id: reboot
         text: i18n.tr("Restart Now")
