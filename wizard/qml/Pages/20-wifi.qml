@@ -18,7 +18,6 @@ import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
-import Ubuntu.SystemSettings.Wifi 1.0
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import Ubuntu.Settings.Menus 0.1 as Menus
 import "../Components" as LocalComponents
@@ -132,27 +131,24 @@ LocalComponents.Page {
     Column {
         id: column
         spacing: units.gu(2)
-        anchors {
-            top: content.top
-            bottom: content.bottom
-            left: wifiPage.left
-            right: wifiPage.right
-        }
+        anchors.top: content.top
+        anchors.bottom: content.bottom
+        anchors.left: wifiPage.left
+        anchors.right: wifiPage.right
 
         Label {
             id: label
-            anchors {
-                left: parent.left
-                leftMargin: leftMargin
-                right: parent.right
-                rightMargin: rightMargin
-            }
+            anchors.left: parent.left
+            anchors.leftMargin: leftMargin
+            anchors.right: parent.right
+            anchors.rightMargin: rightMargin
             fontSize: "small"
             text: i18n.tr("Available networks")
         }
 
         Flickable {
-            anchors { left: parent.left; right: parent.right; }
+            anchors.left: parent.left
+            anchors.right: parent.right
             height: column.height - label.height - column.spacing
             contentHeight: contentItem.childrenRect.height
             clip: true
@@ -161,7 +157,8 @@ LocalComponents.Page {
             boundsBehavior: (contentHeight > height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
             Column {
-                anchors { left: parent.left; right: parent.right; }
+                anchors.left: parent.left
+                anchors.right: parent.right
 
                 Repeater {
                     id: mainMenu
@@ -173,9 +170,14 @@ LocalComponents.Page {
 
                     delegate: Loader {
                         id: loader
-                        anchors { left: parent.left; right: parent.right; }
+
+                        readonly property bool isAccessPoint: model.type === "unity.widgets.systemsettings.tablet.accesspoint"
+
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        height: isAccessPoint ? units.gu(6) : 0
                         asynchronous: true
-                        sourceComponent: model.type === "unity.widgets.systemsettings.tablet.accesspoint" ? accessPointComponent : null
+                        sourceComponent: isAccessPoint ? accessPointComponent : null
 
                         onLoaded: {
                             item.menuData = Qt.binding(function() { return model; });
