@@ -44,7 +44,7 @@ SheetBase {
 
     ListView {
         id: languageList
-
+        objectName: "languagesList"
         clip: true
 
         anchors.top: parent.top

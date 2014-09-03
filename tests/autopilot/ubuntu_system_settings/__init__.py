@@ -613,8 +613,9 @@ class DisplayLanguage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     @autopilot.logging.log_action(logger.debug)
     def _click_language_item(self, index):
-        item = self.select_single(objectName='languageName%d' % index)
-        self.pointing_device.click_object(item)
+        languages_list = self.select_single('QQuickListView',
+                                            objectName='languagesList')
+        languages_list.click_element('languageName%d' % index)
 
     @autopilot.logging.log_action(logger.debug)
     def _click_confirm(self):

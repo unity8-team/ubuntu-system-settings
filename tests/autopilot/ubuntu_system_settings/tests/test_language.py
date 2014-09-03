@@ -9,7 +9,6 @@ from __future__ import absolute_import
 
 from autopilot.matchers import Eventually
 from testtools.matchers import Contains, Equals
-
 from ubuntu_system_settings.tests import LanguageBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
@@ -39,13 +38,3 @@ class LanguageTestCase(LanguageBaseTestCase):
         self.assertThat(
             lambda: str(self.session_mock.GetCalls()),
             Eventually(Contains('Reboot')))
-
-    def test_change_language_but_revert(self):
-        current_language = self.language_page.get_current_language()
-        self.language_page.change_display_language(
-            self.language_page.get_current_language() + 1, reboot=False)
-
-        self.assertThat(
-            lambda:
-                self.language_page.get_current_language(),
-            Eventually(Equals(current_language)))
