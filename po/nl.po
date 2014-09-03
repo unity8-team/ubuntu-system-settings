@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-03 06:08+0000\n"
+"PO-Revision-Date: 2014-08-30 18:25+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-03 07:02+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:16+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -397,7 +397,7 @@ msgstr "Trillen in stille modus"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr "Toetsenblokgeluiden"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -449,7 +449,7 @@ msgstr "Huidige pincode:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr "%1 pogingen toegestaan."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
@@ -569,7 +569,7 @@ msgstr "Meldingen en snelle instellingen"
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
 "Schakel vergrendelbeveiliging in om de toegang tot de telefoon te beveiligen "
-"d.m.v. vergrendeling."
+"door vergrendeling."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."

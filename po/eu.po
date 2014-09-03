@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-02 19:51+0000\n"
+"PO-Revision-Date: 2014-07-28 18:18+0000\n"
 "Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-03 07:02+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:15+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -250,15 +250,15 @@ msgstr "Eguneraketak bilatzen..."
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] "Instalatu eguneratze %1..."
-msgstr[1] "Instalatu %1 eguneratzeak..."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] "Instalatu eguneratze %1"
-msgstr[1] "Instalatu %1 eguneratzeak"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -298,11 +298,11 @@ msgstr "Bertsioa: "
 
 #: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "Hasi saioa Ubuntu One-ekin aplikazioen eguneratzeak jasotzeko."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
-msgstr "Hasi saioa..."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
@@ -396,7 +396,7 @@ msgstr "Bibratu Isilik moduan"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr "Markatze-teklatuaren soinuak"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -432,35 +432,35 @@ msgstr "SIMaren PINa"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr "Aldatu SIM PINa"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr "Okerreko PINa. Beste %1 saiakera dituzu."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr "Uneko PINa:"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:91
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr "%1 saiakera onartuta."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr "Aukeratu PIN berria:"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr "Berretsi PIN berria:"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
-msgstr "PINak ez datoz bat. Saiatu berriz."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:154
 #: ../plugins/security-privacy//LockSecurity.qml:302
@@ -470,41 +470,38 @@ msgstr "Aldatu"
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
-msgstr "Sartu SIM PINa"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
-msgstr "Sartu aurreko SIM PINa"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
-msgstr "Desblokeatu"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Lock"
-msgstr "Blokeatu"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:314
 #, qt-format
 msgid "%1"
-msgstr "%1"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
-msgstr "Aldatu PINa..."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
-"SIM PIN bat ezartzean, hura sartu beharra dago mugikorreko zerbitzuak "
-"erabili ahal izateko telefonoa berrabiaraztean edo SIMa trukatzean."
 
 #: ../plugins/security-privacy//SimPin.qml:358
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
-"Behin eta berriz okerreko PINa sartuz gero SIMa behin betiko blokea daiteke."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -513,7 +510,7 @@ msgstr "Telefonoaren blokeoa"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
-msgstr "PIN kodea"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -552,24 +549,23 @@ msgstr "Esekitzean blokeatu berehala"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr "Blokeatuta dagoenean, onartu:"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr "Abiarazlea"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr "Jakinarazpenak eta ezarpen bizkorrak"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
-"Gaitu blokeoko segurtasuna, telefonoa blokeatuta egotean sarbidea murrizteko."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
-msgstr "Beste aplikazio eta funtzioek desblokeatzeko eskatuko dute."
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -591,7 +587,7 @@ msgstr "Telefonoa soilik"
 
 #: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
-msgstr "Blokeatu telefonoa"
+msgstr ""
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PageComponent.qml:137
@@ -613,7 +609,7 @@ msgstr[1] "%1 minuturen ondoren"
 #: ../plugins/security-privacy//PageComponent.qml:161
 #: ../plugins/security-privacy//PageComponent.qml:236
 msgid "On"
-msgstr "Gaituta"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:165
 #: ../plugins/security-privacy//PageComponent.qml:236
@@ -621,23 +617,21 @@ msgstr "Gaituta"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:50
 #: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
-msgstr "Desgaituta"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
-msgstr "Zifratzea"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
-"Zifratzeak telefonoko datuak atzitzea ekiditen du, telefonoa ordenagailu edo "
-"bestelako gailu batera konektatuta dagoenean."
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
-msgstr "Pribatutasuna"
+msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
@@ -681,7 +675,7 @@ msgstr "Ez da bidali"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr "Aldatu PIN kodea…"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -694,7 +688,7 @@ msgstr "Aldatu hatza pasatzera"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr "Aldatu PIN kodera"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -702,7 +696,7 @@ msgstr "Aldatu pasaesaldira"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr "Existitzen den PIN kodea"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -710,7 +704,7 @@ msgstr "Uneko pasaesaldia"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr "Aukeratu PIN kodea"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -718,7 +712,7 @@ msgstr "Aukeratu pasaesaldia"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr "Berretsi PIN kodea"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
@@ -726,7 +720,7 @@ msgstr "Berretsi pasaesaldia"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr "PIN kodeak ez datoz bat. Saiatu berriz."
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -746,7 +740,7 @@ msgstr "Hatza pasatu (segurtasunik gabe)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr "4 digituko PIN kodea"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -754,7 +748,7 @@ msgstr "Hatza pasatuz (segurtasunik gabe)... "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr "4 digituko PIN kodea…"
+msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -840,7 +834,7 @@ msgstr "Itzuli emaitzak hemendik:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr "Baimendu dituzun aplikazioak, eta hona sarbidea eskatu dutenak:"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
@@ -849,37 +843,37 @@ msgstr "Kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr "Kamerara sarbidea eskatu duten aplikazioak"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr "Mikroa"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr "Mikrora sarbidea eskatu duten aplikazioak"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr "%1/%2"
+msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr "0"
+msgstr ""
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr "Abiarazlearen edukiak leheneratuko dira."
+msgstr ""
 
 #: ../plugins/reset//ResetLauncherHome.qml:44
 #: ../plugins/reset//PageComponent.qml:73
 msgid "Reset Launcher"
-msgstr "Leheneratu abiarazlea"
+msgstr ""
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr "Telefonoa berrabiarazi beharra dago aldaketak aplikatzeko."
+msgstr ""
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -905,7 +899,7 @@ msgstr "Berrezarri sistemaren ezarpen guztiak..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr "Ezabatu eta leheneratu guztia..."
+msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
@@ -917,7 +911,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr "Ezabatu eta leheneratu guztia"
+msgstr ""
 
 #: ../plugins/phone//SingleSim.qml:29
 msgid "SIM"
@@ -961,7 +955,7 @@ msgstr "Telefonoa"
 #: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
 #: ../plugins/phone//MultiSim.qml:94
 msgid "Services"
-msgstr "Zerbitzuak"
+msgstr ""
 
 #: ../plugins/phone//CallWaiting.qml:89
 msgid ""
@@ -987,15 +981,13 @@ msgstr "Birbidali hona:"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
 msgid "Notifications"
-msgstr "Jakinarazpenak"
+msgstr ""
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
-"Hautatutako aplikazioek burbuila, soinu, bibrazio, eta jakinarazpen-"
-"zentroaren bidez ohartaraz zaitzakete."
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
@@ -1029,7 +1021,7 @@ msgstr "Teklatu-diseinuak"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr "Autozuzenketa"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -1046,7 +1038,7 @@ msgstr ""
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr "Autopuntuazioa"
+msgstr ""
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
@@ -1055,7 +1047,7 @@ msgstr ""
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr "Teklatuaren bibrazioa"
+msgstr ""
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -1193,23 +1185,23 @@ msgstr "Bluetooth-a"
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
-msgstr "Konektatuta"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
-msgstr "Konektatzen…"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
-msgstr "Deskonektatzen…"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
-msgstr "Deskonektatuta"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
-msgstr "Ezezaguna"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
@@ -1297,7 +1289,7 @@ msgstr "Konektatu beste gailu bat:"
 
 #: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
-msgstr "Konektatu gailu bat:"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
@@ -1314,7 +1306,7 @@ msgstr "Mota"
 
 #: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
-msgstr "Egoera"
+msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
@@ -1596,7 +1588,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr "Pribatutasun-politika"
+msgstr ""
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
@@ -1640,7 +1632,7 @@ msgstr ""
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr "Ados"
+msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
@@ -1652,27 +1644,27 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
 #: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
-msgstr "2G soilik (bateria aurrezten du)"
+msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:53
 #: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
-msgstr "2G/3G/4G (bizkorragoa)"
+msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr "Datu-ibiltaritza"
+msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
-msgstr "Galdetu aldiro"
+msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
-msgstr "Irteerako deientzat, erabili:"
+msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
@@ -1682,31 +1674,31 @@ msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr "Mezuentzat, erabili:"
+msgstr ""
 
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
 msgid "2G/3G (faster)"
-msgstr "2G/3G (bizkorragoa)"
+msgstr ""
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr "Ez da irudirik hautatu"
+msgstr ""
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] "Kendu irudi %1"
-msgstr[1] "Kendu %1 irudiak"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr "Gehitu irudi bat…"
+msgstr ""
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr "Kendu irudiak…"
+msgstr ""
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
@@ -1745,43 +1737,43 @@ msgstr "Saltatu"
 
 #: ../wizard/qml/Pages//10-welcome.qml:24
 msgid "Hi!"
-msgstr "Epa!"
+msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
-msgstr "Ongi etorri zure Ubuntu telefonora."
+msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:49
 msgid "Let’s get started."
-msgstr "Has gaitezen."
+msgstr ""
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
-msgstr "Baldintzak"
+msgstr ""
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr "Gehitu SIM txartel bat"
+msgstr ""
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
-msgstr "Sartu SIM txartel bat jarraitu baino lehen."
+msgstr ""
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr "Hura gabe, ezingo duzu deirik egin edo testu-mezularitza erabili."
+msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr "Eginda"
+msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr "Bikain!"
+msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr "Zure telefonoa erabiltzeko prest dago."
+msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
@@ -1789,16 +1781,15 @@ msgstr "Amaitu"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr "Errore-txostenak"
+msgstr ""
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
-"Telefonoa automatikoki erroreen berri Canonical-i emateko konfiguratuta dago."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr "Hau sistemaren ezarpenetan desgaitu daiteke."
+msgstr ""
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
@@ -1809,12 +1800,10 @@ msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"Irakurri ditut eta onartzen ditut Ubunturen <a "
-"href='terms.qml'>baldintzak</a>"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
-msgstr "Ezarri blokeoko segurtasuna"
+msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"

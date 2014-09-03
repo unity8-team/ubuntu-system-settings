@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-03 04:07+0000\n"
+"PO-Revision-Date: 2014-07-18 14:21+0000\n"
 "Last-Translator: MinSik CHO <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-03 07:03+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:17+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -250,13 +250,15 @@ msgstr "업데이트 확인 중..."
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] "%1개 업데이트를 설치하는 중..."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] "%1개 업데이트 설치"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -296,11 +298,11 @@ msgstr "버전: "
 
 #: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "애플리케이션에 대한 업데이트를 제공받으려면 우분투 원 계정으로 로그인하세요."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
-msgstr "로그인..."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
@@ -367,11 +369,11 @@ msgstr "소리"
 
 #: ../plugins/sound//PageComponent.qml:75
 msgid "Silent Mode"
-msgstr "방해 금지 모드"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr "발신자:"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -394,7 +396,7 @@ msgstr "조용히 모드에서 진동하기"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr "다이얼패드 소리"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -430,17 +432,17 @@ msgstr "심카드 핀"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr "SIM 핀 번호 바꾸기"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr "잘못된 핀 번호입니다. %1번의 시도가 남았습니다."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr "현재 PIN 번호:"
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:91
 #: ../plugins/security-privacy//SimPin.qml:243

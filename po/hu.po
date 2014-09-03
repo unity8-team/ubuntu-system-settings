@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-02 16:48+0000\n"
+"PO-Revision-Date: 2014-08-30 08:47+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-03 07:03+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:17+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -386,7 +386,7 @@ msgstr "Csengőhang"
 
 #: ../plugins/sound//PageComponent.qml:134
 msgid "Vibrate when ringing"
-msgstr "Csörgéskor rezegjen"
+msgstr "Csörgéskor rezeg"
 
 #: ../plugins/sound//PageComponent.qml:143
 #: ../plugins/sound//PageComponent.qml:187
@@ -396,7 +396,7 @@ msgstr "Rezgés csendes módban"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr "Tárcsázó hangok"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -448,7 +448,7 @@ msgstr "Jelenlegi PIN:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr "%1 próbálkozás engedélyezett."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
@@ -552,7 +552,7 @@ msgstr "Altatáskor azonnali zárolás"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr "A telefont lezárva is legyenek engedélyezve:"
+msgstr "Lezárva is engedélyezze:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
@@ -570,7 +570,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
-msgstr "Más alkalmazások és funkciók engedélyt fognak kérni a feloldáshoz."
+msgstr "Más alkalmazás és funkciók kérni fogják a feloldását."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -739,7 +739,7 @@ msgstr "Elfelejt"
 
 #: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
-msgstr "Telefon feloldása az alábbi módon:"
+msgstr "A telefon feloldása az alábbival:"
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Swipe (no security)"
@@ -764,7 +764,7 @@ msgstr "Jelmondat"
 #: ../plugins/security-privacy//Location.qml:30
 #: ../wizard/qml/Pages//30-location.qml:23
 msgid "Location"
-msgstr "Tartózkodási hely"
+msgstr "Hely"
 
 #: ../plugins/security-privacy//Location.qml:48
 msgid "Location detection"
@@ -1300,7 +1300,7 @@ msgstr "Csatlakoztatott eszközök:"
 
 #: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect another device:"
-msgstr "Egyéb eszköz csatlakoztatása:"
+msgstr "Másik eszköz csatlakoztatása:"
 
 #: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
@@ -1677,7 +1677,7 @@ msgstr "2G/3G/4G (gyorsabb)"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr "Adatbarangolás"
+msgstr "Adat roaming"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
@@ -1717,11 +1717,11 @@ msgstr[1] "%1 kép eltávolítása"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr "Kép hozzáadása"
+msgstr "Kép hozzáadása…"
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr "Képek eltávolítása"
+msgstr "Képek eltávolítása…"
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
@@ -1818,7 +1818,7 @@ msgstr "Ez kikapcsolható a Rendszerbeállításokban."
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr "Mobilinternet és Wi-Fi használata a helyzete meghatározásához"
+msgstr "Mobilinternet és Wi-Fi használata a helymeghatározáshoz"
 
 #: ../wizard/qml/Pages//30-location.qml:58
 msgid ""

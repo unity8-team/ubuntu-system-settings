@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-02 09:59+0000\n"
+"PO-Revision-Date: 2014-08-30 09:55+0000\n"
 "Last-Translator: Jiri Grönroos <Unknown>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-03 07:02+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-09-02 07:16+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -397,7 +397,7 @@ msgstr "Värinä äänettömässä tilassa"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr "Valintanäppäinten äänet"
+msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -449,7 +449,7 @@ msgstr "Nykyinen PIN-koodi:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr "Sallittuja yrityksiä %1."
+msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
