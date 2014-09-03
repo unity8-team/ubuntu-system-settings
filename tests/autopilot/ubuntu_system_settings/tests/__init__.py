@@ -715,8 +715,7 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         self.session_mock = dbus.Interface(self.dbus_con.get_object(
             LM_SERVICE, LM_PATH), dbusmock.MOCK_IFACE)
 
-        self.session_mock.AddMethod(LM_IFACE, 'Reboot', 'b', '',
-                                    'this.rebooted = True')
+        self.session_mock.AddMethod(LM_IFACE, 'Reboot', 'b', '', '')
 
     @classmethod
     def setUpClass(klass):

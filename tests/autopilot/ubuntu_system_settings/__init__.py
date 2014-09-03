@@ -582,22 +582,18 @@ class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             objectName='displayLanguageDialog')
 
     @autopilot.logging.log_action(logger.info)
-    def change_display_language(self, lang, revert=False):
+    def change_display_language(self, langIndex, reboot=True):
         """Changes display language.
 
+        :param langIndex: The language index to change to.
 
-        :param lang: The language to change to.
-
-        :param revert: Whether to revert the change or not
+        :param reboot: Whether to reboot or not
 
         :returns: The language page
 
         """
-        current_setting = self.get_current_language()
         dialog = self._click_change_display_language()
-        dialog.set_language(lang, revert)
-        print(current_setting, dialog)
-
+        dialog.set_language(langIndex, reboot)
         return self.get_root_instance()
 
 
@@ -606,49 +602,54 @@ class DisplayLanguage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """Autopilot helper for the Display Language dialog."""
 
     @autopilot.logging.log_action(logger.debug)
-    def set_language(self, index, revert):
+    def set_language(self, index, reboot):
         self._click_language_item(index)
-        if revert:
-            self._click_cancel()
+        reboot_dialog = self._click_confirm()
+
+        if reboot:
+            reboot_dialog.reboot()
         else:
-            self._click_confirm()
+            reboot_dialog.revert()
 
     @autopilot.logging.log_action(logger.debug)
     def _click_language_item(self, index):
-        sleep(2)
         item = self.select_single(objectName='languageName%d' % index)
         self.pointing_device.click_object(item)
 
     @autopilot.logging.log_action(logger.debug)
     def _click_confirm(self):
-        sleep(2)
-        button = self.select_single(objectName='confirmChangeLanguage')
+        button = self.select_single('Button',
+                                    objectName='confirmChangeLanguage')
         self.pointing_device.click_object(button)
+        return self.get_root_instance().select_single(
+            objectName='rebootNecessaryDialog')
 
     @autopilot.logging.log_action(logger.debug)
     def _click_cancel(self):
-        sleep(2)
-        button = self.select_single(objectName='cancelChangeLanguage')
+        button = self.select_single('Button',
+                                    objectName='cancelChangeLanguage')
         self.pointing_device.click_object(button)
 
 
-class RebootNecessaryDialog(
+class RebootNecessary(
         ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Reboot Necessary dialog."""
 
-    @classmethod
-    def validate_dbus_object(cls, path, state):
-        name = introspection.get_classname_from_path(path)
-        if name == b'Dialog':
-            if state['objectName'][1] == 'rebootNecessaryDialog':
-                return True
-        return False
+    @autopilot.logging.log_action(logger.debug)
+    def reboot(self):
+        self._click_reboot()
+
+    @autopilot.logging.log_action(logger.debug)
+    def revert(self):
+        self._click_revert()
 
     @autopilot.logging.log_action(logger.debug)
     def _click_reboot(self):
-        pass
+        button = self.select_single('Button', objectName='reboot')
+        self.pointing_device.click_object(button)
 
     @autopilot.logging.log_action(logger.debug)
     def _click_revert(self):
-        pass
+        button = self.select_single('Button', objectName='revert')
+        self.pointing_device.click_object(button)

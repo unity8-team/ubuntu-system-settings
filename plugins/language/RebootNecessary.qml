@@ -34,6 +34,7 @@ Dialog {
     text: i18n.tr("The phone needs to restart for changes to take effect.")
     Button {
         id: reboot
+        objectName: "reboot"
         text: i18n.tr("Restart Now")
         onClicked: {
             dialog.reboot();
@@ -42,6 +43,7 @@ Dialog {
     }
     Button {
         id: revert
+        objectName: "revert"
         text: i18n.tr("Cancel")
         onClicked: {
             dialog.revert(revertTo);
