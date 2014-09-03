@@ -98,7 +98,10 @@ ItemPage {
             Menus.StandardMenu {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
+                objectName: "displayLanguage"
                 component: Label {
+                    property int currentLanguage: plugin.currentLanguage
+                    objectName: "currentLanguage"
                     text: plugin.languageNames[plugin.currentLanguage]
                     elide: Text.ElideRight
                     opacity: enabled ? 1.0 : 0.5

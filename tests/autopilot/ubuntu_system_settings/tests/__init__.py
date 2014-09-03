@@ -38,6 +38,9 @@ CALL_FWD_IFACE = 'org.ofono.CallForwarding'
 CALL_SETTINGS_IFACE = 'org.ofono.CallSettings'
 SYSTEM_IFACE = 'com.canonical.SystemImage'
 SYSTEM_SERVICE_OBJ = '/Service'
+LM_SERVICE = 'org.freedesktop.login1'
+LM_PATH = '/org/freedesktop/login1'
+LM_IFACE = 'org.freedesktop.login1.Manager'
 
 
 class UbuntuSystemSettingsTestCase(
@@ -696,3 +699,38 @@ class PhoneSoundBaseTestCase(SoundBaseTestCase):
 
     def tearDown(self):
         super(PhoneSoundBaseTestCase, self).tearDown()
+
+
+class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
+                           dbusmock.DBusTestCase):
+    """ Base class for language settings tests"""
+
+    def mock_loginmanager(self):
+        self.mock_server = self.spawn_server(LM_SERVICE, LM_PATH,
+                                             LM_IFACE, system_bus=True,
+                                             stdout=subprocess.PIPE)
+        # spawn_server does not wait properly
+        # Reported as bug here: http://pad.lv/1350833
+        sleep(2)
+        self.session_mock = dbus.Interface(self.dbus_con.get_object(
+            LM_SERVICE, LM_PATH), dbusmock.MOCK_IFACE)
+
+        self.session_mock.AddMethod(LM_IFACE, 'Reboot', 'b', '',
+                                    'this.rebooted = True')
+
+    @classmethod
+    def setUpClass(klass):
+        klass.start_system_bus()
+        klass.dbus_con = klass.get_dbus(True)
+
+    def setUp(self):
+        self.mock_loginmanager()
+
+        super(LanguageBaseTestCase, self).setUp()
+        self.language_page = self.system_settings.\
+            main_view.go_to_language_page()
+
+    def tearDown(self):
+        self.mock_server.terminate()
+        self.mock_server.wait()
+        super(LanguageBaseTestCase, self).tearDown()

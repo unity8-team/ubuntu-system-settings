@@ -110,6 +110,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_reset_phone(self):
         return self._go_to_page('entryComponent-reset', 'resetPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_language_page(self):
+        return self._go_to_page('entryComponent-language', 'languagePage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -563,9 +567,19 @@ class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     def validate_dbus_object(cls, path, state):
         name = introspection.get_classname_from_path(path)
         if name == b'ItemPage':
-            if state['objectName'][1] == 'ItemPage':
+            if state['objectName'][1] == 'languagePage':
                 return True
         return False
+
+    def get_current_language(self):
+        return self.select_single(
+            'Label', objectName='currentLanguage').currentLanguage
+
+    def _click_change_display_language(self):
+        item = self.select_single(objectName='displayLanguage')
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().select_single(
+            objectName='displayLanguageDialog')
 
     @autopilot.logging.log_action(logger.info)
     def change_display_language(self, lang, revert=False):
@@ -576,39 +590,46 @@ class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         :param revert: Whether to revert the change or not
 
-        :param sim: Number of what SIM to use, either 1 or 2.
-            Required parameter in dual SIM setups
-
         :returns: The language page
 
         """
-        pass
+        current_setting = self.get_current_language()
+        dialog = self._click_change_display_language()
+        dialog.set_language(lang, revert)
+        print(current_setting, dialog)
+
+        return self.get_root_instance()
 
 
-class ChangeDisplayLanguageDialog(
-        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+class DisplayLanguage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Display Language dialog."""
 
-    @classmethod
-    def validate_dbus_object(cls, path, state):
-        name = introspection.get_classname_from_path(path)
-        if name == b'SheetBase':
-            if state['objectName'][1] == 'displayLanguageDialog':
-                return True
-        return False
+    @autopilot.logging.log_action(logger.debug)
+    def set_language(self, index, revert):
+        self._click_language_item(index)
+        if revert:
+            self._click_cancel()
+        else:
+            self._click_confirm()
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_language_item(self):
-        pass
+    def _click_language_item(self, index):
+        sleep(2)
+        item = self.select_single(objectName='languageName%d' % index)
+        self.pointing_device.click_object(item)
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_accept(self):
-        pass
+    def _click_confirm(self):
+        sleep(2)
+        button = self.select_single(objectName='confirmChangeLanguage')
+        self.pointing_device.click_object(button)
 
     @autopilot.logging.log_action(logger.debug)
     def _click_cancel(self):
-        pass
+        sleep(2)
+        button = self.select_single(objectName='cancelChangeLanguage')
+        self.pointing_device.click_object(button)
 
 
 class RebootNecessaryDialog(

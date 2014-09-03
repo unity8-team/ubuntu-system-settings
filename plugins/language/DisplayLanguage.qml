@@ -62,6 +62,7 @@ SheetBase {
 
         model: plugin.languageNames
         delegate: ListItem.Standard {
+            objectName: "languageName" + index
             text: modelData
             selected: index == languageList.currentIndex
 
@@ -93,7 +94,7 @@ SheetBase {
 
         Button {
             id: cancelButton
-
+            objectName: "cancelChangeLanguage"
             text: i18n.tr("Cancel")
 
             anchors.left: parent.left
@@ -113,7 +114,7 @@ SheetBase {
 
         Button {
             id: confirmButton
-
+            objectName: "confirmChangeLanguage"
             text: i18n.tr("Confirm")
             enabled: languageList.currentIndex != plugin.currentLanguage
 
