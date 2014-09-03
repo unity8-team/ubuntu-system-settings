@@ -105,6 +105,12 @@ ItemPage {
         id: batteryBackend
     }
 
+    /* Refresh the graph on a minute basis */
+    Timer {
+        interval: 60000; running: true; repeat: true
+        onTriggered: canvas.requestPaint()
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-29 08:21+0200\n"
+"POT-Creation-Date: 2014-09-01 16:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
-#: ../plugins/battery//PageComponent.qml:327
+#: ../plugins/battery//PageComponent.qml:333
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
 msgid "Wi-Fi"
 msgstr ""
@@ -69,9 +69,9 @@ msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//SimPin.qml:145
-#: ../plugins/security-privacy//SimPin.qml:260
-#: ../plugins/security-privacy//LockSecurity.qml:279
+#: ../plugins/security-privacy//SimPin.qml:146
+#: ../plugins/security-privacy//SimPin.qml:263
+#: ../plugins/security-privacy//LockSecurity.qml:283
 #: ../plugins/reset//ResetLauncherHome.qml:55
 #: ../plugins/reset//ResetAllSettings.qml:38
 #: ../plugins/reset//EraseEverything.qml:54
@@ -106,14 +106,14 @@ msgid "Last connected"
 msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:520
+#: ../plugins/system-update//PageComponent.qml:521
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
 #: ../plugins/security-privacy//PageComponent.qml:140
 #: ../plugins/battery//SleepValues.qml:106
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
 #: ../plugins/about//PageComponent.qml:149
 msgid "Never"
 msgstr ""
@@ -163,7 +163,7 @@ msgid "Year"
 msgstr ""
 
 #: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:300
+#: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/phone//CallForwarding.qml:152
 #: ../plugins/background//Preview.qml:104
 msgid "Set"
@@ -292,48 +292,48 @@ msgstr ""
 msgid "Installed"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:404
+#: ../plugins/system-update//PageComponent.qml:405
 msgid "Version: "
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:426
+#: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:435
+#: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:502
+#: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:517
+#: ../plugins/system-update//PageComponent.qml:518
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:522
+#: ../plugins/system-update//PageComponent.qml:523
 msgid "On wi-fi"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:524
+#: ../plugins/system-update//PageComponent.qml:525
 msgid "Always"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:539
+#: ../plugins/system-update//PageComponent.qml:540
 msgid " bytes"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:542
+#: ../plugins/system-update//PageComponent.qml:543
 msgid " KiB"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:545
+#: ../plugins/system-update//PageComponent.qml:546
 msgid " MiB"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:548
+#: ../plugins/system-update//PageComponent.qml:549
 msgid " GiB"
 msgstr ""
 
@@ -389,38 +389,43 @@ msgid "Vibrate when ringing"
 msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
+#: ../plugins/sound//PageComponent.qml:187
 msgid "Vibrate in Silent Mode"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:147
+#: ../plugins/sound//PageComponent.qml:152
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr ""
+
+#: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
+#: ../plugins/sound//PageComponent.qml:160
+#: ../plugins/sound//PageComponent.qml:166
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:169
+#: ../plugins/sound//PageComponent.qml:178
 msgid "Vibrate with message sound"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:182
+#: ../plugins/sound//PageComponent.qml:191
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:186
+#: ../plugins/sound//PageComponent.qml:195
 #: ../plugins/language//PageComponent.qml:185
 msgid "Keyboard sound"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:200
+#: ../plugins/sound//PageComponent.qml:209
 msgid "Lock sound"
 msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:316
+#: ../plugins/security-privacy//SimPin.qml:319
 #: ../plugins/security-privacy//PageComponent.qml:158
 msgid "SIM PIN"
 msgstr ""
@@ -430,7 +435,7 @@ msgid "Change SIM PIN"
 msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:47
-#: ../plugins/security-privacy//SimPin.qml:183
+#: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
 msgstr ""
@@ -440,9 +445,9 @@ msgid "Current PIN:"
 msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:91
-#: ../plugins/security-privacy//SimPin.qml:241
+#: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
-msgid "%1 attempts remaining"
+msgid "%1 attempts allowed."
 msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:104
@@ -457,44 +462,44 @@ msgstr ""
 msgid "PINs don't match. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:153
-#: ../plugins/security-privacy//LockSecurity.qml:298
+#: ../plugins/security-privacy//SimPin.qml:154
+#: ../plugins/security-privacy//LockSecurity.qml:302
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:179
+#: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:180
+#: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:276
+#: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:276
+#: ../plugins/security-privacy//SimPin.qml:279
 msgid "Lock"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:311
+#: ../plugins/security-privacy//SimPin.qml:314
 #, qt-format
 msgid "%1"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:334
+#: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:351
+#: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:355
+#: ../plugins/security-privacy//SimPin.qml:358
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
 
@@ -508,7 +513,7 @@ msgid "PIN code"
 msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../plugins/security-privacy//LockSecurity.qml:346
+#: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
 msgstr ""
@@ -520,12 +525,12 @@ msgid "Lock security"
 msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:68
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Lock when idle"
 msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:69
-#: ../plugins/battery//PageComponent.qml:300
+#: ../plugins/battery//PageComponent.qml:306
 msgid "Sleep when idle"
 msgstr ""
 
@@ -593,8 +598,8 @@ msgstr ""
 #: ../plugins/battery//SleepValues.qml:95
 #: ../plugins/battery//SleepValues.qml:99
 #: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
@@ -667,85 +672,85 @@ msgstr ""
 msgid "Not sent"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:92
-#: ../plugins/security-privacy//LockSecurity.qml:380
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:381
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
 msgid "Change passphrase…"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:101
+#: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:103
+#: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:105
+#: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:114
+#: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:116
+#: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:170
+#: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:172
+#: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:216
+#: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:218
+#: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:261
+#: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:264
+#: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:295
+#: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:340
+#: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:344
+#: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Swipe (no security)"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:345
+#: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:347
+#: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:348
+#: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
 msgstr ""
 
-#: ../plugins/security-privacy//LockSecurity.qml:349
+#: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
 msgstr ""
 
@@ -919,7 +924,7 @@ msgid "Call"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:31
+#: ../plugins/phone//PageComponent.qml:32
 #: ../plugins/bluetooth//PageComponent.qml:93
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
@@ -1088,8 +1093,8 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseCarriers.qml:49
 #: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281 ../plugins/about//Storage.qml:204
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287 ../plugins/about//Storage.qml:204
 #: ../plugins/cellular//Components//SingleSim.qml:62
 #: ../plugins/cellular//Components//NoSim.qml:48
 msgid "N/A"
@@ -1122,7 +1127,7 @@ msgid "Brightens and dims the display to suit the surroundings."
 msgstr ""
 
 #: ../plugins/brightness//BrightnessSlider.qml:51
-#: ../plugins/battery//PageComponent.qml:290
+#: ../plugins/battery//PageComponent.qml:296
 msgid "Display brightness"
 msgstr ""
 
@@ -1146,7 +1151,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
 #: ../plugins/bluetooth//PageComponent.qml:147
-#: ../plugins/battery//PageComponent.qml:357
+#: ../plugins/battery//PageComponent.qml:363
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
 msgstr ""
@@ -1366,35 +1371,35 @@ msgstr ""
 msgid "Fully charged"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:120
+#: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
 msgstr ""
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:128
+#: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:206
-#: ../plugins/battery//PageComponent.qml:208
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:214
-#: ../plugins/battery//PageComponent.qml:216
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:286
+#: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:388
+#: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:406
+#: ../plugins/battery//PageComponent.qml:412
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
@@ -2091,23 +2096,23 @@ msgstr ""
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:292
+#: ../plugins/security-privacy//securityprivacy.cpp:301
 msgid "Incorrect PIN code. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:294
+#: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:297
+#: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:322
+#: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:335
+#: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
 msgstr ""
 

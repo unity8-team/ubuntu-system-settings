@@ -1,3 +1,21 @@
+ubuntu-system-settings (0.3+14.10.20140829.2-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Added setting for dialpad sounds to both the sound and phone panels.
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Diego Sarmentero ]
+  * Fix out of sync image download. Refresh scope after installation
+    (LP: #1324923)
+
+  [ Sebastien Bacher ]
+  * [battery] refresh the graph on a minute basis
+  * [notifications] use normal text style and ubuntushaped icons
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 29 Aug 2014 20:48:28 +0000
+
 ubuntu-system-settings (0.3+14.10.20140829.1-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
