@@ -46,5 +46,6 @@ add_test(tst-pagelist tst-pagelist)
 configure_file (test_code.py.in test_code.py)
 configure_file (test_push_helper.py.in test_push_helper.py)
 add_test(NAME python3 COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_code.py")
+add_test(NAME python3 COMMAND "${CMAKE_CURRENT_BINARY_DIR}/test_push_helper.py")
 
 add_subdirectory(plugins)
