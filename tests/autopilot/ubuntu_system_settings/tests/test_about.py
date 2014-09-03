@@ -12,11 +12,10 @@ import unittest
 
 from gi.repository import GLib
 
-from autopilot.introspection.dbus import StateNotFoundError
 from autopilot.matchers import Eventually
 from autopilot.platform import model
 from testtools import skipIf
-from testtools.matchers import Equals, NotEquals, raises
+from testtools.matchers import Equals, NotEquals
 
 from ubuntu_system_settings.tests import (
     AboutBaseTestCase,
