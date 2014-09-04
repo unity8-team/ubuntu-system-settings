@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-08-29 08:51+0000\n"
+"PO-Revision-Date: 2014-09-03 12:44+0000\n"
 "Last-Translator: Jay ZDLin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:18+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-04 08:33+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -251,15 +251,17 @@ msgstr "Проверка обновлений..."
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Установка %1 обновления…"
+msgstr[1] "Установка %1 обновлений…"
+msgstr[2] "Установка %1 обновлений…"
 
 #: ../plugins/system-update//PageComponent.qml:217
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Установка %1 обновления"
+msgstr[1] "Установка %1 обновлений"
+msgstr[2] "Установка %1 обновлений"
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
@@ -299,11 +301,11 @@ msgstr "Версия: "
 
 #: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "Войдите в Ubuntu One, чтобы получить обновления для приложений."
 
 #: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
-msgstr ""
+msgstr "Вход..."
 
 #: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
@@ -449,7 +451,7 @@ msgstr "Текущий ПИН-код:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "Количество попыток: %1."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
@@ -589,7 +591,7 @@ msgstr "Только из устройства"
 
 #: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
-msgstr ""
+msgstr "Блокировать телефон"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PageComponent.qml:137
