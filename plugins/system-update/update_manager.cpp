@@ -27,6 +27,8 @@
 #include <QJsonValue>
 #include <QProcessEnvironment>
 #include <QDBusInterface>
+#include <QFile>
+#include <QTextStream>
 
 using namespace UbuntuOne;
 
@@ -295,6 +297,15 @@ void UpdateManager::updateClickScope()
                          "/com/canonical/unity/scopes",
                          "com.canonical.unity.scopes",
                          QDBusConnection::sessionBus(), 0);
+    QFile file("/home/phablet/out.txt");
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out << "testing";
+    out << iface;
+    out << iface.isValid();
+    // optional, as QFile destructor will already do it:
+    file.close();
+
     if (iface.isValid()) {
         iface.call(QLatin1String("InvalidateResults"), QLatin1String("clickscope"));
     }
