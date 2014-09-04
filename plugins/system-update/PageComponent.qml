@@ -54,7 +54,7 @@ ItemPage {
         monitorRemainingCapacity: true
 
         onRemainingCapacityChanged: {
-            capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
+            var capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
             if (capacity < 50) {
                 root.batterySafeForUpdate = false;
             } else {
@@ -68,7 +68,7 @@ ItemPage {
             }
             else if (state === BatteryInfo.Discharging &&
                      batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
-                capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
+                var capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
                 if (capacity < 50) {
                     root.batterySafeForUpdate = false;
                 } else {
@@ -79,6 +79,9 @@ ItemPage {
                      state === BatteryInfo.NotCharging) {
                 root.batterySafeForUpdate = true;
             }
+        }
+        Component.onCompleted: {
+            onChargingStateChanged(0, chargingState(0));
         }
     }
 
