@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-01 07:11+0000\n"
+"PO-Revision-Date: 2014-09-03 10:58+0000\n"
 "Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:18+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-04 08:33+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -252,7 +252,7 @@ msgstr "Căutare actualizări..."
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] ""
+msgstr[0] "Se instalează %1 actualizare..."
 msgstr[1] "Se instalează %1 actualizări..."
 msgstr[2] "Se instalează %1 de actualizări..."
 
@@ -401,7 +401,7 @@ msgstr "Vibrează în modul silențios"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Sunete taste apel"
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -453,7 +453,7 @@ msgstr "PIN actual:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "%1 încercări permise."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
@@ -850,7 +850,7 @@ msgstr "Afișează rezultate:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "Aplicații autorizate care au cerut acces la:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
@@ -1177,7 +1177,7 @@ msgstr "Ajustare automată"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Crește și scade luminozitatea ecranului în funcție de mediu."
 
 #: ../plugins/brightness//BrightnessSlider.qml:51
 #: ../plugins/battery//PageComponent.qml:296
@@ -1619,6 +1619,8 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
+"Pentru a utiliza funcția Mod dezvoltator trebuie să configurați un cod PIN "
+"sau o frază parolă."
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1630,7 +1632,7 @@ msgstr "Raportați către Canonical:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "Defecte și erori ale aplicațiilor"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
@@ -1639,6 +1641,8 @@ msgstr "Rapoarte de erori anterioare"
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
 msgstr ""
+"Include informații despre ce executa o aplicație în momentul în care s-a "
+"oprit subit din funcționare."
 
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//MultiSim.qml:42
@@ -1654,7 +1658,7 @@ msgstr "Rata de utilizare a datelor"
 #: ../plugins/cellular//Components//SingleSim.qml:66
 #: ../plugins/cellular//Components//NoSim.qml:47
 msgid "Carrier"
-msgstr ""
+msgstr "Furnizor servicii"
 
 #: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
@@ -1672,7 +1676,7 @@ msgstr "În regulă"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
 #: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
-msgstr ""
+msgstr "Date celulare:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
@@ -1690,7 +1694,7 @@ msgstr "2G/3G/4G (rapid)"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr ""
+msgstr "Date în roaming"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
@@ -1725,8 +1729,9 @@ msgstr "Nicio imagine selectată"
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Șterge %1 fotografie"
+msgstr[1] "Șterge %1 fotografii"
+msgstr[2] "Șterge %1 de fotografii"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
@@ -1773,15 +1778,15 @@ msgstr "Omite"
 
 #: ../wizard/qml/Pages//10-welcome.qml:24
 msgid "Hi!"
-msgstr ""
+msgstr "Salut!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "Bun venit! Acesta este telefonul dumneavoastră Ubuntu."
 
 #: ../wizard/qml/Pages//10-welcome.qml:49
 msgid "Let’s get started."
-msgstr ""
+msgstr "Să începem."
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
@@ -1802,7 +1807,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "Efectuat"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
@@ -1833,6 +1838,8 @@ msgstr "Acest lucru poate fi dezactivat din configurările de sistem"
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
+"Utilizează rețeaua mobilă și rețeaua fără fir pentru a determina poziția "
+"dumneavoastră."
 
 #: ../wizard/qml/Pages//30-location.qml:58
 msgid ""
@@ -1843,11 +1850,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
-msgstr ""
+msgstr "Configurare securitate blocare"
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "Glisare"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
@@ -1859,11 +1866,11 @@ msgstr "Aceste fraze secrete nu se potrivesc."
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "Codul PIN trebuie să conțină cel puțin patru caractere."
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "Fraza secretă trebuie să fie formată din cel puțin patru caractere."
 
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
@@ -2160,10 +2167,13 @@ msgstr "informații"
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
 msgstr ""
+"Solicitarea curentă nu poate fi anulată (serviciul nu poate fi contactat)"
 
 #: ../plugins/system-update//system_update.cpp:98
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
+"Solicitarea curentă nu poate fi pusă în pauză (serviciul nu poate fi "
+"contactat)"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:301
 msgid "Incorrect PIN code. Try again."
@@ -2175,19 +2185,19 @@ msgstr "Frază secretă incorectă. Încercați din nou."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
-msgstr ""
+msgstr "Nu se poate configura modelul de securitate"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "Nu se poate configura indiciul referitor la securitatea ecranului"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
-msgstr ""
+msgstr "Eroare manipulare jeton de autentificare"
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
-msgstr ""
+msgstr "Titlu necunoscut"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
