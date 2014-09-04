@@ -25,7 +25,7 @@ Item {
     readonly property real topMargin: units.gu(8)
     readonly property real leftMargin: units.gu(2)
     readonly property real rightMargin: units.gu(2)
-    readonly property real bottomMargin: backButton.height + buttonMargin * 3
+    readonly property real bottomMargin: backButton.height + buttonMargin * 2
 
     property bool hasBackButton: true
     property bool customBack: false

@@ -23,14 +23,16 @@
 #include <QtQml/QQmlContext>
 #include "click.h"
 #include "storageabout.h"
+#include "networkabout.h"
 
 
 void BackendPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.StorageAbout"));
-    
+
     qRegisterMetaType<ClickModel::Roles>();
     qmlRegisterType<ClickModel>(uri, 1, 0, "ClickRoles");
+    qmlRegisterType<NetworkAbout>(uri, 1, 0, "NetworkAbout");
     qmlRegisterType<StorageAbout>(uri, 1, 0, "UbuntuStorageAboutPanel");
 }
 

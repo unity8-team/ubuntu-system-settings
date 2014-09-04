@@ -110,6 +110,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_reset_phone(self):
         return self._go_to_page('entryComponent-reset', 'resetPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_language_page(self):
+        return self._go_to_page('entryComponent-language', 'languagePage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -174,6 +178,11 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def security_page(self):
         """ Return 'Security' page """
         return self.select_single(objectName='securityPrivacyPage')
+
+    @property
+    def about_page(self):
+        """ Return 'About' page """
+        return self.select_single(objectName='aboutPage')
 
     @property
     def _orientation_lock_switch(self):
@@ -552,4 +561,101 @@ class FactoryResetConfirmationDialog(
     @autopilot.logging.log_action(logger.debug)
     def confirm_reset(self):
         button = self.select_single('Button', objectName='factoryResetAction')
+        self.pointing_device.click_object(button)
+
+
+class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Language page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'languagePage':
+                return True
+        return False
+
+    def get_current_language(self):
+        return self.select_single(
+            'Label', objectName='currentLanguage').currentLanguage
+
+    def _click_change_display_language(self):
+        item = self.select_single(objectName='displayLanguage')
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().select_single(
+            objectName='displayLanguageDialog')
+
+    @autopilot.logging.log_action(logger.info)
+    def change_display_language(self, langIndex, reboot=True):
+        """Changes display language.
+
+        :param langIndex: The language index to change to.
+
+        :param reboot: Whether to reboot or not
+
+        :returns: The language page
+
+        """
+        dialog = self._click_change_display_language()
+        dialog.set_language(langIndex, reboot)
+        return self.get_root_instance()
+
+
+class DisplayLanguage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Display Language dialog."""
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_language(self, index, reboot):
+        self._click_language_item(index)
+        reboot_dialog = self._click_confirm()
+
+        if reboot:
+            reboot_dialog.reboot()
+        else:
+            reboot_dialog.revert()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_language_item(self, index):
+        languages_list = self.select_single('QQuickListView',
+                                            objectName='languagesList')
+        languages_list.click_element('languageName%d' % index)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_confirm(self):
+        button = self.select_single('Button',
+                                    objectName='confirmChangeLanguage')
+        self.pointing_device.click_object(button)
+        return self.get_root_instance().select_single(
+            objectName='rebootNecessaryDialog')
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_cancel(self):
+        button = self.select_single('Button',
+                                    objectName='cancelChangeLanguage')
+        self.pointing_device.click_object(button)
+
+
+class RebootNecessary(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Reboot Necessary dialog."""
+
+    @autopilot.logging.log_action(logger.debug)
+    def reboot(self):
+        self._click_reboot()
+
+    @autopilot.logging.log_action(logger.debug)
+    def revert(self):
+        self._click_revert()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_reboot(self):
+        button = self.select_single('Button', objectName='reboot')
+        self.pointing_device.click_object(button)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_revert(self):
+        button = self.select_single('Button', objectName='revert')
         self.pointing_device.click_object(button)

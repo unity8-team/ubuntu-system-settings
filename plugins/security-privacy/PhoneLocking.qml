@@ -42,7 +42,7 @@ ItemPage {
         anchors.right: parent.right
 
         ListItem.SingleValue {
-            property string swipe: i18n.tr("None")
+            property string swipe: qsTr("None", "Unlock with swipe")
             property string passcode: i18n.tr("PIN code")
             property string passphrase: i18n.tr("Passphrase")
 

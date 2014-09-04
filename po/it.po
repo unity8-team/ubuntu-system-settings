@@ -1748,8 +1748,8 @@ msgid "System"
 msgstr "Sistema"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Connetti alla rete Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr "Connetti alla rete Wi‑Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"

@@ -21,6 +21,7 @@
 #define WIFI_DBUS_HELPER
 
 #include <QObject>
+#include <QtDBus>
 
 /**
  * For sending specific dbus messages from QML.
@@ -28,6 +29,9 @@
 
 class WifiDbusHelper final : public QObject {
     Q_OBJECT
+    Q_PROPERTY( QString wifiIp4Address
+                READ getWifiIpAddress
+                NOTIFY wifiIp4AddressChanged)
 
 public:
     explicit WifiDbusHelper(QObject *parent = nullptr);
@@ -36,7 +40,14 @@ public:
     Q_INVOKABLE void connect(QString ssid, int security, QString password);
     Q_INVOKABLE QList<QStringList> getPreviouslyConnectedWifiNetworks();
     Q_INVOKABLE void forgetConnection(const QString dbus_path);
+    Q_INVOKABLE bool deactivateConnection();
 
+Q_SIGNALS:
+    void wifiIp4AddressChanged(QString wifiIp4Address);
+
+private:
+    QDBusConnection m_systemBusConnection;
+    QString getWifiIpAddress();
 };
 
 

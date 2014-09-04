@@ -59,7 +59,6 @@ Column {
                             pageStack.push(model.item.pageComponent,
                                            { plugin: model.item, pluginManager: pluginManager })
                         }
-                        loader.item.highlighted = false;
                     }
                 }
             }

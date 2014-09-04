@@ -17,14 +17,14 @@
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
 import Ubuntu.Components 0.1
-import Ubuntu.SystemSettings.Wifi 1.0
+import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import Ubuntu.Settings.Menus 0.1 as Menus
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
     id: wifiPage
-    title: i18n.tr("Connect to Wi-Fi")
+    title: i18n.tr("Connect to Wi‑Fi")
     forwardButtonSourceComponent: forwardButton
 
     readonly property bool connected: mainMenu.connectedAPs === 1
@@ -36,15 +36,95 @@ LocalComponents.Page {
         return defaultValue;
     }
 
-    SortFilterProxyModel {
+    QMenuModel.UnityMenuModel {
         id: menuModel
-        filterRole: 5 // UnityMenuModel.TypeRole should really be exported from unitymenumodel
-        filterRegExp: RegExp("unity.widgets.systemsettings.tablet.accesspoint")
-        model: QMenuModel.UnityMenuModel {
-            id: unitymenumodel
-            busName: "com.canonical.indicator.network"
-            actions: { "indicator": "/com/canonical/indicator/network" }
-            menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
+        busName: "com.canonical.indicator.network"
+        actions: { "indicator": "/com/canonical/indicator/network" }
+        menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
+    }
+
+    Component {
+        id: accessPointComponent
+        ListItem.Standard {
+            id: accessPoint
+            objectName: "accessPoint"
+
+            property QtObject menuData: null
+            property var unityMenuModel: menuModel
+            property var extendedData: menuData && menuData.ext || undefined
+            property var strengthAction: QMenuModel.UnityMenuAction {
+                model: unityMenuModel
+                index: menuIndex
+                name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
+            }
+            property bool checked: menuData && menuData.isToggled || false
+            property bool secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
+            property bool adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
+            property int signalStrength: strengthAction.valid ? strengthAction.state : 0
+            property int menuIndex: -1
+
+            function loadAttributes() {
+                if (!unityMenuModel || menuIndex == -1) return;
+                unityMenuModel.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
+                                                                  'x-canonical-wifi-ap-is-secure': 'bool',
+                                                                  'x-canonical-wifi-ap-strength-action': 'string'});
+            }
+
+            signal activate()
+
+            text: menuData && menuData.label || ""
+            enabled: menuData && menuData.sensitive || false
+            iconName: {
+                var imageName = "nm-signal-100";
+
+                if (adHoc) {
+                    imageName = "nm-adhoc";
+                } else if (signalStrength == 0) {
+                    imageName = "nm-signal-00";
+                } else if (signalStrength <= 25) {
+                    imageName = "nm-signal-25";
+                } else if (signalStrength <= 50) {
+                    imageName = "nm-signal-50";
+                } else if (signalStrength <= 75) {
+                    imageName = "nm-signal-75";
+                }
+
+                if (secure) {
+                    imageName += "-secure";
+                }
+                return imageName;
+            }
+            iconFrame: false
+            control: CheckBox {
+                id: checkBoxActive
+
+                onClicked: {
+                    accessPoint.activate();
+                }
+            }
+            style: Rectangle {
+                color: "#4c000000"
+            }
+
+            Component.onCompleted: {
+                loadAttributes();
+            }
+            onUnityMenuModelChanged: {
+                loadAttributes();
+            }
+            onMenuIndexChanged: {
+                loadAttributes();
+            }
+            onCheckedChanged: {
+                // Can't rely on binding. Checked is assigned on click.
+                checkBoxActive.checked = checked;
+                if (checked) {
+                    mainMenu.connectedAPs++
+                } else {
+                    mainMenu.connectedAPs--
+                }
+            }
+            onActivate: unityMenuModel.activate(menuIndex);
         }
     }
 
@@ -66,75 +146,44 @@ LocalComponents.Page {
             text: i18n.tr("Available networks")
         }
 
-        ListView {
-            id: mainMenu
-
-            property int connectedAPs: 0
-
-            model: menuModel
-            height: column.height - label.height - column.spacing
+        Flickable {
             anchors.left: parent.left
             anchors.right: parent.right
+            height: column.height - label.height - column.spacing
+            contentHeight: contentItem.childrenRect.height
             clip: true
+            flickDeceleration: 1500 * units.gridUnit / 8
+            maximumFlickVelocity: 2500 * units.gridUnit / 8
+            boundsBehavior: (contentHeight > height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-            // Ensure all delegates are cached in order to improve smoothness of scrolling
-            cacheBuffer: 10000
+            Column {
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-            // Only allow flicking if the content doesn't fit on the page
-            boundsBehavior: (contentHeight > mainMenu.height) ?
-                                Flickable.DragAndOvershootBounds :
-                                Flickable.StopAtBounds
+                Repeater {
+                    id: mainMenu
 
-            currentIndex: -1
-            delegate: Menus.AccessPointMenu {
-                id: menuDelegate
+                    // FIXME Check connection better https://bugs.launchpad.net/indicator-network/+bug/1349371
+                    property int connectedAPs: 0
 
-                property int menuIndex: menuModel.mapRowToSource(index)
-                property var extendedData: model.ext
-                property var serverToggle: model.isToggled
-                property var strengthAction: QMenuModel.UnityMenuAction {
-                    model: unitymenumodel
-                    index: menuIndex
-                    name: getExtendedProperty(extendedData, "xCanonicalWifiApStrengthAction", "")
-                }
+                    model: menuModel
 
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                text: model.label
-                enabled: model.sensitive
-                secure: getExtendedProperty(extendedData, "xCanonicalWifiApIsSecure", false)
-                adHoc: getExtendedProperty(extendedData, "xCanonicalWifiApIsAdhoc", false)
-                signalStrength: strengthAction.valid ? strengthAction.state : 0
+                    delegate: Loader {
+                        id: loader
 
-                style: Rectangle {
-                    color: "black"
-                    opacity: 0.3
-                }
+                        readonly property bool isAccessPoint: model.type === "unity.widgets.systemsettings.tablet.accesspoint"
 
-                onCheckedChanged: {
-                    if (checked) {
-                        mainMenu.connectedAPs++
-                    } else {
-                        mainMenu.connectedAPs--
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        height: isAccessPoint ? units.gu(6) : 0
+                        asynchronous: true
+                        sourceComponent: isAccessPoint ? accessPointComponent : null
+
+                        onLoaded: {
+                            item.menuData = Qt.binding(function() { return model; });
+                            item.menuIndex = Qt.binding(function() { return index; });
+                        }
                     }
-                }
-                onMenuIndexChanged: {
-                    loadAttributes();
-                }
-                onServerToggleChanged: {
-                    checked = serverToggle;
-                }
-                onTriggered: {
-                    unitymenumodel.activate(menuIndex);
-                }
-
-                function loadAttributes() {
-                    if (!unitymenumodel || menuIndex == -1) return;
-                    unitymenumodel.loadExtendedAttributes(menuIndex, {'x-canonical-wifi-ap-is-adhoc': 'bool',
-                                                                      'x-canonical-wifi-ap-is-secure': 'bool',
-                                                                      'x-canonical-wifi-ap-strength-action': 'string'});
                 }
             }
         }
