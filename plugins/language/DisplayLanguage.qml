@@ -26,8 +26,11 @@ import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 SheetBase {
     id: root
+    objectName: "displayLanguageDialog"
 
     property string initialLanguage
+
+    signal languageChanged (int newLanguage, int oldLanguage)
 
     modal: true
     title: i18n.tr("Display language")
@@ -41,7 +44,7 @@ SheetBase {
 
     ListView {
         id: languageList
-
+        objectName: "languagesList"
         clip: true
 
         anchors.top: parent.top
@@ -59,6 +62,7 @@ SheetBase {
 
         model: plugin.languageNames
         delegate: ListItem.Standard {
+            objectName: "languageName" + index
             text: modelData
             selected: index == languageList.currentIndex
 
@@ -90,7 +94,7 @@ SheetBase {
 
         Button {
             id: cancelButton
-
+            objectName: "cancelChangeLanguage"
             text: i18n.tr("Cancel")
 
             anchors.left: parent.left
@@ -110,7 +114,7 @@ SheetBase {
 
         Button {
             id: confirmButton
-
+            objectName: "confirmChangeLanguage"
             text: i18n.tr("Confirm")
             enabled: languageList.currentIndex != plugin.currentLanguage
 
@@ -123,8 +127,11 @@ SheetBase {
             anchors.bottomMargin: units.gu(1)
 
             onClicked: {
-                plugin.currentLanguage = languageList.currentIndex
-                PopupUtils.close(root)
+                var oldLang = plugin.currentLanguage;
+                var newLang = languageList.currentIndex;
+                languageChanged(newLang, oldLang);
+                plugin.currentLanguage = newLang;
+                PopupUtils.close(root);
             }
         }
     }
