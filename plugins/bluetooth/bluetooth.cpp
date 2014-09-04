@@ -40,7 +40,7 @@ Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
     // export our Agent to handle pairing requests
     new AgentAdaptor(&m_agent);
     if(!m_dbus.registerObject(DBUS_AGENT_PATH, &m_agent))
-        qFatal("Couldn't register agent at " DBUS_AGENT_PATH);
+        qCritical() << "Couldn't register agent at" << DBUS_AGENT_PATH;
 
     m_connectedDevices.filterOnConnections(Device::Connection::Connected |
                                            Device::Connection::Connecting |
