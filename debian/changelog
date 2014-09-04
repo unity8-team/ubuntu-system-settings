@@ -1,3 +1,32 @@
+ubuntu-system-settings (0.3+14.10.20140904-0ubuntu1) utopic; urgency=low
+
+  [ Andrea Cimitan ]
+  * Various fixes for wifi wizard page (LP: #1362296)
+
+  [ Sebastien Bacher ]
+  * [security] don't mark "%1" string as translatable
+  * [security] give a translation context to the 'None' string (LP:
+    #1362143)
+  * [licenses] display an error when the copyright can't be read (LP:
+    #1206150)
+
+  [ Michael Terry ]
+  * Avoid another race condition when switching password types by
+    completing all DBus operations synchronously as we exit the
+    policykit agent. LP: 1361137 (LP: #1361137)
+  * Fix the OSK not working on first boot. When the wizard closes, shut
+    down maliit-server and the indicators so that unity8 can start them
+    itself. LP: 1362679 (LP: #1362679)
+
+  [ jonas-drange ]
+  * [about] print out phone numbers for dual sims as well
+  * [about/wifi] adding mac addresses for bt and wifi, and ip for wifi
+    (LP: #1356239)
+  * [language] explain to the user that a reboot is necessary for the
+    change to take effect (LP: #1240875)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 04 Sep 2014 00:59:05 +0000
+
 ubuntu-system-settings (0.3+14.10.20140902.2-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]

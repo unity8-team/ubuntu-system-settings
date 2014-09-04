@@ -29,6 +29,7 @@ import Ubuntu.SystemSettings.LanguagePlugin 1.0
 
 ItemPage {
     id: root
+    objectName: "languagePage"
 
     title: i18n.tr("Language & Text")
 
@@ -39,7 +40,13 @@ ItemPage {
     Component {
         id: displayLanguage
 
-        DisplayLanguage {}
+        DisplayLanguage {
+            onLanguageChanged: {
+                PopupUtils.open(rebootNecessaryNotification, root, {
+                    revertTo: oldLanguage
+                })
+            }
+        }
     }
 
     Component {
@@ -52,6 +59,20 @@ ItemPage {
         id: spellChecking
 
         SpellChecking {}
+    }
+
+    Component {
+        id: rebootNecessaryNotification
+
+        RebootNecessary {
+
+            onReboot: {
+                plugin.reboot();
+            }
+            onRevert: {
+                plugin.currentLanguage = to;
+            }
+        }
     }
 
     GSettings {
@@ -77,7 +98,10 @@ ItemPage {
             Menus.StandardMenu {
                 iconSource: "image://theme/language-chooser"
                 text: i18n.tr("Display language…")
+                objectName: "displayLanguage"
                 component: Label {
+                    property int currentLanguage: plugin.currentLanguage
+                    objectName: "currentLanguage"
                     text: plugin.languageNames[plugin.currentLanguage]
                     elide: Text.ElideRight
                     opacity: enabled ? 1.0 : 0.5

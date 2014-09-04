@@ -48,11 +48,17 @@ ItemPage {
 
     OfonoManager {
         id: manager
+        Component.onCompleted: {
+            if (manager.modems.length === 1) {
+                phoneNumbers.setSource("PhoneNumber.qml", {path: manager.modems[0]})
+            } else if (manager.modems.length > 1) {
+                phoneNumbers.setSource("PhoneNumbers.qml", {paths: manager.modems.slice(0).sort()})
+            }
+        }
     }
 
-    OfonoSimManager {
-        id: sim
-        modemPath: manager.modems[0]
+    NetworkAbout {
+        id: network
     }
 
     Flickable {
@@ -91,14 +97,10 @@ ItemPage {
                 }
             }
 
-            ListItem.SingleValue {
-                id: numberItem
-                objectName: "numberItem"
-                text: i18n.tr("Phone number")
-                property string phoneNumber
-                phoneNumber: sim.subscriberNumbers.length > 0 ? sim.subscriberNumbers[0] : ""
-                value: phoneNumber
-                visible: phoneNumber.length > 0
+            Loader {
+                id: phoneNumbers
+                anchors.left: parent.left
+                anchors.right: parent.right
             }
 
             ListItem.SingleValue {
@@ -116,6 +118,21 @@ ItemPage {
                 text: "IMEI"
                 value: imeiNumber
                 visible: imeiNumber
+            }
+
+            ListItem.SingleValue {
+                text: i18n.tr("Wi-Fi address")
+                value: network.networkMacAddresses[0]
+                visible: network.networkMacAddresses.length > 0
+                showDivider: bthwaddr.visible
+            }
+
+            ListItem.SingleValue {
+                id: bthwaddr
+                text: i18n.tr("Bluetooth address")
+                value: network.bluetoothMacAddress
+                visible: network.bluetoothMacAddress
+                showDivider: false
             }
 
             ListItem.Divider {}

@@ -106,6 +106,17 @@ Item {
         }
     }
 
+    Rectangle {
+        id: modalNotificationBackground
+        visible: notifications.useModal && (notifications.state == "narrow")
+        anchors.fill: parent
+        color: "#80000000"
+
+        MouseArea {
+            anchors.fill: parent
+        }
+    }
+
     InputMethod {
         anchors.fill: parent
     }
