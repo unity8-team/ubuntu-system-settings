@@ -192,7 +192,6 @@ ItemPage {
                 enabled: true
                 property variant locationEnabled
                 onLocationEnabledChanged: {
-                    console.warn("onLocationEnabledChanged: " + locationEnabled)
                     value = locationEnabled ?
                        i18n.tr("On") : i18n.tr("Off")
                 }

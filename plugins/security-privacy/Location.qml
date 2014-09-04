@@ -102,7 +102,6 @@ ItemPage {
                 text: model.applicationName
                 iconSource: model.iconName
                 control: Switch {
-                    id: welcomeStatsSwitch
                     checked: model.granted
                     onClicked: model.setEnabled(index, !model.granted)
                 }

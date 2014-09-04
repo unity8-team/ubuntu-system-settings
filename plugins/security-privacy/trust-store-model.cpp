@@ -51,7 +51,7 @@ public:
         QString localShare =
             QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
         QString desktopFilename(QString("%1/applications/%2.desktop").
-                              arg(localShare).arg(id));
+                                arg(localShare).arg(id));
         if (QFile(desktopFilename).exists())
             return desktopFilename;
 
@@ -59,15 +59,16 @@ public:
         QDir dir(QString("%1/applications").arg(localShare));
         dir.setFilter(QDir::Files);
         QStringList fileList = dir.entryList();
+        QString pattern = QString("%1*.desktop").arg(id);
         for (int i = 0; i < fileList.count(); i++) {
             /* stop at the first match */
-            if (QDir::match(QString("%1*.desktop").arg(id), fileList[i])) {
+            if (QDir::match(pattern, fileList[i])) {
                 return QString("%1/applications/%2").arg(localShare).arg(fileList[i]);
             }
         } 
         
         qWarning() << "No desktop file found for app id: " << id;
-        return QString("");
+        return QString();
     }
 
     QString resolveIcon(const QString &iconName, const QString &basePath) {
