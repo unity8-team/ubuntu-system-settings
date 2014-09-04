@@ -20,8 +20,17 @@ set(QML_SOURCES
 )
 
 add_library(UbuntuStorageAboutPanel MODULE
-plugin.cpp storageabout.cpp click.cpp plugin.h storageabout.h click.h
-${QML_SOURCES}) # So they show up in Qt designer.
+    plugin.cpp
+    storageabout.cpp
+    click.cpp
+    networkabout.cpp
+    plugin.h
+    storageabout.h
+    click.h
+    networkabout.h
+    ${QML_SOURCES} # So they show up in Qt designer.
+)
+
 qt5_use_modules(UbuntuStorageAboutPanel Qml Quick DBus)
 target_link_libraries(UbuntuStorageAboutPanel
 ${ANDR_PROP_LDFLAGS} ${GLIB_LDFLAGS} ${GIO_LDFLAGS})

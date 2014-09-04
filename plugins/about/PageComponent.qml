@@ -57,6 +57,10 @@ ItemPage {
         }
     }
 
+    NetworkAbout {
+        id: network
+    }
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
@@ -114,6 +118,21 @@ ItemPage {
                 text: "IMEI"
                 value: imeiNumber
                 visible: imeiNumber
+            }
+
+            ListItem.SingleValue {
+                text: i18n.tr("Wi-Fi address")
+                value: network.networkMacAddresses[0]
+                visible: network.networkMacAddresses.length > 0
+                showDivider: bthwaddr.visible
+            }
+
+            ListItem.SingleValue {
+                id: bthwaddr
+                text: i18n.tr("Bluetooth address")
+                value: network.bluetoothMacAddress
+                visible: network.bluetoothMacAddress
+                showDivider: false
             }
 
             ListItem.Divider {}

@@ -7,6 +7,7 @@ HLine.qml
 IndicatorBase.qml
 MenuItemFactory.qml
 NetworkDetails.qml
+NetworkDetailsBrief.qml
 OtherNetwork.qml
 PageComponent.qml
 PreviousNetworks.qml
