@@ -159,7 +159,7 @@ on_completed(PolkitAgentSession */*session*/,
     UssPolkitListenerPrivate *priv = listener->priv;
 
     priv->successful = gained_authorization;
-    g_simple_async_result_complete_in_idle(priv->simple);
+    g_simple_async_result_complete(priv->simple);
 
     g_clear_object(&priv->simple);
     g_clear_object(&priv->session);
