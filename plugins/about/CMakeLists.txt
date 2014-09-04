@@ -8,6 +8,8 @@ set(QML_SOURCES
     EntryComponent.qml
     License.qml
     PageComponent.qml
+    PhoneNumber.qml
+    PhoneNumbers.qml
     Software.qml
     Storage.qml
     StorageBar.qml

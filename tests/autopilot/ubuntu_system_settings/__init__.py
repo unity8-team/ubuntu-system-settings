@@ -176,6 +176,11 @@ class MainWindow(ubuntuuitoolkit.MainView):
         return self.select_single(objectName='securityPrivacyPage')
 
     @property
+    def about_page(self):
+        """ Return 'About' page """
+        return self.select_single(objectName='aboutPage')
+
+    @property
     def _orientation_lock_switch(self):
         return self.wait_select_single(
             ubuntuuitoolkit.CheckBox,
