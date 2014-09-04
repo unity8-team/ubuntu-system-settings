@@ -80,9 +80,6 @@ ItemPage {
                 root.batterySafeForUpdate = true;
             }
         }
-        Component.onCompleted: {
-            onChargingStateChanged(0, chargingState(0));
-        }
     }
 
     Component {
