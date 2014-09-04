@@ -189,10 +189,10 @@ ItemPage {
                     trans.state = ContentTransfer.Finalized;
                 }
             }
-            // if we did an import, clean up
+            // if we did an import, always save the file
             if ((target.state === "cancelled") &&
                 (trans && trans.state === ContentTransfer.Collected)) {
-                backgroundPanel.rmFile(target.uri);
+                backgroundPanel.prepareBackgroundFile(target.uri, true);
                 trans.state = ContentTransfer.Finalized;
             }
         }

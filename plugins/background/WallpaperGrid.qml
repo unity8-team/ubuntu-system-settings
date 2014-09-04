@@ -180,6 +180,7 @@ Column {
                         anchors.centerIn: parent
                     }
                     ActionSelectionPopover {
+                        z: 100
                         id: actPop
                         caller: emptyItemForCaller
                         delegate: ListItem.Standard {
