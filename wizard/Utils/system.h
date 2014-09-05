@@ -29,13 +29,6 @@ class System : public QObject
     Q_PROPERTY(QString hereLicensePath READ hereLicensePath NOTIFY hereLicensePathChanged)
 
 public:
-    static System *instance()
-    {
-        static System instance_;
-        return &instance_;
-    }
-
-public:
     bool hereEnabled() const;
     void setHereEnabled(bool enabled);
 
