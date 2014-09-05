@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-04 08:33+0000\n"
+"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -2270,7 +2270,3 @@ msgstr "Tik om naar de update te gaan."
 
 #~ msgid "Use your mobile network and wi-fi to work out where you are."
 #~ msgstr "Gebruik uw mobielnetwerk en WiFi om uw locatie te bepalen."
-
-#, qt-format
-#~ msgid "%1 attempts remaining"
-#~ msgstr "Nog %1 pogingen over"

@@ -231,13 +231,23 @@ ItemPage {
                 Component.onCompleted: start()
             }
             ListItem.SingleValue {
+                id: locationItem
                 text: i18n.tr("Location access")
-                value: locationActionGroup.enabled.state ?
-                           i18n.tr("On") : i18n.tr("Off")
+                value: ""
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Location.qml"))
-                visible: showAllUI && // Hidden until the indicator works
-                         locationActionGroup.enabled.state !== undefined
+                visible: true
+                enabled: true
+                property variant locationEnabled
+                onLocationEnabledChanged: {
+                    value = locationEnabled ?
+                       i18n.tr("On") : i18n.tr("Off")
+                }
+            }
+            Binding {
+                target: locationItem
+                property: "locationEnabled"
+                value: locationActionGroup.enabled.state
             }
             ListItem.SingleValue {
                 text: i18n.tr("Other app access")
