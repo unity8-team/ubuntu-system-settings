@@ -38,14 +38,12 @@ ItemPage {
 
     property bool installAll: false
     property bool includeSystemUpdate: false
+    property bool systemUpdateInProgress: false
     property int updatesAvailable: 0
-    property bool isCharging: batteryInfo.chargingState === BatteryInfo.Charging
-    property bool batterySafeForUpdate: isCharging || chargeLevel > 50
+    property bool isCharging: false
+    property bool batterySafeForUpdate: isCharging || chargeLevel > 25
     property var chargeLevel: indicatorPower.batteryLevel || 0
     property var notificationAction;
-
-    onChargeLevelChanged: console.warn("chargeLevel: " + chargeLevel)
-    onIsChargingChanged: console.warn("isCharging: " + isCharging)
 
     QDBusActionGroup {
         id: indicatorPower
@@ -62,9 +60,7 @@ ItemPage {
 
     BatteryInfo {
         id: batteryInfo
-
         monitorChargingState: true
-        monitorBatteryStatus: true
 
         onChargingStateChanged: {
             if (state === BatteryInfo.Charging) {
@@ -112,6 +108,7 @@ ItemPage {
                      item.progressBar.opacity = 0;
                      modelItem.updateReady = true;
                      modelItem.selected = false;
+                     root.systemUpdateInProgress = false;
                      PopupUtils.close(dialogueInstall);
                  }
              }
@@ -185,8 +182,10 @@ ItemPage {
         }
 
         onSystemUpdateDownloaded: {
-            root.updatesAvailable -= 1;
-            PopupUtils.open(dialogInstallComponent);
+            if (!root.systemUpdateInProgress && !installingImageUpdate.visible) {
+                root.systemUpdateInProgress = true;
+                PopupUtils.open(dialogInstallComponent);
+            }
         }
 
         onSystemUpdateFailed: {
