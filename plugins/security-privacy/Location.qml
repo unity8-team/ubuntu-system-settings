@@ -103,7 +103,7 @@ ItemPage {
                 iconSource: model.iconName
                 control: Switch {
                     checked: model.granted
-                    onClicked: model.setEnabled(index, !model.granted)
+                    onClicked: trustStoreModel.setEnabled(index, !model.granted)
                 }
                 visible: locationOn.checked
             }
