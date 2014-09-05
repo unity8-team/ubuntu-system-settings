@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+14.10.20140905.1-0ubuntu1) utopic; urgency=low
+
+  [ David Barth ]
+  * Enable location panel, display contols for authorized applications.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 05 Sep 2014 09:01:36 +0000
+
 ubuntu-system-settings (0.3+14.10.20140904.2-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
