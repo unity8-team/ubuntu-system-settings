@@ -62,7 +62,26 @@ ItemPage {
 
     BatteryInfo {
         id: batteryInfo
+
         monitorChargingState: true
+        monitorBatteryStatus: true
+
+        onChargingStateChanged: {
+            if (state === BatteryInfo.Charging) {
+                isCharging = true
+            }
+            else if (state === BatteryInfo.Discharging &&
+                     batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
+                isCharging = false
+            }
+            else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
+                     state === BatteryInfo.NotCharging) {
+                isCharging = true
+            }
+        }
+        Component.onCompleted: {
+            onChargingStateChanged(0, chargingState(0))
+        }
     }
 
     Component {
