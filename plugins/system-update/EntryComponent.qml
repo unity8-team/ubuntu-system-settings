@@ -31,21 +31,39 @@ ListItem.SingleValue {
     iconFrame: false
     progression: true
 
-    value: root.updatesAvailable > 0 ? root.updatesAvailable : ""
+    value: updatesAvailable > 0 ? updatesAvailable : ""
 
     property int updatesAvailable: 0
+
+    function _updatesRefresh() {
+        var _updatesAvailable = 0;
+        for (var i=0; i < updateManager.model.length; i++) {
+            if (updateManager.model[i].updateState)
+                _updatesAvailable += 1;
+        }
+        root.updatesAvailable = _updatesAvailable;
+        if (root.updatesAvailable > 0)
+            parent.visible = true;
+        else
+            parent.visible = false;
+    }
 
     Item {
         UpdateManager {
             id: updateManager
             objectName: "updateManager"
+            onModelChanged: {
+                console.warn("onModelChanged: " + updateManager.model.length)
+                root._updatesRefresh();
+            }
 
             Component.onCompleted: {
                 updateManager.checkUpdates();
             }
 
             onUpdateAvailableFound: {
-                root.updatesAvailable = updateManager.model.length;
+                console.warn("onUpdateAvailableFound: " + updateManager.model.length)
+                root._updatesRefresh();
             }
         }
     }
