@@ -38,10 +38,6 @@ ItemPage {
         id: storedInfo
     }
 
-    UpdateManager {
-        id: updateBackendInfo
-    }
-
     Flickable {
         anchors.fill: parent
 
@@ -51,14 +47,14 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "versionBuildNumberItem"
                 text: i18n.tr("OS build number")
-                value: updateBackendInfo.currentBuildNumber ? updateBackendInfo.currentBuildNumber : "Non system image"
+                value: UpdateManager.currentBuildNumber ? UpdateManager.currentBuildNumber : "Non system image"
             }
 
             ListItem.SingleValue {
                 objectName: "ubuntuVersionBuildNumberItem"
                 text: i18n.tr("Ubuntu Image part")
-                value: updateBackendInfo.currentUbuntuBuildNumber
-                visible: updateBackendInfo.currentUbuntuBuildNumber
+                value: UpdateManager.currentUbuntuBuildNumber
+                visible: UpdateManager.currentUbuntuBuildNumber
             }
 
             ListItem.SingleValue {
@@ -98,8 +94,8 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "deviceVersionBuildNumberItem"
                 text: i18n.tr("Device Image part")
-                value: updateBackendInfo.currentDeviceBuildNumber
-                visible: updateBackendInfo.currentDeviceBuildNumber
+                value: UpdateManager.currentDeviceBuildNumber
+                visible: UpdateManager.currentDeviceBuildNumber
             }
 
             ListItem.SingleValue {
