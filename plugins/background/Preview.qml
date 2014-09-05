@@ -28,6 +28,9 @@ ItemPage {
     anchors.fill: parent
 
     property string uri
+
+    // whether an image was just imported from e.g. contentHub
+    property bool imported: false
     signal save
     property Item headerStyle: header.__styleInstance ?
                                    header.__styleInstance : null
