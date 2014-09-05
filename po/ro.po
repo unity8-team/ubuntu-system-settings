@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-09-04 08:33+0000\n"
+"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -2260,7 +2260,3 @@ msgstr "Atingeți pentru a deschide programul de actualizare a sistemului."
 
 #~ msgid "Those passcodes don't match."
 #~ msgstr "Aceste coduri de acces nu se potrivesc."
-
-#, qt-format
-#~ msgid "%1 attempts remaining"
-#~ msgstr "%1 încercări rămase"

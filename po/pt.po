@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-04 08:33+0000\n"
+"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -2265,7 +2265,3 @@ msgstr "Carregue para abrir o atualizador de sistema."
 
 #~ msgid "Incorrect passcode. Try again."
 #~ msgstr "Senha incorreta. Tente novamente."
-
-#, qt-format
-#~ msgid "%1 attempts remaining"
-#~ msgstr "%1 tentativas restantes"

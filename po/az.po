@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-08-30 10:14+0000\n"
+"PO-Revision-Date: 2014-09-04 16:05+0000\n"
 "Last-Translator: Nicat Məmmədov <n1c4t97@gmail.com>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:15+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
 msgid "Previous networks"
-msgstr ""
+msgstr "Əvvəlki şəbəkələr"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -32,11 +32,11 @@ msgstr "Wi-Fi"
 
 #: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
-msgstr ""
+msgstr "Başqa şəbəkə"
 
 #: ../plugins/wifi//OtherNetwork.qml:56
 msgid "Network name"
-msgstr ""
+msgstr "Şəbəkə adı"
 
 #: ../plugins/wifi//OtherNetwork.qml:66
 #: ../plugins/security-privacy//PageComponent.qml:126
@@ -49,11 +49,11 @@ msgstr "Təhlükəsizlik"
 #: ../plugins/bluetooth//PageComponent.qml:323
 #: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
-msgstr "Heçbiri"
+msgstr "Heç biri"
 
 #: ../plugins/wifi//OtherNetwork.qml:68
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA & WPA2 Şəxsi"
 
 #: ../plugins/wifi//OtherNetwork.qml:69
 msgid "WEP"
@@ -65,7 +65,7 @@ msgstr "Şifrə"
 
 #: ../plugins/wifi//OtherNetwork.qml:89
 msgid "Password visible"
-msgstr ""
+msgstr "Görünə bilən şifrə"
 
 #: ../plugins/wifi//OtherNetwork.qml:112
 #: ../plugins/time-date//TimePicker.qml:173
@@ -85,7 +85,7 @@ msgstr ""
 #: ../plugins/cellular//Components//SimEditor.qml:189
 #: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
-msgstr "Ləğv et"
+msgstr "İmtina"
 
 #: ../plugins/wifi//OtherNetwork.qml:121
 #: ../plugins/bluetooth//PageComponent.qml:408
@@ -94,7 +94,7 @@ msgstr "Bağlan"
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
-msgstr ""
+msgstr "Şəbəkə təfərrüatları"
 
 #: ../plugins/wifi//NetworkDetails.qml:43
 #: ../plugins/bluetooth//PageComponent.qml:343
@@ -103,7 +103,7 @@ msgstr "Ad"
 
 #: ../plugins/wifi//NetworkDetails.qml:51
 msgid "Last connected"
-msgstr ""
+msgstr "Son bağlantı"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
 #: ../plugins/system-update//PageComponent.qml:521
@@ -124,15 +124,15 @@ msgstr "Şifrәni göstәr"
 
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
-msgstr ""
+msgstr "Şəbəkəni unut"
 
 #: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
-msgstr ""
+msgstr "Tarix və vaxtı tənzimlə"
 
 #: ../plugins/time-date//TimePicker.qml:68
 msgid "Time"
-msgstr ""
+msgstr "Vaxt"
 
 #: ../plugins/time-date//TimePicker.qml:81
 msgid "Hour"
@@ -148,7 +148,7 @@ msgstr "Saniyә"
 
 #: ../plugins/time-date//TimePicker.qml:118
 msgid "Date"
-msgstr ""
+msgstr "Tarix"
 
 #: ../plugins/time-date//TimePicker.qml:130
 msgid "Day"
@@ -167,7 +167,7 @@ msgstr "İl"
 #: ../plugins/phone//CallForwarding.qml:152
 #: ../plugins/background//Preview.qml:104
 msgid "Set"
-msgstr ""
+msgstr "Quraşdır"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
@@ -181,20 +181,20 @@ msgstr "Saat qurşağı:"
 
 #: ../plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
-msgstr ""
+msgstr "Tarix və saatı quraşdır:"
 
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Automatically"
-msgstr ""
+msgstr "Avtomatik"
 
 #: ../plugins/time-date//PageComponent.qml:69
 #: ../plugins/time-date//ChooseTimeZone.qml:47
 #: ../plugins/security-privacy//PageComponent.qml:149
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 msgid "Manually"
-msgstr ""
+msgstr "Əllə"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -202,37 +202,37 @@ msgstr "Saat qurşağı"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:46
 msgid "Set the time zone:"
-msgstr ""
+msgstr "Saat qurşağını quraşdır:"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:126
 msgid "Enter your current location."
-msgstr ""
+msgstr "Hazırkı yerləşmənizi daxil edin."
 
 #: ../plugins/time-date//ChooseTimeZone.qml:127
 msgid "No matching place"
-msgstr ""
+msgstr "Uzlaşan yer yoxdu"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:35
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:26
 msgid "Updates"
-msgstr ""
+msgstr "Yenilənmələr"
 
 #: ../plugins/system-update//PageComponent.qml:52
 msgid "Update System"
-msgstr ""
+msgstr "Sistemi Yenilə"
 
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
-msgstr ""
+msgstr "Yenilənmələri quraşdırmaq üçün telefonu yenidən başlatmaq lazımdı."
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
-msgstr ""
+msgstr "Quraşdır və Yenidən Başlat"
 
 #: ../plugins/system-update//PageComponent.qml:65
 msgid "Not Now"
-msgstr ""
+msgstr "İndi Yox"
 
 #: ../plugins/system-update//PageComponent.qml:71
 msgid "Install"
@@ -240,11 +240,11 @@ msgstr "Quraşdır"
 
 #: ../plugins/system-update//PageComponent.qml:89
 msgid "Software is up to date"
-msgstr ""
+msgstr "Proqram yenilənib"
 
 #: ../plugins/system-update//PageComponent.qml:198
 msgid "Checking for updates…"
-msgstr ""
+msgstr "Yenilənmələr yoxlanılır..."
 
 #: ../plugins/system-update//PageComponent.qml:216
 #, qt-format
@@ -257,16 +257,16 @@ msgstr[1] "%1 yenilәnmәni quraşdır…"
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 yenilәnmәni quraşdır"
+msgstr[1] "%1 yenilәnmәni quraşdır"
 
 #: ../plugins/system-update//PageComponent.qml:218
 msgid "Pause All"
-msgstr ""
+msgstr "Hamısını Dayandır"
 
 #: ../plugins/system-update//PageComponent.qml:270
 msgid "Retry"
-msgstr ""
+msgstr "Yenidən cəhd"
 
 #: ../plugins/system-update//PageComponent.qml:286
 msgid "Download"
@@ -278,7 +278,7 @@ msgstr "Yenilə"
 
 #: ../plugins/system-update//PageComponent.qml:287
 msgid "Resume"
-msgstr ""
+msgstr "Davam et"
 
 #: ../plugins/system-update//PageComponent.qml:288
 msgid "Pause"
@@ -298,24 +298,24 @@ msgstr "Versiya: "
 
 #: ../plugins/system-update//PageComponent.qml:427
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "Tətbiqetmə yenilənmələrini qəbul etmək üçün Ubuntu One-a daxil olun."
 
 #: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
-msgstr ""
+msgstr "Daxil Ol..."
 
 #: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
-msgstr ""
+msgstr "Yenilənmələr quraşdırılır..."
 
 #: ../plugins/system-update//PageComponent.qml:518
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
-msgstr ""
+msgstr "Avtomatik endir"
 
 #: ../plugins/system-update//PageComponent.qml:523
 msgid "On wi-fi"
-msgstr ""
+msgstr "Simsiz əlaqədə"
 
 #: ../plugins/system-update//PageComponent.qml:525
 msgid "Always"
@@ -323,31 +323,31 @@ msgstr "Həmişə"
 
 #: ../plugins/system-update//PageComponent.qml:540
 msgid " bytes"
-msgstr ""
+msgstr " baytlar"
 
 #: ../plugins/system-update//PageComponent.qml:543
 msgid " KiB"
-msgstr ""
+msgstr " KiB"
 
 #: ../plugins/system-update//PageComponent.qml:546
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #: ../plugins/system-update//PageComponent.qml:549
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #: ../plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
-msgstr ""
+msgstr "Sonrakı yenilənmələri avtomatik endir:"
 
 #: ../plugins/system-update//Configuration.qml:54
 msgid "When on wi-fi"
-msgstr ""
+msgstr "Simsiz əlaqədə olanda"
 
 #: ../plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "Hər hansısa bağlantıda"
 
 #: ../plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
@@ -369,11 +369,11 @@ msgstr "Səs"
 
 #: ../plugins/sound//PageComponent.qml:75
 msgid "Silent Mode"
-msgstr ""
+msgstr "Səssiz Rejim"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "Zəng vuran:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -386,12 +386,12 @@ msgstr "Zəng musiqisi"
 
 #: ../plugins/sound//PageComponent.qml:134
 msgid "Vibrate when ringing"
-msgstr "Zəng zamanı titrəmə"
+msgstr "Zəng zamanı vibrasiya"
 
 #: ../plugins/sound//PageComponent.qml:143
 #: ../plugins/sound//PageComponent.qml:187
 msgid "Vibrate in Silent Mode"
-msgstr "Səssiz Rejimdə Titrəmə"
+msgstr "Səssiz Rejimdə Vibrasiya"
 
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
@@ -400,16 +400,16 @@ msgstr ""
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
-msgstr "Məktublar:"
+msgstr "Mesajlar:"
 
 #: ../plugins/sound//PageComponent.qml:160
 #: ../plugins/sound//PageComponent.qml:166
 msgid "Message received"
-msgstr "Məktub alındı"
+msgstr "Mesaj alındı"
 
 #: ../plugins/sound//PageComponent.qml:178
 msgid "Vibrate with message sound"
-msgstr "Məktub səsi ilə titrəmə"
+msgstr "Mesaj səsi ilə vibrasiya"
 
 #: ../plugins/sound//PageComponent.qml:191
 msgid "Other sounds:"
@@ -428,70 +428,70 @@ msgstr "Kilid səsi"
 #: ../plugins/security-privacy//SimPin.qml:319
 #: ../plugins/security-privacy//PageComponent.qml:158
 msgid "SIM PIN"
-msgstr "SİM PİN"
+msgstr "SIM PIN-i"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "SIM PIN kodunu dəyiş"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "Yanlış PIN kod. %1 cəhd qaldı."
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr ""
+msgstr "Hazıkı PIN kod:"
 
 #: ../plugins/security-privacy//SimPin.qml:91
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "%1 cəhdə icazə verildi."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "Yeni PIN kodu seçin:"
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "Yeni PIN kodu təsdiqləyin:"
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "PIN kodlar eyni deyil. Yenidən cəhd edin."
 
 #: ../plugins/security-privacy//SimPin.qml:154
 #: ../plugins/security-privacy//LockSecurity.qml:302
 #: ../plugins/cellular//HotspotSetup.qml:94
 msgid "Change"
-msgstr ""
+msgstr "Dəyişdir"
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
-msgstr ""
+msgstr "SIM PIN kodunuzu daxil edin"
 
 #: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "Əvvəlki SIM PIN kodunuzu daxil edin"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
-msgstr ""
+msgstr "Aç"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Lock"
-msgstr ""
+msgstr "Kilidlə"
 
 #: ../plugins/security-privacy//SimPin.qml:314
 #, qt-format
 msgid "%1"
-msgstr ""
+msgstr "%1"
 
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
-msgstr ""
+msgstr "PIN kodu seç..."
 
 #: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
@@ -510,7 +510,7 @@ msgstr "Telefonun kilidlənməsi"
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
-msgstr ""
+msgstr "PIN kodu"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -527,7 +527,7 @@ msgstr "Kilid qoruması"
 #: ../plugins/security-privacy//PhoneLocking.qml:68
 #: ../plugins/battery//PageComponent.qml:306
 msgid "Lock when idle"
-msgstr "Gözləmə rejimində kilid"
+msgstr "Gözləmə rejimində kilidlə"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:69
 #: ../plugins/battery//PageComponent.qml:306
@@ -545,7 +545,7 @@ msgstr[1] "%1 dəqiqə"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:101
 msgid "Sleep locks immediately"
-msgstr "Yuxu zamanı kilidlənmə"
+msgstr "Yuxu zamanı kilidləyər"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
@@ -553,11 +553,11 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "Başladıcı"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "Bildirişlər və cəld tənzimləmələr"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
@@ -571,7 +571,7 @@ msgstr ""
 #: ../plugins/security-privacy//PageComponent.qml:37
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
 msgid "Security & Privacy"
-msgstr "Təhlükəsizlik & Məxfilik"
+msgstr "Təhlükəsizlik və Məxfilik"
 
 #: ../plugins/security-privacy//PageComponent.qml:100
 #: ../plugins/security-privacy//PageComponent.qml:218
@@ -583,11 +583,11 @@ msgstr "Telefon və İnternet"
 #: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
-msgstr "Yalnız telefondan"
+msgstr "Yalnız telefon"
 
 #: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
-msgstr ""
+msgstr "Telefonu kilidlə"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PageComponent.qml:137
@@ -603,13 +603,13 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 dəqiqə sonra"
+msgstr[1] "%1 dəqiqə sonra"
 
 #: ../plugins/security-privacy//PageComponent.qml:161
 #: ../plugins/security-privacy//PageComponent.qml:236
 msgid "On"
-msgstr ""
+msgstr "Açıq"
 
 #: ../plugins/security-privacy//PageComponent.qml:165
 #: ../plugins/security-privacy//PageComponent.qml:236
@@ -617,11 +617,11 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:50
 #: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
-msgstr ""
+msgstr "Bağlı"
 
 #: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
-msgstr ""
+msgstr "Şifrələmə"
 
 #: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
@@ -631,7 +631,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
-msgstr ""
+msgstr "Gizlilik"
 
 #: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
@@ -639,7 +639,7 @@ msgstr "Qarşılama ekranında statistika"
 
 #: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Messages on welcome screen"
-msgstr "Qarşılama ekranında məktublar"
+msgstr "Qarşılama ekranında mesajlar"
 
 #: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
@@ -653,7 +653,7 @@ msgstr "Mövqe aşkarlamaya giriş"
 #: ../plugins/security-privacy//PageComponent.qml:243
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
-msgstr "Digər proqram girişləri"
+msgstr "Digər tətbiqetmə girişləri"
 
 #: ../plugins/security-privacy//PageComponent.qml:248
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
@@ -675,7 +675,7 @@ msgstr "Göndərilmədi"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "PIN kodu dəyiş…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -684,11 +684,11 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
-msgstr "Svaypa keçir"
+msgstr "Sürüşdürməyə keç"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "PIN koda keç"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -696,7 +696,7 @@ msgstr "Şifrə frazasına keçir"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "Mövcud PIN kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -704,31 +704,31 @@ msgstr "Mövcud şifrə frazası"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "PIN kodu seç"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Frazanı dəyiş"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "PIN kodu təsdiqlə"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Frazanı təsdiqlə"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "PIN kodlar eyni deyil. Yenidən cəhd edin."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
-msgstr ""
+msgstr "Frazalar uyğunlaşmır yenidən cəhd edin."
 
 #: ../plugins/security-privacy//LockSecurity.qml:299
 msgid "Unset"
-msgstr ""
+msgstr "Quraşdırmanı sil"
 
 #: ../plugins/security-privacy//LockSecurity.qml:344
 msgid "Unlock the phone using:"
@@ -736,23 +736,23 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:348
 msgid "Swipe (no security)"
-msgstr ""
+msgstr "Sürüşdür (təhlükəsizlik tədbiri yoxdu)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "4 rəqəmli PIN kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
-msgstr ""
+msgstr "Sürüşdür (təhlükəsizlik tədbiri yoxdu)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "4 rəqəmli PIN kod…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
-msgstr ""
+msgstr "Fraza…"
 
 #: ../plugins/security-privacy//Location.qml:30
 #: ../wizard/qml/Pages//30-location.qml:23
@@ -761,23 +761,23 @@ msgstr "Mövqe"
 
 #: ../plugins/security-privacy//Location.qml:48
 msgid "Location detection"
-msgstr "Mövqenin aşkarlanması"
+msgstr "Mövqenin tәyin olunması"
 
 #: ../plugins/security-privacy//Location.qml:70
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
-"Sizin təxmini mövqenizi tapmaq üçün GPS istifadə edir. Qapalı olduqda "
-"enerjini qorumaq üçün GPS söndürülür."
+"Sizin təxmini mövqenizi tapmaq üçün GPS istifadə edilir. Sönlü olduqda, "
+"batareyanı qorumaq üçün GPS söndürülür."
 
 #: ../plugins/security-privacy//Location.qml:72
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Sizin təxmini mövqenizi tapmaq üçün wi-fi və GPS işlədir. Mövqenin "
-"aşkarlanmasının söndürülməsi enerjini qoruyur."
+"Sizin təxmini mövqenizi tapmaq üçün wi-fi və GPS işlədilir. Mövqe "
+"aşkarlanmasının söndürmək batareyanı qoruyar."
 
 #: ../plugins/security-privacy//Location.qml:74
 msgid ""
@@ -785,33 +785,33 @@ msgid ""
 "off location detection saves battery."
 msgstr ""
 "Sizin təxmini mövqenizi tapmaq üçün wi-fi (hazırda sönülüdür) və GPS "
-"işlədir. Mövqenin aşkarlanmasının söndürülməsi enerjini qoruyur."
+"işlədilir. Mövqe aşkarlanmasını söndürmək batareynı qoruyar."
 
 #: ../plugins/security-privacy//Location.qml:76
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
-"Sizin təxmini mövqenizi tapmaq üçün wi-fi, şəbəkə binalarının mövqelərini və "
-"GPS işlədir. Mövqenin aşkarlanmasının söndürülməsi enerjini qoruyur."
+"Sizin təxmini mövqenizi tapmaq üçün wi-fi, baza stansiyaları və GPS "
+"işlədilir. Mövqe aşkarlanmasını söndürülmək batareyanı qoruyar."
 
 #: ../plugins/security-privacy//Location.qml:78
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
-"Sizin təxmini mövqenizi tapmaq üçün wi-fi, şəbəkə binalarının mövqelərini "
-"(hazırda mövcud şəbəkə bağlantısı yoxdur) və GPS işlədir. Mövqenin "
-"aşkarlanmasının söndürülməsi enerjini qoruyur."
+"Sizin təxmini mövqenizi tapmaq üçün wi-fi, baza stansiyaları (hazırda mövcud "
+"şəbəkə bağlantısı yoxdur) və GPS işlədilir. Mövqe aşkarlanmasını söndürülmək "
+"batareyanı qoruyar."
 
 #: ../plugins/security-privacy//Location.qml:80
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
-"Sizin təxmini mövqenizi tapmaq üçün wi-fi (hazırda sönülüdür), şəbəkə "
-"binalarının mövqelərini və GPS işlədir. Mövqenin aşkarlanmasının "
-"söndürülməsi enerjini qoruyur."
+"Sizin təxmini mövqenizi tapmaq üçün wi-fi (hazırda sönülüdür), baza "
+"stansiyaları və GPS işlədilir. Mövqe aşkarlanmasını söndürülmək batareyanı "
+"qoruyar."
 
 #: ../plugins/security-privacy//Location.qml:82
 msgid ""
@@ -819,13 +819,13 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
-"Sizin təxmini mövqenizi tapmaq üçün wi-fi (hazırda sönülüdür), şəbəkə "
-"binalarının mövqelərini (hazırda mövcud şəbəkə bağlantısı yoxdur) və GPS "
-"işlədir. Mövqenin aşkarlanmasının söndürülməsi enerjini qoruyur."
+"Sizin təxmini mövqenizi tapmaq üçün wi-fi (hazırda sönülüdür), baza "
+"stansiyaları (hazırda mövcud şəbəkə bağlantısı yoxdur) və GPS işlədilir. "
+"Mövqe aşkarlanmasını söndürülmək batareyanı qoruyar."
 
 #: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr "Sizin mövqenizi aşkarlamaya icazə verilsin:"
+msgstr "Mövqenizi aşkarlamaya icazə verilsin:"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
@@ -838,7 +838,7 @@ msgstr ""
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
@@ -855,11 +855,11 @@ msgstr ""
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -868,11 +868,11 @@ msgstr ""
 #: ../plugins/reset//ResetLauncherHome.qml:44
 #: ../plugins/reset//PageComponent.qml:73
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Başladıcını Sıfırla"
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "Seçimlərin effekt verməsi üçün telefonu yenidən başlatmaq lazımdı."
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -882,35 +882,37 @@ msgstr ""
 
 #: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
-msgstr ""
+msgstr "Bütün sistem tənzimləmələrini sıfırla"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:50
 msgid "Reset phone"
-msgstr ""
+msgstr "Telefonu sıfırla"
 
 #: ../plugins/reset//PageComponent.qml:87
 msgid "Reset all system settings…"
-msgstr ""
+msgstr "Bütün sistem tənzimləmələrini sıfırla..."
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Hər şeyi sil və sıfırla..."
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
 "All documents, saved games, settings, and other items will be permanently "
 "deleted from this phone."
 msgstr ""
+"Bütün sənədlər, saxlanılmış oyunlar, tənzimləmələr və başqa şeylər həmişəlik "
+"telefondan silinəcək."
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Hər şeyi sil və sıfırla"
 
 #: ../plugins/phone//SingleSim.qml:29
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #: ../plugins/phone//SingleSim.qml:33 ../plugins/phone//NoSims.qml:28
 #: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
@@ -923,13 +925,13 @@ msgstr ""
 #: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
 #: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
 msgid "Call waiting"
-msgstr ""
+msgstr "Zəng gözlədilməsi"
 
 #. TRANSLATORS: %1 is the name of the (network) carrier
 #: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
 #, qt-format
 msgid "%1 Services"
-msgstr ""
+msgstr "%1 Xidmətləri"
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
@@ -938,19 +940,19 @@ msgstr ""
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
-msgstr ""
+msgstr "Zəng"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../plugins/phone//PageComponent.qml:32
 #: ../plugins/bluetooth//PageComponent.qml:93
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
 #: ../plugins/phone//MultiSim.qml:94
 msgid "Services"
-msgstr ""
+msgstr "Xidmətlər"
 
 #: ../plugins/phone//CallWaiting.qml:89
 msgid ""
@@ -972,7 +974,7 @@ msgstr ""
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
 msgid "Notifications"
-msgstr ""
+msgstr "Bildirişlər"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
@@ -989,17 +991,17 @@ msgstr "Orfoqrafiyanın yoxlanılması"
 
 #: ../plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
-msgstr "Mümkün səs yoxlamaları:"
+msgstr "Cari səs yoxlamaları:"
 
 #: ../plugins/language//SpellChecking.qml:54
 msgid "All languages available:"
-msgstr "Bütün mümkün dillər:"
+msgstr "Bütün mövcud dillər:"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
 msgid "Language & Text"
-msgstr "Dil və mətn"
+msgstr "Dil və Mətn"
 
 #: ../plugins/language//PageComponent.qml:79
 msgid "Display language…"
@@ -1008,11 +1010,11 @@ msgstr "Seçilmiş dil..."
 #: ../plugins/language//PageComponent.qml:93
 #: ../plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
-msgstr "Klaviatura düzümü"
+msgstr "Klaviatura düzülüşü"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Avtomatik düzəltmə"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -1028,7 +1030,7 @@ msgstr "Hər cümlənin ilk hərfini böyütmək üçün Shift-i aktiv edin."
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Avtomatik durğu işarələrinin qoyulması"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
@@ -1041,11 +1043,11 @@ msgstr ""
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
-msgstr "Mövcud düzüm:"
+msgstr "Hazırkı düzülüş:"
 
 #: ../plugins/language//KeyboardLayouts.qml:40
 msgid "All layouts available:"
-msgstr "Bütün mümkün düzümlər:"
+msgstr "Bütün mövcud düzülüşlər:"
 
 #: ../plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
@@ -1059,7 +1061,7 @@ msgstr "Təsdiqlə"
 #: ../plugins/cellular//PageComponent.qml:32
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:106
 msgid "Cellular"
-msgstr ""
+msgstr "Özəkli"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -1115,7 +1117,7 @@ msgstr ""
 #: ../plugins/cellular//Components//SingleSim.qml:62
 #: ../plugins/cellular//Components//NoSim.qml:48
 msgid "N/A"
-msgstr ""
+msgstr "Mövcud deyil"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -1123,17 +1125,17 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseCarrier.qml:130
 msgid "Refresh"
-msgstr ""
+msgstr "Yenilə"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:151
 msgid "Searching"
-msgstr ""
+msgstr "Axtarılır"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:118
 msgid "Brightness"
-msgstr ""
+msgstr "Parlaqlıq"
 
 #: ../plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
@@ -1158,12 +1160,12 @@ msgstr ""
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "'%1' üçün PIN"
 
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "Cüt"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/bluetooth//PageComponent.qml:32
@@ -1171,39 +1173,39 @@ msgstr ""
 #: ../plugins/battery//PageComponent.qml:363
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
-msgstr ""
+msgstr "Bağlanıldı"
 
 #: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
-msgstr ""
+msgstr "Bağlanılır..."
 
 #: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Bağlantı kəsilir..."
 
 #: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
-msgstr ""
+msgstr "Bağlantı kəsildi"
 
 #: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
-msgstr ""
+msgstr "Naməlum"
 
 #: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
-msgstr ""
+msgstr "Kompüter"
 
 #: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Modem"
-msgstr ""
+msgstr "Modem"
 
 #: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
 msgid "Network"
-msgstr ""
+msgstr "Şəbəkə"
 
 #: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Headset"
@@ -1211,15 +1213,15 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Headphones"
-msgstr ""
+msgstr "Qulaqcıqlar"
 
 #: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Other Audio"
-msgstr ""
+msgstr "Başqa Səs"
 
 #: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Joypad"
@@ -1227,88 +1229,88 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Keyboard"
-msgstr ""
+msgstr "Klaviatura"
 
 #: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Tablet"
-msgstr ""
+msgstr "Planşet"
 
 #: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Mouse"
-msgstr ""
+msgstr "Siçan"
 
 #: ../plugins/bluetooth//PageComponent.qml:104
 msgid "Printer"
-msgstr ""
+msgstr "Çap qurğusu"
 
 #: ../plugins/bluetooth//PageComponent.qml:106
 msgid "Other"
-msgstr ""
+msgstr "Digər"
 
 #: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Excellent"
-msgstr ""
+msgstr "Əla"
 
 #: ../plugins/bluetooth//PageComponent.qml:113
 msgid "Good"
-msgstr ""
+msgstr "Yaxşı"
 
 #: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
-msgstr ""
+msgstr "Orta"
 
 #: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
-msgstr ""
+msgstr "Pis"
 
 #: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Discoverable"
-msgstr ""
+msgstr "Kəşf oluna bilən"
 
 #: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Not discoverable"
-msgstr ""
+msgstr "Kəşf oluna bilməyən"
 
 #: ../plugins/bluetooth//PageComponent.qml:213
 msgid "Connected devices:"
-msgstr ""
+msgstr "Bağlanılmış qurğular:"
 
 #: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect another device:"
-msgstr ""
+msgstr "Başqa qurğuya bağlan:"
 
 #: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
-msgstr ""
+msgstr "Qurğuya bağlan:"
 
 #: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
-msgstr ""
+msgstr "Heç nə təyin olunmadı"
 
 #: ../plugins/bluetooth//PageComponent.qml:291
 #: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Təyin olunanda avtomatik olaraq bağlan:"
 
 #: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
-msgstr ""
+msgstr "Növ"
 
 #: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
-msgstr ""
+msgstr "Vəziyyət"
 
 #: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
-msgstr ""
+msgstr "Siqnalın Gücü"
 
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Disconnect"
-msgstr ""
+msgstr "Bağlantını kəs"
 
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
-msgstr ""
+msgstr "Bu cihazı unut"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
@@ -1318,15 +1320,15 @@ msgstr ""
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "PIN-i təsdiqlə"
 
 #: ../plugins/battery//SleepValues.qml:77
 msgid "Lock the phone when it's not in use:"
-msgstr ""
+msgstr "İstifadə olunmayanda telefonu kilidlə:"
 
 #: ../plugins/battery//SleepValues.qml:77
 msgid "Put the phone to sleep when it is not in use:"
-msgstr ""
+msgstr "İstifadə olunmayanda telefonu mürgülət:"
 
 #: ../plugins/battery//SleepValues.qml:117
 msgid ""
@@ -1342,105 +1344,105 @@ msgstr ""
 #: ../plugins/battery//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:130
 msgid "Battery"
-msgstr ""
+msgstr "Batareya"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery//PageComponent.qml:46
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 saniyə əvvəl"
+msgstr[1] "%1 saniyə əvvəl"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 dəqiqə əvvəl"
+msgstr[1] "%1 dəqiqə əvvəl"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 saat əvvəl"
+msgstr[1] "%1 saat əvvəl"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 gün əvvəl"
+msgstr[1] "%1 gün əvvəl"
 
 #: ../plugins/battery//PageComponent.qml:85
 msgid "Charging now"
-msgstr ""
+msgstr "Batareya dolur"
 
 #: ../plugins/battery//PageComponent.qml:90
 msgid "Last full charge"
-msgstr ""
+msgstr "Sonuncu batareyanın tam doldurulması"
 
 #: ../plugins/battery//PageComponent.qml:95
 msgid "Fully charged"
-msgstr ""
+msgstr "Batareya tam dolduruldu"
 
 #: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
-msgstr ""
+msgstr "Batareyanın dolma səviyyəsi"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../plugins/battery//PageComponent.qml:212
 #: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
-msgstr ""
+msgstr "Dünən"
 
 #: ../plugins/battery//PageComponent.qml:220
 #: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
-msgstr ""
+msgstr "Bu gün"
 
 #: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
-msgstr ""
+msgstr "Batareya istifadəsinin azaltma yolları:"
 
 #: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
-msgstr ""
+msgstr "GPS"
 
 #: ../plugins/battery//PageComponent.qml:412
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
+msgstr "Dəqiq yerinizin tapılması GPS və/və ya Wi-Fi tələb edir."
 
 #: ../plugins/background//WallpaperGrid.qml:190
 msgid "Remove"
-msgstr ""
+msgstr "Sil"
 
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
-msgstr ""
+msgstr "Ön baxış"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:136
 msgid "Background"
-msgstr ""
+msgstr "Arxa fon"
 
 #: ../plugins/background//MainPage.qml:107
 msgid "Ubuntu Art"
-msgstr ""
+msgstr "Ubuntu İncəsənət"
 
 #: ../plugins/background//MainPage.qml:123
 msgid "Custom"
-msgstr ""
+msgstr "Şəxsi"
 
 #: ../plugins/about//Version.qml:35
 msgid "OS Build Details"
@@ -1472,85 +1474,85 @@ msgstr ""
 
 #: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
 msgid "Storage"
-msgstr ""
+msgstr "Yaddaş"
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
-msgstr ""
+msgstr "Ubuntu tərəfindən istifadə olunur"
 
 #: ../plugins/about//Storage.qml:88
 msgid "Videos"
-msgstr ""
+msgstr "Videolar"
 
 #: ../plugins/about//Storage.qml:89
 msgid "Audio"
-msgstr ""
+msgstr "Səs"
 
 #: ../plugins/about//Storage.qml:90
 msgid "Pictures"
-msgstr ""
+msgstr "Şəkillər"
 
 #: ../plugins/about//Storage.qml:91
 msgid "Other files"
-msgstr ""
+msgstr "Digər fayllar"
 
 #: ../plugins/about//Storage.qml:92
 msgid "Used by apps"
-msgstr ""
+msgstr "Tətbiqetmələr tərəfindən istifadə olunur"
 
 #: ../plugins/about//Storage.qml:142
 msgid "Total storage"
-msgstr ""
+msgstr "Ümumi yaddaş"
 
 #: ../plugins/about//Storage.qml:154
 msgid "Free space"
-msgstr ""
+msgstr "Boş sahə"
 
 #: ../plugins/about//Storage.qml:174
 msgid "By name"
-msgstr ""
+msgstr "Ada görə"
 
 #: ../plugins/about//Storage.qml:174
 msgid "By size"
-msgstr ""
+msgstr "Ölçüyə görə"
 
 #: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
 msgid "Software licenses"
-msgstr ""
+msgstr "Proqram lisenziyaları"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
-msgstr ""
+msgstr "Bu telefon haqqında"
 
 #: ../plugins/about//PageComponent.qml:97
 msgid "Phone number"
-msgstr ""
+msgstr "Telefon nömrəsi"
 
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
-msgstr ""
+msgstr "Seriya nömrəsi"
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
-msgstr ""
+msgstr "Proqram:"
 
 #: ../plugins/about//PageComponent.qml:138
 msgid "OS"
-msgstr ""
+msgstr "ƏS"
 
 #: ../plugins/about//PageComponent.qml:147
 msgid "Last updated"
-msgstr ""
+msgstr "Son yenilənmə"
 
 #: ../plugins/about//PageComponent.qml:155
 msgid "Check for updates"
-msgstr ""
+msgstr "Yenilənmələri yoxla"
 
 #: ../plugins/about//PageComponent.qml:164
 msgid "Legal:"
-msgstr ""
+msgstr "Qanuni:"
 
 #: ../plugins/about//PageComponent.qml:177
 msgid "Regulatory info"
@@ -1558,17 +1560,19 @@ msgstr ""
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
-msgstr ""
+msgstr "Tərtibatçı rejimi"
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
-msgstr ""
+msgstr "Tərtibatçı Rejimi"
 
 #: ../plugins/about//DevMode.qml:73
 msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"Tərtibatçı rejimində hət hansısa birisi telefona başqa qurğudan qoşularaq "
+"telefondakı hər şeyə daxil ola, onları dəyişdirə və silə bilər."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a PIN code or passphrase set to use Developer Mode."
@@ -1576,11 +1580,11 @@ msgstr ""
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "Məxfilik siyasəti"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "Canonical-a bildir:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
@@ -1602,7 +1606,7 @@ msgstr ""
 #: ../plugins/cellular//Components//SingleSim.qml:52
 #: ../plugins/cellular//Components//MultiSim.qml:58
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Yaddaş istifadə statistikası"
 
 #: ../plugins/cellular//Components//SingleSim.qml:58
 #: ../plugins/cellular//Components//SingleSim.qml:66
@@ -1612,15 +1616,15 @@ msgstr ""
 
 #: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "SIM Adını Düzəlt"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "Oldu"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
@@ -1632,7 +1636,7 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
 #: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Yalnız 2G (batareyanı qoruyar)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:53
@@ -1671,77 +1675,77 @@ msgstr ""
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "Heç bir şəkil seçilməyib"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 şəkili sil"
+msgstr[1] "%1 şəkili sil"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "Şəkil əlavə et..."
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr ""
+msgstr "Şəkilləri sil..."
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
-msgstr ""
+msgstr "Sistem Tənzimləmələri"
 
 #: ../src/qml/MainWindow.qml:131
 msgid "Search"
-msgstr ""
+msgstr "Axtar"
 
 #: ../src/qml/MainWindow.qml:150
 msgid "Personal"
-msgstr ""
+msgstr "Şəxsi"
 
 #: ../src/qml/MainWindow.qml:155
 msgid "System"
-msgstr ""
+msgstr "Sistem"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi bağlatısı yarat"
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
-msgstr ""
+msgstr "Mövcud şəbəkələr"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
 #: ../wizard/qml/Pages//40-reporting.qml:50
 #: ../wizard/qml/Pages//30-location.qml:66
 #: ../wizard/qml/Pages//15-passwd.qml:170
 msgid "Continue"
-msgstr ""
+msgstr "Davam"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
-msgstr ""
+msgstr "Keç"
 
 #: ../wizard/qml/Pages//10-welcome.qml:24
 msgid "Hi!"
-msgstr ""
+msgstr "Salam!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "Ubuntu telefonunuza xoş gəldiniz."
 
 #: ../wizard/qml/Pages//10-welcome.qml:49
 msgid "Let’s get started."
-msgstr ""
+msgstr "Başlayaq."
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Şərtlər və Şəraitlər"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr ""
+msgstr "SIM kart əlavə et"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
@@ -1753,27 +1757,29 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "Hamısı tamamlandı"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "Gözəl iş!"
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "Sizin telefonunuz artıq işləməyə hazırdı."
 
 #: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
-msgstr ""
+msgstr "Son"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "Baq bildirişi"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
+"Sizin telefonunuz elə quraşdırılıb ki, baqlar avtomatik olaraq Canonical-a "
+"göndərilir."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
@@ -1788,18 +1794,20 @@ msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
+"Mən artıq Ubuntu <a href='terms.qml'>şərtləti və şəraitlərini</a> oxumuşam "
+"və onlarla razılaşmışam."
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
-msgstr ""
+msgstr "Kilid təhlükəsizliyini təyin et"
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "Sürüşdür"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "PIN kodlar eyni deyil."
 
 #: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
@@ -1815,39 +1823,39 @@ msgstr ""
 
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
-msgstr ""
+msgstr "Geri"
 
 #: ../wizard/qml/Components//StackButton.qml:51
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:54
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:4
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:110
 msgid "network"
-msgstr ""
+msgstr "şəbəkə"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:6
 msgid "wireless"
-msgstr ""
+msgstr "simsiz əlaqə"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:8
 msgid "wifi"
-msgstr ""
+msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:10
 msgid "wi-fi"
-msgstr ""
+msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
@@ -1876,69 +1884,69 @@ msgstr ""
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:128
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
 msgid "settings"
-msgstr ""
+msgstr "tənzimləmələr"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:16
 msgid "time"
-msgstr ""
+msgstr "vaxt"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:18
 msgid "date"
-msgstr ""
+msgstr "tarix"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
 msgid "timezone"
-msgstr ""
+msgstr "saat qurşağı"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
 msgid "Updates available"
-msgstr ""
+msgstr "Yenilənmələr mövcuddu"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:28
 msgid "system"
-msgstr ""
+msgstr "sistem"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:30
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:74
 msgid "software"
-msgstr ""
+msgstr "proqram"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:32
 msgid "update"
-msgstr ""
+msgstr "yenilə"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
 msgid "sound"
-msgstr ""
+msgstr "səs"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:44
 msgid "security"
-msgstr ""
+msgstr "təhlükəsizlik"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:46
 msgid "privacy"
-msgstr ""
+msgstr "məxfilik"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:52
 msgid "reset"
-msgstr ""
+msgstr "sıfırla"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:58
 msgid "phone"
-msgstr ""
+msgstr "telefon"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:62
@@ -1958,27 +1966,27 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:68
 msgid "lock"
-msgstr ""
+msgstr "kilid"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:70
 msgid "screen"
-msgstr ""
+msgstr "ekran"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:76
 msgid "notifications"
-msgstr ""
+msgstr "bildirişlər"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:82
 msgid "language"
-msgstr ""
+msgstr "dil"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:84
 msgid "lang"
-msgstr ""
+msgstr "dil"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:86
@@ -1988,12 +1996,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:90
 msgid "Flight Mode"
-msgstr ""
+msgstr "Uçuş Rejimi"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:92
 msgid "flight"
-msgstr ""
+msgstr "uçuş"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:94
@@ -2003,22 +2011,22 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:96
 msgid "offline"
-msgstr ""
+msgstr "oflayn"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:98
 msgid "Example"
-msgstr ""
+msgstr "Nümunə"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:100
 msgid "example"
-msgstr ""
+msgstr "nümunə"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:102
 msgid "test"
-msgstr ""
+msgstr "test"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:104
@@ -2033,7 +2041,7 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:112
 msgid "mobile"
-msgstr ""
+msgstr "mobil"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:114
@@ -2043,17 +2051,17 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:120
 msgid "brightness"
-msgstr ""
+msgstr "parlaqlıq"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:126
 msgid "bluetooth"
-msgstr ""
+msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
 msgid "battery"
-msgstr ""
+msgstr "batereya"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:134
@@ -2068,12 +2076,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:140
 msgid "background"
-msgstr ""
+msgstr "arxa fon"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:142
 msgid "wallpaper"
-msgstr ""
+msgstr "divar kağızı"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
@@ -2088,22 +2096,22 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:148
 msgid "a11y"
-msgstr ""
+msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:154
 msgid "about"
-msgstr ""
+msgstr "haqqında"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
 msgid "device"
-msgstr ""
+msgstr "avadanlıq"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:158
 msgid "info"
-msgstr ""
+msgstr "məlumat"
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
@@ -2115,7 +2123,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//securityprivacy.cpp:301
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "Yanlış PIN kod. Yenidən cəhd edin."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
@@ -2135,7 +2143,7 @@ msgstr ""
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
-msgstr ""
+msgstr "Naməlum başlıq"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
@@ -2143,7 +2151,7 @@ msgstr ""
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Sistem yeniləyicisini açmaq üçün bura basın."
 
 #~ msgid "Passcode"
 #~ msgstr "Şifrə"
