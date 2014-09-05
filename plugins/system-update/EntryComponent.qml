@@ -34,37 +34,40 @@ ListItem.SingleValue {
     value: updatesAvailable > 0 ? updatesAvailable : ""
 
     property int updatesAvailable: 0
+    property variant updateModel: UpdateManager.model
 
     function _updatesRefresh() {
+        console.warn("_updatesRefresh: " + root.updateModel);
         var _updatesAvailable = 0;
-        for (var i=0; i < updateManager.model.length; i++) {
-            if (updateManager.model[i].updateState)
+        for (var i=0; i < updateModel.length; i++) {
+            if (updateModel[i].updateRequired)
                 _updatesAvailable += 1;
         }
         root.updatesAvailable = _updatesAvailable;
+        console.warn("_updatesRefresh: " + root.updatesAvailable);
         if (root.updatesAvailable > 0)
             parent.visible = true;
         else
             parent.visible = false;
     }
 
-    Item {
-        UpdateManager {
-            id: updateManager
-            objectName: "updateManager"
-            onModelChanged: {
-                console.warn("onModelChanged: " + updateManager.model.length)
-                root._updatesRefresh();
-            }
+    Connections {
+        id: updateManager
+        objectName: "updateManager"
+        target: UpdateManager
+        onModelChanged: {
+            console.warn("onModelChanged: " + UpdateManager.model.length)
+            root._updatesRefresh();
+        }
 
-            Component.onCompleted: {
-                updateManager.checkUpdates();
-            }
+        Component.onCompleted: {
+            //updateManager.checkUpdates();
+            UpdateManager.checkUpdates();
+        }
 
-            onUpdateAvailableFound: {
-                console.warn("onUpdateAvailableFound: " + updateManager.model.length)
-                root._updatesRefresh();
-            }
+        onUpdateAvailableFound: {
+            console.warn("onUpdateAvailableFound: " + UpdateManager.model.length)
+            root._updatesRefresh();
         }
     }
 

@@ -90,6 +90,12 @@ UpdateManager::~UpdateManager()
 {
 }
 
+UpdateManager *UpdateManager::instance()
+{
+    static UpdateManager *mpdateManager = new UpdateManager(nullptr);
+    return mpdateManager;
+}
+
 void UpdateManager::clickUpdateNotAvailable()
 {
     m_clickCheckingUpdate = false;
