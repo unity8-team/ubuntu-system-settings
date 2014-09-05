@@ -19,6 +19,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import QMenuModel 0.1
 import QtQuick 2.0
 import QtSystemInfo 5.0
 import SystemSettings 1.0
@@ -38,9 +39,22 @@ ItemPage {
     property bool installAll: false
     property bool includeSystemUpdate: false
     property int updatesAvailable: 0
-    property bool batterySafeForUpdate: false
-
+    property bool isCharging: batteryInfo.chargingState === BatteryInfo.Charging
+    property bool batterySafeForUpdate: isCharging || chargeLevel > 50
+    property var chargeLevel: indicatorPower.batteryLevel || 0
     property var notificationAction;
+
+    onChargeLevelChanged: console.warn("chargeLevel: " + chargeLevel)
+    onIsChargingChanged: console.warn("isCharging: " + isCharging)
+
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+        property variant batteryLevel: action("battery-level").state
+        Component.onCompleted: start()
+    }
 
     DeviceInfo {
         id: deviceInfo
@@ -48,41 +62,7 @@ ItemPage {
 
     BatteryInfo {
         id: batteryInfo
-
         monitorChargingState: true
-        monitorBatteryStatus: true
-        monitorRemainingCapacity: true
-
-        onRemainingCapacityChanged: {
-            var capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
-            if (capacity < 50) {
-                root.batterySafeForUpdate = false;
-            } else {
-                root.batterySafeForUpdate = true;
-            }
-        }
-
-        onChargingStateChanged: {
-            if (state === BatteryInfo.Charging) {
-                root.batterySafeForUpdate = true;
-            }
-            else if (state === BatteryInfo.Discharging &&
-                     batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
-                var capacity = batteryInfo.remainingCapacity(0) * 100 / batteryInfo.maximumCapacity(0)
-                if (capacity < 50) {
-                    root.batterySafeForUpdate = false;
-                } else {
-                    root.batterySafeForUpdate = true;
-                }
-            }
-            else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
-                     state === BatteryInfo.NotCharging) {
-                root.batterySafeForUpdate = true;
-            }
-        }
-        Component.onCompleted: {
-            onChargingStateChanged(0, chargingState(0));
-        }
     }
 
     Component {
