@@ -44,6 +44,7 @@ ItemPage {
 
     Audio {
         id: soundEffect
+        audioRole: MediaPlayer.alert
     }
 
     Column {
