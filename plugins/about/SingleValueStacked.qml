@@ -3,7 +3,7 @@
  *
  * Copyright (C) 2014 Canonical Ltd.
  *
- * Contact: Alberto Mardegan <alberto.mardegan@canonical.com>
+ * Contact: Jonas G. Drange <jonas.drange@canonical.com>
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 3, as published

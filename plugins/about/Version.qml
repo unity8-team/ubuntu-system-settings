@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Sergio Schvezov <sergio.schvezov@canonical.com>
+ *         Jonas G. Drange <jonas.drange@canonical.com>
  *
  */
 
