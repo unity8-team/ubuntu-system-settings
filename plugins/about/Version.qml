@@ -61,79 +61,25 @@ ItemPage {
                 visible: updateBackendInfo.currentUbuntuBuildNumber
             }
 
-            ListItem.SingleValue {
+            SingleValueVertical {
                 objectName: "ubuntuBuildIDItem"
-                height: ubuntuBuildIDColumn.childrenRect.height + units.gu(2)
                 visible: storedInfo.ubuntuBuildID
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                Column {
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-
-                    id: ubuntuBuildIDColumn
-                    spacing: units.gu(1)
-                    Label {
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                        }
-                        wrapMode: Text.WordWrap
-                        text: i18n.tr("Ubuntu build description")
-                    }
-                    Label {
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                        }
-                        wrapMode: Text.WordWrap
-                        text: storedInfo.ubuntuBuildID
-                    }
-                }
+                text: i18n.tr("Ubuntu build description")
+                value: storedInfo.ubuntuBuildID
             }
 
-            ListItem.SingleValue {
+            SingleValueVertical {
                 objectName: "deviceVersionBuildNumberItem"
                 text: i18n.tr("Device Image part")
                 value: updateBackendInfo.currentDeviceBuildNumber
                 visible: updateBackendInfo.currentDeviceBuildNumber
             }
 
-            ListItem.SingleValue {
+            SingleValueVertical {
                 objectName: "deviceBuildIDItem"
-                height: deviceBuildIDColumn.childrenRect.height + units.gu(2)
+                text: i18n.tr("Device build description")
+                value: storedInfo.deviceBuildDisplayID
                 visible: storedInfo.deviceBuildDisplayID
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                Column {
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-
-                    id: deviceBuildIDColumn
-                    spacing: units.gu(1)
-                    Label {
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                        }
-                        wrapMode: Text.WordWrap
-                        text: i18n.tr("Device build description")
-                    }
-                    Label {
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                        }
-                        wrapMode: Text.WordWrap
-                        text: storedInfo.deviceBuildDisplayID
-                    }
-                }
             }
 
             ListItem.SingleValue {
