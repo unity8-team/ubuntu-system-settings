@@ -48,7 +48,7 @@ ItemPage {
         anchors.fill: parent
 
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > versionPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
         /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
            otherwise the UI might end up in a situation where scrolling doesn't work */
         flickableDirection: Flickable.VerticalFlick
@@ -72,21 +72,21 @@ ItemPage {
                 visible: updateBackendInfo.currentUbuntuBuildNumber
             }
 
-            SingleValueVertical {
+            SingleValueStacked {
                 objectName: "ubuntuBuildIDItem"
                 visible: storedInfo.ubuntuBuildID
                 text: i18n.tr("Ubuntu build description")
                 value: storedInfo.ubuntuBuildID
             }
 
-            SingleValueVertical {
+            SingleValueStacked {
                 objectName: "deviceVersionBuildNumberItem"
                 text: i18n.tr("Device Image part")
                 value: updateBackendInfo.currentDeviceBuildNumber
                 visible: updateBackendInfo.currentDeviceBuildNumber
             }
 
-            SingleValueVertical {
+            SingleValueStacked {
                 objectName: "deviceBuildIDItem"
                 text: i18n.tr("Device build description")
                 value: storedInfo.deviceBuildDisplayID
