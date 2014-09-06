@@ -29,6 +29,8 @@ class System : public QObject
     Q_PROPERTY(QString hereLicensePath READ hereLicensePath NOTIFY hereLicensePathChanged)
 
 public:
+    System();
+
     bool hereEnabled() const;
     void setHereEnabled(bool enabled);
 
@@ -47,7 +49,6 @@ private Q_SLOTS:
     void getHereLicensePathFinished(QDBusPendingCallWatcher *watcher);
 
 private:
-    System();
     Q_DISABLE_COPY(System)
 
     QDBusInterface *m_accounts;
