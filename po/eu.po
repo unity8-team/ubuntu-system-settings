@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-04 19:47+0000\n"
+"PO-Revision-Date: 2014-09-05 13:16+0000\n"
 "Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
+"X-Launchpad-Export-Date: 2014-09-06 07:31+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -1116,6 +1116,8 @@ msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Beste gailuek zure mugikorreko datu-konexioa erabil dezakete wifi sarearen "
+"bitartez. Ohiko datu-tarifa aplikatuko da."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1159,7 +1161,7 @@ msgstr "Doitu automatikoki"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Pantaila argitu edo iluntzen du ingurunera egokitzeko."
 
 #: ../plugins/brightness//BrightnessSlider.qml:51
 #: ../plugins/battery//PageComponent.qml:296
@@ -1647,7 +1649,7 @@ msgstr "Ados"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
 #: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
-msgstr ""
+msgstr "Mugikorreko datuak:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
@@ -1680,6 +1682,7 @@ msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
+"SIMa alda dezakezu dei jakinentzat, edo helbide-liburuko kontaktuentzat."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
@@ -1803,7 +1806,7 @@ msgstr "Hau sistemaren ezarpenetan desgaitu daiteke."
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
+msgstr "Erabili sare mugikorra eta wifia non zauden ebazteko"
 
 #: ../wizard/qml/Pages//30-location.qml:58
 msgid ""
@@ -2147,7 +2150,7 @@ msgstr "Okerreko pasaesaldia. Saiatu berriz."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
-msgstr ""
+msgstr "Ezin izan da segurtasun-modua ezarri"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
@@ -2163,11 +2166,11 @@ msgstr "Izenburu ezezaguna"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Sistemaren irudi eguneratua eskuragarri dago."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Sakatu sistema-eguneratzailea irekitzeko."
 
 #~ msgid "Switch to passcode"
 #~ msgstr "Aldatu pasagakora"
