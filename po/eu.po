@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-05 13:16+0000\n"
+"PO-Revision-Date: 2014-09-06 11:16+0000\n"
 "Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-06 07:31+0000\n"
+"X-Launchpad-Export-Date: 2014-09-07 06:56+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -1052,6 +1052,8 @@ msgstr "Autopuntuazioa"
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Zuriune tekla bi aldiz sakatzen duzunean, puntu bat gehitzen du, eta baita "
+"falta den edozein komatxo edo parentesi ere."
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
@@ -1110,6 +1112,8 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Wifigunea gaituta egotean, beste gailuek zure mugikorreko datu-konexioa "
+"erabili ahalko dute wifi bidez. Ohiko datuen tarifa aplikatuko da."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
@@ -1591,6 +1595,8 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"Garatzaile moduan, edonork atzi, alda edo ezaba dezake telefono honetako "
+"edozer, hau beste gailu batera konektatuz."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a PIN code or passphrase set to use Developer Mode."
@@ -1603,7 +1609,7 @@ msgstr "Pribatutasun-politika"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "Jakinarazi Canonical-i:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
