@@ -28,7 +28,7 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 ListItem.Standard {
     id: root
     iconSource: model.icon
-    iconFrame: true
+    iconFrame: false
     text: i18n.tr(model.displayName)
     control: Switch {
         id: control
