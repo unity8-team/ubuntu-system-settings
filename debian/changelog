@@ -1,3 +1,10 @@
+ubuntu-system-settings (0.3+14.10.20140908.1-0ubuntu1) utopic; urgency=low
+
+  [ Ricardo Salveti de Araujo ]
+  * sound: setting default audio role for ringtone and messages
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 08 Sep 2014 21:41:34 +0000
+
 ubuntu-system-settings (0.3+14.10.20140908-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
