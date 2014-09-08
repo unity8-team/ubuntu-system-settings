@@ -18,6 +18,7 @@
  */
 
 #include "securityprivacy.h"
+#include <QtCore/QDebug>
 #include <QtCore/QProcess>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusConnectionInterface>
@@ -220,7 +221,12 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type)
                          QDBusConnection::systemBus());
 
     QDBusReply<void> success = iface.call("SetPasswordMode", newMode);
-    return success.isValid();
+    if (success.isValid()) {
+        return true;
+    } else {
+        qWarning() << "Could not set password mode:" << success.error().message();
+        return false;
+    }
 }
 
 bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString password)
@@ -242,6 +248,8 @@ bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString pa
     // But first, see if we have cached authentication
     if (setPasswordMode(type))
         return true;
+    else if (password.isEmpty())
+        return false;
 
     QProcess polkitHelper;
     polkitHelper.setProgram(HELPER_EXEC);
@@ -283,7 +291,7 @@ QString SecurityPrivacy::setPassword(QString oldValue, QString value)
         QString output = QString::fromUtf8(pamHelper.readLine());
         if (output.isEmpty()) {
             return "Internal error: could not run passwd";
-        } else {	
+        } else {
             // Grab everything on first line after the last colon.  This is because
             // passwd will bunch it up like so:
             // "(current) UNIX password: Enter new UNIX password: Retype new UNIX password: You must choose a longer password"
