@@ -34,7 +34,7 @@ static QObject *qml_update_manager(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-    return UpdateManager::instance();
+    return new UpdateManager();
 }
 
 void BackendPlugin::registerTypes(const char *uri)
