@@ -1,3 +1,26 @@
+ubuntu-system-settings (0.3+14.10.20140908-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Don't crash when destructing the Wizard.Utils.System plugin. This
+    fixes the crash on wizard exit and the crash when pressing back on
+    the HERE license.
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Sebastien Bacher ]
+  * [developer-mode] working scrolling and correct spacing
+  * Use standard items for the categories and don't display dividers
+    (LP: #1365563)
+  * [orientation-lock] don't display a frame around the icon (LP:
+    #1365450)
+
+  [ jonas-drange ]
+  * [about/versions] create reusable component of singlevalue items that
+    have long values (LP: #1363927)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 08 Sep 2014 14:58:34 +0000
+
 ubuntu-system-settings (0.3+14.10.20140905.1-0ubuntu1) utopic; urgency=low
 
   [ David Barth ]
