@@ -371,12 +371,22 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
     } else {
         QString errorText = setPassword(oldValue, value);
         if (!errorText.isEmpty()) {
-            setDisplayHint(oldType);
-            // Special case this common message because the one PAM gives is so awful
-            if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error"))
+            if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error")) {
+                // Special case this common message because the one PAM gives is so awful
+                setDisplayHint(oldType);
                 return badPasswordMessage(oldType);
-            else
+            } else if (oldValue != value) {
+                // Only treat this as an error case if the passwords aren't
+                // the same.  (If they are the same, and we're just switching
+                // display hints, then passwd will give us an error message
+                // like "Password unchanged" but we don't want to rely on
+                // parsing that output.  Instead, if we got past the "bad old
+                // password" part above and oldValue == value, we don't care
+                // about any errors from passwd.)
+                setDisplayHint(oldType);
                 return errorText;
+            }
+            // else fall through to below
         }
         if (!setPasswordModeWithPolicykit(type, value)) {
             setDisplayHint(oldType);
