@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-07 03:29+0000\n"
+"PO-Revision-Date: 2014-09-07 22:40+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-07 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-08 06:57+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -565,7 +565,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
+msgstr "ሌሎች መትግበሪያዎች እና ተግባሮች እንዳይቆለፍ ይጠይቃሉ"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -653,7 +653,7 @@ msgstr "የ አካባቢ መድረሻ"
 #: ../plugins/security-privacy//PageComponent.qml:243
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
-msgstr ""
+msgstr "ለ ሌሎች መተግበሪያዎች መፍቀጃ"
 
 #: ../plugins/security-privacy//PageComponent.qml:248
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
@@ -811,7 +811,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//Location.qml:89
 msgid "Allow access to location:"
-msgstr ""
+msgstr "ለ አካባቢው ፍቃድ መፍቀጃ:"
 
 #: ../plugins/security-privacy//Dash.qml:45
 msgid "Return results from:"
