@@ -1,3 +1,31 @@
+ubuntu-system-settings (0.3+14.10.20140905.1-0ubuntu1) utopic; urgency=low
+
+  [ David Barth ]
+  * Enable location panel, display contols for authorized applications.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 05 Sep 2014 09:01:36 +0000
+
+ubuntu-system-settings (0.3+14.10.20140904.2-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Tweak the depends for accountsservice-ubuntu-schemas to handle a "~"
+    version
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 04 Sep 2014 21:04:28 +0000
+
+ubuntu-system-settings (0.3+14.10.20140904.1-0ubuntu1) utopic; urgency=low
+
+  [ Guillermo Gonzalez ]
+  * Basic unittest for the push-helper script
+
+  [ Mathieu Trudel-Lapierre ]
+  * Downgrade qFatal failure to register bluetooth agent to a qCritical.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 04 Sep 2014 04:39:47 +0000
+
 ubuntu-system-settings (0.3+14.10.20140904-0ubuntu1) utopic; urgency=low
 
   [ Andrea Cimitan ]

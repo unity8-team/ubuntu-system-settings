@@ -39,15 +39,36 @@ public:
     void setId(const QString &id) {
         this->id = id;
 
-        QString localShare =
-            QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-        QSettings desktopFile(QString("%1/applications/%2.desktop").
-                              arg(localShare).arg(id),
-                              QSettings::IniFormat);
+        QString desktopFilename = resolveDesktopFilename(id);
+        QSettings desktopFile(desktopFilename, QSettings::IniFormat);
         desktopFile.beginGroup("Desktop Entry");
         displayName = desktopFile.value("Name").toString();
         iconName = resolveIcon(desktopFile.value("Icon").toString(),
                                desktopFile.value("Path").toString());
+    }
+
+    QString resolveDesktopFilename(const QString &id) {
+        QString localShare =
+            QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+        QString desktopFilename(QString("%1/applications/%2.desktop").
+                                arg(localShare).arg(id));
+        if (QFile(desktopFilename).exists())
+            return desktopFilename;
+
+        /* search the directory for a matching filename */
+        QDir dir(QString("%1/applications").arg(localShare));
+        dir.setFilter(QDir::Files);
+        QStringList fileList = dir.entryList();
+        QString pattern = QString("%1*.desktop").arg(id);
+        for (int i = 0; i < fileList.count(); i++) {
+            /* stop at the first match */
+            if (QDir::match(pattern, fileList[i])) {
+                return QString("%1/applications/%2").arg(localShare).arg(fileList[i]);
+            }
+        } 
+        
+        qWarning() << "No desktop file found for app id: " << id;
+        return QString();
     }
 
     QString resolveIcon(const QString &iconName, const QString &basePath) {
@@ -159,6 +180,12 @@ void TrustStoreModelPrivate::update()
             auto r = query->current();
 
             QString applicationId = QString::fromStdString(r.from);
+
+            /* filter out unconfined apps, they can access everything anyway */
+            if (applicationId == "unconfined") {
+                query->next();
+                continue;
+            }
 
             Application &app = appMap[applicationId];
             app.setId(applicationId);

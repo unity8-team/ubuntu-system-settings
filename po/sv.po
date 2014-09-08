@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: Josef Andersson <josef.andersson@fripost.org>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-03 15:15+0000\n"
+"PO-Revision-Date: 2014-09-07 10:14+0000\n"
 "Last-Translator: Josef Andersson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se.>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-04 08:33+0000\n"
+"X-Launchpad-Export-Date: 2014-09-08 06:57+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: sv\n"
 
@@ -374,7 +374,7 @@ msgstr "Ljudlöst läge"
 
 #: ../plugins/sound//PageComponent.qml:79
 msgid "Ringer:"
-msgstr ""
+msgstr "Ringsignal:"
 
 #: ../plugins/sound//PageComponent.qml:111
 msgid "Phone calls:"
@@ -397,7 +397,7 @@ msgstr "Vibrera i tyst läge"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Ljud för knappsats"
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -561,11 +561,11 @@ msgstr "Programstartare"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "Notifieringar och snabbinställningar"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
+msgstr "Slå på låssäkerhet för att begränsa åtkomst när telefonen är låst."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
@@ -591,7 +591,7 @@ msgstr "Endast telefon"
 
 #: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
-msgstr ""
+msgstr "Lås telefon"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PageComponent.qml:137
@@ -613,7 +613,7 @@ msgstr[1] "Efter %1 minuter"
 #: ../plugins/security-privacy//PageComponent.qml:161
 #: ../plugins/security-privacy//PageComponent.qml:236
 msgid "On"
-msgstr ""
+msgstr "På"
 
 #: ../plugins/security-privacy//PageComponent.qml:165
 #: ../plugins/security-privacy//PageComponent.qml:236
@@ -621,21 +621,23 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:50
 #: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
-msgstr ""
+msgstr "Av"
 
 #: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
-msgstr ""
+msgstr "Kryptering"
 
 #: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
+"Kryptering skyddar mot åtkomst till telefondata när telefonen är ansluten "
+"till en PC eller en annan enhet."
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
-msgstr ""
+msgstr "Integritet"
 
 #: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
@@ -679,7 +681,7 @@ msgstr "Inte skickat"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "Ändra PIN-kod…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -692,7 +694,7 @@ msgstr "Byt till gest"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "Växla till PIN-kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -700,7 +702,7 @@ msgstr "Byt till lösenfras"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "Befintlig PIN-kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -708,7 +710,7 @@ msgstr "Befintlig lösenfras"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "Välj PIN-kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -716,7 +718,7 @@ msgstr "Välj lösenfras"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "Bekräfta PIN-kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
@@ -724,7 +726,7 @@ msgstr "Bekräfta lösenfras"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "PIN-koderna stämmer inte överens. Prova igen."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -744,7 +746,7 @@ msgstr "Gest (ingen säkerhet)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "Fyrsiffrig PIN-kod"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -752,7 +754,7 @@ msgstr "Gest (ingen säkerhet)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "Fyrsiffrig PIN-kod…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -836,7 +838,7 @@ msgstr "Returnera resultat från:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "Program du har beviljat och har begärt åtkomst till:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
@@ -845,15 +847,15 @@ msgstr "Kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Program som har begärt åtkomst till din kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Mikrofon"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Program som har begärt åtkomst till din mikrofon"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
@@ -1025,7 +1027,7 @@ msgstr "Tangentbordslayouter…"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Autorättning"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -1042,16 +1044,18 @@ msgstr ""
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Autoskiljetecken"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Lägger till en punkt och saknade citat eller hakparanteser när du trycker på "
+"Mellanslag två gånger."
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "Tangentbordsvibration"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -1106,12 +1110,16 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"När surfpunkt är på kan andra enheter använda din mobildatanslutning över "
+"trådlöst nätverk. Vanliga datakostnader gäller."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Andra enheter kan använda din mobildataanslutning över trådlösa nätverket. "
+"Vanliga datakostnader gäller."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1155,12 +1163,12 @@ msgstr "Justera automatiskt"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Anpassar ljusstyrka och tonar ned displayen för passa omgivningarna."
 
 #: ../plugins/brightness//BrightnessSlider.qml:51
 #: ../plugins/battery//PageComponent.qml:296
 msgid "Display brightness"
-msgstr ""
+msgstr "Ljusstyrka för display"
 
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
@@ -1587,14 +1595,17 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"I utvecklarläge kan vem som helst komma åt, ändra eller ta bort vad som "
+"helst på denna telefon genom att ansluta den till en annan enhet."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
+"Du behöver en PIN-kod eller en lösenfras för att använda utvecklarläge"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "Integritetspolicy"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
@@ -1602,7 +1613,7 @@ msgstr "Anmäl till Canonical:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "Programkrascher och fel"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
@@ -1610,7 +1621,7 @@ msgstr "Tidigare felrapporter"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
-msgstr ""
+msgstr "Bifoga information om vad programmet gjorde när det felade."
 
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//MultiSim.qml:42
@@ -1626,7 +1637,7 @@ msgstr "Statisk över dataanvändning"
 #: ../plugins/cellular//Components//SingleSim.qml:66
 #: ../plugins/cellular//Components//NoSim.qml:47
 msgid "Carrier"
-msgstr ""
+msgstr "Operatör"
 
 #: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
@@ -1634,17 +1645,17 @@ msgstr "APN"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "Redigera SIM-namn"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
 #: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
-msgstr ""
+msgstr "Mobildata:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
@@ -1662,7 +1673,7 @@ msgstr "2G/3G/4G (snabbare)"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr ""
+msgstr "Dataroaming"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
@@ -1670,17 +1681,19 @@ msgstr "Fråga mig varje gång"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "För utgående samtal, använd:"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
+"Du kan ändra SIM för individuella samtal eller för kontakter i denna "
+"adressbok."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr ""
+msgstr "För meddelanden, använd:"
 
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
@@ -1695,16 +1708,16 @@ msgstr "Inga bilder markerade"
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ta bort %1 bild"
+msgstr[1] "Ta bort %1 bilder"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "Lägg till en bild…"
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr ""
+msgstr "Tar bort bilder…"
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
@@ -1747,11 +1760,11 @@ msgstr "Hej!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "Välkommen till din Ubuntutelefon."
 
 #: ../wizard/qml/Pages//10-welcome.qml:49
 msgid "Let’s get started."
-msgstr ""
+msgstr "Kom igång."
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
@@ -1759,27 +1772,28 @@ msgstr "Villkor och regler"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr ""
+msgstr "Lägg till ett SIM-kort"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
-msgstr ""
+msgstr "Stoppa in ett SIM-kort innan du fortsätter."
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr ""
+"Utan det kommer du inte att kunnda ringa eller skicka textmeddelanden."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "Färdig"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "Bra jobbat!"
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "Din telefon är nu redo att användas."
 
 #: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
@@ -1787,49 +1801,52 @@ msgstr "Avsluta"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "Felrapporter"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
+"Din telefon är inställd på att automatiskt skicka felrapporter til Canonical."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "Det kan inaktiveras i Systeminställningar."
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
+msgstr "Använd ditt mobila- och trådlösa nätverk för att lista ut var du är"
 
 #: ../wizard/qml/Pages//30-location.qml:58
 msgid ""
 "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
+"Jag har läst och och gått med på <a href='terms.qml'>användarvillkoren</a> "
+"för Ubuntu"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
-msgstr ""
+msgstr "Ställ in låssäkerhet"
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "Svep"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "PIN-koderna stämmer inte överens."
 
 #: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "Lösenfraserna stämmer inte överens."
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "PIN-koden måste vara minst fyra siffor lång."
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "Lösenfrasen måste vara minst fyra siffror lång."
 
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
@@ -2125,31 +2142,31 @@ msgstr "info"
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
-msgstr ""
+msgstr "Kan inte avbryta aktuell begäran (kan inte kontakta tjänst)"
 
 #: ../plugins/system-update//system_update.cpp:98
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "Kunde inte pausa aktuell begäran (kan inte kontakta tjänst)"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:301
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "Ogiltig PIN-kod. Prova igen."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Ogiltig lösenfras. Prova igen."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
-msgstr ""
+msgstr "Kunde inte ställa in säkerhetsläge"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "Kunde inte ställa in visning av säkerhetstips"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
-msgstr ""
+msgstr "Manipuleringsfel för autentiseringstoken"
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
@@ -2157,11 +2174,11 @@ msgstr "Okänd titel"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Det finns en uppdatera systemavbild."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Tryck för att öppna systemuppdateraren."
 
 #~ msgid "Switch to passcode"
 #~ msgstr "Byt till kod"
