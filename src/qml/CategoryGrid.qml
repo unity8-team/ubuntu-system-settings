@@ -14,9 +14,10 @@ Column {
 
     objectName: "categoryGrid-" + category
 
-    ListItem.Header {
+    ListItem.Standard {
         id: header
 
+        showDivider: false
         text: categoryName
         visible: repeater.count > 0
     }
