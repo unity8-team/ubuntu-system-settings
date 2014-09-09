@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-06 07:31+0000\n"
+"X-Launchpad-Export-Date: 2014-09-09 07:53+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -2170,49 +2170,3 @@ msgstr ""
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr ""
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Los códigos nun concasen. Inténtalo otra vegada."
-
-#~ msgid "Change passcode…"
-#~ msgstr "Camudar el códigu…"
-
-#~ msgid "4-digit passcode"
-#~ msgstr "Códigu de 4 díxitos"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "Códigu de 4 díxitos…"
-
-#~ msgid "Passcode"
-#~ msgstr "Códigu"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "Camudar a códigu"
-
-#~ msgid "Choose passcode"
-#~ msgstr "Escueyi un códigu"
-
-#~ msgid "Existing passcode"
-#~ msgstr "Códigu esistente"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Confirmar códigu"
-
-#~ msgid "Select your language"
-#~ msgstr "Seleiciona la to llingua"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "El teléfonu ta configuráu pa unviar automáticamente informes de fallu a "
-#~ "Canonical. Esto pue desactivase nos Axustes del sistema."
-
-#~ msgid "Hello"
-#~ msgstr "Hola"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Bienllegáu/ada al teléfonu Ubuntu. Entamamos."
-
-#~ msgid "Start"
-#~ msgstr "Aniciar"

@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-08 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-09 07:53+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -2131,39 +2131,3 @@ msgstr "ለ ስርአቱ ምስል ማሻሻያ ዝግጁ ነው"
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr "የ ስርአት ማሻሻያውን ለመክፈት መታ ያድርጉ"
-
-#~ msgid "Select your language"
-#~ msgstr "ቋንቋዎን ይምረጡ"
-
-#~ msgid "Passcode"
-#~ msgstr "የማለፊያ ኮድ"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "ወደ ማለፊያ ኮድ መቀየሪያ"
-
-#~ msgid "Choose passcode"
-#~ msgstr "የ ማለፊያ ኮድ ይምረጡ"
-
-#~ msgid "Existing passcode"
-#~ msgstr "ከ ማለፊያ ኮድ በ መውጣት ላይ"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "እነዚህ ማለፊያ ኮዶች አይመሳሰሉም: እባክዎን እንደገና ይሞክሩ"
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4-አሀዝ ማለፊያ ኮድ"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4-አሀዝ ማለፊያ ኮድ…"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "የ ማለፊያ ኮድ ማረጋገጫ"
-
-#~ msgid "Change passcode…"
-#~ msgstr "የ ማለፊያ ኮድ መቀየሪያ…"
-
-#~ msgid "Start"
-#~ msgstr "መጀመሪያ"
-
-#~ msgid "Hello"
-#~ msgstr "ሰላም"
