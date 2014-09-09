@@ -49,8 +49,6 @@ ItemPage {
         anchors {
             fill: parent
             top: parent.top
-            left: parent.left
-            right: parent.right
             bottom: buttons.top
         }
 
