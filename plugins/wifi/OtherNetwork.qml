@@ -46,12 +46,7 @@ ItemPage {
         id: otherNetworkFlickable
         contentWidth: parent.width
         contentHeight: otherview.height + units.gu(8)
-        anchors {
-            fill: parent
-            top: parent.top
-            bottom: buttons.top
-        }
-
+        anchors.fill: parent
 
         Column {
             id : otherview
@@ -109,45 +104,45 @@ ItemPage {
                     id: passwordVisibleSwitch
                 }
             }
-        }
-    }
-    Rectangle {
-        id: buttons
-        color: Theme.palette.normal.background
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-        height: buttonRow.height + units.gu(4)
-        RowLayout {
-            id: buttonRow
-            anchors {
-                margins: units.gu(2)
-                verticalCenter: parent.verticalCenter
-                left: parent.left
-                right: parent.right
-            }
-            spacing: units.gu(2)
-            height: cancelButton.height
 
-            Button {
-                id: cancelButton
-                Layout.fillWidth: true
-                text: i18n.tr("Cancel")
-                onClicked: {
-                    pageStack.pop()
+            Rectangle {
+                id: buttons
+                color: Theme.palette.normal.background
+                anchors {
+                    left: parent.left
+                    right: parent.right
                 }
-            }
+                height: buttonRow.height + units.gu(4)
+                RowLayout {
+                    id: buttonRow
+                    anchors {
+                        margins: units.gu(2)
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        right: parent.right
+                    }
+                    spacing: units.gu(2)
+                    height: cancelButton.height
 
-            Button {
-                id: connectButton
-                Layout.fillWidth: true
-                text: i18n.tr("Connect")
-                enabled: settingsValid()
-                onClicked: {
-                    DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
-                    pageStack.pop()
+                    Button {
+                        id: cancelButton
+                        Layout.fillWidth: true
+                        text: i18n.tr("Cancel")
+                        onClicked: {
+                            pageStack.pop()
+                        }
+                    }
+
+                    Button {
+                        id: connectButton
+                        Layout.fillWidth: true
+                        text: i18n.tr("Connect")
+                        enabled: settingsValid()
+                        onClicked: {
+                            DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
+                            pageStack.pop()
+                        }
+                    }
                 }
             }
         }
