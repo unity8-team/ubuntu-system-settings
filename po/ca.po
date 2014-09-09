@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-08 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-09 07:53+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: ca\n"
 
@@ -2198,84 +2198,3 @@ msgstr "Hi ha una actualització de la imatge del sistema."
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr "Feu un toc per obrir l'actualitzador del sistema."
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Els codis d'accés no coincideixen. Torneu-ho a intentar."
-
-#~ msgid "Choose passcode"
-#~ msgstr "Escolliu un codi d'accés"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Confirmeu el codi d'accés"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Canvia el codi d'accés..."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "Codi d'accés de 4 dígits"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "Codi d'accés de 4 dígits..."
-
-#~ msgid "Passcode"
-#~ msgstr "Codi d'accés"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "Canvia a codi d'accés"
-
-#~ msgid "Existing passcode"
-#~ msgstr "Codi d'accés existent"
-
-#~ msgid "Select your language"
-#~ msgstr "Seleccioneu la vostra llengua"
-
-#~ msgid "You need a passcode or passphrase set to use Developer Mode."
-#~ msgstr "Cal un codi o contrasenya per utilitzar el mode de desenvolupador"
-
-#~ msgid "Start"
-#~ msgstr "Inici"
-
-#~ msgid "Hello"
-#~ msgstr "Hola!"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Us donem la benvinguda a l'Ubuntu. Anem a començar."
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "El dispositiu està configurat per enviar informes d'error a Canonical de "
-#~ "manera automàtica. Podeu desactivar-ho als paràmetres del sistema."
-
-#~ msgid "Those passcodes don't match."
-#~ msgstr "Els codis d'accés no concorden."
-
-#~ msgid "Passcode must be at least four digits long."
-#~ msgstr "El codi d'accés ha de tenir almenys quatre dígits"
-
-#~ msgid "Nice work! Your phone is now ready to use. "
-#~ msgstr "Bona feina! Ja podeu fer servir el telèfon. "
-
-#~ msgid "Bug Reporting"
-#~ msgstr "Enviament d'errors"
-
-#~ msgid "Use your mobile network and wi-fi to work out where you are."
-#~ msgstr "Utilitza la xarxa mòbil i la wi-fi"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>."
-#~ msgstr ""
-#~ "He llegit i accepto les <a href='terms.qml'>condicions generals</a> de "
-#~ "l'Ubuntu."
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "El codi d'accés és incorrecte. Torneu-ho a provar."
-
-#~ msgid ""
-#~ "Please insert a SIM card before you continue. Without it, you won’t be able "
-#~ "to make calls or use text messaging."
-#~ msgstr ""
-#~ "Introduïu una targeta SIM abans de continuar. Sense la targeta no podreu fer "
-#~ "trucades o enviar missatges de text."

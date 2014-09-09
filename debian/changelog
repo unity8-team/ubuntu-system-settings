@@ -1,3 +1,23 @@
+ubuntu-system-settings (0.3+14.10.20140909-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Notify the user if the phone needs to be plug to power for update.
+
+  [ Sebastien Bacher ]
+  * [system-update] don't draw a frame around ubuntu updates (LP:
+    #1367136)
+
+  [ Mathieu Trudel-Lapierre ]
+  * Also allow Speakers and Carkits as valid audio devices to pair.
+
+  [ Michael Terry ]
+  * Allow switch from PIN code to passphrase and back using the same
+    password. (LP: #1357043) (LP: #1357043)
+  * Fix false-negatives from AccountsService when switching from swipe
+    to password (LP: #1363405) (LP: #1363405)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 09 Sep 2014 16:40:09 +0000
+
 ubuntu-system-settings (0.3+14.10.20140908.1-0ubuntu1) utopic; urgency=low
 
   [ Ricardo Salveti de Araujo ]
