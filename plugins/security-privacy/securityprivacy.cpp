@@ -18,6 +18,7 @@
  */
 
 #include "securityprivacy.h"
+#include <QtCore/QDebug>
 #include <QtCore/QProcess>
 #include <QtDBus/QDBusConnection>
 #include <QtDBus/QDBusConnectionInterface>
@@ -220,7 +221,12 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type)
                          QDBusConnection::systemBus());
 
     QDBusReply<void> success = iface.call("SetPasswordMode", newMode);
-    return success.isValid();
+    if (success.isValid()) {
+        return true;
+    } else {
+        qWarning() << "Could not set password mode:" << success.error().message();
+        return false;
+    }
 }
 
 bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString password)
@@ -242,6 +248,8 @@ bool SecurityPrivacy::setPasswordModeWithPolicykit(SecurityType type, QString pa
     // But first, see if we have cached authentication
     if (setPasswordMode(type))
         return true;
+    else if (password.isEmpty())
+        return false;
 
     QProcess polkitHelper;
     polkitHelper.setProgram(HELPER_EXEC);
@@ -283,7 +291,7 @@ QString SecurityPrivacy::setPassword(QString oldValue, QString value)
         QString output = QString::fromUtf8(pamHelper.readLine());
         if (output.isEmpty()) {
             return "Internal error: could not run passwd";
-        } else {	
+        } else {
             // Grab everything on first line after the last colon.  This is because
             // passwd will bunch it up like so:
             // "(current) UNIX password: Enter new UNIX password: Retype new UNIX password: You must choose a longer password"
@@ -363,12 +371,22 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
     } else {
         QString errorText = setPassword(oldValue, value);
         if (!errorText.isEmpty()) {
-            setDisplayHint(oldType);
-            // Special case this common message because the one PAM gives is so awful
-            if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error"))
+            if (errorText == dgettext("Linux-PAM", "Authentication token manipulation error")) {
+                // Special case this common message because the one PAM gives is so awful
+                setDisplayHint(oldType);
                 return badPasswordMessage(oldType);
-            else
+            } else if (oldValue != value) {
+                // Only treat this as an error case if the passwords aren't
+                // the same.  (If they are the same, and we're just switching
+                // display hints, then passwd will give us an error message
+                // like "Password unchanged" but we don't want to rely on
+                // parsing that output.  Instead, if we got past the "bad old
+                // password" part above and oldValue == value, we don't care
+                // about any errors from passwd.)
+                setDisplayHint(oldType);
                 return errorText;
+            }
+            // else fall through to below
         }
         if (!setPasswordModeWithPolicykit(type, value)) {
             setDisplayHint(oldType);
