@@ -220,11 +220,20 @@ bool SecurityPrivacy::setPasswordMode(SecurityType type)
                          "org.freedesktop.Accounts.User",
                          QDBusConnection::systemBus());
 
-    QDBusReply<void> success = iface.call("SetPasswordMode", newMode);
-    if (success.isValid()) {
+    QDBusReply<void> reply = iface.call("SetPasswordMode", newMode);
+    if (reply.isValid() || reply.error().name() == "org.freedesktop.Accounts.Error.Failed") {
+        // We allow "org.freedesktop.Accounts.Error.Failed" because we actually
+        // expect that error in some cases.  In Ubuntu Touch, group memberships
+        // are not allowed to be changed (/etc/group is read-only).  So when
+        // AccountsService tries to add/remove the user from the nopasswdlogin
+        // group, it will fail.  Thankfully, this will be after it does what we
+        // actually care about it doing (deleting user password).  But it will
+        // return an error in this case, with a message about gpasswd failing
+        // and the above error name.  In other cases (like bad authentication),
+        // it will return something else (like Error.PermissionDenied).
         return true;
     } else {
-        qWarning() << "Could not set password mode:" << success.error().message();
+        qWarning() << "Could not set password mode:" << reply.error().message();
         return false;
     }
 }
@@ -391,6 +400,7 @@ QString SecurityPrivacy::setSecurity(QString oldValue, QString value, SecurityTy
         if (!setPasswordModeWithPolicykit(type, value)) {
             setDisplayHint(oldType);
             setPassword(value, oldValue);
+            setPasswordModeWithPolicykit(oldType, oldValue); // needed to revert to swipe
             return badPasswordMessage(oldType);
         }
     }
