@@ -94,6 +94,8 @@ bool Bluetooth::isSupportedType(const int type)
 
     case Device::Type::Headset:
     case Device::Type::Headphones:
+    case Device::Type::Speakers:
+    case Device::Type::Carkit:
     case Device::Type::OtherAudio:
         return true;
 

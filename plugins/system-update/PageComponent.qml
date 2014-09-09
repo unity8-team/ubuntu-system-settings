@@ -19,6 +19,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import QMenuModel 0.1
 import QtQuick 2.0
 import QtSystemInfo 5.0
 import SystemSettings 1.0
@@ -37,12 +38,46 @@ ItemPage {
 
     property bool installAll: false
     property bool includeSystemUpdate: false
+    property bool systemUpdateInProgress: false
     property int updatesAvailable: 0
-
+    property bool isCharging: false
+    property bool batterySafeForUpdate: isCharging || chargeLevel > 25
+    property var chargeLevel: indicatorPower.batteryLevel || 0
     property var notificationAction;
+
+    QDBusActionGroup {
+        id: indicatorPower
+        busType: 1
+        busName: "com.canonical.indicator.power"
+        objectPath: "/com/canonical/indicator/power"
+        property variant batteryLevel: action("battery-level").state
+        Component.onCompleted: start()
+    }
 
     DeviceInfo {
         id: deviceInfo
+    }
+
+    BatteryInfo {
+        id: batteryInfo
+        monitorChargingState: true
+
+        onChargingStateChanged: {
+            if (state === BatteryInfo.Charging) {
+                isCharging = true
+            }
+            else if (state === BatteryInfo.Discharging &&
+                     batteryInfo.batteryStatus(0) !== BatteryInfo.BatteryFull) {
+                isCharging = false
+            }
+            else if (batteryInfo.batteryStatus(0) === BatteryInfo.BatteryFull ||
+                     state === BatteryInfo.NotCharging) {
+                isCharging = true
+            }
+        }
+        Component.onCompleted: {
+            onChargingStateChanged(0, chargingState(0))
+        }
     }
 
     Component {
@@ -50,10 +85,11 @@ ItemPage {
          Dialog {
              id: dialogueInstall
              title: i18n.tr("Update System")
-             text: i18n.tr("The phone needs to restart to install the system update.")
+             text: root.batterySafeForUpdate ? i18n.tr("The phone needs to restart to install the system update.") : i18n.tr("Connect the phone to power before installing the system update.")
 
              Button {
                  text: i18n.tr("Install & Restart")
+                 visible: root.batterySafeForUpdate ? true : false
                  color: UbuntuColors.orange
                  onClicked: {
                      installingImageUpdate.visible = true;
@@ -69,7 +105,10 @@ ItemPage {
                      var item = updateList.currentItem;
                      var modelItem = updateManager.model[0];
                      item.actionButton.text = i18n.tr("Install");
+                     item.progressBar.opacity = 0;
                      modelItem.updateReady = true;
+                     modelItem.selected = false;
+                     root.systemUpdateInProgress = false;
                      PopupUtils.close(dialogueInstall);
                  }
              }
@@ -143,8 +182,10 @@ ItemPage {
         }
 
         onSystemUpdateDownloaded: {
-            root.updatesAvailable -= 1;
-            PopupUtils.open(dialogInstallComponent);
+            if (!root.systemUpdateInProgress && !installingImageUpdate.visible) {
+                root.systemUpdateInProgress = true;
+                PopupUtils.open(dialogInstallComponent);
+            }
         }
 
         onSystemUpdateFailed: {
@@ -248,11 +289,13 @@ ItemPage {
                 delegate: ListItem.Subtitled {
                     id: listItem
                     iconSource: Qt.resolvedUrl(modelData.iconUrl)
+                    iconFrame: modelData.systemUpdate ? false : true
                     height: modelData.selected ? units.gu(14) : units.gu(8)
                     highlightWhenPressed: false
                     showDivider: false
 
                     property alias actionButton: buttonAppUpdate
+                    property alias progressBar: progress
 
                     Rectangle {
                         id: textArea
@@ -294,8 +337,7 @@ ItemPage {
                                     textArea.retry = false;
                                     updateManager.retryDownload(modelData.packageName);
                                 } else if (modelData.updateReady) {
-                                    updateManager.applySystemUpdate();
-                                    installingImageUpdate.visible = true;
+                                    PopupUtils.open(dialogInstallComponent);
                                 } else if (modelData.updateState) {
                                     if (modelData.systemUpdate) {
                                         updateManager.pauseDownload(modelData.packageName);

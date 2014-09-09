@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-07 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-09 07:53+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -2177,49 +2177,3 @@ msgstr "Sistemaren irudi eguneratua eskuragarri dago."
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr "Sakatu sistema-eguneratzailea irekitzeko."
-
-#~ msgid "Switch to passcode"
-#~ msgstr "Aldatu pasagakora"
-
-#~ msgid "Existing passcode"
-#~ msgstr "Uneko pasagakoa"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Pasagakoak ez datoz bat. Saiatu berriro."
-
-#~ msgid "Choose passcode"
-#~ msgstr "Aukeratu pasagakoa"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Berretsi pasagakoa"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Aldatu pasagakoa..."
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4 digituko pasagakoa..."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4 digituko pasagakoa"
-
-#~ msgid "Passcode"
-#~ msgstr "Pasagakoa"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "Telefonoa erroreak automatikoki Canonical-i bidaltzeko konfiguratuta dago. "
-#~ "Hau sistemaren ezarpenetan desgaitu daiteke."
-
-#~ msgid "Select your language"
-#~ msgstr "Hautatu hizkuntza"
-
-#~ msgid "Hello"
-#~ msgstr "Kaixo"
-
-#~ msgid "Start"
-#~ msgstr "Hasi"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Ongi etorri zure Ubuntu mugikorrera. Has gaitezen."

@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-08 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-09 07:53+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: sv\n"
 
@@ -2179,49 +2179,3 @@ msgstr "Det finns en uppdatera systemavbild."
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr "Tryck för att öppna systemuppdateraren."
-
-#~ msgid "Switch to passcode"
-#~ msgstr "Byt till kod"
-
-#~ msgid "Existing passcode"
-#~ msgstr "Befintlig kod"
-
-#~ msgid "Choose passcode"
-#~ msgstr "Välj kod"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Bekräfta kod"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Koderna stämmer inte med varandra. Prova igen."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "fyrsiffrig kod"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "fyrsiffrig kod…"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Ändra kod…"
-
-#~ msgid "Passcode"
-#~ msgstr "Kod"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "Din telefon är inställd på att automatiskt rapportera fel till Canonical. "
-#~ "Det kan inaktiveras i systeminställningar."
-
-#~ msgid "Select your language"
-#~ msgstr "Välj ditt språk"
-
-#~ msgid "Hello"
-#~ msgstr "Hej"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Välkommen till din Ubuntu-telefon. Låt oss börja."
-
-#~ msgid "Start"
-#~ msgstr "Starta"
