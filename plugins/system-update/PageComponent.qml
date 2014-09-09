@@ -248,6 +248,7 @@ ItemPage {
                 delegate: ListItem.Subtitled {
                     id: listItem
                     iconSource: Qt.resolvedUrl(modelData.iconUrl)
+                    iconFrame: modelData.systemUpdate ? false : true
                     height: modelData.selected ? units.gu(14) : units.gu(8)
                     highlightWhenPressed: false
                     showDivider: false
