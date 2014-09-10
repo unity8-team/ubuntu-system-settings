@@ -284,12 +284,13 @@ ItemPage {
                     right: parent.right
                 }
                 model: UpdateManager.model
-                height: contentItem.childrenRect.height
+                height: childrenRect.height
                 interactive: false
 
                 delegate: ListItem.Subtitled {
                     id: listItem
                     iconSource: Qt.resolvedUrl(modelData.iconUrl)
+                    iconFrame: modelData.systemUpdate ? false : true
                     height: modelData.selected ? units.gu(14) : units.gu(8)
                     highlightWhenPressed: false
                     showDivider: false

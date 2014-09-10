@@ -10,6 +10,7 @@ set(QML_SOURCES
     PageComponent.qml
     PhoneNumber.qml
     PhoneNumbers.qml
+    SingleValueStacked.qml
     Software.qml
     Storage.qml
     StorageBar.qml
