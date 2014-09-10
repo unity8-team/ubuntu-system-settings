@@ -283,7 +283,7 @@ ItemPage {
                     right: parent.right
                 }
                 model: updateManager.model
-                height: contentItem.childrenRect.height
+                height: childrenRect.height
                 interactive: false
 
                 delegate: ListItem.Subtitled {
