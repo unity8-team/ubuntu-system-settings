@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-01 19:21+0000\n"
+"PO-Revision-Date: 2014-09-05 16:54+0000\n"
 "Last-Translator: ivarela <ivarela@ubuntu.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:15+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-09 07:53+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -396,7 +396,7 @@ msgstr "Vibrar en mou silenciosu"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Soníos del tecláu"
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -474,7 +474,7 @@ msgstr "Escribi'l PIN de la SIM"
 
 #: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "Escribi'l PIN anterior de la SIM"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
@@ -498,10 +498,13 @@ msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"Al afitar un PIN de la SIM, esti tien d'inxertase p'acceder a los servicios "
+"telefónicos tres de reaniciar el teléfonu o camudar la tarxeta SIM."
 
 #: ../plugins/security-privacy//SimPin.qml:358
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
+"Pues bloquiar la SIM dafechu s'inxertes repetidamente un PIN incorreutu."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -549,7 +552,7 @@ msgstr "La suspensión bloquia nel intre"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "Cuando ta bloquiáu, permitir:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
@@ -557,15 +560,17 @@ msgstr "Llanzador"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "Notificaciones y configuración rápida"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
+"Activa'l bloquéu de seguridá pa restrinxir l'accesu cuando'l teléfonu ta "
+"bloquiáu."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
+msgstr "Otres aplicaciones y funciones van solicitar que desbloquies."
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -609,7 +614,7 @@ msgstr[1] "Tres %1 minutos"
 #: ../plugins/security-privacy//PageComponent.qml:161
 #: ../plugins/security-privacy//PageComponent.qml:236
 msgid "On"
-msgstr ""
+msgstr "Activáu"
 
 #: ../plugins/security-privacy//PageComponent.qml:165
 #: ../plugins/security-privacy//PageComponent.qml:236
@@ -617,7 +622,7 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:50
 #: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
-msgstr ""
+msgstr "Desactiváu"
 
 #: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
@@ -690,7 +695,7 @@ msgstr "Camudar a eslizar"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "Cambiar a PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -698,7 +703,7 @@ msgstr "Camudar a frase secreta"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "PIN actual"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -706,7 +711,7 @@ msgstr "Frase secreta esistente"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "Seleiciona'l PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -714,7 +719,7 @@ msgstr "Escueyi una frase secreta"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "Confirma'l PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
@@ -722,7 +727,7 @@ msgstr "Confirmar frase secreta"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "Estos PIN nun concasen. Inténtalo de nueves."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -742,7 +747,7 @@ msgstr "Eslizar (non seguro)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "PIN de cuatro díxitos"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -750,7 +755,7 @@ msgstr "Eslizar (non seguro)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "PIN de cuatro díxitos..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -836,7 +841,7 @@ msgstr "Devolver resultaos de:"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "Aplicaciones a les que-yos disti (y solicitaron) accesu a:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
@@ -845,37 +850,37 @@ msgstr "Cámara"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Aplicaciones que solicitaron accesu a la cámara"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Micrófonu"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Aplicaciones que solicitaron accesu al micrófonu"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "El llanzador va tornar al so conteníu orixinal."
 
 #: ../plugins/reset//ResetLauncherHome.qml:44
 #: ../plugins/reset//PageComponent.qml:73
 msgid "Reset Launcher"
-msgstr ""
+msgstr "Reaniciar el llanzador"
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
-msgstr ""
+msgstr "El teléfonu necesita reaniciase p'aplicar los cambeos."
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -901,7 +906,7 @@ msgstr "Restablecer tola configuración del sistema…"
 
 #: ../plugins/reset//PageComponent.qml:101
 msgid "Erase & Reset Everything…"
-msgstr ""
+msgstr "Desaniciar y reaniciar too..."
 
 #: ../plugins/reset//EraseEverything.qml:41
 msgid ""
@@ -913,7 +918,7 @@ msgstr ""
 
 #: ../plugins/reset//EraseEverything.qml:44
 msgid "Erase & Reset Everything"
-msgstr ""
+msgstr "Desaniciar y reaniciar too"
 
 #: ../plugins/phone//SingleSim.qml:29
 msgid "SIM"
@@ -957,7 +962,7 @@ msgstr "Teléfonu"
 #: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
 #: ../plugins/phone//MultiSim.qml:94
 msgid "Services"
-msgstr ""
+msgstr "Servicios"
 
 #: ../plugins/phone//CallWaiting.qml:89
 msgid ""
@@ -983,13 +988,15 @@ msgstr "Reunviar a"
 #: ../plugins/notifications//PageComponent.qml:29
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
 msgid "Notifications"
-msgstr ""
+msgstr "Notificaciones"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"Les aplicaciones esbillaes puen avisate per aciu de notificaciones, soníos, "
+"vibración y el Centru de notificaciones."
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
@@ -1023,7 +1030,7 @@ msgstr "Distribuciones de tecláu"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Correición automática"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -1039,16 +1046,18 @@ msgstr "Activa Mayús al entamu de cada oración."
 
 #: ../plugins/language//PageComponent.qml:168
 msgid "Auto punctuation"
-msgstr ""
+msgstr "Puntuación automática"
 
 #: ../plugins/language//PageComponent.qml:178
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"Amiesta un puntu, y les comines y paréntesis que faigan falta, al primir "
+"Espaciu dos vegaes."
 
 #: ../plugins/language//PageComponent.qml:195
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "Vibración de tecláu"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -1103,12 +1112,16 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"Cuando'l puntu d'accesu ta activáu, otros preseos puen usar la to conexón de "
+"datos móviles per aciu de wifi. Van aplicase cargos de datos normales."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"Otros preseos puen usar la to conexón de datos móviles per aciu de wifi. Van "
+"aplicase cargos de datos normales."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -1152,12 +1165,12 @@ msgstr "Axustar automáticamente"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "Aumenta o amenorga'l brillu de la pantalla según la lluz ambiental."
 
 #: ../plugins/brightness//BrightnessSlider.qml:51
 #: ../plugins/battery//PageComponent.qml:296
 msgid "Display brightness"
-msgstr ""
+msgstr "Brillu de pantalla"
 
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
@@ -1186,7 +1199,7 @@ msgstr "Bluetooth"
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
-msgstr ""
+msgstr "Coneutáu"
 
 #: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
@@ -2157,49 +2170,3 @@ msgstr ""
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr ""
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Los códigos nun concasen. Inténtalo otra vegada."
-
-#~ msgid "Change passcode…"
-#~ msgstr "Camudar el códigu…"
-
-#~ msgid "4-digit passcode"
-#~ msgstr "Códigu de 4 díxitos"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "Códigu de 4 díxitos…"
-
-#~ msgid "Passcode"
-#~ msgstr "Códigu"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "Camudar a códigu"
-
-#~ msgid "Choose passcode"
-#~ msgstr "Escueyi un códigu"
-
-#~ msgid "Existing passcode"
-#~ msgstr "Códigu esistente"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Confirmar códigu"
-
-#~ msgid "Select your language"
-#~ msgstr "Seleiciona la to llingua"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "El teléfonu ta configuráu pa unviar automáticamente informes de fallu a "
-#~ "Canonical. Esto pue desactivase nos Axustes del sistema."
-
-#~ msgid "Hello"
-#~ msgstr "Hola"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Bienllegáu/ada al teléfonu Ubuntu. Entamamos."
-
-#~ msgid "Start"
-#~ msgstr "Aniciar"

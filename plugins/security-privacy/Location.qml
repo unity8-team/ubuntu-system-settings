@@ -23,6 +23,7 @@ import QMenuModel 0.1
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import SystemSettings 1.0
 
 ItemPage {
@@ -82,21 +83,31 @@ ItemPage {
                     return i18n.tr("Uses wi-fi (currently off), cell tower locations (no current cellular connection), and GPS to detect your rough location. Turning off location detection saves battery.")
             }
 
-            visible: showAllUI
+            visible: showAllUI /* hide until the information is real */
         }
 
         ListItem.Standard {
             text: i18n.tr("Allow access to location:")
-            visible: showAllUI && locationOn.checked
+            visible: locationOn.checked
+        }
+
+        TrustStoreModel {
+            id: trustStoreModel
+            serviceName: "UbuntuLocationService"
         }
 
         Repeater {
-            model: ["Browser", "Camera", "Clock", "Weather"]
+            model: trustStoreModel
             ListItem.Standard {
-                text: modelData
-                control: Switch { checked: true; enabled: false}
-                visible: showAllUI && locationOn.checked
+                text: model.applicationName
+                iconSource: model.iconName
+                control: Switch {
+                    checked: model.granted
+                    onClicked: trustStoreModel.setEnabled(index, !model.granted)
+                }
+                visible: locationOn.checked
             }
         }
+
     }
 }
