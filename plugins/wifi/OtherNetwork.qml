@@ -42,13 +42,17 @@ ItemPage {
                password.length === 13 ||
                password.length === 26;
     }
+    Component.onCompleted: {
+        flickable: otherNetworkFlickable
+    }
     Flickable {
         id: otherNetworkFlickable
         contentWidth: parent.width
         contentHeight: otherview.height + units.gu(8)
         anchors {
             fill: parent
-            top: parent.top
+            left: parent.left
+            right: parent.right
             bottom: buttons.top
         }
 
