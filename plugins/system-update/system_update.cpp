@@ -206,7 +206,7 @@ void SystemUpdate::ProcessAvailableStatus(bool isAvailable,
     } else {
         Q_EMIT updateNotFound();
     }
-    if (downloading) {
+    if (!downloading && (m_downloadMode == 0))
         downloadUpdate();
         update->setSelected(true);
     }
