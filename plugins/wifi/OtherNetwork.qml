@@ -24,7 +24,7 @@ import QMenuModel 0.1
 
 ItemPage {
     id: othernetwork
-    title: i18n.tr("Other network")
+    title: i18n.tr("Connect to hidden network")
 
     function settingsValid() {
         if(networkname.length == 0) {
