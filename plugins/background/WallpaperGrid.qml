@@ -179,35 +179,11 @@ Column {
                         id: emptyItemForCaller
                         anchors.centerIn: parent
                     }
-                    ActionSelectionPopover {
-                        id: actPop
-                        caller: emptyItemForCaller
-                        delegate: ListItem.Standard {
-                            text: action.text
-                        }
-                        actions: ActionList {
-                            Action {
-                                text: i18n.tr("Remove")
-                                onTriggered: {
-                                    // removing current background, revert to default
-                                    if (modelData === current) {
-                                        Utilities.revertBackgroundToDefault();
-                                    }
-                                    backgroundPanel.rmFile(modelData);
-                                }
-                            }
-                        }
-                    }
                     MouseArea {
                         id: imgMouseArea
                         anchors.fill: parent
-                        onPressAndHold: {
-                            if (editable && (grid.state === "")) {
-                                actPop.show();
-                            }
-                        }
                         onClicked: {
-                            if (!actPop.visible && (grid.state === "")) {
+                            if (grid.state === "") {
                                 selected(modelData);
                             }
 

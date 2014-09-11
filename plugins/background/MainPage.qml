@@ -61,7 +61,9 @@ ItemPage {
         // a callback that pushes the preview stack
         onTriggered: {
             startContentTransfer(function(uri) {
-                pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                pageStack.push(Qt.resolvedUrl("Preview.qml"), {
+                    uri: uri, imported: true
+                });
                 // set Connection target
                 selectedItemConnection.target = pageStack.currentPage;
             });
@@ -189,10 +191,17 @@ ItemPage {
                     trans.state = ContentTransfer.Finalized;
                 }
             }
-            // if we did an import, clean up
+
             if ((target.state === "cancelled") &&
                 (trans && trans.state === ContentTransfer.Collected)) {
-                backgroundPanel.rmFile(target.uri);
+
+                if (target.imported) {
+                    // if we just did an import, remove the image if the user
+                    // cancels
+                    backgroundPanel.rmFile(target.uri);
+                } else {
+                    backgroundPanel.prepareBackgroundFile(target.uri, true);
+                }
                 trans.state = ContentTransfer.Finalized;
             }
         }

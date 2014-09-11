@@ -1,3 +1,24 @@
+ubuntu-system-settings (0.3+14.10.20140911.1-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * [background] always keep custom images, and remove press-and-hold
+    action. (LP: #1365167)
+  * [wifi] do not use predictive text for network name input (LP:
+    #1365992)
+  * [language] workaround for transition bug in keyboard layout menu
+    (LP: #1350809)
+  * [wifi] factory was setting the icon property, which was causing the
+    icon to not render (LP: #1364366)
+
+  [ Alejandro J. Cura ]
+  * Fixing the refreshing of the apps scope (LP: #1360369)
+
+  [ Sebastien Bacher ]
+  * [sound] use the correct backend to control the keyboard sound toggle
+    (LP: #1366208)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 11 Sep 2014 04:15:10 +0000
+
 ubuntu-system-settings (0.3+14.10.20140911-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
