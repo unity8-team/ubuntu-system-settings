@@ -16,8 +16,8 @@
 
 import QtQuick 2.0
 import QMenuModel 0.1 as QMenuModel
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.1
+import Ubuntu.Components.ListItems 1.0 as ListItem
 import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import Ubuntu.Settings.Menus 0.1 as Menus
 import "../Components" as LocalComponents

@@ -16,7 +16,7 @@
 
 import QtQuick 2.0
 import Unity.Application 0.1
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.1
 
 // TODO: try to share this code with that from the unity8 shell
 

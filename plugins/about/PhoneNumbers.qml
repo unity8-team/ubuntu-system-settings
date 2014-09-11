@@ -21,7 +21,7 @@
 import QtQuick 2.0
 import GSettings 1.0
 import MeeGo.QOfono 0.2
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.ListItems 1.0 as ListItem
 
 Column {
 
