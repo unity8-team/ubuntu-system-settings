@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-08-18 07:22+0000\n"
 "Last-Translator: Jānis-Marks Gailis <jm-gailis@fai-vianet.fr>\n"
 "Language-Team: Latvian <lv@li.org>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:17+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:24+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
 msgid "Previous networks"
-msgstr ""
+msgstr "Iepriekšējie tīkli"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -91,6 +91,14 @@ msgstr "Atcelt"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Savienoties"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Atvienoties"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -220,11 +228,15 @@ msgstr "Atjauninājumi"
 
 #: ../plugins/system-update//PageComponent.qml:52
 msgid "Update System"
-msgstr ""
+msgstr "Atjaunināt Sistēmu"
 
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "Ir jāpārstartē telefonu lai pabeigt sistēmas atjaunināšanu."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -302,7 +314,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:436
 msgid "Sign In…"
-msgstr ""
+msgstr "Ieiet..."
 
 #: ../plugins/system-update//PageComponent.qml:503
 msgid "Installing update…"
@@ -432,13 +444,13 @@ msgstr "SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "Mainīt SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "Nepareizs PIN. %1 paliek mēģinājumi."
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
@@ -448,19 +460,19 @@ msgstr ""
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "%1 mēģinājumi atļauti."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "Izvelieties jaunu PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "Apstipriniet jauno PIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "PIN nesakrīt. Mēģiniet vēlreiz."
 
 #: ../plugins/security-privacy//SimPin.qml:154
 #: ../plugins/security-privacy//LockSecurity.qml:302
@@ -470,7 +482,7 @@ msgstr "Mainīt"
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
-msgstr ""
+msgstr "Ievadiet SIM PIN"
 
 #: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
@@ -478,20 +490,15 @@ msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
-msgstr ""
+msgstr "Atbloķēt"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Lock"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr ""
+msgstr "Bloķēt"
 
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
-msgstr ""
+msgstr "Mainīt PIN..."
 
 #: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
@@ -506,6 +513,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Tālruņa bloķēšana"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -554,7 +566,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "Palaidējs"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
@@ -611,7 +623,7 @@ msgstr[2] "Pēc %1 minūtēm"
 #: ../plugins/security-privacy//PageComponent.qml:161
 #: ../plugins/security-privacy//PageComponent.qml:236
 msgid "On"
-msgstr ""
+msgstr "Ieslēgts"
 
 #: ../plugins/security-privacy//PageComponent.qml:165
 #: ../plugins/security-privacy//PageComponent.qml:236
@@ -619,11 +631,11 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:50
 #: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
-msgstr ""
+msgstr "Izslēgts"
 
 #: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
-msgstr ""
+msgstr "Šifrēšana"
 
 #: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
@@ -633,7 +645,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
-msgstr ""
+msgstr "Privātums"
 
 #: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
@@ -677,7 +689,7 @@ msgstr "Nav nosūtīts"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "Mainīt PIN kodu..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -698,7 +710,7 @@ msgstr "Pārslēgties uz paroles frāzi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "Pastāvošais PIN kods"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -706,7 +718,7 @@ msgstr "Esošā paroles frāze"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "Izvelieties PIN kodu"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -714,7 +726,7 @@ msgstr "Izvēlieties paroli"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "Apstipriniet PIN kodu"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
@@ -722,7 +734,7 @@ msgstr "Apstipriniet paroli"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "Šie PIN kodi nesakrita, mēģiniet vēlreiz."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -742,7 +754,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "4 ciparu PIN kods"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -750,7 +762,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "4 ciparu PIN kods..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -845,24 +857,24 @@ msgstr "Kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "Aplikācijas kuras ir pieprasījušas pieeju jūsu kamerai"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Mik"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "Aplikācijas kuras ir pieprasījušas pieeju jūsu mikrofonam"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
@@ -953,7 +965,7 @@ msgstr "Telefons"
 #: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
 #: ../plugins/phone//MultiSim.qml:94
 msgid "Services"
-msgstr ""
+msgstr "Pakalpojumi"
 
 #: ../plugins/phone//CallWaiting.qml:89
 msgid ""
@@ -998,6 +1010,10 @@ msgstr ""
 msgid "All languages available:"
 msgstr "Visas pieejamas valodas:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1006,7 +1022,7 @@ msgstr "Valoda un teksts"
 
 #: ../plugins/language//PageComponent.qml:79
 msgid "Display language…"
-msgstr ""
+msgstr "Saskarsnes valoda..."
 
 #: ../plugins/language//PageComponent.qml:93
 #: ../plugins/language//KeyboardLayouts.qml:26
@@ -1015,7 +1031,7 @@ msgstr "Tastatūras izkārtojumi"
 
 #: ../plugins/language//PageComponent.qml:128
 msgid "Auto correction"
-msgstr ""
+msgstr "Automātiskā labošana"
 
 #: ../plugins/language//PageComponent.qml:138
 msgid "Word suggestions"
@@ -1052,7 +1068,7 @@ msgstr ""
 
 #: ../plugins/language//DisplayLanguage.qml:33
 msgid "Display language"
-msgstr ""
+msgstr "Saskarsnes valoda"
 
 #: ../plugins/language//DisplayLanguage.qml:114
 msgid "Confirm"
@@ -1305,10 +1321,6 @@ msgstr "Stāvoklis"
 msgid "Signal Strength"
 msgstr "Signāla stiprums"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Atvienoties"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Aizmirst šo ierīci"
@@ -1427,13 +1439,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Izņemt"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Priekšskatījums"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1507,7 +1519,7 @@ msgstr "Aplikāciju izmantots"
 
 #: ../plugins/about//Storage.qml:142
 msgid "Total storage"
-msgstr ""
+msgstr "Kopēja glabātuve"
 
 #: ../plugins/about//Storage.qml:154
 msgid "Free space"
@@ -1525,19 +1537,31 @@ msgstr "Pēc izmēra"
 msgid "Software licenses"
 msgstr "Programmatūras licences"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Tālruņa numurs"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "Par šo telefonu"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Tālruņa numurs"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Sērija"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1549,7 +1573,7 @@ msgstr "Operētājsistēma"
 
 #: ../plugins/about//PageComponent.qml:147
 msgid "Last updated"
-msgstr ""
+msgstr "Pēdējo reizi atjaunināts"
 
 #: ../plugins/about//PageComponent.qml:155
 msgid "Check for updates"
@@ -1567,9 +1591,13 @@ msgstr ""
 msgid "Developer mode"
 msgstr "Izstrādātāja režīms"
 
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
+
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
-msgstr ""
+msgstr "Attīstīšanās veids"
 
 #: ../plugins/about//DevMode.qml:73
 msgid ""
@@ -1583,11 +1611,11 @@ msgstr ""
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "Konfidencialitātes politika"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "Ziņot Canonical:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
@@ -1623,11 +1651,11 @@ msgstr "APN"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "Rediģējiet SIM nosaukumu"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "Labi"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
@@ -1639,13 +1667,13 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
 #: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "2G tikai (taupa bateriju)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:53
 #: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (ātrāks)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
@@ -1659,7 +1687,7 @@ msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "Izejošiem zvaniem, izmantot:"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
@@ -1669,12 +1697,12 @@ msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr ""
+msgstr "Īsziņām izmantot:"
 
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (ātrāks)"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1712,7 +1740,7 @@ msgid "System"
 msgstr "Sistēma"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
+msgid "Connect to Wi‑Fi"
 msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
@@ -1732,11 +1760,11 @@ msgstr "Izlaist"
 
 #: ../wizard/qml/Pages//10-welcome.qml:24
 msgid "Hi!"
-msgstr ""
+msgstr "Sveiki!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "Sveicināti uz jūsu Ubuntu viedtālruni."
 
 #: ../wizard/qml/Pages//10-welcome.qml:49
 msgid "Let’s get started."
@@ -1748,7 +1776,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr ""
+msgstr "Pievienojiet SIM karti"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
@@ -1760,7 +1788,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "Viss paveikts"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
@@ -1768,7 +1796,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "Jūsu telefons tagad ir gatavs lietošanai."
 
 #: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
@@ -1790,9 +1818,9 @@ msgstr ""
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
@@ -2152,35 +2180,12 @@ msgstr ""
 msgid "Tap to open the system updater."
 msgstr ""
 
-#~ msgid "Existing passcode"
-#~ msgstr "Esošais paroles kods"
+#~ msgid "Remove"
+#~ msgstr "Izņemt"
 
-#~ msgid "Switch to passcode"
-#~ msgstr "Pārslēgties uz kodu"
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
 
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Šie kodi nesakrīt. Mēģiniet vēlreiz."
-
-#~ msgid "Choose passcode"
-#~ msgstr "Izvēlieties kodu"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Apstipriniet kodu"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Mainīt kodu..."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4 ciparu kods"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4 ciparu kods..."
-
-#~ msgid "Select your language"
-#~ msgstr "Izvēlēties jūsu valodu."
-
-#~ msgid "Start"
-#~ msgstr "Sākt"
-
-#~ msgid "Hello"
-#~ msgstr "Sveiki"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Pieslēgties uz Wifi"

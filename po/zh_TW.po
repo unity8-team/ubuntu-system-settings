@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-08-29 23:46+0000\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:19+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:26+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -91,6 +91,14 @@ msgstr "取消"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "連接"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "斷線"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -225,6 +233,10 @@ msgstr "更新系統"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "手機需要重新啟動才能安裝系統更新。"
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -482,11 +494,6 @@ msgstr "解鎖"
 msgid "Lock"
 msgstr "鎖定"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "變更 PIN 碼…"
@@ -504,6 +511,11 @@ msgstr "連續錯誤輸入 PIN 碼多次可能令 SIM 卡被永久鎖住。"
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "手機鎖定"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -974,6 +986,10 @@ msgstr "目前會檢查拼字的語言："
 msgid "All languages available:"
 msgstr "所有可用語言："
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1281,10 +1297,6 @@ msgstr "狀態"
 msgid "Signal Strength"
 msgstr "信號強度"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "斷線"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "忘記此裝置"
@@ -1395,13 +1407,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "要準確偵測位置需要 GPS 和/或 Wi-Fi。"
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "移除"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "預覽"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1493,19 +1505,31 @@ msgstr "依大小"
 msgid "Software licenses"
 msgstr "軟體授權條款"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "電話號碼"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "關於此手機"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "電話號碼"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "序號"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1534,6 +1558,10 @@ msgstr "管制資訊"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "開發人員模式"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1679,8 +1707,8 @@ msgid "System"
 msgstr "系統"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "連接 Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1757,11 +1785,11 @@ msgstr "此功能可在「系統設定」停用。"
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr "以電話網路和 Wi-Fi 找出您的位置。"
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
-msgstr "我已閱讀並同意 Ubuntu <a href='terms.qml'>條款與細則</a>"
+msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -2119,41 +2147,17 @@ msgstr "有更新的系統映像檔。"
 msgid "Tap to open the system updater."
 msgstr "輕觸開啟系統更新器。"
 
-#~ msgid "Switch to passcode"
-#~ msgstr "切換為密碼"
+#~ msgid "Remove"
+#~ msgstr "移除"
 
-#~ msgid "Choose passcode"
-#~ msgstr "選擇密碼"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "確認密碼"
-
-#~ msgid "Existing passcode"
-#~ msgstr "現有密碼"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "密碼不符。請重試。"
-
-#~ msgid "Change passcode…"
-#~ msgstr "變更密碼…"
-
-#~ msgid "Passcode"
-#~ msgstr "密碼"
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4 位密碼"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4 位密碼…"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr "您的手機已設置為自動回報錯誤資訊給 Canonical。您可以在系統設定中停用這項動作。"
-
-#~ msgid "Select your language"
-#~ msgstr "選取您的語言"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "連接 Wi-Fi"
 
 #, qt-format
-#~ msgid "%1 attempts remaining"
-#~ msgstr "還可再試 %1 次"
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid ""
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>"
+#~ msgstr "我已閱讀並同意 Ubuntu <a href='terms.qml'>條款與細則</a>"
