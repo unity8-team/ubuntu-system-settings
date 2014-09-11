@@ -1,3 +1,22 @@
+ubuntu-system-settings (0.3+14.10.20140911.3-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Fixed tests for the dialpad settings failing on mako
+  * Don't call downloadUpdate when we see a system update ready, the
+    service does that for us (LP: #1368294) (LP: #1368294)
+  * Translate desktop file (LP: #1318008) (LP: #1318008)
+
+  [ Martin Pitt ]
+  * update POT
+
+  [ Sebastien Bacher ]
+  * [system-update] open the ubuntuone subpanel rather than the list
+    (LP: #1348580)
+  * [security-privacy] use ngettext strings when needed (LP: #1368159)
+  * Increase vertical spacing in the settings grid (LP: #1348579)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 11 Sep 2014 21:08:06 +0000
+
 ubuntu-system-settings (0.3+14.10.20140911.1-0ubuntu1) utopic; urgency=low
 
   [ jonas-drange ]
