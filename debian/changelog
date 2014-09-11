@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+14.10.20140911-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Don't call downloadUpdate for system updates that are already
+    downloading (LP: #1365646) (LP: #1311219, #1365646)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 11 Sep 2014 00:42:18 +0000
+
 ubuntu-system-settings (0.3+14.10.20140909-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
