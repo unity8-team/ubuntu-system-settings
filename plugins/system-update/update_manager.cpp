@@ -291,14 +291,12 @@ void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)
 void UpdateManager::updateClickScope()
 {
     // Refresh click scope
-    QDBusInterface iface("com.canonical.unity.scopes",
-                         "/com/canonical/unity/scopes",
-                         "com.canonical.unity.scopes",
-                         QDBusConnection::sessionBus(), 0);
-
-    if (iface.isValid()) {
-        iface.call(QLatin1String("InvalidateResults"), QLatin1String("clickscope"));
-    }
+    QDBusMessage signal = QDBusMessage::createSignal(
+                "/com/canonical/unity/scopes",
+                "com.canonical.unity.scopes",
+                "InvalidateResults");
+    signal << "clickscope";
+    QDBusConnection::sessionBus().send(signal);
 }
 
 }
