@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-09-03 04:07+0000\n"
 "Last-Translator: MinSik CHO <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:24+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -91,6 +91,14 @@ msgstr "취소"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "접속"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "연결 해제"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -225,6 +233,10 @@ msgstr "시스템 업데이트하기"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "시스템 업데이트를 설치하려면, 휴대 전화를 재시작해야 합니다."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -482,11 +494,6 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr ""
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr ""
@@ -504,6 +511,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "폰 잠금"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -979,6 +991,10 @@ msgstr "현재 맞춤법 검사 언어:"
 msgid "All languages available:"
 msgstr "사용 가능한 언어:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1286,10 +1302,6 @@ msgstr ""
 msgid "Signal Strength"
 msgstr "신호 강도"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "연결 해제"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr ""
@@ -1400,13 +1412,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "정확한 위치를 파악하기 위해서는 GPS와/또는 Wi-Fi가 필요합니다."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "삭제"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "미리보기"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1498,19 +1510,31 @@ msgstr "크기 순으로"
 msgid "Software licenses"
 msgstr "소프트웨어 라이선스"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "이 폰에 대하여"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr ""
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "시리얼"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1538,6 +1562,10 @@ msgstr "규정 정보"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
+msgstr ""
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
 msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
@@ -1685,8 +1713,8 @@ msgid "System"
 msgstr "시스템"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Wi-Fi에 연결하기"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1763,9 +1791,9 @@ msgstr ""
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
@@ -2125,37 +2153,8 @@ msgstr ""
 msgid "Tap to open the system updater."
 msgstr ""
 
-#~ msgid "Confirm passcode"
-#~ msgstr "암호 확인"
+#~ msgid "Remove"
+#~ msgstr "삭제"
 
-#~ msgid "Choose passcode"
-#~ msgstr "암호 입력"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "입력된 암호가 다릅니다. 다시 시도해 주십시오."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4 자리수 암호"
-
-#~ msgid "Passcode"
-#~ msgstr "암호"
-
-#~ msgid "Existing passcode"
-#~ msgstr "현재 암호"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "암호로 바꾸기"
-
-#~ msgid "Change passcode…"
-#~ msgstr "암호 변경..."
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4 자리수 암호..."
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr "시스템 오류가 발생하면 자동으로 캐노니컬에 제출하도록 설정되어 있습니다. 이 설정은 시스템 설정에서 변경하실 수 있습니다."
-
-#~ msgid "Select your language"
-#~ msgstr "언어를 선택하세요."
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Wi-Fi에 연결하기"

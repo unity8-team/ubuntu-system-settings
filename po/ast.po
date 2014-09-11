@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-05 16:54+0000\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
+"PO-Revision-Date: 2014-09-10 12:22+0000\n"
 "Last-Translator: ivarela <ivarela@ubuntu.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-09 07:53+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:22+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -91,6 +91,14 @@ msgstr "Encaboxar"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Coneutar"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Desconeutar"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -225,6 +233,10 @@ msgstr "Anovar el sistema"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "Ye necesario reaniciar pa instalar l'anovamientu del sistema."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -484,11 +496,6 @@ msgstr "Desbloquiar"
 msgid "Lock"
 msgstr "Bloquiar"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Camudar PIN..."
@@ -509,6 +516,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Bloquéu del teléfonu"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1013,6 +1025,10 @@ msgstr "Llingües ortográfiques actuales:"
 msgid "All languages available:"
 msgstr "Toles llingües disponibles:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1203,19 +1219,19 @@ msgstr "Coneutáu"
 
 #: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
-msgstr ""
+msgstr "Coneutando…"
 
 #: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Desconeutando..."
 
 #: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
-msgstr ""
+msgstr "Desconeutáu"
 
 #: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocíu"
 
 #: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
@@ -1303,7 +1319,7 @@ msgstr "Coneutar otru preséu:"
 
 #: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
-msgstr ""
+msgstr "Coneutar un preséu:"
 
 #: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
@@ -1312,7 +1328,7 @@ msgstr "Dengún deteutáu"
 #: ../plugins/bluetooth//PageComponent.qml:291
 #: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "Coneutar automáticamente cuando se deteute:"
 
 #: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
@@ -1320,19 +1336,15 @@ msgstr "Tipu"
 
 #: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
-msgstr ""
+msgstr "Estáu"
 
 #: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
 msgstr "Potencia de la señal"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Desconeutar"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
-msgstr ""
+msgstr "Escaecer esti preséu"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
@@ -1446,13 +1458,13 @@ msgstr "XPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Pa deteutar la llocalización con precisión necesites GPS y/o wifi."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Desaniciar"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Vista precia"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1544,19 +1556,31 @@ msgstr "Por tamañu"
 msgid "Software licenses"
 msgstr "Llicencies de software"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Númberu de teléfonu"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "Tocante a esti teléfonu"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Númberu de teléfonu"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Númberu de serie"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1586,6 +1610,10 @@ msgstr "Información regulatoria"
 msgid "Developer mode"
 msgstr "Mou desendolcador"
 
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
+
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
 msgstr "Mou desendolcador"
@@ -1595,30 +1623,32 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"Nel mou desendolcador, cualquiera va poder acceder, modificar o desaniciar "
+"tolo qu'esista nel teléfonu al coneutalu con otru preséu."
 
 #: ../plugins/about//DevMode.qml:98
 msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr ""
+msgstr "Necesites un PIN o contraseña pa usar el mou de desendolcador."
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "Política de privacidá"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "Informar a Canonical:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "Cuelgues d'aplicaciones y fallos"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
-msgstr ""
+msgstr "Informes anteriores de fallos"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
-msgstr ""
+msgstr "Inclúi información sobre qué facía l'aplicación cuando falló."
 
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//MultiSim.qml:42
@@ -1634,7 +1664,7 @@ msgstr "Estadístiques d'usu de datos"
 #: ../plugins/cellular//Components//SingleSim.qml:66
 #: ../plugins/cellular//Components//NoSim.qml:47
 msgid "Carrier"
-msgstr ""
+msgstr "Operador"
 
 #: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
@@ -1642,77 +1672,77 @@ msgstr "Nome del puntu d'accesu"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "Editar nome de SIM"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "Aceutar"
 
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
 #: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
-msgstr ""
+msgstr "Datos móviles:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
 #: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Namái 2G (aforra batería)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:53
 #: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (más rápido)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr ""
+msgstr "Data roaming"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
-msgstr ""
+msgstr "Entrugar cada vegada"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "Pa llamaes salientes, usar:"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
-msgstr ""
+msgstr "Pues cambiar la tarxeta SIM pa llamaes individuales o pa contautos."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr ""
+msgstr "Pa mensaxes, usar:"
 
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (más rápido)"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "Nun hai imáxenes seleicionaes"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Desaniciar %1 imaxe"
+msgstr[1] "Desaniciar %1 imáxenes"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "Amestar una imaxe..."
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr ""
+msgstr "Desaniciar imáxenes..."
 
 #: ../src/qml/MainWindow.qml:110
 msgid "System Settings"
@@ -1731,8 +1761,8 @@ msgid "System"
 msgstr "Sistema"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Coneutar a Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1751,43 +1781,43 @@ msgstr "Saltar"
 
 #: ../wizard/qml/Pages//10-welcome.qml:24
 msgid "Hi!"
-msgstr ""
+msgstr "Hola!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:41
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "Dámoste l'acoyida a Ubuntu Phone"
 
 #: ../wizard/qml/Pages//10-welcome.qml:49
 msgid "Let’s get started."
-msgstr ""
+msgstr "Entamamos."
 
 #: ../wizard/qml/Pages//terms.qml:24
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Términos y condiciones"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr ""
+msgstr "Amestar una tarxeta SIM"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
-msgstr ""
+msgstr "Inxerta una tarxeta SIM enantes de siguir."
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
+msgstr "Ensin ella, nun vas poder facer llamaes nin unviar mensaxes."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "Too fecho"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "Bon trabayu!"
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "El teléfonu yá ta preparáu pa usar."
 
 #: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
@@ -1795,49 +1825,51 @@ msgstr "Finar"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "Informe de fallos"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
+"El teléfonu ta configuráu pa unviar automáticamente informes de fallos a "
+"Canonical."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "Esta opción pue desactivase n'Axustes del sistema."
 
 #: ../wizard/qml/Pages//30-location.qml:50
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
+msgstr "Usar la rede móvil y wifi pa determinar la llocalización"
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
-msgstr ""
+msgstr "Afitar la seguridá de bloquéu"
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "Eslizar"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "Los PIN nun concasen."
 
 #: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "Les contraseñes nun concasen."
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "El PIN tien de tener polo menos cuatro díxitos."
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "La contraseña tien de tener polo menos cuatro caráuteres."
 
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
@@ -1846,12 +1878,12 @@ msgstr "Atrás"
 #: ../wizard/qml/Components//StackButton.qml:51
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:54
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -1994,7 +2026,7 @@ msgstr "pantalla"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:76
 msgid "notifications"
-msgstr ""
+msgstr "notificaciones"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:82
@@ -2134,39 +2166,56 @@ msgstr "info"
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
 msgstr ""
+"Nun pue encaboxase la solicitú actual (nun pue contautase col serviciu)"
 
 #: ../plugins/system-update//system_update.cpp:98
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "Nun pue posase la solicitú actual (nun pue contautase col serviciu)"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:301
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "PIN incorreutu. Inténtalo otra vuelta."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "Contraseña incorreuta. Inténtalo de nueves."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
-msgstr ""
+msgstr "Nun pudo afitase'l mou de seguridá"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "Nun pudo afitase la contraseña de seguridá de la pantalla"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
-msgstr ""
+msgstr "Fallu de manipulación del testigu d'autenticación"
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
-msgstr ""
+msgstr "Títulu desconocíu"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
-msgstr ""
+msgstr "Hai un anovamientu de la imaxe del sistema disponible."
 
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "Calca p'abrir l'anovador del sistema."
+
+#~ msgid "Remove"
+#~ msgstr "Desaniciar"
+
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Coneutar a Wi-Fi"
+
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid ""
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>"
+#~ msgstr ""
+#~ "Lleí y aceuto  los <a href='terms.qml'>términos y condiciones</a> d'Ubuntu"

@@ -59,6 +59,7 @@ ItemPage {
         TextField {
             id : networkname
             width: parent.width
+            inputMethodHints: Qt.ImhNoPredictiveText
         }
 
         ListItem.ItemSelector {
