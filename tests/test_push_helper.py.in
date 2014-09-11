@@ -38,7 +38,7 @@ class PushHelperTests(unittest.TestCase):
         shutil.rmtree(self.tmp_dir)
 
     def run_push_helper(self, input_fname, output_fname):
-        subprocess.call([self.helper_path, input_fname, output_fname],
+        subprocess.call(["python3", self.helper_path, input_fname, output_fname],
                         stdout=subprocess.PIPE)
 
     def create_input_file(self, filename, content):
