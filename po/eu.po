@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-06 11:16+0000\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
+"PO-Revision-Date: 2014-09-09 22:53+0000\n"
 "Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-07 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:23+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -91,6 +91,14 @@ msgstr "Utzi"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Konektatu"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Deskonektatu"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -225,6 +233,10 @@ msgstr "Eguneratze-sistema"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "Telefonoa berrabiarazi behar da sistemaren eguneraketa instalatzeko."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -484,11 +496,6 @@ msgstr "Desblokeatu"
 msgid "Lock"
 msgstr "Blokeatu"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Aldatu PINa..."
@@ -509,6 +516,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Telefonoaren blokeoa"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1012,6 +1024,10 @@ msgstr "Uneko egiaztapendun hizkuntzak:"
 msgid "All languages available:"
 msgstr "Hizkuntza eskuragarriak:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1326,10 +1342,6 @@ msgstr "Egoera"
 msgid "Signal Strength"
 msgstr "Seinalearen indarra"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Deskonektatu"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Ahaztu gailu hau"
@@ -1446,13 +1458,13 @@ msgstr "GPSa"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Kokapenaren detekzio zehatzerako GPSa eta/edo wifia behar dira."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Kendu"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Aurreikusi"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1544,19 +1556,31 @@ msgstr "Tamainaren arabera"
 msgid "Software licenses"
 msgstr "Software-lizentziak"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Telefono-zenbakia"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "Telefono honi buruz"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Telefono-zenbakia"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Serie-zenbakia"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1585,6 +1609,10 @@ msgstr "Erregulatze-informazioa"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "Garatzaile modua"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1735,8 +1763,8 @@ msgid "System"
 msgstr "Sistema"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Konektatu wifira"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1814,13 +1842,11 @@ msgstr "Hau sistemaren ezarpenetan desgaitu daiteke."
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr "Erabili sare mugikorra eta wifia non zauden ebazteko"
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"Irakurri ditut eta onartzen ditut Ubunturen <a "
-"href='terms.qml'>baldintzak</a>"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -2160,11 +2186,11 @@ msgstr "Ezin izan da segurtasun-modua ezarri"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "Ezin izan da segurtasun-pantailaren argibidea ezarri"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
-msgstr ""
+msgstr "Autentifikazio-tokenaren manipulazio-errorea"
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
@@ -2178,48 +2204,19 @@ msgstr "Sistemaren irudi eguneratua eskuragarri dago."
 msgid "Tap to open the system updater."
 msgstr "Sakatu sistema-eguneratzailea irekitzeko."
 
-#~ msgid "Switch to passcode"
-#~ msgstr "Aldatu pasagakora"
+#~ msgid "Remove"
+#~ msgstr "Kendu"
 
-#~ msgid "Existing passcode"
-#~ msgstr "Uneko pasagakoa"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Konektatu wifira"
 
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Pasagakoak ez datoz bat. Saiatu berriro."
-
-#~ msgid "Choose passcode"
-#~ msgstr "Aukeratu pasagakoa"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Berretsi pasagakoa"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Aldatu pasagakoa..."
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4 digituko pasagakoa..."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4 digituko pasagakoa"
-
-#~ msgid "Passcode"
-#~ msgstr "Pasagakoa"
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
 
 #~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>"
 #~ msgstr ""
-#~ "Telefonoa erroreak automatikoki Canonical-i bidaltzeko konfiguratuta dago. "
-#~ "Hau sistemaren ezarpenetan desgaitu daiteke."
-
-#~ msgid "Select your language"
-#~ msgstr "Hautatu hizkuntza"
-
-#~ msgid "Hello"
-#~ msgstr "Kaixo"
-
-#~ msgid "Start"
-#~ msgstr "Hasi"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Ongi etorri zure Ubuntu mugikorrera. Has gaitezen."
+#~ "Irakurri ditut eta onartzen ditut Ubunturen <a "
+#~ "href='terms.qml'>baldintzak</a>"

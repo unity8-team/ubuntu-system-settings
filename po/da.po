@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-07-30 12:38+0000\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -20,8 +20,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:16+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:23+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -97,6 +97,14 @@ msgstr "Annullér"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Forbind"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Afbryd forbindelse"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -231,6 +239,10 @@ msgstr "Opdatér systemet"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "Telefonen skal genstartes for at systemopdateringen kan installeres."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -490,11 +502,6 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr ""
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr ""
@@ -512,6 +519,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Telefonlås"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1009,6 +1021,10 @@ msgstr "Nuværende stavekontrolsprog:"
 msgid "All languages available:"
 msgstr "Alle tilgængelige sprog:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1316,10 +1332,6 @@ msgstr ""
 msgid "Signal Strength"
 msgstr "Signalstyrke"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Afbryd forbindelse"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr ""
@@ -1436,13 +1448,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Nøjagtig positionsbestemmelse kræver GPS og/eller Wi-Fi."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Fjern"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Forhåndsvisning"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1537,19 +1549,31 @@ msgstr "Efter størrelse"
 msgid "Software licenses"
 msgstr "Softwarelicenser"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Telefonnummer"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "Om denne telefon"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Telefonnummer"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Serienummer"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1578,6 +1602,10 @@ msgstr "Regulationsinfo"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "Udviklertilstand"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1724,8 +1752,8 @@ msgid "System"
 msgstr "System"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Forbind til Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1802,9 +1830,9 @@ msgstr ""
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
@@ -2164,48 +2192,8 @@ msgstr ""
 msgid "Tap to open the system updater."
 msgstr ""
 
-#~ msgid "Confirm passcode"
-#~ msgstr "Bekræft adgangskode"
+#~ msgid "Remove"
+#~ msgstr "Fjern"
 
-#~ msgid "Switch to passcode"
-#~ msgstr "Skift til adgangskode"
-
-#~ msgid "Choose passcode"
-#~ msgstr "Vælg adgangskode"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Adgangskoderne er ikke ens. Prøv igen."
-
-#~ msgid "Passcode"
-#~ msgstr "Adgangskode"
-
-#~ msgid "Existing passcode"
-#~ msgstr "Eksisterende adgangskode"
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4-cifret adgangskode"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4-cifret adgangskode…"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Ændr adgangskode…"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "Din telefon er sat op til automatisk at rapportere fejl til Canonical. Dette "
-#~ "kan slås fra i systemindstillingerne."
-
-#~ msgid "Select your language"
-#~ msgstr "Vælg dit sprog"
-
-#~ msgid "Hello"
-#~ msgstr "Hej"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Velkommen til din Ubuntutelefon. Lad os komme i gang."
-
-#~ msgid "Start"
-#~ msgstr "Start"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Forbind til Wi-Fi"

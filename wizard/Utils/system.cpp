@@ -36,7 +36,8 @@ System::System()
     m_accounts = new QDBusInterface("org.freedesktop.Accounts",
                                     "/org/freedesktop/Accounts/User" + QString::number(geteuid()),
                                     "org.freedesktop.DBus.Properties",
-                                    QDBusConnection::systemBus());
+                                    QDBusConnection::systemBus(),
+                                    this);
 
     m_accounts->connection().connect(m_accounts->service(),
                                      m_accounts->path(),

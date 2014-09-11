@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,36 +38,35 @@ msgstr ""
 msgid "Network name"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:66
+#: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PhoneLocking.qml:45
+#: ../plugins/wifi//OtherNetwork.qml:68
 #: ../plugins/bluetooth//PageComponent.qml:116
 #: ../plugins/bluetooth//PageComponent.qml:323
 #: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:68
+#: ../plugins/wifi//OtherNetwork.qml:69
 msgid "WPA & WPA2 Personal"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:69
+#: ../plugins/wifi//OtherNetwork.qml:70
 msgid "WEP"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
+#: ../plugins/wifi//OtherNetwork.qml:77 ../plugins/wifi//NetworkDetails.qml:61
 msgid "Password"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:89
+#: ../plugins/wifi//OtherNetwork.qml:90
 msgid "Password visible"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/wifi//OtherNetwork.qml:113
 #: ../plugins/time-date//TimePicker.qml:173
 #: ../plugins/security-privacy//SimPin.qml:146
 #: ../plugins/security-privacy//SimPin.qml:263
@@ -76,20 +75,30 @@ msgstr ""
 #: ../plugins/reset//ResetAllSettings.qml:38
 #: ../plugins/reset//EraseEverything.qml:54
 #: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/language//DisplayLanguage.qml:94
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/language//DisplayLanguage.qml:98
 #: ../plugins/cellular//HotspotSetup.qml:85
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/background//Preview.qml:97
+#: ../plugins/background//Preview.qml:101
 #: ../plugins/cellular//Components//SimEditor.qml:189
 #: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:121
+#: ../plugins/wifi//OtherNetwork.qml:122
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
 msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
@@ -106,7 +115,7 @@ msgid "Last connected"
 msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:521
+#: ../plugins/system-update//PageComponent.qml:563
 #: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
@@ -114,7 +123,7 @@ msgstr ""
 #: ../plugins/battery//SleepValues.qml:106
 #: ../plugins/battery//PageComponent.qml:315
 #: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/about//PageComponent.qml:149
+#: ../plugins/about//PageComponent.qml:166
 msgid "Never"
 msgstr ""
 
@@ -165,7 +174,7 @@ msgstr ""
 #: ../plugins/time-date//TimePicker.qml:182
 #: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/background//Preview.qml:104
+#: ../plugins/background//Preview.qml:108
 msgid "Set"
 msgstr ""
 
@@ -213,127 +222,131 @@ msgid "No matching place"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
+#: ../plugins/system-update//PageComponent.qml:36
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:26
 msgid "Updates"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:52
+#: ../plugins/system-update//PageComponent.qml:87
 msgid "Update System"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:53
+#: ../plugins/system-update//PageComponent.qml:88
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:56
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:91
 msgid "Install & Restart"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:65
+#: ../plugins/system-update//PageComponent.qml:101
 msgid "Not Now"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:71
+#: ../plugins/system-update//PageComponent.qml:107
 msgid "Install"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:89
+#: ../plugins/system-update//PageComponent.qml:128
 msgid "Software is up to date"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:198
+#: ../plugins/system-update//PageComponent.qml:239
 msgid "Checking for updates…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:216
+#: ../plugins/system-update//PageComponent.qml:257
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:258
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/system-update//PageComponent.qml:218
+#: ../plugins/system-update//PageComponent.qml:259
 msgid "Pause All"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:270
+#: ../plugins/system-update//PageComponent.qml:313
 msgid "Retry"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:329
 msgid "Download"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:329
 msgid "Update"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:287
+#: ../plugins/system-update//PageComponent.qml:330
 msgid "Resume"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:288
+#: ../plugins/system-update//PageComponent.qml:331
 msgid "Pause"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:347
+#: ../plugins/system-update//PageComponent.qml:389
 msgid "Installing"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:380
+#: ../plugins/system-update//PageComponent.qml:422
 msgid "Installed"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:405
+#: ../plugins/system-update//PageComponent.qml:447
 msgid "Version: "
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:427
+#: ../plugins/system-update//PageComponent.qml:469
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:436
+#: ../plugins/system-update//PageComponent.qml:478
 msgid "Sign In…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:503
+#: ../plugins/system-update//PageComponent.qml:545
 msgid "Installing update…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:518
+#: ../plugins/system-update//PageComponent.qml:560
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:523
+#: ../plugins/system-update//PageComponent.qml:565
 msgid "On wi-fi"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:525
+#: ../plugins/system-update//PageComponent.qml:567
 msgid "Always"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:540
+#: ../plugins/system-update//PageComponent.qml:582
 msgid " bytes"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:543
+#: ../plugins/system-update//PageComponent.qml:585
 msgid " KiB"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:546
+#: ../plugins/system-update//PageComponent.qml:588
 msgid " MiB"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:549
+#: ../plugins/system-update//PageComponent.qml:591
 msgid " GiB"
 msgstr ""
 
@@ -353,7 +366,7 @@ msgstr ""
 msgid "Data charges may apply."
 msgstr ""
 
-#: ../plugins/sound//SoundsList.qml:59
+#: ../plugins/sound//SoundsList.qml:60
 msgid "Stop playing"
 msgstr ""
 
@@ -362,65 +375,65 @@ msgid "The phone is in Silent Mode."
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
+#: ../plugins/sound//PageComponent.qml:37
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
 msgid "Sound"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:75
+#: ../plugins/sound//PageComponent.qml:76
 msgid "Silent Mode"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:79
+#: ../plugins/sound//PageComponent.qml:80
 msgid "Ringer:"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:111
+#: ../plugins/sound//PageComponent.qml:112
 msgid "Phone calls:"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
 msgid "Ringtone"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:134
+#: ../plugins/sound//PageComponent.qml:135
 msgid "Vibrate when ringing"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:187
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
 msgid "Vibrate in Silent Mode"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:152
+#: ../plugins/sound//PageComponent.qml:153
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:156
+#: ../plugins/sound//PageComponent.qml:157
 msgid "Messages:"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:160
-#: ../plugins/sound//PageComponent.qml:166
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
 msgid "Message received"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:178
+#: ../plugins/sound//PageComponent.qml:179
 msgid "Vibrate with message sound"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:191
+#: ../plugins/sound//PageComponent.qml:192
 msgid "Other sounds:"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:195
-#: ../plugins/language//PageComponent.qml:185
+#: ../plugins/sound//PageComponent.qml:196
+#: ../plugins/language//PageComponent.qml:209
 msgid "Keyboard sound"
 msgstr ""
 
-#: ../plugins/sound//PageComponent.qml:209
+#: ../plugins/sound//PageComponent.qml:210
 msgid "Lock sound"
 msgstr ""
 
@@ -484,11 +497,6 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr ""
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr ""
@@ -507,6 +515,11 @@ msgstr ""
 msgid "Phone locking"
 msgstr ""
 
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
+
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
@@ -520,7 +533,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:49
 #: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/about//DevMode.qml:104
+#: ../plugins/about//DevMode.qml:114
 msgid "Lock security"
 msgstr ""
 
@@ -607,12 +620,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/security-privacy//PageComponent.qml:244
 msgid "On"
 msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:236
+#: ../plugins/security-privacy//PageComponent.qml:244
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:50
 #: ../plugins/cellular//Components//CellularMultiSim.qml:30
@@ -646,29 +659,29 @@ msgstr ""
 msgid "Dash search"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:234
+#: ../plugins/security-privacy//PageComponent.qml:235
 msgid "Location access"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:243
+#: ../plugins/security-privacy//PageComponent.qml:253
 #: ../plugins/security-privacy//AppAccess.qml:28
 msgid "Other app access"
 msgstr ""
 
-#: ../plugins/security-privacy//PageComponent.qml:248
+#: ../plugins/security-privacy//PageComponent.qml:258
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr ""
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:253
+#: ../plugins/security-privacy//PageComponent.qml:263
 msgid "Sent"
 msgstr ""
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:256
+#: ../plugins/security-privacy//PageComponent.qml:266
 msgid "Not sent"
 msgstr ""
 
@@ -754,59 +767,59 @@ msgstr ""
 msgid "Passphrase…"
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:30
-#: ../wizard/qml/Pages//30-location.qml:23
+#: ../plugins/security-privacy//Location.qml:31
+#: ../wizard/qml/Pages//30-location.qml:25
 msgid "Location"
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:48
+#: ../plugins/security-privacy//Location.qml:49
 msgid "Location detection"
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:70
+#: ../plugins/security-privacy//Location.qml:71
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:72
+#: ../plugins/security-privacy//Location.qml:73
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:74
+#: ../plugins/security-privacy//Location.qml:75
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:76
+#: ../plugins/security-privacy//Location.qml:77
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:78
+#: ../plugins/security-privacy//Location.qml:79
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:80
+#: ../plugins/security-privacy//Location.qml:81
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:82
+#: ../plugins/security-privacy//Location.qml:83
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
 
-#: ../plugins/security-privacy//Location.qml:89
+#: ../plugins/security-privacy//Location.qml:90
 msgid "Allow access to location:"
 msgstr ""
 
@@ -854,6 +867,7 @@ msgid "Reset Launcher"
 msgstr ""
 
 #: ../plugins/reset//ResetLauncherHome.qml:59
+#: ../plugins/language//RebootNecessary.qml:34
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
 
@@ -965,8 +979,8 @@ msgstr ""
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:108
-#: ../plugins/language//PageComponent.qml:118
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
 msgid "Spell checking"
 msgstr ""
 
@@ -978,47 +992,51 @@ msgstr ""
 msgid "All languages available:"
 msgstr ""
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:33
+#: ../plugins/language//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
 msgid "Language & Text"
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:79
+#: ../plugins/language//PageComponent.qml:100
 msgid "Display language…"
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:93
+#: ../plugins/language//PageComponent.qml:117
 #: ../plugins/language//KeyboardLayouts.qml:26
 msgid "Keyboard layouts"
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:128
+#: ../plugins/language//PageComponent.qml:152
 msgid "Auto correction"
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:138
+#: ../plugins/language//PageComponent.qml:162
 msgid "Word suggestions"
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:151
+#: ../plugins/language//PageComponent.qml:175
 msgid "Auto capitalization"
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:161
+#: ../plugins/language//PageComponent.qml:185
 msgid "Turns on Shift to capitalize the first letter of each sentence."
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:168
+#: ../plugins/language//PageComponent.qml:192
 msgid "Auto punctuation"
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:178
+#: ../plugins/language//PageComponent.qml:202
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
 
-#: ../plugins/language//PageComponent.qml:195
+#: ../plugins/language//PageComponent.qml:219
 msgid "Keyboard vibration"
 msgstr ""
 
@@ -1030,11 +1048,11 @@ msgstr ""
 msgid "All layouts available:"
 msgstr ""
 
-#: ../plugins/language//DisplayLanguage.qml:33
+#: ../plugins/language//DisplayLanguage.qml:36
 msgid "Display language"
 msgstr ""
 
-#: ../plugins/language//DisplayLanguage.qml:114
+#: ../plugins/language//DisplayLanguage.qml:118
 msgid "Confirm"
 msgstr ""
 
@@ -1285,10 +1303,6 @@ msgstr ""
 msgid "Signal Strength"
 msgstr ""
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr ""
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr ""
@@ -1403,12 +1417,12 @@ msgstr ""
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
+#: ../plugins/background//Preview.qml:70
+msgid "Preview"
 msgstr ""
 
-#: ../plugins/background//Preview.qml:67
-msgid "Preview"
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
@@ -1417,43 +1431,43 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: ../plugins/background//MainPage.qml:107
+#: ../plugins/background//MainPage.qml:109
 msgid "Ubuntu Art"
 msgstr ""
 
-#: ../plugins/background//MainPage.qml:123
+#: ../plugins/background//MainPage.qml:125
 msgid "Custom"
 msgstr ""
 
-#: ../plugins/about//Version.qml:35
+#: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
 msgstr ""
 
-#: ../plugins/about//Version.qml:53
+#: ../plugins/about//Version.qml:65
 msgid "OS build number"
 msgstr ""
 
-#: ../plugins/about//Version.qml:59
+#: ../plugins/about//Version.qml:71
 msgid "Ubuntu Image part"
 msgstr ""
 
-#: ../plugins/about//Version.qml:85
+#: ../plugins/about//Version.qml:79
 msgid "Ubuntu build description"
 msgstr ""
 
-#: ../plugins/about//Version.qml:100
+#: ../plugins/about//Version.qml:85
 msgid "Device Image part"
 msgstr ""
 
-#: ../plugins/about//Version.qml:126
+#: ../plugins/about//Version.qml:92
 msgid "Device build description"
 msgstr ""
 
-#: ../plugins/about//Version.qml:141
+#: ../plugins/about//Version.qml:99
 msgid "Customization Image part"
 msgstr ""
 
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:143
 msgid "Storage"
 msgstr ""
 
@@ -1497,8 +1511,16 @@ msgstr ""
 msgid "By size"
 msgstr ""
 
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:186
 msgid "Software licenses"
+msgstr ""
+
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
@@ -1507,53 +1529,61 @@ msgstr ""
 msgid "About this phone"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:107
+#: ../plugins/about//PageComponent.qml:109
 msgid "Serial"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:133
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:150
 msgid "Software:"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:138
+#: ../plugins/about//PageComponent.qml:155
 msgid "OS"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:147
+#: ../plugins/about//PageComponent.qml:164
 msgid "Last updated"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:155
+#: ../plugins/about//PageComponent.qml:172
 msgid "Check for updates"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:164
+#: ../plugins/about//PageComponent.qml:181
 msgid "Legal:"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:177
+#: ../plugins/about//PageComponent.qml:194
 msgid "Regulatory info"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:185
+#: ../plugins/about//PageComponent.qml:202
 msgid "Developer mode"
 msgstr ""
 
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
 msgid "Developer Mode"
 msgstr ""
 
-#: ../plugins/about//DevMode.qml:73
+#: ../plugins/about//DevMode.qml:82
 msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
 
-#: ../plugins/about//DevMode.qml:98
+#: ../plugins/about//DevMode.qml:108
 msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
 
@@ -1688,37 +1718,37 @@ msgid "System"
 msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
+msgid "Connect to Wi‑Fi"
 msgstr ""
 
-#: ../wizard/qml/Pages//20-wifi.qml:66
+#: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
 msgstr ""
 
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
+#: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//10-welcome.qml:85
 #: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//30-location.qml:66
+#: ../wizard/qml/Pages//30-location.qml:79
 #: ../wizard/qml/Pages//15-passwd.qml:170
 msgid "Continue"
 msgstr ""
 
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
+#: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:24
+#: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:41
+#: ../wizard/qml/Pages//10-welcome.qml:42
 msgid "Welcome to your Ubuntu phone."
 msgstr ""
 
-#: ../wizard/qml/Pages//10-welcome.qml:49
+#: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
 msgstr ""
 
-#: ../wizard/qml/Pages//terms.qml:24
+#: ../wizard/qml/Pages//terms.qml:25
 msgid "Terms & Conditions"
 msgstr ""
 
@@ -1762,14 +1792,14 @@ msgstr ""
 msgid "This can be disabled in System Settings."
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:50
+#: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-"conditions</a>"
+"I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</"
+"a>"
 msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
@@ -2096,23 +2126,23 @@ msgstr ""
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:301
+#: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect PIN code. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:303
+#: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:306
+#: ../plugins/security-privacy//securityprivacy.cpp:323
 msgid "Could not set security mode"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:355
+#: ../plugins/security-privacy//securityprivacy.cpp:372
 msgid "Could not set security display hint"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:368
+#: ../plugins/security-privacy//securityprivacy.cpp:383
 msgid "Authentication token manipulation error"
 msgstr ""
 

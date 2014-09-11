@@ -21,6 +21,7 @@
 #include "accountsservice.h"
 
 #include <QDBusReply>
+#include <QDebug>
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -134,6 +135,9 @@ bool AccountsService::setUserProperty(const QString &interface,
                                   interface,
                                   property,
                                   QVariant::fromValue(QDBusVariant(value)));
+    if (msg.type() == QDBusMessage::ErrorMessage) {
+        qWarning() << "Could not set AccountsService property" << property << "on interface" << interface << "for object" << m_objectPath << "to" << value << ":" << msg.errorMessage();
+    }
     return msg.type() == QDBusMessage::ReplyMessage;
 }
 
@@ -146,5 +150,9 @@ bool AccountsService::customSetUserProperty(const QString &method,
                           m_systemBusConnection,
                           this);
 
-    return iface.call(method, value).type() == QDBusMessage::ReplyMessage;
+    QDBusMessage msg = iface.call(method, value);
+    if (msg.type() == QDBusMessage::ErrorMessage) {
+        qWarning() << "Could not call AccountsService method" << method << "for object" << m_objectPath << "with argument" << value << ":" << msg.errorMessage();
+    }
+    return msg.type() == QDBusMessage::ReplyMessage;
 }

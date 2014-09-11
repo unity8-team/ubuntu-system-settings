@@ -55,8 +55,6 @@ ItemPage {
             right: parent.right
             bottom: buttons.top
         }
-
-
         Column {
             id : otherview
             anchors {
@@ -74,6 +72,7 @@ ItemPage {
                 id : networkname
                 width: parent.width - units.gu(4)
                 anchors.horizontalCenter: parent.horizontalCenter
+                inputMethodHints: Qt.ImhNoPredictiveText
             }
 
             ListItem.ItemSelector {

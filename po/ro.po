@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-09-03 10:58+0000\n"
 "Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:25+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -92,6 +92,14 @@ msgstr "Anulează"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Conectare"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Deconectare"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -227,6 +235,10 @@ msgstr "Actualizare sistem"
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 "Trebuie să reporniți telefonul pentru a instala actualizarea de sistem."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -489,11 +501,6 @@ msgstr "Deblochează"
 msgid "Lock"
 msgstr "Blochează"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Modificare PIN..."
@@ -515,6 +522,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Blocare telefon"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1024,6 +1036,10 @@ msgstr "Verificare ortografică curentă pentru limbile:"
 msgid "All languages available:"
 msgstr "Toate limbile disponibile:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1338,10 +1354,6 @@ msgstr "Stare"
 msgid "Signal Strength"
 msgstr "Putere semnal"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Deconectare"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Uită acest dispozitiv"
@@ -1464,13 +1476,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Localizarea geografică precisă necesită GPS și/sau rețele fără fir"
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Șterge"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Previzualizare"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1562,19 +1574,31 @@ msgstr "După dimensiune"
 msgid "Software licenses"
 msgstr "Licențe software"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Număr telefon"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "Despre telefon"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Număr telefon"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Serie"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1603,6 +1627,10 @@ msgstr "Informații normative"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "Mod dezvoltator"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1758,8 +1786,8 @@ msgid "System"
 msgstr "Sistem"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Conectare la rețeaua fără fir"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1841,12 +1869,11 @@ msgstr ""
 "Utilizează rețeaua mobilă și rețeaua fără fir pentru a determina poziția "
 "dumneavoastră."
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"Am citit și sunt de acord cu <a href='terms.qml'>termenii și condițiile</a>"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -2207,56 +2234,18 @@ msgstr "Există o imagine de sistem actualizată."
 msgid "Tap to open the system updater."
 msgstr "Atingeți pentru a deschide programul de actualizare a sistemului."
 
-#~ msgid "Passcode"
-#~ msgstr "Parolă"
+#~ msgid "Remove"
+#~ msgstr "Șterge"
 
-#~ msgid "Switch to passcode"
-#~ msgstr "Schimbă pe parolă"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Conectare la rețeaua fără fir"
 
-#~ msgid "Choose passcode"
-#~ msgstr "Alegeți parola"
-
-#~ msgid "Existing passcode"
-#~ msgstr "Parolă existentă"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Parolele nu se potrivesc. Încercați din nou."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "Parolă din 4 cifre"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Confirmare parolă"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Schimbă parola..."
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "Parolă din 4 cifre..."
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
 
 #~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>"
 #~ msgstr ""
-#~ "Telefonul trimite automat rapoarte de eroare către Canonical. Această "
-#~ "funcție poate fi dezactivată din configurările de sistem."
-
-#~ msgid "Start"
-#~ msgstr "Start"
-
-#~ msgid "Hello"
-#~ msgstr "Salutări"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Bine ați venit. Să începem cu Ubuntu pentru telefoane."
-
-#~ msgid "Select your language"
-#~ msgstr "Selectare limbă"
-
-#~ msgid "You need a passcode or passphrase set to use Developer Mode."
-#~ msgstr ""
-#~ "Pentru a utiliza funcția Mod dezvoltator trebuie să configurați o parolă sau "
-#~ "o frază parolă."
-
-#~ msgid "Those passcodes don't match."
-#~ msgstr "Aceste coduri de acces nu se potrivesc."
+#~ "Am citit și sunt de acord cu <a href='terms.qml'>termenii și condițiile</a>"

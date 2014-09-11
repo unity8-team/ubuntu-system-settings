@@ -29,7 +29,7 @@ static QObject *system_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
-    return System::instance();
+    return new System();
 }
 
 void UtilsPlugin::registerTypes(const char *uri)

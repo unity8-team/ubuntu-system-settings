@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-08-30 14:25+0000\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
+"PO-Revision-Date: 2014-09-02 14:01+0000\n"
 "Last-Translator: Данило Шеган <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:18+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:25+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -92,6 +92,14 @@ msgstr "Откажи"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Повежи"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Прекини везу"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -226,6 +234,10 @@ msgstr "Догради систем"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "Телефон се мора ресетовати ради доградње система."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -399,7 +411,7 @@ msgstr "Вибрирај када је утишан"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Звуци бирања"
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -451,7 +463,7 @@ msgstr "Текући ПИН:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "Дозвољено %1 покушаја."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
@@ -487,11 +499,6 @@ msgstr "Откључај"
 msgid "Lock"
 msgstr "Закључај"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Промени ПИН..."
@@ -511,6 +518,11 @@ msgstr "Унос нетачног ПИН-а више пута може трај�
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Закључавање телефона"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1015,6 +1027,10 @@ msgstr "Текући језици за правопис:"
 msgid "All languages available:"
 msgstr "Сви доступни језици:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1328,10 +1344,6 @@ msgstr "Стање"
 msgid "Signal Strength"
 msgstr "Јачина сигнала"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Прекини везу"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Заборави овај уређај"
@@ -1452,13 +1464,13 @@ msgstr "ГПС"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Прецизно препознавање положаја захтева ГПС и/или бежичну везу."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Уклони"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Преглед"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1550,19 +1562,31 @@ msgstr "По величини"
 msgid "Software licenses"
 msgstr "Лиценце за софтвер"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Број телефона"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "О телефону"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Број телефона"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Серијски"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1591,6 +1615,10 @@ msgstr "Подаци о прописима"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "Режим за развој"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1741,8 +1769,8 @@ msgid "System"
 msgstr "Систем"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Повежи се бежично"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1819,13 +1847,11 @@ msgstr "Ово се може искључити у Подешавањима си
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr "Користи мобилну и бежичне мреже да пронађе где се налазите"
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"Прочитах и слажем се са <a href='terms.qml'>правилима и условима</a> "
-"употребе Убунтуа"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -2184,5 +2210,18 @@ msgid "Tap to open the system updater."
 msgstr "Тапните да отворите доградњу система."
 
 #, qt-format
-#~ msgid "%1 attempts remaining"
-#~ msgstr "Преостало је %1 покушаја"
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid "Remove"
+#~ msgstr "Уклони"
+
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Повежи се бежично"
+
+#~ msgid ""
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>"
+#~ msgstr ""
+#~ "Прочитах и слажем се са <a href='terms.qml'>правилима и условима</a> "
+#~ "употребе Убунтуа"

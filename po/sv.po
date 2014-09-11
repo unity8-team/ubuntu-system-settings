@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: Josef Andersson <josef.andersson@fripost.org>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-09-07 10:14+0000\n"
 "Last-Translator: Josef Andersson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se.>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-08 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:26+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: sv\n"
 
@@ -92,6 +92,14 @@ msgstr "Avbryt"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Anslut"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Koppla från"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -226,6 +234,10 @@ msgstr "Uppdatera system"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "Telefonen behöver starta om för att installera systemuppdateringen."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -485,11 +497,6 @@ msgstr "Lås upp"
 msgid "Lock"
 msgstr "Lås"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Ändra PIN..."
@@ -510,6 +517,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Telefonlås"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1010,6 +1022,10 @@ msgstr "Aktuella rättstavningspråk:"
 msgid "All languages available:"
 msgstr "Alla tillgängliga språk:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1324,10 +1340,6 @@ msgstr "Status"
 msgid "Signal Strength"
 msgstr "Signalstyrka"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Koppla från"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Glöm denna enhet"
@@ -1446,13 +1458,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Precis platsbestämning kräver GPS och/eller Wi-Fi."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Ta bort"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Förhandsgranskning"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1544,19 +1556,31 @@ msgstr "Efter storlek"
 msgid "Software licenses"
 msgstr "Programvarulicenser"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Telefonnummer"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "Om den här telefonen"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Telefonnummer"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Serienummer"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1585,6 +1609,10 @@ msgstr "Regleringsinfo"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "Utvecklarläge"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1736,8 +1764,8 @@ msgid "System"
 msgstr "System"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Anslut till Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1816,13 +1844,11 @@ msgstr "Det kan inaktiveras i Systeminställningar."
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr "Använd ditt mobila- och trådlösa nätverk för att lista ut var du är"
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"Jag har läst och och gått med på <a href='terms.qml'>användarvillkoren</a> "
-"för Ubuntu"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -2180,48 +2206,19 @@ msgstr "Det finns en uppdatera systemavbild."
 msgid "Tap to open the system updater."
 msgstr "Tryck för att öppna systemuppdateraren."
 
-#~ msgid "Switch to passcode"
-#~ msgstr "Byt till kod"
+#~ msgid "Remove"
+#~ msgstr "Ta bort"
 
-#~ msgid "Existing passcode"
-#~ msgstr "Befintlig kod"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Anslut till Wi-Fi"
 
-#~ msgid "Choose passcode"
-#~ msgstr "Välj kod"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Bekräfta kod"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Koderna stämmer inte med varandra. Prova igen."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "fyrsiffrig kod"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "fyrsiffrig kod…"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Ändra kod…"
-
-#~ msgid "Passcode"
-#~ msgstr "Kod"
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
 
 #~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>"
 #~ msgstr ""
-#~ "Din telefon är inställd på att automatiskt rapportera fel till Canonical. "
-#~ "Det kan inaktiveras i systeminställningar."
-
-#~ msgid "Select your language"
-#~ msgstr "Välj ditt språk"
-
-#~ msgid "Hello"
-#~ msgstr "Hej"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Välkommen till din Ubuntu-telefon. Låt oss börja."
-
-#~ msgid "Start"
-#~ msgstr "Starta"
+#~ "Jag har läst och och gått med på <a href='terms.qml'>användarvillkoren</a> "
+#~ "för Ubuntu"
