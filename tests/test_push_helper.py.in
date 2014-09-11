@@ -1,5 +1,4 @@
-#!/usr/bin/python
-
+#!/usr/bin/python3
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 # Copyright 2014 Canonical
 #
@@ -14,7 +13,18 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
+from importlib import import_module
 
+
+HELPER_DIR = '@CMAKE_CURRENT_SOURCE_DIR@/../push-helper/'
+sys.path.append(HELPER_DIR)
+import software_updates_helper
+
+
+class TestingSystemImage(software_updates_helper.SystemImage):
+    def setup(self):
+        pass
 
 class PushHelperTests(unittest.TestCase):
     """Tests for the push-helper script."""
@@ -22,8 +32,7 @@ class PushHelperTests(unittest.TestCase):
     def setUp(self):
         super(PushHelperTests, self).setUp()
         self.tmp_dir = tempfile.mkdtemp(suffix='push-helper', prefix='tests')
-        self.helper_path = '@CMAKE_CURRENT_SOURCE_DIR@/../push-helper/' + \
-            'software-updates-helper.py'
+        self.helper_path = HELPER_DIR + 'software_updates_helper.py'
 
     def tearDown(self):
         super(PushHelperTests, self).tearDown()
@@ -49,7 +58,7 @@ class PushHelperTests(unittest.TestCase):
         self.assertEqual(card['actions'], ['settings:///system/system-update'])
         self.assertEqual(card['persist'], True)
         self.assertEqual(card['body'], 'Tap to open the system updater.')
-        self.assertEqual(card['popup'], True)
+        self.assertEqual(card.get('popup', False), False)
         emblem_counter = notif['notification']['emblem-counter']
         self.assertEqual(emblem_counter, {'visible': True, 'count': 1})
         vibrate = notif['notification']['vibrate']
@@ -58,7 +67,7 @@ class PushHelperTests(unittest.TestCase):
     def test_update_broadcast(self):
         """Default system-update broadcast."""
         input_f = self.create_input_file('bcast_in',
-                                         '{"daily/mako": [200, ""]}')
+                                         '"system-image-update"')
         output_f = os.path.join(self.tmp_dir, 'bcast_out')
         self.run_push_helper(input_f, output_f)
         with open(output_f, 'r') as fd:
@@ -67,13 +76,103 @@ class PushHelperTests(unittest.TestCase):
 
     def test_valid_json(self):
         """Handle a valid json input."""
-        input_f = self.create_input_file('valid_json_in', '"null"')
+        input_f = self.create_input_file('valid_json_in', '"testing"')
         output_f = os.path.join(self.tmp_dir, 'valid_json_out')
         self.run_push_helper(input_f, output_f)
         with open(output_f, 'r') as fd:
             output = json.load(fd)
-        self.assertSystemUpdateNotification(output)
+        self.assertEqual(output, {"testing": True})
 
+    def test_system_image_run(self):
+        """Check that run looks sane"""
+        s = TestingSystemImage()
+        s.sysimg = mock.Mock(name="sysimg")
+        s.loop = mock.Mock(name="loop")
+        s.run()
+        # check the main loop was run
+        s.loop.run.assert_called_once_with()
+        # check CheckForUpdate was called
+        s.sysimg.CheckForUpdate.assert_called_once_with()
+        # and connect_to_signal
+        s.sysimg.connect_to_signal.assert_any_call("UpdateDownloaded", s.downloaded_cb)
+        s.sysimg.connect_to_signal.assert_any_call("UpdateFailed", s.failed_cb)
+        s.sysimg.connect_to_signal.assert_any_call("UpdateAvailableStatus", s.available_cb)
+        self.assertEqual(s.notify, False)
+
+    def test_available_and_downloading(self):
+        """check that available_cb when available and downloading just returns"""
+        s = TestingSystemImage()
+        s.quit = mock.Mock(name="quit")
+
+        self.assertEqual(s.notify, False)
+        # available and downloading; returns without calling quit
+        s.available_cb(True, True)
+        self.assertEqual(s.notify, False)
+        self.assertEqual(s.quit.called, False)
+
+    def test_available_not_downloading(self):
+        """check that available_cb when available and not downloading sets notify and quits"""
+        s = TestingSystemImage()
+        s.quit = mock.Mock(name="quit")
+
+        self.assertEqual(s.notify, False)
+        # available and not downloading; quits with notification
+        s.available_cb(True, False)
+        self.assertEqual(s.notify, True)
+        s.quit.assert_called_once_with()
+
+    def test_not_available(self):
+        """check that available_cb quits when not available"""
+        s = TestingSystemImage()
+        s.quit = mock.Mock(name="quit")
+
+        self.assertEqual(s.notify, False)
+        # not available; quits without notifying
+        s.available_cb(False, False)
+        self.assertEqual(s.notify, False)
+        s.quit.assert_called_once_with()
+
+    def test_downloaded_cb(self):
+        """check that on download, notify is set to True and quit is called"""
+        s = TestingSystemImage()
+        s.quit = mock.Mock(name="quit")
+
+        self.assertEqual(s.notify, False)
+        s.downloaded_cb()
+        self.assertEqual(s.notify, True)
+        s.quit.assert_called_once_with()
+
+    def test_failed_cb(self):
+        """check that on failure, notify is set to False and quit is called"""
+        s = TestingSystemImage()
+        s.quit = mock.Mock(name="quit")
+
+        self.assertEqual(s.notify, False)
+        s.failed_cb()
+        self.assertEqual(s.notify, False)
+        s.quit.assert_called_once_with()
+
+    def test_quit_no_notify(self):
+        """Check that quit withlooks sane"""
+        s = TestingSystemImage()
+        s.postal = mock.Mock(name="sysimg")
+        s.loop = mock.Mock(name="loop")
+        s.notify = False
+        s.quit()
+        self.assertEqual(s.postal.Post.called, False)
+        self.assertEqual(s.postal.ClearPersistent.called, False)
+        s.loop.quit.assert_called_once_with()
+
+    def test_quit_with_notify(self):
+        """Check that quit withlooks sane"""
+        s = TestingSystemImage()
+        s.postal = mock.Mock(name="sysimg")
+        s.loop = mock.Mock(name="loop")
+        s.notify = True
+        s.quit()
+        s.postal.Post.assert_called_once_with("_ubuntu-system-settings", '"system-image-update"')
+        s.postal.ClearPersistent.assert_called_once_with("_ubuntu-system-settings", "system-image-update")
+        s.loop.quit.assert_called_once_with()
 
 if __name__ == '__main__':
     unittest.main(
