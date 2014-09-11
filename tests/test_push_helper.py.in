@@ -14,8 +14,6 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
-from importlib import import_module
-
 
 HELPER_DIR = '@CMAKE_CURRENT_SOURCE_DIR@/../push-helper/'
 sys.path.append(HELPER_DIR)
@@ -25,6 +23,7 @@ import software_updates_helper
 class TestingSystemImage(software_updates_helper.SystemImage):
     def setup(self):
         pass
+
 
 class PushHelperTests(unittest.TestCase):
     """Tests for the push-helper script."""
@@ -94,13 +93,16 @@ class PushHelperTests(unittest.TestCase):
         # check CheckForUpdate was called
         s.sysimg.CheckForUpdate.assert_called_once_with()
         # and connect_to_signal
-        s.sysimg.connect_to_signal.assert_any_call("UpdateDownloaded", s.downloaded_cb)
-        s.sysimg.connect_to_signal.assert_any_call("UpdateFailed", s.failed_cb)
-        s.sysimg.connect_to_signal.assert_any_call("UpdateAvailableStatus", s.available_cb)
+        s.sysimg.connect_to_signal.assert_any_call("UpdateDownloaded",
+                                                   s.downloaded_cb)
+        s.sysimg.connect_to_signal.assert_any_call("UpdateFailed",
+                                                   s.failed_cb)
+        s.sysimg.connect_to_signal.assert_any_call("UpdateAvailableStatus",
+                                                   s.available_cb)
         self.assertEqual(s.notify, False)
 
     def test_available_and_downloading(self):
-        """check that available_cb when available and downloading just returns"""
+        """check that available_cb when available and d'loading just returns"""
         s = TestingSystemImage()
         s.quit = mock.Mock(name="quit")
 
@@ -111,7 +113,8 @@ class PushHelperTests(unittest.TestCase):
         self.assertEqual(s.quit.called, False)
 
     def test_available_not_downloading(self):
-        """check that available_cb when available and not downloading sets notify and quits"""
+        """check that available_cb when available and not downloading
+        sets notify and quits"""
         s = TestingSystemImage()
         s.quit = mock.Mock(name="quit")
 
@@ -170,8 +173,10 @@ class PushHelperTests(unittest.TestCase):
         s.loop = mock.Mock(name="loop")
         s.notify = True
         s.quit()
-        s.postal.Post.assert_called_once_with("_ubuntu-system-settings", '"system-image-update"')
-        s.postal.ClearPersistent.assert_called_once_with("_ubuntu-system-settings", "system-image-update")
+        s.postal.Post.assert_called_once_with("_ubuntu-system-settings",
+                                              '"system-image-update"')
+        s.postal.ClearPersistent.assert_called_once_with(
+            "_ubuntu-system-settings", "system-image-update")
         s.loop.quit.assert_called_once_with()
 
 if __name__ == '__main__':
