@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-09-07 22:40+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-09 07:53+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:22+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -91,6 +91,14 @@ msgstr "መሰረዣ"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "መገናኛ"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "ማቋረጫ"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -225,6 +233,10 @@ msgstr "ስርአት ማሻሻያ"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "የ ስርአቱን ማሻሻያ ለመግጠም ስልኩን እንደገና ማስነሳት ያስፈልጋል"
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -484,11 +496,6 @@ msgstr "መክፈቻ"
 msgid "Lock"
 msgstr "መቆለፊያ"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "መቀየሪያ ፒን…"
@@ -506,6 +513,11 @@ msgstr "የተሳሳተ ፒን ደጋግሞ ማስገባት በቋሚነት ሲ�
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "ስልክ በመቆለፍ ላይ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -982,6 +994,10 @@ msgstr "የ አሁኑ ቋንቋ ፊደል ማረሚያ:"
 msgid "All languages available:"
 msgstr "ሁሉም ቋንቋዎች ዝግጁ ናቸው:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1289,10 +1305,6 @@ msgstr "ሁኔታው"
 msgid "Signal Strength"
 msgstr "የ ምልክት ጥንካሬ"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "ማቋረጫ"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "ይህን አካል ተወው"
@@ -1407,13 +1419,13 @@ msgstr "ጂፒኤስ"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "በትክክል ያሉበትን ቦታ ለማግኘት የ ጂፒኤስ እና/ወይንም ዋይ-ፋይ ያስፈልጋል"
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "ማስወገጃ"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "ቅድመ እይታ"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1505,19 +1517,31 @@ msgstr "በ መጠን"
 msgid "Software licenses"
 msgstr "የ ሶፍትዌር ፍቃዶች"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "የ ስልክ ቁጥር"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "ስለዚህ ስልክ"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "የ ስልክ ቁጥር"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "ተከታታይ"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1545,6 +1569,10 @@ msgstr "የ ደንብ መረጃ"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
+msgstr ""
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
 msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
@@ -1692,8 +1720,8 @@ msgid "System"
 msgstr "ስርአት"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "ወደ ዋይ-ፋይ መገናኛFi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1770,9 +1798,9 @@ msgstr ""
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
@@ -2131,3 +2159,13 @@ msgstr "ለ ስርአቱ ምስል ማሻሻያ ዝግጁ ነው"
 #: ../push-helper/software-updates-helper.py:79
 msgid "Tap to open the system updater."
 msgstr "የ ስርአት ማሻሻያውን ለመክፈት መታ ያድርጉ"
+
+#~ msgid "Remove"
+#~ msgstr "ማስወገጃ"
+
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "ወደ ዋይ-ፋይ መገናኛFi"
+
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-09-03 12:44+0000\n"
 "Last-Translator: Jay ZDLin <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:25+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -92,6 +92,14 @@ msgstr "Отмена"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Подключиться"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Отключиться"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -226,6 +234,10 @@ msgstr "Обновить систему"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "Требуется перезагрузка, чтобы установить системные обновления."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -487,11 +499,6 @@ msgstr "Разблокировать"
 msgid "Lock"
 msgstr "Заблокировать"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Смена ПИН-кода..."
@@ -509,6 +516,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Блокировка телефона"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1011,6 +1023,10 @@ msgstr "Выбранные проверяемые языки:"
 msgid "All languages available:"
 msgstr "Все доступные языки:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1321,10 +1337,6 @@ msgstr "Статус"
 msgid "Signal Strength"
 msgstr "Мощность сигнала"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Отключиться"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Забыть данное устройство"
@@ -1447,13 +1459,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Для точного определения местонахождения требуется GPS и/или Wi-Fi."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Удалить"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Предпросмотр"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1545,19 +1557,31 @@ msgstr "По размеру"
 msgid "Software licenses"
 msgstr "Лицензии на ПО"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Номер телефона"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "Об устройстве"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Номер телефона"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Серийный номер"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1586,6 +1610,10 @@ msgstr "Правовая информация"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "Режим разработчика"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1734,8 +1762,8 @@ msgid "System"
 msgstr "Настройки системы"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Подключиться к Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1812,9 +1840,9 @@ msgstr ""
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
@@ -2174,57 +2202,12 @@ msgstr "Имеется обновлённый образ системы."
 msgid "Tap to open the system updater."
 msgstr "Нажмите для открытия мастера обновления системы."
 
-#~ msgid "Switch to passcode"
-#~ msgstr "Переключить на цифровой пароль"
+#~ msgid "Remove"
+#~ msgstr "Удалить"
 
-#~ msgid "Existing passcode"
-#~ msgstr "Текущий цифровой пароль"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Подключиться к Wi-Fi"
 
-#~ msgid "Confirm passcode"
-#~ msgstr "Подтвердите цифровой пароль"
-
-#~ msgid "Choose passcode"
-#~ msgstr "Введите цифровой пароль"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4-символьный цифровой пароль"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Цифровые пароли не совпадают. Попробуйте еще раз."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4-символьный цифровой пароль"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Изменить цифровой пароль"
-
-#~ msgid "Passcode"
-#~ msgstr "Кодовая фраза"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "Ваш телефон настроен на автоматическую отправку отчётов об ошибках в "
-#~ "Canonical. Отключить данную функцию можно в настройках системы."
-
-#~ msgid "Hello"
-#~ msgstr "Приветствие"
-
-#~ msgid "Start"
-#~ msgstr "Старт"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Добро пожаловать в ваш Ubuntu-фон. Приступим."
-
-#~ msgid "Select your language"
-#~ msgstr "Выберите язык"
-
-#~ msgid "You need a passcode or passphrase set to use Developer Mode."
-#~ msgstr "Придумайте код или фразу для использования режима разработчика."
-
-#~ msgid "Those passcodes don't match."
-#~ msgstr "Коды доступа не совпадают."
-
-#~ msgid "Passcode must be at least four digits long."
-#~ msgstr "Код доступа должен содержать не менее четырёх цифр."
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"

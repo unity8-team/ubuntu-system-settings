@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-08-29 15:50+0000\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
+"PO-Revision-Date: 2014-09-02 14:35+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:18+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:26+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: uk\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
@@ -94,6 +94,14 @@ msgstr "Скасувати"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "З’єднатися"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Від'єднатися"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -229,6 +237,10 @@ msgstr "Оновлення системи"
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 "Для завершення встановлення оновленої системи телефон слід перезавантажити."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -402,7 +414,7 @@ msgstr "Вібрація у тихому режимі"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Озвучення набирання"
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -454,7 +466,7 @@ msgstr "Поточний PIN-код:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "Дозволено не більше %1 спроб."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
@@ -490,11 +502,6 @@ msgstr "Розблокувати"
 msgid "Lock"
 msgstr "Заблокувати"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Змінити PIN-код…"
@@ -517,6 +524,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Блокування телефону"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1031,6 +1043,10 @@ msgstr "Поточні мови перевірки правопису:"
 msgid "All languages available:"
 msgstr "Усі доступні мови:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1345,10 +1361,6 @@ msgstr "Стан"
 msgid "Signal Strength"
 msgstr "Потужність сигналу"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Від'єднатися"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Забути про цей пристрій"
@@ -1472,13 +1484,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Точне визначення місця перебування потребує даних GPS і/або Wi-Fi."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Вилучити"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Перегляд"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1570,19 +1582,31 @@ msgstr "За розміром"
 msgid "Software licenses"
 msgstr "Ліцензування програмного забезпечення"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Номер телефону"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "Про цей телефон"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Номер телефону"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Серійний номер"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1611,6 +1635,10 @@ msgstr "Дані щодо обмежень"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "Режим розробника"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1764,8 +1792,8 @@ msgid "System"
 msgstr "Система"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "З’єднатися з Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1844,13 +1872,11 @@ msgstr "Його можна вимкнути у Системних параме�
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr "Користуйтеся вашою мобільною мережею та Wi-Fi там, де вам це зручно"
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"Мною прочитано <a href='terms.qml'>умови надання послуг</a> Ubuntu. Я "
-"погоджуюся з ними."
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -2210,90 +2236,19 @@ msgstr "Випущено оновлений образ системи."
 msgid "Tap to open the system updater."
 msgstr "Натисніть, щоб відкрити засіб оновлення системи."
 
-#~ msgid "Switch to passcode"
-#~ msgstr "Перемкнутися на код"
+#~ msgid "Remove"
+#~ msgstr "Вилучити"
 
-#~ msgid "Existing passcode"
-#~ msgstr "Наявні коди"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "З’єднатися з Wi-Fi"
 
-#~ msgid "Choose passcode"
-#~ msgstr "Виберіть код"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Підтвердіть код"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Ці коди не збігаються один з одним. Повторіть спробу."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4-цифровий код"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4-цифровий код…"
-
-#~ msgid "Change passcode…"
-#~ msgstr "Змінити код…"
-
-#~ msgid "Passcode"
-#~ msgstr "Код"
-
-#~ msgid "Select your language"
-#~ msgstr "Виберіть мову інтерфейсу"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "Ваш телефон налаштовано на автоматичне надсилання сповіщень щодо помилок до "
-#~ "Canonical. Надсилання сповіщень можна вимкнути у параметрах системи."
-
-#~ msgid "Hello"
-#~ msgstr "Привіт!"
-
-#~ msgid "Start"
-#~ msgstr "Почати"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Вітаємо у вашому телефоні з Ubuntu. Почнімо роботу."
-
-#~ msgid "You need a passcode or passphrase set to use Developer Mode."
-#~ msgstr "Щоб скористатися режимом розробника, вам слід встановити пароль."
-
-#~ msgid "Those passcodes don't match."
-#~ msgstr "Коди-паролі не збігаються."
-
-#~ msgid "Passcode must be at least four digits long."
-#~ msgstr "Код-пароль має складатися принаймні з чотирьох цифр."
-
-#~ msgid "Nice work! Your phone is now ready to use. "
-#~ msgstr "Чудово! Ваш телефон готовий до користування. "
-
-#~ msgid "Bug Reporting"
-#~ msgstr "Звітування щодо вад"
-
-#~ msgid "Use your mobile network and wi-fi to work out where you are."
-#~ msgstr ""
-#~ "Скористайтеся вашою мобільною мережею та wi-fi для роботи у зручному для вас "
-#~ "місці."
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Помилковий код-пароль. Повторіть спробу."
-
-#~ msgid ""
-#~ "Please insert a SIM card before you continue. Without it, you won’t be able "
-#~ "to make calls or use text messaging."
-#~ msgstr ""
-#~ "Перш ніж продовжувати, будь ласка, вставте SIM-картку. Без неї ви не зможете "
-#~ "здійснювати дзвінки та користуватися службами обміну текстовими "
-#~ "повідомленнями."
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
 
 #~ msgid ""
 #~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>."
+#~ "conditions</a>"
 #~ msgstr ""
-#~ "Мені відомі <a href='terms.qml'>умови надання послуг</a> Ubuntu. Я "
+#~ "Мною прочитано <a href='terms.qml'>умови надання послуг</a> Ubuntu. Я "
 #~ "погоджуюся з ними."
-
-#, qt-format
-#~ msgid "%1 attempts remaining"
-#~ msgstr "Лишилося %1 спроб"
