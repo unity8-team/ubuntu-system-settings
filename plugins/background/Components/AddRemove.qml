@@ -99,5 +99,4 @@ Row {
             enteredQueueMode();
         }
     }
-
 }
