@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-09-02 07:09+0000\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
+"PO-Revision-Date: 2014-09-02 07:48+0000\n"
 "Last-Translator: Sok Sophea <sksophea@gmail.com>\n"
 "Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:17+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:24+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -91,6 +91,14 @@ msgstr "បោះ​បង់"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "តភ្ជាប់"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "ផ្តាច់"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -226,6 +234,10 @@ msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ប្រព
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 "ទូរស័ព្ទ​ត្រូវ​ចាប់ផ្ដើម​ឡើងវិញ ដើម្បី​ដំឡើង​បច្ចុប្បន្នភាព​ប្រព័ន្ធ។"
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -483,11 +495,6 @@ msgstr "ដោះ​សោ"
 msgid "Lock"
 msgstr "ចាក់សោ"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "ប្ដូរ​លេខ​កូដ PIN…"
@@ -509,6 +516,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "ការ​ចាក់សោ​ទូរស័ព្ទ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1009,6 +1021,10 @@ msgstr "ភាសា​ប្រកប​បច្ចុប្បន្ន៖"
 msgid "All languages available:"
 msgstr "គ្រប់​ភាសា​៖"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1323,10 +1339,6 @@ msgstr "ស្ថានភាព"
 msgid "Signal Strength"
 msgstr "កម្លាំង​​សញ្ញា"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "ផ្តាច់"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "បំភ្លេច​ឧបករណ៍​នេះ"
@@ -1440,13 +1452,13 @@ msgstr "ជីភីអេស"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "រក​ឃើញ​ទីតាំង​ត្រឹមត្រូវ​ទាមទារ​ជីភីអេស និង/ឬ​វ៉ាយហ្វាយ។"
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "លុប​ចេញ"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "មើល​ជា​មុន"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1538,19 +1550,31 @@ msgstr "តាម​ទំហំ"
 msgid "Software licenses"
 msgstr "អាជ្ញាប័ណ្ណ​កម្មវិធី"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "លេខទូរស័ព្ទ"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "អំពី​ទូរស័ព្ទ​នេះ"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "លេខទូរស័ព្ទ"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "សៀរៀល"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1579,6 +1603,10 @@ msgstr "ព័ត៌មាន​ផ្លូវ​ច្បាប់"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "របៀប​អ្នក​អភិវឌ្ឍន៍"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1729,8 +1757,8 @@ msgid "System"
 msgstr "ប្រព័ន្ធ"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "ភ្ជាប់​វ៉ាយហ្វាយ"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1810,13 +1838,11 @@ msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 "ប្រើ​បណ្ដាញ​ចល័ត​របស់​អ្នក និង​វ៉ាយហ្វាយ​ដើម្បី​កំណត់​ទីតាំង​របស់​អ្នក"
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"ខ្ញុំ​បាន​អាន និង​យល់ព្រម​តាម <a href='terms.qml'>លក្ខខណ្ឌ​ប្រើប្រាស់</a> "
-"របស់ Ubuntu"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -1836,7 +1862,7 @@ msgstr "ឃ្លា​សម្ងាត់​ទាំងនោះ​មិន
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "លេខ​កូដ PIN ត្រូវតែ​មាន​ប្រវែង​យ៉ាង​ហោច​បួន​តួលេខ។"
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
@@ -1849,12 +1875,12 @@ msgstr "ថយ​ក្រោយ​"
 #: ../wizard/qml/Components//StackButton.qml:51
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:54
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
@@ -2136,35 +2162,35 @@ msgstr "ព័ត៌មាន"
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
-msgstr ""
+msgstr "មិន​អាច​បោះបង់​សំណើ​បច្ចុប្បន្ន (មិន​អាច​ទាក់ទង​សេវា)"
 
 #: ../plugins/system-update//system_update.cpp:98
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "មិន​អាច​ផ្អាក​សំណើ​បច្ចុប្បន្ន (មិន​អាច​ទាក់ទង​សេវា)"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:301
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "លេខ​កូដ PIN មិន​ត្រឹមត្រូវ។ ព្យាយាម​ម្ដងទៀត។"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:303
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "ឃ្លា​សម្ងាត់​មិន​ត្រឹមត្រូវ។ ព្យាយាម​ម្ដងទៀត។"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:306
 msgid "Could not set security mode"
-msgstr ""
+msgstr "មិន​អាច​កំណត់​របៀប​សុវត្ថិភាព"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:355
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "មិន​អាច​កំណត់​តម្រុយ​ការ​បង្ហាញ​សុវត្ថិភាព"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:368
 msgid "Authentication token manipulation error"
-msgstr ""
+msgstr "កំហុស​រៀបចំ​ថូខឹន​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ"
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
-msgstr ""
+msgstr "មិនស្គាល់​ចំណងជើង"
 
 #: ../push-helper/software-updates-helper.py:78
 msgid "There's an updated system image."
@@ -2174,62 +2200,19 @@ msgstr "មាន​រូបភាព​ប្រព័ន្ធ​ដែល​
 msgid "Tap to open the system updater."
 msgstr "ប៉ះ​ដើម្បី​បើក​កម្មវិធី​ធ្វើ​បច្ចុប្បន្នភាព​ប្រព័ន្ធ។"
 
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "ពាក្យ​សម្ងាត់​ទាំង​នោះ​មិន​ដូច​គ្នា។​ ព្យាយាម​ម្ដងទៀត។"
+#~ msgid "Remove"
+#~ msgstr "លុប​ចេញ"
 
-#~ msgid "4-digit passcode…"
-#~ msgstr "លេខ​កូដ ៤​ខ្ទង់…"
-
-#~ msgid "4-digit passcode"
-#~ msgstr "លេខ​កូដ ៤​ខ្ទង់"
-
-#~ msgid "Change passcode…"
-#~ msgstr "ប្ដូរ​ឃ្លា​សម្ងាត់..."
-
-#~ msgid "Passcode"
-#~ msgstr "កូដ​សម្ងាត់"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "ប្ដូរ​ទៅ​ពាក្យ​សម្ងាត់"
-
-#~ msgid "Choose passcode"
-#~ msgstr "ជ្រើស​ពាក្យ​សម្ងាត់"
-
-#~ msgid "Existing passcode"
-#~ msgstr "ពាក្យ​សម្ងាត់​ដែល​មាន​ស្រាប់"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "បញ្ជាក់​ពាក្យ​សម្ងាត់"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "ទូរស័ព្ទ​របស់​អ្នក​ត្រូវ​បាន​រៀបចំ​ ដើម្បី​ផ្ញើ​របាយការណ៍​កំហុស​​ទៅ "
-#~ "Canonical ដោយ​ស្វ័យ​ប្រវត្តិ។ វា​អាច​ត្រូវ​បាន​បិទ​ក្នុង​ការ​កំណត់​ប្រព័ន្ធ។"
-
-#~ msgid "Select your language"
-#~ msgstr "ជ្រើស​ភាសា"
-
-#~ msgid "Hello"
-#~ msgstr "សួស្តី"
-
-#~ msgid "Start"
-#~ msgstr "ចាប់ផ្ដើម"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "សូម​ស្វាគមន៍​មកកាន់​ទូរស័ព្ទ Ubuntu ។ តោះ​ចាប់ផ្ដើម!"
-
-#~ msgid "You need a passcode or passphrase set to use Developer Mode."
-#~ msgstr ""
-#~ "អ្នក​ត្រូវ​មាន​កូដ​សម្ងាត់ ឬ​ឃ្លា​សម្ងាត់​ដើម្បី​ប្រើ​របៀប​អ្នក​អភិវឌ្ឍន៍។"
-
-#~ msgid "Those passcodes don't match."
-#~ msgstr "កូដ​សម្ងាត់​ទាំងនោះ​មិន​ផ្គូផ្គង។"
-
-#~ msgid "Passcode must be at least four digits long."
-#~ msgstr "កូដ​សម្ងាត់​ត្រូវតែ​មាន​យ៉ាង​ហោច​បួន​តួអក្សរ"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "ភ្ជាប់​វ៉ាយហ្វាយ"
 
 #, qt-format
-#~ msgid "%1 attempts remaining"
-#~ msgstr "នៅសល់​ការ​ព្យាយាម %1"
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid ""
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>"
+#~ msgstr ""
+#~ "ខ្ញុំ​បាន​អាន និង​យល់ព្រម​តាម <a href='terms.qml'>លក្ខខណ្ឌ​ប្រើប្រាស់</a> "
+#~ "របស់ Ubuntu"

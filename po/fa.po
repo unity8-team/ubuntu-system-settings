@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
-"PO-Revision-Date: 2014-08-29 20:31+0000\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
+"PO-Revision-Date: 2014-09-02 22:21+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@gmail.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:17+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:25+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -91,6 +91,14 @@ msgstr "لغو"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "اتّصال"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "قطع اتّصال"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -225,6 +233,10 @@ msgstr "به‌روز رسانی سامانه"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "تلفن نیاز دارد برای به‌روز رسانی سامانه، راه‌اندازی مجدّد شود."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -394,7 +406,7 @@ msgstr "لرزش در حالت بی‌صدا"
 #: ../plugins/sound//PageComponent.qml:152
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "صداهای صفحه‌ی شماره"
 
 #: ../plugins/sound//PageComponent.qml:156
 msgid "Messages:"
@@ -446,7 +458,7 @@ msgstr "PIN کنونی:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "به %1 تلاش اجازه داده شد."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
@@ -482,11 +494,6 @@ msgstr "بازکردن قفل"
 msgid "Lock"
 msgstr "قفل"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "عوض کردن PIN"
@@ -507,6 +514,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "قفل‌کردن گوشی"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1007,6 +1019,10 @@ msgstr "زبان‌های املایی جاری:"
 msgid "All languages available:"
 msgstr "همه‌ی زبان‌های موجود:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1320,10 +1336,6 @@ msgstr "وضعیت"
 msgid "Signal Strength"
 msgstr "قدرت سیگنال"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "قطع اتّصال"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "فراموش کردن این دستگاه"
@@ -1436,13 +1448,13 @@ msgstr "جی‌پی‌اس"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "مکان یابی دقیق نیاز به جی‌پی‌اس و/یا بی‌سیم دارد."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "برداشتن"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "پیش‌نمایش"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1534,19 +1546,31 @@ msgstr "با اندازه"
 msgid "Software licenses"
 msgstr "پروانه‌های نرم‌افزاری"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "شماره تلفن"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "درباره‌ی این تلفن"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "شماره تلفن"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "سریال"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1575,6 +1599,10 @@ msgstr "اطّلاعات رگولاتوری"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "حالت توسعه‌دهنده"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1726,8 +1754,8 @@ msgid "System"
 msgstr "سامانه"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "اتّصال به بی‌سیم"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1807,12 +1835,11 @@ msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 "برای دانستن این که کجا هستید از شبکه‌ی بی‌سیم و تلفن همراهتان استفاده کنید."
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"من <a href='terms.qml'>شرایط و ضوابط</a> اوبونتو را خوانده‌ام و قبول دارم."
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -2172,89 +2199,18 @@ msgstr "یک تصویر سامانه‌ی به‌روز شده وجود دارد
 msgid "Tap to open the system updater."
 msgstr "برای گشودن به‌روز رسان سامانه فشار دهید."
 
-#~ msgid "Passcode"
-#~ msgstr "رمز عبور"
+#~ msgid "Remove"
+#~ msgstr "برداشتن"
 
-#~ msgid "Switch to passcode"
-#~ msgstr "تعویض به رمز عبور"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "اتّصال به بی‌سیم"
 
-#~ msgid "Choose passcode"
-#~ msgstr "گزینش رمز عبور"
-
-#~ msgid "Existing passcode"
-#~ msgstr "رمز عبور موجود"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "رمزهای عبور مطابقت نداشتند. دوباره تلاش کنید."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "رمز عبور ۴ رقمی"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "تأیید رمز عبور"
-
-#~ msgid "Change passcode…"
-#~ msgstr "تعویض رمز عبور…"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "رمز عبور ۴ رقمی…"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "تلفن شما تنظیم شده که خطاها را به صورت خودکار به کنونیکال گزارش دهد. این "
-#~ "مورد می‌تواند در تنظیمات سامانه غیرفعّال شود."
-
-#~ msgid "Start"
-#~ msgstr "آغاز"
-
-#~ msgid "Hello"
-#~ msgstr "سلام"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "به تلفن اوبونتویی خود خوش آمدید. بیایید شروع کنیم."
-
-#~ msgid "Select your language"
-#~ msgstr "زبانتان را انتخاب کنید"
-
-#~ msgid "You need a passcode or passphrase set to use Developer Mode."
-#~ msgstr ""
-#~ "برای استفاده از حالت توسعه‌دهنده، نیاز به یک رمزعبور یا مجموعه‌ی عبارت عبور "
-#~ "دارید."
-
-#~ msgid "Those passcodes don't match."
-#~ msgstr "آن رمزعبورها مطابقت ندارند."
-
-#~ msgid "Passcode must be at least four digits long."
-#~ msgstr "رمزعبور باید خداقل چهار نویسه طول داشته باشد."
-
-#~ msgid ""
-#~ "Please insert a SIM card before you continue. Without it, you won’t be able "
-#~ "to make calls or use text messaging."
-#~ msgstr ""
-#~ "پیش از ادامه لطفاً یک سیم‌کارت وارد کنید. بدون آن نخواهید توانست تماس بگیرید "
-#~ "با از پیام رسانی متنی استفاده کنید."
-
-#~ msgid "Use your mobile network and wi-fi to work out where you are."
-#~ msgstr ""
-#~ "از شبکه‌ی تلفن همراه و بی سیم برای دریافتن مکانی که هستید استفاده شود."
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
 
 #~ msgid ""
 #~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>."
+#~ "conditions</a>"
 #~ msgstr ""
-#~ "من <a href='terms.qml'>شرایط و ضوابط</a> اوبونتو را خوانده‌ام و قبولشان دارم."
-
-#~ msgid "Nice work! Your phone is now ready to use. "
-#~ msgstr "عالی بود. هم‌اکنون تلفن شما آماده به کار است. "
-
-#~ msgid "Bug Reporting"
-#~ msgstr "گزارش اشکال"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "رمزعبور نادرست است. دوباره تلاش کنید."
-
-#, qt-format
-#~ msgid "%1 attempts remaining"
-#~ msgstr "%1 تلاش باقی‌مانده است"
+#~ "من <a href='terms.qml'>شرایط و ضوابط</a> اوبونتو را خوانده‌ام و قبول دارم."

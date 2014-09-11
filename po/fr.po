@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-09-04 19:38+0000\n"
 "Last-Translator: Anne <anneonyme017@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-05 07:49+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:23+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: \n"
 
@@ -92,6 +92,14 @@ msgstr "Annuler"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Se connecter"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Déconnecter"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -226,6 +234,10 @@ msgstr "Mettre à jour le système"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "Le téléphone nécessite un redémarrage pour installer la mise à jour."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -486,11 +498,6 @@ msgstr "Déverrouiller"
 msgid "Lock"
 msgstr "Verrouiller"
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr "%1"
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr "Changement de code PIN..."
@@ -513,6 +520,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Verrouillage du téléphone"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1023,6 +1035,10 @@ msgstr "Langues d'orthographe actuelles :"
 msgid "All languages available:"
 msgstr "Toutes les langues disponibles :"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1339,10 +1355,6 @@ msgstr "État"
 msgid "Signal Strength"
 msgstr "Force du signal"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Déconnecter"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr "Oublier cet appareil"
@@ -1462,13 +1474,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "La détection précise de la position nécessite le GPS et/ou le Wi-Fi."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Supprimer"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "Aperçu"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1560,19 +1572,31 @@ msgstr "Par taille"
 msgid "Software licenses"
 msgstr "Licences du logiciel"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "À propos de ce téléphone"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Numéro de téléphone"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "Numéro de série"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1601,6 +1625,10 @@ msgstr "Informations réglementaires"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "Mode développeur"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1755,8 +1783,8 @@ msgid "System"
 msgstr "Système"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Se connecter au Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1837,13 +1865,11 @@ msgstr "Ceci peut être désactivé dans les Paramètres Système."
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr "Utiliser vos réseaux mobile et Wi-Fi pour déduire où vous êtes"
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
-"J'ai lu et approuvé les <a href='terms.qml'>conditions d'utilisation</a> "
-"d'Ubuntu"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -2204,86 +2230,19 @@ msgstr "Il existe une image du système à jour."
 msgid "Tap to open the system updater."
 msgstr "Appuyez pour ouvrir le gestionnaire de mise à jour du système."
 
-#~ msgid "4-digit passcode"
-#~ msgstr "Un mot de passe à 4 chiffres"
+#~ msgid "Remove"
+#~ msgstr "Supprimer"
 
-#~ msgid "Existing passcode"
-#~ msgstr "Code actuel"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Se connecter au Wi-Fi"
 
-#~ msgid "Passcode"
-#~ msgstr "Code"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "Ces codes ne correspondent pas. Veuillez réessayer."
-
-#~ msgid "Change passcode…"
-#~ msgstr "Changer le code..."
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "Un code à 4 chiffres..."
-
-#~ msgid "Switch to passcode"
-#~ msgstr "Passer en verrouillage par code"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "Confirmez votre code de déverouillage"
-
-#~ msgid "Choose passcode"
-#~ msgstr "Choisissez votre code de déverrouillage"
-
-#~ msgid "Select your language"
-#~ msgstr "Choisissez votre langue"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "Votre téléphone est réglé pour envoyer automatiquement des rapports d'erreur "
-#~ "à Canonical. Ceci peut être désactivé dans les paramètres système."
-
-#~ msgid "Hello"
-#~ msgstr "Bonjour"
-
-#~ msgid "Start"
-#~ msgstr "Commencer"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "Bienvenue dans votre téléphone Ubuntu. Commençons."
-
-#~ msgid "You need a passcode or passphrase set to use Developer Mode."
-#~ msgstr ""
-#~ "Vous devez définir une phrase secrète ou un code pour utiliser le mode "
-#~ "développeur"
-
-#~ msgid "Those passcodes don't match."
-#~ msgstr "Ces codes ne correspondent pas."
-
-#~ msgid "Passcode must be at least four digits long."
-#~ msgstr "Le code doit faire au moins quatre digits de long."
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
 
 #~ msgid ""
 #~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>."
+#~ "conditions</a>"
 #~ msgstr ""
-#~ "J'ai lu et accepté les <a href='terms.qml'>conditions générales "
-#~ "d'utilisation</a> d'Ubuntu."
-
-#~ msgid ""
-#~ "Please insert a SIM card before you continue. Without it, you won’t be able "
-#~ "to make calls or use text messaging."
-#~ msgstr ""
-#~ "Veuillez insérer une carte SIM avant de continuer. Sans elle, vous ne serez "
-#~ "pas en mesure d'effectuer des appels ou d'envoyer des SMS."
-
-#~ msgid "Nice work! Your phone is now ready to use. "
-#~ msgstr "Beau travail ! Votre téléphone est maintenant prêt à être utilisé. "
-
-#~ msgid "Bug Reporting"
-#~ msgstr "Remontée d'anomalie"
-
-#~ msgid "Use your mobile network and wi-fi to work out where you are."
-#~ msgstr ""
-#~ "Utiliser votre réseau mobile et votre Wi-Fi pour travailler où vous êtes"
-
-#~ msgid "Incorrect passcode. Try again."
-#~ msgstr "Code incorrect. Réessayez."
+#~ "J'ai lu et approuvé les <a href='terms.qml'>conditions d'utilisation</a> "
+#~ "d'Ubuntu"
