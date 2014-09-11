@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-08-09 17:38+0000\n"
 "Last-Translator: omarjan <bahadiromar@outlook.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:18+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:26+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -91,6 +91,14 @@ msgstr "ئەمەلدىن قالدۇر"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "باغلان"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "ئۈز"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -226,6 +234,10 @@ msgstr "سىستېما يېڭىلا"
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 "سىستېما يېڭىلانمىلىرىنى ئورنىتىش ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -485,11 +497,6 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr ""
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr ""
@@ -507,6 +514,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "تېلېفون قۇلۇپلاش"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -986,6 +998,10 @@ msgstr "نۆۋەتتىكى ئىملا تەكشۈرىدىغان تىللار:"
 msgid "All languages available:"
 msgstr "ئىشلەتكىلى بولىدىغان بارلىق تىللار:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1295,10 +1311,6 @@ msgstr "ھالەت"
 msgid "Signal Strength"
 msgstr "سىگنال كۈچلۈكلۈكى"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "ئۈز"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr ""
@@ -1411,13 +1423,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "توغرا بولغان ئورۇن بەلگىلەش GPS بىلەن Wi-Fi نى تەلەپ قىلىدۇ."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "چىقىرىۋەت"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "ئالدىن كۆزەت"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1509,19 +1521,31 @@ msgstr "چوڭلۇقى بويىچە"
 msgid "Software licenses"
 msgstr "يۇمشاق دېتال ئىجازەتنامىسى"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "تېلېفون نومۇرى"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "بۇ تېلېفون ھەققىدە"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "تېلېفون نومۇرى"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "ئارقىمۇئارقا"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1550,6 +1574,10 @@ msgstr "نازارەت قىلىش ئۇچۇرى"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "ئىجادىيەتچى ھالىتى"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1696,8 +1724,8 @@ msgid "System"
 msgstr "سىستېما"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "سىمسىز تور(Wi-Fi)غا باغلان"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1774,9 +1802,9 @@ msgstr ""
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
@@ -2136,48 +2164,8 @@ msgstr ""
 msgid "Tap to open the system updater."
 msgstr ""
 
-#~ msgid "Passcode"
-#~ msgstr "ئىم"
+#~ msgid "Remove"
+#~ msgstr "چىقىرىۋەت"
 
-#~ msgid "Choose passcode"
-#~ msgstr "ئىم تاللاڭ"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "ئىم ماسلاشمىدى.قايتا سىناڭ"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "ئىم ئالماشتۇرۇش"
-
-#~ msgid "Existing passcode"
-#~ msgstr "نۆۋەتتىكى ئىم"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "ئىمنى جەزملەڭ"
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4 خانىلىق رەقەملىك ئىم"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4 خانىلىق رەقەملىك ئىم…"
-
-#~ msgid "Change passcode…"
-#~ msgstr "ئىم ئۆزگەرتىش…"
-
-#~ msgid "Select your language"
-#~ msgstr "تىلىڭىزنى تاللاڭ"
-
-#~ msgid "Start"
-#~ msgstr "باشلا"
-
-#~ msgid "Hello"
-#~ msgstr "سالام"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "ئۇبۇنتۇ تېلېفونىغا مەرھابا. قېنى باشلاڭ."
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr ""
-#~ "تېلېفونىڭىز خاتالىقلارنى Canonical غا ئاپتوماتىك مەلۇم قىلىدىغان قىلىپ "
-#~ "تەڭشەلدى. بۇنى سىستېما تەڭشىكىدە ئۆزگەرتكىلى بولىدۇ."
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "سىمسىز تور(Wi-Fi)غا باغلان"

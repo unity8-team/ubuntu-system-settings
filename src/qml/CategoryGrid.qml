@@ -32,7 +32,7 @@ Column {
         property int n: 4
 
         columnSpacing: space / ((2 * n) + (columns - 1))
-        rowSpacing: units.gu(1)
+        rowSpacing: units.gu(3)
         width: (columns * itemWidth) + columnSpacing * (columns - 1)
         anchors.horizontalCenter: parent.horizontalCenter
         columns: {

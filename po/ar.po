@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-03-21 12:38+0000\n"
 "Last-Translator: Ibrahim Saed <ibraheem5000@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:15+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:22+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -91,6 +91,14 @@ msgstr "ألغِ"
 #: ../plugins/wifi//OtherNetwork.qml:121
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
+msgstr ""
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "اقطع الاتصال"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
 msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
@@ -226,6 +234,10 @@ msgstr "تحديث النظام"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "يحتاج الهاتف لإعادة تشغيله لتثبيت تحديث النظام."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -485,11 +497,6 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr ""
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr ""
@@ -507,6 +514,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "إيصاد الهاتف"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1013,6 +1025,10 @@ msgstr "لغات التدقيق الحالية:"
 msgid "All languages available:"
 msgstr "جميع اللغات المتوفرة:"
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1320,10 +1336,6 @@ msgstr ""
 msgid "Signal Strength"
 msgstr "قوة الإشارة"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "اقطع الاتصال"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr ""
@@ -1457,12 +1469,12 @@ msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr ""
 "لتحديد الموقع بدقه يجب تشغيل نظام تحديد المواقع (GPS) و/أو اتصال واي-فاي."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "إزالة"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
+msgstr ""
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
@@ -1555,19 +1567,31 @@ msgstr "حسب الحجم"
 msgid "Software licenses"
 msgstr "تراخيص البرمجيات"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "عن هذا الهاتف"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr ""
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "التسلسل"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1595,6 +1619,10 @@ msgstr "معلومات تنظيمية"
 
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
+msgstr ""
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
 msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
@@ -1742,7 +1770,7 @@ msgid "System"
 msgstr "النظام"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
+msgid "Connect to Wi‑Fi"
 msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
@@ -1820,9 +1848,9 @@ msgstr ""
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
@@ -2182,29 +2210,5 @@ msgstr ""
 msgid "Tap to open the system updater."
 msgstr ""
 
-#~ msgid "Change passcode…"
-#~ msgstr "تغيير الكود السري..."
-
-#~ msgid "4-digit passcode"
-#~ msgstr "كود سري من 4 أرقام"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "كود سري من 4 أرقام..."
-
-#~ msgid "Passcode"
-#~ msgstr "الكود السري"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "الكودين غير متطابقين. حاول مجددا."
-
-#~ msgid "Choose passcode"
-#~ msgstr "اختيار كود سري"
-
-#~ msgid "Confirm passcode"
-#~ msgstr "تأكيد الكود السري"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "التبديل إلى الكود السري"
-
-#~ msgid "Existing passcode"
-#~ msgstr "الكود السري الحالي"
+#~ msgid "Remove"
+#~ msgstr "إزالة"

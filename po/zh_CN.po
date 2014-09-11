@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-01 16:11+0200\n"
+"POT-Creation-Date: 2014-09-11 08:57+0200\n"
 "PO-Revision-Date: 2014-07-31 16:25+0000\n"
 "Last-Translator: Anthony Wong <anthony.wong@ubuntu.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-02 07:19+0000\n"
-"X-Generator: Launchpad (build 17192)\n"
+"X-Launchpad-Export-Date: 2014-09-11 07:26+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../plugins/wifi//PreviousNetworks.qml:26
 #: ../plugins/wifi//PageComponent.qml:114
@@ -91,6 +91,14 @@ msgstr "取消"
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "连接"
+
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "断开"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -225,6 +233,10 @@ msgstr "更新系统"
 #: ../plugins/system-update//PageComponent.qml:53
 msgid "The phone needs to restart to install the system update."
 msgstr "手机需要重新启动来安装系统更新"
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:56
 msgid "Install & Restart"
@@ -484,11 +496,6 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:314
-#, qt-format
-msgid "%1"
-msgstr ""
-
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
 msgstr ""
@@ -506,6 +513,11 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "锁定手机"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -976,6 +988,10 @@ msgstr "当前拼写检查语言："
 msgid "All languages available:"
 msgstr "所有可用的语言："
 
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:33
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
@@ -1283,10 +1299,6 @@ msgstr ""
 msgid "Signal Strength"
 msgstr "信号强度"
 
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "断开"
-
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
 msgstr ""
@@ -1397,13 +1409,13 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "精确定位需要开启 GPS 和/或 Wi-Fi 。"
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "移除"
-
 #: ../plugins/background//Preview.qml:67
 msgid "Preview"
 msgstr "预览"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1495,19 +1507,31 @@ msgstr "按大小"
 msgid "Software licenses"
 msgstr "软件许可"
 
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:97
+msgid "Phone number"
+msgstr "电话号码"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
 #: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
 msgid "About this phone"
 msgstr "关于此手机"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "电话号码"
-
 #: ../plugins/about//PageComponent.qml:107
 msgid "Serial"
 msgstr "序列号"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr ""
 
 #: ../plugins/about//PageComponent.qml:133
 msgid "Software:"
@@ -1536,6 +1560,10 @@ msgstr "管制信息"
 #: ../plugins/about//PageComponent.qml:185
 msgid "Developer mode"
 msgstr "开发者模式"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
 msgid "Developer Mode"
@@ -1682,8 +1710,8 @@ msgid "System"
 msgstr "系统"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "连接 Wi-Fi"
+msgid "Connect to Wi‑Fi"
+msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:66
 msgid "Available networks"
@@ -1760,9 +1788,9 @@ msgstr ""
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:58
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
 
@@ -2122,46 +2150,8 @@ msgstr ""
 msgid "Tap to open the system updater."
 msgstr ""
 
-#~ msgid "Choose passcode"
-#~ msgstr "选择密码"
+#~ msgid "Remove"
+#~ msgstr "移除"
 
-#~ msgid "Confirm passcode"
-#~ msgstr "确认密码"
-
-#~ msgid "4-digit passcode"
-#~ msgstr "4位数字密码"
-
-#~ msgid "Passcode"
-#~ msgstr "口令"
-
-#~ msgid "Existing passcode"
-#~ msgstr "当前密码"
-
-#~ msgid "Those passcodes don't match. Try again."
-#~ msgstr "密码不一致，请重新输入。"
-
-#~ msgid "Switch to passcode"
-#~ msgstr "切换至密码"
-
-#~ msgid "4-digit passcode…"
-#~ msgstr "4位数字密码…"
-
-#~ msgid "Change passcode…"
-#~ msgstr "更改密码…"
-
-#~ msgid "Hello"
-#~ msgstr "您好"
-
-#~ msgid "Start"
-#~ msgstr "开始"
-
-#~ msgid ""
-#~ "Your phone is set up to automatically report errors to Canonical. This can "
-#~ "be disabled in system settings."
-#~ msgstr "您的手机被设置为自动向 Canonical 报告错误，您可以通过系统设置禁止该功能。"
-
-#~ msgid "Welcome to your Ubuntu phone. Let’s get started."
-#~ msgstr "欢迎使用 Ubuntu 手机，让我们马上开始。"
-
-#~ msgid "Select your language"
-#~ msgstr "请选择语言"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "连接 Wi-Fi"
