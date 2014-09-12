@@ -59,14 +59,24 @@ ListItem.SingleValue {
             console.warn("onModelChanged: " + UpdateManager.model.length)
             root._updatesRefresh();
         }
-
-        Component.onCompleted: {
-            //updateManager.checkUpdates();
-            UpdateManager.checkUpdates();
-        }
-
         onUpdateAvailableFound: {
             console.warn("onUpdateAvailableFound: " + UpdateManager.model.length)
+            root._updatesRefresh();
+        }
+        onUpdatesNotFound: {
+            console.warn("onUpdatesNotFound: " + UpdateManager.model.length)
+            root._updatesRefresh();
+        }
+        onErrorFound: {
+            console.warn("onErrorFound: " + UpdateManager.model.length)
+            root._updatesRefresh();
+        }
+        onUpdateProcessFailed: {
+            console.warn("onUpdateProcessFailed: " + UpdateManager.model.length)
+            root._updatesRefresh();
+        }
+        onCheckFinished: {
+            console.warn("onCheckFinished: " + UpdateManager.model.length)
             root._updatesRefresh();
         }
     }
