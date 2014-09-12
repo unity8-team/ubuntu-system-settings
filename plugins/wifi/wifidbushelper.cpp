@@ -118,6 +118,10 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
                                                dev,
                                                QDBusObjectPath("/"),
                                                tmp);
+    if(!reply2.isValid()) {
+        qWarning() << "Could not connect: " << reply2.error().message() << "\n";
+    }
+    qWarning() << "Got til end";
 }
 
 QString WifiDbusHelper::getWifiIpAddress()

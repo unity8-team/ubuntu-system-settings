@@ -27,7 +27,7 @@ from autopilot.input import Keyboard
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection, platform
-
+from ubuntu_system_settings.utils.i18n import ugettext as _
 
 logger = logging.getLogger(__name__)
 
@@ -114,6 +114,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_language_page(self):
         return self._go_to_page('entryComponent-language', 'languagePage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_wifi_page(self):
+        return self._go_to_page('entryComponent-wifi', 'wifiPage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -183,6 +187,11 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def about_page(self):
         """ Return 'About' page """
         return self.select_single(objectName='aboutPage')
+
+    @property
+    def wifi_page(self):
+        """ Return 'Wifi' page """
+        return self.select_single(objectName='wifiPage')
 
     @property
     def _orientation_lock_switch(self):
@@ -658,4 +667,141 @@ class RebootNecessary(
     @autopilot.logging.log_action(logger.debug)
     def _click_revert(self):
         button = self.select_single('Button', objectName='revert')
+        self.pointing_device.click_object(button)
+
+
+class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Sound page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'wifiPage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def connect_to_hidden_network(self, name, security="none", password=None,
+                                  cancel=False):
+        dialog = self._click_connect_to_hidden_network()
+        dialog.enter_name(name)
+        if security:
+            dialog.set_security(security)
+        if password:
+            dialog.enter_password(password)
+
+        if cancel:
+            dialog.cancel()
+        else:
+            dialog.connect()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_connect_to_hidden_network(self):
+
+        # we can't mock the qunitymenu items, so we
+        # have to wait for them to be built
+        sleep(1)
+
+        button = self.select_single('*',
+                                    objectName='connectToHiddenNetwork')
+        self.pointing_device.click_object(button)
+        return self.get_root_instance().wait_select_single(
+            objectName='otherNetworkDialog')
+
+
+class OtherNetwork(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Connect to Hidden Network dialog."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'Dialog':
+            if state['objectName'][1] == 'otherNetworkDialog':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def enter_name(self, name):
+        self._enter_name(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _enter_name(self, name):
+        namefield = self.select_single('TextField',
+                                       objectName='networkname')
+        namefield.write(name)
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_security(self, security):
+        """Sets the hidden network's security
+
+        :param security: Either "none", "wpa" or "wep
+
+        :returns: None
+
+        """
+        self._set_security(security)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _expand_security_list(self):
+        sec_list = self.select_single(
+            '*', objectName='securityList')
+        active_child = sec_list.select_single(
+            '*', objectName='listContainer')
+        self.pointing_device.click_object(active_child)
+        # wait for it to expand
+        sleep(0.5)
+        return sec_list
+
+    @autopilot.logging.log_action(logger.debug)
+    def _set_security(self, security):
+        if security == 'none':
+            sec_list = self._expand_security_list()
+            item = sec_list.wait_select_single('*',
+                                               text=_('None'))
+            self.pointing_device.click_object(item)
+        elif security == 'wpa':
+            sec_list = self._expand_security_list()
+            item = sec_list.wait_select_single('*',
+                                               text=_('WPA & WPA2 Personal'))
+            self.pointing_device.click_object(item)
+        elif security == 'wep':
+            sec_list = self._expand_security_list()
+            item = sec_list.wait_select_single('*',
+                                               text=_('WEP'))
+            self.pointing_device.click_object(item)
+        elif security is not None:
+            raise ValueError('security type %s is not valid' % security)
+        # wait for ui to change
+        sleep(0.5)
+
+    @autopilot.logging.log_action(logger.debug)
+    def enter_password(self, password):
+        self._enter_password(password)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _enter_password(self, password):
+        pwdfield = self.select_single('TextField',
+                                      objectName='password')
+        pwdfield.write(password)
+
+    @autopilot.logging.log_action(logger.debug)
+    def cancel(self):
+        self._click_cancel()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_cancel(self):
+        button = self.select_single('Button', objectName='cancel')
+        self.pointing_device.click_object(button)
+
+    @autopilot.logging.log_action(logger.debug)
+    def connect(self):
+        self._click_connect()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_connect(self):
+        button = self.select_single('Button', objectName='connect')
         self.pointing_device.click_object(button)

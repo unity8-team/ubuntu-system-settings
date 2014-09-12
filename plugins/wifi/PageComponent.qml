@@ -24,6 +24,7 @@ import QMenuModel 0.1
 
 ItemPage {
     id: wifibase
+    objectName: "wifiPage"
     title: i18n.tr("Wi-Fi")
 
     UnityMenuModel {
@@ -118,6 +119,7 @@ ItemPage {
             }
 
             ListItem.SingleValue {
+                objectName: "connectToHiddenNetwork"
                 text: i18n.tr("Other network")
                 progression: true
                 onClicked: {

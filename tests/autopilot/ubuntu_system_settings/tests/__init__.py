@@ -41,6 +41,9 @@ SYSTEM_SERVICE_OBJ = '/Service'
 LM_SERVICE = 'org.freedesktop.login1'
 LM_PATH = '/org/freedesktop/login1'
 LM_IFACE = 'org.freedesktop.login1.Manager'
+NM_SERVICE = 'org.freedesktop.NetworkManager'
+NM_PATH = '/org/freedesktop/NetworkManager'
+NM_IFACE = 'org.freedesktop.NetworkManager'
 
 
 class UbuntuSystemSettingsTestCase(
@@ -733,3 +736,27 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(LanguageBaseTestCase, self).tearDown()
+
+
+class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
+                       dbusmock.DBusTestCase):
+    """ Base class for wifi settings tests"""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.start_system_bus()
+        cls.dbus_con = cls.get_dbus(True)
+        # Add a mock NetworkManager environment so we get consistent results
+        (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
+            'networkmanager', stdout=subprocess.PIPE)
+        cls.dbusmock = dbus.Interface(cls.obj_nm, dbusmock.MOCK_IFACE)
+
+    def setUp(self, panel=None):
+        self.obj_nm.Reset()
+        device_path = self.obj_nm.AddWiFiDevice('wlan0', 'Barbaz', 1)
+        self.device_mock = dbus.Interface(self.dbus_con.get_object(
+            'org.freedesktop.NetworkManager', device_path),
+            dbusmock.MOCK_IFACE)
+        super(WifiBaseTestCase, self).setUp()
+        self.wifi_page = self.system_settings.\
+            main_view.go_to_wifi_page()

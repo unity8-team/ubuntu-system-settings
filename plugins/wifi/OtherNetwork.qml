@@ -27,6 +27,7 @@ Component {
 
     Dialog {
         id: otherNetworkDialog
+        objectName: "otherNetworkDialog"
         function settingsValid() {
             if(networkname.length == 0) {
                 return false;
@@ -53,11 +54,13 @@ Component {
 
         TextField {
             id : networkname
+            objectName: "networkname"
             inputMethodHints: Qt.ImhNoPredictiveText
         }
 
         ListItem.ItemSelector {
             id: securityList
+            objectName: "securityList"
             text: i18n.tr("Security")
             model: [i18n.tr("None"),                 // index: 0
                     i18n.tr("WPA & WPA2 Personal"),  // index: 1
@@ -69,12 +72,14 @@ Component {
             id: passwordList
             visible: securityList.selectedIndex !== 0
             text: i18n.tr("Password")
-            control : TextInput {}
+            control : TextInput {
+            }
             showDivider: false
         }
 
         TextField {
             id : password
+            objectName: "password"
             visible: securityList.selectedIndex !== 0
             echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
         }
@@ -99,6 +104,7 @@ Component {
 
             Button {
                 id: cancelButton
+                objectName: "cancel"
                 Layout.fillWidth: true
                 text: i18n.tr("Cancel")
                 onClicked: {
@@ -108,6 +114,7 @@ Component {
 
             Button {
                 id: connectButton
+                objectName: "connect"
                 Layout.fillWidth: true
                 text: i18n.tr("Connect")
                 enabled: settingsValid()
