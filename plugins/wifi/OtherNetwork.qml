@@ -19,115 +19,78 @@ import QtQuick.Layouts 1.1
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
-ItemPage {
-    id: othernetwork
-    title: i18n.tr("Other network")
+Component {
 
-    function settingsValid() {
-        if(networkname.length == 0) {
-            return false;
+    Dialog {
+        id: otherNetworkDialog
+        function settingsValid() {
+            if(networkname.length == 0) {
+                return false;
+            }
+            if(securityList.selectedIndex == 0) {
+                return true
+            }
+            if(securityList.selectedIndex == 1) {
+                return password.length >= 8
+            }
+            // WEP
+            return password.length === 5  ||
+                   password.length === 10 ||
+                   password.length === 13 ||
+                   password.length === 26;
         }
-        if(securityList.selectedIndex == 0) {
-            return true
+        title: i18n.tr("Connect to Hidden Network")
+
+        ListItem.Standard {
+            text : i18n.tr("Network name")
+            showDivider: false
+            highlightWhenPressed: false
         }
-        if(securityList.selectedIndex == 1) {
-            return password.length >= 8
+
+        TextField {
+            id : networkname
+            inputMethodHints: Qt.ImhNoPredictiveText
         }
-        // WEP
-        return password.length === 5  ||
-               password.length === 10 ||
-               password.length === 13 ||
-               password.length === 26;
-    }
-    Component.onCompleted: {
-        flickable: otherNetworkFlickable
-    }
-    Flickable {
-        id: otherNetworkFlickable
-        contentWidth: parent.width
-        contentHeight: otherview.height + units.gu(8)
-        anchors {
-            fill: parent
-            left: parent.left
-            right: parent.right
-            bottom: buttons.top
+
+        ListItem.ItemSelector {
+            id: securityList
+            text: i18n.tr("Security")
+            model: [i18n.tr("None"),                 // index: 0
+                    i18n.tr("WPA & WPA2 Personal"),  // index: 1
+                    i18n.tr("WEP"),                  // index: 2
+                    ]
         }
-        Column {
-            id : otherview
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
 
-            ListItem.Standard {
-                text : i18n.tr("Network name")
-                showDivider: false
-            }
+        ListItem.Standard {
+            id: passwordList
+            visible: securityList.selectedIndex !== 0
+            text: i18n.tr("Password")
+            control : TextInput {}
+            showDivider: false
+        }
 
-            TextField {
-                id : networkname
-                width: parent.width - units.gu(4)
-                anchors.horizontalCenter: parent.horizontalCenter
-                inputMethodHints: Qt.ImhNoPredictiveText
-            }
+        TextField {
+            id : password
+            visible: securityList.selectedIndex !== 0
+            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+        }
 
-            ListItem.ItemSelector {
-                id: securityList
-                text: i18n.tr("Security")
-                model: [i18n.tr("None"),                 // index: 0
-                        i18n.tr("WPA & WPA2 Personal"),  // index: 1
-                        i18n.tr("WEP"),                  // index: 2
-                        ]
-            }
-
-            ListItem.Standard {
-                id: passwordList
-                visible: securityList.selectedIndex !== 0
-                text: i18n.tr("Password")
-                control : TextInput {
-                }
-                showDivider: false
-            }
-
-            TextField {
-                id : password
-                visible: securityList.selectedIndex !== 0
-                width: parent.width - units.gu(4)
-                anchors.horizontalCenter: parent.horizontalCenter
-                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
-                onActiveFocusChanged: {
-                    parent.parent.contentY = 1000
-                }
-            }
-
-            ListItem.Standard {
-                text: i18n.tr("Password visible")
-                visible: securityList.selectedIndex !== 0
-                id: passwordVisible
-                control: Switch {
-                    id: passwordVisibleSwitch
-                }
+        ListItem.Standard {
+            text: i18n.tr("Password visible")
+            visible: securityList.selectedIndex !== 0
+            id: passwordVisible
+            control: Switch {
+                id: passwordVisibleSwitch
             }
         }
-    }
-    Rectangle {
-        id: buttons
-        color: Theme.palette.normal.background
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-        height: buttonRow.height + units.gu(4)
+
         RowLayout {
             id: buttonRow
             anchors {
-                margins: units.gu(2)
-                verticalCenter: parent.verticalCenter
                 left: parent.left
                 right: parent.right
             }
@@ -139,7 +102,7 @@ ItemPage {
                 Layout.fillWidth: true
                 text: i18n.tr("Cancel")
                 onClicked: {
-                    pageStack.pop()
+                    PopupUtils.close(otherNetworkDialog)
                 }
             }
 
@@ -150,9 +113,11 @@ ItemPage {
                 enabled: settingsValid()
                 onClicked: {
                     DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
-                    pageStack.pop()
+                    PopupUtils.close(otherNetworkDialog)
                 }
             }
         }
     }
+
 }
+

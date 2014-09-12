@@ -121,9 +121,14 @@ ItemPage {
                 text: i18n.tr("Other network")
                 progression: true
                 onClicked: {
-                    otherNetwork.source = "OtherNetwork.qml";
-                    PopupUtils.open(otherNetwork.item);
+                    otherNetworLoader.source = "OtherNetwork.qml";
+                    PopupUtils.open(otherNetworLoader.item);
                 }
+            }
+
+            Loader {
+                id: otherNetworLoader
+                asynchronous: false
             }
         }
 
@@ -146,8 +151,4 @@ ItemPage {
                             Flickable.StopAtBounds
     }
 
-    Loader {
-        id: otherNetwork
-        asynchronous: false
-    }
 }
