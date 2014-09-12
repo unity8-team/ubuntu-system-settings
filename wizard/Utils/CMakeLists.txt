@@ -7,6 +7,7 @@ include_directories(
 set(QMLPLUGIN_SRC
     qsortfilterproxymodelqml.cpp
     plugin.cpp
+    system.cpp
     )
 
 add_library(Utils-qml SHARED
@@ -19,7 +20,7 @@ add_library(Utils-qml SHARED
 # files directly in targets.
 set_target_properties(Utils-qml PROPERTIES COMPILE_FLAGS -fvisibility=default)
 
-qt5_use_modules(Utils-qml Qml Quick)
+qt5_use_modules(Utils-qml DBus Qml Quick)
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/Wizard/Utils)
 install(FILES qmldir DESTINATION ${PLUG_DIR})

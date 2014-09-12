@@ -58,12 +58,16 @@ ItemPage {
     }
 
     function openDialog() {
+        var newMethod = indexToMethod(unlockMethod.selectedIndex)
+        if (securityPrivacy.trySetSecurity(newMethod))
+            return // Oh, that was easy!  No need to prompt
+
         var dlg = PopupUtils.open(dialogComponent)
         // Set manually rather than have these be dynamically bound, since
         // the security type can change out from under us, but we don't
         // want dialog to change in that case.
         dlg.oldMethod = securityPrivacy.securityType
-        dlg.newMethod = indexToMethod(unlockMethod.selectedIndex)
+        dlg.newMethod = newMethod
     }
 
     Component {
@@ -89,9 +93,9 @@ ItemPage {
                         changeSecurityDialog.oldMethod) { // Changing existing
                     switch (changeSecurityDialog.newMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Change passcode")
+                        return i18n.tr("Change PIN code…")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
-                        return i18n.tr("Change passphrase")
+                        return i18n.tr("Change passphrase…")
                     default: // To stop the runtime complaining
                         return ""
                     }
@@ -100,7 +104,7 @@ ItemPage {
                     case UbuntuSecurityPrivacyPanel.Swipe:
                         return i18n.tr("Switch to swipe")
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Switch to passcode")
+                        return i18n.tr("Switch to PIN code")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Switch to passphrase")
                     }
@@ -111,7 +115,7 @@ ItemPage {
                 text: {
                     switch (changeSecurityDialog.oldMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Existing passcode")
+                        return i18n.tr("Existing PIN code")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Existing passphrase")
                     // Shouldn't be reached when visible but still evaluated
@@ -167,7 +171,7 @@ ItemPage {
                 text: {
                     switch (changeSecurityDialog.newMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Choose passcode")
+                        return i18n.tr("Choose PIN code")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Choose passphrase")
                     // Shouldn't be reached when visible but still evaluated
@@ -213,7 +217,7 @@ ItemPage {
                 text: {
                     switch (changeSecurityDialog.newMethod) {
                     case UbuntuSecurityPrivacyPanel.Passcode:
-                        return i18n.tr("Confirm passcode")
+                        return i18n.tr("Confirm PIN code")
                     case UbuntuSecurityPrivacyPanel.Passphrase:
                         return i18n.tr("Confirm passphrase")
                     // Shouldn't be reached when visible but still evaluated
@@ -258,7 +262,7 @@ ItemPage {
                 text: {
                     if (changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passcode)
-                        return i18n.tr("Those passcodes don't match. Try again.")
+                        return i18n.tr("Those PIN codes don't match. Try again.")
                     if (changeSecurityDialog.newMethod ===
                             UbuntuSecurityPrivacyPanel.Passphrase)
                         return i18n.tr("Those passphrases don't match. Try again.")
@@ -342,10 +346,10 @@ ItemPage {
 
         ListItem.ItemSelector {
             property string swipe: i18n.tr("Swipe (no security)")
-            property string passcode: i18n.tr("4-digit passcode")
+            property string passcode: i18n.tr("4-digit PIN code")
             property string passphrase: i18n.tr("Passphrase")
             property string swipeAlt: i18n.tr("Swipe (no security)… ")
-            property string passcodeAlt: i18n.tr("4-digit passcode…")
+            property string passcodeAlt: i18n.tr("4-digit PIN code…")
             property string passphraseAlt: i18n.tr("Passphrase…")
 
             id: unlockMethod
@@ -377,7 +381,7 @@ ItemPage {
                         UbuntuSecurityPrivacyPanel.Swipe
 
             control: Button {
-                property string changePasscode: i18n.tr("Change passcode…")
+                property string changePasscode: i18n.tr("Change PIN code…")
                 property string changePassphrase: i18n.tr("Change passphrase…")
 
                 property bool passcode: securityPrivacy.securityType ===
@@ -390,6 +394,7 @@ ItemPage {
 
                 onClicked: openDialog()
             }
+            showDivider: false
         }
     }
 }

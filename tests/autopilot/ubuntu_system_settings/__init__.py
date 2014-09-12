@@ -23,6 +23,7 @@ logging.basicConfig(filename='warning.log', level=logging.WARNING)
 
 from time import sleep
 
+from autopilot.input import Keyboard
 import autopilot.logging
 import ubuntuuitoolkit
 from autopilot import introspection, platform
@@ -105,6 +106,10 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def go_to_reset_phone(self):
         return self._go_to_page('entryComponent-reset', 'resetPage')
 
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_language_page(self):
+        return self._go_to_page('entryComponent-language', 'languagePage')
+
     def _go_to_page(self, item_object_name, page_object_name):
         self.click_item(item_object_name)
         page = self.wait_select_single(objectName=page_object_name)
@@ -164,6 +169,28 @@ class MainWindow(ubuntuuitoolkit.MainView):
     def sound_page(self):
         """ Return 'Sound' page """
         return self.select_single(objectName='soundPage')
+
+    @property
+    def security_page(self):
+        """ Return 'Security' page """
+        return self.select_single(objectName='securityPrivacyPage')
+
+    @property
+    def about_page(self):
+        """ Return 'About' page """
+        return self.select_single(objectName='aboutPage')
+
+    @property
+    def _orientation_lock_switch(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='orientationLockSwitch')
+
+    def enable_orientation_lock(self):
+        self._orientation_lock_switch.check()
+
+    def disable_orientation_lock(self):
+        self._orientation_lock_switch.uncheck()
 
 
 class CelullarPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
@@ -299,6 +326,146 @@ class SystemUpdatesPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
         return False
 
 
+class PhonePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Phone page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'PageComponent':
+            if state['objectName'][1] == 'phonePage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.info)
+    def go_to_call_forwarding(self, sim=None):
+        """Open the Call Forwarding settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Forwarding settings page.
+
+        """
+        find = "callFwd"
+        if sim:
+            find = "callFwdSim%d" % sim
+
+        return self._go_to_page(find, 'callForwardingPage')
+
+    def _go_to_page(self, item_object_name, page_object_name):
+        self._click_item(item_object_name)
+        page = self.get_root_instance().wait_select_single(
+            objectName=page_object_name)
+        page.active.wait_for(True)
+        return page
+
+    def _click_item(self, object_name):
+        item = self.select_single(objectName=object_name)
+        item.swipe_into_view()
+        self.pointing_device.click_object(item)
+
+    @autopilot.logging.log_action(logger.info)
+    def go_to_call_waiting(self, sim=None):
+        """Open the Call Waiting settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The Call Waiting settings page.
+
+        """
+        find = "callWait"
+        if sim:
+            find = "callWaitSim%d" % sim
+        return self._go_to_page(find, 'callWaitingPage')
+
+    @autopilot.logging.log_action(logger.info)
+    def go_to_sim_services(self, sim=None):
+        """Open the SIM Services settings page.
+
+        :param sim: Number of what SIM to use, either 1 or 2.
+            Required parameter in dual SIM setups
+        :returns: The SIM Services settings page.
+
+        """
+        find = "simServices"
+        if sim:
+            find = "simServicesSim%d" % sim
+
+        return self._go_to_page(find, 'servicesPage')
+
+
+class CallWaiting(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Call waiting page."""
+
+    @property
+    def _switch(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='callWaitingSwitch')
+
+    def enable_call_waiting(self):
+        self._switch.check()
+
+    def disable_call_waiting(self):
+        self._switch.uncheck()
+
+
+class CallForwarding(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Call forwarding page."""
+
+    @property
+    def _switch(self):
+        return self.wait_select_single(
+            ubuntuuitoolkit.CheckBox,
+            objectName='callForwardingSwitch')
+
+    @property
+    def _number_field(self):
+        return self.wait_select_single(
+            objectName='destNumberField')
+
+    def _click_set(self):
+        button = self.wait_select_single(
+            objectName='set')
+        self.pointing_device.click_object(button)
+
+    def _click_cancel(self):
+        button = self.wait_select_single(
+            objectName='cancel')
+        self.pointing_device.click_object(button)
+
+    @property
+    def current_forwarding(self):
+        return self.wait_select_single(
+            objectName='destNumberField').text
+
+    def enable_call_forwarding(self):
+        self._switch.check()
+
+    def disable_call_forwarding(self):
+        self._switch.uncheck()
+
+    def set_forward(self, number):
+        input_method = Keyboard.create()
+        self.enable_call_forwarding()
+        self.pointing_device.click_object(self._number_field)
+        input_method.type(number)
+        self._click_set()
+
+
+class Services(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Call waiting page."""
+
+    # TODO: add pages for each relevant sim services page
+    def open_sim_service(self, service):
+        """Return a sim service page"""
+        pass
+
+
 class ResetPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
     """Autopilot helper for the Reset page."""
@@ -390,4 +557,101 @@ class FactoryResetConfirmationDialog(
     @autopilot.logging.log_action(logger.debug)
     def confirm_reset(self):
         button = self.select_single('Button', objectName='factoryResetAction')
+        self.pointing_device.click_object(button)
+
+
+class LanguagePage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Language page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'languagePage':
+                return True
+        return False
+
+    def get_current_language(self):
+        return self.select_single(
+            'Label', objectName='currentLanguage').currentLanguage
+
+    def _click_change_display_language(self):
+        item = self.select_single(objectName='displayLanguage')
+        self.pointing_device.click_object(item)
+        return self.get_root_instance().select_single(
+            objectName='displayLanguageDialog')
+
+    @autopilot.logging.log_action(logger.info)
+    def change_display_language(self, langIndex, reboot=True):
+        """Changes display language.
+
+        :param langIndex: The language index to change to.
+
+        :param reboot: Whether to reboot or not
+
+        :returns: The language page
+
+        """
+        dialog = self._click_change_display_language()
+        dialog.set_language(langIndex, reboot)
+        return self.get_root_instance()
+
+
+class DisplayLanguage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Display Language dialog."""
+
+    @autopilot.logging.log_action(logger.debug)
+    def set_language(self, index, reboot):
+        self._click_language_item(index)
+        reboot_dialog = self._click_confirm()
+
+        if reboot:
+            reboot_dialog.reboot()
+        else:
+            reboot_dialog.revert()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_language_item(self, index):
+        languages_list = self.select_single('QQuickListView',
+                                            objectName='languagesList')
+        languages_list.click_element('languageName%d' % index)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_confirm(self):
+        button = self.select_single('Button',
+                                    objectName='confirmChangeLanguage')
+        self.pointing_device.click_object(button)
+        return self.get_root_instance().select_single(
+            objectName='rebootNecessaryDialog')
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_cancel(self):
+        button = self.select_single('Button',
+                                    objectName='cancelChangeLanguage')
+        self.pointing_device.click_object(button)
+
+
+class RebootNecessary(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Reboot Necessary dialog."""
+
+    @autopilot.logging.log_action(logger.debug)
+    def reboot(self):
+        self._click_reboot()
+
+    @autopilot.logging.log_action(logger.debug)
+    def revert(self):
+        self._click_revert()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_reboot(self):
+        button = self.select_single('Button', objectName='reboot')
+        self.pointing_device.click_object(button)
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_revert(self):
+        button = self.select_single('Button', objectName='revert')
         self.pointing_device.click_object(button)

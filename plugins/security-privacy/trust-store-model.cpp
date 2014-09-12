@@ -19,6 +19,9 @@
 #include "trust-store-model.h"
 
 #include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QIcon>
 #include <QList>
 #include <QMap>
 #include <QSet>
@@ -36,14 +39,59 @@ public:
     void setId(const QString &id) {
         this->id = id;
 
-        QString localShare =
-            QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
-        QSettings desktopFile(QString("%1/applications/%2.desktop").
-                              arg(localShare).arg(id),
-                              QSettings::IniFormat);
+        QString desktopFilename = resolveDesktopFilename(id);
+        QSettings desktopFile(desktopFilename, QSettings::IniFormat);
         desktopFile.beginGroup("Desktop Entry");
         displayName = desktopFile.value("Name").toString();
-        iconName = desktopFile.value("Icon").toString();
+        iconName = resolveIcon(desktopFile.value("Icon").toString(),
+                               desktopFile.value("Path").toString());
+    }
+
+    QString resolveDesktopFilename(const QString &id) {
+        QString localShare =
+            QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+        QString desktopFilename(QString("%1/applications/%2.desktop").
+                                arg(localShare).arg(id));
+        if (QFile(desktopFilename).exists())
+            return desktopFilename;
+
+        /* search the directory for a matching filename */
+        QDir dir(QString("%1/applications").arg(localShare));
+        dir.setFilter(QDir::Files);
+        QStringList fileList = dir.entryList();
+        QString pattern = QString("%1*.desktop").arg(id);
+        for (int i = 0; i < fileList.count(); i++) {
+            /* stop at the first match */
+            if (QDir::match(pattern, fileList[i])) {
+                return QString("%1/applications/%2").arg(localShare).arg(fileList[i]);
+            }
+        } 
+        
+        qWarning() << "No desktop file found for app id: " << id;
+        return QString();
+    }
+
+    QString resolveIcon(const QString &iconName, const QString &basePath) {
+        /* If iconName points to a valid file, use it */
+        if (QFile::exists(iconName)) {
+            return iconName;
+        }
+
+        /* See if the iconName resolves to a file installed by the click
+         * package (which is extracted in basePath). */
+        QDir baseDir(basePath);
+        QString iconFilePath =
+            baseDir.absoluteFilePath(QDir::cleanPath(iconName));
+        if (QFile::exists(iconFilePath)) {
+            return iconFilePath;
+        }
+
+        /* Is iconName a valid theme icon? */
+        if (QIcon::hasThemeIcon(iconName)) {
+            return "image://theme/" + iconName;
+        }
+
+        return QString();
     }
 
     void addRequest(const core::trust::Request &request) {
@@ -133,6 +181,12 @@ void TrustStoreModelPrivate::update()
 
             QString applicationId = QString::fromStdString(r.from);
 
+            /* filter out unconfined apps, they can access everything anyway */
+            if (applicationId == "unconfined") {
+                query->next();
+                continue;
+            }
+
             Application &app = appMap[applicationId];
             app.setId(applicationId);
             app.addRequest(r);
@@ -152,7 +206,7 @@ void TrustStoreModelPrivate::updateRow(int row)
     Q_Q(TrustStoreModel);
 
     Q_ASSERT(trustStore);
-    Q_ASSERT(row >= 0 && row < d->applications.count());
+    Q_ASSERT(row >= 0 && row < applications.count());
 
     Application &app = applications[row];
     app.grantedFeatures.clear();

@@ -23,10 +23,19 @@
 
 // local
 #include "qsortfilterproxymodelqml.h"
+#include "system.h"
+
+static QObject *system_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+    return new System();
+}
 
 void UtilsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wizard.Utils"));
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<QSortFilterProxyModelQML>(uri, 0, 1, "SortFilterProxyModel");
+    qmlRegisterSingletonType<System>(uri, 0, 1, "System", system_provider);
 }

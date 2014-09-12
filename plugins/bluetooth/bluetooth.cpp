@@ -18,11 +18,12 @@
  *
  */
 
+#include "bluetooth.h"
+
 #include <QQmlEngine>
 
 #include "agent.h"
 #include "agentadaptor.h"
-#include "bluetooth.h"
 #include "dbus-shared.h"
 
 Bluetooth::Bluetooth(QObject *parent):
@@ -39,7 +40,7 @@ Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
     // export our Agent to handle pairing requests
     new AgentAdaptor(&m_agent);
     if(!m_dbus.registerObject(DBUS_AGENT_PATH, &m_agent))
-        qFatal("Couldn't register agent at " DBUS_AGENT_PATH);
+        qCritical() << "Couldn't register agent at" << DBUS_AGENT_PATH;
 
     m_connectedDevices.filterOnConnections(Device::Connection::Connected |
                                            Device::Connection::Connecting |
@@ -93,6 +94,8 @@ bool Bluetooth::isSupportedType(const int type)
 
     case Device::Type::Headset:
     case Device::Type::Headphones:
+    case Device::Type::Speakers:
+    case Device::Type::Carkit:
     case Device::Type::OtherAudio:
         return true;
 
@@ -151,10 +154,8 @@ QAbstractItemModel * Bluetooth::getAutoconnectDevices()
 
 void Bluetooth::disconnectDevice()
 {
-    Device::Type type;
-
     if (m_selectedDevice) {
-        type = m_selectedDevice->getType();
+        auto type = m_selectedDevice->getType();
         if (type == Device::Type::Headset)
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
         else if (type == Device::Type::Headphones)

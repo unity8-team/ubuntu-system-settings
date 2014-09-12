@@ -18,9 +18,10 @@
  *
 */
 
+#include "plugin.h"
+
 #include <QtQml>
 #include <QtQml/QQmlContext>
-#include "plugin.h"
 #include "update_manager.h"
 #include "system_update.h"
 #include "update.h"

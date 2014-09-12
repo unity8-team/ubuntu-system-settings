@@ -18,8 +18,9 @@
  *
 */
 
-#include <QDir>
 #include "sound.h"
+
+#include <QDir>
 #include <unistd.h>
 
 #define AS_INTERFACE "com.ubuntu.touch.AccountsService.Sound"
@@ -190,6 +191,23 @@ void Sound::setIncomingMessageVibrateSilentMode(bool enabled)
                                       "IncomingMessageVibrateSilentMode",
                                       QVariant::fromValue(enabled));
     Q_EMIT(incomingMessageVibrateSilentModeChanged());
+}
+
+bool Sound::getDialpadSoundsEnabled()
+{
+    return m_accountsService.getUserProperty(AS_INTERFACE,
+                                             "DialpadSoundsEnabled").toBool();
+}
+
+void Sound::setDialpadSoundsEnabled(bool enabled)
+{
+    if (enabled == getDialpadSoundsEnabled())
+        return;
+
+    m_accountsService.setUserProperty(AS_INTERFACE,
+                                      "DialpadSoundsEnabled",
+                                      QVariant::fromValue(enabled));
+    Q_EMIT(dialpadSoundsEnabledChanged());
 }
 
 QStringList Sound::listSounds(const QString &dirString)

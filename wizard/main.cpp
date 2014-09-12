@@ -22,15 +22,17 @@
 #include <QDebug>
 #include <QGuiApplication>
 #include <QLibrary>
+#include <QObject>
 #include <QProcess>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QQuickItem>
 #include <QQuickView>
 #include <QTimer>
 
 #include "PageList.h"
 
-void quitViaUpstart()
+void handleQuit()
 {
     QProcess::startDetached("initctl start ubuntu-system-settings-wizard-cleanup");
 }
@@ -69,7 +71,7 @@ int main(int argc, const char *argv[])
     view->setSource(QUrl(rootDir + "/qml/main.qml"));
     view->setColor("transparent");
 
-    QObject::connect(view->engine(), &QQmlEngine::quit, quitViaUpstart);
+    QObject::connect(view->engine(), &QQmlEngine::quit, handleQuit);
 
     if (isMirServer) {
         view->showFullScreen();
@@ -83,3 +85,5 @@ int main(int argc, const char *argv[])
     delete application;
     return result;
 }
+
+#include "main.moc"

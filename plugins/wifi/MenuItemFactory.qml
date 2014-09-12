@@ -102,7 +102,6 @@ Item {
             }
 
             text: menu && menu.label ? menu.label : ""
-            icon: menu ? menu.icon : ""
             secure: menu ? menu.ext.xCanonicalWifiApIsSecure : false
             adHoc: menu ? menu.ext.xCanonicalWifiApIsAdhoc : false
             checked: menu ? menu.isToggled : false

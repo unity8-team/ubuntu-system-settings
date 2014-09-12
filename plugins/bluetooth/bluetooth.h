@@ -45,22 +45,22 @@ class Bluetooth : public QObject
 
     Q_PROPERTY (QObject * selectedDevice
                 READ getSelectedDevice
-                NOTIFY selectedDeviceChanged);
+                NOTIFY selectedDeviceChanged)
 
     Q_PROPERTY (QObject * agent
-                READ getAgent);
+                READ getAgent)
 
     Q_PROPERTY (bool powered
                 READ isPowered
-                NOTIFY poweredChanged);
+                NOTIFY poweredChanged)
 
     Q_PROPERTY (bool discovering
                 READ isDiscovering
-                NOTIFY discoveringChanged);
+                NOTIFY discoveringChanged)
 
     Q_PROPERTY (bool discoverable
                 READ isDiscoverable
-                NOTIFY discoverableChanged);
+                NOTIFY discoverableChanged)
 
 Q_SIGNALS:
     void selectedDeviceChanged();
@@ -69,8 +69,8 @@ Q_SIGNALS:
     void discoverableChanged(bool isActive);
 
 public:
-    Bluetooth(QObject *parent = 0);
-    Bluetooth(const QDBusConnection &dbus, QObject *parent = 0);
+    explicit Bluetooth(QObject *parent = nullptr);
+    explicit Bluetooth(const QDBusConnection &dbus, QObject *parent = nullptr);
     ~Bluetooth() {}
 
     Q_INVOKABLE QString adapterName() const { return m_devices.adapterName(); }

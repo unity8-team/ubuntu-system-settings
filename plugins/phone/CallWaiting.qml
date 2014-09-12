@@ -25,13 +25,22 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import MeeGo.QOfono 0.2
 
 ItemPage {
-    title: i18n.tr("Call waiting")
-    property string modem
+    objectName: "callWaitingPage"
+    title: headerTitle
+    property var sim
+    property string headerTitle: i18n.tr("Call waiting")
 
     OfonoCallSettings {
         id: callSettings
-        modemPath: modem
+        modemPath: sim.path
         onVoiceCallWaitingChanged: {
+            callWaitingIndicator.running = false;
+        }
+        onGetPropertiesFailed: {
+            console.warn('callSettings, onGetPropertiesFailed');
+            callWaitingIndicator.running = false;
+        }
+        onVoiceCallWaitingComplete: {
             callWaitingIndicator.running = false;
         }
     }
@@ -44,7 +53,9 @@ ItemPage {
 
     Switch {
         id: callWaitingSwitch
+        objectName: "callWaitingSwitch"
         visible: !callWaitingIndicator.running
+        enabled: callSettings.ready
         checked: callSettings.voiceCallWaiting !== "disabled"
         onClicked: {
             callWaitingIndicator.running = true;

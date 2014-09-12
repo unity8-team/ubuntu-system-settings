@@ -18,11 +18,11 @@
  *
  */
 
-#include <QObject>
-#include "urfkill-proxy.h"
-
 #ifndef FLIGHT_MODE_HELPER_H
 #define FLIGHT_MODE_HELPER_H
+
+#include <QObject>
+#include "urfkill-proxy.h"
 
 class FlightModeHelper : public QObject
 {
@@ -33,7 +33,7 @@ class FlightModeHelper : public QObject
                NOTIFY inFlightModeChanged)
 
 public:
-    FlightModeHelper(QObject *parent = 0);
+    explicit FlightModeHelper(QObject *parent = 0);
     ~FlightModeHelper();
 
     Q_INVOKABLE void setFlightMode(bool value);

@@ -28,7 +28,7 @@ static void wireless_enabled_changed (NMDevice *device G_GNUC_UNUSED,
                                       GParamSpec *pspec G_GNUC_UNUSED,
                                       gpointer user_data)
 {
-    Battery * object = (Battery *) user_data;
+    auto object = static_cast<Battery *>(user_data);
 
     Q_EMIT (object->wifiEnabledChanged());
 }
@@ -64,14 +64,13 @@ bool Battery::powerdRunning() const
 void Battery::buildDeviceString() {
     UpClient *client;
     GPtrArray *devices;
-    UpDevice *device;
     UpDeviceKind kind;
 
 #if !UP_CHECK_VERSION(0, 99, 0)
     gboolean returnIsOk;
 
     client = up_client_new();
-    returnIsOk = up_client_enumerate_devices_sync(client, NULL, NULL);
+    returnIsOk = up_client_enumerate_devices_sync(client, nullptr, nullptr);
 
     if(!returnIsOk)
         return;
@@ -80,8 +79,9 @@ void Battery::buildDeviceString() {
     devices = up_client_get_devices(client);
 
     for (uint i=0; i < devices->len; i++) {
+        UpDevice *device;
         device = (UpDevice *)g_ptr_array_index(devices, i);
-        g_object_get(device, "kind", &kind, NULL);
+        g_object_get(device, "kind", &kind, nullptr);
         if (kind == UP_DEVICE_KIND_BATTERY) {
             m_deviceString = QString(up_device_get_object_path(device));
         }
@@ -114,26 +114,25 @@ int Battery::lastFullCharge() const
 
 void Battery::getLastFullCharge()
 {
-    UpHistoryItem *item;
-    GPtrArray *values = NULL;
+    GPtrArray *values = nullptr;
     gint32 offset = 0;
     GTimeVal timeval;
 
     g_get_current_time(&timeval);
     offset = timeval.tv_sec;
-    up_device_set_object_path_sync(m_device, m_deviceString.toStdString().c_str(), NULL, NULL);
-    values = up_device_get_history_sync(m_device, "charge", 864000, 1000, NULL, NULL);
+    up_device_set_object_path_sync(m_device, m_deviceString.toStdString().c_str(), nullptr, nullptr);
+    values = up_device_get_history_sync(m_device, "charge", 864000, 1000, nullptr, nullptr);
 
-    if (values == NULL) {
+    if (values == nullptr) {
         qWarning() << "Can't get charge info";
         return;
     }
 
     double maxCapacity = 100.0;
-    g_object_get (m_device, "capacity", &maxCapacity, NULL);
+    g_object_get (m_device, "capacity", &maxCapacity, nullptr);
 
     for (uint i=0; i < values->len; i++) {
-        item = (UpHistoryItem *) g_ptr_array_index(values, i);
+        auto item = static_cast<UpHistoryItem *>(g_ptr_array_index(values, i));
 
         /* Getting the next point after full charge, since upower registers only on state changes,
            typically you get no data while the device is fully charged and plugged and you get a discharging
@@ -158,8 +157,7 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
     if (deviceString.isNull() || deviceString.isEmpty())
         return QVariantList();
 
-    UpHistoryItem *item;
-    GPtrArray *values = NULL;
+    GPtrArray *values = nullptr;
     gint32 offset = 0;
     GTimeVal timeval;
     QVariantList listValues;
@@ -168,16 +166,16 @@ QVariantList Battery::getHistory(const QString &deviceString, const int timespan
 
     g_get_current_time(&timeval);
     offset = timeval.tv_sec;
-    up_device_set_object_path_sync(m_device, deviceString.toStdString().c_str(), NULL, NULL);
-    values = up_device_get_history_sync(m_device, "charge", timespan, resolution, NULL, NULL);
+    up_device_set_object_path_sync(m_device, deviceString.toStdString().c_str(), nullptr, nullptr);
+    values = up_device_get_history_sync(m_device, "charge", timespan, resolution, nullptr, nullptr);
 
-    if (values == NULL) {
+    if (values == nullptr) {
         qWarning() << "Can't get charge info";
         return QVariantList();
     }
 
     for (uint i=values->len-1; i > 0; i--) {
-        item = (UpHistoryItem *) g_ptr_array_index(values, i);
+        auto item = static_cast<UpHistoryItem *>(g_ptr_array_index(values, i));
 
         if (up_history_item_get_state(item) == UP_DEVICE_STATE_UNKNOWN)
             continue;

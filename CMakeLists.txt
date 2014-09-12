@@ -47,6 +47,8 @@ pkg_search_module(POLKIT_AGENT polkit-agent-1)
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)
+find_program(INTLTOOL_MERGE intltool-merge)
+find_program(INTLTOOL_EXTRACT intltool-extract)
 
 set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
 set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
@@ -62,6 +64,9 @@ set(PUSH_HELPER_DIR "lib/ubuntu-push-client/legacy-helpers")
 
 SET(CMAKE_INSTALL_RPATH "${PLUGIN_MODULE_DIR}")
 
+set(DESKTOP_FILE ubuntu-system-settings.desktop)
+set(GETTEXT_PACKAGE ubuntu-system-settings)
+
 add_subdirectory(po)
 add_subdirectory(schema)
 add_subdirectory(lib)
@@ -72,8 +77,15 @@ add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(wizard)
 
-configure_file(ubuntu-system-settings.desktop.in ubuntu-system-settings.desktop @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-system-settings.desktop DESTINATION share/applications)
+configure_file(${DESKTOP_FILE}.in.in ${DESKTOP_FILE}.in @ONLY)
+add_custom_target(${DESKTOP_FILE} ALL
+                  COMMENT "Merging translations into ${DESKTOP_FILE}"
+                  COMMAND ${INTLTOOL_MERGE} -d -u ${CMAKE_SOURCE_DIR}/po
+                          ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE}.in ${DESKTOP_FILE})
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE}
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+
 install(FILES ubuntu-system-settings.url-dispatcher DESTINATION share/url-dispatcher/urls)
 install(FILES screenshot.png DESTINATION ${SETTINGS_SHARE_DIR})
 install(PROGRAMS push-helper/software-updates-helper.py DESTINATION ${PUSH_HELPER_DIR} RENAME ubuntu-system-settings)

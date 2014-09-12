@@ -18,6 +18,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Sergio Schvezov <sergio.schvezov@canonical.com>
+ *         Jonas G. Drange <jonas.drange@canonical.com>
  *
  */
 
@@ -33,6 +34,7 @@ ItemPage {
     id: versionPage
     objectName: "versionPage"
     title: i18n.tr("OS Build Details")
+    flickable: flickElement
 
     UbuntuStorageAboutPanel {
         id: storedInfo
@@ -43,10 +45,20 @@ ItemPage {
     }
 
     Flickable {
+        id: flickElement
         anchors.fill: parent
 
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > versionPage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
+
         Column {
-            anchors.fill: parent
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
 
             ListItem.SingleValue {
                 objectName: "versionBuildNumberItem"
@@ -61,79 +73,25 @@ ItemPage {
                 visible: updateBackendInfo.currentUbuntuBuildNumber
             }
 
-            ListItem.SingleValue {
+            SingleValueStacked {
                 objectName: "ubuntuBuildIDItem"
-                height: ubuntuBuildIDColumn.childrenRect.height + units.gu(2)
                 visible: storedInfo.ubuntuBuildID
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                Column {
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-
-                    id: ubuntuBuildIDColumn
-                    spacing: units.gu(1)
-                    Label {
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                        }
-                        wrapMode: Text.WordWrap
-                        text: i18n.tr("Ubuntu build description")
-                    }
-                    Label {
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                        }
-                        wrapMode: Text.WordWrap
-                        text: storedInfo.ubuntuBuildID
-                    }
-                }
+                text: i18n.tr("Ubuntu build description")
+                value: storedInfo.ubuntuBuildID
             }
 
-            ListItem.SingleValue {
+            SingleValueStacked {
                 objectName: "deviceVersionBuildNumberItem"
                 text: i18n.tr("Device Image part")
                 value: updateBackendInfo.currentDeviceBuildNumber
                 visible: updateBackendInfo.currentDeviceBuildNumber
             }
 
-            ListItem.SingleValue {
+            SingleValueStacked {
                 objectName: "deviceBuildIDItem"
-                height: deviceBuildIDColumn.childrenRect.height + units.gu(2)
+                text: i18n.tr("Device build description")
+                value: storedInfo.deviceBuildDisplayID
                 visible: storedInfo.deviceBuildDisplayID
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
-                Column {
-                    anchors.fill: parent
-                    anchors.topMargin: units.gu(1)
-
-                    id: deviceBuildIDColumn
-                    spacing: units.gu(1)
-                    Label {
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                        }
-                        wrapMode: Text.WordWrap
-                        text: i18n.tr("Device build description")
-                    }
-                    Label {
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                        }
-                        wrapMode: Text.WordWrap
-                        text: storedInfo.deviceBuildDisplayID
-                    }
-                }
             }
 
             ListItem.SingleValue {

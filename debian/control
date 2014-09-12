@@ -9,6 +9,7 @@ Build-Depends: dbus-test-runner,
                python3-setuptools,
                python3-all:any,
                gdb:any,
+               intltool,
                libaccountsservice-dev,
                libandroid-properties-dev [amd64 armhf i386],
                libglib2.0-dev (>= 2.37.92),
@@ -45,17 +46,18 @@ Homepage: https://launchpad.net/ubuntu-system-settings
 # code again.
 Vcs-Bzr: https://code.launchpad.net/~system-settings-touch/ubuntu-system-settings/trunk
 X-Python3-Version: >= 3.2
+X-Ubuntu-Use-Langpack: yes
 
 Package: ubuntu-system-settings
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          accountsservice,
-         accountsservice-ubuntu-schemas (>= 0.0.2),
+         accountsservice-ubuntu-schemas (>= 0.0.3+14.10.20140829~),
          bluez (>= 4.36),
          dbus-property-service [amd64 armhf i386],
          gsettings-desktop-schemas,
-         gsettings-ubuntu-schemas (>= 0.0.2+14.10.20140802.1),
+         gsettings-ubuntu-schemas (>= 0.0.2+14.10.20140815),
          indicator-bluetooth (>> 0.0.6+13.10.20131010),
          indicator-network (>= 0.5.0+13.10.20130918),
          powerd (>= 0.15) | gnome-settings-daemon,
@@ -63,7 +65,7 @@ Depends: ${misc:Depends},
          qtdeclarative5-folderlistmodel-plugin,
          qml-module-qtmultimedia | qml-module-qtmultimedia-gles,
          qtdeclarative5-gsettings1.0 (>=0.1+14.10.20140801.1),
-         qtdeclarative5-ofono0.2,
+         qtdeclarative5-ofono0.2 (>=0.53),
          qtdeclarative5-systeminfo-plugin,
          qtdeclarative5-ubuntu-content1,
          qtdeclarative5-ubuntu-settings-components (> 0.2),

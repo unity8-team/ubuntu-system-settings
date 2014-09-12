@@ -45,7 +45,7 @@ class UpdateItem: public ItemBase
     Q_OBJECT
 
 public:
-    UpdateItem(const QVariantMap &staticData, QObject *parent = 0);
+    explicit UpdateItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
     ~UpdateItem();
 

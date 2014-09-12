@@ -22,53 +22,92 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.SystemSettings.Sound 1.0
 import MeeGo.QOfono 0.2
+import "sims.js" as Sims
 
 ItemPage {
+    id: root
+    objectName: "phonePage"
     title: i18n.tr("Phone")
-    property string carrierName: netop.name
-    property string carrierString: carrierName ? carrierName : i18n.tr("SIM")
+    flickable: flick
+
+    property var modemsSorted: manager.modems.slice(0).sort()
+    property var simsLoaded: 0
+
+    states: [
+        State {
+            name: "noSim"
+            StateChangeScript {
+                script: loader.setSource("NoSims.qml")
+            }
+            when: (simsLoaded === 0) || (Sims.getPresentCount() === 0)
+        },
+        State {
+            name: "singleSim"
+            StateChangeScript {
+                script: loader.setSource("SingleSim.qml", { sim: Sims.get(0) })
+
+            }
+            when: simsLoaded && (Sims.getPresentCount() === 1)
+        },
+        State {
+            name: "multiSim"
+            StateChangeScript {
+                script: loader.setSource("MultiSim.qml", {
+                    sims: Sims.getAll()
+                })
+            }
+            when: simsLoaded && (Sims.getPresentCount() > 1)
+        }
+    ]
 
     OfonoManager {
         id: manager
+        Component.onCompleted: {
+            // create ofono bindings for all modem paths
+            var component = Qt.createComponent("Ofono.qml");
+            modemsSorted.forEach(function (path) {
+                var sim = component.createObject(root, {
+                    path: path
+                });
+                if (sim === null) {
+                    console.warn('failed to create sim object');
+                } else {
+                    Sims.add(sim);
+                }
+            });
+        }
     }
 
-    OfonoNetworkRegistration {
-        id: netop;
-        modemPath: manager.modems[0]
-        onNameChanged: carrierName = netop.name
-    }
+    UbuntuSoundPanel { id: soundPlugin }
 
-    OfonoSimManager {
-        id: sim
-        modemPath: manager.modems[0]
-    }
-
-    Column {
+    Flickable {
+        id: flick
         anchors.fill: parent
+        contentWidth: parent.width
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ?
+            Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
-        ListItem.Standard {
-            text: i18n.tr("Call forwarding")
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CallForwarding.qml"), {modem: manager.modems[0]})
-        }
+        Column {
+            anchors { left: parent.left; right: parent.right }
 
-        ListItem.Standard {
-            text: i18n.tr("Call waiting")            
-            progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("CallWaiting.qml"), {modem: manager.modems[0]})
-            showDivider: false
-        }
+            Loader {
+                id: loader
+                anchors { left: parent.left; right: parent.right }
+            }
 
-        ListItem.Divider {}
+            ListItem.Divider {}
 
-        ListItem.Standard {
-            // TRANSLATORS: %1 is the name of the (network) carrier
-            text: i18n.tr("%1 Services").arg(carrierString)
-            progression: true
-            enabled: sim.present
-            onClicked: pageStack.push(Qt.resolvedUrl("Services.qml"),
-                                      {carrierString: carrierString, sim: sim})
+            ListItem.Standard {
+                control: Switch {
+                    objectName: "dialpadSounds"
+                    checked: soundPlugin.dialpadSoundsEnabled
+                    onCheckedChanged: soundPlugin.dialpadSoundsEnabled = checked
+                }
+                text: i18n.tr("Dialpad sounds")
+            }
         }
     }
 }

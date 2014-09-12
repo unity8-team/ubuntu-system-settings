@@ -26,6 +26,9 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QProcessEnvironment>
+#include <QDBusInterface>
+
+using namespace UbuntuOne;
 
 #define CLICK_COMMAND "click"
 #ifdef TESTS
@@ -40,7 +43,8 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject(parent),
     m_systemCheckingUpdate(false),
     m_clickCheckingUpdate(false),
-    m_checkingUpdates(0)
+    m_checkingUpdates(0),
+    m_downloadMode(-1)
 {
     // SSO SERVICE
     QObject::connect(&m_service, SIGNAL(credentialsFound(const Token&)),
@@ -282,6 +286,17 @@ void UpdateManager::clickTokenReceived(Update *app, const QString &clickToken)
     app->setError("");
     app->setClickToken(clickToken);
     app->setDownloadUrl(app->getClickUrl());
+}
+
+void UpdateManager::updateClickScope()
+{
+    // Refresh click scope
+    QDBusMessage signal = QDBusMessage::createSignal(
+                "/com/canonical/unity/scopes",
+                "com.canonical.unity.scopes",
+                "InvalidateResults");
+    signal << "clickscope";
+    QDBusConnection::sessionBus().send(signal);
 }
 
 }

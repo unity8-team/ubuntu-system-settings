@@ -14,9 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.0
+import QtQuick 2.3
 import GSettings 1.0
-import Ubuntu.Components 0.1
+import Ubuntu.Components 1.1
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Unity.Application 0.1
 import Unity.Notifications 1.0 as NotificationBackend
@@ -46,10 +46,13 @@ Item {
         // Immediately go to black to give quick feedback
         blackCover.visible = true
 
-        // Ignore any errors, since we're past where the user set the
-        // method.  Worst case, we just leave the user with a swipe
-        // security method and they fix it in the system settings.
-        securityPrivacy.setSecurity("", password, passwordMethod)
+        var errorMsg = securityPrivacy.setSecurity("", password, passwordMethod)
+        if (errorMsg !== "") {
+            // Ignore (but log) any errors, since we're past where the user set
+            // the method.  Worst case, we just leave the user with a swipe
+            // security method and they fix it in the system settings.
+            console.log("Error setting security method:", errorMsg)
+        }
 
         Qt.quit()
     }
@@ -70,6 +73,7 @@ Item {
         backgroundColor: "#A55263"
         footerColor: "#D75669"
         anchorToKeyboard: true
+        useDeprecatedToolbar: false
 
         GSettings {
             id: background
@@ -96,11 +100,23 @@ Item {
             }
 
             function prev() {
-                pageList.prev() // to update pageList.index
+                if (pageList.index >= pageStack.depth - 1)
+                    pageList.prev() // update pageList.index, but not for extra pages
                 pop()
             }
 
             Component.onCompleted: next()
+        }
+    }
+
+    Rectangle {
+        id: modalNotificationBackground
+        visible: notifications.useModal && (notifications.state == "narrow")
+        anchors.fill: parent
+        color: "#80000000"
+
+        MouseArea {
+            anchors.fill: parent
         }
     }
 

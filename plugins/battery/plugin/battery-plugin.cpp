@@ -34,7 +34,7 @@ class BatteryItem: public ItemBase
     Q_OBJECT
 
 public:
-    BatteryItem(const QVariantMap &staticData, QObject *parent = 0);
+    explicit BatteryItem(const QVariantMap &staticData, QObject *parent = 0);
     void setVisibility(bool visible);
     ~BatteryItem();
 
@@ -50,7 +50,7 @@ void deviceChanged(UpClient *client,
     BatteryItem *item (static_cast<BatteryItem *> (user_data));
 
 #if !UP_CHECK_VERSION(0, 99, 0)
-    gboolean ret = up_client_enumerate_devices_sync (client, NULL, NULL);
+    gboolean ret = up_client_enumerate_devices_sync (client, nullptr, nullptr);
     if (!ret) {
         item->setVisibility (false);
     } else
@@ -69,7 +69,7 @@ BatteryItem::BatteryItem(const QVariantMap &staticData, QObject *parent):
     m_addedHandler(0),
     m_removedHandler(0)
 {
-    deviceChanged(m_client, NULL, this);
+    deviceChanged(m_client, nullptr, this);
     m_addedHandler = g_signal_connect (m_client,
                                       "device-added",
                                       G_CALLBACK (::deviceChanged),

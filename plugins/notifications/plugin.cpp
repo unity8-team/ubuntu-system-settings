@@ -15,9 +15,10 @@
  *
 */
 
+#include "plugin.h"
+
 #include <QtQml>
 #include <QtQml/QQmlContext>
-#include "plugin.h"
 #include "notification_manager.h"
 #include "notification_item.h"
 

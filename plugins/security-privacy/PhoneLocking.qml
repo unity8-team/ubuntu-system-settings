@@ -26,7 +26,12 @@ import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 
 ItemPage {
+    id: root
+    objectName: "phoneLockingPage"
     title: i18n.tr("Phone locking")
+
+    property bool usePowerd
+    property variant powerSettings
 
     UbuntuSecurityPrivacyPanel {
         id: securityPrivacy
@@ -37,8 +42,8 @@ ItemPage {
         anchors.right: parent.right
 
         ListItem.SingleValue {
-            property string swipe: i18n.tr("None")
-            property string passcode: i18n.tr("Passcode")
+            property string swipe: qsTr("None", "Unlock with swipe")
+            property string passcode: i18n.tr("PIN code")
             property string passphrase: i18n.tr("Passphrase")
 
             text: i18n.tr("Lock security")
@@ -57,14 +62,31 @@ ItemPage {
         }
 
         ListItem.SingleValue {
+            objectName: "lockTimeout"
             property bool lockOnSuspend: securityPrivacy.securityType !==
                                             UbuntuSecurityPrivacyPanel.Swipe
             text: lockOnSuspend ? i18n.tr("Lock when idle")
                                 : i18n.tr("Sleep when idle")
-            // TRANSLATORS: %1 is the number of minutes
-            value: i18n.tr("%1 minute",
-                           "%1 minutes",
-                           5).arg(5)
+            value: {
+                if (usePowerd) {
+                    var timeout = Math.round(powerSettings.activityTimeout/60)
+                    return (powerSettings.activityTimeout != 0) ?
+                                // TRANSLATORS: %1 is the number of minutes
+                                i18n.tr("%1 minute",
+                                        "%1 minutes",
+                                        timeout).arg(timeout) :
+                                i18n.tr("Never")
+                }
+                else {
+                    var timeout = Math.round(powerSettings.idleDelay/60)
+                    return (powerSettings.idleDelay != 0) ?
+                                // TRANSLATORS: %1 is the number of minutes
+                                i18n.tr("%1 minute",
+                                        "%1 minutes",
+                                        timeout).arg(timeout) :
+                                i18n.tr("Never")
+                }
+            }
             progression: true
             onClicked:
                 pageStack.push(
@@ -77,15 +99,37 @@ ItemPage {
                 checked: true
             }
             text: i18n.tr("Sleep locks immediately")
+            visible: showAllUI
         }
 
-    /* TODO: once we know how to do this
-    ListItem.Standard {
-        text: i18n.tr("When locked, allow:")
-    }
-    Launcher,
-    Camera,
-    ...
-    */
+        ListItem.Standard {
+            text: i18n.tr("When locked, allow:")
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Launcher")
+            control: CheckBox {
+                id: launcherCheck
+                enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                checked: securityPrivacy.enableLauncherWhileLocked || !enabled
+                onClicked: securityPrivacy.enableLauncherWhileLocked = checked
+            }
+        }
+
+        ListItem.Standard {
+            text: i18n.tr("Notifications and quick settings")
+            control: CheckBox {
+                id: indicatorsCheck
+                enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
+                checked: securityPrivacy.enableIndicatorsWhileLocked || !enabled
+                onClicked: securityPrivacy.enableIndicatorsWhileLocked = checked
+            }
+        }
+
+        ListItem.Caption {
+            text: securityPrivacy.securityType === UbuntuSecurityPrivacyPanel.Swipe ?
+                  i18n.tr("Turn on lock security to restrict access when the phone is locked.") :
+                  i18n.tr("Other apps and functions will prompt you to unlock.")
+        }
     }
 }

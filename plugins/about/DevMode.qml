@@ -33,6 +33,7 @@ ItemPage {
     id: versionPage
     objectName: "versionPage"
     title: i18n.tr("Developer Mode")
+    flickable: scrollWidget
 
     UbuntuStorageAboutPanel {
         id: storedInfo
@@ -43,10 +44,18 @@ ItemPage {
     }
 
     Flickable {
+        id: scrollWidget
         anchors.fill: parent
 
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
+
         Column {
-            anchors.fill: parent
+            anchors.left: parent.left
+            anchors.right: parent.right
 
             ListItem.SingleValue {
                 objectName: "devModeWarningItem"
@@ -88,14 +97,15 @@ ItemPage {
             ListItem.Divider {}
 
             ListItem.SingleValue {
+                height: lockSecurityLabel.height + units.gu(2)
                 Label {
-                    id: "lockSecurityLabel"
+                    id: lockSecurityLabel
                     width: parent.width
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                     horizontalAlignment: Text.AlignHCenter
                     wrapMode: Text.WordWrap
-                    text: i18n.tr("You need a passcode or passphrase set to use Developer Mode.")
+                    text: i18n.tr("You need a PIN code or passphrase set to use Developer Mode.")
                 }
             }
 

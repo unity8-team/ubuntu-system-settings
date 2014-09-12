@@ -44,7 +44,9 @@
 #include "system_update.h"
 #endif
 
-using namespace UbuntuOne;
+// Having the full namespaced name in a slot seems to confuse
+// SignalSpy so we need this declaration.
+using UbuntuOne::Token;
 
 namespace UpdatePlugin {
 
@@ -83,6 +85,7 @@ public:
     Q_INVOKABLE void pauseDownload(const QString &packagename);
     Q_INVOKABLE void retryDownload(const QString &packagename);
     Q_INVOKABLE void applySystemUpdate() { m_systemUpdate.applyUpdate(); }
+    Q_INVOKABLE void updateClickScope();
 
     QVariantList model() const { return m_model; }
     int downloadMode() { return m_systemUpdate.downloadMode(); }
@@ -135,7 +138,7 @@ private:
 #else
     Network m_network;
     QProcess m_process;
-    SSOService m_service;
+    UbuntuOne::SSOService m_service;
     SystemUpdate m_systemUpdate;
 #endif
 

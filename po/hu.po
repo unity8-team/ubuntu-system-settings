@@ -7,302 +7,211 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-08 10:09+0200\n"
-"PO-Revision-Date: 2014-08-08 07:59+0000\n"
+"POT-Creation-Date: 2014-09-11 12:06-0400\n"
+"PO-Revision-Date: 2014-09-12 06:43+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-15 06:25+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-09-12 06:56+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
-#: ../plugins/background//Preview.qml:67
-msgid "Preview"
-msgstr "Előnézet"
+#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
+msgid "System Settings"
+msgstr "Rendszerbeállítások"
 
-#: ../plugins/background//Preview.qml:97
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/phone//CallForwarding.qml:136
-#: ../plugins/wifi//OtherNetwork.qml:112
-#: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//LockSecurity.qml:278
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//EraseEverything.qml:54
-msgid "Cancel"
-msgstr "Mégse"
+#: ubuntu-system-settings.desktop.in.in.h:2
+msgid "System;"
+msgstr "Rendszer;"
 
-#: ../plugins/background//Preview.qml:104
-#: ../plugins/phone//CallForwarding.qml:148
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:299
-msgid "Set"
-msgstr "Beállít"
+#: ubuntu-system-settings.desktop.in.in.h:3
+msgid "Preferences;Settings;"
+msgstr "Tulajdonságok;Beállítások;"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
-msgid "Background"
-msgstr "Háttér"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/wifi//PageComponent.qml:26
+#: ../plugins/battery//PageComponent.qml:333
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:10
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
 
-#: ../plugins/background//MainPage.qml:112
-msgid "Ubuntu Art"
-msgstr "Ubuntu kinézet"
+#: ../plugins/wifi//PageComponent.qml:114
+#: ../plugins/wifi//PreviousNetworks.qml:26
+msgid "Previous networks"
+msgstr "Korábbi hálózatok"
 
-#: ../plugins/background//MainPage.qml:128
-msgid "Custom"
-msgstr "Egyéni"
+#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
+msgid "Other network"
+msgstr "Egyéb hálózat"
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Eltávolítás"
+#: ../plugins/wifi//OtherNetwork.qml:56
+msgid "Network name"
+msgstr "Hálózatnév"
 
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr "Bluetooth párosítási kérés"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "„%1” PIN kódja"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr "Párosítás"
-
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
-"Erősítse meg, hogy a(z) „%1” által megjelenített PIN megegyezik ezzel"
-
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "PIN megerősítése"
-
-#: ../plugins/bluetooth//PageComponent.qml:77
-msgid "Connected"
-msgstr "Csatlakozva"
-
-#: ../plugins/bluetooth//PageComponent.qml:78
-msgid "Connecting…"
-msgstr "Csatlakozás…"
-
-#: ../plugins/bluetooth//PageComponent.qml:79
-msgid "Disconnecting…"
-msgstr "Leválasztás…"
-
-#: ../plugins/bluetooth//PageComponent.qml:80
-msgid "Disconnected"
-msgstr "Leválasztva"
-
-#: ../plugins/bluetooth//PageComponent.qml:81
-msgid "Unknown"
-msgstr "Ismeretlen"
-
-#: ../plugins/bluetooth//PageComponent.qml:87
-msgid "Computer"
-msgstr "Számítógép"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:88
-#: ../plugins/phone//PageComponent.qml:28
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:74
-msgid "Phone"
-msgstr "Telefon"
-
-#: ../plugins/bluetooth//PageComponent.qml:89
-msgid "Modem"
-msgstr "Modem"
-
-#: ../plugins/bluetooth//PageComponent.qml:90 ../src/qml/MainWindow.qml:145
-msgid "Network"
-msgstr "Hálózat"
-
-#: ../plugins/bluetooth//PageComponent.qml:91
-msgid "Headset"
-msgstr "Fejhallgató"
-
-#: ../plugins/bluetooth//PageComponent.qml:92
-msgid "Headphones"
-msgstr "Fülhallgatók"
-
-#: ../plugins/bluetooth//PageComponent.qml:93
-msgid "Video"
-msgstr "Videó"
-
-#: ../plugins/bluetooth//PageComponent.qml:94
-msgid "Other Audio"
-msgstr "Egyéb hang"
-
-#: ../plugins/bluetooth//PageComponent.qml:95
-msgid "Joypad"
-msgstr "Játékvezérlő"
-
-#: ../plugins/bluetooth//PageComponent.qml:96
-msgid "Keyboard"
-msgstr "Billentyűzet"
-
-#: ../plugins/bluetooth//PageComponent.qml:97
-msgid "Tablet"
-msgstr "Táblagép"
-
-#: ../plugins/bluetooth//PageComponent.qml:98
-msgid "Mouse"
-msgstr "Egér"
-
-#: ../plugins/bluetooth//PageComponent.qml:99
-msgid "Printer"
-msgstr "Nyomtató"
-
-#: ../plugins/bluetooth//PageComponent.qml:100
-msgid "Camera"
-msgstr "Kamera"
-
-#: ../plugins/bluetooth//PageComponent.qml:101
-msgid "Other"
-msgstr "Egyéb"
-
-#: ../plugins/bluetooth//PageComponent.qml:107
-msgid "Excellent"
-msgstr "Kiváló"
-
-#: ../plugins/bluetooth//PageComponent.qml:108
-msgid "Good"
-msgstr "Jó"
-
-#: ../plugins/bluetooth//PageComponent.qml:109
-msgid "Fair"
-msgstr "Elfogadható"
-
-#: ../plugins/bluetooth//PageComponent.qml:110
-msgid "Poor"
-msgstr "Gyenge"
-
-#: ../plugins/bluetooth//PageComponent.qml:111
-#: ../plugins/bluetooth//PageComponent.qml:302
-#: ../plugins/bluetooth//PageComponent.qml:310
 #: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PageComponent.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:40
+#: ../plugins/security-privacy//PageComponent.qml:126
+msgid "Security"
+msgstr "Biztonság"
+
+#: ../plugins/wifi//OtherNetwork.qml:68
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr "Nincs"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:117
-#: ../plugins/bluetooth//PageComponent.qml:136
-#: ../plugins/battery//PageComponent.qml:342
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:10
-msgid "Bluetooth"
-msgstr "Bluetooth"
+#: ../plugins/wifi//OtherNetwork.qml:69
+msgid "WPA & WPA2 Personal"
+msgstr "WPA és személyes WPA2"
 
-#: ../plugins/bluetooth//PageComponent.qml:171
-msgid "Discoverable"
-msgstr "Észlelhető"
+#: ../plugins/wifi//OtherNetwork.qml:70
+msgid "WEP"
+msgstr "WEP"
 
-#: ../plugins/bluetooth//PageComponent.qml:171
-msgid "Not discoverable"
-msgstr "Nem észlelhető"
+#: ../plugins/wifi//OtherNetwork.qml:77 ../plugins/wifi//NetworkDetails.qml:61
+msgid "Password"
+msgstr "Jelszó"
 
-#: ../plugins/bluetooth//PageComponent.qml:202
-msgid "Connected devices:"
-msgstr "Csatlakoztatott eszközök:"
+#: ../plugins/wifi//OtherNetwork.qml:90
+msgid "Password visible"
+msgstr "A jelszó látható"
 
-#: ../plugins/bluetooth//PageComponent.qml:236
-msgid "Connect another device:"
-msgstr "Másik eszköz csatlakoztatása:"
+#: ../plugins/wifi//OtherNetwork.qml:113
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/phone//CallForwarding.qml:139
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/security-privacy//SimPin.qml:146
+#: ../plugins/security-privacy//SimPin.qml:263
+#: ../plugins/security-privacy//LockSecurity.qml:283
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/background//Preview.qml:101
+#: ../plugins/cellular//Components//SimEditor.qml:189
+#: ../plugins/background//Components//AddRemove.qml:42
+msgid "Cancel"
+msgstr "Mégse"
 
-#: ../plugins/bluetooth//PageComponent.qml:236
-msgid "Connect a device:"
-msgstr "Eszköz csatlakoztatása:"
-
-#: ../plugins/bluetooth//PageComponent.qml:266
-msgid "None detected"
-msgstr "Nem található"
-
-#: ../plugins/bluetooth//PageComponent.qml:274
-#: ../plugins/bluetooth//PageComponent.qml:360
-msgid "Connect automatically when detected:"
-msgstr "Észlelés után automatikus csatlakoztatás:"
-
-#: ../plugins/bluetooth//PageComponent.qml:309
-#: ../plugins/wifi//NetworkDetails.qml:43
-msgid "Name"
-msgstr "Név"
-
-#: ../plugins/bluetooth//PageComponent.qml:327
-msgid "Type"
-msgstr "Típus"
-
-#: ../plugins/bluetooth//PageComponent.qml:351
-msgid "Status"
-msgstr "Állapot"
-
-#: ../plugins/bluetooth//PageComponent.qml:355
-msgid "Signal Strength"
-msgstr "Jelerősség"
-
-#: ../plugins/bluetooth//PageComponent.qml:374
-msgid "Disconnect"
-msgstr "Kapcsolat bontása"
-
-#: ../plugins/bluetooth//PageComponent.qml:374
-#: ../plugins/wifi//OtherNetwork.qml:121
+#: ../plugins/wifi//OtherNetwork.qml:122
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Csatlakozás"
 
-#: ../plugins/bluetooth//PageComponent.qml:392
-msgid "Forget this device"
-msgstr "Eszköz elfelejtése"
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr "Hálózat részletei"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:16
-msgid "Notifications"
-msgstr "Értesítések"
+#: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:343
+msgid "Name"
+msgstr "Név"
 
-#: ../plugins/notifications//PageComponent.qml:40
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr "Legutóbb csatlakozott"
+
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/about//PageComponent.qml:166
+#: ../plugins/security-privacy//PageComponent.qml:140
+#: ../plugins/security-privacy//PhoneLocking.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:87
+#: ../plugins/system-update//PageComponent.qml:563
+#: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
+#: ../plugins/battery//SleepValues.qml:106
+msgid "Never"
+msgstr "Soha"
+
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr "Jelszó megjelenítése"
+
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr "Hálózat elfelejtése"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Kapcsolat bontása"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr "IP cím"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../plugins/reset//PageComponent.qml:32
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:22
+msgid "Reset phone"
+msgstr "Telefon visszaállítása"
+
+#: ../plugins/reset//PageComponent.qml:73
+#: ../plugins/reset//ResetLauncherHome.qml:44
+msgid "Reset Launcher"
+msgstr "Indító visszaállítása"
+
+#: ../plugins/reset//PageComponent.qml:87
+msgid "Reset all system settings…"
+msgstr "Minden rendszerbeállítás visszaállítása"
+
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr "Minden visszaállítása és törlése"
+
+#: ../plugins/reset//EraseEverything.qml:41
 msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
 msgstr ""
-"A kiválasztott alkalmazások értesíthetik Önt értesítési buborékon, hangon, "
-"rezgésen vagy az Értesítési központon keresztül."
+"Minden dokumentum, elmentett játék, beállítás és egyéb dolog véglegesen "
+"törölve lesz a telefonról."
 
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "Válasszon szolgáltatót:"
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "Minden visszaállítása és törlése"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Automatically"
-msgstr "Automatikusan"
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "Visszaállítja az Indító eredeti állapotát."
 
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Manually"
-msgstr "Kézzel"
+#: ../plugins/reset//ResetLauncherHome.qml:59
+#: ../plugins/language//RebootNecessary.qml:34
+msgid "The phone needs to restart for changes to take effect."
+msgstr "A telefont újra kell indítania a változtatások életbe léptetéséhez."
 
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "Frissítés"
+#: ../plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+"A tartalmak és az indító elrendezése, valamint a kezdő képernyőn lévő szűrők "
+"vissza lesznek állítva az eredeti beállításukra."
 
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "Keresés"
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "Minden rendszerbeállítás visszaállítása"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+#: ../plugins/cellular//Components//MultiSim.qml:68
+msgid "Carriers"
+msgstr "Szolgáltatók"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:49
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//Components//NoSim.qml:48
+#: ../plugins/cellular//Components//SingleSim.qml:62
+msgid "N/A"
+msgstr "Nem elérhető"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -321,47 +230,22 @@ msgid "Show key"
 msgstr "Kulcs megjelenítése"
 
 #: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:297
+#: ../plugins/security-privacy//SimPin.qml:154
+#: ../plugins/security-privacy//LockSecurity.qml:302
 msgid "Change"
 msgstr "Módosítás"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../plugins/cellular//PageComponent.qml:32
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:28
 msgid "Cellular"
 msgstr "Mobil"
 
-#: ../plugins/cellular//PageComponent.qml:132
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr "A hotspot kikapcsolva, mert a Wi-Fi is ki van kapcsolva."
-
-#: ../plugins/cellular//PageComponent.qml:138
 #: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//Components//MultiSim.qml:48
+#: ../plugins/cellular//Components//SingleSim.qml:43
 msgid "Wi-Fi hotspot"
 msgstr "Wi-Fi hotspot"
-
-#: ../plugins/cellular//PageComponent.qml:147
-msgid "Data usage statistics"
-msgstr "Adat használati statisztikák"
-
-#: ../plugins/cellular//PageComponent.qml:153
-#: ../plugins/cellular//PageComponent.qml:161
-msgid "Carrier"
-msgid_plural "Carriers"
-msgstr[0] "Szolgáltató"
-msgstr[1] "Szolgáltatók"
-
-#: ../plugins/cellular//PageComponent.qml:175
-#: ../plugins/cellular//PageChooseCarriers.qml:50
-#: ../plugins/cellular//PageChooseCarriers.qml:66
-#: ../plugins/battery//PageComponent.qml:117
-#: ../plugins/battery//PageComponent.qml:268 ../plugins/about//Storage.qml:204
-msgid "N/A"
-msgstr "Nem elérhető"
-
-#: ../plugins/cellular//PageComponent.qml:180
-msgid "APN"
-msgstr "APN"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
@@ -386,253 +270,191 @@ msgstr ""
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr "Hotspot felállítása"
+msgstr "Hotspot beállítása"
 
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-msgid "Carriers"
-msgstr "Szolgáltatók"
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "Válasszon szolgáltatót:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Automatically"
+msgstr "Automatikusan"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/security-privacy//PageComponent.qml:149
+msgid "Manually"
+msgstr "Kézzel"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "Frissítés"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "Keresés"
+
+#: ../plugins/language//DisplayLanguage.qml:36
+msgid "Display language"
+msgstr "A megjelenítés nyelve"
+
+#: ../plugins/language//DisplayLanguage.qml:118
+msgid "Confirm"
+msgstr "Jóváhagyás"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:34
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:40
+msgid "Language & Text"
+msgstr "Nyelv és szöveg"
+
+#: ../plugins/language//PageComponent.qml:100
+msgid "Display language…"
+msgstr "Megjelenítés nyelve"
+
+#: ../plugins/language//PageComponent.qml:117
+#: ../plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "Billentyűzetkiosztások"
+
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "Helyesírás-ellenőrzés"
+
+#: ../plugins/language//PageComponent.qml:152
+msgid "Auto correction"
+msgstr "Automatikus javítás"
+
+#: ../plugins/language//PageComponent.qml:162
+msgid "Word suggestions"
+msgstr "Szójavaslatok"
+
+#: ../plugins/language//PageComponent.qml:175
+msgid "Auto capitalization"
+msgstr "Automatikus nagybetűsítés"
+
+#: ../plugins/language//PageComponent.qml:185
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "A Shift bekapcsolása a mondatok kezdőbetűinek nagybetűsítésére."
+
+#: ../plugins/language//PageComponent.qml:192
+msgid "Auto punctuation"
+msgstr "Automatikus központozás"
+
+#: ../plugins/language//PageComponent.qml:202
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr ""
+"Új mondatot kezd és hozzáad minden hiányzó idézőjelet vagy zárójelet, ha "
+"megérinti kétszer a Szóközt."
+
+#: ../plugins/language//PageComponent.qml:209
+#: ../plugins/sound//PageComponent.qml:196
+msgid "Keyboard sound"
+msgstr "Billentyűzet hang"
+
+#: ../plugins/language//PageComponent.qml:219
+msgid "Keyboard vibration"
+msgstr "Billentyűzet rezgése"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "Jelenlegi kiosztások:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "Rendelkezésre álló kiosztások:"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "Jelenleg ellenőrzött nyelvek:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Rendelkezésre álló nyelvek:"
+
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr "Újraindítás most"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:37
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:58
+msgid "Sound"
+msgstr "Hang"
+
+#: ../plugins/sound//PageComponent.qml:76
+msgid "Silent Mode"
+msgstr "Csendes mód"
+
+#: ../plugins/sound//PageComponent.qml:80
+msgid "Ringer:"
+msgstr "Csengőhang:"
+
+#: ../plugins/sound//PageComponent.qml:112
+msgid "Phone calls:"
+msgstr "Hívások:"
+
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
+msgid "Ringtone"
+msgstr "Csengőhang"
+
+#: ../plugins/sound//PageComponent.qml:135
+msgid "Vibrate when ringing"
+msgstr "Csörgéskor rezegjen"
+
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
+msgid "Vibrate in Silent Mode"
+msgstr "Rezgés csendes módban"
+
+#: ../plugins/sound//PageComponent.qml:153
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr "Tárcsázó hangok"
+
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Messages:"
+msgstr "Üzenetek:"
+
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
+msgid "Message received"
+msgstr "Üzenet érkezett"
+
+#: ../plugins/sound//PageComponent.qml:179
+msgid "Vibrate with message sound"
+msgstr "Rezgés üzenethanggal"
+
+#: ../plugins/sound//PageComponent.qml:192
+msgid "Other sounds:"
+msgstr "Egyéb hangok:"
+
+#: ../plugins/sound//PageComponent.qml:210
+msgid "Lock sound"
+msgstr "Zárolási hang"
+
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "Lejátszás leállítása"
 
 #: ../plugins/sound//SilentModeWarning.qml:31
 msgid "The phone is in Silent Mode."
 msgstr "A telefon néma módban van."
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:54
-msgid "Sound"
-msgstr "Hang"
-
-#: ../plugins/sound//PageComponent.qml:75
-msgid "Silent Mode"
-msgstr "Csendes mód"
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr "Csengőhang:"
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr "Hívások:"
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr "Csengőhang"
-
-#: ../plugins/sound//PageComponent.qml:134
-msgid "Vibrate when ringing"
-msgstr "Csörgéskor rezeg"
-
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Vibrate in Silent Mode"
-msgstr "Rezgés csendes módban"
-
-#: ../plugins/sound//PageComponent.qml:147
-msgid "Messages:"
-msgstr "Üzenetek:"
-
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Message received"
-msgstr "Üzenet érkezett"
-
-#: ../plugins/sound//PageComponent.qml:169
-msgid "Vibrate with message sound"
-msgstr "Rezgés üzenethanggal"
-
-#: ../plugins/sound//PageComponent.qml:182
-msgid "Other sounds:"
-msgstr "Egyéb hangok:"
-
-#: ../plugins/sound//PageComponent.qml:186
-#: ../plugins/language//PageComponent.qml:161
-msgid "Keyboard sound"
-msgstr "Billentyűzet hang"
-
-#: ../plugins/sound//PageComponent.qml:200
-msgid "Lock sound"
-msgstr "Zárolási hang"
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr "Lejátszás leállítása"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:34
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:60
-msgid "Battery"
-msgstr "Akkumulátor"
-
-#. TRANSLATORS: %1 is the number of seconds
-#: ../plugins/battery//PageComponent.qml:46
-#, qt-format
-msgid "%1 second ago"
-msgid_plural "%1 seconds ago"
-msgstr[0] "%1 másodperce"
-msgstr[1] "%1 másodperce"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:49
-#, qt-format
-msgid "%1 minute ago"
-msgid_plural "%1 minutes ago"
-msgstr[0] "%1 perce"
-msgstr[1] "%1 perce"
-
-#. TRANSLATORS: %1 is the number of hours
-#: ../plugins/battery//PageComponent.qml:52
-#, qt-format
-msgid "%1 hour ago"
-msgid_plural "%1 hours ago"
-msgstr[0] "%1 órája"
-msgstr[1] "%1 órája"
-
-#. TRANSLATORS: %1 is the number of days
-#: ../plugins/battery//PageComponent.qml:55
-#, qt-format
-msgid "%1 day ago"
-msgid_plural "%1 days ago"
-msgstr[0] "%1 napja"
-msgstr[1] "%1 napja"
-
-#: ../plugins/battery//PageComponent.qml:75
-msgid "Charging now"
-msgstr "Töltés folyamatban"
-
-#: ../plugins/battery//PageComponent.qml:80
-msgid "Last full charge"
-msgstr "Utolsó teljes töltés"
-
-#: ../plugins/battery//PageComponent.qml:85
-msgid "Fully charged"
-msgstr "Teljesen feltöltve"
-
-#: ../plugins/battery//PageComponent.qml:111
-msgid "Charge level"
-msgstr "Töltöttségi szint"
-
-#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:120
-#, qt-format
-msgid "%1%"
-msgstr "%1%"
-
-#: ../plugins/battery//PageComponent.qml:195
-#: ../plugins/battery//PageComponent.qml:197
-msgid "Yesterday"
-msgstr "Tegnap"
-
-#: ../plugins/battery//PageComponent.qml:203
-#: ../plugins/battery//PageComponent.qml:205
-msgid "Today"
-msgstr "Ma"
-
-#: ../plugins/battery//PageComponent.qml:273
-msgid "Ways to reduce battery use:"
-msgstr "A merülés a következő módokon lassítható:"
-
-#: ../plugins/battery//PageComponent.qml:284
-#: ../plugins/security-privacy//PhoneLocking.qml:62
-msgid "Lock when idle"
-msgstr "Zárolás, ha inaktív"
-
-#: ../plugins/battery//PageComponent.qml:284
-#: ../plugins/security-privacy//PhoneLocking.qml:63
-msgid "Sleep when idle"
-msgstr "Altatás, ha inaktív"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:290
-#: ../plugins/battery//PageComponent.qml:299
-#: ../plugins/battery//SleepValues.qml:77
-#: ../plugins/battery//SleepValues.qml:81
-#: ../plugins/battery//SleepValues.qml:85
-#: ../plugins/battery//SleepValues.qml:89
-#: ../plugins/battery//SleepValues.qml:93
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "%1 perc után"
-msgstr[1] "%1 perc után"
-
-#: ../plugins/battery//PageComponent.qml:293
-#: ../plugins/battery//PageComponent.qml:302
-#: ../plugins/battery//SleepValues.qml:96
-#: ../plugins/about//PageComponent.qml:149
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//Configuration.qml:53
-#: ../plugins/system-update//PageComponent.qml:449
-msgid "Never"
-msgstr "Soha"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/wifi//PageComponent.qml:26
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:96
-msgid "Wi-Fi"
-msgstr "Wi-Fi"
-
-#: ../plugins/battery//PageComponent.qml:373
-msgid "GPS"
-msgstr "GPS"
-
-#: ../plugins/battery//PageComponent.qml:392
-msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "A pontos hely meghatározáshoz GPS vagy Wi-Fi szükséges."
-
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr "Telefon zárolása, ha nem aktív:"
-
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "Altassa el a telefont ha nem aktív:"
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-"Biztonságosabb kisebb értéket választani. A telefon nem kerül zárolásra "
-"telefonhívások vagy videó lejátszás közben."
-
-#: ../plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
-msgstr "A telefon nem alszik el telefonhívások vagy videó lejátszás közben."
-
-#: ../plugins/phone//CallForwarding.qml:28
-#: ../plugins/phone//CallForwarding.qml:75
-#: ../plugins/phone//PageComponent.qml:51
-msgid "Call forwarding"
-msgstr "Hívástovábbítás"
-
-#: ../plugins/phone//CallForwarding.qml:90
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"Egy másik számra irányítja a hívást, ha nem szeretné felvenni, foglalt a "
-"telefonja, ki van kapcsolva vagy nincs térerő."
-
-#: ../plugins/phone//CallForwarding.qml:100
-msgid "Forward to"
-msgstr "Továbbítás"
-
-#: ../plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr "SIM"
-
-#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
-#: ../plugins/phone//CallWaiting.qml:63
-msgid "Call waiting"
-msgstr "Hívásvárakoztatás"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
-#, qt-format
-msgid "%1 Services"
-msgstr "%1 szolgáltatások"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:64
+msgid "Phone"
+msgstr "Telefon"
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
@@ -643,7 +465,53 @@ msgstr "Utolsó hívás: %1"
 msgid "Call"
 msgstr "Hívás"
 
-#: ../plugins/phone//CallWaiting.qml:78
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//SingleSim.qml:33
+msgid "Call forwarding"
+msgstr "Hívástovábbítás"
+
+#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+msgid "Call waiting"
+msgstr "Hívásvárakoztatás"
+
+#: ../plugins/phone//MultiSim.qml:56 ../plugins/phone//MultiSim.qml:94
+#: ../plugins/phone//NoSims.qml:42
+msgid "Services"
+msgstr "Szolgáltatások"
+
+#: ../plugins/phone//CallForwarding.qml:91
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"Egy másik számra irányítja a hívást, ha nem szeretné felvenni, foglalt a "
+"telefonja, ki van kapcsolva vagy nincs térerő."
+
+#: ../plugins/phone//CallForwarding.qml:101
+msgid "Forward to"
+msgstr "Továbbítás"
+
+#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/security-privacy//LockSecurity.qml:304
+#: ../plugins/background//Preview.qml:108
+msgid "Set"
+msgstr "Beállítás"
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "SIM"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 szolgáltatások"
+
+#: ../plugins/phone//CallWaiting.qml:89
 msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
@@ -651,9 +519,118 @@ msgstr ""
 "Lehetővé teszi, hogy új hívást indítson vagy fogadjon egy másik hívás "
 "közben, és akár váltson is közöttük"
 
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr "Sajnáljuk, ez a licence nem jeleníthető meg."
+
+#: ../plugins/about//Version.qml:36
+msgid "OS Build Details"
+msgstr "Rendszer fordítás részletei"
+
+#: ../plugins/about//Version.qml:65
+msgid "OS build number"
+msgstr "Rendszer buildszám"
+
+#: ../plugins/about//Version.qml:71
+msgid "Ubuntu Image part"
+msgstr "Ubuntu lemezkép"
+
+#: ../plugins/about//Version.qml:79
+msgid "Ubuntu build description"
+msgstr "Ubuntu fordítási leírás"
+
+#: ../plugins/about//Version.qml:85
+msgid "Device Image part"
+msgstr "Eszköz lemezkép"
+
+#: ../plugins/about//Version.qml:92
+msgid "Device build description"
+msgstr "Eszköz fordítási leírás"
+
+#: ../plugins/about//Version.qml:99
+msgid "Customization Image part"
+msgstr "Testreszabási lemezkép"
+
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr "Telefonszám:"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:70
+msgid "About this phone"
+msgstr "A telefon névjegye"
+
+#: ../plugins/about//PageComponent.qml:109
+msgid "Serial"
+msgstr "Sorozatszám"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr "Wi-Fi cím"
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr "Bluetooth cím"
+
+#: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
 msgid "Storage"
-msgstr "Tároló"
+msgstr "Tárhely"
+
+#: ../plugins/about//PageComponent.qml:150
+msgid "Software:"
+msgstr "Szoftver:"
+
+#: ../plugins/about//PageComponent.qml:155
+msgid "OS"
+msgstr "Rendszer"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Last updated"
+msgstr "Utolsó frissítés"
+
+#: ../plugins/about//PageComponent.qml:172
+msgid "Check for updates"
+msgstr "Frissítések keresése"
+
+#: ../plugins/about//PageComponent.qml:181
+msgid "Legal:"
+msgstr "Jogi információk:"
+
+#: ../plugins/about//PageComponent.qml:186 ../plugins/about//Software.qml:11
+msgid "Software licenses"
+msgstr "Szoftver licencek"
+
+#: ../plugins/about//PageComponent.qml:194
+msgid "Regulatory info"
+msgstr "Szabályozási információk"
+
+#: ../plugins/about//PageComponent.qml:202
+msgid "Developer mode"
+msgstr "Fejlesztői mód"
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
+msgid "Developer Mode"
+msgstr "Fejlesztői mód"
+
+#: ../plugins/about//DevMode.qml:82
+msgid ""
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
+msgstr ""
+"Fejlesztői módban bárki hozzáférhet, megváltoztat vagy törölhet bármit a "
+"telefonjáról egy csatlakoztatott eszköz segítségével."
+
+#: ../plugins/about//DevMode.qml:108
+msgid "You need a PIN code or passphrase set to use Developer Mode."
+msgstr ""
+"A fejlesztői mód használatához PIN kódra vagy jelmondatra van szüksége."
+
+#: ../plugins/about//DevMode.qml:114
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../plugins/security-privacy//LockSecurity.qml:32
+msgid "Lock security"
+msgstr "Képernyőzárolás"
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
@@ -695,370 +672,23 @@ msgstr "Név szerint"
 msgid "By size"
 msgstr "Méret szerint"
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:88
-msgid "About this phone"
-msgstr "A telefon névjegye"
-
-#: ../plugins/about//PageComponent.qml:97
+#: ../plugins/about//PhoneNumber.qml:36
 msgid "Phone number"
 msgstr "Telefonszám"
 
-#: ../plugins/about//PageComponent.qml:107
-msgid "Serial"
-msgstr "Sorozatszám"
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:96
+msgid "Notifications"
+msgstr "Értesítések"
 
-#: ../plugins/about//PageComponent.qml:133
-msgid "Software:"
-msgstr "Szoftver:"
-
-#: ../plugins/about//PageComponent.qml:138
-msgid "OS"
-msgstr "Rendszer"
-
-#: ../plugins/about//PageComponent.qml:147
-msgid "Last updated"
-msgstr "Utolsó frissítés"
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "Check for updates"
-msgstr "Frissítések keresése"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Legal:"
-msgstr "Jogi információk:"
-
-#: ../plugins/about//PageComponent.qml:169 ../plugins/about//Software.qml:11
-msgid "Software licenses"
-msgstr "Szoftver licencek"
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Regulatory info"
-msgstr "Szabályozási információk"
-
-#: ../plugins/about//PageComponent.qml:185
-msgid "Developer mode"
-msgstr "Fejlesztői mód"
-
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr "Rendszer fordítás részletei"
-
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr "Rendszer buildszám"
-
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr "Ubuntu lemezkép"
-
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr "Ubuntu fordítási leírás"
-
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr "Eszköz lemezkép"
-
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr "Eszköz fordítási leírás"
-
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr "Testreszabási lemezkép"
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
-msgid "Developer Mode"
-msgstr "Fejlesztői mód"
-
-#: ../plugins/about//DevMode.qml:73
+#: ../plugins/notifications//PageComponent.qml:40
 msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
 msgstr ""
-
-#: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:104
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/security-privacy//PageComponent.qml:82
-#: ../plugins/security-privacy//PhoneLocking.qml:44
-msgid "Lock security"
-msgstr "Képernyőzár"
-
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr "Hálózat részletei"
-
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr "Legutóbb csatlakozott"
-
-#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
-msgid "Password"
-msgstr "Jelszó"
-
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr "Jelszó megjelenítése"
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr "Hálózat elfelejtése"
-
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr "Korábbi hálózatok"
-
-#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
-msgstr "Más hálózat"
-
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr "Hálózatnév"
-
-#: ../plugins/wifi//OtherNetwork.qml:66
-msgid "Security"
-msgstr "Biztonság"
-
-#: ../plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
-msgstr "WPA és személyes WPA2"
-
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr "WEP"
-
-#: ../plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
-msgstr "A jelszó látható"
-
-#: ../plugins/system-update//Configuration.qml:30
-#: ../plugins/system-update//PageComponent.qml:446
-msgid "Auto download"
-msgstr "Automatikus letöltés"
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "Frissítések automatikus letöltése:"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "Wi-Fi hálózaton"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "Bármely adatkapcsolaton"
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "Adatforgalmi díja lehet!"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:110
-msgid "Updates"
-msgstr "Frissítések"
-
-#: ../plugins/system-update//PageComponent.qml:51
-msgid "Update System"
-msgstr "Rendszer frissítése"
-
-#: ../plugins/system-update//PageComponent.qml:52
-msgid "The phone needs to restart to install the system update."
-msgstr "A telefon újraindítást igényel a rendszerfrissítés telepítéséhez."
-
-#: ../plugins/system-update//PageComponent.qml:55
-msgid "Install & Restart"
-msgstr "Telepítés és újraindítás"
-
-#: ../plugins/system-update//PageComponent.qml:64
-msgid "Not Now"
-msgstr "Most nem"
-
-#: ../plugins/system-update//PageComponent.qml:70
-msgid "Install"
-msgstr "Telepítés"
-
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "Software is up to date"
-msgstr "A szoftver naprakész"
-
-#: ../plugins/system-update//PageComponent.qml:142
-msgid "Please log into your Ubuntu One account."
-msgstr "Jelentkezzen be az Ubuntu One fiókjába."
-
-#: ../plugins/system-update//PageComponent.qml:157
-msgid "System update has failed."
-msgstr "A rendszerfrissítés nem sikerült."
-
-#: ../plugins/system-update//PageComponent.qml:168
-msgid "System update failed."
-msgstr "A rendszerfrissítés nem sikerült."
-
-#: ../plugins/system-update//PageComponent.qml:199
-msgid "Checking for updates…"
-msgstr "Frissítések keresése…"
-
-#: ../plugins/system-update//PageComponent.qml:217
-#, qt-format
-msgid "Install %1 updates…"
-msgstr "%1 frissítés telepítése…"
-
-#: ../plugins/system-update//PageComponent.qml:217
-#, qt-format
-msgid "Install %1 updates"
-msgstr "%1 frissítés telepítése"
-
-#: ../plugins/system-update//PageComponent.qml:218
-msgid "Pause All"
-msgstr "Összes szüneteltetése"
-
-#: ../plugins/system-update//PageComponent.qml:287
-msgid "Retry"
-msgstr "Újra"
-
-#: ../plugins/system-update//PageComponent.qml:303
-msgid "Download"
-msgstr "Letöltés"
-
-#: ../plugins/system-update//PageComponent.qml:303
-msgid "Update"
-msgstr "Frissítés"
-
-#: ../plugins/system-update//PageComponent.qml:304
-msgid "Resume"
-msgstr "Folytatás"
-
-#: ../plugins/system-update//PageComponent.qml:305
-msgid "Pause"
-msgstr "Szünet"
-
-#: ../plugins/system-update//PageComponent.qml:364
-msgid "Installing"
-msgstr "Telepítés"
-
-#: ../plugins/system-update//PageComponent.qml:397
-msgid "Installed"
-msgstr "Telepítve"
-
-#: ../plugins/system-update//PageComponent.qml:421
-msgid "Version: "
-msgstr "Verzió: "
-
-#: ../plugins/system-update//PageComponent.qml:451
-msgid "On wi-fi"
-msgstr "Wi-Fi hálózaton"
-
-#: ../plugins/system-update//PageComponent.qml:453
-msgid "Always"
-msgstr "Mindig"
-
-#: ../plugins/system-update//PageComponent.qml:505
-msgid "Credentials not found"
-msgstr "Nem találhatók hitelesítési adatok"
-
-#: ../plugins/system-update//PageComponent.qml:535
-msgid "Installing update…"
-msgstr "Frissítés telepítése…"
-
-#: ../plugins/system-update//PageComponent.qml:549
-msgid " bytes"
-msgstr " bájt"
-
-#: ../plugins/system-update//PageComponent.qml:552
-msgid " KiB"
-msgstr " KiB"
-
-#: ../plugins/system-update//PageComponent.qml:555
-msgid " MiB"
-msgstr " MiB"
-
-#: ../plugins/system-update//PageComponent.qml:558
-msgid " GiB"
-msgstr " GiB"
-
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:101
-#: ../plugins/language//PageComponent.qml:111
-msgid "Spell checking"
-msgstr "Helyesírás-ellenőrzés"
-
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "Jelenleg ellenőrzött nyelvek:"
-
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "Rendelkezésre álló nyelvek:"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:32
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:120
-msgid "Language & Text"
-msgstr "Nyelv és szöveg"
-
-#: ../plugins/language//PageComponent.qml:72
-msgid "Display language…"
-msgstr "Megjelenítési nyelv…"
-
-#: ../plugins/language//PageComponent.qml:86
-#: ../plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "Billentyűzetkiosztások"
-
-#: ../plugins/language//PageComponent.qml:121
-msgid "Auto completion"
-msgstr "Automatikus kiegészítés"
-
-#: ../plugins/language//PageComponent.qml:131
-msgid "Word suggestions"
-msgstr "Szójavaslatok"
-
-#: ../plugins/language//PageComponent.qml:144
-msgid "Auto capitalization"
-msgstr "Automatikus nagybetűsítés"
-
-#: ../plugins/language//PageComponent.qml:154
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "A Shift bekapcsolása a mondatok kezdőbetűinek nagybetűsítésére."
-
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "Jelenlegi kiosztások:"
-
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "Rendelkezésre álló kiosztások:"
-
-#: ../plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr "A megjelenítés nyelve"
-
-#: ../plugins/language//DisplayLanguage.qml:114
-msgid "Confirm"
-msgstr "Jóváhagyás"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:130
-msgid "Time & Date"
-msgstr "Dátum és idő"
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "Időzóna:"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "Dátum és idő beállítása:"
+"A kiválasztott alkalmazások értesíthetik Önt értesítési buborékon, hangon, "
+"rezgésen vagy az Értesítési központon keresztül."
 
 #: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
@@ -1096,6 +726,20 @@ msgstr "Hónap"
 msgid "Year"
 msgstr "Év"
 
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:104
+msgid "Time & Date"
+msgstr "Dátum és idő"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Időzóna:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Dátum és idő beállítása:"
+
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
 msgstr "Időzóna"
@@ -1112,203 +756,224 @@ msgstr "Adja meg a jelenlegi helyzetét!"
 msgid "No matching place"
 msgstr "Nincs találat"
 
-#: ../plugins/security-privacy//LockSecurity.qml:92
-msgid "Change passcode"
-msgstr "Jelkód megváltoztatása"
+#: ../plugins/security-privacy//AppAccess.qml:28
+#: ../plugins/security-privacy//PageComponent.qml:253
+msgid "Other app access"
+msgstr "Egyéb alkalmazás hozzáférés"
 
-#: ../plugins/security-privacy//LockSecurity.qml:94
-msgid "Change passphrase"
-msgstr "Jelmondat megváltoztatása"
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr "Alkalmazások amelyek hozzáférhetnek a következőkhöz:"
 
-#: ../plugins/security-privacy//LockSecurity.qml:101
-msgid "Switch to swipe"
-msgstr "Csúsztatásra váltás"
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:105
+msgid "Camera"
+msgstr "Kamera"
 
-#: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr "Jelkódra váltás"
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr "Alkalmazások amelyek hozzáférhetnek a kamerához"
 
-#: ../plugins/security-privacy//LockSecurity.qml:105
-msgid "Switch to passphrase"
-msgstr "Jelmondatra váltás"
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr "Mikrofon"
 
-#: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr "Korábbi jelkód"
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr "Alkalmazások, melyek hozzáférhetnek a mikrofonhoz"
 
-#: ../plugins/security-privacy//LockSecurity.qml:116
-msgid "Existing passphrase"
-msgstr "Korábbi jelmondat"
+#: ../plugins/security-privacy//AppAccess.qml:59
+#, qt-format
+msgid "%1/%2"
+msgstr "%1/%2"
 
-#: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr "Válasszon jelkódot"
-
-#: ../plugins/security-privacy//LockSecurity.qml:172
-msgid "Choose passphrase"
-msgstr "Válasszon jelmondatot"
-
-#: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr "Jelkód megerősítése"
-
-#: ../plugins/security-privacy//LockSecurity.qml:218
-msgid "Confirm passphrase"
-msgstr "Jelmondat megerősítése"
-
-#: ../plugins/security-privacy//LockSecurity.qml:260
-msgid "Those passcodes don't match. Try again."
-msgstr "A jelkódok nem egyeznek. Próbálja újra!"
-
-#: ../plugins/security-privacy//LockSecurity.qml:263
-msgid "Those passphrases don't match. Try again."
-msgstr "A jelmondatok nem egyeznek. Próbálja újra!"
-
-#: ../plugins/security-privacy//LockSecurity.qml:294
-msgid "Unset"
-msgstr "Elfelejt"
-
-#: ../plugins/security-privacy//LockSecurity.qml:339
-msgid "Unlock the phone using:"
-msgstr "A telefon feloldása az alábbival:"
-
-#: ../plugins/security-privacy//LockSecurity.qml:343
-msgid "Swipe (no security)"
-msgstr "Csúsztatás (nincs zárolás)"
-
-#: ../plugins/security-privacy//LockSecurity.qml:344
-msgid "4-digit passcode"
-msgstr "4 jegyű jelkód"
-
-#: ../plugins/security-privacy//LockSecurity.qml:345
-#: ../plugins/security-privacy//PageComponent.qml:80
-#: ../plugins/security-privacy//PhoneLocking.qml:42
-msgid "Passphrase"
-msgstr "Jelmondat"
-
-#: ../plugins/security-privacy//LockSecurity.qml:346
-msgid "Swipe (no security)… "
-msgstr "Csúsztatás (nincs zárolás)… "
-
-#: ../plugins/security-privacy//LockSecurity.qml:347
-msgid "4-digit passcode…"
-msgstr "4 jegyű jelkód…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "Passphrase…"
-msgstr "Jelmondat…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:379
-msgid "Change passcode…"
-msgstr "Jelkód módosítása…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passphrase…"
-msgstr "Jelmondat módosítása…"
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr "0"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:33
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:140
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:114
 msgid "Security & Privacy"
 msgstr "Biztonság és magánszféra"
 
-#: ../plugins/security-privacy//PageComponent.qml:50
-#: ../plugins/security-privacy//PageComponent.qml:150
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
 msgstr "Telefon és internet"
 
-#: ../plugins/security-privacy//PageComponent.qml:52
-#: ../plugins/security-privacy//PageComponent.qml:151
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone only"
 msgstr "Csak telefon"
 
-#: ../plugins/security-privacy//PageComponent.qml:71
-msgid "Security:"
-msgstr "Biztonság:"
-
-#: ../plugins/security-privacy//PageComponent.qml:79
-#: ../plugins/security-privacy//PhoneLocking.qml:41
-msgid "Passcode"
-msgstr "Jelkód"
-
-#: ../plugins/security-privacy//PageComponent.qml:99
-#: ../plugins/security-privacy//PhoneLocking.qml:29
-msgid "Phone locking"
+#: ../plugins/security-privacy//PageComponent.qml:131
+msgid "Lock phone"
 msgstr "Telefon lezárása"
 
 #. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:101
-#: ../plugins/security-privacy//PhoneLocking.qml:65
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
 #, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 perc"
-msgstr[1] "%1 perc"
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "%1 perc után"
+msgstr[1] "%1 perc után"
 
-#: ../plugins/security-privacy//PageComponent.qml:110
+#: ../plugins/security-privacy//PageComponent.qml:158
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:319
 msgid "SIM PIN"
-msgstr "SIM PIN"
+msgstr "SIM PIN kód"
 
-#: ../plugins/security-privacy//PageComponent.qml:116
-msgid "Privacy:"
-msgstr "Magánszféra:"
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:244
+msgid "On"
+msgstr "Bekapcsolás"
 
-#: ../plugins/security-privacy//PageComponent.qml:120
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+msgid "Off"
+msgstr "Kikapcsolva"
+
+#: ../plugins/security-privacy//PageComponent.qml:172
+msgid "Encryption"
+msgstr "Titkosítás"
+
+#: ../plugins/security-privacy//PageComponent.qml:181
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
+"A titkosítás védi a telefonja adatait, ha az egy másik telefonhoz, "
+"számítógéphez vagy egyéb eszközhöz van csatlakoztatva."
+
+#: ../plugins/security-privacy//PageComponent.qml:185
+msgid "Privacy"
+msgstr "Adatvédelem"
+
+#: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
 msgstr "Statisztikák az üdvözlő képernyőn"
 
-#: ../plugins/security-privacy//PageComponent.qml:133
+#: ../plugins/security-privacy//PageComponent.qml:201
 msgid "Messages on welcome screen"
 msgstr "Üzenetek az üdvözlő képernyőn"
 
-#: ../plugins/security-privacy//PageComponent.qml:148
+#: ../plugins/security-privacy//PageComponent.qml:216
 #: ../plugins/security-privacy//Dash.qml:29
 msgid "Dash search"
 msgstr "Dash keresés"
 
-#: ../plugins/security-privacy//PageComponent.qml:166
+#: ../plugins/security-privacy//PageComponent.qml:235
 msgid "Location access"
 msgstr "Hely hozzáférés"
 
-#: ../plugins/security-privacy//PageComponent.qml:174
-msgid "Other app access"
-msgstr "Egyéb alkalmazás hozzáférés"
-
-#: ../plugins/security-privacy//PageComponent.qml:179
+#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
 msgstr "Diagnosztika"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:184
+#: ../plugins/security-privacy//PageComponent.qml:263
 msgid "Sent"
 msgstr "Elküldve"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:187
+#: ../plugins/security-privacy//PageComponent.qml:266
 msgid "Not sent"
 msgstr "Nincs elküldve"
 
-#: ../plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
-msgstr "Altatáskor azonnali zárolás"
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr "SIM kártya PIN megváltoztatása"
 
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "Találatok innen:"
+#: ../plugins/security-privacy//SimPin.qml:47
+#: ../plugins/security-privacy//SimPin.qml:184
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr "Helytelen PIN. %1 próbálkozása maradt."
 
-#: ../plugins/security-privacy//Location.qml:30
+#: ../plugins/security-privacy//SimPin.qml:79
+msgid "Current PIN:"
+msgstr "Jelenlegi PIN:"
+
+#: ../plugins/security-privacy//SimPin.qml:91
+#: ../plugins/security-privacy//SimPin.qml:243
+#, qt-format
+msgid "%1 attempts allowed."
+msgstr "%1 próbálkozás engedélyezett."
+
+#: ../plugins/security-privacy//SimPin.qml:104
+msgid "Choose new PIN:"
+msgstr "Új PIN megadása:"
+
+#: ../plugins/security-privacy//SimPin.qml:115
+msgid "Confirm new PIN:"
+msgstr "ÚJ PIN megerősítése:"
+
+#: ../plugins/security-privacy//SimPin.qml:134
+msgid "PINs don't match. Try again."
+msgstr "Nem egyeznek. Próbálja újra."
+
+#: ../plugins/security-privacy//SimPin.qml:180
+msgid "Enter SIM PIN"
+msgstr "Adja meg a SIM PIN kódját"
+
+#: ../plugins/security-privacy//SimPin.qml:181
+msgid "Enter Previous SIM PIN"
+msgstr "A korábbi SIM PIN kód:"
+
+#: ../plugins/security-privacy//SimPin.qml:279
+msgid "Unlock"
+msgstr "Feloldás"
+
+#: ../plugins/security-privacy//SimPin.qml:279
+msgid "Lock"
+msgstr "Lezárás"
+
+#: ../plugins/security-privacy//SimPin.qml:337
+msgid "Change PIN…"
+msgstr "PIN megváltoztatása…"
+
+#: ../plugins/security-privacy//SimPin.qml:354
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+"Ha a SIM kód beállításra kerül, utána minden SIM csere vagy újraindítás után "
+"szükséges lesz a megadása a mobilszolgáltatások eléréséhez."
+
+#: ../plugins/security-privacy//SimPin.qml:358
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr ""
+"Többszöri helytelen PIN kód megadás a SIM végleges zárolásához vezethet."
+
+#: ../plugins/security-privacy//Location.qml:31
+#: ../wizard/qml/Pages//30-location.qml:25
 msgid "Location"
-msgstr "Hely"
+msgstr "Tartózkodási hely"
 
-#: ../plugins/security-privacy//Location.qml:48
+#: ../plugins/security-privacy//Location.qml:49
 msgid "Location detection"
 msgstr "Helymeghatározás"
 
-#: ../plugins/security-privacy//Location.qml:70
+#: ../plugins/security-privacy//Location.qml:71
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
@@ -1316,7 +981,7 @@ msgstr ""
 "A GPS-t használja a helyzetének durva meghatározásához. Ha ki van kapcsolva, "
 "kikapcsolja a GPS-t az akkumulátor kímélése érdekében."
 
-#: ../plugins/security-privacy//Location.qml:72
+#: ../plugins/security-privacy//Location.qml:73
 msgid ""
 "Uses wi-fi and GPS to detect your rough location. Turning off location "
 "detection saves battery."
@@ -1324,7 +989,7 @@ msgstr ""
 "Wi-Fi és GPS használata a hely durva meghatározásához. A hely meghatározás "
 "kikapcsolása kíméli az akkumulátort."
 
-#: ../plugins/security-privacy//Location.qml:74
+#: ../plugins/security-privacy//Location.qml:75
 msgid ""
 "Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
 "off location detection saves battery."
@@ -1332,7 +997,7 @@ msgstr ""
 "Wi-Fi (jelenleg ki van kapcsolva) és GPS használata a hely durva "
 "meghatározásához. A hely meghatározás kikapcsolása kíméli az akkumulátort."
 
-#: ../plugins/security-privacy//Location.qml:76
+#: ../plugins/security-privacy//Location.qml:77
 msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
@@ -1340,7 +1005,7 @@ msgstr ""
 "Wi-Fi, mobil tornyok helyzetének és GPS használata a hely durva "
 "meghatározásához. A hely meghatározás kikapcsolása kíméli az akkumulátort."
 
-#: ../plugins/security-privacy//Location.qml:78
+#: ../plugins/security-privacy//Location.qml:79
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
@@ -1349,7 +1014,7 @@ msgstr ""
 "GPS használata a hely durva meghatározásához. A hely meghatározás "
 "kikapcsolása kíméli az akkumulátort."
 
-#: ../plugins/security-privacy//Location.qml:80
+#: ../plugins/security-privacy//Location.qml:81
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
@@ -1358,7 +1023,7 @@ msgstr ""
 "használata a hely durva meghatározásához. A hely meghatározás kikapcsolása "
 "kíméli az akkumulátort."
 
-#: ../plugins/security-privacy//Location.qml:82
+#: ../plugins/security-privacy//Location.qml:83
 msgid ""
 "Uses wi-fi (currently off), cell tower locations (no current cellular "
 "connection), and GPS to detect your rough location. Turning off location "
@@ -1368,64 +1033,608 @@ msgstr ""
 "elérhető a mobil hálózat) és GPS használata a hely durva meghatározásához. A "
 "hely meghatározás kikapcsolása kíméli az akkumulátort."
 
-#: ../plugins/security-privacy//Location.qml:89
+#: ../plugins/security-privacy//Location.qml:90
 msgid "Allow access to location:"
 msgstr "Hely információ elérésének engedélyezése:"
 
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:148
-msgid "Reset phone"
-msgstr "Telefon visszaállítása"
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "Találatok innen:"
 
-#: ../plugins/reset//PageComponent.qml:73
-#: ../plugins/reset//ResetLauncherHome.qml:44
-msgid "Reset Launcher"
-msgstr "Indító visszaállítása"
+#: ../plugins/security-privacy//PhoneLocking.qml:31
+msgid "Phone locking"
+msgstr "Telefon lezárása"
 
-#: ../plugins/reset//PageComponent.qml:87
-msgid "Reset all system settings…"
-msgstr "Minden rendszerbeállítás visszaállítása…"
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr "Nincs"
 
-#: ../plugins/reset//PageComponent.qml:101
-msgid "Erase & Reset Everything…"
-msgstr "Minden visszaállítása és törlése…"
+#: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//15-passwd.qml:99
+msgid "PIN code"
+msgstr "PIN kód"
 
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr "Visszaállítja az Indító eredeti állapotát."
+#: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../wizard/qml/Pages//15-passwd.qml:101
+msgid "Passphrase"
+msgstr "Jelmondat"
 
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr "A telefont újra kell indítania a változtatások életbe léptetéséhez."
+#: ../plugins/security-privacy//PhoneLocking.qml:68
+#: ../plugins/battery//PageComponent.qml:306
+msgid "Lock when idle"
+msgstr "Zárolás, ha inaktív"
 
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
+#: ../plugins/security-privacy//PhoneLocking.qml:69
+#: ../plugins/battery//PageComponent.qml:306
+msgid "Sleep when idle"
+msgstr "Altatás, ha inaktív"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:75
+#: ../plugins/security-privacy//PhoneLocking.qml:84
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 perc"
+msgstr[1] "%1 perc"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:101
+msgid "Sleep locks immediately"
+msgstr "Altatáskor azonnali zárolás"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr "A telefont lezárva is legyenek engedélyezve:"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr "Indító"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr "Értesítések és gyors beállítások"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
-"A tartalmak és az indító elrendezése, valamint a kezdő képernyőn lévő szűrők "
-"vissza lesznek állítva az eredeti beállításukra."
+"Kapcsolja be a képernyőzárolást, hogy korlátozza a hozzáférést lezárt "
+"telefon esetén."
 
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "Minden rendszerbeállítás visszaállítása"
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr "Más alkalmazások és funkciók engedélyt fognak kérni a feloldáshoz."
 
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
+msgid "Change PIN code…"
+msgstr "PIN kód megváltoztatása"
+
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
+msgid "Change passphrase…"
+msgstr "Jelmondat módosítása"
+
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to swipe"
+msgstr "Csúsztatásra váltás"
+
+#: ../plugins/security-privacy//LockSecurity.qml:107
+msgid "Switch to PIN code"
+msgstr "PIN kódra váltás"
+
+#: ../plugins/security-privacy//LockSecurity.qml:109
+msgid "Switch to passphrase"
+msgstr "Jelmondatra váltás"
+
+#: ../plugins/security-privacy//LockSecurity.qml:118
+msgid "Existing PIN code"
+msgstr "Jelenlegi PIN kód"
+
+#: ../plugins/security-privacy//LockSecurity.qml:120
+msgid "Existing passphrase"
+msgstr "Korábbi jelmondat"
+
+#: ../plugins/security-privacy//LockSecurity.qml:174
+msgid "Choose PIN code"
+msgstr "PIN kód megadása"
+
+#: ../plugins/security-privacy//LockSecurity.qml:176
+msgid "Choose passphrase"
+msgstr "Válasszon jelmondatot"
+
+#: ../plugins/security-privacy//LockSecurity.qml:220
+msgid "Confirm PIN code"
+msgstr "PIN kód megerősítése"
+
+#: ../plugins/security-privacy//LockSecurity.qml:222
+msgid "Confirm passphrase"
+msgstr "Jelmondat megerősítése"
+
+#: ../plugins/security-privacy//LockSecurity.qml:265
+msgid "Those PIN codes don't match. Try again."
+msgstr "A megadott PIN kódok nem egyeznek. Próbálja újra."
+
+#: ../plugins/security-privacy//LockSecurity.qml:268
+msgid "Those passphrases don't match. Try again."
+msgstr "A jelmondatok nem egyeznek. Próbálja újra!"
+
+#: ../plugins/security-privacy//LockSecurity.qml:299
+msgid "Unset"
+msgstr "Elfelejt"
+
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "Unlock the phone using:"
+msgstr "Telefon feloldása az alábbi módon:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "Swipe (no security)"
+msgstr "Csúsztatás (nincs zárolás)"
+
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "4-digit PIN code"
+msgstr "4 jegyű PIN kód"
+
+#: ../plugins/security-privacy//LockSecurity.qml:351
+msgid "Swipe (no security)… "
+msgstr "Csúsztatás (nincs zárolás) "
+
+#: ../plugins/security-privacy//LockSecurity.qml:352
+msgid "4-digit PIN code…"
+msgstr "4 jegyű PIN kód"
+
+#: ../plugins/security-privacy//LockSecurity.qml:353
+msgid "Passphrase…"
+msgstr "Jelmondat"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:36
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:124
+msgid "Updates"
+msgstr "Frissítések"
+
+#: ../plugins/system-update//PageComponent.qml:87
+msgid "Update System"
+msgstr "Rendszer frissítése"
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "The phone needs to restart to install the system update."
+msgstr "A telefon újraindítást igényel a rendszerfrissítés telepítéséhez."
+
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
 msgstr ""
-"Minden dokumentum, elmentett játék, beállítás és egyéb dolog véglegesen "
-"törölve lesz a telefonról."
+"Csatlakoztassa a töltőt, mielőtt elkezdené telepíteni a rendszerfrissítést."
 
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr "Minden visszaállítása és törlése"
+#: ../plugins/system-update//PageComponent.qml:91
+msgid "Install & Restart"
+msgstr "Telepítés és újraindítás"
+
+#: ../plugins/system-update//PageComponent.qml:101
+msgid "Not Now"
+msgstr "Most nem"
+
+#: ../plugins/system-update//PageComponent.qml:107
+msgid "Install"
+msgstr "Telepítés"
+
+#: ../plugins/system-update//PageComponent.qml:128
+msgid "Software is up to date"
+msgstr "A szoftver naprakész"
+
+#: ../plugins/system-update//PageComponent.qml:239
+msgid "Checking for updates…"
+msgstr "Frissítések keresése…"
+
+#: ../plugins/system-update//PageComponent.qml:257
+#, qt-format
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] "%1 frissítés telepítése…"
+msgstr[1] "%1 frissítés telepítése…"
+
+#: ../plugins/system-update//PageComponent.qml:258
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] "%1 frissítés telepítése"
+msgstr[1] "%1 frissítés telepítése"
+
+#: ../plugins/system-update//PageComponent.qml:259
+msgid "Pause All"
+msgstr "Összes szüneteltetése"
+
+#: ../plugins/system-update//PageComponent.qml:313
+msgid "Retry"
+msgstr "Újra"
+
+#: ../plugins/system-update//PageComponent.qml:329
+msgid "Download"
+msgstr "Letöltés"
+
+#: ../plugins/system-update//PageComponent.qml:329
+msgid "Update"
+msgstr "Frissítés"
+
+#: ../plugins/system-update//PageComponent.qml:330
+msgid "Resume"
+msgstr "Folytatás"
+
+#: ../plugins/system-update//PageComponent.qml:331
+msgid "Pause"
+msgstr "Szünet"
+
+#: ../plugins/system-update//PageComponent.qml:389
+msgid "Installing"
+msgstr "Telepítés"
+
+#: ../plugins/system-update//PageComponent.qml:422
+msgid "Installed"
+msgstr "Telepítve"
+
+#: ../plugins/system-update//PageComponent.qml:447
+msgid "Version: "
+msgstr "Verzió: "
+
+#: ../plugins/system-update//PageComponent.qml:469
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr "Jelentkezzen be az Ubuntu One fiókjába az alkalmazás frissítéseihez."
+
+#: ../plugins/system-update//PageComponent.qml:478
+msgid "Sign In…"
+msgstr "Bejelentkezés"
+
+#: ../plugins/system-update//PageComponent.qml:545
+msgid "Installing update…"
+msgstr "Frissítés telepítése…"
+
+#: ../plugins/system-update//PageComponent.qml:560
+#: ../plugins/system-update//Configuration.qml:30
+msgid "Auto download"
+msgstr "Automatikus letöltés"
+
+#: ../plugins/system-update//PageComponent.qml:565
+msgid "On wi-fi"
+msgstr "Wi-Fi hálózaton"
+
+#: ../plugins/system-update//PageComponent.qml:567
+msgid "Always"
+msgstr "Mindig"
+
+#: ../plugins/system-update//PageComponent.qml:582
+msgid " bytes"
+msgstr " bájt"
+
+#: ../plugins/system-update//PageComponent.qml:585
+msgid " KiB"
+msgstr " KiB"
+
+#: ../plugins/system-update//PageComponent.qml:588
+msgid " MiB"
+msgstr " MiB"
+
+#: ../plugins/system-update//PageComponent.qml:591
+msgid " GiB"
+msgstr " GiB"
+
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr "Frissítések automatikus letöltése:"
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr "Wi-Fi hálózaton"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr "Bármely adatkapcsolaton"
+
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr "Adatforgalmi díja lehet!"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "Bluetooth párosítási kérés"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "„%1” PIN kódja"
+
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+msgid "Pair"
+msgstr "Párosítás"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: ../plugins/battery//PageComponent.qml:363
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:134
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../plugins/bluetooth//PageComponent.qml:82
+msgid "Connected"
+msgstr "Csatlakozva"
+
+#: ../plugins/bluetooth//PageComponent.qml:83
+msgid "Connecting…"
+msgstr "Csatlakozás…"
+
+#: ../plugins/bluetooth//PageComponent.qml:84
+msgid "Disconnecting…"
+msgstr "Leválasztás…"
+
+#: ../plugins/bluetooth//PageComponent.qml:85
+msgid "Disconnected"
+msgstr "Leválasztva"
+
+#: ../plugins/bluetooth//PageComponent.qml:86
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Computer"
+msgstr "Számítógép"
+
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Modem"
+msgstr "Modem"
+
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
+msgid "Network"
+msgstr "Hálózat"
+
+#: ../plugins/bluetooth//PageComponent.qml:96
+msgid "Headset"
+msgstr "Fejhallgató"
+
+#: ../plugins/bluetooth//PageComponent.qml:97
+msgid "Headphones"
+msgstr "Fülhallgatók"
+
+#: ../plugins/bluetooth//PageComponent.qml:98
+msgid "Video"
+msgstr "Videó"
+
+#: ../plugins/bluetooth//PageComponent.qml:99
+msgid "Other Audio"
+msgstr "Egyéb hang"
+
+#: ../plugins/bluetooth//PageComponent.qml:100
+msgid "Joypad"
+msgstr "Játékvezérlő"
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Keyboard"
+msgstr "Billentyűzet"
+
+#: ../plugins/bluetooth//PageComponent.qml:102
+msgid "Tablet"
+msgstr "Táblagép"
+
+#: ../plugins/bluetooth//PageComponent.qml:103
+msgid "Mouse"
+msgstr "Egér"
+
+#: ../plugins/bluetooth//PageComponent.qml:104
+msgid "Printer"
+msgstr "Nyomtató"
+
+#: ../plugins/bluetooth//PageComponent.qml:106
+msgid "Other"
+msgstr "Egyéb"
+
+#: ../plugins/bluetooth//PageComponent.qml:112
+msgid "Excellent"
+msgstr "Kiváló"
+
+#: ../plugins/bluetooth//PageComponent.qml:113
+msgid "Good"
+msgstr "Jó"
+
+#: ../plugins/bluetooth//PageComponent.qml:114
+msgid "Fair"
+msgstr "Elfogadható"
+
+#: ../plugins/bluetooth//PageComponent.qml:115
+msgid "Poor"
+msgstr "Gyenge"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Discoverable"
+msgstr "Észlelhető"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Not discoverable"
+msgstr "Nem észlelhető"
+
+#: ../plugins/bluetooth//PageComponent.qml:213
+msgid "Connected devices:"
+msgstr "Csatlakoztatott eszközök:"
+
+#: ../plugins/bluetooth//PageComponent.qml:250
+msgid "Connect another device:"
+msgstr "Egyéb eszköz csatlakoztatása:"
+
+#: ../plugins/bluetooth//PageComponent.qml:250
+msgid "Connect a device:"
+msgstr "Eszköz csatlakoztatása:"
+
+#: ../plugins/bluetooth//PageComponent.qml:283
+msgid "None detected"
+msgstr "Nem található"
+
+#: ../plugins/bluetooth//PageComponent.qml:291
+#: ../plugins/bluetooth//PageComponent.qml:394
+msgid "Connect automatically when detected:"
+msgstr "Észlelés után automatikus csatlakoztatás:"
+
+#: ../plugins/bluetooth//PageComponent.qml:361
+msgid "Type"
+msgstr "Típus"
+
+#: ../plugins/bluetooth//PageComponent.qml:385
+msgid "Status"
+msgstr "Állapot"
+
+#: ../plugins/bluetooth//PageComponent.qml:389
+msgid "Signal Strength"
+msgstr "Jelerősség"
+
+#: ../plugins/bluetooth//PageComponent.qml:426
+msgid "Forget this device"
+msgstr "Eszköz elfelejtése"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr ""
+"Erősítse meg, hogy a(z) „%1” által megjelenített PIN megegyezik ezzel"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "PIN megerősítése"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:34
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:140
+msgid "Battery"
+msgstr "Akkumulátor"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery//PageComponent.qml:46
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 másodperce"
+msgstr[1] "%1 másodperce"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:49
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 perce"
+msgstr[1] "%1 perce"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery//PageComponent.qml:52
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 órája"
+msgstr[1] "%1 órája"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery//PageComponent.qml:55
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 napja"
+msgstr[1] "%1 napja"
+
+#: ../plugins/battery//PageComponent.qml:85
+msgid "Charging now"
+msgstr "Töltés folyamatban"
+
+#: ../plugins/battery//PageComponent.qml:90
+msgid "Last full charge"
+msgstr "Utolsó teljes töltés"
+
+#: ../plugins/battery//PageComponent.qml:95
+msgid "Fully charged"
+msgstr "Teljesen feltöltve"
+
+#: ../plugins/battery//PageComponent.qml:126
+msgid "Charge level"
+msgstr "Töltöttségi szint"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery//PageComponent.qml:134
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
+msgid "Yesterday"
+msgstr "Tegnap"
+
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
+msgid "Today"
+msgstr "Ma"
+
+#: ../plugins/battery//PageComponent.qml:292
+msgid "Ways to reduce battery use:"
+msgstr "A merülés a következő módokon lassítható:"
+
+#: ../plugins/battery//PageComponent.qml:296
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr "Kijelző fényereje"
+
+#: ../plugins/battery//PageComponent.qml:394
+msgid "GPS"
+msgstr "GPS"
+
+#: ../plugins/battery//PageComponent.qml:412
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "A pontos hely meghatározáshoz GPS vagy Wi-Fi szükséges."
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Lock the phone when it's not in use:"
+msgstr "Telefon zárolása, ha nincs használatban:"
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "Telefon altatása, ha nincs használatban:"
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+"Biztonságosabb kisebb értéket választani. A telefon nem kerül zárolásra "
+"telefonhívások vagy videó lejátszás közben."
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "A telefon nem alszik el telefonhívások vagy videó lejátszás közben."
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:146
+msgid "Background"
+msgstr "Háttér"
+
+#: ../plugins/background//MainPage.qml:109
+msgid "Ubuntu Art"
+msgstr "Ubuntu kinézet"
+
+#: ../plugins/background//MainPage.qml:125
+msgid "Custom"
+msgstr "Egyéni"
+
+#: ../plugins/background//Preview.qml:70
+msgid "Preview"
+msgstr "Előnézet"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr "Kép eltávolítása"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:154
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:154
 msgid "Brightness"
 msgstr "Fényerő"
 
@@ -1434,12 +1643,127 @@ msgid "Adjust automatically"
 msgstr "Automatikus beállítás"
 
 #: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings"
-msgstr "A környezethez igazítja a kijelző fényerejét"
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr ""
+"Élénkíti és elhalványítja a kijelzőt, hogy illeszkedjen a környezethez."
 
-#: ../src/qml/MainWindow.qml:110
-msgid "System Settings"
-msgstr "Rendszerbeállítások"
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+msgid "Cellular data:"
+msgstr "Mobiladatok:"
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
+msgid "2G only (saves battery)"
+msgstr "Csak 2G (kíméli az akkumulátort)"
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
+msgid "2G/3G/4G (faster)"
+msgstr "2G/3G/4G (gyorsabb)"
+
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+msgid "Data roaming"
+msgstr "Adatbarangolás"
+
+#: ../plugins/cellular//Components//NoSim.qml:47
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:66
+msgid "Carrier"
+msgstr "Szolgáltató"
+
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+msgid "2G/3G (faster)"
+msgstr "2G/3G (gyorsabb)"
+
+#: ../plugins/cellular//Components//MultiSim.qml:42
+#: ../plugins/cellular//Components//SingleSim.qml:37
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "A hotspot kikapcsolva, mert a Wi-Fi is ki van kapcsolva."
+
+#: ../plugins/cellular//Components//MultiSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:52
+msgid "Data usage statistics"
+msgstr "Adat használati statisztikák"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:29
+msgid "Ask me each time"
+msgstr "Kérdezze minden alkalommal"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:34
+msgid "For outgoing calls, use:"
+msgstr "Kimenő hívásokhoz használja:"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:48
+msgid ""
+"You can change the SIM for individual calls, or for contacts in the address "
+"book."
+msgstr ""
+"Megválaszthatja a SIM kártyát minden egyes híváshoz vagy névjegyhez a "
+"telefonkönyvben."
+
+#: ../plugins/cellular//Components//DefaultSim.qml:55
+msgid "For messages, use:"
+msgstr "Üzenetekhez használja:"
+
+#: ../plugins/cellular//Components//SingleSim.qml:72
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr "SIM nevének szerkesztése"
+
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr "Ok"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
+msgid "Privacy policy"
+msgstr "Adatvédelmi irányelvek"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
+msgid "Report to Canonical:"
+msgstr "Jelentés a Canonical felé:"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
+msgid "App crashes and errors"
+msgstr "Alkalmazás összeomlások és hibák"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
+msgid "Previous error reports"
+msgstr "Korábbi hibajelentések"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
+msgid "Includes info about what an app was doing when it failed."
+msgstr ""
+"Információkat tartalmaz arról, hogy mi történt az alkalmazással összeomlás "
+"közben."
+
+#: ../plugins/background//Components//AddRemove.qml:52
+msgid "No images selected"
+msgstr "Nincsenek képek kiválasztva"
+
+#: ../plugins/background//Components//AddRemove.qml:65
+#, qt-format
+msgid "Remove %1 image"
+msgid_plural "Remove %1 images"
+msgstr[0] "%1 kép eltávolítása"
+msgstr[1] "%1 kép eltávolítása"
+
+#: ../plugins/background//Components//AddRemove.qml:80
+msgid "Add an image…"
+msgstr "Kép hozzáadása"
+
+#: ../plugins/background//Components//AddRemove.qml:91
+msgid "Remove images…"
+msgstr "Képek eltávolítása"
 
 #: ../src/qml/MainWindow.qml:131
 msgid "Search"
@@ -1453,369 +1777,466 @@ msgstr "Személyes"
 msgid "System"
 msgstr "Rendszer"
 
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Csatlakozás Wi-Fi hálózathoz"
+#: ../wizard/qml/Pages//15-passwd.qml:38
+msgid "Set lock security"
+msgstr "Zárolás beállítása"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
-msgid "Available networks"
-msgstr "Elérhető hálózatok"
+#: ../wizard/qml/Pages//15-passwd.qml:97
+msgid "Swipe"
+msgstr "Csúsztatás"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152
-#: ../wizard/qml/Pages//30-location.qml:48
+#: ../wizard/qml/Pages//15-passwd.qml:147
+msgid "Those PIN codes don't match."
+msgstr "A PIN kódok nem egyeznek."
+
+#: ../wizard/qml/Pages//15-passwd.qml:149
+msgid "Those passphrases don't match."
+msgstr "A jelmondatok nem egyeznek."
+
+#: ../wizard/qml/Pages//15-passwd.qml:157
+msgid "PIN code must be at least four digits long."
+msgstr "A PIN kódnak legalább négy számjegyből kell állnia."
+
+#: ../wizard/qml/Pages//15-passwd.qml:159
+msgid "Passphrase must be at least four characters long."
+msgstr "A jelmondatnak legalább négy karakterből kell állnia."
+
+#: ../wizard/qml/Pages//15-passwd.qml:170
+#: ../wizard/qml/Pages//30-location.qml:79
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//20-wifi.qml:195
 msgid "Continue"
 msgstr "Folytatás"
 
-#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:66
-msgid "Skip"
-msgstr "Kihagyás"
+#: ../wizard/qml/Pages//terms.qml:25
+msgid "Terms & Conditions"
+msgstr "Felhasználási feltételek"
 
-#: ../wizard/qml/Pages//30-location.qml:22
-msgid "Phone settings"
-msgstr "Telefonbeállítások"
+#: ../wizard/qml/Pages//30-location.qml:60
+msgid "Use your mobile network and Wi-Fi to work out where you are"
+msgstr "Mobilinternet és Wi-Fi használata a helyzete meghatározásához"
 
-#: ../wizard/qml/Pages//30-location.qml:39
+#: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
-"Your phone is set up to automatically report errors to Canonical. This can "
-"be disabled in system settings."
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
 msgstr ""
-"A telefonja automatikusan hibajelentéseket küld a Canonical-nak. Ezt a "
-"rendszerbeállításokban kikapcsolhatja."
+"Elolvastam és elfogadom a HERE <a href='terms.qml'>felhasználási "
+"feltételeit</a>"
 
-#: ../wizard/qml/Pages//30-location.qml:41
-msgid ""
-"Your phone is set up to detect your location. This can be disabled in system "
-"settings."
-msgstr ""
-"A telefon beazonosítja az Ön helyét. Ezt szintén a rendszerbeállításokban "
-"kapcsolhatja ki."
+#: ../wizard/qml/Pages//40-reporting.qml:22
+msgid "Bug reporting"
+msgstr "Hibajelentés"
+
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
+msgstr "A telefonja automatikusan küld hibajelentések a Canonical felé."
+
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
+msgstr "Ez kikapcsolható a Rendszerbeállításokban."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
-msgstr "Üdvözöljük"
+msgid "Hi!"
+msgstr "Üdv!"
 
-#: ../wizard/qml/Pages//10-welcome.qml:60
-msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr "Üdvözöljük az Ubuntu telefonos változatában. Kezdjünk bele."
+#: ../wizard/qml/Pages//10-welcome.qml:42
+msgid "Welcome to your Ubuntu phone."
+msgstr "Üdvözöljük az Ubuntu telefonos változatában."
 
-#: ../wizard/qml/Pages//10-welcome.qml:65
-msgid "Select your language"
-msgstr "Válasszon nyelvet"
-
-#: ../wizard/qml/Pages//10-welcome.qml:82
-msgid "Start"
-msgstr "Kezdés"
+#: ../wizard/qml/Pages//10-welcome.qml:50
+msgid "Let’s get started."
+msgstr "Kezdjünk is bele."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
-msgid "Setup complete"
-msgstr "A beállítás befejeződött"
+msgid "All done"
+msgstr "Készen van"
 
-#: ../wizard/qml/Pages//80-finished.qml:39
-msgid ""
-"Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
-"the good folks at Canonical."
-msgstr ""
-"Üdvözöljük az Ubuntu telefonos változatában, mely több ezer önkéntes és "
-"Canonical alkalmazott munkája révén jut el Önhöz."
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr "Szép munka!"
 
-#: ../wizard/qml/Pages//80-finished.qml:41
-msgid "Now you can start using your Ubuntu phone."
-msgstr "Most már elkezdheti használni az Ubuntus telefonját"
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr "A telefonja készen áll a használatra."
 
-#: ../wizard/qml/Pages//80-finished.qml:48
+#: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
 msgstr "Befejezés"
 
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi‑Fi"
+msgstr "Csatlakozás Wi-Fi hálózathoz"
+
+#: ../wizard/qml/Pages//20-wifi.qml:146
+msgid "Available networks"
+msgstr "Elérhető hálózatok"
+
+#: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//no-sim.qml:50
+msgid "Skip"
+msgstr "Kihagyás"
+
 #: ../wizard/qml/Pages//no-sim.qml:22
-msgid "No SIM card"
-msgstr "Nem található SIM kártya"
+msgid "Add a SIM card"
+msgstr "SIM kártya hozzáadása"
 
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid "To use the telephone and SMS features a SIM must be installed."
-msgstr "A telefonáláshoz vagy az SMS funkciókhoz szükséges egy SIM kártya."
-
-#: ../wizard/qml/Pages//no-sim.qml:59
-msgid "Install a SIM before continuing."
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
 msgstr "Folytatás előtt helyezzen be egy SIM kártyát."
 
-#: ../wizard/qml/Components//Page.qml:47
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
+msgstr ""
+"Anélkül nem indíthat vagy fogadhat hívásokat és nem küldhet vagy fogadhat "
+"üzeneteket."
+
+#: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "Vissza"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:4
-msgid "appearance"
-msgstr "megjelenítés"
+#: ../wizard/qml/Components//StackButton.qml:51
+#, qt-format
+msgid "〈  %1"
+msgstr "〈  %1"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:6
-msgid "background"
-msgstr "háttér"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:8
-msgid "wallpaper"
-msgstr "háttérkép"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:12
-msgid "bluetooth"
-msgstr "bluetooth"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:14
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:22
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:52
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:58
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:78
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:86
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:106
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:118
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:128
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:138
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:146
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:158
-msgid "settings"
-msgstr "beállítások"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:18
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:114
-msgid "software"
-msgstr "szoftver"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
-msgid "notifications"
-msgstr "értesítések"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
-msgid "Orientation Lock"
-msgstr "Tájolás zárolása"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:26
-msgid "rotation"
-msgstr "forgatás"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:28
-msgid "orientation"
-msgstr "tájolás"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:30
-msgid "lock"
-msgstr "zárolás"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:32
-msgid "screen"
-msgstr "képernyő"
+#: ../wizard/qml/Components//StackButton.qml:54
+#, qt-format
+msgid "%1  〉"
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:34
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:2
 msgid "Example"
 msgstr "Példa"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:4
 msgid "example"
 msgstr "példa"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:6
 msgid "test"
 msgstr "teszt"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:40
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:8
 msgid "sample"
 msgstr "minta"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:44
-msgid "cellular"
-msgstr "mobil"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:46
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:98
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:12
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:32
 msgid "network"
 msgstr "hálózat"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:48
-msgid "mobile"
-msgstr "mobil"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:50
-msgid "gsm"
-msgstr "gsm"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
-msgid "sound"
-msgstr "hang"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:62
-msgid "battery"
-msgstr "akkumulátor"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:64
-msgid "power"
-msgstr "energia"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:66
-msgid "Flight Mode"
-msgstr "Repülőgépes mód"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:68
-msgid "flight"
-msgstr "repülési"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:70
-msgid "plane"
-msgstr "repülő"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
-msgid "offline"
-msgstr "offline"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:76
-msgid "phone"
-msgstr "telefon"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
-msgid "Accessibility"
-msgstr "Akadálymentesítés"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:82
-msgid "accessibility"
-msgstr "akadálymentesítés"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:84
-msgid "a11y"
-msgstr "a11y"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:90
-msgid "about"
-msgstr "névjegy"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:92
-msgid "device"
-msgstr "eszköz"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:94
-msgid "info"
-msgstr "infó"
-
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:100
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:14
 msgid "wireless"
 msgstr "vezeték nélküli"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:102
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:16
 msgid "wifi"
 msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:104
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:18
 msgid "wi-fi"
 msgstr "wi-fi"
 
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:108
-msgid "Updates available"
-msgstr "Frissítések érhetők el"
-
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:112
-msgid "system"
-msgstr "rendszer"
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:20
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:26
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:38
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:48
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:56
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:62
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:68
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:102
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:112
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:120
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:132
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:138
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:158
+msgid "settings"
+msgstr "beállítások"
 
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:116
-msgid "update"
-msgstr "frissítés"
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:24
+msgid "reset"
+msgstr "visszaállítás"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:30
+msgid "cellular"
+msgstr "mobil"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:34
+msgid "mobile"
+msgstr "mobil"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:36
+msgid "gsm"
+msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:122
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:42
 msgid "language"
 msgstr "nyelv"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:44
 msgid "lang"
 msgstr "nyelv"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:126
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:46
 msgid "i18n"
 msgstr "i18n"
 
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:50
+msgid "Accessibility"
+msgstr "Akadálymentesítés"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:52
+msgid "accessibility"
+msgstr "akadálymentesítés"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:54
+msgid "a11y"
+msgstr "a11y"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:60
+msgid "sound"
+msgstr "hang"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:66
+msgid "phone"
+msgstr "telefon"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:72
+msgid "about"
+msgstr "névjegy"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:74
+msgid "device"
+msgstr "eszköz"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:76
+msgid "info"
+msgstr "infó"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:78
+msgid "Orientation Lock"
+msgstr "Tájolás zárolása"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:80
+msgid "rotation"
+msgstr "forgatás"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:82
+msgid "orientation"
+msgstr "tájolás"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:84
+msgid "lock"
+msgstr "zárolás"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:86
+msgid "screen"
+msgstr "képernyő"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:88
+msgid "Flight Mode"
+msgstr "Repülőgépes mód"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:90
+msgid "flight"
+msgstr "repülési"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:92
+msgid "plane"
+msgstr "repülő"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:94
+msgid "offline"
+msgstr "nem elérhető"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:98
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:128
+msgid "software"
+msgstr "szoftver"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:100
+msgid "notifications"
+msgstr "értesítések"
+
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:106
 msgid "time"
 msgstr "idő"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:134
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:108
 msgid "date"
 msgstr "dátum"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:136
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:110
 msgid "timezone"
 msgstr "időzóna"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:142
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:116
 msgid "security"
 msgstr "biztonság"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:118
 msgid "privacy"
 msgstr "magánszféra"
 
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
-msgid "reset"
-msgstr "visszaállítás"
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:122
+msgid "Updates available"
+msgstr "Frissítések érhetők el"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:126
+msgid "system"
+msgstr "rendszer"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:130
+msgid "update"
+msgstr "frissítés"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:136
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:142
+msgid "battery"
+msgstr "akkumulátor"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:144
+msgid "power"
+msgstr "energia"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:148
+msgid "appearance"
+msgstr "megjelenítés"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:150
+msgid "background"
+msgstr "háttér"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:152
+msgid "wallpaper"
+msgstr "háttérkép"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/martin/ubuntu/tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:156
 msgid "brightness"
 msgstr "fényerő"
+
+#: ../plugins/about//click.cpp:134
+msgid "Unknown title"
+msgstr "Ismeretlen cím"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:318
+msgid "Incorrect PIN code. Try again."
+msgstr "Helytelen PIN kód. Próbálja újra."
+
+#: ../plugins/security-privacy//securityprivacy.cpp:320
+msgid "Incorrect passphrase. Try again."
+msgstr "Helytelen jelmondat. Próbálja újra."
+
+#: ../plugins/security-privacy//securityprivacy.cpp:323
+msgid "Could not set security mode"
+msgstr "Nem sikerült a biztonságos mód beállítása"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:372
+msgid "Could not set security display hint"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:383
+msgid "Authentication token manipulation error"
+msgstr "Hitelesítő tokenkezelés hiba"
+
+#: ../plugins/system-update//system_update.cpp:92
+msgid "Can't cancel current request (can't contact service)"
+msgstr ""
+"Nem lehet megszakítani az aktuális kérést (nem lehet a szolgáltatással "
+"kommunikálni)"
+
+#: ../plugins/system-update//system_update.cpp:98
+msgid "Can't pause current request (can't contact service)"
+msgstr ""
+"Nem lehet szüneteltetni az aktuális kérést (nem lehet a szolgáltatással "
+"kommunikálni)"
+
+#~ msgid "Remove"
+#~ msgstr "Eltávolítás"
+
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Csatlakozás Wi-Fi hálózathoz"
+
+#~ msgid "There's an updated system image."
+#~ msgstr "Elérhető egy frissített rendszer képfájl."
+
+#~ msgid "Tap to open the system updater."
+#~ msgstr "Koppintson a rendszerfrissítő megnyitásához."
+
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
+
+#~ msgid ""
+#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
+#~ "conditions</a>"
+#~ msgstr ""
+#~ "Elolvastam és megértettem az Ubuntu <a href='terms.qml'>felhasználási "
+#~ "feltételeit</a>"

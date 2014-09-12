@@ -15,6 +15,7 @@
  */
 
 import QtQuick 2.3
+import MeeGo.QOfono 0.2
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
@@ -54,16 +55,26 @@ LocalComponents.Page {
             return UbuntuSecurityPrivacyPanel.Passphrase
     }
 
+    OfonoManager {
+        id: manager
+    }
+
+    // Ideally we would query the system more cleverly than hardcoding two
+    // modems.  But we don't yet have a more clever way.  :(
+    OfonoSimManager {
+        id: simManager0
+        modemPath: manager.modems.length >= 1 ? manager.modems[0] : ""
+    }
+
+    OfonoSimManager {
+        id: simManager1
+        modemPath: manager.modems.length >= 2 ? manager.modems[1] : ""
+    }
+
     Column {
-        id: content
+        id: column
         spacing: units.gu(2)
-        anchors {
-            fill: parent
-            topMargin: passwdPage.topMargin
-            bottomMargin: passwdPage.bottomMargin
-            leftMargin: passwdPage.leftMargin
-            rightMargin: passwdPage.rightMargin
-        }
+        anchors.fill: content
 
         ComboButton {
             id: combo
@@ -83,11 +94,11 @@ LocalComponents.Page {
                     text: {
                         var method = indexToMethod(modelData)
                         if (method === UbuntuSecurityPrivacyPanel.Swipe)
-                            return "Swipe"
+                            return i18n.tr("Swipe")
                         else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return "Passcode"
+                            return i18n.tr("PIN code")
                         else
-                            return "Passphrase"
+                            return i18n.tr("Passphrase")
                     }
                     onClicked: {
                         listview.currentIndex = index
@@ -133,7 +144,7 @@ LocalComponents.Page {
                 if (passwordInput.visible) {
                     if (passwordInput.text !== confirmInput.text) {
                         if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Those passcodes don't match.")
+                            return i18n.tr("Those PIN codes don't match.")
                         else
                             return i18n.tr("Those passphrases don't match.")
                     } else if (passwordInput.text.length < 4) {
@@ -143,7 +154,7 @@ LocalComponents.Page {
                         // to set the password via PAM in a different place
                         // than this page.  See comments at top of file.
                         if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Passcode must be at least four digits long.")
+                            return i18n.tr("PIN code must be at least four digits long.")
                         else
                             return i18n.tr("Passphrase must be at least four characters long.")
                     }
@@ -155,13 +166,16 @@ LocalComponents.Page {
 
     Component {
         id: forwardButton
-        LocalComponents.ForwardButton {
+        LocalComponents.StackButton {
             text: i18n.tr("Continue")
             enabled: !problem.visible
             onClicked: {
                 root.passwordMethod = passwdPage.method
                 root.password = passwdPage.password
-                pageStack.next()
+                if (manager.modems.length == 0 || simManager0.present || simManager1.present)
+                    pageStack.next()
+                else
+                    pageStack.push(Qt.resolvedUrl("no-sim.qml"))
             }
         }
     }

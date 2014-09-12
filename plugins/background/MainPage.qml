@@ -47,7 +47,10 @@ ItemPage {
             "/usr/share/unity8/graphics/tablet_background.jpg" :
             "/usr/share/unity8/graphics/phone_background.jpg"
 
-    property string welcomeBackground: backgroundPanel.backgroundFile
+    /* If there is no uri then use the default */
+    property string welcomeBackground: (backgroundPanel.backgroundFile === "file:") ?
+                                           "file:///usr/share/unity8/graphics/phone_background.jpg" :
+                                           backgroundPanel.backgroundFile
 
     property var activeTransfer
 
@@ -58,19 +61,13 @@ ItemPage {
         // a callback that pushes the preview stack
         onTriggered: {
             startContentTransfer(function(uri) {
-                pageStack.push(Qt.resolvedUrl("Preview.qml"), {uri: uri});
+                pageStack.push(Qt.resolvedUrl("Preview.qml"), {
+                    uri: uri, imported: true
+                });
                 // set Connection target
                 selectedItemConnection.target = pageStack.currentPage;
             });
         }
-    }
-
-    tools: ToolbarItems {
-        ToolbarButton {
-            action: selectDefaultPeer
-        }
-        opened: true
-        locked: true
     }
 
     // qml bindings for background stuff
@@ -194,10 +191,17 @@ ItemPage {
                     trans.state = ContentTransfer.Finalized;
                 }
             }
-            // if we did an import, clean up
+
             if ((target.state === "cancelled") &&
                 (trans && trans.state === ContentTransfer.Collected)) {
-                backgroundPanel.rmFile(target.uri);
+
+                if (target.imported) {
+                    // if we just did an import, remove the image if the user
+                    // cancels
+                    backgroundPanel.rmFile(target.uri);
+                } else {
+                    backgroundPanel.prepareBackgroundFile(target.uri, true);
+                }
                 trans.state = ContentTransfer.Finalized;
             }
         }

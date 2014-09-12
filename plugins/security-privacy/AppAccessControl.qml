@@ -41,7 +41,7 @@ ItemPage {
 
             ListItem.Standard {
                 text: model.applicationName
-                iconSource: "image://theme/" + model.iconName
+                iconSource: model.iconName
                 control: Switch {
                     id: welcomeStatsSwitch
                     checked: model.granted
