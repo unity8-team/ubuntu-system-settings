@@ -18,6 +18,7 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
@@ -119,7 +120,10 @@ ItemPage {
             ListItem.SingleValue {
                 text: i18n.tr("Other network")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
+                onClicked: {
+                    otherNetwork.source = "OtherNetwork.qml";
+                    PopupUtils.open(otherNetwork.item);
+                }
             }
         }
 
@@ -140,5 +144,10 @@ ItemPage {
         boundsBehavior: (contentHeight > wifibase.height) ?
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
+    }
+
+    Loader {
+        id: otherNetwork
+        asynchronous: false
     }
 }
