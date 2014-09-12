@@ -91,7 +91,8 @@ ItemPage {
                 visible: securityList.selectedIndex !== 0
                 width: parent.width - units.gu(4)
                 anchors.horizontalCenter: parent.horizontalCenter
-                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+                echoMode: passwordVisibleSwitch.checked ?
+                              TextInput.Normal : TextInput.Password
                 onActiveFocusChanged: {
                     parent.parent.contentY = 1000
                 }
@@ -114,6 +115,7 @@ ItemPage {
                     right: parent.right
                 }
                 height: buttonRow.height + units.gu(4)
+
                 RowLayout {
                     id: buttonRow
                     anchors {
@@ -140,7 +142,9 @@ ItemPage {
                         text: i18n.tr("Connect")
                         enabled: settingsValid()
                         onClicked: {
-                            DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
+                            DbusHelper.connect(networkname.text,
+                                               securityList.selectedIndex,
+                                               password.text)
                             pageStack.pop()
                         }
                     }
