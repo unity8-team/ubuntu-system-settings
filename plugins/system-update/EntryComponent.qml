@@ -40,6 +40,10 @@ ListItem.SingleValue {
         console.warn("_updatesRefresh: " + root.updateModel);
         var _updatesAvailable = 0;
         for (var i=0; i < updateModel.length; i++) {
+            console.warn("packageName: " + root.updateModel[i].packageName);
+            console.warn("updateRequired: " + root.updateModel[i].updateRequired);
+            console.warn("updateState: " + root.updateModel[i].updateState);
+            console.warn("updateReady: " + root.updateModel[i].updateReady);
             if (updateModel[i].updateRequired)
                 _updatesAvailable += 1;
         }
