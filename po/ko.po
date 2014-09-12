@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-11 08:57+0200\n"
+"POT-Creation-Date: 2014-09-11 12:06-0400\n"
 "PO-Revision-Date: 2014-09-03 04:07+0000\n"
 "Last-Translator: MinSik CHO <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -15,20 +15,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-11 07:24+0000\n"
+"X-Launchpad-Export-Date: 2014-09-12 06:56+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr "이전에 사용한 네트워크"
+#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
+msgid "System Settings"
+msgstr "시스템 설정"
+
+#: ubuntu-system-settings.desktop.in.in.h:2
+msgid "System;"
+msgstr "System;시스템;"
+
+#: ubuntu-system-settings.desktop.in.in.h:3
+msgid "Preferences;Settings;"
+msgstr "Preferences;기본 설정;Settings;설정"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
 #: ../plugins/battery//PageComponent.qml:333
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:10
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
+
+#: ../plugins/wifi//PageComponent.qml:114
+#: ../plugins/wifi//PreviousNetworks.qml:26
+msgid "Previous networks"
+msgstr "이전에 사용한 네트워크"
 
 #: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
@@ -38,67 +50,59 @@ msgstr "다른 네트워크"
 msgid "Network name"
 msgstr "네트워크 이름"
 
-#: ../plugins/wifi//OtherNetwork.qml:66
+#: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
 msgstr "보안"
 
-#: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PhoneLocking.qml:45
+#: ../plugins/wifi//OtherNetwork.qml:68
 #: ../plugins/bluetooth//PageComponent.qml:116
 #: ../plugins/bluetooth//PageComponent.qml:323
 #: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr "없음"
 
-#: ../plugins/wifi//OtherNetwork.qml:68
+#: ../plugins/wifi//OtherNetwork.qml:69
 msgid "WPA & WPA2 Personal"
 msgstr "WPA-개인 또는 WPA2-개인"
 
-#: ../plugins/wifi//OtherNetwork.qml:69
+#: ../plugins/wifi//OtherNetwork.qml:70
 msgid "WEP"
 msgstr "WEP"
 
-#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
+#: ../plugins/wifi//OtherNetwork.qml:77 ../plugins/wifi//NetworkDetails.qml:61
 msgid "Password"
 msgstr "암호"
 
-#: ../plugins/wifi//OtherNetwork.qml:89
+#: ../plugins/wifi//OtherNetwork.qml:90
 msgid "Password visible"
 msgstr "암호를 보여주기"
 
-#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/wifi//OtherNetwork.qml:113
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/phone//CallForwarding.qml:139
 #: ../plugins/time-date//TimePicker.qml:173
 #: ../plugins/security-privacy//SimPin.qml:146
 #: ../plugins/security-privacy//SimPin.qml:263
 #: ../plugins/security-privacy//LockSecurity.qml:283
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/background//Preview.qml:97
+#: ../plugins/background//Preview.qml:101
 #: ../plugins/cellular//Components//SimEditor.qml:189
 #: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
 msgstr "취소"
 
-#: ../plugins/wifi//OtherNetwork.qml:121
+#: ../plugins/wifi//OtherNetwork.qml:122
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "접속"
-
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "연결 해제"
-
-#: ../plugins/wifi//NetworkDetailsBrief.qml:58
-msgid "IP address"
-msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -114,15 +118,15 @@ msgid "Last connected"
 msgstr "마지막으로 연결"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:521
-#: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/about//PageComponent.qml:166
+#: ../plugins/security-privacy//PageComponent.qml:140
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:140
-#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/system-update//PageComponent.qml:563
+#: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/battery//PageComponent.qml:315
 #: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/about//PageComponent.qml:149
+#: ../plugins/battery//SleepValues.qml:106
 msgid "Never"
 msgstr "절대로 사용하지 않음"
 
@@ -133,6 +137,539 @@ msgstr "암호 표시"
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
 msgstr "네트워크를 저장하지 않기"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "연결 해제"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr "IP 주소"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../plugins/reset//PageComponent.qml:32
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:22
+msgid "Reset phone"
+msgstr "휴대폰 초기화"
+
+#: ../plugins/reset//PageComponent.qml:73
+#: ../plugins/reset//ResetLauncherHome.qml:44
+msgid "Reset Launcher"
+msgstr "런처 초기화"
+
+#: ../plugins/reset//PageComponent.qml:87
+msgid "Reset all system settings…"
+msgstr "모든 시스템 설정 초기화..."
+
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr "전부 지우고 초기화..."
+
+#: ../plugins/reset//EraseEverything.qml:41
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr "모든 문서와 저장된 게임, 설정 그리고 기타 다른 항목들이 영구히 지워집니다."
+
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "전부 지우고 초기화"
+
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "런처의 내용을 처음 상태로 초기화합니다."
+
+#: ../plugins/reset//ResetLauncherHome.qml:59
+#: ../plugins/language//RebootNecessary.qml:34
+msgid "The phone needs to restart for changes to take effect."
+msgstr "바꾼 내용을 적용하려면 전화를 다시 시작해야 합니다."
+
+#: ../plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr "런쳐의 내용, 레이아웃, 그리고 홈스크린의 필터들이 모두 초기 설정으로 복원 됩니다."
+
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "모든 시스템 설정 초기화"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+#: ../plugins/cellular//Components//MultiSim.qml:68
+msgid "Carriers"
+msgstr "통신사"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:49
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//Components//NoSim.qml:48
+#: ../plugins/cellular//Components//SingleSim.qml:62
+msgid "N/A"
+msgstr "없음"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "핫스팟 설정 바꾸기"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "핫스팟 이름"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "키(반드시 8개 이상의 문자를 사용해야 합니다.)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "키 보이기"
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+#: ../plugins/security-privacy//SimPin.qml:154
+#: ../plugins/security-privacy//LockSecurity.qml:302
+msgid "Change"
+msgstr "바꾸기"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:28
+msgid "Cellular"
+msgstr "셀룰러 네트워크"
+
+#: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//Components//MultiSim.qml:48
+#: ../plugins/cellular//Components//SingleSim.qml:43
+msgid "Wi-Fi hotspot"
+msgstr "와이 파이 핫스팟"
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr "핫스팟"
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
+msgstr ""
+"핫스팟을 사용하면 와이 파이 연결을 이용해 이동 전화의 데이터 연결을 다른 장치가 사용할 수 있습니다. 일반 데이터 요금을 적용 받습니다."
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr "와이 파이 연결을 이용해 이동 전화의 데이터 연결을 다른 장치가 사용할 수 있습니다. 일반 데이터 요금을 적용 받습니다."
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr "핫스팟 설정"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "네트워크 선택하기:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Automatically"
+msgstr "자동"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/security-privacy//PageComponent.qml:149
+msgid "Manually"
+msgstr "수동"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "새로 고침"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "검색 중"
+
+#: ../plugins/language//DisplayLanguage.qml:36
+msgid "Display language"
+msgstr "표시 언어"
+
+#: ../plugins/language//DisplayLanguage.qml:118
+msgid "Confirm"
+msgstr "확인"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:34
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:40
+msgid "Language & Text"
+msgstr "언어 & 글"
+
+#: ../plugins/language//PageComponent.qml:100
+msgid "Display language…"
+msgstr "표시 언어..."
+
+#: ../plugins/language//PageComponent.qml:117
+#: ../plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "키보드 레이아웃"
+
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "맞춤법 검사"
+
+#: ../plugins/language//PageComponent.qml:152
+msgid "Auto correction"
+msgstr "자동 정정"
+
+#: ../plugins/language//PageComponent.qml:162
+msgid "Word suggestions"
+msgstr "단어 추천"
+
+#: ../plugins/language//PageComponent.qml:175
+msgid "Auto capitalization"
+msgstr "자동 대문자화"
+
+#: ../plugins/language//PageComponent.qml:185
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "문장의 첫 글자를 자동으로 대문자화합니다."
+
+#: ../plugins/language//PageComponent.qml:192
+msgid "Auto punctuation"
+msgstr "자동 구두법"
+
+#: ../plugins/language//PageComponent.qml:202
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr "스페이스 키를 두 번 누르면 사용해야 하지만 없는 쉼표나 따옴표, 괄호를 추가합니다."
+
+#: ../plugins/language//PageComponent.qml:209
+#: ../plugins/sound//PageComponent.qml:196
+msgid "Keyboard sound"
+msgstr "키보드 소리"
+
+#: ../plugins/language//PageComponent.qml:219
+msgid "Keyboard vibration"
+msgstr "키보드 진동"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "현재 레이아웃:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "사용 가능한 레이아웃:"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "현재 맞춤법 검사 언어:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "사용 가능한 언어:"
+
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr "지금 다시 시작"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:37
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:58
+msgid "Sound"
+msgstr "소리"
+
+#: ../plugins/sound//PageComponent.qml:76
+msgid "Silent Mode"
+msgstr "방해 금지 모드"
+
+#: ../plugins/sound//PageComponent.qml:80
+msgid "Ringer:"
+msgstr "발신자:"
+
+#: ../plugins/sound//PageComponent.qml:112
+msgid "Phone calls:"
+msgstr "전화 통화:"
+
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
+msgid "Ringtone"
+msgstr "벨소리"
+
+#: ../plugins/sound//PageComponent.qml:135
+msgid "Vibrate when ringing"
+msgstr "전화 수신 시 진동하기"
+
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
+msgid "Vibrate in Silent Mode"
+msgstr "조용히 모드에서 진동하기"
+
+#: ../plugins/sound//PageComponent.qml:153
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr "다이얼패드 소리"
+
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Messages:"
+msgstr "메시지:"
+
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
+msgid "Message received"
+msgstr "메세지를 수신했습니다."
+
+#: ../plugins/sound//PageComponent.qml:179
+msgid "Vibrate with message sound"
+msgstr "메세지 도착음과 같이 진동하기"
+
+#: ../plugins/sound//PageComponent.qml:192
+msgid "Other sounds:"
+msgstr "기타 소리:"
+
+#: ../plugins/sound//PageComponent.qml:210
+msgid "Lock sound"
+msgstr "잠금 소리"
+
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "재생 정지"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "현재 무음 모드에 있습니다."
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:64
+msgid "Phone"
+msgstr "휴대전화"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "마지막 통화 %1"
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "전화"
+
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//SingleSim.qml:33
+msgid "Call forwarding"
+msgstr "착신전환"
+
+#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+msgid "Call waiting"
+msgstr "통화 대기"
+
+#: ../plugins/phone//MultiSim.qml:56 ../plugins/phone//MultiSim.qml:94
+#: ../plugins/phone//NoSims.qml:42
+msgid "Services"
+msgstr "서비스"
+
+#: ../plugins/phone//CallForwarding.qml:91
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr "전화를 받지 못하거나 통화 중인 경우, 또는 휴대 전화가 서비스 지역을 이탈한 경우에 다른 번호로 전달합니다."
+
+#: ../plugins/phone//CallForwarding.qml:101
+msgid "Forward to"
+msgstr "전달"
+
+#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/security-privacy//LockSecurity.qml:304
+#: ../plugins/background//Preview.qml:108
+msgid "Set"
+msgstr "설정"
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "심 (SIM) 카드"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 서비스"
+
+#: ../plugins/phone//CallWaiting.qml:89
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr "통화 중에 다른 통화를 걸거나 받고, 통화 간 전환을 할 수 있도록 합니다."
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr "죄송합니다. 이 라이선스는 표시할 수 없습니다."
+
+#: ../plugins/about//Version.qml:36
+msgid "OS Build Details"
+msgstr "우분투 빌드 정보"
+
+#: ../plugins/about//Version.qml:65
+msgid "OS build number"
+msgstr "우분투 빌드 번호"
+
+#: ../plugins/about//Version.qml:71
+msgid "Ubuntu Image part"
+msgstr "우분투 이미지"
+
+#: ../plugins/about//Version.qml:79
+msgid "Ubuntu build description"
+msgstr "우분투 빌드 정보"
+
+#: ../plugins/about//Version.qml:85
+msgid "Device Image part"
+msgstr "장치 이미지"
+
+#: ../plugins/about//Version.qml:92
+msgid "Device build description"
+msgstr "장치 빌드 정보"
+
+#: ../plugins/about//Version.qml:99
+msgid "Customization Image part"
+msgstr "사용자화 이미지"
+
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr "전화 번호:"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:70
+msgid "About this phone"
+msgstr "이 폰에 대하여"
+
+#: ../plugins/about//PageComponent.qml:109
+msgid "Serial"
+msgstr "시리얼"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr "와이파이 주소"
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr "블루투스 주소"
+
+#: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
+msgid "Storage"
+msgstr "저장 공간"
+
+#: ../plugins/about//PageComponent.qml:150
+msgid "Software:"
+msgstr "소프트웨어:"
+
+#: ../plugins/about//PageComponent.qml:155
+msgid "OS"
+msgstr "OS"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Last updated"
+msgstr "마지막 업데이트"
+
+#: ../plugins/about//PageComponent.qml:172
+msgid "Check for updates"
+msgstr "업데이트 확인"
+
+#: ../plugins/about//PageComponent.qml:181
+msgid "Legal:"
+msgstr "법률 정보:"
+
+#: ../plugins/about//PageComponent.qml:186 ../plugins/about//Software.qml:11
+msgid "Software licenses"
+msgstr "소프트웨어 라이선스"
+
+#: ../plugins/about//PageComponent.qml:194
+msgid "Regulatory info"
+msgstr "규정 정보"
+
+#: ../plugins/about//PageComponent.qml:202
+msgid "Developer mode"
+msgstr "개발자 모드"
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
+msgid "Developer Mode"
+msgstr "개발자 모드"
+
+#: ../plugins/about//DevMode.qml:82
+msgid ""
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
+msgstr "개발자 모드에서는 이 전화를 다른 장치에 연결하여 누구나 이 전화의 모든 것에 접근하고 바꿀 수 있습니다."
+
+#: ../plugins/about//DevMode.qml:108
+msgid "You need a PIN code or passphrase set to use Developer Mode."
+msgstr "개발자 모드를 사용하려면 개인 식별 번호나 패스프레이즈를 입력해야 합니다."
+
+#: ../plugins/about//DevMode.qml:114
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../plugins/security-privacy//LockSecurity.qml:32
+msgid "Lock security"
+msgstr "보안 잠금"
+
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "우분투에 의해 사용됨"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr "비디오"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr "오디오"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr "사진"
+
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr "다른 파일"
+
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "애플리케이션에 의해 사용됨"
+
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
+msgstr "총 저장 공간"
+
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "빈 공간"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr "이름 순으로"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr "크기 순으로"
+
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
+msgstr "전화 번호"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:96
+msgid "Notifications"
+msgstr "알림"
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr "알림이나 소리, 진동 그리고 알림 센터로 사용자에게 경고할 수 있는 프로그램을 선택해주십시오."
 
 #: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
@@ -170,16 +707,9 @@ msgstr "월"
 msgid "Year"
 msgstr "년"
 
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:304
-#: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/background//Preview.qml:104
-msgid "Set"
-msgstr "설정"
-
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:14
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:104
 msgid "Time & Date"
 msgstr "날짜와 시간"
 
@@ -190,19 +720,6 @@ msgstr "시간대:"
 #: ../plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
 msgstr "시간과 날짜 설정:"
-
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-msgid "Automatically"
-msgstr "자동"
-
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:149
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-msgid "Manually"
-msgstr "수동"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -220,225 +737,145 @@ msgstr "현재 위치를 입력하십시오."
 msgid "No matching place"
 msgstr "맞는 장소가 없습니다."
 
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:26
-msgid "Updates"
-msgstr "업데이트"
+#: ../plugins/security-privacy//AppAccess.qml:28
+#: ../plugins/security-privacy//PageComponent.qml:253
+msgid "Other app access"
+msgstr "다른 앱 접근"
 
-#: ../plugins/system-update//PageComponent.qml:52
-msgid "Update System"
-msgstr "시스템 업데이트하기"
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr "다음 항목에 접근하려 하였고 사용자가 허가한 프로그램:"
 
-#: ../plugins/system-update//PageComponent.qml:53
-msgid "The phone needs to restart to install the system update."
-msgstr "시스템 업데이트를 설치하려면, 휴대 전화를 재시작해야 합니다."
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:105
+msgid "Camera"
+msgstr "카메라"
 
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "Connect the phone to power before installing the system update."
-msgstr ""
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr "카메라에 접근하려 하는 프로그램"
 
-#: ../plugins/system-update//PageComponent.qml:56
-msgid "Install & Restart"
-msgstr "설치 및 다시 시작"
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr "마이크"
 
-#: ../plugins/system-update//PageComponent.qml:65
-msgid "Not Now"
-msgstr "나중에 하기"
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr "마이크에 접력하려 하는 프로그램"
 
-#: ../plugins/system-update//PageComponent.qml:71
-msgid "Install"
-msgstr "설치"
-
-#: ../plugins/system-update//PageComponent.qml:89
-msgid "Software is up to date"
-msgstr "소프트웨어가 최신 상태입니다."
-
-#: ../plugins/system-update//PageComponent.qml:198
-msgid "Checking for updates…"
-msgstr "업데이트 확인 중..."
-
-#: ../plugins/system-update//PageComponent.qml:216
+#: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
-msgid "Install %1 update…"
-msgid_plural "Install %1 updates…"
-msgstr[0] "%1개 업데이트를 설치하는 중..."
+msgid "%1/%2"
+msgstr "%1/%2"
 
-#: ../plugins/system-update//PageComponent.qml:217
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr "0"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:114
+msgid "Security & Privacy"
+msgstr "보안 & 사생활 보호"
+
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone and Internet"
+msgstr "전화와 인터넷"
+
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone only"
+msgstr "전화만 사용"
+
+#: ../plugins/security-privacy//PageComponent.qml:131
+msgid "Lock phone"
+msgstr "전화 잠그키"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
 #, qt-format
-msgid "Install %1 update"
-msgid_plural "Install %1 updates"
-msgstr[0] "%1개 업데이트 설치"
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "%1 분 후"
 
-#: ../plugins/system-update//PageComponent.qml:218
-msgid "Pause All"
-msgstr "모두 일시 중지"
-
-#: ../plugins/system-update//PageComponent.qml:270
-msgid "Retry"
-msgstr "재시도"
-
-#: ../plugins/system-update//PageComponent.qml:286
-msgid "Download"
-msgstr "내려받기"
-
-#: ../plugins/system-update//PageComponent.qml:286
-msgid "Update"
-msgstr "업데이트"
-
-#: ../plugins/system-update//PageComponent.qml:287
-msgid "Resume"
-msgstr "다시 시작"
-
-#: ../plugins/system-update//PageComponent.qml:288
-msgid "Pause"
-msgstr "일시정지"
-
-#: ../plugins/system-update//PageComponent.qml:347
-msgid "Installing"
-msgstr "설치 중"
-
-#: ../plugins/system-update//PageComponent.qml:380
-msgid "Installed"
-msgstr "설치됨"
-
-#: ../plugins/system-update//PageComponent.qml:405
-msgid "Version: "
-msgstr "버전: "
-
-#: ../plugins/system-update//PageComponent.qml:427
-msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "애플리케이션에 대한 업데이트를 제공받으려면 우분투 원 계정으로 로그인하세요."
-
-#: ../plugins/system-update//PageComponent.qml:436
-msgid "Sign In…"
-msgstr "로그인..."
-
-#: ../plugins/system-update//PageComponent.qml:503
-msgid "Installing update…"
-msgstr "업데이트 설치 중..."
-
-#: ../plugins/system-update//PageComponent.qml:518
-#: ../plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr "자동 다운로드"
-
-#: ../plugins/system-update//PageComponent.qml:523
-msgid "On wi-fi"
-msgstr "Wi-Fi 에서"
-
-#: ../plugins/system-update//PageComponent.qml:525
-msgid "Always"
-msgstr "항상"
-
-#: ../plugins/system-update//PageComponent.qml:540
-msgid " bytes"
-msgstr " 바이트"
-
-#: ../plugins/system-update//PageComponent.qml:543
-msgid " KiB"
-msgstr " 킬로바이트"
-
-#: ../plugins/system-update//PageComponent.qml:546
-msgid " MiB"
-msgstr " 메가바이트"
-
-#: ../plugins/system-update//PageComponent.qml:549
-msgid " GiB"
-msgstr " 기가바이트"
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "업데이트를 자동으로 다운로드 합니다:"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "Wi-Fi에 연결되어 있을때"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "어떤 네트워크이든 연결되어 있을때"
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "데이터 요금이 부과될 수 있습니다."
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr "재생 정지"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "현재 무음 모드에 있습니다."
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
-msgid "Sound"
-msgstr "소리"
-
-#: ../plugins/sound//PageComponent.qml:75
-msgid "Silent Mode"
-msgstr "방해 금지 모드"
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr "발신자:"
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr "전화 통화:"
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr "벨소리"
-
-#: ../plugins/sound//PageComponent.qml:134
-msgid "Vibrate when ringing"
-msgstr "전화 수신 시 진동하기"
-
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:187
-msgid "Vibrate in Silent Mode"
-msgstr "조용히 모드에서 진동하기"
-
-#: ../plugins/sound//PageComponent.qml:152
-#: ../plugins/phone//PageComponent.qml:109
-msgid "Dialpad sounds"
-msgstr "다이얼패드 소리"
-
-#: ../plugins/sound//PageComponent.qml:156
-msgid "Messages:"
-msgstr "메시지:"
-
-#: ../plugins/sound//PageComponent.qml:160
-#: ../plugins/sound//PageComponent.qml:166
-msgid "Message received"
-msgstr "메세지를 수신했습니다."
-
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Vibrate with message sound"
-msgstr "메세지 도착음과 같이 진동하기"
-
-#: ../plugins/sound//PageComponent.qml:191
-msgid "Other sounds:"
-msgstr "기타 소리:"
-
-#: ../plugins/sound//PageComponent.qml:195
-#: ../plugins/language//PageComponent.qml:185
-msgid "Keyboard sound"
-msgstr "키보드 소리"
-
-#: ../plugins/sound//PageComponent.qml:209
-msgid "Lock sound"
-msgstr "잠금 소리"
-
+#: ../plugins/security-privacy//PageComponent.qml:158
 #: ../plugins/security-privacy//SimPin.qml:34
 #: ../plugins/security-privacy//SimPin.qml:319
-#: ../plugins/security-privacy//PageComponent.qml:158
 msgid "SIM PIN"
 msgstr "심카드 핀"
+
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:244
+msgid "On"
+msgstr "켬"
+
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+msgid "Off"
+msgstr "끔"
+
+#: ../plugins/security-privacy//PageComponent.qml:172
+msgid "Encryption"
+msgstr "암호화"
+
+#: ../plugins/security-privacy//PageComponent.qml:181
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr "전화를 암호화하면 PC 또는 기타 장치에 전화를 연결했을 때 허가 없이 자료에 접근하려는 행위를 막을 수 있습니다."
+
+#: ../plugins/security-privacy//PageComponent.qml:185
+msgid "Privacy"
+msgstr "사생활 보호"
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "Stats on welcome screen"
+msgstr "환영 스크린의 정보"
+
+#: ../plugins/security-privacy//PageComponent.qml:201
+msgid "Messages on welcome screen"
+msgstr "환영 스크린 문구"
+
+#: ../plugins/security-privacy//PageComponent.qml:216
+#: ../plugins/security-privacy//Dash.qml:29
+msgid "Dash search"
+msgstr "대쉬 검색"
+
+#: ../plugins/security-privacy//PageComponent.qml:235
+msgid "Location access"
+msgstr "위치 정보 사용"
+
+#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
+msgid "Diagnostics"
+msgstr "진단"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy//PageComponent.qml:263
+msgid "Sent"
+msgstr "전송 완료"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy//PageComponent.qml:266
+msgid "Not sent"
+msgstr "전송되지 않음"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
@@ -458,55 +895,116 @@ msgstr "현재 PIN 번호:"
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "%1번 시도할 수 있습니다."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "새 개인 식별 번호 입력:"
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "새 개인 식별 번호 확인:"
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:154
-#: ../plugins/security-privacy//LockSecurity.qml:302
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr ""
+msgstr "새 개인 식별 번호가 일치하지 않습니다. 다시 시도해주십시오."
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
-msgstr ""
+msgstr "심 카드의 개인 식별 번호 입력"
 
 #: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "이전 심 카드의 개인 식별 변호 입력"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
-msgstr ""
+msgstr "잠금 해제"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Lock"
-msgstr ""
+msgstr "잠그기"
 
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
-msgstr ""
+msgstr "개인 식별 번호 바꾸기..."
 
 #: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"심 카드에 개인 식별 번호를 입력하면 전화를 다시 시작하거나 심 카드를 바꾸었을 때 이 번호를 입력해야 휴대 전화 서비스를 다시 이용할 "
+"수 있습니다."
 
 #: ../plugins/security-privacy//SimPin.qml:358
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr "반복해서 올바르지 않은 개인 식별 번호를 입력하면 심 카드가 영원히 잠깁니다."
+
+#: ../plugins/security-privacy//Location.qml:31
+#: ../wizard/qml/Pages//30-location.qml:25
+msgid "Location"
+msgstr "위치"
+
+#: ../plugins/security-privacy//Location.qml:49
+msgid "Location detection"
+msgstr "위치 감지"
+
+#: ../plugins/security-privacy//Location.qml:71
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr "GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리를 절약하기 위해 GPS를 끕니다."
+
+#: ../plugins/security-privacy//Location.qml:73
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr "Wi-Fi와 GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리를 절약합니다."
+
+#: ../plugins/security-privacy//Location.qml:75
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr "Wi-Fi (현재 해제됨)와 GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
+
+#: ../plugins/security-privacy//Location.qml:77
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr "Wi-Fi, 셀타워 위치, GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
+
+#: ../plugins/security-privacy//Location.qml:79
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"Wi-Fi, 셀타워 위치 (현재 셀룰러 네트워크에 연결되지 않음), GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 "
+"배터리가 절약됩니다."
+
+#: ../plugins/security-privacy//Location.qml:81
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+"Wi-Fi (현재 해제됨), 셀타워 위치, GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
+
+#: ../plugins/security-privacy//Location.qml:83
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Wi-Fi (현재 해제됨), 셀타워 위치 (현제 셀룰러 네트워크에 연결되지 않음), GPS를 사용하여 대략적인 위치를 감지합니다. 이 "
+"설정을 해제하면 배터리가 절약됩니다."
+
+#: ../plugins/security-privacy//Location.qml:90
+msgid "Allow access to location:"
+msgstr "위치 정보에 접근 허용:"
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "다음에서 결과를 가져오기:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -515,24 +1013,18 @@ msgstr "폰 잠금"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "사용 안함"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
-msgstr ""
+msgstr "개인 식별 번호"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
 msgstr "암호문"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:49
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/about//DevMode.qml:104
-msgid "Lock security"
-msgstr "보안 잠금"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:68
 #: ../plugins/battery//PageComponent.qml:306
@@ -558,132 +1050,28 @@ msgstr "잠자기 모드는 즉시 휴대 전화를 잠급니다."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "전화를 잠그었을 때 허용할 기능:다"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "런처"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "알림과 빠른 설정"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
+msgstr "잠근 화면 보안 기능을 사용하면 전화를 잠근 후 접근을 제한할 수 있습니다."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
-msgid "Security & Privacy"
-msgstr "보안 & 사생활 보호"
-
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "전화와 인터넷"
-
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "전화만 사용"
-
-#: ../plugins/security-privacy//PageComponent.qml:131
-msgid "Lock phone"
-msgstr ""
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/battery//PageComponent.qml:321
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "%1 분 후"
-
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:236
-msgid "On"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:236
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
-msgid "Off"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:172
-msgid "Encryption"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:181
-msgid ""
-"Encryption protects against access to phone data when the phone is connected "
-"to a PC or other device."
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:185
-msgid "Privacy"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "Stats on welcome screen"
-msgstr "환영 스크린의 정보"
-
-#: ../plugins/security-privacy//PageComponent.qml:201
-msgid "Messages on welcome screen"
-msgstr "환영 스크린 문구"
-
-#: ../plugins/security-privacy//PageComponent.qml:216
-#: ../plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "대쉬 검색"
-
-#: ../plugins/security-privacy//PageComponent.qml:234
-msgid "Location access"
-msgstr "위치 정보 사용"
-
-#: ../plugins/security-privacy//PageComponent.qml:243
-#: ../plugins/security-privacy//AppAccess.qml:28
-msgid "Other app access"
-msgstr "다른 앱 접근"
-
-#: ../plugins/security-privacy//PageComponent.qml:248
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
-msgid "Diagnostics"
-msgstr "진단"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:253
-msgid "Sent"
-msgstr "전송 완료"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:256
-msgid "Not sent"
-msgstr "전송되지 않음"
+msgstr "다른 프로그램과 기능을 사용하려 하면 잠금을 해제할 것을 알려줍니다."
 
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "개인 식별 번호 바꾸기..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -696,7 +1084,7 @@ msgstr "스와이프로 바꾸기"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "개인 식변 번호로 전환"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -704,7 +1092,7 @@ msgstr "암호문으로 바꾸기"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "사용 중인 개인 식별 번호"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -712,7 +1100,7 @@ msgstr "현재 암호문"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "개인 식별 번호 선택"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -720,7 +1108,7 @@ msgstr "암호문 입력"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "개인 식별 번호 확인"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
@@ -728,7 +1116,7 @@ msgstr "암호문 확인"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "개인 식별 번호가 일치하지 않습니다. 다시 시도해주십시오."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -748,7 +1136,7 @@ msgstr "스와이프 (보안 기능 없음)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "4자리 개인 식별 번호"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -756,412 +1144,169 @@ msgstr "스와이프 (보안 기능 없음)... "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "4자리 개인 식별 번호..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
 msgstr "암호문..."
 
-#: ../plugins/security-privacy//Location.qml:30
-#: ../wizard/qml/Pages//30-location.qml:23
-msgid "Location"
-msgstr "위치"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:36
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:124
+msgid "Updates"
+msgstr "업데이트"
 
-#: ../plugins/security-privacy//Location.qml:48
-msgid "Location detection"
-msgstr "위치 감지"
+#: ../plugins/system-update//PageComponent.qml:87
+msgid "Update System"
+msgstr "시스템 업데이트하기"
 
-#: ../plugins/security-privacy//Location.qml:70
-msgid ""
-"Uses GPS to detect your rough location. When off, GPS turns off to save "
-"battery."
-msgstr "GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리를 절약하기 위해 GPS를 끕니다."
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "The phone needs to restart to install the system update."
+msgstr "시스템 업데이트를 설치하려면, 휴대 전화를 재시작해야 합니다."
 
-#: ../plugins/security-privacy//Location.qml:72
-msgid ""
-"Uses wi-fi and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr "Wi-Fi와 GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리를 절약합니다."
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
+msgstr "시스템 업데이트를 설치하기 전 전원을 켜려면 전화를 연결해주십시오."
 
-#: ../plugins/security-privacy//Location.qml:74
-msgid ""
-"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
-"off location detection saves battery."
-msgstr "Wi-Fi (현재 해제됨)와 GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
+#: ../plugins/system-update//PageComponent.qml:91
+msgid "Install & Restart"
+msgstr "설치 및 다시 시작"
 
-#: ../plugins/security-privacy//Location.qml:76
-msgid ""
-"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
-"Turning off location detection saves battery."
-msgstr "Wi-Fi, 셀타워 위치, GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
+#: ../plugins/system-update//PageComponent.qml:101
+msgid "Not Now"
+msgstr "나중에 하기"
 
-#: ../plugins/security-privacy//Location.qml:78
-msgid ""
-"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
-"to detect your rough location. Turning off location detection saves battery."
-msgstr ""
-"Wi-Fi, 셀타워 위치 (현재 셀룰러 네트워크에 연결되지 않음), GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 "
-"배터리가 절약됩니다."
+#: ../plugins/system-update//PageComponent.qml:107
+msgid "Install"
+msgstr "설치"
 
-#: ../plugins/security-privacy//Location.qml:80
-msgid ""
-"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
-"rough location. Turning off location detection saves battery."
-msgstr ""
-"Wi-Fi (현재 해제됨), 셀타워 위치, GPS를 사용하여 대략적인 위치를 감지합니다. 이 설정을 해제하면 배터리가 절약됩니다."
+#: ../plugins/system-update//PageComponent.qml:128
+msgid "Software is up to date"
+msgstr "소프트웨어가 최신 상태입니다."
 
-#: ../plugins/security-privacy//Location.qml:82
-msgid ""
-"Uses wi-fi (currently off), cell tower locations (no current cellular "
-"connection), and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"Wi-Fi (현재 해제됨), 셀타워 위치 (현제 셀룰러 네트워크에 연결되지 않음), GPS를 사용하여 대략적인 위치를 감지합니다. 이 "
-"설정을 해제하면 배터리가 절약됩니다."
+#: ../plugins/system-update//PageComponent.qml:239
+msgid "Checking for updates…"
+msgstr "업데이트 확인 중..."
 
-#: ../plugins/security-privacy//Location.qml:89
-msgid "Allow access to location:"
-msgstr "위치 정보에 접근 허용:"
-
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "다음에서 결과를 가져오기:"
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
-msgid "Camera"
-msgstr "카메라"
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:59
+#: ../plugins/system-update//PageComponent.qml:257
 #, qt-format
-msgid "%1/%2"
-msgstr ""
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] "%1개 업데이트를 설치하는 중..."
 
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:44
-#: ../plugins/reset//PageComponent.qml:73
-msgid "Reset Launcher"
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr ""
-
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr "런쳐의 내용, 레이아웃, 그리고 홈스크린의 필터들이 모두 초기 설정으로 복원 됩니다."
-
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "모든 시스템 설정 초기화"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:50
-msgid "Reset phone"
-msgstr "휴대폰 초기화"
-
-#: ../plugins/reset//PageComponent.qml:87
-msgid "Reset all system settings…"
-msgstr "모든 시스템 설정 초기화..."
-
-#: ../plugins/reset//PageComponent.qml:101
-msgid "Erase & Reset Everything…"
-msgstr ""
-
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr "모든 문서와 저장된 게임, 설정 그리고 기타 다른 항목들이 영구히 지워집니다."
-
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr ""
-
-#: ../plugins/phone//SingleSim.qml:29
-msgid "SIM"
-msgstr "심 (SIM) 카드"
-
-#: ../plugins/phone//SingleSim.qml:33 ../plugins/phone//NoSims.qml:28
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76
-msgid "Call forwarding"
-msgstr "착신전환"
-
-#: ../plugins/phone//SingleSim.qml:40 ../plugins/phone//NoSims.qml:34
-#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
-#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-msgid "Call waiting"
-msgstr "통화 대기"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#: ../plugins/system-update//PageComponent.qml:258
 #, qt-format
-msgid "%1 Services"
-msgstr "%1 서비스"
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] "%1개 업데이트 설치"
 
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
-msgstr ""
+#: ../plugins/system-update//PageComponent.qml:259
+msgid "Pause All"
+msgstr "모두 일시 중지"
 
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "전화"
+#: ../plugins/system-update//PageComponent.qml:313
+msgid "Retry"
+msgstr "재시도"
 
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
-msgid "Phone"
-msgstr "휴대전화"
+#: ../plugins/system-update//PageComponent.qml:329
+msgid "Download"
+msgstr "내려받기"
 
-#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
-#: ../plugins/phone//MultiSim.qml:94
-msgid "Services"
-msgstr ""
+#: ../plugins/system-update//PageComponent.qml:329
+msgid "Update"
+msgstr "업데이트"
 
-#: ../plugins/phone//CallWaiting.qml:89
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr "통화 중에 다른 통화를 걸거나 받고, 통화 간 전환을 할 수 있도록 합니다."
+#: ../plugins/system-update//PageComponent.qml:330
+msgid "Resume"
+msgstr "다시 시작"
 
-#: ../plugins/phone//CallForwarding.qml:91
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr "전화를 받지 못하거나 통화 중인 경우, 또는 휴대 전화가 서비스 지역을 이탈한 경우에 다른 번호로 전달합니다."
+#: ../plugins/system-update//PageComponent.qml:331
+msgid "Pause"
+msgstr "일시정지"
 
-#: ../plugins/phone//CallForwarding.qml:101
-msgid "Forward to"
-msgstr ""
+#: ../plugins/system-update//PageComponent.qml:389
+msgid "Installing"
+msgstr "설치 중"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
-msgid "Notifications"
-msgstr ""
+#: ../plugins/system-update//PageComponent.qml:422
+msgid "Installed"
+msgstr "설치됨"
 
-#: ../plugins/notifications//PageComponent.qml:40
-msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
-msgstr ""
+#: ../plugins/system-update//PageComponent.qml:447
+msgid "Version: "
+msgstr "버전: "
 
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:108
-#: ../plugins/language//PageComponent.qml:118
-msgid "Spell checking"
-msgstr "맞춤법 검사"
+#: ../plugins/system-update//PageComponent.qml:469
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr "애플리케이션에 대한 업데이트를 제공받으려면 우분투 원 계정으로 로그인하세요."
 
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "현재 맞춤법 검사 언어:"
+#: ../plugins/system-update//PageComponent.qml:478
+msgid "Sign In…"
+msgstr "로그인..."
 
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "사용 가능한 언어:"
+#: ../plugins/system-update//PageComponent.qml:545
+msgid "Installing update…"
+msgstr "업데이트 설치 중..."
 
-#: ../plugins/language//RebootNecessary.qml:38
-msgid "Restart Now"
-msgstr ""
+#: ../plugins/system-update//PageComponent.qml:560
+#: ../plugins/system-update//Configuration.qml:30
+msgid "Auto download"
+msgstr "자동 다운로드"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:33
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
-msgid "Language & Text"
-msgstr "언어 & 글"
+#: ../plugins/system-update//PageComponent.qml:565
+msgid "On wi-fi"
+msgstr "Wi-Fi 에서"
 
-#: ../plugins/language//PageComponent.qml:79
-msgid "Display language…"
-msgstr "표시 언어..."
+#: ../plugins/system-update//PageComponent.qml:567
+msgid "Always"
+msgstr "항상"
 
-#: ../plugins/language//PageComponent.qml:93
-#: ../plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "키보드 레이아웃"
+#: ../plugins/system-update//PageComponent.qml:582
+msgid " bytes"
+msgstr " 바이트"
 
-#: ../plugins/language//PageComponent.qml:128
-msgid "Auto correction"
-msgstr ""
+#: ../plugins/system-update//PageComponent.qml:585
+msgid " KiB"
+msgstr " 킬로바이트"
 
-#: ../plugins/language//PageComponent.qml:138
-msgid "Word suggestions"
-msgstr "단어 추천"
+#: ../plugins/system-update//PageComponent.qml:588
+msgid " MiB"
+msgstr " 메가바이트"
 
-#: ../plugins/language//PageComponent.qml:151
-msgid "Auto capitalization"
-msgstr "자동 대문자화"
+#: ../plugins/system-update//PageComponent.qml:591
+msgid " GiB"
+msgstr " 기가바이트"
 
-#: ../plugins/language//PageComponent.qml:161
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "문장의 첫 글자를 자동으로 대문자화합니다."
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr "업데이트를 자동으로 다운로드 합니다:"
 
-#: ../plugins/language//PageComponent.qml:168
-msgid "Auto punctuation"
-msgstr ""
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr "Wi-Fi에 연결되어 있을때"
 
-#: ../plugins/language//PageComponent.qml:178
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr "어떤 네트워크이든 연결되어 있을때"
 
-#: ../plugins/language//PageComponent.qml:195
-msgid "Keyboard vibration"
-msgstr ""
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr "데이터 요금이 부과될 수 있습니다."
 
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "현재 레이아웃:"
-
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "사용 가능한 레이아웃:"
-
-#: ../plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr "표시 언어"
-
-#: ../plugins/language//DisplayLanguage.qml:114
-msgid "Confirm"
-msgstr "확인"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:106
-msgid "Cellular"
-msgstr "셀룰러 네트워크"
-
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:29
-#: ../plugins/cellular//Components//SingleSim.qml:43
-#: ../plugins/cellular//Components//MultiSim.qml:48
-msgid "Wi-Fi hotspot"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:40
-msgid "Hotspot"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:60
-msgid ""
-"When hotspot is on, other devices can use your cellular data connection over "
-"Wi-Fi. Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:61
-msgid ""
-"Other devices can use your cellular data connection over the Wi-Fi network. "
-"Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:65
-msgid "Set up hotspot"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-#: ../plugins/cellular//Components//MultiSim.qml:68
-msgid "Carriers"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarriers.qml:49
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/battery//PageComponent.qml:131
-#: ../plugins/battery//PageComponent.qml:287 ../plugins/about//Storage.qml:204
-#: ../plugins/cellular//Components//SingleSim.qml:62
-#: ../plugins/cellular//Components//NoSim.qml:48
-msgid "N/A"
-msgstr "없음"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "네트워크 선택하기:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "새로 고침"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "검색 중"
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:118
-msgid "Brightness"
-msgstr "밝기"
-
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "자동으로 조절하기"
-
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
-
-#: ../plugins/brightness//BrightnessSlider.qml:51
-#: ../plugins/battery//PageComponent.qml:296
-msgid "Display brightness"
-msgstr ""
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "블루투스 페어링 요청"
 
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
 msgstr "'%1'의 PIN 번호"
 
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 msgid "Pair"
 msgstr "페어링"
 
@@ -1169,29 +1314,29 @@ msgstr "페어링"
 #: ../plugins/bluetooth//PageComponent.qml:32
 #: ../plugins/bluetooth//PageComponent.qml:147
 #: ../plugins/battery//PageComponent.qml:363
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:134
 msgid "Bluetooth"
 msgstr "블루투스"
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
-msgstr ""
+msgstr "연결함"
 
 #: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
-msgstr ""
+msgstr "연결 중..."
 
 #: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
-msgstr ""
+msgstr "연결 해제 중..."
 
 #: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
-msgstr ""
+msgstr "연결 해제함"
 
 #: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
-msgstr ""
+msgstr "알 수 없음"
 
 #: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
@@ -1279,7 +1424,7 @@ msgstr "다른 장치에 연결하기:"
 
 #: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
-msgstr ""
+msgstr "장치 연결:"
 
 #: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
@@ -1288,7 +1433,7 @@ msgstr "검색되지 않음"
 #: ../plugins/bluetooth//PageComponent.qml:291
 #: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "발견하면 자동으로 연결:"
 
 #: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
@@ -1296,7 +1441,7 @@ msgstr "종류"
 
 #: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
-msgstr ""
+msgstr "상태"
 
 #: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
@@ -1304,7 +1449,7 @@ msgstr "신호 강도"
 
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
-msgstr ""
+msgstr "이 장치 잊기"
 
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
@@ -1316,27 +1461,9 @@ msgstr "'%1'에 표시된 PIN 번호와 같은지 확인해 주십시오."
 msgid "Confirm PIN"
 msgstr "PIN 번호 확인"
 
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Lock the phone when it's not in use:"
-msgstr "휴대전화를 사용하지 않을때 잠금:"
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "휴대전화를 사용하지 않을 때 잠자기 모드로 전환:"
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr "시간이 짧을수록 더 안전합니다. 통화중이거나 동영상을 재생하고 있을 때는 휴대전화가 잠기지 않습니다."
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid "Phone won’t sleep during calls or video playback."
-msgstr "통화 중이거나 동영상을 재생하고 있을때에는 잠자기모드로 전환되지 않습니다."
-
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:130
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:140
 msgid "Battery"
 msgstr "배터리"
 
@@ -1393,16 +1520,21 @@ msgstr "%1%"
 #: ../plugins/battery//PageComponent.qml:212
 #: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
-msgstr ""
+msgstr "어제"
 
 #: ../plugins/battery//PageComponent.qml:220
 #: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
-msgstr ""
+msgstr "오늘"
 
 #: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
 msgstr "배터리 사용량을 줄이는 방법"
+
+#: ../plugins/battery//PageComponent.qml:296
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr "화면 밝기"
 
 #: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
@@ -1412,211 +1544,122 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "정확한 위치를 파악하기 위해서는 GPS와/또는 Wi-Fi가 필요합니다."
 
-#: ../plugins/background//Preview.qml:67
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Lock the phone when it's not in use:"
+msgstr "휴대전화를 사용하지 않을때 잠금:"
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "휴대전화를 사용하지 않을 때 잠자기 모드로 전환:"
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr "시간이 짧을수록 더 안전합니다. 통화중이거나 동영상을 재생하고 있을 때는 휴대전화가 잠기지 않습니다."
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "통화 중이거나 동영상을 재생하고 있을때에는 잠자기모드로 전환되지 않습니다."
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:146
+msgid "Background"
+msgstr "배경"
+
+#: ../plugins/background//MainPage.qml:109
+msgid "Ubuntu Art"
+msgstr "우분투 기본 배경화면"
+
+#: ../plugins/background//MainPage.qml:125
+msgid "Custom"
+msgstr "사용자 정의"
+
+#: ../plugins/background//Preview.qml:70
 msgid "Preview"
 msgstr "미리보기"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "이미지 제거"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:136
-msgid "Background"
-msgstr "배경"
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:154
+msgid "Brightness"
+msgstr "밝기"
 
-#: ../plugins/background//MainPage.qml:107
-msgid "Ubuntu Art"
-msgstr "우분투 기본 배경화면"
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "자동으로 조절하기"
 
-#: ../plugins/background//MainPage.qml:123
-msgid "Custom"
-msgstr "사용자 정의"
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr "화면의 밝은 부분과 어두운 부분을 조정해 주변 환경에 맞춥니다."
 
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr "우분투 빌드 정보"
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+msgid "Cellular data:"
+msgstr "이동 통신 데이터:"
 
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr "우분투 빌드 번호"
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
+msgid "2G only (saves battery)"
+msgstr "2G 기능만(배터리 절약)"
 
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr "우분투 이미지"
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
+msgid "2G/3G/4G (faster)"
+msgstr "2G/3G/4G(빠름)"
 
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr "우분투 빌드 정보"
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+msgid "Data roaming"
+msgstr "데이터 로밍"
 
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr "장치 이미지"
+#: ../plugins/cellular//Components//NoSim.qml:47
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:66
+msgid "Carrier"
+msgstr "통신사"
 
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr "장치 빌드 정보"
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+msgid "2G/3G (faster)"
+msgstr "2G/3G(빠름)"
 
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr "사용자화 이미지"
-
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
-msgid "Storage"
-msgstr "저장 공간"
-
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "우분투에 의해 사용됨"
-
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "비디오"
-
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "오디오"
-
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "사진"
-
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "다른 파일"
-
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "애플리케이션에 의해 사용됨"
-
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "총 저장 공간"
-
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "빈 공간"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "이름 순으로"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "크기 순으로"
-
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
-msgid "Software licenses"
-msgstr "소프트웨어 라이선스"
-
-#: ../plugins/about//PhoneNumbers.qml:31
-msgid "Phone number:"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
-msgid "About this phone"
-msgstr "이 폰에 대하여"
-
-#: ../plugins/about//PageComponent.qml:107
-msgid "Serial"
-msgstr "시리얼"
-
-#: ../plugins/about//PageComponent.qml:124
-msgid "Wi-Fi address"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:132
-msgid "Bluetooth address"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:133
-msgid "Software:"
-msgstr "소프트웨어:"
-
-#: ../plugins/about//PageComponent.qml:138
-msgid "OS"
-msgstr "OS"
-
-#: ../plugins/about//PageComponent.qml:147
-msgid "Last updated"
-msgstr "마지막 업데이트"
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "Check for updates"
-msgstr "업데이트 확인"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Legal:"
-msgstr "법률 정보:"
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Regulatory info"
-msgstr "규정 정보"
-
-#: ../plugins/about//PageComponent.qml:185
-msgid "Developer mode"
-msgstr ""
-
-#: ../plugins/about//License.qml:30
-msgid "Sorry, this license could not be displayed."
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
-msgid "Developer Mode"
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:73
-msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:98
-msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr ""
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
-msgid "Privacy policy"
-msgstr ""
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
-msgid "Report to Canonical:"
-msgstr ""
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
-msgid "App crashes and errors"
-msgstr ""
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
-msgid "Previous error reports"
-msgstr ""
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
-msgid "Includes info about what an app was doing when it failed."
-msgstr ""
-
-#: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//MultiSim.qml:42
+#: ../plugins/cellular//Components//SingleSim.qml:37
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "와이파이를 껏기 때문에 핫스팟을 사용하지 않습니다."
 
-#: ../plugins/cellular//Components//SingleSim.qml:52
 #: ../plugins/cellular//Components//MultiSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:52
 msgid "Data usage statistics"
 msgstr "데이터 사용 통계"
 
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:66
-#: ../plugins/cellular//Components//NoSim.qml:47
-msgid "Carrier"
-msgstr ""
+#: ../plugins/cellular//Components//DefaultSim.qml:29
+msgid "Ask me each time"
+msgstr "매번 묻기"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:34
+msgid "For outgoing calls, use:"
+msgstr "전화를 걸 때 사용할 심 카드:"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:48
+msgid ""
+"You can change the SIM for individual calls, or for contacts in the address "
+"book."
+msgstr "통화를 할 때 마다 또는 주소록의 연락처에서 사용할 심 카드를 바꿀 수 있습니다."
+
+#: ../plugins/cellular//Components//DefaultSim.qml:55
+msgid "For messages, use:"
+msgstr "메시지를 보낼 때 사용할 심 카드:"
 
 #: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
@@ -1624,58 +1667,31 @@ msgstr "APN"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "심 카드 이름 편집"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "확인"
 
-#: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:32
-#: ../plugins/cellular//Components//CellularMultiSim.qml:82
-msgid "Cellular data:"
-msgstr ""
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
+msgid "Privacy policy"
+msgstr "개인 정보 보호 정책"
 
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:51
-#: ../plugins/cellular//Components//CellularMultiSim.qml:138
-msgid "2G only (saves battery)"
-msgstr ""
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
+msgid "Report to Canonical:"
+msgstr "캐노니컬에 보고"
 
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:140
-msgid "2G/3G/4G (faster)"
-msgstr ""
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
+msgid "App crashes and errors"
+msgstr "프로그램 충돌과 오류"
 
-#: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:72
-#: ../plugins/cellular//Components//CellularMultiSim.qml:182
-msgid "Data roaming"
-msgstr ""
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
+msgid "Previous error reports"
+msgstr "이전 오류 보고서"
 
-#: ../plugins/cellular//Components//DefaultSim.qml:29
-msgid "Ask me each time"
-msgstr ""
-
-#: ../plugins/cellular//Components//DefaultSim.qml:34
-msgid "For outgoing calls, use:"
-msgstr ""
-
-#: ../plugins/cellular//Components//DefaultSim.qml:48
-msgid ""
-"You can change the SIM for individual calls, or for contacts in the address "
-"book."
-msgstr ""
-
-#: ../plugins/cellular//Components//DefaultSim.qml:55
-msgid "For messages, use:"
-msgstr ""
-
-#: ../plugins/cellular//Components//CellularSingleSim.qml:52
-#: ../plugins/cellular//Components//CellularMultiSim.qml:139
-msgid "2G/3G (faster)"
-msgstr ""
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
+msgid "Includes info about what an app was doing when it failed."
+msgstr "오류가 발생했을 때 사용하던 프로그램 정로블 포함합니다."
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1696,10 +1712,6 @@ msgstr ""
 msgid "Remove images…"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:110
-msgid "System Settings"
-msgstr "시스템 설정"
-
 #: ../src/qml/MainWindow.qml:131
 msgid "Search"
 msgstr "검색"
@@ -1711,91 +1723,6 @@ msgstr "개인"
 #: ../src/qml/MainWindow.qml:155
 msgid "System"
 msgstr "시스템"
-
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi‑Fi"
-msgstr ""
-
-#: ../wizard/qml/Pages//20-wifi.qml:66
-msgid "Available networks"
-msgstr "사용 가능한 네트워크"
-
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
-#: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//30-location.qml:66
-#: ../wizard/qml/Pages//15-passwd.qml:170
-msgid "Continue"
-msgstr "계속"
-
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
-msgid "Skip"
-msgstr "건너뛰기"
-
-#: ../wizard/qml/Pages//10-welcome.qml:24
-msgid "Hi!"
-msgstr ""
-
-#: ../wizard/qml/Pages//10-welcome.qml:41
-msgid "Welcome to your Ubuntu phone."
-msgstr ""
-
-#: ../wizard/qml/Pages//10-welcome.qml:49
-msgid "Let’s get started."
-msgstr ""
-
-#: ../wizard/qml/Pages//terms.qml:24
-msgid "Terms & Conditions"
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "Add a SIM card"
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:33
-msgid "Please insert a SIM card before you continue."
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:35
-msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:22
-msgid "All done"
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:37
-msgid "Nice work!"
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:45
-msgid "Your phone is now ready to use."
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:52
-msgid "Finish"
-msgstr "완료"
-
-#: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug reporting"
-msgstr ""
-
-#: ../wizard/qml/Pages//40-reporting.qml:35
-msgid "Your phone is set up to automatically report errors to Canonical."
-msgstr ""
-
-#: ../wizard/qml/Pages//40-reporting.qml:43
-msgid "This can be disabled in System Settings."
-msgstr ""
-
-#: ../wizard/qml/Pages//30-location.qml:50
-msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
-
-#: ../wizard/qml/Pages//30-location.qml:69
-msgid ""
-"I have read and agreed to the HERE <a href='terms.qml'>terms and "
-"conditions</a>"
-msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -1821,6 +1748,91 @@ msgstr ""
 msgid "Passphrase must be at least four characters long."
 msgstr ""
 
+#: ../wizard/qml/Pages//15-passwd.qml:170
+#: ../wizard/qml/Pages//30-location.qml:79
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//20-wifi.qml:195
+msgid "Continue"
+msgstr "계속"
+
+#: ../wizard/qml/Pages//terms.qml:25
+msgid "Terms & Conditions"
+msgstr ""
+
+#: ../wizard/qml/Pages//30-location.qml:60
+msgid "Use your mobile network and Wi-Fi to work out where you are"
+msgstr ""
+
+#: ../wizard/qml/Pages//30-location.qml:69
+msgid ""
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
+msgstr ""
+
+#: ../wizard/qml/Pages//40-reporting.qml:22
+msgid "Bug reporting"
+msgstr ""
+
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
+msgstr ""
+
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hi!"
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:42
+msgid "Welcome to your Ubuntu phone."
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:50
+msgid "Let’s get started."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "All done"
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr ""
+
+#: ../wizard/qml/Pages//80-finished.qml:52
+msgid "Finish"
+msgstr "완료"
+
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi‑Fi"
+msgstr ""
+
+#: ../wizard/qml/Pages//20-wifi.qml:146
+msgid "Available networks"
+msgstr "사용 가능한 네트워크"
+
+#: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//no-sim.qml:50
+msgid "Skip"
+msgstr "건너뛰기"
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "Add a SIM card"
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
+msgstr ""
+
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "뒤로"
@@ -1835,283 +1847,307 @@ msgstr ""
 msgid "%1  〉"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:4
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:110
-msgid "network"
-msgstr "네트워크"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:6
-msgid "wireless"
-msgstr "무선"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:8
-msgid "wifi"
-msgstr "와이파이"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:10
-msgid "wi-fi"
-msgstr "Wi-Fi"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:12
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:22
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:40
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:48
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:54
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:60
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:78
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:88
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:116
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:122
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:128
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
-msgid "settings"
-msgstr "설정"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:16
-msgid "time"
-msgstr "시간"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:18
-msgid "date"
-msgstr "날짜"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
-msgid "timezone"
-msgstr "시간대"
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
-msgid "Updates available"
-msgstr "사용 가능한 업데이트"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:28
-msgid "system"
-msgstr "시스템"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:30
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:74
-msgid "software"
-msgstr "소프트웨어"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:32
-msgid "update"
-msgstr "업데이트"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
-msgid "sound"
-msgstr "소리"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:44
-msgid "security"
-msgstr "보안"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:46
-msgid "privacy"
-msgstr "사생활 보호"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:52
-msgid "reset"
-msgstr "초기화"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:58
-msgid "phone"
-msgstr "휴대 전화"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:62
-msgid "Orientation Lock"
-msgstr "화면 방향 잠금"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:64
-msgid "rotation"
-msgstr "회전"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:66
-msgid "orientation"
-msgstr "방향"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:68
-msgid "lock"
-msgstr "잠금"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:70
-msgid "screen"
-msgstr "화면"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:76
-msgid "notifications"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:82
-msgid "language"
-msgstr "언어"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:84
-msgid "lang"
-msgstr "언어"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:86
-msgid "i18n"
-msgstr "지역화"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:90
-msgid "Flight Mode"
-msgstr "비행 중 모드"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:92
-msgid "flight"
-msgstr "비행 중"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:94
-msgid "plane"
-msgstr "비행기"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:96
-msgid "offline"
-msgstr "오프라인"
-
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:98
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:2
 msgid "Example"
 msgstr "예시"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:100
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:4
 msgid "example"
 msgstr "예시"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:102
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:6
 msgid "test"
 msgstr "테스트"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:104
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:8
 msgid "sample"
 msgstr "예제"
 
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:108
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:12
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:32
+msgid "network"
+msgstr "네트워크"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:14
+msgid "wireless"
+msgstr "무선"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:16
+msgid "wifi"
+msgstr "와이파이"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:18
+msgid "wi-fi"
+msgstr "Wi-Fi"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:20
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:26
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:38
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:48
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:56
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:62
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:68
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:102
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:112
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:120
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:132
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:138
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:158
+msgid "settings"
+msgstr "설정"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:24
+msgid "reset"
+msgstr "초기화"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:30
 msgid "cellular"
 msgstr "셀룰러"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:112
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:34
 msgid "mobile"
 msgstr "휴대 전화"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:114
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:36
 msgid "gsm"
 msgstr "모바일 네트워크"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:120
-msgid "brightness"
-msgstr "밝기"
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:42
+msgid "language"
+msgstr "언어"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:126
-msgid "bluetooth"
-msgstr "블루투스"
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:44
+msgid "lang"
+msgstr "언어"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
-msgid "battery"
-msgstr "배터리"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:134
-msgid "power"
-msgstr "전원"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:138
-msgid "appearance"
-msgstr "모양"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:140
-msgid "background"
-msgstr "배경"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:142
-msgid "wallpaper"
-msgstr "배경 화면"
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:46
+msgid "i18n"
+msgstr "지역화"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:50
 msgid "Accessibility"
 msgstr "접근성"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:146
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:52
 msgid "accessibility"
 msgstr "접근성"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:148
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:54
 msgid "a11y"
 msgstr "접근성"
 
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:60
+msgid "sound"
+msgstr "소리"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:66
+msgid "phone"
+msgstr "휴대 전화"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:154
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:72
 msgid "about"
 msgstr "정보"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:74
 msgid "device"
 msgstr "장치"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:158
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:76
 msgid "info"
 msgstr "정보"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:78
+msgid "Orientation Lock"
+msgstr "화면 방향 잠금"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:80
+msgid "rotation"
+msgstr "회전"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:82
+msgid "orientation"
+msgstr "방향"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:84
+msgid "lock"
+msgstr "잠금"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:86
+msgid "screen"
+msgstr "화면"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:88
+msgid "Flight Mode"
+msgstr "비행 중 모드"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:90
+msgid "flight"
+msgstr "비행 중"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:92
+msgid "plane"
+msgstr "비행기"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:94
+msgid "offline"
+msgstr "오프라인"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:98
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:128
+msgid "software"
+msgstr "소프트웨어"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:100
+msgid "notifications"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:106
+msgid "time"
+msgstr "시간"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:108
+msgid "date"
+msgstr "날짜"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:110
+msgid "timezone"
+msgstr "시간대"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:116
+msgid "security"
+msgstr "보안"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:118
+msgid "privacy"
+msgstr "사생활 보호"
+
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:122
+msgid "Updates available"
+msgstr "사용 가능한 업데이트"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:126
+msgid "system"
+msgstr "시스템"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:130
+msgid "update"
+msgstr "업데이트"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:136
+msgid "bluetooth"
+msgstr "블루투스"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:142
+msgid "battery"
+msgstr "배터리"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:144
+msgid "power"
+msgstr "전원"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:148
+msgid "appearance"
+msgstr "모양"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:150
+msgid "background"
+msgstr "배경"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:152
+msgid "wallpaper"
+msgstr "배경 화면"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:156
+msgid "brightness"
+msgstr "밝기"
+
+#: ../plugins/about//click.cpp:134
+msgid "Unknown title"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:318
+msgid "Incorrect PIN code. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:320
+msgid "Incorrect passphrase. Try again."
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:323
+msgid "Could not set security mode"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:372
+msgid "Could not set security display hint"
+msgstr ""
+
+#: ../plugins/security-privacy//securityprivacy.cpp:383
+msgid "Authentication token manipulation error"
+msgstr ""
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
@@ -2121,40 +2157,12 @@ msgstr ""
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
 
-#: ../plugins/security-privacy//securityprivacy.cpp:301
-msgid "Incorrect PIN code. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//securityprivacy.cpp:303
-msgid "Incorrect passphrase. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//securityprivacy.cpp:306
-msgid "Could not set security mode"
-msgstr ""
-
-#: ../plugins/security-privacy//securityprivacy.cpp:355
-msgid "Could not set security display hint"
-msgstr ""
-
-#: ../plugins/security-privacy//securityprivacy.cpp:368
-msgid "Authentication token manipulation error"
-msgstr ""
-
-#: ../plugins/about//click.cpp:134
-msgid "Unknown title"
-msgstr ""
-
-#: ../push-helper/software-updates-helper.py:78
-msgid "There's an updated system image."
-msgstr ""
-
-#: ../push-helper/software-updates-helper.py:79
-msgid "Tap to open the system updater."
-msgstr ""
-
 #~ msgid "Remove"
 #~ msgstr "삭제"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Wi-Fi에 연결하기"
+
+#, qt-format
+#~ msgid "%1"
+#~ msgstr "%1"
