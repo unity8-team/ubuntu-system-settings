@@ -31,22 +31,43 @@ ListItem.SingleValue {
     iconFrame: false
     progression: true
 
-    value: root.updatesAvailable > 0 ? root.updatesAvailable : ""
+    value: updatesAvailable > 0 ? updatesAvailable : ""
 
     property int updatesAvailable: 0
+    property variant updateModel: UpdateManager.model
 
-    Item {
-        UpdateManager {
-            id: updateManager
-            objectName: "updateManager"
+    function _updatesRefresh() {
+        console.warn("_updatesRefresh: " + root.updateModel);
+        var _updatesAvailable = 0;
+        for (var i=0; i < updateModel.length; i++) {
+            if (updateModel[i].updateRequired)
+                _updatesAvailable += 1;
+        }
+        root.updatesAvailable = _updatesAvailable;
+        console.warn("_updatesRefresh: " + root.updatesAvailable);
+        if (root.updatesAvailable > 0)
+            parent.visible = true;
+        else
+            parent.visible = false;
+    }
 
-            Component.onCompleted: {
-                updateManager.checkUpdates();
-            }
+    Connections {
+        id: updateManager
+        objectName: "updateManager"
+        target: UpdateManager
+        onModelChanged: {
+            console.warn("onModelChanged: " + UpdateManager.model.length)
+            root._updatesRefresh();
+        }
 
-            onUpdateAvailableFound: {
-                root.updatesAvailable = updateManager.model.length;
-            }
+        Component.onCompleted: {
+            //updateManager.checkUpdates();
+            UpdateManager.checkUpdates();
+        }
+
+        onUpdateAvailableFound: {
+            console.warn("onUpdateAvailableFound: " + UpdateManager.model.length)
+            root._updatesRefresh();
         }
     }
 
