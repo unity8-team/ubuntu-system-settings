@@ -24,7 +24,7 @@ import QMenuModel 0.1
 
 ItemPage {
     id: othernetwork
-    title: i18n.tr("Other network")
+    title: i18n.tr("Connect to hidden network")
 
     function settingsValid() {
         if(networkname.length == 0) {
@@ -42,88 +42,116 @@ ItemPage {
                password.length === 13 ||
                password.length === 26;
     }
-
-
-    Column {
-        id : otherview
+    Component.onCompleted: {
+        flickable: otherNetworkFlickable
+    }
+    Flickable {
+        id: otherNetworkFlickable
+        contentWidth: parent.width
+        contentHeight: otherview.height + units.gu(8)
         anchors {
-            top: parent.top
+            fill: parent
             left: parent.left
             right: parent.right
+            bottom: buttons.top
         }
-
-        ListItem.Standard {
-            text : i18n.tr("Network name")
-        }
-
-        TextField {
-            id : networkname
-            width: parent.width
-            inputMethodHints: Qt.ImhNoPredictiveText
-        }
-
-        ListItem.ItemSelector {
-            id: securityList
-            text: i18n.tr("Security")
-            model: [i18n.tr("None"),                 // index: 0
-                    i18n.tr("WPA & WPA2 Personal"),  // index: 1
-                    i18n.tr("WEP"),                  // index: 2
-                    ]
-        }
-
-        ListItem.Standard {
-            id: passwordList
-            visible: securityList.selectedIndex !== 0
-            text: i18n.tr("Password")
-            control : TextInput {
+        Column {
+            id : otherview
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
             }
-        }
 
-        TextField {
-            id : password
-            visible: securityList.selectedIndex !== 0
-            width: parent.width
-            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
-        }
+            ListItem.Standard {
+                text : i18n.tr("Network name")
+                showDivider: false
+            }
 
-        ListItem.Standard {
-            text: i18n.tr("Password visible")
-            visible: securityList.selectedIndex !== 0
-            id: passwordVisible
-            control: Switch {
-                id: passwordVisibleSwitch
+            TextField {
+                id : networkname
+                width: parent.width - units.gu(4)
+                anchors.horizontalCenter: parent.horizontalCenter
+                inputMethodHints: Qt.ImhNoPredictiveText
+            }
+
+            ListItem.ItemSelector {
+                id: securityList
+                text: i18n.tr("Security")
+                model: [i18n.tr("None"),                 // index: 0
+                        i18n.tr("WPA & WPA2 Personal"),  // index: 1
+                        i18n.tr("WEP"),                  // index: 2
+                        ]
+            }
+
+            ListItem.Standard {
+                id: passwordList
+                visible: securityList.selectedIndex !== 0
+                text: i18n.tr("Password")
+                control : TextInput {
+                }
+                showDivider: false
+            }
+
+            TextField {
+                id : password
+                visible: securityList.selectedIndex !== 0
+                width: parent.width - units.gu(4)
+                anchors.horizontalCenter: parent.horizontalCenter
+                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+                onActiveFocusChanged: {
+                    parent.parent.contentY = 1000
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Password visible")
+                visible: securityList.selectedIndex !== 0
+                id: passwordVisible
+                control: Switch {
+                    id: passwordVisibleSwitch
+                }
             }
         }
     }
-
-    RowLayout {
-        id: buttonRow
-
+    Rectangle {
+        id: buttons
+        color: Theme.palette.normal.background
         anchors {
             bottom: parent.bottom
             left: parent.left
             right: parent.right
-            margins: units.gu(2)
         }
-        spacing: units.gu(2)
-
-        Button {
-            id: cancelButton
-            Layout.fillWidth: true
-            text: i18n.tr("Cancel")
-            onClicked: {
-                pageStack.pop()
+        height: buttonRow.height + units.gu(4)
+        RowLayout {
+            id: buttonRow
+            anchors {
+                margins: units.gu(2)
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                right: parent.right
             }
-        }
+            spacing: units.gu(2)
+            height: cancelButton.height
 
-        Button {
-            id: connectButton
-            Layout.fillWidth: true
-            text: i18n.tr("Connect")
-            enabled: settingsValid()
-            onClicked: {
-                DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
-                pageStack.pop()
+            Button {
+                id: cancelButton
+                Layout.fillWidth: true
+                text: i18n.tr("Cancel")
+                onClicked: {
+                    pageStack.pop()
+                }
+            }
+
+            Button {
+                id: connectButton
+                Layout.fillWidth: true
+                text: i18n.tr("Connect")
+                enabled: settingsValid()
+                onClicked: {
+                    DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
+                    pageStack.pop()
+                }
             }
         }
     }
