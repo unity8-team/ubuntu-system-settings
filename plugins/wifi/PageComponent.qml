@@ -135,19 +135,6 @@ ItemPage {
             }
         }
 
-        bottomMargin: Qt.inputMethod.visible ? (Qt.inputMethod.keyboardRectangle.height - main.anchors.bottomMargin) : 0
-
-        Behavior on bottomMargin {
-            NumberAnimation {
-                duration: 175
-                easing.type: Easing.OutQuad
-            }
-        }
-        // TODO - does ever frame.
-        onBottomMarginChanged: {
-            mainMenu.positionViewAtIndex(mainMenu.currentIndex, ListView.End)
-        }
-
         // Only allow flicking if the content doesn't fit on the page
         boundsBehavior: (contentHeight > wifibase.height) ?
                             Flickable.DragAndOvershootBounds :

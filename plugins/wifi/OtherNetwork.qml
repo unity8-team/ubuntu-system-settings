@@ -43,87 +43,108 @@ ItemPage {
                password.length === 26;
     }
 
+    Flickable {
+        id: otherNetworkFlickable
+        contentWidth: parent.width
+        contentHeight: otherview.height + units.gu(8)
+        anchors.fill: parent
 
-    Column {
-        id : otherview
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-
-        ListItem.Standard {
-            text : i18n.tr("Network name")
-        }
-
-        TextField {
-            id : networkname
-            width: parent.width
-            inputMethodHints: Qt.ImhNoPredictiveText
-        }
-
-        ListItem.ItemSelector {
-            id: securityList
-            text: i18n.tr("Security")
-            model: [i18n.tr("None"),                 // index: 0
-                    i18n.tr("WPA & WPA2 Personal"),  // index: 1
-                    i18n.tr("WEP"),                  // index: 2
-                    ]
-        }
-
-        ListItem.Standard {
-            id: passwordList
-            visible: securityList.selectedIndex !== 0
-            text: i18n.tr("Password")
-            control : TextInput {
+        Column {
+            id : otherview
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
             }
-        }
 
-        TextField {
-            id : password
-            visible: securityList.selectedIndex !== 0
-            width: parent.width
-            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Password visible")
-            visible: securityList.selectedIndex !== 0
-            id: passwordVisible
-            control: Switch {
-                id: passwordVisibleSwitch
+            ListItem.Standard {
+                text : i18n.tr("Network name")
+                showDivider: false
             }
-        }
-    }
 
-    RowLayout {
-        id: buttonRow
-
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-            margins: units.gu(2)
-        }
-        spacing: units.gu(2)
-
-        Button {
-            id: cancelButton
-            Layout.fillWidth: true
-            text: i18n.tr("Cancel")
-            onClicked: {
-                pageStack.pop()
+            TextField {
+                id : networkname
+                width: parent.width - units.gu(4)
+                anchors.horizontalCenter: parent.horizontalCenter
             }
-        }
 
-        Button {
-            id: connectButton
-            Layout.fillWidth: true
-            text: i18n.tr("Connect")
-            enabled: settingsValid()
-            onClicked: {
-                DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
-                pageStack.pop()
+            ListItem.ItemSelector {
+                id: securityList
+                text: i18n.tr("Security")
+                model: [i18n.tr("None"),                 // index: 0
+                        i18n.tr("WPA & WPA2 Personal"),  // index: 1
+                        i18n.tr("WEP"),                  // index: 2
+                        ]
+            }
+
+            ListItem.Standard {
+                id: passwordList
+                visible: securityList.selectedIndex !== 0
+                text: i18n.tr("Password")
+                control : TextInput {
+                }
+                showDivider: false
+            }
+
+            TextField {
+                id : password
+                visible: securityList.selectedIndex !== 0
+                width: parent.width - units.gu(4)
+                anchors.horizontalCenter: parent.horizontalCenter
+                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+                onActiveFocusChanged: {
+                    parent.parent.contentY = 1000
+                }
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Password visible")
+                visible: securityList.selectedIndex !== 0
+                id: passwordVisible
+                control: Switch {
+                    id: passwordVisibleSwitch
+                }
+            }
+
+            Rectangle {
+                id: buttons
+                color: Theme.palette.normal.background
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: buttonRow.height + units.gu(4)
+                RowLayout {
+                    id: buttonRow
+                    anchors {
+                        margins: units.gu(2)
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        right: parent.right
+                    }
+                    spacing: units.gu(2)
+                    height: cancelButton.height
+
+                    Button {
+                        id: cancelButton
+                        Layout.fillWidth: true
+                        text: i18n.tr("Cancel")
+                        onClicked: {
+                            pageStack.pop()
+                        }
+                    }
+
+                    Button {
+                        id: connectButton
+                        Layout.fillWidth: true
+                        text: i18n.tr("Connect")
+                        enabled: settingsValid()
+                        onClicked: {
+                            DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
+                            pageStack.pop()
+                        }
+                    }
+                }
             }
         }
     }
