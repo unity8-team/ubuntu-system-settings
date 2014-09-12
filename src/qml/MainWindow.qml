@@ -45,6 +45,7 @@ MainView {
             // Got a valid plugin name - load it
             var pageComponent = plugin.pageComponent
             if (pageComponent) {
+                pageStack.clear()
                 pageStack.push(pageComponent, opts)
             }
             return true
