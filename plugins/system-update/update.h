@@ -39,7 +39,7 @@ class Update : public QObject
                NOTIFY localVersionChanged)
     Q_PROPERTY(QString remoteVersion READ getRemoteVersion
                NOTIFY remoteVersionChanged)
-    Q_PROPERTY(QString updateRequired READ updateRequired)
+    Q_PROPERTY(bool updateRequired READ updateRequired)
     Q_PROPERTY(QString iconUrl READ iconUrl NOTIFY iconUrlChanged)
     Q_PROPERTY(int binaryFilesize READ binaryFilesize
                NOTIFY binaryFilesizeChanged)
