@@ -44,7 +44,7 @@ class Update : public QObject
     Q_PROPERTY(int binaryFilesize READ binaryFilesize
                NOTIFY binaryFilesizeChanged)
     Q_PROPERTY(bool updateState READ updateState WRITE setUpdateState
-               NOTIFY updatesStateChanged)
+               NOTIFY updateStateChanged)
     Q_PROPERTY(bool updateReady READ updateReady WRITE setUpdateReady
                NOTIFY updatesReadyChanged)
     Q_PROPERTY(bool selected READ selected WRITE setSelected
@@ -64,7 +64,7 @@ Q_SIGNALS:
     void iconUrlChanged();
     void localVersionChanged();
     void remoteVersionChanged();
-    void updatesStateChanged();
+    void updateStateChanged();
     void updatesReadyChanged();
     void selectedChanged();
     void errorChanged();

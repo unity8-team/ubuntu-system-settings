@@ -92,7 +92,7 @@ void Update::setSystemUpdate(bool isSystem)
 void Update::setUpdateState(bool state)
 {
     m_update_state = state;
-    Q_EMIT updatesStateChanged();
+    Q_EMIT updateStateChanged();
 }
 
 void Update::setUpdateReady(bool ready)
