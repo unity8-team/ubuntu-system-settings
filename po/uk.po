@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-11 08:57+0200\n"
-"PO-Revision-Date: 2014-09-02 14:35+0000\n"
+"POT-Creation-Date: 2014-09-11 12:06-0400\n"
+"PO-Revision-Date: 2014-09-11 15:42+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,21 +17,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-11 07:26+0000\n"
+"X-Launchpad-Export-Date: 2014-09-12 06:58+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: uk\n"
 
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr "Попередні мережі"
+#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
+msgid "System Settings"
+msgstr "Системні параметри"
+
+#: ubuntu-system-settings.desktop.in.in.h:2
+msgid "System;"
+msgstr ""
+
+#: ubuntu-system-settings.desktop.in.in.h:3
+msgid "Preferences;Settings;"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
 #: ../plugins/battery//PageComponent.qml:333
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:10
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
+
+#: ../plugins/wifi//PageComponent.qml:114
+#: ../plugins/wifi//PreviousNetworks.qml:26
+msgid "Previous networks"
+msgstr "Попередні мережі"
 
 #: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
 msgid "Other network"
@@ -41,67 +53,59 @@ msgstr "Інша мережа"
 msgid "Network name"
 msgstr "Назва мережі"
 
-#: ../plugins/wifi//OtherNetwork.qml:66
+#: ../plugins/wifi//OtherNetwork.qml:67
 #: ../plugins/security-privacy//PageComponent.qml:126
 msgid "Security"
 msgstr "Захист"
 
-#: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PhoneLocking.qml:45
+#: ../plugins/wifi//OtherNetwork.qml:68
 #: ../plugins/bluetooth//PageComponent.qml:116
 #: ../plugins/bluetooth//PageComponent.qml:323
 #: ../plugins/bluetooth//PageComponent.qml:344
 msgid "None"
 msgstr "Немає"
 
-#: ../plugins/wifi//OtherNetwork.qml:68
+#: ../plugins/wifi//OtherNetwork.qml:69
 msgid "WPA & WPA2 Personal"
 msgstr "Персональний WPA та WPA2"
 
-#: ../plugins/wifi//OtherNetwork.qml:69
+#: ../plugins/wifi//OtherNetwork.qml:70
 msgid "WEP"
 msgstr "WEP"
 
-#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
+#: ../plugins/wifi//OtherNetwork.qml:77 ../plugins/wifi//NetworkDetails.qml:61
 msgid "Password"
 msgstr "Пароль"
 
-#: ../plugins/wifi//OtherNetwork.qml:89
+#: ../plugins/wifi//OtherNetwork.qml:90
 msgid "Password visible"
 msgstr "Видимість пароля"
 
-#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/wifi//OtherNetwork.qml:113
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/phone//CallForwarding.qml:139
 #: ../plugins/time-date//TimePicker.qml:173
 #: ../plugins/security-privacy//SimPin.qml:146
 #: ../plugins/security-privacy//SimPin.qml:263
 #: ../plugins/security-privacy//LockSecurity.qml:283
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/background//Preview.qml:97
+#: ../plugins/background//Preview.qml:101
 #: ../plugins/cellular//Components//SimEditor.qml:189
 #: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: ../plugins/wifi//OtherNetwork.qml:121
+#: ../plugins/wifi//OtherNetwork.qml:122
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "З’єднатися"
-
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "Від'єднатися"
-
-#: ../plugins/wifi//NetworkDetailsBrief.qml:58
-msgid "IP address"
-msgstr ""
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -117,15 +121,15 @@ msgid "Last connected"
 msgstr "Останнє з’єднання"
 
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:521
-#: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/about//PageComponent.qml:166
+#: ../plugins/security-privacy//PageComponent.qml:140
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:140
-#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/system-update//PageComponent.qml:563
+#: ../plugins/system-update//Configuration.qml:53
 #: ../plugins/battery//PageComponent.qml:315
 #: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/about//PageComponent.qml:149
+#: ../plugins/battery//SleepValues.qml:106
 msgid "Never"
 msgstr "Ніколи"
 
@@ -136,6 +140,559 @@ msgstr "Показувати пароль"
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
 msgstr "Забути про мережу"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Від'єднатися"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr "IP-адреса"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../plugins/reset//PageComponent.qml:32
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:22
+msgid "Reset phone"
+msgstr "Відновити початковий стан"
+
+#: ../plugins/reset//PageComponent.qml:73
+#: ../plugins/reset//ResetLauncherHome.qml:44
+msgid "Reset Launcher"
+msgstr "Скинути засіб запуску"
+
+#: ../plugins/reset//PageComponent.qml:87
+msgid "Reset all system settings…"
+msgstr "Відновити усі початкові параметри…"
+
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr "Витерти і скинути усе…"
+
+#: ../plugins/reset//EraseEverything.qml:41
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"Усі документи, збережені ігри, параметри та інші записи буде остаточно "
+"вилучено з цього телефону."
+
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "Витерти і скинути усе"
+
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "Засобу запуску буде повернуто його початковий вміст."
+
+#: ../plugins/reset//ResetLauncherHome.qml:59
+#: ../plugins/language//RebootNecessary.qml:34
+msgid "The phone needs to restart for changes to take effect."
+msgstr ""
+"Щоб зміни набули чинності операційну систему телефону слід перезавантажити."
+
+#: ../plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+"Вміст і компонування панелі запуску і фільтри на домашній сторінці буде "
+"повернуто до початкових налаштувань."
+
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "Відновити початкові значення параметрів системи"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+#: ../plugins/cellular//Components//MultiSim.qml:68
+msgid "Carriers"
+msgstr "Носії сигналу"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:49
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//Components//NoSim.qml:48
+#: ../plugins/cellular//Components//SingleSim.qml:62
+msgid "N/A"
+msgstr "н/д"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "Змінити налаштування точки доступу"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "Назва точки"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "Ключ (має складатися з принаймні 8 символів)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "Показувати ключ"
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+#: ../plugins/security-privacy//SimPin.qml:154
+#: ../plugins/security-privacy//LockSecurity.qml:302
+msgid "Change"
+msgstr "Змінити"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:28
+msgid "Cellular"
+msgstr "Мобільний"
+
+#: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//Components//MultiSim.qml:48
+#: ../plugins/cellular//Components//SingleSim.qml:43
+msgid "Wi-Fi hotspot"
+msgstr "Точка Wi-Fi"
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr "Точка"
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
+msgstr ""
+"Якщо точку доступу увімкнено, інші пристрої можуть користуватися "
+"стільниковим з’єднанням за допомогою Wi-Fi. Тарифікація обміну даними "
+"виконуватиметься відповідно до вашого тарифного плану."
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+"Інші пристрої можуть користуватися стільниковим з’єднанням за допомогою Wi-"
+"Fi. Тарифікація обміну даними виконуватиметься відповідно до вашого "
+"тарифного плану."
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr "Налаштувати точку доступу"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "Виберіть сигнал носія:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+msgid "Automatically"
+msgstr "Автоматично"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/security-privacy//PageComponent.qml:149
+msgid "Manually"
+msgstr "Вручну"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "Оновити"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "Пошук"
+
+#: ../plugins/language//DisplayLanguage.qml:36
+msgid "Display language"
+msgstr "Мова перекладу"
+
+#: ../plugins/language//DisplayLanguage.qml:118
+msgid "Confirm"
+msgstr "Підтвердити"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:34
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:40
+msgid "Language & Text"
+msgstr "Мова і текст"
+
+#: ../plugins/language//PageComponent.qml:100
+msgid "Display language…"
+msgstr "Мова показу…"
+
+#: ../plugins/language//PageComponent.qml:117
+#: ../plugins/language//KeyboardLayouts.qml:26
+msgid "Keyboard layouts"
+msgstr "Розкладки клавіатури"
+
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+msgid "Spell checking"
+msgstr "Перевірка правопису"
+
+#: ../plugins/language//PageComponent.qml:152
+msgid "Auto correction"
+msgstr "Автовиправлення"
+
+#: ../plugins/language//PageComponent.qml:162
+msgid "Word suggestions"
+msgstr "Пропозиції слів"
+
+#: ../plugins/language//PageComponent.qml:175
+msgid "Auto capitalization"
+msgstr "Автоматичний регістр літер"
+
+#: ../plugins/language//PageComponent.qml:185
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "Вмикає верхній регістр на першій літері кожного речення."
+
+#: ../plugins/language//PageComponent.qml:192
+msgid "Auto punctuation"
+msgstr "Автопунктуація"
+
+#: ../plugins/language//PageComponent.qml:202
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr ""
+"Додає крапки, пропущені лапки та дужки після подвійного натискання Пробілу."
+
+#: ../plugins/language//PageComponent.qml:209
+#: ../plugins/sound//PageComponent.qml:196
+msgid "Keyboard sound"
+msgstr "Озвучення клавіатури"
+
+#: ../plugins/language//PageComponent.qml:219
+msgid "Keyboard vibration"
+msgstr "Клавіатурна вібрація"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "Поточні розкладки:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "Усі доступні розкладки:"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "Поточні мови перевірки правопису:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Усі доступні мови:"
+
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr "Перезапустити зараз"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:37
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:58
+msgid "Sound"
+msgstr "Звук"
+
+#: ../plugins/sound//PageComponent.qml:76
+msgid "Silent Mode"
+msgstr "Тихий режим"
+
+#: ../plugins/sound//PageComponent.qml:80
+msgid "Ringer:"
+msgstr "Абонент:"
+
+#: ../plugins/sound//PageComponent.qml:112
+msgid "Phone calls:"
+msgstr "Дзвінки:"
+
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
+msgid "Ringtone"
+msgstr "Мелодія дзвінка"
+
+#: ../plugins/sound//PageComponent.qml:135
+msgid "Vibrate when ringing"
+msgstr "Вібрація з дзвінком"
+
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
+msgid "Vibrate in Silent Mode"
+msgstr "Вібрація у тихому режимі"
+
+#: ../plugins/sound//PageComponent.qml:153
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr "Озвучення набирання"
+
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Messages:"
+msgstr "Повідомлення:"
+
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
+msgid "Message received"
+msgstr "Повідомлення отримано"
+
+#: ../plugins/sound//PageComponent.qml:179
+msgid "Vibrate with message sound"
+msgstr "Вібрація зі звуком повідомлення"
+
+#: ../plugins/sound//PageComponent.qml:192
+msgid "Other sounds:"
+msgstr "Інші звуки:"
+
+#: ../plugins/sound//PageComponent.qml:210
+msgid "Lock sound"
+msgstr "Звук блокування"
+
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "Зупинити відтворення"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "Телефон перебуває у тихому режимі."
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:64
+msgid "Phone"
+msgstr "Телефон"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "Останній дзвінок: %1"
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "Дзвінок"
+
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//SingleSim.qml:33
+msgid "Call forwarding"
+msgstr "Переадресація"
+
+#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+msgid "Call waiting"
+msgstr "Очікування виклику"
+
+#: ../plugins/phone//MultiSim.qml:56 ../plugins/phone//MultiSim.qml:94
+#: ../plugins/phone//NoSims.qml:42
+msgid "Services"
+msgstr "Служби"
+
+#: ../plugins/phone//CallForwarding.qml:91
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"Переспрямовує виклики на інший номер, якщо ви не відповідаєте на дзвінок або "
+"ваш телефон зайнято, вимкнено чи поза межами досяжності сигналу."
+
+#: ../plugins/phone//CallForwarding.qml:101
+msgid "Forward to"
+msgstr "Переспрямувати"
+
+#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/security-privacy//LockSecurity.qml:304
+#: ../plugins/background//Preview.qml:108
+msgid "Set"
+msgstr "Встановити"
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "SIM"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#, qt-format
+msgid "%1 Services"
+msgstr "Служби %1"
+
+#: ../plugins/phone//CallWaiting.qml:89
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"Надає змогу відповідати або виконувати нові дзвінки під час іншого дзвінка "
+"або перемикатися між ними."
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr "Вибачте, ці умови ліцензування не може бути показано."
+
+#: ../plugins/about//Version.qml:36
+msgid "OS Build Details"
+msgstr "Параметри збирання ОС"
+
+#: ../plugins/about//Version.qml:65
+msgid "OS build number"
+msgstr "Номер збірки ОС"
+
+#: ../plugins/about//Version.qml:71
+msgid "Ubuntu Image part"
+msgstr "Частина образу Ubuntu"
+
+#: ../plugins/about//Version.qml:79
+msgid "Ubuntu build description"
+msgstr "Опис збірки Ubuntu"
+
+#: ../plugins/about//Version.qml:85
+msgid "Device Image part"
+msgstr "Частина образу пристрою"
+
+#: ../plugins/about//Version.qml:92
+msgid "Device build description"
+msgstr "Опис збірки для пристрою"
+
+#: ../plugins/about//Version.qml:99
+msgid "Customization Image part"
+msgstr "Частина налаштовування образу"
+
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr "Номер телефону:"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:70
+msgid "About this phone"
+msgstr "Про цей телефон"
+
+#: ../plugins/about//PageComponent.qml:109
+msgid "Serial"
+msgstr "Серійний номер"
+
+#: ../plugins/about//PageComponent.qml:124
+msgid "Wi-Fi address"
+msgstr "Адреса Wi-Fi"
+
+#: ../plugins/about//PageComponent.qml:132
+msgid "Bluetooth address"
+msgstr "Адреса Bluetooth"
+
+#: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
+msgid "Storage"
+msgstr "Сховище даних"
+
+#: ../plugins/about//PageComponent.qml:150
+msgid "Software:"
+msgstr "Програмне забезпечення:"
+
+#: ../plugins/about//PageComponent.qml:155
+msgid "OS"
+msgstr "ОС"
+
+#: ../plugins/about//PageComponent.qml:164
+msgid "Last updated"
+msgstr "Востаннє оновлено"
+
+#: ../plugins/about//PageComponent.qml:172
+msgid "Check for updates"
+msgstr "Перевірити наявність оновлень"
+
+#: ../plugins/about//PageComponent.qml:181
+msgid "Legal:"
+msgstr "Правовий статус:"
+
+#: ../plugins/about//PageComponent.qml:186 ../plugins/about//Software.qml:11
+msgid "Software licenses"
+msgstr "Ліцензування програмного забезпечення"
+
+#: ../plugins/about//PageComponent.qml:194
+msgid "Regulatory info"
+msgstr "Дані щодо обмежень"
+
+#: ../plugins/about//PageComponent.qml:202
+msgid "Developer mode"
+msgstr "Режим розробника"
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
+msgid "Developer Mode"
+msgstr "Режим розробника"
+
+#: ../plugins/about//DevMode.qml:82
+msgid ""
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
+msgstr ""
+"У режимі розробника будь-хто може отримувати доступу, змінювати або вилучати "
+"будь-які дані з цього телефону, з’єднавшись із ним з іншого пристрою."
+
+#: ../plugins/about//DevMode.qml:108
+msgid "You need a PIN code or passphrase set to use Developer Mode."
+msgstr ""
+"Для користування режимом розробника вам слід визначити PIN-код або пароль."
+
+#: ../plugins/about//DevMode.qml:114
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+#: ../plugins/security-privacy//LockSecurity.qml:32
+msgid "Lock security"
+msgstr "Захист блокування"
+
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "Використано Ubuntu"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr "Відео"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr "Звук"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr "Зображення"
+
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr "Інші файли"
+
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "Використано програмами"
+
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
+msgstr "Загальна місткість"
+
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "Вільне місце"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr "За назвою"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr "За розміром"
+
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
+msgstr "Номер телефону"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:96
+msgid "Notifications"
+msgstr "Сповіщення"
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr ""
+"Виберіть програми, які зможуть сповіщати вас про події за допомогою панелей-"
+"вигульків, звуків, вібрації та Центру сповіщень."
 
 #: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
@@ -173,16 +730,9 @@ msgstr "Місяць"
 msgid "Year"
 msgstr "Рік"
 
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:304
-#: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/background//Preview.qml:104
-msgid "Set"
-msgstr "Встановити"
-
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: ../plugins/time-date//PageComponent.qml:29
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:14
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:104
 msgid "Time & Date"
 msgstr "Час і дата"
 
@@ -193,19 +743,6 @@ msgstr "Часовий пояс:"
 #: ../plugins/time-date//PageComponent.qml:68
 msgid "Set the time and date:"
 msgstr "Встановити час і дату:"
-
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-msgid "Automatically"
-msgstr "Автоматично"
-
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:149
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-msgid "Manually"
-msgstr "Вручну"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -223,230 +760,149 @@ msgstr "Вкажіть ваше поточне місце перебування
 msgid "No matching place"
 msgstr "Немає відповідного місця"
 
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:26
-msgid "Updates"
-msgstr "Оновлення"
+#: ../plugins/security-privacy//AppAccess.qml:28
+#: ../plugins/security-privacy//PageComponent.qml:253
+msgid "Other app access"
+msgstr "Доступ до інших програм"
 
-#: ../plugins/system-update//PageComponent.qml:52
-msgid "Update System"
-msgstr "Оновлення системи"
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr "Програми, яким ви на запит надали доступ до:"
 
-#: ../plugins/system-update//PageComponent.qml:53
-msgid "The phone needs to restart to install the system update."
-msgstr ""
-"Для завершення встановлення оновленої системи телефон слід перезавантажити."
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:105
+msgid "Camera"
+msgstr "Відеокамера"
 
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "Connect the phone to power before installing the system update."
-msgstr ""
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr "Програми, які надіслали запит щодо користування камерою"
 
-#: ../plugins/system-update//PageComponent.qml:56
-msgid "Install & Restart"
-msgstr "Встановити і перезапустити"
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr "Мікрофон"
 
-#: ../plugins/system-update//PageComponent.qml:65
-msgid "Not Now"
-msgstr "Не зараз"
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr "Програми, які надіслали доступ щодо користування мікрофоном"
 
-#: ../plugins/system-update//PageComponent.qml:71
-msgid "Install"
-msgstr "Встановити"
-
-#: ../plugins/system-update//PageComponent.qml:89
-msgid "Software is up to date"
-msgstr "Програмне забезпечення не потребує оновлення"
-
-#: ../plugins/system-update//PageComponent.qml:198
-msgid "Checking for updates…"
-msgstr "Перевірка наявності оновлень…"
-
-#: ../plugins/system-update//PageComponent.qml:216
+#: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
-msgid "Install %1 update…"
-msgid_plural "Install %1 updates…"
-msgstr[0] "Встановити %1 оновлення…"
-msgstr[1] "Встановити %1 оновлення…"
-msgstr[2] "Встановити %1 оновлень…"
+msgid "%1/%2"
+msgstr "%1/%2"
 
-#: ../plugins/system-update//PageComponent.qml:217
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr "0"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:114
+msgid "Security & Privacy"
+msgstr "Захист і конфіденційність"
+
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone and Internet"
+msgstr "телефон та інтернет"
+
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
+#: ../plugins/security-privacy//Dash.qml:46
+msgid "Phone only"
+msgstr "лише телефон"
+
+#: ../plugins/security-privacy//PageComponent.qml:131
+msgid "Lock phone"
+msgstr "Заблокувати телефон"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
 #, qt-format
-msgid "Install %1 update"
-msgid_plural "Install %1 updates"
-msgstr[0] "Встановити %1 оновлення"
-msgstr[1] "Встановити %1 оновлення"
-msgstr[2] "Встановити %1 оновлень"
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "за %1 хвилину"
+msgstr[1] "за %1 хвилини"
+msgstr[2] "за %1 хвилин"
 
-#: ../plugins/system-update//PageComponent.qml:218
-msgid "Pause All"
-msgstr "Призупинити всі"
-
-#: ../plugins/system-update//PageComponent.qml:270
-msgid "Retry"
-msgstr "Повторити"
-
-#: ../plugins/system-update//PageComponent.qml:286
-msgid "Download"
-msgstr "Отримання"
-
-#: ../plugins/system-update//PageComponent.qml:286
-msgid "Update"
-msgstr "Оновити"
-
-#: ../plugins/system-update//PageComponent.qml:287
-msgid "Resume"
-msgstr "Продовжити"
-
-#: ../plugins/system-update//PageComponent.qml:288
-msgid "Pause"
-msgstr "Призупинити"
-
-#: ../plugins/system-update//PageComponent.qml:347
-msgid "Installing"
-msgstr "Встановлення"
-
-#: ../plugins/system-update//PageComponent.qml:380
-msgid "Installed"
-msgstr "Встановлено"
-
-#: ../plugins/system-update//PageComponent.qml:405
-msgid "Version: "
-msgstr "Версія: "
-
-#: ../plugins/system-update//PageComponent.qml:427
-msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "Увійдіть до Ubuntu One, щоб отримувати оновлення програм."
-
-#: ../plugins/system-update//PageComponent.qml:436
-msgid "Sign In…"
-msgstr "Увійти…"
-
-#: ../plugins/system-update//PageComponent.qml:503
-msgid "Installing update…"
-msgstr "Встановлюємо оновлення…"
-
-#: ../plugins/system-update//PageComponent.qml:518
-#: ../plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr "Автоотримання"
-
-#: ../plugins/system-update//PageComponent.qml:523
-msgid "On wi-fi"
-msgstr "З wi-fi"
-
-#: ../plugins/system-update//PageComponent.qml:525
-msgid "Always"
-msgstr "Завжди"
-
-#: ../plugins/system-update//PageComponent.qml:540
-msgid " bytes"
-msgstr " байтів"
-
-#: ../plugins/system-update//PageComponent.qml:543
-msgid " KiB"
-msgstr " КіБ"
-
-#: ../plugins/system-update//PageComponent.qml:546
-msgid " MiB"
-msgstr " МіБ"
-
-#: ../plugins/system-update//PageComponent.qml:549
-msgid " GiB"
-msgstr " ГіБ"
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "Отримання наступних оновлень у автоматичному режимі:"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "якщо доступний wi-fi"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "з будь-якого з’єднання з передаванням даних"
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "Можливо, передавання даних не є безкоштовним."
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr "Зупинити відтворення"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "Телефон перебуває у тихому режимі."
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
-msgid "Sound"
-msgstr "Звук"
-
-#: ../plugins/sound//PageComponent.qml:75
-msgid "Silent Mode"
-msgstr "Тихий режим"
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr "Абонент:"
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr "Дзвінки:"
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr "Мелодія дзвінка"
-
-#: ../plugins/sound//PageComponent.qml:134
-msgid "Vibrate when ringing"
-msgstr "Вібрація з дзвінком"
-
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:187
-msgid "Vibrate in Silent Mode"
-msgstr "Вібрація у тихому режимі"
-
-#: ../plugins/sound//PageComponent.qml:152
-#: ../plugins/phone//PageComponent.qml:109
-msgid "Dialpad sounds"
-msgstr "Озвучення набирання"
-
-#: ../plugins/sound//PageComponent.qml:156
-msgid "Messages:"
-msgstr "Повідомлення:"
-
-#: ../plugins/sound//PageComponent.qml:160
-#: ../plugins/sound//PageComponent.qml:166
-msgid "Message received"
-msgstr "Повідомлення отримано"
-
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Vibrate with message sound"
-msgstr "Вібрація зі звуком повідомлення"
-
-#: ../plugins/sound//PageComponent.qml:191
-msgid "Other sounds:"
-msgstr "Інші звуки:"
-
-#: ../plugins/sound//PageComponent.qml:195
-#: ../plugins/language//PageComponent.qml:185
-msgid "Keyboard sound"
-msgstr "Озвучення клавіатури"
-
-#: ../plugins/sound//PageComponent.qml:209
-msgid "Lock sound"
-msgstr "Звук блокування"
-
+#: ../plugins/security-privacy//PageComponent.qml:158
 #: ../plugins/security-privacy//SimPin.qml:34
 #: ../plugins/security-privacy//SimPin.qml:319
-#: ../plugins/security-privacy//PageComponent.qml:158
 msgid "SIM PIN"
 msgstr "Пінкод SIM"
+
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:244
+msgid "On"
+msgstr "Увімкн."
+
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+msgid "Off"
+msgstr "Вимкн."
+
+#: ../plugins/security-privacy//PageComponent.qml:172
+msgid "Encryption"
+msgstr "Шифрування"
+
+#: ../plugins/security-privacy//PageComponent.qml:181
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
+"Шифрування захистить дані вашого телефону від небажаного доступу під час "
+"з’єднання з комп’ютером або іншим пристроєм."
+
+#: ../plugins/security-privacy//PageComponent.qml:185
+msgid "Privacy"
+msgstr "Конфіденційність"
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "Stats on welcome screen"
+msgstr "Статистика на екрані вітання"
+
+#: ../plugins/security-privacy//PageComponent.qml:201
+msgid "Messages on welcome screen"
+msgstr "Повідомлення на екрані вітання"
+
+#: ../plugins/security-privacy//PageComponent.qml:216
+#: ../plugins/security-privacy//Dash.qml:29
+msgid "Dash search"
+msgstr "Пошук на панелі"
+
+#: ../plugins/security-privacy//PageComponent.qml:235
+msgid "Location access"
+msgstr "Доступ до даних щодо місця перебування"
+
+#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
+msgid "Diagnostics"
+msgstr "Діагностика"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy//PageComponent.qml:263
+msgid "Sent"
+msgstr "Надіслано"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy//PageComponent.qml:266
+msgid "Not sent"
+msgstr "Не надіслано"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
@@ -479,12 +935,6 @@ msgstr "Підтвердіть новий PIN-код:"
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
 msgstr "Значення PIN-кодів не збігаються. Повторіть спробу."
-
-#: ../plugins/security-privacy//SimPin.qml:154
-#: ../plugins/security-privacy//LockSecurity.qml:302
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr "Змінити"
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
@@ -521,6 +971,89 @@ msgstr ""
 "Неможливість введення правильного PIN-коду протягом декількох спроб може "
 "призвести до остаточного блокування SIM-картки."
 
+#: ../plugins/security-privacy//Location.qml:31
+#: ../wizard/qml/Pages//30-location.qml:25
+msgid "Location"
+msgstr "Місце перебування"
+
+#: ../plugins/security-privacy//Location.qml:49
+msgid "Location detection"
+msgstr "Визначення місця перебування"
+
+#: ../plugins/security-privacy//Location.qml:71
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+"Використовує дані GPS для приблизного визначення вашого місця перебування. "
+"Якщо вимкнено, GPS також буде вимкнено для економії заряду акумулятора."
+
+#: ../plugins/security-privacy//Location.qml:73
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Використовує дані wi-fi і GPS для приблизного визначення вашого місця "
+"перебування. Вимикання визначення місця перебування економить заряд "
+"акумулятора."
+
+#: ../plugins/security-privacy//Location.qml:75
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+"Використовує дані wi-fi (зараз вимкнено) і GPS для приблизного визначення "
+"вашого місця перебування. Вимикання визначення місця перебування економить "
+"заряд акумулятора."
+
+#: ../plugins/security-privacy//Location.qml:77
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+"Використовує дані wi-fi, розташування станцій підтримання мобільного зв’язку "
+"і GPS для приблизного визначення вашого місця перебування. Вимикання "
+"визначення місця перебування економить заряд акумулятора."
+
+#: ../plugins/security-privacy//Location.qml:79
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+"Використовує дані wi-fi, розташування станцій підтримання мобільного зв’язку "
+"(зараз стільниковий зв’язок недоступний) і GPS для приблизного визначення "
+"вашого місця перебування. Вимикання визначення місця перебування економить "
+"заряд акумулятора."
+
+#: ../plugins/security-privacy//Location.qml:81
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+"Використовує дані wi-fi (зараз вимкнено), розташування станцій підтримання "
+"мобільного зв’язку і GPS для приблизного визначення вашого місця "
+"перебування. Вимикання визначення місця перебування економить заряд "
+"акумулятора."
+
+#: ../plugins/security-privacy//Location.qml:83
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Використовує дані wi-fi (зараз вимкнено), розташування станцій підтримання "
+"мобільного зв’язку (зараз стільниковий зв’язок недоступний) і GPS для "
+"приблизного визначення вашого місця перебування. Вимикання визначення місця "
+"перебування економить заряд акумулятора."
+
+#: ../plugins/security-privacy//Location.qml:90
+msgid "Allow access to location:"
+msgstr "Дозволити доступ до даних щодо розташування:"
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "Джерело результатів:"
+
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
 msgstr "Блокування телефону"
@@ -528,7 +1061,7 @@ msgstr "Блокування телефону"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "Нічого"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -540,12 +1073,6 @@ msgstr "PIN-код"
 #: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
 msgstr "Пароль"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:49
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/about//DevMode.qml:104
-msgid "Lock security"
-msgstr "Захист блокування"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:68
 #: ../plugins/battery//PageComponent.qml:306
@@ -594,114 +1121,6 @@ msgid "Other apps and functions will prompt you to unlock."
 msgstr ""
 "Для роботи інших програм та можливостей система проситиме вас розблокувати "
 "телефон."
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
-msgid "Security & Privacy"
-msgstr "Захист і конфіденційність"
-
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "телефон та інтернет"
-
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "лише телефон"
-
-#: ../plugins/security-privacy//PageComponent.qml:131
-msgid "Lock phone"
-msgstr "Заблокувати телефон"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/battery//PageComponent.qml:321
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "за %1 хвилину"
-msgstr[1] "за %1 хвилини"
-msgstr[2] "за %1 хвилин"
-
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:236
-msgid "On"
-msgstr "Увімкн."
-
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:236
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
-msgid "Off"
-msgstr "Вимкн."
-
-#: ../plugins/security-privacy//PageComponent.qml:172
-msgid "Encryption"
-msgstr "Шифрування"
-
-#: ../plugins/security-privacy//PageComponent.qml:181
-msgid ""
-"Encryption protects against access to phone data when the phone is connected "
-"to a PC or other device."
-msgstr ""
-"Шифрування захистить дані вашого телефону від небажаного доступу під час "
-"з’єднання з комп’ютером або іншим пристроєм."
-
-#: ../plugins/security-privacy//PageComponent.qml:185
-msgid "Privacy"
-msgstr "Конфіденційність"
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "Stats on welcome screen"
-msgstr "Статистика на екрані вітання"
-
-#: ../plugins/security-privacy//PageComponent.qml:201
-msgid "Messages on welcome screen"
-msgstr "Повідомлення на екрані вітання"
-
-#: ../plugins/security-privacy//PageComponent.qml:216
-#: ../plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "Пошук на панелі"
-
-#: ../plugins/security-privacy//PageComponent.qml:234
-msgid "Location access"
-msgstr "Доступ до даних щодо місця перебування"
-
-#: ../plugins/security-privacy//PageComponent.qml:243
-#: ../plugins/security-privacy//AppAccess.qml:28
-msgid "Other app access"
-msgstr "Доступ до інших програм"
-
-#: ../plugins/security-privacy//PageComponent.qml:248
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
-msgid "Diagnostics"
-msgstr "Діагностика"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:253
-msgid "Sent"
-msgstr "Надіслано"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:256
-msgid "Not sent"
-msgstr "Не надіслано"
 
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
@@ -785,442 +1204,170 @@ msgstr "4-цифровий PIN-код…"
 msgid "Passphrase…"
 msgstr "Пароль…"
 
-#: ../plugins/security-privacy//Location.qml:30
-#: ../wizard/qml/Pages//30-location.qml:23
-msgid "Location"
-msgstr "Місце перебування"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:36
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:124
+msgid "Updates"
+msgstr "Оновлення"
 
-#: ../plugins/security-privacy//Location.qml:48
-msgid "Location detection"
-msgstr "Визначення місця перебування"
+#: ../plugins/system-update//PageComponent.qml:87
+msgid "Update System"
+msgstr "Оновлення системи"
 
-#: ../plugins/security-privacy//Location.qml:70
-msgid ""
-"Uses GPS to detect your rough location. When off, GPS turns off to save "
-"battery."
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "The phone needs to restart to install the system update."
 msgstr ""
-"Використовує дані GPS для приблизного визначення вашого місця перебування. "
-"Якщо вимкнено, GPS також буде вимкнено для економії заряду акумулятора."
+"Для завершення встановлення оновленої системи телефон слід перезавантажити."
 
-#: ../plugins/security-privacy//Location.qml:72
-msgid ""
-"Uses wi-fi and GPS to detect your rough location. Turning off location "
-"detection saves battery."
+#: ../plugins/system-update//PageComponent.qml:88
+msgid "Connect the phone to power before installing the system update."
 msgstr ""
-"Використовує дані wi-fi і GPS для приблизного визначення вашого місця "
-"перебування. Вимикання визначення місця перебування економить заряд "
-"акумулятора."
+"Перш ніж встановлювати оновлення, з’єднайте телефон з мережею електричного "
+"живлення."
 
-#: ../plugins/security-privacy//Location.qml:74
-msgid ""
-"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
-"off location detection saves battery."
-msgstr ""
-"Використовує дані wi-fi (зараз вимкнено) і GPS для приблизного визначення "
-"вашого місця перебування. Вимикання визначення місця перебування економить "
-"заряд акумулятора."
+#: ../plugins/system-update//PageComponent.qml:91
+msgid "Install & Restart"
+msgstr "Встановити і перезапустити"
 
-#: ../plugins/security-privacy//Location.qml:76
-msgid ""
-"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
-"Turning off location detection saves battery."
-msgstr ""
-"Використовує дані wi-fi, розташування станцій підтримання мобільного зв’язку "
-"і GPS для приблизного визначення вашого місця перебування. Вимикання "
-"визначення місця перебування економить заряд акумулятора."
+#: ../plugins/system-update//PageComponent.qml:101
+msgid "Not Now"
+msgstr "Не зараз"
 
-#: ../plugins/security-privacy//Location.qml:78
-msgid ""
-"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
-"to detect your rough location. Turning off location detection saves battery."
-msgstr ""
-"Використовує дані wi-fi, розташування станцій підтримання мобільного зв’язку "
-"(зараз стільниковий зв’язок недоступний) і GPS для приблизного визначення "
-"вашого місця перебування. Вимикання визначення місця перебування економить "
-"заряд акумулятора."
+#: ../plugins/system-update//PageComponent.qml:107
+msgid "Install"
+msgstr "Встановити"
 
-#: ../plugins/security-privacy//Location.qml:80
-msgid ""
-"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
-"rough location. Turning off location detection saves battery."
-msgstr ""
-"Використовує дані wi-fi (зараз вимкнено), розташування станцій підтримання "
-"мобільного зв’язку і GPS для приблизного визначення вашого місця "
-"перебування. Вимикання визначення місця перебування економить заряд "
-"акумулятора."
+#: ../plugins/system-update//PageComponent.qml:128
+msgid "Software is up to date"
+msgstr "Програмне забезпечення не потребує оновлення"
 
-#: ../plugins/security-privacy//Location.qml:82
-msgid ""
-"Uses wi-fi (currently off), cell tower locations (no current cellular "
-"connection), and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"Використовує дані wi-fi (зараз вимкнено), розташування станцій підтримання "
-"мобільного зв’язку (зараз стільниковий зв’язок недоступний) і GPS для "
-"приблизного визначення вашого місця перебування. Вимикання визначення місця "
-"перебування економить заряд акумулятора."
+#: ../plugins/system-update//PageComponent.qml:239
+msgid "Checking for updates…"
+msgstr "Перевірка наявності оновлень…"
 
-#: ../plugins/security-privacy//Location.qml:89
-msgid "Allow access to location:"
-msgstr "Дозволити доступ до даних щодо розташування:"
-
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "Джерело результатів:"
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr "Програми, яким ви на запит надали доступ до:"
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
-msgid "Camera"
-msgstr "Відеокамера"
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr "Програми, які надіслали запит щодо користування камерою"
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr "Мікрофон"
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr "Програми, які надіслали доступ щодо користування мікрофоном"
-
-#: ../plugins/security-privacy//AppAccess.qml:59
+#: ../plugins/system-update//PageComponent.qml:257
 #, qt-format
-msgid "%1/%2"
-msgstr "%1/%2"
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] "Встановити %1 оновлення…"
+msgstr[1] "Встановити %1 оновлення…"
+msgstr[2] "Встановити %1 оновлень…"
 
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr "0"
-
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr "Засобу запуску буде повернуто його початковий вміст."
-
-#: ../plugins/reset//ResetLauncherHome.qml:44
-#: ../plugins/reset//PageComponent.qml:73
-msgid "Reset Launcher"
-msgstr "Скинути засіб запуску"
-
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr ""
-"Щоб зміни набули чинності операційну систему телефону слід перезавантажити."
-
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr ""
-"Вміст і компонування панелі запуску і фільтри на домашній сторінці буде "
-"повернуто до початкових налаштувань."
-
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "Відновити початкові значення параметрів системи"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:50
-msgid "Reset phone"
-msgstr "Відновити початковий стан"
-
-#: ../plugins/reset//PageComponent.qml:87
-msgid "Reset all system settings…"
-msgstr "Відновити усі початкові параметри…"
-
-#: ../plugins/reset//PageComponent.qml:101
-msgid "Erase & Reset Everything…"
-msgstr "Витерти і скинути усе…"
-
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr ""
-"Усі документи, збережені ігри, параметри та інші записи буде остаточно "
-"вилучено з цього телефону."
-
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr "Витерти і скинути усе"
-
-#: ../plugins/phone//SingleSim.qml:29
-msgid "SIM"
-msgstr "SIM"
-
-#: ../plugins/phone//SingleSim.qml:33 ../plugins/phone//NoSims.qml:28
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76
-msgid "Call forwarding"
-msgstr "Переадресація"
-
-#: ../plugins/phone//SingleSim.qml:40 ../plugins/phone//NoSims.qml:34
-#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
-#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-msgid "Call waiting"
-msgstr "Очікування виклику"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#: ../plugins/system-update//PageComponent.qml:258
 #, qt-format
-msgid "%1 Services"
-msgstr "Служби %1"
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] "Встановити %1 оновлення"
+msgstr[1] "Встановити %1 оновлення"
+msgstr[2] "Встановити %1 оновлень"
 
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
-msgstr "Останній дзвінок: %1"
+#: ../plugins/system-update//PageComponent.qml:259
+msgid "Pause All"
+msgstr "Призупинити всі"
 
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "Дзвінок"
+#: ../plugins/system-update//PageComponent.qml:313
+msgid "Retry"
+msgstr "Повторити"
 
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
-msgid "Phone"
-msgstr "Телефон"
+#: ../plugins/system-update//PageComponent.qml:329
+msgid "Download"
+msgstr "Отримання"
 
-#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
-#: ../plugins/phone//MultiSim.qml:94
-msgid "Services"
-msgstr "Служби"
-
-#: ../plugins/phone//CallWaiting.qml:89
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-"Надає змогу відповідати або виконувати нові дзвінки під час іншого дзвінка "
-"або перемикатися між ними."
-
-#: ../plugins/phone//CallForwarding.qml:91
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"Переспрямовує виклики на інший номер, якщо ви не відповідаєте на дзвінок або "
-"ваш телефон зайнято, вимкнено чи поза межами досяжності сигналу."
-
-#: ../plugins/phone//CallForwarding.qml:101
-msgid "Forward to"
-msgstr "Переспрямувати"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
-msgid "Notifications"
-msgstr "Сповіщення"
-
-#: ../plugins/notifications//PageComponent.qml:40
-msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
-msgstr ""
-"Виберіть програми, які зможуть сповіщати вас про події за допомогою панелей-"
-"вигульків, звуків, вібрації та Центру сповіщень."
-
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:108
-#: ../plugins/language//PageComponent.qml:118
-msgid "Spell checking"
-msgstr "Перевірка правопису"
-
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "Поточні мови перевірки правопису:"
-
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "Усі доступні мови:"
-
-#: ../plugins/language//RebootNecessary.qml:38
-msgid "Restart Now"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:33
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
-msgid "Language & Text"
-msgstr "Мова і текст"
-
-#: ../plugins/language//PageComponent.qml:79
-msgid "Display language…"
-msgstr "Мова показу…"
-
-#: ../plugins/language//PageComponent.qml:93
-#: ../plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "Розкладки клавіатури"
-
-#: ../plugins/language//PageComponent.qml:128
-msgid "Auto correction"
-msgstr "Автовиправлення"
-
-#: ../plugins/language//PageComponent.qml:138
-msgid "Word suggestions"
-msgstr "Пропозиції слів"
-
-#: ../plugins/language//PageComponent.qml:151
-msgid "Auto capitalization"
-msgstr "Автоматичний регістр літер"
-
-#: ../plugins/language//PageComponent.qml:161
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "Вмикає верхній регістр на першій літері кожного речення."
-
-#: ../plugins/language//PageComponent.qml:168
-msgid "Auto punctuation"
-msgstr "Автопунктуація"
-
-#: ../plugins/language//PageComponent.qml:178
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
-"Додає крапки, пропущені лапки та дужки після подвійного натискання Пробілу."
-
-#: ../plugins/language//PageComponent.qml:195
-msgid "Keyboard vibration"
-msgstr "Клавіатурна вібрація"
-
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "Поточні розкладки:"
-
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "Усі доступні розкладки:"
-
-#: ../plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr "Мова перекладу"
-
-#: ../plugins/language//DisplayLanguage.qml:114
-msgid "Confirm"
-msgstr "Підтвердити"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:106
-msgid "Cellular"
-msgstr "Мобільний"
-
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr "Змінити налаштування точки доступу"
-
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr "Назва точки"
-
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr "Ключ (має складатися з принаймні 8 символів)"
-
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr "Показувати ключ"
-
-#: ../plugins/cellular//Hotspot.qml:29
-#: ../plugins/cellular//Components//SingleSim.qml:43
-#: ../plugins/cellular//Components//MultiSim.qml:48
-msgid "Wi-Fi hotspot"
-msgstr "Точка Wi-Fi"
-
-#: ../plugins/cellular//Hotspot.qml:40
-msgid "Hotspot"
-msgstr "Точка"
-
-#: ../plugins/cellular//Hotspot.qml:60
-msgid ""
-"When hotspot is on, other devices can use your cellular data connection over "
-"Wi-Fi. Normal data charges apply."
-msgstr ""
-"Якщо точку доступу увімкнено, інші пристрої можуть користуватися "
-"стільниковим з’єднанням за допомогою Wi-Fi. Тарифікація обміну даними "
-"виконуватиметься відповідно до вашого тарифного плану."
-
-#: ../plugins/cellular//Hotspot.qml:61
-msgid ""
-"Other devices can use your cellular data connection over the Wi-Fi network. "
-"Normal data charges apply."
-msgstr ""
-"Інші пристрої можуть користуватися стільниковим з’єднанням за допомогою Wi-"
-"Fi. Тарифікація обміну даними виконуватиметься відповідно до вашого "
-"тарифного плану."
-
-#: ../plugins/cellular//Hotspot.qml:65
-msgid "Set up hotspot"
-msgstr "Налаштувати точку доступу"
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-#: ../plugins/cellular//Components//MultiSim.qml:68
-msgid "Carriers"
-msgstr "Носії сигналу"
-
-#: ../plugins/cellular//PageChooseCarriers.qml:49
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/battery//PageComponent.qml:131
-#: ../plugins/battery//PageComponent.qml:287 ../plugins/about//Storage.qml:204
-#: ../plugins/cellular//Components//SingleSim.qml:62
-#: ../plugins/cellular//Components//NoSim.qml:48
-msgid "N/A"
-msgstr "н/д"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "Виберіть сигнал носія:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
+#: ../plugins/system-update//PageComponent.qml:329
+msgid "Update"
 msgstr "Оновити"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "Пошук"
+#: ../plugins/system-update//PageComponent.qml:330
+msgid "Resume"
+msgstr "Продовжити"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:118
-msgid "Brightness"
-msgstr "Яскравість"
+#: ../plugins/system-update//PageComponent.qml:331
+msgid "Pause"
+msgstr "Призупинити"
 
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "Коригувати автоматично"
+#: ../plugins/system-update//PageComponent.qml:389
+msgid "Installing"
+msgstr "Встановлення"
 
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
-msgstr "Коригує яскравість дисплея відповідно до зовнішнього освітлення."
+#: ../plugins/system-update//PageComponent.qml:422
+msgid "Installed"
+msgstr "Встановлено"
 
-#: ../plugins/brightness//BrightnessSlider.qml:51
-#: ../plugins/battery//PageComponent.qml:296
-msgid "Display brightness"
-msgstr "Яскравість дисплея"
+#: ../plugins/system-update//PageComponent.qml:447
+msgid "Version: "
+msgstr "Версія: "
 
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/system-update//PageComponent.qml:469
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr "Увійдіть до Ubuntu One, щоб отримувати оновлення програм."
+
+#: ../plugins/system-update//PageComponent.qml:478
+msgid "Sign In…"
+msgstr "Увійти…"
+
+#: ../plugins/system-update//PageComponent.qml:545
+msgid "Installing update…"
+msgstr "Встановлюємо оновлення…"
+
+#: ../plugins/system-update//PageComponent.qml:560
+#: ../plugins/system-update//Configuration.qml:30
+msgid "Auto download"
+msgstr "Автоотримання"
+
+#: ../plugins/system-update//PageComponent.qml:565
+msgid "On wi-fi"
+msgstr "З wi-fi"
+
+#: ../plugins/system-update//PageComponent.qml:567
+msgid "Always"
+msgstr "Завжди"
+
+#: ../plugins/system-update//PageComponent.qml:582
+msgid " bytes"
+msgstr " байтів"
+
+#: ../plugins/system-update//PageComponent.qml:585
+msgid " KiB"
+msgstr " КіБ"
+
+#: ../plugins/system-update//PageComponent.qml:588
+msgid " MiB"
+msgstr " МіБ"
+
+#: ../plugins/system-update//PageComponent.qml:591
+msgid " GiB"
+msgstr " ГіБ"
+
+#: ../plugins/system-update//Configuration.qml:35
+msgid "Download future updates automatically:"
+msgstr "Отримання наступних оновлень у автоматичному режимі:"
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "When on wi-fi"
+msgstr "якщо доступний wi-fi"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "On any data connection"
+msgstr "з будь-якого з’єднання з передаванням даних"
+
+#: ../plugins/system-update//Configuration.qml:56
+msgid "Data charges may apply."
+msgstr "Можливо, передавання даних не є безкоштовним."
+
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "Запит щодо пов’язування за допомогою Bluetooth"
 
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
 msgstr "Пінкод для «%1»"
 
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 msgid "Pair"
 msgstr "Пов’язування"
 
@@ -1228,7 +1375,7 @@ msgstr "Пов’язування"
 #: ../plugins/bluetooth//PageComponent.qml:32
 #: ../plugins/bluetooth//PageComponent.qml:147
 #: ../plugins/battery//PageComponent.qml:363
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:134
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1376,31 +1523,9 @@ msgstr ""
 msgid "Confirm PIN"
 msgstr "Підтвердження пінкоду"
 
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Lock the phone when it's not in use:"
-msgstr "Блокувати телефон, якщо ним не користуються:"
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "Переводити телефон у стан очікування, якщо ним не користуються:"
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-"Менші проміжки часу є безпечнішими. Телефон не переходитиме у стан "
-"блокування екрана під час дзвінків або відтворення відео."
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
-"Телефон не переходитиме у стан очікування під час дзвінків або відтворення "
-"відео."
-
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:130
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:140
 msgid "Battery"
 msgstr "Акумулятор"
 
@@ -1476,6 +1601,11 @@ msgstr "Сьогодні"
 msgid "Ways to reduce battery use:"
 msgstr "Джерела заощадження енергії:"
 
+#: ../plugins/battery//PageComponent.qml:296
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr "Яскравість дисплея"
+
 #: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
 msgstr "GPS"
@@ -1484,227 +1614,63 @@ msgstr "GPS"
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "Точне визначення місця перебування потребує даних GPS і/або Wi-Fi."
 
-#: ../plugins/background//Preview.qml:67
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Lock the phone when it's not in use:"
+msgstr "Блокувати телефон, якщо ним не користуються:"
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "Переводити телефон у стан очікування, якщо ним не користуються:"
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+"Менші проміжки часу є безпечнішими. Телефон не переходитиме у стан "
+"блокування екрана під час дзвінків або відтворення відео."
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid "Phone won’t sleep during calls or video playback."
+msgstr ""
+"Телефон не переходитиме у стан очікування під час дзвінків або відтворення "
+"відео."
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:146
+msgid "Background"
+msgstr "Тло"
+
+#: ../plugins/background//MainPage.qml:109
+msgid "Ubuntu Art"
+msgstr "Ubuntu Art"
+
+#: ../plugins/background//MainPage.qml:125
+msgid "Custom"
+msgstr "Нетипове"
+
+#: ../plugins/background//Preview.qml:70
 msgid "Preview"
 msgstr "Перегляд"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "Вилучити образ"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:136
-msgid "Background"
-msgstr "Тло"
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:154
+msgid "Brightness"
+msgstr "Яскравість"
 
-#: ../plugins/background//MainPage.qml:107
-msgid "Ubuntu Art"
-msgstr "Ubuntu Art"
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "Коригувати автоматично"
 
-#: ../plugins/background//MainPage.qml:123
-msgid "Custom"
-msgstr "Нетипове"
-
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr "Параметри збирання ОС"
-
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr "Номер збірки ОС"
-
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr "Частина образу Ubuntu"
-
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr "Опис збірки Ubuntu"
-
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr "Частина образу пристрою"
-
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr "Опис збірки для пристрою"
-
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr "Частина налаштовування образу"
-
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
-msgid "Storage"
-msgstr "Сховище даних"
-
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "Використано Ubuntu"
-
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "Відео"
-
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "Звук"
-
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "Зображення"
-
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "Інші файли"
-
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "Використано програмами"
-
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "Загальна місткість"
-
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "Вільне місце"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "За назвою"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "За розміром"
-
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
-msgid "Software licenses"
-msgstr "Ліцензування програмного забезпечення"
-
-#: ../plugins/about//PhoneNumbers.qml:31
-msgid "Phone number:"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Номер телефону"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
-msgid "About this phone"
-msgstr "Про цей телефон"
-
-#: ../plugins/about//PageComponent.qml:107
-msgid "Serial"
-msgstr "Серійний номер"
-
-#: ../plugins/about//PageComponent.qml:124
-msgid "Wi-Fi address"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:132
-msgid "Bluetooth address"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:133
-msgid "Software:"
-msgstr "Програмне забезпечення:"
-
-#: ../plugins/about//PageComponent.qml:138
-msgid "OS"
-msgstr "ОС"
-
-#: ../plugins/about//PageComponent.qml:147
-msgid "Last updated"
-msgstr "Востаннє оновлено"
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "Check for updates"
-msgstr "Перевірити наявність оновлень"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Legal:"
-msgstr "Правовий статус:"
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Regulatory info"
-msgstr "Дані щодо обмежень"
-
-#: ../plugins/about//PageComponent.qml:185
-msgid "Developer mode"
-msgstr "Режим розробника"
-
-#: ../plugins/about//License.qml:30
-msgid "Sorry, this license could not be displayed."
-msgstr ""
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
-msgid "Developer Mode"
-msgstr "Режим розробника"
-
-#: ../plugins/about//DevMode.qml:73
-msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
-msgstr ""
-"У режимі розробника будь-хто може отримувати доступу, змінювати або вилучати "
-"будь-які дані з цього телефону, з’єднавшись із ним з іншого пристрою."
-
-#: ../plugins/about//DevMode.qml:98
-msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr ""
-"Для користування режимом розробника вам слід визначити PIN-код або пароль."
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
-msgid "Privacy policy"
-msgstr "Правила конфіденційності"
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
-msgid "Report to Canonical:"
-msgstr "Повідомляти Canonical про:"
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
-msgid "App crashes and errors"
-msgstr "Аварії та помилки у програмах"
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
-msgid "Previous error reports"
-msgstr "Попередні звіти щодо помилок"
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
-msgid "Includes info about what an app was doing when it failed."
-msgstr ""
-"Включає дані щодо того, які дії виконувалися у програмі під час помилки."
-
-#: ../plugins/cellular//Components//SingleSim.qml:37
-#: ../plugins/cellular//Components//MultiSim.qml:42
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr "Точку доступу вимкнено, оскільки вимкнено Wi-Fi."
-
-#: ../plugins/cellular//Components//SingleSim.qml:52
-#: ../plugins/cellular//Components//MultiSim.qml:58
-msgid "Data usage statistics"
-msgstr "Статистика щодо використання даних"
-
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:66
-#: ../plugins/cellular//Components//NoSim.qml:47
-msgid "Carrier"
-msgstr "Носій сигналу"
-
-#: ../plugins/cellular//Components//SingleSim.qml:72
-msgid "APN"
-msgstr "APN"
-
-#: ../plugins/cellular//Components//SimEditor.qml:77
-msgid "Edit SIM Name"
-msgstr "Змінити назву SIM"
-
-#: ../plugins/cellular//Components//SimEditor.qml:200
-msgid "OK"
-msgstr "Гаразд"
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr "Коригує яскравість дисплея відповідно до зовнішнього освітлення."
 
 #: ../plugins/cellular//Components//NoSim.qml:29
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
@@ -1730,6 +1696,27 @@ msgstr "2G/3G/4G (швидше)"
 msgid "Data roaming"
 msgstr "Роумінґ даних"
 
+#: ../plugins/cellular//Components//NoSim.qml:47
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:66
+msgid "Carrier"
+msgstr "Носій сигналу"
+
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+msgid "2G/3G (faster)"
+msgstr "2G/3G (швидше)"
+
+#: ../plugins/cellular//Components//MultiSim.qml:42
+#: ../plugins/cellular//Components//SingleSim.qml:37
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "Точку доступу вимкнено, оскільки вимкнено Wi-Fi."
+
+#: ../plugins/cellular//Components//MultiSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:52
+msgid "Data usage statistics"
+msgstr "Статистика щодо використання даних"
+
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
 msgstr "Завжди питати"
@@ -1750,10 +1737,38 @@ msgstr ""
 msgid "For messages, use:"
 msgstr "Для повідомлень:"
 
-#: ../plugins/cellular//Components//CellularSingleSim.qml:52
-#: ../plugins/cellular//Components//CellularMultiSim.qml:139
-msgid "2G/3G (faster)"
-msgstr "2G/3G (швидше)"
+#: ../plugins/cellular//Components//SingleSim.qml:72
+msgid "APN"
+msgstr "APN"
+
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr "Змінити назву SIM"
+
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr "Гаразд"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
+msgid "Privacy policy"
+msgstr "Правила конфіденційності"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
+msgid "Report to Canonical:"
+msgstr "Повідомляти Canonical про:"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
+msgid "App crashes and errors"
+msgstr "Аварії та помилки у програмах"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
+msgid "Previous error reports"
+msgstr "Попередні звіти щодо помилок"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
+msgid "Includes info about what an app was doing when it failed."
+msgstr ""
+"Включає дані щодо того, які дії виконувалися у програмі під час помилки."
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1775,10 +1790,6 @@ msgstr "Додати зображення…"
 msgid "Remove images…"
 msgstr "Вилучити зображення…"
 
-#: ../src/qml/MainWindow.qml:110
-msgid "System Settings"
-msgstr "Системні параметри"
-
 #: ../src/qml/MainWindow.qml:131
 msgid "Search"
 msgstr "Пошук"
@@ -1790,93 +1801,6 @@ msgstr "Особисте"
 #: ../src/qml/MainWindow.qml:155
 msgid "System"
 msgstr "Система"
-
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi‑Fi"
-msgstr ""
-
-#: ../wizard/qml/Pages//20-wifi.qml:66
-msgid "Available networks"
-msgstr "Доступні мережі"
-
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//10-welcome.qml:84
-#: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//30-location.qml:66
-#: ../wizard/qml/Pages//15-passwd.qml:170
-msgid "Continue"
-msgstr "Продовжити"
-
-#: ../wizard/qml/Pages//20-wifi.qml:146 ../wizard/qml/Pages//no-sim.qml:50
-msgid "Skip"
-msgstr "Пропустити"
-
-#: ../wizard/qml/Pages//10-welcome.qml:24
-msgid "Hi!"
-msgstr "Привіт!"
-
-#: ../wizard/qml/Pages//10-welcome.qml:41
-msgid "Welcome to your Ubuntu phone."
-msgstr "Вітаємо вас у системі телефону Ubuntu."
-
-#: ../wizard/qml/Pages//10-welcome.qml:49
-msgid "Let’s get started."
-msgstr "Почнімо."
-
-#: ../wizard/qml/Pages//terms.qml:24
-msgid "Terms & Conditions"
-msgstr "Умови користування"
-
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "Add a SIM card"
-msgstr "Додати SIM-картку"
-
-#: ../wizard/qml/Pages//no-sim.qml:33
-msgid "Please insert a SIM card before you continue."
-msgstr "Будь ласка, спочатку вставте SIM-картку."
-
-#: ../wizard/qml/Pages//no-sim.qml:35
-msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr "Без неї ви не зможете дзвонити або надсилати повідомлення."
-
-#: ../wizard/qml/Pages//80-finished.qml:22
-msgid "All done"
-msgstr "Виконано"
-
-#: ../wizard/qml/Pages//80-finished.qml:37
-msgid "Nice work!"
-msgstr "Чудова робота!"
-
-#: ../wizard/qml/Pages//80-finished.qml:45
-msgid "Your phone is now ready to use."
-msgstr "Тепер вашим телефоном можна користуватися."
-
-#: ../wizard/qml/Pages//80-finished.qml:52
-msgid "Finish"
-msgstr "Завершити"
-
-#: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug reporting"
-msgstr "Звітування щодо вад"
-
-#: ../wizard/qml/Pages//40-reporting.qml:35
-msgid "Your phone is set up to automatically report errors to Canonical."
-msgstr ""
-"Ваш телефон налаштовано на автоматичне надсилання звітів щодо помилок "
-"компанії Canonical."
-
-#: ../wizard/qml/Pages//40-reporting.qml:43
-msgid "This can be disabled in System Settings."
-msgstr "Його можна вимкнути у Системних параметрах."
-
-#: ../wizard/qml/Pages//30-location.qml:50
-msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr "Користуйтеся вашою мобільною мережею та Wi-Fi там, де вам це зручно"
-
-#: ../wizard/qml/Pages//30-location.qml:69
-msgid ""
-"I have read and agreed to the HERE <a href='terms.qml'>terms and "
-"conditions</a>"
-msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -1902,6 +1826,95 @@ msgstr "PIN-код має складатися з принаймні чотир�
 msgid "Passphrase must be at least four characters long."
 msgstr "Пароль має складатися принаймні з чотирьох символів."
 
+#: ../wizard/qml/Pages//15-passwd.qml:170
+#: ../wizard/qml/Pages//30-location.qml:79
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//20-wifi.qml:195
+msgid "Continue"
+msgstr "Продовжити"
+
+#: ../wizard/qml/Pages//terms.qml:25
+msgid "Terms & Conditions"
+msgstr "Умови користування"
+
+#: ../wizard/qml/Pages//30-location.qml:60
+msgid "Use your mobile network and Wi-Fi to work out where you are"
+msgstr "Користуйтеся вашою мобільною мережею та Wi-Fi там, де вам це зручно"
+
+#: ../wizard/qml/Pages//30-location.qml:69
+msgid ""
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
+msgstr ""
+"Мною прочитано <a href='terms.qml'>умови надання послуг</a> HERE. Я "
+"погоджуюся з ними."
+
+#: ../wizard/qml/Pages//40-reporting.qml:22
+msgid "Bug reporting"
+msgstr "Звітування щодо вад"
+
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
+msgstr ""
+"Ваш телефон налаштовано на автоматичне надсилання звітів щодо помилок "
+"компанії Canonical."
+
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
+msgstr "Його можна вимкнути у Системних параметрах."
+
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hi!"
+msgstr "Привіт!"
+
+#: ../wizard/qml/Pages//10-welcome.qml:42
+msgid "Welcome to your Ubuntu phone."
+msgstr "Вітаємо вас у системі телефону Ubuntu."
+
+#: ../wizard/qml/Pages//10-welcome.qml:50
+msgid "Let’s get started."
+msgstr "Почнімо."
+
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "All done"
+msgstr "Виконано"
+
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr "Чудова робота!"
+
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr "Тепер вашим телефоном можна користуватися."
+
+#: ../wizard/qml/Pages//80-finished.qml:52
+msgid "Finish"
+msgstr "Завершити"
+
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi‑Fi"
+msgstr "З’єднатися із Wi‑Fi"
+
+#: ../wizard/qml/Pages//20-wifi.qml:146
+msgid "Available networks"
+msgstr "Доступні мережі"
+
+#: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//no-sim.qml:50
+msgid "Skip"
+msgstr "Пропустити"
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "Add a SIM card"
+msgstr "Додати SIM-картку"
+
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
+msgstr "Будь ласка, спочатку вставте SIM-картку."
+
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
+msgstr "Без неї ви не зможете дзвонити або надсилати повідомлення."
+
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "Назад"
@@ -1916,283 +1929,307 @@ msgstr "〈  %1"
 msgid "%1  〉"
 msgstr "%1  〉"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:4
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:110
-msgid "network"
-msgstr "мережа"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:6
-msgid "wireless"
-msgstr "бездротова"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:8
-msgid "wifi"
-msgstr "вайфай"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:10
-msgid "wi-fi"
-msgstr "wifi"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:12
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:22
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:40
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:48
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:54
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:60
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:78
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:88
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:116
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:122
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:128
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
-msgid "settings"
-msgstr "параметри"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:16
-msgid "time"
-msgstr "час"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:18
-msgid "date"
-msgstr "дата"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
-msgid "timezone"
-msgstr "часовий пояс"
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
-msgid "Updates available"
-msgstr "Доступні оновлення"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:28
-msgid "system"
-msgstr "система"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:30
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:74
-msgid "software"
-msgstr "програми"
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:32
-msgid "update"
-msgstr "оновлення"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
-msgid "sound"
-msgstr "звук"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:44
-msgid "security"
-msgstr "безпека"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:46
-msgid "privacy"
-msgstr "конфідеційність"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:52
-msgid "reset"
-msgstr "скинути"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:58
-msgid "phone"
-msgstr "телефон"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:62
-msgid "Orientation Lock"
-msgstr "Блокування орієнтації"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:64
-msgid "rotation"
-msgstr "обертання"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:66
-msgid "orientation"
-msgstr "орієнтація"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:68
-msgid "lock"
-msgstr "блокування"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:70
-msgid "screen"
-msgstr "екран"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:76
-msgid "notifications"
-msgstr "сповіщення"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:82
-msgid "language"
-msgstr "мова"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:84
-msgid "lang"
-msgstr "мова"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:86
-msgid "i18n"
-msgstr "переклад"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:90
-msgid "Flight Mode"
-msgstr "Режим польоту"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:92
-msgid "flight"
-msgstr "політ"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:94
-msgid "plane"
-msgstr "літак"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:96
-msgid "offline"
-msgstr "автономний режим"
-
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:98
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:2
 msgid "Example"
 msgstr "Приклад"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:100
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:4
 msgid "example"
 msgstr "приклад"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:102
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:6
 msgid "test"
 msgstr "тест"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:104
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:8
 msgid "sample"
 msgstr "зразок"
 
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:108
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:12
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:32
+msgid "network"
+msgstr "мережа"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:14
+msgid "wireless"
+msgstr "бездротова"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:16
+msgid "wifi"
+msgstr "вайфай"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:18
+msgid "wi-fi"
+msgstr "wifi"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:20
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:26
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:38
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:48
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:56
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:62
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:68
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:102
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:112
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:120
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:132
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:138
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:158
+msgid "settings"
+msgstr "параметри"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:24
+msgid "reset"
+msgstr "скинути"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:30
 msgid "cellular"
 msgstr "мобільний"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:112
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:34
 msgid "mobile"
 msgstr "мобільний"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:114
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:36
 msgid "gsm"
 msgstr "gsm"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:120
-msgid "brightness"
-msgstr "яскравість"
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:42
+msgid "language"
+msgstr "мова"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:126
-msgid "bluetooth"
-msgstr "bluetooth"
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:44
+msgid "lang"
+msgstr "мова"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
-msgid "battery"
-msgstr "акумулятор"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:134
-msgid "power"
-msgstr "заряд"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:138
-msgid "appearance"
-msgstr "вигляд"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:140
-msgid "background"
-msgstr "тло"
-
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:142
-msgid "wallpaper"
-msgstr "шпалери"
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:46
+msgid "i18n"
+msgstr "переклад"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:50
 msgid "Accessibility"
 msgstr "Доступність"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:146
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:52
 msgid "accessibility"
 msgstr "доступність"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:148
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:54
 msgid "a11y"
 msgstr "доступність"
 
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:60
+msgid "sound"
+msgstr "звук"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:66
+msgid "phone"
+msgstr "телефон"
+
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:154
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:72
 msgid "about"
 msgstr "дані"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:74
 msgid "device"
 msgstr "пристрій"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:158
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:76
 msgid "info"
 msgstr "інформація"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:78
+msgid "Orientation Lock"
+msgstr "Блокування орієнтації"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:80
+msgid "rotation"
+msgstr "обертання"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:82
+msgid "orientation"
+msgstr "орієнтація"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:84
+msgid "lock"
+msgstr "блокування"
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:86
+msgid "screen"
+msgstr "екран"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:88
+msgid "Flight Mode"
+msgstr "Режим польоту"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:90
+msgid "flight"
+msgstr "політ"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:92
+msgid "plane"
+msgstr "літак"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:94
+msgid "offline"
+msgstr "автономний режим"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:98
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:128
+msgid "software"
+msgstr "програми"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:100
+msgid "notifications"
+msgstr "сповіщення"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:106
+msgid "time"
+msgstr "час"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:108
+msgid "date"
+msgstr "дата"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:110
+msgid "timezone"
+msgstr "часовий пояс"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:116
+msgid "security"
+msgstr "безпека"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:118
+msgid "privacy"
+msgstr "конфідеційність"
+
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:122
+msgid "Updates available"
+msgstr "Доступні оновлення"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:126
+msgid "system"
+msgstr "система"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:130
+msgid "update"
+msgstr "оновлення"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:136
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:142
+msgid "battery"
+msgstr "акумулятор"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:144
+msgid "power"
+msgstr "заряд"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:148
+msgid "appearance"
+msgstr "вигляд"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:150
+msgid "background"
+msgstr "тло"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:152
+msgid "wallpaper"
+msgstr "шпалери"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:156
+msgid "brightness"
+msgstr "яскравість"
+
+#: ../plugins/about//click.cpp:134
+msgid "Unknown title"
+msgstr "Невідомий заголовок"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:318
+msgid "Incorrect PIN code. Try again."
+msgstr "Помилковий PIN-код. Повторіть спробу."
+
+#: ../plugins/security-privacy//securityprivacy.cpp:320
+msgid "Incorrect passphrase. Try again."
+msgstr "Помилковий пароль. Повторіть спробу."
+
+#: ../plugins/security-privacy//securityprivacy.cpp:323
+msgid "Could not set security mode"
+msgstr "Не вдалося встановити режим захисту"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:372
+msgid "Could not set security display hint"
+msgstr "Не вдалося встановити підказку щодо захисту"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:383
+msgid "Authentication token manipulation error"
+msgstr "Помилка маніпуляції лексемою розпізнавання"
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
@@ -2204,43 +2241,17 @@ msgid "Can't pause current request (can't contact service)"
 msgstr ""
 "Не вдалося призупити поточний запит (не вдалося з’єднатися зі службою)"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:301
-msgid "Incorrect PIN code. Try again."
-msgstr "Помилковий PIN-код. Повторіть спробу."
-
-#: ../plugins/security-privacy//securityprivacy.cpp:303
-msgid "Incorrect passphrase. Try again."
-msgstr "Помилковий пароль. Повторіть спробу."
-
-#: ../plugins/security-privacy//securityprivacy.cpp:306
-msgid "Could not set security mode"
-msgstr "Не вдалося встановити режим захисту"
-
-#: ../plugins/security-privacy//securityprivacy.cpp:355
-msgid "Could not set security display hint"
-msgstr "Не вдалося встановити підказку щодо захисту"
-
-#: ../plugins/security-privacy//securityprivacy.cpp:368
-msgid "Authentication token manipulation error"
-msgstr "Помилка маніпуляції лексемою розпізнавання"
-
-#: ../plugins/about//click.cpp:134
-msgid "Unknown title"
-msgstr "Невідомий заголовок"
-
-#: ../push-helper/software-updates-helper.py:78
-msgid "There's an updated system image."
-msgstr "Випущено оновлений образ системи."
-
-#: ../push-helper/software-updates-helper.py:79
-msgid "Tap to open the system updater."
-msgstr "Натисніть, щоб відкрити засіб оновлення системи."
-
 #~ msgid "Remove"
 #~ msgstr "Вилучити"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "З’єднатися з Wi-Fi"
+
+#~ msgid "There's an updated system image."
+#~ msgstr "Випущено оновлений образ системи."
+
+#~ msgid "Tap to open the system updater."
+#~ msgstr "Натисніть, щоб відкрити засіб оновлення системи."
 
 #, qt-format
 #~ msgid "%1"
