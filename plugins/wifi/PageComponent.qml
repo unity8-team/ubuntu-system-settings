@@ -128,7 +128,7 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Other network")
+                text: i18n.tr("Connect to hidden network")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
                 visible : (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
