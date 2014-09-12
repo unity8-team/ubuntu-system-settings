@@ -95,7 +95,8 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     QObject::connect(&m_network, SIGNAL(updatesFound()),
                   this, SLOT(processUpdates()));
 
-    m_systemUpdate.checkForUpdate();
+    // Don't check for updates when the item is created
+    //m_systemUpdate.checkForUpdate();
     m_service.getCredentials();
 }
 
