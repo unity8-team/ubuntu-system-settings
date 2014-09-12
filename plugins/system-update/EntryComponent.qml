@@ -37,52 +37,28 @@ ListItem.SingleValue {
     property variant updateModel: UpdateManager.model
 
     function _updatesRefresh() {
-        console.warn("_updatesRefresh: " + root.updateModel);
         var _updatesAvailable = 0;
         for (var i=0; i < updateModel.length; i++) {
-            console.warn("packageName: " + root.updateModel[i].packageName);
-            console.warn("updateRequired: " + root.updateModel[i].updateRequired);
-            console.warn("updateState: " + root.updateModel[i].updateState);
-            console.warn("updateReady: " + root.updateModel[i].updateReady);
             if (updateModel[i].updateRequired)
                 _updatesAvailable += 1;
         }
         root.updatesAvailable = _updatesAvailable;
-        console.warn("_updatesRefresh: " + root.updatesAvailable);
         if (root.updatesAvailable > 0)
             parent.visible = true;
         else
             parent.visible = false;
     }
 
+    Component.onCompleted: UpdateManager.checkUpdates()
+
     Connections {
         id: updateManager
         objectName: "updateManager"
         target: UpdateManager
-        onModelChanged: {
-            console.warn("onModelChanged: " + UpdateManager.model.length)
-            root._updatesRefresh();
-        }
-        onUpdateAvailableFound: {
-            console.warn("onUpdateAvailableFound: " + UpdateManager.model.length)
-            root._updatesRefresh();
-        }
-        onUpdatesNotFound: {
-            console.warn("onUpdatesNotFound: " + UpdateManager.model.length)
-            root._updatesRefresh();
-        }
-        onErrorFound: {
-            console.warn("onErrorFound: " + UpdateManager.model.length)
-            root._updatesRefresh();
-        }
-        onUpdateProcessFailed: {
-            console.warn("onUpdateProcessFailed: " + UpdateManager.model.length)
-            root._updatesRefresh();
-        }
-        onCheckFinished: {
-            console.warn("onCheckFinished: " + UpdateManager.model.length)
-            root._updatesRefresh();
-        }
+        onModelChanged: root._updatesRefresh()
+        onUpdateAvailableFound: root._updatesRefresh()
+        onUpdatesNotFound: root._updatesRefresh()
+        onCheckFinished: root._updatesRefresh()
     }
 
     onClicked: main.loadPluginByName("system-update");
