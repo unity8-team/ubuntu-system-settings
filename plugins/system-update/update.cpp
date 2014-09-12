@@ -89,16 +89,25 @@ void Update::setSystemUpdate(bool isSystem)
     Q_EMIT systemUpdateChanged();
 }
 
+void Update::setUpdateRequired(bool state)
+{
+    qWarning() << Q_FUNC_INFO << state;
+    m_update = state;
+    Q_EMIT updateRequiredChanged();
+}
+
 void Update::setUpdateState(bool state)
 {
+    qWarning() << Q_FUNC_INFO << state;
     m_update_state = state;
     Q_EMIT updateStateChanged();
 }
 
 void Update::setUpdateReady(bool ready)
 {
+    qWarning() << Q_FUNC_INFO << ready;
     m_update_ready = ready;
-    Q_EMIT updatesReadyChanged();
+    Q_EMIT updateReadyChanged();
 }
 
 void Update::setSelected(bool value)
