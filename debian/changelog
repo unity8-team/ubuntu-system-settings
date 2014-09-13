@@ -1,3 +1,12 @@
+ubuntu-system-settings (0.3+14.10.20140913-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Don't try to tweak the bottomMargin for the OSK, it was trying to
+    calculate it based on an undefined component so failing. It
+    shouldn't be needed anyway.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 13 Sep 2014 02:46:25 +0000
+
 ubuntu-system-settings (0.3+14.10.20140912-0ubuntu1) utopic; urgency=low
 
   [ jonas-drange ]
