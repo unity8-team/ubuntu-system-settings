@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-11 11:36+0000\n"
+"PO-Revision-Date: 2014-09-12 08:26+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:55+0000\n"
+"X-Launchpad-Export-Date: 2014-09-13 08:36+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: Galician\n"
 
@@ -25,11 +25,11 @@ msgstr "Axustes do sistema"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "Sistema;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Preferencias;Axustes;"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -2223,13 +2223,3 @@ msgstr "Non é posíbel deter a petición (non se pode contactar co servidor)"
 
 #~ msgid "There's an updated system image."
 #~ msgstr "Hai unha imaxe do sistema actualizada."
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Lin e acepto os <a href='terms.qml'>termos e condicións</a> de Ubuntu"

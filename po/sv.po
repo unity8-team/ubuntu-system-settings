@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-13 08:38+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: sv\n"
 
@@ -2214,17 +2214,6 @@ msgstr "Kunde inte pausa aktuell begäran (kan inte kontakta tjänst)"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Anslut till Wi-Fi"
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Jag har läst och och gått med på <a href='terms.qml'>användarvillkoren</a> "
-#~ "för Ubuntu"
 
 #~ msgid "There's an updated system image."
 #~ msgstr "Det finns en uppdatera systemavbild."

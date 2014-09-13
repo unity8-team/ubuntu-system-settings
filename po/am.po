@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-07 22:40+0000\n"
+"PO-Revision-Date: 2014-09-13 04:53+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:54+0000\n"
+"X-Launchpad-Export-Date: 2014-09-13 08:35+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -24,11 +24,11 @@ msgstr "ስርአት ማሰናጃ"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "ስርአት:"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "ምርጫዎች: ማሰናጃዎች:"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -145,7 +145,7 @@ msgstr "ማቋረጫ"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr ""
+msgstr "IP አድራሻ"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
@@ -2166,10 +2166,6 @@ msgstr ""
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "ወደ ዋይ-ፋይ መገናኛFi"
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
 
 #~ msgid "There's an updated system image."
 #~ msgstr "ለ ስርአቱ ምስል ማሻሻያ ዝግጁ ነው"

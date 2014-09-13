@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-13 08:37+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -241,7 +241,7 @@ msgstr "셀룰러 네트워크"
 #: ../plugins/cellular//Components//MultiSim.qml:48
 #: ../plugins/cellular//Components//SingleSim.qml:43
 msgid "Wi-Fi hotspot"
-msgstr "와이 파이 핫스팟"
+msgstr "와이파이 핫스팟"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
@@ -252,13 +252,13 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
-"핫스팟을 사용하면 와이 파이 연결을 이용해 이동 전화의 데이터 연결을 다른 장치가 사용할 수 있습니다. 일반 데이터 요금을 적용 받습니다."
+"핫스팟을 사용하면 와이파이 연결을 이용해 이동 전화의 데이터 연결을 다른 장치가 사용할 수 있습니다. 일반 데이터 요금을 적용 받습니다."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
-msgstr "와이 파이 연결을 이용해 이동 전화의 데이터 연결을 다른 장치가 사용할 수 있습니다. 일반 데이터 요금을 적용 받습니다."
+msgstr "와이파이 연결을 이용해 이동 전화의 데이터 연결을 다른 장치가 사용할 수 있습니다. 일반 데이터 요금을 적용 받습니다."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
@@ -879,17 +879,17 @@ msgstr "전송되지 않음"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr "SIM 핀 번호 바꾸기"
+msgstr "심 카드 개인 식별 번호 바꾸기"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr "잘못된 핀 번호입니다. %1번의 시도가 남았습니다."
+msgstr "개인 식별 번호가 올바르지 않습니다. %1번 더 시도할 수 있습니다."
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr "현재 PIN 번호:"
+msgstr "현재 개인 식별 번호:"
 
 #: ../plugins/security-privacy//SimPin.qml:91
 #: ../plugins/security-privacy//SimPin.qml:243
@@ -1455,11 +1455,11 @@ msgstr "이 장치 잊기"
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
 msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "'%1'에 표시된 PIN 번호와 같은지 확인해 주십시오."
+msgstr "'%1'에 표시된 개인 식별 번호와 같은지 확인해 주십시오."
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr "PIN 번호 확인"
+msgstr "개인 식별 번호 확인"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
@@ -1695,22 +1695,21 @@ msgstr "오류가 발생했을 때 사용하던 프로그램 정로블 포함합
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "선택한 이미지 없음"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
 msgid "Remove %1 image"
 msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 이미지 제거"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "이미지 추가..."
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr ""
+msgstr "이미지 제거..."
 
 #: ../src/qml/MainWindow.qml:131
 msgid "Search"
@@ -1726,27 +1725,27 @@ msgstr "시스템"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
-msgstr ""
+msgstr "잠금 보안 설정"
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "스와이프"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "개인 식별 번호가 일치하지 않습니다."
 
 #: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "패스프레이즈가 일치하지 않습니다."
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "개인 식별 번호는 최소 4자리 이상을 사용해야 합니다."
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "패스프레이즈는 최소 4문자 이상을 사용해야 합니다."
 
 #: ../wizard/qml/Pages//15-passwd.qml:170
 #: ../wizard/qml/Pages//30-location.qml:79
@@ -1757,53 +1756,53 @@ msgstr "계속"
 
 #: ../wizard/qml/Pages//terms.qml:25
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "사용 약관"
 
 #: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
+msgstr "모바일 네트워크와 아이파이를 사용하여 위치를 파악합니다."
 
 #: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
-msgstr ""
+msgstr "<a href='terms.qml'>사용 약관</a>을 읽었고 동의합니다."
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "버그 보고"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
-msgstr ""
+msgstr "자동으로 오류를 보고하도록 전화를 설정했습니다."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "이 항목은 시스템 설정에서 사용하지 않도록 설정할 수 있습니다."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
-msgstr ""
+msgstr "안녕!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:42
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "우분투 폰을 사용해주셔서 감사합니다."
 
 #: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
-msgstr ""
+msgstr "자 시작합니다."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "모두 완료"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "잘 하셨습니다!"
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "이제 전화를 사용할 수 있습니다."
 
 #: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
@@ -1811,7 +1810,7 @@ msgstr "완료"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "와이파이에 연결"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
@@ -1823,15 +1822,15 @@ msgstr "건너뛰기"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr ""
+msgstr "심 카드 추가"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
-msgstr ""
+msgstr "계속 진행하지 전에 심 카드를 삽입해주십시오."
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
+msgstr "심 카드가 없으면 전화를 하거나 텍스트 메시지를 사용할 수 없습니다."
 
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
@@ -1840,12 +1839,12 @@ msgstr "뒤로"
 #: ../wizard/qml/Components//StackButton.qml:51
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:54
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:2
@@ -2048,7 +2047,7 @@ msgstr "소프트웨어"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:100
 msgid "notifications"
-msgstr ""
+msgstr "알림"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:106
@@ -2127,42 +2126,38 @@ msgstr "밝기"
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
-msgstr ""
+msgstr "알 수 없는 제목"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "개인 식별 번호가 올바르지 않습니다. 다시 시도해주십시오."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
-msgstr ""
+msgstr "패스프레이즈가 올바르지 않습니다. 다시 시도해주십시오."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:323
 msgid "Could not set security mode"
-msgstr ""
+msgstr "보안 모드를 설정할 수 없습니다."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:372
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "보안 힌트 화면을 설정할 수 없습니다."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:383
 msgid "Authentication token manipulation error"
-msgstr ""
+msgstr "인증 토근 수정 오류"
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
-msgstr ""
+msgstr "현재 요청을 취소할 수 없습니다.(서비스에 연결할 수 없습니다.)"
 
 #: ../plugins/system-update//system_update.cpp:98
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "현재 요청을 잠시 멈출 수 없습니다.(서비스에 연결할 수 없습니다.)"
 
 #~ msgid "Remove"
 #~ msgstr "삭제"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Wi-Fi에 연결하기"
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"

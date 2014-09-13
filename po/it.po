@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-13 08:37+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -2238,14 +2238,3 @@ msgstr ""
 
 #~ msgid "Tap to open the system updater."
 #~ msgstr "Tocca per aprire gli aggiornamenti di sistema."
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Ho letto e accetto i  <a href='terms.qml'>termini e le condizioni</a> di "
-#~ "Ubuntu"

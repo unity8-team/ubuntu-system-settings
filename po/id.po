@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-13 08:37+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -269,7 +269,7 @@ msgstr ""
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
-msgstr ""
+msgstr "Pilih operator:"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:103
 #: ../plugins/time-date//PageComponent.qml:69
@@ -324,11 +324,11 @@ msgstr "Pemeriksaan ejaan"
 
 #: ../plugins/language//PageComponent.qml:152
 msgid "Auto correction"
-msgstr ""
+msgstr "Koreksi otomatis"
 
 #: ../plugins/language//PageComponent.qml:162
 msgid "Word suggestions"
-msgstr ""
+msgstr "Saran kata"
 
 #: ../plugins/language//PageComponent.qml:175
 msgid "Auto capitalization"
@@ -588,7 +588,7 @@ msgstr "Legal:"
 
 #: ../plugins/about//PageComponent.qml:186 ../plugins/about//Software.qml:11
 msgid "Software licenses"
-msgstr ""
+msgstr "Lisensi perangkat lunak"
 
 #: ../plugins/about//PageComponent.qml:194
 msgid "Regulatory info"
@@ -620,23 +620,23 @@ msgstr ""
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
-msgstr ""
+msgstr "Dipakai oleh Ubuntu"
 
 #: ../plugins/about//Storage.qml:88
 msgid "Videos"
-msgstr ""
+msgstr "Video"
 
 #: ../plugins/about//Storage.qml:89
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: ../plugins/about//Storage.qml:90
 msgid "Pictures"
-msgstr ""
+msgstr "Gambar"
 
 #: ../plugins/about//Storage.qml:91
 msgid "Other files"
-msgstr ""
+msgstr "Berkas lain"
 
 #: ../plugins/about//Storage.qml:92
 msgid "Used by apps"
@@ -644,11 +644,11 @@ msgstr ""
 
 #: ../plugins/about//Storage.qml:142
 msgid "Total storage"
-msgstr ""
+msgstr "Penyimpanan total"
 
 #: ../plugins/about//Storage.qml:154
 msgid "Free space"
-msgstr ""
+msgstr "Ruang kosong"
 
 #: ../plugins/about//Storage.qml:174
 msgid "By name"
@@ -660,13 +660,13 @@ msgstr ""
 
 #: ../plugins/about//PhoneNumber.qml:36
 msgid "Phone number"
-msgstr ""
+msgstr "Nomor telepon"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:96
 msgid "Notifications"
-msgstr ""
+msgstr "Notifikasi"
 
 #: ../plugins/notifications//PageComponent.qml:40
 msgid ""
@@ -752,7 +752,7 @@ msgstr ""
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
@@ -760,7 +760,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "Mik"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
@@ -769,11 +769,11 @@ msgstr ""
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../plugins/security-privacy//PageComponent.qml:37
@@ -785,7 +785,7 @@ msgstr ""
 #: ../plugins/security-privacy//PageComponent.qml:218
 #: ../plugins/security-privacy//Dash.qml:46
 msgid "Phone and Internet"
-msgstr ""
+msgstr "Telepon dan Internet"
 
 #: ../plugins/security-privacy//PageComponent.qml:102
 #: ../plugins/security-privacy//PageComponent.qml:219
@@ -811,19 +811,18 @@ msgstr ""
 #, qt-format
 msgid "After %1 minute"
 msgid_plural "After %1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Setelah %1 menit"
 
 #: ../plugins/security-privacy//PageComponent.qml:158
 #: ../plugins/security-privacy//SimPin.qml:34
 #: ../plugins/security-privacy//SimPin.qml:319
 msgid "SIM PIN"
-msgstr ""
+msgstr "PIN SIM"
 
 #: ../plugins/security-privacy//PageComponent.qml:161
 #: ../plugins/security-privacy//PageComponent.qml:244
 msgid "On"
-msgstr ""
+msgstr "Nyala"
 
 #: ../plugins/security-privacy//PageComponent.qml:165
 #: ../plugins/security-privacy//PageComponent.qml:244
@@ -831,11 +830,11 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:50
 #: ../plugins/cellular//Components//CellularMultiSim.qml:30
 msgid "Off"
-msgstr ""
+msgstr "Mati"
 
 #: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
-msgstr ""
+msgstr "Enkripsi"
 
 #: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
@@ -845,7 +844,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
-msgstr ""
+msgstr "Privasi"
 
 #: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
@@ -862,28 +861,28 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:235
 msgid "Location access"
-msgstr ""
+msgstr "Akses lokasi"
 
 #: ../plugins/security-privacy//PageComponent.qml:258
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostik"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are to be sent by the system.
 #: ../plugins/security-privacy//PageComponent.qml:263
 msgid "Sent"
-msgstr ""
+msgstr "Terkirim"
 
 #. TRANSLATORS: This string is shown when crash
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy//PageComponent.qml:266
 msgid "Not sent"
-msgstr ""
+msgstr "Tak terkirim"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "Ubah PIN SIM"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:184
@@ -893,21 +892,21 @@ msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr ""
+msgstr "PIN Saat Ini:"
 
 #: ../plugins/security-privacy//SimPin.qml:91
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "%1 percobaan diizinkan."
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "Pilih PIN baru:"
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "Konfirmasikan PIN baru:"
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
@@ -915,23 +914,23 @@ msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
-msgstr ""
+msgstr "Masukkan PIN SIM"
 
 #: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "Masukkan PIN SIM Sebelumnya"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
-msgstr ""
+msgstr "Buka kunci"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Lock"
-msgstr ""
+msgstr "Kunci"
 
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
-msgstr ""
+msgstr "Ubah PIN..."
 
 #: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
@@ -946,11 +945,11 @@ msgstr ""
 #: ../plugins/security-privacy//Location.qml:31
 #: ../wizard/qml/Pages//30-location.qml:25
 msgid "Location"
-msgstr ""
+msgstr "Lokasi"
 
 #: ../plugins/security-privacy//Location.qml:49
 msgid "Location detection"
-msgstr ""
+msgstr "Deteksi lokasi"
 
 #: ../plugins/security-privacy//Location.qml:71
 msgid ""
@@ -1015,23 +1014,23 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
-msgstr ""
+msgstr "Kode PIN"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../wizard/qml/Pages//15-passwd.qml:101
 msgid "Passphrase"
-msgstr ""
+msgstr "Frasa sandi"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:68
 #: ../plugins/battery//PageComponent.qml:306
 msgid "Lock when idle"
-msgstr ""
+msgstr "Kunci saat menganggur"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:69
 #: ../plugins/battery//PageComponent.qml:306
 msgid "Sleep when idle"
-msgstr ""
+msgstr "Tidur saat menganggur"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PhoneLocking.qml:75
@@ -1039,8 +1038,7 @@ msgstr ""
 #, qt-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 menit"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:101
 msgid "Sleep locks immediately"
@@ -1052,7 +1050,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
-msgstr ""
+msgstr "Peluncur"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
@@ -1069,12 +1067,12 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "Ubah kode PIN..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
 msgid "Change passphrase…"
-msgstr ""
+msgstr "Ubah frasa sandi..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
@@ -1098,19 +1096,19 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "Pilih kode PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
-msgstr ""
+msgstr "Pilih frasa sandi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "Konfirmasikan kode PIN"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
-msgstr ""
+msgstr "Konfirmasi frasa sandi"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
@@ -1134,7 +1132,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "Kode PIN 4 dijit"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -1142,11 +1140,11 @@ msgstr ""
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "Kode PIN 4 dijit..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
-msgstr ""
+msgstr "Frasa sandi..."
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../plugins/system-update//PageComponent.qml:36
@@ -1201,15 +1199,15 @@ msgstr[1] ""
 
 #: ../plugins/system-update//PageComponent.qml:259
 msgid "Pause All"
-msgstr ""
+msgstr "Jeda Semua"
 
 #: ../plugins/system-update//PageComponent.qml:313
 msgid "Retry"
-msgstr ""
+msgstr "Coba lagi"
 
 #: ../plugins/system-update//PageComponent.qml:329
 msgid "Download"
-msgstr ""
+msgstr "Unduh"
 
 #: ../plugins/system-update//PageComponent.qml:329
 msgid "Update"
@@ -1217,23 +1215,23 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:330
 msgid "Resume"
-msgstr ""
+msgstr "Lanjutkan"
 
 #: ../plugins/system-update//PageComponent.qml:331
 msgid "Pause"
-msgstr ""
+msgstr "Jeda"
 
 #: ../plugins/system-update//PageComponent.qml:389
 msgid "Installing"
-msgstr ""
+msgstr "Memasang..."
 
 #: ../plugins/system-update//PageComponent.qml:422
 msgid "Installed"
-msgstr ""
+msgstr "Terpasang"
 
 #: ../plugins/system-update//PageComponent.qml:447
 msgid "Version: "
-msgstr ""
+msgstr "Versi: "
 
 #: ../plugins/system-update//PageComponent.qml:469
 msgid "Sign in to Ubuntu One to receive updates for apps."
@@ -1250,7 +1248,7 @@ msgstr ""
 #: ../plugins/system-update//PageComponent.qml:560
 #: ../plugins/system-update//Configuration.qml:30
 msgid "Auto download"
-msgstr ""
+msgstr "Unduh otomatis"
 
 #: ../plugins/system-update//PageComponent.qml:565
 msgid "On wi-fi"
@@ -1258,23 +1256,23 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:567
 msgid "Always"
-msgstr ""
+msgstr "Selalu"
 
 #: ../plugins/system-update//PageComponent.qml:582
 msgid " bytes"
-msgstr ""
+msgstr " byte"
 
 #: ../plugins/system-update//PageComponent.qml:585
 msgid " KiB"
-msgstr ""
+msgstr " KiB"
 
 #: ../plugins/system-update//PageComponent.qml:588
 msgid " MiB"
-msgstr ""
+msgstr " MiB"
 
 #: ../plugins/system-update//PageComponent.qml:591
 msgid " GiB"
-msgstr ""
+msgstr " GiB"
 
 #: ../plugins/system-update//Configuration.qml:35
 msgid "Download future updates automatically:"
@@ -1302,7 +1300,7 @@ msgstr ""
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
-msgstr ""
+msgstr "PIN untuk '%1'"
 
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
@@ -1315,23 +1313,23 @@ msgstr ""
 #: ../plugins/battery//PageComponent.qml:363
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:134
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
-msgstr ""
+msgstr "Terhubung"
 
 #: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
-msgstr ""
+msgstr "Menyambung..."
 
 #: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
-msgstr ""
+msgstr "Memutus..."
 
 #: ../plugins/bluetooth//PageComponent.qml:85
 msgid "Disconnected"
-msgstr ""
+msgstr "Terputus"
 
 #: ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
@@ -1339,71 +1337,71 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:92
 msgid "Computer"
-msgstr ""
+msgstr "Komputer"
 
 #: ../plugins/bluetooth//PageComponent.qml:94
 msgid "Modem"
-msgstr ""
+msgstr "Modem"
 
 #: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
 msgid "Network"
-msgstr ""
+msgstr "Jaringan"
 
 #: ../plugins/bluetooth//PageComponent.qml:96
 msgid "Headset"
-msgstr ""
+msgstr "Headset"
 
 #: ../plugins/bluetooth//PageComponent.qml:97
 msgid "Headphones"
-msgstr ""
+msgstr "Headphone"
 
 #: ../plugins/bluetooth//PageComponent.qml:98
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: ../plugins/bluetooth//PageComponent.qml:99
 msgid "Other Audio"
-msgstr ""
+msgstr "Audio Lainnya"
 
 #: ../plugins/bluetooth//PageComponent.qml:100
 msgid "Joypad"
-msgstr ""
+msgstr "Joypad"
 
 #: ../plugins/bluetooth//PageComponent.qml:101
 msgid "Keyboard"
-msgstr ""
+msgstr "Papan Tik"
 
 #: ../plugins/bluetooth//PageComponent.qml:102
 msgid "Tablet"
-msgstr ""
+msgstr "Tablet"
 
 #: ../plugins/bluetooth//PageComponent.qml:103
 msgid "Mouse"
-msgstr ""
+msgstr "Tetikus"
 
 #: ../plugins/bluetooth//PageComponent.qml:104
 msgid "Printer"
-msgstr ""
+msgstr "Pencetak"
 
 #: ../plugins/bluetooth//PageComponent.qml:106
 msgid "Other"
-msgstr ""
+msgstr "Lainnya"
 
 #: ../plugins/bluetooth//PageComponent.qml:112
 msgid "Excellent"
-msgstr ""
+msgstr "Sempurna"
 
 #: ../plugins/bluetooth//PageComponent.qml:113
 msgid "Good"
-msgstr ""
+msgstr "Baik"
 
 #: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
-msgstr ""
+msgstr "Cukup"
 
 #: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
-msgstr ""
+msgstr "Buruk"
 
 #: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Discoverable"
@@ -1436,15 +1434,15 @@ msgstr ""
 
 #: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
-msgstr ""
+msgstr "Tipe"
 
 #: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../plugins/bluetooth//PageComponent.qml:389
 msgid "Signal Strength"
-msgstr ""
+msgstr "Kuat Sinyal"
 
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
@@ -1458,77 +1456,73 @@ msgstr ""
 
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
 msgid "Confirm PIN"
-msgstr ""
+msgstr "Konfirmasikan PIN"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:140
 msgid "Battery"
-msgstr ""
+msgstr "Baterai"
 
 #. TRANSLATORS: %1 is the number of seconds
 #: ../plugins/battery//PageComponent.qml:46
 #, qt-format
 msgid "%1 second ago"
 msgid_plural "%1 seconds ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 detik yang lalu"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/battery//PageComponent.qml:49
 #, qt-format
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 menit yang lalu"
 
 #. TRANSLATORS: %1 is the number of hours
 #: ../plugins/battery//PageComponent.qml:52
 #, qt-format
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 jam yang lalu"
 
 #. TRANSLATORS: %1 is the number of days
 #: ../plugins/battery//PageComponent.qml:55
 #, qt-format
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 hari yang lalu"
 
 #: ../plugins/battery//PageComponent.qml:85
 msgid "Charging now"
-msgstr ""
+msgstr "Sedang mengisi"
 
 #: ../plugins/battery//PageComponent.qml:90
 msgid "Last full charge"
-msgstr ""
+msgstr "Terakhir terisi penuh"
 
 #: ../plugins/battery//PageComponent.qml:95
 msgid "Fully charged"
-msgstr ""
+msgstr "Terisi penuh"
 
 #: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
-msgstr ""
+msgstr "Tingkat pengisian"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
 #: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ../plugins/battery//PageComponent.qml:212
 #: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
-msgstr ""
+msgstr "Kemarin"
 
 #: ../plugins/battery//PageComponent.qml:220
 #: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
-msgstr ""
+msgstr "Hari ini"
 
 #: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
@@ -1537,11 +1531,11 @@ msgstr ""
 #: ../plugins/battery//PageComponent.qml:296
 #: ../plugins/brightness//BrightnessSlider.qml:51
 msgid "Display brightness"
-msgstr ""
+msgstr "Kecerahan tampilan"
 
 #: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
-msgstr ""
+msgstr "GPS"
 
 #: ../plugins/battery//PageComponent.qml:412
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
@@ -1569,7 +1563,7 @@ msgstr ""
 #: ../plugins/background//MainPage.qml:38
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:146
 msgid "Background"
-msgstr ""
+msgstr "Latar belakang"
 
 #: ../plugins/background//MainPage.qml:109
 msgid "Ubuntu Art"
@@ -1581,7 +1575,7 @@ msgstr ""
 
 #: ../plugins/background//Preview.qml:70
 msgid "Preview"
-msgstr ""
+msgstr "Pratinjau"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
@@ -1591,7 +1585,7 @@ msgstr ""
 #: ../plugins/brightness//PageComponent.qml:32
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:154
 msgid "Brightness"
-msgstr ""
+msgstr "Kecerahan"
 
 #: ../plugins/brightness//PageComponent.qml:52
 msgid "Adjust automatically"
@@ -1605,7 +1599,7 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
 #: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
-msgstr ""
+msgstr "Data seluler:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
@@ -1617,24 +1611,24 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:53
 #: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (lebih cepat)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr ""
+msgstr "Roaming data"
 
 #: ../plugins/cellular//Components//NoSim.qml:47
 #: ../plugins/cellular//Components//SingleSim.qml:58
 #: ../plugins/cellular//Components//SingleSim.qml:66
 msgid "Carrier"
-msgstr ""
+msgstr "Operator"
 
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (lebih cepat)"
 
 #: ../plugins/cellular//Components//MultiSim.qml:42
 #: ../plugins/cellular//Components//SingleSim.qml:37
@@ -1644,11 +1638,11 @@ msgstr ""
 #: ../plugins/cellular//Components//MultiSim.qml:58
 #: ../plugins/cellular//Components//SingleSim.qml:52
 msgid "Data usage statistics"
-msgstr ""
+msgstr "Statistik penggunaan data"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
-msgstr ""
+msgstr "Tanya setiap kali"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
@@ -1662,27 +1656,27 @@ msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr ""
+msgstr "Untuk pesan, pakai:"
 
 #: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "Sunting Nama SIM"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "Kebijakan privasi"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "Laporkan ke Canonical:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
@@ -1717,15 +1711,15 @@ msgstr ""
 
 #: ../src/qml/MainWindow.qml:131
 msgid "Search"
-msgstr ""
+msgstr "Cari"
 
 #: ../src/qml/MainWindow.qml:150
 msgid "Personal"
-msgstr ""
+msgstr "Pribadi"
 
 #: ../src/qml/MainWindow.qml:155
 msgid "System"
-msgstr ""
+msgstr "Sistem"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -1733,7 +1727,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "Gesek"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
@@ -1756,11 +1750,11 @@ msgstr ""
 #: ../wizard/qml/Pages//40-reporting.qml:50
 #: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//20-wifi.qml:195
 msgid "Continue"
-msgstr ""
+msgstr "Lanjutkan"
 
 #: ../wizard/qml/Pages//terms.qml:25
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Syarat & Ketentuan"
 
 #: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
@@ -1774,7 +1768,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "Pelaporan bug"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
@@ -1782,23 +1776,23 @@ msgstr ""
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "Ini dapat dinonaktifkan dalam Pengaturan Sistem."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
-msgstr ""
+msgstr "Halo!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:42
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "Selamat datang di telepon Ubuntu Anda."
 
 #: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
-msgstr ""
+msgstr "Mari mulai."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "Semua selesai"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
@@ -1814,11 +1808,11 @@ msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "Sambung ke Wi-Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
-msgstr ""
+msgstr "Jaringan yang tersedia"
 
 #: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
@@ -1843,22 +1837,22 @@ msgstr ""
 #: ../wizard/qml/Components//StackButton.qml:51
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:54
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:2
 msgid "Example"
-msgstr ""
+msgstr "Contoh"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:4
 msgid "example"
-msgstr ""
+msgstr "contoh"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:6
@@ -1875,22 +1869,22 @@ msgstr ""
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:12
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:32
 msgid "network"
-msgstr ""
+msgstr "jaringan"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:14
 msgid "wireless"
-msgstr ""
+msgstr "nirkabel"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:16
 msgid "wifi"
-msgstr ""
+msgstr "wifi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:18
 msgid "wi-fi"
-msgstr ""
+msgstr "wi-fi"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
@@ -1919,17 +1913,17 @@ msgstr ""
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:138
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:158
 msgid "settings"
-msgstr ""
+msgstr "pengaturan"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:24
 msgid "reset"
-msgstr ""
+msgstr "reset"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:30
 msgid "cellular"
-msgstr ""
+msgstr "seluler"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:34
@@ -1939,12 +1933,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:36
 msgid "gsm"
-msgstr ""
+msgstr "gsm"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:42
 msgid "language"
-msgstr ""
+msgstr "bahasa"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:44
@@ -1954,72 +1948,72 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:46
 msgid "i18n"
-msgstr ""
+msgstr "i18n"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:50
 msgid "Accessibility"
-msgstr ""
+msgstr "Aksesibilitas"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:52
 msgid "accessibility"
-msgstr ""
+msgstr "aksesibilitas"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:54
 msgid "a11y"
-msgstr ""
+msgstr "a11y"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:60
 msgid "sound"
-msgstr ""
+msgstr "suara"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:66
 msgid "phone"
-msgstr ""
+msgstr "telepon"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:72
 msgid "about"
-msgstr ""
+msgstr "tentang"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:74
 msgid "device"
-msgstr ""
+msgstr "perangkat"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:76
 msgid "info"
-msgstr ""
+msgstr "info"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:78
 msgid "Orientation Lock"
-msgstr ""
+msgstr "Kunci Orientasi"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:80
 msgid "rotation"
-msgstr ""
+msgstr "rotasi"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:82
 msgid "orientation"
-msgstr ""
+msgstr "orientasi"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:84
 msgid "lock"
-msgstr ""
+msgstr "kunci"
 
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:86
 msgid "screen"
-msgstr ""
+msgstr "layar"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:88
@@ -2039,102 +2033,102 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:94
 msgid "offline"
-msgstr ""
+msgstr "luring"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:98
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:128
 msgid "software"
-msgstr ""
+msgstr "perangkat lunak"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:100
 msgid "notifications"
-msgstr ""
+msgstr "notifikasi"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:106
 msgid "time"
-msgstr ""
+msgstr "waktu"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:108
 msgid "date"
-msgstr ""
+msgstr "tanggal"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:110
 msgid "timezone"
-msgstr ""
+msgstr "zona waktu"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:116
 msgid "security"
-msgstr ""
+msgstr "keamanan"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:118
 msgid "privacy"
-msgstr ""
+msgstr "privasi"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:122
 msgid "Updates available"
-msgstr ""
+msgstr "Tersedia pembaruan"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:126
 msgid "system"
-msgstr ""
+msgstr "sistem"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:130
 msgid "update"
-msgstr ""
+msgstr "pembaruan"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:136
 msgid "bluetooth"
-msgstr ""
+msgstr "bluetooth"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:142
 msgid "battery"
-msgstr ""
+msgstr "baterai"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:144
 msgid "power"
-msgstr ""
+msgstr "daya"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:148
 msgid "appearance"
-msgstr ""
+msgstr "penampilan"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:150
 msgid "background"
-msgstr ""
+msgstr "latar belakang"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:152
 msgid "wallpaper"
-msgstr ""
+msgstr "gambar latar"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:156
 msgid "brightness"
-msgstr ""
+msgstr "kecerahan"
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
-msgstr ""
+msgstr "Judul tak diketahui"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "Kode PIN salah. Coba lagi."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
