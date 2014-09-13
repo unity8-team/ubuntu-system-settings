@@ -42,19 +42,17 @@ ItemPage {
                password.length === 13 ||
                password.length === 26;
     }
+
     Component.onCompleted: {
         flickable: otherNetworkFlickable
     }
+
     Flickable {
         id: otherNetworkFlickable
         contentWidth: parent.width
         contentHeight: otherview.height + units.gu(8)
-        anchors {
-            fill: parent
-            left: parent.left
-            right: parent.right
-            bottom: buttons.top
-        }
+        anchors.fill: parent
+
         Column {
             id : otherview
             anchors {
@@ -112,45 +110,48 @@ ItemPage {
                     id: passwordVisibleSwitch
                 }
             }
-        }
-    }
-    Rectangle {
-        id: buttons
-        color: Theme.palette.normal.background
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-        height: buttonRow.height + units.gu(4)
-        RowLayout {
-            id: buttonRow
-            anchors {
-                margins: units.gu(2)
-                verticalCenter: parent.verticalCenter
-                left: parent.left
-                right: parent.right
-            }
-            spacing: units.gu(2)
-            height: cancelButton.height
 
-            Button {
-                id: cancelButton
-                Layout.fillWidth: true
-                text: i18n.tr("Cancel")
-                onClicked: {
-                    pageStack.pop()
+            Rectangle {
+                id: buttons
+                color: Theme.palette.normal.background
+                anchors {
+                    left: parent.left
+                    right: parent.right
                 }
-            }
+                height: buttonRow.height + units.gu(4)
 
-            Button {
-                id: connectButton
-                Layout.fillWidth: true
-                text: i18n.tr("Connect")
-                enabled: settingsValid()
-                onClicked: {
-                    DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
-                    pageStack.pop()
+                RowLayout {
+                    id: buttonRow
+                    anchors {
+                        margins: units.gu(2)
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        right: parent.right
+                    }
+                    spacing: units.gu(2)
+                    height: cancelButton.height
+
+                    Button {
+                        id: cancelButton
+                        Layout.fillWidth: true
+                        text: i18n.tr("Cancel")
+                        onClicked: {
+                            pageStack.pop()
+                        }
+                    }
+
+                    Button {
+                        id: connectButton
+                        Layout.fillWidth: true
+                        text: i18n.tr("Connect")
+                        enabled: settingsValid()
+                        onClicked: {
+                            DbusHelper.connect(networkname.text,
+                                               securityList.selectedIndex,
+                                               password.text)
+                            pageStack.pop()
+                        }
+                    }
                 }
             }
         }
