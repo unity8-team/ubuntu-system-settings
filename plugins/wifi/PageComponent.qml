@@ -42,6 +42,17 @@ ItemPage {
         model: mainMenu.model
     }
 
+    QDBusActionGroup {
+        id: actionGroup
+        busType: 1
+        busName: "com.canonical.indicator.network"
+        objectPath: "/com/canonical/indicator/network"
+        property variant actionObject: action("wifi.enable")
+        Component.onCompleted: {
+            start()
+        }
+    }
+
     // workaround of getting the following error on startup:
     // WARNING - file:///usr/..../wifi/PageComponent.qml:24:1: QML Page: Binding loop detected for property "flickable"
     flickable: null
@@ -121,9 +132,10 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Other network")
+                text: i18n.tr("Connect to hidden network")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
+                visible : (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
             }
         }
 

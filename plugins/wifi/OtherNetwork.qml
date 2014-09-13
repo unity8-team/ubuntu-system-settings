@@ -24,7 +24,7 @@ import QMenuModel 0.1
 
 ItemPage {
     id: othernetwork
-    title: i18n.tr("Other network")
+    title: i18n.tr("Connect to hidden network")
 
     function settingsValid() {
         if(networkname.length == 0) {
@@ -41,6 +41,10 @@ ItemPage {
                password.length === 10 ||
                password.length === 13 ||
                password.length === 26;
+    }
+
+    Component.onCompleted: {
+        flickable: otherNetworkFlickable
     }
 
     Flickable {
@@ -66,6 +70,7 @@ ItemPage {
                 id : networkname
                 width: parent.width - units.gu(4)
                 anchors.horizontalCenter: parent.horizontalCenter
+                inputMethodHints: Qt.ImhNoPredictiveText
             }
 
             ListItem.ItemSelector {
@@ -91,8 +96,7 @@ ItemPage {
                 visible: securityList.selectedIndex !== 0
                 width: parent.width - units.gu(4)
                 anchors.horizontalCenter: parent.horizontalCenter
-                echoMode: passwordVisibleSwitch.checked ?
-                              TextInput.Normal : TextInput.Password
+                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
                 onActiveFocusChanged: {
                     parent.parent.contentY = 1000
                 }
