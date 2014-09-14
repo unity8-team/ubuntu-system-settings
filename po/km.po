@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-13 08:37+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -2212,14 +2212,3 @@ msgstr "មិន​អាច​ផ្អាក​សំណើ​បច្ចុ
 
 #~ msgid "Tap to open the system updater."
 #~ msgstr "ប៉ះ​ដើម្បី​បើក​កម្មវិធី​ធ្វើ​បច្ចុប្បន្នភាព​ប្រព័ន្ធ។"
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "ខ្ញុំ​បាន​អាន និង​យល់ព្រម​តាម <a href='terms.qml'>លក្ខខណ្ឌ​ប្រើប្រាស់</a> "
-#~ "របស់ Ubuntu"
