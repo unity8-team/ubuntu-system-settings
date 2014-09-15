@@ -1,3 +1,25 @@
+ubuntu-system-settings (0.3+14.10.20140913-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Don't try to tweak the bottomMargin for the OSK, it was trying to
+    calculate it based on an undefined component so failing. It
+    shouldn't be needed anyway.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Sat, 13 Sep 2014 02:46:25 +0000
+
+ubuntu-system-settings (0.3+14.10.20140912-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * [wifi] "Other Network" -> "Connect to hidden network" (LP: #1365984)
+  * [wifi] fix bad looking buttons in "Other Networks" panel (LP:
+    #1362127)
+
+  [ Jussi Pakkanen ]
+  * Hide entry to connect to hidden network when wifi is off. (LP:
+    #1365960)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 12 Sep 2014 20:43:55 +0000
+
 ubuntu-system-settings (0.3+14.10.20140911.3-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
