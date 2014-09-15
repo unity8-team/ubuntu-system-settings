@@ -44,22 +44,34 @@ ListItem.SingleValue {
         }
         root.updatesAvailable = _updatesAvailable;
         if (root.updatesAvailable > 0)
-            parent.visible = true;
+            root.parent.visible = true;
         else
-            parent.visible = false;
+            root.parent.visible = false;
     }
 
-    Component.onCompleted: UpdateManager.checkUpdates()
+    Component.onCompleted: {
+        // Ensure the entryComponent is hidden
+        root.parent.visible = false;
+    }
 
     Connections {
         id: updateManager
         objectName: "updateManager"
         target: UpdateManager
         onModelChanged: root._updatesRefresh()
-        onUpdateAvailableFound: root._updatesRefresh()
-        onUpdatesNotFound: root._updatesRefresh()
-        onCheckFinished: root._updatesRefresh()
     }
 
     onClicked: main.loadPluginByName("system-update");
+
+    /* Don't check for updates immediately on startup */
+    Timer {
+        interval: 60000
+        running: true
+        repeat: false
+        onTriggered: {
+            /* Only check for updates if the model isn't already populated */
+            if (root.updatesAvailable < 1)
+                UpdateManager.checkUpdates();
+        }
+    }
 }
