@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:54+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:08+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -2210,16 +2210,6 @@ msgstr "Nun pue posase la solicitú actual (nun pue contautase col serviciu)"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Coneutar a Wi-Fi"
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Lleí y aceuto  los <a href='terms.qml'>términos y condiciones</a> d'Ubuntu"
 
 #~ msgid "There's an updated system image."
 #~ msgstr "Hai un anovamientu de la imaxe del sistema disponible."

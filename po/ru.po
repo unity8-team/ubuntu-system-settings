@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:11+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -25,11 +25,11 @@ msgstr "Настройки системы"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "Система;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Настройки;Параметры;"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -146,7 +146,7 @@ msgstr "Отключиться"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr ""
+msgstr "IP-адрес"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
@@ -378,7 +378,7 @@ msgstr "Все доступные языки:"
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "Перезапустить сейчас"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
@@ -477,7 +477,7 @@ msgstr "Ожидание вызова"
 #: ../plugins/phone//MultiSim.qml:56 ../plugins/phone//MultiSim.qml:94
 #: ../plugins/phone//NoSims.qml:42
 msgid "Services"
-msgstr ""
+msgstr "Службы"
 
 #: ../plugins/phone//CallForwarding.qml:91
 msgid ""
@@ -518,7 +518,7 @@ msgstr ""
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "Извините, эта лицензия не может быть показана."
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
@@ -550,7 +550,7 @@ msgstr ""
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "Номер телефона:"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -564,11 +564,11 @@ msgstr "Серийный номер"
 
 #: ../plugins/about//PageComponent.qml:124
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Wi-Fi адрес"
 
 #: ../plugins/about//PageComponent.qml:132
 msgid "Bluetooth address"
-msgstr ""
+msgstr "Bluetooth адрес"
 
 #: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
 msgid "Storage"
@@ -621,6 +621,7 @@ msgstr ""
 #: ../plugins/about//DevMode.qml:108
 msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
+"Вам нужен PIN код или ключевая фраза чтобы использовать Режим разработчика"
 
 #: ../plugins/about//DevMode.qml:114
 #: ../plugins/security-privacy//PhoneLocking.qml:49
@@ -848,17 +849,19 @@ msgstr ""
 
 #: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
-msgstr ""
+msgstr "Шифрование"
 
 #: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
+"Шифрование защищает от доступа к данным телефона, когда телефон подключен к "
+"компьютеру или другому устройству."
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
-msgstr ""
+msgstr "Конфиденциальность"
 
 #: ../plugins/security-privacy//PageComponent.qml:188
 msgid "Stats on welcome screen"
@@ -951,10 +954,14 @@ msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"Когда PIN-код SIM-карты установлен, он должен быть введен для доступа к "
+"сотовой связи после перезапуска телефона или смены SIM."
 
 #: ../plugins/security-privacy//SimPin.qml:358
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
+"Неоднократный ввод неправильного PIN-кода может заблокировать SIM-карту "
+"навсегда."
 
 #: ../plugins/security-privacy//Location.qml:31
 #: ../wizard/qml/Pages//30-location.qml:25
@@ -1088,7 +1095,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "Уведомления и быстрые настройки"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
@@ -1101,7 +1108,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "Изменить PIN-код..."
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -1114,7 +1121,7 @@ msgstr "Переключить на свайп"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "Переключится на PIN-код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
@@ -1122,7 +1129,7 @@ msgstr "Переключить на кодовую фразу"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "Существующий PIN-код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -1130,7 +1137,7 @@ msgstr "Текущая кодовая фраза"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "Выберите PIN-код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -1138,7 +1145,7 @@ msgstr "Введите кодовую фразу"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "Подтвердите PIN-код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
@@ -1146,7 +1153,7 @@ msgstr "Подтвердите кодовую фразу"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "PIN-коды не совпадают. Попробуйте ещё раз."
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -1166,7 +1173,7 @@ msgstr "Свайп (небезопасно)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "4-х значный PIN-код"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -1197,6 +1204,7 @@ msgstr "Требуется перезагрузка, чтобы установи
 #: ../plugins/system-update//PageComponent.qml:88
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
+"Подключите телефон к источнику питания перед установкой обновлений системы."
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "Install & Restart"
@@ -1648,25 +1656,25 @@ msgstr "Автонастройка яркости экрана в зависим
 #: ../plugins/cellular//Components//CellularSingleSim.qml:32
 #: ../plugins/cellular//Components//CellularMultiSim.qml:82
 msgid "Cellular data:"
-msgstr ""
+msgstr "Данные сотовой сети:"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
 #: ../plugins/cellular//Components//CellularMultiSim.qml:138
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "Только 2G (экономит батарею)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularSingleSim.qml:53
 #: ../plugins/cellular//Components//CellularMultiSim.qml:140
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (быстрее)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr ""
+msgstr "Данные в роуминге"
 
 #: ../plugins/cellular//Components//NoSim.qml:47
 #: ../plugins/cellular//Components//SingleSim.qml:58
@@ -1677,7 +1685,7 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (быстрее)"
 
 #: ../plugins/cellular//Components//MultiSim.qml:42
 #: ../plugins/cellular//Components//SingleSim.qml:37
@@ -1691,21 +1699,23 @@ msgstr "Использование трафика"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
-msgstr ""
+msgstr "Спрашивать меня каждый раз"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "Для исходящих вызовов использовать:"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
+"Вы можете изменить SIM для отдельных звонков или контактов в телефонной "
+"книге."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr ""
+msgstr "Для сообщений использовать:"
 
 #: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
@@ -1713,27 +1723,27 @@ msgstr "APN"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "Свойства названия SIM-карты"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "Политика конфиденциальности"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "Сообщить в Canonical:"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "Аварийное завершение программ и ошибки"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
-msgstr ""
+msgstr "Предыдущие отчеты об ошибках"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
@@ -1780,7 +1790,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "Эти PIN-коды не совпадают."
 
 #: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
@@ -1788,7 +1798,7 @@ msgstr "Кодовые фразы не совпадают."
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "PIN-код должен быть не менее четырех цифр."
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
@@ -1803,7 +1813,7 @@ msgstr "Продолжить"
 
 #: ../wizard/qml/Pages//terms.qml:25
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Условия использования"
 
 #: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
@@ -1822,14 +1832,15 @@ msgstr ""
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
+"Ваш телефон настроен на автоматическое сообщение об ошибках в Canonical."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "Это может быть отключено в параметрах системы."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
-msgstr ""
+msgstr "Привет!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:42
 msgid "Welcome to your Ubuntu phone."
@@ -1837,19 +1848,19 @@ msgstr ""
 
 #: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
-msgstr ""
+msgstr "Приступим к работе."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
-msgstr ""
+msgstr "Всё готово"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "Хорошая работа!"
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
-msgstr ""
+msgstr "Ваш телефон готов к использованию."
 
 #: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
@@ -1857,7 +1868,7 @@ msgstr "Завершить"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "Подключится к Wi-Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
@@ -1869,15 +1880,16 @@ msgstr "Пропустить"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr ""
+msgstr "Вставьте SIM-карту"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
-msgstr ""
+msgstr "Пожалуйста, вставьте SIM-карту перед тем как продолжить."
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
 msgstr ""
+"Без нее вы не сможете совершать звонки или использовать текстовые сообщения."
 
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
@@ -2214,7 +2226,3 @@ msgstr ""
 
 #~ msgid "Tap to open the system updater."
 #~ msgstr "Нажмите для открытия мастера обновления системы."
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"

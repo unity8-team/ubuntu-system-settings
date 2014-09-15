@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:10+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -2183,10 +2183,6 @@ msgstr ""
 
 #~ msgid "Remove"
 #~ msgstr "Izņemt"
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Pieslēgties uz Wifi"
