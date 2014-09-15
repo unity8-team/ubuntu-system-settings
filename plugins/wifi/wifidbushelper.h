@@ -42,8 +42,12 @@ public:
     Q_INVOKABLE void forgetConnection(const QString dbus_path);
     Q_INVOKABLE bool deactivateConnection();
 
+public Q_SLOTS:
+    void nmDeviceStateChanged(uint, uint, uint);
+
 Q_SIGNALS:
     void wifiIp4AddressChanged(QString wifiIp4Address);
+    void deviceStateChanged(uint newState, uint reason);
 
 private:
     QDBusConnection m_systemBusConnection;

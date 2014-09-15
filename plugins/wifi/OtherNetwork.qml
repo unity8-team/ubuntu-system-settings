@@ -26,6 +26,63 @@ import QMenuModel 0.1
 Component {
 
     Dialog {
+
+        Common {
+            id: common
+        }
+
+        states: [
+            State {
+                name: "CONNECTING"
+                PropertyChanges {
+                    target: connectButton
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: connectButtonIndicator
+                    running: true
+                }
+                PropertyChanges {
+                    target: passwordVisible
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: password
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordList
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: securityList
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: networkname
+                    enabled: false
+                }
+            },
+            State {
+                name: "CONNECTION_FAILED"
+                PropertyChanges {
+                    target: feedback
+                    visible: true
+                }
+            },
+            State {
+                name: "CONNECTION_SUCCEEDED"
+                PropertyChanges {
+                    target: feedback
+                    visible: true
+                }
+                PropertyChanges {
+                    target: successIndicator
+                    running: true
+                }
+            }
+        ]
+
         id: otherNetworkDialog
         objectName: "otherNetworkDialog"
         function settingsValid() {
@@ -44,7 +101,14 @@ Component {
                    password.length === 13 ||
                    password.length === 26;
         }
+
         title: i18n.tr("Connect to Hidden Network")
+
+        Label {
+            id: feedback
+            horizontalAlignment: Text.AlignHCenter
+            visible: false
+        }
 
         ListItem.Standard {
             text : i18n.tr("Network name")
@@ -120,11 +184,53 @@ Component {
                 enabled: settingsValid()
                 onClicked: {
                     DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
-                    PopupUtils.close(otherNetworkDialog)
+                    otherNetworkDialog.state = "CONNECTING";
+                }
+                Icon {
+                    height: parent.height - units.gu(1.5)
+                    width: parent.height - units.gu(1.5)
+                    anchors {
+                        centerIn: parent
+                    }
+                    name: "tick"
+                    color: "green"
+                    visible: successIndicator.running
+                }
+                ActivityIndicator {
+                    id: connectButtonIndicator
+                    running: false
+                    visible: running
+                    height: parent.height - units.gu(1.5)
+                    anchors {
+                        centerIn: parent
+                    }
                 }
             }
         }
-    }
 
+        Timer {
+            id: successIndicator
+            interval: 2000
+            running: false
+            repeat: false
+            onTriggered: PopupUtils.close(otherNetworkDialog)
+        }
+
+        Connections {
+            target: DbusHelper
+            onDeviceStateChanged: {
+                switch (newState) {
+                    case 120:
+                        otherNetworkDialog.state = "CONNECTION_FAILED";
+                        feedback.text = common.reasonToString(reason);
+                        break;
+                    case 100:
+                        otherNetworkDialog.state = "CONNECTION_SUCCEEDED";
+                        break;
+                }
+
+            }
+        }
+    }
 }
 
