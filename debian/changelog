@@ -1,3 +1,16 @@
+ubuntu-system-settings (0.3+14.10.20140915.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * When activated by a url request for a specific panel, clear the
+    pageStack to maintain the natural navigation instead of pushing a
+    new page on top of a page from a the previous panel (LP: #1362025)
+    (LP: #1362025, #1359953)
+
+  [ Lars Uebernickel ]
+  * Use Icon instead of StatusIcon
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 15 Sep 2014 23:26:16 +0000
+
 ubuntu-system-settings (0.3+14.10.20140915-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]
