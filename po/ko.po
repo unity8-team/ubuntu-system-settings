@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-13 08:37+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:10+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -1437,7 +1437,7 @@ msgstr "발견하면 자동으로 연결:"
 
 #: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
-msgstr "종류"
+msgstr "형식"
 
 #: ../plugins/bluetooth//PageComponent.qml:385
 msgid "Status"

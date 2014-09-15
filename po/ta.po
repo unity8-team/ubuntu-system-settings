@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-01-18 17:29+0000\n"
+"PO-Revision-Date: 2014-09-14 20:20+0000\n"
 "Last-Translator: solomon sunder <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-13 08:38+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:12+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -28,7 +28,7 @@ msgstr ""
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "விருப்பங்கள்;அமைப்புகள்"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -64,7 +64,7 @@ msgstr "வெற்று"
 
 #: ../plugins/wifi//OtherNetwork.qml:69
 msgid "WPA & WPA2 Personal"
-msgstr ""
+msgstr "WPA & WPA2 தனிப்பட்ட"
 
 #: ../plugins/wifi//OtherNetwork.qml:70
 msgid "WEP"
@@ -72,7 +72,7 @@ msgstr ""
 
 #: ../plugins/wifi//OtherNetwork.qml:77 ../plugins/wifi//NetworkDetails.qml:61
 msgid "Password"
-msgstr ""
+msgstr "கடவுச்சொல்:"
 
 #: ../plugins/wifi//OtherNetwork.qml:90
 msgid "Password visible"
@@ -102,7 +102,7 @@ msgstr "ரத்துசெய்"
 #: ../plugins/wifi//OtherNetwork.qml:122
 #: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
-msgstr ""
+msgstr "இணை"
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -132,7 +132,7 @@ msgstr "எப்போதுமில்லை"
 
 #: ../plugins/wifi//NetworkDetails.qml:73
 msgid "Show password"
-msgstr ""
+msgstr "கடவுச்சொல்லைக் காண்பி"
 
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
@@ -145,7 +145,7 @@ msgstr "துண்டிக்கவும்"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr ""
+msgstr "ஐபி  முகவரி"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
