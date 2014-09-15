@@ -44,9 +44,10 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            StatusIcon {
+            Icon {
                 id: icon
                 anchors.horizontalCenter: parent.horizontalCenter
+                width: height
                 height: units.gu(4)
                 source: model.icon
             }
