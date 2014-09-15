@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-08 06:15+0000\n"
+"PO-Revision-Date: 2014-09-12 09:05+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:55+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:09+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: ca\n"
 
@@ -25,11 +25,11 @@ msgstr "Configuració del sistema"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "Sistema;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Preferències;Paràmetres;"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -146,7 +146,7 @@ msgstr "Desconnecta"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr ""
+msgstr "Adreça IP"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
@@ -384,7 +384,7 @@ msgstr "Totes les llengües disponibles:"
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "Reinicia ara"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
@@ -524,7 +524,7 @@ msgstr ""
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "No es pot mostrar aquesta llicència"
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
@@ -556,7 +556,7 @@ msgstr "Part de la imatge de personalització"
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "Número de telèfon:"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -570,11 +570,11 @@ msgstr "Número de sèrie"
 
 #: ../plugins/about//PageComponent.qml:124
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Adreça Wi-Fi"
 
 #: ../plugins/about//PageComponent.qml:132
 msgid "Bluetooth address"
-msgstr ""
+msgstr "Adreça Bluetooth"
 
 #: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
 msgid "Storage"
@@ -1058,7 +1058,7 @@ msgstr "Bloqueig del telèfon"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "Cap"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1215,6 +1215,8 @@ msgstr "Cal reiniciar el telèfon per instal·lar l'actualització del sistema."
 #: ../plugins/system-update//PageComponent.qml:88
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
+"Connecteu el dispositiu al carregador abans d'instal·lar l'actualització del "
+"sistema."
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "Install & Restart"
@@ -1641,7 +1643,7 @@ msgstr "Visualització prèvia"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "Suprmeix la imatge"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
@@ -1832,6 +1834,8 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
+"He llegit i accepto les <a href='terms.qml'>condicions generals</a> del "
+"servei HERE"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
@@ -1877,7 +1881,7 @@ msgstr "Finalitza"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "Connecta't a la Wi-Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
@@ -2237,14 +2241,3 @@ msgstr ""
 
 #~ msgid "Tap to open the system updater."
 #~ msgstr "Feu un toc per obrir l'actualitzador del sistema."
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "He llegit i accepto les <a href='terms.qml'>condicions generals</a> de "
-#~ "l'Ubuntu"

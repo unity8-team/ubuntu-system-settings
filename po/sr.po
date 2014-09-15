@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:11+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -2210,22 +2210,11 @@ msgstr "Не може да откаже текући захтев (нема пр
 msgid "Can't pause current request (can't contact service)"
 msgstr "Не може да заустави текући захтев (нема приступа услузи)"
 
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
 #~ msgid "Remove"
 #~ msgstr "Уклони"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Повежи се бежично"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Прочитах и слажем се са <a href='terms.qml'>правилима и условима</a> "
-#~ "употребе Убунтуа"
 
 #~ msgid "Tap to open the system updater."
 #~ msgstr "Тапните да отворите доградњу система."
