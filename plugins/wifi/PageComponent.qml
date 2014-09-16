@@ -42,6 +42,17 @@ ItemPage {
         model: mainMenu.model
     }
 
+    QDBusActionGroup {
+        id: actionGroup
+        busType: 1
+        busName: "com.canonical.indicator.network"
+        objectPath: "/com/canonical/indicator/network"
+        property variant actionObject: action("wifi.enable")
+        Component.onCompleted: {
+            start()
+        }
+    }
+
     // workaround of getting the following error on startup:
     // WARNING - file:///usr/..../wifi/PageComponent.qml:24:1: QML Page: Binding loop detected for property "flickable"
     flickable: null
@@ -52,10 +63,8 @@ ItemPage {
     Flickable {
         id: pageFlickable
         anchors.fill: parent
-
         contentWidth: parent.width
         contentHeight: contentItem.childrenRect.height
-
 
         Column {
             anchors {
@@ -69,7 +78,6 @@ ItemPage {
                 model: menuStack.tail ? menuStack.tail : null
                 delegate: Item {
                     id: menuDelegate
-
                     anchors {
                         left: parent.left
                         right: parent.right
@@ -96,10 +104,17 @@ ItemPage {
                             }
 
                             if (item.hasOwnProperty("menuActivated")) {
-                                item.menuActivated = Qt.binding(function() { return ListView.isCurrentItem; });
-                                item.selectMenu.connect(function() { ListView.view.currentIndex = index });
-                                item.deselectMenu.connect(function() { ListView.view.currentIndex = -1 });
+                                item.menuActivated = Qt.binding(function() {
+                                    return ListView.isCurrentItem; 
+                                });
+                                item.selectMenu.connect(function() {
+                                    ListView.view.currentIndex = index;
+                                });
+                                item.deselectMenu.connect(function() {
+                                    ListView.view.currentIndex = -1;
+                                });
                             }
+
                             if (item.hasOwnProperty("menu")) {
                                 item.menu = Qt.binding(function() { return model; });
                             }
@@ -117,23 +132,11 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Other network")
+                text: i18n.tr("Connect to hidden network")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
+                visible : (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
             }
-        }
-
-        bottomMargin: Qt.inputMethod.visible ? (Qt.inputMethod.keyboardRectangle.height - main.anchors.bottomMargin) : 0
-
-        Behavior on bottomMargin {
-            NumberAnimation {
-                duration: 175
-                easing.type: Easing.OutQuad
-            }
-        }
-        // TODO - does ever frame.
-        onBottomMarginChanged: {
-            mainMenu.positionViewAtIndex(mainMenu.currentIndex, ListView.End)
         }
 
         // Only allow flicking if the content doesn't fit on the page

@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:58+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:12+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -2153,15 +2153,6 @@ msgstr "無法暫停目前要求的服務 (無法聯絡該服務)"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "連接 Wi-Fi"
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr "我已閱讀並同意 Ubuntu <a href='terms.qml'>條款與細則</a>"
 
 #~ msgid "There's an updated system image."
 #~ msgstr "有更新的系統映像檔。"

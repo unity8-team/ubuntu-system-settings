@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:54+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:08+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -2180,22 +2180,11 @@ msgstr ""
 msgid "Can't pause current request (can't contact service)"
 msgstr ""
 
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
 #~ msgid "Remove"
 #~ msgstr "Sil"
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Wi-Fi bağlatısı yarat"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Mən artıq Ubuntu <a href='terms.qml'>şərtləti və şəraitlərini</a> oxumuşam "
-#~ "və onlarla razılaşmışam."
 
 #~ msgid "Tap to open the system updater."
 #~ msgstr "Sistem yeniləyicisini açmaq üçün bura basın."

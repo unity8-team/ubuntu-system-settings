@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-11 18:45+0000\n"
+"PO-Revision-Date: 2014-09-12 11:25+0000\n"
 "Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 07:11+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -25,11 +25,11 @@ msgstr "Configurări de sistem"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "Sistem;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Preferințe;Configurări;"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -2249,13 +2249,3 @@ msgstr ""
 
 #~ msgid "There's an updated system image."
 #~ msgstr "Există o imagine de sistem actualizată."
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Am citit și sunt de acord cu <a href='terms.qml'>termenii și condițiile</a>"

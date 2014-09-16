@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-11 12:04+0000\n"
+"PO-Revision-Date: 2014-09-15 05:47+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-16 08:29+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -25,11 +25,11 @@ msgstr "Sistemske nastavitve"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "Sistem;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Možnosti;Nastavitve;"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -2237,13 +2237,3 @@ msgstr ""
 
 #~ msgid "Tap to open the system updater."
 #~ msgstr "Tapnite za odprtje posodobilnika sistema."
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Prebral sem in sprejmem <a href='terms.qml'>pravila ter pogoje</a> Ubuntuja."

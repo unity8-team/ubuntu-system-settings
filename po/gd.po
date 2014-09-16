@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-11 16:18+0000\n"
+"PO-Revision-Date: 2014-09-15 20:51+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:55+0000\n"
+"X-Launchpad-Export-Date: 2014-09-16 08:28+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -27,11 +27,11 @@ msgstr "Roghainnean an t-siostaim"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "System;Siostam"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Preferences;Settings;Roghainnean;"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -148,7 +148,7 @@ msgstr "Dì-cheangail"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr ""
+msgstr "Seòladh IP"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
@@ -386,7 +386,7 @@ msgstr "Gach cànan a tha ri làimh:"
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "Ath-thòisich an-dràsta"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
@@ -526,7 +526,7 @@ msgstr ""
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "Duilich ach cha ghabh an ceadachas seo a shealltainn."
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
@@ -558,7 +558,7 @@ msgstr "Ìomhaigh an gnàthachaidh"
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "Àireamh fòn:"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -572,11 +572,11 @@ msgstr "Àireamh shreathach"
 
 #: ../plugins/about//PageComponent.qml:124
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Seòladh Wi-Fi"
 
 #: ../plugins/about//PageComponent.qml:132
 msgid "Bluetooth address"
-msgstr ""
+msgstr "Soladh bluetooth"
 
 #: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
 msgid "Storage"
@@ -1064,7 +1064,7 @@ msgstr "Glasadh an fhòn"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "Chan eil gin"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1224,6 +1224,8 @@ msgstr ""
 #: ../plugins/system-update//PageComponent.qml:88
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
+"Ceangail am fòn ris a' chumhachd mus tòisich thu air ùrachadh an t-siostaim "
+"a stàladh."
 
 #: ../plugins/system-update//PageComponent.qml:91
 msgid "Install & Restart"
@@ -1662,7 +1664,7 @@ msgstr "Ro-shealladh"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "Thoir an dealbh air falbh"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
@@ -1905,7 +1907,7 @@ msgstr "Crìochnaich"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "Ceangail ri Wi-Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
@@ -2260,17 +2262,6 @@ msgstr ""
 
 #~ msgid "Connect to Wi-Fi"
 #~ msgstr "Ceangail ri Wi-Fi"
-
-#, qt-format
-#~ msgid "%1"
-#~ msgstr "%1"
-
-#~ msgid ""
-#~ "I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-#~ "conditions</a>"
-#~ msgstr ""
-#~ "Leugh mi 's dh'aontaich mi ri <a href='terms.qml'>teirmichean 's "
-#~ "cumhaichean</a>  Ubuntu."
 
 #~ msgid "There's an updated system image."
 #~ msgstr "Seo ìomhaigh ùr an t-siostaim."
