@@ -320,8 +320,10 @@ class CellularBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
 class PhoneOfonoBaseTestCase(UbuntuSystemSettingsOfonoTestCase):
     def setUp(self):
         """ Go to Phone page """
-        super(PhoneOfonoBaseTestCase, self).setUp()
-        self.phone_page = self.system_settings.main_view.go_to_phone_page()
+        super(PhoneOfonoBaseTestCase, self).setUp('phone')
+        self.phone_page = self.system_settings.main_view.select_single(
+            objectName='phonePage'
+        )
 
 
 class AboutBaseTestCase(UbuntuSystemSettingsTestCase):
@@ -698,7 +700,9 @@ class PhoneSoundBaseTestCase(SoundBaseTestCase):
     def setUp(self):
         """ Go to Phone page """
         super(PhoneSoundBaseTestCase, self).setUp('phone')
-        self.phone_page = self.system_settings.main_view.go_to_phone_page()
+        self.phone_page = self.system_settings.main_view.select_single(
+            objectName='phonePage'
+        )
 
     def tearDown(self):
         super(PhoneSoundBaseTestCase, self).tearDown()

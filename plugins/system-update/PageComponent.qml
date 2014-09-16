@@ -26,6 +26,7 @@ import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.Components.Popups 0.1
+import Ubuntu.OnlineAccounts.Client 0.1
 import Ubuntu.SystemSettings.Update 1.0
 
 
@@ -78,6 +79,12 @@ ItemPage {
         Component.onCompleted: {
             onChargingStateChanged(0, chargingState(0))
         }
+    }
+
+    Setup {
+        id: uoaConfig
+        applicationId: "ubuntu-system-settings"
+        providerId: "ubuntuone"
     }
 
     Component {
@@ -144,10 +151,6 @@ ItemPage {
             PropertyChanges { target: updateNotification; visible: false}
         }
     ]
-
-    function open_online_accounts() {
-        Qt.openUrlExternally("settings:///system/online-accounts");
-    }
 
     UpdateManager {
         id: updateManager
@@ -482,7 +485,7 @@ ItemPage {
                         leftMargin: units.gu(2)
                         rightMargin: units.gu(2)
                     }
-                    onClicked: open_online_accounts()
+                    onClicked: uoaConfig.exec()
                 }
 
             }

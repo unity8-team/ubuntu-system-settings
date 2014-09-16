@@ -103,10 +103,6 @@ class MainWindow(ubuntuuitoolkit.MainView):
         self.pointing_device.click_object(item)
 
     @autopilot.logging.log_action(logger.debug)
-    def go_to_phone_page(self):
-        return self._go_to_page('entryComponent-phone', 'phonePage')
-
-    @autopilot.logging.log_action(logger.debug)
     def go_to_reset_phone(self):
         return self._go_to_page('entryComponent-reset', 'resetPage')
 
