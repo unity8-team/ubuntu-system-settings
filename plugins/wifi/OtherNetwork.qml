@@ -59,26 +59,34 @@ Component {
                     enabled: false
                 }
                 PropertyChanges {
+                    target: feedback
+                    opacity: 0.5
+                }
+                PropertyChanges {
                     target: networkname
                     enabled: false
                 }
-            },
-            State {
-                name: "CONNECTION_FAILED"
                 PropertyChanges {
-                    target: feedback
-                    visible: true
+                    target: networknameLabel
+                    opacity: 0.5
                 }
             },
             State {
-                name: "CONNECTION_SUCCEEDED"
-                PropertyChanges {
-                    target: feedback
-                    visible: true
-                }
+                name: "FAILED"
+            },
+            State {
+                name: "SUCCEEDED"
                 PropertyChanges {
                     target: successIndicator
                     running: true
+                }
+                PropertyChanges {
+                    target: cancelButton
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: connectButton
+                    enabled: false
                 }
             }
         ]
@@ -107,13 +115,16 @@ Component {
         Label {
             id: feedback
             horizontalAlignment: Text.AlignHCenter
-            visible: false
+            height: contentHeight
+            wrapMode: Text.Wrap
         }
 
         ListItem.Standard {
+            id: networknameLabel
             text : i18n.tr("Network name")
             showDivider: false
             highlightWhenPressed: false
+            height: units.gu(2)
         }
 
         TextField {
@@ -172,7 +183,13 @@ Component {
                 Layout.fillWidth: true
                 text: i18n.tr("Cancel")
                 onClicked: {
-                    PopupUtils.close(otherNetworkDialog)
+                    PopupUtils.close(otherNetworkDialog);
+
+                    // If this dialog created the connection,
+                    // disconnect the device
+                    if (otherNetworkDialog.state === "CONNECTING") {
+                        DbusHelper.disconnectDevice();
+                    }
                 }
             }
 
@@ -183,7 +200,10 @@ Component {
                 text: i18n.tr("Connect")
                 enabled: settingsValid()
                 onClicked: {
-                    DbusHelper.connect(networkname.text, securityList.selectedIndex, password.text)
+                    DbusHelper.connect(
+                        networkname.text,
+                        securityList.selectedIndex,
+                        password.text)
                     otherNetworkDialog.state = "CONNECTING";
                 }
                 Icon {
@@ -219,13 +239,31 @@ Component {
         Connections {
             target: DbusHelper
             onDeviceStateChanged: {
+
+                if (otherNetworkDialog.state === "FAILED") {
+                    // Disconnect the device if it tries to reconnect after a
+                    // connection failure
+                    if (newState === 40) { // 40 = NM_DEVICE_STATE_PREPARE
+                        DbusHelper.disconnectDevice();
+                    }
+                }
+
                 switch (newState) {
                     case 120:
-                        otherNetworkDialog.state = "CONNECTION_FAILED";
-                        feedback.text = common.reasonToString(reason);
+                        // connection failed only if we created it
+                        if (otherNetworkDialog.state === "CONNECTING") {
+                            otherNetworkDialog.state = "FAILED";
+                            console.warn('otherNetworkDialog.state',
+                                otherNetworkDialog.state);
+                            feedback.text = common.reasonToString(reason);
+                        }
                         break;
                     case 100:
-                        otherNetworkDialog.state = "CONNECTION_SUCCEEDED";
+                        // connection succeeded only if it was us that
+                        // created it
+                        if (otherNetworkDialog.state === "CONNECTING") {
+                            otherNetworkDialog.state = "SUCCEEDED";
+                        }
                         break;
                 }
 

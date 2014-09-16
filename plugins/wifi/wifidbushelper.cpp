@@ -147,7 +147,6 @@ void WifiDbusHelper::nmDeviceStateChanged(uint newState,
 {
     Q_UNUSED (oldState);
     Q_EMIT (deviceStateChanged(newState, reason));
-    qWarning() << "device state changed: " << newState << ", reason: " << reason << ".\n";
 }
 
 QString WifiDbusHelper::getWifiIpAddress()
@@ -168,11 +167,7 @@ QString WifiDbusHelper::getWifiIpAddress()
 
     QDBusObjectPath dev;
     for (const auto &d : devices) {
-        QDBusInterface iface(NM_SERVICE,
-                             d.path(),
-                             NM_DEVICE_IFACE,
-                             m_systemBusConnection);
-
+        QDBusInterface iface(NM_SERVICE, d.path(), NM_DEVICE_IFACE, m_systemBusConnection);
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
             ip4addr = iface.property("Ip4Address").toInt();
@@ -399,7 +394,7 @@ void WifiDbusHelper::forgetConnection(const QString dbus_path) {
     }
 }
 
-bool WifiDbusHelper::deactivateConnection() {
+bool WifiDbusHelper::disconnectDevice() {
     OrgFreedesktopNetworkManagerInterface mgr(NM_SERVICE,
                                               NM_PATH,
                                               m_systemBusConnection);
@@ -407,42 +402,27 @@ bool WifiDbusHelper::deactivateConnection() {
     auto reply1 = mgr.GetDevices();
     reply1.waitForFinished();
     if(!reply1.isValid()) {
-        qWarning() << "deactivateConnection: Could not get network device: " << reply1.error().message() << "\n";
+        qWarning() << "disconnectDevice: Could not get network device: " << reply1.error().message() << "\n";
         return false;
     }
     auto devices = reply1.value();
 
-    QDBusObjectPath activeConnection;
     QDBusObjectPath dev;
     for (const auto &d : devices) {
-        QDBusInterface iface(NM_SERVICE,
-                             d.path(),
-                             NM_DEVICE_IFACE,
-                             m_systemBusConnection);
+        QDBusInterface iface(NM_SERVICE, d.path(), NM_DEVICE_IFACE, m_systemBusConnection);
 
         auto type_v = iface.property("DeviceType");
         if (type_v.toUInt() == 2 /* NM_DEVICE_TYPE_WIFI */) {
-            activeConnection = qvariant_cast<QDBusObjectPath>(iface.property("ActiveConnection"));
-            dev = d;
+            if (d.path().isEmpty()) {
+                // didn't find a wifi device
+                qWarning() << "disconnectDevice: Could not find wifi device\n";
+                return false;
+            } else {
+                iface.call("Disconnect");
+                return true;
+            }
             break;
         }
     }
-
-    if (dev.path().isEmpty()) {
-        // didn't find a wifi device
-        return false;
-    }
-
-    if (activeConnection.path().isEmpty()) {
-        // no active connection
-        return false;
-    }
-
-    auto reply = mgr.DeactivateConnection(activeConnection);
-    reply.waitForFinished();
-    if(!reply.isValid()) {
-        qWarning() << "Error deactivating connection: " << reply.error().message() << "\n";
-        return false;
-    }
-    return true;
+    return false;
 }

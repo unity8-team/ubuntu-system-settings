@@ -69,7 +69,7 @@ Item {
             case 6:
                 return i18n.tr("The IP configuration is no longer valid");
             case 7:
-                return i18n.tr("Secrets were required, but not provided");
+                return i18n.tr("Your authentication details were incorrect");
             case 8:
                 return i18n.tr("802.1X supplicant disconnected");
             case 9:
