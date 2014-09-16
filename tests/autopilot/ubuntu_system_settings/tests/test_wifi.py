@@ -6,9 +6,7 @@
 # by the Free Software Foundation.
 
 from __future__ import absolute_import
-from time import sleep
-from autopilot.matchers import Eventually
-from testtools.matchers import Contains, Equals
+from testtools.matchers import Equals
 from ubuntu_system_settings.tests import WifiBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
 
@@ -21,7 +19,6 @@ def connection_failure():
 
 class WifiTestCase(WifiBaseTestCase):
     """Tests for Language Page"""
-
 
     def test_wifi_page_title_is_correct(self):
         """Checks whether Wifi page is available"""
@@ -40,6 +37,3 @@ class WifiTestCase(WifiBaseTestCase):
 
         self.wifi_page.connect_to_hidden_network('Foo')
         self.assertFalse(True)
-
-
-
