@@ -42,10 +42,6 @@ ItemPage {
         id: deviceInfos
     }
 
-    UpdateManager {
-        id: updateBackend
-    }
-
     OfonoManager {
         id: manager
         Component.onCompleted: {
@@ -154,7 +150,7 @@ ItemPage {
                 objectName: "osItem"
                 text: i18n.tr("OS")
                 value: "Ubuntu " + deviceInfos.version(DeviceInfo.Os) +
-                       (updateBackend.currentBuildNumber ? " (r%1)".arg(updateBackend.currentBuildNumber) : "")
+                       (UpdateManager.currentBuildNumber ? " (r%1)".arg(UpdateManager.currentBuildNumber) : "")
                 progression: true
                 onClicked: pageStack.push(Qt.resolvedUrl("Version.qml"))
             }
@@ -162,8 +158,8 @@ ItemPage {
             ListItem.SingleValue {
                 objectName: "lastUpdatedItem"
                 text: i18n.tr("Last updated")
-                value: updateBackend.lastUpdateDate && !isNaN(updateBackend.lastUpdateDate) ?
-                    Qt.formatDate(updateBackend.lastUpdateDate) : i18n.tr("Never")
+                value: UpdateManager.lastUpdateDate && !isNaN(UpdateManager.lastUpdateDate) ?
+                    Qt.formatDate(UpdateManager.lastUpdateDate) : i18n.tr("Never")
             }
 
             ListItem.SingleControl {

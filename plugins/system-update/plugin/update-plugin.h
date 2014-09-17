@@ -32,8 +32,6 @@ class CheckUpdatesPlugin: public QObject,
     Q_INTERFACES(SystemSettings::PluginInterface2)
 
 public:
-    CheckUpdatesPlugin();
-
     SystemSettings::ItemBase *createItem(const QVariantMap &staticData,
                                          QObject *parent = 0);
 };
