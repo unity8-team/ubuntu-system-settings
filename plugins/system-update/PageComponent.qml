@@ -100,7 +100,7 @@ ItemPage {
                  color: UbuntuColors.orange
                  onClicked: {
                      installingImageUpdate.visible = true;
-                     updateManager.applySystemUpdate();
+                     UpdateManager.applySystemUpdate();
                      PopupUtils.close(dialogueInstall);
                  }
              }
@@ -110,7 +110,7 @@ ItemPage {
                  onClicked: {
                      updateList.currentIndex = 0;
                      var item = updateList.currentItem;
-                     var modelItem = updateManager.model[0];
+                     var modelItem = UpdateManager.model[0];
                      item.actionButton.text = i18n.tr("Install");
                      item.progressBar.opacity = 0;
                      modelItem.updateReady = true;
@@ -152,20 +152,21 @@ ItemPage {
         }
     ]
 
-    UpdateManager {
+    Connections {
         id: updateManager
+        target: UpdateManager
         objectName: "updateManager"
 
         Component.onCompleted: {
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            updateManager.checkUpdates();
+            UpdateManager.checkUpdates();
         }
 
         onUpdateAvailableFound: {
-            root.updatesAvailable = updateManager.model.length;
+            root.updatesAvailable = UpdateManager.model.length;
             if (root.updatesAvailable > 0)
-                root.includeSystemUpdate = updateManager.model[0].systemUpdate
+                root.includeSystemUpdate = UpdateManager.model[0].systemUpdate
             root.state = "UPDATE";
             root.installAll = downloading;
         }
@@ -269,7 +270,7 @@ ItemPage {
                         for (var i=0; i < updateList.count; i++) {
                             updateList.currentIndex = i;
                             var item = updateList.currentItem;
-                            var modelItem = updateManager.model[i];
+                            var modelItem = UpdateManager.model[i];
                             if (modelItem.updateState != root.installAll && !modelItem.updateReady) {
                                 item.actionButton.clicked();
                             }
@@ -285,7 +286,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                model: updateManager.model
+                model: UpdateManager.model
                 height: childrenRect.height
                 interactive: false
 
@@ -338,12 +339,12 @@ ItemPage {
                             onClicked: {
                                 if (textArea.retry) {
                                     textArea.retry = false;
-                                    updateManager.retryDownload(modelData.packageName);
+                                    UpdateManager.retryDownload(modelData.packageName);
                                 } else if (modelData.updateReady) {
                                     PopupUtils.open(dialogInstallComponent);
                                 } else if (modelData.updateState) {
                                     if (modelData.systemUpdate) {
-                                        updateManager.pauseDownload(modelData.packageName);
+                                        UpdateManager.pauseDownload(modelData.packageName);
                                     } else {
                                         modelData.updateState = false;
                                         tracker.pause();
@@ -351,7 +352,7 @@ ItemPage {
                                 } else {
                                     if (!modelData.selected || modelData.systemUpdate) {
                                         modelData.selected = true;
-                                        updateManager.startDownload(modelData.packageName);
+                                        UpdateManager.startDownload(modelData.packageName);
                                     } else {
                                         modelData.updateState = true;
                                         tracker.resume();
@@ -424,7 +425,8 @@ ItemPage {
                                     buttonAppUpdate.visible = false;
                                     textArea.message = i18n.tr("Installed");
                                     root.updatesAvailable -= 1;
-                                    updateManager.updateClickScope();
+                                    modelData.updateRequired = false;
+                                    UpdateManager.updateClickScope();
                                 }
 
                                 onErrorFound: {
@@ -562,15 +564,15 @@ ItemPage {
             objectName: "configuration"
             text: i18n.tr("Auto download")
             value: {
-                if (updateManager.downloadMode === 0)
+                if (UpdateManager.downloadMode === 0)
                     return i18n.tr("Never")
-                else if (updateManager.downloadMode === 1)
+                else if (UpdateManager.downloadMode === 1)
                     return i18n.tr("On wi-fi")
-                else if (updateManager.downloadMode === 2)
+                else if (UpdateManager.downloadMode === 2)
                     return i18n.tr("Always")
             }
             progression: true
-            onClicked: pageStack.push(Qt.resolvedUrl("Configuration.qml"), {updateManager: updateManager})
+            onClicked: pageStack.push(Qt.resolvedUrl("Configuration.qml"))
         }
     }
 
