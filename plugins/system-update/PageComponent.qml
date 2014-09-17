@@ -45,6 +45,7 @@ ItemPage {
     property bool batterySafeForUpdate: isCharging || chargeLevel > 25
     property var chargeLevel: indicatorPower.batteryLevel || 0
     property var notificationAction;
+    property string errorDialogText: ""
 
     QDBusActionGroup {
         id: indicatorPower
@@ -122,6 +123,23 @@ ItemPage {
          }
     }
 
+    Component {
+         id: dialogErrorComponent
+         Dialog {
+             id: dialogueError
+             title: i18n.tr("Installation Failed")
+             text: root.errorDialogText
+
+             Button {
+                 text: i18n.tr("OK")
+                 color: UbuntuColors.orange
+                 onClicked: {
+                     PopupUtils.close(dialogueError);
+                 }
+             }
+         }
+    }
+
     //states
     states: [
         State {
@@ -129,6 +147,7 @@ ItemPage {
             PropertyChanges { target: installAllButton; visible: false}
             PropertyChanges { target: checkForUpdatesArea; visible: true}
             PropertyChanges { target: updateNotification; visible: false}
+            PropertyChanges { target: activity; running: true}
         },
         State {
             name: "NOUPDATES"
@@ -193,10 +212,22 @@ ItemPage {
 
         onSystemUpdateFailed: {
             root.state = "SYSTEMUPDATEFAILED";
+            root.errorDialogText = i18n.tr("System update failed.");
+            PopupUtils.open(dialogErrorComponent);
         }
 
         onUpdateProcessFailed: {
             root.state = "SYSTEMUPDATEFAILED";
+            root.errorDialogText = i18n.tr("Update process failed.");
+            PopupUtils.open(dialogErrorComponent);
+        }
+
+        onServerError: {
+            activity.running = false;
+        }
+
+        onNetworkError: {
+            activity.running = false;
         }
     }
     Flickable {
@@ -233,21 +264,40 @@ ItemPage {
                     anchors {
                         left: parent.left
                         top: parent.top
-                        rightMargin: units.gu(2)
                     }
                     height: parent.height
                 }
 
                 Label {
-                    text: i18n.tr("Checking for updates…")
+                    text: activity.running ? i18n.tr("Checking for updates…") : i18n.tr("Connect to the Internet to check for updates")
                     verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideRight
                     anchors {
                         left: activity.right
                         top: parent.top
+                        right: btnRetry.left
+                        rightMargin: units.gu(2)
                         leftMargin: units.gu(2)
                     }
                     height: parent.height
+                }
+
+                Button {
+                    id: btnRetry
+                    text: i18n.tr("Retry")
+                    color: UbuntuColors.orange
+                    anchors {
+                        right: parent.right
+                        top: parent.top
+                        bottom: parent.bottom
+                        margins: units.gu(1)
+                    }
+                    visible: !activity.visible
+
+                    onClicked: {
+                        root.state = "SEARCHING";
+                        updateManager.checkUpdates();
+                    }
                 }
             }
 

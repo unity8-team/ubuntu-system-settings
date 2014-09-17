@@ -63,6 +63,10 @@ UpdateManager::UpdateManager(QObject *parent):
                   this, SLOT(clickUpdateNotAvailable()));
     QObject::connect(&m_network, SIGNAL(errorOccurred()),
                   this, SIGNAL(errorFound()));
+    QObject::connect(&m_network, SIGNAL(networkError()),
+                  this, SIGNAL(networkError()));
+    QObject::connect(&m_network, SIGNAL(serverError()),
+                  this, SIGNAL(serverError()));
     QObject::connect(&m_network,
                      SIGNAL(clickTokenObtained(Update*, const QString&)),
                      this, SLOT(clickTokenReceived(Update*, const QString&)));

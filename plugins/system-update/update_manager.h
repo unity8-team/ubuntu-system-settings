@@ -70,6 +70,8 @@ Q_SIGNALS:
     void credentialsNotFound();
     void updateAvailableFound(bool downloading);
     void errorFound();
+    void networkError();
+    void serverError();
     void downloadModeChanged();
     void systemUpdateDownloaded();
     void updateProcessFailed(QString message);
