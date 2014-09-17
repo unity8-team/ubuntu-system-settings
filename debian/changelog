@@ -1,3 +1,11 @@
+ubuntu-system-settings (0.3+14.10.20140917.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Make UpdateManager a singleton and refresh the availableUpdates
+    count when the model updates (LP: #1325629) (LP: #1325629)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Sep 2014 14:04:04 +0000
+
 ubuntu-system-settings (0.3+14.10.20140917-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
