@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-12 09:05+0000\n"
+"PO-Revision-Date: 2014-09-15 09:28+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-15 07:09+0000\n"
+"X-Launchpad-Export-Date: 2014-09-16 08:28+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: ca\n"
 
@@ -1827,7 +1827,7 @@ msgstr "Condicions generals"
 
 #: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr "Utilitzeu la xarxa mòbil i la Wi-Fi per esbrinar on sou"
+msgstr "Utilitza la xarxa mòbil i la Wi-Fi per esbrinar on sóc"
 
 #: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
