@@ -1,3 +1,39 @@
+ubuntu-system-settings (0.3+14.10.20140917-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Include an icon instead of using the themed icon (LP: #1365408) (LP:
+    #1365408)
+
+  [ Mathieu Trudel-Lapierre ]
+  * [bluetooth] don't try to enable Discoverable if the device isn't
+    powered yet. (LP: #1355904)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 17 Sep 2014 02:19:38 +0000
+
+ubuntu-system-settings (0.3+14.10.20140915.1-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * When activated by a url request for a specific panel, clear the
+    pageStack to maintain the natural navigation instead of pushing a
+    new page on top of a page from a the previous panel (LP: #1362025)
+    (LP: #1362025, #1359953)
+
+  [ Lars Uebernickel ]
+  * Use Icon instead of StatusIcon
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 15 Sep 2014 23:26:16 +0000
+
+ubuntu-system-settings (0.3+14.10.20140915-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ John R. Lenton ]
+  * Take the system settings push helper closer to implementing the spec
+    at https://wiki.ubuntu.com/SoftwareUpdates#Prompting (LP: #1363972)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 15 Sep 2014 13:54:48 +0000
+
 ubuntu-system-settings (0.3+14.10.20140913-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
