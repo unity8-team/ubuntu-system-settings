@@ -152,10 +152,6 @@ ItemPage {
         }
     ]
 
-    function open_online_accounts() {
-        Qt.openUrlExternally("settings:///system/online-accounts");
-    }
-
     Connections {
         id: updateManager
         target: UpdateManager
