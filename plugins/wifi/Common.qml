@@ -54,10 +54,10 @@ Item {
 
     function reasonToString (reason) {
         switch (reason) {
-            case 1:
-                return i18n.tr("No reason given");
             case 0:
                 return i18n.tr("Unknown error");
+            case 1:
+                return i18n.tr("No reason given");
             case 2:
                 return i18n.tr("Device is now managed");
             case 3:

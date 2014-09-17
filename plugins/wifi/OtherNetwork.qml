@@ -27,72 +27,11 @@ Component {
 
     Dialog {
 
-        Common {
-            id: common
-        }
-
-        states: [
-            State {
-                name: "CONNECTING"
-                PropertyChanges {
-                    target: connectButton
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: connectButtonIndicator
-                    running: true
-                }
-                PropertyChanges {
-                    target: passwordVisible
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: password
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: passwordList
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: securityList
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: feedback
-                    opacity: 0.5
-                }
-                PropertyChanges {
-                    target: networkname
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: networknameLabel
-                    opacity: 0.5
-                }
-            },
-            State {
-                name: "FAILED"
-            },
-            State {
-                name: "SUCCEEDED"
-                PropertyChanges {
-                    target: successIndicator
-                    running: true
-                }
-                PropertyChanges {
-                    target: cancelButton
-                    enabled: false
-                }
-                PropertyChanges {
-                    target: connectButton
-                    enabled: false
-                }
-            }
-        ]
-
         id: otherNetworkDialog
         objectName: "otherNetworkDialog"
+        anchorToKeyboard: true
+        edgeMargins: units.gu(1)
+
         function settingsValid() {
             if(networkname.length == 0) {
                 return false;
@@ -111,20 +50,102 @@ Component {
         }
 
         title: i18n.tr("Connect to Hidden Network")
+        text: feedback.enabled ? feedback.text : "";
+
+        Common {
+            id: common
+        }
+
+        states: [
+            State {
+                name: "CONNECTING"
+                PropertyChanges {
+                    target: connectButton
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: connectButtonIndicator
+                    running: true
+                }
+                PropertyChanges {
+                    target: passwordVisibleSwitch
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordVisibleLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: password
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: passwordListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: securityList
+                    enabled: false
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: securityListLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: networkname
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: networknameLabel
+                    opacity: 0.5
+                }
+                PropertyChanges {
+                    target: feedback
+                    enabled: true
+                }
+            },
+            State {
+                name: "FAILED"
+                PropertyChanges {
+                    target: feedback
+                    enabled: true
+                }
+            },
+            State {
+                name: "SUCCEEDED"
+                PropertyChanges {
+                    target: successIndicator
+                    running: true
+                }
+                PropertyChanges {
+                    target: cancelButton
+                    enabled: false
+                }
+                PropertyChanges {
+                    target: connectButton
+                    enabled: false
+                }
+            }
+        ]
 
         Label {
+            property bool enabled: false
             id: feedback
             horizontalAlignment: Text.AlignHCenter
             height: contentHeight
             wrapMode: Text.Wrap
+            visible: false
         }
 
-        ListItem.Standard {
+        Label {
             id: networknameLabel
             text : i18n.tr("Network name")
-            showDivider: false
-            highlightWhenPressed: false
-            height: units.gu(2)
+            objectName: "networknameLabel"
+            fontSize: "medium"
+            font.bold: true
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
         }
 
         TextField {
@@ -133,38 +154,74 @@ Component {
             inputMethodHints: Qt.ImhNoPredictiveText
         }
 
+        Label {
+            id: securityListLabel
+            text : i18n.tr("Security")
+            objectName: "securityListLabel"
+            fontSize: "medium"
+            font.bold: true
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
+        }
+
         ListItem.ItemSelector {
             id: securityList
             objectName: "securityList"
-            text: i18n.tr("Security")
             model: [i18n.tr("None"),                 // index: 0
                     i18n.tr("WPA & WPA2 Personal"),  // index: 1
                     i18n.tr("WEP"),                  // index: 2
                     ]
         }
 
-        ListItem.Standard {
-            id: passwordList
+        Label {
+            id: passwordListLabel
+            text : i18n.tr("Password")
+            objectName: "passwordListLabel"
+            fontSize: "medium"
+            font.bold: true
+            color: Theme.palette.selected.backgroundText
+            elide: Text.ElideRight
             visible: securityList.selectedIndex !== 0
-            text: i18n.tr("Password")
-            control : TextInput {
-            }
-            showDivider: false
         }
 
         TextField {
             id : password
             objectName: "password"
             visible: securityList.selectedIndex !== 0
-            echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+            echoMode: passwordVisibleSwitch.checked ?
+                TextInput.Normal : TextInput.Password
+            inputMethodHints: passwordVisibleSwitch.checked ?
+                Qt.ImhHiddenText : Qt.ImhNoPredictiveText
         }
 
-        ListItem.Standard {
-            text: i18n.tr("Password visible")
+        Row {
+            id: passwordVisiblityRow
+            layoutDirection: Qt.LeftToRight
+            spacing: units.gu(2)
             visible: securityList.selectedIndex !== 0
-            id: passwordVisible
-            control: Switch {
+
+            CheckBox {
                 id: passwordVisibleSwitch
+            }
+
+            Label {
+                id: passwordVisibleLabel
+                text : i18n.tr("Show password")
+                objectName: "passwordVisibleLabel"
+                fontSize: "medium"
+                color: Theme.palette.selected.backgroundText
+                elide: Text.ElideRight
+                height: passwordVisibleSwitch.height
+                verticalAlignment: Text.AlignVCenter
+                MouseArea {
+                    anchors {
+                        fill: parent
+                    }
+                    onClicked: {
+                        passwordVisibleSwitch.checked =
+                            !passwordVisibleSwitch.checked
+                    }
+                }
             }
         }
 
@@ -228,6 +285,8 @@ Component {
             }
         }
 
+        /* Timer that shows a tick in the connect button once we have
+        successfully connected. */
         Timer {
             id: successIndicator
             interval: 2000
@@ -239,34 +298,31 @@ Component {
         Connections {
             target: DbusHelper
             onDeviceStateChanged: {
-
                 if (otherNetworkDialog.state === "FAILED") {
-                    // Disconnect the device if it tries to reconnect after a
-                    // connection failure
+                    /* Disconnect the device if it tries to reconnect after a
+                    connection failure */
                     if (newState === 40) { // 40 = NM_DEVICE_STATE_PREPARE
                         DbusHelper.disconnectDevice();
                     }
                 }
 
-                switch (newState) {
-                    case 120:
-                        // connection failed only if we created it
-                        if (otherNetworkDialog.state === "CONNECTING") {
-                            otherNetworkDialog.state = "FAILED";
-                            console.warn('otherNetworkDialog.state',
-                                otherNetworkDialog.state);
+                /* We will only consider these cases if we are in
+                the CONNECTING state. This means that this Dialog will not
+                react to what other NetworkManager consumers do.
+                */
+                if (otherNetworkDialog.state === "CONNECTING") {
+                    switch (newState) {
+                        case 120:
                             feedback.text = common.reasonToString(reason);
-                        }
-                        break;
-                    case 100:
-                        // connection succeeded only if it was us that
-                        // created it
-                        if (otherNetworkDialog.state === "CONNECTING") {
+                            otherNetworkDialog.state = "FAILED";
+                            break;
+                        case 100:
+                            /* connection succeeded only if it was us that
+                            created it */
                             otherNetworkDialog.state = "SUCCEEDED";
-                        }
-                        break;
+                            break;
+                    }
                 }
-
             }
         }
     }
