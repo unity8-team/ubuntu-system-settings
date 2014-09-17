@@ -52,6 +52,8 @@ ListItem.SingleValue {
     Component.onCompleted: {
         // Ensure the entryComponent is hidden
         root.parent.visible = false;
+        // TODO: Initiate a check on load, remove if timer gets enabled
+        UpdateManager.checkUpdates();
     }
 
     Connections {
@@ -66,7 +68,8 @@ ListItem.SingleValue {
     /* Don't check for updates immediately on startup */
     Timer {
         interval: 60000
-        running: true
+        // TODO: Disable the timer until we decide when to check
+        running: false
         repeat: false
         onTriggered: {
             /* Only check for updates if the model isn't already populated */
