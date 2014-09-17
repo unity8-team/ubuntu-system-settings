@@ -297,6 +297,9 @@ void UpdateManager::updateClickScope()
                 "InvalidateResults");
     signal << "clickscope";
     QDBusConnection::sessionBus().send(signal);
+
+    // When a click update is complete, emit modelChanged
+    Q_EMIT modelChanged();
 }
 
 }

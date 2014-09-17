@@ -95,7 +95,6 @@ UpdateItem::UpdateItem(const QVariantMap &staticData, QObject *parent):
     QObject::connect(&m_network, SIGNAL(updatesFound()),
                   this, SLOT(processUpdates()));
 
-    m_systemUpdate.checkForUpdate();
     m_service.getCredentials();
 }
 
@@ -155,12 +154,6 @@ void UpdateItem::setVisibility(bool visible)
 UpdateItem::~UpdateItem()
 {
 }
-
-CheckUpdatesPlugin::CheckUpdatesPlugin():
-    QObject()
-{
-}
-
 
 ItemBase *CheckUpdatesPlugin::createItem(const QVariantMap &staticData,
                                  QObject *parent)
