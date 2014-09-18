@@ -60,7 +60,7 @@ void Network::checkForNewVersions(QHash<QString, Update*> &apps)
     request.setUrl(QUrl(urlApps));
     RequestObject* reqObject = new RequestObject(QString(APPS_DATA));
     request.setOriginatingObject(reqObject);
-    m_nam.post(m_request, content);
+    m_nam.post(request, content);
 }
 
 QString Network::getUrlApps()

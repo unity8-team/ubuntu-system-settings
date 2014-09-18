@@ -119,7 +119,7 @@ private Q_SLOTS:
     void systemUpdatePaused(int value);
     void processOutput();
     void processUpdates();
-    void downloadUrlObtained(const QString &packagename, const QString &url);
+    void downloadApp(Update *app);
     void handleCredentialsFound(Token token);
     void clickTokenReceived(Update *app, const QString &clickToken);
 
