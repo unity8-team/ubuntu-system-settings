@@ -66,6 +66,7 @@ LocalComponents.Page {
             id: termsCheck
             showDivider: false
             visible: System.hereLicensePath !== "" && termsModel.count > 0
+            // TRANSLATORS: HERE is a trademark for Nokia's location service
             text: i18n.tr("I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</a>")
             onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
             checked: System.hereEnabled
