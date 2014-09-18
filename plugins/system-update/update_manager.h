@@ -115,6 +115,7 @@ public Q_SLOTS:
 private Q_SLOTS:
     void clickUpdateNotAvailable();
     void systemUpdatePaused(int value);
+    void systemUpdateProgress(int value, double eta);
     void processOutput();
     void processUpdates();
     void downloadUrlObtained(const QString &packagename, const QString &url);
