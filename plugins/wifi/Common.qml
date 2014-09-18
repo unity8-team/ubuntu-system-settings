@@ -21,37 +21,6 @@ import QtQuick 2.0
 
 Item {
 
-    function deviceStateToString (state) {
-        switch (state) {
-            case 0:
-                return i18n.tr("unmanaged");
-            case 20:
-                return i18n.tr("unavailable");
-            case 30:
-                return i18n.tr("disconnected");
-            case 40:
-                return i18n.tr("connecting (prepare)");
-            case 50:
-                return i18n.tr("connecting (configuring)");
-            case 60:
-                return i18n.tr("connecting (need authentication)");
-            case 70:
-                return i18n.tr("connecting (getting IP configuration)");
-            case 80:
-                return i18n.tr("connecting (checking IP connectivity)");
-            case 90:
-                return i18n.tr("connecting (starting secondary connections)");
-            case 100:
-                return i18n.tr("connected");
-            case 110:
-                return i18n.tr("deactivating");
-            case 120:
-                return i18n.tr("connection failed");
-            default:
-                return i18n.tr("unknown");
-        }
-    }
-
     function reasonToString (reason) {
         switch (reason) {
             case 0:
