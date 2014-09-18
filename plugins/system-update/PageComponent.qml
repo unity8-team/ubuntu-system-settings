@@ -543,7 +543,7 @@ ItemPage {
         id: installingImageUpdate
         objectName: "installingImageUpdate"
         anchors.fill: root
-        visible: true
+        visible: false
         z: 10
         color: "#221e1c"
         property string message: i18n.tr("Installing update…")
