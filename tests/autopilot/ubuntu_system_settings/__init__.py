@@ -678,6 +678,17 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
                 return True
         return False
 
+    """Connects to hidden network
+
+    :param name: Network name string (SSID)
+    :kwarg security: A string that is either "none", "wpa" or "wep
+    :kwarg password: A string/hex secret
+    :kwarg cancel: A boolean deciding whether we press cancel or not
+
+    :returns: If we are connecting, it returns the dialog,
+        if we cancel, it returns itself
+
+    """
     @autopilot.logging.log_action(logger.debug)
     def connect_to_hidden_network(self, name, security="none", password=None,
                                   cancel=False):
@@ -690,8 +701,10 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         if cancel:
             dialog.cancel()
+            return self
         else:
             dialog.connect()
+            return dialog
 
     @autopilot.logging.log_action(logger.debug)
     def _click_connect_to_hidden_network(self):

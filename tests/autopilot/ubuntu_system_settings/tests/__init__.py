@@ -13,15 +13,14 @@ import dbus
 import dbusmock
 import os
 import subprocess
-from time import sleep
-
 import ubuntuuitoolkit
+
 from autopilot.matchers import Eventually
+from dbusmock.templates.networkmanager import DEVICE_IFACE
+from datetime import datetime
 from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, NotEquals, GreaterThan
-
-from datetime import datetime
-
+from time import sleep
 from ubuntu_system_settings import SystemSettings
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
@@ -757,10 +756,21 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
 
     def setUp(self, panel=None):
         self.obj_nm.Reset()
-        device_path = self.obj_nm.AddWiFiDevice('wlan0', 'Barbaz', 1)
+        device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
         self.device_mock = dbus.Interface(self.dbus_con.get_object(
             'org.freedesktop.NetworkManager', device_path),
             dbusmock.MOCK_IFACE)
+
+        """A device should not just implement Device.Wireless/Device.Wired
+        interfaces, but also the Device interface. Since we want to test
+        the Disconnect method, we add it."""
+
+        try:
+            self.device_mock.AddMethod(DEVICE_IFACE, 'Disconnect', '', '', '')
+        except:
+            # it was already added
+            pass
+
         super(WifiBaseTestCase, self).setUp()
         self.wifi_page = self.system_settings.\
             main_view.go_to_wifi_page()

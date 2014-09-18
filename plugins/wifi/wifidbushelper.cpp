@@ -115,6 +115,8 @@ void WifiDbusHelper::connect(QString ssid, int security, QString password)
         return;
     }
 
+    qWarning() << "Found network device" << dev.path();
+
     mgr.connection().disconnect(
         mgr.service(),
         dev.path(),
