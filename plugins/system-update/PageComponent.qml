@@ -186,10 +186,12 @@ ItemPage {
         }
 
         onSystemUpdateDownloaded: {
+            /*
             if (!root.systemUpdateInProgress && !installingImageUpdate.visible) {
                 root.systemUpdateInProgress = true;
                 PopupUtils.open(dialogInstallComponent);
             }
+            */
         }
 
         onSystemUpdateFailed: {
@@ -314,7 +316,6 @@ ItemPage {
                         onMessageChanged: {
                             if(message.length > 0) {
                                 labelVersion.text = message;
-                                buttonAppUpdate.text = i18n.tr("Retry");
                                 modelData.updateState = false;
                                 modelData.selected = false;
                                 textArea.retry = true;
@@ -330,11 +331,24 @@ ItemPage {
                             anchors.rightMargin: units.gu(1)
                             height: labelTitle.height
 
-                            property string actionText: modelData.systemUpdate ? i18n.tr("Download") : i18n.tr("Update")
-                            property string primaryText: modelData.selected ? i18n.tr("Resume") : actionText
-                            property string secondaryText: i18n.tr("Pause")
-
-                            text: modelData.updateState ? secondaryText : primaryText
+                            text: {
+                                if (textArea.retry) {
+                                    return i18n.tr("Retry");
+                                }
+                                if (modelData.systemUpdate) {
+                                    if (modelData.updateReady) {
+                                        return i18n.tr("Install…");
+                                    } else if (!modelData.updateState && !modelData.selected) {
+                                        return i18n.tr("Download");
+                                    }
+                                }
+                                if (modelData.updateState) {
+                                    return i18n.tr("Pause");
+                                } else if (modelData.selected) {
+                                    return i18n.tr("Resume");
+                                }
+                                return i18n.tr("Update");
+                            }
 
                             onClicked: {
                                 if (textArea.retry) {
@@ -390,11 +404,12 @@ ItemPage {
                         Label {
                             id: labelUpdateStatus
                             objectName: "labelUpdateStatus"
-                            text: i18n.tr("Installing")
+                            text: modelData.updateReady || !modelData.systemUpdate ? i18n.tr("Installing") : i18n.tr("Downloading")
                             anchors.top: labelTitle.bottom
                             anchors.left: parent.left
                             anchors.right: parent.right
-                            opacity: modelData.selected ? 1 : 0
+                            visible: opacity > 0
+                            opacity: modelData.selected && !modelData.updateReady ? 1 : 0
                             anchors.bottomMargin: units.gu(1)
 
                             Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
@@ -408,7 +423,8 @@ ItemPage {
                             anchors.top: labelUpdateStatus.bottom
                             anchors.topMargin: units.gu(1)
                             anchors.right: parent.right
-                            opacity: modelData.selected ? 1 : 0
+                            visible: opacity > 0
+                            opacity: modelData.selected && !modelData.updateReady ? 1 : 0
                             value: modelData.systemUpdate ? modelData.downloadProgress : tracker.progress
                             minimumValue: 0
                             maximumValue: 100

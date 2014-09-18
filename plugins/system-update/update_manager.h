@@ -114,6 +114,8 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void clickUpdateNotAvailable();
+    void updateFailed(int consecutiveFailureCount, QString lastReason);
+    void updateDownloaded();
     void systemUpdatePaused(int value);
     void systemUpdateProgress(int value, double eta);
     void processOutput();
