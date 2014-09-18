@@ -201,6 +201,9 @@ ItemPage {
         onUpdateProcessFailed: {
             root.state = "SYSTEMUPDATEFAILED";
         }
+        onRebooting: {
+            installingImageUpdate.message = i18n.tr("Restarting…");
+        }
     }
     Flickable {
         id: scrollWidget
@@ -545,8 +548,8 @@ ItemPage {
             top: parent.top
         }
         visible: false
-
         color: "#221e1c"
+        property string message: i18n.tr("Installing update…")
 
         Column {
             anchors.centerIn: parent
@@ -555,6 +558,13 @@ ItemPage {
             Image {
                 source: Qt.resolvedUrl("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png")
                 anchors.horizontalCenter: parent.horizontalCenter
+                NumberAnimation on rotation {
+                    from: 0
+                    to: 360
+                    running: installingImageUpdate.visible == true
+                    loops: Animation.Infinite
+                    duration: 2000
+                }
             }
 
             ProgressBar {
@@ -563,7 +573,7 @@ ItemPage {
             }
 
             Label {
-                text: i18n.tr("Installing update…")
+                text: installingImageUpdate.message
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
