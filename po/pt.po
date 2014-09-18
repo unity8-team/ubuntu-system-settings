@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-12 11:48+0000\n"
-"Last-Translator: Alexandre Fidalgo <alexandremagnos15@gmail.com>\n"
+"PO-Revision-Date: 2014-09-17 11:01+0000\n"
+"Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-15 07:11+0000\n"
+"X-Launchpad-Export-Date: 2014-09-18 07:14+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -1832,7 +1832,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr "Isto pode ser desligado nas Deinições de Sistema."
+msgstr "Isto pode ser desligado nas definições de sistema."
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
@@ -2075,7 +2075,7 @@ msgstr "ecrã"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:88
 msgid "Flight Mode"
-msgstr "Modo de voo"
+msgstr "Modo de avião"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:90
