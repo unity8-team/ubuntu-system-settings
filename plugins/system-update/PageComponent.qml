@@ -34,8 +34,8 @@ ItemPage {
     id: root
     objectName: "systemUpdatesPage"
 
-    title: i18n.tr("Updates")
-    flickable: scrollWidget
+    title: installingImageUpdate.visible ? "" : i18n.tr("Updates")
+    flickable: installingImageUpdate.visible ? null : scrollWidget
 
     property bool installAll: false
     property bool includeSystemUpdate: false
@@ -201,6 +201,7 @@ ItemPage {
         onUpdateProcessFailed: {
             root.state = "SYSTEMUPDATEFAILED";
         }
+
         onRebooting: {
             installingImageUpdate.message = i18n.tr("Restarting…");
         }
@@ -541,13 +542,9 @@ ItemPage {
     Rectangle {
         id: installingImageUpdate
         objectName: "installingImageUpdate"
-        anchors {
-            bottom: configuration.top
-            left: parent.left
-            right: parent.right
-            top: parent.top
-        }
-        visible: false
+        anchors.fill: root
+        visible: true
+        z: 10
         color: "#221e1c"
         property string message: i18n.tr("Installing update…")
 
