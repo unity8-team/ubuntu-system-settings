@@ -75,6 +75,7 @@ Q_SIGNALS:
     void updateProcessFailed(QString message);
     void systemUpdateFailed(int consecutiveFailureCount, QString lastReason);
     void versionChanged();
+    void rebooting(bool status);
     
 public:
     explicit UpdateManager(QObject *parent = 0);
