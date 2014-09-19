@@ -329,10 +329,12 @@ ItemPage {
                         Button {
                             id: buttonAppUpdate
                             objectName: "buttonAppUpdate"
-                            anchors.top: parent.top
-                            anchors.right: parent.right
-                            anchors.topMargin: units.gu(1)
-                            anchors.rightMargin: units.gu(1)
+                            anchors {
+                                top: parent.top
+                                right: parent.right
+                                topMargin: units.gu(1)
+                                rightMargin: units.gu(1)
+                            }
                             height: labelTitle.height
 
                             text: {
@@ -382,19 +384,11 @@ ItemPage {
                         Label {
                             id: labelSize
                             objectName: "labelSize"
-                            text: {
-                                if (!modelData.updateState)
-                                    return convert_bytes_to_size(modelData.binaryFilesize);
- 
-                                return i18n.tr("%1 of %2").arg(
-                                    convert_bytes_to_size(modelData.binaryFilesize * (progress.value * 0.01))).arg(
-                                    convert_bytes_to_size(modelData.binaryFilesize)
-                                );
-                            }
+                            text: convert_bytes_to_size(modelData.binaryFilesize)
                             anchors.bottom: labelVersion.bottom
                             anchors.right: parent.right
                             anchors.rightMargin: units.gu(1)
-                            //visible: !modelData.selected
+                            visible: !labelUpdateStatus.visible
                         }
 
                         Label {
@@ -413,18 +407,37 @@ ItemPage {
                             elide: buttonAppUpdate.visible ? Text.ElideRight : Text.ElideNone
                         }
 
-                        Label {
+                        Item {
                             id: labelUpdateStatus
-                            objectName: "labelUpdateStatus"
-                            text: modelData.updateReady || !modelData.systemUpdate ? i18n.tr("Installing") : i18n.tr("Downloading")
-                            anchors.top: labelTitle.bottom
-                            anchors.left: parent.left
-                            anchors.right: parent.right
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                                top: labelTitle.bottom
+                                topMargin: units.gu(1)
+                            }
+                            height: childrenRect.height
                             visible: opacity > 0
                             opacity: modelData.selected && !modelData.updateReady ? 1 : 0
-                            anchors.bottomMargin: units.gu(1)
-
                             Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
+                            Label {
+                                objectName: "labelUpdateStatus"
+                                anchors.left: parent.left
+                                text: modelData.updateReady || !modelData.systemUpdate ? i18n.tr("Installing") : i18n.tr("Downloading")
+                            }
+                            Label {
+                                anchors.right: parent.right
+                                //fontSize: "small"
+                                visible: !labelSize.visible
+                                text: {
+                                    if (!labelUpdateStatus.visible)
+                                        return convert_bytes_to_size(modelData.binaryFilesize);
+
+                                    return i18n.tr("%1 of %2").arg(
+                                        convert_bytes_to_size(modelData.binaryFilesize * (progress.value * 0.01))).arg(
+                                        convert_bytes_to_size(modelData.binaryFilesize)
+                                    );
+                                }
+                            }
                         }
 
                         ProgressBar {
