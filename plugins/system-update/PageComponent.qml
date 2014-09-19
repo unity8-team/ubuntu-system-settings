@@ -422,11 +422,10 @@ ItemPage {
                             Label {
                                 objectName: "labelUpdateStatus"
                                 anchors.left: parent.left
-                                text: modelData.updateReady || !modelData.systemUpdate ? i18n.tr("Installing") : i18n.tr("Downloading")
+                                text: modelData.updateReady || (progress.value === progress.maximumValue) ? i18n.tr("Installing") : i18n.tr("Downloading")
                             }
                             Label {
                                 anchors.right: parent.right
-                                //fontSize: "small"
                                 visible: !labelSize.visible
                                 text: {
                                     if (!labelUpdateStatus.visible)
@@ -448,6 +447,7 @@ ItemPage {
                             anchors.top: labelUpdateStatus.bottom
                             anchors.topMargin: units.gu(1)
                             anchors.right: parent.right
+                            indeterminate: modelData.updateReady || (value === maximumValue)
                             visible: opacity > 0
                             opacity: modelData.selected && !modelData.updateReady ? 1 : 0
                             value: modelData.systemUpdate ? modelData.downloadProgress : tracker.progress
