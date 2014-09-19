@@ -233,7 +233,6 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
 
 void UpdateManager::updateDownloaded()
 {
-    qWarning() << Q_FUNC_INFO;
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
@@ -245,7 +244,6 @@ void UpdateManager::updateDownloaded()
 }
 void UpdateManager::updateFailed(int consecutiveFailureCount, QString lastReason)
 {
-    qWarning() << Q_FUNC_INFO << consecutiveFailureCount << lastReason;
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
@@ -269,8 +267,7 @@ void UpdateManager::systemUpdatePaused(int value)
 
 void UpdateManager::systemUpdateProgress(int value, double eta)
 {
-    //Q_UNUSED(eta);
-    qWarning() << Q_FUNC_INFO << value << eta;
+    Q_UNUSED(eta);
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
