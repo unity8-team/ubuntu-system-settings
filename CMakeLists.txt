@@ -88,6 +88,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE}
 
 install(FILES ubuntu-system-settings.url-dispatcher DESTINATION share/url-dispatcher/urls)
 install(FILES screenshot.png DESTINATION ${SETTINGS_SHARE_DIR})
+install(FILES system-settings.png DESTINATION ${SETTINGS_SHARE_DIR})
 install(PROGRAMS push-helper/software_updates_helper.py DESTINATION ${PUSH_HELPER_DIR} RENAME ubuntu-system-settings)
 
 if(cmake_build_type_lower MATCHES coverage)

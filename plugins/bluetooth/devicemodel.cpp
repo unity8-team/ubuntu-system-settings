@@ -239,6 +239,8 @@ void DeviceModel::updateProperty(const QString &key, const QVariant &value)
         setDiscoverable(value.toBool());
     } else if (key == "Powered") {
         setPowered(value.toBool());
+        if (m_isPowered)
+            trySetDiscoverable(true);
     }
 }
 
@@ -271,7 +273,7 @@ void DeviceModel::trySetDiscoverable(bool discoverable)
 
     value.setValue(disc);
 
-    if (m_bluezAdapter && m_bluezAdapter->isValid()) {
+    if (m_bluezAdapter && m_bluezAdapter->isValid() && m_isPowered) {
         reply = m_bluezAdapter->call("SetProperty", "Discoverable", value);
         if (!reply.isValid())
             qWarning() << "Error setting device discoverable:" << reply.error();

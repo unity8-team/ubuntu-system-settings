@@ -2,7 +2,7 @@
 _Name=System Settings
 _Categories=System;
 _Keywords=Preferences;Settings;
-Icon=system-settings
+Icon=@SETTINGS_SHARE_DIR@/system-settings.png
 Exec=system-settings %u
 Terminal=false
 Type=Application
