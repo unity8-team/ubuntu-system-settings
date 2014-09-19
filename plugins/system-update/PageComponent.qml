@@ -47,6 +47,12 @@ ItemPage {
     property var notificationAction;
     property string errorDialogText: ""
 
+    property bool hasConnection: (actionGroup.actionObject.valid ? actionGroup.actionObject.state : true)
+
+    onHasConnectionChanged: {
+        activity.running = false;
+    }
+
     QDBusActionGroup {
         id: indicatorPower
         busType: 1
@@ -54,6 +60,17 @@ ItemPage {
         objectPath: "/com/canonical/indicator/power"
         property variant batteryLevel: action("battery-level").state
         Component.onCompleted: start()
+    }
+
+    QDBusActionGroup {
+        id: actionGroup
+        busType: 1
+        busName: "com.canonical.indicator.network"
+        objectPath: "/com/canonical/indicator/network"
+        property variant actionObject: action("wifi.enable")
+        Component.onCompleted: {
+            start()
+        }
     }
 
     DeviceInfo {
