@@ -711,7 +711,7 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         # we can't mock the qunitymenu items, so we
         # have to wait for them to be built
-        sleep(1)
+        sleep(2)
 
         button = self.select_single('*',
                                     objectName='connectToHiddenNetwork')
