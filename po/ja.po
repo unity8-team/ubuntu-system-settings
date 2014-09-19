@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-01 05:27+0000\n"
-"Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
+"PO-Revision-Date: 2014-09-18 13:02+0000\n"
+"Last-Translator: Kentaro Kazuhama <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-15 07:10+0000\n"
+"X-Launchpad-Export-Date: 2014-09-19 08:09+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -24,11 +24,11 @@ msgstr "システム設定"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "System:システム;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Preferences;Settings;設定;"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../plugins/wifi//PageComponent.qml:26
@@ -145,7 +145,7 @@ msgstr "切断する"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr ""
+msgstr "IPアドレス"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
@@ -448,7 +448,7 @@ msgstr "電話"
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
 msgid "Last called %1"
-msgstr ""
+msgstr "最後の発信: %1"
 
 #: ../plugins/phone//ServiceInfo.qml:119
 msgid "Call"
@@ -752,7 +752,7 @@ msgstr "カメラ"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "カメラへのアクセスを求めているアプリ"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
@@ -760,7 +760,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "マイクへのアクセスを求めているアプリ"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
@@ -830,13 +830,13 @@ msgstr "オフ"
 
 #: ../plugins/security-privacy//PageComponent.qml:172
 msgid "Encryption"
-msgstr ""
+msgstr "暗号化"
 
 #: ../plugins/security-privacy//PageComponent.qml:181
 msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
-msgstr ""
+msgstr "暗号化するとスマートフォンがPCや他のデバイスからアクセスされたときにスマートフォン上のデータを保護します。"
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
@@ -878,35 +878,35 @@ msgstr ""
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "SIM PINの変更"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #: ../plugins/security-privacy//SimPin.qml:184
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "PINが違います。あと%1回試せます。"
 
 #: ../plugins/security-privacy//SimPin.qml:79
 msgid "Current PIN:"
-msgstr ""
+msgstr "現在のPIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:91
 #: ../plugins/security-privacy//SimPin.qml:243
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "%1回試行可能です。"
 
 #: ../plugins/security-privacy//SimPin.qml:104
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "新しいPIN:"
 
 #: ../plugins/security-privacy//SimPin.qml:115
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "PINの確認:"
 
 #: ../plugins/security-privacy//SimPin.qml:134
 msgid "PINs don't match. Try again."
-msgstr ""
+msgstr "PINが一致しません。再度試してください。"
 
 #: ../plugins/security-privacy//SimPin.qml:180
 msgid "Enter SIM PIN"
@@ -914,7 +914,7 @@ msgstr "SIM PINの入力"
 
 #: ../plugins/security-privacy//SimPin.qml:181
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "以前のSIM PINの入力"
 
 #: ../plugins/security-privacy//SimPin.qml:279
 msgid "Unlock"
@@ -926,17 +926,18 @@ msgstr "ロック"
 
 #: ../plugins/security-privacy//SimPin.qml:337
 msgid "Change PIN…"
-msgstr ""
+msgstr "PINの変更..."
 
 #: ../plugins/security-privacy//SimPin.qml:354
 msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"SIM PINが設定されていると、スマートフォンの再起動やSIMの切り替え後に通話サービスにアクセスするためにSIM PINを入力する必要があります。"
 
 #: ../plugins/security-privacy//SimPin.qml:358
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
-msgstr ""
+msgstr "PINの入力に複数回失敗すると、SIMは完全にロックされます。"
 
 #: ../plugins/security-privacy//Location.qml:31
 #: ../wizard/qml/Pages//30-location.qml:25
@@ -951,7 +952,7 @@ msgstr "位置情報の検知"
 msgid ""
 "Uses GPS to detect your rough location. When off, GPS turns off to save "
 "battery."
-msgstr ""
+msgstr "大まかな位置を推定するためにGPSを使用します。オフにすると、GPSがオフの時にバッテリーの消費を減らせます。"
 
 #: ../plugins/security-privacy//Location.qml:73
 msgid ""
@@ -1013,12 +1014,12 @@ msgstr "画面のロック"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "なし"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
 msgid "PIN code"
-msgstr ""
+msgstr "PINコード"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:47
 #: ../plugins/security-privacy//LockSecurity.qml:350
@@ -1058,7 +1059,7 @@ msgstr "Launcher"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "通知とクイック設定"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
