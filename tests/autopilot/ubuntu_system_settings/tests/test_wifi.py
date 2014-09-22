@@ -26,9 +26,8 @@ class WifiTestCase(WifiBaseTestCase):
     def test_connect_to_hidden_network(self):
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah',
-            scroll_to_and_click=self.system_settings.main_view\
-                .scroll_to_and_click)
-
+            scroll_to_and_click=self.system_settings.main_view
+            .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -50,8 +49,8 @@ class WifiTestCase(WifiBaseTestCase):
 
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah',
-            scroll_to_and_click=self.system_settings.main_view\
-                .scroll_to_and_click)
+            scroll_to_and_click=self.system_settings.main_view
+            .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -73,8 +72,8 @@ class WifiTestCase(WifiBaseTestCase):
     def test_connect_to_hidden_network_using_secrets(self):
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah', security='wpa', password='abcdefgh',
-            scroll_to_and_click=self.system_settings.main_view\
-                .scroll_to_and_click)
+            scroll_to_and_click=self.system_settings.main_view
+            .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -95,8 +94,8 @@ class WifiTestCase(WifiBaseTestCase):
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah', security='wpa', password='abcdefgh',
-            scroll_to_and_click=self.system_settings.main_view\
-                .scroll_to_and_click)
+            scroll_to_and_click=self.system_settings.main_view
+            .scroll_to_and_click)
         # allow backend to set up listeners
         sleep(0.3)
 
@@ -118,8 +117,8 @@ class WifiTestCase(WifiBaseTestCase):
 
         dialog = self.wifi_page.connect_to_hidden_network(
             'foo',
-            scroll_to_and_click=self.system_settings.main_view\
-                .scroll_to_and_click)
+            scroll_to_and_click=self.system_settings.main_view
+            .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)

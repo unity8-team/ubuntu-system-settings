@@ -21,6 +21,15 @@ import QtQuick 2.0
 
 Item {
 
+
+    /*
+        The mapping of code to string is taken from
+        http://bazaar.launchpad.net/~vcs-imports/
+            network-manager/trunk/view/head:/cli/src/common.c
+
+        NetworkManager documentation: https://developer.gnome.org/
+            NetworkManager/0.9/spec.html#type-NM_DEVICE_STATE_REASON
+    */
     function reasonToString (reason) {
         switch (reason) {
             case 0:
