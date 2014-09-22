@@ -43,6 +43,15 @@ LocalComponents.Page {
         menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
     }
 
+    QDBusActionGroup {
+        id: locationActionGroup
+        busType: DBus.SessionBus
+        busName: "com.canonical.indicator.location"
+        objectPath: "/com/canonical/indicator/location"
+        property variant enabled: action("location-detection-enabled")
+        Component.onCompleted: start()
+    }
+
     Component {
         id: accessPointComponent
         ListItem.Standard {
@@ -187,13 +196,20 @@ LocalComponents.Page {
                 }
             }
         }
+
+        LocalComponents.CheckableSetting {
+            id: locationCheck
+            showDivider: false
+            text: i18n.tr("Use your mobile network and Wi-Fi to determine where you are")
+            checked: locationActionGroup.enabled.state
+            onTriggered: locationActionGroup.enabled.activate()
+        }
     }
 
     Component {
         id: forwardButton
         LocalComponents.StackButton {
             text: connected ? i18n.tr("Continue") : i18n.tr("Skip")
-            rightArrow: !connected
             onClicked: pageStack.next()
         }
     }

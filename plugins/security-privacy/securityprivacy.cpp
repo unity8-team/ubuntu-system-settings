@@ -315,7 +315,7 @@ QString SecurityPrivacy::badPasswordMessage(SecurityType type)
 {
     switch (type) {
         case SecurityPrivacy::Passcode:
-            return _("Incorrect PIN code. Try again.");
+            return _("Incorrect passcode. Try again.");
         case SecurityPrivacy::Passphrase:
             return _("Incorrect passphrase. Try again.");
         default:

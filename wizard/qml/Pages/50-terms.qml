@@ -22,18 +22,17 @@ import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Location")
+    title: i18n.tr("Terms")
     forwardButtonSourceComponent: forwardButton
 
-    QDBusActionGroup {
-        id: locationActionGroup
-        busType: DBus.SessionBus
-        busName: "com.canonical.indicator.location"
-        objectPath: "/com/canonical/indicator/location"
+    property bool pathSet: System.hereLicensePath !== " " // single space means it's unassigned
+    property bool countSet: false
+    skipValid: pathSet && (System.hereLicensePath === "" || countSet)
+    skip: skipValid && (System.hereLicensePath === "" || termsModel.count === 0)
 
-        property variant enabled: action("location-detection-enabled")
-
-        Component.onCompleted: start()
+    Connections {
+        target: termsModel
+        onCountChanged: if (pathSet) countSet = true
     }
 
     FolderListModel {
@@ -55,19 +54,10 @@ LocalComponents.Page {
         }
 
         LocalComponents.CheckableSetting {
-            id: locationCheck
-            showDivider: false
-            text: i18n.tr("Use your mobile network and Wi-Fi to work out where you are")
-            checked: locationActionGroup.enabled.state
-            onTriggered: locationActionGroup.enabled.activate()
-        }
-
-        LocalComponents.CheckableSetting {
             id: termsCheck
             showDivider: false
-            visible: System.hereLicensePath !== "" && termsModel.count > 0
-            text: i18n.tr("I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</a>")
-            onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
+            text: i18n.tr("I have read and agreed to the HERE <a>terms and conditions</a>")
+            onLinkActivated: pageStack.push(Qt.resolvedUrl("here-terms.qml"))
             checked: System.hereEnabled
             onTriggered: System.hereEnabled = checked
         }

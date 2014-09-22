@@ -15,39 +15,63 @@
  */
 
 import QtQuick 2.0
+import MeeGo.QOfono 0.2
 import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Bug reporting")
+    title: i18n.tr("Add a SIM card")
     forwardButtonSourceComponent: forwardButton
+    hasBackButton: false
+
+    skip: !manager.available || manager.modems.length === 0 || simManager0.present || simManager1.present
+
+    OfonoManager {
+        id: manager
+    }
+
+    // Ideally we would query the system more cleverly than hardcoding two
+    // modems.  But we don't yet have a more clever way.  :(
+    OfonoSimManager {
+        id: simManager0
+        modemPath: manager.modems.length >= 1 ? manager.modems[0] : ""
+    }
+
+    OfonoSimManager {
+        id: simManager1
+        modemPath: manager.modems.length >= 2 ? manager.modems[1] : ""
+    }
 
     Column {
-        id: column
         anchors.fill: content
+        spacing: units.gu(2)
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            fontSize: "large"
-            font.bold: true
-            text: i18n.tr("Your phone is set up to automatically report errors to Canonical.")
+            text: i18n.tr("Please insert a SIM card before you continue, then restart your device.")
         }
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            fontSize: "large"
-            text: i18n.tr("This can be disabled in System Settings.")
+            text: i18n.tr("Without it, you won’t be able to make calls or use text messaging.")
+        }
+
+        Image {
+            id: image
+            source: "data/meet_ubuntu_simcard@30.png"
+            height: units.gu(6.5)
+            width: units.gu(9)
         }
     }
 
     Component {
         id: forwardButton
         LocalComponents.StackButton {
-            text: i18n.tr("Continue")
+            text: i18n.tr("Skip")
             onClicked: pageStack.next()
         }
     }

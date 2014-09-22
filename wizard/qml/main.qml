@@ -96,13 +96,40 @@ Item {
                 // continuing so back button returns to the previous main page.
                 while (pageList.index < pageStack.depth - 1)
                     pop()
-                push(pageList.next())
+                load(pageList.next())
             }
 
             function prev() {
                 if (pageList.index >= pageStack.depth - 1)
                     pageList.prev() // update pageList.index, but not for extra pages
                 pop()
+            }
+
+            function load(path) {
+                // First load it invisible, check that we should actually use
+                // this page, and either skip it or continue.
+                push(path, {"opacity": 0, "enabled": false})
+
+                // Check for immediate skip or not.  We may have to wait for
+                // skipValid to be assigned (see Connections object below)
+                _checkSkip()
+            }
+
+            function _checkSkip() {
+                if (currentPage.skipValid) {
+                    if (currentPage.skip) {
+                        pop()
+                        next()
+                    } else {
+                        currentPage.opacity = 1
+                        currentPage.enabled = true
+                    }
+                }
+            }
+
+            Connections {
+                target: pageStack.currentPage
+                onSkipValidChanged: pageStack._checkSkip()
             }
 
             Component.onCompleted: next()

@@ -15,7 +15,6 @@
  */
 
 import QtQuick 2.3
-import MeeGo.QOfono 0.2
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
@@ -35,7 +34,7 @@ import "../Components" as LocalComponents
 
 LocalComponents.Page {
     id: passwdPage
-    title: i18n.tr("Set lock security")
+    title: i18n.tr("Unlock security")
     forwardButtonSourceComponent: forwardButton
 
     readonly property int method: indexToMethod(listview.currentIndex)
@@ -53,22 +52,6 @@ LocalComponents.Page {
             return UbuntuSecurityPrivacyPanel.Passcode
         else
             return UbuntuSecurityPrivacyPanel.Passphrase
-    }
-
-    OfonoManager {
-        id: manager
-    }
-
-    // Ideally we would query the system more cleverly than hardcoding two
-    // modems.  But we don't yet have a more clever way.  :(
-    OfonoSimManager {
-        id: simManager0
-        modemPath: manager.modems.length >= 1 ? manager.modems[0] : ""
-    }
-
-    OfonoSimManager {
-        id: simManager1
-        modemPath: manager.modems.length >= 2 ? manager.modems[1] : ""
     }
 
     Column {
@@ -96,7 +79,7 @@ LocalComponents.Page {
                         if (method === UbuntuSecurityPrivacyPanel.Swipe)
                             return i18n.tr("Swipe")
                         else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("PIN code")
+                            return i18n.tr("Passcode")
                         else
                             return i18n.tr("Passphrase")
                     }
@@ -144,7 +127,7 @@ LocalComponents.Page {
                 if (passwordInput.visible) {
                     if (passwordInput.text !== confirmInput.text) {
                         if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Those PIN codes don't match.")
+                            return i18n.tr("Those passcodes don't match.")
                         else
                             return i18n.tr("Those passphrases don't match.")
                     } else if (passwordInput.text.length < 4) {
@@ -154,7 +137,7 @@ LocalComponents.Page {
                         // to set the password via PAM in a different place
                         // than this page.  See comments at top of file.
                         if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("PIN code must be at least four digits long.")
+                            return i18n.tr("Passcode must be at least four digits long.")
                         else
                             return i18n.tr("Passphrase must be at least four characters long.")
                     }
@@ -172,10 +155,7 @@ LocalComponents.Page {
             onClicked: {
                 root.passwordMethod = passwdPage.method
                 root.password = passwdPage.password
-                if (manager.modems.length == 0 || simManager0.present || simManager1.present)
-                    pageStack.next()
-                else
-                    pageStack.push(Qt.resolvedUrl("no-sim.qml"))
+                pageStack.next()
             }
         }
     }

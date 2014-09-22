@@ -49,7 +49,7 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         LocalComponents.StackButton {
-            text: i18n.tr("Finish")
+            text: i18n.tr("Continue")
             onClicked: root.quitWizard()
         }
     }

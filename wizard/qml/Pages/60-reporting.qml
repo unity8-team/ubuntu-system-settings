@@ -19,36 +19,35 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Add a SIM card")
+    title: i18n.tr("Bug reporting")
     forwardButtonSourceComponent: forwardButton
-    hasBackButton: false
 
     Column {
+        id: column
         anchors.fill: content
+        spacing: units.gu(2)
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            text: i18n.tr("Please insert a SIM card before you continue.") +
-                  "\n\n" +
-                  i18n.tr("Without it, you won’t be able to make calls or use text messaging.") +
-                  "\n"
+            fontSize: "large"
+            font.bold: true
+            text: i18n.tr("Your phone is set up to automatically report errors to Canonical and its partners, the makers of the operating system.")
         }
 
-        Image {
-            id: image
-            source: "data/meet_ubuntu_simcard@30.png"
-            height: units.gu(6.5)
-            width: units.gu(9)
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("This can be disabled in System Settings > Security & Privacy.")
         }
     }
 
     Component {
         id: forwardButton
         LocalComponents.StackButton {
-            text: i18n.tr("Skip")
-            rightArrow: true
+            text: i18n.tr("Continue")
             onClicked: pageStack.next()
         }
     }
