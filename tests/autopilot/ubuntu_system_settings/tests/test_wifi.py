@@ -24,7 +24,11 @@ class WifiTestCase(WifiBaseTestCase):
             Equals(_('Wi-Fi')))
 
     def test_connect_to_hidden_network(self):
-        self.wifi_page.connect_to_hidden_network('yeah')
+        dialog = self.wifi_page.connect_to_hidden_network(
+            'yeah',
+            scroll_to_and_click=self.system_settings.main_view\
+                .scroll_to_and_click)
+
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -36,7 +40,7 @@ class WifiTestCase(WifiBaseTestCase):
             reason = 53 # NM_DEVICE_STATE_REASON_SSID_NOT_FOUND
         """
 
-        dialog = self.device_mock.EmitSignal(
+        self.device_mock.EmitSignal(
             DEVICE_IFACE, 'StateChanged', 'uuu', [100, 0, 0])
 
         if dialog:
@@ -44,7 +48,10 @@ class WifiTestCase(WifiBaseTestCase):
 
     def test_connect_to_nonexistant_hidden_network(self):
 
-        dialog = self.wifi_page.connect_to_hidden_network('yeah')
+        dialog = self.wifi_page.connect_to_hidden_network(
+            'yeah',
+            scroll_to_and_click=self.system_settings.main_view\
+                .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -64,9 +71,10 @@ class WifiTestCase(WifiBaseTestCase):
                 _('The Wi-Fi network could not be found'))))
 
     def test_connect_to_hidden_network_using_secrets(self):
-
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah', security='wpa', password='abcdefgh')
+            'yeah', security='wpa', password='abcdefgh',
+            scroll_to_and_click=self.system_settings.main_view\
+                .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)
@@ -85,10 +93,10 @@ class WifiTestCase(WifiBaseTestCase):
             dialog.wait_until_destroyed()
 
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
-
         dialog = self.wifi_page.connect_to_hidden_network(
-            'yeah', security='wpa', password='abcdefgh')
-
+            'yeah', security='wpa', password='abcdefgh',
+            scroll_to_and_click=self.system_settings.main_view\
+                .scroll_to_and_click)
         # allow backend to set up listeners
         sleep(0.3)
 
@@ -108,7 +116,10 @@ class WifiTestCase(WifiBaseTestCase):
 
     def test_connect_to_hidden_network_then_cancel(self):
 
-        dialog = self.wifi_page.connect_to_hidden_network('foo')
+        dialog = self.wifi_page.connect_to_hidden_network(
+            'foo',
+            scroll_to_and_click=self.system_settings.main_view\
+                .scroll_to_and_click)
 
         # allow backend to set up listeners
         sleep(0.3)

@@ -691,8 +691,8 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
     """
     @autopilot.logging.log_action(logger.debug)
     def connect_to_hidden_network(self, name, security="none", password=None,
-                                  cancel=False):
-        dialog = self._click_connect_to_hidden_network()
+                                  cancel=False, scroll_to_and_click=None):
+        dialog = self._click_connect_to_hidden_network(scroll_to_and_click)
         dialog.enter_name(name)
         if security:
             dialog.set_security(security)
@@ -707,15 +707,18 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             return dialog
 
     @autopilot.logging.log_action(logger.debug)
-    def _click_connect_to_hidden_network(self):
+    def _click_connect_to_hidden_network(self, scroll_to_and_click):
 
         # we can't mock the qunitymenu items, so we
         # have to wait for them to be built
-        sleep(2)
+        sleep(1)
 
         button = self.select_single('*',
                                     objectName='connectToHiddenNetwork')
-        self.pointing_device.click_object(button)
+        if (scroll_to_and_click):
+            scroll_to_and_click(button)
+        else:
+            self.pointing_device.click_object(button)
         return self.get_root_instance().wait_select_single(
             objectName='otherNetworkDialog')
 
