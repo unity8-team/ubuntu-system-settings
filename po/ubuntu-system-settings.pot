@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-18 18:49+0200\n"
+"POT-Creation-Date: 2014-09-22 17:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,128 +30,128 @@ msgstr ""
 msgid "Preferences;Settings;"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:27
+#: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:29
+#: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:31
+#: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:33
+#: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:35
+#: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:37
+#: ../plugins/wifi//Common.qml:46
 msgid ""
 "IP configuration could not be reserved (no available address, timeout, etc.)"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:39
+#: ../plugins/wifi//Common.qml:48
 msgid "The IP configuration is no longer valid"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:41
+#: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:43
+#: ../plugins/wifi//Common.qml:52
 msgid "802.1X supplicant disconnected"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:45
+#: ../plugins/wifi//Common.qml:54
 msgid "802.1X supplicant configuration failed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:47
+#: ../plugins/wifi//Common.qml:56
 msgid "802.1X supplicant failed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:49
+#: ../plugins/wifi//Common.qml:58
 msgid "802.1X supplicant took too long to authenticate"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:51
+#: ../plugins/wifi//Common.qml:60
 msgid "DHCP client failed to start"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:53
+#: ../plugins/wifi//Common.qml:62
 msgid "DHCP client error"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:55
+#: ../plugins/wifi//Common.qml:64
 msgid "DHCP client failed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:57
+#: ../plugins/wifi//Common.qml:66
 msgid "Shared connection service failed to start"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:59
+#: ../plugins/wifi//Common.qml:68
 msgid "Shared connection service failed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:61
+#: ../plugins/wifi//Common.qml:70
 msgid "Necessary firmware for the device may be missing"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:63
+#: ../plugins/wifi//Common.qml:72
 msgid "The device was removed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:65
+#: ../plugins/wifi//Common.qml:74
 msgid "NetworkManager went to sleep"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:67
+#: ../plugins/wifi//Common.qml:76
 msgid "The device's active connection disappeared"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:69
+#: ../plugins/wifi//Common.qml:78
 msgid "Device disconnected by user or client"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:71
+#: ../plugins/wifi//Common.qml:80
 msgid "The device's existing connection was assumed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:73
+#: ../plugins/wifi//Common.qml:82
 msgid "The supplicant is now available"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:75
+#: ../plugins/wifi//Common.qml:84
 msgid "The modem could not be found"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:77
+#: ../plugins/wifi//Common.qml:86
 msgid "The Bluetooth connection failed or timed out"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:79
+#: ../plugins/wifi//Common.qml:88
 msgid "A dependency of the connection failed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:81
+#: ../plugins/wifi//Common.qml:90
 msgid "ModemManager is unavailable"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:83
+#: ../plugins/wifi//Common.qml:92
 msgid "The Wi-Fi network could not be found"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:85
+#: ../plugins/wifi//Common.qml:94
 msgid "A secondary connection of the base connection failed"
 msgstr ""
 
-#: ../plugins/wifi//Common.qml:87 ../plugins/bluetooth//PageComponent.qml:86
+#: ../plugins/wifi//Common.qml:96 ../plugins/bluetooth//PageComponent.qml:86
 msgid "Unknown"
 msgstr ""
 
@@ -245,9 +245,9 @@ msgstr ""
 #: ../plugins/security-privacy//PhoneLocking.qml:78
 #: ../plugins/security-privacy//PhoneLocking.qml:87
 #: ../plugins/security-privacy//PageComponent.qml:140
-#: ../plugins/system-update//Configuration.qml:53
-#: ../plugins/system-update//PageComponent.qml:566
-#: ../plugins/about//PageComponent.qml:166
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/system-update//PageComponent.qml:568
+#: ../plugins/about//PageComponent.qml:162
 #: ../plugins/battery//SleepValues.qml:106
 #: ../plugins/battery//PageComponent.qml:315
 #: ../plugins/battery//PageComponent.qml:324
@@ -1243,24 +1243,24 @@ msgstr ""
 msgid "Erase & Reset Everything…"
 msgstr ""
 
-#: ../plugins/system-update//Configuration.qml:30
-#: ../plugins/system-update//PageComponent.qml:563
+#: ../plugins/system-update//Configuration.qml:29
+#: ../plugins/system-update//PageComponent.qml:565
 msgid "Auto download"
 msgstr ""
 
-#: ../plugins/system-update//Configuration.qml:35
+#: ../plugins/system-update//Configuration.qml:34
 msgid "Download future updates automatically:"
 msgstr ""
 
-#: ../plugins/system-update//Configuration.qml:54
+#: ../plugins/system-update//Configuration.qml:53
 msgid "When on wi-fi"
 msgstr ""
 
-#: ../plugins/system-update//Configuration.qml:55
+#: ../plugins/system-update//Configuration.qml:54
 msgid "On any data connection"
 msgstr ""
 
-#: ../plugins/system-update//Configuration.qml:56
+#: ../plugins/system-update//Configuration.qml:55
 msgid "Data charges may apply."
 msgstr ""
 
@@ -1298,93 +1298,93 @@ msgstr ""
 msgid "Software is up to date"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:242
+#: ../plugins/system-update//PageComponent.qml:243
 msgid "Checking for updates…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:260
+#: ../plugins/system-update//PageComponent.qml:261
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/system-update//PageComponent.qml:261
+#: ../plugins/system-update//PageComponent.qml:262
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/system-update//PageComponent.qml:262
+#: ../plugins/system-update//PageComponent.qml:263
 msgid "Pause All"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:316
+#: ../plugins/system-update//PageComponent.qml:317
 msgid "Retry"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:332
+#: ../plugins/system-update//PageComponent.qml:333
 msgid "Download"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:332
+#: ../plugins/system-update//PageComponent.qml:333
 msgid "Update"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:333
+#: ../plugins/system-update//PageComponent.qml:334
 msgid "Resume"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:334
+#: ../plugins/system-update//PageComponent.qml:335
 msgid "Pause"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:392
+#: ../plugins/system-update//PageComponent.qml:393
 msgid "Installing"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:425
+#: ../plugins/system-update//PageComponent.qml:426
 msgid "Installed"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:450
+#: ../plugins/system-update//PageComponent.qml:452
 msgid "Version: "
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:472
+#: ../plugins/system-update//PageComponent.qml:474
 msgid "Sign in to Ubuntu One to receive updates for apps."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:481
+#: ../plugins/system-update//PageComponent.qml:483
 msgid "Sign In…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:548
+#: ../plugins/system-update//PageComponent.qml:550
 msgid "Installing update…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:568
+#: ../plugins/system-update//PageComponent.qml:570
 msgid "On wi-fi"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:570
+#: ../plugins/system-update//PageComponent.qml:572
 msgid "Always"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:585
+#: ../plugins/system-update//PageComponent.qml:587
 msgid " bytes"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:588
+#: ../plugins/system-update//PageComponent.qml:590
 msgid " KiB"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:591
+#: ../plugins/system-update//PageComponent.qml:593
 msgid " MiB"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:594
+#: ../plugins/system-update//PageComponent.qml:596
 msgid " GiB"
 msgstr ""
 
@@ -1414,7 +1414,7 @@ msgstr ""
 msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
 
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:186
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
 msgid "Software licenses"
 msgstr ""
 
@@ -1430,31 +1430,31 @@ msgstr ""
 msgid "OS Build Details"
 msgstr ""
 
-#: ../plugins/about//Version.qml:65
+#: ../plugins/about//Version.qml:61
 msgid "OS build number"
 msgstr ""
 
-#: ../plugins/about//Version.qml:71
+#: ../plugins/about//Version.qml:67
 msgid "Ubuntu Image part"
 msgstr ""
 
-#: ../plugins/about//Version.qml:79
+#: ../plugins/about//Version.qml:75
 msgid "Ubuntu build description"
 msgstr ""
 
-#: ../plugins/about//Version.qml:85
+#: ../plugins/about//Version.qml:81
 msgid "Device Image part"
 msgstr ""
 
-#: ../plugins/about//Version.qml:92
+#: ../plugins/about//Version.qml:88
 msgid "Device build description"
 msgstr ""
 
-#: ../plugins/about//Version.qml:99
+#: ../plugins/about//Version.qml:95
 msgid "Customization Image part"
 msgstr ""
 
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:143
+#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:139
 msgid "Storage"
 msgstr ""
 
@@ -1508,43 +1508,43 @@ msgstr ""
 msgid "About this phone"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:109
+#: ../plugins/about//PageComponent.qml:105
 msgid "Serial"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:124
+#: ../plugins/about//PageComponent.qml:120
 msgid "Wi-Fi address"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:132
+#: ../plugins/about//PageComponent.qml:128
 msgid "Bluetooth address"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:150
+#: ../plugins/about//PageComponent.qml:146
 msgid "Software:"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:155
+#: ../plugins/about//PageComponent.qml:151
 msgid "OS"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:164
+#: ../plugins/about//PageComponent.qml:160
 msgid "Last updated"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:172
+#: ../plugins/about//PageComponent.qml:168
 msgid "Check for updates"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:181
+#: ../plugins/about//PageComponent.qml:177
 msgid "Legal:"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:194
+#: ../plugins/about//PageComponent.qml:190
 msgid "Regulatory info"
 msgstr ""
 
-#: ../plugins/about//PageComponent.qml:202
+#: ../plugins/about//PageComponent.qml:198
 msgid "Developer mode"
 msgstr ""
 
