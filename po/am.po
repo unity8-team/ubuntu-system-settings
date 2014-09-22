@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-13 04:53+0000\n"
+"PO-Revision-Date: 2014-09-21 20:01+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-15 07:08+0000\n"
+"X-Launchpad-Export-Date: 2014-09-22 07:03+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -189,7 +189,7 @@ msgstr "ለውጦቹን ተግባራዊ ለማድረግ ስልኩን እንደ�
 msgid ""
 "The contents and layout of the launcher, and the filters in the home screen "
 "will be returned to their original settings."
-msgstr ""
+msgstr "የ ማስነሻ ይዞታ እና እቅድ እና ማጣሪያዎች በ ቤት መመልከቻ ውስጥ ወደ ነበረበት ወደ ማሰናጃው ይመለሳል"
 
 #: ../plugins/reset//ResetAllSettings.qml:31
 msgid "Reset all system settings"
@@ -370,7 +370,7 @@ msgstr "ሁሉም ቋንቋዎች ዝግጁ ናቸው:"
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "እንደገና ልጀምር አሁን"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
@@ -507,7 +507,7 @@ msgstr ""
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "አዝናለሁ ይህን ፍቃድ ማሳየት አይቻልም"
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
@@ -539,7 +539,7 @@ msgstr ""
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "የ ስልክ ቍጥር:"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -557,7 +557,7 @@ msgstr ""
 
 #: ../plugins/about//PageComponent.qml:132
 msgid "Bluetooth address"
-msgstr ""
+msgstr "የ ብሉቱዝ አድራሻ"
 
 #: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
 msgid "Storage"
@@ -757,7 +757,7 @@ msgstr ""
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "ማይክ"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
@@ -1010,7 +1010,7 @@ msgstr "ስልክ በመቆለፍ ላይ"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "ምንም"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1586,7 +1586,7 @@ msgstr "ቅድመ እይታ"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "ምስል ማስወገጃ"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
@@ -1624,7 +1624,7 @@ msgstr "2ጂ/3ጂ/4ጂ (ፈጣን)"
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 msgid "Data roaming"
-msgstr ""
+msgstr "ዳታ ማንቀሳቀሻ"
 
 #: ../plugins/cellular//Components//NoSim.qml:47
 #: ../plugins/cellular//Components//SingleSim.qml:58
@@ -1734,23 +1734,23 @@ msgstr ""
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "መጥረጊያ"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "እነዚህ የ ፒን ኮዶች አይመሳሰሉም"
 
 #: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "እነዚህ የ ማለፊያ ሐረጎች አይመሳሰሉም"
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "የ ፒን ኮድ ቢያንስ አራት አሀዝ መሆን አለበት"
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "የ ማለፊያ ሐረጎች ቢያንስ አራት አሀዝ መሆን አለበት"
 
 #: ../wizard/qml/Pages//15-passwd.qml:170
 #: ../wizard/qml/Pages//30-location.qml:79
@@ -1783,7 +1783,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "ይህን በ ስርአቱ ማሰናጃ ውስጥ ማሰናከል ይችላሉ"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
 msgid "Hi!"
@@ -1815,7 +1815,7 @@ msgstr "መጨረሻ"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "ወደ ዋይ‑ፋይ መገናኛ"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"

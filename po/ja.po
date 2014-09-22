@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-11 12:06-0400\n"
-"PO-Revision-Date: 2014-09-18 13:02+0000\n"
-"Last-Translator: Kentaro Kazuhama <Unknown>\n"
+"PO-Revision-Date: 2014-09-21 17:07+0000\n"
+"Last-Translator: Mitsuya Shibata <mty.shibata@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-19 08:09+0000\n"
+"X-Launchpad-Export-Date: 2014-09-22 07:03+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
@@ -350,7 +350,7 @@ msgstr "キーボード音"
 
 #: ../plugins/language//PageComponent.qml:219
 msgid "Keyboard vibration"
-msgstr ""
+msgstr "キー操作バイブ"
 
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
@@ -370,7 +370,7 @@ msgstr "すべての言語が利用できます："
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "今すぐ再起動"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
@@ -407,7 +407,7 @@ msgstr "サイレントモードでバイブする"
 #: ../plugins/sound//PageComponent.qml:153
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "テンキー音"
 
 #: ../plugins/sound//PageComponent.qml:157
 msgid "Messages:"
@@ -506,7 +506,7 @@ msgstr ""
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "このライセンスは表示できません。"
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
@@ -518,7 +518,7 @@ msgstr "OSビルド番号"
 
 #: ../plugins/about//Version.qml:71
 msgid "Ubuntu Image part"
-msgstr ""
+msgstr "Ubuntuイメージ"
 
 #: ../plugins/about//Version.qml:79
 msgid "Ubuntu build description"
@@ -526,7 +526,7 @@ msgstr "Ubuntuビルド概要"
 
 #: ../plugins/about//Version.qml:85
 msgid "Device Image part"
-msgstr ""
+msgstr "デバイスイメージ"
 
 #: ../plugins/about//Version.qml:92
 msgid "Device build description"
@@ -534,11 +534,11 @@ msgstr "デバイスビルド概要"
 
 #: ../plugins/about//Version.qml:99
 msgid "Customization Image part"
-msgstr ""
+msgstr "カスタマイズイメージ"
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "電話番号:"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
@@ -548,15 +548,15 @@ msgstr "端末情報"
 
 #: ../plugins/about//PageComponent.qml:109
 msgid "Serial"
-msgstr ""
+msgstr "シリアル番号"
 
 #: ../plugins/about//PageComponent.qml:124
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Wi-Fiアドレス"
 
 #: ../plugins/about//PageComponent.qml:132
 msgid "Bluetooth address"
-msgstr ""
+msgstr "Bluetoothアドレス"
 
 #: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
 msgid "Storage"
@@ -606,7 +606,7 @@ msgstr "開発者モードは、この電話に他のデバイスから接続す
 
 #: ../plugins/about//DevMode.qml:108
 msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr ""
+msgstr "開発者モードを使うにはPINコードかパスフレーズを設定する必要があります。"
 
 #: ../plugins/about//DevMode.qml:114
 #: ../plugins/security-privacy//PhoneLocking.qml:49
@@ -743,7 +743,7 @@ msgstr "他アプリのアクセス"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
-msgstr ""
+msgstr "アプリが次のアクセスへの許可を求めています："
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
@@ -756,7 +756,7 @@ msgstr "カメラへのアクセスを求めているアプリ"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
-msgstr ""
+msgstr "マイク"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
@@ -765,7 +765,7 @@ msgstr "マイクへのアクセスを求めているアプリ"
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: ../plugins/security-privacy//AppAccess.qml:60
 msgid "0"
@@ -791,7 +791,7 @@ msgstr "電話のみ"
 
 #: ../plugins/security-privacy//PageComponent.qml:131
 msgid "Lock phone"
-msgstr ""
+msgstr "画面のロック"
 
 #. TRANSLATORS: %1 is the number of minutes
 #: ../plugins/security-privacy//PageComponent.qml:137
@@ -874,7 +874,7 @@ msgstr "送信しました"
 #. reports are not to be sent by the system
 #: ../plugins/security-privacy//PageComponent.qml:266
 msgid "Not sent"
-msgstr ""
+msgstr "送信しない"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
@@ -1051,7 +1051,7 @@ msgstr "スリープしたら即時にロックする"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "ロック時も操作可能な機能："
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
@@ -1072,7 +1072,7 @@ msgstr ""
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "PINコードの変更…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -1081,19 +1081,19 @@ msgstr "パスフレーズの変更…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:105
 msgid "Switch to swipe"
-msgstr ""
+msgstr "スワイプへの変更"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "PINコードへの変更"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
-msgstr ""
+msgstr "パスフレーズへの変更"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "既存のPINコード"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -1101,7 +1101,7 @@ msgstr "既存のパスフレーズ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "PINコードの入力"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -1109,7 +1109,7 @@ msgstr "パスフレーズの入力"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "PINコードの確認"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
@@ -1117,7 +1117,7 @@ msgstr "パスフレーズの確認"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "PINコードが一致しませんでした。再試行してください。"
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -1137,7 +1137,7 @@ msgstr "スワイプ（セキュリティなし）"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "4桁のPINコード"
 
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
@@ -1145,7 +1145,7 @@ msgstr "スワイプ(セキュリティーなし)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "4桁のPINコード…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1245,7 +1245,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:478
 msgid "Sign In…"
-msgstr ""
+msgstr "サインイン..."
 
 #: ../plugins/system-update//PageComponent.qml:545
 msgid "Installing update…"
@@ -1290,7 +1290,7 @@ msgstr "Wi-Fi接続時"
 
 #: ../plugins/system-update//Configuration.qml:55
 msgid "On any data connection"
-msgstr ""
+msgstr "何らかのデータ通信接続時"
 
 #: ../plugins/system-update//Configuration.qml:56
 msgid "Data charges may apply."
@@ -1415,7 +1415,7 @@ msgstr "他のデバイスから検知可能"
 
 #: ../plugins/bluetooth//PageComponent.qml:182
 msgid "Not discoverable"
-msgstr ""
+msgstr "他のデバイスには非表示"
 
 #: ../plugins/bluetooth//PageComponent.qml:213
 msgid "Connected devices:"
@@ -1569,7 +1569,7 @@ msgstr "通話中や動画再生中はスリープしません。"
 #: ../plugins/background//MainPage.qml:38
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:146
 msgid "Background"
-msgstr ""
+msgstr "背景"
 
 #: ../plugins/background//MainPage.qml:109
 msgid "Ubuntu Art"
@@ -1585,7 +1585,7 @@ msgstr "プレビュー"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "イメージを削除"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../plugins/brightness//PageComponent.qml:32
@@ -1629,7 +1629,7 @@ msgstr ""
 #: ../plugins/cellular//Components//SingleSim.qml:58
 #: ../plugins/cellular//Components//SingleSim.qml:66
 msgid "Carrier"
-msgstr ""
+msgstr "キャリア"
 
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
@@ -1674,11 +1674,11 @@ msgstr ""
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "プライバシーポリシー"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
@@ -1698,7 +1698,7 @@ msgstr ""
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "画像が選択されていません"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
@@ -1709,7 +1709,7 @@ msgstr[1] ""
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "画像を追加…"
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
@@ -1756,11 +1756,11 @@ msgstr ""
 #: ../wizard/qml/Pages//40-reporting.qml:50
 #: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//20-wifi.qml:195
 msgid "Continue"
-msgstr ""
+msgstr "続行"
 
 #: ../wizard/qml/Pages//terms.qml:25
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "利用規約"
 
 #: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
@@ -1810,7 +1810,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
-msgstr ""
+msgstr "完了"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
@@ -1818,7 +1818,7 @@ msgstr ""
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
-msgstr ""
+msgstr "利用可能なネットワーク"
 
 #: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//no-sim.qml:50
 msgid "Skip"
@@ -2111,7 +2111,7 @@ msgstr "電力"
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:148
 msgid "appearance"
-msgstr ""
+msgstr "外観"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:150
@@ -2130,7 +2130,7 @@ msgstr "明るさ"
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
-msgstr ""
+msgstr "タイトル不明"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect PIN code. Try again."
