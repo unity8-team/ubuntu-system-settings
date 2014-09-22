@@ -30,11 +30,8 @@ import "utilities.js" as Utilities
 
 ItemPage {
     id: mainPage
-
     objectName: "backgroundPage"
-
     flickable: sources
-
     title: i18n.tr("Background")
 
     signal save (string uri)
@@ -56,17 +53,10 @@ ItemPage {
 
     // Action to import image
     Action {
-        id: selectDefaultPeer
-        // when action has been activated, request a transfer, providing
-        // a callback that pushes the preview stack
-        onTriggered: {
-            startContentTransfer(function(uri) {
-                pageStack.push(Qt.resolvedUrl("Preview.qml"), {
-                    uri: uri, imported: true
-                });
-                // set Connection target
-                selectedItemConnection.target = pageStack.currentPage;
-            });
+        id: selectPeer
+        // when action has been activated, push the picker on the stack
+        onTriggered: {                        
+            pageStack.push(picker);
         }
     }
 
@@ -132,7 +122,6 @@ ItemPage {
                 }
             }
 
-
             ListItem.ThinDivider {}
 
         }
@@ -151,29 +140,7 @@ ItemPage {
                 }
             }
         }
-    }
-
-    ContentPeer {
-        id: peer
-        contentType: ContentType.Pictures
-        handler: ContentHandler.Source
-        selectionType: ContentTransfer.Single
-    }
-
-    ContentStore {
-        id: appStore
-        scope: ContentScope.App
-    }
-
-    // requests an active transfer from peer
-    function startContentTransfer(callback) {
-        if (callback)
-            contentHubConnection.imageCallback = callback
-        var transfer = peer.request(appStore);
-        if (transfer !== null) {
-            activeTransfer = transfer;
-        }
-    }
+    }    
 
     // set up connections
     Connections {
@@ -207,4 +174,45 @@ ItemPage {
         }
     }
 
+    Page {
+        id: picker
+        visible: false
+
+        ContentStore {
+            id: appStore
+            scope: ContentScope.App
+        }
+
+        ContentPeerPicker {
+            id: peerPicker
+            visible: parent.visible
+            handler: ContentHandler.Source
+            contentType: ContentType.Pictures
+
+            onPeerSelected: {
+                pageStack.pop();
+                // requests an active transfer from peer
+                function startContentTransfer(callback) {
+                    if (callback)
+                        contentHubConnection.imageCallback = callback
+                    var transfer = peer.request(appStore);
+                    if (transfer !== null) {
+                        mainPage.activeTransfer = transfer;
+                    }
+                }
+                peer.selectionType = ContentTransfer.Single;
+                // when peer has been selected, request a transfer, providing
+                // a callback that pushes the preview stack
+                startContentTransfer(function(uri) {
+                    pageStack.push(Qt.resolvedUrl("Preview.qml"), {
+                        uri: uri, imported: true
+                    });
+                    // set Connection target
+                    selectedItemConnection.target = pageStack.currentPage;
+                });
+            }
+
+            onCancelPressed: pageStack.pop();
+        }
+    }
 }
