@@ -27,8 +27,8 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Diagnostics"));
-    
+    // @uri Ubuntu.SystemSettings.Diagnostics
+    Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Diagnostics"));    
     qmlRegisterType<Diagnostics>(uri, 1, 0, "UbuntuDiagnostics");
 }
 

@@ -24,11 +24,10 @@
 
 using namespace NotificationsPlugin;
 
-
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.Notifications
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Notifications"));
-
     qmlRegisterType<NotificationsManager>(uri, 1, 0, "NotificationsManager");
     qmlRegisterType<NotificationItem>(uri, 1, 0, "NotificationItem");
 }

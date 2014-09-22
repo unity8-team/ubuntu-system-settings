@@ -39,6 +39,7 @@ static QObject *qml_update_manager(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.Update
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Update"));
     
     qmlRegisterSingletonType<UpdateManager>(uri, 1, 0, "UpdateManager", qml_update_manager);

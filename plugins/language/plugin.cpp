@@ -27,8 +27,8 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.LanguagePlugin
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.LanguagePlugin"));
-
     qmlRegisterType<SubsetModel>(uri, 1, 0, "SubsetModel");
     qmlRegisterType<LanguagePlugin>(uri, 1, 0, "UbuntuLanguagePlugin");
 }

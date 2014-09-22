@@ -41,6 +41,7 @@ QObject* dbusProvider(QQmlEngine* engine, QJSEngine* /* scriptEngine */)
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.Wifi
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wifi"));
     qmlRegisterType<UnityMenuModelStack>(uri, 1, 0, "UnityMenuModelStack");
     qmlRegisterSingletonType<WifiDbusHelper>(uri, 1, 0, "DbusHelper", dbusProvider);

@@ -34,6 +34,7 @@ static QObject *system_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 void UtilsPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.Wizard.Utils
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Wizard.Utils"));
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<QSortFilterProxyModelQML>(uri, 0, 1, "SortFilterProxyModel");

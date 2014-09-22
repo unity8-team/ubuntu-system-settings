@@ -28,8 +28,8 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.StorageAbout
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.StorageAbout"));
-
     qRegisterMetaType<ClickModel::Roles>();
     qmlRegisterType<ClickModel>(uri, 1, 0, "ClickRoles");
     qmlRegisterType<NetworkAbout>(uri, 1, 0, "NetworkAbout");

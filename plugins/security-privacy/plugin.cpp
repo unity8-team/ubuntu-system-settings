@@ -24,6 +24,7 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.SecurityPrivacy
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.SecurityPrivacy"));
     qmlRegisterType<SecurityPrivacy>(uri, 1, 0, "UbuntuSecurityPrivacyPanel");
     qmlRegisterType<TrustStoreModel>(uri, 1, 0, "TrustStoreModel");

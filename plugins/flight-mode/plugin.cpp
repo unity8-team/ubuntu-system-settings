@@ -27,8 +27,8 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.FlightMode
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.FlightMode"));
-    
     qmlRegisterType<FlightModeHelper>(uri, 1, 0, "Helper");
 }
 

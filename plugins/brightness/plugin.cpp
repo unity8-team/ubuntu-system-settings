@@ -27,8 +27,8 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.Brightness
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Brightness"));
-
     qmlRegisterType<Brightness>(uri, 1, 0, "UbuntuBrightnessPanel");
 }
 

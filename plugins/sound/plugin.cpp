@@ -27,8 +27,8 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.Sound
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Sound"));
-
     qmlRegisterType<Sound>(uri, 1, 0, "UbuntuSoundPanel");
 }
 

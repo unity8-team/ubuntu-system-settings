@@ -27,8 +27,8 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.Background
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Background"));
-    
     qmlRegisterType<Background>(uri, 1, 0, "UbuntuBackgroundPanel");
 }
 

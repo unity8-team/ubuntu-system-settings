@@ -23,6 +23,7 @@
 
 void BackendPlugin::registerTypes(const char *uri)
 {
+    // @uri Ubuntu.SystemSettings.Cellular
     Q_ASSERT(uri == QLatin1String("Ubuntu.SystemSettings.Cellular"));
     qmlRegisterType<HotspotManager>(uri, 1, 0, "HotspotManager");
 }
