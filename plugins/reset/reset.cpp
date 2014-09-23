@@ -64,6 +64,11 @@ bool Reset::factoryReset()
                 QDBusConnection::systemBus(),
                 this);
 
+    // FIXME: temporary warning so we know we've reproduced bug #1370815
+    if (!iface.isValid())
+        qWarning() << iface.interface() << "Isn't valid";
+
+
     QDBusReply<QString> reply = iface.call("FactoryReset");
     if (!reply.isValid()) {
          qWarning() << reply.error().message(); 
