@@ -43,9 +43,9 @@ LocalComponents.Page {
         menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
     }
 
-    QDBusActionGroup {
+    QMenuModel.QDBusActionGroup {
         id: locationActionGroup
-        busType: DBus.SessionBus
+        busType: QMenuModel.DBus.SessionBus
         busName: "com.canonical.indicator.location"
         objectPath: "/com/canonical/indicator/location"
         property variant enabled: action("location-detection-enabled")
@@ -152,13 +152,14 @@ LocalComponents.Page {
             anchors.right: parent.right
             anchors.rightMargin: rightMargin
             fontSize: "small"
-            text: i18n.tr("Available networks")
+            text: menuModel.count > 0 ? i18n.tr("Available networks")
+                                      : i18n.tr("No available networks.")
         }
 
         Flickable {
             anchors.left: parent.left
             anchors.right: parent.right
-            height: column.height - label.height - column.spacing
+            height: column.height - label.height - locationCheck.height - column.spacing * 2
             contentHeight: contentItem.childrenRect.height
             clip: true
             flickDeceleration: 1500 * units.gridUnit / 8
@@ -199,6 +200,10 @@ LocalComponents.Page {
 
         LocalComponents.CheckableSetting {
             id: locationCheck
+            anchors.left: parent.left
+            anchors.right: parent.right
+            leftMargin: wifiPage.leftMargin
+            rightMargin: wifiPage.rightMargin
             showDivider: false
             text: i18n.tr("Use your mobile network and Wi-Fi to determine where you are")
             checked: locationActionGroup.enabled.state
@@ -209,7 +214,7 @@ LocalComponents.Page {
     Component {
         id: forwardButton
         LocalComponents.StackButton {
-            text: connected ? i18n.tr("Continue") : i18n.tr("Skip")
+            text: (connected || mainMenu.count === 0) ? i18n.tr("Continue") : i18n.tr("Skip")
             onClicked: pageStack.next()
         }
     }

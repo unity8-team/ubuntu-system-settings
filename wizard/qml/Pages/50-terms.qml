@@ -56,8 +56,8 @@ LocalComponents.Page {
         LocalComponents.CheckableSetting {
             id: termsCheck
             showDivider: false
-            text: i18n.tr("I have read and agreed to the HERE <a>terms and conditions</a>")
-            onLinkActivated: pageStack.push(Qt.resolvedUrl("here-terms.qml"))
+            text: i18n.tr("I have read and agreed to the HERE <a href='here-terms.qml'>terms and conditions</a>")
+            onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
             checked: System.hereEnabled
             onTriggered: System.hereEnabled = checked
         }

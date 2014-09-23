@@ -37,14 +37,6 @@ LocalComponents.Page {
     title: i18n.tr("Unlock security")
     forwardButtonSourceComponent: forwardButton
 
-    readonly property int method: indexToMethod(listview.currentIndex)
-    readonly property string password: {
-        if (method !== UbuntuSecurityPrivacyPanel.Swipe)
-            return passwordInput.text
-        else
-            return ""
-    }
-
     function indexToMethod(index) {
         if (index === 0)
             return UbuntuSecurityPrivacyPanel.Swipe
@@ -54,34 +46,61 @@ LocalComponents.Page {
             return UbuntuSecurityPrivacyPanel.Passphrase
     }
 
+    function methodToIndex(method) {
+        if (method === UbuntuSecurityPrivacyPanel.Swipe)
+            return 0
+        else if (method === UbuntuSecurityPrivacyPanel.Passcode)
+            return 1
+        else
+            return 2
+    }
+
+    Connections {
+        target: root
+        onPasswordMethodChanged: listview.currentIndex = methodToIndex(root.passwordMethod)
+    }
+
     Column {
         id: column
-        spacing: units.gu(2)
+        spacing: units.gu(4)
         anchors.fill: content
+
+        Label {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("Please select how you'd like to unlock your phone.  You can choose between a simple swipe, passcode, and passphrase.")
+        }
 
         ComboButton {
             id: combo
+            anchors.left: parent.left
+            anchors.right: parent.right
 
             text: listview.currentItem.text
+
             onClicked: {
                 expanded = !expanded
-                forceActiveFocus() // hides OSK if up
             }
+
             UbuntuListView {
                 id: listview
                 width: parent.width
                 height: combo.comboListHeight
                 model: 3
-                currentIndex: 1
+                currentIndex: methodToIndex(root.passwordMethod)
                 delegate: Standard {
                     text: {
                         var method = indexToMethod(modelData)
                         if (method === UbuntuSecurityPrivacyPanel.Swipe)
-                            return i18n.tr("Swipe")
+                            return "<b>" + i18n.tr("Swipe") + "</b> — " +
+                                   i18n.tr("Unlock by simply swiping to the left")
                         else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Passcode")
+                            return "<b>" + i18n.tr("Passcode") + "</b> — " +
+                                   i18n.tr("Numbers only (4 digits)")
                         else
-                            return i18n.tr("Passphrase")
+                            return "<b>" + i18n.tr("Passphrase") + "</b> — " +
+                                   i18n.tr("Letters, numbers, and phrases")
                     }
                     onClicked: {
                         listview.currentIndex = index
@@ -90,71 +109,14 @@ LocalComponents.Page {
                 }
             }
         }
-
-        TextField {
-            id: passwordInput
-            echoMode: TextInput.Password
-            inputMethodHints: {
-                var hints = Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
-                if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                    hints |= Qt.ImhDigitsOnly
-                return hints
-            }
-            inputMask: {
-                if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                    return "9999"
-                else
-                    return ""
-            }
-            visible: passwdPage.method !== UbuntuSecurityPrivacyPanel.Swipe
-        }
-
-        TextField {
-            id: confirmInput
-            echoMode: passwordInput.echoMode
-            inputMethodHints: passwordInput.inputMethodHints
-            inputMask: passwordInput.inputMask
-            visible: passwordInput.visible
-        }
-
-        Label {
-            id: problem
-            width: parent.width
-            wrapMode: Text.Wrap
-            visible: text !== ""
-            color: UbuntuColors.red
-            text: {
-                if (passwordInput.visible) {
-                    if (passwordInput.text !== confirmInput.text) {
-                        if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Those passcodes don't match.")
-                        else
-                            return i18n.tr("Those passphrases don't match.")
-                    } else if (passwordInput.text.length < 4) {
-                        // Note that the number four comes from PAM settings,
-                        // which we don't have a good way to interrogate.  We
-                        // only do this matching instead of PAM because we want
-                        // to set the password via PAM in a different place
-                        // than this page.  See comments at top of file.
-                        if (passwdPage.method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return i18n.tr("Passcode must be at least four digits long.")
-                        else
-                            return i18n.tr("Passphrase must be at least four characters long.")
-                    }
-                }
-                return ""
-            }
-        }
     }
 
     Component {
         id: forwardButton
         LocalComponents.StackButton {
             text: i18n.tr("Continue")
-            enabled: !problem.visible
             onClicked: {
-                root.passwordMethod = passwdPage.method
-                root.password = passwdPage.password
+                root.passwordMethod = indexToMethod(listview.currentIndex)
                 pageStack.next()
             }
         }

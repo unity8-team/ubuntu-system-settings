@@ -30,7 +30,7 @@ Item {
 
     // These should be set by a security page and we apply the settings when
     // the user exits the wizard.
-    property int passwordMethod: UbuntuSecurityPrivacyPanel.Swipe
+    property int passwordMethod: UbuntuSecurityPrivacyPanel.Passcode
     property string password: ""
 
     Component.onCompleted: {
@@ -116,7 +116,9 @@ Item {
             }
 
             function _checkSkip() {
-                if (currentPage.skipValid) {
+                if (!currentPage) { // may have had a parse error
+                    next()
+                } else if (currentPage.skipValid) {
                     if (currentPage.skip) {
                         pop()
                         next()
