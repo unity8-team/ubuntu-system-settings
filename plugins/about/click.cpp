@@ -53,6 +53,9 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
     QVariantMap::ConstIterator begin(hooks.constBegin());
     QVariantMap::ConstIterator end(hooks.constEnd());
 
+    const gchar *keyGroup = G_KEY_FILE_DESKTOP_GROUP;
+    const gchar *keyName = G_KEY_FILE_DESKTOP_KEY_NAME;
+
     // Look through the hooks for a 'desktop' key which points to a desktop
     // file referring to this app, or a 'scope' key pointing to an ini
     while (begin != end) {
@@ -61,10 +64,11 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
             (appHooks.contains("desktop") || appHooks.contains("scope")) &&
             directory.exists()) {
 
-            bool isScope = appHooks.contains("scope");
-
-            if (isScope)
+            if (appHooks.contains("scope"))
             {
+                keyGroup = "ScopeConfig";
+                keyName = "DisplayName";
+
                 QDir scopeDirectory(
                             directory.absoluteFilePath(appHooks.value("scope", "").toString()));
                 scopeDirectory.setNameFilters(QStringList()<<"*.ini");
@@ -82,6 +86,9 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
             }
             else
             {
+                keyGroup = G_KEY_FILE_DESKTOP_GROUP;
+                keyName = G_KEY_FILE_DESKTOP_KEY_NAME;
+
                 QFile desktopOrIniFile(directory.absoluteFilePath(
                                       appHooks.value("desktop", "undefined").toString()));
 
@@ -107,8 +114,8 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
             }
 
             gchar * name = g_key_file_get_locale_string (appinfo,
-                                                  isScope ? "ScopeConfig" : G_KEY_FILE_DESKTOP_GROUP,
-                                                  isScope ? "DisplayName" : G_KEY_FILE_DESKTOP_KEY_NAME,
+                                                  keyGroup,
+                                                  keyName,
                                                   nullptr,
                                                   nullptr);
 
@@ -123,7 +130,7 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
             // This is the one that the app scope displays so use that if we
             // can.
             gchar * icon = g_key_file_get_string (appinfo,
-                                                  isScope ? "ScopeConfig" : G_KEY_FILE_DESKTOP_GROUP,
+                                                  keyGroup,
                                                   G_KEY_FILE_DESKTOP_KEY_ICON,
                                                   nullptr);
 
