@@ -83,6 +83,9 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
                         g_strdup(desktopOrIniFile.fileName().toLocal8Bit().constData());
                 if (!desktopOrIniFile.exists())
                     goto out;
+
+                /* replace directory so the icon is correctly loaded */
+                directory = scopeDirectory;
             }
             else
             {
