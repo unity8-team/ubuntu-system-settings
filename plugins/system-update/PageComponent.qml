@@ -346,7 +346,10 @@ ItemPage {
                             Label {
                                 id: labelTitle
                                 objectName: "labelTitle"
-                                anchors.left: parent.left
+                                anchors {
+                                    left: parent.left
+                                    verticalCenter: parent.verticalCenter
+                                }
                                 text: modelData.title
                                 font.bold: true
                                 elide: buttonAppUpdate.visible ? Text.ElideRight : Text.ElideNone
@@ -356,7 +359,7 @@ ItemPage {
                                 id: buttonAppUpdate
                                 objectName: "buttonAppUpdate"
                                 anchors.right: parent.right
-                                height: labelTitle.height
+                                height: labelTitle.height + units.gu(1)
                                 text: {
                                     if (textArea.retry) {
                                         return i18n.tr("Retry");
