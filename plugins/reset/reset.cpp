@@ -21,6 +21,7 @@
 #include "reset.h"
 #include <QEvent>
 #include <QDBusReply>
+#include <QDebug>
 #include <unistd.h>
 #include <QDBusMetaType>
 
@@ -28,8 +29,7 @@ typedef QList<QVariantMap> resetLauncherItemsArg;
 Q_DECLARE_METATYPE(resetLauncherItemsArg)
 
 Reset::Reset(QObject *parent)
-    : QObject(parent),
-    m_systemBusConnection(QDBusConnection::systemBus())
+    : QObject(parent)
 {
     static bool isRegistered = false;
     if(!isRegistered) {
@@ -57,19 +57,18 @@ bool Reset::resetLauncher()
 
 bool Reset::factoryReset()
 {
-    QDBusInterface systemServiceInterface (
+    QDBusInterface iface (
                 "com.canonical.SystemImage",
                 "/Service",
                 "com.canonical.SystemImage",
-                m_systemBusConnection,
+                QDBusConnection::systemBus(),
                 this);
 
-    if (!systemServiceInterface.isValid())
+    QDBusReply<QString> reply = iface.call("FactoryReset");
+    if (!reply.isValid()) {
+         qWarning() << reply.error().message(); 
         return false;
-
-    QDBusReply<QString> reply = systemServiceInterface.call("FactoryReset");
-    if (!reply.isValid())
-        return false;
+    }
 
     return true;
 }
