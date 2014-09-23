@@ -71,17 +71,14 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
 
                 QStringList iniEntry(scopeDirectory.entryList());
 
-                if (!iniEntry.isEmpty())
-                {
-                    QFile desktopOrIniFile(scopeDirectory.absoluteFilePath(iniEntry[0]));
-                    desktopOrIniFileName =
-                            g_strdup(desktopOrIniFile.fileName().toLocal8Bit().constData());
-                    if (!desktopOrIniFile.exists())
-                        goto out;
-                }
-                else
+                if (iniEntry.isEmpty())
                     goto out;
 
+                QFile desktopOrIniFile(scopeDirectory.absoluteFilePath(iniEntry[0]));
+                desktopOrIniFileName =
+                        g_strdup(desktopOrIniFile.fileName().toLocal8Bit().constData());
+                if (!desktopOrIniFile.exists())
+                    goto out;
             }
             else
             {
