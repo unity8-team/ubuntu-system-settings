@@ -296,7 +296,7 @@ ItemPage {
                     verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideRight
                     anchors {
-                        left: activity.right
+                        left: activity.running ? activity.right : parent.left
                         top: parent.top
                         right: btnRetry.left
                         rightMargin: units.gu(2)
