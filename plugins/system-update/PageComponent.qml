@@ -50,7 +50,13 @@ ItemPage {
     property bool hasConnection: (actionGroup.actionObject.valid ? actionGroup.actionObject.state : true)
 
     onHasConnectionChanged: {
-        activity.running = false;
+        if (hasConnection) {
+            activity.running = true;
+            root.state = "SEARCHING";
+            updateManager.checkUpdates();
+        } else {
+            activity.running = false;
+        }
     }
 
     QDBusActionGroup {
@@ -312,6 +318,7 @@ ItemPage {
                     visible: !activity.visible
 
                     onClicked: {
+                        activity.running = true;
                         root.state = "SEARCHING";
                         updateManager.checkUpdates();
                     }
