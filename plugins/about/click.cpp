@@ -37,10 +37,10 @@ ClickModel::ClickModel(QObject *parent):
     m_clickPackages = buildClickList();
 }
 
-/* Look through `hooks' for a desktop file in `directory'
+/* Look through `hooks' for a desktop or ini file in `directory'
  * and set the display name and icon from this.
  *
- * Will set with information from the first desktop file found and parsed.
+ * Will set with information from the first desktop or ini file found and parsed.
  */
 void ClickModel::populateFromDesktopFile (Click *newClick,
                                           QVariantMap hooks,
@@ -58,18 +58,46 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
     while (begin != end) {
         appHooks = (*begin++).toMap();
         if (!appHooks.isEmpty() &&
-            appHooks.contains("desktop") &&
+            (appHooks.contains("desktop") || appHooks.contains("scope")) &&
             directory.exists()) {
-            QFile desktopFile(directory.absoluteFilePath(
-                        appHooks.value("desktop", "undefined").toString()));
 
-           desktopFileName =
-               g_strdup(desktopFile.fileName().toLocal8Bit().constData());
+            bool isScope = appHooks.contains("scope");
+
+            if (isScope)
+            {
+                QDir scopeDirectory(
+                            directory.absolutePath()+"/"+appHooks.value("scope", "").toString());
+                scopeDirectory.setNameFilters(QStringList()<<"*.ini");
+
+                QStringList iniEntry(scopeDirectory.entryList());
+
+                if (!iniEntry.isEmpty())
+                {
+                    QFile desktopFile(scopeDirectory.absolutePath()+"/"+iniEntry[0]);
+                    desktopFileName =
+                            g_strdup(desktopFile.fileName().toLocal8Bit().constData());
+                    if (!desktopFile.exists())
+                        goto out;
+                }
+                else
+                    goto out;
+
+            }
+            else
+            {
+                QFile desktopFile(directory.absoluteFilePath(
+                                      appHooks.value("desktop", "undefined").toString()));
+
+                desktopFileName =
+                   g_strdup(desktopFile.fileName().toLocal8Bit().constData());
+
+                if (!desktopFile.exists())
+                    goto out;
+            }
 
             g_debug ("Desktop file: %s", desktopFileName);
 
-            if (!desktopFile.exists())
-                goto out;
+
 
             gboolean loaded = g_key_file_load_from_file(appinfo,
                                                         desktopFileName,
@@ -82,8 +110,8 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             }
 
             gchar * name = g_key_file_get_locale_string (appinfo,
-                                                  G_KEY_FILE_DESKTOP_GROUP,
-                                                  G_KEY_FILE_DESKTOP_KEY_NAME,
+                                                  isScope ? "ScopeConfig" : G_KEY_FILE_DESKTOP_GROUP,
+                                                  isScope ? "DisplayName" : G_KEY_FILE_DESKTOP_KEY_NAME,
                                                   nullptr,
                                                   nullptr);
 
@@ -98,7 +126,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             // This is the one that the app scope displays so use that if we
             // can.
             gchar * icon = g_key_file_get_string (appinfo,
-                                                  G_KEY_FILE_DESKTOP_GROUP,
+                                                  isScope ? "ScopeConfig" : G_KEY_FILE_DESKTOP_GROUP,
                                                   G_KEY_FILE_DESKTOP_KEY_ICON,
                                                   nullptr);
 
