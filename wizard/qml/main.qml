@@ -105,6 +105,8 @@ Item {
                 if (pageList.index >= pageStack.depth - 1)
                     pageList.prev() // update pageList.index, but not for extra pages
                 pop()
+                while (!currentPage.enabled) // undo skipped pages
+                    prev()
             }
 
             function load(path) {
@@ -122,7 +124,6 @@ Item {
                     next()
                 } else if (currentPage.skipValid) {
                     if (currentPage.skip) {
-                        pop()
                         next()
                     } else {
                         currentPage.opacity = 1

@@ -27,7 +27,7 @@ Item {
     signal clicked()
 
     width: label.width
-    height: label.height + units.gu(2)
+    height: label.height + units.gu(4)
 
     Label {
         id: label
@@ -44,10 +44,10 @@ Item {
             }
         }
         horizontalAlignment: backArrow ? Text.AlignLeft : Text.AlignRight
+    }
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: stackButton.clicked()
-        }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: stackButton.clicked()
     }
 }
