@@ -42,19 +42,19 @@ ClickModel::ClickModel(QObject *parent):
  *
  * Will set with information from the first desktop or ini file found and parsed.
  */
-void ClickModel::populateFromDesktopFile (Click *newClick,
+void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
                                           QVariantMap hooks,
                                           QDir directory)
 {
     QVariantMap appHooks;
     GKeyFile *appinfo = g_key_file_new();
-    gchar *desktopFileName = nullptr;
+    gchar *desktopOrIniFileName = nullptr;
 
     QVariantMap::ConstIterator begin(hooks.constBegin());
     QVariantMap::ConstIterator end(hooks.constEnd());
 
     // Look through the hooks for a 'desktop' key which points to a desktop
-    // file referring to this app.
+    // file referring to this app, or a 'scope' key pointing to an ini
     while (begin != end) {
         appHooks = (*begin++).toMap();
         if (!appHooks.isEmpty() &&
@@ -73,10 +73,10 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
 
                 if (!iniEntry.isEmpty())
                 {
-                    QFile desktopFile(scopeDirectory.absolutePath()+"/"+iniEntry[0]);
-                    desktopFileName =
-                            g_strdup(desktopFile.fileName().toLocal8Bit().constData());
-                    if (!desktopFile.exists())
+                    QFile desktopOrIniFile(scopeDirectory.absolutePath()+"/"+iniEntry[0]);
+                    desktopOrIniFileName =
+                            g_strdup(desktopOrIniFile.fileName().toLocal8Bit().constData());
+                    if (!desktopOrIniFile.exists())
                         goto out;
                 }
                 else
@@ -85,27 +85,27 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             }
             else
             {
-                QFile desktopFile(directory.absoluteFilePath(
+                QFile desktopOrIniFile(directory.absoluteFilePath(
                                       appHooks.value("desktop", "undefined").toString()));
 
-                desktopFileName =
-                   g_strdup(desktopFile.fileName().toLocal8Bit().constData());
+                desktopOrIniFileName =
+                   g_strdup(desktopOrIniFile.fileName().toLocal8Bit().constData());
 
-                if (!desktopFile.exists())
+                if (!desktopOrIniFile.exists())
                     goto out;
             }
 
-            g_debug ("Desktop file: %s", desktopFileName);
+            g_debug ("Desktop or ini file: %s", desktopOrIniFileName);
 
 
 
             gboolean loaded = g_key_file_load_from_file(appinfo,
-                                                        desktopFileName,
+                                                        desktopOrIniFileName,
                                                         G_KEY_FILE_NONE,
                                                         nullptr);
 
             if (!loaded) {
-                g_warning ("Couldn't parse desktop file %s", desktopFileName);
+                g_warning ("Couldn't parse desktop or ini file %s", desktopOrIniFileName);
                 goto out;
             }
 
@@ -122,7 +122,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
                 name = nullptr;
             }
 
-            // Overwrite the icon with the .desktop file's one if we have it.
+            // Overwrite the icon with the .desktop or ini file's one if we have it.
             // This is the one that the app scope displays so use that if we
             // can.
             gchar * icon = g_key_file_get_string (appinfo,
@@ -147,7 +147,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
             }
         }
 out:
-        g_free (desktopFileName);
+        g_free (desktopOrIniFileName);
         g_key_file_free (appinfo);
         return;
     }
@@ -178,13 +178,13 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
 
     }
 
-    // "hooks" → title → "desktop" / "icon"
+    // "hooks" → title → "desktop" or "ini" / "icon"
     QVariant hooks(manifest.value("hooks"));
 
     if (hooks.isValid()) {
         QVariantMap allHooks(hooks.toMap());
-        // The desktop file contains an icon and the display name
-        populateFromDesktopFile(&newClick, allHooks, directory);
+        // The desktop or ini file contains an icon and the display name
+        populateFromDesktopOrIniFile(&newClick, allHooks, directory);
    }
 
     newClick.installSize = manifest.value("installed-size",

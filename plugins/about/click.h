@@ -57,7 +57,7 @@ public:
     quint64 getClickSize() const;
 
 private:
-    void populateFromDesktopFile(Click *newClick,
+    void populateFromDesktopOrIniFile(Click *newClick,
                                  QVariantMap hooks,
                                  QDir directory);
     Click buildClick(QVariantMap manifest);
