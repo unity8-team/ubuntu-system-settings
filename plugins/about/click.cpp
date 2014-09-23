@@ -66,14 +66,14 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
             if (isScope)
             {
                 QDir scopeDirectory(
-                            directory.absolutePath()+"/"+appHooks.value("scope", "").toString());
+                            directory.absoluteFilePath(appHooks.value("scope", "").toString()));
                 scopeDirectory.setNameFilters(QStringList()<<"*.ini");
 
                 QStringList iniEntry(scopeDirectory.entryList());
 
                 if (!iniEntry.isEmpty())
                 {
-                    QFile desktopOrIniFile(scopeDirectory.absolutePath()+"/"+iniEntry[0]);
+                    QFile desktopOrIniFile(scopeDirectory.absoluteFilePath(iniEntry[0]));
                     desktopOrIniFileName =
                             g_strdup(desktopOrIniFile.fileName().toLocal8Bit().constData());
                     if (!desktopOrIniFile.exists())
