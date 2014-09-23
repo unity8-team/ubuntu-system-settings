@@ -44,6 +44,10 @@ LocalComponents.Page {
                   i18n.tr("Confirm passphrase") :
                   i18n.tr("Confirm passcode")
 
+        errorText: root.passwordMethod === UbuntuSecurityPrivacyPanel.Passphrase ?
+                  i18n.tr("Sorry, incorrect passphrase.") + "\n" + i18n.tr("Please try again.") :
+                  i18n.tr("Sorry, incorrect passcode.") + "\n" + i18n.tr("Please try again.")
+
         showEmergencyCallButton: false
         showCancelButton: false
         alphaNumeric: root.passwordMethod === UbuntuSecurityPrivacyPanel.Passphrase
@@ -51,8 +55,12 @@ LocalComponents.Page {
         maxPinLength: 4
 
         onEntered: {
-            pageStack.next()
-            reset()
+            if (passphrase === root.password) {
+                pageStack.next()
+                clear(false)
+            } else {
+                clear(true)
+            }
         }
     }
 }

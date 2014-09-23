@@ -53,8 +53,8 @@ LocalComponents.Page {
 
         onEntered: {
             root.password = passphrase
-            pageStack.next()
-            reset()
+            pageStack.push(Qt.resolvedUrl("passwd-confirm.qml"))
+            clear(false)
         }
     }
 

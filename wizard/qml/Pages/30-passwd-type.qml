@@ -16,7 +16,7 @@
 
 import QtQuick 2.3
 import Ubuntu.Components 1.1
-import Ubuntu.Components.ListItems 0.1
+import Ubuntu.Components.ListItems 1.0
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import "../Components" as LocalComponents
 
@@ -57,55 +57,93 @@ LocalComponents.Page {
 
     Connections {
         target: root
-        onPasswordMethodChanged: listview.currentIndex = methodToIndex(root.passwordMethod)
+        onPasswordMethodChanged: selector.selectedIndex = methodToIndex(root.passwordMethod)
     }
 
     Column {
         id: column
-        spacing: units.gu(4)
         anchors.fill: content
+        spacing: units.gu(1)
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            text: i18n.tr("Please select how you'd like to unlock your phone.  You can choose between a simple swipe, passcode, and passphrase.")
+            text: i18n.tr("Please select how you’d like to unlock your phone. You can choose between a simple swipe, passcode or passphrase.")
         }
 
-        ComboButton {
-            id: combo
+        Item { // spacer
+            height: units.gu(1)
+            width: units.gu(1) // needed else it will be ignored
+        }
+
+        Repeater {
+            id: explanations
+            anchors.left: parent.left
+            anchors.right: parent.right
+            model: 3
+            Row {
+                Label {
+                    id: typeName
+                    fontSize: "x-small"
+                    text: {
+                        var method = indexToMethod(index)
+                        var label = "<b>"
+                        if (method === UbuntuSecurityPrivacyPanel.Swipe)
+                            label += i18n.tr("Swipe")
+                        else if (method === UbuntuSecurityPrivacyPanel.Passcode)
+                            label += i18n.tr("Passcode")
+                        else
+                            label += i18n.tr("Passphrase")
+                        label += "</b> —"
+                        return label
+                    }
+                }
+                Label {
+                    fontSize: "x-small"
+                    wrapMode: Text.Wrap
+                    width: explanations.width - typeName.width
+                    text: {
+                        var method = indexToMethod(index)
+                        if (method === UbuntuSecurityPrivacyPanel.Swipe)
+                           return " " + i18n.tr("Unlock by simply swiping to the left")
+                        else if (method === UbuntuSecurityPrivacyPanel.Passcode)
+                            return " " + i18n.tr("Numbers only (4 digits)")
+                        else
+                            return " " + i18n.tr("Letters, numbers and phrases")
+                    }
+                }
+            }
+        }
+
+        Item { // spacer
+            height: units.gu(1)
+            width: units.gu(1) // needed else it will be ignored
+        }
+
+        Label {
+            fontSize: "x-small"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            wrapMode: Text.Wrap
+            text: i18n.tr("Please select")
+        }
+
+        ItemSelector {
+            id: selector
             anchors.left: parent.left
             anchors.right: parent.right
 
-            text: listview.currentItem.text
+            model: ["", "", ""] // otherwise the delegate will show the text itself and we only want subText
 
-            onClicked: {
-                expanded = !expanded
-            }
+            selectedIndex: methodToIndex(root.passwordMethod)
 
-            UbuntuListView {
-                id: listview
-                width: parent.width
-                height: combo.comboListHeight
-                model: 3
-                currentIndex: methodToIndex(root.passwordMethod)
-                delegate: Standard {
-                    text: {
-                        var method = indexToMethod(modelData)
-                        if (method === UbuntuSecurityPrivacyPanel.Swipe)
-                            return "<b>" + i18n.tr("Swipe") + "</b> — " +
-                                   i18n.tr("Unlock by simply swiping to the left")
-                        else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return "<b>" + i18n.tr("Passcode") + "</b> — " +
-                                   i18n.tr("Numbers only (4 digits)")
-                        else
-                            return "<b>" + i18n.tr("Passphrase") + "</b> — " +
-                                   i18n.tr("Letters, numbers, and phrases")
-                    }
-                    onClicked: {
-                        listview.currentIndex = index
-                        combo.expanded = false
-                    }
+            delegate: OptionSelectorDelegate {
+                // use subText because we want the text to be small, and we have no other way to control it
+                subText: {
+                    if (index === 0)      return i18n.tr("Swipe")
+                    else if (index === 1) return i18n.tr("Passcode")
+                    else                  return i18n.tr("Passphrase")
                 }
             }
         }
@@ -116,7 +154,7 @@ LocalComponents.Page {
         LocalComponents.StackButton {
             text: i18n.tr("Continue")
             onClicked: {
-                root.passwordMethod = indexToMethod(listview.currentIndex)
+                root.passwordMethod = indexToMethod(selector.selectedIndex)
                 pageStack.next()
             }
         }
