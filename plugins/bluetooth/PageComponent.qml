@@ -222,7 +222,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled && (count > 0)
+                visible: bluetoothActionGroup.enabled && (backend.connectedDevices.count > 0)
 
                 Repeater {
                     model: backend.connectedDevices
@@ -261,7 +261,7 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled && (count > 0)
+                visible: bluetoothActionGroup.enabled && (backend.disconnectedDevices.count > 0)
 
                 Repeater {
                     model: backend.disconnectedDevices
@@ -299,7 +299,7 @@ ItemPage {
                     right: parent.right
                 }
 
-                visible: bluetoothActionGroup.enabled && (count > 0)
+                visible: bluetoothActionGroup.enabled && (backend.autoconnectDevices.count > 0)
 
                 Repeater {
                     model: backend.autoconnectDevices
