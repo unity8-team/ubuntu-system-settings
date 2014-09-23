@@ -222,9 +222,10 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled && (backend.connectedDevices.count > 0)
+                visible: bluetoothActionGroup.enabled && (connectedRepeater.count > 0)
 
                 Repeater {
+                    id: connectedRepeater
                     model: backend.connectedDevices
                     delegate: ListItem.Standard {
                         iconSource: iconPath
@@ -261,9 +262,10 @@ ItemPage {
                     left: parent.left
                     right: parent.right
                 }
-                visible: bluetoothActionGroup.enabled && (backend.disconnectedDevices.count > 0)
+                visible: bluetoothActionGroup.enabled && (disconnectedRepeater.count > 0)
 
                 Repeater {
+                    id: disconnectedRepeater
                     model: backend.disconnectedDevices
                     delegate: ListItem.Standard {
                         iconSource: iconPath
@@ -299,9 +301,10 @@ ItemPage {
                     right: parent.right
                 }
 
-                visible: bluetoothActionGroup.enabled && (backend.autoconnectDevices.count > 0)
+                visible: bluetoothActionGroup.enabled && (autoconnectRepeater.count > 0)
 
                 Repeater {
+                    id: autoconnectRepeater
                     model: backend.autoconnectDevices
                     delegate: ListItem.Standard {
                         iconSource: iconPath
