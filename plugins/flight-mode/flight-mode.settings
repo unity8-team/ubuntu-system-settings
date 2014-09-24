@@ -5,9 +5,12 @@
     "category": "uncategorized-top",
     "priority": 1,
     "keywords": [
+        "settings",
         "flight",
         "plane",
-        "offline"
+        "offline",
+        "airplane",
+        "network"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

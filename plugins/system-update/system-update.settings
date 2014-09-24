@@ -5,10 +5,15 @@
     "category": "system",
     "priority": 5,
     "keywords": [
+        "settings",
         "system",
         "software",
         "update",
-        "settings"
+        "apps",
+        "automatic",
+        "download",
+        "upgrade",
+        "click"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

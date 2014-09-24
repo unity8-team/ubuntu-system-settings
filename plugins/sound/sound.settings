@@ -5,8 +5,15 @@
     "category": "personal",
     "priority": 1,
     "keywords": [
+        "settings",
         "sound",
-        "settings"
+        "silent",
+        "ringtone",
+        "vibrate",
+        "dialpad",
+        "message",
+        "keyboard",
+        "volume"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

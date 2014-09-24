@@ -8,8 +8,15 @@
         "phone"
     ],
     "keywords": [
+        "settings",
         "phone",
-        "settings"
+        "services",
+        "forwarding",
+        "waiting",
+        "call",
+        "dialpad",
+        "shortcuts",
+        "numbers"
     ],
     "page-component": "PageComponent.qml",
     "has-dynamic-keywords": false,

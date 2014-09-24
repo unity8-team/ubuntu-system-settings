@@ -5,8 +5,12 @@
     "category": "uncategorized-bottom",
     "priority": 1,
     "keywords": [
+        "settings",
         "reset",
-        "settings"
+        "erase",
+        "factory",
+        "clear",
+        "restore"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

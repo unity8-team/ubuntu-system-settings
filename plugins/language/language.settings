@@ -5,10 +5,19 @@
     "category": "personal",
     "priority": 2,
     "keywords": [
+        "settings",
         "language",
-        "lang",
-        "i18n",
-        "settings"
+        "keyboard",
+        "spellcheck",
+        "automatic",
+        "correct",
+        "suggestions",
+        "capitalization",
+        "punctuation",
+        "layout",
+        "display",
+        "words",
+        "vibration"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

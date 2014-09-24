@@ -8,11 +8,16 @@
         "phone"
     ],
     "keywords": [
+        "settings",
         "network",
         "wireless",
         "wifi",
         "wi-fi",
-        "settings"
+        "connect",
+        "disconnect",
+        "hidden",
+        "ip",
+        "address"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

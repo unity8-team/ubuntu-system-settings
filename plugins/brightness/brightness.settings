@@ -6,8 +6,12 @@
     "category": "system",
     "priority": 1,
     "keywords": [
+        "settings",
         "brightness",
-        "settings"
+        "display",
+        "screen",
+        "automatic",
+        "adjust"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": true,

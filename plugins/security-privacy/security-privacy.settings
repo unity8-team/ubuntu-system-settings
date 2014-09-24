@@ -5,9 +5,18 @@
     "category": "system",
     "priority": 4,
     "keywords": [
+        "settings",
         "security",
         "privacy",
-        "settings"
+        "lock",
+        "sim",
+        "pin",
+        "code",
+        "password",
+        "passphrase",
+        "swipe",
+        "allow",
+        "access"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

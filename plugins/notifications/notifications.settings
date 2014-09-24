@@ -5,9 +5,18 @@
     "category": "personal",
     "priority": 5,
     "keywords": [
+        "settings",
         "software",
         "notifications",
-        "settings"
+        "apps",
+        "authorize",
+        "alerts",
+        "permissions",
+        "badges",
+        "facebook",
+        "twitter",
+        "flickr",
+        "gmail"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

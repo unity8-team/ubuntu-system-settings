@@ -5,9 +5,14 @@
     "category": "personal",
     "priority": 0,
     "keywords": [
+        "settings",
         "appearance",
         "background",
-        "wallpaper"
+        "wallpaper",
+        "art",
+        "photo",
+        "picture",
+        "image"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

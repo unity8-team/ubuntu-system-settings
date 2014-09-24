@@ -6,8 +6,14 @@
     "category": "system",
     "priority": 0,
     "keywords": [
+        "settings",
         "battery",
-        "power"
+        "power",
+        "charge",
+        "idle",
+        "lock",
+        "disable",
+        "enable"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": true,

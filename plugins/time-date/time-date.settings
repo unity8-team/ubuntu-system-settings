@@ -5,10 +5,11 @@
     "category": "system",
     "priority": 3,
     "keywords": [
+        "settings",
         "time",
         "date",
         "timezone",
-        "settings"
+        "automatic"
     ],
     "page-component": "PageComponent.qml",
     "has-dynamic-keywords": false,
