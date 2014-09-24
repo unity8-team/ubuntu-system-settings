@@ -151,6 +151,7 @@ void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
                     else if (QIcon::hasThemeIcon(qIcon)) // try the icon theme
                         newClick->icon = qIcon;
                 }
+                goto out;
             }
         }
 out:
