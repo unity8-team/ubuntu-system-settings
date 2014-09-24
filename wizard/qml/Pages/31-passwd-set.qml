@@ -31,6 +31,9 @@ LocalComponents.Page {
 
     skip: root.passwordMethod === UbuntuSecurityPrivacyPanel.Swipe
 
+    // If we are entering this page, clear any saved password and get focus
+    onEnabledChanged: if (enabled) lockscreen.clear(false)
+
     UnityComponents.Lockscreen {
         id: lockscreen
         anchors {
@@ -45,6 +48,8 @@ LocalComponents.Page {
                   i18n.tr("Enter passphrase") :
                   i18n.tr("Choose your passcode")
 
+        errorText: i18n.tr("Passphrase must be 4 characters long")
+
         showEmergencyCallButton: false
         showCancelButton: false
         alphaNumeric: root.passwordMethod === UbuntuSecurityPrivacyPanel.Passphrase
@@ -52,9 +57,12 @@ LocalComponents.Page {
         maxPinLength: 4
 
         onEntered: {
-            root.password = passphrase
-            pageStack.push(Qt.resolvedUrl("passwd-confirm.qml"))
-            clear(false)
+            if (passphrase.length >= 4) {
+                root.password = passphrase
+                pageStack.load(Qt.resolvedUrl("passwd-confirm.qml"))
+            } else {
+                lockscreen.clear(true)
+            }
         }
     }
 

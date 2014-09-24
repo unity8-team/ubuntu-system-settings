@@ -30,6 +30,9 @@ LocalComponents.Page {
 
     skip: root.passwordMethod === UbuntuSecurityPrivacyPanel.Swipe
 
+    // If we are entering this page, clear any saved password and get focus
+    onEnabledChanged: if (enabled) lockscreen.clear(false)
+
     UnityComponents.Lockscreen {
         id: lockscreen
         anchors {
@@ -57,7 +60,6 @@ LocalComponents.Page {
         onEntered: {
             if (passphrase === root.password) {
                 pageStack.next()
-                clear(false)
             } else {
                 clear(true)
             }

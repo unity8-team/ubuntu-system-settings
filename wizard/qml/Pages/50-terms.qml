@@ -57,7 +57,7 @@ LocalComponents.Page {
             id: termsCheck
             showDivider: false
             text: i18n.tr("I have read and agreed to the HERE <a href='here-terms.qml'>terms and conditions</a>")
-            onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
+            onLinkActivated: pageStack.load(Qt.resolvedUrl(link))
             checked: System.hereEnabled
             onTriggered: System.hereEnabled = checked
         }
