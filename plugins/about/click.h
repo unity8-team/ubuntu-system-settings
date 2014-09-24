@@ -58,8 +58,8 @@ public:
 
 private:
     void populateFromDesktopOrIniFile(Click *newClick,
-                                 QVariantMap hooks,
-                                 QDir directory);
+                                      QVariantMap hooks,
+                                      QDir directory);
     Click buildClick(QVariantMap manifest);
     QList<Click> buildClickList();
 

@@ -43,8 +43,8 @@ ClickModel::ClickModel(QObject *parent):
  * Will set with information from the first desktop or ini file found and parsed.
  */
 void ClickModel::populateFromDesktopOrIniFile (Click *newClick,
-                                          QVariantMap hooks,
-                                          QDir directory)
+                                               QVariantMap hooks,
+                                               QDir directory)
 {
     QVariantMap appHooks;
     GKeyFile *appinfo = g_key_file_new();
