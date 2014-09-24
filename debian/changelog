@@ -1,3 +1,15 @@
+ubuntu-system-settings (0.3+14.10.20140924-0ubuntu1) utopic; urgency=low
+
+  [ Albert Astals ]
+  * make pot
+
+  [ Oliver Grawert ]
+  * fix LP: #1365903, add a watch to Developer Mode page so the page
+    gets refreshed when going back through the page stack, also fix the
+    page id and bounds (LP: #1365903)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 24 Sep 2014 11:10:54 +0000
+
 ubuntu-system-settings (0.3+14.10.20140917.1-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]

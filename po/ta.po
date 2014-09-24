@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-11 12:06-0400\n"
+"POT-Creation-Date: 2014-09-22 19:11+0200\n"
 "PO-Revision-Date: 2014-09-14 20:20+0000\n"
 "Last-Translator: solomon sunder <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
@@ -15,10 +15,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-15 07:12+0000\n"
+"X-Launchpad-Export-Date: 2014-09-23 07:18+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
-#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:110
+#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
 msgid "System Settings"
 msgstr "கணினி அமைப்புகள்"
 
@@ -30,297 +30,73 @@ msgstr ""
 msgid "Preferences;Settings;"
 msgstr "விருப்பங்கள்;அமைப்புகள்"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/wifi//PageComponent.qml:26
-#: ../plugins/battery//PageComponent.qml:333
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:10
-msgid "Wi-Fi"
-msgstr "வை-பை"
-
-#: ../plugins/wifi//PageComponent.qml:114
-#: ../plugins/wifi//PreviousNetworks.qml:26
-msgid "Previous networks"
+#: ../plugins/language//RebootNecessary.qml:34
+#: ../plugins/reset//ResetLauncherHome.qml:59
+msgid "The phone needs to restart for changes to take effect."
 msgstr ""
 
-#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
 msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PageComponent.qml:126
-msgid "Security"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:68
-#: ../plugins/bluetooth//PageComponent.qml:116
-#: ../plugins/bluetooth//PageComponent.qml:323
-#: ../plugins/bluetooth//PageComponent.qml:344
-msgid "None"
-msgstr "வெற்று"
-
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 தனிப்பட்ட"
-
-#: ../plugins/wifi//OtherNetwork.qml:70
-msgid "WEP"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:77 ../plugins/wifi//NetworkDetails.qml:61
-msgid "Password"
-msgstr "கடவுச்சொல்:"
-
-#: ../plugins/wifi//OtherNetwork.qml:90
-msgid "Password visible"
-msgstr ""
-
-#: ../plugins/wifi//OtherNetwork.qml:113
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/wifi//OtherNetwork.qml:137
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/phone//CallForwarding.qml:139
+#: ../plugins/reset//ResetAllSettings.qml:38
 #: ../plugins/reset//EraseEverything.qml:54
 #: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/language//DisplayLanguage.qml:98
-#: ../plugins/language//RebootNecessary.qml:47
-#: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//SimPin.qml:146
-#: ../plugins/security-privacy//SimPin.qml:263
 #: ../plugins/security-privacy//LockSecurity.qml:283
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/security-privacy//SimPin.qml:149
+#: ../plugins/security-privacy//SimPin.qml:266
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
 #: ../plugins/background//Preview.qml:101
 #: ../plugins/cellular//Components//SimEditor.qml:189
 #: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: ../plugins/wifi//OtherNetwork.qml:122
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Connect"
-msgstr "இணை"
+#: ../plugins/language//KeyboardLayouts.qml:26
+#: ../plugins/language//PageComponent.qml:117
+msgid "Keyboard layouts"
+msgstr "விசைப்பலகை அமைப்புகள்"
 
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr ""
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "தற்போதைய அமைப்புகள்:"
 
-#: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:343
-msgid "Name"
-msgstr "பெயர்"
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "எல்லா அமைப்புகளும் இருக்கின்றன:"
 
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr ""
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
+msgid "Spell checking"
+msgstr "சொல்திருத்தம்"
 
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/about//PageComponent.qml:166
-#: ../plugins/security-privacy//PageComponent.qml:140
-#: ../plugins/security-privacy//PhoneLocking.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/system-update//PageComponent.qml:563
-#: ../plugins/system-update//Configuration.qml:53
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//PageComponent.qml:324
-#: ../plugins/battery//SleepValues.qml:106
-msgid "Never"
-msgstr "எப்போதுமில்லை"
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "தற்போதைய உச்சரிப்பு மொழிகளில்:"
 
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr "கடவுச்சொல்லைக் காண்பி"
-
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr ""
-
-#: ../plugins/wifi//NetworkDetailsBrief.qml:42
-#: ../plugins/bluetooth//PageComponent.qml:408
-msgid "Disconnect"
-msgstr "துண்டிக்கவும்"
-
-#: ../plugins/wifi//NetworkDetailsBrief.qml:58
-msgid "IP address"
-msgstr "ஐபி  முகவரி"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:22
-msgid "Reset phone"
-msgstr "தொலைப்பேசையை மீட்டமை"
-
-#: ../plugins/reset//PageComponent.qml:73
-#: ../plugins/reset//ResetLauncherHome.qml:44
-msgid "Reset Launcher"
-msgstr ""
-
-#: ../plugins/reset//PageComponent.qml:87
-msgid "Reset all system settings…"
-msgstr "அனைத்து கணினி அமைப்புகளையும் மீட்டமை..."
-
-#: ../plugins/reset//PageComponent.qml:101
-msgid "Erase & Reset Everything…"
-msgstr ""
-
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr ""
-"அனைத்து ஆவணங்கள், சேமிக்கபட்ட விளையாட்டுகள், அமைப்புகள், மற்றும் மற்ற "
-"உருப்பிடிகள் நிரந்தரமாக இந்த தொலைப்பேசியிலிருந்து நீக்கப்படும்."
-
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr ""
-
-#: ../plugins/reset//ResetLauncherHome.qml:59
-#: ../plugins/language//RebootNecessary.qml:34
-msgid "The phone needs to restart for changes to take effect."
-msgstr ""
-
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr ""
-"தொடக்கத்தின் அமைப்பு மற்றும் உள்ளடக்கங்கள், மற்றும் முகப்பு திரையிலுள்ள "
-"வடிப்பான்கள் அதனுடைய உண்மை அமைப்புகளுக்கு திரும்பிவிடும்."
-
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "அனைத்து கணினி அமைப்புகளையும் மீட்டமை"
-
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-#: ../plugins/cellular//Components//MultiSim.qml:68
-msgid "Carriers"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarriers.qml:49
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:131
-#: ../plugins/battery//PageComponent.qml:287
-#: ../plugins/cellular//Components//NoSim.qml:48
-#: ../plugins/cellular//Components//SingleSim.qml:62
-msgid "N/A"
-msgstr "பொருந்தாது"
-
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr ""
-
-#: ../plugins/cellular//HotspotSetup.qml:94
-#: ../plugins/security-privacy//SimPin.qml:154
-#: ../plugins/security-privacy//LockSecurity.qml:302
-msgid "Change"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:28
-msgid "Cellular"
-msgstr "செல்லுலார்"
-
-#: ../plugins/cellular//Hotspot.qml:29
-#: ../plugins/cellular//Components//MultiSim.qml:48
-#: ../plugins/cellular//Components//SingleSim.qml:43
-msgid "Wi-Fi hotspot"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:40
-msgid "Hotspot"
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:60
-msgid ""
-"When hotspot is on, other devices can use your cellular data connection over "
-"Wi-Fi. Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:61
-msgid ""
-"Other devices can use your cellular data connection over the Wi-Fi network. "
-"Normal data charges apply."
-msgstr ""
-
-#: ../plugins/cellular//Hotspot.qml:65
-msgid "Set up hotspot"
-msgstr ""
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "கேரியர் தேர்வு:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Automatically"
-msgstr "தன்னிச்சையாக"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:149
-msgid "Manually"
-msgstr "கைமுறையாக"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "புதுப்பி"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "தேடுகிறது"
-
-#: ../plugins/language//DisplayLanguage.qml:36
-msgid "Display language"
-msgstr "மொழியை காட்டு"
-
-#: ../plugins/language//DisplayLanguage.qml:118
-msgid "Confirm"
-msgstr "உறுதிப்படுத்து"
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "அனைத்து மொழிகளும் இருக்கின்றன."
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../plugins/language//PageComponent.qml:34
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:40
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:2
 msgid "Language & Text"
 msgstr "மொழி & உரை"
 
 #: ../plugins/language//PageComponent.qml:100
 msgid "Display language…"
 msgstr ""
-
-#: ../plugins/language//PageComponent.qml:117
-#: ../plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "விசைப்பலகை அமைப்புகள்"
-
-#: ../plugins/language//PageComponent.qml:132
-#: ../plugins/language//PageComponent.qml:142
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-msgid "Spell checking"
-msgstr "சொல்திருத்தம்"
 
 #: ../plugins/language//PageComponent.qml:152
 msgid "Auto correction"
@@ -357,29 +133,283 @@ msgstr "விசைப்பலகை ஒலி"
 msgid "Keyboard vibration"
 msgstr ""
 
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "தற்போதைய அமைப்புகள்:"
+#: ../plugins/language//DisplayLanguage.qml:36
+msgid "Display language"
+msgstr "மொழியை காட்டு"
 
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "எல்லா அமைப்புகளும் இருக்கின்றன:"
+#: ../plugins/language//DisplayLanguage.qml:118
+msgid "Confirm"
+msgstr "உறுதிப்படுத்து"
 
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "தற்போதைய உச்சரிப்பு மொழிகளில்:"
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Lock the phone when it's not in use:"
+msgstr "தொலைப்பேசி பயன்பாட்டில் இல்லாதபோது பூட்டு:"
 
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "அனைத்து மொழிகளும் இருக்கின்றன."
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "தொலைப்பேசி பயன்பாட்டில் இல்லாதபோது முடக்கி வை:"
 
-#: ../plugins/language//RebootNecessary.qml:38
-msgid "Restart Now"
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "A %1 நிமிடத்திற்கு பிறகு"
+msgstr[1] "A %1 நிமிடங்களுக்கு பிறகு"
+
+#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/system-update//PageComponent.qml:568
+#: ../plugins/about//PageComponent.qml:162
+#: ../plugins/security-privacy//PhoneLocking.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:140
+msgid "Never"
+msgstr "எப்போதுமில்லை"
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
 msgstr ""
+"குறைந்த நேர்ங்கள் அதிக பாதுகாப்பானது. படம் பார்க்கும்பொழுது அல்லது "
+"அழைப்பிலிருக்கும்போதும் தொலைப்பேசி பூட்டிக்கொள்ளாது."
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid "Phone won’t sleep during calls or video playback."
+msgstr ""
+"தொலைப்பேசியானது அழைப்பில் அல்லது படம் பாரக்கும் பொழுதும் முடங்காது."
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:34
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:12
+msgid "Battery"
+msgstr "மின்கலம்"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery//PageComponent.qml:46
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 வினாடிக்கு முன்"
+msgstr[1] "%1 வினாடிகளுக்கு முன்"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:49
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 நிமிடத்திற்கு முன்"
+msgstr[1] "%1 நிமிடங்களுக்கு முன்"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery//PageComponent.qml:52
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 மணி நேரத்திற்கு முன்"
+msgstr[1] "%1 மணி நேரத்திற்கு முன்"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery//PageComponent.qml:55
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 நாளுக்கு முன்"
+msgstr[1] "%1 நாட்களுக்கு முன்"
+
+#: ../plugins/battery//PageComponent.qml:85
+msgid "Charging now"
+msgstr "இப்போது மின்னேற்றுகிறது"
+
+#: ../plugins/battery//PageComponent.qml:90
+msgid "Last full charge"
+msgstr "முழு மின்கலமும் முடிந்தது"
+
+#: ../plugins/battery//PageComponent.qml:95
+msgid "Fully charged"
+msgstr "முழு மின்கலமும் மின்னேற்றப்பட்டது"
+
+#: ../plugins/battery//PageComponent.qml:126
+msgid "Charge level"
+msgstr "மின்கல அளவு"
+
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//PageChooseCarriers.qml:49
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/about//Storage.qml:204
+#: ../plugins/cellular//Components//SingleSim.qml:62
+#: ../plugins/cellular//Components//NoSim.qml:48
+msgid "N/A"
+msgstr "பொருந்தாது"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery//PageComponent.qml:134
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
+msgid "Yesterday"
+msgstr ""
+
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
+msgid "Today"
+msgstr ""
+
+#: ../plugins/battery//PageComponent.qml:292
+msgid "Ways to reduce battery use:"
+msgstr "மின்கலன் பயன்பாட்டடை குறைப்பதற்க்கான வழிகள்:"
+
+#: ../plugins/battery//PageComponent.qml:296
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr ""
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:68
+msgid "Lock when idle"
+msgstr "வேலையற்ற நிலையில் பூட்டு"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:69
+msgid "Sleep when idle"
+msgstr "வேலையற்ற நிலையில் முடங்கு"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:333
+#: ../plugins/wifi//PageComponent.qml:26
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:44
+msgid "Wi-Fi"
+msgstr "வை-பை"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:363
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:146
+msgid "Bluetooth"
+msgstr "ஃப்ளூடூத்"
+
+#: ../plugins/battery//PageComponent.qml:394
+msgid "GPS"
+msgstr "ஜிபிஎஸ்"
+
+#: ../plugins/battery//PageComponent.qml:412
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr ""
+"துல்லியமான இடத்தை கணிக்க ஜிபிஎஸ் மற்றும்/அல்லது வை-பை தேவைப்படுகிறது."
+
+#: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//Components//SingleSim.qml:43
+#: ../plugins/cellular//Components//MultiSim.qml:48
+msgid "Wi-Fi hotspot"
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr ""
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+#: ../plugins/cellular//Components//MultiSim.qml:68
+msgid "Carriers"
+msgstr ""
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "கேரியர் தேர்வு:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Automatically"
+msgstr "தன்னிச்சையாக"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/security-privacy//PageComponent.qml:149
+msgid "Manually"
+msgstr "கைமுறையாக"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "புதுப்பி"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "தேடுகிறது"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr ""
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+#: ../plugins/security-privacy//LockSecurity.qml:302
+#: ../plugins/security-privacy//SimPin.qml:157
+msgid "Change"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:18
+msgid "Cellular"
+msgstr "செல்லுலார்"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "தொலைப்பேசி சத்தமற்ற முறையில் வைக்கப்பட்டுள்ளது."
+
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "விளையாடுவதை நிறுத்து"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../plugins/sound//PageComponent.qml:37
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:58
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:38
 msgid "Sound"
 msgstr "ஒலி"
 
@@ -435,174 +465,349 @@ msgstr "மற்ற சத்தங்கள்:"
 msgid "Lock sound"
 msgstr "சத்தத்தை பூட்டு"
 
-#: ../plugins/sound//SoundsList.qml:60
-msgid "Stop playing"
-msgstr "விளையாடுவதை நிறுத்து"
+#: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
+msgid "Connect to hidden network"
+msgstr ""
 
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "தொலைப்பேசி சத்தமற்ற முறையில் வைக்கப்பட்டுள்ளது."
+#: ../plugins/wifi//OtherNetwork.qml:65
+msgid "Network name"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:93
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:64
-msgid "Phone"
-msgstr "தொலைபேசி"
+#: ../plugins/wifi//OtherNetwork.qml:78
+#: ../plugins/security-privacy//PageComponent.qml:126
+msgid "Security"
+msgstr ""
 
-#: ../plugins/phone//ServiceInfo.qml:109
+#: ../plugins/wifi//OtherNetwork.qml:79
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
+msgid "None"
+msgstr "வெற்று"
+
+#: ../plugins/wifi//OtherNetwork.qml:80
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 தனிப்பட்ட"
+
+#: ../plugins/wifi//OtherNetwork.qml:81
+msgid "WEP"
+msgstr ""
+
+#: ../plugins/wifi//OtherNetwork.qml:88 ../plugins/wifi//NetworkDetails.qml:61
+msgid "Password"
+msgstr "கடவுச்சொல்:"
+
+#: ../plugins/wifi//OtherNetwork.qml:106
+msgid "Password visible"
+msgstr ""
+
+#: ../plugins/wifi//OtherNetwork.qml:146
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Connect"
+msgstr "இணை"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "துண்டிக்கவும்"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr "ஐபி  முகவரி"
+
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:343
+msgid "Name"
+msgstr "பெயர்"
+
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr "கடவுச்சொல்லைக் காண்பி"
+
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr ""
+
+#: ../plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:129
+msgid "Previous networks"
+msgstr ""
+
+#: ../plugins/system-update//Configuration.qml:29
+#: ../plugins/system-update//PageComponent.qml:565
+msgid "Auto download"
+msgstr "தன்னிச்சையான பதிவிறக்கம்"
+
+#: ../plugins/system-update//Configuration.qml:34
+msgid "Download future updates automatically:"
+msgstr "வருங்கால மேம்பாடுகளை தன்னிச்சையாக பதிவிறக்கு;"
+
+#: ../plugins/system-update//Configuration.qml:53
+msgid "When on wi-fi"
+msgstr "வை-பை செயற்பாட்டிலுள்ள போது"
+
+#: ../plugins/system-update//Configuration.qml:54
+msgid "On any data connection"
+msgstr "எந்தவித தரவு இணைப்பிலும்"
+
+#: ../plugins/system-update//Configuration.qml:55
+msgid "Data charges may apply."
+msgstr "தரவு கட்டணம் இருக்கலாம்."
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:37
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:58
+msgid "Updates"
+msgstr "மேம்பாடுகள்"
+
+#: ../plugins/system-update//PageComponent.qml:94
+msgid "Update System"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:95
+msgid "The phone needs to restart to install the system update."
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:95
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:98
+msgid "Install & Restart"
+msgstr "நிறுவு & மீள்துவக்கு"
+
+#: ../plugins/system-update//PageComponent.qml:108
+msgid "Not Now"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:114
+msgid "Install"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:135
+msgid "Software is up to date"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:243
+msgid "Checking for updates…"
+msgstr "புதுப்பித்தல்களுக்கு தேடுகிறது..."
+
+#: ../plugins/system-update//PageComponent.qml:261
 #, qt-format
-msgid "Last called %1"
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/system-update//PageComponent.qml:262
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/system-update//PageComponent.qml:263
+msgid "Pause All"
 msgstr ""
 
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "அழை"
+#: ../plugins/system-update//PageComponent.qml:317
+msgid "Retry"
+msgstr "மீண்டும் முயல்க"
 
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76 ../plugins/phone//SingleSim.qml:33
-msgid "Call forwarding"
-msgstr "அழைப்பை முன்னனுப்புகிறது"
+#: ../plugins/system-update//PageComponent.qml:333
+msgid "Download"
+msgstr "பதவிறக்கம்"
 
-#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
-#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
-#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-msgid "Call waiting"
-msgstr "அழைப்பு காத்திருக்கிறது"
-
-#: ../plugins/phone//MultiSim.qml:56 ../plugins/phone//MultiSim.qml:94
-#: ../plugins/phone//NoSims.qml:42
-msgid "Services"
+#: ../plugins/system-update//PageComponent.qml:333
+msgid "Update"
 msgstr ""
 
-#: ../plugins/phone//CallForwarding.qml:91
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"நீங்க பதில் அளிக்காத பொதெல்லாம் தொலைப்பேசி அழைப்புகள் மற்றொரு எண்ணிற்கு "
-"மாற்றி அனுப்பபடுகிறது, உங்களுடைய பேசி பயன்பாட்டில் உள்ளது, முடக்கி "
-"வைக்கபட்டுள்ளது, அல்லது தகவல் எல்லைக்கு அப்பாலுள்ளது."
-
-#: ../plugins/phone//CallForwarding.qml:101
-msgid "Forward to"
+#: ../plugins/system-update//PageComponent.qml:334
+msgid "Resume"
 msgstr ""
 
-#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/system-update//PageComponent.qml:335
+msgid "Pause"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:393
+msgid "Installing"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:426
+msgid "Installed"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:452
+msgid "Version: "
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:474
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:483
+msgid "Sign In…"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:550
+msgid "Installing update…"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:570
+msgid "On wi-fi"
+msgstr "வை-பையில்"
+
+#: ../plugins/system-update//PageComponent.qml:572
+msgid "Always"
+msgstr "எப்போதும்"
+
+#: ../plugins/system-update//PageComponent.qml:587
+msgid " bytes"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:590
+msgid " KiB"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:593
+msgid " MiB"
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:596
+msgid " GiB"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:68
+msgid "Brightness"
+msgstr "வெளிச்சம்"
+
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr ""
+
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr ""
+
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "நேர மண்டலம்"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "நேர மண்டலத்தை அமை:"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "உங்களுடைய இருப்படத்தை உள்ளிடு."
+
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "பொருந்திய இடங்கள் காணவில்லை"
+
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "நேரம் & தேதியை அமை"
+
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "நேரம்"
+
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "மணி"
+
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "நிமிடம்"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "வினாடி"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "தேதி"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "நாள்"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "மாதம்"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "ஆண்டு"
+
 #: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/phone//CallForwarding.qml:152
 #: ../plugins/security-privacy//LockSecurity.qml:304
 #: ../plugins/background//Preview.qml:108
 msgid "Set"
 msgstr "அமை"
 
-#: ../plugins/phone//SingleSim.qml:29
-msgid "SIM"
-msgstr "சிம்"
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:74
+msgid "Time & Date"
+msgstr "நேரம் மற்றும் தேதி"
 
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
-#, qt-format
-msgid "%1 Services"
-msgstr "%1 சேவைகள்"
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "நேரம் மண்டலம்:"
 
-#: ../plugins/phone//CallWaiting.qml:89
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-"நீங்க பதலளிங்க அல்லது மற்றொரு அழைப்பிலிருக்கும் பொது புதிய அழைப்பை "
-"உருவாக்கு, அவற்றிரண்டிற்கும் இடையில் மாற்றும் கொள்"
-
-#: ../plugins/about//License.qml:30
-msgid "Sorry, this license could not be displayed."
-msgstr ""
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "நேரம் மற்றும் தேதியை அமை:"
 
 #: ../plugins/about//Version.qml:36
 msgid "OS Build Details"
 msgstr ""
 
-#: ../plugins/about//Version.qml:65
+#: ../plugins/about//Version.qml:61
 msgid "OS build number"
 msgstr ""
 
-#: ../plugins/about//Version.qml:71
+#: ../plugins/about//Version.qml:67
 msgid "Ubuntu Image part"
 msgstr ""
 
-#: ../plugins/about//Version.qml:79
+#: ../plugins/about//Version.qml:75
 msgid "Ubuntu build description"
 msgstr ""
 
-#: ../plugins/about//Version.qml:85
+#: ../plugins/about//Version.qml:81
 msgid "Device Image part"
 msgstr ""
 
-#: ../plugins/about//Version.qml:92
+#: ../plugins/about//Version.qml:88
 msgid "Device build description"
 msgstr ""
 
-#: ../plugins/about//Version.qml:99
+#: ../plugins/about//Version.qml:95
 msgid "Customization Image part"
 msgstr ""
 
-#: ../plugins/about//PhoneNumbers.qml:31
-msgid "Phone number:"
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:70
-msgid "About this phone"
-msgstr "இந்த தொலைப்பேசியைப் பற்றி"
-
-#: ../plugins/about//PageComponent.qml:109
-msgid "Serial"
-msgstr "தொடர்"
-
-#: ../plugins/about//PageComponent.qml:124
-msgid "Wi-Fi address"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:132
-msgid "Bluetooth address"
-msgstr ""
-
-#: ../plugins/about//PageComponent.qml:143 ../plugins/about//Storage.qml:33
-msgid "Storage"
-msgstr "சேமிப்பகம்"
-
-#: ../plugins/about//PageComponent.qml:150
-msgid "Software:"
-msgstr "மென்பொருள்:"
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "OS"
-msgstr "இயங்கு தளம்"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Last updated"
-msgstr "கடைசியாக புதுப்பிக்கப்பட்டது"
-
-#: ../plugins/about//PageComponent.qml:172
-msgid "Check for updates"
-msgstr "புதுப்பிக்க வேண்டியதை சரிபார்க்கவும்"
-
-#: ../plugins/about//PageComponent.qml:181
-msgid "Legal:"
-msgstr "சட்டரீதியான:"
-
-#: ../plugins/about//PageComponent.qml:186 ../plugins/about//Software.qml:11
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
 msgid "Software licenses"
 msgstr "மென்பொருள் உரிமம்"
-
-#: ../plugins/about//PageComponent.qml:194
-msgid "Regulatory info"
-msgstr "ஒழுங்குமுறை தகவல்"
-
-#: ../plugins/about//PageComponent.qml:202
-msgid "Developer mode"
-msgstr ""
 
 #: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
 msgid "Developer Mode"
@@ -619,10 +824,68 @@ msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
 
 #: ../plugins/about//DevMode.qml:114
-#: ../plugins/security-privacy//PhoneLocking.qml:49
 #: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/security-privacy//PhoneLocking.qml:49
 msgid "Lock security"
 msgstr "பாதுகாப்பை பூட்டு"
+
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:84
+msgid "About this phone"
+msgstr "இந்த தொலைப்பேசியைப் பற்றி"
+
+#: ../plugins/about//PageComponent.qml:105
+msgid "Serial"
+msgstr "தொடர்"
+
+#: ../plugins/about//PageComponent.qml:120
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:128
+msgid "Bluetooth address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:139 ../plugins/about//Storage.qml:33
+msgid "Storage"
+msgstr "சேமிப்பகம்"
+
+#: ../plugins/about//PageComponent.qml:146
+msgid "Software:"
+msgstr "மென்பொருள்:"
+
+#: ../plugins/about//PageComponent.qml:151
+msgid "OS"
+msgstr "இயங்கு தளம்"
+
+#: ../plugins/about//PageComponent.qml:160
+msgid "Last updated"
+msgstr "கடைசியாக புதுப்பிக்கப்பட்டது"
+
+#: ../plugins/about//PageComponent.qml:168
+msgid "Check for updates"
+msgstr "புதுப்பிக்க வேண்டியதை சரிபார்க்கவும்"
+
+#: ../plugins/about//PageComponent.qml:177
+msgid "Legal:"
+msgstr "சட்டரீதியான:"
+
+#: ../plugins/about//PageComponent.qml:190
+msgid "Regulatory info"
+msgstr "ஒழுங்குமுறை தகவல்"
+
+#: ../plugins/about//PageComponent.qml:198
+msgid "Developer mode"
+msgstr ""
 
 #: ../plugins/about//Storage.qml:87
 msgid "Used by Ubuntu"
@@ -664,13 +927,74 @@ msgstr "பெயரால்"
 msgid "By size"
 msgstr "அளவால்"
 
-#: ../plugins/about//PhoneNumber.qml:36
-msgid "Phone number"
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//SingleSim.qml:33
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76
+msgid "Call forwarding"
+msgstr "அழைப்பை முன்னனுப்புகிறது"
+
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
+msgid "Call waiting"
+msgstr "அழைப்பு காத்திருக்கிறது"
+
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
+msgid "Services"
+msgstr ""
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "சிம்"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#, qt-format
+msgid "%1 Services"
+msgstr "%1 சேவைகள்"
+
+#: ../plugins/phone//CallWaiting.qml:89
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"நீங்க பதலளிங்க அல்லது மற்றொரு அழைப்பிலிருக்கும் பொது புதிய அழைப்பை "
+"உருவாக்கு, அவற்றிரண்டிற்கும் இடையில் மாற்றும் கொள்"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr ""
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "அழை"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:92
+msgid "Phone"
+msgstr "தொலைபேசி"
+
+#: ../plugins/phone//CallForwarding.qml:91
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"நீங்க பதில் அளிக்காத பொதெல்லாம் தொலைப்பேசி அழைப்புகள் மற்றொரு எண்ணிற்கு "
+"மாற்றி அனுப்பபடுகிறது, உங்களுடைய பேசி பயன்பாட்டில் உள்ளது, முடக்கி "
+"வைக்கபட்டுள்ளது, அல்லது தகவல் எல்லைக்கு அப்பாலுள்ளது."
+
+#: ../plugins/phone//CallForwarding.qml:101
+msgid "Forward to"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../plugins/notifications//PageComponent.qml:29
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:96
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:98
 msgid "Notifications"
 msgstr ""
 
@@ -680,273 +1004,51 @@ msgid ""
 "and the Notification Center."
 msgstr ""
 
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "நேரம் & தேதியை அமை"
-
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "நேரம்"
-
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "மணி"
-
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "நிமிடம்"
-
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "வினாடி"
-
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "தேதி"
-
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "நாள்"
-
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "மாதம்"
-
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "ஆண்டு"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:104
-msgid "Time & Date"
-msgstr "நேரம் மற்றும் தேதி"
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "நேரம் மண்டலம்:"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "நேரம் மற்றும் தேதியை அமை:"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "நேர மண்டலம்"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "நேர மண்டலத்தை அமை:"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "உங்களுடைய இருப்படத்தை உள்ளிடு."
-
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "பொருந்திய இடங்கள் காணவில்லை"
-
-#: ../plugins/security-privacy//AppAccess.qml:28
-#: ../plugins/security-privacy//PageComponent.qml:253
-msgid "Other app access"
-msgstr "மற்ற பயன்பாடுகளின் அனுகல்"
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:105
-msgid "Camera"
-msgstr "புகைபட கருவி"
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:59
-#, qt-format
-msgid "%1/%2"
-msgstr ""
-
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:37
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:114
-msgid "Security & Privacy"
-msgstr "பாதுகாப்பு & தனியுரிமை"
-
-#: ../plugins/security-privacy//PageComponent.qml:100
-#: ../plugins/security-privacy//PageComponent.qml:218
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "தொலைப்பேசி மற்றும் இணையம்"
-
-#: ../plugins/security-privacy//PageComponent.qml:102
-#: ../plugins/security-privacy//PageComponent.qml:219
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "தொலைப்பேசி மட்டும்"
-
-#: ../plugins/security-privacy//PageComponent.qml:131
-msgid "Lock phone"
-msgstr ""
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:137
-#: ../plugins/security-privacy//PageComponent.qml:146
-#: ../plugins/battery//PageComponent.qml:312
-#: ../plugins/battery//PageComponent.qml:321
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "A %1 நிமிடத்திற்கு பிறகு"
-msgstr[1] "A %1 நிமிடங்களுக்கு பிறகு"
-
-#: ../plugins/security-privacy//PageComponent.qml:158
-#: ../plugins/security-privacy//SimPin.qml:34
-#: ../plugins/security-privacy//SimPin.qml:319
-msgid "SIM PIN"
-msgstr "சிம் PIN"
-
-#: ../plugins/security-privacy//PageComponent.qml:161
-#: ../plugins/security-privacy//PageComponent.qml:244
-msgid "On"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:165
-#: ../plugins/security-privacy//PageComponent.qml:244
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:50
-#: ../plugins/cellular//Components//CellularMultiSim.qml:30
-msgid "Off"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:172
-msgid "Encryption"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:181
+#: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
-"Encryption protects against access to phone data when the phone is connected "
-"to a PC or other device."
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
 msgstr ""
+"தொடக்கத்தின் அமைப்பு மற்றும் உள்ளடக்கங்கள், மற்றும் முகப்பு திரையிலுள்ள "
+"வடிப்பான்கள் அதனுடைய உண்மை அமைப்புகளுக்கு திரும்பிவிடும்."
 
-#: ../plugins/security-privacy//PageComponent.qml:185
-msgid "Privacy"
-msgstr ""
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "அனைத்து கணினி அமைப்புகளையும் மீட்டமை"
 
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "Stats on welcome screen"
-msgstr "முகப்பு திரையின் நிலைமை"
-
-#: ../plugins/security-privacy//PageComponent.qml:201
-msgid "Messages on welcome screen"
-msgstr "வரவேற்ப்பு திரை செய்திகள்"
-
-#: ../plugins/security-privacy//PageComponent.qml:216
-#: ../plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "கோடு தேடல்"
-
-#: ../plugins/security-privacy//PageComponent.qml:235
-msgid "Location access"
-msgstr "இடம் அனுகல்"
-
-#: ../plugins/security-privacy//PageComponent.qml:258
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
-msgid "Diagnostics"
-msgstr "கண்டறிதல்"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:263
-msgid "Sent"
-msgstr "அனுப்பப்பட்டது"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:266
-msgid "Not sent"
-msgstr "அனுப்பப்படாதவை"
-
-#: ../plugins/security-privacy//SimPin.qml:44
-msgid "Change SIM PIN"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:47
-#: ../plugins/security-privacy//SimPin.qml:184
-#, qt-format
-msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:79
-msgid "Current PIN:"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:91
-#: ../plugins/security-privacy//SimPin.qml:243
-#, qt-format
-msgid "%1 attempts allowed."
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:104
-msgid "Choose new PIN:"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:115
-msgid "Confirm new PIN:"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:134
-msgid "PINs don't match. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:180
-msgid "Enter SIM PIN"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:181
-msgid "Enter Previous SIM PIN"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:279
-msgid "Unlock"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:279
-msgid "Lock"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:337
-msgid "Change PIN…"
-msgstr ""
-
-#: ../plugins/security-privacy//SimPin.qml:354
+#: ../plugins/reset//EraseEverything.qml:41
 msgid ""
-"When a SIM PIN is set, it must be entered to access cellular services after "
-"restarting the phone or swapping the SIM."
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"அனைத்து ஆவணங்கள், சேமிக்கபட்ட விளையாட்டுகள், அமைப்புகள், மற்றும் மற்ற "
+"உருப்பிடிகள் நிரந்தரமாக இந்த தொலைப்பேசியிலிருந்து நீக்கப்படும்."
+
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
 msgstr ""
 
-#: ../plugins/security-privacy//SimPin.qml:358
-msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr ""
+
+#: ../plugins/reset//ResetLauncherHome.qml:44
+#: ../plugins/reset//PageComponent.qml:73
+msgid "Reset Launcher"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../plugins/reset//PageComponent.qml:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:114
+msgid "Reset phone"
+msgstr "தொலைப்பேசையை மீட்டமை"
+
+#: ../plugins/reset//PageComponent.qml:87
+msgid "Reset all system settings…"
+msgstr "அனைத்து கணினி அமைப்புகளையும் மீட்டமை..."
+
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
 msgstr ""
 
 #: ../plugins/security-privacy//Location.qml:31
@@ -1021,73 +1123,6 @@ msgstr ""
 msgid "Allow access to location:"
 msgstr "இடத்துக்கு அனுமதி வழங்கு:"
 
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "திருப்பிய முடிவுகளிலிருந்து:"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:31
-msgid "Phone locking"
-msgstr "தொலைப்பேசி பூட்டுகிறது"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:45
-msgctxt "Unlock with swipe"
-msgid "None"
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:46
-#: ../wizard/qml/Pages//15-passwd.qml:99
-msgid "PIN code"
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../plugins/security-privacy//LockSecurity.qml:350
-#: ../wizard/qml/Pages//15-passwd.qml:101
-msgid "Passphrase"
-msgstr "கடவுச்சொல்"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:68
-#: ../plugins/battery//PageComponent.qml:306
-msgid "Lock when idle"
-msgstr "வேலையற்ற நிலையில் பூட்டு"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:69
-#: ../plugins/battery//PageComponent.qml:306
-msgid "Sleep when idle"
-msgstr "வேலையற்ற நிலையில் முடங்கு"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PhoneLocking.qml:75
-#: ../plugins/security-privacy//PhoneLocking.qml:84
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 நிமிடம்"
-msgstr[1] "%1 நிமிடங்கள்"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:101
-msgid "Sleep locks immediately"
-msgstr "முடக்கம் உடனடியாக பூட்டிவிடுகிறது"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:106
-msgid "When locked, allow:"
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:110
-msgid "Launcher"
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:120
-msgid "Notifications and quick settings"
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:131
-msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
-
-#: ../plugins/security-privacy//PhoneLocking.qml:132
-msgid "Other apps and functions will prompt you to unlock."
-msgstr ""
-
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
@@ -1158,6 +1193,12 @@ msgstr "தேய் (பாதுகாப்பற்றது)"
 msgid "4-digit PIN code"
 msgstr ""
 
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../wizard/qml/Pages//15-passwd.qml:101
+msgid "Passphrase"
+msgstr "கடவுச்சொல்"
+
 #: ../plugins/security-privacy//LockSecurity.qml:351
 msgid "Swipe (no security)… "
 msgstr "தேய் (பாதுகாப்பற்றது)... "
@@ -1170,175 +1211,283 @@ msgstr ""
 msgid "Passphrase…"
 msgstr "் கடவுச்சொல்..."
 
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:36
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:124
-msgid "Updates"
-msgstr "மேம்பாடுகள்"
+#: ../plugins/security-privacy//Dash.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:216
+msgid "Dash search"
+msgstr "கோடு தேடல்"
 
-#: ../plugins/system-update//PageComponent.qml:87
-msgid "Update System"
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "திருப்பிய முடிவுகளிலிருந்து:"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
+msgid "Phone only"
+msgstr "தொலைப்பேசி மட்டும்"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
+msgid "Phone and Internet"
+msgstr "தொலைப்பேசி மற்றும் இணையம்"
+
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:322
+#: ../plugins/security-privacy//PageComponent.qml:158
+msgid "SIM PIN"
+msgstr "சிம் PIN"
+
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "The phone needs to restart to install the system update."
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:88
-msgid "Connect the phone to power before installing the system update."
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:91
-msgid "Install & Restart"
-msgstr "நிறுவு & மீள்துவக்கு"
-
-#: ../plugins/system-update//PageComponent.qml:101
-msgid "Not Now"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:107
-msgid "Install"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:128
-msgid "Software is up to date"
-msgstr ""
-
-#: ../plugins/system-update//PageComponent.qml:239
-msgid "Checking for updates…"
-msgstr "புதுப்பித்தல்களுக்கு தேடுகிறது..."
-
-#: ../plugins/system-update//PageComponent.qml:257
+#: ../plugins/security-privacy//SimPin.qml:47
 #, qt-format
-msgid "Install %1 update…"
-msgid_plural "Install %1 updates…"
+msgid "Incorrect PIN. %1 attempt remaining."
+msgid_plural "Incorrect PIN. %1 attempts remaining."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/system-update//PageComponent.qml:258
+#: ../plugins/security-privacy//SimPin.qml:81
+msgid "Current PIN:"
+msgstr ""
+
+#: ../plugins/security-privacy//SimPin.qml:93
 #, qt-format
-msgid "Install %1 update"
-msgid_plural "Install %1 updates"
+msgid "%1 attempt allowed."
+msgid_plural "%1 attempts allowed."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../plugins/system-update//PageComponent.qml:259
-msgid "Pause All"
+#: ../plugins/security-privacy//SimPin.qml:107
+msgid "Choose new PIN:"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:313
-msgid "Retry"
-msgstr "மீண்டும் முயல்க"
-
-#: ../plugins/system-update//PageComponent.qml:329
-msgid "Download"
-msgstr "பதவிறக்கம்"
-
-#: ../plugins/system-update//PageComponent.qml:329
-msgid "Update"
+#: ../plugins/security-privacy//SimPin.qml:118
+msgid "Confirm new PIN:"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:330
-msgid "Resume"
+#: ../plugins/security-privacy//SimPin.qml:137
+msgid "PINs don't match. Try again."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:331
-msgid "Pause"
+#: ../plugins/security-privacy//SimPin.qml:183
+msgid "Enter SIM PIN"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:389
-msgid "Installing"
+#: ../plugins/security-privacy//SimPin.qml:184
+msgid "Enter Previous SIM PIN"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:422
-msgid "Installed"
+#: ../plugins/security-privacy//SimPin.qml:187
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:447
-msgid "Version: "
+#: ../plugins/security-privacy//SimPin.qml:246
+#, qt-format
+msgid "%1 attempts allowed."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:469
-msgid "Sign in to Ubuntu One to receive updates for apps."
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Unlock"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:478
-msgid "Sign In…"
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Lock"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:545
-msgid "Installing update…"
+#: ../plugins/security-privacy//SimPin.qml:340
+msgid "Change PIN…"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:560
-#: ../plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr "தன்னிச்சையான பதிவிறக்கம்"
-
-#: ../plugins/system-update//PageComponent.qml:565
-msgid "On wi-fi"
-msgstr "வை-பையில்"
-
-#: ../plugins/system-update//PageComponent.qml:567
-msgid "Always"
-msgstr "எப்போதும்"
-
-#: ../plugins/system-update//PageComponent.qml:582
-msgid " bytes"
+#: ../plugins/security-privacy//SimPin.qml:357
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:585
-msgid " KiB"
+#: ../plugins/security-privacy//SimPin.qml:361
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:588
-msgid " MiB"
+#: ../plugins/security-privacy//PhoneLocking.qml:31
+msgid "Phone locking"
+msgstr "தொலைப்பேசி பூட்டுகிறது"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
 msgstr ""
 
-#: ../plugins/system-update//PageComponent.qml:591
-msgid " GiB"
+#: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//15-passwd.qml:99
+msgid "PIN code"
 msgstr ""
 
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "வருங்கால மேம்பாடுகளை தன்னிச்சையாக பதிவிறக்கு;"
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:75
+#: ../plugins/security-privacy//PhoneLocking.qml:84
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 நிமிடம்"
+msgstr[1] "%1 நிமிடங்கள்"
 
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "வை-பை செயற்பாட்டிலுள்ள போது"
+#: ../plugins/security-privacy//PhoneLocking.qml:101
+msgid "Sleep locks immediately"
+msgstr "முடக்கம் உடனடியாக பூட்டிவிடுகிறது"
 
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "எந்தவித தரவு இணைப்பிலும்"
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr ""
 
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "தரவு கட்டணம் இருக்கலாம்."
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr ""
 
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:28
+#: ../plugins/security-privacy//PageComponent.qml:253
+msgid "Other app access"
+msgstr "மற்ற பயன்பாடுகளின் அனுகல்"
+
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:105
+msgid "Camera"
+msgstr "புகைபட கருவி"
+
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:59
+#, qt-format
+msgid "%1/%2"
+msgstr ""
+
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:138
+msgid "Security & Privacy"
+msgstr "பாதுகாப்பு & தனியுரிமை"
+
+#: ../plugins/security-privacy//PageComponent.qml:131
+msgid "Lock phone"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:244
+msgid "On"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+msgid "Off"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:172
+msgid "Encryption"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:181
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:185
+msgid "Privacy"
+msgstr ""
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "Stats on welcome screen"
+msgstr "முகப்பு திரையின் நிலைமை"
+
+#: ../plugins/security-privacy//PageComponent.qml:201
+msgid "Messages on welcome screen"
+msgstr "வரவேற்ப்பு திரை செய்திகள்"
+
+#: ../plugins/security-privacy//PageComponent.qml:235
+msgid "Location access"
+msgstr "இடம் அனுகல்"
+
+#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
+msgid "Diagnostics"
+msgstr "கண்டறிதல்"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy//PageComponent.qml:263
+msgid "Sent"
+msgstr "அனுப்பப்பட்டது"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy//PageComponent.qml:266
+msgid "Not sent"
+msgstr "அனுப்பப்படாதவை"
+
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "ப்ளூடூத் இணக்கத்திற்க்கான கோரிக்கை"
 
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr ""
+"தயவுச்செய்து %1 இல் காட்டப்பட்ட PIN இதனுடன் பொருந்துகிறதா என "
+"உறுதிப்படுத்தவும்"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "PIN ஐ உறுதிச்செய்"
+
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
 #, qt-format
 msgid "PIN for '%1'"
 msgstr "'%1' க்கான PIN"
 
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
 msgid "Pair"
 msgstr "சோடி"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:147
-#: ../plugins/battery//PageComponent.qml:363
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:134
-msgid "Bluetooth"
-msgstr "ஃப்ளூடூத்"
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
@@ -1368,7 +1517,7 @@ msgstr "கணினி"
 msgid "Modem"
 msgstr "மோடம்"
 
-#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:145
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
 msgid "Network"
 msgstr "பிணையம்"
 
@@ -1473,130 +1622,17 @@ msgstr "சமிக்ஞை வலிமை"
 msgid "Forget this device"
 msgstr ""
 
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr ""
-"தயவுச்செய்து %1 இல் காட்டப்பட்ட PIN இதனுடன் பொருந்துகிறதா என "
-"உறுதிப்படுத்தவும்"
-
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "PIN ஐ உறுதிச்செய்"
-
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:34
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:140
-msgid "Battery"
-msgstr "மின்கலம்"
-
-#. TRANSLATORS: %1 is the number of seconds
-#: ../plugins/battery//PageComponent.qml:46
-#, qt-format
-msgid "%1 second ago"
-msgid_plural "%1 seconds ago"
-msgstr[0] "%1 வினாடிக்கு முன்"
-msgstr[1] "%1 வினாடிகளுக்கு முன்"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:49
-#, qt-format
-msgid "%1 minute ago"
-msgid_plural "%1 minutes ago"
-msgstr[0] "%1 நிமிடத்திற்கு முன்"
-msgstr[1] "%1 நிமிடங்களுக்கு முன்"
-
-#. TRANSLATORS: %1 is the number of hours
-#: ../plugins/battery//PageComponent.qml:52
-#, qt-format
-msgid "%1 hour ago"
-msgid_plural "%1 hours ago"
-msgstr[0] "%1 மணி நேரத்திற்கு முன்"
-msgstr[1] "%1 மணி நேரத்திற்கு முன்"
-
-#. TRANSLATORS: %1 is the number of days
-#: ../plugins/battery//PageComponent.qml:55
-#, qt-format
-msgid "%1 day ago"
-msgid_plural "%1 days ago"
-msgstr[0] "%1 நாளுக்கு முன்"
-msgstr[1] "%1 நாட்களுக்கு முன்"
-
-#: ../plugins/battery//PageComponent.qml:85
-msgid "Charging now"
-msgstr "இப்போது மின்னேற்றுகிறது"
-
-#: ../plugins/battery//PageComponent.qml:90
-msgid "Last full charge"
-msgstr "முழு மின்கலமும் முடிந்தது"
-
-#: ../plugins/battery//PageComponent.qml:95
-msgid "Fully charged"
-msgstr "முழு மின்கலமும் மின்னேற்றப்பட்டது"
-
-#: ../plugins/battery//PageComponent.qml:126
-msgid "Charge level"
-msgstr "மின்கல அளவு"
-
-#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:134
-#, qt-format
-msgid "%1%"
-msgstr "%1%"
-
-#: ../plugins/battery//PageComponent.qml:212
-#: ../plugins/battery//PageComponent.qml:214
-msgid "Yesterday"
+#: ../plugins/background//Preview.qml:70
+msgid "Preview"
 msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:220
-#: ../plugins/battery//PageComponent.qml:222
-msgid "Today"
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
 msgstr ""
-
-#: ../plugins/battery//PageComponent.qml:292
-msgid "Ways to reduce battery use:"
-msgstr "மின்கலன் பயன்பாட்டடை குறைப்பதற்க்கான வழிகள்:"
-
-#: ../plugins/battery//PageComponent.qml:296
-#: ../plugins/brightness//BrightnessSlider.qml:51
-msgid "Display brightness"
-msgstr ""
-
-#: ../plugins/battery//PageComponent.qml:394
-msgid "GPS"
-msgstr "ஜிபிஎஸ்"
-
-#: ../plugins/battery//PageComponent.qml:412
-msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr ""
-"துல்லியமான இடத்தை கணிக்க ஜிபிஎஸ் மற்றும்/அல்லது வை-பை தேவைப்படுகிறது."
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Lock the phone when it's not in use:"
-msgstr "தொலைப்பேசி பயன்பாட்டில் இல்லாதபோது பூட்டு:"
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "தொலைப்பேசி பயன்பாட்டில் இல்லாதபோது முடக்கி வை:"
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-"குறைந்த நேர்ங்கள் அதிக பாதுகாப்பானது. படம் பார்க்கும்பொழுது அல்லது "
-"அழைப்பிலிருக்கும்போதும் தொலைப்பேசி பூட்டிக்கொள்ளாது."
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid "Phone won’t sleep during calls or video playback."
-msgstr ""
-"தொலைப்பேசியானது அழைப்பில் அல்லது படம் பாரக்கும் பொழுதும் முடங்காது."
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:146
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:152
 msgid "Background"
 msgstr "பின்னணி"
 
@@ -1608,72 +1644,57 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: ../plugins/background//Preview.qml:70
-msgid "Preview"
+#: ../plugins/cellular//Components//SingleSim.qml:37
+#: ../plugins/cellular//Components//MultiSim.qml:42
+msgid "Hotspot disabled because Wi-Fi is off."
 msgstr ""
 
-#: ../plugins/background//Preview.qml:101
-msgid "Remove image"
+#: ../plugins/cellular//Components//SingleSim.qml:52
+#: ../plugins/cellular//Components//MultiSim.qml:58
+msgid "Data usage statistics"
+msgstr "தரவு பயன்பாட்டு நிலவரம்"
+
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:66
+#: ../plugins/cellular//Components//NoSim.qml:47
+msgid "Carrier"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:154
-msgid "Brightness"
-msgstr "வெளிச்சம்"
-
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr ""
-
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
+#: ../plugins/cellular//Components//SingleSim.qml:72
+msgid "APN"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:32
 #: ../plugins/cellular//Components//CellularMultiSim.qml:82
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
 msgid "Cellular data:"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:51
 #: ../plugins/cellular//Components//CellularMultiSim.qml:138
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
 msgid "2G only (saves battery)"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
 #: ../plugins/cellular//Components//CellularMultiSim.qml:140
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
 msgid "2G/3G/4G (faster)"
 msgstr ""
 
 #: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:72
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
 msgid "Data roaming"
 msgstr ""
 
-#: ../plugins/cellular//Components//NoSim.qml:47
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:66
-msgid "Carrier"
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
 msgstr ""
 
-#: ../plugins/cellular//Components//CellularSingleSim.qml:52
-#: ../plugins/cellular//Components//CellularMultiSim.qml:139
-msgid "2G/3G (faster)"
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
 msgstr ""
-
-#: ../plugins/cellular//Components//MultiSim.qml:42
-#: ../plugins/cellular//Components//SingleSim.qml:37
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
-
-#: ../plugins/cellular//Components//MultiSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:52
-msgid "Data usage statistics"
-msgstr "தரவு பயன்பாட்டு நிலவரம்"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
@@ -1693,16 +1714,9 @@ msgstr ""
 msgid "For messages, use:"
 msgstr ""
 
-#: ../plugins/cellular//Components//SingleSim.qml:72
-msgid "APN"
-msgstr ""
-
-#: ../plugins/cellular//Components//SimEditor.qml:77
-msgid "Edit SIM Name"
-msgstr ""
-
-#: ../plugins/cellular//Components//SimEditor.qml:200
-msgid "OK"
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+msgid "2G/3G (faster)"
 msgstr ""
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
@@ -1744,17 +1758,66 @@ msgstr ""
 msgid "Remove images…"
 msgstr ""
 
-#: ../src/qml/MainWindow.qml:131
+#: ../src/qml/MainWindow.qml:133
 msgid "Search"
 msgstr "தெடு"
 
-#: ../src/qml/MainWindow.qml:150
+#: ../src/qml/MainWindow.qml:152
 msgid "Personal"
 msgstr "தனிப்பட்ட"
 
-#: ../src/qml/MainWindow.qml:155
+#: ../src/qml/MainWindow.qml:157
 msgid "System"
 msgstr "கணினி"
+
+#: ../wizard/qml/Components//StackButton.qml:51
+#, qt-format
+msgid "〈  %1"
+msgstr ""
+
+#: ../wizard/qml/Components//StackButton.qml:54
+#, qt-format
+msgid "%1  〉"
+msgstr ""
+
+#: ../wizard/qml/Components//Page.qml:84
+msgid "Back"
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "Add a SIM card"
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
+msgstr ""
+
+#: ../wizard/qml/Pages//no-sim.qml:50 ../wizard/qml/Pages//20-wifi.qml:195
+msgid "Skip"
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hi!"
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:42
+msgid "Welcome to your Ubuntu phone."
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:50
+msgid "Let’s get started."
+msgstr ""
+
+#: ../wizard/qml/Pages//10-welcome.qml:85
+#: ../wizard/qml/Pages//15-passwd.qml:170 ../wizard/qml/Pages//20-wifi.qml:195
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//30-location.qml:79
+msgid "Continue"
+msgstr "தொடரவும்"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
@@ -1780,25 +1843,16 @@ msgstr ""
 msgid "Passphrase must be at least four characters long."
 msgstr ""
 
-#: ../wizard/qml/Pages//15-passwd.qml:170
-#: ../wizard/qml/Pages//30-location.qml:79
-#: ../wizard/qml/Pages//40-reporting.qml:50
-#: ../wizard/qml/Pages//10-welcome.qml:85 ../wizard/qml/Pages//20-wifi.qml:195
-msgid "Continue"
-msgstr "தொடரவும்"
-
 #: ../wizard/qml/Pages//terms.qml:25
 msgid "Terms & Conditions"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:60
-msgid "Use your mobile network and Wi-Fi to work out where you are"
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi‑Fi"
 msgstr ""
 
-#: ../wizard/qml/Pages//30-location.qml:69
-msgid ""
-"I have read and agreed to the HERE <a href='terms.qml'>terms and "
-"conditions</a>"
+#: ../wizard/qml/Pages//20-wifi.qml:146
+msgid "Available networks"
 msgstr ""
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
@@ -1811,18 +1865,6 @@ msgstr ""
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
-
-#: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hi!"
-msgstr ""
-
-#: ../wizard/qml/Pages//10-welcome.qml:42
-msgid "Welcome to your Ubuntu phone."
-msgstr ""
-
-#: ../wizard/qml/Pages//10-welcome.qml:50
-msgid "Let’s get started."
 msgstr ""
 
 #: ../wizard/qml/Pages//80-finished.qml:22
@@ -1841,320 +1883,308 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi‑Fi"
+#: ../wizard/qml/Pages//30-location.qml:60
+msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
-#: ../wizard/qml/Pages//20-wifi.qml:146
-msgid "Available networks"
-msgstr ""
-
-#: ../wizard/qml/Pages//20-wifi.qml:195 ../wizard/qml/Pages//no-sim.qml:50
-msgid "Skip"
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "Add a SIM card"
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:33
-msgid "Please insert a SIM card before you continue."
-msgstr ""
-
-#: ../wizard/qml/Pages//no-sim.qml:35
-msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
-
-#: ../wizard/qml/Components//Page.qml:84
-msgid "Back"
-msgstr ""
-
-#: ../wizard/qml/Components//StackButton.qml:51
-#, qt-format
-msgid "〈  %1"
-msgstr ""
-
-#: ../wizard/qml/Components//StackButton.qml:54
-#, qt-format
-msgid "%1  〉"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:2
-msgid "Example"
-msgstr "எடுத்துக்காட்டு"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:4
-msgid "example"
-msgstr "உதாரணம்"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:6
-msgid "test"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:8
-msgid "sample"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:12
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:32
-msgid "network"
-msgstr "பிணையம்"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:14
-msgid "wireless"
-msgstr "கம்பியில்லா"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:16
-msgid "wifi"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:18
-msgid "wi-fi"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:20
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:26
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:38
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:48
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:56
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:62
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:68
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:102
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:112
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:120
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:132
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:138
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:158
-msgid "settings"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:24
-msgid "reset"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:30
-msgid "cellular"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:34
-msgid "mobile"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:36
-msgid "gsm"
+#: ../wizard/qml/Pages//30-location.qml:69
+msgid ""
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:42
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
 msgid "language"
 msgstr "மொழி"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:44
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:6
 msgid "lang"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:46
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:8
 msgid "i18n"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:50
-msgid "Accessibility"
-msgstr "அணுகுத்தன்மை"
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:52
-msgid "accessibility"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:54
-msgid "a11y"
-msgstr ""
-
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:60
-msgid "sound"
-msgstr ""
-
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:66
-msgid "phone"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:72
-msgid "about"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:74
-msgid "device"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:76
-msgid "info"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:78
-msgid "Orientation Lock"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:80
-msgid "rotation"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:82
-msgid "orientation"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:84
-msgid "lock"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:86
-msgid "screen"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:88
-msgid "Flight Mode"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:90
-msgid "flight"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:92
-msgid "plane"
-msgstr "விமானம்"
-
-#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:94
-msgid "offline"
-msgstr ""
-
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:98
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:128
-msgid "software"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:100
-msgid "notifications"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:106
-msgid "time"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:108
-msgid "date"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:110
-msgid "timezone"
-msgstr ""
-
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:116
-msgid "security"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:118
-msgid "privacy"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:122
-msgid "Updates available"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:126
-msgid "system"
-msgstr ""
-
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:130
-msgid "update"
-msgstr ""
-
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:136
-msgid "bluetooth"
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:10
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:28
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:42
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:54
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:66
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:72
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:82
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:96
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:104
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:112
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:118
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:144
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:150
+msgid "settings"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:142
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:14
 msgid "battery"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:144
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:16
 msgid "power"
 msgstr ""
 
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:20
+msgid "cellular"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:22
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:46
+msgid "network"
+msgstr "பிணையம்"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:24
+msgid "mobile"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:26
+msgid "gsm"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:30
+msgid "Flight Mode"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:32
+msgid "flight"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:34
+msgid "plane"
+msgstr "விமானம்"
+
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:36
+msgid "offline"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:40
+msgid "sound"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:48
+msgid "wireless"
+msgstr "கம்பியில்லா"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:50
+msgid "wifi"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:52
+msgid "wi-fi"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:56
+msgid "Updates available"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:60
+msgid "system"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:62
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:100
+msgid "software"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:64
+msgid "update"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:70
+msgid "brightness"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:76
+msgid "time"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:78
+msgid "date"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:80
+msgid "timezone"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:86
+msgid "about"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:88
+msgid "device"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:90
+msgid "info"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:94
+msgid "phone"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:102
+msgid "notifications"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:106
+msgid "Accessibility"
+msgstr "அணுகுத்தன்மை"
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:108
+msgid "accessibility"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:110
+msgid "a11y"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:116
+msgid "reset"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:120
+msgid "Orientation Lock"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:122
+msgid "rotation"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:124
+msgid "orientation"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:126
+msgid "lock"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:128
+msgid "screen"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:130
+msgid "Example"
+msgstr "எடுத்துக்காட்டு"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:132
+msgid "example"
+msgstr "உதாரணம்"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:134
+msgid "test"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:136
+msgid "sample"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:140
+msgid "security"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:142
+msgid "privacy"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:148
+msgid "bluetooth"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:148
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:154
 msgid "appearance"
 msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:150
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:156
 msgid "background"
 msgstr "பின்னணி"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:152
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:158
 msgid "wallpaper"
 msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /storage/1/work/phablet/settings/lp1318008/build/po/settings.js:156
-msgid "brightness"
+#: ../push-helper/software_updates_helper.py:150
+msgid "There's an updated system image."
+msgstr ""
+
+#: ../push-helper/software_updates_helper.py:151
+msgid "Tap to open the system updater."
+msgstr ""
+
+#: ../plugins/system-update//system_update.cpp:92
+msgid "Can't cancel current request (can't contact service)"
+msgstr ""
+
+#: ../plugins/system-update//system_update.cpp:98
+msgid "Can't pause current request (can't contact service)"
 msgstr ""
 
 #: ../plugins/about//click.cpp:134
@@ -2179,14 +2209,6 @@ msgstr ""
 
 #: ../plugins/security-privacy//securityprivacy.cpp:383
 msgid "Authentication token manipulation error"
-msgstr ""
-
-#: ../plugins/system-update//system_update.cpp:92
-msgid "Can't cancel current request (can't contact service)"
-msgstr ""
-
-#: ../plugins/system-update//system_update.cpp:98
-msgid "Can't pause current request (can't contact service)"
 msgstr ""
 
 #~ msgid "Remove"
