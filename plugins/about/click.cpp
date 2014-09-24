@@ -114,7 +114,7 @@ void ClickModel::populateFromDesktopFile (Click *newClick,
                     if (iconFile.exists())
                         newClick->icon = iconFile.fileName();
                     else if (QIcon::hasThemeIcon(qIcon)) // try the icon theme
-                        newClick->icon = qIcon;
+                        newClick->icon = QString("icon://theme/%1").arg(qIcon);
                 }
             }
         }
@@ -140,10 +140,10 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
         // Set the icon from the click package. Might be a path or a reference to a themed icon.
         QString iconFile(manifest.value("icon", "undefined").toString());
 
-        if (directory.exists()) {
+        if (directory.exists() && iconFile != "undefined") {
             QFile icon(directory.absoluteFilePath(iconFile.simplified()));
             if (!icon.exists() && QIcon::hasThemeIcon(iconFile)) // try the icon theme
-                newClick.icon = iconFile;
+                newClick.icon = QString("image://theme/%1").arg(iconFile);
             else
                 newClick.icon = icon.fileName();
         }
