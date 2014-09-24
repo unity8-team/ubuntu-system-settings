@@ -25,7 +25,6 @@ Item {
     readonly property real topMargin: units.gu(8)
     readonly property real leftMargin: units.gu(2)
     readonly property real rightMargin: units.gu(2)
-    readonly property real bottomMargin: backButton.height + buttonMargin * 2
 
     // If you want to skip a page, mark skipValid false while you figure out
     // whether to skip, then set it to true once you've determined the value
@@ -36,7 +35,7 @@ Item {
     property bool hasBackButton: true
     property bool customBack: false
     property alias forwardButtonSourceComponent: forwardButton.sourceComponent
-    property alias content: contentItem
+    property alias content: contentHolder
 
     property string title: ""
 
@@ -64,16 +63,16 @@ Item {
     }
 
     Item {
-        id: contentItem
+        id: contentHolder
         anchors {
             top: titleLabel.bottom
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
+            bottom: backButton.top
             topMargin: units.gu(4)
             leftMargin: leftMargin
             rightMargin: rightMargin
-            bottomMargin: bottomMargin
+            bottomMargin: buttonMargin
         }
     }
 

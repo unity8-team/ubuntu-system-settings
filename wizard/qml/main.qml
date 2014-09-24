@@ -84,7 +84,12 @@ Item {
 
         Image {
             id: image
-            anchors.fill: parent
+            // Use x/y/height/width instead of anchors so that we don't adjust
+            // the image when the OSK appears.
+            x: 0
+            y: 0
+            height: root.height
+            width: root.width
             source: background.pictureUri
             fillMode: Image.PreserveAspectCrop
             visible: status === Image.Ready

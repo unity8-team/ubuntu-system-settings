@@ -41,7 +41,7 @@ LocalComponents.Page {
             topMargin: topMargin
             leftMargin: leftMargin
             rightMargin: rightMargin
-            bottomMargin: bottomMargin
+            bottomMargin: buttonMargin
         }
 
         infoText: root.passwordMethod === UbuntuSecurityPrivacyPanel.Passphrase ?
