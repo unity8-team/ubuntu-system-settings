@@ -39,7 +39,7 @@ Build-Depends: dbus-test-runner,
                pep8,
                python3-pep8,
                pyflakes,
-Standards-Version: 3.9.4
+Standards-Version: 3.9.6
 Homepage: https://launchpad.net/ubuntu-system-settings
 # If you aren't a member of ~system-settings-touch but need to upload packaging
 # changes, just go ahead.  ~system-settings-touch will notice and sync up the
@@ -82,8 +82,7 @@ Depends: ${misc:Depends},
          python3-gi,
          python3-dbus,
          gir1.2-glib-2.0
-Recommends: suru-icon-theme,
-            ubuntu-system-settings-online-accounts,
+Recommends: ubuntu-system-settings-online-accounts,
             ubuntu-touch-sounds,
 Conflicts: ubuntu-system-settings-example
 # ubuntu-push-client shipped the system settings push helper until 0.60:
