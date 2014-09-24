@@ -48,6 +48,11 @@ LocalComponents.Page {
                   i18n.tr("Enter passphrase") :
                   i18n.tr("Choose your passcode")
 
+        // Note that the number four comes from PAM settings,
+        // which we don't have a good way to interrogate.  We
+        // only do this matching instead of PAM because we want
+        // to set the password via PAM in a different place
+        // than this page.  See comments at top of passwd-type file.
         errorText: i18n.tr("Passphrase must be 4 characters long")
 
         showEmergencyCallButton: false
