@@ -135,7 +135,7 @@ ItemPage {
 
             ListItem.SingleValue {
                 objectName: "connectToHiddenNetwork"
-                text: i18n.tr("Connect to hidden network")
+                text: i18n.tr("Connect to hidden network…")
                 progression: true
                 onClicked: {
                     otherNetworLoader.source = "OtherNetwork.qml";
