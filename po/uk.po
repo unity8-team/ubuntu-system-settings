@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-11 15:42+0000\n"
+"PO-Revision-Date: 2014-09-23 08:52+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:18+0000\n"
+"X-Launchpad-Export-Date: 2014-09-24 07:38+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: uk\n"
 
@@ -482,7 +482,7 @@ msgstr "Звук блокування"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
 msgid "Connect to hidden network"
-msgstr ""
+msgstr "З’єднатися з прихованою мережею"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -1277,8 +1277,9 @@ msgstr "Зміна PIN-коду SIM-картки"
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Помилковий PIN-код. Лишилася %1 спроба."
+msgstr[1] "Помилковий PIN-код. Лишилося %1 спроби."
+msgstr[2] "Помилковий PIN-код. Лишилося %1 спроб."
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1288,8 +1289,9 @@ msgstr "Поточний PIN-код:"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Дозволено %1 спробу."
+msgstr[1] "Дозволено %1 спроби."
+msgstr[2] "Дозволено %1 спроб."
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"

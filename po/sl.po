@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-15 05:47+0000\n"
+"PO-Revision-Date: 2014-09-23 12:34+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:18+0000\n"
+"X-Launchpad-Export-Date: 2014-09-24 07:38+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -483,7 +483,7 @@ msgstr "Zvok zaklepa"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
 msgid "Connect to hidden network"
-msgstr ""
+msgstr "Poveži se s skritim omrežjem"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -1273,8 +1273,10 @@ msgstr "Spremeni PIN kartice SIM"
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nepravilen PIN. Ostaja še %1 poskusov."
+msgstr[1] "Nepravilen PIN. Ostaja še %1 poskus."
+msgstr[2] "Nepravilen PIN. Ostajata še %1 poskusa."
+msgstr[3] "Nepravilen PIN. Ostajajo še %1 poskusi."
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1284,8 +1286,10 @@ msgstr "Trenutni PIN:"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dovoljenih je %1 poskusov."
+msgstr[1] "Dovoljen je %1 poskus."
+msgstr[2] "Dovoljena sta %1 poskusa."
+msgstr[3] "Dovoljeni so %1 poskusi."
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
