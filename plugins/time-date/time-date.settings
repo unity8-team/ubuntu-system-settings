@@ -5,7 +5,6 @@
     "category": "system",
     "priority": 3,
     "keywords": [
-        "settings",
         "time",
         "date",
         "timezone",
