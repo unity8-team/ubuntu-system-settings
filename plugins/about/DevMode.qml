@@ -43,7 +43,7 @@ ItemPage {
         id: securityPrivacy
     }
 
-    onActiveChanged: devModeSwitch.checked = storedInfo.getDeveloperMode
+    onActiveChanged: devModeSwitch.checked = storedInfo.developerMode
 
     Flickable {
         id: scrollWidget
@@ -91,8 +91,8 @@ ItemPage {
                 enabled: securityPrivacy.securityType !== UbuntuSecurityPrivacyPanel.Swipe
                 control: Switch {
                     id: devModeSwitch
-                    checked: storedInfo.getDeveloperMode
-                    onClicked: checked = storedInfo.toggleDeveloperMode
+                    checked: storedInfo.developerMode
+                    onClicked: storedInfo.developerMode = checked
                 }
             }
 

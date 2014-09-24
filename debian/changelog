@@ -1,3 +1,36 @@
+ubuntu-system-settings (0.3+14.10.20140924.1-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Prevent the buttons of the wizard's password page from overlapping
+    its content when the OSK appears. (LP: #1368346) (LP: #1368346)
+
+  [ Ken VanDine ]
+  * Set the version information in the SystemUpdate constructor (LP:
+    #1371810) (LP: #1371810)
+  * [reset] Don't bail out on an isValid() check on the SystemImage
+    QDBusInterface, the docs say isValid() may not be reliable for
+    remote interfaces (LP: #1370815) (LP: #1370815)
+  * Fixed reference error for count on the various device models (LP:
+    #1362517) (LP: #1362517)
+  * [background] Use the ContentPeerPicker to select sources for
+    backgrounds (LP: #1356542) (LP: #1356542)
+
+  [ Iain Lane ]
+  * Don't check if the timedated interface is valid before calling
+    SetTime on it, it might have timed out and we should reactivate it
+    in that case.
+  * [about] Fix developerMode property to be QMLish - read & write
+    instead of separate "read" and "toggle" properties.
+  * [about] Don't display a frame for icons that can't be found,
+    improving the visual appearance. Also return the correct path for
+    click packages which use the icon theme.
+
+  [ Sebastien Bacher ]
+  * [storage] handle the scope click .ini and get the correct icons (LP:
+    #1368920)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 24 Sep 2014 16:47:25 +0000
+
 ubuntu-system-settings (0.3+14.10.20140924-0ubuntu1) utopic; urgency=low
 
   [ Albert Astals ]
@@ -9,6 +42,18 @@ ubuntu-system-settings (0.3+14.10.20140924-0ubuntu1) utopic; urgency=low
     page id and bounds (LP: #1365903)
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 24 Sep 2014 11:10:54 +0000
+
+ubuntu-system-settings (0.3+14.10.20140917.1-0ubuntu2) UNRELEASED; urgency=medium
+
+  * Some packaging fixes
+    - > is not a valid relationship. It should be >>
+    - Don't recommend suru-icon-theme since we also depend on it
+    - Bump S-V to 3.9.6 which for example allows the images we ship in
+      /usr/lib/
+    - Override binary-no-manpage lintian warnings. We're not going to get man
+      pages for u-s-s any time soon
+
+ -- Iain Lane <iain.lane@canonical.com>  Wed, 24 Sep 2014 12:12:26 +0100
 
 ubuntu-system-settings (0.3+14.10.20140917.1-0ubuntu1) utopic; urgency=low
 
