@@ -30,8 +30,8 @@ import Ubuntu.SystemSettings.SecurityPrivacy 1.0
 import Ubuntu.SystemSettings.StorageAbout 1.0
 
 ItemPage {
-    id: versionPage
-    objectName: "versionPage"
+    id: devModePage
+    objectName: "devModePage"
     title: i18n.tr("Developer Mode")
     flickable: scrollWidget
 
@@ -43,12 +43,14 @@ ItemPage {
         id: securityPrivacy
     }
 
+    onActiveChanged: devModeSwitch.checked = storedInfo.getDeveloperMode
+
     Flickable {
         id: scrollWidget
         anchors.fill: parent
 
         contentHeight: contentItem.childrenRect.height
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: (contentHeight > devModePage.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
         /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
            otherwise the UI might end up in a situation where scrolling doesn't work */
         flickableDirection: Flickable.VerticalFlick
