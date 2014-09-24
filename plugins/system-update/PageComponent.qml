@@ -186,12 +186,7 @@ ItemPage {
         }
 
         onSystemUpdateDownloaded: {
-            /*
-            if (!root.systemUpdateInProgress && !installingImageUpdate.visible) {
-                root.systemUpdateInProgress = true;
-                PopupUtils.open(dialogInstallComponent);
-            }
-            */
+            root.installAll = false;
         }
 
         onSystemUpdateFailed: {
