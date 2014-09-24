@@ -1,1 +1,2 @@
 ubuntu-system-settings binary: extra-license-file usr/share/ubuntu/settings/system/qml-plugins/about/License.qml
+ubuntu-system-settings: binary-without-manpage usr/bin/system-settings

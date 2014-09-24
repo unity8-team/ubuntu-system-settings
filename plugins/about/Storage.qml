@@ -197,7 +197,8 @@ ItemPage {
                 delegate: ListItem.SingleValue {
                     objectName: "appItem" + displayName
                     iconSource: iconPath
-                    fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
+                    fallbackIconSource: "image://theme/clear"
+                    iconFrame: iconPath // no frame for invalid icons, since these aren't app icons
                     text: displayName
                     value: installedSize ?
                                backendInfo.formatSize(installedSize) :
