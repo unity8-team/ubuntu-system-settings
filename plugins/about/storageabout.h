@@ -87,13 +87,10 @@ class StorageAbout : public QObject
                 READ ubuntuBuildID
                 CONSTANT)
 
-    Q_PROPERTY( bool getDeveloperMode
-                READ getDeveloperMode
-                CONSTANT)
-
-    Q_PROPERTY( bool toggleDeveloperMode
-                READ toggleDeveloperMode
-                CONSTANT)
+    Q_PROPERTY(bool developerMode
+               READ getDeveloperMode
+               WRITE setDeveloperMode
+               CONSTANT)
 
 public:
     explicit StorageAbout(QObject *parent = 0);
@@ -116,7 +113,7 @@ public:
     Q_INVOKABLE void populateSizes();
     Q_INVOKABLE QString getDevicePath (const QString mount_point);
     bool getDeveloperMode();
-    bool toggleDeveloperMode();
+    void setDeveloperMode(bool newMode);
 
 Q_SIGNALS:
     void sortRoleChanged();
