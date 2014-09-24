@@ -198,6 +198,10 @@ ItemPage {
                     objectName: "appItem" + displayName
                     iconSource: iconPath
                     fallbackIconSource: "image://theme/clear"   // TOFIX: use proper fallback
+                    iconFrame: {
+                        var str = "undefined"
+                        return iconPath.indexOf(str, iconPath.length - str.length) == -1
+                    }
                     text: displayName
                     value: installedSize ?
                                backendInfo.formatSize(installedSize) :
