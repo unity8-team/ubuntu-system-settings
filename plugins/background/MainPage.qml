@@ -56,8 +56,6 @@ ItemPage {
         id: selectPeer
         // when action has been activated, push the picker on the stack
         onTriggered: {                        
-            // set Connection target
-            selectedItemConnection.target = pageStack.currentPage;
             pageStack.push(picker);
         }
     }
@@ -175,11 +173,6 @@ ItemPage {
         }
     }
 
-    ContentTransferHint {
-        anchors.fill: parent
-        activeTransfer: mainPage.activeTransfer
-    }
-
     Page {
         id: picker
         visible: false
@@ -213,10 +206,17 @@ ItemPage {
                     pageStack.push(Qt.resolvedUrl("Preview.qml"), {
                         uri: uri, imported: true
                     });
+                    // set Connection target
+                    selectedItemConnection.target = pageStack.currentPage;
                 });
             }
 
             onCancelPressed: pageStack.pop();
         }
+    }
+
+    ContentTransferHint {
+        anchors.fill: parent
+        activeTransfer: mainPage.activeTransfer
     }
 }
