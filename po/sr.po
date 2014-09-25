@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-02 14:01+0000\n"
+"PO-Revision-Date: 2014-09-24 13:26+0000\n"
 "Last-Translator: Данило Шеган <Unknown>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:17+0000\n"
+"X-Launchpad-Export-Date: 2014-09-25 06:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -25,11 +25,11 @@ msgstr "Подешавања система"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "Систем;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Поставке;Подешавања;"
 
 #: ../plugins/language//RebootNecessary.qml:34
 #: ../plugins/reset//ResetLauncherHome.qml:59
@@ -38,7 +38,7 @@ msgstr "Телефон се мора ресетовати да би неке и�
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "Одмах ресетуј"
 
 #: ../plugins/language//RebootNecessary.qml:47
 #: ../plugins/language//DisplayLanguage.qml:98
@@ -476,7 +476,7 @@ msgstr "Звук закључавања"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
 msgid "Connect to hidden network"
-msgstr ""
+msgstr "Повежи се на скривену мрежу"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -522,7 +522,7 @@ msgstr "Прекини везу"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr ""
+msgstr "ИП адреса"
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -557,7 +557,7 @@ msgstr "Самопреузимање"
 
 #: ../plugins/system-update//Configuration.qml:34
 msgid "Download future updates automatically:"
-msgstr "Сам преузми будућа освежења:"
+msgstr "Сам преузми будуће доградње:"
 
 #: ../plugins/system-update//Configuration.qml:53
 msgid "When on wi-fi"
@@ -587,7 +587,7 @@ msgstr "Телефон се мора ресетовати ради доград�
 
 #: ../plugins/system-update//PageComponent.qml:95
 msgid "Connect the phone to power before installing the system update."
-msgstr ""
+msgstr "Прикључите телефон на напајање пре инсталације доградње система."
 
 #: ../plugins/system-update//PageComponent.qml:98
 msgid "Install & Restart"
@@ -663,7 +663,7 @@ msgstr "Издање: "
 
 #: ../plugins/system-update//PageComponent.qml:474
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "Пријавите се у Убунту Један да добијете освежења за програме."
+msgstr "Пријавите се у Убунту Један да добијете доградње програма."
 
 #: ../plugins/system-update//PageComponent.qml:483
 msgid "Sign In…"
@@ -671,7 +671,7 @@ msgstr "Пријави се..."
 
 #: ../plugins/system-update//PageComponent.qml:550
 msgid "Installing update…"
-msgstr "Инсталира освежење..."
+msgstr "Инсталира доградњу..."
 
 #: ../plugins/system-update//PageComponent.qml:570
 msgid "On wi-fi"
@@ -814,7 +814,7 @@ msgstr "Део прилагођеног отиска"
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "Нажалост, ова лиценца се не може приказати."
 
 #: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
 msgid "Software licenses"
@@ -844,7 +844,7 @@ msgstr "Безбедност закључавања"
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "Број телефона:"
 
 #: ../plugins/about//PhoneNumber.qml:36
 msgid "Phone number"
@@ -862,11 +862,11 @@ msgstr "Серијски"
 
 #: ../plugins/about//PageComponent.qml:120
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Бежична адреса:"
 
 #: ../plugins/about//PageComponent.qml:128
 msgid "Bluetooth address"
-msgstr ""
+msgstr "Блутут адреса:"
 
 #: ../plugins/about//PageComponent.qml:139 ../plugins/about//Storage.qml:33
 msgid "Storage"
@@ -1261,8 +1261,9 @@ msgstr "Промени ПИН за СИМ картицу"
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Нетачан ПИН. Преостао %1 покушај."
+msgstr[1] "Нетачан ПИН. Преостало %1 покушаја."
+msgstr[2] "Нетачан ПИН. Преостало %1 покушаја."
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1272,8 +1273,9 @@ msgstr "Текући ПИН:"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Дозвољен %1 покушај."
+msgstr[1] "Дозвољена %1 покушаја."
+msgstr[2] "Дозвољено %1 покушаја."
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
@@ -1336,7 +1338,7 @@ msgstr "Закључавање телефона"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "Ниједна"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1647,7 +1649,7 @@ msgstr "Преглед"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "Уклони слику"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1870,7 +1872,7 @@ msgstr "Правила и услови"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "Повежи се бежично"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
@@ -1913,6 +1915,8 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
+"Прочитао сам и прихватам <a href='terms.qml'>правила и услове</a> за HERE "
+"програм."
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
