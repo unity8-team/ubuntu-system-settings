@@ -211,7 +211,7 @@ QList<ClickModel::Click> ClickModel::buildClickList()
     gchar *clickmanifest = nullptr;
 
     clickdb = click_db_new();
-    click_db_read (clickdb, nullptr, &err);
+    click_db_read(clickdb, nullptr, &err);
     if (err != nullptr) {
         g_warning("Unable to read Click database: %s", err->message);
         g_error_free(err);
@@ -232,7 +232,7 @@ QList<ClickModel::Click> ClickModel::buildClickList()
 
     QJsonDocument jsond =
             QJsonDocument::fromJson(clickmanifest, &error);
-    g_free (clickmanifest);
+    g_free(clickmanifest);
 
     if (error.error != QJsonParseError::NoError) {
         qWarning() << error.errorString();
