@@ -73,6 +73,11 @@ int main(int argc, const char *argv[])
 
     QObject::connect(view->engine(), &QQmlEngine::quit, handleQuit);
 
+    if (qEnvironmentVariableIsSet("UNITY_MIR_EMITS_SIGSTOP")) {
+        // Emit SIGSTOP as expected by upstart, see http://upstart.ubuntu.com/cookbook/#expect-stop
+        raise(SIGSTOP);
+    }
+
     if (isMirServer) {
         view->showFullScreen();
     } else {
