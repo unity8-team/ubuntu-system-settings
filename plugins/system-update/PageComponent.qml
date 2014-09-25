@@ -150,7 +150,7 @@ ItemPage {
          id: dialogErrorComponent
          Dialog {
              id: dialogueError
-             title: i18n.tr("Installation Failed")
+             title: i18n.tr("Installation failed")
              text: root.errorDialogText
 
              Button {
@@ -235,13 +235,13 @@ ItemPage {
 
         onSystemUpdateFailed: {
             root.state = "SYSTEMUPDATEFAILED";
-            root.errorDialogText = i18n.tr("System update failed.");
+            root.errorDialogText = i18n.tr("Sorry, the system update failed.");
             PopupUtils.open(dialogErrorComponent);
         }
 
         onUpdateProcessFailed: {
             root.state = "SYSTEMUPDATEFAILED";
-            root.errorDialogText = i18n.tr("Update process failed.");
+            root.errorDialogText = i18n.tr("Sorry, the system update failed.");
             PopupUtils.open(dialogErrorComponent);
         }
 
