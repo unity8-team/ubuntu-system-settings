@@ -1,3 +1,13 @@
+ubuntu-system-settings (0.3+14.10.20140925-0ubuntu1) utopic; urgency=low
+
+  [ Michael Terry ]
+  * Add a translator comment for what HERE means. (LP: #1368838) (LP:
+    #1368838)
+  * Prevent a crash in unity8 when the wizard also crashes or stops
+    early. (LP: #1355892) (LP: #1355892)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 25 Sep 2014 00:22:52 +0000
+
 ubuntu-system-settings (0.3+14.10.20140924.1-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
