@@ -44,6 +44,7 @@ pkg_search_module(ANDR_PROP libandroid-properties)
 pkg_check_modules(QTDBUSMOCK REQUIRED libqtdbusmock-1 REQUIRED)
 pkg_check_modules(QTDBUSTEST REQUIRED libqtdbustest-1 REQUIRED)
 pkg_search_module(POLKIT_AGENT polkit-agent-1)
+pkg_search_module(CLICK REQUIRED click-0.4)
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)
