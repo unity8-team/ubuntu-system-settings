@@ -71,11 +71,11 @@ ItemPage {
 
     Image {
         id: previewImage
-        anchors.centerIn: parent
+        anchors.fill: parent
         source: uri
-        height: parent.height
         sourceSize.height: height
-        fillMode: Image.PreserveAspectFit
+        sourceSize.width: width
+        fillMode: Image.PreserveAspectCrop
     }
 
     ListItem.ThinDivider {
