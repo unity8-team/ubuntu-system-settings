@@ -30,6 +30,7 @@ ItemPage {
     }
 
     ListView {
+        id: networkList
         anchors.fill : parent
         model: pnmodel
         delegate: ListItem.Standard {
@@ -38,8 +39,22 @@ ItemPage {
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("NetworkDetails.qml"),
                 {networkName : name, password : password, lastUsed : lastUsed,
-                dbusPath : objectPath})
+                dbusPath : objectPath});
+                forgotNetworkConnection.target = pageStack.currentPage;
             }
+        }
+    }
+
+    Connections {
+        id: forgotNetworkConnection
+        ignoreUnknownSignals: true
+        onForgotNetwork: {
+            console.warn("forgot network");
+            var newModel = Qt.createQmlObject("import Ubuntu.SystemSettings.Wifi 1.0; PreviousNetworkModel {}",
+                othernetwork, "Dynamic PreviousNetworkModel");
+            pnmodel.destroy();
+            networkList.model = newModel;
+            networkList.forceLayout();
         }
     }
 }

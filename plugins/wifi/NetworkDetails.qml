@@ -33,6 +33,8 @@ ItemPage {
     property string lastUsed
     property string dbusPath
 
+    signal forgotNetwork()
+
     title: i18n.tr("Network details")
 
     Column {
@@ -87,11 +89,9 @@ ItemPage {
                 margins: units.gu(2)
             }
             onClicked : {
-                DbusHelper.forgetConnection(dbusPath)
-                pageStack.pop()
-                // Go back two steps so we don't have to update the model.
-                // If the user goes back to network list, the model is rebuilt.
-                pageStack.pop()
+                DbusHelper.forgetConnection(dbusPath);
+                networkDetails.forgotNetwork();
+                pageStack.pop();
             }
         }
     }
