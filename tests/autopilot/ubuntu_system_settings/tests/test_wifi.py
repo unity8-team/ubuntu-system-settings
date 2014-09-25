@@ -9,9 +9,10 @@ from __future__ import absolute_import
 from autopilot.matchers import Eventually
 from dbusmock.templates.networkmanager import DEVICE_IFACE
 from testtools.matchers import Equals
+from time import sleep
 from ubuntu_system_settings.tests import WifiBaseTestCase
 from ubuntu_system_settings.utils.i18n import ugettext as _
-from time import sleep
+from unittest import skip
 
 
 class WifiTestCase(WifiBaseTestCase):
@@ -69,6 +70,7 @@ class WifiTestCase(WifiBaseTestCase):
             dialog.text, Eventually(Equals(
                 _('The Wi-Fi network could not be found'))))
 
+    @skip('skipped due to bug 1337556')
     def test_connect_to_hidden_network_using_secrets(self):
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah', security='wpa', password='abcdefgh',
@@ -91,6 +93,7 @@ class WifiTestCase(WifiBaseTestCase):
         if dialog:
             dialog.wait_until_destroyed()
 
+    @skip('skipped due to bug 1337556')
     def test_connect_to_hidden_network_using_incorrect_secrets(self):
         dialog = self.wifi_page.connect_to_hidden_network(
             'yeah', security='wpa', password='abcdefgh',
