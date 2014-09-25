@@ -207,12 +207,12 @@ ClickModel::Click ClickModel::buildClick(QVariantMap manifest)
 QList<ClickModel::Click> ClickModel::buildClickList()
 {
     ClickDB *clickdb;
-    GError *err = NULL;
-    gchar *clickmanifest;
+    GError *err = nullptr;
+    gchar *clickmanifest = nullptr;
 
     clickdb = click_db_new();
-    click_db_read (clickdb, NULL, &err);
-    if (err != NULL) {
+    click_db_read (clickdb, nullptr, &err);
+    if (err != nullptr) {
         g_warning("Unable to read Click database: %s", err->message);
         g_error_free(err);
         g_object_unref(clickdb);
@@ -222,7 +222,7 @@ QList<ClickModel::Click> ClickModel::buildClickList()
     clickmanifest = click_db_get_manifests_as_string(clickdb, TRUE, &err);
     g_object_unref(clickdb);
 
-    if (err != NULL) {
+    if (err != nullptr) {
         g_warning("Unable to get the manifests: %s", err->message);
         g_error_free(err);
         return QList<ClickModel::Click>();
