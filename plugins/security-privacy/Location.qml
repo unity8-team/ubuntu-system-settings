@@ -29,83 +29,94 @@ import SystemSettings 1.0
 ItemPage {
     id: dashPage
     title: i18n.tr("Location")
+    flickable: scrollWidget
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Flickable {
+        id: scrollWidget
+        anchors.fill: parent
+        contentHeight: contentItem.childrenRect.height
+        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        /* Set the direction to workaround https://bugreports.qt-project.org/browse/QTBUG-31905
+           otherwise the UI might end up in a situation where scrolling doesn't work */
+        flickableDirection: Flickable.VerticalFlick
 
-        QDBusActionGroup {
-            id: locationActionGroup
-            busType: DBus.SessionBus
-            busName: "com.canonical.indicator.location"
-            objectPath: "/com/canonical/indicator/location"
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-            property variant enabled: action("location-detection-enabled")
+            QDBusActionGroup {
+                id: locationActionGroup
+                busType: DBus.SessionBus
+                busName: "com.canonical.indicator.location"
+                objectPath: "/com/canonical/indicator/location"
 
-            Component.onCompleted: start()
-        }
+                property variant enabled: action("location-detection-enabled")
 
-        ListItem.Standard {
-            text: i18n.tr("Location detection")
-            control: Switch {
-                id: locationOn
-                onClicked: locationActionGroup.enabled.activate()
-            }
-            visible: locationActionGroup.enabled.state !== undefined
-            Component.onCompleted:
-                clicked.connect(locationOn.clicked)
-        }
-
-        Binding {
-            target: locationOn
-            property: "checked"
-            value: locationActionGroup.enabled.state
-        }
-
-        ListItem.Caption {
-            /* TODO: replace by real info from the location service */
-            property int locationInfo: 0
-
-            text: {
-                if (locationInfo === 0) /* GPS only */
-                    return i18n.tr("Uses GPS to detect your rough location. When off, GPS turns off to save battery.")
-                else if (locationInfo === 1) /* GPS, wi-fi on */
-                    return i18n.tr("Uses wi-fi and GPS to detect your rough location. Turning off location detection saves battery.")
-                else if (locationInfo === 2) /* GPS, wi-fi off */
-                    return i18n.tr("Uses wi-fi (currently off) and GPS to detect your rough location. Turning off location detection saves battery.")
-                else if (locationInfo === 3) /* GPS, wi-fi and cellular on */
-                    return i18n.tr("Uses wi-fi, cell tower locations, and GPS to detect your rough location. Turning off location detection saves battery.")
-                else if (locationInfo === 4) /* GPS, wi-fi on, cellular off */
-                    return i18n.tr("Uses wi-fi, cell tower locations (no current cellular connection), and GPS to detect your rough location. Turning off location detection saves battery.")
-                else if (locationInfo === 5) /* GPS, wi-fi off, cellular on */
-                    return i18n.tr("Uses wi-fi (currently off), cell tower locations, and GPS to detect your rough location. Turning off location detection saves battery.")
-                else if (locationInfo === 6) /* GPS, wi-fi and cellular off */
-                    return i18n.tr("Uses wi-fi (currently off), cell tower locations (no current cellular connection), and GPS to detect your rough location. Turning off location detection saves battery.")
+                Component.onCompleted: start()
             }
 
-            visible: showAllUI /* hide until the information is real */
-        }
-
-        ListItem.Standard {
-            text: i18n.tr("Allow access to location:")
-            visible: locationOn.checked
-        }
-
-        TrustStoreModel {
-            id: trustStoreModel
-            serviceName: "UbuntuLocationService"
-        }
-
-        Repeater {
-            model: trustStoreModel
             ListItem.Standard {
-                text: model.applicationName
-                iconSource: model.iconName
+                text: i18n.tr("Location detection")
                 control: Switch {
-                    checked: model.granted
-                    onClicked: trustStoreModel.setEnabled(index, !model.granted)
+                    id: locationOn
+                    onClicked: locationActionGroup.enabled.activate()
                 }
+                visible: locationActionGroup.enabled.state !== undefined
+                Component.onCompleted:
+                    clicked.connect(locationOn.clicked)
+            }
+
+            Binding {
+                target: locationOn
+                property: "checked"
+                value: locationActionGroup.enabled.state
+            }
+
+            ListItem.Caption {
+                /* TODO: replace by real info from the location service */
+                property int locationInfo: 0
+
+                text: {
+                    if (locationInfo === 0) /* GPS only */
+                        return i18n.tr("Uses GPS to detect your rough location. When off, GPS turns off to save battery.")
+                    else if (locationInfo === 1) /* GPS, wi-fi on */
+                        return i18n.tr("Uses wi-fi and GPS to detect your rough location. Turning off location detection saves battery.")
+                    else if (locationInfo === 2) /* GPS, wi-fi off */
+                        return i18n.tr("Uses wi-fi (currently off) and GPS to detect your rough location. Turning off location detection saves battery.")
+                    else if (locationInfo === 3) /* GPS, wi-fi and cellular on */
+                        return i18n.tr("Uses wi-fi, cell tower locations, and GPS to detect your rough location. Turning off location detection saves battery.")
+                    else if (locationInfo === 4) /* GPS, wi-fi on, cellular off */
+                        return i18n.tr("Uses wi-fi, cell tower locations (no current cellular connection), and GPS to detect your rough location. Turning off location detection saves battery.")
+                    else if (locationInfo === 5) /* GPS, wi-fi off, cellular on */
+                        return i18n.tr("Uses wi-fi (currently off), cell tower locations, and GPS to detect your rough location. Turning off location detection saves battery.")
+                    else if (locationInfo === 6) /* GPS, wi-fi and cellular off */
+                        return i18n.tr("Uses wi-fi (currently off), cell tower locations (no current cellular connection), and GPS to detect your rough location. Turning off location detection saves battery.")
+                }
+
+                visible: showAllUI /* hide until the information is real */
+            }
+
+            ListItem.Standard {
+                text: i18n.tr("Allow access to location:")
                 visible: locationOn.checked
+            }
+
+            TrustStoreModel {
+                id: trustStoreModel
+                serviceName: "UbuntuLocationService"
+            }
+
+            Repeater {
+                model: trustStoreModel
+                ListItem.Standard {
+                    text: model.applicationName
+                    iconSource: model.iconName
+                    control: Switch {
+                        checked: model.granted
+                        onClicked: trustStoreModel.setEnabled(index, !model.granted)
+                    }
+                    visible: locationOn.checked
+                }
             }
         }
 
