@@ -74,7 +74,6 @@ ItemPage {
         anchors.centerIn: parent
         source: uri
         height: parent.height
-        sourceSize.width: width
         sourceSize.height: height
         fillMode: Image.PreserveAspectFit
     }
