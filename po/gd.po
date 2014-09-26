@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-17 10:05+0000\n"
+"PO-Revision-Date: 2014-09-25 12:35+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:15+0000\n"
+"X-Launchpad-Export-Date: 2014-09-26 06:50+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -486,7 +486,7 @@ msgstr "Fuaim glasaidh"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
 msgid "Connect to hidden network"
-msgstr ""
+msgstr "Ceangail ri lìonra falaichte"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -1287,8 +1287,10 @@ msgstr "Atharraich PIN an t-SIM"
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seo PIN cearr. %1 oidhirp air a fàgail."
+msgstr[1] "Seo PIN cearr. %1 oidhirp air a fàgail."
+msgstr[2] "Seo PIN cearr. %1 oidhirpean air am fàgail."
+msgstr[3] "Seo PIN cearr. %1 oidhirp air a fàgail."
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1298,8 +1300,10 @@ msgstr "PIN làithreach:"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tha %1 oidhirp ceadaichte dhut."
+msgstr[1] "Tha %1 oidhirp ceadaichte dhut."
+msgstr[2] "Tha %1 oidhirpean ceadaichte dhut."
+msgstr[3] "Tha %1 oidhirp ceadaichte dhut."
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
@@ -1951,6 +1955,7 @@ msgstr ""
 "Cleachd lìonra an fhòn-làimhe agad 's Wi-Fi gus faighinn a-mach far a bheil "
 "thu"
 
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "

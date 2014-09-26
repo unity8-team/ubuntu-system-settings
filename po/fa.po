@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-25 06:46+0000\n"
+"X-Launchpad-Export-Date: 2014-09-26 06:50+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -1894,6 +1894,7 @@ msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 "برای دانستن این که کجا هستید از شبکه‌ی بی‌سیم و تلفن همراهتان استفاده کنید."
 
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "

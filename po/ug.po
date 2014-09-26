@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-24 12:37+0000\n"
+"PO-Revision-Date: 2014-09-25 07:15+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-25 06:47+0000\n"
+"X-Launchpad-Export-Date: 2014-09-26 06:50+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -699,7 +699,7 @@ msgstr "ئاپتوماتىك تەڭشىسۇن"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "ئېكراننىڭ يورۇقلۇقى ۋە غۇۋالىقىنى ئەتراپقا ئاپتوماتىك ماسلاشتۇرىدۇ"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -1007,6 +1007,8 @@ msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"تاللانغان ئەپلەر، ئۇقتۇرۇش مەركىزى ۋە شۇنداقلا ئاۋاز، چىراغ ۋە تىترەش "
+"ئارقىلىق سىزگە خەۋەر بېرىدۇ."
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1355,19 +1357,23 @@ msgstr "ئۇقتۇرۇش ۋە تېز تەڭشەكلەر"
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
+"تېلېفون قۇلۇپسىزلانغاندا زىيارەتكە چەك قويۇش ئۈچۈن قۇلۇپ زىيارىتىنى "
+"ئىناۋەتلىك قىلىدۇ."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
 msgstr ""
+"باشقا ئەپلەر ۋە فۇنكسىيىلەر قۇلۇپسىزلاشنى تەلەپ قىلىپ كۆرسەتمە كۆرسىتىدۇ."
 
 #: ../plugins/security-privacy//AppAccess.qml:28
 #: ../plugins/security-privacy//PageComponent.qml:253
 msgid "Other app access"
-msgstr "زىيارەت قىلىنغان ئەپلەر"
+msgstr "باشقا ئەپ زىيارىتى"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
 msgstr ""
+"بۇلارنى زىيارەت قىلىشقا ئىجازەت بېرىلگەن ۋە ئىجازەت تەلەپ قىلغان ئەپلەر:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
@@ -1376,7 +1382,7 @@ msgstr "كامېرا"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "كامېرانى زىيارەت قىلىشنى تەلەپ قىلغان ئەپلەر:"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
@@ -1384,7 +1390,7 @@ msgstr "مىكروفون"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "مىكروفوننى زىيارەت قىلىشنى تەلەپ قىلغان ئەپلەر:"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
@@ -1427,6 +1433,8 @@ msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
+"شىفىرلىغاندا، تېلېفوننى كومپيۇتېر ياكى باشقا ئۈسكۈنىلەرگە چاتقاندا ئىچىدىكى "
+"سانلىق-مەلۇماتلارنى قوغداپ قالغىلى بولىدۇ."
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
@@ -1708,6 +1716,8 @@ msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
+"مەلۇم بىر سۆزلىشىش ياكى مەلۇم بىر ئالاقەداش ئۈچۈن ئىشلىتىلىدىغان سىمنى "
+"بەلگىلەشكە بولىدۇ."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
@@ -1728,7 +1738,7 @@ msgstr "Canonical غا مەلۇم قىل"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "ئەپلەر خاتالىقلىرى"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
@@ -1823,7 +1833,7 @@ msgstr "قۇلۇپلاش بىخەتەرلىكىنى بەلگىلە"
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "تېز سىيرىش"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
@@ -1885,8 +1895,9 @@ msgstr "تامام"
 
 #: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
+msgstr "قەيەردىلىكىڭىزنى بىلىش ئۈچۈن يانفون تورىنى ياكى Wi-Fi نى ئىشلەتسۇن"
 
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "
@@ -2201,11 +2212,11 @@ msgstr "ئىم جۈملىسى خاتا، قايتا سىناڭ"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:323
 msgid "Could not set security mode"
-msgstr ""
+msgstr "بىخەتەرلىك ھالىتىنى تەڭشىگىلى بولمىدى"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:372
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "بىخەتەرلىك كۆرسەتمىسىنى تەڭشىگىلى بولمىدى"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:383
 msgid "Authentication token manipulation error"
