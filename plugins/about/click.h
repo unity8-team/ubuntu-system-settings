@@ -23,7 +23,6 @@
 #include <QAbstractTableModel>
 #include <QDir>
 #include <QObject>
-#include <QProcess>
 #include <QSortFilterProxyModel>
 
 class ClickModel : public QAbstractTableModel
