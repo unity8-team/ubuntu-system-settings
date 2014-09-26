@@ -12,7 +12,15 @@
         "network",
         "mobile",
         "gsm",
-        "settings"
+        "data",
+        "carrier",
+        "4g",
+        "3g",
+        "2g",
+        "lte",
+        "apn",
+        "roam",
+        "sim"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,
