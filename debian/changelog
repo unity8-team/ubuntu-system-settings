@@ -1,3 +1,37 @@
+ubuntu-system-settings (0.3+14.10.20140926-0ubuntu1) utopic; urgency=low
+
+  [ Sebastien Bacher ]
+  * [storage] use libclick rather than calling the command line (LP:
+    #1368967)
+  * [storage] tweaks to the disk informations, limit the free space to
+    the user available one (excluding the system partitions), don't list
+    the external mounts, that's described in the design and is going to
+    require work on the categories computation to give correct values
+    (LP: #1284247)
+  * [about] display the free space value next to the storage label (LP:
+    #1335144)
+
+  [ Albert Astals ]
+  * Add i18n.tr
+
+  [ jonas-drange ]
+  * [wifi] connect to hidden network is now a dialog (LP: #1366005)
+
+  [ Ken VanDine ]
+  * Provide more keywords to make search useful (LP: #1370219) (LP:
+    #1370219)
+  * [background] set sourceSize in the image preview to work around an
+    issue loading large images (LP: #1373462)
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Mathieu Trudel-Lapierre ]
+  * [bluetooth] Properly handle device types for connection and
+    disconnection. (LP: #1369964)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 26 Sep 2014 15:32:57 +0000
+
 ubuntu-system-settings (0.3+14.10.20140925-0ubuntu1) utopic; urgency=low
 
   [ Michael Terry ]
