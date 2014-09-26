@@ -49,20 +49,25 @@ PreviousNetworkModel::PreviousNetworkModel(QObject *parent) : QAbstractListModel
 
 void PreviousNetworkModel::removeConnection()
 {
+    qWarning() << "Received Removed signal from a connection object.";
     WifiDbusHelper h;
     QList<QStringList> networks = h.getPreviouslyConnectedWifiNetworks();
 
     int row = -1;
     for (int i=0, n=networks.length(); row==-1 && i<n; i++) {
+        qWarning() << "Comparing" << networks[i][1] << "and" << p->data.at(i)[1];
         if (networks[i][1] != p->data.at(i)[1]) {
+            qWarning() << "The two list of networks differed at" << i;
             row = i;
         }
     }
 
     if (0<=row && row<p->data.size()) {
+        qWarning() << "Began removing" << row;
         beginRemoveRows(QModelIndex(), row, row);
         p->data.removeAt(row);
         endRemoveRows();
+        qWarning() << "Finished removing" << row;
     }
 }
 
