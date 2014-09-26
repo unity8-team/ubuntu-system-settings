@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-21 17:07+0000\n"
-"Last-Translator: Mitsuya Shibata <mty.shibata@gmail.com>\n"
+"PO-Revision-Date: 2014-09-25 10:51+0000\n"
+"Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:16+0000\n"
+"X-Launchpad-Export-Date: 2014-09-26 06:50+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -568,7 +568,7 @@ msgstr "システムアップデートをインストールしたらスマート
 
 #: ../plugins/system-update//PageComponent.qml:95
 msgid "Connect the phone to power before installing the system update."
-msgstr ""
+msgstr "システムアップデートをインストールする前に電話を電源に接続してください。"
 
 #: ../plugins/system-update//PageComponent.qml:98
 msgid "Install & Restart"
@@ -594,15 +594,13 @@ msgstr "アップデートの確認中..."
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1件のアップデートをインストール..."
 
 #: ../plugins/system-update//PageComponent.qml:262
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1件のアップデートをインストール"
 
 #: ../plugins/system-update//PageComponent.qml:263
 msgid "Pause All"
@@ -642,7 +640,7 @@ msgstr "バージョン: "
 
 #: ../plugins/system-update//PageComponent.qml:474
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "アプリのアップデートを受信するにはUbuntu Oneにサインインしてください。"
 
 #: ../plugins/system-update//PageComponent.qml:483
 msgid "Sign In…"
@@ -688,7 +686,7 @@ msgstr "自動調整"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "環境に合わせてディスプレイを明るくしたり暗くします。"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -971,7 +969,7 @@ msgstr "電話"
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
-msgstr ""
+msgstr "応答できない時、もしくは通話中、圏外の時に着信した場合に別の番号へ転送します。"
 
 #: ../plugins/phone//CallForwarding.qml:101
 msgid "Forward to"
@@ -1219,8 +1217,7 @@ msgstr "SIM PINの変更"
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "PINが正しくありません。あと%1回試せます。"
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1230,8 +1227,7 @@ msgstr "現在のPIN:"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1回試行可能です。"
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
@@ -1326,7 +1322,7 @@ msgstr "通知とクイック設定"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
-msgstr ""
+msgstr "スマートフォンがロックされたときアクセスを制限するためには、セキュリティロックを有功にしてください。"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
@@ -1591,7 +1587,7 @@ msgstr "信号強度"
 
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
-msgstr ""
+msgstr "このデバイスを削除する"
 
 #: ../plugins/background//Preview.qml:70
 msgid "Preview"
@@ -1645,23 +1641,23 @@ msgstr ""
 #: ../plugins/cellular//Components//CellularMultiSim.qml:138
 #: ../plugins/cellular//Components//CellularSingleSim.qml:51
 msgid "2G only (saves battery)"
-msgstr ""
+msgstr "2Gのみ (バッテリー消費小)"
 
 #: ../plugins/cellular//Components//NoSim.qml:32
 #: ../plugins/cellular//Components//CellularMultiSim.qml:140
 #: ../plugins/cellular//Components//CellularSingleSim.qml:53
 msgid "2G/3G/4G (faster)"
-msgstr ""
+msgstr "2G/3G/4G (高速)"
 
 #: ../plugins/cellular//Components//NoSim.qml:37
 #: ../plugins/cellular//Components//CellularMultiSim.qml:182
 #: ../plugins/cellular//Components//CellularSingleSim.qml:72
 msgid "Data roaming"
-msgstr ""
+msgstr "データローミング"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "SIM名を編集"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
@@ -1669,7 +1665,7 @@ msgstr "OK"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
-msgstr ""
+msgstr "毎回尋ねる"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
@@ -1858,6 +1854,7 @@ msgstr "完了"
 msgid "Use your mobile network and Wi-Fi to work out where you are"
 msgstr ""
 
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "

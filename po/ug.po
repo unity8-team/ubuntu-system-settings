@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-22 12:28+0000\n"
+"PO-Revision-Date: 2014-09-25 07:15+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:18+0000\n"
+"X-Launchpad-Export-Date: 2014-09-26 06:50+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -34,6 +34,7 @@ msgstr "Preferences;Settings;مايىللىق;تەڭشەكلەر;"
 #: ../plugins/reset//ResetLauncherHome.qml:59
 msgid "The phone needs to restart for changes to take effect."
 msgstr ""
+"ئۆزگىرىشلەرنىڭ ئىناۋەتلىك بولۇشى ئۈچۈن تېلېفوننى قايتا قوزغىتىش كېرەك."
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
@@ -124,6 +125,8 @@ msgstr "ئاپتوماتىك تىنىش بەلگىلەر"
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
 msgstr ""
+"بوشلۇق كۇنۇپكىسى ئىككى قېتىم بېسىلسا، چېكىت ۋە باشقا قوش پەش، تىرناق "
+"قاتارلىقلار ئاپتوماتىك قوشۇلىدۇ."
 
 #: ../plugins/language//PageComponent.qml:209
 #: ../plugins/sound//PageComponent.qml:196
@@ -324,21 +327,26 @@ msgid ""
 "When hotspot is on, other devices can use your cellular data connection over "
 "Wi-Fi. Normal data charges apply."
 msgstr ""
+"قىزىق نۇقتا قىلىپ ئىشلىتىلسە، باشقا ئۈسكۈنىلەرنى تېلېفونىڭىزغا Wi-Fi "
+"ئارقىلىق باغلاپ ئىنتېرنېتنى ئىشلىتىش ئىمكانىيىتىگە ئىگە قىلغىلى بولىدۇ. تور "
+"ھەققى نورمال ھېسابلىنىۋېرىدۇ."
 
 #: ../plugins/cellular//Hotspot.qml:61
 msgid ""
 "Other devices can use your cellular data connection over the Wi-Fi network. "
 "Normal data charges apply."
 msgstr ""
+"باشقا ئۈسكۈنىلەرنى تېلېفونىڭىزغا Wi-Fi ئارقىلىق باغلاپ ئىنتېرنېتنى ئىشلىتىش "
+"ئىمكانىيىتىگە ئىگە قىلغىلى بولىدۇ. تور ھەققى نورمال ھېسابلىنىۋېرىدۇ."
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "قىزىق نۇقتا قىلىپ تەڭشە"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 #: ../plugins/cellular//Components//MultiSim.qml:68
 msgid "Carriers"
-msgstr ""
+msgstr "توشۇغۇچىلار(شىركەت)"
 
 #: ../plugins/cellular//PageChooseCarrier.qml:102
 msgid "Choose carrier:"
@@ -367,7 +375,7 @@ msgstr "ئىزدەۋاتىدۇ"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "قىزىق نۇقتا تەڭشىكىنى ئۆزگەرت"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
@@ -436,7 +444,7 @@ msgstr "ئۈنسىز ھالەتتە تىترىسۇن"
 #: ../plugins/sound//PageComponent.qml:153
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "نومۇر تاختىسى ئاۋازلىرى"
 
 #: ../plugins/sound//PageComponent.qml:157
 msgid "Messages:"
@@ -461,7 +469,7 @@ msgstr "ئۈننى قۇلۇپلا"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
 msgid "Connect to hidden network"
-msgstr ""
+msgstr "يوشۇرۇن تورغا باغلانسۇن"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -573,7 +581,7 @@ msgstr ""
 
 #: ../plugins/system-update//PageComponent.qml:95
 msgid "Connect the phone to power before installing the system update."
-msgstr ""
+msgstr "سىستېما يېڭىلاشنى باشلاشتىن بۇرۇن تېلېفوننى توكقا چەتىش كېرەك."
 
 #: ../plugins/system-update//PageComponent.qml:98
 msgid "Install & Restart"
@@ -645,7 +653,7 @@ msgstr "نەشرى: "
 
 #: ../plugins/system-update//PageComponent.qml:474
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "ئەپلەرنىڭ يېڭىلانمىسىغا ئېرىشىش ئۈچۈن ئۇبۇنتۇ بىرگە كىرىش كېرەك."
 
 #: ../plugins/system-update//PageComponent.qml:483
 msgid "Sign In…"
@@ -691,7 +699,7 @@ msgstr "ئاپتوماتىك تەڭشىسۇن"
 
 #: ../plugins/brightness//PageComponent.qml:65
 msgid "Brightens and dims the display to suit the surroundings."
-msgstr ""
+msgstr "ئېكراننىڭ يورۇقلۇقى ۋە غۇۋالىقىنى ئەتراپقا ئاپتوماتىك ماسلاشتۇرىدۇ"
 
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
@@ -796,7 +804,7 @@ msgstr "ئۆزلەشتۈرۈلگەن تەسۋىر قىسمى"
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "بۇ ئىجازەتنامىنى كۆرسىتىشكە بولمايدۇ."
 
 #: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
 msgid "Software licenses"
@@ -811,10 +819,13 @@ msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
 msgstr ""
+"‹ئىجادىيەتچىلەر ھالىتى› دە ھەرقانداق ئادەم، باشقا ئۈسكۈنىلەردىن تېلېفونغا "
+"باغلىنىش ئارقىلىق ئىچىدىكى ھەرقانداق نەرسىنى ئۆزگەرتەلەيدۇ ۋە ئۆچۈرەلەيدۇ."
 
 #: ../plugins/about//DevMode.qml:108
 msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
+"‹ئىجادىيەتچىلەر ھالىتى› نى ئىشلىتىش ئۈچۈن PIN كودى ياكى ئىم كىرگۈزۈش زۆرۈر."
 
 #: ../plugins/about//DevMode.qml:114
 #: ../plugins/security-privacy//LockSecurity.qml:32
@@ -953,6 +964,9 @@ msgid ""
 "Lets you answer or start a new call while on another call, and switch "
 "between them"
 msgstr ""
+"باشقىلار بىلەن سۆزلىشىۋاتقاندا، ئۇنى توختاتماي تۇرۇپ باشقا بىرىنى چاقىرىش "
+"ياكى كەلگەن تېلېفوننى ئېلىش، ھەم بۇلارنى ئوز-ئارا ئالماشتۇرۇش ئىمكانىيىتىگە "
+"ئىگە قىلىدۇ"
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
@@ -993,6 +1007,8 @@ msgid ""
 "Selected apps can alert you using notification bubbles, sounds, vibrations, "
 "and the Notification Center."
 msgstr ""
+"تاللانغان ئەپلەر، ئۇقتۇرۇش مەركىزى ۋە شۇنداقلا ئاۋاز، چىراغ ۋە تىترەش "
+"ئارقىلىق سىزگە خەۋەر بېرىدۇ."
 
 #: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
@@ -1018,7 +1034,7 @@ msgstr "ھەممىنى تازىلا ۋە ئەسلگە قايتۇر"
 
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
-msgstr ""
+msgstr "ئىجراچى ئەسلىدىكى ھالىتىگە قايتىپ كېلىدۇ."
 
 #: ../plugins/reset//ResetLauncherHome.qml:44
 #: ../plugins/reset//PageComponent.qml:73
@@ -1076,18 +1092,24 @@ msgid ""
 "Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
 "Turning off location detection saves battery."
 msgstr ""
+"wi-fi، تارقىتىش ئانتېنناسى ۋە GPS نى ئىشلىتىپ ئورنىڭىزنى بەلگىلەيدۇ. ئورۇن "
+"بەلگىلەش ئىقتىدارىنى توختاتقاندا توك تېجەيدۇ."
 
 #: ../plugins/security-privacy//Location.qml:79
 msgid ""
 "Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
 "to detect your rough location. Turning off location detection saves battery."
 msgstr ""
+"wi-fi، تارقىتىش ئانتېنناسى(ھازىر باغلىنىش يوق) ۋە GPS نى ئىشلىتىپ ئورنىڭىزنى "
+"بەلگىلەيدۇ. ئورۇن بەلگىلەش ئىقتىدارىنى توختاتقاندا توك تېجەيدۇ."
 
 #: ../plugins/security-privacy//Location.qml:81
 msgid ""
 "Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
 "rough location. Turning off location detection saves battery."
 msgstr ""
+"wi-fi(ھازىر ئېتىك)، تارقىتىش ئانتېنناسى ۋە GPS نى ئىشلىتىپ ئورنىڭىزنى "
+"بەلگىلەيدۇ. ئورۇن بەلگىلەش ئىقتىدارىنى توختاتقاندا توك تېجەيدۇ."
 
 #: ../plugins/security-privacy//Location.qml:83
 msgid ""
@@ -1095,6 +1117,9 @@ msgid ""
 "connection), and GPS to detect your rough location. Turning off location "
 "detection saves battery."
 msgstr ""
+"wi-fi(ھازىر ئېتىك)، تارقىتىش ئانتېنناسى(ھازىر باغلىنىش يوق) ۋە GPS نى "
+"ئىشلىتىپ ئورنىڭىزنى بەلگىلەيدۇ. ئورۇن بەلگىلەش ئىقتىدارىنى توختاتقاندا توك "
+"تېجەيدۇ."
 
 #: ../plugins/security-privacy//Location.qml:90
 msgid "Allow access to location:"
@@ -1103,7 +1128,7 @@ msgstr "بۇ ئورۇنلارنى زىيارەت قىلىشقا ئىجازەت:"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr ""
+msgstr "PIN نومۇرىنى ئۆزگەرتىش…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -1116,15 +1141,15 @@ msgstr "سىيرىپ ئالماشتۇرۇش"
 
 #: ../plugins/security-privacy//LockSecurity.qml:107
 msgid "Switch to PIN code"
-msgstr ""
+msgstr "PIN كودىغا ئالماشتۇر"
 
 #: ../plugins/security-privacy//LockSecurity.qml:109
 msgid "Switch to passphrase"
-msgstr "ئىم جۈملىسى ئالماشتۇرۇش"
+msgstr "ئىم جۈملىسىگە ئالماشتۇر"
 
 #: ../plugins/security-privacy//LockSecurity.qml:118
 msgid "Existing PIN code"
-msgstr ""
+msgstr "نۆۋەتتىكى PIN كودى"
 
 #: ../plugins/security-privacy//LockSecurity.qml:120
 msgid "Existing passphrase"
@@ -1132,7 +1157,7 @@ msgstr "نۆۋەتتىكى ئىم جۈملىسى"
 
 #: ../plugins/security-privacy//LockSecurity.qml:174
 msgid "Choose PIN code"
-msgstr ""
+msgstr "PIN كودىنى تاللاڭ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:176
 msgid "Choose passphrase"
@@ -1140,15 +1165,15 @@ msgstr "ئىم جۈملىسى تاللاڭ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:220
 msgid "Confirm PIN code"
-msgstr ""
+msgstr "كودىنى جەزملەڭ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:222
 msgid "Confirm passphrase"
-msgstr "ئىم جۈملىسى جەزملەڭ"
+msgstr "ئىم جۈملىسىنى جەزملەڭ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:265
 msgid "Those PIN codes don't match. Try again."
-msgstr ""
+msgstr "كودى ماسلاشمىدى.قايتا سىناڭ"
 
 #: ../plugins/security-privacy//LockSecurity.qml:268
 msgid "Those passphrases don't match. Try again."
@@ -1168,7 +1193,7 @@ msgstr "سىيرىش(بىخەتەرلىكى يوق)"
 
 #: ../plugins/security-privacy//LockSecurity.qml:349
 msgid "4-digit PIN code"
-msgstr ""
+msgstr "4 رەقەملىك PIN كودى"
 
 #: ../plugins/security-privacy//LockSecurity.qml:350
 #: ../plugins/security-privacy//PhoneLocking.qml:47
@@ -1182,7 +1207,7 @@ msgstr "سىيرىش(بىخەتەرلىكى يوق)… "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr ""
+msgstr "4 رەقەملىك PIN كودى…"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1217,14 +1242,13 @@ msgstr "SIM نىڭ ئىمى(PIN)  نومۇرى"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "SIM نىڭ ئىمى(PIN) نى ئۆزگەرتىش"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "PIN كودى توغرا ئەمەس. يەنە %1 قېتىملىق پۇرسىتىڭىز قالدى."
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1234,16 +1258,15 @@ msgstr "نۆۋەتتىكى PIN:"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "پۇرسەت سانى %1."
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
-msgstr ""
+msgstr "يېڭى PIN كودى:"
 
 #: ../plugins/security-privacy//SimPin.qml:118
 msgid "Confirm new PIN:"
-msgstr ""
+msgstr "يېڭى PIN كودى(قايتا):"
 
 #: ../plugins/security-privacy//SimPin.qml:137
 msgid "PINs don't match. Try again."
@@ -1255,17 +1278,17 @@ msgstr "SIM نىڭ ئىمى(PIN) نى كىرگۈزۈڭ"
 
 #: ../plugins/security-privacy//SimPin.qml:184
 msgid "Enter Previous SIM PIN"
-msgstr ""
+msgstr "SIM نىڭ بۇرۇنقى ئىمى(PIN) نى كىرگۈزۈڭ"
 
 #: ../plugins/security-privacy//SimPin.qml:187
 #, qt-format
 msgid "Incorrect PIN. %1 attempts remaining."
-msgstr ""
+msgstr "PIN كودى توغرا ئەمەس. يەنە %1 قېتىملىق پۇرسىتىڭىز قالدى."
 
 #: ../plugins/security-privacy//SimPin.qml:246
 #, qt-format
 msgid "%1 attempts allowed."
-msgstr ""
+msgstr "پۇرسەت سانى %1."
 
 #: ../plugins/security-privacy//SimPin.qml:282
 msgid "Unlock"
@@ -1284,10 +1307,14 @@ msgid ""
 "When a SIM PIN is set, it must be entered to access cellular services after "
 "restarting the phone or swapping the SIM."
 msgstr ""
+"سىم كارتىسىنىڭ PIN كودى بەلگىلەنسە، تېلېفوننى قايتا قوزغاتقاندا ياكى سىم "
+"كارتىسىنى ئالماشتۇرغاندا PIN كودىنى كىرگۈزۈش تەلەپ قىلىنىدۇ."
 
 #: ../plugins/security-privacy//SimPin.qml:361
 msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
 msgstr ""
+"سىم كارتىسىنىڭ PIN كودى ئۇدا بىر قانچە قېتىم خاتا كىرگۈزۈلسە، SIM كارتىسى "
+"مەڭگۈلۈك قۇلۇپلىنىپ قالىدۇ."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:31
 msgid "Phone locking"
@@ -1317,7 +1344,7 @@ msgstr "دەرھال ئۈچەككە كىرسۇن"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr ""
+msgstr "قۇلۇپلانغاندا تۆۋەندىكىلەرگە ئىجازەت:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
@@ -1325,24 +1352,28 @@ msgstr "ئىجراچى"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:120
 msgid "Notifications and quick settings"
-msgstr ""
+msgstr "ئۇقتۇرۇش ۋە تېز تەڭشەكلەر"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:131
 msgid "Turn on lock security to restrict access when the phone is locked."
 msgstr ""
+"تېلېفون قۇلۇپسىزلانغاندا زىيارەتكە چەك قويۇش ئۈچۈن قۇلۇپ زىيارىتىنى "
+"ئىناۋەتلىك قىلىدۇ."
 
 #: ../plugins/security-privacy//PhoneLocking.qml:132
 msgid "Other apps and functions will prompt you to unlock."
 msgstr ""
+"باشقا ئەپلەر ۋە فۇنكسىيىلەر قۇلۇپسىزلاشنى تەلەپ قىلىپ كۆرسەتمە كۆرسىتىدۇ."
 
 #: ../plugins/security-privacy//AppAccess.qml:28
 #: ../plugins/security-privacy//PageComponent.qml:253
 msgid "Other app access"
-msgstr "زىيارەت قىلىنغان ئەپلەر"
+msgstr "باشقا ئەپ زىيارىتى"
 
 #: ../plugins/security-privacy//AppAccess.qml:35
 msgid "Apps that you have granted and have requested access to:"
 msgstr ""
+"بۇلارنى زىيارەت قىلىشقا ئىجازەت بېرىلگەن ۋە ئىجازەت تەلەپ قىلغان ئەپلەر:"
 
 #: ../plugins/security-privacy//AppAccess.qml:41
 #: ../plugins/bluetooth//PageComponent.qml:105
@@ -1351,7 +1382,7 @@ msgstr "كامېرا"
 
 #: ../plugins/security-privacy//AppAccess.qml:42
 msgid "Apps that have requested access to your camera"
-msgstr ""
+msgstr "كامېرانى زىيارەت قىلىشنى تەلەپ قىلغان ئەپلەر:"
 
 #: ../plugins/security-privacy//AppAccess.qml:46
 msgid "Mic"
@@ -1359,7 +1390,7 @@ msgstr "مىكروفون"
 
 #: ../plugins/security-privacy//AppAccess.qml:47
 msgid "Apps that have requested access to your mic"
-msgstr ""
+msgstr "مىكروفوننى زىيارەت قىلىشنى تەلەپ قىلغان ئەپلەر:"
 
 #: ../plugins/security-privacy//AppAccess.qml:59
 #, qt-format
@@ -1402,6 +1433,8 @@ msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
+"شىفىرلىغاندا، تېلېفوننى كومپيۇتېر ياكى باشقا ئۈسكۈنىلەرگە چاتقاندا ئىچىدىكى "
+"سانلىق-مەلۇماتلارنى قوغداپ قالغىلى بولىدۇ."
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
@@ -1569,7 +1602,7 @@ msgstr "باشقا ئۈسكۈنىگە باغلىنالمىدى:"
 
 #: ../plugins/bluetooth//PageComponent.qml:250
 msgid "Connect a device:"
-msgstr ""
+msgstr "ئۈسكۈنىگە باغلىنىش:"
 
 #: ../plugins/bluetooth//PageComponent.qml:283
 msgid "None detected"
@@ -1578,7 +1611,7 @@ msgstr "بايقالمىدى"
 #: ../plugins/bluetooth//PageComponent.qml:291
 #: ../plugins/bluetooth//PageComponent.qml:394
 msgid "Connect automatically when detected:"
-msgstr ""
+msgstr "بايقىغاندا ئاپتوماتىك باغلانسۇن:"
 
 #: ../plugins/bluetooth//PageComponent.qml:361
 msgid "Type"
@@ -1594,7 +1627,7 @@ msgstr "سىگنال كۈچلۈكلۈكى"
 
 #: ../plugins/bluetooth//PageComponent.qml:426
 msgid "Forget this device"
-msgstr ""
+msgstr "مەزكۇر ئۈسكۈنىنى ئۇنتۇ"
 
 #: ../plugins/background//Preview.qml:70
 msgid "Preview"
@@ -1621,7 +1654,7 @@ msgstr "ئىختىيارى"
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//MultiSim.qml:42
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "سىمسىز تور(Wi-Fi) ئېتىك بولغاچقا قىزىق نۇقتا ئىناۋەتسىز قىلىندى."
 
 #: ../plugins/cellular//Components//SingleSim.qml:52
 #: ../plugins/cellular//Components//MultiSim.qml:58
@@ -1664,7 +1697,7 @@ msgstr "سانلىق-مەلۇمات ھالقىش"
 
 #: ../plugins/cellular//Components//SimEditor.qml:77
 msgid "Edit SIM Name"
-msgstr ""
+msgstr "سىم كارتا ئاتى"
 
 #: ../plugins/cellular//Components//SimEditor.qml:200
 msgid "OK"
@@ -1672,26 +1705,28 @@ msgstr "تامام"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
-msgstr ""
+msgstr "ھەر قېتىم سورىسۇن"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "چىققان چاقىرىشلار بۇنى ئىشلەتسۇن:"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
+"مەلۇم بىر سۆزلىشىش ياكى مەلۇم بىر ئالاقەداش ئۈچۈن ئىشلىتىلىدىغان سىمنى "
+"بەلگىلەشكە بولىدۇ."
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr ""
+msgstr "ئۇچۇرلار ئۈچۈن بۇنى ئىشلەتسۇن:"
 
 #: ../plugins/cellular//Components//CellularMultiSim.qml:139
 #: ../plugins/cellular//Components//CellularSingleSim.qml:52
 msgid "2G/3G (faster)"
-msgstr ""
+msgstr "2G/3G (تېزرەك)"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1699,23 +1734,23 @@ msgstr "شەخسىيەت سىياسىتى"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "Canonical غا مەلۇم قىل"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "ئەپلەر خاتالىقلىرى"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
-msgstr ""
+msgstr "ئالدىنقى خاتالىق مەلۇماتى"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
-msgstr ""
+msgstr "خاتالىق يۈز بەرگەندە ئەپنىڭ قانداق مەشغۇلات قىلغانلىقىمۇ خاتىرلەنسۇن"
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
-msgstr ""
+msgstr "ھېچقانداق سۈرەت تاللانمىدى"
 
 #: ../plugins/background//Components//AddRemove.qml:65
 #, qt-format
@@ -1725,7 +1760,7 @@ msgstr[0] "%1 دانە سۈرەت چىقىرىۋەت"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr ""
+msgstr "سۈرەت قوش…"
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
@@ -1746,12 +1781,12 @@ msgstr "سىستېما"
 #: ../wizard/qml/Components//StackButton.qml:51
 #, qt-format
 msgid "〈  %1"
-msgstr ""
+msgstr "〈  %1"
 
 #: ../wizard/qml/Components//StackButton.qml:54
 #, qt-format
 msgid "%1  〉"
-msgstr ""
+msgstr "%1  〉"
 
 #: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
@@ -1759,15 +1794,15 @@ msgstr "كەينى"
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
-msgstr ""
+msgstr "سىم كارتىسى قوش"
 
 #: ../wizard/qml/Pages//no-sim.qml:33
 msgid "Please insert a SIM card before you continue."
-msgstr ""
+msgstr "ئالدى بىلەن سىم كارتىسىنى سېلىڭ"
 
 #: ../wizard/qml/Pages//no-sim.qml:35
 msgid "Without it, you won’t be able to make calls or use text messaging."
-msgstr ""
+msgstr "ئۇ بولمىسا، تېلېفون قىلىشقا ۋە ئۇچۇر ئەۋەتىشكە بولمايدۇ."
 
 #: ../wizard/qml/Pages//no-sim.qml:50 ../wizard/qml/Pages//20-wifi.qml:195
 msgid "Skip"
@@ -1779,7 +1814,7 @@ msgstr "سالام!"
 
 #: ../wizard/qml/Pages//10-welcome.qml:42
 msgid "Welcome to your Ubuntu phone."
-msgstr ""
+msgstr "ئۇبۇنتۇ تېلېفونىغا مەرھابا."
 
 #: ../wizard/qml/Pages//10-welcome.qml:50
 msgid "Let’s get started."
@@ -1794,35 +1829,35 @@ msgstr "داۋاملاشتۇر"
 
 #: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
-msgstr ""
+msgstr "قۇلۇپلاش بىخەتەرلىكىنى بەلگىلە"
 
 #: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
-msgstr ""
+msgstr "تېز سىيرىش"
 
 #: ../wizard/qml/Pages//15-passwd.qml:147
 msgid "Those PIN codes don't match."
-msgstr ""
+msgstr "بۇ PIN كودلىرى ماسلاشمىدى."
 
 #: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
-msgstr ""
+msgstr "بۇ ئىم جۈملىلىرى ماسلاشمىدى."
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
-msgstr ""
+msgstr "PIN كودى ئەڭ ئاز دېگەندە 4 رەقەم بولۇشى كېرەك."
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
-msgstr ""
+msgstr "ئىم جۈملىسى ئەڭ ئاز دېگەندە 4 ھەرپ بولۇشى كېرەك."
 
 #: ../wizard/qml/Pages//terms.qml:25
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "ئىشلىتىش تۈزۈمى"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "سىمسىز تورغا(Wi-Fi) باغلان"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
@@ -1830,15 +1865,17 @@ msgstr "ئىشلەتكىلى بولىدىغان تورلار"
 
 #: ../wizard/qml/Pages//40-reporting.qml:22
 msgid "Bug reporting"
-msgstr ""
+msgstr "كەمتۈك مەلۇم قىلىش"
 
 #: ../wizard/qml/Pages//40-reporting.qml:35
 msgid "Your phone is set up to automatically report errors to Canonical."
 msgstr ""
+"تېلېفونىڭىز خاتالىقلارنى Canonical غا ئاپتوماتىك مەلۇم قىلىدىغان قىلىپ "
+"تەڭشەلدى."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr ""
+msgstr "بۇنى سىستېما تەڭشىكىدە ئىناۋەتسىز قىلىشقا بولىدۇ."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
@@ -1846,7 +1883,7 @@ msgstr "ھەممىسى تامام"
 
 #: ../wizard/qml/Pages//80-finished.qml:37
 msgid "Nice work!"
-msgstr ""
+msgstr "جاپا چەكتىڭىز!"
 
 #: ../wizard/qml/Pages//80-finished.qml:45
 msgid "Your phone is now ready to use."
@@ -1858,8 +1895,9 @@ msgstr "تامام"
 
 #: ../wizard/qml/Pages//30-location.qml:60
 msgid "Use your mobile network and Wi-Fi to work out where you are"
-msgstr ""
+msgstr "قەيەردىلىكىڭىزنى بىلىش ئۈچۈن يانفون تورىنى ياكى Wi-Fi نى ئىشلەتسۇن"
 
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
 #: ../wizard/qml/Pages//30-location.qml:69
 msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "
@@ -2047,7 +2085,7 @@ msgstr "تېلېفون"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:102
 msgid "notifications"
-msgstr ""
+msgstr "ئۇقتۇرۇشلار"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:106
@@ -2146,19 +2184,19 @@ msgstr "تام قەغىزى"
 
 #: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
-msgstr ""
+msgstr "يېڭىلانغان سىستېما تەسۋىرى بار."
 
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
-msgstr ""
+msgstr "سىستېما يېڭىلىغۇنى ئىجرا قىلىش ئۈچۈن چېكىڭ."
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
-msgstr ""
+msgstr "نۆۋەتتىكى ئىلتىماسنى ئەمەلدىن قالدۇرغىلى بولمايدۇ."
 
 #: ../plugins/system-update//system_update.cpp:98
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "نۆۋەتتىكى ئىلتىماسنى ۋاقىتلىق توختاتقىلى بولمايدۇ."
 
 #: ../plugins/about//click.cpp:134
 msgid "Unknown title"
@@ -2166,19 +2204,19 @@ msgstr "نامەلۇم ماۋزۇ"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect PIN code. Try again."
-msgstr ""
+msgstr "PIN كود خاتا. قايتا سىناڭ."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
-msgstr "ئىم جۈملىسى ماس كەلمىدى، قايتا سىناڭ"
+msgstr "ئىم جۈملىسى خاتا، قايتا سىناڭ"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:323
 msgid "Could not set security mode"
-msgstr ""
+msgstr "بىخەتەرلىك ھالىتىنى تەڭشىگىلى بولمىدى"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:372
 msgid "Could not set security display hint"
-msgstr ""
+msgstr "بىخەتەرلىك كۆرسەتمىسىنى تەڭشىگىلى بولمىدى"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:383
 msgid "Authentication token manipulation error"

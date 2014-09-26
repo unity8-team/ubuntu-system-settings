@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-21 20:01+0000\n"
+"PO-Revision-Date: 2014-09-25 00:39+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:14+0000\n"
+"X-Launchpad-Export-Date: 2014-09-25 06:46+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -121,7 +121,7 @@ msgstr "በራሱ ነጥቦች ማስገቢያ"
 #: ../plugins/language//PageComponent.qml:202
 msgid ""
 "Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
+msgstr "መጨመሪያ ነጥብ እና የጎደሉ ትምህርተ ጥቅስ: የ ክፍተት ቁልፍን ሁለት ጊዜ መታ ሲያደርጉ"
 
 #: ../plugins/language//PageComponent.qml:209
 #: ../plugins/sound//PageComponent.qml:196
@@ -314,11 +314,11 @@ msgstr "በትክክል ያሉበትን ቦታ ለማግኘት የ ጂፒኤስ 
 #: ../plugins/cellular//Components//SingleSim.qml:43
 #: ../plugins/cellular//Components//MultiSim.qml:48
 msgid "Wi-Fi hotspot"
-msgstr ""
+msgstr "ዋይ-ፋይ ሆትስፖት"
 
 #: ../plugins/cellular//Hotspot.qml:40
 msgid "Hotspot"
-msgstr ""
+msgstr "ሆትስፖት"
 
 #: ../plugins/cellular//Hotspot.qml:60
 msgid ""
@@ -334,7 +334,7 @@ msgstr ""
 
 #: ../plugins/cellular//Hotspot.qml:65
 msgid "Set up hotspot"
-msgstr ""
+msgstr "ሆትስፖት ማሰናጃ"
 
 #: ../plugins/cellular//PageChooseCarriers.qml:28
 #: ../plugins/cellular//Components//MultiSim.qml:68
@@ -368,11 +368,11 @@ msgstr "በ መፈለግ ላይ"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
-msgstr ""
+msgstr "የ ሆትስፖት ማሰናጃ መቀየሪያ"
 
 #: ../plugins/cellular//HotspotSetup.qml:40
 msgid "Hotspot name"
-msgstr ""
+msgstr "የ ሆትስፖት ስም"
 
 #: ../plugins/cellular//HotspotSetup.qml:54
 msgid "Key (must be 8 characters or longer)"
@@ -462,7 +462,7 @@ msgstr "ድምፅ መቆለፊያ"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
 msgid "Connect to hidden network"
-msgstr ""
+msgstr "ወደ ተደበቅ ኔትዎርክ መገናኛ"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -1220,8 +1220,8 @@ msgstr "መቀየሪያ ሲም ፒን"
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "የተሳሳተ ፒን %1 ሙከራ ይቀራል"
+msgstr[1] "የተሳሳተ ፒን %1 ሙከራዎች ይቀራል"
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1231,8 +1231,8 @@ msgstr "የ አሁኑ ፒን:"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 ሙከራ ተፈቅዷል"
+msgstr[1] "%1 ሙከራዎች ተፈቅደዋል"
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
@@ -1459,7 +1459,7 @@ msgstr "ፒን ለ '%1'"
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
 msgid "Pair"
-msgstr ""
+msgstr "ማጣመሪያ"
 
 #: ../plugins/bluetooth//PageComponent.qml:82
 msgid "Connected"
@@ -1619,7 +1619,7 @@ msgstr ""
 #: ../plugins/cellular//Components//SingleSim.qml:37
 #: ../plugins/cellular//Components//MultiSim.qml:42
 msgid "Hotspot disabled because Wi-Fi is off."
-msgstr ""
+msgstr "ሆትስፖት ተሰናክሏል ምክንያቱም ዋይ-ፋይ አልበራም"
 
 #: ../plugins/cellular//Components//SingleSim.qml:52
 #: ../plugins/cellular//Components//MultiSim.qml:58

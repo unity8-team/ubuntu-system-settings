@@ -41,9 +41,10 @@ ItemPage {
             var drive = systemDrives[i]
             var type = storageInfo.driveType(drive)
             var path = backendInfo.getDevicePath(drive)
-            if ((type === StorageInfo.InternalDrive ||
-                type === StorageInfo.RemovableDrive ||
-                type === StorageInfo.UnknownDrive) &&
+            /* only deal with the device's storage for now, external mounts
+               handling would require being smarter on the categories
+               computation as well and is not in the current design */
+            if ((type === StorageInfo.InternalDrive) &&
                 paths.indexOf(path) == -1 && // Haven't seen this device before
                 path.charAt(0) === "/") { // Has a real mount point
                 drives.push(drive)
@@ -59,12 +60,9 @@ ItemPage {
         }
         return space
     }
+    /* Limit the free space to the user available one (see bug #1374134) */
     property real freediskSpace: {
-        var space = 0
-        for (var i = 0; i < allDrives.length; i++) {
-            space += storageInfo.availableDiskSpace(allDrives[i])
-        }
-        return space
+        return storageInfo.availableDiskSpace("/home")
     }
     property real usedByUbuntu: diskSpace -
                                 freediskSpace -

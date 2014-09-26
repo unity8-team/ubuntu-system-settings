@@ -13,15 +13,14 @@ import dbus
 import dbusmock
 import os
 import subprocess
-from time import sleep
-
 import ubuntuuitoolkit
+
 from autopilot.matchers import Eventually
+from dbusmock.templates.networkmanager import DEVICE_IFACE
+from datetime import datetime
 from fixtures import EnvironmentVariable
 from testtools.matchers import Equals, NotEquals, GreaterThan
-
-from datetime import datetime
-
+from time import sleep
 from ubuntu_system_settings import SystemSettings
 
 ACCOUNTS_IFACE = 'org.freedesktop.Accounts'
@@ -41,6 +40,9 @@ SYSTEM_SERVICE_OBJ = '/Service'
 LM_SERVICE = 'org.freedesktop.login1'
 LM_PATH = '/org/freedesktop/login1'
 LM_IFACE = 'org.freedesktop.login1.Manager'
+NM_SERVICE = 'org.freedesktop.NetworkManager'
+NM_PATH = '/org/freedesktop/NetworkManager'
+NM_IFACE = 'org.freedesktop.NetworkManager'
 
 
 class UbuntuSystemSettingsTestCase(
@@ -737,3 +739,38 @@ class LanguageBaseTestCase(UbuntuSystemSettingsTestCase,
         self.mock_server.terminate()
         self.mock_server.wait()
         super(LanguageBaseTestCase, self).tearDown()
+
+
+class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
+                       dbusmock.DBusTestCase):
+    """ Base class for wifi settings tests"""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.start_system_bus()
+        cls.dbus_con = cls.get_dbus(True)
+        # Add a mock NetworkManager environment so we get consistent results
+        (cls.p_mock, cls.obj_nm) = cls.spawn_server_template(
+            'networkmanager', stdout=subprocess.PIPE)
+        cls.dbusmock = dbus.Interface(cls.obj_nm, dbusmock.MOCK_IFACE)
+
+    def setUp(self, panel=None):
+        self.obj_nm.Reset()
+        device_path = self.obj_nm.AddWiFiDevice('test0', 'Barbaz', 1)
+        self.device_mock = dbus.Interface(self.dbus_con.get_object(
+            'org.freedesktop.NetworkManager', device_path),
+            dbusmock.MOCK_IFACE)
+
+        """A device should not just implement Device.Wireless/Device.Wired
+        interfaces, but also the Device interface. Since we want to test
+        the Disconnect method, we add it."""
+
+        try:
+            self.device_mock.AddMethod(DEVICE_IFACE, 'Disconnect', '', '', '')
+        except:
+            # it was already added
+            pass
+
+        super(WifiBaseTestCase, self).setUp()
+        self.wifi_page = self.system_settings.\
+            main_view.go_to_wifi_page()
