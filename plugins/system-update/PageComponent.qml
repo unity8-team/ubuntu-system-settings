@@ -147,7 +147,7 @@ ItemPage {
         State {
             name: "UPDATE"
             PropertyChanges { target: updateList; visible: true}
-            PropertyChanges { target: installAllButton; visible: root.updatesAvailable > 0}
+            PropertyChanges { target: installAllButton; visible: root.updatesAvailable > 1}
             PropertyChanges { target: updateNotification; visible: false}
         }
     ]
@@ -256,10 +256,10 @@ ItemPage {
             }
 
             ListItem.SingleControl {
-                id: installAllButton
-                objectName: "installAllButton"
-                height: units.gu(8)
+                height: installAllButton.visible ? units.gu(8) : units.gu(2)
                 control: Button {
+                    id: installAllButton
+                    objectName: "installAllButton"
                     property string primaryText: includeSystemUpdate ?
                                                      i18n.tr("Install %1 update…", "Install %1 updates…", root.updatesAvailable).arg(root.updatesAvailable) :
                                                      i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
@@ -336,7 +336,7 @@ ItemPage {
                                 left: parent.left
                                 right: parent.right
                             }
-                            height: childrenRect.height
+                            height: buttonAppUpdate.height
                             
                             Label {
                                 id: labelTitle
