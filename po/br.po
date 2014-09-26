@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-22 19:11+0200\n"
-"PO-Revision-Date: 2014-09-02 06:37+0000\n"
+"PO-Revision-Date: 2014-09-24 09:32+0000\n"
 "Last-Translator: Fohanno Thierry <thierry.fohanno@ofis-bzh.org>\n"
 "Language-Team: Breton <br@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-23 07:15+0000\n"
+"X-Launchpad-Export-Date: 2014-09-25 06:46+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -24,11 +24,11 @@ msgstr "Arventennoù ar reizhiad"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "Reizhiad;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Penndibaboù;Arventennoù;"
 
 #: ../plugins/language//RebootNecessary.qml:34
 #: ../plugins/reset//ResetLauncherHome.qml:59
@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "Adloc'hañ bremañ"
 
 #: ../plugins/language//RebootNecessary.qml:47
 #: ../plugins/language//DisplayLanguage.qml:98
@@ -475,7 +475,7 @@ msgstr "Son ar prennañ"
 
 #: ../plugins/wifi//OtherNetwork.qml:27 ../plugins/wifi//PageComponent.qml:135
 msgid "Connect to hidden network"
-msgstr ""
+msgstr "Kevreañ ouzh ur rouedad kuzhet"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -521,7 +521,7 @@ msgstr "Digevreañ"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
-msgstr ""
+msgstr "Chomlec'h IP"
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
@@ -587,6 +587,7 @@ msgstr "Ret eo adlañsañ ar pellgomzer evit staliañ hizivadenn ar reizhiad."
 #: ../plugins/system-update//PageComponent.qml:95
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
+"Kevreit ar pellgomzer ouzh an tredan a-raok staliañ hizivadenn ar reizhiad."
 
 #: ../plugins/system-update//PageComponent.qml:98
 msgid "Install & Restart"
@@ -812,7 +813,7 @@ msgstr "Lodenn personelaat skeudenn"
 
 #: ../plugins/about//License.qml:30
 msgid "Sorry, this license could not be displayed."
-msgstr ""
+msgstr "Siwazh, n'eus ket bet gallet diskwel an aotre-implijout."
 
 #: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
 msgid "Software licenses"
@@ -844,7 +845,7 @@ msgstr "Surentez ar prennañ"
 
 #: ../plugins/about//PhoneNumbers.qml:31
 msgid "Phone number:"
-msgstr ""
+msgstr "Niverenn bellgomz :"
 
 #: ../plugins/about//PhoneNumber.qml:36
 msgid "Phone number"
@@ -862,11 +863,11 @@ msgstr "Niverenn steudad"
 
 #: ../plugins/about//PageComponent.qml:120
 msgid "Wi-Fi address"
-msgstr ""
+msgstr "Chomlec'h Wi-Fi"
 
 #: ../plugins/about//PageComponent.qml:128
 msgid "Bluetooth address"
-msgstr ""
+msgstr "Chomlec'h Bluetooth"
 
 #: ../plugins/about//PageComponent.qml:139 ../plugins/about//Storage.qml:33
 msgid "Storage"
@@ -1263,8 +1264,8 @@ msgstr "Cheñch ar c'hod PIN"
 #, qt-format
 msgid "Incorrect PIN. %1 attempt remaining."
 msgid_plural "Incorrect PIN. %1 attempts remaining."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Kod PIN direizh. Chom a ra %1 taol-esae."
+msgstr[1] "Kod PIN direizh. Chom a ra %1 a dalioù-esae."
 
 #: ../plugins/security-privacy//SimPin.qml:81
 msgid "Current PIN:"
@@ -1274,8 +1275,8 @@ msgstr "Kod PIN a vremañ :"
 #, qt-format
 msgid "%1 attempt allowed."
 msgid_plural "%1 attempts allowed."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 taol-esae aotreet."
+msgstr[1] "%1 a daolioù-esae aotreet."
 
 #: ../plugins/security-privacy//SimPin.qml:107
 msgid "Choose new PIN:"
@@ -1341,7 +1342,7 @@ msgstr "Prennañ ar pellgomzer"
 #: ../plugins/security-privacy//PhoneLocking.qml:45
 msgctxt "Unlock with swipe"
 msgid "None"
-msgstr ""
+msgstr "Hini ebet"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:46
 #: ../wizard/qml/Pages//15-passwd.qml:99
@@ -1654,7 +1655,7 @@ msgstr "Rakwelet"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "Lemel ar skeudenn"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -1879,7 +1880,7 @@ msgstr "Penndivizoù implij"
 
 #: ../wizard/qml/Pages//20-wifi.qml:27
 msgid "Connect to Wi‑Fi"
-msgstr ""
+msgstr "Kevreañ ouzh ar Wi-Fi"
 
 #: ../wizard/qml/Pages//20-wifi.qml:146
 msgid "Available networks"
@@ -1926,6 +1927,8 @@ msgid ""
 "I have read and agreed to the HERE <a href='terms.qml'>terms and "
 "conditions</a>"
 msgstr ""
+"Lennet em eus <a href='terms.qml'>divizoù implijout</a> HERE hag asantiñ a "
+"ran dezho"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
