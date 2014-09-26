@@ -133,3 +133,29 @@ class WifiTestCase(WifiBaseTestCase):
             lambda:
                 len(self.device_mock.GetMethodCalls('Disconnect')),
             Eventually(Equals(1)))
+
+    """Note: this test does not actually remove previous networks from the UI.
+    The NetworkManager dbusmock template does not currently support deletion
+    of connections."""
+    def test_remove_previous_network(self):
+        click_method = self.system_settings.main_view.scroll_to_and_click
+        previous_networks = [{
+            'ssid': 'Series of Tubes',
+            'connection_name': 'conn_0'
+        }, {
+            'ssid': 'Mi-Fi',
+            'connection_name': 'conn_1'
+        }, {
+            'ssid': 'dev/null',
+            'connection_name': 'conn_2'
+        }]
+
+        self.add_previous_networks(previous_networks)
+
+        self.wifi_page.remove_previous_network(
+            previous_networks[0]['ssid'], scroll_to_and_click=click_method)
+
+        self.system_settings.main_view.go_back()
+
+        self.wifi_page.remove_previous_network(
+            previous_networks[2]['ssid'], scroll_to_and_click=click_method)

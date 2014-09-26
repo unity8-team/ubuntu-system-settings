@@ -28,12 +28,12 @@ import Ubuntu.SystemSettings.Wifi 1.0
 ItemPage {
 
     id: networkDetails
+    objectName: "networkDetailsPage"
+
     property string networkName
     property string password
     property string lastUsed
     property string dbusPath
-
-    signal forgotNetwork()
 
     title: i18n.tr("Network details")
 
@@ -54,7 +54,8 @@ ItemPage {
             control: Label {
                 id: lastField
 
-                text: networkDetails.lastUsed.length !== 0 ? networkDetails.lastUsed : i18n.tr("Never")
+                text: networkDetails.lastUsed.length !== 0 ?
+                    networkDetails.lastUsed : i18n.tr("Never")
             }
         }
 
@@ -66,7 +67,8 @@ ItemPage {
                 id: passwordField
                 readOnly: true
                 text: networkDetails.password
-                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+                echoMode: passwordVisibleSwitch.checked ?
+                    TextInput.Normal : TextInput.Password
             }
         }
 
@@ -82,6 +84,7 @@ ItemPage {
         ListItem.Divider {}
 
         Button {
+            objectName: "forgetNetwork"
             text : i18n.tr("Forget network")
             anchors {
                 left: parent.left
@@ -90,7 +93,6 @@ ItemPage {
             }
             onClicked : {
                 DbusHelper.forgetConnection(dbusPath);
-                networkDetails.forgotNetwork();
                 pageStack.pop();
             }
         }
