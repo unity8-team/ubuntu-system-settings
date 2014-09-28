@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-23 10:16+0000\n"
+"PO-Revision-Date: 2014-09-27 20:27+0000\n"
 "Last-Translator: Åka Sikrom <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-27 06:32+0000\n"
+"X-Launchpad-Export-Date: 2014-09-28 06:36+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -691,11 +691,11 @@ msgstr "Tidligere nettverk"
 
 #: ../plugins/wifi//PageComponent.qml:138
 msgid "Connect to hidden network…"
-msgstr ""
+msgstr "Koble til skjult nettverk …"
 
 #: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
-msgstr ""
+msgstr "Koble til skjult nettverk"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -716,36 +716,38 @@ msgstr "WEP"
 
 #: ../plugins/wifi//RemoveBackground.qml:28
 msgid "Clear"
-msgstr ""
+msgstr "Tøm"
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
-msgstr ""
+msgstr "Ukjent feil"
 
 #: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
-msgstr ""
+msgstr "Ingen begrunnelse"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr ""
+msgstr "Enheten blir nå håndtert"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
-msgstr ""
+msgstr "Enheten blir nå ikke håndtert"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
-msgstr ""
+msgstr "Klarte ikke å klargjøre enheten for oppsett"
 
 #: ../plugins/wifi//Common.qml:46
 msgid ""
 "IP configuration could not be reserved (no available address, timeout, etc.)"
 msgstr ""
+"Klarte ikke å reservere IP-oppsett (ingen adresser tilgjengelig, "
+"tidsavbrudd, e.l.)"
 
 #: ../plugins/wifi//Common.qml:48
 msgid "The IP configuration is no longer valid"
-msgstr ""
+msgstr "IP-oppsettet er ikke lenger gyldig"
 
 #: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"

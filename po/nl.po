@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-24 16:39+0000\n"
+"PO-Revision-Date: 2014-09-27 12:13+0000\n"
 "Last-Translator: rob <linuxned@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-27 06:30+0000\n"
+"X-Launchpad-Export-Date: 2014-09-28 06:35+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -693,11 +693,11 @@ msgstr "Vorige netwerken"
 
 #: ../plugins/wifi//PageComponent.qml:138
 msgid "Connect to hidden network…"
-msgstr ""
+msgstr "Verbinding maken met verborgen netwerk…"
 
 #: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
-msgstr ""
+msgstr "Verbinding maken met verborgen netwerk"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -771,23 +771,23 @@ msgstr ""
 
 #: ../plugins/wifi//Common.qml:60
 msgid "DHCP client failed to start"
-msgstr ""
+msgstr "Starten van DHCP-client mislukt"
 
 #: ../plugins/wifi//Common.qml:62
 msgid "DHCP client error"
-msgstr ""
+msgstr "Fout DHCP-client"
 
 #: ../plugins/wifi//Common.qml:64
 msgid "DHCP client failed"
-msgstr ""
+msgstr "DHCP-client mislukt"
 
 #: ../plugins/wifi//Common.qml:66
 msgid "Shared connection service failed to start"
-msgstr ""
+msgstr "Starten van dienst voor gedeelde verbinding is mislukt"
 
 #: ../plugins/wifi//Common.qml:68
 msgid "Shared connection service failed"
-msgstr ""
+msgstr "Dienst voor gedeelde verbinding is mislukt"
 
 #: ../plugins/wifi//Common.qml:70
 msgid "Necessary firmware for the device may be missing"
@@ -795,7 +795,7 @@ msgstr ""
 
 #: ../plugins/wifi//Common.qml:72
 msgid "The device was removed"
-msgstr ""
+msgstr "Het apparaat werd verwijderd"
 
 #: ../plugins/wifi//Common.qml:74
 msgid "NetworkManager went to sleep"
@@ -819,7 +819,7 @@ msgstr ""
 
 #: ../plugins/wifi//Common.qml:84
 msgid "The modem could not be found"
-msgstr ""
+msgstr "Het modem kon niet gevonden worden"
 
 #: ../plugins/wifi//Common.qml:86
 msgid "The Bluetooth connection failed or timed out"
@@ -831,11 +831,11 @@ msgstr ""
 
 #: ../plugins/wifi//Common.qml:90
 msgid "ModemManager is unavailable"
-msgstr ""
+msgstr "Modembeheer is niet beschikbaar"
 
 #: ../plugins/wifi//Common.qml:92
 msgid "The Wi-Fi network could not be found"
-msgstr ""
+msgstr "Het WiFinetwerk kon niet gevonden geworden"
 
 #: ../plugins/wifi//Common.qml:94
 msgid "A secondary connection of the base connection failed"
@@ -2174,7 +2174,7 @@ msgstr "telefoneren"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:50
 msgid "services"
-msgstr ""
+msgstr "diensten"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:52
@@ -2196,7 +2196,7 @@ msgstr ""
 #: ../po/settings.js:58
 #: ../po/settings.js:154
 msgid "dialpad"
-msgstr ""
+msgstr "toetsenblok"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:60
@@ -2439,7 +2439,7 @@ msgstr "Wi-Fi"
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:176
 msgid "hidden"
-msgstr ""
+msgstr "verborgen"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:178

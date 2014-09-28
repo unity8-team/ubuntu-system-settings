@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-23 11:36+0000\n"
+"PO-Revision-Date: 2014-09-27 12:36+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-27 06:31+0000\n"
+"X-Launchpad-Export-Date: 2014-09-28 06:36+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -690,11 +690,11 @@ msgstr "Korábbi hálózatok"
 
 #: ../plugins/wifi//PageComponent.qml:138
 msgid "Connect to hidden network…"
-msgstr ""
+msgstr "Csatlakozás rejtett hálózathoz…"
 
 #: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
-msgstr ""
+msgstr "Csatlakozás rejtett hálózathoz"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -715,128 +715,130 @@ msgstr "WEP"
 
 #: ../plugins/wifi//RemoveBackground.qml:28
 msgid "Clear"
-msgstr ""
+msgstr "Törlés"
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
-msgstr ""
+msgstr "Ismeretlen hiba"
 
 #: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
-msgstr ""
+msgstr "Nincs megadva ok"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr ""
+msgstr "Az eszköz mostantól kezelt"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
-msgstr ""
+msgstr "Az eszköz mostantól nem kezelt"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
-msgstr ""
+msgstr "Az eszköz nem készíthető fel a beállításra"
 
 #: ../plugins/wifi//Common.qml:46
 msgid ""
 "IP configuration could not be reserved (no available address, timeout, etc.)"
 msgstr ""
+"Az IP-beállításokat nem lehet fenntartani (nem elérhető a cím, időtúllépés, "
+"stb.)"
 
 #: ../plugins/wifi//Common.qml:48
 msgid "The IP configuration is no longer valid"
-msgstr ""
+msgstr "Az IP-beállítások már nem érvényesek"
 
 #: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"
-msgstr ""
+msgstr "A hitelesítési adatok helytelenek"
 
 #: ../plugins/wifi//Common.qml:52
 msgid "802.1X supplicant disconnected"
-msgstr ""
+msgstr "A 802.1X-kliens bontotta a kapcsolatot"
 
 #: ../plugins/wifi//Common.qml:54
 msgid "802.1X supplicant configuration failed"
-msgstr ""
+msgstr "A 802.1X-kliens beállítása meghiúsult"
 
 #: ../plugins/wifi//Common.qml:56
 msgid "802.1X supplicant failed"
-msgstr ""
+msgstr "A 802.1X-kliens sikertelen"
 
 #: ../plugins/wifi//Common.qml:58
 msgid "802.1X supplicant took too long to authenticate"
-msgstr ""
+msgstr "A 802.1X-kliens hitelesítése túl sokáig tartott"
 
 #: ../plugins/wifi//Common.qml:60
 msgid "DHCP client failed to start"
-msgstr ""
+msgstr "A DHCP kliens nem indult el"
 
 #: ../plugins/wifi//Common.qml:62
 msgid "DHCP client error"
-msgstr ""
+msgstr "DHCP-klienshiba"
 
 #: ../plugins/wifi//Common.qml:64
 msgid "DHCP client failed"
-msgstr ""
+msgstr "A DHCP-kliens sikertelen"
 
 #: ../plugins/wifi//Common.qml:66
 msgid "Shared connection service failed to start"
-msgstr ""
+msgstr "A megosztott kapcsolat szolgáltatás nem indult el"
 
 #: ../plugins/wifi//Common.qml:68
 msgid "Shared connection service failed"
-msgstr ""
+msgstr "A megosztott kapcsolat szolgáltatás sikertelen"
 
 #: ../plugins/wifi//Common.qml:70
 msgid "Necessary firmware for the device may be missing"
-msgstr ""
+msgstr "Az eszközhöz szükséges firmware hiányozhat"
 
 #: ../plugins/wifi//Common.qml:72
 msgid "The device was removed"
-msgstr ""
+msgstr "Az eszköz eltávolításra került"
 
 #: ../plugins/wifi//Common.qml:74
 msgid "NetworkManager went to sleep"
-msgstr ""
+msgstr "A Hálózatkezelő altatva"
 
 #: ../plugins/wifi//Common.qml:76
 msgid "The device's active connection disappeared"
-msgstr ""
+msgstr "Az eszköz aktív kapcsolata eltűnt"
 
 #: ../plugins/wifi//Common.qml:78
 msgid "Device disconnected by user or client"
-msgstr ""
+msgstr "Az eszközt a felhasználó vagy a kliens leválasztotta"
 
 #: ../plugins/wifi//Common.qml:80
 msgid "The device's existing connection was assumed"
-msgstr ""
+msgstr "Az eszköz meglévő kapcsolata felvéve"
 
 #: ../plugins/wifi//Common.qml:82
 msgid "The supplicant is now available"
-msgstr ""
+msgstr "A kliens nem érhető el"
 
 #: ../plugins/wifi//Common.qml:84
 msgid "The modem could not be found"
-msgstr ""
+msgstr "A modem nem található"
 
 #: ../plugins/wifi//Common.qml:86
 msgid "The Bluetooth connection failed or timed out"
-msgstr ""
+msgstr "A Bluetooth kapcsolódás sikertelen, vagy túllépte az időkorlátot"
 
 #: ../plugins/wifi//Common.qml:88
 msgid "A dependency of the connection failed"
-msgstr ""
+msgstr "Egy sikertelen kapcsolódási függőség"
 
 #: ../plugins/wifi//Common.qml:90
 msgid "ModemManager is unavailable"
-msgstr ""
+msgstr "ModemManager nem elérhető"
 
 #: ../plugins/wifi//Common.qml:92
 msgid "The Wi-Fi network could not be found"
-msgstr ""
+msgstr "A Wi-FI hálózat nem található"
 
 #: ../plugins/wifi//Common.qml:94
 msgid "A secondary connection of the base connection failed"
-msgstr ""
+msgstr "Az alap kapcsolat másodlagos kapcsolata sikertelen"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
@@ -935,7 +937,7 @@ msgstr "Bluetooth cím"
 #: ../plugins/about//PageComponent.qml:144
 #, qt-format
 msgid "%1 free"
-msgstr ""
+msgstr "%1 szabad"
 
 #: ../plugins/about//PageComponent.qml:146
 msgid "Software:"
@@ -2078,7 +2080,7 @@ msgstr "frissítés"
 #: ../po/settings.js:44
 #: ../po/settings.js:188
 msgid "apps"
-msgstr ""
+msgstr "alkalmazás"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
@@ -2089,22 +2091,22 @@ msgstr ""
 #: ../po/settings.js:274
 #: ../po/settings.js:340
 msgid "automatic"
-msgstr ""
+msgstr "automatikus"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:16
 msgid "download"
-msgstr ""
+msgstr "letöltés"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:18
 msgid "upgrade"
-msgstr ""
+msgstr "frissítés"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:20
 msgid "click"
-msgstr ""
+msgstr "click"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:30
@@ -2129,7 +2131,7 @@ msgstr "nem elérhető"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: ../po/settings.js:30
 msgid "airplane"
-msgstr ""
+msgstr "repülőgép"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
@@ -2171,39 +2173,39 @@ msgstr "telefon"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:50
 msgid "services"
-msgstr ""
+msgstr "szolgáltatások"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:52
 msgid "forwarding"
-msgstr ""
+msgstr "továbbítás"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:54
 msgid "waiting"
-msgstr ""
+msgstr "várakozás"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:56
 msgid "call"
-msgstr ""
+msgstr "hívás"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:58
 #: ../po/settings.js:154
 msgid "dialpad"
-msgstr ""
+msgstr "tárcsázó"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:60
 msgid "shortcuts"
-msgstr ""
+msgstr "gyorshívás"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:62
 msgid "numbers"
-msgstr ""
+msgstr "számok"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:154
@@ -2223,22 +2225,22 @@ msgstr "háttérkép"
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:72
 msgid "art"
-msgstr ""
+msgstr "művészet"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:74
 msgid "photo"
-msgstr ""
+msgstr "fénykép"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:76
 msgid "picture"
-msgstr ""
+msgstr "kép"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:78
 msgid "image"
-msgstr ""
+msgstr "kép"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
@@ -2250,54 +2252,54 @@ msgstr "nyelv"
 #: ../po/settings.js:84
 #: ../po/settings.js:158
 msgid "keyboard"
-msgstr ""
+msgstr "billentyűzet"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:86
 msgid "spellcheck"
-msgstr ""
+msgstr "helyesírás-ellenőrzés"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:90
 msgid "correct"
-msgstr ""
+msgstr "javítás"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:92
 msgid "suggestions"
-msgstr ""
+msgstr "javaslatok"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:94
 msgid "capitalization"
-msgstr ""
+msgstr "nagybetűre alakítás"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:96
 msgid "punctuation"
-msgstr ""
+msgstr "központozás"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:98
 msgid "layout"
-msgstr ""
+msgstr "kiosztás"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../po/settings.js:100
 #: ../po/settings.js:336
 msgid "display"
-msgstr ""
+msgstr "kijelző"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:102
 msgid "words"
-msgstr ""
+msgstr "szavak"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:104
 msgid "vibration"
-msgstr ""
+msgstr "rezgés"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:130
@@ -2327,12 +2329,12 @@ msgstr "bluetooth"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:118
 msgid "headset"
-msgstr ""
+msgstr "fejhallgató"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:120
 msgid "pair"
-msgstr ""
+msgstr "párosít"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:88
@@ -2342,17 +2344,17 @@ msgstr "eszköz"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:124
 msgid "discover"
-msgstr ""
+msgstr "felfedez"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:126
 msgid "car"
-msgstr ""
+msgstr "autó"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:128
 msgid "handsfree"
-msgstr ""
+msgstr "kihangosító"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:48
@@ -2364,19 +2366,19 @@ msgstr "vezeték nélküli"
 #: ../po/settings.js:132
 #: ../po/settings.js:172
 msgid "connect"
-msgstr ""
+msgstr "csatlakoztatás"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:134
 #: ../po/settings.js:174
 msgid "disconnect"
-msgstr ""
+msgstr "szétkapcsolás"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:136
 msgid "stereo"
-msgstr ""
+msgstr "sztereó"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:106
@@ -2401,27 +2403,27 @@ msgstr "hang"
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:148
 msgid "silent"
-msgstr ""
+msgstr "néma"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:150
 msgid "ringtone"
-msgstr ""
+msgstr "csengőhang"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:152
 msgid "vibrate"
-msgstr ""
+msgstr "rezgés"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:156
 msgid "message"
-msgstr ""
+msgstr "üzenet"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:160
 msgid "volume"
-msgstr ""
+msgstr "hangerő"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:50
@@ -2436,19 +2438,19 @@ msgstr "wi-fi"
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:176
 msgid "hidden"
-msgstr ""
+msgstr "rejtett"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:178
 msgid "ip"
-msgstr ""
+msgstr "ip"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:180
 #: ../po/settings.js:222
 msgid "address"
-msgstr ""
+msgstr "cím"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:102
@@ -2458,42 +2460,42 @@ msgstr "értesítések"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:190
 msgid "authorize"
-msgstr ""
+msgstr "engedélyez"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:192
 msgid "alerts"
-msgstr ""
+msgstr "riasztások"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:194
 msgid "permissions"
-msgstr ""
+msgstr "engedélyek"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:196
 msgid "badges"
-msgstr ""
+msgstr "bélyegkép"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:198
 msgid "facebook"
-msgstr ""
+msgstr "facebook"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:200
 msgid "twitter"
-msgstr ""
+msgstr "twitter"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:202
 msgid "flickr"
-msgstr ""
+msgstr "flickr"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:204
 msgid "gmail"
-msgstr ""
+msgstr "gmail"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:86
@@ -2508,57 +2510,57 @@ msgstr "infó"
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:216
 msgid "number"
-msgstr ""
+msgstr "szám"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:218
 msgid "imei"
-msgstr ""
+msgstr "imei"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:220
 msgid "serial"
-msgstr ""
+msgstr "sorozatszám"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:224
 msgid "mac"
-msgstr ""
+msgstr "mac"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:226
 msgid "licenses"
-msgstr ""
+msgstr "licencek"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:228
 msgid "developer"
-msgstr ""
+msgstr "fejlesztő"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:232
 msgid "storage"
-msgstr ""
+msgstr "tárhely"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:234
 msgid "disk"
-msgstr ""
+msgstr "lemez"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:236
 msgid "space"
-msgstr ""
+msgstr "szabad hely"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:238
 msgid "version"
-msgstr ""
+msgstr "verzió"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:240
 msgid "revision"
-msgstr ""
+msgstr "kiadás"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:140
@@ -2575,42 +2577,42 @@ msgstr "magánszféra"
 #: ../po/settings.js:250
 #: ../po/settings.js:314
 msgid "sim"
-msgstr ""
+msgstr "sim"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:252
 msgid "pin"
-msgstr ""
+msgstr "pin"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:254
 msgid "code"
-msgstr ""
+msgstr "kód"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:256
 msgid "password"
-msgstr ""
+msgstr "jelszó"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:258
 msgid "passphrase"
-msgstr ""
+msgstr "jelmondat"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:260
 msgid "swipe"
-msgstr ""
+msgstr "csúsztat"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:262
 msgid "allow"
-msgstr ""
+msgstr "engedélyez"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:264
 msgid "access"
-msgstr ""
+msgstr "hozzáférés"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:76
@@ -2635,22 +2637,22 @@ msgstr "visszaállítás"
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:280
 msgid "erase"
-msgstr ""
+msgstr "törlés"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:282
 msgid "factory"
-msgstr ""
+msgstr "gyári"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:284
 msgid "clear"
-msgstr ""
+msgstr "törlés"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:286
 msgid "restore"
-msgstr ""
+msgstr "visszaállít"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:20
@@ -2670,42 +2672,42 @@ msgstr "gsm"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:298
 msgid "data"
-msgstr ""
+msgstr "adat"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:300
 msgid "carrier"
-msgstr ""
+msgstr "szolgáltató"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:302
 msgid "4g"
-msgstr ""
+msgstr "4g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:304
 msgid "3g"
-msgstr ""
+msgstr "3g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:306
 msgid "2g"
-msgstr ""
+msgstr "2g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:308
 msgid "lte"
-msgstr ""
+msgstr "lte"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:310
 msgid "apn"
-msgstr ""
+msgstr "apn"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:312
 msgid "roam"
-msgstr ""
+msgstr "roam"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:14
@@ -2720,22 +2722,22 @@ msgstr "energia"
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:322
 msgid "charge"
-msgstr ""
+msgstr "töltés"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:324
 msgid "idle"
-msgstr ""
+msgstr "inaktív"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:328
 msgid "disable"
-msgstr ""
+msgstr "kikapcsol"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:330
 msgid "enable"
-msgstr ""
+msgstr "bekapcsol"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:70
@@ -2745,7 +2747,7 @@ msgstr "fényerő"
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../po/settings.js:342
 msgid "adjust"
-msgstr ""
+msgstr "állít"
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
