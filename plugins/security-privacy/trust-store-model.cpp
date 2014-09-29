@@ -25,7 +25,6 @@
 #include <QList>
 #include <QMap>
 #include <QSet>
-#include <QSettings>
 #include <QStandardPaths>
 
 #include <core/trust/resolve.h>
@@ -49,32 +48,32 @@ public:
                                                     nullptr);
 
         if (!loaded) {
-            g_warning ("Couldn't parse the desktop: %s", desktopFilename.toUtf8().data());
-            g_key_file_free (desktopInfo);
+            g_warning("Couldn't parse the desktop: %s", desktopFilename.toUtf8().data());
+            g_key_file_free(desktopInfo);
             return;
         }
 
-        gchar * name = g_key_file_get_locale_string (desktopInfo,
-                                              G_KEY_FILE_DESKTOP_GROUP,
-                                              G_KEY_FILE_DESKTOP_KEY_NAME,
-                                              nullptr,
-                                              nullptr);
+        gchar *name = g_key_file_get_locale_string(desktopInfo,
+                                                   G_KEY_FILE_DESKTOP_GROUP,
+                                                   G_KEY_FILE_DESKTOP_KEY_NAME,
+                                                   nullptr,
+                                                   nullptr);
         displayName = QString(name);
 
-        gchar * icon = g_key_file_get_string (desktopInfo,
-                                              G_KEY_FILE_DESKTOP_GROUP,
-                                              G_KEY_FILE_DESKTOP_KEY_ICON,
-                                              nullptr);
-        gchar * path = g_key_file_get_string (desktopInfo,
-                                              G_KEY_FILE_DESKTOP_GROUP,
-                                              G_KEY_FILE_DESKTOP_KEY_PATH,
-                                              nullptr);
+        gchar *icon = g_key_file_get_string(desktopInfo,
+                                            G_KEY_FILE_DESKTOP_GROUP,
+                                            G_KEY_FILE_DESKTOP_KEY_ICON,
+                                            nullptr);
+        gchar *path = g_key_file_get_string(desktopInfo,
+                                            G_KEY_FILE_DESKTOP_GROUP,
+                                            G_KEY_FILE_DESKTOP_KEY_PATH,
+                                            nullptr);
         iconName = resolveIcon(QString(icon),
                                QString(path));
-        g_free (name);
-        g_free (icon);
-        g_free (path);
-        g_key_file_free (desktopInfo);
+        g_free(name);
+        g_free(icon);
+        g_free(path);
+        g_key_file_free(desktopInfo);
     }
 
     QString resolveDesktopFilename(const QString &id) {
