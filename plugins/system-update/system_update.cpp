@@ -122,15 +122,11 @@ bool SystemUpdate::checkTarget() {
     reply.waitForFinished();
     if (reply.isValid()) {
         QMap<QString, QString> result = reply.argumentAt<0>();
-        qWarning() << Q_FUNC_INFO << result;
         target = result.value("target_build_number", "0").toInt();
         current = result.value("current_build_number", "0").toInt();
     } else {
         qWarning() << "Error when retrieving version information: " << reply.error();
     }
-
-    qWarning() << Q_FUNC_INFO << target;
-    qWarning() << Q_FUNC_INFO << current;
 
     return target > current;
 }

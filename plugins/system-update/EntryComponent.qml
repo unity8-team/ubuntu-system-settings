@@ -49,11 +49,6 @@ ListItem.SingleValue {
             root.parent.visible = false;
     }
 
-    Component.onCompleted: {
-        // Ensure the entryComponent is hidden
-        root.parent.visible = false;
-    }
-
     Connections {
         id: updateManager
         objectName: "updateManager"
