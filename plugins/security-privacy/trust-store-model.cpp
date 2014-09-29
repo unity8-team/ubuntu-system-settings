@@ -39,6 +39,7 @@ public:
 
     void setId(const QString &id) {
         this->id = id;
+
         GKeyFile *desktopInfo = g_key_file_new();
         QString desktopFilename = resolveDesktopFilename(id);
 
