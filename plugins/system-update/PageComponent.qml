@@ -257,6 +257,7 @@ ItemPage {
 
             ListItem.SingleControl {
                 height: installAllButton.visible ? units.gu(8) : units.gu(2)
+                highlightWhenPressed: false
                 control: Button {
                     id: installAllButton
                     objectName: "installAllButton"
