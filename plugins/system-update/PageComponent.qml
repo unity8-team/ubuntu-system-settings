@@ -109,6 +109,12 @@ ItemPage {
         id: uoaConfig
         applicationId: "ubuntu-system-settings"
         providerId: "ubuntuone"
+
+        onFinished: {
+            credentialsNotification.visible = false;
+            root.state = "SEARCHING";
+            updateManager.checkUpdates();
+        }
     }
 
     Component {
