@@ -58,7 +58,7 @@ public:
                                                    G_KEY_FILE_DESKTOP_KEY_NAME,
                                                    nullptr,
                                                    nullptr);
-        displayName = QString(name);
+        displayName = QString::fromUtf8(name);
 
         gchar *icon = g_key_file_get_string(desktopInfo,
                                             G_KEY_FILE_DESKTOP_GROUP,
@@ -68,8 +68,8 @@ public:
                                             G_KEY_FILE_DESKTOP_GROUP,
                                             G_KEY_FILE_DESKTOP_KEY_PATH,
                                             nullptr);
-        iconName = resolveIcon(QString(icon),
-                               QString(path));
+        iconName = resolveIcon(QString::fromUtf8(icon),
+                               QString::fromUtf8(path));
         g_free(name);
         g_free(icon);
         g_free(path);
