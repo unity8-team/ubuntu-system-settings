@@ -110,7 +110,7 @@ Item {
                 if (pageList.index >= pageStack.depth - 1)
                     pageList.prev() // update pageList.index, but not for extra pages
                 pop()
-                if (currentPage.opacity === 0) { // undo skipped pages
+                if (!currentPage || currentPage.opacity === 0) { // undo skipped pages
                     prev()
                 } else {
                     currentPage.enabled = true

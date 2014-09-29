@@ -20,10 +20,10 @@ import Ubuntu.Components 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
-    title: i18n.tr("Add a SIM card")
+    title: i18n.tr("Add a SIM card and restart your device")
     forwardButtonSourceComponent: forwardButton
-    hasBackButton: false
 
+    // No need for skipValid, since OfonoManager does everything synchronously
     skip: !manager.available || manager.modems.length === 0 || simManager0.present || simManager1.present
 
     OfonoManager {
@@ -44,14 +44,7 @@ LocalComponents.Page {
 
     Column {
         anchors.fill: content
-        spacing: units.gu(2)
-
-        Label {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            wrapMode: Text.Wrap
-            text: i18n.tr("Please insert a SIM card before you continue, then restart your device.")
-        }
+        spacing: units.gu(4)
 
         Label {
             anchors.left: parent.left

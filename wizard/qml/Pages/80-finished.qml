@@ -41,7 +41,6 @@ LocalComponents.Page {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            fontSize: "large"
             text: i18n.tr("Your phone is now ready to use.")
         }
     }

@@ -31,8 +31,6 @@ LocalComponents.Page {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            fontSize: "large"
-            font.bold: true
             text: i18n.tr("Your phone is set up to automatically report errors to Canonical and its partners, the makers of the operating system.")
         }
 
@@ -40,7 +38,9 @@ LocalComponents.Page {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            text: i18n.tr("This can be disabled in System Settings > Security & Privacy.")
+            textFormat: Text.StyledText
+            text: i18n.tr("This can be disabled here:") + "<br>" +
+                  "<b>" + i18n.tr("System Settings &gt; Security &amp; Privacy") + "</b>"
         }
     }
 

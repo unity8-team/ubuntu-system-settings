@@ -34,7 +34,7 @@ import "../Components" as LocalComponents
 
 LocalComponents.Page {
     id: passwdPage
-    title: i18n.tr("Unlock security")
+    title: i18n.tr("Lock security")
     forwardButtonSourceComponent: forwardButton
 
     function indexToMethod(index) {
@@ -63,74 +63,18 @@ LocalComponents.Page {
     Column {
         id: column
         anchors.fill: content
-        spacing: units.gu(1)
+        spacing: units.gu(4)
 
         Label {
             anchors.left: parent.left
             anchors.right: parent.right
             wrapMode: Text.Wrap
-            text: i18n.tr("Please select how you’d like to unlock your phone. You can choose between a simple swipe, passcode or passphrase.")
-        }
-
-        Item { // spacer
-            height: units.gu(1)
-            width: units.gu(1) // needed else it will be ignored
-        }
-
-        Repeater {
-            id: explanations
-            anchors.left: parent.left
-            anchors.right: parent.right
-            model: 3
-            Row {
-                Label {
-                    id: typeName
-                    fontSize: "x-small"
-                    text: {
-                        var method = indexToMethod(index)
-                        var label = "<b>"
-                        if (method === UbuntuSecurityPrivacyPanel.Swipe)
-                            label += i18n.tr("Swipe")
-                        else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            label += i18n.tr("Passcode")
-                        else
-                            label += i18n.tr("Passphrase")
-                        label += "</b> —"
-                        return label
-                    }
-                }
-                Label {
-                    fontSize: "x-small"
-                    wrapMode: Text.Wrap
-                    width: explanations.width - typeName.width
-                    text: {
-                        var method = indexToMethod(index)
-                        if (method === UbuntuSecurityPrivacyPanel.Swipe)
-                           return " " + i18n.tr("Unlock by simply swiping to the left")
-                        else if (method === UbuntuSecurityPrivacyPanel.Passcode)
-                            return " " + i18n.tr("Numbers only (4 digits)")
-                        else
-                            return " " + i18n.tr("Letters, numbers and phrases")
-                    }
-                }
-            }
-        }
-
-        Item { // spacer
-            height: units.gu(1)
-            width: units.gu(1) // needed else it will be ignored
-        }
-
-        Label {
-            fontSize: "x-small"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            wrapMode: Text.Wrap
-            text: i18n.tr("Please select")
+            text: i18n.tr("Please select how you’d like to unlock your phone.")
         }
 
         ItemSelector {
             id: selector
+            expanded: true
             anchors.left: parent.left
             anchors.right: parent.right
 
@@ -141,11 +85,24 @@ LocalComponents.Page {
             delegate: OptionSelectorDelegate {
                 // use subText because we want the text to be small, and we have no other way to control it
                 subText: {
-                    if (index === 0)      return i18n.tr("Swipe")
-                    else if (index === 1) return i18n.tr("Passcode")
-                    else                  return i18n.tr("Passphrase")
+                    var method = indexToMethod(index)
+                    var name = ""
+                    var desc = ""
+                    if (method === UbuntuSecurityPrivacyPanel.Swipe) {
+                        name = i18n.tr("Swipe")
+                        desc = i18n.tr("No security")
+                    } else if (method === UbuntuSecurityPrivacyPanel.Passcode) {
+                        name = i18n.tr("Passcode")
+                        desc = i18n.tr("4 numbers")
+                    } else {
+                        name = i18n.tr("Passphrase")
+                        desc = i18n.tr("Numbers and letters")
+                    }
+                    return "<b>%1</b> (%2)".arg(name).arg(desc)
                 }
             }
+
+            style: Item {}
         }
     }
 

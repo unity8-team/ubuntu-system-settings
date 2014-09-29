@@ -43,15 +43,6 @@ LocalComponents.Page {
         menuObjectPath: "/com/canonical/indicator/network/phone_wifi_settings"
     }
 
-    QMenuModel.QDBusActionGroup {
-        id: locationActionGroup
-        busType: QMenuModel.DBus.SessionBus
-        busName: "com.canonical.indicator.location"
-        objectPath: "/com/canonical/indicator/location"
-        property variant enabled: action("location-detection-enabled")
-        Component.onCompleted: start()
-    }
-
     Component {
         id: accessPointComponent
         ListItem.Standard {
@@ -152,14 +143,14 @@ LocalComponents.Page {
             anchors.right: parent.right
             anchors.rightMargin: rightMargin
             fontSize: "small"
-            text: menuModel.count > 0 ? i18n.tr("Available networks")
+            text: menuModel.count > 0 ? i18n.tr("Available networks…")
                                       : i18n.tr("No available networks.")
         }
 
         Flickable {
             anchors.left: parent.left
             anchors.right: parent.right
-            height: column.height - label.height - locationCheck.height - column.spacing * 2
+            height: column.height - label.height - column.spacing
             contentHeight: contentItem.childrenRect.height
             clip: true
             flickDeceleration: 1500 * units.gridUnit / 8
@@ -196,18 +187,6 @@ LocalComponents.Page {
                     }
                 }
             }
-        }
-
-        LocalComponents.CheckableSetting {
-            id: locationCheck
-            anchors.left: parent.left
-            anchors.right: parent.right
-            leftMargin: wifiPage.leftMargin
-            rightMargin: wifiPage.rightMargin
-            showDivider: false
-            text: i18n.tr("Use your mobile network and Wi-Fi to determine where you are")
-            checked: locationActionGroup.enabled.state
-            onTriggered: locationActionGroup.enabled.activate()
         }
     }
 
