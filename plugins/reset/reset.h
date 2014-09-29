@@ -41,7 +41,6 @@ public:
 
 private:
     AccountsService m_accountsService;
-    QDBusConnection m_systemBusConnection;
 };
 
 #endif // RESET_H
