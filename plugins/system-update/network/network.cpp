@@ -107,6 +107,7 @@ void Network::onReply(QNetworkReply *reply)
                     QString version = object.value("version").toString();
                     QString icon_url = object.value("icon_url").toString();
                     QString url = object.value("download_url").toString();
+                    QString download_sha512 = object.value("download_sha512").toString();
                     int size = object.value("binary_filesize").toVariant().toInt();
                     if (m_apps.contains(name)) {
                         m_apps[name]->setRemoteVersion(version);
@@ -114,6 +115,7 @@ void Network::onReply(QNetworkReply *reply)
                             m_apps[name]->setIconUrl(icon_url);
                             m_apps[name]->setDownloadUrl(url);
                             m_apps[name]->setBinaryFilesize(size);
+                            m_apps[name]->setDownloadSha512(download_sha512);
                             updates = true;
                         }
                     }
