@@ -275,8 +275,17 @@ ItemPage {
                             updateList.currentIndex = i;
                             var item = updateList.currentItem;
                             var modelItem = UpdateManager.model[i];
-                            if (modelItem.updateState != root.installAll && !modelItem.updateReady) {
-                                item.actionButton.clicked();
+                            if (modelItem.updateState && !modelItem.updateReady && modelItem.selected) {
+                                item.pause();
+                                continue;
+                            }
+                            if (!modelItem.updateState && !modelItem.updateReady && modelItem.selected) {
+                                item.resume();
+                                continue;
+                            }
+                            if (!modelItem.updateState && !modelItem.updateReady && !modelItem.selected) {
+                                item.start();
+                                continue;
                             }
                         }
                     }
@@ -312,6 +321,24 @@ ItemPage {
                     property alias progressBar: progress
                     property bool installing: modelData.updateReady || (progressBar.value === progressBar.maximumValue)
 
+                    function pause () {
+                        console.warn("PAUSE: " + modelData.packageName);
+                        modelData.updateState = false;
+                        tracker.pause();
+                    }
+
+                    function resume () {
+                        console.warn("RESUME: " + modelData.packageName);
+                        modelData.updateState = true;
+                        tracker.resume();
+                    }
+
+                    function start () {
+                        console.warn("START: " + modelData.packageName);
+                        modelData.selected = true;
+                        modelData.updateState = true;
+                        UpdateManager.startDownload(modelData.packageName);
+                    }
                     Column {
                         id: textArea
                         objectName: "textArea"
@@ -375,26 +402,30 @@ ItemPage {
                                     return i18n.tr("Update");
                                 }
 
-                                onClicked: {
+                                function handle_update() {
+                                    if (modelData.updateState && !modelData.systemUpdate)
+                                        return pause();
+                                    if (!modelData.updateState && !modelData.systemUpdate && modelData.selected)
+                                        return resume();
+                                    if (!modelData.updateState && !modelData.systemUpdate && !modelData.selected)
+                                        return start();
+
                                     if (textArea.retry) {
                                         textArea.retry = false;
                                         UpdateManager.retryDownload(modelData.packageName);
+                                        return;
                                     } else if (modelData.updateReady) {
                                         PopupUtils.open(dialogInstallComponent);
+                                        return;
                                     } else if (modelData.updateState) {
                                         if (modelData.systemUpdate) {
-                                            UpdateManager.pauseDownload(modelData.packageName);
-                                        } else {
-                                            tracker.pause();
-                                        }
-                                    } else {
-                                        if (!modelData.selected || modelData.systemUpdate) {
-                                            modelData.selected = true;
-                                            UpdateManager.startDownload(modelData.packageName);
-                                        } else {
-                                            tracker.resume();
+                                            return UpdateManager.pauseDownload(modelData.packageName);
                                         }
                                     }
+                                 }
+
+                                onClicked: {
+                                    handle_update();
                                 }
                             }
                         } 
@@ -459,6 +490,12 @@ ItemPage {
                                     root.updatesAvailable -= 1;
                                     modelData.updateRequired = false;
                                     UpdateManager.updateClickScope();
+                                }
+
+                                onProcessing: {
+                                    console.warn("onProcessing: " + modelData.packageName + " " + path);
+                                    installing = true;
+                                    modelData.updateState = false;
                                 }
 
                                 onStarted: {
@@ -558,8 +595,6 @@ ItemPage {
                 }
 
             }
-
-
         }
     }
 
