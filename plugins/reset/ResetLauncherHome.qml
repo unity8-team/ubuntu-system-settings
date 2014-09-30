@@ -46,7 +46,7 @@ Component {
             onClicked: {
                 dialog.state = "clicked";
                 unitySettings.schema.reset("favorites");
-                resetBackend.resetLauncher();
+                unitySettings.schema.reset("items");
                 root.done();
             }
         }
