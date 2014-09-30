@@ -21,9 +21,11 @@
 import GSettings 1.0
 import QMenuModel 0.1
 import QtQuick 2.0
+import Qt.labs.folderlistmodel 2.1
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
 import Ubuntu.SystemSettings.SecurityPrivacy 1.0
+import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import SystemSettings 1.0
 
 ItemPage {
@@ -33,16 +35,53 @@ ItemPage {
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
-
         QDBusActionGroup {
             id: locationActionGroup
             busType: DBus.SessionBus
             busName: "com.canonical.indicator.location"
             objectPath: "/com/canonical/indicator/location"
-
+    
             property variant enabled: action("location-detection-enabled")
 
             Component.onCompleted: start()
+        }
+
+        FolderListModel {
+            id: termsModel
+            folder: System.hereLicensePath
+            nameFilters: ["*.html"]
+            showDirs: false
+            showOnlyReadable: true
+        }
+
+        ListItem.Empty {
+            showDivider: false
+            visible: System.hereLicensePath !== "" && termsModel.count > 0
+            implicitHeight: termsLabel.height + units.gu(2)
+
+            Label {
+                id: termsLabel
+                anchors {
+                    left: termsCheck.right
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: units.gu(2)
+                }
+                wrapMode: Text.Wrap
+                // TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+                text: i18n.tr("I have read and agreed to the HERE <a href='terms.qml'>terms and conditions</a>")
+                onLinkActivated: pageStack.push(Qt.resolvedUrl(link))
+            }
+            CheckBox {
+                id: termsCheck
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                }
+
+                checked: System.hereEnabled
+                onTriggered: System.hereEnabled = checked
+            }
         }
 
         ListItem.Standard {
