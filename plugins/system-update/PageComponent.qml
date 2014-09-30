@@ -190,10 +190,12 @@ ItemPage {
         }
 
         onSystemUpdateFailed: {
+            console.warn("onSystemUpdateFailed");
             root.state = "SYSTEMUPDATEFAILED";
         }
 
         onUpdateProcessFailed: {
+            console.warn("onUpdateProcessFailed");
             root.state = "SYSTEMUPDATEFAILED";
         }
 
@@ -282,12 +284,12 @@ ItemPage {
                                 UpdateManager.retryDownload(modelItem.packageName);
                                 continue;
                             }
-                            if (root.installAll && modelItem.updateState && !modelItem.updateReady && modelItem.selected) {
+                            if (root.installAll && !modelItem.updateReady && modelItem.selected) {
                                 item.pause();
                                 continue;
                             }
                             console.warn("Past pause");
-                            if (!root.installAll && !modelItem.updateState && !modelItem.updateReady && modelItem.selected) {
+                            if (!root.installAll && !modelItem.updateReady && modelItem.selected) {
                                 item.resume();
                                 continue;
                             }
@@ -333,18 +335,22 @@ ItemPage {
 
                     property alias actionButton: buttonAppUpdate
                     property alias progressBar: progress
-                    property bool installing: modelData.updateReady || (progressBar.value === progressBar.maximumValue)
+                    property bool installing: !modelData.systemUpdate && (modelData.updateReady || (progressBar.value === progressBar.maximumValue))
                     property bool installed: false
                     property bool retry: false
 
                     function pause () {
                         console.warn("PAUSE: " + modelData.packageName);
+                        if (modelData.systemUpdate)
+                            return UpdateManager.pauseDownload(modelData.packageName);
                         modelData.updateState = false;
                         tracker.pause();
                     }
 
                     function resume () {
                         console.warn("RESUME: " + modelData.packageName);
+                        if (modelData.systemUpdate)
+                            return UpdateManager.startDownload(modelData.packageName);
                         modelData.updateState = true;
                         tracker.resume();
                     }
@@ -388,11 +394,10 @@ ItemPage {
                                 objectName: "buttonAppUpdate"
                                 anchors.right: parent.right
                                 height: labelTitle.height + units.gu(1)
-                                enabled: !installing
+                                enabled: !installing 
                                 text: {
-                                    if (retry) {
+                                    if (retry)
                                         return i18n.tr("Retry");
-                                    }
                                     if (modelData.systemUpdate) {
                                         if (modelData.updateReady) {
                                             return i18n.tr("Install…");
@@ -408,30 +413,19 @@ ItemPage {
                                     return i18n.tr("Update");
                                 }
 
-                                function handle_update() {
+                                onClicked: {
                                     if (retry) {
                                         retry = false;
                                         return UpdateManager.retryDownload(modelData.packageName);
                                     }
-                                    if (modelData.updateState && !modelData.systemUpdate)
+                                    if (modelData.updateState)
                                         return pause();
-                                    if (!modelData.updateState && !modelData.systemUpdate && modelData.selected)
+                                    if (!modelData.updateState && modelData.selected)
                                         return resume();
-                                    if (!modelData.updateState && !modelData.systemUpdate && !modelData.selected)
+                                    if (!modelData.updateState && !modelData.selected && !modelData.updateReady)
                                         return start();
-
-                                    if (modelData.updateReady) {
+                                    if (modelData.updateReady)
                                         PopupUtils.open(dialogInstallComponent);
-                                        return;
-                                    } else if (modelData.updateState) {
-                                        if (modelData.systemUpdate) {
-                                            return UpdateManager.pauseDownload(modelData.packageName);
-                                        }
-                                    }
-                                 }
-
-                                onClicked: {
-                                    handle_update();
                                 }
                             }
                         } 
@@ -518,18 +512,24 @@ ItemPage {
                                     console.warn("onStarted: " + modelData.packageName + " " + success);
                                     if (success)
                                         modelData.updateState = true;
+                                    else
+                                        modelData.updateState = false;
                                 }
 
                                 onPaused: {
                                     console.warn("onPaused: " + modelData.packageName + " " + success);
                                     if (success)
                                         modelData.updateState = false;
+                                    else
+                                        modelData.updateState = true;
                                 }
 
                                 onResumed: {
                                     console.warn("onResumed: " + modelData.packageName + " " + success);
                                     if (success)
                                         modelData.updateState = true;
+                                    else
+                                        modelData.updateState = false;
                                 }
 
                                 onCanceled: {
