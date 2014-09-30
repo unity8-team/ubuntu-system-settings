@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-28 05:16+0000\n"
+"PO-Revision-Date: 2014-09-29 02:12+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-28 06:36+0000\n"
+"X-Launchpad-Export-Date: 2014-09-30 07:08+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -736,16 +736,18 @@ msgstr "ئۈسكۈنە ھازىر باشقۇرۇلمايۋاتىدۇ"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
-msgstr ""
+msgstr "ئۈسكۈنىنى سەپلەش ئۈچۈن تەييار قىلغىلى بولمىدى"
 
 #: ../plugins/wifi//Common.qml:46
 msgid ""
 "IP configuration could not be reserved (no available address, timeout, etc.)"
 msgstr ""
+"بۇ IP سەپلىمىسىنى ھەل قىلغىلى بولمىدى(ئادرېس يوق، ياكى ۋاقىت ئېشىپ كەتكەن "
+"دېگەندەك سەۋەبلەردىن)"
 
 #: ../plugins/wifi//Common.qml:48
 msgid "The IP configuration is no longer valid"
-msgstr ""
+msgstr "بۇ IP سەپلىمىسى ئەمدى ئىناۋەتلىك ئەمەس"
 
 #: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"
@@ -825,7 +827,7 @@ msgstr "كۆك چىش باغلىنىشى مەغلۇپ بولدى ياكى ۋاق
 
 #: ../plugins/wifi//Common.qml:88
 msgid "A dependency of the connection failed"
-msgstr ""
+msgstr "باغلىنىشنىڭ بېقىنىش مۇناسىۋىتى مەغلۇپ بولدى"
 
 #: ../plugins/wifi//Common.qml:90
 msgid "ModemManager is unavailable"
@@ -837,7 +839,7 @@ msgstr "سىمسىز تور(Wi-Fi) نى تاپقىلى بولمىدى"
 
 #: ../plugins/wifi//Common.qml:94
 msgid "A secondary connection of the base connection failed"
-msgstr ""
+msgstr "ئاساسىي باغلىنىشنىڭ ئىككىلەمچى باغلىنىشى مەغلۇپ بولدى"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
@@ -2164,7 +2166,7 @@ msgstr "مۇلازىمەتلەر"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:52
 msgid "forwarding"
-msgstr ""
+msgstr "يۆتكىلىش"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:54
@@ -2506,7 +2508,7 @@ msgstr "imei"
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:220
 msgid "serial"
-msgstr ""
+msgstr "تەرتىپ نومۇر"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:224
@@ -2546,7 +2548,7 @@ msgstr "نەشرى"
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:240
 msgid "revision"
-msgstr ""
+msgstr "تۈزىتىلمە"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:140
@@ -2708,7 +2710,7 @@ msgstr "توك مەنبەسى"
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:322
 msgid "charge"
-msgstr ""
+msgstr "توكلاش"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:324

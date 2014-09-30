@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-23 08:32+0000\n"
-"Last-Translator: Niklas Wenzel <nikwen.developer@gmail.com>\n"
+"PO-Revision-Date: 2014-09-29 15:56+0000\n"
+"Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-27 06:30+0000\n"
+"X-Launchpad-Export-Date: 2014-09-30 07:05+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -104,21 +104,21 @@ msgstr "Die Software ist aktuell"
 
 #: ../plugins/system-update//PageComponent.qml:243
 msgid "Checking for updates…"
-msgstr "Suche Aktualisierungen..."
+msgstr "Aktualisierungen werden gesucht …"
 
 #: ../plugins/system-update//PageComponent.qml:261
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] "Installiere %1 Aktualisierung..."
-msgstr[1] "Installiere %1 Aktualisierungen..."
+msgstr[0] "%1 Aktualisierung wird installiert …"
+msgstr[1] "%1 Aktualisierungen werden installiert …"
 
 #: ../plugins/system-update//PageComponent.qml:262
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] "Installiere %1 Aktualisierung"
-msgstr[1] "Installiere %1 Aktualisierungen"
+msgstr[0] "%1 Aktualisierung installieren"
+msgstr[1] "%1 Aktualisierungen installieren"
 
 #: ../plugins/system-update//PageComponent.qml:263
 msgid "Pause All"
@@ -158,11 +158,12 @@ msgstr "Version: "
 
 #: ../plugins/system-update//PageComponent.qml:474
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr "Bei Ubuntu One anmelden um Aktualisierungen zu erhalten."
+msgstr ""
+"Bei »Ubuntu One« anmelden, um Aktualisierungen, für Anwendungen, zu erhalten."
 
 #: ../plugins/system-update//PageComponent.qml:483
 msgid "Sign In…"
-msgstr "Anmelden..."
+msgstr "Anmelden …"
 
 #: ../plugins/system-update//PageComponent.qml:550
 msgid "Installing update…"
@@ -319,7 +320,7 @@ msgstr "Sprache & Text"
 
 #: ../plugins/language//PageComponent.qml:100
 msgid "Display language…"
-msgstr "Sprache..."
+msgstr "Sprache anzeigen …"
 
 #: ../plugins/language//KeyboardLayouts.qml:26
 #: ../plugins/language//PageComponent.qml:117
@@ -369,7 +370,7 @@ msgstr "Tastaturtöne"
 
 #: ../plugins/language//PageComponent.qml:219
 msgid "Keyboard vibration"
-msgstr "Tastatur-Vibration"
+msgstr "Tastaturvibration"
 
 #: ../plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -418,7 +419,7 @@ msgstr "Verbunden"
 
 #: ../plugins/bluetooth//PageComponent.qml:83
 msgid "Connecting…"
-msgstr "Verbinde..."
+msgstr "Verbindung wird hergestellt …"
 
 #: ../plugins/bluetooth//PageComponent.qml:84
 msgid "Disconnecting…"
@@ -695,11 +696,11 @@ msgstr "Vorherige Netzwerke"
 
 #: ../plugins/wifi//PageComponent.qml:138
 msgid "Connect to hidden network…"
-msgstr ""
+msgstr "Mit verborgenem Netzwerk verbinden …"
 
 #: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
-msgstr ""
+msgstr "Mit verborgenem Netzwerk verbinden"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -720,128 +721,131 @@ msgstr "WEP"
 
 #: ../plugins/wifi//RemoveBackground.qml:28
 msgid "Clear"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
-msgstr ""
+msgstr "Unbekannter Fehler"
 
 #: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
-msgstr ""
+msgstr "Kein Grund angegeben"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr ""
+msgstr "Gerät wird nun verwaltet"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
-msgstr ""
+msgstr "Gerät wird nun nicht mehr verwaltet"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
-msgstr ""
+msgstr "Das Gerät konnte nicht für die Konfiguration vorbereitet werden"
 
 #: ../plugins/wifi//Common.qml:46
 msgid ""
 "IP configuration could not be reserved (no available address, timeout, etc.)"
 msgstr ""
+"IP-Konfiguration konnte nicht reserviert werden (keine verfügbare Adresse, "
+"Zeitüberschreitung usw.)"
 
 #: ../plugins/wifi//Common.qml:48
 msgid "The IP configuration is no longer valid"
-msgstr ""
+msgstr "Die IP-Konfiguration ist nicht mehr gültig"
 
 #: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"
-msgstr ""
+msgstr "Ihre Legitimierungsdetails waren fehlerhaft"
 
 #: ../plugins/wifi//Common.qml:52
 msgid "802.1X supplicant disconnected"
-msgstr ""
+msgstr "802.1X-Supplicant getrennt"
 
 #: ../plugins/wifi//Common.qml:54
 msgid "802.1X supplicant configuration failed"
-msgstr ""
+msgstr "Einrichtung des 802.1X-Supplicant fehlgeschlagen"
 
 #: ../plugins/wifi//Common.qml:56
 msgid "802.1X supplicant failed"
-msgstr ""
+msgstr "802.1X-Supplicant fehlgeschlagen"
 
 #: ../plugins/wifi//Common.qml:58
 msgid "802.1X supplicant took too long to authenticate"
-msgstr ""
+msgstr "802.1X-Supplicant brauchte zu lange für die Legitimierung"
 
 #: ../plugins/wifi//Common.qml:60
 msgid "DHCP client failed to start"
-msgstr ""
+msgstr "DHCP-Client konnte nicht gestartet werden"
 
 #: ../plugins/wifi//Common.qml:62
 msgid "DHCP client error"
-msgstr ""
+msgstr "DHCP-Client-Fehler"
 
 #: ../plugins/wifi//Common.qml:64
 msgid "DHCP client failed"
-msgstr ""
+msgstr "DHCP-Client fehlgeschlagen"
 
 #: ../plugins/wifi//Common.qml:66
 msgid "Shared connection service failed to start"
-msgstr ""
+msgstr "Dienst für geteilte Verbindung konnte nicht gestartet werden"
 
 #: ../plugins/wifi//Common.qml:68
 msgid "Shared connection service failed"
-msgstr ""
+msgstr "Dienst für geteilte Verbindung fehlgeschlagen"
 
 #: ../plugins/wifi//Common.qml:70
 msgid "Necessary firmware for the device may be missing"
-msgstr ""
+msgstr "Notwendige Firmware des Geräts fehlt möglicherweise"
 
 #: ../plugins/wifi//Common.qml:72
 msgid "The device was removed"
-msgstr ""
+msgstr "Das Gerät wurde entfernt"
 
 #: ../plugins/wifi//Common.qml:74
 msgid "NetworkManager went to sleep"
-msgstr ""
+msgstr "NetworkManager ging in den Schlafmodus"
 
 #: ../plugins/wifi//Common.qml:76
 msgid "The device's active connection disappeared"
-msgstr ""
+msgstr "Die aktive Verbindung des Geräts verschwand"
 
 #: ../plugins/wifi//Common.qml:78
 msgid "Device disconnected by user or client"
-msgstr ""
+msgstr "Das Gerät wurde durch den Benutzer oder Client getrennt"
 
 #: ../plugins/wifi//Common.qml:80
 msgid "The device's existing connection was assumed"
-msgstr ""
+msgstr "Die bestehende Verbindung des Geräts wurde angenommen"
 
 #: ../plugins/wifi//Common.qml:82
 msgid "The supplicant is now available"
-msgstr ""
+msgstr "Der Supplicant ist nun verfügbar"
 
 #: ../plugins/wifi//Common.qml:84
 msgid "The modem could not be found"
-msgstr ""
+msgstr "Das Modem wurde nicht gefunden"
 
 #: ../plugins/wifi//Common.qml:86
 msgid "The Bluetooth connection failed or timed out"
 msgstr ""
+"Die Bluetooth-Verbindung ist fehlgeschlagen oder benötigte zu viel Zeit"
 
 #: ../plugins/wifi//Common.qml:88
 msgid "A dependency of the connection failed"
-msgstr ""
+msgstr "Eine Abhängigkeit der Verbindung ist gescheitert"
 
 #: ../plugins/wifi//Common.qml:90
 msgid "ModemManager is unavailable"
-msgstr ""
+msgstr "ModemManager ist nicht verfügbar"
 
 #: ../plugins/wifi//Common.qml:92
 msgid "The Wi-Fi network could not be found"
-msgstr ""
+msgstr "Das WLAN konnte nicht gefunden werden"
 
 #: ../plugins/wifi//Common.qml:94
 msgid "A secondary connection of the base connection failed"
-msgstr ""
+msgstr "Eine zweite Verbindung der Basis-Verbindung ist fehlgeschlagen"
 
 #: ../plugins/wifi//NetworkDetailsBrief.qml:58
 msgid "IP address"
@@ -940,7 +944,7 @@ msgstr "Bluetooth-Adresse"
 #: ../plugins/about//PageComponent.qml:144
 #, qt-format
 msgid "%1 free"
-msgstr ""
+msgstr "%1 frei"
 
 #: ../plugins/about//PageComponent.qml:146
 msgid "Software:"
@@ -1020,11 +1024,11 @@ msgid ""
 "phone by connecting it to another device."
 msgstr ""
 "Im Entwicklermodus können alle Daten auf diesem Telefon gelesen, geändert "
-"oder gelöscht werden, wenn es mit einem Computer verbunden wird."
+"oder gelöscht werden, wenn es mit einem Rechner verbunden wird."
 
 #: ../plugins/about//DevMode.qml:108
 msgid "You need a PIN code or passphrase set to use Developer Mode."
-msgstr "Der Entwicklermodus erfordert PIN oder Passwort."
+msgstr "Der Entwicklermodus erfordert PIN oder Kennwort."
 
 #: ../plugins/about//DevMode.qml:114
 #: ../plugins/security-privacy//LockSecurity.qml:32
@@ -1106,8 +1110,8 @@ msgid ""
 "Encryption protects against access to phone data when the phone is connected "
 "to a PC or other device."
 msgstr ""
-"Verschlüsselung verhindert den Zugriff auf das Telefon während es mit einem "
-"PC oder anderen Gerät verbunden ist."
+"Verschlüsselung verhindert den Zugriff auf die Telefondaten, während es mit "
+"einem Rechner oder einem anderen Gerät verbunden ist."
 
 #: ../plugins/security-privacy//PageComponent.qml:185
 msgid "Privacy"
@@ -1229,7 +1233,7 @@ msgstr "Erlaube den Zugriff auf Ihre Position:"
 
 #: ../plugins/security-privacy//SimPin.qml:44
 msgid "Change SIM PIN"
-msgstr "SIM-Pin ändern"
+msgstr "SIM-PIN ändern"
 
 #: ../plugins/security-privacy//SimPin.qml:47
 #, qt-format
@@ -1295,7 +1299,7 @@ msgstr "Sperren"
 
 #: ../plugins/security-privacy//SimPin.qml:340
 msgid "Change PIN…"
-msgstr "PIN ändern..."
+msgstr "PIN ändern …"
 
 #: ../plugins/security-privacy//SimPin.qml:357
 msgid ""
@@ -1355,7 +1359,7 @@ msgstr "Ruhezustand sperrt sofort"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:106
 msgid "When locked, allow:"
-msgstr "Wennn gesperrt, erlaube:"
+msgstr "Wennn gesperrt, erlauben:"
 
 #: ../plugins/security-privacy//PhoneLocking.qml:110
 msgid "Launcher"
@@ -1403,7 +1407,7 @@ msgstr "0"
 #: ../plugins/security-privacy//LockSecurity.qml:96
 #: ../plugins/security-privacy//LockSecurity.qml:384
 msgid "Change PIN code…"
-msgstr "PIN ändern..."
+msgstr "PIN ändern …"
 
 #: ../plugins/security-privacy//LockSecurity.qml:98
 #: ../plugins/security-privacy//LockSecurity.qml:385
@@ -1476,7 +1480,7 @@ msgstr "Fingerbewegung (keine Sicherheit) … "
 
 #: ../plugins/security-privacy//LockSecurity.qml:352
 msgid "4-digit PIN code…"
-msgstr "4-stellige PIN..."
+msgstr "4-stellige PIN …"
 
 #: ../plugins/security-privacy//LockSecurity.qml:353
 msgid "Passphrase…"
@@ -1807,11 +1811,11 @@ msgstr[1] "%1 Bilder entfernen"
 
 #: ../plugins/background//Components//AddRemove.qml:80
 msgid "Add an image…"
-msgstr "Bild hinzufügen..."
+msgstr "Bild hinzufügen …"
 
 #: ../plugins/background//Components//AddRemove.qml:91
 msgid "Remove images…"
-msgstr "Bilder löschen..."
+msgstr "Bilder entfernen …"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
@@ -1907,7 +1911,7 @@ msgstr ""
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr "Für SMS nutze:"
+msgstr "Für SMS benutzen:"
 
 #: ../src/qml/MainWindow.qml:133
 msgid "Search"
@@ -1955,7 +1959,7 @@ msgstr "Diese PINs stimmen nicht überein."
 
 #: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
-msgstr "Diese Passwörter stimmen nicht überein."
+msgstr "Diese Kennworter stimmen nicht überein."
 
 #: ../wizard/qml/Pages//15-passwd.qml:157
 msgid "PIN code must be at least four digits long."
@@ -1963,7 +1967,7 @@ msgstr "PIN muss mindestens 4 Ziffern haben."
 
 #: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
-msgstr "Passwort muss aus mindestens 4 Ziffern bestehen."
+msgstr "Kennwort muss aus mindestens 4 Ziffern bestehen."
 
 #: ../wizard/qml/Pages//10-welcome.qml:85
 #: ../wizard/qml/Pages//15-passwd.qml:170 ../wizard/qml/Pages//20-wifi.qml:195
@@ -1995,7 +1999,7 @@ msgstr "Ihr Telefon sendet automatisch Fehlerberichte an Canonical."
 
 #: ../wizard/qml/Pages//40-reporting.qml:43
 msgid "This can be disabled in System Settings."
-msgstr "Dies kann in den Systemeinstellungen deaktiviert werden."
+msgstr "Dieses kann in den Systemeinstellungen deaktiviert werden."
 
 #: ../wizard/qml/Pages//no-sim.qml:22
 msgid "Add a SIM card"
@@ -2076,7 +2080,7 @@ msgstr "Aktualisierung"
 #: ../po/settings.js:44
 #: ../po/settings.js:188
 msgid "apps"
-msgstr ""
+msgstr "Apps"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
@@ -2087,22 +2091,22 @@ msgstr ""
 #: ../po/settings.js:274
 #: ../po/settings.js:340
 msgid "automatic"
-msgstr ""
+msgstr "automatisch"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:16
 msgid "download"
-msgstr ""
+msgstr "Download"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:18
 msgid "upgrade"
-msgstr ""
+msgstr "aktualisieren"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:20
 msgid "click"
-msgstr ""
+msgstr "click"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:30
@@ -2127,7 +2131,7 @@ msgstr "offline"
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: ../po/settings.js:30
 msgid "airplane"
-msgstr ""
+msgstr "Flugzeug"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
@@ -2169,39 +2173,39 @@ msgstr "Telefon"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:50
 msgid "services"
-msgstr ""
+msgstr "Dienste"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:52
 msgid "forwarding"
-msgstr ""
+msgstr "Weiterleiten"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:54
 msgid "waiting"
-msgstr ""
+msgstr "warten"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:56
 msgid "call"
-msgstr ""
+msgstr "Anruf"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:58
 #: ../po/settings.js:154
 msgid "dialpad"
-msgstr ""
+msgstr "Nummernblock"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:60
 msgid "shortcuts"
-msgstr ""
+msgstr "Kurzwahl"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:62
 msgid "numbers"
-msgstr ""
+msgstr "Nummern"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:154
@@ -2221,22 +2225,22 @@ msgstr "Hintergrundbild"
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:72
 msgid "art"
-msgstr ""
+msgstr "Kunst"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:74
 msgid "photo"
-msgstr ""
+msgstr "Foto"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:76
 msgid "picture"
-msgstr ""
+msgstr "Bild"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:78
 msgid "image"
-msgstr ""
+msgstr "Bild"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
@@ -2248,54 +2252,54 @@ msgstr "Sprache"
 #: ../po/settings.js:84
 #: ../po/settings.js:158
 msgid "keyboard"
-msgstr ""
+msgstr "Tastatur"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:86
 msgid "spellcheck"
-msgstr ""
+msgstr "Rechtschreibprüfung"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:90
 msgid "correct"
-msgstr ""
+msgstr "korrigieren"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:92
 msgid "suggestions"
-msgstr ""
+msgstr "Vorschläge"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:94
 msgid "capitalization"
-msgstr ""
+msgstr "Großschreibung"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:96
 msgid "punctuation"
-msgstr ""
+msgstr "Zeichensetzung"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:98
 msgid "layout"
-msgstr ""
+msgstr "Layout"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../po/settings.js:100
 #: ../po/settings.js:336
 msgid "display"
-msgstr ""
+msgstr "Anzeige"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:102
 msgid "words"
-msgstr ""
+msgstr "Wörter"
 
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
 #: ../po/settings.js:104
 msgid "vibration"
-msgstr ""
+msgstr "Vibration"
 
 #. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:130
@@ -2325,12 +2329,12 @@ msgstr "Bluetooth"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:118
 msgid "headset"
-msgstr ""
+msgstr "Headset"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:120
 msgid "pair"
-msgstr ""
+msgstr "Verbinden"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:88
@@ -2340,17 +2344,17 @@ msgstr "Gerät"
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:124
 msgid "discover"
-msgstr ""
+msgstr "Finden"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:126
 msgid "car"
-msgstr ""
+msgstr "Auto"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:128
 msgid "handsfree"
-msgstr ""
+msgstr "freisprechen"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:48
@@ -2362,19 +2366,19 @@ msgstr "drahtlos"
 #: ../po/settings.js:132
 #: ../po/settings.js:172
 msgid "connect"
-msgstr ""
+msgstr "verbinden"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:134
 #: ../po/settings.js:174
 msgid "disconnect"
-msgstr ""
+msgstr "trennen"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../po/settings.js:136
 msgid "stereo"
-msgstr ""
+msgstr "Stereo"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:106
@@ -2399,27 +2403,27 @@ msgstr "Sound"
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:148
 msgid "silent"
-msgstr ""
+msgstr "stumm"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:150
 msgid "ringtone"
-msgstr ""
+msgstr "Klingelton"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:152
 msgid "vibrate"
-msgstr ""
+msgstr "Vibrieren"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:156
 msgid "message"
-msgstr ""
+msgstr "Nachricht"
 
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
 #: ../po/settings.js:160
 msgid "volume"
-msgstr ""
+msgstr "Lautstärke"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:50
@@ -2434,19 +2438,19 @@ msgstr "W-Lan"
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:176
 msgid "hidden"
-msgstr ""
+msgstr "verborgen"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #: ../po/settings.js:178
 msgid "ip"
-msgstr ""
+msgstr "IP"
 
 #. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:180
 #: ../po/settings.js:222
 msgid "address"
-msgstr ""
+msgstr "Adresse"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:102
@@ -2456,42 +2460,42 @@ msgstr "Benachrichtigungen"
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:190
 msgid "authorize"
-msgstr ""
+msgstr "legitimieren"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:192
 msgid "alerts"
-msgstr ""
+msgstr "Alarme"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:194
 msgid "permissions"
-msgstr ""
+msgstr "Berechtigungen"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:196
 msgid "badges"
-msgstr ""
+msgstr "Symbole"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:198
 msgid "facebook"
-msgstr ""
+msgstr "Facebook"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:200
 msgid "twitter"
-msgstr ""
+msgstr "Twitter"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:202
 msgid "flickr"
-msgstr ""
+msgstr "Flickr"
 
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #: ../po/settings.js:204
 msgid "gmail"
-msgstr ""
+msgstr "Gmail"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:86
@@ -2506,57 +2510,57 @@ msgstr "Info"
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:216
 msgid "number"
-msgstr ""
+msgstr "Nummer"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:218
 msgid "imei"
-msgstr ""
+msgstr "IMEI"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:220
 msgid "serial"
-msgstr ""
+msgstr "Seriennummer"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:224
 msgid "mac"
-msgstr ""
+msgstr "MAC"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:226
 msgid "licenses"
-msgstr ""
+msgstr "Lizenzen"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:228
 msgid "developer"
-msgstr ""
+msgstr "Entwickler"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:232
 msgid "storage"
-msgstr ""
+msgstr "Speicher"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:234
 msgid "disk"
-msgstr ""
+msgstr "Medium"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:236
 msgid "space"
-msgstr ""
+msgstr "Speicherplatz"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:238
 msgid "version"
-msgstr ""
+msgstr "Version"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../po/settings.js:240
 msgid "revision"
-msgstr ""
+msgstr "Revision"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:140
@@ -2573,42 +2577,42 @@ msgstr "Datenschutz"
 #: ../po/settings.js:250
 #: ../po/settings.js:314
 msgid "sim"
-msgstr ""
+msgstr "SIM"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:252
 msgid "pin"
-msgstr ""
+msgstr "PIN"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:254
 msgid "code"
-msgstr ""
+msgstr "Code"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:256
 msgid "password"
-msgstr ""
+msgstr "Passwort"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:258
 msgid "passphrase"
-msgstr ""
+msgstr "Kennwort"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:260
 msgid "swipe"
-msgstr ""
+msgstr "wischen"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:262
 msgid "allow"
-msgstr ""
+msgstr "erlauben"
 
 #. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
 #: ../po/settings.js:264
 msgid "access"
-msgstr ""
+msgstr "Zugriff"
 
 #. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:76
@@ -2633,22 +2637,22 @@ msgstr "zurücksetzen"
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:280
 msgid "erase"
-msgstr ""
+msgstr "löschen"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:282
 msgid "factory"
-msgstr ""
+msgstr "Fabrik"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:284
 msgid "clear"
-msgstr ""
+msgstr "löschen"
 
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../po/settings.js:286
 msgid "restore"
-msgstr ""
+msgstr "wiederherstellen"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:20
@@ -2668,42 +2672,42 @@ msgstr "GSM"
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:298
 msgid "data"
-msgstr ""
+msgstr "Daten"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:300
 msgid "carrier"
-msgstr ""
+msgstr "Mobilfunkanbieter"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:302
 msgid "4g"
-msgstr ""
+msgstr "4G"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:304
 msgid "3g"
-msgstr ""
+msgstr "3g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:306
 msgid "2g"
-msgstr ""
+msgstr "2g"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:308
 msgid "lte"
-msgstr ""
+msgstr "lte"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:310
 msgid "apn"
-msgstr ""
+msgstr "apn"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
 #: ../po/settings.js:312
 msgid "roam"
-msgstr ""
+msgstr "Roaming"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:14
@@ -2718,22 +2722,22 @@ msgstr "Energie"
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:322
 msgid "charge"
-msgstr ""
+msgstr "Akku"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:324
 msgid "idle"
-msgstr ""
+msgstr "untätig"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:328
 msgid "disable"
-msgstr ""
+msgstr "deaktivieren"
 
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../po/settings.js:330
 msgid "enable"
-msgstr ""
+msgstr "aktivieren"
 
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:70
@@ -2743,7 +2747,7 @@ msgstr "Helligkeit"
 #. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
 #: ../po/settings.js:342
 msgid "adjust"
-msgstr ""
+msgstr "anpassen"
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
@@ -2761,23 +2765,23 @@ msgstr "Unbekannter Titel"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:318
 msgid "Incorrect PIN code. Try again."
-msgstr "Falsche PIN. Neuer Versuch..."
+msgstr "Falsche PIN. Noch einmal versuchen …"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:320
 msgid "Incorrect passphrase. Try again."
-msgstr "Falsches Passwort. Neuer Versuch."
+msgstr "Falsches Kennwort. Nochmal versuchen."
 
 #: ../plugins/security-privacy//securityprivacy.cpp:323
 msgid "Could not set security mode"
-msgstr "Kann Datenschutzmodus nicht anwenden"
+msgstr "Sicherheitsmodus kann nicht eingestellt werden"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:372
 msgid "Could not set security display hint"
-msgstr "Kann Datenschutz-Hinweis nicht setzen."
+msgstr "Sicherheitshinweis kann nicht eingestellt werden"
 
 #: ../plugins/security-privacy//securityprivacy.cpp:383
 msgid "Authentication token manipulation error"
-msgstr "Fehler beim Ändern des Authentifizierungs-Tokens"
+msgstr "Bearbeitungssfehler des Legitimierungszeichens"
 
 #: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
@@ -2785,7 +2789,7 @@ msgstr "Es gibt eine Systemaktualisierung."
 
 #: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
-msgstr "Antippen um die System-Aktualisierung zu starten."
+msgstr "Antippen, um die Systemaktualisierung zu starten."
 
 #~ msgid "Remove"
 #~ msgstr "Entfernen"
