@@ -203,7 +203,6 @@ ItemPage {
                     id: welcomeMessagesSwitch
                     checked: securityPrivacy.messagesWelcomeScreen
                 }
-                visible: showAllUI
             }
             Binding {
                 target: securityPrivacy
