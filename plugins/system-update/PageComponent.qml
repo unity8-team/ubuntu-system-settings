@@ -385,7 +385,6 @@ ItemPage {
                                         if (modelData.systemUpdate) {
                                             UpdateManager.pauseDownload(modelData.packageName);
                                         } else {
-                                            modelData.updateState = false;
                                             tracker.pause();
                                         }
                                     } else {
@@ -393,7 +392,6 @@ ItemPage {
                                             modelData.selected = true;
                                             UpdateManager.startDownload(modelData.packageName);
                                         } else {
-                                            modelData.updateState = true;
                                             tracker.resume();
                                         }
                                     }
@@ -461,6 +459,32 @@ ItemPage {
                                     root.updatesAvailable -= 1;
                                     modelData.updateRequired = false;
                                     UpdateManager.updateClickScope();
+                                }
+
+                                onStarted: {
+                                    console.warn("onStarted: " + modelData.packageName + " " + success);
+                                    if (success)
+                                        modelData.updateState = true;
+                                }
+
+                                onPaused: {
+                                    console.warn("onPaused: " + modelData.packageName + " " + success);
+                                    if (success)
+                                        modelData.updateState = false;
+                                }
+
+                                onResumed: {
+                                    console.warn("onResumed: " + modelData.packageName + " " + success);
+                                    if (success)
+                                        modelData.updateState = true;
+                                }
+
+                                onCanceled: {
+                                    console.warn("onCanceled: " + modelData.packageName + " " + success);
+                                    if (success) {
+                                        modelData.updateState = false;
+                                        modelData.selected = false;
+                                    }
                                 }
 
                                 onErrorFound: {
