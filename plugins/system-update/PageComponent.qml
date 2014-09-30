@@ -324,9 +324,12 @@ ItemPage {
                     }
                     iconSource: Qt.resolvedUrl(modelData.iconUrl)
                     iconFrame: modelData.systemUpdate ? false : true
-                    height: textArea.height
+                    height: visible ? textArea.height : 0
                     highlightWhenPressed: false
                     showDivider: false
+                    visible: opacity > 0
+                    opacity: installed ? 0 : 1
+                    Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
 
                     property alias actionButton: buttonAppUpdate
                     property alias progressBar: progress
