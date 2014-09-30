@@ -494,8 +494,8 @@ ItemPage {
                                 onFinished: {
                                     progress.visible = false;
                                     buttonAppUpdate.visible = false;
-                                    installing = false;
                                     installed = true;
+                                    installing = false;
                                     root.updatesAvailable -= 1;
                                     modelData.updateRequired = false;
                                     UpdateManager.updateClickScope();
