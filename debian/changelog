@@ -1,3 +1,19 @@
+ubuntu-system-settings (0.3+14.10.20141001-0ubuntu1) utopic; urgency=low
+
+  [ Ken VanDine ]
+  * Fixed handling of the Downloading/Installing label based on actual
+    state. . Forward updateProgress signals for system updates. Layout
+    fixes (LP: #1312587)
+  * Use new splash screen (LP: #1376242)
+  * Improved tracking download states
+  * Use new target_build_number from system-image-dbus to determine
+    visibility of the update notification (LP: #1355803)
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 01 Oct 2014 16:01:54 +0000
+
 ubuntu-system-settings (0.3+14.10.20140926-0ubuntu1) utopic; urgency=low
 
   [ Sebastien Bacher ]

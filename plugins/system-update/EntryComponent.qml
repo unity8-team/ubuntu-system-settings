@@ -49,13 +49,6 @@ ListItem.SingleValue {
             root.parent.visible = false;
     }
 
-    Component.onCompleted: {
-        // Ensure the entryComponent is hidden
-        root.parent.visible = false;
-        // TODO: Initiate a check on load, remove if timer gets enabled
-        UpdateManager.checkUpdates();
-    }
-
     Connections {
         id: updateManager
         objectName: "updateManager"

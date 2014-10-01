@@ -77,13 +77,17 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_systemUpdate, SIGNAL(downloadModeChanged()),
                   SIGNAL(downloadModeChanged()));
     QObject::connect(&m_systemUpdate, SIGNAL(updateDownloaded()),
-                  SIGNAL(systemUpdateDownloaded()));
+                  SLOT(updateDownloaded()));
     QObject::connect(&m_systemUpdate, SIGNAL(updateProcessFailed(const QString&)),
                   SIGNAL(updateProcessFailed(QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updateFailed(int, QString)),
-                  SIGNAL(systemUpdateFailed(int, QString)));
+                  SLOT(updateFailed(int, QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updatePaused(int)),
                   SLOT(systemUpdatePaused(int)));
+    QObject::connect(&m_systemUpdate, SIGNAL(updateProgress(int, double)),
+                  SLOT(systemUpdateProgress(int, double)));
+    QObject::connect(&m_systemUpdate, SIGNAL(rebooting(bool)),
+                  SIGNAL(rebooting(bool)));
 }
 
 UpdateManager::~UpdateManager()
@@ -227,12 +231,46 @@ void UpdateManager::registerSystemUpdate(const QString& packageName, Update *upd
     reportCheckState();
 }
 
+void UpdateManager::updateDownloaded()
+{
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (m_apps.contains(packagename)) {
+        Update *update = m_apps[packagename];
+        update->setSelected(false);
+        update->setUpdateState(false);
+        update->setUpdateReady(true);
+        Q_EMIT systemUpdateDownloaded();
+    }
+}
+void UpdateManager::updateFailed(int consecutiveFailureCount, QString lastReason)
+{
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (m_apps.contains(packagename)) {
+        Update *update = m_apps[packagename];
+        update->setSelected(false);
+        update->setUpdateState(false);
+        update->setDownloadProgress(0);
+        Q_EMIT systemUpdateFailed(consecutiveFailureCount, lastReason);
+    }
+}
+
 void UpdateManager::systemUpdatePaused(int value)
 {
     QString packagename(UBUNTU_PACKAGE_NAME);
     if (m_apps.contains(packagename)) {
         Update *update = m_apps[packagename];
         update->setSelected(true);
+        update->setUpdateState(false);
+        update->setDownloadProgress(value);
+    }
+}
+
+void UpdateManager::systemUpdateProgress(int value, double eta)
+{
+    Q_UNUSED(eta);
+    QString packagename(UBUNTU_PACKAGE_NAME);
+    if (m_apps.contains(packagename)) {
+        Update *update = m_apps[packagename];
         update->setDownloadProgress(value);
     }
 }
