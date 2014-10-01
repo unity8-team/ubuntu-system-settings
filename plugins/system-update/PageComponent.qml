@@ -34,8 +34,8 @@ ItemPage {
     id: root
     objectName: "systemUpdatesPage"
 
-    title: i18n.tr("Updates")
-    flickable: scrollWidget
+    title: installingImageUpdate.visible ? "" : i18n.tr("Updates")
+    flickable: installingImageUpdate.visible ? null : scrollWidget
 
     property bool installAll: false
     property bool includeSystemUpdate: false
@@ -147,7 +147,7 @@ ItemPage {
         State {
             name: "UPDATE"
             PropertyChanges { target: updateList; visible: true}
-            PropertyChanges { target: installAllButton; visible: true && root.updatesAvailable > 1}
+            PropertyChanges { target: installAllButton; visible: root.updatesAvailable > 1}
             PropertyChanges { target: updateNotification; visible: false}
         }
     ]
@@ -186,10 +186,7 @@ ItemPage {
         }
 
         onSystemUpdateDownloaded: {
-            if (!root.systemUpdateInProgress && !installingImageUpdate.visible) {
-                root.systemUpdateInProgress = true;
-                PopupUtils.open(dialogInstallComponent);
-            }
+            root.installAll = false;
         }
 
         onSystemUpdateFailed: {
@@ -198,6 +195,10 @@ ItemPage {
 
         onUpdateProcessFailed: {
             root.state = "SYSTEMUPDATEFAILED";
+        }
+
+        onRebooting: {
+            installingImageUpdate.message = i18n.tr("Restarting…");
         }
     }
     Flickable {
@@ -217,10 +218,12 @@ ItemPage {
 
         Column {
             id: columnId
-
-            anchors.left: parent.left
-            anchors.right: parent.right
-
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: childrenRect.height
+            
             ListItem.Base {
                 id: checkForUpdatesArea
                 objectName: "checkForUpdatesArea"
@@ -253,10 +256,11 @@ ItemPage {
             }
 
             ListItem.SingleControl {
-                id: installAllButton
-                objectName: "installAllButton"
-
+                height: installAllButton.visible ? units.gu(8) : units.gu(2)
+                highlightWhenPressed: false
                 control: Button {
+                    id: installAllButton
+                    objectName: "installAllButton"
                     property string primaryText: includeSystemUpdate ?
                                                      i18n.tr("Install %1 update…", "Install %1 updates…", root.updatesAvailable).arg(root.updatesAvailable) :
                                                      i18n.tr("Install %1 update", "Install %1 updates", root.updatesAvailable).arg(root.updatesAvailable)
@@ -277,6 +281,7 @@ ItemPage {
                         }
                     }
                 }
+                showDivider: false
             }
 
             ListView {
@@ -289,126 +294,155 @@ ItemPage {
                 model: UpdateManager.model
                 height: childrenRect.height
                 interactive: false
+                spacing: units.gu(2)
 
                 delegate: ListItem.Subtitled {
                     id: listItem
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
                     iconSource: Qt.resolvedUrl(modelData.iconUrl)
                     iconFrame: modelData.systemUpdate ? false : true
-                    height: modelData.selected ? units.gu(14) : units.gu(8)
+                    height: textArea.height
                     highlightWhenPressed: false
                     showDivider: false
 
                     property alias actionButton: buttonAppUpdate
                     property alias progressBar: progress
+                    property bool installing: modelData.updateReady || (progressBar.value === progressBar.maximumValue)
 
-                    Rectangle {
+                    Column {
                         id: textArea
                         objectName: "textArea"
-                        color: "transparent"
-                        anchors.fill: parent
-                        anchors.topMargin: units.gu(1)
-
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        spacing: units.gu(0.5)
                         property string message: modelData.error
                         property bool retry: false
 
                         onMessageChanged: {
                             if(message.length > 0) {
                                 labelVersion.text = message;
-                                buttonAppUpdate.text = i18n.tr("Retry");
                                 modelData.updateState = false;
                                 modelData.selected = false;
                                 textArea.retry = true;
                             }
                         }
 
-                        Button {
-                            id: buttonAppUpdate
-                            objectName: "buttonAppUpdate"
-                            anchors.top: parent.top
-                            anchors.right: parent.right
-                            anchors.topMargin: units.gu(1)
-                            anchors.rightMargin: units.gu(1)
-                            height: labelTitle.height
+                        Item {
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                            }
+                            height: buttonAppUpdate.height
+                            
+                            Label {
+                                id: labelTitle
+                                objectName: "labelTitle"
+                                anchors {
+                                    left: parent.left
+                                    verticalCenter: parent.verticalCenter
+                                }
+                                text: modelData.title
+                                font.bold: true
+                                elide: buttonAppUpdate.visible ? Text.ElideRight : Text.ElideNone
+                            }
 
-                            property string actionText: modelData.systemUpdate ? i18n.tr("Download") : i18n.tr("Update")
-                            property string primaryText: modelData.selected ? i18n.tr("Resume") : actionText
-                            property string secondaryText: i18n.tr("Pause")
-
-                            text: modelData.updateState ? secondaryText : primaryText
-
-                            onClicked: {
-                                if (textArea.retry) {
-                                    textArea.retry = false;
-                                    UpdateManager.retryDownload(modelData.packageName);
-                                } else if (modelData.updateReady) {
-                                    PopupUtils.open(dialogInstallComponent);
-                                } else if (modelData.updateState) {
-                                    if (modelData.systemUpdate) {
-                                        UpdateManager.pauseDownload(modelData.packageName);
-                                    } else {
-                                        modelData.updateState = false;
-                                        tracker.pause();
+                            Button {
+                                id: buttonAppUpdate
+                                objectName: "buttonAppUpdate"
+                                anchors.right: parent.right
+                                height: labelTitle.height + units.gu(1)
+                                text: {
+                                    if (textArea.retry) {
+                                        return i18n.tr("Retry");
                                     }
-                                } else {
-                                    if (!modelData.selected || modelData.systemUpdate) {
-                                        modelData.selected = true;
-                                        UpdateManager.startDownload(modelData.packageName);
+                                    if (modelData.systemUpdate) {
+                                        if (modelData.updateReady) {
+                                            return i18n.tr("Install…");
+                                        } else if (!modelData.updateState && !modelData.selected) {
+                                            return i18n.tr("Download");
+                                        }
+                                    }
+                                    if (modelData.updateState) {
+                                        return i18n.tr("Pause");
+                                    } else if (modelData.selected) {
+                                        return i18n.tr("Resume");
+                                    }
+                                    return i18n.tr("Update");
+                                }
+
+                                onClicked: {
+                                    if (textArea.retry) {
+                                        textArea.retry = false;
+                                        UpdateManager.retryDownload(modelData.packageName);
+                                    } else if (modelData.updateReady) {
+                                        PopupUtils.open(dialogInstallComponent);
+                                    } else if (modelData.updateState) {
+                                        if (modelData.systemUpdate) {
+                                            UpdateManager.pauseDownload(modelData.packageName);
+                                        } else {
+                                            modelData.updateState = false;
+                                            tracker.pause();
+                                        }
                                     } else {
-                                        modelData.updateState = true;
-                                        tracker.resume();
+                                        if (!modelData.selected || modelData.systemUpdate) {
+                                            modelData.selected = true;
+                                            UpdateManager.startDownload(modelData.packageName);
+                                        } else {
+                                            modelData.updateState = true;
+                                            tracker.resume();
+                                        }
                                     }
                                 }
                             }
-                        }
-
-                        Label {
-                            id: labelSize
-                            objectName: "labelSize"
-                            text: convert_bytes_to_size(modelData.binaryFilesize)
-                            anchors.bottom: labelVersion.bottom
-                            anchors.right: parent.right
-                            anchors.rightMargin: units.gu(1)
-                            visible: !modelData.selected
-                        }
-
-                        Label {
-                            id: labelTitle
-                            objectName: "labelTitle"
-                            anchors {
-                                top: parent.top
-                                left: parent.left
-                                right: buttonAppUpdate.left
-                                topMargin: units.gu(1)
-                                rightMargin: units.gu(1)
-                            }
-                            height: units.gu(3)
-                            text: modelData.title
-                            font.bold: true
-                            elide: buttonAppUpdate.visible ? Text.ElideRight : Text.ElideNone
-                        }
-
-                        Label {
+                        } 
+                        
+                        Item {
                             id: labelUpdateStatus
-                            objectName: "labelUpdateStatus"
-                            text: i18n.tr("Installing")
-                            anchors.top: labelTitle.bottom
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            opacity: modelData.selected ? 1 : 0
-                            anchors.bottomMargin: units.gu(1)
-
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                            }
+                            height: childrenRect.height
+                            visible: opacity > 0
+                            opacity: modelData.selected && !modelData.updateReady ? 1 : 0
                             Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
+                            Label {
+                                objectName: "labelUpdateStatus"
+                                anchors.left: parent.left
+                                fontSize: "small"
+                                text: installing ? i18n.tr("Installing") : i18n.tr("Downloading")
+                            }
+                            Label {
+                                anchors.right: parent.right
+                                visible: !labelSize.visible && !installing
+                                fontSize: "small"
+                                text: {
+                                    if (!labelUpdateStatus.visible)
+                                        return convert_bytes_to_size(modelData.binaryFilesize);
+
+                                    return i18n.tr("%1 of %2").arg(
+                                        convert_bytes_to_size(modelData.binaryFilesize * (progress.value * 0.01))).arg(
+                                        convert_bytes_to_size(modelData.binaryFilesize)
+                                    );
+                                }
+                            }
                         }
 
                         ProgressBar {
                             id: progress
                             objectName: "progress"
                             height: units.gu(2)
-                            anchors.left: parent.left
-                            anchors.top: labelUpdateStatus.bottom
-                            anchors.topMargin: units.gu(1)
-                            anchors.right: parent.right
-                            opacity: modelData.selected ? 1 : 0
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                            }
+                            visible: opacity > 0
+                            opacity: modelData.selected && !modelData.updateReady && !installing ? 1 : 0
                             value: modelData.systemUpdate ? modelData.downloadProgress : tracker.progress
                             minimumValue: 0
                             maximumValue: 100
@@ -438,20 +472,29 @@ ItemPage {
                             Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
                         }
 
-                        Label {
-                            id: labelVersion
-                            objectName: "labelVersion"
+                        Item {
                             anchors {
                                 left: parent.left
-                                right: buttonAppUpdate.right
-                                top: (!progress.visible || progress.opacity == 0) ? labelTitle.bottom : progress.bottom
-                                topMargin: (!progress.visible || progress.opacity == 0) ? 0 : units.gu(1)
-                                bottom: parent.bottom
-                                bottomMargin: units.gu(1)
+                                right: parent.right
                             }
-                            text: modelData.remoteVersion ? i18n.tr("Version: ") + modelData.remoteVersion : ""
-                            color: "black"
-                            elide: Text.ElideRight
+                            height: childrenRect.height
+                            Label {
+                                id: labelVersion
+                                objectName: "labelVersion"
+                                anchors.left: parent.left
+                                text: modelData.remoteVersion ? i18n.tr("Version: ") + modelData.remoteVersion : ""
+                                elide: Text.ElideRight
+                                fontSize: "small"
+                            }
+                            
+                            Label {
+                                id: labelSize
+                                objectName: "labelSize"
+                                anchors.right: parent.right
+                                text: convert_bytes_to_size(modelData.binaryFilesize)
+                                fontSize: "small"
+                                visible: !labelUpdateStatus.visible && !installing
+                            }
                         }
                     }
                 }
@@ -522,15 +565,11 @@ ItemPage {
     Rectangle {
         id: installingImageUpdate
         objectName: "installingImageUpdate"
-        anchors {
-            bottom: configuration.top
-            left: parent.left
-            right: parent.right
-            top: parent.top
-        }
+        anchors.fill: root
         visible: false
-
+        z: 10
         color: "#221e1c"
+        property string message: i18n.tr("Installing update…")
 
         Column {
             anchors.centerIn: parent
@@ -539,6 +578,13 @@ ItemPage {
             Image {
                 source: Qt.resolvedUrl("file:///usr/share/ubuntu/settings/system/icons/distributor-logo.png")
                 anchors.horizontalCenter: parent.horizontalCenter
+                NumberAnimation on rotation {
+                    from: 0
+                    to: 360
+                    running: installingImageUpdate.visible == true
+                    loops: Animation.Infinite
+                    duration: 2000
+                }
             }
 
             ProgressBar {
@@ -547,7 +593,7 @@ ItemPage {
             }
 
             Label {
-                text: i18n.tr("Installing update…")
+                text: installingImageUpdate.message
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }

@@ -69,6 +69,7 @@ Q_SIGNALS:
     void downloadModeChanged();
     void versionChanged();
     void updateProcessFailed(const QString& reason);
+    void rebooting(bool status);
 
 private Q_SLOTS:
     void updateDownloadProgress(int percentage, double eta);

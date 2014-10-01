@@ -67,6 +67,8 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                 this, SIGNAL(updateFailed(int, QString)));
     connect(&m_SystemServiceIface, SIGNAL(SettingChanged(QString, QString)),
                 this, SLOT(ProcessSettingChanged(QString, QString)));
+    connect(&m_SystemServiceIface, SIGNAL(Rebooting(bool)),
+                this, SIGNAL(rebooting(bool)));
 
     setCurrentDetailedVersion();
 }
