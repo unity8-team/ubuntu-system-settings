@@ -38,10 +38,9 @@ class ResetTestCase(ResetBaseTestCase):
             self.set_unity_launcher_favorites, gsettings, favorites)
 
         self.reset_page.reset_launcher()
-
         self.assertThat(
-            lambda: str(self.user_mock.GetCalls()),
-            Eventually(Contains('com.canonical.unity.AccountsService')))
+            lambda: gsettings.get_value('favorites'),
+            Eventually(Equals(gsettings.get_default_value('favorites'))))
 
     def test_factory_reset(self):
         self.reset_page.erase_and_reset_everything()
