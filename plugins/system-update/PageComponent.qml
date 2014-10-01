@@ -276,6 +276,7 @@ ItemPage {
                             var modelItem = UpdateManager.model[i];
                             if (item.installing || item.installed)
                                 continue;
+                            console.warn("AllClicked: " + modelItem.updateState + " " + modelItem.updateReady + " " +  modelItem.selected);
                             if (item.retry) {
                                 item.retry = false;
                                 UpdateManager.retryDownload(modelItem.packageName);
@@ -285,14 +286,17 @@ ItemPage {
                                 item.pause();
                                 continue;
                             }
+                            console.warn("Past pause");
                             if (!root.installAll && !modelItem.updateReady && modelItem.selected) {
                                 item.resume();
                                 continue;
                             }
+                            console.warn("Past resume");
                             if (!root.installAll && !modelItem.updateState && !modelItem.updateReady && !modelItem.selected) {
                                 item.start();
                                 continue;
                             }
+                            console.warn("Past start");
                         }
                         root.installAll = !root.installAll;
                     }
@@ -334,6 +338,7 @@ ItemPage {
                     property bool retry: false
 
                     function pause () {
+                        console.warn("PAUSE: " + modelData.packageName);
                         if (modelData.systemUpdate)
                             return UpdateManager.pauseDownload(modelData.packageName);
                         modelData.updateState = false;
@@ -341,6 +346,7 @@ ItemPage {
                     }
 
                     function resume () {
+                        console.warn("RESUME: " + modelData.packageName);
                         if (modelData.systemUpdate)
                             return UpdateManager.startDownload(modelData.packageName);
                         modelData.updateState = true;
@@ -348,6 +354,7 @@ ItemPage {
                     }
 
                     function start () {
+                        console.warn("START: " + modelData.packageName);
                         modelData.selected = true;
                         modelData.updateState = true;
                         UpdateManager.startDownload(modelData.packageName);
@@ -493,12 +500,14 @@ ItemPage {
                                 }
 
                                 onProcessing: {
+                                    console.warn("onProcessing: " + modelData.packageName + " " + path);
                                     buttonAppUpdate.enabled = false;
                                     installing = true;
                                     modelData.updateState = false;
                                 }
 
                                 onStarted: {
+                                    console.warn("onStarted: " + modelData.packageName + " " + success);
                                     if (success)
                                         modelData.updateState = true;
                                     else
@@ -506,6 +515,7 @@ ItemPage {
                                 }
 
                                 onPaused: {
+                                    console.warn("onPaused: " + modelData.packageName + " " + success);
                                     if (success)
                                         modelData.updateState = false;
                                     else
@@ -513,6 +523,7 @@ ItemPage {
                                 }
 
                                 onResumed: {
+                                    console.warn("onResumed: " + modelData.packageName + " " + success);
                                     if (success)
                                         modelData.updateState = true;
                                     else
@@ -520,6 +531,7 @@ ItemPage {
                                 }
 
                                 onCanceled: {
+                                    console.warn("onCanceled: " + modelData.packageName + " " + success);
                                     if (success) {
                                         modelData.updateState = false;
                                         modelData.selected = false;
@@ -527,6 +539,7 @@ ItemPage {
                                 }
 
                                 onErrorFound: {
+                                    console.warn("onErrorFound: " + modelData.packageName + " " + error);
                                     modelData.updateState = false;
                                     modelData.selected = false;
                                     retry = true;
