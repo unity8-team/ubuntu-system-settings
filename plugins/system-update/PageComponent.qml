@@ -270,15 +270,35 @@ ItemPage {
                     width: parent.width - units.gu(4)
 
                     onClicked: {
-                        root.installAll = !root.installAll;
                         for (var i=0; i < updateList.count; i++) {
                             updateList.currentIndex = i;
                             var item = updateList.currentItem;
                             var modelItem = UpdateManager.model[i];
-                            if (modelItem.updateState != root.installAll && !modelItem.updateReady) {
-                                item.actionButton.clicked();
+                            if (item.installing || item.installed)
+                                continue;
+                            console.warn("AllClicked: " + modelItem.updateState + " " + modelItem.updateReady + " " +  modelItem.selected);
+                            if (item.retry) {
+                                item.retry = false;
+                                UpdateManager.retryDownload(modelItem.packageName);
+                                continue;
                             }
+                            if (root.installAll && !modelItem.updateReady && modelItem.selected) {
+                                item.pause();
+                                continue;
+                            }
+                            console.warn("Past pause");
+                            if (!root.installAll && !modelItem.updateReady && modelItem.selected) {
+                                item.resume();
+                                continue;
+                            }
+                            console.warn("Past resume");
+                            if (!root.installAll && !modelItem.updateState && !modelItem.updateReady && !modelItem.selected) {
+                                item.start();
+                                continue;
+                            }
+                            console.warn("Past start");
                         }
+                        root.installAll = !root.installAll;
                     }
                 }
                 showDivider: false
@@ -304,14 +324,41 @@ ItemPage {
                     }
                     iconSource: Qt.resolvedUrl(modelData.iconUrl)
                     iconFrame: modelData.systemUpdate ? false : true
-                    height: textArea.height
+                    height: visible ? textArea.height : 0
                     highlightWhenPressed: false
                     showDivider: false
+                    visible: opacity > 0
+                    opacity: installed ? 0 : 1
+                    Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
 
                     property alias actionButton: buttonAppUpdate
                     property alias progressBar: progress
-                    property bool installing: modelData.updateReady || (progressBar.value === progressBar.maximumValue)
+                    property bool installing: !modelData.systemUpdate && (modelData.updateReady || (progressBar.value === progressBar.maximumValue))
+                    property bool installed: false
+                    property bool retry: false
 
+                    function pause () {
+                        console.warn("PAUSE: " + modelData.packageName);
+                        if (modelData.systemUpdate)
+                            return UpdateManager.pauseDownload(modelData.packageName);
+                        modelData.updateState = false;
+                        tracker.pause();
+                    }
+
+                    function resume () {
+                        console.warn("RESUME: " + modelData.packageName);
+                        if (modelData.systemUpdate)
+                            return UpdateManager.startDownload(modelData.packageName);
+                        modelData.updateState = true;
+                        tracker.resume();
+                    }
+
+                    function start () {
+                        console.warn("START: " + modelData.packageName);
+                        modelData.selected = true;
+                        modelData.updateState = true;
+                        UpdateManager.startDownload(modelData.packageName);
+                    }
                     Column {
                         id: textArea
                         objectName: "textArea"
@@ -320,17 +367,6 @@ ItemPage {
                             right: parent.right
                         }
                         spacing: units.gu(0.5)
-                        property string message: modelData.error
-                        property bool retry: false
-
-                        onMessageChanged: {
-                            if(message.length > 0) {
-                                labelVersion.text = message;
-                                modelData.updateState = false;
-                                modelData.selected = false;
-                                textArea.retry = true;
-                            }
-                        }
 
                         Item {
                             anchors {
@@ -356,10 +392,10 @@ ItemPage {
                                 objectName: "buttonAppUpdate"
                                 anchors.right: parent.right
                                 height: labelTitle.height + units.gu(1)
+                                enabled: !installing 
                                 text: {
-                                    if (textArea.retry) {
+                                    if (retry)
                                         return i18n.tr("Retry");
-                                    }
                                     if (modelData.systemUpdate) {
                                         if (modelData.updateReady) {
                                             return i18n.tr("Install…");
@@ -376,27 +412,18 @@ ItemPage {
                                 }
 
                                 onClicked: {
-                                    if (textArea.retry) {
-                                        textArea.retry = false;
-                                        UpdateManager.retryDownload(modelData.packageName);
-                                    } else if (modelData.updateReady) {
-                                        PopupUtils.open(dialogInstallComponent);
-                                    } else if (modelData.updateState) {
-                                        if (modelData.systemUpdate) {
-                                            UpdateManager.pauseDownload(modelData.packageName);
-                                        } else {
-                                            modelData.updateState = false;
-                                            tracker.pause();
-                                        }
-                                    } else {
-                                        if (!modelData.selected || modelData.systemUpdate) {
-                                            modelData.selected = true;
-                                            UpdateManager.startDownload(modelData.packageName);
-                                        } else {
-                                            modelData.updateState = true;
-                                            tracker.resume();
-                                        }
+                                    if (retry) {
+                                        retry = false;
+                                        return UpdateManager.retryDownload(modelData.packageName);
                                     }
+                                    if (modelData.updateState)
+                                        return pause();
+                                    if (!modelData.updateState && modelData.selected)
+                                        return resume();
+                                    if (!modelData.updateState && !modelData.selected && !modelData.updateReady)
+                                        return start();
+                                    if (modelData.updateReady)
+                                        PopupUtils.open(dialogInstallComponent);
                                 }
                             }
                         } 
@@ -409,17 +436,25 @@ ItemPage {
                             }
                             height: childrenRect.height
                             visible: opacity > 0
-                            opacity: modelData.selected && !modelData.updateReady ? 1 : 0
+                            opacity: (modelData.updateState && modelData.selected && !modelData.updateReady) || (installing || installed) ? 1 : 0
                             Behavior on opacity { PropertyAnimation { duration: UbuntuAnimation.SleepyDuration } }
                             Label {
                                 objectName: "labelUpdateStatus"
                                 anchors.left: parent.left
                                 fontSize: "small"
-                                text: installing ? i18n.tr("Installing") : i18n.tr("Downloading")
+                                text: {
+                                    if (retry)
+                                        return modelData.error;
+                                    if (installing)
+                                        return i18n.tr("Installing");
+                                    if (installed)
+                                        return i18n.tr("Installed");
+                                    return i18n.tr("Downloading");
+                                }
                             }
                             Label {
                                 anchors.right: parent.right
-                                visible: !labelSize.visible && !installing
+                                visible: !labelSize.visible && !installing && !installed
                                 fontSize: "small"
                                 text: {
                                     if (!labelUpdateStatus.visible)
@@ -442,7 +477,7 @@ ItemPage {
                                 right: parent.right
                             }
                             visible: opacity > 0
-                            opacity: modelData.selected && !modelData.updateReady && !installing ? 1 : 0
+                            opacity: modelData.selected && !modelData.updateReady && !installed ? 1 : 0
                             value: modelData.systemUpdate ? modelData.downloadProgress : tracker.progress
                             minimumValue: 0
                             maximumValue: 100
@@ -457,15 +492,57 @@ ItemPage {
                                 onFinished: {
                                     progress.visible = false;
                                     buttonAppUpdate.visible = false;
-                                    textArea.message = i18n.tr("Installed");
+                                    installed = true;
+                                    installing = false;
                                     root.updatesAvailable -= 1;
                                     modelData.updateRequired = false;
                                     UpdateManager.updateClickScope();
                                 }
 
-                                onErrorFound: {
+                                onProcessing: {
+                                    console.warn("onProcessing: " + modelData.packageName + " " + path);
+                                    buttonAppUpdate.enabled = false;
+                                    installing = true;
                                     modelData.updateState = false;
-                                    textArea.message = error;
+                                }
+
+                                onStarted: {
+                                    console.warn("onStarted: " + modelData.packageName + " " + success);
+                                    if (success)
+                                        modelData.updateState = true;
+                                    else
+                                        modelData.updateState = false;
+                                }
+
+                                onPaused: {
+                                    console.warn("onPaused: " + modelData.packageName + " " + success);
+                                    if (success)
+                                        modelData.updateState = false;
+                                    else
+                                        modelData.updateState = true;
+                                }
+
+                                onResumed: {
+                                    console.warn("onResumed: " + modelData.packageName + " " + success);
+                                    if (success)
+                                        modelData.updateState = true;
+                                    else
+                                        modelData.updateState = false;
+                                }
+
+                                onCanceled: {
+                                    console.warn("onCanceled: " + modelData.packageName + " " + success);
+                                    if (success) {
+                                        modelData.updateState = false;
+                                        modelData.selected = false;
+                                    }
+                                }
+
+                                onErrorFound: {
+                                    console.warn("onErrorFound: " + modelData.packageName + " " + error);
+                                    modelData.updateState = false;
+                                    retry = true;
+                                    installing = false;
                                 }
                             }
 
@@ -493,7 +570,7 @@ ItemPage {
                                 anchors.right: parent.right
                                 text: convert_bytes_to_size(modelData.binaryFilesize)
                                 fontSize: "small"
-                                visible: !labelUpdateStatus.visible && !installing
+                                visible: !labelUpdateStatus.visible && !installing && !installed
                             }
                         }
                     }
@@ -534,8 +611,6 @@ ItemPage {
                 }
 
             }
-
-
         }
     }
 
