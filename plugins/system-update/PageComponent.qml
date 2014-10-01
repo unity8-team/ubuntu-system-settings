@@ -541,7 +541,6 @@ ItemPage {
                                 onErrorFound: {
                                     console.warn("onErrorFound: " + modelData.packageName + " " + error);
                                     modelData.updateState = false;
-                                    modelData.selected = false;
                                     retry = true;
                                     installing = false;
                                 }
