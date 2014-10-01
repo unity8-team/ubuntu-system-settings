@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-08-27 12:32+0000\n"
+"PO-Revision-Date: 2014-09-30 17:41+0000\n"
 "Last-Translator: Rafael Neri <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-30 07:09+0000\n"
+"X-Launchpad-Export-Date: 2014-10-01 06:25+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
@@ -24,11 +24,11 @@ msgstr "Configurações"
 
 #: ubuntu-system-settings.desktop.in.in.h:2
 msgid "System;"
-msgstr ""
+msgstr "Sistema;"
 
 #: ubuntu-system-settings.desktop.in.in.h:3
 msgid "Preferences;Settings;"
-msgstr ""
+msgstr "Preferências;Configurações;"
 
 #: ../plugins/system-update//Configuration.qml:29
 #: ../plugins/system-update//PageComponent.qml:565
@@ -82,6 +82,7 @@ msgstr ""
 #: ../plugins/system-update//PageComponent.qml:95
 msgid "Connect the phone to power before installing the system update."
 msgstr ""
+"Conecte o telefone a energia antes de instalar a atualização do sistema."
 
 #: ../plugins/system-update//PageComponent.qml:98
 msgid "Install & Restart"
@@ -199,7 +200,7 @@ msgstr "Telefone"
 #: ../plugins/sound//PageComponent.qml:153
 #: ../plugins/phone//PageComponent.qml:109
 msgid "Dialpad sounds"
-msgstr ""
+msgstr "Sons do discador"
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
@@ -292,7 +293,7 @@ msgstr "Pré-visualizar"
 
 #: ../plugins/background//Preview.qml:101
 msgid "Remove image"
-msgstr ""
+msgstr "Remover imagem"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../plugins/background//MainPage.qml:38
@@ -399,7 +400,7 @@ msgstr ""
 
 #: ../plugins/language//RebootNecessary.qml:38
 msgid "Restart Now"
-msgstr ""
+msgstr "Reiniciar agora"
 
 #. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:363
@@ -716,40 +717,42 @@ msgstr "WEP"
 
 #: ../plugins/wifi//RemoveBackground.qml:28
 msgid "Clear"
-msgstr ""
+msgstr "Limpar"
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
-msgstr ""
+msgstr "Erro desconhecido"
 
 #: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
-msgstr ""
+msgstr "Nenhum motivo determinado"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr ""
+msgstr "Agora o dispositivo é gerenciável"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
-msgstr ""
+msgstr "Agora o dispositivo não é gerenciável"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
-msgstr ""
+msgstr "O dispositivo pode não estar pronto para configuração"
 
 #: ../plugins/wifi//Common.qml:46
 msgid ""
 "IP configuration could not be reserved (no available address, timeout, etc.)"
 msgstr ""
+"A configuração IP não pode estar reservada (nenhum endereço disponível, "
+"timeout, etc)"
 
 #: ../plugins/wifi//Common.qml:48
 msgid "The IP configuration is no longer valid"
-msgstr ""
+msgstr "A configuração IP não é mais válida"
 
 #: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"
-msgstr ""
+msgstr "Os seus detalhes de autenticação estão incorretos"
 
 #: ../plugins/wifi//Common.qml:52
 msgid "802.1X supplicant disconnected"

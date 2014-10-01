@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-26 12:27-0400\n"
-"PO-Revision-Date: 2014-09-25 12:35+0000\n"
+"PO-Revision-Date: 2014-09-30 11:49+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-09-30 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-10-01 06:24+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -507,7 +507,7 @@ msgstr "Math"
 
 #: ../plugins/bluetooth//PageComponent.qml:114
 msgid "Fair"
-msgstr "Meadhanach"
+msgstr "Ceart gu leòr"
 
 #: ../plugins/bluetooth//PageComponent.qml:115
 msgid "Poor"
@@ -703,11 +703,11 @@ msgstr "Lìonraidhean roimhe"
 
 #: ../plugins/wifi//PageComponent.qml:138
 msgid "Connect to hidden network…"
-msgstr ""
+msgstr "Ceangail ri lìonra falaichte..."
 
 #: ../plugins/wifi//OtherNetwork.qml:96
 msgid "Connect to Hidden Network"
-msgstr ""
+msgstr "Ceangail ri lìonra falaichte"
 
 #: ../plugins/wifi//OtherNetwork.qml:65
 msgid "Network name"
@@ -728,36 +728,38 @@ msgstr "WEP"
 
 #: ../plugins/wifi//RemoveBackground.qml:28
 msgid "Clear"
-msgstr ""
+msgstr "Falamhaich"
 
 #: ../plugins/wifi//Common.qml:36
 msgid "Unknown error"
-msgstr ""
+msgstr "Mearachd nach aithne dhuinn"
 
 #: ../plugins/wifi//Common.qml:38
 msgid "No reason given"
-msgstr ""
+msgstr "Cha deach adhbhar a thoirt seachad"
 
 #: ../plugins/wifi//Common.qml:40
 msgid "Device is now managed"
-msgstr ""
+msgstr "Tha an t-uidheam fo stiùireadh a-nis"
 
 #: ../plugins/wifi//Common.qml:42
 msgid "Device is now unmanaged"
-msgstr ""
+msgstr "Tha an t-uidheam gun stiùireadh a-nis"
 
 #: ../plugins/wifi//Common.qml:44
 msgid "The device could not be readied for configuration"
-msgstr ""
+msgstr "Cha deach leinn an t-uidheam ullachadh airson rèiteachadh"
 
 #: ../plugins/wifi//Common.qml:46
 msgid ""
 "IP configuration could not be reserved (no available address, timeout, etc.)"
 msgstr ""
+"Tha b' urrainn dhuinn rèiteachadh an IP a ghlèidheadh (chan eil seòladh ri "
+"làimh, dh'fhalbh an ùine air is msaa.)"
 
 #: ../plugins/wifi//Common.qml:48
 msgid "The IP configuration is no longer valid"
-msgstr ""
+msgstr "Chan eil rèiteachadh an IP dligheach tuilleadh"
 
 #: ../plugins/wifi//Common.qml:50
 msgid "Your authentication details were incorrect"
@@ -781,23 +783,23 @@ msgstr ""
 
 #: ../plugins/wifi//Common.qml:60
 msgid "DHCP client failed to start"
-msgstr ""
+msgstr "Dh'fhàillig tòiseachadh a' chliaint DHCP"
 
 #: ../plugins/wifi//Common.qml:62
 msgid "DHCP client error"
-msgstr ""
+msgstr "Mearachd a' chliaint DHCP"
 
 #: ../plugins/wifi//Common.qml:64
 msgid "DHCP client failed"
-msgstr ""
+msgstr "Dh'fhàillig an cliant DCHP"
 
 #: ../plugins/wifi//Common.qml:66
 msgid "Shared connection service failed to start"
-msgstr ""
+msgstr "Dh'fhàillig tòiseachadh seirbheis a' cheangail cho-roinnte"
 
 #: ../plugins/wifi//Common.qml:68
 msgid "Shared connection service failed"
-msgstr ""
+msgstr "Dh'fhàillig seirbheis a' cheangail cho-roinnte"
 
 #: ../plugins/wifi//Common.qml:70
 msgid "Necessary firmware for the device may be missing"
@@ -2123,7 +2125,7 @@ msgstr "update;ùrachadh"
 #: ../po/settings.js:44
 #: ../po/settings.js:188
 msgid "apps"
-msgstr ""
+msgstr "aplacaidean"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
@@ -2134,22 +2136,22 @@ msgstr ""
 #: ../po/settings.js:274
 #: ../po/settings.js:340
 msgid "automatic"
-msgstr ""
+msgstr "fèin-obrachail"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:16
 msgid "download"
-msgstr ""
+msgstr "luchdadh a-nuas"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:18
 msgid "upgrade"
-msgstr ""
+msgstr "ùrachadh"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #: ../po/settings.js:20
 msgid "click"
-msgstr ""
+msgstr "briogadh"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:30
@@ -2216,22 +2218,22 @@ msgstr "phone;fòn"
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:50
 msgid "services"
-msgstr ""
+msgstr "seirbheisean"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:52
 msgid "forwarding"
-msgstr ""
+msgstr "sìneadh air adhart"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:54
 msgid "waiting"
-msgstr ""
+msgstr "feitheamh"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:56
 msgid "call"
-msgstr ""
+msgstr "gairm"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
@@ -2243,12 +2245,12 @@ msgstr ""
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:60
 msgid "shortcuts"
-msgstr ""
+msgstr "ath-ghoiridean"
 
 #. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
 #: ../po/settings.js:62
 msgid "numbers"
-msgstr ""
+msgstr "àireamhan"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:154
@@ -2268,17 +2270,17 @@ msgstr "wallpaper;pàipear-balla"
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:72
 msgid "art"
-msgstr ""
+msgstr "ealain"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:74
 msgid "photo"
-msgstr ""
+msgstr "dealbh-camara"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:76
 msgid "picture"
-msgstr ""
+msgstr "dealbh"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
 #: ../po/settings.js:78
