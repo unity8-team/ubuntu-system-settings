@@ -67,6 +67,8 @@ SystemUpdate::SystemUpdate(QObject *parent) :
                 this, SIGNAL(updateFailed(int, QString)));
     connect(&m_SystemServiceIface, SIGNAL(SettingChanged(QString, QString)),
                 this, SLOT(ProcessSettingChanged(QString, QString)));
+    connect(&m_SystemServiceIface, SIGNAL(Rebooting(bool)),
+                this, SIGNAL(rebooting(bool)));
 
     setCurrentDetailedVersion();
 }
@@ -112,6 +114,23 @@ void SystemUpdate::setCurrentDetailedVersion() {
         qWarning() << "Error when retrieving version information: " << reply.error();
     }
 }
+
+bool SystemUpdate::checkTarget() {
+    int target = 0;
+    int current = 0;
+    QDBusPendingReply<QMap<QString, QString> > reply = m_SystemServiceIface.call("Information");
+    reply.waitForFinished();
+    if (reply.isValid()) {
+        QMap<QString, QString> result = reply.argumentAt<0>();
+        target = result.value("target_build_number", "0").toInt();
+        current = result.value("current_build_number", "0").toInt();
+    } else {
+        qWarning() << "Error when retrieving version information: " << reply.error();
+    }
+
+    return target > current;
+}
+
 
 QDateTime SystemUpdate::lastUpdateDate() {
     if (!m_lastUpdateDate.isValid())
