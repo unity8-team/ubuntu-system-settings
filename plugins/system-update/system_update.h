@@ -54,6 +54,7 @@ public:
     void applyUpdate();
     void cancelUpdate();
     void pauseDownload();
+    bool checkTarget();
 
 public Q_SLOTS:
     void ProcessAvailableStatus(bool, bool, QString, int, QString, QString);
