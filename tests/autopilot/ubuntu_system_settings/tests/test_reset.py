@@ -10,7 +10,7 @@ from __future__ import absolute_import
 from time import sleep
 
 from autopilot.matchers import Eventually
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 from testtools.matchers import Contains, Equals
 
 from ubuntu_system_settings.tests import ResetBaseTestCase
@@ -35,10 +35,15 @@ class ResetTestCase(ResetBaseTestCase):
         gsettings = Gio.Settings.new('com.canonical.Unity.Launcher')
 
         favorites = gsettings.get_value('favorites')
+        gsettings.set_value(
+            'favorites',
+            GLib.Variant('as', ['application://nautilus.desktop']))
         self.addCleanup(
             self.set_unity_launcher, gsettings, 'favorites', favorites)
 
         items = gsettings.get_value('items')
+        gsettings.set_value(
+            'items', GLib.Variant('as', ['application:///dialer-app.desktop']))
         self.addCleanup(
             self.set_unity_launcher, gsettings, 'items', items)
 
