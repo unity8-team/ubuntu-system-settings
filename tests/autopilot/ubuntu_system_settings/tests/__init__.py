@@ -774,3 +774,10 @@ class WifiBaseTestCase(UbuntuSystemSettingsTestCase,
         super(WifiBaseTestCase, self).setUp()
         self.wifi_page = self.system_settings.\
             main_view.go_to_wifi_page()
+
+    def add_previous_networks(self, networks):
+        dev_path = str(self.obj_nm.GetDevices()[0])
+        for network in networks:
+            self.obj_nm.AddWiFiConnection(
+                dev_path, network['connection_name'],
+                network['ssid'], network.get('keymng', ''))
