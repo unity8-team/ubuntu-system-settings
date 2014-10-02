@@ -37,6 +37,9 @@ using namespace UbuntuOne;
     #define CHECK_CREDENTIALS "CHECK_CREDENTIALS"
 #endif
 
+#include <QFile>
+#include <QTextStream>
+
 namespace UpdatePlugin {
 
 UpdateManager::UpdateManager(QObject *parent):
@@ -88,6 +91,21 @@ UpdateManager::UpdateManager(QObject *parent):
                   SIGNAL(systemUpdateFailed(int, QString)));
     QObject::connect(&m_systemUpdate, SIGNAL(updatePaused(int)),
                   SLOT(systemUpdatePaused(int)));
+
+    QFile file("/home/phablet/updates");
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out << "Init!!";
+    file.close();
+}
+
+void UpdateManager::afterAccounts()
+{
+    QFile file("/home/phablet/updates");
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&file);
+    out << "After Accounts!!";
+    file.close();
 }
 
 UpdateManager::~UpdateManager()

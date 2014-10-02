@@ -82,6 +82,7 @@ public:
     explicit UpdateManager(QObject *parent = 0);
     ~UpdateManager();
 
+    Q_INVOKABLE void afterAccounts();
     Q_INVOKABLE void checkUpdates();
     Q_INVOKABLE void startDownload(const QString &packagename);
     Q_INVOKABLE void pauseDownload(const QString &packagename);
