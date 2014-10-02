@@ -24,7 +24,6 @@
 #include <gio/gio.h>
 #include <gio/gunixmounts.h>
 #include <glib.h>
-#include <unistd.h>
 
 #include <QDateTime>
 #include <QDir>
