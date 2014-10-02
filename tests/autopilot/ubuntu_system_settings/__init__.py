@@ -711,7 +711,7 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
 
         # we can't mock the qunitymenu items, so we
         # have to wait for them to be built
-        sleep(1)
+        sleep(0.5)
 
         button = self.select_single('*',
                                     objectName='connectToHiddenNetwork')
@@ -721,6 +721,40 @@ class WifiPage(ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
             self.pointing_device.click_object(button)
         return self.get_root_instance().wait_select_single(
             objectName='otherNetworkDialog')
+
+    @autopilot.logging.log_action(logger.debug)
+    def go_to_previous_networks(self, scroll_to_and_click=None):
+        return self._click_previous_network(scroll_to_and_click)
+
+    """Removes previous network
+
+    :param ssid: Network name string (SSID)
+
+    :returns: PreviousNetwork page
+
+    """
+    @autopilot.logging.log_action(logger.debug)
+    def remove_previous_network(self, ssid, scroll_to_and_click=None):
+        page = self.go_to_previous_networks(scroll_to_and_click)
+        details = page.select_network(ssid)
+        details.forget_network()
+        return page
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_previous_network(self, scroll_to_and_click):
+
+        # we can't mock the qunitymenu items, so we
+        # have to wait for them to be built
+        sleep(0.5)
+
+        button = self.select_single('*',
+                                    objectName='previousNetwork')
+        if (scroll_to_and_click):
+            scroll_to_and_click(button)
+        else:
+            self.pointing_device.click_object(button)
+        return self.get_root_instance().wait_select_single(
+            objectName='previousNetworksPage')
 
 
 class OtherNetwork(
@@ -816,4 +850,44 @@ class OtherNetwork(
     @autopilot.logging.log_action(logger.debug)
     def _click_connect(self):
         button = self.select_single('Button', objectName='connect')
+        self.pointing_device.click_object(button)
+
+
+class PreviousNetworks(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Previous Networks page."""
+
+    @classmethod
+    def validate_dbus_object(cls, path, state):
+        name = introspection.get_classname_from_path(path)
+        if name == b'ItemPage':
+            if state['objectName'][1] == 'previousNetworksPage':
+                return True
+        return False
+
+    @autopilot.logging.log_action(logger.debug)
+    def select_network(self, name):
+        self._select_network(name)
+        return self.get_root_instance().wait_select_single(
+            objectName='networkDetailsPage')
+
+    @autopilot.logging.log_action(logger.debug)
+    def _select_network(self, name):
+        net = self.select_single('Standard', text=name)
+        self.pointing_device.click_object(net)
+
+
+class NetworkDetails(
+        ubuntuuitoolkit.UbuntuUIToolkitCustomProxyObjectBase):
+
+    """Autopilot helper for the Networks Details page."""
+
+    @autopilot.logging.log_action(logger.debug)
+    def forget_network(self):
+        self._click_forget()
+
+    @autopilot.logging.log_action(logger.debug)
+    def _click_forget(self):
+        button = self.select_single('Button', objectName='forgetNetwork')
         self.pointing_device.click_object(button)

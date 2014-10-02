@@ -19,7 +19,9 @@
 
 #include "previousnetworkmodel.h"
 #include "wifidbushelper.h"
-#include<QVariant>
+
+const QString nm_settings_connection("org.freedesktop.NetworkManager.Settings.Connection");
+const QString nm_settings_connection_removed_member("Removed");
 
 struct PreviousNetworkModel::Private {
     QList<QStringList> data;
@@ -28,10 +30,45 @@ struct PreviousNetworkModel::Private {
 PreviousNetworkModel::PreviousNetworkModel(QObject *parent) : QAbstractListModel(parent) {
     p = new PreviousNetworkModel::Private();
 
+    const QString service("");
+    const QString path("");
+
+    QDBusConnection::systemBus().connect(
+        service,
+        path,
+        nm_settings_connection,
+        nm_settings_connection_removed_member,
+        this,
+        SLOT(removeConnection()));
+
     WifiDbusHelper h;
     auto networks = h.getPreviouslyConnectedWifiNetworks();
-
     p->data = networks;
+
+}
+
+void PreviousNetworkModel::removeConnection()
+{
+    WifiDbusHelper h;
+    QList<QStringList> networks = h.getPreviouslyConnectedWifiNetworks();
+
+    int row = -1;
+    for (int i=0, n=p->data.length(); row==-1 && i<n; i++) {
+        if (i > networks.length() - 1) {
+            row = i;
+            break;
+        }
+        if (networks[i][1] != p->data.at(i)[1]) {
+            row = i;
+            break;
+        }
+    }
+
+    if (0<=row && row<p->data.size()) {
+        beginRemoveRows(QModelIndex(), row, row);
+        p->data.removeAt(row);
+        endRemoveRows();
+    }
 }
 
 PreviousNetworkModel::~PreviousNetworkModel() {

@@ -1,3 +1,20 @@
+ubuntu-system-settings (0.3+14.10.20141002-0ubuntu1) utopic; urgency=low
+
+  [ jonas-drange ]
+  * [cellular] react to application.state changes and update potential
+    out-of-date default SIM settings (LP: #1364103)
+  * [wifi] let removed networks update the previous network model so
+    that we can reuse the model (and not pop the pagestack twice,
+    causing this ux issue) (LP: #1370389)
+
+  [ Sebastien Bacher ]
+  * [location] use a flickable so the list can be scrolled (LP:
+    #1374017)
+  * [security] get localized application names from the trust-store (LP:
+    #1374018)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 02 Oct 2014 14:05:35 +0000
+
 ubuntu-system-settings (0.3+14.10.20141001-0ubuntu1) utopic; urgency=low
 
   [ Ken VanDine ]
