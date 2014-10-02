@@ -219,7 +219,7 @@ ItemPage {
                 TextField {
                     id: pword
                     enabled: !doBoth.checked
-                    echoMode: TextInput.PasswordEchoOnEdit
+                    echoMode: TextInput.Password
                     inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 }
                 /// @todo support for ipv6 will be added after RTM
