@@ -439,6 +439,14 @@ ItemPage {
                     selectedIndex: -1
                     delegate: OptionSelectorDelegate {
                         showDivider: modelData === "/same/as/internet"
+                        enabled: {
+                            if (modelData !== "/same/as/internet")
+                                return true;
+                            else
+                                d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]].dual
+                        }
+                        // work around OptionSelectorDelegate not having a visual change depending on being disabled
+                        opacity: enabled ? 1.0 : 0.5
                         text: {
                             if (modelData === "/same/as/internet") {
                                 return i18n.tr("Same APN as for Internet");
@@ -491,17 +499,6 @@ ItemPage {
                             return;
 
                         if (model[selectedIndex] === "/same/as/internet") {
-                            if (internetApnSelector.selectedIndex == -1) {
-                                PopupUtils.open(noInternetAPNSelected);
-                                updateSelectedIndex()
-                                return;
-                            }
-                            if (!d.mContexts[internetApnSelector.model[internetApnSelector.selectedIndex]].dual) {
-                                PopupUtils.open(canNotChooseSameAsInternet)
-                                updateSelectedIndex()
-                                return;
-                            }
-
                             // @bug delete _any_ actual MMS context
                             //      LP:(#1362795)
                             var remove = [];
@@ -554,30 +551,7 @@ ItemPage {
 
         }
     }
-    Component {
-         id: noInternetAPNSelected
-         Dialog {
-             id: dialogue
-             title: i18n.tr("Error:")
-             text: i18n.tr("No Internet APN has been selected.")
-             Button {
-                 text: i18n.tr("OK")
-                 onClicked: PopupUtils.close(dialogue)
-             }
-         }
-    }
-    Component {
-         id: canNotChooseSameAsInternet
-         Dialog {
-             id: dialogue
-             title: i18n.tr("Error:")
-             text: i18n.tr("The selected Internet APN does not support MMS.")
-             Button {
-                 text: i18n.tr("OK")
-                 onClicked: PopupUtils.close(dialogue)
-             }
-         }
-    }
+
     Component {
          id: resetDialog
          Dialog {
