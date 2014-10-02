@@ -33,7 +33,7 @@ Column {
     property var settings: phoneSettings
 
     CellularMultiSim {
-        anchors { left: parent.left; right: parent.right }
+        anchors { left: parent.left; right: parent.right }
     }
 
     ListItem.Divider {}
@@ -68,6 +68,7 @@ Column {
         text: i18n.tr("Carriers")
         id: chooseCarrier
         objectName: "chooseCarrier"
+        enabled: sim.netReg.status !== ""
         progression: enabled
         onClicked: {
             pageStack.push(Qt.resolvedUrl("../PageChooseCarriers.qml"), {
@@ -79,13 +80,13 @@ Column {
     ListItem.Divider {}
 
     SimEditor {
-        anchors { left: parent.left; right: parent.right }
+        anchors { left: parent.left; right: parent.right }
     }
 
     ListItem.Divider {}
 
     DefaultSim {
-        anchors { left: parent.left; right: parent.right }
+        anchors { left: parent.left; right: parent.right }
     }
 
     GSettings {
@@ -99,7 +100,7 @@ Column {
             if (!simNames[m0]) {
                 simNames[m0] = "SIM 1";
             }
-            if (!simNames[m1]) {
+            if (!simNames[m1]) {
                 simNames[m1] = "SIM 2";
             }
             phoneSettings.simNames = simNames;
