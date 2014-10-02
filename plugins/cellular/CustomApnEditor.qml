@@ -21,8 +21,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.1
+import Ubuntu.Components.ListItems 1.0 as ListItem
 
 ItemPage {
     objectName: "customapnPage"
@@ -160,6 +160,7 @@ ItemPage {
                     id: apnName
                     enabled: !doBoth.checked
                     onTextChanged: d.validateFields()
+                    inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 }
 
                 Label {
@@ -170,6 +171,7 @@ ItemPage {
                     id: mmsc
                     visible: d.isMms
                     onTextChanged: d.validateFields()
+                    inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 }
                 Label {
                     text: i18n.tr("Proxy")
@@ -179,6 +181,7 @@ ItemPage {
                     id: proxy
                     visible: d.isMms
                     onTextChanged: d.validateFields()
+                    inputMethodHints: Qt.ImhUrlCharactersOnly | Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 }
                 Label {
                     text: "Port"
@@ -189,6 +192,7 @@ ItemPage {
                     visible: d.isMms
                     maximumLength: 4
                     onTextChanged: d.validateFields()
+                    inputMethodHints: Qt.ImhDigitsOnly | Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 }
 
                 Label {
@@ -197,6 +201,7 @@ ItemPage {
                 TextField {
                     id: userName
                     enabled: !doBoth.checked
+                    inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 }
 
                 Label {
@@ -206,6 +211,7 @@ ItemPage {
                     id: pword
                     enabled: !doBoth.checked
                     echoMode: TextInput.PasswordEchoOnEdit
+                    inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                 }
                 /// @todo support for ipv6 will be added after RTM
             }
