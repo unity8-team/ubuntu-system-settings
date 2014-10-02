@@ -22,7 +22,8 @@ import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
 ItemPage {
-    id: othernetwork
+    id: previousNetworks
+    objectName: "previousNetworksPage"
     title: i18n.tr("Previous networks")
 
     PreviousNetworkModel {
@@ -30,15 +31,36 @@ ItemPage {
     }
 
     ListView {
+        id: networkList
         anchors.fill : parent
         model: pnmodel
+        remove: Transition {
+            ParallelAnimation {
+                NumberAnimation {
+                    property: "opacity"
+                    to: 0
+                    duration: UbuntuAnimation.SnapDuration
+                }
+                NumberAnimation {
+                    property: "height"
+                    to: 0
+                    duration: UbuntuAnimation.SnapDuration
+                }
+            }
+        }
+        removeDisplaced: Transition {
+            NumberAnimation {
+                property: "y"
+                duration: UbuntuAnimation.SnapDuration
+            }
+        }
         delegate: ListItem.Standard {
             text: name
             progression: true
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("NetworkDetails.qml"),
                 {networkName : name, password : password, lastUsed : lastUsed,
-                dbusPath : objectPath})
+                dbusPath : objectPath});
             }
         }
     }
