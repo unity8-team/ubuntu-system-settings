@@ -47,6 +47,7 @@ pkg_check_modules(TRUST_STORE REQUIRED trust-store)
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${TRUST_STORE_INCLUDE_DIRS}
+    ${GLIB_INCLUDE_DIRS}
 )
 
 set(PLUG_DIR ${PLUGIN_PRIVATE_MODULE_DIR}/Ubuntu/SystemSettings/SecurityPrivacy)
@@ -54,6 +55,7 @@ target_link_libraries (UbuntuSecurityPrivacyPanel
     uss-accountsservice
     ${ACCOUNTSSERVICE_LDFLAGS}
     ${TRUST_STORE_LDFLAGS}
+    ${GLIB_LDFLAGS}
 )
 install(TARGETS UbuntuSecurityPrivacyPanel UbuntuSecurityPrivacyHelper DESTINATION ${PLUG_DIR})
 install(FILES qmldir DESTINATION ${PLUG_DIR})
