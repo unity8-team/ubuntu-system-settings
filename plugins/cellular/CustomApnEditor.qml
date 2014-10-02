@@ -110,13 +110,22 @@ ItemPage {
 
     Flickable {
         id: scrollWidget
-        anchors.fill: parent
-        boundsBehavior: (contentHeight > root.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            bottom: buttonRectangle.top
+        }
+        contentWidth: parent.width
+        clip: true
+        contentHeight: theContents.height
+        boundsBehavior: (contentHeight > height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
         flickableDirection: Flickable.VerticalFlick
 
         Item {
             id: theContents
-            anchors.fill: parent
+            height: sameSwitch.height + theGrid.height
+            width: parent.width
 
             ListItem.Standard {
                 id: sameSwitch
