@@ -87,14 +87,6 @@ static void measure_special_file(GUserDirectory directory,
     measure_file (g_get_user_special_dir (directory), callback, user_data);
 }
 
-static void maybeEmit(MeasureData *data)
-{
-    if (--(*data->running) == 0)
-        Q_EMIT (data->object->sizeReady());
-
-    delete data;
-}
-
 static void measure_finished(GObject *source_object,
                              GAsyncResult *result,
                              gpointer user_data)
@@ -124,12 +116,16 @@ static void measure_finished(GObject *source_object,
         } else {
             qWarning() << "Measuring of" << g_file_get_path (file)
                        << "failed:" << err->message;
-            g_error_free(err);
+            g_error_free (err);
+            err = nullptr;
         }
     }
 
-    g_object_unref (file);
-    maybeEmit(data);
+    if (--(*data->running) == 0)
+        Q_EMIT (data->object->sizeReady());
+
+    delete data;
+    g_clear_object (&file);
 }
 
 StorageAbout::StorageAbout(QObject *parent) :
