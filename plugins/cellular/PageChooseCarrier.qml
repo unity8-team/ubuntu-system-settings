@@ -21,8 +21,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import SystemSettings 1.0
-import Ubuntu.Components 0.1
-import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components 1.1
+import Ubuntu.Components.ListItems 1.0 as ListItem
 import MeeGo.QOfono 0.2
 
 ItemPage {
@@ -38,8 +38,6 @@ ItemPage {
 
     QtObject {
         id: d
-        // work around OptionSelector index behaviour
-        // LP(#1361915)
         property bool __suppressActivation : true;
     }
 
@@ -172,35 +170,38 @@ ItemPage {
                 }
             }
             ListItem.SingleControl {
+                enabled: chooseCarrier.selectedIndex === 1
+                anchors.left: parent.left
+                anchors.leftMargin: units.gu(0)
                 control: ColumnLayout {
+                    id: child
                     width: parent.width - units.gu(4)
+                    anchors.left: parent.left
                     RowLayout {
                         id: searchingRow
-                        height: activityIndicator.height + units.gu(3)
                         spacing: units.gu(1)
 
-                        /// @bug something is breaking the Layouts when playing around with visible.
-                        ///      needs more investigation
-                        // visible: sim.netReg.status === "searching"
-                        opacity: sim.netReg.status === "searching" ? 1 : 0
+                        visible: sim.netReg.status === "searching"
                         ActivityIndicator {
                             id: activityIndicator
-                            anchors.verticalCenter: parent.verticalCenter
-                            // running: parent.visible
-                            running: parent.opacity !== 0;
+                            anchors.verticalCenter: parent.verticalCenter                            
+                            running: parent.visible
                         }
                         Label {
                             anchors.verticalCenter: parent.verticalCenter
                             text: i18n.tr("Searching for carriers…")
                         }
                     }
-                    OptionSelector {
+                    ListItem.ItemSelector {
                         id: carrierSelector
                         objectName: "carrierSelector"
-                        expanded: chooseCarrier.selectedIndex === 1
+                        expanded: true
                         enabled: sim.netReg.status !== "searching" && chooseCarrier.selectedIndex === 1
+                        // work around ItemSelector not having a visual change depending on being disabled
+                        opacity: enabled ? 1.0 : 0.5
                         width: parent.width
                         model: operatorNames
+                        delegate: OptionSelectorDelegate { enabled: carrierSelector.enabled; showDivider: false }
                         onSelectedIndexChanged: {
                             if (selectedIndex === -1 || d.__suppressActivation)
                                 return;

@@ -47,9 +47,7 @@ ItemPage {
         // LP(:#1362795)
         property var pendingCustomMmsData : ({})
 
-        // work around OptionSelector index behaviour
-        // LP(#1361915)
-        // also suppress any actions that we don't want to take
+        // suppress any actions that we don't want to take
         // when updating selectedIndexes, etc
         property bool __suppressActivation : true;
 
@@ -345,7 +343,7 @@ ItemPage {
             }
             ListItem.ThinDivider {}
             ListItem.SingleControl {
-                control: OptionSelector {
+                control: ListItem.ItemSelector {
                     id: internetApnSelector
                     width: parent.width - units.gu(4)
                     model: d.mInternetApns
@@ -433,7 +431,7 @@ ItemPage {
             }
             ListItem.ThinDivider {}
             ListItem.SingleControl {
-                control: OptionSelector {
+                control: ListItem.ItemSelector {
                     id: mmsApnSelector
                     width: parent.width - units.gu(4)
                     model: d.mMmsApns
