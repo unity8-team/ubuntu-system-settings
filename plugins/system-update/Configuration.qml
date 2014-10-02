@@ -26,7 +26,6 @@ import Ubuntu.SystemSettings.Update 1.0
 ItemPage {
     id: root
     objectName: "configurationPage"
-    property UpdateManager updateManager
     title: i18n.tr("Auto download")
 
     ListItem.ItemSelector {
@@ -35,9 +34,9 @@ ItemPage {
         text: i18n.tr ("Download future updates automatically:")
         model: downloadSelector
         delegate: selectorDelegate
-        selectedIndex: updateManager.downloadMode
-        onSelectedIndexChanged: updateManager.downloadMode = selectedIndex
-        Component.onCompleted: selectedIndex = updateManager.downloadMode
+        selectedIndex: UpdateManager.downloadMode
+        onSelectedIndexChanged: UpdateManager.downloadMode = selectedIndex
+        Component.onCompleted: selectedIndex = UpdateManager.downloadMode
     }
     Component {
         id: selectorDelegate

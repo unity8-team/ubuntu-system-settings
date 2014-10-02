@@ -7,7 +7,12 @@
     "priority": 0,
     "keywords": [
         "battery",
-        "power"
+        "power",
+        "charge",
+        "idle",
+        "lock",
+        "disable",
+        "enable"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": true,

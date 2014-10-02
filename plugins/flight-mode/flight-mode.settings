@@ -7,7 +7,9 @@
     "keywords": [
         "flight",
         "plane",
-        "offline"
+        "offline",
+        "airplane",
+        "network"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

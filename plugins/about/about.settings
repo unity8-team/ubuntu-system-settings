@@ -7,7 +7,21 @@
     "keywords": [
         "about",
         "device",
-        "info"
+        "info",
+        "phone",
+        "number",
+        "imei",
+        "serial",
+        "address",
+        "mac",
+        "licenses",
+        "developer",
+        "software",
+        "storage",
+        "disk",
+        "space",
+        "version",
+        "revision"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": false,

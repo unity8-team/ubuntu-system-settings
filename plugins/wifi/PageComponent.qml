@@ -18,11 +18,13 @@ import QtQuick 2.0
 import SystemSettings 1.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 import Ubuntu.SystemSettings.Wifi 1.0
 import QMenuModel 0.1
 
 ItemPage {
     id: wifibase
+    objectName: "wifiPage"
     title: i18n.tr("Wi-Fi")
 
     UnityMenuModel {
@@ -105,7 +107,7 @@ ItemPage {
 
                             if (item.hasOwnProperty("menuActivated")) {
                                 item.menuActivated = Qt.binding(function() {
-                                    return ListView.isCurrentItem; 
+                                    return ListView.isCurrentItem;
                                 });
                                 item.selectMenu.connect(function() {
                                     ListView.view.currentIndex = index;
@@ -132,10 +134,18 @@ ItemPage {
             }
 
             ListItem.SingleValue {
-                text: i18n.tr("Connect to hidden network")
+                objectName: "connectToHiddenNetwork"
+                text: i18n.tr("Connect to hidden network…")
                 progression: true
-                onClicked: pageStack.push(Qt.resolvedUrl("OtherNetwork.qml"))
-                visible : (actionGroup.actionObject.valid ? actionGroup.actionObject.state : false)
+                onClicked: {
+                    otherNetworLoader.source = "OtherNetwork.qml";
+                    PopupUtils.open(otherNetworLoader.item);
+                }
+            }
+
+            Loader {
+                id: otherNetworLoader
+                asynchronous: false
             }
         }
 
@@ -144,4 +154,5 @@ ItemPage {
                             Flickable.DragAndOvershootBounds :
                             Flickable.StopAtBounds
     }
+
 }
