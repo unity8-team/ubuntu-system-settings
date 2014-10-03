@@ -52,7 +52,8 @@ ItemPage {
     }
 
     // map of operatorPath : netOp
-    property var operators: ({}) // naughty, naughty
+    // FIXME: comment on operators' value
+    property var operators: ({})
     function updateNetworkOperators()
     {
         var tmp = sim.netReg.networkOperators;
@@ -131,7 +132,7 @@ ItemPage {
             }
             onNameChanged:  buildLists();
             onStatusChanged: buildLists();
-        }        
+        }
     }
 
     Flickable {
@@ -142,8 +143,11 @@ ItemPage {
         boundsBehavior: (contentHeight > parent.height) ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
 
         ColumnLayout {
-            anchors.left: parent.left
-            anchors.right: parent.right
+
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
 
             ListItem.ItemSelector {
                 id: chooseCarrier
@@ -171,8 +175,10 @@ ItemPage {
             }
             ListItem.SingleControl {
                 enabled: chooseCarrier.selectedIndex === 1
-                anchors.left: parent.left
-                anchors.leftMargin: units.gu(0)
+                anchors {
+                    left: parent.left
+                    leftMargin: units.gu(0)
+                }
                 control: ColumnLayout {
                     id: child
                     width: parent.width - units.gu(4)
@@ -184,7 +190,7 @@ ItemPage {
                         visible: sim.netReg.status === "searching"
                         ActivityIndicator {
                             id: activityIndicator
-                            anchors.verticalCenter: parent.verticalCenter                            
+                            anchors.verticalCenter: parent.verticalCenter
                             running: parent.visible
                         }
                         Label {
@@ -224,7 +230,7 @@ ItemPage {
             ListItem.Standard {
                 text: i18n.tr("APN")
                 progression: true
-                enabled: sim.connMan.powered
+                enabled: !sim.connMan.powered
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("PageChooseApn.qml"), {sim: sim})
                 }

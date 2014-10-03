@@ -78,7 +78,7 @@ ItemPage {
 
         function updateContexts()
         {
-            var tmp = sim.connMan.contexts;
+            var tmp = sim.connMan.contexts.slice(0);
             var added = tmp.filter(function(i) {
                 return mContexts[i] === undefined;
             });
@@ -185,9 +185,9 @@ ItemPage {
 
             // @bug don't create the custom MMS context
             //      LP(:#1362795)
-//            if (customMms.length === 0) {
-//                sim.connMan.addContext("mms");
-//            }
+            // if (customMms.length === 0) {
+            //     sim.connMan.addContext("mms");
+            // }
 
             buildLists();
         }
@@ -196,7 +196,7 @@ ItemPage {
         property var mMmsApns : [];
         function buildLists()
         {
-            __suppressActivation = true;
+            d.__suppressActivation = true;
 
             var internet = [];
             var mms = [];
@@ -332,8 +332,11 @@ ItemPage {
         flickableDirection: Flickable.VerticalFlick
 
         Column {
-            anchors.left: parent.left
-            anchors.right: parent.right
+
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
 
             ListItem.Standard {
                 id: heading1
@@ -537,18 +540,17 @@ ItemPage {
 
             // @todo: no means of doing any meaningful reset right now.
             // LP(#1338758)
-//            ListItem.ThinDivider {}
-//            ListItem.SingleControl {
-//                control: Button {
-//                    objectName: "resetButton"
-//                    text: i18n.tr("Reset APN Settings")
-//                    width: parent.width - units.gu(4)
-//                    onClicked: {
-//                        PopupUtils.open(resetDialog)
-//                    }
-//                }
-//            }
-
+            // ListItem.ThinDivider {}
+            // ListItem.SingleControl {
+            //     control: Button {
+            //         objectName: "resetButton"
+            //         text: i18n.tr("Reset APN Settings")
+            //         width: parent.width - units.gu(4)
+            //         onClicked: {
+            //             PopupUtils.open(resetDialog)
+            //         }
+            //     }
+            // }
         }
     }
 
