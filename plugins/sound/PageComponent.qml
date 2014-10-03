@@ -65,13 +65,13 @@ ItemPage {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            SilentModeWarning { visible: backendInfo.silentMode }
+            SilentModeWarning { visible: soundActionGroup.silentmode.state }
 
             ListItem.Standard {
                 control: Switch {
                     objectName: "silentMode"
-                    checked: backendInfo.silentMode
-                    onCheckedChanged: backendInfo.silentMode = checked
+                    checked: soundActionGroup.silentmode.state
+                    onCheckedChanged: soundActionGroup.silentmode.state = checked
                 }
                 text: i18n.tr("Silent Mode")
             }
@@ -87,6 +87,7 @@ ItemPage {
                 objectPath: "/com/canonical/indicator/sound"
 
                 property variant volume: action("volume")
+                property variant silentMode: action("silent-mode")
 
                 Component.onCompleted: start()
             }
