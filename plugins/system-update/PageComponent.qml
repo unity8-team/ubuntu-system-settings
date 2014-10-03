@@ -53,7 +53,7 @@ ItemPage {
         if (hasConnection) {
             activity.running = true;
             root.state = "SEARCHING";
-            updateManager.checkUpdates();
+            UpdateManager.checkUpdates();
         } else {
             activity.running = false;
         }
@@ -114,7 +114,7 @@ ItemPage {
             console.warn("on finished signal triggered")
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
-            updateManager.checkUpdates();
+            UpdateManager.checkUpdates();
         }
     }
 
@@ -331,7 +331,7 @@ ItemPage {
                     onClicked: {
                         activity.running = true;
                         root.state = "SEARCHING";
-                        updateManager.checkUpdates();
+                        UpdateManager.checkUpdates();
                     }
                 }
             }
