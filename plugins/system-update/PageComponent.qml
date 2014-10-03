@@ -111,6 +111,7 @@ ItemPage {
         providerId: "ubuntuone"
 
         onFinished: {
+            console.warn("on finished signal triggered")
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
             updateManager.checkUpdates();
