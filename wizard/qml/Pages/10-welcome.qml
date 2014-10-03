@@ -18,6 +18,7 @@ import QtQuick 2.3
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 0.1
 import Ubuntu.SystemSettings.LanguagePlugin 1.0
+import Ubuntu.SystemSettings.Wizard.Utils 0.1
 import "../Components" as LocalComponents
 
 LocalComponents.Page {
@@ -84,7 +85,7 @@ LocalComponents.Page {
             text: i18n.tr("Continue")
             onClicked: {
                 plugin.currentLanguage = listview.currentIndex
-                root.updateLanguage()
+                System.updateSessionLanguage()
                 pageStack.next()
             }
         }

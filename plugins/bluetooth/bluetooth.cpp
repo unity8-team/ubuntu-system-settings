@@ -40,7 +40,7 @@ Bluetooth::Bluetooth(const QDBusConnection &dbus, QObject *parent):
     // export our Agent to handle pairing requests
     new AgentAdaptor(&m_agent);
     if(!m_dbus.registerObject(DBUS_AGENT_PATH, &m_agent))
-        qFatal("Couldn't register agent at " DBUS_AGENT_PATH);
+        qCritical() << "Couldn't register agent at" << DBUS_AGENT_PATH;
 
     m_connectedDevices.filterOnConnections(Device::Connection::Connected |
                                            Device::Connection::Connecting |
@@ -94,6 +94,8 @@ bool Bluetooth::isSupportedType(const int type)
 
     case Device::Type::Headset:
     case Device::Type::Headphones:
+    case Device::Type::Speakers:
+    case Device::Type::Carkit:
     case Device::Type::OtherAudio:
         return true;
 
@@ -154,12 +156,18 @@ void Bluetooth::disconnectDevice()
 {
     if (m_selectedDevice) {
         auto type = m_selectedDevice->getType();
-        if (type == Device::Type::Headset)
+        switch ((Device::Type)type) {
+        case Device::Type::Headset:
+        case Device::Type::Headphones:
+        case Device::Type::OtherAudio:
+        case Device::Type::Speakers:
+        case Device::Type::Carkit:
             m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
-        else if (type == Device::Type::Headphones)
-            m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
-        else if (type == Device::Type::OtherAudio)
-            m_selectedDevice->disconnect(Device::ConnectionMode::Audio);
+            break;
+        default:
+            qWarning() << "Nothing to disconnect: Unsupported device type.";
+            break;
+        }
     } else {
         qWarning() << "No selected device to disconnect";
     }
@@ -177,12 +185,18 @@ void Bluetooth::connectDevice(const QString &address)
     }
 
     type = device->getType();
-    if (type == Device::Type::Headset)
+    switch (type) {
+    case Device::Type::Headset:
+    case Device::Type::Headphones:
+    case Device::Type::OtherAudio:
+    case Device::Type::Speakers:
+    case Device::Type::Carkit:
         connMode = Device::ConnectionMode::Audio;
-    else if (type == Device::Type::Headphones)
-        connMode = Device::ConnectionMode::Audio;
-    else if (type == Device::Type::OtherAudio)
-        connMode = Device::ConnectionMode::Audio;
+        break;
+    default:
+        qWarning() << "Nothing to connect: Unsupported device type.";
+        return;
+    }
 
     if (device->isTrusted()) {
         device->connect(connMode);

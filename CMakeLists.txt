@@ -33,6 +33,7 @@ find_package(Qt5Widgets REQUIRED)
 set(QT_IMPORTS_DIR "${CMAKE_INSTALL_LIBDIR}/qt5/qml")
 set(CMAKE_AUTOMOC ON)
 
+pkg_search_module(GOBJECT REQUIRED gobject-2.0)
 pkg_search_module(GLIB REQUIRED glib-2.0)
 pkg_check_modules(GIO REQUIRED gio-2.0 gio-unix-2.0)
 pkg_search_module(UPOWER_GLIB REQUIRED upower-glib)
@@ -44,9 +45,12 @@ pkg_search_module(ANDR_PROP libandroid-properties)
 pkg_check_modules(QTDBUSMOCK REQUIRED libqtdbusmock-1 REQUIRED)
 pkg_check_modules(QTDBUSTEST REQUIRED libqtdbustest-1 REQUIRED)
 pkg_search_module(POLKIT_AGENT polkit-agent-1)
+pkg_search_module(CLICK REQUIRED click-0.4)
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)
+find_program(INTLTOOL_MERGE intltool-merge)
+find_program(INTLTOOL_EXTRACT intltool-extract)
 
 set(PLUGIN_MANIFEST_DIR_BASE share/ubuntu/settings/system)
 set(PLUGIN_MODULE_DIR_BASE ubuntu-system-settings)
@@ -62,6 +66,9 @@ set(PUSH_HELPER_DIR "lib/ubuntu-push-client/legacy-helpers")
 
 SET(CMAKE_INSTALL_RPATH "${PLUGIN_MODULE_DIR}")
 
+set(DESKTOP_FILE ubuntu-system-settings.desktop)
+set(GETTEXT_PACKAGE ubuntu-system-settings)
+
 add_subdirectory(po)
 add_subdirectory(schema)
 add_subdirectory(lib)
@@ -72,11 +79,19 @@ add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(wizard)
 
-configure_file(ubuntu-system-settings.desktop.in ubuntu-system-settings.desktop @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ubuntu-system-settings.desktop DESTINATION share/applications)
+configure_file(${DESKTOP_FILE}.in.in ${DESKTOP_FILE}.in @ONLY)
+add_custom_target(${DESKTOP_FILE} ALL
+                  COMMENT "Merging translations into ${DESKTOP_FILE}"
+                  COMMAND ${INTLTOOL_MERGE} -d -u ${CMAKE_SOURCE_DIR}/po
+                          ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE}.in ${DESKTOP_FILE})
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE}
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+
 install(FILES ubuntu-system-settings.url-dispatcher DESTINATION share/url-dispatcher/urls)
 install(FILES screenshot.png DESTINATION ${SETTINGS_SHARE_DIR})
-install(PROGRAMS push-helper/software-updates-helper.py DESTINATION ${PUSH_HELPER_DIR} RENAME ubuntu-system-settings)
+install(FILES system-settings.png DESTINATION ${SETTINGS_SHARE_DIR})
+install(PROGRAMS push-helper/software_updates_helper.py DESTINATION ${PUSH_HELPER_DIR} RENAME ubuntu-system-settings)
 
 if(cmake_build_type_lower MATCHES coverage)
   ENABLE_COVERAGE_REPORT(TARGETS system-settings FILTER /usr/include ${CMAKE_SOURCE_DIR}/tests/* ${CMAKE_BINARY_DIR}/*)

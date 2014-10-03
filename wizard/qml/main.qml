@@ -33,8 +33,6 @@ Item {
     property int passwordMethod: UbuntuSecurityPrivacyPanel.Swipe
     property string password: ""
 
-    signal updateLanguage()
-
     Component.onCompleted: {
         Theme.name = "Ubuntu.Components.Themes.SuruGradient"
         i18n.domain = "ubuntu-system-settings"
@@ -48,10 +46,13 @@ Item {
         // Immediately go to black to give quick feedback
         blackCover.visible = true
 
-        // Ignore any errors, since we're past where the user set the
-        // method.  Worst case, we just leave the user with a swipe
-        // security method and they fix it in the system settings.
-        securityPrivacy.setSecurity("", password, passwordMethod)
+        var errorMsg = securityPrivacy.setSecurity("", password, passwordMethod)
+        if (errorMsg !== "") {
+            // Ignore (but log) any errors, since we're past where the user set
+            // the method.  Worst case, we just leave the user with a swipe
+            // security method and they fix it in the system settings.
+            console.log("Error setting security method:", errorMsg)
+        }
 
         Qt.quit()
     }
@@ -81,7 +82,12 @@ Item {
 
         Image {
             id: image
-            anchors.fill: parent
+            // Use x/y/height/width instead of anchors so that we don't adjust
+            // the image when the OSK appears.
+            x: 0
+            y: 0
+            height: root.height
+            width: root.width
             source: background.pictureUri
             fillMode: Image.PreserveAspectCrop
             visible: status === Image.Ready
@@ -105,6 +111,17 @@ Item {
             }
 
             Component.onCompleted: next()
+        }
+    }
+
+    Rectangle {
+        id: modalNotificationBackground
+        visible: notifications.useModal && (notifications.state == "narrow")
+        anchors.fill: parent
+        color: "#80000000"
+
+        MouseArea {
+            anchors.fill: parent
         }
     }
 

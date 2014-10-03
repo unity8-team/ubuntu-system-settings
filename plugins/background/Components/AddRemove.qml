@@ -74,7 +74,7 @@ Row {
 
     Button {
         id: add
-        action: selectDefaultPeer
+        action: selectPeer
         objectName: "addCustomBackgroundsButton"
         gradient: UbuntuColors.greyGradient
         text: i18n.tr("Add an image…")
@@ -99,5 +99,4 @@ Row {
             enteredQueueMode();
         }
     }
-
 }

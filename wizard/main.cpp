@@ -32,32 +32,10 @@
 
 #include "PageList.h"
 
-class SignalHandler : public QObject
+void handleQuit()
 {
-    Q_OBJECT
-
-public:
-    static SignalHandler *instance()
-    {
-        static SignalHandler instance_;
-        return &instance_;
-    }
-
-public Q_SLOTS:
-    void handleLanguageUpdate()
-    {
-        QProcess::startDetached("sh -c \"initctl start ubuntu-system-settings-wizard-set-lang; initctl emit --no-wait indicator-services-start; initctl start --no-wait maliit-server\"");
-    }
-
-    void handleQuit()
-    {
-        QProcess::startDetached("initctl start ubuntu-system-settings-wizard-cleanup");
-    }
-
-private:
-    SignalHandler() {}
-    Q_DISABLE_COPY(SignalHandler)
-};
+    QProcess::startDetached("initctl start ubuntu-system-settings-wizard-cleanup");
+}
 
 int main(int argc, const char *argv[])
 {
@@ -93,10 +71,7 @@ int main(int argc, const char *argv[])
     view->setSource(QUrl(rootDir + "/qml/main.qml"));
     view->setColor("transparent");
 
-    QObject::connect(view->rootObject(), SIGNAL(updateLanguage()),
-                     SignalHandler::instance(), SLOT(handleLanguageUpdate()));
-    QObject::connect(view->engine(), &QQmlEngine::quit,
-                     SignalHandler::instance(), &SignalHandler::handleQuit);
+    QObject::connect(view->engine(), &QQmlEngine::quit, handleQuit);
 
     if (isMirServer) {
         view->showFullScreen();

@@ -28,6 +28,8 @@ import Ubuntu.SystemSettings.Wifi 1.0
 ItemPage {
 
     id: networkDetails
+    objectName: "networkDetailsPage"
+
     property string networkName
     property string password
     property string lastUsed
@@ -52,7 +54,8 @@ ItemPage {
             control: Label {
                 id: lastField
 
-                text: networkDetails.lastUsed.length !== 0 ? networkDetails.lastUsed : i18n.tr("Never")
+                text: networkDetails.lastUsed.length !== 0 ?
+                    networkDetails.lastUsed : i18n.tr("Never")
             }
         }
 
@@ -64,7 +67,8 @@ ItemPage {
                 id: passwordField
                 readOnly: true
                 text: networkDetails.password
-                echoMode: passwordVisibleSwitch.checked ? TextInput.Normal : TextInput.Password
+                echoMode: passwordVisibleSwitch.checked ?
+                    TextInput.Normal : TextInput.Password
             }
         }
 
@@ -80,6 +84,7 @@ ItemPage {
         ListItem.Divider {}
 
         Button {
+            objectName: "forgetNetwork"
             text : i18n.tr("Forget network")
             anchors {
                 left: parent.left
@@ -87,11 +92,8 @@ ItemPage {
                 margins: units.gu(2)
             }
             onClicked : {
-                DbusHelper.forgetConnection(dbusPath)
-                pageStack.pop()
-                // Go back two steps so we don't have to update the model.
-                // If the user goes back to network list, the model is rebuilt.
-                pageStack.pop()
+                DbusHelper.forgetConnection(dbusPath);
+                pageStack.pop();
             }
         }
     }

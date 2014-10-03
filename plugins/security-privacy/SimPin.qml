@@ -44,7 +44,9 @@ ItemPage {
             title: i18n.tr("Change SIM PIN")
 
             property string errorText: i18n.tr(
-                    "Incorrect PIN. %1 attempts remaining."
+                    "Incorrect PIN. %1 attempt remaining.",
+                    "Incorrect PIN. %1 attempts remaining.",
+                    curSim.pinRetries[OfonoSimManager.SimPin] || 3
                     ).arg(curSim.pinRetries[OfonoSimManager.SimPin] || 3)
             property int simMin: curSim.minimumPinLength(OfonoSimManager.SimPin)
             property int simMax: curSim.maximumPinLength(OfonoSimManager.SimPin)
@@ -88,7 +90,8 @@ ItemPage {
 
             Label {
                 id: retries
-                text: i18n.tr("%1 attempts allowed.").arg(
+                text: i18n.tr("%1 attempt allowed.", "%1 attempts allowed.",
+                              curSim.pinRetries[OfonoSimManager.SimPin] || 3).arg(
                           curSim.pinRetries[OfonoSimManager.SimPin] || 3)
                 visible: !incorrect.visible
             }
@@ -311,7 +314,7 @@ ItemPage {
                 }
 
                 ListItem.Standard {
-                    text: i18n.tr("%1").arg(sims[index].title)
+                    text: sims[index].title
                     visible: sims.length > 1
                 }
 

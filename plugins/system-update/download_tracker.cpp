@@ -91,10 +91,20 @@ void DownloadTracker::bindDownload(Download* download)
     m_download = download;
     connect(m_download, SIGNAL(finished(const QString &)), this,
             SIGNAL(finished(const QString &)));
+    connect(m_download, SIGNAL(canceled(bool)), this,
+            SIGNAL(canceled(bool)));
+    connect(m_download, SIGNAL(paused(bool)), this,
+            SIGNAL(paused(bool)));
+    connect(m_download, SIGNAL(resumed(bool)), this,
+            SIGNAL(resumed(bool)));
+    connect(m_download, SIGNAL(started(bool)), this,
+            SIGNAL(started(bool)));
     connect(m_download, SIGNAL(error(Error*)), this,
             SLOT(registerError(Error*)));
     connect(m_download, SIGNAL(progress(qulonglong, qulonglong)), this,
             SLOT(setProgress(qulonglong, qulonglong)));
+    connect(m_download, SIGNAL(processing(const QString &)), this,
+            SIGNAL(processing(const QString &)));
 
     m_download->start();
 }

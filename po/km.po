@@ -7,820 +7,197 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-26 13:44+0200\n"
-"PO-Revision-Date: 2014-08-21 03:38+0000\n"
+"POT-Creation-Date: 2014-09-26 12:27-0400\n"
+"PO-Revision-Date: 2014-09-02 07:48+0000\n"
 "Last-Translator: Sok Sophea <sksophea@gmail.com>\n"
 "Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-27 07:43+0000\n"
-"X-Generator: Launchpad (build 17174)\n"
+"X-Launchpad-Export-Date: 2014-09-30 07:06+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr "បណ្ដាញ​ពី​មុន"
+#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
+msgid "System Settings"
+msgstr "ការ​កំណត់​ប្រព័ន្ធ"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:328
-#: ../plugins/wifi//PageComponent.qml:26
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:76
-msgid "Wi-Fi"
-msgstr "វ៉ាយហ្វាយ"
+#: ubuntu-system-settings.desktop.in.in.h:2
+msgid "System;"
+msgstr ""
 
-#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
-msgstr "បណ្ដាញ​ផ្សេង"
+#: ubuntu-system-settings.desktop.in.in.h:3
+msgid "Preferences;Settings;"
+msgstr ""
 
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr "ឈ្មោះ​បណ្ដាញ"
+#: ../plugins/system-update//Configuration.qml:29
+#: ../plugins/system-update//PageComponent.qml:565
+msgid "Auto download"
+msgstr "ទាញយក​ស្វ័យ​ប្រវត្តិ"
 
-#: ../plugins/wifi//OtherNetwork.qml:66
-msgid "Security"
-msgstr "សន្តិសុខ"
+#: ../plugins/system-update//Configuration.qml:34
+msgid "Download future updates automatically:"
+msgstr "ទាញ​យក​បច្ចុប្បន្នភាព​អនាគត​ដោយ​ស្វ័យ​ប្រវត្តិ៖"
 
-#: ../plugins/security-privacy//PageComponent.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:40
-#: ../plugins/bluetooth//PageComponent.qml:111
-#: ../plugins/bluetooth//PageComponent.qml:302
-#: ../plugins/bluetooth//PageComponent.qml:310
-#: ../plugins/wifi//OtherNetwork.qml:67
-msgid "None"
-msgstr "គ្មាន"
-
-#: ../plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 Personal"
-
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr "WEP"
-
-#: ../plugins/wifi//NetworkDetails.qml:61 ../plugins/wifi//OtherNetwork.qml:76
-msgid "Password"
-msgstr "ពាក្យសម្ងាត់"
-
-#: ../plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
-msgstr "ពាក្យ​សម្ងាត់មើលឃើញ"
-
-#: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:279
-#: ../plugins/cellular//HotspotSetup.qml:85
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/reset//ResetAllSettings.qml:38
-#: ../plugins/reset//ResetLauncherHome.qml:55
-#: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/wifi//OtherNetwork.qml:112 ../plugins/background//Preview.qml:97
-#: ../plugins/phone//CallForwarding.qml:136
-msgid "Cancel"
-msgstr "បោះ​បង់"
-
-#: ../plugins/bluetooth//PageComponent.qml:374
-#: ../plugins/wifi//OtherNetwork.qml:121
-msgid "Connect"
-msgstr "តភ្ជាប់"
-
-#: ../plugins/wifi//NetworkDetails.qml:36
-msgid "Network details"
-msgstr "ព័ត៌មាន​លម្អិត​បណ្ដាញ"
-
-#: ../plugins/bluetooth//PageComponent.qml:309
-#: ../plugins/wifi//NetworkDetails.qml:43
-msgid "Name"
-msgstr "ឈ្មោះ"
-
-#: ../plugins/wifi//NetworkDetails.qml:51
-msgid "Last connected"
-msgstr "បា​ន​តភ្ជាប់​ចុងក្រោយ"
-
-#: ../plugins/about//PageComponent.qml:149
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
-#: ../plugins/battery//SleepValues.qml:96
+#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
 #: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:448
-#: ../plugins/system-update//Configuration.qml:53
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/system-update//PageComponent.qml:568
+#: ../plugins/about//PageComponent.qml:162
+#: ../plugins/security-privacy//PhoneLocking.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:140
 msgid "Never"
 msgstr "កុំ"
 
-#: ../plugins/wifi//NetworkDetails.qml:73
-msgid "Show password"
-msgstr "បង្ហាញ​ពាក្យ​សម្ងាត់"
+#: ../plugins/system-update//Configuration.qml:53
+msgid "When on wi-fi"
+msgstr "ពេល​បើក​វ៉ាយហ្វាយ"
 
-#: ../plugins/wifi//NetworkDetails.qml:83
-msgid "Forget network"
-msgstr "ភ្លេច​បណ្ដាញ"
+#: ../plugins/system-update//Configuration.qml:54
+msgid "On any data connection"
+msgstr "លើ​ការ​ភ្ជាប់​ទិន្នន័យ​ណា​មួយ"
 
-#: ../plugins/time-date//TimePicker.qml:26
-msgid "Set time & date"
-msgstr "កំណត់​ពេលវេលា និង​កាលបរិច្ឆេទ"
-
-#: ../plugins/time-date//TimePicker.qml:68
-msgid "Time"
-msgstr "ពេលវេលា"
-
-#: ../plugins/time-date//TimePicker.qml:81
-msgid "Hour"
-msgstr "ម៉ោង"
-
-#: ../plugins/time-date//TimePicker.qml:95
-msgid "Minute"
-msgstr "នាទី"
-
-#: ../plugins/time-date//TimePicker.qml:109
-msgid "Second"
-msgstr "វិនាទី"
-
-#: ../plugins/time-date//TimePicker.qml:118
-msgid "Date"
-msgstr "កាលបរិច្ឆេទ"
-
-#: ../plugins/time-date//TimePicker.qml:130
-msgid "Day"
-msgstr "ថ្ងៃ"
-
-#: ../plugins/time-date//TimePicker.qml:144
-msgid "Month"
-msgstr "ខែ"
-
-#: ../plugins/time-date//TimePicker.qml:162
-msgid "Year"
-msgstr "ឆ្នាំ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:300
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/background//Preview.qml:104
-#: ../plugins/phone//CallForwarding.qml:148
-msgid "Set"
-msgstr "កំណត់"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:54
-msgid "Time & Date"
-msgstr "ពេលវេលា និង​កាល​បរិច្ឆេទ"
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "តំបន់​ពេលវេលា៖"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "កំណត់​ពេលវេលា និង​កាលបរិច្ឆេទ៖"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Automatically"
-msgstr "ស្វ័យប្រវត្តិ"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-msgid "Manually"
-msgstr "ដោយដៃ"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:28
-msgid "Time zone"
-msgstr "តំបន់​ពេលវេលា"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:46
-msgid "Set the time zone:"
-msgstr "កំណត់​តំបន់​ពេលវេលា៖"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:126
-msgid "Enter your current location."
-msgstr "បញ្ចូល​ទីតាំង​បច្ចុប្បន្ន​របស់​អ្នក។"
-
-#: ../plugins/time-date//ChooseTimeZone.qml:127
-msgid "No matching place"
-msgstr "គ្មាន​ទីតាំង​ផ្គូផ្គង"
+#: ../plugins/system-update//Configuration.qml:55
+msgid "Data charges may apply."
+msgstr "ការ​កាត់​លុយ​ទិន្នន័យ​អាច​អនុវត្ត។"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:110
+#: ../plugins/system-update//PageComponent.qml:37
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:58
 msgid "Updates"
 msgstr "បច្ចុប្បន្នភាព"
 
-#: ../plugins/system-update//PageComponent.qml:51
+#: ../plugins/system-update//PageComponent.qml:94
 msgid "Update System"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​ប្រព័ន្ធ"
 
-#: ../plugins/system-update//PageComponent.qml:52
+#: ../plugins/system-update//PageComponent.qml:95
 msgid "The phone needs to restart to install the system update."
 msgstr ""
 "ទូរស័ព្ទ​ត្រូវ​ចាប់ផ្ដើម​ឡើងវិញ ដើម្បី​ដំឡើង​បច្ចុប្បន្នភាព​ប្រព័ន្ធ។"
 
-#: ../plugins/system-update//PageComponent.qml:55
+#: ../plugins/system-update//PageComponent.qml:95
+msgid "Connect the phone to power before installing the system update."
+msgstr ""
+
+#: ../plugins/system-update//PageComponent.qml:98
 msgid "Install & Restart"
 msgstr "ដំឡើង ហើយ​ចាប់ផ្ដើម​ឡើង​វិញ"
 
-#: ../plugins/system-update//PageComponent.qml:64
+#: ../plugins/system-update//PageComponent.qml:108
 msgid "Not Now"
 msgstr "មិនមែន​ឥឡូវ"
 
-#: ../plugins/system-update//PageComponent.qml:70
+#: ../plugins/system-update//PageComponent.qml:114
 msgid "Install"
 msgstr "ដំឡើង"
 
-#: ../plugins/system-update//PageComponent.qml:88
+#: ../plugins/system-update//PageComponent.qml:135
 msgid "Software is up to date"
 msgstr "កម្មវិធី​ទាន់សម័យ​ហើយ"
 
-#: ../plugins/system-update//PageComponent.qml:199
+#: ../plugins/system-update//PageComponent.qml:243
 msgid "Checking for updates…"
 msgstr "កំពុង​ពិនិត្យមើល​បច្ចុប្បន្នភាព…"
 
-#: ../plugins/system-update//PageComponent.qml:216
+#: ../plugins/system-update//PageComponent.qml:261
 #, qt-format
 msgid "Install %1 update…"
 msgid_plural "Install %1 updates…"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ដំឡើង​បច្ចុប្បន្នភាព %1…"
 
-#: ../plugins/system-update//PageComponent.qml:217
+#: ../plugins/system-update//PageComponent.qml:262
 #, qt-format
 msgid "Install %1 update"
 msgid_plural "Install %1 updates"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ដំឡើង​បច្ចុប្បន្នភាព %1"
 
-#: ../plugins/system-update//PageComponent.qml:218
+#: ../plugins/system-update//PageComponent.qml:263
 msgid "Pause All"
 msgstr "ផ្អាក​ទាំងអស់"
 
-#: ../plugins/system-update//PageComponent.qml:286
+#: ../plugins/system-update//PageComponent.qml:317
 msgid "Retry"
 msgstr "ព្យាយាម​ម្តង​ទៀត"
 
-#: ../plugins/system-update//PageComponent.qml:302
+#: ../plugins/system-update//PageComponent.qml:333
 msgid "Download"
 msgstr "ទាញយក"
 
-#: ../plugins/system-update//PageComponent.qml:302
+#: ../plugins/system-update//PageComponent.qml:333
 msgid "Update"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព"
 
-#: ../plugins/system-update//PageComponent.qml:303
+#: ../plugins/system-update//PageComponent.qml:334
 msgid "Resume"
 msgstr "បន្ត"
 
-#: ../plugins/system-update//PageComponent.qml:304
+#: ../plugins/system-update//PageComponent.qml:335
 msgid "Pause"
 msgstr "ផ្អាក"
 
-#: ../plugins/system-update//PageComponent.qml:363
+#: ../plugins/system-update//PageComponent.qml:393
 msgid "Installing"
 msgstr "ដំឡើង"
 
-#: ../plugins/system-update//PageComponent.qml:396
+#: ../plugins/system-update//PageComponent.qml:426
 msgid "Installed"
 msgstr "បាន​ដំឡើង"
 
-#: ../plugins/system-update//PageComponent.qml:420
+#: ../plugins/system-update//PageComponent.qml:452
 msgid "Version: "
 msgstr "កំណែ៖ "
 
-#: ../plugins/system-update//PageComponent.qml:425
+#: ../plugins/system-update//PageComponent.qml:474
 msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
+msgstr "ចូល Ubuntu One ដើម្បី​ទទួល​បាន​បច្ចុប្បន្នភាព​សម្រាប់​កម្មវិធី។"
 
-#: ../plugins/system-update//PageComponent.qml:434
+#: ../plugins/system-update//PageComponent.qml:483
 msgid "Sign In…"
-msgstr ""
+msgstr "ចូល..."
 
-#: ../plugins/system-update//PageComponent.qml:532
+#: ../plugins/system-update//PageComponent.qml:550
 msgid "Installing update…"
 msgstr "កំពុង​ដំឡើង​បច្ចុប្បន្នភាព…"
 
-#: ../plugins/system-update//PageComponent.qml:445
-#: ../plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr "ទាញយក​ស្វ័យ​ប្រវត្តិ"
-
-#: ../plugins/system-update//PageComponent.qml:450
+#: ../plugins/system-update//PageComponent.qml:570
 msgid "On wi-fi"
 msgstr "បើក​វ៉ាយហ្វាយ"
 
-#: ../plugins/system-update//PageComponent.qml:452
+#: ../plugins/system-update//PageComponent.qml:572
 msgid "Always"
 msgstr "ជានិច្ច"
 
-#: ../plugins/system-update//PageComponent.qml:546
+#: ../plugins/system-update//PageComponent.qml:587
 msgid " bytes"
 msgstr " បៃ"
 
-#: ../plugins/system-update//PageComponent.qml:549
+#: ../plugins/system-update//PageComponent.qml:590
 msgid " KiB"
 msgstr " គីឡូបៃ"
 
-#: ../plugins/system-update//PageComponent.qml:552
+#: ../plugins/system-update//PageComponent.qml:593
 msgid " MiB"
 msgstr " មេកាបៃ"
 
-#: ../plugins/system-update//PageComponent.qml:555
+#: ../plugins/system-update//PageComponent.qml:596
 msgid " GiB"
 msgstr " ជីកាបៃ"
 
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "ទាញ​យក​បច្ចុប្បន្នភាព​អនាគត​ដោយ​ស្វ័យ​ប្រវត្តិ៖"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "ពេល​បើក​វ៉ាយហ្វាយ"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "លើ​ការ​ភ្ជាប់​ទិន្នន័យ​ណា​មួយ"
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "ការ​កាត់​លុយ​ទិន្នន័យ​អាច​អនុវត្ត។"
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr "ឈប់ចាក់"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "ទូរស័ព្ទ​ក្នុង​របៀប​ស្ងាត់។"
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:136
-msgid "Sound"
-msgstr "សំឡេង"
-
-#: ../plugins/sound//PageComponent.qml:75
-msgid "Silent Mode"
-msgstr "របៀប​ស្ងាត់"
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr "រោទ៍៖"
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr "ការ​ហៅ​ទូរស័ព្ទ៖"
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr "សំឡេង​រោទ៍"
-
-#: ../plugins/sound//PageComponent.qml:134
-msgid "Vibrate when ringing"
-msgstr "ញ័រ​ពេលរោទ៍"
-
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Vibrate in Silent Mode"
-msgstr "ញ័រ​ក្នុង​របៀប​ស្ងាត់"
-
-#: ../plugins/sound//PageComponent.qml:147
-msgid "Messages:"
-msgstr "សារ៖"
-
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Message received"
-msgstr "បាន​ទទួល​សារ"
-
-#: ../plugins/sound//PageComponent.qml:169
-msgid "Vibrate with message sound"
-msgstr "ញ័រ​ដោយ​សំឡេង​សារ"
-
-#: ../plugins/sound//PageComponent.qml:182
-msgid "Other sounds:"
-msgstr "សំឡេង​ផ្សេងៗ៖"
-
-#: ../plugins/language//PageComponent.qml:185
-#: ../plugins/sound//PageComponent.qml:186
-msgid "Keyboard sound"
-msgstr "សំឡេង​ក្ដារ​ចុច"
-
-#: ../plugins/sound//PageComponent.qml:200
-msgid "Lock sound"
-msgstr "សំឡេង​ចាក់សោ"
-
-#: ../plugins/security-privacy//PageComponent.qml:99
-#: ../plugins/security-privacy//PhoneLocking.qml:29
-msgid "Phone locking"
-msgstr "ការ​ចាក់សោ​ទូរស័ព្ទ"
-
-#: ../plugins/security-privacy//PageComponent.qml:79
-#: ../plugins/security-privacy//PhoneLocking.qml:41
-#: ../wizard/qml/Pages//15-passwd.qml:88
-msgid "Passcode"
-msgstr "កូដ​សម្ងាត់"
-
-#: ../plugins/security-privacy//PageComponent.qml:80
-#: ../plugins/security-privacy//PhoneLocking.qml:42
-#: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:90
-msgid "Passphrase"
-msgstr "ឃ្លាសម្ងាត់"
-
-#: ../plugins/security-privacy//PageComponent.qml:82
-#: ../plugins/security-privacy//PhoneLocking.qml:44
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/about//DevMode.qml:104
-msgid "Lock security"
-msgstr "ចាក់សោ​សុវត្ថិភាព"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:62
-#: ../plugins/battery//PageComponent.qml:300
-msgid "Lock when idle"
-msgstr "ចាក់​សោ​ពេល​នៅទំនេរ"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:63
-#: ../plugins/battery//PageComponent.qml:300
-msgid "Sleep when idle"
-msgstr "ដេក​ពេល​នៅទំនេរ"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:101
-#: ../plugins/security-privacy//PhoneLocking.qml:65
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 នាទី"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:79
-msgid "Sleep locks immediately"
-msgstr "ចាក់​សោ​ដេក​ភ្លាម​ៗ"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:33
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:12
-msgid "Security & Privacy"
-msgstr "សុវត្ថិភាព និង​​ភាព​ឯកជន"
-
-#: ../plugins/security-privacy//PageComponent.qml:50
-#: ../plugins/security-privacy//PageComponent.qml:150
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "ទូរស័ព្ទ និងអ៊ីនធឺណិត"
-
-#: ../plugins/security-privacy//PageComponent.qml:52
-#: ../plugins/security-privacy//PageComponent.qml:151
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "តែ​ទូរស័ព្ទ"
-
-#: ../plugins/security-privacy//PageComponent.qml:90
-msgid "Lock phone"
-msgstr ""
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
-#: ../plugins/battery//SleepValues.qml:77
-#: ../plugins/battery//SleepValues.qml:81
-#: ../plugins/battery//SleepValues.qml:85
-#: ../plugins/battery//SleepValues.qml:89
-#: ../plugins/battery//SleepValues.qml:93
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "បន្ទាប់​ពី %1 នាទី"
-
-#: ../plugins/security-privacy//PageComponent.qml:110
-msgid "SIM PIN"
-msgstr "លេខ​កូដ PIN ស៊ីម"
-
-#: ../plugins/security-privacy//PageComponent.qml:124
-msgid "Encryption"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:133
-msgid ""
-"Encryption protects against access to phone data when the phone is connected "
-"to a PC or other device."
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:137
-msgid "Privacy"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:120
-msgid "Stats on welcome screen"
-msgstr "ស្ថានភាព​លើ​អេក្រង់​ស្វាគមន៍"
-
-#: ../plugins/security-privacy//PageComponent.qml:133
-msgid "Messages on welcome screen"
-msgstr "សារ​លើអេក្រង់​ស្វាគមន៍"
-
-#: ../plugins/security-privacy//PageComponent.qml:148
-#: ../plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "ស្វែងរក"
-
-#: ../plugins/security-privacy//PageComponent.qml:166
-msgid "Location access"
-msgstr "ចូល​ដំណើរការ​ទីតាំង"
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "On"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:31
-msgid "Off"
-msgstr ""
-
-#: ../plugins/security-privacy//PageComponent.qml:174
-#: ../plugins/security-privacy//AppAccess.qml:28
-msgid "Other app access"
-msgstr "ចូល​ដំណើរការ​កម្មវិធី​ផ្សេង"
-
-#: ../plugins/security-privacy//PageComponent.qml:179
-msgid "Diagnostics"
-msgstr "ការ​ពិនិត្យ​មើល"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:184
-msgid "Sent"
-msgstr "បានផ្ញើ"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:187
-msgid "Not sent"
-msgstr "មិន​បាន​ផ្ញើ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passcode…"
-msgstr "ប្ដូរ​ឃ្លា​សម្ងាត់..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:381
-msgid "Change passphrase…"
-msgstr "ប្ដូរ​ឃ្លា​សម្ងាត់..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:101
-msgid "Switch to swipe"
-msgstr "ប្ដូរ​ដើម្បី​ត្រូវ​អូស"
-
-#: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr "ប្ដូរ​ទៅ​ពាក្យ​សម្ងាត់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:105
-msgid "Switch to passphrase"
-msgstr "ប្ដូរ​ទៅ​ឃ្លា​សម្ងាត់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr "ពាក្យ​សម្ងាត់​ដែល​មាន​ស្រាប់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:116
-msgid "Existing passphrase"
-msgstr "ឃ្លា​សម្ងាត់​ដែល​មាន​ស្រាប់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr "ជ្រើស​ពាក្យ​សម្ងាត់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:172
-msgid "Choose passphrase"
-msgstr "ជ្រើស​ពាក្យ​សម្ងាត់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr "បញ្ជាក់​ពាក្យ​សម្ងាត់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:218
-msgid "Confirm passphrase"
-msgstr "បញ្ជាក់​ឃ្លា​សម្ងាត់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:261
-msgid "Those passcodes don't match. Try again."
-msgstr "ពាក្យ​សម្ងាត់​ទាំង​នោះ​មិន​ដូច​គ្នា។​ ព្យាយាម​ម្ដងទៀត។"
-
-#: ../plugins/security-privacy//LockSecurity.qml:264
-msgid "Those passphrases don't match. Try again."
-msgstr "ពាក្យ​សម្ងាត់​ទាំង​នោះ​មិន​ដូច​គ្នា។ ព្យាយាម​ម្ដងទៀត។"
-
-#: ../plugins/security-privacy//LockSecurity.qml:295
-msgid "Unset"
-msgstr "មិន​កំណត់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:298
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr "ប្ដូរ"
-
-#: ../plugins/security-privacy//LockSecurity.qml:340
-msgid "Unlock the phone using:"
-msgstr "ដោះ​សោ​ទូរស័ព្ទ​ដោយ​ប្រើ៖"
-
-#: ../plugins/security-privacy//LockSecurity.qml:344
-msgid "Swipe (no security)"
-msgstr "អូស (គ្មាន​សុវត្ថិភាព)"
-
-#: ../plugins/security-privacy//LockSecurity.qml:345
-msgid "4-digit passcode"
-msgstr "លេខ​កូដ ៤​ខ្ទង់"
-
-#: ../plugins/security-privacy//LockSecurity.qml:347
-msgid "Swipe (no security)… "
-msgstr "អូស (គ្មាន​សុវត្ថិភាព)… "
-
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "4-digit passcode…"
-msgstr "លេខ​កូដ ៤​ខ្ទង់…"
-
-#: ../plugins/security-privacy//LockSecurity.qml:349
-msgid "Passphrase…"
-msgstr "ឃ្លា​សម្ងាត់..."
-
-#: ../plugins/security-privacy//Location.qml:30
-msgid "Location"
-msgstr "ទីតាំង"
-
-#: ../plugins/security-privacy//Location.qml:48
-msgid "Location detection"
-msgstr "រក​ឃើញ​ទីតាំង"
-
-#: ../plugins/security-privacy//Location.qml:70
-msgid ""
-"Uses GPS to detect your rough location. When off, GPS turns off to save "
-"battery."
-msgstr ""
-"ប្រើជីភីអេស ដើម្បី​រកមើល​ទីតាំង​របស់​អ្នក។ នៅ​ពេល​បិទ "
-"ជីភីអេស​បិទ​ដើម្បី​សន្សំ​ថ្ម។"
-
-#: ../plugins/security-privacy//Location.qml:72
-msgid ""
-"Uses wi-fi and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"ប្រើ​វ៉ាយហ្វាយ និង​ជីភីអេស​ដើម្បី​រកមើល​ទីតាំង​របស់​អ្នក "
-"បិទ​ការ​រក​មើល​ទីតាំង​ដើម្បី​សន្សំ​ថ្មី។."
-
-#: ../plugins/security-privacy//Location.qml:74
-msgid ""
-"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
-"off location detection saves battery."
-msgstr ""
-"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ) ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ "
-"បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
-
-#: ../plugins/security-privacy//Location.qml:76
-msgid ""
-"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
-"Turning off location detection saves battery."
-msgstr ""
-"ការ​ប្រើ​វ៉ាយហ្វាយ, ទីតាំង​បង្គោល​​អង់តែន​, និង GPS "
-"ដើម្បី​រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
-
-#: ../plugins/security-privacy//Location.qml:78
-msgid ""
-"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
-"to detect your rough location. Turning off location detection saves battery."
-msgstr ""
-"ប្រើ​វ៉ាយហ្វាយ, ទីតាំង​បង្គោល​អង់តែន (គ្មាន​ការ​តភ្ជាប់​ចល័ត​បច្ចុប្បន្ន), "
-"ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
-
-#: ../plugins/security-privacy//Location.qml:80
-msgid ""
-"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
-"rough location. Turning off location detection saves battery."
-msgstr ""
-"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ), ទីតាំង​បង្គោល​អង់តែន ហើយ GPS "
-"រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
-
-#: ../plugins/security-privacy//Location.qml:82
-msgid ""
-"Uses wi-fi (currently off), cell tower locations (no current cellular "
-"connection), and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ), ទីតាំង​បង្គោល​អង់តែន​ "
-"(គ្មាន​ការ​តភ្ជាប់​ចល័ត​បច្ចុប្បន្ន), ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ "
-"បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
-
-#: ../plugins/security-privacy//Location.qml:89
-msgid "Allow access to location:"
-msgstr "អនុញ្ញាត​ឲ្យ​ចូល​ទៅ​ទីតាំង៖"
-
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "ផ្ដល់​លទ្ធផល​ពី៖"
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr "កម្មវិធី​ដែល​អ្នក​បាន​ផ្ដល់​សិទ្ធិ និង​បាន​ស្នើ​ចូល​ប្រើ៖"
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:100
-msgid "Camera"
-msgstr "ម៉ាស៊ីន​ថ​ត"
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr "កម្មវិធី​ដែល​ស្នើ​ចូល​ប្រើ​ម៉ាស៊ីន​ថត​របស់​អ្នក"
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr "មីក្រូហ្វូន"
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr "កម្មវិធី​ដែល​បាន​ស្នើ​ចូល​ប្រើ​មីក្រូហ្វូន​របស់​អ្នក"
-
-#: ../plugins/security-privacy//AppAccess.qml:59
-#, qt-format
-msgid "%1/%2"
-msgstr "%1/%2"
-
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr "0"
-
-#: ../plugins/reset//ResetLauncherHome.qml:40
-msgid "The Launcher will be returned to its original contents."
-msgstr "កម្មវិធី​ចាប់ផ្ដើម​នឹង​ត្រឡប់​ទៅ​មាតិកា​ដើម​របស់​វា​វិញ។"
-
-#: ../plugins/reset//PageComponent.qml:73
-#: ../plugins/reset//ResetLauncherHome.qml:44
-msgid "Reset Launcher"
-msgstr "កំណត់​ឡើងវិញ​កម្មវិធី​ចាប់ផ្ដើម"
-
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr "ចាំបាច់​ត្រូវ​ចាប់ផ្ដើម​ទូរស័ព្ទ​ឡើងវិញ​ទើប​មាន​ប្រសិទ្ធភាព។"
-
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr ""
-"មាតិកា និង​ប្លង់​កម្មវិធី​ចាប់ផ្ដើម​ "
-"ព្រម​ទាំង​តម្រង​ក្នុង​អេក្រង់​ដើម​នឹង​ត្រូវ​បាន​ត្រឡប់​ទៅ​ការ​កំណត់​ដើម​របស់​"
-"ពួកវា។"
-
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "កំណត់​ការ​កំណត់​ប្រព័ន្ធ​ទាំងអស់​ឡើងវិញ"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: ../plugins/reset//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:64
-msgid "Reset phone"
-msgstr "កំណត់​ទូរស័ព្ទ​ឡើងវិញ"
-
-#: ../plugins/reset//PageComponent.qml:87
-msgid "Reset all system settings…"
-msgstr "កំណត់​ការ​កំណត់​ប្រព័ន្ធ​ទាំងអស់​ឡើង​វិញ"
-
-#: ../plugins/reset//PageComponent.qml:101
-msgid "Erase & Reset Everything…"
-msgstr "លុប & កំណត់​ឡើងវិញ​ទាំងអស់..."
-
-#: ../plugins/reset//EraseEverything.qml:41
-msgid ""
-"All documents, saved games, settings, and other items will be permanently "
-"deleted from this phone."
-msgstr ""
-"ឯកសារ​ទាំងអស់, ហ្គេម​បាន​រក្សាទុក, ការ​កំណត់, "
-"និង​ធាតុ​ផ្សេងៗ​ទៀត​នឹង​ត្រូវ​បាន​លុប​​ជា​អចិន្ត្រៃយ៍​ពី​ទូរស័ព្ទ​នេះ។"
-
-#: ../plugins/reset//EraseEverything.qml:44
-msgid "Erase & Reset Everything"
-msgstr "លុប & កំណត់​ឡើងវិញ​ទាំងអស់"
-
-#: ../plugins/phone//PageComponent.qml:30
-msgid "SIM"
-msgstr "ស៊ីម"
-
-#: ../plugins/phone//PageComponent.qml:51
-#: ../plugins/phone//CallForwarding.qml:28
-#: ../plugins/phone//CallForwarding.qml:75
-msgid "Call forwarding"
-msgstr "បញ្ជូន​ការ​ហៅ​បន្ត"
-
-#: ../plugins/phone//PageComponent.qml:57 ../plugins/phone//CallWaiting.qml:28
-#: ../plugins/phone//CallWaiting.qml:63
-msgid "Call waiting"
-msgstr "រង់ចាំ​ការ​ហៅ"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//PageComponent.qml:67 ../plugins/phone//Services.qml:32
-#, qt-format
-msgid "%1 Services"
-msgstr "សេវាកម្ម %1"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:92
+msgid "Phone"
+msgstr "ទូរស័ព្ទ"
+
+#: ../plugins/sound//PageComponent.qml:153
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr "សំឡេង​បន្ទះ​លេខ"
 
 #: ../plugins/phone//ServiceInfo.qml:109
 #, qt-format
@@ -831,27 +208,14 @@ msgstr "បាន​ហៅ​ចុងក្រោយ %1"
 msgid "Call"
 msgstr "ហៅ"
 
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:88
-#: ../plugins/phone//PageComponent.qml:28
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:104
-msgid "Phone"
-msgstr "ទូរស័ព្ទ"
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//SingleSim.qml:33
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76
+msgid "Call forwarding"
+msgstr "បញ្ជូន​ការ​ហៅ​បន្ត"
 
-#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
-#: ../plugins/phone//MultiSim.qml:94
-msgid "Services"
-msgstr ""
-
-#: ../plugins/phone//CallWaiting.qml:78
-msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
-msgstr ""
-"អនុញ្ញាត​ឲ្យ​អ្នក​ឆ្លើយតប ឬ​ចាប់ផ្ដើម​ការ​​ហៅ​ថ្មី​ខណៈ​ដែល​កំពុង​ហៅ​ "
-"និង​ប្ដូរ​រវាង​ពួកវា។"
-
-#: ../plugins/phone//CallForwarding.qml:90
+#: ../plugins/phone//CallForwarding.qml:91
 msgid ""
 "Redirects phone calls to another number whenever you don't answer, or your "
 "phone is busy, turned off, or out of range."
@@ -859,30 +223,146 @@ msgstr ""
 "បញ្ជូន​ការ​ហៅ​ទូរស័ព្ទ​បន្ត​ទៅ​លេខ​ផ្សេង ពេល​អ្នក​មិន​ឆ្លើយតប "
 "ឬ​ទូរស័ព្ទ​របស់​អ្នក​ជាប់​រវល់, បិទ​ទូរស័ព្ទ ឬ​នៅ​ក្រៅ​តំបន់​សេវា។"
 
-#: ../plugins/phone//CallForwarding.qml:100
+#: ../plugins/phone//CallForwarding.qml:101
 msgid "Forward to"
 msgstr "បញ្ជូន​បន្ត​ទៅ"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:96
-msgid "Notifications"
-msgstr "ការ​ជូនដំណឹង"
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/wifi//OtherNetwork.qml:137
+#: ../plugins/time-date//TimePicker.qml:173
+#: ../plugins/phone//CallForwarding.qml:139
+#: ../plugins/reset//ResetAllSettings.qml:38
+#: ../plugins/reset//EraseEverything.qml:54
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/security-privacy//LockSecurity.qml:283
+#: ../plugins/security-privacy//SimPin.qml:149
+#: ../plugins/security-privacy//SimPin.qml:266
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
+#: ../plugins/background//Preview.qml:101
+#: ../plugins/cellular//Components//SimEditor.qml:189
+#: ../plugins/background//Components//AddRemove.qml:42
+msgid "Cancel"
+msgstr "បោះ​បង់"
 
-#: ../plugins/notifications//PageComponent.qml:40
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/security-privacy//LockSecurity.qml:304
+#: ../plugins/background//Preview.qml:108
+msgid "Set"
+msgstr "កំណត់"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#, qt-format
+msgid "%1 Services"
+msgstr "សេវាកម្ម %1"
+
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
+msgid "Call waiting"
+msgstr "រង់ចាំ​ការ​ហៅ"
+
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
+msgid "Services"
+msgstr "សេវា"
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "ស៊ីម"
+
+#: ../plugins/phone//CallWaiting.qml:89
 msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
 msgstr ""
-"កម្មវិធី​ដែល​បាន​ជ្រើស​អាច​ជូនដំណឹង​អ្នក​ដោយ​ប្រើ​សំឡេង, ញ័រ, ពពុះ "
-"និង​​មជ្ឈមណ្ឌល​ជូនដំណឹង។"
+"អនុញ្ញាត​ឲ្យ​អ្នក​ឆ្លើយតប ឬ​ចាប់ផ្ដើម​ការ​​ហៅ​ថ្មី​ខណៈ​ដែល​កំពុង​ហៅ​ "
+"និង​ប្ដូរ​រវាង​ពួកវា។"
+
+#: ../plugins/background//Preview.qml:70
+msgid "Preview"
+msgstr "មើល​ជា​មុន"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:152
+msgid "Background"
+msgstr "ផ្ទៃ​ខាង​ក្រោយ"
+
+#: ../plugins/background//MainPage.qml:109
+msgid "Ubuntu Art"
+msgstr "សិល្បៈ Ubuntu"
+
+#: ../plugins/background//MainPage.qml:125
+msgid "Custom"
+msgstr "ផ្ទាល់ខ្លួន"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:34
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:2
+msgid "Language & Text"
+msgstr "ភាសា & អត្ថបទ"
+
+#: ../plugins/language//PageComponent.qml:100
+msgid "Display language…"
+msgstr "បង្ហាញ​ភាសា…"
+
+#: ../plugins/language//KeyboardLayouts.qml:26
+#: ../plugins/language//PageComponent.qml:117
+msgid "Keyboard layouts"
+msgstr "ប្លង់​ក្ដារ​ចុច"
 
 #: ../plugins/language//SpellChecking.qml:27
 #: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:108
-#: ../plugins/language//PageComponent.qml:118
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
 msgid "Spell checking"
 msgstr "ការ​ពិនិត្យ​អក្ខរាវិរុទ្ធ"
+
+#: ../plugins/language//PageComponent.qml:152
+msgid "Auto correction"
+msgstr "ការ​កែតម្រូវ​ស្វ័យប្រវត្តិ"
+
+#: ../plugins/language//PageComponent.qml:162
+msgid "Word suggestions"
+msgstr "ការ​ស្នើ​ពាក្យ"
+
+#: ../plugins/language//PageComponent.qml:175
+msgid "Auto capitalization"
+msgstr "អក្សរ​ធំ​ស្វ័យ​ប្រវត្តិ"
+
+#: ../plugins/language//PageComponent.qml:185
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "បើក​ការ​ប្ដូរ​ទៅ​អក្សរ​​ទី​មួយ​​ធំ​នៃ​ប្រយោគ​នីមួយៗ។"
+
+#: ../plugins/language//PageComponent.qml:192
+msgid "Auto punctuation"
+msgstr "ការ​ដាក់​វណ្ណយុត្តិ​ស្វ័យប្រវត្តិ"
+
+#: ../plugins/language//PageComponent.qml:202
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr ""
+"បន្ថែម​សញ្ញា​ប្រហាក់ប្រហែល និង​សញ្ញា​សម្រង់ ឬ​វង់ក្រចក​ដែល​បាត់ "
+"ពេល​អ្នក​ចុច​ដកឃ្លា​ទ្វេដង។"
+
+#: ../plugins/language//PageComponent.qml:209
+#: ../plugins/sound//PageComponent.qml:196
+msgid "Keyboard sound"
+msgstr "សំឡេង​ក្ដារ​ចុច"
+
+#: ../plugins/language//PageComponent.qml:219
+msgid "Keyboard vibration"
+msgstr "ការ​ញ័រ​របស់​ក្ដារចុច"
 
 #: ../plugins/language//SpellChecking.qml:53
 msgid "Current spelling languages:"
@@ -892,52 +372,6 @@ msgstr "ភាសា​ប្រកប​បច្ចុប្បន្ន៖"
 msgid "All languages available:"
 msgstr "គ្រប់​ភាសា​៖"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:33
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:2
-msgid "Language & Text"
-msgstr "ភាសា & អត្ថបទ"
-
-#: ../plugins/language//PageComponent.qml:79
-msgid "Display language…"
-msgstr "បង្ហាញ​ភាសា…"
-
-#: ../plugins/language//PageComponent.qml:93
-#: ../plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "ប្លង់​ក្ដារ​ចុច"
-
-#: ../plugins/language//PageComponent.qml:128
-msgid "Auto correction"
-msgstr "ការ​កែតម្រូវ​ស្វ័យប្រវត្តិ"
-
-#: ../plugins/language//PageComponent.qml:138
-msgid "Word suggestions"
-msgstr "ការ​ស្នើ​ពាក្យ"
-
-#: ../plugins/language//PageComponent.qml:151
-msgid "Auto capitalization"
-msgstr "អក្សរ​ធំ​ស្វ័យ​ប្រវត្តិ"
-
-#: ../plugins/language//PageComponent.qml:161
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "បើក​ការ​ប្ដូរ​ទៅ​អក្សរ​​ទី​មួយ​​ធំ​នៃ​ប្រយោគ​នីមួយៗ។"
-
-#: ../plugins/language//PageComponent.qml:168
-msgid "Auto punctuation"
-msgstr "ការ​ដាក់​វណ្ណយុត្តិ​ស្វ័យប្រវត្តិ"
-
-#: ../plugins/language//PageComponent.qml:178
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
-"បន្ថែម​សញ្ញា​ប្រហាក់ប្រហែល និង​សញ្ញា​សម្រង់ ឬ​វង់ក្រចក​ដែល​បាត់ "
-"ពេល​អ្នក​ចុច​ដកឃ្លា​ទ្វេដង។"
-
-#: ../plugins/language//PageComponent.qml:195
-msgid "Keyboard vibration"
-msgstr "ការ​ញ័រ​របស់​ក្ដារចុច"
-
 #: ../plugins/language//KeyboardLayouts.qml:39
 msgid "Current layouts:"
 msgstr "ប្លង់​បច្ចុប្បន្ន៖"
@@ -946,111 +380,193 @@ msgstr "ប្លង់​បច្ចុប្បន្ន៖"
 msgid "All layouts available:"
 msgstr "ប្លង់​ដែល​មាន​ទាំងអស់៖"
 
-#: ../plugins/language//DisplayLanguage.qml:33
+#: ../plugins/language//DisplayLanguage.qml:36
 msgid "Display language"
 msgstr "បង្ហាញ​ភាសា"
 
-#: ../plugins/language//DisplayLanguage.qml:114
+#: ../plugins/language//DisplayLanguage.qml:118
 msgid "Confirm"
 msgstr "បញ្ជាក់"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:28
-msgid "Cellular"
-msgstr "ចល័ត"
+#: ../plugins/language//RebootNecessary.qml:34
+#: ../plugins/reset//ResetLauncherHome.qml:59
+msgid "The phone needs to restart for changes to take effect."
+msgstr "ចាំបាច់​ត្រូវ​ចាប់ផ្ដើម​ទូរស័ព្ទ​ឡើងវិញ​ទើប​មាន​ប្រសិទ្ធភាព។"
 
-#: ../plugins/cellular//HotspotSetup.qml:29
-msgid "Change hotspot setup"
-msgstr "ប្ដូរ​ការ​កំណត់​ហតស្ប៉ត"
-
-#: ../plugins/cellular//HotspotSetup.qml:40
-msgid "Hotspot name"
-msgstr "ឈ្មោះ​ហតស្ប៉ត"
-
-#: ../plugins/cellular//HotspotSetup.qml:54
-msgid "Key (must be 8 characters or longer)"
-msgstr "លេខ​កូដ (ត្រូវតែ​មាន៨​តួ ឬ​វែង​ជា)"
-
-#: ../plugins/cellular//HotspotSetup.qml:68
-msgid "Show key"
-msgstr "បង្ហាញ​លេខ​កូដ"
-
-#: ../plugins/cellular//PageComponent.qml:138
-#: ../plugins/cellular//Hotspot.qml:29
-msgid "Wi-Fi hotspot"
-msgstr "វ៉ាយហ្វាយ​ហតស្ប៉ត"
-
-#: ../plugins/cellular//Hotspot.qml:40
-msgid "Hotspot"
-msgstr "ហតស្ប៉ត"
-
-#: ../plugins/cellular//Hotspot.qml:60
-msgid ""
-"When hotspot is on, other devices can use your cellular data connection over "
-"Wi-Fi. Normal data charges apply."
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
 msgstr ""
-"ពេល​បាន​បើក​ហតស្ប៉ត "
-"ឧបករណ៍​ផ្សេង​អាច​ប្រើ​ការ​តភ្ជាប់​ទិន្នន័យ​ចល័ត​របស់​អ្នក​តាម​វ់ាយហ្វាយ។ "
-"អនុវត្ត​ការ​គិត​ប្រាក់​ទិន្នន័យ​ធម្មតា។"
 
-#: ../plugins/cellular//Hotspot.qml:61
-msgid ""
-"Other devices can use your cellular data connection over the Wi-Fi network. "
-"Normal data charges apply."
-msgstr ""
-"ឧបករណ៍​ផ្សេង​អាច​ប្រើ​ការ​តភ្ជាប់​ទិន្នន័យ​ចល័ត​របស់​អ្នក​តាម​បណ្ដាញ​វ់ាយហ្វា"
-"យ។ អនុវត្ត​ការ​គិត​ប្រាក់​ទិន្នន័យ​ធម្មតា។"
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:363
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:146
+msgid "Bluetooth"
+msgstr "ប៊្លូធូស"
 
-#: ../plugins/cellular//Hotspot.qml:65
-msgid "Set up hotspot"
-msgstr "រៀបចំ​ហតស្ប៉ត"
+#: ../plugins/bluetooth//PageComponent.qml:82
+msgid "Connected"
+msgstr "បាន​តភ្ជាប់"
 
-#: ../plugins/cellular//PageChooseCarriers.qml:28
-msgid "Carriers"
-msgstr "ក្រុមហ៊ុន​បញ្ជូន"
+#: ../plugins/bluetooth//PageComponent.qml:83
+msgid "Connecting…"
+msgstr "កំពុង​តភ្ជាប់..."
 
-#: ../plugins/cellular//PageChooseCarriers.qml:50
-#: ../plugins/cellular//PageChooseCarriers.qml:66
-#: ../plugins/cellular//PageComponent.qml:175
-#: ../plugins/about//Storage.qml:204 ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281
-msgid "N/A"
-msgstr "N/A"
+#: ../plugins/bluetooth//PageComponent.qml:84
+msgid "Disconnecting…"
+msgstr "កំពុង​ផ្ដាច់..."
 
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "ជ្រើស​ក្រុមហ៊ុន​បញ្ជូន៖"
+#: ../plugins/bluetooth//PageComponent.qml:85
+msgid "Disconnected"
+msgstr "បាន​ផ្ដាច់"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "ផ្ទុក​ឡើងវិញ"
+#: ../plugins/bluetooth//PageComponent.qml:86
+msgid "Unknown"
+msgstr "មិន​ស្គាល់"
 
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "ស្វែងរក"
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Computer"
+msgstr "កុំព្យូទ័រ"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:130
-msgid "Brightness"
-msgstr "ពន្លឺ"
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Modem"
+msgstr "ម៉ូដឹម"
 
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "កែសម្រួល​ស្វ័យ​ប្រវត្តិ"
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
+msgid "Network"
+msgstr "បណ្តាញ"
 
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
-msgstr "ធ្វើឲ្យ​ការ​បង្ហាញ​ភ្លឺ ឬ​ស្រអាប់​ស្របតាម​វត្ថុ​ជុំវិញ។"
+#: ../plugins/bluetooth//PageComponent.qml:96
+msgid "Headset"
+msgstr "កាស"
 
-#: ../plugins/battery//PageComponent.qml:290
-#: ../plugins/brightness//BrightnessSlider.qml:51
-msgid "Display brightness"
-msgstr "ពន្លឺ​បង្ហាញ"
+#: ../plugins/bluetooth//PageComponent.qml:97
+msgid "Headphones"
+msgstr "កាស"
 
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//PageComponent.qml:98
+msgid "Video"
+msgstr "វីដេអូ"
+
+#: ../plugins/bluetooth//PageComponent.qml:99
+msgid "Other Audio"
+msgstr "អូឌីយ៉ូ​ផ្សេង"
+
+#: ../plugins/bluetooth//PageComponent.qml:100
+msgid "Joypad"
+msgstr "Joypad"
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Keyboard"
+msgstr "ក្ដារចុច"
+
+#: ../plugins/bluetooth//PageComponent.qml:102
+msgid "Tablet"
+msgstr "កុំព្យូទ័រ​បន្ទះ"
+
+#: ../plugins/bluetooth//PageComponent.qml:103
+msgid "Mouse"
+msgstr "កណ្ដុរ"
+
+#: ../plugins/bluetooth//PageComponent.qml:104
+msgid "Printer"
+msgstr "ម៉ាស៊ីន​បោះពុម្ព"
+
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:105
+msgid "Camera"
+msgstr "ម៉ាស៊ីន​ថ​ត"
+
+#: ../plugins/bluetooth//PageComponent.qml:106
+msgid "Other"
+msgstr "ផ្សេងៗ"
+
+#: ../plugins/bluetooth//PageComponent.qml:112
+msgid "Excellent"
+msgstr "ល្អ​ណាស់"
+
+#: ../plugins/bluetooth//PageComponent.qml:113
+msgid "Good"
+msgstr "ល្អ"
+
+#: ../plugins/bluetooth//PageComponent.qml:114
+msgid "Fair"
+msgstr "មធ្យម"
+
+#: ../plugins/bluetooth//PageComponent.qml:115
+msgid "Poor"
+msgstr "ខ្សោយ"
+
+#: ../plugins/wifi//OtherNetwork.qml:79
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
+msgid "None"
+msgstr "គ្មាន"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Discoverable"
+msgstr "អាច​រកឃើញ"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Not discoverable"
+msgstr "មិន​អាច​រក​ឃើញ"
+
+#: ../plugins/bluetooth//PageComponent.qml:213
+msgid "Connected devices:"
+msgstr "ឧបករណ៍​បាន​ភ្ជាប់៖"
+
+#: ../plugins/bluetooth//PageComponent.qml:250
+msgid "Connect another device:"
+msgstr "ភ្ជាប់​ឧបករណ៍​ផ្សេង៖"
+
+#: ../plugins/bluetooth//PageComponent.qml:250
+msgid "Connect a device:"
+msgstr "តភ្ជាប់​ឧបករណ៍៖"
+
+#: ../plugins/bluetooth//PageComponent.qml:283
+msgid "None detected"
+msgstr "រក​មិន​ឃើញ"
+
+#: ../plugins/bluetooth//PageComponent.qml:291
+#: ../plugins/bluetooth//PageComponent.qml:394
+msgid "Connect automatically when detected:"
+msgstr "តភ្ជាប់​ដោយ​ស្វ័យប្រវត្តិ​ពេល​រក​ឃើញ៖"
+
+#: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:343
+msgid "Name"
+msgstr "ឈ្មោះ"
+
+#: ../plugins/bluetooth//PageComponent.qml:361
+msgid "Type"
+msgstr "ប្រភេទ"
+
+#: ../plugins/bluetooth//PageComponent.qml:385
+msgid "Status"
+msgstr "ស្ថានភាព"
+
+#: ../plugins/bluetooth//PageComponent.qml:389
+msgid "Signal Strength"
+msgstr "កម្លាំង​​សញ្ញា"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "ផ្តាច់"
+
+#: ../plugins/wifi//OtherNetwork.qml:146
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Connect"
+msgstr "តភ្ជាប់"
+
+#: ../plugins/bluetooth//PageComponent.qml:426
+msgid "Forget this device"
+msgstr "បំភ្លេច​ឧបករណ៍​នេះ"
+
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
 msgid "Bluetooth Pairing Request"
 msgstr "ស្នើ​ផ្គូផ្គង​ប៊្លូធូស"
@@ -1066,151 +582,6 @@ msgstr "កូដ PIN សម្រាប់ '%1'"
 msgid "Pair"
 msgstr "ផ្គូផ្គង"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:117
-#: ../plugins/bluetooth//PageComponent.qml:136
-#: ../plugins/battery//PageComponent.qml:358
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:40
-msgid "Bluetooth"
-msgstr "ប៊្លូធូស"
-
-#: ../plugins/bluetooth//PageComponent.qml:77
-msgid "Connected"
-msgstr "បាន​តភ្ជាប់"
-
-#: ../plugins/bluetooth//PageComponent.qml:78
-msgid "Connecting…"
-msgstr "កំពុង​តភ្ជាប់..."
-
-#: ../plugins/bluetooth//PageComponent.qml:79
-msgid "Disconnecting…"
-msgstr "កំពុង​ផ្ដាច់..."
-
-#: ../plugins/bluetooth//PageComponent.qml:80
-msgid "Disconnected"
-msgstr "បាន​ផ្ដាច់"
-
-#: ../plugins/bluetooth//PageComponent.qml:81
-msgid "Unknown"
-msgstr "មិន​ស្គាល់"
-
-#: ../plugins/bluetooth//PageComponent.qml:87
-msgid "Computer"
-msgstr "កុំព្យូទ័រ"
-
-#: ../plugins/bluetooth//PageComponent.qml:89
-msgid "Modem"
-msgstr "ម៉ូដឹម"
-
-#: ../plugins/bluetooth//PageComponent.qml:90 ../src/qml/MainWindow.qml:145
-msgid "Network"
-msgstr "បណ្តាញ"
-
-#: ../plugins/bluetooth//PageComponent.qml:91
-msgid "Headset"
-msgstr "កាស"
-
-#: ../plugins/bluetooth//PageComponent.qml:92
-msgid "Headphones"
-msgstr "កាស"
-
-#: ../plugins/bluetooth//PageComponent.qml:93
-msgid "Video"
-msgstr "វីដេអូ"
-
-#: ../plugins/bluetooth//PageComponent.qml:94
-msgid "Other Audio"
-msgstr "អូឌីយ៉ូ​ផ្សេង"
-
-#: ../plugins/bluetooth//PageComponent.qml:95
-msgid "Joypad"
-msgstr "Joypad"
-
-#: ../plugins/bluetooth//PageComponent.qml:96
-msgid "Keyboard"
-msgstr "ក្ដារចុច"
-
-#: ../plugins/bluetooth//PageComponent.qml:97
-msgid "Tablet"
-msgstr "កុំព្យូទ័រ​បន្ទះ"
-
-#: ../plugins/bluetooth//PageComponent.qml:98
-msgid "Mouse"
-msgstr "កណ្ដុរ"
-
-#: ../plugins/bluetooth//PageComponent.qml:99
-msgid "Printer"
-msgstr "ម៉ាស៊ីន​បោះពុម្ព"
-
-#: ../plugins/bluetooth//PageComponent.qml:101
-msgid "Other"
-msgstr "ផ្សេងៗ"
-
-#: ../plugins/bluetooth//PageComponent.qml:107
-msgid "Excellent"
-msgstr "ល្អ​ណាស់"
-
-#: ../plugins/bluetooth//PageComponent.qml:108
-msgid "Good"
-msgstr "ល្អ"
-
-#: ../plugins/bluetooth//PageComponent.qml:109
-msgid "Fair"
-msgstr "មធ្យម"
-
-#: ../plugins/bluetooth//PageComponent.qml:110
-msgid "Poor"
-msgstr "ខ្សោយ"
-
-#: ../plugins/bluetooth//PageComponent.qml:171
-msgid "Discoverable"
-msgstr "អាច​រកឃើញ"
-
-#: ../plugins/bluetooth//PageComponent.qml:171
-msgid "Not discoverable"
-msgstr "មិន​អាច​រក​ឃើញ"
-
-#: ../plugins/bluetooth//PageComponent.qml:202
-msgid "Connected devices:"
-msgstr "ឧបករណ៍​បាន​ភ្ជាប់៖"
-
-#: ../plugins/bluetooth//PageComponent.qml:236
-msgid "Connect another device:"
-msgstr "ភ្ជាប់​ឧបករណ៍​ផ្សេង៖"
-
-#: ../plugins/bluetooth//PageComponent.qml:236
-msgid "Connect a device:"
-msgstr "តភ្ជាប់​ឧបករណ៍៖"
-
-#: ../plugins/bluetooth//PageComponent.qml:266
-msgid "None detected"
-msgstr "រក​មិន​ឃើញ"
-
-#: ../plugins/bluetooth//PageComponent.qml:274
-#: ../plugins/bluetooth//PageComponent.qml:360
-msgid "Connect automatically when detected:"
-msgstr "តភ្ជាប់​ដោយ​ស្វ័យប្រវត្តិ​ពេល​រក​ឃើញ៖"
-
-#: ../plugins/bluetooth//PageComponent.qml:327
-msgid "Type"
-msgstr "ប្រភេទ"
-
-#: ../plugins/bluetooth//PageComponent.qml:351
-msgid "Status"
-msgstr "ស្ថានភាព"
-
-#: ../plugins/bluetooth//PageComponent.qml:355
-msgid "Signal Strength"
-msgstr "កម្លាំង​​សញ្ញា"
-
-#: ../plugins/bluetooth//PageComponent.qml:374
-msgid "Disconnect"
-msgstr "ផ្តាច់"
-
-#: ../plugins/bluetooth//PageComponent.qml:392
-msgid "Forget this device"
-msgstr "បំភ្លេច​ឧបករណ៍​នេះ"
-
 #. TRANSLATORS: %1 is the name of the bluetooth device being paired
 #: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
 #, qt-format
@@ -1222,155 +593,272 @@ msgstr ""
 msgid "Confirm PIN"
 msgstr "បញ្ជាក់​កូដ PIN"
 
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Lock the phone when it's not in use:"
-msgstr "ចាក់​សោ​ទូរស័ព្ទ​ពេល​មិន​ប្រើ៖"
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "ទូរស័ព្ទ​ក្នុង​របៀប​ស្ងាត់។"
 
-#: ../plugins/battery//SleepValues.qml:74
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "ឲ្យ​ទូរស័ព្ទ​ដេក​ពេល​មិន​ប្រើ៖"
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:37
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:38
+msgid "Sound"
+msgstr "សំឡេង"
 
-#: ../plugins/battery//SleepValues.qml:107
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
+#: ../plugins/sound//PageComponent.qml:76
+msgid "Silent Mode"
+msgstr "របៀប​ស្ងាត់"
+
+#: ../plugins/sound//PageComponent.qml:80
+msgid "Ringer:"
+msgstr "រោទ៍៖"
+
+#: ../plugins/sound//PageComponent.qml:112
+msgid "Phone calls:"
+msgstr "ការ​ហៅ​ទូរស័ព្ទ៖"
+
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
+msgid "Ringtone"
+msgstr "សំឡេង​រោទ៍"
+
+#: ../plugins/sound//PageComponent.qml:135
+msgid "Vibrate when ringing"
+msgstr "ញ័រ​ពេលរោទ៍"
+
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
+msgid "Vibrate in Silent Mode"
+msgstr "ញ័រ​ក្នុង​របៀប​ស្ងាត់"
+
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Messages:"
+msgstr "សារ៖"
+
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
+msgid "Message received"
+msgstr "បាន​ទទួល​សារ"
+
+#: ../plugins/sound//PageComponent.qml:179
+msgid "Vibrate with message sound"
+msgstr "ញ័រ​ដោយ​សំឡេង​សារ"
+
+#: ../plugins/sound//PageComponent.qml:192
+msgid "Other sounds:"
+msgstr "សំឡេង​ផ្សេងៗ៖"
+
+#: ../plugins/sound//PageComponent.qml:210
+msgid "Lock sound"
+msgstr "សំឡេង​ចាក់សោ"
+
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "ឈប់ចាក់"
+
+#: ../plugins/wifi//NetworkDetails.qml:36
+msgid "Network details"
+msgstr "ព័ត៌មាន​លម្អិត​បណ្ដាញ"
+
+#: ../plugins/wifi//NetworkDetails.qml:51
+msgid "Last connected"
+msgstr "បា​ន​តភ្ជាប់​ចុងក្រោយ"
+
+#: ../plugins/wifi//OtherNetwork.qml:88 ../plugins/wifi//NetworkDetails.qml:61
+msgid "Password"
+msgstr "ពាក្យសម្ងាត់"
+
+#: ../plugins/wifi//NetworkDetails.qml:73
+msgid "Show password"
+msgstr "បង្ហាញ​ពាក្យ​សម្ងាត់"
+
+#: ../plugins/wifi//NetworkDetails.qml:83
+msgid "Forget network"
+msgstr "ភ្លេច​បណ្ដាញ"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:333
+#: ../plugins/wifi//PageComponent.qml:26
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:44
+msgid "Wi-Fi"
+msgstr "វ៉ាយហ្វាយ"
+
+#: ../plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:129
+msgid "Previous networks"
+msgstr "បណ្ដាញ​ពី​មុន"
+
+#: ../plugins/wifi//PageComponent.qml:138
+msgid "Connect to hidden network…"
 msgstr ""
-"ពេលវេលា​កាន់តែ​ខ្លី​សុវត្ថិភាព​កាន់​តែ​ខ្ពស់។ "
-"ទូរស័ព្ទ​នឹង​មិន​ចាក់​សោ​ពេល​ហៅ ឬ​ចាក់​វីដេអូ។"
 
-#: ../plugins/battery//SleepValues.qml:107
-msgid "Phone won’t sleep during calls or video playback."
-msgstr "ទូរស័ព្ទ​នឹង​មិន​ដេក​ពេល​ហៅ ឬ​ចាក់​វីដេអូ។"
+#: ../plugins/wifi//OtherNetwork.qml:96
+msgid "Connect to Hidden Network"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: ../plugins/battery//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:70
-msgid "Battery"
-msgstr "ថ្ម"
+#: ../plugins/wifi//OtherNetwork.qml:65
+msgid "Network name"
+msgstr "ឈ្មោះ​បណ្ដាញ"
 
-#. TRANSLATORS: %1 is the number of seconds
-#: ../plugins/battery//PageComponent.qml:46
-#, qt-format
-msgid "%1 second ago"
-msgid_plural "%1 seconds ago"
-msgstr[0] "%1 វិនាទី​មុន"
+#: ../plugins/wifi//OtherNetwork.qml:78
+#: ../plugins/security-privacy//PageComponent.qml:126
+msgid "Security"
+msgstr "សន្តិសុខ"
 
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/battery//PageComponent.qml:49
-#, qt-format
-msgid "%1 minute ago"
-msgid_plural "%1 minutes ago"
-msgstr[0] "%1 នាទី​មុន"
+#: ../plugins/wifi//OtherNetwork.qml:80
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 Personal"
 
-#. TRANSLATORS: %1 is the number of hours
-#: ../plugins/battery//PageComponent.qml:52
-#, qt-format
-msgid "%1 hour ago"
-msgid_plural "%1 hours ago"
-msgstr[0] "%1 ម៉ោង​មុន"
+#: ../plugins/wifi//OtherNetwork.qml:81
+msgid "WEP"
+msgstr "WEP"
 
-#. TRANSLATORS: %1 is the number of days
-#: ../plugins/battery//PageComponent.qml:55
-#, qt-format
-msgid "%1 day ago"
-msgid_plural "%1 days ago"
-msgstr[0] "%1 ថ្ងៃ​មុន"
+#: ../plugins/wifi//RemoveBackground.qml:28
+msgid "Clear"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:85
-msgid "Charging now"
-msgstr "ឥឡូវ​កំពុង​បញ្ចូលថ្ម"
+#: ../plugins/wifi//Common.qml:36
+msgid "Unknown error"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:90
-msgid "Last full charge"
-msgstr "បញ្ចូល​ថ្ម​​ពេញ​ចុងក្រោយ"
+#: ../plugins/wifi//Common.qml:38
+msgid "No reason given"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:95
-msgid "Fully charged"
-msgstr "បាន​បញ្ចូល​ថ្ម​ពេល"
+#: ../plugins/wifi//Common.qml:40
+msgid "Device is now managed"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:120
-msgid "Charge level"
-msgstr "កម្រិត​បញ្ចូល​ថ្ម"
+#: ../plugins/wifi//Common.qml:42
+msgid "Device is now unmanaged"
+msgstr ""
 
-#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:128
-#, qt-format
-msgid "%1%"
-msgstr "%1%"
+#: ../plugins/wifi//Common.qml:44
+msgid "The device could not be readied for configuration"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:206
-#: ../plugins/battery//PageComponent.qml:208
-msgid "Yesterday"
-msgstr "ម្សិលមិញ"
+#: ../plugins/wifi//Common.qml:46
+msgid ""
+"IP configuration could not be reserved (no available address, timeout, etc.)"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:214
-#: ../plugins/battery//PageComponent.qml:216
-msgid "Today"
-msgstr "ថ្ងៃនេះ"
+#: ../plugins/wifi//Common.qml:48
+msgid "The IP configuration is no longer valid"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:286
-msgid "Ways to reduce battery use:"
-msgstr "វិធី​កាត់បន្ថយ​កា​រ​ប្រើ​ថ្មី៖"
+#: ../plugins/wifi//Common.qml:50
+msgid "Your authentication details were incorrect"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:389
-msgid "GPS"
-msgstr "ជីភីអេស"
+#: ../plugins/wifi//Common.qml:52
+msgid "802.1X supplicant disconnected"
+msgstr ""
 
-#: ../plugins/battery//PageComponent.qml:407
-msgid "Accurate location detection requires GPS and/or Wi-Fi."
-msgstr "រក​ឃើញ​ទីតាំង​ត្រឹមត្រូវ​ទាមទារ​ជីភីអេស និង/ឬ​វ៉ាយហ្វាយ។"
+#: ../plugins/wifi//Common.qml:54
+msgid "802.1X supplicant configuration failed"
+msgstr ""
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "លុប​ចេញ"
+#: ../plugins/wifi//Common.qml:56
+msgid "802.1X supplicant failed"
+msgstr ""
 
-#: ../plugins/background//Preview.qml:67
-msgid "Preview"
-msgstr "មើល​ជា​មុន"
+#: ../plugins/wifi//Common.qml:58
+msgid "802.1X supplicant took too long to authenticate"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:88
-msgid "Background"
-msgstr "ផ្ទៃ​ខាង​ក្រោយ"
+#: ../plugins/wifi//Common.qml:60
+msgid "DHCP client failed to start"
+msgstr ""
 
-#: ../plugins/background//MainPage.qml:112
-msgid "Ubuntu Art"
-msgstr "សិល្បៈ Ubuntu"
+#: ../plugins/wifi//Common.qml:62
+msgid "DHCP client error"
+msgstr ""
 
-#: ../plugins/background//MainPage.qml:128
-msgid "Custom"
-msgstr "ផ្ទាល់ខ្លួន"
+#: ../plugins/wifi//Common.qml:64
+msgid "DHCP client failed"
+msgstr ""
 
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr "ព័ត៌មាន​លម្អិត​បង្កើត​ប្រព័ន្ធ​ប្រតិបត្តិការ"
+#: ../plugins/wifi//Common.qml:66
+msgid "Shared connection service failed to start"
+msgstr ""
 
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr "លេខ​បង្កើត​ប្រព័ន្ធ​ប្រតិបត្តិការ"
+#: ../plugins/wifi//Common.qml:68
+msgid "Shared connection service failed"
+msgstr ""
 
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr "ផ្នែក​រូបភាព Ubuntu"
+#: ../plugins/wifi//Common.qml:70
+msgid "Necessary firmware for the device may be missing"
+msgstr ""
 
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr "ការ​ពណ៌នា​បង្កើត Ubuntu"
+#: ../plugins/wifi//Common.qml:72
+msgid "The device was removed"
+msgstr ""
 
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr "ផ្នែក​រូបភាព​ឧបករណ៍"
+#: ../plugins/wifi//Common.qml:74
+msgid "NetworkManager went to sleep"
+msgstr ""
 
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr "ការពណ៌នា​បង្កើតឧបករណ៍"
+#: ../plugins/wifi//Common.qml:76
+msgid "The device's active connection disappeared"
+msgstr ""
 
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr "ការ​ប្ដូរ​ផ្នែក​រូបភាព​តាម​តម្រូវ​ការ"
+#: ../plugins/wifi//Common.qml:78
+msgid "Device disconnected by user or client"
+msgstr ""
 
-#: ../plugins/about//PageComponent.qml:126 ../plugins/about//Storage.qml:33
+#: ../plugins/wifi//Common.qml:80
+msgid "The device's existing connection was assumed"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:82
+msgid "The supplicant is now available"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:84
+msgid "The modem could not be found"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:86
+msgid "The Bluetooth connection failed or timed out"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:88
+msgid "A dependency of the connection failed"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:90
+msgid "ModemManager is unavailable"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:92
+msgid "The Wi-Fi network could not be found"
+msgstr ""
+
+#: ../plugins/wifi//Common.qml:94
+msgid "A secondary connection of the base connection failed"
+msgstr ""
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:98
+msgid "Notifications"
+msgstr "ការ​ជូនដំណឹង"
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr ""
+"កម្មវិធី​ដែល​បាន​ជ្រើស​អាច​ជូនដំណឹង​អ្នក​ដោយ​ប្រើ​សំឡេង, ញ័រ, ពពុះ "
+"និង​​មជ្ឈមណ្ឌល​ជូនដំណឹង។"
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:139 ../plugins/about//Storage.qml:33
 msgid "Storage"
 msgstr "ការ​ផ្ទុក"
 
@@ -1414,57 +902,112 @@ msgstr "តាម​ឈ្មោះ"
 msgid "By size"
 msgstr "តាម​ទំហំ"
 
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
-msgid "Software licenses"
-msgstr "អាជ្ញាប័ណ្ណ​កម្មវិធី"
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//PageChooseCarriers.qml:49
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/about//Storage.qml:204
+#: ../plugins/cellular//Components//SingleSim.qml:62
+#: ../plugins/cellular//Components//NoSim.qml:48
+msgid "N/A"
+msgstr "N/A"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
 #: ../plugins/about//PageComponent.qml:34
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:46
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:84
 msgid "About this phone"
 msgstr "អំពី​ទូរស័ព្ទ​នេះ"
 
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "លេខទូរស័ព្ទ"
-
-#: ../plugins/about//PageComponent.qml:107
+#: ../plugins/about//PageComponent.qml:105
 msgid "Serial"
 msgstr "សៀរៀល"
 
-#: ../plugins/about//PageComponent.qml:133
+#: ../plugins/about//PageComponent.qml:120
+msgid "Wi-Fi address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:128
+msgid "Bluetooth address"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:144
+#, qt-format
+msgid "%1 free"
+msgstr ""
+
+#: ../plugins/about//PageComponent.qml:146
 msgid "Software:"
 msgstr "កម្មវិធី​បន្ថែម៖"
 
-#: ../plugins/about//PageComponent.qml:138
+#: ../plugins/about//PageComponent.qml:151
 msgid "OS"
 msgstr "ប្រព័ន្ធ​ប្រតិបត្តិការ"
 
-#: ../plugins/about//PageComponent.qml:147
+#: ../plugins/about//PageComponent.qml:160
 msgid "Last updated"
 msgstr "បាន​​ធ្វើ​បច្ចុប្បន្នភាព​ចុងក្រោយ"
 
-#: ../plugins/about//PageComponent.qml:155
+#: ../plugins/about//PageComponent.qml:168
 msgid "Check for updates"
 msgstr "ពិនិត្យ​មើល​បច្ចុប្បន្នភាព"
 
-#: ../plugins/about//PageComponent.qml:164
+#: ../plugins/about//PageComponent.qml:177
 msgid "Legal:"
 msgstr "ស្រប​ច្បាប់៖"
 
-#: ../plugins/about//PageComponent.qml:177
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
+msgid "Software licenses"
+msgstr "អាជ្ញាប័ណ្ណ​កម្មវិធី"
+
+#: ../plugins/about//PageComponent.qml:190
 msgid "Regulatory info"
 msgstr "ព័ត៌មាន​ផ្លូវ​ច្បាប់"
 
-#: ../plugins/about//PageComponent.qml:185
+#: ../plugins/about//PageComponent.qml:198
 msgid "Developer mode"
 msgstr "របៀប​អ្នក​អភិវឌ្ឍន៍"
 
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
+#: ../plugins/about//Version.qml:36
+msgid "OS Build Details"
+msgstr "ព័ត៌មាន​លម្អិត​បង្កើត​ប្រព័ន្ធ​ប្រតិបត្តិការ"
+
+#: ../plugins/about//Version.qml:61
+msgid "OS build number"
+msgstr "លេខ​បង្កើត​ប្រព័ន្ធ​ប្រតិបត្តិការ"
+
+#: ../plugins/about//Version.qml:67
+msgid "Ubuntu Image part"
+msgstr "ផ្នែក​រូបភាព Ubuntu"
+
+#: ../plugins/about//Version.qml:75
+msgid "Ubuntu build description"
+msgstr "ការ​ពណ៌នា​បង្កើត Ubuntu"
+
+#: ../plugins/about//Version.qml:81
+msgid "Device Image part"
+msgstr "ផ្នែក​រូបភាព​ឧបករណ៍"
+
+#: ../plugins/about//Version.qml:88
+msgid "Device build description"
+msgstr "ការពណ៌នា​បង្កើតឧបករណ៍"
+
+#: ../plugins/about//Version.qml:95
+msgid "Customization Image part"
+msgstr "ការ​ប្ដូរ​ផ្នែក​រូបភាព​តាម​តម្រូវ​ការ"
+
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
+msgstr "លេខទូរស័ព្ទ"
+
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr ""
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
 msgid "Developer Mode"
 msgstr "របៀប​អ្នក​អភិវឌ្ឍន៍"
 
-#: ../plugins/about//DevMode.qml:73
+#: ../plugins/about//DevMode.qml:82
 msgid ""
 "In Developer Mode, anyone can access, change or delete anything on this "
 "phone by connecting it to another device."
@@ -1472,622 +1015,1782 @@ msgstr ""
 "នៅ​ក្នុង​របៀប​អ្នក​អភិវឌ្ឍន៍, អ្នកណា​ក៏​អាច​ចូល​ប្រើ ប្ដូរ "
 "ឬ​លុប​អ្វីមួយ​នៅ​លើ​ទូរស័ព្ទ​នេះ​បាន​ដែរ ដោយ​តភ្ជាប់​វា​ទៅ​ឧបករណ៍​ផ្សេង។"
 
-#: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
+#: ../plugins/about//DevMode.qml:108
+msgid "You need a PIN code or passphrase set to use Developer Mode."
 msgstr ""
-"អ្នក​ត្រូវ​មាន​កូដ​សម្ងាត់ ឬ​ឃ្លា​សម្ងាត់​ដើម្បី​ប្រើ​របៀប​អ្នក​អភិវឌ្ឍន៍។"
+"អ្នក​ត្រូវ​កំណត់​លេខ​កូដ PIN ឬ ឃ្លា​សម្ងាត់​ដើម្បី​ប្រើ​របៀប​អ្នក​អភិវឌ្ឍន៍។"
+
+#: ../plugins/about//DevMode.qml:114
+#: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+msgid "Lock security"
+msgstr "ចាក់សោ​សុវត្ថិភាព"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:138
+msgid "Security & Privacy"
+msgstr "សុវត្ថិភាព និង​​ភាព​ឯកជន"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
+msgid "Phone and Internet"
+msgstr "ទូរស័ព្ទ និងអ៊ីនធឺណិត"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
+msgid "Phone only"
+msgstr "តែ​ទូរស័ព្ទ"
+
+#: ../plugins/security-privacy//PageComponent.qml:131
+msgid "Lock phone"
+msgstr "ចាក់សោ​ទូរស័ព្ទ"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "បន្ទាប់​ពី %1 នាទី"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/security-privacy//PageComponent.qml:149
+msgid "Manually"
+msgstr "ដោយដៃ"
+
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:322
+#: ../plugins/security-privacy//PageComponent.qml:158
+msgid "SIM PIN"
+msgstr "លេខ​កូដ PIN ស៊ីម"
+
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:244
+msgid "On"
+msgstr "បើក"
+
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+msgid "Off"
+msgstr "បិទ"
+
+#: ../plugins/security-privacy//PageComponent.qml:172
+msgid "Encryption"
+msgstr "ការ​ដាក់​លេខ​កូដ"
+
+#: ../plugins/security-privacy//PageComponent.qml:181
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
+"ការ​ដាក់​លេខ​កូដ​គឺ​ការពារ​ពី​ការ​ចូល​ប្រើ​ទិន្នន័យ​ទូរស័ព្ទ "
+"ពេល​បាន​តភ្ជាប់​ទៅ PC ឬ​ឧបករណ៍​ផ្សេង។"
+
+#: ../plugins/security-privacy//PageComponent.qml:185
+msgid "Privacy"
+msgstr "ភាព​ឯកជន"
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "Stats on welcome screen"
+msgstr "ស្ថានភាព​លើ​អេក្រង់​ស្វាគមន៍"
+
+#: ../plugins/security-privacy//PageComponent.qml:201
+msgid "Messages on welcome screen"
+msgstr "សារ​លើអេក្រង់​ស្វាគមន៍"
+
+#: ../plugins/security-privacy//Dash.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:216
+msgid "Dash search"
+msgstr "ស្វែងរក"
+
+#: ../plugins/security-privacy//PageComponent.qml:235
+msgid "Location access"
+msgstr "ចូល​ដំណើរការ​ទីតាំង"
+
+#: ../plugins/security-privacy//AppAccess.qml:28
+#: ../plugins/security-privacy//PageComponent.qml:253
+msgid "Other app access"
+msgstr "ចូល​ដំណើរការ​កម្មវិធី​ផ្សេង"
+
+#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
+msgid "Diagnostics"
+msgstr "ការ​ពិនិត្យ​មើល"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy//PageComponent.qml:263
+msgid "Sent"
+msgstr "បានផ្ញើ"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy//PageComponent.qml:266
+msgid "Not sent"
+msgstr "មិន​បាន​ផ្ញើ"
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "ផ្ដល់​លទ្ធផល​ពី៖"
+
+#: ../plugins/security-privacy//Location.qml:31
+#: ../wizard/qml/Pages//30-location.qml:25
+msgid "Location"
+msgstr "ទីតាំង"
+
+#: ../plugins/security-privacy//Location.qml:49
+msgid "Location detection"
+msgstr "រក​ឃើញ​ទីតាំង"
+
+#: ../plugins/security-privacy//Location.qml:71
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+"ប្រើជីភីអេស ដើម្បី​រកមើល​ទីតាំង​របស់​អ្នក។ នៅ​ពេល​បិទ "
+"ជីភីអេស​បិទ​ដើម្បី​សន្សំ​ថ្ម។"
+
+#: ../plugins/security-privacy//Location.qml:73
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"ប្រើ​វ៉ាយហ្វាយ និង​ជីភីអេស​ដើម្បី​រកមើល​ទីតាំង​របស់​អ្នក "
+"បិទ​ការ​រក​មើល​ទីតាំង​ដើម្បី​សន្សំ​ថ្មី។."
+
+#: ../plugins/security-privacy//Location.qml:75
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ) ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ "
+"បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
+
+#: ../plugins/security-privacy//Location.qml:77
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+"ការ​ប្រើ​វ៉ាយហ្វាយ, ទីតាំង​បង្គោល​​អង់តែន​, និង GPS "
+"ដើម្បី​រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
+
+#: ../plugins/security-privacy//Location.qml:79
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+"ប្រើ​វ៉ាយហ្វាយ, ទីតាំង​បង្គោល​អង់តែន (គ្មាន​ការ​តភ្ជាប់​ចល័ត​បច្ចុប្បន្ន), "
+"ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
+
+#: ../plugins/security-privacy//Location.qml:81
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ), ទីតាំង​បង្គោល​អង់តែន ហើយ GPS "
+"រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
+
+#: ../plugins/security-privacy//Location.qml:83
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"ការ​ប្រើ​វ៉ាយហ្វាយ (បច្ចុប្បន្ន​បិទ), ទីតាំង​បង្គោល​អង់តែន​ "
+"(គ្មាន​ការ​តភ្ជាប់​ចល័ត​បច្ចុប្បន្ន), ហើយ GPS រក​ឃើញ​ទីតាំង​ពិបាក​របស់​អ្នក។ "
+"បិទ​ការ​រក​ឃើញ​ទីតាំង​សន្សំ​ថ្ម។"
+
+#: ../plugins/security-privacy//Location.qml:90
+msgid "Allow access to location:"
+msgstr "អនុញ្ញាត​ឲ្យ​ចូល​ទៅ​ទីតាំង៖"
+
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr "ប្ដូរ​លេខ​កូដ PIN ស៊ីម"
+
+#: ../plugins/security-privacy//SimPin.qml:47
+#, qt-format
+msgid "Incorrect PIN. %1 attempt remaining."
+msgid_plural "Incorrect PIN. %1 attempts remaining."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/security-privacy//SimPin.qml:81
+msgid "Current PIN:"
+msgstr "លេខ​កូដ PIN បច្ចុប្បន្ន៖"
+
+#: ../plugins/security-privacy//SimPin.qml:93
+#, qt-format
+msgid "%1 attempt allowed."
+msgid_plural "%1 attempts allowed."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../plugins/security-privacy//SimPin.qml:107
+msgid "Choose new PIN:"
+msgstr "ជ្រើស​កូដ PIN ថ្មី៖"
+
+#: ../plugins/security-privacy//SimPin.qml:118
+msgid "Confirm new PIN:"
+msgstr "បញ្ជាក់​លេខ​កូដ PIN ថ្មី៖"
+
+#: ../plugins/security-privacy//SimPin.qml:137
+msgid "PINs don't match. Try again."
+msgstr "លេខ​កូដ PIN មិន​ផ្គូផ្គង។ ព្យាយាម​ម្ដងទៀត។"
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+#: ../plugins/security-privacy//LockSecurity.qml:302
+#: ../plugins/security-privacy//SimPin.qml:157
+msgid "Change"
+msgstr "ប្ដូរ"
+
+#: ../plugins/security-privacy//SimPin.qml:183
+msgid "Enter SIM PIN"
+msgstr "បញ្ចូល​លេខ​កូដ PIN ស៊ីម"
+
+#: ../plugins/security-privacy//SimPin.qml:184
+msgid "Enter Previous SIM PIN"
+msgstr "បញ្ចូល​លេខ​កូដ PIN ស៊ីម​ពីមុន"
+
+#: ../plugins/security-privacy//SimPin.qml:187
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr "លេខ​កូដ PIN មិន​ត្រឹមត្រូវ។ នៅសល់​ការ​ព្យាយាម %1 ។"
+
+#: ../plugins/security-privacy//SimPin.qml:246
+#, qt-format
+msgid "%1 attempts allowed."
+msgstr "បាន​ឲ្យ​ព្យាយាម %1 ដង។"
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Unlock"
+msgstr "ដោះ​សោ"
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Lock"
+msgstr "ចាក់សោ"
+
+#: ../plugins/security-privacy//SimPin.qml:340
+msgid "Change PIN…"
+msgstr "ប្ដូរ​លេខ​កូដ PIN…"
+
+#: ../plugins/security-privacy//SimPin.qml:357
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+"ពេល​កំណត់​លេខ​កូដ PIN ស៊ីម, "
+"វា​ត្រូវតែ​បាន​បញ្ចូល​ដើម្បី​ដំណើរការ​សេវា​ចល័ត​បន្ទាប់ពី​ចាប់ផ្ដើម​ទូរស័ព្ទ​"
+"ឡើងវិញ ឬ​ពេល​ប្ដូរ​ស៊ីម។"
+
+#: ../plugins/security-privacy//SimPin.qml:361
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr ""
+"ការ​បញ្ចូល​លេខ​កូដ PIN ខុស​ជា​បន្ត​បន្ទាប់ អាច​នឹង​ចាក់សោ​ស៊ីម​ជា​រៀង​រហូត"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:31
+msgid "Phone locking"
+msgstr "ការ​ចាក់សោ​ទូរស័ព្ទ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr ""
+
+#: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//15-passwd.qml:99
+msgid "PIN code"
+msgstr "លេខ​កូដ PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../wizard/qml/Pages//15-passwd.qml:101
+msgid "Passphrase"
+msgstr "ឃ្លាសម្ងាត់"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:68
+msgid "Lock when idle"
+msgstr "ចាក់​សោ​ពេល​នៅទំនេរ"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:69
+msgid "Sleep when idle"
+msgstr "ដេក​ពេល​នៅទំនេរ"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:75
+#: ../plugins/security-privacy//PhoneLocking.qml:84
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 នាទី"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:101
+msgid "Sleep locks immediately"
+msgstr "ចាក់​សោ​ដេក​ភ្លាម​ៗ"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr "ពេល​បាន​ចាក់សោ, អនុញ្ញាត៖"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr "កម្មវិធី​ចាប់ផ្ដើម"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr "ការ​ជូនដំណឹង និង​ការ​កំណត់​រហ័ស"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+"បើក​សុវត្ថិភាព​ចាក់សោ​ដើម្បី​ដាក់​កម្រិត​ការ​ចូល​ប្រើ "
+"ពេល​បាន​ចាក់សោ​ទូរស័ព្ទ។"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr "មុខងារ និង​កម្មវិធី​ផ្សេង​នឹង​ប្រាប់​អ្នក​ឲ្យ​ដោះ​សោ។"
+
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr "កម្មវិធី​ដែល​អ្នក​បាន​ផ្ដល់​សិទ្ធិ និង​បាន​ស្នើ​ចូល​ប្រើ៖"
+
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr "កម្មវិធី​ដែល​ស្នើ​ចូល​ប្រើ​ម៉ាស៊ីន​ថត​របស់​អ្នក"
+
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr "មីក្រូហ្វូន"
+
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr "កម្មវិធី​ដែល​បាន​ស្នើ​ចូល​ប្រើ​មីក្រូហ្វូន​របស់​អ្នក"
+
+#: ../plugins/security-privacy//AppAccess.qml:59
+#, qt-format
+msgid "%1/%2"
+msgstr "%1/%2"
+
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr "0"
+
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
+msgid "Change PIN code…"
+msgstr "ប្ដូរ​លេខ​កូដ PIN…"
+
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
+msgid "Change passphrase…"
+msgstr "ប្ដូរ​ឃ្លា​សម្ងាត់..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to swipe"
+msgstr "ប្ដូរ​ដើម្បី​ត្រូវ​អូស"
+
+#: ../plugins/security-privacy//LockSecurity.qml:107
+msgid "Switch to PIN code"
+msgstr "ប្ដូរ​ទៅ​លេខ​កូដ PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:109
+msgid "Switch to passphrase"
+msgstr "ប្ដូរ​ទៅ​ឃ្លា​សម្ងាត់"
+
+#: ../plugins/security-privacy//LockSecurity.qml:118
+msgid "Existing PIN code"
+msgstr "បញ្ចប់​លេខ​កូដ PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:120
+msgid "Existing passphrase"
+msgstr "ឃ្លា​សម្ងាត់​ដែល​មាន​ស្រាប់"
+
+#: ../plugins/security-privacy//LockSecurity.qml:174
+msgid "Choose PIN code"
+msgstr "ជ្រើស​លេខ​កូដ PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:176
+msgid "Choose passphrase"
+msgstr "ជ្រើស​ពាក្យ​សម្ងាត់"
+
+#: ../plugins/security-privacy//LockSecurity.qml:220
+msgid "Confirm PIN code"
+msgstr "បញ្ជាក់​លេខ​កូដ PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:222
+msgid "Confirm passphrase"
+msgstr "បញ្ជាក់​ឃ្លា​សម្ងាត់"
+
+#: ../plugins/security-privacy//LockSecurity.qml:265
+msgid "Those PIN codes don't match. Try again."
+msgstr "លេខ​កូដ PIN ទាំងនោះ​មិន​ផ្គូផ្គង។ ព្យាយាម​ម្ដងទៀត។"
+
+#: ../plugins/security-privacy//LockSecurity.qml:268
+msgid "Those passphrases don't match. Try again."
+msgstr "ពាក្យ​សម្ងាត់​ទាំង​នោះ​មិន​ដូច​គ្នា។ ព្យាយាម​ម្ដងទៀត។"
+
+#: ../plugins/security-privacy//LockSecurity.qml:299
+msgid "Unset"
+msgstr "មិន​កំណត់"
+
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "Unlock the phone using:"
+msgstr "ដោះ​សោ​ទូរស័ព្ទ​ដោយ​ប្រើ៖"
+
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "Swipe (no security)"
+msgstr "អូស (គ្មាន​សុវត្ថិភាព)"
+
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "4-digit PIN code"
+msgstr "លេខ​កូដ PIN ៤តួ"
+
+#: ../plugins/security-privacy//LockSecurity.qml:351
+msgid "Swipe (no security)… "
+msgstr "អូស (គ្មាន​សុវត្ថិភាព)… "
+
+#: ../plugins/security-privacy//LockSecurity.qml:352
+msgid "4-digit PIN code…"
+msgstr "លេខ​កូដ PIN ៤ ខ្ទង់…"
+
+#: ../plugins/security-privacy//LockSecurity.qml:353
+msgid "Passphrase…"
+msgstr "ឃ្លា​សម្ងាត់..."
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:74
+msgid "Time & Date"
+msgstr "ពេលវេលា និង​កាល​បរិច្ឆេទ"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "តំបន់​ពេលវេលា៖"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "កំណត់​ពេលវេលា និង​កាលបរិច្ឆេទ៖"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Automatically"
+msgstr "ស្វ័យប្រវត្តិ"
+
+#: ../plugins/time-date//TimePicker.qml:26
+msgid "Set time & date"
+msgstr "កំណត់​ពេលវេលា និង​កាលបរិច្ឆេទ"
+
+#: ../plugins/time-date//TimePicker.qml:68
+msgid "Time"
+msgstr "ពេលវេលា"
+
+#: ../plugins/time-date//TimePicker.qml:81
+msgid "Hour"
+msgstr "ម៉ោង"
+
+#: ../plugins/time-date//TimePicker.qml:95
+msgid "Minute"
+msgstr "នាទី"
+
+#: ../plugins/time-date//TimePicker.qml:109
+msgid "Second"
+msgstr "វិនាទី"
+
+#: ../plugins/time-date//TimePicker.qml:118
+msgid "Date"
+msgstr "កាលបរិច្ឆេទ"
+
+#: ../plugins/time-date//TimePicker.qml:130
+msgid "Day"
+msgstr "ថ្ងៃ"
+
+#: ../plugins/time-date//TimePicker.qml:144
+msgid "Month"
+msgstr "ខែ"
+
+#: ../plugins/time-date//TimePicker.qml:162
+msgid "Year"
+msgstr "ឆ្នាំ"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:28
+msgid "Time zone"
+msgstr "តំបន់​ពេលវេលា"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:46
+msgid "Set the time zone:"
+msgstr "កំណត់​តំបន់​ពេលវេលា៖"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:126
+msgid "Enter your current location."
+msgstr "បញ្ចូល​ទីតាំង​បច្ចុប្បន្ន​របស់​អ្នក។"
+
+#: ../plugins/time-date//ChooseTimeZone.qml:127
+msgid "No matching place"
+msgstr "គ្មាន​ទីតាំង​ផ្គូផ្គង"
+
+#: ../plugins/reset//ResetLauncherHome.qml:40
+msgid "The Launcher will be returned to its original contents."
+msgstr "កម្មវិធី​ចាប់ផ្ដើម​នឹង​ត្រឡប់​ទៅ​មាតិកា​ដើម​របស់​វា​វិញ។"
+
+#: ../plugins/reset//ResetLauncherHome.qml:44
+#: ../plugins/reset//PageComponent.qml:73
+msgid "Reset Launcher"
+msgstr "កំណត់​ឡើងវិញ​កម្មវិធី​ចាប់ផ្ដើម"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../plugins/reset//PageComponent.qml:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:114
+msgid "Reset phone"
+msgstr "កំណត់​ទូរស័ព្ទ​ឡើងវិញ"
+
+#: ../plugins/reset//PageComponent.qml:87
+msgid "Reset all system settings…"
+msgstr "កំណត់​ការ​កំណត់​ប្រព័ន្ធ​ទាំងអស់​ឡើង​វិញ"
+
+#: ../plugins/reset//PageComponent.qml:101
+msgid "Erase & Reset Everything…"
+msgstr "លុប & កំណត់​ឡើងវិញ​ទាំងអស់..."
+
+#: ../plugins/reset//EraseEverything.qml:41
+msgid ""
+"All documents, saved games, settings, and other items will be permanently "
+"deleted from this phone."
+msgstr ""
+"ឯកសារ​ទាំងអស់, ហ្គេម​បាន​រក្សាទុក, ការ​កំណត់, "
+"និង​ធាតុ​ផ្សេងៗ​ទៀត​នឹង​ត្រូវ​បាន​លុប​​ជា​អចិន្ត្រៃយ៍​ពី​ទូរស័ព្ទ​នេះ។"
+
+#: ../plugins/reset//EraseEverything.qml:44
+msgid "Erase & Reset Everything"
+msgstr "លុប & កំណត់​ឡើងវិញ​ទាំងអស់"
+
+#: ../plugins/reset//ResetAllSettings.qml:29
+msgid ""
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
+msgstr ""
+"មាតិកា និង​ប្លង់​កម្មវិធី​ចាប់ផ្ដើម​ "
+"ព្រម​ទាំង​តម្រង​ក្នុង​អេក្រង់​ដើម​នឹង​ត្រូវ​បាន​ត្រឡប់​ទៅ​ការ​កំណត់​ដើម​របស់​"
+"ពួកវា។"
+
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "កំណត់​ការ​កំណត់​ប្រព័ន្ធ​ទាំងអស់​ឡើងវិញ"
+
+#: ../plugins/cellular//HotspotSetup.qml:29
+msgid "Change hotspot setup"
+msgstr "ប្ដូរ​ការ​កំណត់​ហតស្ប៉ត"
+
+#: ../plugins/cellular//HotspotSetup.qml:40
+msgid "Hotspot name"
+msgstr "ឈ្មោះ​ហតស្ប៉ត"
+
+#: ../plugins/cellular//HotspotSetup.qml:54
+msgid "Key (must be 8 characters or longer)"
+msgstr "លេខ​កូដ (ត្រូវតែ​មាន៨​តួ ឬ​វែង​ជា)"
+
+#: ../plugins/cellular//HotspotSetup.qml:68
+msgid "Show key"
+msgstr "បង្ហាញ​លេខ​កូដ"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:18
+msgid "Cellular"
+msgstr "ចល័ត"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "ជ្រើស​ក្រុមហ៊ុន​បញ្ជូន៖"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "ផ្ទុក​ឡើងវិញ"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "ស្វែងរក"
+
+#: ../plugins/cellular//Hotspot.qml:29
+#: ../plugins/cellular//Components//SingleSim.qml:43
+#: ../plugins/cellular//Components//MultiSim.qml:48
+msgid "Wi-Fi hotspot"
+msgstr "វ៉ាយហ្វាយ​ហតស្ប៉ត"
+
+#: ../plugins/cellular//Hotspot.qml:40
+msgid "Hotspot"
+msgstr "ហតស្ប៉ត"
+
+#: ../plugins/cellular//Hotspot.qml:60
+msgid ""
+"When hotspot is on, other devices can use your cellular data connection over "
+"Wi-Fi. Normal data charges apply."
+msgstr ""
+"ពេល​បាន​បើក​ហតស្ប៉ត "
+"ឧបករណ៍​ផ្សេង​អាច​ប្រើ​ការ​តភ្ជាប់​ទិន្នន័យ​ចល័ត​របស់​អ្នក​តាម​វ់ាយហ្វាយ។ "
+"អនុវត្ត​ការ​គិត​ប្រាក់​ទិន្នន័យ​ធម្មតា។"
+
+#: ../plugins/cellular//Hotspot.qml:61
+msgid ""
+"Other devices can use your cellular data connection over the Wi-Fi network. "
+"Normal data charges apply."
+msgstr ""
+"ឧបករណ៍​ផ្សេង​អាច​ប្រើ​ការ​តភ្ជាប់​ទិន្នន័យ​ចល័ត​របស់​អ្នក​តាម​បណ្ដាញ​វ់ាយហ្វា"
+"យ។ អនុវត្ត​ការ​គិត​ប្រាក់​ទិន្នន័យ​ធម្មតា។"
+
+#: ../plugins/cellular//Hotspot.qml:65
+msgid "Set up hotspot"
+msgstr "រៀបចំ​ហតស្ប៉ត"
+
+#: ../plugins/cellular//PageChooseCarriers.qml:28
+#: ../plugins/cellular//Components//MultiSim.qml:68
+msgid "Carriers"
+msgstr "ក្រុមហ៊ុន​បញ្ជូន"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:34
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:12
+msgid "Battery"
+msgstr "ថ្ម"
+
+#. TRANSLATORS: %1 is the number of seconds
+#: ../plugins/battery//PageComponent.qml:46
+#, qt-format
+msgid "%1 second ago"
+msgid_plural "%1 seconds ago"
+msgstr[0] "%1 វិនាទី​មុន"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//PageComponent.qml:49
+#, qt-format
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "%1 នាទី​មុន"
+
+#. TRANSLATORS: %1 is the number of hours
+#: ../plugins/battery//PageComponent.qml:52
+#, qt-format
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "%1 ម៉ោង​មុន"
+
+#. TRANSLATORS: %1 is the number of days
+#: ../plugins/battery//PageComponent.qml:55
+#, qt-format
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "%1 ថ្ងៃ​មុន"
+
+#: ../plugins/battery//PageComponent.qml:85
+msgid "Charging now"
+msgstr "ឥឡូវ​កំពុង​បញ្ចូលថ្ម"
+
+#: ../plugins/battery//PageComponent.qml:90
+msgid "Last full charge"
+msgstr "បញ្ចូល​ថ្ម​​ពេញ​ចុងក្រោយ"
+
+#: ../plugins/battery//PageComponent.qml:95
+msgid "Fully charged"
+msgstr "បាន​បញ្ចូល​ថ្ម​ពេល"
+
+#: ../plugins/battery//PageComponent.qml:126
+msgid "Charge level"
+msgstr "កម្រិត​បញ្ចូល​ថ្ម"
+
+#. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
+#: ../plugins/battery//PageComponent.qml:134
+#, qt-format
+msgid "%1%"
+msgstr "%1%"
+
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
+msgid "Yesterday"
+msgstr "ម្សិលមិញ"
+
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
+msgid "Today"
+msgstr "ថ្ងៃនេះ"
+
+#: ../plugins/battery//PageComponent.qml:292
+msgid "Ways to reduce battery use:"
+msgstr "វិធី​កាត់បន្ថយ​កា​រ​ប្រើ​ថ្មី៖"
+
+#: ../plugins/battery//PageComponent.qml:296
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr "ពន្លឺ​បង្ហាញ"
+
+#: ../plugins/battery//PageComponent.qml:394
+msgid "GPS"
+msgstr "ជីភីអេស"
+
+#: ../plugins/battery//PageComponent.qml:412
+msgid "Accurate location detection requires GPS and/or Wi-Fi."
+msgstr "រក​ឃើញ​ទីតាំង​ត្រឹមត្រូវ​ទាមទារ​ជីភីអេស និង/ឬ​វ៉ាយហ្វាយ។"
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Lock the phone when it's not in use:"
+msgstr "ចាក់​សោ​ទូរស័ព្ទ​ពេល​មិន​ប្រើ៖"
+
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "ឲ្យ​ទូរស័ព្ទ​ដេក​ពេល​មិន​ប្រើ៖"
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid ""
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
+msgstr ""
+"ពេលវេលា​កាន់តែ​ខ្លី​សុវត្ថិភាព​កាន់​តែ​ខ្ពស់។ "
+"ទូរស័ព្ទ​នឹង​មិន​ចាក់​សោ​ពេល​ហៅ ឬ​ចាក់​វីដេអូ។"
+
+#: ../plugins/battery//SleepValues.qml:117
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "ទូរស័ព្ទ​នឹង​មិន​ដេក​ពេល​ហៅ ឬ​ចាក់​វីដេអូ។"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:68
+msgid "Brightness"
+msgstr "ពន្លឺ"
+
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "កែសម្រួល​ស្វ័យ​ប្រវត្តិ"
+
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr "ធ្វើឲ្យ​ការ​បង្ហាញ​ភ្លឺ ឬ​ស្រអាប់​ស្របតាម​វត្ថុ​ជុំវិញ។"
+
+#: ../plugins/background//Components//AddRemove.qml:52
+msgid "No images selected"
+msgstr "មិន​បាន​ជ្រើស​រូបភាព"
+
+#: ../plugins/background//Components//AddRemove.qml:65
+#, qt-format
+msgid "Remove %1 image"
+msgid_plural "Remove %1 images"
+msgstr[0] "លុប​រូបភាព %1"
+
+#: ../plugins/background//Components//AddRemove.qml:80
+msgid "Add an image…"
+msgstr "បន្ថែម​រូបភាព..."
+
+#: ../plugins/background//Components//AddRemove.qml:91
+msgid "Remove images…"
+msgstr "លុប​រូបភាព..."
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
 msgid "Privacy policy"
-msgstr ""
+msgstr "គោលនយោបាយ​ភាព​ឯកជន"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
 msgid "Report to Canonical:"
-msgstr ""
+msgstr "រាយការណ៍​ទៅ Canonical ៖"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
 msgid "App crashes and errors"
-msgstr ""
+msgstr "កំហុស និង​ការ​គាំង​កម្មវិធី"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
 msgid "Previous error reports"
-msgstr ""
+msgstr "របាយការណ៍​កំហុស​ពីមុន"
 
 #: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
 msgid "Includes info about what an app was doing when it failed."
-msgstr ""
+msgstr "រួមបញ្ចូល​ព័ត៌មាន​ដែល​កម្មវិធី​កំពុង​ដំណើរការ​ពេល​វា​គាំង។"
 
-#: ../plugins/cellular//PageComponent.qml:132
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr "បាន​បិទ​ហតស្ប៉ត ព្រោះ​វ៉ាយហ្វាយ​បាន​បិទ។"
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+msgid "Cellular data:"
+msgstr "ទិន្នន័យ​ចល័ត៖"
 
-#: ../plugins/cellular//PageComponent.qml:147
-msgid "Data usage statistics"
-msgstr "ស្ថិតិ​ប្រើ​ទិន្នន័យ"
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+msgid "2G only (saves battery)"
+msgstr "2G ប៉ុណ្ណោះ (សន្សំ​ថ្ម)"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+msgid "2G/3G (faster)"
+msgstr "2G/3G (លឿន​ជាង)"
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+msgid "2G/3G/4G (faster)"
+msgstr "2G/3G/4G (លឿន​ជាង)"
+
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+msgid "Data roaming"
+msgstr "ទិន្នន័យ​រ៉ូមីង"
+
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr "កែ​ឈ្មោះ​ស៊ីម"
+
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr "យល់ព្រម"
 
 #: ../plugins/cellular//Components//SingleSim.qml:58
 #: ../plugins/cellular//Components//SingleSim.qml:66
 #: ../plugins/cellular//Components//NoSim.qml:47
 msgid "Carrier"
-msgstr ""
+msgstr "ក្រុមហ៊ុន​បញ្ជូន"
 
-#: ../plugins/cellular//PageComponent.qml:180
+#: ../plugins/cellular//Components//SingleSim.qml:37
+#: ../plugins/cellular//Components//MultiSim.qml:42
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "បាន​បិទ​ហតស្ប៉ត ព្រោះ​វ៉ាយហ្វាយ​បាន​បិទ។"
+
+#: ../plugins/cellular//Components//SingleSim.qml:52
+#: ../plugins/cellular//Components//MultiSim.qml:58
+msgid "Data usage statistics"
+msgstr "ស្ថិតិ​ប្រើ​ទិន្នន័យ"
+
+#: ../plugins/cellular//Components//SingleSim.qml:72
 msgid "APN"
 msgstr "APN"
 
-#: ../plugins/cellular//Components//SimEditor.qml:77
-msgid "Edit SIM Name"
-msgstr ""
-
-#: ../plugins/cellular//Components//SimEditor.qml:200
-msgid "OK"
-msgstr ""
-
-#: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:33
-#: ../plugins/cellular//Components//CellularMultiSim.qml:76
-msgid "Cellular data:"
-msgstr ""
-
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:38
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
-msgid "2G only (saves battery)"
-msgstr ""
-
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:39
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
-msgid "2G/3G/4G (faster)"
-msgstr ""
-
-#: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:155
-msgid "Data roaming"
-msgstr ""
-
 #: ../plugins/cellular//Components//DefaultSim.qml:29
 msgid "Ask me each time"
-msgstr ""
+msgstr "សួរ​ខ្ញុំ​រាល់​ពេល"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:34
 msgid "For outgoing calls, use:"
-msgstr ""
+msgstr "សម្រាប់​ការ​ហៅ​ចេញ, ប្រើ៖"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:48
 msgid ""
 "You can change the SIM for individual calls, or for contacts in the address "
 "book."
 msgstr ""
+"អ្នក​អាច​ប្ដូរ​ស៊ីម​សម្រាប់​ការ​ហៅ​ដាច់​ដោយឡែក "
+"ឬ​សម្រាប់​ទំនាក់ទំនង​នៅ​ក្នុង​សៀវភៅ​អាសយដ្ឋាន។"
 
 #: ../plugins/cellular//Components//DefaultSim.qml:55
 msgid "For messages, use:"
-msgstr ""
+msgstr "សម្រាប់​ការ​ផ្ញើ​សារ, ប្រើ៖"
 
-#: ../plugins/background//Components//AddRemove.qml:52
-msgid "No images selected"
-msgstr ""
-
-#: ../plugins/background//Components//AddRemove.qml:65
-#, qt-format
-msgid "Remove %1 image"
-msgid_plural "Remove %1 images"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../plugins/background//Components//AddRemove.qml:80
-msgid "Add an image…"
-msgstr ""
-
-#: ../plugins/background//Components//AddRemove.qml:91
-msgid "Remove images…"
-msgstr ""
-
-#: ../src/qml/MainWindow.qml:110
-msgid "System Settings"
-msgstr "ការ​កំណត់​ប្រព័ន្ធ"
-
-#: ../src/qml/MainWindow.qml:131
+#: ../src/qml/MainWindow.qml:133
 msgid "Search"
 msgstr "ស្វែង​រក"
 
-#: ../src/qml/MainWindow.qml:150
+#: ../src/qml/MainWindow.qml:152
 msgid "Personal"
 msgstr "ផ្ទាល់​ខ្លួន"
 
-#: ../src/qml/MainWindow.qml:155
+#: ../src/qml/MainWindow.qml:157
 msgid "System"
 msgstr "ប្រព័ន្ធ"
 
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "ភ្ជាប់​វ៉ាយហ្វាយ"
+#: ../wizard/qml/Pages//80-finished.qml:22
+msgid "All done"
+msgstr "ធ្វើ​រួច​ទាំងអស់"
 
-#: ../wizard/qml/Pages//20-wifi.qml:68
-msgid "Available networks"
-msgstr "បណ្ដាញ​ដែល​អាច​ប្រើបាន"
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr "ដំណើរការ​ល្អ!"
 
-#: ../wizard/qml/Pages//30-location.qml:48
-#: ../wizard/qml/Pages//15-passwd.qml:159 ../wizard/qml/Pages//20-wifi.qml:152
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr "ទូរស័ព្ទ​របស់​អ្នក​ឥឡូវ​អាច​ប្រើ​បាន។"
+
+#: ../wizard/qml/Pages//80-finished.qml:52
+msgid "Finish"
+msgstr "បញ្ចប់"
+
+#: ../wizard/qml/Pages//terms.qml:25
+msgid "Terms & Conditions"
+msgstr "លក្ខខណ្ឌ​ប្រើប្រាស់"
+
+#: ../wizard/qml/Pages//15-passwd.qml:38
+msgid "Set lock security"
+msgstr "កំណត់​សុវត្ថិភាព​សោ"
+
+#: ../wizard/qml/Pages//15-passwd.qml:97
+msgid "Swipe"
+msgstr "រុញ"
+
+#: ../wizard/qml/Pages//15-passwd.qml:147
+msgid "Those PIN codes don't match."
+msgstr "លេខ​កូដ PIN មិន​ផ្គូផ្គង។"
+
+#: ../wizard/qml/Pages//15-passwd.qml:149
+msgid "Those passphrases don't match."
+msgstr "ឃ្លា​សម្ងាត់​ទាំងនោះ​មិន​ផ្គូផ្គង។"
+
+#: ../wizard/qml/Pages//15-passwd.qml:157
+msgid "PIN code must be at least four digits long."
+msgstr "លេខ​កូដ PIN ត្រូវតែ​មាន​ប្រវែង​យ៉ាង​ហោច​បួន​តួលេខ។"
+
+#: ../wizard/qml/Pages//15-passwd.qml:159
+msgid "Passphrase must be at least four characters long."
+msgstr "ឃ្លា​សម្ងាត់​ត្រូវតែ​មាន​យ៉ាង​ហោច​បួន​តួអក្សរ"
+
+#: ../wizard/qml/Pages//10-welcome.qml:85
+#: ../wizard/qml/Pages//15-passwd.qml:170 ../wizard/qml/Pages//20-wifi.qml:195
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//30-location.qml:79
 msgid "Continue"
 msgstr "បន្ត"
 
-#: ../wizard/qml/Pages//no-sim.qml:66 ../wizard/qml/Pages//20-wifi.qml:152
+#: ../wizard/qml/Pages//30-location.qml:60
+msgid "Use your mobile network and Wi-Fi to work out where you are"
+msgstr ""
+"ប្រើ​បណ្ដាញ​ចល័ត​របស់​អ្នក និង​វ៉ាយហ្វាយ​ដើម្បី​កំណត់​ទីតាំង​របស់​អ្នក"
+
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+#: ../wizard/qml/Pages//30-location.qml:69
+msgid ""
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
+msgstr ""
+
+#: ../wizard/qml/Pages//40-reporting.qml:22
+msgid "Bug reporting"
+msgstr "រាយការណ៍​កំហុស"
+
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
+msgstr ""
+"ទូរស័ព្ទ​របស់​អ្នក​ត្រូវ​បាន​កំណត់​ឲ្យ​រាយការណ៍​កំហុស​ដោយ​ស្វ័យប្រវត្តិ​ទៅ "
+"Canonical ។"
+
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
+msgstr "វា​អាច​ត្រូវ​បាន​បិទ​នៅ​ក្នុង​ការ​កំណត់​ប្រព័ន្ធ"
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "Add a SIM card"
+msgstr "បន្ថែម​ស៊ីម​កាត"
+
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
+msgstr "បញ្ចូល​ស៊ីម​កាត​មុន​នឹង​បន្ត។"
+
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
+msgstr "បើ​គ្មាន​វា, អ្នក​នឹង​មិន​អាច​ហៅ​ចេញ ឬ​ផ្ញើ​សារ​អត្ថបទ​បាន​ឡើយ។"
+
+#: ../wizard/qml/Pages//no-sim.qml:50 ../wizard/qml/Pages//20-wifi.qml:195
 msgid "Skip"
 msgstr "រំលង"
 
 #: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
-msgstr "សួស្តី"
+msgid "Hi!"
+msgstr "សួស្ដី!"
 
-#: ../wizard/qml/Pages//10-welcome.qml:67
-msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr "សូម​ស្វាគមន៍​មកកាន់​ទូរស័ព្ទ Ubuntu ។ តោះ​ចាប់ផ្ដើម!"
+#: ../wizard/qml/Pages//10-welcome.qml:42
+msgid "Welcome to your Ubuntu phone."
+msgstr "សូម​ស្វាគមន៍​មកកាន់​ទូរស័ព្ទ Ubuntu ។"
 
-#: ../wizard/qml/Pages//10-welcome.qml:72
-msgid "Select your language"
-msgstr "ជ្រើស​ភាសា"
+#: ../wizard/qml/Pages//10-welcome.qml:50
+msgid "Let’s get started."
+msgstr "តោះ​ចាប់ផ្ដើម។"
 
-#: ../wizard/qml/Pages//10-welcome.qml:89
-msgid "Start"
-msgstr "ចាប់ផ្ដើម"
-
-#: ../wizard/qml/Pages//terms.qml:24
-msgid "Terms & Conditions"
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi‑Fi"
 msgstr ""
 
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "Add a SIM card"
-msgstr ""
+#: ../wizard/qml/Pages//20-wifi.qml:146
+msgid "Available networks"
+msgstr "បណ្ដាញ​ដែល​អាច​ប្រើបាន"
 
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid ""
-"Please insert a SIM card before you continue. Without it, you won’t be able "
-"to make calls or use text messaging."
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:22
-msgid "All done"
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:39
-msgid "Nice work! Your phone is now ready to use. "
-msgstr ""
-
-#: ../wizard/qml/Pages//80-finished.qml:48
-msgid "Finish"
-msgstr "បញ្ចប់"
-
-#: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug Reporting"
-msgstr ""
-
-#: ../wizard/qml/Pages//30-location.qml:39
-msgid ""
-"Your phone is set up to automatically report errors to Canonical. This can "
-"be disabled in system settings."
-msgstr ""
-"ទូរស័ព្ទ​របស់​អ្នក​ត្រូវ​បាន​រៀបចំ​ ដើម្បី​ផ្ញើ​របាយការណ៍​កំហុស​​ទៅ "
-"Canonical ដោយ​ស្វ័យ​ប្រវត្តិ។ វា​អាច​ត្រូវ​បាន​បិទ​ក្នុង​ការ​កំណត់​ប្រព័ន្ធ។"
-
-#: ../wizard/qml/Pages//30-location.qml:51
-msgid "Use your mobile network and wi-fi to work out where you are."
-msgstr ""
-
-#: ../wizard/qml/Pages//30-location.qml:59
-msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-"conditions</a>."
-msgstr ""
-
-#: ../wizard/qml/Pages//15-passwd.qml:37
-msgid "Set lock security"
-msgstr "កំណត់​សុវត្ថិភាព​សោ"
-
-#: ../wizard/qml/Pages//15-passwd.qml:86
-msgid "Swipe"
-msgstr "រុញ"
-
-#: ../wizard/qml/Pages//15-passwd.qml:136
-msgid "Those passcodes don't match."
-msgstr "កូដ​សម្ងាត់​ទាំងនោះ​មិន​ផ្គូផ្គង។"
-
-#: ../wizard/qml/Pages//15-passwd.qml:138
-msgid "Those passphrases don't match."
-msgstr "ឃ្លា​សម្ងាត់​ទាំងនោះ​មិន​ផ្គូផ្គង។"
-
-#: ../wizard/qml/Pages//15-passwd.qml:146
-msgid "Passcode must be at least four digits long."
-msgstr "កូដ​សម្ងាត់​ត្រូវតែ​មាន​យ៉ាង​ហោច​បួន​តួអក្សរ"
-
-#: ../wizard/qml/Pages//15-passwd.qml:148
-msgid "Passphrase must be at least four characters long."
-msgstr "ឃ្លា​សម្ងាត់​ត្រូវតែ​មាន​យ៉ាង​ហោច​បួន​តួអក្សរ"
-
-#: ../wizard/qml/Components//Page.qml:47
+#: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "ថយ​ក្រោយ​"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:32
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:78
-msgid "network"
-msgstr "បណ្ដាញ"
+#: ../wizard/qml/Components//StackButton.qml:51
+#, qt-format
+msgid "〈  %1"
+msgstr "〈  %1"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:80
-msgid "wireless"
-msgstr "ឥត​ខ្សែ"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:82
-msgid "wifi"
-msgstr "វ៉ាយហ្វាយ"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:84
-msgid "wi-fi"
-msgstr "វ៉ាយហ្វាយ"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:10
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:18
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:38
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:44
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:62
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:68
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:86
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:102
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:108
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:118
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:134
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:140
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:148
-msgid "settings"
-msgstr "ការ​កំណត់"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:56
-msgid "time"
-msgstr "ពេល​វេលា"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:58
-msgid "date"
-msgstr "កាលបរិច្ឆេទ"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:60
-msgid "timezone"
-msgstr "តំបន់​ពេលវេលា"
+#: ../wizard/qml/Components//StackButton.qml:54
+#, qt-format
+msgid "%1  〉"
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:120
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:56
 msgid "Updates available"
 msgstr "មាន​បច្ចុប្បន្នភាព"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:112
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:60
 msgid "system"
 msgstr "ប្រព័ន្ធ"
 
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:98
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:114
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:62
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:100
 msgid "software"
 msgstr "កម្មវិធី"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:116
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:64
 msgid "update"
 msgstr "បច្ចុប្បន្នភាព"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:138
-msgid "sound"
-msgstr "សំឡេង"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:14
-msgid "security"
-msgstr "សុវត្ថិភាព"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:16
-msgid "privacy"
-msgstr "ភាព​ឯកជន"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:66
-msgid "reset"
-msgstr "កំណត់​ឡើងវិញ"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:106
-msgid "phone"
-msgstr "ទូរស័ព្ទ"
-
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:150
-msgid "Orientation Lock"
-msgstr "ចាក់សោ​ទិស"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:152
-msgid "rotation"
-msgstr "បង្វិល"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:154
-msgid "orientation"
-msgstr "ទិស"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:156
-msgid "lock"
-msgstr "ចាក់សោ"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:158
-msgid "screen"
-msgstr "អេក្រង់"
-
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:100
-msgid "notifications"
-msgstr "ការ​ជូនដំណឹង"
+#: ../po/settings.js:12
+#: ../po/settings.js:44
+#: ../po/settings.js:188
+msgid "apps"
+msgstr ""
 
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:4
-msgid "language"
-msgstr "ភាសា"
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:14
+#: ../po/settings.js:88
+#: ../po/settings.js:274
+#: ../po/settings.js:340
+msgid "automatic"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:6
-msgid "lang"
-msgstr "ភាសា"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:16
+msgid "download"
+msgstr ""
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:8
-msgid "i18n"
-msgstr "i18n"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:18
+msgid "upgrade"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:20
+msgid "click"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:20
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:30
 msgid "Flight Mode"
 msgstr "រៀប​ហោះហើរ"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:22
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:32
 msgid "flight"
 msgstr "ជើង​ហោះ​ហើរ"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:24
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:34
 msgid "plane"
 msgstr "យន្តហោះ"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:26
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:36
 msgid "offline"
 msgstr "ក្រៅ​បណ្ដាញ"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:122
-msgid "Example"
-msgstr "ឧទាហរណ៍"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:124
-msgid "example"
-msgstr "ឧទាហរណ៍"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:126
-msgid "test"
-msgstr "សាកល្បង"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:128
-msgid "sample"
-msgstr "គំរូ"
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: ../po/settings.js:30
+msgid "airplane"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:30
-msgid "cellular"
-msgstr "ចល័ត"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:22
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:46
+msgid "network"
+msgstr "បណ្ដាញ"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:34
-msgid "mobile"
-msgstr "ចល័ត"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:120
+msgid "Orientation Lock"
+msgstr "ចាក់សោ​ទិស"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:36
-msgid "gsm"
-msgstr "gsm"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:122
+msgid "rotation"
+msgstr "បង្វិល"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:132
-msgid "brightness"
-msgstr "ពន្លឺ"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:124
+msgid "orientation"
+msgstr "ទិស"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:42
-msgid "bluetooth"
-msgstr "ប៊្លូធូស"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:126
+msgid "lock"
+msgstr "ចាក់សោ"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:72
-msgid "battery"
-msgstr "ថ្ម"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:128
+msgid "screen"
+msgstr "អេក្រង់"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:74
-msgid "power"
-msgstr "ថាម​ពល"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:94
+msgid "phone"
+msgstr "ទូរស័ព្ទ"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:50
+msgid "services"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:52
+msgid "forwarding"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:54
+msgid "waiting"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:56
+msgid "call"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:58
+#: ../po/settings.js:154
+msgid "dialpad"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:60
+msgid "shortcuts"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:62
+msgid "numbers"
+msgstr ""
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:90
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:154
 msgid "appearance"
 msgstr "រូបរាង"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:92
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:156
 msgid "background"
 msgstr "ផ្ទៃ​ខាងក្រោយ"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:94
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:158
 msgid "wallpaper"
 msgstr "ផ្ទាំង​រូបភាព"
 
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:72
+msgid "art"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:74
+msgid "photo"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:76
+msgid "picture"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:78
+msgid "image"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
+msgid "language"
+msgstr "ភាសា"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:84
+#: ../po/settings.js:158
+msgid "keyboard"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:86
+msgid "spellcheck"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:90
+msgid "correct"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:92
+msgid "suggestions"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:94
+msgid "capitalization"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:96
+msgid "punctuation"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:98
+msgid "layout"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:100
+#: ../po/settings.js:336
+msgid "display"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:102
+msgid "words"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:104
+msgid "vibration"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:130
+msgid "Example"
+msgstr "ឧទាហរណ៍"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:132
+msgid "example"
+msgstr "ឧទាហរណ៍"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:134
+msgid "test"
+msgstr "សាកល្បង"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:136
+msgid "sample"
+msgstr "គំរូ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:148
+msgid "bluetooth"
+msgstr "ប៊្លូធូស"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:118
+msgid "headset"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:120
+msgid "pair"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:88
+msgid "device"
+msgstr "ឧបករណ៍"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:124
+msgid "discover"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:126
+msgid "car"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:128
+msgid "handsfree"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:48
+msgid "wireless"
+msgstr "ឥត​ខ្សែ"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:132
+#: ../po/settings.js:172
+msgid "connect"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:134
+#: ../po/settings.js:174
+msgid "disconnect"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:136
+msgid "stereo"
+msgstr ""
+
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:142
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:106
 msgid "Accessibility"
 msgstr "មធ្យោបាយ​ងាយស្រួល"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:144
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:108
 msgid "accessibility"
 msgstr "ភាព​ងាយស្រួល"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:146
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:110
 msgid "a11y"
 msgstr "a11y"
 
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:40
+msgid "sound"
+msgstr "សំឡេង"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:148
+msgid "silent"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:150
+msgid "ringtone"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:152
+msgid "vibrate"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:156
+msgid "message"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:160
+msgid "volume"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:50
+msgid "wifi"
+msgstr "វ៉ាយហ្វាយ"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:52
+msgid "wi-fi"
+msgstr "វ៉ាយហ្វាយ"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:176
+msgid "hidden"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:178
+msgid "ip"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:48
+#: ../po/settings.js:180
+#: ../po/settings.js:222
+msgid "address"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:102
+msgid "notifications"
+msgstr "ការ​ជូនដំណឹង"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:190
+msgid "authorize"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:192
+msgid "alerts"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:194
+msgid "permissions"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:196
+msgid "badges"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:198
+msgid "facebook"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:200
+msgid "twitter"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:202
+msgid "flickr"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:204
+msgid "gmail"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:86
 msgid "about"
 msgstr "អំពី"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:50
-msgid "device"
-msgstr "ឧបករណ៍"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /home/elopio/workspace/canonical/ubuntu-system-settings/bugs/fix1357605-translations/builddir/po/settings.js:52
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:90
 msgid "info"
 msgstr "ព័ត៌មាន"
 
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:216
+msgid "number"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:218
+msgid "imei"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:220
+msgid "serial"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:224
+msgid "mac"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:226
+msgid "licenses"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:228
+msgid "developer"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:232
+msgid "storage"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:234
+msgid "disk"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:236
+msgid "space"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:238
+msgid "version"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:240
+msgid "revision"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:140
+msgid "security"
+msgstr "សុវត្ថិភាព"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:142
+msgid "privacy"
+msgstr "ភាព​ឯកជន"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:250
+#: ../po/settings.js:314
+msgid "sim"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:252
+msgid "pin"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:254
+msgid "code"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:256
+msgid "password"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:258
+msgid "passphrase"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:260
+msgid "swipe"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:262
+msgid "allow"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:264
+msgid "access"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:76
+msgid "time"
+msgstr "ពេល​វេលា"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:78
+msgid "date"
+msgstr "កាលបរិច្ឆេទ"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:80
+msgid "timezone"
+msgstr "តំបន់​ពេលវេលា"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:116
+msgid "reset"
+msgstr "កំណត់​ឡើងវិញ"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:280
+msgid "erase"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:282
+msgid "factory"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:284
+msgid "clear"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:286
+msgid "restore"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:20
+msgid "cellular"
+msgstr "ចល័ត"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:24
+msgid "mobile"
+msgstr "ចល័ត"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:26
+msgid "gsm"
+msgstr "gsm"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:298
+msgid "data"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:300
+msgid "carrier"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:302
+msgid "4g"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:304
+msgid "3g"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:306
+msgid "2g"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:308
+msgid "lte"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:310
+msgid "apn"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:312
+msgid "roam"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:14
+msgid "battery"
+msgstr "ថ្ម"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:16
+msgid "power"
+msgstr "ថាម​ពល"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:322
+msgid "charge"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:324
+msgid "idle"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:328
+msgid "disable"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:330
+msgid "enable"
+msgstr ""
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:70
+msgid "brightness"
+msgstr "ពន្លឺ"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:342
+msgid "adjust"
+msgstr ""
+
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
-msgstr ""
+msgstr "មិន​អាច​បោះបង់​សំណើ​បច្ចុប្បន្ន (មិន​អាច​ទាក់ទង​សេវា)"
 
 #: ../plugins/system-update//system_update.cpp:98
 msgid "Can't pause current request (can't contact service)"
-msgstr ""
+msgstr "មិន​អាច​ផ្អាក​សំណើ​បច្ចុប្បន្ន (មិន​អាច​ទាក់ទង​សេវា)"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:251
-msgid "Incorrect passcode. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//securityprivacy.cpp:253
-msgid "Incorrect passphrase. Try again."
-msgstr ""
-
-#: ../plugins/security-privacy//securityprivacy.cpp:256
-msgid "Could not set security mode"
-msgstr ""
-
-#: ../plugins/security-privacy//securityprivacy.cpp:281
-msgid "Could not set security display hint"
-msgstr ""
-
-#: ../plugins/security-privacy//securityprivacy.cpp:294
-msgid "Authentication token manipulation error"
-msgstr ""
-
-#: ../plugins/about//click.cpp:133
+#: ../plugins/about//click.cpp:134
 msgid "Unknown title"
-msgstr ""
+msgstr "មិនស្គាល់​ចំណងជើង"
 
-#: ../push-helper/software-updates-helper.py:78
+#: ../plugins/security-privacy//securityprivacy.cpp:318
+msgid "Incorrect PIN code. Try again."
+msgstr "លេខ​កូដ PIN មិន​ត្រឹមត្រូវ។ ព្យាយាម​ម្ដងទៀត។"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:320
+msgid "Incorrect passphrase. Try again."
+msgstr "ឃ្លា​សម្ងាត់​មិន​ត្រឹមត្រូវ។ ព្យាយាម​ម្ដងទៀត។"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:323
+msgid "Could not set security mode"
+msgstr "មិន​អាច​កំណត់​របៀប​សុវត្ថិភាព"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:372
+msgid "Could not set security display hint"
+msgstr "មិន​អាច​កំណត់​តម្រុយ​ការ​បង្ហាញ​សុវត្ថិភាព"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:383
+msgid "Authentication token manipulation error"
+msgstr "កំហុស​រៀបចំ​ថូខឹន​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ"
+
+#: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
 msgstr "មាន​រូបភាព​ប្រព័ន្ធ​ដែល​បាន​ធ្វើ​បច្ចុប្បន្នភាព។"
 
-#: ../push-helper/software-updates-helper.py:79
+#: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "ប៉ះ​ដើម្បី​បើក​កម្មវិធី​ធ្វើ​បច្ចុប្បន្នភាព​ប្រព័ន្ធ។"
 
-#~ msgid "Privacy:"
-#~ msgstr "ភាព​ឯកជន​ ៖"
+#~ msgid "Remove"
+#~ msgstr "លុប​ចេញ"
 
-#~ msgid "Security:"
-#~ msgstr "សុវត្ថិភាព ៖"
+#~ msgid "settings"
+#~ msgstr "ការ​កំណត់"
 
-#~ msgid "Change passphrase"
-#~ msgstr "ផ្លាស់ប្ដូរ​ឃ្លា​សម្ងាត់"
+#~ msgid "i18n"
+#~ msgstr "i18n"
 
-#~ msgid "Change passcode"
-#~ msgstr "ប្ដូរ​ពាក្យ​សម្ងាត់"
+#~ msgid "lang"
+#~ msgstr "ភាសា"
 
-#~ msgid "System update has failed."
-#~ msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ធ្វើ​បច្ចុប្បន្នភាព​ប្រព័ន្ធ។"
+#~ msgid "Password visible"
+#~ msgstr "ពាក្យ​សម្ងាត់មើលឃើញ"
 
-#~ msgid "System update failed."
-#~ msgstr "បាន​បរាជ័យ​​ក្នុងការ​ធ្វើ​បច្ចុប្បន្នភាព​ប្រព័ន្ធ។"
+#~ msgid "Other network"
+#~ msgstr "បណ្ដាញ​ផ្សេង"
 
-#~ msgid "Please log into your Ubuntu One account."
-#~ msgstr "សូម​ចូល​គណនី Ubuntu One របស់​អ្នក។"
-
-#, qt-format
-#~ msgid "Install %1 updates…"
-#~ msgstr "ដំឡើង​បច្ចុប្បន្នភាព %1​…"
-
-#~ msgid "Credentials not found"
-#~ msgstr "រក​មិន​ឃើញ​ព័ត៌មាន​សម្ងាត់"
-
-#, qt-format
-#~ msgid "Install %1 updates"
-#~ msgstr "ដំឡើង​បច្ចុប្បន្នភាព %1"
-
-#~ msgid "Phone settings"
-#~ msgstr "ការ​កំណត់​ទូរស័ព្ទ"
-
-#~ msgid "No SIM card"
-#~ msgstr "គ្មាន​ស៊ីមកាត"
-
-#~ msgid ""
-#~ "Your phone is set up to detect your location. This can be disabled in system "
-#~ "settings."
-#~ msgstr ""
-#~ "ទូរស័ព្ទ​របស់​អ្នក​ត្រូវ​បាន​រៀបចំ​ដើម្បី​រក​ឃើញ​ទីតាំង​របស់​អ្នក។ "
-#~ "វា​អាច​ត្រូវ​បាន​បិទ​ក្នុង​ការ​កំណត់​ប្រព័ន្ធ។"
-
-#~ msgid "To use the telephone and SMS features a SIM must be installed."
-#~ msgstr "ដើម្បី​ប្រើ​ទូរស័ព្ទ និង​លក្ខណៈ​សារ SMS ស៊ីមកាត​ត្រូវតែ​បញ្ចូល។"
-
-#~ msgid ""
-#~ "Welcome to Ubuntu on your phone, brought to you by 1000’s of volunteers and "
-#~ "the good folks at Canonical."
-#~ msgstr ""
-#~ "សូម​ស្វាគមន៍​មកកាន់​ទូរស័ព្ទ Ubuntu, "
-#~ "នាំ​មក​ជូន​លោក​អ្នក​ដោយ​អ្នក​ស្ម័គ្រចិត្ត និង​អ្នក​ធ្វើការ​ប្រមាណ "
-#~ "១០០០នាក់​នៅ Canonical ។"
-
-#~ msgid "Now you can start using your Ubuntu phone."
-#~ msgstr "ឥឡូវ​អ្នក​អាច​ចាប់ផ្ដើម​ប្រើ​ទូរស័ព្ទ Ubuntu របស់​អ្នក​បាន។"
-
-#~ msgid "Install a SIM before continuing."
-#~ msgstr "បញ្ចូល​ស៊ីម មុន​នឹង​បន្ត។"
-
-#~ msgid "Setup complete"
-#~ msgstr "ការ​រៀបចំ​បាន​បញ្ចប់"
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "ភ្ជាប់​វ៉ាយហ្វាយ"

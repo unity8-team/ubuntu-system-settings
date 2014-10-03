@@ -8,10 +8,14 @@
 from __future__ import absolute_import
 
 from autopilot.matchers import Eventually
-from testtools.matchers import Contains, Equals
+from testtools.matchers import Contains, Equals, NotEquals
 
 from ubuntu_system_settings.tests import (
-    PhoneOfonoBaseTestCase, CALL_FWD_IFACE, CALL_SETTINGS_IFACE)
+    PhoneOfonoBaseTestCase,
+    PhoneSoundBaseTestCase,
+    CALL_FWD_IFACE,
+    CALL_SETTINGS_IFACE
+)
 
 
 class PhoneTestCase(PhoneOfonoBaseTestCase):
@@ -109,3 +113,17 @@ class PhoneDualSimTestCase(PhoneOfonoBaseTestCase):
             lambda: str(self.modem_1.Get(CALL_SETTINGS_IFACE,
                                          'VoiceCallWaiting')),
             Eventually(Contains('enabled')))
+
+
+class PhoneSoundTestCase(PhoneSoundBaseTestCase):
+    """Tests for Phone Page"""
+
+    def test_dialpad_sounds_switch(self):
+        """ Check that dialpad_sounds is present and clickable"""
+        snd = self.phone_page.select_single(
+            objectName="dialpadSounds")
+        prev_value = self.obj_test.GetDialpadSoundsEnabled()
+        self.system_settings.main_view.scroll_to_and_click(snd)
+        self.assertThat(
+            lambda: self.obj_test.GetDialpadSoundsEnabled(),
+            Eventually(NotEquals(prev_value)))

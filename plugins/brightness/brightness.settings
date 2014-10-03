@@ -7,7 +7,10 @@
     "priority": 1,
     "keywords": [
         "brightness",
-        "settings"
+        "display",
+        "screen",
+        "automatic",
+        "adjust"
     ],
     "has-dynamic-keywords": false,
     "has-dynamic-visibility": true,

@@ -7,115 +7,667 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ubuntu-system-settings\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-26 13:44+0200\n"
-"PO-Revision-Date: 2014-08-27 18:39+0000\n"
+"POT-Creation-Date: 2014-09-26 12:27-0400\n"
+"PO-Revision-Date: 2014-09-30 12:59+0000\n"
 "Last-Translator: Marcos Lans <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-28 06:28+0000\n"
-"X-Generator: Launchpad (build 17174)\n"
+"X-Launchpad-Export-Date: 2014-10-01 06:25+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: Galician\n"
 
-#: ../plugins/wifi//PreviousNetworks.qml:26
-#: ../plugins/wifi//PageComponent.qml:114
-msgid "Previous networks"
-msgstr "Redes anteriores"
+#: ubuntu-system-settings.desktop.in.in.h:1 ../src/qml/MainWindow.qml:112
+msgid "System Settings"
+msgstr "Axustes do sistema"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: ../plugins/wifi//PageComponent.qml:26
-#: ../plugins/battery//PageComponent.qml:327
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:2
-msgid "Wi-Fi"
-msgstr "Wifi"
+#: ubuntu-system-settings.desktop.in.in.h:2
+msgid "System;"
+msgstr "Sistema;"
 
-#: ../plugins/wifi//PageComponent.qml:120 ../plugins/wifi//OtherNetwork.qml:27
-msgid "Other network"
-msgstr "Outra rede"
+#: ubuntu-system-settings.desktop.in.in.h:3
+msgid "Preferences;Settings;"
+msgstr "Preferencias;Axustes;"
 
-#: ../plugins/wifi//OtherNetwork.qml:56
-msgid "Network name"
-msgstr "Nome da rede"
+#: ../plugins/system-update//Configuration.qml:29
+#: ../plugins/system-update//PageComponent.qml:565
+msgid "Auto download"
+msgstr "Descarga automática"
 
-#: ../plugins/wifi//OtherNetwork.qml:66
-#: ../plugins/security-privacy//PageComponent.qml:85
-msgid "Security"
-msgstr "Seguranza"
+#: ../plugins/system-update//Configuration.qml:34
+msgid "Download future updates automatically:"
+msgstr "Descargar actualizacións automaticamente:"
 
-#: ../plugins/wifi//OtherNetwork.qml:67
-#: ../plugins/security-privacy//PhoneLocking.qml:45
-#: ../plugins/bluetooth//PageComponent.qml:113
-#: ../plugins/bluetooth//PageComponent.qml:320
-#: ../plugins/bluetooth//PageComponent.qml:341
-msgid "None"
-msgstr "Ningunha"
+#: ../plugins/battery//SleepValues.qml:106
+#: ../plugins/battery//PageComponent.qml:315
+#: ../plugins/battery//PageComponent.qml:324
+#: ../plugins/wifi//NetworkDetails.qml:55
+#: ../plugins/system-update//Configuration.qml:52
+#: ../plugins/system-update//PageComponent.qml:568
+#: ../plugins/about//PageComponent.qml:162
+#: ../plugins/security-privacy//PhoneLocking.qml:78
+#: ../plugins/security-privacy//PhoneLocking.qml:87
+#: ../plugins/security-privacy//PageComponent.qml:140
+msgid "Never"
+msgstr "Nunca"
 
-#: ../plugins/wifi//OtherNetwork.qml:68
-msgid "WPA & WPA2 Personal"
-msgstr "WPA & WPA2 Persoal"
+#: ../plugins/system-update//Configuration.qml:53
+msgid "When on wi-fi"
+msgstr "Só en modo wifi"
 
-#: ../plugins/wifi//OtherNetwork.qml:69
-msgid "WEP"
-msgstr "WEP"
+#: ../plugins/system-update//Configuration.qml:54
+msgid "On any data connection"
+msgstr "Con calquera conexión de datos"
 
-#: ../plugins/wifi//OtherNetwork.qml:76 ../plugins/wifi//NetworkDetails.qml:61
-msgid "Password"
-msgstr "Contrasinal"
+#: ../plugins/system-update//Configuration.qml:55
+msgid "Data charges may apply."
+msgstr "Pódese aplicar a tarifa de datos."
 
-#: ../plugins/wifi//OtherNetwork.qml:89
-msgid "Password visible"
-msgstr "Contrasinal visíbel"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../plugins/system-update//PageComponent.qml:37
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:58
+msgid "Updates"
+msgstr "Actualizar"
 
-#: ../plugins/wifi//OtherNetwork.qml:112
+#: ../plugins/system-update//PageComponent.qml:94
+msgid "Update System"
+msgstr "Actualizar o sistema"
+
+#: ../plugins/system-update//PageComponent.qml:95
+msgid "The phone needs to restart to install the system update."
+msgstr ""
+"O teléfono precisa reiniciarse para instalar a actualización do sistema."
+
+#: ../plugins/system-update//PageComponent.qml:95
+msgid "Connect the phone to power before installing the system update."
+msgstr "Conectar o teléfono á corrente antes de actualizar o sistema."
+
+#: ../plugins/system-update//PageComponent.qml:98
+msgid "Install & Restart"
+msgstr "Instalar e reiniciar"
+
+#: ../plugins/system-update//PageComponent.qml:108
+msgid "Not Now"
+msgstr "Agora non"
+
+#: ../plugins/system-update//PageComponent.qml:114
+msgid "Install"
+msgstr "Instalar"
+
+#: ../plugins/system-update//PageComponent.qml:135
+msgid "Software is up to date"
+msgstr "O software está actualizado"
+
+#: ../plugins/system-update//PageComponent.qml:243
+msgid "Checking for updates…"
+msgstr "Buscando actualizacións..."
+
+#: ../plugins/system-update//PageComponent.qml:261
+#, qt-format
+msgid "Install %1 update…"
+msgid_plural "Install %1 updates…"
+msgstr[0] "Instalar %1 actualización…"
+msgstr[1] "Instalar %1 actualizacións…"
+
+#: ../plugins/system-update//PageComponent.qml:262
+#, qt-format
+msgid "Install %1 update"
+msgid_plural "Install %1 updates"
+msgstr[0] "Instalar %1 actualización"
+msgstr[1] "Instalar %1 actualizacións"
+
+#: ../plugins/system-update//PageComponent.qml:263
+msgid "Pause All"
+msgstr "Deter todo"
+
+#: ../plugins/system-update//PageComponent.qml:317
+msgid "Retry"
+msgstr "Reintentar"
+
+#: ../plugins/system-update//PageComponent.qml:333
+msgid "Download"
+msgstr "Descargar"
+
+#: ../plugins/system-update//PageComponent.qml:333
+msgid "Update"
+msgstr "Actualizar"
+
+#: ../plugins/system-update//PageComponent.qml:334
+msgid "Resume"
+msgstr "Continuar"
+
+#: ../plugins/system-update//PageComponent.qml:335
+msgid "Pause"
+msgstr "Deter"
+
+#: ../plugins/system-update//PageComponent.qml:393
+msgid "Installing"
+msgstr "Instalando"
+
+#: ../plugins/system-update//PageComponent.qml:426
+msgid "Installed"
+msgstr "Instalado"
+
+#: ../plugins/system-update//PageComponent.qml:452
+msgid "Version: "
+msgstr "Versión: "
+
+#: ../plugins/system-update//PageComponent.qml:474
+msgid "Sign in to Ubuntu One to receive updates for apps."
+msgstr ""
+"Inicie sesión en Ubuntu One para recibir actualizacións dos aplicativos."
+
+#: ../plugins/system-update//PageComponent.qml:483
+msgid "Sign In…"
+msgstr "Iniciar sesión..."
+
+#: ../plugins/system-update//PageComponent.qml:550
+msgid "Installing update…"
+msgstr "Instalando a actualización..."
+
+#: ../plugins/system-update//PageComponent.qml:570
+msgid "On wi-fi"
+msgstr "Con wifi"
+
+#: ../plugins/system-update//PageComponent.qml:572
+msgid "Always"
+msgstr "Sempre"
+
+#: ../plugins/system-update//PageComponent.qml:587
+msgid " bytes"
+msgstr " bytes"
+
+#: ../plugins/system-update//PageComponent.qml:590
+msgid " KiB"
+msgstr " KiB"
+
+#: ../plugins/system-update//PageComponent.qml:593
+msgid " MiB"
+msgstr " MiB"
+
+#: ../plugins/system-update//PageComponent.qml:596
+msgid " GiB"
+msgstr " GiB"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../plugins/phone//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:93
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:92
+msgid "Phone"
+msgstr "Teléfono"
+
+#: ../plugins/sound//PageComponent.qml:153
+#: ../plugins/phone//PageComponent.qml:109
+msgid "Dialpad sounds"
+msgstr "Sons do teclado de marcación"
+
+#: ../plugins/phone//ServiceInfo.qml:109
+#, qt-format
+msgid "Last called %1"
+msgstr "Última chamada %1"
+
+#: ../plugins/phone//ServiceInfo.qml:119
+msgid "Call"
+msgstr "Chamar"
+
+#: ../plugins/phone//NoSims.qml:28 ../plugins/phone//SingleSim.qml:33
+#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
+#: ../plugins/phone//CallForwarding.qml:32
+#: ../plugins/phone//CallForwarding.qml:76
+msgid "Call forwarding"
+msgstr "Redireccionamento de chamadas"
+
+#: ../plugins/phone//CallForwarding.qml:91
+msgid ""
+"Redirects phone calls to another number whenever you don't answer, or your "
+"phone is busy, turned off, or out of range."
+msgstr ""
+"Redirecciona as chamadas a outro número cando vostede non responde ou o "
+"teléfono está ocupado, apagado ou fóra de cobertura."
+
+#: ../plugins/phone//CallForwarding.qml:101
+msgid "Forward to"
+msgstr "Redireccionar a"
+
+#: ../plugins/language//RebootNecessary.qml:47
+#: ../plugins/language//DisplayLanguage.qml:98
+#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/wifi//OtherNetwork.qml:137
 #: ../plugins/time-date//TimePicker.qml:173
-#: ../plugins/security-privacy//LockSecurity.qml:279
-#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/phone//CallForwarding.qml:139
 #: ../plugins/reset//ResetAllSettings.qml:38
 #: ../plugins/reset//EraseEverything.qml:54
-#: ../plugins/phone//CallForwarding.qml:139
-#: ../plugins/language//DisplayLanguage.qml:94
-#: ../plugins/cellular//HotspotSetup.qml:85
+#: ../plugins/reset//ResetLauncherHome.qml:55
+#: ../plugins/security-privacy//LockSecurity.qml:283
+#: ../plugins/security-privacy//SimPin.qml:149
+#: ../plugins/security-privacy//SimPin.qml:266
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
 #: ../plugins/bluetooth//ProvidePinCodeDialog.qml:55
 #: ../plugins/bluetooth//ProvidePasskeyDialog.qml:54
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:49
-#: ../plugins/background//Preview.qml:97
+#: ../plugins/background//Preview.qml:101
 #: ../plugins/cellular//Components//SimEditor.qml:189
 #: ../plugins/background//Components//AddRemove.qml:42
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../plugins/wifi//OtherNetwork.qml:121
-#: ../plugins/bluetooth//PageComponent.qml:405
+#: ../plugins/time-date//TimePicker.qml:182
+#: ../plugins/phone//CallForwarding.qml:152
+#: ../plugins/security-privacy//LockSecurity.qml:304
+#: ../plugins/background//Preview.qml:108
+msgid "Set"
+msgstr "Estabelecer"
+
+#. TRANSLATORS: %1 is the name of the (network) carrier
+#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
+#, qt-format
+msgid "%1 Services"
+msgstr "Servizos %1"
+
+#: ../plugins/phone//NoSims.qml:34 ../plugins/phone//SingleSim.qml:40
+#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
+#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
+msgid "Call waiting"
+msgstr "Chamada en espera"
+
+#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
+#: ../plugins/phone//MultiSim.qml:94
+msgid "Services"
+msgstr "Servizos"
+
+#: ../plugins/phone//SingleSim.qml:29
+msgid "SIM"
+msgstr "SIM"
+
+#: ../plugins/phone//CallWaiting.qml:89
+msgid ""
+"Lets you answer or start a new call while on another call, and switch "
+"between them"
+msgstr ""
+"Permite contestar ou facer unha chamada cando está atendendo outra, tamén "
+"permite alternar entre elas."
+
+#: ../plugins/background//Preview.qml:70
+msgid "Preview"
+msgstr "Vista previa"
+
+#: ../plugins/background//Preview.qml:101
+msgid "Remove image"
+msgstr "Eliminar a imaxe"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../plugins/background//MainPage.qml:38
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:152
+msgid "Background"
+msgstr "Fondo"
+
+#: ../plugins/background//MainPage.qml:109
+msgid "Ubuntu Art"
+msgstr "Imaxes de Ubuntu"
+
+#: ../plugins/background//MainPage.qml:125
+msgid "Custom"
+msgstr "Personalizar"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../plugins/language//PageComponent.qml:34
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:2
+msgid "Language & Text"
+msgstr "Idioma e texto"
+
+#: ../plugins/language//PageComponent.qml:100
+msgid "Display language…"
+msgstr "Idioma da pantalla..."
+
+#: ../plugins/language//KeyboardLayouts.qml:26
+#: ../plugins/language//PageComponent.qml:117
+msgid "Keyboard layouts"
+msgstr "Disposicións do teclado"
+
+#: ../plugins/language//SpellChecking.qml:27
+#: ../plugins/language//SpellChecking.qml:36
+#: ../plugins/language//PageComponent.qml:132
+#: ../plugins/language//PageComponent.qml:142
+msgid "Spell checking"
+msgstr "Revisión ortográfica"
+
+#: ../plugins/language//PageComponent.qml:152
+msgid "Auto correction"
+msgstr "Corrección automática"
+
+#: ../plugins/language//PageComponent.qml:162
+msgid "Word suggestions"
+msgstr "Suxestións de palabras"
+
+#: ../plugins/language//PageComponent.qml:175
+msgid "Auto capitalization"
+msgstr "Uso automático das maiúsculas"
+
+#: ../plugins/language//PageComponent.qml:185
+msgid "Turns on Shift to capitalize the first letter of each sentence."
+msgstr "Usar maiúsculas na primeira letra de cada frase."
+
+#: ../plugins/language//PageComponent.qml:192
+msgid "Auto punctuation"
+msgstr "Puntuación automática"
+
+#: ../plugins/language//PageComponent.qml:202
+msgid ""
+"Adds a period, and any missing quotes or brackets, when you tap Space twice."
+msgstr ""
+"Ao tocar Espazo dúas veces, engade un punto e as comiñas ou parénteses que "
+"falten."
+
+#: ../plugins/language//PageComponent.qml:209
+#: ../plugins/sound//PageComponent.qml:196
+msgid "Keyboard sound"
+msgstr "Son do teclado"
+
+#: ../plugins/language//PageComponent.qml:219
+msgid "Keyboard vibration"
+msgstr "Vibración do teclado"
+
+#: ../plugins/language//SpellChecking.qml:53
+msgid "Current spelling languages:"
+msgstr "Ortografía dos idiomas actuais:"
+
+#: ../plugins/language//SpellChecking.qml:54
+msgid "All languages available:"
+msgstr "Idiomas dispoñíbeis:"
+
+#: ../plugins/language//KeyboardLayouts.qml:39
+msgid "Current layouts:"
+msgstr "Disposicións actuais:"
+
+#: ../plugins/language//KeyboardLayouts.qml:40
+msgid "All layouts available:"
+msgstr "Disposicións dispoñíbeis:"
+
+#: ../plugins/language//DisplayLanguage.qml:36
+msgid "Display language"
+msgstr "Idioma da pantalla"
+
+#: ../plugins/language//DisplayLanguage.qml:118
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: ../plugins/language//RebootNecessary.qml:34
+#: ../plugins/reset//ResetLauncherHome.qml:59
+msgid "The phone needs to restart for changes to take effect."
+msgstr "Precisa reiniciar o teléfono para que os cambios teñan efecto."
+
+#: ../plugins/language//RebootNecessary.qml:38
+msgid "Restart Now"
+msgstr "Reiniciar agora"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:363
+#: ../plugins/bluetooth//PageComponent.qml:32
+#: ../plugins/bluetooth//PageComponent.qml:147
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:146
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../plugins/bluetooth//PageComponent.qml:82
+msgid "Connected"
+msgstr "Conectado"
+
+#: ../plugins/bluetooth//PageComponent.qml:83
+msgid "Connecting…"
+msgstr "Conectando…"
+
+#: ../plugins/bluetooth//PageComponent.qml:84
+msgid "Disconnecting…"
+msgstr "Desconectando..."
+
+#: ../plugins/bluetooth//PageComponent.qml:85
+msgid "Disconnected"
+msgstr "Desconectado"
+
+#: ../plugins/bluetooth//PageComponent.qml:86
+msgid "Unknown"
+msgstr "Descoñecida"
+
+#: ../plugins/bluetooth//PageComponent.qml:92
+msgid "Computer"
+msgstr "Computador"
+
+#: ../plugins/bluetooth//PageComponent.qml:94
+msgid "Modem"
+msgstr "Módem"
+
+#: ../plugins/bluetooth//PageComponent.qml:95 ../src/qml/MainWindow.qml:147
+msgid "Network"
+msgstr "Rede"
+
+#: ../plugins/bluetooth//PageComponent.qml:96
+msgid "Headset"
+msgstr "Auriculares con micro"
+
+#: ../plugins/bluetooth//PageComponent.qml:97
+msgid "Headphones"
+msgstr "Auriculares"
+
+#: ../plugins/bluetooth//PageComponent.qml:98
+msgid "Video"
+msgstr "Vídeo"
+
+#: ../plugins/bluetooth//PageComponent.qml:99
+msgid "Other Audio"
+msgstr "Outro son"
+
+#: ../plugins/bluetooth//PageComponent.qml:100
+msgid "Joypad"
+msgstr "Joypad"
+
+#: ../plugins/bluetooth//PageComponent.qml:101
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: ../plugins/bluetooth//PageComponent.qml:102
+msgid "Tablet"
+msgstr "Tableta"
+
+#: ../plugins/bluetooth//PageComponent.qml:103
+msgid "Mouse"
+msgstr "Rato"
+
+#: ../plugins/bluetooth//PageComponent.qml:104
+msgid "Printer"
+msgstr "Impresora"
+
+#: ../plugins/security-privacy//AppAccess.qml:41
+#: ../plugins/bluetooth//PageComponent.qml:105
+msgid "Camera"
+msgstr "Cámara"
+
+#: ../plugins/bluetooth//PageComponent.qml:106
+msgid "Other"
+msgstr "Outro"
+
+#: ../plugins/bluetooth//PageComponent.qml:112
+msgid "Excellent"
+msgstr "Excelente"
+
+#: ../plugins/bluetooth//PageComponent.qml:113
+msgid "Good"
+msgstr "Bo"
+
+#: ../plugins/bluetooth//PageComponent.qml:114
+msgid "Fair"
+msgstr "Aceptábel"
+
+#: ../plugins/bluetooth//PageComponent.qml:115
+msgid "Poor"
+msgstr "Malo"
+
+#: ../plugins/wifi//OtherNetwork.qml:79
+#: ../plugins/bluetooth//PageComponent.qml:116
+#: ../plugins/bluetooth//PageComponent.qml:323
+#: ../plugins/bluetooth//PageComponent.qml:344
+msgid "None"
+msgstr "Ningunha"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Discoverable"
+msgstr "Visíbel"
+
+#: ../plugins/bluetooth//PageComponent.qml:182
+msgid "Not discoverable"
+msgstr "Non visíbel"
+
+#: ../plugins/bluetooth//PageComponent.qml:213
+msgid "Connected devices:"
+msgstr "Dispositivos conectados:"
+
+#: ../plugins/bluetooth//PageComponent.qml:250
+msgid "Connect another device:"
+msgstr "Conectar outro dispositivo:"
+
+#: ../plugins/bluetooth//PageComponent.qml:250
+msgid "Connect a device:"
+msgstr "Conectar un dispositivo:"
+
+#: ../plugins/bluetooth//PageComponent.qml:283
+msgid "None detected"
+msgstr "Non se detectou ningún"
+
+#: ../plugins/bluetooth//PageComponent.qml:291
+#: ../plugins/bluetooth//PageComponent.qml:394
+msgid "Connect automatically when detected:"
+msgstr "Conectar automaticamente tras a detección:"
+
+#: ../plugins/wifi//NetworkDetails.qml:43
+#: ../plugins/bluetooth//PageComponent.qml:343
+msgid "Name"
+msgstr "Nome"
+
+#: ../plugins/bluetooth//PageComponent.qml:361
+msgid "Type"
+msgstr "Tipo"
+
+#: ../plugins/bluetooth//PageComponent.qml:385
+msgid "Status"
+msgstr "Estado"
+
+#: ../plugins/bluetooth//PageComponent.qml:389
+msgid "Signal Strength"
+msgstr "Forza do sinal"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:42
+#: ../plugins/bluetooth//PageComponent.qml:408
+msgid "Disconnect"
+msgstr "Desconectar"
+
+#: ../plugins/wifi//OtherNetwork.qml:146
+#: ../plugins/bluetooth//PageComponent.qml:408
 msgid "Connect"
 msgstr "Conectar"
+
+#: ../plugins/bluetooth//PageComponent.qml:426
+msgid "Forget this device"
+msgstr "Esquecer este dispositivo"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
+msgid "Bluetooth Pairing Request"
+msgstr "Petición bluetooth de emparellamento"
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
+#, qt-format
+msgid "PIN for '%1'"
+msgstr "PIN de «%1»"
+
+#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
+#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
+msgid "Pair"
+msgstr "Emparellar"
+
+#. TRANSLATORS: %1 is the name of the bluetooth device being paired
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
+#, qt-format
+msgid "Please confirm that the PIN displayed on '%1' matches this one"
+msgstr "Confirme que o PIN mostrado en «%1» coincide con este"
+
+#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
+msgid "Confirm PIN"
+msgstr "Confirme o PIN"
+
+#: ../plugins/sound//SilentModeWarning.qml:31
+msgid "The phone is in Silent Mode."
+msgstr "O móbil está en modo silencioso."
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../plugins/sound//PageComponent.qml:37
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:38
+msgid "Sound"
+msgstr "Son"
+
+#: ../plugins/sound//PageComponent.qml:76
+msgid "Silent Mode"
+msgstr "Modo silencioso"
+
+#: ../plugins/sound//PageComponent.qml:80
+msgid "Ringer:"
+msgstr "Timbre:"
+
+#: ../plugins/sound//PageComponent.qml:112
+msgid "Phone calls:"
+msgstr "Chamadas de teléfono:"
+
+#: ../plugins/sound//PageComponent.qml:116
+#: ../plugins/sound//PageComponent.qml:122
+msgid "Ringtone"
+msgstr "Son das chamadas"
+
+#: ../plugins/sound//PageComponent.qml:135
+msgid "Vibrate when ringing"
+msgstr "Vibrar e soar"
+
+#: ../plugins/sound//PageComponent.qml:144
+#: ../plugins/sound//PageComponent.qml:188
+msgid "Vibrate in Silent Mode"
+msgstr "Vibrar en modo silencioso"
+
+#: ../plugins/sound//PageComponent.qml:157
+msgid "Messages:"
+msgstr "Mensaxes:"
+
+#: ../plugins/sound//PageComponent.qml:161
+#: ../plugins/sound//PageComponent.qml:167
+msgid "Message received"
+msgstr "Ao recibir unha mensaxe"
+
+#: ../plugins/sound//PageComponent.qml:179
+msgid "Vibrate with message sound"
+msgstr "Vibrar co son das mensaxes"
+
+#: ../plugins/sound//PageComponent.qml:192
+msgid "Other sounds:"
+msgstr "Outros sons:"
+
+#: ../plugins/sound//PageComponent.qml:210
+msgid "Lock sound"
+msgstr "Son do bloqueo"
+
+#: ../plugins/sound//SoundsList.qml:60
+msgid "Stop playing"
+msgstr "Parar a reprodución"
 
 #: ../plugins/wifi//NetworkDetails.qml:36
 msgid "Network details"
 msgstr "Información da rede"
 
-#: ../plugins/wifi//NetworkDetails.qml:43
-#: ../plugins/bluetooth//PageComponent.qml:340
-msgid "Name"
-msgstr "Nome"
-
 #: ../plugins/wifi//NetworkDetails.qml:51
 msgid "Last connected"
 msgstr "Última conexión"
 
-#: ../plugins/wifi//NetworkDetails.qml:55
-#: ../plugins/system-update//PageComponent.qml:519
-#: ../plugins/system-update//Configuration.qml:53
-#: ../plugins/security-privacy//PhoneLocking.qml:78
-#: ../plugins/security-privacy//PhoneLocking.qml:87
-#: ../plugins/security-privacy//PageComponent.qml:99
-#: ../plugins/battery//SleepValues.qml:106
-#: ../plugins/battery//PageComponent.qml:309
-#: ../plugins/battery//PageComponent.qml:318
-#: ../plugins/about//PageComponent.qml:149
-msgid "Never"
-msgstr "Nunca"
+#: ../plugins/wifi//OtherNetwork.qml:88 ../plugins/wifi//NetworkDetails.qml:61
+msgid "Password"
+msgstr "Contrasinal"
 
 #: ../plugins/wifi//NetworkDetails.qml:73
 msgid "Show password"
@@ -124,6 +676,833 @@ msgstr "Mostrar o contrasinal"
 #: ../plugins/wifi//NetworkDetails.qml:83
 msgid "Forget network"
 msgstr "Esquecer a rede"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../plugins/battery//PageComponent.qml:333
+#: ../plugins/wifi//PageComponent.qml:26
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:44
+msgid "Wi-Fi"
+msgstr "Wifi"
+
+#: ../plugins/wifi//PreviousNetworks.qml:26
+#: ../plugins/wifi//PageComponent.qml:129
+msgid "Previous networks"
+msgstr "Redes anteriores"
+
+#: ../plugins/wifi//PageComponent.qml:138
+msgid "Connect to hidden network…"
+msgstr "Conectar a unha rede oculta..."
+
+#: ../plugins/wifi//OtherNetwork.qml:96
+msgid "Connect to Hidden Network"
+msgstr "Conectar a unha rede oculta"
+
+#: ../plugins/wifi//OtherNetwork.qml:65
+msgid "Network name"
+msgstr "Nome da rede"
+
+#: ../plugins/wifi//OtherNetwork.qml:78
+#: ../plugins/security-privacy//PageComponent.qml:126
+msgid "Security"
+msgstr "Seguranza"
+
+#: ../plugins/wifi//OtherNetwork.qml:80
+msgid "WPA & WPA2 Personal"
+msgstr "WPA & WPA2 Persoal"
+
+#: ../plugins/wifi//OtherNetwork.qml:81
+msgid "WEP"
+msgstr "WEP"
+
+#: ../plugins/wifi//RemoveBackground.qml:28
+msgid "Clear"
+msgstr "Eliminar"
+
+#: ../plugins/wifi//Common.qml:36
+msgid "Unknown error"
+msgstr "Erro descoñecido"
+
+#: ../plugins/wifi//Common.qml:38
+msgid "No reason given"
+msgstr "Non se deu ningunha razón"
+
+#: ../plugins/wifi//Common.qml:40
+msgid "Device is now managed"
+msgstr "O dispositivo agora está xestionado"
+
+#: ../plugins/wifi//Common.qml:42
+msgid "Device is now unmanaged"
+msgstr "Dispositivo non xestionado"
+
+#: ../plugins/wifi//Common.qml:44
+msgid "The device could not be readied for configuration"
+msgstr "Non foi posíbel ler o dispositivo para configuralo"
+
+#: ../plugins/wifi//Common.qml:46
+msgid ""
+"IP configuration could not be reserved (no available address, timeout, etc.)"
+msgstr ""
+"Non foi posíbel reservar a configuración de IP (enderezo non dispoñíbel, "
+"tempo de espera esgotado, etc)"
+
+#: ../plugins/wifi//Common.qml:48
+msgid "The IP configuration is no longer valid"
+msgstr "A configuración IP xa non é válida"
+
+#: ../plugins/wifi//Common.qml:50
+msgid "Your authentication details were incorrect"
+msgstr "Os detalles da autenticación son incorrectos"
+
+#: ../plugins/wifi//Common.qml:52
+msgid "802.1X supplicant disconnected"
+msgstr "802.1X supplicant desconectado"
+
+#: ../plugins/wifi//Common.qml:54
+msgid "802.1X supplicant configuration failed"
+msgstr "Fallou a configuación do 802.1X supplicant"
+
+#: ../plugins/wifi//Common.qml:56
+msgid "802.1X supplicant failed"
+msgstr "Fallou o 802.1X supplicant"
+
+#: ../plugins/wifi//Common.qml:58
+msgid "802.1X supplicant took too long to authenticate"
+msgstr "O 802.1X supplicant botou demasiado tempo para autenticarse"
+
+#: ../plugins/wifi//Common.qml:60
+msgid "DHCP client failed to start"
+msgstr "Produciuse un erro ao iniciar o cliente DHCP"
+
+#: ../plugins/wifi//Common.qml:62
+msgid "DHCP client error"
+msgstr "Erro no cliente DHCP"
+
+#: ../plugins/wifi//Common.qml:64
+msgid "DHCP client failed"
+msgstr "O cliente DHCP fallou"
+
+#: ../plugins/wifi//Common.qml:66
+msgid "Shared connection service failed to start"
+msgstr "Produciuse un erro ao iniciar o servizo de conexión compartida"
+
+#: ../plugins/wifi//Common.qml:68
+msgid "Shared connection service failed"
+msgstr "O servizo de conexión compartida fallou"
+
+#: ../plugins/wifi//Common.qml:70
+msgid "Necessary firmware for the device may be missing"
+msgstr "É posíbel que falte o firmware necesario para o dispositivo"
+
+#: ../plugins/wifi//Common.qml:72
+msgid "The device was removed"
+msgstr "Retirouse o dispositivo"
+
+#: ../plugins/wifi//Common.qml:74
+msgid "NetworkManager went to sleep"
+msgstr "O NetworkManager suspendeuse"
+
+#: ../plugins/wifi//Common.qml:76
+msgid "The device's active connection disappeared"
+msgstr "A conexión de rede activa do dispositivo desapareceu"
+
+#: ../plugins/wifi//Common.qml:78
+msgid "Device disconnected by user or client"
+msgstr "Dispositivo desconectado polo usuario ou cliente"
+
+#: ../plugins/wifi//Common.qml:80
+msgid "The device's existing connection was assumed"
+msgstr "A conexión existente do dispositivo foi asumida"
+
+#: ../plugins/wifi//Common.qml:82
+msgid "The supplicant is now available"
+msgstr "O «supplicant» está agora dispoñíbel"
+
+#: ../plugins/wifi//Common.qml:84
+msgid "The modem could not be found"
+msgstr "Non foi posíbel atopar o módem"
+
+#: ../plugins/wifi//Common.qml:86
+msgid "The Bluetooth connection failed or timed out"
+msgstr "Fallou a conexión de Bluetooth ou superouse o tempo máximo de espera"
+
+#: ../plugins/wifi//Common.qml:88
+msgid "A dependency of the connection failed"
+msgstr "Fallou unha dependencia da conexión"
+
+#: ../plugins/wifi//Common.qml:90
+msgid "ModemManager is unavailable"
+msgstr "O ModemManager non está dispoñíbel"
+
+#: ../plugins/wifi//Common.qml:92
+msgid "The Wi-Fi network could not be found"
+msgstr "Non foi posíbel atopar a rede Wi-Fi"
+
+#: ../plugins/wifi//Common.qml:94
+msgid "A secondary connection of the base connection failed"
+msgstr "Fallou a conexión secundaria da conexión base"
+
+#: ../plugins/wifi//NetworkDetailsBrief.qml:58
+msgid "IP address"
+msgstr "Enderezo IP"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../plugins/notifications//PageComponent.qml:29
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:98
+msgid "Notifications"
+msgstr "Notificacións"
+
+#: ../plugins/notifications//PageComponent.qml:40
+msgid ""
+"Selected apps can alert you using notification bubbles, sounds, vibrations, "
+"and the Notification Center."
+msgstr ""
+"Os aplicativos seleccionados enviaranlle avisos mediante burbullas, sons, "
+"vibracións ou o Centro de Notificacións."
+
+#: ../plugins/about//License.qml:30
+msgid "Sorry, this license could not be displayed."
+msgstr "Sentímolo pero non foi posíbel mostrar esta licenza."
+
+#: ../plugins/about//PageComponent.qml:139 ../plugins/about//Storage.qml:33
+msgid "Storage"
+msgstr "Almacenamento"
+
+#: ../plugins/about//Storage.qml:87
+msgid "Used by Ubuntu"
+msgstr "Usado por Ubuntu"
+
+#: ../plugins/about//Storage.qml:88
+msgid "Videos"
+msgstr "Vídeos"
+
+#: ../plugins/about//Storage.qml:89
+msgid "Audio"
+msgstr "Son"
+
+#: ../plugins/about//Storage.qml:90
+msgid "Pictures"
+msgstr "Imaxes"
+
+#: ../plugins/about//Storage.qml:91
+msgid "Other files"
+msgstr "Outros ficheiros"
+
+#: ../plugins/about//Storage.qml:92
+msgid "Used by apps"
+msgstr "Usado polos  aplicativos"
+
+#: ../plugins/about//Storage.qml:142
+msgid "Total storage"
+msgstr "Almacenamento total"
+
+#: ../plugins/about//Storage.qml:154
+msgid "Free space"
+msgstr "Espazo libre"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By name"
+msgstr "Polo nome"
+
+#: ../plugins/about//Storage.qml:174
+msgid "By size"
+msgstr "Polo tamaño"
+
+#: ../plugins/battery//PageComponent.qml:131
+#: ../plugins/battery//PageComponent.qml:287
+#: ../plugins/cellular//PageChooseCarriers.qml:49
+#: ../plugins/cellular//PageChooseCarriers.qml:65
+#: ../plugins/about//Storage.qml:204
+#: ../plugins/cellular//Components//SingleSim.qml:62
+#: ../plugins/cellular//Components//NoSim.qml:48
+msgid "N/A"
+msgstr "N/D"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../plugins/about//PageComponent.qml:34
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:84
+msgid "About this phone"
+msgstr "Sobre este teléfono"
+
+#: ../plugins/about//PageComponent.qml:105
+msgid "Serial"
+msgstr "Serie"
+
+#: ../plugins/about//PageComponent.qml:120
+msgid "Wi-Fi address"
+msgstr "Enderezo wifi"
+
+#: ../plugins/about//PageComponent.qml:128
+msgid "Bluetooth address"
+msgstr "Enderezo bluetooth"
+
+#: ../plugins/about//PageComponent.qml:144
+#, qt-format
+msgid "%1 free"
+msgstr "%1 libre"
+
+#: ../plugins/about//PageComponent.qml:146
+msgid "Software:"
+msgstr "Software:"
+
+#: ../plugins/about//PageComponent.qml:151
+msgid "OS"
+msgstr "SO"
+
+#: ../plugins/about//PageComponent.qml:160
+msgid "Last updated"
+msgstr "Última actualización"
+
+#: ../plugins/about//PageComponent.qml:168
+msgid "Check for updates"
+msgstr "Buscar actualizacións"
+
+#: ../plugins/about//PageComponent.qml:177
+msgid "Legal:"
+msgstr "Legal:"
+
+#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:182
+msgid "Software licenses"
+msgstr "Licenzas do software"
+
+#: ../plugins/about//PageComponent.qml:190
+msgid "Regulatory info"
+msgstr "Información regulamentaria"
+
+#: ../plugins/about//PageComponent.qml:198
+msgid "Developer mode"
+msgstr "Modo desenvolvedor"
+
+#: ../plugins/about//Version.qml:36
+msgid "OS Build Details"
+msgstr "Información da versión do SO"
+
+#: ../plugins/about//Version.qml:61
+msgid "OS build number"
+msgstr "Número da versión do SO"
+
+#: ../plugins/about//Version.qml:67
+msgid "Ubuntu Image part"
+msgstr "Parte da Imaxe de Ubuntu"
+
+#: ../plugins/about//Version.qml:75
+msgid "Ubuntu build description"
+msgstr "Descrición da versión de Ubuntu"
+
+#: ../plugins/about//Version.qml:81
+msgid "Device Image part"
+msgstr "Parte da Imaxe do dispositivo"
+
+#: ../plugins/about//Version.qml:88
+msgid "Device build description"
+msgstr "Descrición da versión do dispositivo"
+
+#: ../plugins/about//Version.qml:95
+msgid "Customization Image part"
+msgstr "Parte da personalización da imaxe"
+
+#: ../plugins/about//PhoneNumber.qml:36
+msgid "Phone number"
+msgstr "Número do teléfono"
+
+#: ../plugins/about//PhoneNumbers.qml:31
+msgid "Phone number:"
+msgstr "Número do teléfono:"
+
+#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:88
+msgid "Developer Mode"
+msgstr "Modo desenvolvedor"
+
+#: ../plugins/about//DevMode.qml:82
+msgid ""
+"In Developer Mode, anyone can access, change or delete anything on this "
+"phone by connecting it to another device."
+msgstr ""
+"No modo Desenvolvedor, calquera persoa pode acceder, cambiar ou eliminar "
+"cousas deste teléfono conectándoo a outro dispositivo."
+
+#: ../plugins/about//DevMode.qml:108
+msgid "You need a PIN code or passphrase set to use Developer Mode."
+msgstr ""
+"Precisa un código PIN ou unha frase secreta para usar o modo Desenvolvedor."
+
+#: ../plugins/about//DevMode.qml:114
+#: ../plugins/security-privacy//LockSecurity.qml:32
+#: ../plugins/security-privacy//PhoneLocking.qml:49
+msgid "Lock security"
+msgstr "Seguranza do bloqueo"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../plugins/security-privacy//PageComponent.qml:37
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:138
+msgid "Security & Privacy"
+msgstr "Seguranza e privacidade"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:100
+#: ../plugins/security-privacy//PageComponent.qml:218
+msgid "Phone and Internet"
+msgstr "Teléfono e internet"
+
+#: ../plugins/security-privacy//Dash.qml:46
+#: ../plugins/security-privacy//PageComponent.qml:102
+#: ../plugins/security-privacy//PageComponent.qml:219
+msgid "Phone only"
+msgstr "Só do teléfono"
+
+#: ../plugins/security-privacy//PageComponent.qml:131
+msgid "Lock phone"
+msgstr "Bloquear o teléfono"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/battery//SleepValues.qml:83
+#: ../plugins/battery//SleepValues.qml:87
+#: ../plugins/battery//SleepValues.qml:91
+#: ../plugins/battery//SleepValues.qml:95
+#: ../plugins/battery//SleepValues.qml:99
+#: ../plugins/battery//SleepValues.qml:103
+#: ../plugins/battery//PageComponent.qml:312
+#: ../plugins/battery//PageComponent.qml:321
+#: ../plugins/security-privacy//PageComponent.qml:137
+#: ../plugins/security-privacy//PageComponent.qml:146
+#, qt-format
+msgid "After %1 minute"
+msgid_plural "After %1 minutes"
+msgstr[0] "Despois de %1 minuto"
+msgstr[1] "Despois de %1 minutos"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+#: ../plugins/security-privacy//PageComponent.qml:149
+msgid "Manually"
+msgstr "Manualmente"
+
+#: ../plugins/security-privacy//SimPin.qml:34
+#: ../plugins/security-privacy//SimPin.qml:322
+#: ../plugins/security-privacy//PageComponent.qml:158
+msgid "SIM PIN"
+msgstr "PIN da SIM"
+
+#: ../plugins/security-privacy//PageComponent.qml:161
+#: ../plugins/security-privacy//PageComponent.qml:244
+msgid "On"
+msgstr "Activado"
+
+#: ../plugins/security-privacy//PageComponent.qml:165
+#: ../plugins/security-privacy//PageComponent.qml:244
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:30
+#: ../plugins/cellular//Components//CellularSingleSim.qml:50
+msgid "Off"
+msgstr "Desactivado"
+
+#: ../plugins/security-privacy//PageComponent.qml:172
+msgid "Encryption"
+msgstr "Cifrado"
+
+#: ../plugins/security-privacy//PageComponent.qml:181
+msgid ""
+"Encryption protects against access to phone data when the phone is connected "
+"to a PC or other device."
+msgstr ""
+"O cifrado protéxeo contra o acceso aos datos do móbil cando o teléfono está "
+"conectado ao PC ou a outro dispositivo."
+
+#: ../plugins/security-privacy//PageComponent.qml:185
+msgid "Privacy"
+msgstr "Privacidade"
+
+#: ../plugins/security-privacy//PageComponent.qml:188
+msgid "Stats on welcome screen"
+msgstr "Estadísticas na pantalla de inicio"
+
+#: ../plugins/security-privacy//PageComponent.qml:201
+msgid "Messages on welcome screen"
+msgstr "Mensaxes na pantalla de inicio"
+
+#: ../plugins/security-privacy//Dash.qml:29
+#: ../plugins/security-privacy//PageComponent.qml:216
+msgid "Dash search"
+msgstr "Buscas no Panel"
+
+#: ../plugins/security-privacy//PageComponent.qml:235
+msgid "Location access"
+msgstr "Acceso á localización"
+
+#: ../plugins/security-privacy//AppAccess.qml:28
+#: ../plugins/security-privacy//PageComponent.qml:253
+msgid "Other app access"
+msgstr "Outros accesos de aplicativos"
+
+#: ../plugins/security-privacy//PageComponent.qml:258
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
+msgid "Diagnostics"
+msgstr "Diagnósticos"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are to be sent by the system.
+#: ../plugins/security-privacy//PageComponent.qml:263
+msgid "Sent"
+msgstr "Enviar"
+
+#. TRANSLATORS: This string is shown when crash
+#. reports are not to be sent by the system
+#: ../plugins/security-privacy//PageComponent.qml:266
+msgid "Not sent"
+msgstr "Non enviar"
+
+#: ../plugins/security-privacy//Dash.qml:45
+msgid "Return results from:"
+msgstr "Obter resultados de:"
+
+#: ../plugins/security-privacy//Location.qml:31
+#: ../wizard/qml/Pages//30-location.qml:25
+msgid "Location"
+msgstr "Localización"
+
+#: ../plugins/security-privacy//Location.qml:49
+msgid "Location detection"
+msgstr "Detección da localización"
+
+#: ../plugins/security-privacy//Location.qml:71
+msgid ""
+"Uses GPS to detect your rough location. When off, GPS turns off to save "
+"battery."
+msgstr ""
+"Usa GPS para detectar a súa localización aproximada. Cando está apagado o "
+"GPS desactívase para aforrar batería."
+
+#: ../plugins/security-privacy//Location.qml:73
+msgid ""
+"Uses wi-fi and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Usa wifi e GPS para detectar a localización aproximada. Apagando a detección "
+"da localización aforrará batería."
+
+#: ../plugins/security-privacy//Location.qml:75
+msgid ""
+"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
+"off location detection saves battery."
+msgstr ""
+"Usa wifi (actualmente apagada) e GPS para detectar a súa situación "
+"aproximada. Apagando a detección da localización aforrará batería."
+
+#: ../plugins/security-privacy//Location.qml:77
+msgid ""
+"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
+"Turning off location detection saves battery."
+msgstr ""
+"Usa wifi, localización por antenas de telefonía e GPS para detectar a súa "
+"situación aproximada. Apagando a detección da localización aforrará batería."
+
+#: ../plugins/security-privacy//Location.qml:79
+msgid ""
+"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
+"to detect your rough location. Turning off location detection saves battery."
+msgstr ""
+"Usa wifi, localización por antenas de telefonía (actualmente sen conexión "
+"móbil) e GPS para detectar a súa situación aproximada. Apagando a detección "
+"da localización aforrará batería."
+
+#: ../plugins/security-privacy//Location.qml:81
+msgid ""
+"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
+"rough location. Turning off location detection saves battery."
+msgstr ""
+"Usa wifi (actualmente apagada), localización por antenas de telefonía e GPS "
+"para detectar a súa situación aproximada. Apagando a detección da "
+"localización aforrará batería."
+
+#: ../plugins/security-privacy//Location.qml:83
+msgid ""
+"Uses wi-fi (currently off), cell tower locations (no current cellular "
+"connection), and GPS to detect your rough location. Turning off location "
+"detection saves battery."
+msgstr ""
+"Usa wifi (actualmente apagada), localización por antenas de telefonía (sen "
+"conexión móbil actualmente) e GPS para detectar a súa situación aproximada. "
+"Apagando a detección da localización aforrará batería."
+
+#: ../plugins/security-privacy//Location.qml:90
+msgid "Allow access to location:"
+msgstr "Permitir o acceso á localización:"
+
+#: ../plugins/security-privacy//SimPin.qml:44
+msgid "Change SIM PIN"
+msgstr "Cambiar o PIN da SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:47
+#, qt-format
+msgid "Incorrect PIN. %1 attempt remaining."
+msgid_plural "Incorrect PIN. %1 attempts remaining."
+msgstr[0] "PIN incorrecto. Quédalle %1 intento."
+msgstr[1] "PIN incorrecto. Quédanlle %1 intentos."
+
+#: ../plugins/security-privacy//SimPin.qml:81
+msgid "Current PIN:"
+msgstr "PIN actual:"
+
+#: ../plugins/security-privacy//SimPin.qml:93
+#, qt-format
+msgid "%1 attempt allowed."
+msgid_plural "%1 attempts allowed."
+msgstr[0] "Permítese %1 intento."
+msgstr[1] "Permítense %1 intentos."
+
+#: ../plugins/security-privacy//SimPin.qml:107
+msgid "Choose new PIN:"
+msgstr "Escolla un novo PIN:"
+
+#: ../plugins/security-privacy//SimPin.qml:118
+msgid "Confirm new PIN:"
+msgstr "Confirme o novo PIN:"
+
+#: ../plugins/security-privacy//SimPin.qml:137
+msgid "PINs don't match. Try again."
+msgstr "Os PIN non coinciden. Ténteo de novo."
+
+#: ../plugins/cellular//HotspotSetup.qml:94
+#: ../plugins/security-privacy//LockSecurity.qml:302
+#: ../plugins/security-privacy//SimPin.qml:157
+msgid "Change"
+msgstr "Cambiar"
+
+#: ../plugins/security-privacy//SimPin.qml:183
+msgid "Enter SIM PIN"
+msgstr "Introduza o PIN da SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:184
+msgid "Enter Previous SIM PIN"
+msgstr "Introduza o PIN anterior da SIM"
+
+#: ../plugins/security-privacy//SimPin.qml:187
+#, qt-format
+msgid "Incorrect PIN. %1 attempts remaining."
+msgstr "O PIN é incorrecto. Ten %1 intentos máis."
+
+#: ../plugins/security-privacy//SimPin.qml:246
+#, qt-format
+msgid "%1 attempts allowed."
+msgstr "Permítense %1 intentos."
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Unlock"
+msgstr "Desbloquear"
+
+#: ../plugins/security-privacy//SimPin.qml:282
+msgid "Lock"
+msgstr "Bloquear"
+
+#: ../plugins/security-privacy//SimPin.qml:340
+msgid "Change PIN…"
+msgstr "Cambiar o PIN..."
+
+#: ../plugins/security-privacy//SimPin.qml:357
+msgid ""
+"When a SIM PIN is set, it must be entered to access cellular services after "
+"restarting the phone or swapping the SIM."
+msgstr ""
+"Cando existe un PIN para a SIM, este debe introducirse para acceder aos "
+"servizos do móbil despois de reiniciar o teléfono ou de cambiar a SIM."
+
+#: ../plugins/security-privacy//SimPin.qml:361
+msgid "Entering an incorrect PIN repeatedly may lock the SIM permanently."
+msgstr ""
+"Se introduce un PIN incorrecto repetidamente pode bloquear a SIM "
+"permanentemente."
+
+#: ../plugins/security-privacy//PhoneLocking.qml:31
+msgid "Phone locking"
+msgstr "Bloqueo do teléfono"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:45
+msgctxt "Unlock with swipe"
+msgid "None"
+msgstr "Ningún"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:46
+#: ../wizard/qml/Pages//15-passwd.qml:99
+msgid "PIN code"
+msgstr "Código PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:350
+#: ../plugins/security-privacy//PhoneLocking.qml:47
+#: ../wizard/qml/Pages//15-passwd.qml:101
+msgid "Passphrase"
+msgstr "Frase secreta"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:68
+msgid "Lock when idle"
+msgstr "Bloquear se está inactivo"
+
+#: ../plugins/battery//PageComponent.qml:306
+#: ../plugins/security-privacy//PhoneLocking.qml:69
+msgid "Sleep when idle"
+msgstr "Suspender se está inactivo"
+
+#. TRANSLATORS: %1 is the number of minutes
+#: ../plugins/security-privacy//PhoneLocking.qml:75
+#: ../plugins/security-privacy//PhoneLocking.qml:84
+#, qt-format
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minuto"
+msgstr[1] "%1 minutos"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:101
+msgid "Sleep locks immediately"
+msgstr "A suspensión bloquea inmediatamente"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:106
+msgid "When locked, allow:"
+msgstr "Se está bloqueado, permitir:"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:110
+msgid "Launcher"
+msgstr "Iniciador"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:120
+msgid "Notifications and quick settings"
+msgstr "Notificacións e axustes rápidos"
+
+#: ../plugins/security-privacy//PhoneLocking.qml:131
+msgid "Turn on lock security to restrict access when the phone is locked."
+msgstr ""
+"Active o bloqueo de seguranza para restrinxir o acceso ao móbil cando estea "
+"bloqueado."
+
+#: ../plugins/security-privacy//PhoneLocking.qml:132
+msgid "Other apps and functions will prompt you to unlock."
+msgstr "Outros aplicativos e funcións pediranlle que o desbloquee."
+
+#: ../plugins/security-privacy//AppAccess.qml:35
+msgid "Apps that you have granted and have requested access to:"
+msgstr "Aplicativos que aprobou e solicitaron acceso a:"
+
+#: ../plugins/security-privacy//AppAccess.qml:42
+msgid "Apps that have requested access to your camera"
+msgstr "Aplicativos que solicitaron acceso á cámara"
+
+#: ../plugins/security-privacy//AppAccess.qml:46
+msgid "Mic"
+msgstr "Micrófono"
+
+#: ../plugins/security-privacy//AppAccess.qml:47
+msgid "Apps that have requested access to your mic"
+msgstr "Aplicativos que solicitaron acceso ao micrófono"
+
+#: ../plugins/security-privacy//AppAccess.qml:59
+#, qt-format
+msgid "%1/%2"
+msgstr "%1/%2"
+
+#: ../plugins/security-privacy//AppAccess.qml:60
+msgid "0"
+msgstr "0"
+
+#: ../plugins/security-privacy//LockSecurity.qml:96
+#: ../plugins/security-privacy//LockSecurity.qml:384
+msgid "Change PIN code…"
+msgstr "Cambiar o código PIN..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:98
+#: ../plugins/security-privacy//LockSecurity.qml:385
+msgid "Change passphrase…"
+msgstr "Cambiar a frase secreta..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:105
+msgid "Switch to swipe"
+msgstr "Cambiar a esvarar o dedo"
+
+#: ../plugins/security-privacy//LockSecurity.qml:107
+msgid "Switch to PIN code"
+msgstr "Cambiar a código PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:109
+msgid "Switch to passphrase"
+msgstr "Cambiar a unha frase secreta"
+
+#: ../plugins/security-privacy//LockSecurity.qml:118
+msgid "Existing PIN code"
+msgstr "Código PIN actual"
+
+#: ../plugins/security-privacy//LockSecurity.qml:120
+msgid "Existing passphrase"
+msgstr "Frase secreta actual"
+
+#: ../plugins/security-privacy//LockSecurity.qml:174
+msgid "Choose PIN code"
+msgstr "Escolla un código PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:176
+msgid "Choose passphrase"
+msgstr "Escolla unha frase secreta"
+
+#: ../plugins/security-privacy//LockSecurity.qml:220
+msgid "Confirm PIN code"
+msgstr "Confirme o código PIN"
+
+#: ../plugins/security-privacy//LockSecurity.qml:222
+msgid "Confirm passphrase"
+msgstr "Confirme a frase secreta"
+
+#: ../plugins/security-privacy//LockSecurity.qml:265
+msgid "Those PIN codes don't match. Try again."
+msgstr "Os códigos PIN non coinciden. Ténteo de novo."
+
+#: ../plugins/security-privacy//LockSecurity.qml:268
+msgid "Those passphrases don't match. Try again."
+msgstr "As frases secretas non coinciden. Ténteo de novo."
+
+#: ../plugins/security-privacy//LockSecurity.qml:299
+msgid "Unset"
+msgstr "Retirar"
+
+#: ../plugins/security-privacy//LockSecurity.qml:344
+msgid "Unlock the phone using:"
+msgstr "Desbloquear o móbil usando:"
+
+#: ../plugins/security-privacy//LockSecurity.qml:348
+msgid "Swipe (no security)"
+msgstr "Esvarar o dedo (non segura)"
+
+#: ../plugins/security-privacy//LockSecurity.qml:349
+msgid "4-digit PIN code"
+msgstr "Código PIN de 4 díxitos"
+
+#: ../plugins/security-privacy//LockSecurity.qml:351
+msgid "Swipe (no security)… "
+msgstr "Esvarar o dedo (non segura)... "
+
+#: ../plugins/security-privacy//LockSecurity.qml:352
+msgid "4-digit PIN code…"
+msgstr "Código PIN de 4 díxitos..."
+
+#: ../plugins/security-privacy//LockSecurity.qml:353
+msgid "Passphrase…"
+msgstr "Frase secreta..."
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: ../plugins/time-date//PageComponent.qml:29
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:74
+msgid "Time & Date"
+msgstr "Hora e data"
+
+#: ../plugins/time-date//PageComponent.qml:53
+msgid "Time zone:"
+msgstr "Zona horaria:"
+
+#: ../plugins/time-date//PageComponent.qml:68
+msgid "Set the time and date:"
+msgstr "Estabelecer a hora e a data:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:103
+#: ../plugins/time-date//ChooseTimeZone.qml:47
+#: ../plugins/time-date//PageComponent.qml:69
+msgid "Automatically"
+msgstr "Automaticamente"
 
 #: ../plugins/time-date//TimePicker.qml:26
 msgid "Set time & date"
@@ -161,40 +1540,6 @@ msgstr "Mes"
 msgid "Year"
 msgstr "Ano"
 
-#: ../plugins/time-date//TimePicker.qml:182
-#: ../plugins/security-privacy//LockSecurity.qml:300
-#: ../plugins/phone//CallForwarding.qml:152
-#: ../plugins/background//Preview.qml:104
-msgid "Set"
-msgstr "Estabelecer"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: ../plugins/time-date//PageComponent.qml:29
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:14
-msgid "Time & Date"
-msgstr "Hora e data"
-
-#: ../plugins/time-date//PageComponent.qml:53
-msgid "Time zone:"
-msgstr "Zona horaria:"
-
-#: ../plugins/time-date//PageComponent.qml:68
-msgid "Set the time and date:"
-msgstr "Estabelecer a hora e a data:"
-
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-msgid "Automatically"
-msgstr "Automaticamente"
-
-#: ../plugins/time-date//PageComponent.qml:69
-#: ../plugins/time-date//ChooseTimeZone.qml:47
-#: ../plugins/security-privacy//PageComponent.qml:108
-#: ../plugins/cellular//PageChooseCarrier.qml:103
-msgid "Manually"
-msgstr "Manualmente"
-
 #: ../plugins/time-date//ChooseTimeZone.qml:28
 msgid "Time zone"
 msgstr "Zona horaria"
@@ -211,562 +1556,6 @@ msgstr "Introduza a súa localización actual"
 msgid "No matching place"
 msgstr "Non hai coincidencias"
 
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: ../plugins/system-update//PageComponent.qml:35
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:26
-msgid "Updates"
-msgstr "Actualizar"
-
-#: ../plugins/system-update//PageComponent.qml:52
-msgid "Update System"
-msgstr "Actualizar o sistema"
-
-#: ../plugins/system-update//PageComponent.qml:53
-msgid "The phone needs to restart to install the system update."
-msgstr ""
-"O teléfono precisa reiniciarse para instalar a actualización do sistema."
-
-#: ../plugins/system-update//PageComponent.qml:56
-msgid "Install & Restart"
-msgstr "Instalar e reiniciar"
-
-#: ../plugins/system-update//PageComponent.qml:65
-msgid "Not Now"
-msgstr "Agora non"
-
-#: ../plugins/system-update//PageComponent.qml:71
-msgid "Install"
-msgstr "Instalar"
-
-#: ../plugins/system-update//PageComponent.qml:89
-msgid "Software is up to date"
-msgstr "O software está actualizado"
-
-#: ../plugins/system-update//PageComponent.qml:198
-msgid "Checking for updates…"
-msgstr "Buscando actualizacións..."
-
-#: ../plugins/system-update//PageComponent.qml:216
-#, qt-format
-msgid "Install %1 update…"
-msgid_plural "Install %1 updates…"
-msgstr[0] "Instalar %1 actualización…"
-msgstr[1] "Instalar %1 actualizacións…"
-
-#: ../plugins/system-update//PageComponent.qml:217
-#, qt-format
-msgid "Install %1 update"
-msgid_plural "Install %1 updates"
-msgstr[0] "Instalar %1 actualización"
-msgstr[1] "Instalar %1 actualizacións"
-
-#: ../plugins/system-update//PageComponent.qml:218
-msgid "Pause All"
-msgstr "Deter todo"
-
-#: ../plugins/system-update//PageComponent.qml:269
-msgid "Retry"
-msgstr "Reintentar"
-
-#: ../plugins/system-update//PageComponent.qml:285
-msgid "Download"
-msgstr "Descargar"
-
-#: ../plugins/system-update//PageComponent.qml:285
-msgid "Update"
-msgstr "Actualizar"
-
-#: ../plugins/system-update//PageComponent.qml:286
-msgid "Resume"
-msgstr "Continuar"
-
-#: ../plugins/system-update//PageComponent.qml:287
-msgid "Pause"
-msgstr "Deter"
-
-#: ../plugins/system-update//PageComponent.qml:346
-msgid "Installing"
-msgstr "Instalando"
-
-#: ../plugins/system-update//PageComponent.qml:379
-msgid "Installed"
-msgstr "Instalado"
-
-#: ../plugins/system-update//PageComponent.qml:403
-msgid "Version: "
-msgstr "Versión: "
-
-#: ../plugins/system-update//PageComponent.qml:425
-msgid "Sign in to Ubuntu One to receive updates for apps."
-msgstr ""
-"Inicia sesión en Ubuntu One para recibir actualizacións dos aplicativos."
-
-#: ../plugins/system-update//PageComponent.qml:434
-msgid "Sign In…"
-msgstr "Iniciar sesión..."
-
-#: ../plugins/system-update//PageComponent.qml:501
-msgid "Installing update…"
-msgstr "Instalando a actualización..."
-
-#: ../plugins/system-update//PageComponent.qml:516
-#: ../plugins/system-update//Configuration.qml:30
-msgid "Auto download"
-msgstr "Descarga automática"
-
-#: ../plugins/system-update//PageComponent.qml:521
-msgid "On wi-fi"
-msgstr "Con wifi"
-
-#: ../plugins/system-update//PageComponent.qml:523
-msgid "Always"
-msgstr "Sempre"
-
-#: ../plugins/system-update//PageComponent.qml:538
-msgid " bytes"
-msgstr " bytes"
-
-#: ../plugins/system-update//PageComponent.qml:541
-msgid " KiB"
-msgstr " KiB"
-
-#: ../plugins/system-update//PageComponent.qml:544
-msgid " MiB"
-msgstr " MiB"
-
-#: ../plugins/system-update//PageComponent.qml:547
-msgid " GiB"
-msgstr " GiB"
-
-#: ../plugins/system-update//Configuration.qml:35
-msgid "Download future updates automatically:"
-msgstr "Descargar actualizacións automaticamente:"
-
-#: ../plugins/system-update//Configuration.qml:54
-msgid "When on wi-fi"
-msgstr "Só en modo wifi"
-
-#: ../plugins/system-update//Configuration.qml:55
-msgid "On any data connection"
-msgstr "Con calquera conexión de datos"
-
-#: ../plugins/system-update//Configuration.qml:56
-msgid "Data charges may apply."
-msgstr "Pódese aplicar a tarifa de datos."
-
-#: ../plugins/sound//SoundsList.qml:59
-msgid "Stop playing"
-msgstr "Parar a reprodución"
-
-#: ../plugins/sound//SilentModeWarning.qml:31
-msgid "The phone is in Silent Mode."
-msgstr "O móbil está en modo silencioso."
-
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: ../plugins/sound//PageComponent.qml:38
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:36
-msgid "Sound"
-msgstr "Son"
-
-#: ../plugins/sound//PageComponent.qml:75
-msgid "Silent Mode"
-msgstr "Modo silencioso"
-
-#: ../plugins/sound//PageComponent.qml:79
-msgid "Ringer:"
-msgstr "Timbre:"
-
-#: ../plugins/sound//PageComponent.qml:111
-msgid "Phone calls:"
-msgstr "Chamadas de teléfono:"
-
-#: ../plugins/sound//PageComponent.qml:115
-#: ../plugins/sound//PageComponent.qml:121
-msgid "Ringtone"
-msgstr "Son das chamadas"
-
-#: ../plugins/sound//PageComponent.qml:134
-msgid "Vibrate when ringing"
-msgstr "Vibrar e soar"
-
-#: ../plugins/sound//PageComponent.qml:143
-#: ../plugins/sound//PageComponent.qml:178
-msgid "Vibrate in Silent Mode"
-msgstr "Vibrar en modo silencioso"
-
-#: ../plugins/sound//PageComponent.qml:147
-msgid "Messages:"
-msgstr "Mensaxes:"
-
-#: ../plugins/sound//PageComponent.qml:151
-#: ../plugins/sound//PageComponent.qml:157
-msgid "Message received"
-msgstr "Ao recibir unha mensaxe"
-
-#: ../plugins/sound//PageComponent.qml:169
-msgid "Vibrate with message sound"
-msgstr "Vibrar co son das mensaxes"
-
-#: ../plugins/sound//PageComponent.qml:182
-msgid "Other sounds:"
-msgstr "Outros sons:"
-
-#: ../plugins/sound//PageComponent.qml:186
-#: ../plugins/language//PageComponent.qml:185
-msgid "Keyboard sound"
-msgstr "Son do teclado"
-
-#: ../plugins/sound//PageComponent.qml:200
-msgid "Lock sound"
-msgstr "Son do bloqueo"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:31
-msgid "Phone locking"
-msgstr "Bloqueo do teléfono"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:46
-#: ../wizard/qml/Pages//15-passwd.qml:88
-msgid "Passcode"
-msgstr "Clave"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:47
-#: ../plugins/security-privacy//LockSecurity.qml:346
-#: ../wizard/qml/Pages//15-passwd.qml:90
-msgid "Passphrase"
-msgstr "Frase secreta"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:49
-#: ../plugins/security-privacy//LockSecurity.qml:32
-#: ../plugins/about//DevMode.qml:104
-msgid "Lock security"
-msgstr "Seguranza do bloqueo"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:68
-#: ../plugins/battery//PageComponent.qml:300
-msgid "Lock when idle"
-msgstr "Bloquear se está inactivo"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:69
-#: ../plugins/battery//PageComponent.qml:300
-msgid "Sleep when idle"
-msgstr "Suspender se está inactivo"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PhoneLocking.qml:75
-#: ../plugins/security-privacy//PhoneLocking.qml:84
-#, qt-format
-msgid "%1 minute"
-msgid_plural "%1 minutes"
-msgstr[0] "%1 minuto"
-msgstr[1] "%1 minutos"
-
-#: ../plugins/security-privacy//PhoneLocking.qml:101
-msgid "Sleep locks immediately"
-msgstr "A suspensión bloquea inmediatamente"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: ../plugins/security-privacy//PageComponent.qml:35
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:42
-msgid "Security & Privacy"
-msgstr "Seguranza e privacidade"
-
-#: ../plugins/security-privacy//PageComponent.qml:59
-#: ../plugins/security-privacy//PageComponent.qml:170
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone and Internet"
-msgstr "Teléfono e internet"
-
-#: ../plugins/security-privacy//PageComponent.qml:61
-#: ../plugins/security-privacy//PageComponent.qml:171
-#: ../plugins/security-privacy//Dash.qml:46
-msgid "Phone only"
-msgstr "Só do teléfono"
-
-#: ../plugins/security-privacy//PageComponent.qml:90
-msgid "Lock phone"
-msgstr "Bloquear o teléfono"
-
-#. TRANSLATORS: %1 is the number of minutes
-#: ../plugins/security-privacy//PageComponent.qml:96
-#: ../plugins/security-privacy//PageComponent.qml:105
-#: ../plugins/battery//SleepValues.qml:83
-#: ../plugins/battery//SleepValues.qml:87
-#: ../plugins/battery//SleepValues.qml:91
-#: ../plugins/battery//SleepValues.qml:95
-#: ../plugins/battery//SleepValues.qml:99
-#: ../plugins/battery//SleepValues.qml:103
-#: ../plugins/battery//PageComponent.qml:306
-#: ../plugins/battery//PageComponent.qml:315
-#, qt-format
-msgid "After %1 minute"
-msgid_plural "After %1 minutes"
-msgstr[0] "Despois de %1 minuto"
-msgstr[1] "Despois de %1 minutos"
-
-#: ../plugins/security-privacy//PageComponent.qml:116
-msgid "SIM PIN"
-msgstr "PIN da SIM"
-
-#: ../plugins/security-privacy//PageComponent.qml:124
-msgid "Encryption"
-msgstr "Cifrado"
-
-#: ../plugins/security-privacy//PageComponent.qml:133
-msgid ""
-"Encryption protects against access to phone data when the phone is connected "
-"to a PC or other device."
-msgstr ""
-"O cifrado protéxeo contra o acceso aos datos do móbil cando o teléfono está "
-"conectado ao PC ou a outro dispositivo."
-
-#: ../plugins/security-privacy//PageComponent.qml:137
-msgid "Privacy"
-msgstr "Privacidade"
-
-#: ../plugins/security-privacy//PageComponent.qml:140
-msgid "Stats on welcome screen"
-msgstr "Estadísticas na pantalla de inicio"
-
-#: ../plugins/security-privacy//PageComponent.qml:153
-msgid "Messages on welcome screen"
-msgstr "Mensaxes na pantalla de inicio"
-
-#: ../plugins/security-privacy//PageComponent.qml:168
-#: ../plugins/security-privacy//Dash.qml:29
-msgid "Dash search"
-msgstr "Buscas no Panel"
-
-#: ../plugins/security-privacy//PageComponent.qml:186
-msgid "Location access"
-msgstr "Acceso á localización"
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-msgid "On"
-msgstr "Activado"
-
-#: ../plugins/security-privacy//PageComponent.qml:188
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:37
-#: ../plugins/cellular//Components//CellularMultiSim.qml:31
-msgid "Off"
-msgstr "Desactivado"
-
-#: ../plugins/security-privacy//PageComponent.qml:195
-#: ../plugins/security-privacy//AppAccess.qml:28
-msgid "Other app access"
-msgstr "Outros accesos de aplicativos"
-
-#: ../plugins/security-privacy//PageComponent.qml:200
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:30
-msgid "Diagnostics"
-msgstr "Diagnósticos"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are to be sent by the system.
-#: ../plugins/security-privacy//PageComponent.qml:205
-msgid "Sent"
-msgstr "Enviar"
-
-#. TRANSLATORS: This string is shown when crash
-#. reports are not to be sent by the system
-#: ../plugins/security-privacy//PageComponent.qml:208
-msgid "Not sent"
-msgstr "Non enviar"
-
-#: ../plugins/security-privacy//LockSecurity.qml:92
-#: ../plugins/security-privacy//LockSecurity.qml:380
-msgid "Change passcode…"
-msgstr "Cambiar a clave..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:94
-#: ../plugins/security-privacy//LockSecurity.qml:381
-msgid "Change passphrase…"
-msgstr "Cambiar a frase secreta..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:101
-msgid "Switch to swipe"
-msgstr "Cambiar a esvarar o dedo"
-
-#: ../plugins/security-privacy//LockSecurity.qml:103
-msgid "Switch to passcode"
-msgstr "Cambiar a unha clave"
-
-#: ../plugins/security-privacy//LockSecurity.qml:105
-msgid "Switch to passphrase"
-msgstr "Cambiar a unha frase secreta"
-
-#: ../plugins/security-privacy//LockSecurity.qml:114
-msgid "Existing passcode"
-msgstr "Clave existente"
-
-#: ../plugins/security-privacy//LockSecurity.qml:116
-msgid "Existing passphrase"
-msgstr "Frase secreta existente"
-
-#: ../plugins/security-privacy//LockSecurity.qml:170
-msgid "Choose passcode"
-msgstr "Escolla unha clave"
-
-#: ../plugins/security-privacy//LockSecurity.qml:172
-msgid "Choose passphrase"
-msgstr "Escolla unha frase secreta"
-
-#: ../plugins/security-privacy//LockSecurity.qml:216
-msgid "Confirm passcode"
-msgstr "Confirme a clave"
-
-#: ../plugins/security-privacy//LockSecurity.qml:218
-msgid "Confirm passphrase"
-msgstr "Confirme a frase secreta"
-
-#: ../plugins/security-privacy//LockSecurity.qml:261
-msgid "Those passcodes don't match. Try again."
-msgstr "As claves non coinciden. Ténteo de novo."
-
-#: ../plugins/security-privacy//LockSecurity.qml:264
-msgid "Those passphrases don't match. Try again."
-msgstr "As frases secretas non coinciden. Ténteo de novo."
-
-#: ../plugins/security-privacy//LockSecurity.qml:295
-msgid "Unset"
-msgstr "Retirar"
-
-#: ../plugins/security-privacy//LockSecurity.qml:298
-#: ../plugins/cellular//HotspotSetup.qml:94
-msgid "Change"
-msgstr "Cambiar"
-
-#: ../plugins/security-privacy//LockSecurity.qml:340
-msgid "Unlock the phone using:"
-msgstr "Desbloquear o móbil usando:"
-
-#: ../plugins/security-privacy//LockSecurity.qml:344
-msgid "Swipe (no security)"
-msgstr "Esvarar o dedo (non segura)"
-
-#: ../plugins/security-privacy//LockSecurity.qml:345
-msgid "4-digit passcode"
-msgstr "Clave de 4 díxitos"
-
-#: ../plugins/security-privacy//LockSecurity.qml:347
-msgid "Swipe (no security)… "
-msgstr "Esvarar o dedo (non segura)... "
-
-#: ../plugins/security-privacy//LockSecurity.qml:348
-msgid "4-digit passcode…"
-msgstr "Clave de 4 díxitos..."
-
-#: ../plugins/security-privacy//LockSecurity.qml:349
-msgid "Passphrase…"
-msgstr "Frase secreta..."
-
-#: ../plugins/security-privacy//Location.qml:30
-#: ../wizard/qml/Pages//30-location.qml:23
-msgid "Location"
-msgstr "Localización"
-
-#: ../plugins/security-privacy//Location.qml:48
-msgid "Location detection"
-msgstr "Detección da localización"
-
-#: ../plugins/security-privacy//Location.qml:70
-msgid ""
-"Uses GPS to detect your rough location. When off, GPS turns off to save "
-"battery."
-msgstr ""
-"Usa GPS para detectar a súa localización aproximada. Cando está apagado o "
-"GPS desactívase para aforrar batería."
-
-#: ../plugins/security-privacy//Location.qml:72
-msgid ""
-"Uses wi-fi and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"Usa wifi e GPS para detectar a localización aproximada. Apagando a detección "
-"da localización aforrará batería."
-
-#: ../plugins/security-privacy//Location.qml:74
-msgid ""
-"Uses wi-fi (currently off) and GPS to detect your rough location. Turning "
-"off location detection saves battery."
-msgstr ""
-"Usa wifi (actualmente apagada) e GPS para detectar a súa situación "
-"aproximada. Apagando a detección da localización aforrará batería."
-
-#: ../plugins/security-privacy//Location.qml:76
-msgid ""
-"Uses wi-fi, cell tower locations, and GPS to detect your rough location. "
-"Turning off location detection saves battery."
-msgstr ""
-"Usa wifi, localización por antenas de telefonía e GPS para detectar a súa "
-"situación aproximada. Apagando a detección da localización aforrará batería."
-
-#: ../plugins/security-privacy//Location.qml:78
-msgid ""
-"Uses wi-fi, cell tower locations (no current cellular connection), and GPS "
-"to detect your rough location. Turning off location detection saves battery."
-msgstr ""
-"Usa wifi, localización por antenas de telefonía (actualmente sen conexión "
-"móbil) e GPS para detectar a súa situación aproximada. Apagando a detección "
-"da localización aforrará batería."
-
-#: ../plugins/security-privacy//Location.qml:80
-msgid ""
-"Uses wi-fi (currently off), cell tower locations, and GPS to detect your "
-"rough location. Turning off location detection saves battery."
-msgstr ""
-"Usa wifi (actualmente apagada), localización por antenas de telefonía e GPS "
-"para detectar a súa situación aproximada. Apagando a detección da "
-"localización aforrará batería."
-
-#: ../plugins/security-privacy//Location.qml:82
-msgid ""
-"Uses wi-fi (currently off), cell tower locations (no current cellular "
-"connection), and GPS to detect your rough location. Turning off location "
-"detection saves battery."
-msgstr ""
-"Usa wifi (actualmente apagada), localización por antenas de telefonía (sen "
-"conexión móbil actualmente) e GPS para detectar a súa situación aproximada. "
-"Apagando a detección da localización aforrará batería."
-
-#: ../plugins/security-privacy//Location.qml:89
-msgid "Allow access to location:"
-msgstr "Permitir o acceso á localización:"
-
-#: ../plugins/security-privacy//Dash.qml:45
-msgid "Return results from:"
-msgstr "Obter resultados de:"
-
-#: ../plugins/security-privacy//AppAccess.qml:35
-msgid "Apps that you have granted and have requested access to:"
-msgstr "Aplicativos que aprobou e solicitaron acceso a:"
-
-#: ../plugins/security-privacy//AppAccess.qml:41
-#: ../plugins/bluetooth//PageComponent.qml:102
-msgid "Camera"
-msgstr "Cámara"
-
-#: ../plugins/security-privacy//AppAccess.qml:42
-msgid "Apps that have requested access to your camera"
-msgstr "Aplicativos que solicitaron acceso á cámara"
-
-#: ../plugins/security-privacy//AppAccess.qml:46
-msgid "Mic"
-msgstr "Micrófono"
-
-#: ../plugins/security-privacy//AppAccess.qml:47
-msgid "Apps that have requested access to your mic"
-msgstr "Aplicativos que solicitaron acceso ao micrófono"
-
-#: ../plugins/security-privacy//AppAccess.qml:59
-#, qt-format
-msgid "%1/%2"
-msgstr "%1/%2"
-
-#: ../plugins/security-privacy//AppAccess.qml:60
-msgid "0"
-msgstr "0"
-
 #: ../plugins/reset//ResetLauncherHome.qml:40
 msgid "The Launcher will be returned to its original contents."
 msgstr "O Iniciador restabelecerá os contidos orixinais."
@@ -776,25 +1565,9 @@ msgstr "O Iniciador restabelecerá os contidos orixinais."
 msgid "Reset Launcher"
 msgstr "Restabelecer o Iniciador"
 
-#: ../plugins/reset//ResetLauncherHome.qml:59
-msgid "The phone needs to restart for changes to take effect."
-msgstr "Precisa reiniciar o teléfono para que os cambios teñan efecto."
-
-#: ../plugins/reset//ResetAllSettings.qml:29
-msgid ""
-"The contents and layout of the launcher, and the filters in the home screen "
-"will be returned to their original settings."
-msgstr ""
-"Restabeleceranse os axustes orixinais dos contidos e deseño do iniciador, "
-"así como os filtros na pantalla de inicio."
-
-#: ../plugins/reset//ResetAllSettings.qml:31
-msgid "Reset all system settings"
-msgstr "Restabelecer todos os axustes do sistema"
-
 #. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
 #: ../plugins/reset//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:50
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:114
 msgid "Reset phone"
 msgstr "Restabelecer o teléfono"
 
@@ -818,166 +1591,17 @@ msgstr ""
 msgid "Erase & Reset Everything"
 msgstr "Eliminar todo e restabelecer"
 
-#: ../plugins/phone//SingleSim.qml:29
-msgid "SIM"
-msgstr "SIM"
-
-#: ../plugins/phone//SingleSim.qml:33 ../plugins/phone//NoSims.qml:28
-#: ../plugins/phone//MultiSim.qml:36 ../plugins/phone//MultiSim.qml:74
-#: ../plugins/phone//CallForwarding.qml:32
-#: ../plugins/phone//CallForwarding.qml:76
-msgid "Call forwarding"
-msgstr "Redireccionamento de chamadas"
-
-#: ../plugins/phone//SingleSim.qml:40 ../plugins/phone//NoSims.qml:34
-#: ../plugins/phone//MultiSim.qml:46 ../plugins/phone//MultiSim.qml:84
-#: ../plugins/phone//CallWaiting.qml:31 ../plugins/phone//CallWaiting.qml:74
-msgid "Call waiting"
-msgstr "Chamada en espera"
-
-#. TRANSLATORS: %1 is the name of the (network) carrier
-#: ../plugins/phone//SingleSim.qml:51 ../plugins/phone//Services.qml:34
-#, qt-format
-msgid "%1 Services"
-msgstr "%1 servizos"
-
-#: ../plugins/phone//ServiceInfo.qml:109
-#, qt-format
-msgid "Last called %1"
-msgstr "Última chamada %1"
-
-#: ../plugins/phone//ServiceInfo.qml:119
-msgid "Call"
-msgstr "Chamar"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: ../plugins/phone//PageComponent.qml:31
-#: ../plugins/bluetooth//PageComponent.qml:90
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:56
-msgid "Phone"
-msgstr "Teléfono"
-
-#: ../plugins/phone//NoSims.qml:42 ../plugins/phone//MultiSim.qml:56
-#: ../plugins/phone//MultiSim.qml:94
-msgid "Services"
-msgstr "Servizos"
-
-#: ../plugins/phone//CallWaiting.qml:89
+#: ../plugins/reset//ResetAllSettings.qml:29
 msgid ""
-"Lets you answer or start a new call while on another call, and switch "
-"between them"
+"The contents and layout of the launcher, and the filters in the home screen "
+"will be returned to their original settings."
 msgstr ""
-"Permite contestar ou facer unha chamada cando está atendendo outra, tamén "
-"permite alternar entre elas."
+"Restabeleceranse os axustes orixinais dos contidos e deseño do iniciador, "
+"así como os filtros na pantalla de inicio."
 
-#: ../plugins/phone//CallForwarding.qml:91
-msgid ""
-"Redirects phone calls to another number whenever you don't answer, or your "
-"phone is busy, turned off, or out of range."
-msgstr ""
-"Redirecciona as chamadas a outro número cando vostede non responde ou o "
-"teléfono está ocupado, apagado ou fóra de cobertura."
-
-#: ../plugins/phone//CallForwarding.qml:101
-msgid "Forward to"
-msgstr "Reenviar a"
-
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: ../plugins/notifications//PageComponent.qml:29
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:72
-msgid "Notifications"
-msgstr "Notificacións"
-
-#: ../plugins/notifications//PageComponent.qml:40
-msgid ""
-"Selected apps can alert you using notification bubbles, sounds, vibrations, "
-"and the Notification Center."
-msgstr ""
-"Os aplicativos seleccionados enviaranlle avisos mediante burbullas, sons, "
-"vibracións ou o Centro de Notificacións."
-
-#: ../plugins/language//SpellChecking.qml:27
-#: ../plugins/language//SpellChecking.qml:36
-#: ../plugins/language//PageComponent.qml:108
-#: ../plugins/language//PageComponent.qml:118
-msgid "Spell checking"
-msgstr "Revisión ortográfica"
-
-#: ../plugins/language//SpellChecking.qml:53
-msgid "Current spelling languages:"
-msgstr "Ortografía dos idiomas actuais:"
-
-#: ../plugins/language//SpellChecking.qml:54
-msgid "All languages available:"
-msgstr "Idiomas dispoñíbeis:"
-
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: ../plugins/language//PageComponent.qml:33
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:80
-msgid "Language & Text"
-msgstr "Idioma e texto"
-
-#: ../plugins/language//PageComponent.qml:79
-msgid "Display language…"
-msgstr "Idioma da pantalla..."
-
-#: ../plugins/language//PageComponent.qml:93
-#: ../plugins/language//KeyboardLayouts.qml:26
-msgid "Keyboard layouts"
-msgstr "Disposicións do teclado"
-
-#: ../plugins/language//PageComponent.qml:128
-msgid "Auto correction"
-msgstr "Corrección automática"
-
-#: ../plugins/language//PageComponent.qml:138
-msgid "Word suggestions"
-msgstr "Suxestións de palabras"
-
-#: ../plugins/language//PageComponent.qml:151
-msgid "Auto capitalization"
-msgstr "Uso automático das maiúsculas"
-
-#: ../plugins/language//PageComponent.qml:161
-msgid "Turns on Shift to capitalize the first letter of each sentence."
-msgstr "Usa maiúsculas na primeira letra de cada frase."
-
-#: ../plugins/language//PageComponent.qml:168
-msgid "Auto punctuation"
-msgstr "Puntuación automática"
-
-#: ../plugins/language//PageComponent.qml:178
-msgid ""
-"Adds a period, and any missing quotes or brackets, when you tap Space twice."
-msgstr ""
-"Ao tocar Espazo dúas veces, engade un punto e as comiñas ou parénteses que "
-"faltan."
-
-#: ../plugins/language//PageComponent.qml:195
-msgid "Keyboard vibration"
-msgstr "Vibración do teclado"
-
-#: ../plugins/language//KeyboardLayouts.qml:39
-msgid "Current layouts:"
-msgstr "Disposicións actuais:"
-
-#: ../plugins/language//KeyboardLayouts.qml:40
-msgid "All layouts available:"
-msgstr "Disposicións dispoñíbeis:"
-
-#: ../plugins/language//DisplayLanguage.qml:33
-msgid "Display language"
-msgstr "Idioma da pantalla"
-
-#: ../plugins/language//DisplayLanguage.qml:114
-msgid "Confirm"
-msgstr "Confirmar"
-
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: ../plugins/cellular//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:106
-msgid "Cellular"
-msgstr "Teléfono móbil"
+#: ../plugins/reset//ResetAllSettings.qml:31
+msgid "Reset all system settings"
+msgstr "Restabelecer todos os axustes do sistema"
 
 #: ../plugins/cellular//HotspotSetup.qml:29
 msgid "Change hotspot setup"
@@ -994,6 +1618,24 @@ msgstr "Clave (polo menos 8 caracteres)"
 #: ../plugins/cellular//HotspotSetup.qml:68
 msgid "Show key"
 msgstr "Mostrar a clave"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../plugins/cellular//PageComponent.qml:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:18
+msgid "Cellular"
+msgstr "Teléfono móbil"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:102
+msgid "Choose carrier:"
+msgstr "Seleccionar operadora:"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:130
+msgid "Refresh"
+msgstr "Actualizar"
+
+#: ../plugins/cellular//PageChooseCarrier.qml:151
+msgid "Searching"
+msgstr "Buscando"
 
 #: ../plugins/cellular//Hotspot.qml:29
 #: ../plugins/cellular//Components//SingleSim.qml:43
@@ -1031,241 +1673,9 @@ msgstr "Axustar o punto de acceso"
 msgid "Carriers"
 msgstr "Operadoras"
 
-#: ../plugins/cellular//PageChooseCarriers.qml:49
-#: ../plugins/cellular//PageChooseCarriers.qml:65
-#: ../plugins/battery//PageComponent.qml:125
-#: ../plugins/battery//PageComponent.qml:281 ../plugins/about//Storage.qml:204
-#: ../plugins/cellular//Components//SingleSim.qml:62
-#: ../plugins/cellular//Components//NoSim.qml:48
-msgid "N/A"
-msgstr "N/D"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:102
-msgid "Choose carrier:"
-msgstr "Seleccionar operadora:"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:130
-msgid "Refresh"
-msgstr "Actualizar"
-
-#: ../plugins/cellular//PageChooseCarrier.qml:151
-msgid "Searching"
-msgstr "Buscando"
-
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: ../plugins/brightness//PageComponent.qml:32
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:118
-msgid "Brightness"
-msgstr "Brillo"
-
-#: ../plugins/brightness//PageComponent.qml:52
-msgid "Adjust automatically"
-msgstr "Axustar automaticamente"
-
-#: ../plugins/brightness//PageComponent.qml:65
-msgid "Brightens and dims the display to suit the surroundings."
-msgstr "Ilumina e escurece a pantalla segundo o contorno."
-
-#: ../plugins/brightness//BrightnessSlider.qml:51
-#: ../plugins/battery//PageComponent.qml:290
-msgid "Display brightness"
-msgstr "Brillo da pantalla"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:28
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:28
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:28
-msgid "Bluetooth Pairing Request"
-msgstr "Petición bluetooth de emparellamento"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:36
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:36
-#, qt-format
-msgid "PIN for '%1'"
-msgstr "PIN de «%1»"
-
-#: ../plugins/bluetooth//ProvidePinCodeDialog.qml:63
-#: ../plugins/bluetooth//ProvidePasskeyDialog.qml:62
-msgid "Pair"
-msgstr "Emparellar"
-
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: ../plugins/bluetooth//PageComponent.qml:32
-#: ../plugins/bluetooth//PageComponent.qml:144
-#: ../plugins/battery//PageComponent.qml:357
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:124
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#: ../plugins/bluetooth//PageComponent.qml:79
-msgid "Connected"
-msgstr "Conectado"
-
-#: ../plugins/bluetooth//PageComponent.qml:80
-msgid "Connecting…"
-msgstr "Conectando…"
-
-#: ../plugins/bluetooth//PageComponent.qml:81
-msgid "Disconnecting…"
-msgstr "Desconectando..."
-
-#: ../plugins/bluetooth//PageComponent.qml:82
-msgid "Disconnected"
-msgstr "Desconectado"
-
-#: ../plugins/bluetooth//PageComponent.qml:83
-msgid "Unknown"
-msgstr "Descoñecida"
-
-#: ../plugins/bluetooth//PageComponent.qml:89
-msgid "Computer"
-msgstr "Computador"
-
-#: ../plugins/bluetooth//PageComponent.qml:91
-msgid "Modem"
-msgstr "Módem"
-
-#: ../plugins/bluetooth//PageComponent.qml:92 ../src/qml/MainWindow.qml:145
-msgid "Network"
-msgstr "Rede"
-
-#: ../plugins/bluetooth//PageComponent.qml:93
-msgid "Headset"
-msgstr "Auriculares con micro"
-
-#: ../plugins/bluetooth//PageComponent.qml:94
-msgid "Headphones"
-msgstr "Auriculares"
-
-#: ../plugins/bluetooth//PageComponent.qml:95
-msgid "Video"
-msgstr "Vídeo"
-
-#: ../plugins/bluetooth//PageComponent.qml:96
-msgid "Other Audio"
-msgstr "Outro son"
-
-#: ../plugins/bluetooth//PageComponent.qml:97
-msgid "Joypad"
-msgstr "Joypad"
-
-#: ../plugins/bluetooth//PageComponent.qml:98
-msgid "Keyboard"
-msgstr "Teclado"
-
-#: ../plugins/bluetooth//PageComponent.qml:99
-msgid "Tablet"
-msgstr "Tableta"
-
-#: ../plugins/bluetooth//PageComponent.qml:100
-msgid "Mouse"
-msgstr "Rato"
-
-#: ../plugins/bluetooth//PageComponent.qml:101
-msgid "Printer"
-msgstr "Impresora"
-
-#: ../plugins/bluetooth//PageComponent.qml:103
-msgid "Other"
-msgstr "Outro"
-
-#: ../plugins/bluetooth//PageComponent.qml:109
-msgid "Excellent"
-msgstr "Excelente"
-
-#: ../plugins/bluetooth//PageComponent.qml:110
-msgid "Good"
-msgstr "Bo"
-
-#: ../plugins/bluetooth//PageComponent.qml:111
-msgid "Fair"
-msgstr "Aceptábel"
-
-#: ../plugins/bluetooth//PageComponent.qml:112
-msgid "Poor"
-msgstr "Malo"
-
-#: ../plugins/bluetooth//PageComponent.qml:179
-msgid "Discoverable"
-msgstr "Visíbel"
-
-#: ../plugins/bluetooth//PageComponent.qml:179
-msgid "Not discoverable"
-msgstr "Non visíbel"
-
-#: ../plugins/bluetooth//PageComponent.qml:210
-msgid "Connected devices:"
-msgstr "Dispositivos conectados:"
-
-#: ../plugins/bluetooth//PageComponent.qml:247
-msgid "Connect another device:"
-msgstr "Conectar outro dispositivo:"
-
-#: ../plugins/bluetooth//PageComponent.qml:247
-msgid "Connect a device:"
-msgstr "Conectar un dispositivo:"
-
-#: ../plugins/bluetooth//PageComponent.qml:280
-msgid "None detected"
-msgstr "Non se detectou ningún"
-
-#: ../plugins/bluetooth//PageComponent.qml:288
-#: ../plugins/bluetooth//PageComponent.qml:391
-msgid "Connect automatically when detected:"
-msgstr "Conectar automaticamente tras a detección:"
-
-#: ../plugins/bluetooth//PageComponent.qml:358
-msgid "Type"
-msgstr "Tipo"
-
-#: ../plugins/bluetooth//PageComponent.qml:382
-msgid "Status"
-msgstr "Estado"
-
-#: ../plugins/bluetooth//PageComponent.qml:386
-msgid "Signal Strength"
-msgstr "Forza do sinal"
-
-#: ../plugins/bluetooth//PageComponent.qml:405
-msgid "Disconnect"
-msgstr "Desconectar"
-
-#: ../plugins/bluetooth//PageComponent.qml:423
-msgid "Forget this device"
-msgstr "Esquecer este dispositivo"
-
-#. TRANSLATORS: %1 is the name of the bluetooth device being paired
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:37
-#, qt-format
-msgid "Please confirm that the PIN displayed on '%1' matches this one"
-msgstr "Confirme que o PIN mostrado en «%1» coincide con este"
-
-#: ../plugins/bluetooth//ConfirmPasskeyDialog.qml:57
-msgid "Confirm PIN"
-msgstr "Confirme o PIN"
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Lock the phone when it's not in use:"
-msgstr "Bloquear o teléfono se está inactivo:"
-
-#: ../plugins/battery//SleepValues.qml:77
-msgid "Put the phone to sleep when it is not in use:"
-msgstr "Suspender o teléfono cando non estea en uso:"
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid ""
-"Shorter times are more secure. Phone won't lock during calls or video "
-"playback."
-msgstr ""
-"Tempos máis curtos son máis seguros. Non se bloqueará durante as chamadas ou "
-"vídeos."
-
-#: ../plugins/battery//SleepValues.qml:117
-msgid "Phone won’t sleep during calls or video playback."
-msgstr "O teléfono non se suspenderá durante as chamadas ou vídeos."
-
 #. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
 #: ../plugins/battery//PageComponent.qml:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:130
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:12
 msgid "Battery"
 msgstr "Batería"
 
@@ -1313,286 +1723,76 @@ msgstr "Última carga completa"
 msgid "Fully charged"
 msgstr "Carga completa"
 
-#: ../plugins/battery//PageComponent.qml:120
+#: ../plugins/battery//PageComponent.qml:126
 msgid "Charge level"
 msgstr "Nivel da carga"
 
 #. TRANSLATORS: %1 refers to a percentage that indicates the charging level of the battery
-#: ../plugins/battery//PageComponent.qml:128
+#: ../plugins/battery//PageComponent.qml:134
 #, qt-format
 msgid "%1%"
 msgstr "%1%"
 
-#: ../plugins/battery//PageComponent.qml:206
-#: ../plugins/battery//PageComponent.qml:208
+#: ../plugins/battery//PageComponent.qml:212
+#: ../plugins/battery//PageComponent.qml:214
 msgid "Yesterday"
 msgstr "Onte"
 
-#: ../plugins/battery//PageComponent.qml:214
-#: ../plugins/battery//PageComponent.qml:216
+#: ../plugins/battery//PageComponent.qml:220
+#: ../plugins/battery//PageComponent.qml:222
 msgid "Today"
 msgstr "Hoxe"
 
-#: ../plugins/battery//PageComponent.qml:286
+#: ../plugins/battery//PageComponent.qml:292
 msgid "Ways to reduce battery use:"
 msgstr "Formas de reducir o uso da batería:"
 
-#: ../plugins/battery//PageComponent.qml:388
+#: ../plugins/battery//PageComponent.qml:296
+#: ../plugins/brightness//BrightnessSlider.qml:51
+msgid "Display brightness"
+msgstr "Brillo da pantalla"
+
+#: ../plugins/battery//PageComponent.qml:394
 msgid "GPS"
 msgstr "GPS"
 
-#: ../plugins/battery//PageComponent.qml:406
+#: ../plugins/battery//PageComponent.qml:412
 msgid "Accurate location detection requires GPS and/or Wi-Fi."
 msgstr "A localización exacta require GPS e/ou Wifi."
 
-#: ../plugins/background//WallpaperGrid.qml:190
-msgid "Remove"
-msgstr "Eliminar"
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Lock the phone when it's not in use:"
+msgstr "Bloquear o teléfono se está inactivo:"
 
-#: ../plugins/background//Preview.qml:67
-msgid "Preview"
-msgstr "Vista previa"
+#: ../plugins/battery//SleepValues.qml:77
+msgid "Put the phone to sleep when it is not in use:"
+msgstr "Suspender o teléfono cando non estea en uso:"
 
-#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: ../plugins/background//MainPage.qml:38
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:136
-msgid "Background"
-msgstr "Fondo"
-
-#: ../plugins/background//MainPage.qml:112
-msgid "Ubuntu Art"
-msgstr "Imaxes de Ubuntu"
-
-#: ../plugins/background//MainPage.qml:128
-msgid "Custom"
-msgstr "Personalizar"
-
-#: ../plugins/about//Version.qml:35
-msgid "OS Build Details"
-msgstr "Información da versión do SO"
-
-#: ../plugins/about//Version.qml:53
-msgid "OS build number"
-msgstr "Número da versión do SO"
-
-#: ../plugins/about//Version.qml:59
-msgid "Ubuntu Image part"
-msgstr "Parte da Imaxe de Ubuntu"
-
-#: ../plugins/about//Version.qml:85
-msgid "Ubuntu build description"
-msgstr "Descrición da versión de Ubuntu"
-
-#: ../plugins/about//Version.qml:100
-msgid "Device Image part"
-msgstr "Parte da Imaxe do dispositivo"
-
-#: ../plugins/about//Version.qml:126
-msgid "Device build description"
-msgstr "Descrición da versión do dispositivo"
-
-#: ../plugins/about//Version.qml:141
-msgid "Customization Image part"
-msgstr "Parte da personalización da imaxe"
-
-#: ../plugins/about//Storage.qml:33 ../plugins/about//PageComponent.qml:126
-msgid "Storage"
-msgstr "Almacenamento"
-
-#: ../plugins/about//Storage.qml:87
-msgid "Used by Ubuntu"
-msgstr "Usado por Ubuntu"
-
-#: ../plugins/about//Storage.qml:88
-msgid "Videos"
-msgstr "Vídeos"
-
-#: ../plugins/about//Storage.qml:89
-msgid "Audio"
-msgstr "Son"
-
-#: ../plugins/about//Storage.qml:90
-msgid "Pictures"
-msgstr "Imaxes"
-
-#: ../plugins/about//Storage.qml:91
-msgid "Other files"
-msgstr "Outros ficheiros"
-
-#: ../plugins/about//Storage.qml:92
-msgid "Used by apps"
-msgstr "Usado polos  aplicativos"
-
-#: ../plugins/about//Storage.qml:142
-msgid "Total storage"
-msgstr "Almacenamento total"
-
-#: ../plugins/about//Storage.qml:154
-msgid "Free space"
-msgstr "Espazo libre"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By name"
-msgstr "Polo nome"
-
-#: ../plugins/about//Storage.qml:174
-msgid "By size"
-msgstr "Polo tamaño"
-
-#: ../plugins/about//Software.qml:11 ../plugins/about//PageComponent.qml:169
-msgid "Software licenses"
-msgstr "Licenzas do software"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: ../plugins/about//PageComponent.qml:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:152
-msgid "About this phone"
-msgstr "Sobre este teléfono"
-
-#: ../plugins/about//PageComponent.qml:97
-msgid "Phone number"
-msgstr "Número do teléfono"
-
-#: ../plugins/about//PageComponent.qml:107
-msgid "Serial"
-msgstr "Serie"
-
-#: ../plugins/about//PageComponent.qml:133
-msgid "Software:"
-msgstr "Software:"
-
-#: ../plugins/about//PageComponent.qml:138
-msgid "OS"
-msgstr "SO"
-
-#: ../plugins/about//PageComponent.qml:147
-msgid "Last updated"
-msgstr "Última actualización"
-
-#: ../plugins/about//PageComponent.qml:155
-msgid "Check for updates"
-msgstr "Buscar actualizacións"
-
-#: ../plugins/about//PageComponent.qml:164
-msgid "Legal:"
-msgstr "Legal:"
-
-#: ../plugins/about//PageComponent.qml:177
-msgid "Regulatory info"
-msgstr "Información regulamentaria"
-
-#: ../plugins/about//PageComponent.qml:185
-msgid "Developer mode"
-msgstr "Modo desenvolvedor"
-
-#: ../plugins/about//DevMode.qml:35 ../plugins/about//DevMode.qml:79
-msgid "Developer Mode"
-msgstr "Modo desenvolvedor"
-
-#: ../plugins/about//DevMode.qml:73
+#: ../plugins/battery//SleepValues.qml:117
 msgid ""
-"In Developer Mode, anyone can access, change or delete anything on this "
-"phone by connecting it to another device."
+"Shorter times are more secure. Phone won't lock during calls or video "
+"playback."
 msgstr ""
-"No modo Desenvolvedor, calquera persoa pode acceder, cambiar ou eliminar "
-"cousas deste teléfono conectándoo a outro dispositivo."
+"Tempos máis curtos son máis seguros. Non se bloqueará durante as chamadas ou "
+"vídeos."
 
-#: ../plugins/about//DevMode.qml:98
-msgid "You need a passcode or passphrase set to use Developer Mode."
-msgstr ""
-"Precisa estabelecer unha clave ou unha frase secreta para usar o modo "
-"Desenvolvedor."
+#: ../plugins/battery//SleepValues.qml:117
+msgid "Phone won’t sleep during calls or video playback."
+msgstr "O teléfono non se suspenderá durante as chamadas ou vídeos."
 
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
-msgid "Privacy policy"
-msgstr "Política de privacidade"
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../plugins/brightness//PageComponent.qml:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:68
+msgid "Brightness"
+msgstr "Brillo"
 
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
-msgid "Report to Canonical:"
-msgstr "Informar a Canonical:"
+#: ../plugins/brightness//PageComponent.qml:52
+msgid "Adjust automatically"
+msgstr "Axustar automaticamente"
 
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
-msgid "App crashes and errors"
-msgstr "Fallor e erros do aplicativo"
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
-msgid "Previous error reports"
-msgstr "Informes de erro anteriores"
-
-#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
-msgid "Includes info about what an app was doing when it failed."
-msgstr "Inclúe información do que facía o aplicativo cando fallou."
-
-#: ../plugins/cellular//Components//SingleSim.qml:37
-#: ../plugins/cellular//Components//MultiSim.qml:42
-msgid "Hotspot disabled because Wi-Fi is off."
-msgstr "Punto de acceso desactivado porque a wifi está desconectada."
-
-#: ../plugins/cellular//Components//SingleSim.qml:52
-#: ../plugins/cellular//Components//MultiSim.qml:58
-msgid "Data usage statistics"
-msgstr "Estadísticas de uso de datos"
-
-#: ../plugins/cellular//Components//SingleSim.qml:58
-#: ../plugins/cellular//Components//SingleSim.qml:66
-#: ../plugins/cellular//Components//NoSim.qml:47
-msgid "Carrier"
-msgstr "Operadora"
-
-#: ../plugins/cellular//Components//SingleSim.qml:72
-msgid "APN"
-msgstr "Punto de acceso"
-
-#: ../plugins/cellular//Components//SimEditor.qml:77
-msgid "Edit SIM Name"
-msgstr "Editar o nome da SIM"
-
-#: ../plugins/cellular//Components//SimEditor.qml:200
-msgid "OK"
-msgstr "Aceptar"
-
-#: ../plugins/cellular//Components//NoSim.qml:29
-#: ../plugins/cellular//Components//CellularSingleSim.qml:33
-#: ../plugins/cellular//Components//CellularMultiSim.qml:76
-msgid "Cellular data:"
-msgstr "Servizo de datos:"
-
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:38
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
-msgid "2G only (saves battery)"
-msgstr "Só 2G (aforra batería)"
-
-#: ../plugins/cellular//Components//NoSim.qml:32
-#: ../plugins/cellular//Components//CellularSingleSim.qml:39
-#: ../plugins/cellular//Components//CellularMultiSim.qml:114
-msgid "2G/3G/4G (faster)"
-msgstr "2G/3G/4G (máis rápido)"
-
-#: ../plugins/cellular//Components//NoSim.qml:37
-#: ../plugins/cellular//Components//CellularSingleSim.qml:53
-#: ../plugins/cellular//Components//CellularMultiSim.qml:155
-msgid "Data roaming"
-msgstr "Datos en itinerancia"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:29
-msgid "Ask me each time"
-msgstr "Preguntarme cada vez"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:34
-msgid "For outgoing calls, use:"
-msgstr "Para chamadas saíntes, usar:"
-
-#: ../plugins/cellular//Components//DefaultSim.qml:48
-msgid ""
-"You can change the SIM for individual calls, or for contacts in the address "
-"book."
-msgstr ""
-"Pode cambiar a SIM para chamadas determinadas ou para contactos da axenda."
-
-#: ../plugins/cellular//Components//DefaultSim.qml:55
-msgid "For messages, use:"
-msgstr "Para mensaxes, usar:"
+#: ../plugins/brightness//PageComponent.qml:65
+msgid "Brightens and dims the display to suit the surroundings."
+msgstr "Ilumina e escurece a pantalla segundo o contorno."
 
 #: ../plugins/background//Components//AddRemove.qml:52
 msgid "No images selected"
@@ -1613,413 +1813,938 @@ msgstr "Engadir unha imaxe..."
 msgid "Remove images…"
 msgstr "Eliminar imaxes..."
 
-#: ../src/qml/MainWindow.qml:110
-msgid "System Settings"
-msgstr "Axustes do sistema"
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:51
+msgid "Privacy policy"
+msgstr "Política de privacidade"
 
-#: ../src/qml/MainWindow.qml:131
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:59
+msgid "Report to Canonical:"
+msgstr "Informar a Canonical:"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:73
+msgid "App crashes and errors"
+msgstr "Fallos e erros dos aplicativos"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:79
+msgid "Previous error reports"
+msgstr "Informes de fallos anteriores"
+
+#: ../plugins/security-privacy//diagnostics//PageComponent.qml:90
+msgid "Includes info about what an app was doing when it failed."
+msgstr "Inclúe información do que facía o aplicativo cando fallou."
+
+#: ../plugins/cellular//Components//NoSim.qml:29
+#: ../plugins/cellular//Components//CellularMultiSim.qml:82
+#: ../plugins/cellular//Components//CellularSingleSim.qml:32
+msgid "Cellular data:"
+msgstr "Servizo de datos:"
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:138
+#: ../plugins/cellular//Components//CellularSingleSim.qml:51
+msgid "2G only (saves battery)"
+msgstr "Só 2G (aforra batería)"
+
+#: ../plugins/cellular//Components//CellularMultiSim.qml:139
+#: ../plugins/cellular//Components//CellularSingleSim.qml:52
+msgid "2G/3G (faster)"
+msgstr "2G/3G (máis rápido)"
+
+#: ../plugins/cellular//Components//NoSim.qml:32
+#: ../plugins/cellular//Components//CellularMultiSim.qml:140
+#: ../plugins/cellular//Components//CellularSingleSim.qml:53
+msgid "2G/3G/4G (faster)"
+msgstr "2G/3G/4G (máis rápido)"
+
+#: ../plugins/cellular//Components//NoSim.qml:37
+#: ../plugins/cellular//Components//CellularMultiSim.qml:182
+#: ../plugins/cellular//Components//CellularSingleSim.qml:72
+msgid "Data roaming"
+msgstr "Datos en itinerancia"
+
+#: ../plugins/cellular//Components//SimEditor.qml:77
+msgid "Edit SIM Name"
+msgstr "Editar o nome da SIM"
+
+#: ../plugins/cellular//Components//SimEditor.qml:200
+msgid "OK"
+msgstr "Aceptar"
+
+#: ../plugins/cellular//Components//SingleSim.qml:58
+#: ../plugins/cellular//Components//SingleSim.qml:66
+#: ../plugins/cellular//Components//NoSim.qml:47
+msgid "Carrier"
+msgstr "Operadora"
+
+#: ../plugins/cellular//Components//SingleSim.qml:37
+#: ../plugins/cellular//Components//MultiSim.qml:42
+msgid "Hotspot disabled because Wi-Fi is off."
+msgstr "Punto de acceso desactivado porque a wifi está desconectada."
+
+#: ../plugins/cellular//Components//SingleSim.qml:52
+#: ../plugins/cellular//Components//MultiSim.qml:58
+msgid "Data usage statistics"
+msgstr "Estadísticas de uso de datos"
+
+#: ../plugins/cellular//Components//SingleSim.qml:72
+msgid "APN"
+msgstr "Punto de acceso"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:29
+msgid "Ask me each time"
+msgstr "Preguntarme cada vez"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:34
+msgid "For outgoing calls, use:"
+msgstr "Para chamadas saíntes, usar:"
+
+#: ../plugins/cellular//Components//DefaultSim.qml:48
+msgid ""
+"You can change the SIM for individual calls, or for contacts in the address "
+"book."
+msgstr ""
+"Pode cambiar a SIM para chamadas determinadas ou para contactos da axenda."
+
+#: ../plugins/cellular//Components//DefaultSim.qml:55
+msgid "For messages, use:"
+msgstr "Para mensaxes, usar:"
+
+#: ../src/qml/MainWindow.qml:133
 msgid "Search"
 msgstr "Buscar"
 
-#: ../src/qml/MainWindow.qml:150
+#: ../src/qml/MainWindow.qml:152
 msgid "Personal"
 msgstr "Persoal"
 
-#: ../src/qml/MainWindow.qml:155
+#: ../src/qml/MainWindow.qml:157
 msgid "System"
 msgstr "Sistema"
-
-#: ../wizard/qml/Pages//20-wifi.qml:27
-msgid "Connect to Wi-Fi"
-msgstr "Conectar a unha rede wifi"
-
-#: ../wizard/qml/Pages//20-wifi.qml:68
-msgid "Available networks"
-msgstr "Redes dispoñíbeis"
-
-#: ../wizard/qml/Pages//20-wifi.qml:152
-#: ../wizard/qml/Pages//40-reporting.qml:46
-#: ../wizard/qml/Pages//30-location.qml:67
-#: ../wizard/qml/Pages//15-passwd.qml:159
-msgid "Continue"
-msgstr "Continuar"
-
-#: ../wizard/qml/Pages//20-wifi.qml:152 ../wizard/qml/Pages//no-sim.qml:64
-msgid "Skip"
-msgstr "Saltar"
-
-#: ../wizard/qml/Pages//10-welcome.qml:25
-msgid "Hello"
-msgstr "Ola"
-
-#: ../wizard/qml/Pages//10-welcome.qml:67
-msgid "Welcome to your Ubuntu phone. Let’s get started."
-msgstr "Benvido/a ao teu teléfono Ubuntu. Comecemos."
-
-#: ../wizard/qml/Pages//10-welcome.qml:72
-msgid "Select your language"
-msgstr "Seleccione o seu idioma"
-
-#: ../wizard/qml/Pages//10-welcome.qml:89
-msgid "Start"
-msgstr "Iniciar"
-
-#: ../wizard/qml/Pages//terms.qml:24
-msgid "Terms & Conditions"
-msgstr "Termos e condicións"
-
-#: ../wizard/qml/Pages//no-sim.qml:22
-msgid "Add a SIM card"
-msgstr "Engadir unha tarxeta SIM"
-
-#: ../wizard/qml/Pages//no-sim.qml:57
-msgid ""
-"Please insert a SIM card before you continue. Without it, you won’t be able "
-"to make calls or use text messaging."
-msgstr ""
-"Insira unha tarxeta SIM antes de continuar. Sen ela, non será quen de chamar "
-"nin de usar as mensaxes de texto."
 
 #: ../wizard/qml/Pages//80-finished.qml:22
 msgid "All done"
 msgstr "Feito"
 
-#: ../wizard/qml/Pages//80-finished.qml:39
-msgid "Nice work! Your phone is now ready to use. "
-msgstr "Bo traballo! Xa ten o móbil listo para usar. "
+#: ../wizard/qml/Pages//80-finished.qml:37
+msgid "Nice work!"
+msgstr "Bo traballo!"
 
-#: ../wizard/qml/Pages//80-finished.qml:46
+#: ../wizard/qml/Pages//80-finished.qml:45
+msgid "Your phone is now ready to use."
+msgstr "Xa ten o teléfono listo para o seu uso."
+
+#: ../wizard/qml/Pages//80-finished.qml:52
 msgid "Finish"
 msgstr "Rematar"
 
-#: ../wizard/qml/Pages//40-reporting.qml:22
-msgid "Bug Reporting"
-msgstr "Informes de fallo"
+#: ../wizard/qml/Pages//terms.qml:25
+msgid "Terms & Conditions"
+msgstr "Termos e condicións"
 
-#: ../wizard/qml/Pages//40-reporting.qml:39
-msgid ""
-"Your phone is set up to automatically report errors to Canonical. This can "
-"be disabled in system settings."
-msgstr ""
-"O seu teléfono está configurado automaticamente para enviar informes de "
-"fallo a Canonical. Pode desactivar esta opción nos axustes do sistema."
-
-#: ../wizard/qml/Pages//30-location.qml:51
-msgid "Use your mobile network and wi-fi to work out where you are."
-msgstr "Usar a rede móbil e a wifi para estabelecer a localización."
-
-#: ../wizard/qml/Pages//30-location.qml:59
-msgid ""
-"I have read and agreed to the Ubuntu <a href='terms.qml'>terms and "
-"conditions</a>."
-msgstr ""
-"Lin e acepto os <a href='terms.qml'>termos e condicións</a> de Ubuntu."
-
-#: ../wizard/qml/Pages//15-passwd.qml:37
+#: ../wizard/qml/Pages//15-passwd.qml:38
 msgid "Set lock security"
 msgstr "Estabelecer o bloqueo"
 
-#: ../wizard/qml/Pages//15-passwd.qml:86
+#: ../wizard/qml/Pages//15-passwd.qml:97
 msgid "Swipe"
 msgstr "Esvarar o dedo"
 
-#: ../wizard/qml/Pages//15-passwd.qml:136
-msgid "Those passcodes don't match."
-msgstr "As claves non coinciden."
+#: ../wizard/qml/Pages//15-passwd.qml:147
+msgid "Those PIN codes don't match."
+msgstr "Os códigos PIN non coinciden."
 
-#: ../wizard/qml/Pages//15-passwd.qml:138
+#: ../wizard/qml/Pages//15-passwd.qml:149
 msgid "Those passphrases don't match."
 msgstr "As frases secretas non coinciden."
 
-#: ../wizard/qml/Pages//15-passwd.qml:146
-msgid "Passcode must be at least four digits long."
-msgstr "A clave debe ter 4 díxitos como mínimo."
+#: ../wizard/qml/Pages//15-passwd.qml:157
+msgid "PIN code must be at least four digits long."
+msgstr "O código PIN debe ter polo menos 4 díxitos."
 
-#: ../wizard/qml/Pages//15-passwd.qml:148
+#: ../wizard/qml/Pages//15-passwd.qml:159
 msgid "Passphrase must be at least four characters long."
-msgstr "A frase secreta debe ter 4 caracteres como mínimo."
+msgstr "A frase secreta debe ter polo menos 4 caracteres."
 
-#: ../wizard/qml/Components//Page.qml:50
+#: ../wizard/qml/Pages//10-welcome.qml:85
+#: ../wizard/qml/Pages//15-passwd.qml:170 ../wizard/qml/Pages//20-wifi.qml:195
+#: ../wizard/qml/Pages//40-reporting.qml:50
+#: ../wizard/qml/Pages//30-location.qml:79
+msgid "Continue"
+msgstr "Continuar"
+
+#: ../wizard/qml/Pages//30-location.qml:60
+msgid "Use your mobile network and Wi-Fi to work out where you are"
+msgstr "Usar a rede móbil e a wifi para estabelecer a súa localización."
+
+#. TRANSLATORS: HERE is a trademark for Nokia's location service, you probably shouldn't translate it
+#: ../wizard/qml/Pages//30-location.qml:69
+msgid ""
+"I have read and agreed to the HERE <a href='terms.qml'>terms and "
+"conditions</a>"
+msgstr "Lin e acepto os <a href='terms.qml'>termos e condicións</a>"
+
+#: ../wizard/qml/Pages//40-reporting.qml:22
+msgid "Bug reporting"
+msgstr "Informes de fallo"
+
+#: ../wizard/qml/Pages//40-reporting.qml:35
+msgid "Your phone is set up to automatically report errors to Canonical."
+msgstr ""
+"O teléfono está configurado para enviar automaticamente informes de fallo a "
+"Canonical."
+
+#: ../wizard/qml/Pages//40-reporting.qml:43
+msgid "This can be disabled in System Settings."
+msgstr "Pode desactivar esta opción nos Axustes do sistema."
+
+#: ../wizard/qml/Pages//no-sim.qml:22
+msgid "Add a SIM card"
+msgstr "Engadir unha tarxeta SIM"
+
+#: ../wizard/qml/Pages//no-sim.qml:33
+msgid "Please insert a SIM card before you continue."
+msgstr "Por favor,  insira unha tarxeta SIM antes de continuar."
+
+#: ../wizard/qml/Pages//no-sim.qml:35
+msgid "Without it, you won’t be able to make calls or use text messaging."
+msgstr ""
+"Sen ela, non poderá realizar chamadas nin usar a mensaxería de texto."
+
+#: ../wizard/qml/Pages//no-sim.qml:50 ../wizard/qml/Pages//20-wifi.qml:195
+msgid "Skip"
+msgstr "Saltar"
+
+#: ../wizard/qml/Pages//10-welcome.qml:25
+msgid "Hi!"
+msgstr "Ola!"
+
+#: ../wizard/qml/Pages//10-welcome.qml:42
+msgid "Welcome to your Ubuntu phone."
+msgstr "Benvido/a ao teléfono de Ubuntu."
+
+#: ../wizard/qml/Pages//10-welcome.qml:50
+msgid "Let’s get started."
+msgstr "Comezamos."
+
+#: ../wizard/qml/Pages//20-wifi.qml:27
+msgid "Connect to Wi‑Fi"
+msgstr "Conectar a unha wifi"
+
+#: ../wizard/qml/Pages//20-wifi.qml:146
+msgid "Available networks"
+msgstr "Redes dispoñíbeis"
+
+#: ../wizard/qml/Components//Page.qml:84
 msgid "Back"
 msgstr "Volver"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:4
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:110
-msgid "network"
-msgstr "rede"
+#: ../wizard/qml/Components//StackButton.qml:51
+#, qt-format
+msgid "〈  %1"
+msgstr "〈  %1"
 
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:6
-msgid "wireless"
-msgstr "sen fíos"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:8
-msgid "wifi"
-msgstr "wifi"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:10
-msgid "wi-fi"
-msgstr "wi-fi"
-
-#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:12
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:22
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:34
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:40
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:48
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:54
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:60
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:78
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:88
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:116
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:122
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:128
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:150
-msgid "settings"
-msgstr "axustes"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:16
-msgid "time"
-msgstr "hora"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:18
-msgid "date"
-msgstr "data"
-
-#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:20
-msgid "timezone"
-msgstr "zona horaria"
+#: ../wizard/qml/Components//StackButton.qml:54
+#, qt-format
+msgid "%1  〉"
+msgstr "%1  〉"
 
 #. TRANSLATORS: This is a keyword or name for the update-notification plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:24
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:56
 msgid "Updates available"
 msgstr "Actualizacións dispoñíbeis"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:28
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:60
 msgid "system"
 msgstr "sistema"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:30
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:74
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:62
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:100
 msgid "software"
 msgstr "software"
 
 #. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:32
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:64
 msgid "update"
 msgstr "actualizar"
 
-#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:38
-msgid "sound"
-msgstr "son"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:44
-msgid "security"
-msgstr "seguranza"
-
-#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:46
-msgid "privacy"
-msgstr "privacidade"
-
-#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:52
-msgid "reset"
-msgstr "restabelecer"
-
-#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:58
-msgid "phone"
-msgstr "teléfono"
-
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:62
-msgid "Orientation Lock"
-msgstr "Bloqueo da orientación"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:64
-msgid "rotation"
-msgstr "rotación"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:66
-msgid "orientation"
-msgstr "orientación"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:68
-msgid "lock"
-msgstr "bloquear"
-
-#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:70
-msgid "screen"
-msgstr "pantalla"
-
 #. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:76
-msgid "notifications"
-msgstr "notificacións"
+#: ../po/settings.js:12
+#: ../po/settings.js:44
+#: ../po/settings.js:188
+msgid "apps"
+msgstr "aplicativos"
 
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:82
-msgid "language"
-msgstr "idioma"
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:14
+#: ../po/settings.js:88
+#: ../po/settings.js:274
+#: ../po/settings.js:340
+msgid "automatic"
+msgstr "automático"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:84
-msgid "lang"
-msgstr "idioma"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:16
+msgid "download"
+msgstr "descargar"
 
-#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:86
-msgid "i18n"
-msgstr "i18n"
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:18
+msgid "upgrade"
+msgstr "actualizar"
+
+#. TRANSLATORS: This is a keyword or name for the system-update plugin which is used while searching
+#: ../po/settings.js:20
+msgid "click"
+msgstr "click"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:90
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:30
 msgid "Flight Mode"
-msgstr "Modo voo"
+msgstr "Modo avión"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:92
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:32
 msgid "flight"
-msgstr "voo"
+msgstr "avión"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:94
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:34
 msgid "plane"
 msgstr "avión"
 
 #. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:96
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:36
 msgid "offline"
 msgstr "desconectado"
 
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:98
-msgid "Example"
-msgstr "Exemplo"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:100
-msgid "example"
-msgstr "exemplo"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:102
-msgid "test"
-msgstr "proba"
-
-#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:104
-msgid "sample"
-msgstr "mostra"
+#. TRANSLATORS: This is a keyword or name for the flight-mode plugin which is used while searching
+#: ../po/settings.js:30
+msgid "airplane"
+msgstr "avión"
 
 #. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:108
-msgid "cellular"
-msgstr "móbil"
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:22
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:46
+msgid "network"
+msgstr "rede"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:112
-msgid "mobile"
-msgstr "móbil"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:120
+msgid "Orientation Lock"
+msgstr "Bloqueo da orientación"
 
-#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:114
-msgid "gsm"
-msgstr "gsm"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:122
+msgid "rotation"
+msgstr "rotación"
 
-#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:120
-msgid "brightness"
-msgstr "brillo"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:124
+msgid "orientation"
+msgstr "orientación"
 
-#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:126
-msgid "bluetooth"
-msgstr "bluetooth"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:126
+msgid "lock"
+msgstr "bloquear"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:132
-msgid "battery"
-msgstr "batería"
+#. TRANSLATORS: This is a keyword or name for the orientation-lock plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:128
+msgid "screen"
+msgstr "pantalla"
 
-#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:134
-msgid "power"
-msgstr "enerxía"
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:94
+msgid "phone"
+msgstr "teléfono"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:50
+msgid "services"
+msgstr "servizos"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:52
+msgid "forwarding"
+msgstr "reenviar"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:54
+msgid "waiting"
+msgstr "agardando"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:56
+msgid "call"
+msgstr "chamar"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:58
+#: ../po/settings.js:154
+msgid "dialpad"
+msgstr "teclado"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:60
+msgid "shortcuts"
+msgstr "atallos"
+
+#. TRANSLATORS: This is a keyword or name for the phone plugin which is used while searching
+#: ../po/settings.js:62
+msgid "numbers"
+msgstr "números"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:138
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:154
 msgid "appearance"
 msgstr "aparencia"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:140
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:156
 msgid "background"
 msgstr "fondo"
 
 #. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:142
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:158
 msgid "wallpaper"
 msgstr "fondo de escritorio"
 
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:72
+msgid "art"
+msgstr "imaxe"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:74
+msgid "photo"
+msgstr "foto"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:76
+msgid "picture"
+msgstr "imaxe"
+
+#. TRANSLATORS: This is a keyword or name for the background plugin which is used while searching
+#: ../po/settings.js:78
+msgid "image"
+msgstr "imaxe"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:4
+msgid "language"
+msgstr "idioma"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:84
+#: ../po/settings.js:158
+msgid "keyboard"
+msgstr "teclado"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:86
+msgid "spellcheck"
+msgstr "corrector ortográfico"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:90
+msgid "correct"
+msgstr "corrixir"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:92
+msgid "suggestions"
+msgstr "suxestións"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:94
+msgid "capitalization"
+msgstr "uso das maiúsculas"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:96
+msgid "punctuation"
+msgstr "puntuación"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:98
+msgid "layout"
+msgstr "disposición"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:100
+#: ../po/settings.js:336
+msgid "display"
+msgstr "pantalla"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:102
+msgid "words"
+msgstr "palabras"
+
+#. TRANSLATORS: This is a keyword or name for the language plugin which is used while searching
+#: ../po/settings.js:104
+msgid "vibration"
+msgstr "vibración"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:130
+msgid "Example"
+msgstr "Exemplo"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:132
+msgid "example"
+msgstr "exemplo"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:134
+msgid "test"
+msgstr "proba"
+
+#. TRANSLATORS: This is a keyword or name for the example plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:136
+msgid "sample"
+msgstr "mostra"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:148
+msgid "bluetooth"
+msgstr "bluetooth"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:118
+msgid "headset"
+msgstr "auriculares"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:120
+msgid "pair"
+msgstr "par"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:88
+msgid "device"
+msgstr "dispositivo"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:124
+msgid "discover"
+msgstr "descubrir"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:126
+msgid "car"
+msgstr "coche"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:128
+msgid "handsfree"
+msgstr "mans libres"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:48
+msgid "wireless"
+msgstr "sen fíos"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:132
+#: ../po/settings.js:172
+msgid "connect"
+msgstr "conectar"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:134
+#: ../po/settings.js:174
+msgid "disconnect"
+msgstr "desconectar"
+
+#. TRANSLATORS: This is a keyword or name for the bluetooth plugin which is used while searching
+#: ../po/settings.js:136
+msgid "stereo"
+msgstr "estéreo"
+
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:144
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:106
 msgid "Accessibility"
 msgstr "Accesibilidade"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:146
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:108
 msgid "accessibility"
 msgstr "accesibilidade"
 
 #. TRANSLATORS: This is a keyword or name for the accessibility plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:148
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:110
 msgid "a11y"
 msgstr "a11y"
 
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:40
+msgid "sound"
+msgstr "son"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:148
+msgid "silent"
+msgstr "mudo"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:150
+msgid "ringtone"
+msgstr "ton de chamada"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:152
+msgid "vibrate"
+msgstr "vibrar"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:156
+msgid "message"
+msgstr "mensaxe"
+
+#. TRANSLATORS: This is a keyword or name for the sound plugin which is used while searching
+#: ../po/settings.js:160
+msgid "volume"
+msgstr "volume"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:50
+msgid "wifi"
+msgstr "wifi"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:52
+msgid "wi-fi"
+msgstr "wi-fi"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:176
+msgid "hidden"
+msgstr "oculto"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
+#: ../po/settings.js:178
+msgid "ip"
+msgstr "ip"
+
+#. TRANSLATORS: This is a keyword or name for the wifi plugin which is used while searching
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:154
+#: ../po/settings.js:180
+#: ../po/settings.js:222
+msgid "address"
+msgstr "enderezo"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:102
+msgid "notifications"
+msgstr "notificacións"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:190
+msgid "authorize"
+msgstr "autorizar"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:192
+msgid "alerts"
+msgstr "avisos"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:194
+msgid "permissions"
+msgstr "permisos"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:196
+msgid "badges"
+msgstr "emblemas"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:198
+msgid "facebook"
+msgstr "facebook"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:200
+msgid "twitter"
+msgstr "twitter"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:202
+msgid "flickr"
+msgstr "flickr"
+
+#. TRANSLATORS: This is a keyword or name for the notifications plugin which is used while searching
+#: ../po/settings.js:204
+msgid "gmail"
+msgstr "gmail"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:86
 msgid "about"
 msgstr "sobre"
 
 #. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:156
-msgid "device"
-msgstr "dispositivo"
-
-#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
-#: /tmp/ubuntu-system-settings/obj-x86_64-linux-gnu/po/settings.js:158
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:90
 msgid "info"
 msgstr "información"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:216
+msgid "number"
+msgstr "número"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:218
+msgid "imei"
+msgstr "imei"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:220
+msgid "serial"
+msgstr "serie"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:224
+msgid "mac"
+msgstr "mac"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:226
+msgid "licenses"
+msgstr "licenzas"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:228
+msgid "developer"
+msgstr "desenvolvedor"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:232
+msgid "storage"
+msgstr "almacenamento"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:234
+msgid "disk"
+msgstr "disco"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:236
+msgid "space"
+msgstr "espazo"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:238
+msgid "version"
+msgstr "versión"
+
+#. TRANSLATORS: This is a keyword or name for the about plugin which is used while searching
+#: ../po/settings.js:240
+msgid "revision"
+msgstr "revisión"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:140
+msgid "security"
+msgstr "seguranza"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:142
+msgid "privacy"
+msgstr "privacidade"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:250
+#: ../po/settings.js:314
+msgid "sim"
+msgstr "sim"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:252
+msgid "pin"
+msgstr "pin"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:254
+msgid "code"
+msgstr "clave"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:256
+msgid "password"
+msgstr "contrasinal"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:258
+msgid "passphrase"
+msgstr "frase secreta"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:260
+msgid "swipe"
+msgstr "esvarar"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:262
+msgid "allow"
+msgstr "permitir"
+
+#. TRANSLATORS: This is a keyword or name for the security-privacy plugin which is used while searching
+#: ../po/settings.js:264
+msgid "access"
+msgstr "acceso"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:76
+msgid "time"
+msgstr "hora"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:78
+msgid "date"
+msgstr "data"
+
+#. TRANSLATORS: This is a keyword or name for the time-date plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:80
+msgid "timezone"
+msgstr "zona horaria"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:116
+msgid "reset"
+msgstr "restabelecer"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:280
+msgid "erase"
+msgstr "borrar"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:282
+msgid "factory"
+msgstr "fábrica"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:284
+msgid "clear"
+msgstr "borrar"
+
+#. TRANSLATORS: This is a keyword or name for the reset plugin which is used while searching
+#: ../po/settings.js:286
+msgid "restore"
+msgstr "restabelecer"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:20
+msgid "cellular"
+msgstr "móbil"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:24
+msgid "mobile"
+msgstr "móbil"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:26
+msgid "gsm"
+msgstr "gsm"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:298
+msgid "data"
+msgstr "datos"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:300
+msgid "carrier"
+msgstr "operadora"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:302
+msgid "4g"
+msgstr "4g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:304
+msgid "3g"
+msgstr "3g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:306
+msgid "2g"
+msgstr "2g"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:308
+msgid "lte"
+msgstr "lte"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:310
+msgid "apn"
+msgstr "apn"
+
+#. TRANSLATORS: This is a keyword or name for the cellular plugin which is used while searching
+#: ../po/settings.js:312
+msgid "roam"
+msgstr "itinerancia"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:14
+msgid "battery"
+msgstr "batería"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:16
+msgid "power"
+msgstr "enerxía"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:322
+msgid "charge"
+msgstr "carga"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:324
+msgid "idle"
+msgstr "inactivo"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:328
+msgid "disable"
+msgstr "desactivar"
+
+#. TRANSLATORS: This is a keyword or name for the battery plugin which is used while searching
+#: ../po/settings.js:330
+msgid "enable"
+msgstr "activar"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: /home/tsdgeos_work/phablet/ubuntu-system-settings/ubuntu-system-settings/build/po/settings.js:70
+msgid "brightness"
+msgstr "brillo"
+
+#. TRANSLATORS: This is a keyword or name for the brightness plugin which is used while searching
+#: ../po/settings.js:342
+msgid "adjust"
+msgstr "axustar"
 
 #: ../plugins/system-update//system_update.cpp:92
 msgid "Can't cancel current request (can't contact service)"
@@ -2030,34 +2755,58 @@ msgstr ""
 msgid "Can't pause current request (can't contact service)"
 msgstr "Non é posíbel deter a petición (non se pode contactar co servidor)"
 
-#: ../plugins/security-privacy//securityprivacy.cpp:251
-msgid "Incorrect passcode. Try again."
-msgstr "A clave é incorrecta. Ténteo de novo."
-
-#: ../plugins/security-privacy//securityprivacy.cpp:253
-msgid "Incorrect passphrase. Try again."
-msgstr "A frase secreta é incorrecta. Ténteo de novo."
-
-#: ../plugins/security-privacy//securityprivacy.cpp:256
-msgid "Could not set security mode"
-msgstr "Non foi posíbel estabelecer o modo da seguranza"
-
-#: ../plugins/security-privacy//securityprivacy.cpp:281
-msgid "Could not set security display hint"
-msgstr "Non foi posíbel estabelecer o consello na pantalla de seguranza."
-
-#: ../plugins/security-privacy//securityprivacy.cpp:294
-msgid "Authentication token manipulation error"
-msgstr "Erro de manipulación do token de autenticación"
-
-#: ../plugins/about//click.cpp:133
+#: ../plugins/about//click.cpp:134
 msgid "Unknown title"
 msgstr "Título descoñecido"
 
-#: ../push-helper/software-updates-helper.py:78
+#: ../plugins/security-privacy//securityprivacy.cpp:318
+msgid "Incorrect PIN code. Try again."
+msgstr "O código PIN é incorrecto. Ténteo de novo."
+
+#: ../plugins/security-privacy//securityprivacy.cpp:320
+msgid "Incorrect passphrase. Try again."
+msgstr "A frase secreta é incorrecta. Ténteo de novo."
+
+#: ../plugins/security-privacy//securityprivacy.cpp:323
+msgid "Could not set security mode"
+msgstr "Non foi posíbel estabelecer o modo da seguranza"
+
+#: ../plugins/security-privacy//securityprivacy.cpp:372
+msgid "Could not set security display hint"
+msgstr "Non foi posíbel estabelecer a suxestión de seguranza da pantalla."
+
+#: ../plugins/security-privacy//securityprivacy.cpp:383
+msgid "Authentication token manipulation error"
+msgstr "Erro de manipulación do token de autenticación"
+
+#: ../push-helper/software_updates_helper.py:150
 msgid "There's an updated system image."
 msgstr "Hai unha imaxe do sistema actualizada."
 
-#: ../push-helper/software-updates-helper.py:79
+#: ../push-helper/software_updates_helper.py:151
 msgid "Tap to open the system updater."
 msgstr "Toque para procesar a actualizacón."
+
+#~ msgid "i18n"
+#~ msgstr "i18n"
+
+#~ msgid "settings"
+#~ msgstr "axustes"
+
+#~ msgid "lang"
+#~ msgstr "idioma"
+
+#~ msgid "Password visible"
+#~ msgstr "Contrasinal visíbel"
+
+#~ msgid "Other network"
+#~ msgstr "Outra rede"
+
+#~ msgid "Remove"
+#~ msgstr "Eliminar"
+
+#~ msgid "Connect to Wi-Fi"
+#~ msgstr "Conectar a unha rede wifi"
+
+#~ msgid "Connect to hidden network"
+#~ msgstr "Conectar a unha rede oculta"

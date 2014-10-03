@@ -23,6 +23,7 @@
 
 #include <QtCore>
 #include "subset-model.h"
+#include "sessionservice.h"
 
 typedef struct _ActUser ActUser;
 typedef struct _ActUserManager ActUserManager;
@@ -62,6 +63,8 @@ public:
     Q_PROPERTY(SubsetModel *spellCheckingModel
                READ spellCheckingModel
                CONSTANT)
+
+    Q_INVOKABLE void reboot();
 
     explicit LanguagePlugin(QObject *parent = nullptr);
 
@@ -122,6 +125,7 @@ private:
     QList<KeyboardLayout *> m_keyboardLayouts;
     SubsetModel m_keyboardLayoutsModel;
     SubsetModel m_spellCheckingModel;
+    SessionService m_sessionService;
 };
 
 #endif // LANGUAGE_PLUGIN_H

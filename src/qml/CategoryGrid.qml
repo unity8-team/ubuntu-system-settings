@@ -14,9 +14,10 @@ Column {
 
     objectName: "categoryGrid-" + category
 
-    ListItem.Header {
+    ListItem.Standard {
         id: header
 
+        showDivider: false
         text: categoryName
         visible: repeater.count > 0
     }
@@ -31,7 +32,7 @@ Column {
         property int n: 4
 
         columnSpacing: space / ((2 * n) + (columns - 1))
-        rowSpacing: units.gu(1)
+        rowSpacing: units.gu(3)
         width: (columns * itemWidth) + columnSpacing * (columns - 1)
         anchors.horizontalCenter: parent.horizontalCenter
         columns: {
@@ -59,7 +60,6 @@ Column {
                             pageStack.push(model.item.pageComponent,
                                            { plugin: model.item, pluginManager: pluginManager })
                         }
-                        loader.item.highlighted = false;
                     }
                 }
             }
