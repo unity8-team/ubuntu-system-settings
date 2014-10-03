@@ -673,3 +673,16 @@ class DualSimCellularTestCase(CellularBaseTestCase):
         self.assertThat(
             lambda: self.system_settings.main_view.select_single(
                 objectName='singleSim'), raises(StateNotFoundError))
+
+    # regression test for 1375832
+    # tests that the second slot only exposes gsm, which
+    # the testdata indicates
+    def test_slot_two(self):
+        self.modem_0.EmitSignal(
+            SIM_IFACE,
+            'PropertyChanged',
+            'sv',
+            ['Present', 'False'])
+        self.select_preference(PREFERENCE_2G)
+        self.assertRaises(StateNotFoundError,
+                          self.select_preference, PREFERENCE_UMTS)
