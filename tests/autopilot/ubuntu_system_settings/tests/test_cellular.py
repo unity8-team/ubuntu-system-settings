@@ -404,7 +404,7 @@ class DualSimCellularTestCase(CellularBaseTestCase):
 
     def test_when_sim_2_comes_online_ui_is_correct(self):
         self.use_selector(USE_SIM_2)
-        self.select_preference(PREFERENCE_UMTS)
+        self.select_preference(PREFERENCE_2G)
         self.use_selector(USE_OFF)
         sleep(2)
         self.modem_1.Set(CONNMAN_IFACE, 'Powered', True)
