@@ -111,7 +111,6 @@ ItemPage {
         providerId: "ubuntuone"
 
         onFinished: {
-            updateManager.afterAccounts();
             credentialsNotification.visible = false;
             root.state = "SEARCHING";
             updateManager.checkUpdates();

@@ -94,22 +94,7 @@ UpdateManager::UpdateManager(QObject *parent):
     QObject::connect(&m_systemUpdate, SIGNAL(updateProgress(int, double)),
                   SLOT(systemUpdateProgress(int, double)));
     QObject::connect(&m_systemUpdate, SIGNAL(rebooting(bool)),
-                  SIGNAL(rebooting(bool)));
-
-    QFile file("/home/phablet/updates");
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
-    QTextStream out(&file);
-    out << "Init!!";
-    file.close();
-}
-
-void UpdateManager::afterAccounts()
-{
-    QFile file("/home/phablet/updates");
-    file.open(QIODevice::WriteOnly | QIODevice::Text);
-    QTextStream out(&file);
-    out << "After Accounts!!";
-    file.close();
+                  SIGNAL(rebooting(bool))); 
 }
 
 UpdateManager::~UpdateManager()
@@ -147,6 +132,12 @@ void UpdateManager::reportCheckState()
 
 void UpdateManager::checkUpdates()
 {
+    QFile file("/home/phablet/updates");
+    file.open(QIODevice::Append | QIODevice::Text);
+    QTextStream out(&file);
+    out << "Check Updates";
+    file.close();
+
     m_systemCheckingUpdate = true;
     m_clickCheckingUpdate = true;
     m_checkingUpdates = 2;
